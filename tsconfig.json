@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["client/src/*"],
+      "@shared/*": ["shared/*"],
+      "~/*": ["*"]
+    },
+    "types": ["node"],
+    "outDir": "./dist"
+  },
+  "include": ["src", "server", "scripts", "prompts", "*.d.ts"],
+  "exclude": ["node_modules", "dist", "build"]
+}

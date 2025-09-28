@@ -1,0 +1,68 @@
+🎯 GOAL:
+Continuously perfect, repair, evolve, and self-optimize the MyMentalHealthBuddy platform — covering all components from A to Z — using evidence-based, automated, foolproof steps, designed for users with zero experience. This includes UI, backend, AI, auth, TTS, billing, security, deployment, scaling, and professional features for healthcare, education, finance, and more.
+
+🧠 INSTRUCTIONS TO THE AI (OR DEV TEAM):
+
+You are now a fusion of the top 100 PhD-level experts from Harvard, MIT, Yale, Stanford, Princeton, and globally recognized innovators across:
+
+- ✅ Programming (frontend, backend, AI, TTS, Replit)
+- ✅ Design (UX, UI, accessibility, healing aesthetics)
+- ✅ Systems architecture (platform-wide logic, self-healing automation)
+- ✅ Mental health, education, healthcare, finance, and engineering
+- ✅ Security, legal compliance, and production scaling
+
+You must now execute the following:
+
+---
+
+### ✅ 1. PLATFORM-WIDE 360° SELF-HEALING INTEGRATION
+
+- Scan and repair all components in Replit workspace (`server/`, `client/`, `shared/`)
+- Auto-remove duplicates, broken links, missing files, dead routes, and invalid tokens
+- Rebuild all workflows to ensure:
+  - 🔄 Continuous deployment (CD) via GitHub
+  - 🔐 Authentication and .env security
+  - 🔁 Resilience and crash recovery
+- Log all changes in `/logs/system-fix.log` for audit
+
+---
+
+### ✅ 2. EXPERT-LEVEL A TO Z PLATFORM SETUP (2-YEAR-OLD-FRIENDLY)
+
+For **users with zero coding knowledge**, do the following:
+
+1. **INSTALL**:
+   - `npm install` or `bun install` all dependencies (server + client)
+   - Automatically fix missing types (e.g. `@types/express`)
+   - Add `.replit` + `replit.nix` for clean Replit boot
+
+2. **START**:
+   - Start server via `npm run dev` or `ts-node server/index.ts`
+   - Start frontend via Vite (`npm run dev` in `client/`)
+   - Confirm server up at `http://localhost:5000/health` → returns ✅
+
+3. **TEST**:
+   - Run unit tests via Jest or Supertest
+   - Run E2E smoke test with Playwright clicking:
+     1. Signup/login
+     2. AI chat message
+     3. TTS playback
+     4. Checkout portal
+
+---
+
+### ✅ 3. AUTOMATE INTEGRATION OF ALL KEY MODULES
+
+| Module | Function | Route |
+|--------|----------|-------|
+| 🧠 AI Bot | Emotional healing replies | `/api/ai` |
+| 🔐 Auth | Secure login/signup | `/auth` |
+| 💬 TTS | Streaming voice replies | `/tts/stream` |
+| 💳 Billing | Stripe checkout + portal | `/billing` |
+| 📊 Dashboard | DAU, retention, feature usage | `/dashboard` |
+
+💡 Use `.env` keys securely, like:
+```env
+OPENAI_KEY=sk-...
+STRIPE_SECRET=...
+JWT_SECRET=...
