@@ -9,6 +9,18 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
+  plugins: [...],
+  resolve: {...},
+  root: ".",
+  build: {...},
+  server: {...},
+  clearScreen: false,
+  logLevel: 'info',
+});
+
+
+
+export default defineConfig({
   plugins: [
     react(),
     runtimeErrorOverlay(),
