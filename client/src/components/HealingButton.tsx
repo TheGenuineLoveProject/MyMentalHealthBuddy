@@ -5,55 +5,41 @@ const HealingButton = () => {
   const [isHealing, setIsHealing] = useState(false);
   const [log, setLog] = useState('');
 
-  const handleHeal = async () => {
+  const runHealing = async () => {
     setIsHealing(true);
-    setLog('');
-
     try {
-      const response = await fetch('/api/healing/run-healing', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const result = await response.json();
-      
-      if (result.status) {
-        setLog(`✅ ${result.status}`);
-      } else {
-        setLog('❌ Healing failed.');
-      }
+      const response = await fetch('/api/heal'); // <-- Make sure this matches your backend route
+      const result = await response.text();
+      alert(result); // Success or error
+      setLog(result);
     } catch (err) {
-      setLog('❌ Healing failed: ' + (err instanceof Error ? err.message : 'Unknown error'));
+      alert('Healing failed.');
+      setLog('Healing failed.');
     }
-
     setIsHealing(false);
   };
 
   return (
     <div style={{ padding: '1rem', background: '#f9f9f9', borderRadius: '8px' }}>
       <button
-        onClick={handleHeal}
+        onClick={runHealing}
         disabled={isHealing}
         style={{
           backgroundColor: '#4CAF50',
           color: 'white',
           padding: '12px 24px',
+          fontSize: '16px',
           border: 'none',
           borderRadius: '4px',
-          cursor: isHealing ? 'not-allowed' : 'pointer',
+          cursor: 'pointer',
           fontWeight: 'bold',
-          opacity: isHealing ? 0.6 : 1
         }}
       >
         {isHealing ? 'Healing...' : '💚 Run Healing'}
       </button>
-
-      {log && (
-        <pre style={{ marginTop: '1rem', color: '#333', fontSize: '0.9rem' }}>
-          {log}
-        </pre>
-      )}
+      <pre style={{ marginTop: '1rem', color: '#333', fontSize: '0.9rem' }}>
+        {log}
+      </pre>
     </div>
   );
 };
