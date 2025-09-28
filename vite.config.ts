@@ -43,3 +43,5 @@ export default defineConfig({
     },
   },
 });
+clearScreen: false,
+logLevel: 'info',
