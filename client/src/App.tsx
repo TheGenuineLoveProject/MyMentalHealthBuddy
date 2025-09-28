@@ -5,8 +5,7 @@
  */
 import { useState } from "react";
 import { HealingButton } from "./components/HealingButton";
-// Inside JSX:
-<HealingButton />
+
 export default function App() {
   const [status, setStatus] = useState("🧘 Click to start healing");
 
