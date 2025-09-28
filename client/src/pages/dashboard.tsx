@@ -9,6 +9,7 @@ import ApiEndpoints from "@/components/api-endpoints";
 import ProjectStructure from "@/components/project-structure";
 import PackageInfo from "@/components/package-info";
 import { PerformanceMetrics } from "@/components/performance-metrics";
+import AIEmployees from "@/components/ai-employees";
 import { useQuery } from "@tanstack/react-query";
 import type { Service } from "@shared/schema";
 
@@ -60,6 +61,9 @@ export default function Dashboard() {
 
         {/* Main Content */}
         <main className="flex-1 p-6 overflow-y-auto">
+          <div className="mb-6">
+            <AIEmployees />
+          </div>
           <ServiceStatus services={services} isLoading={isLoading} />
           <PerformanceMetrics />
           <ApiEndpoints />

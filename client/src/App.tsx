@@ -3,47 +3,31 @@
  * Unauthorized copying or distribution of this file is prohibited.
  * Built with GPT-4o, MIT/Proprietary license, integrated with evidence-based mental health models.
  */
-import { useState } from "react";
-import { HealingButton } from "./components/HealingButton";
+import { Route, Switch, Redirect } from "wouter";
+import Dashboard from "./pages/dashboard";
+import ChatPage from "./pages/chat";
+import MoodTracker from "./pages/mood-tracker";
+import Resources from "./pages/resources";
+import Journal from "./pages/journal";
+import Subscription from "./pages/subscription";
+import Login from "./pages/login";
+import Signup from "./pages/signup";
+import Layout from "./components/Layout";
 
 export default function App() {
-  const [status, setStatus] = useState("🧘 Click to start healing");
-
-  const triggerHealing = async () => {
-    setStatus("🌀 Healing in progress...");
-    try {
-      const response = await fetch("http://localhost:5000/api/heal", {
-        method: "POST",
-      });
-      const result = await response.json();
-      if (result.success) {
-        setStatus("✅ Healing complete!");
-      } else {
-        setStatus("⚠️ Healing failed.");
-      }
-    } catch (error) {
-      setStatus("❌ Error connecting to server.");
-    }
-  };
-
   return (
-    <div style={{ padding: "3rem", fontFamily: "sans-serif", textAlign: "center" }}>
-      <h1>🌿 MyMentalHealthBuddy Healing UI</h1>
-      <p>{status}</p>
-      <button
-        onClick={triggerHealing}
-        style={{
-          backgroundColor: "#4CAF50",
-          color: "white",
-          padding: "1rem 2rem",
-          borderRadius: "8px",
-          fontSize: "1.2rem",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        🩺 Start Healing
-      </button>
-    </div>
+    <Layout>
+      <Switch>
+        <Route path="/" component={() => <Redirect to="/dashboard" />} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/chat" component={ChatPage} />
+        <Route path="/mood" component={MoodTracker} />
+        <Route path="/resources" component={Resources} />
+        <Route path="/journal" component={Journal} />
+        <Route path="/subscription" component={Subscription} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" component={Signup} />
+      </Switch>
+    </Layout>
   );
 }
