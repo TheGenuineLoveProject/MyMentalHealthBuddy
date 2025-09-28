@@ -13,6 +13,17 @@ import Subscription from "./pages/subscription";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Layout from "./components/Layout";
+import HealingButton from './components/HealingButton';
+
+function Dashboard() {
+  return (
+    <div>
+      <HealingButton />
+      <h1>Welcome, Maria 🌈</h1>
+      <HealingButton />
+    </div>
+  );
+}
 
 export default function App() {
   return (
