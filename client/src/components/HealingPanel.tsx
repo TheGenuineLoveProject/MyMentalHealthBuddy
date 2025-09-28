@@ -8,9 +8,9 @@ export function HealingPanel(){
   async function runHeal(){
     setBusy(true); setMsg("Healing in progress…");
     try{
-      const res = await fetch("/api/heal",{ method:"POST" });
+      const res = await fetch("/api/healing/run-healing",{ method:"POST" });
       const j = await res.json();
-      if(j.ok){ setReport(j.report); setMsg("✅ Healed. See details below."); }
+      if(j.status){ setReport(j); setMsg(`✅ ${j.status}`); }
       else { setMsg("❌ Failed. Check console."); console.error(j); }
     } catch(e){ setMsg("❌ Network error."); console.error(e); }
     finally{ setBusy(false); }

@@ -13,6 +13,7 @@ import authRouter from "./routes/auth";
 import mentalHealthRouter from "./routes/mental-health";
 import moodRouter from "./routes/mood";
 import aiOrchestratorRouter from "./routes/ai-orchestrator";
+import healingRouter from "./routes/healing";
 
 export function setupRoutes(app: Express, db: any): void {
   // Authentication routes
@@ -26,6 +27,9 @@ export function setupRoutes(app: Express, db: any): void {
   
   // AI Orchestrator routes
   app.use("/api/ai", aiOrchestratorRouter);
+  
+  // Healing routes
+  app.use("/api/healing", healingRouter);
   
   // Dashboard endpoint with system status and AI information
   app.get("/api/dashboard", cacheMiddleware(apiCache, 5), asyncHandler(async (req, res) => {

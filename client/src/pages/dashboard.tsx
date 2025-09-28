@@ -10,6 +10,7 @@ import ProjectStructure from "@/components/project-structure";
 import PackageInfo from "@/components/package-info";
 import { PerformanceMetrics } from "@/components/performance-metrics";
 import AIEmployees from "@/components/ai-employees";
+import { HealingPanel } from "@/components/HealingPanel";
 import { useQuery } from "@tanstack/react-query";
 import type { Service } from "@shared/schema";
 
@@ -63,6 +64,9 @@ export default function Dashboard() {
         <main className="flex-1 p-6 overflow-y-auto">
           <div className="mb-6">
             <AIEmployees />
+          </div>
+          <div className="mb-6">
+            <HealingPanel />
           </div>
           <ServiceStatus services={services} isLoading={isLoading} />
           <PerformanceMetrics />
