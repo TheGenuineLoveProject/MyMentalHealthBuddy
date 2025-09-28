@@ -1,8 +1,21 @@
-import { Router } from "express";
-import { runHealing } from "../controllers/healController";
+import express from 'express';
+import { exec } from 'child_process';
+import path from 'path';
 
-const router = Router();
+const router = express.Router();
 
-router.post("/heal", runHealing);
+// Trigger the healing script using ts-node
+router.get('/', (req, res) => {
+  const healingScriptPath = path.resolve(__dirname, '../../scripts/activateHealing.ts');
+
+  exec(`npx ts-node ${healingScriptPath}`, (error, stdout, stderr) => {
+    if (error) {
+      console.error('❌ Healing error:', stderr);
+      return res.status(500).send(`❌ Healing failed:\n${stderr}`);
+    }
+
+    res.send(`✅ Healing complete:\n${stdout}`);
+  });
+});
 
 export default router;

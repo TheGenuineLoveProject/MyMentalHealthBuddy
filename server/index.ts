@@ -11,7 +11,7 @@ import { setupRoutes } from "./routes";
 import { errorHandler } from "./middleware/errorHandler";
 import { setupVite, serveStatic } from "./vite";
 import { createServer } from "http";
-import healRoutes from "./routes/heal";
+import healRoute from './routes/heal'; // ✅ name must match filename exactly
 
 // Load environment variables first
 dotenv.config();
@@ -94,7 +94,7 @@ app.use(session(sessionConfig));
 app.locals.db = db;
 
 // Setup heal routes
-app.use("/api", healRoutes);
+app.use('/api/heal', healRoute);
 
 // Setup API routes
 setupRoutes(app, db);
