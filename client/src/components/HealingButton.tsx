@@ -1,19 +1,19 @@
 // HealingButton.tsx
+import React from "react";
 
 export function HealingButton() {
-  const handleClick = () => {
-    fetch("/api/heal", { method: "POST" })
-      .then((res) => res.json())
-      .then((data) => alert("Healing activated: " + data.status))
-      .catch((err) => alert("Error activating healing"));
+  const runHeal = async () => {
+    const res = await fetch("/api/run-healing", { method: "POST" });
+    const json = await res.json();
+    alert("✅ Healing Result:\n" + JSON.stringify(json, null, 2));
   };
 
   return (
     <button
-      className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md shadow-md transition"
-      onClick={handleClick}
+      onClick={runHeal}
+      className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
     >
-      💚 Activate Healing Now
+      🌱 Run Platform Healing
     </button>
   );
 }
