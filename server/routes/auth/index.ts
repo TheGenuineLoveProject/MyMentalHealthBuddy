@@ -5,14 +5,35 @@ import jwt from 'jsonwebtoken';
 import { storage } from '../../storage';
 import { asyncHandler, ValidationError, AuthenticationError } from '../../middleware/errorHandler';
 import { authenticateToken, type AuthRequest } from '../../auth/jwt';
+import { registrationLimiter, loginLimiter } from '../../middleware/rateLimiter';
 
 const router = express.Router();
 
-// Optimized validation schemas
+// Enhanced validation schemas with comprehensive rules
 const registerSchema = z.object({
-  email: z.string().email().max(255),
-  password: z.string().min(8).max(128),
-  name: z.string().min(2).max(100)
+  email: z.string()
+    .email({ message: 'Please provide a valid email address' })
+    .max(255, { message: 'Email must be less than 255 characters' })
+    .toLowerCase()
+    .trim()
+    .optional(),
+  username: z.string()
+    .min(3, { message: 'Username must be at least 3 characters long' })
+    .max(30, { message: 'Username must be less than 30 characters' })
+    .regex(/^[a-zA-Z0-9_-]+$/, { message: 'Username can only contain letters, numbers, underscores and hyphens' })
+    .trim(),
+  password: z.string()
+    .min(8, { message: 'Password must be at least 8 characters long' })
+    .max(128, { message: 'Password must be less than 128 characters' })
+    .regex(/^(?=.*[a-z])/, { message: 'Password must contain at least one lowercase letter' })
+    .regex(/^(?=.*[A-Z])/, { message: 'Password must contain at least one uppercase letter' })
+    .regex(/^(?=.*[0-9])/, { message: 'Password must contain at least one number' })
+    .regex(/^(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/, { message: 'Password must contain at least one special character' }),
+  name: z.string()
+    .min(2, { message: 'Name must be at least 2 characters long' })
+    .max(100, { message: 'Name must be less than 100 characters' })
+    .regex(/^[a-zA-Z\s'-]+$/, { message: 'Name can only contain letters, spaces, hyphens and apostrophes' })
+    .trim()
 });
 
 const loginSchema = z.object({
@@ -37,34 +58,94 @@ const generateTokens = (userId: string) => {
   return { accessToken, refreshToken };
 };
 
-// Register route with optimized password hashing
-router.post('/register', asyncHandler(async (req, res) => {
+// Register route with enhanced validation and error handling
+router.post('/register', registrationLimiter, asyncHandler(async (req, res) => {
+  // Validate input data
   const validation = registerSchema.safeParse(req.body);
   if (!validation.success) {
-    throw new ValidationError(validation.error.issues[0].message);
+    const errors = validation.error.issues.map(issue => ({
+      field: issue.path.join('.'),
+      message: issue.message
+    }));
+    return res.status(400).json({
+      success: false,
+      message: 'Validation failed',
+      errors
+    });
   }
   
-  const { email, password, name } = validation.data;
+  const { email, username, password, name } = validation.data;
   
-  // Check if user exists
-  const existingUser = await storage.getUserByEmail(email);
-  if (existingUser) {
-    throw new ValidationError('Email already registered');
+  // Check if user exists by email or username
+  try {
+    if (email) {
+      const existingUserByEmail = await storage.getUserByEmail(email);
+      if (existingUserByEmail) {
+        return res.status(400).json({
+          success: false,
+          message: 'Registration failed',
+          errors: [{ field: 'email', message: 'This email is already registered' }]
+        });
+      }
+    }
+    
+    const existingUserByUsername = await storage.getUserByUsername(username);
+    if (existingUserByUsername) {
+      return res.status(400).json({
+        success: false,
+        message: 'Registration failed',
+        errors: [{ field: 'username', message: 'This username is already taken' }]
+      });
+    }
+  } catch (error) {
+    console.error('Error checking existing users:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred while checking user availability. Please try again later.'
+    });
   }
   
   // Hash password with optimized salt rounds
-  const hashedPassword = await bcrypt.hash(password, 12);
+  let hashedPassword: string;
+  try {
+    hashedPassword = await bcrypt.hash(password, 12);
+  } catch (error) {
+    console.error('Password hashing error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'An error occurred while securing your password. Please try again.'
+    });
+  }
   
-  // Create user
-  const user = await storage.createUser({
-    email,
-    hashedPassword,
-    name,
-    createdAt: new Date(),
-    subscriptionTier: 'free',
-    aiSessionsUsed: 0,
-    aiSessionsLimit: 5
-  });
+  // Create user with comprehensive error handling
+  let user;
+  try {
+    user = await storage.createUser({
+      email: email || undefined,
+      username,
+      password: hashedPassword,
+      name,
+      createdAt: new Date(),
+      subscriptionTier: 'free',
+      aiSessionsUsed: 0,
+      aiSessionsLimit: 5
+    });
+  } catch (error: any) {
+    console.error('User creation error:', error);
+    
+    // Check for specific database errors
+    if (error.message?.includes('duplicate') || error.message?.includes('unique')) {
+      return res.status(400).json({
+        success: false,
+        message: 'This account information is already in use. Please try different credentials.'
+      });
+    }
+    
+    return res.status(500).json({
+      success: false,
+      message: 'Unable to create your account at this time. Please try again later.'
+    });
+  }
   
   // Generate tokens
   const tokens = generateTokens(user.id);
@@ -85,7 +166,7 @@ router.post('/register', asyncHandler(async (req, res) => {
 }));
 
 // Login route with optimized authentication
-router.post('/login', asyncHandler(async (req, res) => {
+router.post('/login', loginLimiter, asyncHandler(async (req, res) => {
   const validation = loginSchema.safeParse(req.body);
   if (!validation.success) {
     throw new ValidationError('Invalid email or password');
@@ -100,7 +181,7 @@ router.post('/login', asyncHandler(async (req, res) => {
   }
   
   // Verify password
-  const isValid = await bcrypt.compare(password, user.hashedPassword);
+  const isValid = await bcrypt.compare(password, user.password);
   if (!isValid) {
     throw new AuthenticationError('Invalid email or password');
   }

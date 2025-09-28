@@ -16,14 +16,29 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDes
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Loader2, Heart, Brain, Shield } from "lucide-react";
+import { Loader2, Heart, Brain, Shield, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const signupSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters"),
-  email: z.string().email("Please enter a valid email address").optional().or(z.literal("")),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  username: z.string()
+    .min(3, "Username must be at least 3 characters")
+    .max(30, "Username must be less than 30 characters")
+    .regex(/^[a-zA-Z0-9_-]+$/, "Username can only contain letters, numbers, underscores and hyphens"),
+  email: z.string()
+    .email("Please enter a valid email address")
+    .optional()
+    .or(z.literal("")),
+  password: z.string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+    .regex(/[^A-Za-z0-9]/, "Password must contain at least one special character"),
   confirmPassword: z.string(),
-  name: z.string().min(1, "Please enter your name"),
+  name: z.string()
+    .min(2, "Name must be at least 2 characters")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s'-]+$/, "Name can only contain letters, spaces, hyphens and apostrophes"),
   agreeToTerms: z.boolean().refine(val => val === true, {
     message: "You must agree to the terms and conditions"
   })
@@ -34,10 +49,33 @@ const signupSchema = z.object({
 
 type SignupFormData = z.infer<typeof signupSchema>;
 
+// Password strength calculator
+function calculatePasswordStrength(password: string): {
+  score: number;
+  label: string;
+  color: string;
+} {
+  if (!password) return { score: 0, label: "Enter password", color: "text-gray-400" };
+  
+  let score = 0;
+  if (password.length >= 8) score++;
+  if (password.length >= 12) score++;
+  if (/[a-z]/.test(password)) score++;
+  if (/[A-Z]/.test(password)) score++;
+  if (/[0-9]/.test(password)) score++;
+  if (/[^A-Za-z0-9]/.test(password)) score++;
+  
+  if (score <= 2) return { score, label: "Weak", color: "text-red-500" };
+  if (score <= 4) return { score, label: "Fair", color: "text-yellow-500" };
+  if (score <= 5) return { score, label: "Good", color: "text-blue-500" };
+  return { score, label: "Strong", color: "text-green-500" };
+}
+
 export default function Signup() {
   const [_, setLocation] = useLocation();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState({ score: 0, label: "Enter password", color: "text-gray-400" });
 
   const form = useForm<SignupFormData>({
     resolver: zodResolver(signupSchema),
@@ -54,34 +92,74 @@ export default function Signup() {
   const signupMutation = useMutation({
     mutationFn: async (data: SignupFormData) => {
       const { confirmPassword, agreeToTerms, ...registerData } = data;
-      return apiRequest("/api/auth/register", {
+      
+      // Normalize email field - send undefined if empty string
+      const payload = {
+        ...registerData,
+        email: registerData.email || undefined
+      };
+      
+      const response = await fetch("/api/auth/register", {
         method: "POST",
-        body: JSON.stringify(registerData)
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+        credentials: "include"
       });
+      
+      const result = await response.json();
+      
+      if (!response.ok || !result.success) {
+        // Handle specific error fields
+        if (result.errors && Array.isArray(result.errors)) {
+          result.errors.forEach((error: any) => {
+            if (error.field) {
+              form.setError(error.field as any, {
+                type: "manual",
+                message: error.message
+              });
+            }
+          });
+          throw new Error(result.message || "Registration failed. Please check the errors above.");
+        }
+        throw new Error(result.message || "Failed to create account. Please try again.");
+      }
+      
+      return result;
     },
     onSuccess: (data) => {
-      // Store token in localStorage
-      if (data.token) {
-        localStorage.setItem("authToken", data.token);
+      // Store tokens in localStorage
+      if (data.accessToken) {
+        localStorage.setItem("authToken", data.accessToken);
+      }
+      if (data.refreshToken) {
+        localStorage.setItem("refreshToken", data.refreshToken);
+      }
+      if (data.user) {
         localStorage.setItem("user", JSON.stringify(data.user));
       }
       
       toast({
-        title: "Account created successfully!",
-        description: "Welcome to MyMentalHealthBuddy. Let's begin your wellness journey.",
+        title: "Welcome to MyMentalHealthBuddy!",
+        description: "Your account has been created successfully. Let's begin your wellness journey.",
       });
       
       // Redirect to onboarding or dashboard
       setTimeout(() => {
         setLocation("/dashboard");
-      }, 500);
+      }, 1000);
     },
     onError: (error: any) => {
-      toast({
-        title: "Sign up failed",
-        description: error.message || "Failed to create account. Please try again.",
-        variant: "destructive"
-      });
+      // Don't show toast if we've already set field errors
+      const hasFieldErrors = Object.keys(form.formState.errors).length > 0;
+      if (!hasFieldErrors) {
+        toast({
+          title: "Registration Failed",
+          description: error.message || "Unable to create your account. Please try again.",
+          variant: "destructive"
+        });
+      }
     },
     onSettled: () => {
       setIsLoading(false);
@@ -197,8 +275,73 @@ export default function Signup() {
                           disabled={isLoading}
                           autoComplete="new-password"
                           data-testid="input-password"
+                          onChange={(e) => {
+                            field.onChange(e);
+                            setPasswordStrength(calculatePasswordStrength(e.target.value));
+                          }}
                         />
                       </FormControl>
+                      {field.value && (
+                        <div className="mt-2">
+                          <div className="flex items-center gap-2">
+                            <div className="flex-1 flex gap-1">
+                              {[...Array(6)].map((_, i) => (
+                                <div
+                                  key={i}
+                                  className={`h-1 flex-1 rounded ${
+                                    i < passwordStrength.score
+                                      ? passwordStrength.score <= 2
+                                        ? "bg-red-500"
+                                        : passwordStrength.score <= 4
+                                        ? "bg-yellow-500"
+                                        : passwordStrength.score <= 5
+                                        ? "bg-blue-500"
+                                        : "bg-green-500"
+                                      : "bg-gray-200"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                            <span className={`text-sm font-medium ${passwordStrength.color}`}>
+                              {passwordStrength.label}
+                            </span>
+                          </div>
+                          <div className="mt-1 space-y-1">
+                            <div className="flex items-center gap-1">
+                              {/[A-Z]/.test(field.value) ? (
+                                <CheckCircle2 className="h-3 w-3 text-green-500" />
+                              ) : (
+                                <AlertCircle className="h-3 w-3 text-gray-400" />
+                              )}
+                              <span className="text-xs text-gray-600">Contains uppercase letter</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {/[a-z]/.test(field.value) ? (
+                                <CheckCircle2 className="h-3 w-3 text-green-500" />
+                              ) : (
+                                <AlertCircle className="h-3 w-3 text-gray-400" />
+                              )}
+                              <span className="text-xs text-gray-600">Contains lowercase letter</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {/[0-9]/.test(field.value) ? (
+                                <CheckCircle2 className="h-3 w-3 text-green-500" />
+                              ) : (
+                                <AlertCircle className="h-3 w-3 text-gray-400" />
+                              )}
+                              <span className="text-xs text-gray-600">Contains number</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              {/[^A-Za-z0-9]/.test(field.value) ? (
+                                <CheckCircle2 className="h-3 w-3 text-green-500" />
+                              ) : (
+                                <AlertCircle className="h-3 w-3 text-gray-400" />
+                              )}
+                              <span className="text-xs text-gray-600">Contains special character</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       <FormMessage />
                     </FormItem>
                   )}

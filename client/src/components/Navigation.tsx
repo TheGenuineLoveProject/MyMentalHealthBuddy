@@ -67,19 +67,19 @@ export default function Navigation() {
                 const isActive = location === item.href;
                 
                 return (
-                  <Link key={item.href} href={item.href}>
-                    <a
-                      className={cn(
-                        "flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors",
-                        isActive 
-                          ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white" 
-                          : "text-gray-600 hover:bg-gray-100"
-                      )}
-                      data-testid={`nav-${item.name.toLowerCase().replace(' ', '-')}`}
-                    >
-                      <Icon className="h-5 w-5" />
-                      <span className="font-medium">{item.name}</span>
-                    </a>
+                  <Link 
+                    key={item.href} 
+                    href={item.href}
+                    className={cn(
+                      "flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors",
+                      isActive 
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white" 
+                        : "text-gray-600 hover:bg-gray-100"
+                    )}
+                    data-testid={`nav-${item.name.toLowerCase().replace(' ', '-')}`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="font-medium">{item.name}</span>
                   </Link>
                 );
               })}
@@ -87,10 +87,11 @@ export default function Navigation() {
 
             {/* User Menu */}
             <div className="flex items-center space-x-4">
-              <Link href="/profile">
-                <a className="text-gray-600 hover:text-gray-900">
-                  <User className="h-5 w-5" />
-                </a>
+              <Link 
+                href="/profile"
+                className="text-gray-600 hover:text-gray-900"
+              >
+                <User className="h-5 w-5" />
               </Link>
               <Button
                 variant="ghost"
@@ -143,32 +144,31 @@ export default function Navigation() {
                 const isActive = location === item.href;
                 
                 return (
-                  <Link key={item.href} href={item.href}>
-                    <a
-                      className={cn(
-                        "flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors",
-                        isActive 
-                          ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white" 
-                          : "text-gray-600 hover:bg-gray-100"
-                      )}
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <Icon className="h-5 w-5" />
-                      <span className="font-medium">{item.name}</span>
-                    </a>
+                  <Link 
+                    key={item.href} 
+                    href={item.href}
+                    className={cn(
+                      "flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors",
+                      isActive 
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white" 
+                        : "text-gray-600 hover:bg-gray-100"
+                    )}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="font-medium">{item.name}</span>
                   </Link>
                 );
               })}
               
               <div className="mt-4 pt-4 border-t border-gray-200 flex items-center justify-between">
-                <Link href="/profile">
-                  <a 
-                    className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <User className="h-5 w-5" />
-                    <span>Profile</span>
-                  </a>
+                <Link 
+                  href="/profile"
+                  className="flex items-center space-x-2 text-gray-600 hover:text-gray-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <User className="h-5 w-5" />
+                  <span>Profile</span>
                 </Link>
                 <Button
                   variant="ghost"

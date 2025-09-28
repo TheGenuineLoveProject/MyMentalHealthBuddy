@@ -109,12 +109,13 @@ export const errorHandler = (
   // Zod validation error
   if (err instanceof ZodError) {
     const message = 'Validation failed';
-    const details = err.errors.map(e => ({
+    const errors = err.errors.map(e => ({
       field: e.path.join('.'),
       message: e.message,
     }));
     error = new ValidationError(message);
-    error.details = details;
+    error.details = errors;
+    error.errors = errors; // Add errors field for consistency
   }
 
   // JWT errors
@@ -132,9 +133,10 @@ export const errorHandler = (
   const statusCode = error.statusCode || 500;
   const message = error.message || 'Internal Server Error';
 
-  // Prepare error response
+  // Prepare user-friendly error response
   const errorResponse: any = {
     success: false,
+    message: getUserFriendlyMessage(error, message),
     error: {
       message,
       code: error.code || 'INTERNAL_ERROR',
@@ -143,6 +145,11 @@ export const errorHandler = (
       method: req.method,
     },
   };
+  
+  // Add field-specific errors if available
+  if (error.details || error.errors) {
+    errorResponse.errors = error.details || error.errors;
+  }
 
   // Add additional details in development
   if (!isProduction) {
@@ -170,6 +177,35 @@ export const notFound = (req: Request, res: Response, next: NextFunction): void 
   const error = new NotFoundError(`Route ${req.originalUrl} not found`);
   next(error);
 };
+
+// Helper function to provide user-friendly error messages
+function getUserFriendlyMessage(error: any, defaultMessage: string): string {
+  const errorMessages: Record<string, string> = {
+    'VALIDATION_ERROR': 'Please check your input and try again.',
+    'NOT_FOUND': 'The requested resource could not be found.',
+    'UNAUTHORIZED': 'Please log in to continue.',
+    'AUTHENTICATION_ERROR': 'Invalid credentials. Please check and try again.',
+    'FORBIDDEN': 'You do not have permission to perform this action.',
+    'CONFLICT': 'This resource already exists.',
+    'RATE_LIMIT_EXCEEDED': 'Too many attempts. Please slow down and try again later.',
+    'INTERNAL_ERROR': 'Something went wrong on our end. Please try again later.',
+  };
+  
+  // Check for specific error scenarios
+  if (error.message?.toLowerCase().includes('duplicate')) {
+    return 'This information is already registered. Please use different details.';
+  }
+  
+  if (error.message?.toLowerCase().includes('network') || error.message?.toLowerCase().includes('connection')) {
+    return 'Connection issue detected. Please check your internet and try again.';
+  }
+  
+  if (error.message?.toLowerCase().includes('timeout')) {
+    return 'The request took too long. Please try again.';
+  }
+  
+  return errorMessages[error.code] || defaultMessage || 'An unexpected error occurred. Please try again.';
+}
 
 // Request logging middleware
 export const requestLogger = (req: Request, res: Response, next: NextFunction): void => {
