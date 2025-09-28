@@ -13,6 +13,9 @@ import Subscription from "./pages/subscription";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
 import Layout from "./components/Layout";
+import { HealingButton } from "./components/HealingButton";
+
+<HealingButton />
 
 export default function App() {
   return (
