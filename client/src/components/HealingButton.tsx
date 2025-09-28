@@ -1,16 +1,19 @@
-import React from 'react';
+// HealingButton.tsx
 
-const HealingButton = () => {
-  const triggerHealing = async () => {
-    await fetch('/api/trigger/healing');
-    alert('Platform healing and optimization has started!');
+export function HealingButton() {
+  const handleClick = () => {
+    fetch("/api/heal", { method: "POST" })
+      .then((res) => res.json())
+      .then((data) => alert("Healing activated: " + data.status))
+      .catch((err) => alert("Error activating healing"));
   };
 
   return (
-    <button onClick={triggerHealing} className="bg-green-500 text-white px-4 py-2 rounded">
-      🧠 Heal Platform
+    <button
+      className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md shadow-md transition"
+      onClick={handleClick}
+    >
+      💚 Activate Healing Now
     </button>
   );
-};
-
-export default HealingButton;
+}
