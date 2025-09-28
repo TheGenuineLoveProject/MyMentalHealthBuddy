@@ -11,6 +11,8 @@ import { getAIResponse } from './ai';
 import aiEmployeeRouter from './ai/employee';
 import authRouter from './routes/auth';
 import apiRouter from './routes'; // adjust if your main routes are elsewhere
+import healingRoute from "./routes/healing";
+app.use("/api", healingRoute);
 
 dotenv.config();
 
