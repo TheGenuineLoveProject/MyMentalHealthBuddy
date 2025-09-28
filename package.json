@@ -15,6 +15,7 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx"
   },
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "eslint": "^9.36.0",
     "prettier": "^3.6.2",
     "tsx": "^4.20.6",
@@ -46,7 +47,6 @@
     "@types/express-session": "^1.18.2",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",
-    "@types/node": "^24.5.2",
     "@types/passport": "^1.0.17",
     "@types/passport-local": "^1.0.38",
     "@types/react": "^19.1.14",
