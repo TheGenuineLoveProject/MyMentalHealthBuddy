@@ -4,7 +4,7 @@
  * Built with GPT-4o, MIT/Proprietary license, integrated with evidence-based mental health models.
  */
 import { useState } from "react";
-import { HealingButton } from "./components/ui/HealingButton";
+import { HealingButton } from "./components/HealingButton";
 // Inside JSX:
 <HealingButton />
 export default function App() {
