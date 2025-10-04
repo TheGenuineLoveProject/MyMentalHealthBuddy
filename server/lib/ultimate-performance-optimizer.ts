@@ -1,6 +1,5 @@
 // Ultimate Performance Optimizer - 1000% Platform Enhancement
 import { EventEmitter } from "events";
-import * as os from "os";
 
 interface PerformanceMetrics {
   responseTime: number;

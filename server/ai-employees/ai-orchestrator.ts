@@ -3,10 +3,10 @@
  * Auto-heals, monitors, and evolves the entire platform
  */
 
-import { mentalHealthAI } from "./mental_health_content_ai";
-import { chatManager } from "./ai_chat_manager";
-import { platformNurse } from "./platform_nurse";
-import { autoImprover } from "./auto_improver_ai";
+import { chatManager } from './ai_chat_manager.js';
+import { autoImprover } from './auto_improver_ai.js';
+import { mentalHealthAI } from './mental_health_content_ai.js';
+import { platformNurse } from './platform_nurse.js';
 
 export class AIOrchestrator {
   private name = "Platform Commander";

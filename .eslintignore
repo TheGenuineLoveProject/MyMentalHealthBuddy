@@ -1,2 +1,4 @@
+# Ignore build and dependency folders
 dist
 node_modules
+coverage

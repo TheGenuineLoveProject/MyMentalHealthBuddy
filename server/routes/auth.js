@@ -5,9 +5,9 @@ import {
   hashPassword,
   comparePassword,
   authenticateToken
-} from "../auth/jwt";
-import { storage } from "../storage";
-import { asyncHandler, ValidationError } from "../middleware/errorHandler";
+} from "../auth/jwt.js";
+import { storage } from "../storage.js";
+import { asyncHandler, ValidationError } from "../middleware/errorHandler.js";
 const router = Router();
 // Validation schemas
 const registerSchema = z.object({

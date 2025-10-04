@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
-import { config, isProduction } from "../config";
+import { config, isProduction } from "../config.js";
 
 // Custom error types
 export class AppError extends Error {

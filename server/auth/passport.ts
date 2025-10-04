@@ -1,8 +1,8 @@
 // server/auth/passport.ts
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcryptjs";
 import { Request } from "express";
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
 
 passport.use(
   new LocalStrategy(

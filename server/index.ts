@@ -1,33 +1,62 @@
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import cookieParser from "cookie-parser";
+import session from "express-session";
+import { createServer } from "http";
+import path from "path";
+import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-
+import { loadEnv } from "./helpers/env.js";
+loadEnv();
 dotenv.config();
 
+// Express app setup
 const app = express();
-
-// ✅ Replit requires 0.0.0.0 for the host and port 5000
 const PORT = process.env.PORT || 5000;
-const HOST = "0.0.0.0";
+const isDev = process.env.NODE_ENV !== "production";
 
-app.use(cors());
+// Middleware
+app.use(cors({ origin: true, credentials: true }));
 app.use(helmet());
 app.use(compression());
-app.use(cookieParser());
 app.use(express.json());
+app.use(cookieParser());
 
-// simple route
-app.get("/", (_req, res) => {
-  res.json({
-    status: "ok",
-    message: "💖 MyMentalHealthBuddy is running perfectly!"
-  });
+// Session configuration (in-memory fallback)
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "mhb-secret-2024",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false, httpOnly: true, sameSite: "lax" },
+  })
+);
+
+// Simple API route for health check
+app.get("/api/health", (_req: Request, res: Response) => {
+  res.json({ status: "ok", message: "MyMentalHealthBuddy backend is alive!" });
 });
 
-// start server
-app.listen(Number(PORT), HOST, () => {
-  console.log(`🚀 Server running on http://${HOST}:${PORT}`);
+// Serve frontend in production
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+if (!isDev) {
+  app.use(express.static(path.join(__dirname, "../client/dist")));
+  app.get("*", (_req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+  });
+}
+
+// Global error handler
+app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+  console.error("❌ Server error:", err);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
+});
+
+// Create HTTP server
+const server = createServer(app);
+server.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

@@ -1,7 +1,7 @@
 // server/ai/ai-employee.ts
 
-import { OpenAI } from "../lib/openai-mock";
 import dotenv from "dotenv";
+import { OpenAI } from "../lib/openai-mock.js";
 dotenv.config();
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });

@@ -4,13 +4,13 @@ import {
   authenticateToken,
   optionalAuthenticateToken,
   type AuthRequest
-} from "../auth/jwt";
-import { storage } from "../storage";
-import { asyncHandler, ValidationError } from "../middleware/errorHandler";
+} from "../auth/jwt.js";
+import { asyncHandler, ValidationError } from "../middleware/errorHandler.js";
 import {
-  generateHealingResponse,
-  generateCompassionateFallback
-} from "../openai";
+  generateCompassionateFallback,
+  generateHealingResponse
+} from "../openai.js";
+import { storage } from "../storage.js";
 
 const router = Router();
 

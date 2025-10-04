@@ -2,9 +2,9 @@
 // Evolution Engine v1.0.4 - Enhanced Billing & Subscription Management
 
 import Stripe from "stripe";
-import { storage } from "../storage";
-import { aiResponseCache, getCacheKey } from "./cache";
-import { retryWithBreaker, stripeBreaker, retryConfigs } from "./retry";
+import { storage } from "../storage.js";
+import { aiResponseCache, getCacheKey } from './cache.js';
+import { retryConfigs, retryWithBreaker, stripeBreaker } from './retry.js';
 
 // Initialize Stripe with optimized configuration
 const stripe = process.env.STRIPE_SECRET_KEY

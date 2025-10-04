@@ -2,9 +2,9 @@
 // Evolution Engine v1.0.4 - Peak Performance Configuration
 
 import compression from "compression";
+import { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
-import { Request, Response, NextFunction } from "express";
-import { RateLimiter } from "../services/rateLimiter";
+import { RateLimiter } from "../services/rateLimiter.js";
 
 // Initialize rate limiters for different endpoints
 const apiRateLimiter = new RateLimiter({ maxRequests: 100, windowMs: 60000 });

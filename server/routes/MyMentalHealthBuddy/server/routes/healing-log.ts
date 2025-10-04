@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { heal } from "../../src/utils/heal";
+import { heal } from "../../src/utils/heal.js";
 
 const router = Router();
 

@@ -1,18 +1,18 @@
-import express from "express";
-import { z } from "zod";
 import bcrypt from "bcryptjs";
+import express from "express";
 import jwt from "jsonwebtoken";
-import { storage } from "../../storage";
+import { z } from "zod";
+import { authenticateToken, type AuthRequest } from "../../auth/jwt.js";
 import {
   asyncHandler,
-  ValidationError,
-  AuthenticationError
-} from "../../middleware/errorHandler";
-import { authenticateToken, type AuthRequest } from "../../auth/jwt";
+  AuthenticationError,
+  ValidationError
+} from "../../middleware/errorHandler.js";
 import {
-  registrationLimiter,
-  loginLimiter
-} from "../../middleware/rateLimiter";
+  loginLimiter,
+  registrationLimiter
+} from "../../middleware/rateLimiter.js";
+import { storage } from "../../storage.js";
 
 const router = express.Router();
 

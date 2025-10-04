@@ -1,17 +1,17 @@
 // server/index.ts
 
-import express from "express";
-import cors from "cors";
-import helmet from "helmet";
 import compression from "compression";
+import cors from "cors";
 import dotenv from "dotenv";
+import express from "express";
+import helmet from "helmet";
 
 // Import routes
-import { getAIResponse } from "./ai";
-import aiEmployeeRouter from "./ai/employee";
-import authRouter from "./routes/auth";
-import apiRouter from "./routes"; // adjust if your main routes are elsewhere
-import healingRoute from "./routes/healing";
+import { getAIResponse } from './ai.js';
+import aiEmployeeRouter from './ai/employee.js';
+import apiRouter from './routes.js'; // adjust if your main routes are elsewhere
+import authRouter from './routes/auth.js';
+import healingRoute from './routes/healing.js';
 app.use("/api", healingRoute);
 
 dotenv.config();
@@ -53,7 +53,6 @@ app.listen(PORT, () => {
 });
 
 // AI Bot route (already added by you)
-import aiEmployeeRouter from "./ai/employee";
+import aiRoutes from './routes/ai.js';
 app.use("/api/ai", aiEmployeeRouter);
-import aiRoutes from "./routes/ai";
 app.use("/api/ai", aiRoutes);

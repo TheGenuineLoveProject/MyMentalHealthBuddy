@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { z } from "zod";
-import { asyncHandler } from "../middleware/errorHandler";
+import { asyncHandler } from "../middleware/errorHandler.js";
 const router = Router();
 // Schema for mood entry
 const moodEntrySchema = z.object({

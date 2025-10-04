@@ -1,6 +1,6 @@
 import express from "express";
-import stripe from "../stripe";
-import { storage } from "../storage";
+import stripe from "../stripe.js";
+import { storage } from "../storage.js";
 import dotenv from "dotenv";
 dotenv.config();
 const router = express.Router();

@@ -3,9 +3,9 @@ import { z } from "zod";
 import {
   generateHealingResponse,
   generateCompassionateFallback
-} from "../openai";
-import { storage } from "../storage";
-import { asyncHandler } from "../middleware/errorHandler";
+} from "../openai.js";
+import { storage } from "../storage.js";
+import { asyncHandler } from "../middleware/errorHandler.js";
 const router = Router();
 // Schema for chat request
 const chatSchema = z.object({

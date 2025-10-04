@@ -4,9 +4,9 @@ import {
   retryWithBreaker,
   openAIBreaker,
   retryConfigs
-} from "./services/retry";
-import { aiResponseCache, getCacheKey } from "./services/cache";
-import { RateLimiter } from "./services/rateLimiter";
+} from "./services/retry.js";
+import { aiResponseCache, getCacheKey } from "./services/cache.js";
+import { RateLimiter } from "./services/rateLimiter.js";
 // Initialize OpenAI API with optimized configuration
 let openai = null;
 let tokenUsage = { total: 0, prompt: 0, completion: 0, cached: 0 };

@@ -1,7 +1,7 @@
 // server/auth/passport.ts
 console.log("✅ Passport auth logic placeholder loaded");
-import passport from "../lib/passport-mock";
-import { LocalStrategy } from "../lib/passport-mock";
+import passport from "../lib/passport-mock.js";
+import { LocalStrategy } from "../lib/passport-mock.js";
 passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {

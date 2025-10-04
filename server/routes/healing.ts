@@ -1,5 +1,5 @@
 import { Router } from "express";
-import runFullPlatformHealing from "../../scripts/heal";
+import runFullPlatformHealing from "../../scripts/heal.js";
 
 const router = Router();
 

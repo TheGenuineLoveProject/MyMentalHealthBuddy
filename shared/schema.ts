@@ -1,13 +1,13 @@
 import { sql } from "drizzle-orm";
 import {
+  boolean,
+  decimal,
+  integer,
+  jsonb,
   pgTable,
   text,
-  varchar,
-  integer,
-  boolean,
   timestamp,
-  decimal,
-  jsonb
+  varchar
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";

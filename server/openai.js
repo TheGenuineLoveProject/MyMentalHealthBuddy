@@ -3,8 +3,8 @@ import {
   retryWithBreaker,
   openAIBreaker,
   retryConfigs
-} from "./services/retry";
-import { aiResponseCache, getCacheKey } from "./services/cache";
+} from "./services/retry.js";
+import { aiResponseCache, getCacheKey } from "./services/cache.js";
 // Initialize OpenAI API (with fallback if not available)
 let openai = null;
 try {

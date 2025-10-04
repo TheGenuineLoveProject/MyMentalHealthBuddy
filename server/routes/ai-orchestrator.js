@@ -3,8 +3,8 @@
  * Exposes AI employee status and controls
  */
 import { Router } from "express";
-import { aiOrchestrator } from "../ai-employees/ai-orchestrator";
-import { asyncHandler } from "../middleware/errorHandler";
+import { aiOrchestrator } from "../ai-employees/ai-orchestrator.js";
+import { asyncHandler } from "../middleware/errorHandler.js";
 const router = Router();
 /**
  * Get complete status report from all AI employees

@@ -1,18 +1,18 @@
 import {
-  type User,
-  type InsertUser,
-  type Service,
-  type InsertService,
   type ApiEndpoint,
-  type InsertApiEndpoint,
-  type ProjectStructure,
-  type InsertProjectStructure,
-  type Package,
-  type InsertPackage,
-  type Script,
-  type InsertScript,
   type HealingMessage,
-  type InsertHealingMessage
+  type InsertApiEndpoint,
+  type InsertHealingMessage,
+  type InsertPackage,
+  type InsertProjectStructure,
+  type InsertScript,
+  type InsertService,
+  type InsertUser,
+  type Package,
+  type ProjectStructure,
+  type Script,
+  type Service,
+  type User
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 

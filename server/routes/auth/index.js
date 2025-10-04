@@ -2,13 +2,13 @@ import express from "express";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { storage } from "../../storage";
+import { storage } from "../../storage.js";
 import {
   asyncHandler,
   ValidationError,
   AuthenticationError
-} from "../../middleware/errorHandler";
-import { authenticateToken } from "../../auth/jwt";
+} from "../../middleware/errorHandler.js";
+import { authenticateToken } from "../../auth/jwt.js";
 const router = express.Router();
 // Optimized validation schemas
 const registerSchema = z.object({

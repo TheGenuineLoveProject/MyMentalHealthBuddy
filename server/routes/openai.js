@@ -1,6 +1,6 @@
 // server/routes/openai.ts
 import express from "express";
-import { Configuration, OpenAIApi } from "../lib/openai-legacy-mock";
+import { Configuration, OpenAIApi } from "../lib/openai-legacy-mock.js";
 import dotenv from "dotenv";
 dotenv.config();
 const router = express.Router();

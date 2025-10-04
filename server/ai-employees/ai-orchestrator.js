@@ -2,10 +2,10 @@
  * 🎯 AI Orchestrator - Central Command for All AI Employees
  * Auto-heals, monitors, and evolves the entire platform
  */
-import { mentalHealthAI } from "./mental_health_content_ai";
-import { chatManager } from "./ai_chat_manager";
-import { platformNurse } from "./platform_nurse";
-import { autoImprover } from "./auto_improver_ai";
+import { mentalHealthAI } from "./mental_health_content_ai.js";
+import { chatManager } from "./ai_chat_manager.js";
+import { platformNurse } from "./platform_nurse.js";
+import { autoImprover } from "./auto_improver_ai.js";
 export class AIOrchestrator {
   constructor() {
     this.name = "Platform Commander";

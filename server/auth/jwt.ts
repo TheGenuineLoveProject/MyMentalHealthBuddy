@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import type { Request, Response, NextFunction } from "express";
+import type { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
 
 const JWT_SECRET =
   process.env.JWT_SECRET || "mymentalhealthbuddy-jwt-secret-2024";

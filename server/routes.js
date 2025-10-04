@@ -1,29 +1,29 @@
-import { storage } from "./storage";
+import { storage } from "./storage.js";
 import {
   asyncHandler,
   NotFoundError,
   ValidationError
-} from "./middleware/errorHandler";
-import { apiDocumentation } from "./docs/api";
-import { config } from "./config";
-import { healingRequestSchema } from "../shared/schema";
+} from "./middleware/errorHandler.js";
+import { apiDocumentation } from "./docs/api.js";
+import { config } from "./config.js";
+import { healingRequestSchema } from "../shared/schema.js";
 import {
   generateHealingResponse,
   generateCompassionateFallback
-} from "./openai";
+} from "./openai.js";
 import {
   cacheMiddleware,
   apiCache,
   healthCache,
   getCacheStats,
   clearAllCaches
-} from "./services/cache";
-import { getHealthMetrics } from "./middleware/monitoring";
-import billingRouter from "./routes/billing";
-import authRouter from "./routes/auth";
-import mentalHealthRouter from "./routes/mental-health";
-import moodRouter from "./routes/mood";
-import aiOrchestratorRouter from "./routes/ai-orchestrator";
+} from "./services/cache.js";
+import { getHealthMetrics } from "./middleware/monitoring.js";
+import billingRouter from "./routes/billing.js";
+import authRouter from "./routes/auth.js";
+import mentalHealthRouter from "./routes/mental-health.js";
+import moodRouter from "./routes/mood.js";
+import aiOrchestratorRouter from "./routes/ai-orchestrator.js";
 export function setupRoutes(app, db) {
   // Authentication routes
   app.use("/api/auth", authRouter);

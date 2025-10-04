@@ -1,8 +1,7 @@
-
 // @ts-check
-import { healProject } from "./heal";
-import { optimizeProject } from "./optimize";
-import { automateDaily } from "./automate";
+import { automateDaily } from './automate.js';
+import { healProject } from './heal.js';
+import { optimizeProject } from './optimize.js';
 
 export async function runAll() {
   const heal = await healProject({ quarantineDupes: true });

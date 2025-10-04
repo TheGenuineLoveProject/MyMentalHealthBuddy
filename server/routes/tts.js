@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { OpenAI } from "../lib/openai-mock";
+import { OpenAI } from "../lib/openai-mock.js";
 import { z } from "zod";
-import { optionalAuthenticateToken } from "../auth/jwt";
-import { asyncHandler, ValidationError } from "../middleware/errorHandler";
+import { optionalAuthenticateToken } from "../auth/jwt.js";
+import { asyncHandler, ValidationError } from "../middleware/errorHandler.js";
 const router = Router();
 // Initialize OpenAI client
 const openai = process.env.OPENAI_API_KEY

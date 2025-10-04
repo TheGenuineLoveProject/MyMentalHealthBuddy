@@ -3,10 +3,10 @@
  * Unauthorized copying or distribution of this file is prohibited.
  * Built with GPT-4o, MIT/Proprietary license, integrated with evidence-based mental health models.
  */
-import { defineConfig } from "rolldown-vite";
+import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { defineConfig } from "rolldown-vite";
 
 export default defineConfig({
   plugins: [

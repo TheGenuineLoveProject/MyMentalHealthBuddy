@@ -1,0 +1,115 @@
+scripts/activateHealing.ts(17,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './healingCore.js'?
+scripts/activateHealing.ts(18,21): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './logger.js'?
+scripts/heal.ts(12,25): error TS2307: Cannot find module 'ts-morph' or its corresponding type declarations.
+scripts/heal.ts(20,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './platform-healing-engine.js'?
+scripts/manager.ts(2,31): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './automate.js'?
+scripts/manager.ts(3,29): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './heal.js'?
+scripts/manager.ts(4,33): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './optimize.js'?
+server/ai-employees/ai-orchestrator.ts(6,29): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './ai_chat_manager.js'?
+server/ai-employees/ai-orchestrator.ts(7,30): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './auto_improver_ai.js'?
+server/ai-employees/ai-orchestrator.ts(8,32): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './mental_health_content_ai.js'?
+server/ai-employees/ai-orchestrator.ts(9,31): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './platform_nurse.js'?
+server/ai-employees/ai_chat_manager.ts(9,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../openai.js'?
+server/ai-employees/mental_health_content_ai.ts(6,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../storage.js'?
+server/ai.ts(4,24): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './lib/openai-mock.js'?
+server/ai/employee.ts(4,24): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../lib/openai-mock.js'?
+server/auth/jwt.ts(1,20): error TS2307: Cannot find module 'bcryptjs' or its corresponding type declarations.
+server/auth/passport.ts(2,20): error TS2307: Cannot find module 'bcryptjs' or its corresponding type declarations.
+server/auth/passport.ts(4,22): error TS2307: Cannot find module 'passport' or its corresponding type declarations.
+server/auth/passport.ts(5,43): error TS2307: Cannot find module 'passport-local' or its corresponding type declarations.
+server/auth/passport.ts(18,42): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../shared/schema.js'?
+server/auth/passport.ts(69,38): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../shared/schema.js'?
+server/index.ts(36,3): error TS2304: Cannot find name 'server'.
+server/lib/master-healing-integration.ts(5,34): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './ai-employees/quantum-evolution-engine.js'?
+server/lib/master-healing-integration.ts(6,38): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './ai-employees/unified-healing-system.js'?
+server/lib/master-healing-integration.ts(7,35): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './database-optimizer.js'?
+server/lib/master-healing-integration.ts(8,32): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './openai-advanced.js'?
+server/lib/master-healing-integration.ts(9,35): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './ultimate-performance-optimizer.js'?
+server/middleware/errorHandler.ts(3,38): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../config.js'?
+server/middleware/monitoring.ts(3,26): error TS2307: Cannot find module 'response-time' or its corresponding type declarations.
+server/middleware/optimization.ts(7,29): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../services/rateLimiter.js'?
+server/middleware/optimization.ts(170,3): error TS2322: Type '(...args: any[]) => void' is not assignable to type '{ (cb?: () => void): Response<any, Record<string, any>>; (chunk: any, cb?: () => void): Response<any, Record<string, any>>; (chunk: any, encoding: BufferEncoding, cb?: () => void): Response<...>; }'.
+  Type 'void' is not assignable to type 'Response<any, Record<string, any>>'.
+server/middleware/rateLimiter.ts(2,23): error TS2307: Cannot find module 'express-rate-limit' or its corresponding type declarations.
+server/middleware/security.ts(8,23): error TS2307: Cannot find module 'express-rate-limit' or its corresponding type declarations.
+server/middleware/security.ts(59,37): error TS2339: Property 'csrfToken' does not exist on type 'Session & Partial<SessionData>'.
+server/middleware/security.ts(202,22): error TS2551: Property 'lastRegenerate' does not exist on type 'Session & Partial<SessionData>'. Did you mean 'regenerate'?
+server/middleware/security.ts(203,19): error TS2551: Property 'lastRegenerate' does not exist on type 'Session & Partial<SessionData>'. Did you mean 'regenerate'?
+server/middleware/security.ts(204,41): error TS2551: Property 'lastRegenerate' does not exist on type 'Session & Partial<SessionData>'. Did you mean 'regenerate'?
+server/middleware/security.ts(210,23): error TS2551: Property 'lastRegenerate' does not exist on type 'Session & Partial<SessionData>'. Did you mean 'regenerate'?
+server/openai-optimized.ts(4,46): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './services/cache.js'?
+server/openai-optimized.ts(5,29): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './services/rateLimiter.js'?
+server/openai-optimized.ts(10,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './services/retry.js'?
+server/openai-optimized.ts(22,31): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './lib/openai-mock.js'?
+server/openai.ts(3,46): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './services/cache.js'?
+server/openai.ts(8,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './services/retry.js'?
+server/openai.ts(13,31): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './lib/openai-mock.js'?
+server/routes.ts(2,38): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../shared/schema.js'?
+server/routes.ts(3,24): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './config.js'?
+server/routes.ts(4,34): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './docs/api.js'?
+server/routes.ts(9,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './middleware/errorHandler.js'?
+server/routes.ts(10,34): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './middleware/monitoring.js'?
+server/routes.ts(14,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './openai.js'?
+server/routes.ts(15,34): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './routes/ai-orchestrator.js'?
+server/routes.ts(16,24): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './routes/auth.js'?
+server/routes.ts(17,27): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './routes/billing.js'?
+server/routes.ts(18,27): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './routes/healing.js'?
+server/routes.ts(19,32): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './routes/mental-health.js'?
+server/routes.ts(20,24): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './routes/mood.js'?
+server/routes.ts(27,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './services/cache.js'?
+server/routes.ts(28,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './storage.js'?
+server/routes.ts(411,43): error TS2339: Property 'description' does not exist on type 'unknown'.
+server/routes.ts(413,33): error TS2339: Property 'contentType' does not exist on type 'unknown'.
+server/routes.ts(414,42): error TS2339: Property 'schema' does not exist on type 'unknown'.
+server/routes.ts(415,43): error TS2339: Property 'example' does not exist on type 'unknown'.
+server/routes/MyMentalHealthBuddy/server/routes/healing-log.ts(2,22): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider adding an extension to the import path.
+server/routes/ai-orchestrator.ts(7,32): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../ai-employees/ai-orchestrator.js'?
+server/routes/ai-orchestrator.ts(8,30): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../middleware/errorHandler.js'?
+server/routes/ai.ts(7,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../auth/jwt.js'?
+server/routes/ai.ts(8,47): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../middleware/errorHandler.js'?
+server/routes/ai.ts(12,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../openai.js'?
+server/routes/ai.ts(13,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../storage.js'?
+server/routes/auth.ts(9,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../auth/jwt.js'?
+server/routes/auth.ts(10,47): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../middleware/errorHandler.js'?
+server/routes/auth.ts(11,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../storage.js'?
+server/routes/auth/ai.ts(2,42): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../lib/openai-legacy-mock.js'?
+server/routes/auth/index.ts(1,20): error TS2307: Cannot find module 'bcryptjs' or its corresponding type declarations.
+server/routes/auth/index.ts(5,53): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../auth/jwt.js'?
+server/routes/auth/index.ts(10,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../middleware/errorHandler.js'?
+server/routes/auth/index.ts(14,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../middleware/rateLimiter.js'?
+server/routes/auth/index.ts(15,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../storage.js'?
+server/routes/billing.ts(3,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../storage.js'?
+server/routes/billing.ts(4,20): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../stripe.js'?
+server/routes/healing-log.ts(2,30): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider adding an extension to the import path.
+server/routes/healing.ts(2,36): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../../scripts/heal.js'?
+server/routes/index.ts(10,31): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './ai.js'?
+server/routes/index.ts(11,30): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider adding an extension to the import path.
+server/routes/index.ts(12,23): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider adding an extension to the import path.
+server/routes/index.ts(13,24): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider adding an extension to the import path.
+server/routes/index.ts(14,26): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider adding an extension to the import path.
+server/routes/index.ts(15,1): error TS2448: Block-scoped variable 'app' used before its declaration.
+server/routes/index.ts(56,22): error TS2834: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Consider adding an extension to the import path.
+server/routes/mental-health.ts(3,30): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../middleware/errorHandler.js'?
+server/routes/mental-health.ts(7,8): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../openai.js'?
+server/routes/mental-health.ts(8,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../storage.js'?
+server/routes/mood.ts(3,30): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../middleware/errorHandler.js'?
+server/routes/openai.ts(4,42): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../lib/openai-legacy-mock.js'?
+server/routes/tts.ts(3,43): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../auth/jwt.js'?
+server/routes/tts.ts(4,24): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../lib/openai-mock.js'?
+server/routes/tts.ts(5,47): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../middleware/errorHandler.js'?
+server/services/cache.ts(1,23): error TS2307: Cannot find module 'node-cache' or its corresponding type declarations.
+server/services/retry.ts(1,20): error TS2307: Cannot find module 'p-retry' or its corresponding type declarations.
+server/services/stripe-optimized.ts(5,25): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../storage.js'?
+server/services/stripe-optimized.ts(6,46): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './cache.js'?
+server/services/stripe-optimized.ts(7,63): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './retry.js'?
+server/services/stripe-optimized.ts(12,7): error TS2322: Type '"2023-10-16"' is not assignable to type '"2024-06-20"'.
+server/services/stripe-optimized.ts(374,51): error TS2339: Property 'metadata' does not exist on type 'Response<Customer | DeletedCustomer>'.
+  Property 'metadata' does not exist on type 'DeletedCustomer & { lastResponse: { headers: { [key: string]: string; }; requestId: string; statusCode: number; apiVersion?: string; idempotencyKey?: string; stripeAccount?: string; }; }'.
+server/services/stripe-optimized.ts(376,26): error TS2339: Property 'metadata' does not exist on type 'Response<Customer | DeletedCustomer>'.
+  Property 'metadata' does not exist on type 'DeletedCustomer & { lastResponse: { headers: { [key: string]: string; }; requestId: string; statusCode: number; apiVersion?: string; idempotencyKey?: string; stripeAccount?: string; }; }'.
+server/storage.ts(16,8): error TS2307: Cannot find module '@shared/schema' or its corresponding type declarations.
+server/vite.ts(7,24): error TS2307: Cannot find module '../vite.config' or its corresponding type declarations.
+tests/platform.test.ts(6,59): error TS2307: Cannot find module '@jest/globals' or its corresponding type declarations.
+tests/platform.test.ts(7,21): error TS2307: Cannot find module 'supertest' or its corresponding type declarations.
+tests/platform.test.ts(8,21): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../server/index.js'?
+tests/platform.test.ts(9,32): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../server/ai-employees/ai-orchestrator.js'?

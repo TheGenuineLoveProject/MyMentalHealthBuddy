@@ -3,10 +3,10 @@
  * Auto-protects the platform with comprehensive security measures
  */
 
-import { Request, Response, NextFunction } from "express";
+import { createHash } from "crypto";
+import { NextFunction, Request, Response } from "express";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
-import { createHash } from "crypto";
 
 /**
  * Rate limiting configuration

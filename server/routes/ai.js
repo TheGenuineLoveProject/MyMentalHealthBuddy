@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { z } from "zod";
-import { authenticateToken, optionalAuthenticateToken } from "../auth/jwt";
-import { storage } from "../storage";
-import { asyncHandler, ValidationError } from "../middleware/errorHandler";
+import { authenticateToken, optionalAuthenticateToken } from "../auth/jwt.js";
+import { storage } from "../storage.js";
+import { asyncHandler, ValidationError } from "../middleware/errorHandler.js";
 import {
   generateHealingResponse,
   generateCompassionateFallback
-} from "../openai";
+} from "../openai.js";
 const router = Router();
 // Request validation schema
 const healingChatSchema = z.object({

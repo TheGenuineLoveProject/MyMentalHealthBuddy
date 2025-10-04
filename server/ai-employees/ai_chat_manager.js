@@ -5,7 +5,7 @@
 import {
   generateHealingResponse,
   generateCompassionateFallback
-} from "../openai";
+} from "../openai.js";
 export class AIChatManager {
   constructor() {
     this.name = "ChatGPT Healer";

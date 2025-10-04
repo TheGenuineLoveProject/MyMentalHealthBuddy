@@ -1,7 +1,6 @@
 // @ts-check
-import fs from "node:fs";
 import { execSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
+import fs from "node:fs";
 
 function sh(c: string) {
   try {

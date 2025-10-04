@@ -1,39 +1,62 @@
 {
   "name": "mymentalhealthbuddy",
   "version": "1.0.0",
+  "description": "AI-powered mental health platform (Node + React + Vite + TypeScript + PostgreSQL + Drizzle)",
+  "main": "server/index.ts",
   "type": "module",
   "scripts": {
-    "start": "tsx server/index.ts",
-    "dev": "tsx server/index.ts"
+    "dev": "tsx server/index.ts",
+    "build": "tsc && vite build",
+    "start": "node dist/server/index.js",
+    "heal": "tsx scripts/heal.ts",
+    "scan": "tsx scripts/scan.ts",
+    "optimize": "tsx scripts/optimize.ts",
+    "validate": "tsx scripts/validate.ts",
+    "lint": "eslint . --ext .ts,.tsx --fix"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "compression": "^1.7.4",
+    "connect-pg-simple": "^9.0.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.33.0",
     "express": "^4.19.2",
-    "helmet": "^7.0.2",
-    "lightningcss": "^1.30.2",
-    "rolldown-vite": "^7.1.15"
+    "express-session": "^1.17.3",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "openai": "^4.68.0",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.3",
+    "stripe": "^16.6.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@eslint/js": "^9.37.0",
+    "@types/bcrypt": "^6.0.0",
     "@types/compression": "^1.8.1",
-    "@types/connect-pg-simple": "^7.0.3",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
     "@types/express": "^4.17.23",
     "@types/express-session": "^1.18.2",
     "@types/helmet": "^0.0.48",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.19.19",
-    "@types/pg": "^8.15.5",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
-    "eslint": "^9.37.0",
-    "globals": "^16.4.0",
-    "prettier": "^3.6.2",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^8.56.0",
+    "prettier": "^3.3.3",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.45.0"
-  }
+    "typescript-transform-paths": "^3.5.2",
+    "vite": "^5.4.10"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "license": "MIT"
 }

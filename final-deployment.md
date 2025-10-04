@@ -21,6 +21,7 @@ This approach uses `tsx` to run TypeScript files directly, avoiding compilation 
 ### Steps:
 
 1. **Copy these files to your hosting service:**
+
    - `server/` directory
    - `shared/` directory
    - `client/` directory (if you have frontend)

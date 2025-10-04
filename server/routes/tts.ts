@@ -1,12 +1,8 @@
-import express, { Router } from "express";
-import { OpenAI } from "../lib/openai-mock";
+import { Router } from "express";
 import { z } from "zod";
-import {
-  authenticateToken,
-  optionalAuthenticateToken,
-  type AuthRequest
-} from "../auth/jwt";
-import { asyncHandler, ValidationError } from "../middleware/errorHandler";
+import { optionalAuthenticateToken } from "../auth/jwt.js";
+import { OpenAI } from "../lib/openai-mock.js";
+import { asyncHandler, ValidationError } from "../middleware/errorHandler.js";
 
 const router = Router();
 

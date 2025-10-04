@@ -1,8 +1,6 @@
 import { Router } from "express";
 import { z } from "zod";
-import { db } from "../db";
-import { storage } from "../storage";
-import { asyncHandler } from "../middleware/errorHandler";
+import { asyncHandler } from "../middleware/errorHandler.js";
 
 const router = Router();
 

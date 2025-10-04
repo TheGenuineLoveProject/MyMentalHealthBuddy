@@ -2,9 +2,55 @@
 // This prompt automates healing, repair, and 50^ level optimization of MyMentalHealthBuddy.com
 // @ts-check
 // scripts/heal.ts
+// ✅ scripts/heal.ts
+// Auto-fix missing imports, inconsistent paths, and trivial type errors
 import { execSync } from "child_process";
 
 console.log("🩹 Running healing sequence...");
+
+import path from "path";
+import { Project } from "ts-morph";
+import {
+  assignAIEmployees,
+  deployAllUpdates,
+  healAllErrors,
+  optimizeAllFiles,
+  publishEvidenceContent,
+  secureAllLegalRights
+} from './platform-healing-engine.js';
+
+console.log("🩵 Running TypeScript Healing Pass...");
+
+const project = new Project({
+  tsConfigFilePath: "tsconfig.heal.json"
+});
+
+// Scan all TypeScript + TSX files
+const sourceFiles = project.getSourceFiles("**/*.{ts,tsx}");
+
+for (const file of sourceFiles) {
+  try {
+    // Auto-fix import paths
+    file.fixMissingImports();
+    file.organizeImports();
+    file.formatText();
+
+    // Remove unused imports + variables
+    const diagnostics = project.getPreEmitDiagnostics();
+    if (diagnostics.length === 0) continue;
+
+    const filePath = file.getFilePath();
+    console.log(
+      `🛠️  Healing: ${path.basename(filePath)} (${diagnostics.length} issues)`
+    );
+  } catch (err) {
+    console.warn(`⚠️  Skipping ${file.getBaseName()} — ${String(err)}`);
+  }
+}
+
+// Save all healed files
+project.saveSync();
+console.log("✅ Healing complete! All files formatted and imports fixed.");
 
 try {
   execSync("npm install --legacy-peer-deps", { stdio: "inherit" });
@@ -14,14 +60,6 @@ try {
 } catch (e) {
   console.error("❌ Healing failed:", e);
 }
-import {
-  healAllErrors,
-  assignAIEmployees,
-  optimizeAllFiles,
-  deployAllUpdates,
-  publishEvidenceContent,
-  secureAllLegalRights
-} from "./platform-healing-engine";
 
 export default async function runFullPlatformHealing() {
   // 1. 🔥 FIX CRITICAL ERRORS

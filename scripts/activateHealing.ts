@@ -7,15 +7,15 @@
  */
 
 import {
-  repairDuplicates,
-  registerMissingRoutes,
-  deployOpenAI,
-  fixAppTsx,
-  enforceSchema,
+  activateHealingUI,
   assignAIEmployees,
-  activateHealingUI
-} from "./healingCore";
-import { log } from "./logger";
+  deployOpenAI,
+  enforceSchema,
+  fixAppTsx,
+  registerMissingRoutes,
+  repairDuplicates
+} from './healingCore.js';
+import { log } from './logger.js';
 
 async function runHealingDeployment() {
   log("🚑 BEGINNING SYSTEM HEALING...");

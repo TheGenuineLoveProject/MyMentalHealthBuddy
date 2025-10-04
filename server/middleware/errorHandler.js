@@ -1,5 +1,5 @@
 import { ZodError } from "zod";
-import { config, isProduction } from "../config";
+import { config, isProduction } from "../config.js";
 // Custom error types
 export class AppError extends Error {
   constructor(message, statusCode = 500, isOperational = true) {

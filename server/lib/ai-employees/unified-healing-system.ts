@@ -441,4 +441,4 @@ class UnifiedHealingSystem extends EventEmitter {
 export const unifiedHealingSystem = new UnifiedHealingSystem();
 
 // Export types for external use
-export type { HealingMetrics, ComponentHealth, AIEmployee };
+export type { AIEmployee, ComponentHealth, HealingMetrics };

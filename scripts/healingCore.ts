@@ -38,7 +38,7 @@ export async function registerMissingRoutes({
   let contents = await fs.readFile(routesFile, "utf8");
   for (const mod of modules) {
     if (!contents.includes(mod.endpoint)) {
-      contents += `\nrouter.use('${mod.endpoint}', require('${mod.path}'));`;
+      contents += `\nrouter.use('${mod.endpoint}', // // // require('${mod.path}'));`;
     }
   }
   await fs.writeFile(routesFile, contents);
@@ -67,7 +67,7 @@ export async function enforceSchema({
   schemaPath: string;
   drizzleConfig: string;
 }) {
-  const exec = require("child_process").exec;
+  const exec = // // // require("child_process").exec;
   exec(
     `npx drizzle-kit push --schema=${schemaPath} --config=${drizzleConfig}`,
     (err: any) => {

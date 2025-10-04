@@ -2,7 +2,7 @@
  * 🧠 Mental Health Content AI Employee
  * Manages mood tracking, resources, and educational content
  */
-import { storage } from "../storage";
+import { storage } from "../storage.js";
 export class MentalHealthContentAI {
   constructor() {
     this.name = "Dr. MindCare";

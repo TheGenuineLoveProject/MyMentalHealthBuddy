@@ -1,32 +1,31 @@
 import type { Express } from "express";
-import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { healingRequestSchema } from "../shared/schema.js";
+import { config } from './config.js';
+import { apiDocumentation } from './docs/api.js';
 import {
   asyncHandler,
   NotFoundError,
   ValidationError
-} from "./middleware/errorHandler";
-import { apiDocumentation } from "./docs/api";
-import { config } from "./config";
-import { healingRequestSchema } from "../shared/schema";
+} from './middleware/errorHandler.js';
+import { getHealthMetrics } from './middleware/monitoring.js';
 import {
-  generateHealingResponse,
-  generateCompassionateFallback
-} from "./openai";
+  generateCompassionateFallback,
+  generateHealingResponse
+} from './openai.js';
+import aiOrchestratorRouter from './routes/ai-orchestrator.js';
+import authRouter from './routes/auth.js';
+import billingRouter from './routes/billing.js';
+import healingRouter from './routes/healing.js';
+import mentalHealthRouter from './routes/mental-health.js';
+import moodRouter from './routes/mood.js';
 import {
-  cacheMiddleware,
   apiCache,
-  healthCache,
+  cacheMiddleware,
+  clearAllCaches,
   getCacheStats,
-  clearAllCaches
-} from "./services/cache";
-import { getHealthMetrics } from "./middleware/monitoring";
-import billingRouter from "./routes/billing";
-import authRouter from "./routes/auth";
-import mentalHealthRouter from "./routes/mental-health";
-import moodRouter from "./routes/mood";
-import aiOrchestratorRouter from "./routes/ai-orchestrator";
-import healingRouter from "./routes/healing";
+  healthCache
+} from './services/cache.js';
+import { storage } from './storage.js';
 
 export function setupRoutes(app: Express, db: any): void {
   // Authentication routes

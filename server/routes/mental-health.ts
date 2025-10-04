@@ -1,11 +1,11 @@
 import { Router } from "express";
 import { z } from "zod";
+import { asyncHandler } from "../middleware/errorHandler.js";
 import {
-  generateHealingResponse,
-  generateCompassionateFallback
-} from "../openai";
-import { storage } from "../storage";
-import { asyncHandler } from "../middleware/errorHandler";
+  generateCompassionateFallback,
+  generateHealingResponse
+} from "../openai.js";
+import { storage } from "../storage.js";
 
 const router = Router();
 
