@@ -15,7 +15,11 @@
     "noEmit": false,
     "types": ["node"]
   },
-  "files": ["globals.d.ts"],
+  "files": [
+    "globals.d.ts",
+    "types/global.d.ts",
+    "scripts/typesFix.ts"
+  ],
   "include": ["server", "scripts", "db", "client", "tests"],
   "exclude": ["node_modules", "dist"]
 }

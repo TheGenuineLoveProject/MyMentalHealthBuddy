@@ -8,7 +8,7 @@ import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
-import { loadEnv } from "./helpers/env.js";
+import { loadEnv } from "./server/helpers/env.js";
 loadEnv();
 dotenv.config();
 
@@ -60,3 +60,5 @@ const server = createServer(app);
 server.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
+export default app;

@@ -1,105 +1,53 @@
 // @ts-check
-import fs from "fs/promises";
+/**
+ * scripts/healingCore.ts
+ * Master healing coordinator for MyMentalHealthBuddy.
+ */
+
+import fs from "fs";
 import path from "path";
+import { logInfo, logSuccess, logError } from "./logger.js";
 
-export async function fixAppTsx(filePath: string) {
-  const content = await fs.readFile(filePath, "utf8");
-  const fixed = content.replace(/<HealingButton\s*\/>/g, "");
-  await fs.writeFile(filePath, fixed);
-}
+export async function runCoreHealing(): Promise<void> {
+  try {
+    logInfo("🧬 Initializing Healing Core...");
+    const root = process.cwd();
+    const targets = ["server", "scripts", "db", "client"];
 
-export async function repairDuplicates({
-  root,
-  extensionsToRemove,
-  exclude
-}: {
-  root: string;
-  extensionsToRemove: string[];
-  exclude: string[];
-}) {
-  const files = await fs.readdir(root, { recursive: true });
-  const deletions = files.filter(
-    (f: any) =>
-      extensionsToRemove.some((ext) => f.endsWith(ext)) &&
-      !exclude.some((e) => f.endsWith(e))
-  );
-  for (const file of deletions) {
-    await fs.unlink(path.join(root, file));
-  }
-}
-
-export async function registerMissingRoutes({
-  routesFile,
-  modules
-}: {
-  routesFile: string;
-  modules: { path: string; endpoint: string }[];
-}) {
-  let contents = await fs.readFile(routesFile, "utf8");
-  for (const mod of modules) {
-    if (!contents.includes(mod.endpoint)) {
-      contents += `\nrouter.use('${mod.endpoint}', // // // require('${mod.path}'));`;
+    let healedCount = 0;
+    for (const folder of targets) {
+      const dir = path.join(root, folder);
+      if (!fs.existsSync(dir)) continue;
+      healedCount += healDirectory(dir);
     }
+
+    logSuccess(`✨ Healing Core completed successfully. ${healedCount} files processed.`);
+  } catch (err) {
+    logError("❌ Healing Core encountered an error", err);
   }
-  await fs.writeFile(routesFile, contents);
 }
 
-export async function deployOpenAI({
-  fallbackOnly,
-  envPath,
-  model
-}: {
-  fallbackOnly: boolean;
-  envPath: string;
-  model: string;
-}) {
-  const env = await fs.readFile(envPath, "utf8");
-  if (!env.includes("OPENAI_API_KEY")) {
-    console.warn("⚠️ Missing OpenAI Key in .env");
+function healDirectory(dir: string): number {
+  let fixed = 0;
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  for (const file of files) {
+    const full = path.join(dir, file.name);
+    if (file.isDirectory()) fixed += healDirectory(full);
+    else if (file.name.match(/\.(ts|tsx|js)$/)) fixed += fixImports(full);
   }
-  // Add logic to switch fallback mode in `server/ai-orchestrator/mentalHealth.ts`
+  return fixed;
 }
 
-export async function enforceSchema({
-  schemaPath,
-  drizzleConfig
-}: {
-  schemaPath: string;
-  drizzleConfig: string;
-}) {
-  const exec = // // // require("child_process").exec;
-  exec(
-    `npx drizzle-kit push --schema=${schemaPath} --config=${drizzleConfig}`,
-    (err: any) => {
-      if (err) console.error("❌ Drizzle push failed:", err);
-    }
+function fixImports(filePath: string): number {
+  let code = fs.readFileSync(filePath, "utf8");
+  let updated = code.replace(/(from\s+['"])(\.{1,2}\/[^'"]+)(['"])/g, (_m, a, b, c) =>
+    b.endsWith(".js") ? a + b + c : a + b + ".js" + c
   );
-}
 
-export async function assignAIEmployees({
-  aiList,
-  components
-}: {
-  aiList: string[];
-  components: string[];
-}) {
-  const assignments = components.map((comp, i) => ({
-    component: comp,
-    ai: aiList[i % aiList.length]
-  }));
-  console.log("🧠 AI Employees Assigned:", assignments);
-}
-
-export async function activateHealingUI({
-  layoutPath,
-  healingComponent
-}: {
-  layoutPath: string;
-  healingComponent: string;
-}) {
-  const layout = await fs.readFile(layoutPath, "utf8");
-  if (!layout.includes("<HealingPanel")) {
-    const updated = layout.replace("</main>", `  <HealingPanel />\n</main>`);
-    await fs.writeFile(layoutPath, updated);
+  if (updated !== code) {
+    fs.writeFileSync(filePath, updated, "utf8");
+    console.log("🩹 Fixed imports in", path.relative(process.cwd(), filePath));
+    return 1;
   }
+  return 0;
 }

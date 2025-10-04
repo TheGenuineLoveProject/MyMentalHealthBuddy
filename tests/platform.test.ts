@@ -5,8 +5,8 @@
 
 import { describe, it, expect, beforeAll, afterAll } from "@jest/globals";
 import request from "supertest";
-import { app } from "../server/index";
-import { aiOrchestrator } from "../server/ai-employees/ai-orchestrator";
+import { app } from "../server/index.js";
+import { aiOrchestrator } from "../server/ai-employees/ai-orchestrator.js";
 
 describe("MyMentalHealthBuddy Platform Tests", () => {
   beforeAll(async () => {

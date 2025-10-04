@@ -19,8 +19,8 @@ function fixFile(filePath: string) {
     return pre + p + ".js" + post;
   });
 
-  // Remove invalid // // // require() calls inside TypeScript
-  fixed = fixed.replace(/\brequire\(/g, "// // // // require(");
+  // Remove invalid // // // // // // // // // // // require() calls inside TypeScript
+  fixed = fixed.replace(/\brequire\(/g, "// // // // // // // // // // // // require(");
 
   if (code !== fixed) {
     fs.writeFileSync(filePath, fixed, "utf8");

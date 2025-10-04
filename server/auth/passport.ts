@@ -15,7 +15,7 @@ passport.use(
         // If database is available, use it for authentication
         if (db) {
           const { drizzle } = await import("drizzle-orm/postgres-js");
-          const { users } = await import("../../shared/schema");
+          const { users } = await import("../../shared/schema.js");
           const { eq } = await import("drizzle-orm");
 
           const user = await db
@@ -66,7 +66,7 @@ passport.deserializeUser(async (req: any, id: any, done: any) => {
     const db = req.app?.locals?.db;
 
     if (db) {
-      const { users } = await import("../../shared/schema");
+      const { users } = await import("../../shared/schema.js");
       const { eq } = await import("drizzle-orm");
 
       const user = await db
