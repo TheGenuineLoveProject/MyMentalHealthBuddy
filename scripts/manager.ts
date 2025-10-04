@@ -1,28 +1,37 @@
 // @ts-check
-/**
- * scripts/manager.ts
- * Provides helper functions for import optimization and cleanup.
- */
+// ✅ scripts/manager.ts
+// Provides helper functions for import optimization and cleanup.
 
 import fs from "fs";
 import path from "path";
 
 export function optimizeImports(filePath: string): number {
-  let text = fs.readFileSync(filePath, "utf8");
-  let fixed = text;
+  try {
+    const text = fs.readFileSync(filePath, "utf8");
+    let fixed = text;
 
-  // Append .js to relative imports if missing
-  fixed = fixed.replace(/(from\s+['"])(\.{1,2}\/[^'"]+)(['"])/g, (_m, a, b, c) =>
-    b.endsWith(".js") ? a + b + c : a + b + ".js" + c
-  );
+    // Add ".js" to relative imports if missing (for ECMAScript modules)
+    fixed = fixed.replace(
+      /from\s+["'](\.{1,2}\/[^"']+)["']/g,
+      (_match, p1) => (p1.endsWith(".js") ? _match : `from "${p1}.js"`)
+    );
 
-  // Comment out // // // // // // require() in TS files
-  fixed = fixed.replace(/\brequire\(/g, "// // // // // // // require(");
+    // Comment out require() calls in TypeScript files
+    fixed = fixed.replace(/\brequire\(/g, "// require(");
 
-  if (text !== fixed) {
-    fs.writeFileSync(filePath, fixed, "utf8");
-    console.log("🩹 Fixed imports in:", path.relative(process.cwd(), filePath));
-    return 1;
+    // If something was changed, write it back
+    if (text !== fixed) {
+      fs.writeFileSync(filePath, fixed, "utf8");
+
+      const relativePath: string = path.relative(process.cwd(), filePath);
+      console.log(`🛠️  Fixed imports in: ${relativePath}`);
+
+      return 1;
+    }
+
+    return 0;
+  } catch (err) {
+    console.error("❌ Error optimizing imports:", err);
+    return 0;
   }
-  return 0;
 }

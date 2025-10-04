@@ -1,7 +1,5 @@
-/**
- * scripts/logger.ts
- * Provides unified logging utilities for the healing system.
- */
+// ✅ scripts/logger.ts
+// Unified logging utilities for the healing system.
 
 export function logInfo(message: string): void {
   console.log(`ℹ️  ${message}`);

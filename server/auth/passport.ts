@@ -1,8 +1,14 @@
-// server/auth/passport.ts
+// ✅ server/auth/passport.ts (fixed imports)
+
 import bcrypt from "bcryptjs";
 import { Request } from "express";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+
+// ✅ Local file imports (add .js at the end)
+import { drizzle } from "../../db/drizzle.js";
+import { users } from "../../shared/schema.js";
+import { eq } from "drizzle-orm";
 
 passport.use(
   new LocalStrategy(
