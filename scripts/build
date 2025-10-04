@@ -1,3 +1,4 @@
+// @ts-check
 #!/bin/bash
 # Optimized build wrapper script for deployment
 echo "🔨 Running 50^ optimized production build..."

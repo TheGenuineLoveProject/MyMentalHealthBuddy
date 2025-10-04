@@ -1,16 +1,16 @@
 // server/index.ts
 
-import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import compression from 'compression';
-import dotenv from 'dotenv';
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import compression from "compression";
+import dotenv from "dotenv";
 
 // Import routes
-import { getAIResponse } from './ai';
-import aiEmployeeRouter from './ai/employee';
-import authRouter from './routes/auth';
-import apiRouter from './routes'; // adjust if your main routes are elsewhere
+import { getAIResponse } from "./ai";
+import aiEmployeeRouter from "./ai/employee";
+import authRouter from "./routes/auth";
+import apiRouter from "./routes"; // adjust if your main routes are elsewhere
 import healingRoute from "./routes/healing";
 app.use("/api", healingRoute);
 
@@ -27,22 +27,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Health check
-app.get('/health', (req, res) => {
-  res.send('✅ Server is working perfectly!');
+app.get("/health", (req, res) => {
+  res.send("✅ Server is working perfectly!");
 });
 
 // Built-in test endpoint (optional, can delete if not needed)
-app.get('/', (req, res) => {
-  res.send('🧠 Backend is working!');
+app.get("/", (req, res) => {
+  res.send("🧠 Backend is working!");
 });
 
 // Route mounting
-app.use('/auth', authRouter);
-app.use('/api', apiRouter);
-app.use('/api/ai', aiEmployeeRouter); // AI Employee Route
+app.use("/auth", authRouter);
+app.use("/api", apiRouter);
+app.use("/api/ai", aiEmployeeRouter); // AI Employee Route
 
 // Optional: Direct POST route for raw AI prompt
-app.post('/api/ai', async (req, res) => {
+app.post("/api/ai", async (req, res) => {
   const userMessage = req.body.message;
   const reply = await getAIResponse(userMessage);
   res.json({ reply });
@@ -53,7 +53,7 @@ app.listen(PORT, () => {
 });
 
 // AI Bot route (already added by you)
-import aiEmployeeRouter from './ai/employee';
-app.use('/api/ai', aiEmployeeRouter);
-import aiRoutes from './routes/ai';
-app.use('/api/ai', aiRoutes);
+import aiEmployeeRouter from "./ai/employee";
+app.use("/api/ai", aiEmployeeRouter);
+import aiRoutes from "./routes/ai";
+app.use("/api/ai", aiRoutes);

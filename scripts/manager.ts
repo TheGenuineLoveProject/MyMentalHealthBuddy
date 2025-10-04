@@ -1,3 +1,5 @@
+
+// @ts-check
 import { healProject } from "./heal";
 import { optimizeProject } from "./optimize";
 import { automateDaily } from "./automate";

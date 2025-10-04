@@ -9,8 +9,8 @@ dotenv.config();
 
 const app = express();
 
-// ✅ Replit requires 0.0.0.0 for the host
-const PORT = process.env.PORT || 3000;
+// ✅ Replit requires 0.0.0.0 for the host and port 5000
+const PORT = process.env.PORT || 5000;
 const HOST = "0.0.0.0";
 
 app.use(cors());
@@ -21,7 +21,10 @@ app.use(express.json());
 
 // simple route
 app.get("/", (_req, res) => {
-  res.json({ status: "ok", message: "💖 MyMentalHealthBuddy is running perfectly!" });
+  res.json({
+    status: "ok",
+    message: "💖 MyMentalHealthBuddy is running perfectly!"
+  });
 });
 
 // start server

@@ -1,9 +1,10 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import type { Request, Response, NextFunction } from 'express';
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import type { Request, Response, NextFunction } from "express";
 
-const JWT_SECRET = process.env.JWT_SECRET || 'mymentalhealthbuddy-jwt-secret-2024';
-const JWT_EXPIRY = '30d';
+const JWT_SECRET =
+  process.env.JWT_SECRET || "mymentalhealthbuddy-jwt-secret-2024";
+const JWT_EXPIRY = "30d";
 
 export interface AuthRequest extends Request {
   user?: {
@@ -14,7 +15,12 @@ export interface AuthRequest extends Request {
   };
 }
 
-export function generateToken(user: { id: string; username: string; email?: string; role: string }): string {
+export function generateToken(user: {
+  id: string;
+  username: string;
+  email?: string;
+  role: string;
+}): string {
   return jwt.sign(
     {
       id: user.id,
@@ -40,22 +46,29 @@ export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, salt);
 }
 
-export async function comparePassword(password: string, hashedPassword: string): Promise<boolean> {
+export async function comparePassword(
+  password: string,
+  hashedPassword: string
+): Promise<boolean> {
   return bcrypt.compare(password, hashedPassword);
 }
 
-export async function authenticateToken(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+export async function authenticateToken(
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
 
   if (!token) {
-    res.status(401).json({ error: 'Access token required' });
+    res.status(401).json({ error: "Access token required" });
     return;
   }
 
   const user = verifyToken(token);
   if (!user) {
-    res.status(403).json({ error: 'Invalid or expired token' });
+    res.status(403).json({ error: "Invalid or expired token" });
     return;
   }
 
@@ -63,9 +76,13 @@ export async function authenticateToken(req: AuthRequest, res: Response, next: N
   next();
 }
 
-export async function optionalAuthenticateToken(req: AuthRequest, res: Response, next: NextFunction): Promise<void> {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+export async function optionalAuthenticateToken(
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
 
   if (token) {
     const user = verifyToken(token);

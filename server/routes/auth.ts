@@ -5,7 +5,7 @@ import {
   hashPassword,
   comparePassword,
   authenticateToken,
-  type AuthRequest,
+  type AuthRequest
 } from "../auth/jwt";
 import { storage } from "../storage";
 import { asyncHandler, ValidationError } from "../middleware/errorHandler";
@@ -17,12 +17,12 @@ const registerSchema = z.object({
   username: z.string().min(3).max(50),
   email: z.string().email().optional(),
   password: z.string().min(6).max(100),
-  name: z.string().min(1).max(100).optional(),
+  name: z.string().min(1).max(100).optional()
 });
 
 const loginSchema = z.object({
   username: z.string(),
-  password: z.string(),
+  password: z.string()
 });
 
 // Register endpoint
@@ -32,7 +32,7 @@ router.post(
     const validation = registerSchema.safeParse(req.body);
     if (!validation.success) {
       throw new ValidationError(
-        validation.error.issues.map((e: any) => e.message).join(", "),
+        validation.error.issues.map((e: any) => e.message).join(", ")
       );
     }
 
@@ -57,7 +57,7 @@ router.post(
       username,
       email,
       password: hashedPassword,
-      name: name || username,
+      name: name || username
     });
 
     // Generate token
@@ -65,7 +65,7 @@ router.post(
       id: newUser.id,
       username: newUser.username,
       email: newUser.email || undefined,
-      role: newUser.role || "user",
+      role: newUser.role || "user"
     });
 
     res.json({
@@ -75,11 +75,11 @@ router.post(
         username: newUser.username,
         email: newUser.email,
         name: newUser.name,
-        role: newUser.role,
+        role: newUser.role
       },
-      token,
+      token
     });
-  }),
+  })
 );
 
 // Login endpoint
@@ -89,7 +89,7 @@ router.post(
     const validation = loginSchema.safeParse(req.body);
     if (!validation.success) {
       throw new ValidationError(
-        validation.error.issues.map((e: any) => e.message).join(", "),
+        validation.error.issues.map((e: any) => e.message).join(", ")
       );
     }
 
@@ -115,7 +115,7 @@ router.post(
       id: user.id,
       username: user.username,
       email: user.email || undefined,
-      role: user.role || "user",
+      role: user.role || "user"
     });
 
     res.json({
@@ -125,11 +125,11 @@ router.post(
         username: user.username,
         email: user.email,
         name: user.name,
-        role: user.role,
+        role: user.role
       },
-      token,
+      token
     });
-  }),
+  })
 );
 
 // Get current user
@@ -158,10 +158,10 @@ router.get(
         preferences: user.preferences,
         subscriptionTier: user.subscriptionTier,
         createdAt: user.createdAt,
-        lastLogin: user.lastLogin,
-      },
+        lastLogin: user.lastLogin
+      }
     });
-  }),
+  })
 );
 
 // Update user profile
@@ -177,13 +177,13 @@ router.patch(
       name: z.string().min(1).max(100).optional(),
       email: z.string().email().optional(),
       profileImage: z.string().optional(),
-      preferences: z.record(z.any()).optional(),
+      preferences: z.record(z.any()).optional()
     });
 
     const validation = updateSchema.safeParse(req.body);
     if (!validation.success) {
       throw new ValidationError(
-        validation.error.issues.map((e: any) => e.message).join(", "),
+        validation.error.issues.map((e: any) => e.message).join(", ")
       );
     }
 
@@ -202,10 +202,10 @@ router.patch(
         role: updatedUser.role,
         profileImage: updatedUser.profileImage,
         preferences: updatedUser.preferences,
-        subscriptionTier: updatedUser.subscriptionTier,
-      },
+        subscriptionTier: updatedUser.subscriptionTier
+      }
     });
-  }),
+  })
 );
 
 // Change password
@@ -219,13 +219,13 @@ router.post(
 
     const passwordSchema = z.object({
       currentPassword: z.string(),
-      newPassword: z.string().min(6).max(100),
+      newPassword: z.string().min(6).max(100)
     });
 
     const validation = passwordSchema.safeParse(req.body);
     if (!validation.success) {
       throw new ValidationError(
-        validation.error.issues.map((e: any) => e.message).join(", "),
+        validation.error.issues.map((e: any) => e.message).join(", ")
       );
     }
 
@@ -239,7 +239,7 @@ router.post(
 
     const isValidPassword = await comparePassword(
       currentPassword,
-      user.password,
+      user.password
     );
     if (!isValidPassword) {
       throw new ValidationError("Current password is incorrect");
@@ -251,9 +251,9 @@ router.post(
 
     res.json({
       success: true,
-      message: "Password changed successfully",
+      message: "Password changed successfully"
     });
-  }),
+  })
 );
 
 // Logout (mainly for clearing session if needed)
@@ -262,7 +262,7 @@ router.post("/logout", authenticateToken, (req: AuthRequest, res) => {
   // But we can still have this endpoint for consistency
   res.json({
     success: true,
-    message: "Logged out successfully",
+    message: "Logged out successfully"
   });
 });
 

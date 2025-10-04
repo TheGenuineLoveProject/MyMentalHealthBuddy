@@ -3,38 +3,44 @@
  * Oversees OpenAI chat healing & fallback logic
  */
 
-import { generateHealingResponse, generateCompassionateFallback } from "../openai";
+import {
+  generateHealingResponse,
+  generateCompassionateFallback
+} from "../openai";
 
 export class AIChatManager {
   private name = "ChatGPT Healer";
   private conversationCache = new Map();
-  
+
   /**
    * Manages AI chat sessions with auto-healing
    */
   async manageChatSession(userId: string, message: string) {
     try {
       console.log(`💬 [${this.name}] Processing chat for user ${userId}`);
-      
+
       // Try primary AI response
       const response = await generateHealingResponse(message);
-      
+
       // Cache conversation for context
       this.cacheConversation(userId, message, response);
-      
+
       console.log(`✅ [${this.name}] Chat processed successfully`);
-      
+
       return {
         success: true,
         response,
         timestamp: new Date().toISOString()
       };
     } catch (error) {
-      console.error(`❌ [${this.name}] Chat error, activating fallback:`, error);
-      
+      console.error(
+        `❌ [${this.name}] Chat error, activating fallback:`,
+        error
+      );
+
       // Auto-fallback to compassionate response
       const fallbackResponse = generateCompassionateFallback(message);
-      
+
       return {
         success: true,
         response: fallbackResponse,
@@ -51,10 +57,10 @@ export class AIChatManager {
     if (!this.conversationCache.has(userId)) {
       this.conversationCache.set(userId, []);
     }
-    
+
     const history = this.conversationCache.get(userId);
     history.push({ message, response, timestamp: Date.now() });
-    
+
     // Keep only last 10 messages for memory efficiency
     if (history.length > 10) {
       history.shift();
@@ -73,7 +79,7 @@ export class AIChatManager {
     };
 
     console.log(`📊 [${this.name}] Chat metrics:`, metrics);
-    
+
     return metrics;
   }
 
@@ -82,19 +88,23 @@ export class AIChatManager {
    */
   async selfOptimize() {
     console.log(`🧬 [${this.name}] Optimizing chat algorithms...`);
-    
+
     // Clear old conversations to free memory
     const now = Date.now();
     this.conversationCache.forEach((history, userId) => {
-      const recentMessages = history.filter((h: any) => now - h.timestamp < 3600000); // Keep last hour
+      const recentMessages = history.filter(
+        (h: any) => now - h.timestamp < 3600000
+      ); // Keep last hour
       if (recentMessages.length === 0) {
         this.conversationCache.delete(userId);
       } else {
         this.conversationCache.set(userId, recentMessages);
       }
     });
-    
-    console.log(`✨ [${this.name}] Chat optimization complete. Cache optimized.`);
+
+    console.log(
+      `✨ [${this.name}] Chat optimization complete. Cache optimized.`
+    );
   }
 }
 

@@ -17,7 +17,7 @@ export async function startHealing(options: {
   const duplicates = [
     "postcss.config.js",
     "tailwind.config.ts",
-    "vite.config.ts",
+    "vite.config.ts"
   ];
   for (const file of duplicates) {
     const clientFile = path.join("client", file);

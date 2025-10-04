@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Platform Healing Engine - Automated healing and optimization utilities
  */
@@ -8,9 +9,11 @@ export async function healAllErrors(options: { target: string; fix: string }) {
   return Promise.resolve();
 }
 
-export async function assignAIEmployees(employees: Array<{ name: string; component: string }>) {
+export async function assignAIEmployees(
+  employees: Array<{ name: string; component: string }>
+) {
   console.log(`🤖 Assigning ${employees.length} AI employees to components`);
-  employees.forEach(emp => {
+  employees.forEach((emp) => {
     console.log(`  - ${emp.name} → ${emp.component}`);
   });
   // Implementation would assign AI components
@@ -41,7 +44,10 @@ export async function publishEvidenceContent(options: {
   formats: string[];
   include: string[];
 }) {
-  console.log(`📚 Publishing evidence-based content from sources:`, options.sources);
+  console.log(
+    `📚 Publishing evidence-based content from sources:`,
+    options.sources
+  );
   // Implementation would publish content
   return Promise.resolve();
 }
@@ -52,7 +58,9 @@ export async function secureAllLegalRights(options: {
   disclaimers: boolean;
   aiDisclosure: boolean;
 }) {
-  console.log(`⚖️ Securing legal rights: ${options.copyright}, License: ${options.license}`);
+  console.log(
+    `⚖️ Securing legal rights: ${options.copyright}, License: ${options.license}`
+  );
   // Implementation would add legal headers
   return Promise.resolve();
 }

@@ -1,4 +1,4 @@
-import pRetry from 'p-retry';
+import pRetry from "p-retry";
 
 // Retry configuration for different scenarios
 export const retryConfigs = {
@@ -8,7 +8,9 @@ export const retryConfigs = {
     maxTimeout: 30000,
     randomize: true,
     onFailedAttempt: (error: any) => {
-      console.log(`Attempt ${error.attemptNumber} failed. ${error.retriesLeft} retries left.`);
+      console.log(
+        `Attempt ${error.attemptNumber} failed. ${error.retriesLeft} retries left.`
+      );
     }
   },
   standard: {
@@ -29,45 +31,47 @@ export const retryConfigs = {
 export class CircuitBreaker {
   private failureCount = 0;
   private lastFailureTime = 0;
-  private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED';
-  
+  private state: "CLOSED" | "OPEN" | "HALF_OPEN" = "CLOSED";
+
   constructor(
     private threshold: number = 5,
     private timeout: number = 60000, // 1 minute
     private resetTimeout: number = 30000 // 30 seconds
   ) {}
-  
+
   async execute<T>(fn: () => Promise<T>): Promise<T> {
-    if (this.state === 'OPEN') {
+    if (this.state === "OPEN") {
       const now = Date.now();
       if (now - this.lastFailureTime > this.resetTimeout) {
-        this.state = 'HALF_OPEN';
+        this.state = "HALF_OPEN";
         this.failureCount = 0;
       } else {
-        throw new Error('Circuit breaker is OPEN - service unavailable');
+        throw new Error("Circuit breaker is OPEN - service unavailable");
       }
     }
-    
+
     try {
       const result = await fn();
-      if (this.state === 'HALF_OPEN') {
-        this.state = 'CLOSED';
+      if (this.state === "HALF_OPEN") {
+        this.state = "CLOSED";
         this.failureCount = 0;
       }
       return result;
     } catch (error) {
       this.failureCount++;
       this.lastFailureTime = Date.now();
-      
+
       if (this.failureCount >= this.threshold) {
-        this.state = 'OPEN';
-        console.error(`Circuit breaker opened after ${this.failureCount} failures`);
+        this.state = "OPEN";
+        console.error(
+          `Circuit breaker opened after ${this.failureCount} failures`
+        );
       }
-      
+
       throw error;
     }
   }
-  
+
   getState() {
     return {
       state: this.state,
@@ -75,9 +79,9 @@ export class CircuitBreaker {
       lastFailureTime: this.lastFailureTime
     };
   }
-  
+
   reset() {
-    this.state = 'CLOSED';
+    this.state = "CLOSED";
     this.failureCount = 0;
     this.lastFailureTime = 0;
   }
@@ -89,9 +93,7 @@ export async function retryWithBreaker<T>(
   breaker: CircuitBreaker,
   retryConfig = retryConfigs.standard
 ): Promise<T> {
-  return breaker.execute(() => 
-    pRetry(fn, retryConfig)
-  );
+  return breaker.execute(() => pRetry(fn, retryConfig));
 }
 
 // Create circuit breakers for different services

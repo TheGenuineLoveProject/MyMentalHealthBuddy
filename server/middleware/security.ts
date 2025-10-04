@@ -11,7 +11,10 @@ import { createHash } from "crypto";
 /**
  * Rate limiting configuration
  */
-export const createRateLimiter = (windowMs: number = 15 * 60 * 1000, max: number = 100) => {
+export const createRateLimiter = (
+  windowMs: number = 15 * 60 * 1000,
+  max: number = 100
+) => {
   return rateLimit({
     windowMs,
     max,
@@ -42,15 +45,19 @@ export const rateLimiters = {
 /**
  * CSRF Protection
  */
-export const csrfProtection = (req: Request, res: Response, next: NextFunction) => {
+export const csrfProtection = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   // Skip CSRF for GET requests
-  if (req.method === 'GET') {
+  if (req.method === "GET") {
     return next();
   }
-  
-  const token = req.headers['x-csrf-token'] || req.body._csrf;
+
+  const token = req.headers["x-csrf-token"] || req.body._csrf;
   const sessionToken = req.session?.csrfToken;
-  
+
   if (!token || token !== sessionToken) {
     console.log(`🔒 CSRF token mismatch for ${req.path}`);
     return res.status(403).json({
@@ -58,7 +65,7 @@ export const csrfProtection = (req: Request, res: Response, next: NextFunction) 
       message: "Security token is invalid or missing"
     });
   }
-  
+
   next();
 };
 
@@ -66,15 +73,17 @@ export const csrfProtection = (req: Request, res: Response, next: NextFunction) 
  * Generate CSRF token
  */
 export const generateCSRFToken = (): string => {
-  return createHash('sha256')
-    .update(Math.random().toString())
-    .digest('hex');
+  return createHash("sha256").update(Math.random().toString()).digest("hex");
 };
 
 /**
  * SQL Injection Protection
  */
-export const sanitizeInput = (req: Request, res: Response, next: NextFunction) => {
+export const sanitizeInput = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const suspicious = [
     "SELECT",
     "INSERT",
@@ -88,18 +97,18 @@ export const sanitizeInput = (req: Request, res: Response, next: NextFunction) =
     "/*",
     "*/"
   ];
-  
+
   const checkValue = (value: any): boolean => {
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
       const upperValue = value.toUpperCase();
-      return suspicious.some(pattern => upperValue.includes(pattern));
+      return suspicious.some((pattern) => upperValue.includes(pattern));
     }
-    if (typeof value === 'object' && value !== null) {
-      return Object.values(value).some(v => checkValue(v));
+    if (typeof value === "object" && value !== null) {
+      return Object.values(value).some((v) => checkValue(v));
     }
     return false;
   };
-  
+
   if (checkValue(req.body) || checkValue(req.query) || checkValue(req.params)) {
     console.log(`⚠️ Potential SQL injection attempt from ${req.ip}`);
     return res.status(400).json({
@@ -107,31 +116,35 @@ export const sanitizeInput = (req: Request, res: Response, next: NextFunction) =
       message: "Your request contains suspicious patterns"
     });
   }
-  
+
   next();
 };
 
 /**
  * XSS Protection
  */
-export const xssProtection = (req: Request, res: Response, next: NextFunction) => {
+export const xssProtection = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const sanitizeString = (str: string): string => {
     return str
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#x27;')
-      .replace(/\//g, '&#x2F;');
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#x27;")
+      .replace(/\//g, "&#x2F;");
   };
-  
+
   const sanitizeObject = (obj: any): any => {
-    if (typeof obj === 'string') {
+    if (typeof obj === "string") {
       return sanitizeString(obj);
     }
     if (Array.isArray(obj)) {
       return obj.map(sanitizeObject);
     }
-    if (typeof obj === 'object' && obj !== null) {
+    if (typeof obj === "object" && obj !== null) {
       const sanitized: any = {};
       for (const [key, value] of Object.entries(obj)) {
         sanitized[key] = sanitizeObject(value);
@@ -140,11 +153,11 @@ export const xssProtection = (req: Request, res: Response, next: NextFunction) =
     }
     return obj;
   };
-  
+
   if (req.body) {
     req.body = sanitizeObject(req.body);
   }
-  
+
   next();
 };
 
@@ -158,7 +171,11 @@ export const securityHeaders = helmet({
       styleSrc: ["'self'", "'unsafe-inline'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
       imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "https://api.openai.com", "https://api.stripe.com"],
+      connectSrc: [
+        "'self'",
+        "https://api.openai.com",
+        "https://api.stripe.com"
+      ],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
       objectSrc: ["'none'"],
       mediaSrc: ["'self'"],
@@ -175,18 +192,23 @@ export const securityHeaders = helmet({
 /**
  * Session security
  */
-export const sessionSecurity = (req: Request, res: Response, next: NextFunction) => {
+export const sessionSecurity = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   if (req.session) {
     // Regenerate session ID periodically
     if (!req.session.lastRegenerate) {
       req.session.lastRegenerate = Date.now();
-    } else if (Date.now() - req.session.lastRegenerate > 3600000) { // 1 hour
+    } else if (Date.now() - req.session.lastRegenerate > 3600000) {
+      // 1 hour
       req.session.regenerate((err) => {
         if (err) {
-          console.error('Session regeneration error:', err);
+          console.error("Session regeneration error:", err);
         } else {
           req.session.lastRegenerate = Date.now();
-          console.log('✅ Session regenerated for security');
+          console.log("✅ Session regenerated for security");
         }
       });
     }
@@ -209,41 +231,41 @@ export const securityLogger = (event: string, details: any) => {
  */
 export class SecurityMonitor {
   private threats: any[] = [];
-  
+
   logThreat(threat: any) {
     this.threats.push({
       ...threat,
       timestamp: new Date().toISOString()
     });
-    
+
     // Keep only last 1000 threats
     if (this.threats.length > 1000) {
       this.threats.shift();
     }
-    
+
     // Auto-respond to threats
     this.autoRespond(threat);
   }
-  
+
   private autoRespond(threat: any) {
     console.log(`🛡️ Auto-responding to threat: ${threat.type}`);
-    
+
     switch (threat.type) {
-      case 'brute_force':
+      case "brute_force":
         // Block IP temporarily
         console.log(`🚫 Blocking IP: ${threat.ip}`);
         break;
-      case 'sql_injection':
+      case "sql_injection":
         // Log and alert
         console.log(`⚠️ SQL injection attempt from ${threat.ip}`);
         break;
-      case 'xss':
+      case "xss":
         // Sanitize and continue
         console.log(`🧹 XSS attempt sanitized`);
         break;
     }
   }
-  
+
   getThreatsReport() {
     return {
       total: this.threats.length,

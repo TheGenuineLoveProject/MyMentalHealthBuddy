@@ -1,4 +1,4 @@
-/** 
+/**
  * © 2025 Aaliyah Draws Art LLC. All rights reserved.
  * Unauthorized copying or distribution of this file is prohibited.
  * Built with GPT-4o, MIT/Proprietary license, integrated with evidence-based mental health models.
@@ -16,24 +16,24 @@ export default defineConfig({
     process.env.REPL_ID !== undefined
       ? [
           await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
+            m.cartographer()
           ),
           await import("@replit/vite-plugin-dev-banner").then((m) =>
-            m.devBanner(),
-          ),
+            m.devBanner()
+          )
         ]
-      : []),
+      : [])
   ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),
       "@shared": path.resolve(import.meta.dirname, "..", "shared"),
-      "@assets": path.resolve(import.meta.dirname, "..", "attached_assets"),
-    },
+      "@assets": path.resolve(import.meta.dirname, "..", "attached_assets")
+    }
   },
   root: ".",
   css: {
-    transformer: 'lightningcss',
+    transformer: "lightningcss",
     lightningcss: {
       cssModules: {
         dashedIdents: true
@@ -42,20 +42,20 @@ export default defineConfig({
   },
   optimizeDeps: {
     esbuildOptions: {
-      target: 'esnext'
+      target: "esnext"
     }
   },
   build: {
     outDir: path.resolve(import.meta.dirname, "..", "dist/public"),
     emptyOutDir: true,
-    target: 'esnext',
-    cssMinify: 'lightningcss',
+    target: "esnext",
+    cssMinify: "lightningcss",
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'stripe-vendor': ['@stripe/react-stripe-js', '@stripe/stripe-js'],
-          'tanstack-vendor': ['@tanstack/react-query']
+          "react-vendor": ["react", "react-dom"],
+          "stripe-vendor": ["@stripe/react-stripe-js", "@stripe/stripe-js"],
+          "tanstack-vendor": ["@tanstack/react-query"]
         }
       }
     },
@@ -63,14 +63,14 @@ export default defineConfig({
       polyfill: true
     },
     sourcemap: true,
-    minify: 'esbuild'
+    minify: "esbuild"
   },
   server: {
     fs: {
       strict: true,
       deny: ["**/.*"],
       clearScreen: false,
-      logLevel: 'info',
-    },
-  },
+      logLevel: "info"
+    }
+  }
 });

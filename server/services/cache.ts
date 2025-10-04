@@ -1,4 +1,4 @@
-import NodeCache from 'node-cache';
+import NodeCache from "node-cache";
 
 // Create cache instances with different TTL for different purposes
 export const apiCache = new NodeCache({
@@ -27,37 +27,37 @@ export const aiResponseCache = new NodeCache({
 
 // Cache key generators
 export function getCacheKey(prefix: string, ...parts: any[]): string {
-  return `${prefix}:${parts.join(':')}`;
+  return `${prefix}:${parts.join(":")}`;
 }
 
 // Cache middleware
 export function cacheMiddleware(cache: NodeCache, ttl?: number) {
   return (req: any, res: any, next: any) => {
-    const key = getCacheKey('api', req.method, req.originalUrl);
-    
+    const key = getCacheKey("api", req.method, req.originalUrl);
+
     // Only cache GET requests by default
-    if (req.method !== 'GET') {
+    if (req.method !== "GET") {
       return next();
     }
-    
+
     const cachedResponse = cache.get(key);
     if (cachedResponse) {
-      res.set('X-Cache', 'HIT');
+      res.set("X-Cache", "HIT");
       const ttlValue = cache.getTtl(key);
-      res.set('X-Cache-TTL', ttlValue ? ttlValue.toString() : '0');
+      res.set("X-Cache-TTL", ttlValue ? ttlValue.toString() : "0");
       return res.json(cachedResponse);
     }
-    
+
     // Store original json method
     const originalJson = res.json;
-    
+
     // Override json method to cache the response
-    res.json = function(data: any) {
-      res.set('X-Cache', 'MISS');
+    res.json = function (data: any) {
+      res.set("X-Cache", "MISS");
       cache.set(key, data, ttl || undefined);
       originalJson.call(this, data);
     };
-    
+
     next();
   };
 }
@@ -69,19 +69,26 @@ export function getCacheStats() {
       keys: apiCache.keys().length,
       hits: apiCache.getStats().hits,
       misses: apiCache.getStats().misses,
-      hitRate: apiCache.getStats().hits / (apiCache.getStats().hits + apiCache.getStats().misses) || 0
+      hitRate:
+        apiCache.getStats().hits /
+          (apiCache.getStats().hits + apiCache.getStats().misses) || 0
     },
     health: {
       keys: healthCache.keys().length,
       hits: healthCache.getStats().hits,
       misses: healthCache.getStats().misses,
-      hitRate: healthCache.getStats().hits / (healthCache.getStats().hits + healthCache.getStats().misses) || 0
+      hitRate:
+        healthCache.getStats().hits /
+          (healthCache.getStats().hits + healthCache.getStats().misses) || 0
     },
     ai: {
       keys: aiResponseCache.keys().length,
       hits: aiResponseCache.getStats().hits,
       misses: aiResponseCache.getStats().misses,
-      hitRate: aiResponseCache.getStats().hits / (aiResponseCache.getStats().hits + aiResponseCache.getStats().misses) || 0
+      hitRate:
+        aiResponseCache.getStats().hits /
+          (aiResponseCache.getStats().hits +
+            aiResponseCache.getStats().misses) || 0
     }
   };
 }

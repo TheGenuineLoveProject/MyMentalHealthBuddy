@@ -4,5 +4,5 @@
 export const db = {
   users: [],
   healingSessions: [],
-  thoughts: [],
+  thoughts: []
 };

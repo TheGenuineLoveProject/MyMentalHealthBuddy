@@ -5,6 +5,7 @@
 The application is **ready for deployment** with the following configurations:
 
 ### Current Status
+
 - ✅ Server runs successfully on port 5000
 - ✅ Database connection works with PostgreSQL
 - ✅ Session management with fallback to memory store
@@ -18,19 +19,22 @@ The application is **ready for deployment** with the following configurations:
 This approach uses `tsx` to run TypeScript files directly, avoiding compilation issues.
 
 ### Steps:
+
 1. **Copy these files to your hosting service:**
    - `server/` directory
-   - `shared/` directory  
+   - `shared/` directory
    - `client/` directory (if you have frontend)
    - `package.json`
    - `.env.example`
 
 2. **On your hosting service, install dependencies:**
+
    ```bash
    npm install
    ```
 
 3. **Set environment variables:**
+
    ```
    NODE_ENV=production
    PORT=5000
@@ -48,11 +52,13 @@ This approach uses `tsx` to run TypeScript files directly, avoiding compilation 
 ## Option 2: Deploy Pre-Built Package
 
 Use the `dist` or `dist-final` directory that contains:
+
 - All source files
 - Production package.json with pinned dependencies
 - Environment template
 
 ### Steps:
+
 1. Upload the `dist-final` folder to your hosting service
 2. Run `npm install` in the dist-final directory
 3. Configure environment variables
@@ -100,6 +106,7 @@ BASE_URL=https://yourapp.com
 ## Build Command for CI/CD
 
 If your hosting service requires a build command:
+
 ```bash
 ./build.sh  # or npm run build
 ```
@@ -121,14 +128,17 @@ Returns JSON with system status, database connection, and service availability.
 ## Troubleshooting
 
 ### Database Connection Issues
+
 - The app will automatically fall back to in-memory storage if PostgreSQL is unavailable
 - Session storage will use memory if database connection fails
 
 ### Missing Dependencies
+
 - Run `npm install` to install all dependencies
 - The package.json includes all necessary runtime dependencies
 
 ### TypeScript Errors
+
 - The application uses `tsx` runtime which handles TypeScript files directly
 - No compilation step is required
 
@@ -146,6 +156,7 @@ dist-final/
 ## Success Indicators
 
 When successfully deployed, you should see:
+
 ```
 ✅ Database connected successfully
 ✅ PostgreSQL session store configured
@@ -159,6 +170,7 @@ When successfully deployed, you should see:
 ## Support
 
 The application includes:
+
 - Automatic error recovery
 - Database connection fallback
 - Session storage fallback

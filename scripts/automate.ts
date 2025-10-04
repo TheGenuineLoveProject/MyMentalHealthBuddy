@@ -1,3 +1,4 @@
+// @ts-check
 export async function automateDaily() {
   return {
     action: "automate",

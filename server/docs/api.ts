@@ -24,7 +24,7 @@ export interface ApiEndpointDoc {
 
 export interface Parameter {
   name: string;
-  in: 'query' | 'path' | 'header';
+  in: "query" | "path" | "header";
   required: boolean;
   type: string;
   description: string;
@@ -55,7 +55,8 @@ export interface Example {
 // API Documentation Data
 export const apiDocumentation: ApiDocumentation = {
   title: "Development Dashboard API",
-  description: "REST API for the Node.js Express + React Vite development dashboard",
+  description:
+    "REST API for the Node.js Express + React Vite development dashboard",
   version: "1.0.0",
   baseUrl: "/api",
   contact: {
@@ -78,7 +79,10 @@ export const apiDocumentation: ApiDocumentation = {
             properties: {
               status: { type: "string", example: "healthy" },
               timestamp: { type: "string", format: "date-time" },
-              uptime: { type: "number", description: "Server uptime in seconds" },
+              uptime: {
+                type: "number",
+                description: "Server uptime in seconds"
+              },
               responseTime: { type: "string", example: "23ms" }
             }
           },
@@ -305,7 +309,10 @@ export const apiDocumentation: ApiDocumentation = {
           type: "object",
           required: ["method", "path"],
           properties: {
-            method: { type: "string", enum: ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+            method: {
+              type: "string",
+              enum: ["GET", "POST", "PUT", "PATCH", "DELETE"]
+            },
             path: { type: "string" }
           }
         },

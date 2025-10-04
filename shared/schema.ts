@@ -7,7 +7,7 @@ import {
   boolean,
   timestamp,
   decimal,
-  jsonb,
+  jsonb
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -30,7 +30,7 @@ export const users = pgTable("users", {
   subscriptionStatus: text("subscription_status").default("inactive"),
   subscriptionEndDate: timestamp("subscription_end_date"),
   profileImage: text("profile_image"),
-  preferences: jsonb("preferences").default({}),
+  preferences: jsonb("preferences").default({})
 });
 
 export const services = pgTable("services", {
@@ -43,7 +43,7 @@ export const services = pgTable("services", {
   status: text("status").notNull().default("stopped"),
   pid: integer("pid"),
   uptime: text("uptime"),
-  lastChecked: timestamp("last_checked").defaultNow(),
+  lastChecked: timestamp("last_checked").defaultNow()
 });
 
 export const apiEndpoints = pgTable("api_endpoints", {
@@ -53,7 +53,7 @@ export const apiEndpoints = pgTable("api_endpoints", {
   method: text("method").notNull(),
   path: text("path").notNull(),
   description: text("description").notNull(),
-  status: text("status").notNull().default("active"),
+  status: text("status").notNull().default("active")
 });
 
 export const projectStructure = pgTable("project_structure", {
@@ -63,7 +63,7 @@ export const projectStructure = pgTable("project_structure", {
   name: text("name").notNull(),
   type: text("type").notNull(), // "file" or "folder"
   path: text("path").notNull(),
-  parentId: varchar("parent_id"),
+  parentId: varchar("parent_id")
 });
 
 export const packages = pgTable("packages", {
@@ -73,7 +73,7 @@ export const packages = pgTable("packages", {
   name: text("name").notNull(),
   version: text("version").notNull(),
   environment: text("environment").notNull(), // "backend" or "frontend"
-  isDev: boolean("is_dev").default(false),
+  isDev: boolean("is_dev").default(false)
 });
 
 export const scripts = pgTable("scripts", {
@@ -83,7 +83,7 @@ export const scripts = pgTable("scripts", {
   name: text("name").notNull(),
   command: text("command").notNull(),
   description: text("description"),
-  environment: text("environment").notNull(),
+  environment: text("environment").notNull()
 });
 
 export const healingMessages = pgTable("healing_messages", {
@@ -99,13 +99,13 @@ export const healingMessages = pgTable("healing_messages", {
   timestamp: timestamp("timestamp", { withTimezone: true }).defaultNow(),
   tokensUsed: integer("tokens_used"),
   isHelpful: boolean("is_helpful"),
-  tags: text("tags").array(),
+  tags: text("tags").array()
 });
 
 export const sessions = pgTable("sessions", {
   sid: varchar("sid").primaryKey(),
   sess: jsonb("sess").notNull(),
-  expire: timestamp("expire").notNull(),
+  expire: timestamp("expire").notNull()
 });
 
 export const billingTransactions = pgTable("billing_transactions", {
@@ -120,7 +120,7 @@ export const billingTransactions = pgTable("billing_transactions", {
   type: text("type").notNull(),
   description: text("description"),
   createdAt: timestamp("created_at").defaultNow(),
-  metadata: jsonb("metadata").default({}),
+  metadata: jsonb("metadata").default({})
 });
 
 export const analyticsEvents = pgTable("analytics_events", {
@@ -135,7 +135,7 @@ export const analyticsEvents = pgTable("analytics_events", {
   sessionId: varchar("session_id"),
   pageUrl: text("page_url"),
   userAgent: text("user_agent"),
-  ipAddress: varchar("ip_address"),
+  ipAddress: varchar("ip_address")
 });
 
 export const ttsConfigurations = pgTable("tts_configurations", {
@@ -148,7 +148,7 @@ export const ttsConfigurations = pgTable("tts_configurations", {
   pitch: decimal("pitch", { precision: 3, scale: 2 }).default("1.0"),
   language: text("language").default("en-US"),
   provider: text("provider").default("openai"),
-  isDefault: boolean("is_default").default(false),
+  isDefault: boolean("is_default").default(false)
 });
 
 export const assessments = pgTable("assessments", {
@@ -162,7 +162,7 @@ export const assessments = pgTable("assessments", {
   responses: jsonb("responses").notNull(),
   recommendations: text("recommendations").array(),
   completedAt: timestamp("completed_at").defaultNow(),
-  followUpDate: timestamp("follow_up_date"),
+  followUpDate: timestamp("follow_up_date")
 });
 
 export const systemLogs = pgTable("system_logs", {
@@ -176,7 +176,7 @@ export const systemLogs = pgTable("system_logs", {
   context: jsonb("context").default({}),
   timestamp: timestamp("timestamp").defaultNow(),
   resolved: boolean("resolved").default(false),
-  resolutionNotes: text("resolution_notes"),
+  resolutionNotes: text("resolution_notes")
 });
 
 export const subscriptionPlans = pgTable("subscription_plans", {
@@ -196,7 +196,7 @@ export const subscriptionPlans = pgTable("subscription_plans", {
   hasVoiceSupport: boolean("has_voice_support").default(false),
   hasPrioritySupport: boolean("has_priority_support").default(false),
   isActive: boolean("is_active").default(true),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: timestamp("created_at").defaultNow()
 });
 
 export const insertUserSchema = createInsertSchema(users)
@@ -204,49 +204,49 @@ export const insertUserSchema = createInsertSchema(users)
     username: true,
     email: true,
     password: true,
-    name: true,
+    name: true
   })
   .extend({
     email: z.string().email().optional(),
     password: z.string().min(6),
-    username: z.string().min(3),
+    username: z.string().min(3)
   });
 
 export const insertServiceSchema = createInsertSchema(services).omit({
   id: true,
-  lastChecked: true,
+  lastChecked: true
 });
 
 export const insertApiEndpointSchema = createInsertSchema(apiEndpoints).omit({
-  id: true,
+  id: true
 });
 
 export const insertProjectStructureSchema = createInsertSchema(
-  projectStructure,
+  projectStructure
 ).omit({
-  id: true,
+  id: true
 });
 
 export const insertPackageSchema = createInsertSchema(packages).omit({
-  id: true,
+  id: true
 });
 
 export const insertScriptSchema = createInsertSchema(scripts).omit({
-  id: true,
+  id: true
 });
 
 export const insertHealingMessageSchema = createInsertSchema(
-  healingMessages,
+  healingMessages
 ).omit({
   id: true,
-  timestamp: true,
+  timestamp: true
 });
 
 export const healingRequestSchema = z.object({
   message: z
     .string()
     .min(1, "Message cannot be empty")
-    .max(1000, "Message too long"),
+    .max(1000, "Message too long")
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
@@ -269,35 +269,35 @@ export type HealingRequest = z.infer<typeof healingRequestSchema>;
 export type HealingMessage = typeof healingMessages.$inferSelect;
 
 export const insertBillingTransactionSchema = createInsertSchema(
-  billingTransactions,
+  billingTransactions
 ).omit({
   id: true,
-  createdAt: true,
+  createdAt: true
 });
 export const insertAnalyticsEventSchema = createInsertSchema(
-  analyticsEvents,
+  analyticsEvents
 ).omit({
   id: true,
-  timestamp: true,
+  timestamp: true
 });
 export const insertTtsConfigurationSchema = createInsertSchema(
-  ttsConfigurations,
+  ttsConfigurations
 ).omit({
-  id: true,
+  id: true
 });
 export const insertAssessmentSchema = createInsertSchema(assessments).omit({
   id: true,
-  completedAt: true,
+  completedAt: true
 });
 export const insertSystemLogSchema = createInsertSchema(systemLogs).omit({
   id: true,
-  timestamp: true,
+  timestamp: true
 });
 export const insertSubscriptionPlanSchema = createInsertSchema(
-  subscriptionPlans,
+  subscriptionPlans
 ).omit({
   id: true,
-  createdAt: true,
+  createdAt: true
 });
 
 export type InsertBillingTransaction = z.infer<
