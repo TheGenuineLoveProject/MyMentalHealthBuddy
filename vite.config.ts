@@ -3,7 +3,7 @@
  * Unauthorized copying or distribution of this file is prohibited.
  * Built with GPT-4o, MIT/Proprietary license, integrated with evidence-based mental health models.
  */
-import { defineConfig } from "vite";
+import { defineConfig } from "rolldown-vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
@@ -32,9 +32,38 @@ export default defineConfig({
     },
   },
   root: ".",
+  css: {
+    transformer: 'lightningcss',
+    lightningcss: {
+      cssModules: {
+        dashedIdents: true
+      }
+    }
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'esnext'
+    }
+  },
   build: {
     outDir: path.resolve(import.meta.dirname, "..", "dist/public"),
     emptyOutDir: true,
+    target: 'esnext',
+    cssMinify: 'lightningcss',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'stripe-vendor': ['@stripe/react-stripe-js', '@stripe/stripe-js'],
+          'tanstack-vendor': ['@tanstack/react-query']
+        }
+      }
+    },
+    modulePreload: {
+      polyfill: true
+    },
+    sourcemap: true,
+    minify: 'esbuild'
   },
   server: {
     fs: {
