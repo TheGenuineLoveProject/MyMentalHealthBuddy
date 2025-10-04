@@ -12,6 +12,10 @@ build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
 
 [[ports]]
+localPort = 3000
+externalPort = 4200
+
+[[ports]]
 localPort = 5000
 externalPort = 80
 
@@ -39,10 +43,6 @@ externalPort = 3002
 localPort = 45083
 externalPort = 3001
 
-[[ports]]
-localPort = 45671
-externalPort = 4200
-
 [workflows]
 runButton = "Project"
 
@@ -63,6 +63,12 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+run = "npm start"
+language = "nodejs"
+entrypoint = "server/index.ts"
 
 [interpreter]
 entrypoint = "index.ts"
+
+[agent]
+expertMode = true
