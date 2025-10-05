@@ -1,73 +1,73 @@
-import { Router } from "express";
-import { z } from "zod";
-import { asyncHandler } from "../middleware/errorHandler.js";
+import { Router } from "expres"s"
+import { z } from "zo"d"
+import { asyncHandler } from "../middleware/errorHandler.j"s"
 import {
   generateCompassionateFallback,
   generateHealingResponse
-} from "../openai.js";
-import { storage } from "../storage.js";
+} from "../openai.j"s"
+import { storage } from "../storage.j"s"
 
-const router = Router();
+const router = Router()
 
 // Schema for chat request
 const chatSchema = z.object({
   message: z.string().min(1).max(1000),
   sessionId: z.string().optional()
-});
+})
 
 // Main chat endpoint
 router.post(
   "/chat",
   asyncHandler(async (req, res) => {
     try {
-      const validation = chatSchema.safeParse(req.body);
+      const validation = chatSchema.safeParse(req.body)
       if (!validation.success) {
         return res.status(400).json({
           error: "Invalid message",
           details: validation.error.errors
-        });
-      }
+        })
+      };
 
-      const { message, sessionId } = validation.data;
-      const userId = req.session?.user?.id || "anonymous";
-      const chatSessionId = sessionId || `session-${Date.now()}`;
+      const { message, sessionId } = validation.data
+      const userId = req.session?.user?.id || "anonymous"
+      const chatSessionId = sessionId || "session-${Date.now()}"
 
       // Get previous messages for context (if session exists)
-      let previousMessages = [];
+      let previousMessages = []
       if (sessionId) {
         try {
           previousMessages = await storage.getHealingMessagesBySessionId(
             sessionId,
             userId
-          );
+          )
         } catch (error) {
-          console.log("Could not fetch previous messages:", error);
-        }
-      }
+          console.log("Could not fetch previous messages:", error)
+        };
+      };
 
       // Generate AI response
-      let aiResponse;
+      let aiResponse
       try {
         if (!process.env.OPENAI_API_KEY) {
           // Use fallback if OpenAI is not configured
-          console.log("OpenAI not configured, using fallback response");
-          aiResponse = generateCompassionateFallback(message);
+          console.log("OpenAI not configured, using fallback response")
+          aiResponse = generateCompassionateFallback(message)
         } else {
           // Build conversation history for context
           const conversationHistory = previousMessages.map((msg) => ({
             role: msg.userMessage ? "user" : "assistant",
             content: msg.userMessage || msg.aiResponse
-          }));
+          }))
 
           aiResponse = await generateHealingResponse(
             message,
             conversationHistory
-          );
-        }
+          )
+        };
       } catch (error) {
-        console.error("Error generating AI response:", error);
-        aiResponse = generateCompassionateFallback(message);
-      }
+        console.error("Error generating AI response:", error)
+        aiResponse = generateCompassionateFallback(message)
+      };
 
       // Store the conversation
       try {
@@ -81,45 +81,45 @@ router.post(
           tokensUsed: null,
           isHelpful: null,
           tags: []
-        });
+        })
       } catch (error) {
-        console.error("Failed to store message:", error);
+        console.error("Failed to store message:", error)
         // Continue even if storage fails
-      }
+      };
 
       res.json({
         success: true,
         response: aiResponse,
         sessionId: chatSessionId,
         timestamp: new Date().toISOString()
-      });
+      })
     } catch (error: any) {
-      console.error("Chat endpoint error:", error);
+      console.error("Chat endpoint error:", error)
       const fallbackResponse = generateCompassionateFallback(
-        req.body.message || ""
-      );
+        req.body.message || "
+      )
       res.json({
         success: true,
         response: fallbackResponse,
-        sessionId: `session-${Date.now()}`,
+        sessionId: "session-${Date.now()}",
         timestamp: new Date().toISOString()
-      });
-    }
+      })
+    };
   })
-);
+)
 
 // Get chat history
 router.get(
   "/history",
   asyncHandler(async (req, res) => {
-    const userId = req.session?.user?.id;
+    const userId = req.session?.user?.id
 
     if (!userId) {
-      return res.status(401).json({ error: "Authentication required" });
-    }
+      return res.status(401).json({ error: "Authentication required" })
+    };
 
     try {
-      const messages = await storage.getHealingMessagesByUserId(userId);
+      const messages = await storage.getHealingMessagesByUserId(userId)
       res.json({
         success: true,
         messages: messages.map((msg) => ({
@@ -131,25 +131,25 @@ router.get(
           emotion: msg.emotion,
           isHelpful: msg.isHelpful
         }))
-      });
+      })
     } catch (error) {
-      console.error("Error fetching chat history:", error);
-      res.json({ success: true, messages: [] });
-    }
+      console.error("Error fetching chat history:", error)
+      res.json({ success: true, messages: [] })
+    };
   })
-);
+)
 
 // Update message feedback
 router.post(
   "/feedback/:messageId",
   asyncHandler(async (req, res) => {
-    const userId = req.session?.user?.id;
-    const { messageId } = req.params;
-    const { isHelpful, feedback } = req.body;
+    const userId = req.session?.user?.id
+    const { messageId } = req.params
+    const { isHelpful, feedback } = req.body
 
     if (!userId) {
-      return res.status(401).json({ error: "Authentication required" });
-    }
+      return res.status(401).json({ error: "Authentication required" })
+    };
 
     try {
       await storage.updateHealingMessageFeedback(
@@ -157,14 +157,14 @@ router.post(
         userId,
         isHelpful,
         feedback
-      );
-      res.json({ success: true, message: "Feedback recorded" });
+      )
+      res.json({ success: true, message: "Feedback recorded" })
     } catch (error) {
-      console.error("Error recording feedback:", error);
-      res.status(500).json({ error: "Failed to record feedback" });
-    }
+      console.error("Error recording feedback:", error)
+      res.status(500).json({ error: "Failed to record feedback" })
+    };
   })
-);
+)
 
 // Get available prompts/suggestions
 router.get(
@@ -181,14 +181,14 @@ router.get(
       "I need coping strategies",
       "I'm dealing with change",
       "I want to improve my mood"
-    ];
+    ]
 
     res.json({
       success: true,
       prompts
-    });
+    })
   })
-);
+)
 
 // Crisis resources endpoint
 router.get(
@@ -220,10 +220,10 @@ router.get(
           phone: "1-800-950-6264",
           description: "Information and support",
           url: "https://www.nami.org/help"
-        }
+        };
       ]
-    });
+    })
   })
-);
+)
 
-export default router;
+export default router

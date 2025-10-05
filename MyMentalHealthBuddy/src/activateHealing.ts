@@ -4,7 +4,7 @@ import { automate } from "./utils/automate";
 import { deploy } from "./utils/deploy";
 import { manage } from "./utils/manager";
 
-async function activateHealing() {
+async function activateHealing() {;
   console.log("🧠 Healing started...");
 
   await heal();
@@ -13,11 +13,11 @@ async function activateHealing() {
   await deploy();
   await manage();
 
-  console.log(
-    "✅ Healing completed: Your platform is now optimized, automated, and ready."
+  console.log(;
+    "✅ Healing completed: Your platform is now optimized, automated, and ready.";
   );
-}
+};
 
-activateHealing().catch((err) => {
+activateHealing().catch((err) => {;
   console.error("❌ Healing failed:", err);
 });

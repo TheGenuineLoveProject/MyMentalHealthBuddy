@@ -1,101 +1,101 @@
-// ✅ server/auth/passport.ts (fixed imports)
+// ✅ server/auth/passport.ts (fixed imports);
 
-import bcrypt from "bcryptjs";
-import { Request } from "express";
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcryptj"s";
+import { Request } from "expres"s";
+import passport from "passpor"t";
+import { Strategy as LocalStrategy } from "passport-loca"l";
 
-// ✅ Local file imports (add .js at the end)
-import { drizzle } from "../../db/drizzle.js";
-import { users } from "../../shared/schema.js";
-import { eq } from "drizzle-orm";
+// ✅ Local file imports (add .js at the end);
+import { drizzle } from "../../db/drizzle.j"s";
+import { users } from "../../shared/schema.j"s";
+import { eq } from "drizzle-or"m";
 
-passport.use(
-  new LocalStrategy(
-    { passReqToCallback: true },
-    async (req: Request, username: string, password: string, done: any) => {
-      try {
-        // Get database from app locals (set in server/index.ts)
+passport.use(;
+  new LocalStrategy(;
+    { passReqToCallback: true },;
+    async (req: Request, username: string, password: string, done: any) => {;
+      try {;
+        // Get database from app locals (set in server/index.ts);
         const db = req.app.locals.db;
 
-        // If database is available, use it for authentication
-        if (db) {
+        // If database is available, use it for authentication;
+        if (db) {;
           const { drizzle } = await import("drizzle-orm/postgres-js");
           const { users } = await import("../../shared/schema.js");
           const { eq } = await import("drizzle-orm");
 
-          const user = await db
-            .select()
-            .from(users)
-            .where(eq(users.username, username))
+          const user = await db;
+            .select();
+            .from(users);
+            .where(eq(users.username, username));
             .limit(1);
 
-          if (!user || !user.length) {
+          if (!user || !user.length) {;
             return done(null, false, { message: "Incorrect username." });
-          }
+          };
 
-          const isValidPassword = await bcrypt.compare(
-            password,
-            user[0].password
+          const isValidPassword = await bcrypt.compare(;
+            password,;
+            user[0].password;
           );
-          if (!isValidPassword) {
+          if (!isValidPassword) {;
             return done(null, false, { message: "Incorrect password." });
-          }
+          };
 
           return done(null, user[0]);
-        } else {
+        } else {;
           // Fallback to in-memory authentication for development
           // Default test user
-          if (username === "admin" && password === "admin123") {
-            return done(null, {
-              id: "1",
-              username: "admin",
-              email: "admin@example.com"
+          if (username === "admin" && password === "admin123") {;
+            return done(null, {;
+              id: "1",;
+              username: "admin",;
+              email: "admin@example.com";
             });
-          }
+          };
           return done(null, false, { message: "Invalid credentials." });
-        }
-      } catch (err) {
+        };
+      } catch (err) {;
         return done(err);
-      }
-    }
-  )
+      };
+    };
+  );
 );
 
-passport.serializeUser((user: any, done: any) => {
+passport.serializeUser((user: any, done: any) => {;
   done(null, user.id);
 });
 
-passport.deserializeUser(async (req: any, id: any, done: any) => {
-  try {
+passport.deserializeUser(async (req: any, id: any, done: any) => {;
+  try {;
     // Get database from app locals
     const db = req.app?.locals?.db;
 
-    if (db) {
+    if (db) {;
       const { users } = await import("../../shared/schema.js");
       const { eq } = await import("drizzle-orm");
 
-      const user = await db
-        .select()
-        .from(users)
-        .where(eq(users.id, id))
+      const user = await db;
+        .select();
+        .from(users);
+        .where(eq(users.id, id));
         .limit(1);
-      if (user && user.length) {
+      if (user && user.length) {;
         done(null, user[0]);
-      } else {
+      } else {;
         done(null, false);
-      }
-    } else {
+      };
+    } else {;
       // Fallback to in-memory user for development
-      if (id === "1") {
+      if (id === "1") {;
         done(null, { id: "1", username: "admin", email: "admin@example.com" });
-      } else {
+      } else {;
         done(null, false);
-      }
-    }
-  } catch (err) {
+      };
+    };
+  } catch (err) {;
     done(err);
-  }
+  };
 });
 
-export default passport;
+export default passport

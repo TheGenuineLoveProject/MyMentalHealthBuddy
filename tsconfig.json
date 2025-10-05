@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@server/*": ["server/*"],
+      "@scripts/*": ["scripts/*"],
+      "@shared/*": ["shared/*"],
+      "@db/*": ["db/*"],
+      "@tests/*": ["tests/*"]
+    }
+  },
+  "include": ["server", "scripts", "shared", "tests"],
+  "exclude": ["node_modules"]
+}

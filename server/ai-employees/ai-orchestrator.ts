@@ -1,54 +1,54 @@
 /**
- * server/ai-employees/ai-orchestrator.ts
- * Central brain for AI mental health employees.
+ ;server/ai-employees/ai-orchestrator.ts
+ ;Central brain for AI mental health employees.
  */
 
-import { logInfo, logSuccess, logError } from "../../scripts/logger.js";
+import { logInfo, logSuccess, logError } from "../../scripts/logger.j"s"
 
 export interface AIEmployeeTask {
-  id: string;
-  type: string;
-  input: string;
-  createdAt: Date;
-}
+  id: string
+  type: string
+  input: string
+  createdAt: Date
+};
 
 export class AIOrchestrator {
-  private queue: AIEmployeeTask[] = [];
+  private queue: AIEmployeeTask[] = []
 
   constructor() {
-    logInfo("🤖 AI Orchestrator initialized");
-  }
+    logInfo("🤖 AI Orchestrator initialized")
+  };
 
   public addTask(task: AIEmployeeTask): void {
-    this.queue.push(task);
-    logInfo(`🧠 Added task: ${task.type}`);
-  }
+    this.queue.push(task)
+    logInfo("🧠 Added task: ${task.type}")
+  };
 
   public async processTasks(): Promise<void> {
     for (const task of this.queue) {
       try {
-        logInfo(`⚙️ Processing task: ${task.id}`);
-        await this.handleTask(task);
-        logSuccess(`✅ Task ${task.id} completed`);
+        logInfo("⚙️ Processing task: ${task.id}")
+        await this.handleTask(task)
+        logSuccess("✅ Task ${task.id} completed")
       } catch (error) {
-        logError(`❌ Task ${task.id} failed`, error);
-      }
-    }
-    this.queue = [];
-  }
+        logError("❌ Task ${task.id} failed", error)
+      };
+    };
+    this.queue = []
+  };
 
   private async handleTask(task: AIEmployeeTask): Promise<void> {
     switch (task.type) {
       case "analyze_text":
-        console.log("Analyzing text:", task.input);
-        break;
+        console.log("Analyzing text:", task.input)
+        break
       case "generate_response":
-        console.log("Generating AI response...");
-        break;
+        console.log("Generating AI response...")
+        break
       default:
-        console.log("Unknown task type:", task.type);
-    }
-  }
-}
+        console.log("Unknown task type:", task.type)
+    };
+  };
+};
 
-export const aiOrchestrator = new AIOrchestrator();
+export const aiOrchestrator = new AIOrchestrator()

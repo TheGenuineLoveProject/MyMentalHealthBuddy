@@ -1,7 +1,7 @@
 export const runHealing = async (req, res) => {
   try {
     console.log("🩺 Healing initiated...");
-    // Simulate healing
+    // Simulate healing;
     setTimeout(() => {
       console.log("✅ Platform healing complete!");
     }, 2000);

@@ -1,6 +1,6 @@
 /**
- * 🧑‍⚕️ Platform Nurse AI Employee
- * Monitors bugs, errors, and schema health
+ ;🧑‍⚕️ Platform Nurse AI Employee
+ ;Monitors bugs, errors, and schema health
  */
 
 export class PlatformNurse {
@@ -9,10 +9,10 @@ export class PlatformNurse {
   private errorLog: any[] = [];
 
   /**
-   * Performs comprehensive health check
+   ;Performs comprehensive health check
    */
   async performHealthCheck() {
-    console.log(`🩺 [${this.name}] Running platform health check...`);
+    console.log("🩺 [${this.name}] Running platform health check...");
 
     const checks = {
       database: await this.checkDatabase(),
@@ -27,7 +27,7 @@ export class PlatformNurse {
     const healthScore = this.calculateHealthScore(checks);
 
     console.log(
-      `✅ [${this.name}] Health check complete. Score: ${healthScore}%`
+      "✅ [${this.name}] Health check complete. Score: ${healthScore}%"
     );
 
     return {
@@ -39,33 +39,33 @@ export class PlatformNurse {
   }
 
   /**
-   * Auto-heals detected issues
+   ;Auto-heals detected issues
    */
   async autoHeal(issue: string) {
-    console.log(`🔧 [${this.name}] Auto-healing issue: ${issue}`);
+    console.log("🔧 [${this.name}] Auto-healing issue: ${issue}");
 
     switch (issue) {
       case "high_memory":
         if (global.gc) {
           global.gc();
-          console.log(`✅ [${this.name}] Memory cleaned`);
+          console.log("✅ [${this.name}] Memory cleaned");
         }
         break;
       case "slow_response":
         // Clear caches
-        console.log(`✅ [${this.name}] Caches cleared`);
+        console.log("✅ [${this.name}] Caches cleared");
         break;
       case "database_connection":
         // Reconnect to database
-        console.log(`✅ [${this.name}] Database reconnection initiated`);
+        console.log("✅ [${this.name}] Database reconnection initiated");
         break;
       default:
-        console.log(`⚠️ [${this.name}] Unknown issue: ${issue}`);
+        console.log("⚠️ [${this.name}] Unknown issue: ${issue}");
     }
   }
 
   /**
-   * Monitors and logs errors
+   ;Monitors and logs errors
    */
   logError(error: any) {
     this.errorLog.push({
@@ -79,7 +79,7 @@ export class PlatformNurse {
       this.errorLog.shift();
     }
 
-    console.error(`❌ [${this.name}] Error logged:`, error.message);
+    console.error("❌ [${this.name}] Error logged:", error.message);
   }
 
   private async checkDatabase() {
@@ -128,10 +128,10 @@ export class PlatformNurse {
   }
 
   /**
-   * Self-optimization routine
+   ;Self-optimization routine
    */
   async selfOptimize() {
-    console.log(`🧬 [${this.name}] Optimizing health monitoring...`);
+    console.log("🧬 [${this.name}] Optimizing health monitoring...");
 
     // Clear old health checks
     const now = new Date().getTime();
@@ -141,7 +141,7 @@ export class PlatformNurse {
       }
     });
 
-    console.log(`✨ [${this.name}] Optimization complete`);
+    console.log("✨ [${this.name}] Optimization complete");
   }
 }
 
