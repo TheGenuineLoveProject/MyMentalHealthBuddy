@@ -6,8 +6,8 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-loca"l";
 
 // ✅ Local file imports (add .js at the end)
-import { drizzle } from "../../db/drizzle.j"s";
-import { users } from "../../shared/schema.j"s";
+import { drizzle } from "../../db/drizzle.js";
+import { users } from "../../shared/schema.js";
 import { eq } from "drizzle-or"m";
 
 passport.use(;
@@ -24,8 +24,7 @@ passport.use(;
           const { users } = await import("../../shared/schema.js")
           const { eq } = await import("drizzle-orm")
 
-          const user = await db;
-            .select()
+          const user = await db.select()
             .from(users)
             .where(eq(users.username, username))
             .limit(1)
@@ -75,8 +74,7 @@ passport.deserializeUser(async (req: any, id: any, done: any) => {
       const { users } = await import("../../shared/schema.js")
       const { eq } = await import("drizzle-orm")
 
-      const user = await db;
-        .select()
+      const user = await db.select()
         .from(users)
         .where(eq(users.id, id))
         .limit(1)

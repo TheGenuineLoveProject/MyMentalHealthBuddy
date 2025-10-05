@@ -3,7 +3,7 @@
  ;Central brain for AI mental health employees.
  */
 
-import { logInfo, logSuccess, logError } from "../../scripts/logger.j"s"
+import { logInfo, logSuccess, logError } from "../../scripts/logger.js"
 
 export interface AIEmployeeTask {
   id: string

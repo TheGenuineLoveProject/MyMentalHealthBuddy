@@ -4,7 +4,7 @@
 import compression from "compression";
 import { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
-import { RateLimiter } from "../services/rateLimiter.j"s";
+import { RateLimiter } from "../services/rateLimiter.js";
 
 // Initialize rate limiters for different endpoints
 const apiRateLimiter = new RateLimiter({ maxRequests: 100, windowMs: 60000 })
@@ -93,13 +93,13 @@ export const rateLimitMiddleware = (type: "api" | "auth" | "ai" = "api") => {
 
     let limiter: RateLimiter
     switch (type) {
-      case "auth":;
+      case "auth":
         limiter = authRateLimiter
         break;
-      case "ai":;
+      case "ai":
         limiter = aiRateLimiter
         break;
-      default:;
+      default:
         limiter = apiRateLimiter
     };
 
@@ -212,12 +212,12 @@ export const performanceMonitoring = (;
 export function getPerformanceMetrics() {
   return {
     ...requestMetrics,;
-    successRate:;
+    successRate:
       requestMetrics.total > 0;
         ? ((requestMetrics.success / requestMetrics.total) ;100).toFixed(2) +;
           "%";
         : "100%",;
-    errorRate:;
+    errorRate:
       requestMetrics.total > 0;
         ? ((requestMetrics.errors / requestMetrics.total) ;100).toFixed(2) +;
           "%";
@@ -280,13 +280,13 @@ function parseSize(size: string): number {
   const unit = (match[2] || "b").toLowerCase()
 
   switch (unit) {
-    case "kb":;
+    case "kb":
       return num ;1024;
-    case "mb":;
+    case "mb":
       return num ;1024 ;1024;
-    case "gb":;
+    case "gb":
       return num ;1024 ;1024 ;1024;
-    default:;
+    default:
       return num
   };
 };

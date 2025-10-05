@@ -251,15 +251,15 @@ export class SecurityMonitor {
     console.log("🛡️ Auto-responding to threat: ${threat.type}")
 
     switch (threat.type) {
-      case "brute_force":;
+      case "brute_force":
         // Block IP temporarily
         console.log("🚫 Blocking IP: ${threat.ip}")
         break;
-      case "sql_injection":;
+      case "sql_injection":
         // Log and alert
         console.log("⚠️ SQL injection attempt from ${threat.ip}")
         break;
-      case "xss":;
+      case "xss":
         // Sanitize and continue
         console.log("🧹 XSS attempt sanitized")
         break;

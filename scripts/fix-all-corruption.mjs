@@ -1,48 +1,87 @@
 #!/usr/bin/env node
-import { readFileSync, writeFileSync } from 'fs';
-import { execSync } from 'child_process';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-// Find all corrupted files dynamically
-const findCorruptedFiles = () => {
-  const output = execSync(
-    'find server scripts -type f \\( -name "*.ts" -o -name "*.js" -o -name "*.mjs" \\) -exec grep -l \'"[a-z]*"[a-z]"\' {} \\; 2>/dev/null',
-    { encoding: 'utf-8' }
-  );
-  return output.trim().split('\n').filter(Boolean);
-};
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const rootDir = path.join(__dirname, '..');
 
-const corruptedFiles = findCorruptedFiles();
+const targetFiles = [
+  'server/config.ts',
+  'server/docs/api.ts',
+  'server/lib/openai-mock.ts',
+  'server/middleware/errorHandler.ts',
+  'server/middleware/monitoring.ts',
+  'server/openai.ts',
+  'server/routes.ts',
+  'server/routes/ai-orchestrator.ts',
+  'server/routes/auth.ts',
+  'server/routes/billing.ts',
+  'server/routes/healing.ts',
+  'server/routes/mental-health.ts',
+  'server/routes/mood.ts',
+  'server/services/cache.ts'
+];
 
-let totalFixed = 0;
-let totalFiles = 0;
+let totalFixes = 0;
+let filesFixed = 0;
 
-console.log('🔧 PECAS v1100^ - Complete Corruption Repair\n');
-console.log(`📋 Found ${corruptedFiles.length} corrupted files...\n`);
+console.log('🔧 Comprehensive Corruption Fix - Phase 2\n');
 
-corruptedFiles.forEach((filePath) => {
-  try {
-    let content = readFileSync(filePath, 'utf-8');
-    const originalContent = content;
-    let fileFixed = 0;
-
-    // Fix pattern: "words" -> "words"
-    content = content.replace(/"([a-z]+)"([a-z])"/g, (match, p1, p2) => {
-      fileFixed++;
-      return `"${p1}${p2}"`;
-    });
-
-    if (content !== originalContent) {
-      writeFileSync(filePath, content, 'utf-8');
-      totalFixed += fileFixed;
-      totalFiles++;
-      console.log(`✅ ${filePath} - Fixed ${fileFixed} issues`);
-    }
-  } catch (err) {
-    console.error(`❌ ${filePath} - Error: ${err.message}`);
+for (const file of targetFiles) {
+  const filePath = path.join(rootDir, file);
+  if (!fs.existsSync(filePath)) {
+    console.log(`⏭️  Skip: ${file} (not found)`);
+    continue;
   }
-});
 
-console.log(`\n🎉 COMPLETE REPAIR FINISHED!`);
-console.log(`📊 Total files processed: ${corruptedFiles.length}`);
-console.log(`✅ Files repaired: ${totalFiles}`);
-console.log(`🔧 Total fixes applied: ${totalFixed}`);
+  let content = fs.readFileSync(filePath, 'utf-8');
+  const originalContent = content;
+  let fixes = 0;
+
+  // 1. Fix corrupted function calls: (; -> (
+  const beforeParen = content;
+  content = content.replace(/\(;/g, '(');
+  if (content !== beforeParen) fixes++;
+
+  // 2. Fix erroneous semicolons after commas: ,; -> ,
+  const beforeComma = content;
+  content = content.replace(/,;/g, ',');
+  if (content !== beforeComma) fixes++;
+
+  // 3. Fix erroneous semicolons after closing braces at end of line: }; -> }
+  const beforeBrace = content;
+  content = content.replace(/};$/gm, '}');
+  if (content !== beforeBrace) fixes++;
+
+  // 4. Fix corrupted Math.random() multiplication:  ; -> *
+  const beforeMath = content;
+  content = content.replace(/Math\.random\(\)\s*;/g, 'Math.random() *');
+  if (content !== beforeMath) fixes++;
+
+  // 5. Fix other multiplication operators:  ;NUMBER) ->  *NUMBER)
+  const beforeMult = content;
+  content = content.replace(/\s+;(\d+)\)/g, ' * $1)');
+  if (content !== beforeMult) fixes++;
+
+  // 6. Fix period-semicolon:  .; -> .
+  const beforePeriod = content;
+  content = content.replace(/\.\s*;/g, '.');
+  if (content !== beforePeriod) fixes++;
+
+  // 7. Fix double-semicolon: ;; -> ;
+  const beforeDouble = content;
+  content = content.replace(/;;/g, ';');
+  if (content !== beforeDouble) fixes++;
+
+  if (content !== originalContent) {
+    fs.writeFileSync(filePath, content, 'utf-8');
+    filesFixed++;
+    totalFixes += fixes;
+    console.log(`✅ Fixed: ${file} (${fixes} pattern types)`);
+  } else {
+    console.log(`✓  Clean: ${file}`);
+  }
+}
+
+console.log(`\n🎉 Complete! Fixed ${filesFixed}/${targetFiles.length} files (${totalFixes} pattern types total)`);

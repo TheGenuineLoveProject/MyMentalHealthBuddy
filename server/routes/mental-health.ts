@@ -1,11 +1,11 @@
 import { Router } from "express"
 import { z } from "zod"
-import { asyncHandler } from "../middleware/errorHandler.j"s"
+import { asyncHandler } from "../middleware/errorHandler.js"
 import {
   generateCompassionateFallback,
   generateHealingResponse
-} from "../openai.j"s"
-import { storage } from "../storage.j"s"
+} from "../openai.js"
+import { storage } from "../storage.js"
 
 const router = Router()
 
@@ -26,7 +26,7 @@ router.post(
           error: "Invalid message",
           details: validation.error.errors
         })
-      };
+      }
 
       const { message, sessionId } = validation.data
       const userId = req.session?.user?.id || "anonymous"
@@ -42,8 +42,8 @@ router.post(
           )
         } catch (error) {
           console.log("Could not fetch previous messages:", error)
-        };
-      };
+        }
+      }
 
       // Generate AI response
       let aiResponse
@@ -63,11 +63,11 @@ router.post(
             message,
             conversationHistory
           )
-        };
+        }
       } catch (error) {
         console.error("Error generating AI response:", error)
         aiResponse = generateCompassionateFallback(message)
-      };
+      }
 
       // Store the conversation
       try {
@@ -85,7 +85,7 @@ router.post(
       } catch (error) {
         console.error("Failed to store message:", error)
         // Continue even if storage fails
-      };
+      }
 
       res.json({
         success: true,
@@ -104,7 +104,7 @@ router.post(
         sessionId: "session-${Date.now()}",
         timestamp: new Date().toISOString()
       })
-    };
+    }
   })
 )
 
@@ -116,7 +116,7 @@ router.get(
 
     if (!userId) {
       return res.status(401).json({ error: "Authentication required" })
-    };
+    }
 
     try {
       const messages = await storage.getHealingMessagesByUserId(userId)
@@ -135,7 +135,7 @@ router.get(
     } catch (error) {
       console.error("Error fetching chat history:", error)
       res.json({ success: true, messages: [] })
-    };
+    }
   })
 )
 
@@ -149,7 +149,7 @@ router.post(
 
     if (!userId) {
       return res.status(401).json({ error: "Authentication required" })
-    };
+    }
 
     try {
       await storage.updateHealingMessageFeedback(
@@ -162,7 +162,7 @@ router.post(
     } catch (error) {
       console.error("Error recording feedback:", error)
       res.status(500).json({ error: "Failed to record feedback" })
-    };
+    }
   })
 )
 
@@ -220,7 +220,7 @@ router.get(
           phone: "1-800-950-6264",
           description: "Information and support",
           url: "https://www.nami.org/help"
-        };
+        }
       ]
     })
   })

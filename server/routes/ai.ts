@@ -4,13 +4,13 @@ import {
   authenticateToken,;
   optionalAuthenticateToken,;
   type AuthRequest
-} from "../auth/jwt.j"s";
-import { asyncHandler, ValidationError } from "../middleware/errorHandler.j"s";
+} from "../auth/jwt.js";
+import { asyncHandler, ValidationError } from "../middleware/errorHandler.js";
 import {
   generateCompassionateFallback,;
   generateHealingResponse
-} from "../openai.j"s";
-import { storage } from "../storage.j"s";
+} from "../openai.js";
+import { storage } from "../storage.js";
 
 const router = Router()
 
@@ -19,8 +19,7 @@ const healingChatSchema = z.object({
   message: z.string().min(1).max(2000),;
   sessionId: z.string().optional(),;
   emotion: z.string().optional(),;
-  context: z;
-    .object({
+  context: z.object({
       mood: z.string().optional(),;
       stressLevel: z.number().min(0).max(10).optional(),;
       topics: z.array(z.string()).optional()

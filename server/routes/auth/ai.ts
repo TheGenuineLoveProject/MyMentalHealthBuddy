@@ -1,5 +1,5 @@
 import express from "express";
-import { Configuration, OpenAIApi } from "../../lib/openai-legacy-mock.j"s";
+import { Configuration, OpenAIApi } from "../../lib/openai-legacy-mock.js";
 
 const router = express.Router()
 

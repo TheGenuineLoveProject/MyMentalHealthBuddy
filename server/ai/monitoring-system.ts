@@ -167,7 +167,7 @@ export class AIMonitoringSystem extends EventEmitter {
 
     this.recordMetric({
       name: "ai.cache.hit_rate",;
-      value:;
+      value:
         this.counters.cacheHits /
         Math.max(1, this.counters.cacheHits + this.counters.cacheMisses),;
       unit: "ratio",;

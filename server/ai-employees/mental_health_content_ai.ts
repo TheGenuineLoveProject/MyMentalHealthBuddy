@@ -3,7 +3,7 @@
  ;Manages mood tracking, resources, and educational content
  */
 
-import { storage } from "../storage.j"s"
+import { storage } from "../storage.js"
 
 export class MentalHealthContentAI {
   private name = "Dr. MindCare"

@@ -6,7 +6,7 @@ export class OpenAI {;
   constructor(config: any) {;
     // Initialize asynchronously to support ESM import
     this.initialized = this.init(config);
-  };
+  }
 
   private async init(config: any) {;
     // Use real OpenAI if API key is provided;
@@ -17,13 +17,13 @@ export class OpenAI {;
         this.client = new RealOpenAI(config);
       } catch (err) {;
         console.log("OpenAI package not available, using fallback");
-      };
-    };
-  };
+      }
+    }
+  }
 
   private async ensureInitialized() {;
     await this.initialized;
-  };
+  }
 
   chat = {;
     completions: {;
@@ -32,22 +32,22 @@ export class OpenAI {;
         // Use real OpenAI if available
         if (this.client?.chat?.completions?.create) {;
           return this.client.chat.completions.create(params);
-        };
+        }
 
         // Fallback response for development/testing;
         return {;
           choices: [;
             {;
               message: {;
-                content:;
+                content:
                   "I'm here to support you. While the AI service is being configured, please know that you're not alone in this journey.";
-              };
-            };
+              }
+            }
           ];
-        };
-      };
-    };
-  };
+        }
+      }
+    }
+  }
 
   audio = {;
     speech: {;
@@ -55,25 +55,25 @@ export class OpenAI {;
         // Use real OpenAI if available
         if (this.client?.audio?.speech?.create) {;
           return this.client.audio.speech.create(params);
-        };
+        }
 
         // Mock audio response for development
         return {;
           arrayBuffer: async () => new ArrayBuffer(0);
-        };
-      };
-    },;
+        }
+      }
+    },
     transcriptions: {;
       create: async (params: any) => {;
         // Use real OpenAI if available
         if (this.client?.audio?.transcriptions?.create) {;
           return this.client.audio.transcriptions.create(params);
-        };
+        }
 
         return {;
           text: "Mock transcription";
-        };
-      };
-    };
-  };
-};
+        }
+      }
+    }
+  }
+}

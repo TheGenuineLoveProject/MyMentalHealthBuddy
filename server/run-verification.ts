@@ -17,7 +17,7 @@ async function runPlatformVerification() {;
       timestamp: Date.now(),;
       context: "platform_verification",;
       action: "full_system_test",;
-      outcome:;
+      outcome:
         report.overallScore >= 90;
           ? "success";
           : report.overallScore >= 70;

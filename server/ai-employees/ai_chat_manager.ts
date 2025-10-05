@@ -6,7 +6,7 @@
 import {
   generateCompassionateFallback,
   generateHealingResponse
-} from "../openai.j"s"
+} from "../openai.js"
 
 export class AIChatManager {
   private name = "ChatGPT Healer"

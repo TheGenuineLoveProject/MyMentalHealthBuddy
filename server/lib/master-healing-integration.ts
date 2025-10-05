@@ -2,11 +2,11 @@
 import { EventEmitter } from "events"
 
 // Import all optimization modules
-import { quantumEvolution } from "./ai-employees/quantum-evolution-engine.j"s"
-import { unifiedHealingSystem } from "./ai-employees/unified-healing-system.j"s"
-import { databaseOptimizer } from "./database-optimizer.j"s"
-import { advancedOpenAI } from "./openai-advanced.j"s"
-import { ultimateOptimizer } from "./ultimate-performance-optimizer.j"s"
+import { quantumEvolution } from "./ai-employees/quantum-evolution-engine.js"
+import { unifiedHealingSystem } from "./ai-employees/unified-healing-system.js"
+import { databaseOptimizer } from "./database-optimizer.js"
+import { advancedOpenAI } from "./openai-advanced.js"
+import { ultimateOptimizer } from "./ultimate-performance-optimizer.js"
 
 interface SystemStatus {
   health: number

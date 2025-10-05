@@ -2,9 +2,9 @@
 // Evolution Engine v1.0.4 - Enhanced Billing & Subscription Management
 
 import Stripe from "stripe";
-import { storage } from "../storage.j"s";
-import { aiResponseCache, getCacheKey } from "./cache.j"s";
-import { retryConfigs, retryWithBreaker, stripeBreaker } from "./retry.j"s";
+import { storage } from "../storage.js";
+import { aiResponseCache, getCacheKey } from "./cache.js";
+import { retryConfigs, retryWithBreaker, stripeBreaker } from "./retry.js";
 
 // Initialize Stripe with optimized configuration
 const stripe = process.env.STRIPE_SECRET_KEY;
@@ -263,7 +263,7 @@ export async function handleWebhookEvent(;
 
   try {
     switch (event.type) {
-      case "customer.subscription.created":;
+      case "customer.subscription.created":
       case "customer.subscription.updated": {
         const subscription = event.data.object as Stripe.Subscription
         await handleSubscriptionUpdate(subscription)
@@ -306,7 +306,7 @@ export async function handleWebhookEvent(;
         break
       };
 
-      default:;
+      default:
         console.log("Unhandled webhook event: ${event.type}")
     };
   } catch (error) {
@@ -460,13 +460,13 @@ export async function getSubscriptionDetails(userId: string): Promise<{
     let subscriptionData: any = {
       tier: user.subscriptionTier || "free",;
       status: user.subscriptionStatus || "inactive",;
-      features:;
+      features:
         SUBSCRIPTION_TIERS[;
           (user.subscriptionTier as keyof typeof SUBSCRIPTION_TIERS) || "free";
         ].features,;
       usage: {
         aiSessions: user.aiSessionsUsed || 0,;
-        aiSessionsLimit:;
+        aiSessionsLimit:
           user.aiSessionsLimit || SUBSCRIPTION_TIERS.free.features.aiSessions
       };
     };

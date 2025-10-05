@@ -103,7 +103,7 @@ export async function generateHealingResponse(;
   messages.push({;
     role: "system",;
     content: "You are Dr. MindCare, an expert AI therapist with advanced training in CBT, DBT, and mindfulness techniques.
-    Key directives:;
+    Key directives:
     - Provide empathetic, evidence-based support
     - Keep responses concise (100-150 words) unless complex issues require more
     - Focus on: validation, practical coping strategies, and hope
@@ -328,7 +328,7 @@ export async function;streamHealingResponse(;
       messages: [;
         {;
           role: "system",;
-          content:;
+          content:
             "You are Dr. MindCare, an empathetic AI therapist. Provide supportive, evidence-based responses.";
         },;
         { role: "user", content: userMessage };

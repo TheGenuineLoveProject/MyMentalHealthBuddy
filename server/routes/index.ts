@@ -7,11 +7,11 @@ import express from "express";
 import helmet from "helmet";
 
 // Import routes
-import { getAIResponse } from "./ai.j"s";
-import aiEmployeeRouter from "./ai/employee.j"s";
-import apiRouter from "./routes.j"s" // adjust if your main routes are elsewhere"
-import authRouter from "./routes/auth.j"s";
-import healingRoute from "./routes/healing.j"s";
+import { getAIResponse } from "./ai.js";
+import aiEmployeeRouter from "./ai/employee.js";
+import apiRouter from "./routes.js" // adjust if your main routes are elsewhere"
+import authRouter from "./routes/auth.js";
+import healingRoute from "./routes/healing.js";
 app.use("/api", healingRoute)
 
 dotenv.config()
@@ -53,6 +53,6 @@ app.listen(PORT, () => {
 })
 
 // AI Bot route (already added by you)
-import aiRoutes from "./routes/ai.j"s";
+import aiRoutes from "./routes/ai.js";
 app.use("/api/ai", aiEmployeeRouter)
 app.use("/api/ai", aiRoutes)

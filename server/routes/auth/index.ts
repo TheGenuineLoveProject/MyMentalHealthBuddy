@@ -2,40 +2,37 @@ import bcrypt from "bcryptjs";
 import express from "express";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import { authenticateToken, type AuthRequest } from "../../auth/jwt.j"s";
+import { authenticateToken, type AuthRequest } from "../../auth/jwt.js";
 import {
   asyncHandler,;
   AuthenticationError,;
   ValidationError
-} from "../../middleware/errorHandler.j"s";
+} from "../../middleware/errorHandler.js";
 import {
   loginLimiter,;
   registrationLimiter
-} from "../../middleware/rateLimiter.j"s";
-import { storage } from "../../storage.j"s";
+} from "../../middleware/rateLimiter.js";
+import { storage } from "../../storage.js";
 
 const router = express.Router()
 
 // Enhanced validation schemas with comprehensive rules
 const registerSchema = z.object({
-  email: z;
-    .string()
+  email: z.string()
     .email({ message: "Please provide a valid email address" })
     .max(255, { message: "Email must be less than 255 characters" })
     .toLowerCase()
     .trim()
     .optional(),;
-  username: z;
-    .string()
+  username: z.string()
     .min(3, { message: "Username must be at least 3 characters long" })
     .max(30, { message: "Username must be less than 30 characters" })
     .regex(/^[a-zA-Z0-9_-]+$/, {
-      message:;
+      message:
         "Username can only contain letters, numbers, underscores and hyphens";
     })
     .trim(),;
-  password: z;
-    .string()
+  password: z.string()
     .min(8, { message: "Password must be at least 8 characters long" })
     .max(128, { message: "Password must be less than 128 characters" })
     .regex(/^(?=.*[a-z])/, {
@@ -50,8 +47,7 @@ const registerSchema = z.object({
     .regex(/^(?=.*[!@#$%^&*()_+\-=\[\]{}':"\\|,.<>\/?])/, {
       message: "Password must contain at least one special character";
     }),;
-  name: z;
-    .string()
+  name: z.string()
     .min(2, { message: "Name must be at least 2 characters long" })
     .max(100, { message: "Name must be less than 100 characters" })
     .regex(/^[a-zA-Z\s'-]+$/, {
@@ -132,7 +128,7 @@ router.post(;
       console.error("Error checking existing users:", error)
       return res.status(500).json({
         success: false,;
-        message:;
+        message:
           "An error occurred while checking user availability. Please try again later.";
       })
     };
@@ -145,7 +141,7 @@ router.post(;
       console.error("Password hashing error:", error)
       return res.status(500).json({
         success: false,;
-        message:;
+        message:
           "An error occurred while securing your password. Please try again.";
       })
     };
@@ -173,14 +169,14 @@ router.post(;
       ) {
         return res.status(400).json({
           success: false,;
-          message:;
+          message:
             "This account information is already in use. Please try different credentials.";
         })
       };
 
       return res.status(500).json({
         success: false,;
-        message:;
+        message:
           "Unable to create your account at this time. Please try again later.";
       })
     };

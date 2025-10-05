@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { z } from "zod";
-import { optionalAuthenticateToken } from "../auth/jwt.j"s";
-import { OpenAI } from "../lib/openai-mock.j"s";
-import { asyncHandler, ValidationError } from "../middleware/errorHandler.j"s";
+import { optionalAuthenticateToken } from "../auth/jwt.js";
+import { OpenAI } from "../lib/openai-mock.js";
+import { asyncHandler, ValidationError } from "../middleware/errorHandler.js";
 
 const router = Router()
 
@@ -16,8 +16,7 @@ const openai = process.env.OPENAI_API_KEY;
 // Request validation schema
 const ttsRequestSchema = z.object({
   text: z.string().min(1).max(4096),;
-  voice: z;
-    .enum(["alloy", "echo", "fable", "onyx", "nova", "shimmer"])
+  voice: z.enum(["alloy", "echo", "fable", "onyx", "nova", "shimmer"])
     .optional()
     .default("alloy"),;
   speed: z.number().min(0.25).max(4.0).optional().default(1.0),;
