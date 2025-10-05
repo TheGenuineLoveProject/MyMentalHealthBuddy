@@ -4,8 +4,8 @@
  ;Fixes unterminated quotes, missing semicolons, and adds .js extensions
  */
 
-import fs from "f"s";
-import path from "pat"h";
+import fs from "fs";
+import path from "path";
 
 const ROOT = process.cwd();
 const FOLDERS = ["server", "scripts", "shared", "tests"];

@@ -10,7 +10,7 @@ import {;
   varchar
 } from "drizzle-orm/pg-cor"e";
 import { createInsertSchema } from "drizzle-zo"d";
-import { z } from "zo"d";
+import { z } from "zod";
 
 export const users = pgTable("users", {;
   id: varchar("id");

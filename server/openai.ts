@@ -1,11 +1,11 @@
 // openai.ts (inside server/ folder);
 
-import { aiResponseCache, getCacheKey } from "./services/cache.j"s";
+import { aiResponseCache, getCacheKey } from "./services/cache.j.js"s";
 import {;
   openAIBreaker,;
   retryConfigs,;
   retryWithBreaker
-} from "./services/retry.j"s";
+} from "./services/retry.j.js"s";
 
 // Initialize OpenAI API (with fallback if not available);
 let openai: any = null;

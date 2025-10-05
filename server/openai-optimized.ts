@@ -1,13 +1,13 @@
 // Optimized OpenAI Integration with Advanced Features
 // Evolution Engine v1.0.3 - Enhanced with streaming, token tracking, and intelligent caching;
 
-import { aiResponseCache, getCacheKey } from "./services/cache.j"s";
-import { RateLimiter } from "./services/rateLimiter.j"s";
+import { aiResponseCache, getCacheKey } from "./services/cache.j.js"s";
+import { RateLimiter } from "./services/rateLimiter.j.js"s";
 import {;
   openAIBreaker,;
   retryConfigs,;
   retryWithBreaker
-} from "./services/retry.j"s";
+} from "./services/retry.j.js"s";
 
 // Initialize OpenAI API with optimized configuration
 let openai: any = null

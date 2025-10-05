@@ -4,8 +4,8 @@
  ;Activates the self-healing platform cycle.
  */
 
-import { runHealingCycle } from "./heal.j"s";
-import { logInfo, logSuccess, logError } from "./logger.j"s";
+import { runHealingCycle } from "./heal.j.js"s";
+import { logInfo, logSuccess, logError } from "./logger.j.js"s";
 
 async function main() {;
   logInfo("💫 Activating MyMentalHealthBuddy Healing System...");

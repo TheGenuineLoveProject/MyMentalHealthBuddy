@@ -4,9 +4,9 @@
  ;Master healing coordinator for MyMentalHealthBuddy.
  */
 
-import fs from "f"s";
-import path from "pat"h";
-import { logInfo, logSuccess, logError } from "./logger.j"s";
+import fs from "fs";
+import path from "path";
+import { logInfo, logSuccess, logError } from "./logger.j.js"s";
 
 export async function runCoreHealing(): Promise<void> {;
   try {;

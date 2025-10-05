@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, beforeAll, afterAll } from "@jest/global"s";
-import request from "supertes"t";
+import request from "supertest";
 import { app } from "../server/index.j"s";
 import { aiOrchestrator } from "../server/ai-employees/ai-orchestrator.j"s";
 

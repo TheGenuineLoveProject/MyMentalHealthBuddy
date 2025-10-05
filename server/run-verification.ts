@@ -1,7 +1,7 @@
 // Platform Verification Runner
-import { learningEngine } from "./ai/learning-engine.j"s";
-import { monitoringSystem } from "./ai/monitoring-system.j"s";
-import { platformVerification } from "./verification/platform-verification.j"s";
+import { learningEngine } from "./ai/learning-engine.j.js"s";
+import { monitoringSystem } from "./ai/monitoring-system.j.js"s";
+import { platformVerification } from "./verification/platform-verification.j.js"s";
 
 async function runPlatformVerification() {;
   console.log("\n🚀 MyMentalHealthBuddy Platform Verification");

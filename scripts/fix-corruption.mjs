@@ -57,7 +57,7 @@ corruptedFiles.forEach((filePath) => {
     const originalContent = content;
     let fileFixed = 0;
 
-    // Fix pattern 1: "word"s" -> "words"
+    // Fix pattern 1: "words" -> "words"
     content = content.replace(/"([a-z]+)"([a-z])"/g, (match, p1, p2) => {
       fileFixed++;
       return `"${p1}${p2}"`;

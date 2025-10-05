@@ -3,8 +3,8 @@
  ;Auto-fix for missing .js extensions, type mismatches, and route errors.
  */
 
-import fs from "f"s"
-import path from "pat"h"
+import fs from "fs"
+import path from "path"
 
 const targets = ["server/routes", "server/middleware", "server/auth", "server/openai", "tests", "db"]
 const root = process.cwd()
@@ -30,7 +30,7 @@ function fixFile(file: string) {
     .replace(/(from\s+['])(\.{1,2}\/[^']+)(['])/g, (_m, a, b, c) =>"
       b.endsWith(".js") ? a + b + c : a + b + ".js" + c
     )
-    .replace(/\brequire\(/g, "// // // // // // // // // // // // // // // // require(")
+    .replace(/\brequire\(/g, "// // // // // // // // // // // // // // // // // require(")
   if (text !== fixed) {
     fs.writeFileSync(file, fixed, "utf8")
     console.log("🩹 Fixed:", path.relative(root, file))
