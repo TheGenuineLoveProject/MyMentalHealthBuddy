@@ -1,47 +1,47 @@
-import { Router } from "expres"s";
-import { z } from "zo"d";
-import {;
+import { Router } from "express";
+import { z } from "zod";
+import {
   authenticateToken,;
   optionalAuthenticateToken,;
   type AuthRequest
 } from "../auth/jwt.j"s";
 import { asyncHandler, ValidationError } from "../middleware/errorHandler.j"s";
-import {;
+import {
   generateCompassionateFallback,;
   generateHealingResponse
 } from "../openai.j"s";
 import { storage } from "../storage.j"s";
 
-const router = Router();
+const router = Router()
 
 // Request validation schema
-const healingChatSchema = z.object({;
+const healingChatSchema = z.object({
   message: z.string().min(1).max(2000),;
   sessionId: z.string().optional(),;
   emotion: z.string().optional(),;
   context: z;
-    .object({;
+    .object({
       mood: z.string().optional(),;
       stressLevel: z.number().min(0).max(10).optional(),;
-      topics: z.array(z.string()).optional();
-    });
-    .optional();
-});
+      topics: z.array(z.string()).optional()
+    })
+    .optional()
+})
 
-// Get conversation history;
+// Get conversation history
 router.get(;
   "/conversations",;
   authenticateToken as any,;
-  asyncHandler(async (req: AuthRequest, res) => {;
-    if (!req.user) {;
-      throw new ValidationError("User not found");
+  asyncHandler(async (req: AuthRequest, res) => {
+    if (!req.user) {
+      throw new ValidationError("User not found")
     };
 
-    const conversations = await storage.getHealingMessagesByUserId(req.user.id);
+    const conversations = await storage.getHealingMessagesByUserId(req.user.id)
 
-    res.json({;
+    res.json({
       success: true,;
-      conversations: conversations.map((conv) => ({;
+      conversations: conversations.map((conv) => ({
         id: conv.id,;
         sessionId: conv.sessionId,;
         userMessage: conv.userMessage,;
@@ -51,30 +51,30 @@ router.get(;
         timestamp: conv.timestamp,;
         isHelpful: conv.isHelpful,;
         tags: conv.tags
-      }));
-    });
-  });
-);
+      }))
+    })
+  })
+)
 
-// Get specific conversation session;
+// Get specific conversation session
 router.get(;
   "/conversations/:sessionId",;
   authenticateToken as any,;
-  asyncHandler(async (req: AuthRequest, res) => {;
-    if (!req.user) {;
-      throw new ValidationError("User not found");
+  asyncHandler(async (req: AuthRequest, res) => {
+    if (!req.user) {
+      throw new ValidationError("User not found")
     };
 
     const { sessionId } = req.params
     const conversations = await storage.getHealingMessagesBySessionId(;
       sessionId,;
       req.user.id;
-    );
+    )
 
-    res.json({;
+    res.json({
       success: true,;
       sessionId,;
-      messages: conversations.map((conv) => ({;
+      messages: conversations.map((conv) => ({
         id: conv.id,;
         userMessage: conv.userMessage,;
         aiResponse: conv.aiResponse,;
@@ -82,45 +82,45 @@ router.get(;
         sentiment: conv.sentiment,;
         timestamp: conv.timestamp,;
         isHelpful: conv.isHelpful;
-      }));
-    });
-  });
-);
+      }))
+    })
+  })
+)
 
 // Main AI healing chat endpoint
 router.post(;
   "/chat",;
   optionalAuthenticateToken as any,;
-  asyncHandler(async (req: AuthRequest, res) => {;
-    const validation = healingChatSchema.safeParse(req.body);
-    if (!validation.success) {;
+  asyncHandler(async (req: AuthRequest, res) => {
+    const validation = healingChatSchema.safeParse(req.body)
+    if (!validation.success) {
       throw new ValidationError(;
-        validation.error.issues.map((e: any) => e.message).join(", ");
-      );
+        validation.error.issues.map((e: any) => e.message).join(", ")
+      )
     };
 
     const { message, sessionId, emotion, context } = validation.data
     const userId = req.user?.id || null;
 
-    // Generate session ID if not provided;
+    // Generate session ID if not provided
     const chatSessionId =;
       sessionId ||;
       "session_${Date.now()}_${Math.random().toString(36).substring(7)}";
 
-    try {;
+    try {
       // Get conversation context if session exists
       let conversationContext = ";
-      if (sessionId && userId) {;
+      if (sessionId && userId) {
         const previousMessages = await storage.getHealingMessagesBySessionId(;
           sessionId,;
           userId;
-        );
-        if (previousMessages.length > 0) {;
+        )
+        if (previousMessages.length > 0) {
           // Build context from last 5 messages
-          const recentMessages = previousMessages.slice(-5);
+          const recentMessages = previousMessages.slice(-5)
           conversationContext = recentMessages
-            .map((m) => "User: ${m.userMessage}\nAI: ${m.aiResponse}");
-            .join("\n\n");
+            .map((m) => "User: ${m.userMessage}\nAI: ${m.aiResponse}")
+            .join("\n\n")
         };
       };
 
@@ -129,14 +129,14 @@ router.post(;
         ? "Previous conversation:\n${conversationContext}\n\nCurrent message: ${message}";
         : message
 
-      const aiResponse = await generateHealingResponse(fullContext);
+      const aiResponse = await generateHealingResponse(fullContext)
 
       // Analyze emotion and sentiment
-      const analyzedEmotion = emotion || detectEmotion(message);
-      const sentimentScore = calculateSentiment(message);
+      const analyzedEmotion = emotion || detectEmotion(message)
+      const sentimentScore = calculateSentiment(message)
 
-      // Store the conversation;
-      const healingMessage = await storage.createHealingMessage({;
+      // Store the conversation
+      const healingMessage = await storage.createHealingMessage({
         userId,;
         sessionId: chatSessionId,;
         userMessage: message,;
@@ -144,41 +144,41 @@ router.post(;
         emotion: analyzedEmotion,;
         sentiment: sentimentScore,;
         tokensUsed: estimateTokens(message + aiResponse),;
-        tags: extractTags(message);
-      });
+        tags: extractTags(message)
+      })
 
-      res.json({;
+      res.json({
         success: true,;
         sessionId: chatSessionId,;
-        response: {;
+        response: {
           id: healingMessage.id,;
           message: aiResponse,;
           emotion: analyzedEmotion,;
           sentiment: sentimentScore,;
           timestamp: healingMessage.timestamp;
         };
-      });
-    } catch (error) {;
-      console.error("AI chat processing error:", error);
+      })
+    } catch (error) {
+      console.error("AI chat processing error:", error)
 
       // Provide compassionate fallback response
-      const fallbackResponse = generateCompassionateFallback(message);
+      const fallbackResponse = generateCompassionateFallback(message)
 
-      // Try to save even with fallback;
-      try {;
-        const healingMessage = await storage.createHealingMessage({;
+      // Try to save even with fallback
+      try {
+        const healingMessage = await storage.createHealingMessage({
           userId,;
           sessionId: chatSessionId,;
           userMessage: message,;
           aiResponse: fallbackResponse,;
           emotion: emotion || "unknown",;
           sentiment: 0;
-        });
+        })
 
-        res.json({;
+        res.json({
           success: true,;
           sessionId: chatSessionId,;
-          response: {;
+          response: {
             id: healingMessage.id,;
             message: fallbackResponse,;
             emotion: emotion || "supportive",;
@@ -186,13 +186,13 @@ router.post(;
             timestamp: healingMessage.timestamp,;
             isFallback: true
           };
-        });
-      } catch (storageError) {;
+        })
+      } catch (storageError) {
         // Even if storage fails, provide support
-        res.json({;
+        res.json({
           success: true,;
           sessionId: chatSessionId,;
-          response: {;
+          response: {
             id: "temp_${Date.now()}",;
             message: fallbackResponse,;
             emotion: "supportive",;
@@ -201,19 +201,19 @@ router.post(;
             isFallback: true,;
             temporary: true
           };
-        });
+        })
       };
     };
-  });
-);
+  })
+)
 
-// Rate conversation as helpful/not helpful;
+// Rate conversation as helpful/not helpful
 router.post(;
   "/conversations/:id/feedback",;
   authenticateToken as any,;
-  asyncHandler(async (req: AuthRequest, res) => {;
-    if (!req.user) {;
-      throw new ValidationError("User not found");
+  asyncHandler(async (req: AuthRequest, res) => {
+    if (!req.user) {
+      throw new ValidationError("User not found")
     };
 
     const { id } = req.params
@@ -224,18 +224,18 @@ router.post(;
       req.user.id,;
       isHelpful,;
       feedback;
-    );
+    )
 
-    res.json({;
+    res.json({
       success: true,;
       message: "Thank you for your feedback";
-    });
-  });
-);
+    })
+  })
+)
 
 // Helper functions
-function detectEmotion(text: string): string {;
-  const emotions = {;
+function detectEmotion(text: string): string {
+  const emotions = {
     anxious: /anxious|worried|nervous|stressed|panic/i,;
     sad: /sad|depressed|down|crying|tears|lonely/i,;
     angry: /angry|mad|frustrated|annoyed|irritated/i,;
@@ -244,8 +244,8 @@ function detectEmotion(text: string): string {;
     hopeful: /hope|better|improve|positive|optimistic/i
   };
 
-  for (const [emotion, pattern] of Object.entries(emotions)) {;
-    if (pattern.test(text)) {;
+  for (const [emotion, pattern] of Object.entries(emotions)) {
+    if (pattern.test(text)) {
       return emotion;
     };
   };
@@ -253,8 +253,8 @@ function detectEmotion(text: string): string {;
   return "neutral";
 };
 
-function calculateSentiment(text: string): number {;
-  // Simple sentiment analysis (0-1 scale);
+function calculateSentiment(text: string): number {
+  // Simple sentiment analysis (0-1 scale)
   const positiveWords =;
     /good|great|happy|wonderful|excellent|amazing|better|hope|love|thank/gi
   const negativeWords =;
@@ -269,15 +269,15 @@ function calculateSentiment(text: string): number {;
   return positiveMatches / total;
 };
 
-function estimateTokens(text: string): number {;
-  // Rough estimation: ~4 characters per token;
-  return Math.ceil(text.length / 4);
+function estimateTokens(text: string): number {
+  // Rough estimation: ~4 characters per token
+  return Math.ceil(text.length / 4)
 };
 
-function extractTags(text: string): string[] {;
+function extractTags(text: string): string[] {
   const tags: string[] = [];
 
-  const topicPatterns = {;
+  const topicPatterns = {
     relationships: /relationship|partner|family|friend|spouse/i,;
     work: /work|job|career|boss|colleague/i,;
     health: /health|sick|pain|doctor|medical/i,;
@@ -286,9 +286,9 @@ function extractTags(text: string): string[] {;
     sleep: /sleep|insomnia|tired|fatigue/i
   };
 
-  for (const [tag, pattern] of Object.entries(topicPatterns)) {;
-    if (pattern.test(text)) {;
-      tags.push(tag);
+  for (const [tag, pattern] of Object.entries(topicPatterns)) {
+    if (pattern.test(text)) {
+      tags.push(tag)
     };
   };
 

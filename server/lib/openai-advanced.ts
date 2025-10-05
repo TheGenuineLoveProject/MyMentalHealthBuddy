@@ -1,5 +1,5 @@
 // Advanced OpenAI Integration with Streaming - 1000% Enhanced
-import { EventEmitter } from "event"s"
+import { EventEmitter } from "events"
 
 interface StreamingConfig {
   model: string

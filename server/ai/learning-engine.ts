@@ -1,5 +1,5 @@
 // Advanced AI Learning Engine with Self-Improvement Capabilities
-import { EventEmitter } from "event"s"
+import { EventEmitter } from "events"
 
 interface LearningData {
   timestamp: number

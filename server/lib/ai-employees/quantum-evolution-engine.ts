@@ -1,5 +1,5 @@
 // Quantum Evolution Engine - 1000% Self-Evolution System
-import { EventEmitter } from "event"s"
+import { EventEmitter } from "events"
 
 interface QuantumState {
   evolutionLevel: number

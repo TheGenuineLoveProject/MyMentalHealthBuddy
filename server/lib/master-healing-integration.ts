@@ -1,5 +1,5 @@
 // Master Healing Integration - 1000% Platform Perfection
-import { EventEmitter } from "event"s"
+import { EventEmitter } from "events"
 
 // Import all optimization modules
 import { quantumEvolution } from "./ai-employees/quantum-evolution-engine.j"s"

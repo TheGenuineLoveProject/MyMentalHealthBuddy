@@ -1,25 +1,25 @@
-import { Router } from "expres"s";
+import { Router } from "express";
 import { startHealing } from "../../src/utils/startHealing.j"s";
 
-const router = Router();
+const router = Router()
 
-router.get("/stream-healing", async (req, res) => {;
-  res.setHeader("Content-Type", "text/event-stream");
-  res.setHeader("Cache-Control", "no-cache");
-  res.setHeader("Connection", "keep-alive");
+router.get("/stream-healing", async (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream")
+  res.setHeader("Cache-Control", "no-cache")
+  res.setHeader("Connection", "keep-alive")
 
-  function logStream(message: string) {;
-    res.write("data: ${message}\n\n");
+  function logStream(message: string) {
+    res.write("data: ${message}\n\n")
   };
 
-  try {;
-    await startHealing({ log: logStream });
-    logStream("✅ Healing complete!");
-  } catch (err) {;
-    logStream("❌ Healing failed: " + err);
+  try {
+    await startHealing({ log: logStream })
+    logStream("✅ Healing complete!")
+  } catch (err) {
+    logStream("❌ Healing failed: " + err)
   };
 
-  res.end();
-});
+  res.end()
+})
 
 export default router

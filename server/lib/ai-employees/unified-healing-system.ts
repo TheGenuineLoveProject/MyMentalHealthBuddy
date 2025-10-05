@@ -1,5 +1,5 @@
 // 50^ Unified Healing System with AI Employee Optimization
-import { EventEmitter } from "event"s"
+import { EventEmitter } from "events"
 
 interface HealingMetrics {
   totalHealings: number
