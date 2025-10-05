@@ -6,8 +6,8 @@ const router = express.Router()
 
 // Trigger the healing script using ts-node
 router.get("/", (req, res) => {
-  const healingScriptPath = path.resolve(;
-    __dirname,;
+  const healingScriptPath = path.resolve(
+    __dirname,
     "../../scripts/activateHealing.ts";
   )
 

@@ -14,13 +14,13 @@ interface SystemStatus {
   evolution: string
   healing: boolean
   optimization: number
-};
+}
 
 interface ComponentStatus {
   name: string
   status: "perfect" | "optimizing" | "healing"
   metrics: any
-};
+}
 
 export class MasterHealingIntegration extends EventEmitter {
   private systemStatus: SystemStatus
@@ -88,14 +88,14 @@ export class MasterHealingIntegration extends EventEmitter {
       { name: "mood-tracking", module: null },
       { name: "journal", module: null },
       { name: "resources", module: null },
-      { name: "billing", module: null };
+      { name: "billing", module: null }
     ]
 
     components.forEach((comp) => {
       this.components.set(comp.name, {
         name: comp.name,
         status: "optimizing",
-        metrics: {};
+        metrics: {}
       })
     })
 
@@ -212,7 +212,7 @@ export class MasterHealingIntegration extends EventEmitter {
     for (const [name, component] of this.components) {
       if (component.status !== "perfect") {
         await this.healComponent(name)
-      };
+      }
     };
 
     // Update system metrics
@@ -272,8 +272,8 @@ export class MasterHealingIntegration extends EventEmitter {
         case "unified-healing":
           component.metrics = unifiedHealingSystem?.getMetrics() || {};
           break
-      };
-    };
+      }
+    }
   };
 
   private updateSystemMetrics() {
@@ -282,7 +282,7 @@ export class MasterHealingIntegration extends EventEmitter {
     for (const component of this.components.values()) {
       if (component.status === "perfect") {
         perfectCount++
-      };
+      }
     };
 
     // Update health based on perfect components
@@ -291,7 +291,7 @@ export class MasterHealingIntegration extends EventEmitter {
     // Continuously improve perfection level
     if (this.systemStatus.health === 100) {
       this.perfectionLevel = Math.min(1000, this.perfectionLevel + 10)
-    };
+    }
   };
 
   private async achieveUltimatePerfection() {
@@ -357,7 +357,7 @@ export class MasterHealingIntegration extends EventEmitter {
           ? "🏆 ABSOLUTE PERFECTION"
           : "Optimizing to Perfection",
       components: Array.from(this.components.values())
-    };
+    }
   };
 
   async emergencyHeal(component: string) {
@@ -371,8 +371,8 @@ export class MasterHealingIntegration extends EventEmitter {
     if (this.integrationInterval) {
       clearInterval(this.integrationInterval)
       console.log("🛑 [Master Integration] Continuous perfection stopped")
-    };
-  };
+    }
+  }
 };
 
 // Create and export singleton instance

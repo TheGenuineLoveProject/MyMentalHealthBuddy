@@ -12,7 +12,7 @@ interface LearningData {
     userSatisfaction?: number
   };
   feedback?: string
-};
+}
 
 interface Pattern {
   id: string
@@ -21,7 +21,7 @@ interface Pattern {
   frequency: number
   successRate: number
   contexts: Set<string>
-};
+}
 
 interface Optimization {
   id: string
@@ -29,7 +29,7 @@ interface Optimization {
   description: string
   impact: number
   appliedAt: number
-};
+}
 
 export class AILearningEngine extends EventEmitter {
   private static instance: AILearningEngine
@@ -156,7 +156,7 @@ export class AILearningEngine extends EventEmitter {
           data.outcome === "success" ? 1 : data.outcome === "partial" ? 0.5 : 0,
         contexts: new Set([data.context])
       })
-    };
+    }
   };
 
   private updateWeights(data: LearningData) {
@@ -249,7 +249,7 @@ export class AILearningEngine extends EventEmitter {
       avgAccuracy,
       avgPerformance: (successCount / batch.length + avgAccuracy) / 2,
       topPatterns: this.getTopPatterns(5)
-    };
+    }
   };
 
   private getTopPatterns(limit: number): Pattern[] {
@@ -287,7 +287,7 @@ export class AILearningEngine extends EventEmitter {
       // Adjust learning rate
       this.learningRate *= 1.05
       console.log("🎛️ Tuned learning parameters")
-    };
+    }
   };
 
   // Evolution cycles for major improvements
@@ -323,7 +323,7 @@ export class AILearningEngine extends EventEmitter {
         fitness,
         optimizations: this.optimizations.length
       })
-    };
+    }
   };
 
   private evaluateFitness(): number {
@@ -358,7 +358,7 @@ export class AILearningEngine extends EventEmitter {
     this.patterns.forEach((pattern, key) => {
       if (pattern.confidence < 0.3 && pattern.frequency < 10) {
         this.patterns.delete(key)
-      };
+      }
     })
   };
 
@@ -375,7 +375,7 @@ export class AILearningEngine extends EventEmitter {
       baselines: this.baselines,
       learningRate: this.learningRate,
       explorationRate: this.explorationRate
-    };
+    }
   };
 
   // Get recommendations based on learned patterns
@@ -402,7 +402,7 @@ export class AILearningEngine extends EventEmitter {
 
       // Re-process learning with new feedback
       this.updateWeights(experience)
-    };
+    }
   };
 
   // Export learning data for analysis
@@ -412,7 +412,7 @@ export class AILearningEngine extends EventEmitter {
       patterns: Array.from(this.patterns.values()),
       optimizations: this.optimizations,
       state: this.getLearningState()
-    };
+    }
   };
 
   // Import learning data for transfer learning
@@ -437,7 +437,7 @@ export class AILearningEngine extends EventEmitter {
     };
 
     console.log("📥 Learning data imported successfully")
-  };
+  }
 };
 
 // Export singleton instance

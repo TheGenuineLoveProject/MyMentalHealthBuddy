@@ -5,12 +5,12 @@ export const passport = {
   deserializeUser: (fn: any) => {},
   authenticate: (strategy: string, options?: any) => {
     return (req: any, res: any, next: any) => {
-      next();
-    };
+      next()
+    }
   },
   initialize: () => (req: any, res: any, next: any) => next(),
   session: () => (req: any, res: any, next: any) => next()
-};
+}
 
 export class Strategy {
   constructor(fn: any) {}

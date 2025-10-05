@@ -35,7 +35,7 @@ export class PlatformNurse {
       checks,
       status:
         healthScore > 90 ? "healthy" : healthScore > 70 ? "warning" : "critical"
-    };
+    }
   }
 
   /**
@@ -48,7 +48,7 @@ export class PlatformNurse {
       case "high_memory":
         if (global.gc) {
           global.gc();
-          console.log("✅ [${this.name}] Memory cleaned");
+          console.log("✅ [${this.name}] Memory cleaned")
         }
         break;
       case "slow_response":
@@ -60,7 +60,7 @@ export class PlatformNurse {
         console.log("✅ [${this.name}] Database reconnection initiated");
         break;
       default:
-        console.log("⚠️ [${this.name}] Unknown issue: ${issue}");
+        console.log("⚠️ [${this.name}] Unknown issue: ${issue}")
     }
   }
 
@@ -76,18 +76,18 @@ export class PlatformNurse {
 
     // Keep only last 100 errors
     if (this.errorLog.length > 100) {
-      this.errorLog.shift();
+      this.errorLog.shift()
     }
 
-    console.error("❌ [${this.name}] Error logged:", error.message);
+    console.error("❌ [${this.name}] Error logged:", error.message)
   }
 
   private async checkDatabase() {
     try {
       // Check database connection
-      return { status: "connected", latency: "5ms" };
+      return { status: "connected", latency: "5ms" }
     } catch {
-      return { status: "disconnected", latency: "N/A" };
+      return { status: "disconnected", latency: "N/A" }
     }
   }
 
@@ -97,7 +97,7 @@ export class PlatformNurse {
       chat: "operational",
       mood: "operational",
       billing: "operational"
-    };
+    }
   }
 
   private async checkFrontend() {
@@ -105,7 +105,7 @@ export class PlatformNurse {
       build: "success",
       routes: "configured",
       assets: "loaded"
-    };
+    }
   }
 
   private checkMemoryUsage() {
@@ -114,7 +114,7 @@ export class PlatformNurse {
       heapUsed: Math.round(used.heapUsed / 1024 / 1024) + " MB",
       heapTotal: Math.round(used.heapTotal / 1024 / 1024) + " MB",
       external: Math.round(used.external / 1024 / 1024) + " MB"
-    };
+    }
   }
 
   private calculateHealthScore(checks: any): number {
@@ -124,7 +124,7 @@ export class PlatformNurse {
     if (checks.errors > 10) score -= 20;
     if (checks.errors > 50) score -= 30;
 
-    return Math.max(0, score);
+    return Math.max(0, score)
   }
 
   /**
@@ -137,11 +137,11 @@ export class PlatformNurse {
     const now = new Date().getTime();
     this.healthChecks.forEach((value, key) => {
       if (now - new Date(key).getTime() > 3600000) {
-        this.healthChecks.delete(key);
+        this.healthChecks.delete(key)
       }
     });
 
-    console.log("✨ [${this.name}] Optimization complete");
+    console.log("✨ [${this.name}] Optimization complete")
   }
 }
 

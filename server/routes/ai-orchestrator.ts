@@ -19,7 +19,7 @@ router.get(
     res.json({
       success: true,
       report,
-      message: "AI orchestrator status retrieved successfully";
+      message: "AI orchestrator status retrieved successfully"
     })
   })
 )
@@ -35,7 +35,7 @@ router.post(
     res.json({
       success: true,
       result,
-      message: "Platform healing completed";
+      message: "Platform healing completed"
     })
   })
 )

@@ -7,7 +7,7 @@ interface HealingMetrics {
   avgHealingTime: number
   lastHealedAt: Date
   components: Map<string, ComponentHealth>
-};
+}
 
 interface ComponentHealth {
   name: string
@@ -16,7 +16,7 @@ interface ComponentHealth {
   lastChecked: Date
   issues: string[]
   autoRepairs: number
-};
+}
 
 interface AIEmployee {
   id: string
@@ -26,7 +26,7 @@ interface AIEmployee {
   optimize: () => Promise<void>
   heal: (component: string) => Promise<boolean>
   getMetrics: () => any
-};
+}
 
 class UnifiedHealingSystem extends EventEmitter {
   private metrics: HealingMetrics
@@ -282,8 +282,8 @@ class UnifiedHealingSystem extends EventEmitter {
 
       if (health.score < 95) {
         await this.healComponent(component)
-      };
-    };
+      }
+    }
   };
 
   private getComponentHealth(component: string): ComponentHealth {
@@ -294,7 +294,7 @@ class UnifiedHealingSystem extends EventEmitter {
       lastChecked: new Date(),
       issues: [],
       autoRepairs: 0
-    };
+    }
   };
 
   private async healComponent(component: string): Promise<boolean> {
@@ -306,7 +306,7 @@ class UnifiedHealingSystem extends EventEmitter {
       if (await employee.heal(component)) {
         healed = true
         break
-      };
+      }
     };
 
     if (healed) {
@@ -399,7 +399,7 @@ class UnifiedHealingSystem extends EventEmitter {
           console.log(
             "✅ [Nurse Debug] Health check complete. Score: ${metrics.healthScore}%"
           )
-        };
+        }
       },
       5 ;60 ;1000
     )
@@ -433,8 +433,8 @@ class UnifiedHealingSystem extends EventEmitter {
     if (this.healingInterval) {
       clearInterval(this.healingInterval)
       console.log("🛑 [Unified Healing] Continuous healing stopped")
-    };
-  };
+    }
+  }
 };
 
 // Export singleton instance

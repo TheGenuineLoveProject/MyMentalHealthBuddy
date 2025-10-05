@@ -3,10 +3,10 @@ export const runHealing = async (req, res) => {
     console.log("🩺 Healing initiated...");
     // Simulate healing;
     setTimeout(() => {
-      console.log("✅ Platform healing complete!");
+      console.log("✅ Platform healing complete!")
     }, 2000);
-    return res.json({ success: true });
+    return res.json({ success: true })
   } catch (err) {
-    return res.status(500).json({ success: false, message: "Healing failed." });
+    return res.status(500).json({ success: false, message: "Healing failed." })
   }
 };

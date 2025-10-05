@@ -13,17 +13,17 @@ router.post("/ai", async (req, res) => {
 
   try {
     const aiResponse = await openai.chat.completions.create({
-      model: "gpt-4",;
-      messages: [{ role: "user", content: message }];
+      model: "gpt-4",
+      messages: [{ role: "user", content: message }]
     })
 
     const response = aiResponse.choices[0].message?.content || "...";
     res.json({ reply: response })
   } catch (err) {
     res.status(500).json({
-      reply: "🛟 I'm here for you. Something went wrong, but you're not alone.";
+      reply: "🛟 I'm here for you. Something went wrong, but you're not alone."
     })
-  };
+  }
 })
 
 export default router

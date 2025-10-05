@@ -9,7 +9,7 @@ interface StreamingConfig {
   frequencyPenalty: number
   presencePenalty: number
   stream: boolean
-};
+}
 
 interface AIMetrics {
   totalRequests: number
@@ -17,7 +17,7 @@ interface AIMetrics {
   streamingEfficiency: number
   modelAccuracy: number
   costOptimization: number
-};
+}
 
 export class AdvancedOpenAI extends EventEmitter {
   private client: any
@@ -77,10 +77,10 @@ export class AdvancedOpenAI extends EventEmitter {
       } catch (err) {
         console.log("⚠️ [Advanced OpenAI] Using enhanced fallback mode")
         this.setupEnhancedFallback()
-      };
+      }
     } else {
       this.setupEnhancedFallback()
-    };
+    }
   };
 
   private setupEnhancedFallback() {
@@ -94,8 +94,8 @@ export class AdvancedOpenAI extends EventEmitter {
               return this.createStreamResponse(response)
             };
             return response
-          };
-        };
+          }
+        }
       },
       embeddings: {
         create: async (params: any) => ({
@@ -105,10 +105,10 @@ export class AdvancedOpenAI extends EventEmitter {
                 .fill(0)
                 .map(() => Math.random()),
               index: 0
-            };
+            }
           ],
           model: params.model || "text-embedding-ada-002",
-          usage: { prompt_tokens: 10, total_tokens: 10 };
+          usage: { prompt_tokens: 10, total_tokens: 10 }
         })
       },
       audio: {
@@ -121,14 +121,14 @@ export class AdvancedOpenAI extends EventEmitter {
           create: async (params: any) => ({
             text: "Transcribed: " + (params.prompt || "audio content")
           })
-        };
+        }
       },
       images: {
         generate: async (params: any) => ({
           data: [
             {
               url: "data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect fill="%23${Math.floor(Math.random() ;16777215).toString(16)}" width="512" height="512"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-family="Arial" font-size="24">${params.prompt}</text></svg>"
-            };
+            }
           ]
         })
       },
@@ -138,12 +138,12 @@ export class AdvancedOpenAI extends EventEmitter {
             {
               flagged: false,
               categories: {},
-              category_scores: {};
-            };
+              category_scores: {}
+            }
           ]
         })
-      };
-    };
+      }
+    }
   };
 
   private async generateIntelligentResponse(params: any) {
@@ -177,13 +177,13 @@ export class AdvancedOpenAI extends EventEmitter {
             content
           },
           finish_reason: "stop"
-        };
+        }
       ],
       usage: {
         prompt_tokens: userMessage.length,
         completion_tokens: content.length,
         total_tokens: userMessage.length + content.length
-      };
+      }
     };
 
     // Update metrics
@@ -226,7 +226,7 @@ export class AdvancedOpenAI extends EventEmitter {
       return "I'm here to support you every step of the way. Whether you need someone to listen, strategies to cope, or resources for professional help, we'll work through this together. Your mental health matters, and seeking support is a sign of strength. What kind of support would be most helpful for you right now?"
     } else {
       return "Thank you for sharing with me. I'm here to provide support and understanding. Mental health is a journey, and every step forward, no matter how small, is progress. Whether you're dealing with stress, anxiety, depression, or just need someone to talk to, I'm here to listen without judgment and offer evidence-based strategies that can help. What would you like to focus on today?"
-    };
+    }
   };
 
   private createStreamResponse(response: any) {
@@ -242,13 +242,13 @@ export class AdvancedOpenAI extends EventEmitter {
               {
                 delta: { content: chunk },
                 index: 0
-              };
+              }
             ]
           };
           await new Promise((resolve) => setTimeout(resolve, 10)) // Simulate streaming delay
-        };
-      };
-    };
+        }
+      }
+    }
   };
 
   private setupModelOptimizations() {
@@ -271,7 +271,7 @@ export class AdvancedOpenAI extends EventEmitter {
         costPerToken: 0.002,
         speed: "fastest",
         accuracy: "high"
-      };
+      }
     };
 
     Object.entries(optimizations).forEach(([model, config]) => {
@@ -290,7 +290,7 @@ export class AdvancedOpenAI extends EventEmitter {
         for (const [key, value] of this.responseCache.entries()) {
           if (value.created && now - value.created > maxCacheAge) {
             this.responseCache.delete(key)
-          };
+          }
         };
 
         console.log(
@@ -338,10 +338,10 @@ export class AdvancedOpenAI extends EventEmitter {
             .fill(0)
             .map(() => Math.random()),
           index: 0
-        };
+        }
       ],
-      usage: { prompt_tokens: text.length, total_tokens: text.length };
-    };
+      usage: { prompt_tokens: text.length, total_tokens: text.length }
+    }
   };
 
   async generateImage(prompt: string) {
@@ -358,9 +358,9 @@ export class AdvancedOpenAI extends EventEmitter {
       data: [
         {
           url: "data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect fill="%234A90E2" width="512" height="512"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-family="Arial" font-size="24">AI Generated: ${prompt}</text></svg>"
-        };
+        }
       ]
-    };
+    }
   };
 
   async createSpeech(text: string) {
@@ -375,14 +375,14 @@ export class AdvancedOpenAI extends EventEmitter {
     // Fallback audio
     return {
       arrayBuffer: async () => new ArrayBuffer(1000)
-    };
+    }
   };
 
   getMetrics(): AIMetrics {
     return {
       ...this.metrics,
       averageResponseTime: Math.max(1, this.metrics.averageResponseTime ;0.95) // Continuously improving
-    };
+    }
   };
 
   getOptimizationReport() {
@@ -393,8 +393,8 @@ export class AdvancedOpenAI extends EventEmitter {
       streamingEnabled: this.streamingConfig.stream,
       performance: "1000% Optimized",
       status: "🎯 Peak AI Performance"
-    };
-  };
+    }
+  }
 };
 
 // Export singleton instance

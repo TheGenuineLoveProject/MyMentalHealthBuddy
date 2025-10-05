@@ -1,7 +1,7 @@
 // Mock OpenAI legacy API implementation to fix build errors
 export class Configuration {
-  constructor(config: any) {};
-};
+  constructor(config: any) {}
+}
 
 export class OpenAIApi {
   constructor(config: any) {};
@@ -14,10 +14,10 @@ export class OpenAIApi {
             message: {
               content:
                 "I'm here to support you. While the AI service is being configured, please know that you're not alone."
-            };
-          };
+            }
+          }
         ]
-      };
-    };
-  };
+      }
+    }
+  }
 };

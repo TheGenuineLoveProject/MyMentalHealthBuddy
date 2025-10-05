@@ -10,9 +10,9 @@ import { drizzle } from "../../db/drizzle.js";
 import { users } from "../../shared/schema.js";
 import { eq } from "drizzle-or"m";
 
-passport.use(;
-  new LocalStrategy(;
-    { passReqToCallback: true },;
+passport.use(
+  new LocalStrategy(
+    { passReqToCallback: true },
     async (req: Request, username: string, password: string, done: any) => {
       try {
         // Get database from app locals (set in server/index.ts)
@@ -31,10 +31,10 @@ passport.use(;
 
           if (!user || !user.length) {
             return done(null, false, { message: "Incorrect username." })
-          };
+          }
 
-          const isValidPassword = await bcrypt.compare(;
-            password,;
+          const isValidPassword = await bcrypt.compare(
+            password,
             user[0].password;
           )
           if (!isValidPassword) {
@@ -47,16 +47,16 @@ passport.use(;
           // Default test user
           if (username === "admin" && password === "admin123") {
             return done(null, {
-              id: "1",;
-              username: "admin",;
-              email: "admin@example.com";
+              id: "1",
+              username: "admin",
+              email: "admin@example.com"
             })
           };
           return done(null, false, { message: "Invalid credentials." })
-        };
+        }
       } catch (err) {
         return done(err)
-      };
+      }
     };
   )
 )
@@ -82,18 +82,18 @@ passport.deserializeUser(async (req: any, id: any, done: any) => {
         done(null, user[0])
       } else {
         done(null, false)
-      };
+      }
     } else {
       // Fallback to in-memory user for development
       if (id === "1") {
         done(null, { id: "1", username: "admin", email: "admin@example.com" })
       } else {
         done(null, false)
-      };
-    };
+      }
+    }
   } catch (err) {
     done(err)
-  };
+  }
 })
 
 export default passport

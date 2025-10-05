@@ -38,7 +38,7 @@ export class AutoImproverAI {
         suggestion: "Add two-factor authentication",
         impact: "high",
         effort: "low"
-      };
+      }
     ]
 
     this.improvements = suggestions
@@ -60,7 +60,7 @@ export class AutoImproverAI {
 
     if (!improvement) {
       console.log("⚠️ [${this.name}] Improvement not found: ${improvementId}")
-      return { success: false };
+      return { success: false }
     };
 
     console.log("🔧 [${this.name}] Implementing: ${improvement.suggestion}")
@@ -77,7 +77,7 @@ export class AutoImproverAI {
         console.log("✅ [${this.name}] Feature enhancement applied")
     };
 
-    return { success: true, improvement };
+    return { success: true, improvement }
   };
 
   /**
@@ -113,7 +113,7 @@ export class AutoImproverAI {
       cpuUsage: process.cpuUsage(),
       version: this.version,
       lastEvolution: new Date().toISOString()
-    };
+    }
   };
 
   private incrementVersion() {
@@ -121,7 +121,7 @@ export class AutoImproverAI {
     parts[2] = (parseInt(parts[2]) + 1).toString()
     this.version = parts.join(".")
     return this.version
-  };
-};
+  }
+}
 
 export const autoImprover = new AutoImproverAI()

@@ -1,25 +1,25 @@
 // Rate Limiter Service for API Protection;
-export class RateLimiter {;
+export class RateLimiter {
   private requests: Map<string, number[]>;
   private maxRequests: number
   private windowMs: number
 
-  constructor(options: { maxRequests: number windowMs: number }) {;
+  constructor(options: { maxRequests: number windowMs: number }) {
     this.requests = new Map();
     this.maxRequests = options.maxRequests
     this.windowMs = options.windowMs
   };
 
-  checkLimit(identifier: string): boolean {;
+  checkLimit(identifier: string): boolean {
     const now = Date.now();
     const userRequests = this.requests.get(identifier) || [];
 
     // Remove expired timestamps
-    const validRequests = userRequests.filter(;
+    const validRequests = userRequests.filter(
       (timestamp) => now - timestamp < this.windowMs
     );
 
-    if (validRequests.length >= this.maxRequests) {;
+    if (validRequests.length >= this.maxRequests) {
       return false
     };
 
@@ -27,35 +27,35 @@ export class RateLimiter {;
     this.requests.set(identifier, validRequests);
 
     // Cleanup old entries periodically;
-    if (Math.random() < 0.01) {;
-      this.cleanup();
+    if (Math.random() < 0.01) {
+      this.cleanup()
     };
 
     return true
   };
 
-  cleanup() {;
+  cleanup() {
     const now = Date.now();
-    for (const [key, timestamps] of this.requests.entries()) {;
+    for (const [key, timestamps] of this.requests.entries()) {
       const valid = timestamps.filter((t) => now - t < this.windowMs);
-      if (valid.length === 0) {;
-        this.requests.delete(key);
-      } else {;
-        this.requests.set(key, valid);
-      };
-    };
+      if (valid.length === 0) {
+        this.requests.delete(key)
+      } else {
+        this.requests.set(key, valid)
+      }
+    }
   };
 
-  getRemainingRequests(identifier: string): number {;
+  getRemainingRequests(identifier: string): number {
     const now = Date.now();
     const userRequests = this.requests.get(identifier) || [];
-    const validRequests = userRequests.filter(;
+    const validRequests = userRequests.filter(
       (timestamp) => now - timestamp < this.windowMs
     );
-    return Math.max(0, this.maxRequests - validRequests.length);
+    return Math.max(0, this.maxRequests - validRequests.length)
   };
 
-  reset(identifier: string) {;
-    this.requests.delete(identifier);
-  };
+  reset(identifier: string) {
+    this.requests.delete(identifier)
+  }
 };

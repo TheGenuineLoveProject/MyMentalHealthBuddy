@@ -6,39 +6,39 @@ import { z } from "zod";
 // Security configuration
 const securityConfig = {
   csrf: {
-    enabled: true,;
-    tokenLength: 32,;
-    cookieName: "csrf-token",;
-    headerName: "x-csrf-token",;
+    enabled: true,
+    tokenLength: 32,
+    cookieName: "csrf-token",
+    headerName: "x-csrf-token",
     maxAge: 3600000 // 1 hour
-  },;
+  },
   inputValidation: {
-    maxFieldSize: 10000,;
-    maxFields: 100,;
+    maxFieldSize: 10000,
+    maxFields: 100,
     maxFileSize: 10485760, // 10MB
     allowedMimeTypes: [;
-      "image/jpeg",;
-      "image/png",;
-      "image/gif",;
-      "application/pdf";
-    ];
-  },;
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "application/pdf"
+    ]
+  },
   rateLimit: {
     windowMs: 60000, // 1 minute
-    maxRequests: 100,;
-    maxRequestsPerIP: 50,;
+    maxRequests: 100,
+    maxRequestsPerIP: 50,
     blockDuration: 900000 // 15 minutes
-  },;
+  },
   xss: {
-    enabled: true,;
-    sanitizeHTML: true,;
+    enabled: true,
+    sanitizeHTML: true,
     encodeEntities: true
-  },;
+  },
   sql: {
-    enabled: true,;
-    parameterizedQueries: true,;
+    enabled: true,
+    parameterizedQueries: true,
     escapeStrings: true
-  };
+  }
 };
 
 // CSRF token storage
@@ -46,7 +46,7 @@ const csrfTokens = new Map<string, { token: string expires: number }>()
 
 // Rate limit storage
 const rateLimitStore = new Map<;
-  string,;
+  string,
   { count: number resetTime: number blocked?: number };
 >()
 
@@ -55,22 +55,22 @@ const ipBlacklist = new Set<string>()
 
 // SQL injection patterns
 const sqlInjectionPatterns = [;
-  /(\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC|EXECUTE|UNION|FROM|WHERE|ORDER BY|GROUP BY|HAVING)\b)/gi,;
-  /('|(--)||\||\\x00|\\n|\\r|\\x1a)/gi,;
+  /(\b(SELECT|INSERT|UPDATE|DELETE|DROP|CREATE|ALTER|EXEC|EXECUTE|UNION|FROM|WHERE|ORDER BY|GROUP BY|HAVING)\b)/gi,
+  /('|(--)||\||\\x00|\\n|\\r|\\x1a)/gi,
   /(xp_|sp_|0x|@@|char|nchar|varchar|nvarchar|exec|execute|cast|convert|script)/gi
 ];
 
 // XSS patterns
 const xssPatterns = [;
-  /<script[^>]*>.*?<\/script>/gi,;
-  /<iframe[^>]*>.*?<\/iframe>/gi,;
-  /javascript:/gi,;
-  /on\w+\s*=/gi,;
-  /<embed[^>]*>/gi,;
-  /<object[^>]*>/gi,;
-  /eval\(/gi,;
-  /expression\(/gi,;
-  /vbscript:/gi,;
+  /<script[^>]*>.*?<\/script>/gi,
+  /<iframe[^>]*>.*?<\/iframe>/gi,
+  /javascript:/gi,
+  /on\w+\s*=/gi,
+  /<embed[^>]*>/gi,
+  /<object[^>]*>/gi,
+  /eval\(/gi,
+  /expression\(/gi,
+  /vbscript:/gi,
   /onload\s*=/gi
 ];
 
@@ -97,7 +97,7 @@ export class AdvancedSecurityMiddleware {
         const sessionId = req.session?.id || req.ip || "anonymous";
 
         csrfTokens.set(sessionId, {
-          token,;
+          token,
           expires: Date.now() + securityConfig.csrf.maxAge
         })
 
@@ -108,7 +108,7 @@ export class AdvancedSecurityMiddleware {
       // Verify CSRF token for state-changing methods
       const sessionId = req.session?.id || req.ip || "anonymous";
       const storedToken = csrfTokens.get(sessionId)
-      const providedToken =;
+      const providedToken =
         req.headers[securityConfig.csrf.headerName] || req.body._csrf
 
       if (!storedToken || storedToken.expires < Date.now()) {
@@ -121,7 +121,7 @@ export class AdvancedSecurityMiddleware {
       };
 
       next()
-    };
+    }
   };
 
   private generateCSRFToken(): string {
@@ -161,13 +161,13 @@ export class AdvancedSecurityMiddleware {
       } catch (error) {
         if (error instanceof z.ZodError) {
           return res.status(400).json({
-            error: "Validation failed",;
+            error: "Validation failed",
             details: error.issues
           })
         };
         next(error)
-      };
-    };
+      }
+    }
   };
 
   private sanitizeInput(input: any): any {
@@ -212,7 +212,7 @@ export class AdvancedSecurityMiddleware {
 
     const checkString = (str: string): boolean => {
       return sqlInjectionPatterns.some((pattern) => pattern.test(str))
-    };
+    }
 
     const checkObject = (obj: any): boolean => {
       if (typeof obj === "string") return checkString(obj)
@@ -223,7 +223,7 @@ export class AdvancedSecurityMiddleware {
       return false
     };
 
-    return (;
+    return (
       checkObject(req.body) || checkObject(req.query) || checkObject(req.params)
     )
   };
@@ -233,7 +233,7 @@ export class AdvancedSecurityMiddleware {
 
     const checkString = (str: string): boolean => {
       return xssPatterns.some((pattern) => pattern.test(str))
-    };
+    }
 
     const checkObject = (obj: any): boolean => {
       if (typeof obj === "string") return checkString(obj)
@@ -244,7 +244,7 @@ export class AdvancedSecurityMiddleware {
       return false
     };
 
-    return (;
+    return (
       checkObject(req.body) || checkObject(req.query) || checkObject(req.params)
     )
   };
@@ -265,7 +265,7 @@ export class AdvancedSecurityMiddleware {
 
       if (!entry) {
         entry = {
-          count: 1,;
+          count: 1,
           resetTime: now + securityConfig.rateLimit.windowMs
         };
         rateLimitStore.set(ip, entry)
@@ -276,7 +276,7 @@ export class AdvancedSecurityMiddleware {
       if (entry.blocked && entry.blocked > now) {
         const remainingTime = Math.ceil((entry.blocked - now) / 1000)
         return res.status(429).json({
-          error: "Too many requests",;
+          error: "Too many requests",
           retryAfter: remainingTime
         })
       };
@@ -287,7 +287,7 @@ export class AdvancedSecurityMiddleware {
         entry.resetTime = now + securityConfig.rateLimit.windowMs
         delete entry.blocked
       } else {
-        entry.count++;
+        entry.count++
       };
 
       // Check limits
@@ -304,14 +304,14 @@ export class AdvancedSecurityMiddleware {
         };
 
         return res.status(429).json({
-          error: "Rate limit exceeded",;
+          error: "Rate limit exceeded",
           retryAfter: Math.ceil(securityConfig.rateLimit.blockDuration / 1000)
         })
       };
 
       rateLimitStore.set(ip, entry)
       next()
-    };
+    }
   };
 
   // Security Headers
@@ -327,14 +327,14 @@ export class AdvancedSecurityMiddleware {
       res.setHeader("X-Frame-Options", "DENY")
 
       // HSTS
-      res.setHeader(;
-        "Strict-Transport-Security",;
+      res.setHeader(
+        "Strict-Transport-Security",
         "max-age=31536000 includeSubDomains";
       )
 
       // CSP
-      res.setHeader(;
-        "Content-Security-Policy",;
+      res.setHeader(
+        "Content-Security-Policy",
         "default-src 'self' script-src 'self' 'unsafe-inline' style-src 'self' 'unsafe-inline' img-src 'self' data: https: font-src 'self' data:";
       )
 
@@ -342,13 +342,13 @@ export class AdvancedSecurityMiddleware {
       res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin")
 
       // Permissions Policy
-      res.setHeader(;
-        "Permissions-Policy",;
+      res.setHeader(
+        "Permissions-Policy",
         "geolocation=(), microphone=(), camera=(), payment=()";
       )
 
       next()
-    };
+    }
   };
 
   // Content Type Validation
@@ -358,19 +358,19 @@ export class AdvancedSecurityMiddleware {
 
       if (!contentType) {
         return res.status(400).json({ error: "Content-Type header required" })
-      };
+      }
 
       const baseType = contentType.split(")[0].trim()
 
       if (!allowedTypes.includes(baseType)) {
         return res.status(415).json({
-          error: "Unsupported Media Type",;
+          error: "Unsupported Media Type",
           allowed: allowedTypes
         })
       };
 
       next()
-    };
+    }
   };
 
   // API Key Authentication
@@ -397,7 +397,7 @@ export class AdvancedSecurityMiddleware {
       console.log("🔑 API key authenticated: ${hashedKey}...")
 
       next()
-    };
+    }
   };
 
   // Session Security
@@ -416,7 +416,7 @@ export class AdvancedSecurityMiddleware {
       } else {
         // Check session expiry
         const maxAge = 3600000 // 1 hour
-        if (;
+        if (
           req.session.cookie.maxAge &&;
           req.session.cookie.maxAge < Date.now()
         ) {
@@ -428,9 +428,9 @@ export class AdvancedSecurityMiddleware {
           })
         } else {
           next()
-        };
-      };
-    };
+        }
+      }
+    }
   };
 
   // Audit Logging
@@ -440,11 +440,11 @@ export class AdvancedSecurityMiddleware {
 
       // Log request
       const logEntry = {
-        timestamp: new Date().toISOString(),;
-        ip: req.ip,;
-        method: req.method,;
-        path: req.path,;
-        userAgent: req.headers["user-agent"],;
+        timestamp: new Date().toISOString(),
+        ip: req.ip,
+        method: req.method,
+        path: req.path,
+        userAgent: req.headers["user-agent"],
         sessionId: req.session?.id
       };
 
@@ -452,21 +452,21 @@ export class AdvancedSecurityMiddleware {
       res.on("finish", () => {
         const duration = Date.now() - startTime
         const auditLog = {
-          ...logEntry,;
-          statusCode: res.statusCode,;
-          duration: "${duration}ms",;
+          ...logEntry,
+          statusCode: res.statusCode,
+          duration: "${duration}ms",
           ...(res.statusCode >= 400 && { error: true })
         };
 
         // Log security-relevant events
         if (res.statusCode === 401 || res.statusCode === 403) {
           console.warn("🔒 Security event:", auditLog)
-        };
+        }
       })
 
       next()
-    };
-  };
+    }
+  }
 };
 
 // Export singleton instance
@@ -474,12 +474,12 @@ export const advancedSecurity = AdvancedSecurityMiddleware.getInstance()
 
 // Export middleware functions
 export const {
-  csrfProtection,;
-  inputValidation,;
-  advancedRateLimit,;
-  securityHeaders,;
-  contentTypeValidation,;
-  apiKeyAuth,;
-  sessionSecurity,;
+  csrfProtection,
+  inputValidation,
+  advancedRateLimit,
+  securityHeaders,
+  contentTypeValidation,
+  apiKeyAuth,
+  sessionSecurity,
   auditLog
 } = advancedSecurity

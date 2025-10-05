@@ -63,7 +63,7 @@ export const apiDocumentation: ApiDocumentation = {
     name: "Development Team",
     email: "dev@example.com"
   },
-  endpoints: [;
+  endpoints: [
     {
       path: "/health",
       method: "GET",
@@ -130,7 +130,7 @@ export const apiDocumentation: ApiDocumentation = {
       summary: "Update Service",
       description: "Update a service's configuration or status",
       tags: ["Services"],
-      parameters: [;
+      parameters: [
         {
           name: "id",
           in: "path",

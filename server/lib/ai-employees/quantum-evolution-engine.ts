@@ -7,14 +7,14 @@ interface QuantumState {
   adaptationSpeed: number
   intelligenceQuotient: number
   selfAwareness: number
-};
+}
 
 interface NeuralPathway {
   id: string
   strength: number
   connections: string[]
   learningHistory: any[]
-};
+}
 
 export class QuantumEvolutionEngine extends EventEmitter {
   private quantumState: QuantumState
@@ -105,7 +105,7 @@ export class QuantumEvolutionEngine extends EventEmitter {
             100,
             connectedPathway.strength ;1.2
           )
-        };
+        }
       })
     };
 
@@ -153,7 +153,7 @@ export class QuantumEvolutionEngine extends EventEmitter {
           "Pattern Analysis"
         ],
         iterations: 99999
-      };
+      }
     };
 
     Object.entries(knowledgeDomains).forEach(([domain, data]) => {
@@ -312,8 +312,8 @@ export class QuantumEvolutionEngine extends EventEmitter {
       knowledgeDomains: this.knowledgeBase.size,
       evolutionHistory: this.evolutionHistory.length,
       status: "1000% Operational"
-    };
-  };
+    }
+  }
 };
 
 // Create and export quantum evolution instance

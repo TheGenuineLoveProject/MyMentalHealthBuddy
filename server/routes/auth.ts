@@ -65,7 +65,7 @@ router.post(
       id: newUser.id,
       username: newUser.username,
       email: newUser.email || undefined,
-      role: newUser.role || "user";
+      role: newUser.role || "user"
     })
 
     res.json({
@@ -77,7 +77,7 @@ router.post(
         name: newUser.name,
         role: newUser.role
       },
-      token;
+      token
     })
   })
 )
@@ -115,7 +115,7 @@ router.post(
       id: user.id,
       username: user.username,
       email: user.email || undefined,
-      role: user.role || "user";
+      role: user.role || "user"
     })
 
     res.json({
@@ -127,7 +127,7 @@ router.post(
         name: user.name,
         role: user.role
       },
-      token;
+      token
     })
   })
 )
@@ -158,7 +158,7 @@ router.get(
         preferences: user.preferences,
         subscriptionTier: user.subscriptionTier,
         createdAt: user.createdAt,
-        lastLogin: user.lastLogin;
+        lastLogin: user.lastLogin
       }
     })
   })
@@ -251,7 +251,7 @@ router.post(
 
     res.json({
       success: true,
-      message: "Password changed successfully";
+      message: "Password changed successfully"
     })
   })
 )
@@ -262,7 +262,7 @@ router.post("/logout", authenticateToken, (req: AuthRequest, res) => {
   // But we can still have this endpoint for consistency
   res.json({
     success: true,
-    message: "Logged out successfully";
+    message: "Logged out successfully"
   })
 })
 

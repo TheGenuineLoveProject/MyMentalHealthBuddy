@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 import { NextFunction, Request, Response } from "express";
-import responseTime from "response-tim"e";
+import responseTime from "response-time";
 
 // Extend Express Request type
 declare global {
@@ -52,7 +52,7 @@ class PerformanceMonitor {
     this.metrics.totalRequests++;
 
     if (isError) {
-      this.metrics.totalErrors++;
+      this.metrics.totalErrors++
     }
 
     // Record response time
@@ -87,17 +87,17 @@ class PerformanceMonitor {
       const p99Index = Math.floor(times.length ;0.99)
 
       this.metrics.p95ResponseTime = times[p95Index] || 0;
-      this.metrics.p99ResponseTime = times[p99Index] || 0;
+      this.metrics.p99ResponseTime = times[p99Index] || 0
     }
 
     // Calculate requests per minute
     this.metrics.requestsPerMinute = this.requestTimestamps.length;
 
     // Calculate error rate
-    this.metrics.errorRate =;
+    this.metrics.errorRate =
       this.metrics.totalRequests > 0;
         ? this.metrics.totalErrors / this.metrics.totalRequests
-        : 0;
+        : 0
   }
 
   getMetrics(): PerformanceMetrics {
@@ -116,7 +116,7 @@ class PerformanceMonitor {
       responseTimes: [],
       lastReset: new Date()
     }
-    this.requestTimestamps = [];
+    this.requestTimestamps = []
   }
 }
 
@@ -156,13 +156,13 @@ export function getHealthMetrics() {
       averageResponseTime: "${metrics.averageResponseTime.toFixed(2)}ms",
       p95ResponseTime: "${metrics.p95ResponseTime.toFixed(2)}ms",
       p99ResponseTime: "${metrics.p99ResponseTime.toFixed(2)}ms",
-      errorRate: "${(metrics.errorRate * 100).toFixed(2)}%";
+      errorRate: "${(metrics.errorRate * 100).toFixed(2)}%"
     },
     memory: {
       rss: "${(memoryUsage.rss / 1024 / 1024).toFixed(2)}MB",
       heapTotal: "${(memoryUsage.heapTotal / 1024 / 1024).toFixed(2)}MB",
       heapUsed: "${(memoryUsage.heapUsed / 1024 / 1024).toFixed(2)}MB",
-      external: "${(memoryUsage.external / 1024 / 1024).toFixed(2)}MB";
+      external: "${(memoryUsage.external / 1024 / 1024).toFixed(2)}MB"
     },
     lastReset: metrics.lastReset
   }
@@ -219,7 +219,7 @@ export function timeoutMiddleware(timeout: number = 30000) {
       if (!res.headersSent) {
         res.status(408).json({
           error: "Request Timeout",
-          message: "The request took too long to process";
+          message: "The request took too long to process"
         })
       }
     }, timeout)

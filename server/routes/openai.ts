@@ -6,7 +6,7 @@ dotenv.config()
 
 const router = express.Router()
 
-const openai = new OpenAIApi(;
+const openai = new OpenAIApi(
   new Configuration({ apiKey: process.env.OPENAI_API_KEY })
 )
 
@@ -17,15 +17,15 @@ router.post("/ask", async (req, res) => {
 
   try {
     const completion = await openai.createChatCompletion({
-      model: "gpt-4",;
-      messages: [{ role: "user", content: prompt }];
+      model: "gpt-4",
+      messages: [{ role: "user", content: prompt }]
     })
 
     const reply = completion.data.choices[0].message?.content || "No response.";
     res.json({ reply })
   } catch (err) {
     res.status(500).json({ error: "OpenAI Error", details: err })
-  };
+  }
 })
 
 export default router

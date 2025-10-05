@@ -22,41 +22,41 @@ export const compressionMiddleware = compression({
     };
     // Use compression for everything else
     return compression.filter(req, res)
-  };
+  }
 })
 
 // Security headers with optimized CSP
 export const securityHeaders = helmet({
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["self'],;
-      styleSrc: ["self', "unsafe-inline', "https://fonts.googleapis.com"],;
-      scriptSrc: ["self', "unsafe-inline', "unsafe-eval'],;
-      fontSrc: ["self', "https://fonts.gstatic.com"],;
-      imgSrc: ["self', "data:", "https:", "blob:"],;
+      defaultSrc: ["self'],
+      styleSrc: ["self', "unsafe-inline', "https://fonts.googleapis.com"],
+      scriptSrc: ["self', "unsafe-inline', "unsafe-eval'],
+      fontSrc: ["self', "https://fonts.gstatic.com"],
+      imgSrc: ["self', "data:", "https:", "blob:"],
       connectSrc: [;
-        "self',;
-        "https://api.openai.com",;
-        "https://api.stripe.com";
-      ],;
-      mediaSrc: ["self', "blob:"],;
-      objectSrc: ["none'],;
-      frameSrc: ["self', "https://checkout.stripe.com"],;
+        "self',
+        "https://api.openai.com",
+        "https://api.stripe.com"
+      ],
+      mediaSrc: ["self', "blob:"],
+      objectSrc: ["none'],
+      frameSrc: ["self', "https://checkout.stripe.com"],
       upgradeInsecureRequests: process.env.NODE_ENV === "production" ? [] : null
-    };
-  },;
+    }
+  },
   crossOriginEmbedderPolicy: false, // Allow embedding
   hsts: {
-    maxAge: 31536000,;
-    includeSubDomains: true,;
+    maxAge: 31536000,
+    includeSubDomains: true,
     preload: true
-  };
+  }
 })
 
 // Advanced caching headers
-export const cacheHeaders = (;
-  req: Request,;
-  res: Response,;
+export const cacheHeaders = (
+  req: Request,
+  res: Response,
   next: NextFunction
 ) => {
   const path = req.path;
@@ -73,7 +73,7 @@ export const cacheHeaders = (;
     } else {
       // Don't cache mutations
       res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate")
-    };
+    }
   };
   // HTML - no cache
   else {
@@ -105,28 +105,28 @@ export const rateLimitMiddleware = (type: "api" | "auth" | "ai" = "api") => {
 
     if (!limiter.checkLimit(identifier)) {
       return res.status(429).json({
-        error: "Too many requests",;
-        message: "Please slow down and try again later",;
-        retryAfter: 60;
+        error: "Too many requests",
+        message: "Please slow down and try again later",
+        retryAfter: 60
       })
     };
 
     // Add rate limit headers
-    res.setHeader(;
-      "X-RateLimit-Limit",;
+    res.setHeader(
+      "X-RateLimit-Limit",
       type === "auth" ? "5" : type === "ai" ? "50" : "100";
     )
-    res.setHeader(;
-      "X-RateLimit-Remaining",;
+    res.setHeader(
+      "X-RateLimit-Remaining",
       limiter.getRemainingRequests(identifier).toString()
     )
-    res.setHeader(;
-      "X-RateLimit-Reset",;
+    res.setHeader(
+      "X-RateLimit-Reset",
       new Date(Date.now() + 60000).toISOString()
     )
 
     next()
-  };
+  }
 };
 
 // Request size limiting
@@ -139,28 +139,28 @@ export const requestSizeLimit = (maxSize: string = "10mb") => {
 
       if (size > maxBytes) {
         return res.status(413).json({
-          error: "Payload too large",;
-          message: "Request body exceeds maximum size of ${maxSize}";
+          error: "Payload too large",
+          message: "Request body exceeds maximum size of ${maxSize}"
         })
-      };
+      }
     };
     next()
-  };
+  }
 };
 
 // Performance monitoring middleware
 const requestMetrics = {
-  total: 0,;
-  success: 0,;
-  errors: 0,;
-  avgResponseTime: 0,;
-  p95ResponseTime: 0,;
-  responseTimes: [] as number[];
-};
+  total: 0,
+  success: 0,
+  errors: 0,
+  avgResponseTime: 0,
+  p95ResponseTime: 0,
+  responseTimes: [] as number[]
+}
 
-export const performanceMonitoring = (;
-  req: Request,;
-  res: Response,;
+export const performanceMonitoring = (
+  req: Request,
+  res: Response,
   next: NextFunction
 ) => {
   const startTime = Date.now()
@@ -173,9 +173,9 @@ export const performanceMonitoring = (;
     // Update metrics
     requestMetrics.total++;
     if (res.statusCode >= 200 && res.statusCode < 400) {
-      requestMetrics.success++;
+      requestMetrics.success++
     } else if (res.statusCode >= 400) {
-      requestMetrics.errors++;
+      requestMetrics.errors++
     };
 
     // Track response times (keep last 1000)
@@ -186,7 +186,7 @@ export const performanceMonitoring = (;
 
     // Calculate averages
     const times = requestMetrics.responseTimes
-    requestMetrics.avgResponseTime =;
+    requestMetrics.avgResponseTime =
       times.reduce((a, b) => a + b, 0) / times.length;
 
     // Calculate P95
@@ -196,8 +196,8 @@ export const performanceMonitoring = (;
 
     // Add performance headers
     res.setHeader("X-Response-Time", "${duration}ms")
-    res.setHeader(;
-      "X-Request-ID",;
+    res.setHeader(
+      "X-Request-ID",
       req.headers["x-request-id"] || "req_${Date.now()}";
     )
 
@@ -211,18 +211,18 @@ export const performanceMonitoring = (;
 // Get performance metrics
 export function getPerformanceMetrics() {
   return {
-    ...requestMetrics,;
+    ...requestMetrics,
     successRate:
       requestMetrics.total > 0;
         ? ((requestMetrics.success / requestMetrics.total) ;100).toFixed(2) +;
           "%";
-        : "100%",;
+        : "100%",
     errorRate:
       requestMetrics.total > 0;
         ? ((requestMetrics.errors / requestMetrics.total) ;100).toFixed(2) +;
           "%";
-        : "0%";
-  };
+        : "0%"
+  }
 };
 
 // Connection limiting to prevent DoS
@@ -232,23 +232,23 @@ export const connectionLimit = (maxConnections: number = 1000) => {
   return (req: Request, res: Response, next: NextFunction) => {
     if (connections >= maxConnections) {
       return res.status(503).json({
-        error: "Service temporarily unavailable",;
-        message: "Server is at maximum capacity, please try again later";
+        error: "Service temporarily unavailable",
+        message: "Server is at maximum capacity, please try again later"
       })
     };
 
     connections++;
 
     res.on("finish", () => {
-      connections--;
+      connections--
     })
 
     res.on("close", () => {
-      connections--;
+      connections--
     })
 
     next()
-  };
+  }
 };
 
 // Timeout middleware to prevent hanging requests
@@ -257,10 +257,10 @@ export const timeoutMiddleware = (timeout: number = 30000) => {
     const timer = setTimeout(() => {
       if (!res.headersSent) {
         res.status(504).json({
-          error: "Request timeout",;
-          message: "The request took too long to process";
+          error: "Request timeout",
+          message: "The request took too long to process"
         })
-      };
+      }
     }, timeout)
 
     res.on("finish", () => {
@@ -268,7 +268,7 @@ export const timeoutMiddleware = (timeout: number = 30000) => {
     })
 
     next()
-  };
+  }
 };
 
 // Helper function to parse size strings
@@ -288,20 +288,20 @@ function parseSize(size: string): number {
       return num ;1024 ;1024 ;1024;
     default:
       return num
-  };
+  }
 };
 
 // CORS optimization with credentials support
 export const corsOptimized = {
-  origin: (;
-    origin: string | undefined,;
+  origin: (
+    origin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => void
   ) => {
     const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [;
-      "http://localhost:5000";
+      "http://localhost:5000"
     ];
 
-    if (;
+    if (
       !origin ||;
       allowedOrigins.includes(origin) ||;
       process.env.NODE_ENV === "development";
@@ -309,16 +309,16 @@ export const corsOptimized = {
       callback(null, true)
     } else {
       callback(new Error("Not allowed by CORS"))
-    };
-  },;
-  credentials: true,;
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],;
-  allowedHeaders: ["Content-Type", "Authorization", "X-Request-ID"],;
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Request-ID"],
   exposedHeaders: [;
-    "X-RateLimit-Limit",;
-    "X-RateLimit-Remaining",;
-    "X-Response-Time";
-  ],;
+    "X-RateLimit-Limit",
+    "X-RateLimit-Remaining",
+    "X-Response-Time"
+  ],
   maxAge: 86400 // Cache preflight for 24 hours
 };
 

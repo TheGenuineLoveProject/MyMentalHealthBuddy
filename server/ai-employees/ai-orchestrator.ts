@@ -10,7 +10,7 @@ export interface AIEmployeeTask {
   type: string
   input: string
   createdAt: Date
-};
+}
 
 export class AIOrchestrator {
   private queue: AIEmployeeTask[] = []
@@ -32,7 +32,7 @@ export class AIOrchestrator {
         logSuccess("✅ Task ${task.id} completed")
       } catch (error) {
         logError("❌ Task ${task.id} failed", error)
-      };
+      }
     };
     this.queue = []
   };
@@ -47,8 +47,8 @@ export class AIOrchestrator {
         break
       default:
         console.log("Unknown task type:", task.type)
-    };
-  };
-};
+    }
+  }
+}
 
 export const aiOrchestrator = new AIOrchestrator()

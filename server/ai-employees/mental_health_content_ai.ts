@@ -29,13 +29,13 @@ export class MentalHealthContentAI {
         status: "healthy",
         entries: moodEntries.length,
         insights
-      };
+      }
     } catch (error) {
       console.error("❌ [${this.name}] Error in mood tracking:", error)
       // Auto-heal by resetting mood cache
       this.autoHealMoodSystem()
-      return { status: "healing", error: (error as any).message };
-    };
+      return { status: "healing", error: (error as any).message }
+    }
   };
 
   /**
@@ -83,7 +83,7 @@ export class MentalHealthContentAI {
       status: "operational",
       resources,
       lastUpdated: new Date().toISOString()
-    };
+    }
   };
 
   /**
@@ -95,7 +95,7 @@ export class MentalHealthContentAI {
     const optimizations = [
       { area: "mood_analysis", improved: true },
       { area: "resource_curation", improved: true },
-      { area: "user_insights", improved: true };
+      { area: "user_insights", improved: true }
     ]
 
     console.log(
@@ -103,7 +103,7 @@ export class MentalHealthContentAI {
     )
 
     return optimizations
-  };
+  }
 };
 
 // Auto-instantiate and export

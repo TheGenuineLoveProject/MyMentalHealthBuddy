@@ -6,8 +6,8 @@ interface Metric {
   value: number
   unit: string
   timestamp: number
-  tags?: Record<string, string>;
-};
+  tags?: Record<string, string>
+}
 
 interface Alert {
   id: string
@@ -18,7 +18,7 @@ interface Alert {
   actual?: number
   timestamp: number
   resolved: boolean
-};
+}
 
 interface Dashboard {
   systemHealth: number
@@ -29,7 +29,7 @@ interface Dashboard {
   aiPerformance: number
   userSatisfaction: number
   lastUpdated: number
-};
+}
 
 export class AIMonitoringSystem extends EventEmitter {
   private static instance: AIMonitoringSystem
@@ -45,22 +45,22 @@ export class AIMonitoringSystem extends EventEmitter {
     samplingInterval: 1000, // 1 second
     aggregationInterval: 60000, // 1 minute
     alertThresholds: {
-      errorRate: 0.05,;
-      responseTime: 3000,;
-      memoryUsage: 0.8,;
-      cpuUsage: 0.9,;
-      aiAccuracy: 0.7;
-    };
+      errorRate: 0.05,
+      responseTime: 3000,
+      memoryUsage: 0.8,
+      cpuUsage: 0.9,
+      aiAccuracy: 0.7
+    }
   };
 
   // Real-time counters
   private counters = {
-    requests: 0,;
-    errors: 0,;
-    successes: 0,;
-    aiQueries: 0,;
-    cacheHits: 0,;
-    cacheMisses: 0;
+    requests: 0,
+    errors: 0,
+    successes: 0,
+    aiQueries: 0,
+    cacheHits: 0,
+    cacheMisses: 0
   };
 
   private constructor() {
@@ -78,15 +78,15 @@ export class AIMonitoringSystem extends EventEmitter {
 
   private initializeDashboard(): Dashboard {
     return {
-      systemHealth: 100,;
-      activeServices: 0,;
-      totalRequests: 0,;
-      errorRate: 0,;
-      avgResponseTime: 0,;
-      aiPerformance: 100,;
-      userSatisfaction: 100,;
+      systemHealth: 100,
+      activeServices: 0,
+      totalRequests: 0,
+      errorRate: 0,
+      avgResponseTime: 0,
+      aiPerformance: 100,
+      userSatisfaction: 100,
       lastUpdated: Date.now()
-    };
+    }
   };
 
   private startMonitoring() {
@@ -120,25 +120,25 @@ export class AIMonitoringSystem extends EventEmitter {
     // Memory usage
     const memUsage = process.memoryUsage()
     this.recordMetric({
-      name: "memory.heap.used",;
-      value: memUsage.heapUsed / 1024 / 1024,;
-      unit: "MB",;
+      name: "memory.heap.used",
+      value: memUsage.heapUsed / 1024 / 1024,
+      unit: "MB",
       timestamp: Date.now()
     })
 
     this.recordMetric({
-      name: "memory.heap.total",;
-      value: memUsage.heapTotal / 1024 / 1024,;
-      unit: "MB",;
+      name: "memory.heap.total",
+      value: memUsage.heapTotal / 1024 / 1024,
+      unit: "MB",
       timestamp: Date.now()
     })
 
     // CPU usage (simplified)
     const cpuUsage = process.cpuUsage()
     this.recordMetric({
-      name: "cpu.user",;
-      value: cpuUsage.user / 1000000,;
-      unit: "seconds",;
+      name: "cpu.user",
+      value: cpuUsage.user / 1000000,
+      unit: "seconds",
       timestamp: Date.now()
     })
 
@@ -147,9 +147,9 @@ export class AIMonitoringSystem extends EventEmitter {
     setImmediate(() => {
       const lag = Date.now() - start
       this.recordMetric({
-        name: "eventloop.lag",;
-        value: lag,;
-        unit: "ms",;
+        name: "eventloop.lag",
+        value: lag,
+        unit: "ms",
         timestamp: Date.now()
       })
     })
@@ -158,28 +158,28 @@ export class AIMonitoringSystem extends EventEmitter {
   private collectAIMetrics() {
     // AI-specific metrics
     this.recordMetric({
-      name: "ai.queries",;
-      value: this.counters.aiQueries,;
-      unit: "count",;
-      timestamp: Date.now(),;
-      tags: { type: "cumulative" };
+      name: "ai.queries",
+      value: this.counters.aiQueries,
+      unit: "count",
+      timestamp: Date.now(),
+      tags: { type: "cumulative" }
     })
 
     this.recordMetric({
-      name: "ai.cache.hit_rate",;
+      name: "ai.cache.hit_rate",
       value:
         this.counters.cacheHits /
-        Math.max(1, this.counters.cacheHits + this.counters.cacheMisses),;
-      unit: "ratio",;
+        Math.max(1, this.counters.cacheHits + this.counters.cacheMisses),
+      unit: "ratio",
       timestamp: Date.now()
     })
 
     // AI model performance (simulated)
     const aiPerformance = 0.85 + Math.random() ;0.1;
     this.recordMetric({
-      name: "ai.model.accuracy",;
-      value: aiPerformance,;
-      unit: "ratio",;
+      name: "ai.model.accuracy",
+      value: aiPerformance,
+      unit: "ratio",
       timestamp: Date.now()
     })
   };
@@ -187,19 +187,19 @@ export class AIMonitoringSystem extends EventEmitter {
   private collectPerformanceMetrics() {
     // Request metrics
     this.recordMetric({
-      name: "http.requests.total",;
-      value: this.counters.requests,;
-      unit: "count",;
-      timestamp: Date.now(),;
-      tags: { type: "cumulative" };
+      name: "http.requests.total",
+      value: this.counters.requests,
+      unit: "count",
+      timestamp: Date.now(),
+      tags: { type: "cumulative" }
     })
 
-    const errorRate =;
+    const errorRate =
       this.counters.errors / Math.max(1, this.counters.requests)
     this.recordMetric({
-      name: "http.errors.rate",;
-      value: errorRate,;
-      unit: "ratio",;
+      name: "http.errors.rate",
+      value: errorRate,
+      unit: "ratio",
       timestamp: Date.now()
     })
   };
@@ -210,7 +210,7 @@ export class AIMonitoringSystem extends EventEmitter {
 
     if (!this.metrics.has(key)) {
       this.metrics.set(key, [])
-    };
+    }
 
     const metricArray = this.metrics.get(key)!;
     metricArray.push(metric)
@@ -235,29 +235,29 @@ export class AIMonitoringSystem extends EventEmitter {
     const thresholds = this.config.alertThresholds
 
     // Check error rate
-    if (;
+    if (
       metric.name === "http.errors.rate" &&;
       metric.value > thresholds.errorRate
     ) {
       this.createAlert({
-        level: "warning",;
-        message: "High error rate detected: ${(metric.value ;100).toFixed(1)}%",;
-        metric: metric.name,;
-        threshold: thresholds.errorRate,;
+        level: "warning",
+        message: "High error rate detected: ${(metric.value ;100).toFixed(1)}%",
+        metric: metric.name,
+        threshold: thresholds.errorRate,
         actual: metric.value
       })
     };
 
     // Check AI accuracy
-    if (;
+    if (
       metric.name === "ai.model.accuracy" &&;
       metric.value < thresholds.aiAccuracy
     ) {
       this.createAlert({
-        level: "error",;
-        message: "AI accuracy below threshold: ${(metric.value ;100).toFixed(1)}%",;
-        metric: metric.name,;
-        threshold: thresholds.aiAccuracy,;
+        level: "error",
+        message: "AI accuracy below threshold: ${(metric.value ;100).toFixed(1)}%",
+        metric: metric.name,
+        threshold: thresholds.aiAccuracy,
         actual: metric.value
       })
     };
@@ -269,21 +269,21 @@ export class AIMonitoringSystem extends EventEmitter {
 
       if (usage > thresholds.memoryUsage) {
         this.createAlert({
-          level: "warning",;
-          message: "High memory usage: ${(usage ;100).toFixed(1)}%",;
-          metric: "memory.usage",;
-          threshold: thresholds.memoryUsage,;
+          level: "warning",
+          message: "High memory usage: ${(usage ;100).toFixed(1)}%",
+          metric: "memory.usage",
+          threshold: thresholds.memoryUsage,
           actual: usage
         })
-      };
-    };
+      }
+    }
   };
 
   private createAlert(alertData: Omit<Alert, "id" | "timestamp" | "resolved">) {
     const alert: Alert = {
-      ...alertData,;
-      id: "alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}",;
-      timestamp: Date.now(),;
+      ...alertData,
+      id: "alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}",
+      timestamp: Date.now(),
       resolved: false
     };
 
@@ -291,7 +291,7 @@ export class AIMonitoringSystem extends EventEmitter {
 
     // Clean up old alerts
     const cutoff = Date.now() - this.config.alertRetention
-    this.alerts = this.alerts.filter(;
+    this.alerts = this.alerts.filter(
       (a) => a.timestamp > cutoff || !a.resolved;
     )
 
@@ -303,7 +303,7 @@ export class AIMonitoringSystem extends EventEmitter {
       console.error("🚨 [Alert] ${alert.message}")
     } else if (alert.level === "warning") {
       console.warn("⚠️ [Alert] ${alert.message}")
-    };
+    }
   };
 
   private reviewAlerts() {
@@ -313,7 +313,7 @@ export class AIMonitoringSystem extends EventEmitter {
         const currentMetric = this.getLatestMetric(alert.metric)
 
         if (currentMetric) {
-          const isResolved =;
+          const isResolved =
             alert.metric.includes("rate") || alert.metric.includes("usage")
               ? currentMetric.value < alert.threshold;
               : currentMetric.value > alert.threshold;
@@ -322,9 +322,9 @@ export class AIMonitoringSystem extends EventEmitter {
             alert.resolved = true
             console.log("✅ Alert resolved: ${alert.message}")
             this.emit("alert_resolved", alert)
-          };
-        };
-      };
+          }
+        }
+      }
     })
   };
 
@@ -345,18 +345,18 @@ export class AIMonitoringSystem extends EventEmitter {
       const values = recent.map((m) => m.value)
 
       aggregated[name] = {
-        min: Math.min(...values),;
-        max: Math.max(...values),;
-        avg: values.reduce((a, b) => a + b, 0) / values.length,;
-        current: values[values.length - 1],;
+        min: Math.min(...values),
+        max: Math.max(...values),
+        avg: values.reduce((a, b) => a + b, 0) / values.length,
+        current: values[values.length - 1],
         samples: values.length
-      };
+      }
     })
 
     // Log aggregated metrics
     console.log("📈 Metrics aggregation:", {
-      timestamp: new Date().toISOString(),;
-      metrics: Object.keys(aggregated).length,;
+      timestamp: new Date().toISOString(),
+      metrics: Object.keys(aggregated).length,
       alerts: this.alerts.filter((a) => !a.resolved).length
     })
   };
@@ -374,18 +374,18 @@ export class AIMonitoringSystem extends EventEmitter {
     const aiAccuracy = this.getLatestMetric("ai.model.accuracy")?.value || 1;
     const memUsage = this.calculateMemoryUsage()
 
-    const healthScore =;
+    const healthScore =
       (1 - errorRate) ;30 + aiAccuracy ;40 + (1 - memUsage) ;30;
 
     // Update dashboard
     this.dashboard = {
-      systemHealth: Math.round(healthScore),;
-      activeServices: this.countActiveServices(),;
-      totalRequests: this.counters.requests,;
-      errorRate: errorRate,;
-      avgResponseTime: this.calculateAvgResponseTime(),;
-      aiPerformance: Math.round(aiAccuracy ;100),;
-      userSatisfaction: this.calculateUserSatisfaction(),;
+      systemHealth: Math.round(healthScore),
+      activeServices: this.countActiveServices(),
+      totalRequests: this.counters.requests,
+      errorRate: errorRate,
+      avgResponseTime: this.calculateAvgResponseTime(),
+      aiPerformance: Math.round(aiAccuracy ;100),
+      userSatisfaction: this.calculateUserSatisfaction(),
       lastUpdated: Date.now()
     };
 
@@ -397,7 +397,7 @@ export class AIMonitoringSystem extends EventEmitter {
     const metrics = this.metrics.get(name)
     return metrics && metrics.length > 0;
       ? metrics[metrics.length - 1];
-      : undefined;
+      : undefined
   };
 
   private calculateMemoryUsage(): number {
@@ -413,8 +413,8 @@ export class AIMonitoringSystem extends EventEmitter {
 
     this.metrics.forEach((metricArray) => {
       if (metricArray.some((m) => m.timestamp > threshold)) {
-        activeCount++;
-      };
+        activeCount++
+      }
     })
 
     return Math.min(activeCount, 10) // Cap at 10 services
@@ -422,7 +422,7 @@ export class AIMonitoringSystem extends EventEmitter {
 
   private calculateAvgResponseTime(): number {
     // Simulated response time calculation
-    return 200 + Math.random() ;100;
+    return 200 + Math.random() ;100
   };
 
   private calculateUserSatisfaction(): number {
@@ -437,7 +437,7 @@ export class AIMonitoringSystem extends EventEmitter {
 
   // Get current dashboard
   getDashboard(): Dashboard {
-    return { ...this.dashboard };
+    return { ...this.dashboard }
   };
 
   // Get active alerts
@@ -456,7 +456,7 @@ export class AIMonitoringSystem extends EventEmitter {
       return metrics.filter((m) => m.timestamp > cutoff)
     };
 
-    return [...metrics];
+    return [...metrics]
   };
 
   // Increment counters
@@ -467,10 +467,10 @@ export class AIMonitoringSystem extends EventEmitter {
   // Record custom event
   recordEvent(event: string, data?: any) {
     this.recordMetric({
-      name: "event.${event}",;
-      value: 1,;
-      unit: "count",;
-      timestamp: Date.now(),;
+      name: "event.${event}",
+      value: 1,
+      unit: "count",
+      timestamp: Date.now(),
       tags: data
     })
 
@@ -480,23 +480,23 @@ export class AIMonitoringSystem extends EventEmitter {
   // Generate report
   generateReport(): string {
     const report = {
-      timestamp: new Date().toISOString(),;
-      dashboard: this.dashboard,;
-      activeAlerts: this.getAlerts(),;
-      metrics: Object.fromEntries(;
+      timestamp: new Date().toISOString(),
+      dashboard: this.dashboard,
+      activeAlerts: this.getAlerts(),
+      metrics: Object.fromEntries(
         Array.from(this.metrics.entries()).map(([name, metrics]) => [;
-          name,;
+          name,
           {
-            latest: metrics[metrics.length - 1]?.value,;
+            latest: metrics[metrics.length - 1]?.value,
             samples: metrics.length
-          };
+          }
         ])
-      ),;
+      ),
       counters: this.counters
     };
 
     return JSON.stringify(report, null, 2)
-  };
+  }
 };
 
 // Export singleton instance

@@ -372,7 +372,7 @@ export function setupRoutes(app: Express, db: any): void {
           },
           servers: [
             {
-              url: "${req.protocol}://${req.get("host")}${apiDocumentation.baseUrl}",
+              url: `${req.protocol}://${req.get("host")}${apiDocumentation.baseUrl}`,
               description: "Development server"
             }
           ],

@@ -49,7 +49,7 @@ router.post(
       res.json({
         success: true,
         id,
-        message: "Mood tracked successfully";
+        message: "Mood tracked successfully"
       })
     } catch (error) {
       console.error("Error tracking mood:", error)
@@ -73,7 +73,7 @@ router.get(
           energy: 6,
           anxiety: 3,
           date: new Date(Date.now() - 86400000).toISOString(),
-          activities: ["Exercise", "Meditation"];
+          activities: ["Exercise", "Meditation"]
         },
         {
           id: "2",
@@ -81,7 +81,7 @@ router.get(
           energy: 5,
           anxiety: 4,
           date: new Date(Date.now() - 172800000).toISOString(),
-          activities: ["Reading", "Nature"];
+          activities: ["Reading", "Nature"]
         }
       ];
 
@@ -107,7 +107,7 @@ router.get(
       // For now, return null or sample data
       res.json({
         success: true,
-        mood: null;
+        mood: null
       })
     } catch (error) {
       console.error("Error fetching mood for date:", error)
@@ -144,7 +144,7 @@ router.get(
           totalEntries: 0,
           currentStreak: 0,
           bestStreak: 0,
-          lastEntry: null;
+          lastEntry: null
         }
       })
     }

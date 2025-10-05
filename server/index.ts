@@ -9,6 +9,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import { loadEnv } from "./server/helpers/env.js";
+import { db } from "./db.js";
+import { setupRoutes } from "./routes.js";
 
 loadEnv();
 dotenv.config();
@@ -33,8 +35,10 @@ app.use(
 );
 
 app.get("/api/health", (_req: Request, res: Response) => {
-  res.json({ status: "ok", message: "MyMentalHealthBuddy backend is alive!" });
+  res.json({ status: "ok", message: "MyMentalHealthBuddy backend is alive!" })
 });
+
+setupRoutes(app, db);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,16 +46,16 @@ const __dirname = path.dirname(__filename);
 if (!isDev) {
   app.use(express.static(path.join(__dirname, "../client/dist")));
   app.get("*", (_req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-  });
+    res.sendFile(path.join(__dirname, "../client/dist/index.html"))
+  })
 }
 
 app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   console.error("❌ Server error:", err);
-  res.status(500).json({ error: err.message || "Internal Server Error" });
+  res.status(500).json({ error: err.message || "Internal Server Error" })
 });
 
 const server = createServer(app);
 server.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`)
 });

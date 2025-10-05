@@ -25,49 +25,49 @@ export class AppError extends Error {
 export class ValidationError extends AppError {
   constructor(message: string, details?: any) {
     super(message, 400)
-    this.code = "VALIDATION_ERROR";
+    this.code = "VALIDATION_ERROR"
   }
 }
 
 export class NotFoundError extends AppError {
   constructor(resource: string = "Resource") {
     super("${resource} not found", 404)
-    this.code = "NOT_FOUND";
+    this.code = "NOT_FOUND"
   }
 }
 
 export class UnauthorizedError extends AppError {
   constructor(message: string = "Unauthorized access") {
     super(message, 401)
-    this.code = "UNAUTHORIZED";
+    this.code = "UNAUTHORIZED"
   }
 }
 
 export class AuthenticationError extends AppError {
   constructor(message: string = "Authentication failed") {
     super(message, 401)
-    this.code = "AUTHENTICATION_ERROR";
+    this.code = "AUTHENTICATION_ERROR"
   }
 }
 
 export class ForbiddenError extends AppError {
   constructor(message: string = "Forbidden access") {
     super(message, 403)
-    this.code = "FORBIDDEN";
+    this.code = "FORBIDDEN"
   }
 }
 
 export class ConflictError extends AppError {
   constructor(message: string = "Resource conflict") {
     super(message, 409)
-    this.code = "CONFLICT";
+    this.code = "CONFLICT"
   }
 }
 
 export class RateLimitError extends AppError {
   constructor(message: string = "Too many requests") {
     super(message, 429)
-    this.code = "RATE_LIMIT_EXCEEDED";
+    this.code = "RATE_LIMIT_EXCEEDED"
   }
 }
 
@@ -89,7 +89,7 @@ export const errorHandler = (
     method: req.method,
     timestamp: new Date().toISOString(),
     userAgent: req.get("User-Agent"),
-    ip: req.ip;
+    ip: req.ip
   })
 
   // Mongoose bad ObjectId
@@ -163,7 +163,7 @@ export const errorHandler = (
 
   // Add request ID if available
   if (req.headers["x-request-id"]) {
-    errorResponse.error.requestId = req.headers["x-request-id"];
+    errorResponse.error.requestId = req.headers["x-request-id"]
   }
 
   res.status(statusCode).json(errorResponse)
@@ -199,23 +199,23 @@ function getUserFriendlyMessage(error: any, defaultMessage: string): string {
     CONFLICT: "This resource already exists.",
     RATE_LIMIT_EXCEEDED:
       "Too many attempts. Please slow down and try again later.",
-    INTERNAL_ERROR: "Something went wrong on our end. Please try again later.";
+    INTERNAL_ERROR: "Something went wrong on our end. Please try again later."
   }
 
   // Check for specific error scenarios
   if (error.message?.toLowerCase().includes("duplicate")) {
-    return "This information is already registered. Please use different details.";
+    return "This information is already registered. Please use different details."
   }
 
   if (
     error.message?.toLowerCase().includes("network") ||;
     error.message?.toLowerCase().includes("connection")
   ) {
-    return "Connection issue detected. Please check your internet and try again.";
+    return "Connection issue detected. Please check your internet and try again."
   }
 
   if (error.message?.toLowerCase().includes("timeout")) {
-    return "The request took too long. Please try again.";
+    return "The request took too long. Please try again."
   }
 
   return (
@@ -232,7 +232,7 @@ export const requestLogger = (
   next: NextFunction
 ): void => {
   const start = Date.now()
-  const requestId =;
+  const requestId =
     req.headers["x-request-id"] ||;
     "req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}";
 

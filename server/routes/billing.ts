@@ -10,13 +10,13 @@ const router = express.Router()
 router.post("/create-subscription", async (req, res) => {
   if (!stripe) {
     return res.status(503).json({
-      error: "Billing service unavailable - Stripe not configured";
+      error: "Billing service unavailable - Stripe not configured"
     })
   }
 
   if (!process.env.STRIPE_PRICE_ID) {
     return res.status(503).json({
-      error: "Billing service unavailable - Price ID not configured";
+      error: "Billing service unavailable - Price ID not configured"
     })
   }
 
@@ -39,7 +39,7 @@ router.post("/create-subscription", async (req, res) => {
           subscriptionId: subscription.id,
           clientSecret: (subscription.latest_invoice as any)?.payment_intent
             ?.client_secret,
-          status: "existing";
+          status: "existing"
         })
       }
     }
@@ -52,7 +52,7 @@ router.post("/create-subscription", async (req, res) => {
         email: userEmail,
         metadata: { userId }
       })
-      stripeCustomerId = customer.id;
+      stripeCustomerId = customer.id
     }
 
     // Create a subscription with payment intent
@@ -61,7 +61,7 @@ router.post("/create-subscription", async (req, res) => {
       items: [{ price: process.env.STRIPE_PRICE_ID }],
       payment_behavior: "default_incomplete",
       payment_settings: { save_default_payment_method: "on_subscription" },
-      expand: ["latest_invoice.payment_intent"];
+      expand: ["latest_invoice.payment_intent"]
     })
 
     // Update user with Stripe info
@@ -79,7 +79,7 @@ router.post("/create-subscription", async (req, res) => {
     res.json({
       subscriptionId: subscription.id,
       clientSecret,
-      status: "new";
+      status: "new"
     })
   } catch (error) {
     console.error("Error creating subscription:", error)
@@ -91,18 +91,18 @@ router.post("/create-subscription", async (req, res) => {
 router.post("/create-checkout-session", async (req, res) => {
   if (!stripe) {
     return res.status(503).json({
-      error: "Billing service unavailable - Stripe not configured";
+      error: "Billing service unavailable - Stripe not configured"
     })
   }
 
   if (!process.env.STRIPE_PRICE_ID) {
     return res.status(503).json({
-      error: "Billing service unavailable - Price ID not configured";
+      error: "Billing service unavailable - Price ID not configured"
     })
   }
 
   const { priceId, mode = "subscription" } = req.body;
-  const baseUrl =;
+  const baseUrl =
     process.env.BASE_URL || "http://localhost:${process.env.PORT || 5000}";
 
   try {
@@ -111,14 +111,14 @@ router.post("/create-checkout-session", async (req, res) => {
       line_items: [;
         {
           price: priceId || process.env.STRIPE_PRICE_ID,
-          quantity: 1;
+          quantity: 1
         }
       ],
       mode: mode as any,
       success_url: "${baseUrl}/subscription/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "${baseUrl}/subscription/cancel",
       metadata: {
-        userId: req.body.userId || "anonymous";
+        userId: req.body.userId || "anonymous"
       }
     })
     res.json({ url: session.url })
@@ -229,14 +229,14 @@ router.get("/subscription-status/:userId", async (req, res) => {
     if (!user.stripeSubscriptionId) {
       return res.json({
         status: "inactive",
-        tier: "free";
+        tier: "free"
       })
     }
 
     if (!stripe) {
       return res.json({
         status: user.subscriptionStatus || "inactive",
-        tier: user.subscriptionTier || "free";
+        tier: user.subscriptionTier || "free"
       })
     }
 
@@ -248,7 +248,7 @@ router.get("/subscription-status/:userId", async (req, res) => {
       status: subscription.status,
       tier: user.subscriptionTier || "premium",
       currentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      cancelAtPeriodEnd: subscription.cancel_at_period_end;
+      cancelAtPeriodEnd: subscription.cancel_at_period_end
     })
   } catch (error) {
     console.error("Error getting subscription status:", error)
@@ -260,7 +260,7 @@ router.get("/subscription-status/:userId", async (req, res) => {
 router.post("/cancel-subscription", async (req, res) => {
   if (!stripe) {
     return res.status(503).json({
-      error: "Billing service unavailable";
+      error: "Billing service unavailable"
     })
   }
 

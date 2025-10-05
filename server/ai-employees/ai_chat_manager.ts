@@ -31,7 +31,7 @@ export class AIChatManager {
         success: true,
         response,
         timestamp: new Date().toISOString()
-      };
+      }
     } catch (error) {
       console.error(
         "❌ [${this.name}] Chat error, activating fallback:",
@@ -46,8 +46,8 @@ export class AIChatManager {
         response: fallbackResponse,
         timestamp: new Date().toISOString(),
         mode: "fallback"
-      };
-    };
+      }
+    }
   };
 
   /**
@@ -56,7 +56,7 @@ export class AIChatManager {
   private cacheConversation(userId: string, message: string, response: string) {
     if (!this.conversationCache.has(userId)) {
       this.conversationCache.set(userId, [])
-    };
+    }
 
     const history = this.conversationCache.get(userId)
     history.push({ message, response, timestamp: Date.now() })
@@ -64,7 +64,7 @@ export class AIChatManager {
     // Keep only last 10 messages for memory efficiency
     if (history.length > 10) {
       history.shift()
-    };
+    }
   };
 
   /**
@@ -99,13 +99,13 @@ export class AIChatManager {
         this.conversationCache.delete(userId)
       } else {
         this.conversationCache.set(userId, recentMessages)
-      };
+      }
     })
 
     console.log(
       "✨ [${this.name}] Chat optimization complete. Cache optimized."
     )
-  };
-};
+  }
+}
 
 export const chatManager = new AIChatManager()

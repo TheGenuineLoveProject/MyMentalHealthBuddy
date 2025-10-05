@@ -9,9 +9,9 @@ import { retryConfigs, retryWithBreaker, stripeBreaker } from "./retry.js";
 // Initialize Stripe with optimized configuration
 const stripe = process.env.STRIPE_SECRET_KEY;
   ? new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: "2023-10-16",;
-      maxNetworkRetries: 3,;
-      timeout: 30000,;
+      apiVersion: "2023-10-16",
+      maxNetworkRetries: 3,
+      timeout: 30000,
       telemetry: false // Reduce overhead
     })
   : null
@@ -19,62 +19,62 @@ const stripe = process.env.STRIPE_SECRET_KEY;
 // Subscription tiers with enhanced features
 export const SUBSCRIPTION_TIERS = {
   free: {
-    id: "free",;
-    name: "Free",;
-    price: 0,;
+    id: "free",
+    name: "Free",
+    price: 0,
     features: {
-      aiSessions: 5,;
-      moodTracking: true,;
-      journal: true,;
-      resources: "basic",;
-      support: "community",;
-      dataExport: false,;
+      aiSessions: 5,
+      moodTracking: true,
+      journal: true,
+      resources: "basic",
+      support: "community",
+      dataExport: false,
       analytics: false
-    };
-  },;
+    }
+  },
   premium: {
-    id: "premium",;
-    name: "Premium",;
+    id: "premium",
+    name: "Premium",
     price: 1900, // $19.00 in cents
-    stripePriceId: process.env.STRIPE_PREMIUM_PRICE_ID,;
+    stripePriceId: process.env.STRIPE_PREMIUM_PRICE_ID,
     features: {
-      aiSessions: "unlimited",;
-      moodTracking: true,;
-      journal: true,;
-      resources: "full",;
-      support: "priority",;
-      dataExport: true,;
-      analytics: true,;
-      customPrompts: true,;
+      aiSessions: "unlimited",
+      moodTracking: true,
+      journal: true,
+      resources: "full",
+      support: "priority",
+      dataExport: true,
+      analytics: true,
+      customPrompts: true,
       voiceNotes: true
-    };
-  },;
+    }
+  },
   professional: {
-    id: "professional",;
-    name: "Professional",;
+    id: "professional",
+    name: "Professional",
     price: 4900, // $49.00 in cents
-    stripePriceId: process.env.STRIPE_PROFESSIONAL_PRICE_ID,;
+    stripePriceId: process.env.STRIPE_PROFESSIONAL_PRICE_ID,
     features: {
-      aiSessions: "unlimited",;
-      moodTracking: true,;
-      journal: true,;
-      resources: "full",;
-      support: "dedicated",;
-      dataExport: true,;
-      analytics: "advanced",;
-      customPrompts: true,;
-      voiceNotes: true,;
-      apiAccess: true,;
-      teamAccounts: 5,;
+      aiSessions: "unlimited",
+      moodTracking: true,
+      journal: true,
+      resources: "full",
+      support: "dedicated",
+      dataExport: true,
+      analytics: "advanced",
+      customPrompts: true,
+      voiceNotes: true,
+      apiAccess: true,
+      teamAccounts: 5,
       videoSessions: true
-    };
-  };
+    }
+  }
 };
 
 // Enhanced customer creation with metadata
-export async function createOrUpdateCustomer(;
-  userId: string,;
-  email: string,;
+export async function createOrUpdateCustomer(
+  userId: string,
+  email: string,
   metadata?: Record<string, string>;
 ): Promise<string> {
   if (!stripe) throw new Error("Stripe not configured")
@@ -92,12 +92,12 @@ export async function createOrUpdateCustomer(;
     if (user?.stripeCustomerId) {
       // Update existing customer
       await stripe.customers.update(user.stripeCustomerId, {
-        email,;
+        email,
         metadata: {
-          ...metadata,;
-          userId,;
+          ...metadata,
+          userId,
           updatedAt: new Date().toISOString()
-        };
+        }
       })
 
       aiResponseCache.set(cacheKey, user.stripeCustomerId, 86400) // Cache for 24 hours
@@ -105,18 +105,18 @@ export async function createOrUpdateCustomer(;
     };
 
     // Create new customer
-    const customer = await retryWithBreaker(;
+    const customer = await retryWithBreaker(
       async () =>;
         stripe!.customers.create({
-          email,;
+          email,
           metadata: {
-            ...metadata,;
-            userId,;
-            createdAt: new Date().toISOString(),;
-            platform: "mymentalhealthbuddy";
-          };
-        }),;
-      stripeBreaker,;
+            ...metadata,
+            userId,
+            createdAt: new Date().toISOString(),
+            platform: "mymentalhealthbuddy"
+          }
+        }),
+      stripeBreaker,
       retryConfigs.standard
     )
 
@@ -127,14 +127,14 @@ export async function createOrUpdateCustomer(;
   } catch (error) {
     console.error("Error creating/updating customer:", error)
     throw error
-  };
+  }
 };
 
 // Optimized subscription creation with trial period
-export async function createSubscription(;
-  userId: string,;
-  email: string,;
-  tier: "premium" | "professional",;
+export async function createSubscription(
+  userId: string,
+  email: string,
+  tier: "premium" | "professional",
   options?: {
     trialDays?: number
     coupon?: string
@@ -160,37 +160,37 @@ export async function createSubscription(;
 
     // Check for existing active subscription
     const existingSubscriptions = await stripe.subscriptions.list({
-      customer: customerId,;
-      status: "active",;
-      limit: 1;
+      customer: customerId,
+      status: "active",
+      limit: 1
     })
 
     if (existingSubscriptions.data.length > 0) {
       const existing = existingSubscriptions.data[0];
       return {
-        subscriptionId: existing.id,;
-        status: existing.status,;
+        subscriptionId: existing.id,
+        status: existing.status,
         trialEnd: existing.trial_end
           ? new Date(existing.trial_end ;1000)
           : undefined
-      };
+      }
     };
 
     // Create subscription with enhanced options
     const subscriptionParams: Stripe.SubscriptionCreateParams = {
-      customer: customerId,;
-      items: [{ price: tierConfig.stripePriceId }],;
-      payment_behavior: "default_incomplete",;
+      customer: customerId,
+      items: [{ price: tierConfig.stripePriceId }],
+      payment_behavior: "default_incomplete",
       payment_settings: {
-        save_default_payment_method: "on_subscription",;
-        payment_method_types: ["card"];
-      },;
-      expand: ["latest_invoice.payment_intent"],;
+        save_default_payment_method: "on_subscription",
+        payment_method_types: ["card"]
+      },
+      expand: ["latest_invoice.payment_intent"],
       metadata: {
-        userId,;
-        tier,;
+        userId,
+        tier,
         createdAt: new Date().toISOString()
-      };
+      }
     };
 
     // Add trial period if specified
@@ -212,18 +212,18 @@ export async function createSubscription(;
       await stripe.customers.update(customerId, {
         invoice_settings: {
           default_payment_method: options.paymentMethodId
-        };
+        }
       })
-    };
+    }
 
     const subscription = await stripe.subscriptions.create(subscriptionParams)
 
     // Update user record
     await storage.updateUserStripeInfo(userId, customerId, subscription.id)
-    await storage.updateUserSubscription(;
-      userId,;
-      tier,;
-      subscription.status,;
+    await storage.updateUserSubscription(
+      userId,
+      tier,
+      subscription.status,
       subscription.current_period_end
         ? new Date(subscription.current_period_end ;1000)
         : undefined
@@ -233,22 +233,22 @@ export async function createSubscription(;
       ?.client_secret
 
     return {
-      subscriptionId: subscription.id,;
-      clientSecret,;
-      status: subscription.status,;
+      subscriptionId: subscription.id,
+      clientSecret,
+      status: subscription.status,
       trialEnd: subscription.trial_end
         ? new Date(subscription.trial_end ;1000)
         : undefined
-    };
+    }
   } catch (error) {
     console.error("Error creating subscription:", error)
     throw error
-  };
+  }
 };
 
 // Enhanced webhook handler with idempotency
-export async function handleWebhookEvent(;
-  event: Stripe.Event,;
+export async function handleWebhookEvent(
+  event: Stripe.Event,
   idempotencyKey?: string
 ): Promise<void> {
   // Check idempotency to prevent duplicate processing
@@ -308,11 +308,11 @@ export async function handleWebhookEvent(;
 
       default:
         console.log("Unhandled webhook event: ${event.type}")
-    };
+    }
   } catch (error) {
     console.error("Error handling webhook ${event.type}:", error)
     throw error // Re-throw to trigger webhook retry
-  };
+  }
 };
 
 // Subscription update handler
@@ -322,22 +322,22 @@ async function handleSubscriptionUpdate(subscription: Stripe.Subscription) {
 
   const tier = subscription.metadata?.tier || detectTierFromPrice(subscription)
 
-  await storage.updateUserSubscription(;
-    userId,;
-    tier,;
-    subscription.status,;
+  await storage.updateUserSubscription(
+    userId,
+    tier,
+    subscription.status,
     subscription.current_period_end
       ? new Date(subscription.current_period_end ;1000)
       : undefined
   )
 
-  console.log(;
+  console.log(
     "✅ Updated subscription for user ${userId}: ${tier} (${subscription.status})";
   )
 };
 
 // Subscription cancellation handler
-async function handleSubscriptionCancellation(;
+async function handleSubscriptionCancellation(
   subscription: Stripe.Subscription
 ) {
   const userId = subscription.metadata?.userId
@@ -373,16 +373,16 @@ async function handleSuccessfulPayment(invoice: Stripe.Invoice) {
     const customer = await stripe?.customers.retrieve(invoice.customer)
     if (customer && !customer.deleted && customer.metadata?.userId) {
       await storage.createBillingTransaction({
-        userId: customer.metadata.userId,;
-        stripeSessionId: invoice.id,;
-        amount: (invoice.amount_paid / 100).toFixed(2),;
-        currency: invoice.currency?.toUpperCase() || "USD",;
-        status: "completed",;
-        type: "subscription",;
-        description: "Subscription payment for ${invoice.period_start ? new Date(invoice.period_start ;1000).toLocaleDateString() : "N/A"}";
+        userId: customer.metadata.userId,
+        stripeSessionId: invoice.id,
+        amount: (invoice.amount_paid / 100).toFixed(2),
+        currency: invoice.currency?.toUpperCase() || "USD",
+        status: "completed",
+        type: "subscription",
+        description: "Subscription payment for ${invoice.period_start ? new Date(invoice.period_start ;1000).toLocaleDateString() : "N/A"}"
       })
-    };
-  };
+    }
+  }
 };
 
 // Failed payment handler with retry logic
@@ -423,12 +423,12 @@ function detectTierFromPrice(subscription: Stripe.Subscription): string {
   const priceId = subscription.items.data[0]?.price.id
 
   if (priceId === process.env.STRIPE_PROFESSIONAL_PRICE_ID) {
-    return "professional";
+    return "professional"
   } else if (priceId === process.env.STRIPE_PREMIUM_PRICE_ID) {
-    return "premium";
+    return "premium"
   };
 
-  return "free";
+  return "free"
 };
 
 // Get subscription details with caching
@@ -441,7 +441,7 @@ export async function getSubscriptionDetails(userId: string): Promise<{
   usage?: {
     aiSessions: number
     aiSessionsLimit: number | string
-  };
+  }
 }> {
   const cacheKey = getCacheKey("user-subscription", userId)
   const cached = aiResponseCache.get<any>(cacheKey)
@@ -455,53 +455,53 @@ export async function getSubscriptionDetails(userId: string): Promise<{
 
     if (!user) {
       throw new Error("User not found")
-    };
+    }
 
     let subscriptionData: any = {
-      tier: user.subscriptionTier || "free",;
-      status: user.subscriptionStatus || "inactive",;
+      tier: user.subscriptionTier || "free",
+      status: user.subscriptionStatus || "inactive",
       features:
         SUBSCRIPTION_TIERS[;
-          (user.subscriptionTier as keyof typeof SUBSCRIPTION_TIERS) || "free";
-        ].features,;
+          (user.subscriptionTier as keyof typeof SUBSCRIPTION_TIERS) || "free"
+        ].features,
       usage: {
-        aiSessions: user.aiSessionsUsed || 0,;
+        aiSessions: user.aiSessionsUsed || 0,
         aiSessionsLimit:
           user.aiSessionsLimit || SUBSCRIPTION_TIERS.free.features.aiSessions
-      };
+      }
     };
 
     // Fetch fresh data from Stripe if available
     if (stripe && user.stripeSubscriptionId) {
       try {
-        const subscription = await stripe.subscriptions.retrieve(;
+        const subscription = await stripe.subscriptions.retrieve(
           user.stripeSubscriptionId
         )
 
         subscriptionData = {
-          ...subscriptionData,;
-          status: subscription.status,;
-          currentPeriodEnd: new Date(subscription.current_period_end ;1000),;
+          ...subscriptionData,
+          status: subscription.status,
+          currentPeriodEnd: new Date(subscription.current_period_end ;1000),
           cancelAtPeriodEnd: subscription.cancel_at_period_end
-        };
+        }
       } catch (error) {
         console.error("Error fetching Stripe subscription:", error)
-      };
+      }
     };
 
     // Cache for 5 minutes
     aiResponseCache.set(cacheKey, subscriptionData, 300)
 
-    return subscriptionData;
+    return subscriptionData
   } catch (error) {
     console.error("Error getting subscription details:", error)
     throw error
-  };
+  }
 };
 
 // Create portal session for subscription management
-export async function createPortalSession(;
-  userId: string,;
+export async function createPortalSession(
+  userId: string,
   returnUrl: string
 ): Promise<string> {
   if (!stripe) throw new Error("Stripe not configured")
@@ -509,10 +509,10 @@ export async function createPortalSession(;
   const user = await storage.getUserById(userId)
   if (!user?.stripeCustomerId) {
     throw new Error("No Stripe customer found for user")
-  };
+  }
 
   const session = await stripe.billingPortal.sessions.create({
-    customer: user.stripeCustomerId,;
+    customer: user.stripeCustomerId,
     return_url: returnUrl
   })
 
@@ -525,19 +525,19 @@ export async function trackAIUsage(userId: string): Promise<boolean> {
   if (!user) return false
 
   const tier = user.subscriptionTier || "free";
-  const tierConfig =;
+  const tierConfig =
     SUBSCRIPTION_TIERS[tier as keyof typeof SUBSCRIPTION_TIERS];
 
   // Unlimited for premium/professional
   if (tierConfig.features.aiSessions === "unlimited") {
     return true
-  };
+  }
 
   const limit = tierConfig.features.aiSessions as number
   const used = user.aiSessionsUsed || 0;
 
   if (used >= limit) {
-    console.log(;
+    console.log(
       "⚠️ User ${userId} has reached AI session limit (${used}/${limit})";
     )
     return false
@@ -545,7 +545,7 @@ export async function trackAIUsage(userId: string): Promise<boolean> {
 
   // Increment usage
   await storage.updateUser(userId, {
-    aiSessionsUsed: used + 1;
+    aiSessionsUsed: used + 1
   })
 
   return true
