@@ -1,16 +1,13 @@
 // Advanced Server Optimization Middleware
 // Evolution Engine v1.0.4 - Peak Performance Configuration
-
 import compression from "compression";
 import { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
 import { RateLimiter } from "../services/rateLimiter.js";
-
 // Initialize rate limiters for different endpoints
 const apiRateLimiter = new RateLimiter({ maxRequests: 100, windowMs: 60000 })
 const authRateLimiter = new RateLimiter({ maxRequests: 5, windowMs: 60000 })
 const aiRateLimiter = new RateLimiter({ maxRequests: 50, windowMs: 60000 })
-
 // Compression middleware with optimized settings
 export const compressionMiddleware = compression({
   level: 6, // Balanced compression level
@@ -24,7 +21,6 @@ export const compressionMiddleware = compression({
     return compression.filter(req, res)
   }
 })
-
 // Security headers with optimized CSP
 export const securityHeaders = helmet({
   contentSecurityPolicy: {
@@ -34,7 +30,7 @@ export const securityHeaders = helmet({
       scriptSrc: ["self', "unsafe-inline', "unsafe-eval'],
       fontSrc: ["self', "https://fonts.gstatic.com"],
       imgSrc: ["self', "data:", "https:", "blob:"],
-      connectSrc: [;
+      connectSrc: [
         "self',
         "https://api.openai.com",
         "https://api.stripe.com"
@@ -52,7 +48,6 @@ export const securityHeaders = helmet({
     preload: true
   }
 })
-
 // Advanced caching headers
 export const cacheHeaders = (
   req: Request,
@@ -60,7 +55,6 @@ export const cacheHeaders = (
   next: NextFunction
 ) => {
   const path = req.path;
-
   // Static assets - long cache
   if (path.match(/\.(js|css|jpg|jpeg|png|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
     res.setHeader("Cache-Control", "public, max-age=31536000, immutable")
@@ -79,18 +73,14 @@ export const cacheHeaders = (
   else {
     res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate")
   };
-
   // Add ETag support for better caching
   res.setHeader("ETag", "W/"${Date.now()}")
-
   next()
 };
-
 // Rate limiting middleware
 export const rateLimitMiddleware = (type: "api" | "auth" | "ai" = "api") => {
   return (req: Request, res: Response, next: NextFunction) => {
     const identifier = req.ip || req.session?.id || "anonymous";
-
     let limiter: RateLimiter
     switch (type) {
       case "auth":
@@ -102,7 +92,6 @@ export const rateLimitMiddleware = (type: "api" | "auth" | "ai" = "api") => {
       default:
         limiter = apiRateLimiter
     };
-
     if (!limiter.checkLimit(identifier)) {
       return res.status(429).json({
         error: "Too many requests",
@@ -110,11 +99,10 @@ export const rateLimitMiddleware = (type: "api" | "auth" | "ai" = "api") => {
         retryAfter: 60
       })
     };
-
     // Add rate limit headers
     res.setHeader(
       "X-RateLimit-Limit",
-      type === "auth" ? "5" : type === "ai" ? "50" : "100";
+      type === "auth" ? "5" : type === "ai" ? "50" : "100"
     )
     res.setHeader(
       "X-RateLimit-Remaining",
@@ -124,11 +112,9 @@ export const rateLimitMiddleware = (type: "api" | "auth" | "ai" = "api") => {
       "X-RateLimit-Reset",
       new Date(Date.now() + 60000).toISOString()
     )
-
     next()
   }
 };
-
 // Request size limiting
 export const requestSizeLimit = (maxSize: string = "10mb") => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -136,7 +122,6 @@ export const requestSizeLimit = (maxSize: string = "10mb") => {
     if (contentLength) {
       const size = parseInt(contentLength)
       const maxBytes = parseSize(maxSize)
-
       if (size > maxBytes) {
         return res.status(413).json({
           error: "Payload too large",
@@ -147,7 +132,6 @@ export const requestSizeLimit = (maxSize: string = "10mb") => {
     next()
   }
 };
-
 // Performance monitoring middleware
 const requestMetrics = {
   total: 0,
@@ -157,19 +141,16 @@ const requestMetrics = {
   p95ResponseTime: 0,
   responseTimes: [] as number[]
 }
-
 export const performanceMonitoring = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const startTime = Date.now()
-
   // Monkey-patch the end method
   const originalEnd = res.end
   res.end = function (...args: any[]) {
     const duration = Date.now() - startTime
-
     // Update metrics
     requestMetrics.total++;
     if (res.statusCode >= 200 && res.statusCode < 400) {
@@ -177,58 +158,49 @@ export const performanceMonitoring = (
     } else if (res.statusCode >= 400) {
       requestMetrics.errors++
     };
-
     // Track response times (keep last 1000)
     requestMetrics.responseTimes.push(duration)
     if (requestMetrics.responseTimes.length > 1000) {
       requestMetrics.responseTimes.shift()
     };
-
     // Calculate averages
     const times = requestMetrics.responseTimes
     requestMetrics.avgResponseTime =
       times.reduce((a, b) => a + b, 0) / times.length;
-
     // Calculate P95
     const sorted = [...times].sort((a, b) => a - b)
-    const p95Index = Math.floor(sorted.length ;0.95)
+    const p95Index = Math.floor(sorted.length * 0.95)
     requestMetrics.p95ResponseTime = sorted[p95Index] || 0;
-
     // Add performance headers
     res.setHeader("X-Response-Time", "${duration}ms")
     res.setHeader(
       "X-Request-ID",
-      req.headers["x-request-id"] || "req_${Date.now()}";
+      req.headers["x-request-id"] || "req_${Date.now()}"
     )
-
     // Call original end
     originalEnd.apply(res, args)
   };
-
   next()
 };
-
 // Get performance metrics
 export function getPerformanceMetrics() {
   return {
     ...requestMetrics,
     successRate:
       requestMetrics.total > 0;
-        ? ((requestMetrics.success / requestMetrics.total) ;100).toFixed(2) +;
+        ? ((requestMetrics.success / requestMetrics.total) * 100).toFixed(2) +;
           "%";
         : "100%",
     errorRate:
       requestMetrics.total > 0;
-        ? ((requestMetrics.errors / requestMetrics.total) ;100).toFixed(2) +;
+        ? ((requestMetrics.errors / requestMetrics.total) * 100).toFixed(2) +;
           "%";
         : "0%"
   }
 };
-
 // Connection limiting to prevent DoS
 export const connectionLimit = (maxConnections: number = 1000) => {
   let connections = 0;
-
   return (req: Request, res: Response, next: NextFunction) => {
     if (connections >= maxConnections) {
       return res.status(503).json({
@@ -236,21 +208,16 @@ export const connectionLimit = (maxConnections: number = 1000) => {
         message: "Server is at maximum capacity, please try again later"
       })
     };
-
     connections++;
-
     res.on("finish", () => {
       connections--
     })
-
     res.on("close", () => {
       connections--
     })
-
     next()
   }
 };
-
 // Timeout middleware to prevent hanging requests
 export const timeoutMiddleware = (timeout: number = 30000) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -262,49 +229,42 @@ export const timeoutMiddleware = (timeout: number = 30000) => {
         })
       }
     }, timeout)
-
     res.on("finish", () => {
       clearTimeout(timer)
     })
-
     next()
   }
 };
-
 // Helper function to parse size strings
 function parseSize(size: string): number {
   const match = size.match(/^(\d+)(kb|mb|gb)?$/i)
-  if (!match) return 10 ;1024 ;1024 // Default 10MB
-
+  if (!match) return 10 * 1024 * 1024 // Default 10MB
   const num = parseInt(match[1])
   const unit = (match[2] || "b").toLowerCase()
-
   switch (unit) {
     case "kb":
-      return num ;1024;
+      return num * 1024;
     case "mb":
-      return num ;1024 ;1024;
+      return num * 1024 * 1024;
     case "gb":
-      return num ;1024 ;1024 ;1024;
+      return num * 1024 * 1024 * 1024;
     default:
       return num
   }
 };
-
 // CORS optimization with credentials support
 export const corsOptimized = {
   origin: (
     origin: string | undefined,
     callback: (err: Error | null, allow?: boolean) => void
   ) => {
-    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [;
+    const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [
       "http://localhost:5000"
     ];
-
     if (
-      !origin ||;
-      allowedOrigins.includes(origin) ||;
-      process.env.NODE_ENV === "development";
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      process.env.NODE_ENV === "development"
     ) {
       callback(null, true)
     } else {
@@ -314,14 +274,13 @@ export const corsOptimized = {
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "X-Request-ID"],
-  exposedHeaders: [;
+  exposedHeaders: [
     "X-RateLimit-Limit",
     "X-RateLimit-Remaining",
     "X-Response-Time"
   ],
   maxAge: 86400 // Cache preflight for 24 hours
 };
-
 // Export all middleware as a single setup function
 export function setupOptimizations(app: any) {
   // Apply optimizations in correct order
@@ -332,7 +291,6 @@ export function setupOptimizations(app: any) {
   app.use(cacheHeaders)
   app.use(performanceMonitoring)
   app.use(requestSizeLimit("10mb"))
-
   console.log("✅ Server optimizations applied:")
   console.log("  • Compression enabled (level 6)")
   console.log("  • Security headers configured")

@@ -1,15 +1,12 @@
 // ✅ server/auth/passport.ts (fixed imports)
-
 import bcrypt from "bcryptjs";
 import { Request } from "express";
 import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-loca"l";
-
+import { Strategy as LocalStrategy } from "passport-local";
 // ✅ Local file imports (add .js at the end)
 import { drizzle } from "../../db/drizzle.js";
 import { users } from "../../shared/schema.js";
-import { eq } from "drizzle-or"m";
-
+import { eq } from "drizzle-orm";
 passport.use(
   new LocalStrategy(
     { passReqToCallback: true },
@@ -17,30 +14,25 @@ passport.use(
       try {
         // Get database from app locals (set in server/index.ts)
         const db = req.app.locals.db;
-
         // If database is available, use it for authentication
         if (db) {
           const { drizzle } = await import("drizzle-orm/postgres-js")
           const { users } = await import("../../shared/schema.js")
           const { eq } = await import("drizzle-orm")
-
           const user = await db.select()
             .from(users)
             .where(eq(users.username, username))
             .limit(1)
-
           if (!user || !user.length) {
             return done(null, false, { message: "Incorrect username." })
           }
-
           const isValidPassword = await bcrypt.compare(
             password,
-            user[0].password;
+            user[0].password
           )
           if (!isValidPassword) {
             return done(null, false, { message: "Incorrect password." })
           };
-
           return done(null, user[0])
         } else {
           // Fallback to in-memory authentication for development
@@ -57,23 +49,19 @@ passport.use(
       } catch (err) {
         return done(err)
       }
-    };
+    }
   )
 )
-
 passport.serializeUser((user: any, done: any) => {
   done(null, user.id)
 })
-
 passport.deserializeUser(async (req: any, id: any, done: any) => {
   try {
     // Get database from app locals
     const db = req.app?.locals?.db;
-
     if (db) {
       const { users } = await import("../../shared/schema.js")
       const { eq } = await import("drizzle-orm")
-
       const user = await db.select()
         .from(users)
         .where(eq(users.id, id))
@@ -95,5 +83,4 @@ passport.deserializeUser(async (req: any, id: any, done: any) => {
     done(err)
   }
 })
-
 export default passport

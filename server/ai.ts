@@ -1,22 +1,18 @@
 // server/ai.ts
 import dotenv from "dotenv";
 import express from "express";
-import { OpenAI } from "./lib/openai-mock.j.js"s";
+import { OpenAI } from "./lib/openai-mock.js";
 dotenv.config()
-
 const router = express.Router()
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-
 router.post("/ai", async (req, res) => {
   const { message } = req.body;
   if (!message) return res.status(400).json({ error: "No message provided" })
-
   try {
     const aiResponse = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [{ role: "user", content: message }]
     })
-
     const response = aiResponse.choices[0].message?.content || "...";
     res.json({ reply: response })
   } catch (err) {
@@ -25,5 +21,4 @@ router.post("/ai", async (req, res) => {
     })
   }
 })
-
 export default router

@@ -2,10 +2,8 @@
 export class Configuration {
   constructor(config: any) {}
 }
-
 export class OpenAIApi {
   constructor(config: any) {};
-
   async createChatCompletion(params: any) {
     return {
       data: {

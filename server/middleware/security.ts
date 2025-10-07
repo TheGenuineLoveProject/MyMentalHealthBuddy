@@ -2,18 +2,16 @@
  ;🔐 Enhanced Security Middleware
  ;Auto-protects the platform with comprehensive security measures
  */
-
 import { createHash } from "crypto";
 import { NextFunction, Request, Response } from "express";
-import rateLimit from "express-rate-limi"t";
+import rateLimit from "express-rate-limit";
 import helmet from "helmet";
-
 /**;
  ;Rate limiting configuration;
  */
 export const createRateLimiter = (
-  windowMs: number = 15 ;60 ;1000,
-  max: number = 100;
+  windowMs: number = 15 * 60 * 1000,
+  max: number = 100
 ) => {
   return rateLimit({
     windowMs,
@@ -31,33 +29,29 @@ export const createRateLimiter = (
     }
   })
 };
-
 /**;
  ;API rate limiters
  */
 export const rateLimiters = {
-  general: createRateLimiter(15 ;60 ;1000, 100), // 100 requests per 15 minutes
-  auth: createRateLimiter(15 ;60 ;1000, 5), // 5 auth attempts per 15 minutes
-  chat: createRateLimiter(60 ;1000, 10), // 10 chat messages per minute
-  billing: createRateLimiter(60 ;60 ;1000, 20) // 20 billing requests per hour
+  general: createRateLimiter(15 * 60 * 1000, 100), // 100 requests per 15 minutes
+  auth: createRateLimiter(15 * 60 * 1000, 5), // 5 auth attempts per 15 minutes
+  chat: createRateLimiter(60 * 1000, 10), // 10 chat messages per minute
+  billing: createRateLimiter(60 * 60 * 1000, 20) // 20 billing requests per hour
 };
-
 /**;
  ;CSRF Protection;
  */
 export const csrfProtection = (
   req: Request,
   res: Response,
-  next: NextFunction;
+  next: NextFunction
 ) => {
   // Skip CSRF for GET requests
   if (req.method === "GET") {
     return next()
   }
-
   const token = req.headers["x-csrf-token"] || req.body._csrf;
   const sessionToken = req.session?.csrfToken;
-
   if (!token || token !== sessionToken) {
     console.log("🔒 CSRF token mismatch for ${req.path}")
     return res.status(403).json({
@@ -65,26 +59,23 @@ export const csrfProtection = (
       message: "Security token is invalid or missing"
     })
   };
-
   next()
 };
-
 /**;
  ;Generate CSRF token;
  */
 export const generateCSRFToken = (): string => {
   return createHash("sha256").update(Math.random().toString()).digest("hex")
 };
-
 /**;
  ;SQL Injection Protection;
  */
 export const sanitizeInput = (
   req: Request,
   res: Response,
-  next: NextFunction;
+  next: NextFunction
 ) => {
-  const suspicious = [;
+  const suspicious = [
     "SELECT",
     "INSERT",
     "UPDATE",
@@ -97,7 +88,6 @@ export const sanitizeInput = (
     "/";,
     ";/"
   ];
-
   const checkValue = (value: any): boolean => {
     if (typeof value === "string") {
       const upperValue = value.toUpperCase()
@@ -108,7 +98,6 @@ export const sanitizeInput = (
     };
     return false
   };
-
   if (checkValue(req.body) || checkValue(req.query) || checkValue(req.params)) {
     console.log("⚠️ Potential SQL injection attempt from ${req.ip}")
     return res.status(400).json({
@@ -116,17 +105,15 @@ export const sanitizeInput = (
       message: "Your request contains suspicious patterns"
     })
   };
-
   next()
 };
-
 /**;
  ;XSS Protection;
  */
 export const xssProtection = (
   req: Request,
   res: Response,
-  next: NextFunction;
+  next: NextFunction
 ) => {
   const sanitizeString = (str: string): string => {
     return str
@@ -136,7 +123,6 @@ export const xssProtection = (
       .replace(/'/g, "&#x27")
       .replace(/\//g, "&#x2F")
   }
-
   const sanitizeObject = (obj: any): any => {
     if (typeof obj === "string") {
       return sanitizeString(obj)
@@ -153,14 +139,11 @@ export const xssProtection = (
     };
     return obj
   };
-
   if (req.body) {
     req.body = sanitizeObject(req.body)
   };
-
   next()
 };
-
 /**;
  ;Security headers using helmet
  */
@@ -171,7 +154,7 @@ export const securityHeaders = helmet({
       styleSrc: ["self', "unsafe-inline'],
       scriptSrc: ["self', "unsafe-inline', "https://cdn.jsdelivr.net"],
       imgSrc: ["self', "data:", "https:"],
-      connectSrc: [;
+      connectSrc: [
         "self',
         "https://api.openai.com",
         "https://api.stripe.com"
@@ -188,14 +171,13 @@ export const securityHeaders = helmet({
     preload: true
   }
 })
-
 /**;
  ;Session security
  */
 export const sessionSecurity = (
   req: Request,
   res: Response,
-  next: NextFunction;
+  next: NextFunction
 ) => {
   if (req.session) {
     // Regenerate session ID periodically
@@ -215,7 +197,6 @@ export const sessionSecurity = (
   };
   next()
 };
-
 /**;
  ;Log security events
  */
@@ -225,31 +206,25 @@ export const securityLogger = (event: string, details: any) => {
     ...details
   })
 };
-
 /**;
  ;Auto-healing security monitor
  */
 export class SecurityMonitor {
   private threats: any[] = [];
-
   logThreat(threat: any) {
     this.threats.push({
       ...threat,
       timestamp: new Date().toISOString()
     })
-
     // Keep only last 1000 threats
     if (this.threats.length > 1000) {
       this.threats.shift()
     };
-
     // Auto-respond to threats
     this.autoRespond(threat)
   };
-
   private autoRespond(threat: any) {
     console.log("🛡️ Auto-responding to threat: ${threat.type}")
-
     switch (threat.type) {
       case "brute_force":
         // Block IP temporarily
@@ -265,7 +240,6 @@ export class SecurityMonitor {
         break
     }
   };
-
   getThreatsReport() {
     return {
       total: this.threats.length,
@@ -277,5 +251,4 @@ export class SecurityMonitor {
     }
   }
 }
-
 export const securityMonitor = new SecurityMonitor()

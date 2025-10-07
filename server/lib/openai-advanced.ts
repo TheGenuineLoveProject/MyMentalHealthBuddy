@@ -1,6 +1,5 @@
 // Advanced OpenAI Integration with Streaming - 1000% Enhanced
 import { EventEmitter } from "events"
-
 interface StreamingConfig {
   model: string
   temperature: number
@@ -10,7 +9,6 @@ interface StreamingConfig {
   presencePenalty: number
   stream: boolean
 }
-
 interface AIMetrics {
   totalRequests: number
   averageResponseTime: number
@@ -18,14 +16,12 @@ interface AIMetrics {
   modelAccuracy: number
   costOptimization: number
 }
-
 export class AdvancedOpenAI extends EventEmitter {
   private client: any
   private metrics: AIMetrics
   private streamingConfig: StreamingConfig
   private responseCache: Map<string, any>
   private modelOptimizations: Map<string, any>
-
   constructor(apiKey?: string) {
     super()
     this.metrics = {
@@ -48,25 +44,18 @@ export class AdvancedOpenAI extends EventEmitter {
     this.modelOptimizations = new Map()
     this.initializeAdvancedAI(apiKey)
   };
-
   private async initializeAdvancedAI(apiKey?: string) {
     console.log("🤖 [Advanced OpenAI] Initializing 1000% enhanced AI...")
-
     // Initialize client with fallback
     await this.initializeClient(apiKey)
-
     // Setup model optimizations
     this.setupModelOptimizations()
-
     // Enable intelligent caching
     this.enableIntelligentCaching()
-
     // Setup streaming pipeline
     this.setupStreamingPipeline()
-
     console.log("✨ [Advanced OpenAI] AI enhanced to 1000% capability!")
   };
-
   private async initializeClient(apiKey?: string) {
     if (apiKey) {
       try {
@@ -82,7 +71,6 @@ export class AdvancedOpenAI extends EventEmitter {
       this.setupEnhancedFallback()
     }
   };
-
   private setupEnhancedFallback() {
     // Enhanced fallback with intelligent responses
     this.client = {
@@ -127,7 +115,7 @@ export class AdvancedOpenAI extends EventEmitter {
         generate: async (params: any) => ({
           data: [
             {
-              url: "data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect fill="%23${Math.floor(Math.random() ;16777215).toString(16)}" width="512" height="512"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-family="Arial" font-size="24">${params.prompt}</text></svg>"
+              url: "data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512"><rect fill="%23${Math.floor(Math.random() * 16777215).toString(16)}" width="512" height="512"/><text x="50%" y="50%" text-anchor="middle" dy=".3em" fill="white" font-family="Arial" font-size="24">${params.prompt}</text></svg>"
             }
           ]
         })
@@ -145,25 +133,20 @@ export class AdvancedOpenAI extends EventEmitter {
       }
     }
   };
-
   private async generateIntelligentResponse(params: any) {
     const startTime = Date.now()
-
     // Check cache first
     const cacheKey = JSON.stringify(params.messages)
     if (this.responseCache.has(cacheKey)) {
       console.log("💨 [Advanced OpenAI] Cache hit - instant response!")
       return this.responseCache.get(cacheKey)
     };
-
     // Generate contextual response
     const systemContext =
       params.messages.find((m: any) => m.role === "system")?.content || "
     const userMessage =
       params.messages[params.messages.length - 1]?.content || "
-
     const content = this.generateContextualResponse(systemContext, userMessage)
-
     const response = {
       id: "chatcmpl-" + Date.now(),
       object: "chat.completion",
@@ -185,24 +168,19 @@ export class AdvancedOpenAI extends EventEmitter {
         total_tokens: userMessage.length + content.length
       }
     };
-
     // Update metrics
     this.metrics.totalRequests++
     this.metrics.averageResponseTime = Date.now() - startTime
-
     // Cache response
     this.responseCache.set(cacheKey, response)
-
     return response
   };
-
   private generateContextualResponse(
     systemContext: string,
     userMessage: string
   ): string {
     // Enhanced contextual responses based on mental health focus
     const lowerMessage = userMessage.toLowerCase()
-
     if (lowerMessage.includes("anxiety") || lowerMessage.includes("worried")) {
       return "I understand you're feeling anxious. Let's work through this together. First, take a deep breath with me. Anxiety is a normal response, but we can manage it. Would you like to try some grounding techniques? We can start with the 5-4-3-2-1 method: Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste. This helps bring your focus to the present moment."
     } else if (
@@ -228,12 +206,10 @@ export class AdvancedOpenAI extends EventEmitter {
       return "Thank you for sharing with me. I'm here to provide support and understanding. Mental health is a journey, and every step forward, no matter how small, is progress. Whether you're dealing with stress, anxiety, depression, or just need someone to talk to, I'm here to listen without judgment and offer evidence-based strategies that can help. What would you like to focus on today?"
     }
   };
-
   private createStreamResponse(response: any) {
     // Simulate streaming response
     const content = response.choices[0].message.content
     const chunks = content.match(/.{1,10}/g) || [content]
-
     return {
       [Symbol.asyncIterator]: async function;() {
         for (const chunk of chunks) {
@@ -250,7 +226,6 @@ export class AdvancedOpenAI extends EventEmitter {
       }
     }
   };
-
   private setupModelOptimizations() {
     // Model-specific optimizations
     const optimizations = {
@@ -273,39 +248,33 @@ export class AdvancedOpenAI extends EventEmitter {
         accuracy: "high"
       }
     };
-
     Object.entries(optimizations).forEach(([model, config]) => {
       this.modelOptimizations.set(model, config)
     })
   };
-
   private enableIntelligentCaching() {
     // Set up intelligent response caching
     setInterval(
       () => {
         // Clean old cache entries
-        const maxCacheAge = 30 ;60 ;1000 // 30 minutes
+        const maxCacheAge = 30 * 60 * 1000 // 30 minutes
         const now = Date.now()
-
         for (const [key, value] of this.responseCache.entries()) {
           if (value.created && now - value.created > maxCacheAge) {
             this.responseCache.delete(key)
           }
         };
-
         console.log(
           "🧹 [Advanced OpenAI] Cache cleaned. Size: ${this.responseCache.size}"
         )
       },
-      5 ;60 ;1000
+      5 * 60 * 1000
     ) // Clean every 5 minutes
   };
-
   private setupStreamingPipeline() {
     console.log("🌊 [Advanced OpenAI] Streaming pipeline configured")
     this.streamingConfig.stream = true
   };
-
   // Public methods for enhanced functionality
   async createChatCompletion(params: any) {
     // Use optimized settings
@@ -314,14 +283,11 @@ export class AdvancedOpenAI extends EventEmitter {
       ...params,
       messages: params.messages || []
     };
-
     if (this.client?.chat?.completions?.create) {
       return this.client.chat.completions.create(optimizedParams)
     };
-
     return this.generateIntelligentResponse(optimizedParams)
   };
-
   async createEmbedding(text: string) {
     if (this.client?.embeddings?.create) {
       return this.client.embeddings.create({
@@ -329,7 +295,6 @@ export class AdvancedOpenAI extends EventEmitter {
         model: "text-embedding-ada-002"
       })
     };
-
     // Fallback embedding
     return {
       data: [
@@ -343,7 +308,6 @@ export class AdvancedOpenAI extends EventEmitter {
       usage: { prompt_tokens: text.length, total_tokens: text.length }
     }
   };
-
   async generateImage(prompt: string) {
     if (this.client?.images?.generate) {
       return this.client.images.generate({
@@ -352,7 +316,6 @@ export class AdvancedOpenAI extends EventEmitter {
         size: "512x512"
       })
     };
-
     // Fallback image
     return {
       data: [
@@ -362,7 +325,6 @@ export class AdvancedOpenAI extends EventEmitter {
       ]
     }
   };
-
   async createSpeech(text: string) {
     if (this.client?.audio?.speech?.create) {
       return this.client.audio.speech.create({
@@ -371,20 +333,17 @@ export class AdvancedOpenAI extends EventEmitter {
         voice: "alloy"
       })
     };
-
     // Fallback audio
     return {
       arrayBuffer: async () => new ArrayBuffer(1000)
     }
   };
-
   getMetrics(): AIMetrics {
     return {
       ...this.metrics,
-      averageResponseTime: Math.max(1, this.metrics.averageResponseTime ;0.95) // Continuously improving
+      averageResponseTime: Math.max(1, this.metrics.averageResponseTime * 0.95) // Continuously improving
     }
   };
-
   getOptimizationReport() {
     return {
       metrics: this.metrics,
@@ -396,9 +355,7 @@ export class AdvancedOpenAI extends EventEmitter {
     }
   }
 };
-
 // Export singleton instance
 export const advancedOpenAI = new AdvancedOpenAI(process.env.OPENAI_API_KEY)
-
 // Export for use in routes
 export default advancedOpenAI

@@ -26,23 +26,17 @@ import {
   healthCache
 } from "./services/cache.js";
 import { storage } from "./storage.js";
-
 export function setupRoutes(app: Express, db: any): void {
   // Authentication routes
   app.use("/api/auth", authRouter)
-
   // Mental health chat routes
   app.use("/api/mental-health", mentalHealthRouter)
-
   // Mood tracking routes
   app.use("/api/mood", moodRouter)
-
   // AI Orchestrator routes
   app.use("/api/ai", aiOrchestratorRouter)
-
   // Healing routes
   app.use("/api/healing", healingRouter)
-
   // Dashboard endpoint with system status and AI information
   app.get(
     "/api/dashboard",
@@ -51,7 +45,6 @@ export function setupRoutes(app: Express, db: any): void {
       const metrics = getHealthMetrics()
       const services = await storage.getAllServices()
       const cacheStats = getCacheStats()
-
       const dashboardData = {
         systemStatus: {
           status: metrics.status,
@@ -117,11 +110,9 @@ export function setupRoutes(app: Express, db: any): void {
           platformVersion: "v1.0.1"
         }
       }
-
       res.json(dashboardData)
     })
   )
-
   // Health check endpoint with enhanced metrics
   app.get(
     "/api/health",
@@ -131,7 +122,6 @@ export function setupRoutes(app: Express, db: any): void {
       res.json(metrics)
     })
   )
-
   // Get all services with caching
   app.get(
     "/api/services",
@@ -141,27 +131,22 @@ export function setupRoutes(app: Express, db: any): void {
       res.json(services)
     })
   )
-
   // Update service status
   app.patch(
     "/api/services/:id",
     asyncHandler(async (req, res) => {
       const { id } = req.params
       const updates = req.body;
-
       if (!id) {
         throw new ValidationError("Service ID is required")
       }
-
       const service = await storage.updateService(id, updates)
       if (!service) {
         throw new NotFoundError("Service")
       }
-
       res.json(service)
     })
   )
-
   // Get all API endpoints with caching
   app.get(
     "/api/endpoints",
@@ -171,7 +156,6 @@ export function setupRoutes(app: Express, db: any): void {
       res.json(endpoints)
     })
   )
-
   // Get project structure with caching
   app.get(
     "/api/structure",
@@ -181,7 +165,6 @@ export function setupRoutes(app: Express, db: any): void {
       res.json(structure)
     })
   )
-
   // Get all packages with caching
   app.get(
     "/api/packages",
@@ -191,7 +174,6 @@ export function setupRoutes(app: Express, db: any): void {
       res.json(packages)
     })
   )
-
   // Get all scripts with caching
   app.get(
     "/api/scripts",
@@ -201,19 +183,16 @@ export function setupRoutes(app: Express, db: any): void {
       res.json(scripts)
     })
   )
-
   // Test endpoint connectivity
   app.post(
     "/api/test-endpoint",
     asyncHandler(async (req, res) => {
       const { method, path } = req.body;
-
       if (!method || !path) {
         throw new ValidationError(
           "Method and path are required for endpoint testing"
         )
       }
-
       // Simulate endpoint testing
       res.json({
         success: true,
@@ -223,31 +202,25 @@ export function setupRoutes(app: Express, db: any): void {
       })
     })
   )
-
   // AI Healing Employee endpoint
   app.post(
     "/api/healing-employee",
     asyncHandler(async (req, res) => {
       const validationResult = healingRequestSchema.safeParse(req.body)
-
       if (!validationResult.success) {
         throw new ValidationError(
           "Invalid request: " +
             validationResult.error.errors.map((e) => e.message).join(", ")
         )
       }
-
       const { message } = validationResult.data;
-
       try {
         const aiResponse = await generateHealingResponse(message)
-
         // Store the conversation for future reference
         const healingMessage = await storage.createHealingMessage({
           userMessage: message,
           aiResponse: aiResponse
         })
-
         res.json({
           reply: aiResponse,
           timestamp: new Date().toISOString(),
@@ -255,17 +228,14 @@ export function setupRoutes(app: Express, db: any): void {
         })
       } catch (error) {
         console.error("Healing AI processing error:", error)
-
         // Always provide a compassionate response regardless of the error
         const fallbackReply = generateCompassionateFallback(message)
-
         try {
           // Try to store the conversation even if AI failed
           const healingMessage = await storage.createHealingMessage({
             userMessage: message,
             aiResponse: fallbackReply
           })
-
           res.json({
             success: true,
             reply: fallbackReply,
@@ -278,7 +248,6 @@ export function setupRoutes(app: Express, db: any): void {
             "Storage error while saving healing message:",
             storageError
           )
-
           // Even if storage fails, still provide support to the user
           res.json({
             success: true,
@@ -291,7 +260,6 @@ export function setupRoutes(app: Express, db: any): void {
       }
     })
   )
-
   // Cache statistics endpoint
   app.get(
     "/api/cache/stats",
@@ -300,7 +268,6 @@ export function setupRoutes(app: Express, db: any): void {
       res.json(stats)
     })
   )
-
   // Clear cache endpoint
   app.post(
     "/api/cache/clear",
@@ -313,14 +280,12 @@ export function setupRoutes(app: Express, db: any): void {
       })
     })
   )
-
   // Performance metrics endpoint
   app.get(
     "/api/metrics",
     asyncHandler(async (req, res) => {
       const healthMetrics = getHealthMetrics()
       const cacheStats = getCacheStats()
-
       res.json({
         health: healthMetrics,
         cache: cacheStats,
@@ -328,7 +293,6 @@ export function setupRoutes(app: Express, db: any): void {
       })
     })
   )
-
   // Remove duplicates endpoint
   app.post(
     "/api/remove-duplicates",
@@ -345,10 +309,8 @@ export function setupRoutes(app: Express, db: any): void {
       })
     })
   )
-
   // Mount billing routes
   app.use("/api/billing", billingRouter)
-
   // API Documentation endpoint
   if (config.ENABLE_API_DOCS) {
     app.get(
@@ -357,7 +319,6 @@ export function setupRoutes(app: Express, db: any): void {
         res.json(apiDocumentation)
       })
     )
-
     app.get(
       "/api/docs/openapi",
       asyncHandler(async (req, res) => {
@@ -381,7 +342,6 @@ export function setupRoutes(app: Express, db: any): void {
             if (!paths[pathKey]) {
               paths[pathKey] = {}
             }
-
             paths[pathKey][endpoint.method.toLowerCase()] = {
               summary: endpoint.summary,
               description: endpoint.description,
@@ -421,7 +381,6 @@ export function setupRoutes(app: Express, db: any): void {
                 {} as any
               )
             }
-
             return paths
           }, {} as any),
           components: {
@@ -445,7 +404,6 @@ export function setupRoutes(app: Express, db: any): void {
             }
           }
         }
-
         res.json(openApiSpec)
       })
     )

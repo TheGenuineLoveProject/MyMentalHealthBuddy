@@ -1,0 +1,426 @@
+[TYPE CHECK] ❌ TypeScript / Syntax errors detected:
+Command failed: npx tsc --noEmit --skipLibCheck
+
+[LINT REPORT]
+
+
+[DUPLICATE SCAN]
+
+
+[DEPENDENCY AUDIT]
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@esbuild-kit/core-utils": {
+      "name": "@esbuild-kit/core-utils",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "esbuild"
+      ],
+      "effects": [
+        "@esbuild-kit/esm-loader"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@esbuild-kit/core-utils"
+      ],
+      "fixAvailable": {
+        "name": "drizzle-kit",
+        "version": "0.31.5",
+        "isSemVerMajor": true
+      }
+    },
+    "@esbuild-kit/esm-loader": {
+      "name": "@esbuild-kit/esm-loader",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@esbuild-kit/core-utils"
+      ],
+      "effects": [
+        "drizzle-kit"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@esbuild-kit/esm-loader"
+      ],
+      "fixAvailable": {
+        "name": "drizzle-kit",
+        "version": "0.31.5",
+        "isSemVerMajor": true
+      }
+    },
+    "drizzle-kit": {
+      "name": "drizzle-kit",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@esbuild-kit/esm-loader",
+        "esbuild"
+      ],
+      "effects": [],
+      "range": "0.9.1 - 0.9.54 || >=0.12.9",
+      "nodes": [
+        "node_modules/drizzle-kit"
+      ],
+      "fixAvailable": {
+        "name": "drizzle-kit",
+        "version": "0.31.5",
+        "isSemVerMajor": true
+      }
+    },
+    "esbuild": {
+      "name": "esbuild",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1102341,
+          "name": "esbuild",
+          "dependency": "esbuild",
+          "title": "esbuild enables any website to send any requests to the development server and read the response",
+          "url": "https://github.com/advisories/GHSA-67mh-4wv8-2f99",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-346"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N"
+          },
+          "range": "<=0.24.2"
+        }
+      ],
+      "effects": [
+        "@esbuild-kit/core-utils",
+        "drizzle-kit"
+      ],
+      "range": "<=0.24.2",
+      "nodes": [
+        "node_modules/@esbuild-kit/core-utils/node_modules/esbuild",
+        "node_modules/drizzle-kit/node_modules/esbuild"
+      ],
+      "fixAvailable": {
+        "name": "drizzle-kit",
+        "version": "0.31.5",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 4,
+      "high": 0,
+      "critical": 0,
+      "total": 4
+    },
+    "dependencies": {
+      "prod": 130,
+      "dev": 238,
+      "optional": 103,
+      "peer": 1,
+      "peerOptional": 0,
+      "total": 400
+    }
+  }
+}
+
+
+[INTEGRITY SCAN]
+./MyMentalHealthBuddy/src/activateHealing.ts
+./scripts/fix-tsconfig-paths.ts
+./scripts/start.ts
+./scripts/activateHealing.ts
+./scripts/fix-final-healing.ts
+./scripts/fixImports.ts
+./scripts/fixDependencies.ts
+./scripts/selfHeal.ts
+./server/ai/index.ts
+./server/routes/index.ts
+./server/index.ts
+./tests/platform.test.ts
+./types/global.d.ts
+./fix-extensions.ts
+./globals.d.ts
+./fixImports.ts
+./node_modules/@types/passport-strategy/index.d.ts
+./node_modules/@types/estree/flow.d.ts
+./node_modules/@types/node/buffer.buffer.d.ts
+./node_modules/@types/node/globals.d.ts
+./node_modules/@types/node/index.d.ts
+./node_modules/@types/node/sea.d.ts
+./node_modules/@types/node/compatibility/disposable.d.ts
+./node_modules/@types/node/compatibility/index.d.ts
+./node_modules/@types/node/compatibility/indexable.d.ts
+./node_modules/@types/node/compatibility/iterators.d.ts
+./node_modules/@types/node/ts5.6/buffer.buffer.d.ts
+./node_modules/@types/node/ts5.6/index.d.ts
+./node_modules/@types/react/global.d.ts
+./node_modules/@types/react/ts5.0/global.d.ts
+./node_modules/@types/passport-local/index.d.ts
+./node_modules/drizzle-orm/knex/index.d.ts
+./node_modules/rolldown-vite/types/import-meta.d.ts
+./node_modules/rolldown-vite/types/importMeta.d.ts
+./node_modules/typescript/lib/lib.d.ts
+./node_modules/typescript/lib/lib.decorators.d.ts
+./node_modules/typescript/lib/lib.decorators.legacy.d.ts
+./node_modules/typescript/lib/lib.dom.asynciterable.d.ts
+./node_modules/typescript/lib/lib.dom.iterable.d.ts
+./node_modules/typescript/lib/lib.es2015.collection.d.ts
+./node_modules/typescript/lib/lib.es2015.core.d.ts
+./node_modules/typescript/lib/lib.es2015.d.ts
+./node_modules/typescript/lib/lib.es2015.generator.d.ts
+./node_modules/typescript/lib/lib.es2015.iterable.d.ts
+./node_modules/typescript/lib/lib.es2015.promise.d.ts
+./node_modules/typescript/lib/lib.es2015.proxy.d.ts
+./node_modules/typescript/lib/lib.es2015.reflect.d.ts
+./node_modules/typescript/lib/lib.es2015.symbol.d.ts
+./node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts
+./node_modules/typescript/lib/lib.es2016.array.include.d.ts
+./node_modules/typescript/lib/lib.es2016.d.ts
+./node_modules/typescript/lib/lib.es2016.full.d.ts
+./node_modules/typescript/lib/lib.es2016.intl.d.ts
+./node_modules/typescript/lib/lib.es2017.arraybuffer.d.ts
+./node_modules/typescript/lib/lib.es2017.d.ts
+./node_modules/typescript/lib/lib.es2017.date.d.ts
+./node_modules/typescript/lib/lib.es2017.full.d.ts
+./node_modules/typescript/lib/lib.es2017.intl.d.ts
+./node_modules/typescript/lib/lib.es2017.object.d.ts
+./node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts
+./node_modules/typescript/lib/lib.es2017.string.d.ts
+./node_modules/typescript/lib/lib.es2017.typedarrays.d.ts
+./node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts
+./node_modules/typescript/lib/lib.es2018.asynciterable.d.ts
+./node_modules/typescript/lib/lib.es2018.d.ts
+./node_modules/typescript/lib/lib.es2018.full.d.ts
+./node_modules/typescript/lib/lib.es2018.intl.d.ts
+./node_modules/typescript/lib/lib.es2018.promise.d.ts
+./node_modules/typescript/lib/lib.es2018.regexp.d.ts
+./node_modules/typescript/lib/lib.es2019.array.d.ts
+./node_modules/typescript/lib/lib.es2019.d.ts
+./node_modules/typescript/lib/lib.es2019.full.d.ts
+./node_modules/typescript/lib/lib.es2019.intl.d.ts
+./node_modules/typescript/lib/lib.es2019.object.d.ts
+./node_modules/typescript/lib/lib.es2019.string.d.ts
+./node_modules/typescript/lib/lib.es2019.symbol.d.ts
+./node_modules/typescript/lib/lib.es2020.bigint.d.ts
+./node_modules/typescript/lib/lib.es2020.d.ts
+./node_modules/typescript/lib/lib.es2020.date.d.ts
+./node_modules/typescript/lib/lib.es2020.full.d.ts
+./node_modules/typescript/lib/lib.es2020.intl.d.ts
+./node_modules/typescript/lib/lib.es2020.number.d.ts
+./node_modules/typescript/lib/lib.es2020.promise.d.ts
+./node_modules/typescript/lib/lib.es2020.sharedmemory.d.ts
+./node_modules/typescript/lib/lib.es2020.string.d.ts
+./node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts
+./node_modules/typescript/lib/lib.es2021.d.ts
+./node_modules/typescript/lib/lib.es2021.full.d.ts
+./node_modules/typescript/lib/lib.es2021.intl.d.ts
+./node_modules/typescript/lib/lib.es2021.promise.d.ts
+./node_modules/typescript/lib/lib.es2021.string.d.ts
+./node_modules/typescript/lib/lib.es2021.weakref.d.ts
+./node_modules/typescript/lib/lib.es2022.array.d.ts
+./node_modules/typescript/lib/lib.es2022.d.ts
+./node_modules/typescript/lib/lib.es2022.error.d.ts
+./node_modules/typescript/lib/lib.es2022.full.d.ts
+./node_modules/typescript/lib/lib.es2022.intl.d.ts
+./node_modules/typescript/lib/lib.es2022.object.d.ts
+./node_modules/typescript/lib/lib.es2022.regexp.d.ts
+./node_modules/typescript/lib/lib.es2022.string.d.ts
+./node_modules/typescript/lib/lib.es2023.array.d.ts
+./node_modules/typescript/lib/lib.es2023.collection.d.ts
+./node_modules/typescript/lib/lib.es2023.d.ts
+./node_modules/typescript/lib/lib.es2023.full.d.ts
+./node_modules/typescript/lib/lib.es2023.intl.d.ts
+./node_modules/typescript/lib/lib.es2024.arraybuffer.d.ts
+./node_modules/typescript/lib/lib.es2024.collection.d.ts
+./node_modules/typescript/lib/lib.es2024.d.ts
+./node_modules/typescript/lib/lib.es2024.full.d.ts
+./node_modules/typescript/lib/lib.es2024.object.d.ts
+./node_modules/typescript/lib/lib.es2024.promise.d.ts
+./node_modules/typescript/lib/lib.es2024.regexp.d.ts
+./node_modules/typescript/lib/lib.es2024.sharedmemory.d.ts
+./node_modules/typescript/lib/lib.es2024.string.d.ts
+./node_modules/typescript/lib/lib.es5.d.ts
+./node_modules/typescript/lib/lib.es6.d.ts
+./node_modules/typescript/lib/lib.esnext.array.d.ts
+./node_modules/typescript/lib/lib.esnext.collection.d.ts
+./node_modules/typescript/lib/lib.esnext.d.ts
+./node_modules/typescript/lib/lib.esnext.decorators.d.ts
+./node_modules/typescript/lib/lib.esnext.disposable.d.ts
+./node_modules/typescript/lib/lib.esnext.error.d.ts
+./node_modules/typescript/lib/lib.esnext.float16.d.ts
+./node_modules/typescript/lib/lib.esnext.full.d.ts
+./node_modules/typescript/lib/lib.esnext.intl.d.ts
+./node_modules/typescript/lib/lib.esnext.promise.d.ts
+./node_modules/typescript/lib/lib.esnext.sharedmemory.d.ts
+./node_modules/typescript/lib/lib.scripthost.d.ts
+./node_modules/typescript/lib/lib.webworker.asynciterable.d.ts
+./node_modules/typescript/lib/lib.webworker.importscripts.d.ts
+./node_modules/typescript/lib/lib.webworker.iterable.d.ts
+./node_modules/pg-protocol/src/b.ts
+./node_modules/pg-protocol/src/types/chunky.d.ts
+./node_modules/pg-protocol/src/inbound-parser.test.ts
+./node_modules/pg-protocol/src/outbound-serializer.test.ts
+./node_modules/pg-types/index.test-d.ts
+./node_modules/fastq/test/example.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/buffer.buffer.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/globals.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/index.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/sea.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/sqlite.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/compatibility/disposable.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/compatibility/index.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/compatibility/indexable.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/compatibility/iterators.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/ts5.6/buffer.buffer.d.ts
+./node_modules/@neondatabase/serverless/node_modules/@types/node/ts5.6/index.d.ts
+./node_modules/zod/src/v3/tests/all-errors.test.ts
+./node_modules/zod/src/v3/tests/anyunknown.test.ts
+./node_modules/zod/src/v3/tests/array.test.ts
+./node_modules/zod/src/v3/tests/async-parsing.test.ts
+./node_modules/zod/src/v3/tests/async-refinements.test.ts
+./node_modules/zod/src/v3/tests/base.test.ts
+./node_modules/zod/src/v3/tests/bigint.test.ts
+./node_modules/zod/src/v3/tests/branded.test.ts
+./node_modules/zod/src/v3/tests/catch.test.ts
+./node_modules/zod/src/v3/tests/coerce.test.ts
+./node_modules/zod/src/v3/tests/complex.test.ts
+./node_modules/zod/src/v3/tests/custom.test.ts
+./node_modules/zod/src/v3/tests/date.test.ts
+./node_modules/zod/src/v3/tests/deepmasking.test.ts
+./node_modules/zod/src/v3/tests/default.test.ts
+./node_modules/zod/src/v3/tests/description.test.ts
+./node_modules/zod/src/v3/tests/discriminated-unions.test.ts
+./node_modules/zod/src/v3/tests/enum.test.ts
+./node_modules/zod/src/v3/tests/error.test.ts
+./node_modules/zod/src/v3/tests/firstparty.test.ts
+./node_modules/zod/src/v3/tests/firstpartyschematypes.test.ts
+./node_modules/zod/src/v3/tests/function.test.ts
+./node_modules/zod/src/v3/tests/generics.test.ts
+./node_modules/zod/src/v3/tests/instanceof.test.ts
+./node_modules/zod/src/v3/tests/intersection.test.ts
+./node_modules/zod/src/v3/tests/language-server.test.ts
+./node_modules/zod/src/v3/tests/literal.test.ts
+./node_modules/zod/src/v3/tests/map.test.ts
+./node_modules/zod/src/v3/tests/masking.test.ts
+./node_modules/zod/src/v3/tests/mocker.test.ts
+./node_modules/zod/src/v3/tests/nan.test.ts
+./node_modules/zod/src/v3/tests/nativeEnum.test.ts
+./node_modules/zod/src/v3/tests/nullable.test.ts
+./node_modules/zod/src/v3/tests/number.test.ts
+./node_modules/zod/src/v3/tests/object-augmentation.test.ts
+./node_modules/zod/src/v3/tests/object-in-es5-env.test.ts
+./node_modules/zod/src/v3/tests/object.test.ts
+./node_modules/zod/src/v3/tests/optional.test.ts
+./node_modules/zod/src/v3/tests/parser.test.ts
+./node_modules/zod/src/v3/tests/parseUtil.test.ts
+./node_modules/zod/src/v3/tests/partials.test.ts
+./node_modules/zod/src/v3/tests/pickomit.test.ts
+./node_modules/zod/src/v3/tests/pipeline.test.ts
+./node_modules/zod/src/v3/tests/preprocess.test.ts
+./node_modules/zod/src/v3/tests/primitive.test.ts
+./node_modules/zod/src/v3/tests/promise.test.ts
+./node_modules/zod/src/v3/tests/readonly.test.ts
+./node_modules/zod/src/v3/tests/record.test.ts
+./node_modules/zod/src/v3/tests/recursive.test.ts
+./node_modules/zod/src/v3/tests/refine.test.ts
+./node_modules/zod/src/v3/tests/safeparse.test.ts
+./node_modules/zod/src/v3/tests/set.test.ts
+./node_modules/zod/src/v3/tests/standard-schema.test.ts
+./node_modules/zod/src/v3/tests/string.test.ts
+./node_modules/zod/src/v3/tests/transformer.test.ts
+./node_modules/zod/src/v3/tests/tuple.test.ts
+./node_modules/zod/src/v3/tests/unions.test.ts
+./node_modules/zod/src/v3/tests/validations.test.ts
+./node_modules/zod/src/v3/tests/void.test.ts
+./node_modules/zod/src/v3/benchmarks/index.ts
+./node_modules/zod/src/v4/classic/tests/anyunknown.test.ts
+./node_modules/zod/src/v4/classic/tests/array.test.ts
+./node_modules/zod/src/v4/classic/tests/assignability.test.ts
+./node_modules/zod/src/v4/classic/tests/async-parsing.test.ts
+./node_modules/zod/src/v4/classic/tests/async-refinements.test.ts
+./node_modules/zod/src/v4/classic/tests/base.test.ts
+./node_modules/zod/src/v4/classic/tests/bigint.test.ts
+./node_modules/zod/src/v4/classic/tests/brand.test.ts
+./node_modules/zod/src/v4/classic/tests/catch.test.ts
+./node_modules/zod/src/v4/classic/tests/coalesce.test.ts
+./node_modules/zod/src/v4/classic/tests/codec-examples.test.ts
+./node_modules/zod/src/v4/classic/tests/codec.test.ts
+./node_modules/zod/src/v4/classic/tests/coerce.test.ts
+./node_modules/zod/src/v4/classic/tests/continuability.test.ts
+./node_modules/zod/src/v4/classic/tests/custom.test.ts
+./node_modules/zod/src/v4/classic/tests/date.test.ts
+./node_modules/zod/src/v4/classic/tests/datetime.test.ts
+./node_modules/zod/src/v4/classic/tests/default.test.ts
+./node_modules/zod/src/v4/classic/tests/description.test.ts
+./node_modules/zod/src/v4/classic/tests/discriminated-unions.test.ts
+./node_modules/zod/src/v4/classic/tests/enum.test.ts
+./node_modules/zod/src/v4/classic/tests/error-utils.test.ts
+./node_modules/zod/src/v4/classic/tests/error.test.ts
+./node_modules/zod/src/v4/classic/tests/file.test.ts
+./node_modules/zod/src/v4/classic/tests/firstparty.test.ts
+./node_modules/zod/src/v4/classic/tests/function.test.ts
+./node_modules/zod/src/v4/classic/tests/generics.test.ts
+./node_modules/zod/src/v4/classic/tests/hash.test.ts
+./node_modules/zod/src/v4/classic/tests/index.test.ts
+./node_modules/zod/src/v4/classic/tests/instanceof.test.ts
+./node_modules/zod/src/v4/classic/tests/intersection.test.ts
+./node_modules/zod/src/v4/classic/tests/json.test.ts
+./node_modules/zod/src/v4/classic/tests/lazy.test.ts
+./node_modules/zod/src/v4/classic/tests/literal.test.ts
+./node_modules/zod/src/v4/classic/tests/map.test.ts
+./node_modules/zod/src/v4/classic/tests/nan.test.ts
+./node_modules/zod/src/v4/classic/tests/nested-refine.test.ts
+./node_modules/zod/src/v4/classic/tests/nonoptional.test.ts
+./node_modules/zod/src/v4/classic/tests/nullable.test.ts
+./node_modules/zod/src/v4/classic/tests/number.test.ts
+./node_modules/zod/src/v4/classic/tests/object.test.ts
+./node_modules/zod/src/v4/classic/tests/optional.test.ts
+./node_modules/zod/src/v4/classic/tests/partial.test.ts
+./node_modules/zod/src/v4/classic/tests/pickomit.test.ts
+./node_modules/zod/src/v4/classic/tests/pipe.test.ts
+./node_modules/zod/src/v4/classic/tests/prefault.test.ts
+./node_modules/zod/src/v4/classic/tests/preprocess.test.ts
+./node_modules/zod/src/v4/classic/tests/primitive.test.ts
+./node_modules/zod/src/v4/classic/tests/promise.test.ts
+./node_modules/zod/src/v4/classic/tests/prototypes.test.ts
+./node_modules/zod/src/v4/classic/tests/readonly.test.ts
+./node_modules/zod/src/v4/classic/tests/record.test.ts
+./node_modules/zod/src/v4/classic/tests/refine.test.ts
+./node_modules/zod/src/v4/classic/tests/registries.test.ts
+./node_modules/zod/src/v4/classic/tests/set.test.ts
+./node_modules/zod/src/v4/classic/tests/standard-schema.test.ts
+./node_modules/zod/src/v4/classic/tests/string-formats.test.ts
+./node_modules/zod/src/v4/classic/tests/string.test.ts
+./node_modules/zod/src/v4/classic/tests/stringbool.test.ts
+./node_modules/zod/src/v4/classic/tests/template-literal.test.ts
+./node_modules/zod/src/v4/classic/tests/to-json-schema.test.ts
+./node_modules/zod/src/v4/classic/tests/transform.test.ts
+./node_modules/zod/src/v4/classic/tests/tuple.test.ts
+./node_modules/zod/src/v4/classic/tests/union.test.ts
+./node_modules/zod/src/v4/classic/tests/validations.test.ts
+./node_modules/zod/src/v4/classic/tests/void.test.ts
+./node_modules/zod/src/v4/core/tests/locales/be.test.ts
+./node_modules/zod/src/v4/core/tests/locales/en.test.ts
+./node_modules/zod/src/v4/core/tests/locales/es.test.ts
+./node_modules/zod/src/v4/core/tests/locales/ru.test.ts
+./node_modules/zod/src/v4/core/tests/locales/tr.test.ts
+./node_modules/zod/src/v4/core/tests/extend.test.ts
+./node_modules/zod/src/v4/core/tests/index.test.ts
+./node_modules/zod/src/v4/mini/tests/assignability.test.ts
+./node_modules/zod/src/v4/mini/tests/brand.test.ts
+./node_modules/zod/src/v4/mini/tests/checks.test.ts
+./node_modules/zod/src/v4/mini/tests/codec.test.ts
+./node_modules/zod/src/v4/mini/tests/computed.test.ts
+./node_modules/zod/src/v4/mini/tests/error.test.ts
+./node_modules/zod/src/v4/mini/tests/functions.test.ts
+./node_modules/zod/src/v4/mini/tests/index.test.ts
+./node_modules/zod/src/v4/mini/tests/number.test.ts
+./node_modules/zod/src/v4/mini/tests/object.test.ts
+./node_modules/zod/src/v4/mini/tests/prototypes.test.ts
+./node_modules/zod/src/v4/mini/tests/recursive-types.test.ts
+./node_modules/zod/src/v4/mini/tests/string.test.ts

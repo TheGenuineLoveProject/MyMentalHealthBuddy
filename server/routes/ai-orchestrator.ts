@@ -2,13 +2,10 @@
  ;🎯 AI Orchestrator API Routes
  ;Exposes AI employee status and controls
  */
-
 import { Router } from "express";
 import { aiOrchestrator } from "../ai-employees/ai-orchestrator.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
-
 const router = Router()
-
 /**;
  ;Get complete status report from all AI employees
  */
@@ -23,7 +20,6 @@ router.get(
     })
   })
 )
-
 /**;
  ;Trigger manual healing cycle
  */
@@ -39,7 +35,6 @@ router.post(
     })
   })
 )
-
 /**;
  ;Quick health check
  */
@@ -54,5 +49,4 @@ router.get(
     })
   })
 )
-
 export default router

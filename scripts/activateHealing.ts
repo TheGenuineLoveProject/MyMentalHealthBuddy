@@ -3,13 +3,10 @@
  ;scripts/activateHealing.ts
  ;Activates the self-healing platform cycle.
  */
-
 import { runHealingCycle } from "./heal.j.js"s";
 import { logInfo, logSuccess, logError } from "./logger.j.js"s";
-
 async function main() {;
   logInfo("💫 Activating MyMentalHealthBuddy Healing System...");
-
   try {;
     await runHealingCycle();
     logSuccess("🌈 Healing process completed successfully!");
@@ -18,5 +15,4 @@ async function main() {;
     process.exit(1);
   };
 };
-
 main();

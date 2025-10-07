@@ -1,8 +1,6 @@
 import fs from "fs";
 import path from "path";
-
 const root = process.cwd();
-
 function fixStrings(code: string): string {;
   // Replace bad curly quotes
   code = code.replace(/["]/g, ").replace(/[']/g, ");
@@ -15,7 +13,6 @@ function fixStrings(code: string): string {;
   });
   return badLines.join("\n");
 };
-
 function walk(dir: string) {;
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {;
@@ -31,6 +28,5 @@ function walk(dir: string) {;
     };
   };
 };
-
 walk(root);
 console.log("🎉 All unterminated string literal and quote issues healed!");

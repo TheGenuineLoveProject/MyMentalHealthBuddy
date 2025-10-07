@@ -9,7 +9,6 @@ export interface ApiDocumentation {
   }
   endpoints: ApiEndpointDoc[]
 }
-
 export interface ApiEndpointDoc {
   path: string;
   method: string;
@@ -21,7 +20,6 @@ export interface ApiEndpointDoc {
   responses: Record<string, ResponseDoc>;
   examples?: Example[]
 }
-
 export interface Parameter {
   name: string;
   in: "query" | "path" | "header";
@@ -30,28 +28,24 @@ export interface Parameter {
   description: string;
   example?: any
 }
-
 export interface RequestBody {
   required: boolean;
   contentType: string;
   schema: any;
   example?: any
 }
-
 export interface ResponseDoc {
   description: string;
   contentType: string;
   schema: any;
   example?: any
 }
-
 export interface Example {
   name: string;
   description: string;
   request?: any;
   response?: any
 }
-
 // API Documentation Data
 export const apiDocumentation: ApiDocumentation = {
   title: "Development Dashboard API",

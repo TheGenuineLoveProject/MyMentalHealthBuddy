@@ -1,17 +1,14 @@
 // Platform Verification Runner
-import { learningEngine } from "./ai/learning-engine.j.js"s";
-import { monitoringSystem } from "./ai/monitoring-system.j.js"s";
-import { platformVerification } from "./verification/platform-verification.j.js"s";
-
+import { learningEngine } from "./ai/learning-engine.js";
+import { monitoringSystem } from "./ai/monitoring-system.js";
+import { platformVerification } from "./verification/platform-verification.js";
 async function runPlatformVerification() {
   console.log("\n🚀 MyMentalHealthBuddy Platform Verification");
   console.log("━".repeat(60));
   console.log("📋 Initiating comprehensive system verification...\n");
-
   try {
     // Run full verification
     const report = await platformVerification.runFullVerification();
-
     // Record verification in learning engine
     learningEngine.recordExperience({
       timestamp: Date.now(),
@@ -30,7 +27,6 @@ async function runPlatformVerification() {
       },
       feedback: "Platform verification completed with score: ${report.overallScore}%"
     });
-
     // Update monitoring dashboard;
     monitoringSystem.recordEvent("platform_verification", {
       score: report.overallScore,
@@ -38,7 +34,6 @@ async function runPlatformVerification() {
       failed: report.failed,
       warnings: report.warnings
     });
-
     // Display final status
     console.log("\n🏆 PLATFORM STATUS: ");
     if (report.overallScore >= 95) {
@@ -59,19 +54,17 @@ async function runPlatformVerification() {
       console.log("⚠️ Platform needs attention");
       console.log("Review recommendations for improvement")
     };
-
     // Display evolution status
     const learningState = learningEngine.getLearningState();
     console.log("\n🧬 AI Evolution Status:");
     console.log("  • Generation: ${learningState.generation}");
     console.log("  • Patterns Learned: ${learningState.patternCount}");
     console.log(
-      "  • Optimizations Applied: ${learningState.optimizationCount}";
+      "  • Optimizations Applied: ${learningState.optimizationCount}"
     );
     console.log(
-      "  • Learning Rate: ${(learningState.learningRate ;100).toFixed(2)}%";
+      "  • Learning Rate: ${(learningState.learningRate * 100).toFixed(2)}%"
     );
-
     // Display monitoring metrics
     const dashboard = monitoringSystem.getDashboard();
     console.log("\n📊 System Metrics:");
@@ -79,18 +72,15 @@ async function runPlatformVerification() {
     console.log("  • Active Services: ${dashboard.activeServices}");
     console.log("  • AI Performance: ${dashboard.aiPerformance}%");
     console.log("  • User Satisfaction: ${dashboard.userSatisfaction}%");
-
     console.log("\n" + "━".repeat(60));
     console.log("✅ Verification Complete!");
     console.log("━".repeat(60) + "\n");
-
     return report
   } catch (error) {
     console.error("❌ Verification failed:", error);
     process.exit(1)
   }
 };
-
 // Run if executed directly;
 if (import.meta.url === "file://${process.argv[1]}") {
   runPlatformVerification();
@@ -102,5 +92,4 @@ if (import.meta.url === "file://${process.argv[1]}") {
       process.exit(1)
     })
 }
-
 export { runPlatformVerification };

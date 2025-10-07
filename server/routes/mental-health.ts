@@ -6,15 +6,12 @@ import {
   generateHealingResponse
 } from "../openai.js"
 import { storage } from "../storage.js"
-
 const router = Router()
-
 // Schema for chat request
 const chatSchema = z.object({
   message: z.string().min(1).max(1000),
   sessionId: z.string().optional()
 })
-
 // Main chat endpoint
 router.post(
   "/chat",
@@ -27,11 +24,9 @@ router.post(
           details: validation.error.errors
         })
       }
-
       const { message, sessionId } = validation.data
       const userId = req.session?.user?.id || "anonymous"
       const chatSessionId = sessionId || "session-${Date.now()}"
-
       // Get previous messages for context (if session exists)
       let previousMessages = []
       if (sessionId) {
@@ -44,7 +39,6 @@ router.post(
           console.log("Could not fetch previous messages:", error)
         }
       }
-
       // Generate AI response
       let aiResponse
       try {
@@ -58,7 +52,6 @@ router.post(
             role: msg.userMessage ? "user" : "assistant",
             content: msg.userMessage || msg.aiResponse
           }))
-
           aiResponse = await generateHealingResponse(
             message,
             conversationHistory
@@ -68,7 +61,6 @@ router.post(
         console.error("Error generating AI response:", error)
         aiResponse = generateCompassionateFallback(message)
       }
-
       // Store the conversation
       try {
         await storage.createHealingMessage({
@@ -86,7 +78,6 @@ router.post(
         console.error("Failed to store message:", error)
         // Continue even if storage fails
       }
-
       res.json({
         success: true,
         response: aiResponse,
@@ -96,28 +87,25 @@ router.post(
     } catch (error: any) {
       console.error("Chat endpoint error:", error)
       const fallbackResponse = generateCompassionateFallback(
-        req.body.message || "
-      )
+        req.body.message || ""
+      );
       res.json({
         success: true,
         response: fallbackResponse,
-        sessionId: "session-${Date.now()}",
+        sessionId: `session-${Date.now()}`,
         timestamp: new Date().toISOString()
       })
     }
   })
 )
-
 // Get chat history
 router.get(
   "/history",
   asyncHandler(async (req, res) => {
     const userId = req.session?.user?.id
-
     if (!userId) {
       return res.status(401).json({ error: "Authentication required" })
     }
-
     try {
       const messages = await storage.getHealingMessagesByUserId(userId)
       res.json({
@@ -138,7 +126,6 @@ router.get(
     }
   })
 )
-
 // Update message feedback
 router.post(
   "/feedback/:messageId",
@@ -146,11 +133,9 @@ router.post(
     const userId = req.session?.user?.id
     const { messageId } = req.params
     const { isHelpful, feedback } = req.body
-
     if (!userId) {
       return res.status(401).json({ error: "Authentication required" })
     }
-
     try {
       await storage.updateHealingMessageFeedback(
         messageId,
@@ -165,7 +150,6 @@ router.post(
     }
   })
 )
-
 // Get available prompts/suggestions
 router.get(
   "/prompts",
@@ -182,14 +166,12 @@ router.get(
       "I'm dealing with change",
       "I want to improve my mood"
     ]
-
     res.json({
       success: true,
       prompts
     })
   })
 )
-
 // Crisis resources endpoint
 router.get(
   "/crisis-resources",
@@ -225,5 +207,4 @@ router.get(
     })
   })
 )
-
 export default router

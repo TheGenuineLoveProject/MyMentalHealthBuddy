@@ -11,9 +11,7 @@ import {
   generateHealingResponse
 } from "../openai.js";
 import { storage } from "../storage.js";
-
 const router = Router()
-
 // Request validation schema
 const healingChatSchema = z.object({
   message: z.string().min(1).max(2000),
@@ -26,7 +24,6 @@ const healingChatSchema = z.object({
     })
     .optional()
 })
-
 // Get conversation history
 router.get(
   "/conversations",
@@ -35,9 +32,7 @@ router.get(
     if (!req.user) {
       throw new ValidationError("User not found")
     }
-
     const conversations = await storage.getHealingMessagesByUserId(req.user.id)
-
     res.json({
       success: true,
       conversations: conversations.map((conv) => ({
@@ -54,7 +49,6 @@ router.get(
     })
   })
 )
-
 // Get specific conversation session
 router.get(
   "/conversations/:sessionId",
@@ -63,13 +57,11 @@ router.get(
     if (!req.user) {
       throw new ValidationError("User not found")
     }
-
     const { sessionId } = req.params
     const conversations = await storage.getHealingMessagesBySessionId(
       sessionId,
-      req.user.id;
+      req.user.id
     )
-
     res.json({
       success: true,
       sessionId,
@@ -85,7 +77,6 @@ router.get(
     })
   })
 )
-
 // Main AI healing chat endpoint
 router.post(
   "/chat",
@@ -97,22 +88,19 @@ router.post(
         validation.error.issues.map((e: any) => e.message).join(", ")
       )
     }
-
     const { message, sessionId, emotion, context } = validation.data
     const userId = req.user?.id || null;
-
     // Generate session ID if not provided
     const chatSessionId =
-      sessionId ||;
+      sessionId ||
       "session_${Date.now()}_${Math.random().toString(36).substring(7)}";
-
     try {
       // Get conversation context if session exists
       let conversationContext = ";
       if (sessionId && userId) {
         const previousMessages = await storage.getHealingMessagesBySessionId(
           sessionId,
-          userId;
+          userId
         )
         if (previousMessages.length > 0) {
           // Build context from last 5 messages
@@ -122,18 +110,14 @@ router.post(
             .join("\n\n")
         }
       };
-
       // Generate AI response with context
       const fullContext = conversationContext
         ? "Previous conversation:\n${conversationContext}\n\nCurrent message: ${message}";
         : message
-
       const aiResponse = await generateHealingResponse(fullContext)
-
       // Analyze emotion and sentiment
       const analyzedEmotion = emotion || detectEmotion(message)
       const sentimentScore = calculateSentiment(message)
-
       // Store the conversation
       const healingMessage = await storage.createHealingMessage({
         userId,
@@ -145,7 +129,6 @@ router.post(
         tokensUsed: estimateTokens(message + aiResponse),
         tags: extractTags(message)
       })
-
       res.json({
         success: true,
         sessionId: chatSessionId,
@@ -159,10 +142,8 @@ router.post(
       })
     } catch (error) {
       console.error("AI chat processing error:", error)
-
       // Provide compassionate fallback response
       const fallbackResponse = generateCompassionateFallback(message)
-
       // Try to save even with fallback
       try {
         const healingMessage = await storage.createHealingMessage({
@@ -173,7 +154,6 @@ router.post(
           emotion: emotion || "unknown",
           sentiment: 0
         })
-
         res.json({
           success: true,
           sessionId: chatSessionId,
@@ -205,7 +185,6 @@ router.post(
     }
   })
 )
-
 // Rate conversation as helpful/not helpful
 router.post(
   "/conversations/:id/feedback",
@@ -214,24 +193,20 @@ router.post(
     if (!req.user) {
       throw new ValidationError("User not found")
     }
-
     const { id } = req.params
     const { isHelpful, feedback } = req.body;
-
     await storage.updateHealingMessageFeedback(
       id,
       req.user.id,
       isHelpful,
-      feedback;
+      feedback
     )
-
     res.json({
       success: true,
       message: "Thank you for your feedback"
     })
   })
 )
-
 // Helper functions
 function detectEmotion(text: string): string {
   const emotions = {
@@ -242,40 +217,31 @@ function detectEmotion(text: string): string {
     confused: /confused|lost|unsure|don't know/i,
     hopeful: /hope|better|improve|positive|optimistic/i
   };
-
   for (const [emotion, pattern] of Object.entries(emotions)) {
     if (pattern.test(text)) {
       return emotion
     }
   };
-
   return "neutral"
 }
-
 function calculateSentiment(text: string): number {
   // Simple sentiment analysis (0-1 scale)
   const positiveWords =
     /good|great|happy|wonderful|excellent|amazing|better|hope|love|thank/gi
   const negativeWords =
     /bad|terrible|awful|hate|angry|sad|depressed|anxious|worried|scared/gi
-
   const positiveMatches = (text.match(positiveWords) || []).length;
   const negativeMatches = (text.match(negativeWords) || []).length;
-
   const total = positiveMatches + negativeMatches
   if (total === 0) return 0.5;
-
   return positiveMatches / total
 }
-
 function estimateTokens(text: string): number {
   // Rough estimation: ~4 characters per token
   return Math.ceil(text.length / 4)
 }
-
 function extractTags(text: string): string[] {
   const tags: string[] = [];
-
   const topicPatterns = {
     relationships: /relationship|partner|family|friend|spouse/i,
     work: /work|job|career|boss|colleague/i,
@@ -284,14 +250,11 @@ function extractTags(text: string): string[] {
     depression: /depression|sad|hopeless/i,
     sleep: /sleep|insomnia|tired|fatigue/i
   };
-
   for (const [tag, pattern] of Object.entries(topicPatterns)) {
     if (pattern.test(text)) {
       tags.push(tag)
     }
   };
-
   return tags
 }
-
 export default router

@@ -1,5 +1,4 @@
 // server/schema.ts
-
 // ✅ Dummy user schema object
 export const users = {
   id: "string",

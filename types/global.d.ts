@@ -9,7 +9,6 @@ declare namespace NodeJS {;
     STRIPE_SECRET_KEY?: string
   };
 };
-
 declare module ";.js";
 declare module ";.ts";
 declare module ";.json";

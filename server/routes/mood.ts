@@ -1,9 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 import { asyncHandler } from "../middleware/errorHandler.js";
-
 const router = Router()
-
 // Schema for mood entry
 const moodEntrySchema = z.object({
   mood: z.number().min(1).max(10),
@@ -13,13 +11,11 @@ const moodEntrySchema = z.object({
   activities: z.array(z.string()).optional(),
   date: z.string()
 })
-
 // Track mood
 router.post(
   "/track",
   asyncHandler(async (req, res) => {
     const userId = req.session?.user?.id || "anonymous";
-
     const validation = moodEntrySchema.safeParse(req.body)
     if (!validation.success) {
       return res.status(400).json({
@@ -27,9 +23,7 @@ router.post(
         details: validation.error.errors
       })
     }
-
     const { mood, energy, anxiety, notes, activities, date } = validation.data;
-
     try {
       // Store mood entry using storage interface
       const moodEntry = {
@@ -42,10 +36,8 @@ router.post(
         date: new Date(date),
         createdAt: new Date()
       }
-
       // For now, store in memory (will switch to PostgreSQL)
       const id = "mood_${Date.now()}";
-
       res.json({
         success: true,
         id,
@@ -57,16 +49,14 @@ router.post(
     }
   })
 )
-
 // Get mood history
 router.get(
   "/history",
   asyncHandler(async (req, res) => {
     const userId = req.session?.user?.id || "anonymous";
-
     try {
       // For now, return sample data (will fetch from PostgreSQL)
-      const moods = [;
+      const moods = [
         {
           id: "1",
           mood: 7,
@@ -84,7 +74,6 @@ router.get(
           activities: ["Reading", "Nature"]
         }
       ];
-
       res.json({
         success: true,
         moods
@@ -95,14 +84,12 @@ router.get(
     }
   })
 )
-
 // Get mood for specific date
 router.get(
   "/date/:date",
   asyncHandler(async (req, res) => {
     const userId = req.session?.user?.id || "anonymous";
     const { date } = req.params
-
     try {
       // For now, return null or sample data
       res.json({
@@ -115,13 +102,11 @@ router.get(
     }
   })
 )
-
 // Get mood statistics
 router.get(
   "/stats",
   asyncHandler(async (req, res) => {
     const userId = req.session?.user?.id || "anonymous";
-
     try {
       const stats = {
         averageMood: 6.5,
@@ -130,7 +115,6 @@ router.get(
         bestStreak: 7,
         lastEntry: new Date(Date.now() - 86400000).toISOString()
       }
-
       res.json({
         success: true,
         stats
@@ -150,5 +134,4 @@ router.get(
     }
   })
 )
-
 export default router

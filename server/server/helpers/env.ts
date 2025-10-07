@@ -1,5 +1,4 @@
 import dotenv from "dotenv";
-
 export function loadEnv() {
   dotenv.config();
   if (!process.env.PORT) process.env.PORT = "5000";

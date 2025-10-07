@@ -2,31 +2,24 @@
  ;💬 AI Chat Manager Employee
  ;Oversees OpenAI chat healing & fallback logic
  */
-
 import {
   generateCompassionateFallback,
   generateHealingResponse
 } from "../openai.js"
-
 export class AIChatManager {
   private name = "ChatGPT Healer"
   private conversationCache = new Map()
-
   /**
    ;Manages AI chat sessions with auto-healing
    */
   async manageChatSession(userId: string, message: string) {
     try {
       console.log("💬 [${this.name}] Processing chat for user ${userId}")
-
       // Try primary AI response
       const response = await generateHealingResponse(message)
-
       // Cache conversation for context
       this.cacheConversation(userId, message, response)
-
       console.log("✅ [${this.name}] Chat processed successfully")
-
       return {
         success: true,
         response,
@@ -37,10 +30,8 @@ export class AIChatManager {
         "❌ [${this.name}] Chat error, activating fallback:",
         error
       )
-
       // Auto-fallback to compassionate response
       const fallbackResponse = generateCompassionateFallback(message)
-
       return {
         success: true,
         response: fallbackResponse,
@@ -49,7 +40,6 @@ export class AIChatManager {
       }
     }
   };
-
   /**
    ;Caches conversations for context management
    */
@@ -57,16 +47,13 @@ export class AIChatManager {
     if (!this.conversationCache.has(userId)) {
       this.conversationCache.set(userId, [])
     }
-
     const history = this.conversationCache.get(userId)
     history.push({ message, response, timestamp: Date.now() })
-
     // Keep only last 10 messages for memory efficiency
     if (history.length > 10) {
       history.shift()
     }
   };
-
   /**
    ;Self-monitors chat quality
    */
@@ -77,18 +64,14 @@ export class AIChatManager {
       avgResponseTime: "1.2s",
       fallbackRate: "2%"
     };
-
     console.log("📊 [${this.name}] Chat metrics:", metrics)
-
     return metrics
   };
-
   /**
    ;Auto-optimizes chat responses
    */
   async selfOptimize() {
     console.log("🧬 [${this.name}] Optimizing chat algorithms...")
-
     // Clear old conversations to free memory
     const now = Date.now()
     this.conversationCache.forEach((history, userId) => {
@@ -101,11 +84,9 @@ export class AIChatManager {
         this.conversationCache.set(userId, recentMessages)
       }
     })
-
     console.log(
       "✨ [${this.name}] Chat optimization complete. Cache optimized."
     )
   }
 }
-
 export const chatManager = new AIChatManager()

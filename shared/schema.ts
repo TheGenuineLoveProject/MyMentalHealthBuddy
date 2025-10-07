@@ -11,7 +11,6 @@ import {
 } from "drizzle-orm/pg-core"
 import { createInsertSchema } from "drizzle-zod"
 import { z } from "zod"
-
 export const users = pgTable("users", {
   id: varchar("id")
     .primaryKey()
@@ -32,7 +31,6 @@ export const users = pgTable("users", {
   profileImage: text("profile_image"),
   preferences: jsonb("preferences").default({})
 })
-
 export const services = pgTable("services", {
   id: varchar("id")
     .primaryKey()
@@ -45,7 +43,6 @@ export const services = pgTable("services", {
   uptime: text("uptime"),
   lastChecked: timestamp("last_checked").defaultNow()
 })
-
 export const apiEndpoints = pgTable("api_endpoints", {
   id: varchar("id")
     .primaryKey()
@@ -55,7 +52,6 @@ export const apiEndpoints = pgTable("api_endpoints", {
   description: text("description").notNull(),
   status: text("status").notNull().default("active")
 })
-
 export const projectStructure = pgTable("project_structure", {
   id: varchar("id")
     .primaryKey()
@@ -65,7 +61,6 @@ export const projectStructure = pgTable("project_structure", {
   path: text("path").notNull(),
   parentId: varchar("parent_id")
 })
-
 export const packages = pgTable("packages", {
   id: varchar("id")
     .primaryKey()
@@ -75,7 +70,6 @@ export const packages = pgTable("packages", {
   environment: text("environment").notNull(), // "backend" or "frontend"
   isDev: boolean("is_dev").default(false)
 })
-
 export const scripts = pgTable("scripts", {
   id: varchar("id")
     .primaryKey()
@@ -85,7 +79,6 @@ export const scripts = pgTable("scripts", {
   description: text("description"),
   environment: text("environment").notNull()
 })
-
 export const healingMessages = pgTable("healing_messages", {
   id: varchar("id")
     .primaryKey()
@@ -101,13 +94,11 @@ export const healingMessages = pgTable("healing_messages", {
   isHelpful: boolean("is_helpful"),
   tags: text("tags").array()
 })
-
 export const sessions = pgTable("sessions", {
   sid: varchar("sid").primaryKey(),
   sess: jsonb("sess").notNull(),
   expire: timestamp("expire").notNull()
 })
-
 export const billingTransactions = pgTable("billing_transactions", {
   id: varchar("id")
     .primaryKey()
@@ -122,7 +113,6 @@ export const billingTransactions = pgTable("billing_transactions", {
   createdAt: timestamp("created_at").defaultNow(),
   metadata: jsonb("metadata").default({})
 })
-
 export const analyticsEvents = pgTable("analytics_events", {
   id: varchar("id")
     .primaryKey()
@@ -137,7 +127,6 @@ export const analyticsEvents = pgTable("analytics_events", {
   userAgent: text("user_agent"),
   ipAddress: varchar("ip_address")
 })
-
 export const ttsConfigurations = pgTable("tts_configurations", {
   id: varchar("id")
     .primaryKey()
@@ -150,7 +139,6 @@ export const ttsConfigurations = pgTable("tts_configurations", {
   provider: text("provider").default("openai"),
   isDefault: boolean("is_default").default(false)
 })
-
 export const assessments = pgTable("assessments", {
   id: varchar("id")
     .primaryKey()
@@ -164,7 +152,6 @@ export const assessments = pgTable("assessments", {
   completedAt: timestamp("completed_at").defaultNow(),
   followUpDate: timestamp("follow_up_date")
 })
-
 export const systemLogs = pgTable("system_logs", {
   id: varchar("id")
     .primaryKey()
@@ -178,7 +165,6 @@ export const systemLogs = pgTable("system_logs", {
   resolved: boolean("resolved").default(false),
   resolutionNotes: text("resolution_notes")
 })
-
 export const subscriptionPlans = pgTable("subscription_plans", {
   id: varchar("id")
     .primaryKey()
@@ -198,7 +184,6 @@ export const subscriptionPlans = pgTable("subscription_plans", {
   isActive: boolean("is_active").default(true),
   createdAt: timestamp("created_at").defaultNow()
 })
-
 export const journals = pgTable("journals", {
   id: varchar("id")
     .primaryKey()
@@ -212,7 +197,6 @@ export const journals = pgTable("journals", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow()
 })
-
 export const moodEntries = pgTable("mood_entries", {
   id: varchar("id")
     .primaryKey()
@@ -225,7 +209,6 @@ export const moodEntries = pgTable("mood_entries", {
   triggers: text("triggers").array(),
   createdAt: timestamp("created_at").defaultNow()
 })
-
 export const crisisResources = pgTable("crisis_resources", {
   id: varchar("id")
     .primaryKey()
@@ -239,7 +222,6 @@ export const crisisResources = pgTable("crisis_resources", {
   isActive: boolean("is_active").default(true),
   priority: integer("priority").default(0)
 })
-
 export const copingStrategies = pgTable("coping_strategies", {
   id: varchar("id")
     .primaryKey()
@@ -254,7 +236,6 @@ export const copingStrategies = pgTable("coping_strategies", {
   isPersonalized: boolean("is_personalized").default(false),
   createdAt: timestamp("created_at").defaultNow()
 })
-
 export const insertUserSchema = createInsertSchema(users)
   .pick({
     username: true,
@@ -267,44 +248,36 @@ export const insertUserSchema = createInsertSchema(users)
     password: z.string().min(6),
     username: z.string().min(3)
   })
-
 export const insertServiceSchema = createInsertSchema(services).omit({
   id: true,
   lastChecked: true
 })
-
 export const insertApiEndpointSchema = createInsertSchema(apiEndpoints).omit({
   id: true
 })
-
 export const insertProjectStructureSchema = createInsertSchema(
   projectStructure
 ).omit({
   id: true
 })
-
 export const insertPackageSchema = createInsertSchema(packages).omit({
   id: true
 })
-
 export const insertScriptSchema = createInsertSchema(scripts).omit({
   id: true
 })
-
 export const insertHealingMessageSchema = createInsertSchema(
   healingMessages
 ).omit({
   id: true,
   timestamp: true
 })
-
 export const healingRequestSchema = z.object({
   message: z
     .string()
     .min(1, "Message cannot be empty")
     .max(1000, "Message too long")
 })
-
 export type InsertUser = z.infer<typeof insertUserSchema>
 export type User = typeof users.$inferSelect
 export type Service = typeof services.$inferSelect
@@ -312,7 +285,6 @@ export type ApiEndpoint = typeof apiEndpoints.$inferSelect
 export type ProjectStructure = typeof projectStructure.$inferSelect
 export type Package = typeof packages.$inferSelect
 export type Script = typeof scripts.$inferSelect
-
 export type InsertService = z.infer<typeof insertServiceSchema>
 export type InsertApiEndpoint = z.infer<typeof insertApiEndpointSchema>
 export type InsertProjectStructure = z.infer<
@@ -323,7 +295,6 @@ export type InsertScript = z.infer<typeof insertScriptSchema>
 export type InsertHealingMessage = z.infer<typeof insertHealingMessageSchema>
 export type HealingRequest = z.infer<typeof healingRequestSchema>
 export type HealingMessage = typeof healingMessages.$inferSelect
-
 export const insertBillingTransactionSchema = createInsertSchema(
   billingTransactions
 ).omit({
@@ -355,7 +326,6 @@ export const insertSubscriptionPlanSchema = createInsertSchema(
   id: true,
   createdAt: true
 })
-
 export type InsertBillingTransaction = z.infer<
   typeof insertBillingTransactionSchema
 >
@@ -375,7 +345,6 @@ export type InsertSubscriptionPlan = z.infer<
   typeof insertSubscriptionPlanSchema
 >
 export type SelectSubscriptionPlan = typeof subscriptionPlans.$inferSelect
-
 export const insertJournalSchema = createInsertSchema(journals).omit({
   id: true,
   createdAt: true,
@@ -392,7 +361,6 @@ export const insertCopingStrategySchema = createInsertSchema(copingStrategies).o
   id: true,
   createdAt: true
 })
-
 export type InsertJournal = z.infer<typeof insertJournalSchema>
 export type SelectJournal = typeof journals.$inferSelect
 export type InsertMoodEntry = z.infer<typeof insertMoodEntrySchema>

@@ -1,9 +1,7 @@
 import dotenv from "dotenv";
 import { z } from "zod";
-
 // Load environment variables from .env file
 dotenv.config()
-
 // Define environment variable schema with validation
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"])
@@ -24,10 +22,8 @@ const envSchema = z.object({
     .default("true")
     .transform((val) => val === "true")
 })
-
 // Parse and validate environment variables
 const parseResult = envSchema.safeParse(process.env)
-
 if (!parseResult.success) {
   console.error("❌ Invalid environment variables:")
   parseResult.error.issues.forEach((issue) => {
@@ -35,22 +31,17 @@ if (!parseResult.success) {
   })
   process.exit(1)
 }
-
 export const config = parseResult.data;
-
 // Type-safe environment variables
 export type Config = typeof config
-
 // Helper function to check if we're in production
 export const isProduction = config.NODE_ENV === "production";
 export const isDevelopment = config.NODE_ENV === "development";
 export const isTest = config.NODE_ENV === "test";
-
 // Logging configuration
 export const logConfig = {
   level: config.LOG_LEVEL,
   format: isProduction ? "json" : "pretty",
   timestamp: true
 }
-
 // Configuration loaded successfully

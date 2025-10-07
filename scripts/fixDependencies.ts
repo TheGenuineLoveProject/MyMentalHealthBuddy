@@ -1,14 +1,11 @@
 import { execSync } from "child_process";
-
 console.log("🧹 Cleaning environment...");
 execSync("rm -rf node_modules package-lock.json pnpm-lock.yaml", {;
   stdio: "inherit";
 });
-
 console.log("📦 Installing fixed dependencies...");
 execSync(;
   "npm install typescript@5.4.5 supertest@7.0.0 drizzle-orm@0.30.9 drizzle-zod@0.5.1 vitest@1.6.0 @types/supertest@2.0.16 --legacy-peer-deps",;
   { stdio: "inherit" };
 );
-
 console.log("✅ Dependencies healed successfully!");

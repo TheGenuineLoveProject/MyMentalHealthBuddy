@@ -15,7 +15,6 @@ import {
   type User
 } from "@shared/schema"
 import { randomUUID } from "crypto"
-
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>
   getUserById(id: string): Promise<User | undefined>
@@ -24,7 +23,6 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>
   updateUser(id: string, updates: Partial<User>): Promise<User | undefined>
   updateUserLastLogin(id: string): Promise<void>
-
   getAllServices(): Promise<Service[]>
   getService(id: string): Promise<Service | undefined>
   createService(service: InsertService): Promise<Service>
@@ -32,21 +30,16 @@ export interface IStorage {
     id: string,
     updates: Partial<Service>
   ): Promise<Service | undefined>
-
   getAllApiEndpoints(): Promise<ApiEndpoint[]>
   createApiEndpoint(endpoint: InsertApiEndpoint): Promise<ApiEndpoint>
-
   getAllProjectStructure(): Promise<ProjectStructure[]>
   createProjectStructure(
     item: InsertProjectStructure
   ): Promise<ProjectStructure>
-
   getAllPackages(): Promise<Package[]>
   createPackage(pkg: InsertPackage): Promise<Package>
-
   getAllScripts(): Promise<Script[]>
   createScript(script: InsertScript): Promise<Script>
-
   getAllHealingMessages(): Promise<HealingMessage[]>
   createHealingMessage(message: InsertHealingMessage): Promise<HealingMessage>
   getHealingMessagesByUserId(userId: string): Promise<HealingMessage[]>
@@ -60,9 +53,7 @@ export interface IStorage {
     isHelpful: boolean,
     feedback?: string
   ): Promise<void>
-
   removeDuplicates(): Promise<{ removed: number; details: string[] }>
-
   updateUserStripeInfo(
     userId: string,
     stripeCustomerId: string,
@@ -75,7 +66,6 @@ export interface IStorage {
     endDate?: Date
   ): Promise<User | undefined>
 }
-
 export class MemStorage implements IStorage {
   private users: Map<string, User>
   private services: Map<string, Service>
@@ -84,7 +74,6 @@ export class MemStorage implements IStorage {
   private packages: Map<string, Package>
   private scripts: Map<string, Script>
   private healingMessages: Map<string, HealingMessage>
-
   constructor() {
     this.users = new Map()
     this.services = new Map()
@@ -93,10 +82,8 @@ export class MemStorage implements IStorage {
     this.packages = new Map()
     this.scripts = new Map()
     this.healingMessages = new Map()
-
     this.initializeData()
   }
-
   private initializeData() {
     const mainService: Service = {
       id: randomUUID(),
@@ -108,9 +95,7 @@ export class MemStorage implements IStorage {
       uptime: null,
       lastChecked: new Date()
     }
-
     this.services.set(mainService.id, mainService)
-
     const endpoints: InsertApiEndpoint[] = [
       {
         method: "GET",
@@ -167,7 +152,6 @@ export class MemStorage implements IStorage {
         status: "active"
       }
     ]
-
     endpoints.forEach((endpoint) => {
       const apiEndpoint: ApiEndpoint = {
         ...endpoint,
@@ -176,7 +160,6 @@ export class MemStorage implements IStorage {
       }
       this.apiEndpoints.set(apiEndpoint.id, apiEndpoint)
     })
-
     const structure: InsertProjectStructure[] = [
       { name: "client", type: "folder", path: "/client", parentId: null },
       { name: "server", type: "folder", path: "/server", parentId: null },
@@ -200,7 +183,6 @@ export class MemStorage implements IStorage {
         parentId: null
       }
     ]
-
     structure.forEach((item) => {
       const structureItem: ProjectStructure = {
         ...item,
@@ -209,7 +191,6 @@ export class MemStorage implements IStorage {
       }
       this.projectStructure.set(structureItem.id, structureItem)
     })
-
     const packageList: InsertPackage[] = [
       {
         name: "express",
@@ -260,7 +241,6 @@ export class MemStorage implements IStorage {
         isDev: false
       }
     ]
-
     packageList.forEach((pkg) => {
       const packageItem: Package = {
         ...pkg,
@@ -269,7 +249,6 @@ export class MemStorage implements IStorage {
       }
       this.packages.set(packageItem.id, packageItem)
     })
-
     const scriptList: InsertScript[] = [
       {
         name: "dev",
@@ -302,7 +281,6 @@ export class MemStorage implements IStorage {
         environment: "backend"
       }
     ]
-
     scriptList.forEach((script) => {
       const scriptItem: Script = {
         ...script,
@@ -315,29 +293,23 @@ export class MemStorage implements IStorage {
       this.scripts.set(scriptItem.id, scriptItem)
     })
   }
-
   async getUser(id: string): Promise<User | undefined> {
     return this.users.get(id)
   }
-
   async getUserById(id: string): Promise<User | undefined> {
     return this.users.get(id)
   }
-
   async getUserByUsername(username: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find((u) => u.username === username)
   }
-
   async getUserByEmail(email: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find((u) => u.email === email)
   }
-
   async getHealingMessagesByUserId(userId: string): Promise<HealingMessage[]> {
     return Array.from(this.healingMessages.values()).filter(
       (m) => m.userId === userId
     )
   }
-
   async getHealingMessagesBySessionId(
     sessionId: string,
     userId: string
@@ -346,7 +318,6 @@ export class MemStorage implements IStorage {
       (m) => m.sessionId === sessionId && m.userId === userId
     )
   }
-
   async updateHealingMessageFeedback(
     id: string,
     userId: string,
@@ -362,7 +333,6 @@ export class MemStorage implements IStorage {
       this.healingMessages.set(id, updatedMessage)
     }
   }
-
   async createUser(user: InsertUser): Promise<User> {
     const id = randomUUID()
     const newUser: User = {
@@ -385,19 +355,16 @@ export class MemStorage implements IStorage {
     this.users.set(id, newUser)
     return newUser
   }
-
   async updateUser(
     id: string,
     updates: Partial<User>
   ): Promise<User | undefined> {
     const user = this.users.get(id)
     if (!user) return undefined
-
     const updatedUser = { ...user, ...updates }
     this.users.set(id, updatedUser)
     return updatedUser
   }
-
   async updateUserLastLogin(id: string): Promise<void> {
     const user = this.users.get(id)
     if (user) {
@@ -405,15 +372,12 @@ export class MemStorage implements IStorage {
       this.users.set(id, updatedUser)
     }
   }
-
   async getAllServices(): Promise<Service[]> {
     return Array.from(this.services.values())
   }
-
   async getService(id: string): Promise<Service | undefined> {
     return this.services.get(id)
   }
-
   async createService(service: InsertService): Promise<Service> {
     const existing = Array.from(this.services.values()).find(
       (s) => s.name === service.name && s.port === service.port
@@ -421,7 +385,6 @@ export class MemStorage implements IStorage {
     if (existing) {
       return this.updateService(existing.id, service) as Promise<Service>
     }
-
     const id = randomUUID()
     const newService: Service = {
       ...service,
@@ -434,23 +397,19 @@ export class MemStorage implements IStorage {
     this.services.set(id, newService)
     return newService
   }
-
   async updateService(
     id: string,
     updates: Partial<Service>
   ): Promise<Service | undefined> {
     const service = this.services.get(id)
     if (!service) return undefined
-
     const updatedService = { ...service, ...updates, lastChecked: new Date() }
     this.services.set(id, updatedService)
     return updatedService
   }
-
   async getAllApiEndpoints(): Promise<ApiEndpoint[]> {
     return Array.from(this.apiEndpoints.values())
   }
-
   async createApiEndpoint(endpoint: InsertApiEndpoint): Promise<ApiEndpoint> {
     const existing = Array.from(this.apiEndpoints.values()).find(
       (e) => e.method === endpoint.method && e.path === endpoint.path
@@ -464,7 +423,6 @@ export class MemStorage implements IStorage {
       this.apiEndpoints.set(existing.id, updated)
       return updated
     }
-
     const id = randomUUID()
     const newEndpoint: ApiEndpoint = {
       ...endpoint,
@@ -474,11 +432,9 @@ export class MemStorage implements IStorage {
     this.apiEndpoints.set(id, newEndpoint)
     return newEndpoint
   }
-
   async getAllProjectStructure(): Promise<ProjectStructure[]> {
     return Array.from(this.projectStructure.values())
   }
-
   async createProjectStructure(
     item: InsertProjectStructure
   ): Promise<ProjectStructure> {
@@ -490,7 +446,6 @@ export class MemStorage implements IStorage {
       this.projectStructure.set(existing.id, updated)
       return updated
     }
-
     const id = randomUUID()
     const newItem: ProjectStructure = {
       ...item,
@@ -500,11 +455,9 @@ export class MemStorage implements IStorage {
     this.projectStructure.set(id, newItem)
     return newItem
   }
-
   async getAllPackages(): Promise<Package[]> {
     return Array.from(this.packages.values())
   }
-
   async createPackage(pkg: InsertPackage): Promise<Package> {
     const existing = Array.from(this.packages.values()).find(
       (p) => p.name === pkg.name && p.environment === pkg.environment
@@ -514,7 +467,6 @@ export class MemStorage implements IStorage {
       this.packages.set(existing.id, updated)
       return updated
     }
-
     const id = randomUUID()
     const newPackage: Package = {
       ...pkg,
@@ -524,11 +476,9 @@ export class MemStorage implements IStorage {
     this.packages.set(id, newPackage)
     return newPackage
   }
-
   async getAllScripts(): Promise<Script[]> {
     return Array.from(this.scripts.values())
   }
-
   async createScript(script: InsertScript): Promise<Script> {
     const existing = Array.from(this.scripts.values()).find(
       (s) => s.name === script.name && s.command === script.command
@@ -538,7 +488,6 @@ export class MemStorage implements IStorage {
       this.scripts.set(existing.id, updated)
       return updated
     }
-
     const id = randomUUID()
     const newScript: Script = {
       ...script,
@@ -549,11 +498,9 @@ export class MemStorage implements IStorage {
     this.scripts.set(id, newScript)
     return newScript
   }
-
   async getAllHealingMessages(): Promise<HealingMessage[]> {
     return Array.from(this.healingMessages.values())
   }
-
   async createHealingMessage(
     message: InsertHealingMessage
   ): Promise<HealingMessage> {
@@ -569,14 +516,11 @@ export class MemStorage implements IStorage {
     this.healingMessages.set(id, newMessage)
     return newMessage
   }
-
   async removeDuplicates(): Promise<{ removed: number; details: string[] }> {
     let removed = 0
     const details: string[] = []
-
     const servicesSeen = new Map<string, Service>()
     const servicesToRemove: string[] = []
-
     this.services.forEach((service, id) => {
       const key = `${service.name}:${service.port}`
       if (servicesSeen.has(key)) {
@@ -590,10 +534,8 @@ export class MemStorage implements IStorage {
       }
     })
     servicesToRemove.forEach((id) => this.services.delete(id))
-
     const endpointsSeen = new Map<string, ApiEndpoint>()
     const endpointsToRemove: string[] = []
-
     this.apiEndpoints.forEach((endpoint, id) => {
       const key = `${endpoint.method}:${endpoint.path}`
       if (endpointsSeen.has(key)) {
@@ -607,10 +549,8 @@ export class MemStorage implements IStorage {
       }
     })
     endpointsToRemove.forEach((id) => this.apiEndpoints.delete(id))
-
     const packagesSeen = new Map<string, Package>()
     const packagesToRemove: string[] = []
-
     this.packages.forEach((pkg, id) => {
       const key = `${pkg.name}:${pkg.environment}`
       if (packagesSeen.has(key)) {
@@ -624,10 +564,8 @@ export class MemStorage implements IStorage {
       }
     })
     packagesToRemove.forEach((id) => this.packages.delete(id))
-
     const scriptsSeen = new Map<string, Script>()
     const scriptsToRemove: string[] = []
-
     this.scripts.forEach((script, id) => {
       const key = `${script.name}:${script.command}`
       if (scriptsSeen.has(key)) {
@@ -639,10 +577,8 @@ export class MemStorage implements IStorage {
       }
     })
     scriptsToRemove.forEach((id) => this.scripts.delete(id))
-
     const structureSeen = new Map<string, ProjectStructure>()
     const structureToRemove: string[] = []
-
     this.projectStructure.forEach((item, id) => {
       const key = item.path
       if (structureSeen.has(key)) {
@@ -654,10 +590,8 @@ export class MemStorage implements IStorage {
       }
     })
     structureToRemove.forEach((id) => this.projectStructure.delete(id))
-
     return { removed, details }
   }
-
   async updateUserStripeInfo(
     userId: string,
     stripeCustomerId: string,
@@ -665,7 +599,6 @@ export class MemStorage implements IStorage {
   ): Promise<User | undefined> {
     const user = this.users.get(userId)
     if (!user) return undefined
-
     const updatedUser = {
       ...user,
       stripeCustomerId,
@@ -675,7 +608,6 @@ export class MemStorage implements IStorage {
     this.users.set(userId, updatedUser)
     return updatedUser
   }
-
   async updateUserSubscription(
     userId: string,
     tier: string,
@@ -684,7 +616,6 @@ export class MemStorage implements IStorage {
   ): Promise<User | undefined> {
     const user = this.users.get(userId)
     if (!user) return undefined
-
     const updatedUser = {
       ...user,
       subscriptionTier: tier,
@@ -695,5 +626,4 @@ export class MemStorage implements IStorage {
     return updatedUser
   }
 }
-
 export const storage = new MemStorage()

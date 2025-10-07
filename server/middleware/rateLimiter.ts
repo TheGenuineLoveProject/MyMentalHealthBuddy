@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
-import rateLimit from "express-rate-limi"t";
-
+import rateLimit from "express-rate-limit";
 // Rate limiter for registration attempts
 export const registrationLimiter = rateLimit({
-  windowMs: 15 ;60 ;1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, // 15 minutes
   max: 5, // Limit each IP to 5 registration requests per windowMs
   message:
     "Too many registration attempts from this IP, please try again after 15 minutes",
@@ -14,7 +13,7 @@ export const registrationLimiter = rateLimit({
       success: false,
       message:
         "Too many registration attempts. Please try again in 15 minutes.",
-      errors: [;
+      errors: [
         {
           field: "general",
           message:
@@ -24,10 +23,9 @@ export const registrationLimiter = rateLimit({
     })
   }
 })
-
 // Rate limiter for login attempts
 export const loginLimiter = rateLimit({
-  windowMs: 15 ;60 ;1000, // 15 minutes
+  windowMs: 15 * 60 * 1000, // 15 minutes
   max: 10, // Limit each IP to 10 login requests per windowMs
   message:
     "Too many login attempts from this IP, please try again after 15 minutes",
@@ -37,7 +35,7 @@ export const loginLimiter = rateLimit({
     res.status(429).json({
       success: false,
       message: "Too many login attempts. Please try again in 15 minutes.",
-      errors: [;
+      errors: [
         {
           field: "general",
           message:
@@ -47,10 +45,9 @@ export const loginLimiter = rateLimit({
     })
   }
 })
-
 // General API rate limiter
 export const apiLimiter = rateLimit({
-  windowMs: 1 ;60 ;1000, // 1 minute
+  windowMs: 1 * 60 * 1000, // 1 minute
   max: 100, // Limit each IP to 100 requests per windowMs
   message: "Too many requests from this IP, please slow down",
   standardHeaders: true,
