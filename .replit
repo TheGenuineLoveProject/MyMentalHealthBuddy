@@ -66,6 +66,3 @@ waitForPort = 5000
 
 [interpreter]
 entrypoint = "index.ts"
-
-[agent]
-expertMode = true
