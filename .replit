@@ -1,52 +1,27 @@
-# .replit — launch configuration for a Node + Vite (React) + Express monorepo
+# Replit launch configuration for Node + Vite (monorepo-friendly)
 
-# When you click "Run"
 run = "bash -lc 'npm run dev'"
-modules = ["nodejs-20"]
 
 [nix]
 channel = "stable-24_05"
 
-# Handy env vars (ports may be changed if already taken)
 [env]
 PORT = "5000"
 VITE_PORT = "5173"
 NODE_ENV = "development"
 
-# Deployment/Preview (Replit Deploys use this)
 [deployment]
-run = ["sh", "-lc", "npm run preview"]
+run = "bash -lc 'npm run preview'"
 
-# Keep the file tree tidy
+# Keep the file tree tidy (must be a TOML array of strings)
 hidden = [".cache", ".npm", "node_modules", "dist", "client/dist"]
 
-[agent]
-expertMode = true
+[unitTest]
+run = "bash -lc 'npm test'"
 
-[workflows]
-runButton = "Project"
+[packager]
+ignoredPaths = [".cache", ".npm", "node_modules", "dist", "client/dist"]
 
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"
-
-[[ports]]
-localPort = 5000
-externalPort = 80
+[ports]
+# What Replit should proxy to the webview
+previewPort = 5000
