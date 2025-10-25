@@ -1,51 +1,17 @@
-modules = ["bash", "nodejs-20", "web", "postgresql-16"]
-run = "npm run dev"
-hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+modules = ["bash", "nodejs-20"]
+run = "bash -lc 'npm run dev'"
+hidden = [".config", ".git", "node_modules", "client/dist", "server/dist"]
 
 [nix]
-channel = "stable-25_05"
-packages = ["jq"]
+channel = "stable-24_05"
 
 [deployment]
 deploymentTarget = "autoscale"
-build = ["npm", "run", "build"]
-run = ["npm", "run", "start"]
+build = ["npm","run","build"]
+run = ["npm","run","start"]
 
-[[ports]]
-localPort = 3000
-externalPort = 4200
-
-[[ports]]
-localPort = 5000
-externalPort = 80
-
-[[ports]]
-localPort = 32857
-externalPort = 3003
-
-[[ports]]
-localPort = 32995
-externalPort = 5173
-
-[[ports]]
-localPort = 35897
-externalPort = 3000
-
-[[ports]]
-localPort = 37699
-externalPort = 6000
-
-[[ports]]
-localPort = 39033
-externalPort = 5000
-
-[[ports]]
-localPort = 39281
-externalPort = 3002
-
-[[ports]]
-localPort = 45083
-externalPort = 3001
+[ports]
+previewPort = 5173
 
 [workflows]
 runButton = "Project"
@@ -67,12 +33,6 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
-run = "npm start"
-language = "nodejs"
-entrypoint = "server/index.ts"
 
-[interpreter]
-entrypoint = "index.ts"
-
-[agent]
-expertMode = true
+[workflows.workflow.metadata]
+outputType = "webview"
