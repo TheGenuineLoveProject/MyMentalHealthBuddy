@@ -1,20 +1,27 @@
 {
   "name": "mymentalhealthbuddy-monorepo",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
-  "packageManager": "npm@10.8.2",
-  "workspaces": ["client","server"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "preinstall": "node -v && npm -v",
-    "install": "npm -w client install && npm -w server install",
-    "build": "npm -w server run build && npm -w client run build",
-    "typecheck": "npm -w server run typecheck && npm -w client run typecheck",
-    "lint": "npm -w client run lint",
-    "dev": "npm -w server run dev & npm -w client run dev",
-    "start": "npm -w server run start"
+    "dev": "npm run dev -w apps/server",
+    "dev:client": "npm run dev -w apps/client",
+    "build": "npm run build -ws",
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "refine": "prettier --write .",
+    "start:all": "npx concurrently -n SERVER,CLIENT -c cyan,magenta \"npm run dev -w apps/server\" \"npm run dev -w apps/client\""
   },
   "devDependencies": {
-    "typescript": "5.6.3"
+    "typescript": "^5.6.3",
+    "eslint": "^9.12.0",
+    "prettier": "^3.3.3",
+    "vitest": "^2.1.2",
+    "concurrently": "^8.2.2"
   }
 }
