@@ -1,27 +1,18 @@
 {
   "name": "mymentalhealthbuddy-monorepo",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.1.0",
   "type": "module",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*"],
   "scripts": {
-    "dev": "npm run dev -w apps/server",
+    "fixports": "kill-port 3000 5000 5001 5002 9999 || true",
+    "dev:server": "npm run dev -w apps/server",
     "dev:client": "npm run dev -w apps/client",
-    "build": "npm run build -ws",
-    "lint": "eslint . --ext .ts,.tsx",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "vitest run",
-    "refine": "prettier --write .",
-    "start:all": "npx concurrently -n SERVER,CLIENT -c cyan,magenta \"npm run dev -w apps/server\" \"npm run dev -w apps/client\""
+    "start:all": "npm run fixports && concurrently -n SERVER,CLIENT -c cyan,magenta \"npm run dev -w apps/server\" \"npm run dev -w apps/client\"",
+    "heal": "npm install && npm run start:all"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
-    "eslint": "^9.12.0",
-    "prettier": "^3.3.3",
-    "vitest": "^2.1.2",
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "kill-port": "^2.0.1"
   }
 }

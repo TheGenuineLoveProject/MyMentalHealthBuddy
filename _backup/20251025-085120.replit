@@ -1,0 +1,18 @@
+modules = ["bash", "nodejs-20"]
+run = "bash -lc 'npm run dev'"
+hidden = [".config", ".git", "node_modules", "client/dist", "server/dist"]
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm","run","build"]
+run = ["npm","run","start"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[agent]
+expertMode = true

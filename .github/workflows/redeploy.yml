@@ -1,0 +1,26 @@
+name: Auto-Redeploy-to-Replit
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  redeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Node + dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Replit Redeploy
+        env:
+          REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
+        run: |
+          echo "🔁 Triggering Replit redeploy..."
+          curl -X POST "https://replit.com/data/redeploy" \
+            -H "Authorization: Bearer $REPLIT_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"project":"MyMentalHealthBuddy","action":"rebuild"}'
