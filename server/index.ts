@@ -31,7 +31,7 @@ const __dirname = path.dirname(__filename);
 const CLIENT_DIST = path.resolve(__dirname, '../client/dist');
 
 app.use(express.static(CLIENT_DIST));
-app.use((_req, res) => res.sendFile(path.join(CLIENT_DIST, 'index.html')));
+app.get(/^(?!\/api).*/, (_req, res) => res.sendFile(path.join(CLIENT_DIST, 'index.html')));
 
 const PORT = Number(process.env.PORT || 5000);
 app.listen(PORT, () => {
