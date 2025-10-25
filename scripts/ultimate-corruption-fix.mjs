@@ -36,9 +36,9 @@ allFiles.forEach(file => {
     fileFixCount++;
   }
 
-  // Fix 2: Remove semicolons after opening braces: {; → {
-  if (content.match(/\{;/g)) {
-    content = content.replace(/\{;/g, '{');
+  // Fix 2: Remove semicolons after opening braces: { → {
+  if (content.match(/\{/g)) {
+    content = content.replace(/\{/g, '{');
     fileFixCount++;
   }
 

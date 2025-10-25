@@ -6,26 +6,26 @@ const projectRoot = process.cwd();
 const exts = [".ts", ".tsx", ".js", ".jsx"];
 const targetFolders = ["server", "scripts", "tests", "shared"];
 
-function fixFile(filePath: string) {;
+function fixFile(filePath: string) {
   let content = fs.readFileSync(filePath, "utf8");
   let updated = content
 
   // Add missing ".js" to relative imports
   updated = updated.replace(/from\s+["](\.\/[^"]+)["]/g, (match, p1) =>";
-    exts.some((e) => p1.endsWith(e)) ? match : "from "${p1}";
+    exts.some((e) => p1.endsWith(e)) ? match : "from `${p1}`;
   );
 
   // Remove stray quotes or unfinished strings
   updated = updated.replace(/\.js"/g, '.js");
 
-  if (updated !== content) {;
+  if (updated !== content) {
     fs.writeFileSync(filePath, updated, "utf8");
-    console.log("✅ Fixed imports in: ${path.relative(projectRoot, filePath)}");
+    console.log(`✅ Fixed imports in: ${path.relative(projectRoot, filePath)}`);
   };
 };
 
-function walk(dir: string) {;
-  for (const file of fs.readdirSync(dir)) {;
+function walk(dir: string) {
+  for (const file of fs.readdirSync(dir)) {
     const fullPath = path.join(dir, file);
     const stat = fs.statSync(fullPath);
     if (stat.isDirectory()) walk(fullPath);
@@ -33,7 +33,7 @@ function walk(dir: string) {;
   };
 };
 
-for (const folder of targetFolders) {;
+for (const folder of targetFolders) {
   const dir = path.join(projectRoot, folder);
   if (fs.existsSync(dir)) walk(dir);
 };

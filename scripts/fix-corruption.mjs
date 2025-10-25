@@ -65,11 +65,11 @@ corruptedFiles.forEach((filePath) => {
 
     // Fix pattern 2: Remove erroneous semicolons after closing braces/parens
     content = content.replace(/\}\);$/gm, '})');
-    content = content.replace(/\{;$/gm, '{');
+    content = content.replace(/\{$/gm, '{');
     content = content.replace(/\);$/gm, ')');
 
     // Fix pattern 3: Remove semicolons after function declarations
-    content = content.replace(/^(export )?function [^{]+\{;$/gm, (match) => {
+    content = content.replace(/^(export )?function [^{]+\{$/gm, (match) => {
       return match.replace(/;$/, '');
     });
 

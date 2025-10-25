@@ -39,7 +39,7 @@ allFiles.forEach(file => {
   
   // 2. Opening punctuation with semicolon
   content = content.replace(/\[;/g, '[');
-  content = content.replace(/\{;/g, '{');
+  content = content.replace(/\{/g, '{');
   content = content.replace(/\(;\s*\n/g, '(\n');
   
   // 3. Operator semicolons
@@ -49,7 +49,7 @@ allFiles.forEach(file => {
   content = content.replace(/\|\|;/g, '||');
   content = content.replace(/&&;/g, '&&');
   
-  // 4. Number prefix corruption (;0.95 should be * 0.95)
+  // 4. Number prefix corruption (* 0.95 should be * 0.95)
   content = content.replace(/ ;(\d+\.?\d*)/g, ' * $1');
   
   // 5. Identifier splits (letter; followed by dot)

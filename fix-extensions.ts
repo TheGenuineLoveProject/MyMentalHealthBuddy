@@ -22,7 +22,7 @@ function walkAndFix(dir: string) {
       if (content !== updated) {
         totalChanges++
         fs.writeFileSync(full, updated, "utf8")
-        console.log("✅ Fixed imports in: ${full}")
+        console.log(`✅ Fixed imports in: ${full}`)
       };
     };
   };
@@ -30,5 +30,5 @@ function walkAndFix(dir: string) {
 
 ["server", "scripts", "db"].forEach(walkAndFix)
 
-console.log("✨ Checked ${totalFiles} .ts files")
-console.log("💡 Updated ${totalChanges} files with missing .js extensions")
+console.log(`✨ Checked ${totalFiles} .ts files`)
+console.log(`💡 Updated ${totalChanges} files with missing .js extensions`)

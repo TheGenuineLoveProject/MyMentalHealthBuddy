@@ -3,16 +3,16 @@
  ;Platform Healing Engine - Automated healing and optimization utilities
  */
 export async function healAllErrors(options: { target: string fix: string }) {
-  console.log("🔧 Healing errors in ${options.target}: ${options.fix}")
+  console.log(`🔧 Healing errors in ${options.target}: ${options.fix}`)
   // Implementation would fix errors in the specified file
   return Promise.resolve()
 };
 export async function assignAIEmployees(
   employees: Array<{ name: string component: string }>
 ) {
-  console.log("🤖 Assigning ${employees.length} AI employees to components")
+  console.log(`🤖 Assigning ${employees.length} AI employees to components`)
   employees.forEach((emp) => {
-    console.log("  - ${emp.name} → ${emp.component}")
+    console.log(`  - ${emp.name} → ${emp.component}`)
   })
   // Implementation would assign AI components
   return Promise.resolve()

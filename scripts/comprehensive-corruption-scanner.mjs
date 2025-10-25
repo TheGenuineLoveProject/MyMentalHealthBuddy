@@ -25,7 +25,7 @@ console.log(`🔍 Scanning ${allFiles.length} TypeScript files for corruption...
 // Comprehensive corruption patterns
 const corruptionPatterns = [
   { name: 'Opening bracket with semicolon', regex: /\[;/g, fix: '[' },
-  { name: 'Opening brace with semicolon', regex: /\{;/g, fix: '{' },
+  { name: 'Opening brace with semicolon', regex: /\{/g, fix: '{' },
   { name: 'Opening paren with semicolon', regex: /\(;\s*\n/g, fix: '(\n' },
   { name: 'Comma semicolon', regex: /,;/g, fix: ',' },
   { name: 'Colon semicolon', regex: /:;/g, fix: ':' },

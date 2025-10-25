@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 console.log("🧹 Cleaning environment...");
-execSync("rm -rf node_modules package-lock.json pnpm-lock.yaml", {;
+execSync("rm -rf node_modules package-lock.json pnpm-lock.yaml", {
   stdio: "inherit";
 });
 console.log("📦 Installing fixed dependencies...");

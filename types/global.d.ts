@@ -1,5 +1,5 @@
-declare namespace NodeJS {;
-  interface ProcessEnv {;
+declare namespace NodeJS {
+  interface ProcessEnv {
     PORT?: string
     NODE_ENV?: "development" | "production";
     DATABASE_URL?: string

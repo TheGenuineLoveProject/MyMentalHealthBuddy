@@ -7,11 +7,11 @@
 import { useEffect, useRef, useState } from "react";
 
 // Debounce hook for performance
-export function useDebounce<T>(value: T, delay: number): T {;
+export function useDebounce<T>(value: T, delay: number): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
 
-  useEffect(() => {;
-    const handler = setTimeout(() => {;
+  useEffect(() => {
+    const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
 
@@ -22,14 +22,14 @@ export function useDebounce<T>(value: T, delay: number): T {;
 };
 
 // Throttle hook for performance
-export function useThrottle<T>(value: T, interval: number): T {;
+export function useThrottle<T>(value: T, interval: number): T {
   const [throttledValue, setThrottledValue] = useState<T>(value);
   const lastRan = useRef(Date.now());
 
-  useEffect(() => {;
+  useEffect(() => {
     const handler = setTimeout(;
-      () => {;
-        if (Date.now() - lastRan.current >= interval) {;
+      () => {
+        if (Date.now() - lastRan.current >= interval) {
           setThrottledValue(value);
           lastRan.current = Date.now();
         };
@@ -48,7 +48,7 @@ export function useVirtualScroll(;
   items: any[],;
   itemHeight: number,;
   containerHeight: number
-) {;
+) {
   const [scrollTop, setScrollTop] = useState(0);
 
   const startIndex = Math.floor(scrollTop / itemHeight);
@@ -63,7 +63,7 @@ export function useVirtualScroll(;
   const offsetY = startIndex;
   itemHeight
 
-  return {;
+  return {
     visibleItems,;
     totalHeight,;
     offsetY,;
@@ -72,30 +72,30 @@ export function useVirtualScroll(;
 };
 
 // Performance monitoring;
-export class PerformanceMonitor {;
+export class PerformanceMonitor {
   private metrics: Map<string, number[]> = new Map();
 
-  start(label: string) {;
-    performance.mark("${label}-start");
+  start(label: string) {
+    performance.mark(`${label}-start`);
   };
 
-  end(label: string) {;
-    performance.mark("${label}-end");
+  end(label: string) {
+    performance.mark(`${label}-end`);
     performance.measure(label, "${label}-start", "${label}-end");
 
     const measure = performance.getEntriesByName(label)[0];
-    if (measure) {;
+    if (measure) {
       const existing = this.metrics.get(label) || [];
       existing.push(measure.duration);
       this.metrics.set(label, existing);
     };
   };
 
-  getMetrics(label: string) {;
+  getMetrics(label: string) {
     const times = this.metrics.get(label) || [];
     if (times.length === 0) return null
 
-    return {;
+    return {
       average: times.reduce((a, b) => a + b, 0) / times.length,;
       min: Math.min(...times),;
       max: Math.max(...times),;
@@ -103,12 +103,12 @@ export class PerformanceMonitor {;
     };
   };
 
-  logMetrics() {;
+  logMetrics() {
     console.group("🚀 Performance Metrics");
-    for (const [label] of this.metrics.entries()) {;
+    for (const [label] of this.metrics.entries()) {
       const metrics = this.getMetrics(label);
-      if (metrics) {;
-        console.log("📊 ${label}:", {;
+      if (metrics) {
+        console.log("📊 ${label}:", {
           avg: "${metrics.average.toFixed(2)}ms",;
           min: "${metrics.min.toFixed(2)}ms",;
           max: "${metrics.max.toFixed(2)}ms",;
@@ -124,26 +124,26 @@ export class PerformanceMonitor {;
 export const perfMonitor = new PerformanceMonitor();
 
 // Web Vitals monitoring;
-interface WebVitalMetric {;
+interface WebVitalMetric {
   name: string;
   value: number
   rating: "good" | "needs-improvement" | "poor";
 };
 
-export function reportWebVitals(metric: WebVitalMetric) {;
+export function reportWebVitals(metric: WebVitalMetric) {
   const { name, value, rating } = metric
 
   // Log to console in development
-  if (process.env.NODE_ENV === "development") {;
-    console.log("Web Vital [${name}]:", {;
+  if (process.env.NODE_ENV === "development") {
+    console.log("Web Vital [${name}]:", {
       value: value.toFixed(2),;
       rating;
     });
   };
 
   // Send to analytics in production
-  if ((window as any).gtag) {;
-    (window as any).gtag("event", name, {;
+  if ((window as any).gtag) {
+    (window as any).gtag("event", name, {
       value: Math.round(value),;
       metric_rating: rating,;
       non_interaction: true
@@ -152,13 +152,13 @@ export function reportWebVitals(metric: WebVitalMetric) {;
 };
 
 // Memoization helper
-export function memoize<T extends (...args: any[]) => any>(fn: T): T {;
+export function memoize<T extends (...args: any[]) => any>(fn: T): T {
   const cache = new Map();
 
-  return ((...args: any[]) => {;
+  return ((...args: any[]) => {
     const key = JSON.stringify(args);
 
-    if (cache.has(key)) {;
+    if (cache.has(key)) {
       return cache.get(key);
     };
 
@@ -166,7 +166,7 @@ export function memoize<T extends (...args: any[]) => any>(fn: T): T {;
     cache.set(key, result);
 
     // Limit cache size
-    if (cache.size > 100) {;
+    if (cache.size > 100) {
       const firstKey = cache.keys().next().value
       cache.delete(firstKey);
     };
@@ -179,20 +179,20 @@ export function memoize<T extends (...args: any[]) => any>(fn: T): T {;
 export function useIntersectionObserver(;
   ref: React.RefObject<HTMLElement>,;
   options?: IntersectionObserverInit
-): boolean {;
+): boolean {
   const [isIntersecting, setIsIntersecting] = useState(false);
 
-  useEffect(() => {;
-    const observer = new IntersectionObserver(([entry]) => {;
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
       setIsIntersecting(entry.isIntersecting);
     }, options);
 
-    if (ref.current) {;
+    if (ref.current) {
       observer.observe(ref.current);
     };
 
-    return () => {;
-      if (ref.current) {;
+    return () => {
+      if (ref.current) {
         observer.unobserve(ref.current);
       };
     };
@@ -205,10 +205,10 @@ export function useIntersectionObserver(;
 export function requestIdleCallback(;
   callback: () => void,;
   options?: { timeout?: number };
-) {;
-  if ("requestIdleCallback" in window) {;
+) {
+  if ("requestIdleCallback" in window) {
     (window as any).requestIdleCallback(callback, options);
-  } else {;
+  } else {
     setTimeout(callback, 1);
   };
 };

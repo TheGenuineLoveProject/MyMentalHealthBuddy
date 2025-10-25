@@ -1,47 +1,32 @@
 {
   "name": "mymentalhealthbuddy",
   "version": "1.0.0",
-  "main": "server/start.ts",
+  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx server/start.ts",
-    "build": "tsc",
-    "start": "node build/server/start.js"
+    "dev": "TS_NODE_TRANSPILE_ONLY=1 ts-node-dev --respawn --pretty --ignore-watch node_modules server/index.ts",
+    "dev:client": "vite --port 5173",
+    "build": "tsc -p .",
+    "start": "node dist/server/index.js",
+    "typecheck": "tsc -p . --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.8.1",
-    "@types/bcryptjs": "^2.4.6",
-    "@types/express-session": "^1.18.2",
-    "@types/jsonwebtoken": "^9.0.10",
-    "@types/passport": "^1.0.17",
-    "@types/passport-local": "^1.0.38",
-    "@types/ws": "^8.18.1",
-    "bcryptjs": "^3.0.2",
     "compression": "^1.7.4",
-    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.30.5",
-    "drizzle-zod": "^0.5.1",
-    "express": "^4.18.2",
-    "express-rate-limit": "^8.1.0",
-    "express-session": "^1.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
     "helmet": "^7.0.0",
-    "jsonwebtoken": "^9.0.2",
-    "nanoid": "^5.1.6",
-    "node-cache": "^5.1.2",
-    "p-retry": "^7.0.0",
-    "passport": "^0.7.0",
-    "passport-local": "^1.0.0",
-    "response-time": "^2.3.4",
-    "stripe": "^19.1.0",
-    "ws": "^8.18.3",
-    "zod": "^4.1.12"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^5.0.4",
-    "tsx": "^4.7.0",
-    "typescript": "^5.4.3",
-    "vite": "^7.1.9"
+    "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.10",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.0",
+    "vitest": "^1.6.0"
   }
 }

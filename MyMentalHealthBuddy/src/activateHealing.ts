@@ -4,7 +4,7 @@ import { automate } from "./utils/automate";
 import { deploy } from "./utils/deploy";
 import { manage } from "./utils/manager";
 
-async function activateHealing() {;
+async function activateHealing() {
   console.log("🧠 Healing started...");
 
   await heal();
@@ -18,6 +18,6 @@ async function activateHealing() {;
   );
 };
 
-activateHealing().catch((err) => {;
+activateHealing().catch((err) => {
   console.error("❌ Healing failed:", err);
 });

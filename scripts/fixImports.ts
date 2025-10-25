@@ -1,41 +1,46 @@
-/**;
- ;scripts/fixImports.ts
- ;⚡ Universal Import Auto-Healer for MyMentalHealthBuddy;
- ;Fixes unterminated quotes, missing semicolons, and adds .js extensions
- */
+// scripts/fixImports.ts — safe, fast, first-party only
 import fs from "fs";
 import path from "path";
-const ROOT = process.cwd();
-const FOLDERS = ["server", "scripts", "shared", "tests"];
-const EXTS = [".ts", ".tsx", ".js", ".jsx"];
-function healFile(filePath: string) {;
-  let text = fs.readFileSync(filePath, "utf8");
-  let fixed = text
-  // 1️⃣ Fix unterminated string literals in imports
-  fixed = fixed.replace(/from\s+["]([^"]+)(?!["])/gm, 'from "$"1");
-  // 2️⃣ Add missing .js extension to relative imports
-  fixed = fixed.replace(/from\s+["](\.\/[^"]+)["]/g, (m, p1) =>";
-    EXTS.some(ext => p1.endsWith(ext)) ? m : "from "${p1}";
-  );
-  // 3️⃣ Ensure every import line ends with ;
-  fixed = fixed.replace(/(from\s+["][^"]+["])(?!)/g, "$1")";
-  // 4️⃣ Remove duplicate .js";
-  fixed = fixed.replace(/\.js"/g, '.js");
-  if (fixed !== text) {;
-    fs.writeFileSync(filePath, fixed, "utf8");
-    console.log("✅ Fixed:", filePath);
-  };
-};
-function walk(dir: string) {;
-  for (const entry of fs.readdirSync(dir)) {;
-    const full = path.join(dir, entry);
-    const stats = fs.statSync(full);
-    if (stats.isDirectory()) walk(full);
-    else if (EXTS.includes(path.extname(full))) healFile(full);
-  };
-};
-for (const f of FOLDERS) {;
-  const dir = path.join(ROOT, f);
-  if (fs.existsSync(dir)) walk(dir);
-};
-console.log("\n✨ All import statements healed successfully!");
+
+// Scan these project folders only (adjust as needed)
+const ROOTS = ["MyMentalHealthBuddy", "server", "scripts", "src"].map(p =>
+  path.join(process.cwd(), p)
+);
+
+// never touch third-party or build outputs
+const SKIP_DIRS = new Set([
+  "node_modules", ".git", "dist", "build", ".vite", ".next", ".turbo", ".cache"
+]);
+
+const EXTS = [".ts", ".tsx", ".js", ".mjs", ".cjs"];
+
+const FIXES: Array<[RegExp, string]> = [
+  [/\.j\.js"s"/g, ".js"],
+  [/child_process/g, "child_process"],
+  [/node:fs/g, "node:fs"],
+  [/@jest\/global"s"/g, "@jest/globals"],
+  [/console\.log\("([^"`]*?)\$\{([^}]+)\}([^"`]*?)"\)/g, "console.log(`$1\${$2}$3`)"],
+  [/performance\.mark\("([^"`]*?)\$\{([^}]+)\}([^"`]*?)"\)/g, "performance.mark(`$1\${$2}$3`)"],
+  [/\{\;/g, "{"], [/\;\}/g, "}"], [/;0\./g, "* 0."]
+];
+
+function healText(t: string) { return FIXES.reduce((s,[rx,repl])=>s.replace(rx,repl), t); }
+
+function healFile(fp: string) {
+  const txt = fs.readFileSync(fp, "utf8");
+  const out = healText(txt);
+  if (out !== txt) { fs.writeFileSync(fp, out); console.log("🩹 Fixed:", fp); }
+}
+
+function walk(dir: string) {
+  for (const name of fs.readdirSync(dir)) {
+    if (SKIP_DIRS.has(name)) continue;
+    const p = path.join(dir, name);
+    const st = fs.statSync(p);
+    if (st.isDirectory()) walk(p);
+    else if (EXTS.some(e => name.endsWith(e))) healFile(p);
+  }
+}
+
+for (const r of ROOTS) if (fs.existsSync(r)) walk(r);
+console.log("✅ All import/template/semicolon repairs complete");

@@ -1,47 +1,27 @@
-modules = ["nodejs-20", "web", "postgresql-16"]
-run = "npm run dev"
-hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+# .replit — launch configuration for a Node + Vite (React) + Express monorepo
+
+# When you click "Run"
+run = "bash -lc 'npm run dev'"
+modules = ["nodejs-20"]
 
 [nix]
 channel = "stable-24_05"
-packages = ["jq"]
 
+# Handy env vars (ports may be changed if already taken)
+[env]
+PORT = "5000"
+VITE_PORT = "5173"
+NODE_ENV = "development"
+
+# Deployment/Preview (Replit Deploys use this)
 [deployment]
-deploymentTarget = "autoscale"
-build = ["npm", "run", "build"]
-run = ["npm", "run", "start"]
+run = ["sh", "-lc", "npm run preview"]
 
-[[ports]]
-localPort = 5000
-externalPort = 80
+# Keep the file tree tidy
+hidden = [".cache", ".npm", "node_modules", "dist", "client/dist"]
 
-[[ports]]
-localPort = 32857
-externalPort = 3003
-
-[[ports]]
-localPort = 32995
-externalPort = 5173
-
-[[ports]]
-localPort = 35897
-externalPort = 3000
-
-[[ports]]
-localPort = 39033
-externalPort = 5000
-
-[[ports]]
-localPort = 39281
-externalPort = 3002
-
-[[ports]]
-localPort = 42323
-externalPort = 4200
-
-[[ports]]
-localPort = 45083
-externalPort = 3001
+[agent]
+expertMode = true
 
 [workflows]
 runButton = "Project"
@@ -64,5 +44,9 @@ task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
 
-[interpreter]
-entrypoint = "index.ts"
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
