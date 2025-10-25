@@ -1,16 +1,12 @@
-{{
+{
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022", "DOM"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "types": ["node"],
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "dist"
-  },
-  "include": ["server/**/*", "shared/**/*", "scripts/**/*"]
+    "forceConsistentCasingInFileNames": true
+  }
 }

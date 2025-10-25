@@ -17,7 +17,7 @@ export async function runCoreHealing(): Promise<void> {
       if (!fs.existsSync(dir)) continue
       healedCount += healDirectory(dir);
     };
-    logSuccess("✨ Healing Core completed successfully. ${healedCount} files processed.");
+    logSuccess(`✨ Healing Core completed successfully. ${healedCount} files processed.`);
   } catch (err) {
     logError("❌ Healing Core encountered an error", err);
   };

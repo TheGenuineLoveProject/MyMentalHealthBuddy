@@ -1,49 +1,20 @@
 {
-  "name": "mymhb-launcher",
-  "version": "1.0.0",
+  "name": "mymentalhealthbuddy-monorepo",
   "private": true,
+  "version": "0.0.1",
   "type": "module",
-  "engines": {
-    "node": ">=20 <21",
-    "npm": ">=10 <11"
-  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": ["client","server"],
   "scripts": {
-    "typecheck": "tsc --noEmit",
-    "repair": "tsx scripts/repair.ts",
-    "db:push": "drizzle-kit push",
-    "build:client": "npm --prefix MyMentalHealthBuddy/client run build",
-    "dev": "tsx server/index.ts",
-    "start": "tsx server/index.ts",
-    "preview": "tsx server/index.ts",
-    "build": "tsc",
-    "test": "node -e \"console.log('tests placeholder');\""
-  },
-  "dependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/jsonwebtoken": "^9.0.10",
-    "bcryptjs": "^3.0.2",
-    "compression": "^1.7.4",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "drizzle-orm": "^0.44.7",
-    "express": "^5.0.1",
-    "express-session": "^1.18.1",
-    "helmet": "^8.0.0",
-    "jsonwebtoken": "^9.0.2",
-    "postgres": "^3.4.7",
-    "response-time": "^2.3.4",
-    "zod": "^3.23.8"
+    "preinstall": "node -v && npm -v",
+    "install": "npm -w client install && npm -w server install",
+    "build": "npm -w server run build && npm -w client run build",
+    "typecheck": "npm -w server run typecheck && npm -w client run typecheck",
+    "lint": "npm -w client run lint",
+    "dev": "npm -w server run dev & npm -w client run dev",
+    "start": "npm -w server run start"
   },
   "devDependencies": {
-    "@types/compression": "^1.7.5",
-    "@types/cookie-parser": "^1.4.7",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/express-session": "^1.18.0",
-    "@types/node": "^22.10.5",
-    "drizzle-kit": "^0.28.1",
-    "tsx": "^4.20.6",
-    "typescript": "^5.6.3"
+    "typescript": "5.6.3"
   }
 }

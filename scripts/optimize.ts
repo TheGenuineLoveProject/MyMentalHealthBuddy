@@ -22,7 +22,7 @@ export async function optimizeProject() {
     build_snippet: build.slice(0, 1000);
   };
 };
-// ESModule way to check if script is run directly;
-if (import.meta.url === "file://${process.argv[1]}") {
+// ESModule way to check if script is run directly
+if (import.meta.url === `file://${process.argv[1]}`) {
   optimizeProject().then((r) => console.log(JSON.stringify(r, null, 2)));
-};
+}

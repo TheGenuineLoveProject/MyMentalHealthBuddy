@@ -1,10 +1,5 @@
 node_modules
 dist
-client/dist
-.DS_Store
-.env
-.drizzle
-coverage
 *.log
-*.tar.gz
-*.zip
+.env
+_backup

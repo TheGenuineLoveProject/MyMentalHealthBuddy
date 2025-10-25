@@ -5,8 +5,8 @@
 
 import { describe, it, expect, beforeAll, afterAll } from "@jest/globals";
 import request from "supertest";
-import { app } from "../server/index.j"s";
-import { aiOrchestrator } from "../server/ai-employees/ai-orchestrator.j"s";
+import { app } from "../server/index.js";
+import { aiOrchestrator } from "../server/ai-employees/ai-orchestrator.js";
 
 describe("MyMentalHealthBuddy Platform Tests", () => {
   beforeAll(async () => {
@@ -35,35 +35,35 @@ describe("MyMentalHealthBuddy Platform Tests", () => {
 
   describe("🔐 Authentication Tests", () => {
     it("should allow user signup", async () => {
-      const response = await request(app);
-        .post("/api/auth/signup");
+      const response = await request(app)
+        .post("/api/auth/signup")
         .send({
-          email: "test${Date.now()}@example.com",;
-          password: "SecurePass123!",;
-          name: "Test User";
-        });
+          email: `test${Date.now()}@example.com`,
+          password: "SecurePass123!",
+          name: "Test User"
+        })
         .expect(201);
 
       expect(response.body.success).toBe(true);
     });
 
     it("should allow user login", async () => {
-      const email = "test${Date.now()}@example.com";
+      const email = `test${Date.now()}@example.com`;
 
       // First signup
       await request(app).post("/api/auth/signup").send({
-        email,;
-        password: "SecurePass123!",;
-        name: "Test User";
+        email,
+        password: "SecurePass123!",
+        name: "Test User"
       });
 
-      // Then login;
-      const response = await request(app);
-        .post("/api/auth/login");
+      // Then login
+      const response = await request(app)
+        .post("/api/auth/login")
         .send({
-          email,;
-          password: "SecurePass123!";
-        });
+          email,
+          password: "SecurePass123!"
+        })
         .expect(200);
 
       expect(response.body.success).toBe(true);
@@ -72,15 +72,15 @@ describe("MyMentalHealthBuddy Platform Tests", () => {
 
   describe("🧠 Mood Tracking Tests", () => {
     it("should track mood entry", async () => {
-      const response = await request(app);
-        .post("/api/mood/track");
+      const response = await request(app)
+        .post("/api/mood/track")
         .send({
-          mood: 7,;
-          energy: 6,;
-          anxiety: 3,;
-          notes: "Feeling good today",;
-          date: new Date().toISOString();
-        });
+          mood: 7,
+          energy: 6,
+          anxiety: 3,
+          notes: "Feeling good today",
+          date: new Date().toISOString()
+        })
         .expect(200);
 
       expect(response.body.success).toBe(true);
@@ -96,22 +96,22 @@ describe("MyMentalHealthBuddy Platform Tests", () => {
 
   describe("💬 Chat API Tests", () => {
     it("should handle chat messages", async () => {
-      const response = await request(app);
-        .post("/api/mental-health/chat");
+      const response = await request(app)
+        .post("/api/mental-health/chat")
         .send({
-          message: "I need someone to talk to";
-        });
+          message: "I need someone to talk to"
+        })
         .expect(200);
 
       expect(response.body.response).toBeDefined();
     });
 
     it("should provide fallback for errors", async () => {
-      const response = await request(app);
-        .post("/api/mental-health/chat");
+      const response = await request(app)
+        .post("/api/mental-health/chat")
         .send({
-          message: ";
-        });
+          message: ""
+        })
         .expect(200);
 
       expect(response.body).toBeDefined();
@@ -145,22 +145,22 @@ describe("MyMentalHealthBuddy Platform Tests", () => {
 
   describe("🔒 Security Tests", () => {
     it("should reject invalid authentication", async () => {
-      await request(app);
-        .post("/api/auth/login");
+      await request(app)
+        .post("/api/auth/login")
         .send({
-          email: "invalid@example.com",;
-          password: "wrong";
-        });
+          email: "invalid@example.com",
+          password: "wrong"
+        })
         .expect(401);
     });
 
     it("should handle SQL injection attempts", async () => {
-      await request(app);
-        .post("/api/auth/login");
+      await request(app)
+        .post("/api/auth/login")
         .send({
-          email: "admin' OR '1'='1",;
-          password: " OR '1'='1";
-        });
+          email: "admin' OR '1'='1",
+          password: " OR '1'='1"
+        })
         .expect(401);
     });
   });
@@ -171,8 +171,8 @@ describe("MyMentalHealthBuddy Platform Tests", () => {
 
       await request(app).get("/health").expect(200);
 
-      const responseTime = Date.now() - startTime
-      expect(responseTime).toBeLessThan(1000) // Should respond within 1 second;
+      const responseTime = Date.now() - startTime;
+      expect(responseTime).toBeLessThan(1000); // Should respond within 1 second
     });
   });
 });

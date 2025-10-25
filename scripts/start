@@ -1,5 +1,0 @@
-// @ts-check
-#!/bin/bash
-# Start wrapper script for deployment
-echo "🚀 Starting production server..."
-node start-prod.mjs

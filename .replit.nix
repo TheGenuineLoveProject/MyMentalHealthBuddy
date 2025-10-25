@@ -5,9 +5,8 @@
     pkgs.git
     pkgs.openssl
     pkgs.python3
-    pkgs.glibcLocales
+    pkgs.jq
   ];
-
   env = {
     NODE_ENV = "development";
   };
