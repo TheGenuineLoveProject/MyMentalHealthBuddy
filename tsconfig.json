@@ -1,25 +1,16 @@
-{
+{{
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
     "module": "ESNext",
-    "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Bundler",
+    "types": ["node"],
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
-    "isolatedModules": false,
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@server/*": ["server/*"],
-      "@scripts/*": ["scripts/*"],
-      "@shared/*": ["shared/*"],
-      "@db/*": ["db/*"],
-      "@tests/*": ["tests/*"]
-    }
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
   },
-  "include": ["server", "scripts", "shared", "tests"],
-  "exclude": ["node_modules"]
+  "include": ["server/**/*", "shared/**/*", "scripts/**/*"]
 }

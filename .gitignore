@@ -1,10 +1,10 @@
 node_modules
 dist
+client/dist
 .DS_Store
-server/public
-vite.config.ts.*
+.env
+.drizzle
+coverage
+*.log
 *.tar.gz
 *.zip
-node_modules/
-dist/
-.env
