@@ -25,13 +25,13 @@ mountHealth(api);
 mountAI(api);
 app.use('/api', api);
 
-// Serve existing built client at MyMentalHealthBuddy/client/dist
+// Serve built client
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const CLIENT_DIST = path.resolve(__dirname, '../MyMentalHealthBuddy/client/dist');
+const CLIENT_DIST = path.resolve(__dirname, '../client/dist');
 
 app.use(express.static(CLIENT_DIST));
-app.get('*', (_req, res) => res.sendFile(path.join(CLIENT_DIST, 'index.html')));
+app.use((_req, res) => res.sendFile(path.join(CLIENT_DIST, 'index.html')));
 
 const PORT = Number(process.env.PORT || 5000);
 app.listen(PORT, () => {
