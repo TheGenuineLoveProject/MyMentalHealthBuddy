@@ -1,1 +1,3 @@
-run = "npm run start:all"
+modules = ["nodejs-20"]
+[agent]
+expertMode = true
