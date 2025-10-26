@@ -101,16 +101,18 @@ run = ["sh", "-c", "npm start"]
 
 **What happens:**
 1. Builds client → `apps/client/dist/` (static files)
-2. Compiles server → `apps/server/dist/` (compiled JS)
+2. Compiles server → `apps/server/dist/apps/server/src/` (compiled JS with monorepo structure preserved)
 
 **Start command:** `npm start`
 
 **What happens:**
 1. Sets `NODE_ENV=production`
-2. Runs compiled server from `apps/server/dist/index.js`
+2. Runs compiled server from `apps/server/dist/apps/server/src/index.js`
 3. Server serves static client files from `apps/client/dist/`
 4. API routes available at `/api/*`
 5. All other routes serve the React app
+
+**Note:** The TypeScript compiler preserves the monorepo directory structure in the output, which is why the compiled server is at `dist/apps/server/src/` instead of `dist/src/`.
 
 ---
 

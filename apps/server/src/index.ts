@@ -29,7 +29,7 @@ app.get("/health", (_, res) => res.json({ ok: true, message: "MyMentalHealthBudd
 registerRoutes(app);
 
 if (isProduction) {
-  const clientDistPath = path.join(__dirname, "../../client/dist");
+  const clientDistPath = path.join(__dirname, "../../../../../client/dist");
   app.use(express.static(clientDistPath));
   
   app.get("*", (req, res) => {
