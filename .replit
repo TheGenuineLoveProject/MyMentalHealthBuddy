@@ -1,6 +1,2 @@
-run = "npm run start:all"
+run = "pnpm exec tsx MyMentalHealthBuddy/start.ts"
 language = "nodejs"
-entrypoint = "server/src/index.ts"
-
-[agent]
-expertMode = true
