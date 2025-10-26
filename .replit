@@ -12,6 +12,10 @@ build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
 
 [[ports]]
+localPort = 3001
+externalPort = 6800
+
+[[ports]]
 localPort = 5000
 externalPort = 80
 
@@ -34,6 +38,10 @@ externalPort = 5000
 [[ports]]
 localPort = 39281
 externalPort = 3002
+
+[[ports]]
+localPort = 40129
+externalPort = 6000
 
 [[ports]]
 localPort = 42323
@@ -66,3 +74,6 @@ waitForPort = 5000
 
 [interpreter]
 entrypoint = "index.ts"
+
+[agent]
+expertMode = true

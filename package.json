@@ -7,10 +7,11 @@
     "apps/*"
   ],
   "scripts": {
+    "dev": "npm run fixports && concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'",
     "fixports": "npx kill-port 3000 3001 5000 9999 || true",
     "start:server": "npm run dev -w apps/server",
     "start:client": "npm run dev -w apps/client",
-    "start:all": "npm run fixports && concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'"
+    "start:all": "npm run dev"
   },
   "devDependencies": {
     "compression": "^1.8.1",

@@ -808,26 +808,28 @@ class MemStorage implements IStorage {
 
 ### 13.1 Immediate Actions (This Week)
 
-1. **Add OpenAI API Key** (15 minutes)
+1. ✅ **COMPLETED: Delete Obsolete Scripts** (15 minutes)
+   - ✅ DELETED all *-corruption-fix.mjs files (12 files)
+   - ✅ DELETED fix*.ts files in scripts/
+   - ✅ DELETED heal-recovery.sh
+   - ✅ DELETED fix-esm.mjs, fix-extensions.ts, duplicate fixImports.ts
+   - ✅ Saved ~84KB of dead code
+   - ✅ Fixed package.json scripts to use correct workspace commands
+
+2. **Add OpenAI API Key** (15 minutes) - NEXT
    - Set OPENAI_API_KEY in environment
    - Test chat functionality
 
-2. **Delete Deprecated Directories** (30 minutes)
-   - DELETE client/ directory
-   - DELETE server/ directory  
-   - DELETE packages/ directory
+3. **Delete Deprecated Directories** (30 minutes) - REMAINING
+   - DELETE client/ directory (384KB)
+   - DELETE server/ directory (4KB)
+   - DELETE packages/ directory (28KB)
    - Verify no imports reference these
 
-3. **Delete Obsolete Scripts** (15 minutes)
-   - DELETE all *-corruption-fix.mjs files (12 files)
-   - DELETE fix*.ts files in scripts/
-   - DELETE heal-recovery.sh
-
-4. **Clean Root Directory** (15 minutes)
-   - DELETE fix-esm.mjs
-   - DELETE fix-extensions.ts
-   - DELETE duplicate fixImports.ts
-   - Evaluate start*.mjs files
+4. **Clean Remaining Files** (15 minutes) - REMAINING
+   - Evaluate start*.mjs files in root
+   - Archive attached_assets/*.txt files
+   - Clean up orphaned directories (tests/, types/)
 
 ### 13.2 Short-Term Actions (Next 2 Weeks)
 
