@@ -1,9 +1,27 @@
-run = "npm run start:all"
-language = "nodejs"
-entrypoint = "server/src/index.ts"
+# Replit launch configuration for Node + Vite (monorepo-friendly)
 
-[[ports]]
-localPort = 5000
+run = "bash -lc 'npm run dev'"
 
-[agent]
-expertMode = true
+[nix]
+channel = "stable-24_05"
+
+[env]
+PORT = "5000"
+VITE_PORT = "5173"
+NODE_ENV = "development"
+
+[deployment]
+run = "bash -lc 'npm run preview'"
+
+# Keep the file tree tidy (must be a TOML array of strings)
+hidden = [".cache", ".npm", "node_modules", "dist", "client/dist"]
+
+[unitTest]
+run = "bash -lc 'npm test'"
+
+[packager]
+ignoredPaths = [".cache", ".npm", "node_modules", "dist", "client/dist"]
+
+[ports]
+# What Replit should proxy to the webview
+previewPort = 5000
