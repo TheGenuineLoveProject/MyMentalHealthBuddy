@@ -1,18 +1,5 @@
-{
-  "name": "mymentalhealthbuddy-monorepo",
-  "private": true,
-  "version": "1.1.0",
-  "type": "module",
-  "workspaces": ["apps/*"],
-  "scripts": {
-    "fixports": "kill-port 3000 5000 5001 5002 9999 || true",
-    "dev:server": "npm run dev -w apps/server",
-    "dev:client": "npm run dev -w apps/client",
-    "start:all": "npm run fixports && concurrently -n SERVER,CLIENT -c cyan,magenta \"npm run dev -w apps/server\" \"npm run dev -w apps/client\"",
-    "heal": "npm install && npm run start:all"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2",
-    "kill-port": "^2.0.1"
-  }
+"scripts": {
+  "start:all": "concurrently \"npm run start:server\" \"npm run start:client\"",
+  "start:server": "npm run dev --prefix server",
+  "start:client": "npm run dev --prefix client"
 }
