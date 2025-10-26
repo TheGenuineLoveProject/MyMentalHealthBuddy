@@ -1,6 +1,6 @@
-run = "bash scripts/auto-backup.sh"
+run = "npm run start:all"
 language = "nodejs"
-onBoot = "bash scripts/auto-backup.sh"
+entrypoint = "server/src/index.ts"
 
 [agent]
 expertMode = true
