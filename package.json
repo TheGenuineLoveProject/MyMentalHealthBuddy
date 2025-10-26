@@ -1,5 +1,23 @@
-"scripts": {
-  "start:all": "concurrently \"npm run start:server\" \"npm run start:client\"",
-  "start:server": "npm run dev --prefix server",
-  "start:client": "npm run dev --prefix client"
+{
+  "name": "mymentalhealthbuddy-monorepo",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "fixports": "npx kill-port 3000 3001 5000 9999 || true",
+    "start:server": "PORT=5000 tsx watch server/src/index.ts",
+    "start:client": "cd client && PORT=3000 npm run dev -- --host --port 3000",
+    "start:all": "npm run fixports && concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'"
+  },
+  "devDependencies": {
+    "compression": "^1.8.1",
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "kill-port": "^2.0.1",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12"
+  }
 }
