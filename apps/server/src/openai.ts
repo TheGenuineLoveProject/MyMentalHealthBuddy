@@ -1,5 +1,11 @@
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const OPENAI_API_URL = "https://api.openai.com/v1/chat/completions";
+import OpenAI from "openai";
+
+// This is using Replit's AI Integrations service, which provides OpenAI-compatible API access without requiring your own OpenAI API key.
+// Charges are billed to your Replit credits.
+const openai = new OpenAI({
+  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY
+});
 
 interface Message {
   role: "system" | "user" | "assistant";
@@ -22,101 +28,53 @@ Remember:
 - Use trauma-informed language and be sensitive to triggers`;
 
 export async function generateChatResponse(userMessage: string, chatHistory: Message[] = []): Promise<string> {
-  if (!OPENAI_API_KEY) {
-    throw new Error("OPENAI_API_KEY not configured");
-  }
-
-  const messages: Message[] = [
+  const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
     { role: "system", content: MENTAL_HEALTH_SYSTEM_PROMPT },
     ...chatHistory,
     { role: "user", content: userMessage }
   ];
 
-  const response = await fetch(OPENAI_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${OPENAI_API_KEY}`
-    },
-    body: JSON.stringify({
-      model: "gpt-4",
+  try {
+    // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+    const completion = await openai.chat.completions.create({
+      model: "gpt-5",
       messages,
       temperature: 0.7,
-      max_tokens: 500
-    })
-  });
+      max_completion_tokens: 500
+    });
 
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`OpenAI API error: ${response.status} - ${error}`);
+    return completion.choices[0]?.message?.content || "I'm here to listen. Could you tell me more?";
+  } catch (error) {
+    console.error("OpenAI API error:", error);
+    throw new Error(`Failed to generate chat response: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
-
-  const data = await response.json();
-  return data.choices[0]?.message?.content || "I'm here to listen. Could you tell me more?";
 }
 
 export async function* streamChatResponse(userMessage: string, chatHistory: Message[] = []): AsyncGenerator<string> {
-  if (!OPENAI_API_KEY) {
-    throw new Error("OPENAI_API_KEY not configured");
-  }
-
-  const messages: Message[] = [
+  const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
     { role: "system", content: MENTAL_HEALTH_SYSTEM_PROMPT },
     ...chatHistory,
     { role: "user", content: userMessage }
   ];
 
-  const response = await fetch(OPENAI_API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${OPENAI_API_KEY}`
-    },
-    body: JSON.stringify({
-      model: "gpt-4",
+  try {
+    // the newest OpenAI model is "gpt-5" which was released August 7, 2025. do not change this unless explicitly requested by the user
+    const stream = await openai.chat.completions.create({
+      model: "gpt-5",
       messages,
       temperature: 0.7,
-      max_tokens: 500,
+      max_completion_tokens: 500,
       stream: true
-    })
-  });
+    });
 
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`OpenAI API error: ${response.status} - ${error}`);
-  }
-
-  if (!response.body) {
-    throw new Error("No response body");
-  }
-
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-
-      const chunk = decoder.decode(value);
-      const lines = chunk.split("\n").filter(line => line.trim().startsWith("data: "));
-
-      for (const line of lines) {
-        const data = line.replace("data: ", "").trim();
-        if (data === "[DONE]") continue;
-        
-        try {
-          const parsed = JSON.parse(data);
-          const content = parsed.choices[0]?.delta?.content;
-          if (content) {
-            yield content;
-          }
-        } catch (e) {
-          console.error("Error parsing SSE data:", e);
-        }
+    for await (const chunk of stream) {
+      const content = chunk.choices[0]?.delta?.content;
+      if (content) {
+        yield content;
       }
     }
-  } finally {
-    reader.releaseLock();
+  } catch (error) {
+    console.error("OpenAI streaming error:", error);
+    throw new Error(`Failed to stream chat response: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }
