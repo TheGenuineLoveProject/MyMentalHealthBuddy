@@ -55,7 +55,7 @@ export interface InsertHealingMessage {
 export interface SelectJournal {
   id: string;
   userId: string;
-  title: string;
+  title: string | null;
   content: string;
   mood: string | null;
   tags: string[] | null;
@@ -66,7 +66,7 @@ export interface SelectJournal {
 
 export interface InsertJournal {
   userId: string;
-  title: string;
+  title?: string | null;
   content: string;
   mood?: string | null;
   tags?: string[] | null;
@@ -76,27 +76,21 @@ export interface InsertJournal {
 export interface SelectMoodEntry {
   id: string;
   userId: string;
-  moodLevel: number;
-  emotions: string[] | null;
-  note: string | null;
+  mood: string;
+  intensity: number;
+  notes: string | null;
   activities: string[] | null;
-  sleep: number | null;
-  exercise: number | null;
-  socialInteraction: number | null;
-  stress: number | null;
+  triggers: string[] | null;
   createdAt: Date;
 }
 
 export interface InsertMoodEntry {
   userId: string;
-  moodLevel: number;
-  emotions?: string[] | null;
-  note?: string | null;
+  mood: string;
+  intensity: number;
+  notes?: string | null;
   activities?: string[] | null;
-  sleep?: number | null;
-  exercise?: number | null;
-  socialInteraction?: number | null;
-  stress?: number | null;
+  triggers?: string[] | null;
 }
 
 export interface SelectCrisisResource {
@@ -108,6 +102,7 @@ export interface SelectCrisisResource {
   website: string | null;
   type: string;
   isActive: boolean;
+  priority: number | null;
 }
 
 export interface InsertCrisisResource {
@@ -118,11 +113,12 @@ export interface InsertCrisisResource {
   website?: string | null;
   type: string;
   isActive?: boolean;
+  priority?: number | null;
 }
 
 export const insertJournalSchema = z.object({
   userId: z.string(),
-  title: z.string().min(1, "Title is required"),
+  title: z.string().nullable().optional(),
   content: z.string().min(1, "Content is required"),
   mood: z.string().nullable().optional(),
   tags: z.array(z.string()).nullable().optional(),
@@ -131,14 +127,11 @@ export const insertJournalSchema = z.object({
 
 export const insertMoodEntrySchema = z.object({
   userId: z.string(),
-  moodLevel: z.number().min(1).max(10),
-  emotions: z.array(z.string()).nullable().optional(),
-  note: z.string().nullable().optional(),
+  mood: z.string().min(1, "Mood is required"),
+  intensity: z.number().min(1).max(10),
+  notes: z.string().nullable().optional(),
   activities: z.array(z.string()).nullable().optional(),
-  sleep: z.number().min(0).max(24).nullable().optional(),
-  exercise: z.number().min(0).nullable().optional(),
-  socialInteraction: z.number().min(1).max(10).nullable().optional(),
-  stress: z.number().min(1).max(10).nullable().optional()
+  triggers: z.array(z.string()).nullable().optional()
 });
 
 export const healingRequestSchema = z.object({
@@ -152,5 +145,6 @@ export const insertCrisisResourceSchema = z.object({
   phoneNumber: z.string().nullable().optional(),
   website: z.string().url().nullable().optional(),
   type: z.string().min(1),
-  isActive: z.boolean().optional().default(true)
+  isActive: z.boolean().optional().default(true),
+  priority: z.number().nullable().optional()
 });

@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "fixports": "npx kill-port 3000 3001 5000 9999 || true",
-    "start:server": "PORT=5000 tsx watch server/src/index.ts",
-    "start:client": "cd client && PORT=3000 npm run dev -- --host --port 3000",
+    "start:server": "npm run dev -w apps/server",
+    "start:client": "npm run dev -w apps/client",
     "start:all": "npm run fixports && concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'"
   },
   "devDependencies": {
