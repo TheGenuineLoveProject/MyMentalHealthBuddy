@@ -7,8 +7,9 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run fixports && concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'",
-    "fixports": "npx kill-port 3000 3001 5000 9999 || true",
+    "dev": "npm run fixports && npm run dev:start",
+    "dev:start": "concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'",
+    "fixports": "npx kill-port 3000 3001 5000 9999 && sleep 2 || true",
     "start:server": "npm run dev -w apps/server",
     "start:client": "npm run dev -w apps/client",
     "start:all": "npm run dev",
@@ -17,21 +18,8 @@
     "db:push": "drizzle-kit push"
   },
   "devDependencies": {
-    "compression": "^1.8.1",
     "concurrently": "^8.2.2",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "helmet": "^8.1.0",
     "kill-port": "^2.0.1",
-    "tsx": "^4.20.6",
-    "typescript": "^5.9.3",
-    "vite": "^7.1.12"
-  },
-  "dependencies": {
-    "@types/compression": "^1.8.1",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.4",
-    "@types/node": "^24.9.1",
-    "openai": "^6.7.0"
+    "typescript": "^5.9.3"
   }
 }
