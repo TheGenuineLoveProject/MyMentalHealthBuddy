@@ -7,16 +7,24 @@
     "dev": "PORT=5000 node dist/apps/server/src/index.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5",
-    "helmet": "^7.1.0",
     "compression": "^1.7.4",
-    "express-static-gzip": "^2.1.7",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "openai": "^4.56.0",
-    "zod": "^3.23.8",
     "drizzle-orm": "^0.34.1",
+    "drizzle-zod": "^0.5.1",
+    "express": "^4.19.2",
+    "express-static-gzip": "^2.1.7",
+    "helmet": "^7.1.0",
+    "openai": "^4.56.0",
     "postgres": "^3.4.4",
-    "drizzle-zod": "^0.5.1"
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/compression": "^1.8.1",
+    "@types/cors": "^2.8.19",
+    "@types/dotenv": "^6.1.1",
+    "@types/express": "^5.0.4",
+    "@types/helmet": "^0.0.48",
+    "@types/node": "^18.19.130"
   }
 }

@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import { registerRoutes } from "./routes.js";
 import path from "path";
 import { fileURLToPath } from "url";
+import { createServer as createViteServer } from "vite";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 const isProduction = process.env.NODE_ENV === "production";
+const isDev = !isProduction;
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -121,6 +123,58 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   });
 });
 
+// Development mode: Vite middleware integration
+if (isDev) {
+  // process.cwd() returns apps/server, so go up one level to workspace root
+  const workspaceRoot = path.join(process.cwd(), '..');
+  const clientRoot = path.join(workspaceRoot, 'apps/client');
+  
+  console.log(`📁 Client root: ${clientRoot}`);
+  
+  const vite = await createViteServer({
+    server: { middlewareMode: true },
+    appType: 'custom',
+    root: clientRoot
+  });
+  
+  app.use(vite.middlewares);
+  
+  // Only serve index.html for non-API, non-asset requests
+  app.use('*', async (req, res, next) => {
+    // Skip API routes and asset files
+    if (req.originalUrl.startsWith('/api') || 
+        req.originalUrl.match(/\.(js|jsx|ts|tsx|css|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
+      return next();
+    }
+    
+    const url = req.originalUrl;
+    
+    try {
+      // Read the index.html from the client directory
+      const indexPath = path.join(clientRoot, 'index.html');
+      let template = `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="AI-powered mental health support platform" />
+    <title>MyMentalHealthBuddy</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>`;
+      
+      const html = await vite.transformIndexHtml(url, template);
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+    } catch (e) {
+      vite.ssrFixStacktrace(e as Error);
+      next(e);
+    }
+  });
+}
+
 // Production static file serving
 if (isProduction) {
   const clientDistPath = path.join(__dirname, "../../../../../client/dist");
@@ -192,21 +246,28 @@ process.on('SIGINT', () => {
 });
 
 // Start server
-const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ Server running on port ${PORT} (${isProduction ? "production" : "development"} mode)`);
-  console.log(`🔒 Security middleware: CORS, Helmet, Compression enabled`);
-  console.log(`📊 Request logging: Enabled`);
-  console.log(`⚡ Global error handlers: Active`);
-});
+async function startServer() {
+  const server = app.listen(PORT, "0.0.0.0", () => {
+    console.log(`✅ Server running on port ${PORT} (${isProduction ? "production" : "development"} mode)`);
+    console.log(`🔒 Security middleware: CORS, Helmet, Compression enabled`);
+    console.log(`📊 Request logging: Enabled`);
+    console.log(`⚡ Global error handlers: Active`);
+    if (isDev) {
+      console.log(`🎨 Vite middleware: Enabled (serving frontend on same port)`);
+    }
+  });
 
-// Handle server errors
-server.on('error', (error: NodeJS.ErrnoException) => {
-  if (error.code === 'EADDRINUSE') {
-    console.error(`❌ Port ${PORT} is already in use`);
-  } else {
-    console.error('❌ Server error:', error);
-  }
-  process.exit(1);
-});
+  // Handle server errors
+  server.on('error', (error: NodeJS.ErrnoException) => {
+    if (error.code === 'EADDRINUSE') {
+      console.error(`❌ Port ${PORT} is already in use`);
+    } else {
+      console.error('❌ Server error:', error);
+    }
+    process.exit(1);
+  });
+}
+
+startServer();
 
 export { app };
