@@ -68,7 +68,7 @@ export class MemStorage implements IStorage {
       subscriptionStatus: "inactive",
       subscriptionEndDate: null,
       profileImage: null,
-      preferences: {}
+      preferences: "{}"
     };
     
     this.users.set(id, user);
