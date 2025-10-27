@@ -1,5 +1,6 @@
 import { Route, Switch } from "wouter";
 import { Navigation } from "./components/Navigation";
+import { DashboardPage } from "./pages/DashboardPage";
 import { ChatPage } from "./pages/ChatPage";
 import { MoodPage } from "./pages/MoodPage";
 import { JournalPage } from "./pages/JournalPage";
@@ -12,7 +13,8 @@ export default function App() {
       <Navigation />
       <main>
         <Switch>
-          <Route path="/" component={ChatPage} />
+          <Route path="/" component={DashboardPage} />
+          <Route path="/chat" component={ChatPage} />
           <Route path="/mood" component={MoodPage} />
           <Route path="/journal" component={JournalPage} />
           <Route path="/resources" component={ResourcesPage} />

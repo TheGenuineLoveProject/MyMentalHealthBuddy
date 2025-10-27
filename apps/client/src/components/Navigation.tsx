@@ -1,11 +1,12 @@
 import { Link, useLocation } from "wouter";
-import { MessageCircle, Heart, BookOpen, Info, Phone } from "lucide-react";
+import { Home, MessageCircle, Heart, BookOpen, Info, Phone } from "lucide-react";
 
 export function Navigation() {
   const [location] = useLocation();
 
   const links = [
-    { path: "/", label: "Chat", icon: MessageCircle },
+    { path: "/", label: "Home", icon: Home },
+    { path: "/chat", label: "Chat", icon: MessageCircle },
     { path: "/mood", label: "Mood", icon: Heart },
     { path: "/journal", label: "Journal", icon: BookOpen },
     { path: "/resources", label: "Resources", icon: Info },
