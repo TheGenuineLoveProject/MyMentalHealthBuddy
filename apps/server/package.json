@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "PORT=5000 node dist/apps/server/src/index.js"
+    "build": "tsc",
+    "dev": "PORT=5000 node dist/apps/server/src/index.js",
+    "start": "PORT=5000 node dist/apps/server/src/index.js"
   },
   "dependencies": {
     "compression": "^1.7.4",

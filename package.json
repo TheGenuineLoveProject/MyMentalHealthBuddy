@@ -9,6 +9,10 @@
     "dev:server": "npm --prefix apps/server run dev",
     "dev:client": "npm --prefix apps/client run dev",
     "dev:start": "npm run dev:server",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "npm --prefix apps/client run build",
+    "build:server": "npm --prefix apps/server run build",
+    "start": "NODE_ENV=production npm --prefix apps/server run start",
     "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
     "health": "node -e \"require('http').get('http://localhost:5000/health',r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>console.log(d))})\""
   },
