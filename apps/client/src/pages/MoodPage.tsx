@@ -24,8 +24,7 @@ export function MoodPage() {
     trends: { weeklyAverage: number; improving: boolean };
     insights: string[];
   }>({
-    queryKey: ["/api/moods/analytics"],
-    enabled: moods.length > 0
+    queryKey: ["/api/moods/analytics"]
   });
 
   const handleExport = async (format: "csv" | "json") => {
@@ -57,6 +56,7 @@ export function MoodPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/moods"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/moods/analytics"] });
       setMood("");
       setIntensity(5);
       setNotes("");
