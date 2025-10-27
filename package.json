@@ -21,5 +21,9 @@
     "concurrently": "^8.2.2",
     "kill-port": "^2.0.1",
     "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
+    "vite": "^7.1.12"
   }
 }
