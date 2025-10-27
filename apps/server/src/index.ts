@@ -129,9 +129,10 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 
 // Development mode: Vite middleware integration
 if (isDev) {
-  // Use __dirname for robustness: from dist/apps/server/src, go up 5 levels to workspace/apps
-  // (5 levels: src → server → apps → dist → server → apps/)
-  const clientRoot = path.join(__dirname, '../../../../..', 'client');
+  // Use __dirname for robustness: from dist/apps/server/src, go up to workspace root
+  // __dirname: /workspace/apps/server/dist/apps/server/src
+  // Go up 6 levels to workspace root, then into apps/client  
+  const clientRoot = path.join(__dirname, '../../../../../../apps/client');
   
   console.log(`📁 Client root: ${clientRoot}`);
   
@@ -180,9 +181,10 @@ if (isDev) {
 
 // Production static file serving
 if (isProduction) {
-  // Use __dirname for robustness: from dist/apps/server/src, go up 5 levels to workspace/apps
-  // (5 levels: src → server → apps → dist → server → apps/)
-  const clientDistPath = path.join(__dirname, '../../../../..', 'client/dist');
+  // Use __dirname for robustness: from dist/apps/server/src, go up to workspace root
+  // __dirname: /workspace/apps/server/dist/apps/server/src
+  // Go up 6 levels to workspace root, then into apps/client/dist
+  const clientDistPath = path.join(__dirname, '../../../../../../apps/client/dist');
   
   console.log(`📦 Production dist: ${clientDistPath}`);
   
