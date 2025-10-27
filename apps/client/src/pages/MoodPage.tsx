@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import type { SelectMoodEntry } from "@shared/schema";
+import { Download, TrendingUp } from "lucide-react";
 
 const MOODS = ["Happy", "Sad", "Anxious", "Calm", "Angry", "Stressed", "Content"];
 
@@ -13,6 +14,38 @@ export function MoodPage() {
   const { data: moods = [], isLoading } = useQuery<SelectMoodEntry[]>({
     queryKey: ["/api/moods"],
   });
+
+  const { data: analytics } = useQuery<{
+    totalEntries: number;
+    averageIntensity: number;
+    moodDistribution: Record<string, number>;
+    commonTriggers: string[];
+    commonActivities: string[];
+    trends: { weeklyAverage: number; improving: boolean };
+    insights: string[];
+  }>({
+    queryKey: ["/api/moods/analytics"],
+    enabled: moods.length > 0
+  });
+
+  const handleExport = async (format: "csv" | "json") => {
+    try {
+      const response = await fetch(`/api/moods/export?format=${format}`, {
+        headers: { "x-user-id": "demo-user" }
+      });
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `moods-${Date.now()}.${format}`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Export failed:", error);
+    }
+  };
 
   const createMoodMutation = useMutation({
     mutationFn: async (data: { mood: string; intensity: number; notes?: string }) => {
@@ -43,7 +76,29 @@ export function MoodPage() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Mood Tracker</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">Mood Tracker</h1>
+        {moods.length > 0 && (
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleExport("csv")}
+              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2"
+              data-testid="button-export-csv"
+            >
+              <Download size={16} />
+              Export CSV
+            </button>
+            <button
+              onClick={() => handleExport("json")}
+              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2"
+              data-testid="button-export-json"
+            >
+              <Download size={16} />
+              Export JSON
+            </button>
+          </div>
+        )}
+      </div>
 
       <div className="bg-white rounded-lg shadow p-6 mb-6">
         <h2 className="text-xl font-semibold mb-4">How are you feeling?</h2>
@@ -106,6 +161,32 @@ export function MoodPage() {
           </button>
         </form>
       </div>
+
+      {analytics && analytics.insights.length > 0 && (
+        <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg shadow p-6 mb-6">
+          <div className="flex items-center gap-2 mb-4">
+            <TrendingUp className="text-blue-600" />
+            <h2 className="text-xl font-semibold">Your Insights</h2>
+          </div>
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-white rounded-lg p-4">
+              <p className="text-sm text-gray-600">Total Entries</p>
+              <p className="text-2xl font-bold text-blue-600">{analytics.totalEntries}</p>
+            </div>
+            <div className="bg-white rounded-lg p-4">
+              <p className="text-sm text-gray-600">Average Intensity</p>
+              <p className="text-2xl font-bold text-purple-600">{analytics.averageIntensity}/10</p>
+            </div>
+          </div>
+          <div className="space-y-2">
+            {analytics.insights.map((insight, i) => (
+              <div key={i} className="bg-white rounded-lg p-3 text-sm">
+                {insight}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Entries</h2>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient";
-import { Plus, Edit, Trash2 } from "lucide-react";
+import { Plus, Edit, Trash2, Download } from "lucide-react";
 import type { SelectJournal } from "@shared/schema";
 
 export function JournalPage() {
@@ -79,20 +79,61 @@ export function JournalPage() {
     }
   };
 
+  const handleExport = async (format: "csv" | "json") => {
+    try {
+      const response = await fetch(`/api/journals/export?format=${format}`, {
+        headers: { "x-user-id": "demo-user" }
+      });
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `journals-${Date.now()}.${format}`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Export failed:", error);
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Journal</h1>
-        {!isEditing && (
-          <button
-            onClick={() => setIsEditing(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-            data-testid="button-new-journal"
-          >
-            <Plus size={18} />
-            New Entry
-          </button>
-        )}
+        <div className="flex gap-2">
+          {journals.length > 0 && (
+            <>
+              <button
+                onClick={() => handleExport("csv")}
+                className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center gap-2 text-sm"
+                data-testid="button-export-journals-csv"
+              >
+                <Download size={16} />
+                CSV
+              </button>
+              <button
+                onClick={() => handleExport("json")}
+                className="px-3 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 flex items-center gap-2 text-sm"
+                data-testid="button-export-journals-json"
+              >
+                <Download size={16} />
+                JSON
+              </button>
+            </>
+          )}
+          {!isEditing && (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              data-testid="button-new-journal"
+            >
+              <Plus size={18} />
+              New Entry
+            </button>
+          )}
+        </div>
       </div>
 
       {isEditing && (

@@ -12,6 +12,7 @@ import {
   apiRateLimiter,
   chatRateLimiter
 } from "./validation.js";
+import { DataExporter } from "./export.js";
 
 // Async handler wrapper for better error handling
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
@@ -230,6 +231,67 @@ export function registerRoutes(app: Express) {
       
       const resources = await storage.getCrisisResourcesByCountry(country);
       res.json(resources);
+    })
+  );
+
+  // Export journals endpoint
+  app.get("/api/journals/export",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const format = (req.query.format as string) || "json";
+
+      const journals = await storage.getJournalsByUserId(userId);
+
+      if (format === "csv") {
+        const csv = DataExporter.journalsToCSV(journals);
+        res.setHeader("Content-Type", "text/csv");
+        res.setHeader("Content-Disposition", `attachment; filename="journals-${Date.now()}.csv"`);
+        res.send(csv);
+      } else {
+        res.setHeader("Content-Type", "application/json");
+        res.setHeader("Content-Disposition", `attachment; filename="journals-${Date.now()}.json"`);
+        res.json(journals);
+      }
+    })
+  );
+
+  // Export moods endpoint
+  app.get("/api/moods/export",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const format = (req.query.format as string) || "json";
+
+      const moods = await storage.getMoodEntriesByUserId(userId);
+
+      if (format === "csv") {
+        const csv = DataExporter.moodsToCSV(moods);
+        res.setHeader("Content-Type", "text/csv");
+        res.setHeader("Content-Disposition", `attachment; filename="moods-${Date.now()}.csv"`);
+        res.send(csv);
+      } else {
+        res.setHeader("Content-Type", "application/json");
+        res.setHeader("Content-Disposition", `attachment; filename="moods-${Date.now()}.json"`);
+        res.json(moods);
+      }
+    })
+  );
+
+  // Get mood analytics endpoint
+  app.get("/api/moods/analytics",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const moods = await storage.getMoodEntriesByUserId(userId);
+
+      const analytics = DataExporter.generateMoodAnalytics(moods);
+      const insights = DataExporter.generateInsights(moods);
+
+      res.json({
+        ...analytics,
+        insights
+      });
     })
   );
 }
