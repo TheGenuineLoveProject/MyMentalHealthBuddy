@@ -2,185 +2,7 @@
 
 ## Overview
 
-MyMentalHealthBuddy is a comprehensive mental health support application that provides users with AI-powered therapeutic chat, mood tracking, journaling, and mental health resources. The platform features a subscription-based model with Free, Premium ($19/mo), and Professional ($49/mo) tiers, offering varying levels of access to AI therapy sessions, mood analytics, and professional support options.
-
-## Key Features
-
-### Mental Health Support
-
-- **AI-Powered Chat Therapy**: Conversational AI assistant trained for mental health support
-- **Mood Tracking**: Daily mood monitoring with insights and trends analysis
-- **Personal Journal**: Private, secure journaling system with writing prompts
-- **Resource Library**: Curated collection of articles, videos, exercises, and podcasts
-- **Crisis Support**: Quick access to emergency helplines and support resources
-
-### Subscription Tiers
-
-1. **Free Tier**: 5 AI sessions/month, basic mood tracking, limited resources
-2. **Premium ($19/mo)**: Unlimited AI sessions, advanced mood analytics, full resource access
-3. **Professional ($49/mo)**: All Premium features plus priority support and professional referrals
-
-### Technical Features
-
-- Secure user authentication with session management
-- PostgreSQL database for data persistence
-- Stripe integration for subscription billing
-- Responsive design for mobile and desktop
-- Real-time chat with streaming AI responses
-
-## Recent Changes
-
-### October 27, 2025 - Perfect System Complete: Advanced Build + Bulletproof Startup + Cleanup
-
-**Codebase Cleanup Complete:**
-- ✅ Removed 6 redundant files and directories (client/, server/, start-all.js, MASTER_COMMAND.md, scripts/build, old prompt files)
-- ✅ Created comprehensive one-paste cleanup commands (CLEANUP_COMMANDS.md)
-- ✅ Eliminated empty stub directories from old monorepo structure
-- ✅ All deprecated files archived or removed
-- ✅ System verified clean and operational post-cleanup
-
-**Advanced Build System Complete:**
-- ✅ Dual-algorithm compression (gzip + brotli) for 72-75% size reduction
-- ✅ Pre-compressed assets served via express-static-gzip
-- ✅ Intelligent HTTP caching (immutable hashed assets, fresh HTML)
-- ✅ Advanced code splitting with intelligent chunking strategy
-- ✅ Bundle analyzer with visualization (build:analyze)
-- ✅ Performance monitoring tools and scripts
-- ✅ Tree-shaking and dead code elimination
-- ✅ Module preloading for faster page loads
-- ✅ Development server optimizations (faster HMR, better error overlay)
-
-**Build Performance & Compression:**
-- React vendor: 149KB → 47KB (gzip) → 41KB (brotli) = 72% reduction
-- Vendor libs: 38KB → 12KB (gzip) → 11KB (brotli) = 71% reduction
-- App code: 16KB → 5KB (gzip) → 4KB (brotli) = 75% reduction
-- Total initial load: ~64KB gzipped / ~56KB brotli
-- App updates: Only 4-11KB (changed chunks only)
-
-**Architect Review:**
-- ✅ All optimizations reviewed and approved
-- ✅ Production standards met
-- ✅ No security issues identified
-- ✅ Compression strategy verified
-- ✅ Caching headers validated
-
-**Bulletproof Startup System:**
-- ✅ One-paste command system (`npm run start:all`)
-- ✅ Automatic process cleanup and port management
-- ✅ Self-healing startup with error recovery
-- ✅ Health check validation (backend + frontend)
-- ✅ Smart restart script with 7-step cleanup
-- ✅ Color-coded logs (SERVER cyan, CLIENT magenta)
-- ✅ Comprehensive documentation (STARTUP_GUIDE.md, ONE_PASTE_COMMANDS.md)
-
-**Deployment Status:**
-- ✅ Pre-compressed assets (.gz + .br files) generated
-- ✅ Express serves compressed files with content negotiation
-- ✅ HTTP caching strategy implemented (1-year for hashed assets)
-- ✅ Build scripts optimized (build, build:analyze, build:stats, perf)
-- ✅ NPM configuration tuned for performance
-- ✅ Production server tested and verified
-- ✅ Bundle composition optimized for maximum caching efficiency
-- ✅ Workflow configured and running successfully
-- ✅ Health checks validated and working
-- ✅ Architect reviewed and approved
-- ✅ **SYSTEM PERFECTED TO 100% CAPACITY - PRODUCTION READY** 🚀
-
-**Previous Fixes (October 27, 2025):**
-- ✅ Fixed API fallback bug - unknown /api/* routes return proper 404 JSON
-- ✅ Fixed workspace dependency issue - moved vite to client dependencies
-- ✅ Resolved "vite package cannot be found" build error
-- ✅ Clean node_modules reinstall resolved development issues
-
-### October 26, 2025 - Full Integration, Platform Cleanup, Deployment & Monorepo Optimization Completed
-
-**Integration Complete:**
-- ✅ Successfully integrated full-stack mental health application using workspace monorepo structure
-- ✅ Fixed workspace configuration (added `apps/*` to package.json workspaces)
-- ✅ Created comprehensive type-safe schema in `apps/shared/schema.ts` with all mental health types
-- ✅ Aligned schema/storage contracts (fixed mood entry, journal, crisis resource type mismatches)
-- ✅ Installed missing dependencies (zod in server, wouter in client)
-- ✅ Configured Vite to use port 5000 with proper host settings for Replit webview
-- ✅ Updated Express server to use port 3001 and register all API routes
-- ✅ Resolved port conflicts and cleaned up stale processes from old directory structure
-- ✅ Application running successfully with frontend (port 5000) and backend (port 3001)
-
-**Platform Cleanup (28 items removed, ~542KB saved):**
-
-*Phase 1 - Obsolete Scripts (16 files, ~84KB):*
-- ✅ Deleted 12 obsolete corruption-fix scripts (advanced-corruption-fix.mjs, comprehensive-corruption-scanner.mjs, final-corruption-fix.mjs, fix-all-corruption.mjs, fix-corruption.mjs, mega-corruption-fix.mjs, ultimate-corruption-fix.mjs, fixCorruption.ts, fixDependencies.ts, fixImports.ts, fix-tsconfig-paths.ts, typesFix.ts)
-- ✅ Deleted 4 duplicate root files (fix-esm.mjs, fix-extensions.ts, fixImports.ts duplicate, heal-recovery.sh)
-- ✅ Cleaned scripts directory from 22 files to 10 files
-
-*Phase 2 - Deprecated Directories (3 dirs, ~432KB):*
-- ✅ Deleted client/ directory (388KB) - Default Vite template that duplicated apps/client/
-- ✅ Deleted server/ directory (16KB) - Minimal Express stub that duplicated apps/server/
-- ✅ Deleted packages/ directory (28KB) - Old schema location that duplicated apps/shared/
-
-*Phase 3 - Additional Cleanup (9 items, ~26KB):*
-- ✅ Archived 5 .txt prompt files to _archive/ directory (20KB)
-- ✅ Deleted 4 outdated build/start scripts (build.mjs, build-prod.mjs, start.mjs, start-prod.mjs - 5.7KB)
-- These scripts referenced old directory structure and are replaced by npm scripts
-
-*OpenAI Integration:*
-- ✅ Installed Replit AI Integrations for OpenAI (no API key required)
-- ✅ Updated apps/server/src/openai.ts to use GPT-5 model
-- ✅ Chat functionality now fully operational
-- ✅ Uses Replit-managed endpoint (billed to Replit credits)
-
-*Configuration Fixes:*
-- ✅ Fixed package.json scripts to use correct workspace commands
-- ✅ Added `npm run dev` script as main entry point
-- ✅ Verified no imports reference deleted directories
-- ✅ Application running without errors after all cleanup
-
-**Deployment Configuration:**
-- ✅ Added production `build` script to build client and server
-- ✅ Added production `start` script to run built server
-- ✅ Configured deployment settings for Autoscale deployment
-- ✅ Updated server to serve static client files in production mode
-- ✅ Installed missing TypeScript type definitions (@types/node, @types/express, @types/cors, @types/compression)
-- ✅ Fixed PORT type handling for production environment
-- ✅ Fixed TypeScript build output paths for monorepo structure
-- ✅ Updated server tsconfig to include shared schema files
-- ✅ Corrected production start path to match actual build output location
-- ✅ Fixed client static file serving path for production mode
-- ✅ Build process verified and working successfully
-- ✅ Production server tested and confirmed operational
-- ✅ Ready for production deployment via Replit's Publishing tool
-
-**Monorepo Optimization (October 26, 2025):**
-- ✅ Cleaned up unused root files (10 scripts, 6 config files removed)
-- ✅ Removed empty directories (content/, tests/)
-- ✅ Created complete workspace for apps/shared (package.json, tsconfig.json)
-- ✅ Optimized dependency organization (removed 36 duplicate packages)
-- ✅ Root now only has workspace tools (concurrently, kill-port, typescript)
-- ✅ Server has all server dependencies (openai, @types/*, express, etc.)
-- ✅ Fixed server workspace start script to match build output path
-- ✅ Fixed Vite strictPort configuration for better dev reliability
-- ✅ Created comprehensive documentation (MONOREPO.md, WORKSPACE_GUIDE.md, docs/)
-- ✅ Organized documentation into structured hierarchy (docs/deployment/, docs/cleanup/)
-- ✅ Production build verified: Client 216KB (68KB gzipped), all paths correct
-- ✅ All improvements documented in docs/MONOREPO_IMPROVEMENTS.md
-- ⚠️ Known issue: Development mode has transient port race condition (non-critical, production unaffected)
-
-### Core Features Integrated
-
-- **AI Chat Therapy**: OpenAI-powered mental health support with conversation history
-- **Mood Tracking**: Track mood, intensity, activities, and triggers
-- **Journal System**: Private journaling with optional titles, moods, and tags
-- **Crisis Resources**: Pre-seeded emergency helplines and support services (National Suicide Prevention, Crisis Text Line, NAMI, SAMHSA)
-- **Navigation**: Clean UI with Chat, Mood, Journal, Resources, and Crisis tabs
-
-### September 27, 2025 - Platform Healing Completed
-
-- ✅ Fixed 219+ critical errors and warnings across the codebase
-- ✅ Implemented complete mental health features (mood tracking, journal, resources)
-- ✅ Created unified navigation system with mobile support
-- ✅ Integrated all routes and API endpoints
-- ✅ Set up PostgreSQL database connection and session store
-- ✅ Cleaned up 10+ duplicate files and directories
-- ✅ Added comprehensive error handling and fallback systems
+MyMentalHealthBuddy is an AI-powered mental health support application offering therapeutic chat, mood tracking, journaling, and a resource library. It operates on a subscription model (Free, Premium, Professional) providing tiered access to AI sessions, analytics, and professional support. The platform aims to provide accessible and comprehensive mental health tools to a wide user base.
 
 ## User Preferences
 
@@ -188,89 +10,57 @@ Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-### Frontend Architecture
+### UI/UX Decisions
 
-- **Framework**: React 18 with TypeScript
-- **Build Tool**: Vite for fast development and optimized production builds
-- **UI Library**: shadcn/ui components built on Radix UI primitives
-- **Styling**: Tailwind CSS with CSS variables for theming
-- **State Management**: TanStack Query (React Query) for server state management
-- **Routing**: Wouter for lightweight client-side routing
-- **Form Handling**: React Hook Form with Zod validation
+The application uses `shadcn/ui` components built on `Radix UI` primitives for a consistent and accessible user interface. `Tailwind CSS` with CSS variables handles styling and theming. `Lucide React` provides consistent iconography. The design is responsive, supporting both mobile and desktop.
 
-### Backend Architecture
+### Technical Implementations
 
-- **Runtime**: Node.js with Express.js framework
-- **Language**: TypeScript with ESM modules
-- **API Design**: RESTful API endpoints with JSON responses
-- **Error Handling**: Centralized error middleware with structured error responses
-- **Logging**: Custom request/response logging middleware
-- **Development**: Hot reloading with Vite middleware integration
+- **Frontend**: Built with React 18 and TypeScript, using Vite for bundling. `TanStack Query` manages server state, `Wouter` handles client-side routing, and `React Hook Form` with `Zod` provides form handling and validation.
+- **Backend**: Node.js with Express.js and TypeScript (ESM modules). It features a RESTful API with JSON responses, centralized error handling, and custom logging middleware.
+- **Data Storage**: PostgreSQL database, managed by Drizzle ORM and hosted on Neon Database. Drizzle Kit handles schema migrations, and Drizzle-Zod ensures runtime type validation. In-memory storage is available for development.
+- **Authentication**: Session-based authentication with user credentials stored with hashed passwords, using `connect-pg-simple` for PostgreSQL session storage.
+- **Core Features**:
+    - **AI Chat Therapy**: OpenAI-powered conversational AI.
+    - **Mood Tracking**: Records mood, intensity, activities, and triggers.
+    - **Journal System**: Private journaling with optional titles, moods, and tags.
+    - **Crisis Resources**: Provides access to emergency helplines.
+- **Deployment**: Advanced build system with dual-algorithm compression (gzip + brotli), pre-compressed asset serving, intelligent HTTP caching, and code splitting for optimized performance. The system includes a bulletproof startup process with health checks and error recovery.
 
-### Data Storage
+### System Design Choices
 
-- **Database**: PostgreSQL with Drizzle ORM
-- **Connection**: Neon Database serverless PostgreSQL
-- **Schema Management**: Drizzle Kit for migrations and schema management
-- **Type Safety**: Drizzle-Zod integration for runtime validation
-- **Fallback Storage**: In-memory storage implementation for development
-
-### Database Schema
-
-The application manages several key entities:
-
-- **Users**: Authentication and user management
-- **Services**: Application services with status monitoring
-- **API Endpoints**: REST endpoint documentation and testing
-- **Project Structure**: File and folder hierarchy tracking
-- **Packages**: Dependency management for frontend/backend
-- **Scripts**: Available npm/package scripts
-
-### Authentication & Authorization
-
-- Session-based authentication with PostgreSQL session storage
-- User credentials stored with hashed passwords
-- Session management through connect-pg-simple
-
-### Development Tools
-
-- **Hot Reloading**: Vite development server with HMR
-- **Error Overlay**: Runtime error modal for development
-- **Code Quality**: TypeScript strict mode with comprehensive type checking
-- **Build Process**: Separate client/server build pipelines
+The architecture emphasizes type safety, developer experience, and modern web development practices. It maintains a clean separation between frontend and backend concerns, utilizing a monorepo structure for organized development.
 
 ## External Dependencies
 
 ### Database & Storage
 
-- **Neon Database**: Serverless PostgreSQL hosting
-- **Drizzle ORM**: Type-safe database ORM with PostgreSQL dialect
-- **connect-pg-simple**: PostgreSQL session store for Express
+- **Neon Database**: Serverless PostgreSQL hosting.
+- **Drizzle ORM**: Type-safe ORM for PostgreSQL.
+- **connect-pg-simple**: PostgreSQL session store for Express.
 
 ### UI & Styling
 
-- **shadcn/ui**: Complete component library with 40+ components
-- **Radix UI**: Headless UI primitives for accessibility
-- **Tailwind CSS**: Utility-first CSS framework with custom design system
-- **Lucide React**: Icon library for consistent iconography
+- **shadcn/ui**: Component library.
+- **Radix UI**: Headless UI primitives.
+- **Tailwind CSS**: Utility-first CSS framework.
+- **Lucide React**: Icon library.
 
 ### State Management & Data Fetching
 
-- **TanStack Query**: Server state management with caching and synchronization
-- **React Hook Form**: Form handling with validation
-- **Zod**: Runtime type validation and schema definition
+- **TanStack Query**: Server state management.
+- **React Hook Form**: Form handling.
+- **Zod**: Runtime type validation and schema definition.
 
 ### Development & Build Tools
 
-- **Vite**: Fast build tool with development server
-- **TypeScript**: Static type checking and enhanced developer experience
-- **ESBuild**: Fast JavaScript bundler for production builds
-- **PostCSS**: CSS processing with Tailwind CSS and Autoprefixer
+- **Vite**: Fast build tool and development server.
+- **TypeScript**: Static type checking.
+- **ESBuild**: JavaScript bundler.
+- **PostCSS**: CSS processing.
 
 ### Replit Integration
 
-- **@replit/vite-plugin-cartographer**: Development environment integration
-- **@replit/vite-plugin-dev-banner**: Development UI enhancements
-- **@replit/vite-plugin-runtime-error-modal**: Enhanced error reporting
-
-The architecture emphasizes type safety, developer experience, and modern web development practices while maintaining a clean separation between frontend and backend concerns.
+- **@replit/vite-plugin-cartographer**: Development environment integration.
+- **@replit/vite-plugin-dev-banner**: Development UI enhancements.
+- **@replit/vite-plugin-runtime-error-modal**: Enhanced error reporting.
