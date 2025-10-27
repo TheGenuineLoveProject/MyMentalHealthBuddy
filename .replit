@@ -1,4 +1,2 @@
 run = "npm run start:all"
 hidden = [".cache","node_modules",".pnpm"]
-[deployment]
-run = "npm run start:all"
