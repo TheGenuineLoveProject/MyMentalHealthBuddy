@@ -5,7 +5,7 @@
  * Validates both backend and frontend are running correctly
  */
 
-const http = require('http');
+import http from 'http';
 
 const COLORS = {
   reset: '\x1b[0m',
