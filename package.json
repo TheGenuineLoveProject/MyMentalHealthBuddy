@@ -2,13 +2,20 @@
   "name": "mymentalhealthbuddy-monorepo",
   "version": "1.1.0",
   "private": true,
-  "workspaces": ["apps/*"],
-  "engines": { "node": ">=20 <21" },
+  "workspaces": [
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=20 <21"
+  },
   "scripts": {
     "dev:server": "npm --prefix apps/server run dev",
     "dev:client": "npm --prefix apps/client run dev",
-    "type-check": "echo \"(optional) add TS later\"",
-    "health": "node scripts/health.js",
+    "dev:start": "npm run dev:server",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "npm --prefix apps/client run build",
+    "build:server": "npm --prefix apps/server run build",
+    "start": "NODE_ENV=production npm --prefix apps/server run start",
     "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
     "build:all": "npm --prefix apps/client run build",
     "preview": "npm --prefix apps/client run preview",
@@ -16,20 +23,27 @@
     "format": "prettier -w ."
   },
   "dependencies": {
+    "@replit/vite-plugin-cartographer": "^0.4.0",
+    "@replit/vite-plugin-dev-banner": "^0.1.1",
+    "@replit/vite-plugin-runtime-error-modal": "^0.0.3",
+    "@vitejs/plugin-react": "^5.1.0",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "helmet": "^7.1.0",
-    "cors": "^2.8.5",
-    "compression": "^1.7.4",
     "morgan": "^1.10.0",
-    "zod": "^3.23.8",
-    "dotenv": "^16.4.5"
+    "rollup-plugin-visualizer": "^6.0.5",
+    "vite": "^7.1.12",
+    "vite-plugin-compression": "^0.5.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "concurrently": "^9.0.0",
-    "wait-on": "^8.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.10.0",
     "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "wait-on": "^8.0.0"
   }
 }

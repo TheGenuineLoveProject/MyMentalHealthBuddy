@@ -20,12 +20,16 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 32857
+localPort = 24678
 externalPort = 3003
 
 [[ports]]
 localPort = 32995
 externalPort = 5173
+
+[[ports]]
+localPort = 34903
+externalPort = 6800
 
 [[ports]]
 localPort = 35897
@@ -65,11 +69,11 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "npm run dev:start"
 waitForPort = 5000
-run = "npm start"
-language = "nodejs"
-entrypoint = "server/index.ts"
+
+[workflows.workflow.metadata]
+outputType = "webview"
 
 [interpreter]
 entrypoint = "index.ts"
