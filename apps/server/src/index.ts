@@ -8,8 +8,12 @@ import { registerRoutes } from "./routes.js";
 import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
+import { validateEnv } from "./lib/env.js";
 
 dotenv.config();
+
+const env = validateEnv();
+console.log("✅ Environment variables validated");
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

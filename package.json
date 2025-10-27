@@ -20,7 +20,10 @@
     "build:all": "npm --prefix apps/client run build",
     "preview": "npm --prefix apps/client run preview",
     "lint": "eslint . --ext .js,.jsx --max-warnings=0",
-    "format": "prettier -w ."
+    "format": "prettier -w .",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

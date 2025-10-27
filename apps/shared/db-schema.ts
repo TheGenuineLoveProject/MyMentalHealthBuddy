@@ -99,26 +99,57 @@ export const insertUserSchema = createInsertSchema(users).omit({
   preferences: true,
   role: true,
   isActive: true
+}).extend({
+  username: z.string().min(3, "Username must be at least 3 characters"),
+  email: z.string().email().nullable().optional(),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  name: z.string().nullable().optional()
 });
 
 export const insertHealingMessageSchema = createInsertSchema(healingMessages).omit({ 
   id: true, 
   timestamp: true 
+}).extend({
+  userMessage: z.string().min(1, "Message is required"),
+  aiResponse: z.string().min(1, "AI response is required")
 });
 
 export const insertJournalSchema = createInsertSchema(journals).omit({ 
   id: true, 
   createdAt: true, 
   updatedAt: true 
+}).extend({
+  userId: z.string(),
+  title: z.string().nullable().optional(),
+  content: z.string().min(1, "Content is required"),
+  mood: z.string().nullable().optional(),
+  tags: z.array(z.string()).nullable().optional(),
+  isPrivate: z.boolean().optional().default(false)
 });
 
 export const insertMoodEntrySchema = createInsertSchema(moodEntries).omit({ 
   id: true, 
   createdAt: true 
+}).extend({
+  userId: z.string(),
+  mood: z.string().min(1, "Mood is required"),
+  intensity: z.number().min(1, "Intensity must be at least 1").max(10, "Intensity cannot exceed 10"),
+  notes: z.string().nullable().optional(),
+  activities: z.array(z.string()).nullable().optional(),
+  triggers: z.array(z.string()).nullable().optional()
 });
 
 export const insertCrisisResourceSchema = createInsertSchema(crisisResources).omit({ 
   id: true 
+}).extend({
+  name: z.string().min(1, "Name is required"),
+  description: z.string().min(1, "Description is required"),
+  country: z.string().min(2).max(2, "Country must be 2-letter code"),
+  phoneNumber: z.string().nullable().optional(),
+  website: z.string().url("Invalid URL").nullable().optional(),
+  type: z.string().min(1, "Type is required"),
+  isActive: z.boolean().optional().default(true),
+  priority: z.number().nullable().optional()
 });
 
 export const healingRequestSchema = z.object({
