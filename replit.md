@@ -34,13 +34,14 @@ MyMentalHealthBuddy is a comprehensive mental health support application that pr
 
 **Critical Fixes Applied:**
 - ✅ Fixed API fallback bug - unknown /api/* routes now return proper 404 JSON instead of hanging
-- ✅ Fixed workspace dependency issue - added vite and @vitejs/plugin-react to root package.json
+- ✅ Fixed workspace dependency issue - moved vite and @vitejs/plugin-react to client dependencies
 - ✅ Resolved "vite package cannot be found by @vitejs/plugin-react" build error
-- ✅ Production build verified working: Client 211KB (66KB gzipped)
+- ✅ Updated build script to run npm install before building
+- ✅ Production build verified working: Client 207KB (65KB gzipped)
 - ✅ Production server tested and confirmed operational
 
 **Deployment Status:**
-- ✅ All dependencies properly installed
+- ✅ All dependencies properly configured in workspace packages
 - ✅ Build process succeeds without errors
 - ✅ Static file serving verified
 - ✅ API endpoints responding correctly
