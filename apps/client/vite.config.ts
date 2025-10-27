@@ -32,9 +32,18 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5000,
     strictPort: false,
-    watch: { usePolling: true },
+    watch: { 
+      usePolling: true,
+      ignored: ['**/node_modules/**', '**/dist/**']
+    },
     hmr: {
-      overlay: true
+      overlay: true,
+      clientPort: 5000,
+    },
+    cors: true,
+    fs: {
+      strict: false,
+      allow: ['..']
     }
   },
   preview: { port: 4173 },
@@ -58,11 +67,22 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'router': ['wouter'],
-          'query': ['@tanstack/react-query'],
-          'ui': ['lucide-react']
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('@tanstack/react-query')) {
+              return 'query';
+            }
+            if (id.includes('wouter')) {
+              return 'router';
+            }
+            if (id.includes('lucide-react')) {
+              return 'ui';
+            }
+            return 'vendor';
+          }
         },
         assetFileNames: (assetInfo) => {
           const info = assetInfo.name?.split('.');
@@ -75,7 +95,12 @@ export default defineConfig({
           return `assets/[name]-[hash][extname]`;
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
-        entryFileNames: 'assets/js/[name]-[hash].js'
+        entryFileNames: 'assets/js/[name]-[hash].js',
+      },
+      treeshake: {
+        moduleSideEffects: 'no-external',
+        propertyReadSideEffects: false,
+        tryCatchDeoptimization: false
       }
     }
   },

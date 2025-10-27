@@ -30,7 +30,21 @@ registerRoutes(app);
 
 if (isProduction) {
   const clientDistPath = path.join(__dirname, "../../../../../client/dist");
-  app.use(express.static(clientDistPath));
+  app.use(express.static(clientDistPath, {
+  maxAge: isProd ? '1y' : 0,
+  immutable: isProd,
+  etag: true,
+  lastModified: true,
+  setHeaders: (res, path) => {
+    if (path.endsWith('.html')) {
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    } else if (path.match(/\.(js|css|woff2?|ttf|eot)$/)) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else if (path.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/)) {
+      res.setHeader('Cache-Control', 'public, max-age=2592000');
+    }
+  }
+}));
   
   app.get("*", (req, res) => {
     if (req.path.startsWith("/api")) {
