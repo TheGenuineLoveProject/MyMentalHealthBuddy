@@ -23,12 +23,12 @@ export default defineConfig({
       algorithm: 'brotliCompress',
       ext: '.br',
     }),
-    process.env.ANALYZE === 'true' && visualizer({
+    ...(process.env.ANALYZE === 'true' ? [visualizer({
       filename: './dist/stats.html',
       open: false,
       gzipSize: true,
       brotliSize: true,
-    }) as any,
+    })] : []),
   ],
   server: {
     host: '0.0.0.0',
