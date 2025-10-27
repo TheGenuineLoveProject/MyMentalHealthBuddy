@@ -13,9 +13,14 @@
     "start:server": "npm run dev -w apps/server",
     "start:client": "npm run dev -w apps/client",
     "start:all": "npm run dev",
-    "build": "npm install --workspaces --include-workspace-root && npm run build -w apps/client && npm run build -w apps/server",
+    "build": "npm install --workspaces --include-workspace-root && npm run build:clean && npm run build:compile",
+    "build:clean": "rm -rf apps/client/dist apps/server/dist",
+    "build:compile": "npm run build -w apps/client && npm run build -w apps/server",
+    "build:analyze": "npm run build -w apps/client -- --mode analyze",
     "start": "NODE_ENV=production node apps/server/dist/apps/server/src/index.js",
-    "db:push": "drizzle-kit push"
+    "db:push": "drizzle-kit push",
+    "type-check": "npm run type-check -w apps/client && npm run type-check -w apps/server",
+    "clean": "rm -rf node_modules apps/*/node_modules apps/*/dist package-lock.json"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
@@ -23,6 +28,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^5.1.0",
     "vite": "^7.1.12"
   }
