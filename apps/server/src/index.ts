@@ -125,9 +125,9 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 
 // Development mode: Vite middleware integration
 if (isDev) {
-  // process.cwd() returns apps/server, so go up one level to workspace root
+  // process.cwd() returns apps/server, so go up one level to apps/, then to client
   const workspaceRoot = path.join(process.cwd(), '..');
-  const clientRoot = path.join(workspaceRoot, 'apps/client');
+  const clientRoot = path.join(workspaceRoot, 'client');
   
   console.log(`📁 Client root: ${clientRoot}`);
   
