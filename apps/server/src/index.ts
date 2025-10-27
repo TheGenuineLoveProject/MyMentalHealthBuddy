@@ -125,9 +125,9 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 
 // Development mode: Vite middleware integration
 if (isDev) {
-  // process.cwd() returns apps/server, so go up one level to apps/, then to client
-  const workspaceRoot = path.join(process.cwd(), '..');
-  const clientRoot = path.join(workspaceRoot, 'client');
+  // Use __dirname for robustness: from dist/apps/server/src, go up 5 levels to workspace/apps
+  // (5 levels: src → server → apps → dist → server → apps/)
+  const clientRoot = path.join(__dirname, '../../../../..', 'client');
   
   console.log(`📁 Client root: ${clientRoot}`);
   
@@ -150,8 +150,7 @@ if (isDev) {
     const url = req.originalUrl;
     
     try {
-      // Read the index.html from the client directory
-      const indexPath = path.join(clientRoot, 'index.html');
+      // Inline HTML template for development
       let template = `<!doctype html>
 <html lang="en">
   <head>
@@ -177,7 +176,11 @@ if (isDev) {
 
 // Production static file serving
 if (isProduction) {
-  const clientDistPath = path.join(__dirname, "../../../../../client/dist");
+  // Use __dirname for robustness: from dist/apps/server/src, go up 5 levels to workspace/apps
+  // (5 levels: src → server → apps → dist → server → apps/)
+  const clientDistPath = path.join(__dirname, '../../../../..', 'client/dist');
+  
+  console.log(`📦 Production dist: ${clientDistPath}`);
   
   app.use(
     expressStaticGzip(clientDistPath, {
