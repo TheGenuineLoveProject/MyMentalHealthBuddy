@@ -27,7 +27,118 @@ Remember:
 - If someone expresses thoughts of self-harm or suicide, encourage them to contact crisis resources immediately
 - Use trauma-informed language and be sensitive to triggers`;
 
-export async function generateChatResponse(userMessage: string, chatHistory: Message[] = []): Promise<string> {
+// Enhanced error types for better error handling
+export class OpenAIError extends Error {
+  constructor(message: string, public code: string, public statusCode?: number) {
+    super(message);
+    this.name = "OpenAIError";
+  }
+}
+
+export class RateLimitError extends OpenAIError {
+  constructor(message: string = "Rate limit exceeded. Please try again in a moment.") {
+    super(message, "RATE_LIMIT", 429);
+    this.name = "RateLimitError";
+  }
+}
+
+export class APIKeyError extends OpenAIError {
+  constructor(message: string = "API configuration error. Please check your setup.") {
+    super(message, "API_KEY_ERROR", 401);
+    this.name = "APIKeyError";
+  }
+}
+
+export class TimeoutError extends OpenAIError {
+  constructor(message: string = "Request timed out. Please try again.") {
+    super(message, "TIMEOUT", 408);
+    this.name = "TimeoutError";
+  }
+}
+
+export class QuotaExceededError extends OpenAIError {
+  constructor(message: string = "API quota exceeded. Please try again later.") {
+    super(message, "QUOTA_EXCEEDED", 429);
+    this.name = "QuotaExceededError";
+  }
+}
+
+// Fallback responses for different error scenarios
+const FALLBACK_RESPONSES = {
+  rateLimited: "I'm experiencing high demand right now. I'm still here to support you - could you please try again in just a moment? Your well-being is important.",
+  apiError: "I'm having a temporary technical difficulty, but I want you to know that I'm here for you. Please try again, or if you need immediate support, consider reaching out to a crisis helpline.",
+  timeout: "My response is taking longer than expected. I'm here for you - please try sending your message again.",
+  general: "I encountered a brief technical issue, but I'm here to support you. Please try again, and if you need immediate help, don't hesitate to reach out to crisis resources."
+};
+
+// Enhanced error classification function
+function classifyOpenAIError(error: unknown): OpenAIError {
+  if (error instanceof OpenAIError) {
+    return error;
+  }
+
+  const errorMessage = error instanceof Error ? error.message : String(error);
+  const errorString = errorMessage.toLowerCase();
+
+  // Rate limiting errors
+  if (errorString.includes("rate limit") || errorString.includes("429")) {
+    return new RateLimitError();
+  }
+
+  // Authentication errors
+  if (errorString.includes("api key") || errorString.includes("401") || errorString.includes("authentication")) {
+    return new APIKeyError();
+  }
+
+  // Timeout errors
+  if (errorString.includes("timeout") || errorString.includes("timed out") || errorString.includes("408")) {
+    return new TimeoutError();
+  }
+
+  // Quota errors
+  if (errorString.includes("quota") || errorString.includes("insufficient_quota")) {
+    return new QuotaExceededError();
+  }
+
+  // Generic OpenAI error
+  return new OpenAIError(
+    errorMessage,
+    "UNKNOWN_ERROR",
+    500
+  );
+}
+
+// Get appropriate fallback response based on error type
+function getFallbackResponse(error: OpenAIError): string {
+  if (error instanceof RateLimitError || error instanceof QuotaExceededError) {
+    return FALLBACK_RESPONSES.rateLimited;
+  }
+  if (error instanceof TimeoutError) {
+    return FALLBACK_RESPONSES.timeout;
+  }
+  if (error instanceof APIKeyError) {
+    return FALLBACK_RESPONSES.apiError;
+  }
+  return FALLBACK_RESPONSES.general;
+}
+
+// Retry configuration
+const RETRY_CONFIG = {
+  maxRetries: 2,
+  retryDelay: 1000, // 1 second
+  retryableErrors: [TimeoutError]
+};
+
+// Sleep utility for retries
+function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+export async function generateChatResponse(
+  userMessage: string, 
+  chatHistory: Message[] = [],
+  retryCount: number = 0
+): Promise<string> {
   const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
     { role: "system", content: MENTAL_HEALTH_SYSTEM_PROMPT },
     ...chatHistory,
@@ -45,12 +156,37 @@ export async function generateChatResponse(userMessage: string, chatHistory: Mes
 
     return completion.choices[0]?.message?.content || "I'm here to listen. Could you tell me more?";
   } catch (error) {
-    console.error("OpenAI API error:", error);
-    throw new Error(`Failed to generate chat response: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    const classifiedError = classifyOpenAIError(error);
+    
+    // Log detailed error for monitoring
+    console.error("OpenAI API error:", {
+      type: classifiedError.name,
+      code: classifiedError.code,
+      statusCode: classifiedError.statusCode,
+      message: classifiedError.message,
+      retryCount
+    });
+
+    // Retry logic for transient errors
+    const isRetryable = RETRY_CONFIG.retryableErrors.some(
+      ErrorClass => classifiedError instanceof ErrorClass
+    );
+
+    if (isRetryable && retryCount < RETRY_CONFIG.maxRetries) {
+      console.log(`Retrying request (attempt ${retryCount + 1}/${RETRY_CONFIG.maxRetries})...`);
+      await sleep(RETRY_CONFIG.retryDelay * (retryCount + 1)); // Exponential backoff
+      return generateChatResponse(userMessage, chatHistory, retryCount + 1);
+    }
+
+    // Return fallback response instead of throwing
+    return getFallbackResponse(classifiedError);
   }
 }
 
-export async function* streamChatResponse(userMessage: string, chatHistory: Message[] = []): AsyncGenerator<string> {
+export async function* streamChatResponse(
+  userMessage: string, 
+  chatHistory: Message[] = []
+): AsyncGenerator<string> {
   const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
     { role: "system", content: MENTAL_HEALTH_SYSTEM_PROMPT },
     ...chatHistory,
@@ -74,7 +210,32 @@ export async function* streamChatResponse(userMessage: string, chatHistory: Mess
       }
     }
   } catch (error) {
-    console.error("OpenAI streaming error:", error);
-    throw new Error(`Failed to stream chat response: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    const classifiedError = classifyOpenAIError(error);
+    
+    // Log detailed error for monitoring
+    console.error("OpenAI streaming error:", {
+      type: classifiedError.name,
+      code: classifiedError.code,
+      statusCode: classifiedError.statusCode,
+      message: classifiedError.message
+    });
+
+    // Yield fallback response for streaming
+    const fallback = getFallbackResponse(classifiedError);
+    yield fallback;
+  }
+}
+
+// Health check function for OpenAI API
+export async function checkOpenAIHealth(): Promise<{ healthy: boolean; error?: string }> {
+  try {
+    await openai.models.list();
+    return { healthy: true };
+  } catch (error) {
+    const classifiedError = classifyOpenAIError(error);
+    return { 
+      healthy: false, 
+      error: `${classifiedError.name}: ${classifiedError.message}` 
+    };
   }
 }

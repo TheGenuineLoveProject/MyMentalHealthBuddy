@@ -1,4 +1,4 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { storage } from "../storage.js";
 import { 
   insertJournalSchema, 
@@ -6,26 +6,65 @@ import {
   healingRequestSchema 
 } from "../../shared/schema.js";
 import { generateChatResponse } from "./openai.js";
+import {
+  Sanitizer,
+  ValidationError,
+  apiRateLimiter,
+  chatRateLimiter
+} from "./validation.js";
+
+// Async handler wrapper for better error handling
+function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    Promise.resolve(fn(req, res, next)).catch(next);
+  };
+}
+
+// Rate limiter middleware
+function rateLimitMiddleware(limiter: typeof apiRateLimiter) {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const identifier = req.ip || req.socket.remoteAddress || 'unknown';
+    
+    if (!limiter.check(identifier)) {
+      return res.status(429).json({
+        error: 'Too many requests. Please try again in a moment.',
+        retryAfter: 60
+      });
+    }
+    
+    next();
+  };
+}
 
 export function registerRoutes(app: Express) {
-  app.post("/api/chat", async (req, res) => {
-    try {
-      const parsed = healingRequestSchema.safeParse(req.body);
-      if (!parsed.success) {
-        return res.status(400).json({ error: parsed.error.flatten() });
+  // Chat endpoint with enhanced error handling and rate limiting
+  app.post("/api/chat", 
+    rateLimitMiddleware(chatRateLimiter),
+    asyncHandler(async (req, res) => {
+      // Validate and sanitize input
+      const sanitized = Sanitizer.sanitizeObject(req.body);
+      const result = healingRequestSchema.safeParse(sanitized);
+      
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const userMessage = parsed.data.message;
-      const sessionId = req.headers["x-session-id"] as string || `session-${Date.now()}`;
+      const userMessage = result.data.message;
+      const sessionId = Sanitizer.sanitizeString(
+        req.headers["x-session-id"] as string || `session-${Date.now()}`
+      );
 
+      // Get conversation history
       const history = await storage.getHealingMessagesBySessionId(sessionId);
       const chatHistory = history.map(h => [
         { role: "user" as const, content: h.userMessage },
         { role: "assistant" as const, content: h.aiResponse }
       ]).flat();
 
+      // Generate AI response with enhanced error handling
       const aiResponse = await generateChatResponse(userMessage, chatHistory);
 
+      // Save the conversation
       const savedMessage = await storage.createHealingMessage({
         userId: null,
         sessionId,
@@ -43,58 +82,65 @@ export function registerRoutes(app: Express) {
         reply: aiResponse,
         sessionId
       });
-    } catch (error) {
-      console.error("Chat error:", error);
-      res.status(500).json({ error: "Failed to process chat message" });
-    }
-  });
+    })
+  );
 
-  app.get("/api/chat/history/:sessionId", async (req, res) => {
-    try {
-      const { sessionId } = req.params;
+  // Chat history endpoint
+  app.get("/api/chat/history/:sessionId", 
+    asyncHandler(async (req, res) => {
+      const sessionId = Sanitizer.sanitizeString(req.params.sessionId);
+      
+      if (!sessionId) {
+        return res.status(400).json({ error: 'Invalid session ID' });
+      }
+
       const messages = await storage.getHealingMessagesBySessionId(sessionId);
       res.json(messages);
-    } catch (error) {
-      console.error("Chat history error:", error);
-      res.status(500).json({ error: "Failed to fetch chat history" });
-    }
-  });
+    })
+  );
 
-  app.get("/api/journals", async (req, res) => {
-    try {
-      const userId = req.headers["x-user-id"] as string || "demo-user";
+  // Get journals endpoint
+  app.get("/api/journals",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
       const journals = await storage.getJournalsByUserId(userId);
       res.json(journals);
-    } catch (error) {
-      console.error("Get journals error:", error);
-      res.status(500).json({ error: "Failed to fetch journals" });
-    }
-  });
+    })
+  );
 
-  app.post("/api/journals", async (req, res) => {
-    try {
-      const userId = req.headers["x-user-id"] as string || "demo-user";
-      const parsed = insertJournalSchema.safeParse({
+  // Create journal endpoint
+  app.post("/api/journals",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      
+      // Sanitize and validate input
+      const sanitized = Sanitizer.sanitizeObject({
         ...req.body,
         userId
       });
+      const result = insertJournalSchema.safeParse(sanitized);
 
-      if (!parsed.success) {
-        return res.status(400).json({ error: parsed.error.flatten() });
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const journal = await storage.createJournal(parsed.data);
+      const journal = await storage.createJournal(result.data);
       res.status(201).json(journal);
-    } catch (error) {
-      console.error("Create journal error:", error);
-      res.status(500).json({ error: "Failed to create journal entry" });
-    }
-  });
+    })
+  );
 
-  app.patch("/api/journals/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const userId = req.headers["x-user-id"] as string || "demo-user";
+  // Update journal endpoint
+  app.patch("/api/journals/:id",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const id = Sanitizer.sanitizeString(req.params.id);
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+
+      if (!id) {
+        return res.status(400).json({ error: 'Invalid journal ID' });
+      }
 
       const existing = await storage.getJournalById(id);
       if (!existing) {
@@ -105,23 +151,29 @@ export function registerRoutes(app: Express) {
         return res.status(403).json({ error: "Not authorized to update this entry" });
       }
 
-      const parsed = insertJournalSchema.partial().safeParse(req.body);
-      if (!parsed.success) {
-        return res.status(400).json({ error: parsed.error.flatten() });
+      // Sanitize and validate partial update
+      const sanitized = Sanitizer.sanitizeObject(req.body);
+      const result = insertJournalSchema.partial().safeParse(sanitized);
+
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const updated = await storage.updateJournal(id, parsed.data);
+      const updated = await storage.updateJournal(id, result.data);
       res.json(updated);
-    } catch (error) {
-      console.error("Update journal error:", error);
-      res.status(500).json({ error: "Failed to update journal entry" });
-    }
-  });
+    })
+  );
 
-  app.delete("/api/journals/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const userId = req.headers["x-user-id"] as string || "demo-user";
+  // Delete journal endpoint
+  app.delete("/api/journals/:id",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const id = Sanitizer.sanitizeString(req.params.id);
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+
+      if (!id) {
+        return res.status(400).json({ error: 'Invalid journal ID' });
+      }
 
       const existing = await storage.getJournalById(id);
       if (!existing) {
@@ -134,51 +186,50 @@ export function registerRoutes(app: Express) {
 
       await storage.deleteJournal(id);
       res.status(204).send();
-    } catch (error) {
-      console.error("Delete journal error:", error);
-      res.status(500).json({ error: "Failed to delete journal entry" });
-    }
-  });
+    })
+  );
 
-  app.get("/api/moods", async (req, res) => {
-    try {
-      const userId = req.headers["x-user-id"] as string || "demo-user";
+  // Get mood entries endpoint
+  app.get("/api/moods",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
       const moods = await storage.getMoodEntriesByUserId(userId);
       res.json(moods);
-    } catch (error) {
-      console.error("Get moods error:", error);
-      res.status(500).json({ error: "Failed to fetch mood entries" });
-    }
-  });
+    })
+  );
 
-  app.post("/api/moods", async (req, res) => {
-    try {
-      const userId = req.headers["x-user-id"] as string || "demo-user";
-      const parsed = insertMoodEntrySchema.safeParse({
+  // Create mood entry endpoint
+  app.post("/api/moods",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      
+      // Sanitize and validate input
+      const sanitized = Sanitizer.sanitizeObject({
         ...req.body,
         userId
       });
+      const result = insertMoodEntrySchema.safeParse(sanitized);
 
-      if (!parsed.success) {
-        return res.status(400).json({ error: parsed.error.flatten() });
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const moodEntry = await storage.createMoodEntry(parsed.data);
+      const moodEntry = await storage.createMoodEntry(result.data);
       res.status(201).json(moodEntry);
-    } catch (error) {
-      console.error("Create mood error:", error);
-      res.status(500).json({ error: "Failed to create mood entry" });
-    }
-  });
+    })
+  );
 
-  app.get("/api/crisis-resources", async (req, res) => {
-    try {
-      const country = (req.query.country as string) || "US";
+  // Get crisis resources endpoint
+  app.get("/api/crisis-resources",
+    asyncHandler(async (req, res) => {
+      const country = Sanitizer.sanitizeString(
+        (req.query.country as string) || "US"
+      ).toUpperCase().slice(0, 2) || "US";
+      
       const resources = await storage.getCrisisResourcesByCountry(country);
       res.json(resources);
-    } catch (error) {
-      console.error("Get crisis resources error:", error);
-      res.status(500).json({ error: "Failed to fetch crisis resources" });
-    }
-  });
+    })
+  );
 }
