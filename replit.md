@@ -56,3 +56,56 @@ The architecture emphasizes type safety, developer experience, and modern web de
 -   **@replit/vite-plugin-cartographer**: Development environment integration.
 -   **@replit/vite-plugin-dev-banner**: Development UI enhancements.
 -   **@replit/vite-plugin-runtime-error-modal**: Enhanced error reporting.
+## Recent Changes
+
+### October 27, 2025 - Production-Ready Database & Security Enhancements 🔒
+
+**Database Infrastructure:**
+- ✅ **Drizzle ORM Setup**: Complete PostgreSQL integration with type-safe schema definitions
+  - Created `drizzle.config.ts` for migration management
+  - Implemented full Drizzle schema in `apps/shared/db-schema.ts` with pgTable definitions
+  - Tables: users, healing_messages, journals, mood_entries, crisis_resources
+  - All tables use UUID primary keys with `gen_random_uuid()` defaults
+  
+- ✅ **PostgreSQL Storage Layer**: Created `PgStorage` class as production-ready alternative to MemStorage
+  - Full implementation of IStorage interface using Drizzle ORM
+  - Connection pooling with pg.Pool for performance
+  - Proper type mapping and JSON handling for preferences field
+  
+- ✅ **Database Migration Tools**: Added npm scripts for schema management
+  - `npm run db:push` - Push schema changes to database
+  - `npm run db:studio` - Launch Drizzle Studio for database inspection
+  - `npm run db:generate` - Generate migration files
+
+**Security Enhancements:**
+- ✅ **Session Management**: Production-grade session handling with express-session
+  - PostgreSQL-backed session storage using connect-pg-simple
+  - Auto-creating session table on first run
+  - Secure cookie configuration (httpOnly, sameSite, secure in production)
+  - Mandatory SESSION_SECRET with minimum 32-character requirement
+  
+- ✅ **Password Security**: Integrated bcryptjs for password hashing
+  
+- ✅ **Environment Validation**: Zod-based runtime environment variable validation
+  - Created `apps/server/src/lib/env.ts` with strict validation schema
+  - Validates NODE_ENV, PORT, DATABASE_URL, OpenAI credentials, SESSION_SECRET
+  - Fail-fast startup if environment is misconfigured
+
+**Data Validation:**
+- ✅ **Enhanced Zod Schemas**: Restored and improved all field-level validations
+  - Journal content: minimum 1 character required
+  - Mood intensity: constrained to 1-10 range
+  - Username: minimum 3 characters, Password: minimum 8 characters
+  - Email: proper email format validation
+  - All schemas use `.extend()` to add validation on top of Drizzle-generated schemas
+
+**Dependencies Added:**
+- Backend: bcryptjs, express-session, connect-pg-simple, pg, drizzle-kit
+- Types: @types/bcryptjs, @types/express-session, @types/pg
+
+**File Structure:**
+- `drizzle.config.ts` - Database migration configuration
+- `apps/shared/db-schema.ts` - Drizzle ORM table definitions
+- `apps/server/pg-storage.ts` - PostgreSQL storage implementation
+- `apps/server/src/lib/session.ts` - Session management configuration
+- `apps/server/src/lib/env.ts` - Environment variable validation
