@@ -80,22 +80,42 @@ app.use('/api/*', (req, res) => {
 });
 
 // Global error handler middleware
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   // Log the error with stack trace
   console.error('[GLOBAL ERROR HANDLER]', {
+    name: err.name,
     message: err.message,
     stack: err.stack,
     path: req.path,
     method: req.method,
+    statusCode: err.statusCode,
     timestamp: new Date().toISOString()
   });
 
-  // Don't leak error details in production
+  // Handle ValidationError with specific status code
+  if (err.name === 'ValidationError') {
+    return res.status(err.statusCode || 400).json({
+      error: err.message,
+      details: err.errors,
+      ...(isProduction ? {} : { stack: err.stack })
+    });
+  }
+
+  // Handle OpenAI errors
+  if (err.name && err.name.includes('OpenAIError')) {
+    return res.status(err.statusCode || 500).json({
+      error: err.message,
+      code: err.code,
+      ...(isProduction ? {} : { stack: err.stack })
+    });
+  }
+
+  // Don't leak error details in production for unknown errors
   const errorMessage = isProduction 
     ? 'An unexpected error occurred. Please try again.' 
     : err.message;
 
-  res.status(500).json({
+  res.status(err.statusCode || 500).json({
     error: errorMessage,
     ...(isProduction ? {} : { stack: err.stack })
   });
