@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import { Plus, Edit, Trash2 } from "lucide-react";
+import type { SelectJournal } from "@shared/schema";
 
 export function JournalPage() {
   const [isEditing, setIsEditing] = useState(false);
@@ -9,7 +10,7 @@ export function JournalPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const { data: journals = [], isLoading } = useQuery({
+  const { data: journals = [], isLoading } = useQuery<SelectJournal[]>({
     queryKey: ["/api/journals"],
   });
 
@@ -60,7 +61,7 @@ export function JournalPage() {
     setContent("");
   };
 
-  const handleEdit = (journal: any) => {
+  const handleEdit = (journal: SelectJournal) => {
     setIsEditing(true);
     setEditingId(journal.id);
     setTitle(journal.title || "");
@@ -156,7 +157,7 @@ export function JournalPage() {
             <p>Start writing to track your thoughts and feelings.</p>
           </div>
         ) : (
-          journals.map((journal: any) => (
+          journals.map((journal) => (
             <div
               key={journal.id}
               className="bg-white rounded-lg shadow p-6"

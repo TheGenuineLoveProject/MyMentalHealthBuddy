@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { Phone, Globe, AlertCircle } from "lucide-react";
+import type { SelectCrisisResource } from "@shared/schema";
 
 export function CrisisPage() {
-  const { data: resources = [], isLoading } = useQuery({
+  const { data: resources = [], isLoading } = useQuery<SelectCrisisResource[]>({
     queryKey: ["/api/crisis-resources?country=US"],
   });
 
@@ -28,7 +29,7 @@ export function CrisisPage() {
         <p className="text-gray-500">Loading resources...</p>
       ) : (
         <div className="space-y-4">
-          {resources.map((resource: any) => (
+          {resources.map((resource) => (
             <div
               key={resource.id}
               className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500"

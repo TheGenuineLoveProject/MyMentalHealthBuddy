@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient";
+import type { SelectMoodEntry } from "@shared/schema";
 
 const MOODS = ["Happy", "Sad", "Anxious", "Calm", "Angry", "Stressed", "Content"];
 
@@ -9,7 +10,7 @@ export function MoodPage() {
   const [intensity, setIntensity] = useState(5);
   const [notes, setNotes] = useState("");
 
-  const { data: moods = [], isLoading } = useQuery({
+  const { data: moods = [], isLoading } = useQuery<SelectMoodEntry[]>({
     queryKey: ["/api/moods"],
   });
 
@@ -114,7 +115,7 @@ export function MoodPage() {
           <p className="text-gray-500">No mood entries yet. Start tracking your mood above!</p>
         ) : (
           <div className="space-y-3">
-            {moods.map((entry: any) => (
+            {moods.map((entry) => (
               <div
                 key={entry.id}
                 className="border-l-4 border-blue-500 pl-4 py-2"
