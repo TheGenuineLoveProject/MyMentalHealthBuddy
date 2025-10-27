@@ -1,59 +1,21 @@
-modules = ["nodejs-20", "web", "postgresql-16"]
-run = "npm run dev"
-hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
+run = "npm run start:all"
+hidden = [".cache","node_modules",".pnpm"]
+modules = ["nodejs-20"]
 
-[nix]
-channel = "stable-24_05"
-packages = ["jq"]
-
-[deployment]
-deploymentTarget = "autoscale"
-build = ["sh", "-c", "npm run build"]
-run = ["sh", "-c", "npm start"]
+[agent]
+expertMode = true
 
 [[ports]]
 localPort = 3001
-externalPort = 6800
+externalPort = 3001
 
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 5001
-externalPort = 6000
-
-[[ports]]
-localPort = 8080
-externalPort = 8080
-
-[[ports]]
-localPort = 32857
-externalPort = 3003
-
-[[ports]]
-localPort = 32995
-externalPort = 5173
-
-[[ports]]
-localPort = 35897
+localPort = 40423
 externalPort = 3000
-
-[[ports]]
-localPort = 39033
-externalPort = 5000
-
-[[ports]]
-localPort = 39281
-externalPort = 3002
-
-[[ports]]
-localPort = 42323
-externalPort = 4200
-
-[[ports]]
-localPort = 45083
-externalPort = 3001
 
 [workflows]
 runButton = "Project"
@@ -73,12 +35,8 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm run dev"
+args = "npm run dev:start"
 waitForPort = 5000
 
-[interpreter]
-entrypoint = "index.ts"
-
-[agent]
-expertMode = true
-integrations = ["javascript_openai_ai_integrations:1.0.0"]
+[workflows.workflow.metadata]
+outputType = "webview"

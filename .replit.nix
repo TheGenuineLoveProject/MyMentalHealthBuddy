@@ -1,7 +1,6 @@
 { pkgs }: {
   deps = [
-    pkgs.nodejs-20_x
-    pkgs.postgresql
-    pkgs.jq
+    pkgs.nodejs_20
+    pkgs.nodePackages.npm
   ];
 }
