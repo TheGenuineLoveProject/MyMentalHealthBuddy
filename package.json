@@ -7,12 +7,13 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run fixports && npm run dev:start",
-    "dev:start": "concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'",
+    "dev": "bash start.sh",
+    "dev:start": "concurrently --kill-others --names SERVER,CLIENT --prefix-colors cyan,magenta 'npm run start:server' 'npm run start:client'",
     "fixports": "npx kill-port 3000 3001 5000 9999 && sleep 2 || true",
     "start:server": "npm run dev -w apps/server",
     "start:client": "npm run dev -w apps/client",
-    "start:all": "npm run dev",
+    "start:all": "bash start.sh",
+    "health": "node scripts/health-check.js",
     "build": "npm install --workspaces --include-workspace-root && npm run build:clean && npm run build:compile",
     "build:clean": "rm -rf apps/client/dist apps/server/dist",
     "build:compile": "npm run build -w apps/client && npm run build -w apps/server",
@@ -22,7 +23,9 @@
     "db:push": "drizzle-kit push",
     "type-check": "npm run type-check -w apps/client && npm run type-check -w apps/server",
     "clean": "rm -rf node_modules apps/*/node_modules apps/*/dist package-lock.json",
-    "perf": "npm run build:stats"
+    "perf": "npm run build:stats",
+    "restart": "npm run fixports && npm run start:all",
+    "kill": "killall node || true"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
