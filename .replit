@@ -1,3 +1,2 @@
-modules = ["nodejs-20"]
-[agent]
-expertMode = true
+run = "npm run start:all"
+hidden = [".cache","node_modules",".pnpm"]
