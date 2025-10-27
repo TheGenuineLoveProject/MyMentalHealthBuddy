@@ -2,10 +2,20 @@
   "name": "client",
   "private": true,
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "vite --port 5173 --strictPort",
     "build": "vite build",
     "preview": "vite preview --port 5173 --strictPort"
   },
-  "devDependencies": { "vite": "^5.4.0" }
+  "devDependencies": {
+    "vite": "^5.4.0"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.90.5",
+    "lucide-react": "^0.548.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "wouter": "^3.7.1"
+  }
 }
