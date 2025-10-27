@@ -31,8 +31,8 @@ registerRoutes(app);
 if (isProduction) {
   const clientDistPath = path.join(__dirname, "../../../../../client/dist");
   app.use(express.static(clientDistPath, {
-  maxAge: isProd ? '1y' : 0,
-  immutable: isProd,
+  maxAge: isProduction ? '1y' : 0,
+  immutable: isProduction,
   etag: true,
   lastModified: true,
   setHeaders: (res, path) => {

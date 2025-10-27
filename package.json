@@ -16,11 +16,13 @@
     "build": "npm install --workspaces --include-workspace-root && npm run build:clean && npm run build:compile",
     "build:clean": "rm -rf apps/client/dist apps/server/dist",
     "build:compile": "npm run build -w apps/client && npm run build -w apps/server",
-    "build:analyze": "npm run build -w apps/client -- --mode analyze",
+    "build:analyze": "npm run build -w apps/client -- --mode analyze && open apps/client/dist/stats.html",
+    "build:stats": "npm run build -w apps/client && ls -lh apps/client/dist/assets/js/",
     "start": "NODE_ENV=production node apps/server/dist/apps/server/src/index.js",
     "db:push": "drizzle-kit push",
     "type-check": "npm run type-check -w apps/client && npm run type-check -w apps/server",
-    "clean": "rm -rf node_modules apps/*/node_modules apps/*/dist package-lock.json"
+    "clean": "rm -rf node_modules apps/*/node_modules apps/*/dist package-lock.json",
+    "perf": "npm run build:stats"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
