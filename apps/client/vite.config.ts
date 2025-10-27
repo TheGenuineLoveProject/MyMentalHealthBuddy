@@ -8,20 +8,20 @@ export default defineConfig({
   plugins: [
     react(),
     viteCompression({
-      verbose: true,
+      verbose: process.env.ANALYZE === 'true',
       disable: false,
       threshold: 10240,
       algorithm: 'gzip',
       ext: '.gz',
     }),
     viteCompression({
-      verbose: true,
+      verbose: process.env.ANALYZE === 'true',
       disable: false,
       threshold: 10240,
       algorithm: 'brotliCompress',
       ext: '.br',
     }),
-    visualizer({
+    process.env.ANALYZE === 'true' && visualizer({
       filename: './dist/stats.html',
       open: false,
       gzipSize: true,

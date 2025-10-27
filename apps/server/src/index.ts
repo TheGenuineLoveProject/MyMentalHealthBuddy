@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
+import expressStaticGzip from "express-static-gzip";
 import dotenv from "dotenv";
 import { registerRoutes } from "./routes.js";
 import path from "path";
@@ -30,21 +31,28 @@ registerRoutes(app);
 
 if (isProduction) {
   const clientDistPath = path.join(__dirname, "../../../../../client/dist");
-  app.use(express.static(clientDistPath, {
-  maxAge: isProduction ? '1y' : 0,
-  immutable: isProduction,
-  etag: true,
-  lastModified: true,
-  setHeaders: (res, path) => {
-    if (path.endsWith('.html')) {
-      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
-    } else if (path.match(/\.(js|css|woff2?|ttf|eot)$/)) {
-      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-    } else if (path.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/)) {
-      res.setHeader('Cache-Control', 'public, max-age=2592000');
-    }
-  }
-}));
+  
+  app.use(
+    expressStaticGzip(clientDistPath, {
+      enableBrotli: true,
+      orderPreference: ['br', 'gz'],
+      serveStatic: {
+        maxAge: '1y',
+        immutable: true,
+        etag: true,
+        lastModified: true,
+        setHeaders: (res, filePath) => {
+          if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+          } else if (filePath.match(/\.(js|css|woff2?|ttf|eot)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+          } else if (filePath.match(/\.(jpg|jpeg|png|gif|svg|ico|webp)$/)) {
+            res.setHeader('Cache-Control', 'public, max-age=2592000');
+          }
+        }
+      }
+    })
+  );
   
   app.get("*", (req, res) => {
     if (req.path.startsWith("/api")) {
