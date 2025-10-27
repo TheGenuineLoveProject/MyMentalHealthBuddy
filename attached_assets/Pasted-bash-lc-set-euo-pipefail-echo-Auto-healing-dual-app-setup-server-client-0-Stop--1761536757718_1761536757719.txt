@@ -1,0 +1,124 @@
+bash -lc 'set -euo pipefail
+echo "[⚙️] Auto-healing dual-app setup (server + client)…"
+
+# 0️⃣  Stop any leftovers cleanly
+pkill -f vite >/dev/null 2>&1 || true
+pkill -f "node .*server" >/dev/null 2>&1 || true
+pkill -f concurrently >/dev/null 2>&1 || true
+for p in 3000 3001 5000 5173 9999; do
+  (lsof -ti tcp:$p | xargs -r kill -9) >/dev/null 2>&1 || true
+done
+echo "[ok] Freed all ports (3000-9999)"
+
+# 1️⃣  Replit runtime (ensures Run button = start:all)
+echo "run = \"npm run start:all\"" > .replit
+cat > replit.nix <<EOF
+{ pkgs }: { deps = [ pkgs.nodejs-20_x pkgs.npm pkgs.git pkgs.curl ]; }
+EOF
+
+# 2️⃣  Root package.json with universal scripts
+node - <<'JS'
+import fs from "fs";
+const f="package.json";let pkg={};
+if(fs.existsSync(f))pkg=JSON.parse(fs.readFileSync(f,"utf8"));
+pkg.private=true;pkg.type="module";
+pkg.workspaces=["server","client"];
+pkg.scripts={
+ "clean":"node scripts/killports.mjs 3000 3001 5000 5173 9999",
+ "dev:server":"PORT=5000 node server/index.js",
+ "dev:client":"vite --host 0.0.0.0 --port 5173",
+ "start:all":"node scripts/start-all.mjs"
+};
+pkg.devDependencies=Object.assign({
+ "concurrently":"^9.0.1",
+ "wait-on":"^8.0.1",
+ "kill-port":"^2.0.1"
+},pkg.devDependencies||{});
+fs.mkdirSync("scripts",{recursive:true});
+fs.writeFileSync(f,JSON.stringify(pkg,null,2));
+console.log("[ok] Root package.json ensured ✅");
+JS
+
+# 3️⃣  Kill-ports helper (cross-platform)
+cat > scripts/killports.mjs <<'JS'
+import {spawnSync} from "child_process";
+for(const p of process.argv.slice(2)){
+ spawnSync("bash",["-lc",`lsof -ti tcp:${p}|xargs -r kill -9`],{stdio:"ignore"});
+}
+JS
+chmod +x scripts/killports.mjs
+
+# 4️⃣  start-all orchestrator (restarts & waits for backend)
+cat > scripts/start-all.mjs <<'JS'
+import {spawn} from "child_process";
+import waitOn from "wait-on";
+import kill from "kill-port";
+
+const S=5000,C=5173;
+function delay(ms){return new Promise(r=>setTimeout(r,ms));}
+async function clean(){for(const p of[3000,3001,S,C,9999])await kill(p).catch(()=>{});}
+function run(cmd,args){
+ const p=spawn(cmd,args,{stdio:"inherit"});
+ p.on("exit",c=>{if(c)console.log(`[♻] ${cmd} exited (${c}), restarting…`);});
+ return p;
+}
+(async()=>{
+ await clean();
+ console.log("[▶] Starting backend…");
+ const srv=run("npm",["run","dev:server"]);
+ await waitOn({resources:[`http://localhost:${S}/healthz`],timeout:60000}).catch(()=>{});
+ console.log("[✅] Backend healthy → launching frontend…");
+ await delay(1500);
+ run("npm",["run","dev:client"]);
+})();
+JS
+chmod +x scripts/start-all.mjs
+
+# 5️⃣  Minimal backend (Express + Helmet + CORS + health)
+mkdir -p server
+cat > server/package.json <<EOF
+{ "name":"server","type":"module",
+  "scripts":{"dev":"node index.js"},
+  "dependencies":{"express":"^4.19.2","helmet":"^7.1.0","cors":"^2.8.5"} }
+EOF
+cat > server/index.js <<'JS'
+import express from "express";
+import helmet from "helmet";
+import cors from "cors";
+const app=express();
+app.use(helmet({contentSecurityPolicy:false}));
+app.use(cors());
+app.get("/healthz",(req,res)=>res.send("OK"));
+const PORT=process.env.PORT||5000;
+function start(){
+ try{app.listen(PORT,"0.0.0.0",()=>console.log("🟢 Backend running on",PORT));}
+ catch(e){if(e.code==="EADDRINUSE"){console.log("[♻] Port busy, retrying…");setTimeout(start,2000);}else throw e;}
+}
+start();
+JS
+
+# 6️⃣  Minimal Vite frontend (safe defaults)
+mkdir -p client/src
+cat > client/package.json <<EOF
+{ "name":"client","private":true,
+  "scripts":{"dev":"vite --host 0.0.0.0 --port 5173"},
+  "devDependencies":{"vite":"^5.4.11"} }
+EOF
+cat > client/index.html <<EOF
+<!doctype html><html><body><h3>🌈 Client</h3><div id="app">Connecting…</div>
+<script type="module" src="/src/main.js"></script></body></html>
+EOF
+cat > client/src/main.js <<'JS'
+const el=document.getElementById("app");
+fetch("http://localhost:5000/healthz").then(r=>r.text())
+ .then(t=>el.innerHTML+="<br>Backend:"+t)
+ .catch(()=>el.innerHTML+="<br>Backend:❌");
+JS
+
+# 7️⃣  Install everything
+npm install --legacy-peer-deps --force
+npm install --prefix server --legacy-peer-deps --force
+npm install --prefix client --legacy-peer-deps --force
+
+echo "[🎯] Ready! Click ▶ Run or type: npm run start:all"
+'
