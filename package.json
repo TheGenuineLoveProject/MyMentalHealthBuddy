@@ -1,43 +1,35 @@
 {
   "name": "mymentalhealthbuddy-monorepo",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
+  "workspaces": ["apps/*"],
+  "engines": { "node": ">=20 <21" },
   "scripts": {
     "dev:server": "npm --prefix apps/server run dev",
     "dev:client": "npm --prefix apps/client run dev",
-    "dev:start": "npm run dev:server",
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "npm --prefix apps/client run build",
-    "build:server": "npm --prefix apps/server run build",
-    "start": "NODE_ENV=production npm --prefix apps/server run start",
+    "type-check": "echo \"(optional) add TS later\"",
+    "health": "node scripts/health.js",
     "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
-    "health": "node -e \"require('http').get('http://localhost:5000/health',r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>console.log(d))})\""
+    "build:all": "npm --prefix apps/client run build",
+    "preview": "npm --prefix apps/client run preview",
+    "lint": "eslint . --ext .js,.jsx --max-warnings=0",
+    "format": "prettier -w ."
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "cors": "^2.8.5",
+    "compression": "^1.7.4",
+    "morgan": "^1.10.0",
+    "zod": "^3.23.8",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "concurrently": "^9.0.0",
+    "wait-on": "^8.0.0",
     "cross-env": "^7.0.3",
-    "wait-on": "^8.0.0"
-  },
-  "dependencies": {
-    "@vitejs/plugin-react": "^5.1.0",
-    "compression": "^1.8.1",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "drizzle-orm": "^0.44.7",
-    "drizzle-zod": "^0.8.3",
-    "express": "^4.19.2",
-    "express-static-gzip": "^3.0.0",
-    "helmet": "^8.1.0",
-    "openai": "^6.7.0",
-    "postgres": "^3.4.7",
-    "rollup-plugin-visualizer": "^6.0.5",
-    "vite-plugin-compression": "^0.5.1",
-    "zod": "^3.25.76"
-  },
-  "engines": {
-    "node": ">=20 <21"
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.3.3"
   }
 }

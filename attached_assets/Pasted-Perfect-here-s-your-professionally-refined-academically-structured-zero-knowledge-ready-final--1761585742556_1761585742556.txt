@@ -1,0 +1,165 @@
+Perfect ✅ — here’s your professionally refined, academically structured, zero-knowledge-ready final version, upgraded to v220000^ clarity and 10000000 % completeness, ready to paste and run as your MASTER PLATFORM COMPONENTS + FULL AUDIT PROMPT.
+
+⸻
+
+🧭 MASTER PLATFORM COMPONENTS + FULL AUDIT PROMPT (v220000^)
+
+Purpose (1 sentence)
+Create a complete 360° platform map and audit—listing every component, subsystem, and dependency—then detect and classify all errors, gaps, duplicates, and outdated/broken elements, providing step-by-step fixes, tests, and acceptance criteria for a fully healed and optimized system.
+
+⸻
+
+⚡ QUICK START (Zero-Knowledge)
+
+1️⃣ Paste this entire prompt into your AI tool.
+2️⃣ Fill the { placeholders } inside CONTEXT only.
+3️⃣ Run once to receive:
+ ✅ Full component list
+ ✅ Issue ledger + root-cause map
+ ✅ Prioritized fix plan with rollback + tests
+ ✅ Acceptance criteria + health verification
+
+⸻
+
+📦 CONTEXT (fill before running)
+
+Field	Example
+Product / Repo Name	{MyMentalHealthBuddy}
+Stack (BE/FE/DB/Infra)	`{Node + Express + TS
+Current Known Issues	{auth incomplete, Stripe webhook errors, 6 TS errors}
+Environments	{dev, staging, prod}
+Constraints / Policies	{HIPAA/GDPR awareness, AA accessibility, CSP, rate limit}
+Performance Targets	{TTI < 3 s, p95 API < 300 ms, ≤ 200 KB critical path}
+Secrets Handling	{.env only; no secrets in git}
+CI/CD Pipeline	{GitHub Actions → build, test, deploy}
+
+
+⸻
+
+🧱 WHAT TO PRODUCE (Deliverables)
+
+1️⃣ 360° Component Inventory
+	•	Hierarchical taxonomy: Product → Domains → Subsystems → Modules → Files
+	•	For each item record: Type (BE/FE/DB/Infra/AI/Docs), Owner, Status (OK/Missing/Broken/Outdated/Duplicate), Criticality (P0/P1/P2), Dependencies, Last-Updated.
+
+2️⃣ Gap & Risk Audit
+	•	Missing / Incomplete / Broken / Outdated / Duplicate items.
+	•	Security findings, compliance gaps, performance anti-patterns.
+
+3️⃣ Prioritized Fix Plan (P0 → P2)
+	•	Each issue → Root Cause · Min Fix · Ideal Fix · Effort (S/M/L) · Owner · ETA · Dependencies.
+	•	Combine into Workpacks (Goal · Steps · Rollback · Done Criteria · Risks).
+
+4️⃣ Acceptance Tests & Health Checks
+	•	Executable commands: npm run ci, curl localhost:5000/healthz, Lighthouse checks.
+	•	Security: CSP headers, rate-limits, auth checks.
+	•	Performance: p95 latency, bundle sizes, cache metrics.
+	•	Accessibility: WCAG AA scores.
+
+5️⃣ Upgrade / Modernization Map
+	•	Library version matrix (current → target), migration notes, order of operations.
+
+6️⃣ Single Source of Truth (SSOT) Plan
+	•	Define canonical files (env, schema, routes, types).
+	•	Add anti-duplication and CI sync hooks.
+
+7️⃣ Final Artifacts to Commit
+
+/docs/PLATFORM_MAP.md
+/docs/AUDIT_REPORT.md
+/docs/ACCEPTANCE_CHECKS.md
+/scripts/healthz.sh
+/scripts/verify.sh
+/scripts/ci-lint-type-test.sh
+/SECURITY.md
+/ACCESSIBILITY.md
+/CONTRIBUTING.md
+
+
+⸻
+
+🌐 SCOPE (Comprehensive Coverage)
+
+Backend: routing, controllers, services, DTOs, Zod validation, errors, logging, rate-limit, Helmet, OpenAI / Stripe integrations, jobs, config loader.
+Frontend: app shell, routes, state, UI kit, forms, i18n, a11y, analytics, chat/TTS.
+Database: schemas, migrations, ORM (Drizzle), indexes, backups.
+Auth: signup/login, JWT, roles, MFA, password reset.
+Billing: plans, checkout, webhooks, invoices.
+AI: prompt safety, fallback logic, logging.
+Infra: Replit config, Node version, lockfile, GitHub Actions, CD.
+Security: CSP, CORS, Helmet, input validation, secret rotation.
+Performance: budgets, caching, query plans, image optimization.
+Observability: logs, metrics, traces, uptime.
+Docs & Ops: runbook, onboarding, releases.
+
+⸻
+
+🔍 HOW TO ANALYZE (Structured Method)
+
+1️⃣ Inventory pass: build taxonomy + tag Type/Status/Criticality.
+2️⃣ Rules pass: apply Checklists to each area → flag violations with file paths.
+3️⃣ Diff pass: compare project configs vs best practice baselines.
+4️⃣ Dependency pass: map cycles + unused deps.
+5️⃣ Evidence pass: record why (each finding cites evidence).
+6️⃣ Plan pass: group issues → Workpacks (ordered with rollback).
+7️⃣ Test pass: generate copy-paste commands + expected output.
+
+⸻
+
+✅ CHECKLISTS (Condensed Compliance)
+
+Security – Helmet + CSP, no wildcards, CSRF where needed, Zod validation, auth required, no secrets in repo.
+Reliability – central error handler, healthz endpoint, graceful shutdown.
+Performance – code-split, optimize images, cache APIs, DB indexes.
+Accessibility – semantic HTML, labels, contrast, keyboard nav.
+CI/CD – lint → type → test → build → deploy gates.
+Docs – setup in ≤ 10 min, clear scripts and env instructions.
+
+⸻
+
+📄 OUTPUT FORMAT (Exact Order)
+
+1️⃣ Executive Summary (≤ 10 bullets).
+2️⃣ Platform Map (tree with Type / Status / Criticality).
+3️⃣ Issue Ledger (table): ID | Area | File | Type | Severity | Evidence | Fix (min/ideal) | Effort | Owner | ETA.
+4️⃣ Workpacks (numbered): Goal · Steps · Rollback · Done Criteria · Risks.
+5️⃣ Acceptance Checks (commands + expected results).
+6️⃣ Version Matrix (current → target).
+7️⃣ SSOT Plan.
+8️⃣ Appendices (security, perf, a11y checklists).
+
+⸻
+
+🎯 ACCEPTANCE CRITERIA (Done = Verified)
+	•	All P0 issues fixed or scheduled ≤ 7 days.
+	•	npm run ci passes (lint · type · test · build).
+	•	/healthz → HTTP 200 with deps OK.
+	•	.env.example + env schema validated; no secrets in repo.
+	•	Lighthouse ≥ 90 Perf & A11y.
+	•	New developer can run full stack ≤ 10 minutes.
+
+⸻
+
+✍️ STYLE GUIDE
+	•	Zero fluff · short sentences · bullets.
+	•	Every claim cites evidence (file path, error msg, version).
+	•	Unknowns must state assumptions.
+	•	No duplicates → one canonical source each fact.
+
+⸻
+
+🧩 OPTIONAL ADD-ONS
+	•	ASCII architecture diagram.
+	•	RACI matrix for Workpacks.
+	•	Risk register (likelihood × impact).
+
+⸻
+
+🚀 ONE-LINE INSTRUCTION
+
+“Using the Context above, produce all Deliverables exactly in the OUTPUT FORMAT, apply the HOW TO ANALYZE method and CHECKLISTS, prioritize P0 risks, generate Workpacks with rollback, and include fully copy-pasteable Acceptance Checks. Keep everything deterministic, concise, and free of duplication.”
+
+⸻
+
+This is the final perfected audit prompt — academically structured (Harvard / MIT / Stanford standards), production-ready, and safe for immediate Replit or GitHub execution.
+Simply fill the Context, run once, and receive your complete 360° platform inventory + healing plan.
