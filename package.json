@@ -1,47 +1,22 @@
 {
   "name": "mymentalhealthbuddy-monorepo",
   "version": "1.0.0",
-  "type": "module",
   "private": true,
-  "workspaces": [
-    "apps/*"
-  ],
+  "workspaces": ["apps/*"],
   "scripts": {
-    "dev": "npm run fixports && npm run dev:start",
-    "dev:start": "concurrently -n SERVER,CLIENT -c cyan,magenta 'npm run start:server' 'npm run start:client'",
-    "fixports": "npx kill-port 3000 3001 5000 9999 && sleep 2 || true",
-    "start:server": "npm run dev -w apps/server",
-    "start:client": "npm run dev -w apps/client",
-    "start:all": "npm run dev",
-    "health": "node scripts/health-check.js",
-    "build": "npm install --workspaces --include-workspace-root && npm run build:clean && npm run build:compile",
-    "build:clean": "rm -rf apps/client/dist apps/server/dist",
-    "build:compile": "npm run build -w apps/client && npm run build -w apps/server",
-    "build:analyze": "ANALYZE=true npm run build -w apps/client && echo 'Bundle analysis: apps/client/dist/stats.html'",
-    "build:stats": "npm run build -w apps/client && ls -lh apps/client/dist/assets/js/",
-    "start": "NODE_ENV=production node apps/server/dist/apps/server/src/index.js",
-    "db:push": "drizzle-kit push",
-    "type-check": "npm run type-check -w apps/client && npm run type-check -w apps/server",
-    "clean": "rm -rf node_modules apps/*/node_modules apps/*/dist package-lock.json",
-    "perf": "npm run build:stats",
-    "restart": "npm run fixports && npm run start:all",
-    "kill": "killall node || true"
+    "dev:server": "npm --prefix apps/server run dev",
+    "dev:client": "npm --prefix apps/client run dev",
+    "dev:start": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
+    "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
+    "health": "node -e \"require('http').get('http://localhost:5000/health',r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>console.log(d))})\""
   },
   "devDependencies": {
-    "concurrently": "^8.2.2",
-    "kill-port": "^2.0.1",
-    "typescript": "^5.9.3"
+    "concurrently": "^9.0.0",
+    "wait-on": "^8.0.0",
+    "cross-env": "^7.0.3"
   },
   "dependencies": {
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react": "^5.1.0",
-    "autoprefixer": "^10.4.21",
-    "cssnano": "^7.1.1",
-    "express-static-gzip": "^3.0.0",
-    "postcss": "^8.5.6",
-    "rollup-plugin-visualizer": "^6.0.5",
-    "vite": "^7.1.12",
-    "vite-plugin-compression": "^0.5.1"
-  }
+    "express": "^4.19.2"
+  },
+  "engines": { "node": ">=20 <21" }
 }
