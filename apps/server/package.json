@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "cross-env PORT=5000 node dist/apps/server/src/index.js"
+    "dev": "PORT=5000 node dist/apps/server/src/index.js"
   },
   "dependencies": {
     "express": "^4.19.2",

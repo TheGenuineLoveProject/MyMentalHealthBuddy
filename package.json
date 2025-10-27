@@ -2,7 +2,9 @@
   "name": "mymentalhealthbuddy-monorepo",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["apps/*"],
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev:server": "npm --prefix apps/server run dev",
     "dev:client": "npm --prefix apps/client run dev",
@@ -12,11 +14,26 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.0",
-    "wait-on": "^8.0.0",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "wait-on": "^8.0.0"
   },
   "dependencies": {
-    "express": "^4.19.2"
+    "@vitejs/plugin-react": "^5.1.0",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.44.7",
+    "drizzle-zod": "^0.8.3",
+    "express": "^4.19.2",
+    "express-static-gzip": "^3.0.0",
+    "helmet": "^8.1.0",
+    "openai": "^6.7.0",
+    "postgres": "^3.4.7",
+    "rollup-plugin-visualizer": "^6.0.5",
+    "vite-plugin-compression": "^0.5.1",
+    "zod": "^3.25.76"
   },
-  "engines": { "node": ">=20 <21" }
+  "engines": {
+    "node": ">=20 <21"
+  }
 }
