@@ -1,0 +1,27 @@
+{
+  "webVitals": {
+    "enabled": true,
+    "metrics": [
+      "CLS",
+      "FID",
+      "FCP",
+      "LCP",
+      "TTFB"
+    ],
+    "reportingThreshold": 1000
+  },
+  "customMarks": [
+    "app-initialized",
+    "user-authenticated",
+    "data-loaded",
+    "ui-interactive"
+  ],
+  "resourceTiming": {
+    "enabled": true,
+    "threshold": 100
+  },
+  "longTasks": {
+    "enabled": true,
+    "threshold": 50
+  }
+}

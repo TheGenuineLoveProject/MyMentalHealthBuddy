@@ -1,0 +1,89 @@
+/**
+ * Service Worker Registration
+ * Register the service worker for offline support and PWA features
+ */
+
+export function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then((registration) => {
+          console.log('Service Worker registered successfully:', registration.scope);
+          
+          // Check for updates every hour
+          setInterval(() => {
+            registration.update();
+          }, 60 * 60 * 1000);
+        })
+        .catch((error) => {
+          console.error('Service Worker registration failed:', error);
+        });
+    });
+  }
+}
+
+/**
+ * Unregister service worker (for development)
+ */
+export async function unregisterServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    const registrations = await navigator.serviceWorker.getRegistrations();
+    for (const registration of registrations) {
+      await registration.unregister();
+    }
+    console.log('Service Worker unregistered');
+  }
+}
+
+/**
+ * Check if app is running as PWA
+ */
+export function isPWA(): boolean {
+  return window.matchMedia('(display-mode: standalone)').matches ||
+         (window.navigator as any).standalone === true;
+}
+
+/**
+ * Prompt user to install PWA
+ */
+export function setupInstallPrompt() {
+  let deferredPrompt: any;
+  
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    
+    // Show custom install button/banner
+    const installButton = document.querySelector('[data-install-button]');
+    if (installButton) {
+      installButton.classList.remove('hidden');
+      
+      installButton.addEventListener('click', () => {
+        // Hide the button
+        installButton.classList.add('hidden');
+        
+        // Show the install prompt
+        deferredPrompt.prompt();
+        
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice.then((choiceResult: any) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+          } else {
+            console.log('User dismissed the install prompt');
+          }
+          deferredPrompt = null;
+        });
+      });
+    }
+  });
+  
+  // Track if app was installed
+  window.addEventListener('appinstalled', () => {
+    console.log('PWA installed successfully');
+    deferredPrompt = null;
+  });
+}
