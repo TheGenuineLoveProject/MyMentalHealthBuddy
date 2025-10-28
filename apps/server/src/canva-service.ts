@@ -1,4 +1,4 @@
-import type { SelectCanvaDesign } from "@shared/schema";
+import type { SelectCanvaDesign } from "../../shared/schema.js";
 
 export interface CanvaTokenResponse {
   access_token: string;

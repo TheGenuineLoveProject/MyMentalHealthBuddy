@@ -76,7 +76,10 @@ export class MemStorage implements IStorage {
       subscriptionStatus: "inactive",
       subscriptionEndDate: null,
       profileImage: null,
-      preferences: "{}"
+      preferences: "{}",
+      canvaAccessToken: null,
+      canvaRefreshToken: null,
+      canvaTokenExpiresAt: null
     };
     
     this.users.set(id, user);

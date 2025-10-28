@@ -15,6 +15,8 @@ import {
 } from "./validation.js";
 import { DataExporter } from "./export.js";
 import { StripeService, stripe, SUBSCRIPTION_TIERS } from "./stripe-service.js";
+import { canvaService } from "./canva-service.js";
+import type { SelectCanvaDesign, InsertCanvaDesign } from "../../shared/schema.js";
 
 // Async handler wrapper for better error handling
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
@@ -510,6 +512,290 @@ export function registerRoutes(app: Express) {
 
       // Return success to acknowledge receipt
       res.json({ received: true });
+    })
+  );
+
+  // ============================================================================
+  // CANVA DESIGN & VISUAL CONTENT ROUTES
+  // ============================================================================
+
+  // Check if Canva is enabled
+  app.get("/api/canva/status",
+    asyncHandler(async (req, res) => {
+      res.json({
+        enabled: canvaService.isEnabled(),
+        message: canvaService.isEnabled() 
+          ? "Canva API is configured and ready" 
+          : "Canva API credentials not configured"
+      });
+    })
+  );
+
+  // Get Canva authorization URL
+  app.get("/api/canva/auth-url",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      if (!canvaService.isEnabled()) {
+        return res.status(503).json({ error: "Canva API not configured" });
+      }
+
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const state = `${authenticatedUserId}-${Date.now()}`;
+      const authUrl = canvaService.getAuthorizationUrl(state);
+
+      res.json({ authUrl, state });
+    })
+  );
+
+  // Canva OAuth callback
+  app.get("/api/canva/callback",
+    asyncHandler(async (req, res) => {
+      const { code, state } = req.query;
+
+      if (!code || typeof code !== "string") {
+        return res.status(400).json({ error: "Missing authorization code" });
+      }
+
+      if (!state || typeof state !== "string") {
+        return res.status(400).json({ error: "Missing state parameter" });
+      }
+
+      try {
+        // Extract user ID from state
+        const userId = state.split("-")[0];
+        
+        // Exchange code for tokens
+        const tokens = await canvaService.exchangeCodeForToken(code);
+        
+        // Save tokens to user record
+        const expiresAt = new Date(Date.now() + tokens.expires_in * 1000);
+        await storage.updateUser(userId, {
+          canvaAccessToken: tokens.access_token,
+          canvaRefreshToken: tokens.refresh_token,
+          canvaTokenExpiresAt: expiresAt
+        });
+
+        // Redirect to designs page or dashboard
+        res.redirect("/designs?canva_connected=true");
+      } catch (error: any) {
+        console.error("Canva OAuth callback error:", error);
+        res.redirect("/designs?canva_error=true");
+      }
+    })
+  );
+
+  // Create a new design
+  app.post("/api/canva/designs",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      if (!canvaService.isEnabled()) {
+        return res.status(503).json({ error: "Canva API not configured" });
+      }
+
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const { designType, title, imageUrl } = req.body;
+
+      if (!designType) {
+        return res.status(400).json({ error: "Design type is required" });
+      }
+
+      // Get user's Canva access token
+      const user = await storage.getUserById(authenticatedUserId);
+      if (!user || !user.canvaAccessToken) {
+        return res.status(401).json({ error: "Canva not connected. Please authorize first." });
+      }
+
+      // TODO: Check if token is expired and refresh if needed
+
+      // Create design in Canva
+      const design = await canvaService.createDesign(
+        user.canvaAccessToken,
+        designType,
+        title,
+        imageUrl ? undefined : undefined // Asset upload would go here
+      );
+
+      res.json({
+        canvaDesignId: design.id,
+        title: design.title,
+        editUrl: design.urls.edit_url,
+        viewUrl: design.urls.view_url,
+        thumbnail: design.thumbnail?.url
+      });
+    })
+  );
+
+  // Create social media post
+  app.post("/api/canva/create-social-post",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      if (!canvaService.isEnabled()) {
+        return res.status(503).json({ error: "Canva API not configured" });
+      }
+
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const { platform, title, imageUrl } = req.body;
+
+      if (!platform || !["instagram", "facebook", "twitter", "linkedin"].includes(platform)) {
+        return res.status(400).json({ error: "Invalid platform. Must be instagram, facebook, twitter, or linkedin" });
+      }
+
+      // Get user's Canva access token
+      const user = await storage.getUserById(authenticatedUserId);
+      if (!user || !user.canvaAccessToken) {
+        return res.status(401).json({ error: "Canva not connected. Please authorize first." });
+      }
+
+      // Create social media post
+      const design = await canvaService.createSocialMediaPost(
+        user.canvaAccessToken,
+        platform,
+        title || `Mental Health ${platform.charAt(0).toUpperCase() + platform.slice(1)} Post`,
+        imageUrl
+      );
+
+      res.json({
+        canvaDesignId: design.id,
+        title: design.title,
+        editUrl: design.urls.edit_url,
+        viewUrl: design.urls.view_url,
+        platform
+      });
+    })
+  );
+
+  // Generate mental health quote design
+  app.post("/api/canva/generate-quote",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      if (!canvaService.isEnabled()) {
+        return res.status(503).json({ error: "Canva API not configured" });
+      }
+
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const { quote, author } = req.body;
+
+      if (!quote) {
+        return res.status(400).json({ error: "Quote text is required" });
+      }
+
+      const user = await storage.getUserById(authenticatedUserId);
+      if (!user || !user.canvaAccessToken) {
+        return res.status(401).json({ error: "Canva not connected. Please authorize first." });
+      }
+
+      const design = await canvaService.generateMentalHealthQuote(
+        user.canvaAccessToken,
+        quote,
+        author
+      );
+
+      res.json({
+        canvaDesignId: design.id,
+        title: design.title,
+        editUrl: design.urls.edit_url,
+        viewUrl: design.urls.view_url
+      });
+    })
+  );
+
+  // Generate mood visualization
+  app.post("/api/canva/generate-mood-visual",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      if (!canvaService.isEnabled()) {
+        return res.status(503).json({ error: "Canva API not configured" });
+      }
+
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const { mood, intensity, date } = req.body;
+
+      if (!mood || !intensity) {
+        return res.status(400).json({ error: "Mood and intensity are required" });
+      }
+
+      const user = await storage.getUserById(authenticatedUserId);
+      if (!user || !user.canvaAccessToken) {
+        return res.status(401).json({ error: "Canva not connected. Please authorize first." });
+      }
+
+      const design = await canvaService.generateMoodVisualization(
+        user.canvaAccessToken,
+        mood,
+        intensity,
+        date || new Date().toISOString().split("T")[0]
+      );
+
+      res.json({
+        canvaDesignId: design.id,
+        title: design.title,
+        editUrl: design.urls.edit_url,
+        viewUrl: design.urls.view_url
+      });
+    })
+  );
+
+  // Export design
+  app.post("/api/canva/export/:designId",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      if (!canvaService.isEnabled()) {
+        return res.status(503).json({ error: "Canva API not configured" });
+      }
+
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const designId = Sanitizer.sanitizeString(req.params.designId);
+      const { format } = req.body;
+
+      if (!["PNG", "JPG", "PDF"].includes(format)) {
+        return res.status(400).json({ error: "Invalid format. Must be PNG, JPG, or PDF" });
+      }
+
+      const user = await storage.getUserById(authenticatedUserId);
+      if (!user || !user.canvaAccessToken) {
+        return res.status(401).json({ error: "Canva not connected. Please authorize first." });
+      }
+
+      const exportJob = await canvaService.exportDesign(
+        user.canvaAccessToken,
+        designId,
+        format
+      );
+
+      res.json({
+        jobId: exportJob.job.id,
+        status: exportJob.job.status,
+        urls: exportJob.urls
+      });
+    })
+  );
+
+  // Get design templates
+  app.get("/api/canva/templates",
+    asyncHandler(async (req, res) => {
+      const templates = canvaService.getDesignTemplates();
+      res.json(templates);
+    })
+  );
+
+  // List user designs
+  app.get("/api/canva/designs",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      if (!canvaService.isEnabled()) {
+        return res.status(503).json({ error: "Canva API not configured" });
+      }
+
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+
+      const user = await storage.getUserById(authenticatedUserId);
+      if (!user || !user.canvaAccessToken) {
+        return res.status(401).json({ error: "Canva not connected. Please authorize first." });
+      }
+
+      const designs = await canvaService.listUserDesigns(user.canvaAccessToken);
+
+      res.json({ designs });
     })
   );
 }
