@@ -4,10 +4,14 @@
  */
 
 const CACHE_NAME = 'mymentalhealthbuddy-v1';
+// Basic precache - for full offline support, integrate Workbox for automatic asset management
+// This provides network-first caching for dynamic content
 const urlsToCache = [
   '/',
   '/index.html',
-  '/manifest.json'
+  '/manifest.json',
+  // Note: Hashed assets (*.js, *.css) are cached dynamically on first fetch
+  // For production deployment, consider using Workbox for automatic asset precaching
 ];
 
 // Install event - cache essential files

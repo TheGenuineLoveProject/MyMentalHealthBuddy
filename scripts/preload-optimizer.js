@@ -26,6 +26,14 @@ if (!fs.existsSync(indexPath)) {
 // Read index.html
 let html = fs.readFileSync(indexPath, 'utf-8');
 
+// Check if resource hints already exist (idempotent builds)
+if (html.includes('<!-- Resource Hints for Performance -->')) {
+  console.log('✅ Resource hints already present - skipping injection (idempotent)');
+  console.log('\n🎉 Optimization complete!');
+  console.log('================================\n');
+  process.exit(0);
+}
+
 // Find critical assets
 const criticalAssets = [];
 const prefetchAssets = [];
