@@ -336,7 +336,12 @@ export function registerRoutes(app: Express) {
         return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const transaction = await storage.createBillingTransaction(result.data);
+      const transactionData = {
+        ...result.data,
+        currency: result.data.currency || "USD"
+      } as import("../../shared/schema.js").InsertBillingTransaction;
+
+      const transaction = await storage.createBillingTransaction(transactionData);
       res.status(201).json(transaction);
     })
   );

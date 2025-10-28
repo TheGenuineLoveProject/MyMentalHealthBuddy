@@ -166,10 +166,10 @@ export const healingRequestSchema = z.object({
 });
 
 export const insertBillingTransactionSchema = z.object({
-  userId: z.string(),
+  userId: z.string().min(1, "User ID is required"),
   stripeSessionId: z.string().nullable().optional(),
-  amount: z.string(),
-  currency: z.string().default("USD"),
+  amount: z.string().min(1, "Amount is required"),
+  currency: z.string().min(1).default("USD"),
   status: z.string().min(1, "Status is required"),
   type: z.string().min(1, "Type is required"),
   description: z.string().nullable().optional(),
