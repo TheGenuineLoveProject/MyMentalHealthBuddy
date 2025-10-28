@@ -24,7 +24,12 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "health": "node scripts/health.js",
-    "deploy:prepare": "npm run build:production && npm run production-check && echo '\n✅ Ready for deployment!'"
+    "deploy:prepare": "npm run build:production && npm run production-check && echo '\n✅ Ready for deployment!'",
+    "diagnose": "node scripts/diagnose.mjs",
+    "heal": "node scripts/heal.mjs",
+    "verify": "node scripts/verify.mjs",
+    "self-evolve": "npm run diagnose && npm run heal && npm run verify",
+    "activate": "bash scripts/activateMaster.sh"
   },
   "dependencies": {
     "@stripe/react-stripe-js": "^5.3.0",

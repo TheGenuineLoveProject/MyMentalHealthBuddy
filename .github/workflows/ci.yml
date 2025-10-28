@@ -1,13 +1,61 @@
-name: CI
-on: { push: { branches: [ main, master ] }, pull_request: { branches: [ main, master ] } }
+name: MyMentalHealthBuddy CI - Self-Evolution
+on: 
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
 jobs:
-  build:
+  diagnose:
+    name: System Diagnostics
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: '20' }
+        with: { node-version: '20', cache: 'npm' }
       - run: npm ci
-      - run: npm run typecheck
-      - run: npm run build
-      - run: npm test
+      - run: npm run diagnose || true
+      
+  heal:
+    name: Auto-Healing
+    runs-on: ubuntu-latest
+    needs: diagnose
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run heal || true
+      
+  verify:
+    name: Verification Suite
+    runs-on: ubuntu-latest
+    needs: heal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run verify
+      
+  build:
+    name: Build & Optimize
+    runs-on: ubuntu-latest
+    needs: verify
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run build:production
+        env:
+          NODE_ENV: production
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            apps/client/dist
+            apps/server/dist
+            build-report.json
+          retention-days: 7

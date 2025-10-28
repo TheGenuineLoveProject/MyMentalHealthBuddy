@@ -3,3 +3,30 @@ dist/
 .env
 *.tar.gz
 .backup/
+
+# Self-evolution system
+.rollback/
+build-report.json
+analytics-config.json
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+apps/*/dist/
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

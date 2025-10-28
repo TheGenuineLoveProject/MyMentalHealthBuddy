@@ -14,6 +14,8 @@ const CrisisPage = lazy(() => import("./pages/CrisisPage").then(m => ({ default:
 const BillingPage = lazy(() => import("./pages/BillingPage"));
 const AccountPage = lazy(() => import("./pages/AccountPage"));
 const DesignsPage = lazy(() => import("./pages/DesignsPage"));
+const StudioPage = lazy(() => import("./pages/StudioPage"));
+const SocialCalendarPage = lazy(() => import("./pages/SocialCalendarPage"));
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
               <Route path="/billing" component={BillingPage} />
               <Route path="/account" component={AccountPage} />
               <Route path="/designs" component={DesignsPage} />
+              <Route path="/studio" component={StudioPage} />
+              <Route path="/social" component={SocialCalendarPage} />
               <Route>
                 <div className="container mx-auto px-4 py-16">
                   <div className="text-center max-w-md mx-auto animate-slide-in-up">
