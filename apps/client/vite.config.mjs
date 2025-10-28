@@ -3,12 +3,10 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import viteCompression from 'vite-plugin-compression';
 import { visualizer } from 'rollup-plugin-visualizer';
-import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss(),
     viteCompression({
       verbose: process.env.ANALYZE === 'true',
       disable: false,

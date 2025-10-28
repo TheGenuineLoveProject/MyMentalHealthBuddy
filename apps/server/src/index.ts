@@ -133,13 +133,18 @@ if (isDev) {
   // __dirname: /workspace/apps/server/dist/apps/server/src
   // Go up 6 levels to workspace root, then into apps/client  
   const clientRoot = path.join(__dirname, '../../../../../../apps/client');
+  const workspaceRoot = path.join(__dirname, '../../../../../..');
   
   console.log(`📁 Client root: ${clientRoot}`);
+  console.log(`📁 Workspace root: ${workspaceRoot}`);
   
   const vite = await createViteServer({
     server: { middlewareMode: true },
     appType: 'custom',
-    root: clientRoot
+    root: clientRoot,
+    resolve: {
+      preserveSymlinks: false
+    }
   });
   
   app.use(vite.middlewares);
