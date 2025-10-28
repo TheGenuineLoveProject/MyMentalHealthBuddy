@@ -114,11 +114,7 @@ export const insertHealingMessageSchema = createInsertSchema(healingMessages).om
   aiResponse: z.string().min(1, "AI response is required")
 });
 
-export const insertJournalSchema = createInsertSchema(journals).omit({ 
-  id: true, 
-  createdAt: true, 
-  updatedAt: true 
-}).extend({
+export const insertJournalSchema = z.object({
   userId: z.string(),
   title: z.string().nullable().optional(),
   content: z.string().min(1, "Content is required"),
@@ -127,10 +123,7 @@ export const insertJournalSchema = createInsertSchema(journals).omit({
   isPrivate: z.boolean().optional().default(false)
 });
 
-export const insertMoodEntrySchema = createInsertSchema(moodEntries).omit({ 
-  id: true, 
-  createdAt: true 
-}).extend({
+export const insertMoodEntrySchema = z.object({
   userId: z.string(),
   mood: z.string().min(1, "Mood is required"),
   intensity: z.number().min(1, "Intensity must be at least 1").max(10, "Intensity cannot exceed 10"),
