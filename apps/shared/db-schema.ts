@@ -165,8 +165,9 @@ export const healingRequestSchema = z.object({
   message: z.string().min(1, "Message is required")
 });
 
+// Schema for creating billing transactions via API (userId comes from auth header)
 export const insertBillingTransactionSchema = z.object({
-  userId: z.string().min(1, "User ID is required"),
+  userId: z.string().min(1, "User ID is required").optional(),  // Optional in request, will be set from auth
   stripeSessionId: z.string().nullable().optional(),
   amount: z.string().min(1, "Amount is required"),
   currency: z.string().min(1).default("USD"),

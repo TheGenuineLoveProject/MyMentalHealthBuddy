@@ -300,13 +300,19 @@ export function registerRoutes(app: Express) {
   app.get("/api/transactions/:userId",
     rateLimitMiddleware(apiRateLimiter),
     asyncHandler(async (req, res) => {
-      const userId = Sanitizer.sanitizeString(req.params.userId);
+      const requestedUserId = Sanitizer.sanitizeString(req.params.userId);
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
       
-      if (!userId) {
+      if (!requestedUserId) {
         return res.status(400).json({ error: "User ID is required" });
       }
 
-      const transactions = await storage.getBillingTransactionsByUserId(userId);
+      // Authorization check: users can only access their own transactions
+      if (requestedUserId !== authenticatedUserId) {
+        return res.status(403).json({ error: "Unauthorized: You can only access your own transaction history" });
+      }
+
+      const transactions = await storage.getBillingTransactionsByUserId(requestedUserId);
       res.json(transactions);
     })
   );
@@ -315,11 +321,17 @@ export function registerRoutes(app: Express) {
     rateLimitMiddleware(apiRateLimiter),
     asyncHandler(async (req, res) => {
       const id = Sanitizer.sanitizeString(req.params.id);
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
       
       const transaction = await storage.getBillingTransactionById(id);
       
       if (!transaction) {
         return res.status(404).json({ error: "Transaction not found" });
+      }
+
+      // Authorization check: users can only access their own transactions
+      if (transaction.userId !== authenticatedUserId) {
+        return res.status(403).json({ error: "Unauthorized: You can only access your own transactions" });
       }
 
       res.json(transaction);
@@ -329,6 +341,7 @@ export function registerRoutes(app: Express) {
   app.post("/api/transactions",
     rateLimitMiddleware(apiRateLimiter),
     asyncHandler(async (req, res) => {
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
       const sanitized = Sanitizer.sanitizeObject(req.body);
       const result = insertBillingTransactionSchema.safeParse(sanitized);
       
@@ -336,8 +349,10 @@ export function registerRoutes(app: Express) {
         return res.status(400).json({ error: result.error.flatten() });
       }
 
+      // Authorization check: override userId with authenticated user to prevent forgery
       const transactionData = {
         ...result.data,
+        userId: authenticatedUserId,  // Force userId to be the authenticated user
         currency: result.data.currency || "USD"
       } as import("../../shared/schema.js").InsertBillingTransaction;
 
