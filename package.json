@@ -13,7 +13,11 @@
     "dev:client": "npm --prefix apps/client run dev",
     "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
     "build": "npm --prefix apps/client run build && npm --prefix apps/server run build",
+    "build:analyze": "cross-env ANALYZE=true npm run build",
     "start": "cross-env PORT=5000 NODE_ENV=production node dist/apps/server/src/index.js",
+    "production-check": "node scripts/production-check.js",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
     "health": "node scripts/health.js"
   },
   "dependencies": {
