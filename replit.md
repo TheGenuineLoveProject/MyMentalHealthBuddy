@@ -1,7 +1,7 @@
 # MyMentalHealthBuddy
 
 ## Overview
-MyMentalHealthBuddy is an AI-powered mental health support application that provides therapeutic chat, mood tracking, journaling, and a resource library. It aims to offer accessible and comprehensive mental health tools through a tiered subscription model (Free, Premium, Professional) that provides various levels of access to AI sessions, analytics, and professional support.
+MyMentalHealthBuddy is an AI-powered mental health support application offering therapeutic chat, mood tracking, journaling, and a resource library. It aims to provide accessible, comprehensive mental health tools through a tiered subscription model (Free, Premium, Professional) with varying access to AI sessions, analytics, and professional support, targeting a broad market seeking digital mental wellness solutions.
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
@@ -9,24 +9,26 @@ Preferred communication style: Simple, everyday language.
 ## System Architecture
 
 ### UI/UX Decisions
-The application uses `shadcn/ui` components built on `Radix UI` primitives for a consistent and accessible user interface. `Tailwind CSS` with CSS variables is used for styling and theming, and `Lucide React` provides consistent iconography. The design is responsive, supporting both mobile and desktop. The dashboard includes real-time stats, quick action cards with animations, a recent activity feed, and motivational messages.
+The application utilizes `shadcn/ui` built on `Radix UI` primitives, styled with `Tailwind CSS` and `Lucide React` for iconography. The design is responsive, supporting both mobile and desktop, and features a dashboard with real-time stats, animated quick action cards, and a recent activity feed.
 
 ### Technical Implementations
--   **Frontend**: Built with React 18 and TypeScript, using Vite for bundling. `TanStack Query` manages server state, `Wouter` handles client-side routing, and `React Hook Form` with `Zod` provides form handling and validation.
--   **Backend**: Node.js with Express.js and TypeScript (ESM modules). It features a RESTful API with JSON responses, centralized error handling, and custom logging middleware.
--   **Data Storage**: PostgreSQL database, managed by Drizzle ORM and hosted on Neon Database. Drizzle Kit handles schema migrations, and Drizzle-Zod ensures runtime type validation.
--   **Authentication**: Session-based authentication with user credentials stored with hashed passwords, using `connect-pg-simple` for PostgreSQL session storage.
+-   **Frontend**: React 18, TypeScript, Vite, `TanStack Query` for server state, `Wouter` for routing, and `React Hook Form` with `Zod` for forms.
+-   **Backend**: Node.js with Express.js and TypeScript (ESM modules), featuring a RESTful API, centralized error handling, and custom logging.
+-   **Data Storage**: PostgreSQL database managed by Drizzle ORM (Neon Database hosting), with Drizzle Kit for migrations and Drizzle-Zod for runtime type validation.
+-   **Authentication**: Session-based authentication with hashed passwords, using `connect-pg-simple` for PostgreSQL session storage.
 -   **Core Features**:
-    -   **AI Chat Therapy**: OpenAI-powered conversational AI with retry logic and empathetic fallbacks.
-    -   **Mood Tracking**: Records mood, intensity, activities, and triggers with real-time analytics.
-    -   **Mood Analytics**: Advanced analytics dashboard with personalized insights, trend analysis, and mood distribution.
-    -   **Data Export**: CSV and JSON export capabilities for journals and moods with proper download headers and rate limiting.
+    -   **AI Chat Therapy**: OpenAI-powered conversational AI with retry logic.
+    -   **Mood Tracking**: Records mood, intensity, activities, and triggers with analytics.
+    -   **Mood Analytics**: Advanced dashboard with personalized insights and trend analysis.
+    -   **Data Export**: CSV and JSON export for journals and moods.
     -   **Journal System**: Private journaling with optional titles, moods, and tags.
-    -   **Crisis Resources**: Provides access to emergency helplines.
--   **Deployment**: Advanced build system with dual-algorithm compression (gzip + brotli), pre-compressed asset serving, intelligent HTTP caching, and code splitting for optimized performance. The system includes a robust startup process with health checks and error recovery, configured for Replit Autoscale deployment.
+    -   **Crisis Resources**: Access to emergency helplines.
+    -   **Stripe Billing System**: Subscription management and payment processing.
+    -   **Canva Integration**: Design creation for social media, quotes, and mood visualizations.
+-   **Deployment**: Optimized for Replit Autoscale with dual-algorithm compression, pre-compressed asset serving, intelligent HTTP caching, and code splitting.
 
 ### System Design Choices
-The architecture emphasizes type safety, developer experience, and modern web development practices. It maintains a clean separation between frontend and backend concerns, utilizing a monorepo structure for organized development. Security features include XSS protection, rate limiting, and input sanitization. The system incorporates robust error handling with specific error classes, retry logic, and global error handlers for resilience. Observability is maintained through request logging, health monitoring, and structured error tracking.
+The architecture emphasizes type safety, developer experience, and modern web practices within a monorepo structure. It maintains clear separation of concerns and incorporates security features like XSS protection, rate limiting, and input sanitization. Robust error handling includes specific error classes, retry logic, and global handlers. Observability is ensured through request logging, health monitoring, and structured error tracking. Environment variables are validated at runtime using Zod.
 
 ## External Dependencies
 
@@ -56,98 +58,8 @@ The architecture emphasizes type safety, developer experience, and modern web de
 -   **@replit/vite-plugin-cartographer**: Development environment integration.
 -   **@replit/vite-plugin-dev-banner**: Development UI enhancements.
 -   **@replit/vite-plugin-runtime-error-modal**: Enhanced error reporting.
-## Recent Changes
 
-### October 28, 2025 - Complete Stripe Billing System Implementation 💳
-
-**🎉 DELIVERED: Full-Stack Billing System**
-- ✅ **Stripe Integration**: Complete payment processing via Replit Stripe integration (STRIPE_SECRET_KEY + VITE_STRIPE_PUBLIC_KEY configured)
-- ✅ **Backend Services**: 
-  - `stripe-service.ts`: Payment/subscription management, webhook handling, customer creation
-  - 7 new Stripe API endpoints: checkout sessions (subscription + one-time), subscription management, webhooks
-  - `updateUser()` storage method for Stripe customer ID persistence
-- ✅ **Frontend UI**:
-  - `/billing` page: 3-tier subscription display (Free/$0, Premium/$29.99, Professional/$49.99), transaction history, upgrade buttons
-  - `/account` page: Profile management, subscription status, billing stats, security settings
-  - Navigation updated with Billing link (CreditCard icon)
-- ✅ **Database**: billingTransactions table with status tracking, metadata storage
-- ✅ **Transaction System**: Secured endpoints with x-user-id authorization, prevents cross-user data access
-
-**⚠️ CRITICAL SECURITY LIMITATIONS (PRE-PRODUCTION)**
-The current implementation is a **functional MVP demo** but has critical security gaps:
-1. **🔴 NO SERVER-SIDE AUTHENTICATION**: The `x-user-id` header is client-controlled - any user can impersonate others by changing the header. This is a CRITICAL vulnerability that MUST be fixed before production.
-2. **🟡 Webhook Signature Verification**: Partially implemented but needs STRIPE_WEBHOOK_SECRET env var for production security
-3. **🟡 Idempotency**: Webhook events lack idempotency keys to prevent duplicate processing
-4. **🟡 Real-time Sync**: Subscription status changes from Stripe webhooks don't update user records (tier/status/endDate remain stale)
-
-**REQUIRED FOR PRODUCTION:**
-- [ ] Implement proper session-based or JWT authentication (replace client-controlled x-user-id)
-- [ ] Add STRIPE_WEBHOOK_SECRET and enforce signature verification
-- [ ] Wire webhook events to update user subscription state in storage
-- [ ] Add idempotency handling for webhook events
-- [ ] Replace mock frontend user data with authenticated context
-- [ ] Comprehensive integration testing with real Stripe test mode
-
-**Files Modified/Created:**
-- Backend: `apps/server/src/stripe-service.ts` (NEW), `apps/server/src/routes.ts` (7 new endpoints), `apps/server/storage.ts` (updateUser method)
-- Frontend: `apps/client/src/pages/BillingPage.tsx` (NEW), `apps/client/src/pages/AccountPage.tsx` (NEW), `apps/client/src/App.tsx`, `apps/client/src/components/Navigation.tsx`
-- Schema: Already had stripeCustomerId, stripeSubscriptionId, billingTransactions table
-
-### October 27, 2025 - Production-Ready Database & Security Enhancements 🔒
-
-**Database Infrastructure:**
-- ✅ **Drizzle ORM Setup**: Complete PostgreSQL integration with type-safe schema definitions
-  - Created `drizzle.config.ts` for migration management
-  - Implemented full Drizzle schema in `apps/shared/db-schema.ts` with pgTable definitions
-  - Tables: users, healing_messages, journals, mood_entries, crisis_resources
-  - All tables use UUID primary keys with `gen_random_uuid()` defaults
-  
-- ✅ **PostgreSQL Storage Layer**: Created `PgStorage` class as production-ready alternative to MemStorage
-  - Full implementation of IStorage interface using Drizzle ORM
-  - Connection pooling with pg.Pool for performance
-  - Proper type mapping and JSON handling for preferences field
-  
-- ✅ **Database Migration Tools**: Added npm scripts for schema management
-  - `npm run db:push` - Push schema changes to database
-  - `npm run db:studio` - Launch Drizzle Studio for database inspection
-  - `npm run db:generate` - Generate migration files
-
-**Security Enhancements:**
-- ✅ **Session Management**: Production-grade session handling with express-session
-  - PostgreSQL-backed session storage using connect-pg-simple
-  - Auto-creating session table on first run
-  - Secure cookie configuration (httpOnly, sameSite, secure in production)
-  - Mandatory SESSION_SECRET with minimum 32-character requirement
-  
-- ✅ **Password Security**: Integrated bcryptjs for password hashing
-  
-- ✅ **Environment Validation**: Zod-based runtime environment variable validation
-  - Created `apps/server/src/lib/env.ts` with strict validation schema
-  - Validates NODE_ENV, PORT, DATABASE_URL, OpenAI credentials, SESSION_SECRET
-  - Fail-fast startup if environment is misconfigured
-
-**Data Validation:**
-- ✅ **Enhanced Zod Schemas**: Restored and improved all field-level validations
-  - Journal content: minimum 1 character required
-  - Mood intensity: constrained to 1-10 range
-  - Username: minimum 3 characters, Password: minimum 8 characters
-  - Email: proper email format validation
-  - All schemas use `.extend()` to add validation on top of Drizzle-generated schemas
-
-**Dependencies Added:**
-- Backend: bcryptjs, express-session, connect-pg-simple, pg, drizzle-kit
-- Types: @types/bcryptjs, @types/express-session, @types/pg
-
-**File Structure:**
-- `drizzle.config.ts` - Database migration configuration
-- `apps/shared/db-schema.ts` - Drizzle ORM table definitions
-- `apps/server/pg-storage.ts` - PostgreSQL storage implementation
-- `apps/server/src/lib/session.ts` - Session management configuration
-- `apps/server/src/lib/env.ts` - Environment variable validation
-- `apps/server/src/types/connect-pg-simple.d.ts` - TypeScript declaration for connect-pg-simple
-
-**Build & Deployment Fixes:**
-- ✅ Fixed TypeScript compilation error: Changed `preferences: {}` to `preferences: "{}"` (JSON string) in storage.ts
-- ✅ Created type declaration file for connect-pg-simple module to resolve TypeScript errors
-- ✅ All builds passing: Server build ✅ | Client build ✅
-- ✅ Ready for production deployment
+### Third-Party Services
+-   **OpenAI**: AI-powered conversational therapy.
+-   **Stripe**: Payment processing and subscription management.
+-   **Canva Connect API**: Professional design tool integration for visual content creation.
