@@ -20,6 +20,9 @@ export const users = pgTable("users", {
   subscriptionEndDate: timestamp("subscription_end_date"),
   profileImage: text("profile_image"),
   preferences: text("preferences").default("{}"),
+  canvaAccessToken: text("canva_access_token"),
+  canvaRefreshToken: text("canva_refresh_token"),
+  canvaTokenExpiresAt: timestamp("canva_token_expires_at"),
 });
 
 export const healingMessages = pgTable("healing_messages", {
@@ -84,6 +87,21 @@ export const billingTransactions = pgTable("billing_transactions", {
   metadata: jsonb("metadata").default({}),
 });
 
+export const canvaDesigns = pgTable("canva_designs", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  canvaDesignId: varchar("canva_design_id", { length: 255 }).notNull(),
+  title: varchar("title", { length: 500 }),
+  designType: varchar("design_type", { length: 100 }).notNull(),
+  thumbnail: text("thumbnail"),
+  editUrl: text("edit_url"),
+  exportUrl: text("export_url"),
+  tags: text("tags").array(),
+  metadata: jsonb("metadata").default({}),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
@@ -101,6 +119,9 @@ export type InsertCrisisResource = typeof crisisResources.$inferInsert;
 
 export type SelectBillingTransaction = typeof billingTransactions.$inferSelect;
 export type InsertBillingTransaction = typeof billingTransactions.$inferInsert;
+
+export type SelectCanvaDesign = typeof canvaDesigns.$inferSelect;
+export type InsertCanvaDesign = typeof canvaDesigns.$inferInsert;
 
 export const insertUserSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),
@@ -163,5 +184,17 @@ export const insertBillingTransactionSchema = z.object({
   status: z.string().min(1, "Status is required"),
   type: z.string().min(1, "Type is required"),
   description: z.string().nullable().optional(),
+  metadata: z.any().optional()
+});
+
+export const insertCanvaDesignSchema = z.object({
+  userId: z.string(),
+  canvaDesignId: z.string().min(1, "Canva Design ID is required"),
+  title: z.string().nullable().optional(),
+  designType: z.string().min(1, "Design type is required"),
+  thumbnail: z.string().nullable().optional(),
+  editUrl: z.string().nullable().optional(),
+  exportUrl: z.string().nullable().optional(),
+  tags: z.array(z.string()).nullable().optional(),
   metadata: z.any().optional()
 });
