@@ -8,7 +8,9 @@ import type {
   SelectMoodEntry,
   InsertMoodEntry,
   SelectCrisisResource,
-  InsertCrisisResource
+  InsertCrisisResource,
+  SelectBillingTransaction,
+  InsertBillingTransaction
 } from "../shared/schema.js";
 
 export interface IStorage {
@@ -32,6 +34,10 @@ export interface IStorage {
   
   getCrisisResources(): Promise<SelectCrisisResource[]>;
   getCrisisResourcesByCountry(country: string): Promise<SelectCrisisResource[]>;
+  
+  createBillingTransaction(transaction: InsertBillingTransaction): Promise<SelectBillingTransaction>;
+  getBillingTransactionsByUserId(userId: string): Promise<SelectBillingTransaction[]>;
+  getBillingTransactionById(id: string): Promise<SelectBillingTransaction | null>;
 }
 
 export class MemStorage implements IStorage {
@@ -41,6 +47,7 @@ export class MemStorage implements IStorage {
   private journals: Map<string, SelectJournal> = new Map();
   private moodEntries: Map<string, SelectMoodEntry> = new Map();
   private crisisResources: Map<string, SelectCrisisResource> = new Map();
+  private billingTransactions: Map<string, SelectBillingTransaction> = new Map();
 
   constructor() {
     this.seedCrisisResources();
@@ -209,6 +216,35 @@ export class MemStorage implements IStorage {
     return Array.from(this.crisisResources.values())
       .filter(r => r.isActive && r.country === country)
       .sort((a, b) => (b.priority || 0) - (a.priority || 0));
+  }
+
+  async createBillingTransaction(insertTransaction: InsertBillingTransaction): Promise<SelectBillingTransaction> {
+    const id = this.generateId();
+    const transaction: SelectBillingTransaction = {
+      id,
+      userId: insertTransaction.userId,
+      stripeSessionId: insertTransaction.stripeSessionId || null,
+      amount: insertTransaction.amount,
+      currency: insertTransaction.currency || "USD",
+      status: insertTransaction.status,
+      type: insertTransaction.type,
+      description: insertTransaction.description || null,
+      createdAt: new Date(),
+      metadata: insertTransaction.metadata || null
+    };
+    
+    this.billingTransactions.set(id, transaction);
+    return transaction;
+  }
+
+  async getBillingTransactionsByUserId(userId: string): Promise<SelectBillingTransaction[]> {
+    return Array.from(this.billingTransactions.values())
+      .filter(t => t.userId === userId)
+      .sort((a, b) => (b.createdAt?.getTime() || 0) - (a.createdAt?.getTime() || 0));
+  }
+
+  async getBillingTransactionById(id: string): Promise<SelectBillingTransaction | null> {
+    return this.billingTransactions.get(id) || null;
   }
 
   private seedCrisisResources(): void {

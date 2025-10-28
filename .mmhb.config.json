@@ -1,0 +1,10 @@
+{
+  "frontendStart": "npm run dev --prefix client",
+  "backendStart": "npm run dev --prefix server",
+  "frontendURL": "http://localhost:5173/",
+  "backendURL": "http://localhost:5000/healthz",
+  "startAllLabel": "start:all",
+  "verifyLabel": "verify",
+  "healLabel": "heal",
+  "auditLabel": "audit"
+}

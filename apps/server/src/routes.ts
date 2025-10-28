@@ -3,7 +3,8 @@ import { storage } from "../storage.js";
 import { 
   insertJournalSchema, 
   insertMoodEntrySchema,
-  healingRequestSchema 
+  healingRequestSchema,
+  insertBillingTransactionSchema
 } from "../../shared/schema.js";
 import { generateChatResponse } from "./openai.js";
 import {
@@ -292,6 +293,51 @@ export function registerRoutes(app: Express) {
         ...analytics,
         insights
       });
+    })
+  );
+
+  // Billing Transactions endpoints
+  app.get("/api/transactions/:userId",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const userId = Sanitizer.sanitizeString(req.params.userId);
+      
+      if (!userId) {
+        return res.status(400).json({ error: "User ID is required" });
+      }
+
+      const transactions = await storage.getBillingTransactionsByUserId(userId);
+      res.json(transactions);
+    })
+  );
+
+  app.get("/api/transaction/:id",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const id = Sanitizer.sanitizeString(req.params.id);
+      
+      const transaction = await storage.getBillingTransactionById(id);
+      
+      if (!transaction) {
+        return res.status(404).json({ error: "Transaction not found" });
+      }
+
+      res.json(transaction);
+    })
+  );
+
+  app.post("/api/transactions",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const sanitized = Sanitizer.sanitizeObject(req.body);
+      const result = insertBillingTransactionSchema.safeParse(sanitized);
+      
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.flatten() });
+      }
+
+      const transaction = await storage.createBillingTransaction(result.data);
+      res.status(201).json(transaction);
     })
   );
 }

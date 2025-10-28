@@ -1,4 +1,4 @@
-import { pgTable, varchar, text, boolean, timestamp, integer, serial } from "drizzle-orm/pg-core";
+import { pgTable, varchar, text, boolean, timestamp, integer, serial, decimal, jsonb } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -71,6 +71,19 @@ export const crisisResources = pgTable("crisis_resources", {
   priority: integer("priority"),
 });
 
+export const billingTransactions = pgTable("billing_transactions", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  stripeSessionId: varchar("stripe_session_id", { length: 255 }),
+  amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+  currency: text("currency").notNull().default("USD"),
+  status: text("status").notNull(),
+  type: text("type").notNull(),
+  description: text("description"),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  metadata: jsonb("metadata").default({}),
+});
+
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
@@ -85,6 +98,9 @@ export type InsertMoodEntry = typeof moodEntries.$inferInsert;
 
 export type SelectCrisisResource = typeof crisisResources.$inferSelect;
 export type InsertCrisisResource = typeof crisisResources.$inferInsert;
+
+export type SelectBillingTransaction = typeof billingTransactions.$inferSelect;
+export type InsertBillingTransaction = typeof billingTransactions.$inferInsert;
 
 export const insertUserSchema = createInsertSchema(users).omit({ 
   id: true, 
@@ -147,4 +163,15 @@ export const insertCrisisResourceSchema = createInsertSchema(crisisResources).om
 
 export const healingRequestSchema = z.object({
   message: z.string().min(1, "Message is required")
+});
+
+export const insertBillingTransactionSchema = z.object({
+  userId: z.string(),
+  stripeSessionId: z.string().nullable().optional(),
+  amount: z.string(),
+  currency: z.string().default("USD"),
+  status: z.string().min(1, "Status is required"),
+  type: z.string().min(1, "Type is required"),
+  description: z.string().nullable().optional(),
+  metadata: z.any().optional()
 });
