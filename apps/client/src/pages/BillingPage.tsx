@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { 
   CreditCard, 
@@ -12,10 +12,10 @@ import {
   Zap,
   Crown
 } from "lucide-react";
-import { queryClient } from "@/lib/queryClient";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
+import { StripeStatus } from "@/components/stripe/StripeStatus";
 import type { SelectBillingTransaction } from "@shared/schema";
 
-// Mock user ID - in production this would come from auth context
 const CURRENT_USER_ID = "user-1";
 
 interface SubscriptionTier {
@@ -33,58 +33,22 @@ interface SubscriptionTiers {
 
 export default function BillingPage() {
   const [selectedTier, setSelectedTier] = useState<"premium" | "professional" | null>(null);
-  const [error, setError] = useState<string>("");
 
-  // Fetch subscription tiers
   const { data: tiers, isLoading: tiersLoading } = useQuery<SubscriptionTiers>({
     queryKey: ["/api/stripe/tiers"],
   });
 
-  // Fetch transaction history
   const { data: transactions, isLoading: transactionsLoading } = useQuery<SelectBillingTransaction[]>({
     queryKey: ["/api/transactions", CURRENT_USER_ID],
     retry: 1,
   });
 
-  // Create checkout session mutation
-  const createCheckout = useMutation({
-    mutationFn: async (tier: "premium" | "professional") => {
-      const baseUrl = window.location.origin;
-      const response = await fetch("/api/stripe/create-subscription-checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-user-id": CURRENT_USER_ID,
-        },
-        body: JSON.stringify({
-          tier,
-          successUrl: `${baseUrl}/billing?success=true`,
-          cancelUrl: `${baseUrl}/billing?canceled=true`,
-        }),
-      });
-      
-      if (!response.ok) {
-        const error = await response.json().catch(() => ({ error: "Request failed" }));
-        throw new Error(error.error || `HTTP ${response.status}`);
-      }
-      
-      return response.json();
-    },
-    onSuccess: (data: any) => {
-      // Redirect to Stripe checkout
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    },
-    onError: (error: any) => {
-      setError(error.message || "Unable to create checkout session");
-    },
-  });
+  const { createSubscriptionCheckout, isLoading: checkoutLoading, error, clearError } = useStripeCheckout();
 
   const handleUpgrade = (tier: "premium" | "professional") => {
     setSelectedTier(tier);
-    setError("");
-    createCheckout.mutate(tier);
+    clearError();
+    createSubscriptionCheckout({ tier });
   };
 
   const getStatusIcon = (status: string) => {
@@ -136,10 +100,13 @@ export default function BillingPage() {
         <p className="text-gray-600">
           Manage your subscription plan and view transaction history
         </p>
+        <div className="mt-4">
+          <StripeStatus />
+        </div>
       </div>
 
       {error && (
-        <div className="mb-6 bg-red-50 border border-red-200 text-red-800 p-4 rounded-lg">
+        <div className="mb-6 bg-red-50 border border-red-200 text-red-800 p-4 rounded-lg" data-testid="alert-checkout-error">
           {error}
         </div>
       )}
@@ -205,15 +172,15 @@ export default function BillingPage() {
                   ) : (
                     <button
                       onClick={() => handleUpgrade(tierKey)}
-                      disabled={createCheckout.isPending && selectedTier === tierKey}
+                      disabled={checkoutLoading && selectedTier === tierKey}
                       className={`w-full py-2 px-4 rounded-md font-medium transition-colors flex items-center justify-center gap-2 ${
                         isPopular 
                           ? "bg-blue-500 hover:bg-blue-600 text-white" 
                           : "bg-gray-800 hover:bg-gray-900 text-white"
-                      } ${createCheckout.isPending && selectedTier === tierKey ? "opacity-50 cursor-not-allowed" : ""}`}
+                      } ${checkoutLoading && selectedTier === tierKey ? "opacity-50 cursor-not-allowed" : ""}`}
                       data-testid={`button-upgrade-${key}`}
                     >
-                      {createCheckout.isPending && selectedTier === tierKey ? (
+                      {checkoutLoading && selectedTier === tierKey ? (
                         "Processing..."
                       ) : (
                         <>
