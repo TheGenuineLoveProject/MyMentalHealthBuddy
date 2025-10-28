@@ -92,7 +92,9 @@ async function runAllVerifications() {
   const criticalFiles = [
     'apps/client/src/App.tsx',
     'apps/server/src/index.ts',
-    'shared/schema.ts'
+    'apps/shared/schema.ts',
+    'apps/server/storage.ts',
+    'apps/client/vite.config.mjs'
   ];
   const allExist = criticalFiles.every(file => fileExists(file));
   if (allExist) {

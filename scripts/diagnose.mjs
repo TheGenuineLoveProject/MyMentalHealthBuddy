@@ -59,11 +59,11 @@ console.log('\n📁 Checking Critical Files...');
 const criticalFiles = [
   'apps/client/src/App.tsx',
   'apps/server/src/index.ts',
-  'shared/schema.ts',
-  'apps/server/src/storage.ts',
+  'apps/shared/schema.ts',
+  'apps/server/storage.ts',
   'apps/server/src/routes.ts',
   'package.json',
-  'vite.config.ts'
+  'apps/client/vite.config.mjs'
 ];
 
 criticalFiles.forEach(file => {
