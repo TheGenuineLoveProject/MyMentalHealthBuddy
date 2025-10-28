@@ -67,6 +67,7 @@ export const redirectToCheckout = async (sessionId: string): Promise<void> => {
   if (error) {
     throw new Error(error.message || "Failed to redirect to checkout");
   }
+}
 };
 
 export const formatPrice = (amountInCents: number): string => {
