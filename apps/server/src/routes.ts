@@ -127,7 +127,7 @@ export function registerRoutes(app: Express) {
         return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const journal = await storage.createJournal(result.data);
+      const journal = await storage.createJournal(result.data as any);
       res.status(201).json(journal);
     })
   );
@@ -160,7 +160,7 @@ export function registerRoutes(app: Express) {
         return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const updated = await storage.updateJournal(id, result.data);
+      const updated = await storage.updateJournal(id, result.data as any);
       res.json(updated);
     })
   );
@@ -217,7 +217,7 @@ export function registerRoutes(app: Express) {
         return res.status(400).json({ error: result.error.flatten() });
       }
 
-      const moodEntry = await storage.createMoodEntry(result.data);
+      const moodEntry = await storage.createMoodEntry(result.data as any);
       res.status(201).json(moodEntry);
     })
   );
