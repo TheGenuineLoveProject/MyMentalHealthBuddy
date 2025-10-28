@@ -17,6 +17,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   getUserById(id: string): Promise<User | null>;
   getUserByUsername(username: string): Promise<User | null>;
+  updateUser(id: string, updates: Partial<User>): Promise<User | null>;
   
   createHealingMessage(message: InsertHealingMessage): Promise<HealingMessage>;
   getHealingMessagesByUserId(userId: string): Promise<HealingMessage[]>;
@@ -89,6 +90,22 @@ export class MemStorage implements IStorage {
 
   async getUserByUsername(username: string): Promise<User | null> {
     return this.usersByUsername.get(username) || null;
+  }
+
+  async updateUser(id: string, updates: Partial<User>): Promise<User | null> {
+    const user = this.users.get(id);
+    if (!user) return null;
+
+    const updatedUser = { ...user, ...updates };
+    this.users.set(id, updatedUser);
+    
+    // Update username index if username changed
+    if (updates.username && updates.username !== user.username) {
+      this.usersByUsername.delete(user.username);
+      this.usersByUsername.set(updates.username, updatedUser);
+    }
+
+    return updatedUser;
   }
 
   async createHealingMessage(insertMessage: InsertHealingMessage): Promise<HealingMessage> {

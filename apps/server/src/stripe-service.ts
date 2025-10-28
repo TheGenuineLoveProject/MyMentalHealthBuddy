@@ -7,7 +7,7 @@ if (!process.env.STRIPE_SECRET_KEY) {
 }
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2024-11-20.acacia",
+  apiVersion: "2025-09-30.clover",
   typescript: true,
 });
 
@@ -85,7 +85,7 @@ export class StripeService {
     });
 
     // Update user record with Stripe customer ID
-    // Note: This would need a storage method - for now just return customer
+    await storage.updateUser(userId, { stripeCustomerId: customer.id });
     console.log(`Created Stripe customer ${customer.id} for user ${userId}`);
 
     return customer;

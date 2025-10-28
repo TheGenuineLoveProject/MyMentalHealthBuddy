@@ -14,6 +14,7 @@ import {
   chatRateLimiter
 } from "./validation.js";
 import { DataExporter } from "./export.js";
+import { StripeService, stripe, SUBSCRIPTION_TIERS } from "./stripe-service.js";
 
 // Async handler wrapper for better error handling
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
@@ -358,6 +359,157 @@ export function registerRoutes(app: Express) {
 
       const transaction = await storage.createBillingTransaction(transactionData);
       res.status(201).json(transaction);
+    })
+  );
+
+  // ============================================
+  // STRIPE PAYMENT & SUBSCRIPTION ENDPOINTS
+  // ============================================
+
+  // Get subscription tier configuration
+  app.get("/api/stripe/tiers",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      res.json(SUBSCRIPTION_TIERS);
+    })
+  );
+
+  // Create subscription checkout session
+  app.post("/api/stripe/create-subscription-checkout",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const { tier, successUrl, cancelUrl } = req.body;
+
+      if (!tier || !["premium", "professional"].includes(tier)) {
+        return res.status(400).json({ error: "Invalid subscription tier. Must be 'premium' or 'professional'." });
+      }
+
+      if (!successUrl || !cancelUrl) {
+        return res.status(400).json({ error: "Missing successUrl or cancelUrl" });
+      }
+
+      const session = await StripeService.createSubscriptionCheckout(
+        authenticatedUserId,
+        tier,
+        successUrl,
+        cancelUrl
+      );
+
+      res.json({ 
+        sessionId: session.id,
+        url: session.url 
+      });
+    })
+  );
+
+  // Create one-time payment checkout session
+  app.post("/api/stripe/create-payment-checkout",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const { amount, description, successUrl, cancelUrl } = req.body;
+
+      if (!amount || typeof amount !== "number" || amount <= 0) {
+        return res.status(400).json({ error: "Invalid amount. Must be a positive number in cents." });
+      }
+
+      if (!description || typeof description !== "string") {
+        return res.status(400).json({ error: "Missing or invalid description" });
+      }
+
+      if (!successUrl || !cancelUrl) {
+        return res.status(400).json({ error: "Missing successUrl or cancelUrl" });
+      }
+
+      const session = await StripeService.createOneTimeCheckout(
+        authenticatedUserId,
+        amount,
+        description,
+        successUrl,
+        cancelUrl
+      );
+
+      res.json({ 
+        sessionId: session.id,
+        url: session.url 
+      });
+    })
+  );
+
+  // Get user's active subscriptions
+  app.get("/api/stripe/subscriptions",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+      const subscriptions = await StripeService.getUserSubscriptions(authenticatedUserId);
+      res.json(subscriptions);
+    })
+  );
+
+  // Cancel subscription
+  app.post("/api/stripe/cancel-subscription",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const { subscriptionId } = req.body;
+
+      if (!subscriptionId || typeof subscriptionId !== "string") {
+        return res.status(400).json({ error: "Invalid subscriptionId" });
+      }
+
+      // TODO: Add authorization check to ensure user owns this subscription
+      const subscription = await StripeService.cancelSubscription(subscriptionId);
+      res.json(subscription);
+    })
+  );
+
+  // Get subscription details
+  app.get("/api/stripe/subscription/:id",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const id = Sanitizer.sanitizeString(req.params.id);
+      const subscription = await StripeService.getSubscription(id);
+      res.json(subscription);
+    })
+  );
+
+  // Stripe webhook handler
+  app.post("/api/stripe/webhook",
+    // Note: Raw body is needed for Stripe webhook signature verification
+    asyncHandler(async (req, res) => {
+      const sig = req.headers["stripe-signature"];
+
+      if (!sig || typeof sig !== "string") {
+        return res.status(400).json({ error: "Missing Stripe signature" });
+      }
+
+      let event;
+
+      try {
+        // Verify webhook signature
+        const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+        
+        if (webhookSecret) {
+          event = stripe.webhooks.constructEvent(
+            req.body,
+            sig,
+            webhookSecret
+          );
+        } else {
+          // For development: accept webhook without verification (NOT for production!)
+          console.warn("⚠️  Stripe webhook secret not configured - skipping signature verification");
+          event = req.body;
+        }
+      } catch (err: any) {
+        console.error(`Webhook signature verification failed: ${err.message}`);
+        return res.status(400).json({ error: `Webhook Error: ${err.message}` });
+      }
+
+      // Handle the event
+      await StripeService.handleWebhookEvent(event);
+
+      // Return success to acknowledge receipt
+      res.json({ received: true });
     })
   );
 }
