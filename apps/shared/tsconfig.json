@@ -11,6 +11,6 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["schema.ts"],
+  "include": ["schema.ts", "db-schema.ts"],
   "exclude": ["node_modules", "schema.js"]
 }

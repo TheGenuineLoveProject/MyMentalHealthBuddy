@@ -102,32 +102,23 @@ export type InsertCrisisResource = typeof crisisResources.$inferInsert;
 export type SelectBillingTransaction = typeof billingTransactions.$inferSelect;
 export type InsertBillingTransaction = typeof billingTransactions.$inferInsert;
 
-export const insertUserSchema = createInsertSchema(users).omit({ 
-  id: true, 
-  createdAt: true,
-  lastLogin: true,
-  stripeCustomerId: true,
-  stripeSubscriptionId: true,
-  subscriptionTier: true,
-  subscriptionStatus: true,
-  subscriptionEndDate: true,
-  profileImage: true,
-  preferences: true,
-  role: true,
-  isActive: true
-}).extend({
+export const insertUserSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),
   email: z.string().email().nullable().optional(),
   password: z.string().min(8, "Password must be at least 8 characters"),
   name: z.string().nullable().optional()
 });
 
-export const insertHealingMessageSchema = createInsertSchema(healingMessages).omit({ 
-  id: true, 
-  timestamp: true 
-}).extend({
+export const insertHealingMessageSchema = z.object({
+  userId: z.string().nullable().optional(),
+  sessionId: z.string().nullable().optional(),
   userMessage: z.string().min(1, "Message is required"),
-  aiResponse: z.string().min(1, "AI response is required")
+  aiResponse: z.string().min(1, "AI response is required"),
+  emotion: z.string().nullable().optional(),
+  sentiment: z.string().nullable().optional(),
+  tokensUsed: z.number().nullable().optional(),
+  isHelpful: z.boolean().nullable().optional(),
+  tags: z.array(z.string()).nullable().optional()
 });
 
 export const insertJournalSchema = z.object({
@@ -148,9 +139,7 @@ export const insertMoodEntrySchema = z.object({
   triggers: z.array(z.string()).nullable().optional()
 });
 
-export const insertCrisisResourceSchema = createInsertSchema(crisisResources).omit({ 
-  id: true 
-}).extend({
+export const insertCrisisResourceSchema = z.object({
   name: z.string().min(1, "Name is required"),
   description: z.string().min(1, "Description is required"),
   country: z.string().min(2).max(2, "Country must be 2-letter code"),
