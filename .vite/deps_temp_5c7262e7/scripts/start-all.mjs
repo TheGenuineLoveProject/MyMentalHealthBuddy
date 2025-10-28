@@ -1,0 +1,11 @@
+import { spawn } from "child_process";
+import fs from "fs";
+const cfgFile = ".mmhb.config.json";
+const cfg = JSON.parse(fs.readFileSync(cfgFile,"utf8"));
+const backend = cfg.backendStart || "npm run dev --prefix server";
+const frontend = cfg.frontendStart || "npm run dev --prefix client";
+const procs=[];
+const run=(cmd)=>{const p=spawn(cmd,{shell:true,stdio:"inherit"});procs.push(p);p.on("exit",c=>console.log(`[${cmd}] exited ${c}`));};
+console.log("✓ Starting backend…"); run(backend);
+setTimeout(()=>{ console.log("✓ Starting frontend…"); run(frontend); }, 1000);
+process.on("SIGINT",()=>{ procs.forEach(p=>p.kill("SIGINT")); process.exit(0); });
