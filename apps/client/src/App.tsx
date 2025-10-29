@@ -13,6 +13,7 @@ import { SkipNavigation } from "./components/SkipNavigation";
 import { AccessibilityAnnouncer } from "./components/AccessibilityAnnouncer";
 import { OfflineIndicator } from "./components/OfflineIndicator";
 import { WebVitalsMonitor } from "./components/WebVitalsMonitor";
+import { NavigationProgress } from "./components/NavigationProgress";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -37,6 +38,7 @@ function AppContent() {
   return (
     <CanvaProvider>
         <div className="min-h-screen bg-gradient-mesh">
+          <NavigationProgress />
           <SkipNavigation />
           <Navigation />
           <main id="main-content" className="container mx-auto px-4 py-6" tabIndex={-1}>

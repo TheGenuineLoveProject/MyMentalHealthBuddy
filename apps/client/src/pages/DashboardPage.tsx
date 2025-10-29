@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { 
-  MessageCircle, Heart, BookOpen, TrendingUp, Calendar,
-  Sparkles, ArrowRight, Activity
+  Heart, BookOpen, TrendingUp, Calendar,
+  Sparkles, Activity
 } from "lucide-react";
 import type { SelectMoodEntry, SelectJournal } from "@shared/schema";
+import { QuickActions } from "@/components/QuickActions";
 
 export function DashboardPage() {
   const { data: moods = [] } = useQuery<SelectMoodEntry[]>({
@@ -41,33 +42,6 @@ export function DashboardPage() {
     }
     return "You're making progress. Every step counts! ✨";
   };
-
-  const quickActions = [
-    {
-      title: "Start Chat",
-      description: "Talk with your AI companion",
-      icon: MessageCircle,
-      href: "/chat",
-      color: "bg-blue-500 hover:bg-blue-600",
-      testId: "quick-action-chat"
-    },
-    {
-      title: "Track Mood",
-      description: "Log how you're feeling",
-      icon: Heart,
-      href: "/mood",
-      color: "bg-pink-500 hover:bg-pink-600",
-      testId: "quick-action-mood"
-    },
-    {
-      title: "Write Journal",
-      description: "Express your thoughts",
-      icon: BookOpen,
-      href: "/journal",
-      color: "bg-purple-500 hover:bg-purple-600",
-      testId: "quick-action-journal"
-    }
-  ];
 
   const stats = [
     {
@@ -139,27 +113,8 @@ export function DashboardPage() {
 
       {/* Quick Actions */}
       <div className="mb-8">
-        <h2 className="text-2xl font-bold mb-4 text-gray-900">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {quickActions.map((action, index) => {
-            const Icon = action.icon;
-            return (
-              <Link key={index} href={action.href}>
-                <div
-                  className={`${action.color} text-white rounded-lg p-6 cursor-pointer transition transform hover:scale-105 shadow-lg`}
-                  data-testid={action.testId}
-                >
-                  <Icon size={32} className="mb-3" />
-                  <h3 className="text-xl font-bold mb-1">{action.title}</h3>
-                  <p className="text-sm opacity-90 mb-3">{action.description}</p>
-                  <div className="flex items-center text-sm font-medium">
-                    Get Started <ArrowRight size={16} className="ml-2" />
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+        <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Quick Actions</h2>
+        <QuickActions />
       </div>
 
       {/* Recent Activity */}
