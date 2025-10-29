@@ -14,3 +14,6 @@ export {
   usePrefersReducedMotion
 } from './useMediaQuery';
 export { useOnClickOutside } from './useOnClickOutside';
+
+// Toast hook now exported from ToastContext
+export { useToast } from '../contexts/ToastContext';

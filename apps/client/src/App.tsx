@@ -3,9 +3,9 @@ import { Route, Switch } from "wouter";
 import { Navigation } from "./components/Navigation";
 import { LoadingOverlay } from "./components/LoadingSpinner";
 import { CanvaProvider } from "./contexts/CanvaContext";
+import { ToastProvider, useToast } from "./contexts/ToastContext";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ToastContainer } from "./components/Toast";
-import { useToast } from "./hooks/useToast";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -21,12 +21,11 @@ const StudioPage = lazy(() => import("./pages/StudioPage"));
 const SocialCalendarPage = lazy(() => import("./pages/SocialCalendarPage"));
 const DesignSystemPage = lazy(() => import("./pages/DesignSystemPage"));
 
-export default function App() {
+function AppContent() {
   const { toasts } = useToast();
 
   return (
-    <ErrorBoundary>
-      <CanvaProvider>
+    <CanvaProvider>
         <div className="min-h-screen bg-gradient-mesh">
           <Navigation />
           <main>
@@ -65,6 +64,15 @@ export default function App() {
         <ToastContainer toasts={toasts} position="top-right" />
       </div>
     </CanvaProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <ErrorBoundary>
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </ErrorBoundary>
   );
 }

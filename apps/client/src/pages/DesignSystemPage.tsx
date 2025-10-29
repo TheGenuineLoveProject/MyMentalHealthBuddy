@@ -11,7 +11,7 @@ import {
   SkeletonList,
   SkeletonStats,
 } from '@/components/SkeletonLoader';
-import { useToast } from '@/hooks/useToast';
+import { useToast } from '@/contexts/ToastContext';
 import {
   Palette,
   Type,
