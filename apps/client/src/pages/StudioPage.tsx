@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Card } from "@/components/Card";
-import { Button } from "@/components/Button";
-import { Badge } from "@/components/Badge";
-import { ContentEditor } from "@/components/ContentEditor";
-import { ContentTemplates } from "@/components/ContentTemplates";
-import { SearchFilter } from "@/components/SearchFilter";
-import { SEOOptimizer } from "@/components/SEOOptimizer";
+import { Card } from "@/components/Card.tsx";
+import { Button } from "@/components/Button.tsx";
+import { Badge } from "@/components/Badge.tsx";
+import { ContentEditor } from "@/components/ContentEditor.tsx";
+import { ContentTemplates } from "@/components/ContentTemplates.tsx";
+import { SearchFilter } from "@/components/SearchFilter.tsx";
+import { SEOOptimizer } from "@/components/SEOOptimizer.tsx";
 import { useToast } from "@/hooks";
 import { FileEdit, Calendar, CheckCircle2, Clock, Send, Library, TrendingUp } from "lucide-react";
 

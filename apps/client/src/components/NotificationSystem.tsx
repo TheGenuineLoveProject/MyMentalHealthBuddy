@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
+import { Button } from '@/components/Button.tsx';
+import { Badge } from '@/components/Badge.tsx';
 import { Bell, X, Check, Info, AlertCircle, TrendingUp } from 'lucide-react';
 
 interface Notification {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/Card';
-import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
-import { LineChart, BarChart } from '@/components/Charts';
+import { Card } from '@/components/Card.tsx';
+import { Button } from '@/components/Button.tsx';
+import { Badge } from '@/components/Badge.tsx';
+import { LineChart, BarChart } from '@/components/Charts.tsx';
 import {
   Zap,
   TrendingUp,

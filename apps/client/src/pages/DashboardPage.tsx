@@ -5,7 +5,7 @@ import {
   Sparkles, Activity
 } from "lucide-react";
 import type { SelectMoodEntry, SelectJournal } from "@shared/schema";
-import { QuickActions } from "@/components/QuickActions";
+import { QuickActions } from "@/components/QuickActions.tsx";
 
 export function DashboardPage() {
   const { data: moods = [] } = useQuery<SelectMoodEntry[]>({

@@ -1,5 +1,5 @@
 import { Moon, Sun, Monitor } from 'lucide-react';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/Button.tsx';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**

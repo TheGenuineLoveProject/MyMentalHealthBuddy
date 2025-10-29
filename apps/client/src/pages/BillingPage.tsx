@@ -13,7 +13,7 @@ import {
   Crown
 } from "lucide-react";
 import { useStripeCheckout } from "@/hooks/useStripeCheckout";
-import { StripeStatus } from "@/components/stripe/StripeStatus";
+import { StripeStatus } from "@/components/stripe/StripeStatus.tsx";
 import type { SelectBillingTransaction } from "@shared/schema";
 
 const CURRENT_USER_ID = "user-1";

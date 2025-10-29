@@ -4,8 +4,8 @@
  */
 
 import { Component, ReactNode, ErrorInfo } from 'react';
-import { Button } from '@/components/Button';
-import { Card } from '@/components/Card';
+import { Button } from '@/components/Button.tsx';
+import { Card } from '@/components/Card.tsx';
 import { AlertCircle, RefreshCw, Home, ArrowLeft } from 'lucide-react';
 
 interface PageErrorBoundaryProps {

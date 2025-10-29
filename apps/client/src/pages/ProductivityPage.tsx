@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { AdvancedExport } from '@/components/AdvancedExport';
-import { BulkOperations } from '@/components/BulkOperations';
-import { AIContentGenerator } from '@/components/AIContentGenerator';
-import { AutomationRules } from '@/components/AutomationRules';
-import { AdvancedSearch } from '@/components/AdvancedSearch';
-import { Card } from '@/components/Card';
-import { Badge } from '@/components/Badge';
+import { AdvancedExport } from '@/components/AdvancedExport.tsx';
+import { BulkOperations } from '@/components/BulkOperations.tsx';
+import { AIContentGenerator } from '@/components/AIContentGenerator.tsx';
+import { AutomationRules } from '@/components/AutomationRules.tsx';
+import { AdvancedSearch } from '@/components/AdvancedSearch.tsx';
+import { Card } from '@/components/Card.tsx';
+import { Badge } from '@/components/Badge.tsx';
 import { Zap, Search, Download, CheckSquare, Sparkles, Settings } from 'lucide-react';
 
 /**

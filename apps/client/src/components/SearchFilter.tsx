@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
+import { Button } from '@/components/Button.tsx';
+import { Badge } from '@/components/Badge.tsx';
 import { Search, Filter, X } from 'lucide-react';
 
 interface SearchFilterProps {

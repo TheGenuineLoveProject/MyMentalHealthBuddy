@@ -1,8 +1,8 @@
-import { Card } from '@/components/Card';
-import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
-import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
-import { LineChart, PieChart } from '@/components/Charts';
+import { Card } from '@/components/Card.tsx';
+import { Button } from '@/components/Button.tsx';
+import { Badge } from '@/components/Badge.tsx';
+import { AnalyticsDashboard } from '@/components/AnalyticsDashboard.tsx';
+import { LineChart, PieChart } from '@/components/Charts.tsx';
 import {
   TrendingUp,
   Users,

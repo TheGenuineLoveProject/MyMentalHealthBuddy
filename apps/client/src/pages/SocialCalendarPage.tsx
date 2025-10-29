@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Card } from "@/components/Card";
-import { Button } from "@/components/Button";
-import { Badge } from "@/components/Badge";
-import { CalendarView } from "@/components/CalendarView";
+import { Card } from "@/components/Card.tsx";
+import { Button } from "@/components/Button.tsx";
+import { Badge } from "@/components/Badge.tsx";
+import { CalendarView } from "@/components/CalendarView.tsx";
 import { useToast } from "@/hooks";
 import { Calendar as CalendarIcon, Instagram, Twitter, Facebook, Linkedin, Clock, CheckCircle2, List } from "lucide-react";
 import { SiTiktok } from "react-icons/si";

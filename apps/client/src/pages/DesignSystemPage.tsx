@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card';
-import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
-import { Alert } from '@/components/Alert';
-import { LoadingSpinner } from '@/components/LoadingSpinner';
-import { ProgressIndicator } from '@/components/ProgressIndicator';
+import { Card } from '@/components/Card.tsx';
+import { Button } from '@/components/Button.tsx';
+import { Badge } from '@/components/Badge.tsx';
+import { Alert } from '@/components/Alert.tsx';
+import { LoadingSpinner } from '@/components/LoadingSpinner.tsx';
+import { ProgressIndicator } from '@/components/ProgressIndicator.tsx';
 import {
   Skeleton,
   SkeletonCard,
   SkeletonList,
   SkeletonStats,
-} from '@/components/SkeletonLoader';
+} from '@/components/SkeletonLoader.tsx';
 import { useToast } from '@/contexts/ToastContext';
 import {
   Palette,

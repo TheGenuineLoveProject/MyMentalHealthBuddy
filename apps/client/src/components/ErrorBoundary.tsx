@@ -1,6 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { Card } from '@/components/Card';
-import { Button } from '@/components/Button';
+import { Card } from '@/components/Card.tsx';
+import { Button } from '@/components/Button.tsx';
 import { AlertCircle, RefreshCw, Home } from 'lucide-react';
 
 interface Props {

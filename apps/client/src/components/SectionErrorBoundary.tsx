@@ -4,7 +4,7 @@
  */
 
 import { Component, ReactNode, ErrorInfo } from 'react';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/Button.tsx';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 
 interface SectionErrorBoundaryProps {

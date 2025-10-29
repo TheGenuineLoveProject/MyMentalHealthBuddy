@@ -5,8 +5,8 @@
 
 import { useState } from 'react';
 import { Bell, X, Check, Info, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
-import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
+import { Button } from '@/components/Button.tsx';
+import { Badge } from '@/components/Badge.tsx';
 
 export interface Notification {
   id: string;

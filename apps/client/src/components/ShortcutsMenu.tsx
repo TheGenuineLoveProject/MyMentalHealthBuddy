@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, Keyboard, Command } from 'lucide-react';
-import { Card } from '@/components/Card';
-import { Button } from '@/components/Button';
+import { Card } from '@/components/Card.tsx';
+import { Button } from '@/components/Button.tsx';
 
 /**
  * Keyboard Shortcuts Menu

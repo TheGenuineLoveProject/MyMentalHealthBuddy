@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react';
-import type { ToastType, ToastProps } from '@/components/Toast';
+import type { ToastType, ToastProps } from '@/components/Toast.tsx';
 
 let toastCounter = 0;
 

@@ -5,8 +5,8 @@
 
 import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 import { Wifi, WifiOff, Cloud, CloudOff, RefreshCw } from 'lucide-react';
-import { Button } from '@/components/Button';
-import { Badge } from '@/components/Badge';
+import { Button } from '@/components/Button.tsx';
+import { Badge } from '@/components/Badge.tsx';
 import { useState } from 'react';
 
 export function OfflineIndicator() {

@@ -1,5 +1,5 @@
-import { Card } from '@/components/Card';
-import { Badge } from '@/components/Badge';
+import { Card } from '@/components/Card.tsx';
+import { Badge } from '@/components/Badge.tsx';
 import { TrendingUp, TrendingDown, Eye, Heart, Share2, MessageCircle } from 'lucide-react';
 
 interface AnalyticsData {
