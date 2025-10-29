@@ -38,10 +38,6 @@ localPort = 5000
 externalPort = 5000
 
 [[ports]]
-localPort = 41405
-externalPort = 3000
-
-[[ports]]
 localPort = 45463
 externalPort = 80
 
@@ -49,6 +45,6 @@ externalPort = 80
 channel = "stable-25_05"
 
 [deployment]
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
 run = ["npm", "start"]
-build = ["npm", "run", "build"]
+build = ["npm", "run", "build:production"]

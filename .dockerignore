@@ -1,68 +1,159 @@
-# Development files
-node_modules
-.cache
-.pnpm
-.vite
+# ================================
+# DEPLOYMENT BUNDLE OPTIMIZATION
+# Excludes all unnecessary files to keep deployment under 1GB
+# ================================
+
+# Node modules (will be installed fresh in deployment)
+node_modules/
+apps/*/node_modules/
+**/node_modules/
+
+# Build and cache directories
+.cache/
+.pnpm/
+.vite/
+.rollup.cache/
+dist-temp/
+.turbo/
+.next/
+.nuxt/
+
+# Environment files (use Replit Secrets instead)
+.env
+.env.*
+!.env.example
 .env.local
 .env.development
+.env.test
+.env.production
 
-# Source code (already compiled in dist/)
-apps/client/src
-apps/server/src
+# Source code (TypeScript will be compiled to dist/)
+# COMMENTED OUT - Need source for server
+# apps/client/src
+# apps/server/src
 
-# Build tools and configs (not needed in production)
-vite.config.ts
-tsconfig.json
-tsconfig.node.json
-tailwind.config.ts
-postcss.config.mjs
-drizzle.config.ts
-scripts/
+# Build configuration files (keep essentials for production build)
+# tsconfig.json - KEEP for TypeScript compilation
+# vite.config.ts - KEEP for Vite build
+.eslintrc*
+.prettierrc*
+.editorconfig
 
-# Development dependencies
-*.md
-!README.md
-LICENSE
-.gitignore
+# Development scripts (keep build/optimization scripts)
+# scripts/ - KEEP for production build (optimize-build.js, preload-optimizer.js needed)
+tools/
+.husky/
+
+# Replit development files
 .replit
 replit.nix
+.breakpoints
+
+# Documentation (Large files - exclude from deployment)
+# Keep README.md and essential guides
+360_DEGREE_ENHANCEMENTS.md
+PLATFORM_360_AUDIT_REPORT.md
+PRODUCTION_CHECKLIST.md
+PRODUCTION_SUMMARY.md
+SELF_EVOLUTION_GUIDE.md
+STRIPE_360_PERFORMANCE_REPORT.md
+STRIPE_INTEGRATION_COMPLETE.md
+VISUAL_ENHANCEMENTS_SUMMARY.md
+docs/
+attached_assets/
+content/
 
 # Test files
 *.test.ts
 *.test.tsx
+*.test.js
+*.test.jsx
 *.spec.ts
 *.spec.tsx
+*.spec.js
+*.spec.jsx
 __tests__/
+__mocks__/
 coverage/
+.nyc_output/
+jest.config.*
+vitest.config.*
 
-# Documentation and design
-docs/
-design/
-*.sketch
-*.fig
-*.psd
+# Source maps (large files)
+*.map
+**/*.map
+apps/client/dist/**/*.map
+apps/server/dist/**/*.map
 
-# Logs and temporary files
+# Log files
 *.log
+logs/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.DS_Store
-Thumbs.db
+pnpm-debug.log*
+lerna-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
 *.swp
 *.swo
 *~
+.DS_Store
+Thumbs.db
 
-# IDE files
+# IDE and editor files
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
+*.code-workspace
 
-# Build artifacts to exclude
-apps/client/dist/*.map
+# Design files
+*.sketch
+*.fig
+*.psd
+*.ai
+*.xd
+
+# Database files (use Replit Postgres instead)
+*.sqlite
+*.sqlite3
+*.db
+
+# Build reports and analytics
+build-report.json
 stats.html
-.rollup.cache/
+bundle-analyzer-report.html
+analytics-config.json
 
-# Keep only production build
-!dist/
+# Git files
+.git/
+.gitignore
+.gitattributes
+.github/
+
+# Package manager lock files (reduce size, will be regenerated)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Backup and rollback directories
+.backup/
+.rollback/
+
+# Large binary files
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Public assets that can be served via CDN (optional)
+# public/large-videos/
+# public/high-res-images/
+
+# ================================
+# KEEP ONLY ESSENTIAL FILES
+# ================================
+# Keep: package.json, dist/, compiled JS, production configs
