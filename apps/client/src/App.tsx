@@ -11,6 +11,7 @@ import { Breadcrumbs } from "./components/Breadcrumbs";
 import { MobileNav } from "./components/MobileNav";
 import { SkipNavigation } from "./components/SkipNavigation";
 import { AccessibilityAnnouncer } from "./components/AccessibilityAnnouncer";
+import { OfflineIndicator } from "./components/OfflineIndicator";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -76,6 +77,7 @@ function AppContent() {
           </Suspense>
         </main>
         <MobileNav />
+        <OfflineIndicator />
         <ToastContainer toasts={toasts} position="top-right" />
         <KeyboardShortcuts />
       </div>
