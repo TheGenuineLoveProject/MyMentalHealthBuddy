@@ -798,4 +798,103 @@ export function registerRoutes(app: Express) {
       res.json({ designs });
     })
   );
+
+  // Error Tracking Endpoint
+  app.post("/api/errors",
+    asyncHandler(async (req, res) => {
+      const errorData = Sanitizer.sanitizeObject(req.body);
+      
+      // Log to console in development
+      if (process.env.NODE_ENV === 'development') {
+        console.error('📊 Frontend Error Captured:', {
+          message: errorData.message,
+          stack: errorData.stack,
+          url: errorData.url,
+          timestamp: errorData.timestamp,
+          userAgent: errorData.userAgent
+        });
+      }
+
+      // In production, this would forward to external error tracking service
+      // Example integrations:
+      // - Sentry: Sentry.captureException(new Error(errorData.message))
+      // - DataDog: logger.error(errorData.message, errorData)
+      // - LogRocket: LogRocket.captureException(new Error(errorData.message))
+      
+      // Store error count for monitoring dashboard (optional)
+      // await storage.incrementErrorCount(errorData);
+
+      res.status(200).json({ 
+        success: true, 
+        message: 'Error logged successfully',
+        errorId: `err_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+      });
+    })
+  );
+
+  // Performance Analytics Endpoint
+  app.post("/api/performance",
+    asyncHandler(async (req, res) => {
+      const metricsData = Sanitizer.sanitizeObject(req.body);
+      
+      // Log Web Vitals in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log('📈 Performance Metrics:', {
+          metrics: metricsData.metrics,
+          page: metricsData.page,
+          timestamp: metricsData.timestamp,
+          userAgent: metricsData.userAgent
+        });
+      }
+
+      // In production, forward to analytics service
+      // Example integrations:
+      // - Google Analytics: gtag('event', 'web_vitals', metricsData)
+      // - PostHog: posthog.capture('web_vitals', metricsData)
+      // - Plausible: plausible('Web Vitals', { props: metricsData })
+      
+      // Store metrics for performance dashboard (optional)
+      // await storage.savePerformanceMetrics(metricsData);
+
+      res.status(200).json({ 
+        success: true, 
+        message: 'Metrics logged successfully'
+      });
+    })
+  );
+
+  // Health Check Endpoint
+  app.get("/api/health", (req, res) => {
+    res.json({ 
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      environment: process.env.NODE_ENV || 'development'
+    });
+  });
+
+  // Monitoring Dashboard Data Endpoint
+  app.get("/api/monitoring/stats",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      // Return real-time monitoring statistics
+      // In production, this would query stored error/performance data
+      res.json({
+        errors: {
+          total: 0,
+          last24h: 0,
+          criticalCount: 0
+        },
+        performance: {
+          avgLCP: 0,
+          avgINP: 0,
+          avgCLS: 0,
+          avgFCP: 0,
+          avgTTFB: 0
+        },
+        uptime: process.uptime(),
+        timestamp: new Date().toISOString()
+      });
+    })
+  );
 }

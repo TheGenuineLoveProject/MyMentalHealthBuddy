@@ -66,17 +66,48 @@ function reportMetric(metric: PerformanceMetric) {
     });
   }
 
-  // Send to analytics in production
-  if (import.meta.env.PROD) {
-    // Send to Google Analytics, Plausible, PostHog, etc.
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', metric.name, {
-        event_category: 'Web Vitals',
-        value: Math.round(metric.value),
-        metric_rating: metric.rating,
-        non_interaction: true,
-      });
-    }
+  // Send to backend analytics endpoint
+  sendToBackend({
+    metrics: {
+      [metric.name]: {
+        value: metric.value,
+        rating: metric.rating,
+      }
+    },
+    page: window.location.pathname,
+    timestamp: new Date(metric.timestamp).toISOString(),
+    userAgent: navigator.userAgent,
+  });
+
+  // Send to Google Analytics if available
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', metric.name, {
+      event_category: 'Web Vitals',
+      value: Math.round(metric.value),
+      metric_rating: metric.rating,
+      non_interaction: true,
+    });
+  }
+}
+
+/**
+ * Send performance data to backend
+ */
+function sendToBackend(data: any) {
+  // Use sendBeacon for reliability (doesn't block page unload)
+  if (navigator.sendBeacon) {
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    navigator.sendBeacon('/api/performance', blob);
+  } else {
+    // Fallback to fetch
+    fetch('/api/performance', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      keepalive: true,
+    }).catch((err) => {
+      console.warn('Failed to send performance data:', err);
+    });
   }
 }
 
