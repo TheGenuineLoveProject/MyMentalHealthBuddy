@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { Badge } from '@/components/Badge';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks';
 import { Sparkles, RefreshCw, Copy, Check, Wand2 } from 'lucide-react';
 
 /**

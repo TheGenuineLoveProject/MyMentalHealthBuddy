@@ -30,6 +30,7 @@ export function KeyboardShortcuts({ shortcuts = [] }: KeyboardShortcutsProps) {
     { key: 'gs', description: 'Go to Studio', action: () => window.location.href = '/studio', category: 'Navigation' },
     { key: 'ga', description: 'Go to Analytics', action: () => window.location.href = '/analytics', category: 'Navigation' },
     { key: 'gp', description: 'Go to Performance', action: () => window.location.href = '/performance', category: 'Navigation' },
+    { key: 'gt', description: 'Go to Productivity', action: () => window.location.href = '/productivity', category: 'Navigation' },
     
     // Actions
     { key: 'n', description: 'New Content', action: () => console.log('New content'), category: 'Actions' },

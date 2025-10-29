@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Home, MessageCircle, Heart, BookOpen, Info, Phone, CreditCard, Palette } from "lucide-react";
+import { Home, MessageCircle, Heart, BookOpen, Info, Phone, CreditCard, Palette, Zap } from "lucide-react";
 
 export function Navigation() {
   const [location] = useLocation();
@@ -9,6 +9,7 @@ export function Navigation() {
     { path: "/chat", label: "Chat", icon: MessageCircle },
     { path: "/mood", label: "Mood", icon: Heart },
     { path: "/journal", label: "Journal", icon: BookOpen },
+    { path: "/productivity", label: "Productivity", icon: Zap },
     { path: "/designs", label: "Designs", icon: Palette },
     { path: "/billing", label: "Billing", icon: CreditCard },
     { path: "/resources", label: "Resources", icon: Info },

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { Badge } from '@/components/Badge';
-import { useToast } from '@/hooks/use-toast';
+import { useToast } from '@/hooks';
 import { CheckSquare, Trash2, Calendar, Tag, Copy, Archive, Move } from 'lucide-react';
 
 /**

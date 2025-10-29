@@ -23,6 +23,7 @@ const SocialCalendarPage = lazy(() => import("./pages/SocialCalendarPage"));
 const DesignSystemPage = lazy(() => import("./pages/DesignSystemPage"));
 const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
 const PerformancePage = lazy(() => import("./pages/PerformancePage"));
+const ProductivityPage = lazy(() => import("./pages/ProductivityPage"));
 
 function AppContent() {
   const { toasts } = useToast();
@@ -47,6 +48,7 @@ function AppContent() {
               <Route path="/social" component={SocialCalendarPage} />
               <Route path="/analytics" component={AnalyticsPage} />
               <Route path="/performance" component={PerformancePage} />
+              <Route path="/productivity" component={ProductivityPage} />
               <Route path="/design-system" component={DesignSystemPage} />
               <Route>
                 <div className="container mx-auto px-4 py-16">
