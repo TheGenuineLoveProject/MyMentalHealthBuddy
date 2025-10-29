@@ -115,3 +115,114 @@ export function devAuthFallback(req, res, next) {
     }
     next();
 }
+/**
+ * Require minimum subscription tier
+ * Usage: requireTier('premium', storage) or requireTier('professional', storage)
+ *
+ * Note: Must pass storage instance to query user subscription
+ */
+export function requireTier(minTier, storageInstance) {
+    return async (req, res, next) => {
+        try {
+            // First ensure user is authenticated
+            if (!req.session || !req.session.userId) {
+                return res.status(401).json({
+                    error: 'Authentication required',
+                    message: 'Please log in to access this resource'
+                });
+            }
+            const userId = req.session.userId;
+            // Query user subscription status from database
+            const user = await storageInstance.getUserById(userId);
+            if (!user) {
+                return res.status(401).json({
+                    error: 'User not found',
+                    message: 'Your account could not be verified'
+                });
+            }
+            // Check if user's subscription is active
+            if (user.subscriptionStatus !== 'active') {
+                return res.status(403).json({
+                    error: 'Subscription required',
+                    message: `This feature requires an active ${minTier} subscription. Your subscription status: ${user.subscriptionStatus}`,
+                    upgradeUrl: '/subscription'
+                });
+            }
+            // Tier hierarchy: free < premium < professional
+            const tierHierarchy = { free: 0, premium: 1, professional: 2 };
+            const userTierLevel = tierHierarchy[user.subscriptionTier] || 0;
+            const requiredTierLevel = tierHierarchy[minTier];
+            // Check if user meets minimum tier requirement
+            if (userTierLevel < requiredTierLevel) {
+                return res.status(403).json({
+                    error: 'Upgrade required',
+                    message: `This feature requires ${minTier} tier. Your current tier: ${user.subscriptionTier}`,
+                    currentTier: user.subscriptionTier,
+                    requiredTier: minTier,
+                    upgradeUrl: '/subscription'
+                });
+            }
+            // Attach subscription info to request for route handlers
+            req.userSubscription = {
+                userId: user.id,
+                subscriptionTier: user.subscriptionTier,
+                subscriptionStatus: user.subscriptionStatus
+            };
+            next();
+        }
+        catch (error) {
+            console.error('RBAC error:', error);
+            res.status(500).json({
+                error: 'Authorization check failed',
+                message: 'Unable to verify subscription status'
+            });
+        }
+    };
+}
+/**
+ * Check if user has required tier (helper function)
+ * Returns true if user meets or exceeds required tier
+ */
+export function checkTier(userTier, requiredTier) {
+    const tierHierarchy = { free: 0, premium: 1, professional: 2 };
+    const userLevel = tierHierarchy[userTier] || 0;
+    const requiredLevel = tierHierarchy[requiredTier];
+    return userLevel >= requiredLevel;
+}
+/**
+ * CSRF Protection Middleware
+ * Validates CSRF token for state-changing operations
+ */
+export function csrfProtection(req, res, next) {
+    // Skip CSRF for GET, HEAD, OPTIONS requests (safe methods)
+    if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) {
+        return next();
+    }
+    // For state-changing requests (POST, PUT, PATCH, DELETE), verify CSRF token
+    const csrfToken = req.headers['x-csrf-token'];
+    const sessionToken = req.session?.csrfToken;
+    if (!csrfToken || csrfToken !== sessionToken) {
+        // In development, log warning but allow through
+        if (process.env.NODE_ENV !== 'production') {
+            console.warn('⚠️  CSRF token missing or invalid (development mode - allowing through)');
+            return next();
+        }
+        // In production, block the request
+        return res.status(403).json({
+            error: 'CSRF validation failed',
+            message: 'Invalid or missing CSRF token'
+        });
+    }
+    next();
+}
+/**
+ * Generate CSRF token for session
+ */
+export function generateCsrfToken(req) {
+    if (!req.session) {
+        throw new Error('Session required for CSRF token generation');
+    }
+    const token = `csrf-${Date.now()}-${Math.random().toString(36).substr(2, 16)}`;
+    req.session.csrfToken = token;
+    return token;
+}
