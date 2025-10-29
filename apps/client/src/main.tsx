@@ -6,11 +6,15 @@ import { StripeProvider } from "./contexts/StripeContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { registerServiceWorker } from "./registerSW";
 import { initPerformanceMonitoring } from "./lib/performance";
+import { initWebVitals } from "./lib/webVitals";
 import App from "./App";
 import "./index.css";
 
 // Initialize performance monitoring
 initPerformanceMonitoring();
+
+// Initialize Web Vitals monitoring
+initWebVitals();
 
 // Register service worker for PWA support (production only)
 if (import.meta.env.PROD) {

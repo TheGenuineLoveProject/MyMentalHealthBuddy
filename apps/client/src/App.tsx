@@ -12,6 +12,7 @@ import { MobileNav } from "./components/MobileNav";
 import { SkipNavigation } from "./components/SkipNavigation";
 import { AccessibilityAnnouncer } from "./components/AccessibilityAnnouncer";
 import { OfflineIndicator } from "./components/OfflineIndicator";
+import { WebVitalsMonitor } from "./components/WebVitalsMonitor";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -138,6 +139,7 @@ function AppContent() {
         </main>
         <MobileNav />
         <OfflineIndicator />
+        <WebVitalsMonitor />
         <ToastContainer toasts={toasts} position="top-right" />
         <KeyboardShortcuts />
       </div>
