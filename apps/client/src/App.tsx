@@ -6,6 +6,7 @@ import { CanvaProvider } from "./contexts/CanvaContext";
 import { ToastProvider, useToast } from "./contexts/ToastContext";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ToastContainer } from "./components/Toast";
+import { KeyboardShortcuts } from "./components/KeyboardShortcuts";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -21,6 +22,7 @@ const StudioPage = lazy(() => import("./pages/StudioPage"));
 const SocialCalendarPage = lazy(() => import("./pages/SocialCalendarPage"));
 const DesignSystemPage = lazy(() => import("./pages/DesignSystemPage"));
 const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
+const PerformancePage = lazy(() => import("./pages/PerformancePage"));
 
 function AppContent() {
   const { toasts } = useToast();
@@ -44,6 +46,7 @@ function AppContent() {
               <Route path="/studio" component={StudioPage} />
               <Route path="/social" component={SocialCalendarPage} />
               <Route path="/analytics" component={AnalyticsPage} />
+              <Route path="/performance" component={PerformancePage} />
               <Route path="/design-system" component={DesignSystemPage} />
               <Route>
                 <div className="container mx-auto px-4 py-16">
@@ -64,6 +67,7 @@ function AppContent() {
           </Suspense>
         </main>
         <ToastContainer toasts={toasts} position="top-right" />
+        <KeyboardShortcuts />
       </div>
     </CanvaProvider>
   );

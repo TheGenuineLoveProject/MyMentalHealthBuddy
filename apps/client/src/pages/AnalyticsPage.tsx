@@ -2,6 +2,7 @@ import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { Badge } from '@/components/Badge';
 import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
+import { LineChart, PieChart } from '@/components/Charts';
 import {
   TrendingUp,
   Users,
@@ -95,27 +96,37 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Platform Breakdown */}
-      <div className="mt-8">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="p-6">
           <h3 className="text-xl font-semibold mb-6" data-testid="text-platform-breakdown">
             Traffic by Platform
           </h3>
-          <div className="space-y-4">
-            {platformBreakdown.map((platform, i) => (
-              <div key={i} data-testid={`platform-${platform.name.toLowerCase()}`}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-medium">{platform.name}</span>
-                  <span className="text-muted-foreground">{platform.percentage}%</span>
-                </div>
-                <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
-                  <div
-                    className={`h-full ${platform.color} transition-all duration-500`}
-                    style={{ width: `${platform.percentage}%` }}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
+          <PieChart
+            data={platformBreakdown.map(p => ({
+              label: p.name,
+              value: p.percentage,
+              color: undefined
+            }))}
+            size={250}
+            showLegend
+          />
+        </Card>
+
+        <Card className="p-6">
+          <h3 className="text-xl font-semibold mb-6">Engagement Trend (7 Days)</h3>
+          <LineChart
+            data={[
+              { label: 'Mon', value: 7.2 },
+              { label: 'Tue', value: 8.1 },
+              { label: 'Wed', value: 7.8 },
+              { label: 'Thu', value: 8.9 },
+              { label: 'Fri', value: 9.2 },
+              { label: 'Sat', value: 8.4 },
+              { label: 'Sun', value: 8.4 }
+            ]}
+            height={250}
+            animate
+          />
         </Card>
       </div>
 

@@ -5,8 +5,9 @@ import { Badge } from "@/components/Badge";
 import { ContentEditor } from "@/components/ContentEditor";
 import { ContentTemplates } from "@/components/ContentTemplates";
 import { SearchFilter } from "@/components/SearchFilter";
+import { SEOOptimizer } from "@/components/SEOOptimizer";
 import { useToast } from "@/hooks";
-import { FileEdit, Calendar, CheckCircle2, Clock, Send, Library } from "lucide-react";
+import { FileEdit, Calendar, CheckCircle2, Clock, Send, Library, TrendingUp } from "lucide-react";
 
 /**
  * Content Studio - Content creation and management workflow
@@ -15,6 +16,7 @@ import { FileEdit, Calendar, CheckCircle2, Clock, Send, Library } from "lucide-r
 export default function StudioPage() {
   const [showEditor, setShowEditor] = useState(false);
   const [showTemplates, setShowTemplates] = useState(false);
+  const [showSEO, setShowSEO] = useState(false);
   const toast = useToast();
   const contentItems = [
     {
@@ -115,7 +117,22 @@ export default function StudioPage() {
           <Calendar className="h-4 w-4 mr-2" />
           Schedule Content
         </Button>
+        <Button variant="outline" onClick={() => setShowSEO(!showSEO)} data-testid="button-seo">
+          <TrendingUp className="h-4 w-4 mr-2" />
+          SEO Tools
+        </Button>
       </div>
+
+      {/* SEO Optimizer */}
+      {showSEO && (
+        <div className="mb-6">
+          <SEOOptimizer
+            content="Sample content for SEO analysis. This is a comprehensive guide to mental health practices and wellness techniques."
+            title="Understanding Anxiety: A Beginner's Guide"
+            description="Learn proven techniques to manage anxiety and improve your mental wellbeing with our comprehensive guide."
+          />
+        </div>
+      )}
 
       {/* Content List */}
       <div className="space-y-4">
