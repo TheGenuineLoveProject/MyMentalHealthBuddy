@@ -7,6 +7,8 @@ import { ToastProvider, useToast } from "./contexts/ToastContext";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ToastContainer } from "./components/Toast";
 import { KeyboardShortcuts } from "./components/KeyboardShortcuts";
+import { Breadcrumbs } from "./components/Breadcrumbs";
+import { MobileNav } from "./components/MobileNav";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -32,7 +34,8 @@ function AppContent() {
     <CanvaProvider>
         <div className="min-h-screen bg-gradient-mesh">
           <Navigation />
-          <main>
+          <main className="container mx-auto px-4 py-6">
+            <Breadcrumbs />
             <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
               <Switch>
               <Route path="/" component={DashboardPage} />
@@ -68,6 +71,7 @@ function AppContent() {
             </Switch>
           </Suspense>
         </main>
+        <MobileNav />
         <ToastContainer toasts={toasts} position="top-right" />
         <KeyboardShortcuts />
       </div>

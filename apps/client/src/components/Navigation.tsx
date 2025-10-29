@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Home, MessageCircle, Heart, BookOpen, Info, Phone, CreditCard, Palette, Zap } from "lucide-react";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navigation() {
   const [location] = useLocation();
@@ -21,7 +22,7 @@ export function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <h1 className="text-xl font-bold">MyMentalHealthBuddy</h1>
-          <div className="flex gap-4">
+          <div className="hidden lg:flex gap-4">
             {links.map(({ path, label, icon: Icon }) => (
               <Link
                 key={path}
@@ -40,6 +41,9 @@ export function Navigation() {
                 </span>
               </Link>
             ))}
+          </div>
+          <div className="ml-4">
+            <ThemeToggle />
           </div>
         </div>
       </div>
