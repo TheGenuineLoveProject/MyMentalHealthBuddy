@@ -1,0 +1,68 @@
+# Development files
+node_modules
+.cache
+.pnpm
+.vite
+.env.local
+.env.development
+
+# Source code (already compiled in dist/)
+apps/client/src
+apps/server/src
+
+# Build tools and configs (not needed in production)
+vite.config.ts
+tsconfig.json
+tsconfig.node.json
+tailwind.config.ts
+postcss.config.mjs
+drizzle.config.ts
+scripts/
+
+# Development dependencies
+*.md
+!README.md
+LICENSE
+.gitignore
+.replit
+replit.nix
+
+# Test files
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+__tests__/
+coverage/
+
+# Documentation and design
+docs/
+design/
+*.sketch
+*.fig
+*.psd
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build artifacts to exclude
+apps/client/dist/*.map
+stats.html
+.rollup.cache/
+
+# Keep only production build
+!dist/
