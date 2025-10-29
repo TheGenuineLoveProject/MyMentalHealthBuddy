@@ -41,6 +41,6 @@ export function useWebVitals() {
     lastUpdate,
     score,
     recommendations,
-    hasData: metrics.lcp !== null || metrics.fid !== null || metrics.cls !== null,
+    hasData: metrics.lcp !== null || metrics.inp !== null || metrics.cls !== null,
   };
 }

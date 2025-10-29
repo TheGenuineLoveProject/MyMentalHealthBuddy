@@ -20,7 +20,7 @@ interface PerformanceMetrics {
   fcp: number; // First Contentful Paint
   lcp: number; // Largest Contentful Paint
   cls: number; // Cumulative Layout Shift
-  fid: number; // First Input Delay
+  inp: number; // Interaction to Next Paint
   ttfb: number; // Time to First Byte
 }
 
@@ -35,7 +35,7 @@ export function PerformanceDashboard() {
     fcp: 0.8,
     lcp: 1.5,
     cls: 0.05,
-    fid: 10,
+    inp: 10,
     ttfb: 0.3
   });
 
@@ -80,7 +80,7 @@ export function PerformanceDashboard() {
       fcp: { good: 1.8, poor: 3.0 },
       lcp: { good: 2.5, poor: 4.0 },
       cls: { good: 0.1, poor: 0.25 },
-      fid: { good: 100, poor: 300 },
+      inp: { good: 200, poor: 500 },
       ttfb: { good: 0.8, poor: 1.8 }
     };
 

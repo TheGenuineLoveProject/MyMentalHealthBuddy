@@ -19,10 +19,10 @@ const THRESHOLDS = {
     good: 2500,
     poor: 4000,
   },
-  // First Input Delay (FID)
-  FID: {
-    good: 100,
-    poor: 300,
+  // Interaction to Next Paint (INP)
+  INP: {
+    good: 200,
+    poor: 500,
   },
   // Cumulative Layout Shift (CLS)
   CLS: {
@@ -107,20 +107,28 @@ export function observeWebVitals() {
     });
     lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
 
-    // First Input Delay
-    const fidObserver = new PerformanceObserver((list) => {
+    // Interaction to Next Paint (INP)
+    // Note: INP is measured by the web-vitals library
+    // This observer tracks event timing for reference
+    const inpObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: PerformanceEntry & { processingStart: number }) => {
-        const value = entry.processingStart - entry.startTime;
+      entries.forEach((entry: PerformanceEntry & { processingStart: number; processingEnd: number }) => {
+        const value = entry.processingEnd - entry.startTime;
         reportMetric({
-          name: 'FID',
+          name: 'INP',
           value,
-          rating: getRating(value, THRESHOLDS.FID),
+          rating: getRating(value, THRESHOLDS.INP),
           timestamp: Date.now(),
         });
       });
     });
-    fidObserver.observe({ type: 'first-input', buffered: true });
+    // INP uses 'event' type with longer buffering
+    try {
+      inpObserver.observe({ type: 'event', buffered: true, durationThreshold: 16 });
+    } catch {
+      // Fallback to first-input for browsers that don't support event timing
+      inpObserver.observe({ type: 'first-input', buffered: true });
+    }
 
     // Cumulative Layout Shift
     let clsValue = 0;
