@@ -4,13 +4,20 @@
  */
 
 import type { Request, Response, NextFunction } from 'express';
-import type { SelectUser } from '../../shared/schema.js';
+
+// Extend Express Session to include custom fields
+declare module 'express-session' {
+  interface SessionData {
+    userId?: string;
+    isAdmin?: boolean;
+    id?: string;
+  }
+}
 
 // Extend Express Request to include user
 declare global {
   namespace Express {
     interface Request {
-      user?: SelectUser;
       userId?: string;
       sessionId?: string;
     }

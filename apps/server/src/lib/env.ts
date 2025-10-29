@@ -6,8 +6,24 @@ const envSchema = z.object({
   DATABASE_URL: z.string().url().optional(),
   AI_INTEGRATIONS_OPENAI_BASE_URL: z.string().url().optional(),
   AI_INTEGRATIONS_OPENAI_API_KEY: z.string().optional(),
-  SESSION_SECRET: z.string().min(32, "SESSION_SECRET must be at least 32 characters").optional(),
-});
+  SESSION_SECRET: z.string().min(32, "SESSION_SECRET must be at least 32 characters"),
+}).refine(
+  (env) => {
+    // In production, both SESSION_SECRET and DATABASE_URL are mandatory
+    if (env.NODE_ENV === "production") {
+      if (!env.SESSION_SECRET) {
+        return false;
+      }
+      if (!env.DATABASE_URL) {
+        return false;
+      }
+    }
+    return true;
+  },
+  {
+    message: "SESSION_SECRET and DATABASE_URL are required in production mode for secure multi-instance sessions"
+  }
+);
 
 export function validateEnv() {
   try {

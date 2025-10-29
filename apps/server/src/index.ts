@@ -3,6 +3,9 @@ import cors from "cors";
 import helmet from "helmet";
 import compression from "compression";
 import expressStaticGzip from "express-static-gzip";
+import session from "express-session";
+import connectPg from "connect-pg-simple";
+import pg from "pg";
 import dotenv from "dotenv";
 import { registerRoutes } from "./routes.js";
 import path from "path";
@@ -10,6 +13,12 @@ import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
 import { validateEnv } from "./lib/env.js";
 import { requestTimeout, timeoutPresets } from "./lib/requestTimeout.js";
+import { devAuthFallback } from "./lib/authMiddleware.js";
+import { configureSecurityHeaders, getCorsOptions } from "./lib/securityHeaders.js";
+import { setupGracefulShutdown } from "./lib/gracefulShutdown.js";
+import { monitoring, monitoringMiddleware } from "./lib/monitoring.js";
+
+const PgSession = connectPg(session);
 
 dotenv.config();
 
@@ -24,27 +33,68 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 const isProduction = process.env.NODE_ENV === "production";
 const isDev = !isProduction;
 
-// Request logging middleware
-app.use((req, res, next) => {
-  const start = Date.now();
-  res.on('finish', () => {
-    const duration = Date.now() - start;
-    const logLevel = res.statusCode >= 400 ? 'ERROR' : 'INFO';
-    console.log(`[${logLevel}] ${req.method} ${req.path} - ${res.statusCode} - ${duration}ms`);
-  });
-  next();
-});
+// === 360° MIDDLEWARE INTEGRATION === //
 
-// Security middleware
-app.use(cors());
+// 1. Monitoring (track ALL requests)
+app.use(monitoringMiddleware);
+
+// 2. Session configuration for authentication (PostgreSQL-backed for production)
+const sessionConfig: session.SessionOptions = {
+  secret: env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: isProduction, // HTTPS only in production
+    httpOnly: true,
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    sameSite: 'lax'
+  }
+};
+
+// Configure session store based on environment
+if (isProduction) {
+  // Production REQUIRES PostgreSQL for multi-instance compatibility
+  // DATABASE_URL is validated as required in production by env.ts
+  const pgPool = new pg.Pool({
+    connectionString: env.DATABASE_URL
+  });
+  
+  sessionConfig.store = new PgSession({
+    pool: pgPool,
+    tableName: 'user_sessions',
+    createTableIfMissing: true
+  });
+  
+  console.log('✅ PostgreSQL session store configured (production multi-instance ready)');
+} else {
+  // Development uses memory store (fine for single instance)
+  console.log('⚠️  Using memory session store (development only - not suitable for production)');
+}
+
+app.use(session(sessionConfig));
+
+// 3. Development auth fallback (auto-disabled in production)
+app.use(devAuthFallback);
+
+// 4. Security headers (CSP, HSTS, etc.)
+configureSecurityHeaders(app);
+
+// 5. CORS with proper configuration
+app.use(cors(getCorsOptions()));
+
+// 6. Helmet for additional security
 app.use(helmet({
-  contentSecurityPolicy: false,
+  contentSecurityPolicy: false, // Using custom CSP from securityHeaders
   crossOriginEmbedderPolicy: false
 }));
+
+// 7. Compression
 app.use(compression());
+
+// 8. JSON parsing
 app.use(express.json({ limit: '10mb' }));
 
-// Request timeout middleware - Applied BEFORE routes
+// 9. Request timeout middleware
 app.use(requestTimeout(timeoutPresets.normal));
 
 // Request validation middleware
@@ -114,6 +164,12 @@ app.get("/ready", async (req, res) => {
   } catch (error) {
     res.status(503).json({ ready: false, error: "Readiness check failed" });
   }
+});
+
+// Monitoring stats endpoint
+app.get("/api/monitoring/stats", (req, res) => {
+  const stats = monitoring.getMetricsSummary();
+  res.json(stats);
 });
 
 // Register application routes
@@ -263,52 +319,19 @@ if (isProduction) {
   });
 }
 
-// Global unhandled promise rejection handler
-process.on('unhandledRejection', (reason: unknown, promise: Promise<unknown>) => {
-  console.error('[UNHANDLED PROMISE REJECTION]', {
-    reason: reason instanceof Error ? reason.message : reason,
-    stack: reason instanceof Error ? reason.stack : undefined,
-    timestamp: new Date().toISOString()
-  });
-  
-  // In production, you might want to:
-  // 1. Log to monitoring service (Sentry, DataDog, etc.)
-  // 2. Gracefully shutdown if critical
-  // For now, we log and continue
-});
-
-// Global uncaught exception handler
-process.on('uncaughtException', (error: Error) => {
-  console.error('[UNCAUGHT EXCEPTION]', {
-    message: error.message,
-    stack: error.stack,
-    timestamp: new Date().toISOString()
-  });
-  
-  // Uncaught exceptions are serious - the process is in an undefined state
-  // Best practice is to gracefully shutdown
-  console.error('Server is shutting down due to uncaught exception...');
-  process.exit(1);
-});
-
-// Graceful shutdown handler
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server gracefully');
-  process.exit(0);
-});
-
-process.on('SIGINT', () => {
-  console.log('SIGINT signal received: closing HTTP server gracefully');
-  process.exit(0);
-});
+// Global error handlers are now managed by gracefulShutdown module
+// (configured below after server starts)
 
 // Start server
 async function startServer() {
   const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`✅ Server running on port ${PORT} (${isProduction ? "production" : "development"} mode)`);
-    console.log(`🔒 Security middleware: CORS, Helmet, Compression enabled`);
+    console.log(`🔒 Security middleware: CORS, Helmet, Compression, Session enabled`);
+    console.log(`🛡️  Advanced Security: CSP headers, Rate limiting, Monitoring active`);
     console.log(`📊 Request logging: Enabled`);
     console.log(`⚡ Global error handlers: Active`);
+    console.log(`🔄 Request timeout protection: 30s`);
+    console.log(`📈 Monitoring: /api/monitoring/stats endpoint available`);
     if (isDev) {
       console.log(`🎨 Vite middleware: Enabled (serving frontend on same port)`);
     }
@@ -322,6 +345,15 @@ async function startServer() {
       console.error('❌ Server error:', error);
     }
     process.exit(1);
+  });
+
+  // Setup graceful shutdown for Cloud Run / Autoscale deployments
+  setupGracefulShutdown(server, {
+    timeout: 30000, // 30 seconds
+    onShutdown: async () => {
+      console.log('[SHUTDOWN] Cleaning up resources...');
+      // Add any cleanup logic here (close DB connections, etc.)
+    }
   });
 }
 
