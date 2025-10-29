@@ -3,6 +3,9 @@ import { Route, Switch } from "wouter";
 import { Navigation } from "./components/Navigation";
 import { LoadingOverlay } from "./components/LoadingSpinner";
 import { CanvaProvider } from "./contexts/CanvaContext";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { ToastContainer } from "./components/Toast";
+import { useToast } from "./hooks/useToast";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -16,15 +19,19 @@ const AccountPage = lazy(() => import("./pages/AccountPage"));
 const DesignsPage = lazy(() => import("./pages/DesignsPage"));
 const StudioPage = lazy(() => import("./pages/StudioPage"));
 const SocialCalendarPage = lazy(() => import("./pages/SocialCalendarPage"));
+const DesignSystemPage = lazy(() => import("./pages/DesignSystemPage"));
 
 export default function App() {
+  const { toasts } = useToast();
+
   return (
-    <CanvaProvider>
-      <div className="min-h-screen bg-gradient-mesh">
-        <Navigation />
-        <main>
-          <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
-            <Switch>
+    <ErrorBoundary>
+      <CanvaProvider>
+        <div className="min-h-screen bg-gradient-mesh">
+          <Navigation />
+          <main>
+            <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
+              <Switch>
               <Route path="/" component={DashboardPage} />
               <Route path="/chat" component={ChatPage} />
               <Route path="/mood" component={MoodPage} />
@@ -36,6 +43,7 @@ export default function App() {
               <Route path="/designs" component={DesignsPage} />
               <Route path="/studio" component={StudioPage} />
               <Route path="/social" component={SocialCalendarPage} />
+              <Route path="/design-system" component={DesignSystemPage} />
               <Route>
                 <div className="container mx-auto px-4 py-16">
                   <div className="text-center max-w-md mx-auto animate-slide-in-up">
@@ -54,7 +62,9 @@ export default function App() {
             </Switch>
           </Suspense>
         </main>
+        <ToastContainer toasts={toasts} position="top-right" />
       </div>
     </CanvaProvider>
+    </ErrorBoundary>
   );
 }

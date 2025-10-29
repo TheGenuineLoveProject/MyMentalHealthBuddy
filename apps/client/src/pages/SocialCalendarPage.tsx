@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
+import { Badge } from "@/components/Badge";
 import { Calendar as CalendarIcon, Instagram, Twitter, Facebook, Linkedin, Clock, CheckCircle2 } from "lucide-react";
 import { SiTiktok } from "react-icons/si";
 

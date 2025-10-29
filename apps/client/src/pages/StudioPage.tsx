@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
+import { Badge } from "@/components/Badge";
 import { FileEdit, Calendar, CheckCircle2, Clock, Send } from "lucide-react";
 
 /**

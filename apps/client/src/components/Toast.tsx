@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { X, CheckCircle, AlertCircle, Info, AlertTriangle } from 'lucide-react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
