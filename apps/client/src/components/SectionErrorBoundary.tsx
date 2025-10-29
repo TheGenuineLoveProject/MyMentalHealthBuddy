@@ -3,7 +3,7 @@
  * Smaller error boundaries for individual sections/components
  */
 
-import { Component, ReactNode } from 'react';
+import { Component, ReactNode, ErrorInfo } from 'react';
 import { Button } from '@/components/Button';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 
@@ -38,7 +38,7 @@ export class SectionErrorBoundary extends Component<
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error(`Section Error (${this.props.sectionName}):`, error, errorInfo);
   }
 

@@ -3,7 +3,7 @@
  * Granular error boundaries for individual pages with recovery actions
  */
 
-import { Component, ReactNode } from 'react';
+import { Component, ReactNode, ErrorInfo } from 'react';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { AlertCircle, RefreshCw, Home, ArrowLeft } from 'lucide-react';
@@ -11,14 +11,14 @@ import { AlertCircle, RefreshCw, Home, ArrowLeft } from 'lucide-react';
 interface PageErrorBoundaryProps {
   children: ReactNode;
   fallback?: ReactNode;
-  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
+  onError?: (error: Error, errorInfo: ErrorInfo) => void;
   pageName?: string;
 }
 
 interface PageErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
-  errorInfo: React.ErrorInfo | null;
+  errorInfo: ErrorInfo | null;
   errorCount: number;
 }
 
@@ -40,7 +40,7 @@ export class PageErrorBoundary extends Component<PageErrorBoundaryProps, PageErr
     };
   }
 
-  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // Log error to console in development
     console.error('Page Error Boundary caught an error:', error, errorInfo);
 
@@ -62,7 +62,7 @@ export class PageErrorBoundary extends Component<PageErrorBoundaryProps, PageErr
     }
   }
 
-  logErrorToService(error: Error, errorInfo: React.ErrorInfo) {
+  logErrorToService(error: Error, errorInfo: ErrorInfo) {
     // Placeholder for error tracking service integration
     const errorData = {
       message: error.message,

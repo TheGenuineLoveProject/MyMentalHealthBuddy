@@ -203,45 +203,47 @@ class OfflineManager {
   }
 
   /**
-   * Make a request that queues automatically when offline
+   * Make a request with full RequestInit support
+   * Only queues mutations (POST/PUT/PATCH/DELETE) when offline
    */
   async request(
     url: string,
-    options: {
-      method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
-      data?: any;
+    options: RequestInit & {
       type?: string;
     } = {}
   ): Promise<Response> {
-    const { method = 'GET', data, type = 'request' } = options;
+    const { type = 'request', ...fetchOptions } = options;
+    const method = (fetchOptions.method || 'GET') as 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
+    const shouldQueue = ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method);
 
-    // If online, make request directly
+    // If online, make request directly with all options
     if (this.isOnline) {
-      const response = await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: data ? JSON.stringify(data) : undefined,
-      });
+      const response = await fetch(url, fetchOptions);
 
-      if (!response.ok && response.status >= 500) {
-        // Server error - queue for retry
+      // Queue for retry only on server errors for mutations
+      if (!response.ok && response.status >= 500 && shouldQueue) {
+        const data = fetchOptions.body ? JSON.parse(fetchOptions.body as string) : undefined;
         this.addToQueue({ type, url, method, data });
       }
 
       return response;
     }
 
-    // If offline, queue the action
-    this.addToQueue({ type, url, method, data });
-    
-    // Return a mock response
-    return new Response(JSON.stringify({ queued: true }), {
-      status: 202,
-      statusText: 'Queued for sync',
-      headers: { 'Content-Type': 'application/json' },
-    });
+    // If offline and it's a mutation, queue it
+    if (shouldQueue) {
+      const data = fetchOptions.body ? JSON.parse(fetchOptions.body as string) : undefined;
+      this.addToQueue({ type, url, method, data });
+      
+      // Return a mock response indicating queued
+      return new Response(JSON.stringify({ queued: true }), {
+        status: 202,
+        statusText: 'Queued for sync',
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
+
+    // For GET requests when offline, throw error (don't queue reads)
+    throw new Error('You are offline. Please check your connection.');
   }
 }
 

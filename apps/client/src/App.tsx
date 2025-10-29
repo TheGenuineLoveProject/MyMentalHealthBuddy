@@ -4,7 +4,7 @@ import { Navigation } from "./components/Navigation";
 import { LoadingOverlay } from "./components/LoadingSpinner";
 import { CanvaProvider } from "./contexts/CanvaContext";
 import { ToastProvider, useToast } from "./contexts/ToastContext";
-import { ErrorBoundary } from "./components/ErrorBoundary";
+import { PageErrorBoundary } from "./components/PageErrorBoundary";
 import { ToastContainer } from "./components/Toast";
 import { KeyboardShortcuts } from "./components/KeyboardShortcuts";
 import { Breadcrumbs } from "./components/Breadcrumbs";
@@ -43,21 +43,81 @@ function AppContent() {
             <AccessibilityAnnouncer message="" />
             <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
               <Switch>
-              <Route path="/" component={DashboardPage} />
-              <Route path="/chat" component={ChatPage} />
-              <Route path="/mood" component={MoodPage} />
-              <Route path="/journal" component={JournalPage} />
-              <Route path="/resources" component={ResourcesPage} />
-              <Route path="/crisis" component={CrisisPage} />
-              <Route path="/billing" component={BillingPage} />
-              <Route path="/account" component={AccountPage} />
-              <Route path="/designs" component={DesignsPage} />
-              <Route path="/studio" component={StudioPage} />
-              <Route path="/social" component={SocialCalendarPage} />
-              <Route path="/analytics" component={AnalyticsPage} />
-              <Route path="/performance" component={PerformancePage} />
-              <Route path="/productivity" component={ProductivityPage} />
-              <Route path="/design-system" component={DesignSystemPage} />
+              <Route path="/">
+                <PageErrorBoundary pageName="Dashboard">
+                  <DashboardPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/chat">
+                <PageErrorBoundary pageName="AI Chat">
+                  <ChatPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/mood">
+                <PageErrorBoundary pageName="Mood Tracker">
+                  <MoodPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/journal">
+                <PageErrorBoundary pageName="Journal">
+                  <JournalPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/resources">
+                <PageErrorBoundary pageName="Resources">
+                  <ResourcesPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/crisis">
+                <PageErrorBoundary pageName="Crisis Support">
+                  <CrisisPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/billing">
+                <PageErrorBoundary pageName="Billing">
+                  <BillingPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/account">
+                <PageErrorBoundary pageName="Account">
+                  <AccountPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/designs">
+                <PageErrorBoundary pageName="Designs">
+                  <DesignsPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/studio">
+                <PageErrorBoundary pageName="Content Studio">
+                  <StudioPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/social">
+                <PageErrorBoundary pageName="Social Calendar">
+                  <SocialCalendarPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/analytics">
+                <PageErrorBoundary pageName="Analytics">
+                  <AnalyticsPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/performance">
+                <PageErrorBoundary pageName="Performance">
+                  <PerformancePage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/productivity">
+                <PageErrorBoundary pageName="Productivity">
+                  <ProductivityPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/design-system">
+                <PageErrorBoundary pageName="Design System">
+                  <DesignSystemPage />
+                </PageErrorBoundary>
+              </Route>
               <Route>
                 <div className="container mx-auto px-4 py-16">
                   <div className="text-center max-w-md mx-auto animate-slide-in-up">
@@ -87,10 +147,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ErrorBoundary>
+    <PageErrorBoundary pageName="Application">
       <ToastProvider>
         <AppContent />
       </ToastProvider>
-    </ErrorBoundary>
+    </PageErrorBoundary>
   );
 }
