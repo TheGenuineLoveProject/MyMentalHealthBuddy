@@ -16,6 +16,11 @@ The application utilizes `shadcn/ui` built on `Radix UI` primitives, styled with
 -   **Backend**: Node.js with Express.js and TypeScript (ESM modules), featuring a RESTful API, centralized error handling, and custom logging.
 -   **Data Storage**: PostgreSQL database managed by Drizzle ORM (Neon Database hosting), with Drizzle Kit for migrations and Drizzle-Zod for runtime type validation.
 -   **Authentication**: Session-based authentication with hashed passwords, using `connect-pg-simple` for PostgreSQL session storage.
+-   **Custom Hooks Library**: Professional React hooks including `useDebounce`, `useLocalStorage`, `useMediaQuery` (with responsive variants), and `useOnClickOutside` for enhanced UX.
+-   **Error Handling**: Advanced ErrorBoundary component with graceful fallback UI, recovery actions, and production error tracking integration.
+-   **Toast Notifications**: Global toast system with ToastContext provider supporting success, error, info, and warning notifications with auto-dismiss.
+-   **Loading States**: Comprehensive skeleton loaders (7 variants: Card, List, Table, Stats, Chart, Page) for improved perceived performance.
+-   **Performance Monitoring**: Web Vitals tracking (LCP, FID, CLS, FCP, TTFB) with custom metrics and analytics integration ready.
 -   **Core Features**:
     -   **AI Chat Therapy**: OpenAI-powered conversational AI with retry logic.
     -   **Mood Tracking**: Records mood, intensity, activities, and triggers with analytics.
@@ -25,10 +30,13 @@ The application utilizes `shadcn/ui` built on `Radix UI` primitives, styled with
     -   **Crisis Resources**: Access to emergency helplines.
     -   **Stripe Billing System**: Subscription management and payment processing.
     -   **Canva Integration**: Design creation for social media, quotes, and mood visualizations.
+    -   **Content Studio**: Complete workflow management system (Draft→QA→Approve→Schedule→Publish) for content creation.
+    -   **Social Calendar**: Multi-platform scheduling (Instagram, TikTok, Twitter, Facebook, LinkedIn) with visual calendar interface.
+    -   **Design System**: Comprehensive component showcase (/design-system) documenting all UI components, colors, typography, and best practices.
 -   **Deployment**: Optimized for Replit Autoscale with dual-algorithm compression, pre-compressed asset serving, intelligent HTTP caching, and code splitting.
 
 ### System Design Choices
-The architecture emphasizes type safety, developer experience, and modern web practices within a monorepo structure. It maintains clear separation of concerns and incorporates security features like XSS protection, rate limiting, and input sanitization. Robust error handling includes specific error classes, retry logic, and global handlers. Observability is ensured through request logging, health monitoring, and structured error tracking. Environment variables are validated at runtime using Zod.
+The architecture emphasizes type safety, developer experience, and modern web practices within a monorepo structure. It maintains clear separation of concerns and incorporates security features like XSS protection, rate limiting, and input sanitization. Robust error handling includes specific error classes, retry logic, global ErrorBoundary, and production error tracking. Observability is ensured through request logging, health monitoring, Web Vitals tracking, and structured error tracking. Environment variables are validated at runtime using Zod. The application uses React Context pattern for global state (Toast, Canva) and implements comprehensive loading states for optimal UX.
 
 ## External Dependencies
 
@@ -49,10 +57,11 @@ The architecture emphasizes type safety, developer experience, and modern web pr
 -   **Zod**: Runtime type validation and schema definition.
 
 ### Development & Build Tools
--   **Vite**: Fast build tool and development server.
+-   **Vite**: Fast build tool and development server with ES module support.
 -   **TypeScript**: Static type checking.
 -   **ESBuild**: JavaScript bundler.
--   **PostCSS**: CSS processing.
+-   **PostCSS**: CSS processing with ES module configuration.
+-   **Build Optimization**: Code splitting, lazy loading, tree shaking, gzip + brotli compression, bundle visualization.
 
 ### Replit Integration
 -   **@replit/vite-plugin-cartographer**: Development environment integration.
