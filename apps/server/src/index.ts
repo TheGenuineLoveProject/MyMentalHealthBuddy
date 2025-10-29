@@ -55,8 +55,16 @@ const sessionConfig: session.SessionOptions = {
 if (isProduction) {
   // Production REQUIRES PostgreSQL for multi-instance compatibility
   // DATABASE_URL is validated as required in production by env.ts
+  // Optimized database connection pool for production (360° performance)
   const pgPool = new pg.Pool({
-    connectionString: env.DATABASE_URL
+    connectionString: env.DATABASE_URL,
+    max: 20, // Maximum pool size (default: 10)
+    min: 5, // Minimum pool size for faster responses
+    idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
+    connectionTimeoutMillis: 5000, // Timeout for acquiring connection (5s)
+    allowExitOnIdle: false, // Keep pool alive
+    statement_timeout: 30000, // SQL statement timeout (30s)
+    query_timeout: 30000, // Query timeout (30s)
   });
   
   sessionConfig.store = new PgSession({
@@ -88,8 +96,18 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false
 }));
 
-// 7. Compression
-app.use(compression());
+// 7. Compression (optimized for 360° performance)
+app.use(compression({
+  filter: (req, res) => {
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    return compression.filter(req, res);
+  },
+  level: 6, // Optimal balance between speed and compression (1-9, default 6)
+  threshold: 1024, // Only compress responses larger than 1KB
+  memLevel: 8, // Memory level for compression (1-9, default 8)
+}));
 
 // 8. JSON parsing
 app.use(express.json({ limit: '10mb' }));
