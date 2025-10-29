@@ -9,6 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { createServer as createViteServer } from "vite";
 import { validateEnv } from "./lib/env.js";
+import { requestTimeout, timeoutPresets } from "./lib/requestTimeout.js";
 
 dotenv.config();
 
@@ -43,6 +44,9 @@ app.use(helmet({
 app.use(compression());
 app.use(express.json({ limit: '10mb' }));
 
+// Request timeout middleware - Applied BEFORE routes
+app.use(requestTimeout(timeoutPresets.normal));
+
 // Request validation middleware
 app.use((req, res, next) => {
   if (req.path.startsWith('/api')) {
@@ -57,20 +61,59 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health check endpoint with enhanced monitoring
+// Enhanced health check endpoint with comprehensive monitoring
 app.get("/health", async (req, res) => {
+  const uptime = process.uptime();
+  const memUsage = process.memoryUsage();
+  
   const health = {
+    status: "healthy",
     ok: true,
     service: "MyMentalHealthBuddy API",
+    version: "1.1.0",
+    environment: isProduction ? "production" : "development",
     timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
+    uptime: {
+      seconds: Math.round(uptime),
+      formatted: `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m ${Math.floor(uptime % 60)}s`
+    },
     memory: {
-      used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
-      total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
-      unit: "MB"
+      used: Math.round(memUsage.heapUsed / 1024 / 1024),
+      total: Math.round(memUsage.heapTotal / 1024 / 1024),
+      rss: Math.round(memUsage.rss / 1024 / 1024),
+      external: Math.round(memUsage.external / 1024 / 1024),
+      unit: "MB",
+      usage: `${Math.round((memUsage.heapUsed / memUsage.heapTotal) * 100)}%`
+    },
+    system: {
+      platform: process.platform,
+      nodeVersion: process.version,
+      pid: process.pid
     }
   };
+  
+  // Set cache control for health checks (short cache for monitoring)
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  
   res.json(health);
+});
+
+// Readiness check endpoint (for deployment platforms)
+app.get("/ready", async (req, res) => {
+  try {
+    // Check if server is ready to accept requests
+    const isReady = true; // Add actual readiness checks here (e.g., database connection)
+    
+    if (isReady) {
+      res.status(200).json({ ready: true, message: "Server is ready" });
+    } else {
+      res.status(503).json({ ready: false, message: "Server not ready" });
+    }
+  } catch (error) {
+    res.status(503).json({ ready: false, error: "Readiness check failed" });
+  }
 });
 
 // Register application routes
