@@ -5,6 +5,7 @@ import { Sanitizer, apiRateLimiter, chatRateLimiter } from "./validation.js";
 import { DataExporter } from "./export.js";
 import { StripeService, stripe, SUBSCRIPTION_TIERS } from "./stripe-service.js";
 import { canvaService } from "./canva-service.js";
+import { requireAuth, requireTier, csrfProtection, generateCsrfToken, devAuthFallback } from "./lib/authMiddleware.js";
 // Async handler wrapper for better error handling
 function asyncHandler(fn) {
     return (req, res, next) => {
@@ -25,6 +26,18 @@ function rateLimitMiddleware(limiter) {
     };
 }
 export function registerRoutes(app) {
+    // ============================================
+    // CSRF TOKEN ENDPOINT
+    // ============================================
+    // Get CSRF token - Frontend calls this to get token for secure requests
+    app.get("/api/csrf-token", devAuthFallback, asyncHandler(async (req, res) => {
+        // Generate or retrieve CSRF token for the session
+        let csrfToken = req.session?.csrfToken;
+        if (!csrfToken) {
+            csrfToken = generateCsrfToken(req);
+        }
+        res.json({ csrfToken });
+    }));
     // Chat endpoint with enhanced error handling and rate limiting
     app.post("/api/chat", rateLimitMiddleware(chatRateLimiter), asyncHandler(async (req, res) => {
         // Validate and sanitize input
@@ -70,15 +83,15 @@ export function registerRoutes(app) {
         const messages = await storage.getHealingMessagesBySessionId(sessionId);
         res.json(messages);
     }));
-    // Get journals endpoint
-    app.get("/api/journals", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Get journals endpoint - SECURED ✅
+    app.get("/api/journals", devAuthFallback, requireAuth, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const userId = req.userId; // From session, not header
         const journals = await storage.getJournalsByUserId(userId);
         res.json(journals);
     }));
-    // Create journal endpoint
-    app.post("/api/journals", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Create journal endpoint - SECURED ✅
+    app.post("/api/journals", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const userId = req.userId; // From session, not header
         // Sanitize and validate input
         const sanitized = Sanitizer.sanitizeObject({
             ...req.body,
@@ -91,10 +104,10 @@ export function registerRoutes(app) {
         const journal = await storage.createJournal(result.data);
         res.status(201).json(journal);
     }));
-    // Update journal endpoint
-    app.patch("/api/journals/:id", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Update journal endpoint - SECURED ✅
+    app.patch("/api/journals/:id", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         const id = Sanitizer.sanitizeString(req.params.id);
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const userId = req.userId; // From session, not header
         if (!id) {
             return res.status(400).json({ error: 'Invalid journal ID' });
         }
@@ -114,10 +127,10 @@ export function registerRoutes(app) {
         const updated = await storage.updateJournal(id, result.data);
         res.json(updated);
     }));
-    // Delete journal endpoint
-    app.delete("/api/journals/:id", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Delete journal endpoint - SECURED ✅
+    app.delete("/api/journals/:id", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         const id = Sanitizer.sanitizeString(req.params.id);
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const userId = req.userId; // From session, not header
         if (!id) {
             return res.status(400).json({ error: 'Invalid journal ID' });
         }
@@ -131,15 +144,15 @@ export function registerRoutes(app) {
         await storage.deleteJournal(id);
         res.status(204).send();
     }));
-    // Get mood entries endpoint
-    app.get("/api/moods", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Get mood entries endpoint - SECURED ✅
+    app.get("/api/moods", devAuthFallback, requireAuth, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const userId = req.userId; // From session, not header
         const moods = await storage.getMoodEntriesByUserId(userId);
         res.json(moods);
     }));
-    // Create mood entry endpoint
-    app.post("/api/moods", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Create mood entry endpoint - SECURED ✅
+    app.post("/api/moods", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const userId = req.userId; // From session, not header
         // Sanitize and validate input
         const sanitized = Sanitizer.sanitizeObject({
             ...req.body,
@@ -158,9 +171,9 @@ export function registerRoutes(app) {
         const resources = await storage.getCrisisResourcesByCountry(country);
         res.json(resources);
     }));
-    // Export journals endpoint
-    app.get("/api/journals/export", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Export journals endpoint - SECURED ✅ PREMIUM FEATURE
+    app.get("/api/journals/export", devAuthFallback, requireAuth, requireTier('premium', storage), rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const userId = req.userId; // From session, not header
         const format = req.query.format || "json";
         const journals = await storage.getJournalsByUserId(userId);
         if (format === "csv") {
@@ -175,9 +188,9 @@ export function registerRoutes(app) {
             res.json(journals);
         }
     }));
-    // Export moods endpoint
-    app.get("/api/moods/export", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Export moods endpoint - SECURED ✅ PREMIUM FEATURE
+    app.get("/api/moods/export", devAuthFallback, requireAuth, requireTier('premium', storage), rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const userId = req.userId; // From session, not header
         const format = req.query.format || "json";
         const moods = await storage.getMoodEntriesByUserId(userId);
         if (format === "csv") {
@@ -192,9 +205,9 @@ export function registerRoutes(app) {
             res.json(moods);
         }
     }));
-    // Get mood analytics endpoint
-    app.get("/api/moods/analytics", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const userId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Get mood analytics endpoint - SECURED ✅ PREMIUM FEATURE
+    app.get("/api/moods/analytics", devAuthFallback, requireAuth, requireTier('premium', storage), rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const userId = req.userId; // From session, not header
         const moods = await storage.getMoodEntriesByUserId(userId);
         const analytics = DataExporter.generateMoodAnalytics(moods);
         const insights = DataExporter.generateInsights(moods);
@@ -203,10 +216,10 @@ export function registerRoutes(app) {
             insights
         });
     }));
-    // Billing Transactions endpoints
-    app.get("/api/transactions/:userId", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Billing Transactions endpoints - SECURED ✅
+    app.get("/api/transactions/:userId", devAuthFallback, requireAuth, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         const requestedUserId = Sanitizer.sanitizeString(req.params.userId);
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         if (!requestedUserId) {
             return res.status(400).json({ error: "User ID is required" });
         }
@@ -217,9 +230,9 @@ export function registerRoutes(app) {
         const transactions = await storage.getBillingTransactionsByUserId(requestedUserId);
         res.json(transactions);
     }));
-    app.get("/api/transaction/:id", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    app.get("/api/transaction/:id", devAuthFallback, requireAuth, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         const id = Sanitizer.sanitizeString(req.params.id);
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const transaction = await storage.getBillingTransactionById(id);
         if (!transaction) {
             return res.status(404).json({ error: "Transaction not found" });
@@ -230,8 +243,8 @@ export function registerRoutes(app) {
         }
         res.json(transaction);
     }));
-    app.post("/api/transactions", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    app.post("/api/transactions", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const authenticatedUserId = req.userId; // From session, not header
         const sanitized = Sanitizer.sanitizeObject(req.body);
         const result = insertBillingTransactionSchema.safeParse(sanitized);
         if (!result.success) {
@@ -253,9 +266,9 @@ export function registerRoutes(app) {
     app.get("/api/stripe/tiers", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         res.json(SUBSCRIPTION_TIERS);
     }));
-    // Create subscription checkout session
-    app.post("/api/stripe/create-subscription-checkout", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Create subscription checkout session - SECURED ✅
+    app.post("/api/stripe/create-subscription-checkout", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const authenticatedUserId = req.userId; // From session, not header
         const { tier, successUrl, cancelUrl } = req.body;
         if (!tier || !["premium", "professional"].includes(tier)) {
             return res.status(400).json({ error: "Invalid subscription tier. Must be 'premium' or 'professional'." });
@@ -269,9 +282,9 @@ export function registerRoutes(app) {
             url: session.url
         });
     }));
-    // Create one-time payment checkout session
-    app.post("/api/stripe/create-payment-checkout", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Create one-time payment checkout session - SECURED ✅
+    app.post("/api/stripe/create-payment-checkout", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const authenticatedUserId = req.userId; // From session, not header
         const { amount, description, successUrl, cancelUrl } = req.body;
         if (!amount || typeof amount !== "number" || amount <= 0) {
             return res.status(400).json({ error: "Invalid amount. Must be a positive number in cents." });
@@ -288,25 +301,38 @@ export function registerRoutes(app) {
             url: session.url
         });
     }));
-    // Get user's active subscriptions
-    app.get("/api/stripe/subscriptions", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+    // Get user's active subscriptions - SECURED ✅
+    app.get("/api/stripe/subscriptions", devAuthFallback, requireAuth, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const authenticatedUserId = req.userId; // From session, not header
         const subscriptions = await StripeService.getUserSubscriptions(authenticatedUserId);
         res.json(subscriptions);
     }));
-    // Cancel subscription
-    app.post("/api/stripe/cancel-subscription", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Cancel subscription - SECURED ✅
+    app.post("/api/stripe/cancel-subscription", devAuthFallback, requireAuth, csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const authenticatedUserId = req.userId; // From session, not header
         const { subscriptionId } = req.body;
         if (!subscriptionId || typeof subscriptionId !== "string") {
             return res.status(400).json({ error: "Invalid subscriptionId" });
         }
-        // TODO: Add authorization check to ensure user owns this subscription
+        // Authorization check: ensure user owns this subscription
+        const userSubscriptions = await StripeService.getUserSubscriptions(authenticatedUserId);
+        const ownsSubscription = userSubscriptions.some((sub) => sub.id === subscriptionId);
+        if (!ownsSubscription) {
+            return res.status(403).json({ error: "Not authorized to cancel this subscription" });
+        }
         const subscription = await StripeService.cancelSubscription(subscriptionId);
         res.json(subscription);
     }));
-    // Get subscription details
-    app.get("/api/stripe/subscription/:id", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Get subscription details - SECURED ✅
+    app.get("/api/stripe/subscription/:id", devAuthFallback, requireAuth, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const authenticatedUserId = req.userId; // From session, not header
         const id = Sanitizer.sanitizeString(req.params.id);
+        // Authorization check: verify user owns this subscription
+        const userSubscriptions = await StripeService.getUserSubscriptions(authenticatedUserId);
+        const ownsSubscription = userSubscriptions.some((sub) => sub.id === id);
+        if (!ownsSubscription) {
+            return res.status(403).json({ error: "Not authorized to view this subscription" });
+        }
         const subscription = await StripeService.getSubscription(id);
         res.json(subscription);
     }));
@@ -352,12 +378,12 @@ export function registerRoutes(app) {
                 : "Canva API credentials not configured"
         });
     }));
-    // Get Canva authorization URL
-    app.get("/api/canva/auth-url", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Get Canva authorization URL - SECURED ✅ PROFESSIONAL FEATURE
+    app.get("/api/canva/auth-url", devAuthFallback, requireAuth, requireTier('professional', storage), rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         if (!canvaService.isEnabled()) {
             return res.status(503).json({ error: "Canva API not configured" });
         }
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const state = `${authenticatedUserId}-${Date.now()}`;
         const authUrl = canvaService.getAuthorizationUrl(state);
         res.json({ authUrl, state });
@@ -391,12 +417,12 @@ export function registerRoutes(app) {
             res.redirect("/designs?canva_error=true");
         }
     }));
-    // Create a new design
-    app.post("/api/canva/designs", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Create a new design - SECURED ✅ PROFESSIONAL FEATURE
+    app.post("/api/canva/designs", devAuthFallback, requireAuth, requireTier('professional', storage), csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         if (!canvaService.isEnabled()) {
             return res.status(503).json({ error: "Canva API not configured" });
         }
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const { designType, title, imageUrl } = req.body;
         if (!designType) {
             return res.status(400).json({ error: "Design type is required" });
@@ -418,12 +444,12 @@ export function registerRoutes(app) {
             thumbnail: design.thumbnail?.url
         });
     }));
-    // Create social media post
-    app.post("/api/canva/create-social-post", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Create social media post - SECURED ✅ PROFESSIONAL FEATURE
+    app.post("/api/canva/create-social-post", devAuthFallback, requireAuth, requireTier('professional', storage), csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         if (!canvaService.isEnabled()) {
             return res.status(503).json({ error: "Canva API not configured" });
         }
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const { platform, title, imageUrl } = req.body;
         if (!platform || !["instagram", "facebook", "twitter", "linkedin"].includes(platform)) {
             return res.status(400).json({ error: "Invalid platform. Must be instagram, facebook, twitter, or linkedin" });
@@ -443,12 +469,12 @@ export function registerRoutes(app) {
             platform
         });
     }));
-    // Generate mental health quote design
-    app.post("/api/canva/generate-quote", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Generate mental health quote design - SECURED ✅ PROFESSIONAL FEATURE
+    app.post("/api/canva/generate-quote", devAuthFallback, requireAuth, requireTier('professional', storage), csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         if (!canvaService.isEnabled()) {
             return res.status(503).json({ error: "Canva API not configured" });
         }
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const { quote, author } = req.body;
         if (!quote) {
             return res.status(400).json({ error: "Quote text is required" });
@@ -465,12 +491,12 @@ export function registerRoutes(app) {
             viewUrl: design.urls.view_url
         });
     }));
-    // Generate mood visualization
-    app.post("/api/canva/generate-mood-visual", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Generate mood visualization - SECURED ✅ PROFESSIONAL FEATURE
+    app.post("/api/canva/generate-mood-visual", devAuthFallback, requireAuth, requireTier('professional', storage), csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         if (!canvaService.isEnabled()) {
             return res.status(503).json({ error: "Canva API not configured" });
         }
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const { mood, intensity, date } = req.body;
         if (!mood || !intensity) {
             return res.status(400).json({ error: "Mood and intensity are required" });
@@ -487,12 +513,12 @@ export function registerRoutes(app) {
             viewUrl: design.urls.view_url
         });
     }));
-    // Export design
-    app.post("/api/canva/export/:designId", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // Export design - SECURED ✅ PROFESSIONAL FEATURE
+    app.post("/api/canva/export/:designId", devAuthFallback, requireAuth, requireTier('professional', storage), csrfProtection, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         if (!canvaService.isEnabled()) {
             return res.status(503).json({ error: "Canva API not configured" });
         }
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const designId = Sanitizer.sanitizeString(req.params.designId);
         const { format } = req.body;
         if (!["PNG", "JPG", "PDF"].includes(format)) {
@@ -514,12 +540,12 @@ export function registerRoutes(app) {
         const templates = canvaService.getDesignTemplates();
         res.json(templates);
     }));
-    // List user designs
-    app.get("/api/canva/designs", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+    // List user designs - SECURED ✅ PROFESSIONAL FEATURE
+    app.get("/api/canva/designs", devAuthFallback, requireAuth, requireTier('professional', storage), rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         if (!canvaService.isEnabled()) {
             return res.status(503).json({ error: "Canva API not configured" });
         }
-        const authenticatedUserId = Sanitizer.sanitizeUserId(req.headers["x-user-id"]);
+        const authenticatedUserId = req.userId; // From session, not header
         const user = await storage.getUserById(authenticatedUserId);
         if (!user || !user.canvaAccessToken) {
             return res.status(401).json({ error: "Canva not connected. Please authorize first." });
