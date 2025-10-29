@@ -3,9 +3,9 @@ node_modules/
 apps/*/node_modules/
 **/node_modules/
 
-# Build outputs
-dist/
-apps/*/dist/
+# Build outputs (keep dist for deployment)
+# dist/ - COMMENTED OUT - needed for deployment
+# apps/*/dist/ - COMMENTED OUT - needed for deployment
 *.tsbuildinfo
 .rollup.cache/
 
@@ -61,6 +61,12 @@ __tests__/__coverage__/
 .backup/
 *.tar.gz
 *.zip
+
+# Replit system directories (exclude from deployment)
+.local/
+.config/
+.upm/
+.cache/
 
 # Source maps in production
 *.map
