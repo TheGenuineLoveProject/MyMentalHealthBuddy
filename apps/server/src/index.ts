@@ -55,14 +55,14 @@ const sessionConfig: session.SessionOptions = {
 if (isProduction) {
   // Production REQUIRES PostgreSQL for multi-instance compatibility
   // DATABASE_URL is validated as required in production by env.ts
-  // Optimized database connection pool for production (360° performance)
+  // Autoscale-safe database connection pool (360° production-ready)
   const pgPool = new pg.Pool({
     connectionString: env.DATABASE_URL,
-    max: 20, // Maximum pool size (default: 10)
-    min: 5, // Minimum pool size for faster responses
+    max: 10, // Conservative max for Autoscale (multiple instances share connection limit)
+    min: 0, // CRITICAL: 0 for Autoscale (avoid pre-warming connections per instance)
     idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
     connectionTimeoutMillis: 5000, // Timeout for acquiring connection (5s)
-    allowExitOnIdle: false, // Keep pool alive
+    allowExitOnIdle: true, // Allow pool to exit when idle (important for Autoscale)
     statement_timeout: 30000, // SQL statement timeout (30s)
     query_timeout: 30000, // Query timeout (30s)
   });
@@ -93,7 +93,8 @@ app.use(cors(getCorsOptions()));
 // 6. Helmet for additional security
 app.use(helmet({
   contentSecurityPolicy: false, // Using custom CSP from securityHeaders
-  crossOriginEmbedderPolicy: false
+  crossOriginEmbedderPolicy: false,
+  frameguard: isDev ? false : { action: 'sameorigin' } // Disable in dev for Replit webview
 }));
 
 // 7. Compression (optimized for 360° performance)

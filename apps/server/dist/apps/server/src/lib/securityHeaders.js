@@ -51,7 +51,10 @@ export function configureSecurityHeaders(app) {
         objectSrc: ["'none'"],
         baseUri: ["'self'"],
         formAction: ["'self'"],
-        frameAncestors: ["'none'"], // Prevent clickjacking
+        // Allow Replit webview in development, strict in production
+        frameAncestors: isProduction
+            ? ["'self'"]
+            : ["'self'", "https://replit.com", "https://*.replit.com", "https://*.replit.dev"],
         upgradeInsecureRequests: isProduction ? [] : null
     };
     // Build CSP header
@@ -76,8 +79,17 @@ export function configureSecurityHeaders(app) {
         }
         // Prevent MIME type sniffing
         res.setHeader('X-Content-Type-Options', 'nosniff');
-        // Prevent clickjacking
-        res.setHeader('X-Frame-Options', 'DENY');
+        // Prevent clickjacking - permissive in dev for Replit webview, strict in production
+        // In dev, rely on CSP frame-ancestors; X-Frame-Options doesn't support multiple origins
+        if (!isProduction) {
+            // Development: Remove X-Frame-Options to allow CSP frame-ancestors to handle it
+            // This allows Replit's webview (multiple origins) while CSP provides protection
+            res.removeHeader('X-Frame-Options');
+        }
+        else {
+            // Production: Use SAMEORIGIN for clickjacking protection
+            res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+        }
         // Enable XSS filter
         res.setHeader('X-XSS-Protection', '1; mode=block');
         // Referrer policy

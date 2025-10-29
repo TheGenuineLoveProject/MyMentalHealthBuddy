@@ -46,8 +46,16 @@ const sessionConfig = {
 if (isProduction) {
     // Production REQUIRES PostgreSQL for multi-instance compatibility
     // DATABASE_URL is validated as required in production by env.ts
+    // Autoscale-safe database connection pool (360° production-ready)
     const pgPool = new pg.Pool({
-        connectionString: env.DATABASE_URL
+        connectionString: env.DATABASE_URL,
+        max: 10, // Conservative max for Autoscale (multiple instances share connection limit)
+        min: 0, // CRITICAL: 0 for Autoscale (avoid pre-warming connections per instance)
+        idleTimeoutMillis: 30000, // Close idle clients after 30 seconds
+        connectionTimeoutMillis: 5000, // Timeout for acquiring connection (5s)
+        allowExitOnIdle: true, // Allow pool to exit when idle (important for Autoscale)
+        statement_timeout: 30000, // SQL statement timeout (30s)
+        query_timeout: 30000, // Query timeout (30s)
     });
     sessionConfig.store = new PgSession({
         pool: pgPool,
@@ -70,10 +78,21 @@ app.use(cors(getCorsOptions()));
 // 6. Helmet for additional security
 app.use(helmet({
     contentSecurityPolicy: false, // Using custom CSP from securityHeaders
-    crossOriginEmbedderPolicy: false
+    crossOriginEmbedderPolicy: false,
+    frameguard: isDev ? false : { action: 'sameorigin' } // Disable in dev for Replit webview
 }));
-// 7. Compression
-app.use(compression());
+// 7. Compression (optimized for 360° performance)
+app.use(compression({
+    filter: (req, res) => {
+        if (req.headers['x-no-compression']) {
+            return false;
+        }
+        return compression.filter(req, res);
+    },
+    level: 6, // Optimal balance between speed and compression (1-9, default 6)
+    threshold: 1024, // Only compress responses larger than 1KB
+    memLevel: 8, // Memory level for compression (1-9, default 8)
+}));
 // 8. JSON parsing
 app.use(express.json({ limit: '10mb' }));
 // 9. Request timeout middleware
