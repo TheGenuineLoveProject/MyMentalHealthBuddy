@@ -25,6 +25,7 @@ import {
   generateCsrfToken,
   devAuthFallback
 } from "./lib/authMiddleware.js";
+import { apiCache, CACHE_PRESETS } from "./lib/apiCache.js";
 
 // Async handler wrapper for better error handling
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
@@ -269,8 +270,9 @@ export function registerRoutes(app: Express) {
     })
   );
 
-  // Get crisis resources endpoint
+  // Get crisis resources endpoint - PUBLIC with long caching
   app.get("/api/crisis-resources",
+    apiCache(CACHE_PRESETS.PUBLIC_LONG), // 1 hour cache for static reference data
     asyncHandler(async (req, res) => {
       const country = Sanitizer.sanitizeString(
         (req.query.country as string) || "US"
