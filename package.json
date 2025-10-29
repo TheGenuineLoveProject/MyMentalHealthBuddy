@@ -10,9 +10,15 @@
     "node": ">=20 <21"
   },
   "scripts": {
+    "diagnose": "node scripts/diagnose.mjs",
+    "heal": "node scripts/heal.mjs",
+    "verify": "node scripts/verify.mjs",
+    "optimize": "echo '🔧 optimize: stub' && exit 0",
+    "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
+    "server": "npm run server:start || echo 'ℹ️ Define server:start to launch your API'",
+    "client": "npm run client:start || echo 'ℹ️ Define client:start to launch your web app'",
     "dev:server": "npm --prefix apps/server run dev",
     "dev:client": "npm --prefix apps/client run dev",
-    "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
     "build": "npm --prefix apps/client run build && npm --prefix apps/server run build",
     "postbuild": "node scripts/deployment-cleanup.js",
     "build:analyze": "cross-env ANALYZE=true npm run build",
@@ -27,9 +33,6 @@
     "health": "node scripts/health.js",
     "deploy:prepare": "npm run build:production && npm run production-check && echo '\n✅ Ready for deployment!'",
     "deploy:clean": "node scripts/deployment-cleanup.js && echo '\n✅ Deployment bundle optimized!'",
-    "diagnose": "node scripts/diagnose.mjs",
-    "heal": "node scripts/heal.mjs",
-    "verify": "node scripts/verify.mjs",
     "self-evolve": "npm run diagnose && npm run heal && npm run verify",
     "activate": "bash scripts/activateMaster.sh"
   },
@@ -73,9 +76,9 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
-    "concurrently": "^9.2.1",
     "cross-env": "^7.0.3",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
