@@ -65,15 +65,15 @@ export function WebVitalsMonitor() {
           </span>
         </div>
 
-        {/* FID */}
+        {/* INP */}
         <div className="flex items-center gap-1">
           <Zap className="h-3 w-3 text-gray-500" aria-hidden="true" />
-          <span className="text-gray-600 dark:text-gray-400">FID:</span>
+          <span className="text-gray-600 dark:text-gray-400">INP:</span>
           <span 
-            className={getRatingColor(metrics.fid, { good: 100, poor: 300 })}
-            data-testid="metric-fid"
+            className={getRatingColor(metrics.inp, { good: 200, poor: 500 })}
+            data-testid="metric-inp"
           >
-            {formatMetric(metrics.fid)}
+            {formatMetric(metrics.inp)}
           </span>
         </div>
 

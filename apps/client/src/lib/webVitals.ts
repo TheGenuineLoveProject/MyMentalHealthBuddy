@@ -1,13 +1,13 @@
 /**
  * Web Vitals Monitoring
- * Track and report Core Web Vitals (LCP, FID, CLS, FCP, TTFB)
+ * Track and report Core Web Vitals (LCP, INP, CLS, FCP, TTFB)
  */
 
-import { onCLS, onFID, onLCP, onFCP, onTTFB, Metric } from 'web-vitals';
+import { onCLS, onINP, onLCP, onFCP, onTTFB, Metric } from 'web-vitals';
 
 export interface WebVitalsMetrics {
   lcp: number | null; // Largest Contentful Paint
-  fid: number | null; // First Input Delay
+  inp: number | null; // Interaction to Next Paint
   cls: number | null; // Cumulative Layout Shift
   fcp: number | null; // First Contentful Paint
   ttfb: number | null; // Time to First Byte
@@ -24,7 +24,7 @@ export interface WebVitalsReport {
 
 const metrics: WebVitalsMetrics = {
   lcp: null,
-  fid: null,
+  inp: null,
   cls: null,
   fcp: null,
   ttfb: null,
@@ -38,7 +38,7 @@ const listeners: Set<(report: WebVitalsReport) => void> = new Set();
 function getRating(name: string, value: number): 'good' | 'needs-improvement' | 'poor' {
   const thresholds = {
     LCP: { good: 2500, poor: 4000 },
-    FID: { good: 100, poor: 300 },
+    INP: { good: 200, poor: 500 },
     CLS: { good: 0.1, poor: 0.25 },
     FCP: { good: 1800, poor: 3000 },
     TTFB: { good: 800, poor: 1800 },
@@ -108,7 +108,7 @@ function sendToAnalytics(report: WebVitalsReport) {
 export function initWebVitals() {
   try {
     onLCP(handleMetric);
-    onFID(handleMetric);
+    onINP(handleMetric);
     onCLS(handleMetric);
     onFCP(handleMetric);
     onTTFB(handleMetric);
@@ -138,10 +138,10 @@ export function getWebVitals(): WebVitalsMetrics {
  * Get performance score (0-100)
  */
 export function getPerformanceScore(): number {
-  const { lcp, fid, cls, fcp, ttfb } = metrics;
+  const { lcp, inp, cls, fcp, ttfb } = metrics;
 
   // Check if required metrics are available (null check, not falsy check)
-  if (lcp === null || fid === null || cls === null) {
+  if (lcp === null || inp === null || cls === null) {
     return 0; // Not enough data
   }
 
@@ -152,9 +152,9 @@ export function getPerformanceScore(): number {
   else if (lcp <= 4000) score += 15;
   else score += 5;
 
-  // FID score (0-25 points)
-  if (fid <= 100) score += 25;
-  else if (fid <= 300) score += 15;
+  // INP score (0-25 points)
+  if (inp <= 200) score += 25;
+  else if (inp <= 500) score += 15;
   else score += 5;
 
   // CLS score (0-25 points)
@@ -180,7 +180,7 @@ export function getPerformanceScore(): number {
  */
 export function getPerformanceRecommendations(): string[] {
   const recommendations: string[] = [];
-  const { lcp, fid, cls, fcp, ttfb } = metrics;
+  const { lcp, inp, cls, fcp, ttfb } = metrics;
 
   if (lcp && lcp > 2500) {
     recommendations.push('Optimize images and lazy load below-the-fold content');
@@ -188,10 +188,11 @@ export function getPerformanceRecommendations(): string[] {
     recommendations.push('Minimize render-blocking resources');
   }
 
-  if (fid && fid > 100) {
+  if (inp && inp > 200) {
     recommendations.push('Reduce JavaScript execution time');
     recommendations.push('Break up long tasks into smaller chunks');
     recommendations.push('Use web workers for heavy computations');
+    recommendations.push('Optimize event handlers and reduce layout thrashing');
   }
 
   if (cls && cls > 0.1) {

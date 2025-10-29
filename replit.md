@@ -36,7 +36,7 @@ The application uses `shadcn/ui` (built on `Radix UI`) with `Tailwind CSS` and `
 -   **Error Handling**: Advanced ErrorBoundary (page and section level) with recovery actions, global error tracking, and `useErrorHandler` hook. Fully integrated across all 15 routes.
 -   **Form Validation**: `useFormValidation` hook with real-time validation, auto-save, and Zod schema support.
 -   **Offline Support**: `offlineManager` with automatic queuing, auto-sync, retry logic, and `OfflineIndicator`.
--   **Web Vitals Monitoring**: Real-time Core Web Vitals tracking (LCP, FID, CLS, FCP, TTFB), performance scoring (0-100), automated recommendations, development monitoring overlay with `WebVitalsMonitor` component.
+-   **Web Vitals Monitoring**: Real-time Core Web Vitals tracking (LCP, INP, CLS, FCP, TTFB), performance scoring (0-100), automated recommendations, development monitoring overlay with `WebVitalsMonitor` component.
 -   **Deployment**: Optimized for Replit Autoscale with dual-algorithm compression, pre-compressed assets, HTTP caching, and code splitting.
 
 ### System Design Choices
