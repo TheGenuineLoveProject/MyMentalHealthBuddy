@@ -22,17 +22,18 @@ export function KeyboardShortcuts({ shortcuts = [] }: KeyboardShortcutsProps) {
   const [showHelp, setShowHelp] = useState(false);
 
   const defaultShortcuts: Shortcut[] = [
-    // Navigation
-    { key: 'g d', description: 'Go to Dashboard', action: () => window.location.href = '/', category: 'Navigation' },
-    { key: 'g c', description: 'Go to Chat', action: () => window.location.href = '/chat', category: 'Navigation' },
-    { key: 'g m', description: 'Go to Mood Tracker', action: () => window.location.href = '/mood', category: 'Navigation' },
-    { key: 'g j', description: 'Go to Journal', action: () => window.location.href = '/journal', category: 'Navigation' },
-    { key: 'g s', description: 'Go to Studio', action: () => window.location.href = '/studio', category: 'Navigation' },
-    { key: 'g a', description: 'Go to Analytics', action: () => window.location.href = '/analytics', category: 'Navigation' },
+    // Navigation (keys are concatenated without spaces: "gd" not "g d")
+    { key: 'gd', description: 'Go to Dashboard', action: () => window.location.href = '/', category: 'Navigation' },
+    { key: 'gc', description: 'Go to Chat', action: () => window.location.href = '/chat', category: 'Navigation' },
+    { key: 'gm', description: 'Go to Mood Tracker', action: () => window.location.href = '/mood', category: 'Navigation' },
+    { key: 'gj', description: 'Go to Journal', action: () => window.location.href = '/journal', category: 'Navigation' },
+    { key: 'gs', description: 'Go to Studio', action: () => window.location.href = '/studio', category: 'Navigation' },
+    { key: 'ga', description: 'Go to Analytics', action: () => window.location.href = '/analytics', category: 'Navigation' },
+    { key: 'gp', description: 'Go to Performance', action: () => window.location.href = '/performance', category: 'Navigation' },
     
     // Actions
     { key: 'n', description: 'New Content', action: () => console.log('New content'), category: 'Actions' },
-    { key: 's', description: 'Search', action: () => document.querySelector<HTMLInputElement>('[data-testid="input-search"]')?.focus(), category: 'Actions' },
+    { key: '/', description: 'Search', action: () => document.querySelector<HTMLInputElement>('[data-testid="input-search"]')?.focus(), category: 'Actions' },
     { key: '?', description: 'Show Shortcuts', action: () => setShowHelp(true), category: 'Help' },
     { key: 'Escape', description: 'Close Dialog', action: () => setShowHelp(false), category: 'Help' },
   ];
@@ -144,11 +145,19 @@ export function KeyboardShortcuts({ shortcuts = [] }: KeyboardShortcutsProps) {
                         >
                           <span className="text-sm">{shortcut.description}</span>
                           <div className="flex gap-1">
-                            {shortcut.key.split(' ').map((key, j) => (
-                              <Badge key={j} variant="outline" className="font-mono text-xs">
-                                {key}
+                            {shortcut.key.length > 1 && shortcut.key !== 'Escape' ? (
+                              // Multi-key sequence: show each character separately
+                              shortcut.key.split('').map((key, j) => (
+                                <Badge key={j} variant="outline" className="font-mono text-xs">
+                                  {key}
+                                </Badge>
+                              ))
+                            ) : (
+                              // Single key
+                              <Badge variant="outline" className="font-mono text-xs">
+                                {shortcut.key}
                               </Badge>
-                            ))}
+                            )}
                           </div>
                         </div>
                       ))}
