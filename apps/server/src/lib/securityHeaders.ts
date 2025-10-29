@@ -55,7 +55,7 @@ export function configureSecurityHeaders(app: Express) {
     objectSrc: ["'none'"],
     baseUri: ["'self'"],
     formAction: ["'self'"],
-    frameAncestors: ["'none'"], // Prevent clickjacking
+    frameAncestors: ["'self'"], // Prevent external clickjacking, allow Replit webview
     upgradeInsecureRequests: isProduction ? [] : null
   };
 
@@ -85,8 +85,8 @@ export function configureSecurityHeaders(app: Express) {
     // Prevent MIME type sniffing
     res.setHeader('X-Content-Type-Options', 'nosniff');
 
-    // Prevent clickjacking
-    res.setHeader('X-Frame-Options', 'DENY');
+    // Prevent clickjacking (SAMEORIGIN allows Replit webview)
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
 
     // Enable XSS filter
     res.setHeader('X-XSS-Protection', '1; mode=block');
