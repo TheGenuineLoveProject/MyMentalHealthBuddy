@@ -1,0 +1,195 @@
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
+import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
+import {
+  TrendingUp,
+  Users,
+  Globe,
+  Clock,
+  Target,
+  Award,
+} from 'lucide-react';
+
+/**
+ * Analytics Page - Comprehensive performance insights
+ * Track content performance, audience engagement, and growth
+ */
+export default function AnalyticsPage() {
+  const analyticsData = {
+    views: { value: 45820, change: 12.5 },
+    engagement: { value: 8.4, change: 3.2 },
+    shares: { value: 2340, change: -2.1 },
+    comments: { value: 1520, change: 15.8 },
+  };
+
+  const audienceStats = [
+    { label: 'Total Followers', value: '12.5K', change: '+5.2%', icon: Users },
+    { label: 'Reach', value: '45.8K', change: '+12.3%', icon: Globe },
+    { label: 'Avg. Session', value: '3m 42s', change: '+8.1%', icon: Clock },
+    { label: 'Conversion Rate', value: '4.2%', change: '+1.3%', icon: Target },
+  ];
+
+  const platformBreakdown = [
+    { name: 'Instagram', percentage: 45, color: 'bg-pink-500' },
+    { name: 'Twitter', percentage: 30, color: 'bg-blue-500' },
+    { name: 'LinkedIn', percentage: 15, color: 'bg-indigo-500' },
+    { name: 'Facebook', percentage: 10, color: 'bg-blue-600' },
+  ];
+
+  return (
+    <div className="container mx-auto p-6 max-w-7xl">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2" data-testid="text-page-title">
+          Analytics Dashboard
+        </h1>
+        <p className="text-muted-foreground text-lg">
+          Track performance, engagement, and growth across all platforms
+        </p>
+      </div>
+
+      {/* Quick Export */}
+      <div className="flex gap-3 mb-8">
+        <Button variant="outline" data-testid="button-export-pdf">
+          Export PDF
+        </Button>
+        <Button variant="outline" data-testid="button-export-csv">
+          Export CSV
+        </Button>
+        <Button variant="outline" data-testid="button-schedule-report">
+          Schedule Report
+        </Button>
+      </div>
+
+      {/* Main Analytics Dashboard */}
+      <AnalyticsDashboard data={analyticsData} period="30d" />
+
+      {/* Audience Insights */}
+      <div className="mt-8">
+        <h2 className="text-2xl font-semibold mb-6">Audience Insights</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {audienceStats.map((stat, i) => {
+            const Icon = stat.icon;
+            return (
+              <Card key={i} className="p-6" data-testid={`audience-stat-${i}`}>
+                <div className="flex items-start justify-between mb-4">
+                  <div className="text-sm font-medium text-muted-foreground">
+                    {stat.label}
+                  </div>
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <Icon className="h-5 w-5 text-primary" />
+                  </div>
+                </div>
+                <div className="text-3xl font-bold mb-2" data-testid={`audience-value-${i}`}>
+                  {stat.value}
+                </div>
+                <Badge variant="outline" className="text-green-600" data-testid={`audience-change-${i}`}>
+                  <TrendingUp className="h-3 w-3 mr-1" />
+                  {stat.change}
+                </Badge>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Platform Breakdown */}
+      <div className="mt-8">
+        <Card className="p-6">
+          <h3 className="text-xl font-semibold mb-6" data-testid="text-platform-breakdown">
+            Traffic by Platform
+          </h3>
+          <div className="space-y-4">
+            {platformBreakdown.map((platform, i) => (
+              <div key={i} data-testid={`platform-${platform.name.toLowerCase()}`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="font-medium">{platform.name}</span>
+                  <span className="text-muted-foreground">{platform.percentage}%</span>
+                </div>
+                <div className="w-full h-3 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className={`h-full ${platform.color} transition-all duration-500`}
+                    style={{ width: `${platform.percentage}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </Card>
+      </div>
+
+      {/* Goals & Achievements */}
+      <div className="mt-8">
+        <Card className="p-6">
+          <div className="flex items-center gap-3 mb-6">
+            <Award className="h-6 w-6 text-primary" />
+            <h3 className="text-xl font-semibold" data-testid="text-goals">
+              Goals & Achievements
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 rounded-lg">
+              <div className="text-4xl mb-2">🎯</div>
+              <div className="text-2xl font-bold mb-1">10K</div>
+              <div className="text-sm text-muted-foreground">Monthly Views Goal</div>
+              <div className="mt-2">
+                <Badge variant="default">Achieved!</Badge>
+              </div>
+            </div>
+            <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950 rounded-lg">
+              <div className="text-4xl mb-2">📈</div>
+              <div className="text-2xl font-bold mb-1">5K</div>
+              <div className="text-sm text-muted-foreground">Follower Milestone</div>
+              <div className="mt-2">
+                <Badge variant="secondary">In Progress (92%)</Badge>
+              </div>
+            </div>
+            <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 rounded-lg">
+              <div className="text-4xl mb-2">💪</div>
+              <div className="text-2xl font-bold mb-1">30</div>
+              <div className="text-sm text-muted-foreground">Consecutive Days Publishing</div>
+              <div className="mt-2">
+                <Badge variant="default">Achieved!</Badge>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      {/* AI Insights */}
+      <Card className="mt-8 p-6 bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950 dark:to-purple-950">
+        <h3 className="text-xl font-semibold mb-4">💡 AI-Powered Insights</h3>
+        <div className="space-y-3">
+          <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="text-2xl">✨</div>
+            <div>
+              <div className="font-medium mb-1">Best posting time identified</div>
+              <div className="text-sm text-muted-foreground">
+                Your audience is most active on weekdays between 10 AM - 2 PM. Consider scheduling more content during this window.
+              </div>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="text-2xl">🚀</div>
+            <div>
+              <div className="font-medium mb-1">Content performance trending up</div>
+              <div className="text-sm text-muted-foreground">
+                "How-to" guides are getting 45% more engagement than other content types. Create more tutorial content!
+              </div>
+            </div>
+          </div>
+          <div className="flex items-start gap-3 p-4 bg-white dark:bg-gray-800 rounded-lg">
+            <div className="text-2xl">🎨</div>
+            <div>
+              <div className="font-medium mb-1">Visual content opportunity</div>
+              <div className="text-sm text-muted-foreground">
+                Posts with infographics get 3x more shares. Use the Canva integration to create more visual content.
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+}

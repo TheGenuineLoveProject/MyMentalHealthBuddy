@@ -1,13 +1,18 @@
+import { useState } from 'react';
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { Badge } from "@/components/Badge";
-import { Calendar as CalendarIcon, Instagram, Twitter, Facebook, Linkedin, Clock, CheckCircle2 } from "lucide-react";
+import { CalendarView } from "@/components/CalendarView";
+import { useToast } from "@/hooks";
+import { Calendar as CalendarIcon, Instagram, Twitter, Facebook, Linkedin, Clock, CheckCircle2, List } from "lucide-react";
 import { SiTiktok } from "react-icons/si";
 
 /**
  * Social Calendar - Schedule and manage social media posts
  */
 export default function SocialCalendarPage() {
+  const [viewMode, setViewMode] = useState<'list' | 'calendar'>('list');
+  const toast = useToast();
   const scheduledPosts = [
     {
       id: 1,
@@ -90,16 +95,25 @@ export default function SocialCalendarPage() {
 
       {/* Quick Actions */}
       <div className="flex gap-3 mb-6">
-        <Button data-testid="button-new-post">
+        <Button onClick={() => toast.info("New Post", "Opening post composer...")} data-testid="button-new-post">
           <CalendarIcon className="h-4 w-4 mr-2" />
           Schedule New Post
         </Button>
-        <Button variant="outline" data-testid="button-view-calendar">
+        <Button
+          variant={viewMode === 'calendar' ? 'default' : 'outline'}
+          onClick={() => setViewMode('calendar')}
+          data-testid="button-view-calendar"
+        >
           <CalendarIcon className="h-4 w-4 mr-2" />
           Calendar View
         </Button>
-        <Button variant="outline" data-testid="button-analytics">
-          View Analytics
+        <Button
+          variant={viewMode === 'list' ? 'default' : 'outline'}
+          onClick={() => setViewMode('list')}
+          data-testid="button-view-list"
+        >
+          <List className="h-4 w-4 mr-2" />
+          List View
         </Button>
       </div>
 
@@ -135,9 +149,53 @@ export default function SocialCalendarPage() {
         </div>
       </Card>
 
-      {/* Scheduled Posts */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold mb-4">Upcoming Posts</h2>
+      {/* Calendar View */}
+      {viewMode === 'calendar' ? (
+        <CalendarView
+          posts={scheduledPosts.map(post => {
+            // Helper to format date in local timezone as YYYY-MM-DD
+            const formatLocalDate = (date: Date): string => {
+              const year = date.getFullYear();
+              const month = String(date.getMonth() + 1).padStart(2, '0');
+              const day = String(date.getDate()).padStart(2, '0');
+              return `${year}-${month}-${day}`;
+            };
+
+            // Parse relative and absolute dates to local ISO format
+            let isoDate: string;
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            if (post.scheduledFor.startsWith('Today')) {
+              isoDate = formatLocalDate(today);
+            } else if (post.scheduledFor.startsWith('Tomorrow')) {
+              isoDate = formatLocalDate(tomorrow);
+            } else if (post.scheduledFor.startsWith('Dec 30')) {
+              const dec30 = new Date(today.getFullYear(), 11, 30); // Month is 0-indexed
+              isoDate = formatLocalDate(dec30);
+            } else {
+              // Default to tomorrow if format unknown
+              isoDate = formatLocalDate(tomorrow);
+            }
+
+            // Extract time from scheduledFor string
+            const timeMatch = post.scheduledFor.match(/(\d+):(\d+)\s*(AM|PM)/i);
+            const time = timeMatch ? timeMatch[0] : '12:00 PM';
+
+            return {
+              id: post.id,
+              date: isoDate,
+              content: post.content,
+              platforms: post.platforms,
+              time: time
+            };
+          })}
+          onDateClick={(date) => toast.info("Date Selected", `Selected: ${date.toLocaleDateString()}`)}
+        />
+      ) : (
+        <div className="space-y-4">
+          <h2 className="text-2xl font-semibold mb-4">Upcoming Posts</h2>
         {scheduledPosts.map((post) => (
           <Card key={post.id} className="p-6 hover:shadow-lg transition-shadow" data-testid={`card-post-${post.id}`}>
             <div className="flex items-start justify-between mb-4">
@@ -188,7 +246,8 @@ export default function SocialCalendarPage() {
             )}
           </Card>
         ))}
-      </div>
+        </div>
+      )}
 
       {/* Best Times to Post */}
       <Card className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-950 dark:to-blue-950">

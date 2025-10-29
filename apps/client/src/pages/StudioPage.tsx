@@ -1,13 +1,21 @@
+import { useState } from 'react';
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { Badge } from "@/components/Badge";
-import { FileEdit, Calendar, CheckCircle2, Clock, Send } from "lucide-react";
+import { ContentEditor } from "@/components/ContentEditor";
+import { ContentTemplates } from "@/components/ContentTemplates";
+import { SearchFilter } from "@/components/SearchFilter";
+import { useToast } from "@/hooks";
+import { FileEdit, Calendar, CheckCircle2, Clock, Send, Library } from "lucide-react";
 
 /**
  * Content Studio - Content creation and management workflow
  * Draft → QA → Approve → Schedule → Publish
  */
 export default function StudioPage() {
+  const [showEditor, setShowEditor] = useState(false);
+  const [showTemplates, setShowTemplates] = useState(false);
+  const toast = useToast();
   const contentItems = [
     {
       id: 1,
@@ -87,18 +95,25 @@ export default function StudioPage() {
         </Card>
       </div>
 
+      {/* Search & Filter */}
+      <SearchFilter
+        onSearch={(query) => toast.info("Searching", `Searching for: ${query}`)}
+        onFilter={(filters) => console.log('Filters:', filters)}
+      />
+
       {/* Actions */}
-      <div className="flex gap-3 mb-6">
-        <Button data-testid="button-new-article">
+      <div className="flex gap-3 mb-6 mt-6">
+        <Button onClick={() => setShowEditor(true)} data-testid="button-new-article">
           <FileEdit className="h-4 w-4 mr-2" />
           New Article
+        </Button>
+        <Button variant="outline" onClick={() => setShowTemplates(true)} data-testid="button-templates">
+          <Library className="h-4 w-4 mr-2" />
+          Templates
         </Button>
         <Button variant="outline" data-testid="button-new-video">
           <Calendar className="h-4 w-4 mr-2" />
           Schedule Content
-        </Button>
-        <Button variant="outline" data-testid="button-view-analytics">
-          View Analytics
         </Button>
       </div>
 
@@ -166,6 +181,36 @@ export default function StudioPage() {
           </div>
         </div>
       </Card>
+
+      {/* Content Editor Modal */}
+      <ContentEditor
+        isOpen={showEditor}
+        onClose={() => setShowEditor(false)}
+        onSave={(content) => {
+          toast.success("Content Saved", "Your draft has been saved successfully");
+          setShowEditor(false);
+        }}
+      />
+
+      {/* Templates Modal */}
+      {showTemplates && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="w-full max-w-7xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg p-6">
+            <ContentTemplates
+              onSelectTemplate={(template) => {
+                toast.info("Template Selected", `Using ${template.name} template`);
+                setShowTemplates(false);
+                setShowEditor(true);
+              }}
+            />
+            <div className="mt-6 flex justify-end">
+              <Button variant="outline" onClick={() => setShowTemplates(false)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

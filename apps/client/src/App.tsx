@@ -20,6 +20,7 @@ const DesignsPage = lazy(() => import("./pages/DesignsPage"));
 const StudioPage = lazy(() => import("./pages/StudioPage"));
 const SocialCalendarPage = lazy(() => import("./pages/SocialCalendarPage"));
 const DesignSystemPage = lazy(() => import("./pages/DesignSystemPage"));
+const AnalyticsPage = lazy(() => import("./pages/AnalyticsPage"));
 
 function AppContent() {
   const { toasts } = useToast();
@@ -42,6 +43,7 @@ function AppContent() {
               <Route path="/designs" component={DesignsPage} />
               <Route path="/studio" component={StudioPage} />
               <Route path="/social" component={SocialCalendarPage} />
+              <Route path="/analytics" component={AnalyticsPage} />
               <Route path="/design-system" component={DesignSystemPage} />
               <Route>
                 <div className="container mx-auto px-4 py-16">
