@@ -1,7 +1,0 @@
-{
-  "type": "module",
-  "scripts": {
-    "verify": "node scripts/verify.mjs",
-    "start:all": "node scripts/start-all.mjs"
-  }
-}
