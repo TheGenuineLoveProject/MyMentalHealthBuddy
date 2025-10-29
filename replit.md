@@ -32,7 +32,8 @@ The application uses `shadcn/ui` (built on `Radix UI`) with `Tailwind CSS` and `
     -   **Analytics Dashboard**: Comprehensive performance metrics, professional chart visualizations (PieChart, LineChart), audience insights, and export capabilities.
     -   **Performance Dashboard**: Core Web Vitals monitoring, load time analysis, bundle size breakdown, and optimization suggestions.
     -   **Productivity Hub**: Advanced Export (multi-format, templates, scheduled), Bulk Operations Manager (batch editing), AI Content Generator (multi-type, tone, length), Automation Rules Engine (triggers & actions), and Advanced Search System.
--   **Error Handling**: Advanced ErrorBoundary (page and section level) with recovery actions, global error tracking, and `useErrorHandler` hook.
+-   **Caching Strategy**: Centralized cache key factory, optimized cache configurations per data type (user, moods, analytics, etc.), `useOptimizedQuery` and `useOptimizedMutation` hooks with automatic invalidation patterns.
+-   **Error Handling**: Advanced ErrorBoundary (page and section level) with recovery actions, global error tracking, and `useErrorHandler` hook. Fully integrated across all 15 routes.
 -   **Form Validation**: `useFormValidation` hook with real-time validation, auto-save, and Zod schema support.
 -   **Offline Support**: `offlineManager` with automatic queuing, auto-sync, retry logic, and `OfflineIndicator`.
 -   **Deployment**: Optimized for Replit Autoscale with dual-algorithm compression, pre-compressed assets, HTTP caching, and code splitting.
