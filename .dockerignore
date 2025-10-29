@@ -45,8 +45,8 @@ tools/
 .husky/
 
 # Replit development files
-.replit
-replit.nix
+# .replit - KEEP for deployment configuration
+# replit.nix - KEEP for Nix environment
 .breakpoints
 
 # Documentation (Large files - exclude from deployment)
@@ -139,9 +139,17 @@ package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
-# Backup and rollback directories
+# Backup and rollback directories (CRITICAL: 32GB+ .backup directory!)
 .backup/
+.backup
 .rollback/
+backups/
+*.backup
+
+# Replit system directories (73MB+ each)
+.local/
+.config/
+.upm/
 
 # Large binary files
 *.tar.gz
