@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import { quickActions } from '@/lib/navigationStructure';
-import { Card } from '@/components/Card';
+import { Card } from '@/components/Card.tsx';
 
 /**
  * Quick Actions Component
