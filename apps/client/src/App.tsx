@@ -9,6 +9,8 @@ import { ToastContainer } from "./components/Toast";
 import { KeyboardShortcuts } from "./components/KeyboardShortcuts";
 import { Breadcrumbs } from "./components/Breadcrumbs";
 import { MobileNav } from "./components/MobileNav";
+import { SkipNavigation } from "./components/SkipNavigation";
+import { AccessibilityAnnouncer } from "./components/AccessibilityAnnouncer";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -33,9 +35,11 @@ function AppContent() {
   return (
     <CanvaProvider>
         <div className="min-h-screen bg-gradient-mesh">
+          <SkipNavigation />
           <Navigation />
-          <main className="container mx-auto px-4 py-6">
+          <main id="main-content" className="container mx-auto px-4 py-6" tabIndex={-1}>
             <Breadcrumbs />
+            <AccessibilityAnnouncer message="" />
             <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
               <Switch>
               <Route path="/" component={DashboardPage} />
