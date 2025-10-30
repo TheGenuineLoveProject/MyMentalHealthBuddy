@@ -17,6 +17,7 @@ import { devAuthFallback } from "./lib/authMiddleware.js";
 import { configureSecurityHeaders, getCorsOptions } from "./lib/securityHeaders.js";
 import { setupGracefulShutdown } from "./lib/gracefulShutdown.js";
 import { monitoring, monitoringMiddleware } from "./lib/monitoring.js";
+import { varyHeader } from "./lib/apiCache.js";
 const PgSession = connectPg(session);
 dotenv.config();
 const env = validateEnv();
@@ -166,6 +167,8 @@ app.get("/api/monitoring/stats", (req, res) => {
     const stats = monitoring.getMetricsSummary();
     res.json(stats);
 });
+// 360° Performance: Vary header for proper cache keying
+app.use('/api', varyHeader(['Authorization', 'Accept-Encoding', 'Accept']));
 // Register application routes
 registerRoutes(app);
 // 404 handler for API routes

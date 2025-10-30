@@ -6,6 +6,7 @@ import { DataExporter } from "./export.js";
 import { StripeService, stripe, SUBSCRIPTION_TIERS } from "./stripe-service.js";
 import { canvaService } from "./canva-service.js";
 import { requireAuth, requireTier, csrfProtection, generateCsrfToken, devAuthFallback } from "./lib/authMiddleware.js";
+import { apiCache, CACHE_PRESETS } from "./lib/apiCache.js";
 // Async handler wrapper for better error handling
 function asyncHandler(fn) {
     return (req, res, next) => {
@@ -165,8 +166,9 @@ export function registerRoutes(app) {
         const moodEntry = await storage.createMoodEntry(result.data);
         res.status(201).json(moodEntry);
     }));
-    // Get crisis resources endpoint
-    app.get("/api/crisis-resources", asyncHandler(async (req, res) => {
+    // Get crisis resources endpoint - PUBLIC with long caching
+    app.get("/api/crisis-resources", apiCache(CACHE_PRESETS.PUBLIC_LONG), // 1 hour cache for static reference data
+    asyncHandler(async (req, res) => {
         const country = Sanitizer.sanitizeString(req.query.country || "US").toUpperCase().slice(0, 2) || "US";
         const resources = await storage.getCrisisResourcesByCountry(country);
         res.json(resources);
