@@ -10,6 +10,7 @@
     "node": ">=20 <21"
   },
   "scripts": {
+    "weekly:chain": "./scripts/weeklyMaster.sh",
     "nightly:chain": "./scripts/nightlyMaster.sh",
     "nightly:translate": "./scripts/translateNightly.sh",
     "compare:graphs": "node scripts/compareGraphs.mjs",
