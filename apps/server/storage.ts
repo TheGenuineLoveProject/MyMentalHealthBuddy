@@ -30,6 +30,7 @@ import type {
   SelectAiUsageTracking,
   InsertAiUsageTracking
 } from "../shared/schema.js";
+import { PgStorage } from "./pg-storage.js";
 
 export interface IStorage {
   // User Management
@@ -400,4 +401,5 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage: IStorage = new MemStorage();
+// Switch to PostgreSQL for production persistence
+export const storage: IStorage = new PgStorage();
