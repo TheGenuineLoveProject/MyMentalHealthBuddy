@@ -3,6 +3,45 @@
  * Handles self-evolving intelligence using RAG (Retrieval Augmented Generation)
  * Ingests worldwide literature and provides AI-powered content generation
  * Part of the 360° self-evolving platform
+ * 
+ * VECTOR EMBEDDING INTEGRATION REQUIRED FOR FULL RAG FUNCTIONALITY:
+ * 
+ * Current State:
+ * - Content chunking: ✅ Implemented
+ * - Credibility scoring: ✅ Implemented
+ * - Vector embeddings: ⚠️  Requires OpenAI integration
+ * - Semantic search: ⚠️  Requires vector database (pgvector)
+ * 
+ * To Enable Full RAG:
+ * 1. Install pgvector extension in PostgreSQL
+ * 2. Add vector column to knowledge_chunks table
+ * 3. Integrate OpenAI embeddings API in chunkContent()
+ * 4. Implement vector similarity search in searchKnowledge()
+ * 5. Use vector search results in generateWithRAG()
+ * 
+ * Example Implementation:
+ * ```typescript
+ * // In chunkContent():
+ * const embedding = await openai.embeddings.create({
+ *   model: 'text-embedding-3-small',
+ *   input: chunkText
+ * });
+ * chunks.push({
+ *   ...chunk,
+ *   embedding: embedding.data[0].embedding // Store vector
+ * });
+ * 
+ * // In searchKnowledge():
+ * const queryEmbedding = await openai.embeddings.create({
+ *   model: 'text-embedding-3-small',
+ *   input: query
+ * });
+ * // Use pgvector to find similar chunks
+ * const results = await db.select()
+ *   .from(knowledgeChunks)
+ *   .orderBy(sql`embedding <=> ${queryEmbedding}`)
+ *   .limit(10);
+ * ```
  */
 
 import type { 
@@ -115,10 +154,17 @@ export class KnowledgeService {
 
     // Boost score if URL is from reputable domains
     if (params.url) {
-      const reputableDomains = ['edu', 'gov', 'org'];
-      const domain = new URL(params.url).hostname;
-      if (reputableDomains.some(d => domain.endsWith(`.${d}`))) {
-        score += 15;
+      try {
+        // Validate URL before parsing
+        const url = params.url.startsWith('http') ? params.url : `https://${params.url}`;
+        const domain = new URL(url).hostname;
+        const reputableDomains = ['edu', 'gov', 'org'];
+        if (reputableDomains.some(d => domain.endsWith(`.${d}`))) {
+          score += 15;
+        }
+      } catch (error) {
+        // Invalid URL - skip domain check but don't fail ingestion
+        console.warn('Invalid URL for credibility check:', params.url);
       }
     }
 
