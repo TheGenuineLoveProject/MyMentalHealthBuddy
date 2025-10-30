@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Route, Switch } from "wouter";
 import { Navigation } from "./components/Navigation";
 import { LoadingOverlay } from "./components/LoadingSpinner";
@@ -14,6 +14,7 @@ import { AccessibilityAnnouncer } from "./components/AccessibilityAnnouncer";
 import { OfflineIndicator } from "./components/OfflineIndicator";
 import { WebVitalsMonitor } from "./components/WebVitalsMonitor";
 import { NavigationProgress } from "./components/NavigationProgress";
+import { initializeCsrf } from "./lib/csrf";
 
 // Code Splitting: Lazy load pages for better initial bundle size
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
@@ -34,6 +35,13 @@ const ProductivityPage = lazy(() => import("./pages/ProductivityPage"));
 
 function AppContent() {
   const { toasts } = useToast();
+
+  // 360° Security: Initialize CSRF token on app load
+  useEffect(() => {
+    initializeCsrf().catch((error) => {
+      console.warn('[App] CSRF initialization failed:', error);
+    });
+  }, []);
 
   return (
     <CanvaProvider>

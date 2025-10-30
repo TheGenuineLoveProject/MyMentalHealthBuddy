@@ -10,5 +10,10 @@ while true; do
   npm run diagnose || true
   npm run heal || true
   npm run verify || true
+  echo "🤖 Spawning AI Employees..."
+  node server/core/ai-employees.mjs || true
+  echo "🧠  Running AI Governor + Employees..."
+  node server/core/ai-governor.mjs || true
+  node scripts/audit-compliance.mjs || true
   sleep 3600
 done

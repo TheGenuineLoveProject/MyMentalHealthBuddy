@@ -1,8 +1,9 @@
 import { QueryClient } from "@tanstack/react-query";
+import { attachCsrfToken, requiresCsrfToken } from "./csrf";
 
 /**
  * Enhanced Query Client with Advanced Error Handling & Retry Logic
- * 360° Optimization: Exponential backoff, smart retries, request timeouts
+ * 360° Optimization: Exponential backoff, smart retries, request timeouts, CSRF protection
  */
 
 // Request timeout for all API calls
@@ -86,19 +87,28 @@ export const queryClient = new QueryClient({
   }
 });
 
-// Enhanced API request helper with timeout and better error handling
+// Enhanced API request helper with timeout, CSRF protection, and better error handling
 export async function apiRequest(url: string, options: RequestInit = {}) {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
   
   try {
+    // Automatically attach CSRF token for state-changing requests
+    const method = options.method || 'GET';
+    let headers: HeadersInit = {
+      "Content-Type": "application/json",
+      ...options.headers
+    };
+    
+    if (requiresCsrfToken(method)) {
+      headers = await attachCsrfToken(headers) as Record<string, string>;
+    }
+    
     const res = await fetch(url, {
       ...options,
       signal: options.signal || controller.signal,
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers
-      }
+      headers,
+      credentials: 'include', // Include session cookie for authentication
     });
     
     clearTimeout(timeoutId);

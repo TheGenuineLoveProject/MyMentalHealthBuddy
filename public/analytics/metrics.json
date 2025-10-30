@@ -1,0 +1,25 @@
+{
+  "generated_at": "2025-10-30T03:48:26.052Z",
+  "lastHealth": 100,
+  "avgHealth": 100,
+  "complianceOKCount": 3,
+  "series": [
+    {
+      "t": "2025-10-30T02:36:46.144Z",
+      "health": 100
+    }
+  ],
+  "dauSeries": [
+    {
+      "d": "2025-10-30",
+      "dau": 1
+    }
+  ],
+  "sessionsSeries": [
+    {
+      "d": "2025-10-30",
+      "sessions": 1
+    }
+  ],
+  "publishCadence": 0
+}

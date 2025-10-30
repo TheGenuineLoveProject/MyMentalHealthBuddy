@@ -1,0 +1,41 @@
+<!doctype html><html><head>
+<meta charset="utf-8"/><title>Healing Analytics v12.7</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body{font-family:system-ui;margin:24px;max-width:980px}
+select,button{margin:6px;padding:6px 10px}
+canvas{margin-top:10px}
+</style></head><body>
+<h1>💚 Healing Analytics v12.7</h1>
+<label>🌍 Language:
+<select id="lang">
+<option value="en">English</option><option value="es">Español</option>
+<option value="fr">Français</option><option value="pt">Português</option>
+<option value="ko">한국어</option><option value="de">Deutsch</option><option value="ja">日本語</option>
+</select></label>
+<button onclick="loadSummary()">Load</button>
+<div id="summary"></div><button id="speak">🔊 Listen</button>
+<canvas id="compare" height="120"></canvas>
+<script>
+async function loadSummary(){
+ const lang=document.getElementById("lang").value;
+ const d=new Date().toISOString().slice(0,10);
+ try{
+  const s=await fetch(`./summaries/daily-${d}-${lang}.json`).then(r=>r.json());
+  document.getElementById("summary").textContent=s.summary;
+  document.getElementById("speak").onclick=()=>new Audio(`./audio/daily-${d}-${lang}.mp3`).play();
+ }catch{document.getElementById("summary").textContent="(No summary yet)";}
+}
+async function drawCompare(){
+ const data=await fetch("./charts/comparison.json").then(r=>r.json());
+ const ctx=document.getElementById("compare");
+ new Chart(ctx,{type:"line",data:{
+  labels:data.labels,
+  datasets:[
+    {label:"Mood",data:data.mood,borderColor:"#2b7"},
+    {label:"Compliance",data:data.compliance,borderColor:"#28f"},
+    {label:"AI Sentiment",data:data.sentiment,borderColor:"#f55"}]
+ }});
+}
+drawCompare();
+</script></body></html>
