@@ -1,4 +1,5 @@
 import type { Request, Response, NextFunction } from 'express';
+import crypto from 'crypto';
 
 /**
  * 360° Performance Optimization: API Response Caching Middleware
@@ -8,6 +9,31 @@ import type { Request, Response, NextFunction } from 'express';
  * - User-specific data: Short cache with private directive
  * - Real-time data: No caching
  */
+
+/**
+ * Deep stable JSON stringify with recursive key sorting
+ * Leverages JSON.stringify for proper type handling (Date, RegExp, etc.)
+ * while ensuring deterministic key order for plain objects
+ */
+function stableStringify(obj: any): string {
+  return JSON.stringify(obj, (key, value) => {
+    // For non-plain objects (Date, RegExp, etc.), let JSON.stringify handle them
+    if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+      // Check if it's a plain object (has Object.prototype or null prototype)
+      const proto = Object.getPrototypeOf(value);
+      if (proto === Object.prototype || proto === null) {
+        // Sort keys for plain objects only
+        const sorted: any = {};
+        Object.keys(value).sort().forEach(k => {
+          sorted[k] = value[k];
+        });
+        return sorted;
+      }
+    }
+    // Return value as-is for primitives, arrays, and special objects (Date, etc.)
+    return value;
+  });
+}
 
 export interface CacheConfig {
   maxAge: number; // seconds
@@ -105,19 +131,31 @@ export function apiCache(config: CacheConfig) {
       const originalJson = res.json.bind(res);
       res.json = function(body: any) {
         try {
-          // Generate ETag from response body
-          const etag = `"${Buffer.from(JSON.stringify(body)).toString('base64').substring(0, 27)}"`;
+          // Normalize JSON with deep stable stringify (recursive key sorting)
+          const bodyString = stableStringify(body);
+          
+          // Generate ETag from full response body using SHA-256 for collision-free fingerprinting
+          const hash = crypto.createHash('sha256').update(bodyString).digest('base64');
+          const etag = hash; // Strong ETag without quotes (added by setHeader)
           
           // Check if client has cached version (304 Not Modified)
-          if (req.headers['if-none-match'] === etag) {
-            // CRITICAL: Explicitly re-set headers in 304 response to guarantee persistence
-            res.setHeader('Cache-Control', cacheControlValue);
-            res.setHeader('ETag', etag);
-            return res.status(304).end();
+          // Support both strong and weak ETags by normalizing comparison
+          const clientEtag = req.headers['if-none-match'];
+          if (clientEtag) {
+            // Strip W/ prefix for weak validators and quotes
+            const normalizedClientEtag = clientEtag.replace(/^W\//, '').replace(/"/g, '');
+            const normalizedServerEtag = etag.replace(/"/g, '');
+            
+            if (normalizedClientEtag === normalizedServerEtag) {
+              // CRITICAL: Explicitly re-set headers in 304 response to guarantee persistence
+              res.setHeader('Cache-Control', cacheControlValue);
+              res.setHeader('ETag', `"${etag}"`); // Set with quotes for HTTP spec compliance
+              return res.status(304).end();
+            }
           }
           
-          // Set ETag for successful response
-          res.setHeader('ETag', etag);
+          // Set ETag for successful response (with quotes for HTTP spec compliance)
+          res.setHeader('ETag', `"${etag}"`);
         } catch (error) {
           // If ETag generation fails, just continue without it
           console.warn('[apiCache] ETag generation failed:', error);
