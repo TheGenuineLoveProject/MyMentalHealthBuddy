@@ -319,30 +319,7 @@ export const socialPostsHistory = pgTable("social_posts_history", {
 });
 
 // 360° Self-Evolving Platform: Phase 2 - AI Media Generation Tables
-export const mediaAssets = pgTable("media_assets", {
-  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: varchar("user_id").notNull().references(() => users.id),
-  filename: varchar("filename", { length: 255 }).notNull(),
-  originalName: varchar("original_name", { length: 255 }),
-  fileType: varchar("file_type", { length: 50 }).notNull(), // image, video, audio
-  mimeType: varchar("mime_type", { length: 100 }).notNull(),
-  fileSize: integer("file_size").notNull(), // bytes
-  width: integer("width"),
-  height: integer("height"),
-  duration: integer("duration"), // for video/audio in seconds
-  storageUrl: text("storage_url").notNull(),
-  thumbnailUrl: text("thumbnail_url"),
-  cdnUrl: text("cdn_url"),
-  generatedBy: varchar("generated_by", { length: 50 }), // openai, stability, user_upload
-  aiPromptId: varchar("ai_prompt_id").references(() => aiPrompts.id),
-  aiRunId: varchar("ai_run_id").references(() => aiRuns.id),
-  tags: text("tags").array(),
-  altText: text("alt_text"),
-  isPublic: boolean("is_public").default(false),
-  metadata: jsonb("metadata").default({}),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-});
-
+// IMPORTANT: aiPrompts and aiRuns declared FIRST to avoid forward reference errors
 export const aiPrompts = pgTable("ai_prompts", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   userId: varchar("user_id").references(() => users.id),
@@ -380,6 +357,31 @@ export const aiRuns = pgTable("ai_runs", {
   metadata: jsonb("metadata").default({}),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   completedAt: timestamp("completed_at"),
+});
+
+// mediaAssets declared AFTER aiPrompts and aiRuns to avoid forward reference
+export const mediaAssets = pgTable("media_assets", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").notNull().references(() => users.id),
+  filename: varchar("filename", { length: 255 }).notNull(),
+  originalName: varchar("original_name", { length: 255 }),
+  fileType: varchar("file_type", { length: 50 }).notNull(), // image, video, audio
+  mimeType: varchar("mime_type", { length: 100 }).notNull(),
+  fileSize: integer("file_size").notNull(), // bytes
+  width: integer("width"),
+  height: integer("height"),
+  duration: integer("duration"), // for video/audio in seconds
+  storageUrl: text("storage_url").notNull(),
+  thumbnailUrl: text("thumbnail_url"),
+  cdnUrl: text("cdn_url"),
+  generatedBy: varchar("generated_by", { length: 50 }), // openai, stability, user_upload
+  aiPromptId: varchar("ai_prompt_id").references(() => aiPrompts.id),
+  aiRunId: varchar("ai_run_id").references(() => aiRuns.id),
+  tags: text("tags").array(),
+  altText: text("alt_text"),
+  isPublic: boolean("is_public").default(false),
+  metadata: jsonb("metadata").default({}),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
 // 360° Self-Evolving Platform: Phase 3 - Knowledge & Learning Tables
