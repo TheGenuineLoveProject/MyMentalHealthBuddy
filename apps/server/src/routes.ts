@@ -1089,12 +1089,12 @@ export function registerRoutes(app: Express) {
       const aiRun = await storage.createAiRun({
         userId,
         model: 'gpt-image-1',
-        feature: 'image_generation',
-        inputTokens: 0,
-        outputTokens: 0,
-        totalCost: '0.02',
+        runType: 'image_generation',
+        inputPrompt: prompt,
         status: 'pending',
-        metadata: { prompt, size, quality },
+        tokensUsed: 0,
+        creditsUsed: '0.02',
+        metadata: { size, quality },
         createdAt: new Date(),
       });
       

@@ -597,13 +597,178 @@ export function registerRoutes(app) {
         // Example integrations:
         // - Google Analytics: gtag('event', 'web_vitals', metricsData)
         // - PostHog: posthog.capture('web_vitals', metricsData)
-        // - Plausible: plausible('Web Vitals', { props: metricsData })
+        // - Plausible: plausible('Web Vitals', { props: metricsData})
         // Store metrics for performance dashboard (optional)
         // await storage.savePerformanceMetrics(metricsData);
         res.status(200).json({
             success: true,
             message: 'Metrics logged successfully'
         });
+    }));
+    // ============================================
+    // SOCIAL MEDIA MANAGEMENT - 360° PLATFORM
+    // ============================================
+    // Get connected social media accounts
+    app.get("/api/social/accounts", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const accounts = await storage.getSocialAccountsByUserId(userId);
+        res.json(accounts);
+    }));
+    // Connect new social media account
+    app.post("/api/social/accounts", devAuthFallback, requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const accountData = Sanitizer.sanitizeObject(req.body);
+        const account = await storage.createSocialAccount({
+            ...accountData,
+            userId,
+            isActive: true,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
+        res.status(201).json(account);
+    }));
+    // Get social media profiles for an account
+    app.get("/api/social/accounts/:accountId/profiles", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const { accountId } = req.params;
+        const profiles = await storage.getSocialProfilesByAccountId(accountId);
+        res.json(profiles);
+    }));
+    // Get all social media posts
+    app.get("/api/social/posts", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const posts = await storage.getSocialPostsByUserId(userId);
+        res.json(posts);
+    }));
+    // Create new social media post
+    app.post("/api/social/posts", devAuthFallback, requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const postData = Sanitizer.sanitizeObject(req.body);
+        const post = await storage.createSocialPost({
+            ...postData,
+            userId,
+            status: 'published',
+            publishedAt: new Date(),
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
+        res.status(201).json(post);
+    }));
+    // ============================================
+    // AI IMAGE GENERATION - 360° PLATFORM
+    // ============================================
+    // Get user's media assets
+    app.get("/api/media/assets", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const assets = await storage.getMediaAssetsByUserId(userId);
+        res.json(assets);
+    }));
+    // Generate AI image
+    app.post("/api/media/generate", devAuthFallback, requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const { prompt, size, quality } = Sanitizer.sanitizeObject(req.body);
+        // Create AI run tracking
+        const aiRun = await storage.createAiRun({
+            userId,
+            model: 'gpt-image-1',
+            runType: 'image_generation',
+            inputPrompt: prompt,
+            status: 'pending',
+            tokensUsed: 0,
+            creditsUsed: '0.02',
+            metadata: { size, quality },
+            createdAt: new Date(),
+        });
+        res.status(202).json({
+            message: 'Image generation started',
+            runId: aiRun.id
+        });
+    }));
+    // ============================================
+    // AI PROMPTS MANAGEMENT - 360° PLATFORM
+    // ============================================
+    // Get AI prompts
+    app.get("/api/ai/prompts", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const { category } = req.query;
+        const prompts = category
+            ? await storage.getAiPromptsByCategory(category)
+            : await storage.getAiPromptsByUserId(userId);
+        res.json(prompts);
+    }));
+    // Create AI prompt template
+    app.post("/api/ai/prompts", devAuthFallback, requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const promptData = Sanitizer.sanitizeObject(req.body);
+        const prompt = await storage.createAiPrompt({
+            ...promptData,
+            userId,
+            usageCount: 0,
+            avgQualityScore: null,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
+        res.status(201).json(prompt);
+    }));
+    // ============================================
+    // KNOWLEDGE MANAGEMENT - SELF-EVOLVING AI
+    // ============================================
+    // Get knowledge sources
+    app.get("/api/knowledge/sources", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const sources = await storage.getKnowledgeSourcesByUserId(userId);
+        res.json(sources);
+    }));
+    // Ingest new knowledge
+    app.post("/api/knowledge/ingest", devAuthFallback, requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const { title, content, sourceType, url, category } = Sanitizer.sanitizeObject(req.body);
+        const source = await storage.createKnowledgeSource({
+            userId,
+            title,
+            sourceType,
+            sourceUrl: url || null,
+            category: category || null,
+            status: 'active',
+            language: 'en',
+            credibilityScore: '3.00',
+            metadata: { wordCount: content.split(/\s+/).length },
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
+        res.status(201).json(source);
+    }));
+    // Get knowledge chunks for a source
+    app.get("/api/knowledge/sources/:sourceId/chunks", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const { sourceId } = req.params;
+        const chunks = await storage.getKnowledgeChunksBySourceId(sourceId);
+        res.json(chunks);
+    }));
+    // ============================================
+    // AI USAGE TRACKING & ANALYTICS
+    // ============================================
+    // Get AI usage statistics
+    app.get("/api/ai/usage", devAuthFallback, requireAuth, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const usage = await storage.getAiUsageByUserId(userId);
+        res.json(usage);
+    }));
+    // Track AI usage
+    app.post("/api/ai/usage", devAuthFallback, requireAuth, csrfProtection, asyncHandler(async (req, res) => {
+        const userId = req.userId;
+        const usageData = Sanitizer.sanitizeObject(req.body);
+        const usage = await storage.createAiUsageTracking({
+            userId,
+            date: new Date(),
+            feature: usageData.feature,
+            model: usageData.model || null,
+            requestCount: usageData.requestCount || 1,
+            tokensUsed: usageData.tokensUsed || 0,
+            creditsUsed: usageData.creditsUsed || '0',
+            successCount: usageData.successCount || 1,
+            failureCount: usageData.failureCount || 0,
+            metadata: usageData.metadata || {},
+        });
+        res.status(201).json(usage);
     }));
     // Health Check Endpoint
     app.get("/api/health", (req, res) => {
