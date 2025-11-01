@@ -38,7 +38,13 @@ function log(line) {
 function runCommand(cmd, name, role) {
   const logFile = `${LOG_DIR}/${role}.log`;
   log(`🚀 ${name} (${role}) → ${cmd}`);
-  const proc = exec(cmd, { shell: "/bin/bash" });
+  
+  // Parse command to separate executable and arguments (no shell invocation)
+  const parts = cmd.split(/\s+/);
+  const executable = parts[0];
+  const args = parts.slice(1);
+  
+  const proc = spawn(executable, args);
   proc.stdout.on("data", d => {
     fs.appendFileSync(logFile, d);
     process.stdout.write(d);
