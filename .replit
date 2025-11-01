@@ -2,14 +2,6 @@ run = "npm run start:all"
 hidden = [".cache", "node_modules", ".pnpm"]
 modules = ["nodejs-20", "postgresql-16"]
 
-run = "bash scripts/heal-now.sh"
-
-[env]
-# (Optional secrets for GitHub automation)
-# GH_TOKEN = ""
-# GH_OWNER = ""
-# GH_REPO  = ""
-
 [agent]
 expertMode = true
 integrations = [
@@ -44,6 +36,14 @@ waitForPort = 5000
 [[ports]]
 localPort = 5000
 externalPort = 5000
+
+[[ports]]
+localPort = 24678
+externalPort = 80
+
+[[ports]]
+localPort = 34683
+externalPort = 3000
 
 [nix]
 channel = "stable-25_05"
