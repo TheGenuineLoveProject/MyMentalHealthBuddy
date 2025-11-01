@@ -15,6 +15,7 @@ export {
   knowledgeSources,
   knowledgeChunks,
   aiUsageTracking,
+  auditLogs,
   type User,
   type InsertUser,
   type HealingMessage,
@@ -47,6 +48,8 @@ export {
   type InsertKnowledgeChunk,
   type SelectAiUsageTracking,
   type InsertAiUsageTracking,
+  type SelectAuditLog,
+  type InsertAuditLog,
   insertUserSchema,
   insertHealingMessageSchema,
   insertJournalSchema,
@@ -63,5 +66,6 @@ export {
   insertKnowledgeSourceSchema,
   insertKnowledgeChunkSchema,
   insertAiUsageTrackingSchema,
+  insertAuditLogSchema,
   healingRequestSchema,
 } from "./db-schema.js";

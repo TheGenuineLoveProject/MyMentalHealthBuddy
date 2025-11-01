@@ -99,26 +99,46 @@ export function getOrCreateSessionId(req: Request): string {
 
 /**
  * Admin middleware - Requires authenticated user with admin role
+ * Queries database to verify admin status for security
  */
-export function requireAdmin(req: Request, res: Response, next: NextFunction) {
-  if (!req.session || !req.session.userId) {
-    return res.status(401).json({
-      error: 'Authentication required',
-      message: 'Please log in to access this resource'
-    });
-  }
+export function requireAdmin(storageInstance: any) {
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      if (!req.session || !req.session.userId) {
+        return res.status(401).json({
+          error: 'Authentication required',
+          message: 'Please log in to access this resource'
+        });
+      }
 
-  // Check if user is admin (you'll need to add this field to your user schema)
-  // For now, we'll check if the user has an admin flag in session
-  if (!req.session.isAdmin) {
-    return res.status(403).json({
-      error: 'Forbidden',
-      message: 'Administrator access required'
-    });
-  }
+      const userId = req.session.userId;
+      const user = await storageInstance.getUserById(userId);
+      
+      if (!user) {
+        return res.status(401).json({
+          error: 'User not found',
+          message: 'Your account could not be verified'
+        });
+      }
 
-  req.userId = req.session.userId;
-  next();
+      if (!user.isAdmin) {
+        return res.status(403).json({
+          error: 'Forbidden',
+          message: 'Administrator access required'
+        });
+      }
+
+      req.userId = userId;
+      req.session.isAdmin = true;
+      next();
+    } catch (error) {
+      console.error('Admin auth error:', error);
+      res.status(500).json({
+        error: 'Authorization check failed',
+        message: 'Unable to verify admin status'
+      });
+    }
+  };
 }
 
 /**

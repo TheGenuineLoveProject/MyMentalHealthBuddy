@@ -27,6 +27,7 @@ import {
   devAuthFallback
 } from "./lib/authMiddleware.js";
 import { apiCache, CACHE_PRESETS } from "./lib/apiCache.js";
+import { healthCheckHandler, livenessHandler, readinessHandler } from "./lib/healthCheck.js";
 
 // Async handler wrapper for better error handling
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
@@ -52,6 +53,19 @@ function rateLimitMiddleware(limiter: typeof apiRateLimiter) {
 }
 
 export function registerRoutes(app: Express) {
+  // ============================================
+  // HEALTH CHECK ENDPOINTS
+  // ============================================
+  
+  // Comprehensive health check with all dependency status
+  app.get("/api/health", healthCheckHandler(storage));
+  
+  // Liveness probe - simple check that service is running
+  app.get("/api/health/live", livenessHandler);
+  
+  // Readiness probe - check if service is ready to accept traffic
+  app.get("/api/health/ready", readinessHandler(storage));
+  
   // ============================================
   // CSRF TOKEN ENDPOINT
   // ============================================
@@ -1242,16 +1256,6 @@ export function registerRoutes(app: Express) {
     })
   );
 
-  // Health Check Endpoint
-  app.get("/api/health", (req, res) => {
-    res.json({ 
-      status: 'healthy',
-      timestamp: new Date().toISOString(),
-      uptime: process.uptime(),
-      environment: process.env.NODE_ENV || 'development'
-    });
-  });
-
   // Monitoring Dashboard Data Endpoint
   app.get("/api/monitoring/stats",
     rateLimitMiddleware(apiRateLimiter),
@@ -1276,8 +1280,8 @@ export function registerRoutes(app: Express) {
       });
     })
   );
+  
+  // Auto-added: Analytics endpoints
+  try { registerAnalytics(app as any); } catch { /* noop */ }
 }
-
-// Auto-added: Analytics endpoints
-try { registerAnalytics(app as any); } catch { /* noop */ }
 
