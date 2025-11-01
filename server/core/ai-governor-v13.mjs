@@ -39,12 +39,9 @@ function runCommand(cmd, name, role) {
   const logFile = `${LOG_DIR}/${role}.log`;
   log(`🚀 ${name} (${role}) → ${cmd}`);
   
-  // Parse command to separate executable and arguments (no shell invocation)
-  const parts = cmd.split(/\s+/);
-  const executable = parts[0];
-  const args = parts.slice(1);
-  
-  const proc = spawn(executable, args);
+  // Commands come from trusted static AI_EMPLOYEES config (not user input)
+  // Use shell: true to support npm scripts and shell operators like &&
+  const proc = spawn(cmd, [], { shell: true });
   proc.stdout.on("data", d => {
     fs.appendFileSync(logFile, d);
     process.stdout.write(d);
