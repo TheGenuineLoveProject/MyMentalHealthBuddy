@@ -1,66 +1,38 @@
-#!/usr/bin/env node
-import { readdirSync, readFileSync } from "fs";
-import path from "path";
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import fs from 'fs';
+import path from 'path';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-const required = ["S3_BUCKET", "S3_REGION", "S3_ENDPOINT", "S3_ACCESS_KEY", "S3_SECRET_KEY"];
-for (const key of required) {
-  if (!process.env[key] || process.env[key].trim() === "") {
-    console.error(`❌ Missing environment variable: ${key}`);
-    process.exit(1);
-  }
-}
+const endpoint = process.env.S3_ENDPOINT?.trim();
+const region = process.env.S3_REGION?.trim() || 'us-east-1';
+const bucket = process.env.S3_BUCKET?.trim();
+const accessKeyId = process.env.S3_ACCESS_KEY?.trim();
+const secretAccessKey = process.env.S3_SECRET_KEY?.trim();
 
-const folder = "public/analytics/covers";
-const bucket = process.env.S3_BUCKET;
+function fail(msg){ console.error("❌", msg); process.exit(1); }
+
+if(!endpoint) fail("Missing S3_ENDPOINT");
+if(!bucket)   fail("Missing S3_BUCKET");
+if(!accessKeyId || !secretAccessKey) fail("Missing S3_ACCESS_KEY / S3_SECRET_KEY");
+
 const s3 = new S3Client({
-  region: process.env.S3_REGION,
-  endpoint: process.env.S3_ENDPOINT,
-  credentials: {
-    accessKeyId: process.env.S3_ACCESS_KEY,
-    secretAccessKey: process.env.S3_SECRET_KEY,
-  },
-  forcePathStyle: true,
+  endpoint, region,
+  credentials: { accessKeyId, secretAccessKey },
+  forcePathStyle: true
 });
 
-function detectMime(filename) {
-  const ext = filename.split(".").pop().toLowerCase();
-  return {
-    png: "image/png",
-    jpg: "image/jpeg",
-    jpeg: "image/jpeg",
-    webp: "image/webp",
-    svg: "image/svg+xml",
-  }[ext] || "application/octet-stream";
-}
+const folder = 'public/analytics/covers';
 
-async function uploadAll() {
-  const files = readdirSync(folder).filter(f => /\.(png|jpg|jpeg|webp|svg)$/i.test(f));
-  if (files.length === 0) {
-    console.log(`⚠️ No images found in ${folder}`);
-    return;
+async function main(){
+  const files = fs.readdirSync(folder).filter(f => f.endsWith('.png') || f.endsWith('.jpg') || f.endsWith('.jpeg'));
+  if(files.length === 0){ console.log("ℹ️ No cover images found in", folder); return; }
+  for(const f of files){
+    const Body = fs.readFileSync(path.join(folder,f));
+    const Key = `covers/${f}`;
+    await s3.send(new PutObjectCommand({ Bucket: bucket, Key, Body, ACL: 'public-read', ContentType: f.endsWith('.png')?'image/png':'image/jpeg' }));
+    const host = endpoint.replace(/^https?:\/\//,'').replace(/\/$/,'');
+    // Works for Spaces (path style) and MinIO; adjust if needed for AWS virtual host style
+    const url = `${endpoint.replace(/\/$/,'')}/${bucket}/${Key}`;
+    console.log(`✅ Uploaded: ${url}`);
   }
-  console.log(`📤 Uploading ${files.length} files to bucket '${bucket}'...`);
-
-  for (const file of files) {
-    const filePath = path.join(folder, file);
-    const Body = readFileSync(filePath);
-    const Key = `covers/${file}`;
-    try {
-      await s3.send(new PutObjectCommand({
-        Bucket: bucket,
-        Key,
-        Body,
-        ACL: "public-read",
-        ContentType: detectMime(file),
-      }));
-      const publicUrl = `${process.env.S3_ENDPOINT.replace(/\/$/, '')}/${bucket}/${Key}`;
-      console.log(`✅ Uploaded: ${publicUrl}`);
-    } catch (err) {
-      console.error(`❌ Upload failed for ${file}:`, err.message);
-    }
-  }
-  console.log("🎉 Upload complete.");
 }
-
-uploadAll().catch(err => console.error("Uploader crashed:", err));
+main().catch(e=>{ console.error(e); process.exit(1); });

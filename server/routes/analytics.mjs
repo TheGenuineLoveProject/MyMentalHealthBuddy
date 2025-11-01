@@ -1,14 +1,22 @@
-import express from "express";
-const router = express.Router();
+import { Router } from 'express';
+const r = Router();
 
-router.get("/snapshots", (req, res) => {
-  const now = new Date().toISOString();
-  const analytics = [
-    { id: 1, metric: "Active Users", value: 122, timestamp: now },
-    { id: 2, metric: "Mood Improvement", value: 93, timestamp: now },
-    { id: 3, metric: "Engagement Score", value: 98, timestamp: now },
-  ];
-  res.json({ success: true, analytics });
+// stub snapshot model
+const FAKE_SNAPSHOTS = [
+  { id: 1, date: new Date().toISOString(), metrics: { DAU: 123, EngagementScore: 96 } }
+];
+
+r.get('/snapshots', async (_req,res) => {
+  try { res.json(FAKE_SNAPSHOTS); }
+  catch(err){ console.error('analytics snapshots error', err); res.status(500).json({error:'snapshots failed'}); }
 });
 
-export default router;
+r.post('/snapshot', async (req,res) => {
+  try {
+    const item = { id: Date.now(), date: new Date().toISOString(), metrics: req.body?.metrics||{} };
+    FAKE_SNAPSHOTS.push(item);
+    res.status(201).json(item);
+  } catch(err){ console.error('analytics save error', err); res.status(500).json({error:'save failed'}); }
+});
+
+export default r;

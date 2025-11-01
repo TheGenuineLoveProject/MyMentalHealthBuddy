@@ -1,3 +1,4 @@
+import { registerAnalytics } from "./routes.analytics";
 import type { Express, Request, Response, NextFunction } from "express";
 import { storage } from "../storage.js";
 import { 
@@ -1276,3 +1277,7 @@ export function registerRoutes(app: Express) {
     })
   );
 }
+
+// Auto-added: Analytics endpoints
+try { registerAnalytics(app as any); } catch { /* noop */ }
+

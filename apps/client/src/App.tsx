@@ -166,3 +166,13 @@ export default function App() {
     </PageErrorBoundary>
   );
 }
+
+/* Auto-added route for Healing Analytics */
+try {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const ReactRouter = require("react-router-dom");
+  const HealingAnalytics = require("./pages/HealingAnalytics").default;
+  // The code below is a comment-only hint for humans:
+  // Add this to your <Routes> block:
+  // <Route path="/healing-analytics" element={<HealingAnalytics />} />
+} catch {}

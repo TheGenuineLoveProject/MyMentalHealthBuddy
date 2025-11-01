@@ -1,33 +1,15 @@
-#!/usr/bin/env node
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-
-const blogDir = "content/blog";
-const reports = [];
-
-function validateAPA(front) {
-  const required = ["title","authors","source","year","apa_citation"];
-  const missing = required.filter(k => !front[k]);
-  return {
-    valid: missing.length === 0,
-    missing,
-  };
+import fs from 'fs';
+import path from 'path';
+import matter from 'gray-matter';
+const dir = 'content/blog';
+const req = ["title","authors","source","year","apa_citation"];
+const rows = [];
+if(!fs.existsSync(dir)){ console.log("ℹ️ no content/blog directory"); process.exit(0); }
+for(const f of fs.readdirSync(dir).filter(x=>x.endsWith('.md')||x.endsWith('.mdx'))){
+  const raw = fs.readFileSync(path.join(dir,f),'utf8');
+  const { data } = matter(raw);
+  const missing = req.filter(k=>!data[k]);
+  rows.push({ file:f, valid: missing.length===0, missing: missing.join(', ')||'—', title: data.title||'(untitled)' });
 }
-
-fs.readdirSync(blogDir).filter(f => f.endsWith(".md") || f.endsWith(".mdx")).forEach(file => {
-  const raw = fs.readFileSync(path.join(blogDir,file),"utf8");
-  const { data:front } = matter(raw);
-  const check = validateAPA(front);
-  reports.push({
-    file,
-    valid: check.valid,
-    missing: check.missing,
-    title: front.title || "Untitled",
-  });
-});
-
-console.log("📘 APA Validation Report:");
-console.table(reports);
-const validCount = reports.filter(r => r.valid).length;
-console.log(`✅ ${validCount}/${reports.length} content files have complete APA metadata.`);
+console.log("\n📚 APA Validation Report"); console.table(rows);
+const ok = rows.every(r=>r.valid); if(!ok) process.exitCode = 1;
