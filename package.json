@@ -56,7 +56,8 @@
     "upload:images": "node scripts/s3-uploader.mjs",
     "governor:v14": "node server/core/ai-governor-v14.mjs",
     "publish": "node scripts/publisher.mjs",
-    "validate:apa": "node scripts/validate-apa.mjs"
+    "validate:apa": "node scripts/validate-apa.mjs",
+    "heal:all": "node scripts/autoHeal.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.922.0",
