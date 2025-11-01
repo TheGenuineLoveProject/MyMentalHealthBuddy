@@ -8,7 +8,16 @@ import { AI_EMPLOYEES } from "./ai-employees.mjs";
 
 console.log("🧠 Starting AI Governor…");
 
+// Allowlist of valid commands from AI_EMPLOYEES (defense-in-depth)
+const VALID_COMMANDS = new Set(AI_EMPLOYEES.map(emp => emp.command));
+
 function runCommand(cmd, name, role) {
+  // Validate command is from known allowlist
+  if (!VALID_COMMANDS.has(cmd)) {
+    console.error(`❌ Security: Rejected unknown command: ${cmd}`);
+    return;
+  }
+  
   console.log(`🚀 ${name} (${role}) → ${cmd}`);
   const proc = exec(cmd, { shell: "/bin/bash" });
   proc.stdout.on("data", d => process.stdout.write(`   ${d}`));
