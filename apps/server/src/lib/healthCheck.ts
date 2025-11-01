@@ -39,13 +39,19 @@ async function checkDatabase(storageInstance: any): Promise<HealthStatus> {
     }
     const responseTime = Date.now() - startTime;
     
+    // Get live pool stats if available
+    const poolStats = storageInstance.getPoolStats ? storageInstance.getPoolStats() : null;
+    
     return {
       status: responseTime < 100 ? 'pass' : responseTime < 500 ? 'warn' : 'fail',
       message: 'Database connection successful',
       responseTime,
-      details: {
-        connectionPoolSize: 'N/A',
-        activeConnections: 'N/A'
+      details: poolStats ? {
+        totalConnections: poolStats.total,
+        idleConnections: poolStats.idle,
+        waitingRequests: poolStats.waiting
+      } : {
+        poolMonitoring: 'Not available'
       }
     };
   } catch (error: any) {

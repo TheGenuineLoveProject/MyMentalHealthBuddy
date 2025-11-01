@@ -11,7 +11,7 @@ User requirement: "360 degrees to 10000000000% perfection" implementation.
 
 ## Recent Improvements (October 2025)
 
-### 360° Infrastructure & Security Enhancements (November 1, 2025) - LATEST
+### 360° Infrastructure & Monitoring Enhancements (November 1, 2025) - LATEST
 -   **⚠️ CRITICAL: Database Migration Required**: Schema changes made - you MUST run `npm run db:push` before deployment. See MIGRATION_REQUIRED.md for complete instructions.
 -   **Admin Authentication**: Added `isAdmin` boolean field to users table for proper role-based access control. Updated `requireAdmin` middleware to query database for real-time admin verification instead of session-only checks.
 -   **Comprehensive Health Monitoring**: Implemented production-grade health check system with three endpoints:
@@ -31,6 +31,7 @@ User requirement: "360 degrees to 10000000000% perfection" implementation.
     -   Console fallback when database logging unavailable
 -   **Schema Exports**: Added auditLogs table and related types to shared schema exports for proper type safety
 -   **Code Splitting**: Verified all major pages use lazy loading (already implemented) for optimal bundle size
+-   **Database Query Optimization**: Implemented Autoscale-optimized connection pool configuration in PgStorage (max:10, min:0, allowExitOnIdle:true) for proper scale-to-zero behavior. Added getPoolStats() and healthCheck() methods. Updated health monitoring to display live pool statistics. Created comprehensive DATABASE_QUERY_OPTIMIZATION.md guide covering cachedQuery, QueryBatcher, paginatedQuery, and optimizedQuery helpers with real-world examples.
 -   **Production-Grade PWA Enhancements**: Enhanced service worker (v2.0.0) with intelligent caching strategies:
     -   Cache-first with expiration for images (7-day TTL)
     -   Stale-while-revalidate for scripts/styles
