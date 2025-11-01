@@ -14,10 +14,37 @@ export function registerServiceWorker() {
           setInterval(() => {
             registration.update();
           }, 60 * 60 * 1000);
+          
+          // Listen for service worker updates
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            if (newWorker) {
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  console.log('New Service Worker available - refresh to update');
+                  // Optionally show update notification to user
+                }
+              });
+            }
+          });
         })
         .catch((error) => {
           console.error('Service Worker registration failed:', error);
         });
+      
+      // Listen for messages from service worker
+      navigator.serviceWorker.addEventListener('message', async (event) => {
+        if (event.data && event.data.type === 'SYNC_QUEUE') {
+          console.log('Service Worker: Sync queue message received');
+          // Trigger offline queue sync
+          try {
+            const { offlineManager } = await import('./lib/offlineManager');
+            await offlineManager.syncQueue();
+          } catch (error) {
+            console.error('Failed to sync offline queue:', error);
+          }
+        }
+      });
     });
   }
 }
