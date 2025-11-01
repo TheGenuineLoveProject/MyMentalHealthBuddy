@@ -3,3 +3,7 @@ import aiRouter from "./routes/ai.js";
 app.use("/api/ai", aiRouter);
 import aiDashboard from "./routes/ai-dashboard.mjs";
 app.use(aiDashboard);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});

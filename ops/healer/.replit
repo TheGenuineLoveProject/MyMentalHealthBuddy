@@ -1,0 +1,7 @@
+run = "bash scripts/heal-now.sh"
+
+[env]
+# Optional GitHub secrets for automatic pull requests:
+# GH_TOKEN = "ghp_yourtoken"
+# GH_OWNER = "your-username"
+# GH_REPO  = "your-repo"

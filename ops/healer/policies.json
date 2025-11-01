@@ -1,0 +1,4 @@
+{
+  "autoMerge": { "enabled": false, "allowedFixTypes": ["lint-fix","dep-patch","regen-lock"], "requireGreenCI": true, "requireChecks": ["build","test","lint"] },
+  "approval": { "requireHumanFor": ["type:security","type:major-dep-upgrade","type:db-migration","type:auth","type:payments","type:infra"] }
+}
