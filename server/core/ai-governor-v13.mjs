@@ -3,7 +3,7 @@
 // Adds logging, pause/resume, and optional S3 upload for report images.
 
 import fs from "fs";
-import { exec } from "child_process";
+import { spawn } from "child_process";
 import { AI_EMPLOYEES } from "./ai-employees.mjs";
 
 // ---- CONFIG ----
