@@ -2,6 +2,14 @@ run = "npm run start:all"
 hidden = [".cache", "node_modules", ".pnpm"]
 modules = ["nodejs-20", "postgresql-16"]
 
+run = "bash scripts/heal-now.sh"
+
+[env]
+# Optional GitHub secrets for auto-PRs
+# GH_TOKEN = "ghp_yourtoken"
+# GH_OWNER = "your-username"
+# GH_REPO  = "your-repo"
+
 [agent]
 expertMode = true
 integrations = [
