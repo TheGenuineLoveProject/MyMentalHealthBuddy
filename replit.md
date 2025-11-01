@@ -12,6 +12,7 @@ User requirement: "360 degrees to 10000000000% perfection" implementation.
 ## Recent Improvements (October 2025)
 
 ### 360° Infrastructure & Security Enhancements (November 1, 2025) - LATEST
+-   **⚠️ CRITICAL: Database Migration Required**: Schema changes made - you MUST run `npm run db:push` before deployment. See MIGRATION_REQUIRED.md for complete instructions.
 -   **Admin Authentication**: Added `isAdmin` boolean field to users table for proper role-based access control. Updated `requireAdmin` middleware to query database for real-time admin verification instead of session-only checks.
 -   **Comprehensive Health Monitoring**: Implemented production-grade health check system with three endpoints:
     -   `/api/health` - Full system health check monitoring database, memory, OpenAI, and Stripe dependencies
