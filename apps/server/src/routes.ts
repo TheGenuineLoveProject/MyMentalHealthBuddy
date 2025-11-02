@@ -1,4 +1,4 @@
-import { registerAnalytics } from "./routes.analytics";
+import { registerAnalytics } from "./routes.analytics.js";
 import type { Express, Request, Response, NextFunction } from "express";
 import { storage } from "../storage.js";
 import { 

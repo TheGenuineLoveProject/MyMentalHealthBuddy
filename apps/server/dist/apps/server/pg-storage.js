@@ -11,10 +11,34 @@ export class PgStorage {
         if (!dbUrl) {
             throw new Error("DATABASE_URL environment variable is required for PgStorage");
         }
+        // Autoscale-optimized connection pool configuration
         this.pool = new Pool({
             connectionString: dbUrl,
+            max: 10, // Conservative max connections per instance
+            min: 0, // CRITICAL: Allow scale-to-zero (no pre-warming)
+            idleTimeoutMillis: 30000, // Close idle connections after 30s
+            connectionTimeoutMillis: 5000, // Timeout for acquiring connections
+            allowExitOnIdle: true, // Allow pool to exit when idle (scale-to-zero)
+            statement_timeout: 30000, // Prevent runaway queries (30s limit)
+            query_timeout: 30000, // Overall query timeout (30s limit)
         });
         this.db = drizzle(this.pool);
+    }
+    /**
+     * Get connection pool statistics for monitoring
+     */
+    getPoolStats() {
+        return {
+            total: this.pool.totalCount,
+            idle: this.pool.idleCount,
+            waiting: this.pool.waitingCount,
+        };
+    }
+    /**
+     * Health check method for testing database connectivity
+     */
+    async healthCheck() {
+        await this.pool.query('SELECT 1');
     }
     async createUser(insertUser) {
         const [user] = await this.db

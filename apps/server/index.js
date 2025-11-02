@@ -6,7 +6,6 @@ const morgan = require('morgan');
 const { z } = require('zod');
 require('dotenv').config();
 
-const PORT = process.env.PORT || 5000;
 const app = express();
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
@@ -27,4 +26,5 @@ app.post('/api/echo', (req, res) => {
 app.use((_req,res)=>res.status(404).json({ ok:false, error:'Not Found' }));
 app.use((err,_req,res,_next)=>{ console.error(err); res.status(500).json({ ok:false, error:'Internal Server Error' }); });
 
-app.listen(PORT, () => console.log('✅ Server listening on', PORT));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server listening on port ${PORT}`));

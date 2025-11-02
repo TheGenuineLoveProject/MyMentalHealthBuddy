@@ -64,24 +64,43 @@ export function getOrCreateSessionId(req) {
 }
 /**
  * Admin middleware - Requires authenticated user with admin role
+ * Queries database to verify admin status for security
  */
-export function requireAdmin(req, res, next) {
-    if (!req.session || !req.session.userId) {
-        return res.status(401).json({
-            error: 'Authentication required',
-            message: 'Please log in to access this resource'
-        });
-    }
-    // Check if user is admin (you'll need to add this field to your user schema)
-    // For now, we'll check if the user has an admin flag in session
-    if (!req.session.isAdmin) {
-        return res.status(403).json({
-            error: 'Forbidden',
-            message: 'Administrator access required'
-        });
-    }
-    req.userId = req.session.userId;
-    next();
+export function requireAdmin(storageInstance) {
+    return async (req, res, next) => {
+        try {
+            if (!req.session || !req.session.userId) {
+                return res.status(401).json({
+                    error: 'Authentication required',
+                    message: 'Please log in to access this resource'
+                });
+            }
+            const userId = req.session.userId;
+            const user = await storageInstance.getUserById(userId);
+            if (!user) {
+                return res.status(401).json({
+                    error: 'User not found',
+                    message: 'Your account could not be verified'
+                });
+            }
+            if (!user.isAdmin) {
+                return res.status(403).json({
+                    error: 'Forbidden',
+                    message: 'Administrator access required'
+                });
+            }
+            req.userId = userId;
+            req.session.isAdmin = true;
+            next();
+        }
+        catch (error) {
+            console.error('Admin auth error:', error);
+            res.status(500).json({
+                error: 'Authorization check failed',
+                message: 'Unable to verify admin status'
+            });
+        }
+    };
 }
 /**
  * Rate limit by user ID (for authenticated users)

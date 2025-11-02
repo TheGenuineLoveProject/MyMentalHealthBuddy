@@ -1,3 +1,4 @@
+import { registerAnalytics } from "./routes.analytics.js";
 import { storage } from "../storage.js";
 import { insertJournalSchema, insertMoodEntrySchema, healingRequestSchema, insertBillingTransactionSchema } from "../../shared/schema.js";
 import { generateChatResponse } from "./openai.js";
@@ -7,6 +8,7 @@ import { StripeService, stripe, SUBSCRIPTION_TIERS } from "./stripe-service.js";
 import { canvaService } from "./canva-service.js";
 import { requireAuth, requireTier, csrfProtection, generateCsrfToken, devAuthFallback } from "./lib/authMiddleware.js";
 import { apiCache, CACHE_PRESETS } from "./lib/apiCache.js";
+import { healthCheckHandler, livenessHandler, readinessHandler } from "./lib/healthCheck.js";
 // Async handler wrapper for better error handling
 function asyncHandler(fn) {
     return (req, res, next) => {
@@ -27,6 +29,15 @@ function rateLimitMiddleware(limiter) {
     };
 }
 export function registerRoutes(app) {
+    // ============================================
+    // HEALTH CHECK ENDPOINTS
+    // ============================================
+    // Comprehensive health check with all dependency status
+    app.get("/api/health", healthCheckHandler(storage));
+    // Liveness probe - simple check that service is running
+    app.get("/api/health/live", livenessHandler);
+    // Readiness probe - check if service is ready to accept traffic
+    app.get("/api/health/ready", readinessHandler(storage));
     // ============================================
     // CSRF TOKEN ENDPOINT
     // ============================================
@@ -770,15 +781,6 @@ export function registerRoutes(app) {
         });
         res.status(201).json(usage);
     }));
-    // Health Check Endpoint
-    app.get("/api/health", (req, res) => {
-        res.json({
-            status: 'healthy',
-            timestamp: new Date().toISOString(),
-            uptime: process.uptime(),
-            environment: process.env.NODE_ENV || 'development'
-        });
-    });
     // Monitoring Dashboard Data Endpoint
     app.get("/api/monitoring/stats", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
         // Return real-time monitoring statistics
@@ -800,4 +802,9 @@ export function registerRoutes(app) {
             timestamp: new Date().toISOString()
         });
     }));
+    // Auto-added: Analytics endpoints
+    try {
+        registerAnalytics(app);
+    }
+    catch { /* noop */ }
 }

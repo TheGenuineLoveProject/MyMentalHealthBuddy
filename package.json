@@ -39,7 +39,7 @@
     "postbuild": "node scripts/deployment-cleanup.js",
     "build:analyze": "cross-env ANALYZE=true npm run build",
     "build:optimize": "npm run build && node scripts/optimize-build.js && node scripts/preload-optimizer.js",
-    "build:production": "cross-env NODE_ENV=production npm run build:optimize",
+    "build:production": "cross-env NODE_ENV=production npm run build && node scripts/optimize-build.js && node scripts/preload-optimizer.js && node scripts/deployment-cleanup.js",
     "start": "cross-env NODE_ENV=production node apps/server/dist/apps/server/src/index.js",
     "production-check": "node scripts/production-check.js",
     "production-ready": "npm run build:production && npm run production-check",

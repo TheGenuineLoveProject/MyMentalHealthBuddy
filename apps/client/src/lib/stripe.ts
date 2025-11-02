@@ -1,19 +1,12 @@
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 
-const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+// Get Stripe public key from environment
+const stripePublicKey = (import.meta.env as any).VITE_STRIPE_PUBLIC_KEY || "";
 
-if (!stripePublicKey) {
-  throw new Error(
-    "Missing VITE_STRIPE_PUBLIC_KEY environment variable. Please configure your Stripe public key."
-  );
-}
+// Load Stripe singleton
+export const stripePromise = loadStripe(stripePublicKey);
 
-let stripePromise: Promise<Stripe | null>;
-
-export const getStripe = (): Promise<Stripe | null> => {
-  if (!stripePromise) {
-    stripePromise = loadStripe(stripePublicKey);
-  }
+export const getStripe = async (): Promise<Stripe | null> => {
   return stripePromise;
 };
 
@@ -26,7 +19,7 @@ export const validateStripeKey = (): boolean => {
     return false;
   }
   
-  if (import.meta.env.PROD && isTestKey) {
+  if ((import.meta.env as any).PROD && isTestKey) {
     console.warn("Using Stripe test key in production environment");
   }
   
