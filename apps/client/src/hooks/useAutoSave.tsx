@@ -2,6 +2,7 @@
  * Auto-Save Hook - 360° Content Management Enhancement
  * Automatically saves content as user types with smart debouncing
  */
+import React from "react";
 
 import { useEffect, useRef, useCallback, useState } from 'react';
 
