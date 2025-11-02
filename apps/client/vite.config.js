@@ -7,24 +7,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
-  root: ".",
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@assets": path.resolve(__dirname, "../attached_assets")
-    }
-  },
+  root: path.resolve(__dirname, "."),
   build: {
-    outDir: "dist",
+    outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {
+      input: path.resolve(__dirname, "index.html"),
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom'],
           router: ['wouter']
         }
       }
+    }
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@assets": path.resolve(__dirname, "../attached_assets")
     }
   }
 });
