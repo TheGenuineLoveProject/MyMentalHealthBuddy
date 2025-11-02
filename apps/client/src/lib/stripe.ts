@@ -1,7 +1,19 @@
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 
+// Environment variable types
+interface ImportMetaEnv {
+  VITE_STRIPE_PUBLIC_KEY?: string;
+  PROD?: boolean;
+}
+
+declare global {
+  interface ImportMeta {
+    env: ImportMetaEnv;
+  }
+}
+
 // Get Stripe public key from environment
-const stripePublicKey = (import.meta.env as any).VITE_STRIPE_PUBLIC_KEY || "";
+const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY || "";
 
 // Load Stripe singleton
 export const stripePromise = loadStripe(stripePublicKey);
@@ -19,7 +31,7 @@ export const validateStripeKey = (): boolean => {
     return false;
   }
   
-  if ((import.meta.env as any).PROD && isTestKey) {
+  if (import.meta.env.PROD && isTestKey) {
     console.warn("Using Stripe test key in production environment");
   }
   
@@ -49,17 +61,13 @@ export interface CheckoutSessionResponse {
   url: string;
 }
 
-export const redirectToCheckout = async (sessionId: string): Promise<void> => {
-  const stripe = await getStripe();
-  if (!stripe) {
-    throw new Error("Failed to load Stripe");
+export const redirectToCheckout = async (checkoutUrl: string): Promise<void> => {
+  if (!checkoutUrl) {
+    throw new Error("No checkout URL provided");
   }
-
-  const { error } = await stripe.redirectToCheckout({ sessionId });
   
-  if (error) {
-    throw new Error(error.message || "Failed to redirect to checkout");
-  }
+  // Modern Stripe.js: redirect directly to the checkout URL
+  window.location.href = checkoutUrl;
 };
 
 export const formatPrice = (amountInCents: number): string => {
