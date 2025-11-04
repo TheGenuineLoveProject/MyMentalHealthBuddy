@@ -58,7 +58,7 @@ function getRating(
  */
 function reportMetric(metric: PerformanceMetric) {
   // Log in development
-  if (import.meta.env.DEV) {
+  if (process.env.NODE_ENV !== 'production') {
     console.log(`[Performance] ${metric.name}:`, {
       value: metric.value,
       rating: metric.rating,
@@ -143,8 +143,9 @@ export function observeWebVitals() {
     // This observer tracks event timing for reference
     const inpObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: PerformanceEntry & { processingStart: number; processingEnd: number }) => {
-        const value = entry.processingEnd - entry.startTime;
+      entries.forEach((entry) => {
+        const perfEntry = entry as PerformanceEntry & { processingStart: number; processingEnd: number };
+        const value = perfEntry.processingEnd - entry.startTime;
         reportMetric({
           name: 'INP',
           value,
@@ -165,9 +166,10 @@ export function observeWebVitals() {
     let clsValue = 0;
     const clsObserver = new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach((entry: PerformanceEntry & { value: number; hadRecentInput: boolean }) => {
-        if (!entry.hadRecentInput) {
-          clsValue += entry.value;
+      entries.forEach((entry) => {
+        const layoutEntry = entry as PerformanceEntry & { value: number; hadRecentInput: boolean };
+        if (!layoutEntry.hadRecentInput) {
+          clsValue += layoutEntry.value;
         }
       });
 
@@ -275,7 +277,7 @@ export function initPerformanceMonitoring() {
   window.addEventListener('load', () => {
     setTimeout(() => {
       const report = getPerformanceReport();
-      if (report && import.meta.env.DEV) {
+      if (report && process.env.NODE_ENV !== 'production') {
         console.table(report);
       }
     }, 0);
