@@ -43,9 +43,6 @@
   /* Typography - optimized with font-display */
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   
-  /* Font loading performance */
-  font-display: swap;
-  
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -737,6 +734,64 @@ select:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* === LAYOUT STABILITY (CLS Prevention) === */
+/* Prevent layout shifts during loading */
+.card,
+.stat-card,
+.action-card {
+  min-height: 120px; /* Reserve space to prevent shifts */
+  contain: layout; /* Isolate layout calculations */
+}
+
+.card-interactive {
+  will-change: transform; /* Optimize hover transforms */
+  backface-visibility: hidden; /* Prevent repaints */
+}
+
+/* Grid containers with explicit dimensions */
+.grid {
+  min-height: 200px; /* Prevent collapse during loading */
+}
+
+/* Dashboard stats grid - explicit heights */
+.stats-grid {
+  min-height: 140px;
+}
+
+/* Skeleton loaders - match final content dimensions */
+.skeleton {
+  min-height: 1rem; /* Text skeleton */
+}
+
+.skeleton-card {
+  min-height: 120px; /* Card skeleton */
+}
+
+.skeleton-stat {
+  min-height: 140px; /* Stat card skeleton */
+}
+
+/* Images - prevent shifts */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  content-visibility: auto; /* Optimize off-screen rendering */
+}
+
+/* Font loading stability - system fonts for instant render */
+@font-face {
+  font-family: 'System Font';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(-apple-system), local(BlinkMacSystemFont), local('Segoe UI'), local('Roboto');
+}
+
+html {
+  font-family: 'System Font', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 /* === PRINT STYLES === */

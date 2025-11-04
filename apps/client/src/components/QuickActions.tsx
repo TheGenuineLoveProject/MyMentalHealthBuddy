@@ -1,6 +1,6 @@
 import { Link } from 'wouter';
 import { quickActions } from '@/lib/navigationStructure';
-import { Card } from '@/components/Card.tsx';
+import { Card } from '@/components/Card';
 
 /**
  * Quick Actions Component
@@ -16,7 +16,7 @@ export function QuickActions() {
         return (
           <Link key={action.id} href={action.path}>
             <Card
-              className={`p-4 hover:shadow-lg transition-all duration-200 cursor-pointer group ${action.color} bg-opacity-5 hover:bg-opacity-10 border-2 border-transparent hover:border-current`}
+              className={`p-4 hover:shadow-lg transition-all duration-200 cursor-pointer group ${action.color} bg-opacity-5 hover:bg-opacity-10 border-2 border-transparent hover:border-current action-card min-h-[180px]`}
               data-testid={`quick-action-${action.id}`}
             >
               <div className="flex flex-col items-center text-center gap-3">

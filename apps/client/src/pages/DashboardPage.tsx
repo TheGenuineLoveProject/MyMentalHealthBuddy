@@ -90,14 +90,15 @@ export function DashboardPage() {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 stats-grid">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           return (
             <div
               key={index}
-              className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500"
+              className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500 stat-card min-h-[140px]"
               data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
+              style={{ contain: 'layout' }}
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-gray-600">{stat.label}</span>
@@ -132,13 +133,14 @@ export function DashboardPage() {
               </span>
             </Link>
           </div>
-          {recentMoods.length === 0 ? (
-            <p className="text-gray-500 text-center py-8" data-testid="no-recent-moods">
-              No mood entries yet. Start tracking your mood!
-            </p>
-          ) : (
-            <div className="space-y-3">
-              {recentMoods.map((mood) => (
+          <div className="min-h-[200px]" style={{ contain: 'layout' }}>
+            {recentMoods.length === 0 ? (
+              <p className="text-gray-500 text-center py-8" data-testid="no-recent-moods">
+                No mood entries yet. Start tracking your mood!
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {recentMoods.map((mood) => (
                 <div
                   key={mood.id}
                   className="p-3 border border-gray-200 rounded-lg hover:border-pink-300 hover:bg-pink-50 transition"
@@ -158,9 +160,10 @@ export function DashboardPage() {
                     <p className="text-sm text-gray-600 mt-2 line-clamp-1">{mood.notes}</p>
                   )}
                 </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Recent Journals */}
@@ -176,13 +179,14 @@ export function DashboardPage() {
               </span>
             </Link>
           </div>
-          {recentJournals.length === 0 ? (
-            <p className="text-gray-500 text-center py-8" data-testid="no-recent-journals">
-              No journal entries yet. Start journaling!
-            </p>
-          ) : (
-            <div className="space-y-3">
-              {recentJournals.map((journal) => (
+          <div className="min-h-[200px]" style={{ contain: 'layout' }}>
+            {recentJournals.length === 0 ? (
+              <p className="text-gray-500 text-center py-8" data-testid="no-recent-journals">
+                No journal entries yet. Start journaling!
+              </p>
+            ) : (
+              <div className="space-y-3">
+                {recentJournals.map((journal) => (
                 <div
                   key={journal.id}
                   className="p-3 border border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 transition"
@@ -199,9 +203,10 @@ export function DashboardPage() {
                   </div>
                   <p className="text-sm text-gray-600 line-clamp-2">{journal.content}</p>
                 </div>
-              ))}
-            </div>
-          )}
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
