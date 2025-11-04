@@ -9,38 +9,9 @@
   "engines": {
     "node": ">=20 <21"
   },
-  {
-    "name": "mmhb-healer",
-    "version": "0.1.0",
-    "type": "module",
-    "scripts": {
-      "scan": "ts-node scanner.ts",
-      "orch": "ts-node orchestrator.ts"
-    },
-    "dependencies": {
-      "@octokit/rest": "^19.0.0",
-      "simple-git": "^3.13.0",
-      "execa": "^7.1.1",
-      "globby": "^13.2.2",
-      "axios": "^1.4.0",
-      "jsdom": "^22.1.0"
-    },
-    "devDependencies": {
-      "ts-node": "^10.9.1",
-      "typescript": "^5.1.6"
-    }
-  }
-    {
-      "scripts": {
-        "start": "node apps/server/dist/apps/server/src/index.js",
-        "dev": "npm-run-all -p dev:client dev:server",
-        "dev:client": "npm --prefix apps/client run dev",
-        "dev:server": "npm --prefix apps/server run dev",
-        "build:client": "npm --prefix apps/client install && npm --prefix apps/client run build",
-        "build:server": "npm --prefix apps/server install && npm --prefix apps/server run build",
-        "build:production": "cross-env NODE_ENV=production npm run build:client && npm run build:server && echo \"🟢 Build complete — ready for Cloud Run\"",
-        "db:push": "drizzle-kit push",
-        "heal": "bash scripts/heal-now.sh",
+  "scripts": {
+    "dev:server": "npm --prefix apps/server run dev",
+    "dev:client": "npm --prefix apps/client run dev",
     "start:all": "concurrently -k -n server,client -c auto \"npm run dev:server\" \"wait-on http://localhost:5000/health && npm run dev:client\"",
     "diagnose": "node scripts/diagnose.mjs",
     "verify": "node scripts/verify.mjs",
@@ -153,6 +124,7 @@
     "eslint": "^9.39.0",
     "gray-matter": "^4.0.3",
     "nodemon": "^3.1.10",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
     "typescript": "^5.9.3",
