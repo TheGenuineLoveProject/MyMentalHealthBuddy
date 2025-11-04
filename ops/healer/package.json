@@ -10,19 +10,24 @@
     "heal:now": "echo 'Healing…' && tsx orchestrator.ts"
   },
   "dependencies": {
-    "@octokit/rest": "^21.0.0",
-    "axios": "^1.7.7",
-    "execa": "^9.3.0",
-    "globby": "^14.0.2",
-    "jsdom": "^25.0.0",
-    "simple-git": "^3.27.0",
+    "@octokit/rest": "^21.1.1",
+    "axios": "^1.13.1",
+    "execa": "^9.6.0",
+    "globby": "^14.1.0",
+    "jsdom": "^25.0.1",
+    "simple-git": "^3.29.0",
     "ts-morph": "^24.0.0"
   },
   "devDependencies": {
-    "eslint": "^9.13.0",
+    "eslint": "^9.39.0",
     "npm-check-updates": "^17.1.3",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.0",
-    "typescript": "^5.6.3"
-  }
+    "typescript": "^5.9.3"
+  },
+  "description": "- **Scan**: `cd ops/healer && npm ci && npm run scan` - **Scan + Safe Fix + PR**: `cd ops/healer && npm ci && npm run heal` - Outputs: `ops/healer/output/*` - Configure repo/PR vars via env: `GH_TOKEN`, `GH_OWNER`, `GH_REPO`, `GH_BASE` (default `main`). - **Safety**: Auto-merge is **disabled**. Risky areas require human review per `policies.json`.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
