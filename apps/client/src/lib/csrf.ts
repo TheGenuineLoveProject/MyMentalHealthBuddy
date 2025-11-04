@@ -26,7 +26,7 @@ export async function fetchCsrfToken(): Promise<string> {
   // Fetch new token
   tokenPromise = (async () => {
     try {
-      const response = await fetch('/api/auth/csrf-token', {
+      const response = await fetch('/api/csrf-token', {
         credentials: 'include', // Include session cookie
       });
       

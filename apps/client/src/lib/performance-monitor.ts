@@ -329,8 +329,12 @@ export class PerformanceMonitor {
 export const performanceMonitor = new PerformanceMonitor();
 
 // Auto-log summary in development
-if (import.meta.env.MODE === 'development') {
+if (typeof window !== 'undefined') {
   window.addEventListener('load', () => {
-    setTimeout(() => performanceMonitor.logSummary(), 3000);
+    setTimeout(() => {
+      if (process.env.NODE_ENV !== 'production') {
+        performanceMonitor.logSummary();
+      }
+    }, 3000);
   });
 }
