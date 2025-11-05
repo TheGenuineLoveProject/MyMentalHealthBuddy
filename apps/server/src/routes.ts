@@ -1280,6 +1280,70 @@ export function registerRoutes(app: Express) {
       });
     })
   );
+
+  // ============================================
+  // ADVANCED SEARCH API - Full-Text Search with Relevance Scoring
+  // ============================================
+  
+  // Comprehensive search across all content
+  app.get("/api/search",
+    devAuthFallback,
+    optionalAuth,
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const { SearchService } = await import("./services/searchService.js");
+      const searchService = new SearchService(storage);
+      
+      const query = Sanitizer.sanitizeString(req.query.q as string || '');
+      const types = req.query.types 
+        ? (req.query.types as string).split(',').map(t => Sanitizer.sanitizeString(t))
+        : undefined;
+      const limit = parseInt(req.query.limit as string || '20', 10);
+      const offset = parseInt(req.query.offset as string || '0', 10);
+      const userId = req.userId || null;
+
+      const results = await searchService.search({
+        query,
+        types,
+        limit,
+        offset,
+        userId
+      });
+
+      res.json(results);
+    })
+  );
+
+  // Autocomplete suggestions
+  app.get("/api/search/autocomplete",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const { SearchService } = await import("./services/searchService.js");
+      const searchService = new SearchService(storage);
+      
+      const query = Sanitizer.sanitizeString(req.query.q as string || '');
+      const limit = parseInt(req.query.limit as string || '5', 10);
+
+      const suggestions = await searchService.autocomplete(query, limit);
+
+      res.json({ suggestions });
+    })
+  );
+
+  // Trending search queries
+  app.get("/api/search/trending",
+    rateLimitMiddleware(apiRateLimiter),
+    asyncHandler(async (req, res) => {
+      const { SearchService } = await import("./services/searchService.js");
+      const searchService = new SearchService(storage);
+      
+      const limit = parseInt(req.query.limit as string || '10', 10);
+
+      const trending = await searchService.getTrending(limit);
+
+      res.json({ trending });
+    })
+  );
   
   // Auto-added: Analytics endpoints
   try { registerAnalytics(app as any); } catch { /* noop */ }

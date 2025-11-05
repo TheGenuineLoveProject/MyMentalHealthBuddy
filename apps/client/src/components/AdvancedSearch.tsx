@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { useToast } from '@/hooks';
 import { Search, Filter, Save, Clock, X, TrendingUp } from 'lucide-react';
 
@@ -174,19 +174,19 @@ export function AdvancedSearch({ onSearch }: AdvancedSearchProps) {
             )}
           </Button>
           <Button
-            variant="outline"
+            variant="secondary"
             onClick={() => setShowFilters(!showFilters)}
             data-testid="button-filters"
           >
             <Filter className="h-4 w-4 mr-2" />
             Filters
             {Object.values(filters).flat().length > 0 && (
-              <Badge variant="default" className="ml-2 px-1.5 py-0.5 text-xs">
+              <Badge variant="primary" className="ml-2 px-1.5 py-0.5 text-xs">
                 {Object.values(filters).flat().length}
               </Badge>
             )}
           </Button>
-          <Button variant="outline" onClick={saveCurrentSearch} data-testid="button-save-search">
+          <Button variant="secondary" onClick={saveCurrentSearch} data-testid="button-save-search">
             <Save className="h-4 w-4" />
           </Button>
         </div>

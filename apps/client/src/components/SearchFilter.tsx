@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { Search, Filter, X } from 'lucide-react';
 
 interface SearchFilterProps {
@@ -86,14 +86,14 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
           Search
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           onClick={() => setShowFilters(!showFilters)}
           data-testid="button-toggle-filters"
         >
           <Filter className="h-4 w-4 mr-2" />
           Filters
           {activeFilterCount > 0 && (
-            <Badge variant="default" className="ml-2" data-testid="badge-filter-count">
+            <Badge variant="primary" className="ml-2" data-testid="badge-filter-count">
               {activeFilterCount}
             </Badge>
           )}
@@ -126,7 +126,7 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
                 {activeFilters.types?.map((type) => (
                   <Badge
                     key={type}
-                    variant={filters.types.includes(type) ? 'default' : 'outline'}
+                    variant={filters.types.includes(type) ? 'primary' : 'gray'}
                     className="cursor-pointer"
                     onClick={() => toggleFilter('types', type)}
                     data-testid={`filter-type-${type}`}
@@ -144,7 +144,7 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
                 {activeFilters.statuses?.map((status) => (
                   <Badge
                     key={status}
-                    variant={filters.statuses.includes(status) ? 'default' : 'outline'}
+                    variant={filters.statuses.includes(status) ? 'primary' : 'gray'}
                     className="cursor-pointer"
                     onClick={() => toggleFilter('statuses', status)}
                     data-testid={`filter-status-${status}`}
@@ -162,7 +162,7 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
                 {activeFilters.tags?.map((tag) => (
                   <Badge
                     key={tag}
-                    variant={filters.tags.includes(tag) ? 'default' : 'outline'}
+                    variant={filters.tags.includes(tag) ? 'primary' : 'gray'}
                     className="cursor-pointer"
                     onClick={() => toggleFilter('tags', tag)}
                     data-testid={`filter-tag-${tag}`}
@@ -182,7 +182,7 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
           {[...filters.types, ...filters.statuses, ...filters.tags].map((filter) => (
             <Badge
               key={filter}
-              variant="secondary"
+              variant="primary"
               className="flex items-center gap-1"
               data-testid={`active-filter-${filter}`}
             >

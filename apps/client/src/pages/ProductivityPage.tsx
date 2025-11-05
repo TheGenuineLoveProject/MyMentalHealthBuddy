@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { AdvancedExport } from '@/components/AdvancedExport.tsx';
-import { BulkOperations } from '@/components/BulkOperations.tsx';
-import { AIContentGenerator } from '@/components/AIContentGenerator.tsx';
-import { AutomationRules } from '@/components/AutomationRules.tsx';
-import { AdvancedSearch } from '@/components/AdvancedSearch.tsx';
-import { Card } from '@/components/Card.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { AdvancedExport } from '@/components/AdvancedExport';
+import { BulkOperations } from '@/components/BulkOperations';
+import { AIContentGenerator } from '@/components/AIContentGenerator';
+import { AutomationRules } from '@/components/AutomationRules';
+import { AdvancedSearch } from '@/components/AdvancedSearch';
+import { Card } from '@/components/Card';
+import { Badge } from '@/components/Badge';
 import { Zap, Search, Download, CheckSquare, Sparkles, Settings } from 'lucide-react';
 
 /**
@@ -35,7 +35,7 @@ export function ProductivityPage() {
               Enterprise-grade tools to supercharge your workflow
             </p>
           </div>
-          <Badge variant="outline" className="gap-1">
+          <Badge variant="gray" className="gap-1">
             <Settings className="h-3 w-3" />
             5 Power Tools
           </Badge>
@@ -53,7 +53,7 @@ export function ProductivityPage() {
             <Card key={i} className="p-4" data-testid={`stat-${i}`}>
               <div className="flex items-center justify-between mb-2">
                 <stat.icon className="h-4 w-4 text-muted-foreground" />
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="gray" className="text-xs">
                   {stat.change}
                 </Badge>
               </div>
