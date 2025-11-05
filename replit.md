@@ -28,6 +28,14 @@ The application uses `shadcn/ui` (built on `Radix UI`) with `Tailwind CSS` and `
 -   **Activity Feed**: ActivityFeed component displaying real-time user activity with date grouping, type-based icons and colors, priority indicators, and customizable metadata display.
 -   **Performance Monitoring**: PerformanceMonitor component with live FPS tracking, memory usage monitoring, page load metrics, and useRenderTime/useAPIPerformance hooks for development debugging.
 -   **Advanced Data Table**: DataTable component featuring sortable columns, real-time search, multi-row selection with proper pagination handling, configurable page sizes, and custom cell rendering.
+-   **Modal & Dialog System**: Production-ready Modal component with FocusTrap integration, independent overlay/escape controls, size variants (sm/md/lg/xl/full), and ConfirmModal for confirmation dialogs. All test IDs conditionally rendered.
+-   **Advanced Tabs**: Fully accessible Tabs component with roving tabindex, Arrow/Home/End keyboard navigation, horizontal and vertical variants, badge support, and proper ARIA labels/controls. VerticalTabs for sidebar navigation.
+-   **Tooltip System**: Advanced Tooltip component with smart positioning (top/bottom/left/right), delay control, and SimpleTooltip for quick inline use. Supports complex ReactNode content.
+-   **Accordion Component**: Collapsible content sections with Accordion (multi-item) and SimpleAccordion (single-item) variants. Supports allow-multiple mode, disabled states, and custom icons.
+-   **Dropdown Menu**: Accessible Dropdown with keyboard navigation, aria-activedescendant management, empty state handling, option icons/dividers/badges, and Select component for simple use cases.
+-   **Pagination**: Full-featured Pagination component with page numbers, first/last/prev/next controls, page size selector, and SimplePagination for basic prev/next navigation.
+-   **Skeleton Loaders**: Comprehensive Skeleton component with variants (text/circular/rectangular/rounded) and pre-built layouts (Card, Avatar, List, Table, Form) for loading states.
+-   **Empty States**: EmptyState component with variants (default/search/error/inbox), optional actions, and pre-built variants (NoResults, NoData, Error, NoJournals, NoMoods) for common scenarios.
 
 ### Technical Implementations
 -   **Frontend**: React 18, TypeScript, Vite, `TanStack Query` for server state, `Wouter` for routing, `React Hook Form` with `Zod` for forms.
