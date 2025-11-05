@@ -23,6 +23,11 @@ The application uses `shadcn/ui` (built on `Radix UI`) with `Tailwind CSS` and `
 -   **Keyboard Shortcuts**: Complete keyboard shortcuts system with KeyboardShortcutsDialog displaying all available shortcuts, and useKeyboardShortcut hook for registering custom shortcuts. Includes Ctrl+K command palette (CommandPalette component) for quick actions and navigation.
 -   **Enhanced Form Validation**: FormField component with inline validation, success states, character counts, real-time error messages, and comprehensive validators (email, URL, phone, pattern matching). Includes FormFieldGroup for related inputs.
 -   **Image Optimization**: OptimizedImage component with lazy loading, blur placeholders, responsive srcset generation, error states, and specialized AvatarImage component for profile pictures with fallback initials.
+-   **Progress Tracking**: ProgressTracker component with horizontal/vertical step indicators, CircularProgress rings, and LinearProgress bars with variant support (success, warning, danger).
+-   **Data Visualization**: MoodChart component for interactive mood trend visualization with SVG charts, statistics (average, highest, lowest), trend indicators, and empty state handling.
+-   **Activity Feed**: ActivityFeed component displaying real-time user activity with date grouping, type-based icons and colors, priority indicators, and customizable metadata display.
+-   **Performance Monitoring**: PerformanceMonitor component with live FPS tracking, memory usage monitoring, page load metrics, and useRenderTime/useAPIPerformance hooks for development debugging.
+-   **Advanced Data Table**: DataTable component featuring sortable columns, real-time search, multi-row selection with proper pagination handling, configurable page sizes, and custom cell rendering.
 
 ### Technical Implementations
 -   **Frontend**: React 18, TypeScript, Vite, `TanStack Query` for server state, `Wouter` for routing, `React Hook Form` with `Zod` for forms.
