@@ -10,7 +10,7 @@
     "server:start": "npm --prefix apps/server run dev",
     "client:start": "npm --prefix apps/client run dev",
     "start:all": "concurrently -k \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run start\"",
-    "start:heal": "npm run heal && npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit; npm run start:all",
+    "start:heal": "npm run heal && (npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit); npm run start:all",
     "heal:json": "node scripts/autoHealJson.mjs",
     "fix": "node scripts/autoheal-json.mjs"
   },
@@ -27,5 +27,13 @@
   ],
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@stripe/react-stripe-js": "^5.3.0",
+    "@stripe/stripe-js": "^8.3.0",
+    "lucide-react": "^0.552.0",
+    "react-icons": "^5.5.0",
+    "web-vitals": "^5.1.0",
+    "wouter": "^3.7.1"
   }
 }

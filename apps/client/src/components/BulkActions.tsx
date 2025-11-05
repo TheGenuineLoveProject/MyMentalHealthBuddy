@@ -8,8 +8,12 @@ import { Button } from '@/components/Button';
 import { Checkbox } from '@/components/Checkbox';
 import { Download, Trash2, CheckSquare, X } from 'lucide-react';
 
-interface BulkActionsProps {
-  items: any[];
+interface BulkActionsItem {
+  id: string | number;
+}
+
+interface BulkActionsProps<T extends BulkActionsItem = BulkActionsItem> {
+  items: T[];
   selectedIds: string[];
   onSelectionChange: (ids: string[]) => void;
   onDelete?: (ids: string[]) => Promise<void>;
@@ -28,7 +32,9 @@ export function BulkActions({
   const [isDeleting, setIsDeleting] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
 
-  const allIds = items.map((item) => item.id?.toString() || '');
+  const allIds = items
+    .map((item) => item.id?.toString())
+    .filter((id): id is string => Boolean(id));
   const isAllSelected = selectedIds.length === items.length && items.length > 0;
   const isSomeSelected = selectedIds.length > 0 && selectedIds.length < items.length;
 

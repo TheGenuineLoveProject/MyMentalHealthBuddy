@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { useToast } from '@/hooks';
 import { Download, FileText, Database, FileSpreadsheet, Calendar, Filter } from 'lucide-react';
 
@@ -27,7 +27,7 @@ export function AdvancedExport({ onExport }: AdvancedExportProps) {
   const [dataType, setDataType] = useState<ExportOptions['dataType']>('analytics');
   const [includeMetadata, setIncludeMetadata] = useState(true);
   const [isExporting, setIsExporting] = useState(false);
-  const { toast } = useToast();
+  const { addToast } = useToast();
 
   const exportFormats = [
     { id: 'csv', label: 'CSV', icon: FileText, description: 'Comma-separated values for spreadsheets' },
@@ -68,9 +68,9 @@ export function AdvancedExport({ onExport }: AdvancedExportProps) {
         onExport(options);
       }
 
-      toast({
-        title: 'Export Successful',
-        description: `Your ${dataType} data has been exported as ${format.toUpperCase()}`,
+      addToast({
+        type: 'success',
+        message: `Your ${dataType} data has been exported as ${format.toUpperCase()}`,
       });
 
       // Simulate file download
@@ -78,10 +78,9 @@ export function AdvancedExport({ onExport }: AdvancedExportProps) {
       console.log(`Downloading: ${filename}`);
       
     } catch (error) {
-      toast({
-        title: 'Export Failed',
-        description: 'Unable to export data. Please try again.',
-        variant: 'destructive',
+      addToast({
+        type: 'error',
+        message: 'Unable to export data. Please try again.',
       });
     } finally {
       setIsExporting(false);
@@ -97,7 +96,7 @@ export function AdvancedExport({ onExport }: AdvancedExportProps) {
             Export your data in multiple formats with custom templates
           </p>
         </div>
-        <Badge variant="outline" className="gap-1">
+        <Badge variant="primary" className="gap-1">
           <Download className="h-3 w-3" />
           Multi-Format
         </Badge>
@@ -204,11 +203,11 @@ export function AdvancedExport({ onExport }: AdvancedExportProps) {
               </>
             )}
           </Button>
-          <Button variant="outline" data-testid="button-schedule-export">
+          <Button variant="secondary" data-testid="button-schedule-export">
             <Calendar className="h-4 w-4 mr-2" />
             Schedule
           </Button>
-          <Button variant="outline" data-testid="button-filter-export">
+          <Button variant="secondary" data-testid="button-filter-export">
             <Filter className="h-4 w-4 mr-2" />
             Filters
           </Button>

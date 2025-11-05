@@ -3,7 +3,7 @@
  * Comprehensive meta tags for search engines and social media
  */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface SEOHeadProps {
   title: string;
@@ -30,10 +30,27 @@ export function SEOHead({
 }: SEOHeadProps) {
   const siteName = 'MyMentalHealthBuddy';
   const fullTitle = `${title} | ${siteName}`;
-  const canonicalUrl = url || `${window.location.origin}${window.location.pathname}`;
-  const imageUrl = image.startsWith('http') ? image : `${window.location.origin}${image}`;
+  
+  // Use window only in useEffect to avoid SSR issues
+  const [canonicalUrl, setCanonicalUrl] = useState(url || '');
+  const [imageUrl, setImageUrl] = useState(image);
 
   useEffect(() => {
+    // Set URLs safely after mount
+    if (typeof window !== 'undefined') {
+      if (!url) {
+        setCanonicalUrl(`${window.location.origin}${window.location.pathname}`);
+      }
+      if (!image.startsWith('http')) {
+        setImageUrl(`${window.location.origin}${image}`);
+      }
+    }
+  }, [url, image]);
+
+  useEffect(() => {
+    // Skip if window is not available (SSR)
+    if (typeof window === 'undefined' || !canonicalUrl) return;
+    
     // Update document title
     document.title = fullTitle;
 

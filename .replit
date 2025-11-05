@@ -34,20 +34,8 @@ args = "npm run dev:server"
 waitForPort = 5000
 
 [[ports]]
-localPort = 5000
-externalPort = 5000
-
-[[ports]]
 localPort = 5173
-externalPort = 5173
-
-[[ports]]
-localPort = 24678
 externalPort = 80
-
-[[ports]]
-localPort = 46657
-externalPort = 3000
 
 [nix]
 channel = "stable-25_05"
