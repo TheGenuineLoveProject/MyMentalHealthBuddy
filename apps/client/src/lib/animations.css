@@ -1,0 +1,466 @@
+/**
+ * Animation System - 360° UX Enhancement
+ * Smooth micro-interactions and transitions for better user experience
+ */
+
+/* ============================================================================
+   KEYFRAME ANIMATIONS
+   ============================================================================ */
+
+/* Fade In */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide Up */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide Down */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide In From Left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide In From Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale In */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Bounce In */
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Shake */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+/* Pulse */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Shimmer (for skeletons) */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Spin */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Float */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Glow Pulse */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(14, 165, 233, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.8);
+  }
+}
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.4s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.4s ease-out;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.4s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.3s ease-out;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s linear infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0.5) 60%,
+    rgba(255, 255, 255, 0)
+  );
+  background-size: 200% 100%;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* ============================================================================
+   STAGGER DELAYS (for list animations)
+   ============================================================================ */
+
+.animate-stagger-delay-1 {
+  animation-delay: 0.05s;
+}
+
+.animate-stagger-delay-2 {
+  animation-delay: 0.1s;
+}
+
+.animate-stagger-delay-3 {
+  animation-delay: 0.15s;
+}
+
+.animate-stagger-delay-4 {
+  animation-delay: 0.2s;
+}
+
+.animate-stagger-delay-5 {
+  animation-delay: 0.25s;
+}
+
+/* ============================================================================
+   MICRO-INTERACTIONS
+   ============================================================================ */
+
+/* Hover Lift */
+.hover-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hover-lift:active {
+  transform: translateY(0);
+}
+
+/* Hover Grow */
+.hover-grow {
+  transition: transform 0.2s ease;
+}
+
+.hover-grow:hover {
+  transform: scale(1.05);
+}
+
+.hover-grow:active {
+  transform: scale(0.98);
+}
+
+/* Hover Glow */
+.hover-glow {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.hover-glow::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+}
+
+.hover-glow:hover::before {
+  opacity: 0.7;
+}
+
+/* Hover Underline */
+.hover-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* Button Press */
+.button-press {
+  transition: transform 0.1s ease;
+}
+
+.button-press:active {
+  transform: scale(0.95);
+}
+
+/* Smooth Focus */
+.focus-ring {
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.focus-ring:focus {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
+}
+
+.focus-ring:focus-visible {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.5);
+}
+
+/* ============================================================================
+   LOADING STATES
+   ============================================================================ */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 0%,
+    #e0e0e0 20%,
+    #f0f0f0 40%,
+    #f0f0f0 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    #2a2a2a 0%,
+    #3a3a3a 20%,
+    #2a2a2a 40%,
+    #2a2a2a 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* ============================================================================
+   PAGE TRANSITIONS
+   ============================================================================ */
+
+.page-enter {
+  animation: slideUp 0.3s ease-out;
+}
+
+.page-exit {
+  animation: fadeIn 0.2s ease-in reverse;
+}
+
+/* ============================================================================
+   MODAL/DIALOG ANIMATIONS
+   ============================================================================ */
+
+.modal-overlay-enter {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-overlay-exit {
+  animation: fadeIn 0.15s ease-in reverse;
+}
+
+.modal-content-enter {
+  animation: scaleIn 0.2s ease-out;
+}
+
+.modal-content-exit {
+  animation: scaleIn 0.15s ease-in reverse;
+}
+
+/* ============================================================================
+   TOAST/NOTIFICATION ANIMATIONS
+   ============================================================================ */
+
+.toast-enter-top {
+  animation: slideDown 0.3s ease-out;
+}
+
+.toast-enter-bottom {
+  animation: slideUp 0.3s ease-out;
+}
+
+.toast-enter-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.toast-exit {
+  animation: slideInRight 0.2s ease-in reverse;
+}
+
+/* ============================================================================
+   RESPONSIVE ANIMATIONS (Respect reduced motion)
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================================================ */
+
+/* Use GPU acceleration for animations */
+.gpu-accelerate {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Contain repaints for better performance */
+.contain-paint {
+  contain: paint;
+}
+
+/* Contain layout for lists */
+.contain-layout {
+  contain: layout;
+}

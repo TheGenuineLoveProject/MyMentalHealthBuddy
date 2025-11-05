@@ -13,18 +13,13 @@
     "client:start": "npm --prefix apps/client run dev",
     "start:all": "concurrently -k -n server,client \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run dev\"",
     "start:heal": "npm run heal:json && npm install && npm run start:all",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
     "express-static-gzip": "^2.2.0",
-    "zod": "^3.25.76",
-    "express": "^4.19.2",
-    "cors": "^2.8.5",
-    "helmet": "^7.0.0",
-    "compression": "^1.7.4",
-    "morgan": "^1.10.0",
-    "express-session": "^1.17.3"
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
@@ -51,5 +46,6 @@
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "main": "dist/index.js"
 }

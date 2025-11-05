@@ -22,26 +22,31 @@ function healRoot(p) {
   const pkg = readSafe(p, "mmhb-monorepo");
   ensure(pkg,"private",true);
   pkg.type = "module";
+  ensure(pkg,"workspaces", pkg.workspaces ?? ["apps/*"]);
   ensure(pkg,"scripts",{});
-  pkg.scripts["fix"] = "node scripts/autoheal-json.mjs";
-  pkg.scripts["start:all"] = "concurrently -k \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run start\"";
-  pkg.scripts["start:heal"] = "node scripts/autoheal-json.mjs && npm install --prefer-offline --no-audit && npm run start:all";
+  pkg.scripts["heal"]       = "node scripts/autoheal-json.mjs";
+  pkg.scripts["start:all"]  = "concurrently -k \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run start\"";
+  pkg.scripts["start:heal"] = "npm run heal && npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit; npm run start:all";
   ensure(pkg,"devDependencies",{});
   Object.assign(pkg.devDependencies,{
     concurrently:"^9.0.0", typescript:"^5.6.3", tsx:"^4.19.1", "cross-env":"^7.0.3"
   });
   writeJson(p,pkg);
 }
+
 function healServer(p) {
   const pkg = readSafe(p,"server");
-  pkg.type = "commonjs"; // fix require()/ESM conflict
+  // Use CJS so require("express") works; TSX can still run TS.
+  pkg.type = "commonjs";
+  ensure(pkg,"main","dist/index.js");
   ensure(pkg,"scripts",{});
   pkg.scripts["dev"]   = pkg.scripts["dev"]   ?? "tsx src/index.ts || node src/index.js";
+  pkg.scripts["build"] = pkg.scripts["build"] ?? "tsc -p tsconfig.json";
   pkg.scripts["start"] = pkg.scripts["start"] ?? "node dist/index.js";
   ensure(pkg,"dependencies",{});
   Object.assign(pkg.dependencies,{
     express:"^4.19.2", "express-session":"^1.17.3",
-    cors:"^2.8.5", helmet:"^7.0.0", compression:"^1.7.4", morgan:"^1.10.0", zod:"^3.23.8"
+    cors:"^2.8.5", helmet:"^7.1.0", compression:"^1.7.4", morgan:"^1.10.0", zod:"^3.23.8"
   });
   ensure(pkg,"devDependencies",{});
   Object.assign(pkg.devDependencies,{
@@ -51,6 +56,7 @@ function healServer(p) {
   });
   writeJson(p,pkg);
 }
+
 function healClient(p) {
   const pkg = readSafe(p,"client");
   pkg.type = "module";
@@ -69,20 +75,25 @@ function healClient(p) {
 const root = process.cwd();
 healRoot(path.join(root,"package.json"));
 
-const appsDir = path.join(root,"apps");
-if (fs.existsSync(appsDir)) {
-  for (const name of fs.readdirSync(appsDir)) {
-    const pkgP = path.join(appsDir,name,"package.json");
-    if (!fs.existsSync(pkgP)) continue;
-    if (name==="server") healServer(pkgP);
-    else if (name==="client") healClient(pkgP);
-    else {
-      // generic apps/*: keep minimal valid json
-      const pkg = readSafe(pkgP,name);
-      pkg.type = pkg.type ?? "module";
-      pkg.scripts = pkg.scripts ?? {};
-      writeJson(pkgP,pkg);
-    }
+function healApp(dir) {
+  const name = path.basename(dir);
+  const pkgPath = path.join(dir,"package.json");
+  if (!fs.existsSync(pkgPath)) return;
+  if (name === "server") healServer(pkgPath);
+  else if (name === "client") healClient(pkgPath);
+  else {
+    const pkg = readSafe(pkgPath, name);
+    pkg.type = pkg.type ?? "module";
+    pkg.scripts = pkg.scripts ?? {};
+    writeJson(pkgPath, pkg);
   }
 }
-console.log("JSON healed for root + apps/*.");
+
+const appsDir = path.join(root,"apps");
+if (fs.existsSync(appsDir)) {
+  for (const entry of fs.readdirSync(appsDir)) {
+    const p = path.join(appsDir, entry);
+    if (fs.statSync(p).isDirectory()) healApp(p);
+  }
+}
+console.log("✓ JSON healed for root + apps/*");
