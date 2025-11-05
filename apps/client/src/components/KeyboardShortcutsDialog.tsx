@@ -86,16 +86,20 @@ export function KeyboardShortcutsDialog({ isOpen, onClose }: KeyboardShortcutsDi
     <div
       className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 modal-overlay-enter"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="shortcuts-title"
       data-testid="keyboard-shortcuts-overlay"
     >
       <Card
         className="w-full max-w-3xl max-h-[90vh] overflow-auto modal-content-enter"
         onClick={(e) => e.stopPropagation()}
+        role="document"
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-10">
           <div>
-            <h2 className="text-2xl font-bold flex items-center gap-2">
+            <h2 id="shortcuts-title" className="text-2xl font-bold flex items-center gap-2">
               <Command className="h-6 w-6" />
               Keyboard Shortcuts
             </h2>
