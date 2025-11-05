@@ -1,2 +1,58 @@
-hidden = [".git", ".rollback", "node_modules"]
-run = "npm run start:heal"
+run = "npm run start:all"
+hidden = [".cache", "node_modules", ".pnpm"]
+modules = ["nodejs-20", "postgresql-16"]
+
+[agent]
+expertMode = true
+integrations = [
+  "javascript_openai_ai_integrations:1.0.0",
+  "javascript_stripe:1.0.0",
+]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev:server"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 5000
+
+[[ports]]
+localPort = 5173
+externalPort = 5173
+
+[[ports]]
+localPort = 24678
+externalPort = 80
+
+[[ports]]
+localPort = 46657
+externalPort = 3000
+
+[nix]
+channel = "stable-25_05"
+
+[deployment]
+deploymentTarget = "autoscale"
+run = ["npm", "start"]
+build = ["npm", "run", "build:production"]
