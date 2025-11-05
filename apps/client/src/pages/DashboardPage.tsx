@@ -5,18 +5,19 @@ import {
   Sparkles, Activity
 } from "lucide-react";
 import type { SelectMoodEntry, SelectJournal } from "@shared/schema";
-import { QuickActions } from "@/components/QuickActions.tsx";
+import { QuickActions } from "@/components/QuickActions";
+import { Skeleton } from "@/components/SkeletonLoader";
 
 export function DashboardPage() {
-  const { data: moods = [] } = useQuery<SelectMoodEntry[]>({
+  const { data: moods = [], isLoading: moodsLoading } = useQuery<SelectMoodEntry[]>({
     queryKey: ["/api/moods"],
   });
 
-  const { data: journals = [] } = useQuery<SelectJournal[]>({
+  const { data: journals = [], isLoading: journalsLoading } = useQuery<SelectJournal[]>({
     queryKey: ["/api/journals"],
   });
 
-  const { data: analytics } = useQuery<{
+  const { data: analytics, isLoading: analyticsLoading } = useQuery<{
     totalEntries: number;
     averageIntensity: number;
     trends: { weeklyAverage: number; improving: boolean };
@@ -133,13 +134,15 @@ export function DashboardPage() {
               </span>
             </Link>
           </div>
-          <div className="min-h-[200px]" style={{ contain: 'layout' }}>
-            {recentMoods.length === 0 ? (
-              <p className="text-gray-500 text-center py-8" data-testid="no-recent-moods">
-                No mood entries yet. Start tracking your mood!
-              </p>
+          <div style={{ height: '252px', contain: 'layout strict' }}>
+            {moodsLoading || recentMoods.length === 0 ? (
+              <div style={{ height: '252px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <p className="text-gray-500 text-center" data-testid="no-recent-moods">
+                  {moodsLoading ? 'Loading...' : 'No mood entries yet. Start tracking your mood!'}
+                </p>
+              </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3" style={{ height: '252px', overflow: 'auto' }}>
                 {recentMoods.map((mood) => (
                 <div
                   key={mood.id}
@@ -179,13 +182,15 @@ export function DashboardPage() {
               </span>
             </Link>
           </div>
-          <div className="min-h-[200px]" style={{ contain: 'layout' }}>
-            {recentJournals.length === 0 ? (
-              <p className="text-gray-500 text-center py-8" data-testid="no-recent-journals">
-                No journal entries yet. Start journaling!
-              </p>
+          <div style={{ height: '276px', contain: 'layout strict' }}>
+            {journalsLoading || recentJournals.length === 0 ? (
+              <div style={{ height: '276px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <p className="text-gray-500 text-center" data-testid="no-recent-journals">
+                  {journalsLoading ? 'Loading...' : 'No journal entries yet. Start journaling!'}
+                </p>
+              </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3" style={{ height: '276px', overflow: 'auto' }}>
                 {recentJournals.map((journal) => (
                 <div
                   key={journal.id}
