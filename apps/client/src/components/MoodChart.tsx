@@ -28,6 +28,18 @@ export function MoodChart({
   height = 200,
   'data-testid': testId,
 }: MoodChartProps) {
+  // Guard against empty data
+  if (!data || data.length === 0) {
+    return (
+      <div className="bg-white dark:bg-gray-800 rounded-lg p-6" data-testid={testId}>
+        <div className="text-center py-12 text-gray-500">
+          <p>No mood data available</p>
+          <p className="text-sm mt-2">Start logging your mood to see trends!</p>
+        </div>
+      </div>
+    );
+  }
+
   const chartData = useMemo(() => {
     const maxValue = 5;
     const points = data.map((item, index) => {
@@ -168,10 +180,10 @@ export function MoodChart({
       {/* Legend */}
       <div className="mt-4 flex items-center justify-between text-xs text-gray-500">
         <span>
-          {new Date(data[0]?.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+          {data[0]?.date ? new Date(data[0].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'N/A'}
         </span>
         <span>
-          {new Date(data[data.length - 1]?.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+          {data[data.length - 1]?.date ? new Date(data[data.length - 1].date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : 'N/A'}
         </span>
       </div>
 
