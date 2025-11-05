@@ -48,18 +48,39 @@ export function AdvancedSearchWithAPI() {
   // Main search query
   const { data: searchData, isLoading: isSearching, refetch } = useQuery<SearchResponse>({
     queryKey: ['/api/search', debouncedQuery, selectedTypes],
+    queryFn: async () => {
+      const params = new URLSearchParams();
+      params.set('q', debouncedQuery);
+      if (selectedTypes.length > 0) {
+        params.set('types', selectedTypes.join(','));
+      }
+      const response = await fetch(`/api/search?${params.toString()}`);
+      if (!response.ok) throw new Error('Search failed');
+      return response.json();
+    },
     enabled: debouncedQuery.length >= 2,
   });
 
   // Autocomplete suggestions
   const { data: autocompleteData } = useQuery<{ suggestions: string[] }>({
-    queryKey: ['/api/search/autocomplete', { q: query }],
-    enabled: query.length >= 2 && query.length < debouncedQuery.length,
+    queryKey: ['/api/search/autocomplete', query],
+    queryFn: async () => {
+      const params = new URLSearchParams({ q: query });
+      const response = await fetch(`/api/search/autocomplete?${params.toString()}`);
+      if (!response.ok) throw new Error('Autocomplete failed');
+      return response.json();
+    },
+    enabled: query.length >= 2 && query !== debouncedQuery,
   });
 
   // Trending searches
   const { data: trendingData } = useQuery<{ trending: string[] }>({
     queryKey: ['/api/search/trending'],
+    queryFn: async () => {
+      const response = await fetch('/api/search/trending');
+      if (!response.ok) throw new Error('Trending failed');
+      return response.json();
+    },
   });
 
   const handleSearch = () => {
