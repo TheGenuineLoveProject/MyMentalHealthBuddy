@@ -98,10 +98,10 @@ export function DataTable<T extends Record<string, any>>({
     });
   };
 
-  const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectAll = (checked: boolean) => {
     const newSelected = new Set(selected);
     
-    if (e.target.checked) {
+    if (checked) {
       // Add all current page rows to selection
       paginatedData.forEach((row) => newSelected.add(row[keyField]));
     } else {
@@ -114,9 +114,9 @@ export function DataTable<T extends Record<string, any>>({
     onSelectionChange?.(data.filter((r) => newSelected.has(r[keyField])));
   };
 
-  const handleSelectRow = (row: T, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectRow = (row: T, checked: boolean) => {
     const newSelected = new Set(selected);
-    if (e.target.checked) {
+    if (checked) {
       newSelected.add(row[keyField]);
     } else {
       newSelected.delete(row[keyField]);
@@ -218,7 +218,7 @@ export function DataTable<T extends Record<string, any>>({
                     <td className="px-4 py-3">
                       <Checkbox
                         checked={selected.has(row[keyField])}
-                        onChange={(e) => handleSelectRow(row, e)}
+                        onChange={(checked) => handleSelectRow(row, checked)}
                         data-testid={`checkbox-row-${row[keyField]}`}
                       />
                     </td>
