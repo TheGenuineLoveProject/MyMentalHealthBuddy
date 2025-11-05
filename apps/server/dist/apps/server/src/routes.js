@@ -6,7 +6,7 @@ import { Sanitizer, apiRateLimiter, chatRateLimiter } from "./validation.js";
 import { DataExporter } from "./export.js";
 import { StripeService, stripe, SUBSCRIPTION_TIERS } from "./stripe-service.js";
 import { canvaService } from "./canva-service.js";
-import { requireAuth, requireTier, csrfProtection, generateCsrfToken, devAuthFallback } from "./lib/authMiddleware.js";
+import { requireAuth, optionalAuth, requireTier, csrfProtection, generateCsrfToken, devAuthFallback } from "./lib/authMiddleware.js";
 import { apiCache, CACHE_PRESETS } from "./lib/apiCache.js";
 import { healthCheckHandler, livenessHandler, readinessHandler } from "./lib/healthCheck.js";
 // Async handler wrapper for better error handling
@@ -801,6 +801,46 @@ export function registerRoutes(app) {
             uptime: process.uptime(),
             timestamp: new Date().toISOString()
         });
+    }));
+    // ============================================
+    // ADVANCED SEARCH API - Full-Text Search with Relevance Scoring
+    // ============================================
+    // Comprehensive search across all content
+    app.get("/api/search", devAuthFallback, optionalAuth, rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const { SearchService } = await import("./services/searchService.js");
+        const searchService = new SearchService(storage);
+        const query = Sanitizer.sanitizeString(req.query.q || '');
+        const types = req.query.types
+            ? req.query.types.split(',').map(t => Sanitizer.sanitizeString(t))
+            : undefined;
+        const limit = parseInt(req.query.limit || '20', 10);
+        const offset = parseInt(req.query.offset || '0', 10);
+        const userId = req.userId ? req.userId.toString() : null;
+        const results = await searchService.search({
+            query,
+            types,
+            limit,
+            offset,
+            userId
+        });
+        res.json(results);
+    }));
+    // Autocomplete suggestions
+    app.get("/api/search/autocomplete", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const { SearchService } = await import("./services/searchService.js");
+        const searchService = new SearchService(storage);
+        const query = Sanitizer.sanitizeString(req.query.q || '');
+        const limit = parseInt(req.query.limit || '5', 10);
+        const suggestions = await searchService.autocomplete(query, limit);
+        res.json({ suggestions });
+    }));
+    // Trending search queries
+    app.get("/api/search/trending", rateLimitMiddleware(apiRateLimiter), asyncHandler(async (req, res) => {
+        const { SearchService } = await import("./services/searchService.js");
+        const searchService = new SearchService(storage);
+        const limit = parseInt(req.query.limit || '10', 10);
+        const trending = await searchService.getTrending(limit);
+        res.json({ trending });
     }));
     // Auto-added: Analytics endpoints
     try {

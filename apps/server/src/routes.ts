@@ -1300,7 +1300,7 @@ export function registerRoutes(app: Express) {
         : undefined;
       const limit = parseInt(req.query.limit as string || '20', 10);
       const offset = parseInt(req.query.offset as string || '0', 10);
-      const userId = req.userId || null;
+      const userId = req.userId ? req.userId.toString() : null;
 
       const results = await searchService.search({
         query,

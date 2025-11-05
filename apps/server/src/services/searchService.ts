@@ -1,4 +1,4 @@
-import type { IStorage } from "../storage.js";
+import type { IStorage } from "../../storage.js";
 
 /**
  * Advanced Search Service with Full-Text Search & Relevance Scoring
@@ -10,7 +10,7 @@ export interface SearchOptions {
   types?: string[];  // Filter by entity type
   limit?: number;
   offset?: number;
-  userId?: number | null;
+  userId?: string | null;
 }
 
 export interface SearchResult {
@@ -84,9 +84,9 @@ export class SearchService {
       results.push(...messages);
     }
 
-    // Search knowledge base
-    if (types.includes('knowledge')) {
-      const knowledge = await this.searchKnowledge(normalizedQuery);
+    // Search knowledge base (user-specific)
+    if (types.includes('knowledge') && userId) {
+      const knowledge = await this.searchKnowledge(normalizedQuery, userId);
       results.push(...knowledge);
     }
 
@@ -145,7 +145,7 @@ export class SearchService {
   /**
    * Search journals with full-text search
    */
-  private async searchJournals(query: string, userId: number): Promise<SearchResult[]> {
+  private async searchJournals(query: string, userId: string): Promise<SearchResult[]> {
     const journals = await this.storage.getJournalsByUserId(userId);
     
     return journals
@@ -174,7 +174,7 @@ export class SearchService {
   /**
    * Search mood entries
    */
-  private async searchMoods(query: string, userId: number): Promise<SearchResult[]> {
+  private async searchMoods(query: string, userId: string): Promise<SearchResult[]> {
     const moods = await this.storage.getMoodEntriesByUserId(userId);
     
     return moods
@@ -202,47 +202,106 @@ export class SearchService {
    * Search crisis resources
    */
   private async searchResources(query: string): Promise<SearchResult[]> {
-    const resources = await this.storage.getAllCrisisResources();
-    
-    return resources
-      .filter(resource => {
-        const searchText = `${resource.name} ${resource.description} ${resource.category}`.toLowerCase();
-        return searchText.includes(query.toLowerCase());
-      })
-      .map(resource => ({
-        id: resource.id.toString(),
-        type: 'resource' as const,
-        title: resource.name,
-        content: resource.description,
-        excerpt: this.generateExcerpt(resource.description, query),
-        relevance: this.calculateRelevance(
-          `${resource.name} ${resource.description} ${resource.category}`,
-          query
-        ),
-        createdAt: resource.createdAt,
-        metadata: {
-          category: resource.category,
-          phone: resource.phone,
-          website: resource.website,
-        },
-      }));
+    try {
+      const resources = await this.storage.getCrisisResources();
+      
+      return resources
+        .filter(resource => {
+          const searchText = `${resource.name} ${resource.description} ${resource.type}`.toLowerCase();
+          return searchText.includes(query.toLowerCase());
+        })
+        .map(resource => ({
+          id: resource.id.toString(),
+          type: 'resource' as const,
+          title: resource.name,
+          content: resource.description,
+          excerpt: this.generateExcerpt(resource.description, query),
+          relevance: this.calculateRelevance(
+            `${resource.name} ${resource.description} ${resource.type}`,
+            query
+          ),
+          createdAt: new Date(),
+          metadata: {
+            type: resource.type,
+            phoneNumber: resource.phoneNumber,
+            website: resource.website,
+            country: resource.country,
+          },
+        }));
+    } catch (error) {
+      console.error('Error searching resources:', error);
+      return [];
+    }
   }
 
   /**
    * Search healing messages
    */
-  private async searchMessages(query: string, userId: number | null): Promise<SearchResult[]> {
-    // Get all messages (optionally filtered by userId if implemented)
-    // For now, return empty array as we don't have a method to get all messages
-    return [];
+  private async searchMessages(query: string, userId: string | null): Promise<SearchResult[]> {
+    if (!userId) return [];
+    
+    try {
+      const messages = await this.storage.getHealingMessagesByUserId(userId);
+      
+      return messages
+        .filter(msg => {
+          const searchText = `${msg.userMessage} ${msg.aiResponse}`.toLowerCase();
+          return searchText.includes(query.toLowerCase());
+        })
+        .map(msg => ({
+          id: msg.id.toString(),
+          type: 'message' as const,
+          title: `Conversation - ${new Date(msg.timestamp).toLocaleDateString()}`,
+          content: `You: ${msg.userMessage}\n\nAI: ${msg.aiResponse}`,
+          excerpt: this.generateExcerpt(`${msg.userMessage} ${msg.aiResponse}`, query),
+          relevance: this.calculateRelevance(`${msg.userMessage} ${msg.aiResponse}`, query),
+          createdAt: msg.timestamp,
+          metadata: {
+            emotion: msg.emotion,
+            sentiment: msg.sentiment,
+            sessionId: msg.sessionId,
+          },
+        }));
+    } catch (error) {
+      console.error('Error searching messages:', error);
+      return [];
+    }
   }
 
   /**
    * Search knowledge base
    */
-  private async searchKnowledge(query: string): Promise<SearchResult[]> {
-    // TODO: Implement knowledge base search when knowledge API is ready
-    return [];
+  private async searchKnowledge(query: string, userId: string): Promise<SearchResult[]> {
+    try {
+      const sources = await this.storage.getKnowledgeSourcesByUserId(userId);
+      
+      return sources
+        .filter(source => {
+          const searchText = `${source.title} ${source.sourceType} ${source.category || ''}`.toLowerCase();
+          return searchText.includes(query.toLowerCase());
+        })
+        .map(source => ({
+          id: source.id.toString(),
+          type: 'knowledge' as const,
+          title: source.title,
+          content: `${source.sourceType} - ${source.category || 'Uncategorized'}`,
+          excerpt: `Knowledge source: ${source.title}`,
+          relevance: this.calculateRelevance(
+            `${source.title} ${source.sourceType} ${source.category || ''}`,
+            query
+          ),
+          createdAt: source.createdAt,
+          metadata: {
+            sourceType: source.sourceType,
+            category: source.category,
+            url: source.sourceUrl,
+            status: source.status,
+          },
+        }));
+    } catch (error) {
+      console.error('Error searching knowledge:', error);
+      return [];
+    }
   }
 
   /**
