@@ -94,10 +94,12 @@ export function DashboardPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 stats-grid">
         {stats.map((stat, index) => {
           const Icon = stat.icon;
+          const isLoading = moodsLoading || journalsLoading || analyticsLoading;
+          
           return (
             <div
               key={index}
-              className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500 stat-card min-h-[140px]"
+              className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500 stat-card h-[140px]"
               data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
               style={{ contain: 'layout' }}
             >
@@ -107,7 +109,13 @@ export function DashboardPage() {
                   <Icon className={stat.color} size={20} />
                 </div>
               </div>
-              <p className="text-3xl font-bold text-gray-900">{stat.value}</p>
+              {isLoading ? (
+                <Skeleton className="h-9 w-16" />
+              ) : (
+                <p className="text-3xl font-bold text-gray-900" data-testid={`stat-value-${index}`}>
+                  {stat.value}
+                </p>
+              )}
             </div>
           );
         })}
