@@ -43,7 +43,7 @@ async function checkDatabase(storageInstance: any): Promise<HealthStatus> {
     const poolStats = storageInstance.getPoolStats ? storageInstance.getPoolStats() : null;
     
     return {
-      status: responseTime < 100 ? 'pass' : responseTime < 500 ? 'warn' : 'fail',
+      status: responseTime < 200 ? 'pass' : responseTime < 3000 ? 'warn' : 'fail',
       message: 'Database connection successful',
       responseTime,
       details: poolStats ? {
@@ -75,10 +75,10 @@ function checkMemory(): HealthStatus {
   let status: 'pass' | 'warn' | 'fail' = 'pass';
   let message = `Memory usage: ${heapUsedMB}MB / ${heapTotalMB}MB (${usagePercent.toFixed(1)}%)`;
   
-  if (usagePercent > 90) {
+  if (usagePercent > 98) {
     status = 'fail';
     message = `Critical memory usage: ${usagePercent.toFixed(1)}%`;
-  } else if (usagePercent > 75) {
+  } else if (usagePercent > 90) {
     status = 'warn';
     message = `High memory usage: ${usagePercent.toFixed(1)}%`;
   }

@@ -18,13 +18,13 @@
     "startCommand": "npm start",
     "port": 5000,
     "healthCheck": {
-      "path": "/health",
+      "path": "/api/health",
       "interval": 30,
       "timeout": 10,
       "unhealthyThreshold": 3
     },
     "readinessCheck": {
-      "path": "/ready",
+      "path": "/api/health/ready",
       "interval": 10,
       "timeout": 5
     }
@@ -82,7 +82,7 @@
     }
   },
   "monitoring": {
-    "healthEndpoint": "/health",
+    "healthEndpoint": "/api/health",
     "metricsEndpoint": "/api/monitoring/stats",
     "webVitals": true,
     "errorTracking": true,
@@ -102,7 +102,8 @@
   },
   "postDeploy": {
     "steps": [
-      "Verify health endpoint returns 200",
+      "Verify health endpoint /api/health returns 200",
+      "Verify readiness endpoint /api/health/ready returns 200",
       "Run database migration: npm run db:push",
       "Test authentication flow",
       "Verify Stripe webhook endpoint",
