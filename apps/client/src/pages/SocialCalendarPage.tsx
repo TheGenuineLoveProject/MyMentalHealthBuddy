@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Card } from "@/components/Card.tsx";
-import { Button } from "@/components/Button.tsx";
-import { Badge } from "@/components/Badge.tsx";
-import { CalendarView } from "@/components/CalendarView.tsx";
+import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
+import { Badge } from "@/components/Badge";
+import { CalendarView } from "@/components/CalendarView";
 import { useToast } from "@/hooks";
 import { Calendar as CalendarIcon, Instagram, Twitter, Facebook, Linkedin, Clock, CheckCircle2, List } from "lucide-react";
 import { SiTiktok } from "react-icons/si";
@@ -100,7 +100,7 @@ export default function SocialCalendarPage() {
           Schedule New Post
         </Button>
         <Button
-          variant={viewMode === 'calendar' ? 'default' : 'outline'}
+          variant={viewMode === 'calendar' ? 'primary' : 'secondary'}
           onClick={() => setViewMode('calendar')}
           data-testid="button-view-calendar"
         >
@@ -108,7 +108,7 @@ export default function SocialCalendarPage() {
           Calendar View
         </Button>
         <Button
-          variant={viewMode === 'list' ? 'default' : 'outline'}
+          variant={viewMode === 'list' ? 'primary' : 'secondary'}
           onClick={() => setViewMode('list')}
           data-testid="button-view-list"
         >
@@ -121,27 +121,27 @@ export default function SocialCalendarPage() {
       <Card className="p-6 mb-8">
         <h3 className="text-lg font-semibold mb-4">Connected Platforms</h3>
         <div className="flex gap-3 flex-wrap">
-          <Badge variant="default" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-instagram">
+          <Badge variant="primary" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-instagram">
             <Instagram className="h-4 w-4" />
             Instagram
             <CheckCircle2 className="h-3 w-3 text-green-400" />
           </Badge>
-          <Badge variant="default" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-twitter">
+          <Badge variant="primary" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-twitter">
             <Twitter className="h-4 w-4" />
             Twitter/X
             <CheckCircle2 className="h-3 w-3 text-green-400" />
           </Badge>
-          <Badge variant="default" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-facebook">
+          <Badge variant="primary" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-facebook">
             <Facebook className="h-4 w-4" />
             Facebook
             <CheckCircle2 className="h-3 w-3 text-green-400" />
           </Badge>
-          <Badge variant="default" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-linkedin">
+          <Badge variant="primary" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-linkedin">
             <Linkedin className="h-4 w-4" />
             LinkedIn
             <CheckCircle2 className="h-3 w-3 text-green-400" />
           </Badge>
-          <Badge variant="outline" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-tiktok">
+          <Badge variant="gray" className="flex items-center gap-2 py-2 px-3" data-testid="badge-platform-tiktok">
             <SiTiktok className="h-4 w-4" />
             TikTok
             <span className="text-xs text-muted-foreground">Not connected</span>
@@ -202,7 +202,7 @@ export default function SocialCalendarPage() {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <div className={`h-2 w-2 rounded-full ${getStatusColor(post.status)}`} />
-                  <Badge variant="outline" data-testid={`badge-status-${post.id}`}>
+                  <Badge variant="gray" data-testid={`badge-status-${post.id}`}>
                     {post.status}
                   </Badge>
                   <div className="flex items-center text-sm text-muted-foreground">
@@ -217,7 +217,7 @@ export default function SocialCalendarPage() {
                   {post.platforms.map((platform) => {
                     const Icon = getPlatformIcon(platform);
                     return (
-                      <Badge key={platform} variant="secondary" className="flex items-center gap-1" data-testid={`badge-platform-${post.id}-${platform}`}>
+                      <Badge key={platform} variant="gray" className="flex items-center gap-1" data-testid={`badge-platform-${post.id}-${platform}`}>
                         <Icon className="h-3 w-3" />
                         {platform}
                       </Badge>
@@ -226,10 +226,10 @@ export default function SocialCalendarPage() {
                 </div>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" data-testid={`button-edit-${post.id}`}>
+                <Button variant="secondary" size="sm" data-testid={`button-edit-${post.id}`}>
                   Edit
                 </Button>
-                <Button variant="outline" size="sm" data-testid={`button-preview-${post.id}`}>
+                <Button variant="secondary" size="sm" data-testid={`button-preview-${post.id}`}>
                   Preview
                 </Button>
               </div>

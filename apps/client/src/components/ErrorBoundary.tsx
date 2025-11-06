@@ -1,6 +1,6 @@
 import { Component, ErrorInfo, ReactNode } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
 import { AlertCircle, RefreshCw, Home } from 'lucide-react';
 
 interface Props {
@@ -106,7 +106,7 @@ export class ErrorBoundary extends Component<Props, State> {
               <div className="flex gap-3 justify-center">
                 <Button
                   onClick={this.handleReset}
-                  variant="default"
+                  variant="primary"
                   className="inline-flex items-center gap-2"
                   data-testid="button-try-again"
                 >
@@ -116,7 +116,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 
                 <Button
                   onClick={this.handleGoHome}
-                  variant="outline"
+                  variant="secondary"
                   className="inline-flex items-center gap-2"
                   data-testid="button-go-home"
                 >

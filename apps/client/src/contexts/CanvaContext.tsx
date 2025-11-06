@@ -20,7 +20,7 @@ interface CanvaContextType {
   createSocialPost: (platform: string, title: string, imageUrl?: string) => Promise<CanvaDesign | null>;
   generateQuote: (quote: string, author?: string) => Promise<CanvaDesign | null>;
   generateMoodVisual: (mood: string, intensity: number, date?: string) => Promise<CanvaDesign | null>;
-  refreshDesigns: () => Promise<void>;
+  refreshDesigns: () => Promise<boolean>;
   checkStatus: () => Promise<void>;
 }
 

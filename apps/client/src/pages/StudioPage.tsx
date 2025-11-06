@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Card } from "@/components/Card.tsx";
-import { Button } from "@/components/Button.tsx";
-import { Badge } from "@/components/Badge.tsx";
-import { ContentEditor } from "@/components/ContentEditor.tsx";
-import { ContentTemplates } from "@/components/ContentTemplates.tsx";
-import { SearchFilter } from "@/components/SearchFilter.tsx";
-import { SEOOptimizer } from "@/components/SEOOptimizer.tsx";
+import { Card } from "@/components/Card";
+import { Button } from "@/components/Button";
+import { Badge } from "@/components/Badge";
+import { ContentEditor } from "@/components/ContentEditor";
+import { ContentTemplates } from "@/components/ContentTemplates";
+import { SearchFilter } from "@/components/SearchFilter";
+import { SEOOptimizer } from "@/components/SEOOptimizer";
 import { useToast } from "@/hooks";
 import { FileEdit, Calendar, CheckCircle2, Clock, Send, Library, TrendingUp } from "lucide-react";
 
@@ -46,12 +46,12 @@ export default function StudioPage() {
   ];
 
   const getStatusBadge = (status: string) => {
-    const statusConfig: Record<string, { variant: "default" | "secondary" | "outline" | "destructive", icon: any }> = {
-      draft: { variant: "outline", icon: FileEdit },
-      in_review: { variant: "secondary", icon: Clock },
-      approved: { variant: "default", icon: CheckCircle2 },
-      scheduled: { variant: "default", icon: Calendar },
-      published: { variant: "default", icon: Send }
+    const statusConfig: Record<string, { variant: "primary" | "success" | "danger" | "warning" | "gray", icon: any }> = {
+      draft: { variant: "gray", icon: FileEdit },
+      in_review: { variant: "warning", icon: Clock },
+      approved: { variant: "success", icon: CheckCircle2 },
+      scheduled: { variant: "primary", icon: Calendar },
+      published: { variant: "success", icon: Send }
     };
 
     const config = statusConfig[status] || statusConfig.draft;
@@ -109,15 +109,15 @@ export default function StudioPage() {
           <FileEdit className="h-4 w-4 mr-2" />
           New Article
         </Button>
-        <Button variant="outline" onClick={() => setShowTemplates(true)} data-testid="button-templates">
+        <Button variant="secondary" onClick={() => setShowTemplates(true)} data-testid="button-templates">
           <Library className="h-4 w-4 mr-2" />
           Templates
         </Button>
-        <Button variant="outline" data-testid="button-new-video">
+        <Button variant="secondary" data-testid="button-new-video">
           <Calendar className="h-4 w-4 mr-2" />
           Schedule Content
         </Button>
-        <Button variant="outline" onClick={() => setShowSEO(!showSEO)} data-testid="button-seo">
+        <Button variant="secondary" onClick={() => setShowSEO(!showSEO)} data-testid="button-seo">
           <TrendingUp className="h-4 w-4 mr-2" />
           SEO Tools
         </Button>
@@ -146,7 +146,7 @@ export default function StudioPage() {
                     {item.title}
                   </h3>
                   {getStatusBadge(item.status)}
-                  <Badge variant="outline" data-testid={`badge-type-${item.id}`}>
+                  <Badge variant="gray" data-testid={`badge-type-${item.id}`}>
                     {item.type}
                   </Badge>
                 </div>
@@ -155,10 +155,10 @@ export default function StudioPage() {
                 </div>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" data-testid={`button-edit-${item.id}`}>
+                <Button variant="secondary" size="sm" data-testid={`button-edit-${item.id}`}>
                   Edit
                 </Button>
-                <Button variant="outline" size="sm" data-testid={`button-preview-${item.id}`}>
+                <Button variant="secondary" size="sm" data-testid={`button-preview-${item.id}`}>
                   Preview
                 </Button>
               </div>
@@ -221,7 +221,7 @@ export default function StudioPage() {
               }}
             />
             <div className="mt-6 flex justify-end">
-              <Button variant="outline" onClick={() => setShowTemplates(false)}>
+              <Button variant="secondary" onClick={() => setShowTemplates(false)}>
                 Close
               </Button>
             </div>

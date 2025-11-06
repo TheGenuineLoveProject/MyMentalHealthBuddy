@@ -79,8 +79,6 @@ export function FormField({
     ? 'border-green-300 focus:border-green-500 focus:ring-green-200 dark:border-green-700 dark:focus:ring-green-900'
     : 'border-gray-300 focus:border-blue-500 focus:ring-blue-200 dark:border-gray-600 dark:focus:ring-blue-900';
 
-  const InputElement = type === 'textarea' ? 'textarea' : 'input';
-
   return (
     <div className="space-y-2" data-testid={testId}>
       {/* Label */}
@@ -94,29 +92,51 @@ export function FormField({
 
       {/* Input Container */}
       <div className="relative">
-        <InputElement
-          id={id}
-          name={name}
-          type={type !== 'textarea' ? type : undefined}
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          disabled={disabled}
-          required={required}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          minLength={minLength}
-          pattern={pattern}
-          autoComplete={autoComplete}
-          rows={type === 'textarea' ? rows : undefined}
-          className={`${baseInputClasses} ${stateClasses} ${
-            showSuccess || showError ? 'pr-10' : ''
-          }`}
-          aria-invalid={showError}
-          aria-describedby={`${id}-hint ${id}-error`}
-          data-testid={`input-${name}`}
-        />
+        {type === 'textarea' ? (
+          <textarea
+            id={id}
+            name={name}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            disabled={disabled}
+            required={required}
+            placeholder={placeholder}
+            maxLength={maxLength}
+            minLength={minLength}
+            rows={rows}
+            className={`${baseInputClasses} ${stateClasses} ${
+              showSuccess || showError ? 'pr-10' : ''
+            }`}
+            aria-invalid={showError ? 'true' : 'false'}
+            aria-describedby={`${id}-hint ${id}-error`}
+            data-testid={`input-${name}`}
+          />
+        ) : (
+          <input
+            id={id}
+            name={name}
+            type={type}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            disabled={disabled}
+            required={required}
+            placeholder={placeholder}
+            maxLength={maxLength}
+            minLength={minLength}
+            pattern={pattern}
+            autoComplete={autoComplete}
+            className={`${baseInputClasses} ${stateClasses} ${
+              showSuccess || showError ? 'pr-10' : ''
+            }`}
+            aria-invalid={showError ? 'true' : 'false'}
+            aria-describedby={`${id}-hint ${id}-error`}
+            data-testid={`input-${name}`}
+          />
+        )}
 
         {/* Success/Error Icons */}
         {(showSuccess || showError) && (

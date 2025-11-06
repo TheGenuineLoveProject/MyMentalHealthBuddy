@@ -4,8 +4,8 @@
  */
 
 import { Component, ReactNode, ErrorInfo } from 'react';
-import { Button } from '@/components/Button.tsx';
-import { Card } from '@/components/Card.tsx';
+import { Button } from '@/components/Button';
+import { Card } from '@/components/Card';
 import { AlertCircle, RefreshCw, Home, ArrowLeft } from 'lucide-react';
 
 interface PageErrorBoundaryProps {
@@ -143,7 +143,7 @@ export class PageErrorBoundary extends Component<PageErrorBoundaryProps, PageErr
               <div className="flex flex-wrap gap-3 justify-center">
                 <Button
                   onClick={this.handleReset}
-                  variant="default"
+                  variant="primary"
                   data-testid="button-reset-error"
                   aria-label="Try again"
                 >
@@ -153,7 +153,7 @@ export class PageErrorBoundary extends Component<PageErrorBoundaryProps, PageErr
                 
                 <Button
                   onClick={this.handleGoBack}
-                  variant="outline"
+                  variant="secondary"
                   data-testid="button-go-back"
                   aria-label="Go back to previous page"
                 >
@@ -163,7 +163,7 @@ export class PageErrorBoundary extends Component<PageErrorBoundaryProps, PageErr
 
                 <Button
                   onClick={this.handleGoHome}
-                  variant="outline"
+                  variant="secondary"
                   data-testid="button-go-home"
                   aria-label="Go to home page"
                 >
@@ -174,7 +174,7 @@ export class PageErrorBoundary extends Component<PageErrorBoundaryProps, PageErr
                 {this.state.errorCount > 2 && (
                   <Button
                     onClick={this.handleReload}
-                    variant="outline"
+                    variant="secondary"
                     data-testid="button-reload-page"
                     aria-label="Reload the entire page"
                   >

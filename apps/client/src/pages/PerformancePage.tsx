@@ -1,4 +1,4 @@
-import { PerformanceDashboard } from '@/components/PerformanceDashboard.tsx';
+import { PerformanceDashboard } from '@/components/PerformanceDashboard';
 
 /**
  * Performance Monitoring Page

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
-import { LineChart, BarChart } from '@/components/Charts.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
+import { LineChart, BarChart } from '@/components/Charts';
 import {
   Zap,
   TrendingUp,
@@ -113,7 +113,7 @@ export function PerformanceDashboard() {
         </div>
         <div className="flex gap-2">
           <Button
-            variant="outline"
+            variant="ghost"
             onClick={refreshMetrics}
             disabled={isRefreshing}
             data-testid="button-refresh"
@@ -121,7 +121,7 @@ export function PerformanceDashboard() {
             <RefreshCw className={`h-4 w-4 mr-2 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
-          <Button variant="outline" data-testid="button-export">
+          <Button variant="secondary" data-testid="button-export">
             <Download className="h-4 w-4 mr-2" />
             Export Report
           </Button>
@@ -189,7 +189,7 @@ export function PerformanceDashboard() {
       <Card className="p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-semibold">Bundle Size Breakdown</h3>
-          <Badge variant="outline">Total: {metrics.bundleSize} KB</Badge>
+          <Badge variant="gray">Total: {metrics.bundleSize} KB</Badge>
         </div>
         <BarChart data={bundleSizeData} height={250} />
       </Card>

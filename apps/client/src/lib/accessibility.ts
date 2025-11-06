@@ -169,12 +169,13 @@ export function isEscapeKey(event: React.KeyboardEvent): boolean {
  * Check if event is arrow navigation key
  */
 export function isArrowKey(event: React.KeyboardEvent): boolean {
-  return [
+  const arrowKeys = [
     KeyboardKeys.ArrowUp,
     KeyboardKeys.ArrowDown,
     KeyboardKeys.ArrowLeft,
     KeyboardKeys.ArrowRight,
-  ].includes(event.key as typeof KeyboardKeys[keyof typeof KeyboardKeys]);
+  ];
+  return arrowKeys.includes(event.key as any);
 }
 
 /**

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { X, Save, Eye, Sparkles, Image, Video, FileText } from 'lucide-react';
 
 interface ContentEditorProps {
@@ -76,7 +76,7 @@ export function ContentEditor({ isOpen, onClose, onSave, initialContent }: Conte
               {['blog', 'video', 'podcast', 'infographic'].map((type) => (
                 <Button
                   key={type}
-                  variant={contentType === type ? 'default' : 'outline'}
+                  variant={contentType === type ? 'primary' : 'secondary'}
                   size="sm"
                   onClick={() => setContentType(type)}
                   data-testid={`button-type-${type}`}
@@ -107,7 +107,7 @@ export function ContentEditor({ isOpen, onClose, onSave, initialContent }: Conte
             <div className="flex items-center justify-between mb-2">
               <label className="block text-sm font-medium">Content</label>
               <Button
-                variant="outline"
+                variant="secondary"
                 size="sm"
                 onClick={handleAISuggestion}
                 disabled={aiSuggesting}
@@ -134,7 +134,7 @@ export function ContentEditor({ isOpen, onClose, onSave, initialContent }: Conte
             <label className="block text-sm font-medium mb-2">Tags</label>
             <div className="flex gap-2 mb-3 flex-wrap">
               {tags.map((tag) => (
-                <Badge key={tag} variant="secondary" className="flex items-center gap-1" data-testid={`badge-tag-${tag}`}>
+                <Badge key={tag} variant="gray" className="flex items-center gap-1" data-testid={`badge-tag-${tag}`}>
                   {tag}
                   <button onClick={() => handleRemoveTag(tag)} className="hover:text-destructive">
                     <X className="h-3 w-3" />
@@ -158,11 +158,11 @@ export function ContentEditor({ isOpen, onClose, onSave, initialContent }: Conte
 
           {/* Toolbar */}
           <div className="flex gap-2 mb-6 p-3 bg-muted rounded-lg">
-            <Button variant="outline" size="sm" data-testid="button-add-image">
+            <Button variant="secondary" size="sm" data-testid="button-add-image">
               <Image className="h-4 w-4 mr-1" />
               Image
             </Button>
-            <Button variant="outline" size="sm" data-testid="button-add-video">
+            <Button variant="secondary" size="sm" data-testid="button-add-video">
               <Video className="h-4 w-4 mr-1" />
               Video
             </Button>
@@ -170,10 +170,10 @@ export function ContentEditor({ isOpen, onClose, onSave, initialContent }: Conte
 
           {/* Actions */}
           <div className="flex gap-3 justify-end">
-            <Button variant="outline" onClick={onClose} data-testid="button-cancel">
+            <Button variant="secondary" onClick={onClose} data-testid="button-cancel">
               Cancel
             </Button>
-            <Button variant="outline" data-testid="button-preview">
+            <Button variant="secondary" data-testid="button-preview">
               <Eye className="h-4 w-4 mr-2" />
               Preview
             </Button>

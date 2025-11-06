@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { ThemeToggle } from "@/components/ThemeToggle.tsx";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { allNavItems } from "@/lib/navigationStructure";
 
 export function Navigation() {

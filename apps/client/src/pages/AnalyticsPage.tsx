@@ -1,8 +1,8 @@
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
-import { AnalyticsDashboard } from '@/components/AnalyticsDashboard.tsx';
-import { LineChart, PieChart } from '@/components/Charts.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
+import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
+import { LineChart, PieChart } from '@/components/Charts';
 import {
   TrendingUp,
   Users,
@@ -52,13 +52,13 @@ export default function AnalyticsPage() {
 
       {/* Quick Export */}
       <div className="flex gap-3 mb-8">
-        <Button variant="outline" data-testid="button-export-pdf">
+        <Button variant="secondary" data-testid="button-export-pdf">
           Export PDF
         </Button>
-        <Button variant="outline" data-testid="button-export-csv">
+        <Button variant="secondary" data-testid="button-export-csv">
           Export CSV
         </Button>
-        <Button variant="outline" data-testid="button-schedule-report">
+        <Button variant="secondary" data-testid="button-schedule-report">
           Schedule Report
         </Button>
       </div>
@@ -85,7 +85,7 @@ export default function AnalyticsPage() {
                 <div className="text-3xl font-bold mb-2" data-testid={`audience-value-${i}`}>
                   {stat.value}
                 </div>
-                <Badge variant="outline" className="text-green-600" data-testid={`audience-change-${i}`}>
+                <Badge variant="gray" className="text-green-600" data-testid={`audience-change-${i}`}>
                   <TrendingUp className="h-3 w-3 mr-1" />
                   {stat.change}
                 </Badge>
@@ -145,7 +145,7 @@ export default function AnalyticsPage() {
               <div className="text-2xl font-bold mb-1">10K</div>
               <div className="text-sm text-muted-foreground">Monthly Views Goal</div>
               <div className="mt-2">
-                <Badge variant="default">Achieved!</Badge>
+                <Badge variant="primary">Achieved!</Badge>
               </div>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950 rounded-lg">
@@ -153,7 +153,7 @@ export default function AnalyticsPage() {
               <div className="text-2xl font-bold mb-1">5K</div>
               <div className="text-sm text-muted-foreground">Follower Milestone</div>
               <div className="mt-2">
-                <Badge variant="secondary">In Progress (92%)</Badge>
+                <Badge variant="gray">In Progress (92%)</Badge>
               </div>
             </div>
             <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 rounded-lg">
@@ -161,7 +161,7 @@ export default function AnalyticsPage() {
               <div className="text-2xl font-bold mb-1">30</div>
               <div className="text-sm text-muted-foreground">Consecutive Days Publishing</div>
               <div className="mt-2">
-                <Badge variant="default">Achieved!</Badge>
+                <Badge variant="primary">Achieved!</Badge>
               </div>
             </div>
           </div>

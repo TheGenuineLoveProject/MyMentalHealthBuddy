@@ -1,5 +1,5 @@
-import { Card } from '@/components/Card.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Badge } from '@/components/Badge';
 import { TrendingUp, TrendingDown, Eye, Heart, Share2, MessageCircle } from 'lucide-react';
 
 interface AnalyticsData {
@@ -67,7 +67,7 @@ export function AnalyticsDashboard({ data, period = '30d' }: AnalyticsDashboardP
           {['7d', '30d', '90d'].map((p) => (
             <Badge
               key={p}
-              variant={period === p ? 'default' : 'outline'}
+              variant={period === p ? 'primary' : 'gray'}
               className="cursor-pointer"
               data-testid={`badge-period-${p}`}
             >
@@ -133,7 +133,7 @@ export function AnalyticsDashboard({ data, period = '30d' }: AnalyticsDashboardP
                   {content.views.toLocaleString()} views • {content.engagement}% engagement
                 </div>
               </div>
-              <Badge variant="default"># {i + 1}</Badge>
+              <Badge variant="primary"># {i + 1}</Badge>
             </div>
           ))}
         </div>

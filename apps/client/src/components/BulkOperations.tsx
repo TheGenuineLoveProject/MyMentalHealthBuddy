@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { useToast } from '@/hooks';
 import { CheckSquare, Trash2, Calendar, Tag, Copy, Archive, Move } from 'lucide-react';
 
@@ -26,7 +26,7 @@ interface BulkOperationsProps {
 export function BulkOperations({ items = [], onBulkAction }: BulkOperationsProps) {
   const [selectedItems, setSelectedItems] = useState<Set<string>>(new Set());
   const [isProcessing, setIsProcessing] = useState(false);
-  const { toast } = useToast();
+  const { success, error } = useToast();
 
   const defaultItems: BulkItem[] = items.length > 0 ? items : [
     { id: '1', title: 'Understanding Anxiety', type: 'blog', status: 'published' },
@@ -56,11 +56,7 @@ export function BulkOperations({ items = [], onBulkAction }: BulkOperationsProps
 
   const handleBulkAction = async (action: string) => {
     if (selectedItems.size === 0) {
-      toast({
-        title: 'No Items Selected',
-        description: 'Please select items to perform bulk actions',
-        variant: 'destructive',
-      });
+      error('No Items Selected', 'Please select items to perform bulk actions');
       return;
     }
 
@@ -73,30 +69,23 @@ export function BulkOperations({ items = [], onBulkAction }: BulkOperationsProps
         onBulkAction(action, Array.from(selectedItems));
       }
 
-      toast({
-        title: 'Bulk Action Complete',
-        description: `${action} applied to ${selectedItems.size} items`,
-      });
+      success('Bulk Action Complete', `${action} applied to ${selectedItems.size} items`);
 
       setSelectedItems(new Set());
-    } catch (error) {
-      toast({
-        title: 'Action Failed',
-        description: 'Unable to complete bulk action',
-        variant: 'destructive',
-      });
+    } catch (err) {
+      error('Action Failed', 'Unable to complete bulk action');
     } finally {
       setIsProcessing(false);
     }
   };
 
   const bulkActions = [
-    { id: 'publish', label: 'Publish', icon: CheckSquare, variant: 'default' as const },
-    { id: 'schedule', label: 'Schedule', icon: Calendar, variant: 'outline' as const },
-    { id: 'tag', label: 'Add Tags', icon: Tag, variant: 'outline' as const },
-    { id: 'duplicate', label: 'Duplicate', icon: Copy, variant: 'outline' as const },
-    { id: 'archive', label: 'Archive', icon: Archive, variant: 'outline' as const },
-    { id: 'delete', label: 'Delete', icon: Trash2, variant: 'outline' as const },
+    { id: 'publish', label: 'Publish', icon: CheckSquare, variant: 'primary' as const },
+    { id: 'schedule', label: 'Schedule', icon: Calendar, variant: 'secondary' as const },
+    { id: 'tag', label: 'Add Tags', icon: Tag, variant: 'secondary' as const },
+    { id: 'duplicate', label: 'Duplicate', icon: Copy, variant: 'secondary' as const },
+    { id: 'archive', label: 'Archive', icon: Archive, variant: 'secondary' as const },
+    { id: 'delete', label: 'Delete', icon: Trash2, variant: 'secondary' as const },
   ];
 
   return (
@@ -108,7 +97,7 @@ export function BulkOperations({ items = [], onBulkAction }: BulkOperationsProps
             Select and manage multiple items at once
           </p>
         </div>
-        <Badge variant="outline">
+        <Badge variant="gray">
           {selectedItems.size} / {defaultItems.length} selected
         </Badge>
       </div>
@@ -171,10 +160,10 @@ export function BulkOperations({ items = [], onBulkAction }: BulkOperationsProps
             <div className="flex-1">
               <div className="font-medium text-sm">{item.title}</div>
               <div className="flex gap-2 mt-1">
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="gray" className="text-xs">
                   {item.type}
                 </Badge>
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="gray" className="text-xs">
                   {item.status}
                 </Badge>
               </div>

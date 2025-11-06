@@ -27,7 +27,7 @@ export function AdvancedExport({ onExport }: AdvancedExportProps) {
   const [dataType, setDataType] = useState<ExportOptions['dataType']>('analytics');
   const [includeMetadata, setIncludeMetadata] = useState(true);
   const [isExporting, setIsExporting] = useState(false);
-  const { addToast } = useToast();
+  const { success, error } = useToast();
 
   const exportFormats = [
     { id: 'csv', label: 'CSV', icon: FileText, description: 'Comma-separated values for spreadsheets' },
@@ -68,20 +68,14 @@ export function AdvancedExport({ onExport }: AdvancedExportProps) {
         onExport(options);
       }
 
-      addToast({
-        type: 'success',
-        message: `Your ${dataType} data has been exported as ${format.toUpperCase()}`,
-      });
+      success('Export Complete', `Your ${dataType} data has been exported as ${format.toUpperCase()}`);
 
       // Simulate file download
       const filename = `mymentalhealthbuddy-${dataType}-${new Date().toISOString().split('T')[0]}.${format}`;
       console.log(`Downloading: ${filename}`);
       
-    } catch (error) {
-      addToast({
-        type: 'error',
-        message: 'Unable to export data. Please try again.',
-      });
+    } catch (err) {
+      error('Export Failed', 'Unable to export data. Please try again.');
     } finally {
       setIsExporting(false);
     }

@@ -222,9 +222,9 @@ export const NLP_COPY = {
       "Invest in yourself for less than a gym membership"
     ],
     framing: [
-      "Only $29.99/month" // Not "$360/year"
-      "Just 99 cents per day" // Not "$30/month"
-      "First month free, then $29.99" // Lead with value
+      "Only $29.99/month", // Not "$360/year"
+      "Just 99 cents per day", // Not "$30/month"
+      "First month free, then $29.99", // Lead with value
       "Save 40% with annual billing",
       "Premium features unlock your potential"
     ],

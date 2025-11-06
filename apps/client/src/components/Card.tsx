@@ -9,18 +9,21 @@ interface CardProps {
   children: ReactNode;
   className?: string;
   interactive?: boolean;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
   testId?: string;
+  role?: string;
+  'aria-live'?: 'polite' | 'assertive' | 'off';
+  'data-testid'?: string;
 }
 
-export function Card({ children, className = '', interactive = false, onClick, testId }: CardProps) {
+export function Card({ children, className = '', interactive = false, onClick, testId, role, 'aria-live': ariaLive, 'data-testid': dataTestId }: CardProps) {
   const baseClasses = 'card';
   const interactiveClasses = interactive ? 'card-interactive' : '';
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (interactive && onClick && (e.key === 'Enter' || e.key === ' ')) {
       e.preventDefault();
-      onClick();
+      onClick(e as any);
     }
   };
 
@@ -29,9 +32,10 @@ export function Card({ children, className = '', interactive = false, onClick, t
       className={`${baseClasses} ${interactiveClasses} ${className}`}
       onClick={onClick}
       onKeyDown={handleKeyDown}
-      role={interactive ? 'button' : undefined}
+      role={role || (interactive ? 'button' : undefined)}
+      aria-live={ariaLive}
       tabIndex={interactive ? 0 : undefined}
-      data-testid={testId}
+      data-testid={dataTestId || testId}
     >
       {children}
     </div>

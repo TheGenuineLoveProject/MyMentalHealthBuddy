@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { ShortcutsMenu, useShortcutsMenu } from '@/components/ShortcutsMenu.tsx';
+import { ShortcutsMenu, useShortcutsMenu } from '@/components/ShortcutsMenu';
 
 interface Shortcut {
   key: string;

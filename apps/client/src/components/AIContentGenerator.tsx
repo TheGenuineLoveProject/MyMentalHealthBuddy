@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { useToast } from '@/hooks';
 import { Sparkles, RefreshCw, Copy, Check, Wand2 } from 'lucide-react';
 
@@ -29,7 +29,7 @@ export function AIContentGenerator({ topic = '', onGenerate }: AIContentGenerato
   const [generatedContent, setGeneratedContent] = useState<string[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
-  const { toast } = useToast();
+  const { success, error } = useToast();
 
   const contentTypes = [
     { id: 'headline', label: 'Headlines', description: 'Catchy titles for your content' },
@@ -53,11 +53,7 @@ export function AIContentGenerator({ topic = '', onGenerate }: AIContentGenerato
 
   const generateContent = async () => {
     if (!inputTopic.trim()) {
-      toast({
-        title: 'Topic Required',
-        description: 'Please enter a topic to generate content',
-        variant: 'destructive',
-      });
+      error('Topic Required', 'Please enter a topic to generate content');
       return;
     }
 
@@ -99,17 +95,10 @@ export function AIContentGenerator({ topic = '', onGenerate }: AIContentGenerato
         onGenerate(content[0], { contentType: selectedType, tone: selectedTone, length: selectedLength });
       }
 
-      toast({
-        title: 'Content Generated',
-        description: `Created ${content.length} ${selectedType} variations`,
-      });
+      success('Content Generated', `Created ${content.length} ${selectedType} variations`);
       
-    } catch (error) {
-      toast({
-        title: 'Generation Failed',
-        description: 'Unable to generate content. Please try again.',
-        variant: 'destructive',
-      });
+    } catch (err) {
+      error('Generation Failed', 'Unable to generate content. Please try again.');
     } finally {
       setIsGenerating(false);
     }
@@ -120,16 +109,9 @@ export function AIContentGenerator({ topic = '', onGenerate }: AIContentGenerato
       await navigator.clipboard.writeText(text);
       setCopiedIndex(index);
       setTimeout(() => setCopiedIndex(null), 2000);
-      toast({
-        title: 'Copied',
-        description: 'Content copied to clipboard',
-      });
-    } catch (error) {
-      toast({
-        title: 'Copy Failed',
-        description: 'Unable to copy to clipboard',
-        variant: 'destructive',
-      });
+      success('Copied', 'Content copied to clipboard');
+    } catch (err) {
+      error('Copy Failed', 'Unable to copy to clipboard');
     }
   };
 
@@ -145,7 +127,7 @@ export function AIContentGenerator({ topic = '', onGenerate }: AIContentGenerato
             Generate engaging content with AI assistance
           </p>
         </div>
-        <Badge variant="outline" className="gap-1">
+        <Badge variant="primary" className="gap-1">
           <Wand2 className="h-3 w-3" />
           Powered by AI
         </Badge>
@@ -256,7 +238,7 @@ export function AIContentGenerator({ topic = '', onGenerate }: AIContentGenerato
           <div className="flex items-center justify-between">
             <label className="text-sm font-medium">Generated Variations</label>
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={generateContent}
               data-testid="button-regenerate"

@@ -45,10 +45,10 @@ export function useOptimizedMutation<TData = unknown, TError = Error, TVariables
 
   return useMutation<TData, TError, TVariables, TContext>({
     ...mutationOptions,
-    onSuccess: async (data, variables, context) => {
+    onSuccess: (data, variables, context) => {
       // Invalidate specified caches
       if (invalidates && invalidates.length > 0) {
-        await Promise.all(
+        Promise.all(
           invalidates.map((key) => queryClient.invalidateQueries({ queryKey: key }))
         );
       }
@@ -70,7 +70,8 @@ export function useOptimizedMutation<TData = unknown, TError = Error, TVariables
 
       // Call user's onSuccess
       if (onSuccess) {
-        await onSuccess(data, variables, context);
+        // @ts-expect-error - onSuccess can return void or Promise<unknown>
+        return onSuccess(data, variables, context);
       }
     },
   });

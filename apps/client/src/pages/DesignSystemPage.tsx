@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
-import { Alert } from '@/components/Alert.tsx';
-import { LoadingSpinner } from '@/components/LoadingSpinner.tsx';
-import { ProgressIndicator } from '@/components/ProgressIndicator.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
+import { Alert } from '@/components/Alert';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
+import { ProgressIndicator } from '@/components/ProgressIndicator';
 import {
   Skeleton,
   SkeletonCard,
   SkeletonList,
   SkeletonStats,
-} from '@/components/SkeletonLoader.tsx';
+} from '@/components/SkeletonLoader';
 import { useToast } from '@/contexts/ToastContext';
 import {
   Palette,
@@ -108,13 +108,13 @@ export default function DesignSystemPage() {
               <Button variant="secondary" data-testid="button-secondary">
                 Secondary
               </Button>
-              <Button variant="outline" data-testid="button-outline">
+              <Button variant="secondary" data-testid="button-outline">
                 Outline
               </Button>
               <Button variant="ghost" data-testid="button-ghost">
                 Ghost
               </Button>
-              <Button variant="destructive" data-testid="button-destructive">
+              <Button variant="danger" data-testid="button-destructive">
                 Destructive
               </Button>
             </div>
@@ -122,7 +122,7 @@ export default function DesignSystemPage() {
               <Button size="sm" data-testid="button-small">
                 Small
               </Button>
-              <Button size="default" data-testid="button-medium">
+              <Button size="md" data-testid="button-medium">
                 Medium
               </Button>
               <Button size="lg" data-testid="button-large">
@@ -148,13 +148,13 @@ export default function DesignSystemPage() {
         <Card className="p-6">
           <div className="flex flex-wrap gap-3">
             <Badge data-testid="badge-default">Default</Badge>
-            <Badge variant="secondary" data-testid="badge-secondary">
+            <Badge variant="gray" data-testid="badge-secondary">
               Secondary
             </Badge>
-            <Badge variant="outline" data-testid="badge-outline">
+            <Badge variant="gray" data-testid="badge-outline">
               Outline
             </Badge>
-            <Badge variant="destructive" data-testid="badge-destructive">
+            <Badge variant="danger" data-testid="badge-destructive">
               Destructive
             </Badge>
           </div>
@@ -165,30 +165,30 @@ export default function DesignSystemPage() {
       <section className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Alerts</h2>
         <div className="space-y-4">
-          <Alert variant="success" data-testid="alert-success">
-            <Check className="h-4 w-4" />
-            <div>
-              <strong>Success!</strong> Your action completed successfully.
-            </div>
-          </Alert>
-          <Alert variant="info" data-testid="alert-info">
-            <Info className="h-4 w-4" />
-            <div>
-              <strong>Info:</strong> Here's some helpful information.
-            </div>
-          </Alert>
-          <Alert variant="warning" data-testid="alert-warning">
-            <AlertTriangle className="h-4 w-4" />
-            <div>
-              <strong>Warning:</strong> Please review this carefully.
-            </div>
-          </Alert>
-          <Alert variant="error" data-testid="alert-error">
-            <AlertCircle className="h-4 w-4" />
-            <div>
-              <strong>Error:</strong> Something went wrong.
-            </div>
-          </Alert>
+          <Alert 
+            type="success" 
+            title="Success!" 
+            message="Your action completed successfully."
+            testId="alert-success"
+          />
+          <Alert 
+            type="info" 
+            title="Info" 
+            message="Here's some helpful information."
+            testId="alert-info"
+          />
+          <Alert 
+            type="warning" 
+            title="Warning" 
+            message="Please review this carefully."
+            testId="alert-warning"
+          />
+          <Alert 
+            type="error" 
+            title="Error" 
+            message="Something went wrong."
+            testId="alert-error"
+          />
         </div>
       </section>
 
@@ -217,7 +217,7 @@ export default function DesignSystemPage() {
             <div className="space-y-4">
               <div>
                 <p className="text-sm mb-2">Linear Progress</p>
-                <ProgressIndicator variant="linear" value={progress} max={100} />
+                <ProgressIndicator current={progress} total={100} />
               </div>
               <div className="flex gap-4">
                 <Button size="sm" onClick={() => setProgress(Math.max(0, progress - 10))}>
@@ -270,14 +270,14 @@ export default function DesignSystemPage() {
               Info Toast
             </Button>
             <Button
-              variant="outline"
+              variant="secondary"
               onClick={() => toast.warning('Warning', 'Please review this carefully')}
               data-testid="button-toast-warning"
             >
               Warning Toast
             </Button>
             <Button
-              variant="destructive"
+              variant="danger"
               onClick={() => toast.error('Error', 'Something went wrong')}
               data-testid="button-toast-error"
             >

@@ -1,0 +1,38 @@
+import { useState, useEffect } from 'react';
+/**
+ * Custom hook for responsive design using media queries
+ * Returns true if the media query matches
+ */
+export function useMediaQuery(query) {
+    const [matches, setMatches] = useState(false);
+    useEffect(() => {
+        const media = window.matchMedia(query);
+        // Set initial value
+        if (media.matches !== matches) {
+            setMatches(media.matches);
+        }
+        // Create listener
+        const listener = (event) => setMatches(event.matches);
+        // Add listener
+        media.addEventListener('change', listener);
+        // Cleanup
+        return () => media.removeEventListener('change', listener);
+    }, [matches, query]);
+    return matches;
+}
+// Convenience hooks for common breakpoints
+export function useIsMobile() {
+    return useMediaQuery('(max-width: 768px)');
+}
+export function useIsTablet() {
+    return useMediaQuery('(min-width: 769px) and (max-width: 1024px)');
+}
+export function useIsDesktop() {
+    return useMediaQuery('(min-width: 1025px)');
+}
+export function usePrefersDarkMode() {
+    return useMediaQuery('(prefers-color-scheme: dark)');
+}
+export function usePrefersReducedMotion() {
+    return useMediaQuery('(prefers-reduced-motion: reduce)');
+}

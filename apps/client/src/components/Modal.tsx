@@ -162,14 +162,14 @@ export function ConfirmModal({
       footer={
         <>
           <Button 
-            variant="secondary" 
+            variant="ghost" 
             onClick={onClose} 
             {...(testId && { 'data-testid': `${testId}-cancel` })}
           >
             {cancelText}
           </Button>
           <Button
-            variant={variant === 'danger' ? 'danger' : variant === 'warning' ? 'warning' : 'primary'}
+            variant={variant === 'danger' ? 'danger' : variant === 'warning' ? 'danger' : 'primary'}
             onClick={handleConfirm}
             {...(testId && { 'data-testid': `${testId}-confirm` })}
           >

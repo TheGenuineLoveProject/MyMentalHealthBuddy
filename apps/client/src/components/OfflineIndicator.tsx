@@ -5,8 +5,8 @@
 
 import { useOnlineStatus } from '@/hooks/useOnlineStatus';
 import { Wifi, WifiOff, Cloud, CloudOff, RefreshCw } from 'lucide-react';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { useState } from 'react';
 
 export function OfflineIndicator() {
@@ -61,7 +61,7 @@ export function OfflineIndicator() {
 
         {/* Queue Badge */}
         {queueSize > 0 && (
-          <Badge variant="secondary" data-testid="badge-queue-size">
+          <Badge variant="gray" data-testid="badge-queue-size">
             {queueSize}
           </Badge>
         )}

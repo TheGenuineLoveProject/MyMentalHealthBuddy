@@ -211,7 +211,7 @@ export function SimplePagination({
   return (
     <div className="flex items-center justify-between" data-testid={testId}>
       <Button
-        variant="secondary"
+        variant="ghost"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
         data-testid={`${testId}-previous`}
@@ -225,7 +225,7 @@ export function SimplePagination({
       </span>
 
       <Button
-        variant="secondary"
+        variant="ghost"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         data-testid={`${testId}-next`}

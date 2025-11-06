@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { Bell, X, Check, Info, AlertCircle, TrendingUp } from 'lucide-react';
 
 interface Notification {
@@ -105,7 +105,7 @@ export function NotificationSystem() {
           <Bell className="h-5 w-5" />
           {unreadCount > 0 && (
             <Badge
-              variant="destructive"
+              variant="danger"
               className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs"
               data-testid="badge-unread-count"
             >
@@ -216,7 +216,7 @@ export function NotificationSystem() {
                                 )}
                                 {notification.actionLabel && (
                                   <Button
-                                    variant="outline"
+                                    variant="ghost"
                                     size="sm"
                                     onClick={() => {
                                       if (notification.actionUrl) {

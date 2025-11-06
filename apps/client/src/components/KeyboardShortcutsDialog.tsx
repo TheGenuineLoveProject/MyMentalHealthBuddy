@@ -93,7 +93,7 @@ export function KeyboardShortcutsDialog({ isOpen, onClose }: KeyboardShortcutsDi
     >
       <Card
         className="w-full max-w-3xl max-h-[90vh] overflow-auto modal-content-enter"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
         role="document"
       >
         {/* Header */}

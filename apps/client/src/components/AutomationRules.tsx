@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { useToast } from '@/hooks';
 import { Zap, Plus, Play, Pause, Trash2, Settings } from 'lucide-react';
 
@@ -59,7 +59,7 @@ export function AutomationRules({ rules = [], onCreateRule, onToggleRule }: Auto
     ]
   );
   const [showCreateForm, setShowCreateForm] = useState(false);
-  const { toast } = useToast();
+  const { success, error } = useToast();
 
   const triggers = [
     { id: 'schedule', label: 'Scheduled Time', description: 'At specific date/time' },
@@ -86,18 +86,12 @@ export function AutomationRules({ rules = [], onCreateRule, onToggleRule }: Auto
     if (onToggleRule) {
       onToggleRule(id);
     }
-    toast({
-      title: 'Rule Updated',
-      description: 'Automation rule status changed',
-    });
+    success('Rule Updated', 'Automation rule status changed');
   };
 
   const deleteRule = (id: string) => {
     setActiveRules(prev => prev.filter(rule => rule.id !== id));
-    toast({
-      title: 'Rule Deleted',
-      description: 'Automation rule removed',
-    });
+    success('Rule Deleted', 'Automation rule removed');
   };
 
   return (
@@ -155,7 +149,7 @@ export function AutomationRules({ rules = [], onCreateRule, onToggleRule }: Auto
             </div>
             <div className="flex gap-2">
               <Button className="flex-1" data-testid="button-save-rule">Save Rule</Button>
-              <Button variant="outline" onClick={() => setShowCreateForm(false)} data-testid="button-cancel">
+              <Button variant="secondary" onClick={() => setShowCreateForm(false)} data-testid="button-cancel">
                 Cancel
               </Button>
             </div>
@@ -176,7 +170,7 @@ export function AutomationRules({ rules = [], onCreateRule, onToggleRule }: Auto
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
                   <h4 className="font-medium">{rule.name}</h4>
-                  <Badge variant={rule.enabled ? 'default' : 'outline'}>
+                  <Badge variant={rule.enabled ? 'success' : 'gray'}>
                     {rule.enabled ? 'Active' : 'Inactive'}
                   </Badge>
                 </div>
@@ -195,7 +189,7 @@ export function AutomationRules({ rules = [], onCreateRule, onToggleRule }: Auto
               </div>
               <div className="flex gap-2">
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   onClick={() => toggleRule(rule.id)}
                   data-testid={`toggle-rule-${rule.id}`}
@@ -206,11 +200,11 @@ export function AutomationRules({ rules = [], onCreateRule, onToggleRule }: Auto
                     <Play className="h-4 w-4" />
                   )}
                 </Button>
-                <Button variant="outline" size="sm" data-testid={`edit-rule-${rule.id}`}>
+                <Button variant="secondary" size="sm" data-testid={`edit-rule-${rule.id}`}>
                   <Settings className="h-4 w-4" />
                 </Button>
                 <Button
-                  variant="outline"
+                  variant="ghost"
                   size="sm"
                   onClick={() => deleteRule(rule.id)}
                   data-testid={`delete-rule-${rule.id}`}

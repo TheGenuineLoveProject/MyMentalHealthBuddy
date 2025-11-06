@@ -86,7 +86,7 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
           Search
         </Button>
         <Button
-          variant="secondary"
+          variant="ghost"
           onClick={() => setShowFilters(!showFilters)}
           data-testid="button-toggle-filters"
         >
@@ -124,15 +124,18 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
               <label className="block text-sm font-medium mb-2">Content Type</label>
               <div className="flex flex-wrap gap-2">
                 {activeFilters.types?.map((type) => (
-                  <Badge
+                  <button
                     key={type}
-                    variant={filters.types.includes(type) ? 'primary' : 'gray'}
-                    className="cursor-pointer"
+                    className={`px-3 py-1 rounded-full text-sm cursor-pointer transition-colors ${
+                      filters.types.includes(type) 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted hover:bg-muted/80'
+                    }`}
                     onClick={() => toggleFilter('types', type)}
                     data-testid={`filter-type-${type}`}
                   >
                     {type}
-                  </Badge>
+                  </button>
                 ))}
               </div>
             </div>
@@ -142,15 +145,18 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
               <label className="block text-sm font-medium mb-2">Status</label>
               <div className="flex flex-wrap gap-2">
                 {activeFilters.statuses?.map((status) => (
-                  <Badge
+                  <button
                     key={status}
-                    variant={filters.statuses.includes(status) ? 'primary' : 'gray'}
-                    className="cursor-pointer"
+                    className={`px-3 py-1 rounded-full text-sm cursor-pointer transition-colors ${
+                      filters.statuses.includes(status) 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted hover:bg-muted/80'
+                    }`}
                     onClick={() => toggleFilter('statuses', status)}
                     data-testid={`filter-status-${status}`}
                   >
                     {status.replace('_', ' ')}
-                  </Badge>
+                  </button>
                 ))}
               </div>
             </div>
@@ -160,15 +166,18 @@ export function SearchFilter({ onSearch, onFilter, availableFilters }: SearchFil
               <label className="block text-sm font-medium mb-2">Tags</label>
               <div className="flex flex-wrap gap-2">
                 {activeFilters.tags?.map((tag) => (
-                  <Badge
+                  <button
                     key={tag}
-                    variant={filters.tags.includes(tag) ? 'primary' : 'gray'}
-                    className="cursor-pointer"
+                    className={`px-3 py-1 rounded-full text-sm cursor-pointer transition-colors ${
+                      filters.tags.includes(tag) 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-muted hover:bg-muted/80'
+                    }`}
                     onClick={() => toggleFilter('tags', tag)}
                     data-testid={`filter-tag-${tag}`}
                   >
                     {tag}
-                  </Badge>
+                  </button>
                 ))}
               </div>
             </div>

@@ -5,8 +5,8 @@
 
 import { useState } from 'react';
 import { Bell, X, Check, Info, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 
 export interface Notification {
   id: string;
@@ -85,7 +85,7 @@ export function NotificationCenter({
         <Bell className="h-5 w-5" aria-hidden="true" />
         {unreadCount > 0 && (
           <Badge
-            variant="destructive"
+            variant="danger"
             className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center text-xs"
             data-testid="badge-unread-count"
             aria-label={`${unreadCount} unread notifications`}
@@ -118,7 +118,7 @@ export function NotificationCenter({
               <div className="flex items-center gap-2">
                 <h3 className="font-semibold text-lg">Notifications</h3>
                 {unreadCount > 0 && (
-                  <Badge variant="secondary" data-testid="text-unread-total">
+                  <Badge variant="gray" data-testid="text-unread-total">
                     {unreadCount}
                   </Badge>
                 )}
@@ -150,7 +150,7 @@ export function NotificationCenter({
             {/* Filter Tabs */}
             <div className="p-2 border-b flex gap-2">
               <Button
-                variant={filter === 'all' ? 'default' : 'ghost'}
+                variant={filter === 'all' ? 'primary' : 'ghost'}
                 size="sm"
                 onClick={() => setFilter('all')}
                 data-testid="button-filter-all"
@@ -159,7 +159,7 @@ export function NotificationCenter({
                 All ({notifications.length})
               </Button>
               <Button
-                variant={filter === 'unread' ? 'default' : 'ghost'}
+                variant={filter === 'unread' ? 'primary' : 'ghost'}
                 size="sm"
                 onClick={() => setFilter('unread')}
                 data-testid="button-filter-unread"
@@ -208,7 +208,7 @@ export function NotificationCenter({
                           </span>
                           {notification.actionLabel && (
                             <Button
-                              variant="link"
+                              variant="ghost"
                               size="sm"
                               className="h-auto p-0 text-xs"
                               data-testid={`button-action-${notification.id}`}

@@ -1,17 +1,5 @@
 import { loadStripe, Stripe } from "@stripe/stripe-js";
 
-// Environment variable types
-interface ImportMetaEnv {
-  VITE_STRIPE_PUBLIC_KEY?: string;
-  PROD?: boolean;
-}
-
-declare global {
-  interface ImportMeta {
-    env: ImportMetaEnv;
-  }
-}
-
 // Get Stripe public key from environment
 const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY || "";
 

@@ -34,7 +34,7 @@ export function AdvancedSearch({ onSearch }: AdvancedSearchProps) {
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<SearchFilter>({});
   const [isSearching, setIsSearching] = useState(false);
-  const { toast } = useToast();
+  const { success, error } = useToast();
 
   const savedSearches: SavedSearch[] = [
     {
@@ -84,16 +84,9 @@ export function AdvancedSearch({ onSearch }: AdvancedSearchProps) {
         onSearch(query, filters);
       }
 
-      toast({
-        title: 'Search Complete',
-        description: `Found results for "${query}"`,
-      });
-    } catch (error) {
-      toast({
-        title: 'Search Failed',
-        description: 'Unable to complete search',
-        variant: 'destructive',
-      });
+      success('Search Complete', `Found results for "${query}"`);
+    } catch (err) {
+      error('Search Failed', 'Unable to complete search');
     } finally {
       setIsSearching(false);
     }
@@ -102,26 +95,16 @@ export function AdvancedSearch({ onSearch }: AdvancedSearchProps) {
   const loadSavedSearch = (search: SavedSearch) => {
     setQuery(search.query);
     setFilters(search.filters);
-    toast({
-      title: 'Search Loaded',
-      description: `Applied "${search.name}"`,
-    });
+    success('Search Loaded', `Applied "${search.name}"`);
   };
 
   const saveCurrentSearch = () => {
     if (!query && Object.keys(filters).length === 0) {
-      toast({
-        title: 'Nothing to Save',
-        description: 'Enter a search query or add filters first',
-        variant: 'destructive',
-      });
+      error('Nothing to Save', 'Enter a search query or add filters first');
       return;
     }
 
-    toast({
-      title: 'Search Saved',
-      description: 'Search has been saved to your library',
-    });
+    success('Search Saved', 'Search has been saved to your library');
   };
 
   const toggleFilter = (category: keyof SearchFilter, value: string) => {
@@ -174,7 +157,7 @@ export function AdvancedSearch({ onSearch }: AdvancedSearchProps) {
             )}
           </Button>
           <Button
-            variant="secondary"
+            variant="ghost"
             onClick={() => setShowFilters(!showFilters)}
             data-testid="button-filters"
           >

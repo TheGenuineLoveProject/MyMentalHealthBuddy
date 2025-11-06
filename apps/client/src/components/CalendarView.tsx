@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { ChevronLeft, ChevronRight, Instagram, Twitter } from 'lucide-react';
 
 interface ScheduledPost {
@@ -115,7 +115,7 @@ export function CalendarView({ posts, onDateClick }: CalendarViewProps) {
         </h2>
         <div className="flex gap-2">
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={goToPreviousMonth}
             data-testid="button-prev-month"
@@ -123,7 +123,7 @@ export function CalendarView({ posts, onDateClick }: CalendarViewProps) {
             <ChevronLeft className="h-4 w-4" />
           </Button>
           <Button
-            variant="outline"
+            variant="secondary"
             size="sm"
             onClick={goToNextMonth}
             data-testid="button-next-month"

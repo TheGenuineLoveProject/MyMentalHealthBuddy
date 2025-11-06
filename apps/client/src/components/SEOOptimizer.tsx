@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { CheckCircle2, AlertCircle, Info, TrendingUp, Hash, FileText } from 'lucide-react';
 
 interface SEOScore {
@@ -152,7 +152,7 @@ export function SEOOptimizer({ content = '', title = '', description = '', onOpt
               <div className="text-sm text-muted-foreground">{score.title.message}</div>
             </div>
           </div>
-          <Badge variant={score.title.score >= 80 ? 'default' : 'outline'}>
+          <Badge variant={score.title.score >= 80 ? 'primary' : 'gray'}>
             {score.title.score}
           </Badge>
         </div>
@@ -165,7 +165,7 @@ export function SEOOptimizer({ content = '', title = '', description = '', onOpt
               <div className="text-sm text-muted-foreground">{score.description.message}</div>
             </div>
           </div>
-          <Badge variant={score.description.score >= 80 ? 'default' : 'outline'}>
+          <Badge variant={score.description.score >= 80 ? 'primary' : 'gray'}>
             {score.description.score}
           </Badge>
         </div>
@@ -181,7 +181,7 @@ export function SEOOptimizer({ content = '', title = '', description = '', onOpt
               <div className="text-sm text-muted-foreground">{score.keywords.message}</div>
             </div>
           </div>
-          <Badge variant={score.keywords.score >= 80 ? 'default' : 'outline'}>
+          <Badge variant={score.keywords.score >= 80 ? 'primary' : 'gray'}>
             {score.keywords.score}
           </Badge>
         </div>
@@ -197,7 +197,7 @@ export function SEOOptimizer({ content = '', title = '', description = '', onOpt
               <div className="text-sm text-muted-foreground">{score.readability.message}</div>
             </div>
           </div>
-          <Badge variant={score.readability.score >= 80 ? 'default' : 'outline'}>
+          <Badge variant={score.readability.score >= 80 ? 'primary' : 'gray'}>
             {score.readability.score}
           </Badge>
         </div>
@@ -210,7 +210,7 @@ export function SEOOptimizer({ content = '', title = '', description = '', onOpt
               <div className="text-sm text-muted-foreground">{score.length.message}</div>
             </div>
           </div>
-          <Badge variant={score.length.score >= 80 ? 'default' : 'outline'}>
+          <Badge variant={score.length.score >= 80 ? 'primary' : 'gray'}>
             {score.length.score}
           </Badge>
         </div>

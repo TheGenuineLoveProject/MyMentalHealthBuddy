@@ -13,7 +13,7 @@ interface ErrorHandlerOptions {
 }
 
 export function useErrorHandler() {
-  const { addToast } = useToast();
+  const { error: showError } = useToast();
 
   const handleError = useCallback(
     (error: unknown, options: ErrorHandlerOptions = {}) => {
@@ -43,12 +43,7 @@ export function useErrorHandler() {
 
       // Show toast notification
       if (showToast) {
-        addToast({
-          title: 'Error',
-          description: getUserFriendlyMessage(message),
-          variant: 'error',
-          duration: 5000,
-        });
+        showError('Error', getUserFriendlyMessage(message), 5000);
       }
 
       // Log to error tracking service in production
@@ -61,7 +56,7 @@ export function useErrorHandler() {
         throw error;
       }
     },
-    [addToast]
+    [showError]
   );
 
   return { handleError };

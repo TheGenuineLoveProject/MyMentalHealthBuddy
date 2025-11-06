@@ -13,7 +13,7 @@ import {
   Crown
 } from "lucide-react";
 import { useStripeCheckout } from "@/hooks/useStripeCheckout";
-import { StripeStatus } from "@/components/stripe/StripeStatus.tsx";
+import { StripeStatus } from "@/components/stripe/StripeStatus";
 import type { SelectBillingTransaction } from "@shared/schema";
 
 const CURRENT_USER_ID = "user-1";
@@ -153,7 +153,7 @@ export default function BillingPage() {
                   </div>
                   
                   <ul className="space-y-3 mb-6">
-                    {tier.features.map((feature, index) => (
+                    {tier.features.map((feature: string, index: number) => (
                       <li key={index} className="flex items-start gap-2">
                         <CheckCircle2 className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
                         <span className="text-sm text-gray-700">{feature}</span>

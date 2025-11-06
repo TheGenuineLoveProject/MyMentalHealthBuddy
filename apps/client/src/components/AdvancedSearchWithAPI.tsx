@@ -35,7 +35,7 @@ export function AdvancedSearchWithAPI() {
   const [debouncedQuery, setDebouncedQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const { toast } = useToast();
+  const { success, error } = useToast();
 
   // Debounce search query for autocomplete
   useEffect(() => {
@@ -85,11 +85,7 @@ export function AdvancedSearchWithAPI() {
 
   const handleSearch = () => {
     if (query.trim().length < 2) {
-      toast({
-        title: 'Query Too Short',
-        description: 'Please enter at least 2 characters',
-        variant: 'destructive',
-      });
+      error('Query Too Short', 'Please enter at least 2 characters');
       return;
     }
     refetch();
@@ -172,7 +168,7 @@ export function AdvancedSearchWithAPI() {
           </Button>
           
           <Button
-            variant="secondary"
+            variant="ghost"
             onClick={() => setShowFilters(!showFilters)}
             data-testid="button-filters-api"
           >

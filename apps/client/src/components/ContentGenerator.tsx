@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Sparkles, Copy, Download, RefreshCw, Wand2, FileText, MessageSquare, Calendar } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card } from '@/components/ui/card';
-import { useToast } from '@/hooks/use-toast';
+import { Button } from '@/components/Button';
+import { Card } from '@/components/Card';
+import { useToast } from '@/hooks';
 import { apiRequest, queryClient } from '@/lib/queryClient';
 import { useMutation } from '@tanstack/react-query';
 
@@ -64,7 +63,7 @@ export function ContentGenerator({
   const [generatedContent, setGeneratedContent] = useState('');
   const [tone, setTone] = useState<string>('balanced');
   const [length, setLength] = useState<'short' | 'medium' | 'long'>('medium');
-  const { addToast } = useToast();
+  const { success, error } = useToast();
 
   const template = contentTypeTemplates[contentType];
   const Icon = template.icon;
@@ -82,28 +81,16 @@ export function ContentGenerator({
       if (onContentGenerated) {
         onContentGenerated(data.content);
       }
-      addToast({
-        title: 'Content Generated',
-        description: 'Your AI-generated content is ready!',
-        variant: 'success'
-      });
+      success('Content Generated', 'Your AI-generated content is ready!');
     },
-    onError: (error: Error) => {
-      addToast({
-        title: 'Generation Failed',
-        description: error.message || 'Failed to generate content. Please try again.',
-        variant: 'error'
-      });
+    onError: (err: Error) => {
+      error('Generation Failed', err.message || 'Failed to generate content. Please try again.');
     }
   });
 
   const handleGenerate = () => {
     if (!prompt.trim()) {
-      addToast({
-        title: 'Prompt Required',
-        description: 'Please enter a description of the content you want to generate.',
-        variant: 'error'
-      });
+      error('Prompt Required', 'Please enter a description of the content you want to generate.');
       return;
     }
 
@@ -118,17 +105,9 @@ export function ContentGenerator({
   const handleCopy = async () => {
     try {
       await navigator.clipboard.writeText(generatedContent);
-      addToast({
-        title: 'Copied',
-        description: 'Content copied to clipboard',
-        variant: 'success'
-      });
-    } catch (error) {
-      addToast({
-        title: 'Copy Failed',
-        description: 'Could not copy to clipboard',
-        variant: 'error'
-      });
+      success('Copied', 'Content copied to clipboard');
+    } catch (err) {
+      error('Copy Failed', 'Could not copy to clipboard');
     }
   };
 
@@ -143,11 +122,7 @@ export function ContentGenerator({
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    addToast({
-      title: 'Downloaded',
-      description: 'Content saved to file',
-      variant: 'success'
-    });
+    success('Downloaded', 'Content saved to file');
   };
 
   const handleRegenerate = () => {
@@ -169,12 +144,12 @@ export function ContentGenerator({
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium mb-2">What would you like to create?</label>
-          <Textarea
+          <textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder={template.placeholder}
             rows={4}
-            className="resize-none"
+            className="resize-none w-full px-3 py-2 border rounded-md bg-background"
             data-testid="input-content-prompt"
           />
         </div>
@@ -201,7 +176,7 @@ export function ContentGenerator({
             <label className="block text-sm font-medium mb-2">Length</label>
             <select
               value={length}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setLength(e.target.value as 'short' | 'medium' | 'long')}
+              onChange={(e) => setLength(e.target.value as 'short' | 'medium' | 'long')}
               className="w-full px-3 py-2 border rounded-md bg-background"
               data-testid="select-length"
             >

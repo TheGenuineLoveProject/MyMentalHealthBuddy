@@ -1,6 +1,6 @@
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
-import { Badge } from '@/components/Badge.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
+import { Badge } from '@/components/Badge';
 import { FileText, Video, Mic, Image as ImageIcon } from 'lucide-react';
 
 interface Template {
@@ -105,14 +105,14 @@ export function ContentTemplates({ onSelectTemplate }: ContentTemplatesProps) {
                 <h3 className="font-semibold mb-1" data-testid={`template-name-${template.id}`}>
                   {template.name}
                 </h3>
-                <Badge variant="outline" data-testid={`template-category-${template.id}`}>
+                <Badge variant="gray" data-testid={`template-category-${template.id}`}>
                   {template.category}
                 </Badge>
               </div>
             </div>
             <p className="text-sm text-muted-foreground mb-4">{template.description}</p>
             <Button
-              variant="outline"
+              variant="secondary"
               size="sm"
               className="w-full"
               data-testid={`button-use-template-${template.id}`}

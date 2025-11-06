@@ -75,20 +75,20 @@ export function useFormValidation<T extends Record<string, any>>({
       if (!validationSchema) return null;
 
       try {
-        // Create a partial schema for this field
-        const fieldSchema = validationSchema.shape[name as string];
-        if (fieldSchema) {
-          await fieldSchema.parseAsync(value);
-        }
+        // Validate the full form with partial data
+        const partialData = { ...values, [name]: value };
+        await validationSchema.parseAsync(partialData);
         return null;
       } catch (error) {
         if (error instanceof z.ZodError) {
-          return error.errors[0]?.message || 'Validation error';
+          // Find error for this specific field
+          const fieldError = error.errors.find(err => err.path[0] === name);
+          return fieldError?.message || null;
         }
         return 'Validation error';
       }
     },
-    [validationSchema]
+    [validationSchema, values]
   );
 
   // Validate all fields

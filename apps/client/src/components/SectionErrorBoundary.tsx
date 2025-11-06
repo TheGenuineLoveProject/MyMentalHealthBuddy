@@ -4,7 +4,7 @@
  */
 
 import { Component, ReactNode, ErrorInfo } from 'react';
-import { Button } from '@/components/Button.tsx';
+import { Button } from '@/components/Button';
 import { AlertCircle, RefreshCw } from 'lucide-react';
 
 interface SectionErrorBoundaryProps {
@@ -77,7 +77,7 @@ export class SectionErrorBoundary extends Component<
               )}
               <Button
                 onClick={this.handleReset}
-                variant="outline"
+                variant="secondary"
                 size="sm"
                 data-testid="button-reset-section"
                 aria-label={`Retry loading ${this.props.sectionName || 'this section'}`}

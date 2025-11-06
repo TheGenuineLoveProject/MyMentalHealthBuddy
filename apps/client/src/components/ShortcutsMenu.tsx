@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { X, Keyboard, Command } from 'lucide-react';
-import { Card } from '@/components/Card.tsx';
-import { Button } from '@/components/Button.tsx';
+import { Card } from '@/components/Card';
+import { Button } from '@/components/Button';
 
 /**
  * Keyboard Shortcuts Menu
@@ -65,7 +65,7 @@ export function ShortcutsMenu({ isOpen, onClose }: ShortcutsMenuProps) {
     >
       <Card 
         className="max-w-2xl w-full max-h-[80vh] overflow-auto"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
         data-testid="shortcuts-menu-card"
       >
         <div className="p-6">

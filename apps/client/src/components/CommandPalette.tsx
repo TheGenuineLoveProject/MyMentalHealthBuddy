@@ -210,7 +210,7 @@ export function CommandPalette({ isOpen, onClose, onToggleDarkMode }: CommandPal
     >
       <Card
         className="w-full max-w-2xl modal-content-enter"
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e: React.MouseEvent) => e.stopPropagation()}
       >
         {/* Search Input */}
         <div className="flex items-center gap-3 p-4 border-b border-gray-200 dark:border-gray-700">
