@@ -1162,6 +1162,43 @@ export function registerRoutes(app: Express) {
     })
   );
 
+  // Generate AI content
+  app.post("/api/ai/generate-content",
+    rateLimitMiddleware(chatRateLimiter),
+    asyncHandler(async (req, res) => {
+      const { prompt, contentType, tone, length } = Sanitizer.sanitizeObject(req.body);
+      
+      if (!prompt || typeof prompt !== 'string') {
+        return res.status(400).json({ error: 'Prompt is required' });
+      }
+
+      const wordCounts = {
+        short: 100,
+        medium: 250,
+        long: 500
+      };
+      
+      const targetWords = wordCounts[length as keyof typeof wordCounts] || 250;
+      
+      const systemPrompts: Record<string, string> = {
+        journal: 'Generate a thoughtful, introspective journal entry that encourages self-reflection and emotional awareness.',
+        social: 'Create an engaging, authentic social media post that connects with the audience.',
+        email: 'Write a professional, clear, and concise email.',
+        blog: 'Create an informative, well-structured blog post with clear sections.',
+        general: 'Generate helpful, relevant content based on the user\'s request.'
+      };
+      
+      const systemPrompt = systemPrompts[contentType as string] || systemPrompts.general;
+      const toneInstruction = tone ? `Write in a ${tone} tone.` : '';
+      
+      const fullPrompt = `${systemPrompt} ${toneInstruction} Target length: approximately ${targetWords} words.\n\nUser request: ${prompt}`;
+      
+      const content = await generateChatResponse(fullPrompt, []);
+      
+      res.json({ content });
+    })
+  );
+
   // ============================================
   // KNOWLEDGE MANAGEMENT - SELF-EVOLVING AI
   // ============================================

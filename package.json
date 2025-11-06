@@ -12,7 +12,10 @@
     "start:all": "concurrently -k \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run start\"",
     "start:heal": "npm run heal && (npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit); npm run start:all",
     "heal:json": "node scripts/autoHealJson.mjs",
-    "fix": "node scripts/autoheal-json.mjs"
+    "fix": "node scripts/autoheal-json.mjs",
+    "build:production": "npm --prefix apps/client run build && npm --prefix apps/server run build",
+    "start": "NODE_ENV=production npm --prefix apps/server run start:prod",
+    "db:push": "npm --prefix apps/server run db:push"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
