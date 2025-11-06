@@ -1381,6 +1381,139 @@ export function registerRoutes(app: Express) {
       res.json({ trending });
     })
   );
+
+  // ============================================
+  // BACKUP & RESTORE ENDPOINTS
+  // ============================================
+  
+  // Create backup
+  app.post("/api/backups",
+    devAuthFallback,
+    requireAuth,
+    csrfProtection,
+    asyncHandler(async (req, res) => {
+      const userId = req.userId!.toString();
+      const { backupService } = await import("./services/backupService.js");
+      
+      const backup = await backupService.createBackup(userId, 'full');
+      
+      res.status(201).json(backup);
+    })
+  );
+
+  // List backups
+  app.get("/api/backups",
+    devAuthFallback,
+    requireAuth,
+    asyncHandler(async (req, res) => {
+      const userId = req.userId!.toString();
+      const { backupService } = await import("./services/backupService.js");
+      
+      const backups = await backupService.listBackups(userId);
+      
+      res.json(backups);
+    })
+  );
+
+  // Get backup stats
+  app.get("/api/backups/stats",
+    devAuthFallback,
+    requireAuth,
+    asyncHandler(async (req, res) => {
+      const { backupService } = await import("./services/backupService.js");
+      
+      const stats = await backupService.getBackupStats();
+      
+      res.json(stats);
+    })
+  );
+
+  // Restore backup
+  app.post("/api/backups/:backupId/restore",
+    devAuthFallback,
+    requireAuth,
+    csrfProtection,
+    asyncHandler(async (req, res) => {
+      const { backupId } = req.params;
+      const userId = req.userId!.toString();
+      const { backupService } = await import("./services/backupService.js");
+      
+      // Verify backup ownership with exact prefix match
+      const expectedPrefix = `backup-${userId}-`;
+      if (!backupId.startsWith(expectedPrefix)) {
+        return res.status(403).json({ error: 'Forbidden: You do not own this backup' });
+      }
+      
+      await backupService.restoreBackup(backupId);
+      
+      res.json({ message: 'Backup restored successfully' });
+    })
+  );
+
+  // Delete backup
+  app.delete("/api/backups/:backupId",
+    devAuthFallback,
+    requireAuth,
+    csrfProtection,
+    asyncHandler(async (req, res) => {
+      const { backupId } = req.params;
+      const userId = req.userId!.toString();
+      const { backupService } = await import("./services/backupService.js");
+      
+      // Verify backup ownership with exact prefix match
+      const expectedPrefix = `backup-${userId}-`;
+      if (!backupId.startsWith(expectedPrefix)) {
+        return res.status(403).json({ error: 'Forbidden: You do not own this backup' });
+      }
+      
+      await backupService.deleteBackup(backupId);
+      
+      res.json({ message: 'Backup deleted successfully' });
+    })
+  );
+
+  // ============================================
+  // PERFORMANCE MONITORING ENDPOINTS - ADMIN ONLY
+  // ============================================
+  
+  // Get performance stats (Admin only)
+  app.get("/api/admin/performance/stats",
+    devAuthFallback,
+    requireAuth,
+    asyncHandler(async (req, res) => {
+      // Check if user is admin
+      const user = await storage.getUserById(req.userId!.toString());
+      if (!user || !user.isAdmin) {
+        return res.status(403).json({ error: 'Forbidden: Admin access required' });
+      }
+
+      const { performanceMonitor } = await import("./services/performanceMonitor.js");
+      
+      const stats = performanceMonitor.getStats();
+      
+      res.json(stats);
+    })
+  );
+
+  // Get slowest routes (Admin only)
+  app.get("/api/admin/performance/slow-routes",
+    devAuthFallback,
+    requireAuth,
+    asyncHandler(async (req, res) => {
+      // Check if user is admin
+      const user = await storage.getUserById(req.userId!.toString());
+      if (!user || !user.isAdmin) {
+        return res.status(403).json({ error: 'Forbidden: Admin access required' });
+      }
+
+      const { performanceMonitor } = await import("./services/performanceMonitor.js");
+      
+      const limit = parseInt(req.query.limit as string || '10', 10);
+      const slowRoutes = performanceMonitor.getSlowestRoutes(limit);
+      
+      res.json(slowRoutes);
+    })
+  );
   
   // Auto-added: Analytics endpoints
   try { registerAnalytics(app as any); } catch { /* noop */ }
