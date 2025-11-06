@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 import { registerRoutes } from "./routes.js";
 import { createSessionMiddleware } from "./lib/session.js";
 import { validateEnv } from "./lib/env.js";
+import { logger } from "./lib/logger.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,8 +21,8 @@ const isDev = process.env.NODE_ENV !== "production";
 try {
   validateEnv();
 } catch (error) {
-  console.error("❌ Environment validation failed:", error);
-  console.log("⚠️  Continuing with available environment variables...");
+  logger.error("Environment validation failed", error instanceof Error ? error : new Error(String(error)));
+  logger.warn("Continuing with available environment variables");
 }
 
 const app = express();
@@ -49,7 +50,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // Global error handler
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  console.error("💥 Server error:", err);
+  logger.error("Server error", err instanceof Error ? err : new Error(String(err)));
   res.status(err.status || 500).json({
     error: err.message || "Internal server error",
     ...(process.env.NODE_ENV === "development" && { stack: err.stack })
@@ -68,7 +69,7 @@ async function startServer() {
     // From apps/server/src, go up 2 levels then into apps/client
     const clientRoot = path.join(__dirname, "../../client");
     
-    console.log(`📁 Client root: ${clientRoot}`);
+    logger.info("Client root configured", { clientRoot });
     
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -118,12 +119,12 @@ async function startServer() {
   }
   
   app.listen(PORT, () => {
-    console.log(`🚀 Server ready on port ${PORT}`);
-    console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+    logger.info("Server ready", { port: PORT });
+    logger.info("Health check available", { endpoint: `/api/health` });
   });
 }
 
 startServer().catch((error) => {
-  console.error("Failed to start server:", error);
+  logger.error("Failed to start server", error instanceof Error ? error : new Error(String(error)));
   process.exit(1);
 });

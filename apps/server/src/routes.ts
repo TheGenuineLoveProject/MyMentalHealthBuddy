@@ -28,6 +28,7 @@ import {
 } from "./lib/authMiddleware.js";
 import { apiCache, CACHE_PRESETS } from "./lib/apiCache.js";
 import { healthCheckHandler, livenessHandler, readinessHandler } from "./lib/healthCheck.js";
+import { logger } from "./lib/logger.js";
 
 // Async handler wrapper for better error handling
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
@@ -606,11 +607,11 @@ export function registerRoutes(app: Express) {
           );
         } else {
           // For development: accept webhook without verification (NOT for production!)
-          console.warn("⚠️  Stripe webhook secret not configured - skipping signature verification");
+          logger.warn("Stripe webhook secret not configured - skipping signature verification");
           event = req.body;
         }
       } catch (err: any) {
-        console.error(`Webhook signature verification failed: ${err.message}`);
+        logger.error("Webhook signature verification failed", err);
         return res.status(400).json({ error: `Webhook Error: ${err.message}` });
       }
 
@@ -688,7 +689,7 @@ export function registerRoutes(app: Express) {
         // Redirect to designs page or dashboard
         res.redirect("/designs?canva_connected=true");
       } catch (error: any) {
-        console.error("Canva OAuth callback error:", error);
+        logger.error("Canva OAuth callback error", error instanceof Error ? error : new Error(String(error)));
         res.redirect("/designs?canva_error=true");
       }
     })
@@ -937,16 +938,14 @@ export function registerRoutes(app: Express) {
     asyncHandler(async (req, res) => {
       const errorData = Sanitizer.sanitizeObject(req.body);
       
-      // Log to console in development
-      if (process.env.NODE_ENV === 'development') {
-        console.error('📊 Frontend Error Captured:', {
-          message: errorData.message,
-          stack: errorData.stack,
-          url: errorData.url,
-          timestamp: errorData.timestamp,
-          userAgent: errorData.userAgent
-        });
-      }
+      // Log frontend errors
+      logger.error('Frontend Error Captured', {
+        message: errorData.message,
+        stack: errorData.stack,
+        url: errorData.url,
+        timestamp: errorData.timestamp,
+        userAgent: errorData.userAgent
+      });
 
       // In production, this would forward to external error tracking service
       // Example integrations:
@@ -970,15 +969,13 @@ export function registerRoutes(app: Express) {
     asyncHandler(async (req, res) => {
       const metricsData = Sanitizer.sanitizeObject(req.body);
       
-      // Log Web Vitals in development
-      if (process.env.NODE_ENV === 'development') {
-        console.log('📈 Performance Metrics:', {
-          metrics: metricsData.metrics,
-          page: metricsData.page,
-          timestamp: metricsData.timestamp,
-          userAgent: metricsData.userAgent
-        });
-      }
+      // Log Web Vitals metrics
+      logger.info('Performance Metrics', {
+        metrics: metricsData.metrics,
+        page: metricsData.page,
+        timestamp: metricsData.timestamp,
+        userAgent: metricsData.userAgent
+      });
 
       // In production, forward to analytics service
       // Example integrations:

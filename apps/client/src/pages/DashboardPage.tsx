@@ -84,9 +84,9 @@ export function DashboardPage() {
         <h1 className="text-4xl font-bold mb-2 text-gray-900" data-testid="dashboard-title">
           Welcome to MyMentalHealthBuddy
         </h1>
-        <p className="text-xl text-gray-600 flex items-center gap-2">
+        <p className="text-xl text-gray-600 flex items-center gap-2 min-h-[32px]" style={{ contain: 'layout' }}>
           <Sparkles className="text-yellow-500" size={24} />
-          {getMotivationalMessage()}
+          <span className="inline-block min-w-[400px]">{getMotivationalMessage()}</span>
         </p>
       </div>
 
@@ -109,13 +109,15 @@ export function DashboardPage() {
                   <Icon className={stat.color} size={20} />
                 </div>
               </div>
-              {isLoading ? (
-                <Skeleton className="h-9 w-16" />
-              ) : (
-                <p className="text-3xl font-bold text-gray-900" data-testid={`stat-value-${index}`}>
-                  {stat.value}
-                </p>
-              )}
+              <div className="min-w-[80px] min-h-[36px]" style={{ contain: 'layout' }}>
+                {isLoading ? (
+                  <Skeleton className="h-9 w-20" />
+                ) : (
+                  <p className="text-3xl font-bold text-gray-900 tabular-nums" data-testid={`stat-value-${index}`}>
+                    {stat.value}
+                  </p>
+                )}
+              </div>
             </div>
           );
         })}
