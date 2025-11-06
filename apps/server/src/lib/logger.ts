@@ -61,17 +61,13 @@ class Logger {
   }
 
   http(method: string, path: string, statusCode: number, duration?: number): void {
-    if (this.isDevelopment) {
-      const durationStr = duration ? ` (${duration}ms)` : '';
-      this.info(`${method} ${path} ${statusCode}${durationStr}`);
-    }
+    const durationStr = duration ? ` (${duration}ms)` : '';
+    this.info(`${method} ${path} ${statusCode}${durationStr}`);
   }
 
   metric(name: string, value: number, unit?: string): void {
-    if (this.isDevelopment) {
-      const unitStr = unit ? ` ${unit}` : '';
-      this.debug(`Metric: ${name} = ${value}${unitStr}`);
-    }
+    const unitStr = unit ? ` ${unit}` : '';
+    this.info(`Metric: ${name} = ${value}${unitStr}`);
   }
 }
 
