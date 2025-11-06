@@ -9,21 +9,26 @@ import { QuickActions } from "@/components/QuickActions";
 import { Skeleton } from "@/components/SkeletonLoader";
 
 export function DashboardPage() {
-  const { data: moods = [], isLoading: moodsLoading } = useQuery<SelectMoodEntry[]>({
+  const { data: moods = [], isLoading: moodsLoading, error: moodsError } = useQuery<SelectMoodEntry[]>({
     queryKey: ["/api/moods"],
+    retry: false,
   });
 
-  const { data: journals = [], isLoading: journalsLoading } = useQuery<SelectJournal[]>({
+  const { data: journals = [], isLoading: journalsLoading, error: journalsError } = useQuery<SelectJournal[]>({
     queryKey: ["/api/journals"],
+    retry: false,
   });
 
-  const { data: analytics, isLoading: analyticsLoading } = useQuery<{
+  const { data: analytics, isLoading: analyticsLoading, error: analyticsError } = useQuery<{
     totalEntries: number;
     averageIntensity: number;
     trends: { weeklyAverage: number; improving: boolean };
   }>({
-    queryKey: ["/api/moods/analytics"]
+    queryKey: ["/api/moods/analytics"],
+    retry: false,
   });
+
+  const isUnauthorized = moodsError || journalsError || analyticsError;
 
   // Calculate recent activity
   const recentMoods = moods.slice(0, 3);
@@ -79,19 +84,21 @@ export function DashboardPage() {
 
   return (
     <div className="max-w-7xl mx-auto p-6">
-      {/* Welcome Header */}
-      <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2 text-gray-900" data-testid="dashboard-title">
+      {/* Welcome Header - Fixed height to prevent CLS */}
+      <div className="mb-8 h-[120px]" style={{ contain: 'layout' }}>
+        <h1 className="text-4xl font-bold mb-2 text-gray-900 h-[48px] leading-tight" data-testid="dashboard-title">
           Welcome to MyMentalHealthBuddy
         </h1>
-        <p className="text-xl text-gray-600 flex items-center gap-2 min-h-[32px]" style={{ contain: 'layout' }}>
-          <Sparkles className="text-yellow-500" size={24} />
-          <span className="inline-block min-w-[400px]">{getMotivationalMessage()}</span>
-        </p>
+        <div className="flex items-center gap-2 h-[40px]" style={{ contain: 'layout' }}>
+          <Sparkles className="text-yellow-500 flex-shrink-0" size={24} />
+          <p className="text-xl text-gray-600 line-clamp-2 min-w-[500px]">
+            {getMotivationalMessage()}
+          </p>
+        </div>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 stats-grid">
+      {/* Stats Grid - Fixed heights to prevent CLS */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 stats-grid" style={{ contain: 'layout' }}>
         {stats.map((stat, index) => {
           const Icon = stat.icon;
           const isLoading = moodsLoading || journalsLoading || analyticsLoading;
@@ -101,19 +108,19 @@ export function DashboardPage() {
               key={index}
               className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500 stat-card h-[140px]"
               data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
-              style={{ contain: 'layout' }}
+              style={{ contain: 'layout strict' }}
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-600">{stat.label}</span>
-                <div className={`p-2 rounded-lg ${stat.bgColor}`}>
+              <div className="flex items-center justify-between mb-2 h-[32px]">
+                <span className="text-sm font-medium text-gray-600 truncate">{stat.label}</span>
+                <div className={`p-2 rounded-lg ${stat.bgColor} flex-shrink-0`}>
                   <Icon className={stat.color} size={20} />
                 </div>
               </div>
-              <div className="min-w-[80px] min-h-[36px]" style={{ contain: 'layout' }}>
+              <div className="w-[100px] h-[48px] flex items-center" style={{ contain: 'layout strict' }}>
                 {isLoading ? (
                   <Skeleton className="h-9 w-20" />
                 ) : (
-                  <p className="text-3xl font-bold text-gray-900 tabular-nums" data-testid={`stat-value-${index}`}>
+                  <p className="text-3xl font-bold text-gray-900 tabular-nums leading-none" data-testid={`stat-value-${index}`}>
                     {stat.value}
                   </p>
                 )}
