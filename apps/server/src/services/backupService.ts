@@ -1,4 +1,4 @@
-import { storage } from '../storage.js';
+import { storage } from '../../storage.js';
 import { promisify } from 'util';
 import { exec } from 'child_process';
 import * as fs from 'fs';

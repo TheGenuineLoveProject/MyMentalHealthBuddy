@@ -61,6 +61,11 @@ export class AIImageGenerationService {
         // Note: response_format is not supported, always returns base64
       });
 
+      // Add null check for response.data
+      if (!response.data || response.data.length === 0) {
+        throw new Error('No image data returned from API');
+      }
+
       const base64 = response.data[0]?.b64_json ?? '';
       if (!base64) {
         throw new Error('No image data returned from API');
