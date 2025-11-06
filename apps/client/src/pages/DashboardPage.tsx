@@ -83,21 +83,21 @@ export function DashboardPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6 particles-bg animate-fade-in">
       {/* Welcome Header - Fixed height to prevent CLS */}
-      <div className="mb-8 h-[120px]" style={{ contain: 'layout' }}>
-        <h1 className="text-4xl font-bold mb-2 text-gray-900 h-[48px] leading-tight" data-testid="dashboard-title">
+      <div className="mb-8 h-[120px] animate-slide-up" style={{ contain: 'layout' }}>
+        <h1 className="heading-lg mb-2 text-gray-900 h-[48px] leading-tight text-shadow-soft" data-testid="dashboard-title">
           Welcome to MyMentalHealthBuddy
         </h1>
         <div className="flex items-center gap-2 h-[40px]" style={{ contain: 'layout' }}>
-          <Sparkles className="text-yellow-500 flex-shrink-0" size={24} />
+          <Sparkles className="text-yellow-500 flex-shrink-0 animate-subtle-pulse" size={24} />
           <p className="text-xl text-gray-600 line-clamp-2 min-w-[500px]">
             {getMotivationalMessage()}
           </p>
         </div>
       </div>
 
-      {/* Stats Grid - Fixed heights to prevent CLS */}
+      {/* Stats Grid - Fixed heights to prevent CLS - Enhanced with Visual Effects */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 stats-grid" style={{ contain: 'layout' }}>
         {stats.map((stat, index) => {
           const Icon = stat.icon;
@@ -106,13 +106,13 @@ export function DashboardPage() {
           return (
             <div
               key={index}
-              className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500 stat-card h-[140px]"
+              className="bg-white rounded-lg shadow-lg p-6 border-l-4 border-blue-500 stat-card h-[140px] card-hover-lift transition-all-smooth gpu-accelerated stagger-item"
               data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}
-              style={{ contain: 'layout strict' }}
+              style={{ contain: 'layout strict', animationDelay: `${index * 100}ms` }}
             >
               <div className="flex items-center justify-between mb-2 h-[32px]">
                 <span className="text-sm font-medium text-gray-600 truncate">{stat.label}</span>
-                <div className={`p-2 rounded-lg ${stat.bgColor} flex-shrink-0`}>
+                <div className={`p-2 rounded-lg ${stat.bgColor} flex-shrink-0 hover-scale transition-transform-smooth`}>
                   <Icon className={stat.color} size={20} />
                 </div>
               </div>
@@ -136,17 +136,17 @@ export function DashboardPage() {
         <QuickActions />
       </div>
 
-      {/* Recent Activity */}
+      {/* Recent Activity - Enhanced with Visual Effects */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Recent Moods */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow-lg p-6 card-hover-lift transition-all-smooth gpu-accelerated">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-              <Heart className="text-pink-500" size={24} />
+              <Heart className="text-pink-500 animate-subtle-pulse" size={24} />
               Recent Moods
             </h2>
             <Link href="/mood">
-              <span className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer font-medium">
+              <span className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer font-medium transition-colors-smooth hover-lift">
                 View All →
               </span>
             </Link>
@@ -187,14 +187,14 @@ export function DashboardPage() {
         </div>
 
         {/* Recent Journals */}
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white rounded-lg shadow-lg p-6 card-hover-lift transition-all-smooth gpu-accelerated">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2">
-              <BookOpen className="text-purple-500" size={24} />
+              <BookOpen className="text-purple-500 animate-subtle-pulse" size={24} />
               Recent Journals
             </h2>
             <Link href="/journal">
-              <span className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer font-medium">
+              <span className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer font-medium transition-colors-smooth hover-lift">
                 View All →
               </span>
             </Link>
@@ -232,10 +232,10 @@ export function DashboardPage() {
         </div>
       </div>
 
-      {/* Helpful Tips */}
-      <div className="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border border-blue-200">
+      {/* Helpful Tips - Enhanced with Visual Effects */}
+      <div className="mt-8 bg-gradient-serenity rounded-lg p-6 border border-blue-200 shadow-lg card-hover-lift transition-all-smooth gpu-accelerated">
         <h2 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-          <Sparkles className="text-yellow-500" size={24} />
+          <Sparkles className="text-yellow-500 animate-subtle-pulse" size={24} />
           Daily Mental Health Tips
         </h2>
         <ul className="space-y-2 text-gray-700">
