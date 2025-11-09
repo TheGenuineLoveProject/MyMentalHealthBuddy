@@ -1,9 +1,11 @@
 /**
  * Web Vitals Monitoring
  * Track and report Core Web Vitals (LCP, INP, CLS, FCP, TTFB)
+ * Uses attribution build in dev for detailed CLS debugging
  */
 
-import { onCLS, onINP, onLCP, onFCP, onTTFB, Metric } from 'web-vitals';
+// Use attribution build for detailed debugging (has CLS attribution data)
+import { onCLS, onINP, onLCP, onFCP, onTTFB, Metric } from 'web-vitals/attribution';
 
 export interface WebVitalsMetrics {
   lcp: number | null; // Largest Contentful Paint

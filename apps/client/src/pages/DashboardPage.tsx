@@ -142,12 +142,12 @@ export function DashboardPage() {
       <div className="max-w-7xl mx-auto p-6 particles-bg animate-fade-in relative z-10">
         {/* Welcome Header - Fixed height to prevent CLS */}
       <div className="mb-8 h-[120px] animate-slide-up" style={{ contain: 'layout' }}>
-        <h1 className="heading-lg mb-2 text-gray-900 h-[48px] leading-tight text-shadow-soft" data-testid="dashboard-title">
+        <h1 className="heading-lg mb-2 text-gray-900 leading-tight text-shadow-soft" data-testid="dashboard-title" style={{ height: '48px', minHeight: '48px', maxHeight: '48px', overflow: 'hidden' }}>
           Welcome to MyMentalHealthBuddy
         </h1>
-        <div className="flex items-center gap-2 h-[40px]" style={{ contain: 'layout' }}>
+        <div className="flex items-center gap-2" style={{ contain: 'layout strict', height: '40px', minHeight: '40px', maxHeight: '40px', overflow: 'hidden' }}>
           <Sparkles className="text-yellow-500 flex-shrink-0 animate-subtle-pulse" size={24} />
-          <p className="text-xl text-gray-600 line-clamp-2 w-full max-w-[600px]">
+          <p className="text-xl text-gray-600 line-clamp-2 w-full max-w-[600px]" style={{ minHeight: '32px' }}>
             {getMotivationalMessage()}
           </p>
         </div>
@@ -172,11 +172,11 @@ export function DashboardPage() {
                   <Icon className={stat.color} size={20} />
                 </div>
               </div>
-              <div className="w-[100px] h-[48px] flex items-center" style={{ contain: 'layout strict', minWidth: '100px', maxWidth: '100px' }}>
+              <div className="flex items-center" style={{ contain: 'layout strict', width: '140px', height: '48px', minWidth: '140px', maxWidth: '140px', minHeight: '48px', maxHeight: '48px', overflow: 'hidden' }}>
                 {isLoading ? (
-                  <Skeleton className="h-9 w-[80px]" />
+                  <Skeleton className="h-9 w-[120px]" />
                 ) : (
-                  <p className="text-3xl font-bold text-gray-900 tabular-nums leading-none w-full" data-testid={`stat-value-${index}`} style={{ minWidth: '100px' }}>
+                  <p className="text-3xl font-bold text-gray-900 tabular-nums leading-none" data-testid={`stat-value-${index}`} style={{ width: '140px', minWidth: '140px', maxWidth: '140px' }}>
                     {stat.value}
                   </p>
                 )}
