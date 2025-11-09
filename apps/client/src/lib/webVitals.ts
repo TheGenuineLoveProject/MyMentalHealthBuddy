@@ -79,6 +79,21 @@ function handleMetric(metric: Metric) {
       rating: report.rating,
       delta: metric.delta,
     });
+    
+    // Special CLS debugging
+    if (metric.name === 'CLS' && 'entries' in metric && Array.isArray(metric.entries)) {
+      console.log(`[CLS Debug] Layout shift sources:`, metric.entries);
+      metric.entries.forEach((entry: any, index: number) => {
+        console.log(`[CLS Debug] Shift #${index + 1}:`, {
+          value: entry.value,
+          sources: entry.sources?.map((s: any) => ({
+            node: s.node,
+            previousRect: s.previousRect,
+            currentRect: s.currentRect,
+          })),
+        });
+      });
+    }
   }
 
   // Send to analytics in production

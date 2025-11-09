@@ -49,6 +49,7 @@ The architecture emphasizes type safety, developer experience, and modern web pr
 ### Performance Optimization Lessons Learned
 -   **Font Preloading Regression**: Attempting to preload non-existent `/fonts/system-ui.woff2` caused 45x TTFB regression (49ms → 2216ms). **Critical Lesson**: Always verify resource existence before preloading; measure performance after every change.
 -   **Deferred Instrumentation Success**: Moving security hardening, performance monitoring, and service worker registration to `requestIdleCallback` improved FCP significantly without sacrificing functionality.
+-   **CLS Challenge**: Despite extensive layout containment (`contain: layout strict`, fixed heights, min-heights), CLS remains at 0.2847 (POOR). Attempted fixes: UnauthenticatedBanner min-height, navigation fixed dimensions, main container min-height, layout containment on root/containers. CLS persists, suggesting trade-off between immersive atmospheric design and core web vitals. TTFB, FCP, LCP all excellent (GOOD ratings).
 
 ## External Dependencies
 
