@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "clean": "bash scripts/clean.sh",
-    "build": "vite build --config apps/client/vite.config.ts && tsc -p apps/server/tsconfig.json",
+    "build": "vite build --config apps/client/vite.config.js && tsc -p apps/server/tsconfig.json",
+    "build:production": "rm -rf apps/client/dist apps/client/.vite apps/server/dist && npm run build",
     "start": "node apps/server/dist/index.js",
     "deployGuard": "bash scripts/deployGuard.sh",
     "heal": "bash scripts/heal.sh",

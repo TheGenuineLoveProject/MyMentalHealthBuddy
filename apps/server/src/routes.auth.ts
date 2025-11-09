@@ -1,4 +1,4 @@
-import type { Express, Request, Response } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { storage } from "../storage.js";
 import { insertUserSchema } from "../../shared/schema.js";
@@ -9,14 +9,14 @@ import { logger } from "./lib/logger.js";
 
 // Async handler wrapper
 function asyncHandler(fn: (req: Request, res: Response) => Promise<any>) {
-  return (req: Request, res: Response, next: Function) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     Promise.resolve(fn(req, res)).catch(next);
   };
 }
 
 // Rate limiter middleware
 function rateLimitMiddleware(limiter: typeof apiRateLimiter) {
-  return (req: Request, res: Response, next: Function) => {
+  return (req: Request, res: Response, next: NextFunction) => {
     const identifier = req.ip || req.socket.remoteAddress || 'unknown';
     
     if (!limiter.check(identifier)) {
@@ -91,7 +91,7 @@ export function registerAuthRoutes(app: Express) {
         isActive: true,
         subscriptionTier: 'free',
         subscriptionStatus: 'inactive',
-        preferences: {}
+        preferences: JSON.stringify({})
       });
       
       // Set session
