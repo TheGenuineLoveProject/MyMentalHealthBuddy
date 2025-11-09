@@ -36,12 +36,26 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        contain: layout;
       }
       
       /* Reserve space for navigation to prevent layout shift */
       nav {
-        contain: layout;
+        contain: layout strict;
         height: 64px;
+        min-height: 64px;
+        max-height: 64px;
+      }
+      
+      /* Prevent layout shifts from dynamic content */
+      .max-w-7xl {
+        min-height: calc(100vh - 64px);
+        contain: layout;
+      }
+      
+      /* Fixed dimensions for main containers */
+      main, .particles-bg {
+        contain: layout;
       }
       
       /* Skeleton loader styles for instant feedback */

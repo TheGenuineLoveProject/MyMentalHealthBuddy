@@ -28,8 +28,9 @@ export function UnauthenticatedBanner({
 
   return (
     <div 
-      className={`flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-blue-200 ${className}`}
+      className={`flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-blue-200 min-h-[400px] ${className}`}
       data-testid="unauthenticated-banner"
+      style={{ contain: 'layout' }}
     >
       <div className="mb-4 p-4 bg-white rounded-full shadow-lg">
         <Icon className="text-blue-600" size={48} />

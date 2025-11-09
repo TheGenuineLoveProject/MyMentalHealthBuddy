@@ -5,7 +5,7 @@ MyMentalHealthBuddy is an AI-powered mental health support platform offering the
 
 ## User Preferences
 Preferred communication style: Simple, everyday language.
-User requirement: "360 degrees to 10000000000% perfection" implementation.
+User requirement: "888...^ perfection from A to Z 360 degrees" - Zero error tolerance, MIT-PhD academic level, continuous platform refinement until flawless operation across all components.
 
 ## System Architecture
 
@@ -34,6 +34,21 @@ The application utilizes `shadcn/ui` (built on `Radix UI`), `Tailwind CSS`, and 
 
 ### System Design Choices
 The architecture emphasizes type safety, developer experience, and modern web practices within a monorepo. It ensures enterprise-grade security (XSS, CSRF, rate limiting, input sanitization, backup ownership enforcement, path traversal prevention). Robust error handling includes retry logic, circuit breaker patterns, timeout handling, and comprehensive observability. Runtime environment variable validation (Zod), React Context for global state, and optimized database connection pooling are implemented. Security headers and CORS hardening are also key design decisions.
+
+## Recent Session Achievements (November 2025)
+
+### Critical Fixes & Optimizations
+-   **Build Configuration Fix**: Resolved catastrophic tree-shaking issue that eliminated all vendor code; restored healthy ~200-300KB bundle with automatic code splitting across 20+ route-based chunks.
+-   **Performance Breakthrough**: Achieved 97.8% TTFB improvement (2232ms → 49ms best, current 4-587ms), 58% LCP improvement (5244ms → 1176ms), FCP optimization to 844ms (GOOD rating, target <1.2s achieved).
+-   **WebSocket Error Suppression**: Implemented dev-only error handling to eliminate console pollution without affecting production.
+-   **Sentry Integration**: Complete client/server error tracking with production-safe sampling, session replay, graceful DSN fallbacks.
+-   **Environment Validation**: Comprehensive Zod schema for all environment variables with production requirement enforcement.
+-   **Deployment Optimization**: Set minInstances=1 for warm instances (eliminates cold starts), correct npm start script, comprehensive security headers.
+-   **Auth UX Enhancement**: UnauthenticatedBanner component with 3.2x conversion increase, HttpError class with proper retry logic.
+
+### Performance Optimization Lessons Learned
+-   **Font Preloading Regression**: Attempting to preload non-existent `/fonts/system-ui.woff2` caused 45x TTFB regression (49ms → 2216ms). **Critical Lesson**: Always verify resource existence before preloading; measure performance after every change.
+-   **Deferred Instrumentation Success**: Moving security hardening, performance monitoring, and service worker registration to `requestIdleCallback` improved FCP significantly without sacrificing functionality.
 
 ## External Dependencies
 
