@@ -78,4 +78,3 @@ export declare class PgStorage implements IStorage {
     private mapUserToInterface;
     close(): Promise<void>;
 }
-//# sourceMappingURL=pg-storage.d.ts.map

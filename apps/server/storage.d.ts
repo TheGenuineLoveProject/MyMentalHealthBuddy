@@ -61,4 +61,3 @@ export interface IStorage {
     getAiUsageByDateRange(userId: string, startDate: Date, endDate: Date): Promise<SelectAiUsageTracking[]>;
 }
 export declare const storage: IStorage;
-//# sourceMappingURL=storage.d.ts.map

@@ -9,10 +9,11 @@
     "region": "auto"
   },
   "build": {
-    "command": "npm run build:production",
+    "command": "npm run build",
     "outputDirectory": "apps/client/dist",
-    "installCommand": "npm install",
-    "environment": "production"
+    "installCommand": "npm install --include=dev",
+    "environment": "production",
+    "nodeVersion": "20"
   },
   "runtime": {
     "startCommand": "npm start",
