@@ -80,19 +80,21 @@ function handleMetric(metric: Metric) {
       delta: metric.delta,
     });
     
-    // Special CLS debugging
-    if (metric.name === 'CLS' && 'entries' in metric && Array.isArray(metric.entries)) {
-      console.log(`[CLS Debug] Layout shift sources:`, metric.entries);
-      metric.entries.forEach((entry: any, index: number) => {
-        console.log(`[CLS Debug] Shift #${index + 1}:`, {
-          value: entry.value,
-          sources: entry.sources?.map((s: any) => ({
-            node: s.node,
-            previousRect: s.previousRect,
-            currentRect: s.currentRect,
-          })),
-        });
+    // CLS Attribution Debugging (web-vitals v4+ with reportAllChanges)
+    if (metric.name === 'CLS' && 'attribution' in metric) {
+      const attribution = (metric as any).attribution;
+      console.log('[CLS Attribution] Detailed shift analysis:', {
+        largestShiftTarget: attribution?.largestShiftTarget,
+        largestShiftValue: attribution?.largestShiftValue,
+        largestShiftTime: attribution?.largestShiftTime,
+        loadState: attribution?.loadState,
+        largestShiftEntry: attribution?.largestShiftEntry,
       });
+      
+      // Log selector path if available
+      if (attribution?.largestShiftTarget) {
+        console.log('[CLS Attribution] Element causing shift:', attribution.largestShiftTarget);
+      }
     }
   }
 
@@ -124,9 +126,36 @@ export function initWebVitals() {
   try {
     onLCP(handleMetric);
     onINP(handleMetric);
-    onCLS(handleMetric);
+    // Enable reportAllChanges for detailed CLS attribution
+    onCLS(handleMetric, { reportAllChanges: true });
     onFCP(handleMetric);
     onTTFB(handleMetric);
+
+    // Fallback PerformanceObserver for layout-shift debugging (dev only)
+    if (import.meta.env.DEV && typeof PerformanceObserver !== 'undefined') {
+      try {
+        const observer = new PerformanceObserver((list) => {
+          for (const entry of list.getEntries()) {
+            if (entry.entryType === 'layout-shift' && !(entry as any).hadRecentInput) {
+              const sources = (entry as any).sources || [];
+              console.log('[CLS Debug] Layout Shift Entry:', {
+                value: (entry as any).value,
+                startTime: entry.startTime,
+                hadRecentInput: (entry as any).hadRecentInput,
+                sources: sources.map((s: any) => ({
+                  node: s.node?.tagName + (s.node?.className ? `.${s.node.className}` : ''),
+                  previousRect: s.previousRect,
+                  currentRect: s.currentRect,
+                })),
+              });
+            }
+          }
+        });
+        observer.observe({ type: 'layout-shift', buffered: true });
+      } catch (e) {
+        console.warn('[CLS Debug] PerformanceObserver failed:', e);
+      }
+    }
 
     console.log('[Web Vitals] Monitoring initialized');
   } catch (error) {
