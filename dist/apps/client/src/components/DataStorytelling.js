@@ -25,7 +25,7 @@ export function InsightCard({ type, title, description, metric, action, classNam
             bgColor: 'bg-red-50 dark:bg-red-950',
             borderColor: 'border-red-200 dark:border-red-800',
             iconColor: 'text-red-600 dark:text-red-400',
-            badgeVariant: 'destructive'
+            badgeVariant: 'danger'
         },
         neutral: {
             icon: _jsx(Lightbulb, { className: "h-5 w-5" }),
@@ -39,7 +39,7 @@ export function InsightCard({ type, title, description, metric, action, classNam
             bgColor: 'bg-purple-50 dark:bg-purple-950',
             borderColor: 'border-purple-200 dark:border-purple-800',
             iconColor: 'text-purple-600 dark:text-purple-400',
-            badgeVariant: 'secondary'
+            badgeVariant: 'gray'
         }
     }[type];
     return (_jsx(Card, { className: `${config.bgColor} border-2 ${config.borderColor} ${className}`, "data-testid": `insight-${type}`, children: _jsxs("div", { className: "p-4 space-y-3", children: [_jsxs("div", { className: "flex items-start gap-3", children: [_jsx("div", { className: `p-2 rounded-lg ${config.iconColor}`, children: config.icon }), _jsxs("div", { className: "flex-1", children: [_jsx("h4", { className: "font-semibold text-foreground mb-1", "data-testid": "insight-title", children: title }), _jsx("p", { className: "text-sm text-muted-foreground", "data-testid": "insight-description", children: description })] })] }), metric && (_jsxs("div", { className: "flex items-baseline gap-2 pl-11", children: [_jsx("span", { className: "text-2xl font-bold text-foreground", "data-testid": "insight-metric-value", children: metric.value }), _jsx("span", { className: "text-sm text-muted-foreground", children: metric.label }), metric.change !== undefined && (_jsxs(Badge, { variant: metric.change >= 0 ? 'success' : 'danger', children: [metric.change >= 0 ? '+' : '', metric.change, "%"] }))] })), action && (_jsxs("button", { onClick: action.onClick, className: `ml-11 text-sm font-medium ${config.iconColor} hover:underline`, "data-testid": "insight-action", children: [action.label, " \u2192"] }))] }) }));

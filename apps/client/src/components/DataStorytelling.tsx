@@ -49,7 +49,7 @@ export function InsightCard({ type, title, description, metric, action, classNam
       bgColor: 'bg-red-50 dark:bg-red-950',
       borderColor: 'border-red-200 dark:border-red-800',
       iconColor: 'text-red-600 dark:text-red-400',
-      badgeVariant: 'destructive' as const
+      badgeVariant: 'danger' as const
     },
     neutral: {
       icon: <Lightbulb className="h-5 w-5" />,
@@ -63,7 +63,7 @@ export function InsightCard({ type, title, description, metric, action, classNam
       bgColor: 'bg-purple-50 dark:bg-purple-950',
       borderColor: 'border-purple-200 dark:border-purple-800',
       iconColor: 'text-purple-600 dark:text-purple-400',
-      badgeVariant: 'secondary' as const
+      badgeVariant: 'gray' as const
     }
   }[type];
 
