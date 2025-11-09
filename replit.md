@@ -123,18 +123,23 @@ The architecture emphasizes type safety, developer experience, and modern web pr
     -   Expected behavior for unauthenticated users - dashboard should handle gracefully with empty states
     -   Route prefetcher successfully skips HEAD requests to protected endpoints (confirmed by absence of HEAD 401s in logs)
 
-### Deployment Build Optimization ✅ (November 9, 2025 - Session 4)
+### Deployment Build Optimization ✅ (November 9, 2025 - Session 4 & 5)
 -   **Automatic Cache Clearing**: Production build script removes all dist, .vite, and build artifacts before compilation
 -   **Zero Stale Files**: Prevents TypeScript compilation errors from cached/outdated code
 -   **Replit Docs Compliance**: Follows official Replit deployment best practices
 -   **Build Command**: `rm -rf apps/client/dist apps/client/.vite apps/server/dist && npm run build:production`
--   **Deployment Target**: Autoscale with optimized build pipeline (9.32s clean compilation)
+-   **Deployment Target**: Autoscale with optimized build pipeline (10.59-12.63s clean compilation)
 -   **Type Safety**: All Badge variants standardized ('primary', 'success', 'warning', 'danger', 'gray')
--   **Zero Build Errors**: TypeScript compilation passes with 0 errors in DataStorytelling.tsx and all components
+-   **Zero Build Errors**: TypeScript compilation passes with 0 errors across all components
+-   **Production-Safe Port Resolution**: Implemented `SERVER_PORT ?? PORT ?? 5000` strategy for development override while respecting platform-provided PORT in production
+-   **ES Module Configuration**: Changed server package.json to `type: "module"` and tsconfig to `module: "ESNext"` for Node 20+ compatibility
+-   **Deployment Path**: Configured to `node apps/server/dist/server/src/index.js` (correct TypeScript output structure)
+-   **Sentry Instrumentation Fix**: Removed double import pattern (single side-effect import + direct @sentry/node import) to prevent re-initialization
+-   **Sentry Dependencies**: Installed @sentry/node and @sentry/profiling-node in monorepo root
+-   **Workspace Build Scripts**: Added build:production to both apps/client and apps/server with matching cache clearing
 -   **Vite Config Fix**: Corrected build script to use vite.config.js (production-optimized with code splitting) instead of incomplete vite.config.ts
--   **Server TypeScript Config**: Removed restrictive rootDir to allow imports from ../shared and storage.ts files
--   **Auth Routes Type Safety**: Fixed NextFunction types in asyncHandler and rateLimitMiddleware, corrected preferences JSON.stringify()
--   **Architect Approval**: PASS - build:production script safe for Replit Autoscale, maintains security & type safety, 0 TypeScript errors
+-   **Health Check Verified**: Production server successfully starts on configured port, /api/health returns 200 OK (671 bytes)
+-   **Architect Approval**: PASS - Deployment configuration meets production-readiness goals for Replit Autoscale, ES modules coherent, port resolution correct, build scripts functional, 0 security issues
 
 ### Loading States Standardization ✅
 -   **Unified System**: 530-line LoadingStates.tsx consolidates 4 duplicate skeleton files
