@@ -7,6 +7,7 @@ import {
 import type { SelectMoodEntry, SelectJournal } from "@shared/schema";
 import { QuickActions } from "@/components/QuickActions";
 import { Skeleton } from "@/components/SkeletonLoader";
+import { AtmosphericBackground, DecorativeWave } from "@/components/atmospheric";
 
 export function DashboardPage() {
   const { data: moods = [], isLoading: moodsLoading, error: moodsError } = useQuery<SelectMoodEntry[]>({
@@ -83,8 +84,13 @@ export function DashboardPage() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-6 particles-bg animate-fade-in">
-      {/* Welcome Header - Fixed height to prevent CLS */}
+    <>
+      {/* Atmospheric Background for Immersive Experience */}
+      <AtmosphericBackground scene="serenity" intensity="moderate" showParticles={true} />
+      <DecorativeWave position="top" scene="serenity" />
+      
+      <div className="max-w-7xl mx-auto p-6 particles-bg animate-fade-in relative z-10">
+        {/* Welcome Header - Fixed height to prevent CLS */}
       <div className="mb-8 h-[120px] animate-slide-up" style={{ contain: 'layout' }}>
         <h1 className="heading-lg mb-2 text-gray-900 h-[48px] leading-tight text-shadow-soft" data-testid="dashboard-title">
           Welcome to MyMentalHealthBuddy
@@ -257,6 +263,7 @@ export function DashboardPage() {
           </li>
         </ul>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "../lib/queryClient";
 import { Send, Copy, Trash2, Bot, User, Check } from "lucide-react";
+import { AtmosphericBackground, GlowEffect } from "@/components/atmospheric";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -68,8 +69,12 @@ export function ChatPage() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] bg-gray-50">
-      {/* Chat Header */}
+    <>
+      {/* Atmospheric Background for Therapeutic Chat Experience */}
+      <AtmosphericBackground scene="serenity" intensity="subtle" showParticles={true} />
+      
+      <div className="flex flex-col h-[calc(100vh-4rem)] bg-transparent relative z-10">
+        {/* Chat Header */}
       <div className="bg-white border-b px-6 py-4 flex justify-between items-center">
         <div>
           <h1 className="text-xl font-bold text-gray-900">AI Chat Support</h1>
@@ -214,6 +219,7 @@ export function ChatPage() {
           </button>
         </div>
       </form>
-    </div>
+      </div>
+    </>
   );
 }

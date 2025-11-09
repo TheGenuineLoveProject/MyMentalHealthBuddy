@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import type { SelectMoodEntry } from "@shared/schema";
 import { Download, TrendingUp } from "lucide-react";
+import { AtmosphericBackground } from "@/components/atmospheric";
 
 const MOODS = ["Happy", "Sad", "Anxious", "Calm", "Angry", "Stressed", "Content"];
 
@@ -75,8 +76,12 @@ export function MoodPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <div className="flex justify-between items-center mb-6">
+    <>
+      {/* Atmospheric Background for Focus and Clarity */}
+      <AtmosphericBackground scene="focus" intensity="subtle" showParticles={false} />
+      
+      <div className="max-w-4xl mx-auto p-6 relative z-10">
+        <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Mood Tracker</h1>
         {moods.length > 0 && (
           <div className="flex gap-2">
@@ -217,6 +222,7 @@ export function MoodPage() {
           </div>
         )}
       </div>
-    </div>
+      </div>
+    </>
   );
 }
