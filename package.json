@@ -23,6 +23,8 @@
     "@types/express": "^5.0.5",
     "@types/express-session": "^1.18.2",
     "@types/pg": "^8.15.6",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.21",
     "bcryptjs": "^3.0.3",
