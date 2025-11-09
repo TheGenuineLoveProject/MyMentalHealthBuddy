@@ -18,6 +18,8 @@ import { initializeCsrf } from "./lib/csrf";
 import { routePrefetcher } from "./lib/route-prefetcher";
 
 // Code Splitting: Lazy load pages for better initial bundle size
+const LoginPage = lazy(() => import("./pages/LoginPage").then(m => ({ default: m.LoginPage })));
+const SignupPage = lazy(() => import("./pages/SignupPage").then(m => ({ default: m.SignupPage })));
 const DashboardPage = lazy(() => import("./pages/DashboardPage").then(m => ({ default: m.DashboardPage })));
 const ChatPage = lazy(() => import("./pages/ChatPage").then(m => ({ default: m.ChatPage })));
 const MoodPage = lazy(() => import("./pages/MoodPage").then(m => ({ default: m.MoodPage })));
@@ -61,6 +63,16 @@ function AppContent() {
             <AccessibilityAnnouncer message="" />
             <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
               <Switch>
+              <Route path="/login">
+                <PageErrorBoundary pageName="Login">
+                  <LoginPage />
+                </PageErrorBoundary>
+              </Route>
+              <Route path="/signup">
+                <PageErrorBoundary pageName="Signup">
+                  <SignupPage />
+                </PageErrorBoundary>
+              </Route>
               <Route path="/">
                 <PageErrorBoundary pageName="Dashboard">
                   <DashboardPage />

@@ -1,4 +1,5 @@
 import { registerAnalytics } from "./routes.analytics.js";
+import { registerAuthRoutes } from "./routes.auth.js";
 import type { Express, Request, Response, NextFunction } from "express";
 import { storage } from "../storage.js";
 import { 
@@ -54,6 +55,12 @@ function rateLimitMiddleware(limiter: typeof apiRateLimiter) {
 }
 
 export function registerRoutes(app: Express) {
+  // ============================================
+  // AUTHENTICATION ROUTES (MUST BE FIRST!)
+  // ============================================
+  
+  registerAuthRoutes(app);
+  
   // ============================================
   // HEALTH CHECK ENDPOINTS
   // ============================================
