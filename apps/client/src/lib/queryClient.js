@@ -15,7 +15,19 @@ const defaultFetcher = async (url) => {
         clearTimeout(timeoutId);
         if (!res.ok) {
             const errorData = await res.json().catch(() => ({ error: res.statusText }));
-            throw new Error(errorData.error || `HTTP ${res.status}: ${res.statusText}`);
+            // Normalize error message to string (handles nested error objects)
+            let errorMessage;
+            if (typeof errorData.error === 'object' && errorData.error !== null) {
+                errorMessage = errorData.error.message || JSON.stringify(errorData.error);
+            } else {
+                errorMessage = errorData.error || `HTTP ${res.status}: ${res.statusText}`;
+            }
+            
+            // Create error with normalized message and attach status code
+            const err = new Error(errorMessage);
+            err.status = res.status;
+            err.body = errorData;
+            throw err;
         }
         return res.json();
     }
@@ -34,6 +46,23 @@ const defaultFetcher = async (url) => {
 const shouldRetry = (failureCount, error) => {
     if (failureCount >= 3)
         return false; // Max 3 retries
+    
+    // PRIORITY CHECK: Don't retry on auth errors (401/403) - user needs to login
+    if (error?.status === 401 || error?.status === 403) {
+        return false;
+    }
+    
+    // Don't retry on other 4xx client errors (bad request, not found, etc.)
+    if (error?.status >= 400 && error?.status < 500) {
+        return false;
+    }
+    
+    // Retry on 5xx server errors
+    if (error?.status >= 500) {
+        return true;
+    }
+    
+    // Fallback to message-based detection for legacy code
     if (error instanceof Error) {
         const message = error.message.toLowerCase();
         // Retry on network errors
@@ -44,11 +73,12 @@ const shouldRetry = (failureCount, error) => {
         if (message.includes('http 5')) {
             return true;
         }
-        // Don't retry on 4xx client errors (bad request, not found, etc.)
+        // Don't retry on 4xx client errors
         if (message.includes('http 4')) {
             return false;
         }
     }
+    
     return true; // Retry on unknown errors
 };
 // Exponential backoff: 1s, 2s, 4s
@@ -94,8 +124,20 @@ export async function apiRequest(url, options = {}) {
         });
         clearTimeout(timeoutId);
         if (!res.ok) {
-            const error = await res.json().catch(() => ({ error: "Request failed" }));
-            throw new Error(error.error || `HTTP ${res.status}`);
+            const errorData = await res.json().catch(() => ({ error: "Request failed" }));
+            // Normalize error message to string (handles nested error objects)
+            let errorMessage;
+            if (typeof errorData.error === 'object' && errorData.error !== null) {
+                errorMessage = errorData.error.message || JSON.stringify(errorData.error);
+            } else {
+                errorMessage = errorData.error || `HTTP ${res.status}`;
+            }
+            
+            // Create error with normalized message and attach status code
+            const err = new Error(errorMessage);
+            err.status = res.status;
+            err.body = errorData;
+            throw err;
         }
         if (res.status === 204)
             return null;

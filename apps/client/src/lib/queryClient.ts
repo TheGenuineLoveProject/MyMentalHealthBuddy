@@ -9,6 +9,19 @@ import { attachCsrfToken, requiresCsrfToken } from "./csrf";
 // Request timeout for all API calls
 const REQUEST_TIMEOUT = 30000; // 30 seconds
 
+// Custom error class with HTTP status code
+class HttpError extends Error {
+  status: number;
+  body?: any;
+  
+  constructor(message: string, status: number, body?: any) {
+    super(message);
+    this.name = 'HttpError';
+    this.status = status;
+    this.body = body;
+  }
+}
+
 // Enhanced fetcher with timeout and better error handling
 const defaultFetcher = async (url: string) => {
   const controller = new AbortController();
@@ -20,7 +33,17 @@ const defaultFetcher = async (url: string) => {
     
     if (!res.ok) {
       const errorData = await res.json().catch(() => ({ error: res.statusText }));
-      throw new Error(errorData.error || `HTTP ${res.status}: ${res.statusText}`);
+      
+      // Normalize error message to string (handles nested error objects)
+      let errorMessage: string;
+      if (typeof errorData.error === 'object' && errorData.error !== null) {
+        errorMessage = errorData.error.message || JSON.stringify(errorData.error);
+      } else {
+        errorMessage = errorData.error || `HTTP ${res.status}: ${res.statusText}`;
+      }
+      
+      // Throw custom error with status code attached
+      throw new HttpError(errorMessage, res.status, errorData);
     }
     
     return res.json();
@@ -42,6 +65,24 @@ const defaultFetcher = async (url: string) => {
 const shouldRetry = (failureCount: number, error: unknown): boolean => {
   if (failureCount >= 3) return false; // Max 3 retries
   
+  // PRIORITY CHECK: Don't retry on auth errors (401/403) - user needs to login
+  if (error instanceof HttpError) {
+    if (error.status === 401 || error.status === 403) {
+      return false;
+    }
+    
+    // Don't retry on other 4xx client errors (bad request, not found, etc.)
+    if (error.status >= 400 && error.status < 500) {
+      return false;
+    }
+    
+    // Retry on 5xx server errors
+    if (error.status >= 500) {
+      return true;
+    }
+  }
+  
+  // Fallback to message-based detection for legacy code
   if (error instanceof Error) {
     const message = error.message.toLowerCase();
     
@@ -55,7 +96,7 @@ const shouldRetry = (failureCount: number, error: unknown): boolean => {
       return true;
     }
     
-    // Don't retry on 4xx client errors (bad request, not found, etc.)
+    // Don't retry on 4xx client errors
     if (message.includes('http 4')) {
       return false;
     }
@@ -114,8 +155,18 @@ export async function apiRequest(url: string, options: RequestInit = {}) {
     clearTimeout(timeoutId);
     
     if (!res.ok) {
-      const error = await res.json().catch(() => ({ error: "Request failed" }));
-      throw new Error(error.error || `HTTP ${res.status}`);
+      const errorData = await res.json().catch(() => ({ error: "Request failed" }));
+      
+      // Normalize error message to string (handles nested error objects)
+      let errorMessage: string;
+      if (typeof errorData.error === 'object' && errorData.error !== null) {
+        errorMessage = errorData.error.message || JSON.stringify(errorData.error);
+      } else {
+        errorMessage = errorData.error || `HTTP ${res.status}`;
+      }
+      
+      // Throw custom error with status code attached
+      throw new HttpError(errorMessage, res.status, errorData);
     }
     
     if (res.status === 204) return null;

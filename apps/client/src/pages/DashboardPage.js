@@ -5,20 +5,40 @@ import { Heart, BookOpen, TrendingUp, Calendar, Sparkles, Activity } from "lucid
 import { QuickActions } from "@/components/QuickActions";
 import { Skeleton } from "@/components/LoadingStates";
 import { AtmosphericBackground, DecorativeWave } from "@/components/atmospheric";
+import { UnauthenticatedBanner } from "@/components/UnauthenticatedBanner";
 export function DashboardPage() {
     const { data: moods = [], isLoading: moodsLoading, error: moodsError } = useQuery({
         queryKey: ["/api/moods"],
-        retry: false,
+        retry: (failureCount, error) => {
+            // Don't retry on 401 Unauthorized - user needs to login
+            if (error?.status === 401) {
+                return false;
+            }
+            return failureCount < 3;
+        },
     });
     const { data: journals = [], isLoading: journalsLoading, error: journalsError } = useQuery({
         queryKey: ["/api/journals"],
-        retry: false,
+        retry: (failureCount, error) => {
+            // Don't retry on 401 Unauthorized - user needs to login
+            if (error?.status === 401) {
+                return false;
+            }
+            return failureCount < 3;
+        },
     });
     const { data: analytics, isLoading: analyticsLoading, error: analyticsError } = useQuery({
         queryKey: ["/api/moods/analytics"],
-        retry: false,
+        retry: (failureCount, error) => {
+            // Don't retry on 401 Unauthorized - user needs to login
+            if (error?.status === 401) {
+                return false;
+            }
+            return failureCount < 3;
+        },
     });
-    const isUnauthorized = moodsError || journalsError || analyticsError;
+    // Check if user is unauthenticated (401 HTTP status code)
+    const isUnauthorized = moodsError?.status === 401 || journalsError?.status === 401 || analyticsError?.status === 401;
     // Calculate recent activity
     const recentMoods = moods.slice(0, 3);
     const recentJournals = journals.slice(0, 3);
@@ -68,6 +88,10 @@ export function DashboardPage() {
             bgColor: "bg-green-50"
         }
     ];
+    // If user is unauthorized, show login banner instead of normal dashboard
+    if (isUnauthorized) {
+        return (_jsxs(_Fragment, { children: [_jsx(AtmosphericBackground, { scene: "serenity", intensity: "moderate", showParticles: true }), _jsx(DecorativeWave, { position: "top", scene: "serenity" }), _jsx("div", { className: "max-w-7xl mx-auto p-6 particles-bg animate-fade-in relative z-10", children: _jsx(UnauthenticatedBanner, { message: "Sign in to track your moods, journal entries, and view your mental health analytics", className: "mt-12" }) })] }));
+    }
     return (_jsxs(_Fragment, { children: [_jsx(AtmosphericBackground, { scene: "serenity", intensity: "moderate", showParticles: true }), _jsx(DecorativeWave, { position: "top", scene: "serenity" }), _jsxs("div", { className: "max-w-7xl mx-auto p-6 particles-bg animate-fade-in relative z-10", children: [_jsxs("div", { className: "mb-8 h-[120px] animate-slide-up overflow-hidden", style: { contain: 'layout' }, children: [_jsx("h1", { className: "heading-lg mb-2 text-gray-900 h-[48px] leading-tight text-shadow-soft", "data-testid": "dashboard-title", children: "Welcome to MyMentalHealthBuddy" }), _jsxs("div", { className: "flex items-center gap-2 h-[60px]", style: { contain: 'layout' }, children: [_jsx(Sparkles, { className: "text-yellow-500 flex-shrink-0 animate-subtle-pulse", size: 24 }), _jsx("p", { className: "text-xl text-gray-600 line-clamp-2 w-full max-w-[600px]", children: getMotivationalMessage() })] })] }), _jsx("div", { className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 stats-grid", style: { contain: 'layout' }, children: stats.map((stat, index) => {
                             const Icon = stat.icon;
                             const isLoading = moodsLoading || journalsLoading || analyticsLoading;

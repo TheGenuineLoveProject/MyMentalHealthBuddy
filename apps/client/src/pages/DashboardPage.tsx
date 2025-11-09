@@ -8,16 +8,34 @@ import type { SelectMoodEntry, SelectJournal } from "@shared/schema";
 import { QuickActions } from "@/components/QuickActions";
 import { Skeleton, SkeletonStats, SkeletonList, SkeletonDashboard } from "@/components/LoadingStates";
 import { AtmosphericBackground, DecorativeWave } from "@/components/atmospheric";
+import { UnauthenticatedBanner } from "@/components/UnauthenticatedBanner";
+
+// Type guard to check if error has status property
+interface HttpError extends Error {
+  status?: number;
+}
 
 export function DashboardPage() {
   const { data: moods = [], isLoading: moodsLoading, error: moodsError } = useQuery<SelectMoodEntry[]>({
     queryKey: ["/api/moods"],
-    retry: false,
+    retry: (failureCount, error) => {
+      // Don't retry on 401 Unauthorized - user needs to login
+      if ((error as HttpError)?.status === 401) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 
   const { data: journals = [], isLoading: journalsLoading, error: journalsError } = useQuery<SelectJournal[]>({
     queryKey: ["/api/journals"],
-    retry: false,
+    retry: (failureCount, error) => {
+      // Don't retry on 401 Unauthorized - user needs to login
+      if ((error as HttpError)?.status === 401) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 
   const { data: analytics, isLoading: analyticsLoading, error: analyticsError } = useQuery<{
@@ -26,10 +44,20 @@ export function DashboardPage() {
     trends: { weeklyAverage: number; improving: boolean };
   }>({
     queryKey: ["/api/moods/analytics"],
-    retry: false,
+    retry: (failureCount, error) => {
+      // Don't retry on 401 Unauthorized - user needs to login
+      if ((error as HttpError)?.status === 401) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 
-  const isUnauthorized = moodsError || journalsError || analyticsError;
+  // Check if user is unauthenticated (401 HTTP status code)
+  const isUnauthorized = 
+    (moodsError as HttpError)?.status === 401 || 
+    (journalsError as HttpError)?.status === 401 || 
+    (analyticsError as HttpError)?.status === 401;
 
   // Calculate recent activity
   const recentMoods = moods.slice(0, 3);
@@ -82,6 +110,22 @@ export function DashboardPage() {
       bgColor: "bg-green-50"
     }
   ];
+
+  // Show authentication banner for unauthenticated users
+  if (isUnauthorized) {
+    return (
+      <>
+        <AtmosphericBackground scene="serenity" intensity="moderate" showParticles={true} />
+        <DecorativeWave position="top" scene="serenity" />
+        
+        <div className="max-w-7xl mx-auto p-6 relative z-10 min-h-screen flex items-center justify-center">
+          <UnauthenticatedBanner 
+            message="Sign in to track your moods, journal entries, and view your mental health analytics"
+          />
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
