@@ -14,7 +14,7 @@
     "heal:json": "node scripts/autoHealJson.mjs",
     "fix": "node scripts/autoheal-json.mjs",
     "build": "npm --prefix apps/client run build && npm --prefix apps/server run build",
-    "build:production": "npm --prefix apps/client run build && npm --prefix apps/server run build",
+    "build:production": "rm -rf apps/client/dist apps/client/.vite apps/server/dist && npm --prefix apps/client run build && npm --prefix apps/server run build",
     "start": "NODE_ENV=production npm --prefix apps/server run start",
     "db:push": "npm --prefix apps/server run db:push"
   },
