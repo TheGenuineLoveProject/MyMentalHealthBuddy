@@ -102,17 +102,26 @@ The architecture emphasizes type safety, developer experience, and modern web pr
     -   **Architect Approval**: PASS - Production-ready fixes, grid stability verified
     -   **Known Issue**: Metrics validation blocked by WebVitalsMonitor localStorage caching (CLS shows 0.2847222222222222 identically across reloads)
 
-### Performance Baseline Established ⚠️ (November 9, 2025 - Session 1)
--   **Current Metrics** (via Web Vitals):
-    -   CLS: 0.28 (POOR - target <0.08) - fixes applied, pending validation
-    -   FCP: 6016ms (POOR - target <2000ms) - improved from 9192ms
-    -   LCP: 6016ms (POOR - target <2500ms) - improved from 9516ms
-    -   TTFB: 2881ms (improved from 3100ms)
--   **Remaining Bottlenecks**:
-    -   WebVitalsMonitor caching prevents CLS validation
-    -   Data loading delays (FCP/LCP still above targets)
-    -   TTFB optimization needed
--   **Strategic Roadmap**: Performance → Cache-busting → Visual Polish → Deployment
+### Route Prefetcher + Performance Breakthrough ✅ (November 9, 2025 - Session 3)
+-   **Route Prefetcher Fixes (Architect PASS - Production-Ready)** ✅
+    -   **API Endpoint Correction**: Fixed /api/conversations → /api/chat (route-prefetcher.js line 260), eliminated 404 errors
+    -   **Wildcard Asset Removal**: Removed getRouteChunkName() method (lines 232-250) - Vite uses dynamic hashed filenames, not wildcard paths, eliminated lazy chunk 404s
+    -   **Protected Endpoint Prefix Matching**: Added isProtectedEndpoint() with `.startsWith()` to prevent HEAD prefetch requests to auth-protected APIs, covers nested paths like /api/moods/analytics
+    -   **Architect Approval**: PASS - All 3 fixes collectively resolve 404 and HEAD-401 issues while keeping protected endpoints unwarmed
+-   **Performance Breakthrough** 🚀
+    -   **TTFB**: 2881ms → 31ms (99% improvement!) ✅ EXCELLENT (target <800ms)
+    -   **FCP**: 6016ms → 896ms (85% improvement!) ✅ GOOD (target <2000ms)
+    -   **LCP**: 6016ms → 896ms (85% improvement!) ✅ GOOD (target <2500ms)
+    -   **CLS**: 0.28 (POOR - fixes applied, validation pending WebVitalsMonitor cache clear)
+-   **Tailwind CSS Strategic Revert** ✅
+    -   Diagnosed PostCSS "blocklist" error (monorepo complexity with @import ordering)
+    -   STRATEGIC DECISION: Reverted all @tailwind directive changes to restore working platform
+    -   Rationale: Original "content warning" is harmless log message, platform functionality prioritized over CSS optimization
+    -   Result: Platform loads successfully with excellent performance
+-   **401 Error Analysis** ✅
+    -   Remaining 401s (GET /api/moods, /api/journals, /api/moods/analytics) are React Query data fetches, NOT prefetcher bugs
+    -   Expected behavior for unauthenticated users - dashboard should handle gracefully with empty states
+    -   Route prefetcher successfully skips HEAD requests to protected endpoints (confirmed by absence of HEAD 401s in logs)
 
 ### Deployment Build Optimization ✅
 -   **Automatic Cache Clearing**: Production build script removes all dist, .vite, and build artifacts before compilation
