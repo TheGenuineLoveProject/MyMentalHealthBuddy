@@ -1,5 +1,5 @@
 import type { Express, Request, Response, NextFunction } from "express";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { storage } from "../storage.js";
 import { insertUserSchema } from "../../shared/schema.js";
 import { z } from "zod";

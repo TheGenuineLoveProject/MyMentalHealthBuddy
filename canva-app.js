@@ -1,4 +1,9 @@
-// Temporary Canva integration file
-// My Mental Health Buddy - Canva app source placeholder
+// 🌎 MyMentalHealthBuddy — Canva Integration Source
 console.log("✅ Canva app source connected successfully.");
-export default {};
+
+// Optional future integrations (OAuth, templates, etc.)
+export default {
+  name: "MyMentalHealthBuddy",
+  version: "1.0.0",
+  description: "AI-powered mental health tools from A to Z"
+};

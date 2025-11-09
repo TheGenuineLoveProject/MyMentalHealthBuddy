@@ -15,13 +15,14 @@ externalPort = 80
 [[ports]]
 localPort = 5173
 externalPort = 5173
+exposeLocalhost = true
 
 [[ports]]
 localPort = 5555
 externalPort = 3000
 
 [[ports]]
-localPort = 33277
+localPort = 40917
 externalPort = 3001
 
 [agent]
