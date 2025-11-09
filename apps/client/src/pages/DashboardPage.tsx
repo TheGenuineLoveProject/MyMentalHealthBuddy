@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import type { SelectMoodEntry, SelectJournal } from "@shared/schema";
 import { QuickActions } from "@/components/QuickActions";
-import { Skeleton } from "@/components/SkeletonLoader";
+import { Skeleton, SkeletonStats, SkeletonList, SkeletonDashboard } from "@/components/LoadingStates";
 import { AtmosphericBackground, DecorativeWave } from "@/components/atmospheric";
 
 export function DashboardPage() {

@@ -10,7 +10,7 @@ import {
   SkeletonCard,
   SkeletonList,
   SkeletonStats,
-} from '@/components/SkeletonLoader';
+} from '@/components/LoadingStates';
 import { useToast } from '@/contexts/ToastContext';
 import {
   Palette,
