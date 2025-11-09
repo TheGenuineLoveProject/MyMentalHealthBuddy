@@ -225,17 +225,17 @@ class RoutePrefetcher {
         }
     }
     /**
-     * Check if endpoint requires authentication
+     * Check if endpoint requires authentication (uses prefix matching)
      */
     isProtectedEndpoint(endpoint) {
-        const protectedEndpoints = [
+        const protectedPrefixes = [
             '/api/moods',
             '/api/journals',
             '/api/analytics',
             '/api/chat',
             '/api/designs',
         ];
-        return protectedEndpoints.includes(endpoint);
+        return protectedPrefixes.some(prefix => endpoint.startsWith(prefix));
     }
     /**
      * Get API endpoint for route data
