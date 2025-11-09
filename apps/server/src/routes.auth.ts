@@ -91,7 +91,7 @@ export function registerAuthRoutes(app: Express) {
         isActive: true,
         subscriptionTier: 'free',
         subscriptionStatus: 'inactive',
-        preferences: '{}'
+        preferences: {}
       });
       
       // Set session

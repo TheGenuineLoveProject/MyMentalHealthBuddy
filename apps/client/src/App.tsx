@@ -40,6 +40,9 @@ function AppContent() {
   const { toasts } = useToast();
   const [location] = useLocation();
 
+  // 360° Security: Check if user is on auth pages (login/signup)
+  const isAuthPage = location === '/login' || location === '/signup';
+
   // 360° Security: Initialize CSRF token on app load
   useEffect(() => {
     initializeCsrf().catch((error) => {
@@ -55,11 +58,11 @@ function AppContent() {
   return (
     <CanvaProvider>
         <div className="min-h-screen bg-gradient-mesh">
-          <NavigationProgress />
-          <SkipNavigation />
-          <Navigation />
+          {!isAuthPage && <NavigationProgress />}
+          {!isAuthPage && <SkipNavigation />}
+          {!isAuthPage && <Navigation />}
           <main id="main-content" className="container mx-auto px-4 py-6" tabIndex={-1}>
-            <Breadcrumbs />
+            {!isAuthPage && <Breadcrumbs />}
             <AccessibilityAnnouncer message="" />
             <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
               <Switch>
