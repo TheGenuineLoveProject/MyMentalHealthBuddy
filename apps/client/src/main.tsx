@@ -6,30 +6,12 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { StripeProvider } from "./contexts/StripeContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import { registerServiceWorker } from "./registerSW";
-import { initPerformanceMonitoring } from "./lib/performance";
-import { initWebVitals } from "./lib/webVitals";
-import { initializePerformanceOptimizations } from "./lib/performance-optimizer";
-import { initializeSecurityHardening } from "./lib/security-hardening";
 import App from "./App";
 import "./index.css";
 
-// 360° Security: Initialize security hardening
-initializeSecurityHardening();
-
-// 360° Performance: Initialize performance monitoring
-initPerformanceMonitoring();
-
-// 360° Performance: Initialize Web Vitals monitoring
-initWebVitals();
-
-// 360° Performance: Initialize advanced performance optimizations
-initializePerformanceOptimizations();
-
-// Register service worker for PWA support (production only)
-if (import.meta.env.PROD) {
-  registerServiceWorker();
-}
+// 🚀 PERFORMANCE BREAKTHROUGH: Render first, instrument later
+// Defer all heavy monitoring/optimization/security modules to post-render idle tasks
+// This unblocks DOMContentLoaded and dramatically improves FCP/LCP
 
 createRoot(document.getElementById("root")!).render(
   <QueryClientProvider client={queryClient}>
@@ -40,3 +22,60 @@ createRoot(document.getElementById("root")!).render(
     </StripeProvider>
   </QueryClientProvider>
 );
+
+// Initialize instrumentation modules AFTER initial render via idle callback
+if (typeof requestIdleCallback !== 'undefined') {
+  requestIdleCallback(async () => {
+    // Lazy load heavy modules to avoid blocking main thread
+    const [
+      { initializeSecurityHardening },
+      { initPerformanceMonitoring },
+      { initWebVitals },
+      { initializePerformanceOptimizations },
+      { registerServiceWorker }
+    ] = await Promise.all([
+      import("./lib/security-hardening"),
+      import("./lib/performance"),
+      import("./lib/webVitals"),
+      import("./lib/performance-optimizer"),
+      import("./registerSW")
+    ]);
+
+    // Only initialize security hardening in production (prevents HMR issues in dev)
+    if (import.meta.env.PROD) {
+      initializeSecurityHardening();
+      registerServiceWorker();
+    }
+
+    // Initialize performance monitoring
+    initPerformanceMonitoring();
+    initWebVitals();
+    initializePerformanceOptimizations();
+  }, { timeout: 2000 });
+} else {
+  // Fallback for browsers without requestIdleCallback
+  setTimeout(async () => {
+    const [
+      { initializeSecurityHardening },
+      { initPerformanceMonitoring },
+      { initWebVitals },
+      { initializePerformanceOptimizations },
+      { registerServiceWorker }
+    ] = await Promise.all([
+      import("./lib/security-hardening"),
+      import("./lib/performance"),
+      import("./lib/webVitals"),
+      import("./lib/performance-optimizer"),
+      import("./registerSW")
+    ]);
+
+    if (import.meta.env.PROD) {
+      initializeSecurityHardening();
+      registerServiceWorker();
+    }
+
+    initPerformanceMonitoring();
+    initWebVitals();
+    initializePerformanceOptimizations();
+  }, 100);
+}
