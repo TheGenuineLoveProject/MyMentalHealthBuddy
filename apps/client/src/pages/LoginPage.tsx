@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/contexts/ToastContext";
 import { apiRequest } from "@/lib/queryClient";
 
 const loginSchema = z.object({
@@ -17,7 +17,7 @@ type LoginForm = z.infer<typeof loginSchema>;
 
 export function LoginPage() {
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+  const { success, error: showError } = useToast();
   
   const {
     register,
@@ -34,19 +34,11 @@ export function LoginPage() {
         body: JSON.stringify(data)
       }),
     onSuccess: (data) => {
-      toast({
-        title: "Welcome back!",
-        description: data.message || "Login successful",
-        variant: "success"
-      });
+      success("Welcome back!", data.message || "Login successful");
       setLocation("/");
     },
     onError: (error: any) => {
-      toast({
-        title: "Login failed",
-        description: error.message || "Invalid credentials",
-        variant: "destructive"
-      });
+      showError("Login failed", error.message || "Invalid credentials");
     }
   });
   

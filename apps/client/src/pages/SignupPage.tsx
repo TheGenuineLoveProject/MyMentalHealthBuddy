@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { Link, useLocation } from "wouter";
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/contexts/ToastContext";
 import { apiRequest } from "@/lib/queryClient";
 
 const signupSchema = z.object({
@@ -19,7 +19,7 @@ type SignupForm = z.infer<typeof signupSchema>;
 
 export function SignupPage() {
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+  const { success, error: showError } = useToast();
   
   const {
     register,
@@ -36,19 +36,11 @@ export function SignupPage() {
         body: JSON.stringify(data)
       }),
     onSuccess: (data) => {
-      toast({
-        title: "Account created!",
-        description: data.message || "Welcome to MyMentalHealthBuddy",
-        variant: "success"
-      });
+      success("Account created!", data.message || "Welcome to MyMentalHealthBuddy");
       setLocation("/");
     },
     onError: (error: any) => {
-      toast({
-        title: "Signup failed",
-        description: error.message || "Username may already be taken",
-        variant: "destructive"
-      });
+      showError("Signup failed", error.message || "Username may already be taken");
     }
   });
   

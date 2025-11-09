@@ -124,7 +124,7 @@ export function DashboardPage() {
               </div>
               <div className="w-[100px] h-[48px] flex items-center" style={{ contain: 'layout strict', minWidth: '100px', maxWidth: '100px' }}>
                 {isLoading ? (
-                  <Skeleton className="h-9 w-20" style={{ width: '80px', height: '36px' }} />
+                  <Skeleton className="h-9 w-[80px]" />
                 ) : (
                   <p className="text-3xl font-bold text-gray-900 tabular-nums leading-none w-full" data-testid={`stat-value-${index}`} style={{ minWidth: '100px' }}>
                     {stat.value}
