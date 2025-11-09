@@ -1,30 +1,39 @@
-import { z } from "zod";
-export const insertJournalSchema = z.object({
-    userId: z.string(),
-    title: z.string().nullable().optional(),
-    content: z.string().min(1, "Content is required"),
-    mood: z.string().nullable().optional(),
-    tags: z.array(z.string()).nullable().optional(),
-    isPrivate: z.boolean().optional().default(false)
-});
-export const insertMoodEntrySchema = z.object({
-    userId: z.string(),
-    mood: z.string().min(1, "Mood is required"),
-    intensity: z.number().min(1).max(10),
-    notes: z.string().nullable().optional(),
-    activities: z.array(z.string()).nullable().optional(),
-    triggers: z.array(z.string()).nullable().optional()
-});
-export const healingRequestSchema = z.object({
-    message: z.string().min(1, "Message is required")
-});
-export const insertCrisisResourceSchema = z.object({
-    name: z.string().min(1),
-    description: z.string().min(1),
-    country: z.string().min(2).max(2),
-    phoneNumber: z.string().nullable().optional(),
-    website: z.string().url().nullable().optional(),
-    type: z.string().min(1),
-    isActive: z.boolean().optional().default(true),
-    priority: z.number().nullable().optional()
-});
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.healingRequestSchema = exports.insertAuditLogSchema = exports.insertAiUsageTrackingSchema = exports.insertKnowledgeChunkSchema = exports.insertKnowledgeSourceSchema = exports.insertAiRunSchema = exports.insertAiPromptSchema = exports.insertMediaAssetSchema = exports.insertSocialPostHistorySchema = exports.insertSocialProfileSchema = exports.insertSocialAccountSchema = exports.insertCanvaDesignSchema = exports.insertBillingTransactionSchema = exports.insertCrisisResourceSchema = exports.insertMoodEntrySchema = exports.insertJournalSchema = exports.insertHealingMessageSchema = exports.insertUserSchema = exports.auditLogs = exports.aiUsageTracking = exports.knowledgeChunks = exports.knowledgeSources = exports.aiRuns = exports.aiPrompts = exports.mediaAssets = exports.socialPostsHistory = exports.socialProfiles = exports.socialAccounts = exports.canvaDesigns = exports.billingTransactions = exports.crisisResources = exports.moodEntries = exports.journals = exports.healingMessages = exports.users = void 0;
+var db_schema_js_1 = require("./db-schema.js");
+Object.defineProperty(exports, "users", { enumerable: true, get: function () { return db_schema_js_1.users; } });
+Object.defineProperty(exports, "healingMessages", { enumerable: true, get: function () { return db_schema_js_1.healingMessages; } });
+Object.defineProperty(exports, "journals", { enumerable: true, get: function () { return db_schema_js_1.journals; } });
+Object.defineProperty(exports, "moodEntries", { enumerable: true, get: function () { return db_schema_js_1.moodEntries; } });
+Object.defineProperty(exports, "crisisResources", { enumerable: true, get: function () { return db_schema_js_1.crisisResources; } });
+Object.defineProperty(exports, "billingTransactions", { enumerable: true, get: function () { return db_schema_js_1.billingTransactions; } });
+Object.defineProperty(exports, "canvaDesigns", { enumerable: true, get: function () { return db_schema_js_1.canvaDesigns; } });
+Object.defineProperty(exports, "socialAccounts", { enumerable: true, get: function () { return db_schema_js_1.socialAccounts; } });
+Object.defineProperty(exports, "socialProfiles", { enumerable: true, get: function () { return db_schema_js_1.socialProfiles; } });
+Object.defineProperty(exports, "socialPostsHistory", { enumerable: true, get: function () { return db_schema_js_1.socialPostsHistory; } });
+Object.defineProperty(exports, "mediaAssets", { enumerable: true, get: function () { return db_schema_js_1.mediaAssets; } });
+Object.defineProperty(exports, "aiPrompts", { enumerable: true, get: function () { return db_schema_js_1.aiPrompts; } });
+Object.defineProperty(exports, "aiRuns", { enumerable: true, get: function () { return db_schema_js_1.aiRuns; } });
+Object.defineProperty(exports, "knowledgeSources", { enumerable: true, get: function () { return db_schema_js_1.knowledgeSources; } });
+Object.defineProperty(exports, "knowledgeChunks", { enumerable: true, get: function () { return db_schema_js_1.knowledgeChunks; } });
+Object.defineProperty(exports, "aiUsageTracking", { enumerable: true, get: function () { return db_schema_js_1.aiUsageTracking; } });
+Object.defineProperty(exports, "auditLogs", { enumerable: true, get: function () { return db_schema_js_1.auditLogs; } });
+Object.defineProperty(exports, "insertUserSchema", { enumerable: true, get: function () { return db_schema_js_1.insertUserSchema; } });
+Object.defineProperty(exports, "insertHealingMessageSchema", { enumerable: true, get: function () { return db_schema_js_1.insertHealingMessageSchema; } });
+Object.defineProperty(exports, "insertJournalSchema", { enumerable: true, get: function () { return db_schema_js_1.insertJournalSchema; } });
+Object.defineProperty(exports, "insertMoodEntrySchema", { enumerable: true, get: function () { return db_schema_js_1.insertMoodEntrySchema; } });
+Object.defineProperty(exports, "insertCrisisResourceSchema", { enumerable: true, get: function () { return db_schema_js_1.insertCrisisResourceSchema; } });
+Object.defineProperty(exports, "insertBillingTransactionSchema", { enumerable: true, get: function () { return db_schema_js_1.insertBillingTransactionSchema; } });
+Object.defineProperty(exports, "insertCanvaDesignSchema", { enumerable: true, get: function () { return db_schema_js_1.insertCanvaDesignSchema; } });
+Object.defineProperty(exports, "insertSocialAccountSchema", { enumerable: true, get: function () { return db_schema_js_1.insertSocialAccountSchema; } });
+Object.defineProperty(exports, "insertSocialProfileSchema", { enumerable: true, get: function () { return db_schema_js_1.insertSocialProfileSchema; } });
+Object.defineProperty(exports, "insertSocialPostHistorySchema", { enumerable: true, get: function () { return db_schema_js_1.insertSocialPostHistorySchema; } });
+Object.defineProperty(exports, "insertMediaAssetSchema", { enumerable: true, get: function () { return db_schema_js_1.insertMediaAssetSchema; } });
+Object.defineProperty(exports, "insertAiPromptSchema", { enumerable: true, get: function () { return db_schema_js_1.insertAiPromptSchema; } });
+Object.defineProperty(exports, "insertAiRunSchema", { enumerable: true, get: function () { return db_schema_js_1.insertAiRunSchema; } });
+Object.defineProperty(exports, "insertKnowledgeSourceSchema", { enumerable: true, get: function () { return db_schema_js_1.insertKnowledgeSourceSchema; } });
+Object.defineProperty(exports, "insertKnowledgeChunkSchema", { enumerable: true, get: function () { return db_schema_js_1.insertKnowledgeChunkSchema; } });
+Object.defineProperty(exports, "insertAiUsageTrackingSchema", { enumerable: true, get: function () { return db_schema_js_1.insertAiUsageTrackingSchema; } });
+Object.defineProperty(exports, "insertAuditLogSchema", { enumerable: true, get: function () { return db_schema_js_1.insertAuditLogSchema; } });
+Object.defineProperty(exports, "healingRequestSchema", { enumerable: true, get: function () { return db_schema_js_1.healingRequestSchema; } });

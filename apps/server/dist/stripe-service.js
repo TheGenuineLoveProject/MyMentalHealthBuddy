@@ -1,0 +1,303 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StripeService = exports.SUBSCRIPTION_TIERS = exports.stripe = void 0;
+const stripe_1 = __importDefault(require("stripe"));
+const storage_js_1 = require("../storage.js");
+// Initialize Stripe with secret key (from Replit integration blueprint:javascript_stripe)
+if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error("Missing required Stripe secret: STRIPE_SECRET_KEY");
+}
+exports.stripe = new stripe_1.default(process.env.STRIPE_SECRET_KEY, {
+    // Let Stripe SDK use its default API version for reliability
+    typescript: true,
+});
+// Subscription tier pricing configuration
+exports.SUBSCRIPTION_TIERS = {
+    free: {
+        name: "Free",
+        price: 0,
+        priceId: null,
+        features: [
+            "5 AI therapy sessions per month",
+            "Basic mood tracking",
+            "Journal entries",
+            "Crisis resources access",
+        ],
+    },
+    premium: {
+        name: "Premium",
+        price: 2999, // $29.99 in cents
+        priceId: process.env.STRIPE_PREMIUM_PRICE_ID || "price_premium_default",
+        features: [
+            "Unlimited AI therapy sessions",
+            "Advanced mood analytics",
+            "Unlimited journal entries",
+            "Data export (CSV/JSON)",
+            "Priority support",
+        ],
+    },
+    professional: {
+        name: "Professional",
+        price: 4999, // $49.99 in cents
+        priceId: process.env.STRIPE_PROFESSIONAL_PRICE_ID || "price_professional_default",
+        features: [
+            "Everything in Premium",
+            "Professional therapist consultations",
+            "Custom therapy plans",
+            "Advanced insights & reports",
+            "24/7 priority support",
+            "HIPAA-compliant data storage",
+        ],
+    },
+};
+class StripeService {
+    /**
+     * Create or retrieve Stripe customer for a user
+     */
+    static async getOrCreateCustomer(userId) {
+        const user = await storage_js_1.storage.getUserById(userId);
+        if (!user) {
+            throw new Error("User not found");
+        }
+        // Return existing customer if already created
+        if (user.stripeCustomerId) {
+            try {
+                return await exports.stripe.customers.retrieve(user.stripeCustomerId);
+            }
+            catch (error) {
+                // Customer might have been deleted, create new one
+                console.warn(`Stripe customer ${user.stripeCustomerId} not found, creating new one`);
+            }
+        }
+        // Create new Stripe customer
+        const customer = await exports.stripe.customers.create({
+            email: user.email || undefined,
+            name: user.name || user.username,
+            metadata: {
+                userId: user.id,
+                username: user.username,
+            },
+        });
+        // Update user record with Stripe customer ID
+        await storage_js_1.storage.updateUser(userId, { stripeCustomerId: customer.id });
+        console.log(`Created Stripe customer ${customer.id} for user ${userId}`);
+        return customer;
+    }
+    /**
+     * Create subscription checkout session
+     */
+    static async createSubscriptionCheckout(userId, tier, successUrl, cancelUrl) {
+        if (tier === "free") {
+            throw new Error("Cannot create checkout for free tier");
+        }
+        const customer = await this.getOrCreateCustomer(userId);
+        const tierConfig = exports.SUBSCRIPTION_TIERS[tier];
+        const session = await exports.stripe.checkout.sessions.create({
+            customer: customer.id,
+            mode: "subscription",
+            line_items: [
+                {
+                    price: tierConfig.priceId,
+                    quantity: 1,
+                },
+            ],
+            success_url: successUrl,
+            cancel_url: cancelUrl,
+            metadata: {
+                userId,
+                tier,
+            },
+            subscription_data: {
+                metadata: {
+                    userId,
+                    tier,
+                },
+            },
+        });
+        return session;
+    }
+    /**
+     * Create one-time payment checkout session
+     */
+    static async createOneTimeCheckout(userId, amount, description, successUrl, cancelUrl) {
+        const customer = await this.getOrCreateCustomer(userId);
+        const session = await exports.stripe.checkout.sessions.create({
+            customer: customer.id,
+            mode: "payment",
+            line_items: [
+                {
+                    price_data: {
+                        currency: "usd",
+                        product_data: {
+                            name: description,
+                        },
+                        unit_amount: amount,
+                    },
+                    quantity: 1,
+                },
+            ],
+            success_url: successUrl,
+            cancel_url: cancelUrl,
+            metadata: {
+                userId,
+                description,
+            },
+        });
+        return session;
+    }
+    /**
+     * Get user's active subscriptions
+     */
+    static async getUserSubscriptions(userId) {
+        const user = await storage_js_1.storage.getUserById(userId);
+        if (!user?.stripeCustomerId) {
+            return [];
+        }
+        const subscriptions = await exports.stripe.subscriptions.list({
+            customer: user.stripeCustomerId,
+            status: "active",
+        });
+        return subscriptions.data;
+    }
+    /**
+     * Cancel subscription
+     */
+    static async cancelSubscription(subscriptionId) {
+        return await exports.stripe.subscriptions.cancel(subscriptionId);
+    }
+    /**
+     * Get subscription details
+     */
+    static async getSubscription(subscriptionId) {
+        return await exports.stripe.subscriptions.retrieve(subscriptionId);
+    }
+    /**
+     * Handle webhook events and record transactions
+     */
+    static async handleWebhookEvent(event) {
+        switch (event.type) {
+            case "checkout.session.completed": {
+                const session = event.data.object;
+                await this.handleCheckoutCompleted(session);
+                break;
+            }
+            case "payment_intent.succeeded": {
+                const paymentIntent = event.data.object;
+                await this.handlePaymentSucceeded(paymentIntent);
+                break;
+            }
+            case "payment_intent.payment_failed": {
+                const paymentIntent = event.data.object;
+                await this.handlePaymentFailed(paymentIntent);
+                break;
+            }
+            case "customer.subscription.created":
+            case "customer.subscription.updated": {
+                const subscription = event.data.object;
+                await this.handleSubscriptionChange(subscription);
+                break;
+            }
+            case "customer.subscription.deleted": {
+                const subscription = event.data.object;
+                await this.handleSubscriptionCancelled(subscription);
+                break;
+            }
+            default:
+                console.log(`Unhandled event type: ${event.type}`);
+        }
+    }
+    static async handleCheckoutCompleted(session) {
+        const userId = session.metadata?.userId;
+        if (!userId)
+            return;
+        const amount = session.amount_total || 0;
+        const description = session.mode === "subscription"
+            ? `Subscription: ${session.metadata?.tier || "unknown"}`
+            : session.metadata?.description || "One-time payment";
+        // Record transaction
+        await storage_js_1.storage.createBillingTransaction({
+            userId,
+            stripeSessionId: session.id,
+            amount: (amount / 100).toString(),
+            currency: session.currency?.toUpperCase() || "USD",
+            status: "completed",
+            type: session.mode || "payment",
+            description,
+            metadata: {
+                customerId: session.customer,
+                subscriptionId: session.subscription,
+            },
+        });
+        console.log(`Checkout completed for user ${userId}: ${description}`);
+    }
+    static async handlePaymentSucceeded(paymentIntent) {
+        const userId = paymentIntent.metadata?.userId;
+        if (!userId)
+            return;
+        // Record successful payment
+        await storage_js_1.storage.createBillingTransaction({
+            userId,
+            stripeSessionId: paymentIntent.id,
+            amount: (paymentIntent.amount / 100).toString(),
+            currency: paymentIntent.currency.toUpperCase(),
+            status: "completed",
+            type: "payment",
+            description: paymentIntent.description || "Payment",
+            metadata: {
+                paymentIntentId: paymentIntent.id,
+            },
+        });
+        console.log(`Payment succeeded for user ${userId}: $${paymentIntent.amount / 100}`);
+    }
+    static async handlePaymentFailed(paymentIntent) {
+        const userId = paymentIntent.metadata?.userId;
+        if (!userId)
+            return;
+        // Record failed payment
+        await storage_js_1.storage.createBillingTransaction({
+            userId,
+            stripeSessionId: paymentIntent.id,
+            amount: (paymentIntent.amount / 100).toString(),
+            currency: paymentIntent.currency.toUpperCase(),
+            status: "failed",
+            type: "payment",
+            description: `Failed: ${paymentIntent.description || "Payment"}`,
+            metadata: {
+                paymentIntentId: paymentIntent.id,
+                error: paymentIntent.last_payment_error?.message,
+            },
+        });
+        console.error(`Payment failed for user ${userId}: ${paymentIntent.last_payment_error?.message}`);
+    }
+    static async handleSubscriptionChange(subscription) {
+        const userId = subscription.metadata?.userId;
+        if (!userId)
+            return;
+        console.log(`Subscription ${subscription.status} for user ${userId}`);
+        // Additional logic to update user subscription status could go here
+    }
+    static async handleSubscriptionCancelled(subscription) {
+        const userId = subscription.metadata?.userId;
+        if (!userId)
+            return;
+        // Record cancellation
+        await storage_js_1.storage.createBillingTransaction({
+            userId,
+            stripeSessionId: subscription.id,
+            amount: "0",
+            currency: "USD",
+            status: "cancelled",
+            type: "subscription",
+            description: "Subscription cancelled",
+            metadata: {
+                subscriptionId: subscription.id,
+                cancelledAt: new Date().toISOString(),
+            },
+        });
+        console.log(`Subscription cancelled for user ${userId}`);
+    }
+}
+exports.StripeService = StripeService;

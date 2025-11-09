@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
     "heal": "node scripts/heal.mjs || echo heal stub",
