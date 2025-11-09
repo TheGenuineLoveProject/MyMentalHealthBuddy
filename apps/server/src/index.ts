@@ -10,6 +10,7 @@ import { registerRoutes } from "./routes.js";
 import { createSessionMiddleware } from "./lib/session.js";
 import { validateEnv } from "./lib/env.js";
 import { logger } from "./lib/logger.js";
+import { configureSecurityHeaders, getCorsOptions } from "./lib/securityHeaders.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -28,10 +29,11 @@ try {
 const app = express();
 
 // Security and performance middleware
-app.use(cors());
+app.use(cors(getCorsOptions())); // 360° Production-grade CORS with allowlist
 app.use(helmet({
-  contentSecurityPolicy: false, // Vite handles CSP in dev
+  contentSecurityPolicy: false, // Disabled - using custom security headers below
 }));
+configureSecurityHeaders(app); // 360° Production-grade security headers
 app.use(compression());
 app.use(morgan("dev"));
 

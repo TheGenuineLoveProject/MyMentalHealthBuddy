@@ -16,14 +16,13 @@ export function configureSecurityHeaders(app: Express) {
     defaultSrc: ["'self'"],
     scriptSrc: [
       "'self'",
-      "'unsafe-inline'", // For React inline scripts
-      "'unsafe-eval'", // For React DevTools (remove in production)
+      ...(isProduction ? [] : ["'unsafe-inline'", "'unsafe-eval'"]), // Only allow in dev for React DevTools
       "https://js.stripe.com",
       "https://cdn.canva.com"
     ],
     styleSrc: [
       "'self'",
-      "'unsafe-inline'", // For styled components
+      ...(isProduction ? [] : ["'unsafe-inline'"]), // Only allow in dev
       "https://fonts.googleapis.com"
     ],
     imgSrc: [

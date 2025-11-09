@@ -21,6 +21,12 @@
   --color-primary-800: #075985;
   --color-primary-900: #0c4a6e;
   
+  /* Accessibility - Focus Indicators (WCAG 2.4.11/2.4.12) */
+  --focus-ring-color: #0ea5e9;
+  --focus-ring-offset: 2px;
+  --focus-ring-width: 3px;
+  --focus-ring-opacity: 0.6;
+  
   /* Calming Accent Palette */
   --color-calm-mint: #10b981;
   --color-calm-lavender: #a78bfa;
@@ -86,6 +92,18 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* Accessibility: Respect reduced motion (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
