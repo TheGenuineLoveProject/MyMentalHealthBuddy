@@ -36,10 +36,11 @@
     "NODE_OPTIONS": "--max-old-space-size=512"
   },
   "scaling": {
-    "minInstances": 0,
+    "minInstances": 1,
     "maxInstances": 10,
     "targetCPUUtilization": 70,
-    "scaleDownDelay": 300
+    "scaleDownDelay": 300,
+    "note": "Keep 1 warm instance to prevent cold starts and improve TTFB"
   },
   "database": {
     "provider": "postgresql",

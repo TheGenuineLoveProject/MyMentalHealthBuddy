@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { storage } from "../storage.js";
 import { z } from "zod";
 import { Sanitizer, apiRateLimiter } from "./validation.js";
