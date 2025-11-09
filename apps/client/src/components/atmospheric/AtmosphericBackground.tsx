@@ -105,12 +105,17 @@ export function AtmosphericBackground({
     <div
       className={`fixed inset-0 -z-10 overflow-hidden ${className}`}
       aria-hidden="true"
+      style={{ 
+        contain: 'strict',
+        contentVisibility: 'auto',
+      }}
     >
       {/* Base gradient layer */}
       <div
         className="absolute inset-0 transition-opacity duration-1000"
         style={{
           background: `linear-gradient(135deg, ${currentGradient.from} 0%, ${currentGradient.via} 50%, ${currentGradient.to} 100%)`,
+          willChange: 'opacity',
         }}
       />
 
@@ -121,6 +126,7 @@ export function AtmosphericBackground({
           style={{
             ...animationStyle,
             background: `radial-gradient(ellipse at top, ${currentGradient.accent} 0%, transparent 60%)`,
+            willChange: 'transform, opacity',
           }}
         />
       )}
@@ -143,6 +149,7 @@ export function AtmosphericBackground({
 }
 
 // Global styles injected once (not on every render)
+// CLS-optimized: GPU-accelerated transforms only, no layout-affecting properties
 if (typeof document !== 'undefined') {
   const styleId = 'atmospheric-animations';
   if (!document.getElementById(styleId)) {
@@ -150,18 +157,18 @@ if (typeof document !== 'undefined') {
     style.id = styleId;
     style.innerHTML = `
       @keyframes breathe {
-        0%, 100% { opacity: 0.7; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.02); }
+        0%, 100% { opacity: 0.7; transform: scale3d(1, 1, 1); }
+        50% { opacity: 1; transform: scale3d(1.02, 1.02, 1); }
       }
       @keyframes float {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        25% { transform: translate(10px, -20px) scale(1.1); }
-        50% { transform: translate(-10px, -40px) scale(0.9); }
-        75% { transform: translate(15px, -60px) scale(1.05); }
+        0%, 100% { transform: translate3d(0, 0, 0) scale3d(1, 1, 1); }
+        25% { transform: translate3d(10px, -20px, 0) scale3d(1.1, 1.1, 1); }
+        50% { transform: translate3d(-10px, -40px, 0) scale3d(0.9, 0.9, 1); }
+        75% { transform: translate3d(15px, -60px, 0) scale3d(1.05, 1.05, 1); }
       }
       @keyframes wave {
-        0%, 100% { transform: translateX(0) scaleX(1); }
-        50% { transform: translateX(-5%) scaleX(1.05); }
+        0%, 100% { transform: translate3d(0, 0, 0) scaleX(1); }
+        50% { transform: translate3d(-5%, 0, 0) scaleX(1.05); }
       }
     `;
     document.head.appendChild(style);
@@ -217,6 +224,7 @@ function ParticleField({
             opacity: particle.opacity,
             animation: `float ${particle.duration}s ease-in-out infinite`,
             animationDelay: `${particle.delay}s`,
+            willChange: 'transform',
           }}
         />
       ))}
@@ -258,6 +266,7 @@ export function DecorativeWave({
         position === 'top' ? 'top-0' : 'bottom-0'
       } left-0 right-0 h-32 overflow-hidden pointer-events-none ${className}`}
       aria-hidden="true"
+      style={{ contain: 'layout' }}
     >
       <svg
         className="absolute w-full h-full"
@@ -266,6 +275,7 @@ export function DecorativeWave({
         style={{
           ...animationStyle,
           transform: position === 'bottom' ? 'scaleY(-1)' : 'none',
+          willChange: 'transform',
         }}
       >
         <path

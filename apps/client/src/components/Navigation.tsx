@@ -10,9 +10,18 @@ export function Navigation() {
   const mainNavItems = allNavItems;
 
   return (
-    <nav className="bg-blue-600 dark:bg-blue-900 text-white shadow-lg" role="navigation" aria-label="Main navigation">
+    <nav 
+      className="bg-blue-600 dark:bg-blue-900 text-white shadow-lg" 
+      role="navigation" 
+      aria-label="Main navigation"
+      style={{ 
+        minHeight: '64px',
+        maxHeight: '64px',
+        contain: 'layout',
+      }}
+    >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 gap-4">
+        <div className="flex items-center justify-between h-16 gap-4" style={{ contain: 'layout' }}>
           {/* Logo */}
           <h1 className="text-lg font-bold flex-shrink-0">
             <Link href="/" aria-label="MyMentalHealthBuddy - Home" data-testid="link-logo">

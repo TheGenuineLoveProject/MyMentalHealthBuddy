@@ -118,7 +118,13 @@ export function DashboardPage() {
         <AtmosphericBackground scene="serenity" intensity="moderate" showParticles={true} />
         <DecorativeWave position="top" scene="serenity" />
         
-        <div className="max-w-7xl mx-auto p-6 relative z-10 min-h-screen flex items-center justify-center">
+        <div 
+          className="max-w-7xl mx-auto p-6 relative z-10 flex items-center justify-center" 
+          style={{ 
+            minHeight: 'calc(100vh - 64px - 48px)',
+            contain: 'layout strict',
+          }}
+        >
           <UnauthenticatedBanner 
             message="Sign in to track your moods, journal entries, and view your mental health analytics"
           />

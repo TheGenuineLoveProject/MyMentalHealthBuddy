@@ -28,9 +28,13 @@ export function UnauthenticatedBanner({
 
   return (
     <div 
-      className={`flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg border-2 border-blue-200 min-h-[400px] ${className}`}
+      className={`flex flex-col items-center justify-center p-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg border-2 border-blue-200 dark:border-blue-700 ${className}`}
       data-testid="unauthenticated-banner"
-      style={{ contain: 'layout' }}
+      style={{ 
+        minHeight: '400px',
+        maxHeight: '400px',
+        contain: 'layout strict',
+      }}
     >
       <div className="mb-4 p-4 bg-white rounded-full shadow-lg">
         <Icon className="text-blue-600" size={48} />

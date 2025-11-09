@@ -57,11 +57,19 @@ function AppContent() {
 
   return (
     <CanvaProvider>
-        <div className="min-h-screen bg-gradient-mesh">
+        <div className="min-h-screen bg-gradient-mesh" style={{ contain: 'layout' }}>
           {!isAuthPage && <NavigationProgress />}
           {!isAuthPage && <SkipNavigation />}
           {!isAuthPage && <Navigation />}
-          <main id="main-content" className="container mx-auto px-4 py-6" tabIndex={-1}>
+          <main 
+            id="main-content" 
+            className="container mx-auto px-4 py-6" 
+            tabIndex={-1}
+            style={{ 
+              minHeight: 'calc(100vh - 64px)',
+              contain: 'layout',
+            }}
+          >
             {!isAuthPage && <Breadcrumbs />}
             <AccessibilityAnnouncer message="" />
             <Suspense fallback={<LoadingOverlay message="Loading page..." />}>
