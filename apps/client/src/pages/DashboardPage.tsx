@@ -97,7 +97,7 @@ export function DashboardPage() {
         </h1>
         <div className="flex items-center gap-2 h-[40px]" style={{ contain: 'layout' }}>
           <Sparkles className="text-yellow-500 flex-shrink-0 animate-subtle-pulse" size={24} />
-          <p className="text-xl text-gray-600 line-clamp-2 min-w-[500px]">
+          <p className="text-xl text-gray-600 line-clamp-2 w-full max-w-[600px]">
             {getMotivationalMessage()}
           </p>
         </div>
@@ -122,11 +122,11 @@ export function DashboardPage() {
                   <Icon className={stat.color} size={20} />
                 </div>
               </div>
-              <div className="w-[100px] h-[48px] flex items-center" style={{ contain: 'layout strict' }}>
+              <div className="w-[100px] h-[48px] flex items-center" style={{ contain: 'layout strict', minWidth: '100px', maxWidth: '100px' }}>
                 {isLoading ? (
-                  <Skeleton className="h-9 w-20" />
+                  <Skeleton className="h-9 w-20" style={{ width: '80px', height: '36px' }} />
                 ) : (
-                  <p className="text-3xl font-bold text-gray-900 tabular-nums leading-none" data-testid={`stat-value-${index}`}>
+                  <p className="text-3xl font-bold text-gray-900 tabular-nums leading-none w-full" data-testid={`stat-value-${index}`} style={{ minWidth: '100px' }}>
                     {stat.value}
                   </p>
                 )}

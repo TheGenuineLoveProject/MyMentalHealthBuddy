@@ -312,7 +312,7 @@ class RoutePrefetcher {
    */
   private getRouteDataEndpoint(route: string): string | null {
     const endpointMap: Record<string, string> = {
-      '/chat': '/api/conversations',
+      '/chat': '/api/chat',
       '/mood': '/api/moods',
       '/journal': '/api/journals',
       '/analytics': '/api/analytics',

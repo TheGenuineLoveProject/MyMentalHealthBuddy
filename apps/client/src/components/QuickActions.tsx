@@ -14,7 +14,7 @@ export function QuickActions() {
         const Icon = action.icon;
         
         return (
-          <Link key={action.id} href={action.path}>
+          <Link key={action.id} href={action.path} className="block">
             <Card
               className={`p-4 hover:shadow-lg transition-all duration-200 cursor-pointer group ${action.color} bg-opacity-5 hover:bg-opacity-10 border-2 border-transparent hover:border-current action-card h-[180px] [contain:layout_strict]`}
               data-testid={`quick-action-${action.id}`}
