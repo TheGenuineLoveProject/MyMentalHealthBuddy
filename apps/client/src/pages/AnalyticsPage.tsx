@@ -4,6 +4,12 @@ import { Badge } from '@/components/Badge';
 import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
 import { LineChart, PieChart } from '@/components/Charts';
 import {
+  InsightCard,
+  PredictiveInsights,
+  NarrativeSummary,
+  ComparisonInsight
+} from '@/components/DataStorytelling';
+import {
   TrendingUp,
   Users,
   Globe,
@@ -63,8 +69,86 @@ export default function AnalyticsPage() {
         </Button>
       </div>
 
+      {/* Narrative Summary - Data Storytelling */}
+      <NarrativeSummary
+        title="📊 Your Analytics Story"
+        timeframe="Last 30 Days"
+        summary="Your mental health platform achieved remarkable growth this month! Total views increased by 12.5% to nearly 46K visits, while engagement surged by 15.8% with over 1,500 meaningful comments from users. Although shares dipped slightly by 2.1%, your overall community interaction and reach continue strengthening—a testament to the authentic value your content delivers to users seeking mental wellness support."
+        highlights={[
+          { label: 'Total Reach', value: '45.8K', sentiment: 'positive' },
+          { label: 'Engagement Rate', value: '8.4%', sentiment: 'positive' },
+          { label: 'Active Days', value: '28/30', sentiment: 'positive' }
+        ]}
+      />
+
+      {/* Key Insights - Storytelling */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <InsightCard
+          type="positive"
+          title="🎉 Comments Surged 15.8%"
+          description="User engagement reached all-time high with 1,520 comments this month, indicating strong community connection and therapeutic value."
+          metric={{ label: 'total comments', value: '1,520', change: 15.8 }}
+          action={{
+            label: 'View top discussions',
+            onClick: () => console.log('Navigate to discussions')
+          }}
+        />
+        <InsightCard
+          type="recommendation"
+          title="💡 Optimize Posting Schedule"
+          description="Your audience is most active on weekdays between 10 AM - 2 PM. Schedule therapeutic content during these peak engagement windows."
+          action={{
+            label: 'Set up automation',
+            onClick: () => console.log('Navigate to automation')
+          }}
+        />
+      </div>
+
+      {/* Predictive Insights */}
+      <div className="mt-8">
+        <PredictiveInsights
+          historical={[
+            { label: 'Week 1', value: 10200 },
+            { label: 'Week 2', value: 11500 },
+            { label: 'Week 3', value: 11800 },
+            { label: 'Week 4', value: 12320 }
+          ]}
+          forecast={[
+            { label: 'Next Week', value: 13100, confidence: 85 },
+            { label: 'Week +2', value: 13850, confidence: 78 },
+            { label: 'Week +3', value: 14200, confidence: 72 }
+          ]}
+          insights={[
+            'Weekly growth rate of 6.2% suggests sustained upward momentum in user engagement',
+            'Peak traffic days (Tue/Thu) correlate with new therapeutic content releases',
+            'Average session duration increased 18% indicating higher content quality perception',
+            'Mobile traffic (68%) dominates—optimize responsive design for mobile journaling features'
+          ]}
+        />
+      </div>
+
+      {/* Comparison Insight */}
+      <div className="mt-8">
+        <ComparisonInsight
+          title="Monthly Performance Comparison"
+          current={{
+            label: 'This Month (Nov 2025)',
+            value: 45820,
+            trend: 12.5
+          }}
+          previous={{
+            label: 'Last Month (Oct 2025)',
+            value: 40700
+          }}
+          insight="Exceptional growth driven by viral 'Mindfulness Exercises' content and improved SEO rankings. Your therapeutic guidance resonated with 5,120 new users this month."
+        />
+      </div>
+
       {/* Main Analytics Dashboard */}
-      <AnalyticsDashboard data={analyticsData} period="30d" />
+      <div className="mt-8">
+        <h2 className="text-2xl font-semibold mb-6">Engagement Metrics</h2>
+        <AnalyticsDashboard data={analyticsData} period="30d" />
+      </div>
 
       {/* Audience Insights */}
       <div className="mt-8">
