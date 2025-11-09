@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
-    "heal": "node scripts/heal.mjs || echo heal stub",
+    "heal": "npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit",
     "verify": "node scripts/verify.mjs || echo verify stub",
     "dev": "tsx src/index.ts || node index.js",
     "heal:json": "node scripts/autoHealJson.mjs",
@@ -22,16 +22,22 @@
     "dotenv": "^16.4.5",
     "express-static-gzip": "^2.2.0",
     "tsx": "^4.20.6",
-    "zod": "^3.25.76"
+    "zod": "^3.23.8",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "compression": "^1.7.4",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@types/compression": "^1.7.5",
-    "@types/cors": "^2.8.19",
-    "@types/express": "^4.17.25",
-    "@types/express-session": "^1.18.2",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/express-session": "^1.17.8",
     "@types/helmet": "^4.0.0",
-    "@types/morgan": "^1.9.10",
-    "@types/node": "^20.19.24",
+    "@types/morgan": "^1.9.9",
+    "@types/node": "^20.11.30",
     "@vitejs/plugin-react": "^4.7.0",
     "compression": "^1.8.1",
     "concurrently": "^9.2.1",
@@ -43,8 +49,9 @@
     "morgan": "^1.10.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "typescript": "^5.9.3",
-    "vite": "^7.1.12"
+    "typescript": "^5.6.3",
+    "vite": "^7.1.12",
+    "tsx": "^4.19.1"
   },
   "workspaces": [
     "apps/*"

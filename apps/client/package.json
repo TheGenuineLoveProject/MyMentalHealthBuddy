@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
-    "heal": "node scripts/heal.mjs || echo heal stub",
+    "heal": "npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit",
     "verify": "node scripts/verify.mjs || echo verify stub",
     "dev": "vite --port 5173 --host 0.0.0.0 --strictPort",
     "heal:json": "node scripts/autoHealJson.mjs",
@@ -18,10 +18,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/react": "^18.3.26",
-    "@types/react-dom": "^18.3.7",
-    "@vitejs/plugin-react": "^4.7.0",
-    "autoprefixer": "^10.4.21",
+    "@types/react": "^18.3.7",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
     "compression": "^1.8.1",
     "concurrently": "^9.2.1",
     "cors": "^2.8.5",
@@ -30,15 +30,19 @@
     "express-session": "^1.18.2",
     "helmet": "^8.1.0",
     "morgan": "^1.10.1",
-    "postcss": "^8.5.6",
+    "postcss": "^8.4.47",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwindcss": "^3.4.18",
+    "tailwindcss": "^3.4.13",
     "tsx": "^4.20.6",
     "typescript": "^5.6.3",
-    "vite": "^5.4.21"
+    "vite": "^5.4.12"
   },
   "workspaces": [
     "apps/*"
-  ]
+  ],
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
 }

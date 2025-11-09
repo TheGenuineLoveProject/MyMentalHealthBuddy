@@ -4,8 +4,6 @@ import pg from "pg";
 import { users, healingMessages, journals, moodEntries, crisisResources, billingTransactions, mediaAssets, socialAccounts, socialProfiles, socialPostsHistory, aiPrompts, aiRuns, knowledgeSources, knowledgeChunks, aiUsageTracking, } from "../shared/db-schema.js";
 const { Pool } = pg;
 export class PgStorage {
-    pool;
-    db;
     constructor(connectionString) {
         const dbUrl = connectionString || process.env.DATABASE_URL;
         if (!dbUrl) {

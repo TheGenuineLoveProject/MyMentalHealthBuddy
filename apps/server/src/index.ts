@@ -28,42 +28,27 @@ try {
 
 const app = express();
 
-// Security and performance middleware
-app.use(cors(getCorsOptions())); // 360° Production-grade CORS with allowlist
-app.use(helmet({
-  contentSecurityPolicy: false, // Disabled - using custom security headers below
-}));
-configureSecurityHeaders(app); // 360° Production-grade security headers
-app.use(compression());
-app.use(morgan("dev"));
-
-// Body parsing (will be configured per-route for Stripe webhooks)
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Session middleware (production-grade with PostgreSQL store)
-app.use(createSessionMiddleware());
-
-// Register all API routes
-registerRoutes(app);
-
-// Fallback: serve static assets
-app.use(express.static(path.join(__dirname, "../public")));
-
-// Global error handler
-app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
-  logger.error("Server error", err instanceof Error ? err : new Error(String(err)));
-  res.status(err.status || 500).json({
-    error: err.message || "Internal server error",
-    ...(process.env.NODE_ENV === "development" && { stack: err.stack })
-  });
-});
-
 const PORT = process.env.PORT || 5000;
 
-// Start server with Vite integration in development
-async function startServer() {
-  // Development mode: Vite middleware integration
+// 360° MIT-PhD Level Architecture: Async app configuration with proper middleware sequencing
+async function configureApp() {
+  // PHASE 1: Security and performance middleware (must be first)
+  app.use(cors(getCorsOptions())); // 360° Production-grade CORS with allowlist
+  app.use(helmet({
+    contentSecurityPolicy: false, // Disabled - using custom security headers below
+  }));
+  configureSecurityHeaders(app); // 360° Production-grade security headers
+  app.use(compression());
+  app.use(morgan("dev"));
+
+  // PHASE 2: Body parsing (will be configured per-route for Stripe webhooks)
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+
+  // PHASE 3: Session middleware (production-grade with PostgreSQL store)
+  app.use(createSessionMiddleware());
+
+  // PHASE 4: Vite middleware integration (MUST come BEFORE route registration)
   if (isDev) {
     const { createServer: createViteServer } = await import("vite");
     
@@ -119,6 +104,27 @@ async function startServer() {
       })();
     });
   }
+
+  // PHASE 5: Register all API routes (AFTER Vite middleware)
+  registerRoutes(app);
+
+  // PHASE 6: Fallback - serve static assets (for production builds)
+  app.use(express.static(path.join(__dirname, "../public")));
+
+  // PHASE 7: Global error handler (MUST be last)
+  app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+    logger.error("Server error", err instanceof Error ? err : new Error(String(err)));
+    res.status(err.status || 500).json({
+      error: err.message || "Internal server error",
+      ...(process.env.NODE_ENV === "development" && { stack: err.stack })
+    });
+  });
+}
+
+// Start server with proper async configuration
+async function startServer() {
+  // Configure app with proper middleware sequencing
+  await configureApp();
   
   app.listen(PORT, () => {
     logger.info("Server ready", { port: PORT });
