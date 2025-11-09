@@ -7,6 +7,9 @@
 /* === VISUAL ENHANCEMENTS 360° === */
 @import './lib/visualEnhancements.css';
 
+/* === THERAPEUTIC DESIGN TOKENS === */
+@import './design-system/tokens.css';
+
 /* === ROOT VARIABLES & DESIGN TOKENS === */
 :root {
   /* Mental Health Brand Colors - Calming & Professional */
