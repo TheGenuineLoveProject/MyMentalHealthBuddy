@@ -9,6 +9,7 @@ import {
   NarrativeSummary,
   ComparisonInsight
 } from '@/components/DataStorytelling';
+import { NarrativeLineChart, detectTrendAnnotations } from '@/components/NarrativeChart';
 import {
   TrendingUp,
   Users,
@@ -197,8 +198,8 @@ export default function AnalyticsPage() {
         </Card>
 
         <Card className="p-6">
-          <h3 className="text-xl font-semibold mb-6">Engagement Trend (7 Days)</h3>
-          <LineChart
+          <h3 className="text-xl font-semibold mb-6">Engagement Trend (7 Days) - With Narrative Annotations</h3>
+          <NarrativeLineChart
             data={[
               { label: 'Mon', value: 7.2 },
               { label: 'Tue', value: 8.1 },
@@ -207,6 +208,20 @@ export default function AnalyticsPage() {
               { label: 'Fri', value: 9.2 },
               { label: 'Sat', value: 8.4 },
               { label: 'Sun', value: 8.4 }
+            ]}
+            annotations={[
+              {
+                label: '🎯 Best Day',
+                description: 'Friday reached peak engagement at 9.2% - new content release timing was optimal',
+                dataIndex: 4,
+                type: 'peak'
+              },
+              {
+                label: '📊 Milestone',
+                description: 'Tuesday marked first day above 8% threshold this week',
+                dataIndex: 1,
+                type: 'milestone'
+              }
             ]}
             height={250}
             animate

@@ -164,11 +164,16 @@ export function PredictiveInsights({ historical, forecast, insights }: Predictiv
   const calculateTrend = () => {
     if (historical.length < 2) return 0;
     const recent = historical.slice(-5);
-    const avgChange = recent.reduce((sum, point, i) => {
-      if (i === 0) return 0;
-      return sum + (point.value - recent[i - 1].value);
-    }, 0) / (recent.length - 1);
-    return avgChange;
+    
+    // Calculate percentage change between consecutive periods
+    const percentageChanges = recent.slice(1).map((point, i) => {
+      const previous = recent[i].value;
+      if (previous === 0) return 0;
+      return ((point.value - previous) / previous) * 100;
+    });
+    
+    // Return average percentage change
+    return percentageChanges.reduce((sum, change) => sum + change, 0) / percentageChanges.length;
   };
 
   const trend = calculateTrend();
