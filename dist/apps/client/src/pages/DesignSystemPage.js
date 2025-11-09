@@ -6,7 +6,7 @@ import { Badge } from '@/components/Badge';
 import { Alert } from '@/components/Alert';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { ProgressIndicator } from '@/components/ProgressIndicator';
-import { Skeleton, SkeletonCard, SkeletonList, SkeletonStats, } from '@/components/SkeletonLoader';
+import { Skeleton, SkeletonCard, SkeletonList, SkeletonStats, } from '@/components/LoadingStates';
 import { useToast } from '@/contexts/ToastContext';
 import { Palette, Type, Layout, Zap, Check, } from 'lucide-react';
 /**

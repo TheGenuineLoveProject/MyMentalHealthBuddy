@@ -200,7 +200,7 @@ export default function BillingPage() {
       <div>
         <h2 className="text-2xl font-semibold mb-4">Transaction History</h2>
         {transactionsLoading ? (
-          <SkeletonTable rows={5} columns={3} />
+          <SkeletonTable rows={5} cols={3} />
         ) : transactions && transactions.length > 0 ? (
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden" data-testid="card-transaction-history">
             <div className="divide-y divide-gray-200">

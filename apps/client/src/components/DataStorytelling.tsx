@@ -89,7 +89,7 @@ export function InsightCard({ type, title, description, metric, action, classNam
             </span>
             <span className="text-sm text-muted-foreground">{metric.label}</span>
             {metric.change !== undefined && (
-              <Badge variant={metric.change >= 0 ? 'success' : 'destructive'}>
+              <Badge variant={metric.change >= 0 ? 'success' : 'danger'}>
                 {metric.change >= 0 ? '+' : ''}{metric.change}%
               </Badge>
             )}
@@ -184,7 +184,7 @@ export function PredictiveInsights({ historical, forecast, insights }: Predictiv
       <div className="flex items-center gap-2 mb-4">
         <Target className="h-5 w-5 text-purple-600" />
         <h3 className="text-lg font-semibold">Predictive Insights</h3>
-        <Badge variant="secondary">AI-Powered</Badge>
+        <Badge variant="gray">AI-Powered</Badge>
       </div>
 
       {/* Trend Summary */}
@@ -214,7 +214,7 @@ export function PredictiveInsights({ historical, forecast, insights }: Predictiv
             <span className="text-sm">{point.label}</span>
             <div className="flex items-center gap-2">
               <span className="font-medium">{point.value.toLocaleString()}</span>
-              <Badge variant="secondary" className="text-xs">
+              <Badge variant="gray" className="text-xs">
                 {point.confidence}% confidence
               </Badge>
             </div>

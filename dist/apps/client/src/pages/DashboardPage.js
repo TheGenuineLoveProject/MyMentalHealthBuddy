@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Heart, BookOpen, TrendingUp, Calendar, Sparkles, Activity } from "lucide-react";
 import { QuickActions } from "@/components/QuickActions";
-import { Skeleton } from "@/components/SkeletonLoader";
+import { Skeleton } from "@/components/LoadingStates";
 import { AtmosphericBackground, DecorativeWave } from "@/components/atmospheric";
 export function DashboardPage() {
     const { data: moods = [], isLoading: moodsLoading, error: moodsError } = useQuery({
