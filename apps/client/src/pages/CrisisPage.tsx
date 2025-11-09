@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Phone, Globe, AlertCircle } from "lucide-react";
 import type { SelectCrisisResource } from "@shared/schema";
+import { SkeletonList } from "@/components/LoadingStates";
 
 export function CrisisPage() {
   const { data: resources = [], isLoading } = useQuery<SelectCrisisResource[]>({
@@ -26,7 +27,7 @@ export function CrisisPage() {
       <h1 className="text-3xl font-bold mb-6">Crisis Resources</h1>
 
       {isLoading ? (
-        <p className="text-gray-500">Loading resources...</p>
+        <SkeletonList count={5} />
       ) : (
         <div className="space-y-4">
           {resources.map((resource) => (

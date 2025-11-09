@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { User, CreditCard, Shield, Bell } from "lucide-react";
 import type { SelectBillingTransaction } from "@shared/schema";
+import { SkeletonList } from "@/components/LoadingStates";
 
 // Mock user ID - in production this would come from auth context
 const CURRENT_USER_ID = "user-1";
 
 export default function AccountPage() {
   // Fetch user's recent transactions
-  const { data: transactions } = useQuery<SelectBillingTransaction[]>({
+  const { data: transactions, isLoading: transactionsLoading } = useQuery<SelectBillingTransaction[]>({
     queryKey: ["/api/transactions", CURRENT_USER_ID],
     retry: 1,
   });
@@ -75,36 +76,40 @@ export default function AccountPage() {
           <h2 className="text-2xl font-semibold">Subscription Status</h2>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <label className="text-sm font-medium text-gray-500">Current Plan</label>
-            <p className="text-2xl font-bold capitalize" data-testid="text-plan">
-              {user.subscriptionTier}
-            </p>
-          </div>
-          <div>
-            <label className="text-sm font-medium text-gray-500">Status</label>
-            <div className="flex items-center gap-2">
-              <span className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${
-                user.subscriptionStatus === "active" 
-                  ? "bg-green-100 text-green-800" 
-                  : "bg-gray-100 text-gray-800"
-              }`} data-testid="badge-status">
-                {user.subscriptionStatus}
-              </span>
+        {transactionsLoading ? (
+          <SkeletonList count={4} />
+        ) : (
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="text-sm font-medium text-gray-500">Current Plan</label>
+              <p className="text-2xl font-bold capitalize" data-testid="text-plan">
+                {user.subscriptionTier}
+              </p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-500">Status</label>
+              <div className="flex items-center gap-2">
+                <span className={`px-3 py-1 rounded-full text-sm font-medium capitalize ${
+                  user.subscriptionStatus === "active" 
+                    ? "bg-green-100 text-green-800" 
+                    : "bg-gray-100 text-gray-800"
+                }`} data-testid="badge-status">
+                  {user.subscriptionStatus}
+                </span>
+              </div>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-500">Total Spent</label>
+              <p className="text-2xl font-bold text-green-600" data-testid="text-total-spent">
+                ${totalSpent.toFixed(2)}
+              </p>
+            </div>
+            <div>
+              <label className="text-sm font-medium text-gray-500">Transactions</label>
+              <p className="text-2xl font-bold">{transactions?.length || 0}</p>
             </div>
           </div>
-          <div>
-            <label className="text-sm font-medium text-gray-500">Total Spent</label>
-            <p className="text-2xl font-bold text-green-600" data-testid="text-total-spent">
-              ${totalSpent.toFixed(2)}
-            </p>
-          </div>
-          <div>
-            <label className="text-sm font-medium text-gray-500">Transactions</label>
-            <p className="text-2xl font-bold">{transactions?.length || 0}</p>
-          </div>
-        </div>
+        )}
 
         <div className="mt-6 flex gap-3">
           <a 

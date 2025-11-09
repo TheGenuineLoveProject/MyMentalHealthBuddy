@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient";
 import { Plus, Edit, Trash2, Download } from "lucide-react";
 import type { SelectJournal } from "@shared/schema";
+import { SkeletonContentList } from "@/components/LoadingStates";
 
 export function JournalPage() {
   const [isEditing, setIsEditing] = useState(false);
@@ -191,7 +192,7 @@ export function JournalPage() {
 
       <div className="space-y-4">
         {isLoading ? (
-          <p className="text-gray-500">Loading...</p>
+          <SkeletonContentList count={3} />
         ) : journals.length === 0 ? (
           <div className="text-center text-gray-500 py-8">
             <p>No journal entries yet.</p>

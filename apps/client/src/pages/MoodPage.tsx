@@ -4,6 +4,7 @@ import { apiRequest, queryClient } from "../lib/queryClient";
 import type { SelectMoodEntry } from "@shared/schema";
 import { Download, TrendingUp } from "lucide-react";
 import { AtmosphericBackground } from "@/components/atmospheric";
+import { SkeletonContentList, SkeletonStats } from "@/components/LoadingStates";
 
 const MOODS = ["Happy", "Sad", "Anxious", "Calm", "Angry", "Stressed", "Content"];
 
@@ -196,7 +197,7 @@ export function MoodPage() {
       <div className="bg-white rounded-lg shadow p-6">
         <h2 className="text-xl font-semibold mb-4">Recent Entries</h2>
         {isLoading ? (
-          <p className="text-gray-500">Loading...</p>
+          <SkeletonContentList count={3} />
         ) : moods.length === 0 ? (
           <p className="text-gray-500">No mood entries yet. Start tracking your mood above!</p>
         ) : (

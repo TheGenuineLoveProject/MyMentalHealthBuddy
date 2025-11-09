@@ -15,6 +15,7 @@ import {
 import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 import { StripeStatus } from "@/components/stripe/StripeStatus";
 import type { SelectBillingTransaction } from "@shared/schema";
+import { SkeletonCard, SkeletonTable } from "@/components/LoadingStates";
 
 const CURRENT_USER_ID = "user-1";
 
@@ -115,11 +116,7 @@ export default function BillingPage() {
       <div className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Choose Your Plan</h2>
         {tiersLoading ? (
-          <div className="grid md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-gray-100 animate-pulse h-96 rounded-lg"></div>
-            ))}
-          </div>
+          <SkeletonCard count={3} />
         ) : (
           <div className="grid md:grid-cols-3 gap-6">
             {tiers && Object.entries(tiers).map(([key, tier]) => {
@@ -203,11 +200,7 @@ export default function BillingPage() {
       <div>
         <h2 className="text-2xl font-semibold mb-4">Transaction History</h2>
         {transactionsLoading ? (
-          <div className="space-y-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-gray-100 animate-pulse h-20 rounded-lg"></div>
-            ))}
-          </div>
+          <SkeletonTable rows={5} columns={3} />
         ) : transactions && transactions.length > 0 ? (
           <div className="bg-white border border-gray-200 rounded-lg overflow-hidden" data-testid="card-transaction-history">
             <div className="divide-y divide-gray-200">

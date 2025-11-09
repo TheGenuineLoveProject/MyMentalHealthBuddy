@@ -12,6 +12,7 @@ import {
   AlertCircle,
   CheckCircle2
 } from "lucide-react";
+import { SkeletonContentList } from "@/components/LoadingStates";
 
 const DESIGN_TYPES = [
   { id: "InstagramPost", name: "Instagram Post", icon: Instagram },
