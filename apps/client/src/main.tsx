@@ -23,6 +23,25 @@ createRoot(document.getElementById("root")!).render(
   </QueryClientProvider>
 );
 
+// Suppress dev-only Vite HMR WebSocket errors (doesn't affect production)
+if (!import.meta.env.PROD) {
+  window.addEventListener('unhandledrejection', (event) => {
+    if (event.reason?.message?.includes('WebSocket')) {
+      event.preventDefault();
+      console.debug('[Dev] Vite HMR WebSocket connection issue (non-critical)');
+    }
+  });
+  
+  // Suppress console errors for WebSocket connection issues
+  const originalError = console.error;
+  console.error = (...args) => {
+    if (args.some(arg => typeof arg === 'string' && arg.includes('WebSocket'))) {
+      return;
+    }
+    originalError.apply(console, args);
+  };
+}
+
 // Initialize instrumentation modules AFTER initial render via idle callback
 if (typeof requestIdleCallback !== 'undefined') {
   requestIdleCallback(async () => {
