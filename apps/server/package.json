@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
     "heal": "npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit",
@@ -15,7 +15,8 @@
     "start:heal": "npm run heal:json && npm install && npm run start:all",
     "start": "NODE_ENV=production tsx src/index.ts",
     "start:prod": "NODE_ENV=production tsx src/index.ts",
-    "build": "echo 'Using tsx - no build step required'",
+    "build": "tsc -p tsconfig.json",
+    "build:production": "rm -rf dist && tsc -p tsconfig.json",
     "db:push": "drizzle-kit push"
   },
   "dependencies": {

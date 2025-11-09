@@ -14,7 +14,8 @@
     "start:all": "concurrently -k -n server,client \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run dev\"",
     "start:heal": "npm run heal:json && npm install && npm run start:all",
     "start": "vite --port 5173 --host 0.0.0.0 --strictPort",
-    "build": "tsc && vite build",
+    "build": "vite build --config vite.config.js",
+    "build:production": "rm -rf dist .vite && vite build --config vite.config.js",
     "preview": "vite preview"
   },
   "devDependencies": {

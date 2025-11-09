@@ -14,7 +14,7 @@ import { createSessionMiddleware } from "./lib/session.js";
 import { validateEnv } from "./lib/env.js";
 import { logger } from "./lib/logger.js";
 import { configureSecurityHeaders, getCorsOptions } from "./lib/securityHeaders.js";
-import Sentry from "./instrument.js";
+import * as Sentry from "@sentry/node";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,7 +32,9 @@ try {
 
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+// Production-safe port resolution: SERVER_PORT (dev override) → PORT (platform-provided) → 5000 (fallback)
+// This ensures development uses 5000 consistently while deployments respect platform-injected PORT
+const PORT = Number(process.env.SERVER_PORT ?? process.env.PORT ?? 5000);
 
 // 360° MIT-PhD Level Architecture: Async app configuration with proper middleware sequencing
 async function configureApp() {
