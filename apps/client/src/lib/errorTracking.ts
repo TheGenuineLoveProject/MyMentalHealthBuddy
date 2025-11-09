@@ -1,7 +1,9 @@
 /**
  * Error Tracking Utilities
- * Centralized error logging and tracking
+ * Centralized error logging and tracking using Sentry
  */
+
+import * as Sentry from '@sentry/react';
 
 export interface ErrorContext {
   user?: {
@@ -26,7 +28,7 @@ class ErrorTracker {
   }
 
   /**
-   * Initialize error tracking
+   * Initialize error tracking - Sentry is already initialized in instrument.ts
    */
   init(options: { environment: string; dsn?: string }) {
     if (this.isInitialized) {
@@ -34,8 +36,7 @@ class ErrorTracker {
       return;
     }
 
-    // TODO: Initialize actual error tracking service (e.g., Sentry)
-    console.log('Error tracking initialized:', options);
+    console.log('✅ Error tracking service connected (Sentry)');
     
     // Set up global error handlers
     this.setupGlobalHandlers();
@@ -65,80 +66,56 @@ class ErrorTracker {
   }
 
   /**
-   * Capture an exception
+   * Capture an exception using Sentry
    */
   captureException(error: Error, context?: ErrorContext) {
     if (!this.isInitialized && !import.meta.env.DEV) {
       console.warn('Error tracker not initialized');
     }
 
-    const errorData = {
-      message: error.message,
-      stack: error.stack,
-      name: error.name,
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      userAgent: navigator.userAgent,
-      context,
-    };
-
     // Log to console in development
     if (import.meta.env.DEV) {
-      console.error('Error captured:', errorData);
-      return;
+      console.error('Error captured:', error, context);
     }
 
-    // Send to backend error logging endpoint
-    this.sendToBackend(errorData);
+    // Send to Sentry with context
+    Sentry.captureException(error, {
+      tags: context?.tags,
+      extra: context?.extra,
+      user: context?.user,
+    });
   }
 
   /**
-   * Capture a message (non-error)
+   * Capture a message (non-error) using Sentry
    */
   captureMessage(message: string, level: 'info' | 'warning' | 'error' = 'info', context?: ErrorContext) {
-    const messageData = {
-      message,
-      level,
-      timestamp: new Date().toISOString(),
-      url: window.location.href,
-      context,
-    };
-
     if (import.meta.env.DEV) {
-      console.log('Message captured:', messageData);
-      return;
+      console.log(`[${level.toUpperCase()}] Message captured:`, message, context);
     }
 
-    this.sendToBackend(messageData);
+    Sentry.captureMessage(message, {
+      level: level as Sentry.SeverityLevel,
+      tags: context?.tags,
+      extra: context?.extra,
+      user: context?.user,
+    });
   }
 
   /**
-   * Send error data to backend
-   */
-  private async sendToBackend(data: any) {
-    try {
-      await fetch('/api/errors', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-    } catch (err) {
-      console.error('Failed to send error to backend:', err);
-    }
-  }
-
-  /**
-   * Set user context for error tracking
+   * Set user context for error tracking using Sentry
    */
   setUser(user: { id?: string; email?: string; username?: string }) {
     console.log('User context set:', user);
-    // TODO: Set user context in actual error tracking service
+    Sentry.setUser({
+      id: user.id,
+      email: user.email,
+      username: user.username,
+    });
   }
 
   /**
-   * Add breadcrumb for debugging
+   * Add breadcrumb for debugging using Sentry
    */
   addBreadcrumb(breadcrumb: {
     message: string;
@@ -147,7 +124,12 @@ class ErrorTracker {
     data?: Record<string, any>;
   }) {
     console.log('Breadcrumb added:', breadcrumb);
-    // TODO: Add breadcrumb to actual error tracking service
+    Sentry.addBreadcrumb({
+      message: breadcrumb.message,
+      category: breadcrumb.category,
+      level: breadcrumb.level as Sentry.SeverityLevel,
+      data: breadcrumb.data,
+    });
   }
 }
 

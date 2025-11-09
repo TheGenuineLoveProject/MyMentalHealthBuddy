@@ -1,3 +1,6 @@
+// 360° CRITICAL: Sentry instrumentation must be imported FIRST (before any other imports)
+import "./instrument.js";
+
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
@@ -11,6 +14,7 @@ import { createSessionMiddleware } from "./lib/session.js";
 import { validateEnv } from "./lib/env.js";
 import { logger } from "./lib/logger.js";
 import { configureSecurityHeaders, getCorsOptions } from "./lib/securityHeaders.js";
+import Sentry from "./instrument.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -111,7 +115,10 @@ async function configureApp() {
   // PHASE 6: Fallback - serve static assets (for production builds)
   app.use(express.static(path.join(__dirname, "../public")));
 
-  // PHASE 7: Global error handler (MUST be last)
+  // PHASE 7: Sentry error handler (MUST come AFTER all routes but BEFORE custom error handlers)
+  Sentry.setupExpressErrorHandler(app);
+
+  // PHASE 8: Custom error handler (MUST be last, after Sentry)
   app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
     logger.error("Server error", err instanceof Error ? err : new Error(String(err)));
     res.status(err.status || 500).json({

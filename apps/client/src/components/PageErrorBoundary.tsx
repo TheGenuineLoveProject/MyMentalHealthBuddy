@@ -1,12 +1,14 @@
 /**
  * Page-Level Error Boundary
  * Granular error boundaries for individual pages with recovery actions
+ * ✅ Integrated with Sentry error tracking
  */
 
 import { Component, ReactNode, ErrorInfo } from 'react';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { AlertCircle, RefreshCw, Home, ArrowLeft } from 'lucide-react';
+import { errorTracker } from '@/lib/errorTracking';
 
 interface PageErrorBoundaryProps {
   children: ReactNode;
@@ -55,26 +57,24 @@ export class PageErrorBoundary extends Component<PageErrorBoundaryProps, PageErr
       this.props.onError(error, errorInfo);
     }
 
-    // In production, send to error tracking service
-    if (import.meta.env.PROD) {
-      // TODO: Integrate with error tracking (e.g., Sentry)
-      this.logErrorToService(error, errorInfo);
-    }
+    // ✅ Send to Sentry error tracking service
+    this.logErrorToService(error, errorInfo);
   }
 
   logErrorToService(error: Error, errorInfo: ErrorInfo) {
-    // Placeholder for error tracking service integration
-    const errorData = {
-      message: error.message,
-      stack: error.stack,
-      componentStack: errorInfo.componentStack,
-      timestamp: new Date().toISOString(),
-      userAgent: navigator.userAgent,
-      url: window.location.href,
-    };
-    
-    console.log('Error logged:', errorData);
-    // fetch('/api/errors', { method: 'POST', body: JSON.stringify(errorData) });
+    // ✅ PRODUCTION-GRADE: Send React errors to Sentry with component stack
+    errorTracker.captureException(error, {
+      tags: {
+        errorBoundary: 'PageErrorBoundary',
+        pageName: this.props.pageName || 'unknown',
+      },
+      extra: {
+        componentStack: errorInfo.componentStack,
+        errorCount: this.state.errorCount,
+        userAgent: navigator.userAgent,
+        url: window.location.href,
+      },
+    });
   }
 
   handleReset = () => {

@@ -1,10 +1,12 @@
 /**
  * Error Handler Hook
  * Centralized error handling with user-friendly messages
+ * ✅ Integrated with Sentry error tracking
  */
 
 import { useCallback } from 'react';
 import { useToast } from '@/contexts/ToastContext';
+import { errorTracker } from '@/lib/errorTracking';
 
 interface ErrorHandlerOptions {
   showToast?: boolean;
@@ -90,24 +92,17 @@ function getUserFriendlyMessage(technicalMessage: string): string {
 }
 
 /**
- * Log error to external service (placeholder)
+ * ✅ Log error to Sentry error tracking service
  */
 function logErrorToService(error: Error) {
-  // TODO: Integrate with error tracking service (e.g., Sentry, LogRocket)
-  const errorData = {
-    message: error.message,
-    stack: error.stack,
-    timestamp: new Date().toISOString(),
-    userAgent: navigator.userAgent,
-    url: window.location.href,
-  };
-
-  console.log('Error would be logged to service:', errorData);
-  
-  // Example integration:
-  // fetch('/api/errors', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(errorData),
-  // });
+  errorTracker.captureException(error, {
+    tags: {
+      source: 'useErrorHandler',
+    },
+    extra: {
+      timestamp: new Date().toISOString(),
+      userAgent: navigator.userAgent,
+      url: window.location.href,
+    },
+  });
 }
