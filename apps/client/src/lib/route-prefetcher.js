@@ -213,48 +213,36 @@ class RoutePrefetcher {
      * Prefetch a single route
      */
     prefetchRoute(route) {
-        // Prefetch the route's JS bundle (if using code splitting)
-        const routeChunk = this.getRouteChunkName(route);
-        if (routeChunk) {
-            prefetchResource([routeChunk]);
-        }
-        // Prefetch route data API endpoint
+        // Note: Removed chunk prefetching as Vite generates dynamic hashed filenames,
+        // not static wildcard paths. Pages are lazy-loaded automatically via React.lazy()
+        
+        // Prefetch route data API endpoint (skip auth-protected endpoints)
         const apiEndpoint = this.getRouteDataEndpoint(route);
-        if (apiEndpoint) {
-            fetch(apiEndpoint, { method: 'HEAD' }).catch(() => {
+        if (apiEndpoint && !this.isProtectedEndpoint(apiEndpoint)) {
+            fetch(apiEndpoint, { method: 'HEAD', credentials: 'include' }).catch(() => {
                 // Silent fail for prefetch
             });
         }
     }
     /**
-     * Get chunk name for route (used with code splitting)
+     * Check if endpoint requires authentication
      */
-    getRouteChunkName(route) {
-        const chunkMap = {
-            '/chat': '/assets/ChatPage-*.js',
-            '/mood': '/assets/MoodPage-*.js',
-            '/journal': '/assets/JournalPage-*.js',
-            '/analytics': '/assets/AnalyticsPage-*.js',
-            '/dashboard': '/assets/DashboardPage-*.js',
-            '/crisis': '/assets/CrisisPage-*.js',
-            '/resources': '/assets/ResourcesPage-*.js',
-            '/account': '/assets/AccountPage-*.js',
-            '/billing': '/assets/BillingPage-*.js',
-            '/studio': '/assets/StudioPage-*.js',
-            '/designs': '/assets/DesignsPage-*.js',
-            '/productivity': '/assets/ProductivityPage-*.js',
-            '/performance': '/assets/PerformancePage-*.js',
-            '/social-calendar': '/assets/SocialCalendarPage-*.js',
-            '/design-system': '/assets/DesignSystemPage-*.js',
-        };
-        return chunkMap[route] || null;
+    isProtectedEndpoint(endpoint) {
+        const protectedEndpoints = [
+            '/api/moods',
+            '/api/journals',
+            '/api/analytics',
+            '/api/chat',
+            '/api/designs',
+        ];
+        return protectedEndpoints.includes(endpoint);
     }
     /**
      * Get API endpoint for route data
      */
     getRouteDataEndpoint(route) {
         const endpointMap = {
-            '/chat': '/api/conversations',
+            '/chat': '/api/chat',
             '/mood': '/api/moods',
             '/journal': '/api/journals',
             '/analytics': '/api/analytics',
