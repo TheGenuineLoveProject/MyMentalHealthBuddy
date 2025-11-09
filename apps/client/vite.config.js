@@ -8,6 +8,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   plugins: [react()],
   root: path.resolve(__dirname, "."),
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: false,
+    allowedHosts: [
+      'my-mental-health-buddy.replit.app',
+      '.replit.app',
+      '.replit.dev',
+      'localhost'
+    ]
+  },
   build: {
     outDir: path.resolve(__dirname, "dist"),
     emptyOutDir: true,
