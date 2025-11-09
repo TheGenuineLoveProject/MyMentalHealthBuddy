@@ -57,4 +57,4 @@ channel = "stable-25_05"
 [deployment]
 deploymentTarget = "autoscale"
 run = ["node", "apps/server/dist/server/src/index.js"]
-build = ["npm", "run", "build:production"]
+build = ["npm", "run", "build"]
