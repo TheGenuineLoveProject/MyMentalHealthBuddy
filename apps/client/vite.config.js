@@ -32,6 +32,7 @@ export default defineConfig({
     cssCodeSplit: true,
     // Optimize chunk size thresholds
     chunkSizeWarningLimit: 600, // Alert for chunks >600KB
+    reportCompressedSize: true,
     rollupOptions: {
       input: path.resolve(__dirname, "index.html"),
       output: {
@@ -42,9 +43,7 @@ export default defineConfig({
         entryFileNames: 'assets/[name]-[hash].js'
       }
       // Use Vite's default treeshake settings - custom settings were too aggressive
-    },
-    chunkSizeWarningLimit: 1000,
-    reportCompressedSize: true
+    }
   },
   resolve: {
     alias: {
