@@ -47,6 +47,10 @@ export function configureSecurityHeaders(app) {
             "https://hooks.stripe.com",
             "https://*.canva.com"
         ],
+        workerSrc: [
+            "'self'",
+            "blob:"
+        ],
         objectSrc: ["'none'"],
         baseUri: ["'self'"],
         formAction: ["'self'"],
