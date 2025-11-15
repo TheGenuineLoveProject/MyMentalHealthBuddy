@@ -1,5 +1,5 @@
-// 360° CRITICAL: Sentry instrumentation must be imported FIRST (before any other imports)
-import "./instrument.js";
+// 360° CRITICAL: Sentry instrumentation now loaded via --import flag in package.json
+// This ensures Sentry initializes BEFORE Express for proper auto-instrumentation
 
 import "dotenv/config";
 import express from "express";

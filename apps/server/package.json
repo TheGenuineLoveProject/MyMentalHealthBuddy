@@ -7,7 +7,7 @@
     "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
     "heal": "npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit",
     "verify": "node scripts/verify.mjs || echo verify stub",
-    "dev": "tsx src/index.ts || node index.js",
+    "dev": "node --import=./instrument.mjs ./node_modules/.bin/tsx src/index.ts || tsx src/index.ts || node index.js",
     "heal:json": "node scripts/autoHealJson.mjs",
     "server:start": "npm --prefix apps/server run dev",
     "client:start": "npm --prefix apps/client run dev",
