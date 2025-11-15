@@ -10,10 +10,17 @@
     "dev:auto": "node automation/dev-server.mjs",
     "dev:monitored": "node automation/health-monitor.mjs",
     "dev:evolve": "node automation/self-evolving-monitor.mjs",
+    "orchestrate": "node automation/platform-orchestrator.mjs",
+    "verify:predeploy": "node automation/verify-predeploy.mjs",
+    "verify:health": "node automation/verify-health.mjs",
+    "verify:build": "node automation/verify-build.mjs",
+    "verify:all": "npm run verify:build && npm run verify:health",
     "heal": "bash scripts/heal.sh",
     "clean": "bash scripts/clean.sh",
     "canva-dev": "node --env-file=.env scripts/canva-orchestrator.mjs",
-    "canva:console": "node scripts/canva-console-kit.mjs"
+    "canva:console": "node scripts/canva-console-kit.mjs",
+    "db:push": "cd apps/server && drizzle-kit push",
+    "db:studio": "cd apps/server && drizzle-kit studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

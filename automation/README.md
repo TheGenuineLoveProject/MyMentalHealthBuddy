@@ -1,11 +1,102 @@
 # MyMentalHealthBuddy - Automation Tools 🤖
 
 ## Overview
-Enterprise-grade automated development server management with intelligent health monitoring, self-healing capabilities, and continuous platform evolution for 888...^ perfection.
+Enterprise-grade platform automation with intelligent monitoring, self-healing capabilities, production verification, and orchestrated workflows for 888...^ perfection from A to Z 360 degrees.
 
-## Tools
+## 🎯 Platform Orchestrator - MASTER COMMAND
 
-### 1. self-evolving-monitor.mjs ⭐ NEW - 888...^ Perfection
+### platform-orchestrator.mjs ⭐ NEW - Unified Automation
+Single command to access all platform automation modes with interactive selection.
+
+**Features:**
+- 🎛️ Interactive mode selection (6 automation modes)
+- 🚀 One-command platform management
+- 🔄 Intelligent mode switching
+- 📊 Comprehensive workflow orchestration
+- ⏱️ Auto-start with 10-second timeout
+
+**Usage:**
+```bash
+npm run orchestrate
+```
+
+**Available Modes:**
+1. **Start Platform** - Auto-configured development server
+2. **Monitor Health** - Continuous health monitoring
+3. **Self-Evolving Mode** - Intelligent self-healing (default)
+4. **Verify Platform** - Run all verification checks
+5. **Production Build** - Build for deployment
+6. **Pre-Deploy Check** - Comprehensive pre-deployment validation
+
+## 🔍 Verification Tools - Production Readiness
+
+### verify-predeploy.mjs - Pre-Deployment Validation
+Comprehensive verification suite ensuring 888...^ production readiness.
+
+**Features:**
+- ✅ Production build compilation (TypeScript + Vite)
+- 📦 Build output verification (artifacts, bundle sizes)
+- ⏱️ Performance timing analysis
+- 🎯 Critical failure detection
+- 📊 Detailed summary reporting
+- 🚫 Exits immediately on critical failures
+
+**Usage:**
+```bash
+npm run verify:predeploy
+```
+
+**Validation Steps:**
+1. Production Build - Compile TypeScript and build bundles (CRITICAL)
+2. Build Output Validation - Verify artifacts and sizes (CRITICAL)
+
+**Note:** Health endpoint check requires server to be running. Use `verify:health` separately if needed.
+
+### verify-health.mjs - Health Endpoint Testing
+Tests all health endpoints with detailed status reporting.
+
+**Features:**
+- 🏥 Multiple endpoint testing
+- ⏱️ Response time tracking
+- 📊 Detailed status reporting
+- 🎯 Required vs. optional classification
+- ❌ Critical failure detection
+
+**Usage:**
+```bash
+npm run verify:health
+```
+
+**Endpoints Tested:**
+- `/api/health` - Overall system health (REQUIRED)
+- `/api/health/ready` - Readiness check (REQUIRED)
+- `/api/health/live` - Liveness check (OPTIONAL)
+
+### verify-build.mjs - Build Output Validation
+Validates production build outputs and bundle sizes.
+
+**Features:**
+- 📁 Directory existence checks
+- 📄 Required file validation
+- 📊 Bundle size analysis
+- ⚠️ Large chunk detection
+- 📈 Build quality metrics
+
+**Usage:**
+```bash
+npm run verify:build
+```
+
+**Validation Checks:**
+- Client distribution directory
+- Server distribution directory
+- Required HTML/JS files
+- Bundle size analysis
+- Chunk size warnings (>800KB)
+
+## 🔄 Monitoring Tools - Continuous Health
+
+### 1. self-evolving-monitor.mjs ⭐ - 888...^ Perfection
 Intelligent platform monitor with adaptive health checking, performance optimization, and self-evolving capabilities.
 
 **Features:**
@@ -59,21 +150,43 @@ Automated server startup with environment configuration.
 npm run dev:auto
 ```
 
-## Scripts
+## 📜 Complete npm Scripts Reference
 
-```json
-{
-  "dev:auto": "node automation/dev-server.mjs",
-  "dev:monitored": "node automation/health-monitor.mjs",
-  "dev:evolve": "node automation/self-evolving-monitor.mjs"
-}
+### Orchestration & Master Commands
+```bash
+npm run orchestrate           # 🎯 Master platform orchestrator (interactive)
+npm run dev:evolve           # 🔄 Self-evolving mode (recommended for dev)
+npm run dev:monitored        # 🏥 Health monitoring mode
+npm run dev:auto             # 🚀 Quick auto-configured start
 ```
 
-## Recommended Usage
+### Verification & Quality Assurance
+```bash
+npm run verify:predeploy     # ✅ Full pre-deployment validation
+npm run verify:health        # 🏥 Health endpoint testing
+npm run verify:build         # 📦 Build output validation
+npm run verify:all           # 🎯 All verification checks
+```
 
-**Development:** `npm run dev:evolve` - Full self-evolving monitoring  
-**Basic Monitoring:** `npm run dev:monitored` - Simple health checks  
-**Quick Start:** `npm run dev:auto` - Auto-configured startup  
+### Build & Deployment
+```bash
+npm run build                # 🏗️ Production build
+npm start                    # ▶️  Start production server
+```
+
+### Database Management
+```bash
+npm run db:push              # 📊 Push schema changes to database
+npm run db:studio            # 🎨 Open Drizzle Studio (database GUI)
+```
+
+## 🎯 Recommended Usage
+
+**Primary Development:** `npm run orchestrate` - Interactive mode selection  
+**Self-Evolving Mode:** `npm run dev:evolve` - Intelligent self-healing  
+**Pre-Deployment:** `npm run verify:predeploy` - Full validation suite  
+**Quick Start:** `npm run dev:auto` - Fast auto-configured startup  
+**Health Check:** `npm run verify:health` - Endpoint verification  
 
 ## Health Monitoring Endpoints
 
