@@ -7,6 +7,8 @@
     "build": "vite build --config apps/client/vite.config.js && tsc -p apps/server/tsconfig.json",
     "start": "NODE_ENV=production node apps/server/dist/server/src/index.js",
     "dev:server": "cd apps/server && npm run dev",
+    "dev:auto": "node automation/dev-server.mjs",
+    "dev:monitored": "node automation/health-monitor.mjs",
     "heal": "bash scripts/heal.sh",
     "clean": "bash scripts/clean.sh",
     "canva-dev": "node --env-file=.env scripts/canva-orchestrator.mjs",

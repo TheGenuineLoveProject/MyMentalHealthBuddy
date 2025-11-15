@@ -1,0 +1,77 @@
+#!/usr/bin/env node
+/**
+ * Development Server Automation - 360° Auto-Configuration
+ * Automatically configures and starts server with optimal settings
+ */
+
+import { spawn } from 'child_process';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const projectRoot = join(__dirname, '..');
+
+function log(message, type = 'INFO') {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] [${type}] ${message}`);
+}
+
+function startServer() {
+  log('🚀 Starting MyMentalHealthBuddy development server...', 'START');
+  
+  const env = {
+    ...process.env,
+    SERVER_PORT: '5000',
+    PORT: '5000',
+    NODE_ENV: 'development',
+    HOST: '0.0.0.0'
+  };
+
+  // Check if secrets are configured
+  if (!env.DATABASE_URL) {
+    log('⚠️  DATABASE_URL not configured', 'WARN');
+  }
+  if (!env.OPENAI_API_KEY) {
+    log('⚠️  OPENAI_API_KEY not configured', 'WARN');
+  }
+  if (!env.SENTRY_DSN) {
+    log('⚠️  SENTRY_DSN not configured - error tracking disabled', 'WARN');
+  }
+
+  log('✅ Environment configured', 'CONFIG');
+  log(`   Port: ${env.SERVER_PORT}`, 'CONFIG');
+  log(`   Mode: ${env.NODE_ENV}`, 'CONFIG');
+  
+  const serverProcess = spawn('npm', ['--prefix', 'apps/server', 'run', 'dev'], {
+    cwd: projectRoot,
+    stdio: 'inherit',
+    shell: true,
+    env
+  });
+
+  serverProcess.on('exit', (code) => {
+    if (code !== 0) {
+      log(`Server exited with code ${code}`, 'ERROR');
+      process.exit(code);
+    }
+  });
+
+  return serverProcess;
+}
+
+// Start server
+const server = startServer();
+
+// Handle graceful shutdown
+process.on('SIGINT', () => {
+  log('Shutting down...', 'SHUTDOWN');
+  server.kill('SIGTERM');
+  process.exit(0);
+});
+
+process.on('SIGTERM', () => {
+  log('Shutting down...', 'SHUTDOWN');
+  server.kill('SIGTERM');
+  process.exit(0);
+});
