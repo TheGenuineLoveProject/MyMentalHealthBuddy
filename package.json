@@ -9,6 +9,7 @@
     "dev:server": "cd apps/server && npm run dev",
     "dev:auto": "node automation/dev-server.mjs",
     "dev:monitored": "node automation/health-monitor.mjs",
+    "dev:evolve": "node automation/self-evolving-monitor.mjs",
     "heal": "bash scripts/heal.sh",
     "clean": "bash scripts/clean.sh",
     "canva-dev": "node --env-file=.env scripts/canva-orchestrator.mjs",

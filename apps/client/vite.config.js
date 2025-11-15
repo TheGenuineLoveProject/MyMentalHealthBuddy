@@ -21,7 +21,14 @@ export default defineConfig({
       '.replit.app',
       '.replit.dev',
       'localhost'
-    ]
+    ],
+    hmr: {
+      // In Replit, Vite runs as middleware through Express on port 5000
+      // HMR WebSocket should connect to the same host/port as the page
+      port: 5000,
+      timeout: 10000, // Increase timeout for cloud environment
+      overlay: false // Disable error overlay to reduce noise in dev
+    }
   },
   build: {
     outDir: path.resolve(__dirname, "dist"),

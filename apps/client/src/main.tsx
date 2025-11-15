@@ -9,48 +9,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import App from "./App";
 import "./index.css";
 
-// 🚀 888...^ PERFECTION: Comprehensive WebSocket error handling (dev-only)
-// Must be installed BEFORE Vite client connects
-if (!import.meta.env.PROD) {
-  // Comprehensive WebSocket error suppression - catches ALL variations
-  const handleWebSocketError = (event: any) => {
-    const message = event?.reason?.message || event?.message || String(event?.reason || '');
-    if (message.toLowerCase().includes('websocket') || message.includes('ws://')) {
-      event.preventDefault?.();
-      event.stopPropagation?.();
-      event.stopImmediatePropagation?.();
-      return true;
-    }
-    return false;
-  };
-
-  // Unhandled promise rejections
-  window.addEventListener('unhandledrejection', handleWebSocketError, true);
-  
-  // Regular errors
-  window.addEventListener('error', handleWebSocketError, true);
-  
-  // Comprehensive console patching
-  const originalError = console.error;
-  const originalWarn = console.warn;
-  
-  console.error = (...args: any[]) => {
-    const message = args.join(' ').toLowerCase();
-    if (message.includes('websocket') || message.includes('[vite]') && message.includes('websocket')) {
-      return; // Silently suppress
-    }
-    originalError.apply(console, args);
-  };
-  
-  console.warn = (...args: any[]) => {
-    const message = args.join(' ').toLowerCase();
-    if (message.includes('websocket')) {
-      return; // Silently suppress
-    }
-    originalWarn.apply(console, args);
-  };
-}
-
 // 🚀 PERFORMANCE BREAKTHROUGH: Render first, instrument later
 // Defer all heavy monitoring/optimization/security modules to post-render idle tasks
 // This unblocks DOMContentLoaded and dramatically improves FCP/LCP
