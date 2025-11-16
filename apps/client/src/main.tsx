@@ -27,17 +27,12 @@ createRoot(document.getElementById("root")!).render(
 if (typeof requestIdleCallback !== 'undefined') {
   requestIdleCallback(async () => {
     // Lazy load heavy modules to avoid blocking main thread
+    // NOTE: security-hardening and registerSW are truly lazy (only dynamically imported)
     const [
       { initializeSecurityHardening },
-      { initPerformanceMonitoring },
-      { initWebVitals },
-      { initializePerformanceOptimizations },
       { registerServiceWorker }
     ] = await Promise.all([
       import("./lib/security-hardening"),
-      import("./lib/performance"),
-      import("./lib/webVitals"),
-      import("./lib/performance-optimizer"),
       import("./registerSW")
     ]);
 
@@ -46,26 +41,15 @@ if (typeof requestIdleCallback !== 'undefined') {
       initializeSecurityHardening();
       registerServiceWorker();
     }
-
-    // Initialize performance monitoring
-    initPerformanceMonitoring();
-    initWebVitals();
-    initializePerformanceOptimizations();
   }, { timeout: 2000 });
 } else {
   // Fallback for browsers without requestIdleCallback
   setTimeout(async () => {
     const [
       { initializeSecurityHardening },
-      { initPerformanceMonitoring },
-      { initWebVitals },
-      { initializePerformanceOptimizations },
       { registerServiceWorker }
     ] = await Promise.all([
       import("./lib/security-hardening"),
-      import("./lib/performance"),
-      import("./lib/webVitals"),
-      import("./lib/performance-optimizer"),
       import("./registerSW")
     ]);
 
@@ -73,9 +57,18 @@ if (typeof requestIdleCallback !== 'undefined') {
       initializeSecurityHardening();
       registerServiceWorker();
     }
-
-    initPerformanceMonitoring();
-    initWebVitals();
-    initializePerformanceOptimizations();
   }, 100);
 }
+
+// Import performance/webVitals statically since they're used by hooks
+// This eliminates dynamic import warnings and ensures immediate availability
+import { initPerformanceMonitoring } from "./lib/performance";
+import { initWebVitals } from "./lib/webVitals";
+import { initializePerformanceOptimizations } from "./lib/performance-optimizer";
+
+// Initialize after a short delay to allow render to complete
+setTimeout(() => {
+  initPerformanceMonitoring();
+  initWebVitals();
+  initializePerformanceOptimizations();
+}, 0);

@@ -22,9 +22,8 @@ export default defineConfig({
     // Trade-off: Manual page refresh required, but achieves 888...^ zero-console-error perfection
     hmr: false,
 
-    // Optional but recommended: auto-open preview & handle HTTPS proxies
+    // Optional but recommended: auto-open preview
     open: false,
-    https: false,
   },
   preview: {
     allowedHosts: [
