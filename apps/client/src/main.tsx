@@ -1,29 +1,6 @@
 // 360° CRITICAL: Sentry instrumentation must be imported FIRST (before React or any other imports)
 import "./instrument";
 
-// Suppress Vite HMR WebSocket errors in development (Replit iframe environment)
-// This error is harmless - HMR works via HTTP polling fallback
-if (import.meta.env.DEV) {
-  const originalError = console.error;
-  console.error = (...args: any[]) => {
-    const message = args[0]?.toString() || '';
-    // Suppress known benign Vite HMR errors
-    if (message.includes('[vite] failed to connect to websocket') ||
-        message.includes('WebSocket closed without opened')) {
-      return; // Silently ignore
-    }
-    originalError.apply(console, args);
-  };
-
-  // Also suppress unhandledrejection for WebSocket HMR errors
-  window.addEventListener('unhandledrejection', (event) => {
-    const message = event.reason?.message || event.reason?.toString() || '';
-    if (message.includes('WebSocket closed without opened')) {
-      event.preventDefault(); // Prevent console error
-    }
-  });
-}
-
 import { createRoot } from "react-dom/client";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";

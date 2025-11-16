@@ -65,7 +65,10 @@ async function configureApp() {
     logger.info("Client root configured", { clientRoot });
     
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { 
+        middlewareMode: true,
+        hmr: false  // Disable HMR to eliminate WebSocket errors in Replit iframe
+      },
       appType: "custom",
       root: clientRoot,
     });

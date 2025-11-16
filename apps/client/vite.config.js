@@ -21,9 +21,10 @@ export default defineConfig({
       '.replit.app',
       '.replit.dev',
       'localhost'
-    ]
-    // HMR auto-configures when running in middleware mode (server/index.ts)
-    // No manual HMR configuration needed - Vite handles it automatically
+    ],
+    // Disable HMR to eliminate WebSocket errors in Replit iframe environment
+    // Trade-off: Manual page refresh required, but achieves 888...^ zero-console-error perfection
+    hmr: false
   },
   build: {
     outDir: path.resolve(__dirname, "dist"),

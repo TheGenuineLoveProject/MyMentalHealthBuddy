@@ -206,7 +206,8 @@ async function startServer() {
   
   console.log('🚀 Starting server...');
   
-  state.serverProcess = spawn('npm', ['run', 'dev'], {
+  // Start the backend server (Express on port 5000)
+  state.serverProcess = spawn('npm', ['--prefix', 'apps/server', 'run', 'dev'], {
     stdio: 'inherit',
     shell: true,
     env: { ...process.env, SERVER_PORT: '5000' }
@@ -223,7 +224,7 @@ async function startServer() {
   });
   
   // Wait for server to start
-  await new Promise(resolve => setTimeout(resolve, 5000));
+  await new Promise(resolve => setTimeout(resolve, 8000));
   console.log('✅ Server started');
 }
 
