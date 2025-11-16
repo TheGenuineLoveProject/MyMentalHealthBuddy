@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch --config apps/client/vite.config.js",
     "build": "vite build --config apps/client/vite.config.js && tsc -p apps/server/tsconfig.json",
     "start": "NODE_ENV=production node apps/server/dist/server/src/index.js",
     "dev:server": "cd apps/server && npm run dev",
+    "dev:client": "vite build --watch --config apps/client/vite.config.js",
     "dev:auto": "node automation/dev-server.mjs",
     "dev:monitored": "node automation/health-monitor.mjs",
     "dev:evolve": "node automation/self-evolving-monitor.mjs",
