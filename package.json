@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch --config apps/client/vite.config.js",
+    "dev": "bash -c 'echo \"🔨 Initial build...\" && vite build --config apps/client/vite.config.js && echo \"✅ Build complete! Starting server...\" && vite build --watch --config apps/client/vite.config.js & SERVER_PORT=5000 npm --prefix apps/server run dev'",
     "build": "vite build --config apps/client/vite.config.js && tsc -p apps/server/tsconfig.json",
     "start": "NODE_ENV=production node apps/server/dist/server/src/index.js",
     "dev:server": "cd apps/server && npm run dev",

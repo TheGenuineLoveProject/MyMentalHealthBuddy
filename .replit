@@ -13,10 +13,6 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 5174
-externalPort = 3002
-
-[[ports]]
 localPort = 5555
 externalPort = 3000
 
@@ -52,7 +48,7 @@ outputType = "webview"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "bash -c 'vite build --watch --config apps/client/vite.config.js & sleep 3 && SERVER_PORT=5000 npm --prefix apps/server run dev'"
+args = "bash -c 'echo \"🔨 Initial build...\" && vite build --config apps/client/vite.config.js && echo \"✅ Build complete! Starting server...\" && vite build --watch --config apps/client/vite.config.js & SERVER_PORT=5000 npm --prefix apps/server run dev'"
 waitForPort = 5000
 
 [nix]
