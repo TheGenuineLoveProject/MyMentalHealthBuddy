@@ -9,6 +9,12 @@ apps/*/node_modules/
 *.tsbuildinfo
 .rollup.cache/
 
+# TypeScript compiled artifacts (prevent shadowing source files)
+# Critical: Compiled .js/.jsx files in src/ can override .ts/.tsx imports
+apps/*/src/**/*.js
+apps/*/src/**/*.jsx
+!apps/*/src/**/*.config.js  # Allow config files
+
 # Environment variables
 .env
 .env.local
