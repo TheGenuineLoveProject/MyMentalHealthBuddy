@@ -10,6 +10,7 @@
     "dev:auto": "node automation/dev-server.mjs",
     "dev:monitored": "node automation/health-monitor.mjs",
     "dev:evolve": "node automation/self-evolving-monitor.mjs",
+    "evolve": "node automation/master-evolve.mjs",
     "orchestrate": "node automation/platform-orchestrator.mjs",
     "verify:predeploy": "node automation/verify-predeploy.mjs",
     "verify:health": "node automation/verify-health.mjs",
