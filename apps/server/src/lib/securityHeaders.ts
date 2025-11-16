@@ -43,7 +43,9 @@ export function configureSecurityHeaders(app: Express) {
       "https://api.stripe.com",
       "https://api.canva.com",
       "https://api.openai.com",
-      ...(isProduction ? [] : ["ws:", "wss:"]) // WebSocket for HMR in dev
+      "https://*.ingest.sentry.io", // Sentry error tracking
+      "https://*.ingest.us.sentry.io", // Sentry US region
+      ...(isProduction ? [] : ["ws:", "wss:"]) // WebSocket for HMR in dev (disabled - using watched build)
     ],
     frameSrc: [
       "'self'",
