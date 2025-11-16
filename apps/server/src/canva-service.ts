@@ -42,38 +42,46 @@ export type DesignType =
   | "Logo";
 
 export class CanvaService {
-  private clientId: string;
-  private clientSecret: string;
-  private redirectUri: string;
+  private appId: string;
+  private appOrigin: string;
   private apiBaseUrl = "https://api.canva.com/rest/v1";
 
   constructor() {
-    this.clientId = process.env.CANVA_CLIENT_ID || "";
-    this.clientSecret = process.env.CANVA_CLIENT_SECRET || "";
-    this.redirectUri = process.env.CANVA_REDIRECT_URI || "http://localhost:5000/api/canva/callback";
+    // Canva Apps SDK uses PKCE (no client secret needed)
+    this.appId = process.env.CANVA_CLIENT_ID || "";
+    this.appOrigin = process.env.CANVA_APP_ORIGIN || "";
 
-    if (!this.clientId || !this.clientSecret) {
-      console.warn("⚠️  Canva API credentials not configured. Visual design features will be disabled.");
+    if (!this.appId || !this.appOrigin) {
+      console.warn("⚠️  Canva Apps SDK credentials not configured. Visual design features will be disabled.");
+      console.warn("   Required: CANVA_CLIENT_ID (App ID) and CANVA_APP_ORIGIN");
+    } else {
+      console.log("✅ Canva Apps SDK configured successfully");
+      console.log(`   App ID: ${this.appId.substring(0, 8)}...`);
+      console.log(`   App Origin: ${this.appOrigin}`);
     }
   }
 
   isEnabled(): boolean {
-    return !!(this.clientId && this.clientSecret);
+    return !!(this.appId && this.appOrigin);
   }
 
   getAuthorizationUrl(state: string): string {
+    // Canva Apps SDK uses PKCE-based authentication
+    // This URL is primarily for Connect API (external integrations)
+    // For Apps SDK, authentication happens via @canva/user package in the frontend
     const params = new URLSearchParams({
-      client_id: this.clientId,
-      redirect_uri: this.redirectUri,
+      client_id: this.appId,
       response_type: "code",
       scope: "design:content:read design:content:write design:meta:read asset:read asset:write folder:read",
       state: state,
+      // PKCE parameters will be added by frontend SDK
     });
     
     return `https://www.canva.com/api/oauth/authorize?${params.toString()}`;
   }
 
-  async exchangeCodeForToken(code: string): Promise<CanvaTokenResponse> {
+  async exchangeCodeForToken(code: string, codeVerifier: string): Promise<CanvaTokenResponse> {
+    // Canva Apps SDK uses PKCE (code_verifier instead of client_secret)
     const response = await fetch("https://api.canva.com/rest/v1/oauth/token", {
       method: "POST",
       headers: {
@@ -82,9 +90,8 @@ export class CanvaService {
       body: new URLSearchParams({
         grant_type: "authorization_code",
         code: code,
-        client_id: this.clientId,
-        client_secret: this.clientSecret,
-        redirect_uri: this.redirectUri,
+        client_id: this.appId,
+        code_verifier: codeVerifier, // PKCE - no client secret needed
       }),
     });
 
@@ -97,6 +104,7 @@ export class CanvaService {
   }
 
   async refreshAccessToken(refreshToken: string): Promise<CanvaTokenResponse> {
+    // For Apps SDK, token refresh doesn't require client secret
     const response = await fetch("https://api.canva.com/rest/v1/oauth/token", {
       method: "POST",
       headers: {
@@ -105,8 +113,7 @@ export class CanvaService {
       body: new URLSearchParams({
         grant_type: "refresh_token",
         refresh_token: refreshToken,
-        client_id: this.clientId,
-        client_secret: this.clientSecret,
+        client_id: this.appId,
       }),
     });
 
