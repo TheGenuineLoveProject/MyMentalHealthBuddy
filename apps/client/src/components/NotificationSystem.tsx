@@ -48,7 +48,7 @@ export function NotificationSystem() {
       timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
       read: true,
       actionLabel: 'Review Schedule',
-      actionUrl: '/social'
+      actionUrl: '/social-calendar'
     }
   ]);
 

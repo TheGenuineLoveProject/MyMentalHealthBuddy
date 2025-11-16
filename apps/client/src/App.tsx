@@ -134,7 +134,7 @@ function AppContent() {
                   <StudioPage />
                 </PageErrorBoundary>
               </Route>
-              <Route path="/social">
+              <Route path="/social-calendar">
                 <PageErrorBoundary pageName="Social Calendar">
                   <SocialCalendarPage />
                 </PageErrorBoundary>

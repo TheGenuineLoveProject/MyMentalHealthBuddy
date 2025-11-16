@@ -81,7 +81,7 @@ export const allNavItems: NavItem[] = [
     description: 'Content performance insights'
   },
   {
-    path: '/social',
+    path: '/social-calendar',
     label: 'Social Calendar',
     icon: Calendar,
     category: 'professional',
