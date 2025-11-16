@@ -62,7 +62,38 @@ async function configureApp() {
   
   logger.info("Serving client from", { path: clientDistPath, mode: isDev ? "development (watched build)" : "production" });
   
-  app.use(express.static(clientDistPath));
+  // 360° Cache Strategy: Long-lived for hashed assets, no-cache for HTML
+  const isProduction = !isDev;
+  app.use(express.static(clientDistPath, {
+    maxAge: isProduction ? '1y' : '0', // 1 year for production hashed assets, no cache in dev
+    immutable: isProduction, // Assets with content hashes are immutable
+    setHeaders: (res, filePath) => {
+      // Service Worker & Manifest: NEVER cache (must always be fresh for updates)
+      if (filePath.endsWith('/sw.js') || filePath.endsWith('/manifest.json') || filePath.includes('service-worker')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      }
+      // HTML files: Always revalidate (no cache)
+      else if (filePath.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.setHeader('Pragma', 'no-cache');
+        res.setHeader('Expires', '0');
+      }
+      // Hashed assets (JS, CSS with hash in filename): Long-lived cache
+      else if (/\.[a-f0-9]{8,}\.(js|css)$/i.test(filePath)) {
+        res.setHeader('Cache-Control', isProduction ? 'public, max-age=31536000, immutable' : 'no-cache');
+      }
+      // Images and fonts: Medium-lived cache
+      else if (/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i.test(filePath)) {
+        res.setHeader('Cache-Control', isProduction ? 'public, max-age=604800' : 'no-cache'); // 1 week
+      }
+      // Fallback for unversioned assets: Short cache with revalidation
+      else {
+        res.setHeader('Cache-Control', isProduction ? 'public, max-age=3600, must-revalidate' : 'no-cache'); // 1 hour with revalidation
+      }
+    }
+  }));
 
   // PHASE 5: Register all API routes (AFTER static assets)
   registerRoutes(app);
