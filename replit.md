@@ -33,7 +33,28 @@ The application utilizes `shadcn/ui` (built on `Radix UI`), `Tailwind CSS`, and 
 -   **Enterprise Backend Services**: Includes a BackupService, PerformanceMonitor, QueryOptimizer, Enhanced Rate Limiting, and an Error Recovery System.
 
 ### System Design Choices
-The architecture emphasizes type safety, developer experience, and modern web practices within a monorepo. It ensures enterprise-grade security (XSS, CSRF, rate limiting, input sanitization, backup ownership enforcement, path traversal prevention). Robust error handling includes retry logic, circuit breaker patterns, timeout handling, and comprehensive observability. Runtime environment variable validation (Zod), React Context for global state, and optimized database connection pooling are implemented. Security headers and CORS hardening are also key design decisions. The system has achieved critical breakthroughs in performance, eliminating WebSocket errors, restoring performance to excellent levels (TTFB 156ms, LCP 560ms), and enhancing CSP security with zero console errors.
+The architecture emphasizes type safety, developer experience, and modern web practices within a monorepo. It ensures enterprise-grade security (XSS, CSRF, rate limiting, input sanitization, backup ownership enforcement, path traversal prevention). Robust error handling includes retry logic, circuit breaker patterns, timeout handling, and comprehensive observability. Runtime environment variable validation (Zod), React Context for global state, and optimized database connection pooling are implemented. Security headers and CORS hardening are also key design decisions. The system has achieved critical breakthroughs in performance, eliminating WebSocket errors, restoring performance to excellent levels (TTFB 44ms, FCP 516ms, LCP 516ms), and enhancing CSP security with zero console errors.
+
+### Recent Changes (November 2025)
+
+#### Build Optimization & Vendor Chunking
+-   **Critical Fix**: Resolved ES6 module compliance issue where static imports were placed after executable code, causing SyntaxError and preventing app initialization
+-   **Routing Bug Fixed**: Removed 20+ compiled .js/.jsx artifacts from src/ directories that shadowed TypeScript sources; updated all `/social` references to `/social-calendar`
+-   **Gitignore Protection**: Added rules to prevent future compilation artifacts from being committed (`apps/**/src/**/*.js`, `apps/**/src/**/*.jsx`)
+-   **Dynamic Import Warnings Eliminated**: Converted `webVitals.ts`, `performance.ts`, `performance-optimizer.ts` to static imports while maintaining post-render idle-callback initialization for non-blocking startup
+-   **Vendor Bundle Optimization**: Reduced from 712kB monolithic chunk (warning!) to 4 optimized chunks under 600kB:
+    -   `ui-icons`: 36kB (Lucide React)
+    -   `data-query`: 40kB (TanStack Query)
+    -   `monitoring`: 252kB (Sentry)
+    -   `vendor`: 459kB (React + core libraries preserved together to avoid breaking internal dependencies)
+-   **Vite Config Cleanup**: Removed invalid `https: false` option; clarified that `vite.config.js` takes precedence over `.ts`/`.mjs` variants
+-   **Zero Build Warnings**: All build warnings eliminated through safe chunking strategy that preserves React's AsyncMode references
+
+#### Performance Metrics (Current)
+-   **TTFB**: 44ms (GOOD) - down from 156ms
+-   **FCP**: 516ms (GOOD)
+-   **LCP**: 516ms (GOOD) - improved from 560ms
+-   **CLS**: 0.286 (POOR) - user-accepted trade-off for atmospheric gradients/animations that enhance therapeutic design experience
 
 ## External Dependencies
 

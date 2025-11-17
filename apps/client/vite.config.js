@@ -8,8 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   plugins: [
     react(),
-    // Use Vite's built-in vendor chunking strategy - eliminates empty chunks
-    splitVendorChunkPlugin()
+    // Manual chunking for optimal vendor bundle splitting (888...^ optimization)
   ],
   root: path.resolve(__dirname, "."),
   server: {
@@ -39,11 +38,28 @@ export default defineConfig({
     rollupOptions: {
       input: path.resolve(__dirname, "index.html"),
       output: {
-        // Let Vite's splitVendorChunkPlugin handle ALL chunking automatically
-        // No manual chunks - eliminates empty chunk artifacts
         chunkFileNames: 'assets/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
-        entryFileNames: 'assets/[name]-[hash].js'
+        entryFileNames: 'assets/[name]-[hash].js',
+        // Manual chunking to split large vendor bundle - simplified to avoid breaking internal references
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            // Lucide icons - large library, can be safely split
+            if (id.includes('lucide-react')) {
+              return 'ui-icons';
+            }
+            // TanStack Query - self-contained
+            if (id.includes('@tanstack')) {
+              return 'data-query';
+            }
+            // Sentry - large monitoring library
+            if (id.includes('@sentry')) {
+              return 'monitoring';
+            }
+            // All other vendor code stays together to preserve internal dependencies
+            return 'vendor';
+          }
+        }
       }
       // Use Vite's default treeshake settings - custom settings were too aggressive
     }

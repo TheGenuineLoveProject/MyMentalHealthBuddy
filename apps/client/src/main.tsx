@@ -9,6 +9,12 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import App from "./App";
 import "./index.css";
 
+// Import performance/webVitals statically since they're used by hooks
+// This eliminates dynamic import warnings and ensures immediate availability
+import { initPerformanceMonitoring } from "./lib/performance";
+import { initWebVitals } from "./lib/webVitals";
+import { initializePerformanceOptimizations } from "./lib/performance-optimizer";
+
 // 🚀 PERFORMANCE BREAKTHROUGH: Render first, instrument later
 // Defer all heavy monitoring/optimization/security modules to post-render idle tasks
 // This unblocks DOMContentLoaded and dramatically improves FCP/LCP
@@ -60,13 +66,7 @@ if (typeof requestIdleCallback !== 'undefined') {
   }, 100);
 }
 
-// Import performance/webVitals statically since they're used by hooks
-// This eliminates dynamic import warnings and ensures immediate availability
-import { initPerformanceMonitoring } from "./lib/performance";
-import { initWebVitals } from "./lib/webVitals";
-import { initializePerformanceOptimizations } from "./lib/performance-optimizer";
-
-// Initialize after a short delay to allow render to complete
+// Initialize performance monitoring after a short delay to allow render to complete
 setTimeout(() => {
   initPerformanceMonitoring();
   initWebVitals();
