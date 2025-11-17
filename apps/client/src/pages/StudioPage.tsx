@@ -1,17 +1,22 @@
-import { useState } from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { Card } from "@/components/Card";
 import { Button } from "@/components/Button";
 import { Badge } from "@/components/Badge";
-import { ContentEditor } from "@/components/ContentEditor";
-import { ContentTemplates } from "@/components/ContentTemplates";
-import { SearchFilter } from "@/components/SearchFilter";
-import { SEOOptimizer } from "@/components/SEOOptimizer";
+import { Skeleton } from "@/components/LoadingStates";
 import { useToast } from "@/hooks";
 import { FileEdit, Calendar, CheckCircle2, Clock, Send, Library, TrendingUp } from "lucide-react";
+
+const ContentEditor = lazy(() => import("@/components/ContentEditor").then(m => ({ default: m.ContentEditor })));
+const ContentTemplates = lazy(() => import("@/components/ContentTemplates").then(m => ({ default: m.ContentTemplates })));
+const SearchFilter = lazy(() => import("@/components/SearchFilter").then(m => ({ default: m.SearchFilter })));
+const SEOOptimizer = lazy(() => import("@/components/SEOOptimizer").then(m => ({ default: m.SEOOptimizer })));
 
 /**
  * Content Studio - Content creation and management workflow
  * Draft → QA → Approve → Schedule → Publish
+ * 
+ * Performance Optimization: Component-level code splitting with lazy loading
+ * Heavy components loaded only when modals/dialogs are opened
  */
 export default function StudioPage() {
   const [showEditor, setShowEditor] = useState(false);
@@ -98,10 +103,12 @@ export default function StudioPage() {
       </div>
 
       {/* Search & Filter */}
-      <SearchFilter
-        onSearch={(query) => toast.info("Searching", `Searching for: ${query}`)}
-        onFilter={(filters) => console.log('Filters:', filters)}
-      />
+      <Suspense fallback={<Skeleton className="h-20" />}>
+        <SearchFilter
+          onSearch={(query) => toast.info("Searching", `Searching for: ${query}`)}
+          onFilter={(filters) => console.log('Filters:', filters)}
+        />
+      </Suspense>
 
       {/* Actions */}
       <div className="flex gap-3 mb-6 mt-6">
@@ -125,13 +132,15 @@ export default function StudioPage() {
 
       {/* SEO Optimizer */}
       {showSEO && (
-        <div className="mb-6">
-          <SEOOptimizer
-            content="Sample content for SEO analysis. This is a comprehensive guide to mental health practices and wellness techniques."
-            title="Understanding Anxiety: A Beginner's Guide"
-            description="Learn proven techniques to manage anxiety and improve your mental wellbeing with our comprehensive guide."
-          />
-        </div>
+        <Suspense fallback={<Skeleton className="h-64 mb-6" />}>
+          <div className="mb-6">
+            <SEOOptimizer
+              content="Sample content for SEO analysis. This is a comprehensive guide to mental health practices and wellness techniques."
+              title="Understanding Anxiety: A Beginner's Guide"
+              description="Learn proven techniques to manage anxiety and improve your mental wellbeing with our comprehensive guide."
+            />
+          </div>
+        </Suspense>
       )}
 
       {/* Content List */}
@@ -199,34 +208,40 @@ export default function StudioPage() {
         </div>
       </Card>
 
-      {/* Content Editor Modal */}
-      <ContentEditor
-        isOpen={showEditor}
-        onClose={() => setShowEditor(false)}
-        onSave={(content) => {
-          toast.success("Content Saved", "Your draft has been saved successfully");
-          setShowEditor(false);
-        }}
-      />
+      {/* Content Editor Modal - Lazy Load Only When Opened */}
+      {showEditor && (
+        <Suspense fallback={null}>
+          <ContentEditor
+            isOpen={showEditor}
+            onClose={() => setShowEditor(false)}
+            onSave={(content) => {
+              toast.success("Content Saved", "Your draft has been saved successfully");
+              setShowEditor(false);
+            }}
+          />
+        </Suspense>
+      )}
 
       {/* Templates Modal */}
       {showTemplates && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="w-full max-w-7xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg p-6">
-            <ContentTemplates
-              onSelectTemplate={(template) => {
-                toast.info("Template Selected", `Using ${template.name} template`);
-                setShowTemplates(false);
-                setShowEditor(true);
-              }}
-            />
-            <div className="mt-6 flex justify-end">
-              <Button variant="secondary" onClick={() => setShowTemplates(false)}>
-                Close
-              </Button>
+        <Suspense fallback={<div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"><Skeleton className="w-full max-w-7xl h-96" /></div>}>
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="w-full max-w-7xl max-h-[90vh] overflow-y-auto bg-white dark:bg-gray-900 rounded-lg p-6">
+              <ContentTemplates
+                onSelectTemplate={(template) => {
+                  toast.info("Template Selected", `Using ${template.name} template`);
+                  setShowTemplates(false);
+                  setShowEditor(true);
+                }}
+              />
+              <div className="mt-6 flex justify-end">
+                <Button variant="secondary" onClick={() => setShowTemplates(false)}>
+                  Close
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        </Suspense>
       )}
     </div>
   );

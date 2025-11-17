@@ -1,16 +1,21 @@
-import { useState } from 'react';
-import { AdvancedExport } from '@/components/AdvancedExport';
-import { BulkOperations } from '@/components/BulkOperations';
-import { AIContentGenerator } from '@/components/AIContentGenerator';
-import { AutomationRules } from '@/components/AutomationRules';
-import { AdvancedSearch } from '@/components/AdvancedSearch';
+import { useState, lazy, Suspense } from 'react';
 import { Card } from '@/components/Card';
 import { Badge } from '@/components/Badge';
+import { Skeleton } from '@/components/LoadingStates';
 import { Zap, Search, Download, CheckSquare, Sparkles, Settings } from 'lucide-react';
+
+const AdvancedSearch = lazy(() => import('@/components/AdvancedSearch').then(m => ({ default: m.AdvancedSearch })));
+const AIContentGenerator = lazy(() => import('@/components/AIContentGenerator').then(m => ({ default: m.AIContentGenerator })));
+const AutomationRules = lazy(() => import('@/components/AutomationRules').then(m => ({ default: m.AutomationRules })));
+const BulkOperations = lazy(() => import('@/components/BulkOperations').then(m => ({ default: m.BulkOperations })));
+const AdvancedExport = lazy(() => import('@/components/AdvancedExport').then(m => ({ default: m.AdvancedExport })));
 
 /**
  * Productivity Hub - Enterprise-grade productivity tools
  * Export, Bulk Operations, AI Generation, Automation, Advanced Search
+ * 
+ * Performance Optimization: Component-level code splitting with lazy loading
+ * Each tool is loaded only when its tab is activated, reducing initial bundle size
  */
 
 export function ProductivityPage() {
@@ -84,43 +89,45 @@ export function ProductivityPage() {
           </div>
         </Card>
 
-        {/* Active Tab Content */}
-        <div className="animate-in fade-in duration-300">
-          {activeTab === 'search' && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-4">Advanced Search</h2>
-              <AdvancedSearch />
-            </div>
-          )}
+        {/* Active Tab Content - Code Split with Suspense */}
+        <Suspense fallback={<Skeleton className="h-96" />}>
+          <div className="animate-in fade-in duration-300">
+            {activeTab === 'search' && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">Advanced Search</h2>
+                <AdvancedSearch />
+              </div>
+            )}
 
-          {activeTab === 'ai' && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-4">AI Content Generator</h2>
-              <AIContentGenerator />
-            </div>
-          )}
+            {activeTab === 'ai' && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">AI Content Generator</h2>
+                <AIContentGenerator />
+              </div>
+            )}
 
-          {activeTab === 'automation' && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-4">Automation Rules</h2>
-              <AutomationRules />
-            </div>
-          )}
+            {activeTab === 'automation' && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">Automation Rules</h2>
+                <AutomationRules />
+              </div>
+            )}
 
-          {activeTab === 'bulk' && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-4">Bulk Operations</h2>
-              <BulkOperations />
-            </div>
-          )}
+            {activeTab === 'bulk' && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">Bulk Operations</h2>
+                <BulkOperations />
+              </div>
+            )}
 
-          {activeTab === 'export' && (
-            <div>
-              <h2 className="text-2xl font-semibold mb-4">Advanced Export</h2>
-              <AdvancedExport />
-            </div>
-          )}
-        </div>
+            {activeTab === 'export' && (
+              <div>
+                <h2 className="text-2xl font-semibold mb-4">Advanced Export</h2>
+                <AdvancedExport />
+              </div>
+            )}
+          </div>
+        </Suspense>
 
         {/* Quick Tips */}
         <Card className="p-6 bg-gradient-to-r from-primary/5 to-purple-500/5">

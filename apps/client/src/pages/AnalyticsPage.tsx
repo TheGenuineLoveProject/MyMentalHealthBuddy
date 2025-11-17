@@ -1,15 +1,8 @@
+import { lazy, Suspense } from 'react';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { Badge } from '@/components/Badge';
-import { AnalyticsDashboard } from '@/components/AnalyticsDashboard';
-import { LineChart, PieChart } from '@/components/Charts';
-import {
-  InsightCard,
-  PredictiveInsights,
-  NarrativeSummary,
-  ComparisonInsight
-} from '@/components/DataStorytelling';
-import { NarrativeLineChart, detectTrendAnnotations } from '@/components/NarrativeChart';
+import { Skeleton } from '@/components/LoadingStates';
 import {
   TrendingUp,
   Users,
@@ -19,9 +12,21 @@ import {
   Award,
 } from 'lucide-react';
 
+const AnalyticsDashboard = lazy(() => import('@/components/AnalyticsDashboard').then(m => ({ default: m.AnalyticsDashboard })));
+const LineChart = lazy(() => import('@/components/Charts').then(m => ({ default: m.LineChart })));
+const PieChart = lazy(() => import('@/components/Charts').then(m => ({ default: m.PieChart })));
+const InsightCard = lazy(() => import('@/components/DataStorytelling').then(m => ({ default: m.InsightCard })));
+const PredictiveInsights = lazy(() => import('@/components/DataStorytelling').then(m => ({ default: m.PredictiveInsights })));
+const NarrativeSummary = lazy(() => import('@/components/DataStorytelling').then(m => ({ default: m.NarrativeSummary })));
+const ComparisonInsight = lazy(() => import('@/components/DataStorytelling').then(m => ({ default: m.ComparisonInsight })));
+const NarrativeLineChart = lazy(() => import('@/components/NarrativeChart').then(m => ({ default: m.NarrativeLineChart })));
+
 /**
  * Analytics Page - Comprehensive performance insights
  * Track content performance, audience engagement, and growth
+ * 
+ * Performance Optimization: Component-level code splitting with lazy loading
+ * Heavy chart and visualization components loaded progressively
  */
 export default function AnalyticsPage() {
   const analyticsData = {
@@ -71,20 +76,23 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Narrative Summary - Data Storytelling */}
-      <NarrativeSummary
-        title="📊 Your Analytics Story"
-        timeframe="Last 30 Days"
-        summary="Your mental health platform achieved remarkable growth this month! Total views increased by 12.5% to nearly 46K visits, while engagement surged by 15.8% with over 1,500 meaningful comments from users. Although shares dipped slightly by 2.1%, your overall community interaction and reach continue strengthening—a testament to the authentic value your content delivers to users seeking mental wellness support."
-        highlights={[
-          { label: 'Total Reach', value: '45.8K', sentiment: 'positive' },
-          { label: 'Engagement Rate', value: '8.4%', sentiment: 'positive' },
-          { label: 'Active Days', value: '28/30', sentiment: 'positive' }
-        ]}
-      />
+      <Suspense fallback={<Skeleton className="h-48" />}>
+        <NarrativeSummary
+          title="📊 Your Analytics Story"
+          timeframe="Last 30 Days"
+          summary="Your mental health platform achieved remarkable growth this month! Total views increased by 12.5% to nearly 46K visits, while engagement surged by 15.8% with over 1,500 meaningful comments from users. Although shares dipped slightly by 2.1%, your overall community interaction and reach continue strengthening—a testament to the authentic value your content delivers to users seeking mental wellness support."
+          highlights={[
+            { label: 'Total Reach', value: '45.8K', sentiment: 'positive' },
+            { label: 'Engagement Rate', value: '8.4%', sentiment: 'positive' },
+            { label: 'Active Days', value: '28/30', sentiment: 'positive' }
+          ]}
+        />
+      </Suspense>
 
       {/* Key Insights - Storytelling */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <InsightCard
+      <Suspense fallback={<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8"><Skeleton className="h-48" /><Skeleton className="h-48" /></div>}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+          <InsightCard
           type="positive"
           title="🎉 Comments Surged 15.8%"
           description="User engagement reached all-time high with 1,520 comments this month, indicating strong community connection and therapeutic value."
@@ -103,11 +111,13 @@ export default function AnalyticsPage() {
             onClick: () => console.log('Navigate to automation')
           }}
         />
-      </div>
+        </div>
+      </Suspense>
 
       {/* Predictive Insights */}
-      <div className="mt-8">
-        <PredictiveInsights
+      <Suspense fallback={<Skeleton className="h-96 mt-8" />}>
+        <div className="mt-8">
+          <PredictiveInsights
           historical={[
             { label: 'Week 1', value: 10200 },
             { label: 'Week 2', value: 11500 },
@@ -126,11 +136,13 @@ export default function AnalyticsPage() {
             'Mobile traffic (68%) dominates—optimize responsive design for mobile journaling features'
           ]}
         />
-      </div>
+        </div>
+      </Suspense>
 
       {/* Comparison Insight */}
-      <div className="mt-8">
-        <ComparisonInsight
+      <Suspense fallback={<Skeleton className="h-48 mt-8" />}>
+        <div className="mt-8">
+          <ComparisonInsight
           title="Monthly Performance Comparison"
           current={{
             label: 'This Month (Nov 2025)',
@@ -143,13 +155,16 @@ export default function AnalyticsPage() {
           }}
           insight="Exceptional growth driven by viral 'Mindfulness Exercises' content and improved SEO rankings. Your therapeutic guidance resonated with 5,120 new users this month."
         />
-      </div>
+        </div>
+      </Suspense>
 
       {/* Main Analytics Dashboard */}
-      <div className="mt-8">
-        <h2 className="text-2xl font-semibold mb-6">Engagement Metrics</h2>
-        <AnalyticsDashboard data={analyticsData} period="30d" />
-      </div>
+      <Suspense fallback={<Skeleton className="h-96 mt-8" />}>
+        <div className="mt-8">
+          <h2 className="text-2xl font-semibold mb-6">Engagement Metrics</h2>
+          <AnalyticsDashboard data={analyticsData} period="30d" />
+        </div>
+      </Suspense>
 
       {/* Audience Insights */}
       <div className="mt-8">
@@ -181,53 +196,55 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Platform Breakdown */}
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="p-6">
-          <h3 className="text-xl font-semibold mb-6" data-testid="text-platform-breakdown">
-            Traffic by Platform
-          </h3>
-          <PieChart
-            data={platformBreakdown.map(p => ({
-              label: p.name,
-              value: p.percentage,
-              color: undefined
-            }))}
-            size={250}
-            showLegend
-          />
-        </Card>
+      <Suspense fallback={<div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6"><Skeleton className="h-96" /><Skeleton className="h-96" /></div>}>
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Card className="p-6">
+            <h3 className="text-xl font-semibold mb-6" data-testid="text-platform-breakdown">
+              Traffic by Platform
+            </h3>
+            <PieChart
+              data={platformBreakdown.map(p => ({
+                label: p.name,
+                value: p.percentage,
+                color: undefined
+              }))}
+              size={250}
+              showLegend
+            />
+          </Card>
 
-        <Card className="p-6">
-          <h3 className="text-xl font-semibold mb-6">Engagement Trend (7 Days) - With Narrative Annotations</h3>
-          <NarrativeLineChart
-            data={[
-              { label: 'Mon', value: 7.2 },
-              { label: 'Tue', value: 8.1 },
-              { label: 'Wed', value: 7.8 },
-              { label: 'Thu', value: 8.9 },
-              { label: 'Fri', value: 9.2 },
-              { label: 'Sat', value: 8.4 },
-              { label: 'Sun', value: 8.4 }
-            ]}
-            annotations={[
-              {
-                label: '🎯 Best Day',
-                description: 'Friday reached peak engagement at 9.2% - new content release timing was optimal',
-                dataIndex: 4,
-                type: 'peak'
-              },
-              {
-                label: '📊 Milestone',
-                description: 'Tuesday marked first day above 8% threshold this week',
-                dataIndex: 1,
-                type: 'milestone'
-              }
-            ]}
-            height={250}
-            animate
-          />
-        </Card>
-      </div>
+          <Card className="p-6">
+            <h3 className="text-xl font-semibold mb-6">Engagement Trend (7 Days) - With Narrative Annotations</h3>
+            <NarrativeLineChart
+              data={[
+                { label: 'Mon', value: 7.2 },
+                { label: 'Tue', value: 8.1 },
+                { label: 'Wed', value: 7.8 },
+                { label: 'Thu', value: 8.9 },
+                { label: 'Fri', value: 9.2 },
+                { label: 'Sat', value: 8.4 },
+                { label: 'Sun', value: 8.4 }
+              ]}
+              annotations={[
+                {
+                  label: '🎯 Best Day',
+                  description: 'Friday reached peak engagement at 9.2% - new content release timing was optimal',
+                  dataIndex: 4,
+                  type: 'peak'
+                },
+                {
+                  label: '📊 Milestone',
+                  description: 'Tuesday marked first day above 8% threshold this week',
+                  dataIndex: 1,
+                  type: 'milestone'
+                }
+              ]}
+              height={250}
+              animate
+            />
+          </Card>
+        </div>
+      </Suspense>
 
       {/* Goals & Achievements */}
       <div className="mt-8">
