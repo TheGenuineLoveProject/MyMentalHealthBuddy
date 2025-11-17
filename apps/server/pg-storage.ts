@@ -17,6 +17,7 @@ import {
   knowledgeSources,
   knowledgeChunks,
   aiUsageTracking,
+  searchAnalytics,
   type User,
   type InsertUser,
   type HealingMessage,
@@ -905,6 +906,59 @@ export class PgStorage implements IStorage {
         ? JSON.parse(user.preferences) 
         : (user.preferences as any || {})
     };
+  }
+
+  // ✅ 888...^ Enterprise Search Analytics (Database-Backed with Retry Logic)
+  async trackSearch(query: string, userId?: string): Promise<void> {
+    return retryWithBackoff(async () => {
+      const normalizedQuery = query.trim().toLowerCase();
+      
+      if (normalizedQuery.length === 0) {
+        return;
+      }
+
+      // UPSERT: Increment search_count if query exists, otherwise insert new record
+      await this.db.execute(sql`
+        INSERT INTO ${searchAnalytics} (query, search_count, last_searched_at, user_id)
+        VALUES (${normalizedQuery}, 1, NOW(), ${userId || null})
+        ON CONFLICT (query)
+        DO UPDATE SET
+          search_count = ${searchAnalytics.searchCount} + 1,
+          last_searched_at = NOW()
+      `);
+    }, 'trackSearch');
+  }
+
+  async getTrendingSearches(
+    limit: number = 10,
+    window: '7d' | '30d' | 'all' = '7d'
+  ): Promise<Array<{query: string, count: number}>> {
+    return retryWithBackoff(async () => {
+      // Calculate time window
+      let windowCondition = sql`1=1`; // Default: all time
+      
+      if (window === '7d') {
+        windowCondition = sql`${searchAnalytics.lastSearchedAt} >= NOW() - INTERVAL '7 days'`;
+      } else if (window === '30d') {
+        windowCondition = sql`${searchAnalytics.lastSearchedAt} >= NOW() - INTERVAL '30 days'`;
+      }
+
+      // Query trending searches with time window filter
+      const trending = await this.db
+        .select({
+          query: searchAnalytics.query,
+          count: searchAnalytics.searchCount,
+        })
+        .from(searchAnalytics)
+        .where(windowCondition)
+        .orderBy(
+          desc(searchAnalytics.searchCount),
+          desc(searchAnalytics.lastSearchedAt)
+        )
+        .limit(limit);
+
+      return trending;
+    }, 'getTrendingSearches');
   }
 
   async close(): Promise<void> {

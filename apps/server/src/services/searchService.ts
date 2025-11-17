@@ -3,25 +3,8 @@ import type { IStorage } from "../../storage.js";
 /**
  * Advanced Search Service with Full-Text Search & Relevance Scoring
  * Implements PostgreSQL full-text search with ranking, fuzzy matching, and autocomplete
+ * ✅ 888...^ Enterprise Database-Backed Search Analytics
  */
-
-// ✅ 888...^ Real-time Search Analytics Tracking
-// Map<query, frequency> - Tracks search queries for trending analysis
-const searchAnalytics = new Map<string, number>();
-const MAX_ANALYTICS_SIZE = 1000; // Limit to prevent memory bloat
-
-// Cleanup old entries when map gets too large
-function cleanupSearchAnalytics() {
-  if (searchAnalytics.size > MAX_ANALYTICS_SIZE) {
-    // Remove least popular 20% of entries
-    const entries = Array.from(searchAnalytics.entries())
-      .sort((a, b) => a[1] - b[1]); // Sort by frequency ascending
-    const toRemove = Math.floor(entries.length * 0.2);
-    for (let i = 0; i < toRemove; i++) {
-      searchAnalytics.delete(entries[i][0]);
-    }
-  }
-}
 
 export interface SearchOptions {
   query: string;
@@ -78,11 +61,13 @@ export class SearchService {
     const normalizedQuery = this.normalizeQuery(query);
     const results: SearchResult[] = [];
 
-    // Track search query for analytics (888...^ Enterprise Analytics)
+    // Track search query for analytics (888...^ Enterprise Database-Backed)
     const trimmedQuery = normalizedQuery.trim().toLowerCase();
     if (trimmedQuery.length > 0) {
-      searchAnalytics.set(trimmedQuery, (searchAnalytics.get(trimmedQuery) || 0) + 1);
-      cleanupSearchAnalytics();
+      // Async fire-and-forget - don't block search results
+      this.storage.trackSearch(trimmedQuery, userId || undefined).catch(() => {
+        // Silently fail - analytics should never break search functionality
+      });
     }
 
     // Search journals (private to user)
@@ -149,32 +134,38 @@ export class SearchService {
 
   /**
    * Get trending search queries
-   * ✅ 888...^ Real-time Analytics Integration
+   * ✅ 888...^ Enterprise Database-Backed Analytics (Last 7 Days)
    */
   async getTrending(limit: number = 10): Promise<string[]> {
-    // Return top searches by frequency (most recent 100 searches)
-    const trending = Array.from(searchAnalytics.entries())
-      .sort((a, b) => b[1] - a[1]) // Sort by frequency descending
-      .map(([query]) => query)
-      .slice(0, limit);
-    
-    // Fallback to popular topics if no analytics data yet
-    if (trending.length === 0) {
+    try {
+      // Get trending searches from database (default: last 7 days)
+      const trending = await this.storage.getTrendingSearches(limit, '7d');
+      
+      if (trending.length === 0) {
+        // Fallback to popular topics if no analytics data yet
+        return [
+          'anxiety management',
+          'mindfulness meditation',
+          'stress relief',
+          'sleep improvement',
+          'depression support',
+          'breathing exercises',
+          'cognitive behavioral therapy',
+          'emotional wellness',
+          'self-care routine',
+          'mental health resources'
+        ].slice(0, limit);
+      }
+      
+      return trending.map(t => t.query);
+    } catch (error) {
+      // Return fallback on error
       return [
         'anxiety management',
         'mindfulness meditation',
-        'stress relief',
-        'sleep improvement',
-        'depression support',
-        'breathing exercises',
-        'cognitive behavioral therapy',
-        'emotional wellness',
-        'self-care routine',
-        'mental health resources'
+        'stress relief'
       ].slice(0, limit);
     }
-    
-    return trending;
   }
 
   /**

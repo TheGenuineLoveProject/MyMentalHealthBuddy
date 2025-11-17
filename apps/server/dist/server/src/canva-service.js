@@ -1,3 +1,4 @@
+import crypto from "crypto";
 export class CanvaService {
     constructor() {
         this.apiBaseUrl = "https://api.canva.com/rest/v1";
@@ -17,16 +18,29 @@ export class CanvaService {
     isEnabled() {
         return !!(this.appId && this.appOrigin);
     }
-    getAuthorizationUrl(state) {
-        // Canva Apps SDK uses PKCE-based authentication
-        // This URL is primarily for Connect API (external integrations)
-        // For Apps SDK, authentication happens via @canva/user package in the frontend
+    /**
+     * Generate PKCE code verifier and challenge
+     * 888...^ Enterprise-Grade Security
+     */
+    generatePKCE() {
+        // Generate cryptographically secure random code_verifier (43-128 chars)
+        const codeVerifier = crypto.randomBytes(64).toString('base64url');
+        // Create code_challenge using SHA-256
+        const codeChallenge = crypto
+            .createHash('sha256')
+            .update(codeVerifier)
+            .digest('base64url');
+        return { codeVerifier, codeChallenge };
+    }
+    getAuthorizationUrl(state, codeChallenge) {
+        // Canva Apps SDK uses PKCE-based authentication (RFC 7636)
         const params = new URLSearchParams({
             client_id: this.appId,
             response_type: "code",
             scope: "design:content:read design:content:write design:meta:read asset:read asset:write folder:read",
             state: state,
-            // PKCE parameters will be added by frontend SDK
+            code_challenge: codeChallenge,
+            code_challenge_method: "S256", // SHA-256
         });
         return `https://www.canva.com/api/oauth/authorize?${params.toString()}`;
     }

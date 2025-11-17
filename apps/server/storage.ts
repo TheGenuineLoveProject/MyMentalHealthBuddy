@@ -121,6 +121,10 @@ export interface IStorage {
   createAiUsageTracking(usage: InsertAiUsageTracking): Promise<SelectAiUsageTracking>;
   getAiUsageByUserId(userId: string): Promise<SelectAiUsageTracking[]>;
   getAiUsageByDateRange(userId: string, startDate: Date, endDate: Date): Promise<SelectAiUsageTracking[]>;
+  
+  // Search Analytics (888...^ Enterprise Database-Backed)
+  trackSearch(query: string, userId?: string): Promise<void>;
+  getTrendingSearches(limit: number, window?: '7d'|'30d'|'all'): Promise<Array<{query: string, count: number}>>;
 }
 
 // MemStorage removed - now using PgStorage for production persistence

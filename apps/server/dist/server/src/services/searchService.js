@@ -1,3 +1,23 @@
+/**
+ * Advanced Search Service with Full-Text Search & Relevance Scoring
+ * Implements PostgreSQL full-text search with ranking, fuzzy matching, and autocomplete
+ */
+// ✅ 888...^ Real-time Search Analytics Tracking
+// Map<query, frequency> - Tracks search queries for trending analysis
+const searchAnalytics = new Map();
+const MAX_ANALYTICS_SIZE = 1000; // Limit to prevent memory bloat
+// Cleanup old entries when map gets too large
+function cleanupSearchAnalytics() {
+    if (searchAnalytics.size > MAX_ANALYTICS_SIZE) {
+        // Remove least popular 20% of entries
+        const entries = Array.from(searchAnalytics.entries())
+            .sort((a, b) => a[1] - b[1]); // Sort by frequency ascending
+        const toRemove = Math.floor(entries.length * 0.2);
+        for (let i = 0; i < toRemove; i++) {
+            searchAnalytics.delete(entries[i][0]);
+        }
+    }
+}
 export class SearchService {
     constructor(storage) {
         this.storage = storage;
@@ -18,6 +38,12 @@ export class SearchService {
         }
         const normalizedQuery = this.normalizeQuery(query);
         const results = [];
+        // Track search query for analytics (888...^ Enterprise Analytics)
+        const trimmedQuery = normalizedQuery.trim().toLowerCase();
+        if (trimmedQuery.length > 0) {
+            searchAnalytics.set(trimmedQuery, (searchAnalytics.get(trimmedQuery) || 0) + 1);
+            cleanupSearchAnalytics();
+        }
         // Search journals (private to user)
         if (types.includes('journal') && userId) {
             const journals = await this.searchJournals(normalizedQuery, userId);
@@ -70,22 +96,30 @@ export class SearchService {
     }
     /**
      * Get trending search queries
+     * ✅ 888...^ Real-time Analytics Integration
      */
     async getTrending(limit = 10) {
-        // TODO: Implement search analytics tracking
-        // For now, return popular mental health topics
-        return [
-            'anxiety management',
-            'mindfulness meditation',
-            'stress relief',
-            'sleep improvement',
-            'depression support',
-            'breathing exercises',
-            'cognitive behavioral therapy',
-            'emotional wellness',
-            'self-care routine',
-            'mental health resources'
-        ].slice(0, limit);
+        // Return top searches by frequency (most recent 100 searches)
+        const trending = Array.from(searchAnalytics.entries())
+            .sort((a, b) => b[1] - a[1]) // Sort by frequency descending
+            .map(([query]) => query)
+            .slice(0, limit);
+        // Fallback to popular topics if no analytics data yet
+        if (trending.length === 0) {
+            return [
+                'anxiety management',
+                'mindfulness meditation',
+                'stress relief',
+                'sleep improvement',
+                'depression support',
+                'breathing exercises',
+                'cognitive behavioral therapy',
+                'emotional wellness',
+                'self-care routine',
+                'mental health resources'
+            ].slice(0, limit);
+        }
+        return trending;
     }
     /**
      * Search journals with full-text search
