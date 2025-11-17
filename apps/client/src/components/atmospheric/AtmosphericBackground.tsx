@@ -107,7 +107,6 @@ export function AtmosphericBackground({
       aria-hidden="true"
       style={{ 
         contain: 'strict',
-        contentVisibility: 'auto',
       }}
     >
       {/* Base gradient layer */}

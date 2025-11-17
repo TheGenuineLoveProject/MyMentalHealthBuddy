@@ -119,10 +119,13 @@ export function DashboardPage() {
         <DecorativeWave position="top" scene="serenity" />
         
         <div 
-          className="max-w-7xl mx-auto p-6 relative z-10 flex items-center justify-center" 
+          className="max-w-7xl mx-auto p-6 relative z-10" 
           style={{ 
             minHeight: 'calc(100vh - 64px - 48px)',
             contain: 'layout strict',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           <UnauthenticatedBanner 

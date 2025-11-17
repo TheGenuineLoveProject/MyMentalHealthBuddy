@@ -781,6 +781,13 @@ select:focus-visible {
   min-height: 140px;
 }
 
+/* Authentication/Dashboard containers - prevent flex centering shifts */
+.max-w-7xl,
+.max-w-4xl,
+.max-w-6xl {
+  contain: layout; /* Isolate layout calculations */
+}
+
 /* Skeleton loaders - match final content dimensions */
 .skeleton {
   min-height: 1rem; /* Text skeleton */
