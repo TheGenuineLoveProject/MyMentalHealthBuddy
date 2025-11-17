@@ -75,6 +75,21 @@ export class PgStorage implements IStorage {
       query_timeout: 30000,           // Overall query timeout (30s limit)
     });
 
+    // 888...^ CRITICAL FIX: Handle connection pool errors gracefully
+    // This prevents server crashes when PostgreSQL terminates connections
+    this.pool.on('error', (err, client) => {
+      console.error('[Database Pool] Unexpected error on idle client:', err.message);
+      // Don't exit process - pool will handle reconnection automatically
+    });
+
+    // 888...^ CRITICAL FIX: Handle client connection errors
+    this.pool.on('connect', (client) => {
+      client.on('error', (err) => {
+        console.error('[Database Client] Connection error:', err.message);
+        // Client will be removed from pool automatically
+      });
+    });
+
     this.db = drizzle(this.pool);
   }
   
