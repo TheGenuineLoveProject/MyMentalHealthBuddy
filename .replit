@@ -1,7 +1,7 @@
 # 🌎 UNIVERSAL AUTO-HEAL + VITE DEPLOY CONFIG (2025)
 run = "bash scripts/heal.sh || npm run dev"
 entrypoint = "package.json"
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "postgresql-16"]
 
 [env]
 HOST = "0.0.0.0"
@@ -19,10 +19,6 @@ externalPort = 3000
 [[ports]]
 localPort = 24678
 externalPort = 3001
-
-[[ports]]
-localPort = 40009
-externalPort = 3002
 
 [agent]
 expertMode = true
