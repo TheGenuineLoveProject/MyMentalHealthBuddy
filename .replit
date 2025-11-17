@@ -20,10 +20,6 @@ externalPort = 3000
 localPort = 24678
 externalPort = 3001
 
-[[ports]]
-localPort = 46043
-externalPort = 3002
-
 [agent]
 expertMode = true
 
@@ -57,4 +53,4 @@ channel = "stable-25_05"
 [deployment]
 deploymentTarget = "autoscale"
 run = ["node", "apps/server/dist/server/src/index.js"]
-build = ["npm", "run", "build"]
+build = ["bash", "-c", "vite build --config apps/client/vite.config.js && tsc -p apps/server/tsconfig.json"]

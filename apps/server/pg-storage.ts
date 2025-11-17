@@ -50,6 +50,10 @@ import {
 } from "../shared/db-schema.js";
 import type { IStorage } from "./storage.js";
 
+// Import logger for structured logging (888...^ MIT-PhD Production Standard)
+// Import from sibling directory (pg-storage.ts and storage.ts are peers, logger is in src/lib)
+import { logger } from "./src/lib/logger.js";
+
 const { Pool } = pg;
 
 // 888...^ Enterprise-Grade Database Resilience
@@ -64,12 +68,13 @@ const RETRY_CONFIG = {
 /**
  * Exponential backoff retry wrapper for database operations
  * Handles transient connection errors (ECONNRESET, 57P01, etc.)
+ * 888...^ Uses structured logger for production observability
  */
 async function retryWithBackoff<T>(
   operation: () => Promise<T>,
   context: string
 ): Promise<T> {
-  let lastError: Error | null = null;
+  let lastError: any = null;
   let delay = RETRY_CONFIG.initialDelayMs;
 
   for (let attempt = 0; attempt <= RETRY_CONFIG.maxRetries; attempt++) {
@@ -87,11 +92,16 @@ async function retryWithBackoff<T>(
         error.code === 'ECONNREFUSED';
       
       if (!isTransient || attempt === RETRY_CONFIG.maxRetries) {
-        console.error(`[Database] ${context} failed after ${attempt + 1} attempts:`, error.message);
+        const errorMsg = `Database ${context} failed after ${attempt + 1} attempts`;
+        const errorObj = error instanceof Error ? error : new Error(error?.message || String(error));
+        logger.error(errorMsg, errorObj);
         throw error;
       }
       
-      console.warn(`[Database] ${context} attempt ${attempt + 1} failed, retrying in ${delay}ms...`, error.message);
+      logger.warn(`Database ${context} attempt ${attempt + 1} failed, retrying in ${delay}ms`, { 
+        errorMessage: error?.message || String(error), 
+        errorCode: error?.code 
+      });
       
       // Wait with exponential backoff
       await new Promise(resolve => setTimeout(resolve, delay));
@@ -128,14 +138,14 @@ export class PgStorage implements IStorage {
     // 888...^ CRITICAL FIX: Handle connection pool errors gracefully
     // This prevents server crashes when PostgreSQL terminates connections
     this.pool.on('error', (err, client) => {
-      console.error('[Database Pool] Unexpected error on idle client:', err.message);
+      logger.error('Database pool unexpected error on idle client', err instanceof Error ? err : new Error(String(err)));
       // Don't exit process - pool will handle reconnection automatically
     });
 
     // 888...^ CRITICAL FIX: Handle client connection errors
     this.pool.on('connect', (client) => {
       client.on('error', (err) => {
-        console.error('[Database Client] Connection error:', err.message);
+        logger.error('Database client connection error', err instanceof Error ? err : new Error(String(err)));
         // Client will be removed from pool automatically
       });
     });
@@ -166,138 +176,166 @@ export class PgStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await this.db
-      .insert(users)
-      .values(insertUser)
-      .returning();
-    
-    return this.mapUserToInterface(user);
+    return retryWithBackoff(async () => {
+      const [user] = await this.db
+        .insert(users)
+        .values(insertUser)
+        .returning();
+      
+      return this.mapUserToInterface(user);
+    }, 'createUser');
   }
 
   async getUserById(id: string): Promise<User | null> {
-    const [user] = await this.db
-      .select()
-      .from(users)
-      .where(eq(users.id, id))
-      .limit(1);
-    
-    return user ? this.mapUserToInterface(user) : null;
+    return retryWithBackoff(async () => {
+      const [user] = await this.db
+        .select()
+        .from(users)
+        .where(eq(users.id, id))
+        .limit(1);
+      
+      return user ? this.mapUserToInterface(user) : null;
+    }, 'getUserById');
   }
 
   async getUserByUsername(username: string): Promise<User | null> {
-    const [user] = await this.db
-      .select()
-      .from(users)
-      .where(eq(users.username, username))
-      .limit(1);
-    
-    return user ? this.mapUserToInterface(user) : null;
+    return retryWithBackoff(async () => {
+      const [user] = await this.db
+        .select()
+        .from(users)
+        .where(eq(users.username, username))
+        .limit(1);
+      
+      return user ? this.mapUserToInterface(user) : null;
+    }, 'getUserByUsername');
   }
 
   async updateUser(id: string, updates: Partial<User>): Promise<User | null> {
-    const [user] = await this.db
-      .update(users)
-      .set(updates)
-      .where(eq(users.id, id))
-      .returning();
-    
-    return user ? this.mapUserToInterface(user) : null;
+    return retryWithBackoff(async () => {
+      const [user] = await this.db
+        .update(users)
+        .set(updates)
+        .where(eq(users.id, id))
+        .returning();
+      
+      return user ? this.mapUserToInterface(user) : null;
+    }, 'updateUser');
   }
 
   async createHealingMessage(insertMessage: InsertHealingMessage): Promise<HealingMessage> {
-    const [message] = await this.db
-      .insert(healingMessages)
-      .values(insertMessage)
-      .returning();
-    
-    return message;
+    return retryWithBackoff(async () => {
+      const [message] = await this.db
+        .insert(healingMessages)
+        .values(insertMessage)
+        .returning();
+      
+      return message;
+    }, 'createHealingMessage');
   }
 
   async getHealingMessagesByUserId(userId: string): Promise<HealingMessage[]> {
-    const messages = await this.db
-      .select()
-      .from(healingMessages)
-      .where(eq(healingMessages.userId, userId))
-      .orderBy(healingMessages.timestamp);
-    
-    return messages;
+    return retryWithBackoff(async () => {
+      const messages = await this.db
+        .select()
+        .from(healingMessages)
+        .where(eq(healingMessages.userId, userId))
+        .orderBy(healingMessages.timestamp);
+      
+      return messages;
+    }, 'getHealingMessagesByUserId');
   }
 
   async getHealingMessagesBySessionId(sessionId: string): Promise<HealingMessage[]> {
-    const messages = await this.db
-      .select()
-      .from(healingMessages)
-      .where(eq(healingMessages.sessionId, sessionId))
-      .orderBy(healingMessages.timestamp);
-    
-    return messages;
+    return retryWithBackoff(async () => {
+      const messages = await this.db
+        .select()
+        .from(healingMessages)
+        .where(eq(healingMessages.sessionId, sessionId))
+        .orderBy(healingMessages.timestamp);
+      
+      return messages;
+    }, 'getHealingMessagesBySessionId');
   }
 
   async createJournal(insertJournal: InsertJournal): Promise<SelectJournal> {
-    const [journal] = await this.db
-      .insert(journals)
-      .values(insertJournal)
-      .returning();
-    
-    return journal;
+    return retryWithBackoff(async () => {
+      const [journal] = await this.db
+        .insert(journals)
+        .values(insertJournal)
+        .returning();
+      
+      return journal;
+    }, 'createJournal');
   }
 
   async getJournalsByUserId(userId: string): Promise<SelectJournal[]> {
-    const journalList = await this.db
-      .select()
-      .from(journals)
-      .where(eq(journals.userId, userId))
-      .orderBy(desc(journals.createdAt));
-    
-    return journalList;
+    return retryWithBackoff(async () => {
+      const journalList = await this.db
+        .select()
+        .from(journals)
+        .where(eq(journals.userId, userId))
+        .orderBy(desc(journals.createdAt));
+      
+      return journalList;
+    }, 'getJournalsByUserId');
   }
 
   async getJournalById(id: string): Promise<SelectJournal | null> {
-    const [journal] = await this.db
-      .select()
-      .from(journals)
-      .where(eq(journals.id, id))
-      .limit(1);
-    
-    return journal || null;
+    return retryWithBackoff(async () => {
+      const [journal] = await this.db
+        .select()
+        .from(journals)
+        .where(eq(journals.id, id))
+        .limit(1);
+      
+      return journal || null;
+    }, 'getJournalById');
   }
 
   async updateJournal(id: string, update: Partial<InsertJournal>): Promise<SelectJournal | null> {
-    const [journal] = await this.db
-      .update(journals)
-      .set({ ...update, updatedAt: new Date() })
-      .where(eq(journals.id, id))
-      .returning();
-    
-    return journal || null;
+    return retryWithBackoff(async () => {
+      const [journal] = await this.db
+        .update(journals)
+        .set({ ...update, updatedAt: new Date() })
+        .where(eq(journals.id, id))
+        .returning();
+      
+      return journal || null;
+    }, 'updateJournal');
   }
 
   async deleteJournal(id: string): Promise<boolean> {
-    const result = await this.db
-      .delete(journals)
-      .where(eq(journals.id, id))
-      .returning();
-    
-    return result.length > 0;
+    return retryWithBackoff(async () => {
+      const result = await this.db
+        .delete(journals)
+        .where(eq(journals.id, id))
+        .returning();
+      
+      return result.length > 0;
+    }, 'deleteJournal');
   }
 
   async createMoodEntry(insertEntry: InsertMoodEntry): Promise<SelectMoodEntry> {
-    const [entry] = await this.db
-      .insert(moodEntries)
-      .values(insertEntry)
-      .returning();
-    
-    return entry;
+    return retryWithBackoff(async () => {
+      const [entry] = await this.db
+        .insert(moodEntries)
+        .values(insertEntry)
+        .returning();
+      
+      return entry;
+    }, 'createMoodEntry');
   }
 
   async getMoodEntriesByUserId(userId: string): Promise<SelectMoodEntry[]> {
-    const entries = await this.db
-      .select()
-      .from(moodEntries)
-      .where(eq(moodEntries.userId, userId))
-      .orderBy(desc(moodEntries.createdAt));
-    
-    return entries;
+    return retryWithBackoff(async () => {
+      const entries = await this.db
+        .select()
+        .from(moodEntries)
+        .where(eq(moodEntries.userId, userId))
+        .orderBy(desc(moodEntries.createdAt));
+      
+      return entries;
+    }, 'getMoodEntriesByUserId');
   }
 
   async getMoodEntriesByUserIdAndDateRange(
@@ -305,449 +343,537 @@ export class PgStorage implements IStorage {
     startDate: Date,
     endDate: Date
   ): Promise<SelectMoodEntry[]> {
-    const entries = await this.db
-      .select()
-      .from(moodEntries)
-      .where(
-        and(
-          eq(moodEntries.userId, userId),
-          gte(moodEntries.createdAt, startDate),
-          lte(moodEntries.createdAt, endDate)
+    return retryWithBackoff(async () => {
+      const entries = await this.db
+        .select()
+        .from(moodEntries)
+        .where(
+          and(
+            eq(moodEntries.userId, userId),
+            gte(moodEntries.createdAt, startDate),
+            lte(moodEntries.createdAt, endDate)
+          )
         )
-      )
-      .orderBy(desc(moodEntries.createdAt));
-    
-    return entries;
+        .orderBy(desc(moodEntries.createdAt));
+      
+      return entries;
+    }, 'getMoodEntriesByUserIdAndDateRange');
   }
 
   async getCrisisResources(): Promise<SelectCrisisResource[]> {
-    const resources = await this.db
-      .select()
-      .from(crisisResources)
-      .where(eq(crisisResources.isActive, true))
-      .orderBy(desc(crisisResources.priority));
-    
-    return resources;
+    return retryWithBackoff(async () => {
+      const resources = await this.db
+        .select()
+        .from(crisisResources)
+        .where(eq(crisisResources.isActive, true))
+        .orderBy(desc(crisisResources.priority));
+      
+      return resources;
+    }, 'getCrisisResources');
   }
 
   async getCrisisResourcesByCountry(country: string): Promise<SelectCrisisResource[]> {
-    const resources = await this.db
-      .select()
-      .from(crisisResources)
-      .where(
-        and(
-          eq(crisisResources.isActive, true),
-          eq(crisisResources.country, country)
+    return retryWithBackoff(async () => {
+      const resources = await this.db
+        .select()
+        .from(crisisResources)
+        .where(
+          and(
+            eq(crisisResources.isActive, true),
+            eq(crisisResources.country, country)
+          )
         )
-      )
-      .orderBy(desc(crisisResources.priority));
-    
-    return resources;
+        .orderBy(desc(crisisResources.priority));
+      
+      return resources;
+    }, 'getCrisisResourcesByCountry');
   }
 
   async createBillingTransaction(insertTransaction: InsertBillingTransaction): Promise<SelectBillingTransaction> {
-    const [transaction] = await this.db
-      .insert(billingTransactions)
-      .values(insertTransaction)
-      .returning();
-    
-    return transaction;
+    return retryWithBackoff(async () => {
+      const [transaction] = await this.db
+        .insert(billingTransactions)
+        .values(insertTransaction)
+        .returning();
+      
+      return transaction;
+    }, 'createBillingTransaction');
   }
 
   async getBillingTransactionsByUserId(userId: string): Promise<SelectBillingTransaction[]> {
-    const transactions = await this.db
-      .select()
-      .from(billingTransactions)
-      .where(eq(billingTransactions.userId, userId))
-      .orderBy(desc(billingTransactions.createdAt));
-    
-    return transactions;
+    return retryWithBackoff(async () => {
+      const transactions = await this.db
+        .select()
+        .from(billingTransactions)
+        .where(eq(billingTransactions.userId, userId))
+        .orderBy(desc(billingTransactions.createdAt));
+      
+      return transactions;
+    }, 'getBillingTransactionsByUserId');
   }
 
   async getBillingTransactionById(id: string): Promise<SelectBillingTransaction | null> {
-    const [transaction] = await this.db
-      .select()
-      .from(billingTransactions)
-      .where(eq(billingTransactions.id, id))
-      .limit(1);
-    
-    return transaction || null;
+    return retryWithBackoff(async () => {
+      const [transaction] = await this.db
+        .select()
+        .from(billingTransactions)
+        .where(eq(billingTransactions.id, id))
+        .limit(1);
+      
+      return transaction || null;
+    }, 'getBillingTransactionById');
   }
 
   // Media Assets (AI Image Generation)
   async createMediaAsset(insertAsset: InsertMediaAsset): Promise<SelectMediaAsset> {
-    const [asset] = await this.db
-      .insert(mediaAssets)
-      .values(insertAsset)
-      .returning();
-    
-    return asset;
+    return retryWithBackoff(async () => {
+      const [asset] = await this.db
+        .insert(mediaAssets)
+        .values(insertAsset)
+        .returning();
+      
+      return asset;
+    }, 'createMediaAsset');
   }
 
   async getMediaAssetsByUserId(userId: string): Promise<SelectMediaAsset[]> {
-    const assets = await this.db
-      .select()
-      .from(mediaAssets)
-      .where(eq(mediaAssets.userId, userId))
-      .orderBy(desc(mediaAssets.createdAt));
-    
-    return assets;
+    return retryWithBackoff(async () => {
+      const assets = await this.db
+        .select()
+        .from(mediaAssets)
+        .where(eq(mediaAssets.userId, userId))
+        .orderBy(desc(mediaAssets.createdAt));
+      
+      return assets;
+    }, 'getMediaAssetsByUserId');
   }
 
   async getMediaAssetById(id: string): Promise<SelectMediaAsset | null> {
-    const [asset] = await this.db
-      .select()
-      .from(mediaAssets)
-      .where(eq(mediaAssets.id, id))
-      .limit(1);
-    
-    return asset || null;
+    return retryWithBackoff(async () => {
+      const [asset] = await this.db
+        .select()
+        .from(mediaAssets)
+        .where(eq(mediaAssets.id, id))
+        .limit(1);
+      
+      return asset || null;
+    }, 'getMediaAssetById');
   }
 
   async updateMediaAsset(id: string, updates: Partial<InsertMediaAsset>): Promise<SelectMediaAsset | null> {
-    const [asset] = await this.db
-      .update(mediaAssets)
-      .set(updates)
-      .where(eq(mediaAssets.id, id))
-      .returning();
-    
-    return asset || null;
+    return retryWithBackoff(async () => {
+      const [asset] = await this.db
+        .update(mediaAssets)
+        .set(updates)
+        .where(eq(mediaAssets.id, id))
+        .returning();
+      
+      return asset || null;
+    }, 'updateMediaAsset');
   }
 
   async deleteMediaAsset(id: string): Promise<boolean> {
-    const result = await this.db
-      .delete(mediaAssets)
-      .where(eq(mediaAssets.id, id))
-      .returning();
-    
-    return result.length > 0;
+    return retryWithBackoff(async () => {
+      const result = await this.db
+        .delete(mediaAssets)
+        .where(eq(mediaAssets.id, id))
+        .returning();
+      
+      return result.length > 0;
+    }, 'deleteMediaAsset');
   }
 
   // Social Media Accounts
   async createSocialAccount(insertAccount: InsertSocialAccount): Promise<SelectSocialAccount> {
-    const [account] = await this.db
-      .insert(socialAccounts)
-      .values(insertAccount)
-      .returning();
-    
-    return account;
+    return retryWithBackoff(async () => {
+      const [account] = await this.db
+        .insert(socialAccounts)
+        .values(insertAccount)
+        .returning();
+      
+      return account;
+    }, 'createSocialAccount');
   }
 
   async getSocialAccountsByUserId(userId: string): Promise<SelectSocialAccount[]> {
-    const accounts = await this.db
-      .select()
-      .from(socialAccounts)
-      .where(eq(socialAccounts.userId, userId))
-      .orderBy(desc(socialAccounts.createdAt));
-    
-    return accounts;
+    return retryWithBackoff(async () => {
+      const accounts = await this.db
+        .select()
+        .from(socialAccounts)
+        .where(eq(socialAccounts.userId, userId))
+        .orderBy(desc(socialAccounts.createdAt));
+      
+      return accounts;
+    }, 'getSocialAccountsByUserId');
   }
 
   async getSocialAccountById(id: string): Promise<SelectSocialAccount | null> {
-    const [account] = await this.db
-      .select()
-      .from(socialAccounts)
-      .where(eq(socialAccounts.id, id))
-      .limit(1);
-    
-    return account || null;
+    return retryWithBackoff(async () => {
+      const [account] = await this.db
+        .select()
+        .from(socialAccounts)
+        .where(eq(socialAccounts.id, id))
+        .limit(1);
+      
+      return account || null;
+    }, 'getSocialAccountById');
   }
 
   async updateSocialAccount(id: string, updates: Partial<InsertSocialAccount>): Promise<SelectSocialAccount | null> {
-    const [account] = await this.db
-      .update(socialAccounts)
-      .set(updates)
-      .where(eq(socialAccounts.id, id))
-      .returning();
-    
-    return account || null;
+    return retryWithBackoff(async () => {
+      const [account] = await this.db
+        .update(socialAccounts)
+        .set(updates)
+        .where(eq(socialAccounts.id, id))
+        .returning();
+      
+      return account || null;
+    }, 'updateSocialAccount');
   }
 
   async deleteSocialAccount(id: string): Promise<boolean> {
-    const result = await this.db
-      .delete(socialAccounts)
-      .where(eq(socialAccounts.id, id))
-      .returning();
-    
-    return result.length > 0;
+    return retryWithBackoff(async () => {
+      const result = await this.db
+        .delete(socialAccounts)
+        .where(eq(socialAccounts.id, id))
+        .returning();
+      
+      return result.length > 0;
+    }, 'deleteSocialAccount');
   }
 
   // Social Media Profiles
   async createSocialProfile(insertProfile: InsertSocialProfile): Promise<SelectSocialProfile> {
-    const [profile] = await this.db
-      .insert(socialProfiles)
-      .values(insertProfile)
-      .returning();
-    
-    return profile;
+    return retryWithBackoff(async () => {
+      const [profile] = await this.db
+        .insert(socialProfiles)
+        .values(insertProfile)
+        .returning();
+      
+      return profile;
+    }, 'createSocialProfile');
   }
 
   async getSocialProfilesByAccountId(accountId: string): Promise<SelectSocialProfile[]> {
-    const profiles = await this.db
-      .select()
-      .from(socialProfiles)
-      .where(eq(socialProfiles.accountId, accountId));
-    
-    return profiles;
+    return retryWithBackoff(async () => {
+      const profiles = await this.db
+        .select()
+        .from(socialProfiles)
+        .where(eq(socialProfiles.accountId, accountId));
+      
+      return profiles;
+    }, 'getSocialProfilesByAccountId');
   }
 
   async getSocialProfileById(id: string): Promise<SelectSocialProfile | null> {
-    const [profile] = await this.db
-      .select()
-      .from(socialProfiles)
-      .where(eq(socialProfiles.id, id))
-      .limit(1);
-    
-    return profile || null;
+    return retryWithBackoff(async () => {
+      const [profile] = await this.db
+        .select()
+        .from(socialProfiles)
+        .where(eq(socialProfiles.id, id))
+        .limit(1);
+      
+      return profile || null;
+    }, 'getSocialProfileById');
   }
 
   async updateSocialProfile(id: string, updates: Partial<InsertSocialProfile>): Promise<SelectSocialProfile | null> {
-    const [profile] = await this.db
-      .update(socialProfiles)
-      .set({ ...updates, lastUpdatedAt: new Date() })
-      .where(eq(socialProfiles.id, id))
-      .returning();
-    
-    return profile || null;
+    return retryWithBackoff(async () => {
+      const [profile] = await this.db
+        .update(socialProfiles)
+        .set({ ...updates, lastUpdatedAt: new Date() })
+        .where(eq(socialProfiles.id, id))
+        .returning();
+      
+      return profile || null;
+    }, 'updateSocialProfile');
   }
 
   // Social Post History
   async createSocialPost(insertPost: InsertSocialPostHistory): Promise<SelectSocialPostHistory> {
-    const [post] = await this.db
-      .insert(socialPostsHistory)
-      .values(insertPost)
-      .returning();
-    
-    return post;
+    return retryWithBackoff(async () => {
+      const [post] = await this.db
+        .insert(socialPostsHistory)
+        .values(insertPost)
+        .returning();
+      
+      return post;
+    }, 'createSocialPost');
   }
 
   async getSocialPostsByUserId(userId: string): Promise<SelectSocialPostHistory[]> {
-    const posts = await this.db
-      .select()
-      .from(socialPostsHistory)
-      .where(eq(socialPostsHistory.userId, userId))
-      .orderBy(desc(socialPostsHistory.publishedAt));
-    
-    return posts;
+    return retryWithBackoff(async () => {
+      const posts = await this.db
+        .select()
+        .from(socialPostsHistory)
+        .where(eq(socialPostsHistory.userId, userId))
+        .orderBy(desc(socialPostsHistory.publishedAt));
+      
+      return posts;
+    }, 'getSocialPostsByUserId');
   }
 
   async getSocialPostsByAccountId(accountId: string): Promise<SelectSocialPostHistory[]> {
-    const posts = await this.db
-      .select()
-      .from(socialPostsHistory)
-      .where(eq(socialPostsHistory.accountId, accountId))
-      .orderBy(desc(socialPostsHistory.publishedAt));
-    
-    return posts;
+    return retryWithBackoff(async () => {
+      const posts = await this.db
+        .select()
+        .from(socialPostsHistory)
+        .where(eq(socialPostsHistory.accountId, accountId))
+        .orderBy(desc(socialPostsHistory.publishedAt));
+      
+      return posts;
+    }, 'getSocialPostsByAccountId');
   }
 
   async getSocialPostById(id: string): Promise<SelectSocialPostHistory | null> {
-    const [post] = await this.db
-      .select()
-      .from(socialPostsHistory)
-      .where(eq(socialPostsHistory.id, id))
-      .limit(1);
-    
-    return post || null;
+    return retryWithBackoff(async () => {
+      const [post] = await this.db
+        .select()
+        .from(socialPostsHistory)
+        .where(eq(socialPostsHistory.id, id))
+        .limit(1);
+      
+      return post || null;
+    }, 'getSocialPostById');
   }
 
   async updateSocialPost(id: string, updates: Partial<InsertSocialPostHistory>): Promise<SelectSocialPostHistory | null> {
-    const [post] = await this.db
-      .update(socialPostsHistory)
-      .set(updates)
-      .where(eq(socialPostsHistory.id, id))
-      .returning();
-    
-    return post || null;
+    return retryWithBackoff(async () => {
+      const [post] = await this.db
+        .update(socialPostsHistory)
+        .set(updates)
+        .where(eq(socialPostsHistory.id, id))
+        .returning();
+      
+      return post || null;
+    }, 'updateSocialPost');
   }
 
   // AI Prompts
   async createAiPrompt(insertPrompt: InsertAiPrompt): Promise<SelectAiPrompt> {
-    const [prompt] = await this.db
-      .insert(aiPrompts)
-      .values(insertPrompt)
-      .returning();
-    
-    return prompt;
+    return retryWithBackoff(async () => {
+      const [prompt] = await this.db
+        .insert(aiPrompts)
+        .values(insertPrompt)
+        .returning();
+      
+      return prompt;
+    }, 'createAiPrompt');
   }
 
   async getAiPromptsByUserId(userId: string): Promise<SelectAiPrompt[]> {
-    const prompts = await this.db
-      .select()
-      .from(aiPrompts)
-      .where(eq(aiPrompts.userId, userId))
-      .orderBy(desc(aiPrompts.createdAt));
-    
-    return prompts;
+    return retryWithBackoff(async () => {
+      const prompts = await this.db
+        .select()
+        .from(aiPrompts)
+        .where(eq(aiPrompts.userId, userId))
+        .orderBy(desc(aiPrompts.createdAt));
+      
+      return prompts;
+    }, 'getAiPromptsByUserId');
   }
 
   async getAiPromptsByCategory(category: string): Promise<SelectAiPrompt[]> {
-    const prompts = await this.db
-      .select()
-      .from(aiPrompts)
-      .where(eq(aiPrompts.category, category))
-      .orderBy(desc(aiPrompts.usageCount));
-    
-    return prompts;
+    return retryWithBackoff(async () => {
+      const prompts = await this.db
+        .select()
+        .from(aiPrompts)
+        .where(eq(aiPrompts.category, category))
+        .orderBy(desc(aiPrompts.usageCount));
+      
+      return prompts;
+    }, 'getAiPromptsByCategory');
   }
 
   async getAiPromptById(id: string): Promise<SelectAiPrompt | null> {
-    const [prompt] = await this.db
-      .select()
-      .from(aiPrompts)
-      .where(eq(aiPrompts.id, id))
-      .limit(1);
-    
-    return prompt || null;
+    return retryWithBackoff(async () => {
+      const [prompt] = await this.db
+        .select()
+        .from(aiPrompts)
+        .where(eq(aiPrompts.id, id))
+        .limit(1);
+      
+      return prompt || null;
+    }, 'getAiPromptById');
   }
 
   async updateAiPrompt(id: string, updates: Partial<InsertAiPrompt>): Promise<SelectAiPrompt | null> {
-    const [prompt] = await this.db
-      .update(aiPrompts)
-      .set({ ...updates, updatedAt: new Date() })
-      .where(eq(aiPrompts.id, id))
-      .returning();
-    
-    return prompt || null;
+    return retryWithBackoff(async () => {
+      const [prompt] = await this.db
+        .update(aiPrompts)
+        .set({ ...updates, updatedAt: new Date() })
+        .where(eq(aiPrompts.id, id))
+        .returning();
+      
+      return prompt || null;
+    }, 'updateAiPrompt');
   }
 
   async deleteAiPrompt(id: string): Promise<boolean> {
-    const result = await this.db
-      .delete(aiPrompts)
-      .where(eq(aiPrompts.id, id))
-      .returning();
-    
-    return result.length > 0;
+    return retryWithBackoff(async () => {
+      const result = await this.db
+        .delete(aiPrompts)
+        .where(eq(aiPrompts.id, id))
+        .returning();
+      
+      return result.length > 0;
+    }, 'deleteAiPrompt');
   }
 
   // AI Runs
   async createAiRun(insertRun: InsertAiRun): Promise<SelectAiRun> {
-    const [run] = await this.db
-      .insert(aiRuns)
-      .values(insertRun)
-      .returning();
-    
-    return run;
+    return retryWithBackoff(async () => {
+      const [run] = await this.db
+        .insert(aiRuns)
+        .values(insertRun)
+        .returning();
+      
+      return run;
+    }, 'createAiRun');
   }
 
   async getAiRunsByUserId(userId: string): Promise<SelectAiRun[]> {
-    const runs = await this.db
-      .select()
-      .from(aiRuns)
-      .where(eq(aiRuns.userId, userId))
-      .orderBy(desc(aiRuns.createdAt));
-    
-    return runs;
+    return retryWithBackoff(async () => {
+      const runs = await this.db
+        .select()
+        .from(aiRuns)
+        .where(eq(aiRuns.userId, userId))
+        .orderBy(desc(aiRuns.createdAt));
+      
+      return runs;
+    }, 'getAiRunsByUserId');
   }
 
   async getAiRunById(id: string): Promise<SelectAiRun | null> {
-    const [run] = await this.db
-      .select()
-      .from(aiRuns)
-      .where(eq(aiRuns.id, id))
-      .limit(1);
-    
-    return run || null;
+    return retryWithBackoff(async () => {
+      const [run] = await this.db
+        .select()
+        .from(aiRuns)
+        .where(eq(aiRuns.id, id))
+        .limit(1);
+      
+      return run || null;
+    }, 'getAiRunById');
   }
 
   async updateAiRun(id: string, updates: Partial<InsertAiRun>): Promise<SelectAiRun | null> {
-    const [run] = await this.db
-      .update(aiRuns)
-      .set(updates)
-      .where(eq(aiRuns.id, id))
-      .returning();
-    
-    return run || null;
+    return retryWithBackoff(async () => {
+      const [run] = await this.db
+        .update(aiRuns)
+        .set(updates)
+        .where(eq(aiRuns.id, id))
+        .returning();
+      
+      return run || null;
+    }, 'updateAiRun');
   }
 
   // Knowledge Sources
   async createKnowledgeSource(insertSource: InsertKnowledgeSource): Promise<SelectKnowledgeSource> {
-    const [source] = await this.db
-      .insert(knowledgeSources)
-      .values(insertSource)
-      .returning();
-    
-    return source;
+    return retryWithBackoff(async () => {
+      const [source] = await this.db
+        .insert(knowledgeSources)
+        .values(insertSource)
+        .returning();
+      
+      return source;
+    }, 'createKnowledgeSource');
   }
 
   async getKnowledgeSourcesByUserId(userId: string): Promise<SelectKnowledgeSource[]> {
-    const sources = await this.db
-      .select()
-      .from(knowledgeSources)
-      .where(eq(knowledgeSources.userId, userId))
-      .orderBy(desc(knowledgeSources.createdAt));
-    
-    return sources;
+    return retryWithBackoff(async () => {
+      const sources = await this.db
+        .select()
+        .from(knowledgeSources)
+        .where(eq(knowledgeSources.userId, userId))
+        .orderBy(desc(knowledgeSources.createdAt));
+      
+      return sources;
+    }, 'getKnowledgeSourcesByUserId');
   }
 
   async getKnowledgeSourceById(id: string): Promise<SelectKnowledgeSource | null> {
-    const [source] = await this.db
-      .select()
-      .from(knowledgeSources)
-      .where(eq(knowledgeSources.id, id))
-      .limit(1);
-    
-    return source || null;
+    return retryWithBackoff(async () => {
+      const [source] = await this.db
+        .select()
+        .from(knowledgeSources)
+        .where(eq(knowledgeSources.id, id))
+        .limit(1);
+      
+      return source || null;
+    }, 'getKnowledgeSourceById');
   }
 
   async updateKnowledgeSource(id: string, updates: Partial<InsertKnowledgeSource>): Promise<SelectKnowledgeSource | null> {
-    const [source] = await this.db
-      .update(knowledgeSources)
-      .set({ ...updates, updatedAt: new Date() })
-      .where(eq(knowledgeSources.id, id))
-      .returning();
-    
-    return source || null;
+    return retryWithBackoff(async () => {
+      const [source] = await this.db
+        .update(knowledgeSources)
+        .set({ ...updates, updatedAt: new Date() })
+        .where(eq(knowledgeSources.id, id))
+        .returning();
+      
+      return source || null;
+    }, 'updateKnowledgeSource');
   }
 
   // Knowledge Chunks
   async createKnowledgeChunk(insertChunk: InsertKnowledgeChunk): Promise<SelectKnowledgeChunk> {
-    const [chunk] = await this.db
-      .insert(knowledgeChunks)
-      .values(insertChunk)
-      .returning();
-    
-    return chunk;
+    return retryWithBackoff(async () => {
+      const [chunk] = await this.db
+        .insert(knowledgeChunks)
+        .values(insertChunk)
+        .returning();
+      
+      return chunk;
+    }, 'createKnowledgeChunk');
   }
 
   async getKnowledgeChunksBySourceId(sourceId: string): Promise<SelectKnowledgeChunk[]> {
-    const chunks = await this.db
-      .select()
-      .from(knowledgeChunks)
-      .where(eq(knowledgeChunks.sourceId, sourceId))
-      .orderBy(knowledgeChunks.chunkIndex);
-    
-    return chunks;
+    return retryWithBackoff(async () => {
+      const chunks = await this.db
+        .select()
+        .from(knowledgeChunks)
+        .where(eq(knowledgeChunks.sourceId, sourceId))
+        .orderBy(knowledgeChunks.chunkIndex);
+      
+      return chunks;
+    }, 'getKnowledgeChunksBySourceId');
   }
 
   async getKnowledgeChunkById(id: string): Promise<SelectKnowledgeChunk | null> {
-    const [chunk] = await this.db
-      .select()
-      .from(knowledgeChunks)
-      .where(eq(knowledgeChunks.id, id))
-      .limit(1);
-    
-    return chunk || null;
+    return retryWithBackoff(async () => {
+      const [chunk] = await this.db
+        .select()
+        .from(knowledgeChunks)
+        .where(eq(knowledgeChunks.id, id))
+        .limit(1);
+      
+      return chunk || null;
+    }, 'getKnowledgeChunkById');
   }
 
   // AI Usage Tracking
   async createAiUsageTracking(insertUsage: InsertAiUsageTracking): Promise<SelectAiUsageTracking> {
-    const [usage] = await this.db
-      .insert(aiUsageTracking)
-      .values(insertUsage)
-      .returning();
-    
-    return usage;
+    return retryWithBackoff(async () => {
+      const [usage] = await this.db
+        .insert(aiUsageTracking)
+        .values(insertUsage)
+        .returning();
+      
+      return usage;
+    }, 'createAiUsageTracking');
   }
 
   async getAiUsageByUserId(userId: string): Promise<SelectAiUsageTracking[]> {
-    const usage = await this.db
-      .select()
-      .from(aiUsageTracking)
-      .where(eq(aiUsageTracking.userId, userId))
-      .orderBy(desc(aiUsageTracking.date));
-    
-    return usage;
+    return retryWithBackoff(async () => {
+      const usage = await this.db
+        .select()
+        .from(aiUsageTracking)
+        .where(eq(aiUsageTracking.userId, userId))
+        .orderBy(desc(aiUsageTracking.date));
+      
+      return usage;
+    }, 'getAiUsageByUserId');
   }
 
   async getAiUsageByDateRange(
@@ -755,19 +881,21 @@ export class PgStorage implements IStorage {
     startDate: Date,
     endDate: Date
   ): Promise<SelectAiUsageTracking[]> {
-    const usage = await this.db
-      .select()
-      .from(aiUsageTracking)
-      .where(
-        and(
-          eq(aiUsageTracking.userId, userId),
-          gte(aiUsageTracking.date, startDate),
-          lte(aiUsageTracking.date, endDate)
+    return retryWithBackoff(async () => {
+      const usage = await this.db
+        .select()
+        .from(aiUsageTracking)
+        .where(
+          and(
+            eq(aiUsageTracking.userId, userId),
+            gte(aiUsageTracking.date, startDate),
+            lte(aiUsageTracking.date, endDate)
+          )
         )
-      )
-      .orderBy(desc(aiUsageTracking.date));
-    
-    return usage;
+        .orderBy(desc(aiUsageTracking.date));
+      
+      return usage;
+    }, 'getAiUsageByDateRange');
   }
 
   private mapUserToInterface(user: typeof users.$inferSelect): User {
