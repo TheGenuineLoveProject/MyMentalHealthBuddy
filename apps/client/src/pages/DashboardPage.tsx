@@ -142,7 +142,14 @@ export function DashboardPage() {
       <AtmosphericBackground scene="serenity" intensity="moderate" showParticles={true} />
       <DecorativeWave position="top" scene="serenity" />
       
-      <div className="max-w-7xl mx-auto p-6 particles-bg animate-fade-in relative z-10">
+      <div 
+        className="max-w-7xl mx-auto p-6 particles-bg animate-fade-in relative z-10"
+        style={{
+          minHeight: 'calc(100vh - 64px)',
+          contain: 'layout',
+          willChange: 'auto'
+        }}
+      >
         {/* Welcome Header - Fixed height to prevent CLS */}
       <div className="mb-8 h-[120px] animate-slide-up" style={{ contain: 'layout' }}>
         <h1 className="heading-lg mb-2 text-gray-900 leading-tight text-shadow-soft" data-testid="dashboard-title" style={{ height: '48px', minHeight: '48px', maxHeight: '48px', overflow: 'hidden' }}>

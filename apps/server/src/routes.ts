@@ -141,6 +141,11 @@ export function registerRoutes(app: Express) {
     })
   );
 
+  // HEAD support for route prefetching
+  app.head("/api/chat", (req, res) => {
+    res.status(200).end();
+  });
+
   // Chat history endpoint
   app.get("/api/chat/history/:sessionId", 
     asyncHandler(async (req, res) => {
