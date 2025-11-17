@@ -70,6 +70,7 @@ export function LoginPage() {
               {...register("username")}
               type="text"
               data-testid="input-username"
+              autoComplete="username"
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white transition-colors"
               placeholder="Enter your username"
               disabled={loginMutation.isPending}
@@ -89,6 +90,7 @@ export function LoginPage() {
               {...register("password")}
               type="password"
               data-testid="input-password"
+              autoComplete="current-password"
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-white transition-colors"
               placeholder="Enter your password"
               disabled={loginMutation.isPending}

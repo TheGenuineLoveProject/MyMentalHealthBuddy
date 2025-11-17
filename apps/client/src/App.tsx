@@ -84,6 +84,11 @@ function AppContent() {
                   <SignupPage />
                 </PageErrorBoundary>
               </Route>
+              <Route path="/dashboard">
+                <PageErrorBoundary pageName="Dashboard">
+                  <DashboardPage />
+                </PageErrorBoundary>
+              </Route>
               <Route path="/">
                 <PageErrorBoundary pageName="Dashboard">
                   <DashboardPage />
