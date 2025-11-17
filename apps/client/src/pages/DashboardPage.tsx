@@ -59,6 +59,9 @@ export function DashboardPage() {
     (journalsError as HttpError)?.status === 401 || 
     (analyticsError as HttpError)?.status === 401;
 
+  // Check if we're still determining auth state (queries pending and no errors yet)
+  const isCheckingAuth = (moodsLoading || journalsLoading || analyticsLoading) && !isUnauthorized && !moods.length && !journals.length;
+
   // Calculate recent activity
   const recentMoods = moods.slice(0, 3);
   const recentJournals = journals.slice(0, 3);
@@ -111,6 +114,29 @@ export function DashboardPage() {
     }
   ];
 
+  // Show loading state while checking auth to prevent layout shift
+  if (isCheckingAuth) {
+    return (
+      <>
+        <AtmosphericBackground scene="serenity" intensity="moderate" showParticles={true} />
+        <DecorativeWave position="top" scene="serenity" />
+        
+        <div 
+          className="max-w-7xl mx-auto p-6 relative z-10" 
+          style={{ 
+            minHeight: 'calc(100vh - 64px)',
+            contain: 'layout strict',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <SkeletonDashboard />
+        </div>
+      </>
+    );
+  }
+
   // Show authentication banner for unauthenticated users
   if (isUnauthorized) {
     return (
@@ -121,7 +147,7 @@ export function DashboardPage() {
         <div 
           className="max-w-7xl mx-auto p-6 relative z-10" 
           style={{ 
-            minHeight: 'calc(100vh - 64px - 48px)',
+            minHeight: 'calc(100vh - 64px)',
             contain: 'layout strict',
             display: 'flex',
             alignItems: 'center',
