@@ -204,13 +204,34 @@ async function startServer() {
     return;
   }
   
-  console.log('🚀 Starting server...');
+  console.log('🚀 Building and starting server in PRODUCTION mode...');
   
-  // Start the backend server (Express on port 5000)
-  state.serverProcess = spawn('npm', ['--prefix', 'apps/server', 'run', 'dev'], {
+  // Step 1: Build the application (client + server)
+  console.log('📦 Running production build...');
+  const buildProcess = spawn('npm', ['run', 'build'], {
+    stdio: 'inherit',
+    shell: true
+  });
+  
+  // Wait for build to complete
+  await new Promise((resolve, reject) => {
+    buildProcess.on('close', (code) => {
+      if (code === 0) {
+        console.log('✅ Production build complete');
+        resolve();
+      } else {
+        console.error(`❌ Build failed with code ${code}`);
+        reject(new Error(`Build failed with code ${code}`));
+      }
+    });
+  });
+  
+  // Step 2: Start the backend server (Express on port 5000) in PRODUCTION mode
+  console.log('🚀 Starting production server...');
+  state.serverProcess = spawn('npm', ['run', 'start'], {
     stdio: 'inherit',
     shell: true,
-    env: { ...process.env, SERVER_PORT: '5000' }
+    env: { ...process.env, NODE_ENV: 'production', PORT: '5000' }
   });
   
   state.serverProcess.on('error', (error) => {
@@ -225,7 +246,7 @@ async function startServer() {
   
   // Wait for server to start
   await new Promise(resolve => setTimeout(resolve, 8000));
-  console.log('✅ Server started');
+  console.log('✅ Production server started');
 }
 
 /**

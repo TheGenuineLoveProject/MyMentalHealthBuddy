@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/node-postgres";
-import { eq, and, gte, lte, desc } from "drizzle-orm";
+import { eq, and, gte, lte, desc, sql } from "drizzle-orm";
 import pg from "pg";
-import { users, healingMessages, journals, moodEntries, crisisResources, billingTransactions, mediaAssets, socialAccounts, socialProfiles, socialPostsHistory, aiPrompts, aiRuns, knowledgeSources, knowledgeChunks, aiUsageTracking, } from "../shared/db-schema.js";
+import { users, healingMessages, journals, moodEntries, crisisResources, billingTransactions, mediaAssets, socialAccounts, socialProfiles, socialPostsHistory, aiPrompts, aiRuns, knowledgeSources, knowledgeChunks, aiUsageTracking, searchAnalytics, } from "../shared/db-schema.js";
 // Import logger for structured logging (888...^ MIT-PhD Production Standard)
 // Import from sibling directory (pg-storage.ts and storage.ts are peers, logger is in src/lib)
 import { logger } from "./src/lib/logger.js";
@@ -687,6 +687,47 @@ export class PgStorage {
                 ? JSON.parse(user.preferences)
                 : (user.preferences || {})
         };
+    }
+    // ✅ 888...^ Enterprise Search Analytics (Database-Backed with Retry Logic)
+    async trackSearch(query, userId) {
+        return retryWithBackoff(async () => {
+            const normalizedQuery = query.trim().toLowerCase();
+            if (normalizedQuery.length === 0) {
+                return;
+            }
+            // UPSERT: Increment search_count if query exists, otherwise insert new record
+            await this.db.execute(sql `
+        INSERT INTO ${searchAnalytics} (query, search_count, last_searched_at, user_id)
+        VALUES (${normalizedQuery}, 1, NOW(), ${userId || null})
+        ON CONFLICT (query)
+        DO UPDATE SET
+          search_count = ${searchAnalytics.searchCount} + 1,
+          last_searched_at = NOW()
+      `);
+        }, 'trackSearch');
+    }
+    async getTrendingSearches(limit = 10, window = '7d') {
+        return retryWithBackoff(async () => {
+            // Calculate time window
+            let windowCondition = sql `1=1`; // Default: all time
+            if (window === '7d') {
+                windowCondition = sql `${searchAnalytics.lastSearchedAt} >= NOW() - INTERVAL '7 days'`;
+            }
+            else if (window === '30d') {
+                windowCondition = sql `${searchAnalytics.lastSearchedAt} >= NOW() - INTERVAL '30 days'`;
+            }
+            // Query trending searches with time window filter
+            const trending = await this.db
+                .select({
+                query: searchAnalytics.query,
+                count: searchAnalytics.searchCount,
+            })
+                .from(searchAnalytics)
+                .where(windowCondition)
+                .orderBy(desc(searchAnalytics.searchCount), desc(searchAnalytics.lastSearchedAt))
+                .limit(limit);
+            return trending;
+        }, 'getTrendingSearches');
     }
     async close() {
         await this.pool.end();

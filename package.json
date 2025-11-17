@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bash -c 'echo \"🔨 Initial build...\" && vite build --config apps/client/vite.config.js && echo \"✅ Build complete! Starting server...\" && vite build --watch --config apps/client/vite.config.js & SERVER_PORT=5000 npm --prefix apps/server run dev'",
+    "dev": "bash -c 'echo \"🔨 Building client...\" && vite build --config apps/client/vite.config.js && echo \"✅ Client built! Starting server...\" && SERVER_PORT=5000 npm --prefix apps/server run dev'",
     "build": "vite build --config apps/client/vite.config.js && tsc -p apps/server/tsconfig.json",
-    "start": "NODE_ENV=production node apps/server/dist/server/src/index.js",
+    "start": "cd apps/server && NODE_ENV=production PORT=5000 node dist/index.js",
     "dev:server": "cd apps/server && npm run dev",
     "dev:client": "vite build --watch --config apps/client/vite.config.js",
     "dev:auto": "node automation/dev-server.mjs",

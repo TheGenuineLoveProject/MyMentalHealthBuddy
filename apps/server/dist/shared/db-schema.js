@@ -407,6 +407,16 @@ export const aiUsageTracking = pgTable("ai_usage_tracking", {
     avgResponseTime: integer("avg_response_time"), // milliseconds
     metadata: jsonb("metadata").default({}),
 });
+// 888...^ Enterprise Search Analytics (Database-Backed)
+export const searchAnalytics = pgTable("search_analytics", {
+    id: varchar("id").primaryKey().default(sql `gen_random_uuid()`),
+    query: varchar("query", { length: 500 }).notNull().unique(), // Normalized query (trimmed, lowercase)
+    searchCount: integer("search_count").notNull().default(1),
+    lastSearchedAt: timestamp("last_searched_at").notNull().defaultNow(),
+    userId: varchar("user_id").references(() => users.id), // Optional - track per-user or global
+    context: jsonb("context").default({}), // Extensible metadata (IP hash, user agent, etc.)
+    createdAt: timestamp("created_at").notNull().defaultNow(),
+});
 export const insertUserSchema = z.object({
     username: z.string().min(3, "Username must be at least 3 characters"),
     email: z.string().email().nullable().optional(),
@@ -687,4 +697,10 @@ export const insertAiUsageTrackingSchema = z.object({
     failureCount: z.number().optional().default(0),
     avgResponseTime: z.number().nullable().optional(),
     metadata: z.any().optional()
+});
+export const insertSearchAnalyticsSchema = z.object({
+    query: z.string().min(1).max(500),
+    searchCount: z.number().optional().default(1),
+    userId: z.string().optional(),
+    context: z.any().optional()
 });
