@@ -9,7 +9,7 @@ const envSchema = z.object({
     SENTRY_DSN: z.string().url().optional(),
     STRIPE_SECRET_KEY: z.string().optional(),
     CANVA_CLIENT_ID: z.string().optional(),
-    CANVA_CLIENT_SECRET: z.string().optional(),
+    CANVA_APP_ORIGIN: z.string().optional(),
 }).refine((env) => {
     // In production, both SESSION_SECRET and DATABASE_URL are mandatory
     if (env.NODE_ENV === "production") {

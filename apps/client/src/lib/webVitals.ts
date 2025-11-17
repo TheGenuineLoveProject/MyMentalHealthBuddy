@@ -108,15 +108,47 @@ function handleMetric(metric: Metric) {
 
 /**
  * Send metrics to analytics service
+ * ✅ 888...^ Enterprise Analytics Integration
  */
 function sendToAnalytics(report: WebVitalsReport) {
-  // TODO: Integrate with your analytics service
-  // Example: Google Analytics
-  // window.gtag?.('event', report.name, {
-  //   value: Math.round(report.value),
-  //   metric_rating: report.rating,
-  //   metric_delta: Math.round(report.delta),
-  // });
+  // Send to Sentry Performance Monitoring (already configured)
+  if (typeof window !== 'undefined' && (window as any).Sentry) {
+    const Sentry = (window as any).Sentry;
+    Sentry.metrics?.increment('web_vitals.' + report.name.toLowerCase(), 1, {
+      tags: {
+        rating: report.rating,
+        page: window.location.pathname,
+      },
+    });
+    
+    // Track metric value as measurement
+    Sentry.metrics?.distribution('web_vitals.value', report.value, {
+      tags: {
+        metric: report.name,
+        rating: report.rating,
+      },
+      unit: 'millisecond',
+    });
+  }
+  
+  // Also send to backend for centralized tracking
+  try {
+    fetch('/api/performance', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        metrics: { [report.name]: report },
+        page: window.location.pathname,
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+      }),
+      credentials: 'same-origin',
+    }).catch(() => {
+      // Silently fail - analytics should never break UX
+    });
+  } catch {
+    // Silently fail
+  }
   
   console.log('[Analytics] Web Vitals:', report);
 }

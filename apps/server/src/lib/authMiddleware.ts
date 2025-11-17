@@ -11,6 +11,9 @@ declare module 'express-session' {
     userId?: string;
     isAdmin?: boolean;
     id?: string;
+    // Canva PKCE OAuth (888...^ Enterprise Security)
+    canvaCodeVerifier?: string;
+    canvaState?: string;
   }
 }
 

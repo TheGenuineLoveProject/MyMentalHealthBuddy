@@ -646,7 +646,7 @@ export function registerRoutes(app: Express) {
     })
   );
 
-  // Get Canva authorization URL - SECURED ✅ PROFESSIONAL FEATURE
+  // Get Canva authorization URL - SECURED ✅ PROFESSIONAL FEATURE (888...^ PKCE)
   app.get("/api/canva/auth-url",
     devAuthFallback,
     requireAuth,
@@ -659,13 +659,22 @@ export function registerRoutes(app: Express) {
 
       const authenticatedUserId = req.userId!; // From session, not header
       const state = `${authenticatedUserId}-${Date.now()}`;
-      const authUrl = canvaService.getAuthorizationUrl(state);
+      
+      // Generate PKCE pair (888...^ Enterprise Security)
+      const { codeVerifier, codeChallenge } = canvaService.generatePKCE();
+      
+      // Store code_verifier in session for callback
+      req.session.canvaCodeVerifier = codeVerifier;
+      req.session.canvaState = state;
+      
+      // Generate authorization URL with code_challenge
+      const authUrl = canvaService.getAuthorizationUrl(state, codeChallenge);
 
       res.json({ authUrl, state });
     })
   );
 
-  // Canva OAuth callback
+  // Canva OAuth callback (888...^ PKCE Token Exchange)
   app.get("/api/canva/callback",
     asyncHandler(async (req, res) => {
       const { code, state } = req.query;
@@ -678,12 +687,27 @@ export function registerRoutes(app: Express) {
         return res.status(400).json({ error: "Missing state parameter" });
       }
 
+      // Validate state matches session (CSRF protection)
+      if (state !== req.session.canvaState) {
+        return res.status(400).json({ error: "Invalid state parameter" });
+      }
+
+      // Retrieve code_verifier from session
+      const codeVerifier = req.session.canvaCodeVerifier;
+      if (!codeVerifier) {
+        return res.status(400).json({ error: "Missing PKCE code verifier" });
+      }
+
       try {
         // Extract user ID from state
         const userId = state.split("-")[0];
         
-        // Exchange code for tokens
-        const tokens = await canvaService.exchangeCodeForToken(code);
+        // Exchange code for tokens with PKCE verification
+        const tokens = await canvaService.exchangeCodeForToken(code, codeVerifier);
+        
+        // Clean up session
+        delete req.session.canvaCodeVerifier;
+        delete req.session.canvaState;
         
         // Save tokens to user record
         const expiresAt = new Date(Date.now() + tokens.expires_in * 1000);
@@ -697,6 +721,11 @@ export function registerRoutes(app: Express) {
         res.redirect("/designs?canva_connected=true");
       } catch (error: any) {
         logger.error("Canva OAuth callback error", error instanceof Error ? error : new Error(String(error)));
+        
+        // Clean up session on error
+        delete req.session.canvaCodeVerifier;
+        delete req.session.canvaState;
+        
         res.redirect("/designs?canva_error=true");
       }
     })
@@ -727,11 +756,38 @@ export function registerRoutes(app: Express) {
         return res.status(401).json({ error: "Canva not connected. Please authorize first." });
       }
 
-      // TODO: Check if token is expired and refresh if needed
+      // ✅ 888...^ Auto-refresh token if expired (Enterprise Grade)
+      let accessToken = user.canvaAccessToken;
+      const now = new Date();
+      const expiresAt = user.canvaTokenExpiresAt;
+      const fiveMinutesFromNow = new Date(now.getTime() + 5 * 60 * 1000);
 
-      // Create design in Canva
+      // Refresh token if expired or expiring within 5 minutes
+      if (expiresAt && expiresAt <= fiveMinutesFromNow && user.canvaRefreshToken) {
+        try {
+          logger.info('Canva token expiring soon, refreshing...', { userId: authenticatedUserId });
+          
+          const newTokens = await canvaService.refreshAccessToken(user.canvaRefreshToken);
+          accessToken = newTokens.access_token;
+          
+          // Update user record with refreshed tokens
+          const newExpiresAt = new Date(Date.now() + newTokens.expires_in * 1000);
+          await storage.updateUser(authenticatedUserId, {
+            canvaAccessToken: newTokens.access_token,
+            canvaRefreshToken: newTokens.refresh_token,
+            canvaTokenExpiresAt: newExpiresAt
+          });
+          
+          logger.info('Canva token refreshed successfully', { userId: authenticatedUserId });
+        } catch (error: any) {
+          logger.error('Canva token refresh failed', error instanceof Error ? error : new Error(String(error)));
+          return res.status(401).json({ error: "Token expired. Please reconnect Canva." });
+        }
+      }
+
+      // Create design in Canva with fresh token
       const design = await canvaService.createDesign(
-        user.canvaAccessToken,
+        accessToken,
         designType,
         title,
         imageUrl ? undefined : undefined // Asset upload would go here

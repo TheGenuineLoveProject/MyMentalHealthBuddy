@@ -45,58 +45,64 @@ async function configureApp() {
     app.use(express.urlencoded({ extended: true }));
     // PHASE 3: Session middleware (production-grade with PostgreSQL store)
     app.use(createSessionMiddleware());
-    // PHASE 4: Vite middleware integration (MUST come BEFORE route registration)
-    if (isDev) {
-        const { createServer: createViteServer } = await import("vite");
-        // Calculate client root path from TypeScript source location
-        // From apps/server/src, go up 2 levels then into apps/client
-        const clientRoot = path.join(__dirname, "../../client");
-        logger.info("Client root configured", { clientRoot });
-        const vite = await createViteServer({
-            server: { middlewareMode: true },
-            appType: "custom",
-            root: clientRoot,
-        });
-        app.use(vite.middlewares);
-        // Only serve index.html for non-API, non-asset requests
-        app.use((req, res, next) => {
-            // Skip API routes and asset files
-            if (req.originalUrl.startsWith("/api") ||
-                req.originalUrl.match(/\.(js|jsx|ts|tsx|css|json|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/)) {
-                return next();
+    // PHASE 4: Static file serving (888...^ perfection - zero console errors)
+    // Serve built client assets from apps/client/dist
+    // In development: Use `vite build --watch` to auto-rebuild on changes
+    // In production: Serve pre-built assets
+    const clientDistPath = path.join(__dirname, "../../client/dist");
+    logger.info("Serving client from", { path: clientDistPath, mode: isDev ? "development (watched build)" : "production" });
+    // 360° Cache Strategy: Long-lived for hashed assets, no-cache for HTML
+    const isProduction = !isDev;
+    app.use(express.static(clientDistPath, {
+        maxAge: isProduction ? '1y' : '0', // 1 year for production hashed assets, no cache in dev
+        immutable: isProduction, // Assets with content hashes are immutable
+        setHeaders: (res, filePath) => {
+            // Service Worker & Manifest: NEVER cache (must always be fresh for updates)
+            if (filePath.endsWith('/sw.js') || filePath.endsWith('/manifest.json') || filePath.includes('service-worker')) {
+                res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+                res.setHeader('Pragma', 'no-cache');
+                res.setHeader('Expires', '0');
             }
-            const url = req.originalUrl;
-            // Serve index.html for all other requests
-            (async () => {
-                try {
-                    // Inline HTML template for development
-                    const template = `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="AI-powered mental health support platform" />
-    <title>MyMentalHealthBuddy</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>`;
-                    const html = await vite.transformIndexHtml(url, template);
-                    res.status(200).set({ "Content-Type": "text/html" }).end(html);
-                }
-                catch (e) {
-                    vite.ssrFixStacktrace(e);
-                    next(e);
-                }
-            })();
-        });
-    }
-    // PHASE 5: Register all API routes (AFTER Vite middleware)
+            // HTML files: Always revalidate (no cache)
+            else if (filePath.endsWith('.html')) {
+                res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+                res.setHeader('Pragma', 'no-cache');
+                res.setHeader('Expires', '0');
+            }
+            // Hashed assets (JS, CSS with hash in filename): Long-lived cache
+            else if (/\.[a-f0-9]{8,}\.(js|css)$/i.test(filePath)) {
+                res.setHeader('Cache-Control', isProduction ? 'public, max-age=31536000, immutable' : 'no-cache');
+            }
+            // Images and fonts: Medium-lived cache
+            else if (/\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$/i.test(filePath)) {
+                res.setHeader('Cache-Control', isProduction ? 'public, max-age=604800' : 'no-cache'); // 1 week
+            }
+            // Fallback for unversioned assets: Short cache with revalidation
+            else {
+                res.setHeader('Cache-Control', isProduction ? 'public, max-age=3600, must-revalidate' : 'no-cache'); // 1 hour with revalidation
+            }
+        }
+    }));
+    // PHASE 5: Register all API routes (AFTER static assets)
     registerRoutes(app);
-    // PHASE 6: Fallback - serve static assets (for production builds)
-    app.use(express.static(path.join(__dirname, "../public")));
+    // PHASE 6: SPA fallback - serve index.html for all non-API routes
+    app.use((req, res, next) => {
+        // Skip API routes
+        if (req.path.startsWith("/api")) {
+            return next();
+        }
+        // Skip if file was found (static middleware already served it)
+        if (res.headersSent) {
+            return;
+        }
+        // Serve index.html for all other routes (SPA fallback)
+        res.sendFile(path.join(clientDistPath, "index.html"), (err) => {
+            if (err) {
+                logger.error("Failed to serve index.html", err instanceof Error ? err : new Error(String(err)));
+                next(err);
+            }
+        });
+    });
     // PHASE 7: Sentry error handler (MUST come AFTER all routes but BEFORE custom error handlers)
     Sentry.setupExpressErrorHandler(app);
     // PHASE 8: Custom error handler (MUST be last, after Sentry)

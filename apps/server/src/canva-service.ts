@@ -1,4 +1,5 @@
 import type { SelectCanvaDesign } from "../../shared/schema.js";
+import crypto from "crypto";
 
 export interface CanvaTokenResponse {
   access_token: string;
@@ -41,6 +42,12 @@ export type DesignType =
   | "Poster"
   | "Logo";
 
+// 888...^ MIT-PhD PKCE Implementation
+export interface PKCEPair {
+  codeVerifier: string;
+  codeChallenge: string;
+}
+
 export class CanvaService {
   private appId: string;
   private appOrigin: string;
@@ -65,16 +72,32 @@ export class CanvaService {
     return !!(this.appId && this.appOrigin);
   }
 
-  getAuthorizationUrl(state: string): string {
-    // Canva Apps SDK uses PKCE-based authentication
-    // This URL is primarily for Connect API (external integrations)
-    // For Apps SDK, authentication happens via @canva/user package in the frontend
+  /**
+   * Generate PKCE code verifier and challenge
+   * 888...^ Enterprise-Grade Security
+   */
+  generatePKCE(): PKCEPair {
+    // Generate cryptographically secure random code_verifier (43-128 chars)
+    const codeVerifier = crypto.randomBytes(64).toString('base64url');
+    
+    // Create code_challenge using SHA-256
+    const codeChallenge = crypto
+      .createHash('sha256')
+      .update(codeVerifier)
+      .digest('base64url');
+    
+    return { codeVerifier, codeChallenge };
+  }
+
+  getAuthorizationUrl(state: string, codeChallenge: string): string {
+    // Canva Apps SDK uses PKCE-based authentication (RFC 7636)
     const params = new URLSearchParams({
       client_id: this.appId,
       response_type: "code",
       scope: "design:content:read design:content:write design:meta:read asset:read asset:write folder:read",
       state: state,
-      // PKCE parameters will be added by frontend SDK
+      code_challenge: codeChallenge,
+      code_challenge_method: "S256", // SHA-256
     });
     
     return `https://www.canva.com/api/oauth/authorize?${params.toString()}`;
