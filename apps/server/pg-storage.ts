@@ -52,6 +52,56 @@ import type { IStorage } from "./storage.js";
 
 const { Pool } = pg;
 
+// 888...^ Enterprise-Grade Database Resilience
+// Retry configuration with exponential backoff
+const RETRY_CONFIG = {
+  maxRetries: 3,
+  initialDelayMs: 100,
+  maxDelayMs: 2000,
+  backoffMultiplier: 2,
+};
+
+/**
+ * Exponential backoff retry wrapper for database operations
+ * Handles transient connection errors (ECONNRESET, 57P01, etc.)
+ */
+async function retryWithBackoff<T>(
+  operation: () => Promise<T>,
+  context: string
+): Promise<T> {
+  let lastError: Error | null = null;
+  let delay = RETRY_CONFIG.initialDelayMs;
+
+  for (let attempt = 0; attempt <= RETRY_CONFIG.maxRetries; attempt++) {
+    try {
+      return await operation();
+    } catch (error: any) {
+      lastError = error;
+      
+      // Don't retry on non-transient errors (auth, syntax, etc.)
+      const isTransient = 
+        error.code === '57P01' || // admin shutdown
+        error.code === 'ECONNRESET' ||
+        error.code === 'ENOTFOUND' ||
+        error.code === 'ETIMEDOUT' ||
+        error.code === 'ECONNREFUSED';
+      
+      if (!isTransient || attempt === RETRY_CONFIG.maxRetries) {
+        console.error(`[Database] ${context} failed after ${attempt + 1} attempts:`, error.message);
+        throw error;
+      }
+      
+      console.warn(`[Database] ${context} attempt ${attempt + 1} failed, retrying in ${delay}ms...`, error.message);
+      
+      // Wait with exponential backoff
+      await new Promise(resolve => setTimeout(resolve, delay));
+      delay = Math.min(delay * RETRY_CONFIG.backoffMultiplier, RETRY_CONFIG.maxDelayMs);
+    }
+  }
+  
+  throw lastError || new Error('Retry loop completed without success or error');
+}
+
 export class PgStorage implements IStorage {
   private pool: pg.Pool;
   private db: ReturnType<typeof drizzle>;
@@ -106,9 +156,13 @@ export class PgStorage implements IStorage {
   
   /**
    * Health check method for testing database connectivity
+   * 888...^ Includes retry logic for resilient health monitoring
    */
   async healthCheck(): Promise<void> {
-    await this.pool.query('SELECT 1');
+    await retryWithBackoff(
+      () => this.pool.query('SELECT 1'),
+      'Health Check'
+    );
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {

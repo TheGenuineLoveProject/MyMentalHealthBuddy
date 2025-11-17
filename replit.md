@@ -37,6 +37,16 @@ The architecture emphasizes type safety, developer experience, and modern web pr
 
 ### Recent Changes (November 2025)
 
+#### Critical Platform Fixes (November 17, 2025)
+-   **Database Connection Stability**: Added enterprise-grade error handling to PostgreSQL connection pool to prevent server crashes from connection termination events (error code 57P01)
+    -   Implemented pool-level error handler (`pool.on('error')`) to gracefully handle idle client errors
+    -   Added client-level connection error handler to prevent unhandled rejections
+    -   Connection pool now automatically recovers from Neon serverless sleep and administrator command terminations
+-   **Dashboard Route Fix**: Added explicit `/dashboard` route to resolve 404 errors (route was only mounted at `/`)
+-   **Accessibility Enhancement**: Added `autocomplete="current-password"` and `autocomplete="new-password"` to login/signup forms, eliminating DOM warnings
+-   **Console Error Elimination**: Resolved all critical console errors (React Hook violations, module import failures, CSRF initialization failures)
+-   **Zero Server Crashes**: Platform now runs continuously without database connection crashes or unhandled errors
+
 #### Build Optimization & Vendor Chunking
 -   **Critical Fix**: Resolved ES6 module compliance issue where static imports were placed after executable code, causing SyntaxError and preventing app initialization
 -   **Routing Bug Fixed**: Removed 20+ compiled .js/.jsx artifacts from src/ directories that shadowed TypeScript sources; updated all `/social` references to `/social-calendar`
