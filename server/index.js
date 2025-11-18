@@ -1,5 +1,4 @@
 // ✅ server/index.js — Canva OAuth + AI unified to 8888888888888888888888888^
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -22,16 +21,17 @@ app.get("/healthz", (_req, res) => {
   });
 });
 
-// 🌸 Routes
+// 🌸 API Routes
 app.use("/api/ai", aiRouter);
 app.use("/api/canva", canvaOAuth);
 
-// 🌍 Dynamic Replit port
+// 👉 Canva Policy Routes (move here, no duplicate import)
+app.use("/policies", express.static("public/policies"));
+
+// 🌍 Replit Autoscale port
 const PORT = process.env.PORT || 5173;
 
-// 👉 Canva Policy Routes
-import express from "express";
-app.use("/policies", express.static("public/policies"));
+// 🚀 Start server
 app.listen(PORT, "0.0.0.0", () =>
   console.log(`✅ Server running perfectly on port ${PORT}`)
 );
