@@ -17,9 +17,7 @@
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
-    "lucide-react": "^0.554.0",
-    "openai": "^6.9.1",
-    "react-router-dom": "^7.9.6"
+    "openai": "^6.9.1"
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
