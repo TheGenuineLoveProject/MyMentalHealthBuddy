@@ -1,0 +1,42 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
+    "heal": "node scripts/heal.mjs || echo heal stub",
+    "verify": "node scripts/verify.mjs || echo verify stub",
+    "dev": "vite --port 5173 --host 0.0.0.0 --strictPort",
+    "heal:json": "node scripts/autoHealJson.mjs",
+    "server:start": "npm --prefix apps/server run dev",
+    "client:start": "npm --prefix apps/client run dev",
+    "start:all": "concurrently -k -n server,client \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run dev\"",
+    "start:heal": "npm run heal:json && npm install && npm run start:all",
+    "start": "vite --port 5173 --host 0.0.0.0 --strictPort"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.26",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.21",
+    "compression": "^1.8.1",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^3.4.18",
+    "tsx": "^4.20.6",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.21"
+  },
+  "workspaces": [
+    "apps/*"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": ".",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
+    "heal": "node scripts/heal.mjs || echo heal stub",
+    "verify": "node scripts/verify.mjs || echo verify stub",
+    "server:start": "node apps/server/index.js || tsx apps/server/src/index.ts",
+    "client:start": "vite --port 5173 --host 0.0.0.0 --strictPort",
+    "start:all": "concurrently -k -n server,client \"npm:server:start\" \"npm:client:start\"",
+    "start:heal": "node scripts/autoHealJson.mjs && npm install && npm run start:all"
+  },
+  "workspaces": [
+    "apps/*",
+    "ops/*",
+    "shared/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}

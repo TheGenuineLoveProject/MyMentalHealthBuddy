@@ -1,0 +1,39 @@
+{
+  "name": ".",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
+    "heal": "node scripts/autoheal-json.mjs",
+    "verify": "node scripts/verify.mjs || echo verify stub",
+    "server:start": "npm --prefix apps/server run dev",
+    "client:start": "npm --prefix apps/client run dev",
+    "start:all": "concurrently -k \"npm --prefix apps/server run dev\" \"npm --prefix apps/client run start\"",
+    "start:heal": "npm run heal && npm ci --prefer-offline --no-audit || npm i --prefer-offline --no-audit; npm run start:all",
+    "heal:json": "node scripts/autoHealJson.mjs",
+    "fix": "node scripts/autoheal-json.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^7.0.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  },
+  "workspaces": [
+    "apps/*",
+    "ops/*",
+    "shared/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@stripe/react-stripe-js": "^5.3.0",
+    "@stripe/stripe-js": "^8.3.0",
+    "lucide-react": "^0.552.0",
+    "react-icons": "^5.5.0",
+    "web-vitals": "^5.1.0",
+    "wouter": "^3.7.1"
+  }
+}

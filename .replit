@@ -1,14 +1,10 @@
-# --- CLEAN AUTOSCALE CONFIG (2025) ---
-
-run = "npm run build && npm run start"
-
-entrypoint = "package.json"
+run = "npm run dev --prefix client"
+entrypoint = "client/src/main.tsx"
 modules = ["nodejs-20"]
 
-[env]
-HOST = "0.0.0.0"
-PORT = "5000"
-NODE_ENV = "production"
+[agent]
+expertMode = true
 
-[deployment]
-deploymentTarget = "autoscale"
+[[ports]]
+localPort = 5000
+externalPort = 80

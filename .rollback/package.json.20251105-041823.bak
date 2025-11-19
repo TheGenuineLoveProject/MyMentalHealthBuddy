@@ -1,0 +1,36 @@
+{
+  "name": ".",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
+    "heal": "node scripts/heal.mjs || echo heal stub",
+    "verify": "node scripts/verify.mjs || echo verify stub",
+    "server:start": "tsx apps/server/src/index.ts",
+    "client:start": "vite --port 5173 --host 0.0.0.0 --strictPort",
+    "start:all": "concurrently -k -n server,client \"npm:server:start\" \"npm:client:start\"",
+    "start:heal": "node scripts/autoHealJson.mjs && npm install && npm run start:all"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
+    "compression": "^1.8.1",
+    "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tsx": "^4.20.6",
+    "vite": "^7.1.12"
+  },
+  "workspaces": [
+    "apps/*",
+    "ops/*",
+    "shared/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}

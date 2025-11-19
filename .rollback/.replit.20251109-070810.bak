@@ -1,0 +1,2 @@
+hidden = [".git", ".rollback", "node_modules"]
+run = "npm run start:heal"

@@ -1,0 +1,30 @@
+{
+  "name": ".",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "diagnose": "node scripts/diagnose.mjs || echo diagnose stub",
+    "heal": "node scripts/autoHealJson.mjs || echo heal stub",
+    "verify": "node scripts/verify.mjs || echo verify stub",
+    "server:start": "npm --prefix apps/server run dev",
+    "client:start": "npm --prefix apps/client run dev",
+    "start:all": "concurrently -k \"npm:server:start\" \"npm:client:start\"",
+    "start:heal": "node scripts/autohealJson.mjs && npm i && npm run start:all",
+    "heal:json": "node scripts/autoHealJson.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^7.0.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.3"
+  },
+  "workspaces": [
+    "apps/*",
+    "ops/*",
+    "shared/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  }
+}
