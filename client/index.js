@@ -1,37 +1,58 @@
-// ✅ server/index.js — Canva OAuth + AI unified to 8888888888888888888888888^
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
+// ---------------------------------------------
+// GPT-5 Streaming AI Route — Trauma-Informed Buddy
+// ---------------------------------------------
+import OpenAI from "openai";
 
-import aiRouter from "./routes/ai-routes/ai.js";
-import canvaOAuth from "./routes/canva-oauth.js";
-
-dotenv.config();
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-// 🌿 Health route
-app.get("/healthz", (_req, res) => {
-  res.status(200).json({
-    status: "ok",
-    uptime: process.uptime(),
-    timestamp: new Date().toISOString(),
-  });
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-// 🌸 API Routes
-app.use("/api/ai", aiRouter);
-app.use("/api/canva", canvaOAuth);
+app.post("/api/ai-stream", async (req, res) => {
+  try {
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Connection", "keep-alive");
 
-// 👉 Canva Policy Routes (move here, no duplicate import)
-app.use("/policies", express.static("public/policies"));
+    const { message, mood } = req.body;
 
-// 🌍 Replit Autoscale port
-const PORT = process.env.PORT || 5173;
+    const stream = await openai.chat.completions.create({
+      model: "gpt-5", // GPT-5 therapeutic model
+      stream: true,
+      messages: [
+        {
+          role: "system",
+          content: `
+You are MyMentalHealthBuddy GPT-5 — a trauma-informed, deeply empathic emotional companion.
 
-// 🚀 Start server
-app.listen(PORT, "0.0.0.0", () =>
-  console.log(`✅ Server running perfectly on port ${PORT}`)
-);
+Rules:
+• Respond gently, slowly, and with warm attunement.
+• Validate feelings before offering guidance.
+• Use grounding tools (slow breath cues, vagus nerve soothing).
+• Avoid clinical claims, diagnoses, or medical directives.
+• If user expresses harm, gently guide them to call 988.
+
+Mood tuning:
+If mood = "sad" → comfort softly.
+If mood = "anxious" → regulate breathing (3-3-6), reassure safety.
+If mood = "angry" → acknowledge hurt without judgment.
+If mood = "lonely" → affirm presence and connection.
+        `,
+        },
+        { role: "user", content: message },
+      ],
+    });
+
+    for await (const chunk of stream) {
+      const text = chunk.choices?.[0]?.delta?.content;
+      if (text) {
+        res.write(`data: ${text}\n\n`);
+      }
+    }
+
+    res.end();
+  } catch (err) {
+    console.error("GPT-5 stream error:", err);
+    res.write(`data: I'm here with you. Something went wrong.\n\n`);
+    res.end();
+  }
+});
