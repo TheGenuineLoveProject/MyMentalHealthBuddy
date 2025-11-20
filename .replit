@@ -1,56 +1,8 @@
-# 🌎 UNIVERSAL AUTO-HEAL + VITE DEPLOY CONFIG (2025)
-run = "bash scripts/heal.sh || npm run dev"
-entrypoint = "package.json"
-modules = ["nodejs-20"]
-
-[env]
-HOST = "0.0.0.0"
-PORT = "5173"
-NODE_ENV = "development"
-
-[[ports]]
-localPort = 5000
-externalPort = 80
-
-[[ports]]
-localPort = 5555
-externalPort = 3000
-
-[[ports]]
-localPort = 24678
-externalPort = 3001
-
-[agent]
-expertMode = true
-
-[workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "webview"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "bash -c 'echo \"🔨 Initial build...\" && vite build --config apps/client/vite.config.js && echo \"✅ Build complete! Starting server...\" && vite build --watch --config apps/client/vite.config.js & SERVER_PORT=5000 npm --prefix apps/server run dev'"
-waitForPort = 5000
-
-[nix]
-channel = "stable-25_05"
+run = ["npm", "start"]
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["node", "apps/server/dist/server/src/index.js"]
-build = ["npm", "run", "build"]
+
+[ports]
+localPort = 5000
+externalPort = 80
