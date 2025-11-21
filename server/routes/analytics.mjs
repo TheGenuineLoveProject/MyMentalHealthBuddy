@@ -1,22 +1,40 @@
-import { Router } from 'express';
-const r = Router();
+import { Router } from "express";
+const router = Router();
 
-// stub snapshot model
+// Fake in-memory snapshots
 const FAKE_SNAPSHOTS = [
-  { id: 1, date: new Date().toISOString(), metrics: { DAU: 123, EngagementScore: 96 } }
+  {
+    id: 1,
+    date: new Date().toISOString(),
+    metrics: { DAU: 123, EngagementScore: 96 }
+  }
 ];
 
-r.get('/snapshots', async (_req,res) => {
-  try { res.json(FAKE_SNAPSHOTS); }
-  catch(err){ console.error('analytics snapshots error', err); res.status(500).json({error:'snapshots failed'}); }
+// GET all snapshots
+router.get("/snapshots", (req, res) => {
+  try {
+    res.json(FAKE_SNAPSHOTS);
+  } catch (err) {
+    console.error("analytics-load-error", err);
+    res.status(500).json({ error: "snapshots-failed" });
+  }
 });
 
-r.post('/snapshot', async (req,res) => {
+// POST new snapshot
+router.post("/snapshots", (req, res) => {
   try {
-    const item = { id: Date.now(), date: new Date().toISOString(), metrics: req.body?.metrics||{} };
+    const item = {
+      id: Date.now(),
+      date: new Date().toISOString(),
+      metrics: req.body?.metrics || {}
+    };
+
     FAKE_SNAPSHOTS.push(item);
     res.status(201).json(item);
-  } catch(err){ console.error('analytics save error', err); res.status(500).json({error:'save failed'}); }
+  } catch (err) {
+    console.error("analytics-save-error", err);
+    res.status(500).json({ error: "save-failed" });
+  }
 });
 
-export default r;
+export default router;

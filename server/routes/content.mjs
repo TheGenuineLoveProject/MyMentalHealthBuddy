@@ -1,29 +1,31 @@
-import express from "express";
+import { Router } from "express";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-const router = express.Router();
+const router = Router();
+
 const blogDir = "content/blog";
 
-// GET /api/content/evidence → list all APA-validated articles
-router.get("/evidence", async (req,res) => {
+router.get("/evidence", async (req, res) => {
   try {
-    const posts = fs.readdirSync(blogDir)
+    const posts = fs
+      .readdirSync(blogDir)
       .filter(f => f.endsWith(".md") || f.endsWith(".mdx"))
-      .map(f => {
-        const raw = fs.readFileSync(path.join(blogDir,f),"utf8");
-        const { data, content } = matter(raw);
+      .map(filename => {
+        const raw = fs.readFileSync(path.join(blogDir, filename), "utf8");
+        const parsed = matter(raw);
         return {
-          slug: f.replace(/\.(md|mdx)$/,""),
-          ...data,
-          excerpt: content.substring(0,180)+"…"
+          slug: filename.replace(/\.(md|mdx)$/, ""),
+          excerpt: parsed.content.substring(0, 180),
+          ...parsed.data
         };
       });
-    res.json({count: posts.length, posts});
-  } catch(err){
-    console.error("Error reading content:", err);
-    res.status(500).json({error: "Unable to load evidence content"});
+
+    res.json({ count: posts.length, posts });
+  } catch (err) {
+    console.error("content-error:", err);
+    res.status(500).json({ error: "unable-to-load-evidence-content" });
   }
 });
 

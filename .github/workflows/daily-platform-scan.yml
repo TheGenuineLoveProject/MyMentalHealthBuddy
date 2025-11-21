@@ -1,0 +1,25 @@
+        name: Daily Platform Scan
+
+        on:
+          schedule:
+            - cron: "0 10 * * *" # every day at 10:00 UTC
+          workflow_dispatch: {}
+
+        jobs:
+          scan:
+            runs-on: ubuntu-latest
+
+            steps:
+              - name: Checkout repo
+                uses: actions/checkout@v4
+
+              - name: Use Node
+                uses: actions/setup-node@v4
+                with:
+                  node-version: "20"
+
+              - name: Install deps
+                run: npm install
+
+              - name: Run 360° platform scan
+                run: npm run scan
