@@ -47,47 +47,57 @@
     <script>
       const output = document.getElementById('output');
 
-      async function sendAuth(path, payload) {
-        output.textContent = 'Sending request...';
+      // === AUTO-DETECT YOUR REAL SERVER URL (REPLIT AUTOSCALE SAFE) ===
+      const API_BASE = window.location.origin;  
+      // Example becomes: https://my-mental-health-buddy.replit.app
 
-        try {
-          const res = await fetch(path, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-          });
+      <script>
+        const output = document.getElementById("output");
 
-          const text = await res.text();
-          let data;
+        async function sendAuth(path, payload) {
+          output.textContent = "Sending request...";
+
           try {
-            data = JSON.parse(text);
-          } catch {
-            data = { raw: text };
+            const res = await fetch(path, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            const data = await res.json();
+
+            // 🔐 If this is a login request and we got a token, save it for later
+            if (path === "/auth/login" && data.token) {
+              localStorage.setItem("mmhb_token", data.token);
+            }
+
+            output.textContent =
+              `Status: ${res.status}\nPath: ${path}\n\n` +
+              JSON.stringify(data, null, 2);
+          } catch (err) {
+            output.textContent = "Error: " + err.message;
           }
-
-          output.textContent =
-            'Status: ' + res.status + '\\n' +
-            'Path: ' + path + '\\n\\n' +
-            JSON.stringify(data, null, 2);
-        } catch (err) {
-          output.textContent = 'ERROR: ' + err.message;
         }
-      }
 
-      document.getElementById('registerForm').addEventListener('submit', (e) => {
+        // existing handlers for registerForm / loginForm can stay as they are
+      </script>
+
+      // === REGISTER ===
+      document.getElementById('regForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        sendAuth('/auth/register', {
-          email: document.getElementById('regEmail').value,
-          password: document.getElementById('regPassword').value,
-        });
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+
+        await sendAuth('/auth/register', { email, password });
       });
 
-      document.getElementById('loginForm').addEventListener('submit', (e) => {
+      // === LOGIN ===
+      document.getElementById('logInForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        sendAuth('/auth/login', {
-          email: document.getElementById('loginEmail').value,
-          password: document.getElementById('loginPassword').value,
-        });
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        await sendAuth('/auth/login', { email, password });
       });
     </script>
   </body>

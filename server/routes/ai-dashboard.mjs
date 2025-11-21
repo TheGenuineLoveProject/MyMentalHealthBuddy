@@ -1,12 +1,13 @@
 import { Router } from "express";
+import authGuard from "../middleware/auth.mjs";
+
 const router = Router();
 
-// SIMPLE HEALTH CHECK
-router.get("/", (req, res) => {
+router.get("/", authGuard, (req, res) => {
   res.json({
     route: "ai-dashboard",
     status: "ok",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
