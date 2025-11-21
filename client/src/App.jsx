@@ -1,15 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Dashboard from "./pages/Dashboard";
+import About from "./pages/About";
+
 export default function App() {
   return (
-    <div style={{
-      width: "100%",
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: "2rem",
-      fontWeight: "bold"
-    }}>
-      React Frontend Loaded Successfully ✓
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
   );
 }

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Auth Test – MyMentalHealthBuddy</title>
+    <style>
+      body { font-family: system-ui, -apple-system, sans-serif; padding: 2rem; }
+      h1 { margin-bottom: 1rem; }
+      form { border: 1px solid #ccc; padding: 1rem; margin-bottom: 1.5rem; max-width: 400px; }
+      label { display:block; margin-top:0.5rem; }
+      button { margin-top:0.75rem; }
+      pre { background:#111; color:#0f0; padding:1rem; max-width:600px; overflow:auto; }
+    </style>
+  </head>
+  <body>
+    <h1>Auth Test Page ✓</h1>
+
+    <h2>Register</h2>
+    <form id="registerForm">
+      <label>
+        Email
+        <input type="email" id="regEmail" required value="test@example.com" />
+      </label>
+      <label>
+        Password
+        <input type="password" id="regPassword" required value="Test1234!" />
+      </label>
+      <button type="submit">Register</button>
+    </form>
+
+    <h2>Log in</h2>
+    <form id="loginForm">
+      <label>
+        Email
+        <input type="email" id="loginEmail" required value="test@example.com" />
+      </label>
+      <label>
+        Password
+        <input type="password" id="loginPassword" required value="Test1234!" />
+      </label>
+      <button type="submit">Log in</button>
+    </form>
+
+    <h2>Response</h2>
+    <pre id="output">Waiting for request…</pre>
+
+    <script>
+      const output = document.getElementById('output');
+
+      async function sendAuth(path, payload) {
+        output.textContent = 'Sending request...';
+
+        try {
+          const res = await fetch(path, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          const text = await res.text();
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch {
+            data = { raw: text };
+          }
+
+          output.textContent =
+            'Status: ' + res.status + '\\n' +
+            'Path: ' + path + '\\n\\n' +
+            JSON.stringify(data, null, 2);
+        } catch (err) {
+          output.textContent = 'ERROR: ' + err.message;
+        }
+      }
+
+      document.getElementById('registerForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        sendAuth('/auth/register', {
+          email: document.getElementById('regEmail').value,
+          password: document.getElementById('regPassword').value,
+        });
+      });
+
+      document.getElementById('loginForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        sendAuth('/auth/login', {
+          email: document.getElementById('loginEmail').value,
+          password: document.getElementById('loginPassword').value,
+        });
+      });
+    </script>
+  </body>
+</html>
