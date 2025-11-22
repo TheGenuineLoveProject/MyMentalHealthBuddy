@@ -6,7 +6,7 @@ const router = Router();
 router.get("/", authGuard, (req, res) => {
   res.json({
     status: "ok",
-    message: "Analytics-working!",
+    message: "Analytics working!",
     user: req.user,
   });
 });

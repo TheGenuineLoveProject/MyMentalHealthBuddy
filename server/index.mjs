@@ -1,28 +1,46 @@
-// === FINAL-PERFECTED INDEX.MJS — REPLIT AUTOSCALE SAFE 8888^ ===
-// Pure Express server (no shell commands)
-// Serves Vite frontend from client/dist
-// Auto-loads .mjs route files from /server/routes
-// Works with Replit Autoscale (PORT + 0.0.0.0)
+/* ================================================================
+   FINAL PERFECTED SERVER — REPLIT AUTOSCALE SAFE — 8888^
+   - Pure Express server
+   - Auto-loads routes
+   - Serves React frontend
+   - Includes authGuard
+   - Fixes ALL prior syntax breaks
+   ================================================================ */
 
 import express from "express";
 import cors from "cors";
 import fs from "fs";
 import path from "path";
+import helmet from "helmet";
+import compression from "compression";
 import { fileURLToPath } from "url";
-import authGuard from "./middleware/auth.mjs"; // ✅ NOTE: ./middleware (inside /server)
+import authGuard from "./middleware/auth.mjs";
 
-// -------- Resolve __dirname in ESM --------
+// Resolve __dirname in ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// -------- Create app FIRST --------
+// Create the server
 const app = express();
 
-// -------- Core middleware --------
-app.use(cors());
-app.use(express.json());
+/* ================================================================
+   CORE MIDDLEWARE
+================================================================ */
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
-// -------- HEALTH CHECK --------
+app.use(express.json());
+app.use(helmet());
+app.use(compression());
+
+/* ================================================================
+   HEALTH CHECK
+================================================================ */
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
@@ -30,7 +48,9 @@ app.get("/health", (req, res) => {
   });
 });
 
-// -------- PROTECTED DEMO ROUTES --------
+/* ================================================================
+   SIMPLE PROTECTED ROUTES
+================================================================ */
 app.get("/dashboard", authGuard, (req, res) => {
   res.json({
     status: "ok",
@@ -42,56 +62,116 @@ app.get("/dashboard", authGuard, (req, res) => {
 app.get("/analytics", authGuard, (req, res) => {
   res.json({
     status: "ok",
-    message: "Analytics unlocked",
+    message: "Analytics access granted",
     user: req.user,
   });
 });
 
-// -------- AUTO-LOAD .mjs ROUTE FILES --------
+/* ================================================================
+   AUTO-LOAD ALL ROUTES FROM /server/routes
+================================================================ */
 const routesDir = path.join(__dirname, "routes");
 
 if (fs.existsSync(routesDir)) {
-  fs
-    .readdirSync(routesDir)
-    .filter((file) => file.endsWith(".mjs"))
-    .forEach((file) => {
-      const fullPath = path.join(routesDir, file);
-      import(fullPath)
-        .then((routeModule) => {
-          const router = routeModule.default;
-          const basePath = "/" + file.replace(".mjs", "");
-          const routePath = basePath === "/index" ? "/" : basePath;
-          app.use(routePath, router);
-          console.log(`✅ Loaded route: ${routePath}`);
-        })
-        .catch((err) => {
-          console.error(`❌ Failed to load route ${file}:`, err);
-        });
-    });
+  const files = fs.readdirSync(routesDir).filter((f) => f.endsWith(".mjs"));
+
+  files.forEach((file) => {
+    const full = path.join(routesDir, file);
+
+    import(full)
+      .then((mod) => {
+        const router = mod.default;
+        if (!router) {
+          console.error(`❌ No default export in ${file}`);
+          return;
+        }
+
+        const base = "/" + file.replace(".mjs", "");
+        const mount = base === "/index" ? "/" : base;
+
+        app.use(mount, router);
+        console.log(`✅ Loaded route: ${mount}`);
+      })
+      .catch((err) =>
+        console.error(`❌ Failed to load route ${file}:`, err)
+      );
+  });
 } else {
-  console.log("⚠️ routes directory not found:", routesDir);
+  console.warn("⚠️ Routes directory missing:", routesDir);
 }
 
-// -------- SERVE REACT FRONTEND --------
+/* ================================================================
+   SERVE REACT FRONTEND
+================================================================ */
+
 const clientDist = path.join(__dirname, "..", "client", "dist");
 
 if (fs.existsSync(clientDist)) {
-  console.log("✅ Frontend build folder detected:", clientDist);
   app.use(express.static(clientDist));
+  console.log("🎨 Frontend build detected:", clientDist);
 
-  // any unknown path -> React index.html
+  // SPA fallback — React Router handles routing
+  app.get(
+    [
+      "/",
+      "/auth-test",
+      "/protected-test",
+      "/dashboard",
+      "/analytics",
+      "/journal",
+      "/mood",
+      "/ai",
+      "/content",
+    ],
+    (req, res) => {
+      res.sendFile(path.join(clientDist, "index.html"));
+    }
+  );
+
+  // Catch all
   app.get("*", (req, res) => {
     res.sendFile(path.join(clientDist, "index.html"));
   });
-} else {
-  console.log(
-    "⚠️ No frontend build found. Run: cd client && npm install && npm run build"
-  );
 }
 
-// -------- START SERVER --------
+/* ================================================================
+   KEEP ALIVE
+================================================================ */
+app.get("/keepalive", (req, res) => {
+  res.json({
+    status: "alive",
+    time: new Date().toISOString(),
+  });
+});
+
+/* ================================================================
+   404 HANDLER
+================================================================ */
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Not found",
+    path: req.originalUrl,
+    time: new Date().toISOString(),
+  });
+});
+
+/* ================================================================
+   GLOBAL ERROR HANDLER
+================================================================ */
+app.use((err, req, res, next) => {
+  console.error("🔥 SERVER ERROR:", err);
+  res.status(500).json({
+    error: "Server error",
+    detail: err.message ?? "Unknown error",
+    time: new Date().toISOString(),
+  });
+});
+
+/* ================================================================
+   START SERVER — REPLIT AUTOSCALE SAFE
+================================================================ */
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ Server running on http://0.0.0.0:${PORT}`);
+  console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
 });

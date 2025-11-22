@@ -1,20 +1,10 @@
-import express from "express";
-import { askAI } from "../services/aiService.mjs";
+// ===== AI ROUTE (PROTECTED - 8888^) =====
+import { Router } from "express";
+import { runAIEmployee } from "../ai/aiHandler.mjs";
+import authGuard from "../middleware/auth.mjs";
 
-const router = express.Router();
+const router = Router();
 
-router.post("/", async (req, res) => {
-  const { message } = req.body;
-
-  if (!message) {
-    return res.status(400).json({
-      ok: false,
-      error: "Missing user message.",
-    });
-  }
-
-  const result = await askAI(message);
-  res.json(result);
-});
+router.post("/chat", authGuard, runAIEmployee);
 
 export default router;

@@ -1,9 +1,13 @@
-import express from "express";
-const router = express.Router();
+import { Router } from "express";
 import authGuard from "../middleware/auth.mjs";
 
-router.get("/", (req, res) => {
-  res.json({ message: "Content-route-working ✓" });
+const router = Router();
+
+router.get("/", authGuard, (req, res) => {
+  res.json({
+    message: "Content route working ✓",
+    user: req.user,
+  });
 });
 
 export default router;
