@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import { Button } from "../components/ui/button";
 
 export default function HomePage() {
@@ -19,29 +18,29 @@ export default function HomePage() {
         {/* Primary action button */}
         <div className="mb-8">
           <Button asChild>
-            <Link to="/auth">Go to Auth Page</Link>
+            <Link href="/auth">Go to Auth Page</Link>
           </Button>
         </div>
 
         {/* Links list */}
         <ul className="list-disc list-inside space-y-1 text-blue-700">
           <li>
-            <Link to="/auth" className="hover:underline">
+            <Link href="/auth" className="hover:underline">
               Auth Page
             </Link>
           </li>
           <li>
-            <Link to="/protected-test" className="hover:underline">
+            <Link href="/protected-test" className="hover:underline">
               Protected Route Test
             </Link>
           </li>
           <li>
-            <Link to="/analytics" className="hover:underline">
+            <Link href="/analytics" className="hover:underline">
               Analytics
             </Link>
           </li>
           <li>
-            <Link to="/ai-test" className="hover:underline">
+            <Link href="/ai-test" className="hover:underline">
               AI Page
             </Link>
           </li>

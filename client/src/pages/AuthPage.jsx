@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 
@@ -30,7 +29,7 @@ export default function AuthPage() {
           <Button className="w-full">Sign In</Button>
         </div>
 
-        <Link to="/" className="text-blue-700 hover:underline text-sm">
+        <Link href="/" className="text-blue-700 hover:underline text-sm">
           ← Back to Home
         </Link>
       </div>
