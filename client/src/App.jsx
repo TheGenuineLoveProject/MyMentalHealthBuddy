@@ -1,36 +1,23 @@
 // client/src/App.jsx
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
 
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AuthPage from "./pages/AuthPage";
+import ProtectedTest from "./pages/ProtectedTest";
+import AnalyticsPage from "./pages/AnalyticsPage";
+import AITestPage from "./pages/AITestPage";
 
-import Home from "./pages/Home.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import JournalPage from "./pages/JournalPage.jsx";
-import MoodPage from "./pages/MoodPage.jsx";
-import AIPage from "./pages/AIPage.jsx";
-import AnalyticsPage from "./pages/AnalyticsPage.jsx";
-import AuthPage from "./pages/AuthPage.jsx";
-import AuthTestPage from "./pages/AuthTestPage.jsx";
-
-function App() {
+export default function App() {
   return (
-    <Router>
+    <Layout>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/journal" element={<JournalPage />} />
-        <Route path="/mood" element={<MoodPage />} />
-        <Route path="/ai" element={<AIPage />} />
-        <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/auth" element={<AuthPage />} />
-        <Route path="/auth-test" element={<AuthTestPage />} />
+        <Route path="/protected-test" element={<ProtectedTest />} />
+        <Route path="/analytics" element={<AnalyticsPage />} />
+        <Route path="/ai-test" element={<AITestPage />} />
       </Routes>
-    </Router>
+    </Layout>
   );
 }
-
-export default App;
