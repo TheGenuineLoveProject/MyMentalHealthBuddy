@@ -1,3 +1,4 @@
+import * as schema from '../shared/schema.mjs';
 // ===== AI ROUTE (PROTECTED - 8888^) =====
 import { Router } from "express";
 import { runAIEmployee } from "../ai/aiHandler.mjs";

@@ -1,10 +1,3 @@
-import React from "react";
-
-export default function Dashboard() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1>Dashboard</h1>
-      <p>Welcome to your dashboard.</p>
-    </div>
-  );
+export default function DashboardPage() {
+  return <div className="p-6 text-xl">Dashboard Ready ✓</div>
 }

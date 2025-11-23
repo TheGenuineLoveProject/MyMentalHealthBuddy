@@ -1,24 +1,22 @@
-// client/vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      // base alias – lets "@/..." work
-      "@": path.resolve(__dirname, "./src"),
+      "@": "/src",
+      "@/components": "/src/components",
+      "@/ui": "/src/components/ui",
+      "@/layout": "/src/components/layout",
+      "@/lib": "/src/lib",
+      "@/pages": "/src/pages"
     },
   },
   server: {
     host: true,
     strictPort: false,
     port: 5173,
-    allowedHosts: true, // Replit
+    allowedHosts: true,
   },
 });

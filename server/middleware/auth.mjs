@@ -1,17 +1,15 @@
-// ---- AUTH MIDDLEWARE (REPLIT-SAFE-8888^) ----
 import jwt from "jsonwebtoken";
 
 export default function authGuard(req, res, next) {
+  const auth = req.headers.authorization;
+  if (!auth) return res.status(401).json({ error: "Not authorized" });
+
   try {
-    const header = req.headers.authorization;
-    if (!header) return res.status(401).json({ error: "Missing token" });
-
-    const token = header.replace("Bearer ", "");
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || "default-secret");
-
+    const token = auth.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.SESSION_SECRET);
     req.user = decoded;
     next();
-  } catch (err) {
+  } catch {
     return res.status(401).json({ error: "Invalid token" });
   }
 }

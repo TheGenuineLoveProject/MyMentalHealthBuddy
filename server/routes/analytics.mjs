@@ -1,3 +1,4 @@
+import * as schema from '../shared/schema.mjs';
 import { Router } from "express";
 import authGuard from "../middleware/auth.mjs";
 

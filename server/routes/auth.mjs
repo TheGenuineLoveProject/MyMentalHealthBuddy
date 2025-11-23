@@ -1,59 +1,45 @@
+import * as schema from '../shared/schema.mjs';
 import { Router } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { body, validationResult } from "express-validator";
-import authGuard from "../middleware/auth.mjs";
+import { db } from "../db/connection.mjs";
+// auth.mjs
+
+import { eq } from "drizzle-orm";
 
 const router = Router();
 
-// In-memory demo DB (replace with PostgreSQL later)
-const users = [];
+router.post("/register", async (req, res) => {
+  const { email, password, name } = req.body;
 
-// REGISTER
-router.post(
-  "/register",
-  body("email").isEmail(),
-  body("password").isLength({ min: 6 }),
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty())
-      return res.status(400).json({ errors: errors.array() });
+  const exists = await db.select().from(users).where(eq(users.email, email));
+  if (exists.length > 0) return res.status(400).json({ error: "User exists" });
 
-    const { email, password } = req.body;
+  const hash = await bcrypt.hash(password, 10);
 
-    const exists = users.find((u) => u.email === email);
-    if (exists) return res.status(400).json({ error: "User already exists" });
+  const [newUser] = await db.insert(users).values({
+    email,
+    passwordHash: hash,
+    name
+  }).returning();
 
-    const hashed = await bcrypt.hash(password, 10);
-    users.push({ email, password: hashed });
-
-    return res.json({ success: true });
-  }
-);
-
-// LOGIN
-router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  const user = users.find((u) => u.email === email);
-  if (!user) return res.status(400).json({ error: "Invalid credentials" });
-
-  const valid = await bcrypt.compare(password, user.password);
-  if (!valid) return res.status(400).json({ error: "Invalid credentials" });
-
-  const token = jwt.sign({ email }, process.env.JWT_SECRET || "default-secret", {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign({ userId: newUser.id }, process.env.SESSION_SECRET, { expiresIn: "7d" });
 
   res.json({ token });
 });
 
-// Protected test
-router.get("/me", authGuard, (req, res) => {
-  res.json({
-    message: "Authenticated user ✓",
-    user: req.user,
-  });
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  const [user] = await db.select().from(users).where(eq(users.email, email));
+  if (!user) return res.status(401).json({ error: "Invalid login" });
+
+  const valid = await bcrypt.compare(password, user.passwordHash);
+  if (!valid) return res.status(401).json({ error: "Invalid login" });
+
+  const token = jwt.sign({ userId: user.id }, process.env.SESSION_SECRET, { expiresIn: "7d" });
+
+  res.json({ token });
 });
 
 export default router;
