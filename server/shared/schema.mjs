@@ -1,5 +1,5 @@
 // server/shared/schema.mjs
-// Single source of truth for Drizzle schema (PURE JS / MJS)
+// Runtime Drizzle schema for Node ESM (JS only)
 
 import {
   pgTable,
@@ -10,53 +10,51 @@ import {
   integer,
 } from "drizzle-orm/pg-core";
 
-// Users table
+// ===== Users table =====
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   passwordHash: varchar("password_hash", { length: 255 }).notNull(),
-  name: varchar("name", { length: 255 }),
+  name: varchar("name", { length: 255 }).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// Mood entries table
+// ===== Mood entries table =====
 export const moodEntries = pgTable("mood_entries", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   mood: varchar("mood", { length: 50 }).notNull(),
   note: text("note"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// Journal entries table
+// ===== Journal entries table =====
 export const journalEntries = pgTable("journal_entries", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   title: varchar("title", { length: 255 }),
-  content: text("content"),
+  content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// Stripe subscriptions table
+// ===== Stripe subscriptions table =====
 export const subscriptions = pgTable("subscriptions", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => users.id, { onDelete: "cascade" }),
   stripeCustomerId: varchar("stripe_customer_id", { length: 255 })
     .notNull()
     .unique(),
-  stripeSubscriptionId: varchar("stripe_subscription_id", {
-    length: 255,
-  })
+  stripeSubscriptionId: varchar("stripe_subscription_id", { length: 255 })
     .notNull()
     .unique(),
   status: varchar("status", { length: 50 }).notNull(),
-  priceId: varchar("price_id", { length: 100 }),
+  priceId: varchar("price_id", { length: 100 }).notNull(),
   currentPeriodEnd: timestamp("current_period_end"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

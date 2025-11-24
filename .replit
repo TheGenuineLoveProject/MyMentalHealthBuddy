@@ -1,40 +1,25 @@
-# .replit — CORRECT CONFIG
+# .replit — TARGET CONFIG FOR AUTOSCALE
+
+# 1) What runs when you click "Run" in the workspace:
 run = "npm start"
 entrypoint = "server/index.mjs"
 modules = ["nodejs-20"]
 
+# 2) Deployment config for Replit Autoscale:
 [deployment]
 deploymentTarget = "autoscale"
 run = ["npm", "start"]
 build = ["npm", "run", "build"]
 
+# 3) Ports — ONLY ONE EXTERNAL PORT (Replit requirement):
 [[ports]]
 localPort = 5000
 externalPort = 80
 
+# 4) (Optional but nice) Nix channel:
+[nix]
+channel = "stable-25_05"
+packages = ["killall"]
+
 [agent]
 expertMode = true
-
-[workflows]
-runButton = "Project"
-
-[[workflows.workflow]]
-name = "Project"
-mode = "parallel"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm start"
-waitForPort = 5000
-
-[workflows.workflow.metadata]
-outputType = "webview"

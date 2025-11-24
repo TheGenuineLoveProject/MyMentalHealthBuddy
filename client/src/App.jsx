@@ -1,3 +1,4 @@
+// client/src/App.jsx
 import { Route, Switch } from "wouter";
 import Layout from "@/components/layout/Layout";
 
@@ -14,6 +15,9 @@ export default function App() {
         <Route path="/auth" component={AuthPage} />
         <Route path="/ai" component={AIPage} />
         <Route path="/analytics" component={AnalyticsPage} />
+
+        {/* Catch-all route */}
+        <Route>404 - Page Not Found</Route>
       </Switch>
     </Layout>
   );

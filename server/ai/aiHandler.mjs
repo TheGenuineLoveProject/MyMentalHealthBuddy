@@ -1,5 +1,7 @@
 // ===== AI EMPLOYEE (REPLIT-SAFE 8888^) =====
 import OpenAI from "openai";
+import { users, moodEntries, journalEntries, subscriptions } 
+  from "../shared/schema.mjs";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

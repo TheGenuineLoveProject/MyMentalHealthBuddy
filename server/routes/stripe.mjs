@@ -1,4 +1,5 @@
-import * as schema from '../shared/schema.mjs';
+import { users, moodEntries, journalEntries, subscriptions } 
+  from "../shared/schema.mjs";
 import { Router } from "express";
 import Stripe from "stripe";
 
