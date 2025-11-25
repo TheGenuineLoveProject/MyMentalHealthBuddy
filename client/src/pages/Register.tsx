@@ -82,8 +82,7 @@ export default function Register() {
   return (
     <div
       data-testid="page-register"
-      className="min-h-screen flex"
-      style={{ background: "var(--background)" }}
+      className="min-h-screen flex bg-gray-50 dark:bg-gray-900"
     >
       <div 
         className="hidden lg:flex lg:w-1/2 items-center justify-center p-12"
@@ -97,7 +96,7 @@ export default function Register() {
             <Sparkles className="w-8 h-8 animate-pulse" />
           </div>
           <h2 className="text-3xl font-bold mb-4">Begin Your Wellness Journey</h2>
-          <p className="text-lg text-white/80 max-w-md mb-8">
+          <p className="text-lg opacity-80 max-w-md mb-8">
             Join thousands who have found peace and clarity with our AI-powered mental health companion.
           </p>
           <div className="space-y-3 text-left max-w-sm mx-auto">
@@ -107,7 +106,7 @@ export default function Register() {
               "Private, secure journaling",
               "Crisis resources when you need them"
             ].map((feature, i) => (
-              <div key={i} className="flex items-center gap-3 text-white/90">
+              <div key={i} className="flex items-center gap-3 opacity-90">
                 <ShieldCheck className="w-5 h-5" />
                 <span>{feature}</span>
               </div>
@@ -119,13 +118,13 @@ export default function Register() {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md animate-fade-in">
           <div className="lg:hidden flex items-center justify-center gap-2 mb-8">
-            <Brain className="w-8 h-8" style={{ color: "var(--primary)" }} />
-            <span className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
+            <Brain className="w-8 h-8 text-emerald-600" />
+            <span className="text-xl font-bold text-gray-900 dark:text-white">
               MyMentalHealthBuddy
             </span>
           </div>
 
-          <div className="card p-8">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
             <div className="text-center mb-6">
               <div 
                 className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center"
@@ -135,14 +134,13 @@ export default function Register() {
               </div>
               <h1
                 data-testid="text-register-title"
-                className="text-2xl font-bold mb-2"
-                style={{ color: "var(--text-primary)" }}
+                className="text-2xl font-bold mb-2 text-gray-900 dark:text-white"
               >
                 Create Account
               </h1>
               <p
                 data-testid="text-register-subtitle"
-                style={{ color: "var(--text-secondary)" }}
+                className="text-gray-600 dark:text-gray-400"
               >
                 Start your mental health journey today
               </p>
@@ -152,8 +150,7 @@ export default function Register() {
               <div
                 data-testid="text-error"
                 role="alert"
-                className="p-3 rounded-xl mb-4 flex items-center gap-2"
-                style={{ background: "#fef2f2", color: "#dc2626" }}
+                className="p-3 rounded-xl mb-4 flex items-center gap-2 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
               >
                 <span>⚠️</span> {error}
               </div>
@@ -163,8 +160,7 @@ export default function Register() {
               <div>
                 <label
                   htmlFor="name"
-                  className="flex items-center gap-2 text-sm font-medium mb-2"
-                  style={{ color: "var(--text-secondary)" }}
+                  className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-600 dark:text-gray-300"
                 >
                   <User className="w-4 h-4" />
                   Name (optional)
@@ -177,20 +173,14 @@ export default function Register() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
-                  className="w-full p-3 rounded-xl border"
-                  style={{
-                    background: "var(--background)",
-                    color: "var(--text-primary)",
-                    borderColor: "var(--border)"
-                  }}
+                  className="w-full p-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="email"
-                  className="flex items-center gap-2 text-sm font-medium mb-2"
-                  style={{ color: "var(--text-secondary)" }}
+                  className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-600 dark:text-gray-300"
                 >
                   <Mail className="w-4 h-4" />
                   Email
@@ -206,15 +196,10 @@ export default function Register() {
                   autoComplete="email"
                   aria-invalid={!!fieldErrors.email}
                   aria-describedby={fieldErrors.email ? "email-error" : undefined}
-                  className="w-full p-3 rounded-xl border"
-                  style={{
-                    background: "var(--background)",
-                    color: "var(--text-primary)",
-                    borderColor: fieldErrors.email ? "#dc2626" : "var(--border)"
-                  }}
+                  className={`w-full p-3 rounded-xl border bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all ${fieldErrors.email ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'}`}
                 />
                 {fieldErrors.email && (
-                  <span id="email-error" data-testid="error-email" className="text-xs mt-1 block" style={{ color: "#dc2626" }}>
+                  <span id="email-error" data-testid="error-email" className="text-xs mt-1 block text-red-600">
                     {fieldErrors.email}
                   </span>
                 )}
@@ -223,8 +208,7 @@ export default function Register() {
               <div>
                 <label
                   htmlFor="password"
-                  className="flex items-center gap-2 text-sm font-medium mb-2"
-                  style={{ color: "var(--text-secondary)" }}
+                  className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-600 dark:text-gray-300"
                 >
                   <Lock className="w-4 h-4" />
                   Password
@@ -240,15 +224,10 @@ export default function Register() {
                   autoComplete="new-password"
                   aria-invalid={!!fieldErrors.password}
                   aria-describedby={fieldErrors.password ? "password-error" : undefined}
-                  className="w-full p-3 rounded-xl border"
-                  style={{
-                    background: "var(--background)",
-                    color: "var(--text-primary)",
-                    borderColor: fieldErrors.password ? "#dc2626" : "var(--border)"
-                  }}
+                  className={`w-full p-3 rounded-xl border bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all ${fieldErrors.password ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'}`}
                 />
                 {fieldErrors.password && (
-                  <span id="password-error" data-testid="error-password" className="text-xs mt-1 block" style={{ color: "#dc2626" }}>
+                  <span id="password-error" data-testid="error-password" className="text-xs mt-1 block text-red-600">
                     {fieldErrors.password}
                   </span>
                 )}
@@ -257,8 +236,7 @@ export default function Register() {
               <div>
                 <label
                   htmlFor="confirmPassword"
-                  className="flex items-center gap-2 text-sm font-medium mb-2"
-                  style={{ color: "var(--text-secondary)" }}
+                  className="flex items-center gap-2 text-sm font-medium mb-2 text-gray-600 dark:text-gray-300"
                 >
                   <ShieldCheck className="w-4 h-4" />
                   Confirm Password
@@ -274,15 +252,10 @@ export default function Register() {
                   autoComplete="new-password"
                   aria-invalid={!!fieldErrors.confirmPassword}
                   aria-describedby={fieldErrors.confirmPassword ? "confirm-error" : undefined}
-                  className="w-full p-3 rounded-xl border"
-                  style={{
-                    background: "var(--background)",
-                    color: "var(--text-primary)",
-                    borderColor: fieldErrors.confirmPassword ? "#dc2626" : "var(--border)"
-                  }}
+                  className={`w-full p-3 rounded-xl border bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all ${fieldErrors.confirmPassword ? 'border-red-500' : 'border-gray-200 dark:border-gray-600'}`}
                 />
                 {fieldErrors.confirmPassword && (
-                  <span id="confirm-error" data-testid="error-confirm-password" className="text-xs mt-1 block" style={{ color: "#dc2626" }}>
+                  <span id="confirm-error" data-testid="error-confirm-password" className="text-xs mt-1 block text-red-600">
                     {fieldErrors.confirmPassword}
                   </span>
                 )}
@@ -293,7 +266,8 @@ export default function Register() {
                 data-testid="button-register"
                 disabled={isLoading}
                 aria-busy={isLoading}
-                className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-3 px-6 rounded-xl text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50 transition-all hover:shadow-lg hover:-translate-y-0.5"
+                style={{ background: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)" }}
               >
                 {isLoading ? (
                   "Creating account..."
@@ -306,19 +280,18 @@ export default function Register() {
               </button>
             </form>
 
-            <p className="text-center mt-6" style={{ color: "var(--text-secondary)" }}>
+            <p className="text-center mt-6 text-gray-600 dark:text-gray-400">
               Already have an account?{" "}
               <Link
                 to="/login"
                 data-testid="link-login"
-                className="font-semibold hover:underline"
-                style={{ color: "var(--primary)" }}
+                className="font-semibold hover:underline text-emerald-600 dark:text-emerald-400"
               >
                 Sign in
               </Link>
             </p>
 
-            <p className="text-center mt-4 text-xs" style={{ color: "var(--text-muted)" }}>
+            <p className="text-center mt-4 text-xs text-gray-500 dark:text-gray-500">
               By creating an account, you agree to our Terms of Service and Privacy Policy.
             </p>
           </div>
