@@ -10,6 +10,8 @@ MyMentalHealthBuddy is a comprehensive mental health support platform featuring 
 - **JWT Token Fix**: Resolved authentication mismatch where JWT was signed with `id` but middleware validated `userId` - now properly validates `id` and provides backward-compatible `userId` alias
 - **Analytics Routes Fix**: All analytics endpoints now correctly use `req.user.id` instead of undefined `req.user.userId`
 - **Mood Stats Fix**: Fixed division-by-zero bug in trend calculation by requiring 14+ entries and adding array length guards
+- **JWT Secret Security**: Removed hard-coded fallback secret; now requires SESSION_SECRET environment variable with error logging if missing
+- **OpenAI Graceful Handling**: Lazy initialization of OpenAI client with 503 response when API key is unavailable (no startup crash)
 
 ### Platform Perfection Session (November 25, 2025)
 - **AI Chat Enhancement**: Complete redesign with gradient header, conversation suggestions, animated typing indicators, improved message bubbles
