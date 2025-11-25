@@ -4,27 +4,26 @@ import crypto from "crypto";
 import { db } from "../db/connection.mjs";
 import { moodEntries } from "../shared/schema.mjs";
 import { eq, desc } from "drizzle-orm";
-import { optionalAuth } from "../middleware/auth.mjs";
+import { authGuard } from "../middleware/auth.mjs";
+import { success, created, badRequest, serverError } from "../utils/response.mjs";
+import { moodSchema, validate } from "../utils/validation.mjs";
 
 const router = express.Router();
 
-// Health check
-router.get("/ping", (req, res) => res.json({ ok: true, route: "mood" }));
+router.get("/ping", (req, res) => success(res, { route: "mood" }));
 
-// CREATE MOOD ENTRY
-router.post("/", optionalAuth, async (req, res) => {
+router.post("/", authGuard, async (req, res) => {
   try {
-    const { mood, notes } = req.body;
-    
-    if (!mood || typeof mood !== "number" || mood < 1 || mood > 10) {
-      return res.status(400).json({ ok: false, error: "Mood must be a number between 1 and 10" });
+    const validation = validate(moodSchema, req.body);
+    if (!validation.valid) {
+      return res.status(400).json({
+        ok: false,
+        error: "Validation failed",
+        validationErrors: validation.errors
+      });
     }
 
-    // Require authentication to save mood entries
-    if (!req.user?.id) {
-      return res.status(401).json({ ok: false, error: "Please login to save mood entries" });
-    }
-
+    const { mood, notes } = validation.data;
     const userId = String(req.user.id);
 
     const [entry] = await db
@@ -38,31 +37,24 @@ router.post("/", optionalAuth, async (req, res) => {
       })
       .returning();
 
-    res.json({ ok: true, entry });
+    return created(res, { entry });
   } catch (err) {
-    console.error("Error saving mood:", err);
-    res.status(500).json({ ok: false, error: "Failed to save mood", history: [] });
+    return serverError(res, err, "Failed to save mood entry");
   }
 });
 
-// GET HISTORY
-router.get("/history", optionalAuth, async (req, res) => {
+router.get("/history", authGuard, async (req, res) => {
   try {
-    // Return empty history if not logged in
-    if (!req.user?.id) {
-      return res.json({ ok: true, history: [] });
-    }
-
     const userId = String(req.user.id);
+    const limit = Math.min(parseInt(req.query.limit) || 20, 100);
 
     const history = await db
       .select()
       .from(moodEntries)
       .where(eq(moodEntries.userId, userId))
       .orderBy(desc(moodEntries.createdAt))
-      .limit(20);
+      .limit(limit);
 
-    // Map to expected format
     const formattedHistory = history.map(entry => ({
       id: entry.id,
       mood: entry.intensity || parseInt(entry.mood) || 5,
@@ -70,10 +62,85 @@ router.get("/history", optionalAuth, async (req, res) => {
       createdAt: entry.createdAt?.toISOString() || new Date().toISOString()
     }));
 
-    res.json({ ok: true, history: formattedHistory });
+    return success(res, { history: formattedHistory });
   } catch (err) {
-    console.error("Error fetching mood history:", err);
-    res.json({ ok: false, history: [], error: "Failed to fetch history" });
+    return serverError(res, err, "Failed to fetch mood history");
+  }
+});
+
+router.get("/stats", authGuard, async (req, res) => {
+  try {
+    const userId = String(req.user.id);
+
+    const entries = await db
+      .select()
+      .from(moodEntries)
+      .where(eq(moodEntries.userId, userId))
+      .orderBy(desc(moodEntries.createdAt))
+      .limit(30);
+
+    if (entries.length === 0) {
+      return success(res, {
+        stats: {
+          average: 0,
+          total: 0,
+          trend: "neutral",
+          highest: 0,
+          lowest: 0
+        }
+      });
+    }
+
+    const moods = entries.map(e => e.intensity || parseInt(e.mood) || 5);
+    const average = moods.reduce((a, b) => a + b, 0) / moods.length;
+    const highest = Math.max(...moods);
+    const lowest = Math.min(...moods);
+
+    let trend = "neutral";
+    if (moods.length >= 7) {
+      const recent = moods.slice(0, 7).reduce((a, b) => a + b, 0) / 7;
+      const older = moods.slice(7, 14).reduce((a, b) => a + b, 0) / Math.min(moods.length - 7, 7);
+      if (recent > older + 0.5) trend = "improving";
+      else if (recent < older - 0.5) trend = "declining";
+    }
+
+    return success(res, {
+      stats: {
+        average: Math.round(average * 10) / 10,
+        total: entries.length,
+        trend,
+        highest,
+        lowest
+      }
+    });
+  } catch (err) {
+    return serverError(res, err, "Failed to calculate mood stats");
+  }
+});
+
+router.delete("/:id", authGuard, async (req, res) => {
+  try {
+    const userId = String(req.user.id);
+    const entryId = req.params.id;
+
+    const [entry] = await db
+      .select()
+      .from(moodEntries)
+      .where(eq(moodEntries.id, entryId));
+
+    if (!entry) {
+      return res.status(404).json({ ok: false, error: "Entry not found" });
+    }
+
+    if (entry.userId !== userId) {
+      return res.status(403).json({ ok: false, error: "Not authorized to delete this entry" });
+    }
+
+    await db.delete(moodEntries).where(eq(moodEntries.id, entryId));
+
+    return success(res, { message: "Entry deleted successfully" });
+  } catch (err) {
+    return serverError(res, err, "Failed to delete mood entry");
   }
 });
 

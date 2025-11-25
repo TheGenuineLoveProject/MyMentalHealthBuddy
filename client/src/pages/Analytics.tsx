@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { apiGet } from "../utils/api";
 
 type MoodEntry = {
   id: string;
@@ -7,136 +8,123 @@ type MoodEntry = {
   createdAt: string;
 };
 
+type MoodStats = {
+  average: number;
+  total: number;
+  trend: string;
+  highest: number;
+  lowest: number;
+};
+
 export default function Analytics() {
   const [moodData, setMoodData] = useState<MoodEntry[]>([]);
+  const [stats, setStats] = useState<MoodStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const loadMoodData = async () => {
+    async function loadData() {
       try {
-        const token = localStorage.getItem("token");
-        const headers: Record<string, string> = {};
-        if (token) {
-          headers.Authorization = `Bearer ${token}`;
-        }
+        setIsLoading(true);
+        const [historyData, statsData] = await Promise.all([
+          apiGet<{ history: MoodEntry[] }>("/api/mood/history?limit=100"),
+          apiGet<{ stats: MoodStats }>("/api/mood/stats").catch(() => ({ ok: true, stats: null })),
+        ]);
 
-        const res = await fetch("/mood/history", { headers });
-        const data = await res.json();
-
-        if (data && Array.isArray(data.history)) {
-          setMoodData(data.history);
-        } else {
-          setMoodData([]);
+        setMoodData(historyData.history || []);
+        if (statsData.stats) {
+          setStats(statsData.stats);
         }
       } catch (err) {
-        console.error("Failed to load mood data:", err);
+        console.error("Failed to load analytics:", err);
         setMoodData([]);
       } finally {
         setIsLoading(false);
       }
-    };
+    }
 
-    loadMoodData();
+    loadData();
   }, []);
-
-  const calculateStats = () => {
-    if (moodData.length === 0) return null;
-
-    const moods = moodData.map((e) => Number(e.mood));
-    const average = moods.reduce((a, b) => a + b, 0) / moods.length;
-    const highest = Math.max(...moods);
-    const lowest = Math.min(...moods);
-
-    const lastWeekData = moodData.filter((e) => {
-      const entryDate = new Date(e.createdAt);
-      const weekAgo = new Date();
-      weekAgo.setDate(weekAgo.getDate() - 7);
-      return entryDate >= weekAgo;
-    });
-
-    const weeklyAvg =
-      lastWeekData.length > 0
-        ? lastWeekData.map((e) => Number(e.mood)).reduce((a, b) => a + b, 0) / lastWeekData.length
-        : 0;
-
-    return {
-      average: average.toFixed(1),
-      highest,
-      lowest,
-      totalEntries: moodData.length,
-      weeklyEntries: lastWeekData.length,
-      weeklyAvg: weeklyAvg.toFixed(1),
-    };
-  };
 
   const getMoodEmoji = (mood: number) => {
     if (mood <= 2) return "😢";
     if (mood <= 4) return "😞";
     if (mood <= 6) return "😐";
-    if (mood <= 8) return "😊";
-    return "😁";
+    if (mood <= 8) return "🙂";
+    return "😊";
   };
 
   const getMoodColor = (mood: number) => {
-    if (mood <= 2) return "#ef4444";
-    if (mood <= 4) return "#f97316";
-    if (mood <= 6) return "#eab308";
-    if (mood <= 8) return "#22c55e";
-    return "#10b981";
+    if (mood <= 2) return "#dc2626";
+    if (mood <= 4) return "#ea580c";
+    if (mood <= 6) return "#ca8a04";
+    if (mood <= 8) return "#16a34a";
+    return "#059669";
   };
 
-  const stats = calculateStats();
+  const getTrendLabel = (trend: string) => {
+    switch (trend) {
+      case "improving": return { icon: "📈", text: "Improving", color: "#16a34a" };
+      case "declining": return { icon: "📉", text: "Declining", color: "#dc2626" };
+      default: return { icon: "➡️", text: "Stable", color: "#6b7280" };
+    }
+  };
 
-  const StatCard = ({
+  function StatCard({
     title,
     value,
     subtitle,
     emoji,
+    color,
+    testId,
   }: {
     title: string;
     value: string | number;
     subtitle?: string;
     emoji?: string;
-  }) => (
-    <div
-      style={{
-        padding: "1.5rem",
-        background: "white",
-        borderRadius: "12px",
-        border: "1px solid #e5e7eb",
-        textAlign: "center",
-      }}
-    >
-      {emoji && <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>{emoji}</div>}
-      <div style={{ fontSize: "2rem", fontWeight: 700, color: "#1f2937" }}>{value}</div>
-      <div style={{ fontSize: "0.9rem", fontWeight: 600, color: "#6b7280" }}>{title}</div>
-      {subtitle && (
-        <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.25rem" }}>{subtitle}</div>
-      )}
-    </div>
-  );
+    color?: string;
+    testId?: string;
+  }) {
+    return (
+      <div
+        data-testid={testId}
+        style={{
+          padding: "1.5rem",
+          background: "white",
+          borderRadius: "12px",
+          border: "1px solid #e5e7eb",
+          textAlign: "center",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+        }}
+      >
+        {emoji && <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>{emoji}</div>}
+        <div style={{ fontSize: "2rem", fontWeight: 700, color: color || "#1f2937" }}>{value}</div>
+        <div style={{ fontSize: "0.9rem", fontWeight: 600, color: "#6b7280" }}>{title}</div>
+        {subtitle && (
+          <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.25rem" }}>{subtitle}</div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div data-testid="page-analytics" style={{ maxWidth: "1000px", margin: "0 auto", padding: "2rem" }}>
       <h1
         data-testid="text-analytics-title"
-        style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "0.5rem" }}
+        style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "0.5rem", color: "#1f2937" }}
       >
         Your Mental Health Insights
       </h1>
-      <p style={{ color: "#6b7280", marginBottom: "2rem" }}>
+      <p data-testid="text-analytics-subtitle" style={{ color: "#6b7280", marginBottom: "2rem" }}>
         Understanding patterns in your mood can help you take better care of yourself.
       </p>
 
-      {isLoading && (
-        <p data-testid="text-loading" style={{ color: "#6b7280" }}>
+      {isLoading ? (
+        <div data-testid="loading-analytics" style={{ padding: "3rem", textAlign: "center", color: "#6b7280" }}>
           Loading your analytics...
-        </p>
-      )}
-
-      {!isLoading && moodData.length === 0 && (
+        </div>
+      ) : moodData.length === 0 ? (
         <div
-          data-testid="text-no-data"
+          data-testid="section-no-data"
           style={{
             padding: "3rem",
             background: "#f9fafb",
@@ -145,18 +133,17 @@ export default function Analytics() {
           }}
         >
           <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📊</div>
-          <h3 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "0.5rem" }}>
+          <h3 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "0.5rem", color: "#374151" }}>
             No mood data yet
           </h3>
           <p style={{ color: "#6b7280" }}>
             Start tracking your mood to see insights here.
           </p>
         </div>
-      )}
-
-      {!isLoading && stats && (
+      ) : (
         <>
           <div
+            data-testid="section-stats"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
@@ -165,23 +152,43 @@ export default function Analytics() {
             }}
           >
             <StatCard
+              testId="stat-average"
               title="Average Mood"
-              value={stats.average}
+              value={stats?.average?.toFixed(1) || "0"}
               subtitle="All time"
-              emoji={getMoodEmoji(Number(stats.average))}
+              emoji={getMoodEmoji(stats?.average || 5)}
             />
-            <StatCard title="Highest" value={`${stats.highest}/10`} emoji="🎉" />
-            <StatCard title="Lowest" value={`${stats.lowest}/10`} emoji="💪" />
-            <StatCard title="Total Entries" value={stats.totalEntries} emoji="📝" />
             <StatCard
-              title="This Week"
-              value={stats.weeklyAvg}
-              subtitle={`${stats.weeklyEntries} entries`}
-              emoji="📅"
+              testId="stat-highest"
+              title="Highest"
+              value={`${stats?.highest || 0}/10`}
+              emoji="🎉"
             />
+            <StatCard
+              testId="stat-lowest"
+              title="Lowest"
+              value={`${stats?.lowest || 0}/10`}
+              emoji="💪"
+            />
+            <StatCard
+              testId="stat-total"
+              title="Total Entries"
+              value={stats?.total || moodData.length}
+              emoji="📝"
+            />
+            {stats?.trend && (
+              <StatCard
+                testId="stat-trend"
+                title="Weekly Trend"
+                value={getTrendLabel(stats.trend).text}
+                emoji={getTrendLabel(stats.trend).icon}
+                color={getTrendLabel(stats.trend).color}
+              />
+            )}
           </div>
 
           <h2
+            data-testid="text-timeline-title"
             style={{
               fontSize: "1.25rem",
               fontWeight: 600,
@@ -193,11 +200,13 @@ export default function Analytics() {
           </h2>
 
           <div
+            data-testid="chart-mood-timeline"
             style={{
               background: "white",
               borderRadius: "12px",
               border: "1px solid #e5e7eb",
               padding: "1.5rem",
+              marginBottom: "2rem",
             }}
           >
             <div
@@ -245,21 +254,22 @@ export default function Analytics() {
           </div>
 
           <h2
+            data-testid="text-recent-title"
             style={{
               fontSize: "1.25rem",
               fontWeight: 600,
-              margin: "2rem 0 1rem",
+              marginBottom: "1rem",
               color: "#374151",
             }}
           >
             Recent Check-ins
           </h2>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {moodData.slice(0, 10).map((entry) => (
+          <div data-testid="list-recent-entries" style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            {moodData.slice(0, 10).map((entry, index) => (
               <div
                 key={entry.id}
-                data-testid={`row-mood-${entry.id}`}
+                data-testid={`row-mood-${index}`}
                 style={{
                   display: "flex",
                   alignItems: "center",

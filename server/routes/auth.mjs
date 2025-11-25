@@ -5,85 +5,123 @@ import jwt from "jsonwebtoken";
 import { db } from "../db/connection.mjs";
 import { users } from "../shared/schema.mjs";
 import { eq } from "drizzle-orm";
+import { success, created, badRequest, unauthorized, conflict, serverError } from "../utils/response.mjs";
+import { registerSchema, loginSchema, validate } from "../utils/validation.mjs";
 
 const router = express.Router();
 
-// Health check
-router.get("/ping", (req, res) => res.json({ ok: true, route: "auth" }));
+const JWT_SECRET = process.env.SESSION_SECRET || "dev-secret-change-in-production";
+const JWT_EXPIRY = "7d";
 
-// REGISTER
+router.get("/ping", (req, res) => success(res, { route: "auth" }));
+
 router.post("/register", async (req, res) => {
   try {
-    const { email, password, name } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required" });
+    const validation = validate(registerSchema, req.body);
+    if (!validation.valid) {
+      return res.status(400).json({
+        ok: false,
+        error: "Validation failed",
+        validationErrors: validation.errors
+      });
     }
 
-    // Check if user already exists
-    const [existingUser] = await db.select().from(users).where(eq(users.email, email));
+    const { email, password, name } = validation.data;
+
+    const [existingUser] = await db.select().from(users).where(eq(users.email, email.toLowerCase()));
     if (existingUser) {
-      return res.status(409).json({ error: "Email already registered" });
+      return conflict(res, "An account with this email already exists");
     }
 
     const passwordHash = await bcrypt.hash(password, 12);
 
     const [newUser] = await db
       .insert(users)
-      .values({ email, passwordHash, name: name || null })
+      .values({ 
+        email: email.toLowerCase(), 
+        passwordHash, 
+        name: name || null 
+      })
       .returning();
 
     const token = jwt.sign(
       { id: newUser.id, email: newUser.email },
-      process.env.SESSION_SECRET || "dev-secret",
-      { expiresIn: "7d" }
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRY }
     );
 
-    res.status(201).json({ 
-      ok: true,
+    return created(res, { 
       user: { id: newUser.id, email: newUser.email, name: newUser.name }, 
       token 
     });
   } catch (err) {
-    console.error("Registration error:", err);
-    res.status(500).json({ error: "Registration failed. Please try again." });
+    return serverError(res, err, "Registration failed. Please try again.");
   }
 });
 
-// LOGIN
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({ error: "Email and password are required" });
+    const validation = validate(loginSchema, req.body);
+    if (!validation.valid) {
+      return res.status(400).json({
+        ok: false,
+        error: "Validation failed",
+        validationErrors: validation.errors
+      });
     }
 
-    const [user] = await db.select().from(users).where(eq(users.email, email));
+    const { email, password } = validation.data;
+
+    const [user] = await db.select().from(users).where(eq(users.email, email.toLowerCase()));
 
     if (!user) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return unauthorized(res, "Invalid email or password");
     }
 
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) {
-      return res.status(401).json({ error: "Invalid email or password" });
+      return unauthorized(res, "Invalid email or password");
     }
 
     const token = jwt.sign(
       { id: user.id, email: user.email },
-      process.env.SESSION_SECRET || "dev-secret",
-      { expiresIn: "7d" }
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRY }
     );
 
-    res.json({ 
-      ok: true,
+    return success(res, { 
       user: { id: user.id, email: user.email, name: user.name }, 
       token 
     });
   } catch (err) {
-    console.error("Login error:", err);
-    res.status(500).json({ error: "Login failed. Please try again." });
+    return serverError(res, err, "Login failed. Please try again.");
+  }
+});
+
+router.get("/me", async (req, res) => {
+  try {
+    const header = req.headers.authorization;
+    if (!header || !header.startsWith("Bearer ")) {
+      return unauthorized(res, "No token provided");
+    }
+
+    const token = header.split(" ")[1];
+    const decoded = jwt.verify(token, JWT_SECRET);
+    
+    const [user] = await db.select().from(users).where(eq(users.id, decoded.id));
+    
+    if (!user) {
+      return unauthorized(res, "User not found");
+    }
+
+    return success(res, { 
+      user: { id: user.id, email: user.email, name: user.name } 
+    });
+  } catch (err) {
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') {
+      return unauthorized(res, "Invalid or expired token");
+    }
+    return serverError(res, err, "Failed to verify token");
   }
 });
 

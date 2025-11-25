@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getStoredUser, logout } from "../utils/api";
 
 export default function Settings() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [notifications, setNotifications] = useState(true);
   const [theme, setTheme] = useState("light");
   const [isSaving, setIsSaving] = useState(false);
@@ -15,18 +17,14 @@ export default function Settings() {
     setTheme(savedTheme);
     setNotifications(savedNotifications);
 
-    try {
-      const token = localStorage.getItem("token");
-      if (token) {
-        const payload = JSON.parse(atob(token.split(".")[1]));
-        setEmail(payload.email || "");
-      }
-    } catch {
-      setEmail("");
+    const user = getStoredUser();
+    if (user) {
+      setEmail(user.email || "");
+      setName(user.name || "");
     }
   }, []);
 
-  const handleSavePreferences = () => {
+  function handleSavePreferences() {
     setIsSaving(true);
     localStorage.setItem("theme", theme);
     localStorage.setItem("notifications", String(notifications));
@@ -36,68 +34,73 @@ export default function Settings() {
       setMessage("Preferences saved successfully!");
       setTimeout(() => setMessage(""), 3000);
     }, 500);
-  };
+  }
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
+  function handleLogout() {
+    logout();
+  }
 
-  const handleDeleteAccount = () => {
+  function handleDeleteAccount() {
     const confirmed = window.confirm(
-      "Are you sure you want to delete your account? This action cannot be undone."
+      "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed."
     );
     if (confirmed) {
-      localStorage.removeItem("token");
-      navigate("/");
+      logout();
     }
-  };
+  }
 
-  const Section = ({
+  function Section({
     title,
     children,
+    testId,
   }: {
     title: string;
     children: React.ReactNode;
-  }) => (
-    <div
-      style={{
-        marginBottom: "2rem",
-        padding: "1.5rem",
-        background: "white",
-        borderRadius: "12px",
-        border: "1px solid #e5e7eb",
-      }}
-    >
-      <h2
+    testId?: string;
+  }) {
+    return (
+      <section
+        data-testid={testId}
         style={{
-          fontSize: "1.1rem",
-          fontWeight: 600,
-          marginBottom: "1rem",
-          color: "#374151",
+          marginBottom: "2rem",
+          padding: "1.5rem",
+          background: "white",
+          borderRadius: "12px",
+          border: "1px solid #e5e7eb",
+          boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
         }}
       >
-        {title}
-      </h2>
-      {children}
-    </div>
-  );
+        <h2
+          style={{
+            fontSize: "1.1rem",
+            fontWeight: 600,
+            marginBottom: "1rem",
+            color: "#374151",
+          }}
+        >
+          {title}
+        </h2>
+        {children}
+      </section>
+    );
+  }
 
   return (
     <div data-testid="page-settings" style={{ maxWidth: "600px", margin: "0 auto", padding: "2rem" }}>
       <h1
         data-testid="text-settings-title"
-        style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "0.5rem" }}
+        style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "0.5rem", color: "#1f2937" }}
       >
         Settings
       </h1>
-      <p style={{ color: "#6b7280", marginBottom: "2rem" }}>
+      <p data-testid="text-settings-subtitle" style={{ color: "#6b7280", marginBottom: "2rem" }}>
         Manage your account and preferences.
       </p>
 
       {message && (
         <div
           data-testid="text-success-message"
+          role="status"
           style={{
             padding: "1rem",
             background: "#ecfdf5",
@@ -111,9 +114,10 @@ export default function Settings() {
         </div>
       )}
 
-      <Section title="Account Information">
+      <Section title="Account Information" testId="section-account">
         <div style={{ marginBottom: "1rem" }}>
           <label
+            htmlFor="email"
             style={{
               display: "block",
               fontSize: "0.9rem",
@@ -125,10 +129,12 @@ export default function Settings() {
             Email Address
           </label>
           <input
+            id="email"
             type="email"
             data-testid="input-email"
             value={email}
             disabled
+            aria-readonly="true"
             style={{
               width: "100%",
               padding: "0.75rem",
@@ -136,15 +142,33 @@ export default function Settings() {
               border: "1px solid #e5e7eb",
               background: "#f9fafb",
               color: "#6b7280",
+              boxSizing: "border-box",
             }}
           />
           <p style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.25rem" }}>
             Email cannot be changed at this time.
           </p>
         </div>
+
+        {name && (
+          <div>
+            <label
+              style={{
+                display: "block",
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                color: "#6b7280",
+                marginBottom: "0.5rem",
+              }}
+            >
+              Name
+            </label>
+            <p data-testid="text-name" style={{ color: "#374151", fontWeight: 500 }}>{name}</p>
+          </div>
+        )}
       </Section>
 
-      <Section title="Preferences">
+      <Section title="Preferences" testId="section-preferences">
         <div style={{ marginBottom: "1.25rem" }}>
           <label
             style={{
@@ -172,6 +196,7 @@ export default function Settings() {
 
         <div style={{ marginBottom: "1.25rem" }}>
           <label
+            htmlFor="theme-select"
             style={{
               display: "block",
               fontSize: "0.9rem",
@@ -183,6 +208,7 @@ export default function Settings() {
             Theme
           </label>
           <select
+            id="theme-select"
             data-testid="select-theme"
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
@@ -193,6 +219,7 @@ export default function Settings() {
               border: "1px solid #e5e7eb",
               background: "white",
               fontSize: "1rem",
+              boxSizing: "border-box",
             }}
           >
             <option value="light">Light</option>
@@ -205,6 +232,7 @@ export default function Settings() {
           onClick={handleSavePreferences}
           data-testid="button-save-preferences"
           disabled={isSaving}
+          aria-busy={isSaving}
           style={{
             padding: "0.75rem 1.5rem",
             borderRadius: "10px",
@@ -212,14 +240,15 @@ export default function Settings() {
             background: isSaving ? "#9ca3af" : "#4f46e5",
             color: "white",
             fontWeight: 600,
-            cursor: isSaving ? "default" : "pointer",
+            cursor: isSaving ? "not-allowed" : "pointer",
+            transition: "background 0.2s",
           }}
         >
           {isSaving ? "Saving..." : "Save Preferences"}
         </button>
       </Section>
 
-      <Section title="Account Actions">
+      <Section title="Account Actions" testId="section-actions">
         <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
           <button
             onClick={handleLogout}
@@ -232,6 +261,7 @@ export default function Settings() {
               color: "#374151",
               fontWeight: 500,
               cursor: "pointer",
+              transition: "background 0.2s",
             }}
           >
             Log Out
@@ -247,6 +277,7 @@ export default function Settings() {
               color: "#dc2626",
               fontWeight: 500,
               cursor: "pointer",
+              transition: "background 0.2s",
             }}
           >
             Delete Account
@@ -255,16 +286,24 @@ export default function Settings() {
       </Section>
 
       <div
+        data-testid="section-support"
         style={{
           padding: "1rem",
           background: "#f9fafb",
           borderRadius: "10px",
           textAlign: "center",
-          color: "#9ca3af",
+          color: "#6b7280",
           fontSize: "0.85rem",
         }}
       >
-        Need help? Contact us at support@mymentalhealthbuddy.com
+        Need help? Contact us at{" "}
+        <a
+          href="mailto:support@mymentalhealthbuddy.com"
+          data-testid="link-support-email"
+          style={{ color: "#4f46e5", textDecoration: "none" }}
+        >
+          support@mymentalhealthbuddy.com
+        </a>
       </div>
     </div>
   );

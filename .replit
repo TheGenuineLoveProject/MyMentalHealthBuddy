@@ -16,7 +16,7 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 42447
+localPort = 41871
 externalPort = 3000
 
 # 4) (Optional but nice) Nix channel:
