@@ -1,24 +1,28 @@
-// client/src/App.jsx
-import { Route, Switch } from "wouter";
-import Layout from "@/components/layout/Layout";
-
-import HomePage from "@/pages/HomePage";
-import AuthPage from "@/pages/AuthPage";
-import AIPage from "@/pages/AIPage";
-import AnalyticsPage from "@/pages/AnalyticsPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import Journal from "./pages/Journal";
+import Mood from "./pages/Mood";
+import Analytics from "./pages/Analytics";
+import Settings from "./pages/Settings";
+import Error404 from "./pages/Error404";
 
 export default function App() {
   return (
-    <Layout>
-      <Switch>
-        <Route path="/" component={HomePage} />
-        <Route path="/auth" component={AuthPage} />
-        <Route path="/ai" component={AIPage} />
-        <Route path="/analytics" component={AnalyticsPage} />
-
-        {/* Catch-all route */}
-        <Route>404 - Page Not Found</Route>
-      </Switch>
-    </Layout>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/journal" element={<Journal />} />
+        <Route path="/mood" element={<Mood />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="*" element={<Error404 />} />
+      </Routes>
+    </BrowserRouter>
   );
 }

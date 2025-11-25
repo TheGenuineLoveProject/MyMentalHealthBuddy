@@ -1,15 +1,7 @@
-import { users, moodEntries, journalEntries, subscriptions } 
-  from "../shared/schema.mjs";
-import { Router } from "express";
-import authGuard from "../middleware/auth.mjs";
+import express from "express";
+import { authGuard } from "../middleware/auth.mjs";
+const router = express.Router();
 
-const router = Router();
-
-router.get("/", authGuard, (req, res) => {
-  res.json({
-    message: "Content route working ✓",
-    user: req.user,
-  });
-});
+router.get("/ping", (req, res) => res.json({ ok: true, route: "content" }));
 
 export default router;

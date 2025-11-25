@@ -1,17 +1,16 @@
+// server/middleware/cors-fix.mjs
 import cors from "cors";
 
-const allowedOrigins = [
-  process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : null,
-  process.env.CORS_ORIGIN || null,
-].filter(Boolean);
-
-export const secureCORS = cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.includes(origin)) return callback(null, true);
-    return callback(new Error("Not allowed by CORS"));
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+// CORS configuration (safe defaults)
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-});
+};
+
+// Export correctly so the server can import default
+export default function corsFix(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+}

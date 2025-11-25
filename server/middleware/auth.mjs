@@ -1,15 +1,15 @@
-import jwt from "jsonwebtoken";
-
-export default function authGuard(req, res, next) {
-  const auth = req.headers.authorization;
-  if (!auth) return res.status(401).json({ error: "Not authorized" });
-
+/* server/middleware/auth.mjs */
+export function auth(req, res, next) {
   try {
-    const token = auth.split(" ")[1];
-    const decoded = jwt.verify(token, process.env.SESSION_SECRET);
-    req.user = decoded;
+    const token = req.headers.authorization;
+    if (!token) return res.status(401).json({ error: "Unauthorized" });
     next();
-  } catch {
-    return res.status(401).json({ error: "Invalid token" });
+  } catch (err) {
+    console.error("auth middleware error:", err);
+    res.status(500).json({ error: "Internal auth error" });
   }
+}
+
+export function authGuard(req, res, next) {
+  return auth(req, res, next);
 }

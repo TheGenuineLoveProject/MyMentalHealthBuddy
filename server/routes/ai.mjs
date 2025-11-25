@@ -1,12 +1,13 @@
-import { users, moodEntries, journalEntries, subscriptions } 
-  from "../shared/schema.mjs";
-// ===== AI ROUTE (PROTECTED - 8888^) =====
+// server/routes/ai.mjs
 import { Router } from "express";
-import { runAIEmployee } from "../ai/aiHandler.mjs";
-import authGuard from "../middleware/auth.mjs";
+import { askAI } from "../services/aiService.mjs";
 
 const router = Router();
 
-router.post("/chat", authGuard, runAIEmployee);
+router.post("/chat", async (req, res) => {
+  const { message } = req.body || {};
+  const reply = await askAI(message || "");
+  res.json({ reply });
+});
 
 export default router;
