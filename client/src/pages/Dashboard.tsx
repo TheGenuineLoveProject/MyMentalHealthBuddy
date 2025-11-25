@@ -1,9 +1,17 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+type MoodEntry = {
+  id: number;
+  mood: number;
+  notes?: string;
+  createdAt: string;
+};
 
 export default function Dashboard() {
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState<MoodEntry[]>([]);
 
-  // fetch recent mood history
+  // ---- FETCH RECENT MOOD HISTORY ----
   useEffect(() => {
     fetch("/mood/history")
       .then((r) => r.json())
@@ -26,14 +34,14 @@ export default function Dashboard() {
         Recent Mood Trends
       </h2>
 
-      {/* If no data */}
+      {/* ---- IF NO DATA ---- */}
       {history.length === 0 && (
         <p style={{ color: "#888" }}>
           You have no mood history yet. Go save your first mood!
         </p>
       )}
 
-      {/* List */}
+      {/* ---- LIST ---- */}
       <ul style={{ listStyle: "none", padding: 0 }}>
         {history.map((entry) => {
           const date = new Date(entry.createdAt).toLocaleString();
@@ -48,10 +56,13 @@ export default function Dashboard() {
                 border: "1px solid #ddd",
               }}
             >
-              <div style={{ fontWeight: 600 }}>Mood: {entry.mood}/10</div>
-              <div style={{ fontSize: "0.9rem" }}>{date}</div>
+              <div style={{ fontWeight: 600 }}>
+                Mood: {entry.mood}/10
+              </div>
+              <div style={{ fontSize: "0.9rem", color: "#444" }}>{date}</div>
+
               {entry.notes && (
-                <div style={{ marginTop: "0.5rem", color: "#444" }}>
+                <div style={{ marginTop: "0.5rem", color: "#444", fontSize: "0.85rem" }}>
                   Notes: {entry.notes}
                 </div>
               )}
@@ -60,21 +71,22 @@ export default function Dashboard() {
         })}
       </ul>
 
-      <a
-        href="/mood"
+      {/* ---- FIXED BUTTON: ALWAYS GOES TO /mood ---- */}
+      <Link
+        to="/mood"
         style={{
           marginTop: "2rem",
           display: "inline-block",
           padding: "0.75rem 1.25rem",
-          background: "#4e8cff",
-          color: "#fff",
-          borderRadius: "6px",
+          background: "#4e86ff",
+          color: "white",
+          borderRadius: "8px",
           textDecoration: "none",
           fontWeight: 600,
         }}
       >
         Go to Mood Tracker →
-      </a>
+      </Link>
     </div>
   );
 }

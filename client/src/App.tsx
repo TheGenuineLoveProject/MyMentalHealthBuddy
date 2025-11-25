@@ -13,13 +13,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-        {/* PUBLIC */}
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* PROTECTED */}
+        {/* Protected pages */}
         <Route
           path="/dashboard"
           element={
@@ -29,16 +28,7 @@ export default function App() {
           }
         />
 
-        <Route
-          path="/mood"
-          element={
-            <ProtectedRoute>
-              <MoodPage />
-            </ProtectedRoute>
-          }
-        />
-
+        {/* Mood tracker is PUBLIC for demo */}
+        <Route path="/mood" element={<MoodPage />} />
       </Routes>
     </BrowserRouter>
-  );
-}
