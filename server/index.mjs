@@ -68,7 +68,10 @@ app.get("/api/health/ready", async (req, res) => {
       timestamp: new Date().toISOString()
     });
   } catch (err) {
-    console.error("Health check failed:", err.message);
+    logger.error("Health check failed", { 
+      error: err.message,
+      requestId: req.requestId 
+    });
     res.status(503).json({ 
       ok: false,
       status: "not-ready",
