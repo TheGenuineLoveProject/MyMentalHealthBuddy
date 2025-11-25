@@ -6,11 +6,19 @@ MyMentalHealthBuddy is a comprehensive mental health support platform featuring 
 
 ## Recent Changes (November 25, 2025)
 
+### Visual Enhancement Session
+- **All Pages Polished**: Analytics, Journal, Settings, MoodPage, Login, Register now feature consistent gradient headers
+- **Modern Styling**: Lucide icons throughout, smooth animations (fadeIn, slideUp), card-based layouts
+- **Split-Screen Auth**: Login and Register pages now use elegant split-screen design with feature lists
+- **Accessibility Enhanced**: ARIA labels, aria-invalid, aria-describedby, semantic form labels across all forms
+- **Performance**: ErrorBoundary component, lazy loading with Suspense, PageSkeleton for loading states
+
 ### Security & Backend Enhancements
 - **JWT Security**: Enforced SESSION_SECRET in production (exits if not configured)
 - **Stripe Webhooks**: Complete event handlers with database-backed idempotency for autoscale
-- **Analytics API**: 5 new endpoints (mood-trends, mood-distribution, journal-stats, wellness-score, summary)
-- **Schema Update**: Added Stripe fields to users table, webhookEvents table for idempotency
+- **Rate Limiting**: Multi-tier rate limiters (general, auth, AI, strict, write)
+- **Health Checks**: /api/health, /api/health/ready (with DB latency), /api/health/live endpoints
+- **Graceful Shutdown**: SIGTERM and SIGINT handlers with 30s timeout
 
 ### Frontend & Visual Improvements
 - **Visual Refresh**: Gradient hero sections, CSS animations, modern card designs
