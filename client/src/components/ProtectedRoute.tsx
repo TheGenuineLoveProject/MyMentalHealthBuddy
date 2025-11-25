@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
-export default function ProtectedRoute({ children }) {
+type Props = {
+  children: ReactNode;
+};
+
+export default function ProtectedRoute({ children }: Props) {
   const [loading, setLoading] = useState(true);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const t = localStorage.getItem("token");

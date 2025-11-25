@@ -5,9 +5,9 @@ import { Navigate } from "react-router-dom";
    Types
 --------------------------------------------- */
 type MoodEntry = {
-  id: number;
+  id: string;
   mood: number;
-  notes: string;
+  notes?: string;
   createdAt: string;
 };
 
@@ -53,16 +53,24 @@ export default function MoodPage() {
   --------------------------------------------- */
   const loadHistory = async () => {
     try {
-      const res = await fetch("/mood/history", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      const token = localStorage.getItem("token");
+      const headers: Record<string, string> = {};
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
 
+      const res = await fetch("/mood/history", { headers });
       const data = await res.json();
-      setHistory(data.history || []);
+      
+      // Ensure history is always an array
+      if (data && Array.isArray(data.history)) {
+        setHistory(data.history);
+      } else {
+        setHistory([]);
+      }
     } catch (err) {
       console.error("Failed to load mood history:", err);
+      setHistory([]);
     }
   };
 

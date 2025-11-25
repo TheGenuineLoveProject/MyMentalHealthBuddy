@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 type MoodEntry = {
-  id: number;
+  id: string;
   mood: number;
   notes?: string;
   createdAt: string;
@@ -13,10 +13,30 @@ export default function Dashboard() {
 
   // ---- FETCH RECENT MOOD HISTORY ----
   useEffect(() => {
-    fetch("/mood/history")
-      .then((r) => r.json())
-      .then((data) => setHistory(data.history || []))
-      .catch(() => setHistory([]));
+    const fetchHistory = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const headers: Record<string, string> = {};
+        if (token) {
+          headers.Authorization = `Bearer ${token}`;
+        }
+        
+        const res = await fetch("/mood/history", { headers });
+        const data = await res.json();
+        
+        // Ensure history is always an array
+        if (data && Array.isArray(data.history)) {
+          setHistory(data.history);
+        } else {
+          setHistory([]);
+        }
+      } catch (err) {
+        console.error("Failed to load mood history:", err);
+        setHistory([]);
+      }
+    };
+    
+    fetchHistory();
   }, []);
 
   return (

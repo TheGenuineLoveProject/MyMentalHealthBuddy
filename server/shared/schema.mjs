@@ -12,12 +12,15 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-// MOOD ENTRIES
+// MOOD ENTRIES - matches existing database schema
 export const moodEntries = pgTable("mood_entries", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  mood: varchar("mood", { length: 50 }).notNull(),
-  note: text("note"),
+  id: varchar("id", { length: 255 }).primaryKey(),
+  userId: varchar("user_id", { length: 255 }).notNull(),
+  mood: text("mood").notNull(),
+  intensity: integer("intensity").notNull().default(5),
+  notes: text("notes"),
+  activities: text("activities").array(),
+  triggers: text("triggers").array(),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
