@@ -1,37 +1,52 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { isAuthenticated, logout as apiLogout } from "../utils/api";
 
 export default function Navbar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    setIsLoggedIn(isAuthenticated());
   }, [location.pathname]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    window.location.href = "/";
-  };
+  function handleLogout() {
+    apiLogout();
+  }
 
-  const isActive = (path: string) => location.pathname === path;
+  function isActive(path: string): boolean {
+    return location.pathname === path;
+  }
 
-  const linkStyle = (path: string) => ({
-    padding: "0.5rem 1rem",
-    borderRadius: "8px",
-    textDecoration: "none",
-    fontWeight: 500,
-    fontSize: "0.95rem",
-    color: isActive(path) ? "#4f46e5" : "#374151",
-    background: isActive(path) ? "#eef2ff" : "transparent",
-    transition: "all 0.2s ease",
-  });
+  function linkStyle(path: string) {
+    return {
+      padding: "0.5rem 1rem",
+      borderRadius: "8px",
+      textDecoration: "none",
+      fontWeight: 500,
+      fontSize: "0.95rem",
+      color: isActive(path) ? "#4f46e5" : "#374151",
+      background: isActive(path) ? "#eef2ff" : "transparent",
+      transition: "all 0.2s ease",
+    };
+  }
+
+  const navLinks = [
+    { to: "/dashboard", label: "Dashboard", testId: "link-dashboard" },
+    { to: "/mood", label: "Mood", testId: "link-mood" },
+    { to: "/journal", label: "Journal", testId: "link-journal" },
+    { to: "/chat", label: "AI Chat", testId: "link-chat" },
+    { to: "/analytics", label: "Analytics", testId: "link-analytics" },
+    { to: "/settings", label: "Settings", testId: "link-settings" },
+  ];
 
   return (
     <nav
       data-testid="navbar"
+      role="navigation"
+      aria-label="Main navigation"
       style={{
         display: "flex",
         justifyContent: "space-between",
@@ -46,7 +61,8 @@ export default function Navbar() {
     >
       <Link
         to="/"
-        data-testid="link-home"
+        data-testid="link-logo"
+        aria-label="MyMentalHealthBuddy Home"
         style={{
           fontSize: "1.25rem",
           fontWeight: 700,
@@ -57,30 +73,28 @@ export default function Navbar() {
         MyMentalHealthBuddy
       </Link>
 
-      <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+      <div
+        data-testid="nav-links"
+        style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
+      >
         {isLoggedIn ? (
           <>
-            <Link to="/dashboard" data-testid="link-dashboard" style={linkStyle("/dashboard")}>
-              Dashboard
-            </Link>
-            <Link to="/mood" data-testid="link-mood" style={linkStyle("/mood")}>
-              Mood
-            </Link>
-            <Link to="/journal" data-testid="link-journal" style={linkStyle("/journal")}>
-              Journal
-            </Link>
-            <Link to="/chat" data-testid="link-chat" style={linkStyle("/chat")}>
-              AI Chat
-            </Link>
-            <Link to="/analytics" data-testid="link-analytics" style={linkStyle("/analytics")}>
-              Analytics
-            </Link>
-            <Link to="/settings" data-testid="link-settings" style={linkStyle("/settings")}>
-              Settings
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                data-testid={link.testId}
+                aria-current={isActive(link.to) ? "page" : undefined}
+                style={linkStyle(link.to)}
+              >
+                {link.label}
+              </Link>
+            ))}
             <button
               onClick={handleLogout}
               data-testid="button-logout"
+              type="button"
+              aria-label="Log out of your account"
               style={{
                 marginLeft: "0.5rem",
                 padding: "0.5rem 1rem",
@@ -90,6 +104,7 @@ export default function Navbar() {
                 color: "#6b7280",
                 fontWeight: 500,
                 cursor: "pointer",
+                transition: "all 0.2s ease",
               }}
             >
               Logout
@@ -97,7 +112,12 @@ export default function Navbar() {
           </>
         ) : (
           <>
-            <Link to="/login" data-testid="link-login" style={linkStyle("/login")}>
+            <Link
+              to="/login"
+              data-testid="link-login"
+              aria-current={isActive("/login") ? "page" : undefined}
+              style={linkStyle("/login")}
+            >
               Login
             </Link>
             <Link
@@ -111,6 +131,7 @@ export default function Navbar() {
                 fontSize: "0.95rem",
                 color: "white",
                 background: "#4f46e5",
+                transition: "all 0.2s ease",
               }}
             >
               Get Started
