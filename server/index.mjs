@@ -10,6 +10,7 @@ import moodRoutes from "./routes/mood.mjs";
 import journalRoutes from "./routes/journal.mjs";
 import aiRoutes from "./routes/ai.mjs";
 import billingRoutes from "./routes/billing.mjs";
+import analyticsRoutes from "./routes/analytics.mjs";
 import stripeWebhook from "./routes/stripeWebhook.mjs";
 
 import { db } from "./db/connection.mjs";
@@ -87,6 +88,7 @@ app.use("/api/mood", moodRoutes);
 app.use("/api/journal", journalRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/billing", billingRoutes);
+app.use("/api/analytics", analyticsRoutes);
 
 app.use("/auth", authRoutes);
 app.use("/mood", moodRoutes);

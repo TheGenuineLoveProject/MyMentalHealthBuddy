@@ -8,12 +8,15 @@ modules = ["nodejs-20", "postgresql-16"]
 # 2) Deployment config for Replit Autoscale:
 [deployment]
 deploymentTarget = "autoscale"
-run = ["npm", "start"]
 build = ["npm", "run", "build"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 46285
+externalPort = 3000
 
 # 4) (Optional but nice) Nix channel:
 [nix]
