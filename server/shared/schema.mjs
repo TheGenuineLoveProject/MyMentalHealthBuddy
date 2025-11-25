@@ -8,6 +8,11 @@ export const users = pgTable("users", {
   email: varchar("email", { length: 255 }).notNull().unique(),
   passwordHash: varchar("password_hash", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }),
+  stripeCustomerId: varchar("stripe_customer_id", { length: 255 }),
+  stripeSubscriptionId: varchar("stripe_subscription_id", { length: 255 }),
+  subscriptionPlan: varchar("subscription_plan", { length: 50 }).default("free"),
+  subscriptionStatus: varchar("subscription_status", { length: 50 }).default("active"),
+  subscriptionPeriodEnd: timestamp("subscription_period_end"),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

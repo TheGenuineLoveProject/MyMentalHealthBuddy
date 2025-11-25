@@ -4,6 +4,17 @@
 
 MyMentalHealthBuddy is a comprehensive mental health support platform featuring AI-powered chat therapy, mood tracking, personal journaling, mental health resources, and crisis support. The platform combines therapeutic AI conversations with self-care tools to provide 24/7 mental health support in a compassionate, non-judgmental environment.
 
+## Recent Changes (November 25, 2025)
+
+- **Component Enhancement**: All React components enhanced with comprehensive data-testid attributes
+- **Accessibility**: Added ARIA labels to Navbar, ProtectedRoute, FloatingButton, ChatWidget
+- **Error Handling**: Centralized API client with proper error handling
+- **Schema Update**: Added Stripe subscription fields to users table
+- **Bug Fixes**: Fixed AI service model name from "gpt-4.1-mini" to "gpt-4o-mini"
+- **Cleanup**: Removed duplicate/unused files (stripe.mjs, cors-fix.mjs, connection.mjs, pages/index.tsx)
+- **Billing Routes**: Complete Stripe integration with plans, checkout, portal, cancel endpoints
+- **404 Page**: Enhanced with proper styling and navigation links
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.

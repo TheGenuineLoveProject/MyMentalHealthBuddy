@@ -14,7 +14,7 @@ const openai = new OpenAI({
 export async function askAI(message) {
   try {
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: "You are a warm, supportive mental health buddy." },
         { role: "user", content: message },
