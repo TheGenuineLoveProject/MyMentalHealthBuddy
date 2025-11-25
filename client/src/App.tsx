@@ -16,6 +16,7 @@ import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FloatingButton from "./components/FloatingButton";
 import ChatWidget from "./components/ChatWidget";
+import { ThemeProvider } from "./context/ThemeContext";
 
 function AppContent() {
   const [showChat, setShowChat] = useState(false);
@@ -107,8 +108,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppContent />
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
