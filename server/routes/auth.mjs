@@ -10,8 +10,19 @@ import { registerSchema, loginSchema, validate } from "../utils/validation.mjs";
 
 const router = express.Router();
 
-const JWT_SECRET = process.env.SESSION_SECRET || "dev-secret-change-in-production";
+const JWT_SECRET = process.env.SESSION_SECRET;
 const JWT_EXPIRY = "7d";
+
+if (!JWT_SECRET) {
+  console.error("[CRITICAL] SESSION_SECRET environment variable is not set. Authentication will not work.");
+}
+
+const getJwtSecret = () => {
+  if (!JWT_SECRET) {
+    throw new Error("SESSION_SECRET not configured");
+  }
+  return JWT_SECRET;
+};
 
 router.get("/ping", (req, res) => success(res, { route: "auth" }));
 
@@ -46,7 +57,7 @@ router.post("/register", async (req, res) => {
 
     const token = jwt.sign(
       { id: newUser.id, email: newUser.email },
-      JWT_SECRET,
+      getJwtSecret(),
       { expiresIn: JWT_EXPIRY }
     );
 
@@ -85,7 +96,7 @@ router.post("/login", async (req, res) => {
 
     const token = jwt.sign(
       { id: user.id, email: user.email },
-      JWT_SECRET,
+      getJwtSecret(),
       { expiresIn: JWT_EXPIRY }
     );
 
@@ -106,7 +117,7 @@ router.get("/me", async (req, res) => {
     }
 
     const token = header.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, getJwtSecret());
     
     const [user] = await db.select().from(users).where(eq(users.id, decoded.id));
     

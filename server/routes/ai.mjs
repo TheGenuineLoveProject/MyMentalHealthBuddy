@@ -7,9 +7,19 @@ import { chatMessageSchema, validate } from "../utils/validation.mjs";
 
 const router = express.Router();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai = null;
+
+const getOpenAIClient = () => {
+  if (!process.env.OPENAI_API_KEY) {
+    return null;
+  }
+  if (!openai) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openai;
+};
 
 const SYSTEM_PROMPT = `You are MyMentalHealthBuddy, a compassionate and supportive mental health companion.
 
@@ -39,6 +49,14 @@ router.get("/ping", (req, res) => success(res, { route: "ai" }));
 
 router.post("/chat", authGuard, async (req, res) => {
   try {
+    const client = getOpenAIClient();
+    if (!client) {
+      return res.status(503).json({
+        ok: false,
+        error: "AI chat is currently unavailable. Please try again later or contact support."
+      });
+    }
+
     const validation = validate(chatMessageSchema, { message: req.body?.message });
     if (!validation.valid) {
       return res.status(400).json({
@@ -62,7 +80,7 @@ router.post("/chat", authGuard, async (req, res) => {
       { role: "user", content: message },
     ];
 
-    const completion = await openai.chat.completions.create({
+    const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
       messages,
       temperature: 0.7,
@@ -95,6 +113,14 @@ router.post("/chat", authGuard, async (req, res) => {
 
 router.post("/quick-response", optionalAuth, async (req, res) => {
   try {
+    const client = getOpenAIClient();
+    if (!client) {
+      return res.status(503).json({
+        ok: false,
+        error: "AI service is currently unavailable."
+      });
+    }
+
     const { prompt } = req.body || {};
     
     if (!prompt || typeof prompt !== "string") {
@@ -103,7 +129,7 @@ router.post("/quick-response", optionalAuth, async (req, res) => {
 
     const safePrompt = prompt.slice(0, 500);
     
-    const completion = await openai.chat.completions.create({
+    const completion = await client.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
         { role: "system", content: "You are a helpful mental wellness assistant. Provide a brief, supportive response." },
