@@ -97,11 +97,15 @@ router.get("/stats", authGuard, async (req, res) => {
     const lowest = Math.min(...moods);
 
     let trend = "neutral";
-    if (moods.length >= 7) {
+    if (moods.length >= 14) {
+      // Need at least 14 entries to compare two weeks
       const recent = moods.slice(0, 7).reduce((a, b) => a + b, 0) / 7;
-      const older = moods.slice(7, 14).reduce((a, b) => a + b, 0) / Math.min(moods.length - 7, 7);
-      if (recent > older + 0.5) trend = "improving";
-      else if (recent < older - 0.5) trend = "declining";
+      const olderSlice = moods.slice(7, 14);
+      if (olderSlice.length > 0) {
+        const older = olderSlice.reduce((a, b) => a + b, 0) / olderSlice.length;
+        if (recent > older + 0.5) trend = "improving";
+        else if (recent < older - 0.5) trend = "declining";
+      }
     }
 
     return success(res, {

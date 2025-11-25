@@ -50,8 +50,8 @@ export function authGuard(req, res, next) {
     const token = header.split(" ")[1];
     const decoded = jwt.verify(token, JWT_SECRET);
     
-    // Validate token has required fields
-    if (!decoded.userId || !decoded.email) {
+    // Validate token has required fields (id from auth.mjs JWT signing)
+    if (!decoded.id || !decoded.email) {
       return res.status(401).json({ 
         success: false,
         error: "Invalid token format",
@@ -59,7 +59,11 @@ export function authGuard(req, res, next) {
       });
     }
     
-    req.user = decoded;
+    // Normalize user object to always have both 'id' and 'userId' for compatibility
+    req.user = {
+      ...decoded,
+      userId: decoded.id  // Add userId alias for backward compatibility
+    };
     next();
   } catch (err) {
     if (err.name === "TokenExpiredError") {

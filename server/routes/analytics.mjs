@@ -27,7 +27,7 @@ router.get("/mood-trends", authGuard, async (req, res) => {
       .from(moodEntries)
       .where(
         and(
-          eq(moodEntries.userId, String(req.user.userId)),
+          eq(moodEntries.userId, String(req.user.id)),
           gte(moodEntries.createdAt, startDate)
         )
       )
@@ -73,7 +73,7 @@ router.get("/mood-distribution", authGuard, async (req, res) => {
     const entries = await db
       .select({ mood: moodEntries.mood })
       .from(moodEntries)
-      .where(eq(moodEntries.userId, String(req.user.userId)));
+      .where(eq(moodEntries.userId, String(req.user.id)));
 
     const distribution = {};
     entries.forEach((entry) => {
@@ -110,7 +110,7 @@ router.get("/journal-stats", authGuard, async (req, res) => {
         createdAt: journals.createdAt,
       })
       .from(journals)
-      .where(eq(journals.userId, req.user.userId))
+      .where(eq(journals.userId, String(req.user.id)))
       .orderBy(desc(journals.createdAt));
 
     // Calculate statistics
@@ -153,7 +153,7 @@ router.get("/wellness-score", authGuard, async (req, res) => {
       .from(moodEntries)
       .where(
         and(
-          eq(moodEntries.userId, String(req.user.userId)),
+          eq(moodEntries.userId, String(req.user.id)),
           gte(moodEntries.createdAt, thirtyDaysAgo)
         )
       );
@@ -164,7 +164,7 @@ router.get("/wellness-score", authGuard, async (req, res) => {
       .from(journals)
       .where(
         and(
-          eq(journals.userId, req.user.userId),
+          eq(journals.userId, String(req.user.id)),
           gte(journals.createdAt, thirtyDaysAgo)
         )
       );
@@ -197,7 +197,7 @@ router.get("/wellness-score", authGuard, async (req, res) => {
 // Get activity summary
 router.get("/summary", authGuard, async (req, res) => {
   try {
-    const userId = req.user.userId;
+    const userId = String(req.user.id);
     const today = new Date();
     const weekAgo = new Date(today);
     weekAgo.setDate(today.getDate() - 7);
@@ -206,7 +206,7 @@ router.get("/summary", authGuard, async (req, res) => {
       db
         .select({ count: sql`count(*)` })
         .from(moodEntries)
-        .where(eq(moodEntries.userId, String(userId))),
+        .where(eq(moodEntries.userId, userId)),
       db
         .select({ count: sql`count(*)` })
         .from(journals)
@@ -216,7 +216,7 @@ router.get("/summary", authGuard, async (req, res) => {
         .from(moodEntries)
         .where(
           and(
-            eq(moodEntries.userId, String(userId)),
+            eq(moodEntries.userId, userId),
             gte(moodEntries.createdAt, weekAgo)
           )
         ),
