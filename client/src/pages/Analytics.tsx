@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { apiGet } from "../utils/api";
+import { BarChart3, TrendingUp, TrendingDown, Minus, Calendar, Award } from "lucide-react";
 
 type MoodEntry = {
   id: string;
@@ -35,7 +36,6 @@ export default function Analytics() {
           setStats(statsData.stats);
         }
       } catch (err) {
-        console.error("Failed to load analytics:", err);
         setMoodData([]);
       } finally {
         setIsLoading(false);
@@ -61,259 +61,197 @@ export default function Analytics() {
     return "#059669";
   };
 
-  const getTrendLabel = (trend: string) => {
+  const getTrendInfo = (trend: string) => {
     switch (trend) {
-      case "improving": return { icon: "📈", text: "Improving", color: "#16a34a" };
-      case "declining": return { icon: "📉", text: "Declining", color: "#dc2626" };
-      default: return { icon: "➡️", text: "Stable", color: "#6b7280" };
+      case "improving": return { Icon: TrendingUp, text: "Improving", color: "#16a34a", bg: "#dcfce7" };
+      case "declining": return { Icon: TrendingDown, text: "Needs attention", color: "#dc2626", bg: "#fef2f2" };
+      default: return { Icon: Minus, text: "Stable", color: "#6b7280", bg: "#f3f4f6" };
     }
   };
 
-  function StatCard({
-    title,
-    value,
-    subtitle,
-    emoji,
-    color,
-    testId,
-  }: {
-    title: string;
-    value: string | number;
-    subtitle?: string;
-    emoji?: string;
-    color?: string;
-    testId?: string;
-  }) {
-    return (
-      <div
-        data-testid={testId}
-        style={{
-          padding: "1.5rem",
-          background: "white",
-          borderRadius: "12px",
-          border: "1px solid #e5e7eb",
-          textAlign: "center",
-          boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+  return (
+    <div data-testid="page-analytics" className="min-h-screen" style={{ background: "var(--background)" }}>
+      <div 
+        className="py-12 px-6 mb-8 animate-fade-in"
+        style={{ 
+          background: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+          borderRadius: "0 0 2rem 2rem"
         }}
       >
-        {emoji && <div style={{ fontSize: "2rem", marginBottom: "0.5rem" }}>{emoji}</div>}
-        <div style={{ fontSize: "2rem", fontWeight: 700, color: color || "#1f2937" }}>{value}</div>
-        <div style={{ fontSize: "0.9rem", fontWeight: 600, color: "#6b7280" }}>{title}</div>
-        {subtitle && (
-          <div style={{ fontSize: "0.8rem", color: "#9ca3af", marginTop: "0.25rem" }}>{subtitle}</div>
-        )}
-      </div>
-    );
-  }
-
-  return (
-    <div data-testid="page-analytics" style={{ maxWidth: "1000px", margin: "0 auto", padding: "2rem" }}>
-      <h1
-        data-testid="text-analytics-title"
-        style={{ fontSize: "2rem", fontWeight: 700, marginBottom: "0.5rem", color: "#1f2937" }}
-      >
-        Your Mental Health Insights
-      </h1>
-      <p data-testid="text-analytics-subtitle" style={{ color: "#6b7280", marginBottom: "2rem" }}>
-        Understanding patterns in your mood can help you take better care of yourself.
-      </p>
-
-      {isLoading ? (
-        <div data-testid="loading-analytics" style={{ padding: "3rem", textAlign: "center", color: "#6b7280" }}>
-          Loading your analytics...
-        </div>
-      ) : moodData.length === 0 ? (
-        <div
-          data-testid="section-no-data"
-          style={{
-            padding: "3rem",
-            background: "#f9fafb",
-            borderRadius: "16px",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>📊</div>
-          <h3 style={{ fontSize: "1.25rem", fontWeight: 600, marginBottom: "0.5rem", color: "#374151" }}>
-            No mood data yet
-          </h3>
-          <p style={{ color: "#6b7280" }}>
-            Start tracking your mood to see insights here.
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <BarChart3 className="w-10 h-10 text-white" />
+            <h1 
+              data-testid="text-analytics-title"
+              className="text-3xl font-bold text-white"
+            >
+              Your Mental Health Insights
+            </h1>
+          </div>
+          <p className="text-white/90 text-lg">
+            Understanding patterns in your mood helps you take better care of yourself
           </p>
         </div>
-      ) : (
-        <>
-          <div
-            data-testid="section-stats"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-              gap: "1rem",
-              marginBottom: "2rem",
-            }}
-          >
-            <StatCard
-              testId="stat-average"
-              title="Average Mood"
-              value={stats?.average?.toFixed(1) || "0"}
-              subtitle="All time"
-              emoji={getMoodEmoji(stats?.average || 5)}
-            />
-            <StatCard
-              testId="stat-highest"
-              title="Highest"
-              value={`${stats?.highest || 0}/10`}
-              emoji="🎉"
-            />
-            <StatCard
-              testId="stat-lowest"
-              title="Lowest"
-              value={`${stats?.lowest || 0}/10`}
-              emoji="💪"
-            />
-            <StatCard
-              testId="stat-total"
-              title="Total Entries"
-              value={stats?.total || moodData.length}
-              emoji="📝"
-            />
-            {stats?.trend && (
-              <StatCard
-                testId="stat-trend"
-                title="Weekly Trend"
-                value={getTrendLabel(stats.trend).text}
-                emoji={getTrendLabel(stats.trend).icon}
-                color={getTrendLabel(stats.trend).color}
-              />
-            )}
-          </div>
+      </div>
 
-          <h2
-            data-testid="text-timeline-title"
-            style={{
-              fontSize: "1.25rem",
-              fontWeight: 600,
-              marginBottom: "1rem",
-              color: "#374151",
-            }}
-          >
-            Mood Timeline
-          </h2>
-
-          <div
-            data-testid="chart-mood-timeline"
-            style={{
-              background: "white",
-              borderRadius: "12px",
-              border: "1px solid #e5e7eb",
-              padding: "1.5rem",
-              marginBottom: "2rem",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "flex-end",
-                gap: "4px",
-                height: "200px",
-                overflowX: "auto",
-              }}
-            >
-              {moodData.slice(0, 30).reverse().map((entry, index) => {
-                const height = (Number(entry.mood) / 10) * 100;
-                return (
-                  <div
-                    key={entry.id}
-                    data-testid={`bar-mood-${index}`}
-                    title={`${new Date(entry.createdAt).toLocaleDateString()}: ${entry.mood}/10`}
-                    style={{
-                      flex: "1 1 20px",
-                      minWidth: "20px",
-                      maxWidth: "40px",
-                      height: `${height}%`,
-                      background: getMoodColor(Number(entry.mood)),
-                      borderRadius: "4px 4px 0 0",
-                      cursor: "pointer",
-                      transition: "opacity 0.2s",
-                    }}
-                  />
-                );
-              })}
-            </div>
-            <div
-              style={{
-                marginTop: "0.5rem",
-                display: "flex",
-                justifyContent: "space-between",
-                fontSize: "0.8rem",
-                color: "#9ca3af",
-              }}
-            >
-              <span>Older</span>
-              <span>Recent</span>
-            </div>
-          </div>
-
-          <h2
-            data-testid="text-recent-title"
-            style={{
-              fontSize: "1.25rem",
-              fontWeight: 600,
-              marginBottom: "1rem",
-              color: "#374151",
-            }}
-          >
-            Recent Check-ins
-          </h2>
-
-          <div data-testid="list-recent-entries" style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {moodData.slice(0, 10).map((entry, index) => (
-              <div
-                key={entry.id}
-                data-testid={`row-mood-${index}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                  padding: "1rem",
-                  background: "white",
-                  borderRadius: "10px",
-                  border: "1px solid #e5e7eb",
-                }}
-              >
-                <div style={{ fontSize: "1.5rem" }}>{getMoodEmoji(Number(entry.mood))}</div>
-                <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 600, color: "#374151" }}>
-                    Mood: {entry.mood}/10
-                  </div>
-                  <div style={{ fontSize: "0.85rem", color: "#9ca3af" }}>
-                    {new Date(entry.createdAt).toLocaleDateString("en-US", {
-                      weekday: "short",
-                      month: "short",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </div>
-                </div>
-                {entry.notes && (
-                  <div
-                    style={{
-                      fontSize: "0.9rem",
-                      color: "#6b7280",
-                      maxWidth: "300px",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {entry.notes}
-                  </div>
-                )}
-              </div>
+      <div className="max-w-4xl mx-auto px-6 pb-12">
+        {isLoading ? (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="skeleton h-32 rounded-xl" data-testid={`skeleton-stat-${i}`} />
             ))}
           </div>
-        </>
-      )}
+        ) : moodData.length === 0 ? (
+          <div 
+            data-testid="section-no-data"
+            className="card p-8 text-center animate-fade-in"
+          >
+            <div className="text-6xl mb-4">📊</div>
+            <h3 className="text-xl font-semibold mb-2" style={{ color: "var(--text-primary)" }}>
+              No mood data yet
+            </h3>
+            <p style={{ color: "var(--text-secondary)" }}>
+              Start tracking your mood to see beautiful insights here.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div 
+              data-testid="section-stats"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
+            >
+              <div className="card p-5 text-center animate-fade-in stagger-1" data-testid="stat-average">
+                <div className="text-4xl mb-2">{getMoodEmoji(stats?.average || 5)}</div>
+                <div className="text-3xl font-bold" style={{ color: getMoodColor(stats?.average || 5) }}>
+                  {stats?.average?.toFixed(1) || "0"}
+                </div>
+                <div className="text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                  Average Mood
+                </div>
+              </div>
+              
+              <div className="card p-5 text-center animate-fade-in stagger-2" data-testid="stat-highest">
+                <Award className="w-8 h-8 mx-auto mb-2 text-yellow-500" />
+                <div className="text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
+                  {stats?.highest || 0}/10
+                </div>
+                <div className="text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                  Highest Mood
+                </div>
+              </div>
+              
+              <div className="card p-5 text-center animate-fade-in stagger-3" data-testid="stat-total">
+                <Calendar className="w-8 h-8 mx-auto mb-2 text-blue-500" />
+                <div className="text-3xl font-bold" style={{ color: "var(--text-primary)" }}>
+                  {stats?.total || moodData.length}
+                </div>
+                <div className="text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                  Total Entries
+                </div>
+              </div>
+              
+              {stats?.trend && (
+                <div className="card p-5 text-center animate-fade-in stagger-4" data-testid="stat-trend">
+                  {(() => {
+                    const trendInfo = getTrendInfo(stats.trend);
+                    return (
+                      <>
+                        <div 
+                          className="w-12 h-12 rounded-full mx-auto mb-2 flex items-center justify-center"
+                          style={{ background: trendInfo.bg }}
+                        >
+                          <trendInfo.Icon className="w-6 h-6" style={{ color: trendInfo.color }} />
+                        </div>
+                        <div className="text-lg font-bold" style={{ color: trendInfo.color }}>
+                          {trendInfo.text}
+                        </div>
+                        <div className="text-sm font-medium" style={{ color: "var(--text-secondary)" }}>
+                          Weekly Trend
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
+              )}
+            </div>
+
+            <div className="card p-6 mb-8 animate-fade-in" data-testid="chart-mood-timeline">
+              <h2 
+                data-testid="text-timeline-title"
+                className="text-lg font-semibold mb-4"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Mood Timeline
+              </h2>
+              <div className="flex items-end gap-1 h-48 overflow-x-auto pb-2">
+                {moodData.slice(0, 30).reverse().map((entry, index) => {
+                  const height = (Number(entry.mood) / 10) * 100;
+                  return (
+                    <div
+                      key={entry.id}
+                      data-testid={`bar-mood-${index}`}
+                      title={`${new Date(entry.createdAt).toLocaleDateString()}: ${entry.mood}/10`}
+                      className="flex-1 min-w-5 max-w-10 rounded-t cursor-pointer transition-all hover:opacity-80"
+                      style={{
+                        height: `${height}%`,
+                        background: getMoodColor(Number(entry.mood)),
+                      }}
+                    />
+                  );
+                })}
+              </div>
+              <div className="flex justify-between text-xs mt-2" style={{ color: "var(--text-muted)" }}>
+                <span>Older</span>
+                <span>Recent</span>
+              </div>
+            </div>
+
+            <div className="card p-6 animate-fade-in" data-testid="list-recent-entries">
+              <h2 
+                data-testid="text-recent-title"
+                className="text-lg font-semibold mb-4"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Recent Check-ins
+              </h2>
+              <div className="space-y-3">
+                {moodData.slice(0, 10).map((entry, index) => (
+                  <div
+                    key={entry.id}
+                    data-testid={`row-mood-${index}`}
+                    className="flex items-center gap-4 p-4 rounded-xl transition-all hover:scale-[1.01]"
+                    style={{ background: "var(--background)" }}
+                  >
+                    <div className="text-3xl">{getMoodEmoji(Number(entry.mood))}</div>
+                    <div className="flex-1">
+                      <div className="font-semibold" style={{ color: "var(--text-primary)" }}>
+                        Mood: {entry.mood}/10
+                      </div>
+                      <div className="text-sm" style={{ color: "var(--text-muted)" }}>
+                        {new Date(entry.createdAt).toLocaleDateString("en-US", {
+                          weekday: "short",
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                    </div>
+                    {entry.notes && (
+                      <div 
+                        className="text-sm max-w-xs truncate"
+                        style={{ color: "var(--text-secondary)" }}
+                      >
+                        {entry.notes}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
