@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { apiPost, ApiError } from "../utils/api";
+import { LogIn, Mail, Lock, ArrowRight, Brain, Sparkles } from "lucide-react";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -41,175 +42,157 @@ export default function Login() {
   return (
     <div
       data-testid="page-login"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "2rem",
-        background: "#f9fafb",
-      }}
+      className="min-h-screen flex"
+      style={{ background: "var(--background)" }}
     >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "400px",
-          padding: "2rem",
-          background: "white",
-          borderRadius: "16px",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+      <div 
+        className="hidden lg:flex lg:w-1/2 items-center justify-center p-12"
+        style={{ 
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
         }}
       >
-        <h1
-          data-testid="text-login-title"
-          style={{
-            fontSize: "1.75rem",
-            fontWeight: 700,
-            marginBottom: "0.5rem",
-            textAlign: "center",
-            color: "#1f2937",
-          }}
-        >
-          Welcome Back
-        </h1>
-        <p
-          data-testid="text-login-subtitle"
-          style={{
-            textAlign: "center",
-            color: "#6b7280",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Sign in to continue your journey
-        </p>
-
-        {error && (
-          <div
-            data-testid="text-error"
-            role="alert"
-            style={{
-              padding: "0.75rem",
-              background: "#fef2f2",
-              color: "#dc2626",
-              borderRadius: "8px",
-              marginBottom: "1rem",
-              fontSize: "0.9rem",
-            }}
-          >
-            {error}
+        <div className="text-center text-white animate-fade-in">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Brain className="w-16 h-16" />
+            <Sparkles className="w-8 h-8 animate-pulse" />
           </div>
-        )}
+          <h2 className="text-3xl font-bold mb-4">Welcome to MyMentalHealthBuddy</h2>
+          <p className="text-lg text-white/80 max-w-md">
+            Your compassionate AI companion for mental wellness. Track your mood, 
+            journal your thoughts, and find peace of mind.
+          </p>
+        </div>
+      </div>
 
-        <form onSubmit={handleLogin} data-testid="form-login">
-          <div style={{ marginBottom: "1rem" }}>
-            <label
-              htmlFor="email"
-              style={{
-                display: "block",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#374151",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              data-testid="input-email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoComplete="email"
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                borderRadius: "8px",
-                border: "1px solid #e5e7eb",
-                fontSize: "1rem",
-                boxSizing: "border-box",
-              }}
-            />
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full max-w-md animate-fade-in">
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-8">
+            <Brain className="w-8 h-8" style={{ color: "var(--primary)" }} />
+            <span className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
+              MyMentalHealthBuddy
+            </span>
           </div>
 
-          <div style={{ marginBottom: "1.5rem" }}>
-            <label
-              htmlFor="password"
-              style={{
-                display: "block",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#374151",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              data-testid="input-password"
-              placeholder="Your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoComplete="current-password"
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                borderRadius: "8px",
-                border: "1px solid #e5e7eb",
-                fontSize: "1rem",
-                boxSizing: "border-box",
-              }}
-            />
+          <div className="card p-8">
+            <div className="text-center mb-6">
+              <div 
+                className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center"
+                style={{ background: "var(--gradient-primary)" }}
+              >
+                <LogIn className="w-6 h-6 text-white" />
+              </div>
+              <h1
+                data-testid="text-login-title"
+                className="text-2xl font-bold mb-2"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Welcome Back
+              </h1>
+              <p
+                data-testid="text-login-subtitle"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Sign in to continue your journey
+              </p>
+            </div>
+
+            {error && (
+              <div
+                data-testid="text-error"
+                role="alert"
+                className="p-3 rounded-xl mb-4 flex items-center gap-2"
+                style={{ background: "#fef2f2", color: "#dc2626" }}
+              >
+                <span>⚠️</span> {error}
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} data-testid="form-login" className="space-y-4">
+              <div>
+                <label
+                  htmlFor="email"
+                  className="flex items-center gap-2 text-sm font-medium mb-2"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <Mail className="w-4 h-4" />
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  data-testid="input-email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                  className="w-full p-3 rounded-xl border"
+                  style={{
+                    background: "var(--background)",
+                    color: "var(--text-primary)",
+                    borderColor: "var(--border)"
+                  }}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="flex items-center gap-2 text-sm font-medium mb-2"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <Lock className="w-4 h-4" />
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  data-testid="input-password"
+                  placeholder="Your password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  autoComplete="current-password"
+                  className="w-full p-3 rounded-xl border"
+                  style={{
+                    background: "var(--background)",
+                    color: "var(--text-primary)",
+                    borderColor: "var(--border)"
+                  }}
+                />
+              </div>
+
+              <button
+                type="submit"
+                data-testid="button-login"
+                disabled={isLoading}
+                aria-busy={isLoading}
+                className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {isLoading ? (
+                  "Signing in..."
+                ) : (
+                  <>
+                    Sign In
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+
+            <p className="text-center mt-6" style={{ color: "var(--text-secondary)" }}>
+              Don't have an account?{" "}
+              <Link
+                to="/register"
+                data-testid="link-register"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
+              >
+                Sign up
+              </Link>
+            </p>
           </div>
-
-          <button
-            type="submit"
-            data-testid="button-login"
-            disabled={isLoading}
-            aria-busy={isLoading}
-            style={{
-              width: "100%",
-              padding: "0.85rem",
-              borderRadius: "10px",
-              border: "none",
-              background: isLoading ? "#9ca3af" : "#4f46e5",
-              color: "white",
-              fontWeight: 600,
-              fontSize: "1rem",
-              cursor: isLoading ? "not-allowed" : "pointer",
-              transition: "background 0.2s",
-            }}
-          >
-            {isLoading ? "Signing in..." : "Sign In"}
-          </button>
-        </form>
-
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "1.5rem",
-            color: "#6b7280",
-            fontSize: "0.9rem",
-          }}
-        >
-          Don't have an account?{" "}
-          <Link
-            to="/register"
-            data-testid="link-register"
-            style={{
-              color: "#4f46e5",
-              fontWeight: 600,
-              textDecoration: "none",
-            }}
-          >
-            Sign up
-          </Link>
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState, FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { apiPost, ApiError } from "../utils/api";
+import { UserPlus, Mail, Lock, User, ArrowRight, Brain, Sparkles, ShieldCheck } from "lucide-react";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -81,266 +82,247 @@ export default function Register() {
   return (
     <div
       data-testid="page-register"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "2rem",
-        background: "#f9fafb",
-      }}
+      className="min-h-screen flex"
+      style={{ background: "var(--background)" }}
     >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: "400px",
-          padding: "2rem",
-          background: "white",
-          borderRadius: "16px",
-          boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+      <div 
+        className="hidden lg:flex lg:w-1/2 items-center justify-center p-12"
+        style={{ 
+          background: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)"
         }}
       >
-        <h1
-          data-testid="text-register-title"
-          style={{
-            fontSize: "1.75rem",
-            fontWeight: 700,
-            marginBottom: "0.5rem",
-            textAlign: "center",
-            color: "#1f2937",
-          }}
-        >
-          Create Account
-        </h1>
-        <p
-          data-testid="text-register-subtitle"
-          style={{
-            textAlign: "center",
-            color: "#6b7280",
-            marginBottom: "1.5rem",
-          }}
-        >
-          Start your mental health journey today
-        </p>
-
-        {error && (
-          <div
-            data-testid="text-error"
-            role="alert"
-            style={{
-              padding: "0.75rem",
-              background: "#fef2f2",
-              color: "#dc2626",
-              borderRadius: "8px",
-              marginBottom: "1rem",
-              fontSize: "0.9rem",
-            }}
-          >
-            {error}
+        <div className="text-center text-white animate-fade-in">
+          <div className="flex items-center justify-center gap-3 mb-6">
+            <Brain className="w-16 h-16" />
+            <Sparkles className="w-8 h-8 animate-pulse" />
           </div>
-        )}
+          <h2 className="text-3xl font-bold mb-4">Begin Your Wellness Journey</h2>
+          <p className="text-lg text-white/80 max-w-md mb-8">
+            Join thousands who have found peace and clarity with our AI-powered mental health companion.
+          </p>
+          <div className="space-y-3 text-left max-w-sm mx-auto">
+            {[
+              "24/7 AI companion for support",
+              "Track and understand your moods",
+              "Private, secure journaling",
+              "Crisis resources when you need them"
+            ].map((feature, i) => (
+              <div key={i} className="flex items-center gap-3 text-white/90">
+                <ShieldCheck className="w-5 h-5" />
+                <span>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-        <form onSubmit={handleRegister} data-testid="form-register">
-          <div style={{ marginBottom: "1rem" }}>
-            <label
-              htmlFor="name"
-              style={{
-                display: "block",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#374151",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Name (optional)
-            </label>
-            <input
-              id="name"
-              type="text"
-              data-testid="input-name"
-              placeholder="Your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                borderRadius: "8px",
-                border: "1px solid #e5e7eb",
-                fontSize: "1rem",
-                boxSizing: "border-box",
-              }}
-            />
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full max-w-md animate-fade-in">
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-8">
+            <Brain className="w-8 h-8" style={{ color: "var(--primary)" }} />
+            <span className="text-xl font-bold" style={{ color: "var(--text-primary)" }}>
+              MyMentalHealthBuddy
+            </span>
           </div>
 
-          <div style={{ marginBottom: "1rem" }}>
-            <label
-              htmlFor="email"
-              style={{
-                display: "block",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#374151",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              data-testid="input-email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoComplete="email"
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                borderRadius: "8px",
-                border: fieldErrors.email ? "1px solid #dc2626" : "1px solid #e5e7eb",
-                fontSize: "1rem",
-                boxSizing: "border-box",
-              }}
-            />
-            {fieldErrors.email && (
-              <span data-testid="error-email" style={{ color: "#dc2626", fontSize: "0.8rem" }}>
-                {fieldErrors.email}
-              </span>
+          <div className="card p-8">
+            <div className="text-center mb-6">
+              <div 
+                className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center"
+                style={{ background: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)" }}
+              >
+                <UserPlus className="w-6 h-6 text-white" />
+              </div>
+              <h1
+                data-testid="text-register-title"
+                className="text-2xl font-bold mb-2"
+                style={{ color: "var(--text-primary)" }}
+              >
+                Create Account
+              </h1>
+              <p
+                data-testid="text-register-subtitle"
+                style={{ color: "var(--text-secondary)" }}
+              >
+                Start your mental health journey today
+              </p>
+            </div>
+
+            {error && (
+              <div
+                data-testid="text-error"
+                role="alert"
+                className="p-3 rounded-xl mb-4 flex items-center gap-2"
+                style={{ background: "#fef2f2", color: "#dc2626" }}
+              >
+                <span>⚠️</span> {error}
+              </div>
             )}
+
+            <form onSubmit={handleRegister} data-testid="form-register" className="space-y-4">
+              <div>
+                <label
+                  htmlFor="name"
+                  className="flex items-center gap-2 text-sm font-medium mb-2"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <User className="w-4 h-4" />
+                  Name (optional)
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  data-testid="input-name"
+                  placeholder="Your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  autoComplete="name"
+                  className="w-full p-3 rounded-xl border"
+                  style={{
+                    background: "var(--background)",
+                    color: "var(--text-primary)",
+                    borderColor: "var(--border)"
+                  }}
+                />
+              </div>
+
+              <div>
+                <label
+                  htmlFor="email"
+                  className="flex items-center gap-2 text-sm font-medium mb-2"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <Mail className="w-4 h-4" />
+                  Email
+                </label>
+                <input
+                  id="email"
+                  type="email"
+                  data-testid="input-email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  autoComplete="email"
+                  aria-invalid={!!fieldErrors.email}
+                  aria-describedby={fieldErrors.email ? "email-error" : undefined}
+                  className="w-full p-3 rounded-xl border"
+                  style={{
+                    background: "var(--background)",
+                    color: "var(--text-primary)",
+                    borderColor: fieldErrors.email ? "#dc2626" : "var(--border)"
+                  }}
+                />
+                {fieldErrors.email && (
+                  <span id="email-error" data-testid="error-email" className="text-xs mt-1 block" style={{ color: "#dc2626" }}>
+                    {fieldErrors.email}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="password"
+                  className="flex items-center gap-2 text-sm font-medium mb-2"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <Lock className="w-4 h-4" />
+                  Password
+                </label>
+                <input
+                  id="password"
+                  type="password"
+                  data-testid="input-password"
+                  placeholder="At least 8 characters"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  autoComplete="new-password"
+                  aria-invalid={!!fieldErrors.password}
+                  aria-describedby={fieldErrors.password ? "password-error" : undefined}
+                  className="w-full p-3 rounded-xl border"
+                  style={{
+                    background: "var(--background)",
+                    color: "var(--text-primary)",
+                    borderColor: fieldErrors.password ? "#dc2626" : "var(--border)"
+                  }}
+                />
+                {fieldErrors.password && (
+                  <span id="password-error" data-testid="error-password" className="text-xs mt-1 block" style={{ color: "#dc2626" }}>
+                    {fieldErrors.password}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label
+                  htmlFor="confirmPassword"
+                  className="flex items-center gap-2 text-sm font-medium mb-2"
+                  style={{ color: "var(--text-secondary)" }}
+                >
+                  <ShieldCheck className="w-4 h-4" />
+                  Confirm Password
+                </label>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  data-testid="input-confirm-password"
+                  placeholder="Confirm your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  autoComplete="new-password"
+                  aria-invalid={!!fieldErrors.confirmPassword}
+                  aria-describedby={fieldErrors.confirmPassword ? "confirm-error" : undefined}
+                  className="w-full p-3 rounded-xl border"
+                  style={{
+                    background: "var(--background)",
+                    color: "var(--text-primary)",
+                    borderColor: fieldErrors.confirmPassword ? "#dc2626" : "var(--border)"
+                  }}
+                />
+                {fieldErrors.confirmPassword && (
+                  <span id="confirm-error" data-testid="error-confirm-password" className="text-xs mt-1 block" style={{ color: "#dc2626" }}>
+                    {fieldErrors.confirmPassword}
+                  </span>
+                )}
+              </div>
+
+              <button
+                type="submit"
+                data-testid="button-register"
+                disabled={isLoading}
+                aria-busy={isLoading}
+                className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {isLoading ? (
+                  "Creating account..."
+                ) : (
+                  <>
+                    Create Account
+                    <ArrowRight className="w-4 h-4" />
+                  </>
+                )}
+              </button>
+            </form>
+
+            <p className="text-center mt-6" style={{ color: "var(--text-secondary)" }}>
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                data-testid="link-login"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--primary)" }}
+              >
+                Sign in
+              </Link>
+            </p>
+
+            <p className="text-center mt-4 text-xs" style={{ color: "var(--text-muted)" }}>
+              By creating an account, you agree to our Terms of Service and Privacy Policy.
+            </p>
           </div>
-
-          <div style={{ marginBottom: "1rem" }}>
-            <label
-              htmlFor="password"
-              style={{
-                display: "block",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#374151",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              data-testid="input-password"
-              placeholder="At least 8 characters"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoComplete="new-password"
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                borderRadius: "8px",
-                border: fieldErrors.password ? "1px solid #dc2626" : "1px solid #e5e7eb",
-                fontSize: "1rem",
-                boxSizing: "border-box",
-              }}
-            />
-            {fieldErrors.password && (
-              <span data-testid="error-password" style={{ color: "#dc2626", fontSize: "0.8rem" }}>
-                {fieldErrors.password}
-              </span>
-            )}
-          </div>
-
-          <div style={{ marginBottom: "1.5rem" }}>
-            <label
-              htmlFor="confirmPassword"
-              style={{
-                display: "block",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#374151",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Confirm Password
-            </label>
-            <input
-              id="confirmPassword"
-              type="password"
-              data-testid="input-confirm-password"
-              placeholder="Confirm your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              autoComplete="new-password"
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                borderRadius: "8px",
-                border: fieldErrors.confirmPassword ? "1px solid #dc2626" : "1px solid #e5e7eb",
-                fontSize: "1rem",
-                boxSizing: "border-box",
-              }}
-            />
-            {fieldErrors.confirmPassword && (
-              <span data-testid="error-confirm-password" style={{ color: "#dc2626", fontSize: "0.8rem" }}>
-                {fieldErrors.confirmPassword}
-              </span>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            data-testid="button-register"
-            disabled={isLoading}
-            aria-busy={isLoading}
-            style={{
-              width: "100%",
-              padding: "0.85rem",
-              borderRadius: "10px",
-              border: "none",
-              background: isLoading ? "#9ca3af" : "#4f46e5",
-              color: "white",
-              fontWeight: 600,
-              fontSize: "1rem",
-              cursor: isLoading ? "not-allowed" : "pointer",
-              transition: "background 0.2s",
-            }}
-          >
-            {isLoading ? "Creating account..." : "Create Account"}
-          </button>
-        </form>
-
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "1.5rem",
-            color: "#6b7280",
-            fontSize: "0.9rem",
-          }}
-        >
-          Already have an account?{" "}
-          <Link
-            to="/login"
-            data-testid="link-login"
-            style={{
-              color: "#4f46e5",
-              fontWeight: 600,
-              textDecoration: "none",
-            }}
-          >
-            Sign in
-          </Link>
-        </p>
-
-        <p
-          style={{
-            textAlign: "center",
-            marginTop: "1rem",
-            color: "#9ca3af",
-            fontSize: "0.8rem",
-          }}
-        >
-          By creating an account, you agree to our Terms of Service and Privacy Policy.
-        </p>
+        </div>
       </div>
     </div>
   );
