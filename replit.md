@@ -6,12 +6,17 @@ MyMentalHealthBuddy is a comprehensive mental health support platform featuring 
 
 ## Recent Changes (November 25, 2025)
 
+### Critical Bug Fixes (November 25, 2025)
+- **JWT Token Fix**: Resolved authentication mismatch where JWT was signed with `id` but middleware validated `userId` - now properly validates `id` and provides backward-compatible `userId` alias
+- **Analytics Routes Fix**: All analytics endpoints now correctly use `req.user.id` instead of undefined `req.user.userId`
+- **Mood Stats Fix**: Fixed division-by-zero bug in trend calculation by requiring 14+ entries and adding array length guards
+
 ### Platform Perfection Session (November 25, 2025)
 - **AI Chat Enhancement**: Complete redesign with gradient header, conversation suggestions, animated typing indicators, improved message bubbles
 - **Visual Consistency**: All 9 pages now share unified gradient header treatment, smooth animations (fadeIn, slideUp, float), and cohesive card styling
 - **CSS Variables**: Added --card-bg for dark mode support, enhanced skeleton animations, focus indicators
 - **Production Build**: Optimized with code-splitting, 70.36 kB gzipped main bundle
-- **Architect Review**: Comprehensive review passed with no blocking issues
+- **Zero LSP Errors**: All TypeScript/JavaScript errors resolved
 
 ### Production Monitoring Enhancements
 - **Request ID Tracking**: Cross-pod request correlation via X-Request-ID headers for autoscale debugging
