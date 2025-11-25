@@ -3,7 +3,7 @@
 # 1) What runs when you click "Run" in the workspace:
 run = "npm start"
 entrypoint = "server/index.mjs"
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "postgresql-16"]
 
 # 2) Deployment config for Replit Autoscale:
 [deployment]
