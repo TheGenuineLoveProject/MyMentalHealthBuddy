@@ -23,11 +23,17 @@ app.use(express.json());
 // === STRIPE RAW ROUTE ===
 app.use("/stripe/webhook", stripeWebhook);
 
-// === BACKEND ROUTES ===
+// === BACKEND ROUTES (prefixed with /api) ===
+app.use("/api/auth", authRoutes);
+app.use("/api/mood", moodRoutes);
+app.use("/api/journal", journalRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/billing", billingRoutes);
+
+// Legacy routes for backward compatibility
 app.use("/auth", authRoutes);
 app.use("/mood", moodRoutes);
-app.use("/journal", journalRoutes);
-app.use("/ai", aiRoutes);                       // <— ACTIVATE AI API
+app.use("/ai", aiRoutes);
 app.use("/billing", billingRoutes);
 
 // === STATIC FRONTEND (REPLIT AUTOSCALE SAFE) ===

@@ -1,8 +1,4 @@
-// ─────────────────────────────────────────────
-// FILE: client/src/components/ChatWidget.tsx
-// Pop-up AI chat assistant (bottom-right)
-// ─────────────────────────────────────────────
-import React, { useState } from "react";
+import { useState } from "react";
 
 type ChatWidgetProps = {
   onClose: () => void;
@@ -72,6 +68,7 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
 
   return (
     <div
+      data-testid="chat-widget"
       style={{
         position: "fixed",
         right: "1.5rem",
@@ -86,8 +83,8 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
         zIndex: 60,
       }}
     >
-      {/* Header */}
       <div
+        data-testid="chat-widget-header"
         style={{
           padding: "0.75rem 1rem",
           borderBottom: "1px solid #e5e7eb",
@@ -105,11 +102,12 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
             MyMentalHealthBuddy
           </div>
           <div style={{ fontSize: "0.75rem", opacity: 0.9 }}>
-            Here to listen, not to judge 💛
+            Here to listen, not to judge
           </div>
         </div>
         <button
           onClick={onClose}
+          data-testid="button-close-chat"
           style={{
             background: "transparent",
             border: "none",
@@ -174,9 +172,9 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
         </div>
       )}
 
-      {/* Input */}
       <form
         onSubmit={sendMessage}
+        data-testid="form-chat"
         style={{
           display: "flex",
           padding: "0.5rem 0.6rem 0.6rem",
@@ -189,6 +187,7 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."
+          data-testid="input-chat-message"
           style={{
             flex: 1,
             padding: "0.4rem 0.6rem",
@@ -200,6 +199,7 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
         <button
           type="submit"
           disabled={isSending}
+          data-testid="button-send-chat"
           style={{
             padding: "0.4rem 0.8rem",
             borderRadius: "999px",

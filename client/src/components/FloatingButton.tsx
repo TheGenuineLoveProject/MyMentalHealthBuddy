@@ -1,9 +1,3 @@
-// ─────────────────────────────────────────────
-// FILE: client/src/components/FloatingButton.tsx
-// Small round button in bottom-right corner
-// ─────────────────────────────────────────────
-import React from "react";
-
 type FloatingButtonProps = {
   onOpen: () => void;
 };
@@ -12,6 +6,7 @@ export default function FloatingButton({ onOpen }: FloatingButtonProps) {
   return (
     <button
       onClick={onOpen}
+      data-testid="button-chat-floating"
       style={{
         position: "fixed",
         right: "1.5rem",

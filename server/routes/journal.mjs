@@ -2,7 +2,7 @@
 import express from "express";
 import { db } from "../db/connection.mjs";
 import { journals } from "../shared/schema.mjs";
-import { optionalAuth } from "../middleware/auth.mjs";
+import { authGuard } from "../middleware/auth.mjs";
 import { eq, desc } from "drizzle-orm";
 
 const router = express.Router();
@@ -10,8 +10,8 @@ const router = express.Router();
 // Health check
 router.get("/ping", (req, res) => res.json({ ok: true, route: "journal" }));
 
-// CREATE
-router.post("/", optionalAuth, async (req, res) => {
+// CREATE - requires authentication
+router.post("/", authGuard, async (req, res) => {
   try {
     const { text } = req.body;
 
@@ -19,7 +19,7 @@ router.post("/", optionalAuth, async (req, res) => {
       return res.status(400).json({ ok: false, error: "Journal text is required" });
     }
 
-    const userId = req.user?.id || 1;
+    const userId = req.user.id;
 
     const [entry] = await db
       .insert(journals)
@@ -36,10 +36,10 @@ router.post("/", optionalAuth, async (req, res) => {
   }
 });
 
-// LIST
-router.get("/", optionalAuth, async (req, res) => {
+// LIST - requires authentication
+router.get("/", authGuard, async (req, res) => {
   try {
-    const userId = req.user?.id || 1;
+    const userId = req.user.id;
 
     const list = await db
       .select()
@@ -51,7 +51,7 @@ router.get("/", optionalAuth, async (req, res) => {
     res.json({ ok: true, list: list || [] });
   } catch (err) {
     console.error("Error fetching journal entries:", err);
-    res.json({ ok: false, list: [], error: "Failed to fetch journal entries" });
+    res.status(500).json({ ok: false, list: [], error: "Failed to fetch journal entries" });
   }
 });
 

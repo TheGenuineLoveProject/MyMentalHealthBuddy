@@ -44,7 +44,7 @@ router.post("/chat", authGuard, async (req, res) => {
     ];
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4.1-mini",
+      model: "gpt-4o-mini",
       messages,
       temperature: 0.7,
       max_tokens: 600,
