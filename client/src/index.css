@@ -9,6 +9,7 @@
   --danger: hsl(0, 84%, 60%);
   --background: hsl(220, 14%, 96%);
   --surface: hsl(0, 0%, 100%);
+  --card-bg: hsl(0, 0%, 100%);
   --text-primary: hsl(220, 13%, 13%);
   --text-secondary: hsl(220, 9%, 46%);
   --text-muted: hsl(220, 9%, 64%);
@@ -30,6 +31,7 @@
 .dark {
   --background: hsl(220, 13%, 10%);
   --surface: hsl(220, 13%, 15%);
+  --card-bg: hsl(220, 13%, 18%);
   --text-primary: hsl(220, 14%, 96%);
   --text-secondary: hsl(220, 9%, 70%);
   --text-muted: hsl(220, 9%, 50%);
