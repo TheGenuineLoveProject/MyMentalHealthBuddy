@@ -34,7 +34,9 @@ export default function MoodPage() {
   async function loadHistory() {
     const res = await fetch("/mood/history");
     const data = await res.json();
-    setHistory(data);
+    if (data.history) {
+      setHistory(data.history);
+    }
   }
 
   useEffect(() => {

@@ -1,20 +1,16 @@
 // server/db/connection.mjs
-import 'dotenv/config';
-import pkg from 'pg';
-import { drizzle } from 'drizzle-orm/node-postgres';
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
+import * as schema from "../shared/schema.mjs";
 
-const { Pool } = pkg;
+if (!process.env.DATABASE_URL) {
+  throw new Error("DATABASE_URL missing");
+}
 
-// Use your DATABASE_URL from Replit Secrets
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: process.env.DATABASE_SSL === 'true'
-    ? { rejectUnauthorized: false }
-    : undefined,
+const client = postgres(process.env.DATABASE_URL, {
+  max: 1,
+  idle_timeout: 5
 });
 
-// ✅ THIS is the important part: named export "db"
-export const db = drizzle(pool);
-
-// (optional) export pool if you ever need it
-export { pool };
+export const db = drizzle(client, { schema });
+export default db;

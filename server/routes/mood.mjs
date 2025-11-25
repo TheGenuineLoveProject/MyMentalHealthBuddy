@@ -1,34 +1,37 @@
+// server/routes/mood.mjs
 import express from "express";
-import { authGuard } from "../middleware/auth.mjs"; // adjust if your path is different
+import { db } from "../db/connection.mjs";
+import { moodEntries } from "../shared/schema.mjs";
+import { eq, desc } from "drizzle-orm";
+import { authGuard } from "../middleware/auth.mjs";
 
-export const router = express.Router();
+const router = express.Router();
 
-// POST /mood  → save today’s mood
-router.post("/", (req, res) => {
+// CREATE MOOD ENTRY
+router.post("/", authGuard, async (req, res) => {
   const { mood, notes } = req.body;
 
-  if (!global.moodHistory) global.moodHistory = [];
+  const [entry] = await db
+    .insert(moodEntries)
+    .values({
+      userId: req.user.id,
+      mood,
+      note: notes
+    })
+    .returning();
 
-  global.moodHistory.unshift({
-    id: Date.now(),
-    mood,
-    notes,
-    createdAt: new Date().toISOString(),
-  });
-
-  console.log("Mood saved:", { mood, notes });  // ✅ Inside function
-
-  // TODO: later save to PostgreSQL
-  res.json({ ok: true });  // ✅ Single return
-});  // ✅ Proper closing
-
-// GET /mood/ping → simple health check
-router.get("/ping", (req, res) => {
-  res.json({ ok: true, route: "mood" });
+  res.json({ ok: true, entry });
 });
-router.get("/history", (req, res) => {
-  // TEMP in-memory store if database not yet wired
-  if (!global.moodHistory) global.moodHistory = [];
-  res.json({ ok: true, history: global.moodHistory });
+
+// GET HISTORY
+router.get("/history", authGuard, async (req, res) => {
+  const history = await db
+    .select()
+    .from(moodEntries)
+    .where(eq(moodEntries.userId, req.user.id))
+    .orderBy(desc(moodEntries.createdAt));
+
+  res.json({ ok: true, history });
 });
+
 export default router;
