@@ -10,6 +10,7 @@ import Analytics from "./pages/Analytics";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Error404 from "./pages/Error404";
 
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -23,73 +24,84 @@ function AppContent() {
   const hideNavbarRoutes = ["/login", "/register"];
   const showNavbar = !hideNavbarRoutes.includes(location.pathname);
 
+  const hideChatRoutes = ["/login", "/register", "/chat"];
+  const showChatWidget = !hideChatRoutes.includes(location.pathname);
+
   return (
-    <>
+    <div data-testid="app-container">
       {showNavbar && <Navbar />}
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+      <main id="main-content" role="main">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/mood"
-          element={
-            <ProtectedRoute>
-              <MoodPage />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/mood"
+            element={
+              <ProtectedRoute>
+                <MoodPage />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/journal"
-          element={
-            <ProtectedRoute>
-              <Journal />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/journal"
+            element={
+              <ProtectedRoute>
+                <Journal />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/chat"
-          element={
-            <ProtectedRoute>
-              <AIChat />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/chat"
+            element={
+              <ProtectedRoute>
+                <AIChat />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/analytics"
-          element={
-            <ProtectedRoute>
-              <Analytics />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/analytics"
+            element={
+              <ProtectedRoute>
+                <Analytics />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <Settings />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
 
-      {!showChat && <FloatingButton onOpen={() => setShowChat(true)} />}
-      {showChat && <ChatWidget onClose={() => setShowChat(false)} />}
-    </>
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </main>
+
+      {showChatWidget && (
+        <>
+          {!showChat && <FloatingButton onOpen={() => setShowChat(true)} isOpen={showChat} />}
+          {showChat && <ChatWidget onClose={() => setShowChat(false)} />}
+        </>
+      )}
+    </div>
   );
 }
 
