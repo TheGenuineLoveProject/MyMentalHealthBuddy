@@ -15,12 +15,15 @@ import stripeWebhook from "./routes/stripeWebhook.mjs";
 
 import { db } from "./db/connection.mjs";
 import { generalLimiter, authLimiter, aiLimiter } from "./middleware/rateLimiter.mjs";
+import { requestIdMiddleware, logger } from "./middleware/requestId.mjs";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const clientDist = path.join(__dirname, "../client/dist");
+
+app.use(requestIdMiddleware);
 
 app.use(helmet({
   contentSecurityPolicy: false,
@@ -114,43 +117,59 @@ app.get("*", (req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
-  console.error("[Error]", err.message);
+  const requestId = req.requestId || "unknown";
+  
+  logger.error("Request error", {
+    requestId,
+    path: req.path,
+    method: req.method,
+    error: err.message,
+    stack: process.env.NODE_ENV === "production" ? undefined : err.stack
+  });
   
   if (err.type === 'entity.parse.failed') {
-    return res.status(400).json({ ok: false, error: "Invalid JSON in request body" });
+    return res.status(400).json({ 
+      ok: false, 
+      error: "Invalid JSON in request body",
+      requestId
+    });
   }
   
   res.status(err.status || 500).json({
     ok: false,
     error: process.env.NODE_ENV === 'production' 
       ? "An unexpected error occurred" 
-      : err.message
+      : err.message,
+    requestId
   });
 });
 
 const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  logger.info("Server started", {
+    port: PORT,
+    environment: process.env.NODE_ENV || "development",
+    nodeVersion: process.version
+  });
 });
 
 server.keepAliveTimeout = 65000;
 server.headersTimeout = 66000;
 
 process.on("SIGTERM", () => {
-  console.log("SIGTERM received. Graceful shutdown...");
+  logger.info("SIGTERM received, initiating graceful shutdown");
   server.close(() => {
-    console.log("Server closed");
+    logger.info("Server closed gracefully");
     process.exit(0);
   });
   
   setTimeout(() => {
-    console.log("Forced shutdown after timeout");
+    logger.warn("Forced shutdown after 30s timeout");
     process.exit(1);
   }, 30000);
 });
 
 process.on("SIGINT", () => {
-  console.log("SIGINT received. Shutting down...");
+  logger.info("SIGINT received, shutting down");
   server.close(() => process.exit(0));
 });
 

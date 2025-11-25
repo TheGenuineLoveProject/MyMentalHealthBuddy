@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet, getStoredUser } from "../utils/api";
+import { Target, PenLine, MessageCircle, BarChart3, TrendingUp, TrendingDown, Minus, Lightbulb, Calendar, Heart } from "lucide-react";
 
 type MoodEntry = {
   id: string;
@@ -48,9 +49,9 @@ export default function Dashboard() {
 
   const getTrendInfo = (trend: string) => {
     switch (trend) {
-      case "improving": return { icon: "📈", text: "Improving", color: "#16a34a", bg: "#f0fdf4" };
-      case "declining": return { icon: "📉", text: "Needs attention", color: "#dc2626", bg: "#fef2f2" };
-      default: return { icon: "➡️", text: "Stable", color: "#6b7280", bg: "#f9fafb" };
+      case "improving": return { icon: <TrendingUp className="w-5 h-5" />, text: "Improving", color: "#16a34a", bg: "#f0fdf4" };
+      case "declining": return { icon: <TrendingDown className="w-5 h-5" />, text: "Needs attention", color: "#dc2626", bg: "#fef2f2" };
+      default: return { icon: <Minus className="w-5 h-5" />, text: "Stable", color: "#6b7280", bg: "#f9fafb" };
     }
   };
 
@@ -66,28 +67,28 @@ export default function Dashboard() {
     { 
       to: "/mood", 
       label: "Track Mood", 
-      icon: "🎯", 
+      icon: <Target className="w-6 h-6 text-white" />, 
       description: "Log how you're feeling",
       gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)" 
     },
     { 
       to: "/journal", 
       label: "Write Journal", 
-      icon: "📝", 
+      icon: <PenLine className="w-6 h-6 text-white" />, 
       description: "Express your thoughts",
       gradient: "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)" 
     },
     { 
       to: "/chat", 
       label: "Chat with AI", 
-      icon: "💬", 
+      icon: <MessageCircle className="w-6 h-6 text-white" />, 
       description: "Talk to your buddy",
       gradient: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)" 
     },
     { 
       to: "/analytics", 
       label: "View Insights", 
-      icon: "📊", 
+      icon: <BarChart3 className="w-6 h-6 text-white" />, 
       description: "See your progress",
       gradient: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" 
     },
@@ -101,335 +102,295 @@ export default function Dashboard() {
     return { greeting: "Good night", emoji: "🌙" };
   };
 
+  const dailyTips = [
+    "Taking a few minutes each day to check in with yourself can significantly improve your self-awareness.",
+    "Deep breathing exercises can help reduce stress and anxiety. Try the 4-7-8 technique today.",
+    "Journaling your thoughts helps process emotions and gain clarity about your feelings.",
+    "Regular physical activity is one of the most effective ways to improve mental health.",
+    "Connecting with loved ones, even briefly, can boost your mood significantly.",
+  ];
+
+  const randomTip = dailyTips[new Date().getDate() % dailyTips.length];
   const timeInfo = getTimeOfDay();
 
   return (
     <div 
       data-testid="page-dashboard" 
-      className="animate-fade-in"
-      style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}
+      className="min-h-screen animate-fade-in"
+      style={{ background: "var(--background)" }}
     >
       <div 
-        className="card animate-slide-up"
+        className="py-10 px-6 mb-8"
         style={{ 
-          padding: "2rem",
-          marginBottom: "2rem",
           background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-          color: "white",
-          borderRadius: "20px",
+          borderRadius: "0 0 2rem 2rem"
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.5rem" }}>
-          <span style={{ fontSize: "2.5rem" }}>{timeInfo.emoji}</span>
-          <div>
-            <div style={{ fontSize: "0.9rem", opacity: 0.9 }}>{timeInfo.greeting}</div>
-            <h1 
-              data-testid="text-welcome"
-              style={{ fontSize: "1.75rem", fontWeight: 700 }}
-            >
-              {user?.name || "Friend"}!
-            </h1>
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center gap-4 mb-3">
+            <span className="text-4xl animate-float">{timeInfo.emoji}</span>
+            <div>
+              <p className="text-white/80 text-sm font-medium">{timeInfo.greeting}</p>
+              <h1 
+                data-testid="text-welcome"
+                className="text-3xl font-bold text-white"
+              >
+                {user?.name || "Friend"}!
+              </h1>
+            </div>
           </div>
+          <p 
+            data-testid="text-subtitle" 
+            className="text-white/90 text-lg ml-16"
+          >
+            Here's an overview of your mental health journey
+          </p>
         </div>
-        <p data-testid="text-subtitle" style={{ opacity: 0.9, marginTop: "0.5rem" }}>
-          Here's an overview of your mental health journey
-        </p>
       </div>
 
-      <div
-        data-testid="section-quick-actions"
-        style={{ 
-          display: "grid", 
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", 
-          gap: "1rem", 
-          marginBottom: "2rem" 
-        }}
-      >
-        {quickActions.map((action, index) => (
-          <Link
-            key={action.to}
-            to={action.to}
-            data-testid={`link-action-${index}`}
-            className="card animate-slide-up"
-            style={{
-              padding: "1.5rem",
-              textDecoration: "none",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              textAlign: "center",
-              animationDelay: `${index * 0.1}s`,
-              opacity: 0,
-              animationFillMode: "forwards",
-            }}
-          >
-            <div 
-              style={{ 
-                width: "60px",
-                height: "60px",
-                borderRadius: "16px",
-                background: action.gradient,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: "1.75rem",
-                marginBottom: "0.75rem",
-                boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
-              }}
-            >
-              {action.icon}
-            </div>
-            <div style={{ fontWeight: 600, color: "#1f2937", fontSize: "1rem" }}>
-              {action.label}
-            </div>
-            <div style={{ fontSize: "0.8rem", color: "#6b7280", marginTop: "0.25rem" }}>
-              {action.description}
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "1.5rem" }}>
-        <div
-          className="card animate-slide-up stagger-3"
-          style={{
-            padding: "1.5rem",
-            opacity: 0,
-            animationFillMode: "forwards",
-          }}
+      <div className="max-w-5xl mx-auto px-6 pb-12">
+        <section
+          data-testid="section-quick-actions"
+          aria-label="Quick actions"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
         >
-          <h2
-            data-testid="text-stats-title"
-            style={{ 
-              fontSize: "1.2rem", 
-              fontWeight: 600, 
-              marginBottom: "1.25rem", 
-              color: "#374151",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-            }}
-          >
-            <span>📈</span> Your Mood Overview
-          </h2>
-
-          {isLoading ? (
-            <div data-testid="loading-stats" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
-              {[1,2,3,4].map(i => (
-                <div key={i} className="skeleton" style={{ height: "80px", borderRadius: "12px" }} />
-              ))}
-            </div>
-          ) : stats && stats.total > 0 ? (
-            <div data-testid="section-stats" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
-              <div style={{ 
-                padding: "1rem", 
-                background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)", 
-                borderRadius: "12px", 
-                textAlign: "center" 
-              }}>
-                <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#16a34a" }}>
-                  {stats.average.toFixed(1)}
-                </div>
-                <div style={{ fontSize: "0.8rem", color: "#4b5563", fontWeight: 500 }}>Average Mood</div>
-              </div>
-              <div style={{ 
-                padding: "1rem", 
-                background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)", 
-                borderRadius: "12px", 
-                textAlign: "center" 
-              }}>
-                <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#2563eb" }}>
-                  {stats.total}
-                </div>
-                <div style={{ fontSize: "0.8rem", color: "#4b5563", fontWeight: 500 }}>Total Check-ins</div>
-              </div>
-              <div style={{ 
-                padding: "1rem", 
-                background: getTrendInfo(stats.trend).bg, 
-                borderRadius: "12px", 
-                textAlign: "center" 
-              }}>
-                <div style={{ 
-                  fontSize: "1.5rem", 
-                  fontWeight: 700, 
-                  color: getTrendInfo(stats.trend).color,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  gap: "0.25rem",
-                }}>
-                  {getTrendInfo(stats.trend).icon} {getTrendInfo(stats.trend).text}
-                </div>
-                <div style={{ fontSize: "0.8rem", color: "#4b5563", fontWeight: 500 }}>Weekly Trend</div>
-              </div>
-              <div style={{ 
-                padding: "1rem", 
-                background: "linear-gradient(135deg, #fefce8 0%, #fef9c3 100%)", 
-                borderRadius: "12px", 
-                textAlign: "center" 
-              }}>
-                <div style={{ fontSize: "1.75rem", fontWeight: 700, color: "#ca8a04" }}>
-                  {stats.highest}/{stats.lowest}
-                </div>
-                <div style={{ fontSize: "0.8rem", color: "#4b5563", fontWeight: 500 }}>High/Low</div>
-              </div>
-            </div>
-          ) : (
-            <div 
-              data-testid="text-no-stats" 
-              style={{ 
-                textAlign: "center", 
-                padding: "2rem",
-                background: "#f9fafb",
-                borderRadius: "12px",
-              }}
+          {quickActions.map((action, index) => (
+            <Link
+              key={action.to}
+              to={action.to}
+              data-testid={`link-action-${index}`}
+              aria-label={`${action.label}: ${action.description}`}
+              className="card p-5 text-center transition-all hover:scale-[1.02] animate-fade-in"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div style={{ fontSize: "2.5rem", marginBottom: "0.75rem" }}>🎯</div>
-              <p style={{ color: "#6b7280", marginBottom: "1rem" }}>
-                Start tracking your mood to see insights here
-              </p>
-              <Link
-                to="/mood"
-                style={{
-                  display: "inline-block",
-                  padding: "0.75rem 1.5rem",
-                  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                  color: "white",
-                  borderRadius: "10px",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: "0.9rem",
+              <div 
+                className="w-14 h-14 rounded-2xl mx-auto mb-3 flex items-center justify-center"
+                style={{ 
+                  background: action.gradient,
+                  boxShadow: "0 4px 15px rgba(0,0,0,0.15)"
                 }}
               >
-                Track First Mood
-              </Link>
-            </div>
-          )}
-        </div>
+                {action.icon}
+              </div>
+              <div className="font-semibold" style={{ color: "var(--text-primary)" }}>
+                {action.label}
+              </div>
+              <div className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+                {action.description}
+              </div>
+            </Link>
+          ))}
+        </section>
 
-        <div
-          className="card animate-slide-up stagger-4"
-          style={{
-            padding: "1.5rem",
-            opacity: 0,
-            animationFillMode: "forwards",
-          }}
-        >
-          <h2
-            data-testid="text-history-title"
-            style={{ 
-              fontSize: "1.2rem", 
-              fontWeight: 600, 
-              marginBottom: "1.25rem", 
-              color: "#374151",
-              display: "flex",
-              alignItems: "center",
-              gap: "0.5rem",
-            }}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <section
+            className="card p-6 animate-fade-in stagger-2"
+            aria-labelledby="stats-title"
           >
-            <span>📋</span> Recent Mood Entries
-          </h2>
+            <h2
+              id="stats-title"
+              data-testid="text-stats-title"
+              className="flex items-center gap-2 text-lg font-semibold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              <Heart className="w-5 h-5" style={{ color: "var(--primary)" }} />
+              Your Mood Overview
+            </h2>
 
-          {isLoading ? (
-            <div data-testid="loading-history">
-              {[1,2,3].map(i => (
-                <div key={i} className="skeleton" style={{ height: "60px", marginBottom: "0.5rem", borderRadius: "10px" }} />
-              ))}
-            </div>
-          ) : history.length === 0 ? (
-            <div data-testid="text-no-history" style={{ 
-              textAlign: "center", 
-              padding: "2rem",
-              background: "#f9fafb",
-              borderRadius: "12px",
-            }}>
-              <div style={{ fontSize: "2.5rem", marginBottom: "0.75rem" }}>📝</div>
-              <p style={{ color: "#6b7280", marginBottom: "1rem" }}>You haven't tracked any moods yet</p>
-              <Link
-                to="/mood"
-                data-testid="link-track-mood"
-                style={{
-                  display: "inline-block",
-                  padding: "0.75rem 1.5rem",
-                  background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                  color: "white",
-                  borderRadius: "10px",
-                  textDecoration: "none",
-                  fontWeight: 600,
-                  fontSize: "0.9rem",
-                }}
-              >
-                Track Your First Mood
-              </Link>
-            </div>
-          ) : (
-            <ul data-testid="list-recent-moods" style={{ listStyle: "none", padding: 0 }}>
-              {history.slice(0, 5).map((entry, index) => {
-                const date = new Date(entry.createdAt).toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
-                return (
-                  <li
-                    key={entry.id}
-                    data-testid={`item-mood-${index}`}
-                    style={{
-                      padding: "0.875rem",
-                      marginBottom: "0.5rem",
-                      borderRadius: "10px",
-                      background: "#f9fafb",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      transition: "background 0.2s ease",
-                    }}
+            {isLoading ? (
+              <div data-testid="loading-stats" className="grid grid-cols-2 gap-3">
+                {[1,2,3,4].map(i => (
+                  <div key={i} className="skeleton h-20 rounded-xl" />
+                ))}
+              </div>
+            ) : stats && stats.total > 0 ? (
+              <div data-testid="section-stats" className="grid grid-cols-2 gap-3">
+                <div 
+                  className="p-4 rounded-xl text-center"
+                  style={{ background: "linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)" }}
+                >
+                  <div className="text-2xl font-bold" style={{ color: "#16a34a" }}>
+                    {stats.average.toFixed(1)}
+                  </div>
+                  <div className="text-xs font-medium mt-1" style={{ color: "#4b5563" }}>
+                    Average Mood
+                  </div>
+                </div>
+                <div 
+                  className="p-4 rounded-xl text-center"
+                  style={{ background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)" }}
+                >
+                  <div className="text-2xl font-bold" style={{ color: "#2563eb" }}>
+                    {stats.total}
+                  </div>
+                  <div className="text-xs font-medium mt-1" style={{ color: "#4b5563" }}>
+                    Total Check-ins
+                  </div>
+                </div>
+                <div 
+                  className="p-4 rounded-xl text-center"
+                  style={{ background: getTrendInfo(stats.trend).bg }}
+                >
+                  <div 
+                    className="flex items-center justify-center gap-1 text-lg font-bold"
+                    style={{ color: getTrendInfo(stats.trend).color }}
                   >
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                      <span style={{ fontSize: "1.5rem" }}>{getMoodEmoji(entry.mood)}</span>
-                      <div>
-                        <span style={{ fontWeight: 600, color: "#374151" }}>
-                          Mood: {entry.mood}/10
-                        </span>
-                        {entry.notes && (
-                          <p style={{ fontSize: "0.8rem", color: "#6b7280", margin: "0.2rem 0 0 0" }}>
-                            {entry.notes.slice(0, 40)}{entry.notes.length > 40 ? "..." : ""}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                    <span style={{ fontSize: "0.75rem", color: "#9ca3af" }}>{date}</span>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
-      </div>
+                    {getTrendInfo(stats.trend).icon}
+                    <span className="text-sm">{getTrendInfo(stats.trend).text}</span>
+                  </div>
+                  <div className="text-xs font-medium mt-1" style={{ color: "#4b5563" }}>
+                    Weekly Trend
+                  </div>
+                </div>
+                <div 
+                  className="p-4 rounded-xl text-center"
+                  style={{ background: "linear-gradient(135deg, #fefce8 0%, #fef9c3 100%)" }}
+                >
+                  <div className="text-2xl font-bold" style={{ color: "#ca8a04" }}>
+                    {stats.highest}/{stats.lowest}
+                  </div>
+                  <div className="text-xs font-medium mt-1" style={{ color: "#4b5563" }}>
+                    High/Low
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div 
+                data-testid="text-no-stats" 
+                className="text-center p-8 rounded-xl"
+                style={{ background: "var(--background)" }}
+              >
+                <div className="text-4xl mb-3">🎯</div>
+                <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
+                  Start tracking your mood to see insights here
+                </p>
+                <Link
+                  to="/mood"
+                  className="btn-primary inline-flex items-center gap-2"
+                >
+                  <Target className="w-4 h-4" />
+                  Track First Mood
+                </Link>
+              </div>
+            )}
+          </section>
 
-      <div
-        className="card animate-slide-up stagger-5"
-        style={{
-          marginTop: "1.5rem",
-          padding: "1.5rem",
-          background: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
-          border: "1px solid #fbbf24",
-          opacity: 0,
-          animationFillMode: "forwards",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <div style={{ fontSize: "2rem" }}>💡</div>
-          <div>
-            <h3 style={{ fontWeight: 600, color: "#92400e", marginBottom: "0.25rem" }}>
-              Daily Tip
-            </h3>
-            <p style={{ color: "#a16207", fontSize: "0.95rem" }}>
-              Taking a few minutes each day to check in with yourself can significantly improve your self-awareness and emotional well-being.
-            </p>
-          </div>
+          <section
+            className="card p-6 animate-fade-in stagger-3"
+            aria-labelledby="history-title"
+          >
+            <h2
+              id="history-title"
+              data-testid="text-history-title"
+              className="flex items-center gap-2 text-lg font-semibold mb-4"
+              style={{ color: "var(--text-primary)" }}
+            >
+              <Calendar className="w-5 h-5" style={{ color: "var(--primary)" }} />
+              Recent Mood Entries
+            </h2>
+
+            {isLoading ? (
+              <div data-testid="loading-history" className="space-y-3">
+                {[1,2,3].map(i => (
+                  <div key={i} className="skeleton h-16 rounded-xl" />
+                ))}
+              </div>
+            ) : history.length === 0 ? (
+              <div 
+                data-testid="text-no-history" 
+                className="text-center p-8 rounded-xl"
+                style={{ background: "var(--background)" }}
+              >
+                <div className="text-4xl mb-3">📝</div>
+                <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
+                  You haven't tracked any moods yet
+                </p>
+                <Link
+                  to="/mood"
+                  data-testid="link-track-mood"
+                  className="btn-primary inline-flex items-center gap-2"
+                >
+                  <Target className="w-4 h-4" />
+                  Track Your First Mood
+                </Link>
+              </div>
+            ) : (
+              <ul 
+                data-testid="list-recent-moods" 
+                className="space-y-3"
+                aria-label="Recent mood entries"
+              >
+                {history.slice(0, 5).map((entry, index) => {
+                  const date = new Date(entry.createdAt);
+                  return (
+                    <li
+                      key={entry.id}
+                      data-testid={`item-mood-${index}`}
+                      className="p-4 rounded-xl flex justify-between items-center transition-colors"
+                      style={{ background: "var(--background)" }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-2xl">{getMoodEmoji(entry.mood)}</span>
+                        <div>
+                          <span className="font-semibold" style={{ color: "var(--text-primary)" }}>
+                            Mood: {entry.mood}/10
+                          </span>
+                          {entry.notes && (
+                            <p className="text-xs mt-0.5 line-clamp-1" style={{ color: "var(--text-muted)" }}>
+                              {entry.notes.slice(0, 40)}{entry.notes.length > 40 ? "..." : ""}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <time 
+                        className="text-xs"
+                        style={{ color: "var(--text-muted)" }}
+                        dateTime={entry.createdAt}
+                      >
+                        {date.toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit"
+                        })}
+                      </time>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </section>
         </div>
+
+        <section
+          className="card p-6 animate-fade-in stagger-4"
+          style={{
+            background: "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)",
+            border: "1px solid #fbbf24",
+          }}
+          aria-labelledby="tip-title"
+        >
+          <div className="flex items-start gap-4">
+            <div 
+              className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              style={{ background: "rgba(234, 179, 8, 0.3)" }}
+            >
+              <Lightbulb className="w-6 h-6" style={{ color: "#92400e" }} />
+            </div>
+            <div>
+              <h3 
+                id="tip-title"
+                className="font-semibold mb-1"
+                style={{ color: "#92400e" }}
+              >
+                Daily Wellness Tip
+              </h3>
+              <p style={{ color: "#a16207", lineHeight: 1.6 }}>
+                {randomTip}
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

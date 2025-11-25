@@ -20,6 +20,8 @@ import ChatWidget from "./components/ChatWidget";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { PageSkeleton } from "./components/LoadingSkeleton";
 import { ThemeProvider } from "./context/ThemeContext";
+import { ToastProvider } from "./components/Toast";
+import { SkipLink } from "./components/SkipLink";
 
 function AppContent() {
   const [showChat, setShowChat] = useState(false);
@@ -33,9 +35,10 @@ function AppContent() {
 
   return (
     <div data-testid="app-container">
+      <SkipLink />
       {showNavbar && <Navbar />}
 
-      <main id="main-content" role="main">
+      <main id="main-content" role="main" tabIndex={-1}>
         <Suspense fallback={<PageSkeleton />}>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -115,9 +118,11 @@ export default function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider>
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
+        <ToastProvider>
+          <BrowserRouter>
+            <AppContent />
+          </BrowserRouter>
+        </ToastProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
