@@ -6,6 +6,7 @@ export const generalLimiter = rateLimit({
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator: (req) => req.ip || req.headers['x-forwarded-for'] || 'unknown',
   message: {
     ok: false,
     error: "Too many requests. Please try again later.",
@@ -19,6 +20,7 @@ export const authLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   skipSuccessfulRequests: true,
+  keyGenerator: (req) => req.ip || req.headers['x-forwarded-for'] || 'unknown',
   message: {
     ok: false,
     error: "Too many login attempts. Please try again in 15 minutes.",
@@ -31,6 +33,10 @@ export const aiLimiter = rateLimit({
   max: 20,
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator: (req) => {
+    if (req.user?.id) return `user:${req.user.id}`;
+    return req.ip || req.headers['x-forwarded-for'] || 'unknown';
+  },
   message: {
     ok: false,
     error: "You're sending messages too quickly. Please slow down.",
@@ -50,6 +56,14 @@ export const strictLimiter = rateLimit({
   }
 });
 
-export function rateLimiter(req, res, next) {
-  next();
-}
+export const writeLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    ok: false,
+    error: "Too many write operations. Please slow down.",
+    retryAfter: 60
+  }
+});

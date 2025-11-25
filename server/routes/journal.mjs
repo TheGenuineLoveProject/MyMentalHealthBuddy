@@ -5,28 +5,15 @@ import { journals } from "../shared/schema.mjs";
 import { authGuard } from "../middleware/auth.mjs";
 import { eq, desc } from "drizzle-orm";
 import { success, created, badRequest, notFound, forbidden, serverError } from "../utils/response.mjs";
-import { journalSchema, validate } from "../utils/validation.mjs";
-import { z } from "zod";
+import { journalSchema, journalUpdateSchema, validate } from "../utils/validation.mjs";
 
 const router = express.Router();
-
-const createJournalSchema = z.object({
-  text: z.string().min(1, "Journal entry cannot be empty").max(10000, "Entry too long"),
-  title: z.string().max(200).optional(),
-  mood: z.number().int().min(1).max(10).optional()
-});
-
-const updateJournalSchema = z.object({
-  text: z.string().min(1, "Journal entry cannot be empty").max(10000, "Entry too long").optional(),
-  title: z.string().max(200).optional(),
-  mood: z.number().int().min(1).max(10).optional()
-});
 
 router.get("/ping", (req, res) => success(res, { route: "journal" }));
 
 router.post("/", authGuard, async (req, res) => {
   try {
-    const validation = validate(createJournalSchema, req.body);
+    const validation = validate(journalSchema, req.body);
     if (!validation.valid) {
       return res.status(400).json({
         ok: false,
@@ -114,7 +101,7 @@ router.put("/:id", authGuard, async (req, res) => {
       return badRequest(res, "Invalid entry ID");
     }
 
-    const validation = validate(updateJournalSchema, req.body);
+    const validation = validate(journalUpdateSchema, req.body);
     if (!validation.valid) {
       return res.status(400).json({
         ok: false,

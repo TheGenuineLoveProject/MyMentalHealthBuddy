@@ -26,13 +26,23 @@ export const moodSchema = z.object({
 });
 
 export const journalSchema = z.object({
-  title: z.string().min(1, "Title is required").max(200, "Title too long"),
-  content: z.string().min(1, "Content is required").max(10000, "Content too long"),
+  text: z.string().min(1, "Journal entry cannot be empty").max(10000, "Entry too long"),
+  title: z.string().max(200, "Title too long").optional(),
+  mood: z.number().int().min(1).max(10).optional()
+});
+
+export const journalUpdateSchema = z.object({
+  text: z.string().min(1, "Journal entry cannot be empty").max(10000, "Entry too long").optional(),
+  title: z.string().max(200, "Title too long").optional(),
   mood: z.number().int().min(1).max(10).optional()
 });
 
 export const chatMessageSchema = z.object({
-  message: z.string().min(1, "Message cannot be empty").max(4000, "Message too long")
+  message: z.string().min(1, "Message cannot be empty").max(4000, "Message too long"),
+  conversationHistory: z.array(z.object({
+    role: z.enum(["user", "assistant"]),
+    content: z.string()
+  })).optional()
 });
 
 export function validate(schema, data) {
