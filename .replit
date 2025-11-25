@@ -15,10 +15,6 @@ build = ["npm", "run", "build"]
 localPort = 5000
 externalPort = 80
 
-[[ports]]
-localPort = 34209
-externalPort = 3000
-
 # 4) (Optional but nice) Nix channel:
 [nix]
 channel = "stable-25_05"

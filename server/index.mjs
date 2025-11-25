@@ -1,52 +1,51 @@
-// server/index.mjs
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 
+// === ROUTES ===
 import authRoutes from "./routes/auth.mjs";
 import moodRoutes from "./routes/mood.mjs";
 import journalRoutes from "./routes/journal.mjs";
-import aiRoutes from "./routes/ai.mjs";
+import aiRoutes from "./routes/ai.mjs";          // <— ADD THIS
+import billingRoutes from "./routes/billing.mjs";
 import stripeWebhook from "./routes/stripeWebhook.mjs";
 
 import { db } from "./db/connection.mjs";
 
-// Create express app FIRST
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// === MIDDLEWARE ===
 app.use(helmet());
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json());
 
-// Stripe raw body only for webhook route
+// === STRIPE RAW ROUTE ===
 app.use("/stripe/webhook", stripeWebhook);
 
-// Backend API routes
+// === BACKEND ROUTES ===
 app.use("/auth", authRoutes);
 app.use("/mood", moodRoutes);
 app.use("/journal", journalRoutes);
-app.use("/ai", aiRoutes);
+app.use("/ai", aiRoutes);                       // <— ACTIVATE AI API
+app.use("/billing", billingRoutes);
 
-// ===== FRONTEND SERVING (MUST COME AFTER ROUTES) =====
+// === STATIC FRONTEND (REPLIT AUTOSCALE SAFE) ===
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const clientDist = path.join(__dirname, "../client/dist");
 
-const clientDistPath = path.join(__dirname, "../client/dist");
+app.use(express.static(clientDist));
 
-// Serve static React build
-app.use(express.static(clientDistPath));
-
-// React Router fallback
+// === REACT FALLBACK ===
 app.get("*", (req, res) => {
-  res.sendFile(path.join(clientDistPath, "index.html"));
+  res.sendFile(path.join(clientDist, "index.html"));
 });
 
-// ===== HEALTH CHECKS =====
+// === HEALTH CHECKS ===
 app.get("/health", (req, res) => {
   res.json({ status: "healthy", time: new Date().toISOString() });
 });
@@ -56,18 +55,16 @@ app.get("/health/ready", async (req, res) => {
     await db.execute("SELECT 1");
     res.json({ status: "ready" });
   } catch {
-    res.status(503).json({ status: "not ready" });
+    res.status(503).json({ status: "not-ready" });
   }
 });
 
-// ===== START SERVER =====
 const server = app.listen(PORT, "0.0.0.0", () =>
-  console.log("Backend running on:", PORT)
+  console.log("Backend running on", PORT)
 );
 
-// ===== GRACEFUL SHUTDOWN =====
 process.on("SIGTERM", () => {
-  console.log("SIGTERM received, shutting down...");
+  console.log("Shutting down...");
   server.close(() => process.exit(0));
 });
 
