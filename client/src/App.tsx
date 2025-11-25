@@ -1,21 +1,24 @@
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import MoodPage from "./pages/MoodPage";
-import AIChat from "./pages/AIChat";
-import Journal from "./pages/Journal";
-import Analytics from "./pages/Analytics";
-import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Error404 from "./pages/Error404";
+
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const MoodPage = lazy(() => import("./pages/MoodPage"));
+const AIChat = lazy(() => import("./pages/AIChat"));
+const Journal = lazy(() => import("./pages/Journal"));
+const Analytics = lazy(() => import("./pages/Analytics"));
+const Settings = lazy(() => import("./pages/Settings"));
+const Error404 = lazy(() => import("./pages/Error404"));
 
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
 import FloatingButton from "./components/FloatingButton";
 import ChatWidget from "./components/ChatWidget";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+import { PageSkeleton } from "./components/LoadingSkeleton";
 import { ThemeProvider } from "./context/ThemeContext";
 
 function AppContent() {
@@ -33,67 +36,69 @@ function AppContent() {
       {showNavbar && <Navbar />}
 
       <main id="main-content" role="main">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        <Suspense fallback={<PageSkeleton />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-          <Route
-            path="/dashboard"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/mood"
-            element={
-              <ProtectedRoute>
-                <MoodPage />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/mood"
+              element={
+                <ProtectedRoute>
+                  <MoodPage />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/journal"
-            element={
-              <ProtectedRoute>
-                <Journal />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/journal"
+              element={
+                <ProtectedRoute>
+                  <Journal />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/chat"
-            element={
-              <ProtectedRoute>
-                <AIChat />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/chat"
+              element={
+                <ProtectedRoute>
+                  <AIChat />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/analytics"
-            element={
-              <ProtectedRoute>
-                <Analytics />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/analytics"
+              element={
+                <ProtectedRoute>
+                  <Analytics />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRoute>
-                <Settings />
-              </ProtectedRoute>
-            }
-          />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings />
+                </ProtectedRoute>
+              }
+            />
 
-          <Route path="*" element={<Error404 />} />
-        </Routes>
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+        </Suspense>
       </main>
 
       {showChatWidget && (
@@ -108,10 +113,12 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </ThemeProvider>
+    </ErrorBoundary>
   );
 }
