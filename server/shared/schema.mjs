@@ -47,3 +47,11 @@ export const subscriptions = pgTable("subscriptions", {
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
+
+// WEBHOOK EVENTS (For idempotency tracking)
+export const webhookEvents = pgTable("webhook_events", {
+  id: varchar("id", { length: 255 }).primaryKey(),
+  eventType: varchar("event_type", { length: 100 }).notNull(),
+  processedAt: timestamp("processed_at").defaultNow(),
+  status: varchar("status", { length: 50 }).default("processed"),
+});

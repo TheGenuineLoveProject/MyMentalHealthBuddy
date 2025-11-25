@@ -6,14 +6,29 @@ MyMentalHealthBuddy is a comprehensive mental health support platform featuring 
 
 ## Recent Changes (November 25, 2025)
 
-- **Component Enhancement**: All React components enhanced with comprehensive data-testid attributes
-- **Accessibility**: Added ARIA labels to Navbar, ProtectedRoute, FloatingButton, ChatWidget
-- **Error Handling**: Centralized API client with proper error handling
-- **Schema Update**: Added Stripe subscription fields to users table
-- **Bug Fixes**: Fixed AI service model name from "gpt-4.1-mini" to "gpt-4o-mini"
-- **Cleanup**: Removed duplicate/unused files (stripe.mjs, cors-fix.mjs, connection.mjs, pages/index.tsx)
-- **Billing Routes**: Complete Stripe integration with plans, checkout, portal, cancel endpoints
-- **404 Page**: Enhanced with proper styling and navigation links
+### Security & Backend Enhancements
+- **JWT Security**: Enforced SESSION_SECRET in production (exits if not configured)
+- **Stripe Webhooks**: Complete event handlers with database-backed idempotency for autoscale
+- **Analytics API**: 5 new endpoints (mood-trends, mood-distribution, journal-stats, wellness-score, summary)
+- **Schema Update**: Added Stripe fields to users table, webhookEvents table for idempotency
+
+### Frontend & Visual Improvements
+- **Visual Refresh**: Gradient hero sections, CSS animations, modern card designs
+- **Dark Mode**: Full theme toggle with localStorage persistence and system preference detection
+- **Theme Context**: Created ThemeProvider with React context API
+- **Enhanced Pages**: Home page with testimonials, Dashboard with animated cards
+
+### Infrastructure
+- **Deployment**: Configured for Replit Autoscale with npm run build
+- **Build Optimized**: Production bundle 71.91 kB gzipped
+- **All Routes Mounted**: Auth, Mood, Journal, AI, Billing, Analytics all functional
+
+### Previous Changes
+- Component Enhancement: All React components enhanced with comprehensive data-testid attributes
+- Accessibility: Added ARIA labels to Navbar, ProtectedRoute, FloatingButton, ChatWidget
+- Error Handling: Centralized API client with proper error handling
+- Bug Fixes: Fixed AI service model name from "gpt-4.1-mini" to "gpt-4o-mini"
+- Cleanup: Removed duplicate/unused files
 
 ## User Preferences
 
