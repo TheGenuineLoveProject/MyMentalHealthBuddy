@@ -4,9 +4,11 @@ build:
   runs-on: ubuntu-latest
 
   steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repo
+      uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v4
+    - name: Setup Node
+      uses: actions/setup-node@v4
       with:
         node-version: "20"
         cache: "npm"
@@ -19,13 +21,13 @@ build:
       run: |
         echo "📦 Attempting frontend build…"
 
-        # 1) Try root-level script first (most likely for your Replit setup)
+        # 1) Try root-level script first
         if npm run build:client --if-present; then
           echo "✅ Ran npm run build:client"
           exit 0
         fi
 
-        # 2) Fallback: client has its own package.json
+        # 2) Fallback: build inside client/
         if [ -d "client" ] && [ -f "client/package.json" ]; then
           echo "📦 Detected client/package.json — building inside client/"
           cd client
@@ -47,7 +49,7 @@ build:
           exit 0
         fi
 
-        # 2) Fallback: server has its own package.json
+        # 2) Fallback: build inside server/
         if [ -d "server" ] && [ -f "server/package.json" ]; then
           echo "📦 Detected server/package.json — building inside server/"
           cd server
@@ -58,7 +60,7 @@ build:
 
         echo "ℹ️ No backend build script found — skipping."
 
-    # ---------- OPTIONAL: UPLOAD BUILD ARTIFACTS ----------
+    # ---------- OPTIONAL: ARTIFACTS ----------
     - name: Upload Build Artifacts
       if: success()
       uses: actions/upload-artifact@v4
@@ -67,4 +69,4 @@ build:
         path: |
           client/dist
           server/dist
-        retention-days: 7C
+        retention-days: 7
