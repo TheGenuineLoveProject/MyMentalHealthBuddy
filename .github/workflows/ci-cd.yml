@@ -3,27 +3,28 @@ name: MyMentalHealthBuddy-CI/CD
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
 
 jobs:
-  build-and-deploy:
+  build-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: 📦 Checkout Repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 🟦 Setup Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: 📥 Install Dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: 🧪 Run Tests
+      - name: Run Tests
         run: npm run test
 
-      - name: 🚀 Deploy (manual or webhook)
-        run: echo "Replit deployment is manual or handled via webhook"
+      - name: Deploy-to-Replit
+        env:
+          REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
+        run: |
+          echo "Deploying to Replit..."
+          npx replit deploy --token="${REPLIT_TOKEN}"
