@@ -22,7 +22,13 @@ export default function AIChat() {
   async function sendMessage(e: React.FormEvent) {
     e.preventDefault();
     const trimmed = input.trim();
-    if (!trimmed || isSending) return; };
+    if (!trimmed || isSending) return;
+
+    const userMessage: ChatMessage = {
+      role: "user",
+      content: trimmed,
+      timestamp: new Date(),
+    };
 
     setMessages((prev) => [...prev, userMessage]);
     setInput("");

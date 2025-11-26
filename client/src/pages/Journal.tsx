@@ -35,7 +35,13 @@ export default function Journal() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!newEntry.trim()) return; });
+    if (!newEntry.trim()) return;
+
+    setIsSaving(true);
+    setError("");
+
+    try {
+      await apiPost("/api/journal", { text: newEntry.trim() });
       setSuccess("Your thoughts have been saved!");
       setNewEntry("");
       loadEntries();
