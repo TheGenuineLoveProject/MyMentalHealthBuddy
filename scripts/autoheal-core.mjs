@@ -53,6 +53,11 @@ function safeFix(content) {
 }
 
 // ----------- MAIN HEALING ENGINE ---------------------
+// SAFE replaceAll helper – prevents GitHub Actions crashes
+function safeReplaceAll(str, find, replaceWith = "") {
+  if (!find) return str;
+  return str.replaceAll(find, replaceWith);
+}
 
 export function healFile(filePath) {
   const abs = path.join(ROOT, filePath);
