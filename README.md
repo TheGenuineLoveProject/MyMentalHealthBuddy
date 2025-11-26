@@ -1,5 +1,6 @@
 # 🧠 MyMentalHealthBuddy
 
+
 A comprehensive mental health support platform featuring AI-powered chat therapy, mood tracking, journaling, and crisis resources.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)

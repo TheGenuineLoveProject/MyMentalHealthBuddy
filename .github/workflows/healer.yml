@@ -1,21 +1,33 @@
 name: Healer
+
 on:
-  push: { branches: ["main"] }
+  push:
+    branches: ["main"]
   workflow_dispatch:
-  schedule: [{ cron: "0 */6 * * *" }]
+  schedule:
+    - cron: "0 */6 * * *"  # every 6 hours
+
 jobs:
   healer:
     runs-on: ubuntu-latest
-    permissions: { contents: write, pull-requests: write }
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: "20" }
-      - name: Install Healer deps
-        run: cd ops/healer && npm ci
-      - name: Run Healer
+        with:
+          node-version: "20"
+
+      - name: Install-Healer-Deps
+        run: npm ci
+
+      - name: Run-Healer
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_OWNER: ${{ github.repository_owner }}
-          GH_REPO: ${{ github.event.repository.name }}
-        run: cd ops/healer && npx ts-node orchestrator.ts
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cd ops/healer-66-mqa-ts
+          node orchestrator.ts

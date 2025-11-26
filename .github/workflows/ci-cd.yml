@@ -1,31 +1,29 @@
-name: MyMentalHealthBuddy CI/CD
+name: MyMentalHealthBuddy-CI/CD
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
-    branches:
-      - main
+    branches: ["main"]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout Repository
-        uses: actions/checkout@v3
+      - name: 📦 Checkout Repository
+        uses: actions/checkout@v4
 
-      - name: 🧠 Setup Node.js
-        uses: actions/setup-node@v3
+      - name: 🟦 Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
 
-      - name: 📦 Install Dependencies
+      - name: 📥 Install Dependencies
         run: npm install
 
-      - name: ✅ Run Tests
+      - name: 🧪 Run Tests
         run: npm run test
 
-      - name: 🚀 Deploy to Replit (via GitHub)
-        run: echo "✅ Replit deployment is manual or handled via webhook"
+      - name: 🚀 Deploy (manual or webhook)
+        run: echo "Replit deployment is manual or handled via webhook"

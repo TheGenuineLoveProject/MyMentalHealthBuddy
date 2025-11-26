@@ -14,7 +14,11 @@
     "build": "npm run build --workspaces",
     "check-backend": "node scripts/check-backend.mjs",
     "check-frontend": "node scripts/check-frontend.mjs",
-    "scan-errors": "node scripts/scan-errors.mjs"
+    "scan-errors": "node scripts/scan-errors.mjs",
+    "diagnose": "node automation/orchestrator.mjs",
+    "scan": "node scripts/run-suite.mjs",
+    "heal": "node scripts/autoheal-project.mjs",
+    "heal:full": "npm run heal && npm run scan"
   },
   "workspaces": [
     "client",

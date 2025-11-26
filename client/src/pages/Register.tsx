@@ -38,8 +38,7 @@ export default function Register() {
     setFieldErrors({});
 
     if (!validateForm()) {
-      return;
-    }
+      return; }
 
     setIsLoading(true);
 
