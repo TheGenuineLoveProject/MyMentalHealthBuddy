@@ -3,32 +3,34 @@ name: Healer
 on:
   push:
     branches: ["main"]
-  workflow_dispatch: {}
-  schedule:
-    - cron: "0 */6 * * *"   # every 6 hours
+  workflow_dispatch:
 
 jobs:
   healer:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
       pull-requests: write
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
-      - name: Install-Healer-Deps
+      - name: Install Healer Dependencies
         run: npm ci
 
-      - name: Run-Healer
+      - name: Run Healer
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_OWNER: ${{ github.repository_owner }}
           GH_REPO: ${{ github.event.repository.name }}
         run: |
           echo "Running healer..."
-          node scripts/healer-orchestrator.mjs
+          node scripts/healer/healer-orchestrator.mjs
