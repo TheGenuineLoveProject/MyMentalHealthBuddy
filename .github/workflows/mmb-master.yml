@@ -1,21 +1,24 @@
-name: MyMentalHealthBuddy — Unified CI/CD + AutoHeal + Build + Deploy
+# ========================================================================
+# MyMentalHealthBuddy — Unified CI/CD + AutoHeal + Build + Deploy
+# ========================================================================
 
+name: MMB-CI-CD-Orchestrator
 on:
   push:
     branches: ["main"]
   workflow_dispatch:
 
 jobs:
-  # ===================================================================
+  # ===============================================================
   # (1) SYSTEM DIAGNOSTICS (soft-fail allowed)
-  # ===================================================================
+  # ===============================================================
   diagnose:
     name: System-Diagnostics
     runs-on: ubuntu-latest
     continue-on-error: true
+
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -24,20 +27,20 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
-      - name: Run-Diagnostics
-        run: node scripts/scan-ui.mjs || true
+      - name: Run Diagnostics
+        run: node scripts/scan-ul.mjs || true
 
-  # ===================================================================
-  # (2) AUTO-HEALING (soft edition, non-blocking)
-  # ===================================================================
+  # ===============================================================
+  # (2) AUTO-HEALING (Silent Edition – non-blocking)
+  # ===============================================================
   autoheal:
-    name: Auto-Healing
+    name: Auto-Healing (Silent Edition)
     runs-on: ubuntu-latest
     needs: diagnose
     continue-on-error: true
+
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -46,21 +49,21 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
-      - name: Run AutoHeal
+      - name: Run Autoheal (Silent Mode)
         run: |
-          echo "⚡ Running AutoHeal..."
-          node scripts/autoheal-project.mjs || true
+          echo "⚙️ Running Autoheal Silent Edition…"
+          node scripts/autoheal-silent.mjs || true
 
-  # ===================================================================
-  # (3) VERIFICATION SUITE (HARD PASS — BLOCKS DEPLOYMENT)
-  # ===================================================================
+  # ===============================================================
+  # (3) VERIFICATION SUITE (HARD PASS — blocks deployment)
+  # ===============================================================
   verify:
     name: Verification Suite
     runs-on: ubuntu-latest
     needs: autoheal
+
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -71,27 +74,27 @@ jobs:
 
       - name: Run Verification
         run: |
-          echo "🔍 Running Verification..."
+          echo "🔍 Running Verification…"
           node scripts/run-suite.mjs
 
       - name: Fail if Autoheal suggestions exist
         run: |
-          if grep -q "Autoheal Suggestion" -r ./; then
+          if grep -q "Autoheal Suggestion" -r .; then
             echo "❌ Autoheal suggestions detected — fix required."
             exit 1
           fi
           echo "✅ No Autoheal suggestions — safe to proceed."
 
-  # ===================================================================
-  # (4) BUILD — FRONTEND + BACKEND (auto-detect both)
-  # ===================================================================
+  # ===============================================================
+  # (4) BUILD — FRONTEND + BACKEND (auto-detect both directories)
+  # ===============================================================
   build:
-    name: Build-Frontend+Backend
+    name: Build-Frontend-Backend
     runs-on: ubuntu-latest
     needs: verify
+
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -100,14 +103,14 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
-      # -----------------------------
-      # Frontend build
-      # -----------------------------
+      # -------------------------------
+      # FRONTEND BUILD
+      # -------------------------------
       - name: Build Frontend
         run: |
-          echo "🎨 Attempting frontend build..."
-          if [ -f "client/package.json" ]; then
-            echo "➡️ Detected client/package.json — building frontend..."
+          echo "🚧 Attempting frontend build…"
+          if [ -f "./client/package.json" ]; then
+            echo "📁 Detected client/package.json — building frontend…"
             cd client
             npm install
             npm run build || exit 1
@@ -115,14 +118,14 @@ jobs:
             echo "⚠️ No frontend detected — skipping."
           fi
 
-      # -----------------------------
-      # Backend build
-      # -----------------------------
+      # -------------------------------
+      # BACKEND BUILD
+      # -------------------------------
       - name: Build Backend
         run: |
-          echo "🛠 Attempting backend build..."
-          if [ -f "server/package.json" ]; then
-            echo "➡️ Detected server/package.json — building backend..."
+          echo "🚧 Attempting backend build…"
+          if [ -f "./server/package.json" ]; then
+            echo "📁 Detected server/package.json — building backend…"
             cd server
             npm install
             npm run build || exit 1
@@ -130,11 +133,19 @@ jobs:
             echo "⚠️ No backend detected — skipping."
           fi
 
-      # -----------------------------
-      # Upload build artifacts
-      # -----------------------------
+  # ===============================================================
+  # (5) UPLOAD BUILD ARTIFACTS (Optional, Safe)
+  # ===============================================================
+  artifacts:
+    name: Upload Build Artifacts
+    runs-on: ubuntu-latest
+    needs: build
+    if: success()
+
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Upload Build Artifacts
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: mmb-build
@@ -143,16 +154,16 @@ jobs:
             server/dist
           retention-days: 7
 
-  # ===================================================================
-  # (5) DEPLOY TO REPLIT AUTOSCALE
-  # ===================================================================
+  # ===============================================================
+  # (6) DEPLOY TO REPLIT AUTOSCALE
+  # ===============================================================
   deploy:
     name: Deploy-to-Replit
     runs-on: ubuntu-latest
     needs: build
+
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -165,5 +176,5 @@ jobs:
         env:
           REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
         run: |
-          echo "🚀 Deploying to Replit..."
-          npx replit-deploy --token "$REPLIT_TOKEN"
+          echo "🚀 Deploying to Replit Autoscale…"
+          npx replit deploy --token "$REPLIT_TOKEN"
