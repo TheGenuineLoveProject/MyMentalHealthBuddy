@@ -1,6 +1,10 @@
 # 🧠 MyMentalHealthBuddy
 
+<p align="center">
+  <img src="https://github.com/MyMentalHealthSupport/MyMentalHealthBuddy/actions/workflows/mmb-master.yml/badge.svg" alt="MyMentalHealthBuddy CI/CD Status" />
+</p>
 
+---
 A comprehensive mental health support platform featuring AI-powered chat therapy, mood tracking, journaling, and crisis resources.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)](https://www.typescriptlang.org/)
