@@ -33,7 +33,7 @@ jobs:
           cache: "npm"
       - run: npm ci
       - name: Run-AutoHeal
-        run: npm run heal
+        run: node "$GITHUB_WORKSPACE/scripts/autoheal-project.mjs"
 
   verify:
     name: Verification-Suite

@@ -8,29 +8,28 @@ on:
 jobs:
   healer:
     runs-on: ubuntu-latest
-
     permissions:
       contents: write
       pull-requests: write
 
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
+          node-version: '20'
+          cache: 'npm'
 
       - name: Install Healer Dependencies
         run: npm ci
 
-      - name: Run Healer
+      - name: Run-Healer
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_OWNER: ${{ github.repository_owner }}
           GH_REPO: ${{ github.event.repository.name }}
         run: |
           echo "Running healer..."
-          node scripts/healer/healer-orchestrator.mjs
+          node "$GITHUB_WORKSPACE/scripts/healer-orchestrator.mjs"
