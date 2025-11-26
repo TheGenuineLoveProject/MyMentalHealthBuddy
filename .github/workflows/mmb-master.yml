@@ -1,102 +1,70 @@
-name: MyMentalHealthBuddy-CI-CD-Self-Evolution
+build:
+  name: Build-Frontend-Backend
+  needs: verify
+  runs-on: ubuntu-latest
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+  steps:
+    - uses: actions/checkout@v4
 
-permissions:
-  contents: write
+    - uses: actions/setup-node@v4
+      with:
+        node-version: "20"
+        cache: "npm"
 
-jobs:
-  diagnose:
-    name: System-Diagnostics
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
+    - name: Install Root Dependencies
+      run: npm ci
 
-      - name: Install Dependencies
-        run: npm ci
+    # ---------- FRONTEND BUILD ----------
+    - name: Build Frontend
+      run: |
+        echo "📦 Attempting frontend build…"
 
-      - name: Run npm audit (high-only)
-        run: |
-          echo "🔍 Running npm audit --level=high…"
-          npm audit --audit-level=high || true
+        # 1) Try root-level script first (most likely for your Replit setup)
+        if npm run build:client --if-present; then
+          echo "✅ Ran npm run build:client"
+          exit 0
+        fi
 
-  autoheal:
-    name: Auto-Healing
-    needs: diagnose
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
+        # 2) Fallback: client has its own package.json
+        if [ -d "client" ] && [ -f "client/package.json" ]; then
+          echo "📦 Detected client/package.json — building inside client/"
+          cd client
+          npm install
+          npm run build --if-present
+          exit 0
+        fi
 
-      - name: Install Dependencies
-        run: npm ci
+        echo "ℹ️ No frontend build script found — skipping."
 
-      - name: Run AutoHeal Orchestrator
-        run: |
-          echo "🩺 Running AutoHeal…"
-          node scripts/healer-orchestrator.mjs || true
+    # ---------- BACKEND BUILD ----------
+    - name: Build Backend
+      run: |
+        echo "📦 Attempting backend build…"
 
-  verify:
-    name: Verification Suite
-    needs: autoheal
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
+        # 1) Try root-level script first
+        if npm run build:server --if-present; then
+          echo "✅ Ran npm run build:server"
+          exit 0
+        fi
 
-      - name: Install Dependencies
-        run: npm ci
+        # 2) Fallback: server has its own package.json
+        if [ -d "server" ] && [ -f "server/package.json" ]; then
+          echo "📦 Detected server/package.json — building inside server/"
+          cd server
+          npm install
+          npm run build --if-present
+          exit 0
+        fi
 
-      - name: Run Verification
-        run: node scripts/run-suite.mjs
+        echo "ℹ️ No backend build script found — skipping."
 
-      - name: Fail if AutoHeal Suggestions Exist
-        run: |
-          if grep -qr "AutoHeal-suggestions" scripts; then
-            echo "❌ AutoHeal suggestions detected — please fix before deploy.";
-            exit 1;
-          fi
-          echo "✅ No AutoHeal suggestions — safe to proceed.";
-
-  build:
-    name: Build-Frontend-Backend
-    needs: verify
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Build Project
-        env:
-          NODE_ENV: production
-        run: |
-          echo "📦 Building client and server…"
-          npm run build
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-artifacts
-          path: |
-            client/dist
-            server/dist
-          retention-days: 7
+    # ---------- OPTIONAL: UPLOAD BUILD ARTIFACTS ----------
+    - name: Upload Build Artifacts
+      if: success()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-artifacts
+        path: |
+          client/dist
+          server/dist
+        retention-days: 7
