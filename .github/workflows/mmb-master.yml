@@ -6,28 +6,30 @@ on:
   workflow_dispatch:
 
 jobs:
-
-  # ===========================================
+  # ===================================================================
   # (1) SYSTEM DIAGNOSTICS (soft-fail allowed)
-  # ===========================================
+  # ===================================================================
   diagnose:
     name: System-Diagnostics
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
+
       - name: Install root dependencies
         run: npm ci
-      - name: Run Diagnostics
+
+      - name: Run-Diagnostics
         run: node scripts/scan-ui.mjs || true
 
-  # ====================================================
-  # (2) AUTO-HEALING (SAFE EDITION — soft fail allowed)
-  # ====================================================
+  # ===================================================================
+  # (2) AUTO-HEALING (soft edition, non-blocking)
+  # ===================================================================
   autoheal:
     name: Auto-Healing
     runs-on: ubuntu-latest
@@ -35,54 +37,61 @@ jobs:
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
+
       - name: Install root dependencies
         run: npm ci
+
       - name: Run AutoHeal
         run: |
           echo "⚡ Running AutoHeal..."
-          node scripts/autoheal.mjs || true   # <-- uses the SILENT autoheal
+          node scripts/autoheal-project.mjs || true
 
-  # =======================================================
-  # (3) VERIFICATION SUITE (MUST PASS – blocks deployment)
-  # =======================================================
+  # ===================================================================
+  # (3) VERIFICATION SUITE (HARD PASS — BLOCKS DEPLOYMENT)
+  # ===================================================================
   verify:
     name: Verification Suite
     runs-on: ubuntu-latest
     needs: autoheal
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
+
       - name: Install root dependencies
         run: npm ci
+
       - name: Run Verification
         run: |
           echo "🔍 Running Verification..."
           node scripts/run-suite.mjs
 
-      - name: Fail if AutoHeal suggestions exist
+      - name: Fail if Autoheal suggestions exist
         run: |
-          if grep -q "Autoheal Suggestion" -r .; then
+          if grep -q "Autoheal Suggestion" -r ./; then
             echo "❌ Autoheal suggestions detected — fix required."
             exit 1
           fi
-          echo "✅ No AutoHeal suggestions — safe to proceed."
+          echo "✅ No Autoheal suggestions — safe to proceed."
 
-  # =================================================================
-  # (4) BUILD — FRONTEND + BACKEND (Auto-detect both directories)
-  # =================================================================
+  # ===================================================================
+  # (4) BUILD — FRONTEND + BACKEND (auto-detect both)
+  # ===================================================================
   build:
-    name: Build-Frontend-Backend
+    name: Build-Frontend+Backend
     runs-on: ubuntu-latest
     needs: verify
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -92,13 +101,13 @@ jobs:
         run: npm ci
 
       # -----------------------------
-      # FRONTEND
+      # Frontend build
       # -----------------------------
       - name: Build Frontend
         run: |
-          echo "⚙️ Attempting frontend build..."
+          echo "🎨 Attempting frontend build..."
           if [ -f "client/package.json" ]; then
-            echo "📦 Detected client/package.json — building frontend..."
+            echo "➡️ Detected client/package.json — building frontend..."
             cd client
             npm install
             npm run build || exit 1
@@ -107,13 +116,13 @@ jobs:
           fi
 
       # -----------------------------
-      # BACKEND
+      # Backend build
       # -----------------------------
       - name: Build Backend
         run: |
-          echo "⚙️ Attempting backend build..."
+          echo "🛠 Attempting backend build..."
           if [ -f "server/package.json" ]; then
-            echo "📦 Detected server/package.json — building backend..."
+            echo "➡️ Detected server/package.json — building backend..."
             cd server
             npm install
             npm run build || exit 1
@@ -122,7 +131,7 @@ jobs:
           fi
 
       # -----------------------------
-      # UPLOAD ARTIFACTS
+      # Upload build artifacts
       # -----------------------------
       - name: Upload Build Artifacts
         if: success()
@@ -134,23 +143,27 @@ jobs:
             server/dist
           retention-days: 7
 
-  # =======================================
+  # ===================================================================
   # (5) DEPLOY TO REPLIT AUTOSCALE
-  # =======================================
+  # ===================================================================
   deploy:
     name: Deploy-to-Replit
     runs-on: ubuntu-latest
     needs: build
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: npm
+
       - name: Install Replit CLI
         run: npm install -g @replit/cli
+
       - name: Trigger Replit Deploy
         env:
           REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
         run: |
           echo "🚀 Deploying to Replit..."
-          npx replit deploy --token "$REPLIT_TOKEN"
+          npx replit-deploy --token "$REPLIT_TOKEN"
