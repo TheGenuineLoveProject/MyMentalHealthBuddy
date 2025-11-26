@@ -1,27 +1,22 @@
-name: MyMentalHealthBuddy-Master-AutoEvolution
+name: MyMentalHealthBuddy-CI-CD-Self-Evolution
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-  schedule:
-    - cron: "0 10 * * *"     # Daily 10:00 UTC scan
-  workflow_dispatch: {}
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  ###############################################################
-  # 1) SYSTEM DIAGNOSTICS
-  ###############################################################
   diagnose:
-    name: System Diagnostics
+    name: System-Diagnostics
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
@@ -29,25 +24,19 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Run Diagnostics Suite
+      - name: Run npm audit (high-only)
         run: |
-          echo "▶️ Running diagnostics..."
-          node scripts/run-suite.mjs || true
+          echo "🔍 Running npm audit --level=high…"
+          npm audit --audit-level=high || true
 
-  ###############################################################
-  # 2) SECURITY SCAN  (soft-fail)
-  ###############################################################
-  security:
-    name: Security Scan
+  autoheal:
+    name: Auto-Healing
     needs: diagnose
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
@@ -55,50 +44,18 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: npm audit (high+ only)
+      - name: Run AutoHeal Orchestrator
         run: |
-          echo "🛡 Running npm audit (high+)..."
-          npm audit --audit-level=high || true
+          echo "🩺 Running AutoHeal…"
+          node scripts/healer-orchestrator.mjs || true
 
-  ###############################################################
-  # 3) AUTO-HEAL  (soft-fail)
-  ###############################################################
-  autoheal:
-    name: Auto-Healing
-    needs: [diagnose, security]
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run AutoHeal
-        run: |
-          echo "⚕️ Running AutoHeal..."
-          node scripts/autoheal-project.mjs || true
-
-  ###############################################################
-  # 4) VERIFY (this one MUST pass)
-  ###############################################################
   verify:
     name: Verification Suite
     needs: autoheal
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
@@ -107,53 +64,35 @@ jobs:
         run: npm ci
 
       - name: Run Verification
-        run: |
-          echo "🔍 Running verification..."
-          node scripts/run-suite.mjs
+        run: node scripts/run-suite.mjs
 
       - name: Fail if AutoHeal Suggestions Exist
         run: |
-          if grep -q "AutoHeal Suggestions" -r scripts; then
-            echo "❌ AutoHeal suggestions detected — please fix before deploy."
-            exit 1
+          if grep -qr "AutoHeal-suggestions" scripts; then
+            echo "❌ AutoHeal suggestions detected — please fix before deploy.";
+            exit 1;
           fi
-          echo "✅ No AutoHeal suggestions — safe to proceed."
+          echo "✅ No AutoHeal suggestions — safe to proceed.";
 
-  ###############################################################
-  # 5) BUILD FRONTEND + BACKEND
-  ###############################################################
   build:
-    name: Build & Optimize
+    name: Build-Frontend-Backend
     needs: verify
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
-      - name: Install Root Dependencies
-        run: npm ci
-
-      - name: Build Frontend
+      - name: Build Project
+        env:
+          NODE_ENV: production
         run: |
-          cd client
-          npm ci
+          echo "📦 Building client and server…"
           npm run build
-          cd ..
 
-      - name: Build Backend
-        run: |
-          cd server
-          npm ci
-          npm run build
-          cd ..
-
-      - name: Upload Build Artifacts
+      - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
@@ -161,87 +100,3 @@ jobs:
             client/dist
             server/dist
           retention-days: 7
-
-  ###############################################################
-  # 6) DEPLOY TO REPLIT AUTOSCALE
-  ###############################################################
-  deploy:
-    name: Deploy to Replit Autoscale
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Install Replit CLI
-        run: npm install -g @replit/cli
-
-      - name: Trigger Replit Deploy
-        env:
-          REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
-        run: |
-          echo "🚀 Triggering Replit deploy..."
-          npx replit-deploy --token="${REPLIT_TOKEN}" || true
-
-  ###############################################################
-  # 7) HEALER AUTOMATION (soft-fail)
-  ###############################################################
-  healer:
-    name: Healer Automation
-    needs: deploy
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    permissions:
-      contents: write
-      pull-requests: write
-
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Healer
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_OWNER: ${{ github.repository_owner }}
-          GH_REPO: ${{ github.event.repository.name }}
-        run: |
-          echo "⚕️ Running healer orchestrator..."
-          node scripts/healer-orchestrator.mjs || true
-
-  ###############################################################
-  # 8) DAILY PLATFORM SCAN (only when cron)
-  ###############################################################
-  daily:
-    name: Daily Platform Scan
-    needs: healer
-    runs-on: ubuntu-latest
-    if: github.event_name == 'schedule'
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: "npm"
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Run Daily Scan
-        run: |
-          echo "📊 Running daily 360° scan..."
-          node scripts/scan-ui.mjs || true
-          node scripts/scan-api.mjs || true
-          node scripts/scan-types.mjs || true
-          node scripts/scan-critical.mjs || true
