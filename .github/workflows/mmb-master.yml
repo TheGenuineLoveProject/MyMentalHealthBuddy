@@ -46,8 +46,10 @@ jobs:
       - name: Install root dependencies
         run: npm ci
 
-       - name: Run Autoheal (Silent Edition)
-         run: node scripts/autoheal.mjs || true
+      - name: Run AutoHeal
+        run: |
+          echo "⚡ Running AutoHeal..."
+          node scripts/autoheal-project.mjs || true
 
   # ===================================================================
   # (3) VERIFICATION SUITE (HARD PASS — BLOCKS DEPLOYMENT)
