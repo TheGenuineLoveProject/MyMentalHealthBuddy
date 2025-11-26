@@ -1,11 +1,12 @@
-# MyMentalHealthBuddy — Unified CI/CD + Silent-AutoHeal + Build + Deploy
-# Roger v7 — Final Stable Edition (CI-Safe, Replit-Safe)
+name: MyMentalHealthBuddy - Unified CI/CD + Silent-AutoHeal + Build + Deploy
 
-name: CI/CD
+# ---------------------------------------------------------
+# Roger v7 — Final Stable Edition (CI-Safe, Replit-Safe)
+# ---------------------------------------------------------
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
@@ -32,7 +33,7 @@ jobs:
 
 
   # ===========================================================
-  # (2) AUTO-HEAL (SILENT EDITION — ALWAYS SAFELY COMPLETE)
+  # (2) AUTO-HEAL (SILENT EDITION — ALWAYS COMPLETE)
   # ===========================================================
   autoheal:
     name: Auto-Healing (Silent Edition)
@@ -126,7 +127,7 @@ jobs:
 
 
   # ===========================================================
-  # (5) OPTIONAL: UPLOAD ARTIFACTS
+  # (5) UPLOAD ARTIFACTS
   # ===========================================================
   upload:
     name: Upload Build Artifacts
@@ -151,6 +152,7 @@ jobs:
     name: Deploy-to-Replit
     needs: upload
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -166,4 +168,4 @@ jobs:
           REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
         run: |
           echo "🚀 Deploying to Replit..."
-          npx replit deploy --token "$REPLIT_TOKEN"CI/CD
+          npx replit deploy --token "$REPLIT_TOKEN"
