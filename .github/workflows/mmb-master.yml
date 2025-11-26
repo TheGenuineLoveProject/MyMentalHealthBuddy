@@ -67,4 +67,4 @@ build:
         path: |
           client/dist
           server/dist
-        retention-days: 7
+        retention-days: 7C
