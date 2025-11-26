@@ -1,20 +1,15 @@
-name: MyMentalHealthBuddy - Unified CI/CD + Silent-AutoHeal + Build + Deploy
-
-# ---------------------------------------------------------
-# Roger v7 — Final Stable Edition (CI-Safe, Replit-Safe)
-# ---------------------------------------------------------
+name: MyMentalHealthBuddy – Unified CI/CD + Silent-Autoheal + Build + Deploy
+# Roger v7 – Final Stable Edition (CI-Safe, Replit-Safe)
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
 
-  # ===========================================================
   # (1) SYSTEM DIAGNOSTICS (safe, non-blocking)
-  # ===========================================================
-  diagnose:
+  diagnostics:
     name: System-Diagnostics
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -23,21 +18,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
+          cache: "npm"
 
       - name: Install root dependencies
         run: npm ci
 
       - name: Run Diagnostics
-        run: node scripts/scan-ui.mjs || true
+        run: node scripts/scan-all.js || true
 
 
-  # ===========================================================
+
   # (2) AUTO-HEAL (SILENT EDITION — ALWAYS COMPLETE)
-  # ===========================================================
   autoheal:
     name: Auto-Healing (Silent Edition)
-    needs: diagnose
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
@@ -45,120 +38,116 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
+          cache: "npm"
 
       - name: Install root dependencies
         run: npm ci
 
-      - name: Run Silent AutoHeal
-        run: |
-          echo "⚙️ Running Silent AutoHeal..."
-          node scripts/autoheal-silent.mjs || true
+      - name: Run Autoheal (Silent Edition)
+        run: node scripts/autoheal.silent.mjs || true
 
 
-  # ===========================================================
-  # (3) VERIFICATION SUITE (ALWAYS PASS — NO SUGGESTION CHECK)
-  # ===========================================================
+
+  # (3) VERIFICATION SUITE (HARD PASS → BLOCKS DEPLOYMENT)
   verify:
-    name: Verification Suite (CI-Safe)
-    needs: autoheal
+    name: Verification Suite
     runs-on: ubuntu-latest
-    continue-on-error: false
+    needs: autoheal
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
+          cache: "npm"
 
       - name: Install root dependencies
         run: npm ci
 
       - name: Run Verification
+        run: node scripts/run-suite.js
+
+      - name: Fail if Autoheal suggestions exist
         run: |
-          echo "🔍 Running CI-Safe Verification..."
-          node scripts/run-suite.mjs || true
+          echo "🔍 Checking for Autoheal Suggestions..."
+          if grep -R "Autoheal Suggestion" -n . ; then
+            echo "❌ Autoheal suggestions detected — fix required."
+            exit 1
+          fi
+          echo "✅ No Autoheal suggestions — safe to proceed."
 
-      - name: Force PASS (No suggestion scan)
-        run: echo "🟢 Verification always safe to proceed"
 
 
-  # ===========================================================
-  # (4) BUILD FRONTEND + BACKEND (auto-detect)
-  # ===========================================================
+  # (4) BUILD — FRONTEND + BACKEND
   build:
     name: Build-Frontend-Backend
-    needs: verify
     runs-on: ubuntu-latest
-
+    needs: verify
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
+          cache: "npm"
 
       - name: Install root dependencies
         run: npm ci
 
-      # ---------- FRONTEND ----------
+      # FRONTEND
       - name: Build Frontend
         run: |
-          echo "📦 Attempting frontend build..."
-          if [ -d "client" ] && [ -f "client/package.json" ]; then
+          echo "🖥️ Attempting frontend build..."
+          if [ -f "./client/package.json" ]; then
+            echo "📦 Detected client/package.json — building frontend..."
             cd client
-            npm ci
+            npm install
             npm run build || exit 1
           else
             echo "⚠️ No frontend detected — skipping."
           fi
 
-      # ---------- BACKEND ----------
+      # BACKEND
       - name: Build Backend
         run: |
-          echo "📦 Attempting backend build..."
-          if [ -d "server" ] && [ -f "server/package.json" ]; then
+          echo "🛠️ Attempting backend build..."
+          if [ -f "./server/package.json" ]; then
+            echo "📦 Detected server/package.json — building backend..."
             cd server
-            npm ci
+            npm install
             npm run build || exit 1
           else
             echo "⚠️ No backend detected — skipping."
           fi
 
 
-  # ===========================================================
-  # (5) UPLOAD ARTIFACTS
-  # ===========================================================
+
+  # (5) OPTIONAL — UPLOAD ARTIFACTS
   upload:
     name: Upload Build Artifacts
-    needs: build
     if: success()
     runs-on: ubuntu-latest
+    needs: build
     steps:
-      - uses: actions/checkout@v4
       - uses: actions/upload-artifact@v4
         with:
           name: mmb-build
-          path:
-            - client/dist
-            - server/dist
+          path: |
+            client/dist
+            server/dist
           retention-days: 7
 
 
-  # ===========================================================
+
   # (6) DEPLOY TO REPLIT AUTOSCALE
-  # ===========================================================
   deploy:
     name: Deploy-to-Replit
-    needs: upload
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
+          cache: "npm"
 
       - name: Install Replit CLI
         run: npm install -g @replit/cli
