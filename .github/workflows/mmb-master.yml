@@ -118,21 +118,26 @@ jobs:
   ###################################################################
   # (6) DEPLOY TO REPLIT
   ###################################################################
-  deploy-to-replit:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+          deploy-to-replit:
+            runs-on: ubuntu-latest
+            needs: upload
 
-      - name: Install Replit CLI
-        run: npm install -g @replit/replit-cli
+            steps:
+              - uses: actions/checkout@v4
 
-      - name: Deploying to Replit...
-        env:
-          REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
-        run: |
-          echo "🚀 Deploying to Replit Autoscale..."
-          npx replit-cli deploy --token "$REPLIT_TOKEN"
+              - uses: actions/setup-node@v4
+                with:
+                  node-version: "20"
+                  cache: "npm"
+
+              - name: Install Replit CLI (correct official package)
+                run: |
+                  echo "Installing Replit CLI..."
+                  npm install -g @replit/cli
+
+              - name: Deploy to Replit (Autoscale)
+                env:
+                  REPLIT_TOKEN: ${{ secrets.REPLIT_TOKEN }}
+                run: |
+                  echo "Deploying to Replit Autoscale…"
+                  replit deploy --token "$REPLIT_TOKEN"
