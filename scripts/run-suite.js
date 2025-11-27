@@ -1,24 +1,22 @@
-// run-suite.mjs — Runs all automation scans
-
 import { execSync } from "node:child_process";
 
 const tasks = [
   "scripts/scan-ui.mjs",
   "scripts/scan-api.mjs",
-  "scripts/scan-types.mjs",
   "scripts/scan-critical.mjs",
-  "scripts/autoheal.mjs"
+  "scripts/scan-types.mjs",
+  "scripts/scan-vips.mjs"
 ];
 
-console.log("\n🚀 Running Full Automation Suite\n");
+console.log("🧪 Running full automation suite...");
 
 for (const t of tasks) {
   try {
-    console.log(`\n➡️ Running ${t}\n`);
+    console.log(`🔹 Running ${t}...`);
     execSync(`node ${t}`, { stdio: "inherit" });
   } catch (err) {
-    console.log("❌ Error:", err.message);
+    console.log(`⚠️ Error: ${err.message}`);
   }
 }
 
-console.log("\n✨ Automation Suite Complete\n");
+console.log("🧪 Automation Suite Complete");

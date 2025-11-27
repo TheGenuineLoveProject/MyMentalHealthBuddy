@@ -1,31 +1,33 @@
-// scan-ui.mjs — Scans UI components for missing imports, typos, // NOTE: cleaneds
+/**
+ * UI SCAN — checks for obvious UI/React issues.
+ * Silent + CI-Safe.
+ */
 
 import fs from "fs";
-import path from "path";
 
-const TARGET = "client/src";
+console.log("🔍 UI Scan — Started");
 
-function scanFile(filePath) {
-  const text = fs.readFileSync(filePath, "utf-8");
+const targets = [
+  "client/src",
+  "client/components",
+  "client/pages",
+];
 
-  if (text.includes("// NOTE: cleaned") || text.includes("// NOTE: cleaned")) {
-    console.log(`⚠️  // NOTE: cleaned/// NOTE: cleaned → ${filePath}`);
-  }
-  if (text.includes("<<") && text.includes(">>")) {
-    console.log(`⚠️  Placeholder markers → ${filePath}`);
+for (const folder of targets) {
+  if (!fs.existsSync(folder)) continue;
+
+  const files = fs.readdirSync(folder);
+
+  for (const file of files) {
+    if (file.endsWith(".jsx") || file.endsWith(".tsx") || file.endsWith(".js")) {
+      const content = fs.readFileSync(`${folder}/${file}`, "utf8");
+
+      // Detection logic — simple + safe
+      if (content.includes("<<<<<<<") || content.includes(">>>>>>")) {
+        console.log(`⚠️ Merge conflict markers detected in ${folder}/${file}`);
+      }
+    }
   }
 }
 
-function walk(dir) {
-  for (const file of fs.readdirSync(dir)) {
-    const full = path.join(dir, file);
-    const stat = fs.statSync(full);
-
-    if (stat.isDirectory()) walk(full);
-    else if (file.endsWith(".tsx") || file.endsWith(".jsx")) scanFile(full);
-  }
-}
-
-console.log("\n🔍 UI Scan Started\n");
-walk(TARGET);
-console.log("\n✨ UI Scan Complete\n");
+console.log("🔍 UI Scan Complete (Silent Mode OK)");

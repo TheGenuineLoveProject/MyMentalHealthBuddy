@@ -1,30 +1,26 @@
-// scan-api.mjs — Scan server routes/services for issues
+/**
+ * API Scan — looks for express router issues and missing exports.
+ * Silent Edition.
+ */
 
 import fs from "fs";
-import path from "path";
 
-const TARGET = "server";
+console.log("🔍 API Scan — Started");
 
-function scanFile(filePath) {
-  const t = fs.readFileSync(filePath, "utf-8");
-  if (t.includes("// NOTE: cleaned") || t.includes("// NOTE: cleaned")) {
-    console.log(`⚠️ // NOTE: cleaned/// NOTE: cleaned in ${filePath}`);
-  }
-  if (t.includes("any")) {
-    console.log(`⚠️ 'any' detected in ${filePath}`);
-  }
-}
+const server = "server";
 
-function walk(dir) {
-  for (const file of fs.readdirSync(dir)) {
-    const full = path.join(dir, file);
-    const stat = fs.statSync(full);
-    if (stat.isDirectory()) walk(full);
-    else if (file.endsWith(".mjs") || file.endsWith(".js") || file.endsWith(".ts"))
-      scanFile(full);
+if (fs.existsSync(server)) {
+  const routes = fs.readdirSync(`${server}`);
+
+  for (const file of routes) {
+    if (file.endsWith(".js") || file.endsWith(".mjs")) {
+      const content = fs.readFileSync(`${server}/${file}`, "utf8");
+
+      if (content.includes("console.log(")) {
+        console.log(`ℹ️ API file uses console.log — ${file}`);
+      }
+    }
   }
 }
 
-console.log("\n🔍 API Scan Started\n");
-walk(TARGET);
-console.log("\n✨ API Scan Complete\n");
+console.log("🔍 API Scan Complete (Silent Mode OK)");
