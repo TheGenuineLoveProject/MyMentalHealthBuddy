@@ -1,179 +1,163 @@
-// server/index.mjs
+// RESTORE PACK v8 — Minimal, Stable Backend
+// ESM-only, no bcryptjs, Replit-friendly
+
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import path from "path";
-import { fileURLToPath } from "url";
+import compression from "compression";
+import dotenv from "dotenv";
+import OpenAI from "openai";
 
-import authRoutes from "./routes/auth.mjs";
-import moodRoutes from "./routes/mood.mjs";
-import journalRoutes from "./routes/journal.mjs";
-import aiRoutes from "./routes/ai.mjs";
-import billingRoutes from "./routes/billing.mjs";
-import analyticsRoutes from "./routes/analytics.mjs";
-import stripeWebhook from "./routes/stripeWebhook.mjs";
+dotenv.config();
 
-import { db } from "./db/connection.mjs";
-import { generalLimiter, authLimiter, aiLimiter } from "./middleware/rateLimiter.mjs";
-import { requestIdMiddleware, logger } from "./middleware/requestId.mjs";
+// ────────────────────────────────────────────
+// BASIC APP SETUP
+// ────────────────────────────────────────────
 
 const app = express();
+
+// Replit uses PORT env sometimes; we default to 5000
 const PORT = process.env.PORT || 5000;
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const clientDist = path.join(__dirname, "../client/dist");
 
-app.use(requestIdMiddleware);
+// Trust Replit proxy (for correct protocol / IP)
+app.set("trust proxy", 1);
 
-app.use(helmet({
-  contentSecurityPolicy: false,
-  crossOriginEmbedderPolicy: false
-}));
+// Core middleware
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" }
+  })
+);
 
-app.use(cors({ 
-  origin: process.env.CORS_ORIGIN || "*",
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN || "*",
+    credentials: true
+  })
+);
 
-app.use("/stripe/webhook", stripeWebhook);
+app.use(compression());
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true }));
 
-app.use(express.json({ limit: '1mb' }));
-
-app.use("/api", generalLimiter);
+// ────────────────────────────────────────────
+// HEALTH CHECK
+// ────────────────────────────────────────────
 
 app.get("/api/health", (req, res) => {
-  res.json({ 
-    ok: true,
-    status: "healthy", 
-    timestamp: new Date().toISOString(),
-    version: process.env.npm_package_version || "1.0.0"
+  res.json({
+    status: "ok",
+    env: process.env.NODE_ENV || "development",
+    time: new Date().toISOString()
   });
 });
 
-app.get("/api/health/ready", async (req, res) => {
+// ────────────────────────────────────────────
+// AI CHAT (SAFE, OPTIONAL OPENAI)
+// ────────────────────────────────────────────
+
+let openai = null;
+
+if (process.env.OPENAI_API_KEY) {
+  openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
+  });
+}
+
+app.post("/api/ai/chat", async (req, res) => {
+  const { message } = req.body || {};
+
+  if (!message || typeof message !== "string") {
+    return res.status(400).json({ error: "Missing 'message' in request body." });
+  }
+
+  // If OpenAI is not configured, return a gentle fallback
+  if (!openai) {
+    return res.json({
+      reply:
+        "AI isn’t fully configured yet, but I’m here with you. 💛 Your feelings matter, and you’re not alone."
+    });
+  }
+
   try {
-    const start = Date.now();
-    await db.execute("SELECT 1");
-    const dbLatency = Date.now() - start;
-    
-    res.json({ 
-      ok: true,
-      status: "ready",
-      database: "connected",
-      latency: {
-        database: dbLatency
-      },
-      timestamp: new Date().toISOString()
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are MyMentalHealthBuddy, a gentle, trauma-informed companion. You are NOT a therapist. You offer short, warm, non-clinical emotional support, always encouraging users to seek professional help in emergencies."
+        },
+        {
+          role: "user",
+          content: message
+        }
+      ],
+      max_tokens: 200,
+      temperature: 0.7
     });
+
+    const reply =
+      completion.choices?.[0]?.message?.content ||
+      "I’m here with you and I care about what you’re going through. 💛";
+
+    res.json({ reply });
   } catch (err) {
-    logger.error("Health check failed", { 
-      error: err.message,
-      requestId: req.requestId 
-    });
-    res.status(503).json({ 
-      ok: false,
-      status: "not-ready",
-      database: "disconnected",
-      error: "Database connection failed"
+    console.error("AI chat error:", err);
+    res.status(500).json({
+      error: "AI error",
+      fallback:
+        "Something went wrong on the tech side, but your emotions are still valid. If you’re in crisis, please reach out to local emergency services or a trusted professional."
     });
   }
 });
 
-app.get("/api/health/live", (req, res) => {
-  res.json({ ok: true, status: "alive" });
-});
+// ────────────────────────────────────────────
+// SIMPLE IN-MEMORY MOOD ENDPOINTS (PLACEHOLDER)
+// ────────────────────────────────────────────
 
-app.use("/api/auth/login", authLimiter);
-app.use("/api/auth/register", authLimiter);
-app.use("/api/ai", aiLimiter);
+const inMemoryMoodLog = [];
 
-app.use("/api/auth", authRoutes);
-app.use("/api/mood", moodRoutes);
-app.use("/api/journal", journalRoutes);
-app.use("/api/ai", aiRoutes);
-app.use("/api/billing", billingRoutes);
-app.use("/api/analytics", analyticsRoutes);
+app.post("/api/mood", (req, res) => {
+  const { score, note } = req.body || {};
 
-app.use("/auth", authRoutes);
-app.use("/mood", moodRoutes);
-app.use("/ai", aiRoutes);
-app.use("/billing", billingRoutes);
+  const entry = {
+    id: inMemoryMoodLog.length + 1,
+    score: typeof score === "number" ? score : null,
+    note: typeof note === "string" ? note : "",
+    createdAt: new Date().toISOString()
+  };
 
-app.use(express.static(clientDist, {
-  maxAge: '1d',
-  etag: true,
-  lastModified: true
-}));
+  inMemoryMoodLog.push(entry);
 
-app.get("*", (req, res, next) => {
-  if (req.path.startsWith("/api/")) {
-    return res.status(404).json({ ok: false, error: "API endpoint not found" });
-  }
-  
-  res.sendFile(path.join(clientDist, "index.html"), (err) => {
-    if (err) {
-      res.status(500).send("Server error");
-    }
+  res.status(201).json({
+    saved: true,
+    entry
   });
 });
 
-app.use((err, req, res, next) => {
-  const requestId = req.requestId || "unknown";
-  
-  logger.error("Request error", {
-    requestId,
-    path: req.path,
-    method: req.method,
-    error: err.message,
-    stack: process.env.NODE_ENV === "production" ? undefined : err.stack
-  });
-  
-  if (err.type === 'entity.parse.failed') {
-    return res.status(400).json({ 
-      ok: false, 
-      error: "Invalid JSON in request body",
-      requestId
-    });
-  }
-  
-  res.status(err.status || 500).json({
-    ok: false,
-    error: process.env.NODE_ENV === 'production' 
-      ? "An unexpected error occurred" 
-      : err.message,
-    requestId
+app.get("/api/mood", (req, res) => {
+  res.json({
+    items: inMemoryMoodLog
   });
 });
 
-const server = app.listen(PORT, "0.0.0.0", () => {
-  logger.info("Server started", {
-    port: PORT,
-    environment: process.env.NODE_ENV || "development",
-    nodeVersion: process.version
+// ────────────────────────────────────────────
+// FALLBACK 404 HANDLER
+// ────────────────────────────────────────────
+
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Not found",
+    path: req.originalUrl
   });
 });
 
-server.keepAliveTimeout = 65000;
-server.headersTimeout = 66000;
+// ────────────────────────────────────────────
+// START SERVER
+// ────────────────────────────────────────────
 
-process.on("SIGTERM", () => {
-  logger.info("SIGTERM received, initiating graceful shutdown");
-  server.close(() => {
-    logger.info("Server closed gracefully");
-    process.exit(0);
-  });
-  
-  setTimeout(() => {
-    logger.warn("Forced shutdown after 30s timeout");
-    process.exit(1);
-  }, 30000);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("🧠 RESTORE PACK v8 server online");
+  console.log(`🚀 Listening on http://0.0.0.0:${PORT}`);
 });
-
-process.on("SIGINT", () => {
-  logger.info("SIGINT received, shutting down");
-  server.close(() => process.exit(0));
-});
-
-export default app;
