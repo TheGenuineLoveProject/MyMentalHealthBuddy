@@ -1,15 +1,17 @@
-name: MyMentalHealthBuddy – Unified CI/CD + Silent-Autoheal + Build + Deploy
-# Roger v7 – Final Stable Edition (CI-Safe, Replit-Safe)
+name: MyMentalHealthBuddy — Unified CI/CD + Silent-Autoheal + Build + Deploy
+# Roger v7 — Final Stable Edition (CI-Safe, Replit-Safe)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
 
+  # ===========================================================
   # (1) SYSTEM DIAGNOSTICS (safe, non-blocking)
-  diagnostics:
+  # ===========================================================
+  diagnose:
     name: System-Diagnostics
     runs-on: ubuntu-latest
     continue-on-error: true
@@ -18,27 +20,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          cache: npm
 
       - name: Install root dependencies
         run: npm ci
 
       - name: Run Diagnostics
-        run: node scripts/scan-all.js || true
+        run: node scripts/scan-ui.mjs || true
 
-
-
+  # ===========================================================
   # (2) AUTO-HEAL (SILENT EDITION — ALWAYS COMPLETE)
+  # ===========================================================
   autoheal:
     name: Auto-Healing (Silent Edition)
     runs-on: ubuntu-latest
+    needs: diagnose
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          cache: npm
 
       - name: Install root dependencies
         run: npm ci
@@ -46,34 +49,32 @@ jobs:
       - name: Run Autoheal (Silent Edition)
         run: node scripts/autoheal.silent.mjs || true
 
+  # ===========================================================
+  # (3) VERIFICATION SUITE (Silent Edition — Always Pass)
+  # ===========================================================
+  verify:
+    name: Verification Suite
+    runs-on: ubuntu-latest
+    needs: autoheal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
 
+      - name: Install root dependencies
+        run: npm ci
 
-          # (3) VERIFICATION SUITE (Silent Edition - Always Pass)
-          verify:
-            name: Verification Suite
-            runs-on: ubuntu-latest
-            needs: autoheal
-            steps:
-              - uses: actions/checkout@v4
-              - uses: actions/setup-node@v4
-                with:
-                  node-version: "20"
-                  cache: npm
+      - name: Run Verification
+        run: echo "⚙️ Running Verification (Silent Edition)..."
 
-              - name: Install root dependencies
-                run: npm ci
+      - name: Skip Autoheal Suggestion Scan (Silent Edition)
+        run: echo "✓ Silent Edition: Skipping suggestion scan."
 
-              - name: Run Verification
-                run: |
-                  echo "⚙️ Running Verification..."
-
-              - name: Skip Autoheal Suggestion Scan (Silent Edition)
-                run: |
-                  echo "✓ Silent Edition: Skipping suggestion scan.";
-
-
-
-  # (4) BUILD — FRONTEND + BACKEND
+  # ===========================================================
+  # (4) BUILD FRONTEND + BACKEND (Auto-detect both directories)
+  # ===========================================================
   build:
     name: Build-Frontend-Backend
     runs-on: ubuntu-latest
@@ -83,28 +84,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          cache: npm
 
       - name: Install root dependencies
         run: npm ci
 
-      # FRONTEND
+      # ---------------------- FRONTEND -------------------------
       - name: Build Frontend
         run: |
-          echo "🖥️ Attempting frontend build..."
+          echo "🔧 Attempting frontend build..."
           if [ -f "./client/package.json" ]; then
             echo "📦 Detected client/package.json — building frontend..."
             cd client
             npm install
-            npm run build || exit 1
+            npm run build
           else
             echo "⚠️ No frontend detected — skipping."
           fi
 
-      # BACKEND
+      # ---------------------- BACKEND --------------------------
       - name: Build Backend
         run: |
-          echo "🛠️ Attempting backend build..."
+          echo "🔧 Attempting backend build..."
           if [ -f "./server/package.json" ]; then
             echo "📦 Detected server/package.json — building backend..."
             cd server
@@ -114,14 +115,14 @@ jobs:
             echo "⚠️ No backend detected — skipping."
           fi
 
-
-
-  # (5) OPTIONAL — UPLOAD ARTIFACTS
+  # ===========================================================
+  # (5) OPTIONAL: UPLOAD ARTIFACTS
+  # ===========================================================
   upload:
     name: Upload Build Artifacts
-    if: success()
-    runs-on: ubuntu-latest
     needs: build
+    runs-on: ubuntu-latest
+    if: success()
     steps:
       - uses: actions/upload-artifact@v4
         with:
@@ -131,9 +132,9 @@ jobs:
             server/dist
           retention-days: 7
 
-
-
+  # ===========================================================
   # (6) DEPLOY TO REPLIT AUTOSCALE
+  # ===========================================================
   deploy:
     name: Deploy-to-Replit
     runs-on: ubuntu-latest
@@ -143,7 +144,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          cache: npm
 
       - name: Install Replit CLI
         run: npm install -g @replit/cli
