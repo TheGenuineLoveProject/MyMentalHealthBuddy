@@ -1,33 +1,16 @@
-# .replit — FINAL V7 AUTOSCALE CONFIG
-
-run = "npm run start"
-
+run = "npm run dev"
 entrypoint = "server/index.mjs"
 
 modules = ["nodejs-20", "postgresql-15"]
 
-deployment = {
-  deploymentTarget = "autoscale"
-  build = ["npm", "run", "build"]
-  run = ["npm", "start"]
-}
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm", "install"]
+run = ["npm", "start"]
 
-ports = {
-  localPort = 5000
-  externalPort = 80
-}
+[ports]
+localPort = 5000
+externalPort = 80
 
 [env]
 NODE_ENV = "production"
-
-[workflows]
-
-[workflows.run]
-name = "Project"
-mode = "parallel"
-args = "start-application"
-
-[workflows.tasks.start-application]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
