@@ -1,3 +1,24 @@
+// Valid emotion options
+export const VALID_EMOTIONS = [
+  "happy", "joyful", "excited", "content", "peaceful", "calm",
+  "neutral", "tired", "stressed", "anxious", "worried", "sad",
+  "angry", "frustrated", "overwhelmed", "hopeful", "grateful"
+];
+
+// Valid activity options
+export const VALID_ACTIVITIES = [
+  "exercise", "meditation", "yoga", "walking", "running", "sports",
+  "work", "study", "reading", "gaming", "socializing", "family",
+  "cooking", "cleaning", "shopping", "traveling", "nature",
+  "music", "art", "writing", "therapy", "rest", "sleep"
+];
+
+// Valid weather options
+export const VALID_WEATHER = [
+  "sunny", "cloudy", "rainy", "stormy", "snowy", "windy", "foggy", "hot", "cold"
+];
+
+// Authentication schemas
 export const registerSchema = {
   email: { type: "string", required: true },
   password: { type: "string", required: true, minLength: 6 },
@@ -9,17 +30,47 @@ export const loginSchema = {
   password: { type: "string", required: true }
 };
 
+// AI Chat schema
 export const chatMessageSchema = {
   message: { type: "string", required: true, minLength: 1, maxLength: 4000 }
 };
 
+// Comprehensive mood tracking schema
 export const moodSchema = {
   score: { type: "number", required: true, min: 1, max: 10 },
-  note: { type: "string", required: false }
+  emotion: { type: "string", required: false, enum: VALID_EMOTIONS },
+  energy_level: { type: "number", required: false, min: 1, max: 5 },
+  sleep_quality: { type: "number", required: false, min: 1, max: 5 },
+  activities: { type: "array", required: false },
+  triggers: { type: "array", required: false },
+  note: { type: "string", required: false, maxLength: 2000 },
+  weather: { type: "string", required: false, enum: VALID_WEATHER },
+  location: { type: "string", required: false, maxLength: 100 }
 };
 
+// Quick mood entry (simplified)
+export const quickMoodSchema = {
+  score: { type: "number", required: true, min: 1, max: 10 },
+  emotion: { type: "string", required: false },
+  note: { type: "string", required: false, maxLength: 500 }
+};
+
+// Journal schema
 export const journalSchema = {
-  text: { type: "string", required: true, minLength: 1, maxLength: 10000 }
+  title: { type: "string", required: false, maxLength: 255 },
+  text: { type: "string", required: true, minLength: 1, maxLength: 10000 },
+  tags: { type: "array", required: false },
+  mood_id: { type: "string", required: false }
+};
+
+// Mood filter schema for queries
+export const moodFilterSchema = {
+  start_date: { type: "string", required: false },
+  end_date: { type: "string", required: false },
+  emotion: { type: "string", required: false },
+  min_score: { type: "number", required: false, min: 1, max: 10 },
+  max_score: { type: "number", required: false, min: 1, max: 10 },
+  limit: { type: "number", required: false, min: 1, max: 100 }
 };
 
 export function validate(schema, data) {
@@ -38,7 +89,7 @@ export function validate(schema, data) {
       continue;
     }
 
-    if (value === undefined || value === null) {
+    if (value === undefined || value === null || value === "") {
       continue;
     }
 
@@ -54,6 +105,10 @@ export function validate(schema, data) {
       }
       if (rules.maxLength && trimmed.length > rules.maxLength) {
         errors.push(`${field} must be at most ${rules.maxLength} characters`);
+        continue;
+      }
+      if (rules.enum && !rules.enum.includes(trimmed.toLowerCase())) {
+        errors.push(`${field} must be one of: ${rules.enum.slice(0, 5).join(", ")}...`);
         continue;
       }
       cleaned[field] = trimmed;
@@ -72,6 +127,16 @@ export function validate(schema, data) {
         continue;
       }
       cleaned[field] = num;
+    } else if (rules.type === "array") {
+      if (!Array.isArray(value)) {
+        errors.push(`${field} must be an array`);
+        continue;
+      }
+      if (rules.maxLength && value.length > rules.maxLength) {
+        errors.push(`${field} can have at most ${rules.maxLength} items`);
+        continue;
+      }
+      cleaned[field] = value.map(v => typeof v === "string" ? v.trim() : v);
     }
   }
 
@@ -84,4 +149,16 @@ export function validateRegister(data) {
 
 export function validateLogin(data) {
   return validate(loginSchema, data);
+}
+
+export function validateMood(data) {
+  return validate(moodSchema, data);
+}
+
+export function validateQuickMood(data) {
+  return validate(quickMoodSchema, data);
+}
+
+export function validateJournal(data) {
+  return validate(journalSchema, data);
 }
