@@ -12,6 +12,18 @@ run = ["npm", "start"]
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 5174
+externalPort = 3000
+
+[[ports]]
+localPort = 5175
+externalPort = 3001
+
+[[ports]]
+localPort = 41463
+externalPort = 3002
+
 [env]
 NODE_ENV = "development"
 
@@ -34,13 +46,13 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "npm run dev"
-waitForPort = 5000
-
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=development node server/index.mjs"
+waitForPort = 5000
 
 [nix]
 channel = "stable-25_05"

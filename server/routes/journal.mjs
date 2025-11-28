@@ -5,7 +5,7 @@ import { journals } from "../shared/schema.mjs";
 import { authGuard } from "../middleware/auth.mjs";
 import { eq, desc } from "drizzle-orm";
 import { success, created, badRequest, notFound, forbidden, serverError } from "../utils/response.mjs";
-import { journalSchema, journalUpdateSchema, validate } from "../utils/validation.mjs";
+import { validateJournal } from "../utils/validation.mjs";
 
 const router = express.Router();
 
@@ -13,13 +13,9 @@ router.get("/ping", (req, res) => success(res, { route: "journal" }));
 
 router.post("/", authGuard, async (req, res) => {
   try {
-    const validation = validate(journalSchema, req.body);
-    if (!validation.valid) {
-      return res.status(400).json({
-        ok: false,
-        error: "Validation failed",
-        validationErrors: validation.errors
-      });
+    const { valid, errors, data } = validateJournal(req.body);
+    if (!valid) {
+      return badRequest(res, "Validation failed.", errors);
     }
 
     const { text, title, mood } = validation.data;

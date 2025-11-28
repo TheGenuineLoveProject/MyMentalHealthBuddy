@@ -143,6 +143,21 @@ export function validate(schema, data) {
   return { valid: errors.length === 0, errors, data: cleaned };
 }
 
+export function validatePagination(data) {
+  const schema = {
+    page: { type: "number", required: false, min: 1, max: 99999 },
+    limit: { type: "number", required: false, min: 1, max: 200 }
+  };
+  return validate(schema, data);
+}
+
+export function validateIdParam(id) {
+  if (!id || typeof id !== "string" || id.trim().length < 1) {
+    return { valid: false, errors: ["Invalid id"], data: {} };
+  }
+  return { valid: true, errors: [], data: { id: id.trim() } };
+}
+
 export function validateRegister(data) {
   return validate(registerSchema, data);
 }

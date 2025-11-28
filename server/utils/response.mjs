@@ -27,6 +27,23 @@ export function error(res, message, statusCode = 500, details = null) {
   return res.status(statusCode).json(response);
 }
 
+export function sendSuccess(res, data = {}, status = 200) {
+  res.status(status).json({
+    ok: true,
+    data,
+    timestamp: new Date().toISOString(),
+  });
+}
+
+export function sendError(res, message = "Unknown error", status = 400, details = null) {
+  res.status(status).json({
+    ok: false,
+    error: message,
+    details,
+    timestamp: new Date().toISOString(),
+  });
+}
+
 export function badRequest(res, message = "Invalid request") {
   return error(res, message, 400);
 }
