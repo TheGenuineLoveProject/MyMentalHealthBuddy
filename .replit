@@ -1,31 +1,24 @@
-# .replit — TARGET CONFIG FOR AUTOSCALE
-
-# 1) What runs when you click "Run" in the workspace:
-run = "npm start"
 entrypoint = "server/index.mjs"
-modules = ["nodejs-20", "postgresql-16"]
 
-# 2) Deployment config for Replit Autoscale:
+run = "echo 'Use npm run dev to start the server manually'"
+
+modules = ["nodejs-20", "postgresql-15"]
+
 [deployment]
 deploymentTarget = "autoscale"
-build = ["npm", "run", "build"]
+build = ["npm", "run", "build", "-w", "client"]
+run = ["npm", "start"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 42507
-externalPort = 3001
-
-[[ports]]
-localPort = 46285
+localPort = 39483
 externalPort = 3000
 
-# 4) (Optional but nice) Nix channel:
-[nix]
-channel = "stable-25_05"
-packages = ["killall", "nano"]
+[env]
+NODE_ENV = "development"
 
 [agent]
 expertMode = true
@@ -48,7 +41,7 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm start"
+args = "npm run dev"
 waitForPort = 5000
 
 [workflows.workflow.metadata]

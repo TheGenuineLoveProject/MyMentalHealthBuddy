@@ -1,149 +1,86 @@
 // server/routes/ai.mjs
 import express from "express";
-import OpenAI from "openai";
-import { authGuard, optionalAuth } from "../middleware/auth.mjs";
-import { success, badRequest, serverError } from "../utils/response.mjs";
-import { chatMessageSchema, validate } from "../utils/validation.mjs";
+import { OpenAI } from "openai";
 
 const router = express.Router();
 
-let openai = null;
+// ───────────── SAFE CLIENT SETUP ─────────────
+const apiKey = process.env.OPENAI_API_KEY;
 
-const getOpenAIClient = () => {
-  if (!process.env.OPENAI_API_KEY) {
-    return null;
-  }
-  if (!openai) {
-    openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    });
-  }
-  return openai;
-};
+if (!apiKey) {
+  console.warn(
+    "[AI ROUTE] WARNING: OPENAI_API_KEY is missing. /api/ai/chat will return 503."
+  );
+}
 
-const SYSTEM_PROMPT = `You are MyMentalHealthBuddy, a compassionate and supportive mental health companion.
+const client = apiKey
+  ? new OpenAI({ apiKey })
+  : null;
 
-Your role:
-- Listen with empathy and without judgment
-- Validate feelings and emotions
-- Offer gentle coping strategies and grounding techniques
-- Encourage self-care and healthy habits
-- Suggest professional help when appropriate
-
-Important boundaries:
-- You are NOT a licensed therapist or medical professional
-- Never provide medical, legal, or financial advice
-- Never diagnose mental health conditions
-- In crisis situations, immediately recommend emergency services (911) or crisis hotlines:
-  - National Suicide Prevention Lifeline: 988
-  - Crisis Text Line: Text HOME to 741741
-  - International Association for Suicide Prevention: https://www.iasp.info/resources/Crisis_Centres/
-
-Communication style:
-- Keep responses warm, brief, and easy to understand
-- Use simple language, avoid jargon
-- Ask open-ended questions to understand better
-- Celebrate small wins and progress`.trim();
-
-router.get("/ping", (req, res) => success(res, { route: "ai" }));
-
-router.post("/chat", authGuard, async (req, res) => {
-  try {
-    const client = getOpenAIClient();
-    if (!client) {
-      return res.status(503).json({
-        ok: false,
-        error: "AI chat is currently unavailable. Please try again later or contact support."
-      });
-    }
-
-    const validation = validate(chatMessageSchema, { message: req.body?.message });
-    if (!validation.valid) {
-      return res.status(400).json({
-        ok: false,
-        error: "Validation failed",
-        validationErrors: validation.errors
-      });
-    }
-
-    const { message } = validation.data;
-    const conversationHistory = Array.isArray(req.body?.conversationHistory) 
-      ? req.body.conversationHistory.slice(-10)
-      : [];
-
-    const messages = [
-      { role: "system", content: SYSTEM_PROMPT },
-      ...conversationHistory.map((m) => ({
-        role: m.role === "assistant" ? "assistant" : "user",
-        content: String(m.content || "").slice(0, 4000),
-      })),
-      { role: "user", content: message },
-    ];
-
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages,
-      temperature: 0.7,
-      max_tokens: 600,
-      presence_penalty: 0.1,
-      frequency_penalty: 0.1,
-    });
-
-    const reply = completion.choices?.[0]?.message?.content || "I'm here to listen. Could you tell me more?";
-
-    return success(res, { reply });
-  } catch (error) {
-    if (error?.status === 429) {
-      return res.status(429).json({
-        ok: false,
-        error: "I'm receiving too many messages right now. Please try again in a moment."
-      });
-    }
-    
-    if (error?.code === 'insufficient_quota') {
-      return res.status(503).json({
-        ok: false,
-        error: "The AI service is temporarily unavailable. Please try again later."
-      });
-    }
-
-    return serverError(res, error, "I had trouble responding. Please try again.");
-  }
+// ───────────── HEALTH CHECK ─────────────
+router.get("/health", (req, res) => {
+  res.json({
+    status: apiKey ? "ok" : "degraded",
+    hasApiKey: Boolean(apiKey),
+    route: "ai",
+    env: process.env.NODE_ENV || "development",
+    time: new Date().toISOString(),
+  });
 });
 
-router.post("/quick-response", optionalAuth, async (req, res) => {
+// ───────────── MAIN AI CHAT ─────────────
+router.post("/chat", async (req, res) => {
   try {
-    const client = getOpenAIClient();
-    if (!client) {
+    if (!apiKey || !client) {
       return res.status(503).json({
-        ok: false,
-        error: "AI service is currently unavailable."
+        error: "AI service is not configured (missing OPENAI_API_KEY).",
       });
     }
 
-    const { prompt } = req.body || {};
-    
-    if (!prompt || typeof prompt !== "string") {
-      return badRequest(res, "Prompt is required");
+    const { message } = req.body;
+
+    if (typeof message !== "string" || !message.trim()) {
+      return res.status(400).json({ error: "Message must be a non-empty string." });
     }
 
-    const safePrompt = prompt.slice(0, 500);
-    
+    const cleanMessage = message.trim();
+
+    if (cleanMessage.length > 1000) {
+      return res.status(400).json({
+        error: "Message is too long. Please keep it under 1000 characters.",
+      });
+    }
+
     const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4o",
       messages: [
-        { role: "system", content: "You are a helpful mental wellness assistant. Provide a brief, supportive response." },
-        { role: "user", content: safePrompt }
+        {
+          role: "system",
+          content:
+            "You are a gentle, supportive mental health buddy. " +
+            "You never give medical, legal, or crisis advice – you encourage users to seek professional help " +
+            "and use warm, simple language.",
+        },
+        { role: "user", content: cleanMessage },
       ],
+      max_tokens: 200,
       temperature: 0.7,
-      max_tokens: 150,
     });
 
-    const reply = completion.choices?.[0]?.message?.content || "";
+    const reply = completion.choices?.[0]?.message?.content?.trim() || "";
 
-    return success(res, { reply });
-  } catch (error) {
-    return serverError(res, error, "Unable to generate response");
+    if (!reply) {
+      return res.status(502).json({
+        error: "AI did not return a response. Please try again.",
+      });
+    }
+
+    res.json({ reply });
+  } catch (err) {
+    console.error("[AI ROUTE] Error:", err);
+    res.status(500).json({
+      error: "AI chat failed unexpectedly. Please try again later.",
+    });
   }
 });
 
