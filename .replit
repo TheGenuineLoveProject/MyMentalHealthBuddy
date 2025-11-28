@@ -1,8 +1,7 @@
 entrypoint = "server/index.mjs"
 
 run = "echo 'Use npm run dev to start the server manually'"
-
-modules = ["nodejs-20", "postgresql-15"]
+modules = ["nodejs-20", "postgresql-16"]
 
 [deployment]
 deploymentTarget = "autoscale"
@@ -12,10 +11,6 @@ run = ["npm", "start"]
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 39483
-externalPort = 3000
 
 [env]
 NODE_ENV = "development"
@@ -46,3 +41,6 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[nix]
+channel = "stable-25_05"
