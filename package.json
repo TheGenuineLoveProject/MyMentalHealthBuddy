@@ -2,38 +2,53 @@
   "name": "my-mental-health-buddy",
   "version": "1.0.0",
   "private": true,
-  "workspaces": [
-    "client"
-  ],
-  "scripts": {
-    "build": "npm run build -w client",
-    "start": "NODE_ENV=production node server/index.mjs",
-    "dev": "npm run dev -w client",
-    "kill-ports": "node scripts/clean-port.mjs",
-    "heal": "node scripts/permanent-fix.mjs",
-    "check:package": "node scripts/check-package-json.mjs",
-    "ensure-tools": "node scripts/ensure-tools.mjs",
-    "guardian": "node scripts/guardian-heart.mjs",
-    "build-and-start": "npm run kill-ports && npm run build && npm run start"
-  },
+  "type": "module",
   "engines": {
     "node": ">=20.0.0"
   },
+  "scripts": {
+    "//0": "── core app scripts ──",
+    "build": "npm run build -w client",
+    "start": "NODE_ENV=production node server/index.mjs",
+    "dev": "npm run dev -w client",
+    "//1": "── helper tools ──",
+    "kill-ports": "node scripts/clean-port.mjs",
+    "ensure-tools": "node scripts/ensure-tools.mjs",
+    "guardian": "node scripts/guardian-heart.mjs",
+    "heal": "node scripts/permanent-fix.mjs",
+    "check-package": "node scripts/check-package-json.mjs",
+    "preflight": "node scripts/preflight.mjs",
+    "//2": "── combined commands ──",
+    "build-and-start": "npm run kill-ports && npm run build && npm run start",
+    "//3": "── FULL SAFE-CYCLE (one command) ──",
+    "safe-cycle": "npm run preflight && npm run ensure-tools && npm run heal && npm run guardian && npm run build-and-start",
+    "//4": "── heal-only shortcut ──",
+    "heal-only": "node scripts/permanent-fix.mjs"
+  },
   "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.0",
-    "drizzle-orm": "^0.31.0",
+    "drizzle-orm": "^0.30.0",
     "express": "^4.19.0",
-    "helmet": "^8.1.0",
+    "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
-    "openai": "^4.73.0",
+    "morgan": "^1.10.0",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.0.0",
     "pg": "^8.11.0",
     "stripe": "^14.0.0",
-    "zod": "^3.23.8"
+    "uuid": "^9.0.1",
+    "zod": "^3.23.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2"
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.0",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.6.0"
   }
 }
