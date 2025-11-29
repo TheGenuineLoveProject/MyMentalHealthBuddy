@@ -1,6 +1,6 @@
 // client/src/pages/Dashboard.tsx
 // MyMentalHealthBuddy — Main Dashboard
-// Includes: Mood overview, history, tips, GuardianHeartPanel, CodeCopilotPanel, Perplexity helper.
+// Includes: Mood overview, history, tips, GuardianHeartPanel, CanvaPanel, CodeCopilotPanel, Perplexity helper.
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -22,6 +22,7 @@ import {
 
 import GuardianHeartPanel from "../components/GuardianHeartPanel";
 import CodeCopilotPanel from "../components/CodeCopilotPanel";
+import CanvaPanel from "../components/CanvaPanel";
 
 type MoodEntry = {
   id: string;
@@ -225,9 +226,10 @@ export default function Dashboard() {
             )}
           </section>
 
-          {/* Right: Guardian Heart + Code Copilot stack */}
+          {/* Right: Guardian Heart + Canva + Code Copilot + Perplexity */}
           <div className="space-y-4">
             <GuardianHeartPanel />
+            <CanvaPanel />
             <CodeCopilotPanel />
 
             {/* Perplexity helper card */}
