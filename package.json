@@ -3,25 +3,23 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "workspaces": ["client"],
+  "workspaces": [
+    "client"
+  ],
   "scripts": {
     "start": "node server/index.mjs",
     "build": "npm run build -w client",
     "dev": "npm run dev -w client",
-
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-
     "kill-ports": "node scripts/clean-port.mjs",
     "ensure-tools": "node scripts/ensure-tools.mjs",
     "guardian": "node scripts/guardian-heart.mjs",
     "heal": "node scripts/permanent-fix.mjs",
     "check-package": "node scripts/check-package-json.mjs",
     "preflight": "node scripts/preflight.mjs",
-
     "build-and-start": "npm run build -w client && npm start",
     "safe-cycle": "npm run preflight && npm run ensure-tools && npm run heal && npm run guardian && npm run build-and-start",
-
     "heal-only": "node scripts/permanent-fix.mjs"
   },
   "dependencies": {
@@ -31,10 +29,11 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.38.0",
     "drizzle-zod": "^0.5.0",
-    "dotenv": "^16.4.5",
     "express": "^4.19.0",
+    "express-rate-limit": "^7.5.1",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",

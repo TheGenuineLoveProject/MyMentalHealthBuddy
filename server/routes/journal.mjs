@@ -1,121 +1,79 @@
 // server/routes/journal.mjs
+
 import express from "express";
-import { desc, eq } from "drizzle-orm";
 import { db } from "../db/connection.mjs";
-import { journals } from "../../shared/schema.mjs";
+import { journal } from "../../shared/schema.mjs";
+import { eq } from "drizzle-orm";
+import { success, badRequest } from "../utils/response.mjs";
 
 const router = express.Router();
 
-// Response helpers
-function success(res, data, status = 200) {
-  return res.status(status).json({ ok: true, ...data });
-}
-
-function badRequest(res, message, errors = []) {
-  return res.status(400).json({ ok: false, message, errors });
-}
-
-function serverError(res, message = "Server error") {
-  return res.status(500).json({ ok: false, error: message });
-}
-
-// Health check
-router.get("/ping", (req, res) => {
-  return success(res, { route: "journal" });
-});
-
-// GET all journal entries
-router.get("/", async (req, res) => {
-  try {
-    const entries = await db
-      .select()
-      .from(journals)
-      .orderBy(desc(journals.createdAt))
-      .limit(50);
-
-    return success(res, { entries });
-  } catch (err) {
-    console.error("[journal.get error]", err);
-    return serverError(res, "Failed to fetch journal entries");
-  }
-});
-
-// GET journal entries by user
-router.get("/user/:userId", async (req, res) => {
-  try {
-    const { userId } = req.params;
-    const entries = await db
-      .select()
-      .from(journals)
-      .where(eq(journals.userId, userId))
-      .orderBy(desc(journals.createdAt))
-      .limit(50);
-
-    return success(res, { entries });
-  } catch (err) {
-    console.error("[journal.getByUser error]", err);
-    return serverError(res, "Failed to fetch journal entries");
-  }
-});
-
-// POST new journal entry
+/**
+ * POST /api/journal
+ * Body: { userId, title, content }
+ */
 router.post("/", async (req, res) => {
   try {
-    const { text, userId, tags, triggers } = req.body || {};
-    const errors = [];
-
-    if (!text || typeof text !== "string" || text.trim().length === 0) {
-      errors.push({ field: "text", message: "Journal entry cannot be empty" });
-    } else if (text.length > 10000) {
-      errors.push({ field: "text", message: "Journal entry is too long (max 10000 characters)" });
-    }
+    const { userId, title, content } = req.body ?? {};
 
     if (!userId) {
-      errors.push({ field: "userId", message: "User ID is required" });
+      return badRequest(res, "User ID is required.", [
+        { field: "userId", message: "Missing userId" },
+      ]);
     }
 
-    if (errors.length > 0) {
-      return badRequest(res, "Validation failed", errors);
+    if (!title || !content) {
+      return badRequest(res, "Title and content are required.", [
+        { field: "title", message: !title ? "Missing title" : "" },
+        { field: "content", message: !content ? "Missing content" : "" },
+      ]);
     }
 
-    const [inserted] = await db
-      .insert(journals)
-      .values({ 
-        text: text.trim(), 
+    const inserted = await db
+      .insert(journal)
+      .values({
         userId,
-        tags: tags || null,
-        triggers: triggers || null
+        title,
+        content,
+        createdAt: new Date(),
       })
-      .returning();
+      .returning({
+        id: journal.id,
+        title: journal.title,
+        content: journal.content,
+        createdAt: journal.createdAt,
+      });
 
-    return success(res, {
-      message: "Journal entry saved successfully",
-      entry: inserted,
-    }, 201);
+    return success(res, inserted[0], "Journal entry created.");
   } catch (err) {
-    console.error("[journal.post error]", err);
-    return serverError(res, "Failed to save journal entry");
+    console.error("[journal/create] Unexpected error:", err);
+    return res.status(500).json({
+      ok: false,
+      message: "Unexpected error when creating journal entry.",
+    });
   }
 });
 
-// DELETE journal entry
-router.delete("/:id", async (req, res) => {
+/**
+ * GET /api/journal/:userId
+ * Fetch all entries for a user
+ */
+router.get("/:userId", async (req, res) => {
   try {
-    const { id } = req.params;
-    
-    const [deleted] = await db
-      .delete(journals)
-      .where(eq(journals.id, parseInt(id)))
-      .returning();
+    const { userId } = req.params;
 
-    if (!deleted) {
-      return badRequest(res, "Journal entry not found");
-    }
+    const entries = await db
+      .select()
+      .from(journal)
+      .where(eq(journal.userId, userId));
 
-    return success(res, { message: "Journal entry deleted", deleted });
+    return success(res, entries, "Journal entries fetched.");
   } catch (err) {
-    console.error("[journal.delete error]", err);
-    return serverError(res, "Failed to delete journal entry");
+    console.error("[journal/fetch] Unexpected error:", err);
+    return res.status(500).json({
+      ok: false,
+      message: "Unexpected error while fetching journal entries.",
+    });
   }
 });
 

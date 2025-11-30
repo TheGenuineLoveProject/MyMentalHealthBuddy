@@ -5,7 +5,7 @@
 import React from "react";
 import { Router, Route, Link } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ThemeProvider, useTheme } from "./ThemeProvider";
+import ThemeProvider from "./components/ThemeProvider.jsx";
 import "./index.css";
 
 // -----------------------------------------

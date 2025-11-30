@@ -2,7 +2,6 @@
 
 import express from "express";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { eq } from "drizzle-orm";
 
 import { db } from "../db/connection.mjs";
@@ -10,118 +9,115 @@ import { users } from "../../shared/schema.mjs";
 import { success, badRequest } from "../utils/response.mjs";
 
 const router = express.Router();
-const JWT_SECRET = process.env.SESSION_SECRET;
 
-// Warn instead of crashing if secret missing
-if (!JWT_SECRET) {
-  console.warn(
-    "[auth] SESSION_SECRET is not set. JWT tokens will not be issued."
-  );
-}
-
-function createToken(user) {
-  if (!JWT_SECRET) return null;
-  return jwt.sign(
-    { id: user.id, email: user.email },
-    JWT_SECRET,
-    { expiresIn: "7d" }
-  );
-}
-
-// POST /api/auth/register
-router.post("/register", async (req, res, next) => {
+/**
+ * POST /api/auth/register
+ * Body: { email, password, name? }
+ */
+router.post("/register", async (req, res) => {
   try {
-    const { email, password, name } = req.body || {};
+    const { email, password, name } = req.body ?? {};
 
+    // Basic validation
     if (!email || !password) {
       return badRequest(res, "Email and password are required.", [
-        { field: "email", message: "Email is required." },
-        { field: "password", message: "Password is required." },
+        { field: "email", message: !email ? "Email is required." : "" },
+        { field: "password", message: !password ? "Password is required." : "" },
       ]);
     }
 
-    const [existing] = await db
+    // Check if user already exists
+    const existing = await db
       .select()
       .from(users)
-      .where(eq(users.email, email));
+      .where(eq(users.email, email))
+      .limit(1);
 
-    if (existing) {
-      return badRequest(res, "An account with this email already exists.", [
-        { field: "email", message: "Email already in use." },
-      ]);
+    if (existing.length > 0) {
+      return badRequest(res, "An account with this email already exists.");
     }
 
+    // Hash password
     const passwordHash = await bcrypt.hash(password, 10);
 
-    const [created] = await db
+    // Insert new user
+    const inserted = await db
       .insert(users)
       .values({
         email,
         passwordHash,
         name: name ?? null,
       })
-      .returning();
+      .returning({
+        id: users.id,
+        email: users.email,
+        name: users.name,
+        createdAt: users.createdAt,
+      });
 
-    const token = createToken(created);
+    const user = inserted[0];
 
-    return success(res, "Account created.", {
-      user: { id: created.id, email: created.email, name: created.name },
-      token,
-    });
+    return success(res, { user }, "User registered successfully.");
   } catch (err) {
-    next(err);
+    console.error("[auth/register] Unexpected error:", err);
+    return res.status(500).json({
+      ok: false,
+      message: "Unexpected server error during registration.",
+    });
   }
 });
 
-// POST /api/auth/login
-router.post("/login", async (req, res, next) => {
+/**
+ * POST /api/auth/login
+ * Body: { email, password }
+ */
+router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body || {};
+    const { email, password } = req.body ?? {};
 
     if (!email || !password) {
       return badRequest(res, "Email and password are required.", [
-        { field: "email", message: "Email is required." },
-        { field: "password", message: "Password is required." },
+        { field: "email", message: !email ? "Email is required." : "" },
+        { field: "password", message: !password ? "Password is required." : "" },
       ]);
     }
 
-    const [user] = await db
+    // Look up user
+    const rows = await db
       .select()
       .from(users)
-      .where(eq(users.email, email));
+      .where(eq(users.email, email))
+      .limit(1);
+
+    const user = rows[0];
 
     if (!user) {
-      return badRequest(res, "Invalid email or password.", [
-        { field: "email", message: "Invalid email or password." },
-      ]);
+      return badRequest(res, "Invalid email or password.");
     }
 
-    const ok = await bcrypt.compare(password, user.passwordHash);
-    if (!ok) {
-      return badRequest(res, "Invalid email or password.", [
-        { field: "password", message: "Invalid email or password." },
-      ]);
+    // Compare passwords
+    const isMatch = await bcrypt.compare(password, user.passwordHash);
+
+    if (!isMatch) {
+      return badRequest(res, "Invalid email or password.");
     }
 
-    const token = createToken(user);
+    // Return safe user shape (no passwordHash)
+    const safeUser = {
+      id: user.id,
+      email: user.email,
+      name: user.name ?? null,
+      createdAt: user.createdAt,
+    };
 
-    return success(res, "Logged in.", {
-      user: { id: user.id, email: user.email, name: user.name },
-      token,
-    });
+    return success(res, { user: safeUser }, "Login successful.");
   } catch (err) {
-    next(err);
+    console.error("[auth/login] Unexpected error:", err);
+    return res.status(500).json({
+      ok: false,
+      message: "Unexpected server error during login.",
+    });
   }
-});
-
-// Simple health route to prove wiring works
-router.get("/me", (req, res) => {
-  return success(res, "Auth route is wired correctly.", null);
-});
-
-// Ping endpoint for consistency
-router.get("/ping", (_req, res) => {
-  return success(res, "Auth route is healthy.", { route: "auth" });
 });
 
 export default router;

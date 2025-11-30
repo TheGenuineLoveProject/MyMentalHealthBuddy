@@ -1,16 +1,14 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 5173,
-    strictPort: true,
-    proxy: {
-      "/api": {
-        target: "http://localhost:5000",
-        changeOrigin: true
-      }
-    }
-  }
-});
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MyMentalHealthBuddy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" crossorigin src="/assets/index-DSRtnL-4.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CyADI0al.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Vite entry -->
+  </body>
+</html>

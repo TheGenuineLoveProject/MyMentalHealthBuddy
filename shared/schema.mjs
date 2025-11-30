@@ -1,67 +1,68 @@
-// shared/schema.ts
-// Plain JS, just using .ts extension so Drizzle + Node can see it.
+// shared/schema.mjs
+// Central Drizzle schema used by all server routes (JS / .mjs version)
 
-// Drizzle ORM Postgres core
 import {
   pgTable,
   serial,
-  text,
-  varchar,
   integer,
+  varchar,
+  text,
   timestamp,
-  uuid,
   jsonb,
 } from "drizzle-orm/pg-core";
 
-// USERS
+/**
+ * USERS TABLE
+ * Used by auth.mjs:
+ *  - users.email
+ *  - users.passwordHash
+ *  - users.name
+ */
 export const users = pgTable("users", {
-  id: uuid("id").defaultRandom().primaryKey(),
+  id: serial("id").primaryKey(),
   email: varchar("email", { length: 255 }).notNull().unique(),
-  passwordHash: text("password_hash").notNull(),
+  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }),
   createdAt: timestamp("created_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
 });
 
-// MOODS
+/**
+ * MOODS TABLE
+ * Used by mood.mjs + analytics.mjs
+ */
 export const moods = pgTable("moods", {
   id: serial("id").primaryKey(),
-  userId: uuid("user_id").notNull(),
-  score: integer("score").notNull(), // your audit says this is NOT NULL now
-  note: text("note"),
-  activities: jsonb("activities"), // changed to JSON in your drizzle push
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
+  score: integer("score").notNull(), // 1–10
+  // NOTE: JS version — no <$type>, just default([]) + notNull()
+  activities: jsonb("activities").notNull().default([]),
+  notes: text("notes"),
   createdAt: timestamp("created_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
 });
 
-// MOOD INSIGHTS
-export const moodInsights = pgTable("mood_insights", {
-  id: serial("id").primaryKey(),
-  userId: uuid("user_id").notNull(),
-  summary: text("summary"),
-  tags: jsonb("tags"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
-});
-
-// JOURNALS
+/**
+ * JOURNALS TABLE
+ * Used by journal.mjs + analytics.mjs
+ */
 export const journals = pgTable("journals", {
   id: serial("id").primaryKey(),
-  userId: uuid("user_id").notNull(),
-  text: text("text").notNull(),
-  tags: jsonb("tags"),
-  triggers: jsonb("triggers"),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
+  title: varchar("title", { length: 255 }).notNull(),
+  content: text("content").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
 });
 
-// Optional helper "schema" object some routes expect
-export const schema = {
-  users,
-  moods,
-  moodInsights,
-  journals,
-};
+// Alias so BOTH imports work:
+//   import { journal } from "../../shared/schema.mjs";
+//   import { journals } from "../../shared/schema.mjs";
+export const journal = journals;
