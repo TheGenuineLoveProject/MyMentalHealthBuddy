@@ -1,26 +1,39 @@
 // server/routes/analytics.mjs
-import { Router } from "express";
+import express from "express";
 import { db } from "../db/connection.mjs";
-import { moods, journals } from "../../shared/schema.ts"; // FIXED SCHEMA IMPORT
+import { moods, journals } from "../../shared/schema.mjs";
 
-const router = Router();
+const router = express.Router();
 
-// Example analytics
-router.get("/summary", async (_req, res) => {
+// Response helpers
+function success(res, data, status = 200) {
+  return res.status(status).json({ ok: true, ...data });
+}
+
+function serverError(res, message = "Server error") {
+  return res.status(500).json({ ok: false, error: message });
+}
+
+// Health check
+router.get("/ping", (req, res) => {
+  return success(res, { route: "analytics" });
+});
+
+// GET summary analytics
+router.get("/summary", async (req, res) => {
   try {
-    const moodCount = await db.select().from(moods);
-    const journalCount = await db.select().from(journals);
+    const allMoods = await db.select().from(moods);
+    const allJournals = await db.select().from(journals);
 
-    return res.json({
-      ok: true,
+    return success(res, {
       data: {
-        totalMoods: moodCount.length,
-        totalJournalEntries: journalCount.length,
+        totalMoods: allMoods.length,
+        totalJournalEntries: allJournals.length,
       },
     });
   } catch (err) {
-    console.error("[analytics.error]", err);
-    return res.status(500).json({ ok: false, error: "Analytics failed" });
+    console.error("[analytics.summary error]", err);
+    return serverError(res, "Failed to fetch analytics");
   }
 });
 
