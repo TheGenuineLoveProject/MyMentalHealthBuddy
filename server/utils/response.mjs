@@ -1,79 +1,120 @@
 // server/utils/response.mjs
-// Standardized API response utilities for consistent error handling
 
-export function success(res, data = {}, statusCode = 200) {
-  return res.status(statusCode).json({
-    ok: true,
-    ...data,
-    timestamp: new Date().toISOString()
-  });
-}
+/**
+ * Unified JSON response helpers for MyMentalHealthBuddy.
+ *
+ * All responses follow this shape:
+ * {
+ *   success: boolean,
+ *   message: string,
+ *   data?: any,
+ *   errors?: any,
+ *   requestId?: string
+ * }
+ *
+ * If requestId middleware is active, it will be available on req.requestId
+ * and we echo it back to the client for easier debugging.
+ */
 
-export function created(res, data = {}) {
-  return success(res, data, 201);
-}
-
-export function error(res, message, statusCode = 500, details = null) {
-  const response = {
-    ok: false,
-    error: message,
-    timestamp: new Date().toISOString()
-  };
-  
-  if (details && process.env.NODE_ENV !== 'production') {
-    response.details = details;
+function attachRequestMeta(resBody, req) {
+  if (req && req.requestId) {
+    return { ...resBody, requestId: req.requestId };
   }
-  
-  return res.status(statusCode).json(response);
+  return resBody;
 }
 
-export function sendSuccess(res, data = {}, status = 200) {
-  res.status(status).json({
-    ok: true,
-    data,
-    timestamp: new Date().toISOString(),
-  });
+// 200 OK
+export function success(res, data = null, message = "OK", req) {
+  const body = {
+    success: true,
+    message,
+  };
+
+  if (data !== null && data !== undefined) {
+    body.data = data;
+  }
+
+  return res.status(200).json(attachRequestMeta(body, req));
 }
 
-export function sendError(res, message = "Unknown error", status = 400, details = null) {
-  res.status(status).json({
-    ok: false,
-    error: message,
-    details,
-    timestamp: new Date().toISOString(),
-  });
+// 201 Created
+export function created(res, data = null, message = "Created", req) {
+  const body = {
+    success: true,
+    message,
+  };
+
+  if (data !== null && data !== undefined) {
+    body.data = data;
+  }
+
+  return res.status(201).json(attachRequestMeta(body, req));
 }
 
-export function badRequest(res, message = "Invalid request") {
-  return error(res, message, 400);
+// 400 Bad Request — NOW RETURNS ERRORS ARRAY
+export function badRequest(res, message = "Invalid request.", errors = null, req) {
+  const body = {
+    success: false,
+    message,
+  };
+
+  if (errors && Array.isArray(errors) && errors.length > 0) {
+    body.errors = errors;
+  } else if (errors && !Array.isArray(errors)) {
+    // If a single error object/string is passed
+    body.errors = [errors];
+  }
+
+  return res.status(400).json(attachRequestMeta(body, req));
 }
 
-export function unauthorized(res, message = "Authentication required") {
-  return error(res, message, 401);
+// 401 Unauthorized
+export function unauthorized(res, message = "Not authorized.", req) {
+  const body = {
+    success: false,
+    message,
+  };
+
+  return res.status(401).json(attachRequestMeta(body, req));
 }
 
-export function forbidden(res, message = "Access denied") {
-  return error(res, message, 403);
+// 403 Forbidden
+export function forbidden(res, message = "Forbidden.", req) {
+  const body = {
+    success: false,
+    message,
+  };
+
+  return res.status(403).json(attachRequestMeta(body, req));
 }
 
-export function notFound(res, message = "Resource not found") {
-  return error(res, message, 404);
+// 404 Not Found
+export function notFound(res, message = "Not found.", req) {
+  const body = {
+    success: false,
+    message,
+  };
+
+  return res.status(404).json(attachRequestMeta(body, req));
 }
 
-export function conflict(res, message = "Resource already exists") {
-  return error(res, message, 409);
-}
+// 500 Server Error
+export function serverError(res, error, message = "Something went wrong.", req) {
+  console.error("🚨 Server error:", error);
 
-export function serverError(res, err, userMessage = "An unexpected error occurred") {
-  console.error("[Server Error]", err);
-  return error(res, userMessage, 500, err?.message);
-}
+  const body = {
+    success: false,
+    message,
+  };
 
-export function validationError(res, errors) {
-  return res.status(400).json({
-    ok: false,
-    error: "Validation failed",
-    validationErrors: errors,
-    timestamp: new Date().toISOString()
-  });
+  // Optionally surface a very minimal error for debugging without leaking internals
+  if (process.env.NODE_ENV !== "production") {
+    body.errors = [
+      typeof error === "string"
+        ? error
+        : error?.message || "Unknown server error",
+    ];
+  }
+
+  return res.status(500).json(attachRequestMeta(body, req));
 }

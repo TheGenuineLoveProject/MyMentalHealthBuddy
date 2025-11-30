@@ -1,184 +1,88 @@
 // server/routes/billing.mjs
+
 import express from "express";
 import Stripe from "stripe";
-import { authGuard } from "../middleware/auth.mjs";
-import { success, badRequest, serverError, forbidden } from "../utils/response.mjs";
-import { db } from "../db/connection.mjs";
-import { users } from "../shared/schema.mjs";
-import { eq } from "drizzle-orm";
+import { z } from "zod";
+
+import {
+  success,
+  badRequest,
+  serverError,
+  unauthorized,
+} from "../utils/response.mjs";
+import { requireAuth } from "../middleware/auth.mjs";
 
 const router = express.Router();
 
-const stripe = process.env.STRIPE_SECRET_KEY 
-  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" })
-  : null;
+const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
 
-const PLANS = {
-  free: {
-    id: "free",
-    name: "Free",
-    price: 0,
-    features: ["5 AI chats per day", "Basic mood tracking", "Journal entries"],
-  },
-  pro: {
-    id: "pro",
-    name: "Pro",
-    price: 9.99,
-    priceId: process.env.STRIPE_PRO_PRICE_ID,
-    features: ["Unlimited AI chats", "Advanced analytics", "Priority support", "Export data"],
-  },
-  premium: {
-    id: "premium",
-    name: "Premium",
-    price: 19.99,
-    priceId: process.env.STRIPE_PREMIUM_PRICE_ID,
-    features: ["Everything in Pro", "Custom themes", "Family sharing", "1-on-1 onboarding"],
-  },
-};
-
-router.get("/ping", (req, res) => success(res, { route: "billing" }));
-
-router.get("/plans", (req, res) => {
-  return success(res, { 
-    plans: Object.values(PLANS).map(plan => ({
-      id: plan.id,
-      name: plan.name,
-      price: plan.price,
-      features: plan.features,
-    }))
+let stripe = null;
+if (STRIPE_SECRET_KEY) {
+  stripe = new Stripe(STRIPE_SECRET_KEY, {
+    apiVersion: "2024-06-20",
   });
+}
+
+// All billing routes require auth
+router.use(requireAuth);
+
+const checkoutSchema = z.object({
+  priceId: z.string().min(1, "priceId is required."),
+  successUrl: z.string().url(),
+  cancelUrl: z.string().url(),
 });
 
-router.get("/status", authGuard, async (req, res) => {
+// POST /api/billing/checkout-session
+router.post("/checkout-session", async (req, res) => {
   try {
-    const userId = req.user.id;
-    
-    const [user] = await db.select().from(users).where(eq(users.id, userId));
-    
-    if (!user) {
-      return forbidden(res, "User not found");
-    }
+    const user = req.user;
+    if (!user) return unauthorized(res);
 
-    return success(res, {
-      plan: user.subscriptionPlan || "free",
-      status: user.subscriptionStatus || "active",
-      currentPeriodEnd: user.subscriptionPeriodEnd || null,
-    });
-  } catch (err) {
-    return serverError(res, err, "Failed to fetch billing status");
-  }
-});
-
-router.post("/create-checkout", authGuard, async (req, res) => {
-  try {
     if (!stripe) {
-      return badRequest(res, "Payment processing is not configured");
+      return serverError(res, new Error("Stripe not configured."), "Stripe not configured.");
     }
 
-    const { planId } = req.body;
-    
-    if (!planId || !PLANS[planId] || planId === "free") {
-      return badRequest(res, "Invalid plan selected");
+    const parseResult = checkoutSchema.safeParse(req.body);
+    if (!parseResult.success) {
+      const errors = parseResult.error.flatten();
+      return badRequest(res, "Validation failed.", errors);
     }
 
-    const plan = PLANS[planId];
-    
-    if (!plan.priceId) {
-      return badRequest(res, "This plan is not available for purchase");
-    }
-
-    const userId = req.user.id;
-    const [user] = await db.select().from(users).where(eq(users.id, userId));
-
-    if (!user) {
-      return forbidden(res, "User not found");
-    }
-
-    let customerId = user.stripeCustomerId;
-
-    if (!customerId) {
-      const customer = await stripe.customers.create({
-        email: user.email,
-        metadata: { userId: String(userId) },
-      });
-      customerId = customer.id;
-
-      await db.update(users)
-        .set({ stripeCustomerId: customerId })
-        .where(eq(users.id, userId));
-    }
+    const { priceId, successUrl, cancelUrl } = parseResult.data;
 
     const session = await stripe.checkout.sessions.create({
-      customer: customerId,
-      payment_method_types: ["card"],
+      mode: "subscription",
       line_items: [
         {
-          price: plan.priceId,
+          price: priceId,
           quantity: 1,
         },
       ],
-      mode: "subscription",
-      success_url: `${process.env.APP_URL || "http://localhost:5000"}/settings?checkout=success`,
-      cancel_url: `${process.env.APP_URL || "http://localhost:5000"}/settings?checkout=cancelled`,
-      metadata: {
-        userId: String(userId),
-        planId: planId,
-      },
+      customer_email: user.email,
+      success_url: successUrl,
+      cancel_url: cancelUrl,
     });
 
-    return success(res, { 
-      sessionId: session.id,
-      url: session.url,
-    });
+    return success(res, { url: session.url }, "Checkout session created.");
   } catch (err) {
-    return serverError(res, err, "Failed to create checkout session");
+    return serverError(res, err);
   }
 });
 
-router.post("/create-portal", authGuard, async (req, res) => {
+// (Optional) billing portal stub
+router.post("/portal-session", async (req, res) => {
   try {
+    const user = req.user;
+    if (!user) return unauthorized(res);
+
     if (!stripe) {
-      return badRequest(res, "Payment processing is not configured");
+      return serverError(res, new Error("Stripe not configured."), "Stripe not configured.");
     }
 
-    const userId = req.user.id;
-    const [user] = await db.select().from(users).where(eq(users.id, userId));
-
-    if (!user || !user.stripeCustomerId) {
-      return badRequest(res, "No billing account found");
-    }
-
-    const session = await stripe.billingPortal.sessions.create({
-      customer: user.stripeCustomerId,
-      return_url: `${process.env.APP_URL || "http://localhost:5000"}/settings`,
-    });
-
-    return success(res, { url: session.url });
+    // In real setup, you’d link Stripe customer id from DB
+    return success(res, { message: "Billing portal not fully wired yet." });
   } catch (err) {
-    return serverError(res, err, "Failed to create billing portal session");
-  }
-});
-
-router.post("/cancel", authGuard, async (req, res) => {
-  try {
-    if (!stripe) {
-      return badRequest(res, "Payment processing is not configured");
-    }
-
-    const userId = req.user.id;
-    const [user] = await db.select().from(users).where(eq(users.id, userId));
-
-    if (!user || !user.stripeSubscriptionId) {
-      return badRequest(res, "No active subscription found");
-    }
-
-    await stripe.subscriptions.update(user.stripeSubscriptionId, {
-      cancel_at_period_end: true,
-    });
-
-    return success(res, { message: "Subscription will be cancelled at the end of the billing period" });
-  } catch (err) {
-    return serverError(res, err, "Failed to cancel subscription");
+    return serverError(res, err);
   }
 });
 

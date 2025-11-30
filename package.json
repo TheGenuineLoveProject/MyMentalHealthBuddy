@@ -3,52 +3,60 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=20.0.0"
-  },
+  "workspaces": ["client"],
   "scripts": {
-    "//0": "── core app scripts ──",
+    "start": "node server/index.mjs",
     "build": "npm run build -w client",
-    "start": "NODE_ENV=production node server/index.mjs",
     "dev": "npm run dev -w client",
-    "//1": "── helper tools ──",
+
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+
     "kill-ports": "node scripts/clean-port.mjs",
     "ensure-tools": "node scripts/ensure-tools.mjs",
     "guardian": "node scripts/guardian-heart.mjs",
     "heal": "node scripts/permanent-fix.mjs",
     "check-package": "node scripts/check-package-json.mjs",
     "preflight": "node scripts/preflight.mjs",
-    "//2": "── combined commands ──",
-    "build-and-start": "npm run kill-ports && npm run build && npm run start",
-    "//3": "── FULL SAFE-CYCLE (one command) ──",
+
+    "build-and-start": "npm run build -w client && npm start",
     "safe-cycle": "npm run preflight && npm run ensure-tools && npm run heal && npm run guardian && npm run build-and-start",
-    "//4": "── heal-only shortcut ──",
+
     "heal-only": "node scripts/permanent-fix.mjs"
   },
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
+    "@tanstack/react-query": "^5.90.11",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.0",
-    "drizzle-orm": "^0.30.0",
+    "drizzle-orm": "^0.38.0",
+    "drizzle-zod": "^0.5.0",
+    "dotenv": "^16.4.5",
     "express": "^4.19.0",
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "node-fetch": "^3.3.2",
-    "openai": "^4.0.0",
-    "pg": "^8.11.0",
-    "stripe": "^14.0.0",
-    "uuid": "^9.0.1",
+    "openai": "^4.76.0",
+    "pg": "^8.12.0",
+    "stripe": "^16.0.0",
+    "wouter": "^3.3.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/jsonwebtoken": "^9.0.0",
-    "@types/node": "^20.11.0",
-    "typescript": "^5.6.0"
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/morgan": "^1.9.5",
+    "@vitejs/plugin-react": "^5.0.0",
+    "autoprefixer": "^10.4.20",
+    "drizzle-kit": "^0.28.0",
+    "nodemon": "^3.1.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "vite": "^5.4.0"
   }
 }

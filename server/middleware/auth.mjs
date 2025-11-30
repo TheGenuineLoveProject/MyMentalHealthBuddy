@@ -1,105 +1,68 @@
 // server/middleware/auth.mjs
+// JWT auth middleware for protected API routes
+
 import jwt from "jsonwebtoken";
 
-// Get JWT secret with STRICT enforcement
-function getJwtSecret() {
-  const secret = process.env.SESSION_SECRET;
-  
-  // In production, secret is MANDATORY
-  if (process.env.NODE_ENV === "production") {
+// Tiny helper to pull the token from headers
+function getTokenFromRequest(req) {
+  const authHeader = req.headers.authorization || req.headers.Authorization;
+  if (!authHeader) return null;
+
+  // Expect "Bearer <token>"
+  const parts = authHeader.split(" ");
+  if (parts.length !== 2) return null;
+  const [scheme, token] = parts;
+
+  if (!/^Bearer$/i.test(scheme)) return null;
+  return token || null;
+}
+
+/**
+ * requireAuth
+ *
+ * Usage (inside a route file):
+ *   import { requireAuth } from "../middleware/auth.mjs";
+ *
+ *   router.get("/me", requireAuth, async (req, res) => {
+ *     // req.user will contain the decoded JWT payload
+ *   });
+ */
+export function requireAuth(req, res, next) {
+  try {
+    const token = getTokenFromRequest(req);
+
+    if (!token) {
+      return res.status(401).json({
+        ok: false,
+        error: "Authentication required. Please sign in.",
+      });
+    }
+
+    const secret = process.env.SESSION_SECRET;
     if (!secret) {
-      throw new Error("CRITICAL: SESSION_SECRET environment variable is required in production");
-    }
-    if (secret.length < 32) {
-      throw new Error("CRITICAL: SESSION_SECRET must be at least 32 characters in production");
-    }
-    return secret;
-  }
-  
-  // In development, warn but allow fallback
-  if (!secret) {
-    console.warn("WARNING: SESSION_SECRET not set. Using development fallback. Set this before production!");
-    return "dev-only-secret-change-in-production-min-32-chars";
-  }
-  
-  return secret;
-}
-
-// Initialize secret at module load (will throw in production if not configured)
-let JWT_SECRET;
-try {
-  JWT_SECRET = getJwtSecret();
-} catch (error) {
-  console.error(error.message);
-  process.exit(1);
-}
-
-// Strict auth - requires valid token
-export function authGuard(req, res, next) {
-  const header = req.headers.authorization;
-
-  if (!header || !header.startsWith("Bearer ")) {
-    return res.status(401).json({ 
-      success: false,
-      error: "Authentication required",
-      code: "MISSING_TOKEN"
-    });
-  }
-
-  try {
-    const token = header.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_SECRET);
-    
-    // Validate token has required fields (id from auth.mjs JWT signing)
-    if (!decoded.id || !decoded.email) {
-      return res.status(401).json({ 
-        success: false,
-        error: "Invalid token format",
-        code: "INVALID_TOKEN_FORMAT"
+      console.error("❌ SESSION_SECRET is not set. Cannot verify JWT.");
+      return res.status(500).json({
+        ok: false,
+        error: "Auth configuration error. Please try again later.",
       });
     }
-    
-    // Normalize user object to always have both 'id' and 'userId' for compatibility
+
+    const payload = jwt.verify(token, secret);
+
+    // Attach user data to request for downstream handlers
     req.user = {
-      ...decoded,
-      userId: decoded.id  // Add userId alias for backward compatibility
+      id: payload.sub ?? payload.id ?? null,
+      email: payload.email ?? null,
+      ...payload,
     };
-    next();
+
+    return next();
   } catch (err) {
-    if (err.name === "TokenExpiredError") {
-      return res.status(401).json({ 
-        success: false,
-        error: "Token has expired",
-        code: "TOKEN_EXPIRED"
-      });
-    }
-    return res.status(401).json({ 
-      success: false,
-      error: "Invalid authentication token",
-      code: "INVALID_TOKEN"
+    console.error("JWT verification failed:", err?.message || err);
+
+    return res.status(401).json({
+      ok: false,
+      error: "Invalid or expired authentication token.",
     });
   }
 }
-
-// Optional auth - continues even without token
-export function optionalAuth(req, res, next) {
-  const header = req.headers.authorization;
-
-  if (!header || !header.startsWith("Bearer ")) {
-    req.user = null;
-    return next();
-  }
-
-  try {
-    const token = header.split(" ")[1];
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
-  } catch (err) {
-    req.user = null;
-  }
-  
-  next();
-}
-
-// Export for use in auth routes
-export { JWT_SECRET };

@@ -1,3 +1,18 @@
+// server/middleware/requestId.mjs
+
+import { randomUUID } from "node:crypto";
+
+export function requestId(req, res, next) {
+  const existingId = req.headers["x-request-id"];
+  const id = typeof existingId === "string" && existingId.trim() !== ""
+    ? existingId
+    : randomUUID();
+
+  req.requestId = id;
+  res.setHeader("X-Request-Id", id);
+
+  next();
+}
 // Assigns a unique request ID to each request.
 import { randomUUID } from "crypto";
 

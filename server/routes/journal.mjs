@@ -1,168 +1,102 @@
 // server/routes/journal.mjs
+// MyMentalHealthBuddy — Journaling API
+// ESM · Drizzle ORM · Replit-safe
+
 import express from "express";
+import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { desc } from "drizzle-orm";
 import { db } from "../db/connection.mjs";
-import { journals } from "../shared/schema.mjs";
-import { authGuard } from "../middleware/auth.mjs";
-import { eq, desc } from "drizzle-orm";
-import { success, created, badRequest, notFound, forbidden, serverError } from "../utils/response.mjs";
-import { validateJournal } from "../utils/validation.mjs";
+import { schema } from "../../shared/schema.mjs";
+import { success, badRequest } from "../services/response.mjs";
+
+export const journalEntries = pgTable("journal_entries", {
+  id: serial("id").primaryKey(),
+  text: text("text").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
 
 const router = express.Router();
 
-router.get("/ping", (req, res) => success(res, { route: "journal" }));
+// Small helper: standard success response
+function ok(res, payload = {}, status = 200) {
+  return res.status(status).json({
+    success: true,
+    ...payload,
+  });
+}
 
-router.post("/", authGuard, async (req, res) => {
+// Small helper: standard error response
+function badRequest(res, message = "Validation failed.", errors = []) {
+  return res.status(400).json({
+    success: false,
+    message,
+    errors,
+  });
+}
+
+/**
+ * GET /api/journal
+ * Returns the user’s most recent journal entries.
+ */
+router.get("/", async (req, res, next) => {
   try {
-    const { valid, errors, data } = validateJournal(req.body);
-    if (!valid) {
-      return badRequest(res, "Validation failed.", errors);
-    }
-
-    const { text, title, mood } = validation.data;
-    const userId = req.user.id;
-
-    const [entry] = await db
-      .insert(journals)
-      .values({
-        userId,
-        text: text.trim(),
-        title: title?.trim() || null,
-        mood: mood || null
-      })
-      .returning();
-
-    return created(res, { entry });
-  } catch (err) {
-    return serverError(res, err, "Failed to save journal entry");
-  }
-});
-
-router.get("/", authGuard, async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const limit = Math.min(parseInt(req.query.limit) || 50, 100);
-    const offset = parseInt(req.query.offset) || 0;
-
-    const list = await db
+    const entries = await db
       .select()
-      .from(journals)
-      .where(eq(journals.userId, userId))
-      .orderBy(desc(journals.createdAt))
-      .limit(limit)
-      .offset(offset);
+      .from(journalEntries)
+      .orderBy(desc(journalEntries.createdAt))
+      .limit(50);
 
-    return success(res, { 
-      list: list || [],
-      pagination: { limit, offset, count: list.length }
-    });
+    return ok(res, { entries });
   } catch (err) {
-    return serverError(res, err, "Failed to fetch journal entries");
+    return next(err);
   }
 });
 
-router.get("/:id", authGuard, async (req, res) => {
+/**
+ * POST /api/journal
+ * Body: { text: string }
+ * Saves a new journal entry.
+ */
+router.post("/", async (req, res, next) => {
   try {
-    const userId = req.user.id;
-    const entryId = parseInt(req.params.id);
+    const { text: rawText } = req.body || {};
+    const text = typeof rawText === "string" ? rawText.trim() : "";
 
-    if (isNaN(entryId)) {
-      return badRequest(res, "Invalid entry ID");
-    }
+    const errors = [];
 
-    const [entry] = await db
-      .select()
-      .from(journals)
-      .where(eq(journals.id, entryId));
-
-    if (!entry) {
-      return notFound(res, "Journal entry not found");
-    }
-
-    if (entry.userId !== userId) {
-      return forbidden(res, "Not authorized to view this entry");
-    }
-
-    return success(res, { entry });
-  } catch (err) {
-    return serverError(res, err, "Failed to fetch journal entry");
-  }
-});
-
-router.put("/:id", authGuard, async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const entryId = parseInt(req.params.id);
-
-    if (isNaN(entryId)) {
-      return badRequest(res, "Invalid entry ID");
-    }
-
-    const validation = validate(journalUpdateSchema, req.body);
-    if (!validation.valid) {
-      return res.status(400).json({
-        ok: false,
-        error: "Validation failed",
-        validationErrors: validation.errors
+    if (!text) {
+      errors.push({ field: "text", message: "Journal entry cannot be empty." });
+    } else if (text.length > 5000) {
+      errors.push({
+        field: "text",
+        message: "Journal entry is too long. Try splitting it into smaller pieces.",
       });
     }
 
-    const [existing] = await db
-      .select()
-      .from(journals)
-      .where(eq(journals.id, entryId));
-
-    if (!existing) {
-      return notFound(res, "Journal entry not found");
+    if (errors.length > 0) {
+      return badRequest(
+        res,
+        "Please adjust your entry and try again.",
+        errors
+      );
     }
 
-    if (existing.userId !== userId) {
-      return forbidden(res, "Not authorized to edit this entry");
-    }
-
-    const updateData = {};
-    if (validation.data.text) updateData.text = validation.data.text.trim();
-    if (validation.data.title !== undefined) updateData.title = validation.data.title?.trim() || null;
-    if (validation.data.mood !== undefined) updateData.mood = validation.data.mood;
-
-    const [updated] = await db
-      .update(journals)
-      .set(updateData)
-      .where(eq(journals.id, entryId))
+    const [inserted] = await db
+      .insert(journalEntries)
+      .values({ text })
       .returning();
 
-    return success(res, { entry: updated });
+    return ok(
+      res,
+      {
+        message:
+          "Your thoughts have been safely saved. Thank you for sharing your truth.",
+        entry: inserted,
+      },
+      201
+    );
   } catch (err) {
-    return serverError(res, err, "Failed to update journal entry");
-  }
-});
-
-router.delete("/:id", authGuard, async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const entryId = parseInt(req.params.id);
-
-    if (isNaN(entryId)) {
-      return badRequest(res, "Invalid entry ID");
-    }
-
-    const [existing] = await db
-      .select()
-      .from(journals)
-      .where(eq(journals.id, entryId));
-
-    if (!existing) {
-      return notFound(res, "Journal entry not found");
-    }
-
-    if (existing.userId !== userId) {
-      return forbidden(res, "Not authorized to delete this entry");
-    }
-
-    await db.delete(journals).where(eq(journals.id, entryId));
-
-    return success(res, { message: "Journal entry deleted successfully" });
-  } catch (err) {
-    return serverError(res, err, "Failed to delete journal entry");
+    return next(err);
   }
 });
 

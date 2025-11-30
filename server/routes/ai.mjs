@@ -1,86 +1,79 @@
 // server/routes/ai.mjs
+
 import express from "express";
-import { OpenAI } from "openai";
+import { z } from "zod";
+import OpenAI from "openai";
+
+import {
+  success,
+  badRequest,
+  serverError,
+  unauthorized,
+} from "../utils/response.mjs";
+import { requireAuth } from "../middleware/auth.mjs";
 
 const router = express.Router();
 
-// ───────────── SAFE CLIENT SETUP ─────────────
-const apiKey = process.env.OPENAI_API_KEY;
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
+let openai = null;
 
-if (!apiKey) {
-  console.warn(
-    "[AI ROUTE] WARNING: OPENAI_API_KEY is missing. /api/ai/chat will return 503."
-  );
+if (OPENAI_API_KEY) {
+  openai = new OpenAI({
+    apiKey: OPENAI_API_KEY,
+  });
 }
 
-const client = apiKey
-  ? new OpenAI({ apiKey })
-  : null;
+// All AI routes require auth (you can relax this later if desired)
+router.use(requireAuth);
 
-// ───────────── HEALTH CHECK ─────────────
-router.get("/health", (req, res) => {
-  res.json({
-    status: apiKey ? "ok" : "degraded",
-    hasApiKey: Boolean(apiKey),
-    route: "ai",
-    env: process.env.NODE_ENV || "development",
-    time: new Date().toISOString(),
-  });
+const messageSchema = z.object({
+  message: z.string().min(1, "Message is required."),
 });
 
-// ───────────── MAIN AI CHAT ─────────────
+// POST /api/ai/chat
 router.post("/chat", async (req, res) => {
   try {
-    if (!apiKey || !client) {
-      return res.status(503).json({
-        error: "AI service is not configured (missing OPENAI_API_KEY).",
-      });
+    const user = req.user;
+    if (!user) return unauthorized(res);
+
+    if (!openai) {
+      return serverError(res, new Error("OpenAI not configured."), "AI not configured.");
     }
 
-    const { message } = req.body;
-
-    if (typeof message !== "string" || !message.trim()) {
-      return res.status(400).json({ error: "Message must be a non-empty string." });
+    const parseResult = messageSchema.safeParse(req.body);
+    if (!parseResult.success) {
+      const errors = parseResult.error.flatten();
+      return badRequest(res, "Validation failed.", errors);
     }
 
-    const cleanMessage = message.trim();
+    const { message } = parseResult.data;
 
-    if (cleanMessage.length > 1000) {
-      return res.status(400).json({
-        error: "Message is too long. Please keep it under 1000 characters.",
-      });
-    }
-
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o",
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
           content:
-            "You are a gentle, supportive mental health buddy. " +
-            "You never give medical, legal, or crisis advice – you encourage users to seek professional help " +
-            "and use warm, simple language.",
+            "You are a gentle emotional support companion for MyMentalHealthBuddy. " +
+            "You never give medical advice or crisis instructions. You help users " +
+            "name feelings, practice self-compassion, and explore honest questions " +
+            "about their inner world.",
         },
-        { role: "user", content: cleanMessage },
+        {
+          role: "user",
+          content: message,
+        },
       ],
-      max_tokens: 200,
       temperature: 0.7,
     });
 
-    const reply = completion.choices?.[0]?.message?.content?.trim() || "";
+    const reply =
+      completion.choices?.[0]?.message?.content ??
+      "I'm here with you. I’m not sure what to say yet, but I care about how you feel.";
 
-    if (!reply) {
-      return res.status(502).json({
-        error: "AI did not return a response. Please try again.",
-      });
-    }
-
-    res.json({ reply });
+    return success(res, { reply }, "AI reply.");
   } catch (err) {
-    console.error("[AI ROUTE] Error:", err);
-    res.status(500).json({
-      error: "AI chat failed unexpectedly. Please try again later.",
-    });
+    return serverError(res, err);
   }
 });
 

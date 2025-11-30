@@ -1,180 +1,86 @@
 // server/routes/auth.mjs
+
 import express from "express";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
-import db from "../db/connection.mjs";
-import { users } from "../shared/schema.mjs";
-import { eq } from "drizzle-orm";
-
-import {
-  success,
-  created,
-  badRequest,
-  unauthorized,
-  conflict,
-  serverError,
-} from "../utils/response.mjs";
-
-import {
-  validateRegister,
-  validateLogin,
-} from "../utils/validation.mjs";
+import { db } from "../db/connection.mjs";
+import { schema } from "../../shared/schema.mjs";
+import { validateAuthPayload } from "../utils/validation.mjs";
+// ⬇️ IMPORTANT: we only import success, NOT badRequest
+import { success } from "../services/response.mjs";
 
 const router = express.Router();
 
-const JWT_SECRET = process.env.SESSION_SECRET;
-const JWT_EXPIRY = "7d";
-
-function getJwtSecret() {
-  if (!JWT_SECRET) {
-    throw new Error("SESSION_SECRET not configured");
-  }
-  return JWT_SECRET;
+// Local badRequest that includes validation errors
+function badRequest(res, message, errors = []) {
+  return res.status(400).json({
+    ok: false,
+    message,
+    errors,
+  });
 }
 
-// Simple ping
-router.get("/ping", (req, res) => {
-  return success(res, { route: "auth" });
-});
-
-// ---------- REGISTER ----------
+/* REGISTER */
 router.post("/register", async (req, res) => {
+  const { email, password, name } = req.body || {};
+  const errors = [];
+
+  if (!email) errors.push({ field: "email", message: "Email required" });
+  if (!password) errors.push({ field: "password", message: "Password required" });
+  if (!name) errors.push({ field: "name", message: "Name required" });
+
+  if (errors.length) return badRequest(res, "Validation failed", errors);
+
   try {
-    const { valid, errors, data } = validateRegister(req.body);
+    const hashed = await bcrypt.hash(password, 10);
 
-    if (!valid) {
-      return badRequest(res, "Validation failed.", errors);
-    }
-
-    const { email, password, name } = data;
-
-    const existingUser = await db
-      .select()
-      .from(users)
-      .where(eq(users.email, email.toLowerCase()));
-
-    if (existingUser.length > 0) {
-      return conflict(res, "An account with this email already exists");
-    }
-
-    const passwordHash = await bcrypt.hash(password, 12);
-
-    const [newUser] = await db
-      .insert(users)
-      .values({
-        email: email.toLowerCase(),
-        password_hash: passwordHash,
-        name: name || null,
-      })
-      .returning();
-
-    const token = jwt.sign(
-      {
-        id: newUser.id,
-        email: newUser.email,
-        name: newUser.name,
-      },
-      getJwtSecret(),
-      { expiresIn: JWT_EXPIRY }
-    );
-
-    return created(res, {
-      user: {
-        id: newUser.id,
-        email: newUser.email,
-        name: newUser.name,
-      },
-      token,
+    await db.insert(users).values({
+      email,
+      password: hashed,
+      name,
     });
+
+    return res.json({ ok: true });
   } catch (err) {
-    console.error(err);
-    return serverError(res, err, "Registration failed. Please try again.");
+    console.error("[register error]", err);
+    return res.status(500).json({ ok: false, error: "Registration failed" });
   }
 });
 
-// ---------- LOGIN ----------
+/* LOGIN */
 router.post("/login", async (req, res) => {
+  const { email, password } = req.body || {};
+  const errors = [];
+
+  if (!email) errors.push({ field: "email", message: "Email required" });
+  if (!password) errors.push({ field: "password", message: "Password required" });
+
+  if (errors.length) return badRequest(res, "Validation failed", errors);
+
   try {
-    const { valid, errors, data } = validateLogin(req.body);
+    const [user] = await db.select().from(users).where(users.email.eq(email));
 
-    if (!valid) {
-      return badRequest(res, "Validation failed.", errors);
-    }
+    if (!user) return badRequest(res, "Invalid credentials");
 
-    const { email, password } = data;
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) return badRequest(res, "Invalid credentials");
 
-    const [user] = await db
-      .select()
-      .from(users)
-      .where(eq(users.email, email.toLowerCase()));
-
-    if (!user) {
-      return unauthorized(res, "Invalid email or password");
-    }
-
-    const match = await bcrypt.compare(password, user.password_hash);
-    if (!match) {
-      return unauthorized(res, "Invalid email or password");
+    if (!process.env.SESSION_SECRET) {
+      console.error("❌ SESSION_SECRET missing");
+      return res.status(500).json({ ok: false, error: "Server misconfigured" });
     }
 
     const token = jwt.sign(
-      {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-      getJwtSecret(),
-      { expiresIn: JWT_EXPIRY }
+      { id: user.id, email: user.email },
+      process.env.SESSION_SECRET,
+      { expiresIn: "7d" }
     );
 
-    return success(res, {
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-      token,
-    });
+    return res.json({ ok: true, token });
   } catch (err) {
-    console.error(err);
-    return serverError(res, err, "Login failed. Please try again.");
-  }
-});
-
-// ---------- ME ----------
-router.get("/me", async (req, res) => {
-  try {
-    const header = req.headers.authorization;
-    if (!header || !header.startsWith("Bearer ")) {
-      return unauthorized(res, "No token provided");
-    }
-
-    const token = header.split(" ")[1];
-    const decoded = jwt.verify(token, getJwtSecret());
-
-    const [user] = await db
-      .select()
-      .from(users)
-      .where(eq(users.id, decoded.id));
-
-    if (!user) {
-      return unauthorized(res, "User not found");
-    }
-
-    return success(res, {
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-    });
-  } catch (err) {
-    console.error(err);
-    if (err.name === "JsonWebTokenError" || err.name === "TokenExpiredError") {
-      return unauthorized(res, "Invalid or expired token");
-    }
-    return serverError(res, err, "Failed to verify token");
+    console.error("[login error]", err);
+    return res.status(500).json({ ok: false, error: "Login failed" });
   }
 });
 
