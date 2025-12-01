@@ -1,15 +1,25 @@
-// drizzle.config.ts - root (project-level) config
+// drizzle.config.ts
+// Final Neon Postgres config for Drizzle Kit (TS)
 
-import type { Config } from "drizzle-kit";
+// Load .env variables
+import 'dotenv/config';
+import { defineConfig } from 'drizzle-kit';
 
-const config: Config = {
-  schema: "./server/db/schema.mjs",   // unified schema file
-  out: "./drizzle/migrations",       // migrations folder
-  driver: "pg",                      // using pg (node-postgres)
-  dialect: "postgresql",             // <-- fixes "dialect" error
+export default defineConfig({
+  // Path to the unified schema used by your app
+  schema: './shared/schema.mjs',
+
+  // Where migrations will be stored
+  out: './drizzle',
+
+  // We use Postgres on Neon
+  dialect: 'postgresql',
+
+  // Use your existing Neon URL from .env
   dbCredentials: {
-    connectionString: process.env.DATABASE_URL ?? "",
+    url: process.env.DRIZZLE_DATABASE_URL || process.env.DATABASE_URL || '',
   },
-};
 
-export default config;
+  strict: true,
+  verbose: true,
+});

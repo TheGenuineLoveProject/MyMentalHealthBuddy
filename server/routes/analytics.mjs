@@ -1,7 +1,7 @@
 // server/routes/analytics.mjs
 import express from "express";
 import { db } from "../db/connection.mjs";
-import { moods, journal, users } from "../../shared/schema.mjs";
+import { moods, journals } from "../../shared/schema.mjs";
 import { eq, sql } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 
@@ -25,8 +25,8 @@ router.get("/summary", async (req, res) => {
     // Journal count
     const [journalStats] = await db
       .select({ count: sql`count(*)` })
-      .from(journal)
-      .where(eq(journal.userId, userId));
+      .from(journals)
+      .where(eq(journals.userId, userId));
 
     return success(res, {
       moodCount: Number(moodStats.count),

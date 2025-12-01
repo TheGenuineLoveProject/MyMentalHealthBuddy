@@ -1,58 +1,105 @@
 // server/index.mjs
-import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import compression from "compression";
 import rateLimit from "express-rate-limit";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
-import { router as apiRouter } from "./routes/index.mjs";
+dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// -------------------------------------------
+// 0. APP BASE
+// -------------------------------------------
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Trust Replit / proxy for correct IPs + HTTPS
-app.set("trust proxy", 1);
+// Replit / proxy safety
+app.set("trust proxy", true);
 
-// Basic security + JSON parsing
-app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN || "*",
-    credentials: true,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
-app.use(compression());
-app.use(express.json());
 
-// Global rate limit (stateless-friendly)
+app.use(express.json());
+app.use(helmet());
+
+// -------------------------------------------
+// 1. RATE LIMIT (GLOBAL)
+// -------------------------------------------
 const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 min
-  max: 120,
-  standardHeaders: true,
-  legacyHeaders: false,
+  windowMs: 60 * 1000, // 1 minute
+  max: 100,            // 100 reqs / minute / IP
 });
+
 app.use(limiter);
 
-// Health check
-app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", env: process.env.NODE_ENV || "development" });
-});
+// -------------------------------------------
+// 2. ROUTES (EACH FILE HAS ITS OWN ROUTER)
+// -------------------------------------------
 
-// Mount API routes (mood, journal, analytics, ai, auth...)
-app.use("/api", apiRouter);
+import analyticsRoutes from "./routes/analytics.mjs";
+import authRoutes from "./routes/auth.mjs";
+import journalRoutes from "./routes/journal.mjs";
+import moodRoutes from "./routes/mood.mjs";
+import contentRoutes from "./routes/content.mjs";
+import billingRoutes from "./routes/billing.mjs";
+import canvaOAuthRoutes from "./routes/canva-oauth.mjs";
+import uiDashboardRoutes from "./routes/ui-dashboard.mjs";
+import aiDashboardRoutes from "./routes/ai-dashboard.mjs";
+import stripeWebhookRoutes from "./routes/stripeWebhook.mjs";
 
-// Start server
-const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(`MyMentalHealthBuddy API listening on http://0.0.0.0:${PORT}`);
-});
+// Attach route modules
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/journal", journalRoutes);
+app.use("/api/mood", moodRoutes);
+app.use("/api/content", contentRoutes);
+app.use("/api/billing", billingRoutes);
+app.use("/api/canva", canvaOAuthRoutes);
+app.use("/api/ui-dashboard", uiDashboardRoutes);
+app.use("/api/ai-dashboard", aiDashboardRoutes);
+app.use("/api/webhooks/stripe", stripeWebhookRoutes);
 
-// Graceful shutdown
-const shutdown = () => {
-  console.log("Received SIGTERM, shutting down gracefully...");
-  server.close(() => {
-    process.exit(0);
+// -------------------------------------------
+// 3. HEALTHCHECK
+// -------------------------------------------
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "MyMentalHealthBuddy API is running.",
+    uptime: process.uptime()
   });
-};
-process.on("SIGINT", shutdown);
-process.on("SIGTERM", shutdown);
+});
+
+// -------------------------------------------
+// 4. SERVE STATIC FRONTEND
+// -------------------------------------------
+const clientDistPath = path.join(__dirname, "..", "client", "dist");
+app.use(express.static(clientDistPath));
+
+// SPA fallback - serve index.html for all non-API routes
+app.get("*", (req, res) => {
+  if (!req.path.startsWith("/api")) {
+    res.sendFile(path.join(clientDistPath, "index.html"));
+  } else {
+    res.status(404).json({ success: false, error: "API endpoint not found" });
+  }
+});
+
+// -------------------------------------------
+// 5. START SERVER
+// -------------------------------------------
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(
+    `MyMentalHealthBuddy API listening on http://0.0.0.0:${PORT} (env: ${process.env.NODE_ENV || "development"})`
+  );
+});

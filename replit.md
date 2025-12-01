@@ -10,12 +10,18 @@ MyMentalHealthBuddy is a comprehensive mental health support platform featuring 
 - **JSON Syntax Fix**: Fixed `client/package.json` - removed JavaScript comments and trailing commas that were blocking deployment
 - **Schema Consolidation**: Created `shared/schema.mjs` at root level to resolve import path errors across server routes
 - **ThemeProvider Fix**: Updated `components/ThemeProvider.jsx` to re-export from `context/ThemeContext` - fixed "Can't find variable: useTheme" runtime error
-- **Client Rebuild**: Production build now 344 kB (103 kB gzipped) with all fixes applied
-- **Trust Proxy**: Server configured with `app.set("trust proxy", 1)` for proper rate limiting behind Replit proxy
+- **Circular Import Fix**: Removed self-import in `server/routes/canva-oauth.mjs` that caused `routes/routes/` nested path error
+- **Duplicate Route Fix**: Removed duplicate canva-oauth imports and route registrations in `server/index.mjs`
+- **Schema Import Paths**: Fixed `stripeWebhook.mjs` and `db/helpers.mjs` to use correct `../../shared/schema.mjs` path
+- **Response Utils**: Added missing exports (`serverError`, `unauthorized`, `sendError`, `success`, `badRequest`) to `server/utils/response.mjs`
+- **Schema Exports**: Added `webhookEvents` table and `journal` alias to schema for backward compatibility
+- **Static File Serving**: Added Express static file serving for client build + SPA fallback
+- **Client Rebuild**: Production build now 414 kB (120 kB gzipped) with all fixes applied
+- **Trust Proxy**: Server configured with `app.set("trust proxy", true)` for proper rate limiting behind Replit proxy
 
 ### Schema Alignment
 - Unified schema definition at `shared/schema.mjs` matching actual PostgreSQL database structure
-- Tables: users (uuid), moods (11 columns), journals, mood_insights, webhook_events
+- Tables: users, moods (11 columns), journals, analytics, aiMessages, webhookEvents
 - Added `journal` alias export for backward compatibility with existing routes
 
 ## Previous Changes (November 25, 2025)

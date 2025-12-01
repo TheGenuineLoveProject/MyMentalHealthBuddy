@@ -2,7 +2,7 @@
 import express from "express";
 import Stripe from "stripe";
 import { db } from "../db/connection.mjs";
-import { users, webhookEvents } from "../shared/schema.mjs";
+import { users, webhookEvents } from "../../shared/schema.mjs";
 import { eq } from "drizzle-orm";
 
 const router = express.Router();

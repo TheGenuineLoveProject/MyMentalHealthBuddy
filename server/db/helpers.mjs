@@ -1,6 +1,6 @@
 // server/db/helpers.mjs
 import { db } from "./connection.mjs";
-import { users, moods, journals } from "../shared/schema.mjs";
+import { users, moods, journals } from "../../shared/schema.mjs";
 import { eq, desc } from "drizzle-orm";
 
 // ---------- USER HELPERS ----------

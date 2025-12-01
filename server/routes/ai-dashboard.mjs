@@ -1,14 +1,21 @@
-// server/routes/ai-dashboard.mjs
-import { Router } from "express";
+// /server/routes/ai-dashboard.mjs
+// Safe placeholder for AI dashboard so imports never break.
 
-const router = Router();
+import express from "express";
 
-// Simple placeholder dashboard route
-// GET /ai/dashboard
-router.get("/dashboard", (req, res) => {
+const router = express.Router();
+
+// Basic placeholder dashboard summary
+router.get("/", (_req, res) => {
   res.json({
-    status: "ok",
-    message: "AI dashboard endpoint is wired and alive."
+    ok: true,
+    route: "ai-dashboard",
+    summary: {
+      moodScore: null,
+      journalCount: 0,
+      lastEntry: null,
+      note: "AI dashboard placeholder (real DB-backed analytics can be wired later)."
+    }
   });
 });
 
