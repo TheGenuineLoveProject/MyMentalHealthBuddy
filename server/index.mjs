@@ -17,8 +17,8 @@ const __dirname = path.dirname(__filename);
 // -------------------------------------------
 const app = express();
 
-// Replit / proxy safety
-app.set("trust proxy", true);
+// Replit / proxy safety - trust only first proxy hop
+app.set("trust proxy", 1);
 
 app.use(
   cors({
