@@ -1,68 +1,52 @@
-// shared/schema.mjs
-// Central Drizzle schema used by all server routes (JS / .mjs version)
+import { pgTable, varchar, uuid, timestamp, text, integer } from "drizzle-orm/pg-core";
 
-import {
-  pgTable,
-  serial,
-  integer,
-  varchar,
-  text,
-  timestamp,
-  jsonb,
-} from "drizzle-orm/pg-core";
-
-/**
- * USERS TABLE
- * Used by auth.mjs:
- *  - users.email
- *  - users.passwordHash
- *  - users.name
- */
 export const users = pgTable("users", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   email: varchar("email", { length: 255 }).notNull().unique(),
-  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
-  name: varchar("name", { length: 255 }),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
+  password_hash: varchar("password_hash", { length: 255 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
 
-/**
- * MOODS TABLE
- * Used by mood.mjs + analytics.mjs
- */
 export const moods = pgTable("moods", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id")
-    .notNull()
-    .references(() => users.id),
-  score: integer("score").notNull(), // 1–10
-  // NOTE: JS version — no <$type>, just default([]) + notNull()
-  activities: jsonb("activities").notNull().default([]),
-  notes: text("notes"),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
+  id: uuid("id").defaultRandom().primaryKey(),
+  user_id: uuid("user_id").notNull(),
+  rating: integer("rating"),
+  content: text("content"),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  score: integer("score"),
+  note: text("note"),
+  emotion: varchar("emotion", { length: 255 }),
+  energy_level: integer("energy_level"),
+  sleep_quality: integer("sleep_quality"),
+  activities: text("activities"),
+  triggers: text("triggers"),
+  weather: varchar("weather", { length: 255 }),
+  location: varchar("location", { length: 255 }),
 });
 
-/**
- * JOURNALS TABLE
- * Used by journal.mjs + analytics.mjs
- */
 export const journals = pgTable("journals", {
-  id: serial("id").primaryKey(),
-  userId: integer("user_id")
-    .notNull()
-    .references(() => users.id),
-  title: varchar("title", { length: 255 }).notNull(),
-  content: text("content").notNull(),
-  createdAt: timestamp("created_at", { withTimezone: true })
-    .defaultNow()
-    .notNull(),
+  id: uuid("id").defaultRandom().primaryKey(),
+  user_id: uuid("user_id").notNull(),
+  title: varchar("title", { length: 255 }),
+  text: text("text"),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
 });
 
-// Alias so BOTH imports work:
-//   import { journal } from "../../shared/schema.mjs";
-//   import { journals } from "../../shared/schema.mjs";
+export const moodInsights = pgTable("mood_insights", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  user_id: uuid("user_id").notNull(),
+  insight: text("insight").notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const webhookEvents = pgTable("webhook_events", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  event_id: varchar("event_id", { length: 255 }).notNull().unique(),
+  event_type: varchar("event_type", { length: 255 }).notNull(),
+  processed_at: timestamp("processed_at").defaultNow().notNull(),
+});
+
 export const journal = journals;

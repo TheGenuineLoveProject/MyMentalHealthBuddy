@@ -4,7 +4,21 @@
 
 MyMentalHealthBuddy is a comprehensive mental health support platform featuring AI-powered chat therapy, mood tracking, personal journaling, mental health resources, and crisis support. The platform combines therapeutic AI conversations with self-care tools to provide 24/7 mental health support in a compassionate, non-judgmental environment.
 
-## Recent Changes (November 25, 2025)
+## Recent Changes (December 1, 2025)
+
+### Critical Platform Fixes (December 1, 2025)
+- **JSON Syntax Fix**: Fixed `client/package.json` - removed JavaScript comments and trailing commas that were blocking deployment
+- **Schema Consolidation**: Created `shared/schema.mjs` at root level to resolve import path errors across server routes
+- **ThemeProvider Fix**: Updated `components/ThemeProvider.jsx` to re-export from `context/ThemeContext` - fixed "Can't find variable: useTheme" runtime error
+- **Client Rebuild**: Production build now 344 kB (103 kB gzipped) with all fixes applied
+- **Trust Proxy**: Server configured with `app.set("trust proxy", 1)` for proper rate limiting behind Replit proxy
+
+### Schema Alignment
+- Unified schema definition at `shared/schema.mjs` matching actual PostgreSQL database structure
+- Tables: users (uuid), moods (11 columns), journals, mood_insights, webhook_events
+- Added `journal` alias export for backward compatibility with existing routes
+
+## Previous Changes (November 25, 2025)
 
 ### Critical Bug Fixes (November 25, 2025)
 - **JWT Token Fix**: Resolved authentication mismatch where JWT was signed with `id` but middleware validated `userId` - now properly validates `id` and provides backward-compatible `userId` alias

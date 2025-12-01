@@ -1,12 +1,18 @@
-import rateLimitLib from 'express-rate-limit';
+// server/middleware/rateLimit.mjs
+// Unified rate limiter for the whole API
+// Uses express-rate-limit v7 (ESM compatible)
 
-// Create a single reusable rate limiter
-export const rateLimit = rateLimitLib({
-  windowMs: 15 * 60 * 1000, 
-  max: 100,
+// 1) Import the library
+import rateLimitLib from "express-rate-limit";
+
+// 2) Create a single limiter instance
+const apiRateLimit = rateLimitLib({
+  windowMs: 60 * 1000, // 1 minute
+  max: 120,            // 120 requests / minute / IP
   standardHeaders: true,
   legacyHeaders: false,
 });
 
-// Default export (required by your server/index.mjs)
-export default rateLimit;
+// 3) Export as BOTH default + named so ALL imports work
+export default apiRateLimit;
+export { apiRateLimit };

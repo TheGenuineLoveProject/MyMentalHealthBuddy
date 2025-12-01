@@ -6,20 +6,15 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": "/src",
-      "@components": "/src/components",
-      "@ui": "/src/components/ui",
-      "@layout": "/src/components/layout",
-      "@lib": "/src/lib",
-    },
+    }
   },
   server: {
-    host: true,
-    strictPort: false,
-    port: 5173,
-    allowedHosts: true,
+    port: 3000,
+    strictPort: true,
   },
   build: {
     outDir: "dist",
+    sourcemap: false,
     emptyOutDir: true,
-  },
+  }
 });
