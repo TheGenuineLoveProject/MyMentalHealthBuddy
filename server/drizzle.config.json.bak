@@ -1,0 +1,35 @@
+// server/drizzle.config.ts
+// ✅ Drizzle + Neon PostgreSQL config (TS version, with dialect)
+
+import { defineConfig } from "drizzle-kit";
+import dotenv from "dotenv";
+
+// Load env vars from project root (.env next to package.json)
+dotenv.config({ path: "../.env" });
+
+const databaseUrl =
+  process.env.DATABASE_URL ?? process.env.DRIZZLE_DB_URL ?? "";
+
+if (!databaseUrl) {
+  throw new Error(
+    "DATABASE_URL (or DRIZZLE_DB_URL) is not set in ../.env – required for drizzle-kit push."
+  );
+}
+
+export default defineConfig({
+  // 🔑 This is what Zod was yelling about:
+  dialect: "postgresql",
+
+  // Your unified schema (the mjs you just showed in the screenshot)
+  schema: "./db/schema.mjs",
+
+  // Where Drizzle will put migrations / SQL
+  out: "./drizzle",
+
+  dbCredentials: {
+    url: databaseUrl,
+  },
+
+  strict: false,
+  verbose: true,
+});

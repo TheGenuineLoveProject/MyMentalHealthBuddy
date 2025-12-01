@@ -1,16 +1,15 @@
-import { defineConfig } from "drizzle-kit";
+// drizzle.config.ts - root (project-level) config
 
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL environment variable is required");
-}
+import type { Config } from "drizzle-kit";
 
-export default defineConfig({
-  schema: "./server/shared/schema.mjs",
-  out: "./drizzle",
-  dialect: "postgresql",
+const config: Config = {
+  schema: "./server/db/schema.mjs",   // unified schema file
+  out: "./drizzle/migrations",       // migrations folder
+  driver: "pg",                      // using pg (node-postgres)
+  dialect: "postgresql",             // <-- fixes "dialect" error
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    connectionString: process.env.DATABASE_URL ?? "",
   },
-  verbose: true,
-  strict: true,
-});
+};
+
+export default config;
