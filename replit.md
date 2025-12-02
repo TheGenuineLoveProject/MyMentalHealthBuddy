@@ -54,3 +54,29 @@ The client is built using Vite for optimized production bundles with code splitt
 
 ### Monitoring & Error Tracking
 - **Sentry**: Comprehensive error tracking and performance monitoring for both client and server.
+
+## Recent Changes (December 2, 2025)
+
+### Crisis Resources Page
+- Added comprehensive crisis resources page with 24/7 emergency hotlines (988 Suicide & Crisis Lifeline, Crisis Text Line, NAMI)
+- Includes self-care tips and accessible navigation
+- Linked from Dashboard and AI Chat pages for easy access
+
+### AI Chat Improvements
+- Chat history now persists to database (ai_messages table)
+- Improved error handling with compassionate fallback messages when AI is unavailable
+- Users can clear chat history from the UI
+
+### API Validation & Security
+- Centralized Zod validation schemas in server/validation/schemas.mjs
+- All routes now validate request bodies before processing
+- Added PUT endpoints for mood and journal updates
+
+### Performance Optimizations
+- Code-splitting with React.lazy() reduces initial bundle size from 537KB to 426KB (20% reduction)
+- Protected pages load on-demand for faster initial page load
+
+### Production Readiness
+- Graceful shutdown handler for Replit Autoscale deployments
+- Global error handler for uncaught exceptions
+- Health check endpoint at /api/health
