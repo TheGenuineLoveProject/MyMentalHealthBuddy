@@ -1,4 +1,6 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Switch, Route, Redirect } from "wouter";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient.js";
 import ThemeProvider from "./components/ui/theme-provider.jsx";
 import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
 
@@ -19,51 +21,60 @@ function ProtectedRoute({ children }) {
   
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-white">
-        Loading...
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-950">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white">Loading...</p>
+        </div>
       </div>
     );
   }
   
   if (!isAuthenticated()) {
-    return <Navigate to="/login" replace />;
+    return <Redirect to="/login" />;
   }
   
   return children;
 }
 
+function AppRoutes() {
+  return (
+    <Switch>
+      <Route path="/" component={Home} />
+      <Route path="/dashboard">
+        <ProtectedRoute><Dashboard /></ProtectedRoute>
+      </Route>
+      <Route path="/mood">
+        <ProtectedRoute><MoodPage /></ProtectedRoute>
+      </Route>
+      <Route path="/journal">
+        <ProtectedRoute><JournalPage /></ProtectedRoute>
+      </Route>
+      <Route path="/chat">
+        <ProtectedRoute><AIChatPage /></ProtectedRoute>
+      </Route>
+      <Route path="/analytics">
+        <ProtectedRoute><Analytics /></ProtectedRoute>
+      </Route>
+      <Route path="/health" component={HealthPage} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/settings">
+        <ProtectedRoute><Settings /></ProtectedRoute>
+      </Route>
+      <Route component={Error404} />
+    </Switch>
+  );
+}
+
 export default function App() {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/dashboard" element={
-              <ProtectedRoute><Dashboard /></ProtectedRoute>
-            } />
-            <Route path="/mood" element={
-              <ProtectedRoute><MoodPage /></ProtectedRoute>
-            } />
-            <Route path="/journal" element={
-              <ProtectedRoute><JournalPage /></ProtectedRoute>
-            } />
-            <Route path="/chat" element={
-              <ProtectedRoute><AIChatPage /></ProtectedRoute>
-            } />
-            <Route path="/analytics" element={
-              <ProtectedRoute><Analytics /></ProtectedRoute>
-            } />
-            <Route path="/health" element={<HealthPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/settings" element={
-              <ProtectedRoute><Settings /></ProtectedRoute>
-            } />
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ThemeProvider>
+          <AppRoutes />
+        </ThemeProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }

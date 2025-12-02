@@ -1,44 +1,36 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "../context/AuthContext.jsx";
+import { apiRequest } from "../lib/queryClient.js";
 
 export default function Login() {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const loginMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/auth/login", data),
+    onSuccess: (result) => {
+      if (result.token) {
+        login(result.token, result.user);
+        setLocation("/dashboard");
+      } else {
+        setError(result.message || "Login failed");
+      }
+    },
+    onError: (err) => {
+      console.error("Login error:", err);
+      setError(err.message?.includes("401") ? "Invalid email or password" : "Something went wrong");
+    },
+  });
 
   async function handleLogin(e) {
     e.preventDefault();
-    setIsLoading(true);
     setError("");
-
-    try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password })
-      });
-
-      const result = await res.json();
-
-      if (!res.ok || !result.success) {
-        setError(result.message || result.error || "Login failed");
-        setIsLoading(false);
-        return;
-      }
-
-      login(result.token, result.user);
-      navigate("/dashboard");
-
-    } catch (err) {
-      console.error("Login error:", err);
-      setError("Something went wrong");
-    }
-
-    setIsLoading(false);
+    loginMutation.mutate({ email, password });
   }
 
   return (
@@ -87,16 +79,16 @@ export default function Login() {
 
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={loginMutation.isPending}
           className="w-full p-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
           data-testid="button-submit"
         >
-          {isLoading ? "Signing in..." : "Sign In"}
+          {loginMutation.isPending ? "Signing in..." : "Sign In"}
         </button>
 
         <p className="mt-6 text-center text-neutral-400">
           Don't have an account?{" "}
-          <Link to="/register" className="text-blue-400 hover:text-blue-300 transition" data-testid="link-register">
+          <Link href="/register" className="text-blue-400 hover:text-blue-300 transition" data-testid="link-register">
             Create one
           </Link>
         </p>

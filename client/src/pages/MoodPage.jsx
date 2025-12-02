@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Smile, Frown, Meh, Sun, Moon, Cloud, Zap } from "lucide-react";
-import { apiPost } from "../utils/api.js";
+import { Link, useLocation } from "wouter";
+import { useMutation } from "@tanstack/react-query";
+import { ArrowLeft, Smile, Frown, Meh, Sun, Moon, Zap } from "lucide-react";
+import { apiRequest, queryClient } from "../lib/queryClient.js";
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "text-green-400" },
@@ -17,14 +18,26 @@ const ACTIVITIES = [
 ];
 
 export default function MoodPage() {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const [rating, setRating] = useState(5);
   const [emotion, setEmotion] = useState("");
   const [activities, setActivities] = useState([]);
   const [content, setContent] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+
+  const saveMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/analytics"] });
+      setSuccess(true);
+      setTimeout(() => setLocation("/dashboard"), 1500);
+    },
+    onError: (err) => {
+      setError(err.message || "Failed to save mood");
+    },
+  });
 
   function toggleActivity(activity) {
     setActivities((prev) =>
@@ -36,30 +49,14 @@ export default function MoodPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setIsLoading(true);
     setError("");
-
-    try {
-      const result = await apiPost("/api/mood", {
-        rating,
-        emotion,
-        activities,
-        content,
-        score: rating,
-      });
-
-      if (result.ok) {
-        setSuccess(true);
-        setTimeout(() => navigate("/dashboard"), 1500);
-      } else {
-        setError(result.message || "Failed to save mood");
-      }
-    } catch (err) {
-      console.error("Mood save error:", err);
-      setError(err.message || "Failed to save mood");
-    } finally {
-      setIsLoading(false);
-    }
+    saveMutation.mutate({
+      rating,
+      emotion,
+      activities,
+      content,
+      score: rating,
+    });
   }
 
   if (success) {
@@ -78,7 +75,7 @@ export default function MoodPage() {
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-lg mx-auto">
         <div className="flex items-center gap-4 mb-8">
-          <Link to="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
+          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <h1 className="text-3xl font-bold" data-testid="text-title">Track Your Mood</h1>
@@ -170,11 +167,11 @@ export default function MoodPage() {
 
           <button
             type="submit"
-            disabled={isLoading}
+            disabled={saveMutation.isPending}
             className="w-full p-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
             data-testid="button-submit"
           >
-            {isLoading ? "Saving..." : "Save Mood Entry"}
+            {saveMutation.isPending ? "Saving..." : "Save Mood Entry"}
           </button>
         </form>
       </div>

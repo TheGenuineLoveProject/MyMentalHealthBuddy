@@ -1,33 +1,14 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { BarChart3, Heart, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { apiGet } from "../utils/api.js";
+import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const [summary, setSummary] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
 
-  useEffect(() => {
-    async function loadDashboard() {
-      try {
-        const result = await apiGet("/api/dashboard");
-        if (result.ok) {
-          setSummary(result.data);
-        } else {
-          setError(result.message || "Failed to load dashboard");
-        }
-      } catch (err) {
-        console.error("Dashboard load failed:", err);
-        setError(err.message || "Failed to load dashboard");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    loadDashboard();
-  }, []);
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ["/api/dashboard"],
+  });
 
   function getGreeting() {
     const hour = new Date().getHours();
@@ -63,9 +44,9 @@ export default function Dashboard() {
     return (
       <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 flex items-center justify-center">
         <div className="text-center text-white">
-          <p className="text-red-400 mb-4">{error}</p>
+          <p className="text-red-400 mb-4">{error.message || "Failed to load dashboard"}</p>
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => refetch()}
             className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
             data-testid="button-retry"
           >
@@ -76,8 +57,8 @@ export default function Dashboard() {
     );
   }
 
-  const moodData = summary?.moodSummary || {};
-  const journalData = summary?.journalSummary || {};
+  const moodData = data?.moodSummary || {};
+  const journalData = data?.journalSummary || {};
 
   return (
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
@@ -119,28 +100,28 @@ export default function Dashboard() {
 
         <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link to="/mood" className="group" data-testid="link-mood">
+          <Link href="/mood" className="group" data-testid="link-mood">
             <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-blue-500/50">
               <Smile className="w-8 h-8 mx-auto mb-2 text-blue-400" />
               <span className="text-sm">Track Mood</span>
             </div>
           </Link>
 
-          <Link to="/journal" className="group" data-testid="link-journal">
+          <Link href="/journal" className="group" data-testid="link-journal">
             <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-purple-500/50">
               <Notebook className="w-8 h-8 mx-auto mb-2 text-purple-400" />
               <span className="text-sm">Write Journal</span>
             </div>
           </Link>
 
-          <Link to="/chat" className="group" data-testid="link-chat">
+          <Link href="/chat" className="group" data-testid="link-chat">
             <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-green-500/50">
               <MessageCircle className="w-8 h-8 mx-auto mb-2 text-green-400" />
               <span className="text-sm">AI Chat</span>
             </div>
           </Link>
 
-          <Link to="/analytics" className="group" data-testid="link-analytics">
+          <Link href="/analytics" className="group" data-testid="link-analytics">
             <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-amber-500/50">
               <BarChart3 className="w-8 h-8 mx-auto mb-2 text-amber-400" />
               <span className="text-sm">Analytics</span>

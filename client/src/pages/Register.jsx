@@ -1,58 +1,53 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useLocation, Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "../context/AuthContext.jsx";
+import { apiRequest } from "../lib/queryClient.js";
 
 export default function Register() {
-  const navigate = useNavigate();
+  const [, setLocation] = useLocation();
   const { login } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  const registerMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/auth/register", data),
+    onSuccess: (result) => {
+      if (result.token) {
+        login(result.token, result.user);
+        setLocation("/dashboard");
+      } else {
+        setError(result.message || "Registration failed");
+      }
+    },
+    onError: (err) => {
+      console.error("Register error:", err);
+      if (err.message?.includes("409")) {
+        setError("An account with this email already exists");
+      } else {
+        setError("Something went wrong");
+      }
+    },
+  });
 
   async function handleRegister(e) {
     e.preventDefault();
-    setIsLoading(true);
     setError("");
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
-      setIsLoading(false);
       return;
     }
 
     if (password.length < 6) {
       setError("Password must be at least 6 characters");
-      setIsLoading(false);
       return;
     }
 
-    try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password })
-      });
-
-      const result = await res.json();
-
-      if (!res.ok || !result.success) {
-        setError(result.message || result.error || "Registration failed");
-        setIsLoading(false);
-        return;
-      }
-
-      login(result.token, result.user);
-      navigate("/dashboard");
-
-    } catch (err) {
-      console.error("Register error:", err);
-      setError("Something went wrong");
-    }
-
-    setIsLoading(false);
+    registerMutation.mutate({ name, email, password });
   }
 
   return (
@@ -126,16 +121,16 @@ export default function Register() {
 
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={registerMutation.isPending}
           className="w-full p-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
           data-testid="button-submit"
         >
-          {isLoading ? "Creating account..." : "Create Account"}
+          {registerMutation.isPending ? "Creating account..." : "Create Account"}
         </button>
 
         <p className="mt-6 text-center text-neutral-400">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-400 hover:text-blue-300 transition" data-testid="link-login">
+          <Link href="/login" className="text-blue-400 hover:text-blue-300 transition" data-testid="link-login">
             Sign in
           </Link>
         </p>

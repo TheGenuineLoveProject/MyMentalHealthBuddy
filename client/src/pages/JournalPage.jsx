@@ -1,82 +1,60 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "wouter";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
-import { apiGet, apiPost, apiDelete } from "../utils/api.js";
+import { apiRequest, queryClient } from "../lib/queryClient.js";
 
 export default function JournalPage() {
-  const navigate = useNavigate();
-  const [entries, setEntries] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSaving, setIsSaving] = useState(false);
-  const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [expandedId, setExpandedId] = useState(null);
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    loadEntries();
-  }, []);
+  const { data: entries = [], isLoading } = useQuery({
+    queryKey: ["/api/journal"],
+    select: (data) => data.journals || data || [],
+  });
 
-  async function loadEntries() {
-    try {
-      const result = await apiGet("/api/journal");
-      if (result.ok) {
-        setEntries(result.data || []);
-      } else {
-        setError(result.message || "Failed to load entries");
-      }
-    } catch (err) {
-      console.error("Journal load error:", err);
-      setError(err.message || "Failed to load entries");
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  const createMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+      setTitle("");
+      setContent("");
+      setShowForm(false);
+      setError("");
+    },
+    onError: (err) => {
+      setError(err.message || "Failed to save entry");
+    },
+  });
 
-  async function handleSubmit(e) {
+  const deleteMutation = useMutation({
+    mutationFn: (id) => apiRequest("DELETE", `/api/journal/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+    },
+    onError: (err) => {
+      setError(err.message || "Failed to delete entry");
+    },
+  });
+
+  function handleSubmit(e) {
     e.preventDefault();
     if (!title.trim() || !content.trim()) {
       setError("Title and content are required");
       return;
     }
-
-    setIsSaving(true);
     setError("");
-
-    try {
-      const result = await apiPost("/api/journal", { title, content });
-      if (result.ok) {
-        setTitle("");
-        setContent("");
-        setShowForm(false);
-        loadEntries();
-      } else {
-        setError(result.message || "Failed to save entry");
-      }
-    } catch (err) {
-      console.error("Journal save error:", err);
-      setError(err.message || "Failed to save entry");
-    } finally {
-      setIsSaving(false);
-    }
+    createMutation.mutate({ title, content });
   }
 
-  async function handleDelete(id) {
+  function handleDelete(id) {
     if (!confirm("Delete this journal entry?")) return;
-
-    try {
-      const result = await apiDelete(`/api/journal/${id}`);
-      if (result.ok) {
-        setEntries((prev) => prev.filter((e) => e.id !== id));
-      } else {
-        setError(result.message || "Failed to delete entry");
-      }
-    } catch (err) {
-      console.error("Journal delete error:", err);
-      setError(err.message || "Failed to delete entry");
-    }
+    deleteMutation.mutate(id);
   }
 
   if (isLoading) {
@@ -97,7 +75,7 @@ export default function JournalPage() {
       <div className="max-w-2xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
-            <Link to="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
+            <Link href="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
               <ArrowLeft className="w-6 h-6" />
             </Link>
             <h1 className="text-3xl font-bold" data-testid="text-title">Journal</h1>
@@ -146,11 +124,11 @@ export default function JournalPage() {
             <div className="flex gap-3">
               <button
                 type="submit"
-                disabled={isSaving}
+                disabled={createMutation.isPending}
                 className="flex-1 p-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50"
                 data-testid="button-save"
               >
-                {isSaving ? "Saving..." : "Save Entry"}
+                {createMutation.isPending ? "Saving..." : "Save Entry"}
               </button>
               <button
                 type="button"
@@ -199,7 +177,8 @@ export default function JournalPage() {
                         e.stopPropagation();
                         handleDelete(entry.id);
                       }}
-                      className="p-2 text-neutral-400 hover:text-red-400 transition"
+                      disabled={deleteMutation.isPending}
+                      className="p-2 text-neutral-400 hover:text-red-400 transition disabled:opacity-50"
                       data-testid={`button-delete-${entry.id}`}
                     >
                       <Trash2 className="w-5 h-5" />

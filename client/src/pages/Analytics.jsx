@@ -1,32 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { BarChart3, TrendingUp, TrendingDown, Calendar, Award, ArrowLeft, Minus } from "lucide-react";
-import { apiGet } from "../utils/api.js";
 
 export default function Analytics() {
-  const [stats, setStats] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    async function loadAnalytics() {
-      try {
-        const result = await apiGet("/api/analytics");
-        if (result.ok) {
-          setStats(result.data);
-        } else {
-          setError(result.message || "Failed to load analytics");
-        }
-      } catch (err) {
-        console.error("Analytics load failed:", err);
-        setError(err.message || "Failed to load analytics");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    loadAnalytics();
-  }, []);
+  const { data: stats, isLoading, error, refetch } = useQuery({
+    queryKey: ["/api/analytics"],
+  });
 
   function getTrendIcon(avg) {
     if (avg >= 7) return <TrendingUp className="w-6 h-6 text-green-400" />;
@@ -55,9 +34,9 @@ export default function Analytics() {
     return (
       <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 flex items-center justify-center">
         <div className="text-center text-white">
-          <p className="text-red-400 mb-4">{error}</p>
+          <p className="text-red-400 mb-4">{error.message || "Failed to load analytics"}</p>
           <button
-            onClick={() => window.location.reload()}
+            onClick={() => refetch()}
             className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
             data-testid="button-retry"
           >
@@ -72,7 +51,7 @@ export default function Analytics() {
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
-          <Link to="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
+          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
             <ArrowLeft className="w-6 h-6" />
           </Link>
           <h1 className="text-3xl font-bold" data-testid="text-title">Analytics</h1>
@@ -145,7 +124,7 @@ export default function Analytics() {
 
         <div className="mt-8 text-center">
           <Link
-            to="/dashboard"
+            href="/dashboard"
             className="inline-block px-6 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
             data-testid="link-dashboard"
           >

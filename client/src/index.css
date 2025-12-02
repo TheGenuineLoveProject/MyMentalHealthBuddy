@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* -----------------------------------------------------------
    MyMentalHealthBuddy — Global Styles (Light/Dark)
    Replit-safe • Vite-safe • No external plugins

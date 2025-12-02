@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Send, Bot, User, Loader2 } from "lucide-react";
-import { apiPost } from "../utils/api.js";
+import { apiRequest } from "../lib/queryClient.js";
 
 export default function AIChatPage() {
   const [input, setInput] = useState("");
@@ -11,7 +12,6 @@ export default function AIChatPage() {
       content: "Hello! I'm your mental wellness companion. I'm here to listen and support you. How are you feeling today?",
     },
   ]);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const messagesEndRef = useRef(null);
 
@@ -19,41 +19,40 @@ export default function AIChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  async function sendMessage(e) {
-    e?.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    const userMessage = input.trim();
-    setInput("");
-    setError("");
-    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
-    setIsLoading(true);
-
-    try {
-      const result = await apiPost("/api/ai/chat", { message: userMessage });
-
-      if (result.ok && result.data?.reply) {
+  const chatMutation = useMutation({
+    mutationFn: (message) => apiRequest("POST", "/api/ai/chat", { message }),
+    onSuccess: (data) => {
+      if (data?.reply) {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: result.data.reply },
+          { role: "assistant", content: data.reply },
         ]);
       } else {
-        setError(result.message || "Failed to get response");
         setMessages((prev) => [
           ...prev,
           { role: "assistant", content: "I'm having trouble responding right now. Please try again in a moment." },
         ]);
       }
-    } catch (err) {
+    },
+    onError: (err) => {
       console.error("Chat error:", err);
       setError(err.message || "Failed to send message");
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: "I'm sorry, I couldn't process your message. Please try again." },
       ]);
-    } finally {
-      setIsLoading(false);
-    }
+    },
+  });
+
+  function sendMessage(e) {
+    e?.preventDefault();
+    if (!input.trim() || chatMutation.isPending) return;
+
+    const userMessage = input.trim();
+    setInput("");
+    setError("");
+    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
+    chatMutation.mutate(userMessage);
   }
 
   function handleKeyDown(e) {
@@ -66,7 +65,7 @@ export default function AIChatPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="flex items-center gap-4 p-4 border-b border-neutral-800">
-        <Link to="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
+        <Link href="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
           <ArrowLeft className="w-6 h-6" />
         </Link>
         <div className="flex items-center gap-3">
@@ -109,7 +108,7 @@ export default function AIChatPage() {
           </div>
         ))}
 
-        {isLoading && (
+        {chatMutation.isPending && (
           <div className="flex gap-3 justify-start">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center flex-shrink-0">
               <Bot className="w-5 h-5" />
@@ -140,13 +139,13 @@ export default function AIChatPage() {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Type your message..."
-            disabled={isLoading}
+            disabled={chatMutation.isPending}
             className="flex-1 p-4 rounded-xl bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition disabled:opacity-50"
             data-testid="input-message"
           />
           <button
             type="submit"
-            disabled={isLoading || !input.trim()}
+            disabled={chatMutation.isPending || !input.trim()}
             className="px-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
             data-testid="button-send"
           >

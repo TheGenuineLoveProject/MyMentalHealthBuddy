@@ -4,7 +4,17 @@
 
 MyMentalHealthBuddy is a comprehensive mental health support platform featuring AI-powered chat therapy, mood tracking, personal journaling, mental health resources, and crisis support. The platform combines therapeutic AI conversations with self-care tools to provide 24/7 mental health support in a compassionate, non-judgmental environment.
 
-## Recent Changes (December 1, 2025)
+## Recent Changes (December 2, 2025)
+
+### React Query & Wouter Migration (December 2, 2025)
+- **Wouter Migration**: Replaced react-router-dom with wouter across all pages for lightweight routing
+- **React Query Integration**: Added @tanstack/react-query for consistent data fetching with caching
+- **SSR-Safe QueryClient**: Fixed localStorage access to check for window/localStorage before accessing
+- **Auth Mutations**: Login and Register pages now use useMutation for consistent API handling
+- **PostCSS Configuration**: Added postcss.config.js for proper Tailwind CSS processing
+- **CSS Bundle Optimization**: Tailwind CSS bundle now properly includes all utility classes (24.87 kB)
+
+## Previous Changes (December 1, 2025)
 
 ### Critical Platform Fixes (December 1, 2025)
 - **JSON Syntax Fix**: Fixed `client/package.json` - removed JavaScript comments and trailing commas that were blocking deployment
