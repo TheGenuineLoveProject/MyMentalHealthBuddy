@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings } from "lucide-react";
+import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 
@@ -140,6 +140,19 @@ export default function Dashboard() {
             </Link>
           </div>
         </nav>
+
+        <div className="mt-6 p-4 bg-red-900/20 border border-red-800/50 rounded-xl">
+          <Link href="/crisis" className="flex items-center justify-between group focus:outline-none" data-testid="link-crisis-resources">
+            <div className="flex items-center gap-3">
+              <Heart className="w-6 h-6 text-red-400" aria-hidden="true" />
+              <div>
+                <h3 className="font-medium text-red-200">Crisis Resources</h3>
+                <p className="text-sm text-red-300/70">24/7 support hotlines and help</p>
+              </div>
+            </div>
+            <span className="text-red-400 group-hover:text-red-300 transition">View &rarr;</span>
+          </Link>
+        </div>
 
         {moodData.recentMoods && moodData.recentMoods.length > 0 && (
           <section className="mt-8" aria-label="Recent mood history">

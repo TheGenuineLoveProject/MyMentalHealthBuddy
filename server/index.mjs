@@ -131,12 +131,43 @@ app.get("*", (req, res) => {
 });
 
 // -------------------------------------------
-// 5. START SERVER
+// 5. GLOBAL ERROR HANDLER
+// -------------------------------------------
+app.use((err, req, res, next) => {
+  console.error("[Global Error Handler]", err);
+  res.status(500).json({
+    ok: false,
+    message: isProduction 
+      ? "An unexpected error occurred. Please try again later."
+      : err.message || "Internal Server Error",
+  });
+});
+
+// -------------------------------------------
+// 6. START SERVER WITH GRACEFUL SHUTDOWN
 // -------------------------------------------
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(
     `MyMentalHealthBuddy API listening on http://0.0.0.0:${PORT} (env: ${process.env.NODE_ENV || "development"})`
   );
 });
+
+// Graceful shutdown handler for production deployments
+function gracefulShutdown(signal) {
+  console.log(`${signal} received. Shutting down gracefully...`);
+  server.close(() => {
+    console.log("HTTP server closed.");
+    process.exit(0);
+  });
+
+  // Force close after 10 seconds
+  setTimeout(() => {
+    console.error("Could not close connections in time, forcing shutdown.");
+    process.exit(1);
+  }, 10000);
+}
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));

@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "wouter";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient.js";
@@ -6,30 +7,39 @@ import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
 import { SkipLink } from "./components/SkipLink.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 
+// Eagerly loaded critical pages
 import Home from "./pages/Home.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import MoodPage from "./pages/MoodPage.jsx";
-import JournalPage from "./pages/JournalPage.jsx";
-import AIChatPage from "./pages/AIChatPage.jsx";
-import Analytics from "./pages/Analytics.jsx";
-import HealthPage from "./pages/HealthPage.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
-import Settings from "./pages/Settings.jsx";
 import Error404 from "./pages/Error404.jsx";
+
+// Lazy-loaded pages for code splitting
+const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
+const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
+const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
+const AIChatPage = lazy(() => import("./pages/AIChatPage.jsx"));
+const Analytics = lazy(() => import("./pages/Analytics.jsx"));
+const HealthPage = lazy(() => import("./pages/HealthPage.jsx"));
+const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
+const Settings = lazy(() => import("./pages/Settings.jsx"));
+
+// Loading fallback component
+function PageLoader() {
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-950">
+      <div className="text-center">
+        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" aria-hidden="true"></div>
+        <p className="text-white">Loading...</p>
+      </div>
+    </div>
+  );
+}
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated, isLoading } = useAuth();
   
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-950">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white">Loading...</p>
-        </div>
-      </div>
-    );
+    return <PageLoader />;
   }
   
   if (!isAuthenticated()) {
@@ -41,31 +51,38 @@ function ProtectedRoute({ children }) {
 
 function AppRoutes() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/dashboard">
-        <ProtectedRoute><Dashboard /></ProtectedRoute>
-      </Route>
-      <Route path="/mood">
-        <ProtectedRoute><MoodPage /></ProtectedRoute>
-      </Route>
-      <Route path="/journal">
-        <ProtectedRoute><JournalPage /></ProtectedRoute>
-      </Route>
-      <Route path="/chat">
-        <ProtectedRoute><AIChatPage /></ProtectedRoute>
-      </Route>
-      <Route path="/analytics">
-        <ProtectedRoute><Analytics /></ProtectedRoute>
-      </Route>
-      <Route path="/health" component={HealthPage} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/settings">
-        <ProtectedRoute><Settings /></ProtectedRoute>
-      </Route>
-      <Route component={Error404} />
-    </Switch>
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/dashboard">
+          <ProtectedRoute><Dashboard /></ProtectedRoute>
+        </Route>
+        <Route path="/mood">
+          <ProtectedRoute><MoodPage /></ProtectedRoute>
+        </Route>
+        <Route path="/journal">
+          <ProtectedRoute><JournalPage /></ProtectedRoute>
+        </Route>
+        <Route path="/chat">
+          <ProtectedRoute><AIChatPage /></ProtectedRoute>
+        </Route>
+        <Route path="/analytics">
+          <ProtectedRoute><Analytics /></ProtectedRoute>
+        </Route>
+        <Route path="/crisis">
+          <ProtectedRoute><CrisisResources /></ProtectedRoute>
+        </Route>
+        <Route path="/health">
+          <Suspense fallback={<PageLoader />}><HealthPage /></Suspense>
+        </Route>
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/settings">
+          <ProtectedRoute><Settings /></ProtectedRoute>
+        </Route>
+        <Route component={Error404} />
+      </Switch>
+    </Suspense>
   );
 }
 

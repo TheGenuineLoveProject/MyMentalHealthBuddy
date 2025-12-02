@@ -7,6 +7,7 @@ import { journals } from "../../shared/schema.mjs";
 import { eq, sql } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
+import { createJournalSchema, updateJournalSchema, validateBody } from "../validation/schemas.mjs";
 
 const router = express.Router();
 
@@ -18,17 +19,10 @@ router.use(requireAuth);
  * Body: { title, content }
  * User ID comes from JWT token
  */
-router.post("/", async (req, res) => {
+router.post("/", validateBody(createJournalSchema), async (req, res) => {
   try {
     const userId = req.user?.id;
-    const { title, content } = req.body ?? {};
-
-    if (!title || !content) {
-      return badRequest(res, "Title and content are required.", [
-        { field: "title", message: !title ? "Missing title" : "" },
-        { field: "content", message: !content ? "Missing content" : "" },
-      ]);
-    }
+    const { title, content } = req.validatedBody;
 
     const inserted = await db
       .insert(journals)
@@ -109,6 +103,45 @@ router.get("/:id", async (req, res) => {
     return res.status(500).json({
       ok: false,
       message: "Unexpected error while fetching journal entry.",
+    });
+  }
+});
+
+/**
+ * PUT /api/journal/:id
+ * Update entry by ID
+ */
+router.put("/:id", validateBody(updateJournalSchema), async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const { id } = req.params;
+    const updates = req.validatedBody;
+
+    // Check ownership first
+    const existing = await db
+      .select()
+      .from(journals)
+      .where(eq(journals.id, id));
+
+    if (existing.length === 0 || existing[0].userId !== userId) {
+      return badRequest(res, "Journal entry not found or access denied.");
+    }
+
+    const [updated] = await db
+      .update(journals)
+      .set({
+        ...updates,
+        updatedAt: new Date(),
+      })
+      .where(eq(journals.id, id))
+      .returning();
+
+    return success(res, updated, "Journal entry updated.");
+  } catch (err) {
+    console.error("[journal/update] Unexpected error:", err);
+    return res.status(500).json({
+      ok: false,
+      message: "Unexpected error while updating journal entry.",
     });
   }
 });

@@ -1,23 +1,44 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
-import { useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Send, Bot, User, Loader2 } from "lucide-react";
-import { apiRequest } from "../lib/queryClient.js";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle } from "lucide-react";
+import { apiRequest, queryClient } from "../lib/queryClient.js";
+
+const INITIAL_MESSAGE = {
+  role: "assistant",
+  content: "Hello! I'm your mental wellness companion. I'm here to listen and support you. How are you feeling today?",
+};
 
 export default function AIChatPage() {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([
-    {
-      role: "assistant",
-      content: "Hello! I'm your mental wellness companion. I'm here to listen and support you. How are you feeling today?",
-    },
-  ]);
+  const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [error, setError] = useState("");
   const messagesEndRef = useRef(null);
+
+  // Load chat history
+  const { data: historyData, isLoading: historyLoading } = useQuery({
+    queryKey: ["/api/ai/history"],
+  });
+
+  // Set messages from history when loaded
+  useEffect(() => {
+    if (historyData?.messages && historyData.messages.length > 0) {
+      setMessages(historyData.messages);
+    }
+  }, [historyData]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  // Clear history mutation
+  const clearHistoryMutation = useMutation({
+    mutationFn: () => apiRequest("DELETE", "/api/ai/history"),
+    onSuccess: () => {
+      setMessages([INITIAL_MESSAGE]);
+      queryClient.invalidateQueries({ queryKey: ["/api/ai/history"] });
+    },
+  });
 
   const chatMutation = useMutation({
     mutationFn: (message) => apiRequest("POST", "/api/ai/chat", { message }),
@@ -68,7 +89,7 @@ export default function AIChatPage() {
         <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
           <ArrowLeft className="w-6 h-6" aria-hidden="true" />
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-1">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center" aria-hidden="true">
             <Bot className="w-6 h-6" />
           </div>
@@ -76,6 +97,26 @@ export default function AIChatPage() {
             <h1 className="font-semibold" data-testid="text-title">Wellness Companion</h1>
             <p className="text-sm text-neutral-400">Always here to listen</p>
           </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/crisis"
+            className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-900/50 hover:bg-red-900 border border-red-700 text-red-200 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-red-400"
+            data-testid="link-crisis"
+          >
+            <AlertTriangle className="w-4 h-4" aria-hidden="true" />
+            <span className="hidden sm:inline">Crisis Help</span>
+          </Link>
+          <button
+            onClick={() => clearHistoryMutation.mutate()}
+            disabled={clearHistoryMutation.isPending || messages.length <= 1}
+            className="p-2 text-neutral-400 hover:text-white transition disabled:opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            data-testid="button-clear-history"
+            aria-label="Clear chat history"
+            title="Clear chat history"
+          >
+            <Trash2 className="w-5 h-5" aria-hidden="true" />
+          </button>
         </div>
       </header>
 

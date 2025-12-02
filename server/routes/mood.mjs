@@ -7,6 +7,7 @@ import { moods } from "../../shared/schema.mjs";
 import { eq, sql } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
+import { createMoodSchema, updateMoodSchema, validateBody } from "../validation/schemas.mjs";
 
 const router = express.Router();
 
@@ -23,7 +24,7 @@ router.use(requireAuth);
  * Body: { rating, emotion?, content?, score?, energyLevel?, sleepQuality?, activities?, triggers?, weather?, location? }
  * User ID comes from JWT token
  */
-router.post("/", async (req, res) => {
+router.post("/", validateBody(createMoodSchema), async (req, res) => {
   try {
     const userId = req.user?.id;
     const {
@@ -37,14 +38,7 @@ router.post("/", async (req, res) => {
       triggers,
       weather,
       location,
-    } = req.body || {};
-
-    // Rating is required (1-10 scale)
-    if (typeof rating !== "number" || rating < 1 || rating > 10) {
-      return badRequest(res, "Rating is required and must be between 1 and 10.", [
-        { field: "rating", message: "Rating must be a number between 1 and 10." },
-      ]);
-    }
+    } = req.validatedBody;
 
     const [row] = await db
       .insert(moods)
@@ -159,6 +153,52 @@ router.get("/stats", async (req, res) => {
     return res.status(500).json({
       ok: false,
       message: "Unexpected error when loading mood stats.",
+    });
+  }
+});
+
+/**
+ * PUT /api/mood/:id
+ * Update a mood entry
+ */
+router.put("/:id", validateBody(updateMoodSchema), async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const { id } = req.params;
+    const updates = req.validatedBody;
+
+    // Check ownership
+    const existing = await db
+      .select()
+      .from(moods)
+      .where(eq(moods.id, id));
+
+    if (existing.length === 0 || existing[0].userId !== userId) {
+      return badRequest(res, "Mood entry not found or access denied.");
+    }
+
+    // Process activities if provided
+    if (updates.activities) {
+      updates.activities = Array.isArray(updates.activities) 
+        ? updates.activities.join(",") 
+        : updates.activities;
+    }
+
+    const [updated] = await db
+      .update(moods)
+      .set({
+        ...updates,
+        updatedAt: new Date(),
+      })
+      .where(eq(moods.id, id))
+      .returning();
+
+    return success(res, updated, "Mood entry updated.");
+  } catch (err) {
+    console.error("[mood/update] Unexpected error:", err);
+    return res.status(500).json({
+      ok: false,
+      message: "Unexpected error when updating mood entry.",
     });
   }
 });

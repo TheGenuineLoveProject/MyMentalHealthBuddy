@@ -9,6 +9,7 @@ import { randomUUID } from "crypto";
 import { db } from "../db/connection.mjs";
 import { users } from "../../shared/schema.mjs";
 import { success, badRequest } from "../utils/response.mjs";
+import { registerSchema, loginSchema, validateBody } from "../validation/schemas.mjs";
 
 const router = express.Router();
 
@@ -19,17 +20,9 @@ const JWT_EXPIRES_IN = "7d";
  * POST /api/auth/register
  * Body: { email, password, name? }
  */
-router.post("/register", async (req, res) => {
+router.post("/register", validateBody(registerSchema), async (req, res) => {
   try {
-    const { email, password, name } = req.body ?? {};
-
-    // Basic validation
-    if (!email || !password) {
-      return badRequest(res, "Email and password are required.", [
-        { field: "email", message: !email ? "Email is required." : "" },
-        { field: "password", message: !password ? "Password is required." : "" },
-      ]);
-    }
+    const { email, password, name } = req.validatedBody;
 
     // Check if user already exists
     const existing = await db
@@ -85,16 +78,9 @@ router.post("/register", async (req, res) => {
  * POST /api/auth/login
  * Body: { email, password }
  */
-router.post("/login", async (req, res) => {
+router.post("/login", validateBody(loginSchema), async (req, res) => {
   try {
-    const { email, password } = req.body ?? {};
-
-    if (!email || !password) {
-      return badRequest(res, "Email and password are required.", [
-        { field: "email", message: !email ? "Email is required." : "" },
-        { field: "password", message: !password ? "Password is required." : "" },
-      ]);
-    }
+    const { email, password } = req.validatedBody;
 
     // Look up user
     const rows = await db
