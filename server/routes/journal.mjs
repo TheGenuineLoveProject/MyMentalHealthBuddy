@@ -30,17 +30,18 @@ router.post("/", validateBody(createJournalSchema), async (req, res) => {
         id: randomUUID(),
         userId,
         title,
-        content,
+        text: content,
         createdAt: new Date(),
       })
       .returning({
         id: journals.id,
         title: journals.title,
-        content: journals.content,
+        text: journals.text,
         createdAt: journals.createdAt,
       });
 
-    return success(res, inserted[0], "Journal entry created.");
+    const result = inserted[0];
+    return success(res, { ...result, content: result.text }, "Journal entry created.");
   } catch (err) {
     console.error("[journal/create] Unexpected error:", err);
     return res.status(500).json({
@@ -64,7 +65,8 @@ router.get("/", async (req, res) => {
       .where(eq(journals.userId, userId))
       .orderBy(sql`${journals.createdAt} DESC`);
 
-    return success(res, entries, "Journal entries fetched.");
+    const mapped = entries.map(e => ({ ...e, content: e.text }));
+    return success(res, mapped, "Journal entries fetched.");
   } catch (err) {
     console.error("[journal/fetch] Unexpected error:", err);
     return res.status(500).json({
@@ -92,12 +94,12 @@ router.get("/:id", async (req, res) => {
       return badRequest(res, "Journal entry not found.");
     }
 
-    // Ensure user owns this entry
     if (entries[0].userId !== userId) {
       return badRequest(res, "Access denied.");
     }
 
-    return success(res, entries[0], "Journal entry fetched.");
+    const entry = entries[0];
+    return success(res, { ...entry, content: entry.text }, "Journal entry fetched.");
   } catch (err) {
     console.error("[journal/fetch-one] Unexpected error:", err);
     return res.status(500).json({
@@ -115,9 +117,8 @@ router.put("/:id", validateBody(updateJournalSchema), async (req, res) => {
   try {
     const userId = req.user?.id;
     const { id } = req.params;
-    const updates = req.validatedBody;
+    const { title, content } = req.validatedBody;
 
-    // Check ownership first
     const existing = await db
       .select()
       .from(journals)
@@ -127,16 +128,17 @@ router.put("/:id", validateBody(updateJournalSchema), async (req, res) => {
       return badRequest(res, "Journal entry not found or access denied.");
     }
 
+    const updateValues = { updatedAt: new Date() };
+    if (title !== undefined) updateValues.title = title;
+    if (content !== undefined) updateValues.text = content;
+
     const [updated] = await db
       .update(journals)
-      .set({
-        ...updates,
-        updatedAt: new Date(),
-      })
+      .set(updateValues)
       .where(eq(journals.id, id))
       .returning();
 
-    return success(res, updated, "Journal entry updated.");
+    return success(res, { ...updated, content: updated.text }, "Journal entry updated.");
   } catch (err) {
     console.error("[journal/update] Unexpected error:", err);
     return res.status(500).json({

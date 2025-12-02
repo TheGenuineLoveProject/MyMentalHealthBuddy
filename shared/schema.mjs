@@ -23,10 +23,10 @@ export const users = pgTable('users', {
 
 // ---------- JOURNALS ----------
 export const journals = pgTable('journals', {
-  id: text('id').primaryKey(),           // was causing integer cast error
+  id: text('id').primaryKey(),
   userId: text('user_id').notNull(),
   title: text('title'),
-  content: text('content').notNull(),
+  text: text('text').notNull(),
   createdAt: timestamp('created_at', { withTimezone: false })
     .defaultNow()
     .notNull(),
@@ -38,9 +38,9 @@ export const journal = journals;
 
 // ---------- MOODS ----------
 export const moods = pgTable('moods', {
-  id: text('id').primaryKey(),           // keep as text to match Neon
+  id: text('id').primaryKey(),
   userId: text('user_id').notNull(),
-  rating: integer('rating').notNull(),
+  rating: text('rating').notNull(),
   content: text('content'),
   score: integer('score'),
   emotion: text('emotion'),
@@ -53,7 +53,6 @@ export const moods = pgTable('moods', {
   createdAt: timestamp('created_at', { withTimezone: false })
     .defaultNow()
     .notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: false }),
 });
 
 // ---------- ANALYTICS ----------
@@ -75,6 +74,8 @@ export const aiMessages = pgTable('ai_messages', {
     .defaultNow()
     .notNull(),
 });
+
+export { aiMessages as ai_messages };
 
 // ---------- WEBHOOK EVENTS (for Stripe idempotency) ----------
 export const webhookEvents = pgTable('webhook_events', {

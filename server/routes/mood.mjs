@@ -45,10 +45,10 @@ router.post("/", validateBody(createMoodSchema), async (req, res) => {
       .values({
         id: randomUUID(),
         userId,
-        rating,
+        rating: String(rating),
         emotion: emotion || null,
         content: content || null,
-        score: score || rating, // Default score to rating if not provided
+        score: score || rating,
         energyLevel: energyLevel || null,
         sleepQuality: sleepQuality || null,
         activities: Array.isArray(activities) ? activities.join(",") : activities || null,
@@ -107,7 +107,6 @@ router.get("/stats", async (req, res) => {
   try {
     const userId = req.user?.id;
 
-    // Get all moods for stats calculation
     const rows = await db
       .select()
       .from(moods)
@@ -125,15 +124,14 @@ router.get("/stats", async (req, res) => {
 
     const totalEntries = rows.length;
     const averageRating = Math.round(
-      (rows.reduce((sum, r) => sum + r.rating, 0) / totalEntries) * 10
+      (rows.reduce((sum, r) => sum + Number(r.rating), 0) / totalEntries) * 10
     ) / 10;
 
-    // Last 7 entries for trend
     const last7 = rows.slice(0, 7);
     let trend = "neutral";
     if (last7.length >= 2) {
-      const recent = last7.slice(0, 3).reduce((s, r) => s + r.rating, 0) / Math.min(3, last7.length);
-      const older = last7.slice(-3).reduce((s, r) => s + r.rating, 0) / Math.min(3, last7.length);
+      const recent = last7.slice(0, 3).reduce((s, r) => s + Number(r.rating), 0) / Math.min(3, last7.length);
+      const older = last7.slice(-3).reduce((s, r) => s + Number(r.rating), 0) / Math.min(3, last7.length);
       if (recent > older + 0.5) trend = "improving";
       else if (recent < older - 0.5) trend = "declining";
     }
@@ -143,7 +141,7 @@ router.get("/stats", async (req, res) => {
       averageRating,
       trend,
       last7Days: last7.map((m) => ({
-        rating: m.rating,
+        rating: Number(m.rating),
         emotion: m.emotion,
         createdAt: m.createdAt,
       })),
@@ -167,7 +165,6 @@ router.put("/:id", validateBody(updateMoodSchema), async (req, res) => {
     const { id } = req.params;
     const updates = req.validatedBody;
 
-    // Check ownership
     const existing = await db
       .select()
       .from(moods)
@@ -177,19 +174,19 @@ router.put("/:id", validateBody(updateMoodSchema), async (req, res) => {
       return badRequest(res, "Mood entry not found or access denied.");
     }
 
-    // Process activities if provided
     if (updates.activities) {
       updates.activities = Array.isArray(updates.activities) 
         ? updates.activities.join(",") 
         : updates.activities;
     }
 
+    if (updates.rating !== undefined) {
+      updates.rating = String(updates.rating);
+    }
+
     const [updated] = await db
       .update(moods)
-      .set({
-        ...updates,
-        updatedAt: new Date(),
-      })
+      .set(updates)
       .where(eq(moods.id, id))
       .returning();
 

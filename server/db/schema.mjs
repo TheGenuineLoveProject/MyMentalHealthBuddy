@@ -1,16 +1,16 @@
 // server/db/schema.mjs
+// Schema that matches the actual Neon database structure
 import {
   pgTable,
-  uuid,
-  varchar,
   text,
+  varchar,
   timestamp,
   integer,
 } from "drizzle-orm/pg-core";
 
 // USERS TABLE
 export const users = pgTable("users", {
-  id: uuid("id").defaultRandom().primaryKey(),
+  id: text("id").primaryKey(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   passwordHash: varchar("password_hash", { length: 255 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
@@ -18,30 +18,39 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
-// MOODS TABLE (matches Neon)
+// MOODS TABLE (matches Neon - rating is VARCHAR, no updated_at)
 export const moods = pgTable("moods", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  userId: uuid("user_id").notNull(),
-  rating: integer("rating").notNull(),               // 1–10
-  content: text("content"),                          // free text
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull(),
+  rating: varchar("rating", { length: 255 }).notNull(),
+  content: text("content"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-  score: integer("score"),                           // optional extra score
-  note: text("note"),                                // long note
-  emotion: varchar("emotion", { length: 255 }),      // e.g. "anxious"
-  energyLevel: integer("energy_level"),              // 1–10
-  sleepQuality: integer("sleep_quality"),            // 1–10
-  activities: text("activities"),                    // JSON string
-  triggers: text("triggers"),                        // JSON string
+  score: integer("score"),
+  note: text("note"),
+  emotion: varchar("emotion", { length: 255 }),
+  energyLevel: integer("energy_level"),
+  sleepQuality: integer("sleep_quality"),
+  activities: text("activities"),
+  triggers: text("triggers"),
   weather: varchar("weather", { length: 255 }),
   location: varchar("location", { length: 255 }),
 });
 
-// JOURNALS TABLE
+// JOURNALS TABLE (uses 'text' column not 'content')
 export const journals = pgTable("journals", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  userId: uuid("user_id").notNull(),
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   text: text("text").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// AI MESSAGES TABLE (for chat history persistence)
+export const aiMessages = pgTable("ai_messages", {
+  id: text("id").primaryKey(),
+  userId: text("user_id").notNull(),
+  role: text("role").notNull(),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
