@@ -6,6 +6,11 @@ MyMentalHealthBuddy is a comprehensive mental health support platform featuring 
 
 ## Recent Changes (December 2, 2025)
 
+### Code Cleanup & Optimization (December 2, 2025)
+- **Removed Redundant Files**: Deleted unused API utility files (utils/api.js, utils/api.ts, api/mood.js) - all replaced by centralized queryClient.js
+- **Autocomplete Attributes**: Added proper autocomplete attributes to all form inputs for better UX and accessibility
+- **Production Build**: Optimized build at 499.88 kB (135.79 kB gzipped)
+
 ### React Query & Wouter Migration (December 2, 2025)
 - **Wouter Migration**: Replaced react-router-dom with wouter across all pages for lightweight routing
 - **React Query Integration**: Added @tanstack/react-query for consistent data fetching with caching
