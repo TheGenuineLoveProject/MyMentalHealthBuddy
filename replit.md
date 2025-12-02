@@ -108,3 +108,16 @@ The client is built using Vite for optimized production bundles with code splitt
 - Structured logging with correlation IDs (JSON in production, colorized in dev)
 - Enhanced health check endpoint with memory/uptime metrics
 - Readiness endpoint (/api/ready) for deployment probes
+- Sentry SDK integration for server and client error tracking
+
+### Account Lifecycle Features (December 2, 2025)
+- Password reset flow with secure token-based system (tokens hashed at rest, 1-hour expiry)
+- Account deletion with re-authentication and complete data purge
+- GDPR-compliant data export endpoint (JSON download of all user data)
+- Audit logging for security-sensitive operations
+
+### AI Resilience
+- OpenAI circuit breaker with configurable failure/success thresholds
+- Request timeout (15s) and exponential backoff retry (up to 3 attempts)
+- Graceful fallback responses when AI is unavailable
+- /api/ai/status endpoint to monitor circuit breaker state

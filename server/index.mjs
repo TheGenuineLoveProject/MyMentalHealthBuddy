@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 import { apiRateLimit, authRateLimit } from "./middleware/rateLimit.mjs";
 import { cspHeaders, sanitizeBody, securityHeaders } from "./middleware/security.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
+import { initSentry, sentryErrorHandler, captureException } from "./utils/sentry.mjs";
 
 dotenv.config();
 
@@ -44,6 +45,9 @@ if (!SESSION_SECRET) {
 // 0. APP BASE
 // -------------------------------------------
 const app = express();
+
+// Initialize Sentry for error tracking
+initSentry(app);
 
 // Replit / proxy safety - trust only first proxy hop
 app.set("trust proxy", 1);
@@ -88,6 +92,7 @@ import uiDashboardRoutes from "./routes/ui-dashboard.mjs";
 import aiDashboardRoutes from "./routes/ai-dashboard.mjs";
 import stripeWebhookRoutes from "./routes/stripeWebhook.mjs";
 import aiRoutes from "./routes/ai.mjs";
+import accountRoutes from "./routes/account.mjs";
 
 // Attach route modules
 app.use("/api/analytics", analyticsRoutes);
@@ -106,6 +111,9 @@ app.use("/api/dashboard", uiDashboardRoutes);
 
 // AI chat routes
 app.use("/api/ai", aiRoutes);
+
+// Account management routes (password reset, account deletion, data export)
+app.use("/api/account", accountRoutes);
 
 // -------------------------------------------
 // 3. HEALTHCHECK (Enhanced)
@@ -155,8 +163,20 @@ app.get("*", (req, res) => {
 // -------------------------------------------
 // 5. GLOBAL ERROR HANDLER
 // -------------------------------------------
+app.use(sentryErrorHandler());
+
 app.use((err, req, res, next) => {
   console.error("[Global Error Handler]", err);
+  
+  captureException(err, {
+    requestId: req.requestId,
+    user: req.user,
+    extra: {
+      path: req.path,
+      method: req.method,
+    },
+  });
+  
   res.status(500).json({
     ok: false,
     message: isProduction 

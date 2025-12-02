@@ -2,7 +2,6 @@
 
 import express from "express";
 import { randomUUID } from "crypto";
-import OpenAI from "openai";
 import { db } from "../db/connection.mjs";
 import { aiMessages } from "../../shared/schema.mjs";
 import { eq, sql } from "drizzle-orm";
@@ -16,22 +15,12 @@ import {
 import { requireAuth } from "../middleware/auth.mjs";
 import { chatMessageSchema, validateBody } from "../validation/schemas.mjs";
 import { aiRateLimit } from "../middleware/rateLimit.mjs";
+import { chatCompletion, isConfigured, getCircuitBreakerStatus } from "../utils/aiClient.mjs";
 
 const router = express.Router();
 
 // Apply AI-specific rate limiting
 router.use(aiRateLimit);
-
-const OPENAI_API_KEY = process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY || "";
-const OPENAI_BASE_URL = process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined;
-let openai = null;
-
-if (OPENAI_API_KEY) {
-  openai = new OpenAI({
-    apiKey: OPENAI_API_KEY,
-    baseURL: OPENAI_BASE_URL,
-  });
-}
 
 // All AI routes require auth
 router.use(requireAuth);
@@ -113,7 +102,6 @@ router.post("/chat", validateBody(chatMessageSchema), async (req, res) => {
 
     const { message } = req.validatedBody;
 
-    // Save user message to history
     await db.insert(aiMessages).values({
       id: randomUUID(),
       userId: user.id,
@@ -122,11 +110,9 @@ router.post("/chat", validateBody(chatMessageSchema), async (req, res) => {
       createdAt: new Date(),
     });
 
-    // Check if OpenAI is configured
-    if (!openai) {
+    if (!isConfigured()) {
       const fallbackReply = FALLBACK_RESPONSES[Math.floor(Math.random() * FALLBACK_RESPONSES.length)];
       
-      // Save fallback response
       await db.insert(aiMessages).values({
         id: randomUUID(),
         userId: user.id,
@@ -141,7 +127,6 @@ router.post("/chat", validateBody(chatMessageSchema), async (req, res) => {
       }, "AI is currently offline.");
     }
 
-    // Get recent conversation history for context
     const recentMessages = await db
       .select()
       .from(aiMessages)
@@ -149,31 +134,28 @@ router.post("/chat", validateBody(chatMessageSchema), async (req, res) => {
       .orderBy(sql`${aiMessages.createdAt} DESC`)
       .limit(10);
 
-    // Build conversation context (reverse to get chronological order)
     const conversationHistory = recentMessages
       .reverse()
-      .slice(0, -1) // Exclude the message we just added
+      .slice(0, -1)
       .map(msg => ({
         role: msg.role,
         content: msg.content,
       }));
 
-    try {
-      const completion = await openai.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: SYSTEM_PROMPT },
-          ...conversationHistory,
-          { role: "user", content: message },
-        ],
-        temperature: 0.7,
-        max_tokens: 500,
-      });
+    const result = await chatCompletion({
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        ...conversationHistory,
+        { role: "user", content: message },
+      ],
+      model: "gpt-4o-mini",
+      temperature: 0.7,
+      maxTokens: 500,
+    });
 
-      const reply = completion.choices?.[0]?.message?.content ??
-        "I'm here with you. I'm not sure what to say yet, but I care about how you feel.";
+    if (result.success) {
+      const reply = result.content || "I'm here with you. I'm not sure what to say yet, but I care about how you feel.";
 
-      // Save assistant response to history
       await db.insert(aiMessages).values({
         id: randomUUID(),
         userId: user.id,
@@ -183,29 +165,36 @@ router.post("/chat", validateBody(chatMessageSchema), async (req, res) => {
       });
 
       return success(res, { reply }, "AI reply.");
-    } catch (aiError) {
-      console.error("[ai/chat] OpenAI error:", aiError);
-      
-      const fallbackReply = FALLBACK_RESPONSES[Math.floor(Math.random() * FALLBACK_RESPONSES.length)];
-      
-      // Save fallback response
-      await db.insert(aiMessages).values({
-        id: randomUUID(),
-        userId: user.id,
-        role: "assistant",
-        content: fallbackReply,
-        createdAt: new Date(),
-      });
-
-      return success(res, { 
-        reply: fallbackReply,
-        isOffline: true 
-      }, "AI is temporarily unavailable.");
     }
+
+    const fallbackReply = FALLBACK_RESPONSES[Math.floor(Math.random() * FALLBACK_RESPONSES.length)];
+    
+    await db.insert(aiMessages).values({
+      id: randomUUID(),
+      userId: user.id,
+      role: "assistant",
+      content: fallbackReply,
+      createdAt: new Date(),
+    });
+
+    return success(res, { 
+      reply: fallbackReply,
+      isOffline: true,
+      circuitOpen: result.isCircuitOpen,
+    }, "AI is temporarily unavailable.");
   } catch (err) {
     console.error("[ai/chat] Unexpected error:", err);
     return serverError(res, err, "Failed to process message.");
   }
+});
+
+/**
+ * GET /api/ai/status
+ * Get AI service status including circuit breaker state
+ */
+router.get("/status", (req, res) => {
+  const status = getCircuitBreakerStatus();
+  return success(res, status, "AI service status.");
 });
 
 export default router;

@@ -86,3 +86,30 @@ export const webhookEvents = pgTable('webhook_events', {
     .notNull(),
   status: text('status').default('processed'),
 });
+
+// ---------- PASSWORD RESET TOKENS ----------
+export const passwordResetTokens = pgTable('password_reset_tokens', {
+  id: text('id').primaryKey(),
+  userId: text('user_id').notNull(),
+  tokenHash: text('token_hash').notNull(),
+  expiresAt: timestamp('expires_at', { withTimezone: false }).notNull(),
+  usedAt: timestamp('used_at', { withTimezone: false }),
+  createdAt: timestamp('created_at', { withTimezone: false })
+    .defaultNow()
+    .notNull(),
+});
+
+// ---------- AUDIT LOG ----------
+export const auditLog = pgTable('audit_log', {
+  id: text('id').primaryKey(),
+  userId: text('user_id'),
+  action: text('action').notNull(),
+  resourceType: text('resource_type'),
+  resourceId: text('resource_id'),
+  metadata: text('metadata'),
+  ipAddress: text('ip_address'),
+  userAgent: text('user_agent'),
+  createdAt: timestamp('created_at', { withTimezone: false })
+    .defaultNow()
+    .notNull(),
+});
