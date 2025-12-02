@@ -2,113 +2,7 @@
 
 ## Overview
 
-MyMentalHealthBuddy is a comprehensive mental health support platform featuring AI-powered chat therapy, mood tracking, personal journaling, mental health resources, and crisis support. The platform combines therapeutic AI conversations with self-care tools to provide 24/7 mental health support in a compassionate, non-judgmental environment.
-
-## Recent Changes (December 2, 2025)
-
-### Code Cleanup & Optimization (December 2, 2025)
-- **Removed Redundant Files**: Deleted unused API utility files (utils/api.js, utils/api.ts, api/mood.js) - all replaced by centralized queryClient.js
-- **Autocomplete Attributes**: Added proper autocomplete attributes to all form inputs for better UX and accessibility
-- **Production Build**: Optimized build at 499.88 kB (135.79 kB gzipped)
-
-### React Query & Wouter Migration (December 2, 2025)
-- **Wouter Migration**: Replaced react-router-dom with wouter across all pages for lightweight routing
-- **React Query Integration**: Added @tanstack/react-query for consistent data fetching with caching
-- **SSR-Safe QueryClient**: Fixed localStorage access to check for window/localStorage before accessing
-- **Auth Mutations**: Login and Register pages now use useMutation for consistent API handling
-- **204 Response Handling**: Fixed apiRequest to handle 204 No Content and empty body responses gracefully
-- **PostCSS Configuration**: Added postcss.config.js for proper Tailwind CSS processing
-- **CSS Bundle Optimization**: Tailwind CSS bundle now properly includes all utility classes (24.87 kB)
-
-**All Pages Using React Query:**
-- Login/Register: useMutation with apiRequest
-- Dashboard: useQuery for dashboard data
-- MoodPage: useMutation with cache invalidation
-- JournalPage: useQuery + useMutation with cache invalidation
-- Analytics: useQuery for stats
-- AIChatPage: useMutation for chat messages
-- HealthPage: useQuery for health check
-
-## Previous Changes (December 1, 2025)
-
-### Critical Platform Fixes (December 1, 2025)
-- **JSON Syntax Fix**: Fixed `client/package.json` - removed JavaScript comments and trailing commas that were blocking deployment
-- **Schema Consolidation**: Created `shared/schema.mjs` at root level to resolve import path errors across server routes
-- **ThemeProvider Fix**: Updated `components/ThemeProvider.jsx` to re-export from `context/ThemeContext` - fixed "Can't find variable: useTheme" runtime error
-- **Circular Import Fix**: Removed self-import in `server/routes/canva-oauth.mjs` that caused `routes/routes/` nested path error
-- **Duplicate Route Fix**: Removed duplicate canva-oauth imports and route registrations in `server/index.mjs`
-- **Schema Import Paths**: Fixed `stripeWebhook.mjs` and `db/helpers.mjs` to use correct `../../shared/schema.mjs` path
-- **Response Utils**: Added missing exports (`serverError`, `unauthorized`, `sendError`, `success`, `badRequest`) to `server/utils/response.mjs`
-- **Schema Exports**: Added `webhookEvents` table and `journal` alias to schema for backward compatibility
-- **Static File Serving**: Added Express static file serving for client build + SPA fallback
-- **Client Rebuild**: Production build now 414 kB (120 kB gzipped) with all fixes applied
-- **Trust Proxy**: Server configured with `app.set("trust proxy", true)` for proper rate limiting behind Replit proxy
-
-### Schema Alignment
-- Unified schema definition at `shared/schema.mjs` matching actual PostgreSQL database structure
-- Tables: users, moods (11 columns), journals, analytics, aiMessages, webhookEvents
-- Added `journal` alias export for backward compatibility with existing routes
-
-## Previous Changes (November 25, 2025)
-
-### Critical Bug Fixes (November 25, 2025)
-- **JWT Token Fix**: Resolved authentication mismatch where JWT was signed with `id` but middleware validated `userId` - now properly validates `id` and provides backward-compatible `userId` alias
-- **Analytics Routes Fix**: All analytics endpoints now correctly use `req.user.id` instead of undefined `req.user.userId`
-- **Mood Stats Fix**: Fixed division-by-zero bug in trend calculation by requiring 14+ entries and adding array length guards
-- **JWT Secret Security**: Removed hard-coded fallback secret; now requires SESSION_SECRET environment variable with error logging if missing
-- **OpenAI Graceful Handling**: Lazy initialization of OpenAI client with 503 response when API key is unavailable (no startup crash)
-
-### Platform Perfection Session (November 25, 2025)
-- **AI Chat Enhancement**: Complete redesign with gradient header, conversation suggestions, animated typing indicators, improved message bubbles
-- **Visual Consistency**: All 9 pages now share unified gradient header treatment, smooth animations (fadeIn, slideUp, float), and cohesive card styling
-- **CSS Variables**: Added --card-bg for dark mode support, enhanced skeleton animations, focus indicators
-- **Production Build**: Optimized with code-splitting, 70.36 kB gzipped main bundle
-- **Zero LSP Errors**: All TypeScript/JavaScript errors resolved
-
-### Production Monitoring Enhancements
-- **Request ID Tracking**: Cross-pod request correlation via X-Request-ID headers for autoscale debugging
-- **Structured Logging**: JSON log output in production with timestamps, levels, and request context
-- **Enhanced Error Handler**: Errors now include request ID for traceability across distributed pods
-- **Health Check Logging**: Database connectivity failures logged with structured format
-
-### Dashboard Enhancement
-- **Gradient Stat Cards**: Visual mood stats with color-coded backgrounds and trend indicators
-- **Time-of-Day Greeting**: Personalized welcome messages based on time (morning/afternoon/evening)
-- **Daily Wellness Tips**: Rotating tips to encourage mental health practices
-- **Quick Action Cards**: Gradient-styled cards for mood tracking, journaling, chat, and analytics
-- **Loading States**: Skeleton loaders for data-fetching with proper accessibility
-
-### Visual Enhancement Session
-- **All Pages Polished**: Analytics, Journal, Settings, MoodPage, Login, Register now feature consistent gradient headers
-- **Modern Styling**: Lucide icons throughout, smooth animations (fadeIn, slideUp), card-based layouts
-- **Split-Screen Auth**: Login and Register pages now use elegant split-screen design with feature lists
-- **Accessibility Enhanced**: ARIA labels, aria-invalid, aria-describedby, semantic form labels across all forms
-- **Performance**: ErrorBoundary component, lazy loading with Suspense, PageSkeleton for loading states
-
-### Security & Backend Enhancements
-- **JWT Security**: Enforced SESSION_SECRET in production (exits if not configured)
-- **Stripe Webhooks**: Complete event handlers with database-backed idempotency for autoscale
-- **Rate Limiting**: Multi-tier rate limiters (general, auth, AI, strict, write)
-- **Health Checks**: /api/health, /api/health/ready (with DB latency), /api/health/live endpoints
-- **Graceful Shutdown**: SIGTERM and SIGINT handlers with 30s timeout
-
-### Frontend & Visual Improvements
-- **Visual Refresh**: Gradient hero sections, CSS animations, modern card designs
-- **Dark Mode**: Full theme toggle with localStorage persistence and system preference detection
-- **Theme Context**: Created ThemeProvider with React context API
-- **Enhanced Pages**: Home page with testimonials, Dashboard with animated cards
-
-### Infrastructure
-- **Deployment**: Configured for Replit Autoscale with npm run build
-- **Build Optimized**: Production bundle 71.91 kB gzipped
-- **All Routes Mounted**: Auth, Mood, Journal, AI, Billing, Analytics all functional
-
-### Previous Changes
-- Component Enhancement: All React components enhanced with comprehensive data-testid attributes
-- Accessibility: Added ARIA labels to Navbar, ProtectedRoute, FloatingButton, ChatWidget
-- Error Handling: Centralized API client with proper error handling
-- Bug Fixes: Fixed AI service model name from "gpt-4.1-mini" to "gpt-4o-mini"
-- Cleanup: Removed duplicate/unused files
+MyMentalHealthBuddy is a comprehensive mental health support platform offering AI-powered chat therapy, mood tracking, personal journaling, mental health resources, and crisis support. It aims to provide 24/7 mental health assistance in a compassionate and non-judgmental environment, combining therapeutic AI conversations with self-care tools. The platform is designed for scalability and robust performance.
 
 ## User Preferences
 
@@ -118,142 +12,45 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Architecture
 
-**Technology Stack:**
-- **React 18** with TypeScript for type-safe UI components
-- **Vite** as the build tool and development server
-- **Wouter** for lightweight client-side routing
-- **React Hook Form** with **Zod** for form validation and schema definition
-- **Tailwind CSS** for utility-first styling
-- **Lucide React** for iconography
-
-**Design Decisions:**
-- Single-page application (SPA) architecture for seamless navigation
-- Component-based architecture for reusability and maintainability
-- Vite's fast refresh enables rapid development iteration
-- Tailwind CSS provides consistent, responsive design without custom CSS overhead
-- Form validation handled declaratively with Zod schemas for runtime type safety
-
-**Development Server:**
-- Runs on port 5173 (configurable)
-- Configured with `0.0.0.0` host binding for Replit compatibility
-- Allows Replit-specific domains (*.replit.dev, *.replit.app)
+The frontend is a Single-Page Application (SPA) built with **React 18** and **TypeScript**, using **Vite** for fast development and optimized builds. **Wouter** handles lightweight client-side routing, and **React Hook Form** with **Zod** manages form validation and schema definition. Styling is achieved with **Tailwind CSS** for a utility-first approach, ensuring consistent and responsive design, complemented by **Lucide React** for iconography. Accessibility is a core focus, incorporating ARIA attributes, semantic HTML, keyboard navigation (SkipLink), and visible focus rings. All interactive elements have proper focus management and screen reader support.
 
 ### Backend Architecture
 
-**Technology Stack:**
-- **Node.js** with **Express** framework
-- **TypeScript** in ES Module mode for type safety
-- **OpenAI API** for AI-powered therapeutic chat
-- **CORS** middleware for cross-origin requests
-- **Helmet** for security headers
-- **Compression** middleware for response optimization
-- **Morgan** for HTTP request logging
-- **Express Session** for session management
+The backend is developed with **Node.js** and **Express**, utilizing **TypeScript** in ES Module mode. It provides a RESTful API with middleware for CORS, security headers (Helmet), compression, and logging (Morgan). User sessions are managed with **Express Session**. The AI chat feature integrates with the **OpenAI API**, using specialized mental health-focused system prompts for compassionate and non-judgmental therapeutic responses, with a focus on crisis intervention awareness and trauma-informed language. The server handles static file serving for the client build and includes health check endpoints for monitoring.
 
-**Design Decisions:**
-- RESTful API design for clear endpoint semantics
-- Express middleware chain for request processing (CORS → JSON parsing → routing)
-- AI chat powered by OpenAI's GPT models with mental health-focused system prompts
-- Session-based authentication for user state management
-- Compression reduces bandwidth usage for faster responses
-- Security headers (Helmet) protect against common web vulnerabilities
+### Monorepo Organization
 
-**Server Configuration:**
-- Production server binds to `0.0.0.0` on port configurable via `PORT` environment variable
-- Development mode uses `tsx` for TypeScript execution without compilation
-- Production mode uses compiled JavaScript from `dist/` directory
-
-### Mental Health System Prompt
-
-The AI chat feature uses a specialized system prompt that ensures:
-- Compassionate, non-judgmental responses
-- Active listening and emotional validation
-- Appropriate coping strategies when needed
-- Clear boundaries (not a replacement for professional therapy)
-- Crisis intervention awareness (directing to emergency resources when needed)
-- Trauma-informed language and sensitivity to triggers
-
-### Application Structure
-
-**Monorepo Organization:**
-```
-client/          # Frontend React application
-server/          # Backend Express server
-shared/          # Shared types and schemas (referenced but not present)
-scripts/         # Build and deployment scripts
-archive_DO_NOT_DELETE/  # Historical documentation and configuration
-```
-
-**Key Design Choices:**
-- Separation of client and server code for independent deployment
-- Shared TypeScript paths configured via `tsconfig.json` for type reuse
-- Archive directory preserves documentation and configuration history
-- Scripts directory contains automation for diagnostics, healing, and verification
+The project follows a monorepo structure, separating the `client/` (React app) and `server/` (Express app) directories. Shared types and schemas are intended to be placed in a `shared/` directory to ensure consistency between client and server.
 
 ### Build and Deployment
 
-**Build Process:**
-- Client built with Vite (optimized production bundles with code splitting)
-- Server compiled with TypeScript compiler (`tsc`)
-- Concurrent development servers for client (5173) and server (configurable)
-
-**Deployment Configuration:**
-- Optimized for Replit deployment environment
-- Environment variables managed via `.env` files
-- Production-ready with compression, security headers, and session management
-- Health check endpoints for monitoring
-
-### Data Flow
-
-1. **User Interaction** → Frontend React components
-2. **API Request** → Client makes HTTP request to Express server
-3. **Middleware Chain** → CORS → Session → JSON parsing → Routing
-4. **AI Processing** → OpenAI API integration for therapeutic responses
-5. **Response** → Server returns JSON with AI-generated reply
-6. **UI Update** → React updates interface with response
-
-### Security Considerations
-
-- **CORS** configured to allow specific origins
-- **Helmet** adds security headers (XSS protection, content security policy)
-- **Session management** for user state persistence
-- **Input sanitization** (implied through validation libraries)
-- **Environment variables** protect API keys and secrets
+The client is built using Vite for optimized production bundles with code splitting. The server is compiled with TypeScript. The entire application is optimized for deployment on environments like Replit Autoscale, utilizing environment variables for configuration and including health checks, rate limiting, and graceful shutdown handlers.
 
 ## External Dependencies
 
 ### AI Services
-- **OpenAI API** - Powers the AI chat therapy feature with GPT models
-  - Requires `OPENAI_API_KEY` environment variable
-  - Uses mental health-focused system prompts for therapeutic responses
+- **OpenAI API**: Powers the AI chat therapy feature.
 
 ### Development Tools
-- **Vite** - Fast build tool and development server
-- **TypeScript** - Static type checking across the codebase
-- **tsx** - TypeScript execution for development mode
-- **Concurrently** - Run multiple development servers simultaneously
+- **Vite**: Build tool and development server.
+- **TypeScript**: Enables static type checking.
+- **tsx**: Executes TypeScript directly in development.
+- **Concurrently**: Runs multiple development processes.
 
 ### UI & Styling
-- **Tailwind CSS** - Utility-first CSS framework
-- **Lucide React** - Icon library
-- **React Hook Form** - Form state management
-- **Wouter** - Lightweight routing library
+- **Tailwind CSS**: Utility-first CSS framework.
+- **Lucide React**: Icon library.
+- **React Hook Form**: Manages form state.
+- **Wouter**: Lightweight routing library.
+- **Zod**: Runtime type validation and schema definition.
 
 ### Backend Services
-- **Express** - Web application framework
-- **Express Session** - Session middleware
-- **CORS** - Cross-origin resource sharing
-- **Helmet** - Security headers middleware
-- **Compression** - Response compression
-- **Morgan** - HTTP request logger
-- **Zod** - Runtime type validation and schema definition
+- **Express**: Web application framework.
+- **Express Session**: Session management.
+- **CORS**: Cross-origin resource sharing.
+- **Helmet**: Security headers middleware.
+- **Compression**: Response compression.
+- **Morgan**: HTTP request logger.
 
 ### Monitoring & Error Tracking
-- **Sentry** (Browser and React) - Error tracking and performance monitoring
-  - Configured for both client-side and server-side error capture
-  - Profiling capabilities for Node.js performance analysis
-
-### Development Dependencies
-- **@types/** packages - TypeScript type definitions
-- **@vitejs/plugin-react** - React integration for Vite
-- **dotenv** - Environment variable management
+- **Sentry**: Comprehensive error tracking and performance monitoring for both client and server.
