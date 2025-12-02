@@ -11,8 +11,18 @@ MyMentalHealthBuddy is a comprehensive mental health support platform featuring 
 - **React Query Integration**: Added @tanstack/react-query for consistent data fetching with caching
 - **SSR-Safe QueryClient**: Fixed localStorage access to check for window/localStorage before accessing
 - **Auth Mutations**: Login and Register pages now use useMutation for consistent API handling
+- **204 Response Handling**: Fixed apiRequest to handle 204 No Content and empty body responses gracefully
 - **PostCSS Configuration**: Added postcss.config.js for proper Tailwind CSS processing
 - **CSS Bundle Optimization**: Tailwind CSS bundle now properly includes all utility classes (24.87 kB)
+
+**All Pages Using React Query:**
+- Login/Register: useMutation with apiRequest
+- Dashboard: useQuery for dashboard data
+- MoodPage: useMutation with cache invalidation
+- JournalPage: useQuery + useMutation with cache invalidation
+- Analytics: useQuery for stats
+- AIChatPage: useMutation for chat messages
+- HealthPage: useQuery for health check
 
 ## Previous Changes (December 1, 2025)
 

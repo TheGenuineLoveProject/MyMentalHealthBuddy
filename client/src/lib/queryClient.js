@@ -32,7 +32,17 @@ export async function apiRequest(method, url, data) {
   });
 
   await throwIfResNotOk(res);
-  return res.json();
+  
+  if (res.status === 204 || res.headers.get("content-length") === "0") {
+    return undefined;
+  }
+  
+  const text = await res.text();
+  if (!text) {
+    return undefined;
+  }
+  
+  return JSON.parse(text);
 }
 
 export const queryClient = new QueryClient({
@@ -53,7 +63,17 @@ export const queryClient = new QueryClient({
         });
 
         await throwIfResNotOk(res);
-        return res.json();
+        
+        if (res.status === 204 || res.headers.get("content-length") === "0") {
+          return undefined;
+        }
+        
+        const text = await res.text();
+        if (!text) {
+          return undefined;
+        }
+        
+        return JSON.parse(text);
       },
       staleTime: 1000 * 60 * 5,
       retry: (failureCount, error) => {
