@@ -91,3 +91,20 @@ The client is built using Vite for optimized production bundles with code splitt
 - server/db/schema.mjs and shared/schema.mjs fully synchronized
 - TEXT-based IDs, VARCHAR ratings match actual Neon database structure
 - Fixed mood stats calculation to parse VARCHAR ratings as numbers for proper analytics
+
+### Security Hardening (December 2, 2025)
+- Enhanced rate limiting with per-route configurations (auth: 10 req/15min, AI: 20 req/min, API: 120 req/min)
+- Content Security Policy (CSP) headers implemented
+- Input sanitization middleware with recursive nested object/array support
+- Security headers: X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy
+
+### SEO Implementation
+- Dynamic SEO component for page-specific meta tags
+- Open Graph (og:title, og:description, og:image, og:type) and Twitter Card meta tags
+- All main pages have unique titles and descriptions
+
+### Observability Improvements
+- Request ID middleware for correlation tracking
+- Structured logging with correlation IDs (JSON in production, colorized in dev)
+- Enhanced health check endpoint with memory/uptime metrics
+- Readiness endpoint (/api/ready) for deployment probes

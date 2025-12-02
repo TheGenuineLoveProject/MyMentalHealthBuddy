@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
+import SEO from "../components/SEO.jsx";
 
 const INITIAL_MESSAGE = {
   role: "assistant",
@@ -84,6 +85,11 @@ export default function AIChatPage() {
   }
 
   return (
+    <>
+      <SEO 
+        title="AI Chat"
+        description="Chat with your AI wellness companion. Get compassionate support and guidance for your mental health journey."
+      />
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <header className="flex items-center gap-4 p-4 border-b border-neutral-800">
         <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
@@ -202,5 +208,6 @@ export default function AIChatPage() {
         </p>
       </form>
     </div>
+    </>
   );
 }

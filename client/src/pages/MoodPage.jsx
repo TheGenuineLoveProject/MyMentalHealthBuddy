@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Smile, Frown, Meh, Sun, Moon, Zap } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
+import SEO from "../components/SEO.jsx";
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "text-green-400" },
@@ -72,6 +73,11 @@ export default function MoodPage() {
   }
 
   return (
+    <>
+      <SEO 
+        title="Log Mood"
+        description="Track your emotional state and well-being. Log your daily mood, select emotions, and note activities that affect how you feel."
+      />
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-lg mx-auto">
         <header className="flex items-center gap-4 mb-8">
@@ -185,5 +191,6 @@ export default function MoodPage() {
         </form>
       </div>
     </div>
+    </>
   );
 }

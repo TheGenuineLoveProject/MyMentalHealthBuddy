@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
+import SEO from "../components/SEO.jsx";
 
 export default function JournalPage() {
   const [showForm, setShowForm] = useState(false);
@@ -71,6 +72,11 @@ export default function JournalPage() {
   }
 
   return (
+    <>
+      <SEO 
+        title="Journal"
+        description="Write and reflect on your thoughts in a private, secure journal. Express yourself freely and track your mental wellness journey."
+      />
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-2xl mx-auto">
         <header className="flex items-center justify-between mb-8">
@@ -215,5 +221,6 @@ export default function JournalPage() {
         )}
       </div>
     </div>
+    </>
   );
 }

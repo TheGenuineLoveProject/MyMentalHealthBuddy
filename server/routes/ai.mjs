@@ -15,8 +15,12 @@ import {
 } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 import { chatMessageSchema, validateBody } from "../validation/schemas.mjs";
+import { aiRateLimit } from "../middleware/rateLimit.mjs";
 
 const router = express.Router();
+
+// Apply AI-specific rate limiting
+router.use(aiRateLimit);
 
 const OPENAI_API_KEY = process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY || "";
 const OPENAI_BASE_URL = process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined;

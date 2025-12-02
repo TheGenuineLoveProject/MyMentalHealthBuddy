@@ -1,8 +1,14 @@
 import { Link } from "wouter";
 import { Heart, MessageCircle, BarChart3, Notebook, Shield, Clock } from "lucide-react";
+import SEO from "../components/SEO.jsx";
 
 export default function Home() {
   return (
+    <>
+      <SEO 
+        title="AI-Powered Mental Health Support"
+        description="24/7 AI-powered mental health support with mood tracking, journaling, and therapeutic chat. Your compassionate companion for emotional wellness."
+      />
     <div className="min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <header className="py-6 px-6 flex items-center justify-between max-w-6xl mx-auto" role="banner">
         <Link href="/" className="flex items-center gap-2" aria-label="MyMentalHealthBuddy home">
@@ -124,5 +130,6 @@ export default function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }

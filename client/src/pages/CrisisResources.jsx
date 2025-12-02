@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ArrowLeft, Phone, MessageSquare, Globe, Heart, AlertTriangle, Shield, ExternalLink } from "lucide-react";
+import SEO from "../components/SEO.jsx";
 
 const CRISIS_HOTLINES = [
   {
@@ -79,6 +80,11 @@ const SELF_CARE_TIPS = [
 
 export default function CrisisResources() {
   return (
+    <>
+      <SEO 
+        title="Crisis Resources"
+        description="24/7 crisis support hotlines and mental health resources. Find immediate help, emergency contacts, and self-care tips when you need them most."
+      />
     <div className="min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-4xl mx-auto px-6 py-8">
         <header className="flex items-center gap-4 mb-8">
@@ -249,5 +255,6 @@ export default function CrisisResources() {
         </footer>
       </div>
     </div>
+    </>
   );
 }

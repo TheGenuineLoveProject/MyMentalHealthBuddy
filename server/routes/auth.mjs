@@ -10,8 +10,12 @@ import { db } from "../db/connection.mjs";
 import { users } from "../../shared/schema.mjs";
 import { success, badRequest } from "../utils/response.mjs";
 import { registerSchema, loginSchema, validateBody } from "../validation/schemas.mjs";
+import { authRateLimit } from "../middleware/rateLimit.mjs";
 
 const router = express.Router();
+
+// Apply stricter rate limiting to auth endpoints
+router.use(authRateLimit);
 
 const JWT_SECRET = process.env.SESSION_SECRET;
 const JWT_EXPIRES_IN = "7d";

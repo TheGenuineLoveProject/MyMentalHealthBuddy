@@ -2,10 +2,13 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
+
+import { apiRateLimit, authRateLimit } from "./middleware/rateLimit.mjs";
+import { cspHeaders, sanitizeBody, securityHeaders } from "./middleware/security.mjs";
+import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 dotenv.config();
 
@@ -61,14 +64,14 @@ app.use(express.json());
 app.use(helmet());
 
 // -------------------------------------------
-// 1. RATE LIMIT (GLOBAL)
+// 1. SECURITY & OBSERVABILITY MIDDLEWARE
 // -------------------------------------------
-const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: 100,            // 100 reqs / minute / IP
-});
-
-app.use(limiter);
+app.use(requestId);
+app.use(requestLogger);
+app.use(cspHeaders);
+app.use(securityHeaders);
+app.use(sanitizeBody);
+app.use(apiRateLimit);
 
 // -------------------------------------------
 // 2. ROUTES (EACH FILE HAS ITS OWN ROUTER)
@@ -105,14 +108,33 @@ app.use("/api/dashboard", uiDashboardRoutes);
 app.use("/api/ai", aiRoutes);
 
 // -------------------------------------------
-// 3. HEALTHCHECK
+// 3. HEALTHCHECK (Enhanced)
 // -------------------------------------------
 app.get("/api/health", (req, res) => {
-  res.json({
+  const healthData = {
     success: true,
     message: "MyMentalHealthBuddy API is running.",
-    uptime: process.uptime()
-  });
+    uptime: Math.floor(process.uptime()),
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    version: "1.0.0",
+    memory: {
+      used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+      total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+    },
+  };
+  
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  res.json(healthData);
+});
+
+// Readiness check for deployment
+app.get("/api/ready", async (req, res) => {
+  try {
+    res.json({ ready: true, timestamp: new Date().toISOString() });
+  } catch (err) {
+    res.status(503).json({ ready: false, error: "Service unavailable" });
+  }
 });
 
 // -------------------------------------------

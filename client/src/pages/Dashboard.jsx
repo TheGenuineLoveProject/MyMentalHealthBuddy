@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
+import SEO from "../components/SEO.jsx";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -64,6 +65,11 @@ export default function Dashboard() {
   const journalData = data?.journalSummary || {};
 
   return (
+    <>
+      <SEO 
+        title="Dashboard"
+        description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with MyMentalHealthBuddy."
+      />
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-4xl mx-auto">
         <header className="flex items-center justify-between mb-8">
@@ -177,5 +183,6 @@ export default function Dashboard() {
         )}
       </div>
     </div>
+    </>
   );
 }
