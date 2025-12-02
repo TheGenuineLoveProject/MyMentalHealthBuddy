@@ -13,6 +13,31 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // -------------------------------------------
+// CRITICAL: Environment Detection
+// -------------------------------------------
+const isExplicitDev = process.env.NODE_ENV === "development";
+const isReplitDeployment = !!process.env.REPLIT_DEPLOYMENT || !!process.env.REPLIT_DB_URL;
+const isProduction = !isExplicitDev || isReplitDeployment;
+
+if (isProduction && !isExplicitDev) {
+  console.log("Running in PRODUCTION mode (detected deployment environment)");
+}
+
+// -------------------------------------------
+// CRITICAL: Validate required environment variables
+// -------------------------------------------
+const SESSION_SECRET = process.env.SESSION_SECRET;
+if (!SESSION_SECRET) {
+  console.error("FATAL: SESSION_SECRET environment variable is required but not set.");
+  console.error("Please set SESSION_SECRET in your environment variables.");
+  if (isProduction) {
+    process.exit(1);
+  } else {
+    console.warn("WARNING: Running without SESSION_SECRET in development mode. Auth will fail.");
+  }
+}
+
+// -------------------------------------------
 // 0. APP BASE
 // -------------------------------------------
 const app = express();
@@ -20,10 +45,15 @@ const app = express();
 // Replit / proxy safety - trust only first proxy hop
 app.set("trust proxy", 1);
 
+const corsOrigin = process.env.CORS_ORIGIN || process.env.REPLIT_DEV_DOMAIN 
+  ? [`https://${process.env.REPLIT_DEV_DOMAIN}`, ...(process.env.REPLIT_DOMAINS?.split(",").map(d => `https://${d}`) || [])]
+  : "*";
+
 app.use(
   cors({
-    origin: "*",
+    origin: isProduction ? corsOrigin : "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
   })
 );
 
@@ -54,6 +84,7 @@ import canvaOAuthRoutes from "./routes/canva-oauth.mjs";
 import uiDashboardRoutes from "./routes/ui-dashboard.mjs";
 import aiDashboardRoutes from "./routes/ai-dashboard.mjs";
 import stripeWebhookRoutes from "./routes/stripeWebhook.mjs";
+import aiRoutes from "./routes/ai.mjs";
 
 // Attach route modules
 app.use("/api/analytics", analyticsRoutes);
@@ -66,6 +97,12 @@ app.use("/api/canva", canvaOAuthRoutes);
 app.use("/api/ui-dashboard", uiDashboardRoutes);
 app.use("/api/ai-dashboard", aiDashboardRoutes);
 app.use("/api/webhooks/stripe", stripeWebhookRoutes);
+
+// Dashboard endpoint alias (frontend expects /api/dashboard)
+app.use("/api/dashboard", uiDashboardRoutes);
+
+// AI chat routes
+app.use("/api/ai", aiRoutes);
 
 // -------------------------------------------
 // 3. HEALTHCHECK

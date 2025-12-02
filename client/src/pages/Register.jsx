@@ -1,36 +1,30 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Register() {
   const navigate = useNavigate();
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-  });
-
-  const [error, setError] = useState("");
-  const [fieldErrors, setFieldErrors] = useState({});
+  const { login } = useAuth();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  }
-
-  async function handleSubmit(e) {
+  async function handleRegister(e) {
     e.preventDefault();
-    setError("");
-    setFieldErrors({});
     setIsLoading(true);
+    setError("");
 
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       setError("Passwords do not match");
+      setIsLoading(false);
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
       setIsLoading(false);
       return;
     }
@@ -39,115 +33,112 @@ export default function Register() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password
-        })
+        body: JSON.stringify({ name, email, password })
       });
 
-      const data = await res.json();
+      const result = await res.json();
 
-      if (!res.ok) {
-        if (data.fieldErrors && typeof data.fieldErrors === "object") {
-          setFieldErrors(data.fieldErrors);
-        }
-        setError(data.message || "Registration failed");
+      if (!res.ok || !result.success) {
+        setError(result.message || result.error || "Registration failed");
         setIsLoading(false);
         return;
       }
 
-      // Optional: store token, then redirect
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-      }
+      login(result.token, result.user);
+      navigate("/dashboard");
 
-      // After successful registration, go to login or dashboard
-      navigate("/login");
     } catch (err) {
       console.error("Register error:", err);
-      setError("Something went wrong. Please try again.");
+      setError("Something went wrong");
     }
 
     setIsLoading(false);
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-6 text-white">
-      <form
-        onSubmit={handleSubmit}
-        className="w-full max-w-md bg-neutral-900 p-6 rounded-xl shadow-lg"
+    <div className="flex items-center justify-center min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950">
+      <form 
+        onSubmit={handleRegister}
+        className="w-full max-w-md bg-neutral-900 p-8 rounded-2xl shadow-2xl border border-neutral-800"
+        data-testid="form-register"
       >
-        <h1 className="text-3xl font-bold mb-6 text-center">Create Account</h1>
+        <h1 className="text-3xl font-bold mb-2 text-center text-white" data-testid="text-register-title">
+          Create Account
+        </h1>
+        <p className="text-neutral-400 text-center mb-6">Start your mental wellness journey</p>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-700 rounded text-sm">{error}</div>
+          <div className="mb-4 p-3 bg-red-900/50 border border-red-700 rounded-lg text-red-200 text-sm" data-testid="text-error">
+            {error}
+          </div>
         )}
 
         <div className="mb-4">
-          <label className="block mb-1 text-sm">Name</label>
+          <label className="block mb-2 text-sm text-neutral-300">Name</label>
           <input
             type="text"
-            name="name"
-            className="w-full p-3 rounded bg-neutral-800 border border-neutral-700"
-            value={formData.name}
-            onChange={handleChange}
-            required
+            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name"
+            data-testid="input-name"
           />
-          {fieldErrors.name && (
-            <p className="mt-1 text-xs text-red-400">{fieldErrors.name}</p>
-          )}
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1 text-sm">Email</label>
+          <label className="block mb-2 text-sm text-neutral-300">Email</label>
           <input
             type="email"
-            name="email"
-            className="w-full p-3 rounded bg-neutral-800 border border-neutral-700"
-            value={formData.email}
-            onChange={handleChange}
+            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
             required
+            data-testid="input-email"
           />
-          {fieldErrors.email && (
-            <p className="mt-1 text-xs text-red-400">{fieldErrors.email}</p>
-          )}
         </div>
 
         <div className="mb-4">
-          <label className="block mb-1 text-sm">Password</label>
+          <label className="block mb-2 text-sm text-neutral-300">Password</label>
           <input
             type="password"
-            name="password"
-            className="w-full p-3 rounded bg-neutral-800 border border-neutral-700"
-            value={formData.password}
-            onChange={handleChange}
+            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Create a password"
             required
+            data-testid="input-password"
           />
-          {fieldErrors.password && (
-            <p className="mt-1 text-xs text-red-400">{fieldErrors.password}</p>
-          )}
         </div>
 
         <div className="mb-6">
-          <label className="block mb-1 text-sm">Confirm Password</label>
+          <label className="block mb-2 text-sm text-neutral-300">Confirm Password</label>
           <input
             type="password"
-            name="confirmPassword"
-            className="w-full p-3 rounded bg-neutral-800 border border-neutral-700"
-            value={formData.confirmPassword}
-            onChange={handleChange}
+            className="w-full p-3 rounded-lg bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm your password"
             required
+            data-testid="input-confirm-password"
           />
         </div>
 
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full p-3 rounded bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50"
+          className="w-full p-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
+          data-testid="button-submit"
         >
-          {isLoading ? "Creating account..." : "Sign Up"}
+          {isLoading ? "Creating account..." : "Create Account"}
         </button>
+
+        <p className="mt-6 text-center text-neutral-400">
+          Already have an account?{" "}
+          <Link to="/login" className="text-blue-400 hover:text-blue-300 transition" data-testid="link-login">
+            Sign in
+          </Link>
+        </p>
       </form>
     </div>
   );

@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import ThemeProvider from "./components/ui/theme-provider.jsx";
+import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
 
 import Home from "./pages/Home.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
@@ -13,24 +14,56 @@ import Register from "./pages/Register.jsx";
 import Settings from "./pages/Settings.jsx";
 import Error404 from "./pages/Error404.jsx";
 
+function ProtectedRoute({ children }) {
+  const { isAuthenticated, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-white">
+        Loading...
+      </div>
+    );
+  }
+  
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  return children;
+}
+
 export default function App() {
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/mood" element={<MoodPage />} />
-          <Route path="/journal" element={<JournalPage />} />
-          <Route path="/chat" element={<AIChatPage />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/health" element={<HealthPage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="*" element={<Error404 />} />
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute><Dashboard /></ProtectedRoute>
+            } />
+            <Route path="/mood" element={
+              <ProtectedRoute><MoodPage /></ProtectedRoute>
+            } />
+            <Route path="/journal" element={
+              <ProtectedRoute><JournalPage /></ProtectedRoute>
+            } />
+            <Route path="/chat" element={
+              <ProtectedRoute><AIChatPage /></ProtectedRoute>
+            } />
+            <Route path="/analytics" element={
+              <ProtectedRoute><Analytics /></ProtectedRoute>
+            } />
+            <Route path="/health" element={<HealthPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/settings" element={
+              <ProtectedRoute><Settings /></ProtectedRoute>
+            } />
+            <Route path="*" element={<Error404 />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </AuthProvider>
   );
 }

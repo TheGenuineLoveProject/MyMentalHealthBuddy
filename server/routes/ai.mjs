@@ -14,12 +14,14 @@ import { requireAuth } from "../middleware/auth.mjs";
 
 const router = express.Router();
 
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";
+const OPENAI_API_KEY = process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY || "";
+const OPENAI_BASE_URL = process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined;
 let openai = null;
 
 if (OPENAI_API_KEY) {
   openai = new OpenAI({
     apiKey: OPENAI_API_KEY,
+    baseURL: OPENAI_BASE_URL,
   });
 }
 

@@ -1,38 +1,225 @@
-import React, { useState } from "react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { apiGet, apiPost, apiDelete } from "../utils/api.js";
 
 export default function JournalPage() {
-  const [text, setText] = useState("");
+  const navigate = useNavigate();
+  const [entries, setEntries] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [expandedId, setExpandedId] = useState(null);
 
-  const saveJournal = async () => {
-    await fetch("/api/journal", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-    alert("Journal entry saved!");
-  };
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
+  useEffect(() => {
+    loadEntries();
+  }, []);
+
+  async function loadEntries() {
+    try {
+      const result = await apiGet("/api/journal");
+      if (result.ok) {
+        setEntries(result.data || []);
+      } else {
+        setError(result.message || "Failed to load entries");
+      }
+    } catch (err) {
+      console.error("Journal load error:", err);
+      setError(err.message || "Failed to load entries");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!title.trim() || !content.trim()) {
+      setError("Title and content are required");
+      return;
+    }
+
+    setIsSaving(true);
+    setError("");
+
+    try {
+      const result = await apiPost("/api/journal", { title, content });
+      if (result.ok) {
+        setTitle("");
+        setContent("");
+        setShowForm(false);
+        loadEntries();
+      } else {
+        setError(result.message || "Failed to save entry");
+      }
+    } catch (err) {
+      console.error("Journal save error:", err);
+      setError(err.message || "Failed to save entry");
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  async function handleDelete(id) {
+    if (!confirm("Delete this journal entry?")) return;
+
+    try {
+      const result = await apiDelete(`/api/journal/${id}`);
+      if (result.ok) {
+        setEntries((prev) => prev.filter((e) => e.id !== id));
+      } else {
+        setError(result.message || "Failed to delete entry");
+      }
+    } catch (err) {
+      console.error("Journal delete error:", err);
+      setError(err.message || "Failed to delete entry");
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950">
+        <div className="max-w-2xl mx-auto animate-pulse space-y-4">
+          <div className="h-8 bg-neutral-800 rounded w-1/4"></div>
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-24 bg-neutral-800 rounded-xl"></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Journal</h1>
+    <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
+      <div className="max-w-2xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Link to="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
+              <ArrowLeft className="w-6 h-6" />
+            </Link>
+            <h1 className="text-3xl font-bold" data-testid="text-title">Journal</h1>
+          </div>
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
+            data-testid="button-new"
+          >
+            <Plus className="w-5 h-5" />
+            <span>New Entry</span>
+          </button>
+        </div>
 
-      <textarea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        rows={8}
-        style={{ width: "400px" }}
-      />
+        {error && (
+          <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200" data-testid="text-error">
+            {error}
+            <button onClick={() => setError("")} className="ml-2 underline">Dismiss</button>
+          </div>
+        )}
 
-      <button
-        onClick={saveJournal}
-        style={{ display: "block", marginTop: "1rem", padding: "0.5rem" }}
-      >
-        Save
-      </button>
+        {showForm && (
+          <form onSubmit={handleSubmit} className="mb-8 bg-neutral-800 p-6 rounded-xl" data-testid="form-journal">
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">Title</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                placeholder="Give your entry a title..."
+                className="w-full p-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition"
+                data-testid="input-title"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium mb-2">Content</label>
+              <textarea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                placeholder="Write your thoughts..."
+                rows={6}
+                className="w-full p-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition resize-none"
+                data-testid="input-content"
+              />
+            </div>
+            <div className="flex gap-3">
+              <button
+                type="submit"
+                disabled={isSaving}
+                className="flex-1 p-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50"
+                data-testid="button-save"
+              >
+                {isSaving ? "Saving..." : "Save Entry"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowForm(false)}
+                className="px-6 py-3 rounded-lg bg-neutral-700 hover:bg-neutral-600 transition"
+                data-testid="button-cancel"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
 
-      <div style={{ marginTop: "1rem" }}>
-        <Link href="/dashboard">Back to Dashboard</Link>
+        {entries.length === 0 ? (
+          <div className="text-center py-12">
+            <Notebook className="w-16 h-16 mx-auto text-neutral-600 mb-4" />
+            <h2 className="text-xl font-semibold text-neutral-400">No journal entries yet</h2>
+            <p className="text-neutral-500 mt-2">Start writing to track your thoughts and feelings</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {entries.map((entry) => (
+              <div
+                key={entry.id}
+                className="bg-neutral-800 rounded-xl overflow-hidden"
+                data-testid={`entry-${entry.id}`}
+              >
+                <div
+                  className="p-4 flex items-center justify-between cursor-pointer hover:bg-neutral-700/50 transition"
+                  onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                >
+                  <div>
+                    <h3 className="font-semibold">{entry.title || "Untitled"}</h3>
+                    <p className="text-sm text-neutral-400">
+                      {new Date(entry.createdAt).toLocaleDateString("en-US", {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(entry.id);
+                      }}
+                      className="p-2 text-neutral-400 hover:text-red-400 transition"
+                      data-testid={`button-delete-${entry.id}`}
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </button>
+                    {expandedId === entry.id ? (
+                      <ChevronUp className="w-5 h-5 text-neutral-400" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-neutral-400" />
+                    )}
+                  </div>
+                </div>
+                {expandedId === entry.id && (
+                  <div className="px-4 pb-4 border-t border-neutral-700 pt-4">
+                    <p className="text-neutral-300 whitespace-pre-wrap">{entry.content}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

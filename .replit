@@ -6,7 +6,7 @@ modules = ["nodejs-20", "postgresql-16"]
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build", "-w", "client"]
-run = ["npm", "start"]
+run = ["node", "server/index.mjs"]
 
 [[ports]]
 localPort = 5000
@@ -19,6 +19,10 @@ externalPort = 3000
 [[ports]]
 localPort = 5175
 externalPort = 3001
+
+[[ports]]
+localPort = 37999
+externalPort = 3002
 
 [env]
 NODE_ENV = "development"
@@ -52,3 +56,8 @@ waitForPort = 5000
 
 [nix]
 channel = "stable-25_05"
+
+[userenv]
+
+[userenv.production]
+NODE_ENV = "production"

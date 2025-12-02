@@ -2,13 +2,18 @@
 
 import express from "express";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { eq } from "drizzle-orm";
+import { randomUUID } from "crypto";
 
 import { db } from "../db/connection.mjs";
 import { users } from "../../shared/schema.mjs";
 import { success, badRequest } from "../utils/response.mjs";
 
 const router = express.Router();
+
+const JWT_SECRET = process.env.SESSION_SECRET;
+const JWT_EXPIRES_IN = "7d";
 
 /**
  * POST /api/auth/register
@@ -40,10 +45,12 @@ router.post("/register", async (req, res) => {
     // Hash password
     const passwordHash = await bcrypt.hash(password, 10);
 
-    // Insert new user
+    // Insert new user with generated UUID
+    const userId = randomUUID();
     const inserted = await db
       .insert(users)
       .values({
+        id: userId,
         email,
         passwordHash,
         name: name ?? null,
@@ -57,7 +64,14 @@ router.post("/register", async (req, res) => {
 
     const user = inserted[0];
 
-    return success(res, { user }, "User registered successfully.");
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
+
+    return success(res, { user, token }, "User registered successfully.");
   } catch (err) {
     console.error("[auth/register] Unexpected error:", err);
     return res.status(500).json({
@@ -110,7 +124,14 @@ router.post("/login", async (req, res) => {
       createdAt: user.createdAt,
     };
 
-    return success(res, { user: safeUser }, "Login successful.");
+    // Generate JWT token
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRES_IN }
+    );
+
+    return success(res, { user: safeUser, token }, "Login successful.");
   } catch (err) {
     console.error("[auth/login] Unexpected error:", err);
     return res.status(500).json({
