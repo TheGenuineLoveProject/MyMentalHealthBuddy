@@ -76,6 +76,7 @@ export default function Register() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Your name"
+            autoComplete="name"
             data-testid="input-name"
           />
         </div>
@@ -89,6 +90,7 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             required
+            autoComplete="email"
             data-testid="input-email"
           />
         </div>
@@ -102,6 +104,7 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Create a password"
             required
+            autoComplete="new-password"
             data-testid="input-password"
           />
         </div>
@@ -115,6 +118,7 @@ export default function Register() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm your password"
             required
+            autoComplete="new-password"
             data-testid="input-confirm-password"
           />
         </div>
