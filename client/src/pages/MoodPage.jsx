@@ -61,9 +61,9 @@ export default function MoodPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-neutral-900 to-neutral-950 text-white" role="status" aria-label="Mood saved successfully">
         <div className="text-center">
-          <Smile className="w-16 h-16 mx-auto text-green-400 mb-4" />
+          <Smile className="w-16 h-16 mx-auto text-green-400 mb-4" aria-hidden="true" />
           <h2 className="text-2xl font-bold">Mood Saved!</h2>
           <p className="text-neutral-400 mt-2">Redirecting to dashboard...</p>
         </div>
@@ -74,22 +74,22 @@ export default function MoodPage() {
   return (
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-lg mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
-            <ArrowLeft className="w-6 h-6" />
+        <header className="flex items-center gap-4 mb-8">
+          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
+            <ArrowLeft className="w-6 h-6" aria-hidden="true" />
           </Link>
           <h1 className="text-3xl font-bold" data-testid="text-title">Track Your Mood</h1>
-        </div>
+        </header>
 
         {error && (
-          <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200" data-testid="text-error">
+          <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200" role="alert" data-testid="text-error">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-8" data-testid="form-mood">
-          <div>
-            <label className="block text-lg font-medium mb-4">How are you feeling? (1-10)</label>
+        <form onSubmit={handleSubmit} className="space-y-8" data-testid="form-mood" aria-label="Mood tracking form">
+          <fieldset>
+            <legend className="block text-lg font-medium mb-4">How are you feeling? (1-10)</legend>
             <div className="flex items-center gap-4">
               <input
                 type="range"
@@ -99,68 +99,76 @@ export default function MoodPage() {
                 onChange={(e) => setRating(Number(e.target.value))}
                 className="flex-1 h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
                 data-testid="input-rating"
+                aria-label={`Mood rating: ${rating} out of 10`}
+                aria-valuemin={1}
+                aria-valuemax={10}
+                aria-valuenow={rating}
               />
-              <span className="text-3xl font-bold text-blue-400 w-12 text-center" data-testid="text-rating">
+              <span className="text-3xl font-bold text-blue-400 w-12 text-center" data-testid="text-rating" aria-hidden="true">
                 {rating}
               </span>
             </div>
-            <div className="flex justify-between text-sm text-neutral-500 mt-2">
+            <div className="flex justify-between text-sm text-neutral-500 mt-2" aria-hidden="true">
               <span>Very Low</span>
               <span>Very High</span>
             </div>
-          </div>
+          </fieldset>
 
-          <div>
-            <label className="block text-lg font-medium mb-4">Select an emotion</label>
-            <div className="grid grid-cols-3 gap-3">
+          <fieldset>
+            <legend className="block text-lg font-medium mb-4">Select an emotion</legend>
+            <div className="grid grid-cols-3 gap-3" role="radiogroup" aria-label="Emotion selection">
               {EMOTIONS.map(({ name, icon: Icon, color }) => (
                 <button
                   key={name}
                   type="button"
                   onClick={() => setEmotion(name)}
-                  className={`p-4 rounded-xl border-2 transition ${
+                  className={`p-4 rounded-xl border-2 transition focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                     emotion === name
                       ? "border-blue-500 bg-blue-500/20"
                       : "border-neutral-700 bg-neutral-800 hover:border-neutral-600"
                   }`}
                   data-testid={`button-emotion-${name.toLowerCase()}`}
+                  aria-pressed={emotion === name}
+                  aria-label={`Select emotion: ${name}`}
                 >
-                  <Icon className={`w-8 h-8 mx-auto mb-2 ${color}`} />
+                  <Icon className={`w-8 h-8 mx-auto mb-2 ${color}`} aria-hidden="true" />
                   <span className="text-sm">{name}</span>
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
 
-          <div>
-            <label className="block text-lg font-medium mb-4">Activities today</label>
-            <div className="flex flex-wrap gap-2">
+          <fieldset>
+            <legend className="block text-lg font-medium mb-4">Activities today</legend>
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Activity selection">
               {ACTIVITIES.map((activity) => (
                 <button
                   key={activity}
                   type="button"
                   onClick={() => toggleActivity(activity)}
-                  className={`px-4 py-2 rounded-full border transition ${
+                  className={`px-4 py-2 rounded-full border transition focus:outline-none focus:ring-2 focus:ring-blue-400 ${
                     activities.includes(activity)
                       ? "border-blue-500 bg-blue-500/20 text-blue-400"
                       : "border-neutral-700 bg-neutral-800 hover:border-neutral-600"
                   }`}
                   data-testid={`button-activity-${activity.toLowerCase()}`}
+                  aria-pressed={activities.includes(activity)}
                 >
                   {activity}
                 </button>
               ))}
             </div>
-          </div>
+          </fieldset>
 
           <div>
-            <label className="block text-lg font-medium mb-4">Notes (optional)</label>
+            <label htmlFor="mood-notes" className="block text-lg font-medium mb-4">Notes (optional)</label>
             <textarea
+              id="mood-notes"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="Any thoughts you'd like to add..."
               rows={4}
-              className="w-full p-4 rounded-xl bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none transition resize-none"
+              className="w-full p-4 rounded-xl bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"
               data-testid="input-notes"
             />
           </div>
@@ -168,8 +176,9 @@ export default function MoodPage() {
           <button
             type="submit"
             disabled={saveMutation.isPending}
-            className="w-full p-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full p-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
             data-testid="button-submit"
+            aria-busy={saveMutation.isPending}
           >
             {saveMutation.isPending ? "Saving..." : "Save Mood Entry"}
           </button>

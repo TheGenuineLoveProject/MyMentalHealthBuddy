@@ -15,16 +15,17 @@ export default function Analytics() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950">
+      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950" role="status" aria-label="Loading analytics">
         <div className="max-w-4xl mx-auto">
           <div className="animate-pulse space-y-6">
-            <div className="h-8 bg-neutral-800 rounded w-1/4"></div>
+            <div className="h-8 bg-neutral-800 rounded w-1/4" aria-hidden="true"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-32 bg-neutral-800 rounded-xl"></div>
+                <div key={i} className="h-32 bg-neutral-800 rounded-xl" aria-hidden="true"></div>
               ))}
             </div>
           </div>
+          <span className="sr-only">Loading your analytics data...</span>
         </div>
       </div>
     );
@@ -32,12 +33,12 @@ export default function Analytics() {
 
   if (error) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 flex items-center justify-center">
+      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 flex items-center justify-center" role="alert">
         <div className="text-center text-white">
           <p className="text-red-400 mb-4">{error.message || "Failed to load analytics"}</p>
           <button
             onClick={() => refetch()}
-            className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
+            className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
             data-testid="button-retry"
           >
             Try Again
@@ -50,87 +51,88 @@ export default function Analytics() {
   return (
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
-            <ArrowLeft className="w-6 h-6" />
+        <header className="flex items-center gap-4 mb-8">
+          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
+            <ArrowLeft className="w-6 h-6" aria-hidden="true" />
           </Link>
           <h1 className="text-3xl font-bold" data-testid="text-title">Analytics</h1>
-        </div>
+        </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-green-900/50 to-green-800/30 p-5 rounded-xl border border-green-700/30" data-testid="card-trend">
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4" aria-label="Analytics overview">
+          <article className="bg-gradient-to-br from-green-900/50 to-green-800/30 p-5 rounded-xl border border-green-700/30" data-testid="card-trend">
             <div className="flex items-center gap-3 mb-3">
               {getTrendIcon(stats?.averageMood)}
               <h2 className="text-lg font-semibold">Mood Trend</h2>
             </div>
-            <p className="text-2xl font-bold">
+            <p className="text-2xl font-bold" aria-label={`Current mood trend: ${stats?.averageMood !== null ? (stats.averageMood >= 7 ? "Positive" : stats.averageMood <= 4 ? "Needs Attention" : "Stable") : "No data"}`}>
               {stats?.averageMood !== null ? (
                 stats.averageMood >= 7 ? "Positive" : stats.averageMood <= 4 ? "Needs Attention" : "Stable"
               ) : "No data"}
             </p>
-          </div>
+          </article>
 
-          <div className="bg-gradient-to-br from-blue-900/50 to-blue-800/30 p-5 rounded-xl border border-blue-700/30" data-testid="card-entries">
+          <article className="bg-gradient-to-br from-blue-900/50 to-blue-800/30 p-5 rounded-xl border border-blue-700/30" data-testid="card-entries">
             <div className="flex items-center gap-3 mb-3">
-              <Calendar className="w-6 h-6 text-blue-400" />
+              <Calendar className="w-6 h-6 text-blue-400" aria-hidden="true" />
               <h2 className="text-lg font-semibold">Total Mood Entries</h2>
             </div>
-            <p className="text-4xl font-bold">{stats?.moodCount || 0}</p>
-          </div>
+            <p className="text-4xl font-bold" aria-label={`${stats?.moodCount || 0} total mood entries`}>{stats?.moodCount || 0}</p>
+          </article>
 
-          <div className="bg-gradient-to-br from-amber-900/50 to-amber-800/30 p-5 rounded-xl border border-amber-700/30" data-testid="card-average">
+          <article className="bg-gradient-to-br from-amber-900/50 to-amber-800/30 p-5 rounded-xl border border-amber-700/30" data-testid="card-average">
             <div className="flex items-center gap-3 mb-3">
-              <Award className="w-6 h-6 text-amber-400" />
+              <Award className="w-6 h-6 text-amber-400" aria-hidden="true" />
               <h2 className="text-lg font-semibold">Average Mood Rating</h2>
             </div>
             <div className="flex items-end gap-2">
-              <span className="text-4xl font-bold">
+              <span className="text-4xl font-bold" aria-label={`Average mood: ${stats?.averageMood !== null ? stats.averageMood : 'no data'} out of 10`}>
                 {stats?.averageMood !== null ? stats.averageMood : "--"}
               </span>
-              <span className="text-neutral-400 mb-1">/10</span>
+              <span className="text-neutral-400 mb-1" aria-hidden="true">/10</span>
             </div>
-          </div>
+          </article>
 
-          <div className="bg-gradient-to-br from-purple-900/50 to-purple-800/30 p-5 rounded-xl border border-purple-700/30" data-testid="card-journal">
+          <article className="bg-gradient-to-br from-purple-900/50 to-purple-800/30 p-5 rounded-xl border border-purple-700/30" data-testid="card-journal">
             <div className="flex items-center gap-3 mb-3">
-              <BarChart3 className="w-6 h-6 text-purple-400" />
+              <BarChart3 className="w-6 h-6 text-purple-400" aria-hidden="true" />
               <h2 className="text-lg font-semibold">Journal Entries</h2>
             </div>
-            <p className="text-4xl font-bold">{stats?.journalCount || 0}</p>
-          </div>
-        </div>
+            <p className="text-4xl font-bold" aria-label={`${stats?.journalCount || 0} journal entries`}>{stats?.journalCount || 0}</p>
+          </article>
+        </section>
 
         {stats?.recentMoods && stats.recentMoods.length > 0 && (
-          <div className="mt-8">
+          <section className="mt-8" aria-label="Recent mood history chart">
             <h2 className="text-xl font-semibold mb-4">Recent Mood History</h2>
-            <div className="bg-neutral-800 rounded-xl p-4">
+            <div className="bg-neutral-800 rounded-xl p-4" role="img" aria-label={`Bar chart showing mood ratings over ${stats.recentMoods.length} days`}>
               <div className="flex items-end justify-between h-32 gap-2">
                 {stats.recentMoods.map((mood, idx) => (
-                  <div key={idx} className="flex-1 flex flex-col items-center gap-2">
+                  <div key={idx} className="flex-1 flex flex-col items-center gap-2" role="presentation">
                     <div
                       className="w-full bg-blue-500 rounded-t transition-all"
                       style={{ height: `${(mood.rating / 10) * 100}%` }}
                       data-testid={`bar-mood-${idx}`}
+                      aria-hidden="true"
                     ></div>
-                    <span className="text-xs text-neutral-400">
+                    <span className="text-xs text-neutral-400" aria-label={`${new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "long" })}: mood rating ${mood.rating}`}>
                       {new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "short" })}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </section>
         )}
 
-        <div className="mt-8 text-center">
+        <nav className="mt-8 text-center">
           <Link
             href="/dashboard"
-            className="inline-block px-6 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
+            className="inline-block px-6 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
             data-testid="link-dashboard"
           >
             Back to Dashboard
           </Link>
-        </div>
+        </nav>
       </div>
     </div>
   );
