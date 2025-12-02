@@ -1,7 +1,8 @@
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
+import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -65,12 +66,19 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-4xl mx-auto">
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold" data-testid="text-greeting">
-            {getGreeting()}, {user?.email?.split("@")[0] || "Friend"}
-          </h1>
-          <p className="text-neutral-400 mt-1">Here's your wellness overview</p>
+        <header className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold" data-testid="text-greeting">
+              {getGreeting()}, {user?.email?.split("@")[0] || "Friend"}
+            </h1>
+            <p className="text-neutral-400 mt-1">Here's your wellness overview</p>
+          </div>
+          <Link href="/settings" className="p-2 text-neutral-400 hover:text-white transition rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" data-testid="link-settings" aria-label="Settings">
+            <Settings className="w-6 h-6" aria-hidden="true" />
+          </Link>
         </header>
+
+        <GuardianHeartPanel name={user?.email?.split("@")[0]} />
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" aria-label="Wellness statistics">
           <article className="bg-gradient-to-br from-blue-900/50 to-blue-800/30 p-5 rounded-xl border border-blue-700/30" data-testid="card-mood-score">

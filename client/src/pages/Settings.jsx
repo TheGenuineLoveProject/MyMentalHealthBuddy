@@ -48,17 +48,17 @@ export default function Settings() {
   return (
     <div data-testid="page-settings" className="min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
       <div className="max-w-xl mx-auto px-6 py-8">
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
-            <ArrowLeft className="w-6 h-6" />
+        <header className="flex items-center gap-4 mb-8">
+          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
+            <ArrowLeft className="w-6 h-6" aria-hidden="true" />
           </Link>
           <div className="flex items-center gap-3">
-            <SettingsIcon className="w-8 h-8 text-purple-400" />
+            <SettingsIcon className="w-8 h-8 text-purple-400" aria-hidden="true" />
             <h1 data-testid="text-settings-title" className="text-3xl font-bold">
               Settings
             </h1>
           </div>
-        </div>
+        </header>
 
         {message && (
           <div
@@ -66,15 +66,15 @@ export default function Settings() {
             role="status"
             className="p-4 rounded-xl mb-6 flex items-center gap-3 bg-green-900/50 border border-green-700 text-green-200"
           >
-            <Shield className="w-5 h-5" />
+            <Shield className="w-5 h-5" aria-hidden="true" />
             {message}
           </div>
         )}
 
-        <section data-testid="section-account" className="bg-neutral-800 p-6 rounded-xl mb-6">
+        <section data-testid="section-account" className="bg-neutral-800 p-6 rounded-xl mb-6" aria-labelledby="account-heading">
           <div className="flex items-center gap-2 mb-4">
-            <User className="w-5 h-5 text-blue-400" />
-            <h2 className="text-lg font-semibold">Account Information</h2>
+            <User className="w-5 h-5 text-blue-400" aria-hidden="true" />
+            <h2 id="account-heading" className="text-lg font-semibold">Account Information</h2>
           </div>
           
           <div className="space-y-4">
@@ -102,10 +102,10 @@ export default function Settings() {
           </div>
         </section>
 
-        <section data-testid="section-preferences" className="bg-neutral-800 p-6 rounded-xl mb-6">
+        <section data-testid="section-preferences" className="bg-neutral-800 p-6 rounded-xl mb-6" aria-labelledby="preferences-heading">
           <div className="flex items-center gap-2 mb-4">
-            <Palette className="w-5 h-5 text-purple-400" />
-            <h2 className="text-lg font-semibold">Preferences</h2>
+            <Palette className="w-5 h-5 text-purple-400" aria-hidden="true" />
+            <h2 id="preferences-heading" className="text-lg font-semibold">Preferences</h2>
           </div>
           
           <div className="space-y-5">
@@ -116,12 +116,12 @@ export default function Settings() {
                   data-testid="checkbox-notifications"
                   checked={notifications}
                   onChange={(e) => setNotifications(e.target.checked)}
-                  className="w-5 h-5 rounded accent-blue-500"
+                  className="w-5 h-5 rounded accent-blue-500 focus:ring-2 focus:ring-blue-400"
                 />
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <Bell className="w-4 h-4 text-neutral-400" />
+                  <Bell className="w-4 h-4 text-neutral-400" aria-hidden="true" />
                   <span className="font-medium">Reminder notifications</span>
                 </div>
                 <p className="text-sm mt-1 text-neutral-500">
@@ -142,7 +142,7 @@ export default function Settings() {
                 data-testid="select-theme"
                 value={theme}
                 onChange={(e) => setTheme(e.target.value)}
-                className="w-full p-3 rounded-xl border bg-neutral-900 text-white border-neutral-700"
+                className="w-full p-3 rounded-xl border bg-neutral-900 text-white border-neutral-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
               >
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
@@ -155,32 +155,32 @@ export default function Settings() {
               data-testid="button-save-preferences"
               disabled={isSaving}
               aria-busy={isSaving}
-              className="w-full p-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50"
+              className="w-full p-3 rounded-xl bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               {isSaving ? "Saving..." : "Save Preferences"}
             </button>
           </div>
         </section>
 
-        <section data-testid="section-actions" className="bg-neutral-800 p-6 rounded-xl mb-6">
-          <h2 className="text-lg font-semibold mb-4">Account Actions</h2>
+        <section data-testid="section-actions" className="bg-neutral-800 p-6 rounded-xl mb-6" aria-labelledby="actions-heading">
+          <h2 id="actions-heading" className="text-lg font-semibold mb-4">Account Actions</h2>
           
           <div className="space-y-3">
             <button
               onClick={handleLogout}
               data-testid="button-logout"
-              className="w-full flex items-center justify-center gap-2 p-3 rounded-xl border border-neutral-700 hover:bg-neutral-700 transition"
+              className="w-full flex items-center justify-center gap-2 p-3 rounded-xl border border-neutral-700 hover:bg-neutral-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
-              <LogOut className="w-4 h-4" />
+              <LogOut className="w-4 h-4" aria-hidden="true" />
               Log Out
             </button>
             
             <button
               onClick={handleDeleteAccount}
               data-testid="button-delete-account"
-              className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-red-900/50 border border-red-700 text-red-200 hover:bg-red-900 transition"
+              className="w-full flex items-center justify-center gap-2 p-3 rounded-xl bg-red-900/50 border border-red-700 text-red-200 hover:bg-red-900 transition focus:outline-none focus:ring-2 focus:ring-red-400"
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className="w-4 h-4" aria-hidden="true" />
               Delete Account
             </button>
           </div>
