@@ -80,3 +80,14 @@ The client is built using Vite for optimized production bundles with code splitt
 - Graceful shutdown handler for Replit Autoscale deployments
 - Global error handler for uncaught exceptions
 - Health check endpoint at /api/health
+
+### Integration Testing Suite
+- 35 comprehensive tests covering AI chat, mood, and journal CRUD operations
+- Vitest configured with supertest for API testing
+- Test helpers for authentication and user creation
+- All tests pass with zero failures
+
+### Schema Synchronization
+- server/db/schema.mjs and shared/schema.mjs fully synchronized
+- TEXT-based IDs, VARCHAR ratings match actual Neon database structure
+- Fixed mood stats calculation to parse VARCHAR ratings as numbers for proper analytics
