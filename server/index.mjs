@@ -1,8 +1,8 @@
 // server/index.mjs
+import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -10,8 +10,6 @@ import { apiRateLimit, authRateLimit } from "./middleware/rateLimit.mjs";
 import { cspHeaders, sanitizeBody, securityHeaders } from "./middleware/security.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import { initSentry, sentryErrorHandler, captureException } from "./utils/sentry.mjs";
-
-dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -38,6 +36,7 @@ if (!SESSION_SECRET) {
     process.exit(1);
   } else {
     console.warn("WARNING: Running without SESSION_SECRET in development mode. Auth will fail.");
+    process.env.SESSION_SECRET = "mmb-dev-session-secret-change-me";
   }
 }
 
@@ -45,6 +44,7 @@ if (!SESSION_SECRET) {
 // 0. APP BASE
 // -------------------------------------------
 const app = express();
+const PORT = Number(process.env.PORT) || 5000;
 
 // Initialize Sentry for error tracking
 initSentry(app);
@@ -80,7 +80,6 @@ app.use(apiRateLimit);
 // -------------------------------------------
 // 2. ROUTES (EACH FILE HAS ITS OWN ROUTER)
 // -------------------------------------------
-
 import analyticsRoutes from "./routes/analytics.mjs";
 import authRoutes from "./routes/auth.mjs";
 import journalRoutes from "./routes/journal.mjs";
@@ -188,9 +187,7 @@ app.use((err, req, res, next) => {
 // -------------------------------------------
 // 6. START SERVER WITH GRACEFUL SHUTDOWN
 // -------------------------------------------
-const PORT = process.env.PORT || 5000;
-
-const server = app.listen(PORT, () => {
+const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(
     `MyMentalHealthBuddy API listening on http://0.0.0.0:${PORT} (env: ${process.env.NODE_ENV || "development"})`
   );

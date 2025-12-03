@@ -47,7 +47,7 @@ export const createMoodSchema = z.object({
 
 export const updateMoodSchema = createMoodSchema.partial();
 
-// Journal schemas
+// Journal schemas - API uses 'content', database uses 'text'
 export const createJournalSchema = z.object({
   title: z
     .string()

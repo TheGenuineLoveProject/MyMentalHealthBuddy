@@ -12,6 +12,34 @@ import { success, badRequest } from "../utils/response.mjs";
 import { registerSchema, loginSchema, validateBody } from "../validation/schemas.mjs";
 import { authRateLimit } from "../middleware/rateLimit.mjs";
 
+// [MMB] Auth stubs with standardized responses (wire to your real auth)
+import { Router } from "express";
+import { ok, fail } from "../utils/apiResponse.mjs";
+
+export const authRouter = Router();
+
+authRouter.post("/register", async (req, res) => {
+  try {
+    const { email, password, name } = req.body || {};
+    if (!email || !password || !name) return fail(res, 400, "Missing fields", "VALIDATION");
+    // TODO: integrate with real user creation + hashing
+    return ok(res, { user: { id: "TODO", email, name } }, "Registered");
+  } catch (e) {
+    return fail(res, 500, "Internal error", "REGISTER_ERROR");
+  }
+});
+
+authRouter.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body || {};
+    if (!email || !password) return fail(res, 400, "Missing fields", "VALIDATION");
+    // TODO: integrate with real verification + JWT/session
+    return ok(res, { token: "TODO", user: { id: "TODO", email } }, "Logged in");
+  } catch {
+    return fail(res, 500, "Internal error", "LOGIN_ERROR");
+  }
+});
+
 const router = express.Router();
 
 // Apply stricter rate limiting to auth endpoints

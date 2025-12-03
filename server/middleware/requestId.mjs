@@ -2,17 +2,10 @@
 // Request ID and structured logging middleware
 
 import { randomUUID } from "node:crypto";
-
-// Assigns a unique request ID to each request
-export function requestId(req, res, next) {
-  const existingId = req.headers["x-request-id"];
-  const id = typeof existingId === "string" && existingId.trim() !== ""
-    ? existingId
-    : randomUUID();
-
-  req.requestId = id;
-  res.setHeader("X-Request-Id", id);
-
+// [MMB] Simple request id
+import crypto from "crypto";
+export function requestId(req, _res, next) {
+  req.requestId = req.headers["x-request-id"] || crypto.randomUUID();
   next();
 }
 
