@@ -177,6 +177,36 @@ The client is built using Vite for optimized production bundles with code splitt
   - idx_audit_log_user_id, idx_audit_log_created_at
 - Set APP_BASE_URL environment variable for production Stripe redirects
 - All 8 database tables now synchronized with schema
+- Added foreign key constraints to schema for referential integrity:
+  - moods.userId → users.id (CASCADE)
+  - journals.userId → users.id (CASCADE)
+  - ai_messages.userId → users.id (CASCADE)
+  - password_reset_tokens.userId → users.id (CASCADE)
+  - audit_log.userId → users.id (SET NULL)
+
+### Premium Visual Design System (December 3, 2025)
+- Complete Canva-inspired visual overhaul with premium aesthetics
+- HSL color format for all CSS custom properties (accessibility compliant)
+- Premium typography: Inter for body, Playfair Display for display headings
+- Enhanced gradient system: hero, card, glass, calm, energy, focus, success gradients
+- Premium component classes: .card-elevated, .btn-gradient, .feature-card
+- Mood palette with expressive colors for emotional tracking
+- Refined shadows: xs, sm, md, lg, xl, glow, card, button variants
+- Micro-interactions with animate-scale-in, animate-fade-in-up
+- Full light/dark theme support with proper color transitions
+
+### Pages Redesigned
+- Home: Trust badges, social proof, gradient hero section, feature cards
+- Dashboard: Quick action cards, mood overview, visual hierarchy
+- Mood Page: Premium mood picker, rating system, analytics integration
+- Journal Page: Elevated cards, expandable entries, clean form design
+- AI Chat: Gradient chat bubbles, typing indicators, crisis link
+- Login/Register: Form icons, benefits list, validation feedback
+
+### Testing Infrastructure
+- Added data-testid attributes to all interactive elements
+- Pattern: button-*, input-*, link-*, text-*, card-*, message-*
+- Full accessibility compliance with ARIA labels and roles
 
 ## Database Tables Reference
 

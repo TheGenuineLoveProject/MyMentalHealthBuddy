@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart } from "lucide-react";
+import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO.jsx";
@@ -14,27 +14,47 @@ export default function Dashboard() {
 
   function getGreeting() {
     const hour = new Date().getHours();
-    if (hour < 12) return "Good morning";
-    if (hour < 18) return "Good afternoon";
-    return "Good evening";
+    if (hour < 12) return { text: "Good morning", icon: Sun, color: "text-amber-400" };
+    if (hour < 18) return { text: "Good afternoon", icon: Sun, color: "text-orange-400" };
+    return { text: "Good evening", icon: Moon, color: "text-indigo-400" };
   }
 
   function getTrendIcon(trend) {
     const label = trend === "improving" ? "Mood improving" : trend === "declining" ? "Mood declining" : "Mood stable";
-    if (trend === "improving") return <><TrendingUp className="w-5 h-5 text-green-400" aria-hidden="true" /><span className="sr-only">{label}</span></>;
-    if (trend === "declining") return <><TrendingDown className="w-5 h-5 text-red-400" aria-hidden="true" /><span className="sr-only">{label}</span></>;
-    return <><Minus className="w-5 h-5 text-neutral-400" aria-hidden="true" /><span className="sr-only">{label}</span></>;
+    if (trend === "improving") return (
+      <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium">
+        <TrendingUp className="w-4 h-4" aria-hidden="true" />
+        <span>Improving</span>
+      </div>
+    );
+    if (trend === "declining") return (
+      <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-red-500/10 text-red-400 text-sm font-medium">
+        <TrendingDown className="w-4 h-4" aria-hidden="true" />
+        <span>Declining</span>
+      </div>
+    );
+    return (
+      <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-neutral-500/10 text-neutral-400 text-sm font-medium">
+        <Minus className="w-4 h-4" aria-hidden="true" />
+        <span>Stable</span>
+      </div>
+    );
   }
 
   if (isLoading) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950" role="status" aria-label="Loading dashboard">
-        <div className="max-w-4xl mx-auto">
-          <div className="animate-pulse space-y-6">
-            <div className="h-8 bg-neutral-800 rounded w-1/3" aria-hidden="true"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="min-h-screen p-6 bg-gradient-mesh" role="status" aria-label="Loading dashboard">
+        <div className="max-w-5xl mx-auto">
+          <div className="space-y-6">
+            <div className="skeleton h-12 w-1/3 rounded-xl"></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[1, 2].map((i) => (
+                <div key={i} className="skeleton-card"></div>
+              ))}
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-32 bg-neutral-800 rounded-xl" aria-hidden="true"></div>
+                <div key={i} className="skeleton h-28 rounded-xl"></div>
               ))}
             </div>
           </div>
@@ -46,12 +66,16 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 flex items-center justify-center" role="alert">
-        <div className="text-center text-white">
-          <p className="text-red-400 mb-4">{error.message || "Failed to load dashboard"}</p>
+      <div className="min-h-screen p-6 bg-gradient-mesh flex items-center justify-center" role="alert">
+        <div className="card-elevated p-8 text-center max-w-md">
+          <div className="w-16 h-16 rounded-full bg-[var(--accent-rose-soft)] flex items-center justify-center mx-auto mb-4">
+            <Heart className="w-8 h-8 text-[var(--accent-rose)]" aria-hidden="true" />
+          </div>
+          <h2 className="text-xl font-semibold mb-2">Unable to load dashboard</h2>
+          <p className="text-[var(--text-secondary)] mb-6">{error.message || "Something went wrong. Please try again."}</p>
           <button
             onClick={() => refetch()}
-            className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="btn btn-primary"
             data-testid="button-retry"
           >
             Try Again
@@ -63,6 +87,8 @@ export default function Dashboard() {
 
   const moodData = data?.moodSummary || {};
   const journalData = data?.journalSummary || {};
+  const greeting = getGreeting();
+  const GreetingIcon = greeting.icon;
 
   return (
     <>
@@ -70,119 +96,175 @@ export default function Dashboard() {
         title="Dashboard"
         description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with MyMentalHealthBuddy."
       />
-    <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
-      <div className="max-w-4xl mx-auto">
-        <header className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold" data-testid="text-greeting">
-              {getGreeting()}, {user?.email?.split("@")[0] || "Friend"}
-            </h1>
-            <p className="text-neutral-400 mt-1">Here's your wellness overview</p>
-          </div>
-          <Link href="/settings" className="p-2 text-neutral-400 hover:text-white transition rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" data-testid="link-settings" aria-label="Settings">
-            <Settings className="w-6 h-6" aria-hidden="true" />
-          </Link>
-        </header>
-
-        <GuardianHeartPanel name={user?.email?.split("@")[0]} />
-
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" aria-label="Wellness statistics">
-          <article className="bg-gradient-to-br from-blue-900/50 to-blue-800/30 p-5 rounded-xl border border-blue-700/30" data-testid="card-mood-score">
-            <div className="flex items-center gap-3 mb-3">
-              <Smile className="w-6 h-6 text-blue-400" aria-hidden="true" />
-              <h2 className="text-lg font-semibold">Average Mood</h2>
-            </div>
-            <div className="flex items-end gap-2">
-              <span className="text-4xl font-bold" aria-label={`Average mood score: ${moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : 'no data'} out of 10`}>
-                {moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : "--"}
-              </span>
-              <span className="text-neutral-400 mb-1" aria-hidden="true">/10</span>
-              {moodData.trend && getTrendIcon(moodData.trend)}
-            </div>
-            <p className="text-sm text-neutral-400 mt-2">
-              {moodData.entriesLast7Days || 0} entries this week
-            </p>
-          </article>
-
-          <article className="bg-gradient-to-br from-purple-900/50 to-purple-800/30 p-5 rounded-xl border border-purple-700/30" data-testid="card-journal">
-            <div className="flex items-center gap-3 mb-3">
-              <Notebook className="w-6 h-6 text-purple-400" aria-hidden="true" />
-              <h2 className="text-lg font-semibold">Journal Entries</h2>
-            </div>
-            <span className="text-4xl font-bold" aria-label={`${journalData.totalEntries || 0} total journal entries`}>{journalData.totalEntries || 0}</span>
-            <p className="text-sm text-neutral-400 mt-2">Total entries</p>
-          </article>
-        </section>
-
-        <nav aria-label="Quick actions">
-          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link href="/mood" className="group focus:outline-none focus:ring-2 focus:ring-blue-400 rounded-xl" data-testid="link-mood">
-              <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-blue-500/50">
-                <Smile className="w-8 h-8 mx-auto mb-2 text-blue-400" aria-hidden="true" />
-                <span className="text-sm">Track Mood</span>
+      <div className="min-h-screen p-6 bg-gradient-mesh">
+        <div className="max-w-5xl mx-auto">
+          {/* Header */}
+          <header className="flex items-start justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-[var(--gradient-focus)] flex items-center justify-center shadow-lg animate-pulse-glow">
+                <GreetingIcon className={`w-7 h-7 text-white`} aria-hidden="true" />
               </div>
-            </Link>
-
-            <Link href="/journal" className="group focus:outline-none focus:ring-2 focus:ring-purple-400 rounded-xl" data-testid="link-journal">
-              <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-purple-500/50">
-                <Notebook className="w-8 h-8 mx-auto mb-2 text-purple-400" aria-hidden="true" />
-                <span className="text-sm">Write Journal</span>
-              </div>
-            </Link>
-
-            <Link href="/chat" className="group focus:outline-none focus:ring-2 focus:ring-green-400 rounded-xl" data-testid="link-chat">
-              <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-green-500/50">
-                <MessageCircle className="w-8 h-8 mx-auto mb-2 text-green-400" aria-hidden="true" />
-                <span className="text-sm">AI Chat</span>
-              </div>
-            </Link>
-
-            <Link href="/analytics" className="group focus:outline-none focus:ring-2 focus:ring-amber-400 rounded-xl" data-testid="link-analytics">
-              <div className="bg-neutral-800 p-4 rounded-xl text-center hover:bg-neutral-700 transition group-hover:ring-2 ring-amber-500/50">
-                <BarChart3 className="w-8 h-8 mx-auto mb-2 text-amber-400" aria-hidden="true" />
-                <span className="text-sm">Analytics</span>
-              </div>
-            </Link>
-          </div>
-        </nav>
-
-        <div className="mt-6 p-4 bg-red-900/20 border border-red-800/50 rounded-xl">
-          <Link href="/crisis" className="flex items-center justify-between group focus:outline-none" data-testid="link-crisis-resources">
-            <div className="flex items-center gap-3">
-              <Heart className="w-6 h-6 text-red-400" aria-hidden="true" />
               <div>
-                <h3 className="font-medium text-red-200">Crisis Resources</h3>
-                <p className="text-sm text-red-300/70">24/7 support hotlines and help</p>
+                <h1 className="text-3xl font-bold tracking-tight" data-testid="text-greeting">
+                  {greeting.text}, {user?.email?.split("@")[0] || "Friend"}
+                </h1>
+                <p className="text-[var(--text-secondary)] mt-1">Here's your wellness overview</p>
               </div>
             </div>
-            <span className="text-red-400 group-hover:text-red-300 transition">View &rarr;</span>
-          </Link>
-        </div>
+            <Link 
+              href="/settings" 
+              className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+              data-testid="link-settings" 
+              aria-label="Settings"
+            >
+              <Settings className="w-5 h-5" aria-hidden="true" />
+            </Link>
+          </header>
 
-        {moodData.recentMoods && moodData.recentMoods.length > 0 && (
-          <section className="mt-8" aria-label="Recent mood history">
-            <h2 className="text-xl font-semibold mb-4">Recent Moods</h2>
-            <div className="flex gap-2 overflow-x-auto pb-2" role="list" aria-label="Mood entries from recent days">
-              {moodData.recentMoods.map((mood, idx) => (
-                <div
-                  key={idx}
-                  className="flex-shrink-0 bg-neutral-800 p-3 rounded-lg text-center min-w-[80px]"
-                  data-testid={`mood-entry-${idx}`}
-                  role="listitem"
-                  aria-label={`Mood rating ${mood.rating} on ${new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "long" })}`}
-                >
-                  <div className="text-2xl font-bold text-blue-400" aria-hidden="true">{mood.rating}</div>
-                  <div className="text-xs text-neutral-400" aria-hidden="true">
-                    {new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "short" })}
+          {/* Guardian Heart Panel */}
+          <GuardianHeartPanel name={user?.email?.split("@")[0]} />
+
+          {/* Stats Cards */}
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" aria-label="Wellness statistics">
+            {/* Mood Card */}
+            <article 
+              className="stat-card bg-gradient-to-br from-[var(--accent-sky)] to-blue-600 text-white shadow-lg"
+              data-testid="card-mood-score"
+            >
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                    <Smile className="w-6 h-6" aria-hidden="true" />
                   </div>
+                  <h2 className="text-lg font-semibold opacity-90">Average Mood</h2>
                 </div>
-              ))}
-            </div>
+                {moodData.trend && (
+                  <div className="px-3 py-1.5 rounded-full bg-white/20 text-sm font-medium backdrop-blur-sm">
+                    {moodData.trend === "improving" ? "↑ Improving" : moodData.trend === "declining" ? "↓ Declining" : "→ Stable"}
+                  </div>
+                )}
+              </div>
+              <div className="flex items-baseline gap-2">
+                <span 
+                  className="stat-value" 
+                  aria-label={`Average mood score: ${moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : 'no data'} out of 10`}
+                >
+                  {moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : "--"}
+                </span>
+                <span className="text-2xl opacity-70">/10</span>
+              </div>
+              <p className="stat-label text-white/70 mt-3">
+                {moodData.entriesLast7Days || 0} entries this week
+              </p>
+            </article>
+
+            {/* Journal Card */}
+            <article 
+              className="stat-card bg-gradient-to-br from-[var(--primary)] to-purple-600 text-white shadow-lg"
+              data-testid="card-journal"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                  <Notebook className="w-6 h-6" aria-hidden="true" />
+                </div>
+                <h2 className="text-lg font-semibold opacity-90">Journal Entries</h2>
+              </div>
+              <span 
+                className="stat-value" 
+                aria-label={`${journalData.totalEntries || 0} total journal entries`}
+              >
+                {journalData.totalEntries || 0}
+              </span>
+              <p className="stat-label text-white/70 mt-3">Total entries written</p>
+            </article>
           </section>
-        )}
+
+          {/* Quick Actions */}
+          <nav aria-label="Quick actions" className="mb-8">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
+              Quick Actions
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Link href="/mood" className="quick-action group" data-testid="link-mood">
+                <div className="quick-action-icon bg-[var(--accent-sky-soft)]">
+                  <Smile className="w-6 h-6 text-[var(--accent-sky)]" aria-hidden="true" />
+                </div>
+                <span className="font-medium">Track Mood</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
+
+              <Link href="/journal" className="quick-action group" data-testid="link-journal">
+                <div className="quick-action-icon bg-[var(--primary-soft)]">
+                  <Notebook className="w-6 h-6 text-[var(--primary)]" aria-hidden="true" />
+                </div>
+                <span className="font-medium">Write Journal</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
+
+              <Link href="/chat" className="quick-action group" data-testid="link-chat">
+                <div className="quick-action-icon bg-[var(--accent-teal-soft)]">
+                  <MessageCircle className="w-6 h-6 text-[var(--accent-teal)]" aria-hidden="true" />
+                </div>
+                <span className="font-medium">AI Chat</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
+
+              <Link href="/analytics" className="quick-action group" data-testid="link-analytics">
+                <div className="quick-action-icon bg-[var(--accent-amber-soft)]">
+                  <BarChart3 className="w-6 h-6 text-[var(--accent-amber)]" aria-hidden="true" />
+                </div>
+                <span className="font-medium">Analytics</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
+            </div>
+          </nav>
+
+          {/* Crisis Resources Card */}
+          <div className="card-elevated p-5 bg-gradient-to-r from-[var(--accent-rose-soft)] to-transparent border-[var(--accent-rose)]/30 mb-8">
+            <Link href="/crisis" className="flex items-center justify-between group" data-testid="link-crisis-resources">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[var(--accent-rose-soft)] flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-[var(--accent-rose)]" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-[var(--accent-rose)]">Crisis Resources</h3>
+                  <p className="text-sm text-[var(--text-secondary)]">24/7 support hotlines and help when you need it most</p>
+                </div>
+              </div>
+              <ArrowRight className="w-5 h-5 text-[var(--accent-rose)] group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+            </Link>
+          </div>
+
+          {/* Recent Moods */}
+          {moodData.recentMoods && moodData.recentMoods.length > 0 && (
+            <section className="mb-8" aria-label="Recent mood history">
+              <h2 className="text-xl font-semibold mb-4">Recent Moods</h2>
+              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" role="list" aria-label="Mood entries from recent days">
+                {moodData.recentMoods.map((mood, idx) => (
+                  <div
+                    key={idx}
+                    className="flex-shrink-0 card p-4 text-center min-w-[90px] hover:scale-105 transition-transform"
+                    data-testid={`mood-entry-${idx}`}
+                    role="listitem"
+                    aria-label={`Mood rating ${mood.rating} on ${new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "long" })}`}
+                  >
+                    <div 
+                      className="text-3xl font-bold bg-gradient-to-br from-[var(--accent-sky)] to-[var(--primary)] bg-clip-text text-transparent" 
+                      aria-hidden="true"
+                    >
+                      {mood.rating}
+                    </div>
+                    <div className="text-xs text-[var(--text-secondary)] mt-1 font-medium" aria-hidden="true">
+                      {new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "short" })}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
       </div>
-    </div>
     </>
   );
 }

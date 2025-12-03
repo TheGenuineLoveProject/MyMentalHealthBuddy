@@ -39,7 +39,7 @@ export const selectUserSchema = createSelectSchema(users);
 // ============================================================================
 export const moods = pgTable("moods", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: uuid("user_id").notNull(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   rating: varchar("rating", { length: 255 }).notNull(),
   content: text("content"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -66,7 +66,7 @@ export const selectMoodSchema = createSelectSchema(moods);
 // ============================================================================
 export const journals = pgTable("journals", {
   id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
-  userId: uuid("user_id").notNull(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   title: varchar("title", { length: 255 }).notNull(),
   text: text("text").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -88,7 +88,7 @@ export const journal = journals;
 // ============================================================================
 export const aiMessages = pgTable("ai_messages", {
   id: text("id").primaryKey(),
-  userId: uuid("user_id").notNull(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   role: text("role").notNull(),
   content: text("content").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
@@ -123,7 +123,7 @@ export const selectAnalyticsSchema = createSelectSchema(analytics);
 // ============================================================================
 export const passwordResetTokens = pgTable("password_reset_tokens", {
   id: text("id").primaryKey(),
-  userId: uuid("user_id").notNull(),
+  userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   tokenHash: text("token_hash").notNull(),
   expiresAt: timestamp("expires_at").notNull(),
   usedAt: timestamp("used_at"),
@@ -139,7 +139,7 @@ export const insertPasswordResetTokenSchema = createInsertSchema(passwordResetTo
 // ============================================================================
 export const auditLog = pgTable("audit_log", {
   id: text("id").primaryKey(),
-  userId: uuid("user_id"),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
   action: text("action").notNull(),
   resourceType: text("resource_type"),
   resourceId: text("resource_id"),

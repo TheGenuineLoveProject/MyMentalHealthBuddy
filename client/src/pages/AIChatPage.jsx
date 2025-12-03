@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle, Sparkles, Heart } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO.jsx";
 
 const INITIAL_MESSAGE = {
   role: "assistant",
-  content: "Hello! I'm your mental wellness companion. I'm here to listen and support you. How are you feeling today?",
+  content: "Hello! I'm your mental wellness companion. I'm here to listen and support you without judgment. How are you feeling today?",
 };
 
 export default function AIChatPage() {
@@ -16,12 +16,10 @@ export default function AIChatPage() {
   const [error, setError] = useState("");
   const messagesEndRef = useRef(null);
 
-  // Load chat history
   const { data: historyData, isLoading: historyLoading } = useQuery({
     queryKey: ["/api/ai/history"],
   });
 
-  // Set messages from history when loaded
   useEffect(() => {
     if (historyData?.messages && historyData.messages.length > 0) {
       setMessages(historyData.messages);
@@ -32,7 +30,6 @@ export default function AIChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Clear history mutation
   const clearHistoryMutation = useMutation({
     mutationFn: () => apiRequest("DELETE", "/api/ai/history"),
     onSuccess: () => {
@@ -90,124 +87,145 @@ export default function AIChatPage() {
         title="AI Chat"
         description="Chat with your AI wellness companion. Get compassionate support and guidance for your mental health journey."
       />
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
-      <header className="flex items-center gap-4 p-4 border-b border-neutral-800">
-        <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
-          <ArrowLeft className="w-6 h-6" aria-hidden="true" />
-        </Link>
-        <div className="flex items-center gap-3 flex-1">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center" aria-hidden="true">
-            <Bot className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="font-semibold" data-testid="text-title">Wellness Companion</h1>
-            <p className="text-sm text-neutral-400">Always here to listen</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link
-            href="/crisis"
-            className="flex items-center gap-1 px-3 py-1.5 text-sm bg-red-900/50 hover:bg-red-900 border border-red-700 text-red-200 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-red-400"
-            data-testid="link-crisis"
+      <div className="min-h-screen flex flex-col bg-gradient-mesh">
+        {/* Header */}
+        <header className="flex items-center gap-4 p-4 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-xl sticky top-0 z-10">
+          <Link 
+            href="/dashboard" 
+            className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+            data-testid="link-back" 
+            aria-label="Back to dashboard"
           >
-            <AlertTriangle className="w-4 h-4" aria-hidden="true" />
-            <span className="hidden sm:inline">Crisis Help</span>
+            <ArrowLeft className="w-5 h-5" aria-hidden="true" />
           </Link>
-          <button
-            onClick={() => clearHistoryMutation.mutate()}
-            disabled={clearHistoryMutation.isPending || messages.length <= 1}
-            className="p-2 text-neutral-400 hover:text-white transition disabled:opacity-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-            data-testid="button-clear-history"
-            aria-label="Clear chat history"
-            title="Clear chat history"
-          >
-            <Trash2 className="w-5 h-5" aria-hidden="true" />
-          </button>
-        </div>
-      </header>
-
-      <div className="flex-1 overflow-y-auto p-4 space-y-4" aria-label="Chat conversation">
-        {messages.map((message, idx) => (
-          <div
-            key={idx}
-            className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"}`}
-            data-testid={`message-${idx}`}
-          >
-            {message.role === "assistant" && (
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                <Bot className="w-5 h-5" />
-              </div>
-            )}
-            <div
-              className={`max-w-[80%] p-4 rounded-2xl ${
-                message.role === "user"
-                  ? "bg-blue-600 rounded-br-md"
-                  : "bg-neutral-800 rounded-bl-md"
-              }`}
-            >
-              <p className="whitespace-pre-wrap">{message.content}</p>
+          
+          <div className="flex items-center gap-3 flex-1">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center shadow-lg" aria-hidden="true">
+              <Bot className="w-6 h-6 text-white" />
             </div>
-            {message.role === "user" && (
-              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-                <User className="w-5 h-5" />
-              </div>
-            )}
+            <div>
+              <h1 className="font-semibold flex items-center gap-2" data-testid="text-title">
+                Wellness Companion
+                <Sparkles className="w-4 h-4 text-[var(--primary)]" aria-hidden="true" />
+              </h1>
+              <p className="text-sm text-[var(--text-secondary)]">Always here to listen</p>
+            </div>
           </div>
-        ))}
+          
+          <div className="flex items-center gap-2">
+            <Link
+              href="/crisis"
+              className="flex items-center gap-1.5 px-4 py-2 text-sm bg-[var(--accent-rose-soft)] hover:bg-[var(--accent-rose)]/20 border border-[var(--accent-rose)]/30 text-[var(--accent-rose)] rounded-xl transition font-medium"
+              data-testid="link-crisis"
+            >
+              <AlertTriangle className="w-4 h-4" aria-hidden="true" />
+              <span className="hidden sm:inline">Crisis Help</span>
+            </Link>
+            <button
+              onClick={() => clearHistoryMutation.mutate()}
+              disabled={clearHistoryMutation.isPending || messages.length <= 1}
+              className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-rose)] hover:border-[var(--accent-rose)]/50 transition disabled:opacity-40"
+              data-testid="button-clear-history"
+              aria-label="Clear chat history"
+              title="Clear chat history"
+            >
+              <Trash2 className="w-5 h-5" aria-hidden="true" />
+            </button>
+          </div>
+        </header>
 
-        {chatMutation.isPending && (
-          <div className="flex gap-3 justify-start" role="status" aria-live="polite">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-              <Bot className="w-5 h-5" />
+        {/* Messages */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4" aria-label="Chat conversation">
+          {messages.map((message, idx) => (
+            <div
+              key={idx}
+              className={`flex gap-3 ${message.role === "user" ? "justify-end" : "justify-start"} animate-fade-in-up`}
+              style={{ animationDelay: `${idx * 0.05}s` }}
+              data-testid={`message-${idx}`}
+            >
+              {message.role === "assistant" && (
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md" aria-hidden="true">
+                  <Bot className="w-5 h-5 text-white" />
+                </div>
+              )}
+              <div
+                className={`chat-bubble ${
+                  message.role === "user"
+                    ? "chat-bubble-user shadow-lg"
+                    : "chat-bubble-assistant shadow-sm"
+                }`}
+              >
+                <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
+              </div>
+              {message.role === "user" && (
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--primary)] to-purple-600 flex items-center justify-center flex-shrink-0 shadow-md" aria-hidden="true">
+                  <User className="w-5 h-5 text-white" />
+                </div>
+              )}
             </div>
-            <div className="bg-neutral-800 p-4 rounded-2xl rounded-bl-md">
-              <div className="flex items-center gap-2">
-                <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
-                <span className="text-neutral-400">Thinking...</span>
+          ))}
+
+          {chatMutation.isPending && (
+            <div className="flex gap-3 justify-start animate-fade-in-up" role="status" aria-live="polite">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center flex-shrink-0 shadow-md" aria-hidden="true">
+                <Bot className="w-5 h-5 text-white" />
+              </div>
+              <div className="chat-bubble chat-bubble-assistant">
+                <div className="flex items-center gap-3">
+                  <div className="flex gap-1">
+                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
+                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
+                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                  </div>
+                  <span className="text-[var(--text-muted)]">Thinking...</span>
+                </div>
               </div>
             </div>
+          )}
+
+          <div ref={messagesEndRef} />
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="px-4 py-3 bg-[var(--accent-rose-soft)] border-t border-[var(--accent-rose)]/30 text-[var(--accent-rose)] text-sm flex items-center gap-2" role="alert">
+            <AlertTriangle className="w-4 h-4" aria-hidden="true" />
+            {error}
           </div>
         )}
 
-        <div ref={messagesEndRef} />
+        {/* Input Form */}
+        <form onSubmit={sendMessage} className="p-4 border-t border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-xl" aria-label="Send a message">
+          <div className="flex gap-3 max-w-4xl mx-auto">
+            <label htmlFor="chat-input" className="sr-only">Type your message</label>
+            <input
+              id="chat-input"
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Type your message..."
+              disabled={chatMutation.isPending}
+              className="input-lg flex-1"
+              data-testid="input-message"
+              autoComplete="off"
+            />
+            <button
+              type="submit"
+              disabled={chatMutation.isPending || !input.trim()}
+              className="btn btn-gradient px-6"
+              data-testid="button-send"
+              aria-label="Send message"
+            >
+              <Send className="w-5 h-5" aria-hidden="true" />
+            </button>
+          </div>
+          <p className="text-xs text-[var(--text-muted)] mt-3 text-center flex items-center justify-center gap-1.5" role="note">
+            <Heart className="w-3 h-3" aria-hidden="true" />
+            This is a supportive companion, not a replacement for professional mental health care.
+          </p>
+        </form>
       </div>
-
-      {error && (
-        <div className="px-4 py-2 bg-red-900/50 border-t border-red-700 text-red-200 text-sm" role="alert">
-          {error}
-        </div>
-      )}
-
-      <form onSubmit={sendMessage} className="p-4 border-t border-neutral-800" aria-label="Send a message">
-        <div className="flex gap-3">
-          <label htmlFor="chat-input" className="sr-only">Type your message</label>
-          <input
-            id="chat-input"
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Type your message..."
-            disabled={chatMutation.isPending}
-            className="flex-1 p-4 rounded-xl bg-neutral-800 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 transition disabled:opacity-50"
-            data-testid="input-message"
-            autoComplete="off"
-          />
-          <button
-            type="submit"
-            disabled={chatMutation.isPending || !input.trim()}
-            className="px-6 rounded-xl bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-400"
-            data-testid="button-send"
-            aria-label="Send message"
-          >
-            <Send className="w-5 h-5" aria-hidden="true" />
-          </button>
-        </div>
-        <p className="text-xs text-neutral-500 mt-2 text-center" role="note">
-          Remember: This is a supportive companion, not a replacement for professional mental health care.
-        </p>
-      </form>
-    </div>
     </>
   );
 }

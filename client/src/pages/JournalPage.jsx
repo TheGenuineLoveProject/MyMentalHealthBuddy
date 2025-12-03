@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO.jsx";
 
@@ -60,11 +60,11 @@ export default function JournalPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950">
-        <div className="max-w-2xl mx-auto animate-pulse space-y-4">
-          <div className="h-8 bg-neutral-800 rounded w-1/4"></div>
+      <div className="min-h-screen p-6 bg-gradient-mesh">
+        <div className="max-w-2xl mx-auto space-y-4">
+          <div className="skeleton h-10 w-1/3 rounded-xl"></div>
           {[1, 2, 3].map((i) => (
-            <div key={i} className="h-24 bg-neutral-800 rounded-xl"></div>
+            <div key={i} className="skeleton h-28 rounded-xl"></div>
           ))}
         </div>
       </div>
@@ -77,150 +77,217 @@ export default function JournalPage() {
         title="Journal"
         description="Write and reflect on your thoughts in a private, secure journal. Express yourself freely and track your mental wellness journey."
       />
-    <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
-      <div className="max-w-2xl mx-auto">
-        <header className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
-              <ArrowLeft className="w-6 h-6" aria-hidden="true" />
-            </Link>
-            <h1 className="text-3xl font-bold" data-testid="text-title">Journal</h1>
-          </div>
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
-            data-testid="button-new"
-            aria-expanded={showForm}
-            aria-controls="journal-form"
-          >
-            <Plus className="w-5 h-5" aria-hidden="true" />
-            <span>New Entry</span>
-          </button>
-        </header>
-
-        {error && (
-          <div className="mb-6 p-4 bg-red-900/50 border border-red-700 rounded-lg text-red-200" role="alert" data-testid="text-error">
-            {error}
-            <button onClick={() => setError("")} className="ml-2 underline focus:outline-none focus:ring-2 focus:ring-blue-400 rounded">Dismiss</button>
-          </div>
-        )}
-
-        {showForm && (
-          <form id="journal-form" onSubmit={handleSubmit} className="mb-8 bg-neutral-800 p-6 rounded-xl" data-testid="form-journal" aria-label="New journal entry form">
-            <div className="mb-4">
-              <label htmlFor="journal-title" className="block text-sm font-medium mb-2">Title</label>
-              <input
-                id="journal-title"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Give your entry a title..."
-                className="w-full p-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
-                data-testid="input-title"
-                autoComplete="off"
-              />
-            </div>
-            <div className="mb-4">
-              <label htmlFor="journal-content" className="block text-sm font-medium mb-2">Content</label>
-              <textarea
-                id="journal-content"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder="Write your thoughts..."
-                rows={6}
-                className="w-full p-3 rounded-lg bg-neutral-900 border border-neutral-700 text-white placeholder-neutral-500 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 transition resize-none"
-                data-testid="input-content"
-              />
-            </div>
-            <div className="flex gap-3">
-              <button
-                type="submit"
-                disabled={createMutation.isPending}
-                className="flex-1 p-3 rounded-lg bg-blue-600 hover:bg-blue-700 transition disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                data-testid="button-save"
-                aria-busy={createMutation.isPending}
+      <div className="min-h-screen p-6 bg-gradient-mesh">
+        <div className="max-w-2xl mx-auto">
+          {/* Header */}
+          <header className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-4">
+              <Link 
+                href="/dashboard" 
+                className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+                data-testid="link-back" 
+                aria-label="Back to dashboard"
               >
-                {createMutation.isPending ? "Saving..." : "Save Entry"}
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-                className="px-6 py-3 rounded-lg bg-neutral-700 hover:bg-neutral-600 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
-                data-testid="button-cancel"
+                <ArrowLeft className="w-5 h-5" aria-hidden="true" />
+              </Link>
+              <div>
+                <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2" data-testid="text-title">
+                  <Notebook className="w-8 h-8 text-[var(--primary)]" aria-hidden="true" />
+                  Journal
+                </h1>
+                <p className="text-[var(--text-secondary)] text-sm mt-1">Your private space for reflection</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="btn btn-gradient"
+              data-testid="button-new"
+              aria-expanded={showForm}
+              aria-controls="journal-form"
+            >
+              <Plus className="w-5 h-5" aria-hidden="true" />
+              <span className="hidden sm:inline">New Entry</span>
+            </button>
+          </header>
+
+          {/* Error Alert */}
+          {error && (
+            <div className="mb-6 p-4 rounded-xl bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 text-[var(--accent-rose)] flex items-center justify-between" role="alert" data-testid="text-error">
+              <span>{error}</span>
+              <button 
+                onClick={() => setError("")} 
+                className="p-1 hover:bg-[var(--accent-rose)]/20 rounded-lg transition"
+                aria-label="Dismiss error"
               >
-                Cancel
+                <X className="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
-          </form>
-        )}
+          )}
 
-        {entries.length === 0 ? (
-          <div className="text-center py-12" role="status">
-            <Notebook className="w-16 h-16 mx-auto text-neutral-600 mb-4" aria-hidden="true" />
-            <h2 className="text-xl font-semibold text-neutral-400">No journal entries yet</h2>
-            <p className="text-neutral-500 mt-2">Start writing to track your thoughts and feelings</p>
-          </div>
-        ) : (
-          <section className="space-y-4" aria-label="Journal entries">
-            {entries.map((entry) => (
-              <article
-                key={entry.id}
-                className="bg-neutral-800 rounded-xl overflow-hidden"
-                data-testid={`entry-${entry.id}`}
-              >
-                <div
-                  className="p-4 flex items-center justify-between cursor-pointer hover:bg-neutral-700/50 transition focus-within:ring-2 focus-within:ring-blue-400"
-                  onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => e.key === "Enter" && setExpandedId(expandedId === entry.id ? null : entry.id)}
-                  aria-expanded={expandedId === entry.id}
-                  aria-controls={`entry-content-${entry.id}`}
-                >
-                  <div>
-                    <h3 className="font-semibold">{entry.title || "Untitled"}</h3>
-                    <p className="text-sm text-neutral-400">
-                      <time dateTime={entry.createdAt}>
-                        {new Date(entry.createdAt).toLocaleDateString("en-US", {
-                          weekday: "long",
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        })}
-                      </time>
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(entry.id);
-                      }}
-                      disabled={deleteMutation.isPending}
-                      className="p-2 text-neutral-400 hover:text-red-400 transition disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-red-400 rounded"
-                      data-testid={`button-delete-${entry.id}`}
-                      aria-label={`Delete entry: ${entry.title || "Untitled"}`}
-                    >
-                      <Trash2 className="w-5 h-5" aria-hidden="true" />
-                    </button>
-                    {expandedId === entry.id ? (
-                      <ChevronUp className="w-5 h-5 text-neutral-400" aria-hidden="true" />
-                    ) : (
-                      <ChevronDown className="w-5 h-5 text-neutral-400" aria-hidden="true" />
-                    )}
-                  </div>
+          {/* New Entry Form */}
+          {showForm && (
+            <form 
+              id="journal-form" 
+              onSubmit={handleSubmit} 
+              className="mb-8 card-elevated p-6 animate-scale-in" 
+              data-testid="form-journal" 
+              aria-label="New journal entry form"
+            >
+              <div className="flex items-center gap-2 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-[var(--primary-soft)] flex items-center justify-center">
+                  <PenLine className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
                 </div>
-                {expandedId === entry.id && (
-                  <div id={`entry-content-${entry.id}`} className="px-4 pb-4 border-t border-neutral-700 pt-4">
-                    <p className="text-neutral-300 whitespace-pre-wrap">{entry.content}</p>
+                <h2 className="text-lg font-semibold">New Journal Entry</h2>
+              </div>
+              
+              <div className="mb-4">
+                <label htmlFor="journal-title" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Title</label>
+                <input
+                  id="journal-title"
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Give your entry a title..."
+                  className="input"
+                  data-testid="input-title"
+                  autoComplete="off"
+                />
+              </div>
+              
+              <div className="mb-6">
+                <label htmlFor="journal-content" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Content</label>
+                <textarea
+                  id="journal-content"
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  placeholder="Write your thoughts..."
+                  rows={6}
+                  className="input resize-none"
+                  data-testid="input-content"
+                />
+              </div>
+              
+              <div className="flex gap-3">
+                <button
+                  type="submit"
+                  disabled={createMutation.isPending}
+                  className="btn btn-gradient flex-1"
+                  data-testid="button-save"
+                  aria-busy={createMutation.isPending}
+                >
+                  {createMutation.isPending ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
+                      Saving...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4" aria-hidden="true" />
+                      Save Entry
+                    </>
+                  )}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setShowForm(false)}
+                  className="btn btn-secondary"
+                  data-testid="button-cancel"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          )}
+
+          {/* Empty State */}
+          {entries.length === 0 ? (
+            <div className="text-center py-16 card-elevated" role="status">
+              <div className="w-20 h-20 rounded-2xl bg-[var(--primary-soft)] flex items-center justify-center mx-auto mb-6">
+                <Notebook className="w-10 h-10 text-[var(--primary)]" aria-hidden="true" />
+              </div>
+              <h2 className="text-xl font-semibold mb-2">No journal entries yet</h2>
+              <p className="text-[var(--text-secondary)] mb-6">Start writing to track your thoughts and feelings</p>
+              <button
+                onClick={() => setShowForm(true)}
+                className="btn btn-gradient"
+              >
+                <Plus className="w-5 h-5" aria-hidden="true" />
+                Write Your First Entry
+              </button>
+            </div>
+          ) : (
+            <section className="space-y-4" aria-label="Journal entries">
+              {entries.map((entry, index) => (
+                <article
+                  key={entry.id}
+                  className="card-elevated overflow-hidden animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.05}s` }}
+                  data-testid={`entry-${entry.id}`}
+                >
+                  <div
+                    className="p-5 flex items-center justify-between cursor-pointer hover:bg-[var(--card-hover)] transition"
+                    onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === "Enter" && setExpandedId(expandedId === entry.id ? null : entry.id)}
+                    aria-expanded={expandedId === entry.id}
+                    aria-controls={`entry-content-${entry.id}`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-[var(--primary-soft)] flex items-center justify-center flex-shrink-0">
+                        <PenLine className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg">{entry.title || "Untitled"}</h3>
+                        <p className="text-sm text-[var(--text-secondary)] flex items-center gap-1.5 mt-1">
+                          <Calendar className="w-4 h-4" aria-hidden="true" />
+                          <time dateTime={entry.createdAt}>
+                            {new Date(entry.createdAt).toLocaleDateString("en-US", {
+                              weekday: "long",
+                              year: "numeric",
+                              month: "long",
+                              day: "numeric",
+                            })}
+                          </time>
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDelete(entry.id);
+                        }}
+                        disabled={deleteMutation.isPending}
+                        className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-rose)] hover:bg-[var(--accent-rose-soft)] transition disabled:opacity-50"
+                        data-testid={`button-delete-${entry.id}`}
+                        aria-label={`Delete entry: ${entry.title || "Untitled"}`}
+                      >
+                        <Trash2 className="w-5 h-5" aria-hidden="true" />
+                      </button>
+                      <div className="p-2 text-[var(--text-muted)]">
+                        {expandedId === entry.id ? (
+                          <ChevronUp className="w-5 h-5" aria-hidden="true" />
+                        ) : (
+                          <ChevronDown className="w-5 h-5" aria-hidden="true" />
+                        )}
+                      </div>
+                    </div>
                   </div>
-                )}
-              </article>
-            ))}
-          </section>
-        )}
+                  {expandedId === entry.id && (
+                    <div 
+                      id={`entry-content-${entry.id}`} 
+                      className="px-5 pb-5 border-t border-[var(--border)] pt-5 ml-16"
+                    >
+                      <p className="text-[var(--text)] leading-relaxed whitespace-pre-wrap">{entry.content}</p>
+                    </div>
+                  )}
+                </article>
+              ))}
+            </section>
+          )}
+        </div>
       </div>
-    </div>
     </>
   );
 }
