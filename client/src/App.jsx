@@ -25,6 +25,7 @@ const Analytics = lazy(() => import("./pages/Analytics.jsx"));
 const HealthPage = lazy(() => import("./pages/HealthPage.jsx"));
 const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));
+const Wellness = lazy(() => import("./pages/Wellness.jsx"));
 
 // Premium loading fallback component
 function PageLoader() {
@@ -81,6 +82,9 @@ function AppRoutes() {
         </Route>
         <Route path="/crisis">
           <ProtectedRoute><CrisisResources /></ProtectedRoute>
+        </Route>
+        <Route path="/wellness">
+          <ProtectedRoute><Wellness /></ProtectedRoute>
         </Route>
         <Route path="/health">
           <Suspense fallback={<PageLoader />}><HealthPage /></Suspense>

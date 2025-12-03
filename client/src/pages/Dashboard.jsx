@@ -1,9 +1,10 @@
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon } from "lucide-react";
+import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO.jsx";
+import DailyAffirmations from "../components/DailyAffirmations.jsx";
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -217,8 +218,29 @@ export default function Dashboard() {
                 <span className="font-medium">Analytics</span>
                 <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
               </Link>
+
+              <Link href="/wellness" className="quick-action group" data-testid="link-wellness">
+                <div className="quick-action-icon bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30">
+                  <Wind className="w-6 h-6 text-emerald-500" aria-hidden="true" />
+                </div>
+                <span className="font-medium">Wellness Tools</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-emerald-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
+
+              <Link href="/wellness#habits" className="quick-action group" data-testid="link-habits">
+                <div className="quick-action-icon bg-gradient-to-br from-orange-100 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/30">
+                  <Target className="w-6 h-6 text-orange-500" aria-hidden="true" />
+                </div>
+                <span className="font-medium">Daily Habits</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-orange-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
             </div>
           </nav>
+
+          {/* Daily Affirmation */}
+          <section className="mb-8" aria-label="Daily affirmation">
+            <DailyAffirmations compact />
+          </section>
 
           {/* Crisis Resources Card */}
           <div className="card-elevated p-5 bg-gradient-to-r from-[var(--accent-rose-soft)] to-transparent border-[var(--accent-rose)]/30 mb-8">
