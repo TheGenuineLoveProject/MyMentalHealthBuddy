@@ -9,47 +9,36 @@ import { fileURLToPath } from "url";
 import { apiRateLimit, authRateLimit } from "./middleware/rateLimit.mjs";
 import { cspHeaders, sanitizeBody, securityHeaders } from "./middleware/security.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
+import { logger } from "./utils/logger.mjs";
 import { initSentry, sentryErrorHandler, captureException } from "./utils/sentry.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// -------------------------------------------
-// CRITICAL: Environment Detection
-// -------------------------------------------
 const isExplicitDev = process.env.NODE_ENV === "development";
 const isReplitDeployment = !!process.env.REPLIT_DEPLOYMENT || !!process.env.REPLIT_DB_URL;
 const isProduction = !isExplicitDev || isReplitDeployment;
 
 if (isProduction && !isExplicitDev) {
-  console.log("Running in PRODUCTION mode (detected deployment environment)");
+  logger.info("Running in PRODUCTION mode (detected deployment environment)");
 }
 
-// -------------------------------------------
-// CRITICAL: Validate required environment variables
-// -------------------------------------------
 const SESSION_SECRET = process.env.SESSION_SECRET;
 if (!SESSION_SECRET) {
-  console.error("FATAL: SESSION_SECRET environment variable is required but not set.");
-  console.error("Please set SESSION_SECRET in your environment variables.");
+  logger.error("FATAL: SESSION_SECRET environment variable is required but not set");
   if (isProduction) {
     process.exit(1);
   } else {
-    console.warn("WARNING: Running without SESSION_SECRET in development mode. Auth will fail.");
+    logger.warn("Running without SESSION_SECRET in development mode. Auth will fail");
     process.env.SESSION_SECRET = "mmb-dev-session-secret-change-me";
   }
 }
 
-// -------------------------------------------
-// 0. APP BASE
-// -------------------------------------------
 const app = express();
 const PORT = Number(process.env.PORT) || 5000;
 
-// Initialize Sentry for error tracking
 initSentry(app);
 
-// Replit / proxy safety - trust only first proxy hop
 app.set("trust proxy", 1);
 
 const corsOrigin = process.env.CORS_ORIGIN || process.env.REPLIT_DEV_DOMAIN 
@@ -67,9 +56,6 @@ app.use(
 app.use(express.json());
 app.use(helmet());
 
-// -------------------------------------------
-// 1. SECURITY & OBSERVABILITY MIDDLEWARE
-// -------------------------------------------
 app.use(requestId);
 app.use(requestLogger);
 app.use(cspHeaders);
@@ -77,9 +63,6 @@ app.use(securityHeaders);
 app.use(sanitizeBody);
 app.use(apiRateLimit);
 
-// -------------------------------------------
-// 2. ROUTES (EACH FILE HAS ITS OWN ROUTER)
-// -------------------------------------------
 import analyticsRoutes from "./routes/analytics.mjs";
 import authRoutes from "./routes/auth.mjs";
 import journalRoutes from "./routes/journal.mjs";
@@ -93,7 +76,6 @@ import stripeWebhookRoutes from "./routes/stripeWebhook.mjs";
 import aiRoutes from "./routes/ai.mjs";
 import accountRoutes from "./routes/account.mjs";
 
-// Attach route modules
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/journal", journalRoutes);
@@ -105,18 +87,12 @@ app.use("/api/ui-dashboard", uiDashboardRoutes);
 app.use("/api/ai-dashboard", aiDashboardRoutes);
 app.use("/api/webhooks/stripe", stripeWebhookRoutes);
 
-// Dashboard endpoint alias (frontend expects /api/dashboard)
 app.use("/api/dashboard", uiDashboardRoutes);
 
-// AI chat routes
 app.use("/api/ai", aiRoutes);
 
-// Account management routes (password reset, account deletion, data export)
 app.use("/api/account", accountRoutes);
 
-// -------------------------------------------
-// 3. HEALTHCHECK (Enhanced)
-// -------------------------------------------
 app.get("/api/health", (req, res) => {
   const healthData = {
     success: true,
@@ -135,7 +111,6 @@ app.get("/api/health", (req, res) => {
   res.json(healthData);
 });
 
-// Readiness check for deployment
 app.get("/api/ready", async (req, res) => {
   try {
     res.json({ ready: true, timestamp: new Date().toISOString() });
@@ -144,13 +119,9 @@ app.get("/api/ready", async (req, res) => {
   }
 });
 
-// -------------------------------------------
-// 4. SERVE STATIC FRONTEND
-// -------------------------------------------
 const clientDistPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientDistPath));
 
-// SPA fallback - serve index.html for all non-API routes
 app.get("*", (req, res) => {
   if (!req.path.startsWith("/api")) {
     res.sendFile(path.join(clientDistPath, "index.html"));
@@ -159,13 +130,10 @@ app.get("*", (req, res) => {
   }
 });
 
-// -------------------------------------------
-// 5. GLOBAL ERROR HANDLER
-// -------------------------------------------
 app.use(sentryErrorHandler());
 
 app.use((err, req, res, next) => {
-  console.error("[Global Error Handler]", err);
+  logger.error("Global error handler", { error: err.message, stack: err.stack, requestId: req.requestId });
   
   captureException(err, {
     requestId: req.requestId,
@@ -184,26 +152,19 @@ app.use((err, req, res, next) => {
   });
 });
 
-// -------------------------------------------
-// 6. START SERVER WITH GRACEFUL SHUTDOWN
-// -------------------------------------------
 const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(
-    `MyMentalHealthBuddy API listening on http://0.0.0.0:${PORT} (env: ${process.env.NODE_ENV || "development"})`
-  );
+  logger.info("MyMentalHealthBuddy API started", { port: PORT, env: process.env.NODE_ENV || "development" });
 });
 
-// Graceful shutdown handler for production deployments
 function gracefulShutdown(signal) {
-  console.log(`${signal} received. Shutting down gracefully...`);
+  logger.info("Shutdown signal received", { signal });
   server.close(() => {
-    console.log("HTTP server closed.");
+    logger.info("HTTP server closed");
     process.exit(0);
   });
 
-  // Force close after 10 seconds
   setTimeout(() => {
-    console.error("Could not close connections in time, forcing shutdown.");
+    logger.error("Could not close connections in time, forcing shutdown");
     process.exit(1);
   }, 10000);
 }

@@ -1,5 +1,6 @@
 // server/utils/stripe.mjs
 import Stripe from "stripe";
+import { logger } from "./logger.mjs";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
 const APP_BASE_URL = process.env.APP_BASE_URL || "http://localhost:5173";
@@ -11,7 +12,7 @@ if (STRIPE_SECRET_KEY) {
     apiVersion: "2023-10-16"
   });
 } else {
-  console.warn("[STRIPE] STRIPE_SECRET_KEY not set. Billing is disabled.");
+  logger.warn("STRIPE_SECRET_KEY not set. Billing is disabled");
 }
 
 export function getStripeClient() {
@@ -21,9 +22,6 @@ export function getStripeClient() {
   return stripe;
 }
 
-/**
- * Create a subscription checkout session for a given user + priceId
- */
 export async function createSubscriptionCheckoutSession({
   userId,
   priceId,
@@ -48,9 +46,6 @@ export async function createSubscriptionCheckoutSession({
   return session;
 }
 
-/**
- * Verify webhook signature and return the event.
- */
 export function constructStripeWebhookEvent(rawBody, signature) {
   const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET || "";
   const client = getStripeClient();

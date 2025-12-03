@@ -2,13 +2,14 @@
 // Sentry initialization for server-side error tracking
 
 import * as Sentry from "@sentry/node";
+import { logger } from "./logger.mjs";
 
 const SENTRY_DSN = process.env.SENTRY_DSN;
 const isProduction = process.env.NODE_ENV === "production" || !!process.env.REPLIT_DEPLOYMENT;
 
 export function initSentry(app) {
   if (!SENTRY_DSN) {
-    console.log("[Sentry] DSN not configured, error tracking disabled");
+    logger.info("Sentry DSN not configured, error tracking disabled");
     return;
   }
 
@@ -30,7 +31,7 @@ export function initSentry(app) {
     },
   });
 
-  console.log(`[Sentry] Initialized for ${isProduction ? "production" : "development"}`);
+  logger.info("Sentry initialized", { environment: isProduction ? "production" : "development" });
 }
 
 export function sentryRequestHandler() {
@@ -49,7 +50,7 @@ export function sentryErrorHandler() {
 
 export function captureException(error, context = {}) {
   if (!SENTRY_DSN) {
-    console.error("[Sentry] Would capture:", error.message);
+    logger.error("Sentry would capture exception", { error: error.message });
     return;
   }
   

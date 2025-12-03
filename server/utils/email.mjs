@@ -1,5 +1,6 @@
 // server/utils/email.mjs
 import { Resend } from "resend";
+import { logger } from "./logger.mjs";
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "no-reply@example.com";
@@ -9,7 +10,7 @@ let resend = null;
 if (RESEND_API_KEY) {
   resend = new Resend(RESEND_API_KEY);
 } else {
-  console.warn("[EMAIL] RESEND_API_KEY not set. Emails will be logged but not sent.");
+  logger.warn("RESEND_API_KEY not set. Emails will be logged but not sent");
 }
 
 export async function sendTransactionalEmail({ to, subject, html }) {
@@ -18,7 +19,7 @@ export async function sendTransactionalEmail({ to, subject, html }) {
   }
 
   if (!resend) {
-    console.log("[EMAIL] Skipping send (no RESEND_API_KEY).", { to, subject });
+    logger.info("Skipping email send (no RESEND_API_KEY)", { to, subject });
     return { ok: false, skipped: true };
   }
 

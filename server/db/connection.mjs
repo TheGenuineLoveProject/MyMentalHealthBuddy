@@ -4,11 +4,12 @@
 import pg from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "../../shared/schema.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const { Pool } = pg;
 
 if (!process.env.DATABASE_URL) {
-  console.error("[DB] Missing DATABASE_URL in environment.");
+  logger.error("Missing DATABASE_URL in environment");
   process.exit(1);
 }
 
@@ -24,8 +25,8 @@ export { schema };
 export async function closeDb() {
   try {
     await pool.end();
-    console.log("[DB] Pool closed cleanly.");
+    logger.info("Database pool closed cleanly");
   } catch (err) {
-    console.error("[DB] Error closing pool:", err);
+    logger.error("Error closing database pool", { error: err.message });
   }
 }

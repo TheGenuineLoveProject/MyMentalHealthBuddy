@@ -8,6 +8,7 @@ import { eq, sql } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 import { createMoodSchema, updateMoodSchema, validateBody } from "../validation/schemas.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -61,7 +62,7 @@ router.post("/", validateBody(createMoodSchema), async (req, res) => {
 
     return success(res, row, "Mood entry created.");
   } catch (err) {
-    console.error("[mood/create] Unexpected error:", err);
+    logger.error("Failed to create mood entry", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error when creating mood entry.",
@@ -91,7 +92,7 @@ router.get("/", async (req, res) => {
 
     return success(res, parsed, "Mood entries loaded.");
   } catch (err) {
-    console.error("[mood/list] Unexpected error:", err);
+    logger.error("Failed to list mood entries", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error when loading mood entries.",
@@ -147,7 +148,7 @@ router.get("/stats", async (req, res) => {
       })),
     }, "Mood stats loaded.");
   } catch (err) {
-    console.error("[mood/stats] Unexpected error:", err);
+    logger.error("Failed to get mood stats", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error when loading mood stats.",
@@ -192,7 +193,7 @@ router.put("/:id", validateBody(updateMoodSchema), async (req, res) => {
 
     return success(res, updated, "Mood entry updated.");
   } catch (err) {
-    console.error("[mood/update] Unexpected error:", err);
+    logger.error("Failed to update mood entry", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error when updating mood entry.",
@@ -223,7 +224,7 @@ router.delete("/:id", async (req, res) => {
 
     return success(res, { id }, "Mood entry deleted.");
   } catch (err) {
-    console.error("[mood/delete] Unexpected error:", err);
+    logger.error("Failed to delete mood entry", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error when deleting mood entry.",

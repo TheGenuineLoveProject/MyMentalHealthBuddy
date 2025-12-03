@@ -24,7 +24,7 @@ export default function ForgotPassword() {
   });
 
   const resetMutation = useMutation({
-    mutationFn: (data) => apiRequest("POST", "/api/auth/password-reset/request", data),
+    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/request", data),
     onError: (err) => {
       setError("root", { 
         message: err.message || "Something went wrong. Please try again." 

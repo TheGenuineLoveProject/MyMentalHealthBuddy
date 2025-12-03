@@ -4,15 +4,14 @@ import Stripe from "stripe";
 import { db } from "../db/connection.mjs";
 import { users, webhookEvents } from "../../shared/schema.mjs";
 import { eq } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
-// Initialize Stripe only if key is available
 const stripe = process.env.STRIPE_SECRET_KEY 
   ? new Stripe(process.env.STRIPE_SECRET_KEY)
   : null;
 
-// Database-backed idempotency check
 async function isEventProcessed(eventId) {
   try {
     const existing = await db
@@ -22,12 +21,11 @@ async function isEventProcessed(eventId) {
       .limit(1);
     return existing.length > 0;
   } catch (error) {
-    console.error("Error checking event idempotency:", error);
+    logger.error("Error checking event idempotency", { error: error.message, eventId });
     return false;
   }
 }
 
-// Mark event as processed
 async function markEventProcessed(eventId, eventType) {
   try {
     await db.insert(webhookEvents).values({
@@ -37,11 +35,10 @@ async function markEventProcessed(eventId, eventType) {
       status: "processed",
     }).onConflictDoNothing();
   } catch (error) {
-    console.error("Error marking event processed:", error);
+    logger.error("Error marking event processed", { error: error.message, eventId });
   }
 }
 
-// Helper to update user subscription
 async function updateUserSubscription(customerId, subscriptionData) {
   try {
     const [user] = await db
@@ -58,12 +55,11 @@ async function updateUserSubscription(customerId, subscriptionData) {
     
     return user;
   } catch (error) {
-    console.error("Failed to update user subscription:", error);
+    logger.error("Failed to update user subscription", { error: error.message, customerId });
     throw error;
   }
 }
 
-// Map Stripe price IDs to plan names
 function getPlanFromPriceId(priceId) {
   const planMap = {
     [process.env.STRIPE_PRICE_BASIC]: "basic",
@@ -73,11 +69,9 @@ function getPlanFromPriceId(priceId) {
   return planMap[priceId] || "basic";
 }
 
-// Webhook endpoint
 router.post("/", express.raw({ type: "application/json" }), async (req, res) => {
-  // Check if Stripe is configured
   if (!stripe) {
-    console.warn("Stripe not configured, webhook ignored");
+    logger.warn("Stripe not configured, webhook ignored");
     return res.status(200).json({ received: true, message: "Stripe not configured" });
   }
 
@@ -85,7 +79,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
   if (!webhookSecret) {
-    console.error("STRIPE_WEBHOOK_SECRET not configured");
+    logger.error("STRIPE_WEBHOOK_SECRET not configured");
     return res.status(500).json({ error: "Webhook not configured" });
   }
 
@@ -93,18 +87,17 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
   try {
     event = stripe.webhooks.constructEvent(req.body, sig, webhookSecret);
   } catch (err) {
-    console.error("Webhook signature verification failed:", err.message);
+    logger.error("Webhook signature verification failed", { error: err.message });
     return res.status(400).json({ error: "Invalid signature" });
   }
 
-  // Database-backed idempotency check
   const alreadyProcessed = await isEventProcessed(event.id);
   if (alreadyProcessed) {
-    console.log(`Event ${event.id} already processed, skipping`);
+    logger.info("Event already processed, skipping", { eventId: event.id });
     return res.json({ received: true, duplicate: true });
   }
 
-  console.log(`Processing Stripe event: ${event.type} (${event.id})`);
+  logger.info("Processing Stripe event", { eventType: event.type, eventId: event.id });
 
   try {
     switch (event.type) {
@@ -121,7 +114,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
             status: subscription.status,
             periodEnd: new Date(subscription.current_period_end * 1000),
           });
-          console.log(`Checkout completed for customer ${customerId}`);
+          logger.info("Checkout completed", { customerId });
         }
         break;
       }
@@ -135,7 +128,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
           status: subscription.status,
           periodEnd: new Date(subscription.current_period_end * 1000),
         });
-        console.log(`Subscription ${event.type} for customer ${subscription.customer}`);
+        logger.info("Subscription event processed", { eventType: event.type, customerId: subscription.customer });
         break;
       }
 
@@ -147,19 +140,19 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
           status: "canceled",
           periodEnd: null,
         });
-        console.log(`Subscription canceled for customer ${subscription.customer}`);
+        logger.info("Subscription canceled", { customerId: subscription.customer });
         break;
       }
 
       case "invoice.paid": {
         const invoice = event.data.object;
-        console.log(`Invoice paid: ${invoice.id} for customer ${invoice.customer}`);
+        logger.info("Invoice paid", { invoiceId: invoice.id, customerId: invoice.customer });
         break;
       }
 
       case "invoice.payment_failed": {
         const invoice = event.data.object;
-        console.error(`Payment failed for customer ${invoice.customer}`);
+        logger.error("Payment failed", { customerId: invoice.customer });
         await updateUserSubscription(invoice.customer, {
           subscriptionId: invoice.subscription,
           plan: "basic",
@@ -170,15 +163,14 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
       }
 
       default:
-        console.log(`Unhandled event type: ${event.type}`);
+        logger.info("Unhandled event type", { eventType: event.type });
     }
 
-    // Mark event as processed in database
     await markEventProcessed(event.id, event.type);
 
     res.json({ received: true, processed: event.type });
   } catch (error) {
-    console.error(`Error processing event ${event.type}:`, error);
+    logger.error("Error processing event", { eventType: event.type, error: error.message });
     res.status(500).json({ error: "Processing failed", retryable: true });
   }
 });

@@ -38,9 +38,9 @@ export default function ResetPassword() {
   });
 
   const resetMutation = useMutation({
-    mutationFn: (data) => apiRequest("POST", "/api/auth/password-reset/confirm", {
+    mutationFn: (data) => apiRequest("POST", "/api/account/password-reset/confirm", {
       token,
-      newPassword: data.newPassword,
+      password: data.newPassword,
     }),
     onError: (err) => {
       const message = err.message?.includes("expired") || err.message?.includes("invalid")

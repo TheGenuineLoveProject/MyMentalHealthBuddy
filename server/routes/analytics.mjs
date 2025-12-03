@@ -5,6 +5,7 @@ import { moods, journals } from "../../shared/schema.mjs";
 import { eq, sql } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -53,7 +54,7 @@ router.get("/", async (req, res) => {
         : null,
     });
   } catch (err) {
-    console.error("Analytics base error:", err);
+    logger.error("Failed to load analytics", { error: err.message, requestId: req.requestId });
     return badRequest(res, "Failed to load analytics.");
   }
 });
@@ -83,7 +84,7 @@ router.get("/summary", async (req, res) => {
       journalCount: Number(journalStats.count),
     });
   } catch (err) {
-    console.error("Analytics summary error:", err);
+    logger.error("Failed to load analytics summary", { error: err.message, requestId: req.requestId });
     return badRequest(res, "Failed to load analytics.");
   }
 });
@@ -109,7 +110,7 @@ router.get("/moods-last-7", async (req, res) => {
 
     return success(res, results);
   } catch (err) {
-    console.error("Analytics mood error:", err);
+    logger.error("Failed to load mood analytics", { error: err.message, requestId: req.requestId });
     return badRequest(res, "Failed to load mood analytics.");
   }
 });
@@ -135,7 +136,7 @@ router.get("/journal-last-7", async (req, res) => {
 
     return success(res, results);
   } catch (err) {
-    console.error("Analytics journal error:", err);
+    logger.error("Failed to load journal analytics", { error: err.message, requestId: req.requestId });
     return badRequest(res, "Failed to load journal analytics.");
   }
 });

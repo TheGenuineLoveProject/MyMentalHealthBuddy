@@ -1,9 +1,9 @@
 // server/middleware/auth.mjs
-// Universal Authentication Middleware — MyMentalHealthBuddy (MJS / Replit)
+// Universal Authentication Middleware
 
 import jwt from 'jsonwebtoken';
+import { logger } from '../utils/logger.mjs';
 
-// Core auth guard used by all protected routes
 export function authGuard(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
@@ -22,7 +22,7 @@ export function authGuard(req, res, next) {
 
     return next();
   } catch (err) {
-    console.error('Auth middleware error:', err);
+    logger.warn("Auth middleware error", { error: err.message, requestId: req.requestId });
     return res.status(401).json({
       ok: false,
       error: 'Unauthorized: invalid or expired token',
@@ -30,9 +30,6 @@ export function authGuard(req, res, next) {
   }
 }
 
-// Backwards compatible name for older routes:
-// import { requireAuth } from '../middleware/auth.mjs';
 export const requireAuth = authGuard;
 
-// Optional default export
 export default authGuard;

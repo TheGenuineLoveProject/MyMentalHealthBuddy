@@ -16,6 +16,7 @@ import { requireAuth } from "../middleware/auth.mjs";
 import { chatMessageSchema, validateBody } from "../validation/schemas.mjs";
 import { aiRateLimit } from "../middleware/rateLimit.mjs";
 import { chatCompletion, isConfigured, getCircuitBreakerStatus } from "../utils/aiClient.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -68,7 +69,7 @@ router.get("/history", async (req, res) => {
 
     return success(res, { messages }, "Chat history loaded.");
   } catch (err) {
-    console.error("[ai/history] Error:", err);
+    logger.error("Failed to load chat history", { error: err.message, requestId: req.requestId });
     return serverError(res, err, "Failed to load chat history.");
   }
 });
@@ -86,7 +87,7 @@ router.delete("/history", async (req, res) => {
 
     return success(res, {}, "Chat history cleared.");
   } catch (err) {
-    console.error("[ai/history/clear] Error:", err);
+    logger.error("Failed to clear chat history", { error: err.message, requestId: req.requestId });
     return serverError(res, err, "Failed to clear chat history.");
   }
 });
@@ -183,7 +184,7 @@ router.post("/chat", validateBody(chatMessageSchema), async (req, res) => {
       circuitOpen: result.isCircuitOpen,
     }, "AI is temporarily unavailable.");
   } catch (err) {
-    console.error("[ai/chat] Unexpected error:", err);
+    logger.error("Failed to process AI chat message", { error: err.message, requestId: req.requestId });
     return serverError(res, err, "Failed to process message.");
   }
 });

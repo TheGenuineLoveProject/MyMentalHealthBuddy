@@ -2,6 +2,7 @@
 // Thin wrapper around aiService for routes or other callers.
 
 import { askAI } from "./aiService.mjs";
+import { logger } from "../utils/logger.mjs";
 
 export async function handleAIChat(message) {
   return askAI(message);
@@ -9,10 +10,6 @@ export async function handleAIChat(message) {
 
 export default { handleAIChat };
 
-// We do NOT import schema here anymore.
-// No more: import * as schema from "../shared/schema.mjs";
-
-// Core AI employee handler
 export async function runAIEmployee(req, res) {
   try {
     const { message } = req.body;
@@ -46,7 +43,7 @@ export async function runAIEmployee(req, res) {
 
     res.end();
   } catch (err) {
-    console.error("AI-Employee error:", err);
+    logger.error("AI-Employee error", { error: err.message });
     res.status(500).json({ error: "AI error" });
   }
 }

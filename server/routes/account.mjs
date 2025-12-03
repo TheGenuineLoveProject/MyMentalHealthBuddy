@@ -4,7 +4,6 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import { randomUUID } from "crypto";
 import { eq, and, gt } from "drizzle-orm";
 
 import { db } from "../db/connection.mjs";
@@ -13,6 +12,7 @@ import { success, badRequest } from "../utils/response.mjs";
 import { authRateLimit, sensitiveRateLimit } from "../middleware/rateLimit.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 import { logAuditEvent, AuditActions } from "../utils/auditLogger.mjs";
+import { logger } from "../utils/logger.mjs";
 import { z } from "zod";
 
 const router = express.Router();
@@ -69,12 +69,12 @@ router.post("/password-reset/request", authRateLimit, async (req, res) => {
     });
 
     if (process.env.NODE_ENV === "development" && !process.env.REPLIT_DEPLOYMENT) {
-      console.log(`[DEV ONLY] Password reset token for ${email}: ${token}`);
+      logger.info("Password reset token generated (dev only)", { email, token });
     }
 
     return success(res, null, "If an account exists with this email, a reset link will be sent.");
   } catch (error) {
-    console.error("[account/password-reset/request]", error);
+    logger.error("Password reset request failed", { error: error.message, requestId: req.requestId });
     return res.status(500).json({ ok: false, message: "Server error" });
   }
 });
@@ -126,7 +126,7 @@ router.post("/password-reset/confirm", authRateLimit, async (req, res) => {
 
     return success(res, null, "Password has been reset successfully.");
   } catch (error) {
-    console.error("[account/password-reset/confirm]", error);
+    logger.error("Password reset confirm failed", { error: error.message, requestId: req.requestId });
     return res.status(500).json({ ok: false, message: "Server error" });
   }
 });
@@ -173,7 +173,7 @@ router.delete("/", requireAuth, sensitiveRateLimit, async (req, res) => {
 
     return success(res, null, "Account and all data deleted successfully.");
   } catch (error) {
-    console.error("[account/delete]", error);
+    logger.error("Account deletion failed", { error: error.message, requestId: req.requestId });
     return res.status(500).json({ ok: false, message: "Server error" });
   }
 });
@@ -227,7 +227,7 @@ router.get("/export", requireAuth, sensitiveRateLimit, async (req, res) => {
 
     return res.json(exportData);
   } catch (error) {
-    console.error("[account/export]", error);
+    logger.error("Data export failed", { error: error.message, requestId: req.requestId });
     return res.status(500).json({ ok: false, message: "Server error" });
   }
 });

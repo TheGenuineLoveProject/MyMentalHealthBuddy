@@ -1,4 +1,3 @@
-import { sendError } from "../utils/response.mjs";
 import { fail } from "../utils/apiResponse.mjs";
 import { logger } from "../utils/logger.mjs";
 
@@ -7,8 +6,7 @@ export function notFoundHandler(_req, res) {
 }
 
 export function errorHandler(err, req, res, _next) {
-  logger.error("Unhandled error", { error: err?.message, requestId: req.requestId });
-  console.error("SERVER ERROR →", err);
+  logger.error("Unhandled error", { error: err?.message, stack: err?.stack, requestId: req.requestId });
   if (res.headersSent) return;
   return fail(res, 500, "Internal server error", "UNHANDLED_ERROR");
 }

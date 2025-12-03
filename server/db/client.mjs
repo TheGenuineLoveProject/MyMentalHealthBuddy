@@ -1,12 +1,13 @@
-# server/db/client.mjs
+// server/db/client.mjs
 import 'dotenv/config';
 import pg from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
+import { logger } from "../utils/logger.mjs";
 
 const { Pool } = pg;
 
 if (!process.env.DATABASE_URL) {
-  console.error("[FATAL] DATABASE_URL missing");
+  logger.error("FATAL: DATABASE_URL missing");
   process.exit(1);
 }
 

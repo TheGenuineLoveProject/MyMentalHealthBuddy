@@ -1,4 +1,5 @@
 // server/utils/response.mjs
+import { logger } from "./logger.mjs";
 
 export const ok = (res, data = {}, status = 200) =>
   res.status(status).json({ success: true, ...data });
@@ -6,13 +7,13 @@ export const ok = (res, data = {}, status = 200) =>
 export const fail = (res, error, status = 400) => {
   const message =
     typeof error === "string" ? error : error?.message || "Unknown error";
-  console.error("[API ERROR]", message, error);
+  logger.error("API error", { message, status });
   return res.status(status).json({ success: false, error: message });
 };
 
 export const serverError = (res, error, customMessage = null) => {
   const message = customMessage || error?.message || "Internal server error";
-  console.error("[SERVER ERROR]", message, error);
+  logger.error("Server error", { message, error: error?.message });
   return res.status(500).json({ success: false, error: message });
 };
 
@@ -21,7 +22,7 @@ export const unauthorized = (res, message = "Unauthorized") => {
 };
 
 export const sendError = (res, message, status = 500, details = null) => {
-  console.error("[SEND ERROR]", message, details);
+  logger.error("Send error", { message, status, details });
   return res.status(status).json({ 
     success: false, 
     error: message,

@@ -153,3 +153,16 @@ The client is built using Vite for optimized production bundles with code splitt
 - Fixed client/main.jsx with dangling Route JSX element
 - Updated client/postcss.config.js to use @tailwindcss/postcss
 - All 35 integration tests passing
+
+### Structured Logging Overhaul (December 3, 2025)
+- Replaced 65+ console.log/error/warn statements with structured logger across all server files
+- Unified logging through server/utils/logger.mjs and server/middleware/requestId.mjs
+- All log entries now include structured metadata (requestId, error details, timestamps)
+- Production logs output JSON format for log aggregation; development logs use colorized output
+- Updated files: auth.mjs, mood.mjs, journal.mjs, ai.mjs, analytics.mjs, account.mjs, ui-dashboard.mjs, stripeWebhook.mjs, response.mjs, auth middleware, errorHandler.mjs, db/client.mjs, db/connection.mjs, sentry.mjs, stripe.mjs, email.mjs, aiService.mjs, aiHandler.mjs, index.mjs
+
+### Code Cleanup
+- Removed duplicate authentication stubs from auth.mjs (kept real JWT implementation only)
+- Deleted unused server/routes/passwordReset.mjs stub file
+- Fixed password reset frontend to use correct /api/account/password-reset/* endpoints
+- Fixed missing randomUUID imports in mood.mjs and journal.mjs routes

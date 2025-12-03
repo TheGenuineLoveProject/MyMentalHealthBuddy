@@ -8,6 +8,7 @@ import { eq, sql } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 import { createJournalSchema, updateJournalSchema, validateBody } from "../validation/schemas.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -43,7 +44,7 @@ router.post("/", validateBody(createJournalSchema), async (req, res) => {
     const result = inserted[0];
     return success(res, { ...result, content: result.text }, "Journal entry created.");
   } catch (err) {
-    console.error("[journal/create] Unexpected error:", err);
+    logger.error("Failed to create journal entry", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error when creating journal entry.",
@@ -68,7 +69,7 @@ router.get("/", async (req, res) => {
     const mapped = entries.map(e => ({ ...e, content: e.text }));
     return success(res, mapped, "Journal entries fetched.");
   } catch (err) {
-    console.error("[journal/fetch] Unexpected error:", err);
+    logger.error("Failed to list journal entries", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error while fetching journal entries.",
@@ -101,7 +102,7 @@ router.get("/:id", async (req, res) => {
     const entry = entries[0];
     return success(res, { ...entry, content: entry.text }, "Journal entry fetched.");
   } catch (err) {
-    console.error("[journal/fetch-one] Unexpected error:", err);
+    logger.error("Failed to get journal entry", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error while fetching journal entry.",
@@ -140,7 +141,7 @@ router.put("/:id", validateBody(updateJournalSchema), async (req, res) => {
 
     return success(res, { ...updated, content: updated.text }, "Journal entry updated.");
   } catch (err) {
-    console.error("[journal/update] Unexpected error:", err);
+    logger.error("Failed to update journal entry", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error while updating journal entry.",
@@ -171,7 +172,7 @@ router.delete("/:id", async (req, res) => {
 
     return success(res, { id }, "Journal entry deleted.");
   } catch (err) {
-    console.error("[journal/delete] Unexpected error:", err);
+    logger.error("Failed to delete journal entry", { error: err.message, requestId: req.requestId });
     return res.status(500).json({
       ok: false,
       message: "Unexpected error while deleting journal entry.",

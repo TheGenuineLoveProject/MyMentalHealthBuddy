@@ -7,6 +7,7 @@ import { moods, journals } from "../../shared/schema.mjs";
 import { eq, sql } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -72,7 +73,7 @@ router.get("/", async (req, res) => {
       },
     }, "Dashboard data loaded.");
   } catch (err) {
-    console.error("[dashboard] Unexpected error:", err);
+    logger.error("Failed to load dashboard data", { error: err.message, requestId: req.requestId });
     return badRequest(res, "Failed to load dashboard data.");
   }
 });
