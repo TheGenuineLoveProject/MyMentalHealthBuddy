@@ -1,6 +1,8 @@
 // server/middleware/security.mjs
 // Enhanced security middleware
 
+import { randomBytes } from "crypto";
+
 // Content Security Policy configuration
 export function cspHeaders(req, res, next) {
   const isProduction = process.env.NODE_ENV === "production";
@@ -77,4 +79,66 @@ export function securityHeaders(req, res, next) {
   res.setHeader("X-XSS-Protection", "1; mode=block");
   
   next();
+}
+
+// CSRF token generation using double-submit cookie pattern
+// NOTE: This app uses JWT bearer tokens in Authorization headers, not session cookies.
+// CSRF protection is less critical but available for future use.
+const CSRF_COOKIE_NAME = "csrf_token";
+const CSRF_HEADER_NAME = "x-csrf-token";
+const TOKEN_LENGTH = 32;
+
+export function generateCsrfToken() {
+  return randomBytes(TOKEN_LENGTH).toString("hex");
+}
+
+// CSRF protection middleware - currently disabled as the app uses JWT tokens
+// To enable: set ENABLE_CSRF=true in environment variables and integrate with frontend
+export function csrfProtection(req, res, next) {
+  // CSRF is disabled by default since we use JWT bearer tokens
+  // JWT tokens are not automatically sent with requests, making CSRF attacks less viable
+  // Enable with ENABLE_CSRF=true if switching to cookie-based sessions
+  if (process.env.ENABLE_CSRF !== "true") {
+    return next();
+  }
+  
+  const isProduction = process.env.NODE_ENV === "production";
+  
+  // Skip CSRF for safe methods and exempt endpoints
+  const safeMethods = ["GET", "HEAD", "OPTIONS"];
+  const exemptPaths = ["/api/webhooks", "/api/health", "/api/ready", "/api/auth"];
+  
+  if (safeMethods.includes(req.method) || exemptPaths.some(path => req.path.startsWith(path))) {
+    return next();
+  }
+  
+  // Validate CSRF token for mutating requests
+  const cookieToken = req.cookies?.[CSRF_COOKIE_NAME];
+  const headerToken = req.headers[CSRF_HEADER_NAME];
+  
+  if (!cookieToken || !headerToken || cookieToken !== headerToken) {
+    // In development, log but don't block
+    if (!isProduction) {
+      return next();
+    }
+    return res.status(403).json({
+      ok: false,
+      error: "Invalid or missing CSRF token",
+    });
+  }
+  
+  next();
+}
+
+// Secure cookie configuration helper
+export function getSecureCookieOptions(maxAge = 24 * 60 * 60 * 1000) {
+  const isProduction = process.env.NODE_ENV === "production";
+  
+  return {
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: isProduction ? "strict" : "lax",
+    maxAge,
+    path: "/",
+  };
 }

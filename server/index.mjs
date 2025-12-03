@@ -93,29 +93,66 @@ app.use("/api/ai", aiRoutes);
 
 app.use("/api/account", accountRoutes);
 
-app.get("/api/health", (req, res) => {
+import { db } from "./db/client.mjs";
+import { sql } from "drizzle-orm";
+
+app.get("/api/health", async (req, res) => {
+  const startTime = Date.now();
+  
+  // Check database connectivity
+  let dbStatus = { connected: false, latencyMs: 0 };
+  try {
+    const dbStart = Date.now();
+    await db.execute(sql`SELECT 1`);
+    dbStatus = { connected: true, latencyMs: Date.now() - dbStart };
+  } catch (err) {
+    dbStatus = { connected: false, error: "Database connection failed" };
+  }
+  
+  // Check AI service availability
+  let aiStatus = { available: !!process.env.OPENAI_API_KEY };
+  
+  // Check required environment variables
+  const envCheck = {
+    SESSION_SECRET: !!process.env.SESSION_SECRET,
+    DATABASE_URL: !!process.env.DATABASE_URL,
+    OPENAI_API_KEY: !!process.env.OPENAI_API_KEY,
+  };
+  
+  const allServicesHealthy = dbStatus.connected && Object.values(envCheck).every(v => v);
+  
   const healthData = {
-    success: true,
+    success: allServicesHealthy,
+    status: allServicesHealthy ? "healthy" : "degraded",
     message: "MyMentalHealthBuddy API is running.",
     uptime: Math.floor(process.uptime()),
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || "development",
-    version: "1.0.0",
+    version: "2.0.0",
+    responseTimeMs: Date.now() - startTime,
+    services: {
+      database: dbStatus,
+      ai: aiStatus,
+    },
     memory: {
       used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
       total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+      rss: Math.round(process.memoryUsage().rss / 1024 / 1024),
     },
+    env: envCheck,
   };
   
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-  res.json(healthData);
+  res.status(allServicesHealthy ? 200 : 503).json(healthData);
 });
 
 app.get("/api/ready", async (req, res) => {
   try {
+    // Quick database ping for readiness
+    await db.execute(sql`SELECT 1`);
     res.json({ ready: true, timestamp: new Date().toISOString() });
   } catch (err) {
-    res.status(503).json({ ready: false, error: "Service unavailable" });
+    res.status(503).json({ ready: false, error: "Database not ready", timestamp: new Date().toISOString() });
   }
 });
 

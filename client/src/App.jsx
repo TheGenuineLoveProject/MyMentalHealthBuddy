@@ -6,6 +6,7 @@ import ThemeProvider from "./components/ui/theme-provider.jsx";
 import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
 import { SkipLink } from "./components/SkipLink.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
+import { Heart } from "lucide-react";
 
 // Eagerly loaded critical pages
 import Home from "./pages/Home.jsx";
@@ -13,7 +14,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
-import Error404 from "./pages/Error404.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 // Lazy-loaded pages for code splitting
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
@@ -25,13 +26,20 @@ const HealthPage = lazy(() => import("./pages/HealthPage.jsx"));
 const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));
 
-// Loading fallback component
+// Premium loading fallback component
 function PageLoader() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-neutral-900 to-neutral-950">
-      <div className="text-center">
-        <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" aria-hidden="true"></div>
-        <p className="text-white">Loading...</p>
+    <div className="flex items-center justify-center min-h-screen bg-[var(--bg)]">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--accent-teal)]/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "150ms" }}></div>
+      </div>
+      <div className="text-center relative z-10 animate-fade-in-up">
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[var(--primary)] to-[var(--accent-violet)] flex items-center justify-center mx-auto mb-4 shadow-lg animate-pulse">
+          <Heart className="w-8 h-8 text-white" aria-hidden="true" />
+        </div>
+        <div className="w-8 h-8 border-3 border-[var(--primary)]/30 border-t-[var(--primary)] rounded-full animate-spin mx-auto mb-4" aria-hidden="true"></div>
+        <p className="text-[var(--text-secondary)] font-medium">Loading your wellness space...</p>
       </div>
     </div>
   );
@@ -84,7 +92,7 @@ function AppRoutes() {
         <Route path="/settings">
           <ProtectedRoute><Settings /></ProtectedRoute>
         </Route>
-        <Route component={Error404} />
+        <Route component={NotFound} />
       </Switch>
     </Suspense>
   );

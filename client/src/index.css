@@ -910,3 +910,195 @@ html.dark .bg-gradient-mesh {
   opacity: 1;
   visibility: visible;
 }
+
+/* ============================================================
+   MOBILE RESPONSIVENESS
+   Optimized breakpoints, touch targets, and typography
+============================================================ */
+
+/* Mobile-first touch targets (minimum 44px for accessibility) */
+@media (max-width: 768px) {
+  .btn,
+  .quick-action,
+  .nav-link,
+  button,
+  [role="button"],
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .btn {
+    padding: var(--space-3) var(--space-4);
+    font-size: 1rem;
+  }
+  
+  .input-lg {
+    padding: var(--space-4);
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+  
+  .card-elevated {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+  
+  /* Typography scale for mobile */
+  h1 {
+    font-size: 1.75rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  .stat-value {
+    font-size: 2rem;
+  }
+  
+  /* Stack grid items on mobile */
+  .grid {
+    gap: var(--space-3);
+  }
+  
+  /* Full-width cards on mobile */
+  .feature-card,
+  .quick-action {
+    padding: var(--space-4);
+  }
+  
+  /* Chat bubbles */
+  .chat-bubble {
+    max-width: 90%;
+    padding: var(--space-3) var(--space-4);
+  }
+  
+  /* Mood selector chips */
+  .mood-chip {
+    padding: var(--space-3) var(--space-4);
+    font-size: 0.875rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+  }
+  
+  .btn-gradient {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .card-elevated {
+    margin-left: calc(-1 * var(--space-2));
+    margin-right: calc(-1 * var(--space-2));
+    border-radius: var(--radius-md);
+  }
+  
+  .stat-value {
+    font-size: 1.75rem;
+  }
+  
+  /* Stack action buttons */
+  .flex-wrap {
+    flex-direction: column;
+  }
+  
+  .flex-wrap > * {
+    width: 100%;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .quick-action {
+    padding: var(--space-5);
+  }
+  
+  .feature-card {
+    padding: var(--space-5);
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .min-h-screen {
+    min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .fixed-bottom {
+    padding-bottom: calc(var(--space-4) + env(safe-area-inset-bottom));
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-fade-in-up,
+  .animate-scale-in,
+  .animate-pulse,
+  .animate-bounce {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: hsl(0, 0%, 0%);
+    --text-secondary: hsl(0, 0%, 20%);
+  }
+  
+  .dark {
+    --border: hsl(0, 0%, 100%);
+    --text-secondary: hsl(0, 0%, 80%);
+  }
+  
+  .btn-gradient {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print,
+  nav,
+  .btn,
+  button {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .card-elevated {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
