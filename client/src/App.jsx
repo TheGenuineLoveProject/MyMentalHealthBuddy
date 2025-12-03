@@ -11,6 +11,8 @@ import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
 import Error404 from "./pages/Error404.jsx";
 
 // Lazy-loaded pages for code splitting
@@ -77,6 +79,8 @@ function AppRoutes() {
         </Route>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/forgot-password" component={ForgotPassword} />
+        <Route path="/reset-password" component={ResetPassword} />
         <Route path="/settings">
           <ProtectedRoute><Settings /></ProtectedRoute>
         </Route>
