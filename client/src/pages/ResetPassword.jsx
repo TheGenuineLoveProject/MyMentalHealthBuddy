@@ -1,10 +1,11 @@
-import { useLocation, Link } from "wouter";
+import { Link, useSearch } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, AlertCircle } from "lucide-react";
+import { useMemo } from "react";
 
 const resetPasswordSchema = z.object({
   newPassword: z.string().min(6, "Password must be at least 6 characters"),
@@ -15,10 +16,13 @@ const resetPasswordSchema = z.object({
 });
 
 export default function ResetPassword() {
-  const [, setLocation] = useLocation();
+  const searchString = useSearch();
   
-  const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get("token");
+  const token = useMemo(() => {
+    if (!searchString) return null;
+    const params = new URLSearchParams(searchString);
+    return params.get("token");
+  }, [searchString]);
 
   const {
     register,
@@ -47,6 +51,10 @@ export default function ResetPassword() {
   });
 
   const onSubmit = (data) => {
+    if (!token) {
+      setError("root", { message: "Invalid reset token. Please request a new password reset link." });
+      return;
+    }
     resetMutation.mutate(data);
   };
 

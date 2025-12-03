@@ -121,3 +121,35 @@ The client is built using Vite for optimized production bundles with code splitt
 - Request timeout (15s) and exponential backoff retry (up to 3 attempts)
 - Graceful fallback responses when AI is unavailable
 - /api/ai/status endpoint to monitor circuit breaker state
+
+## Recent Changes (December 3, 2025)
+
+### Schema Consolidation
+- Unified shared/schema.mjs as single source of truth for all Drizzle models
+- Schema now matches actual Neon PostgreSQL database structure:
+  - users, moods, journals: UUID with gen_random_uuid()
+  - ai_messages, password_reset_tokens, audit_log: TEXT (manually generated)
+  - analytics: INTEGER serial
+- Fixed duplicate errorHandler middleware in server/middleware/errorHandler.mjs
+
+### Form Validation Enhancement
+- Retrofitted Login and Register pages with react-hook-form and Zod validation
+- Improved error handling with per-field validation messages
+- Added ARIA attributes for accessibility (aria-invalid, aria-describedby)
+- Proper focus management and keyboard navigation
+
+### Password Reset Frontend
+- Added ForgotPassword page with email input and success state
+- Added ResetPassword page with token validation via wouter's useSearch hook
+- Both pages integrated with existing backend password-reset endpoints
+- Added "Forgot your password?" link to Login page
+
+### CSP Security Updates
+- Updated Content Security Policy to allow Sentry connections (*.ingest.sentry.io)
+- Added worker-src directive for blob workers
+- Fixed CSP blocking Sentry error tracking in development
+
+### Build System Fixes
+- Fixed client/main.jsx with dangling Route JSX element
+- Updated client/postcss.config.js to use @tailwindcss/postcss
+- All 35 integration tests passing
