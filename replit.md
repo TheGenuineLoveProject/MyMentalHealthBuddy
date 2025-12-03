@@ -166,3 +166,41 @@ The client is built using Vite for optimized production bundles with code splitt
 - Deleted unused server/routes/passwordReset.mjs stub file
 - Fixed password reset frontend to use correct /api/account/password-reset/* endpoints
 - Fixed missing randomUUID imports in mood.mjs and journal.mjs routes
+
+### Database Schema & Performance Fixes (December 3, 2025)
+- Created missing webhook_events table for Stripe idempotency
+- Added 9 database indexes for query performance:
+  - idx_moods_user_id, idx_moods_created_at
+  - idx_journals_user_id, idx_journals_created_at
+  - idx_ai_messages_user_id, idx_ai_messages_created_at
+  - idx_password_reset_tokens_user_id
+  - idx_audit_log_user_id, idx_audit_log_created_at
+- Set APP_BASE_URL environment variable for production Stripe redirects
+- All 8 database tables now synchronized with schema
+
+## Database Tables Reference
+
+| Table | ID Type | Description |
+|-------|---------|-------------|
+| users | UUID (gen_random_uuid) | User accounts |
+| moods | UUID (gen_random_uuid) | Mood tracking entries |
+| journals | UUID (gen_random_uuid) | Journal entries |
+| ai_messages | TEXT (manually generated) | AI chat history |
+| password_reset_tokens | TEXT (manually generated) | Password reset tokens |
+| audit_log | TEXT (manually generated) | Security audit log |
+| analytics | INTEGER (serial) | User analytics aggregates |
+| webhook_events | TEXT (Stripe event ID) | Webhook idempotency tracking |
+
+## Environment Variables
+
+### Required for Production
+- SESSION_SECRET: ✅ Set
+- DATABASE_URL: ✅ Set
+- OPENAI_API_KEY: ✅ Set (for AI chat)
+- STRIPE_SECRET_KEY: ✅ Set (for billing)
+- STRIPE_WEBHOOK_SECRET: ✅ Set (for billing)
+- APP_BASE_URL: ✅ Set (for Stripe redirects)
+- SENTRY_DSN: ✅ Set (for error tracking)
+
+### Optional
+- RESEND_API_KEY: Not set (for email delivery)
