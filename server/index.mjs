@@ -5,7 +5,6 @@ import cors from "cors";
 import helmet from "helmet";
 import path from "path";
 import { fileURLToPath } from "url";
-
 import { apiRateLimit, authRateLimit } from "./middleware/rateLimit.mjs";
 import { cspHeaders, sanitizeBody, securityHeaders } from "./middleware/security.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
@@ -35,7 +34,6 @@ if (!SESSION_SECRET) {
 }
 
 const app = express();
-const PORT = Number(process.env.PORT) || 5000;
 
 initSentry(app);
 
@@ -75,6 +73,7 @@ import aiDashboardRoutes from "./routes/ai-dashboard.mjs";
 import stripeWebhookRoutes from "./routes/stripeWebhook.mjs";
 import aiRoutes from "./routes/ai.mjs";
 import accountRoutes from "./routes/account.mjs";
+import gamificationRoutes from "./routes/gamification.mjs";
 
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/auth", authRoutes);
@@ -86,6 +85,7 @@ app.use("/api/canva", canvaOAuthRoutes);
 app.use("/api/ui-dashboard", uiDashboardRoutes);
 app.use("/api/ai-dashboard", aiDashboardRoutes);
 app.use("/api/webhooks/stripe", stripeWebhookRoutes);
+app.use("/api/gamification", gamificationRoutes);
 
 app.use("/api/dashboard", uiDashboardRoutes);
 
@@ -188,6 +188,8 @@ app.use((err, req, res, next) => {
       : err.message || "Internal Server Error",
   });
 });
+
+const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, "0.0.0.0", () => {
   logger.info("MyMentalHealthBuddy API started", { port: PORT, env: process.env.NODE_ENV || "development" });

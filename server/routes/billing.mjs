@@ -23,7 +23,6 @@ if (STRIPE_SECRET_KEY) {
   });
 }
 
-// All billing routes require auth
 router.use(requireAuth);
 
 const checkoutSchema = z.object({
@@ -32,7 +31,6 @@ const checkoutSchema = z.object({
   cancelUrl: z.string().url(),
 });
 
-// POST /api/billing/checkout-session
 router.post("/checkout-session", async (req, res) => {
   try {
     const user = req.user;
@@ -69,7 +67,6 @@ router.post("/checkout-session", async (req, res) => {
   }
 });
 
-// (Optional) billing portal stub
 router.post("/portal-session", async (req, res) => {
   try {
     const user = req.user;
@@ -79,8 +76,85 @@ router.post("/portal-session", async (req, res) => {
       return serverError(res, new Error("Stripe not configured."), "Stripe not configured.");
     }
 
-    // In real setup, you’d link Stripe customer id from DB
-    return success(res, { message: "Billing portal not fully wired yet." });
+    const { returnUrl } = req.body;
+    
+    if (!returnUrl) {
+      return badRequest(res, "returnUrl is required.");
+    }
+
+    let customers;
+    try {
+      customers = await stripe.customers.list({
+        email: user.email,
+        limit: 1,
+      });
+    } catch (err) {
+      return serverError(res, err, "Failed to look up customer.");
+    }
+
+    if (!customers.data.length) {
+      return badRequest(res, "No billing account found. Please subscribe to a plan first.");
+    }
+
+    const customerId = customers.data[0].id;
+
+    const portalSession = await stripe.billingPortal.sessions.create({
+      customer: customerId,
+      return_url: returnUrl,
+    });
+
+    return success(res, { url: portalSession.url }, "Billing portal session created.");
+  } catch (err) {
+    return serverError(res, err);
+  }
+});
+
+router.get("/subscription-status", async (req, res) => {
+  try {
+    const user = req.user;
+    if (!user) return unauthorized(res);
+
+    if (!stripe) {
+      return success(res, { 
+        plan: "free", 
+        status: "active",
+        message: "Billing not configured" 
+      });
+    }
+
+    const customers = await stripe.customers.list({
+      email: user.email,
+      limit: 1,
+      expand: ["data.subscriptions"],
+    });
+
+    if (!customers.data.length) {
+      return success(res, { plan: "free", status: "none" });
+    }
+
+    const customer = customers.data[0];
+    const subscription = customer.subscriptions?.data[0];
+
+    if (!subscription) {
+      return success(res, { plan: "free", status: "none" });
+    }
+
+    // Use these exact values in your billing.mjs:
+    const STRIPE_PRICES = {
+      basic: process.env.STRIPE_PRICE_BASIC,     // $9.99/month
+      premium: process.env.STRIPE_PRICE_PREMIUM, // $19.99/month
+      pro: process.env.STRIPE_PRICE_PRO          // $29.99/month
+    };
+
+    const priceId = subscription.items.data[0]?.price.id;
+    const plan = planMap[priceId] || "basic";
+
+    return success(res, {
+      plan,
+      status: subscription.status,
+      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+      cancelAtPeriodEnd: subscription.cancel_at_period_end,
+    });
   } catch (err) {
     return serverError(res, err);
   }

@@ -5,27 +5,12 @@ modules = ["nodejs-20", "postgresql-16"]
 
 [deployment]
 deploymentTarget = "autoscale"
-build = ["npm", "run", "build", "-w", "client"]
-run = ["node", "server/index.mjs"]
+build = ["npm", "run", "build"]
+run = ["node", "dist/server/index.js"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
-
-[[ports]]
-localPort = 5174
-externalPort = 3000
-
-[[ports]]
-localPort = 5175
-externalPort = 3001
-
-[[ports]]
-localPort = 44105
-externalPort = 3002
-
-[env]
-NODE_ENV = "development"
 
 [agent]
 expertMode = true

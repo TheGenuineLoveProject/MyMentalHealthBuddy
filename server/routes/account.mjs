@@ -3,7 +3,7 @@
 
 import express from "express";
 import bcrypt from "bcryptjs";
-import crypto from "crypto";
+import crypto, { randomUUID } from "crypto";
 import { eq, and, gt } from "drizzle-orm";
 
 import { db } from "../db/connection.mjs";

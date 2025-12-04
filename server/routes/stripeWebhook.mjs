@@ -2,8 +2,8 @@
 import express from "express";
 import Stripe from "stripe";
 import { db } from "../db/connection.mjs";
-import { users, webhookEvents } from "../../shared/schema.mjs";
-import { eq } from "drizzle-orm";
+import { users, webhookEvents, subscriptions } from "../../shared/schema.mjs";
+import { eq, and } from "drizzle-orm";
 import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
@@ -39,23 +39,89 @@ async function markEventProcessed(eventId, eventType) {
   }
 }
 
-async function updateUserSubscription(customerId, subscriptionData) {
+async function findUserByStripeCustomer(customerId) {
   try {
-    const [user] = await db
-      .update(users)
-      .set({
-        stripeSubscriptionId: subscriptionData.subscriptionId,
-        subscriptionPlan: subscriptionData.plan,
-        subscriptionStatus: subscriptionData.status,
-        subscriptionPeriodEnd: subscriptionData.periodEnd,
-        updatedAt: new Date(),
-      })
-      .where(eq(users.stripeCustomerId, customerId))
-      .returning();
+    const existing = await db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.stripeCustomerId, customerId))
+      .limit(1);
     
-    return user;
+    if (existing.length > 0) {
+      return existing[0].userId;
+    }
+    return null;
   } catch (error) {
-    logger.error("Failed to update user subscription", { error: error.message, customerId });
+    logger.error("Error finding user by Stripe customer", { error: error.message, customerId });
+    return null;
+  }
+}
+
+async function findUserByEmail(email) {
+  try {
+    const userRows = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email))
+      .limit(1);
+    
+    return userRows[0]?.id || null;
+  } catch (error) {
+    logger.error("Error finding user by email", { error: error.message, email });
+    return null;
+  }
+}
+
+async function updateUserSubscription(customerId, subscriptionData, customerEmail = null) {
+  try {
+    let userId = await findUserByStripeCustomer(customerId);
+    
+    if (!userId && customerEmail) {
+      userId = await findUserByEmail(customerEmail);
+    }
+    
+    if (!userId) {
+      logger.warn("No user found for subscription update", { customerId, customerEmail });
+      return null;
+    }
+
+    const existingSub = await db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.userId, userId))
+      .limit(1);
+
+    const subscriptionValues = {
+      userId,
+      tier: subscriptionData.plan || "free",
+      status: subscriptionData.status || "active",
+      stripeCustomerId: customerId,
+      stripeSubscriptionId: subscriptionData.subscriptionId || null,
+      currentPeriodStart: subscriptionData.periodStart || null,
+      currentPeriodEnd: subscriptionData.periodEnd || null,
+      cancelAtPeriodEnd: subscriptionData.cancelAtPeriodEnd ? 1 : 0,
+      updatedAt: new Date(),
+    };
+
+    if (existingSub.length > 0) {
+      await db
+        .update(subscriptions)
+        .set(subscriptionValues)
+        .where(eq(subscriptions.userId, userId));
+      
+      logger.info("Subscription updated", { userId, plan: subscriptionData.plan });
+    } else {
+      await db.insert(subscriptions).values({
+        ...subscriptionValues,
+        createdAt: new Date(),
+      });
+      
+      logger.info("Subscription created", { userId, plan: subscriptionData.plan });
+    }
+
+    return { userId, ...subscriptionData };
+  } catch (error) {
+    logger.error("Failed to update subscription", { error: error.message, customerId });
     throw error;
   }
 }
@@ -63,8 +129,8 @@ async function updateUserSubscription(customerId, subscriptionData) {
 function getPlanFromPriceId(priceId) {
   const planMap = {
     [process.env.STRIPE_PRICE_BASIC]: "basic",
-    [process.env.STRIPE_PRICE_PRO]: "pro",
     [process.env.STRIPE_PRICE_PREMIUM]: "premium",
+    [process.env.STRIPE_PRICE_PRO]: "pro",
   };
   return planMap[priceId] || "basic";
 }
@@ -105,6 +171,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
         const session = event.data.object;
         const customerId = session.customer;
         const subscriptionId = session.subscription;
+        const customerEmail = session.customer_email || session.customer_details?.email;
 
         if (subscriptionId) {
           const subscription = await stripe.subscriptions.retrieve(subscriptionId);
@@ -112,9 +179,10 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
             subscriptionId: subscription.id,
             plan: getPlanFromPriceId(subscription.items.data[0]?.price.id),
             status: subscription.status,
+            periodStart: new Date(subscription.current_period_start * 1000),
             periodEnd: new Date(subscription.current_period_end * 1000),
-          });
-          logger.info("Checkout completed", { customerId });
+            cancelAtPeriodEnd: subscription.cancel_at_period_end,
+          }, customerEmail);
         }
         break;
       }
@@ -126,9 +194,10 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
           subscriptionId: subscription.id,
           plan: getPlanFromPriceId(subscription.items.data[0]?.price.id),
           status: subscription.status,
+          periodStart: new Date(subscription.current_period_start * 1000),
           periodEnd: new Date(subscription.current_period_end * 1000),
+          cancelAtPeriodEnd: subscription.cancel_at_period_end,
         });
-        logger.info("Subscription event processed", { eventType: event.type, customerId: subscription.customer });
         break;
       }
 
@@ -138,9 +207,10 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
           subscriptionId: null,
           plan: "free",
           status: "canceled",
+          periodStart: null,
           periodEnd: null,
+          cancelAtPeriodEnd: false,
         });
-        logger.info("Subscription canceled", { customerId: subscription.customer });
         break;
       }
 
@@ -152,13 +222,14 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
 
       case "invoice.payment_failed": {
         const invoice = event.data.object;
-        logger.error("Payment failed", { customerId: invoice.customer });
-        await updateUserSubscription(invoice.customer, {
-          subscriptionId: invoice.subscription,
-          plan: "basic",
-          status: "past_due",
-          periodEnd: null,
-        });
+        logger.warn("Payment failed", { customerId: invoice.customer, invoiceId: invoice.id });
+        
+        if (invoice.subscription) {
+          await updateUserSubscription(invoice.customer, {
+            subscriptionId: invoice.subscription,
+            status: "past_due",
+          });
+        }
         break;
       }
 
@@ -170,7 +241,7 @@ router.post("/", express.raw({ type: "application/json" }), async (req, res) => 
 
     res.json({ received: true, processed: event.type });
   } catch (error) {
-    logger.error("Error processing event", { eventType: event.type, error: error.message });
+    logger.error("Error processing webhook event", { eventType: event.type, error: error.message });
     res.status(500).json({ error: "Processing failed", retryable: true });
   }
 });

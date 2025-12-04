@@ -2,6 +2,8 @@
 
 {
   deps = [
+    pkgs.u-root-cmds
+    pkgs.splat
     pkgs.yakut
     pkgs.imagemagick_light
     pkgs.killall

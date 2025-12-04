@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient.js";
 import ThemeProvider from "./components/ui/theme-provider.jsx";
 import { AuthProvider, useAuth } from "./context/AuthContext.jsx";
+import { GamificationProvider } from "./context/GamificationContext.jsx";
 import { SkipLink } from "./components/SkipLink.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import { Heart } from "lucide-react";
@@ -26,6 +27,7 @@ const HealthPage = lazy(() => import("./pages/HealthPage.jsx"));
 const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));
 const Wellness = lazy(() => import("./pages/Wellness.jsx"));
+const Premium = lazy(() => import("./pages/Premium.jsx"));
 
 // Premium loading fallback component
 function PageLoader() {
@@ -86,6 +88,9 @@ function AppRoutes() {
         <Route path="/wellness">
           <ProtectedRoute><Wellness /></ProtectedRoute>
         </Route>
+        <Route path="/premium">
+          <ProtectedRoute><Premium /></ProtectedRoute>
+        </Route>
         <Route path="/health">
           <Suspense fallback={<PageLoader />}><HealthPage /></Suspense>
         </Route>
@@ -106,14 +111,16 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <ThemeProvider>
-          <ErrorBoundary>
-            <SkipLink />
-            <main id="main-content" tabIndex={-1} className="outline-none">
-              <AppRoutes />
-            </main>
-          </ErrorBoundary>
-        </ThemeProvider>
+        <GamificationProvider>
+          <ThemeProvider>
+            <ErrorBoundary>
+              <SkipLink />
+              <main id="main-content" tabIndex={-1} className="outline-none">
+                <AppRoutes />
+              </main>
+            </ErrorBoundary>
+          </ThemeProvider>
+        </GamificationProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

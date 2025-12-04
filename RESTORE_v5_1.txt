@@ -1,0 +1,34 @@
+REPLIT_RESTORE_PACK_v5.1
+───────────────────────────────
+PURPOSE:
+Rebuild entire Replit project environment to guaranteed working state.
+
+FILES INSTALLED:
+• .replit
+• replit.nix
+• server/index.mjs
+• client/ structure (optional)
+• scripts/automation files (mjs)
+• shared/ core utils
+• env template
+• install commands
+
+INSTRUCTIONS:
+Paste each file EXACTLY as listed.
+No changes. No edits.
+
+───────────────────────────────
+FILE: .replit
+───────────────────────────────
+run = "node server/index.mjs"
+entrypoint = "server/index.mjs"
+
+[env]
+NODE_ENV = "development"
+
+[packager]
+language = "nodejs"
+
+[[ports]]
+localPort = 5000
+externalPort = 80

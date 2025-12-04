@@ -126,15 +126,17 @@ router.get("/journal-last-7", async (req, res) => {
     const results = await db
       .select({
         title: journals.title,
-        content: journals.content,
+        text: journals.text,
         createdAt: journals.createdAt,
       })
       .from(journals)
       .where(eq(journals.userId, userId))
       .orderBy(sql`${journals.createdAt} DESC`)
       .limit(7);
+    
+    const mapped = results.map(j => ({ ...j, content: j.text }));
 
-    return success(res, results);
+    return success(res, mapped);
   } catch (err) {
     logger.error("Failed to load journal analytics", { error: err.message, requestId: req.requestId });
     return badRequest(res, "Failed to load journal analytics.");
