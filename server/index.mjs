@@ -98,6 +98,50 @@ import { sql } from "drizzle-orm";
 
 app.get("/api/health", async (req, res) => {
   const startTime = Date.now();
+  // Add these routes after your existing Canva route:
+
+  // Enhanced Canva OAuth routes with healing integration
+  app.get('/api/canva/oauth', authenticateToken, canvaOAuthHandler);
+  app.get('/api/canva/callback', authenticateToken, canvaOAuthCallbackHandler);
+  app.get('/api/canva/templates', authenticateToken, getTherapeuticTemplatesHandler);
+
+  // Healing-focused design creation
+  app.post('/api/canva/create-design', authenticateToken, async (req, res) => {
+    try {
+      const { templateId, customization, healingIntent } = req.body;
+
+      // Validate healing intention
+      if (!healingIntent || healingIntent.length < 10) {
+        return res.status(400).json({
+          error: 'Please provide a meaningful healing intention for your design',
+          healingSupport: 'Your intention helps create more powerful healing visuals'
+        });
+      }
+
+      // Create design with healing focus
+      const design = await createHealingDesign(templateId, customization, healingIntent, req.user.id);
+
+      res.json({
+        success: true,
+        design: design,
+        healingMessage: 'Your healing design has been created with love and intention',
+        nextSteps: [
+          'Download your healing visual',
+          'Share with your support network',
+          'Use daily for maximum healing benefit',
+          'Create more designs as you heal and grow'
+        ]
+      });
+
+    } catch (error) {
+      console.error('Healing design creation error:', error);
+      res.status(500).json({
+        error: 'Unable to create healing design',
+        healingSupport: 'Please try again with a different template or intention',
+        alternative: 'Browse other therapeutic templates while we resolve this'
+      });
+    }
+  });
   
   // Check database connectivity
   let dbStatus = { connected: false, latencyMs: 0 };

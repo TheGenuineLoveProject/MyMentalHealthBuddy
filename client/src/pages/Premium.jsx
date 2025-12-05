@@ -1,10 +1,13 @@
-import { useState, lazy, Suspense } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Link } from "wouter";
 import { 
   Sparkles, ArrowLeft, Crown, Star, Target, BarChart3,
-  Brain, Heart, Calendar, Bell, ChevronRight, Check, Zap, Loader2
+  Brain, Heart, Calendar, Bell, ChevronRight, Zap, Loader2
 } from "lucide-react";
 import SEO from "../components/SEO.jsx";
+
+const STRIPE_PRICING_TABLE_ID = "prctbl_1SanK5RtwDw9mKhaSKDHxmn5";
+const STRIPE_PUBLISHABLE_KEY = "pk_live_51RIV9vRtwDw9mKhaldQnCVBo6Grjc2KXIjwyolZbTClMNgMGySVBrT6LayaZhBebFDUaQI0yoXoxiAjyLXLOl2b800NJXSDcQd";
 
 const HealingJourneys = lazy(() => import("../components/HealingJourneys.jsx"));
 const ProgressAnalytics = lazy(() => import("../components/ProgressAnalytics.jsx"));
@@ -91,54 +94,46 @@ const PREMIUM_FEATURES = [
   }
 ];
 
-const SUBSCRIPTION_TIERS = [
-  {
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    features: [
-      "Access to 40+ basic tools",
-      "Daily mood tracking",
-      "Basic journaling",
-      "Community resources",
-      "Crisis support resources"
-    ],
-    cta: "Current Plan",
-    popular: false
-  },
-  {
-    name: "Premium",
-    price: "$9.99",
-    period: "per month",
-    features: [
-      "Everything in Free",
-      "AI Wellness Concierge",
-      "Healing Journeys (14+)",
-      "Advanced Analytics",
-      "Goal Tracking & Planning",
-      "Mood Visualizations",
-      "Priority support",
-      "No ads"
-    ],
-    cta: "Upgrade Now",
-    popular: true
-  },
-  {
-    name: "Annual",
-    price: "$79.99",
-    period: "per year",
-    features: [
-      "Everything in Premium",
-      "2 months free",
-      "Exclusive content",
-      "Early access features",
-      "1-on-1 onboarding session",
-      "Custom wellness plan"
-    ],
-    cta: "Best Value",
-    popular: false
+function StripePricingTable() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (document.querySelector('script[src*="pricing-table.js"]')) {
+      setIsLoaded(true);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://js.stripe.com/v3/pricing-table.js";
+    script.async = true;
+    script.onload = () => setIsLoaded(true);
+    document.head.appendChild(script);
+
+    return () => {
+      // Keep script loaded for subsequent visits
+    };
+  }, []);
+
+  if (!isLoaded) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 animate-spin text-violet-500" />
+          <p className="text-sm text-gray-500 dark:text-gray-400">Loading pricing options...</p>
+        </div>
+      </div>
+    );
   }
-];
+
+  return (
+    <div className="stripe-pricing-wrapper" data-testid="stripe-pricing-table">
+      <stripe-pricing-table
+        pricing-table-id={STRIPE_PRICING_TABLE_ID}
+        publishable-key={STRIPE_PUBLISHABLE_KEY}
+      />
+    </div>
+  );
+}
 
 export default function Premium() {
   const [activeFeature, setActiveFeature] = useState("journeys");
@@ -205,47 +200,16 @@ export default function Premium() {
           </div>
 
           {view === "pricing" ? (
-            <div className="grid md:grid-cols-3 gap-6">
-              {SUBSCRIPTION_TIERS.map((tier, index) => (
-                <div
-                  key={tier.name}
-                  className={`card-elevated p-6 relative ${
-                    tier.popular ? "ring-2 ring-[var(--primary)]" : ""
-                  }`}
-                  data-testid={`tier-${tier.name.toLowerCase()}`}
-                >
-                  {tier.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-[var(--primary)] text-white text-sm font-medium rounded-full">
-                      Most Popular
-                    </div>
-                  )}
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-bold text-[var(--text)] mb-2">{tier.name}</h3>
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-4xl font-bold text-[var(--text)]">{tier.price}</span>
-                      <span className="text-[var(--text-secondary)]">/{tier.period}</span>
-                    </div>
-                  </div>
-                  <ul className="space-y-3 mb-6">
-                    {tier.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-2 text-[var(--text)]">
-                        <Check className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    className={`w-full py-3 rounded-xl font-semibold transition-all ${
-                      tier.popular
-                        ? "bg-[var(--primary)] text-white hover:opacity-90"
-                        : "bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--surface-hover)]"
-                    }`}
-                    data-testid={`button-${tier.name.toLowerCase()}`}
-                  >
-                    {tier.cta}
-                  </button>
-                </div>
-              ))}
+            <div className="card-elevated p-6 md:p-8">
+              <div className="text-center mb-8">
+                <h2 className="text-2xl font-bold text-[var(--text)] mb-2">
+                  Choose Your Wellness Journey
+                </h2>
+                <p className="text-[var(--text-secondary)]">
+                  Select a plan that fits your mental health goals
+                </p>
+              </div>
+              <StripePricingTable />
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
