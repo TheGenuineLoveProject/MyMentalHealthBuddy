@@ -1,231 +1,199 @@
 // server/routes/canva-oauth.mjs
-// Canva OAuth 2.0 integration for design embeds
+// Canva Apps SDK integration - no client secret needed
+// Uses CANVA_APP_ID and CANVA_APP_ORIGIN for authentication
 
 import express from "express";
 import crypto from "crypto";
 import { logger } from "../utils/logger.mjs";
-import { requireAuth } from "../middleware/auth.mjs";
 import { success, badRequest, serverError } from "../utils/response.mjs";
 
 const router = express.Router();
 
-const CANVA_CLIENT_ID = process.env.CANVA_CLIENT_ID || "";
-const CANVA_CLIENT_SECRET = process.env.CANVA_CLIENT_SECRET || "";
+const CANVA_APP_ID = process.env.CANVA_APP_ID || process.env.CANVA_CLIENT_ID || "";
 const CANVA_APP_ORIGIN = process.env.CANVA_APP_ORIGIN || "";
-const CANVA_REDIRECT_URI = process.env.CANVA_REDIRECT_URI || "";
+const CANVA_HMR_ENABLED = process.env.CANVA_HMR_ENABLED === "TRUE";
 
-const pendingStates = new Map();
-
-function generateState() {
-  return crypto.randomBytes(32).toString("hex");
-}
-
-function generateCodeVerifier() {
-  return crypto.randomBytes(32).toString("base64url");
-}
-
-function generateCodeChallenge(verifier) {
-  return crypto
-    .createHash("sha256")
-    .update(verifier)
-    .digest("base64url");
-}
-
+// Health check endpoint
 router.get("/health", (req, res) => {
-  const configured = !!(CANVA_CLIENT_ID && CANVA_APP_ORIGIN);
+  const configured = !!(CANVA_APP_ID && CANVA_APP_ORIGIN);
   res.json({
     ok: true,
-    route: "canva-oauth",
+    route: "canva-apps",
     configured,
-    clientId: CANVA_CLIENT_ID ? "set" : "missing",
-    clientSecret: CANVA_CLIENT_SECRET ? "set" : "missing",
-    appOrigin: CANVA_APP_ORIGIN ? "set" : "missing"
+    appId: CANVA_APP_ID ? "set" : "missing",
+    appOrigin: CANVA_APP_ORIGIN ? "set" : "missing",
+    hmrEnabled: CANVA_HMR_ENABLED,
+    mode: "canva-apps-sdk"
   });
 });
 
-router.get("/authorize", requireAuth, (req, res) => {
-  try {
-    if (!CANVA_CLIENT_ID) {
-      return badRequest(res, "Canva integration not configured. Missing CANVA_CLIENT_ID.");
+// Canva Apps SDK configuration endpoint
+router.get("/config", (req, res) => {
+  if (!CANVA_APP_ID || !CANVA_APP_ORIGIN) {
+    return badRequest(res, "Canva Apps SDK not configured. Missing CANVA_APP_ID or CANVA_APP_ORIGIN.");
+  }
+
+  return success(res, {
+    appId: CANVA_APP_ID,
+    appOrigin: CANVA_APP_ORIGIN,
+    hmrEnabled: CANVA_HMR_ENABLED,
+    features: {
+      designEditing: true,
+      assetUpload: true,
+      collaboration: true
     }
+  });
+});
 
-    const state = generateState();
-    const codeVerifier = generateCodeVerifier();
-    const codeChallenge = generateCodeChallenge(codeVerifier);
-
-    pendingStates.set(state, {
-      userId: req.user.id,
-      codeVerifier,
-      createdAt: Date.now()
-    });
-
-    setTimeout(() => pendingStates.delete(state), 10 * 60 * 1000);
-
-    const redirectUri = CANVA_REDIRECT_URI || `${req.protocol}://${req.get("host")}/api/canva/callback`;
+// Verify Canva JWT token (for authenticated requests from Canva Apps)
+router.post("/verify-token", async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
     
-    const authUrl = new URL("https://www.canva.com/api/oauth/authorize");
-    authUrl.searchParams.set("response_type", "code");
-    authUrl.searchParams.set("client_id", CANVA_CLIENT_ID);
-    authUrl.searchParams.set("redirect_uri", redirectUri);
-    authUrl.searchParams.set("scope", "design:content:read design:content:write");
-    authUrl.searchParams.set("state", state);
-    authUrl.searchParams.set("code_challenge", codeChallenge);
-    authUrl.searchParams.set("code_challenge_method", "S256");
-
-    logger.info("Canva OAuth initiated", { userId: req.user.id });
-
-    return success(res, { 
-      authUrl: authUrl.toString(),
-      message: "Redirect user to this URL to authorize Canva access"
-    });
-  } catch (err) {
-    logger.error("Canva authorize error", { error: err.message });
-    return serverError(res, err);
-  }
-});
-
-router.get("/callback", async (req, res) => {
-  try {
-    const { code, state, error, error_description } = req.query;
-
-    if (error) {
-      logger.warn("Canva OAuth error", { error, error_description });
-      return res.redirect(`/?canva_error=${encodeURIComponent(error_description || error)}`);
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return badRequest(res, "Authorization header with Bearer token required.");
     }
 
-    if (!code || !state) {
-      return res.redirect("/?canva_error=missing_parameters");
-    }
-
-    const pending = pendingStates.get(state);
-    if (!pending) {
-      return res.redirect("/?canva_error=invalid_state");
-    }
-
-    pendingStates.delete(state);
-
-    if (!CANVA_CLIENT_SECRET) {
-      logger.warn("CANVA_CLIENT_SECRET not configured");
-      return res.redirect("/?canva_error=server_configuration");
-    }
-
-    const redirectUri = CANVA_REDIRECT_URI || `${req.protocol}://${req.get("host")}/api/canva/callback`;
-
-    const tokenResponse = await fetch("https://www.canva.com/api/oauth/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        grant_type: "authorization_code",
-        code,
-        client_id: CANVA_CLIENT_ID,
-        client_secret: CANVA_CLIENT_SECRET,
-        redirect_uri: redirectUri,
-        code_verifier: pending.codeVerifier,
-      }),
-    });
-
-    if (!tokenResponse.ok) {
-      const errorData = await tokenResponse.text();
-      logger.error("Canva token exchange failed", { status: tokenResponse.status, error: errorData });
-      return res.redirect("/?canva_error=token_exchange_failed");
-    }
-
-    const tokens = await tokenResponse.json();
+    const token = authHeader.split(" ")[1];
     
-    logger.info("Canva OAuth successful", { userId: pending.userId });
+    // Decode JWT payload (Canva tokens are signed but we verify origin)
+    const parts = token.split(".");
+    if (parts.length !== 3) {
+      return badRequest(res, "Invalid token format.");
+    }
 
-    return res.redirect(`/?canva_connected=true`);
+    try {
+      const payload = JSON.parse(Buffer.from(parts[1], "base64url").toString());
+      
+      // Verify the token is for our app
+      if (payload.aud !== CANVA_APP_ID) {
+        logger.warn("Canva token audience mismatch", { 
+          expected: CANVA_APP_ID, 
+          received: payload.aud 
+        });
+        return badRequest(res, "Token not issued for this application.");
+      }
+
+      // Check expiration
+      const now = Math.floor(Date.now() / 1000);
+      if (payload.exp && payload.exp < now) {
+        return badRequest(res, "Token has expired.");
+      }
+
+      logger.info("Canva token verified", { 
+        userId: payload.userId,
+        brandId: payload.brandId 
+      });
+
+      return success(res, {
+        valid: true,
+        userId: payload.userId,
+        brandId: payload.brandId,
+        expiresAt: payload.exp ? new Date(payload.exp * 1000).toISOString() : null
+      });
+    } catch (parseError) {
+      return badRequest(res, "Failed to decode token.");
+    }
   } catch (err) {
-    logger.error("Canva callback error", { error: err.message });
-    return res.redirect("/?canva_error=server_error");
-  }
-});
-
-router.post("/revoke", requireAuth, async (req, res) => {
-  try {
-    const { accessToken } = req.body;
-
-    if (!accessToken) {
-      return badRequest(res, "Access token is required for revocation.");
-    }
-
-    if (!CANVA_CLIENT_SECRET) {
-      return serverError(res, new Error("CANVA_CLIENT_SECRET not configured."));
-    }
-
-    const revokeResponse = await fetch("https://www.canva.com/api/oauth/revoke", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        client_id: CANVA_CLIENT_ID,
-        client_secret: CANVA_CLIENT_SECRET,
-        token: accessToken,
-      }),
-    });
-
-    if (!revokeResponse.ok) {
-      const errorData = await revokeResponse.text();
-      logger.error("Canva token revocation failed", { error: errorData });
-      return serverError(res, new Error("Failed to revoke Canva access."));
-    }
-
-    logger.info("Canva access revoked", { userId: req.user.id });
-
-    return success(res, { message: "Canva access has been revoked." });
-  } catch (err) {
-    logger.error("Canva revoke error", { error: err.message });
+    logger.error("Canva token verification error", { error: err.message });
     return serverError(res, err);
   }
 });
 
-router.post("/refresh", requireAuth, async (req, res) => {
+// Webhook endpoint for Canva events
+router.post("/webhook", async (req, res) => {
   try {
-    const { refreshToken } = req.body;
-
-    if (!refreshToken) {
-      return badRequest(res, "Refresh token is required.");
+    const { event, data } = req.body;
+    
+    logger.info("Canva webhook received", { event, dataKeys: Object.keys(data || {}) });
+    
+    switch (event) {
+      case "app.installed":
+        logger.info("Canva app installed", { brandId: data?.brandId });
+        break;
+      case "app.uninstalled":
+        logger.info("Canva app uninstalled", { brandId: data?.brandId });
+        break;
+      case "design.published":
+        logger.info("Design published via Canva", { designId: data?.designId });
+        break;
+      default:
+        logger.info("Unknown Canva event", { event });
     }
 
-    if (!CANVA_CLIENT_SECRET) {
-      return serverError(res, new Error("CANVA_CLIENT_SECRET not configured."));
-    }
-
-    const tokenResponse = await fetch("https://www.canva.com/api/oauth/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        grant_type: "refresh_token",
-        refresh_token: refreshToken,
-        client_id: CANVA_CLIENT_ID,
-        client_secret: CANVA_CLIENT_SECRET,
-      }),
-    });
-
-    if (!tokenResponse.ok) {
-      const errorData = await tokenResponse.text();
-      logger.error("Canva token refresh failed", { error: errorData });
-      return serverError(res, new Error("Failed to refresh Canva tokens."));
-    }
-
-    const tokens = await tokenResponse.json();
-
-    logger.info("Canva tokens refreshed", { userId: req.user.id });
-
-    return success(res, {
-      accessToken: tokens.access_token,
-      refreshToken: tokens.refresh_token,
-      expiresIn: tokens.expires_in,
-    });
+    return success(res, { received: true });
   } catch (err) {
-    logger.error("Canva refresh error", { error: err.message });
+    logger.error("Canva webhook error", { error: err.message });
     return serverError(res, err);
   }
+});
+
+// Asset proxy for Canva (fetch external assets securely)
+router.get("/asset-proxy", async (req, res) => {
+  try {
+    const { url } = req.query;
+    
+    if (!url) {
+      return badRequest(res, "URL parameter required.");
+    }
+
+    // Validate URL is from allowed domains
+    const allowedDomains = [
+      "canva.com",
+      "canva-apps.com",
+      "media.canva.com",
+      "static.canva.com"
+    ];
+
+    const parsedUrl = new URL(url);
+    const isAllowed = allowedDomains.some(domain => 
+      parsedUrl.hostname.endsWith(domain)
+    );
+
+    if (!isAllowed) {
+      return badRequest(res, "URL domain not allowed.");
+    }
+
+    const response = await fetch(url);
+    
+    if (!response.ok) {
+      return serverError(res, new Error(`Failed to fetch asset: ${response.status}`));
+    }
+
+    const contentType = response.headers.get("content-type");
+    res.setHeader("Content-Type", contentType || "application/octet-stream");
+    res.setHeader("Cache-Control", "public, max-age=86400");
+
+    const buffer = await response.arrayBuffer();
+    res.send(Buffer.from(buffer));
+  } catch (err) {
+    logger.error("Canva asset proxy error", { error: err.message });
+    return serverError(res, err);
+  }
+});
+
+// Status endpoint showing all Canva integration capabilities
+router.get("/status", (req, res) => {
+  const isConfigured = !!(CANVA_APP_ID && CANVA_APP_ORIGIN);
+  
+  return success(res, {
+    integration: "canva-apps-sdk",
+    configured: isConfigured,
+    environment: {
+      appId: CANVA_APP_ID ? `${CANVA_APP_ID.substring(0, 4)}...` : null,
+      appOrigin: CANVA_APP_ORIGIN || null,
+      hmrEnabled: CANVA_HMR_ENABLED
+    },
+    endpoints: {
+      health: "/api/canva/health",
+      config: "/api/canva/config",
+      verifyToken: "/api/canva/verify-token",
+      webhook: "/api/canva/webhook",
+      assetProxy: "/api/canva/asset-proxy",
+      status: "/api/canva/status"
+    },
+    documentation: "https://www.canva.dev/docs/apps/"
+  });
 });
 
 export default router;

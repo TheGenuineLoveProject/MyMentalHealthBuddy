@@ -42,7 +42,7 @@ router.post("/register", validateBody(registerSchema), async (req, res) => {
       .values({
         email,
         passwordHash,
-        name: name ?? null,
+        name: name || "User",
       })
       .returning({
         id: users.id,

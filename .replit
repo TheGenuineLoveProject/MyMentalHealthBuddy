@@ -6,11 +6,27 @@ modules = ["nodejs-20", "postgresql-16"]
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
-run = ["node", "dist/server/index.js"]
+run = ["node", "server/index.mjs"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 5001
+externalPort = 3001
+
+[[ports]]
+localPort = 5173
+externalPort = 5173
+
+[[ports]]
+localPort = 5174
+externalPort = 3000
+
+[[ports]]
+localPort = 34299
+externalPort = 3003
 
 [agent]
 expertMode = true
@@ -49,3 +65,5 @@ NODE_ENV = "production"
 
 [userenv.shared]
 APP_BASE_URL = "https://${REPLIT_DEV_DOMAIN}"
+CANVA_APP_ID = "AAG4Muf2kzE"
+CANVA_HMR_ENABLED = "TRUE"

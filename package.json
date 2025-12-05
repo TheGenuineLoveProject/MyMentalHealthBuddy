@@ -1,40 +1,22 @@
 {
-  "name": "my-mental-health-buddy",
-  "version": "1.0.0",
+  "name": "mymentalhealthbuddy",
+  "version": "2.0.0",
   "type": "module",
+  "main": "server/index.mjs",
   "scripts": {
+    "dev": "NODE_ENV=development node server/index.mjs",
+    "build": "vite build --config vite.config.js",
     "start": "NODE_ENV=production node server/index.mjs",
-    "dev": "node server/index.mjs",
-    "db:push": "drizzle-kit push --config drizzle.config.ts",
-    "db:studio": "drizzle-kit studio --config drizzle.config.ts",
-    "build": "npm --prefix client install && npm --prefix client run build",
-    "build:client": "npm --prefix client install && npm --prefix client run build",
-    "list:ai": "NODE_ENV=development node scripts/automation/listAiEmployees.mjs"
+    "studio": "drizzle-kit studio --host 0.0.0.0 --port 4999",
+    "db:push": "drizzle-kit push --config=drizzle.config.ts",
+    "db:studio": "npm run db:push && npm run studio"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@sentry/node": "^8.0.0",
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "drizzle-zod": "^0.8.3",
-    "express": "^4.19.2",
-    "express-rate-limit": "^8.2.1",
-    "helmet": "^7.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "morgan": "^1.10.0",
-    "openai": "^6.9.1",
+    "concurrently": "^8.2.2",
+    "drizzle-kit": "^0.31.0",
+    "drizzle-orm": "^0.30.9",
     "pg": "^8.11.3",
-    "rate-limiter-flexible": "^5.0.5",
-    "react-hook-form": "^7.67.0",
-    "resend": "^6.5.2",
-    "stripe": "^20.0.0",
-    "zod": "^4.1.13"
-  },
-  "devDependencies": {
-    "drizzle-kit": "^0.31.7",
-    "drizzle-orm": "^0.44.7",
-    "supertest": "^7.1.4",
-    "vitest": "^4.0.15"
+    "nodemon": "^3.1.11",
+    "vite": "^5.4.2"
   }
 }

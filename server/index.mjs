@@ -86,11 +86,8 @@ app.use("/api/ui-dashboard", uiDashboardRoutes);
 app.use("/api/ai-dashboard", aiDashboardRoutes);
 app.use("/api/webhooks/stripe", stripeWebhookRoutes);
 app.use("/api/gamification", gamificationRoutes);
-
 app.use("/api/dashboard", uiDashboardRoutes);
-
 app.use("/api/ai", aiRoutes);
-
 app.use("/api/account", accountRoutes);
 
 import { db } from "./db/client.mjs";
@@ -98,52 +95,7 @@ import { sql } from "drizzle-orm";
 
 app.get("/api/health", async (req, res) => {
   const startTime = Date.now();
-  // Add these routes after your existing Canva route:
-
-  // Enhanced Canva OAuth routes with healing integration
-  app.get('/api/canva/oauth', authenticateToken, canvaOAuthHandler);
-  app.get('/api/canva/callback', authenticateToken, canvaOAuthCallbackHandler);
-  app.get('/api/canva/templates', authenticateToken, getTherapeuticTemplatesHandler);
-
-  // Healing-focused design creation
-  app.post('/api/canva/create-design', authenticateToken, async (req, res) => {
-    try {
-      const { templateId, customization, healingIntent } = req.body;
-
-      // Validate healing intention
-      if (!healingIntent || healingIntent.length < 10) {
-        return res.status(400).json({
-          error: 'Please provide a meaningful healing intention for your design',
-          healingSupport: 'Your intention helps create more powerful healing visuals'
-        });
-      }
-
-      // Create design with healing focus
-      const design = await createHealingDesign(templateId, customization, healingIntent, req.user.id);
-
-      res.json({
-        success: true,
-        design: design,
-        healingMessage: 'Your healing design has been created with love and intention',
-        nextSteps: [
-          'Download your healing visual',
-          'Share with your support network',
-          'Use daily for maximum healing benefit',
-          'Create more designs as you heal and grow'
-        ]
-      });
-
-    } catch (error) {
-      console.error('Healing design creation error:', error);
-      res.status(500).json({
-        error: 'Unable to create healing design',
-        healingSupport: 'Please try again with a different template or intention',
-        alternative: 'Browse other therapeutic templates while we resolve this'
-      });
-    }
-  });
   
-  // Check database connectivity
   let dbStatus = { connected: false, latencyMs: 0 };
   try {
     const dbStart = Date.now();
@@ -153,10 +105,8 @@ app.get("/api/health", async (req, res) => {
     dbStatus = { connected: false, error: "Database connection failed" };
   }
   
-  // Check AI service availability
   let aiStatus = { available: !!process.env.OPENAI_API_KEY };
   
-  // Check required environment variables
   const envCheck = {
     SESSION_SECRET: !!process.env.SESSION_SECRET,
     DATABASE_URL: !!process.env.DATABASE_URL,
@@ -192,7 +142,6 @@ app.get("/api/health", async (req, res) => {
 
 app.get("/api/ready", async (req, res) => {
   try {
-    // Quick database ping for readiness
     await db.execute(sql`SELECT 1`);
     res.json({ ready: true, timestamp: new Date().toISOString() });
   } catch (err) {
@@ -226,10 +175,9 @@ app.use((err, req, res, next) => {
   });
   
   res.status(500).json({
-    ok: false,
-    message: isProduction 
-      ? "An unexpected error occurred. Please try again later."
-      : err.message || "Internal Server Error",
+    success: false,
+    error: "Something went wrong. Please try again.",
+    requestId: req.requestId,
   });
 });
 
@@ -239,18 +187,20 @@ const server = app.listen(PORT, "0.0.0.0", () => {
   logger.info("MyMentalHealthBuddy API started", { port: PORT, env: process.env.NODE_ENV || "development" });
 });
 
-function gracefulShutdown(signal) {
-  logger.info("Shutdown signal received", { signal });
+process.on("SIGTERM", () => {
+  logger.info("SIGTERM received, shutting down gracefully...");
   server.close(() => {
-    logger.info("HTTP server closed");
+    logger.info("Server closed");
     process.exit(0);
   });
+});
 
-  setTimeout(() => {
-    logger.error("Could not close connections in time, forcing shutdown");
-    process.exit(1);
-  }, 10000);
-}
+process.on("SIGINT", () => {
+  logger.info("SIGINT received, shutting down gracefully...");
+  server.close(() => {
+    logger.info("Server closed");
+    process.exit(0);
+  });
+});
 
-process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
-process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+export default app;

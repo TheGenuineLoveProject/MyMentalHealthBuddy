@@ -139,15 +139,14 @@ router.get("/subscription-status", async (req, res) => {
       return success(res, { plan: "free", status: "none" });
     }
 
-    // Use these exact values in your billing.mjs:
-    const STRIPE_PRICES = {
-      basic: process.env.STRIPE_PRICE_BASIC,     // $9.99/month
-      premium: process.env.STRIPE_PRICE_PREMIUM, // $19.99/month
-      pro: process.env.STRIPE_PRICE_PRO          // $29.99/month
+    const planMap = {
+      [process.env.STRIPE_PRICE_BASIC]: "basic",
+      [process.env.STRIPE_PRICE_PREMIUM]: "premium",
+      [process.env.STRIPE_PRICE_PRO]: "pro",
     };
 
     const priceId = subscription.items.data[0]?.price.id;
-    const plan = planMap[priceId] || "basic";
+    const plan = (priceId && planMap[priceId]) || "basic";
 
     return success(res, {
       plan,

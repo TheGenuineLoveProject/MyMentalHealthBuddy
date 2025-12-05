@@ -1,6 +1,6 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from "wouter";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from "./lib/queryClient.js";
 import ThemeProvider from "./components/ui/theme-provider.jsx";
 import { AuthProvider, useAuth } from "./context/AuthContext.jsx";

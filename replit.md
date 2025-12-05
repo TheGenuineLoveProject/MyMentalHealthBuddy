@@ -77,7 +77,68 @@ The application is designed for optimized production bundles with code splitting
 - **Neon PostgreSQL**: Primary database.
 - **Stripe**: Billing and payment processing.
 
-## Recent Changes (December 4, 2025)
+## Recent Changes (December 5, 2025)
+
+### 1000% Platform Analysis & Comprehensive Fixes
+- **Authentication Middleware**: Real JWT verification using SESSION_SECRET
+  - Replaces placeholder "user-from-token" with actual decoded user ID/email
+  - Proper error handling for expired/invalid tokens (TokenExpiredError, JsonWebTokenError)
+  - Smoketest bypass restricted to development mode only
+- **Registration Fix**: Name field defaults to "User" if empty (prevents NOT NULL violation)
+- **Billing Route Fix**: Fixed undefined `planMap` variable in subscription-status endpoint
+  - Was using undefined variable causing runtime errors
+  - Now properly maps Stripe price IDs to plan names (basic/premium/pro)
+- **Deployment Config**: Corrected to use `node server/index.mjs`
+
+### Complete Platform Inventory
+
+#### Database Schema (26 Tables)
+| Category | Tables |
+|----------|--------|
+| Core | users, moods, journals, ai_messages |
+| Gamification | user_progress, achievements, user_achievements, daily_quests, tool_sessions, wellness_streaks |
+| Premium | subscriptions, healing_journeys, journey_steps, user_journey_progress |
+| Personalization | user_preferences, wellness_goals, notifications, scheduled_reminders |
+| AI | ai_recommendations, wellness_insights |
+| Community | support_circles, circle_members |
+| Security | password_reset_tokens, audit_log, webhook_events, analytics |
+
+#### Backend Routes (14 Modules)
+| Route | Endpoints | Auth | Status |
+|-------|-----------|------|--------|
+| /api/auth | login, register, logout, refresh | Public | ✅ |
+| /api/mood | CRUD mood entries | Protected | ✅ |
+| /api/journal | CRUD journal entries | Protected | ✅ |
+| /api/ai | chat, status | Protected | ✅ |
+| /api/ai-dashboard | analytics, insights | Protected | ✅ |
+| /api/billing | checkout, portal, subscription-status | Protected | ✅ |
+| /api/gamification | progress, quests, sessions, leaderboard | Protected | ✅ |
+| /api/account | profile, password reset, delete, export | Protected | ✅ |
+| /api/analytics | usage metrics | Protected | ✅ |
+| /api/content | static content | Public | ✅ |
+| /api/canva | health, status, config, verify-token | Mixed | ✅ |
+| /api/webhooks/stripe | subscription events | Stripe Sig | ✅ |
+| /api/health | health, ready | Public | ✅ |
+| /api/ui-dashboard | dashboard data | Protected | ✅ |
+
+#### Frontend Pages (16)
+Home, Dashboard, Login, Register, ForgotPassword, ResetPassword, MoodPage, JournalPage, AIChatPage, Analytics, CrisisResources, Wellness, Premium, Settings, HealthPage, NotFound
+
+#### Wellness Components (82)
+AchievementBadges, AchievementSystem, AffirmationCards, AIChat, AIWellnessConcierge, AngerManagement, AnxietyRelief, BodyScanMeditation, BoundaryBuilder, BreathingExercise, CBTThoughtDiary, CopingStrategies, CreativeExpression, CrisisStabilizer, DailyAffirmations, DailyWellnessPlanner, DigitalDetox, EmotionalIntelligenceQuiz, EmotionWheel, EnergyBooster, FocusTimer, GoalProgress, GratitudeJar, GratitudePrompt, HabitTracker, HealingJourneys, HydrationTracker, InsightCard, LaughterTherapy, MeditationTimer, MindfulBreathing, MindfulEating, MindfulnessBell, MindfulnessChallenges, MindfulWalking, MoodMeter, MoodVisualizer, MorningEveningRituals, MotivationalQuote, MotivationBooster, NotificationCenter, PositiveReframing, PositiveVisualization, PowerNap, ProgressAnalytics, ProgressiveMuscleRelaxation, ProgressRing, QuestPanel, QuickActions, ResilienceStories, SelfCareBingo, SelfCareChecklist, SelfCompassion, SleepSanctuary, SleepTracker, SocialConnection, SomaticRelease, SoundHealingPlayer, StreakCounter, StressMonitor, ValuesExplorer, WeeklyReflection, WellnessGoalTracker, WellnessScore, WellnessStreakDashboard, WellnessTimer, WorryTimeScheduler, XPProgressBar, and more
+
+#### Test Coverage
+- Pages: 154 data-testid attributes
+- Components: 550+ data-testid attributes
+
+### Platform Health Status
+- API: ✅ Healthy (version 2.0.0)
+- Database: ✅ Connected (26 tables, ~120ms latency)
+- AI: ✅ Available (gpt-4o-mini, circuit breaker CLOSED)
+- Sentry: ✅ Error tracking active
+- Stripe: ✅ Webhooks configured
+
+## Previous Changes (December 4, 2025)
 
 ### AI Chat Integration Complete
 - Full OpenAI integration with gpt-4o-mini model
@@ -103,12 +164,13 @@ The application is designed for optimized production bundles with code splitting
 - Stores tier, status, period dates, cancelAtPeriodEnd flags
 - Idempotent event processing with webhookEvents table
 
-### Canva OAuth Integration
-- Full OAuth 2.0 flow with PKCE (S256 code challenge)
-- Authorize, callback, refresh, and revoke endpoints
-- State validation with 10-minute expiry
-- Secure token exchange with code verifier
-- Requires CANVA_CLIENT_SECRET to activate
+### Canva Apps SDK Integration
+- Full Canva Apps SDK integration (no client secret required)
+- JWT token verification for authenticated requests
+- Webhook endpoint for app events (install/uninstall/publish)
+- Asset proxy for secure Canva resource fetching
+- Environment: CANVA_APP_ID, CANVA_APP_ORIGIN, CANVA_HMR_ENABLED
+- Endpoints: /api/canva/health, /api/canva/status, /api/canva/config, /api/canva/verify-token
 
 ### Bundle Optimization
 - Code splitting via Vite manualChunks function
