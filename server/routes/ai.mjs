@@ -5,6 +5,10 @@ import { Router } from "express";
 import { requireAuth } from "../middleware/auth.mjs";
 import { chatCompletion, isConfigured, getCircuitBreakerStatus } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
+import { db } from "../db/connection.mjs";
+import { aiMessages } from "../../shared/schema.mjs";
+import { eq } from "drizzle-orm";
+import { randomUUID } from "crypto";
 
 const router = Router();
 
@@ -123,6 +127,15 @@ router.post("/chat", requireAuth, async (req, res) => {
         requestId: req.requestId 
       });
 
+      try {
+        await db.insert(aiMessages).values([
+          { id: randomUUID(), userId: req.user.id, role: "user", content: userMessage },
+          { id: randomUUID(), userId: req.user.id, role: "assistant", content: result.content }
+        ]);
+      } catch (saveErr) {
+        logger.warn("Failed to save chat messages", { error: saveErr.message, userId: req.user?.id });
+      }
+
       return res.json({
         ok: true,
         reply: result.content,
@@ -164,6 +177,49 @@ router.get("/status", async (req, res) => {
     model: "gpt-4o-mini",
     features: ["trauma-informed", "crisis-detection", "reflection-prompts", "circuit-breaker"]
   });
+});
+
+router.get("/history", requireAuth, async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ ok: false, error: "Unauthorized" });
+    }
+
+    const messages = await db
+      .select({
+        id: aiMessages.id,
+        role: aiMessages.role,
+        content: aiMessages.content,
+        createdAt: aiMessages.createdAt,
+      })
+      .from(aiMessages)
+      .where(eq(aiMessages.userId, userId))
+      .orderBy(aiMessages.createdAt)
+      .limit(100);
+
+    res.json({ ok: true, messages });
+  } catch (err) {
+    logger.error("Error fetching AI history", { error: err.message, userId: req.user?.id });
+    res.status(500).json({ ok: false, error: "Failed to fetch chat history" });
+  }
+});
+
+router.delete("/history", requireAuth, async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ ok: false, error: "Unauthorized" });
+    }
+
+    await db.delete(aiMessages).where(eq(aiMessages.userId, userId));
+    
+    logger.info("AI chat history cleared", { userId });
+    res.json({ ok: true, message: "Chat history cleared" });
+  } catch (err) {
+    logger.error("Error clearing AI history", { error: err.message, userId: req.user?.id });
+    res.status(500).json({ ok: false, error: "Failed to clear chat history" });
+  }
 });
 
 export default router;

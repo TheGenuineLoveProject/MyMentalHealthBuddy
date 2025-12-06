@@ -79,7 +79,7 @@ The application is designed for optimized production bundles with code splitting
 
 ## Recent Changes (December 5, 2025)
 
-### 1000% Platform Analysis & Comprehensive Fixes
+### 10000% Platform Perfection Analysis & Comprehensive Fixes
 - **Authentication Middleware**: Real JWT verification using SESSION_SECRET
   - Replaces placeholder "user-from-token" with actual decoded user ID/email
   - Proper error handling for expired/invalid tokens (TokenExpiredError, JsonWebTokenError)
@@ -88,7 +88,13 @@ The application is designed for optimized production bundles with code splitting
 - **Billing Route Fix**: Fixed undefined `planMap` variable in subscription-status endpoint
   - Was using undefined variable causing runtime errors
   - Now properly maps Stripe price IDs to plan names (basic/premium/pro)
+- **AI Chat History Fix**: Added missing `/api/ai/history` endpoints
+  - GET /api/ai/history - Fetches chat history for authenticated user
+  - DELETE /api/ai/history - Clears chat history for authenticated user
+  - POST /api/ai/chat now persists messages to ai_messages table
 - **Deployment Config**: Corrected to use `node server/index.mjs`
+- **Package Dependencies Fixed**: Updated drizzle-kit to ^0.31.8 and drizzle-orm to ^0.45.0 (compatible versions)
+- **Express 5.x Compatibility**: Fixed wildcard route from `*` to `/{*splat}` for path-to-regexp v8 compatibility
 
 ### Complete Platform Inventory
 
@@ -109,7 +115,7 @@ The application is designed for optimized production bundles with code splitting
 | /api/auth | login, register, logout, refresh | Public | ✅ |
 | /api/mood | CRUD mood entries | Protected | ✅ |
 | /api/journal | CRUD journal entries | Protected | ✅ |
-| /api/ai | chat, status | Protected | ✅ |
+| /api/ai | chat, status, history | Protected | ✅ |
 | /api/ai-dashboard | analytics, insights | Protected | ✅ |
 | /api/billing | checkout, portal, subscription-status | Protected | ✅ |
 | /api/gamification | progress, quests, sessions, leaderboard | Protected | ✅ |

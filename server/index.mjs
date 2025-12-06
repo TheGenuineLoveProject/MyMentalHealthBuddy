@@ -152,7 +152,7 @@ app.get("/api/ready", async (req, res) => {
 const clientDistPath = path.join(__dirname, "..", "client", "dist");
 app.use(express.static(clientDistPath));
 
-app.get("*", (req, res) => {
+app.get("/{*splat}", (req, res) => {
   if (!req.path.startsWith("/api")) {
     res.sendFile(path.join(clientDistPath, "index.html"));
   } else {
