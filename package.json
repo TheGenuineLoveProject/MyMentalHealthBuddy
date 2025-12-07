@@ -5,15 +5,22 @@
   "main": "dist/server/index.mjs",
   "type": "module",
   "scripts": {
+    "dev:client": "cd client && vite",
+    "dev:server": "nodemon server/index.mjs",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-    "dev:client": "cd src/client && vite",
-    "dev:server": "nodemon src/server/index.mjs",
-    "start": "NODE_ENV=production PORT=5002 node dist/server/index.mjs",
+
+    "start": "node server/index.mjs",
+
+    "build:structure": "mkdir -p dist/server dist/client",
+    "build:vite": "cd client && npm run build",
     "build": "npm run build:structure && npm run build:vite",
-    "build:structure": "mkdir -p dist/server dist/client src/client src/server",
-    "build:vite": "cd src/client && vite build",
-    "life-support": "PORT=5002 node src/server/index.mjs",
-    "ultra-perfect": "PORT=5002 node dist/server/index.js"
+
+    "lint": "eslint . --ext .js,.jsx,.mjs",
+    "format": "prettier --write .",
+
+    "db:push": "drizzle-kit push --config=drizzle.config.ts",
+    "db:studio": "drizzle-kit studio --host 0.0.0.0 --port 4999",
+    "db:reset": "psql $DATABASE_URL -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;' && npm run db:push && npm run db:studio"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
