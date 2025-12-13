@@ -8,16 +8,15 @@
     "dev:client": "cd client && vite",
     "dev:server": "nodemon server/index.mjs",
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
-
     "start": "node server/index.mjs",
-
     "build:structure": "mkdir -p dist/server dist/client",
     "build:vite": "cd client && npm run build",
     "build": "npm run build:structure && npm run build:vite",
-
     "lint": "eslint . --ext .js,.jsx,.mjs",
     "format": "prettier --write .",
-
+    "test": "vitest --config server/test.config.mjs run",
+    "test:ci": "vitest --config server/test.config.mjs run",
+    "pretest": "node helpers/test-db-reset.mjs",
     "db:push": "drizzle-kit push --config=drizzle.config.ts",
     "db:studio": "drizzle-kit studio --host 0.0.0.0 --port 4999",
     "db:reset": "psql $DATABASE_URL -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;' && npm run db:push && npm run db:studio"
@@ -65,9 +64,11 @@
     "react-router-dom": "^6.30.2",
     "resend": "^2.0.0",
     "stripe": "^14.5.0",
+    "supertest": "^7.1.4",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.17",
     "uuid": "^13.0.0",
+    "vitest": "^4.0.15",
     "wouter": "^3.8.1",
     "zod": "^3.22.4"
   },

@@ -35,3 +35,18 @@ export const logger = {
   warn: (message, meta) => log("warn", message, meta),
   error: (message, meta) => log("error", message, meta),
 };
+
+export const requestLogger = (req, res, next) => {
+  const start = Date.now();
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    log("info", `${req.method} ${req.path}`, {
+      method: req.method,
+      path: req.path,
+      status: res.statusCode,
+      durationMs: duration,
+      requestId: req.id,
+    });
+  });
+  next();
+};
