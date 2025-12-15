@@ -41,6 +41,18 @@ The platform offers:
 ### System Design Choices
 The application is designed for optimized production bundles with code splitting and environment variable configuration. It incorporates health checks, rate limiting, and graceful shutdown handlers. A unified `shared/schema.mjs` serves as the single source of truth for Drizzle ORM models, matching the Neon PostgreSQL database structure with UUIDs, TEXT-based IDs, serial integers, and foreign key constraints with performance-enhancing indexes. The system implements a trauma-informed NLP layer for all user-facing text, crisis detection, and gentle reflection prompts.
 
+## Scripts & Utilities
+
+- **npm run dev**: Start development server
+- **npm run start**: Start production server
+- **npm run build**: Build client application
+- **npm run bundle:gpt**: Create a safe bundle for ChatGPT debugging (excludes .env and node_modules)
+- **npm run db:push**: Push schema changes to database
+
+### Brand Assets Location
+- `/public/brand/` - Logo, favicon, and OG images
+- `/shared/brand.mjs` - Brand constants (colors, tagline)
+
 ## External Dependencies
 
 - **OpenAI API**: AI chat therapy.

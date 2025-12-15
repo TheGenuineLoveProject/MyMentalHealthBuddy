@@ -2,6 +2,8 @@
 
 {
   deps = [
+    pkgs.gnutar
+    pkgs.zip
     pkgs.u-root-cmds
     pkgs.splat
     pkgs.yakut

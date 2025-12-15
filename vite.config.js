@@ -29,12 +29,6 @@ export default defineConfig({
     minify: 'esbuild',
     target: 'es2020'
   },
-  server: {
-    port: 3000,
-    host: '0.0.0.0',
-    cors: true,
-    hmr: { overlay: false }
-  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'client/src'),
