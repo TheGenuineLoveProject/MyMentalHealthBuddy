@@ -80,7 +80,7 @@ export default function MotivationalQuote({ variant = "default" }) {
       try {
         await navigator.share({ text: shareText });
       } catch (e) {
-        console.log("Share cancelled");
+        // Share cancelled
       }
     } else {
       navigator.clipboard.writeText(shareText);

@@ -1,8 +1,12 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef, useCallback } from "react";
 
 const AuthContext = createContext(null);
 
-function decodeJWT(token) {
+const TOKEN_KEY = "mmhb_token";
+const USER_KEY = "mmhb_user";
+const TOKEN_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
+
+function parseJwt(token) {
   try {
     const base64Url = token.split(".")[1];
     const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
@@ -13,78 +17,145 @@ function decodeJWT(token) {
         .join("")
     );
     return JSON.parse(jsonPayload);
-  } catch (err) {
-    console.error("Failed to decode JWT:", err);
+  } catch {
     return null;
   }
 }
 
-function isTokenExpired(payload) {
-  if (!payload || !payload.exp) return false;
-  return Date.now() >= payload.exp * 1000;
+function isTokenExpired(token) {
+  const payload = parseJwt(token);
+  if (!payload || !payload.exp) return true;
+  const expiryTime = payload.exp * 1000;
+  return Date.now() >= expiryTime - 60000; // Consider expired 1 minute before actual expiry
 }
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() => localStorage.getItem("token"));
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (token) {
-      const payload = decodeJWT(token);
-      if (payload && !isTokenExpired(payload)) {
-        setUser({ id: payload.id, email: payload.email });
-      } else {
-        logout();
+  const [token, setToken] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(TOKEN_KEY);
+      if (stored && isTokenExpired(stored)) {
+        localStorage.removeItem(TOKEN_KEY);
+        localStorage.removeItem(USER_KEY);
+        return null;
       }
+      return stored || null;
     }
-    setIsLoading(false);
-  }, [token]);
+    return null;
+  });
 
-  function login(newToken, userData) {
-    localStorage.setItem("token", newToken);
-    setToken(newToken);
-    setUser(userData || decodeJWT(newToken));
-  }
+  const [user, setUser] = useState(() => {
+    if (typeof window !== "undefined") {
+      const stored = localStorage.getItem(USER_KEY);
+      return stored ? JSON.parse(stored) : null;
+    }
+    return null;
+  });
 
-  function logout() {
-    localStorage.removeItem("token");
+  const [isLoading, setIsLoading] = useState(true);
+  const refreshTimerRef = useRef(null);
+
+  const logout = useCallback(() => {
     setToken(null);
     setUser(null);
-  }
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
+    if (refreshTimerRef.current) {
+      clearInterval(refreshTimerRef.current);
+      refreshTimerRef.current = null;
+    }
+  }, []);
 
-  function isAuthenticated() {
-    if (!token || !user) return false;
-    const payload = decodeJWT(token);
-    if (!payload || isTokenExpired(payload)) {
+  const refreshToken = useCallback(async () => {
+    const currentToken = localStorage.getItem(TOKEN_KEY);
+    if (!currentToken) return;
+
+    try {
+      const response = await fetch("/api/auth/refresh", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${currentToken}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.token) {
+          setToken(data.token);
+          localStorage.setItem(TOKEN_KEY, data.token);
+          if (data.user) {
+            setUser(data.user);
+            localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+          }
+        }
+      } else if (response.status === 401) {
+        logout();
+      }
+    } catch {
+      // Network error - don't logout, just skip refresh
+    }
+  }, [logout]);
+
+  useEffect(() => {
+    setIsLoading(false);
+
+    // Set up token refresh interval
+    if (token && !isTokenExpired(token)) {
+      refreshTimerRef.current = setInterval(refreshToken, TOKEN_REFRESH_INTERVAL);
+    }
+
+    return () => {
+      if (refreshTimerRef.current) {
+        clearInterval(refreshTimerRef.current);
+      }
+    };
+  }, [token, refreshToken]);
+
+  const login = (newToken, userData = null) => {
+    setToken(newToken);
+    setUser(userData);
+    localStorage.setItem(TOKEN_KEY, newToken);
+    if (userData) {
+      localStorage.setItem(USER_KEY, JSON.stringify(userData));
+    }
+
+    // Start refresh timer
+    if (refreshTimerRef.current) {
+      clearInterval(refreshTimerRef.current);
+    }
+    refreshTimerRef.current = setInterval(refreshToken, TOKEN_REFRESH_INTERVAL);
+  };
+
+  const isAuthenticated = () => {
+    if (!token) return false;
+    if (isTokenExpired(token)) {
       logout();
       return false;
     }
     return true;
-  }
-
-  const value = {
-    user,
-    token,
-    isLoading,
-    isAuthenticated,
-    login,
-    logout,
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider
+      value={{
+        token,
+        user,
+        isLoading,
+        isAuthenticated,
+        login,
+        logout,
+        refreshToken,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+  const ctx = useContext(AuthContext);
+  if (!ctx) {
+    throw new Error("useAuth must be used inside AuthProvider");
   }
-  return context;
+  return ctx;
 }
-
-export default AuthContext;

@@ -3,10 +3,10 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Heart, Mail, Lock, ArrowRight, Sparkles } from "lucide-react";
-import { useAuth } from "../context/AuthContext.jsx";
+import { Heart, Mail, Lock, ArrowRight } from "lucide-react";
 import { apiRequest } from "../lib/queryClient.js";
 import SEO from "../components/SEO.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -56,21 +56,19 @@ export default function Login() {
     <>
       <SEO 
         title="Sign In"
-        description="Sign in to your MyMentalHealthBuddy account to access your wellness dashboard, mood tracking, and AI companion."
+        description="Sign in to your Genuine Love Project account to access your wellness dashboard, mood tracking, and AI companion."
       />
       <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-mesh">
         <div className="w-full max-w-md">
-          {/* Logo */}
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="w-12 h-12 rounded-xl bg-[var(--gradient-focus)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                 <Heart className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
-              <span className="text-2xl font-bold tracking-tight">MyMentalHealthBuddy</span>
+              <span className="text-2xl font-bold tracking-tight">The Genuine Love Project</span>
             </Link>
           </div>
 
-          {/* Form Card */}
           <form 
             onSubmit={handleSubmit(onSubmit)}
             className="card-elevated p-8"

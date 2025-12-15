@@ -139,7 +139,7 @@ export default function ResetPassword() {
     <>
       <SEO 
         title="Reset Password"
-        description="Create a new password for your MyMentalHealthBuddy account."
+        description="Create a new password for your Genuine Love Project account."
       />
       <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -154,7 +154,7 @@ export default function ResetPassword() {
             data-testid="link-home"
           >
             <Heart className="w-6 h-6" aria-hidden="true" />
-            <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
+            <span className="font-display font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
           </Link>
           
           <div className="card-elevated p-8">

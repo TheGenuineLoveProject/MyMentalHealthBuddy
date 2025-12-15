@@ -155,7 +155,7 @@ export default function AffirmationCards() {
           text: currentAffirmation,
         });
       } catch (err) {
-        console.log("Share cancelled");
+        // Share cancelled
       }
     } else {
       navigator.clipboard.writeText(currentAffirmation);

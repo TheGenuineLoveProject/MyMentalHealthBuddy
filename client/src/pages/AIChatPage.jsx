@@ -54,7 +54,6 @@ export default function AIChatPage() {
       }
     },
     onError: (err) => {
-      console.error("Chat error:", err);
       setError(err.message || "Failed to send message");
       setMessages((prev) => [
         ...prev,

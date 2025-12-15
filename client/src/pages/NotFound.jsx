@@ -29,7 +29,7 @@ export default function NotFound() {
             data-testid="link-home-logo"
           >
             <Heart className="w-6 h-6" aria-hidden="true" />
-            <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
+            <span className="font-display font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
           </Link>
           
           <div className="card-elevated p-8 md:p-12">

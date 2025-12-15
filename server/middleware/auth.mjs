@@ -1,84 +1,48 @@
-// /server/middleware/auth.mjs
-// Roger v5.1 — Real JWT verification with SESSION_SECRET
-
-import jwt from "jsonwebtoken";
-
-const JWT_SECRET = process.env.SESSION_SECRET;
+import { verifyToken } from "../utils/jwt.mjs";
 
 export function requireAuth(req, res, next) {
-  const authHeader = req.headers.authorization || "";
-
-  // 1) Smoke-test bypass (development only)
-  if (process.env.NODE_ENV === "development" && authHeader === "Bearer smoketest-token") {
-    req.user = { id: "smoketest-user" };
-    return next();
-  }
-
-  // 2) Verify Bearer token format
-  if (!authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({
-      ok: false,
-      error: "Unauthorized: missing Bearer token"
-    });
-  }
-
-  const token = authHeader.replace("Bearer ", "").trim();
-
-  if (!token) {
-    return res.status(401).json({
-      ok: false,
-      error: "Unauthorized: token is empty"
-    });
-  }
-
-  // 3) Verify JWT with SESSION_SECRET
-  if (!JWT_SECRET) {
-    console.error("FATAL: SESSION_SECRET not configured for JWT verification");
-    return res.status(500).json({
-      ok: false,
-      error: "Server configuration error"
-    });
-  }
-
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    
-    // Validate decoded payload has required fields
-    if (!decoded.id || !decoded.email) {
-      return res.status(401).json({
-        ok: false,
-        error: "Unauthorized: invalid token payload"
-      });
+    const authHeader = req.headers.authorization || "";
+    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+
+    if (!token) {
+      return res.status(401).json({ message: "Missing access token" });
     }
 
-    // Attach verified user to request
-    req.user = {
-      id: decoded.id,
-      email: decoded.email
-    };
-    
-    return next();
+    const decoded = verifyToken(token);
+    if (!decoded || !decoded.id) {
+      return res.status(401).json({ message: "Invalid token payload" });
+    }
+
+    req.user = decoded;
+    next();
   } catch (err) {
     if (err.name === "TokenExpiredError") {
-      return res.status(401).json({
-        ok: false,
-        error: "Unauthorized: token has expired"
-      });
+      return res.status(401).json({ message: "Token has expired" });
     }
     if (err.name === "JsonWebTokenError") {
-      return res.status(401).json({
-        ok: false,
-        error: "Unauthorized: invalid token"
-      });
+      return res.status(401).json({ message: "Invalid token" });
     }
-    
-    console.error("JWT verification error:", err.message);
-    return res.status(401).json({
-      ok: false,
-      error: "Unauthorized: token verification failed"
-    });
+    return res.status(401).json({ message: "Invalid/expired access token" });
   }
 }
 
-// Alias for backward compatibility
+export function requireRole(...roles) {
+  return (req, res, next) => {
+    const role = req.user?.role;
+    if (!role || !roles.includes(role)) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+    next();
+  };
+}
+
+export function requirePro(req, res, next) {
+  const status = req.user?.subscription_status || "free";
+  if (status !== "pro" && status !== "premium") {
+    return res.status(402).json({ message: "Upgrade required" });
+  }
+  next();
+}
+
 export const authGuard = requireAuth;

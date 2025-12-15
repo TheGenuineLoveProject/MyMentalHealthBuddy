@@ -120,7 +120,7 @@ export default function DailyAffirmations({ compact = false }) {
           text: affirmation.text,
         });
       } catch (err) {
-        console.log("Share cancelled");
+        // Share cancelled
       }
     } else {
       navigator.clipboard.writeText(affirmation.text);

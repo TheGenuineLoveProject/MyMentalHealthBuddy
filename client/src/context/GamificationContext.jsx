@@ -64,7 +64,7 @@ export function GamificationProvider({ children }) {
         setProgress(data);
       }
     } catch (err) {
-      console.log("Gamification not yet initialized");
+      // Gamification not yet initialized
     }
   }, [token]);
 
@@ -76,7 +76,7 @@ export function GamificationProvider({ children }) {
         setQuests(data.quests);
       }
     } catch (err) {
-      console.log("Quests not yet available");
+      // Quests not yet available
     }
   }, [token]);
 
@@ -130,7 +130,6 @@ export function GamificationProvider({ children }) {
 
       return result?.xpEarned || xpEarned;
     } catch (err) {
-      console.error("Failed to record session:", err);
       return 0;
     }
   }, [token, fetchProgress, fetchQuests]);
@@ -143,7 +142,6 @@ export function GamificationProvider({ children }) {
       await fetchProgress();
       return true;
     } catch (err) {
-      console.error("Failed to complete quest:", err);
       return false;
     }
   }, [token, fetchQuests, fetchProgress]);

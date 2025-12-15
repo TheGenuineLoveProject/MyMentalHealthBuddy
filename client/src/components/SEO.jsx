@@ -4,8 +4,8 @@
 import { useEffect } from "react";
 
 const defaultMeta = {
-  title: "MyMentalHealthBuddy - AI-Powered Mental Health Support",
-  description: "24/7 AI-powered mental health support with mood tracking, journaling, and therapeutic chat. Your compassionate companion for emotional wellness.",
+  title: "The Genuine Love Project - Live in Genuine Love",
+  description: "An AI-powered mental wellness platform for self-love, healing, and emotional growth — private, compassionate, and available 24/7.",
   type: "website",
   image: "/og-image.png",
 };
@@ -18,7 +18,7 @@ export function SEO({
   noindex = false 
 }) {
   const fullTitle = title 
-    ? `${title} | MyMentalHealthBuddy` 
+    ? `${title} | The Genuine Love Project` 
     : defaultMeta.title;
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export function SEO({
     setMeta("og:title", fullTitle);
     setMeta("og:description", description);
     setMeta("og:type", type);
-    setMeta("og:site_name", "MyMentalHealthBuddy");
+    setMeta("og:site_name", "The Genuine Love Project");
     setMeta("og:image", imageUrl);
     setMeta("twitter:card", "summary_large_image");
     setMeta("twitter:title", fullTitle);

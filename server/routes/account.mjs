@@ -2,7 +2,7 @@
 // Account management: password reset, account deletion, data export
 
 import express from "express";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import crypto, { randomUUID } from "crypto";
 import { eq, and, gt } from "drizzle-orm";
 

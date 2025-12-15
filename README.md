@@ -1,14 +1,8 @@
-# 🧠 TheGenuineLoveProject
-
-<p align="center">
-  <img src="https://github.com/MyMentalHealthSupport/MyMentalHealthBuddy/actions/workflows/mmb-master.yml/badge.svg" alt="MyMentalHealthBuddy CI/CD Status" />
-</p>
-
----
 # 🌸 The Genuine Love Project
-### Evidence-Based Mental Health & Healing Platform
 
-The Genuine Love Project is an A-to-Z mental health, wellness, and self-actualization platform powered by AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools.
+### Live in Genuine Love
+
+An AI-powered mental wellness platform for self-love, healing, and emotional growth — private, compassionate, and available 24/7.
 
 Built to help you heal, grow, and live in Genuine Love.
 

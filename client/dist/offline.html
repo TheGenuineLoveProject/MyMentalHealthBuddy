@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Offline - MyMentalHealthBuddy</title>
-  <meta name="description" content="You are currently offline. MyMentalHealthBuddy will reconnect automatically when your connection is restored.">
+  <title>Offline - The Genuine Love Project</title>
+  <meta name="description" content="You are currently offline. The Genuine Love Project will reconnect automatically when your connection is restored.">
   <style>
     * {
       margin: 0;
@@ -175,7 +175,7 @@
       Don't worry—we'll automatically reconnect you when your connection is restored.
     </p>
     <p>
-      Your mental health journey continues offline with cached content.
+      Your wellness journey continues offline with cached content.
     </p>
     
     <div class="status">
@@ -199,7 +199,6 @@
   </div>
   
   <script>
-    // Monitor online status
     function updateOnlineStatus() {
       if (navigator.onLine) {
         document.getElementById('status-text').textContent = 'Connection restored!';
@@ -221,10 +220,8 @@
       }
     }
     
-    // Listen for online event
     window.addEventListener('online', updateOnlineStatus);
     
-    // Check status on load
     if (navigator.onLine) {
       updateOnlineStatus();
     }

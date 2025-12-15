@@ -6,17 +6,24 @@ export default function Home() {
   return (
     <>
       <SEO 
-        title="AI-Powered Mental Health Support"
-        description="24/7 AI-powered mental health support with mood tracking, journaling, and therapeutic chat. Your compassionate companion for emotional wellness."
+        title="Live in Genuine Love"
+        description="An AI-powered mental wellness platform for self-love, healing, and emotional growth — private, compassionate, and available 24/7."
       />
-      <div className="min-h-screen bg-gradient-mesh text-[var(--text)]">
+      <div className="min-h-screen bg-gradient-mesh text-[var(--text)] overflow-hidden">
+        {/* Animated Background Orbs */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl animate-float" />
+          <div className="absolute top-40 right-20 w-96 h-96 bg-blue-400/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-teal-400/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }} />
+        </div>
+
         {/* Navigation */}
-        <header className="py-6 px-6 flex items-center justify-between max-w-6xl mx-auto" role="banner">
-          <Link href="/" className="flex items-center gap-3 group" aria-label="MyMentalHealthBuddy home" data-testid="link-brand-home">
-            <div className="w-10 h-10 rounded-xl bg-[var(--gradient-focus)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-              <Heart className="w-5 h-5 text-white" aria-hidden="true" />
+        <header className="relative z-50 py-6 px-6 flex items-center justify-between max-w-6xl mx-auto" role="banner">
+          <Link href="/" className="flex items-center gap-3 group" aria-label="The Genuine Love Project home" data-testid="link-brand-home">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-xl shadow-purple-500/25 group-hover:scale-110 group-hover:shadow-purple-500/40 transition-all duration-300">
+              <Heart className="w-6 h-6 text-white" aria-hidden="true" />
             </div>
-            <span className="text-xl font-bold tracking-tight" data-testid="text-brand-name">MyMentalHealthBuddy</span>
+            <span className="text-xl font-bold tracking-tight text-violet-600 dark:text-violet-400" data-testid="text-brand-name">The Genuine Love Project</span>
           </Link>
           <nav className="flex items-center gap-3" aria-label="Main navigation">
             <Link 
@@ -37,37 +44,37 @@ export default function Home() {
           </nav>
         </header>
 
-        <main className="px-6" role="main">
+        <main className="relative z-10 px-6" role="main">
           {/* Hero Section */}
           <section className="hero max-w-5xl mx-auto" aria-labelledby="hero-title">
-            <div className="hero-content py-16 md:py-24">
+            <div className="hero-content py-20 md:py-32">
               {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--primary-soft)] text-[var(--primary)] text-sm font-medium mb-8 animate-fade-in-up">
-                <Star className="w-4 h-4" aria-hidden="true" />
-                <span>Trusted by thousands for mental wellness</span>
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/80 dark:bg-white/10 backdrop-blur-sm border border-purple-200/50 dark:border-purple-500/20 text-purple-700 dark:text-purple-300 text-sm font-medium mb-10 animate-fade-in-up shadow-lg shadow-purple-500/10">
+                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                <span>AI-Powered Mental Wellness Platform</span>
               </div>
               
-              <h1 id="hero-title" className="hero-title" data-testid="text-hero-title">
-                Your Daily Companion for{" "}
-                <span className="hero-gradient-text">Mental Wellness</span>
+              <h1 id="hero-title" className="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 leading-[1.1]" data-testid="text-hero-title">
+                Your Safe Space for{" "}
+                <span className="bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent">Mental Wellness</span>
               </h1>
               
-              <p className="hero-subtitle">
-                Track your mood, journal your thoughts, and chat with an AI companion designed to support your mental health journey — available 24/7, completely private.
+              <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12 leading-relaxed">
+                Track your mood, journal your thoughts, and connect with an AI companion that truly listens — available 24/7, completely private.
               </p>
               
-              <div className="hero-cta">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link 
                   href="/register" 
-                  className="btn btn-gradient text-lg px-8 py-4"
+                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 to-purple-600 text-white text-lg font-semibold rounded-2xl shadow-xl shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300"
                   data-testid="link-get-started"
                 >
-                  Start Your Journey
-                  <ArrowRight className="w-5 h-5" aria-hidden="true" />
+                  <span>Start Your Journey</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                 </Link>
                 <Link 
                   href="/login" 
-                  className="btn btn-secondary text-lg px-8 py-4"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/80 dark:bg-white/10 backdrop-blur-sm border-2 border-gray-200 dark:border-white/20 text-gray-700 dark:text-white text-lg font-semibold rounded-2xl hover:bg-gray-50 dark:hover:bg-white/20 hover:border-purple-300 transition-all duration-300"
                   data-testid="link-signin"
                 >
                   Sign In
@@ -146,7 +153,7 @@ export default function Home() {
           {/* Benefits Section */}
           <section className="max-w-5xl mx-auto py-20" aria-labelledby="benefits-title">
             <div className="bg-[var(--card)] rounded-[var(--radius-2xl)] p-8 md:p-12 border border-[var(--border)] shadow-[var(--shadow-lg)]">
-              <h2 id="benefits-title" className="text-2xl font-bold text-center mb-10">Why choose MyMentalHealthBuddy?</h2>
+              <h2 id="benefits-title" className="text-2xl font-bold text-center mb-10">Why choose The Genuine Love Project?</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8" role="list">
                 <div className="flex flex-col items-center text-center" data-testid="benefit-privacy" role="listitem">
                   <div className="w-16 h-16 rounded-2xl bg-[var(--accent-sky-soft)] flex items-center justify-center mb-4">
@@ -201,15 +208,15 @@ export default function Home() {
               <div className="w-8 h-8 rounded-lg bg-[var(--gradient-focus)] flex items-center justify-center">
                 <Heart className="w-4 h-4 text-white" aria-hidden="true" />
               </div>
-              <span>&copy; {new Date().getFullYear()} MyMentalHealthBuddy</span>
+              <span>&copy; {new Date().getFullYear()} The Genuine Love Project</span>
             </div>
             <p>
               <a 
-                href="mailto:support@mymentalhealthbuddy.com" 
+                href="mailto:support@thegenuineloveproject.com" 
                 className="hover:text-[var(--primary)] transition"
                 aria-label="Email support"
               >
-                support@mymentalhealthbuddy.com
+                support@thegenuineloveproject.com
               </a>
             </p>
           </div>

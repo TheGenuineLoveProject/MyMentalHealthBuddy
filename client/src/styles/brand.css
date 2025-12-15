@@ -1,0 +1,9 @@
+:root {
+  --gl-primary: #7C9A92; /* Serenity Sage */
+  --gl-secondary: #E6DCD2;
+  --gl-accent: #C9A86A;
+  --gl-text: #2F3E3A;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}

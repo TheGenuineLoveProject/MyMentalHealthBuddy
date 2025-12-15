@@ -109,10 +109,10 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
       >
         <div>
           <div style={{ fontWeight: 700, fontSize: "1rem" }}>
-            MyMentalHealthBuddy
+            Genuine Love
           </div>
           <div style={{ fontSize: "0.75rem", opacity: 0.9 }}>
-            Here to listen, not to judge
+            Live in Genuine Love
           </div>
         </div>
         <button

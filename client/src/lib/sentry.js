@@ -8,7 +8,6 @@ const isProduction = import.meta.env.PROD;
 
 export function initSentry() {
   if (!SENTRY_DSN) {
-    console.log("[Sentry] DSN not configured, error tracking disabled");
     return;
   }
 
@@ -34,12 +33,10 @@ export function initSentry() {
     },
   });
 
-  console.log(`[Sentry] Initialized for ${isProduction ? "production" : "development"}`);
 }
 
 export function captureException(error, context = {}) {
   if (!SENTRY_DSN) {
-    console.error("[Sentry] Would capture:", error.message);
     return;
   }
 

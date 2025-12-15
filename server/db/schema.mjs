@@ -1,40 +1,5 @@
 // server/db/schema.mjs
-// 🔁 Re-exports everything from the unified shared schema
+// Re-exports everything from the unified shared schema
 // Ensures a single source of truth for all Drizzle + API schema definitions
 
 export * from "../../shared/schema.mjs";
-export {
-  users,
-  moods,
-  journals,
-  journal,
-  aiMessages,
-  ai_messages,
-  analytics,
-  passwordResetTokens,
-  auditLog,
-  audit_log,
-  webhookEvents,
-  insertUserSchema,
-  selectUserSchema,
-  insertMoodSchema,
-  selectMoodSchema,
-  insertJournalSchema,
-  selectJournalSchema,
-  insertAiMessageSchema,
-  selectAiMessageSchema,
-  insertAnalyticsSchema,
-  selectAnalyticsSchema,
-  insertPasswordResetTokenSchema,
-  insertAuditLogSchema,
-  insertWebhookEventSchema,
-  loginSchema,
-  registerSchema,
-  passwordResetRequestSchema,
-  passwordResetConfirmSchema,
-  createMoodSchema,
-  updateMoodSchema,
-  createJournalSchema,
-  updateJournalSchema,
-  aiChatSchema,
-} from "../../shared/schema.mjs";

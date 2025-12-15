@@ -1,6 +1,6 @@
 // client/src/components/ui/theme-provider.jsx
 
-import React, {
+import {
   createContext,
   useContext,
   useEffect,

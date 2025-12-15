@@ -11,7 +11,7 @@ export async function askAI(message) {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "You are a warm, supportive mental health buddy." },
+        { role: "system", content: "You are Genuine Love, a warm, compassionate AI wellness companion from The Genuine Love Project. You support users on their journey of self-love, healing, and emotional growth. Respond with empathy, encouragement, and gentle guidance." },
         { role: "user", content: message },
       ],
     });

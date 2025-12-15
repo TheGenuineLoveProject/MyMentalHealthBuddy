@@ -75,7 +75,7 @@ export default function Register() {
     <>
       <SEO 
         title="Create Account"
-        description="Create your free MyMentalHealthBuddy account. Start your mental wellness journey with AI-powered support, mood tracking, and journaling."
+        description="Create your free Genuine Love Project account. Start your mental wellness journey with AI-powered support, mood tracking, and journaling."
       />
       <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-mesh">
         <div className="w-full max-w-md">
@@ -85,7 +85,7 @@ export default function Register() {
               <div className="w-12 h-12 rounded-xl bg-[var(--gradient-focus)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                 <Heart className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
-              <span className="text-2xl font-bold tracking-tight">MyMentalHealthBuddy</span>
+              <span className="text-2xl font-bold tracking-tight">The Genuine Love Project</span>
             </Link>
           </div>
 

@@ -1,4 +1,4 @@
-# MyMentalHealthBuddy - Robots.txt
+# TheGenuineLoveProject - Robots.txt
 # Optimized for search engine crawling and indexing
 
 User-agent: *
@@ -8,7 +8,7 @@ Disallow: /account
 Disallow: /billing
 
 # Sitemap location
-Sitemap: https://mymentalhealthbuddy.com/sitemap.xml
+Sitemap: https://TheGenuineLoveProject.com/sitemap.xml
 
 # Crawl delay (be nice to the server)
 Crawl-delay: 1

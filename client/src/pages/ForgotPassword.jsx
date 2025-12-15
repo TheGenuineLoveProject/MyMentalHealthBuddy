@@ -85,7 +85,7 @@ export default function ForgotPassword() {
     <>
       <SEO 
         title="Forgot Password"
-        description="Reset your MyMentalHealthBuddy password. We'll send you a secure link to create a new password."
+        description="Reset your Genuine Love Project password. We'll send you a secure link to create a new password."
       />
       <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -100,7 +100,7 @@ export default function ForgotPassword() {
             data-testid="link-home"
           >
             <Heart className="w-6 h-6" aria-hidden="true" />
-            <span className="font-display font-semibold text-lg text-[var(--text)]">MyMentalHealthBuddy</span>
+            <span className="font-display font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
           </Link>
           
           <div className="card-elevated p-8">

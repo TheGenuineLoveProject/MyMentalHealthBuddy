@@ -1,17 +1,23 @@
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target } from "lucide-react";
-import { useAuth } from "../context/AuthContext.jsx";
+import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut } from "lucide-react";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO.jsx";
 import DailyAffirmations from "../components/DailyAffirmations.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Dashboard() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const [, setLocation] = useLocation();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["/api/dashboard"],
   });
+
+  function handleLogout() {
+    logout();
+    setLocation("/login");
+  }
 
   function getGreeting() {
     const hour = new Date().getHours();
@@ -21,7 +27,6 @@ export default function Dashboard() {
   }
 
   function getTrendIcon(trend) {
-    const label = trend === "improving" ? "Mood improving" : trend === "declining" ? "Mood declining" : "Mood stable";
     if (trend === "improving") return (
       <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium">
         <TrendingUp className="w-4 h-4" aria-hidden="true" />
@@ -95,11 +100,10 @@ export default function Dashboard() {
     <>
       <SEO 
         title="Dashboard"
-        description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with MyMentalHealthBuddy."
+        description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with The Genuine Love Project."
       />
       <div className="min-h-screen p-6 bg-gradient-mesh">
         <div className="max-w-5xl mx-auto">
-          {/* Header */}
           <header className="flex items-start justify-between mb-8">
             <div className="flex items-center gap-4">
               <div className="w-14 h-14 rounded-2xl bg-[var(--gradient-focus)] flex items-center justify-center shadow-lg animate-pulse-glow">
@@ -112,22 +116,29 @@ export default function Dashboard() {
                 <p className="text-[var(--text-secondary)] mt-1">Here's your wellness overview</p>
               </div>
             </div>
-            <Link 
-              href="/settings" 
-              className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
-              data-testid="link-settings" 
-              aria-label="Settings"
-            >
-              <Settings className="w-5 h-5" aria-hidden="true" />
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link 
+                href="/settings" 
+                className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+                data-testid="link-settings" 
+                aria-label="Settings"
+              >
+                <Settings className="w-5 h-5" aria-hidden="true" />
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-rose)] hover:border-[var(--accent-rose)] transition shadow-sm"
+                data-testid="button-logout"
+                aria-label="Logout"
+              >
+                <LogOut className="w-5 h-5" aria-hidden="true" />
+              </button>
+            </div>
           </header>
 
-          {/* Guardian Heart Panel */}
           <GuardianHeartPanel name={user?.email?.split("@")[0]} />
 
-          {/* Stats Cards */}
           <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" aria-label="Wellness statistics">
-            {/* Mood Card */}
             <article 
               className="stat-card bg-gradient-to-br from-[var(--accent-sky)] to-blue-600 text-white shadow-lg"
               data-testid="card-mood-score"
@@ -159,7 +170,6 @@ export default function Dashboard() {
               </p>
             </article>
 
-            {/* Journal Card */}
             <article 
               className="stat-card bg-gradient-to-br from-[var(--primary)] to-purple-600 text-white shadow-lg"
               data-testid="card-journal"
@@ -180,7 +190,6 @@ export default function Dashboard() {
             </article>
           </section>
 
-          {/* Quick Actions */}
           <nav aria-label="Quick actions" className="mb-8">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
@@ -237,12 +246,10 @@ export default function Dashboard() {
             </div>
           </nav>
 
-          {/* Daily Affirmation */}
           <section className="mb-8" aria-label="Daily affirmation">
             <DailyAffirmations compact />
           </section>
 
-          {/* Crisis Resources Card */}
           <div className="card-elevated p-5 bg-gradient-to-r from-[var(--accent-rose-soft)] to-transparent border-[var(--accent-rose)]/30 mb-8">
             <Link href="/crisis" className="flex items-center justify-between group" data-testid="link-crisis-resources">
               <div className="flex items-center gap-4">
@@ -258,7 +265,6 @@ export default function Dashboard() {
             </Link>
           </div>
 
-          {/* Recent Moods */}
           {moodData.recentMoods && moodData.recentMoods.length > 0 && (
             <section className="mb-8" aria-label="Recent mood history">
               <h2 className="text-xl font-semibold mb-4">Recent Moods</h2>
