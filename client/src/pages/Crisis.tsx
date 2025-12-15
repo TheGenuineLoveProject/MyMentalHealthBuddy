@@ -1,4 +1,3 @@
-import "./styles/brand.css";
 export default function Crisis() {
   return (
     <main className="mx-auto max-w-3xl px-6 py-12">
