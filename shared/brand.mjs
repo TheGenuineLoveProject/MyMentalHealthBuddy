@@ -1,7 +1,18 @@
+// shared/brand.mjs
 export const BRAND = {
-  appName: "The Genuine Love Project",
+  name: "The Genuine Love Project",
+  shortName: "TGLP",
   tagline: "Live in Genuine Love",
-  primary: "#7FAF9B",   // Serenity Sage
-  accent:  "#D7B56D",   // Eternal Gold
-  website: "https://TheGenuineLoveProject.com"
+  mission:
+    "To help people heal, grow, and align through everyday self-love and consciousness.",
+  logo: {
+    primary: "/brand/logo-infinity-heart.png",
+    mark: "/brand/mark-infinity-heart.png"
+  },
+  colors: {
+    serenitySage: "#A7BFA8",
+    eternalGold: "#D8B55A",
+    midnightInk: "#0B1220",
+    softIvory: "#F7F4EE"
+  }
 };
