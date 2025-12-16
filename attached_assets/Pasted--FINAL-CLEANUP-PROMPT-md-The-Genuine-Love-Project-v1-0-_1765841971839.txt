@@ -1,0 +1,114 @@
+# FINAL_CLEANUP_PROMPT.md — The Genuine Love Project (v1.0 LAUNCH READY)
+You are the Replit Agent working inside this repo. Make ONLY repo-local changes. No secrets. No external calls.
+Goal: fix boot/build issues, validate config, integrate brand, and prepare a GitHub Release.
+
+## 0) NON-NEGOTIABLE RULES
+- Do NOT print or request private keys.
+- If you need env vars, add them to `.env.example` only.
+- Keep Node >= 20, ESM `"type": "module"`.
+- The server MUST bind to `0.0.0.0` and respect `process.env.PORT`.
+- Output a final checklist of what you changed.
+
+---
+
+## 1) FIX THE CURRENT CRASH: package.json INVALID JSON
+### 1.1 Validate JSON
+Run:
+- `node -e "JSON.parse(require('fs').readFileSync('package.json','utf8')); console.log('package.json OK')"`
+If it throws, open `package.json` and fix:
+- all keys must be "double-quoted"
+- no trailing commas
+- no smart quotes
+- no comments
+
+### 1.2 Enforce a clean, minimal scripts block (keep existing commands if already correct)
+Ensure root `package.json` includes scripts:
+- "dev": "node server/index.mjs"
+- "start": "NODE_ENV=production node server/index.mjs"
+- "build": "npm run build:client"
+- "build:client": "vite build"
+- "bundle:gpt": "node scripts/make-gpt-repair-bundle.mjs"
+
+Ensure it has:
+- "type": "module"
+- "engines": { "node": ">=20" }
+
+---
+
+## 2) REPLIT AUTOSCALE CONFIG (PORT + RUN)
+### 2.1 Ensure `.replit` matches:
+- [deployment] build = ["npm","run","build"]
+- [deployment] run   = ["node","server/index.mjs"]
+- [[ports]] localPort=5000 externalPort=80
+If mismatch, fix `.replit`.
+
+### 2.2 Ensure `server/index.mjs` listens like:
+- const PORT = process.env.PORT || 5000;
+- app.listen(PORT, "0.0.0.0", ...)
+
+---
+
+## 3) BRAND INTEGRATION (The Genuine Love Project)
+Brand requirements:
+- Name: The Genuine Love Project
+- Tagline: "Live in Genuine Love"
+- Logo: Infinity-Heart Fusion™ (existing asset)
+- Palette: Serenity Sage + Eternal Gold (use existing tokens if present)
+
+### 3.1 Public Brand Assets
+- Confirm `/public/brand/` exists with logo(s) and favicon(s)
+- Ensure server serves `/brand` static route to `/public/brand`
+
+### 3.2 HTML Meta + App Title
+Update `client/index.html` (or `client/dist/index.html` is build output—update the SOURCE file):
+- <title>The Genuine Love Project</title>
+- meta description: healing, self-love, evidence-based tools
+- OpenGraph/Twitter tags:
+  - og:title = The Genuine Love Project
+  - og:description = Live in Genuine Love
+  - og:image = /brand/og-image.png (if missing, create placeholder)
+
+### 3.3 Policies
+Ensure routes/paths exist and are linked in UI footer:
+- /policies/privacy
+- /policies/terms
+- /policies/disclaimer
+Ensure content clearly states:
+- not medical advice
+- crisis resources
+- privacy summary
+
+---
+
+## 4) LAUNCH QUALITY GATES (must pass)
+Run and ensure they succeed:
+- `npm install`
+- `npm run build`
+- `npm run dev` (server boots)
+Hit endpoints:
+- GET /api/ready -> { "status": "ready" }
+
+If build fails:
+- fix import paths, missing files, vite config
+- do NOT add heavy deps unless required
+
+---
+
+## 5) GITHUB RELEASE PREP (repo-only changes)
+### 5.1 Ensure these files exist:
+- CHANGELOG.md (v1.0.0 section)
+- DEPLOY_CHECKLIST_ONE_CLICK.md
+- FINAL_CLEANUP_PROMPT.md
+
+### 5.2 Create a release bundle script output:
+- `gpt_repair_bundle.zip` should exist after `npm run bundle:gpt`
+Add `.gitignore` rules if needed to avoid committing huge node_modules.
+
+---
+
+## 6) FINAL OUTPUT REQUIRED
+At the end, print:
+1) Summary of fixes (package.json, port, start scripts)
+2) Brand integration changes (files touched)
+3) Commands to run
+4) Any remaining TODOs blocking v1.0

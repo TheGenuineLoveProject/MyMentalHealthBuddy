@@ -71,6 +71,9 @@ export default function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/crisis" element={<Crisis />} />
+          <Route path="/policies/privacy" element={<Privacy />} />
+          <Route path="/policies/terms" element={<Terms />} />
+          <Route path="/policies/disclaimer" element={<Disclaimer />} />
         </Routes>
       </Shell>
     </BrowserRouter>
