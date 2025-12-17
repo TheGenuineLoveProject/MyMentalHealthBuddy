@@ -1,6 +1,5 @@
 // server/utils/aiClient.mjs
 // OpenAI client with circuit breaker, timeout, and retry logic
-
 import OpenAI from "openai";
 import { logger } from "./logger.mjs";
 

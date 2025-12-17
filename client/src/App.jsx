@@ -28,6 +28,7 @@ const Premium = lazy(() => import("./pages/Premium.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Pricing = lazy(() => import("./pages/Pricing.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
+const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 
 function LoadingFallback() {
   return (
@@ -53,6 +54,13 @@ export default function App() {
             <Route path="/forgot-password" component={ForgotPassword} />
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/health" component={HealthPage} />
+
+            {/* Onboarding - protected but before main app */}
+            <Route path="/onboarding">
+              <RouteGuard>
+                <Onboarding />
+              </RouteGuard>
+            </Route>
 
             {/* Protected routes */}
             <Route path="/dashboard">

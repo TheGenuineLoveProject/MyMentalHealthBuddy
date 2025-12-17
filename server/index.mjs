@@ -27,16 +27,58 @@ import gamificationRoutes from "./routes/gamification.mjs";
 import uiDashboardRoutes from "./routes/ui-dashboard.mjs";
 import healthRoutes from "./routes/health.mjs";
 import adminRoutes from "./routes/admin.mjs";
+import therapyRoutes from "./routes/therapy.mjs";
+import proFeaturesRoutes from "./routes/pro-features.mjs";
+import onboardingRoutes from "./routes/onboarding.mjs";
 import { makeSessionStore } from "./utils/sessionStore.mjs";
 import { createSessionMiddleware } from "./db/sessionStore.mjs";
-app.use(createSessionMiddleware());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const isProd = process.env.NODE_ENV === "production";
+
+if (isProd && !process.env.SESSION_SECRET) {
+  console.error("FATAL: SESSION_SECRET is required in production");
+  process.exit(1);
+}
+
+if (isProd && !process.env.DATABASE_URL) {
+  console.error("FATAL: DATABASE_URL is required in production for session persistence");
+  process.exit(1);
+}
+
 if (!process.env.SESSION_SECRET) {
-  console.warn("Warning: Missing SESSION_SECRET.");
-  process.env.SESSION_SECRET = "mmb-dev-secret";
+  console.warn("Warning: Missing SESSION_SECRET. Using dev fallback.");
+  process.env.SESSION_SECRET = "mmb-dev-secret-" + Math.random().toString(36);
+}
+
+const SESSION_TTL_DAYS = 14;
+const SESSION_TTL_MS = 1000 * 60 * 60 * 24 * SESSION_TTL_DAYS;
+
+const sessionConfig = {
+  store: process.env.DATABASE_URL ? makeSessionStore() : undefined,
+  name: isProd ? "__Host-tglp.sid" : "tglp.sid",
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  rolling: true,
+  cookie: {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: isProd ? "lax" : "lax",
+    maxAge: SESSION_TTL_MS,
+    path: "/",
+  },
+};
+
+if (!sessionConfig.store && isProd) {
+  console.error("FATAL: MemoryStore cannot be used in production. Ensure DATABASE_URL is set.");
+  process.exit(1);
+}
+
+if (!sessionConfig.store) {
+  console.warn("⚠️  Using MemoryStore for sessions (development only). Sessions will not persist across restarts.");
 }
 
 const app = express();
@@ -51,21 +93,7 @@ app.use(requestLogger);
 app.use(securityHeaders);
 app.use(sanitizeBody);
 app.use(rateLimit);
-app.use(
-  session({
-    store: process.env.DATABASE_URL ? makeSessionStore() : undefined,
-    name: "genuine-love-session",
-    secret: process.env.SESSION_SECRET || "dev-secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24,
-    },
-  })
-);
+app.use(session(sessionConfig));
 
 app.use("/api/analytics", analyticsRoutes);
 app.use("/api/auth", authRoutes);
@@ -82,6 +110,9 @@ app.use("/api/gamification", gamificationRoutes);
 app.use("/api/ui-dashboard", uiDashboardRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/therapy", therapyRoutes);
+app.use("/api/pro", proFeaturesRoutes);
+app.use("/api/onboarding", onboardingRoutes);
 
 app.get("/api/ready", async (req, res) => {
   try {

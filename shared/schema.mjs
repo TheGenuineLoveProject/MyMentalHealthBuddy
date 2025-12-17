@@ -57,9 +57,21 @@ export const moods = pgTable("moods", {
 export const aiMessages = pgTable("ai_messages", {
   id: text("id").primaryKey(),
   userId: uuid("user_id").notNull(),
+  sessionId: text("session_id"),
   role: text("role").notNull(),
   content: text("content").notNull(),
+  flowType: text("flow_type"),
+  isCrisis: boolean("is_crisis").default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= THERAPY SESSIONS ================= */
+export const therapySessions = pgTable("therapy_sessions", {
+  id: text("id").primaryKey(),
+  userId: uuid("user_id").notNull(),
+  flowType: text("flow_type").notNull().default("general"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 /* ================= ANALYTICS ================= */
@@ -105,6 +117,18 @@ export const supportCircles = pgTable("support_circles", {
 
 export const userPreferences = pgTable("user_preferences", {
   id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  onboardingCompleted: boolean("onboarding_completed").default(false),
+  wellnessGoals: text("wellness_goals"),
+  supportMode: varchar("support_mode", { length: 50 }).default("reflection"),
+  reminderTime: varchar("reminder_time", { length: 10 }),
+  reminderDays: text("reminder_days"),
+  disclaimerAccepted: boolean("disclaimer_accepted").default(false),
+  disclaimerAcceptedAt: timestamp("disclaimer_accepted_at"),
+  theme: varchar("theme", { length: 20 }).default("system"),
+  notifications: boolean("notifications").default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const wellnessInsights = pgTable("wellness_insights", {

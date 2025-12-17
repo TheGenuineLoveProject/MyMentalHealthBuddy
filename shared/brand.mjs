@@ -1,8 +1,8 @@
 export const BRAND = {
   name: "The Genuine Love Project",
+  shortName: "Genuine Love",
   tagline: "Live in Genuine Love",
-  mission:
-    "A safe, private space for healing, reflection, and conscious growth.",
+  mission: "A safe, private space for healing, reflection, and conscious growth.",
 
   colors: {
     primary: "#6D9B8D",
@@ -10,20 +10,78 @@ export const BRAND = {
     accent: "#EAC3B5",
     gold: "#EAC33B",
     background: "#F6F7F8",
-    text: "#1C1C1C"
+    backgroundDark: "#1A1A2E",
+    text: "#1C1C1C",
+    textLight: "#FFFFFF",
+    muted: "#6B7280",
+    border: "#E5E7EB",
+    success: "#10B981",
+    warning: "#F59E0B",
+    error: "#EF4444"
+  },
+
+  typography: {
+    fontFamily: {
+      display: "Playfair Display, Georgia, serif",
+      body: "Inter, system-ui, sans-serif",
+      mono: "JetBrains Mono, monospace"
+    },
+    fontSize: {
+      xs: "0.75rem",
+      sm: "0.875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem"
+    },
+    fontWeight: {
+      normal: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700
+    },
+    lineHeight: {
+      tight: 1.25,
+      normal: 1.5,
+      relaxed: 1.75
+    }
+  },
+
+  spacing: {
+    xs: "0.25rem",
+    sm: "0.5rem",
+    md: "1rem",
+    lg: "1.5rem",
+    xl: "2rem",
+    "2xl": "3rem",
+    "3xl": "4rem"
+  },
+
+  borderRadius: {
+    sm: "0.25rem",
+    md: "0.5rem",
+    lg: "1rem",
+    xl: "1.5rem",
+    full: "9999px"
   },
 
   logo: {
     concept: "Infinity-Heart Fusion",
-    meaning: "Infinite compassion, healing, and growth"
+    meaning: "Infinite compassion, healing, and growth",
+    paths: {
+      svg: "/brand/logo.svg",
+      favicon: "/brand/favicon.svg",
+      ogImage: "/brand/og-image.svg"
+    }
   },
 
   seo: {
     title: "The Genuine Love Project",
-    description:
-      "Live in Genuine Love — healing, self-love, and consciousness tools.",
+    description: "Live in Genuine Love — healing, self-love, and consciousness tools.",
     ogTitle: "The Genuine Love Project",
-    ogDescription:
-      "A private AI-powered space for healing, reflection, and emotional growth."
+    ogDescription: "A private AI-powered space for healing, reflection, and emotional growth."
   }
 };

@@ -1,10 +1,12 @@
 import express from "express";
 import { z } from "zod";
 import Stripe from "stripe";
+import crypto from "crypto";
 import { sql } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth.mjs";
 import db from "../db/client.mjs";
 import { success, badRequest, serverError, unauthorized } from "../utils/response.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
@@ -13,26 +15,81 @@ if (STRIPE_SECRET_KEY) {
   stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" });
 }
 
+const PLANS = {
+  free: { name: "Free", priceId: null, features: ["mood_tracking", "journaling", "basic_tools"] },
+  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, features: ["ai_therapy", "advanced_tools", "analytics", "healing_journeys"] },
+  team: { name: "Team", priceId: process.env.STRIPE_PRICE_TEAM, features: ["all_pro", "team_dashboard", "admin_controls", "priority_support"] },
+};
+
+function generateIdempotencyKey(userId, plan, timestamp) {
+  const data = `${userId}-${plan}-${Math.floor(timestamp / 60000)}`;
+  return crypto.createHash("sha256").update(data).digest("hex").substring(0, 32);
+}
+
+async function getOrCreateStripeCustomer(userId, email) {
+  const userResult = await db.execute(sql`SELECT stripe_customer_id, email FROM users WHERE id = ${userId}`);
+  const existingCustomerId = userResult.rows?.[0]?.stripe_customer_id;
+  const userEmail = email || userResult.rows?.[0]?.email;
+
+  if (existingCustomerId) {
+    return existingCustomerId;
+  }
+
+  const customer = await stripe.customers.create({
+    email: userEmail,
+    metadata: { userId },
+  });
+
+  await db.execute(sql`UPDATE users SET stripe_customer_id = ${customer.id} WHERE id = ${userId}`);
+  logger.info("Created Stripe customer", { userId, customerId: customer.id });
+
+  return customer.id;
+}
+
 router.use(requireAuth);
+
+router.get("/plans", async (req, res) => {
+  return success(res, {
+    plans: Object.entries(PLANS).map(([key, plan]) => ({
+      id: key,
+      name: plan.name,
+      features: plan.features,
+      hasPriceId: !!plan.priceId,
+    })),
+  });
+});
 
 router.post("/checkout", async (req, res) => {
   try {
     if (!req.user) return unauthorized(res);
     if (!stripe) return serverError(res, new Error("Stripe not configured"));
 
-    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.user.id}`);
-    const customerId = userResult.rows?.[0]?.stripe_customer_id;
-    if (!customerId) return badRequest(res, "Missing Stripe customer");
+    const { plan = "pro" } = req.body;
+    const planConfig = PLANS[plan];
+    
+    if (!planConfig?.priceId) {
+      return badRequest(res, `Invalid plan: ${plan}`);
+    }
+
+    const customerId = await getOrCreateStripeCustomer(req.user.id, req.user.email);
+    const idempotencyKey = generateIdempotencyKey(req.user.id, plan, Date.now());
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       customer: customerId,
-      line_items: [{ price: process.env.STRIPE_PRICE_PRO, quantity: 1 }],
+      client_reference_id: req.user.id,
+      line_items: [{ price: planConfig.priceId, quantity: 1 }],
       success_url: `${process.env.CORS_ORIGIN || ""}/dashboard?billing=success`,
-      cancel_url: `${process.env.CORS_ORIGIN || ""}/dashboard?billing=cancel`,
+      cancel_url: `${process.env.CORS_ORIGIN || ""}/billing?canceled=true`,
+      metadata: { userId: req.user.id, plan },
+    }, {
+      idempotencyKey,
     });
-    return success(res, { url: session.url });
+
+    logger.info("Checkout session created", { userId: req.user.id, plan, sessionId: session.id });
+    return success(res, { url: session.url, sessionId: session.id });
   } catch (err) {
+    logger.error("Checkout error", { error: err.message, userId: req.user?.id });
     return serverError(res, err);
   }
 });
@@ -59,27 +116,50 @@ router.post("/portal", async (req, res) => {
 router.get("/subscription-status", async (req, res) => {
   try {
     if (!req.user) return unauthorized(res);
-    if (!stripe) return success(res, { plan: "free", status: "active" });
 
-    const customers = await stripe.customers.list({ email: req.user.email, limit: 1, expand: ["data.subscriptions"] });
-    if (!customers.data.length) return success(res, { plan: "free", status: "none" });
+    const subResult = await db.execute(sql`
+      SELECT tier, status, current_period_end, cancel_at_period_end 
+      FROM subscriptions WHERE user_id = ${req.user.id} LIMIT 1
+    `);
 
-    const subscription = customers.data[0].subscriptions?.data[0];
-    if (!subscription) return success(res, { plan: "free", status: "none" });
+    if (subResult.rows?.length > 0) {
+      const sub = subResult.rows[0];
+      return success(res, {
+        plan: sub.tier || "free",
+        status: sub.status || "active",
+        currentPeriodEnd: sub.current_period_end,
+        cancelAtPeriodEnd: sub.cancel_at_period_end || false,
+      });
+    }
 
-    const planMap = {
-      [process.env.STRIPE_PRICE_BASIC]: "basic",
-      [process.env.STRIPE_PRICE_PREMIUM]: "premium",
-      [process.env.STRIPE_PRICE_PRO]: "pro",
-    };
-    const priceId = subscription.items.data[0]?.price.id;
+    return success(res, { plan: "free", status: "none" });
+  } catch (err) {
+    logger.error("Subscription status error", { error: err.message });
+    return serverError(res, err);
+  }
+});
+
+router.get("/current-plan", async (req, res) => {
+  try {
+    if (!req.user) return unauthorized(res);
+
+    const subResult = await db.execute(sql`
+      SELECT tier, status FROM subscriptions 
+      WHERE user_id = ${req.user.id} AND status IN ('active', 'trialing') LIMIT 1
+    `);
+
+    const plan = subResult.rows?.[0]?.tier || "free";
+    const planConfig = PLANS[plan] || PLANS.free;
+
     return success(res, {
-      plan: planMap[priceId] || "basic",
-      status: subscription.status,
-      currentPeriodEnd: new Date(subscription.current_period_end * 1000),
-      cancelAtPeriodEnd: subscription.cancel_at_period_end,
+      plan,
+      name: planConfig.name,
+      features: planConfig.features,
+      canAccessPro: ["pro", "team", "enterprise"].includes(plan),
+      canAccessTeam: ["team", "enterprise"].includes(plan),
     });
   } catch (err) {
+    logger.error("Current plan error", { error: err.message });
     return serverError(res, err);
   }
 });

@@ -9,7 +9,73 @@ import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
-// Apply auth middleware to all analytics routes
+/**
+ * POST /api/analytics/event
+ * Lightweight client-side event tracking (no sensitive data) - PUBLIC
+ */
+const SAFE_EVENT_TYPES = [
+  "page_view", "feature_click", "session_start", "session_end",
+  "tool_opened", "tool_completed", "mood_logged", "journal_created",
+  "goal_set", "goal_completed", "auth_login", "auth_logout", "auth_register",
+  "subscription_viewed", "error_occurred"
+];
+
+router.post("/event", async (req, res) => {
+  try {
+    const { eventType, page, metadata = {} } = req.body;
+
+    if (!eventType || !SAFE_EVENT_TYPES.includes(eventType)) {
+      return badRequest(res, "Invalid event type");
+    }
+
+    const safeMetadata = {};
+    const allowedKeys = ["page", "tool", "feature", "duration", "source"];
+    for (const key of allowedKeys) {
+      if (metadata[key] !== undefined) {
+        safeMetadata[key] = String(metadata[key]).substring(0, 200);
+      }
+    }
+
+    logger.debug("Analytics event", {
+      eventType,
+      page: page?.substring(0, 200),
+      userId: req.user?.id || "anonymous",
+      metadata: safeMetadata,
+    });
+
+    return success(res, { ok: true, received: eventType });
+  } catch (err) {
+    logger.error("Analytics event error", { error: err.message });
+    return badRequest(res, "Failed to track event");
+  }
+});
+
+/**
+ * POST /api/analytics/pageview
+ * Track page views without sensitive content - PUBLIC
+ */
+router.post("/pageview", async (req, res) => {
+  try {
+    const { page, referrer } = req.body;
+
+    if (!page) {
+      return badRequest(res, "Page is required");
+    }
+
+    logger.debug("Page view", {
+      page: page.substring(0, 200),
+      referrer: referrer?.substring(0, 500),
+      userId: req.user?.id || "anonymous",
+    });
+
+    return success(res, { ok: true });
+  } catch (err) {
+    logger.error("Pageview error", { error: err.message });
+    return badRequest(res, "Failed to track pageview");
+  }
+});
+
+// Apply auth middleware to remaining analytics routes
 router.use(requireAuth);
 
 /**
