@@ -2,6 +2,7 @@
 // Account management: password reset, account deletion, data export
 
 import express from "express";
+const router = express.Router();
 import bcrypt from "bcrypt";
 import crypto, { randomUUID } from "crypto";
 import { eq, and, gt } from "drizzle-orm";
@@ -15,7 +16,14 @@ import { logAuditEvent, AuditActions } from "../utils/auditLogger.mjs";
 import { logger } from "../utils/logger.mjs";
 import { z } from "zod";
 
-const router = express.Router();
+router.post("/onboarding", async (req, res) => {
+  // TODO: require auth (session user)
+  const { name, goal } = req.body || {};
+  if (!goal) return res.status(400).json({ error: "Missing goal" });
+
+  // TODO: write to DB user profile table
+  return res.json({ ok: true });
+});
 
 const passwordResetRequestSchema = z.object({
   email: z.string().email("Valid email required"),

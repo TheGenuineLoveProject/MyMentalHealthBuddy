@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+@import "./styles/brand.css";
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +10,14 @@
    Live in Genuine Love • Light/Dark Themes
    Version 2.0 — Full 360° Visual Refresh
 ----------------------------------------------------------- */
-
+:root {
+  --gl-primary: #6D9B8D;
+  --gl-secondary: #A4C3B2;
+  --gl-accent: #EAC3B5;
+  --gl-gold: #EAC33B;
+  --gl-bg: #F6F7F8;
+  --gl-text: #1C1C1C;
+}
 /* RESET --------------------------------------------------- */
 *,
 *::before,
@@ -52,67 +60,12 @@ h1, h2, h3, h4, h5, h6 {
 /* PREMIUM THEME VARIABLES -------------------------------- */
 /* LIGHT THEME - Soft, Warm, Inviting */
 :root {
-  /* Base Colors - HSL Format */
-  --bg: hsl(0, 0%, 98%);
-  --bg-secondary: hsl(0, 0%, 100%);
-  --text: hsl(237, 28%, 14%);
-  --text-secondary: hsl(215, 16%, 47%);
-  --text-muted: hsl(215, 20%, 65%);
-  
-  /* Surface Colors - HSL Format */
-  --card: hsl(0, 0%, 100%);
-  --card-hover: hsl(210, 40%, 98%);
-  --border: hsl(214, 32%, 91%);
-  --border-light: hsl(210, 40%, 96%);
-  
-  /* Brand Colors - Calming Violet Palette - HSL Format */
-  --primary: hsl(262, 83%, 58%);
-  --primary-light: hsl(263, 90%, 76%);
-  --primary-dark: hsl(263, 70%, 42%);
-  --primary-soft: hsla(262, 83%, 58%, 0.1);
-  
-  /* Accent Colors - HSL Format */
-  --accent-teal: hsl(168, 80%, 40%);
-  --accent-teal-soft: hsla(168, 80%, 40%, 0.1);
-  --accent-rose: hsl(347, 90%, 60%);
-  --accent-rose-soft: hsla(347, 90%, 60%, 0.1);
-  --accent-amber: hsl(38, 92%, 50%);
-  --accent-amber-soft: hsla(38, 92%, 50%, 0.1);
-  --accent-sky: hsl(199, 89%, 49%);
-  --accent-sky-soft: hsla(199, 89%, 49%, 0.1);
-  
-  /* Mood Palette - Expressive & Warm - HSL Format */
-  --mood-happy: hsl(45, 96%, 56%);
-  --mood-happy-soft: hsla(45, 96%, 56%, 0.15);
-  --mood-calm: hsl(188, 82%, 53%);
-  --mood-calm-soft: hsla(188, 82%, 53%, 0.15);
-  --mood-sad: hsl(235, 91%, 74%);
-  --mood-sad-soft: hsla(235, 91%, 74%, 0.15);
-  --mood-angry: hsl(0, 91%, 69%);
-  --mood-angry-soft: hsla(0, 91%, 69%, 0.15);
-  --mood-anxious: hsl(27, 96%, 61%);
-  --mood-anxious-soft: hsla(27, 96%, 61%, 0.15);
-  --mood-tired: hsl(263, 90%, 76%);
-  --mood-tired-soft: hsla(263, 90%, 76%, 0.15);
-  
-  /* Premium Gradients */
-  --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-  --gradient-card: linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(248,250,252,1) 100%);
-  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
-  --gradient-calm: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-  --gradient-energy: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  --gradient-focus: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --gradient-success: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-  
-  /* Shadows - Soft & Elevated */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.03);
-  --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.15);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
-  --shadow-button: 0 4px 14px rgba(124, 58, 237, 0.25);
+  --gl-primary: #6D9B8D;
+  --gl-secondary: #A4C3B2;
+  --gl-accent: #EAC3B5;
+  --gl-gold: #EAC33B;
+  --gl-bg: #F6F7F8;
+  --gl-text: #1C1C1C;
   
   /* Border Radius */
   --radius-sm: 8px;
@@ -135,69 +88,9 @@ h1, h2, h3, h4, h5, h6 {
   --space-16: 64px;
 }
 
-/* DARK THEME - Deep, Rich, Sophisticated */
-html.dark {
-  /* Base Colors - HSL Format */
-  --bg: hsl(240, 33%, 8%);
-  --bg-secondary: hsl(240, 33%, 13%);
-  --text: hsl(210, 40%, 96%);
-  --text-secondary: hsl(215, 20%, 65%);
-  --text-muted: hsl(215, 16%, 47%);
-  
-  /* Surface Colors - HSL Format */
-  --card: hsl(240, 28%, 16%);
-  --card-hover: hsl(240, 28%, 20%);
-  --border: hsl(240, 28%, 24%);
-  --border-light: hsl(240, 28%, 16%);
-  
-  /* Brand Colors - HSL Format */
-  --primary: hsl(263, 90%, 76%);
-  --primary-light: hsl(263, 90%, 85%);
-  --primary-dark: hsl(262, 83%, 58%);
-  --primary-soft: hsla(263, 90%, 76%, 0.15);
-  
-  /* Accent Colors - HSL Format */
-  --accent-teal: hsl(171, 68%, 51%);
-  --accent-teal-soft: hsla(171, 68%, 51%, 0.15);
-  --accent-rose: hsl(350, 94%, 72%);
-  --accent-rose-soft: hsla(350, 94%, 72%, 0.15);
-  --accent-amber: hsl(45, 96%, 56%);
-  --accent-amber-soft: hsla(45, 96%, 56%, 0.15);
-  --accent-sky: hsl(196, 94%, 60%);
-  --accent-sky-soft: hsla(196, 94%, 60%, 0.15);
-  
-  /* Mood Palette - HSL Format */
-  --mood-happy: hsl(47, 96%, 65%);
-  --mood-happy-soft: hsla(47, 96%, 65%, 0.2);
-  --mood-calm: hsl(187, 88%, 69%);
-  --mood-calm-soft: hsla(187, 88%, 69%, 0.2);
-  --mood-sad: hsl(231, 94%, 82%);
-  --mood-sad-soft: hsla(231, 94%, 82%, 0.2);
-  --mood-angry: hsl(0, 93%, 82%);
-  --mood-angry-soft: hsla(0, 93%, 82%, 0.2);
-  --mood-anxious: hsl(27, 97%, 70%);
-  --mood-anxious-soft: hsla(27, 97%, 70%, 0.2);
-  --mood-tired: hsl(263, 90%, 85%);
-  --mood-tired-soft: hsla(263, 90%, 85%, 0.2);
-  
-  /* Premium Gradients */
-  --gradient-hero: linear-gradient(135deg, #1e1e32 0%, #2d1b4e 50%, #1e1e32 100%);
-  --gradient-card: linear-gradient(180deg, rgba(30,30,50,0.8) 0%, rgba(22,22,42,1) 100%);
-  --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%);
-  --gradient-calm: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 100%);
-  --gradient-energy: linear-gradient(135deg, #2d1b4e 0%, #44337a 100%);
-  --gradient-focus: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
-  --gradient-success: linear-gradient(135deg, #059669 0%, #10b981 100%);
-  
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  --shadow-glow: 0 0 60px rgba(167, 139, 250, 0.3);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.3);
-  --shadow-button: 0 4px 14px rgba(167, 139, 250, 0.3);
+html, body {
+  background: var(--gl-bg);
+  color: var(--gl-text);
 }
 
 /* GLASSMORPHISM COMPONENTS ------------------------------- */

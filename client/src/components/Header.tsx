@@ -1,17 +1,26 @@
 import { BrandLogo } from "./BrandLogo";
 import { Link } from "react-router-dom";
+import { BRAND } from "@shared/brand.mjs";
 
-export default function Header() {
-  return (
+        export function Header() {
+          return (
+            <header style={{ background: BRAND.colors.background }}>
+              <h1 style={{ color: BRAND.colors.primary }}>
+                {BRAND.name}
+              </h1>
+              <p>{BRAND.tagline}</p>
+            </header>
+          );
+        }
     <header className="flex items-center justify-between px-6 py-4 border-b bg-white">
       <Link to="/" className="flex items-center gap-3">
         <img
           src="/brand/logo.png"
-          alt="The Genuine Love Project"
+          alt={BRAND.name}
           className="h-10 w-auto"
         />
         <span className="font-serif text-xl font-semibold">
-          The Genuine Love Project
+          {BRAND.name}
         </span>
       </Link>
 
@@ -24,5 +33,15 @@ export default function Header() {
         </Link>
       </nav>
     </header>
+  );
+}
+
+export function Footer() {
+  return (
+    <footer>
+      <small>
+        © {new Date().getFullYear()} {BRAND.name}
+      </small>
+    </footer>
   );
 }

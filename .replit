@@ -1,16 +1,19 @@
 entrypoint = "server/index.mjs"
 
-run = "echo 'Use npm run dev to start the server manually'"
+run = "npm run dev"
 modules = ["nodejs-20", "postgresql-16"]
 
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
-run = ["node", "server/index.mjs"]
+run = ["npm", "run", "start"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[nix]
+channel = "stable-25_05"
 
 [agent]
 expertMode = true
@@ -31,23 +34,16 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run dev"
+waitForPort = 5000
+
 [workflows.workflow.metadata]
 outputType = "webview"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "NODE_ENV=development node server/index.mjs"
-waitForPort = 5000
-
-[nix]
-channel = "stable-25_05"
-
 [userenv]
 
-[userenv.production]
-NODE_ENV = "production"
-
 [userenv.shared]
-APP_BASE_URL = "https://${REPLIT_DEV_DOMAIN}"
-CANVA_APP_ID = "AAG4Muf2kzE"
-CANVA_HMR_ENABLED = "TRUE"
+REPLIT_KEEP_PACKAGE_DEV_DEPENDENCIES = "1"
+REPLIT_DISABLE_PACKAGE_LAYER = "1"

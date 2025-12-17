@@ -1,1 +1,0 @@
-import{r as i}from"./vendor-react-ByI56QNH.js";import"./index-Dob-qRSr.js";const o=i.createContext(null);function r(){const t=i.useContext(o);if(!t)throw new Error("useGamification must be used within a GamificationProvider");return t}export{r as u};

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: ["class"],
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}"
@@ -10,11 +11,20 @@ export default {
         primary: "var(--gl-primary)",
         secondary: "var(--gl-secondary)",
         accent: "var(--gl-accent)",
-        text: "var(--gl-text)",
+        gold: "var(--gl-gold)",
+        background: "var(--gl-bg)",
+        foreground: "var(--gl-text)",
       },
       fontFamily: {
-        heading: ["Playfair Display", "serif"],
-        body: ["Inter", "sans-serif"],
+        serif: ["Playfair Display", "Georgia", "serif"],
+        sans: ["Inter", "system-ui", "sans-serif"],
+      },
+      borderRadius: {
+        lg: "var(--radius-lg, 16px)",
+        md: "var(--radius-md, 12px)",
+        sm: "var(--radius-sm, 8px)",
       },
     },
-  }
+  },
+  plugins: [],
+};

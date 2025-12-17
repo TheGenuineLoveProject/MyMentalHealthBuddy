@@ -2,10 +2,11 @@
 // Dynamic SEO component for page-specific meta tags
 
 import { useEffect } from "react";
+import { BRAND } from "@shared/brand.mjs";
 
 const defaultMeta = {
-  title: "The Genuine Love Project - Live in Genuine Love",
-  description: "An AI-powered mental wellness platform for self-love, healing, and emotional growth — private, compassionate, and available 24/7.",
+  title: `${BRAND.name} - ${BRAND.tagline}`,
+  description: BRAND.mission,
   type: "website",
   image: "/og-image.png",
 };
@@ -18,7 +19,7 @@ export function SEO({
   noindex = false 
 }) {
   const fullTitle = title 
-    ? `${title} | The Genuine Love Project` 
+    ? `${title} | ${BRAND.name}` 
     : defaultMeta.title;
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export function SEO({
     setMeta("og:title", fullTitle);
     setMeta("og:description", description);
     setMeta("og:type", type);
-    setMeta("og:site_name", "The Genuine Love Project");
+    setMeta("og:site_name", BRAND.name);
     setMeta("og:image", imageUrl);
     setMeta("twitter:card", "summary_large_image");
     setMeta("twitter:title", fullTitle);

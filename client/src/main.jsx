@@ -1,13 +1,9 @@
-import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import App from "./App";
+import { applyBrand } from "./lib/brand";
 import "./index.css";
-import { initSentry } from "./lib/sentry";
+import "./styles/brand.css";
 
-initSentry();
+applyBrand();
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

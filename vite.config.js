@@ -7,20 +7,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
-  plugins: [react()],
-  root: resolve(__dirname, 'src/client'),
+  plugins: [
+    react({
+      jsxRuntime: 'automatic'
+    })
+  ],
+  root: resolve(__dirname, 'client'),
   build: {
-    outDir: resolve(__dirname, 'dist/client'),
+    outDir: resolve(__dirname, 'client/dist'),
     emptyOutDir: true,
     rollupOptions: {
-      input: resolve(__dirname, 'src/client/index.html'),
+      input: resolve(__dirname, 'client/index.html'),
       output: {
         format: 'es',
         manualChunks: {
-          'vendor-react': ['react', 'react-dom', 'wouter'],
-          'vendor-query': ['@tanstack/react-query'],
-          'vendor-sentry': ['@sentry/react'],
-          'vendor-validation': ['zod', 'react-hook-form', '@hookform/resolvers']
+          'vendor-react': ['react', 'react-dom'],
+          'vendor-query': ['@tanstack/react-query']
         }
       }
     },
@@ -37,11 +39,15 @@ export default defineConfig({
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
   },
+  server: {
+    host: '0.0.0.0',
+    port: 5173,
+    strictPort: false
+  },
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
   },
   optimizeDeps: {
-    include: ['react', 'react-dom', 'wouter', '@tanstack/react-query', '@sentry/react'],
-    exclude: []
+    include: ['react', 'react-dom', '@tanstack/react-query']
   }
 });

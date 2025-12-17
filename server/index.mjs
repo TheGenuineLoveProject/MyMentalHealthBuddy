@@ -27,6 +27,7 @@ import gamificationRoutes from "./routes/gamification.mjs";
 import uiDashboardRoutes from "./routes/ui-dashboard.mjs";
 import healthRoutes from "./routes/health.mjs";
 import adminRoutes from "./routes/admin.mjs";
+import { makeSessionStore } from "./utils/sessionStore.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,12 +51,14 @@ app.use(sanitizeBody);
 app.use(rateLimit);
 app.use(
   session({
+    store: process.env.DATABASE_URL ? makeSessionStore() : undefined,
     name: "genuine-love-session",
     secret: process.env.SESSION_SECRET || "dev-secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24,
     },
@@ -92,7 +95,9 @@ app.use("/brand", express.static(path.join(__dirname, "../public/brand")));
 
 const clientDistPath = path.join(__dirname, "../client/dist");
 app.use(express.static(clientDistPath));
-app.get("/{*splat}", (req, res) => res.sendFile(path.join(clientDistPath, "index.html")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"));
+});
 
 app.use(sentryErrorHandler);
 app.use((err, req, res, next) => {
@@ -101,8 +106,11 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Something went wrong" });
 });
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, "0.0.0.0", () => console.log(`Server started on port ${PORT}`));
+const PORT = Number(process.env.PORT || 5000);
+
+const server = app.listen(PORT, "0.0.0.0", () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
 
 process.on("SIGTERM", () => server.close(() => process.exit(0)));
 process.on("SIGINT", () => server.close(() => process.exit(0)));

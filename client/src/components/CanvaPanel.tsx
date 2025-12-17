@@ -1,13 +1,11 @@
 // client/src/components/CanvaPanel.tsx
-// Simple Canva integration panel for MyMentalHealthBuddy.
-// Shows your Guardian Canva link + a gentle explanation.
+// Simple Canva integration panel for The Genuine Love Project.
+// Shows Canva workspace link with a gentle explanation.
 
 import { ExternalLink, Palette } from "lucide-react";
 
 export default function CanvaPanel() {
-  // ⬇️ Replace this with your real Canva share URL when you have it.
-  const CANVA_URL =
-    "https://www.canva.com"; // TODO: paste your Guardian Heart Canva design link here
+  const CANVA_URL = "https://www.canva.com";
 
   return (
     <section
@@ -24,9 +22,8 @@ export default function CanvaPanel() {
             Design space (Canva)
           </h3>
           <p className="text-xs text-violet-800 mb-3 leading-relaxed">
-            This opens your Canva design workspace in a new tab — where you can
-            refine Guardian Heart visuals, dashboards, and healing layouts
-            without breaking the app.
+            This opens your Canva design workspace in a new tab where you can
+            create and refine visuals, dashboards, and wellness layouts.
           </p>
 
           <a

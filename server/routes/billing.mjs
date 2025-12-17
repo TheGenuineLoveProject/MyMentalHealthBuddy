@@ -1,6 +1,7 @@
 import express from "express";
 import { z } from "zod";
 import Stripe from "stripe";
+import { sql } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth.mjs";
 import db from "../db/client.mjs";
 import { success, badRequest, serverError, unauthorized } from "../utils/response.mjs";
@@ -19,7 +20,7 @@ router.post("/checkout", async (req, res) => {
     if (!req.user) return unauthorized(res);
     if (!stripe) return serverError(res, new Error("Stripe not configured"));
 
-    const userResult = await db.execute(`SELECT stripe_customer_id FROM users WHERE id = $1`, [req.user.id]);
+    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.user.id}`);
     const customerId = userResult.rows?.[0]?.stripe_customer_id;
     if (!customerId) return badRequest(res, "Missing Stripe customer");
 
@@ -41,7 +42,7 @@ router.post("/portal", async (req, res) => {
     if (!req.user) return unauthorized(res);
     if (!stripe) return serverError(res, new Error("Stripe not configured"));
 
-    const userResult = await db.execute(`SELECT stripe_customer_id FROM users WHERE id = $1`, [req.user.id]);
+    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.user.id}`);
     const customerId = userResult.rows?.[0]?.stripe_customer_id;
     if (!customerId) return badRequest(res, "Missing Stripe customer");
 

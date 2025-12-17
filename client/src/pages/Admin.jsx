@@ -1,27 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { useAuth } from "../auth/AuthContext";
+import { useEffect, useState } from "react";
+import { useAuth } from "../context/AuthContext.jsx";
 
 export default function Admin() {
-  const { token, user } = useAuth();
+  const { user } = useAuth();
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
     fetch("/api/admin/stats", {
-      headers: { Authorization: `Bearer ${token}` },
+      credentials: "include",
     })
       .then(r => r.json())
-      .then(setStats);
-  }, [token]);
+      .then(setStats)
+      .catch(console.error);
+  }, []);
 
-  if (user?.role !== "admin") return <div style={{ padding: 24 }}>Forbidden</div>;
+  if (user?.role !== "admin") {
+    return (
+      <div style={{ padding: 24 }}>
+        <h2>Access Denied</h2>
+        <p>You must be an administrator to view this page.</p>
+      </div>
+    );
+  }
 
   return (
     <div style={{ padding: 24 }}>
-      <h1>Admin Dashboard</h1>
-      {!stats ? "Loading..." : (
+      <h1 data-testid="text-admin-title">Admin Dashboard</h1>
+      {!stats ? (
+        <p>Loading statistics...</p>
+      ) : (
         <ul>
-          <li>Total users: {stats.users}</li>
-          <li>Total audit logs: {stats.auditLogs}</li>
+          <li data-testid="text-total-users">Total users: {stats.users}</li>
+          <li data-testid="text-audit-logs">Total audit logs: {stats.auditLogs}</li>
         </ul>
       )}
     </div>

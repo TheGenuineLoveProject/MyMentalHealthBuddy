@@ -1,18 +1,29 @@
-// shared/brand.mjs
 export const BRAND = {
   name: "The Genuine Love Project",
-  shortName: "TGLP",
   tagline: "Live in Genuine Love",
   mission:
-    "To help people heal, grow, and align through everyday self-love and consciousness.",
-  logo: {
-    primary: "/brand/logo-infinity-heart.png",
-    mark: "/brand/mark-infinity-heart.png"
-  },
+    "A safe, private space for healing, reflection, and conscious growth.",
+
   colors: {
-    serenitySage: "#A7BFA8",
-    eternalGold: "#D8B55A",
-    midnightInk: "#0B1220",
-    softIvory: "#F7F4EE"
+    primary: "#6D9B8D",
+    secondary: "#A4C3B2",
+    accent: "#EAC3B5",
+    gold: "#EAC33B",
+    background: "#F6F7F8",
+    text: "#1C1C1C"
+  },
+
+  logo: {
+    concept: "Infinity-Heart Fusion",
+    meaning: "Infinite compassion, healing, and growth"
+  },
+
+  seo: {
+    title: "The Genuine Love Project",
+    description:
+      "Live in Genuine Love — healing, self-love, and consciousness tools.",
+    ogTitle: "The Genuine Love Project",
+    ogDescription:
+      "A private AI-powered space for healing, reflection, and emotional growth."
   }
 };
