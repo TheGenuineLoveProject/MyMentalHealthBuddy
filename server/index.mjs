@@ -28,6 +28,8 @@ import uiDashboardRoutes from "./routes/ui-dashboard.mjs";
 import healthRoutes from "./routes/health.mjs";
 import adminRoutes from "./routes/admin.mjs";
 import { makeSessionStore } from "./utils/sessionStore.mjs";
+import { createSessionMiddleware } from "./db/sessionStore.mjs";
+app.use(createSessionMiddleware());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

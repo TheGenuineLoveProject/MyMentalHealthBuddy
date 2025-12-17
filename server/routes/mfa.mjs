@@ -1,13 +1,12 @@
 import express from "express";
 import speakeasy from "speakeasy";
 import QRCode from "qrcode";
-import bcrypt from "bcrypt";
+import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
-import { writeAudit } from "../security/audit.mjs";
-import { authMiddleware } from "../security/authMiddleware.mjs";
 import { audit } from "../security/audit.mjs";
-import { sha256, signAccessToken } from "../security/tokens.mjs";
+import { sha256 } from "../utils/hash.mjs";
+import { signAccessToken } from "../utils/jwt.mjs";
 
 const router = express.Router();
 
@@ -18,68 +17,74 @@ function makeBackupCodes() {
 }
 
 router.post("/setup", requireAuth, async (req, res) => {
-  const secret = speakeasy.generateSecret({ name: "TheGenuineLoveProject" });
-  const otpauth_url = secret.otpauth_url;
+  try {
+    const secret = speakeasy.generateSecret({ name: "TheGenuineLoveProject" });
+    const otpauth_url = secret.otpauth_url;
 
-  const qr = await QRCode.toDataURL(otpauth_url);
+    const qr = await QRCode.toDataURL(otpauth_url);
 
-  // store secret but not enabled until verified
-  await db.execute(
-    `UPDATE users SET mfa_secret=$1, mfa_enabled=FALSE WHERE id=$2`,
-    [secret.base32, req.user.id]
-  );
+    await db.execute(sql`UPDATE users SET mfa_secret=${secret.base32}, mfa_enabled=FALSE WHERE id=${req.user.id}`);
 
-  await audit(req, "mfa.setup");
-  res.json({ qr, secret: secret.base32 });
+    await audit(req, "mfa.setup");
+    res.json({ qr, secret: secret.base32 });
+  } catch (err) {
+    console.error("MFA setup error:", err);
+    res.status(500).json({ message: "MFA setup failed" });
+  }
 });
 
 router.post("/verify", requireAuth, async (req, res) => {
-  const { code } = req.body || {};
-  if (!code) return res.status(400).json({ message: "Missing code" });
+  try {
+    const { code } = req.body || {};
+    if (!code) return res.status(400).json({ message: "Missing code" });
 
-  const r = await db.execute(`SELECT * FROM users WHERE id=$1 LIMIT 1`, [req.user.id]);
-  const user = r.rows?.[0] || r[0]?.[0];
-  if (!user?.mfa_secret) return res.status(400).json({ message: "MFA not setup" });
+    const r = await db.execute(sql`SELECT * FROM users WHERE id=${req.user.id} LIMIT 1`);
+    const user = r.rows?.[0] || r[0]?.[0];
+    if (!user?.mfa_secret) return res.status(400).json({ message: "MFA not setup" });
 
-  const ok = speakeasy.totp.verify({
-    secret: user.mfa_secret,
-    encoding: "base32",
-    token: code,
-    window: 1,
-  });
+    const ok = speakeasy.totp.verify({
+      secret: user.mfa_secret,
+      encoding: "base32",
+      token: code,
+      window: 1,
+    });
 
-  if (!ok) {
-    await audit(req, "mfa.verify.fail");
-    return res.status(401).json({ message: "Invalid code" });
+    if (!ok) {
+      await audit(req, "mfa.verify.fail");
+      return res.status(401).json({ message: "Invalid code" });
+    }
+
+    const backups = makeBackupCodes();
+    const hashedBackups = JSON.stringify(backups.map(c => sha256(c)));
+    
+    await db.execute(sql`UPDATE users SET mfa_enabled=TRUE, mfa_backup_codes=${hashedBackups} WHERE id=${req.user.id}`);
+
+    await audit(req, "mfa.enabled");
+
+    const accessToken = signAccessToken({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role || "user",
+      subscription_status: user.subscription_status || "free",
+    });
+
+    res.json({ ok: true, backupCodes: backups, accessToken });
+  } catch (err) {
+    console.error("MFA verify error:", err);
+    res.status(500).json({ message: "MFA verification failed" });
   }
-
-  const backups = makeBackupCodes();
-  await db.execute(
-    `UPDATE users SET mfa_enabled=TRUE, mfa_backup_codes=$1 WHERE id=$2`,
-    [JSON.stringify(backups.map(sha256)), req.user.id]
-  );
-
-  await audit(req, "mfa.enabled");
-
-  // issue fresh access token including latest role/subscription
-  const accessToken = signAccessToken({
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    role: user.role || "user",
-    subscription_status: user.subscription_status || "free",
-  });
-
-  res.json({ ok: true, backupCodes: backups, accessToken });
 });
 
 router.post("/disable", requireAuth, async (req, res) => {
-  await db.execute(
-    `UPDATE users SET mfa_enabled=FALSE, mfa_secret=NULL, mfa_backup_codes=NULL WHERE id=$1`,
-    [req.user.id]
-  );
-  await audit(req, "mfa.disabled");
-  res.json({ ok: true });
+  try {
+    await db.execute(sql`UPDATE users SET mfa_enabled=FALSE, mfa_secret=NULL, mfa_backup_codes=NULL WHERE id=${req.user.id}`);
+    await audit(req, "mfa.disabled");
+    res.json({ ok: true });
+  } catch (err) {
+    console.error("MFA disable error:", err);
+    res.status(500).json({ message: "Failed to disable MFA" });
+  }
 });
 
 export default router;

@@ -13,8 +13,10 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import HealthPage from "./pages/HealthPage.jsx";
-
+import DesignDashboard from "./pages/DesignDashboard.jsx";
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
+// add a route:
+// <Route path="/dashboard/design" element={<DesignDashboard />} />
 const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
 const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
 const AIChatPage = lazy(() => import("./pages/AIChatPage.jsx"));
