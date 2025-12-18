@@ -52,6 +52,22 @@ The application is designed for optimized production bundles with code splitting
 ### Brand Assets Location
 - `/public/brand/` - Logo, favicon, and OG images
 - `/shared/brand.mjs` - Brand constants (colors, tagline)
+- `/client/src/styles/brand.css` - CSS design tokens
+
+### Brand Colors
+| Token | Hex | Usage |
+|-------|-----|-------|
+| sage | #8FBF9F | Primary |
+| clay | #C89A82 | Warm accent |
+| gold | #D4B768 | Golden accent |
+| forest | #2F5D5D | Deep teal |
+| heart | #B45B5B | Compassion |
+| ink | #3A3A3A | Text |
+| ivory | #FAF9F7 | Background |
+| sun | #EAC33B | Highlight |
+
+### Crisis Detection
+The AI routes include crisis detection that scans for 14 keywords indicating self-harm intent. When detected, the system returns a safe, compassionate response with crisis resources (988 Suicide Prevention Lifeline, Crisis Text Line) instead of continuing the conversation.
 
 ## External Dependencies
 

@@ -1,5 +1,4 @@
 entrypoint = "server/index.mjs"
-
 run = "npm run dev"
 modules = ["nodejs-20", "postgresql-16"]
 
@@ -8,15 +7,13 @@ deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
 run = ["node", "server/index.mjs"]
 
+# Autoscale must expose ONE web port.
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [nix]
 channel = "stable-25_05"
-
-[agent]
-expertMode = true
 
 [workflows]
 runButton = "Project"
@@ -27,14 +24,6 @@ mode = "parallel"
 author = "agent"
 
 [[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "Start application"
-
-[[workflows.workflow]]
-name = "Start application"
-author = "agent"
-
-[[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
@@ -42,8 +31,5 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
-[userenv]
-
-[userenv.shared]
-REPLIT_KEEP_PACKAGE_DEV_DEPENDENCIES = "1"
-REPLIT_DISABLE_PACKAGE_LAYER = "1"
+[agent]
+expertMode = true

@@ -1,0 +1,215 @@
+ROGER_PRODUCTION_FINALIZE_v1 — The Genuine Love Project
+Goal: Fix current blockers, lock production session storage, finalize AI therapy flows, finalize Canva+Figma bridge, add analytics+monitoring, harden Stripe billing, finish onboarding flows, and complete final production deploy + public launch checklist.
+
+NON-NEGOTIABLE:
+- Do NOT read or expose .env values.
+- Do NOT break existing routes.
+- Run commands after edits and report results + files changed.
+
+PHASE 0 — FIX ALL CURRENT BLOCKERS (DO THIS FIRST)
+
+0.1 Fix package.json corruption (EJSONPARSE)
+- Open package.json and ensure it is valid JSON.
+- Remove any accidental pasted JavaScript or stray quotes.
+- Confirm “scripts” and “dependencies” are valid JSON objects.
+- After fixing, run: node scripts/check-package-json.mjs
+- Then run: npm install
+
+0.2 Fix scripts/figma-map.mjs: BRAND is not defined
+Problem: The script’s template string is interpolating ${BRAND.*} at runtime, but BRAND isn’t defined in the script scope. We must output JSX that references BRAND inside the generated component.
+
+Replace scripts/figma-map.mjs template with a version that uses JSX braces {BRAND.tagline} instead of ${BRAND.tagline} and uses style={{ color: BRAND.colors.primary }}.
+
+Use this exact code for scripts/figma-map.mjs:
+
+--- START scripts/figma-map.mjs ---
+import fs from "fs";
+import path from "path";
+
+const files = [
+  "client/src/pages/marketing/LandingHero.tsx",
+  "client/src/pages/marketing/LandingFeatures.tsx",
+  "client/src/pages/marketing/LandingTestimonials.tsx",
+  "client/src/pages/marketing/LandingCTA.tsx",
+
+  "client/src/pages/auth/Login.tsx",
+  "client/src/pages/auth/SignUp.tsx",
+  "client/src/pages/auth/ForgotPassword.tsx",
+
+  "client/src/pages/dashboard/Overview.tsx",
+  "client/src/pages/dashboard/MoodTracker.tsx",
+  "client/src/pages/dashboard/Journal.tsx",
+  "client/src/pages/dashboard/Insights.tsx",
+  "client/src/pages/dashboard/DesignSystem.tsx",
+
+  "client/src/pages/ai/ChatEmpty.tsx",
+  "client/src/pages/ai/ChatConversation.tsx",
+  "client/src/pages/ai/ChatCrisis.tsx",
+
+  "client/src/pages/account/Profile.tsx",
+  "client/src/pages/account/Settings.tsx",
+  "client/src/pages/account/Billing.tsx",
+
+  "client/src/pages/legal/Privacy.tsx",
+  "client/src/pages/legal/Terms.tsx",
+  "client/src/pages/legal/Disclaimer.tsx",
+];
+
+const template = (name) => `import React from "react";
+import { BRAND } from "@shared/brand";
+
+export default function ${name}() {
+  return (
+    <div style={{ padding: 24 }}>
+      <h1 style={{ color: BRAND.colors.primary }}>${name}</h1>
+      <p>{BRAND.tagline}</p>
+      <p style={{ opacity: 0.75 }}>
+        Replace this scaffold with your Figma Dev Mode code.
+      </p>
+    </div>
+  );
+}
+`;
+
+function pascalCase(filePath) {
+  const base = path.basename(filePath).replace(/\.(tsx|ts|jsx|js)$/, "");
+  return base.replace(/(^|[-_ ]+)([a-zA-Z0-9])/g, (_, __, c) => c.toUpperCase());
+}
+
+const root = process.cwd();
+
+let created = 0;
+for (const rel of files) {
+  const abs = path.join(root, rel);
+  if (!fs.existsSync(abs)) {
+    fs.mkdirSync(path.dirname(abs), { recursive: true });
+    fs.writeFileSync(abs, template(pascalCase(rel)), "utf8");
+    created++;
+  }
+}
+
+console.log(`[figma:map] ensured ${files.length} files, created ${created}.`);
+--- END scripts/figma-map.mjs ---
+
+0.3 Fix OpenAI module missing
+Your server imports “openai” but it is not installed. Add dependency and ensure correct SDK usage.
+
+- In package.json dependencies, add:
+  "openai": "^4.0.0"
+
+- Then update server/utils/aiClient.mjs to use OpenAI v4 default export.
+Use this exact code:
+
+--- START server/utils/aiClient.mjs ---
+import OpenAI from "openai";
+
+export function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY;
+  if (!apiKey) return null;
+  return new OpenAI({ apiKey });
+}
+--- END server/utils/aiClient.mjs ---
+
+- Then run: npm install
+- Then run: npm run dev
+
+PHASE 1 — LOCK PRODUCTION SESSION STORAGE
+
+1.1 Ensure express-session uses Postgres store in production, secure cookies, and no fallback secrets.
+
+In server/index.mjs:
+- Ensure app is created BEFORE app.use(...)
+- Ensure webhook raw body is mounted BEFORE express.json
+- In production: app.set("trust proxy", 1)
+- Session cookies: httpOnly true, secure true in prod, sameSite "lax" (or "none" only if needed), maxAge set.
+- Require SESSION_SECRET in production (no default).
+
+If you already have server/db/sessionStore.mjs with createSessionMiddleware(), use it and remove duplicate session store usage.
+
+PHASE 2 — FINALIZE AI THERAPY FLOWS (SAFE + EVIDENCE-BASED UX)
+
+2.1 Confirm routes exist:
+- /api/ai/chat
+- /api/ai/crisis
+- /api/therapy/flow (or equivalent)
+
+2.2 Implement:
+- A “crisis gate” that detects self-harm intent and returns a crisis-safe response + resources (no therapy claims).
+- A structured flow engine: intake → goals → reflection → next step → journaling prompt.
+- Store messages in aiMessages table (if present) or your existing storage.
+
+PHASE 3 — CANVA + FIGMA UI BRIDGE
+
+3.1 Fix brand centralization
+Your brand:guard output shows hardcoded strings + hex codes in:
+- client/src/components/CanvaPanel.tsx
+- client/src/components/ChatWidget.tsx
+- client/src/components/HealingChat.tsx
+- client/src/content/marketingCopy.ts
+- client/src/copy/disclaimers.ts
+- client/src/index.css
+- client/src/styles/brand.css
+- client/src/pages/*
+
+Replace hardcoded:
+- “The Genuine Love Project”
+- “Live in Genuine Love”
+- hex colors like #6D9B8D, #A4C3B2, #EAC3B5, #EAC33B
+
+with BRAND constants from @shared/brand.
+
+3.2 Ensure shared/brand.ts exports:
+- name, tagline
+- colors: primary, secondary, accent, background, text
+- logo paths if needed
+
+3.3 Canva/Figma bridge:
+- Ensure a docs page exists: docs/marketing/canva/README.md
+- Ensure scripts/canva-urls.json contains placeholders and is never committed with secrets.
+
+PHASE 4 — ANALYTICS + MONITORING
+
+4.1 Add Sentry (or equivalent):
+- Capture server errors + route breadcrumbs
+- Add requestId middleware
+- Add basic health metrics route (already have /api/health)
+
+4.2 Add PostHog (optional) or lightweight event logging:
+- page_view, signup_started, signup_completed, onboarding_completed, upgrade_clicked, checkout_started, checkout_completed
+Do not track sensitive journaling content.
+
+PHASE 5 — STRIPE BILLING HARDENING
+
+5.1 Enforce allowlist for Price IDs and plans.
+5.2 Verify webhook signature strictly.
+5.3 Make checkout idempotent and user-bound.
+5.4 Billing portal enabled.
+5.5 Ensure pro gating uses server-side verification (not only UI checks).
+
+PHASE 6 — USER ONBOARDING FLOWS
+
+6.1 Required pages:
+- welcome → account → goals → preferences → first journal → first AI chat → dashboard
+6.2 Persist onboarding progress in DB.
+6.3 Add skip + resume.
+
+PHASE 7 — FINAL PRODUCTION DEPLOY + PUBLIC LAUNCH CHECKLIST
+
+7.1 Run:
+- npm test (or vitest)
+- npm run build
+- npm run start
+
+7.2 Confirm:
+- .replit ports correct
+- binds 0.0.0.0
+- NODE_ENV=production behaviors
+- DB migrations applied
+- Stripe webhooks configured
+- Monitoring working
+- Legal pages live: Privacy, Terms, Disclaimer
+
+Deliverables:
+- List of files changed (with brief why)
+- Commands run + outputs
+- A final “LAUNCH_READY.md” checklist updated

@@ -7,6 +7,36 @@ import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
+const CRISIS_KEYWORDS = [
+  "kill myself", "end my life", "suicide", "suicidal", "want to die",
+  "don't want to live", "hurt myself", "self-harm", "cut myself",
+  "overdose", "end it all", "no reason to live", "better off dead"
+];
+
+const CRISIS_RESPONSE = {
+  isCrisis: true,
+  reply: `I hear you, and I'm genuinely concerned about what you're sharing. Your safety matters more than anything else right now.
+
+Please reach out to someone who can help immediately:
+
+**National Suicide Prevention Lifeline**: 988 (call or text)
+**Crisis Text Line**: Text HOME to 741741
+**International Association for Suicide Prevention**: https://www.iasp.info/resources/Crisis_Centres/
+
+If you're in immediate danger, please call emergency services (911 in the US) or go to your nearest emergency room.
+
+You are not alone. You matter. Help is available right now.`,
+  resources: [
+    { name: "National Suicide Prevention Lifeline", contact: "988", type: "phone" },
+    { name: "Crisis Text Line", contact: "741741", type: "text" }
+  ]
+};
+
+function detectCrisis(message) {
+  const lowerMessage = message.toLowerCase();
+  return CRISIS_KEYWORDS.some(keyword => lowerMessage.includes(keyword));
+}
+
 const SYSTEM_PROMPT = `You are a compassionate, trauma-informed AI wellness companion for The Genuine Love Project. Your role is to:
 - Listen with empathy and validate feelings
 - Offer gentle, supportive guidance
@@ -26,6 +56,11 @@ router.post("/chat", async (req, res) => {
 
     if (!userId || !message) {
       return res.status(400).json({ error: "Missing userId or message" });
+    }
+
+    if (detectCrisis(message)) {
+      logger.warn("Crisis detected in AI chat", { userId });
+      return res.json(CRISIS_RESPONSE);
     }
 
     const historyResult = await db.execute(sql`

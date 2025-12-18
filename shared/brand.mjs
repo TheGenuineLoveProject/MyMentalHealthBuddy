@@ -5,13 +5,28 @@ export const BRAND = {
   mission: "A safe, private space for healing, reflection, and conscious growth.",
 
   colors: {
-    primary: "#6D9B8D",
-    secondary: "#A4C3B2",
-    accent: "#EAC3B5",
-    gold: "#EAC33B",
-    background: "#F6F7F8",
-    backgroundDark: "#1A1A2E",
-    text: "#1C1C1C",
+    serenitySage: "#8FBF9F",
+    warmBlossomPink: "#F4C7C3",
+    deepTeal: "#2F5D5D",
+    ivoryLight: "#FAF9F7",
+    charcoalDeep: "#3A3A3A",
+    eternalGold: "#D4AF37",
+
+    primary: "#8FBF9F",
+    secondary: "#F4C7C3",
+    accent: "#D4AF37",
+    foreground: "#2F5D5D",
+    background: "#FAF9F7",
+    text: "#3A3A3A",
+
+    sage: "#8FBF9F",
+    pink: "#F4C7C3",
+    teal: "#2F5D5D",
+    ivory: "#FAF9F7",
+    charcoal: "#3A3A3A",
+    gold: "#D4AF37",
+
+    backgroundDark: "#1A1A1A",
     textLight: "#FFFFFF",
     muted: "#6B7280",
     border: "#E5E7EB",
@@ -25,47 +40,7 @@ export const BRAND = {
       display: "Playfair Display, Georgia, serif",
       body: "Inter, system-ui, sans-serif",
       mono: "JetBrains Mono, monospace"
-    },
-    fontSize: {
-      xs: "0.75rem",
-      sm: "0.875rem",
-      base: "1rem",
-      lg: "1.125rem",
-      xl: "1.25rem",
-      "2xl": "1.5rem",
-      "3xl": "1.875rem",
-      "4xl": "2.25rem",
-      "5xl": "3rem"
-    },
-    fontWeight: {
-      normal: 400,
-      medium: 500,
-      semibold: 600,
-      bold: 700
-    },
-    lineHeight: {
-      tight: 1.25,
-      normal: 1.5,
-      relaxed: 1.75
     }
-  },
-
-  spacing: {
-    xs: "0.25rem",
-    sm: "0.5rem",
-    md: "1rem",
-    lg: "1.5rem",
-    xl: "2rem",
-    "2xl": "3rem",
-    "3xl": "4rem"
-  },
-
-  borderRadius: {
-    sm: "0.25rem",
-    md: "0.5rem",
-    lg: "1rem",
-    xl: "1.5rem",
-    full: "9999px"
   },
 
   logo: {

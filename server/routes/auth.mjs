@@ -118,6 +118,79 @@ router.post("/refresh", async (req, res) => {
   }
 });
 
+router.get("/me", async (req, res) => {
+  try {
+    let userId = null;
+    let needsNewToken = false;
+
+    const authHeader = req.headers.authorization;
+    if (authHeader?.startsWith("Bearer ")) {
+      const token = authHeader.slice(7);
+      try {
+        const payload = verifyToken(token);
+        if (payload?.id) {
+          userId = payload.id;
+        }
+      } catch {
+        needsNewToken = true;
+      }
+    }
+
+    if (!userId) {
+      const refreshToken = req.cookies?.refresh_token;
+      if (refreshToken) {
+        try {
+          const payload = verifyToken(refreshToken);
+          if (payload?.id) {
+            const result = await db.execute(sql`SELECT id, refresh_token_hash FROM users WHERE id = ${payload.id}`);
+            const user = result.rows?.[0];
+            if (user && sha256(refreshToken) === user.refresh_token_hash) {
+              userId = user.id;
+              needsNewToken = true;
+            }
+          }
+        } catch {}
+      }
+    }
+
+    if (!userId) {
+      return res.json({ authenticated: false });
+    }
+
+    const result = await db.execute(sql`
+      SELECT id, email, name, role, subscription_status, avatar_url, created_at
+      FROM users WHERE id = ${userId}
+    `);
+    const user = result.rows?.[0];
+
+    if (!user) {
+      return res.json({ authenticated: false });
+    }
+
+    const response = {
+      authenticated: true,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        subscriptionStatus: user.subscription_status,
+        avatarUrl: user.avatar_url,
+        createdAt: user.created_at
+      }
+    };
+
+    if (needsNewToken) {
+      response.token = signAccessToken({ id: user.id, email: user.email, role: user.role });
+    }
+
+    res.json(response);
+  } catch (err) {
+    console.error("Auth check error:", err);
+    res.json({ authenticated: false });
+  }
+});
+
 router.post("/logout", async (req, res) => {
   try {
     const token = req.cookies?.refresh_token;

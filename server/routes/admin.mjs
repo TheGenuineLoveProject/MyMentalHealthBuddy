@@ -3,6 +3,22 @@ import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { requireAuth, requireRole } from "../middleware/auth.mjs";
 import { audit } from "../security/audit.mjs";
+import { requireAdmin } from "../middleware/requireAdmin.mjs";
+
+export const adminRouter = express.Router();
+
+adminRouter.get("/overview", requireAdmin, async (req, res) => {
+  // Replace with real DB calls as needed
+  res.json({
+    ok: true,
+    stats: {
+      users: "TODO",
+      activeToday: "TODO",
+      journalEntries: "TODO",
+      aiMessages: "TODO",
+    },
+  });
+});
 
 const router = express.Router();
 

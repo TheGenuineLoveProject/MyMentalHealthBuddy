@@ -49,6 +49,7 @@ export default function App() {
           <Switch>
             {/* Public routes */}
             <Route path="/" component={Home} />
+            <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/forgot-password" component={ForgotPassword} />
