@@ -1,2 +1,67 @@
-language = "nodejs"
-run = "npm start"
+entrypoint = "server/index.mjs"
+
+run = "echo 'Use npm run dev to start the server manually'"
+modules = ["nodejs-20", "postgresql-16"]
+
+[deployment]
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build", "-w", "client"]
+run = ["node", "server/index.mjs"]
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[[ports]]
+localPort = 5174
+externalPort = 3000
+
+[[ports]]
+localPort = 5175
+externalPort = 3001
+
+[[ports]]
+localPort = 44105
+externalPort = 3002
+
+[[ports]]
+localPort = 44725
+externalPort = 3003
+
+[env]
+NODE_ENV = "development"
+
+[agent]
+expertMode = true
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Start application"
+
+[[workflows.workflow]]
+name = "Start application"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "webview"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "NODE_ENV=development node server/index.mjs"
+waitForPort = 5000
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.production]
+NODE_ENV = "production"
