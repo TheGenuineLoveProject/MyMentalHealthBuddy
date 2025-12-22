@@ -1,9 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
 import compression from 'compression';
-import { fileURLToPath } from 'url';
+import helmet from "helmet";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { dirname, join } from 'path';
 import { buildSessionMiddleware } from './middleware/session.mjs';
 
@@ -22,14 +23,14 @@ const app = express();
 const isProduction = process.env.NODE_ENV === "production";
 
 if (isProduction && !process.env.DATABASE_URL) {
-  console.error("❌ DEPLOY BLOCKED: DATABASE_URL is missing in production. Add it in Replit Deploy Secrets.");
+  console.error("DEPLOY BLOCKED: DATABASE_URL is missing in production. Add it in Replit Deploy Secrets.");
   process.exit(1);
 }
 
 // Trust proxy for secure cookies behind load balancer (Autoscale)
 app.set('trust proxy', 1);
 
-// --- basic middleware ---
+// Core middleware
 app.use(helmet({
   contentSecurityPolicy: false
 }));
@@ -43,49 +44,41 @@ app.use(
   })
 );
 
-// --- sessions (MemoryStore in dev; Postgres store in production) ---
+// Sessions (MemoryStore in dev; Postgres store in production)
 app.use(buildSessionMiddleware());
 
-// --- API routes ---
+// API routes
 app.use('/api/auth', authRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/journal', journalRouter);
 app.use('/api/mood', moodRouter);
 app.use('/api/health', healthRouter);
 
-// --- health ---
+// Health check endpoint
 app.get('/health', (_req, res) => res.json({ ok: true, app: 'The Genuine Love Project' }));
 
-// --- serve Vite build in production ---
-const distPath = join(__dirname, '..', 'client', 'dist');
+// Serve frontend (Vite build output)
+const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));
 
 // SPA fallback - serve index.html for all non-API routes
-app.get('*', (_req, res) => {
-  res.sendFile(join(distPath, 'index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(join(distPath, "index.html"));
 });
 
-const PORT = Number(process.env.PORT ?? 5000);
-const HOST = process.env.HOST ?? "0.0.0.0";
-
-const server = app.listen(PORT, HOST, () => {
-  console.log(`✅ Server listening on http://${HOST}:${PORT}`);
-});
-
-server.on("error", (err) => {
-  if (err.code === "EADDRINUSE") {
-    console.error(`❌ Port ${PORT} already in use. Shutting down cleanly.`);
-    process.exit(1);
-  } else {
-    throw err;
-  }
-});
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-  console.log('SIGTERM received, shutting down gracefully');
-  server.close(() => {
-    console.log('Server closed');
-    process.exit(0);
+// Error handler (always JSON)
+app.use((err, req, res, next) => {
+  console.error("Server error:", err);
+  res.status(500).json({
+    ok: false,
+    error: "INTERNAL_SERVER_ERROR",
+    message: "Something went wrong. Please try again.",
   });
+});
+
+const PORT = Number(process.env.PORT || 5000);
+const HOST = "0.0.0.0";
+
+app.listen(PORT, HOST, () => {
+  console.log(`Server running on http://${HOST}:${PORT}`);
 });

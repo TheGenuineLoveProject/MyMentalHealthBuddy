@@ -1,0 +1,427 @@
+LEGACY TERM FOUND IN:
+/home/runner/workspace/_quarantine/archive_DO_NOT_DELETE/apps/shared/design-system/tokens.d.ts
+
+--- CONTENT ---
+/**
+ * MyMentalHealthBuddy - Therapeutic Design Token System
+ * MIT-PhD Level Evidence-Based Design
+ *
+ * Token Taxonomy:
+ * - Foundational: Primitive values (colors, spacing, typography, motion)
+ * - Semantic: Emotional states, UI intents, therapeutic contexts
+ * - Component: Specific component styling
+ *
+ * References:
+ * - Küller et al. (2009): Blue-green stress reduction
+ * - Mehta & Zhu (2009): Blue creativity enhancement
+ * - Elliot & Maier (2014): Color-in-context theory
+ */
+export declare const foundational: {
+    /**
+     * Color Primitives - HSL format for maximum flexibility
+     * Following WCAG 2.2 AA contrast requirements
+     */
+    color: {
+        blue: {
+            50: string;
+            100: string;
+            200: string;
+            300: string;
+            400: string;
+            500: string;
+            600: string;
+            700: string;
+            800: string;
+            900: string;
+        };
+        green: {
+            50: string;
+            100: string;
+            200: string;
+            300: string;
+            400: string;
+            500: string;
+            600: string;
+            700: string;
+            800: string;
+            900: string;
+        };
+        coral: {
+            50: string;
+            100: string;
+            200: string;
+            300: string;
+            400: string;
+            500: string;
+            600: string;
+            700: string;
+            800: string;
+            900: string;
+        };
+        violet: {
+            50: string;
+            100: string;
+            200: string;
+            300: string;
+            400: string;
+            500: string;
+            600: string;
+            700: string;
+            800: string;
+            900: string;
+        };
+        neutral: {
+            50: string;
+            100: string;
+            200: string;
+            300: string;
+            400: string;
+            500: string;
+            600: string;
+            700: string;
+            800: string;
+            900: string;
+        };
+        mood: {
+            joy: string;
+            serenity: string;
+            anxiety: string;
+            melancholy: string;
+            anger: string;
+            hope: string;
+        };
+        success: string;
+        warning: string;
+        error: string;
+        info: string;
+    };
+    /**
+     * Spacing Scale - 8pt grid system with therapeutic rhythm
+     * Base unit: 0.25rem (4px) for fine-grained control
+     */
+    spacing: {
+        0: string;
+        1: string;
+        2: string;
+        3: string;
+        4: string;
+        5: string;
+        6: string;
+        8: string;
+        10: string;
+        12: string;
+        16: string;
+        20: string;
+        24: string;
+        32: string;
+    };
+    /**
+     * Typography Scale - Modular scale (1.25 ratio) for visual hierarchy
+     */
+    typography: {
+        fontFamily: {
+            sans: string;
+            mono: string;
+        };
+        fontSize: {
+            xs: string;
+            sm: string;
+            base: string;
+            lg: string;
+            xl: string;
+            '2xl': string;
+            '3xl': string;
+            '4xl': string;
+            '5xl': string;
+            '6xl': string;
+        };
+        fontWeight: {
+            normal: string;
+            medium: string;
+            semibold: string;
+            bold: string;
+            extrabold: string;
+        };
+        lineHeight: {
+            none: string;
+            tight: string;
+            snug: string;
+            normal: string;
+            relaxed: string;
+            loose: string;
+        };
+        letterSpacing: {
+            tighter: string;
+            tight: string;
+            normal: string;
+            wide: string;
+            wider: string;
+        };
+    };
+    /**
+     * Border Radius - Organic, calming curves
+     */
+    borderRadius: {
+        none: string;
+        sm: string;
+        base: string;
+        md: string;
+        lg: string;
+        xl: string;
+        '2xl': string;
+        full: string;
+    };
+    /**
+     * Shadows - Depth perception for spatial hierarchy
+     */
+    shadow: {
+        sm: string;
+        base: string;
+        md: string;
+        lg: string;
+        xl: string;
+        '2xl': string;
+        inner: string;
+        none: string;
+    };
+    /**
+     * Motion - Therapeutic rhythm aligned with 4-7-8 breathing
+     * Duration based on calming cadence research
+     */
+    motion: {
+        duration: {
+            instant: string;
+            fast: string;
+            base: string;
+            slow: string;
+            slower: string;
+            breath: string;
+        };
+        easing: {
+            linear: string;
+            easeIn: string;
+            easeOut: string;
+            easeInOut: string;
+            bounce: string;
+            calm: string;
+        };
+    };
+    /**
+     * Z-Index - Spatial layering system
+     */
+    zIndex: {
+        base: number;
+        dropdown: number;
+        sticky: number;
+        fixed: number;
+        modalBackdrop: number;
+        modal: number;
+        popover: number;
+        tooltip: number;
+    };
+};
+export declare const semantic: {
+    /**
+     * Therapeutic Modes - Evidence-based color schemes
+     */
+    modes: {
+        /**
+         * Serenity Mode - Parasympathetic activation
+         * Research: Küller et al. (2009) - Blue-green reduces cortisol
+         * Use: Anxiety reduction, meditation, sleep preparation
+         */
+        serenity: {
+            primary: string;
+            surface: string;
+            border: string;
+            text: string;
+            accent: string;
+            contrast: {
+                ratio: string;
+                validated: boolean;
+            };
+        };
+        /**
+         * Empowerment Mode - Positive affect boost
+         * Research: Mehta & Zhu (2009) - Warm colors increase motivation
+         * Use: Goal setting, journaling, achievement tracking
+         */
+        empowerment: {
+            primary: string;
+            surface: string;
+            border: string;
+            text: string;
+            accent: string;
+            contrast: {
+                ratio: string;
+                validated: boolean;
+            };
+        };
+        /**
+         * Focus Mode - Cognitive performance
+         * Research: Elliot & Maier (2014) - Cool colors enhance focus
+         * Use: Content creation, learning, task completion
+         */
+        focus: {
+            primary: string;
+            surface: string;
+            border: string;
+            text: string;
+            accent: string;
+            contrast: {
+                ratio: string;
+                validated: boolean;
+            };
+        };
+        /**
+         * Recovery Mode - Grief support & healing
+         * Research: Palmer & Schloss (2010) - Soft purples aid processing
+         * Use: Loss processing, difficult emotions, healing journey
+         */
+        recovery: {
+            primary: string;
+            surface: string;
+            border: string;
+            text: string;
+            accent: string;
+            contrast: {
+                ratio: string;
+                validated: boolean;
+            };
+        };
+    };
+    /**
+     * Mood States - Emotion visualization palette
+     */
+    moodStates: {
+        joy: string;
+        serenity: string;
+        anxiety: string;
+        melancholy: string;
+        anger: string;
+        hope: string;
+    };
+    /**
+     * UI Intent - Semantic meaning colors
+     */
+    intent: {
+        success: {
+            background: string;
+            border: string;
+            text: string;
+            icon: string;
+        };
+        warning: {
+            background: string;
+            border: string;
+            text: string;
+            icon: string;
+        };
+        error: {
+            background: string;
+            border: string;
+            text: string;
+            icon: string;
+        };
+        info: {
+            background: string;
+            border: string;
+            text: string;
+            icon: string;
+        };
+    };
+};
+export declare const sensory: {
+    /**
+     * Haptic Patterns - Vibration API for mobile
+     * Pattern: [vibrate, pause, vibrate, ...]
+     */
+    haptics: {
+        breathingCycle: number[];
+        success: number[];
+        error: number[];
+        notification: number[];
+        grounding: number[];
+    };
+    /**
+     * Audio Cues - Web Audio API soundscapes
+     * Frequency in Hz, duration in ms
+     */
+    audio: {
+        alphaWave: {
+            baseFrequency: number;
+            beatFrequency: number;
+            duration: number;
+        };
+        chime: {
+            frequencies: number[];
+            duration: number;
+            volume: number;
+        };
+        success: {
+            frequency: number;
+            duration: number;
+            volume: number;
+        };
+    };
+    /**
+     * Motion Rhythms - Animation timing aligned with breathing
+     */
+    motionRhythms: {
+        breathIn: string;
+        breathHold: string;
+        breathOut: string;
+        fullCycle: string;
+    };
+};
+export declare const component: {
+    button: {
+        primary: {
+            background: string;
+            hover: string;
+            active: string;
+            text: string;
+            shadow: string;
+            borderRadius: string;
+        };
+        secondary: {
+            background: string;
+            hover: string;
+            active: string;
+            text: string;
+            shadow: string;
+            borderRadius: string;
+        };
+    };
+    card: {
+        background: string;
+        border: string;
+        shadow: string;
+        shadowHover: string;
+        borderRadius: string;
+        padding: string;
+    };
+    input: {
+        background: string;
+        border: string;
+        borderFocus: string;
+        text: string;
+        placeholder: string;
+        shadow: string;
+        shadowFocus: string;
+        borderRadius: string;
+    };
+    chart: {
+        gridLines: string;
+        labels: string;
+        tooltipBackground: string;
+        tooltipText: string;
+    };
+};
+export declare const metadata: {
+    version: string;
+    lastUpdated: string;
+    wcagCompliance: string;
+    scientificReferences: string[];
+    therapeuticContexts: string[];
+};

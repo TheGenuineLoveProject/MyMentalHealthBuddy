@@ -1,0 +1,251 @@
+LEGACY TERM FOUND IN:
+/home/runner/workspace/_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_SELF_EVOLUTION_GUIDE.md
+
+--- CONTENT ---
+# 🌐 Self-Evolution System Guide
+
+## Overview
+
+MyMentalHealthBuddy now includes a **comprehensive self-evolution system** that continuously monitors, diagnoses, heals, and verifies the platform's health. This system operates autonomously to ensure maximum uptime, performance, and code quality.
+
+## 🎯 Key Features
+
+### 1. **Automated Diagnostics** (`npm run diagnose`)
+Scans the entire system for:
+- ✅ Environment variable configuration
+- ✅ Critical files and dependencies
+- ✅ Package scripts availability
+- ✅ Build artifacts status
+- ✅ PWA infrastructure
+- ✅ SEO files
+- ✅ Documentation completeness
+
+**Health Scoring:**
+- 90-100: 🟢 EXCELLENT - Production Ready
+- 75-89: 🟡 GOOD - Minor improvements recommended
+- 50-74: 🟠 FAIR - Action required
+- 0-49: 🔴 CRITICAL - Immediate attention needed
+
+### 2. **Auto-Healing** (`npm run heal`)
+Automatically fixes common issues:
+- Creates missing configuration files (.env.example, .gitignore)
+- Ensures directory structure exists
+- Sets up rollback capabilities
+- Normalizes file permissions
+- Updates configuration for self-evolution system
+
+**Safe & Non-Destructive:**
+All healing operations are safe and reversible. The system:
+- Never deletes user code
+- Creates backups in `.rollback/`
+- Only adds/updates infrastructure files
+
+### 3. **Verification Suite** (`npm run verify`)
+Validates platform readiness:
+- ✅ Package.json structure
+- ✅ TypeScript configuration
+- ✅ Build capability
+- ✅ Critical files presence
+- ✅ PWA infrastructure
+- ✅ SEO optimization
+- ✅ Production scripts
+- ✅ Documentation
+
+### 4. **Continuous Self-Evolution** (`npm run self-evolve`)
+Runs the complete cycle:
+```bash
+npm run diagnose && npm run heal && npm run verify
+```
+
+### 5. **Activation Script** (`npm run activate`)
+Starts the platform with hourly self-audit loops:
+- Launches the application
+- Runs initial diagnostics
+- Performs auto-healing
+- Executes verification
+- Continues hourly health checks
+
+## 📦 Available Commands
+
+| Command | Description | Use Case |
+|---------|-------------|----------|
+| `npm run diagnose` | System health scan | Quick health check |
+| `npm run heal` | Auto-fix issues | Repair configuration |
+| `npm run verify` | Validation suite | Pre-deployment check |
+| `npm run self-evolve` | Complete cycle | Full system audit |
+| `npm run activate` | Start with monitoring | Production activation |
+
+## 🚀 Usage
+
+### Quick Health Check
+```bash
+npm run diagnose
+```
+
+### Fix Configuration Issues
+```bash
+npm run heal
+```
+
+### Pre-Deployment Verification
+```bash
+npm run self-evolve
+```
+
+### Production Activation (with hourly monitoring)
+```bash
+npm run activate
+```
+
+## 🏗️ Directory Structure
+
+The self-evolution system creates and manages:
+
+```
+.
+├── scripts/
+│   ├── diagnose.mjs          # Health diagnostics
+│   ├── heal.mjs               # Auto-healing
+│   ├── verify.mjs             # Verification suite
+│   └── activateMaster.sh      # Activation script
+├── .rollback/                 # Backup files
+├── content/blog/              # Content management
+├── public/healing-ui/         # UI assets
+├── config/                    # Configuration files
+└── .env.example               # Environment template
+```
+
+## 🔄 CI/CD Integration
+
+The system integrates with GitHub Actions for automated quality assurance:
+
+### Workflow: `.github/workflows/ci.yml`
+
+**On every push/PR:**
+1. **Diagnose** - System health check
+2. **Heal** - Auto-fix issues
+3. **Verify** - Run validation suite
+4. **Build** - Production build & optimization
+
+**Benefits:**
+- Catches issues before they reach production
+- Automatically applies safe fixes
+- Ensures consistent code quality
+- Validates production readiness
+
+## 📊 Health Metrics
+
+### Current System Status (Example)
+
+```
+🏥 HEALTH SCORE: 88/100
+Status: 🟡 GOOD - Minor improvements recommended
+
+✅ Environment: All required variables configured
+✅ Build: Production artifacts ready
+✅ PWA: Full offline support
+✅ SEO: All optimization files present
+✅ Documentation: Comprehensive guides available
+```
+
+## 🛡️ Safety Features
+
+### Non-Destructive Operations
+- All changes are additive, never destructive
+- User code is never modified without explicit permission
+- Backups created before any changes
+
+### Rollback Support
+- `.rollback/` directory maintains file backups
+- Easy restoration if needed
+- Version history preserved
+
+### Idempotent Operations
+- Scripts can run multiple times safely
+- No duplicate entries or conflicts
+- Stable across repeated executions
+
+## 🎓 Best Practices
+
+### Development Workflow
+1. Run `npm run diagnose` daily
+2. Fix any issues with `npm run heal`
+3. Verify before commits with `npm run verify`
+4. Use `npm run self-evolve` before deployments
+
+### Production Deployment
+1. Run `npm run self-evolve` locally
+2. Fix any critical issues
+3. Push to repository (triggers CI)
+4. Review CI results
+5. Deploy when all checks pass
+
+### Monitoring
+- Enable hourly checks with `npm run activate`
+- Review diagnostic reports regularly
+- Address "FAIR" or "CRITICAL" scores promptly
+
+## 🔧 Customization
+
+### Adding Custom Checks
+
+Edit `scripts/diagnose.mjs` to add new diagnostics:
+```javascript
+// Example: Check for custom configuration
+console.log('\n🔍 Checking custom config...');
+const customConfigPath = path.join(rootDir, 'config/custom.json');
+if (fs.existsSync(customConfigPath)) {
+  console.log('  ✅ Custom config present');
+  passedChecks++;
+} else {
+  findings.push({ type: 'missing_config', severity: 'medium' });
+  healthScore -= 5;
+  console.log('  ⚠️  Custom config missing');
+}
+```
+
+### Adding Auto-Fixes
+
+Edit `scripts/heal.mjs` to add new healing actions:
+```javascript
+// Example: Create custom config file
+const customConfigPath = path.join(rootDir, 'config/custom.json');
+if (!fs.existsSync(customConfigPath)) {
+  const defaultConfig = { feature: 'enabled' };
+  fs.writeFileSync(customConfigPath, JSON.stringify(defaultConfig, null, 2));
+  console.log('  ✅ Created custom config');
+  healingActions++;
+}
+```
+
+## 📈 Performance Impact
+
+The self-evolution system is designed for minimal overhead:
+- **Diagnostic scan**: ~1-2 seconds
+- **Healing operations**: ~500ms - 1 second
+- **Verification suite**: ~2-3 seconds
+- **Total cycle**: ~5-7 seconds
+
+## 🎉 Integration Complete!
+
+Your platform now has:
+- ✅ Automated health monitoring
+- ✅ Self-healing capabilities
+- ✅ Continuous verification
+- ✅ CI/CD integration
+- ✅ Hourly self-audit loops
+- ✅ Comprehensive documentation
+
+## 🚀 Next Steps
+
+1. Run `npm run diagnose` to see current health score
+2. Address any critical issues
+3. Set up CI/CD triggers in your repository
+4. Consider enabling `npm run activate` for production monitoring
+5. Review health reports regularly
+
+---
+
+**System Status:** 🌐 MASTER PLATFORM SELF-EVOLUTION ACTIVATED
+
+For issues or questions, refer to the main documentation in `360_DEGREE_ENHANCEMENTS.md`.

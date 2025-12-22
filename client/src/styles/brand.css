@@ -1,31 +1,32 @@
 /* Brand Design Tokens - The Genuine Love Project */
 
 :root {
-  /* Primary brand palette */
-  --glp-sage: #8fbf9f;
-  --glp-sage-light: #b8d9c2;
-  --glp-sage-deep: #5a9a6e;
-  
-  /* Warm accents */
-  --glp-blush: #f5c5c5;
-  --glp-clay: #c89a82;
-  --glp-gold: #d4b768;
-  
-  /* Neutral palette */
-  --glp-ink: #2d3748;
-  --glp-paper: #faf9f7;
-  --glp-mist: #f8fafc;
-  
-  /* Semantic colors */
-  --glp-heart: #b45b5b;
-  --glp-sun: #eac33b;
-  --glp-forest: #2d5a4a;
-  
-  /* Legacy tokens for compatibility */
-  --glp-sage-500: #8fbf9f;
-  --glp-ink-900: #0f172a;
-  --glp-mist-50: #f8fafc;
-  --glp-gold-500: #d4af37;
+  /* Genuine Love Project — Serenity Sage System */
+  --glp-primary: #8FBF9F;
+  --glp-secondary: #F5C5C5;
+  --glp-accent: #D4AF37;
+  --glp-gold: #D4AF37;
+
+  --glp-bg: #FAF9F7;
+  --glp-paper: #FAF9F7;
+  --glp-mist: #F8FAFC;
+
+  --glp-text: #2D3748;
+  --glp-ink: #2D3748;
+
+  --glp-border: #E5E7EB;
+  --glp-muted: #6B7280;
+
+  --glp-success: #22C55E;
+  --glp-warning: #F59E0B;
+  --glp-danger: #EF4444;
+  --glp-info: #3B82F6;
+}
+
+/* Global “healing luxury” background */
+body {
+  background: linear-gradient(180deg, var(--glp-bg), var(--glp-mist));
+  color: var(--glp-text);
 }
 
 .dark {

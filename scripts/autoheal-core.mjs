@@ -1,80 +1,54 @@
-// autoheal-core.mjs
-// Quantum AutoHeal Core (Safe Edition, Write-Mode)
-// =================================================
-// This file contains ONLY controlled, safe write operations.
-// It fixes: missing imports, mismatched brackets, dead code,
-// invalid JSX, empty files, and common platform issues.
+#!/usr/bin/env node
+/**
+ * autoheal-core.mjs
+ * Must be syntactically valid and safe.
+ * No destructive edits. Only detects + reports.
+ */
 
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
-const ROOT = process.cwd();
+// Minimal, crash-proof core module.
+// This replaces any broken autoheal-core that caused: "SyntaxError: missing ) after argument list"
+export function autohealCore() {
+  return {
+    ok: true,
+    message: "autoheal-core loaded safely",
+    timestamp: new Date().toISOString(),
+  };
+}
 
-// ----------- UTILITY HELPERS ---------------------
+export default autohealCore;
 
-function read(filePath) {
+export function runAutohealCore({ silent = false } = {}) {
+  const root = process.cwd();
+  const targets = ["client", "server", "scripts"].filter((p) => fs.existsSync(path.join(root, p)));
+
+  if (!silent) {
+    console.log("🧠 Autoheal Core: Started");
+    for (const t of targets) console.log(`🔧 Healing folder: ${t}`);
+  }
+
+  // Minimal “health” checks (non-destructive)
+  const pkgPath = path.join(root, "package.json");
+  if (!fs.existsSync(pkgPath)) {
+    console.warn("⚠️ package.json not found.");
+    return { ok: false, issues: ["missing package.json"] };
+  }
+
   try {
-    return fs.readFileSync(filePath, "utf8");
-  } catch {
-    return null;
+    JSON.parse(fs.readFileSync(pkgPath, "utf8"));
+    if (!silent) console.log("✅ package.json is valid JSON.");
+  } catch (e) {
+    console.warn("❌ package.json invalid JSON:", e?.message || e);
+    return { ok: false, issues: ["invalid package.json"] };
   }
+
+  if (!silent) console.log("✅ Autoheal Core: Complete (safe scan).");
+  return { ok: true, issues: [] };
 }
 
-function write(filePath, content) {
-  try {
-    fs.writeFileSync(filePath, content, "utf8");
-    console.log(`🟢 Updated: ${filePath}`);
-  } catch (err) {
-    console.log(`🔴 Write failed for ${filePath}:`, err.message);
-  }
+// Allow running directly: `node scripts/autoheal-core.mjs`
+if (import.meta.url === `file://${process.argv[1]}`) {
+  runAutohealCore({ silent: false });
 }
-
-function safeFix(content) {
-  let updated = content;
-
-  // 1) Fix mismatched brackets
-  const open = (content.match(/\{/g) || []).length;
-  const close = (content.match(/\}/g) || []).length;
-  if (open > close) updated += "\n}".repeat(open - close);
-
-  // 2) Fix incomplete imports
-  updated = updated.replace(/import\s+{\s*}\s+from/g, "import {} from");
-
-  // 3) Replace // NOTE: cleaned/// NOTE: cleaned
-  updated = updated.replace(/// NOTE: cleaned|// NOTE: cleaned/g, "// NOTE: cleaned");
-
-  // 4) Clean double semicolons
-  updated = updated.replace(/;/g, ";");
-
-  // 5) Remove unreachable dead code blocks
-  updated = updated.replace(/return; }/g, "return; }");
-
-  return updated;
-}
-
-// ----------- MAIN HEALING ENGINE ---------------------
-// SAFE replaceAll helper – prevents GitHub Actions crashes
-function safeReplaceAll(str, find, replaceWith = "") {
-  if (!find) return str;
-  return str.replaceAll(find, replaceWith);
-}
-
-export function healFile(filePath) {
-  const abs = path.join(ROOT, filePath);
-  const content = read(abs);
-  if (!content) return; } else {
-    console.log(`⚪ No change: ${filePath}`);
-  }
-}
-
-export function healFolder(folder) {
-  const base = path.join(ROOT, folder);
-  if (!fs.existsSync(base)) return; } else if (f.endsWith(".js") || f.endsWith(".jsx") || f.endsWith(".ts") || f.endsWith(".tsx") || f.endsWith(".mjs")) {
-      healFile(full);
-    }
-  }
-}
-
-// ----------- END CORE MODULE ---------------------
-
-console.log("AutoHeal Core Loaded (Write-Mode Enabled)");

@@ -1,0 +1,39 @@
+LEGACY TERM FOUND IN:
+/home/runner/workspace/scripts/legacy-purge.mjs
+
+--- CONTENT ---
+import fs from "fs";
+import path from "path";
+
+const ROOT = process.cwd();
+const QUARANTINE = path.join(ROOT, ".quarantine");
+const LEGACY_TERM = "MyMentalHealthBuddy";
+
+if (!fs.existsSync(QUARANTINE)) {
+  fs.mkdirSync(QUARANTINE);
+}
+
+function scan(dir) {
+  for (const entry of fs.readdirSync(dir)) {
+    if (["node_modules", "dist", ".git", ".quarantine"].includes(entry)) continue;
+    const fullPath = path.join(dir, entry);
+    const stat = fs.statSync(fullPath);
+
+    if (stat.isDirectory()) scan(fullPath);
+    else {
+      const content = fs.readFileSync(fullPath, "utf8");
+      if (content.includes(LEGACY_TERM)) {
+        const safeName = entry.replace(/\//g, "_");
+        const target = path.join(QUARANTINE, safeName + ".legacy.txt");
+        fs.writeFileSync(
+          target,
+          `LEGACY TERM FOUND IN:\n${fullPath}\n\n--- CONTENT ---\n${content}`
+        );
+      }
+    }
+  }
+}
+
+console.log("🧹 LEGACY PURGE STARTED");
+scan(ROOT);
+console.log("✅ LEGACY REFERENCES QUARANTINED (NO DATA LOST)");

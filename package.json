@@ -7,10 +7,11 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "node server/index.mjs",
-    "start": "node server/index.mjs",
+    "dev": "node server/dev.mjs",
     "build": "vite build",
-    "db:push": "drizzle-kit push"
+    "start": "node server/index.mjs",
+    "db:push": "drizzle-kit push",
+    "test": "node -e \"console.log('test placeholder: add real tests later')\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -69,6 +70,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "depcheck": "^1.4.7",
     "drizzle-kit": "^0.31.2",
     "postcss": "^8.4.49",
     "vite": "^5.4.11"

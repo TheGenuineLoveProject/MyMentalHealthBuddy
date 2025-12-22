@@ -1,0 +1,1 @@
+import"./index-1oGxw4rX.js";import{r as i}from"./vendor-react-CB2Jy2Kr.js";const o=i.createContext(null);function r(){const t=i.useContext(o);if(!t)throw new Error("useGamification must be used within a GamificationProvider");return t}export{r as u};

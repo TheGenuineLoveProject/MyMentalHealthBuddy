@@ -1,0 +1,13 @@
+LEGACY TERM FOUND IN:
+/home/runner/workspace/_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_canva-app.js
+
+--- CONTENT ---
+// 🌎 MyMentalHealthBuddy — Canva Integration Source
+console.log("✅ Canva app source connected successfully.");
+
+// Optional future integrations (OAuth, templates, etc.)
+export default {
+  name: "MyMentalHealthBuddy",
+  version: "1.0.0",
+  description: "AI-powered mental health tools from A to Z"
+};
