@@ -10,11 +10,12 @@ function run(cmd, args = []) {
   const r = spawnSync(cmd, args, { stdio: "inherit", shell: process.platform === "win32" });
   return r.status ?? 0;
 }
-// Safe no-op shim so permanent-fix / scripts don't crash if this file is referenced.
-// Keep this file forever unless you fully remove all references.
-console.log("✅ autorepair-project shim: OK (no-op).");
+// scripts/autorepair-project.mjs
+// START
+console.log("🧩 autorepair-project: placeholder present (no-op).");
+console.log("✅ This file exists to satisfy script references safely.");
 process.exit(0);
-
+// END
 console.log("🛠️ autorepair-project.mjs: starting safe checks…");
 
 // 1) Validate package.json

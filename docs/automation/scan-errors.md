@@ -1,6 +1,6 @@
 # QuantumBrain Error Scanner (Safe Edition, 8888^)
 
-**Owner:** © Maria Landa / MyMentalHealthBuddy / The Genuine Love Project  
+**Owner:** © Maria Landa / The Genuine Love Project / The Genuine Love Project  
 **Script:** `scripts/scan-errors.mjs`  
 **Command:** `npm run scan:errors`
 

@@ -1,6 +1,6 @@
 /**
  * CONTENT_AUTOMATION_GLP_v1.0_8888^
- * © Maria Landa / The Genuine Love Project / MyMentalHealthBuddy
+ * © Maria Landa / The Genuine Love Project / The Genuine Love Project
  * Safe, human-triggered content pack generator (dev-only)
  */
 

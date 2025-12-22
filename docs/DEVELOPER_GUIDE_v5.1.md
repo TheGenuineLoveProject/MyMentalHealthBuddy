@@ -33,7 +33,7 @@ docs/DEVELOPER_GUIDE_v5.1.md
 
 ⭐ DEVELOPER GUIDE v5.1
 
-MyMentalHealthBuddy — A→Z 360° Platform Engineering Manual
+The Genuine Love Project — A→Z 360° Platform Engineering Manual
 
 (MIT–Harvard–Stanford–Yale–CMU Derived Standards)
 

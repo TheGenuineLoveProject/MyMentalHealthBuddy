@@ -16,7 +16,7 @@ Let’s proceed.
 
 ⭐ 1️⃣ FULL API_REFERENCE v5.1
 
-MyMentalHealthBuddy — Complete Backend API Specification
+The Genuine Love Project — Complete Backend API Specification
 
 (MIT–Harvard–Stanford Level • Zero-Knowledge Friendly)
 
@@ -25,7 +25,7 @@ docs/API_REFERENCE_v5.1.md
 
 ⸻
 
-📘 API REFERENCE — MyMentalHealthBuddy v5.1
+📘 API REFERENCE — The Genuine Love Project v5.1
 
 Complete A→Z documentation of every backend route.
 
@@ -61,7 +61,7 @@ Response
 
 {
   "status": "healthy",
-  "message": "MyMentalHealthBuddy API is running.",
+  "message": "The Genuine Love Project API is running.",
   "environment": "development",
   "version": "2.0.0"
 }

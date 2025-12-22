@@ -70,8 +70,9 @@ app.use('/api/gamification', gamificationRouter);
 app.use('/api/onboarding', onboardingRouter);
 app.use('/api/therapy', therapyRouter);
 
-// Health check endpoint
-app.get('/health', (_req, res) => res.json({ ok: true, app: 'The Genuine Love Project' }));
+app.get("/api/health", (req, res) => {
+  res.status(200).json({ ok: true, service: "TheGenuineLoveProject", time: new Date().toISOString() });
+});
 
 // Serve frontend (Vite build output)
 const distPath = join(__dirname, "../client/dist");

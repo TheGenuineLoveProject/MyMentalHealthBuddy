@@ -33,11 +33,11 @@ function ensureScript(filename, contents) {
 ensureScript(
   "permanent-fix.mjs",
   `// scripts/permanent-fix.mjs
-// Big heal script for MyMentalHealthBuddy
+// Big heal script for The Genuine Love Project
 import { execSync } from "child_process";
 import fs from "fs";
 
-console.log("\\n💛 Running Permanent Heal for MyMentalHealthBuddy...");
+console.log("\\n💛 Running Permanent Heal for The Genuine Love Project...");
 
 // Kill stray Node processes (gently ignore errors)
 try {
@@ -113,7 +113,7 @@ ensureScript(
 
 import fs from "fs";
 
-console.log("\\n💛 MyMentalHealthBuddy Guardian — for Maria and every human.");
+console.log("\\n💛 The Genuine Love Project Guardian — for Maria and every human.");
 
 const messages = [
   "You are not broken. You are learning.",

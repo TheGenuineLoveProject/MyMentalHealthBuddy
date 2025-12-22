@@ -36,6 +36,23 @@ const scanUi = await safeImport('./scan-ui.mjs');
 console.log("\n🔮 QuantumBrain Healer — Safe Edition");
 console.log("-------------------------------------\n");
 
+// START SAFE AUTOHEAL LOAD (paste this inside healer-orchestrator.mjs)
+let autohealCoreFn = null;
+
+try {
+  const mod = await import("./autoheal-core.mjs");
+  autohealCoreFn = mod.autohealCore || null;
+  console.log("✅ [HEALER] autoheal-core loaded.");
+} catch (e) {
+  console.log("⚠️ [HEALER] autoheal-core missing or invalid. Continuing safely.");
+}
+
+if (autohealCoreFn) {
+  const result = autohealCoreFn();
+  if (result?.ok) console.log("✅ [HEALER] autoheal-core completed (safe).");
+}
+// END SAFE AUTOHEAL LOAD
+
 async function runHealer() {
   console.log("🟣 Starting Healing Sequence...");
 

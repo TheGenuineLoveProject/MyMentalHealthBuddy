@@ -69,7 +69,7 @@ function checkJson(relativePath) {
 
 function main() {
   console.log("────────────────────────────");
-  console.log("💛 MyMentalHealthBuddy — Heal Tool");
+  console.log("💛 The Genuine Love Project — Heal Tool");
   console.log("   (Love + Safety + Error Guard)");
   console.log("────────────────────────────");
 

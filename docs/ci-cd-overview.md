@@ -1,9 +1,9 @@
-# MyMentalHealthBuddy – CI/CD & Self-Healing Overview
+# The Genuine Love Project – CI/CD & Self-Healing Overview
 
 This project uses **one master GitHub Actions workflow**:
 
 - File: `.github/workflows/mmb-master.yml`
-- Name: `MyMentalHealthBuddy-Master-AutoEvolution`
+- Name: `The Genuine Love Project-Master-AutoEvolution`
 
 ## Pipeline Stages
 
@@ -29,7 +29,7 @@ Set these in **GitHub → Settings → Secrets and variables → Actions → Sec
   → full pipeline runs: diagnose → security → autoheal → verify → build → deploy → healer.
 
 - **Manual run**  
-  In the *Actions* tab, select `MyMentalHealthBuddy-Master-AutoEvolution` → *Run workflow*.
+  In the *Actions* tab, select `The Genuine Love Project-Master-AutoEvolution` → *Run workflow*.
 
 - **Daily automatic scan**  
   Triggered by the cron schedule `0 10 * * *` (10:00 UTC).
