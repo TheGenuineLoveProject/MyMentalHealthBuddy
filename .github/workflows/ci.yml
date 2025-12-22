@@ -29,4 +29,5 @@ jobs:
           NODE_ENV: production
 
       - name: Type check
-        run: npx tsc --noEmit || true
+        run: npx tsc --noEmit
+        continue-on-error: true
