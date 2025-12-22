@@ -5,6 +5,98 @@ import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO.jsx";
 import DailyAffirmations from "../components/DailyAffirmations.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
+// client/src/pages/Dashboard.jsx
+import React from "react";
+import "../styles/brand.css";
+
+export default function Dashboard() {
+  return (
+    <div className="glp-page">
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "28px 18px 60px" }}>
+        {/* Header */}
+        <div className="glp-card" style={{ padding: 22, marginBottom: 18 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+            <div>
+              <div className="glp-chip" aria-label="Brand chip">
+                <span style={{ width: 10, height: 10, borderRadius: 999, background: "var(--glp-primary)" }} />
+                <span style={{ fontWeight: 700 }}>TheGenuineLoveProject</span>
+              </div>
+
+              <h1 className="glp-h1" style={{ margin: "10px 0 6px", fontSize: 34 }}>
+                Mental Health from A to Z
+              </h1>
+              <p className="glp-muted" style={{ margin: 0, lineHeight: 1.5 }}>
+                Gentle tools for reflection and growth. Not therapy. Not diagnosis. Not crisis services.
+              </p>
+            </div>
+
+            <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+              <button className="glp-btn" onClick={() => alert("Open Mood Check-In (wire next)")} >
+                Mood Check-In
+              </button>
+              <button className="glp-btn secondary" onClick={() => alert("Open Journal (wire next)")}>
+                Journal
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Main grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: 14,
+          }}
+        >
+          {/* Card 1 */}
+          <section className="glp-card" style={{ padding: 18 }}>
+            <h2 style={{ margin: "0 0 8px", fontSize: 18 }}>Today’s tiny step</h2>
+            <p className="glp-muted" style={{ margin: "0 0 14px" }}>
+              What is one gentle thing you can do in the next 10 minutes?
+            </p>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <button className="glp-btn" onClick={() => alert("Save tiny step (wire next)")}>
+                Save
+              </button>
+              <button className="glp-btn secondary" onClick={() => alert("Generate prompt (wire AI next)")}>
+                Give me a prompt
+              </button>
+            </div>
+          </section>
+
+          {/* Card 2 */}
+          <section className="glp-card" style={{ padding: 18 }}>
+            <h2 style={{ margin: "0 0 8px", fontSize: 18 }}>Quick reflection</h2>
+            <ul className="glp-muted" style={{ margin: 0, paddingLeft: 18, lineHeight: 1.7 }}>
+              <li>What happened?</li>
+              <li>What did I feel in my body?</li>
+              <li>What did I need most?</li>
+              <li>What’s one kind reframe?</li>
+            </ul>
+          </section>
+
+          {/* Card 3 */}
+          <section className="glp-card" style={{ padding: 18 }}>
+            <h2 style={{ margin: "0 0 8px", fontSize: 18 }}>Your space</h2>
+            <p className="glp-muted" style={{ margin: "0 0 14px" }}>
+              This is a calm, private space for growth. You decide the pace.
+            </p>
+            <div className="glp-chip">
+              <span style={{ fontWeight: 700, color: "var(--glp-primary)" }}>Tip:</span>
+              <span>Small steps count.</span>
+            </div>
+          </section>
+        </div>
+
+        {/* Footer note */}
+        <p className="glp-muted" style={{ marginTop: 16, fontSize: 13 }}>
+          Safety note: This app is not a crisis or therapy service. For emergencies, contact local emergency services or a licensed professional.
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function Dashboard() {
   const { user, logout } = useAuth();

@@ -78,7 +78,7 @@ Built to help you heal, grow, and live in Genuine Love.
 This is a **monorepo** using npm workspaces:
 
 ```
-MyMentalHealthBuddy/
+TheGenuineLoveProject/
 ├── apps/
 │   ├── client/          # React frontend
 │   ├── server/          # Express backend
@@ -106,7 +106,7 @@ For detailed monorepo documentation, see [MONOREPO.md](MONOREPO.md).
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd MyMentalHealthBuddy
+cd TheGenuineLoveProject
 
 # Install dependencies
 npm install
@@ -327,7 +327,7 @@ For issues, questions, or feedback:
 
 ## ⚠️ Disclaimer
 
-**MyMentalHealthBuddy is not a replacement for professional mental health care.**
+**TheGenuineLoveProject is not a replacement for professional mental health care.**
 
 This platform provides supportive resources and AI-assisted conversations, but it is NOT:
 - A substitute for therapy or counseling

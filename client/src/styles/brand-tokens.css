@@ -1,0 +1,17 @@
+/* client/src/styles/brand-tokens.css */
+
+:root {
+  /* Genuine Love Project (GLP) tokens */
+  --glp-sage: #a4c3b2;
+  --glp-sage-deep: #6d9b8d;
+  --glp-blush: #eac3b5;
+  --glp-gold: #eac33b;
+  --glp-ink: #1c1c1c;
+  --glp-paper: #f6f7f8;
+
+  /* RGB helpers for rgba() replacements */
+  --glp-sage-rgb: 164, 195, 178;
+  --glp-sage-deep-rgb: 109, 155, 141;
+  --glp-blush-rgb: 234, 195, 181;
+  --glp-paper-rgb: 246, 247, 248;
+}
