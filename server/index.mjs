@@ -15,18 +15,6 @@ import healthRouter from './routes/health.mjs';
 
 import process from "node:process";
 
-const server = app.listen(PORT, HOST, () => {
-  console.log(`✅ Server listening on http://${HOST}:${PORT}`);
-});
-
-server.on("error", (err) => {
-  if (err.code === "EADDRINUSE") {
-    console.error(`❌ Port ${PORT} already in use. Shutting down cleanly.`);
-    process.exit(1);
-  } else {
-    throw err;
-  }
-});
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -38,19 +26,13 @@ if (isProduction && !process.env.DATABASE_URL) {
   process.exit(1);
 }
 
-const sessionStore =
-  isProduction && process.env.DATABASE_URL
-    ? new PgSession({
-        conString: process.env.DATABASE_URL,
-        tableName: "user_sessions",
-        createTableIfMissing: true,
-      })
-    : undefined;
 // Trust proxy for secure cookies behind load balancer (Autoscale)
 app.set('trust proxy', 1);
 
 // --- basic middleware ---
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false
+}));
 app.use(compression());
 app.use(express.json({ limit: '1mb' }));
 
@@ -74,7 +56,7 @@ app.use('/api/health', healthRouter);
 // --- health ---
 app.get('/health', (_req, res) => res.json({ ok: true, app: 'The Genuine Love Project' }));
 
-// --- serve Vite build ---
+// --- serve Vite build in production ---
 const distPath = join(__dirname, '..', 'client', 'dist');
 app.use(express.static(distPath));
 
@@ -86,6 +68,24 @@ app.get('*', (_req, res) => {
 const PORT = Number(process.env.PORT ?? 5000);
 const HOST = process.env.HOST ?? "0.0.0.0";
 
-app.listen(PORT, HOST, () => {
+const server = app.listen(PORT, HOST, () => {
   console.log(`✅ Server listening on http://${HOST}:${PORT}`);
+});
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(`❌ Port ${PORT} already in use. Shutting down cleanly.`);
+    process.exit(1);
+  } else {
+    throw err;
+  }
+});
+
+// Graceful shutdown
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received, shutting down gracefully');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
 });

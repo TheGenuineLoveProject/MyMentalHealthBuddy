@@ -1,26 +1,47 @@
-/* client/src/styles/brand.css */
-@import "./styles/brand.css";
-/* Light theme */
-::root {
-  /* Replace these with your exact approved brand palette */
-  --glp-sage-500: #8fbf9f;  /* Serenity Sage */
-  --glp-ink-900:  #0f172a;  /* deep ink */
-  --glp-mist-50:  #f8fafc;  /* soft background */
-  --glp-gold-500: #d4af37;  /* Eternal Gold accent */
+/* Brand Design Tokens - The Genuine Love Project */
+
+:root {
+  /* Primary brand palette */
+  --glp-sage: #8fbf9f;
+  --glp-sage-light: #b8d9c2;
+  --glp-sage-deep: #5a9a6e;
+  
+  /* Warm accents */
+  --glp-blush: #f5c5c5;
+  --glp-clay: #c89a82;
+  --glp-gold: #d4b768;
+  
+  /* Neutral palette */
+  --glp-ink: #2d3748;
+  --glp-paper: #faf9f7;
+  --glp-mist: #f8fafc;
+  
+  /* Semantic colors */
+  --glp-heart: #b45b5b;
+  --glp-sun: #eac33b;
+  --glp-forest: #2d5a4a;
+  
+  /* Legacy tokens for compatibility */
+  --glp-sage-500: #8fbf9f;
+  --glp-ink-900: #0f172a;
+  --glp-mist-50: #f8fafc;
+  --glp-gold-500: #d4af37;
 }
 
 .dark {
-  --bg: 15 23 42;
-  --fg: 248 250 252;
-
-  --muted: 148 163 184;
-  --border: 51 65 85;
-
-  --card: 30 41 59;
-  --ring: 143 191 159;
-}
-html, body {
-  color: var(--glp-ink-900);
-  background: var(--glp-mist-50);
-  border-color: var(--glp-sage-500);
+  --glp-sage: #6ea584;
+  --glp-sage-light: #4d8560;
+  --glp-sage-deep: #8fbf9f;
+  
+  --glp-blush: #d4a5a5;
+  --glp-clay: #a87d68;
+  --glp-gold: #c4a558;
+  
+  --glp-ink: #f5f5f5;
+  --glp-paper: #1a202c;
+  --glp-mist: #2d3748;
+  
+  --glp-heart: #c87070;
+  --glp-sun: #d4b048;
+  --glp-forest: #4a9a7a;
 }

@@ -1,4 +1,4 @@
-import { BRAND } from "@shared/brand";
+import { BRAND } from "@shared/brand.mjs";
 
 export { BRAND };
 
@@ -16,7 +16,6 @@ export function applyBrandToDocument(): void {
 
   document.title = BRAND.seo?.title || BRAND.name;
 
-  // Optional SEO meta update (safe if tag exists)
   const meta = document.querySelector('meta[name="description"]');
   if (meta) meta.setAttribute("content", BRAND.seo.description);
 

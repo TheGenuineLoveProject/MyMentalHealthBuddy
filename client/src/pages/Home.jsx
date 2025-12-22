@@ -1,7 +1,6 @@
 import { Link } from "wouter";
 import { Heart, MessageCircle, BarChart3, Notebook, Shield, Clock, Sparkles, ArrowRight, Star } from "lucide-react";
 import SEO from "../components/SEO.jsx";
-import React from "react";
 import TglpNavbar from "../components/TglpNavbar";
 
 function FeatureCard({ title, body }) {
@@ -12,7 +11,9 @@ function FeatureCard({ title, body }) {
     </div>
   );
 }
+
 const logo = "/logo/primary.png";
+
 export default function Home() {
   return (
     <div className="min-h-screen">
@@ -20,13 +21,13 @@ export default function Home() {
 
       <main className="mx-auto max-w-6xl px-4 py-10">
         {/* HERO */}
-          <div className="min-h-screen" style={{
-            background:
-              "radial-gradient(900px 600px at 20% 10%, rgba(var(--glp-sage-rgb), 0.22), transparent 60%)," +
-              "radial-gradient(900px 600px at 80% 15%, rgba(var(--glp-blush-rgb), 0.18), transparent 60%)," +
-              "radial-gradient(900px 600px at 50% 90%, rgba(47,93,93,0.14), transparent 60%)," +
-              "linear-gradient(180deg, var(--ivory), var(--ivory))"
-          }}>
+        <section className="relative min-h-[60vh] rounded-2xl p-8" style={{
+          background:
+            "radial-gradient(900px 600px at 20% 10%, rgba(143, 191, 159, 0.22), transparent 60%)," +
+            "radial-gradient(900px 600px at 80% 15%, rgba(245, 197, 197, 0.18), transparent 60%)," +
+            "radial-gradient(900px 600px at 50% 90%, rgba(47,93,93,0.14), transparent 60%)," +
+            "linear-gradient(180deg, var(--glp-paper), var(--glp-paper))"
+        }}>
           {/* glow orbs */}
           <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-40"
                style={{ background: "radial-gradient(circle, var(--glp-sage) 0%, transparent 60%)" }} />
@@ -36,21 +37,21 @@ export default function Home() {
                style={{ background: "radial-gradient(circle, var(--glp-sage-deep) 0%, transparent 60%)" }} />
 
           <div className="relative">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(var(--glp-sage-deep-rgb), 0.25)] bg-white/60 px-3 py-1 text-xs font-semibold text-[var(--glp-sage-deep)]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[rgba(90,154,110,0.25)] bg-white/60 px-3 py-1 text-xs font-semibold text-[var(--glp-sage-deep)]">
               ✨ AI-Powered Mental Wellness Platform
             </div>
             <header className="w-full flex items-center justify-between py-6">
               <div className="flex items-center gap-3">
                 <img src={logo} alt="The Genuine Love Project" className="h-10 w-10 rounded-xl border" style={{ borderColor: "var(--border)" }} />
                 <div className="leading-tight">
-                  <div className="font-semibold" style={{ color: "var(--text)" }}>The Genuine Love Project</div>
-                  <div className="text-sm" style={{ color: "var(--muted)" }}>Live in Genuine Love</div>
+                  <div className="font-semibold" style={{ color: "var(--glp-ink)" }}>The Genuine Love Project</div>
+                  <div className="text-sm" style={{ color: "var(--muted-foreground)" }}>Live in Genuine Love</div>
                 </div>
               </div>
 
               <nav className="flex items-center gap-3">
-                <a className="text-sm" href="/login">Sign In</a>
-                <a className="text-sm badge-gold px-3 py-2" href="/register">Get Started</a>
+                <Link href="/login" className="text-sm">Sign In</Link>
+                <Link href="/register" className="text-sm badge-gold px-3 py-2">Get Started</Link>
               </nav>
             </header>
 
@@ -64,19 +65,19 @@ export default function Home() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="/get-started"
+              <Link
+                href="/register"
                 className="rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm"
                 style={{ background: "linear-gradient(90deg, var(--glp-sage-deep) 0%, var(--glp-sage) 55%, var(--glp-gold) 100%)" }}
               >
                 Start Your Journey →
-              </a>
-              <a
-                href="/sign-in"
-                className="rounded-2xl border border-[rgba(var(--glp-sage-deep-rgb), 0.25)] bg-white/70 px-5 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+              </Link>
+              <Link
+                href="/login"
+                className="rounded-2xl border border-[rgba(90,154,110,0.25)] bg-white/70 px-5 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
               >
                 Sign In
-              </a>
+              </Link>
             </div>
 
             <div className="mt-6 flex items-center gap-3 text-sm text-[var(--glp-ink)]/70">
@@ -135,19 +136,19 @@ export default function Home() {
               Create your account and start your first journal + mood check-in in under 2 minutes.
             </p>
             <div className="mt-4 flex gap-3">
-              <a
-                href="/get-started"
+              <Link
+                href="/register"
                 className="rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm"
                 style={{ background: "linear-gradient(90deg, var(--glp-sage-deep) 0%, var(--glp-sage) 55%, var(--glp-gold) 100%)" }}
               >
                 Get Started
-              </a>
-              <a
-                href="/learn"
-                className="rounded-2xl border border-[rgba(var(--glp-sage-deep-rgb), 0.25)] bg-white/70 px-5 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+              </Link>
+              <Link
+                href="/blog"
+                className="rounded-2xl border border-[rgba(90,154,110,0.25)] bg-white/70 px-5 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
               >
                 Learn More
-              </a>
+              </Link>
             </div>
           </div>
         </section>

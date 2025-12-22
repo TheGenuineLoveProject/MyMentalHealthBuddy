@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import FigmaPanel from "../design/FigmaPanel.jsx";
-import CanvaPanel from "../design/CanvaPanel.jsx";
-import React from "react";
+import { useState } from "react";
 
 export default function DesignDashboard() {
+  const [tab, setTab] = useState("dashboard");
+
   return (
     <div
       style={{
         minHeight: "100vh",
-        background: "var(--bg)",
-        color: "var(--text)",
+        background: "var(--background)",
+        color: "var(--foreground)",
       }}
     >
       <header
@@ -17,9 +16,9 @@ export default function DesignDashboard() {
           position: "sticky",
           top: 0,
           zIndex: 10,
-          background: "rgba(243, 247, 246, 0.85)", // uses brand bg tone
+          background: "rgba(243, 247, 246, 0.85)",
           backdropFilter: "blur(10px)",
-          borderBottom: "1px solid var(--border)",
+          borderBottom: "1px solid hsl(var(--border))",
         }}
       >
         <div
@@ -34,15 +33,15 @@ export default function DesignDashboard() {
           }}
         >
           <div>
-            <div style={{ fontSize: 14, color: "var(--muted)" }}>The Genuine Love Project</div>
+            <div style={{ fontSize: 14, color: "hsl(var(--muted-foreground))" }}>The Genuine Love Project</div>
             <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: -0.3 }}>
-              Dashboard
+              Design Dashboard
             </div>
           </div>
 
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <button style={btnSecondary}>View Insights</button>
-            <button style={btnPrimary}>New Journal Entry</button>
+            <button style={btnSecondary} onClick={() => setTab("dashboard")}>Dashboard</button>
+            <button style={btnPrimary} onClick={() => setTab("design")}>Design Tools</button>
           </div>
         </div>
       </header>
@@ -50,11 +49,11 @@ export default function DesignDashboard() {
       <main style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px 42px" }}>
         <section style={hero}>
           <div>
-            <div style={{ fontSize: 14, color: "var(--muted)" }}>Today’s intention</div>
+            <div style={{ fontSize: 14, color: "hsl(var(--muted-foreground))" }}>Today's intention</div>
             <div style={{ fontSize: 26, fontWeight: 800, marginTop: 6 }}>
               Slow down. Feel safe. Return to genuine love.
             </div>
-            <div style={{ marginTop: 10, color: "var(--slate)" }}>
+            <div style={{ marginTop: 10, color: "hsl(var(--muted-foreground))" }}>
               Your tools are organized below — quick actions, progress, and calm focus.
             </div>
           </div>
@@ -78,7 +77,7 @@ export default function DesignDashboard() {
           </Card>
 
           <Card title="Journal" subtitle="Write, reflect, and release">
-            <div style={{ color: "var(--slate)" }}>
+            <div style={{ color: "hsl(var(--muted-foreground))" }}>
               A safe place to express thoughts, gratitude, and growth.
             </div>
             <div style={divider} />
@@ -97,7 +96,7 @@ export default function DesignDashboard() {
           </Card>
 
           <Card title="Progress" subtitle="Keep it gentle and consistent">
-            <div style={{ color: "var(--slate)" }}>
+            <div style={{ color: "hsl(var(--muted-foreground))" }}>
               Streaks are optional — consistency without pressure.
             </div>
             <div style={divider} />
@@ -118,7 +117,7 @@ function Card({ title, subtitle, children }) {
       <div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
         <div>
           <div style={{ fontSize: 16, fontWeight: 800 }}>{title}</div>
-          <div style={{ fontSize: 13, color: "var(--muted)", marginTop: 4 }}>{subtitle}</div>
+          <div style={{ fontSize: 13, color: "hsl(var(--muted-foreground))", marginTop: 4 }}>{subtitle}</div>
         </div>
         <div style={badge}>TGLP</div>
       </div>
@@ -129,19 +128,19 @@ function Card({ title, subtitle, children }) {
 
 function Metric({ label, value }) {
   return (
-    <div style={{ flex: 1, background: "var(--sage-100)", borderRadius: 12, padding: 12 }}>
-      <div style={{ fontSize: 12, color: "var(--muted)" }}>{label}</div>
+    <div style={{ flex: 1, background: "hsl(var(--muted))", borderRadius: 12, padding: 12 }}>
+      <div style={{ fontSize: 12, color: "hsl(var(--muted-foreground))" }}>{label}</div>
       <div style={{ fontSize: 18, fontWeight: 800, marginTop: 4 }}>{value}</div>
     </div>
   );
 }
 
 const hero = {
-  background: "linear-gradient(135deg, var(--sage-100), var(--white))",
-  border: "1px solid var(--border)",
+  background: "linear-gradient(135deg, hsl(var(--muted)), hsl(var(--background)))",
+  border: "1px solid hsl(var(--border))",
   borderRadius: 18,
   padding: 18,
-  boxShadow: "var(--shadow-soft)",
+  boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -157,17 +156,17 @@ const grid = {
 };
 
 const card = {
-  background: "var(--panel)",
-  border: "1px solid var(--border)",
+  background: "hsl(var(--card))",
+  border: "1px solid hsl(var(--border))",
   borderRadius: 18,
   padding: 16,
-  boxShadow: "var(--shadow-card)",
+  boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
 };
 
 const badge = {
-  background: "var(--sage-100)",
-  border: "1px solid var(--border)",
-  color: "var(--sage-700)",
+  background: "hsl(var(--muted))",
+  border: "1px solid hsl(var(--border))",
+  color: "hsl(var(--primary))",
   borderRadius: 999,
   padding: "6px 10px",
   fontSize: 12,
@@ -177,14 +176,14 @@ const badge = {
 
 const divider = {
   height: 1,
-  background: "var(--border)",
+  background: "hsl(var(--border))",
   margin: "14px 0",
 };
 
 const list = {
   margin: 0,
   paddingLeft: 18,
-  color: "var(--slate)",
+  color: "hsl(var(--muted-foreground))",
   display: "grid",
   gap: 6,
 };
@@ -192,9 +191,9 @@ const list = {
 const metricRow = { display: "flex", gap: 10, flexWrap: "wrap" };
 
 const btnPrimary = {
-  background: "var(--primary)",
-  border: "1px solid var(--primary)",
-  color: "var(--white)",
+  background: "hsl(var(--primary))",
+  border: "1px solid hsl(var(--primary))",
+  color: "hsl(var(--primary-foreground))",
   padding: "10px 12px",
   borderRadius: 12,
   fontWeight: 800,
@@ -202,9 +201,9 @@ const btnPrimary = {
 };
 
 const btnSecondary = {
-  background: "var(--white)",
-  border: "1px solid var(--border)",
-  color: "var(--sage-700)",
+  background: "hsl(var(--background))",
+  border: "1px solid hsl(var(--border))",
+  color: "hsl(var(--foreground))",
   padding: "10px 12px",
   borderRadius: 12,
   fontWeight: 800,
@@ -215,24 +214,11 @@ const btnPrimaryFull = { ...btnPrimary, width: "100%" };
 const btnSecondaryFull = { ...btnSecondary, width: "100%" };
 
 const pill = {
-  background: "var(--white)",
-  border: "1px solid var(--border)",
-  color: "var(--sage-700)",
+  background: "hsl(var(--background))",
+  border: "1px solid hsl(var(--border))",
+  color: "hsl(var(--foreground))",
   padding: "10px 12px",
   borderRadius: 999,
   fontWeight: 800,
   cursor: "pointer",
 };
-export default function DesignDashboard() {
-  const [tab, setTab] = useState("figma");
-
-  return (
-    <div>
-      <div style={{ display: "flex", gap: 8, padding: 12, borderBottom: "1px solid rgba(0,0,0,.08)" }}>
-        <button onClick={() => setTab("figma")}>Figma</button>
-        <button onClick={() => setTab("canva")}>Canva</button>
-      </div>
-      {tab === "figma" ? <FigmaPanel /> : <CanvaPanel />}
-    </div>
-  );
-}
