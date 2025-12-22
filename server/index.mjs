@@ -3,16 +3,24 @@ import express from 'express';
 import compression from 'compression';
 import helmet from "helmet";
 import cors from "cors";
-import path from "path";
 import { fileURLToPath } from "url";
 import { dirname, join } from 'path';
 import { buildSessionMiddleware } from './middleware/session.mjs';
 
+// Import all route modules
 import authRouter from './routes/auth.mjs';
 import blogRouter from './routes/blog.mjs';
 import journalRouter from './routes/journal.mjs';
 import moodRouter from './routes/mood.mjs';
 import healthRouter from './routes/health.mjs';
+import accountRouter from './routes/account.mjs';
+import adminRouter from './routes/admin.mjs';
+import aiRouter from './routes/ai.mjs';
+import analyticsRouter from './routes/analytics.mjs';
+import billingRouter from './routes/billing.mjs';
+import gamificationRouter from './routes/gamification.mjs';
+import onboardingRouter from './routes/onboarding.mjs';
+import therapyRouter from './routes/therapy.mjs';
 
 import process from "node:process";
 
@@ -23,11 +31,11 @@ const app = express();
 const isProduction = process.env.NODE_ENV === "production";
 
 if (isProduction && !process.env.DATABASE_URL) {
-  console.error("DEPLOY BLOCKED: DATABASE_URL is missing in production. Add it in Replit Deploy Secrets.");
+  console.error("DEPLOY BLOCKED: DATABASE_URL is missing in production.");
   process.exit(1);
 }
 
-// Trust proxy for secure cookies behind load balancer (Autoscale)
+// Trust proxy for secure cookies behind load balancer
 app.set('trust proxy', 1);
 
 // Core middleware
@@ -44,7 +52,7 @@ app.use(
   })
 );
 
-// Sessions (MemoryStore in dev; Postgres store in production)
+// Sessions
 app.use(buildSessionMiddleware());
 
 // API routes
@@ -53,6 +61,14 @@ app.use('/api/blog', blogRouter);
 app.use('/api/journal', journalRouter);
 app.use('/api/mood', moodRouter);
 app.use('/api/health', healthRouter);
+app.use('/api/account', accountRouter);
+app.use('/api/admin', adminRouter);
+app.use('/api/ai', aiRouter);
+app.use('/api/analytics', analyticsRouter);
+app.use('/api/billing', billingRouter);
+app.use('/api/gamification', gamificationRouter);
+app.use('/api/onboarding', onboardingRouter);
+app.use('/api/therapy', therapyRouter);
 
 // Health check endpoint
 app.get('/health', (_req, res) => res.json({ ok: true, app: 'The Genuine Love Project' }));
@@ -61,12 +77,12 @@ app.get('/health', (_req, res) => res.json({ ok: true, app: 'The Genuine Love Pr
 const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));
 
-// SPA fallback - serve index.html for all non-API routes
+// SPA fallback
 app.get("*", (req, res) => {
   res.sendFile(join(distPath, "index.html"));
 });
 
-// Error handler (always JSON)
+// Error handler
 app.use((err, req, res, next) => {
   console.error("Server error:", err);
   res.status(500).json({

@@ -8,11 +8,20 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { buildSessionMiddleware } from './middleware/session.mjs';
 
+// Import all route modules
 import authRouter from './routes/auth.mjs';
 import blogRouter from './routes/blog.mjs';
 import journalRouter from './routes/journal.mjs';
 import moodRouter from './routes/mood.mjs';
 import healthRouter from './routes/health.mjs';
+import accountRouter from './routes/account.mjs';
+import adminRouter from './routes/admin.mjs';
+import aiRouter from './routes/ai.mjs';
+import analyticsRouter from './routes/analytics.mjs';
+import billingRouter from './routes/billing.mjs';
+import gamificationRouter from './routes/gamification.mjs';
+import onboardingRouter from './routes/onboarding.mjs';
+import therapyRouter from './routes/therapy.mjs';
 
 import process from "node:process";
 
@@ -25,7 +34,7 @@ async function startDevServer() {
   // Trust proxy for secure cookies
   app.set('trust proxy', 1);
 
-  // --- basic middleware ---
+  // Basic middleware
   app.use(helmet({
     contentSecurityPolicy: false
   }));
@@ -39,46 +48,52 @@ async function startDevServer() {
     })
   );
 
-  // --- sessions ---
+  // Sessions
   app.use(buildSessionMiddleware());
 
-  // --- API routes ---
+  // API routes
   app.use('/api/auth', authRouter);
   app.use('/api/blog', blogRouter);
   app.use('/api/journal', journalRouter);
   app.use('/api/mood', moodRouter);
   app.use('/api/health', healthRouter);
+  app.use('/api/account', accountRouter);
+  app.use('/api/admin', adminRouter);
+  app.use('/api/ai', aiRouter);
+  app.use('/api/analytics', analyticsRouter);
+  app.use('/api/billing', billingRouter);
+  app.use('/api/gamification', gamificationRouter);
+  app.use('/api/onboarding', onboardingRouter);
+  app.use('/api/therapy', therapyRouter);
 
-  // --- health ---
+  // Health endpoint
   app.get('/health', (_req, res) => res.json({ ok: true, app: 'The Genuine Love Project' }));
 
-  // Create Vite server in middleware mode using the config file
+  // Create Vite server in middleware mode
   const vite = await createViteServer({
     configFile: join(__dirname, '..', 'vite.config.js'),
     server: { middlewareMode: true },
     appType: 'spa'
   });
 
-  // Use Vite's middleware for HMR and serving files
   app.use(vite.middlewares);
 
   const PORT = Number(process.env.PORT ?? 5000);
   const HOST = process.env.HOST ?? "0.0.0.0";
 
   const server = app.listen(PORT, HOST, () => {
-    console.log(`✅ Dev server listening on http://${HOST}:${PORT}`);
+    console.log(`Dev server listening on http://${HOST}:${PORT}`);
   });
 
   server.on("error", (err) => {
     if (err.code === "EADDRINUSE") {
-      console.error(`❌ Port ${PORT} already in use. Shutting down cleanly.`);
+      console.error(`Port ${PORT} already in use. Shutting down cleanly.`);
       process.exit(1);
     } else {
       throw err;
     }
   });
 
-  // Graceful shutdown
   process.on('SIGTERM', () => {
     console.log('SIGTERM received, shutting down gracefully');
     vite.close();
