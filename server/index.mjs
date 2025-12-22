@@ -13,6 +13,20 @@ import journalRouter from './routes/journal.mjs';
 import moodRouter from './routes/mood.mjs';
 import healthRouter from './routes/health.mjs';
 
+import process from "node:process";
+
+const server = app.listen(PORT, HOST, () => {
+  console.log(`✅ Server listening on http://${HOST}:${PORT}`);
+});
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(`❌ Port ${PORT} already in use. Shutting down cleanly.`);
+    process.exit(1);
+  } else {
+    throw err;
+  }
+});
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
