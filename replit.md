@@ -57,13 +57,13 @@ The application is designed for optimized production bundles with code splitting
 ### Brand Colors
 | Token | Hex | Usage |
 |-------|-----|-------|
-| sage | #8FBF9F | Primary |
+| sage | var(--glp-sage) | Primary |
 | clay | #C89A82 | Warm accent |
 | gold | #D4B768 | Golden accent |
-| forest | #2F5D5D | Deep teal |
+| forest | var(--glp-sage-deep) | Deep teal |
 | heart | #B45B5B | Compassion |
-| ink | #3A3A3A | Text |
-| ivory | #FAF9F7 | Background |
+| ink | var(--glp-ink) | Text |
+| ivory | var(--glp-paper) | Background |
 | sun | #EAC33B | Highlight |
 
 ### Crisis Detection

@@ -3,7 +3,7 @@
   "short_name": "Genuine Love",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAF9F7",
+  "background_color": "var(--glp-paper)",
   "theme_color": "#8FBF9F",
   "icons": [
     { "src": "/brand/logo.png", "sizes": "512x512", "type": "image/png" }

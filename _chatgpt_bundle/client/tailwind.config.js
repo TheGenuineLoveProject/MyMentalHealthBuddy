@@ -8,11 +8,11 @@ export default {
     extend: {
       colors: {
         sage: "#8FBF9F",
-        pink: "#F4C7C3",
-        teal: "#2F5D5D",
-        ivory: "#FAF9F7",
-        charcoal: "#3A3A3A",
-        gold: "#D4AF37",
+        pink: "var(--glp-blush)",
+        teal: "var(--glp-sage-deep)",
+        ivory: "var(--glp-paper)",
+        charcoal: "var(--glp-ink)",
+        gold: "var(--glp-gold)",
       },
       fontFamily: {
         display: ["Playfair Display", "Georgia", "serif"],

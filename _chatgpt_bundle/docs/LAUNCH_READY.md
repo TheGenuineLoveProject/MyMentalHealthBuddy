@@ -31,8 +31,8 @@
 **Brand Colors:**
 - Primary: #8FBF9F (sage), Secondary: #A8D4B8
 - Accent: #D4B768 (gold), Sun: #EAC33B
-- Heart: #B45B5B, Forest: #2F5D5D
-- Text: #3A3A3A (ink), Background: #FAF9F7 (ivory)
+- Heart: #B45B5B, Forest: var(--glp-sage-deep)
+- Text: var(--glp-ink) (ink), Background: var(--glp-paper) (ivory)
 
 ---
 

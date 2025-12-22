@@ -69,5 +69,9 @@ app.get('*', (_req, res) => {
   res.sendFile(join(distPath, 'index.html'));
 });
 
-const port = Number(process.env.PORT || 5000);
-app.listen(port, '0.0.0.0', () => console.log(`✅ server running on :${port}`));
+const PORT = Number(process.env.PORT ?? 5000);
+const HOST = process.env.HOST ?? "0.0.0.0";
+
+app.listen(PORT, HOST, () => {
+  console.log(`✅ Server listening on http://${HOST}:${PORT}`);
+});

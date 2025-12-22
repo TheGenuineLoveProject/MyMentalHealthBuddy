@@ -4,8 +4,8 @@
   "description": "Mental Health from A to Z",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAF9F7",
-  "theme_color": "#8FBF9F",
+  "background_color": "var(--glp-paper)",
+  "theme_color": "var(--glp-sage)",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

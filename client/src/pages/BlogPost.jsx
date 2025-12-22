@@ -28,18 +28,18 @@ function CommentItem({ comment, postId, slug }) {
 
   return (
     <div className="border-l-2 border-[rgba(143,191,159,0.3)] pl-4 py-3" data-testid={`comment-${comment.id}`}>
-      <div className="flex items-center gap-2 text-xs text-[#3A3A3A]/60 mb-2">
+      <div className="flex items-center gap-2 text-xs text-[var(--glp-ink)]/60 mb-2">
         <User className="w-3 h-3" />
-        <span className="font-medium text-[#2F5D5D]">{comment.authorName}</span>
+        <span className="font-medium text-[var(--glp-sage-deep)]">{comment.authorName}</span>
         <span>•</span>
         <span>{new Date(comment.createdAt).toLocaleDateString()}</span>
       </div>
-      <p className="text-sm text-[#3A3A3A]/90" data-testid={`text-comment-${comment.id}`}>{comment.content}</p>
+      <p className="text-sm text-[var(--glp-ink)]/90" data-testid={`text-comment-${comment.id}`}>{comment.content}</p>
       
       {user && (
         <button
           onClick={() => setShowReplyForm(!showReplyForm)}
-          className="mt-2 flex items-center gap-1 text-xs text-[#2F5D5D] hover:text-[#8FBF9F] transition-colors"
+          className="mt-2 flex items-center gap-1 text-xs text-[var(--glp-sage-deep)] hover:text-[var(--glp-sage)] transition-colors"
           data-testid={`button-reply-${comment.id}`}
         >
           <Reply className="w-3 h-3" /> Reply
@@ -53,13 +53,13 @@ function CommentItem({ comment, postId, slug }) {
             value={replyContent}
             onChange={(e) => setReplyContent(e.target.value)}
             placeholder="Write a reply..."
-            className="flex-1 px-3 py-2 rounded-lg border border-[rgba(47,93,93,0.25)] bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-[#8FBF9F]/50"
+            className="flex-1 px-3 py-2 rounded-lg border border-[rgba(var(--glp-sage-deep-rgb), 0.25)] bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--glp-sage)]/50"
             data-testid={`input-reply-${comment.id}`}
           />
           <button
             onClick={handleReply}
             disabled={replyMutation.isPending}
-            className="px-3 py-2 rounded-lg bg-[#2F5D5D] text-white text-sm hover:bg-[#8FBF9F] transition-colors disabled:opacity-50"
+            className="px-3 py-2 rounded-lg bg-[var(--glp-sage-deep)] text-white text-sm hover:bg-[var(--glp-sage)] transition-colors disabled:opacity-50"
             data-testid={`button-submit-reply-${comment.id}`}
           >
             <Send className="w-4 h-4" />
@@ -94,7 +94,7 @@ function CommentSection({ comments, postId, slug }) {
 
   return (
     <section className="mt-10 pt-8 border-t border-[rgba(143,191,159,0.25)]">
-      <h3 className="text-xl font-semibold text-[#2F5D5D] flex items-center gap-2 mb-6" data-testid="text-comments-title">
+      <h3 className="text-xl font-semibold text-[var(--glp-sage-deep)] flex items-center gap-2 mb-6" data-testid="text-comments-title">
         <MessageCircle className="w-5 h-5" /> Comments ({comments?.length || 0})
       </h3>
 
@@ -105,13 +105,13 @@ function CommentSection({ comments, postId, slug }) {
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Share your thoughts..."
             rows={3}
-            className="w-full px-4 py-3 rounded-xl border border-[rgba(47,93,93,0.25)] bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-[#8FBF9F]/50 resize-none"
+            className="w-full px-4 py-3 rounded-xl border border-[rgba(var(--glp-sage-deep-rgb), 0.25)] bg-white/70 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--glp-sage)]/50 resize-none"
             data-testid="textarea-new-comment"
           />
           <button
             onClick={handleSubmit}
             disabled={commentMutation.isPending || !newComment.trim()}
-            className="mt-3 px-6 py-2 rounded-xl bg-[#2F5D5D] text-white text-sm font-medium hover:bg-[#8FBF9F] transition-colors disabled:opacity-50 flex items-center gap-2"
+            className="mt-3 px-6 py-2 rounded-xl bg-[var(--glp-sage-deep)] text-white text-sm font-medium hover:bg-[var(--glp-sage)] transition-colors disabled:opacity-50 flex items-center gap-2"
             data-testid="button-submit-comment"
           >
             <Send className="w-4 h-4" /> Post Comment
@@ -119,8 +119,8 @@ function CommentSection({ comments, postId, slug }) {
         </div>
       ) : (
         <div className="mb-8 p-4 rounded-xl bg-[rgba(143,191,159,0.1)] text-center">
-          <p className="text-sm text-[#3A3A3A]/70">
-            <Link href="/login" className="text-[#2F5D5D] font-medium hover:underline" data-testid="link-login-to-comment">
+          <p className="text-sm text-[var(--glp-ink)]/70">
+            <Link href="/login" className="text-[var(--glp-sage-deep)] font-medium hover:underline" data-testid="link-login-to-comment">
               Sign in
             </Link>{" "}
             to join the conversation.
@@ -142,8 +142,8 @@ function CommentSection({ comments, postId, slug }) {
 
         {topLevelComments.length === 0 && (
           <div className="text-center py-8">
-            <MessageCircle className="w-12 h-12 mx-auto text-[#8FBF9F]/50 mb-3" />
-            <p className="text-[#3A3A3A]/60">No comments yet. Be the first to share your thoughts!</p>
+            <MessageCircle className="w-12 h-12 mx-auto text-[var(--glp-sage)]/50 mb-3" />
+            <p className="text-[var(--glp-ink)]/60">No comments yet. Be the first to share your thoughts!</p>
           </div>
         )}
       </div>
@@ -169,11 +169,11 @@ export default function BlogPost() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#FAF9F7]">
+      <div className="min-h-screen bg-[var(--glp-paper)]">
         <TglpNavbar />
         <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-          <div className="w-12 h-12 border-4 border-[#8FBF9F] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#3A3A3A]/70">Loading article...</p>
+          <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[var(--glp-ink)]/70">Loading article...</p>
         </div>
       </div>
     );
@@ -181,13 +181,13 @@ export default function BlogPost() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-[#FAF9F7]">
+      <div className="min-h-screen bg-[var(--glp-paper)]">
         <TglpNavbar />
         <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-2xl font-semibold text-[#2F5D5D]">Article not found</h2>
-          <p className="mt-2 text-[#3A3A3A]/70">The article you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-semibold text-[var(--glp-sage-deep)]">Article not found</h2>
+          <p className="mt-2 text-[var(--glp-ink)]/70">The article you're looking for doesn't exist.</p>
           <Link href="/blog">
-            <button className="mt-6 px-6 py-3 rounded-xl bg-[#2F5D5D] text-white text-sm font-medium hover:bg-[#8FBF9F] transition-colors" data-testid="button-back-to-blog">
+            <button className="mt-6 px-6 py-3 rounded-xl bg-[var(--glp-sage-deep)] text-white text-sm font-medium hover:bg-[var(--glp-sage)] transition-colors" data-testid="button-back-to-blog">
               Back to Blog
             </button>
           </Link>
@@ -205,7 +205,7 @@ export default function BlogPost() {
     : "";
 
   return (
-    <div className="min-h-screen bg-[#FAF9F7]">
+    <div className="min-h-screen bg-[var(--glp-paper)]">
       <SEO
         title={`${post.title} | The Genuine Love Project Blog`}
         description={post.excerpt || post.content?.substring(0, 160)}
@@ -214,7 +214,7 @@ export default function BlogPost() {
 
       <main className="max-w-3xl mx-auto px-4 py-10">
         <Link href="/blog">
-          <button className="flex items-center gap-2 text-sm text-[#2F5D5D] hover:text-[#8FBF9F] transition-colors mb-8" data-testid="button-back">
+          <button className="flex items-center gap-2 text-sm text-[var(--glp-sage-deep)] hover:text-[var(--glp-sage)] transition-colors mb-8" data-testid="button-back">
             <ArrowLeft className="w-4 h-4" /> Back to Blog
           </button>
         </Link>
@@ -230,11 +230,11 @@ export default function BlogPost() {
           )}
 
           <header className="mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold text-[#2F5D5D] leading-tight" data-testid="text-post-title">
+            <h1 className="text-3xl md:text-4xl font-bold text-[var(--glp-sage-deep)] leading-tight" data-testid="text-post-title">
               {post.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-[#3A3A3A]/60">
+            <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-[var(--glp-ink)]/60">
               <span className="flex items-center gap-1">
                 <User className="w-4 h-4" />
                 {post.authorName}
@@ -254,7 +254,7 @@ export default function BlogPost() {
                 {post.tags.split(",").map((tag, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 text-xs rounded-full bg-[rgba(143,191,159,0.15)] text-[#2F5D5D]"
+                    className="px-3 py-1 text-xs rounded-full bg-[rgba(var(--glp-sage-rgb), 0.15)] text-[var(--glp-sage-deep)]"
                     data-testid={`tag-${i}`}
                   >
                     {tag.trim()}
@@ -265,7 +265,7 @@ export default function BlogPost() {
           </header>
 
           <div
-            className="prose prose-lg max-w-none text-[#3A3A3A]/90 leading-relaxed"
+            className="prose prose-lg max-w-none text-[var(--glp-ink)]/90 leading-relaxed"
             style={{ whiteSpace: "pre-wrap" }}
             data-testid="text-post-content"
           >

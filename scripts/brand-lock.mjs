@@ -64,7 +64,7 @@ const rootDir = path.join(__dirname, "..");
 const BRAND_SOURCE = path.join(rootDir, "shared/brand.mjs");
 
 const BRAND_VALUES = {
-  colors: ["#6D9B8D", "#A4C3B2", "#EAC3B5", "#EAC33B", "#F6F7F8", "#1C1C1C"],
+  colors: ["#6D9B8D", "#A4C3B2", "#EAC3B5", "#EAC33B", "var(--glp-paper)", "var(--glp-ink)"],
   names: ["The Genuine Love Project", "Genuine Love"],
   taglines: ["Live in Genuine Love"],
 };

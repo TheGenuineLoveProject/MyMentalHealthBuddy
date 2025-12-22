@@ -1,67 +1,26 @@
 /* client/src/styles/brand.css */
-@import "./brand-tokens.css";
+@import "./styles/brand.css";
+/* Light theme */
+::root {
+  /* Replace these with your exact approved brand palette */
+  --glp-sage-500: #8fbf9f;  /* Serenity Sage */
+  --glp-ink-900:  #0f172a;  /* deep ink */
+  --glp-mist-50:  #f8fafc;  /* soft background */
+  --glp-gold-500: #d4af37;  /* Eternal Gold accent */
+}
 
+.dark {
+  --bg: 15 23 42;
+  --fg: 248 250 252;
+
+  --muted: 148 163 184;
+  --border: 51 65 85;
+
+  --card: 30 41 59;
+  --ring: 143 191 159;
+}
 html, body {
-  background: var(--glp-bg);
-  color: var(--glp-text);
-}
-
-.glp-page {
-  min-height: 100vh;
-  background: radial-gradient(
-      900px 500px at 20% 10%,
-      rgba(109, 155, 141, 0.18),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 500px at 80% 0%,
-      rgba(234, 195, 181, 0.20),
-      transparent 55%
-    ),
-    var(--glp-bg);
-}
-
-.glp-card {
-  background: var(--glp-surface);
-  border: 1px solid var(--glp-border);
-  border-radius: var(--glp-radius);
-  box-shadow: 0 10px 30px rgba(28, 28, 28, 0.06);
-}
-
-.glp-h1 {
-  font-family: "Playfair Display", serif;
-  letter-spacing: -0.02em;
-}
-
-.glp-muted {
-  color: var(--glp-muted);
-}
-
-.glp-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px 16px;
-  border-radius: 14px;
-  border: 1px solid var(--glp-border);
-  background: var(--glp-primary);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.glp-btn.secondary {
-  background: transparent;
-  color: var(--glp-text);
-}
-
-.glp-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--glp-border);
-  background: rgba(164, 195, 178, 0.22);
+  color: var(--glp-ink-900);
+  background: var(--glp-mist-50);
+  border-color: var(--glp-sage-500);
 }

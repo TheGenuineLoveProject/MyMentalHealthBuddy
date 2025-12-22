@@ -24,8 +24,8 @@ Add these exact hex codes to your Canva Brand Kit:
 | Secondary (Mint) | `#A4C3B2` | Backgrounds, cards, accents |
 | Accent (Warm Blush) | `#EAC3B5` | Highlights, callouts, warmth |
 | Gold (Achievement) | `#EAC33B` | Premium elements, badges |
-| Dark Text | `#1C1C1C` | Body text, paragraphs |
-| Light Background | `#F6F7F8` | Page backgrounds |
+| Dark Text | `var(--glp-ink)` | Body text, paragraphs |
+| Light Background | `var(--glp-paper)` | Page backgrounds |
 
 ### Fonts
 

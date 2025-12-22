@@ -1,24 +1,20 @@
+// tailwind.config.js
 export default {
-  darkMode: ["class"],
-  content: [
-    "./client/index.html",
-    "./client/src/**/*.{js,ts,jsx,tsx}",
-  ],
+  // ...
   theme: {
     extend: {
       colors: {
-        sage: "#8FBF9F",
-        pink: "#F4C7C3",
-        teal: "#2F5D5D",
-        ivory: "#FAF9F7",
-        charcoal: "#3A3A3A",
-        gold: "#D4AF37",
-      },
-      fontFamily: {
-        display: ["Playfair Display", "Georgia", "serif"],
-        body: ["Inter", "system-ui", "sans-serif"],
+        brand: {
+          sage: "rgb(var(--brand-sage) / <alpha-value>)",
+          gold: "rgb(var(--brand-gold) / <alpha-value>)",
+        },
+        bg: "rgb(var(--bg) / <alpha-value>)",
+        fg: "rgb(var(--fg) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        border: "rgb(var(--border) / <alpha-value>)",
+        card: "rgb(var(--card) / <alpha-value>)",
+        ring: "rgb(var(--ring) / <alpha-value>)",
       },
     },
   },
-  plugins: [],
 };

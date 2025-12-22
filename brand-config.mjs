@@ -6,9 +6,9 @@ export const BRAND = {
     serenitySage: "#6D9B8D",
     softSage: "#A4C3B2",
     blushSand: "#EAC3B5",
-    ivory: "#FAF9F7",
-    ink: "#1C1C1C",
-    eternalGold: "#D4AF37",
+    ivory: "var(--glp-paper)",
+    ink: "var(--glp-ink)",
+    eternalGold: "var(--glp-gold)",
   },
 };
 

@@ -19,9 +19,9 @@
 | Secondary | `#A4C3B2` | Backgrounds, cards, accents |
 | Accent | `#EAC3B5` | Warm highlights, callouts |
 | Gold | `#EAC33B` | Premium features, achievements |
-| Background | `#F6F7F8` | Page backgrounds (light) |
+| Background | `var(--glp-paper)` | Page backgrounds (light) |
 | Background Dark | `#1A1A2E` | Page backgrounds (dark mode) |
-| Text | `#1C1C1C` | Primary text color |
+| Text | `var(--glp-ink)` | Primary text color |
 | Text Light | `#FFFFFF` | Text on dark backgrounds |
 | Muted | `#6B7280` | Secondary text, placeholders |
 | Border | `#E5E7EB` | Dividers, card borders |
