@@ -12,7 +12,7 @@ function FeatureCard({ title, body }) {
   );
 }
 
-const logo = "/logo/primary.png";
+const logo = "/brand/logo.png";
 
 export default function Home() {
   return (
@@ -42,7 +42,7 @@ export default function Home() {
             </div>
             <header className="w-full flex items-center justify-between py-6">
               <div className="flex items-center gap-3">
-                <img src={logo} alt="The Genuine Love Project" className="h-10 w-10 rounded-xl border" style={{ borderColor: "var(--border)" }} />
+                <img src={logo} alt="The Genuine Love Project" className="h-12 w-auto" />
                 <div className="leading-tight">
                   <div className="font-semibold" style={{ color: "var(--glp-ink)" }}>The Genuine Love Project</div>
                   <div className="text-sm" style={{ color: "var(--muted-foreground)" }}>Live in Genuine Love</div>

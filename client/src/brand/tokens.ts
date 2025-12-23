@@ -10,8 +10,9 @@ export const brand = {
     gold: "var(--glp-gold)",
   },
   assets: {
-    logoMark: "/brand/logo-mark.svg",
-    logoLockup: "/brand/logo-lockup.svg",
+    logo: "/brand/logo.png",
+    logoMark: "/brand/logo.png",
+    logoLockup: "/brand/logo.png",
     favicon: "/brand/favicon.svg",
   },
 };
