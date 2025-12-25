@@ -3,11 +3,11 @@ import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
 import { z } from "zod";
 import { sql } from "drizzle-orm";
-import db from "../db/client.mjs";
 import { signAccessToken, signRefreshToken, verifyToken } from "../utils/jwt.mjs";
 import { getCookieOptions } from "../utils/cookies.mjs";
 import { sha256 } from "../utils/hash.mjs";
 import { ensureStripeCustomerForUser } from "../services/stripeSync.mjs";
+import { db } from "../db/client.mjs";
 
 const router = express.Router();
 router.use(cookieParser());
