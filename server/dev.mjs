@@ -93,6 +93,9 @@ async function startDevServer() {
       throw err;
     }
   });
+  if (process.env.NODE_ENV === "production") {
+    throw new Error("❌ dev.mjs must never run in production");
+  }
 
   process.on('SIGTERM', () => {
     console.log('SIGTERM received, shutting down gracefully');

@@ -16,10 +16,13 @@ export default defineConfig({
   dialect: 'postgresql',
 
   // Use your existing Neon URL from .env
+
+    schema: "./server/db/schema",
+    out: "./server/db/migrations",
+    strict: true,
+    verbose: true
+
   dbCredentials: {
     url: process.env.DRIZZLE_DATABASE_URL || process.env.DATABASE_URL || '',
   },
-
-  strict: true,
-  verbose: true,
 });

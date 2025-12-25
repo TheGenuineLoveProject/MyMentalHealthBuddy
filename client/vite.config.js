@@ -10,9 +10,10 @@ export default defineConfig({
       "@assets": path.resolve(import.meta.dirname, "../attached_assets"),
     }
   },
-  server: {
-    port: 3000,
-    strictPort: true,
+
+    server: {
+      port: 5173,
+      strictPort: true,
     hmr: {
       clientPort: 443,
     },
