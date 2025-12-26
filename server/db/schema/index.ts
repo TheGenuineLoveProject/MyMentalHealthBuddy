@@ -1,4 +1,2 @@
-export * from "./users";
-export * from "./refreshTokens";
-export * from "./pendingEntitlements";
-export * from "./userPreferences";
+export * from "./users.js";
+export * from "./refreshTokens.js";

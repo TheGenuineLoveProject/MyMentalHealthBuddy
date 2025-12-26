@@ -23,6 +23,10 @@ import onboardingRouter from './routes/onboarding.mjs';
 import therapyRouter from './routes/therapy.mjs';
 
 import process from "node:process";
+import aiRoutes from "./routes/ai.mjs";
+app.use("/api/ai", aiRoutes);
+import webhookRoutes from "./routes/webhook.mjs";
+app.use("/api/webhook", webhookRoutes);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

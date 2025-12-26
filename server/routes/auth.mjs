@@ -3,11 +3,25 @@ import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
 import { z } from "zod";
 import { sql } from "drizzle-orm";
-import { signAccessToken, signRefreshToken, verifyToken } from "../utils/jwt.mjs";
 import { getCookieOptions } from "../utils/cookies.mjs";
 import { sha256 } from "../utils/hash.mjs";
 import { ensureStripeCustomerForUser } from "../services/stripeSync.mjs";
 import { db } from "../db/client.mjs";
+import jwt from "jsonwebtoken";
+import { Router } from "express";
+import { authGuard } from "../middleware/auth.mjs";
+
+import {
+  signAccessToken,
+  newRefreshToken,
+  hashToken,
+} from "../auth/tokens.mjs";
+
+import {
+  storeRefreshToken,
+  verifyRefreshToken,
+  revokeAllRefreshTokens,
+} from "../services/refreshTokens.service.mjs";
 
 const router = express.Router();
 router.use(cookieParser());
@@ -116,6 +130,38 @@ router.post("/refresh", async (req, res) => {
     console.error("Refresh error:", err);
     res.status(401).json({ message: "Invalid refresh token" });
   }
+});
+router.post("/refresh", async (req, res) => {
+  const refresh = req.cookies?.refresh_token || req.body?.refresh_token;
+  const userId = req.body?.userId;
+
+  if (!refresh || !userId) return res.status(401).json({ error: "Missing refresh token" });
+
+  const ok = await verifyRefreshToken({ userId, token: refresh });
+  if (!ok) return res.status(401).json({ error: "Invalid refresh token" });
+
+  // Rotate refresh token
+  const nextRefresh = newRefreshToken();
+  await storeRefreshToken({ userId, token: nextRefresh });
+
+  const access = jwt.sign({ id: userId }, process.env.JWT_ACCESS_SECRET, { expiresIn: "15m" });
+
+  res.cookie("refresh_token", nextRefresh, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "lax",
+    path: "/",
+    maxAge: 1000 * 60 * 60 * 24 * 30,
+  });
+
+  return res.json({ token: access });
+});
+router.post("/logout", async (req, res) => {
+  const userId = req.user?.id || req.body?.userId;
+  if (userId) await revokeAllRefreshTokens(userId);
+
+  res.clearCookie("refresh_token", { path: "/" });
+  res.json({ ok: true });
 });
 
 router.get("/me", async (req, res) => {
