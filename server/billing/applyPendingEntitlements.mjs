@@ -1,5 +1,5 @@
 import { db } from "../db/client.mjs";
-import { pendingEntitlements, subscriptions, users } from "../db/schema/index.ts";
+import { pendingEntitlements, subscriptions, users } from "../db/schema/index.mjs";
 import { eq, and, isNull } from "drizzle-orm";
 
 export async function applyPendingForUser(user) {

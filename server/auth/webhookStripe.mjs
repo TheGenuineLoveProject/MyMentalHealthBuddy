@@ -1,6 +1,5 @@
 import { db } from "../db/client.mjs";
-import { pendingEntitlements } from "../db/schema/index.ts"; // adjust import
-import { users, subscriptions } from "../db/schema/index.ts"; // adjust import
+import { pendingEntitlements, users, subscriptions } from "../db/schema/index.mjs";
 import { eq } from "drizzle-orm";
 
 async function applyOrBufferEntitlement({ stripeCustomerId, email, tier, status }) {

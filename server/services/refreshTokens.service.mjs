@@ -1,5 +1,5 @@
 import { db } from "../db/client.mjs";
-import { refreshTokens } from "../db/schema/index.ts"; // if TS schema is compiled in runtime, use your actual import style
+import { refreshTokens } from "../db/schema/index.mjs";
 import { eq } from "drizzle-orm";
 import { hashToken } from "../auth/tokens.mjs";
 

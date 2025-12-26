@@ -1,92 +1,11 @@
-import express from "express";
-import { authGuard } from "../middleware/auth.mjs";
 import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
-import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { authGuard } from "../middleware/auth.mjs";
+import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
-import { classifyCrisis } from "../ai/crisisClassifier.mjs";
-import { CRISIS_RESPONSE, CRISIS_KEYWORDS } from "../ai/constants.mjs";
 import { Router } from "express";
-import { safetyGuardInput } from "../ai/safety/guard.mjs";
-import { WELLNESS_SYSTEM_PROMPT } from "../ai/system-prompts/wellnessSystemPrompt.mjs";
-import { getLastMessages, saveMessage } from "../services/aiMessages.service.mjs";
-import { chatCompletion } from "../ai/openaiClient.mjs";
 
 const router = Router();
-
-router.post("/chat", authGuard, async (req, res) => {
-  const userId = req.user?.id;
-  const userText = req.body?.message ?? "";
-
-  const guard = safetyGuardInput(userText);
-  if (guard.blocked) {
-    // Log crisis events elsewhere if you want; keep response safe.
-    return res.status(200).json(guard.response);
-  }
-
-  const history = await getLastMessages(userId, 10);
-
-  // Persist user message
-  await saveMessage(userId, "user", guard.cleanText);
-
-  try {
-    const reply = await chatCompletion({
-      system: WELLNESS_SYSTEM_PROMPT,
-      history,
-      user: guard.cleanText,
-      temperature: 0.8,
-      maxTokens: 500,
-    });
-
-    await saveMessage(userId, "assistant", reply);
-
-    return res.json({ reply });
-  } catch (e) {
-    return res.status(200).json({
-      reply:
-        "I’m having trouble connecting right now. I’m still here with you. " +
-        "If you want, share one sentence: what’s the hardest part of today?",
-      offline: true,
-    });
-  }
-});
-
-router.get("/history", authGuard, async (req, res) => {
-  const userId = req.user?.id;
-  const history = await getLastMessages(userId, 50);
-  res.json({ history });
-});
-
-router.delete("/history", authGuard, async (req, res) => {
-  const userId = req.user?.id;
-  // implement delete if you have it; otherwise return ok
-  res.json({ ok: true });
-});
-
-function keywordCrisisCheck(text) {
-  const lowered = text.toLowerCase();
-  return CRISIS_KEYWORDS.some(k => lowered.includes(k));
-}
-
-router.post("/chat", authGuard, async (req, res) => {
-  const { message } = req.body;
-
-  const keywordHit = keywordCrisisCheck(message);
-  let semanticHit = false;
-
-  if (!keywordHit) {
-    const result = await classifyCrisis(openai, message);
-    semanticHit = result === "CRISIS";
-  }
-
-  if (keywordHit || semanticHit) {
-    await logCrisisEvent(req.user.id, message);
-    return res.json(CRISIS_RESPONSE);
-  }
-
-  // continue normal AI flow
-});
 
 const CRISIS_KEYWORDS = [
   "kill myself", "end my life", "suicide", "suicidal", "want to die",
@@ -102,7 +21,6 @@ Please reach out to someone who can help immediately:
 
 **National Suicide Prevention Lifeline**: 988 (call or text)
 **Crisis Text Line**: Text HOME to 741741
-**International Association for Suicide Prevention**: https://www.iasp.info/resources/Crisis_Centres/
 
 If you're in immediate danger, please call emergency services (911 in the US) or go to your nearest emergency room.
 
@@ -112,11 +30,6 @@ You are not alone. You matter. Help is available right now.`,
     { name: "Crisis Text Line", contact: "741741", type: "text" }
   ]
 };
-
-function detectCrisis(message) {
-  const lowerMessage = message.toLowerCase();
-  return CRISIS_KEYWORDS.some(keyword => lowerMessage.includes(keyword));
-}
 
 const SYSTEM_PROMPT = `You are a compassionate, trauma-informed AI wellness companion for The Genuine Love Project. Your role is to:
 - Listen with empathy and validate feelings
@@ -128,9 +41,16 @@ const SYSTEM_PROMPT = `You are a compassionate, trauma-informed AI wellness comp
 
 Always respond with warmth, patience, and genuine care. Keep responses concise but meaningful.`;
 
-router.use(authGuard);
+function detectCrisis(message) {
+  const lowerMessage = message.toLowerCase();
+  return CRISIS_KEYWORDS.some(keyword => lowerMessage.includes(keyword));
+}
 
-router.post("/chat", async (req, res) => {
+function generateId(prefix = "id") {
+  return `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+}
+
+router.post("/chat", authGuard, async (req, res) => {
   try {
     const userId = req.user?.id;
     const { message } = req.body;
@@ -150,7 +70,7 @@ router.post("/chat", async (req, res) => {
       ORDER BY created_at DESC 
       LIMIT 10
     `);
-    
+
     const history = (historyResult.rows || []).reverse().map(row => ({
       role: row.role,
       content: row.content,
@@ -163,7 +83,7 @@ router.post("/chat", async (req, res) => {
     ];
 
     let aiResponse;
-    
+
     if (isConfigured()) {
       const result = await chatCompletion({
         messages,
@@ -181,8 +101,8 @@ router.post("/chat", async (req, res) => {
       aiResponse = "I'm here with you. You are not alone. (AI is currently in offline mode)";
     }
 
-    const messageId = `msg_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-    const responseId = `msg_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
+    const messageId = generateId("msg");
+    const responseId = generateId("msg");
 
     await db.execute(sql`
       INSERT INTO ai_messages (id, user_id, role, content, created_at)
@@ -201,7 +121,7 @@ router.post("/chat", async (req, res) => {
   }
 });
 
-router.get("/history", async (req, res) => {
+router.get("/history", authGuard, async (req, res) => {
   try {
     const userId = req.user?.id;
     if (!userId) {
@@ -222,7 +142,7 @@ router.get("/history", async (req, res) => {
   }
 });
 
-router.delete("/history", async (req, res) => {
+router.delete("/history", authGuard, async (req, res) => {
   try {
     const userId = req.user?.id;
     if (!userId) {
