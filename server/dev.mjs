@@ -22,6 +22,7 @@ import billingRouter from './routes/billing.mjs';
 import gamificationRouter from './routes/gamification.mjs';
 import onboardingRouter from './routes/onboarding.mjs';
 import therapyRouter from './routes/therapy.mjs';
+import dashboardRouter from './routes/ui-dashboard.mjs';
 
 import process from "node:process";
 
@@ -65,6 +66,7 @@ async function startDevServer() {
   app.use('/api/gamification', gamificationRouter);
   app.use('/api/onboarding', onboardingRouter);
   app.use('/api/therapy', therapyRouter);
+  app.use('/api/dashboard', dashboardRouter);
 
   // Health endpoint
   app.get('/health', (_req, res) => res.json({ ok: true, app: 'The Genuine Love Project' }));
