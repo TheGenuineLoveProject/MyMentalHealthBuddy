@@ -1,5 +1,0 @@
-{
-  "AUTHORIZATION_SERVER_URL": "https://cold-horse-2.loca.lt/",
-  "TOKEN_EXCHANGE_URL": "https://cold-horse-2.loca.lt/api/canva/callback",
-  "DEVELOPMENT_URL": "http://localhost:5183/canva-app.js"
-}
