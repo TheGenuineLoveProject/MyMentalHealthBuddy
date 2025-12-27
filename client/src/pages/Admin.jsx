@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
-import Admin from "./pages/Admin.jsx";
+
 export default function Admin() {
   const { user } = useAuth();
   const [stats, setStats] = useState(null);
@@ -13,7 +13,7 @@ export default function Admin() {
       .then(setStats)
       .catch(console.error);
   }, []);
-  <Route path="/admin" element={<Admin />} />
+
   if (user?.role !== "admin") {
     return (
       <div style={{ padding: 24 }}>
