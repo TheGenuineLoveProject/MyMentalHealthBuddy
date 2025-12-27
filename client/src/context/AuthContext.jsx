@@ -127,8 +127,10 @@ export function AuthProvider({ children }) {
   };
 
   const isAuthenticated = () => {
-    if (!token) return false;
-    if (isTokenExpired(token)) {
+    // Check both state and localStorage for token (handles race conditions after login)
+    const currentToken = token || localStorage.getItem(TOKEN_KEY);
+    if (!currentToken) return false;
+    if (isTokenExpired(currentToken)) {
       logout();
       return false;
     }
