@@ -1,10 +1,12 @@
 import { QueryClient } from "@tanstack/react-query";
 
+const TOKEN_KEY = "mmhb_token";
+
 function getToken() {
   if (typeof window === "undefined" || typeof localStorage === "undefined") {
     return null;
   }
-  return localStorage.getItem("token");
+  return localStorage.getItem(TOKEN_KEY);
 }
 
 async function throwIfResNotOk(res) {
