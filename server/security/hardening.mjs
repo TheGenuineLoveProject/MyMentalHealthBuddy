@@ -2,12 +2,11 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import cors from "cors";
 
-  export function applyHardening(app) {
-    app.disable("x-powered-by");
-  }
-const origin = process.env.CORS_ORIGIN || "http://localhost:3000";
+export function applyHardening(app) {
+  const origin = process.env.CORS_ORIGIN || "http://localhost:3000";
   const isProd = process.env.NODE_ENV === "production";
 
+  app.disable("x-powered-by");
   app.set("trust proxy", 1);
 
   app.use(
@@ -24,7 +23,6 @@ const origin = process.env.CORS_ORIGIN || "http://localhost:3000";
     })
   );
 
-  // basic rate limits
   app.use(
     "/api/auth",
     rateLimit({

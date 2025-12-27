@@ -23,10 +23,7 @@ import onboardingRouter from './routes/onboarding.mjs';
 import therapyRouter from './routes/therapy.mjs';
 
 import process from "node:process";
-import aiRoutes from "./routes/ai.mjs";
-app.use("/api/ai", aiRoutes);
-import webhookRoutes from "./routes/webhook.mjs";
-app.use("/api/webhook", webhookRoutes);
+import webhookRouter from "./routes/webhook.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -73,6 +70,7 @@ app.use('/api/billing', billingRouter);
 app.use('/api/gamification', gamificationRouter);
 app.use('/api/onboarding', onboardingRouter);
 app.use('/api/therapy', therapyRouter);
+app.use('/api/webhook', webhookRouter);
 
 app.get("/api/health", (req, res) => {
   res.status(200).json({ ok: true, service: "TheGenuineLoveProject", time: new Date().toISOString() });

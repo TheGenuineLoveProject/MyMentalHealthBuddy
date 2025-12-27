@@ -1,4 +1,3 @@
-# server/db/schemaBridge.mjs
-// Bridge: import built TS schema from dist
-import * as schema from "../../dist/shared/schema.js";
-export { schema };
+// server/db/schemaBridge.mjs
+// Bridge: re-export schema from shared
+export * from "../../shared/schema.mjs";
