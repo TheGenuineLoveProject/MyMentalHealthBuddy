@@ -16,6 +16,7 @@ import {
   newRefreshToken,
   hashToken,
 } from "../auth/tokens.mjs";
+import { signRefreshToken } from "../utils/jwt.mjs";
 
 import {
   storeRefreshToken,
