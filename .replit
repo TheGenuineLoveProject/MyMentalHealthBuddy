@@ -54,3 +54,6 @@ packages = ["lsof", "unzip"]
 
 [userenv.production]
 NODE_ENV = "production"
+
+[userenv.shared]
+ADMIN_EMAILS = "marglanda92@yahoo.com"
