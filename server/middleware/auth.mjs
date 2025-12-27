@@ -1,65 +1,84 @@
-import { verifyToken } from "../utils/jwt.mjs";
+// server/middleware/auth.mjs
+import jwt from "jsonwebtoken";
+import { db } from "../db/client.mjs";
+import { eq } from "drizzle-orm";
 
-export function requireAuth(req, res, next) {
+const JWT_SECRET = process.env.JWT_SECRET || "dev-jwt-secret-genuine-love-project-2024";
+
+/**
+ * Extract Bearer token
+ */
+function getToken(req) {
+  const header = req.headers.authorization;
+  if (!header) return null;
+  const [type, token] = header.split(" ");
+  return type === "Bearer" ? token : null;
+}
+
+/**
+ * REQUIRED AUTH
+ */
+export async function requireAuth(req, res, next) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
+    const token = getToken(req);
     if (!token) {
-      return res.status(401).json({ message: "Missing access token" });
+      return res.status(401).json({ message: "Authentication required" });
     }
 
-    const decoded = verifyToken(token);
-    if (!decoded || !decoded.id) {
-      return res.status(401).json({ message: "Invalid token payload" });
+    const payload = jwt.verify(token, JWT_SECRET);
+
+    const user =
+      (await db.query.users.findFirst({
+        where: (u, { eq }) => eq(u.id, payload.id),
+      })) ?? null;
+
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
     }
 
-    req.user = decoded;
+    req.user = user;
     next();
   } catch (err) {
-    if (err.name === "TokenExpiredError") {
-      return res.status(401).json({ message: "Token has expired" });
-    }
-    if (err.name === "JsonWebTokenError") {
-      return res.status(401).json({ message: "Invalid token" });
-    }
-    return res.status(401).json({ message: "Invalid/expired access token" });
+    return res.status(401).json({ message: "Invalid token" });
   }
 }
 
-export function requireRole(...roles) {
-  return (req, res, next) => {
-    const role = req.user?.role;
-    if (!role || !roles.includes(role)) {
-      return res.status(403).json({ message: "Forbidden" });
-    }
-    next();
-  };
-}
-
-export function requirePro(req, res, next) {
-  const status = req.user?.subscription_status || "free";
-  if (status !== "pro" && status !== "premium") {
-    return res.status(402).json({ message: "Upgrade required" });
-  }
-  next();
-}
-
-export const authGuard = requireAuth;
-
-export function optionalAuth(req, res, next) {
+/**
+ * OPTIONAL AUTH
+ */
+export async function optionalAuth(req, _res, next) {
   try {
-    const authHeader = req.headers.authorization || "";
-    const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
+    const token = getToken(req);
+    if (!token) return next();
 
-    if (token) {
-      const decoded = verifyToken(token);
-      if (decoded && decoded.id) {
-        req.user = decoded;
-      }
-    }
+    const payload = jwt.verify(token, JWT_SECRET);
+    const user =
+      (await db.query.users.findFirst({
+        where: (u, { eq }) => eq(u.id, payload.id),
+      })) ?? null;
+
+    if (user) req.user = user;
     next();
   } catch {
     next();
   }
 }
+
+/**
+ * ADMIN ONLY
+ */
+export function requireAdmin(req, res, next) {
+  if (!req.user) {
+    return res.status(401).json({ message: "Authentication required" });
+  }
+
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ message: "Admin access required" });
+  }
+
+  next();
+}
+
+// Aliases for backward compatibility
+export const auth = requireAuth;
+export const authGuard = requireAuth;

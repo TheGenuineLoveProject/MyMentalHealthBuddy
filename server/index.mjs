@@ -1,12 +1,23 @@
 import 'dotenv/config';
 import express from 'express';
+import adminRouter from './routes/admin.mjs';
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+import authRoutes from "./routes/auth.mjs";
+
+app.use(express.json());
+app.use("/api", authRoutes);
 import compression from 'compression';
 import helmet from "helmet";
 import cors from "cors";
 import { fileURLToPath } from "url";
 import { dirname, join } from 'path';
 import { buildSessionMiddleware } from './middleware/session.mjs';
+import { auth } from "./middleware/auth.mjs";
+import adminRoutes from "./routes/admin.mjs";
 
+app.use("/api/admin", auth, adminRoutes);
 // Import all route modules
 import authRouter from './routes/auth.mjs';
 import blogRouter from './routes/blog.mjs';
@@ -14,7 +25,6 @@ import journalRouter from './routes/journal.mjs';
 import moodRouter from './routes/mood.mjs';
 import healthRouter from './routes/health.mjs';
 import accountRouter from './routes/account.mjs';
-import adminRouter from './routes/admin.mjs';
 import aiRouter from './routes/ai.mjs';
 import analyticsRouter from './routes/analytics.mjs';
 import billingRouter from './routes/billing.mjs';
@@ -29,7 +39,6 @@ import webhookRouter from "./routes/webhook.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const app = express();
 const isProduction = process.env.NODE_ENV === "production";
 
 if (isProduction && !process.env.DATABASE_URL) {
@@ -64,7 +73,7 @@ app.use('/api/journal', journalRouter);
 app.use('/api/mood', moodRouter);
 app.use('/api/health', healthRouter);
 app.use('/api/account', accountRouter);
-app.use('/api/admin', adminRouter);
+app.use("/api/admin", adminRoutes);
 app.use('/api/ai', aiRouter);
 app.use('/api/analytics', analyticsRouter);
 app.use('/api/billing', billingRouter);

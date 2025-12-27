@@ -3,6 +3,7 @@ import 'dotenv/config';
 import pg from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { logger } from "../utils/logger.mjs";
+import * as schema from "../../shared/schema.mjs";
 
 const { Pool } = pg;
 
@@ -12,5 +13,5 @@ if (!process.env.DATABASE_URL) {
 }
 
 export const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
-export const db = drizzle(pool);
+export const db = drizzle(pool, { schema });
 export default db;
