@@ -1,6 +1,19 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET;
+const isProduction = process.env.NODE_ENV === "production";
+
+function getJwtSecret() {
+  if (process.env.JWT_SECRET) {
+    return process.env.JWT_SECRET;
+  }
+  if (isProduction) {
+    console.error("CRITICAL: JWT_SECRET must be set in production!");
+    process.exit(1);
+  }
+  return "dev-jwt-secret-genuine-love-project-2024";
+}
+
+const JWT_SECRET = getJwtSecret();
 const ACCESS_EXPIRES = process.env.JWT_ACCESS_EXPIRES || "15m";
 const REFRESH_EXPIRES = process.env.JWT_REFRESH_EXPIRES || "30d";
 
