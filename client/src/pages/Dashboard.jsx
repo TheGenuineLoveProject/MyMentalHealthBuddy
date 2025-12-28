@@ -2,7 +2,7 @@ import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut } from "lucide-react";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 import DailyAffirmations from "../components/DailyAffirmations.jsx";
 import DailyInsight from "../components/DailyInsight.jsx";
 import { useAuth } from "../context/AuthContext.jsx";

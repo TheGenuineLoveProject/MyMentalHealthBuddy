@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const logo = "/brand/logo.png";
 

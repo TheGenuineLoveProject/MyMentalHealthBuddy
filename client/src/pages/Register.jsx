@@ -6,7 +6,7 @@ import { z } from "zod";
 import { Heart, Mail, Lock, User, Sparkles, Check } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest } from "../lib/queryClient.js";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const registerSchema = z.object({
   name: z.string().min(1, "Name is required").max(255, "Name is too long"),

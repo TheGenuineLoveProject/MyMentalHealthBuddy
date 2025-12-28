@@ -39,6 +39,12 @@ const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/Mirror.tsx"));
 const CommunityPage = lazy(() => import("./pages/CommunityPage.tsx"));
+import Landing from "./pages/Landing.jsx";
+import TodayPage from "./features/today/TodayPage.jsx";
+import JournalingMirrorPage from "./features/mirror/JournalingMirrorPage.jsx";
+import SharedReflectionsPage from "./features/community/SharedReflectionsPage.jsx";
+import Ethics from "./pages/legal/Ethics.jsx";
+import Disclaimer from "./pages/legal/Disclaimer.jsx";
 
 function LoadingFallback() {
   return (
@@ -163,9 +169,16 @@ export default function App() {
                   <CommunityPage />
                 </RouteGuard>
               </Route>
-
+              <Route path="/" exact component={Landing} />
+              <Route path="/today" component={TodayPage} />
+              <Route path="/state" component={StatePage} />
+              <Route path="/journal" component={JournalPage} />
               {/* Fallback */}
               <Route component={NotFound} />
+              <Route path="/mirror" component={JournalingMirrorPage} />
+              <Route path="/community" component={SharedReflectionsPage} />
+              <Route path="/ethics" component={Ethics} />
+              <Route path="/disclaimer" component={Disclaimer} />
             </Switch>
           </Suspense>
         </ErrorBoundary>

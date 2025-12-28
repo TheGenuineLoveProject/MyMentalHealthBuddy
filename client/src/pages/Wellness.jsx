@@ -9,7 +9,7 @@ import {
   Music, Gift, Star, Gamepad2, Smile, BookOpen, Sunrise, Droplets,
   Timer, Footprints, Palette, Award, Loader2
 } from "lucide-react";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 import { useGamification } from "../context/GamificationContext.jsx";
 
 const BreathingExercise = lazy(() => import("../components/BreathingExercise.jsx"));

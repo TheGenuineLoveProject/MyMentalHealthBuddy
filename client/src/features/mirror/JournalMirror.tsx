@@ -137,3 +137,78 @@ export function JournalMirror() {
     </Card>
   );
 }
+cat > client/src/features/mirror/JournalingMirrorPage.jsx <<'EOF'
+import React, { useState } from "react";
+
+export default function JournalingMirrorPage() {
+  const [text, setText] = useState("");
+  const [mirror, setMirror] = useState("");
+  const [enabled, setEnabled] = useState(false);
+
+  function mirrorText() {
+    if (!enabled || !text.trim()) return;
+
+    // SAFE LOCAL MIRROR (no AI yet)
+    setMirror(
+      "Here is what I hear in your words:\n\n" +
+      text
+        .split(".")
+        .slice(0, 3)
+        .join(".")
+        .trim() +
+      ".\n\nWould you like to reflect on what matters most in this?"
+    );
+  }
+
+  return (
+    <div className="mx-auto max-w-3xl px-6 py-10">
+      <div className="rounded-2xl border bg-white/60 p-6 shadow-sm">
+        <h1 className="text-2xl font-semibold text-neutral-900">
+          Journaling Mirror
+        </h1>
+
+        <p className="mt-3 text-neutral-700">
+          This space reflects your words back to you.
+          It does not analyze, diagnose, or advise.
+        </p>
+
+        <label className="mt-4 flex items-center gap-2 text-sm text-neutral-700">
+          <input
+            type="checkbox"
+            checked={enabled}
+            onChange={(e) => setEnabled(e.target.checked)}
+          />
+          Enable reflection (optional)
+        </label>
+
+        <textarea
+          className="mt-4 w-full rounded-xl border p-3 text-sm"
+          rows={8}
+          placeholder="Write freely. Nothing is interpreted or judged."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+
+        <button
+          className="mt-4 rounded-xl bg-neutral-900 px-4 py-2 text-sm text-white disabled:opacity-40"
+          onClick={mirrorText}
+          disabled={!enabled}
+        >
+          Reflect my words
+        </button>
+
+        {mirror && (
+          <div className="mt-6 rounded-xl border bg-neutral-50 p-4 whitespace-pre-wrap">
+            {mirror}
+          </div>
+        )}
+
+        <p className="mt-4 text-xs text-neutral-500">
+          This feature is not a mental health service. If you feel unsafe, please
+          visit the Support page.
+        </p>
+      </div>
+    </div>
+  );
+}
+EOF

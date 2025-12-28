@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { Home, ArrowLeft, Search, Heart, MessageSquare, BookOpen, BarChart3 } from "lucide-react";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const QUICK_LINKS = [
   { href: "/", label: "Home", icon: Home, description: "Return to the homepage" },

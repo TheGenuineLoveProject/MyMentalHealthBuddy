@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, ArrowLeft, Mail, Send, Heart, Shield, Clock } from "lucide-react";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const forgotPasswordSchema = z.object({
   email: z.string().email("Please enter a valid email address"),

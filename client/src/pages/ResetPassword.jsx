@@ -6,7 +6,7 @@ import { z } from "zod";
 import { apiRequest } from "../lib/queryClient.js";
 import { CheckCircle, AlertCircle, Lock, Eye, EyeOff, Heart, Shield, ArrowRight } from "lucide-react";
 import { useMemo, useState } from "react";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const resetPasswordSchema = z.object({
   newPassword: z.string().min(6, "Password must be at least 6 characters"),

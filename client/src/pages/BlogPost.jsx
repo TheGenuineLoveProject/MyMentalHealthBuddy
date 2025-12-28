@@ -3,7 +3,7 @@ import { useRoute, Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Calendar, Clock, User, ArrowLeft, MessageCircle, Send, Reply } from "lucide-react";
 import TglpNavbar from "../components/TglpNavbar";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 

@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Smile, Frown, Meh, Sun, Moon, Zap, Check, Sparkles } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "var(--mood-happy)", bgColor: "var(--mood-happy-soft)" },

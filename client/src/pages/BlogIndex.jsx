@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Search, Calendar, Clock, User, ArrowRight, BookOpen } from "lucide-react";
 import TglpNavbar from "../components/TglpNavbar";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 function BlogCard({ post }) {
   const formattedDate = post.publishedAt

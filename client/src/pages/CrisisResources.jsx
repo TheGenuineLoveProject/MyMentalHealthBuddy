@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { ArrowLeft, Phone, MessageSquare, Globe, Heart, AlertTriangle, Shield, ExternalLink, Sparkles, Wind, Users, HandHeart } from "lucide-react";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const CRISIS_HOTLINES = [
   {

@@ -4,7 +4,7 @@ import {
   Sparkles, ArrowLeft, Crown, Star, Target, BarChart3,
   Brain, Heart, Calendar, Bell, ChevronRight, Zap, Loader2
 } from "lucide-react";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 
 const STRIPE_PRICING_TABLE_ID = "prctbl_1SanK5RtwDw9mKhaSKDHxmn5";
 const STRIPE_PUBLISHABLE_KEY = "pk_live_51RIV9vRtwDw9mKhaldQnCVBo6Grjc2KXIjwyolZbTClMNgMGySVBrT6LayaZhBebFDUaQI0yoXoxiAjyLXLOl2b800NJXSDcQd";

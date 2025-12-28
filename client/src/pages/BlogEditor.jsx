@@ -3,7 +3,7 @@ import { useLocation } from "wouter";
 import { useMutation } from "@tanstack/react-query";
 import { Save, Eye, Send, ArrowLeft, Image, Tag } from "lucide-react";
 import TglpNavbar from "../components/TglpNavbar";
-import SEO from "../components/SEO.jsx";
+import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import { Link } from "wouter";
