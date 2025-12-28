@@ -4,62 +4,7 @@ import { ArrowLeft, ChevronRight, Compass, PenLine, Activity } from "lucide-reac
 import { StateTracker } from "@/components/state/StateTracker";
 import { journalPrompts, categoryLabels, PromptCategory } from "@/data/journalPrompts";
 import SEO from "@/components/SEO";
-import { sharedReflections } from "@/data/sharedReflections";
-import { safeTextOrFallback } from "@/safety/languageCheck";
-import { TodaysInsight } from "@/components/insight/TodaysInsight";
-import { JournalingMirror } from "@/components/journal/JournalingMirror";
-
-  return (
-    <main style={{ maxWidth: 820, margin: "0 auto", padding: 24 }}>
-      <TodaysInsight />
-      <hr />
-
-      <StateTracker />
-      <hr />
-
-      <JournalingMirror />
-      <hr />
-
-      <SharedReflections />
-      <hr />
-
-      <section>
-        <h3>Journal prompts (optional)</h3>
-        {Object.entries(journalPrompts).map(([group, prompts]) => (
-          <div key={group}>
-            <h4 style={{ textTransform: "capitalize" }}>{group}</h4>
-            <ul>
-              {prompts.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </section>
-    </main>
-  );
-}
-export function SharedReflections() {
-  return (
-    <section style={{ padding: 16, border: "1px solid #e5e7eb", borderRadius: 12 }}>
-      <h3>Shared Reflections (read-only)</h3>
-      <p style={{ opacity: 0.8 }}>
-        Anonymous reflections offered without advice, comparison, or metrics. Please take only what feels supportive.
-      </p>
-
-      <div style={{ display: "grid", gap: 12 }}>
-        {sharedReflections.map((r) => (
-          <div key={r.id} style={{ padding: 12, borderRadius: 10, border: "1px solid #f0f0f0" }}>
-            {safeTextOrFallback(
-              r.text,
-              "A reflection is here. Please take only what feels kind and helpful."
-            )}
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
+import { TodaysInsight } from "@/components/insights/TodaysInsight";
 
 type FlowStep = "welcome" | "state" | "prompt" | "complete";
 

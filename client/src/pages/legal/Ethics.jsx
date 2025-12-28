@@ -1,6 +1,3 @@
-cat > client/src/pages/legal/Ethics.jsx <<'EOF'
-import React from "react";
-
 export default function Ethics() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10">
@@ -25,4 +22,3 @@ export default function Ethics() {
     </div>
   );
 }
-EOF

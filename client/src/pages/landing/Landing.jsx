@@ -1,6 +1,3 @@
-cat > client/src/pages/Landing.jsx <<'EOF'
-import React from "react";
-
 function Pill({ children }) {
   return (
     <span className="rounded-full border bg-white/70 px-3 py-1 text-xs text-neutral-700">
@@ -29,10 +26,18 @@ export default function Landing() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a className="rounded-xl border px-4 py-2 text-sm hover:bg-white" href="/login">
+          <a 
+            data-testid="link-sign-in"
+            className="rounded-xl border px-4 py-2 text-sm hover:bg-white" 
+            href="/login"
+          >
             Sign in
           </a>
-          <a className="rounded-xl bg-neutral-900 px-4 py-2 text-sm text-white hover:opacity-90" href="/register">
+          <a 
+            data-testid="link-start-free"
+            className="rounded-xl bg-neutral-900 px-4 py-2 text-sm text-white hover:opacity-90" 
+            href="/register"
+          >
             Start free
           </a>
         </div>
@@ -54,15 +59,23 @@ export default function Landing() {
 
             <p className="mt-5 text-lg leading-relaxed text-neutral-700">
               The Genuine Love Project helps you map your inner state, reflect with care, and build
-              sustainable habits—without shame, comparison, or pressure to “perform wellness.”
+              sustainable habits—without shame, comparison, or pressure to "perform wellness."
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              <a className="rounded-xl bg-neutral-900 px-5 py-3 text-sm text-white hover:opacity-90" href="/register">
+              <a 
+                data-testid="link-begin-dashboard"
+                className="rounded-xl bg-neutral-900 px-5 py-3 text-sm text-white hover:opacity-90" 
+                href="/register"
+              >
                 Begin your calm dashboard
               </a>
-              <a className="rounded-xl border px-5 py-3 text-sm hover:bg-white" href="/today">
-                See Today’s Insight
+              <a 
+                data-testid="link-see-insight"
+                className="rounded-xl border px-5 py-3 text-sm hover:bg-white" 
+                href="/today"
+              >
+                See Today's Insight
               </a>
             </div>
 
@@ -103,4 +116,3 @@ export default function Landing() {
     </div>
   );
 }
-EOF

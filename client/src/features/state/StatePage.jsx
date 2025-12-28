@@ -1,5 +1,4 @@
-cat > client/src/features/state/StatePage.jsx <<'EOF'
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 const STATE_DIMENSIONS = [
   { key: "energy", label: "Energy", hint: "low → steady → high" },
@@ -22,9 +21,9 @@ function suggestionFromState(state) {
 
   const map = {
     energy: "Try a body reset: water + small snack + 5 minutes of gentle movement.",
-    clarity: "Try a clarity reset: write one sentence: “Right now, what matters most is…”",
+    clarity: 'Try a clarity reset: write one sentence: "Right now, what matters most is…"',
     safety: "Try safety first: breathe out longer than you breathe in (exhale 6, inhale 4).",
-    connection: "Try connection: send one low-pressure message: “Thinking of you—no need to respond fast.”",
+    connection: 'Try connection: send one low-pressure message: "Thinking of you—no need to respond fast."',
     agency: "Try agency: pick ONE tiny step (2 minutes) and do it before thinking more."
   };
   return map[k] || "Be kind to yourself. Small steps count.";
@@ -53,7 +52,7 @@ export default function StatePage() {
           How are you, as a whole system?
         </h1>
         <p className="mt-3 text-neutral-700">
-          This is not “mood.” It’s your current internal conditions — so the app can support you with
+          This is not "mood." It's your current internal conditions — so the app can support you with
           the right kind of care.
         </p>
 
@@ -69,6 +68,7 @@ export default function StatePage() {
               </div>
 
               <input
+                data-testid={`slider-${d.key}`}
                 className="mt-3 w-full"
                 type="range"
                 min="1"
@@ -82,20 +82,27 @@ export default function StatePage() {
 
         <div className="mt-6 rounded-xl bg-neutral-900 p-4 text-white">
           <div className="text-sm opacity-80">State average</div>
-          <div className="text-2xl font-semibold">{summary.avg} / 5</div>
-          <div className="mt-2 text-sm opacity-90">{summary.suggestion}</div>
+          <div className="text-2xl font-semibold" data-testid="text-state-average">{summary.avg} / 5</div>
+          <div className="mt-2 text-sm opacity-90" data-testid="text-suggestion">{summary.suggestion}</div>
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <a className="rounded-xl bg-white px-4 py-2 text-sm text-neutral-900 hover:bg-neutral-50" href="/journal">
+          <a 
+            data-testid="link-journal-from-state"
+            className="rounded-xl bg-white px-4 py-2 text-sm text-neutral-900 hover:bg-neutral-50" 
+            href="/journal"
+          >
             Journal from this state
           </a>
-          <a className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-50" href="/today">
-            Go to Today’s Insight
+          <a 
+            data-testid="link-go-today"
+            className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-50" 
+            href="/today"
+          >
+            Go to Today's Insight
           </a>
         </div>
       </div>
     </div>
   );
 }
-EOF

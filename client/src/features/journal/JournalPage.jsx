@@ -1,5 +1,4 @@
-cat > client/src/features/journal/JournalPage.jsx <<'EOF'
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { PROMPT_SETS } from "./PromptLibrary";
 
 const CATEGORIES = [
@@ -27,13 +26,14 @@ export default function JournalPage() {
         <p className="text-xs uppercase tracking-wider text-neutral-500">Journal</p>
         <h1 className="mt-2 text-2xl font-semibold text-neutral-900">Write with care and clarity</h1>
         <p className="mt-3 text-neutral-700">
-          These prompts are designed to be thoughtful and supportive — no pressure to “fix” yourself.
+          These prompts are designed to be thoughtful and supportive — no pressure to "fix" yourself.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-2">
           {CATEGORIES.map((c) => (
             <button
               key={c.key}
+              data-testid={`button-category-${c.key}`}
               className={
                 "rounded-full border px-4 py-2 text-sm " +
                 (category === c.key ? "bg-neutral-900 text-white" : "bg-white hover:bg-neutral-50")
@@ -54,10 +54,15 @@ export default function JournalPage() {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="font-medium text-neutral-900">Prompt</div>
             <div className="flex gap-2">
-              <button className="rounded-xl border px-3 py-1 text-sm hover:bg-neutral-50" onClick={randomPrompt}>
+              <button 
+                data-testid="button-new-prompt"
+                className="rounded-xl border px-3 py-1 text-sm hover:bg-neutral-50" 
+                onClick={randomPrompt}
+              >
                 New prompt
               </button>
               <button
+                data-testid="button-copy-prompt"
                 className="rounded-xl border px-3 py-1 text-sm hover:bg-neutral-50"
                 onClick={() => navigator.clipboard?.writeText(prompt)}
               >
@@ -66,9 +71,10 @@ export default function JournalPage() {
             </div>
           </div>
 
-          <div className="mt-3 text-neutral-800">{prompt}</div>
+          <div className="mt-3 text-neutral-800" data-testid="text-current-prompt">{prompt}</div>
 
           <textarea
+            data-testid="input-journal-text"
             className="mt-4 w-full rounded-xl border p-3 text-sm outline-none focus:ring-2 focus:ring-neutral-200"
             rows={8}
             value={text}
@@ -78,10 +84,18 @@ export default function JournalPage() {
         </div>
 
         <div className="mt-6 flex flex-wrap gap-3">
-          <a className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-50" href="/today">
-            Back to Today’s Insight
+          <a 
+            data-testid="link-back-today"
+            className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-50" 
+            href="/today"
+          >
+            Back to Today's Insight
           </a>
-          <a className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-50" href="/state">
+          <a 
+            data-testid="link-check-state"
+            className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-50" 
+            href="/state"
+          >
             Check State
           </a>
         </div>
@@ -89,4 +103,3 @@ export default function JournalPage() {
     </div>
   );
 }
-EOF
