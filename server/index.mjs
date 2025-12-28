@@ -26,8 +26,8 @@ import webhookRouter from "./routes/webhook.mjs";
 import insightsRouter from './routes/insights.mjs';
 import statesRouter from './routes/states.mjs';
 import promptsRouter from './routes/prompts.mjs';
-app.use("/api/mirror", mirrorRouter);
-import mirrorRoutes from "./routes/mirror.mjs";
+import mirrorRouter from "./routes/mirror.mjs";
+import communityRouter from "./routes/community.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -68,6 +68,8 @@ app.use('/api/webhook', webhookRouter);
 app.use('/api/insights', insightsRouter);
 app.use('/api/states', statesRouter);
 app.use('/api/prompts', promptsRouter);
+app.use('/api/mirror', mirrorRouter);
+app.use('/api/community', communityRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });

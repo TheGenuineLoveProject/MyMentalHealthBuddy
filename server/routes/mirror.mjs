@@ -1,7 +1,11 @@
 import express from "express";
 import { ensureDisclaimer } from "../utils/safetyCheck.mjs";
+import { mirrorRateLimit } from "../middleware/rateLimit.mjs";
 
 const router = express.Router();
+
+// Apply gentle rate limiting
+router.use(mirrorRateLimit);
 
 const DISCLAIMER = {
   title: "Gentle Mirror",
@@ -9,6 +13,9 @@ const DISCLAIMER = {
 };
 
 router.post("/", async (req, res) => {
+  const startTime = Date.now();
+  const requestId = req.requestId || "-";
+  
   try {
     const text = String(req.body?.text ?? "").trim();
     const enableAI = Boolean(req.body?.enableAI);
@@ -60,7 +67,8 @@ router.post("/", async (req, res) => {
       disclaimer: DISCLAIMER,
     });
   } catch (err) {
-    console.error("MIRROR_ERROR:", err);
+    const duration = Date.now() - startTime;
+    console.error(`[ERROR] [${requestId}] MIRROR_ERROR duration=${duration}ms:`, err.message);
     return res.status(500).json({ ok: false, error: "Mirror failed." });
   }
 });

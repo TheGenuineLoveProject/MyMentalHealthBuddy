@@ -77,4 +77,16 @@ export const sensitiveRateLimit = rateLimitLib({
   },
 });
 
+// Mirror endpoint rate limit (gentle, reflective journaling)
+export const mirrorRateLimit = rateLimitLib({
+  windowMs: 60 * 1000,
+  max: 30,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    ok: false,
+    message: "You're reflecting quickly. Take a moment to breathe, then try again.",
+  },
+});
+
 export default apiRateLimit;

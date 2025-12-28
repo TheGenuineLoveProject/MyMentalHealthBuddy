@@ -25,6 +25,7 @@ import statesRouter from "./routes/states.mjs";
 import promptsRouter from "./routes/prompts.mjs";
 import mirrorRouter from "./routes/mirror.mjs";
 import communityRouter from "./routes/community.mjs";
+import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -32,6 +33,10 @@ const __dirname = dirname(__filename);
 async function startServer() {
   const app = express();
 
+  // Request tracking middleware (first in chain)
+  app.use(requestId);
+  app.use(requestLogger);
+  
   app.use(cors({ origin: true, credentials: true }));
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());

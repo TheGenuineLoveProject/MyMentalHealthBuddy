@@ -50,20 +50,32 @@ function requestJSON(method, path, body, headers = {}) {
     process.exit(1);
   }
 
-  // 2) AI chat check using smoke-test token
-  const ai = await requestJSON(
-    "POST",
-    "/api/v1/ai/chat",
-    { message: "Hello from smoke test" },
-    { Authorization: "Bearer smoketest-token" }
-  );
-  console.log("/api/v1/ai/chat", ai.status, ai.json);
-
-  if (ai.status !== 200 || !ai.json?.ok) {
-    console.error("❌ AI chat check failed");
+  // 2) Mirror endpoint - missing text (should return 400)
+  const mirrorEmpty = await requestJSON("POST", "/api/mirror", {});
+  console.log("/api/mirror (empty)", mirrorEmpty.status, mirrorEmpty.json);
+  if (mirrorEmpty.status !== 400 || mirrorEmpty.json?.ok !== false) {
+    console.error("❌ Mirror empty check failed");
     process.exit(1);
   }
 
-  console.log("✅ Smoke test PASSED — health + AI chat are working.");
+  // 3) Mirror endpoint - valid text
+  const mirror = await requestJSON("POST", "/api/mirror", { 
+    text: "I am feeling thoughtful today." 
+  });
+  console.log("/api/mirror (valid)", mirror.status, mirror.json);
+  if (mirror.status !== 200 || !mirror.json?.ok) {
+    console.error("❌ Mirror valid check failed");
+    process.exit(1);
+  }
+  if (!mirror.json?.reflection) {
+    console.error("❌ Mirror missing reflection");
+    process.exit(1);
+  }
+  if (!mirror.json?.disclaimer) {
+    console.error("❌ Mirror missing disclaimer");
+    process.exit(1);
+  }
+
+  console.log("✅ Smoke test PASSED — health + mirror are working.");
   process.exit(0);
 })();
