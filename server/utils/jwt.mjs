@@ -28,3 +28,6 @@ export function signRefreshToken(payload) {
 export function verifyToken(token) {
   return jwt.verify(token, JWT_SECRET);
 }
+
+// Aliases for backward compatibility
+export { verifyToken as verifyAccessToken };
