@@ -62,6 +62,15 @@ The `/tools` route provides access to 6 privacy-focused reflection tools:
 
 All reflection data stored in browser localStorage (`glp_*` keys) for maximum privacy.
 
+### Wisdom Tools (A→Z Intellectual Enhancement)
+The `/wisdom` route provides advanced intellectual tools for deep thinkers:
+- **Cognitive Frameworks Library**: 12 mental models across 6 categories (philosophy, psychology, systems, decision, creativity, metacognition) including First Principles, Inversion, Steel-Manning, Pre-Mortem, and Paradox Integration
+- **Dialectical Inquiry**: Thesis→Antithesis→Synthesis→Integration flow for exploring truth through opposing perspectives across 6 domains (self, relationships, purpose, growth, fear, truth)
+- **Temporal Reflection**: Past/Present/Future integration with The Witness, The Observer, and The Visionary lenses
+- **Daily Wisdom**: Cross-tradition insights from philosophy, psychology, spirituality, and science
+
+All wisdom data stored in browser localStorage (`glp_dialectical_sessions`, `glp_temporal_integrations`) for maximum privacy.
+
 ### Content Files
 - `server/insights/daily.mjs` - 14 daily insights
 - `server/routes/prompts.mjs` - 24 journal prompts API
