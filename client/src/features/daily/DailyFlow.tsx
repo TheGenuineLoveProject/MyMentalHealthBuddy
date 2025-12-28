@@ -59,7 +59,7 @@ export function DailyFlow() {
               </p>
             </header>
 
-            {/* Today's Insight */}
+            {/* A thought to sit with */}
             <TodaysInsight />
 
             {/* Optional actions */}

@@ -22,15 +22,18 @@ export function TodaysInsight() {
 
   return (
     <div className="p-5 rounded-xl bg-[var(--glp-sage)]/5 border border-[var(--glp-sage)]/10">
-      <p className="text-xs uppercase tracking-wide text-[var(--glp-ink)]/40 mb-3">
-        Today's Insight
+      <p className="text-xs text-[var(--glp-ink)]/40 mb-3">
+        A thought you may want to sit with today
       </p>
       <blockquote 
         className="text-base leading-relaxed text-[var(--glp-ink)]/75"
-        data-testid="text-daily-insight"
+        data-testid="text-daily-thought"
       >
         {data.insight}
       </blockquote>
+      <p className="text-xs text-[var(--glp-ink)]/30 mt-4 italic">
+        Take it or leave it. You know yourself best.
+      </p>
     </div>
   );
 }

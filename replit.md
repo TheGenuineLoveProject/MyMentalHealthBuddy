@@ -85,6 +85,21 @@ The application is designed for optimized production bundles with code splitting
 | ivory | var(--glp-paper) | Background |
 | sun | #EAC33B | Highlight |
 
+### AI Guardrails (MANDATORY)
+The AI must:
+- **Never instruct** — No directives, only observations and questions
+- **Never diagnose** — No labeling or pathologizing experiences
+- **Never promise healing** — We offer reflection space, not cures
+- **Never imply deficiency** — Every state is observed neutrally
+- **Always allow disagreement** — Users can reject any content
+
+Reframed language:
+- "Today's Insight" → "A thought you may want to sit with today"
+- "Track your mood" → "Notice your state"
+- Footer: "You know yourself best." / "Take what serves you."
+
+See `docs/AI_GUARDRAILS.md` for complete guidelines.
+
 ### Crisis Detection
 The AI routes include crisis detection that scans for 14 keywords indicating self-harm intent. When detected, the system returns a safe, compassionate response with crisis resources (988 Suicide Prevention Lifeline, Crisis Text Line) instead of continuing the conversation.
 
