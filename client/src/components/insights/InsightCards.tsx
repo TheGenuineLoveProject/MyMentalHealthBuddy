@@ -3,7 +3,7 @@ import type { InsightCard } from "@/lib/insights/insightEngine";
 function Badge({ text }: { text?: string }) {
   if (!text) return null;
   return (
-    <span className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs text-muted-foreground">
+    <span className="inline-flex items-center rounded-full border px-2 py-0.5 text-xs opacity-80">
       {text}
     </span>
   );
@@ -15,9 +15,11 @@ export default function InsightCards({
   onSave,
 }: {
   cards: InsightCard[];
-  tags: string[];
+  tags?: string[];
   onSave?: () => void;
 }) {
+  if (!cards?.length) return null;
+
   return (
     <section className="mt-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -39,7 +41,7 @@ export default function InsightCards({
         )}
       </div>
 
-      {tags?.length > 0 && (
+      {tags && tags.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-2">
           {tags.map((t) => (
             <span
