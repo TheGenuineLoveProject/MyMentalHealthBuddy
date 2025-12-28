@@ -41,6 +41,7 @@ const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.jsx"));
 const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
 const TodayPage = lazy(() => import("./features/today/TodayPage.jsx"));
+const ToolsPage = lazy(() => import("./pages/ToolsPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -163,6 +164,11 @@ export default function App() {
               <Route path="/community">
                 <RouteGuard>
                   <CommunityPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/tools">
+                <RouteGuard>
+                  <ToolsPage />
                 </RouteGuard>
               </Route>
 
