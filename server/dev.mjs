@@ -22,6 +22,8 @@ import therapyRouter from "./routes/therapy.mjs";
 import dashboardRouter from "./routes/ui-dashboard.mjs";
 import webhookRouter from "./routes/webhook.mjs";
 import insightsRouter from "./routes/insights.mjs";
+import statesRouter from "./routes/states.mjs";
+import promptsRouter from "./routes/prompts.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -49,6 +51,8 @@ async function startServer() {
   app.use("/api/dashboard", dashboardRouter);
   app.use("/api/webhook", webhookRouter);
   app.use("/api/insights", insightsRouter);
+  app.use("/api/states", statesRouter);
+  app.use("/api/prompts", promptsRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });

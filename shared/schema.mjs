@@ -210,6 +210,19 @@ export const achievements = pgTable("achievements", {
   id: uuid("id").defaultRandom().primaryKey(),
 });
 
+/* ================= STATES (NOT MOODS) ================= */
+export const states = pgTable("states", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  energy: varchar("energy", { length: 20 }).notNull(),
+  clarity: varchar("clarity", { length: 20 }).notNull(),
+  openness: varchar("openness", { length: 20 }).notNull(),
+  regulation: varchar("regulation", { length: 20 }).notNull(),
+  presence: varchar("presence", { length: 20 }).notNull(),
+  note: text("note"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 /* ================= BLOG POSTS ================= */
 export const blogPosts = pgTable("blog_posts", {
   id: uuid("id").defaultRandom().primaryKey(),

@@ -24,6 +24,7 @@ import BlogPost from "./pages/BlogPost.jsx";
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
 const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
+const StatePage = lazy(() => import("./pages/StatePage.jsx"));
 const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
 const AIChatPage = lazy(() => import("./pages/AIChatPage.jsx"));
 const Analytics = lazy(() => import("./pages/Analytics.jsx"));
@@ -92,6 +93,11 @@ export default function App() {
               <Route path="/mood">
                 <RouteGuard>
                   <MoodPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/state">
+                <RouteGuard>
+                  <StatePage />
                 </RouteGuard>
               </Route>
               <Route path="/journal">
