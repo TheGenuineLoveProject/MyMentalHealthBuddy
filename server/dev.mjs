@@ -33,7 +33,10 @@ const __dirname = dirname(__filename);
 
 async function startServer() {
   const app = express();
-
+  
+  app.get("/", (req, res) => {
+    res.status(200).send("OK — The Genuine Love Project dev server is running.");
+  });
   // Request tracking middleware (first in chain)
   app.use(requestId);
   app.use(requestLogger);
