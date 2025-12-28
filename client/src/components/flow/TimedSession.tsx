@@ -61,7 +61,7 @@ export default function TimedSession({ onComplete, onCancel }: Props) {
       <div className="space-y-4 text-center">
         <h3 className="text-lg font-semibold">Timed Writing Session</h3>
         <p className="text-sm text-muted-foreground">
-          Choose your duration and write without stopping. No editing, no backspace - just flow.
+          A space for uninterrupted writing, if that feels right for you. You might let thoughts flow without editing.
         </p>
 
         <div className="flex justify-center gap-2">
@@ -134,7 +134,7 @@ export default function TimedSession({ onComplete, onCancel }: Props) {
       />
 
       <p className="text-xs text-center text-muted-foreground">
-        Just write. No fixing, no perfecting. You know yourself best.
+        This is your space. Take what feels helpful. You know yourself best.
       </p>
     </div>
   );

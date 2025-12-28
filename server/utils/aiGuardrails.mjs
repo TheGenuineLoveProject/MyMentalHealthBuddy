@@ -86,10 +86,13 @@ export function enforceQuestionRatio(response, targetRatio = 0.8) {
     "What small step might feel respectful to you?",
     "What do you notice in your body right now?",
     "What would kindness look like here?",
+    "What are you noticing right now?",
+    "What might you want to sit with for a moment?",
+    "What feels important about this?",
   ];
 
   const additionalQuestions = gentleQuestions
-    .slice(0, Math.min(neededQuestions, 2))
+    .slice(0, Math.min(neededQuestions, 4))
     .join("\n");
 
   const enhancedResponse = `${response}\n\n${additionalQuestions}`;
@@ -135,7 +138,7 @@ export function buildSafeResponse(text) {
     response = `${response}\n\nPlease ignore anything that doesn't feel accurate or helpful. ${AI_CONSTRAINTS.requiredDisclaimer}`;
   }
 
-  const { modified, response: enhancedResponse } = enforceQuestionRatio(response, 0.5);
+  const { modified, response: enhancedResponse } = enforceQuestionRatio(response, AI_CONSTRAINTS.minQuestionsRatio);
   if (modified) {
     response = enhancedResponse;
   }
