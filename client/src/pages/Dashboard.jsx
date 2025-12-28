@@ -192,6 +192,25 @@ export default function Dashboard() {
             </article>
           </section>
 
+          {/* Your Space Today - Primary Entry Point */}
+          <Link 
+            href="/today" 
+            className="block mb-8 p-6 rounded-2xl bg-gradient-to-br from-[var(--glp-sage)]/10 to-[var(--glp-sage)]/5 border border-[var(--glp-sage)]/20 hover:border-[var(--glp-sage)]/40 transition-all group"
+            data-testid="link-today"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-medium text-[var(--glp-ink)] group-hover:text-[var(--glp-sage-deep)] transition-colors">
+                  Your Space Today
+                </h2>
+                <p className="text-sm text-[var(--glp-ink)]/50 mt-1">
+                  A place to pause, notice, and reflect — only if it feels supportive.
+                </p>
+              </div>
+              <ArrowRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] group-hover:translate-x-1 transition-all" />
+            </div>
+          </Link>
+
           <nav aria-label="Quick actions" className="mb-8">
             <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />

@@ -36,6 +36,7 @@ const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Pricing = lazy(() => import("./pages/Pricing.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
+const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 
 function LoadingFallback() {
   return (
@@ -88,6 +89,11 @@ export default function App() {
               <Route path="/dashboard">
                 <RouteGuard>
                   <Dashboard />
+                </RouteGuard>
+              </Route>
+              <Route path="/today">
+                <RouteGuard>
+                  <DailyFlow />
                 </RouteGuard>
               </Route>
               <Route path="/mood">
