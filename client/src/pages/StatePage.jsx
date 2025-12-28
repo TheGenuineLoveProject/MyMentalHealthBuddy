@@ -1,14 +1,23 @@
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Info } from "lucide-react";
 import SEO from "../components/SEO.jsx";
-import StateTracker from "../components/StateTracker.jsx";
+import { StateTracker } from "../components/state/StateTracker.tsx";
+
+const DIMENSION_INFO = [
+  { name: "Energy", desc: "Physical and mental fuel available" },
+  { name: "Clarity", desc: "How thoughts are forming and connecting" },
+  { name: "Openness", desc: "Willingness to take in new information" },
+  { name: "Regulation", desc: "How your nervous system is managing stimuli" },
+  { name: "Presence", desc: "Connection to the current moment" },
+  { name: "Pace", desc: "Internal tempo you're experiencing" },
+];
 
 export default function StatePage() {
   return (
     <div className="min-h-screen bg-[var(--glp-paper)]">
       <SEO 
-        title="State Check-in" 
-        description="Notice your current state without judgment. Track energy, clarity, openness, regulation, and presence."
+        title="State Check-in — The Genuine Love Project" 
+        description="Notice your current state without judgment. Track energy, clarity, openness, regulation, presence, and pace."
       />
 
       <div className="mx-auto max-w-xl px-6 py-8">
@@ -22,6 +31,27 @@ export default function StatePage() {
             Dashboard
           </Link>
         </nav>
+
+        {/* Info panel */}
+        <div className="mb-6 p-4 rounded-xl bg-[var(--glp-sage)]/10 border border-[var(--glp-sage)]/20">
+          <div className="flex items-start gap-3">
+            <Info className="w-4 h-4 text-[var(--glp-sage-deep)] mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-sm text-[var(--glp-ink)]/70 mb-3">
+                State tracking observes where you are—not where you should be. 
+                All positions are neutral observations, not goals.
+              </p>
+              <div className="grid grid-cols-2 gap-2 text-xs text-[var(--glp-ink)]/50">
+                {DIMENSION_INFO.map((d) => (
+                  <div key={d.name}>
+                    <span className="font-medium text-[var(--glp-ink)]/60">{d.name}:</span>{" "}
+                    {d.desc}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="bg-white rounded-2xl border border-[var(--glp-ink)]/5 p-6 shadow-sm">
           <StateTracker />

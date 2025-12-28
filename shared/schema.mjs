@@ -219,6 +219,7 @@ export const states = pgTable("states", {
   openness: varchar("openness", { length: 20 }).notNull(),
   regulation: varchar("regulation", { length: 20 }).notNull(),
   presence: varchar("presence", { length: 20 }).notNull(),
+  pace: varchar("pace", { length: 20 }),
   note: text("note"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

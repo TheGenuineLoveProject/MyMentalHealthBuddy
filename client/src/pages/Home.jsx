@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[var(--glp-paper)]">
       <SEO 
-        title="The Genuine Love Project" 
-        description="A private space to process what you carry, without performance or diagnosis."
+        title="The Genuine Love Project — A Private Space for Reflection" 
+        description="A private space to process what you carry—without performance, diagnosis, or someone else's timeline. For people who think deeply."
       />
 
       {/* Minimal nav */}
@@ -19,13 +19,22 @@ export default function Home() {
             The Genuine Love Project
           </span>
         </div>
-        <Link 
-          href="/login" 
-          className="text-sm text-[var(--glp-ink)]/60 hover:text-[var(--glp-ink)] transition-colors"
-          data-testid="link-login"
-        >
-          Sign in
-        </Link>
+        <div className="flex items-center gap-6">
+          <Link 
+            href="/pricing" 
+            className="text-sm text-[var(--glp-ink)]/50 hover:text-[var(--glp-ink)] transition-colors hidden sm:block"
+            data-testid="link-pricing-nav"
+          >
+            Pricing
+          </Link>
+          <Link 
+            href="/login" 
+            className="text-sm text-[var(--glp-ink)]/60 hover:text-[var(--glp-ink)] transition-colors"
+            data-testid="link-login"
+          >
+            Sign in
+          </Link>
+        </div>
       </nav>
 
       {/* Hero */}
@@ -37,30 +46,42 @@ export default function Home() {
             style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
             data-testid="text-headline"
           >
-            A private space to process what you carry,
+            A private space to process what you carry—
             <br className="hidden md:block" />
-            without performance or diagnosis.
+            without performance, diagnosis, or someone else's timeline.
           </h1>
 
-          {/* Secondary line - what this is NOT */}
+          {/* Subhead */}
           <p 
             className="text-base md:text-lg text-[var(--glp-ink)]/65 max-w-2xl leading-relaxed"
             data-testid="text-subheadline"
           >
-            Not therapy. Not a chatbot pretending to understand you.
-            <span className="hidden md:inline"><br /></span>
-            <span className="md:hidden"> </span>
-            Just structured clarity when you need it.
+            For people who think deeply and want tools that respect that.
           </p>
 
-          {/* Action button */}
-          <div className="pt-4">
+          {/* What this is NOT */}
+          <p 
+            className="text-sm text-[var(--glp-ink)]/45 max-w-xl"
+            data-testid="text-not-therapy"
+          >
+            This is not therapy, not a crisis service, and not a place to perform wellness for an audience.
+          </p>
+
+          {/* Action buttons */}
+          <div className="pt-4 flex flex-col sm:flex-row items-start gap-4">
             <Link
               href="/register"
               className="inline-block rounded-xl border border-[var(--glp-sage-deep)]/30 bg-[var(--glp-sage-deep)] px-6 py-3.5 text-sm font-medium text-white transition-all hover:bg-[var(--glp-sage-deep)]/90 hover:shadow-lg"
               data-testid="button-begin"
             >
-              Begin quietly
+              Begin Quietly
+            </Link>
+            <Link
+              href="/pricing"
+              className="inline-block text-sm text-[var(--glp-ink)]/50 hover:text-[var(--glp-ink)] transition-colors py-3.5"
+              data-testid="link-how-it-works"
+            >
+              See how it works
             </Link>
           </div>
         </div>
@@ -86,6 +107,9 @@ export default function Home() {
             </Link>
             <Link href="/blog" className="hover:text-[var(--glp-ink)]/60 transition-colors" data-testid="link-blog">
               Writing
+            </Link>
+            <Link href="/crisis" className="hover:text-[var(--glp-ink)]/60 transition-colors" data-testid="link-crisis">
+              Crisis Resources
             </Link>
           </div>
         </div>

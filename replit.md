@@ -29,14 +29,33 @@ The frontend is a React 18 SPA with TypeScript, built using Vite, Wouter for rou
 
 ### Feature Specifications
 The platform offers:
-- AI-powered chat therapy integrated with the OpenAI API, providing compassionate, trauma-informed responses and crisis intervention awareness.
-- Mood tracking and personal journaling.
-- Comprehensive crisis resources and support.
-- Account lifecycle management (password reset, account deletion, GDPR data export).
-- Robust security features (rate limiting, CSP, input sanitization, CSRF protection).
-- Structured logging, health/readiness endpoints, and a comprehensive gamification system (XP, levels, streaks, daily quests).
-- A comprehensive wellness toolkit with over 54 tools across 6 categories.
-- Premium features including HealingJourneys, ProgressAnalytics, WellnessGoalTracker, AIWellnessConcierge, DailyWellnessPlanner, WellnessTimer, MoodVisualizer, MindfulBreathing, and NotificationCenter, accessible via subscription tiers.
+- **State Tracker**: 6-dimension neutral observation system (energy, clarity, openness, regulation, presence, pace) using non-judgmental language
+- **Today's Insight**: 14 rotating philosophical insights grounded in psychology/systems thinking
+- **Journal Prompts**: 24 intelligent prompts across 4 categories (Awareness, Agency, Relationships, Meaning)
+- AI-powered chat therapy integrated with the OpenAI API, providing compassionate, trauma-informed responses and crisis intervention awareness
+- Personal journaling with intelligent prompts
+- Comprehensive crisis resources and support
+- Account lifecycle management (password reset, account deletion, GDPR data export)
+- Robust security features (rate limiting, CSP, input sanitization, CSRF protection)
+- Structured logging, health/readiness endpoints, and gamification system (XP, levels, streaks, daily quests)
+- Comprehensive wellness toolkit with over 54 tools across 6 categories
+- Premium features accessible via subscription tiers
+
+### State Tracker Dimensions
+| Dimension | Options | Description |
+|-----------|---------|-------------|
+| Energy | Depleted → Low → Neutral → Steady → Wired | Physical and mental fuel available |
+| Clarity | Foggy → Scattered → Mixed → Clear → Sharp | How thoughts are forming and connecting |
+| Openness | Closed → Guarded → Selective → Receptive → Expansive | Willingness to take in new information |
+| Regulation | Reactive → Unstable → Variable → Stable → Grounded | Nervous system management of stimuli |
+| Presence | Distant → Distracted → Partial → Engaged → Absorbed | Connection to the current moment |
+| Pace | Rushed → Hurried → Moderate → Unhurried → Still | Internal tempo experienced |
+
+### Content Files
+- `server/insights/daily.mjs` - 14 daily insights
+- `server/routes/prompts.mjs` - 24 journal prompts API
+- `shared/stateTracker.mjs` - State dimension definitions
+- `docs/content/features-content.md` - Full content reference
 
 ### System Design Choices
 The application is designed for optimized production bundles with code splitting and environment variable configuration. It incorporates health checks, rate limiting, and graceful shutdown handlers. A unified `shared/schema.mjs` serves as the single source of truth for Drizzle ORM models, matching the Neon PostgreSQL database structure with UUIDs, TEXT-based IDs, serial integers, and foreign key constraints with performance-enhancing indexes. The system implements a trauma-informed NLP layer for all user-facing text, crisis detection, and gentle reflection prompts.
