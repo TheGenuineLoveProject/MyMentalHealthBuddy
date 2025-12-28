@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from "react";import React from "react";
 import JournalingMirror from "../features/mirror/JournalingMirror.jsx";
+import InsightCards from "@/components/insights/InsightCards";
+import { buildInsightCards } from "@/lib/insights/insightEngine";
 
-export default function MirrorPage() {
-  return <JournalingMirror />;
-}
 // If you already have shared brand tokens/components, keep this simple for now.
 // Later we can swap in shadcn/ui cards, buttons, etc.
 
@@ -14,11 +13,12 @@ export default function MirrorPage() {
   const [loading, setLoading] = useState(false);
   const [reflection, setReflection] = useState("");
   const [error, setError] = useState("");
-
   const canSubmit = useMemo(() => {
     return consent && text.trim().length >= 8 && !loading;
   }, [consent, text, loading]);
-
+  const [insightCards, setInsightCards] = React.useState<ReturnType<typeof buildInsightCards> | null>(null);
+  const [lastReflection, setLastReflection] = React.useState<string>("");
+  
   async function onSubmit(e) {
     e.preventDefault();
     setError("");
@@ -35,7 +35,6 @@ export default function MirrorPage() {
 
     try {
       setLoading(true);
-
       const res = await fetch("/api/mirror", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -63,7 +62,22 @@ export default function MirrorPage() {
       setLoading(false);
     }
   }
-
+  {insightCards && (
+    <InsightCards
+      cards={insightCards.cards}
+      tags={insightCards.tags}
+      onSave={() => {
+        const payload = {
+          createdAt: new Date().toISOString(),
+          reflection: lastReflection,
+          cards: insightCards.cards,
+          tags: insightCards.tags,
+        };
+        const key = "glp_saved_reflections";
+        const existing = JSON.parse(localStorage.getItem(key) || "[]");
+        localStorage.setItem(key, JSON.stringify([payload, ...existing].slice(0, 50)));
+        alert("Saved ✨");
+      }}
   return (
     <div className="min-h-screen px-4 py-10">
       <div className="mx-auto w-full max-w-3xl">
@@ -165,3 +179,4 @@ export default function MirrorPage() {
     </div>
   );
 }
+return <JournalingMirror />;

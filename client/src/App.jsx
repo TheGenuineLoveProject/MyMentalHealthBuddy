@@ -18,7 +18,7 @@ import SocialHub from "./pages/SocialHub.jsx";
 import ControlDashboard from "./pages/ControlDashboard.jsx";
 import BlogIndex from "./pages/BlogIndex.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
-import Landing from "./pages/Landing.jsx";
+import Landing from "./pages/landing/Landing.jsx";
 import Ethics from "./pages/legal/Ethics.jsx";
 import Disclaimer from "./pages/legal/Disclaimer.jsx";
 
