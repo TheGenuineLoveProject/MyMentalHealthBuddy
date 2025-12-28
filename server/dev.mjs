@@ -9,6 +9,7 @@ import { dirname, resolve } from "path";
 // Import routers AFTER setting up environment
 import authRouter from "./routes/auth.mjs";
 import adminRouter from "./routes/admin.mjs";
+import insightsRouter from "./routes/insights.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -24,6 +25,7 @@ async function startServer() {
   // 2. API routes BEFORE Vite
   app.use("/api/auth", authRouter);
   app.use("/api/admin", adminRouter);
+  app.use("/api/insights", insightsRouter);
 
   // 3. Health check
   app.get("/api/health-check", (_req, res) => {

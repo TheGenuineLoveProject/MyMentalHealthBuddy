@@ -23,6 +23,7 @@ import onboardingRouter from './routes/onboarding.mjs';
 import therapyRouter from './routes/therapy.mjs';
 import dashboardRouter from './routes/ui-dashboard.mjs';
 import webhookRouter from "./routes/webhook.mjs";
+import insightsRouter from './routes/insights.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -60,6 +61,7 @@ app.use('/api/onboarding', onboardingRouter);
 app.use('/api/therapy', therapyRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/webhook', webhookRouter);
+app.use('/api/insights', insightsRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
