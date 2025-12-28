@@ -1,8 +1,13 @@
-// client/src/components/SEO.jsx
-// Dynamic SEO component for page-specific meta tags
-
 import { useEffect } from "react";
 import { BRAND } from "@shared/brand.mjs";
+
+interface SEOProps {
+  title?: string;
+  description?: string;
+  type?: string;
+  image?: string;
+  noindex?: boolean;
+}
 
 const defaultMeta = {
   title: `${BRAND.name} - ${BRAND.tagline}`,
@@ -17,7 +22,7 @@ export function SEO({
   type = defaultMeta.type,
   image = defaultMeta.image,
   noindex = false 
-}) {
+}: SEOProps) {
   const fullTitle = title 
     ? `${title} | ${BRAND.name}` 
     : defaultMeta.title;
@@ -25,7 +30,7 @@ export function SEO({
   useEffect(() => {
     document.title = fullTitle;
 
-    const setMeta = (name, content) => {
+    const setMeta = (name: string, content: string) => {
       let meta = document.querySelector(`meta[name="${name}"]`) || 
                  document.querySelector(`meta[property="${name}"]`);
       if (!meta) {
