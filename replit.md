@@ -51,11 +51,23 @@ The platform offers:
 | Presence | Distant → Distracted → Partial → Engaged → Absorbed | Connection to the current moment |
 | Pace | Rushed → Hurried → Moderate → Unhurried → Still | Internal tempo experienced |
 
+### Reflection Tools (A→Z Enhancement)
+The `/tools` route provides access to 6 privacy-focused reflection tools:
+- **Belief Mapping**: Track patterns in personal beliefs across 4 categories (self, world, others, future)
+- **Timed Writing**: Flow state writing sessions with configurable duration (5-30 minutes)
+- **Silence Mode**: Private writing space with no AI output or analysis
+- **Question Reflection**: Socratic self-inquiry with 20+ questions across 4 categories
+- **Growth Timeline**: Personal evolution visualization without comparison metrics
+- **Export Data**: Markdown/JSON export for full data sovereignty
+
+All reflection data stored in browser localStorage (`glp_*` keys) for maximum privacy.
+
 ### Content Files
 - `server/insights/daily.mjs` - 14 daily insights
 - `server/routes/prompts.mjs` - 24 journal prompts API
 - `shared/stateTracker.mjs` - State dimension definitions
 - `docs/content/features-content.md` - Full content reference
+- `server/utils/aiGuardrails.mjs` - AI response safety enforcement
 
 ### System Design Choices
 The application is designed for optimized production bundles with code splitting and environment variable configuration. It incorporates health checks, rate limiting, and graceful shutdown handlers. A unified `shared/schema.mjs` serves as the single source of truth for Drizzle ORM models, matching the Neon PostgreSQL database structure with UUIDs, TEXT-based IDs, serial integers, and foreign key constraints with performance-enhancing indexes. The system implements a trauma-informed NLP layer for all user-facing text, crisis detection, and gentle reflection prompts.
