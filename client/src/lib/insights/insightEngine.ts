@@ -1,8 +1,8 @@
 export type InsightCard = {
   title: string;
-  subtitle?: string;
   body: string;
   tag?: "Name it" | "Normalize it" | "Next kind step";
+  subtitle?: string;
   badge?: string;
 };
 
@@ -11,7 +11,7 @@ export type EngineOutput = {
   tags: string[];
 };
 
-function clampText(s: string, max = 260) {
+function clampText(s: string, max = 320) {
   const t = (s || "").trim();
   if (t.length <= max) return t;
   return t.slice(0, max - 1).trimEnd() + "…";
