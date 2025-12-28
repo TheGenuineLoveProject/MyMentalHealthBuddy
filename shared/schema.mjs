@@ -266,3 +266,28 @@ export const sharedQuestions = pgTable("shared_questions", {
   activeDate: timestamp("active_date"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+/* ================= REFLECTIONS (Insight Trails) ================= */
+export const reflections = pgTable("reflections", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  text: text("text").notNull(),
+  mode: varchar("mode", { length: 50 }).default("narrative"),
+  tags: text("tags"),
+  insightCards: text("insight_cards"),
+  stateSnapshot: text("state_snapshot"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= DAILY RITUALS ================= */
+export const dailyRituals = pgTable("daily_rituals", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  date: timestamp("date").notNull(),
+  stateId: uuid("state_id"),
+  reflectionId: uuid("reflection_id"),
+  promptUsed: text("prompt_used"),
+  insightId: text("insight_id"),
+  completedSteps: text("completed_steps"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
