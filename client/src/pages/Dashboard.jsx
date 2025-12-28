@@ -4,6 +4,7 @@ import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Mi
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO.jsx";
 import DailyAffirmations from "../components/DailyAffirmations.jsx";
+import DailyInsight from "../components/DailyInsight.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/brand.css";
 
@@ -292,6 +293,8 @@ export default function Dashboard() {
               </div>
             </section>
           )}
+
+          <DailyInsight />
         </div>
       </div>
     </>
