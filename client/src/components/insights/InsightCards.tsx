@@ -35,6 +35,7 @@ export default function InsightCards({
             type="button"
             onClick={onSave}
             className="rounded-lg border px-3 py-2 text-sm hover:bg-muted"
+            data-testid="button-save-reflection"
           >
             Save to my reflections
           </button>

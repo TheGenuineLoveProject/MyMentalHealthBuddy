@@ -4,8 +4,10 @@ import { buildInsightCards } from "@/lib/insights/insightEngine";
 import JournalMirror from "@/features/mirror/JournalMirror";
 import WisdomCard from "@/components/wisdom/WisdomCard";
 import PatternInsights from "@/components/patterns/PatternInsights";
+import { useToast } from "@/hooks/use-toast";
 
 export default function MirrorPage() {
+  const { toast } = useToast();
   const [insightCards, setInsightCards] = useState(null);
   const [lastReflection, setLastReflection] = useState(null);
   const [savedReflections, setSavedReflections] = useState([]);
@@ -54,7 +56,10 @@ export default function MirrorPage() {
       tags: r.tags || [],
     })));
 
-    alert("Saved to your private reflection history.");
+    toast({
+      title: "Reflection saved",
+      description: "Added to your private reflection history.",
+    });
   }
 
   return (

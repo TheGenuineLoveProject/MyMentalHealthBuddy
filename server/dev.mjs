@@ -40,7 +40,25 @@ async function startServer() {
   app.use(requestId);
   app.use(requestLogger);
   
-  app.use(cors({ origin: true, credentials: true }));
+  const allowedOrigins = [
+    process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : null,
+    process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : null,
+    'http://localhost:5000',
+    'http://127.0.0.1:5000',
+  ].filter(Boolean);
+  
+  app.use(cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.some(allowed => origin.startsWith(allowed.replace(/:\d+$/, '')))) {
+        callback(null, true);
+      } else if (process.env.NODE_ENV === 'development') {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true
+  }));
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
 
@@ -107,10 +125,5 @@ async function startServer() {
   process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
   process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 }
-// SPA fallback (so Preview doesn't 403)
-app.get("*", (req, res) => {
-  // If you have a built client, serve its index.html here.
-  // Minimal fallback for dev:
-  res.status(200).send("✅ Server is running. Frontend is served by Vite in dev.");
-});
+
 startServer().catch(console.error);
