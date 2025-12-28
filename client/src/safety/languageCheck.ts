@@ -1,3 +1,13 @@
+import { toneRules } from "./toneRules";
+
+export function containsBlockedLanguage(text: string): boolean {
+  const t = text.toLowerCase();
+  return toneRules.blocked.some((p) => t.includes(p));
+}
+
+export function safeTextOrFallback(text: string, fallback: string) {
+  return containsBlockedLanguage(text) ? fallback : text;
+}
 export const aiBoundaries = {
   noAuthorityVoice: [
     "I'm telling you",
