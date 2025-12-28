@@ -53,9 +53,21 @@ async function startServer() {
   });
 
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, "0.0.0.0", () => {
+  const server = app.listen(PORT, "0.0.0.0", () => {
     console.log(`Dev server listening on http://0.0.0.0:${PORT}`);
   });
+
+  function gracefulShutdown(signal) {
+    console.log(`${signal} received, shutting down...`);
+    server.close(() => {
+      console.log("Server closed.");
+      process.exit(0);
+    });
+    setTimeout(() => process.exit(1), 5000);
+  }
+
+  process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+  process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 }
 
 startServer().catch(console.error);

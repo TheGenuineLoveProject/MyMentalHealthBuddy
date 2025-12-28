@@ -1,25 +1,15 @@
 import 'dotenv/config';
 import express from 'express';
-import adminRouter from './routes/admin.mjs';
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-import authRoutes from "./routes/auth.mjs";
-
-app.use(express.json());
-app.use("/api", authRoutes);
 import compression from 'compression';
 import helmet from "helmet";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 import { dirname, join } from 'path';
-import { buildSessionMiddleware } from './middleware/session.mjs';
-import { auth } from "./middleware/auth.mjs";
-import adminRoutes from "./routes/admin.mjs";
+import process from "node:process";
 
-app.use("/api/admin", auth, adminRoutes);
-// Import all route modules
 import authRouter from './routes/auth.mjs';
+import adminRouter from './routes/admin.mjs';
 import blogRouter from './routes/blog.mjs';
 import journalRouter from './routes/journal.mjs';
 import moodRouter from './routes/mood.mjs';
@@ -32,8 +22,6 @@ import gamificationRouter from './routes/gamification.mjs';
 import onboardingRouter from './routes/onboarding.mjs';
 import therapyRouter from './routes/therapy.mjs';
 import dashboardRouter from './routes/ui-dashboard.mjs';
-
-import process from "node:process";
 import webhookRouter from "./routes/webhook.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -46,34 +34,24 @@ if (isProduction && !process.env.DATABASE_URL) {
   process.exit(1);
 }
 
-// Trust proxy for secure cookies behind load balancer
+const app = express();
+
 app.set('trust proxy', 1);
 
-// Core middleware
-app.use(helmet({
-  contentSecurityPolicy: false
-}));
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(compression());
 app.use(express.json({ limit: '1mb' }));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(cors({ origin: true, credentials: true }));
 
-app.use(
-  cors({
-    origin: true,
-    credentials: true
-  })
-);
-
-// Sessions
-app.use(buildSessionMiddleware());
-
-// API routes
 app.use('/api/auth', authRouter);
+app.use('/api/admin', adminRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/journal', journalRouter);
 app.use('/api/mood', moodRouter);
 app.use('/api/health', healthRouter);
 app.use('/api/account', accountRouter);
-app.use("/api/admin", adminRoutes);
 app.use('/api/ai', aiRouter);
 app.use('/api/analytics', analyticsRouter);
 app.use('/api/billing', billingRouter);
@@ -83,21 +61,18 @@ app.use('/api/therapy', therapyRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/webhook', webhookRouter);
 
-app.get("/api/health", (req, res) => {
-  res.status(200).json({ ok: true, service: "TheGenuineLoveProject", time: new Date().toISOString() });
+app.get("/api/health-check", (_req, res) => {
+  res.json({ ok: true, env: isProduction ? "production" : "development" });
 });
 
-// Serve frontend (Vite build output)
 const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));
 
-// SPA fallback
-app.get("*", (req, res) => {
+app.get("*", (_req, res) => {
   res.sendFile(join(distPath, "index.html"));
 });
 
-// Error handler
-app.use((err, req, res, next) => {
+app.use((err, _req, res, _next) => {
   console.error("Server error:", err);
   res.status(500).json({
     ok: false,
@@ -107,8 +82,21 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-const HOST = "0.0.0.0";
-
-app.listen(PORT, HOST, () => {
-  console.log(`✅ API server listening on http://${HOST}:${PORT}`);
+const server = app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server listening on http://0.0.0.0:${PORT}`);
 });
+
+function gracefulShutdown(signal) {
+  console.log(`${signal} received, shutting down gracefully...`);
+  server.close(() => {
+    console.log("Server closed.");
+    process.exit(0);
+  });
+  setTimeout(() => {
+    console.error("Forced shutdown after timeout.");
+    process.exit(1);
+  }, 10000);
+}
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
