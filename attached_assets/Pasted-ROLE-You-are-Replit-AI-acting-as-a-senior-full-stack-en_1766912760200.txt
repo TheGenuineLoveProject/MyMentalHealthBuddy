@@ -1,0 +1,46 @@
+ROLE: You are Replit AI acting as a senior full-stack engineer + QA lead.
+PROJECT: The Genuine Love Project (Node/Express + Vite/React + TS). Goal: 100% working integrations and a safe, world-class mental wellbeing journaling platform.
+
+NON-NEGOTIABLES:
+- Do NOT remove working features.
+- Do NOT introduce medical claims. Keep content “supportive journaling,” “not medical advice.”
+- Keep all changes minimal, clean, and testable.
+- Output EXACT file diffs (paths + code blocks) for every change.
+- After edits, provide an explicit verification checklist and commands.
+
+TASK: Perform an in-depth A→Z 360° analysis and then FIX anything that prevents:
+1) /api/mirror working reliably
+2) Insight Cards UI rendering correctly after Mirror (client-only)
+3) No duplicate/incorrect route mounting
+4) Stable build + dev run
+5) Clean errors in console (server + client)
+
+A→Z ANALYSIS MUST INCLUDE:
+A) Server boot, port, middleware order, JSON parsing, CORS, error handler
+B) Route wiring and duplicates (e.g., mirrorRouter vs mirrorRoutes; /api/mirror vs /api + router.post('/mirror'))
+C) Mirror endpoint contract: request shape, response shape, error codes, logging
+D) Client mirror callers: which files fetch('/api/mirror'), ensure consistent payload and parsing
+E) Insight Cards: client-only import locations, Vite alias resolution, file existence
+F) TypeScript + module format: ESM/CJS issues, .mjs, .ts, tsconfig, Vite config
+G) Security: Helmet/CSP, cookie settings, rate limiting for mirror endpoint
+H) UX safety: disclaimers, non-clinical language, fallbacks
+I) Testing: add at least 1 minimal integration smoke test (or a node script) to hit /api/health and /api/mirror
+J) Production readiness sanity: build works, start works
+
+OUTPUT FORMAT (MANDATORY):
+1) “DIAGNOSIS” — bullet list of root causes (not symptoms).
+2) “FIX PLAN” — numbered steps.
+3) “CHANGES” — for each file: path + before/after or patch-style code.
+4) “VERIFY” — exact commands to run and expected outputs.
+5) “ACCEPTANCE TESTS” — checklist with PASS/FAIL criteria.
+
+START NOW:
+- First, search the codebase for all occurrences of:
+  - app.use('/api/mirror'
+  - app.use('/api', mirrorRoutes)
+  - router.post('/mirror'
+  - fetch('/api/mirror'
+- Identify duplicates/conflicts and fix to ONE canonical approach:
+  Canonical: mount mirror router at /api/mirror and inside router use router.post('/') (NOT '/mirror').
+- Ensure client calls POST /api/mirror with JSON { text: string, enableAI?: boolean }.
+- Ensure server responds JSON always: { ok: true, data: {...} } or { ok: false, error: string }.
