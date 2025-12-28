@@ -1,4 +1,3 @@
-import React from "react";
 import type { InsightCard } from "@/lib/insights/insightEngine";
 
 function Badge({ text }: { text?: string }) {
