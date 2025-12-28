@@ -28,6 +28,7 @@ import statesRouter from './routes/states.mjs';
 import promptsRouter from './routes/prompts.mjs';
 import mirrorRouter from "./routes/mirror.mjs";
 import communityRouter from "./routes/community.mjs";
+import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -42,6 +43,10 @@ if (isProduction && !process.env.DATABASE_URL) {
 const app = express();
 
 app.set('trust proxy', 1);
+
+// Request tracking middleware (first in chain)
+app.use(requestId);
+app.use(requestLogger);
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(compression());
