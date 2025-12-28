@@ -1,3 +1,5 @@
+import React from "react";
+import JournalingMirror from "../features/mirror/JournalingMirror.jsx";
 import { Switch, Route } from "wouter";
 import { Suspense, lazy } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -20,12 +22,7 @@ import SocialHub from "./pages/SocialHub.jsx";
 import ControlDashboard from "./pages/ControlDashboard.jsx";
 import BlogIndex from "./pages/BlogIndex.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
-import Landing from "./pages/Landing.jsx";
-import TodayPage from "./features/today/TodayPage.jsx";
-import JournalingMirrorPage from "./features/mirror/JournalingMirrorPage.jsx";
-import SharedReflectionsPage from "./features/community/SharedReflectionsPage.jsx";
-import Ethics from "./pages/legal/Ethics.jsx";
-import Disclaimer from "./pages/legal/Disclaimer.jsx";
+import MirrorPage from "./pages/MirrorPage.jsx";
 
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
@@ -45,6 +42,14 @@ const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/Mirror.tsx"));
 const CommunityPage = lazy(() => import("./pages/CommunityPage.tsx"));
+import Landing from "./pages/Landing.jsx";
+import TodayPage from "./features/today/TodayPage.jsx";
+import StatePage from "./features/state/StatePage.jsx";
+import JournalPage from "./features/journal/JournalPage.jsx";
+import JournalingMirrorPage from "./features/mirror/JournalingMirrorPage.jsx";
+import SharedReflectionsPage from "./features/community/SharedReflectionsPage.jsx";
+import Ethics from "./pages/legal/Ethics.jsx";
+import Disclaimer from "./pages/legal/Disclaimer.jsx";
 
 function LoadingFallback() {
   return (
@@ -56,6 +61,8 @@ function LoadingFallback() {
     </div>
   );
 }
+export default function MirrorPage() {
+  return <JournalingMirror />;
 
 export default function App() {
   return (

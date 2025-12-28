@@ -3,17 +3,66 @@ import { requireAuth } from "../middleware/auth.mjs";
 import OpenAI from "openai";
 import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../utils/safetyCheck.mjs";
 
+let aiService = null;
+try {
+  const mod = await import("../services/aiHandler.mjs");
+  aiService = mod?.default || mod?.aiService || null;
+} catch {
+  aiService = null;
+}
+
 const router = express.Router();
 
 /**
- * SAFETY PRINCIPLES
- * - No diagnosis
- * - No advice
- * - No interpretation
- * - No therapy language
- * - Mirrors user's own words only
- * - Optional, user-controlled
+ * POST /api/mirror
+ * Body: { text: string, enableAI?: boolean }
+ *
+ * Safety: "mirror, not authority" — no diagnosis, no commands, no therapy claims.
  */
+router.post("/", async (req, res) => {
+  try {
+    const text = String(req.body?.text ?? "").trim();
+    const enableAI = Boolean(req.body?.enableAI);
+
+    if (!text) {
+      return res.status(400).json({
+        ok: false,
+        error: "Missing 'text' in request body.",
+      });
+    }
+
+    const localReflection =
+      `Here's what I'm hearing in your words:\n\n` +
+      `"${text}"\n\n` +
+      `A gentle question you can try:\n` +
+      `• What would feeling 5% calmer look like in the next 10 minutes?\n` +
+      `• What is one small thing you can do that supports you right now?\n`;
+
+    let reflection = localReflection;
+
+    if (enableAI && aiService?.mirror) {
+      const aiText = await aiService.mirror(text);
+      const safetyResult = checkResponseSafety(aiText);
+      if (!safetyResult.passes) {
+        reflection = sanitizeAIResponse(aiText);
+      } else {
+        reflection = aiText;
+      }
+    }
+
+    reflection = ensureDisclaimer(reflection);
+
+    return res.json({ ok: true, reflection });
+  } catch (err) {
+    console.error("Mirror route error:", err);
+    return res.json({
+      ok: true,
+      reflection: ensureDisclaimer(
+        "Your words carry their own meaning. Sometimes simply writing is enough.\n\nIf anything here doesn't feel accurate, ignore it — you know yourself best."
+      ),
+    });
+  }
+});
 
 function localSafeMirror(text = "") {
   const clean = String(text).trim().slice(0, 6000);

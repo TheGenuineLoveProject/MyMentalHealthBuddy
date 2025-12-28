@@ -1,5 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";import React from "react";
+import JournalingMirror from "../features/mirror/JournalingMirror.jsx";
 
+export default function MirrorPage() {
+  return <JournalingMirror />;
+}
 // If you already have shared brand tokens/components, keep this simple for now.
 // Later we can swap in shadcn/ui cards, buttons, etc.
 
