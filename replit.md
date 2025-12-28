@@ -71,6 +71,32 @@ The `/wisdom` route provides advanced intellectual tools for deep thinkers:
 
 All wisdom data stored in browser localStorage (`glp_dialectical_sessions`, `glp_temporal_integrations`) for maximum privacy.
 
+### Advanced Intellectual Tools (A→Z MIT-Level Enhancement)
+The `/advanced` route provides 13 rigorous intellectual instruments organized into 4 categories:
+
+**Reasoning & Logic**
+- **Logic Lattice Lab**: Map arguments with claims, premises, evidence, counters, and inferences; includes 8 fallacy references
+- **Decision Architecture**: Structure complex choices with options, pros/cons, reversibility assessment, and pre-mortem analysis
+- **Thought Experiments Lab**: 8 classic philosophical puzzles (Trolley, Experience Machine, Ship of Theseus, etc.) with guided reflection
+
+**Systems & Patterns**
+- **Systems Resonance Simulator**: Model feedback loops with stocks, flows, variables, delays; detects reinforcing vs. balancing loops
+- **Paradox Cartographer**: Navigate tensions on dual-axis maps without forcing resolution; includes 6 paradox templates
+- **Synthesis Collider**: Combine artifacts through 10 creative lenses to generate novel insights
+
+**Knowledge & Learning**
+- **Knowledge Weave Map**: Connect concepts across 8 categories with 5 relationship types; includes cluster detection
+- **Autodidact Forge**: Self-directed learning with 4 time horizons, experiment templates, momentum tracking
+- **Semantic Mapping**: Explore personal word meanings, emotional valence, and semantic relationships
+
+**Self-Awareness**
+- **Metacognition Dashboard**: Track thinking patterns, mental states, cognitive areas, optimal conditions
+- **Bias Blind Spots**: 12 cognitive biases with incident tracking and debiasing strategies
+- **Epistemic Calibration**: Prediction tracking, belief auditing, Brier score calculation
+- **Philosophical Stance Mapper**: 12 fundamental questions across 7 philosophical domains
+
+All advanced tools data stored in browser localStorage (`glp_decision_frames`, `glp_epistemic_profile`, `glp_thought_sessions`, `glp_metacognitive_profile`, `glp_bias_profile`, `glp_semantic_maps`, `glp_philosophical_profile`) for maximum privacy.
+
 ### Content Files
 - `server/insights/daily.mjs` - 14 daily insights
 - `server/routes/prompts.mjs` - 24 journal prompts API
