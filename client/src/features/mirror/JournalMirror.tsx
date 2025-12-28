@@ -50,7 +50,7 @@ export default function JournalingMirror() {
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
-          placeholder="Write what you’re carrying right now..."
+          placeholder="Write what you're carrying right now..."
           className="w-full min-h-[160px] rounded-md border p-3 bg-transparent"
         />
 
