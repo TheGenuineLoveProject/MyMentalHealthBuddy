@@ -1,9 +1,51 @@
-import { Router } from "express";
+import express from "express";
 import { requireAuth } from "../middleware/auth.mjs";
 import OpenAI from "openai";
 import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../utils/safetyCheck.mjs";
 
-const router = Router();
+const router = express.Router();
+
+/**
+ * SAFETY PRINCIPLES
+ * - No diagnosis
+ * - No advice
+ * - No interpretation
+ * - No therapy language
+ * - Mirrors user's own words only
+ * - Optional, user-controlled
+ */
+
+function localSafeMirror(text = "") {
+  const clean = String(text).trim().slice(0, 6000);
+
+  const summary = clean
+    .split(/\n+/)
+    .map(l => l.trim())
+    .filter(Boolean)
+    .slice(0, 4)
+    .join("\n");
+
+  const questions = [
+    "What feels most important in what you wrote?",
+    "What part of this deserves kindness right now?",
+    "What would support you just a little today?",
+    "What feels steady or grounding, even briefly?"
+  ];
+
+  return {
+    mirror:
+      (summary
+        ? `Here is what I hear reflected in your words:\n\n${summary}`
+        : "I'm here with you.") +
+      "\n\nIf you want, you can reflect on one of these questions:\n" +
+      questions.map(q => `• ${q}`).join("\n"),
+    questions,
+    meta: {
+      mode: "local_safe_mirror",
+      truncated: clean.length >= 6000
+    }
+  };
+}
 
 const MIRROR_SYSTEM_PROMPT = `You are a gentle mirror for journaling. Your role is to reflect the user's words back to them without interpretation, advice, or diagnosis.
 
@@ -28,6 +70,29 @@ const REFLECTION_PROMPT = `Here is a gentle reflection of what you wrote.
 It may not fully capture your experience — please keep only what feels true to you.
 
 `;
+
+router.post("/mirror", async (req, res) => {
+  try {
+    const { text, enableAI } = req.body || {};
+
+    if (!text || !String(text).trim()) {
+      return res.status(400).json({ ok: false, error: "Text is required." });
+    }
+
+    const result = localSafeMirror(text);
+
+    res.json({
+      ok: true,
+      enableAI: Boolean(enableAI),
+      ...result
+    });
+  } catch (err) {
+    res.status(500).json({
+      ok: false,
+      error: "Mirror processing failed."
+    });
+  }
+});
 
 router.post("/reflect", requireAuth, async (req, res) => {
   try {

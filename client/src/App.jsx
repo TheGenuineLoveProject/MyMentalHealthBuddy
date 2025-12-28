@@ -20,6 +20,12 @@ import SocialHub from "./pages/SocialHub.jsx";
 import ControlDashboard from "./pages/ControlDashboard.jsx";
 import BlogIndex from "./pages/BlogIndex.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
+import Landing from "./pages/Landing.jsx";
+import TodayPage from "./features/today/TodayPage.jsx";
+import JournalingMirrorPage from "./features/mirror/JournalingMirrorPage.jsx";
+import SharedReflectionsPage from "./features/community/SharedReflectionsPage.jsx";
+import Ethics from "./pages/legal/Ethics.jsx";
+import Disclaimer from "./pages/legal/Disclaimer.jsx";
 
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
@@ -39,12 +45,6 @@ const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/Mirror.tsx"));
 const CommunityPage = lazy(() => import("./pages/CommunityPage.tsx"));
-import Landing from "./pages/Landing.jsx";
-import TodayPage from "./features/today/TodayPage.jsx";
-import JournalingMirrorPage from "./features/mirror/JournalingMirrorPage.jsx";
-import SharedReflectionsPage from "./features/community/SharedReflectionsPage.jsx";
-import Ethics from "./pages/legal/Ethics.jsx";
-import Disclaimer from "./pages/legal/Disclaimer.jsx";
 
 function LoadingFallback() {
   return (
