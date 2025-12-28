@@ -1,203 +1,45 @@
 import express from "express";
-import { requireAuth } from "../middleware/auth.mjs";
-import OpenAI from "openai";
-import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../utils/safetyCheck.mjs";
-
-let aiService = null;
-try {
-  const mod = await import("../services/aiHandler.mjs");
-  aiService = mod?.default || mod?.aiService || null;
-} catch {
-  aiService = null;
-}
+import { ensureDisclaimer } from "../utils/safetyCheck.mjs";
 
 const router = express.Router();
 
 /**
  * POST /api/mirror
- * Body: { text: string, enableAI?: boolean }
- *
- * Safety: "mirror, not authority" — no diagnosis, no commands, no therapy claims.
+ * Safe baseline: mirrors the user's words (no diagnosis, no advice).
+ * Optional: enableAI flag can be used later, but keep baseline safe.
  */
-router.post("/", async (req, res) => {
-  try {
-    const text = String(req.body?.text ?? "").trim();
-    const enableAI = Boolean(req.body?.enableAI);
-
-    if (!text) {
-      return res.status(400).json({
-        ok: false,
-        error: "Missing 'text' in request body.",
-      });
-    }
-
-    const localReflection =
-      `Here's what I'm hearing in your words:\n\n` +
-      `"${text}"\n\n` +
-      `A gentle question you can try:\n` +
-      `• What would feeling 5% calmer look like in the next 10 minutes?\n` +
-      `• What is one small thing you can do that supports you right now?\n`;
-
-    let reflection = localReflection;
-
-    if (enableAI && aiService?.mirror) {
-      const aiText = await aiService.mirror(text);
-      const safetyResult = checkResponseSafety(aiText);
-      if (!safetyResult.passes) {
-        reflection = sanitizeAIResponse(aiText);
-      } else {
-        reflection = aiText;
-      }
-    }
-
-    reflection = ensureDisclaimer(reflection);
-
-    return res.json({ ok: true, reflection });
-  } catch (err) {
-    console.error("Mirror route error:", err);
-    return res.json({
-      ok: true,
-      reflection: ensureDisclaimer(
-        "Your words carry their own meaning. Sometimes simply writing is enough.\n\nIf anything here doesn't feel accurate, ignore it — you know yourself best."
-      ),
-    });
-  }
-});
-
-function localSafeMirror(text = "") {
-  const clean = String(text).trim().slice(0, 6000);
-
-  const summary = clean
-    .split(/\n+/)
-    .map(l => l.trim())
-    .filter(Boolean)
-    .slice(0, 4)
-    .join("\n");
-
-  const questions = [
-    "What feels most important in what you wrote?",
-    "What part of this deserves kindness right now?",
-    "What would support you just a little today?",
-    "What feels steady or grounding, even briefly?"
-  ];
-
-  return {
-    mirror:
-      (summary
-        ? `Here is what I hear reflected in your words:\n\n${summary}`
-        : "I'm here with you.") +
-      "\n\nIf you want, you can reflect on one of these questions:\n" +
-      questions.map(q => `• ${q}`).join("\n"),
-    questions,
-    meta: {
-      mode: "local_safe_mirror",
-      truncated: clean.length >= 6000
-    }
-  };
-}
-
-const MIRROR_SYSTEM_PROMPT = `You are a gentle mirror for journaling. Your role is to reflect the user's words back to them without interpretation, advice, or diagnosis.
-
-MANDATORY RULES:
-1. NEVER give advice or tell the user what to do
-2. NEVER diagnose or label their experience
-3. NEVER interpret meaning beyond what they explicitly wrote
-4. NEVER use words like "should", "must", "need to", "have to"
-5. ALWAYS ask permission before offering any reflection
-6. ALWAYS include the disclaimer at the end
-
-Your responses should:
-- Summarize or rephrase what the user wrote
-- Highlight themes THEY already expressed
-- Use tentative language: "You might notice...", "One way to describe what you wrote is...", "It seems like you mentioned..."
-- Be brief and gentle
-
-Always end with:
-"Please ignore anything that doesn't feel accurate or helpful. You know yourself best."`;
-
-const REFLECTION_PROMPT = `Here is a gentle reflection of what you wrote.
-It may not fully capture your experience — please keep only what feels true to you.
-
-`;
-
 router.post("/mirror", async (req, res) => {
   try {
-    const { text, enableAI } = req.body || {};
+    const { text = "", enableAI = false } = req.body || {};
 
-    if (!text || !String(text).trim()) {
-      return res.status(400).json({ ok: false, error: "Text is required." });
+    // Safety + disclaimer gate (must NOT be declared twice anywhere)
+    const disclaimer = ensureDisclaimer({ feature: "mirror" });
+
+    const clean = String(text || "").trim();
+    if (!clean) {
+      return res.status(400).json({
+        ok: false,
+        error: "Please write something first.",
+        disclaimer,
+      });
     }
 
-    const result = localSafeMirror(text);
+    // LOCAL SAFE MIRROR (no AI, no therapy)
+    const reflection =
+      "Here is what I hear in your words:\n\n" +
+      clean +
+      "\n\nIf you want, what part of this feels most important right now?";
 
-    res.json({
+    return res.json({
       ok: true,
-      enableAI: Boolean(enableAI),
-      ...result
+      reflection,
+      usedAI: false,
+      disclaimer,
     });
   } catch (err) {
-    res.status(500).json({
+    return res.status(500).json({
       ok: false,
-      error: "Mirror processing failed."
-    });
-  }
-});
-
-router.post("/reflect", requireAuth, async (req, res) => {
-  try {
-    const { text, permission } = req.body;
-
-    if (!text || typeof text !== "string") {
-      return res.status(400).json({ ok: false, message: "Text is required" });
-    }
-
-    if (!permission) {
-      return res.json({
-        ok: true,
-        askingPermission: true,
-        message: "Would you like a gentle reflection of what you wrote? This is completely optional — your words are valuable as they are.",
-      });
-    }
-
-    if (!process.env.OPENAI_API_KEY) {
-      return res.json({
-        ok: true,
-        reflection: REFLECTION_PROMPT + "Your words carry their own meaning. Sometimes simply writing is enough.\n\nPlease ignore anything that doesn't feel accurate or helpful. You know yourself best.",
-      });
-    }
-
-    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: MIRROR_SYSTEM_PROMPT },
-        { role: "user", content: `Please provide a gentle, non-directive reflection of this journal entry:\n\n"${text}"` },
-      ],
-      max_tokens: 300,
-      temperature: 0.7,
-    });
-
-    let reflection = completion.choices[0]?.message?.content || 
-      "Your words hold their own meaning. Sometimes the act of writing is the insight itself.";
-
-    const safetyResult = checkResponseSafety(reflection);
-    if (!safetyResult.passes) {
-      console.warn("Mirror response safety check failed:", safetyResult.violations);
-      reflection = sanitizeAIResponse(reflection);
-    }
-    
-    reflection = ensureDisclaimer(reflection);
-
-    res.json({
-      ok: true,
-      reflection: REFLECTION_PROMPT + reflection,
-    });
-  } catch (err) {
-    console.error("Mirror reflection error:", err);
-    res.json({
-      ok: true,
-      reflection: REFLECTION_PROMPT + "Your words carry their own meaning. Sometimes simply writing is enough.\n\nPlease ignore anything that doesn't feel accurate or helpful. You know yourself best.",
+      error: "Mirror failed.",
     });
   }
 });
