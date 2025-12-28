@@ -1,18 +1,22 @@
-export const brand = {
-  name: "The Genuine Love Project",
-  tagline: "Live in Genuine Love",
+export const tokens = {
   colors: {
-    sage: "var(--glp-sage)",
-    blossom: "var(--glp-blush)",
-    teal: "var(--glp-sage-deep)",
-    ivory: "var(--glp-paper)",
-    charcoal: "var(--glp-ink)",
-    gold: "var(--glp-gold)",
+    background: "#F6F7F6",
+    surface: "#FFFFFF",
+    primary: "#2F5D62",
+    secondary: "#5E8B7E",
+    textPrimary: "#1F2933",
+    textSecondary: "#4B5563",
+    border: "#E5E7EB",
   },
-  assets: {
-    logo: "/brand/logo.png",
-    logoMark: "/brand/logo.png",
-    logoLockup: "/brand/logo.png",
-    favicon: "/brand/favicon.svg",
+  radius: {
+    sm: "6px",
+    md: "12px",
+    lg: "18px",
+  },
+  spacing: {
+    sm: "8px",
+    md: "16px",
+    lg: "24px",
+    xl: "40px",
   },
 };
