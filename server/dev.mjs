@@ -6,9 +6,21 @@ import { createServer as createViteServer } from "vite";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
 
-// Import routers AFTER setting up environment
 import authRouter from "./routes/auth.mjs";
 import adminRouter from "./routes/admin.mjs";
+import blogRouter from "./routes/blog.mjs";
+import journalRouter from "./routes/journal.mjs";
+import moodRouter from "./routes/mood.mjs";
+import healthRouter from "./routes/health.mjs";
+import accountRouter from "./routes/account.mjs";
+import aiRouter from "./routes/ai.mjs";
+import analyticsRouter from "./routes/analytics.mjs";
+import billingRouter from "./routes/billing.mjs";
+import gamificationRouter from "./routes/gamification.mjs";
+import onboardingRouter from "./routes/onboarding.mjs";
+import therapyRouter from "./routes/therapy.mjs";
+import dashboardRouter from "./routes/ui-dashboard.mjs";
+import webhookRouter from "./routes/webhook.mjs";
 import insightsRouter from "./routes/insights.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -17,22 +29,31 @@ const __dirname = dirname(__filename);
 async function startServer() {
   const app = express();
 
-  // 1. Core middleware FIRST
   app.use(cors({ origin: true, credentials: true }));
-  app.use(express.json());
+  app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
 
-  // 2. API routes BEFORE Vite
   app.use("/api/auth", authRouter);
   app.use("/api/admin", adminRouter);
+  app.use("/api/blog", blogRouter);
+  app.use("/api/journal", journalRouter);
+  app.use("/api/mood", moodRouter);
+  app.use("/api/health", healthRouter);
+  app.use("/api/account", accountRouter);
+  app.use("/api/ai", aiRouter);
+  app.use("/api/analytics", analyticsRouter);
+  app.use("/api/billing", billingRouter);
+  app.use("/api/gamification", gamificationRouter);
+  app.use("/api/onboarding", onboardingRouter);
+  app.use("/api/therapy", therapyRouter);
+  app.use("/api/dashboard", dashboardRouter);
+  app.use("/api/webhook", webhookRouter);
   app.use("/api/insights", insightsRouter);
 
-  // 3. Health check
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });
   });
 
-  // 4. Vite middleware for frontend
   const vite = await createViteServer({
     configFile: resolve(__dirname, "../vite.config.js"),
     server: { middlewareMode: true },
@@ -40,7 +61,6 @@ async function startServer() {
   });
   app.use(vite.middlewares);
 
-  // 5. SPA fallback LAST
   app.use("*", async (req, res, next) => {
     try {
       const fs = await import("fs/promises");
