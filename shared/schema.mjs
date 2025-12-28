@@ -251,3 +251,18 @@ export const blogComments = pgTable("blog_comments", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+/* ================= ANONYMOUS REFLECTIONS (Community) ================= */
+export const anonymousReflections = pgTable("anonymous_reflections", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= SHARED QUESTIONS ================= */
+export const sharedQuestions = pgTable("shared_questions", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  question: text("question").notNull(),
+  activeDate: timestamp("active_date"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

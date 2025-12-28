@@ -37,6 +37,8 @@ const Pricing = lazy(() => import("./pages/Pricing.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
+const MirrorPage = lazy(() => import("./pages/Mirror.tsx"));
+const CommunityPage = lazy(() => import("./pages/CommunityPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -149,6 +151,16 @@ export default function App() {
               <Route path="/admin">
                 <RouteGuard>
                   <Admin />
+                </RouteGuard>
+              </Route>
+              <Route path="/mirror">
+                <RouteGuard>
+                  <MirrorPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/community">
+                <RouteGuard>
+                  <CommunityPage />
                 </RouteGuard>
               </Route>
 
