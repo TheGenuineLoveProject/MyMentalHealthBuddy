@@ -11,7 +11,8 @@
     "build": "vite build",
     "start": "node server/index.mjs",
     "db:push": "drizzle-kit push",
-    "test": "node -e \"console.log('test placeholder: add real tests later')\""
+    "test": "node -e \"console.log('test placeholder: add real tests later')\"",
+    "smoke": "node scripts/smoke.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

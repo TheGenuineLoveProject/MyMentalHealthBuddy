@@ -27,12 +27,11 @@ import mirrorRouter from "./routes/mirror.mjs";
 import communityRouter from "./routes/community.mjs";
 import integrationHealthRouter from "./routes/integrationHealth.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
-
+const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 async function startServer() {
-  const app = express();
   
   app.get("/", (req, res) => {
     res.status(200).send("OK — The Genuine Love Project dev server is running.");
@@ -108,5 +107,10 @@ async function startServer() {
   process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
   process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 }
-
+// SPA fallback (so Preview doesn't 403)
+app.get("*", (req, res) => {
+  // If you have a built client, serve its index.html here.
+  // Minimal fallback for dev:
+  res.status(200).send("✅ Server is running. Frontend is served by Vite in dev.");
+});
 startServer().catch(console.error);
