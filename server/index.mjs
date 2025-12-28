@@ -26,11 +26,8 @@ import webhookRouter from "./routes/webhook.mjs";
 import insightsRouter from './routes/insights.mjs';
 import statesRouter from './routes/states.mjs';
 import promptsRouter from './routes/prompts.mjs';
-import mirrorRouter from "./routes/mirror.mjs";
 app.use("/api/mirror", mirrorRouter);
 import mirrorRoutes from "./routes/mirror.mjs";
-
-app.use("/api", mirrorRoutes);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

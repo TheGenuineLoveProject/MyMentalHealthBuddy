@@ -1,5 +1,3 @@
-import React from "react";
-import JournalingMirror from "../features/mirror/JournalingMirror.jsx";
 import { Switch, Route } from "wouter";
 import { Suspense, lazy } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -15,14 +13,14 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import HealthPage from "./pages/HealthPage.jsx";
-import DesignDashboard from "./pages/DesignDashboard.jsx";
-import Blog from "./pages/Blog.jsx";
 import Publishing from "./pages/Publishing.jsx";
 import SocialHub from "./pages/SocialHub.jsx";
 import ControlDashboard from "./pages/ControlDashboard.jsx";
 import BlogIndex from "./pages/BlogIndex.jsx";
 import BlogPost from "./pages/BlogPost.jsx";
-import MirrorPage from "./pages/MirrorPage.jsx";
+import Landing from "./pages/Landing.jsx";
+import Ethics from "./pages/legal/Ethics.jsx";
+import Disclaimer from "./pages/legal/Disclaimer.jsx";
 
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
@@ -40,16 +38,9 @@ const Pricing = lazy(() => import("./pages/Pricing.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
-const MirrorPage = lazy(() => import("./pages/Mirror.tsx"));
-const CommunityPage = lazy(() => import("./pages/CommunityPage.tsx"));
-import Landing from "./pages/Landing.jsx";
-import TodayPage from "./features/today/TodayPage.jsx";
-import StatePage from "./features/state/StatePage.jsx";
-import JournalPage from "./features/journal/JournalPage.jsx";
-import JournalingMirrorPage from "./features/mirror/JournalingMirrorPage.jsx";
-import SharedReflectionsPage from "./features/community/SharedReflectionsPage.jsx";
-import Ethics from "./pages/legal/Ethics.jsx";
-import Disclaimer from "./pages/legal/Disclaimer.jsx";
+const MirrorPage = lazy(() => import("./features/mirror/JournalingMirrorPage.jsx"));
+const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
+const TodayPage = lazy(() => import("./features/today/TodayPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -61,8 +52,6 @@ function LoadingFallback() {
     </div>
   );
 }
-export default function MirrorPage() {
-  return <JournalingMirror />;
 
 export default function App() {
   return (
@@ -176,16 +165,13 @@ export default function App() {
                   <CommunityPage />
                 </RouteGuard>
               </Route>
-              <Route path="/" exact component={Landing} />
-              <Route path="/today" component={TodayPage} />
-              <Route path="/state" component={StatePage} />
-              <Route path="/journal" component={JournalPage} />
-              {/* Fallback */}
-              <Route component={NotFound} />
-              <Route path="/mirror" component={JournalingMirrorPage} />
-              <Route path="/community" component={SharedReflectionsPage} />
+
+              {/* Legal routes */}
               <Route path="/ethics" component={Ethics} />
               <Route path="/disclaimer" component={Disclaimer} />
+
+              {/* Fallback */}
+              <Route component={NotFound} />
             </Switch>
           </Suspense>
         </ErrorBoundary>

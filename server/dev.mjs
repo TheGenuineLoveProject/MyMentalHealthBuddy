@@ -5,7 +5,7 @@ import cookieParser from "cookie-parser";
 import { createServer as createViteServer } from "vite";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
-
+import mirrorRoutes from "./routes/mirror.mjs";
 import authRouter from "./routes/auth.mjs";
 import adminRouter from "./routes/admin.mjs";
 import blogRouter from "./routes/blog.mjs";
@@ -57,6 +57,7 @@ async function startServer() {
   app.use("/api/prompts", promptsRouter);
   app.use("/api/mirror", mirrorRouter);
   app.use("/api/community", communityRouter);
+  app.use("/api", mirrorRoutes);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });
