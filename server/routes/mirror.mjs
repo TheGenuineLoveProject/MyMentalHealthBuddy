@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { requireAuth } from "../middleware/auth.mjs";
 import OpenAI from "openai";
+import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../utils/safetyCheck.mjs";
 
 const router = Router();
 
@@ -66,11 +67,13 @@ router.post("/reflect", requireAuth, async (req, res) => {
     let reflection = completion.choices[0]?.message?.content || 
       "Your words hold their own meaning. Sometimes the act of writing is the insight itself.";
 
-    const MANDATORY_DISCLAIMER = "\n\nPlease ignore anything that doesn't feel accurate or helpful. You know yourself best.";
-    
-    if (!reflection.includes("You know yourself best")) {
-      reflection = reflection + MANDATORY_DISCLAIMER;
+    const safetyResult = checkResponseSafety(reflection);
+    if (!safetyResult.passes) {
+      console.warn("Mirror response safety check failed:", safetyResult.violations);
+      reflection = sanitizeAIResponse(reflection);
     }
+    
+    reflection = ensureDisclaimer(reflection);
 
     res.json({
       ok: true,

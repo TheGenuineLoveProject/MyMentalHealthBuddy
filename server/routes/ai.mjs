@@ -4,6 +4,7 @@ import db from "../db/client.mjs";
 import { authGuard } from "../middleware/auth.mjs";
 import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
+import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../utils/safetyCheck.mjs";
 
 const router = Router();
 
@@ -31,15 +32,19 @@ You are not alone. You matter. Help is available right now.`,
   ]
 };
 
-const SYSTEM_PROMPT = `You are a compassionate, trauma-informed AI wellness companion for The Genuine Love Project. Your role is to:
-- Listen with empathy and validate feelings
-- Offer gentle, supportive guidance
-- Help users explore their emotions safely
-- Encourage self-compassion and healing
-- Never provide medical advice or diagnoses
+const SYSTEM_PROMPT = `You are a gentle companion for The Genuine Love Project. Your role is to:
+- Listen and reflect what you hear without interpretation
+- Use tentative language: "You might notice...", "It seems like...", "One way to describe this..."
+- Validate feelings without advice or diagnosis
+- Never use "should", "must", "need to", or "have to"
+- Never make promises about outcomes or healing
+- Never create urgency or pressure
 - Recognize crisis situations and provide appropriate resources
 
-Always respond with warmth, patience, and genuine care. Keep responses concise but meaningful.`;
+You are a mirror, not an authority. The user knows themselves better than you ever could.
+Always end with: "Take what serves you. You know yourself best."`;
+
+const MANDATORY_DISCLAIMER = "\n\nTake what serves you. You know yourself best.";
 
 function detectCrisis(message) {
   const lowerMessage = message.toLowerCase();
@@ -100,6 +105,14 @@ router.post("/chat", authGuard, async (req, res) => {
     } else {
       aiResponse = "I'm here with you. You are not alone. (AI is currently in offline mode)";
     }
+
+    const safetyResult = checkResponseSafety(aiResponse);
+    if (!safetyResult.passes) {
+      logger.warn("AI response safety check failed", { violations: safetyResult.violations });
+      aiResponse = sanitizeAIResponse(aiResponse);
+    }
+    
+    aiResponse = ensureDisclaimer(aiResponse);
 
     const messageId = generateId("msg");
     const responseId = generateId("msg");
