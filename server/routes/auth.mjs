@@ -194,7 +194,8 @@ router.post("/logout", (_req, res) => {
    ME (DEBUG / VERIFY)
 ================================ */
 router.get("/me", requireAuth, (req, res) => {
-  res.json({ user: req.user });
+  const { passwordHash, password_hash, refreshTokenHash, mfaSecret, mfaBackupCodes, ...safeUser } = req.user;
+  res.json({ user: safeUser });
 });
 
 export default router;
