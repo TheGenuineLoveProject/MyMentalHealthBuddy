@@ -1,5 +1,22 @@
+// Safe localStorage helpers for environments with blocked storage
+function safeGetItem(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // Storage blocked, fail silently
+  }
+}
+
 export async function fetchWithAuth(url, options = {}) {
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = safeGetItem("accessToken");
 
   const res = await fetch(url, {
     ...options,
@@ -23,7 +40,7 @@ export async function fetchWithAuth(url, options = {}) {
 
   const data = await refreshRes.json();
   if (data.accessToken) {
-    localStorage.setItem("accessToken", data.accessToken);
+    safeSetItem("accessToken", data.accessToken);
   }
 
   // retry original
@@ -31,7 +48,7 @@ export async function fetchWithAuth(url, options = {}) {
     ...options,
     headers: {
       ...(options.headers || {}),
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      Authorization: `Bearer ${safeGetItem("accessToken")}`,
       "Content-Type": "application/json",
     },
     credentials: "include",

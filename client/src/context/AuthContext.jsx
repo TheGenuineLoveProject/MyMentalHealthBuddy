@@ -29,13 +29,39 @@ function isTokenExpired(token) {
   return Date.now() >= expiryTime - 60000; // Consider expired 1 minute before actual expiry
 }
 
+// Safe localStorage helper that handles blocked storage (Safari Private, privacy extensions)
+function safeGetItem(key) {
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    console.warn('localStorage unavailable, using in-memory storage');
+    return null;
+  }
+}
+
+function safeSetItem(key, value) {
+  try {
+    localStorage.setItem(key, value);
+  } catch {
+    // Storage blocked, fail silently
+  }
+}
+
+function safeRemoveItem(key) {
+  try {
+    localStorage.removeItem(key);
+  } catch {
+    // Storage blocked, fail silently
+  }
+}
+
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => {
     if (typeof window !== "undefined") {
-      const stored = localStorage.getItem(TOKEN_KEY);
+      const stored = safeGetItem(TOKEN_KEY);
       if (stored && isTokenExpired(stored)) {
-        localStorage.removeItem(TOKEN_KEY);
-        localStorage.removeItem(USER_KEY);
+        safeRemoveItem(TOKEN_KEY);
+        safeRemoveItem(USER_KEY);
         return null;
       }
       return stored || null;
@@ -45,8 +71,12 @@ export function AuthProvider({ children }) {
 
   const [user, setUser] = useState(() => {
     if (typeof window !== "undefined") {
-      const stored = localStorage.getItem(USER_KEY);
-      return stored ? JSON.parse(stored) : null;
+      const stored = safeGetItem(USER_KEY);
+      try {
+        return stored ? JSON.parse(stored) : null;
+      } catch {
+        return null;
+      }
     }
     return null;
   });
@@ -57,8 +87,8 @@ export function AuthProvider({ children }) {
   const logout = useCallback(() => {
     setToken(null);
     setUser(null);
-    localStorage.removeItem(TOKEN_KEY);
-    localStorage.removeItem(USER_KEY);
+    safeRemoveItem(TOKEN_KEY);
+    safeRemoveItem(USER_KEY);
     if (refreshTimerRef.current) {
       clearInterval(refreshTimerRef.current);
       refreshTimerRef.current = null;
@@ -66,7 +96,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const refreshToken = useCallback(async () => {
-    const currentToken = localStorage.getItem(TOKEN_KEY);
+    const currentToken = safeGetItem(TOKEN_KEY);
     if (!currentToken) return;
 
     try {
@@ -82,10 +112,10 @@ export function AuthProvider({ children }) {
         const data = await response.json();
         if (data.token) {
           setToken(data.token);
-          localStorage.setItem(TOKEN_KEY, data.token);
+          safeSetItem(TOKEN_KEY, data.token);
           if (data.user) {
             setUser(data.user);
-            localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+            safeSetItem(USER_KEY, JSON.stringify(data.user));
           }
         }
       } else if (response.status === 401) {
@@ -114,9 +144,9 @@ export function AuthProvider({ children }) {
   const login = (newToken, userData = null) => {
     setToken(newToken);
     setUser(userData);
-    localStorage.setItem(TOKEN_KEY, newToken);
+    safeSetItem(TOKEN_KEY, newToken);
     if (userData) {
-      localStorage.setItem(USER_KEY, JSON.stringify(userData));
+      safeSetItem(USER_KEY, JSON.stringify(userData));
     }
 
     // Start refresh timer
@@ -128,7 +158,7 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = () => {
     // Check both state and localStorage for token (handles race conditions after login)
-    const currentToken = token || localStorage.getItem(TOKEN_KEY);
+    const currentToken = token || safeGetItem(TOKEN_KEY);
     if (!currentToken) return false;
     if (isTokenExpired(currentToken)) {
       logout();
