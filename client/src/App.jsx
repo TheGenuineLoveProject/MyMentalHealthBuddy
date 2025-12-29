@@ -57,6 +57,12 @@ const GrowthAnalyticsPage = lazy(() => import("./pages/GrowthAnalyticsPage.tsx")
 const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
 const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
 const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
+const WisdomSynthesisPage = lazy(() => import("./pages/WisdomSynthesisPage.tsx"));
+const CognitiveArchitecturePage = lazy(() => import("./pages/CognitiveArchitecturePage.tsx"));
+const PhilosophicalInquiryPage = lazy(() => import("./pages/PhilosophicalInquiryPage.tsx"));
+const DailyWisdomOraclePage = lazy(() => import("./pages/DailyWisdomOraclePage.tsx"));
+const SystemsThinkingPage = lazy(() => import("./pages/SystemsThinkingPage.tsx"));
+const MetaLearningPage = lazy(() => import("./pages/MetaLearningPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -259,6 +265,36 @@ export default function App() {
               <Route path="/progress">
                 <RouteGuard>
                   <ProgressDashboardPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/wisdom-synthesis">
+                <RouteGuard>
+                  <WisdomSynthesisPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/cognitive-architecture">
+                <RouteGuard>
+                  <CognitiveArchitecturePage />
+                </RouteGuard>
+              </Route>
+              <Route path="/philosophical-inquiry">
+                <RouteGuard>
+                  <PhilosophicalInquiryPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/daily-wisdom">
+                <RouteGuard>
+                  <DailyWisdomOraclePage />
+                </RouteGuard>
+              </Route>
+              <Route path="/systems-thinking">
+                <RouteGuard>
+                  <SystemsThinkingPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/meta-learning">
+                <RouteGuard>
+                  <MetaLearningPage />
                 </RouteGuard>
               </Route>
 

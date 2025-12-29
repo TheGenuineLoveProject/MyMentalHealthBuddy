@@ -26,7 +26,13 @@ The platform offers:
 - **Comprehensive Wellness Toolkit**: Over 54 tools across various categories including Reflection, Wisdom, Advanced Intellectual Tools, and Mastery.
 - **Reflection Tools**: Privacy-focused tools like Belief Mapping, Timed Writing, Silence Mode, Question Reflection, Growth Timeline, and Data Export.
 - **Wisdom Tools**: Advanced intellectual tools such as Cognitive Frameworks Library, Dialectical Inquiry, Temporal Reflection, and Daily Wisdom.
-- **Advanced Intellectual Tools**: 20 rigorous instruments across Reasoning & Logic, Systems & Patterns, Knowledge & Learning, Self-Awareness, and Identity & Meaning.
+- **Advanced Intellectual Tools**: 20+ rigorous instruments across Reasoning & Logic, Systems & Patterns, Knowledge & Learning, Self-Awareness, and Identity & Meaning.
+- **Wisdom Synthesis Engine**: Pattern recognition, insight extraction, wisdom theme analysis.
+- **Cognitive Architecture Lab**: 25 mental models library with favorites and practice tracking.
+- **Philosophical Inquiry System**: Socratic questioning and dialectical reasoning framework.
+- **Daily Wisdom Oracle**: 30 wisdom quotes from world philosophies with reflection journaling.
+- **Systems Thinking Toolkit**: Feedback loops, system archetypes, and leverage point identification.
+- **Meta-Learning Dashboard**: 8 evidence-based learning techniques with session tracking.
 - **Mastery Tools**: 3 instruments for deep work and deliberate practice: Deep Work Tracker, Skill Forge, and Mental Models Library.
 - **Navigation & Discovery**: Intellectual Atlas (central hub for tools), Strategy Maps (curated learning pathways), Collaborative Intelligence Lab (anonymous community reflection), Resilience Metrics (6-dimension growth tracking), and Adaptive Companion (AI-guided recommendations).
 - **Knowledge Synthesis**: Concept Mapper for building personal knowledge bases, Learning Journal for capturing key takeaways, and Insight Extractor for synthesizing wisdom from sources.
