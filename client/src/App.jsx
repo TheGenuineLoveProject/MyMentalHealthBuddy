@@ -38,7 +38,7 @@ const Pricing = lazy(() => import("./pages/Pricing.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
-const MirrorPage = lazy(() => import("./pages/MirrorPage.jsx"));
+const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
 const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
 const TodayPage = lazy(() => import("./features/today/TodayPage.jsx"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage.tsx"));
