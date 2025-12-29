@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T16:07:18.253Z",
+  "ts": "2025-12-29T16:11:45.738Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -92,12 +92,22 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/deep-learning.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/dialectics.mjs",
       "empty": false,
       "hasTODO": false
     },
     {
       "file": "server/routes/embodiment.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/emotional-mastery.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -233,6 +243,11 @@
     },
     {
       "file": "server/routes/prompts.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/purpose-compass.mjs",
       "empty": false,
       "hasTODO": false
     },
