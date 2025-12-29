@@ -63,6 +63,10 @@ The platform offers:
 - **Gamification**: XP, levels, streaks, and daily quests.
 - **Crisis Detection**: AI routes scan for self-harm intent keywords and provide crisis resources.
 - **Trauma-Informed NLP Layer**: Ensures all user-facing text, crisis detection, and prompts are gentle and supportive.
+- **Healing Tools API** (Pack A): Wisdom Ladder (1-60min progressive tools), Micro-Courage exercises, Reflection Mirror, Behavior Pattern Analysis.
+- **Self-Mastery API** (Pack B): Values Compass, Emotion Translator (25 emotions → needs/boundaries/requests), Boundary Builder, Relationship Repair Guide.
+- **Meaning & Future API** (Pack C): Future Self Letters (1mo-10yr timeframes), Life Chapters Framework, 5-Dimension Gratitude Practice, Contribution Map, Brave Action Planning.
+- **Publishing Content Generator**: 1 input → 10 platform-specific outputs (Blog, Newsletter, Twitter/X Thread, LinkedIn Post, Instagram Carousel, Instagram Reel Script, YouTube Short Script, Pinterest Pin, TikTok Script, Quote Card) with automatic keyword extraction and SEO optimization.
 
 ### System Design Choices
 The application is optimized for production with code splitting and environment variable configuration. It includes health checks, rate limiting, and graceful shutdown handlers. A unified `shared/schema.mjs` defines Drizzle ORM models, matching the Neon PostgreSQL database with UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints.
