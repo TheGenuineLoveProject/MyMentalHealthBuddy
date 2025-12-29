@@ -31,6 +31,9 @@ import dialecticsRouter from "./routes/dialectics.mjs";
 import practicesRouter from "./routes/practices.mjs";
 import knowledgeRouter from "./routes/knowledge.mjs";
 import philosophyRouter from "./routes/philosophy.mjs";
+import metacognitionRouter from "./routes/metacognition.mjs";
+import creativityRouter from "./routes/creativity.mjs";
+import resilienceRouter from "./routes/resilience.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -93,6 +96,9 @@ async function startServer() {
   app.use("/api/practices", practicesRouter);
   app.use("/api/knowledge", knowledgeRouter);
   app.use("/api/philosophy", philosophyRouter);
+  app.use("/api/metacognition", metacognitionRouter);
+  app.use("/api/creativity", creativityRouter);
+  app.use("/api/resilience", resilienceRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });

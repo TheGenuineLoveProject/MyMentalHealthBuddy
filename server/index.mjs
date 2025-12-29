@@ -32,6 +32,9 @@ import dialecticsRouter from "./routes/dialectics.mjs";
 import practicesRouter from "./routes/practices.mjs";
 import knowledgeRouter from "./routes/knowledge.mjs";
 import philosophyRouter from "./routes/philosophy.mjs";
+import metacognitionRouter from "./routes/metacognition.mjs";
+import creativityRouter from "./routes/creativity.mjs";
+import resilienceRouter from "./routes/resilience.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -57,7 +60,29 @@ app.use(compression());
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({ origin: true, credentials: true }));
+
+// Production-safe CORS configuration
+const allowedOrigins = [
+  process.env.CORS_ORIGIN,
+  process.env.CORS_ORIGINS,
+  isProduction ? undefined : "http://localhost:5000",
+  isProduction ? undefined : "http://localhost:5173",
+].filter(Boolean).flatMap((value) =>
+  value.split(",").map((entry) => entry.trim()).filter(Boolean)
+);
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    // In development, allow all origins
+    if (!isProduction) return callback(null, true);
+    // In production, check allowlist
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+}));
 
 app.use('/api/auth', authRouter);
 app.use('/api/admin', adminRouter);
@@ -84,6 +109,9 @@ app.use('/api/dialectics', dialecticsRouter);
 app.use('/api/practices', practicesRouter);
 app.use('/api/knowledge', knowledgeRouter);
 app.use('/api/philosophy', philosophyRouter);
+app.use('/api/metacognition', metacognitionRouter);
+app.use('/api/creativity', creativityRouter);
+app.use('/api/resilience', resilienceRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });

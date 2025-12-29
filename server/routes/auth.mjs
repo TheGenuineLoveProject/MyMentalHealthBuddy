@@ -11,6 +11,18 @@ const router = express.Router();
 router.use(cookieParser());
 
 /* ================================
+   ENVIRONMENT VALIDATION
+================================ */
+const isProduction = process.env.NODE_ENV === "production";
+const ACCESS_SECRET = process.env.JWT_SECRET || (isProduction ? null : "dev_secret_not_for_production");
+const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || (isProduction ? null : "dev_refresh_secret_not_for_production");
+
+if (isProduction && (!ACCESS_SECRET || !REFRESH_SECRET)) {
+  console.error("DEPLOY BLOCKED: JWT_SECRET and JWT_REFRESH_SECRET must be configured in production.");
+  process.exit(1);
+}
+
+/* ================================
    SCHEMAS
 ================================ */
 const LoginSchema = z.object({
@@ -35,7 +47,7 @@ function signAccessToken(user) {
       role: user.role || "user",
       subscription_status: user.subscription_status || "free",
     },
-    process.env.JWT_SECRET || "dev_secret",
+    ACCESS_SECRET,
     { expiresIn: "15m" }
   );
 }
@@ -43,7 +55,7 @@ function signAccessToken(user) {
 function signRefreshToken(user) {
   return jwt.sign(
     { id: user.id },
-    process.env.JWT_REFRESH_SECRET || "dev_refresh_secret",
+    REFRESH_SECRET,
     { expiresIn: "7d" }
   );
 }

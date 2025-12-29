@@ -247,3 +247,96 @@ describe("Philosophy API", () => {
     expect(data.daily).toBeDefined();
   });
 });
+
+describe("Metacognition API", () => {
+  it("should return metacognitive strategies", async () => {
+    const res = await fetch(`${BASE_URL}/api/metacognition/strategies`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.strategies)).toBe(true);
+    expect(data.strategies.length).toBe(6);
+  });
+
+  it("should return thinking biases", async () => {
+    const res = await fetch(`${BASE_URL}/api/metacognition/biases`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.biases)).toBe(true);
+    expect(data.biases.length).toBe(8);
+  });
+
+  it("should return daily metacognition practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/metacognition/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Creativity API", () => {
+  it("should return creative techniques", async () => {
+    const res = await fetch(`${BASE_URL}/api/creativity/techniques`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.techniques)).toBe(true);
+    expect(data.techniques.length).toBe(8);
+  });
+
+  it("should return problem framing methods", async () => {
+    const res = await fetch(`${BASE_URL}/api/creativity/framing`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+  });
+
+  it("should return daily creativity practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/creativity/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Resilience API", () => {
+  it("should return resilience factors", async () => {
+    const res = await fetch(`${BASE_URL}/api/resilience/factors`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.factors)).toBe(true);
+    expect(data.factors.length).toBe(8);
+  });
+
+  it("should return coping strategies", async () => {
+    const res = await fetch(`${BASE_URL}/api/resilience/coping`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.strategies)).toBe(true);
+    expect(data.strategies.length).toBe(4);
+  });
+
+  it("should return psychological flexibility processes", async () => {
+    const res = await fetch(`${BASE_URL}/api/resilience/flexibility`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.processes)).toBe(true);
+    expect(data.processes.length).toBe(6);
+  });
+
+  it("should return daily resilience practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/resilience/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+    expect(data.daily.affirmation).toBeDefined();
+  });
+});
