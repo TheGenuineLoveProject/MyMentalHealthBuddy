@@ -153,14 +153,28 @@ async function startServer() {
     server: { middlewareMode: true },
     appType: "spa",
   });
+  
+  // Vite middleware MUST be registered before any catch-all routes
   app.use(vite.middlewares);
 
+  // SPA fallback - only for non-API, non-Vite routes
+  // Vite internal paths: /@vite/*, /@fs/*, /@react-refresh, /src/*, /node_modules/.vite/*
   app.use("*", async (req, res, next) => {
+    const url = req.originalUrl;
+    
+    // Skip Vite internal paths - let Vite middleware handle them
+    if (url.startsWith('/@') || 
+        url.startsWith('/src/') || 
+        url.startsWith('/node_modules/') ||
+        url.includes('.vite')) {
+      return next();
+    }
+    
     try {
       const fs = await import("fs/promises");
       const indexPath = resolve(__dirname, "../client/index.html");
       let template = await fs.readFile(indexPath, "utf-8");
-      template = await vite.transformIndexHtml(req.originalUrl, template);
+      template = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(template);
     } catch (e) {
       vite.ssrFixStacktrace(e);
