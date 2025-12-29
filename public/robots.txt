@@ -3,10 +3,15 @@ Allow: /
 Allow: /blog
 Allow: /library
 Allow: /research
+Allow: /content-studio
+Allow: /study-vault
+Allow: /wisdom-tools
+Allow: /mastery-tools
+Allow: /advanced-tools
 
 Disallow: /api/
 Disallow: /admin
 Disallow: /dashboard
 Disallow: /settings
 
-Sitemap: https://genuinelove.app/sitemap.xml
+Sitemap: https://thegenuineloveproject.com/sitemap.xml
