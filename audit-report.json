@@ -1,779 +1,577 @@
 {
-  "timestamp": "2025-12-29T06:42:17.427Z",
-  "project": "workspace",
+  "ts": "2025-12-29T06:48:54.340Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/admin.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/ai-dashboard.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/ai.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/analytics.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/auth.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/billing.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/blog.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/canva-oauth.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/community.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/content.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/figma.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/gamification.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/health.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/insights.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/integrationHealth.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/journal.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/login.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/mfa.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/mirror.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/mood.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/onboarding.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/pro-features.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/prompts.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/states.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/stripeWebhook.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/therapy.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/ui-dashboard.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     },
     {
       "file": "server/routes/webhook.mjs",
       "empty": false,
-      "hasTodo": false,
-      "exportsRouter": true
+      "hasTODO": false
     }
   ],
   "pages": [
     {
       "file": "client/src/pages/AIChatPage.jsx",
-      "hasTodo": false,
-      "length": 9858
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/AdaptiveCompanionPage.tsx",
-      "hasTodo": false,
-      "length": 16365
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Admin.jsx",
-      "hasTodo": false,
-      "length": 977
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/AdvancedToolsPage.tsx",
-      "hasTodo": false,
-      "length": 8775
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Analytics.jsx",
-      "hasTodo": false,
-      "length": 7072
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/AtlasDashboard.tsx",
-      "hasTodo": false,
-      "length": 18118
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Blog.jsx",
-      "hasTodo": false,
-      "length": 581
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/BlogEditor.jsx",
-      "hasTodo": false,
-      "length": 9455
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/BlogIndex.jsx",
-      "hasTodo": false,
-      "length": 6820
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/BlogPost.jsx",
-      "hasTodo": false,
-      "length": 10562
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/CognitiveArchitecturePage.tsx",
-      "hasTodo": false,
-      "length": 21811
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/CollaborativeLabPage.tsx",
-      "hasTodo": false,
-      "length": 18584
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/CommunityPage.tsx",
-      "hasTodo": false,
-      "length": 725
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ControlDashboard.jsx",
-      "hasTodo": false,
-      "length": 2836
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/CrisisResources.jsx",
-      "hasTodo": false,
-      "length": 14602
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/DailyRitualPage.tsx",
-      "hasTodo": false,
-      "length": 15092
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/DailyWisdomOraclePage.tsx",
-      "hasTodo": false,
-      "length": 14004
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Dashboard.jsx",
-      "hasTodo": false,
-      "length": 17465
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/DesignDashboard.jsx",
-      "hasTodo": false,
-      "length": 6836
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Disclaimer.tsx",
-      "hasTodo": false,
-      "length": 1464
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/DisclaimerPage.tsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/EthicsPage.tsx",
-      "hasTodo": false,
-      "length": 133
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ForgotPassword.jsx",
-      "hasTodo": false,
-      "length": 8572
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/GrowthAnalyticsPage.tsx",
-      "hasTodo": false,
-      "length": 14220
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/GuidedJournalingPage.tsx",
-      "hasTodo": false,
-      "length": 14937
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/HealthPage.jsx",
-      "hasTodo": false,
-      "length": 1802
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Home.jsx",
-      "hasTodo": false,
-      "length": 4708
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/InsightCardsPage.tsx",
-      "hasTodo": false,
-      "length": 13724
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/JournalPage.jsx",
-      "hasTodo": false,
-      "length": 12404
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/KnowledgeSynthesisPage.tsx",
-      "hasTodo": false,
-      "length": 22577
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Legal.tsx",
-      "hasTodo": false,
-      "length": 906
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Login.jsx",
-      "hasTodo": false,
-      "length": 3665
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/MasteryToolsPage.tsx",
-      "hasTodo": false,
-      "length": 3031
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/MetaLearningPage.tsx",
-      "hasTodo": false,
-      "length": 15403
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/MirrorPage.tsx",
-      "hasTodo": false,
-      "length": 2933
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/MoodPage.jsx",
-      "hasTodo": false,
-      "length": 10575
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/NotFound.jsx",
-      "hasTodo": false,
-      "length": 5293
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Onboarding.tsx",
-      "hasTodo": false,
-      "length": 13621
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/PhilosophicalInquiryPage.tsx",
-      "hasTodo": false,
-      "length": 16736
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Premium.jsx",
-      "hasTodo": false,
-      "length": 10178
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Pricing.jsx",
-      "hasTodo": false,
-      "length": 3168
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Privacy.tsx",
-      "hasTodo": false,
-      "length": 1332
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ProgressDashboardPage.tsx",
-      "hasTodo": false,
-      "length": 14587
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Publishing.jsx",
-      "hasTodo": false,
-      "length": 516
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Register.jsx",
-      "hasTodo": false,
-      "length": 10773
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ResetPassword.jsx",
-      "hasTodo": false,
-      "length": 13439
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ResilienceMetricsPage.tsx",
-      "hasTodo": false,
-      "length": 16149
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Settings.jsx",
-      "hasTodo": false,
-      "length": 8289
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/SocialHub.jsx",
-      "hasTodo": false,
-      "length": 661
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/StatePage.jsx",
-      "hasTodo": false,
-      "length": 2614
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/StrategyMapsPage.tsx",
-      "hasTodo": false,
-      "length": 19260
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/SupportPage.tsx",
-      "hasTodo": false,
-      "length": 2348
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/SystemsThinkingPage.tsx",
-      "hasTodo": false,
-      "length": 16032
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Terms.tsx",
-      "hasTodo": false,
-      "length": 1226
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ToolsPage.tsx",
-      "hasTodo": false,
-      "length": 3685
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Upgrade.jsx",
-      "hasTodo": false,
-      "length": 340
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/Wellness.jsx",
-      "hasTodo": false,
-      "length": 24785
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/WisdomPracticesPage.tsx",
-      "hasTodo": false,
-      "length": 18042
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/WisdomSynthesisPage.tsx",
-      "hasTodo": false,
-      "length": 15318
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/WisdomToolsPage.tsx",
-      "hasTodo": false,
-      "length": 4729
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/marketing/LandingCTA.tsx",
-      "hasTodo": false,
-      "length": 389
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/marketing/LandingFeatures.tsx",
-      "hasTodo": false,
-      "length": 399
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/marketing/LandingHero.tsx",
-      "hasTodo": false,
-      "length": 391
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/marketing/LandingTestimonials.tsx",
-      "hasTodo": false,
-      "length": 407
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/Disclaimer.jsx",
-      "hasTodo": false,
-      "length": 750
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/Disclaimer.tsx",
-      "hasTodo": false,
-      "length": 389
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/DisclaimerPage.tsx",
-      "hasTodo": false,
-      "length": 1412
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/Ethics.jsx",
-      "hasTodo": false,
-      "length": 834
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/Privacy.jsx",
-      "hasTodo": true,
-      "length": 3555
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/Privacy.tsx",
-      "hasTodo": false,
-      "length": 383
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/PrivacyPage.tsx",
-      "hasTodo": false,
-      "length": 1821
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/Terms.jsx",
-      "hasTodo": true,
-      "length": 3454
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/Terms.tsx",
-      "hasTodo": false,
-      "length": 379
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/legal/TermsPage.tsx",
-      "hasTodo": false,
-      "length": 1557
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/landing/Landing.jsx",
-      "hasTodo": false,
-      "length": 4950
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/landing/LandingCTA.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/landing/LandingFeatures.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/landing/LandingHero.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/landing/LandingTestimonials.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/Insights.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/Insights.tsx",
-      "hasTodo": false,
-      "length": 385
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/Journal.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/Journal.tsx",
-      "hasTodo": false,
-      "length": 383
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/MoodTracker.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/MoodTracker.tsx",
-      "hasTodo": false,
-      "length": 391
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/Overview.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/dashboard/Overview.tsx",
-      "hasTodo": false,
-      "length": 385
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/auth/ForgotPassword.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/auth/ForgotPassword.tsx",
-      "hasTodo": false,
-      "length": 397
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/auth/Login.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/auth/Login.tsx",
-      "hasTodo": false,
-      "length": 379
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/auth/SignUp.tsx",
-      "hasTodo": false,
-      "length": 381
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/auth/Signup.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ai/ChatConversation.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ai/ChatConversation.tsx",
-      "hasTodo": false,
-      "length": 401
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ai/ChatCrisis.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ai/ChatCrisis.tsx",
-      "hasTodo": false,
-      "length": 389
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ai/ChatEmpty.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/ai/ChatEmpty.tsx",
-      "hasTodo": false,
-      "length": 387
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/account/Billing.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/account/Billing.tsx",
-      "hasTodo": false,
-      "length": 383
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/account/ControlDashboard.jsx",
-      "hasTodo": false,
-      "length": 1283
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/account/Profile.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/account/Profile.tsx",
-      "hasTodo": false,
-      "length": 383
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/account/Settings.jsx",
-      "hasTodo": false,
-      "length": 0
+      "hasTODO": false
     },
     {
       "file": "client/src/pages/account/Settings.tsx",
-      "hasTodo": false,
-      "length": 385
+      "hasTODO": false
     }
-  ],
-  "emptyFiles": [
-    "ISSUE_REGISTER.md",
-    "server/intelligence/journalingMirror.mjs",
-    "scripts/scan-errors.mjs",
-    "scripts/node scripts/run-suite.mjs",
-    "public/android-chrome-192x192.png",
-    "public/android-chrome-512x512.png",
-    "public/logo.png",
-    "public/og-image.png",
-    "public/twitter-card.png",
-    "migrations/007_metrics_log.sql",
-    "docs/ethics/AI_BOUNDARIES.md",
-    "client/android-chrome-512x512.png",
-    "client/src/pages/DisclaimerPage.tsx",
-    "client/src/pages/landing/LandingCTA.jsx",
-    "client/src/pages/landing/LandingFeatures.jsx",
-    "client/src/pages/landing/LandingHero.jsx",
-    "client/src/pages/landing/LandingTestimonials.jsx",
-    "client/src/pages/dashboard/Insights.jsx",
-    "client/src/pages/dashboard/Journal.jsx",
-    "client/src/pages/dashboard/MoodTracker.jsx",
-    "client/src/pages/dashboard/Overview.jsx",
-    "client/src/pages/auth/ForgotPassword.jsx",
-    "client/src/pages/auth/Login.jsx",
-    "client/src/pages/auth/Signup.jsx",
-    "client/src/pages/ai/ChatConversation.jsx",
-    "client/src/pages/ai/ChatCrisis.jsx",
-    "client/src/pages/ai/ChatEmpty.jsx",
-    "client/src/pages/account/Billing.jsx",
-    "client/src/pages/account/Profile.jsx",
-    "client/src/pages/account/Settings.jsx",
-    "client/src/legal/PrivacyHighlights.tsx",
-    "client/src/layouts/brand.ts",
-    "client/src/components/ui/Input.tsx",
-    "client/src/components/community/CommunityBoundary.tsx",
-    "client/src/assets/tglp-logo.png",
-    "client/public/android-chrome-192x192.png",
-    "client/public/apple-touch-icon.png",
-    "client/public/favicon-16x16.png",
-    "client/public/favicon-32x32.png",
-    "client/public/favicon.ico",
-    "client/public/favicon.png",
-    "client/public/og-image.png",
-    "client/public/twitter-card.png",
-    "client/public/brand/favicon.png",
-    "client/public/brand/favicon.svg",
-    "client/public/brand/logo-mark.png",
-    "client/public/brand/logo.svg",
-    "client/public/brand/og-image.png",
-    "client/analytics/covers/weekly-report-2025-10-30.png",
-    "client/analytics/covers/weekly-report-2025-11-01.png",
-    "_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_server_index.ts",
-    "_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_server_stripe-server.js",
-    "_quarantine/archive_DO_NOT_DELETE/_home_runner_workspace_logs/heal_20251109-081926.log",
-    ".local/state/replit/agent/rapid_build_success",
-    ".local/share/pnpm/store/v10/files/cf/83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"
-  ],
-  "todos": [
-    "client/src/pages/legal/Privacy.jsx:10:      <p>TODO: Replace with the matching Figma frame layout.</p>",
-    "client/src/pages/legal/Terms.jsx:10:      <p>TODO: Replace with the matching Figma frame layout.</p>",
-    "scripts/platformAudit.mjs:50:      `grep -RIn \"TODO\\\\|FIXME\" ` +",
-    "scripts/platformAudit.mjs:108:      hasTodo: /TODO|FIXME/.test(text),",
-    "scripts/platformAudit.mjs:118:      hasTodo: /TODO|FIXME/.test(text),",
-    "scripts/platformAudit.mjs:127:  // TODOs",
-    "scripts/platformAudit.mjs:147:  console.log(`Routes: ${report.routes.length} | Pages: ${report.pages.length} | TODO lines: ${report.todos.length}`);"
   ],
   "env": [
     {
@@ -797,5 +595,7 @@
       "set": true
     }
   ],
-  "notes": []
+  "todos": [],
+  "missing": [],
+  "hints": []
 }
