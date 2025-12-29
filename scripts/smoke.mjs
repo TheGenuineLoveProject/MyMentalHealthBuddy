@@ -22,7 +22,7 @@ const log = {
 const BASE_URL = process.env.SMOKE_BASE_URL || 'http://127.0.0.1:5000';
 
 const ENDPOINTS = [
-  { path: '/', method: 'GET', expectedStatus: 200, name: 'Root' },
+  { path: '/', method: 'GET', expectedStatus: 200, name: 'Root', acceptHtml: true },
   { path: '/healthz', method: 'GET', expectedStatus: 200, name: 'Health Check' },
   { path: '/api/health-check', method: 'GET', expectedStatus: 200, name: 'API Health' },
   { path: '/api/insights/daily', method: 'GET', expectedStatus: [200, 401], name: 'Daily Insights' },
@@ -37,7 +37,7 @@ async function testEndpoint(endpoint) {
   try {
     const response = await fetch(url, {
       method: endpoint.method,
-      headers: { 'Accept': 'application/json' }
+      headers: { 'Accept': endpoint.acceptHtml ? 'text/html' : 'application/json' }
     });
     
     const duration = Date.now() - start;

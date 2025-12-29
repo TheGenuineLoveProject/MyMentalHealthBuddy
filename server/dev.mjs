@@ -56,10 +56,6 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 async function startServer() {
-  
-  app.get("/", (req, res) => {
-    res.status(200).send("OK — The Genuine Love Project dev server is running.");
-  });
   // Request tracking middleware (first in chain)
   app.use(requestId);
   app.use(requestLogger);
