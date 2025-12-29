@@ -1,10 +1,10 @@
 // client/src/features/mirror/JournalMirror.tsx
 import React, { useMemo, useState } from "react";
 
-type MirrorResponse = {
+export type MirrorResponse = {
   ok?: boolean;
-  reflection?: string; // server text response
-  mode?: "local" | "ai" | string;
+  reflection?: string; // server "text" response
+  mode?: "local" | "ai" | "local_fallback" | string;
   title?: string;
   note?: string; // disclaimer note
   error?: string;
@@ -13,7 +13,11 @@ type MirrorResponse = {
 type Props = {
   /** Optional prefill */
   initialText?: string;
-  /** Called when a reflection is returned (used by MirrorPage to build InsightCards) */
+  /**
+   * Called when a reflection is returned (used by MirrorPage to build InsightCards)
+   * reflectionText = the reflection string
+   * raw = full response JSON
+   */
   onReflection?: (reflectionText: string, raw?: MirrorResponse) => void;
   /** Optional label/title override */
   title?: string;
@@ -37,10 +41,7 @@ export default function JournalMirror({
   const [mode, setMode] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const canSubmit = useMemo(
-    () => safeTrim(text).length >= 10 && !loading,
-    [text, loading]
-  );
+  const canSubmit = useMemo(() => safeTrim(text).length >= 10 && !loading, [text, loading]);
 
   async function runMirror() {
     setError("");
@@ -61,10 +62,7 @@ export default function JournalMirror({
         body: JSON.stringify({ text: input }),
       });
 
-      const data: MirrorResponse = await res
-        .json()
-        .catch(() => ({} as MirrorResponse));
-
+      const data: MirrorResponse = await res.json().catch(() => ({} as MirrorResponse));
       if (!res.ok || data.ok === false) {
         throw new Error(data.error || `Request failed (${res.status})`);
       }
@@ -73,7 +71,7 @@ export default function JournalMirror({
       setReflection(out);
       setMode(String(data.mode || ""));
 
-      // Tell parent (MirrorPage) so it can build InsightCards
+      // Tell parent (MirrorPage) so it can build InsightCards immediately
       if (out && onReflection) onReflection(out, data);
     } catch (e: any) {
       setError(e?.message || "Something went wrong.");
@@ -96,8 +94,7 @@ export default function JournalMirror({
           <div>
             <h2 className="text-lg font-semibold text-white/90">{title}</h2>
             <p className="text-sm text-white/60">
-              This is a reflection tool for journaling support — not medical
-              advice or diagnosis.
+              This is a reflection tool for journaling support — not medical advice or diagnosis.
             </p>
           </div>
 
@@ -122,9 +119,7 @@ export default function JournalMirror({
         </div>
 
         <label className="block">
-          <span className="mb-2 block text-sm text-white/70">
-            Write what’s on your mind
-          </span>
+          <span className="mb-2 block text-sm text-white/70">Write what’s on your mind</span>
           <textarea
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -134,13 +129,9 @@ export default function JournalMirror({
         </label>
 
         <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+          <p className="text-xs text-white/45">Tip: try 3–6 honest sentences. Messy is allowed.</p>
           <p className="text-xs text-white/45">
-            Tip: try 3–6 honest sentences. You can be messy. You don’t have to
-            be perfect.
-          </p>
-          <p className="text-xs text-white/45">
-            {safeTrim(text).length} chars
-            {mode ? ` • mode: ${mode}` : ""}
+            {safeTrim(text).length} chars {mode ? `• mode: ${mode}` : ""}
           </p>
         </div>
 
@@ -153,9 +144,8 @@ export default function JournalMirror({
         {reflection ? (
           <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4">
             <div className="mb-2 flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-white/80">
-                Reflection
-              </h3>
+              <h3 className="text-sm font-semibold text-white/80">Reflection</h3>
+
               <button
                 type="button"
                 className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/70 hover:bg-white/10"
@@ -165,13 +155,11 @@ export default function JournalMirror({
               </button>
             </div>
 
-            <pre className="whitespace-pre-wrap text-sm leading-relaxed text-white/80">
-              {reflection}
-            </pre>
+            <pre className="whitespace-pre-wrap text-sm leading-relaxed text-white/80">{reflection}</pre>
 
             <div className="mt-3 text-xs text-white/45">
-              If you feel unsafe or at risk of harming yourself or someone else,
-              please seek immediate help (local emergency services).
+              If you feel unsafe or at risk of harming yourself or someone else, please seek immediate help (local
+              emergency services).
             </div>
           </div>
         ) : null}
