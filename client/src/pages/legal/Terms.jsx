@@ -11,66 +11,70 @@ export default function Page() {
     </div>
   );
 
-export default function Terms() {
-  const updated = "2025-12-28";
+  export default function Terms() {
+    return (
+      <main className="mx-auto max-w-3xl px-6 py-10">
+        <h1 className="text-3xl font-semibold">Terms of Service</h1>
+        <p className="mt-4 text-sm opacity-80">Last updated: {new Date().toLocaleDateString()}</p>
 
-  return (
-    <main className="mx-auto max-w-3xl px-6 py-10">
-      <h1 className="text-3xl font-semibold">Terms of Service</h1>
-      <p className="mt-2 text-sm opacity-80">Last updated: {updated}</p>
+        <section className="mt-8 space-y-4">
+          <p>
+            By using The Genuine Love Project (“Service”), you agree to these Terms. If you do not agree, do not use the
+            Service.
+          </p>
 
-      <section className="mt-8 space-y-4 leading-relaxed">
-        <p>
-          By using The Genuine Love Project (“the Service”), you agree to these Terms. If you do not agree, do not use the Service.
-        </p>
+          <h2 className="text-xl font-semibold mt-6">1) Not medical care</h2>
+          <p>
+            The Service provides educational and self-reflection tools. It does not provide medical advice, diagnosis, or
+            treatment. If you need urgent help, contact emergency services or a licensed professional.
+          </p>
 
-        <h2 className="text-xl font-semibold mt-6">1) Wellness-only, not therapy</h2>
-        <p>
-          The Service provides reflection tools and educational wellness content. It is not a substitute for professional care,
-          diagnosis, or treatment.
-        </p>
+          <h2 className="text-xl font-semibold mt-6">2) Accounts</h2>
+          <p>
+            You are responsible for maintaining the confidentiality of your account. You agree not to misuse the Service
+            or attempt unauthorized access.
+          </p>
 
-        <h2 className="text-xl font-semibold mt-6">2) Your responsibilities</h2>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>Use the Service lawfully and respectfully.</li>
-          <li>Do not attempt to break security, scrape data, or misuse AI features.</li>
-          <li>You are responsible for safeguarding your account credentials.</li>
-        </ul>
+          <h2 className="text-xl font-semibold mt-6">3) Subscriptions</h2>
+          <p>
+            Paid features may be offered through Stripe. Prices, billing cycles, cancellations, and refunds (if any) are
+            described at checkout and may change over time.
+          </p>
 
-        <h2 className="text-xl font-semibold mt-6">3) User content</h2>
-        <p>
-          You retain ownership of content you submit. You grant the Service a limited license to store and process it
-          solely to operate and improve features you request (such as generating insights).
-        </p>
+          <h2 className="text-xl font-semibold mt-6">4) Acceptable use</h2>
+          <ul className="list-disc pl-6 space-y-2">
+            <li>No harassment, hate, or threats.</li>
+            <li>No illegal activity or attempts to exploit vulnerabilities.</li>
+            <li>No scraping or abusive automation.</li>
+          </ul>
 
-        <h2 className="text-xl font-semibold mt-6">4) Subscriptions and billing</h2>
-        <p>
-          Paid features (if offered) are billed through Stripe. Subscription terms, renewal, and cancellation are handled through Stripe
-          and your account settings where available.
-        </p>
+          <h2 className="text-xl font-semibold mt-6">5) Intellectual property</h2>
+          <p>
+            The Service’s content, design, code, and branding are owned by The Genuine Love Project or licensed to us. You
+            may not copy, resell, or distribute without permission.
+          </p>
 
-        <h2 className="text-xl font-semibold mt-6">5) Acceptable use</h2>
-        <ul className="list-disc pl-6 space-y-2">
-          <li>No hate, harassment, or harmful content.</li>
-          <li>No attempts to generate instructions for wrongdoing or self-harm.</li>
-          <li>No abuse of the platform or excessive automated traffic.</li>
-        </ul>
+          <h2 className="text-xl font-semibold mt-6">6) User content</h2>
+          <p>
+            You retain ownership of your content. You grant us a limited license to process it to provide the Service
+            (e.g., saving journals, generating requested insights).
+          </p>
 
-        <h2 className="text-xl font-semibold mt-6">6) Disclaimers</h2>
-        <p>
-          The Service is provided “as is” without warranties. We do our best to keep it reliable but cannot guarantee uninterrupted access.
-        </p>
+          <h2 className="text-xl font-semibold mt-6">7) Disclaimer of warranties</h2>
+          <p>
+            The Service is provided “as is” without warranties of any kind. We do not guarantee outcomes, accuracy, or
+            uninterrupted availability.
+          </p>
 
-        <h2 className="text-xl font-semibold mt-6">7) Limitation of liability</h2>
-        <p>
-          To the maximum extent permitted by law, we are not liable for indirect or consequential damages arising from your use of the Service.
-        </p>
+          <h2 className="text-xl font-semibold mt-6">8) Limitation of liability</h2>
+          <p>
+            To the maximum extent permitted by law, we are not liable for indirect or consequential damages arising from
+            your use of the Service.
+          </p>
 
-        <h2 className="text-xl font-semibold mt-6">8) Changes</h2>
-        <p>
-          We may update these Terms to improve clarity and safety. Continued use after changes means you accept the updated Terms.
-        </p>
-      </section>
-    </main>
-  );
-}
+          <h2 className="text-xl font-semibold mt-6">9) Changes</h2>
+          <p>We may update these Terms. Continued use after changes means you accept the updated Terms.</p>
+        </section>
+      </main>
+    );
+  }

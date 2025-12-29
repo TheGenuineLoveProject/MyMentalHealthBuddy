@@ -3,12 +3,15 @@ import express from "express";
 const router = express.Router();
 
 /**
- * Placeholder Figma route
- * - Keeps imports stable
- * - Lets you add real Figma integration later
+ * Placeholder route: keeps imports from breaking until Figma integration is added.
+ * Later you can add:
+ * - OAuth flow
+ * - token storage
+ * - fetch file nodes
+ * - export images/styles
  */
-router.get("/figma/health", (_req, res) => {
-  res.json({ ok: true, feature: "figma", status: "placeholder" });
+router.get("/health", (req, res) => {
+  res.json({ ok: true, service: "figma", status: "placeholder" });
 });
 
 router.get("/figma", (_req, res) => {
