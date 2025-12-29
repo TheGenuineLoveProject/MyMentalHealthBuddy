@@ -434,3 +434,106 @@ describe("Collective Intelligence API", () => {
     expect(data.daily).toBeDefined();
   });
 });
+
+describe("Wisdom Synthesis API", () => {
+  it("should return pattern recognition frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/wisdom-synthesis/patterns`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.patterns)).toBe(true);
+    expect(data.patterns.length).toBe(6);
+  });
+
+  it("should return wisdom themes", async () => {
+    const res = await fetch(`${BASE_URL}/api/wisdom-synthesis/themes`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.themes)).toBe(true);
+    expect(data.themes.length).toBe(8);
+  });
+
+  it("should return daily wisdom synthesis", async () => {
+    const res = await fetch(`${BASE_URL}/api/wisdom-synthesis/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Cognitive Lab API", () => {
+  it("should return mental models library", async () => {
+    const res = await fetch(`${BASE_URL}/api/cognitive-lab/models`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.models)).toBe(true);
+    expect(data.models.length).toBe(25);
+  });
+
+  it("should return thinking tools", async () => {
+    const res = await fetch(`${BASE_URL}/api/cognitive-lab/tools`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.tools)).toBe(true);
+    expect(data.tools.length).toBe(6);
+  });
+
+  it("should return cognitive biases", async () => {
+    const res = await fetch(`${BASE_URL}/api/cognitive-lab/biases`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.biases)).toBe(true);
+    expect(data.biases.length).toBe(10);
+  });
+
+  it("should return daily cognitive practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/cognitive-lab/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Contemplative API", () => {
+  it("should return meditation practices", async () => {
+    const res = await fetch(`${BASE_URL}/api/contemplative/meditation`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.practices)).toBe(true);
+    expect(data.practices.length).toBe(8);
+  });
+
+  it("should return contemplative questions", async () => {
+    const res = await fetch(`${BASE_URL}/api/contemplative/inquiry`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.questions)).toBe(true);
+    expect(data.questions.length).toBe(5);
+  });
+
+  it("should return wisdom traditions", async () => {
+    const res = await fetch(`${BASE_URL}/api/contemplative/traditions`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.traditions)).toBe(true);
+    expect(data.traditions.length).toBe(6);
+  });
+
+  it("should return daily contemplative practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/contemplative/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+    expect(data.daily.morningPrompt).toBeDefined();
+  });
+});

@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T07:50:25.541Z",
+  "ts": "2025-12-29T07:56:52.957Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -47,12 +47,22 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/cognitive-lab.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/collective-intelligence.mjs",
       "empty": false,
       "hasTODO": false
     },
     {
       "file": "server/routes/community.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/contemplative.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -193,6 +203,11 @@
     },
     {
       "file": "server/routes/webhook.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/wisdom-synthesis.mjs",
       "empty": false,
       "hasTODO": false
     },
