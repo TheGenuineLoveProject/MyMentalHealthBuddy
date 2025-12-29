@@ -537,3 +537,114 @@ describe("Contemplative API", () => {
     expect(data.daily.morningPrompt).toBeDefined();
   });
 });
+
+describe("Ethical Reasoning API", () => {
+  it("should return ethical frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/ethical-reasoning/frameworks`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+    expect(data.frameworks.length).toBe(8);
+  });
+
+  it("should return moral reasoning tools", async () => {
+    const res = await fetch(`${BASE_URL}/api/ethical-reasoning/tools`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.tools)).toBe(true);
+    expect(data.tools.length).toBe(6);
+  });
+
+  it("should return ethical dilemmas", async () => {
+    const res = await fetch(`${BASE_URL}/api/ethical-reasoning/dilemmas`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.dilemmas)).toBe(true);
+    expect(data.dilemmas.length).toBe(5);
+  });
+
+  it("should return daily ethical practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/ethical-reasoning/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Existential API", () => {
+  it("should return existential themes", async () => {
+    const res = await fetch(`${BASE_URL}/api/existential/themes`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.themes)).toBe(true);
+    expect(data.themes.length).toBe(6);
+  });
+
+  it("should return existential philosophers", async () => {
+    const res = await fetch(`${BASE_URL}/api/existential/philosophers`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.philosophers)).toBe(true);
+    expect(data.philosophers.length).toBe(7);
+  });
+
+  it("should return meaning sources", async () => {
+    const res = await fetch(`${BASE_URL}/api/existential/meaning`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.sources)).toBe(true);
+    expect(data.sources.length).toBe(8);
+  });
+
+  it("should return daily existential practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/existential/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Embodiment API", () => {
+  it("should return somatic practices", async () => {
+    const res = await fetch(`${BASE_URL}/api/embodiment/somatic`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.practices)).toBe(true);
+    expect(data.practices.length).toBe(6);
+  });
+
+  it("should return nervous system states", async () => {
+    const res = await fetch(`${BASE_URL}/api/embodiment/nervous-system`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.states)).toBe(true);
+    expect(data.states.length).toBe(3);
+  });
+
+  it("should return regulation strategies", async () => {
+    const res = await fetch(`${BASE_URL}/api/embodiment/regulation`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.strategies)).toBe(true);
+    expect(data.strategies.length).toBe(6);
+  });
+
+  it("should return daily embodiment practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/embodiment/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});

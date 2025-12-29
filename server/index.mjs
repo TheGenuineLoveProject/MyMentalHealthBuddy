@@ -41,6 +41,9 @@ import collectiveIntelligenceRouter from "./routes/collective-intelligence.mjs";
 import wisdomSynthesisRouter from "./routes/wisdom-synthesis.mjs";
 import cognitiveLabRouter from "./routes/cognitive-lab.mjs";
 import contemplativeRouter from "./routes/contemplative.mjs";
+import ethicalReasoningRouter from "./routes/ethical-reasoning.mjs";
+import existentialRouter from "./routes/existential.mjs";
+import embodimentRouter from "./routes/embodiment.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -48,9 +51,31 @@ const __dirname = dirname(__filename);
 
 const isProduction = process.env.NODE_ENV === "production";
 
-if (isProduction && !process.env.DATABASE_URL) {
-  console.error("DEPLOY BLOCKED: DATABASE_URL is missing in production.");
-  process.exit(1);
+if (isProduction) {
+  const requiredEnvVars = [
+    { name: 'DATABASE_URL', value: process.env.DATABASE_URL },
+    { name: 'JWT_SECRET', value: process.env.JWT_SECRET },
+    { name: 'JWT_REFRESH_SECRET', value: process.env.JWT_REFRESH_SECRET },
+    { name: 'SESSION_SECRET', value: process.env.SESSION_SECRET },
+  ];
+  
+  const optionalButRecommended = [
+    { name: 'STRIPE_SECRET_KEY', value: process.env.STRIPE_SECRET_KEY },
+    { name: 'STRIPE_WEBHOOK_SECRET', value: process.env.STRIPE_WEBHOOK_SECRET },
+    { name: 'CORS_ORIGIN', value: process.env.CORS_ORIGIN || process.env.CORS_ORIGINS },
+  ];
+  
+  const missingRequired = requiredEnvVars.filter(v => !v.value);
+  const missingOptional = optionalButRecommended.filter(v => !v.value);
+  
+  if (missingRequired.length > 0) {
+    console.error(`DEPLOY BLOCKED: Missing required environment variables: ${missingRequired.map(v => v.name).join(', ')}`);
+    process.exit(1);
+  }
+  
+  if (missingOptional.length > 0) {
+    console.warn(`WARNING: Missing recommended environment variables: ${missingOptional.map(v => v.name).join(', ')}`);
+  }
 }
 
 const app = express();
@@ -124,6 +149,9 @@ app.use('/api/collective-intelligence', collectiveIntelligenceRouter);
 app.use('/api/wisdom-synthesis', wisdomSynthesisRouter);
 app.use('/api/cognitive-lab', cognitiveLabRouter);
 app.use('/api/contemplative', contemplativeRouter);
+app.use('/api/ethical-reasoning', ethicalReasoningRouter);
+app.use('/api/existential', existentialRouter);
+app.use('/api/embodiment', embodimentRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });

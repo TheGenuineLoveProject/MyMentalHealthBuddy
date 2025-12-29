@@ -40,6 +40,9 @@ import collectiveIntelligenceRouter from "./routes/collective-intelligence.mjs";
 import wisdomSynthesisRouter from "./routes/wisdom-synthesis.mjs";
 import cognitiveLabRouter from "./routes/cognitive-lab.mjs";
 import contemplativeRouter from "./routes/contemplative.mjs";
+import ethicalReasoningRouter from "./routes/ethical-reasoning.mjs";
+import existentialRouter from "./routes/existential.mjs";
+import embodimentRouter from "./routes/embodiment.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -111,6 +114,9 @@ async function startServer() {
   app.use("/api/wisdom-synthesis", wisdomSynthesisRouter);
   app.use("/api/cognitive-lab", cognitiveLabRouter);
   app.use("/api/contemplative", contemplativeRouter);
+  app.use("/api/ethical-reasoning", ethicalReasoningRouter);
+  app.use("/api/existential", existentialRouter);
+  app.use("/api/embodiment", embodimentRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });
