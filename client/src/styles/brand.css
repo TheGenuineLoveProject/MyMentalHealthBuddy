@@ -2,21 +2,37 @@
 
 :root {
   /* Genuine Love Project — Serenity Sage System */
-  --glp-primary: #8FBF9F;
-  --glp-secondary: #F5C5C5;
+  --glp-primary: #7FAF9B;
+  --glp-secondary: #F4C7C3;
   --glp-accent: #D4AF37;
   --glp-gold: #D4AF37;
 
+  /* Sage palette - LIGHT MODE */
+  --glp-sage: #8FBF9F;
+  --glp-sage-light: #B8D4C4;
+  --glp-sage-deep: #5A8A6E;
+  --glp-sage-deep-rgb: 90, 138, 110;
+
+  /* Blush palette */
+  --glp-blush: #F4C7C3;
+  --glp-clay: #C49A82;
+  --glp-heart: #E07070;
+
+  /* Backgrounds */
   --glp-bg: #FAF9F7;
   --glp-paper: #FAF9F7;
   --glp-mist: #F8FAFC;
+  --glp-ivory: #FFFEF9;
 
+  /* Text */
   --glp-text: #2D3748;
   --glp-ink: #2D3748;
 
+  /* Utilities */
   --glp-border: #E5E7EB;
   --glp-muted: #6B7280;
 
+  /* Status */
   --glp-success: #22C55E;
   --glp-warning: #F59E0B;
   --glp-danger: #EF4444;
