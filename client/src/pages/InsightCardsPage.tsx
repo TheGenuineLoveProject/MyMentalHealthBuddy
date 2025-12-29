@@ -1,0 +1,342 @@
+import { useState, useEffect } from "react";
+import { Link } from "wouter";
+import { ArrowLeft, Lightbulb, Tag, Search, Trash2, Plus, Filter, Calendar, Star, Bookmark } from "lucide-react";
+
+const STORAGE_KEY = "glp_insight_cards";
+
+interface InsightCard {
+  id: string;
+  content: string;
+  source: string;
+  tags: string[];
+  theme: string;
+  starred: boolean;
+  date: string;
+}
+
+interface InsightLibrary {
+  cards: InsightCard[];
+  themes: string[];
+}
+
+const SUGGESTED_THEMES = [
+  "Self-Compassion",
+  "Boundaries",
+  "Growth",
+  "Relationships",
+  "Purpose",
+  "Resilience",
+  "Presence",
+  "Acceptance"
+];
+
+const SUGGESTED_TAGS = [
+  "daily wisdom",
+  "personal insight",
+  "book quote",
+  "therapy session",
+  "meditation",
+  "conversation",
+  "dream",
+  "observation"
+];
+
+const loadLibrary = (): InsightLibrary => {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) return JSON.parse(stored);
+  } catch {}
+  return { cards: [], themes: SUGGESTED_THEMES };
+};
+
+const saveLibrary = (library: InsightLibrary) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(library));
+};
+
+export default function InsightCardsPage() {
+  const [library, setLibrary] = useState<InsightLibrary>(loadLibrary);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [showStarredOnly, setShowStarredOnly] = useState(false);
+  
+  const [newCard, setNewCard] = useState({
+    content: "",
+    source: "",
+    tags: "",
+    theme: SUGGESTED_THEMES[0]
+  });
+
+  const addCard = () => {
+    if (!newCard.content.trim()) return;
+    
+    const card: InsightCard = {
+      id: `card-${Date.now()}`,
+      content: newCard.content.trim(),
+      source: newCard.source.trim(),
+      tags: newCard.tags.split(",").map(t => t.trim().toLowerCase()).filter(Boolean),
+      theme: newCard.theme,
+      starred: false,
+      date: new Date().toISOString()
+    };
+
+    const updated = { ...library, cards: [card, ...library.cards] };
+    setLibrary(updated);
+    saveLibrary(updated);
+    setNewCard({ content: "", source: "", tags: "", theme: SUGGESTED_THEMES[0] });
+    setShowForm(false);
+  };
+
+  const deleteCard = (id: string) => {
+    const updated = { ...library, cards: library.cards.filter(c => c.id !== id) };
+    setLibrary(updated);
+    saveLibrary(updated);
+  };
+
+  const toggleStar = (id: string) => {
+    const updated = {
+      ...library,
+      cards: library.cards.map(c => c.id === id ? { ...c, starred: !c.starred } : c)
+    };
+    setLibrary(updated);
+    saveLibrary(updated);
+  };
+
+  const filteredCards = library.cards.filter(card => {
+    const matchesSearch = !searchTerm || 
+      card.content.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      card.tags.some(t => t.includes(searchTerm.toLowerCase()));
+    const matchesTheme = !selectedTheme || card.theme === selectedTheme;
+    const matchesStarred = !showStarredOnly || card.starred;
+    return matchesSearch && matchesTheme && matchesStarred;
+  });
+
+  const themeCounts = library.cards.reduce((acc, card) => {
+    acc[card.theme] = (acc[card.theme] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <header className="mb-8">
+          <Link href="/atlas">
+            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
+              <ArrowLeft className="h-4 w-4" /> Back to Atlas
+            </a>
+          </Link>
+          <div className="flex items-center gap-3 mb-2">
+            <Lightbulb className="h-10 w-10 text-amber-400" />
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent" data-testid="text-insight-title">
+              Insight Cards
+            </h1>
+          </div>
+          <p className="text-lg opacity-70">
+            Collect and organize your wisdom. Save insights, tag themes, build your personal library.
+          </p>
+        </header>
+
+        <div className="grid md:grid-cols-4 gap-4 mb-8">
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+            <Lightbulb className="h-6 w-6 mx-auto mb-2 text-amber-400" />
+            <div className="text-2xl font-bold" data-testid="text-total-cards">{library.cards.length}</div>
+            <p className="text-xs opacity-50">Total Cards</p>
+          </div>
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+            <Star className="h-6 w-6 mx-auto mb-2 text-yellow-400" />
+            <div className="text-2xl font-bold" data-testid="text-starred-count">{library.cards.filter(c => c.starred).length}</div>
+            <p className="text-xs opacity-50">Starred</p>
+          </div>
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+            <Tag className="h-6 w-6 mx-auto mb-2 text-purple-400" />
+            <div className="text-2xl font-bold" data-testid="text-themes-count">{Object.keys(themeCounts).length}</div>
+            <p className="text-xs opacity-50">Themes Used</p>
+          </div>
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
+            <Calendar className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
+            <div className="text-2xl font-bold" data-testid="text-this-week">
+              {library.cards.filter(c => {
+                const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+                return new Date(c.date).getTime() > weekAgo;
+              }).length}
+            </div>
+            <p className="text-xs opacity-50">This Week</p>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4 mb-6">
+          <div className="flex-1 min-w-[200px] relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-40" />
+            <input
+              type="text"
+              placeholder="Search insights or tags..."
+              value={searchTerm}
+              onChange={e => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+              data-testid="input-search"
+            />
+          </div>
+          
+          <button
+            onClick={() => setShowStarredOnly(!showStarredOnly)}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all ${
+              showStarredOnly ? "bg-yellow-500/20 text-yellow-400" : "bg-white/5 hover:bg-white/10"
+            }`}
+            data-testid="button-toggle-starred"
+          >
+            <Star className="h-4 w-4" />
+            Starred
+          </button>
+
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 transition-all"
+            data-testid="button-add-card"
+          >
+            <Plus className="h-4 w-4" />
+            Add Insight
+          </button>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mb-6">
+          <button
+            onClick={() => setSelectedTheme(null)}
+            className={`px-3 py-1.5 rounded-full text-sm transition-all ${
+              !selectedTheme ? "bg-white/20" : "bg-white/5 hover:bg-white/10"
+            }`}
+            data-testid="button-filter-all"
+          >
+            All
+          </button>
+          {SUGGESTED_THEMES.map(theme => (
+            <button
+              key={theme}
+              onClick={() => setSelectedTheme(selectedTheme === theme ? null : theme)}
+              className={`px-3 py-1.5 rounded-full text-sm transition-all ${
+                selectedTheme === theme ? "bg-amber-500/30 text-amber-300" : "bg-white/5 hover:bg-white/10"
+              }`}
+              data-testid={`button-filter-${theme.toLowerCase().replace(/\s/g, '-')}`}
+            >
+              {theme} {themeCounts[theme] ? `(${themeCounts[theme]})` : ""}
+            </button>
+          ))}
+        </div>
+
+        {showForm && (
+          <div className="p-6 rounded-xl bg-white/5 border border-white/10 mb-6 space-y-4">
+            <h3 className="font-semibold text-lg">Add New Insight</h3>
+            <textarea
+              value={newCard.content}
+              onChange={e => setNewCard({ ...newCard, content: e.target.value })}
+              placeholder="Write your insight, quote, or wisdom..."
+              className="w-full h-32 px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none resize-none"
+              data-testid="textarea-insight-content"
+            />
+            <div className="grid md:grid-cols-3 gap-4">
+              <input
+                type="text"
+                value={newCard.source}
+                onChange={e => setNewCard({ ...newCard, source: e.target.value })}
+                placeholder="Source (optional)"
+                className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+                data-testid="input-insight-source"
+              />
+              <input
+                type="text"
+                value={newCard.tags}
+                onChange={e => setNewCard({ ...newCard, tags: e.target.value })}
+                placeholder="Tags (comma separated)"
+                className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+                data-testid="input-insight-tags"
+              />
+              <select
+                value={newCard.theme}
+                onChange={e => setNewCard({ ...newCard, theme: e.target.value })}
+                className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+                data-testid="select-insight-theme"
+              >
+                {SUGGESTED_THEMES.map(theme => (
+                  <option key={theme} value={theme} className="bg-slate-800">{theme}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex gap-2">
+              <button
+                onClick={addCard}
+                disabled={!newCard.content.trim()}
+                className="px-5 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                data-testid="button-save-insight"
+              >
+                Save Insight
+              </button>
+              <button
+                onClick={() => setShowForm(false)}
+                className="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+                data-testid="button-cancel-insight"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+
+        {filteredCards.length === 0 ? (
+          <div className="text-center py-16 opacity-50">
+            <Bookmark className="h-12 w-12 mx-auto mb-4 opacity-40" />
+            <p>No insights yet. Start collecting your wisdom.</p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 gap-4">
+            {filteredCards.map(card => (
+              <div
+                key={card.id}
+                className="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/[0.07] transition-all group"
+                data-testid={`card-insight-${card.id}`}
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <span className="text-xs px-2 py-1 rounded-full bg-amber-500/20 text-amber-300">
+                    {card.theme}
+                  </span>
+                  <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button
+                      onClick={() => toggleStar(card.id)}
+                      className={`p-1.5 rounded-lg ${card.starred ? "text-yellow-400" : "text-white/40 hover:text-white/80"}`}
+                      data-testid={`button-star-${card.id}`}
+                    >
+                      <Star className="h-4 w-4" fill={card.starred ? "currentColor" : "none"} />
+                    </button>
+                    <button
+                      onClick={() => deleteCard(card.id)}
+                      className="p-1.5 rounded-lg text-white/40 hover:text-red-400"
+                      data-testid={`button-delete-${card.id}`}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+                <p className="text-base leading-relaxed mb-3" data-testid={`text-content-${card.id}`}>
+                  "{card.content}"
+                </p>
+                {card.source && (
+                  <p className="text-sm opacity-50 mb-3">— {card.source}</p>
+                )}
+                {card.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5">
+                    {card.tags.map(tag => (
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-white/10">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <p className="text-xs opacity-30 mt-3">
+                  {new Date(card.date).toLocaleDateString()}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /blog
+Allow: /library
+Allow: /research
+
+Disallow: /api/
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /settings
+
+Sitemap: https://genuinelove.app/sitemap.xml

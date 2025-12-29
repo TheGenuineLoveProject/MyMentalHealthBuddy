@@ -54,6 +54,9 @@ const AdaptiveCompanionPage = lazy(() => import("./pages/AdaptiveCompanionPage.t
 const KnowledgeSynthesisPage = lazy(() => import("./pages/KnowledgeSynthesisPage.tsx"));
 const WisdomPracticesPage = lazy(() => import("./pages/WisdomPracticesPage.tsx"));
 const GrowthAnalyticsPage = lazy(() => import("./pages/GrowthAnalyticsPage.tsx"));
+const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
+const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
+const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -241,6 +244,21 @@ export default function App() {
               <Route path="/growth-analytics">
                 <RouteGuard>
                   <GrowthAnalyticsPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/guided-journaling">
+                <RouteGuard>
+                  <GuidedJournalingPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/insight-cards">
+                <RouteGuard>
+                  <InsightCardsPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/progress">
+                <RouteGuard>
+                  <ProgressDashboardPage />
                 </RouteGuard>
               </Route>
 
