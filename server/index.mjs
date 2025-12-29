@@ -30,6 +30,8 @@ import communityRouter from "./routes/community.mjs";
 import wisdomRouter from "./routes/wisdom.mjs";
 import dialecticsRouter from "./routes/dialectics.mjs";
 import practicesRouter from "./routes/practices.mjs";
+import knowledgeRouter from "./routes/knowledge.mjs";
+import philosophyRouter from "./routes/philosophy.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -80,6 +82,8 @@ app.use('/api/community', communityRouter);
 app.use('/api/wisdom', wisdomRouter);
 app.use('/api/dialectics', dialecticsRouter);
 app.use('/api/practices', practicesRouter);
+app.use('/api/knowledge', knowledgeRouter);
+app.use('/api/philosophy', philosophyRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });

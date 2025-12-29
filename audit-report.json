@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T07:25:18.706Z",
+  "ts": "2025-12-29T07:33:29.262Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -92,6 +92,11 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/knowledge.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/login.mjs",
       "empty": false,
       "hasTODO": false
@@ -113,6 +118,11 @@
     },
     {
       "file": "server/routes/onboarding.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/philosophy.mjs",
       "empty": false,
       "hasTODO": false
     },

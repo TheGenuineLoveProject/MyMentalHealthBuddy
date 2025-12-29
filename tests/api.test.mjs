@@ -165,3 +165,85 @@ describe("Insights API", () => {
     expect(data.insight.length).toBeGreaterThan(0);
   });
 });
+
+describe("Knowledge API", () => {
+  it("should return concept frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/knowledge/concepts`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+    expect(data.frameworks.length).toBe(5);
+  });
+
+  it("should return learning principles", async () => {
+    const res = await fetch(`${BASE_URL}/api/knowledge/learning`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.principles)).toBe(true);
+    expect(data.principles.length).toBe(8);
+  });
+
+  it("should return intellectual virtues", async () => {
+    const res = await fetch(`${BASE_URL}/api/knowledge/virtues`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.virtues)).toBe(true);
+    expect(data.virtues.length).toBe(7);
+  });
+
+  it("should return daily knowledge practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/knowledge/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Philosophy API", () => {
+  it("should return philosophical schools", async () => {
+    const res = await fetch(`${BASE_URL}/api/philosophy/schools`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.schools)).toBe(true);
+    expect(data.schools.length).toBe(8);
+  });
+
+  it("should return virtue ethics framework", async () => {
+    const res = await fetch(`${BASE_URL}/api/philosophy/virtues`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.virtueEthics).toBeDefined();
+    expect(data.virtueEthics.cardinal).toBeDefined();
+  });
+
+  it("should return cardinal virtues", async () => {
+    const res = await fetch(`${BASE_URL}/api/philosophy/virtues/cardinal`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.cardinalVirtues)).toBe(true);
+    expect(data.cardinalVirtues.length).toBe(4);
+  });
+
+  it("should return philosophical questions", async () => {
+    const res = await fetch(`${BASE_URL}/api/philosophy/questions`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.categories).toBeDefined();
+  });
+
+  it("should return daily philosophical practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/philosophy/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
