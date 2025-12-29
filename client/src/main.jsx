@@ -11,4 +11,9 @@ try {
   console.warn('Brand initialization failed, continuing with defaults:', err);
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+const root = document.getElementById("root");
+if (root) {
+  ReactDOM.createRoot(root).render(<App />);
+} else {
+  console.error("Root element not found!");
+}
