@@ -88,6 +88,10 @@ async function startServer() {
     res.json({ ok: true, env: "development" });
   });
 
+  app.get("/healthz", (_req, res) => {
+    res.status(200).json({ ok: true });
+  });
+
   const vite = await createViteServer({
     configFile: resolve(__dirname, "../vite.config.js"),
     server: { middlewareMode: true },

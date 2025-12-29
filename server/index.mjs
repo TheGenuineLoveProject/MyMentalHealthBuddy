@@ -79,6 +79,13 @@ app.use('/api/community', communityRouter);
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
 });
+app.get("/", (req, res) => {
+  res.status(200).send("OK");
+});
+
+app.get("/healthz", (req, res) => {
+  res.status(200).json({ ok: true });
+});
 
 const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));
@@ -113,5 +120,11 @@ function gracefulShutdown(signal) {
   }, 10000);
 }
 
-process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
-process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+process.on("SIGTERM", () => {
+  console.log("[shutdown] SIGTERM received");
+  process.exit(0);
+});
+process.on("SIGINT", () => {
+  console.log("[shutdown] SIGINT received");
+  process.exit(0);
+});
