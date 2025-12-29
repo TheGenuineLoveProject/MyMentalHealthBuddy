@@ -65,6 +65,7 @@ const SystemsThinkingPage = lazy(() => import("./pages/SystemsThinkingPage.tsx")
 const MetaLearningPage = lazy(() => import("./pages/MetaLearningPage.tsx"));
 const ContentStudioPage = lazy(() => import("./pages/ContentStudioPage.tsx"));
 const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.tsx"));
+const EliteToolsDashboard = lazy(() => import("./pages/EliteToolsDashboard.tsx"));
 
 function LoadingFallback() {
   return (
@@ -307,6 +308,11 @@ export default function App() {
               <Route path="/study-vault">
                 <RouteGuard>
                   <StudyVaultPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/elite-tools">
+                <RouteGuard>
+                  <EliteToolsDashboard />
                 </RouteGuard>
               </Route>
 
