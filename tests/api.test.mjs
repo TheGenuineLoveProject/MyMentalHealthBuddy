@@ -340,3 +340,97 @@ describe("Resilience API", () => {
     expect(data.daily.affirmation).toBeDefined();
   });
 });
+
+describe("Foresight API", () => {
+  it("should return scenario planning methods", async () => {
+    const res = await fetch(`${BASE_URL}/api/foresight/scenarios`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.methods)).toBe(true);
+    expect(data.methods.length).toBe(5);
+  });
+
+  it("should return ethical foresight principles", async () => {
+    const res = await fetch(`${BASE_URL}/api/foresight/ethics`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.principles)).toBe(true);
+    expect(data.principles.length).toBe(5);
+  });
+
+  it("should return daily foresight practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/foresight/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Systems Compassion API", () => {
+  it("should return compassionate systems frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/systems-compassion/frameworks`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+    expect(data.frameworks.length).toBe(4);
+  });
+
+  it("should return empathy scales", async () => {
+    const res = await fetch(`${BASE_URL}/api/systems-compassion/scales`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.scales)).toBe(true);
+    expect(data.scales.length).toBe(6);
+  });
+
+  it("should return daily compassion practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/systems-compassion/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+    expect(data.daily.practiceInstruction).toBeDefined();
+  });
+});
+
+describe("Collective Intelligence API", () => {
+  it("should return collective wisdom principles", async () => {
+    const res = await fetch(`${BASE_URL}/api/collective-intelligence/principles`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.principles)).toBe(true);
+    expect(data.principles.length).toBe(5);
+  });
+
+  it("should return wisdom synthesis methods", async () => {
+    const res = await fetch(`${BASE_URL}/api/collective-intelligence/synthesis`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.methods)).toBe(true);
+    expect(data.methods.length).toBe(5);
+  });
+
+  it("should return emergent intelligence patterns", async () => {
+    const res = await fetch(`${BASE_URL}/api/collective-intelligence/emergence`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.phenomena)).toBe(true);
+    expect(data.phenomena.length).toBe(4);
+  });
+
+  it("should return daily collective wisdom practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/collective-intelligence/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});

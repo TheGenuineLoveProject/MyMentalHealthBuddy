@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T07:42:16.085Z",
+  "ts": "2025-12-29T07:50:25.541Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -47,6 +47,11 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/collective-intelligence.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/community.mjs",
       "empty": false,
       "hasTODO": false
@@ -68,6 +73,11 @@
     },
     {
       "file": "server/routes/figma.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/foresight.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -163,6 +173,11 @@
     },
     {
       "file": "server/routes/stripeWebhook.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/systems-compassion.mjs",
       "empty": false,
       "hasTODO": false
     },

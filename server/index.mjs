@@ -35,6 +35,9 @@ import philosophyRouter from "./routes/philosophy.mjs";
 import metacognitionRouter from "./routes/metacognition.mjs";
 import creativityRouter from "./routes/creativity.mjs";
 import resilienceRouter from "./routes/resilience.mjs";
+import foresightRouter from "./routes/foresight.mjs";
+import systemsCompassionRouter from "./routes/systems-compassion.mjs";
+import collectiveIntelligenceRouter from "./routes/collective-intelligence.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -112,6 +115,9 @@ app.use('/api/philosophy', philosophyRouter);
 app.use('/api/metacognition', metacognitionRouter);
 app.use('/api/creativity', creativityRouter);
 app.use('/api/resilience', resilienceRouter);
+app.use('/api/foresight', foresightRouter);
+app.use('/api/systems-compassion', systemsCompassionRouter);
+app.use('/api/collective-intelligence', collectiveIntelligenceRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });

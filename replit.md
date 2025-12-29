@@ -32,6 +32,9 @@ The platform offers:
 - **Metacognition API**: 6 metacognitive strategies (Think-Aloud Protocol, Self-Questioning, Calibration Practice, etc.), 8 thinking biases with antidotes, 5 reflection frameworks (Gibbs Cycle, Kolb's Learning Cycle, etc.), 5 self-awareness tools.
 - **Creativity API**: 8 creative techniques (SCAMPER, Six Thinking Hats, Random Entry, etc.), 4 problem framing methods, 6 ideation principles, 5 creative block solutions.
 - **Resilience API**: 8 resilience factors with practices and affirmations, 4 coping strategy categories, 5 post-traumatic growth domains, 6 psychological flexibility processes (ACT-based).
+- **Foresight API**: 5 scenario planning methods (Three Horizons, Scenario Cross-Matrix, Causal Layered Analysis), 5 ethical foresight principles, futures wheel methodology, weak signal scanning, 5 futures literacy competencies.
+- **Systems Compassion API**: 4 trauma-informed systems design frameworks, 3 systemic intervention levels, 5 healing narrative archetypes, 6 empathy scales, 5 compassion practices (Tonglen, Metta, etc.).
+- **Collective Intelligence API**: 5 collective wisdom principles, 5 wisdom synthesis methods (Delphi, World Café, Appreciative Inquiry), 4 crowd wisdom types, 4 synthesis frameworks (Integral Theory, Consilience), 4 emergent intelligence patterns.
 - **Wisdom Synthesis Engine**: Pattern recognition, insight extraction, wisdom theme analysis.
 - **Cognitive Architecture Lab**: 25 mental models library with favorites and practice tracking.
 - **Philosophical Inquiry System**: Socratic questioning and dialectical reasoning framework.
@@ -58,12 +61,12 @@ The application is optimized for production with code splitting and environment 
 - **Rate Limiting**: Applied to authentication and AI endpoints.
 
 ### Platform Metrics
-- **37 API Routes**: Comprehensive intellectual, wellness, and administrative APIs
+- **40 API Routes**: Comprehensive intellectual, wellness, and administrative APIs
 - **106 Frontend Pages**: Full-featured UI components
-- **36 Passing Tests**: Unit and integration coverage
+- **46 Passing Tests**: Unit and integration coverage
 - **7 Smoke Tests**: Health check verification
 - **0 TODO Lines**: Production-clean codebase
-- **300+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
+- **400+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
 
 ## External Dependencies
 
