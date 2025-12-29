@@ -648,3 +648,105 @@ describe("Embodiment API", () => {
     expect(data.daily).toBeDefined();
   });
 });
+
+describe("Narrative API", () => {
+  it("should return narrative frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/narrative/frameworks`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+    expect(data.frameworks.length).toBe(6);
+  });
+
+  it("should return archetypal figures", async () => {
+    const res = await fetch(`${BASE_URL}/api/narrative/archetypes`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.archetypes)).toBe(true);
+    expect(data.archetypes.length).toBe(8);
+  });
+
+  it("should return daily narrative practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/narrative/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Relational API", () => {
+  it("should return attachment styles", async () => {
+    const res = await fetch(`${BASE_URL}/api/relational/attachment`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.styles)).toBe(true);
+    expect(data.styles.length).toBe(4);
+  });
+
+  it("should return communication skills", async () => {
+    const res = await fetch(`${BASE_URL}/api/relational/communication`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.skills)).toBe(true);
+    expect(data.skills.length).toBe(6);
+  });
+
+  it("should return love languages", async () => {
+    const res = await fetch(`${BASE_URL}/api/relational/love-languages`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.languages)).toBe(true);
+    expect(data.languages.length).toBe(5);
+  });
+
+  it("should return daily relational practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/relational/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Values API", () => {
+  it("should return core values", async () => {
+    const res = await fetch(`${BASE_URL}/api/values/core`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.values)).toBe(true);
+    expect(data.values.length).toBe(15);
+  });
+
+  it("should return purpose frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/values/purpose`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+    expect(data.frameworks.length).toBe(4);
+  });
+
+  it("should return meaning sources", async () => {
+    const res = await fetch(`${BASE_URL}/api/values/meaning`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.sources)).toBe(true);
+    expect(data.sources.length).toBe(5);
+  });
+
+  it("should return daily values practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/values/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});

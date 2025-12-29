@@ -38,6 +38,12 @@ The platform offers:
 - **Wisdom Synthesis API**: 6 pattern recognition frameworks, 5 insight extraction methods, 8 universal wisdom themes, 5 integration practices for embodying wisdom.
 - **Cognitive Lab API**: 25 mental models library (Inversion, First Principles, Second-Order Thinking, etc.), 6 thinking tools, 10 cognitive biases with antidotes, 5 reasoning frameworks.
 - **Contemplative API**: 8 meditation practices (Breath Awareness, Body Scan, Metta, Zazen, etc.), 5 categories of contemplative questions, 5 mindfulness exercises, 6 wisdom traditions.
+- **Ethical Reasoning API**: 8 ethical frameworks (Utilitarianism, Deontology, Virtue Ethics, Care Ethics, etc.), 6 moral reasoning tools, 5 ethical dilemma categories, 8-step ethical decision process.
+- **Existential API**: 6 existential themes (Mortality, Freedom, Meaning, Isolation, Authenticity, Absurdity), 7 existential philosophers (Kierkegaard, Nietzsche, Heidegger, Sartre, Camus, de Beauvoir, Frankl), 10 life questions, 8 meaning sources.
+- **Embodiment API**: 6 somatic practices (Body Scan, Grounding, Breath Work, PMR, Mindful Movement, Trauma-Sensitive), 3 nervous system states (Polyvagal Theory), 6 regulation strategies, 5 interoception exercises.
+- **Narrative API**: 6 narrative frameworks (Hero's Journey, Redemption, Agency, Communion, Growth), 6 story elements, 10 reauthoring prompts, 8 archetypal figures.
+- **Relational API**: 4 attachment styles, 6 communication skills (Active Listening, I-Statements, NVC, Repair Attempts, Boundaries, Empathic Inquiry), 5 relationship patterns, 5 love languages.
+- **Values API**: 15 core values, 6 values exercises, 4 purpose frameworks (Ikigai, Hedgehog, Golden Circle, Life Domains), 5 meaning sources.
 - **Wisdom Synthesis Engine**: Pattern recognition, insight extraction, wisdom theme analysis.
 - **Cognitive Architecture Lab**: 25 mental models library with favorites and practice tracking.
 - **Philosophical Inquiry System**: Socratic questioning and dialectical reasoning framework.
@@ -64,12 +70,12 @@ The application is optimized for production with code splitting and environment 
 - **Rate Limiting**: Applied to authentication and AI endpoints.
 
 ### Platform Metrics
-- **43 API Routes**: Comprehensive intellectual, wellness, and administrative APIs
+- **52 API Routes**: Comprehensive intellectual, wellness, and administrative APIs
 - **106 Frontend Pages**: Full-featured UI components
-- **57 Passing Tests**: Unit and integration coverage
+- **80 Passing Tests**: Unit and integration coverage
 - **7 Smoke Tests**: Health check verification
 - **0 TODO Lines**: Production-clean codebase
-- **500+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
+- **600+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
 
 ## External Dependencies
 

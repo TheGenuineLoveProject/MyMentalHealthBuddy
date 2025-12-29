@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T07:56:52.957Z",
+  "ts": "2025-12-29T08:26:34.555Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -82,6 +82,21 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/embodiment.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/ethical-reasoning.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/existential.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/figma.mjs",
       "empty": false,
       "hasTODO": false
@@ -147,6 +162,11 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/narrative.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/onboarding.mjs",
       "empty": false,
       "hasTODO": false
@@ -168,6 +188,11 @@
     },
     {
       "file": "server/routes/prompts.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/relational.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -198,6 +223,11 @@
     },
     {
       "file": "server/routes/ui-dashboard.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/values.mjs",
       "empty": false,
       "hasTODO": false
     },

@@ -44,6 +44,9 @@ import contemplativeRouter from "./routes/contemplative.mjs";
 import ethicalReasoningRouter from "./routes/ethical-reasoning.mjs";
 import existentialRouter from "./routes/existential.mjs";
 import embodimentRouter from "./routes/embodiment.mjs";
+import narrativeRouter from "./routes/narrative.mjs";
+import relationalRouter from "./routes/relational.mjs";
+import valuesRouter from "./routes/values.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -152,6 +155,9 @@ app.use('/api/contemplative', contemplativeRouter);
 app.use('/api/ethical-reasoning', ethicalReasoningRouter);
 app.use('/api/existential', existentialRouter);
 app.use('/api/embodiment', embodimentRouter);
+app.use('/api/narrative', narrativeRouter);
+app.use('/api/relational', relationalRouter);
+app.use('/api/values', valuesRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
