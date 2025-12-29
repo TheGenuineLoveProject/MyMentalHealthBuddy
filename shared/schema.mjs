@@ -294,3 +294,27 @@ export const dailyRituals = pgTable("daily_rituals", {
   completedSteps: text("completed_steps"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+/* ================= CONCEPTS (Knowledge Graph) ================= */
+export const concepts = pgTable("concepts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  tags: text("tags"),
+  linkedJournals: text("linked_journals"),
+  linkedInsights: text("linked_insights"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+/* ================= CONTENT DRAFTS (Publishing) ================= */
+export const contentDrafts = pgTable("content_drafts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id"),
+  title: varchar("title", { length: 255 }).notNull(),
+  sourceContent: text("source_content").notNull(),
+  outputs: text("outputs"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});

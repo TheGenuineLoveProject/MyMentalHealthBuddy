@@ -63,6 +63,8 @@ const PhilosophicalInquiryPage = lazy(() => import("./pages/PhilosophicalInquiry
 const DailyWisdomOraclePage = lazy(() => import("./pages/DailyWisdomOraclePage.tsx"));
 const SystemsThinkingPage = lazy(() => import("./pages/SystemsThinkingPage.tsx"));
 const MetaLearningPage = lazy(() => import("./pages/MetaLearningPage.tsx"));
+const ContentStudioPage = lazy(() => import("./pages/ContentStudioPage.tsx"));
+const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -295,6 +297,16 @@ export default function App() {
               <Route path="/meta-learning">
                 <RouteGuard>
                   <MetaLearningPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/content-studio">
+                <RouteGuard>
+                  <ContentStudioPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/study-vault">
+                <RouteGuard>
+                  <StudyVaultPage />
                 </RouteGuard>
               </Route>
 

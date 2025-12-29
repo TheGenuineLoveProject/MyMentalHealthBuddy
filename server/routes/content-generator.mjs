@@ -211,4 +211,34 @@ router.get("/formats", (req, res) => {
   });
 });
 
+const drafts = [];
+
+router.get("/drafts", (req, res) => {
+  res.json({ ok: true, drafts });
+});
+
+router.post("/drafts", (req, res) => {
+  const { title, sourceContent, outputs } = req.body || {};
+  
+  if (!title || typeof title !== 'string') {
+    return res.status(400).json({ ok: false, error: "Title is required" });
+  }
+  if (!sourceContent || typeof sourceContent !== 'string') {
+    return res.status(400).json({ ok: false, error: "Source content is required" });
+  }
+  
+  const draft = {
+    id: `draft-${Date.now()}`,
+    title,
+    sourceContent,
+    outputs: outputs || {},
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  
+  drafts.push(draft);
+  
+  res.json({ ok: true, draft });
+});
+
 export default router;
