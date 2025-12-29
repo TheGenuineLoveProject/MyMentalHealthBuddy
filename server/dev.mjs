@@ -162,7 +162,10 @@ async function startServer() {
 
   const vite = await createViteServer({
     configFile: resolve(__dirname, "../vite.config.js"),
-    server: { middlewareMode: true },
+    server: { 
+      middlewareMode: true,
+      allowedHosts: 'all'
+    },
     appType: "spa",
   });
   
