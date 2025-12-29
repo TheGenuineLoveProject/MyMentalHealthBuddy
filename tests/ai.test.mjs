@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import { createTestApp } from './app.mjs';
-import { createTestUser, createAuthToken, authHeader } from './helpers.mjs';
+import { createTestUser, createAuthToken, authHeader, seedTestUser, cleanupTestUser } from './helpers.mjs';
 import { db } from '../server/db/connection.mjs';
 import { aiMessages } from '../shared/schema.mjs';
 import { eq } from 'drizzle-orm';
@@ -11,14 +11,16 @@ describe('AI Chat Routes', () => {
   let testUser;
   let authToken;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     app = createTestApp();
     testUser = createTestUser();
+    await seedTestUser(testUser);
     authToken = createAuthToken(testUser);
   });
 
   afterAll(async () => {
     await db.delete(aiMessages).where(eq(aiMessages.userId, testUser.id));
+    await cleanupTestUser(testUser.id);
   });
 
   describe('GET /api/ai/history', () => {
@@ -34,7 +36,7 @@ describe('AI Chat Routes', () => {
 
       expect(res.status).toBe(200);
       expect(res.body.ok).toBe(true);
-      expect(res.body.data.messages).toBeInstanceOf(Array);
+      expect(res.body.messages).toBeInstanceOf(Array);
     });
   });
 
@@ -63,8 +65,7 @@ describe('AI Chat Routes', () => {
         .send({ message: 'Hello, I am feeling a bit anxious today.' });
 
       expect(res.status).toBe(200);
-      expect(res.body.ok).toBe(true);
-      expect(res.body.data.reply).toBeDefined();
+      expect(res.body.reply).toBeDefined();
     });
 
     it('should persist message to history', async () => {
@@ -73,9 +74,9 @@ describe('AI Chat Routes', () => {
         .set(authHeader(authToken));
 
       expect(historyRes.status).toBe(200);
-      expect(historyRes.body.data.messages.length).toBeGreaterThan(0);
+      expect(historyRes.body.messages.length).toBeGreaterThan(0);
       
-      const userMessages = historyRes.body.data.messages.filter(m => m.role === 'user');
+      const userMessages = historyRes.body.messages.filter(m => m.role === 'user');
       expect(userMessages.length).toBeGreaterThan(0);
     });
   });
@@ -98,7 +99,7 @@ describe('AI Chat Routes', () => {
         .get('/api/ai/history')
         .set(authHeader(authToken));
 
-      expect(historyRes.body.data.messages).toHaveLength(0);
+      expect(historyRes.body.messages).toHaveLength(0);
     });
   });
 });

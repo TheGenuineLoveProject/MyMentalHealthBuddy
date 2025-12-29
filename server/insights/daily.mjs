@@ -1,7 +1,7 @@
 const insights = [
   "Most of what we call 'overthinking' is actually the mind attempting to solve a problem it hasn't correctly defined. Before analyzing solutions, it often helps to ask: what exactly am I trying to solve, and is this solvable by thinking?",
 
-  "The gap between who you are and who you think you should be isn't a character flaw—it's a signal. That tension often points to values you haven't fully examined or expectations you inherited without choosing.",
+  "The gap between who you are and who you imagine being isn't a character flaw—it's a signal. That tension often points to values not yet fully examined or expectations inherited without choosing.",
 
   "Fatigue rarely means you need more rest. Sometimes it means you've been expending energy on things that don't replenish you. The question isn't always 'how do I recover?' but 'what am I recovering from?'",
 

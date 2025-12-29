@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T08:41:34.835Z",
+  "ts": "2025-12-29T16:01:56.869Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -52,6 +52,11 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/cognitive-mastery.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/collective-intelligence.mjs",
       "empty": false,
       "hasTODO": false
@@ -63,6 +68,16 @@
     },
     {
       "file": "server/routes/contemplative.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/content-generator.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/content-intelligence.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -112,6 +127,16 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/healing-intelligence.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/healing-tools.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/health.mjs",
       "empty": false,
       "hasTODO": false
@@ -138,6 +163,11 @@
     },
     {
       "file": "server/routes/login.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/meaning-future.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -217,6 +247,11 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/self-mastery.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/socio-ecology.mjs",
       "empty": false,
       "hasTODO": false
@@ -242,6 +277,11 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/transformation-engine.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/ui-dashboard.mjs",
       "empty": false,
       "hasTODO": false
@@ -253,6 +293,11 @@
     },
     {
       "file": "server/routes/webhook.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/wisdom-engine.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -321,6 +366,10 @@
       "hasTODO": false
     },
     {
+      "file": "client/src/pages/ContentStudioPage.tsx",
+      "hasTODO": false
+    },
+    {
       "file": "client/src/pages/ControlDashboard.jsx",
       "hasTODO": false
     },
@@ -350,6 +399,10 @@
     },
     {
       "file": "client/src/pages/DisclaimerPage.tsx",
+      "hasTODO": false
+    },
+    {
+      "file": "client/src/pages/EliteToolsDashboard.tsx",
       "hasTODO": false
     },
     {
@@ -470,6 +523,10 @@
     },
     {
       "file": "client/src/pages/StrategyMapsPage.tsx",
+      "hasTODO": false
+    },
+    {
+      "file": "client/src/pages/StudyVaultPage.tsx",
       "hasTODO": false
     },
     {

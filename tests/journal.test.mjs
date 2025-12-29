@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import { createTestApp } from './app.mjs';
-import { createTestUser, createAuthToken, authHeader } from './helpers.mjs';
+import { createTestUser, createAuthToken, authHeader, seedTestUser, cleanupTestUser } from './helpers.mjs';
 import { db } from '../server/db/connection.mjs';
 import { journals } from '../shared/schema.mjs';
 import { eq } from 'drizzle-orm';
@@ -12,14 +12,16 @@ describe('Journal Routes', () => {
   let authToken;
   let createdJournalId;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     app = createTestApp();
     testUser = createTestUser();
+    await seedTestUser(testUser);
     authToken = createAuthToken(testUser);
   });
 
   afterAll(async () => {
     await db.delete(journals).where(eq(journals.userId, testUser.id));
+    await cleanupTestUser(testUser.id);
   });
 
   describe('POST /api/journal', () => {

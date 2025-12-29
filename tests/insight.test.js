@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest';
 import { getDailyInsight, getAllInsights } from "../server/insights/daily.mjs";
 
 describe("Daily Insights", () => {

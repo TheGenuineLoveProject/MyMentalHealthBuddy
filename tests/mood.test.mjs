@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import { createTestApp } from './app.mjs';
-import { createTestUser, createAuthToken, authHeader } from './helpers.mjs';
+import { createTestUser, createAuthToken, authHeader, seedTestUser, cleanupTestUser } from './helpers.mjs';
 import { db } from '../server/db/connection.mjs';
 import { moods } from '../shared/schema.mjs';
 import { eq } from 'drizzle-orm';
@@ -12,14 +12,16 @@ describe('Mood Routes', () => {
   let authToken;
   let createdMoodId;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     app = createTestApp();
     testUser = createTestUser();
+    await seedTestUser(testUser);
     authToken = createAuthToken(testUser);
   });
 
   afterAll(async () => {
     await db.delete(moods).where(eq(moods.userId, testUser.id));
+    await cleanupTestUser(testUser.id);
   });
 
   describe('GET /api/mood/ping', () => {
