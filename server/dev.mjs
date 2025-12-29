@@ -56,6 +56,9 @@ import contentGeneratorRouter from "./routes/content-generator.mjs";
 import healingIntelligenceRouter from "./routes/healing-intelligence.mjs";
 import cognitiveMasteryRouter from "./routes/cognitive-mastery.mjs";
 import wisdomEngineRouter from "./routes/wisdom-engine.mjs";
+import selfMasteryRouter from "./routes/self-mastery.mjs";
+import transformationEngineRouter from "./routes/transformation-engine.mjs";
+import contentIntelligenceRouter from "./routes/content-intelligence.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -139,6 +142,9 @@ async function startServer() {
   app.use("/api/healing-intelligence", healingIntelligenceRouter);
   app.use("/api/cognitive-mastery", cognitiveMasteryRouter);
   app.use("/api/wisdom-engine", wisdomEngineRouter);
+  app.use("/api/self-mastery", selfMasteryRouter);
+  app.use("/api/transformation", transformationEngineRouter);
+  app.use("/api/content-intelligence", contentIntelligenceRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });
