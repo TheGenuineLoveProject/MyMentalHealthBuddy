@@ -4,7 +4,116 @@ export type InsightCard = {
   tag?: "Name it" | "Normalize it" | "Next kind step";
   subtitle?: string;
   badge?: string;
+  id: string;
+  tags?: string[];
+  cta?: string;
 };
+
+function uid(prefix: string) {
+  return `${prefix}_${Math.random().toString(16).slice(2)}_${Date.now().toString(16)}`;
+}
+
+function pickEmotionTags(text: string): string[] {
+  const t = text.toLowerCase();
+  const tags: string[] = [];
+
+  const map: Array<[string, string]> = [
+    ["anxious", "anxiety"],
+    ["anxiety", "anxiety"],
+    ["panic", "anxiety"],
+    ["sad", "sadness"],
+    ["grief", "grief"],
+    ["lonely", "loneliness"],
+    ["angry", "anger"],
+    ["ashamed", "shame"],
+    ["guilty", "guilt"],
+    ["overwhelmed", "overwhelm"],
+    ["stress", "stress"],
+    ["tired", "fatigue"],
+    ["stuck", "stuckness"],
+    ["scared", "fear"],
+    ["fear", "fear"],
+    ["trust", "trust"],
+    ["calm", "calm"],
+  ];
+
+  for (const [key, tag] of map) {
+    if (t.includes(key) && !tags.includes(tag)) tags.push(tag);
+  }
+
+  return tags.slice(0, 4);
+}
+
+function firstMeaningfulLine(text: string): string {
+  const lines = text.split("\n").map((s) => s.trim()).filter(Boolean);
+  return lines[0] || text.trim();
+}
+
+export function buildInsightCards(reflectionText: string): InsightCard[] {
+  const tags = pickEmotionTags(reflectionText);
+  const headline = firstMeaningfulLine(reflectionText);
+
+  const cards: InsightCard[] = [];
+
+  cards.push({
+    id: uid("heard"),
+    title: "What I hear",
+    body: headline.length > 180 ? headline.slice(0, 180) + "…" : headline,
+    tags,
+  });
+
+  cards.push({
+    id: uid("truth"),
+    title: "One sentence to make truer tomorrow",
+    body:
+      "Fill this in:\n" +
+      "“Tomorrow, I will practice ______ for 2 minutes, even if I don’t feel ready.”",
+    tags: ["micro-step", ...tags].slice(0, 4),
+  });
+
+  cards.push({
+    id: uid("reframe"),
+    title: "Gentle reframe",
+    body:
+      "If your mind says “something is wrong with me,” try:\n" +
+      "“Something in me is asking for care. I can respond with kindness, one step at a time.”",
+    tags: ["reframe", ...tags].slice(0, 4),
+  });
+
+  cards.push({
+    id: uid("action"),
+    title: "Small next step",
+    body:
+      "Pick ONE:\n" +
+      "• Drink water\n" +
+      "• 6 slow breaths\n" +
+      "• Write 3 honest sentences\n" +
+      "• Text a trusted person\n" +
+      "• Step outside for 60 seconds",
+    tags: ["action", ...tags].slice(0, 4),
+    cta: "Choose one and do it now.",
+  });
+
+  cards.push({
+    id: uid("prompt"),
+    title: "Journal prompt",
+    body:
+      "“If the part of me that feels this way could speak without being judged, what would it say?”\n\n" +
+      "Then answer: “What would help me feel 5% safer right now?”",
+    tags: ["journaling", ...tags].slice(0, 4),
+  });
+
+  cards.push({
+    id: uid("safety"),
+    title: "Safety note",
+    body:
+      "This is journaling support, not medical advice.\n" +
+      "If you feel unsafe or at risk of harming yourself or someone else, please seek immediate help or local emergency services.",
+    tags: ["safety"],
+  });
+
+  return cards;
+}
 
 export type EngineOutput = {
   cards: InsightCard[];
@@ -74,7 +183,7 @@ function emotionGuess(tags: string[]) {
   return primary ?? "Present moment";
 }
 
-export function buildInsightCards(reflectionText: string): EngineOutput {
+export function buildThematicCards(reflectionText: string): EngineOutput {
   const safeText = (reflectionText ?? "").trim();
   const seed = hashSeed(safeText || "seed");
 
@@ -82,6 +191,7 @@ export function buildInsightCards(reflectionText: string): EngineOutput {
   const primary = emotionGuess(tags);
 
   const nameIt: InsightCard = {
+    id: uid("name"),
     title: "Name it",
     subtitle: "A gentle label can reduce intensity",
     body:
@@ -92,6 +202,7 @@ export function buildInsightCards(reflectionText: string): EngineOutput {
   };
 
   const normalizeIt: InsightCard = {
+    id: uid("normalize"),
     title: "Normalize it",
     subtitle: "Validation without judgment",
     body: pick(NORMALIZE_LINES, seed),
@@ -99,6 +210,7 @@ export function buildInsightCards(reflectionText: string): EngineOutput {
   };
 
   const nextStep: InsightCard = {
+    id: uid("nextstep"),
     title: "Next kind step",
     subtitle: "Small actions create safety",
     body: pick(NEXT_KIND_STEPS, seed + 7),
@@ -121,6 +233,7 @@ export function buildSimpleInsightCards(input: {
 
   return [
     {
+      id: uid("simple-name"),
       tag: "Name it",
       title: "Name what's here",
       body:
@@ -129,6 +242,7 @@ export function buildSimpleInsightCards(input: {
         (themeLine ? ` ${themeLine}` : ""),
     },
     {
+      id: uid("simple-norm"),
       tag: "Normalize it",
       title: "You're not weird for this",
       body:
@@ -136,6 +250,7 @@ export function buildSimpleInsightCards(input: {
         `This is a human response — not a personal failure.`,
     },
     {
+      id: uid("simple-next"),
       tag: "Next kind step",
       title: "One kind next step",
       body:

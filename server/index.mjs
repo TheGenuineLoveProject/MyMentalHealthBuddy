@@ -7,7 +7,6 @@ import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
 import { dirname, join } from 'path';
 import process from "node:process";
-
 import authRouter from './routes/auth.mjs';
 import adminRouter from './routes/admin.mjs';
 import blogRouter from './routes/blog.mjs';

@@ -27,10 +27,10 @@ import mirrorRouter from "./routes/mirror.mjs";
 import communityRouter from "./routes/community.mjs";
 import integrationHealthRouter from "./routes/integrationHealth.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
+
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 async function startServer() {
   
   app.get("/", (req, res) => {

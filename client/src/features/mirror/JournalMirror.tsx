@@ -1,173 +1,181 @@
-import { useMemo, useState } from "react";
+// client/src/features/mirror/JournalMirror.tsx
+import React, { useMemo, useState } from "react";
 
-interface JournalMirrorProps {
-  onReflectionComplete?: (data: {
-    inputText: string;
-    reflection: string;
-    mode: string;
-  }) => void;
+type MirrorResponse = {
+  ok?: boolean;
+  reflection?: string; // server text response
+  mode?: "local" | "ai" | string;
+  title?: string;
+  note?: string; // disclaimer note
+  error?: string;
+};
+
+type Props = {
+  /** Optional prefill */
   initialText?: string;
+  /** Called when a reflection is returned (used by MirrorPage to build InsightCards) */
+  onReflection?: (reflectionText: string, raw?: MirrorResponse) => void;
+  /** Optional label/title override */
+  title?: string;
+  /** Optional className */
+  className?: string;
+};
+
+function safeTrim(s: string) {
+  return (s ?? "").replace(/\s+/g, " ").trim();
 }
 
 export default function JournalMirror({
-  onReflectionComplete,
   initialText = "",
-}: JournalMirrorProps) {
-  const [text, setText] = useState(initialText);
-  const [consent, setConsent] = useState(false);
+  onReflection,
+  title = "Gentle Mirror",
+  className = "",
+}: Props) {
+  const [text, setText] = useState<string>(initialText);
   const [loading, setLoading] = useState(false);
-  const [reflection, setReflection] = useState("");
-  const [error, setError] = useState("");
-  const [enableAI, setEnableAI] = useState(false);
+  const [reflection, setReflection] = useState<string>("");
+  const [mode, setMode] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const canSubmit = useMemo(
-    () => consent && text.trim().length >= 8 && !loading,
-    [consent, text, loading]
+    () => safeTrim(text).length >= 10 && !loading,
+    [text, loading]
   );
 
-  async function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function runMirror() {
     setError("");
     setReflection("");
+    setMode("");
+
+    const input = safeTrim(text);
+    if (input.length < 10) {
+      setError("Please write a little more (at least ~10 characters).");
+      return;
+    }
+
     setLoading(true);
-
-    if (!consent) {
-      setError("Please check the consent box to continue.");
-      setLoading(false);
-      return;
-    }
-
-    if (text.trim().length < 8) {
-      setError("Please write a little more so the mirror can reflect it clearly.");
-      setLoading(false);
-      return;
-    }
-
     try {
       const res = await fetch("/api/mirror", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: text.trim(), enableAI }),
+        body: JSON.stringify({ text: input }),
       });
 
-      const data = await res.json().catch(() => ({} as Record<string, unknown>));
+      const data: MirrorResponse = await res
+        .json()
+        .catch(() => ({} as MirrorResponse));
 
-      if (!res.ok || data?.ok === false) {
-        throw new Error(
-          (data?.error as string) || (data?.message as string) || "Mirror request failed."
-        );
+      if (!res.ok || data.ok === false) {
+        throw new Error(data.error || `Request failed (${res.status})`);
       }
 
-      const reflectionText = String(data?.reflection || "");
-      const mode = String(data?.mode || "local");
-      setReflection(reflectionText);
+      const out = (data.reflection || "").trim();
+      setReflection(out);
+      setMode(String(data.mode || ""));
 
-      onReflectionComplete?.({
-        inputText: text.trim(),
-        reflection: reflectionText,
-        mode,
-      });
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Something went wrong.";
-      setError(message);
+      // Tell parent (MirrorPage) so it can build InsightCards
+      if (out && onReflection) onReflection(out, data);
+    } catch (e: any) {
+      setError(e?.message || "Something went wrong.");
     } finally {
       setLoading(false);
     }
   }
 
-  function handleClear() {
-    setText("");
-    setReflection("");
+  function clearAll() {
     setError("");
+    setReflection("");
+    setMode("");
+    setText("");
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/10 p-5">
-      <form onSubmit={onSubmit} className="space-y-4">
-        <label className="block">
-          <span className="text-sm opacity-80">Write what's true for you</span>
-          <textarea
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            rows={7}
-            className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 p-3 outline-none"
-            placeholder="Example: I've been carrying a lot. I want to feel calmer and steadier..."
-            data-testid="input-journal-text"
-          />
-          <div className="mt-2 flex items-center justify-between text-xs opacity-70">
-            <span>{Math.min(text.length, 5000)} characters</span>
+    <section className={`w-full ${className}`}>
+      <div className="rounded-2xl border border-white/10 bg-black/20 p-5 shadow-sm">
+        <div className="mb-3 flex items-center justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold text-white/90">{title}</h2>
+            <p className="text-sm text-white/60">
+              This is a reflection tool for journaling support — not medical
+              advice or diagnosis.
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={handleClear}
-              className="underline underline-offset-2"
-              data-testid="button-clear"
+              onClick={clearAll}
+              className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/80 hover:bg-white/10"
             >
               Clear
             </button>
+
+            <button
+              type="button"
+              disabled={!canSubmit}
+              onClick={runMirror}
+              className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black disabled:opacity-50"
+            >
+              {loading ? "Reflecting…" : "Reflect"}
+            </button>
           </div>
-        </label>
-
-        <div className="rounded-xl border border-white/10 bg-black/10 p-3 space-y-2">
-          <label className="flex items-start gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              className="mt-1"
-              data-testid="checkbox-consent"
-            />
-            <span>
-              I understand this is a reflection tool for journaling support,
-              not medical or crisis help, and I can ignore anything that
-              doesn't feel accurate.
-            </span>
-          </label>
-
-          <label className="flex items-center gap-2 text-sm opacity-90">
-            <input
-              type="checkbox"
-              checked={enableAI}
-              onChange={(e) => setEnableAI(e.target.checked)}
-              data-testid="checkbox-enable-ai"
-            />
-            <span>Optional: use AI-powered reflection (bounded, safe tone)</span>
-          </label>
         </div>
 
-        {error && (
-          <div
-            className="rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm"
-            data-testid="text-error"
-          >
+        <label className="block">
+          <span className="mb-2 block text-sm text-white/70">
+            Write what’s on your mind
+          </span>
+          <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder='Example: "I want to feel calmer and trust myself again…"'
+            className="min-h-[140px] w-full resize-y rounded-2xl border border-white/10 bg-black/30 p-4 text-white placeholder:text-white/30 outline-none focus:border-white/25"
+          />
+        </label>
+
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+          <p className="text-xs text-white/45">
+            Tip: try 3–6 honest sentences. You can be messy. You don’t have to
+            be perfect.
+          </p>
+          <p className="text-xs text-white/45">
+            {safeTrim(text).length} chars
+            {mode ? ` • mode: ${mode}` : ""}
+          </p>
+        </div>
+
+        {error ? (
+          <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-200">
             {error}
           </div>
-        )}
+        ) : null}
 
-        <button
-          type="submit"
-          disabled={!canSubmit}
-          className="w-full rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-sm font-medium disabled:opacity-40"
-          data-testid="button-submit"
-        >
-          {loading ? "Reflecting..." : "Reflect my words"}
-        </button>
-      </form>
+        {reflection ? (
+          <div className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4">
+            <div className="mb-2 flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-white/80">
+                Reflection
+              </h3>
+              <button
+                type="button"
+                className="rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-xs text-white/70 hover:bg-white/10"
+                onClick={() => navigator.clipboard?.writeText(reflection)}
+              >
+                Copy
+              </button>
+            </div>
 
-      {reflection && (
-        <section className="mt-6">
-          <h2 className="text-lg font-semibold">Your reflection</h2>
-          <div
-            className="mt-3 whitespace-pre-wrap rounded-2xl border border-white/10 bg-black/10 p-5 text-sm leading-relaxed"
-            data-testid="text-reflection"
-          >
-            {reflection}
+            <pre className="whitespace-pre-wrap text-sm leading-relaxed text-white/80">
+              {reflection}
+            </pre>
+
+            <div className="mt-3 text-xs text-white/45">
+              If you feel unsafe or at risk of harming yourself or someone else,
+              please seek immediate help (local emergency services).
+            </div>
           </div>
-          <p className="mt-3 text-xs opacity-70">
-            If you feel unsafe or in immediate danger, contact local emergency
-            services. If you're in the U.S., you can call/text <strong>988</strong>.
-          </p>
-        </section>
-      )}
-    </div>
+        ) : null}
+      </div>
+    </section>
   );
 }
