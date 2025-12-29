@@ -164,7 +164,16 @@ async function startServer() {
     configFile: resolve(__dirname, "../vite.config.js"),
     server: { 
       middlewareMode: true,
-      allowedHosts: 'all'
+      allowedHosts: [
+        'localhost',
+        '127.0.0.1',
+        '.replit.dev',
+        '.replit.app',
+        '.repl.co',
+        '.spock.replit.dev',
+        process.env.REPLIT_DEV_DOMAIN,
+        process.env.REPLIT_DOMAINS?.split(',')[0]
+      ].filter(Boolean)
     },
     appType: "spa",
   });
