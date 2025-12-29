@@ -12,6 +12,7 @@
     "start": "node server/index.mjs",
     "db:push": "drizzle-kit push",
     "test": "node -e \"console.log('test placeholder: add real tests later')\"",
+     "test": "vitest run",
     "smoke": "node scripts/smoke.mjs",
     "audit:platform": "node scripts/platformAudit.mjs"
   },
