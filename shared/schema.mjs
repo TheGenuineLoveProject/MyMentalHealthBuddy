@@ -195,7 +195,10 @@ export const dailyQuests = pgTable("daily_quests", {
 });
 
 export const webhookEvents = pgTable("webhook_events", {
-  id: uuid("id").defaultRandom().primaryKey(),
+  id: text("id").primaryKey(), // Stripe event ID (not UUID)
+  eventType: varchar("event_type", { length: 100 }).notNull(),
+  status: varchar("status", { length: 50 }).default("processed").notNull(),
+  processedAt: timestamp("processed_at").defaultNow().notNull(),
 });
 
 export const auditLog = pgTable("audit_log", {

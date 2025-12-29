@@ -1,14 +1,11 @@
 // server/routes/account.mjs
 // Account management: password reset, account deletion, data export
-
 import express from "express";
-const router = express.Router();
 import bcrypt from "bcrypt";
 import crypto, { randomUUID } from "crypto";
 import { eq, and, gt } from "drizzle-orm";
-
 import { db } from "../db/connection.mjs";
-import { users, passwordResetTokens, journals, moods, aiMessages } from "../db/schema.mjs";
+import { users, passwordResetTokens, journals, moods, aiMessages, userPreferences } from "../db/schema.mjs";
 import { success, badRequest } from "../utils/response.mjs";
 import { authRateLimit, sensitiveRateLimit } from "../middleware/rateLimit.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
@@ -16,13 +13,85 @@ import { logAuditEvent, AuditActions } from "../utils/auditLogger.mjs";
 import { logger } from "../utils/logger.mjs";
 import { z } from "zod";
 
-router.post("/onboarding", async (req, res) => {
-  // TODO: require auth (session user)
-  const { name, goal } = req.body || {};
-  if (!goal) return res.status(400).json({ error: "Missing goal" });
+const router = express.Router();
 
-  // TODO: write to DB user profile table
-  return res.json({ ok: true });
+// Profile update - persists to DB
+router.put("/profile", requireAuth, async (req, res) => {
+  try {
+    const { name } = req.body;
+    if (!name || typeof name !== "string" || name.trim().length === 0) {
+      return badRequest(res, "Name is required");
+    }
+
+    await db
+      .update(users)
+      .set({ name: name.trim(), updatedAt: new Date() })
+      .where(eq(users.id, req.user.id));
+
+    await logAuditEvent({
+      userId: req.user.id,
+      action: AuditActions.PROFILE_UPDATE,
+      metadata: { field: "name" },
+      req,
+    });
+
+    return success(res, { name: name.trim() }, "Profile updated");
+  } catch (error) {
+    logger.error("Profile update failed", { error: error.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
+});
+
+// Onboarding - requires auth and persists to DB
+router.post("/onboarding", requireAuth, async (req, res) => {
+  try {
+    const { name, goal } = req.body || {};
+    if (!goal) return badRequest(res, "Missing goal");
+
+    // Update user name if provided
+    if (name && typeof name === "string" && name.trim().length > 0) {
+      await db
+        .update(users)
+        .set({ name: name.trim(), updatedAt: new Date() })
+        .where(eq(users.id, req.user.id));
+    }
+
+    // Update or create user preferences with onboarding data
+    const existingPrefs = await db
+      .select()
+      .from(userPreferences)
+      .where(eq(userPreferences.userId, req.user.id))
+      .limit(1);
+
+    if (existingPrefs.length > 0) {
+      await db
+        .update(userPreferences)
+        .set({
+          wellnessGoals: goal,
+          onboardingCompleted: true,
+          updatedAt: new Date(),
+        })
+        .where(eq(userPreferences.userId, req.user.id));
+    } else {
+      await db.insert(userPreferences).values({
+        userId: req.user.id,
+        wellnessGoals: goal,
+        onboardingCompleted: true,
+      });
+    }
+
+    await logAuditEvent({
+      userId: req.user.id,
+      action: AuditActions.ONBOARDING_COMPLETE,
+      metadata: { goal },
+      req,
+    });
+
+    return success(res, { ok: true }, "Onboarding completed");
+  } catch (error) {
+    logger.error("Onboarding failed", { error: error.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
 });
 
 const passwordResetRequestSchema = z.object({

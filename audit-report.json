@@ -1,0 +1,413 @@
+{
+  "routes": [
+    {
+      "file": "account.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "admin.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "ai-dashboard.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "ai.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "analytics.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "auth.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "billing.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "blog.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "canva-oauth.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "community.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "content.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "figma.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "gamification.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "health.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "insights.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "integrationHealth.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "journal.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "login.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "mfa.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "mirror.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "mood.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "onboarding.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "pro-features.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "prompts.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "states.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "stripeWebhook.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "therapy.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "ui-dashboard.mjs",
+      "empty": false,
+      "hasTodo": false
+    },
+    {
+      "file": "webhook.mjs",
+      "empty": false,
+      "hasTodo": false
+    }
+  ],
+  "pages": [
+    {
+      "file": "AIChatPage.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "AdaptiveCompanionPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Admin.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "AdvancedToolsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Analytics.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "AtlasDashboard.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Blog.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "BlogEditor.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "BlogIndex.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "BlogPost.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "CognitiveArchitecturePage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "CollaborativeLabPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "CommunityPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "ControlDashboard.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "CrisisResources.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "DailyRitualPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "DailyWisdomOraclePage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Dashboard.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "DesignDashboard.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Disclaimer.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "DisclaimerPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "EthicsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "ForgotPassword.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "GrowthAnalyticsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "GuidedJournalingPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "HealthPage.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Home.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "InsightCardsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "JournalPage.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "KnowledgeSynthesisPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Legal.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Login.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "MasteryToolsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "MetaLearningPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "MirrorPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "MoodPage.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "NotFound.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Onboarding.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "PhilosophicalInquiryPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Premium.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Pricing.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Privacy.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "ProgressDashboardPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Publishing.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Register.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "ResetPassword.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "ResilienceMetricsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Settings.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "SocialHub.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "StatePage.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "StrategyMapsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "SupportPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "SystemsThinkingPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Terms.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "ToolsPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Upgrade.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "Wellness.jsx",
+      "hasTodo": false
+    },
+    {
+      "file": "WisdomPracticesPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "WisdomSynthesisPage.tsx",
+      "hasTodo": false
+    },
+    {
+      "file": "WisdomToolsPage.tsx",
+      "hasTodo": false
+    }
+  ],
+  "envVars": [
+    {
+      "key": "DATABASE_URL",
+      "set": true
+    },
+    {
+      "key": "SESSION_SECRET",
+      "set": true
+    },
+    {
+      "key": "OPENAI_API_KEY",
+      "set": true
+    },
+    {
+      "key": "STRIPE_SECRET_KEY",
+      "set": true
+    }
+  ],
+  "todos": [
+    "client/src/pages/legal/Privacy.jsx:10:      <p>TODO: Replace with the matching Figma frame layout.</p>",
+    "client/src/pages/legal/Terms.jsx:10:      <p>TODO: Replace with the matching Figma frame layout.</p>"
+  ]
+}
