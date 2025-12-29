@@ -64,6 +64,9 @@ import contentIntelligenceRouter from "./routes/content-intelligence.mjs";
 import deepLearningRouter from "./routes/deep-learning.mjs";
 import purposeCompassRouter from "./routes/purpose-compass.mjs";
 import emotionalMasteryRouter from "./routes/emotional-mastery.mjs";
+import holisticHealingRouter from "./routes/holistic-healing.mjs";
+import masteryExcellenceRouter from "./routes/mastery-excellence.mjs";
+import contentStudioRouter from "./routes/content-studio.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -191,6 +194,9 @@ app.use('/api/content-intelligence', contentIntelligenceRouter);
 app.use('/api/deep-learning', deepLearningRouter);
 app.use('/api/purpose-compass', purposeCompassRouter);
 app.use('/api/emotional-mastery', emotionalMasteryRouter);
+app.use('/api/holistic-healing', holisticHealingRouter);
+app.use('/api/mastery-excellence', masteryExcellenceRouter);
+app.use('/api/content-studio', contentStudioRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
