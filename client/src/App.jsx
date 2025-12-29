@@ -46,6 +46,11 @@ const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
 const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
 const AdvancedToolsPage = lazy(() => import("./pages/AdvancedToolsPage.tsx"));
 const MasteryToolsPage = lazy(() => import("./pages/MasteryToolsPage.tsx"));
+const AtlasDashboard = lazy(() => import("./pages/AtlasDashboard.tsx"));
+const StrategyMapsPage = lazy(() => import("./pages/StrategyMapsPage.tsx"));
+const CollaborativeLabPage = lazy(() => import("./pages/CollaborativeLabPage.tsx"));
+const ResilienceMetricsPage = lazy(() => import("./pages/ResilienceMetricsPage.tsx"));
+const AdaptiveCompanionPage = lazy(() => import("./pages/AdaptiveCompanionPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -193,6 +198,31 @@ export default function App() {
               <Route path="/mastery">
                 <RouteGuard>
                   <MasteryToolsPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/atlas">
+                <RouteGuard>
+                  <AtlasDashboard />
+                </RouteGuard>
+              </Route>
+              <Route path="/strategy-maps">
+                <RouteGuard>
+                  <StrategyMapsPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/collaborative-lab">
+                <RouteGuard>
+                  <CollaborativeLabPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/resilience">
+                <RouteGuard>
+                  <ResilienceMetricsPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/companion">
+                <RouteGuard>
+                  <AdaptiveCompanionPage />
                 </RouteGuard>
               </Route>
 

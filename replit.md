@@ -1,17 +1,7 @@
 # The Genuine Love Project
 
-**Tagline:** Live in Genuine Love
-
-**Short Name:** Genuine Love
-
 ## Overview
-An AI-powered mental wellness platform for self-love, healing, and emotional growth — private, compassionate, and available 24/7. The platform combines AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools. It offers a comprehensive wellness toolkit and premium features through subscription tiers.
-
-## Brand Guidelines
-- **Full Brand Name:** The Genuine Love Project
-- **Short Name/App Name:** Genuine Love  
-- **Tagline:** Live in Genuine Love
-- **Legacy Name (deprecated):** MyMentalHealthBuddy — DO NOT USE
+The Genuine Love Project is an AI-powered mental wellness platform dedicated to fostering self-love, healing, and emotional growth. It provides a private, compassionate, and 24/7 accessible environment through AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools. The platform aims to offer a comprehensive wellness toolkit, with advanced features available via subscription. Our vision is to empower users to "Live in Genuine Love" by integrating cutting-edge AI with trauma-informed psychological principles to support mental well-being.
 
 ## User Preferences
 - Preferred communication style: Simple, everyday language
@@ -22,173 +12,50 @@ An AI-powered mental wellness platform for self-love, healing, and emotional gro
 ## System Architecture
 
 ### UI/UX Decisions
-The frontend features a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It includes full light/dark theme support, micro-interactions, and comprehensive accessibility features (ARIA, semantic HTML, keyboard navigation, visible focus rings, proper touch targets). Responsive typography and safe area insets ensure mobile responsiveness, while `prefers-reduced-motion` and high contrast mode support cater to diverse user needs.
+The frontend employs a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features including ARIA, semantic HTML, keyboard navigation, visible focus rings, and proper touch targets. Responsive typography and safe area insets ensure mobile adaptability, while `prefers-reduced-motion` and high contrast mode support diverse user needs.
 
 ### Technical Implementations
-The frontend is a React 18 SPA with TypeScript, built using Vite, Wouter for routing, React Hook Form with Zod for validation, and Tailwind CSS with Lucide React for styling. The backend is a Node.js and Express application with TypeScript, providing a RESTful API. It utilizes middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). The project maintains a monorepo structure with separate client and server applications and uses shared types for consistency. All modules are ESM (`.mjs` files).
+The project uses a monorepo structure with separate client and server applications. The frontend is a React 18 SPA with TypeScript, built with Vite, Wouter for routing, React Hook Form with Zod for validation, and Tailwind CSS with Lucide React for styling. The backend is a Node.js and Express application with TypeScript, providing a RESTful API. It uses middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). Shared types ensure consistency across the monorepo, and all modules are ESM.
 
 ### Feature Specifications
 The platform offers:
-- **State Tracker**: 6-dimension neutral observation system (energy, clarity, openness, regulation, presence, pace) using non-judgmental language
-- **Today's Insight**: 14 rotating philosophical insights grounded in psychology/systems thinking
-- **Journal Prompts**: 24 intelligent prompts across 4 categories (Awareness, Agency, Relationships, Meaning)
-- AI-powered chat therapy integrated with the OpenAI API, providing compassionate, trauma-informed responses and crisis intervention awareness
-- Personal journaling with intelligent prompts
-- Comprehensive crisis resources and support
-- Account lifecycle management (password reset, account deletion, GDPR data export)
-- Robust security features (rate limiting, CSP, input sanitization, CSRF protection)
-- Structured logging, health/readiness endpoints, and gamification system (XP, levels, streaks, daily quests)
-- Comprehensive wellness toolkit with 54+ wellness tools across 6 categories
-- **37 Intellectual Tools**: 6 Reflection + 8 Wisdom + 20 Advanced + 3 Mastery instruments for "1 billion × 1 billion MIT intelligence"
-- Premium features accessible via subscription tiers
-
-### State Tracker Dimensions
-| Dimension | Options | Description |
-|-----------|---------|-------------|
-| Energy | Depleted → Low → Neutral → Steady → Wired | Physical and mental fuel available |
-| Clarity | Foggy → Scattered → Mixed → Clear → Sharp | How thoughts are forming and connecting |
-| Openness | Closed → Guarded → Selective → Receptive → Expansive | Willingness to take in new information |
-| Regulation | Reactive → Unstable → Variable → Stable → Grounded | Nervous system management of stimuli |
-| Presence | Distant → Distracted → Partial → Engaged → Absorbed | Connection to the current moment |
-| Pace | Rushed → Hurried → Moderate → Unhurried → Still | Internal tempo experienced |
-
-### Reflection Tools (A→Z Enhancement)
-The `/tools` route provides access to 6 privacy-focused reflection tools:
-- **Belief Mapping**: Track patterns in personal beliefs across 4 categories (self, world, others, future)
-- **Timed Writing**: Flow state writing sessions with configurable duration (5-30 minutes)
-- **Silence Mode**: Private writing space with no AI output or analysis
-- **Question Reflection**: Socratic self-inquiry with 20+ questions across 4 categories
-- **Growth Timeline**: Personal evolution visualization without comparison metrics
-- **Export Data**: Markdown/JSON export for full data sovereignty
-
-All reflection data stored in browser localStorage (`glp_*` keys) for maximum privacy.
-
-### Wisdom Tools (A→Z Intellectual Enhancement)
-The `/wisdom` route provides advanced intellectual tools for deep thinkers:
-- **Cognitive Frameworks Library**: 12 mental models across 6 categories (philosophy, psychology, systems, decision, creativity, metacognition) including First Principles, Inversion, Steel-Manning, Pre-Mortem, and Paradox Integration
-- **Dialectical Inquiry**: Thesis→Antithesis→Synthesis→Integration flow for exploring truth through opposing perspectives across 6 domains (self, relationships, purpose, growth, fear, truth)
-- **Temporal Reflection**: Past/Present/Future integration with The Witness, The Observer, and The Visionary lenses
-- **Daily Wisdom**: Cross-tradition insights from philosophy, psychology, spirituality, and science
-
-All wisdom data stored in browser localStorage (`glp_dialectical_sessions`, `glp_temporal_integrations`) for maximum privacy.
-
-### Advanced Intellectual Tools (A→Z MIT-Level Enhancement)
-The `/advanced` route provides 20 rigorous intellectual instruments organized into 5 categories:
-
-**Reasoning & Logic (5 tools)**
-- **Logic Lattice Lab**: Map arguments with claims, premises, evidence, counters, and inferences; includes 8 fallacy references
-- **Decision Architecture**: Structure complex choices with options, pros/cons, reversibility assessment, and pre-mortem analysis
-- **Thought Experiments Lab**: 8 classic philosophical puzzles (Trolley, Experience Machine, Ship of Theseus, etc.) with guided reflection
-- **Moral Reasoning Lab**: 6 ethical frameworks (consequentialism, deontology, virtue ethics, care ethics, justice theory, pragmatism) with classic dilemmas
-- **Creative Problem-Solving**: SCAMPER, Random Entry, Assumption Reversal, Analogy Thinking, Six Thinking Hats, PMI Analysis
-
-**Systems & Patterns (4 tools)**
-- **Systems Resonance Simulator**: Model feedback loops with stocks, flows, variables, delays; detects reinforcing vs. balancing loops
-- **Paradox Cartographer**: Navigate tensions on dual-axis maps without forcing resolution; includes 6 paradox templates
-- **Synthesis Collider**: Combine artifacts through 10 creative lenses to generate novel insights
-- **Attention Ecology**: Track attention flows, audit time allocation, set boundaries with 14 attention categories
-
-**Knowledge & Learning (3 tools)**
-- **Knowledge Weave Map**: Connect concepts across 8 categories with 5 relationship types; includes cluster detection
-- **Autodidact Forge**: Self-directed learning with 4 time horizons, experiment templates, momentum tracking
-- **Semantic Mapping**: Explore personal word meanings, emotional valence, and semantic relationships
-
-**Self-Awareness (4 tools)**
-- **Metacognition Dashboard**: Track thinking patterns, mental states, cognitive areas, optimal conditions
-- **Bias Blind Spots**: 12 cognitive biases with incident tracking and debiasing strategies
-- **Epistemic Calibration**: Prediction tracking, belief auditing, Brier score calculation
-- **Mindscape Navigator**: 8 archetypal mind states (flow, contemplative, creative, analytical, social, restorative, alert, integrative) with transition methods
-
-**Identity & Meaning (4 tools)**
-- **Values Clarification**: 20 core values across 5 domains (self, relationships, work, society, transcendence) with alignment tracking
-- **Narrative Identity Studio**: Life chapters, McAdams prompts, 6 narrative patterns (redemption, contamination, growth, stability, decline, transformation)
-- **Existential Inquiry**: 6 existential themes (mortality, freedom, isolation, meaning, authenticity, groundlessness) from Heidegger, Sartre, Frankl, Camus
-- **Philosophical Stance Mapper**: 12 fundamental questions across 7 philosophical domains
-
-All advanced tools data stored in browser localStorage (`glp_decision_frames`, `glp_epistemic_profile`, `glp_thought_sessions`, `glp_metacognitive_profile`, `glp_bias_profile`, `glp_semantic_maps`, `glp_philosophical_profile`, `glp_values_profile`, `glp_moral_dilemmas`, `glp_life_narrative`, `glp_attention_profile`, `glp_existential_profile`, `glp_creative_problems`, `glp_mindscape_map`) for maximum privacy.
-
-### Mastery Tools (A→Z Skill Development)
-The `/mastery` route provides 3 instruments for deep work and deliberate practice:
-
-- **Deep Work Tracker**: Track focused work sessions, log accomplishments, monitor distractions; based on Cal Newport's principles
-- **Skill Forge**: Deliberate practice tracking with 5 skill levels (Novice→Expert), 6 practice methods (repetition, feedback, challenge, analysis, imitation, experimentation)
-- **Mental Models Library**: 12 mental models (First Principles, Inversion, Second-Order Thinking, Circle of Competence, Probabilistic Thinking, Occam's Razor, Hanlon's Razor, Pareto Principle, Feedback Loops, Margin of Safety, Reversibility, Opportunity Cost) with practice applications
-
-All mastery data stored in browser localStorage (`glp_mastery_profile`, `glp_mental_models_library`) for maximum privacy.
-
-### Content Files
-- `server/insights/daily.mjs` - 14 daily insights
-- `server/routes/prompts.mjs` - 24 journal prompts API
-- `shared/stateTracker.mjs` - State dimension definitions
-- `docs/content/features-content.md` - Full content reference
-- `server/utils/aiGuardrails.mjs` - AI response safety enforcement
+- **AI-powered Chat Therapy**: Integrated with OpenAI API, providing trauma-informed responses and crisis intervention awareness.
+- **State Tracker**: A 6-dimension neutral observation system (energy, clarity, openness, regulation, presence, pace).
+- **Today's Insight**: 14 rotating philosophical insights grounded in psychology/systems thinking.
+- **Journal Prompts**: 24 intelligent prompts across 4 categories (Awareness, Agency, Relationships, Meaning).
+- **Comprehensive Wellness Toolkit**: Over 54 tools across various categories including Reflection, Wisdom, Advanced Intellectual Tools, and Mastery.
+- **Reflection Tools**: Privacy-focused tools like Belief Mapping, Timed Writing, Silence Mode, Question Reflection, Growth Timeline, and Data Export.
+- **Wisdom Tools**: Advanced intellectual tools such as Cognitive Frameworks Library, Dialectical Inquiry, Temporal Reflection, and Daily Wisdom.
+- **Advanced Intellectual Tools**: 20 rigorous instruments across Reasoning & Logic, Systems & Patterns, Knowledge & Learning, Self-Awareness, and Identity & Meaning.
+- **Mastery Tools**: 3 instruments for deep work and deliberate practice: Deep Work Tracker, Skill Forge, and Mental Models Library.
+- **Navigation & Discovery**: Intellectual Atlas (central hub for tools), Strategy Maps (curated learning pathways), and Collaborative Intelligence Lab (anonymous community reflection).
+- **Security**: Rate limiting, CSP, input sanitization, CSRF protection, and account lifecycle management.
+- **Gamification**: XP, levels, streaks, and daily quests.
+- **Crisis Detection**: AI routes scan for self-harm intent keywords and provide crisis resources.
+- **Trauma-Informed NLP Layer**: Ensures all user-facing text, crisis detection, and prompts are gentle and supportive.
 
 ### System Design Choices
-The application is designed for optimized production bundles with code splitting and environment variable configuration. It incorporates health checks, rate limiting, and graceful shutdown handlers. A unified `shared/schema.mjs` serves as the single source of truth for Drizzle ORM models, matching the Neon PostgreSQL database structure with UUIDs, TEXT-based IDs, serial integers, and foreign key constraints with performance-enhancing indexes. The system implements a trauma-informed NLP layer for all user-facing text, crisis detection, and gentle reflection prompts.
-
-## Scripts & Utilities
-
-- **npm run dev**: Start development server
-- **npm run start**: Start production server
-- **npm run build**: Build client application
-- **npm run bundle:gpt**: Create a safe bundle for ChatGPT debugging (excludes .env and node_modules)
-- **npm run db:push**: Push schema changes to database
-
-### Brand Assets Location
-- `/public/brand/` - Logo, favicon, and OG images
-- `/shared/brand.mjs` - Brand constants (colors, tagline)
-- `/client/src/styles/brand.css` - CSS design tokens
-
-### Brand Colors
-| Token | Hex | Usage |
-|-------|-----|-------|
-| sage | var(--glp-sage) | Primary |
-| clay | #C89A82 | Warm accent |
-| gold | #D4B768 | Golden accent |
-| forest | var(--glp-sage-deep) | Deep teal |
-| heart | #B45B5B | Compassion |
-| ink | var(--glp-ink) | Text |
-| ivory | var(--glp-paper) | Background |
-| sun | #EAC33B | Highlight |
-
-### AI Guardrails (MANDATORY)
-The AI must:
-- **Never instruct** — No directives, only observations and questions
-- **Never diagnose** — No labeling or pathologizing experiences
-- **Never promise healing** — We offer reflection space, not cures
-- **Never imply deficiency** — Every state is observed neutrally
-- **Always allow disagreement** — Users can reject any content
-
-Reframed language:
-- "Today's Insight" → "A thought you may want to sit with today"
-- "Track your mood" → "Notice your state"
-- Footer: "You know yourself best." / "Take what serves you."
-
-See `docs/AI_GUARDRAILS.md` for complete guidelines.
-
-### Crisis Detection
-The AI routes include crisis detection that scans for 14 keywords indicating self-harm intent. When detected, the system returns a safe, compassionate response with crisis resources (988 Suicide Prevention Lifeline, Crisis Text Line) instead of continuing the conversation.
+The application is optimized for production with code splitting and environment variable configuration. It includes health checks, rate limiting, and graceful shutdown handlers. A unified `shared/schema.mjs` defines Drizzle ORM models, matching the Neon PostgreSQL database with UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints.
 
 ## External Dependencies
 
 - **OpenAI API**: AI chat therapy.
 - **Vite**: Frontend build tool.
-- **TypeScript**: Static typing.
-- **React**: Frontend UI.
+- **TypeScript**: Language.
+- **React**: Frontend UI library.
 - **Wouter**: Client-side routing.
 - **React Hook Form**: Form management.
 - **Zod**: Runtime type validation.
-- **Tailwind CSS**: Styling.
+- **Tailwind CSS**: Styling framework.
 - **Lucide React**: Icons.
 - **Node.js**: Backend runtime.
-- **Express**: Backend framework.
+- **Express**: Backend web framework.
 - **Express Session**: Session management.
-- **CORS**: Cross-Origin Resource Sharing.
-- **Helmet**: Security headers.
-- **Compression**: Response compression.
-- **Morgan**: HTTP request logging.
+- **CORS**: Cross-Origin Resource Sharing middleware.
+- **Helmet**: Security headers middleware.
+- **Compression**: Response compression middleware.
+- **Morgan**: HTTP request logger middleware.
 - **Sentry**: Error tracking and performance monitoring.
 - **Drizzle ORM**: Database interactions.
 - **Neon PostgreSQL**: Primary database.
 - **Stripe**: Billing and payment processing.
-- **Canva Apps SDK**: Integration for Canva apps.
