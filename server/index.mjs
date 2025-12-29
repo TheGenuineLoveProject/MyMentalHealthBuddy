@@ -170,9 +170,6 @@ app.use('/api/post-trauma', postTraumaRouter);
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
 });
-app.get("/", (req, res) => {
-  res.status(200).send("OK");
-});
 
 app.get("/healthz", (req, res) => {
   res.status(200).json({ ok: true });
