@@ -50,6 +50,9 @@ import neuroIntegrationRouter from "./routes/neuro-integration.mjs";
 import socioEcologyRouter from "./routes/socio-ecology.mjs";
 import praxisRouter from "./routes/praxis.mjs";
 import postTraumaRouter from "./routes/post-trauma.mjs";
+import healingToolsRouter from "./routes/healing-tools.mjs";
+import meaningFutureRouter from "./routes/meaning-future.mjs";
+import contentGeneratorRouter from "./routes/content-generator.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -127,6 +130,9 @@ async function startServer() {
   app.use("/api/socio-ecology", socioEcologyRouter);
   app.use("/api/praxis", praxisRouter);
   app.use("/api/post-trauma", postTraumaRouter);
+  app.use("/api/healing", healingToolsRouter);
+  app.use("/api/meaning", meaningFutureRouter);
+  app.use("/api/content", contentGeneratorRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });

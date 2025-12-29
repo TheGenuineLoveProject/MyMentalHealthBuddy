@@ -862,3 +862,144 @@ describe("Post-Trauma API", () => {
     expect(data.daily).toBeDefined();
   });
 });
+
+describe("Healing Tools API", () => {
+  it("GET /api/healing/wisdom-ladder returns ladders", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/wisdom-ladder`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.ladders).toBeDefined();
+  });
+
+  it("GET /api/healing/micro-courage returns steps", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/micro-courage`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.steps).toBeDefined();
+  });
+
+  it("POST /api/healing/reflection-mirror returns mirror prompt", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/reflection-mirror`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ category: "awareness" })
+    });
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.mirror).toBeDefined();
+  });
+
+  it("GET /api/healing/patterns/summary returns summary", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/patterns/summary`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.summary).toBeDefined();
+  });
+
+  it("GET /api/healing/values-compass returns values", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/values-compass`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.values).toBeDefined();
+  });
+
+  it("GET /api/healing/emotion-translator returns emotions", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/emotion-translator`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.emotions).toBeDefined();
+  });
+
+  it("GET /api/healing/boundary-builder returns scripts", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/boundary-builder`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.scripts).toBeDefined();
+  });
+
+  it("GET /api/healing/repair-guide returns steps", async () => {
+    const res = await fetch(`${BASE_URL}/api/healing/repair-guide`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.steps).toBeDefined();
+  });
+});
+
+describe("Meaning & Future API", () => {
+  it("GET /api/meaning/future-self/prompts returns prompts", async () => {
+    const res = await fetch(`${BASE_URL}/api/meaning/future-self/prompts`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.prompts).toBeDefined();
+  });
+
+  it("GET /api/meaning/life-chapters returns chapters", async () => {
+    const res = await fetch(`${BASE_URL}/api/meaning/life-chapters`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.chapters).toBeDefined();
+  });
+
+  it("GET /api/meaning/gratitude/daily returns dimension", async () => {
+    const res = await fetch(`${BASE_URL}/api/meaning/gratitude/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.dimension).toBeDefined();
+  });
+
+  it("GET /api/meaning/contribution-map returns spheres", async () => {
+    const res = await fetch(`${BASE_URL}/api/meaning/contribution-map`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.spheres).toBeDefined();
+  });
+
+  it("GET /api/meaning/brave-action returns framework", async () => {
+    const res = await fetch(`${BASE_URL}/api/meaning/brave-action`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.framework).toBeDefined();
+  });
+});
+
+describe("Content Generator API", () => {
+  it("GET /api/content/formats returns available formats", async () => {
+    const res = await fetch(`${BASE_URL}/api/content/formats`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.formats).toBeDefined();
+    expect(data.formats.length).toBe(10);
+  });
+
+  it("POST /api/content/generate creates content outputs", async () => {
+    const res = await fetch(`${BASE_URL}/api/content/generate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: "Test Content",
+        content: "This is a test piece of content about healing and self-love. It contains enough words to pass the minimum character requirement for generation."
+      })
+    });
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.outputCount).toBe(10);
+    expect(data.outputs.blog).toBeDefined();
+    expect(data.outputs.twitter).toBeDefined();
+    expect(data.outputs.linkedin).toBeDefined();
+  });
+});
