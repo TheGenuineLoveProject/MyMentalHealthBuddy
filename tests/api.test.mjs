@@ -750,3 +750,115 @@ describe("Values API", () => {
     expect(data.daily).toBeDefined();
   });
 });
+
+describe("Neuro-Integration API", () => {
+  it("should return affective neuroscience systems", async () => {
+    const res = await fetch(`${BASE_URL}/api/neuro-integration/affective-systems`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.systems)).toBe(true);
+    expect(data.systems.length).toBe(7);
+  });
+
+  it("should return neuroplasticity principles", async () => {
+    const res = await fetch(`${BASE_URL}/api/neuro-integration/neuroplasticity`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.principles)).toBe(true);
+    expect(data.principles.length).toBe(8);
+  });
+
+  it("should return daily neuro practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/neuro-integration/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Socio-Ecology API", () => {
+  it("should return planetary ethics frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/socio-ecology/planetary-ethics`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+    expect(data.frameworks.length).toBe(5);
+  });
+
+  it("should return regenerative futures visions", async () => {
+    const res = await fetch(`${BASE_URL}/api/socio-ecology/regenerative`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.visions)).toBe(true);
+    expect(data.visions.length).toBe(5);
+  });
+
+  it("should return daily socio-ecology practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/socio-ecology/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Praxis API", () => {
+  it("should return execution frameworks", async () => {
+    const res = await fetch(`${BASE_URL}/api/praxis/execution`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.frameworks)).toBe(true);
+    expect(data.frameworks.length).toBe(6);
+  });
+
+  it("should return resistance patterns", async () => {
+    const res = await fetch(`${BASE_URL}/api/praxis/resistance`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.patterns)).toBe(true);
+    expect(data.patterns.length).toBe(6);
+  });
+
+  it("should return daily praxis practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/praxis/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});
+
+describe("Post-Trauma API", () => {
+  it("should return post-traumatic growth domains", async () => {
+    const res = await fetch(`${BASE_URL}/api/post-trauma/growth-domains`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.domains)).toBe(true);
+    expect(data.domains.length).toBe(5);
+  });
+
+  it("should return healing modalities", async () => {
+    const res = await fetch(`${BASE_URL}/api/post-trauma/modalities`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(Array.isArray(data.modalities)).toBe(true);
+    expect(data.modalities.length).toBe(6);
+  });
+
+  it("should return daily post-trauma practice", async () => {
+    const res = await fetch(`${BASE_URL}/api/post-trauma/daily`);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+    expect(data.daily).toBeDefined();
+  });
+});

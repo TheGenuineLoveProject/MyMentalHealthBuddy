@@ -44,6 +44,10 @@ The platform offers:
 - **Narrative API**: 6 narrative frameworks (Hero's Journey, Redemption, Agency, Communion, Growth), 6 story elements, 10 reauthoring prompts, 8 archetypal figures.
 - **Relational API**: 4 attachment styles, 6 communication skills (Active Listening, I-Statements, NVC, Repair Attempts, Boundaries, Empathic Inquiry), 5 relationship patterns, 5 love languages.
 - **Values API**: 15 core values, 6 values exercises, 4 purpose frameworks (Ikigai, Hedgehog, Golden Circle, Life Domains), 5 meaning sources.
+- **Neuro-Integration API**: 7 affective neuroscience systems (SEEKING, RAGE, FEAR, PANIC/GRIEF, CARE, PLAY, LUST), 6 brain regions, 8 neuroplasticity principles, 4 mind-body practices.
+- **Socio-Ecology API**: 5 planetary ethics frameworks (Intergenerational Justice, Environmental Justice, Deep Ecology, Ecofeminism, Ubuntu), 4 systems of oppression analysis, 5 regenerative futures visions, 5 collective healing practices.
+- **Praxis API**: 6 execution frameworks (GTD, Deep Work, Implementation Intentions, Atomic Habits, WOOP, Pomodoro), 6 creativity-to-action phases, 6 resistance patterns, 5 accountability systems.
+- **Post-Trauma API**: 5 post-traumatic growth domains, 4 reintegration phases, 6 healing modalities (TF-CBT, EMDR, Somatic Experiencing, IFS, Narrative, Mindfulness), 6 resilience builders.
 - **Wisdom Synthesis Engine**: Pattern recognition, insight extraction, wisdom theme analysis.
 - **Cognitive Architecture Lab**: 25 mental models library with favorites and practice tracking.
 - **Philosophical Inquiry System**: Socratic questioning and dialectical reasoning framework.
@@ -70,12 +74,12 @@ The application is optimized for production with code splitting and environment 
 - **Rate Limiting**: Applied to authentication and AI endpoints.
 
 ### Platform Metrics
-- **52 API Routes**: Comprehensive intellectual, wellness, and administrative APIs
+- **56 API Routes**: Comprehensive intellectual, wellness, and administrative APIs
 - **106 Frontend Pages**: Full-featured UI components
-- **80 Passing Tests**: Unit and integration coverage
+- **92 Passing Tests**: Unit and integration coverage
 - **7 Smoke Tests**: Health check verification
 - **0 TODO Lines**: Production-clean codebase
-- **600+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
+- **700+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
 
 ## External Dependencies
 

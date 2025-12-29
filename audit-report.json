@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T08:26:34.555Z",
+  "ts": "2025-12-29T08:41:34.835Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -167,6 +167,11 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/neuro-integration.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/onboarding.mjs",
       "empty": false,
       "hasTODO": false
@@ -177,7 +182,17 @@
       "hasTODO": false
     },
     {
+      "file": "server/routes/post-trauma.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
       "file": "server/routes/practices.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/praxis.mjs",
       "empty": false,
       "hasTODO": false
     },
@@ -198,6 +213,11 @@
     },
     {
       "file": "server/routes/resilience.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/socio-ecology.mjs",
       "empty": false,
       "hasTODO": false
     },
