@@ -55,6 +55,15 @@ import postTraumaRouter from "./routes/post-trauma.mjs";
 import healingToolsRouter from "./routes/healing-tools.mjs";
 import meaningFutureRouter from "./routes/meaning-future.mjs";
 import contentGeneratorRouter from "./routes/content-generator.mjs";
+import healingIntelligenceRouter from "./routes/healing-intelligence.mjs";
+import cognitiveMasteryRouter from "./routes/cognitive-mastery.mjs";
+import wisdomEngineRouter from "./routes/wisdom-engine.mjs";
+import selfMasteryRouter from "./routes/self-mastery.mjs";
+import transformationEngineRouter from "./routes/transformation-engine.mjs";
+import contentIntelligenceRouter from "./routes/content-intelligence.mjs";
+import deepLearningRouter from "./routes/deep-learning.mjs";
+import purposeCompassRouter from "./routes/purpose-compass.mjs";
+import emotionalMasteryRouter from "./routes/emotional-mastery.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -173,6 +182,15 @@ app.use('/api/post-trauma', postTraumaRouter);
 app.use('/api/healing', healingToolsRouter);
 app.use('/api/meaning', meaningFutureRouter);
 app.use('/api/content', contentGeneratorRouter);
+app.use('/api/healing-intelligence', healingIntelligenceRouter);
+app.use('/api/cognitive-mastery', cognitiveMasteryRouter);
+app.use('/api/wisdom-engine', wisdomEngineRouter);
+app.use('/api/self-mastery', selfMasteryRouter);
+app.use('/api/transformation', transformationEngineRouter);
+app.use('/api/content-intelligence', contentIntelligenceRouter);
+app.use('/api/deep-learning', deepLearningRouter);
+app.use('/api/purpose-compass', purposeCompassRouter);
+app.use('/api/emotional-mastery', emotionalMasteryRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
