@@ -26,6 +26,7 @@ import promptsRouter from "./routes/prompts.mjs";
 import mirrorRouter from "./routes/mirror.mjs";
 import communityRouter from "./routes/community.mjs";
 import integrationHealthRouter from "./routes/integrationHealth.mjs";
+import wisdomRouter from "./routes/wisdom.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -83,6 +84,7 @@ async function startServer() {
   app.use("/api/mirror", mirrorRouter);
   app.use("/api/community", communityRouter);
   app.use("/api/integrations", integrationHealthRouter);
+  app.use("/api/wisdom", wisdomRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });

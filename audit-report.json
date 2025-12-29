@@ -1,5 +1,5 @@
 {
-  "ts": "2025-12-29T06:48:54.340Z",
+  "ts": "2025-12-29T07:09:16.160Z",
   "routes": [
     {
       "file": "server/routes/account.mjs",
@@ -143,6 +143,11 @@
     },
     {
       "file": "server/routes/webhook.mjs",
+      "empty": false,
+      "hasTODO": false
+    },
+    {
+      "file": "server/routes/wisdom.mjs",
       "empty": false,
       "hasTODO": false
     }

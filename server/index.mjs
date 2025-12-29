@@ -27,6 +27,7 @@ import statesRouter from './routes/states.mjs';
 import promptsRouter from './routes/prompts.mjs';
 import mirrorRouter from "./routes/mirror.mjs";
 import communityRouter from "./routes/community.mjs";
+import wisdomRouter from "./routes/wisdom.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -74,6 +75,7 @@ app.use('/api/states', statesRouter);
 app.use('/api/prompts', promptsRouter);
 app.use('/api/mirror', mirrorRouter);
 app.use('/api/community', communityRouter);
+app.use('/api/wisdom', wisdomRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
