@@ -1,6 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut } from "lucide-react";
+import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut, Brain, Compass } from "lucide-react";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO";
 import DailyAffirmations from "../components/DailyAffirmations.jsx";
@@ -263,6 +263,22 @@ export default function Dashboard() {
                 </div>
                 <span className="font-medium">Daily Habits</span>
                 <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-orange-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
+
+              <Link href="/atlas" className="quick-action group" data-testid="link-atlas">
+                <div className="quick-action-icon bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30">
+                  <Compass className="w-6 h-6 text-cyan-500" aria-hidden="true" />
+                </div>
+                <span className="font-medium">Intellectual Atlas</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-cyan-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
+              </Link>
+
+              <Link href="/growth-analytics" className="quick-action group" data-testid="link-growth">
+                <div className="quick-action-icon bg-gradient-to-br from-violet-100 to-purple-100 dark:from-violet-900/30 dark:to-purple-900/30">
+                  <Brain className="w-6 h-6 text-violet-500" aria-hidden="true" />
+                </div>
+                <span className="font-medium">Growth Analytics</span>
+                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-violet-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
               </Link>
             </div>
           </nav>

@@ -51,6 +51,9 @@ const StrategyMapsPage = lazy(() => import("./pages/StrategyMapsPage.tsx"));
 const CollaborativeLabPage = lazy(() => import("./pages/CollaborativeLabPage.tsx"));
 const ResilienceMetricsPage = lazy(() => import("./pages/ResilienceMetricsPage.tsx"));
 const AdaptiveCompanionPage = lazy(() => import("./pages/AdaptiveCompanionPage.tsx"));
+const KnowledgeSynthesisPage = lazy(() => import("./pages/KnowledgeSynthesisPage.tsx"));
+const WisdomPracticesPage = lazy(() => import("./pages/WisdomPracticesPage.tsx"));
+const GrowthAnalyticsPage = lazy(() => import("./pages/GrowthAnalyticsPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -223,6 +226,21 @@ export default function App() {
               <Route path="/companion">
                 <RouteGuard>
                   <AdaptiveCompanionPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/knowledge-synthesis">
+                <RouteGuard>
+                  <KnowledgeSynthesisPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/wisdom-practices">
+                <RouteGuard>
+                  <WisdomPracticesPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/growth-analytics">
+                <RouteGuard>
+                  <GrowthAnalyticsPage />
                 </RouteGuard>
               </Route>
 
