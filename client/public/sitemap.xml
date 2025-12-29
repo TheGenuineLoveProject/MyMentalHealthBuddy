@@ -1,68 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url><loc>/</loc></url>
-    <url><loc>/heal</loc></url>
-    <url><loc>/community</loc></url>
-    <url><loc>/legal</loc></url>
-  </urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   
   <!-- Homepage -->
   <url>
-    <loc>https://TheGenuineLoveProject.com/</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://thegenuineloveproject.com/</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <!-- AI Chat Therapy -->
   <url>
-    <loc>https://TheGenuineLoveProject.com/chat</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://thegenuineloveproject.com/chat</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <!-- Mood Tracking -->
+  <!-- State Tracker -->
   <url>
-    <loc>https://TheGenuineLoveProject.com/mood</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://thegenuineloveproject.com/track</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Journal -->
   <url>
-    <loc>https://TheGenuineLoveProject.com/journal</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://thegenuineloveproject.com/journal</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Mirror -->
+  <url>
+    <loc>https://thegenuineloveproject.com/mirror</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Wisdom Tools -->
+  <url>
+    <loc>https://thegenuineloveproject.com/wisdom</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Resources Library -->
   <url>
-    <loc>https://TheGenuineLoveProject.com/resources</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://thegenuineloveproject.com/resources</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <!-- Crisis Resources -->
   <url>
-    <loc>https://TheGenuineLoveProject.com/crisis</loc>
-    <lastmod>2025-10-28</lastmod>
+    <loc>https://thegenuineloveproject.com/crisis</loc>
+    <lastmod>2025-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
-  <!-- Design Studio -->
+  <!-- About -->
   <url>
-    <loc>https://TheGenuineLoveProject.com/designs</loc>
-    <lastmod>2025-10-28</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://thegenuineloveproject.com/about</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+  
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://thegenuineloveproject.com/privacy</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://thegenuineloveproject.com/terms</loc>
+    <lastmod>2025-12-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
   </url>
   
 </urlset>

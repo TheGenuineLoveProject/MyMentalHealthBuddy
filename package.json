@@ -11,8 +11,7 @@
     "build": "vite build",
     "start": "node server/index.mjs",
     "db:push": "drizzle-kit push",
-    "test": "node -e \"console.log('test placeholder: add real tests later')\"",
-     "test": "vitest run",
+    "test": "vitest run",
     "smoke": "node scripts/smoke.mjs",
     "audit:platform": "node scripts/platformAudit.mjs"
   },
@@ -61,6 +60,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
+    "sharp": "^0.34.5",
     "stripe": "^20.1.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "^3.4.17",
