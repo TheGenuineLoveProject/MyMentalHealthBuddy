@@ -28,7 +28,10 @@ The platform offers:
 - **Wisdom Tools**: Advanced intellectual tools such as Cognitive Frameworks Library, Dialectical Inquiry, Temporal Reflection, and Daily Wisdom.
 - **Advanced Intellectual Tools**: 20 rigorous instruments across Reasoning & Logic, Systems & Patterns, Knowledge & Learning, Self-Awareness, and Identity & Meaning.
 - **Mastery Tools**: 3 instruments for deep work and deliberate practice: Deep Work Tracker, Skill Forge, and Mental Models Library.
-- **Navigation & Discovery**: Intellectual Atlas (central hub for tools), Strategy Maps (curated learning pathways), and Collaborative Intelligence Lab (anonymous community reflection).
+- **Navigation & Discovery**: Intellectual Atlas (central hub for tools), Strategy Maps (curated learning pathways), Collaborative Intelligence Lab (anonymous community reflection), Resilience Metrics (6-dimension growth tracking), and Adaptive Companion (AI-guided recommendations).
+- **Knowledge Synthesis**: Concept Mapper for building personal knowledge bases, Learning Journal for capturing key takeaways, and Insight Extractor for synthesizing wisdom from sources.
+- **Wisdom Practices**: Daily Contemplation prompts, Gratitude Practice with synthesis, and Meditation Timer with reflection journaling.
+- **Growth Analytics**: Visual progress tracking across all tool categories with milestones and achievement system.
 - **Security**: Rate limiting, CSP, input sanitization, CSRF protection, and account lifecycle management.
 - **Gamification**: XP, levels, streaks, and daily quests.
 - **Crisis Detection**: AI routes scan for self-harm intent keywords and provide crisis resources.
