@@ -12,14 +12,23 @@ import MetacognitionDashboard from "@/components/metacognition/MetacognitionDash
 import BiasBlindSpots from "@/components/bias/BiasBlindSpots";
 import SemanticMapping from "@/components/semantic/SemanticMapping";
 import PhilosophicalStanceMapper from "@/components/stance/PhilosophicalStanceMapper";
+import ValuesClarification from "@/components/values/ValuesClarification";
+import MoralReasoningLab from "@/components/moral/MoralReasoningLab";
+import NarrativeIdentityStudio from "@/components/narrative/NarrativeIdentityStudio";
+import AttentionEcology from "@/components/attention/AttentionEcology";
+import ExistentialInquiry from "@/components/existential/ExistentialInquiry";
+import CreativeProblemSolver from "@/components/creative/CreativeProblemSolver";
+import MindscapeNavigator from "@/components/mindscape/MindscapeNavigator";
 import { 
   Network, GitBranch, Compass, Zap, Share2, Flame,
-  Scale, Target, Lightbulb, Brain, Eye, Type, MapPin
+  Scale, Target, Lightbulb, Brain, Eye, Type, MapPin,
+  Heart, BookOpen, Focus, Map, Sparkles
 } from "lucide-react";
 
 type ActiveTool = 
   | "logic" | "systems" | "paradox" | "synthesis" | "weave" | "autodidact"
-  | "decision" | "epistemic" | "thought" | "metacognition" | "bias" | "semantic" | "stance";
+  | "decision" | "epistemic" | "thought" | "metacognition" | "bias" | "semantic" | "stance"
+  | "values" | "moral" | "narrative" | "attention" | "existential" | "creative" | "mindscape";
 
 const TOOL_CATEGORIES = [
   {
@@ -27,7 +36,9 @@ const TOOL_CATEGORIES = [
     tools: [
       { id: "logic" as ActiveTool, name: "Logic Lattice", description: "Map arguments", icon: Network, color: "blue" },
       { id: "decision" as ActiveTool, name: "Decision Architecture", description: "Structure choices", icon: Scale, color: "indigo" },
-      { id: "thought" as ActiveTool, name: "Thought Experiments", description: "Test intuitions", icon: Lightbulb, color: "purple" }
+      { id: "thought" as ActiveTool, name: "Thought Experiments", description: "Test intuitions", icon: Lightbulb, color: "purple" },
+      { id: "moral" as ActiveTool, name: "Moral Reasoning", description: "Ethical frameworks", icon: Scale, color: "blue" },
+      { id: "creative" as ActiveTool, name: "Creative Problem-Solving", description: "Generate solutions", icon: Sparkles, color: "yellow" }
     ]
   },
   {
@@ -35,7 +46,8 @@ const TOOL_CATEGORIES = [
     tools: [
       { id: "systems" as ActiveTool, name: "Systems Resonance", description: "Model feedback loops", icon: GitBranch, color: "green" },
       { id: "paradox" as ActiveTool, name: "Paradox Cartographer", description: "Navigate tensions", icon: Compass, color: "purple" },
-      { id: "synthesis" as ActiveTool, name: "Synthesis Collider", description: "Combine ideas", icon: Zap, color: "orange" }
+      { id: "synthesis" as ActiveTool, name: "Synthesis Collider", description: "Combine ideas", icon: Zap, color: "orange" },
+      { id: "attention" as ActiveTool, name: "Attention Ecology", description: "Track focus", icon: Focus, color: "cyan" }
     ]
   },
   {
@@ -52,6 +64,15 @@ const TOOL_CATEGORIES = [
       { id: "metacognition" as ActiveTool, name: "Metacognition", description: "Think about thinking", icon: Brain, color: "pink" },
       { id: "bias" as ActiveTool, name: "Bias Blind Spots", description: "Cognitive biases", icon: Eye, color: "rose" },
       { id: "epistemic" as ActiveTool, name: "Epistemic Calibration", description: "Track predictions", icon: Target, color: "emerald" },
+      { id: "mindscape" as ActiveTool, name: "Mindscape Navigator", description: "Map mental states", icon: Map, color: "teal" }
+    ]
+  },
+  {
+    name: "Identity & Meaning",
+    tools: [
+      { id: "values" as ActiveTool, name: "Values Clarification", description: "What matters most", icon: Heart, color: "rose" },
+      { id: "narrative" as ActiveTool, name: "Narrative Identity", description: "Your life story", icon: BookOpen, color: "amber" },
+      { id: "existential" as ActiveTool, name: "Existential Inquiry", description: "Ultimate questions", icon: Compass, color: "violet" },
       { id: "stance" as ActiveTool, name: "Philosophical Stance", description: "Map positions", icon: MapPin, color: "violet" }
     ]
   }
@@ -66,15 +87,15 @@ export default function AdvancedToolsPage() {
 
   return (
     <div className="min-h-screen px-4 py-10">
-      <div className="mx-auto w-full max-w-5xl">
+      <div className="mx-auto w-full max-w-6xl">
         <header className="mb-8">
           <h1 className="text-3xl font-semibold leading-tight">Advanced Intellectual Tools</h1>
           <p className="mt-2 text-sm opacity-80">
-            13 instruments for rigorous self-inquiry — logic, systems, paradox, synthesis, metacognition, and philosophical mapping.
+            20 instruments for rigorous self-inquiry — logic, ethics, identity, systems, creativity, and philosophical mapping.
           </p>
         </header>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-8">
           {TOOL_CATEGORIES.map(category => (
             <div key={category.name} className="space-y-2">
               <h3 className="text-xs font-medium uppercase tracking-wider opacity-50">{category.name}</h3>
@@ -118,6 +139,13 @@ export default function AdvancedToolsPage() {
           {activeTool === "bias" && <BiasBlindSpots />}
           {activeTool === "semantic" && <SemanticMapping />}
           {activeTool === "stance" && <PhilosophicalStanceMapper />}
+          {activeTool === "values" && <ValuesClarification />}
+          {activeTool === "moral" && <MoralReasoningLab />}
+          {activeTool === "narrative" && <NarrativeIdentityStudio />}
+          {activeTool === "attention" && <AttentionEcology />}
+          {activeTool === "existential" && <ExistentialInquiry />}
+          {activeTool === "creative" && <CreativeProblemSolver />}
+          {activeTool === "mindscape" && <MindscapeNavigator />}
         </div>
 
         <footer className="mt-8 text-center">

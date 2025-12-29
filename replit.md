@@ -38,7 +38,8 @@ The platform offers:
 - Account lifecycle management (password reset, account deletion, GDPR data export)
 - Robust security features (rate limiting, CSP, input sanitization, CSRF protection)
 - Structured logging, health/readiness endpoints, and gamification system (XP, levels, streaks, daily quests)
-- Comprehensive wellness toolkit with over 54 tools across 6 categories
+- Comprehensive wellness toolkit with 54+ wellness tools across 6 categories
+- **37 Intellectual Tools**: 6 Reflection + 8 Wisdom + 20 Advanced + 3 Mastery instruments for "1 billion × 1 billion MIT intelligence"
 - Premium features accessible via subscription tiers
 
 ### State Tracker Dimensions
@@ -72,30 +73,48 @@ The `/wisdom` route provides advanced intellectual tools for deep thinkers:
 All wisdom data stored in browser localStorage (`glp_dialectical_sessions`, `glp_temporal_integrations`) for maximum privacy.
 
 ### Advanced Intellectual Tools (A→Z MIT-Level Enhancement)
-The `/advanced` route provides 13 rigorous intellectual instruments organized into 4 categories:
+The `/advanced` route provides 20 rigorous intellectual instruments organized into 5 categories:
 
-**Reasoning & Logic**
+**Reasoning & Logic (5 tools)**
 - **Logic Lattice Lab**: Map arguments with claims, premises, evidence, counters, and inferences; includes 8 fallacy references
 - **Decision Architecture**: Structure complex choices with options, pros/cons, reversibility assessment, and pre-mortem analysis
 - **Thought Experiments Lab**: 8 classic philosophical puzzles (Trolley, Experience Machine, Ship of Theseus, etc.) with guided reflection
+- **Moral Reasoning Lab**: 6 ethical frameworks (consequentialism, deontology, virtue ethics, care ethics, justice theory, pragmatism) with classic dilemmas
+- **Creative Problem-Solving**: SCAMPER, Random Entry, Assumption Reversal, Analogy Thinking, Six Thinking Hats, PMI Analysis
 
-**Systems & Patterns**
+**Systems & Patterns (4 tools)**
 - **Systems Resonance Simulator**: Model feedback loops with stocks, flows, variables, delays; detects reinforcing vs. balancing loops
 - **Paradox Cartographer**: Navigate tensions on dual-axis maps without forcing resolution; includes 6 paradox templates
 - **Synthesis Collider**: Combine artifacts through 10 creative lenses to generate novel insights
+- **Attention Ecology**: Track attention flows, audit time allocation, set boundaries with 14 attention categories
 
-**Knowledge & Learning**
+**Knowledge & Learning (3 tools)**
 - **Knowledge Weave Map**: Connect concepts across 8 categories with 5 relationship types; includes cluster detection
 - **Autodidact Forge**: Self-directed learning with 4 time horizons, experiment templates, momentum tracking
 - **Semantic Mapping**: Explore personal word meanings, emotional valence, and semantic relationships
 
-**Self-Awareness**
+**Self-Awareness (4 tools)**
 - **Metacognition Dashboard**: Track thinking patterns, mental states, cognitive areas, optimal conditions
 - **Bias Blind Spots**: 12 cognitive biases with incident tracking and debiasing strategies
 - **Epistemic Calibration**: Prediction tracking, belief auditing, Brier score calculation
+- **Mindscape Navigator**: 8 archetypal mind states (flow, contemplative, creative, analytical, social, restorative, alert, integrative) with transition methods
+
+**Identity & Meaning (4 tools)**
+- **Values Clarification**: 20 core values across 5 domains (self, relationships, work, society, transcendence) with alignment tracking
+- **Narrative Identity Studio**: Life chapters, McAdams prompts, 6 narrative patterns (redemption, contamination, growth, stability, decline, transformation)
+- **Existential Inquiry**: 6 existential themes (mortality, freedom, isolation, meaning, authenticity, groundlessness) from Heidegger, Sartre, Frankl, Camus
 - **Philosophical Stance Mapper**: 12 fundamental questions across 7 philosophical domains
 
-All advanced tools data stored in browser localStorage (`glp_decision_frames`, `glp_epistemic_profile`, `glp_thought_sessions`, `glp_metacognitive_profile`, `glp_bias_profile`, `glp_semantic_maps`, `glp_philosophical_profile`) for maximum privacy.
+All advanced tools data stored in browser localStorage (`glp_decision_frames`, `glp_epistemic_profile`, `glp_thought_sessions`, `glp_metacognitive_profile`, `glp_bias_profile`, `glp_semantic_maps`, `glp_philosophical_profile`, `glp_values_profile`, `glp_moral_dilemmas`, `glp_life_narrative`, `glp_attention_profile`, `glp_existential_profile`, `glp_creative_problems`, `glp_mindscape_map`) for maximum privacy.
+
+### Mastery Tools (A→Z Skill Development)
+The `/mastery` route provides 3 instruments for deep work and deliberate practice:
+
+- **Deep Work Tracker**: Track focused work sessions, log accomplishments, monitor distractions; based on Cal Newport's principles
+- **Skill Forge**: Deliberate practice tracking with 5 skill levels (Novice→Expert), 6 practice methods (repetition, feedback, challenge, analysis, imitation, experimentation)
+- **Mental Models Library**: 12 mental models (First Principles, Inversion, Second-Order Thinking, Circle of Competence, Probabilistic Thinking, Occam's Razor, Hanlon's Razor, Pareto Principle, Feedback Loops, Margin of Safety, Reversibility, Opportunity Cost) with practice applications
+
+All mastery data stored in browser localStorage (`glp_mastery_profile`, `glp_mental_models_library`) for maximum privacy.
 
 ### Content Files
 - `server/insights/daily.mjs` - 14 daily insights

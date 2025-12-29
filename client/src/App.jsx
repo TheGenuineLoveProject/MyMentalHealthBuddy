@@ -45,6 +45,7 @@ const ToolsPage = lazy(() => import("./pages/ToolsPage.tsx"));
 const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
 const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
 const AdvancedToolsPage = lazy(() => import("./pages/AdvancedToolsPage.tsx"));
+const MasteryToolsPage = lazy(() => import("./pages/MasteryToolsPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -187,6 +188,11 @@ export default function App() {
               <Route path="/advanced">
                 <RouteGuard>
                   <AdvancedToolsPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/mastery">
+                <RouteGuard>
+                  <MasteryToolsPage />
                 </RouteGuard>
               </Route>
 
