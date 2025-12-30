@@ -14,7 +14,12 @@ export default function JournalPage() {
 
   const { data: entries = [], isLoading } = useQuery({
     queryKey: ["/api/journal"],
-    select: (data) => data.journals || data || [],
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (data?.journals && Array.isArray(data.journals)) return data.journals;
+      if (data?.data && Array.isArray(data.data)) return data.data;
+      return [];
+    },
   });
 
   const createMutation = useMutation({
