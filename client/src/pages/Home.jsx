@@ -90,20 +90,20 @@ export default function Home() {
 
         {/* Features Grid */}
         <div className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-3 gap-6" data-testid="features-grid">
-          <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-[var(--glp-ink)]/5 hover:shadow-md transition-all">
+          <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-[var(--glp-ink)]/5 hover:shadow-md transition-all" data-testid="card-feature-privacy">
             <Shield className="w-8 h-8 text-[var(--glp-sage-deep)] mb-4" />
-            <h3 className="text-sm font-medium text-[var(--glp-ink)] mb-2">Private & Secure</h3>
-            <p className="text-xs text-[var(--glp-ink)]/50 leading-relaxed">Your inner world stays yours. No social features, no sharing, no performance.</p>
+            <h3 className="text-sm font-medium text-[var(--glp-ink)] mb-2" data-testid="text-feature-privacy-title">Private & Secure</h3>
+            <p className="text-xs text-[var(--glp-ink)]/50 leading-relaxed" data-testid="text-feature-privacy-desc">Your inner world stays yours. No social features, no sharing, no performance.</p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-[var(--glp-ink)]/5 hover:shadow-md transition-all">
+          <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-[var(--glp-ink)]/5 hover:shadow-md transition-all" data-testid="card-feature-ai">
             <Brain className="w-8 h-8 text-[var(--glp-sage-deep)] mb-4" />
-            <h3 className="text-sm font-medium text-[var(--glp-ink)] mb-2">AI-Guided Reflection</h3>
-            <p className="text-xs text-[var(--glp-ink)]/50 leading-relaxed">Thoughtful prompts and insights that meet you where you are today.</p>
+            <h3 className="text-sm font-medium text-[var(--glp-ink)] mb-2" data-testid="text-feature-ai-title">AI-Guided Reflection</h3>
+            <p className="text-xs text-[var(--glp-ink)]/50 leading-relaxed" data-testid="text-feature-ai-desc">Thoughtful prompts and insights that meet you where you are today.</p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-[var(--glp-ink)]/5 hover:shadow-md transition-all">
+          <div className="p-6 rounded-2xl bg-white/60 backdrop-blur-sm border border-[var(--glp-ink)]/5 hover:shadow-md transition-all" data-testid="card-feature-tools">
             <Sparkles className="w-8 h-8 text-[var(--glp-sage-deep)] mb-4" />
-            <h3 className="text-sm font-medium text-[var(--glp-ink)] mb-4">1000+ Wellness Tools</h3>
-            <p className="text-xs text-[var(--glp-ink)]/50 leading-relaxed">Evidence-based practices from psychology, philosophy, and wisdom traditions.</p>
+            <h3 className="text-sm font-medium text-[var(--glp-ink)] mb-2" data-testid="text-feature-tools-title">1000+ Wellness Tools</h3>
+            <p className="text-xs text-[var(--glp-ink)]/50 leading-relaxed" data-testid="text-feature-tools-desc">Evidence-based practices from psychology, philosophy, and wisdom traditions.</p>
           </div>
         </div>
 
