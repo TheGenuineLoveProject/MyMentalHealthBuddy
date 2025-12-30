@@ -1,7 +1,7 @@
 import { ReactNode, useMemo, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import FigmaPanel from "../FigmaPanel";
+import FigmaPanel from "../figma/FigmaPanel";
 
 export default function AppShell({ children }: { children: ReactNode }) {
   const isDev = useMemo(() => import.meta.env.MODE !== "production", []);
