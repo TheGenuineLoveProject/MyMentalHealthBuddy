@@ -5,7 +5,7 @@ const router = express.Router();
 async function checkDatabaseHealth() {
   try {
     const { pool } = await import("../db/client.mjs");
-    const result = await pool.query("SELECT 1 as ping");
+    await pool.query("SELECT 1 as ping");
     return { status: "healthy", connected: true, latency: "< 100ms" };
   } catch (err) {
     return { status: "unhealthy", connected: false, error: err.message };

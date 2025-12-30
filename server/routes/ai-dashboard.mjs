@@ -4,7 +4,7 @@
 import express from "express";
 import { db } from "../db/connection.mjs";
 import { moods, journals, aiMessages, userProgress, toolSessions, dailyQuests } from "../../shared/schema.mjs";
-import { eq, desc, sql, gte, and, count } from "drizzle-orm";
+import { eq, desc, gte, and, count } from "drizzle-orm";
 import { requireAuth } from "../middleware/auth.mjs";
 import { success, serverError } from "../utils/response.mjs";
 import { logger } from "../utils/logger.mjs";
@@ -253,7 +253,7 @@ function calculateXpToNextLevel(level, currentXp) {
   return Math.max(0, xpForCurrentLevel - currentXp);
 }
 
-function generateInsights({ averageMood, moodTrend, streak, toolsUsed, journalCount }) {
+function generateInsights({ averageMood: _averageMood, moodTrend, streak, toolsUsed, journalCount }) {
   const insights = [];
   
   if (streak >= 7) {

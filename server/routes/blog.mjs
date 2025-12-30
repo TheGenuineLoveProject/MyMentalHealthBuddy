@@ -2,9 +2,9 @@ import express from "express";
 import { randomUUID } from "crypto";
 import { db } from "../db/connection.mjs";
 import { blogPosts, blogComments, users } from "../../shared/schema.mjs";
-import { eq, sql, desc, and, ilike, or } from "drizzle-orm";
+import { eq, desc, and, ilike, or } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
-import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
+import { requireAuth } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();

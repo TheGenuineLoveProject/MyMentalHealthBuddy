@@ -104,7 +104,7 @@ router.post("/register", async (req, res) => {
     setRefreshCookie(res, refreshToken);
 
     res.json({ token: accessToken });
-  } catch (err) {
+  } catch {
     res.status(400).json({ message: "Invalid registration data" });
   }
 });
@@ -156,7 +156,7 @@ router.post("/login", async (req, res) => {
         role: user.role || "user",
       },
     });
-  } catch (err) {
+  } catch {
     res.status(400).json({ message: "Login failed" });
   }
 });
@@ -206,7 +206,7 @@ router.post("/logout", (_req, res) => {
    ME (DEBUG / VERIFY)
 ================================ */
 router.get("/me", requireAuth, (req, res) => {
-  const { passwordHash, password_hash, refreshTokenHash, mfaSecret, mfaBackupCodes, ...safeUser } = req.user;
+  const { passwordHash: _pwHash, password_hash: _pwHashSnake, refreshTokenHash: _rtHash, mfaSecret: _mfa, mfaBackupCodes: _mfaCodes, ...safeUser } = req.user;
   res.json({ user: safeUser });
 });
 

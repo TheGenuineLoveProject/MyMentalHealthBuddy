@@ -17,7 +17,7 @@ export function createTestApp() {
   app.use('/api/journal', journalRoutes);
   app.use('/api/ai', aiRoutes);
   
-  app.use((err, req, res, next) => {
+  app.use((err, req, res, _next) => {
     console.error('[Test Error]', err);
     res.status(500).json({ ok: false, message: err.message });
   });

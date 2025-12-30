@@ -246,7 +246,7 @@ router.get("/categories", (_req, res) => {
 });
 
 router.post("/recommend", (req, res) => {
-  const { symptoms, preferences } = req.body;
+  const { symptoms: _symptoms, preferences } = req.body;
   const recommendations = HEALING_MODALITIES.filter(m => {
     if (preferences?.intensity && m.intensity !== preferences.intensity) return false;
     return true;

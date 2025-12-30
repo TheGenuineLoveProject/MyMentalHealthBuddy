@@ -110,7 +110,7 @@ const healthyPatterns = {
 };
 
 // Relationship Types and Dynamics
-const relationshipTypes = {
+const _relationshipTypes = {
   romantic: ["Dating", "Committed Partnership", "Marriage", "Long-distance", "Open/Polyamorous"],
   familial: ["Parent-Child", "Siblings", "Extended Family", "Chosen Family"],
   friendship: ["Casual", "Close", "Best Friends", "Work Friends", "Online Friends"],

@@ -1,6 +1,6 @@
 import express from "express";
 import { db } from "../db/connection.mjs";
-import { userProgress, dailyQuests, toolSessions, achievements, userAchievements } from "../../shared/schema.mjs";
+import { userProgress, dailyQuests, toolSessions } from "../../shared/schema.mjs";
 import { eq, and, gte, sql } from "drizzle-orm";
 import { authGuard } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
@@ -155,7 +155,7 @@ router.post("/record-session", async (req, res) => {
         }
       }
 
-      const [updatedProgress] = await db
+      const [_updatedProgress] = await db
         .update(userProgress)
         .set({
           totalXp: newTotalXp,

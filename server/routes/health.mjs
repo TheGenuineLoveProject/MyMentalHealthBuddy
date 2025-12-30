@@ -5,15 +5,15 @@ import { isConfigured } from "../utils/aiClient.mjs";
 
 const router = express.Router();
 const startTime = Date.now();
-let requestCount = 0;
-let errorCount = 0;
+let _requestCount = 0;
+let _errorCount = 0;
 
 export function incrementRequestCount() {
-  requestCount++;
+  _requestCount++;
 }
 
 export function incrementErrorCount() {
-  errorCount++;
+  _errorCount++;
 }
 
 router.get("/", async (_req, res) => {
@@ -109,7 +109,7 @@ router.get("/metrics", async (_req, res) => {
       `${secs}s`
     ].filter(Boolean).join(" ");
 
-    let dbStats = { users: 0, messages: 0 };
+    const dbStats = { users: 0, messages: 0 };
 
     if (process.env.DATABASE_URL) {
       try {

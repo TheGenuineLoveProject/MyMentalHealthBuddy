@@ -7,7 +7,7 @@ import { logger } from "./logger.mjs";
 const SENTRY_DSN = process.env.SENTRY_DSN;
 const isProduction = process.env.NODE_ENV === "production" || !!process.env.REPLIT_DEPLOYMENT;
 
-export function initSentry(app) {
+export function initSentry(_app) {
   if (!SENTRY_DSN) {
     logger.info("Sentry DSN not configured, error tracking disabled");
     return;

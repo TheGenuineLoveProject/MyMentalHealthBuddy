@@ -1,5 +1,4 @@
 import 'dotenv/config';
-import path from "node:path";
 import express from 'express';
 import compression from 'compression';
 import helmet from "helmet";
@@ -279,7 +278,7 @@ const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server listening on http://0.0.0.0:${PORT}`);
 });
 
-function gracefulShutdown(signal) {
+function _gracefulShutdown(signal) {
   console.log(`${signal} received, shutting down gracefully...`);
   server.close(() => {
     console.log("Server closed.");

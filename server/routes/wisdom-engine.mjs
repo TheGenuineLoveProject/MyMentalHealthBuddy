@@ -223,7 +223,7 @@ router.get("/daily", (_req, res) => {
 });
 
 router.post("/synthesize", (req, res) => {
-  const { challenge, preferences } = req.body;
+  const { challenge, preferences: _preferences } = req.body;
   
   const relevantPatterns = WISDOM_PATTERNS.slice(0, 2);
   const relevantTradition = WISDOM_TRADITIONS[Math.floor(Math.random() * WISDOM_TRADITIONS.length)];

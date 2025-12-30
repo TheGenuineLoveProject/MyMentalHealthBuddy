@@ -138,7 +138,7 @@ router.get("/domains", (_req, res) => {
 
 // POST /api/spiritual-intelligence/practice-recommendation
 router.post("/practice-recommendation", (req, res) => {
-  const { intention, experienceLevel, timeAvailable, tradition } = req.body;
+  const { intention, experienceLevel, timeAvailable: _timeAvailable, tradition } = req.body;
 
   const levelMap = { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced" };
   const level = levelMap[experienceLevel] || "Beginner";

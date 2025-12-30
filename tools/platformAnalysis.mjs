@@ -4,7 +4,7 @@ import path from "path";
 const ROOT = process.cwd();
 
 const exists = (p) => fs.existsSync(path.join(ROOT, p));
-const read = (p) => (exists(p) ? fs.readFileSync(path.join(ROOT, p), "utf8") : null);
+const _read = (p) => (exists(p) ? fs.readFileSync(path.join(ROOT, p), "utf8") : null);
 
 export async function runPlatformAnalysis() {
   const report = {

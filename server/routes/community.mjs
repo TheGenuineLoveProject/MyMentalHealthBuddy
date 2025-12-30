@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
 import { db } from "../db/client.mjs";
-import { anonymousReflections, sharedQuestions } from "../../shared/schema.mjs";
-import { desc, sql } from "drizzle-orm";
+import { anonymousReflections } from "../../shared/schema.mjs";
+import { desc } from "drizzle-orm";
 
 const router = Router();
 
@@ -62,7 +62,7 @@ router.post("/reflect", requireAuth, async (req, res) => {
       return res.status(400).json({ ok: false, message: "Reflection must be under 500 characters" });
     }
 
-    const [reflection] = await db
+    const [_reflection] = await db
       .insert(anonymousReflections)
       .values({
         content: content.trim(),

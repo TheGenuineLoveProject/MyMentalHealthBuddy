@@ -1,7 +1,6 @@
 // server/routes/wisdom.mjs
 // New A→Z 360° Intellectual Intelligence Products
 import express from "express";
-import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
 
 const router = express.Router();
 

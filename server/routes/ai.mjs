@@ -44,7 +44,6 @@ const SYSTEM_PROMPT = `You are a gentle companion for The Genuine Love Project. 
 You are a mirror, not an authority. The user knows themselves better than you ever could.
 Always end with: "Take what serves you. You know yourself best."`;
 
-const MANDATORY_DISCLAIMER = "\n\nTake what serves you. You know yourself best.";
 
 function detectCrisis(message) {
   const lowerMessage = message.toLowerCase();

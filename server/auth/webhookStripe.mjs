@@ -2,7 +2,7 @@ import { db } from "../db/client.mjs";
 import { pendingEntitlements, users, subscriptions } from "../db/schema/index.mjs";
 import { eq } from "drizzle-orm";
 
-async function applyOrBufferEntitlement({ stripeCustomerId, email, tier, status }) {
+export async function applyOrBufferEntitlement({ stripeCustomerId, email, tier, status }) {
   // 1) try to find user by stripe_customer_id (best) or email (fallback)
   const userByStripe = await db.select().from(users).where(eq(users.stripeCustomerId, stripeCustomerId)).limit(1);
   const user = userByStripe[0];

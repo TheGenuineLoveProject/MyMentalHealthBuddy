@@ -134,7 +134,7 @@ Guidelines:
   }
 }
 
-function extractInsightCards(text, reflection) {
+function extractInsightCards(text, _reflection) {
   const cards = [];
   
   const emotionPatterns = {

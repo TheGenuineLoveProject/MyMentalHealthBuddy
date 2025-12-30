@@ -28,7 +28,7 @@ router.get("/health", async (_req, res) => {
     await db.execute({ sql: "SELECT 1" });
     dbLatency = Date.now() - start;
     dbStatus = "connected";
-  } catch (error) {
+  } catch {
     dbStatus = "disconnected";
   }
 

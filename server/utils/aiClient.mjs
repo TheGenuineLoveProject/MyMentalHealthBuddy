@@ -227,7 +227,7 @@ export function isConfigured() {
   return !!openaiClient;
 }
 
-export async function sendTherapyMessage({ messages, userId = "anonymous" }) {
+export async function sendTherapyMessage({ messages, userId: _userId = "anonymous" }) {
   const result = await chatCompletion({ messages });
   
   if (result.success) {

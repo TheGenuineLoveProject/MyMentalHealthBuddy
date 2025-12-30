@@ -3,7 +3,6 @@
 // Uses CANVA_APP_ID and CANVA_APP_ORIGIN for authentication
 
 import express from "express";
-import crypto from "crypto";
 import { logger } from "../utils/logger.mjs";
 import { success, badRequest, serverError } from "../utils/response.mjs";
 
@@ -91,7 +90,7 @@ router.post("/verify-token", async (req, res) => {
         brandId: payload.brandId,
         expiresAt: payload.exp ? new Date(payload.exp * 1000).toISOString() : null
       });
-    } catch (parseError) {
+    } catch {
       return badRequest(res, "Failed to decode token.");
     }
   } catch (err) {

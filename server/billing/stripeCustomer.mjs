@@ -11,7 +11,6 @@ export async function ensureStripeCustomer(user) {
     name: user.name || undefined,
     metadata: { user_id: user.id },
   });
-  const customerId = await ensureStripeCustomer(user);
   
   await db.execute(
     `UPDATE users SET stripe_customer_id=$1 WHERE id=$2`,
