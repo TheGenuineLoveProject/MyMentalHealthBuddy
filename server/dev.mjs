@@ -82,6 +82,8 @@ import lifePurposeRouter from "./routes/life-purpose.mjs";
 import mindBodyIntegrationRouter from "./routes/mind-body-integration.mjs";
 import socialIntelligenceRouter from "./routes/social-intelligence.mjs";
 import peakPerformanceRouter from "./routes/peak-performance.mjs";
+import personalGrowthRouter from "./routes/personal-growth.mjs";
+import psychologicalSafetyRouter from "./routes/psychological-safety.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -197,6 +199,8 @@ async function startServer() {
   app.use("/api/mind-body", mindBodyIntegrationRouter);
   app.use("/api/social-intelligence", socialIntelligenceRouter);
   app.use("/api/peak-performance", peakPerformanceRouter);
+  app.use("/api/personal-growth", personalGrowthRouter);
+  app.use("/api/psychological-safety", psychologicalSafetyRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });

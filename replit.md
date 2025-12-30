@@ -59,8 +59,8 @@ The application is production-optimized with code splitting, environment variabl
 - **Stripe**: Billing and payment processing.
 
 ## Platform Metrics (as of December 2025)
-- **84 API Route Files**: Comprehensive intellectual, wellness, and administrative APIs
-- **75 Registered API Routers**: Production and development servers
+- **86 API Route Files**: Comprehensive intellectual, wellness, and administrative APIs
+- **77 Registered API Routers**: Production and development servers
 - **109 Frontend Pages**: Full-featured UI components (including Content Studio, Study Vault)
 - **152 Passing Tests**: Unit and integration coverage
 - **1000+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
@@ -79,6 +79,8 @@ The application is production-optimized with code splitting, environment variabl
 - **Mind-Body Integration API**: Breathwork techniques (4-7-8, Coherent, Tummo, Nadi Shodhana), somatic practices (PMR, Body Scan, TRE), movement therapy (Yoga, Qigong, Tai Chi), polyvagal theory, embodiment exercises (Focusing, Pendulation, Containment)
 - **Social Intelligence API**: Emotional literacy levels, empathy development (cognitive, affective, compassionate), communication mastery (NVC, DEAR MAN, GIVE), social dynamics, conflict resolution, boundary setting
 - **Peak Performance API**: Flow states (Csikszentmihalyi), mental models (decision-making, systems thinking), goal systems (SMART, OKRs, 12-Week Year), energy management (Schwartz), habit frameworks (Duhigg, Clear, Fogg), productivity systems (GTD, Deep Work)
+- **Personal Growth API**: Self-improvement pillars (physical, mental, emotional, spiritual, relational), character development (VIA strengths, virtues), growth mindset (Carol Dweck), self-discipline techniques, life stages (Erikson)
+- **Psychological Safety API**: Inner security development, self-compassion (Kristin Neff), safety signals (polyvagal), resilience factors, trauma-informed care principles, grounding techniques, window of tolerance
 
 ### Phase 11 APIs
 - **Consciousness Expansion API**: Awareness practices, consciousness states (Turiya, Turiyatita), perception exercises, integral developmental stages
