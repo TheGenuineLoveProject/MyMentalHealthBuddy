@@ -1,5 +1,5 @@
 // Healing design creation service
-import { db } from '../db/index.js';
+import { db } from '../db/client.mjs';
 
 const THERAPEUTIC_TEMPLATES = [
   { id: 'healing-affirmation', name: 'Healing Affirmation', elements: [] },

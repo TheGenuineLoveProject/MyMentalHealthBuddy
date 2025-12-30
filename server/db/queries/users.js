@@ -1,5 +1,5 @@
-import { db } from "../index.js";
-import { users } from "../schema/users.js";
+import { db } from "../client.mjs";
+import { users } from "../schema.mjs";
 import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 

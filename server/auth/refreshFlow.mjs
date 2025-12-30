@@ -1,5 +1,5 @@
 import { db } from "../db/client.mjs";
-import { refreshTokens } from "../db/schema/refreshTokens.mjs";
+import { refreshTokens } from "../db/schema/refreshTokens.js";
 import { eq, and, isNull } from "drizzle-orm";
 import { hashToken, makeRefreshToken, refreshExpiryDate, signAccessToken } from "./tokens.mjs";
 
