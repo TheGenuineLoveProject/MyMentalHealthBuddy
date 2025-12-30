@@ -77,6 +77,9 @@ import universalContentRouter from "./routes/universal-content.mjs";
 import traumaHealingProtocolsRouter from "./routes/trauma-healing-protocols.mjs";
 import spiritualIntelligenceRouter from "./routes/spiritual-intelligence.mjs";
 import relationshipDynamicsRouter from "./routes/relationship-dynamics.mjs";
+import cognitiveEnhancementRouter from "./routes/cognitive-enhancement.mjs";
+import emotionalResilienceRouter from "./routes/emotional-resilience.mjs";
+import lifePurposeRouter from "./routes/life-purpose.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -217,6 +220,9 @@ app.use('/api/universal-content', universalContentRouter);
 app.use('/api/trauma-healing', traumaHealingProtocolsRouter);
 app.use('/api/spiritual-intelligence', spiritualIntelligenceRouter);
 app.use('/api/relationship-dynamics', relationshipDynamicsRouter);
+app.use('/api/cognitive-enhancement', cognitiveEnhancementRouter);
+app.use('/api/emotional-resilience', emotionalResilienceRouter);
+app.use('/api/life-purpose', lifePurposeRouter);
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
