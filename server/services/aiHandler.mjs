@@ -1,8 +1,11 @@
 // server/services/aiHandler.mjs
 // Thin wrapper around aiService for routes or other callers.
 
+import OpenAI from "openai";
 import { askAI } from "./aiService.mjs";
 import { logger } from "../utils/logger.mjs";
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export async function handleAIChat(message) {
   return askAI(message);
@@ -18,7 +21,7 @@ export async function runAIEmployee(req, res) {
       return res.status(400).json({ error: "Message required." });
     }
 
-    const stream = await client.chat.completions.create({
+    const stream = await openai.chat.completions.create({
       model: process.env.AI_MODEL || "gpt-5.1",
       stream: true,
       messages: [

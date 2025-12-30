@@ -19,6 +19,7 @@
     "typecheck": "tsc -p client/tsconfig.json --noEmit || true"
   },
   "dependencies": {
+    "@eslint/js": "^9.39.2",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
@@ -52,9 +53,11 @@
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.45.1",
+    "eslint": "^9.39.2",
     "express": "^4.19.2",
     "express-rate-limit": "^8.2.1",
     "express-session": "^1.17.3",
+    "globals": "^16.5.0",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^0.441.0",

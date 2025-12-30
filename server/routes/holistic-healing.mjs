@@ -9,7 +9,7 @@ const BREATHWORK_PROTOCOLS = [
     category: "Calming",
     description: "Military-grade stress reduction technique for nervous system regulation",
     duration: "5-10 min",
-    pattern: { inhale: 4, hold: 4, exhale: 4, hold: 4 },
+    pattern: { inhale: 4, holdIn: 4, exhale: 4, holdOut: 4 },
     benefits: ["Reduces cortisol", "Activates parasympathetic", "Improves focus"],
     guidance: [
       "Sit comfortably with spine straight",

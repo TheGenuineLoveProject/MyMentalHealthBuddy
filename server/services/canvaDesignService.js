@@ -1,6 +1,13 @@
 // Healing design creation service
 import { db } from '../db/index.js';
 
+const THERAPEUTIC_TEMPLATES = [
+  { id: 'healing-affirmation', name: 'Healing Affirmation', elements: [] },
+  { id: 'gratitude-journal', name: 'Gratitude Journal', elements: [] },
+  { id: 'mindfulness-poster', name: 'Mindfulness Poster', elements: [] },
+  { id: 'self-love-card', name: 'Self-Love Card', elements: [] },
+];
+
 export async function createHealingDesign(templateId, customization, healingIntent, userId) {
   try {
     // Get template configuration
