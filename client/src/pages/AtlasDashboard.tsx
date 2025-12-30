@@ -352,13 +352,12 @@ export default function AtlasDashboard() {
                         );
                       })}
                     </div>
-                    <Link href={category.route}>
-                      <a 
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm transition-all"
-                        data-testid={`link-explore-${category.id}`}
-                      >
-                        Explore {category.name} <ArrowRight className="h-4 w-4" />
-                      </a>
+                    <Link 
+                      href={category.route}
+                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm transition-all"
+                      data-testid={`link-explore-${category.id}`}
+                    >
+                      Explore {category.name} <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
                 )}

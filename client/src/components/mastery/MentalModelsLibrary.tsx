@@ -97,15 +97,18 @@ export default function MentalModelsLibrary() {
             {filteredModels.map(model => {
               const isFavorite = library.favoriteModels.includes(model.id);
               return (
-                <button
+                <div
                   key={model.id}
+                  role="button"
+                  tabIndex={0}
                   onClick={() => setSelectedModel(selectedModel?.id === model.id ? null : model)}
-                  className={`w-full p-4 rounded-xl border text-left transition-all ${
+                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelectedModel(selectedModel?.id === model.id ? null : model); }}}
+                  className={`w-full p-4 rounded-xl border text-left transition-all cursor-pointer ${
                     selectedModel?.id === model.id 
                       ? "border-purple-500/30 bg-purple-500/10" 
                       : "border-white/10 bg-white/5 hover:bg-white/10"
                   }`}
-                  data-testid={`button-model-${model.id}`}
+                  data-testid={`card-model-${model.id}`}
                 >
                   <div className="flex justify-between items-start">
                     <div>
@@ -140,7 +143,7 @@ export default function MentalModelsLibrary() {
                       </div>
                     </div>
                   )}
-                </button>
+                </div>
               );
             })}
           </div>

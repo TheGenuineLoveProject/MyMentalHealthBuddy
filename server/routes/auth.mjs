@@ -164,7 +164,7 @@ router.post("/login", async (req, res) => {
 /* ================================
    REFRESH TOKEN
 ================================ */
-router.post("/auth/refresh", async (req, res) => {
+router.post("/refresh", async (req, res) => {
   try {
     const token = req.cookies?.refresh_token;
     if (!token) {
