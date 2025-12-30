@@ -57,3 +57,24 @@ The application is production-optimized with code splitting, environment variabl
 - **Drizzle ORM**: Database interactions.
 - **Neon PostgreSQL**: Primary database.
 - **Stripe**: Billing and payment processing.
+
+## Platform Metrics (as of December 2025)
+- **76 API Route Files**: Comprehensive intellectual, wellness, and administrative APIs
+- **67 Registered API Routers**: Production and development servers
+- **109 Frontend Pages**: Full-featured UI components (including Content Studio, Study Vault)
+- **152 Passing Tests**: Unit and integration coverage
+- **1000+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
+
+## Recent API Additions
+
+### Phase 12 APIs
+- **Self-Mastery Intelligence API**: Discipline systems (self-control, focus, habit architecture), emotional intelligence mastery (4 EQ domains, emotional agility), mindset mastery (growth, abundance, antifragile), personal power frameworks, and excellence models (Kaizen, deliberate practice, mastery path)
+- **Universal Content API**: Content frameworks (Hero's Journey, PAS, AIDA, Storytelling Spine), content types (educational, promotional, social), headline formulas, hooks & openers, repurposing strategies, and calls to action
+- **Trauma Healing Protocols API**: Grounding techniques (5-4-3-2-1, container exercise), nervous system regulation (polyvagal theory, physiological sigh, vagal toning), parts work (IFS-informed), somatic healing practices, reparenting protocols, and window of tolerance framework
+
+### Phase 11 APIs
+- **Consciousness Expansion API**: Awareness practices, consciousness states (Turiya, Turiyatita), perception exercises, integral developmental stages
+- **Human Potential API**: Flow state triggers, peak experiences, self-actualization hierarchy
+- **Wisdom Traditions API**: Major traditions (Stoicism, Buddhism, Taoism, Vedanta, Sufism, Kabbalah), perennial truths
+- **Life Design API**: Life domains, design frameworks (Ikigai, Odyssey Planning), goal-setting systems
+- **Healing Modalities API**: Therapeutic modalities (CBT, DBT, EMDR, IFS, Somatic Experiencing, ACT)
