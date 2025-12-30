@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "../context/AuthContext.jsx";
+import { Heart, Mail, Lock, ArrowRight } from "lucide-react";
+import SEO from "../components/SEO";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,73 +41,117 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
-      <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-gray-900">Welcome Back</h1>
-          <p className="text-gray-600 mt-2">Sign in to continue your journey</p>
-        </div>
-
-        {error && (
-          <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="you@example.com"
-              required
-              data-testid="input-email"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="••••••••"
-              required
-              data-testid="input-password"
-            />
-          </div>
-
-          <div className="flex items-center justify-between text-sm">
-            <Link href="/forgot-password" className="text-blue-600 hover:underline">
-              Forgot password?
+    <>
+      <SEO 
+        title="Sign In - The Genuine Love Project"
+        description="Sign in to your Genuine Love Project account. Continue your mental wellness journey."
+      />
+      <div className="min-h-screen hero-gradient overflow-hidden relative flex items-center justify-center px-4">
+        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -right-20 absolute" aria-hidden="true" />
+        
+        <div className="relative z-10 w-full max-w-md animate-fade-in-up">
+          <div className="text-center mb-8">
+            <Link href="/" className="inline-flex items-center gap-3 group">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5A8A6E] to-[#4a7a5e] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                <Heart className="w-6 h-6 text-white" aria-hidden="true" />
+              </div>
+              <span className="text-xl font-bold tracking-tight text-[#2D3748]">The Genuine Love Project</span>
             </Link>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
-            data-testid="button-login"
-          >
-            {loading ? "Signing in..." : "Sign In"}
-          </button>
-        </form>
+          <div className="glass-premium rounded-2xl p-8">
+            <div className="text-center mb-6">
+              <h1 className="text-2xl font-bold text-[#2D3748]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+                Welcome Back
+              </h1>
+              <p className="text-[#6B7280] mt-2">Sign in to continue your journey</p>
+            </div>
 
-        <p className="text-center text-gray-600 mt-6 text-sm">
-          Don't have an account?{" "}
-          <Link href="/register" className="text-blue-600 hover:underline">
-            Create one
-          </Link>
-        </p>
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl mb-6 text-sm" role="alert" data-testid="text-error">
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <label className="block text-sm font-medium text-[#2D3748] mb-2">
+                  Email
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 border border-[rgba(143,191,159,0.3)] rounded-xl bg-white/80 focus:ring-2 focus:ring-[#5A8A6E] focus:border-transparent transition-all text-[#2D3748] placeholder:text-[#9CA3AF]"
+                    placeholder="you@example.com"
+                    required
+                    data-testid="input-email"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-[#2D3748] mb-2">
+                  Password
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="w-full pl-12 pr-4 py-3 border border-[rgba(143,191,159,0.3)] rounded-xl bg-white/80 focus:ring-2 focus:ring-[#5A8A6E] focus:border-transparent transition-all text-[#2D3748] placeholder:text-[#9CA3AF]"
+                    placeholder="••••••••"
+                    required
+                    data-testid="input-password"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-end">
+                <Link href="/forgot-password" className="text-sm text-[#4a7a5e] hover:text-[#2D3748] transition-colors font-medium">
+                  Forgot password?
+                </Link>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full btn-premium py-3.5 hover-glow-gold disabled:opacity-50 disabled:cursor-not-allowed"
+                data-testid="button-login"
+              >
+                {loading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    Signing in...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    Sign In
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                )}
+              </button>
+            </form>
+
+            <div className="mt-6 pt-6 border-t border-[rgba(143,191,159,0.2)] text-center">
+              <p className="text-[#6B7280] text-sm">
+                Don't have an account?{" "}
+                <Link href="/register" className="text-[#4a7a5e] hover:text-[#2D3748] font-semibold transition-colors">
+                  Create one
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          <p className="text-center text-xs text-[#9CA3AF] mt-6">
+            By signing in, you agree to our Terms of Service and Privacy Policy
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
