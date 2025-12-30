@@ -3,11 +3,17 @@
   "short_name": "GenuineLove",
   "description": "An AI-powered mental wellness platform for self-love, healing, and emotional growth",
   "start_url": "/",
+  "scope": "/",
+  "id": "genuine-love-project",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "background_color": "#FDFCF9",
   "theme_color": "#5A8A6E",
   "orientation": "portrait-primary",
-  "categories": ["health", "lifestyle", "wellness"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["health", "lifestyle", "wellness", "medical"],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -25,6 +31,31 @@
       "src": "/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "The Genuine Love Project Homepage"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Journal",
+      "short_name": "Journal",
+      "description": "Open your personal journal",
+      "url": "/journal",
+      "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Mood Tracker",
+      "short_name": "Mood",
+      "description": "Track your emotional state",
+      "url": "/mood",
+      "icons": [{ "src": "/android-chrome-192x192.png", "sizes": "192x192" }]
     }
   ]
 }

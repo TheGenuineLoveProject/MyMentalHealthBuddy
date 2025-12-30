@@ -43,6 +43,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#7FAF9B" />
+    <meta name="theme-color" content="#5A8A6E" media="(prefers-color-scheme: dark)" />
+    <meta name="msapplication-TileColor" content="#5A8A6E" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,25 +57,47 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "The Genuine Love Project",
+      "alternateName": "Genuine Love",
       "description": "An AI-powered mental wellness platform for self-love, healing, and emotional growth.",
       "url": "https://thegenuineloveproject.com",
       "applicationCategory": "HealthApplication",
+      "applicationSubCategory": "Mental Wellness",
       "operatingSystem": "Web",
+      "browserRequirements": "Requires JavaScript",
+      "softwareVersion": "1.0.0",
+      "inLanguage": "en-US",
+      "isAccessibleForFree": true,
       "offers": {
         "@type": "Offer",
         "price": "0",
-        "priceCurrency": "USD"
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
       },
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "4.9",
-        "ratingCount": "150"
+        "ratingCount": "150",
+        "bestRating": "5",
+        "worstRating": "1"
       },
       "author": {
         "@type": "Organization",
         "name": "The Genuine Love Project",
-        "url": "https://thegenuineloveproject.com"
-      }
+        "url": "https://thegenuineloveproject.com",
+        "logo": "https://thegenuineloveproject.com/brand/logo.png",
+        "sameAs": [
+          "https://twitter.com/genuineloveproj"
+        ]
+      },
+      "screenshot": "https://thegenuineloveproject.com/brand/og-image.png",
+      "featureList": [
+        "AI-powered emotional support",
+        "Mood tracking",
+        "Personal journaling",
+        "Wellness tools",
+        "Trauma-informed care"
+      ],
+      "keywords": "mental wellness, self-love, healing, emotional growth, AI therapy, mood tracking"
     }
     </script>
   </head>
