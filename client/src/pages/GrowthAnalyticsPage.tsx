@@ -286,35 +286,29 @@ export default function GrowthAnalyticsPage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <Link href="/knowledge-synthesis">
-            <a className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all group" data-testid="link-knowledge-synthesis">
-              <Brain className="h-6 w-6 mb-2 text-cyan-400" />
-              <h4 className="font-medium mb-1">Knowledge Synthesis</h4>
-              <p className="text-xs opacity-60">Build your concept map</p>
-              <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
-                Open <ChevronRight className="h-3 w-3" />
-              </div>
-            </a>
+          <Link href="/knowledge-synthesis" className="block p-5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all group" data-testid="link-knowledge-synthesis">
+            <Brain className="h-6 w-6 mb-2 text-cyan-400" />
+            <h4 className="font-medium mb-1">Knowledge Synthesis</h4>
+            <p className="text-xs opacity-60">Build your concept map</p>
+            <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
+              Open <ChevronRight className="h-3 w-3" />
+            </div>
           </Link>
-          <Link href="/wisdom-practices">
-            <a className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-violet-500/40 transition-all group" data-testid="link-wisdom-practices">
-              <Sparkles className="h-6 w-6 mb-2 text-violet-400" />
-              <h4 className="font-medium mb-1">Wisdom Practices</h4>
-              <p className="text-xs opacity-60">Daily contemplation & gratitude</p>
-              <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
-                Open <ChevronRight className="h-3 w-3" />
-              </div>
-            </a>
+          <Link href="/wisdom-practices" className="block p-5 rounded-xl bg-white/5 border border-white/10 hover:border-violet-500/40 transition-all group" data-testid="link-wisdom-practices">
+            <Sparkles className="h-6 w-6 mb-2 text-violet-400" />
+            <h4 className="font-medium mb-1">Wisdom Practices</h4>
+            <p className="text-xs opacity-60">Daily contemplation & gratitude</p>
+            <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
+              Open <ChevronRight className="h-3 w-3" />
+            </div>
           </Link>
-          <Link href="/atlas">
-            <a className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition-all group" data-testid="link-all-tools">
-              <Target className="h-6 w-6 mb-2 text-emerald-400" />
-              <h4 className="font-medium mb-1">Explore All Tools</h4>
-              <p className="text-xs opacity-60">Full intellectual toolkit</p>
-              <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
-                Open <ChevronRight className="h-3 w-3" />
-              </div>
-            </a>
+          <Link href="/atlas" className="block p-5 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition-all group" data-testid="link-all-tools">
+            <Target className="h-6 w-6 mb-2 text-emerald-400" />
+            <h4 className="font-medium mb-1">Explore All Tools</h4>
+            <p className="text-xs opacity-60">Full intellectual toolkit</p>
+            <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
+              Open <ChevronRight className="h-3 w-3" />
+            </div>
           </Link>
         </div>
 
