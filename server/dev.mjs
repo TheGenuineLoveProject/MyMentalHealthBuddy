@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { createServer as createViteServer } from "vite";
 import { fileURLToPath } from "url";
@@ -65,6 +66,11 @@ import emotionalMasteryRouter from "./routes/emotional-mastery.mjs";
 import holisticHealingRouter from "./routes/holistic-healing.mjs";
 import masteryExcellenceRouter from "./routes/mastery-excellence.mjs";
 import contentStudioRouter from "./routes/content-studio.mjs";
+import consciousnessExpansionRouter from "./routes/consciousness-expansion.mjs";
+import humanPotentialRouter from "./routes/human-potential.mjs";
+import wisdomTraditionsRouter from "./routes/wisdom-traditions.mjs";
+import lifeDesignRouter from "./routes/life-design.mjs";
+import healingModalitiesRouter from "./routes/healing-modalities.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -94,6 +100,13 @@ async function startServer() {
     },
     credentials: true
   }));
+  
+  // Security headers (relaxed for development)
+  app.use(helmet({
+    contentSecurityPolicy: false, // Disabled for Vite HMR
+    crossOriginEmbedderPolicy: false,
+  }));
+  
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
 
@@ -157,6 +170,11 @@ async function startServer() {
   app.use("/api/holistic-healing", holisticHealingRouter);
   app.use("/api/mastery-excellence", masteryExcellenceRouter);
   app.use("/api/content-studio", contentStudioRouter);
+  app.use("/api/consciousness", consciousnessExpansionRouter);
+  app.use("/api/human-potential", humanPotentialRouter);
+  app.use("/api/wisdom-traditions", wisdomTraditionsRouter);
+  app.use("/api/life-design", lifeDesignRouter);
+  app.use("/api/healing-modalities", healingModalitiesRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });
