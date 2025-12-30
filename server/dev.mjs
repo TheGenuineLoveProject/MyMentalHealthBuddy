@@ -71,6 +71,9 @@ import humanPotentialRouter from "./routes/human-potential.mjs";
 import wisdomTraditionsRouter from "./routes/wisdom-traditions.mjs";
 import lifeDesignRouter from "./routes/life-design.mjs";
 import healingModalitiesRouter from "./routes/healing-modalities.mjs";
+import selfMasteryIntelligenceRouter from "./routes/self-mastery-intelligence.mjs";
+import universalContentRouter from "./routes/universal-content.mjs";
+import traumaHealingProtocolsRouter from "./routes/trauma-healing-protocols.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -175,6 +178,9 @@ async function startServer() {
   app.use("/api/wisdom-traditions", wisdomTraditionsRouter);
   app.use("/api/life-design", lifeDesignRouter);
   app.use("/api/healing-modalities", healingModalitiesRouter);
+  app.use("/api/self-mastery-intelligence", selfMasteryIntelligenceRouter);
+  app.use("/api/universal-content", universalContentRouter);
+  app.use("/api/trauma-healing", traumaHealingProtocolsRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });
