@@ -77,38 +77,41 @@ export default function Register() {
         title="Create Account"
         description="Create your free Genuine Love Project account. Start your mental wellness journey with AI-powered support, mood tracking, and journaling."
       />
-      <div className="min-h-screen flex items-center justify-center p-6 bg-gradient-mesh">
-        <div className="w-full max-w-md">
-          {/* Logo */}
+      <div className="min-h-screen hero-gradient overflow-hidden relative flex items-center justify-center p-6">
+        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -left-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-gold w-[200px] h-[200px] top-1/3 left-10 absolute" aria-hidden="true" />
+        
+        <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="w-12 h-12 rounded-xl bg-[var(--gradient-focus)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                 <Heart className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
-              <span className="text-2xl font-bold tracking-tight">The Genuine Love Project</span>
+              <span className="text-xl font-bold tracking-tight text-[var(--text)]">The Genuine Love Project</span>
             </Link>
           </div>
 
-          {/* Form Card */}
           <form 
             onSubmit={handleSubmit(onSubmit)}
-            className="card-elevated p-8"
+            className="glass-premium rounded-2xl p-8"
             data-testid="form-register"
             noValidate
           >
             <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold mb-2" data-testid="text-register-title">
+              <h1 className="text-2xl font-bold text-[var(--text)] mb-2 font-display" data-testid="text-register-title">
                 Start Your Wellness Journey
               </h1>
               <p className="text-[var(--text-secondary)]">Create your free account today</p>
             </div>
 
-            {/* Benefits */}
             <div className="mb-6 p-4 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)]/20">
               <ul className="space-y-2">
                 {benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm">
-                    <Check className="w-4 h-4 text-[var(--primary)]" aria-hidden="true" />
+                  <li key={i} className="flex items-center gap-2 text-sm text-[var(--text-secondary)]">
+                    <div className="w-5 h-5 rounded-full bg-[var(--primary)]/20 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-[var(--primary)]" aria-hidden="true" />
+                    </div>
                     <span>{benefit}</span>
                   </li>
                 ))}
@@ -230,19 +233,19 @@ export default function Register() {
             <button
               type="submit"
               disabled={registerMutation.isPending}
-              className="btn btn-gradient w-full mt-6 py-4 text-base"
+              className="w-full btn-premium py-3.5 mt-6 hover-glow-gold disabled:opacity-50 disabled:cursor-not-allowed"
               data-testid="button-submit"
             >
               {registerMutation.isPending ? (
-                <>
+                <span className="flex items-center justify-center gap-2">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
                   Creating account...
-                </>
+                </span>
               ) : (
-                <>
+                <span className="flex items-center justify-center gap-2">
                   <Sparkles className="w-5 h-5" aria-hidden="true" />
                   Create Account
-                </>
+                </span>
               )}
             </button>
 
@@ -251,7 +254,7 @@ export default function Register() {
                 Already have an account?{" "}
                 <Link 
                   href="/login" 
-                  className="text-[var(--primary)] hover:text-[var(--primary-dark)] font-medium transition"
+                  className="text-[var(--primary)] hover:text-[var(--primary-dark)] font-semibold transition-colors"
                   data-testid="link-login"
                 >
                   Sign in
@@ -259,6 +262,10 @@ export default function Register() {
               </p>
             </div>
           </form>
+          
+          <p className="text-center text-xs text-[var(--text-muted)] mt-6">
+            By creating an account, you agree to our Terms of Service and Privacy Policy
+          </p>
         </div>
       </div>
     </>

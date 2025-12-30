@@ -16,25 +16,26 @@ export default function NotFound() {
         title="Page Not Found"
         description="The page you're looking for doesn't exist. Let's get you back on track."
       />
-      <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--accent-teal)]/10 rounded-full blur-3xl"></div>
-        </div>
+      <div className="min-h-screen hero-gradient overflow-hidden relative flex items-center justify-center p-6">
+        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] top-1/4 -left-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-1/4 -right-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-gold w-[200px] h-[200px] top-10 right-1/4 absolute" aria-hidden="true" />
         
-        <div className="w-full max-w-2xl text-center relative z-10 animate-fade-in-up">
+        <div className="relative z-10 w-full max-w-2xl text-center animate-fade-in-up">
           <Link 
             href="/" 
-            className="inline-flex items-center gap-2 mb-8 text-[var(--primary)] hover:opacity-80 transition-opacity"
+            className="inline-flex items-center gap-2 mb-8 hover:opacity-80 transition-opacity"
             data-testid="link-home-logo"
           >
-            <Heart className="w-6 h-6" aria-hidden="true" />
-            <span className="font-display font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center shadow-lg">
+              <Heart className="w-5 h-5 text-white" aria-hidden="true" />
+            </div>
+            <span className="font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
           </Link>
           
-          <div className="card-elevated p-8 md:p-12">
+          <div className="glass-premium rounded-2xl p-8 md:p-12">
             <div className="mb-8">
-              <div className="text-8xl md:text-9xl font-display font-bold bg-gradient-to-r from-[var(--primary)] to-[var(--accent-violet)] bg-clip-text text-transparent mb-4">
+              <div className="text-8xl md:text-9xl font-display font-bold bg-gradient-to-r from-[var(--primary)] via-[var(--primary-light)] to-[var(--accent-gold)] bg-clip-text text-transparent mb-4">
                 404
               </div>
               <h1 className="text-2xl md:text-3xl font-display font-bold text-[var(--text)] mb-3" data-testid="text-title">
@@ -48,7 +49,7 @@ export default function NotFound() {
             <div className="flex flex-wrap justify-center gap-3 mb-8">
               <Link
                 href="/"
-                className="btn btn-gradient px-6 py-3 inline-flex items-center gap-2"
+                className="btn-premium px-6 py-3 inline-flex items-center gap-2 hover-glow-gold"
                 data-testid="button-go-home"
               >
                 <Home className="w-5 h-5" aria-hidden="true" />
@@ -56,7 +57,7 @@ export default function NotFound() {
               </Link>
               <button
                 onClick={() => window.history.back()}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--surface)] hover:bg-[var(--surface-hover)] border border-[var(--border)] text-[var(--text)] font-medium rounded-xl transition-all focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--surface)]/80 hover:bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] font-medium rounded-xl transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
                 data-testid="button-go-back"
               >
                 <ArrowLeft className="w-5 h-5" aria-hidden="true" />
@@ -79,7 +80,7 @@ export default function NotFound() {
                       className="group p-4 rounded-xl bg-[var(--surface)]/50 hover:bg-[var(--surface)] border border-transparent hover:border-[var(--border)] transition-all text-center focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
                       data-testid={`link-quick-${link.label.toLowerCase().replace(/\s/g, '-')}`}
                     >
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--accent-violet)] flex items-center justify-center mx-auto mb-2 shadow-md group-hover:scale-110 transition-transform">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center mx-auto mb-2 shadow-md group-hover:scale-110 transition-transform">
                         <Icon className="w-5 h-5 text-white" aria-hidden="true" />
                       </div>
                       <span className="text-sm font-medium text-[var(--text)] block">{link.label}</span>
