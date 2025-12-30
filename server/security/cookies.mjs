@@ -3,7 +3,7 @@ export function getCookieOptions() {
   return {
     httpOnly: true,
     secure: prod,
-    sameSite: prod ? "none" : "lax",
+    sameSite: prod ? "strict" : "lax",
     path: "/",
     maxAge: 1000 * 60 * 60 * 24 * 30, // 30d
   };
