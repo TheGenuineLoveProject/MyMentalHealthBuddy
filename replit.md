@@ -109,3 +109,29 @@ The application is production-optimized with code splitting, environment variabl
 - Enhanced focus states with box-shadow for keyboard navigation
 - 338+ ARIA attributes across the platform
 - Semantic HTML structure throughout
+
+## Deployment Configuration (December 2025)
+
+### Replit Autoscale
+- **Target**: Autoscale (scales with traffic, cost-efficient)
+- **Build**: `npm run build` (Vite production build ~18s)
+- **Run**: `node server/index.mjs`
+- **Health Endpoints**: `/healthz`, `/api/health-check`
+
+### Production Security
+- **Content Security Policy (CSP)**: Enabled via Helmet with whitelisted directives
+- **Allowed Origins**: OpenAI API, Stripe, Google Fonts, WebSocket connections
+- **Headers**: Strict security headers, frame protection, upgrade-insecure-requests
+- **Rate Limiting**: API rate limiting enabled
+
+### Build Metrics
+- **Build Time**: ~18 seconds
+- **Tests**: 152/152 passing
+- **ESLint**: 0 errors (43 warnings - unused variables)
+- **Bundle Size**: ~260KB gzipped total
+
+### PWA Assets
+- `apple-touch-icon.png`: 180x180 iOS home screen icon
+- `favicon.png`: Browser tab icon
+- `og-image.png`: Social media sharing preview (1200x630)
+- `manifest.json`: PWA metadata with hex colors (#FDFCF9, #5A8A6E)
