@@ -11,8 +11,8 @@ export function buildSessionMiddleware() {
   // Always set trust proxy on Replit/Autoscale (important for secure cookies behind proxy)
   const cookie = {
     httpOnly: true,
-    sameSite: "lax",
-    secure: isProd, // secure cookies only in prod
+    sameSite: isProd ? "strict" : "lax",
+    secure: isProd,
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
   };
 
