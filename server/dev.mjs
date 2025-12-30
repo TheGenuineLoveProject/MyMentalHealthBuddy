@@ -79,6 +79,9 @@ import relationshipDynamicsRouter from "./routes/relationship-dynamics.mjs";
 import cognitiveEnhancementRouter from "./routes/cognitive-enhancement.mjs";
 import emotionalResilienceRouter from "./routes/emotional-resilience.mjs";
 import lifePurposeRouter from "./routes/life-purpose.mjs";
+import mindBodyIntegrationRouter from "./routes/mind-body-integration.mjs";
+import socialIntelligenceRouter from "./routes/social-intelligence.mjs";
+import peakPerformanceRouter from "./routes/peak-performance.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -191,6 +194,9 @@ async function startServer() {
   app.use("/api/cognitive-enhancement", cognitiveEnhancementRouter);
   app.use("/api/emotional-resilience", emotionalResilienceRouter);
   app.use("/api/life-purpose", lifePurposeRouter);
+  app.use("/api/mind-body", mindBodyIntegrationRouter);
+  app.use("/api/social-intelligence", socialIntelligenceRouter);
+  app.use("/api/peak-performance", peakPerformanceRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });

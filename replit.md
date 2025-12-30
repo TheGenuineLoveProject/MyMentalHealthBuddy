@@ -59,8 +59,8 @@ The application is production-optimized with code splitting, environment variabl
 - **Stripe**: Billing and payment processing.
 
 ## Platform Metrics (as of December 2025)
-- **81 API Route Files**: Comprehensive intellectual, wellness, and administrative APIs
-- **72 Registered API Routers**: Production and development servers
+- **84 API Route Files**: Comprehensive intellectual, wellness, and administrative APIs
+- **75 Registered API Routers**: Production and development servers
 - **109 Frontend Pages**: Full-featured UI components (including Content Studio, Study Vault)
 - **152 Passing Tests**: Unit and integration coverage
 - **1000+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
@@ -76,6 +76,9 @@ The application is production-optimized with code splitting, environment variabl
 - **Cognitive Enhancement API**: Memory techniques (Memory Palace, Spaced Repetition, Chunking), focus strategies (Pomodoro, Time Blocking, Ultradian Rhythms), learning acceleration (Feynman Technique, Deliberate Practice), cognitive biases and brain health
 - **Emotional Resilience API**: Stress management (Physiological Sigh, Box Breathing, Cognitive Reframing), emotional agility framework (Susan David), inner strength builders (antifragility, post-traumatic growth, psychological flexibility), regulation strategies (RAIN, Name It to Tame It, Opposite Action)
 - **Life Purpose API**: Ikigai framework, values discovery exercises, mission crafting templates, purpose frameworks (Eulogy Exercise, Odyssey Planning, Zone of Genius), meaning sources (Viktor Frankl's logotherapy)
+- **Mind-Body Integration API**: Breathwork techniques (4-7-8, Coherent, Tummo, Nadi Shodhana), somatic practices (PMR, Body Scan, TRE), movement therapy (Yoga, Qigong, Tai Chi), polyvagal theory, embodiment exercises (Focusing, Pendulation, Containment)
+- **Social Intelligence API**: Emotional literacy levels, empathy development (cognitive, affective, compassionate), communication mastery (NVC, DEAR MAN, GIVE), social dynamics, conflict resolution, boundary setting
+- **Peak Performance API**: Flow states (Csikszentmihalyi), mental models (decision-making, systems thinking), goal systems (SMART, OKRs, 12-Week Year), energy management (Schwartz), habit frameworks (Duhigg, Clear, Fogg), productivity systems (GTD, Deep Work)
 
 ### Phase 11 APIs
 - **Consciousness Expansion API**: Awareness practices, consciousness states (Turiya, Turiyatita), perception exercises, integral developmental stages
