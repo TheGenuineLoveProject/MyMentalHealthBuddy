@@ -74,6 +74,8 @@ import healingModalitiesRouter from "./routes/healing-modalities.mjs";
 import selfMasteryIntelligenceRouter from "./routes/self-mastery-intelligence.mjs";
 import universalContentRouter from "./routes/universal-content.mjs";
 import traumaHealingProtocolsRouter from "./routes/trauma-healing-protocols.mjs";
+import spiritualIntelligenceRouter from "./routes/spiritual-intelligence.mjs";
+import relationshipDynamicsRouter from "./routes/relationship-dynamics.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -181,6 +183,8 @@ async function startServer() {
   app.use("/api/self-mastery-intelligence", selfMasteryIntelligenceRouter);
   app.use("/api/universal-content", universalContentRouter);
   app.use("/api/trauma-healing", traumaHealingProtocolsRouter);
+  app.use("/api/spiritual-intelligence", spiritualIntelligenceRouter);
+  app.use("/api/relationship-dynamics", relationshipDynamicsRouter);
 
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });

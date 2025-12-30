@@ -59,8 +59,8 @@ The application is production-optimized with code splitting, environment variabl
 - **Stripe**: Billing and payment processing.
 
 ## Platform Metrics (as of December 2025)
-- **76 API Route Files**: Comprehensive intellectual, wellness, and administrative APIs
-- **67 Registered API Routers**: Production and development servers
+- **78 API Route Files**: Comprehensive intellectual, wellness, and administrative APIs
+- **69 Registered API Routers**: Production and development servers
 - **109 Frontend Pages**: Full-featured UI components (including Content Studio, Study Vault)
 - **152 Passing Tests**: Unit and integration coverage
 - **1000+ Discrete Intellectual Instruments**: World-class toolkit for MIT-level users
@@ -71,6 +71,8 @@ The application is production-optimized with code splitting, environment variabl
 - **Self-Mastery Intelligence API**: Discipline systems (self-control, focus, habit architecture), emotional intelligence mastery (4 EQ domains, emotional agility), mindset mastery (growth, abundance, antifragile), personal power frameworks, and excellence models (Kaizen, deliberate practice, mastery path)
 - **Universal Content API**: Content frameworks (Hero's Journey, PAS, AIDA, Storytelling Spine), content types (educational, promotional, social), headline formulas, hooks & openers, repurposing strategies, and calls to action
 - **Trauma Healing Protocols API**: Grounding techniques (5-4-3-2-1, container exercise), nervous system regulation (polyvagal theory, physiological sigh, vagal toning), parts work (IFS-informed), somatic healing practices, reparenting protocols, and window of tolerance framework
+- **Spiritual Intelligence API**: Meditation practices (Metta, Vipassana, TM, Centering Prayer, Zazen), contemplation methods (Lectio Divina, Koan, Atma Vichara), breathwork (Pranayama, Holotropic, Wim Hof), developmental stages (Wilber Integral, Fowler Faith), and SQ domains
+- **Relationship Dynamics API**: Attachment styles (Bowlby/Ainsworth), love languages (Chapman), Gottman's Four Horsemen, conflict styles (Thomas-Kilmann), healthy relationship patterns, and repair strategies
 
 ### Phase 11 APIs
 - **Consciousness Expansion API**: Awareness practices, consciousness states (Turiya, Turiyatita), perception exercises, integral developmental stages
