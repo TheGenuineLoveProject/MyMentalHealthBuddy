@@ -41,3 +41,11 @@ export const success = (res, data = {}, message = null, status = 200) => {
 export const badRequest = (res, message = "Bad request") => {
   return res.status(400).json({ ok: false, message });
 };
+
+export const created = (res, data = null, message = "Created") =>
+  res.status(201).json({ ok: true, data, message });
+
+export const failWithCode = (res, status = 400, message = "Request failed", errorCode = null) => {
+  logger.error("API error", { message, status, errorCode });
+  return res.status(status).json({ ok: false, message, errorCode });
+};
