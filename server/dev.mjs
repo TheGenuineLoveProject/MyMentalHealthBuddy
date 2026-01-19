@@ -233,7 +233,7 @@ async function startServer() {
 
   // SPA fallback - only for non-API, non-Vite routes
   // Vite internal paths: /@vite/*, /@fs/*, /@react-refresh, /src/*, /node_modules/.vite/*
-  app.use("*", async (req, res, next) => {
+  app.use("/{*splat}", async (req, res, next) => {
     const url = req.originalUrl;
     
     // Skip Vite internal paths - let Vite middleware handle them
