@@ -1,0 +1,53 @@
+YOU ARE REPLIT AI OPERATING IN SAFE MODE.
+
+ABSOLUTE RULES (NON-NEGOTIABLE):
+- NO refactors. NO renames. NO file moves. NO deletions.
+- NO dependency swaps unless I explicitly approve.
+- Only targeted edits inside existing files OR add small new files when required.
+- Preserve existing brand logo assets EXACTLY.
+- Preserve brand palette; only tune contrast/usage (Serenity Sage #8FBF9F / Deep Teal #2F5D5D + Eternal Gold #D4AF37 + Ivory #FAF9F7 + Charcoal #3A3A3A).
+
+MISSION:
+Complete The Genuine Love Project platform end-to-end (A→Z) with:
+1) Build + run stability
+2) Tests that pass (or clearly explain failing tests with fixes)
+3) Admin dashboard: correct data + meaningful behavior pattern tracking
+4) Visual enhancement system: automated UI polish (typography, spacing, icons, contrast, motion) with brand safety
+5) Content + social system: daily post generator + scheduler + publishing scaffolding
+6) GitHub: fix push/pull issues, Actions, security settings, wiki/docs readiness
+7) Security hardening: headers, sessions, rate limits, env validation
+8) Performance: caching, bundle hygiene, error logging
+
+START WITH A DIAGNOSTIC (NO CHANGES YET):
+- Print: current node version, package scripts, ports, server entry, routes list
+- Identify: why any endpoints return 404 that tests expect (especially /api/content/formats and /api/content/generate)
+- Identify: why port 5000 gets EADDRINUSE and fix using env PORT + single server instance
+- Identify: why Git push is rejected and propose the safe git commands (pull --rebase then push)
+
+THEN APPLY FIXES IN ORDER (EACH CHANGE MUST INCLUDE):
+- Exact file path
+- Exact code block to paste
+- Why it is safe
+- How to verify (exact command + expected output)
+
+DELIVERABLES:
+A) A “Visual Enhancement Tool” added as a small module:
+   - A config file defining typography scale, spacing scale, radius, shadows
+   - A single source of truth for brand colors
+   - A UI audit checklist + auto-report generator
+B) Admin Dashboard upgrades:
+   - Add a server endpoint /api/admin/insights that returns:
+     * usage counts
+     * mood/behavior pattern summaries
+     * top tools used
+     * error rate
+   - Update dashboard UI to display those metrics with clean charts/cards (no dependency changes unless approved)
+C) Content + Social system:
+   - /api/content/formats (GET) and /api/content/generate (POST)
+   - A daily content generator script (node script) that can output JSON to content_output/
+   - A scheduler stub (manual trigger first) that can later integrate platform APIs
+D) GitHub:
+   - Ensure workflows exist and are green
+   - Ensure CODEOWNERS, SECURITY.md, and minimal issue templates exist (add-only)
+
+STOP AFTER EACH PHASE AND WAIT FOR MY “CONTINUE”.

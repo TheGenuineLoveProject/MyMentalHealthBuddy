@@ -85,7 +85,8 @@ import peakPerformanceRouter from "./routes/peak-performance.mjs";
 import personalGrowthRouter from "./routes/personal-growth.mjs";
 import psychologicalSafetyRouter from "./routes/psychological-safety.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
-
+import { contentRouter } from "./routes/content.mjs";
+app.use("/api/content", contentRouter);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
