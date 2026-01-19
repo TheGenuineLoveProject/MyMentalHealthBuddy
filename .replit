@@ -6,14 +6,26 @@ modules = ["nodejs-20", "postgresql-16"]
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
-run = ["node", "server/index.mjs"]
+run = ["node", "production.mjs"]
 
 [[ports]]
 localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 24678
+localPort = 5099
+externalPort = 3002
+
+[[ports]]
+localPort = 5173
+externalPort = 5173
+
+[[ports]]
+localPort = 5174
+externalPort = 3001
+
+[[ports]]
+localPort = 5175
 externalPort = 3000
 
 [env]
