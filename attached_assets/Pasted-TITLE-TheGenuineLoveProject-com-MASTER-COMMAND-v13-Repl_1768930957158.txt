@@ -1,0 +1,352 @@
+TITLE: TheGenuineLoveProject.com — MASTER COMMAND v13 (Replit Agent)
+POWER MODE: “100th billionth × 100 billionth” intensity expressed as enforceable gates, measurable budgets, and continuous audits.
+SIGNATURE: elite-MIT-Harvard-Yale-Stanford-PhD-level rigor. Zero vague language. Zero duplicate stacks. Always runnable. No deletions without explicit approval.
+PRIMARY EMPHASIS (v13): Visual Refinement A→Z + Styling A→Z + Navigation Integrity A→Z + Content Alignment A→Z.
+
+============================================================
+0) ABSOLUTE RULES (NON-NEGOTIABLE)
+============================================================
+R0.1 NO DELETIONS
+Do not delete/remove files, routes, tables, records, assets, posts, components, or styles unless I explicitly write:
+"APPROVED TO DELETE: <exact list>".
+
+R0.2 NO DUPLICATE IMPLEMENTATIONS
+Extend/refactor existing systems only. No parallel styling systems, no duplicate component libraries, no “v2” folders, no alternate routers/frameworks.
+
+R0.3 ALWAYS RUNNABLE (HARD GATE)
+After every change:
+- app boots in Replit
+- /health returns HTTP 200 JSON:
+  { status:"ok", version, buildTime, commit, uptimeSeconds }
+
+R0.4 NO SHIP PLACEHOLDERS
+If stubbing is unavoidable:
+- mark TODO
+- include completion checklist + acceptance criteria
+- safety/security stubs block release
+
+R0.5 SECURITY + PRIVACY FIRST
+- secrets only in Replit Secrets
+- strict server-side schema validation
+- sanitize UGC on render
+- least privilege (DB, admin actions)
+- user export/delete controls where applicable
+
+R0.6 HEALING SAFETY (NON-CLINICAL)
+Educational/supportive only. No diagnosis/treatment/cure claims.
+Disclaimers + crisis guidance shown where relevant.
+
+R0.7 ORIGINALITY / COPYRIGHT
+Original content only. No plagiarism. No copyrighted passages. No imitation of specific creators.
+Citations as links/refs only.
+
+R0.8 AUDITABILITY
+Every meaningful change updates:
+- /docs/CHANGELOG.md (what/why/risk/verification)
+- exact files touched
+- commands run + results
+
+R0.9 LEGAL-RISK (NOT A LAWYER)
+No unverifiable compliance claims.
+Maintain “NEEDS ATTORNEY REVIEW” checklists for privacy/terms/disclaimers/moderation/email/liability/COI notes.
+
+R0.10 STOP CONDITIONS (ONLY TIMES TO ASK USER)
+Stop and request input only for:
+- deletion approval
+- brand voice samples (3–5 posts you wrote)
+- API keys (social/email/payments)
+- domain/DNS/provider decisions
+- design direction approval ONLY if required (otherwise implement neutral foundation tokens)
+
+============================================================
+1) DEFINITIONS (ANTI-VAGUE; ENFORCEABLE)
+============================================================
+D1 “Perfecting” = translating intent into:
+- explicit deliverables
+- explicit acceptance criteria
+- explicit automated checks (Doctors)
+- explicit budgets (fonts/images/effects)
+- explicit fallback modes
+
+D2 “360° A→Z coverage” = every UI surface must map to:
+- Tokens (color/type/space/radii/shadow/motion)
+- Components (library)
+- Patterns (templates)
+- Assets (icons/images/OG)
+- Effects (micro-interactions)
+- QA (Visual Doctor + Nav Doctor + checklists)
+- Governance (decisions logs + drift detection)
+
+D3 “Navigation integrity” = zero broken internal links, correct route usage, accessible nav, and documented IA.
+
+============================================================
+2) NORTH STAR (VISUAL + UX + SAFETY)
+============================================================
+NS1 Emotional tone: calm clarity + warmth + trust + safety.
+NS2 Cognitive load: predictable patterns, clear hierarchy, whitespace.
+NS3 Neurodivergent support: Low-Stimulation + Reading/Focus + Reduced Motion.
+NS4 Content alignment: copy + layout + visuals are consistent, non-shaming, non-clinical.
+
+============================================================
+3) VISUAL & NAV GOVERNANCE (REINFORCED)
+============================================================
+GOV1 DESIGN DECISIONS LOG (MANDATORY)
+/docs/DESIGN_DECISIONS.md:
+- decision, date, context, options, chosen, consequences, follow-ups
+
+GOV2 IA DECISIONS LOG (MANDATORY)
+/docs/INFORMATION_ARCHITECTURE.md:
+- sitemap, nav structure, user flows, role-based nav
+
+GOV3 DRIFT DETECTOR (BUILD FAIL RULES)
+- raw hex outside token files => FAIL
+- non-scale spacing/typography in components => FAIL
+- mixed icon styles => FAIL
+- broken internal links => FAIL
+- new pages not using templates/components => FAIL review
+
+GOV4 BUDGETS (EXCEPTIONS REQUIRE DOC ENTRY)
+Fonts:
+- max 2 families, max 4 weights total
+Effects:
+- approved micro-interactions only; low-stim disables decorative effects
+Images:
+- next/image preferred; large-asset offenders tracked and reduced
+
+============================================================
+4) DESIGN SYSTEM AS CODE (SINGLE SOURCE OF TRUTH)
+============================================================
+DS0 HARD BANS (ENFORCE)
+- no raw hex colors outside token files
+- no non-scale font sizes/spacing in components
+- no ad-hoc shadows/blurs outside token set
+- no mixed icon systems
+
+DS1 TOKEN ARCHITECTURE (REQUIRED)
+Layer 1: core palette tokens
+Layer 2: semantic tokens (used everywhere):
+- bg, surface-1/2/3
+- text-1/2/3
+- border, ring
+- primary + primary-contrast
+- accent + accent-contrast
+- success/warn/danger (+ contrasts)
+- shadow-1/2/3
+- radius-1/2/3
+- space-1..n
+- motion-fast/med/slow + easing
+
+DS2 TYPOGRAPHY SYSTEM (READABILITY-FIRST)
+Rules:
+- one H1 per page
+- scale tokens only
+- reading surfaces: 60–75 char line length
+- body line-height: 1.55–1.75
+- headings semantic only
+
+DS3 MODES (TOKEN-DRIVEN)
+- Default
+- Low-Stimulation (reduced saturation/effects/chrome)
+- Reading/Focus (constrained width, higher line-height, reduced distractions)
+
+DS4 COMPONENT LIBRARY (MINIMUM)
+Button, Input/Textarea/Select, Card/Panel, Badge/Tag, Alert/Toast, Modal/Drawer,
+Tabs, Dropdown/Menu, Pagination, Skeleton, EmptyState, Avatar, Icon wrapper, Tooltip.
+
+DS5 PATTERN LIBRARY (PAGE TEMPLATES)
+Marketing, Reading, Community Feed, Tool, Admin Dashboard.
+
+ACCEPTANCE (DESIGN SYSTEM):
+- tokens exist + 3 modes work
+- component gallery exists
+- 10 key pages migrated to tokens/components/templates
+- bans checks pass
+
+============================================================
+5) VISUAL REFINEMENT A→Z (ICONS / IMAGES / TYPOGRAPHY / THEMES / EFFECTS / COLORS)
+============================================================
+COLORS:
+- primary = CTAs + key highlights only
+- accent = warmth/delight only
+- warn/danger = only for true warnings/errors/moderation
+- focus ring visible in all modes
+Deliverable: /docs/COLOR_SYSTEM.md
+
+TYPOGRAPHY:
+- scale, line-height, reading width, headings rules
+Deliverable: /docs/TYPOGRAPHY_GUIDE.md
+
+ICONS:
+- choose ONE style (stroke OR filled), no mixing
+- 24x24 grid, consistent padding
+Deliverable: /docs/ICONOGRAPHY_GUIDE.md + /public/icons/*
+
+IMAGES:
+- photos: AVIF/WebP; vectors: SVG
+- next/image usage; responsive sizes
+- consistent radii/shadows via tokens
+Deliverable: /docs/ASSET_PIPELINE.md + asset intake spec/page
+
+THEMES:
+- default / low-stim / reading implemented with tokens
+Deliverable: /docs/DESIGN_SYSTEM.md (theme section)
+
+EFFECTS:
+- micro-interactions only; tokenized; reduced-motion compliant
+Deliverable: /docs/MOTION_AND_EFFECTS.md
+
+============================================================
+6) PLATFORM STYLING OPTIMIZATION A→Z
+============================================================
+STYLE1 Global styling discipline:
+- no inline styles except rare documented exceptions
+- primitives: Container/Section/Stack/Grid/Spacer
+- consistent surfaces: surface-1/2/3 rules
+- consistent text styles: body/heading/caption rules
+- consistent empty/loading/error state components everywhere
+
+STYLE2 State completeness:
+Every component/page must cover:
+- default/hover/focus/active
+- loading/empty/error
+- disabled
+- low-stim + reduced-motion variants
+
+STYLE3 SSR-safe theming:
+- no flash of incorrect theme; document strategy
+- store user preference in profile/preferences_json (or cookie fallback)
+
+============================================================
+7) NAVIGATION LINKS A→Z (FIX + ENFORCE)
+============================================================
+NAV1 CANONICAL NAV MAP
+Create /docs/NAVIGATION_MAP.md:
+- primary nav + destinations
+- secondary nav
+- footer links
+- public vs authenticated nav
+- admin/mod nav differences
+
+NAV2 ROUTE MAP
+Create /docs/ROUTE_MAP.md:
+- enumerate app routes (App Router: app/**/page.tsx)
+- annotate: public/auth/admin/mod + template used
+
+NAV3 LINK AUDIT (AUTOMATED + MANUAL)
+Automated:
+- scan codebase for internal hrefs and route references
+- verify each internal href matches a real route
+Manual:
+- click-through checklist for primary flows
+Deliverables:
+- /docs/NAV_LINK_AUDIT.md (broken links + file paths)
+- /docs/NAVIGATION_QA_CHECKLIST.md
+
+NAV4 NEXT.JS ROUTING CORRECTNESS
+- internal links use <Link>
+- external links use <a rel="noopener noreferrer">
+- aria-current for active nav
+- focus management documented
+
+NAV5 404 + REDIRECT STRATEGY
+- custom 404 page with calm copy + key destinations
+- if routes change: document redirects plan (no silent breaking)
+
+============================================================
+8) CONTENT ALIGNMENT A→Z (VISUAL + COPY)
+============================================================
+CA1 Brand voice matches visuals:
+- calm, direct, empowering, non-shaming, non-clinical
+
+CA2 Microcopy system:
+Standardize:
+- button labels
+- validation messages
+- empty states
+- moderation notices
+- disclaimer blocks
+
+CA3 Layout specs by content type:
+- blog/library: reading mode defaults, callouts, checklists, pull quotes
+- feed: scannable cards, clear CTAs, safe prompts
+- tools: step-by-step flows, gentle progress cues
+
+Deliverables:
+- /docs/BRAND_VOICE.md
+- /docs/MICROCOPY_SYSTEM.md
+- reusable UI components: DisclaimerCallout, GentleError, EmptyState
+
+============================================================
+9) DOCTORS (HARD GATES — MUST PASS)
+============================================================
+COMMAND: RUN VISUAL DOCTOR (FAIL ON VIOLATIONS)
+1) token enforcement: raw hex outside tokens => FAIL
+2) scale enforcement: non-scale spacing/type in components => FAIL
+3) icon enforcement: mixed icon styles => FAIL
+4) image audit: list top offenders + fix plan
+5) outputs:
+   /docs/VISUAL_DIFF_PLAN.md
+   /docs/VISUAL_QA_CHECKLIST.md
+   /docs/ACCESSIBILITY.md
+   /docs/DESIGN_DECISIONS.md (if decisions)
+
+COMMAND: RUN NAV DOCTOR (FAIL ON BROKEN INTERNAL LINKS)
+1) generate route map
+2) scan internal links/route strings
+3) verify each href resolves
+4) verify primary+footer nav targets exist
+5) output:
+   /docs/ROUTE_MAP.md
+   /docs/NAVIGATION_MAP.md
+   /docs/NAV_LINK_AUDIT.md
+6) FAIL if any broken internal link exists (unless feature-flagged + documented)
+
+============================================================
+10) PHASED EXECUTION (STRICT ORDER + VISUAL/NAV TRACKS)
+============================================================
+PHASE 1 must be GREEN before migration:
+- repo inventory
+- docs created/updated
+- /health implemented
+- runtime errors fixed
+
+VISUAL TRACK:
+A) Foundation (tokens/modes/components/gallery + Visual Doctor)
+B) Migration (global chrome → key pages)
+C) Assets (icons/OG/asset intake)
+D) Effects + QA (polish + checklists)
+
+NAV TRACK:
+A) Map (IA + nav map + route map)
+B) Audit (automated + manual)
+C) Fix (repair links, add 404, redirects plan)
+D) Enforce (Nav Doctor in ops)
+
+============================================================
+11) TEAM ORCHESTRATION (MANDATORY OUTPUT FORMAT)
+============================================================
+Every response MUST include:
+A) Current Phase + Step #
+B) TL Summary
+C) Role Outputs (TL/FE/BE/QA/SEC/DESIGN/SEO/CONTENT/MOD/DEVOPS/CRM/LEGAL-RISK)
+D) Files Changed
+E) Commands to Run
+F) Verification Results
+G) Next Steps Checklist
+H) Deletion Candidates (WAIT FOR APPROVAL)
+
+============================================================
+12) START NOW (MANDATORY)
+============================================================
+PHASE 1 STEP 1:
+- Generate/update /docs/* first (no placeholders), including:
+  DESIGN_SYSTEM, COLOR_SYSTEM, TYPOGRAPHY_GUIDE, ICONOGRAPHY_GUIDE, ASSET_PIPELINE,
+  MOTION_AND_EFFECTS, BRAND_VOICE, MICROCOPY_SYSTEM, ACCESSIBILITY,
+  VISUAL_QA_CHECKLIST, VISUAL_DIFF_PLAN, DESIGN_DECISIONS,
+  INFORMATION_ARCHITECTURE, NAVIGATION_MAP, ROUTE_MAP, NAVIGATION_QA_CHECKLIST, NAV_LINK_AUDIT.
+- Produce repo inventory (routes/components/db/jobs/scripts).
+- Add /health and verify it responds in Replit.
+- Fix boot/runtime errors.
+- Update /docs/CHANGELOG.md with files touched + verification commands.
+
+END MASTER COMMAND v13

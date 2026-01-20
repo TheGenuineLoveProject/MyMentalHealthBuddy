@@ -113,7 +113,7 @@ const TOOL_CATEGORIES = {
       { id: "sleep", name: "Sleep Tracker", icon: Bed, color: "from-indigo-400 to-purple-500" },
       { id: "stress", name: "Stress Monitor", icon: Activity, color: "from-blue-400 to-indigo-500" },
       { id: "reflection", name: "Weekly Reflection", icon: Calendar, color: "from-blue-400 to-indigo-500" },
-      { id: "worry", name: "Worry Time", icon: Clock, color: "from-slate-400 to-gray-500" },
+      { id: "worry", name: "Worry Time", icon: Clock, color: "from-sage-400 to-sage-500" },
       { id: "streaks", name: "Wellness Streaks", icon: Flame, color: "from-orange-400 to-amber-500" },
       { id: "challenges", name: "Challenges", icon: Target, color: "from-emerald-400 to-teal-500" },
       { id: "focus", name: "Focus Timer", icon: Timer, color: "from-rose-400 to-orange-500" },
