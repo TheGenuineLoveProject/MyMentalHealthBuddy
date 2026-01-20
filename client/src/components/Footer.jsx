@@ -1,6 +1,6 @@
 import { DISCLAIMERS_COPY } from "../copy/disclaimers";
-import React from "react";
 import { BRAND } from "@shared/brand.mjs";
+import { Link } from "wouter";
 
 export default function Footer() {
   return (
@@ -15,9 +15,9 @@ export default function Footer() {
           <div style={{ opacity: 0.75 }}>{BRAND.tagline}</div>
         </div>
         <div style={{ display: "flex", gap: 12 }}>
-          <a href="/legal/privacy">Privacy</a>
-          <a href="/legal/terms">Terms</a>
-          <a href="/legal/disclaimer">Disclaimer</a>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
+          <Link to="/disclaimer">Disclaimer</Link>
         </div>
       </div>
     </footer>

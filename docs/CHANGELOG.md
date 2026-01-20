@@ -19,6 +19,10 @@ All notable changes to The Genuine Love Project are documented in this file.
 ### Fixed
 - Removed all gray colors from page components
 - Standardized icon usage to Lucide React
+- Fixed broken footer navigation links (`/legal/*` → correct paths)
+- Updated SiteFooter.tsx to use Wouter instead of react-router-dom
+- Updated Footer.jsx to use Wouter Link components
+- Added `/health` endpoint with v14-compliant JSON response
 
 ---
 
