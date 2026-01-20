@@ -104,18 +104,18 @@ export default function Dashboard() {
         title="Dashboard"
         description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with The Genuine Love Project."
       />
-      <div className="min-h-screen p-6 bg-gradient-mesh">
+      <div className="min-h-screen p-6 hero-gradient">
         <div className="max-w-5xl mx-auto">
           <header className="flex items-start justify-between mb-8">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-[var(--gradient-focus)] flex items-center justify-center shadow-lg animate-pulse-glow">
-                <GreetingIcon className={`w-7 h-7 text-white`} aria-hidden="true" />
+              <div className="icon-container icon-xl icon-gradient-sage">
+                <GreetingIcon className="w-7 h-7" aria-hidden="true" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold tracking-tight" data-testid="text-greeting">
+                <h1 className="text-display-lg text-teal" data-testid="text-greeting">
                   {greeting.text}, {user?.email?.split("@")[0] || "Friend"}
                 </h1>
-                <p className="text-[var(--text-secondary)] mt-1">Here's your wellness overview</p>
+                <p className="text-lead">Here's your wellness overview</p>
               </div>
             </div>
             <div className="flex items-center gap-2">

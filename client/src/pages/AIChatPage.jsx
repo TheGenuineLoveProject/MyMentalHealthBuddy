@@ -86,21 +86,21 @@ export default function AIChatPage() {
         title="AI Chat"
         description="Chat with your AI wellness companion. Get compassionate support and guidance for your mental health journey."
       />
-      <div className="min-h-screen flex flex-col bg-gradient-mesh">
-        {/* Header */}
-        <header className="flex items-center gap-4 p-4 border-b border-[var(--border)] bg-[var(--bg)]/80 backdrop-blur-xl sticky top-0 z-10">
+      <div className="min-h-screen flex flex-col hero-gradient">
+        <header className="flex items-center gap-4 p-4 border-b border-[var(--sage-200)] bg-white/80 backdrop-blur-xl sticky top-0 z-10">
           <Link 
             href="/dashboard" 
-            className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition" 
             data-testid="link-back" 
             aria-label="Back to dashboard"
           >
-            <ArrowLeft className="w-5 h-5" aria-hidden="true" />
+            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+            Back
           </Link>
           
           <div className="flex items-center gap-3 flex-1">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--accent-teal)] to-teal-600 flex items-center justify-center shadow-lg" aria-hidden="true">
-              <Bot className="w-6 h-6 text-white" />
+            <div className="icon-container icon-lg icon-gradient-teal" aria-hidden="true">
+              <Bot className="w-6 h-6" />
             </div>
             <div>
               <h1 className="font-semibold flex items-center gap-2" data-testid="text-title">

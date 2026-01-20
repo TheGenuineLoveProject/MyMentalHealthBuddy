@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { ArrowLeft, CheckCircle, XCircle, Loader2 } from "lucide-react";
+import { ArrowLeft, CheckCircle, XCircle, Loader2, Activity } from "lucide-react";
+import SEO from "../components/SEO";
 
 export default function HealthPage() {
   const { data, isLoading, error } = useQuery({
@@ -8,38 +9,71 @@ export default function HealthPage() {
   });
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
-      <div className="max-w-lg mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-          <Link href="/" className="text-neutral-400 hover:text-white transition" data-testid="link-back">
-            <ArrowLeft className="w-6 h-6" />
-          </Link>
-          <h1 className="text-3xl font-bold" data-testid="text-title">Health Check</h1>
-        </div>
-
-        <div className="bg-neutral-800 rounded-xl p-6" data-testid="section-health">
-          {isLoading ? (
-            <div className="flex items-center justify-center py-8">
-              <Loader2 className="w-8 h-8 animate-spin text-blue-400" />
-            </div>
-          ) : error ? (
-            <div className="flex items-center gap-3 text-red-400">
-              <XCircle className="w-6 h-6" />
-              <span>Health check failed</span>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <CheckCircle className="w-6 h-6 text-green-400" />
-                <span className="text-lg font-medium">System Status: {data?.status || "Unknown"}</span>
+    <>
+      <SEO 
+        title="Health Check - The Genuine Love Project"
+        description="System health status and diagnostics."
+      />
+      <div className="min-h-screen hero-gradient p-6">
+        <div className="max-w-lg mx-auto">
+          <header className="mb-8">
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition mb-6" 
+              data-testid="link-back"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
+            </Link>
+            <div className="flex items-center gap-4">
+              <div className="icon-container icon-lg icon-gradient-sage">
+                <Activity className="w-6 h-6" />
               </div>
-              <pre className="p-4 bg-neutral-900 rounded-lg text-sm overflow-x-auto" data-testid="text-health-data">
-                {JSON.stringify(data, null, 2)}
-              </pre>
+              <div>
+                <h1 className="text-heading-xl text-teal" data-testid="text-title">Health Check</h1>
+                <p className="text-body-sm">System status and diagnostics</p>
+              </div>
             </div>
-          )}
+          </header>
+
+          <div className="card-bordered" data-testid="section-health">
+            {isLoading ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <div className="icon-container icon-lg icon-soft-teal mb-4">
+                  <Loader2 className="w-6 h-6 animate-spin" />
+                </div>
+                <p className="text-body-sm">Checking system health...</p>
+              </div>
+            ) : error ? (
+              <div className="flex flex-col items-center justify-center py-12">
+                <div className="icon-container icon-lg icon-soft-blush mb-4">
+                  <XCircle className="w-6 h-6" />
+                </div>
+                <p className="text-heading-sm text-[var(--blush-600)]">Health check failed</p>
+                <p className="text-body-sm mt-2">{error.message || "Unable to connect to server"}</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 p-4 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)]">
+                  <div className="icon-container icon-md icon-soft-sage">
+                    <CheckCircle className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-heading-sm text-teal">System Status</p>
+                    <p className="text-body-sm text-[var(--sage-600)]">{data?.status || "Unknown"}</p>
+                  </div>
+                </div>
+                <div className="p-4 bg-[var(--sage-50)] rounded-xl border border-[var(--sage-200)]">
+                  <p className="text-eyebrow text-[var(--sage-500)] mb-2">Raw Response</p>
+                  <pre className="text-caption font-mono overflow-x-auto" data-testid="text-health-data">
+                    {JSON.stringify(data, null, 2)}
+                  </pre>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

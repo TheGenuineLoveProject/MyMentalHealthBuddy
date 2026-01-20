@@ -35,13 +35,13 @@ export default function Admin() {
 
   if (user?.role !== "admin") {
     return (
-      <div className="min-h-screen bg-gradient-mesh flex items-center justify-center p-6">
+      <div className="min-h-screen hero-gradient flex items-center justify-center p-6">
         <SEO title="Access Denied" description="Admin access required" />
-        <div className="card-elevated max-w-md text-center p-8">
-          <div className="icon-container icon-lg icon-blush mx-auto mb-4">
+        <div className="card-bordered max-w-md text-center p-8">
+          <div className="icon-container icon-lg icon-soft-blush mx-auto mb-4">
             <Shield className="w-8 h-8" />
           </div>
-          <h2 className="text-heading-lg text-[#2D3748] mb-2">Access Denied</h2>
+          <h2 className="text-heading-lg text-teal mb-2">Access Denied</h2>
           <p className="text-body-sm">You must be an administrator to view this page.</p>
         </div>
       </div>
@@ -49,16 +49,21 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-mesh p-6">
+    <div className="min-h-screen hero-gradient p-6">
       <SEO title="Admin Dashboard" description="Platform administration and metrics" />
       
       <div className="content-wrapper">
         <header className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-heading-xl text-[#2D3748] mb-1" data-testid="text-admin-title">
-              Admin Dashboard
-            </h1>
-            <p className="text-body-sm">Platform metrics and system health</p>
+          <div className="flex items-center gap-4">
+            <div className="icon-container icon-xl icon-gradient-sage">
+              <Shield className="w-7 h-7" />
+            </div>
+            <div>
+              <h1 className="text-display-lg text-teal" data-testid="text-admin-title">
+                Admin Dashboard
+              </h1>
+              <p className="text-lead">Platform metrics and system health</p>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             <button

@@ -87,21 +87,26 @@ export default function MoodPage() {
         title="Log Mood"
         description="Track your emotional state and well-being. Log your daily mood, select emotions, and note activities that affect how you feel."
       />
-      <div className="min-h-screen p-6 bg-gradient-mesh">
+      <div className="min-h-screen p-6 hero-gradient">
         <div className="max-w-lg mx-auto">
-          {/* Header */}
-          <header className="flex items-center gap-4 mb-8">
+          <header className="mb-8">
             <Link 
               href="/dashboard" 
-              className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+              className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition mb-6" 
               data-testid="link-back" 
               aria-label="Back to dashboard"
             >
-              <ArrowLeft className="w-5 h-5" aria-hidden="true" />
+              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+              Back to Dashboard
             </Link>
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight" data-testid="text-title">Track Your Mood</h1>
-              <p className="text-[var(--text-secondary)] text-sm mt-1">How are you feeling right now?</p>
+            <div className="flex items-center gap-4">
+              <div className="icon-container icon-lg icon-gradient-blush">
+                <Smile className="w-6 h-6" aria-hidden="true" />
+              </div>
+              <div>
+                <h1 className="text-heading-xl text-teal" data-testid="text-title">Track Your Mood</h1>
+                <p className="text-body-sm">How are you feeling right now?</p>
+              </div>
             </div>
           </header>
 

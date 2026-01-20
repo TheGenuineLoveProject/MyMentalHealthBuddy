@@ -14,26 +14,34 @@ const DIMENSION_INFO = [
 
 export default function StatePage() {
   return (
-    <div className="min-h-screen bg-[var(--glp-paper)]">
+    <div className="min-h-screen hero-gradient">
       <SEO 
         title="State Check-in — The Genuine Love Project" 
         description="Notice your current state without judgment. Track energy, clarity, openness, regulation, presence, and pace."
       />
 
       <div className="mx-auto max-w-xl px-6 py-8">
-        <nav className="mb-8">
+        <header className="mb-8">
           <Link 
             href="/dashboard" 
-            className="inline-flex items-center gap-2 text-sm text-[var(--glp-ink)]/50 hover:text-[var(--glp-ink)] transition-colors"
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition mb-6"
             data-testid="link-back-dashboard"
           >
             <ArrowLeft className="w-4 h-4" />
-            Dashboard
+            Back to Dashboard
           </Link>
-        </nav>
+          <div className="flex items-center gap-4">
+            <div className="icon-container icon-lg icon-gradient-teal">
+              <Info className="w-6 h-6" />
+            </div>
+            <div>
+              <h1 className="text-heading-xl text-teal">State Check-in</h1>
+              <p className="text-body-sm">Notice your current state without judgment</p>
+            </div>
+          </div>
+        </header>
 
-        {/* Info panel */}
-        <div className="mb-6 p-4 rounded-xl bg-[var(--glp-sage)]/10 border border-[var(--glp-sage)]/20">
+        <div className="mb-6 p-4 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)]">
           <div className="flex items-start gap-3">
             <Info className="w-4 h-4 text-[var(--glp-sage-deep)] mt-0.5 flex-shrink-0" />
             <div>
