@@ -364,6 +364,7 @@ export default function WisdomSynthesisPage() {
             )}
           </div>
         </div>
+        </div>
       </div>
     </div>
   );
