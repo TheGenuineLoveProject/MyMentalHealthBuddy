@@ -118,31 +118,36 @@ export default function AdaptiveCompanionPage() {
   const TimeIcon = state.time === "morning" ? Sun : state.time === "night" ? Moon : Clock;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-3xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-3xl mx-auto">
         <header className="text-center mb-10">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Sparkles className="h-10 w-10 text-violet-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400 bg-clip-text text-transparent" data-testid="text-companion-title">
-              Adaptive Companion
-            </h1>
+            <div className="icon-container icon-xl icon-gradient-blush">
+              <Sparkles className="h-8 w-8" />
+            </div>
           </div>
-          <p className="text-lg opacity-70 max-w-2xl mx-auto" data-testid="text-companion-subtitle">
+          <h1 className="text-display-lg text-teal mb-4" data-testid="text-companion-title">
+            Adaptive Companion
+          </h1>
+          <p className="text-lead max-w-2xl mx-auto" data-testid="text-companion-subtitle">
             Tell me how you're feeling, and I'll suggest tools that might serve you right now.
           </p>
         </header>
 
         {!showRecommendations ? (
           <div className="space-y-8">
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+            <div className="card-bordered">
               <div className="flex items-center gap-2 mb-4">
-                <TimeIcon className="h-5 w-5 text-amber-400" />
-                <span className="text-sm opacity-60">Good {state.time}!</span>
+                <div className="icon-container icon-sm icon-soft-gold">
+                  <TimeIcon className="h-4 w-4" />
+                </div>
+                <span className="text-body-sm">Good {state.time}!</span>
               </div>
 
               <div className="space-y-6">
-                <div>
-                  <label className="text-sm font-medium mb-3 block">How's your energy?</label>
+                <div className="form-group">
+                  <label className="form-label">How's your energy?</label>
                   <div className="grid grid-cols-3 gap-2">
                     {[
                       { id: "low", label: "Low", emoji: "🌙" },
@@ -154,20 +159,20 @@ export default function AdaptiveCompanionPage() {
                         onClick={() => updateState("energy", opt.id as any)}
                         className={`p-3 rounded-xl transition-all ${
                           state.energy === opt.id
-                            ? "bg-violet-500/30 border-violet-500/50"
-                            : "bg-white/5 border-white/10 hover:bg-white/10"
+                            ? "bg-[var(--sage-100)] border-[var(--sage-500)]"
+                            : "bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]"
                         } border`}
                         data-testid={`button-energy-${opt.id}`}
                       >
                         <span className="text-lg">{opt.emoji}</span>
-                        <span className="block text-xs mt-1">{opt.label}</span>
+                        <span className="block text-caption mt-1">{opt.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium mb-3 block">Mental clarity?</label>
+                <div className="form-group">
+                  <label className="form-label">Mental clarity?</label>
                   <div className="grid grid-cols-3 gap-2">
                     {[
                       { id: "foggy", label: "Foggy", emoji: "🌫️" },
@@ -179,20 +184,20 @@ export default function AdaptiveCompanionPage() {
                         onClick={() => updateState("clarity", opt.id as any)}
                         className={`p-3 rounded-xl transition-all ${
                           state.clarity === opt.id
-                            ? "bg-violet-500/30 border-violet-500/50"
-                            : "bg-white/5 border-white/10 hover:bg-white/10"
+                            ? "bg-[var(--teal-50)] border-[var(--teal-500)]"
+                            : "bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]"
                         } border`}
                         data-testid={`button-clarity-${opt.id}`}
                       >
                         <span className="text-lg">{opt.emoji}</span>
-                        <span className="block text-xs mt-1">{opt.label}</span>
+                        <span className="block text-caption mt-1">{opt.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium mb-3 block">Emotional tone?</label>
+                <div className="form-group">
+                  <label className="form-label">Emotional tone?</label>
                   <div className="grid grid-cols-3 gap-2">
                     {[
                       { id: "heavy", label: "Heavy", emoji: "🌧️" },
@@ -204,20 +209,20 @@ export default function AdaptiveCompanionPage() {
                         onClick={() => updateState("mood", opt.id as any)}
                         className={`p-3 rounded-xl transition-all ${
                           state.mood === opt.id
-                            ? "bg-violet-500/30 border-violet-500/50"
-                            : "bg-white/5 border-white/10 hover:bg-white/10"
+                            ? "bg-[var(--blush-50)] border-[var(--blush-500)]"
+                            : "bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]"
                         } border`}
                         data-testid={`button-mood-${opt.id}`}
                       >
                         <span className="text-lg">{opt.emoji}</span>
-                        <span className="block text-xs mt-1">{opt.label}</span>
+                        <span className="block text-caption mt-1">{opt.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="text-sm font-medium mb-3 block">What would you like to focus on?</label>
+                <div className="form-group">
+                  <label className="form-label">What would you like to focus on?</label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                     {GOALS.map(goal => (
                       <button
@@ -225,13 +230,13 @@ export default function AdaptiveCompanionPage() {
                         onClick={() => updateState("goal", state.goal === goal.id ? null : goal.id)}
                         className={`p-3 rounded-xl transition-all text-left ${
                           state.goal === goal.id
-                            ? "bg-violet-500/30 border-violet-500/50"
-                            : "bg-white/5 border-white/10 hover:bg-white/10"
+                            ? "bg-[var(--gold-50)] border-[var(--gold-500)]"
+                            : "bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]"
                         } border`}
                         data-testid={`button-goal-${goal.id}`}
                       >
-                        <goal.icon className="h-4 w-4 mb-1 opacity-60" />
-                        <span className="text-xs">{goal.label}</span>
+                        <goal.icon className="h-4 w-4 mb-1 text-[var(--sage-500)]" />
+                        <span className="text-caption">{goal.label}</span>
                       </button>
                     ))}
                   </div>
@@ -241,7 +246,7 @@ export default function AdaptiveCompanionPage() {
 
             <button
               onClick={generateRecommendations}
-              className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 transition-all flex items-center justify-center gap-2 text-lg font-medium"
+              className="btn-premium w-full py-4 text-lg flex items-center justify-center gap-2"
               data-testid="button-get-recommendations"
             >
               <Sparkles className="h-5 w-5" />
@@ -316,10 +321,11 @@ export default function AdaptiveCompanionPage() {
         )}
 
         <div className="mt-12 text-center">
-          <p className="text-xs opacity-40 max-w-md mx-auto">
+          <p className="text-caption max-w-md mx-auto">
             These suggestions are offerings based on what you've shared.
             Trust your intuition—you know what you need.
           </p>
+        </div>
         </div>
       </div>
     </div>

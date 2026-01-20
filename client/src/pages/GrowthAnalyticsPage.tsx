@@ -166,50 +166,61 @@ export default function GrowthAnalyticsPage() {
   const nextMilestone = milestones.find(m => !m.achieved) || milestones[milestones.length - 1];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-5xl mx-auto">
         <header className="mb-8">
-          <Link href="/atlas" className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
+          <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
             <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
           <div className="flex items-center gap-3 mb-2">
-            <TrendingUp className="h-10 w-10 text-emerald-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent" data-testid="text-analytics-title">
+            <div className="icon-container icon-xl icon-gradient-sage">
+              <TrendingUp className="h-8 w-8" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-analytics-title">
               Growth Analytics
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead">
             Track your intellectual growth journey. See progress across all tool categories.
           </p>
         </header>
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10 text-center">
-            <BarChart3 className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
-            <div className="text-3xl font-bold" data-testid="text-total-activities">{aggregated.total}</div>
-            <p className="text-xs opacity-50">Total Data Points</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-sage mx-auto mb-2">
+              <BarChart3 className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-total-activities">{aggregated.total}</div>
+            <p className="text-caption">Total Data Points</p>
           </div>
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Flame className="h-6 w-6 mx-auto mb-2 text-orange-400" />
-            <div className="text-3xl font-bold" data-testid="text-streak">{data.currentStreak || 0}</div>
-            <p className="text-xs opacity-50">Day Streak</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-2">
+              <Flame className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-streak">{data.currentStreak || 0}</div>
+            <p className="text-caption">Day Streak</p>
           </div>
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Award className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-3xl font-bold" data-testid="text-milestones">{milestones.filter(m => m.achieved).length}</div>
-            <p className="text-xs opacity-50">Milestones Achieved</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-2">
+              <Award className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-milestones">{milestones.filter(m => m.achieved).length}</div>
+            <p className="text-caption">Milestones Achieved</p>
           </div>
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Star className="h-6 w-6 mx-auto mb-2 text-yellow-400" />
-            <div className="text-3xl font-bold" data-testid="text-categories">{Object.values(aggregated.categories).filter(v => v > 0).length}</div>
-            <p className="text-xs opacity-50">Active Categories</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-teal mx-auto mb-2">
+              <Star className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-categories">{Object.values(aggregated.categories).filter(v => v > 0).length}</div>
+            <p className="text-caption">Active Categories</p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Activity className="h-5 w-5" /> Category Progress
+          <div className="card-bordered">
+            <h3 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+              <Activity className="h-5 w-5 text-[var(--sage-500)]" /> Category Progress
             </h3>
             <div className="space-y-4">
               {Object.entries(TOOL_CATEGORIES).map(([category, config]) => {
@@ -313,9 +324,10 @@ export default function GrowthAnalyticsPage() {
         </div>
 
         <div className="text-center">
-          <p className="text-xs opacity-40 max-w-md mx-auto">
+          <p className="text-caption max-w-md mx-auto">
             Growth is not linear. Every interaction with these tools contributes to your intellectual development.
           </p>
+        </div>
         </div>
       </div>
     </div>

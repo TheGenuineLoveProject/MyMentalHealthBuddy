@@ -155,20 +155,25 @@ export default function StudyVaultPage() {
   const activeTopic = RESEARCH_TOPICS.find(t => t.id === selectedTopic);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link href="/dashboard">
-            <Button variant="ghost" size="icon" data-testid="button-back">
+            <Button variant="ghost" size="icon" className="text-[var(--sage-500)] hover:text-[var(--teal-600)]" data-testid="button-back">
               <ChevronLeft className="w-5 h-5" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold flex items-center gap-3" data-testid="text-page-title">
-              <BookOpen className="w-8 h-8 text-primary" />
-              Study Vault
-            </h1>
-            <p className="text-muted-foreground">Evidence-based summaries for your healing journey</p>
+            <div className="flex items-center gap-3 mb-1">
+              <div className="icon-container icon-lg icon-gradient-sage">
+                <BookOpen className="w-6 h-6" />
+              </div>
+              <h1 className="text-display-lg text-teal" data-testid="text-page-title">
+                Study Vault
+              </h1>
+            </div>
+            <p className="text-lead">Evidence-based summaries for your healing journey</p>
           </div>
         </div>
 
@@ -300,6 +305,7 @@ export default function StudyVaultPage() {
             </Card>
           </TabsContent>
         </Tabs>
+        </div>
       </div>
     </div>
   );

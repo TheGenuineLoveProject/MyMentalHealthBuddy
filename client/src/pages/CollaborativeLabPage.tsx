@@ -192,22 +192,25 @@ export default function CollaborativeLabPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-4xl mx-auto">
         <header className="text-center mb-8">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Users className="h-10 w-10 text-rose-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-rose-400 via-pink-400 to-purple-400 bg-clip-text text-transparent" data-testid="text-lab-title">
-              Collaborative Intelligence Lab
-            </h1>
+            <div className="icon-container icon-xl icon-gradient-blush">
+              <Users className="h-8 w-8" />
+            </div>
           </div>
-          <p className="text-lg opacity-70 max-w-2xl mx-auto" data-testid="text-lab-subtitle">
+          <h1 className="text-display-lg text-teal mb-4" data-testid="text-lab-title">
+            Collaborative Intelligence Lab
+          </h1>
+          <p className="text-lead max-w-2xl mx-auto" data-testid="text-lab-subtitle">
             A sanctuary for anonymous reflection and shared wisdom.
             Connect through insights, not identities.
           </p>
         </header>
 
-        <div className="flex items-center justify-center gap-4 p-2 rounded-xl bg-white/5 mb-8">
+        <div className="flex items-center justify-center gap-4 p-2 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)] mb-8">
           {[
             { id: "explore", label: "Explore", icon: Sparkles },
             { id: "share", label: "Share", icon: MessageCircle },
@@ -217,7 +220,7 @@ export default function CollaborativeLabPage() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-                activeTab === tab.id ? "bg-white/10" : "hover:bg-white/5"
+                activeTab === tab.id ? "bg-white shadow-sm text-[var(--teal-700)]" : "hover:bg-white/50 text-[var(--sage-600)]"
               }`}
               data-testid={`tab-${tab.id}`}
             >
@@ -422,10 +425,11 @@ export default function CollaborativeLabPage() {
         )}
 
         <div className="mt-12 text-center">
-          <p className="text-xs opacity-40 max-w-md mx-auto">
+          <p className="text-caption max-w-md mx-auto">
             This space honors the courage it takes to reflect honestly.
             Every insight shared adds to our collective wisdom.
           </p>
+        </div>
         </div>
       </div>
     </div>

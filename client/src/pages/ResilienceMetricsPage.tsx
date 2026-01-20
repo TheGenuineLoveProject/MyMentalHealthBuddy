@@ -148,16 +148,19 @@ export default function ResilienceMetricsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-5xl mx-auto">
         <header className="text-center mb-10">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <TrendingUp className="h-10 w-10 text-emerald-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent" data-testid="text-resilience-title">
-              Resilience Metrics
-            </h1>
+            <div className="icon-container icon-xl icon-gradient-sage">
+              <TrendingUp className="h-8 w-8" />
+            </div>
           </div>
-          <p className="text-lg opacity-70 max-w-2xl mx-auto" data-testid="text-resilience-subtitle">
+          <h1 className="text-display-lg text-teal mb-4" data-testid="text-resilience-title">
+            Resilience Metrics
+          </h1>
+          <p className="text-lead max-w-2xl mx-auto" data-testid="text-resilience-subtitle">
             Track your growth across all dimensions. These metrics reflect your journey,
             not a destination.
           </p>
@@ -173,7 +176,7 @@ export default function ResilienceMetricsPage() {
               key={view.id}
               onClick={() => setActiveView(view.id as any)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-                activeView === view.id ? "bg-white/10" : "hover:bg-white/5"
+                activeView === view.id ? "bg-[var(--sage-100)] text-[var(--teal-700)]" : "hover:bg-[var(--sage-50)] text-[var(--sage-600)]"
               }`}
               data-testid={`tab-${view.id}`}
             >
@@ -186,40 +189,48 @@ export default function ResilienceMetricsPage() {
         {activeView === "overview" && (
           <div className="space-y-6">
             <div className="grid md:grid-cols-4 gap-4">
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30">
+              <div className="card-bordered bg-[var(--sage-50)]">
                 <div className="flex items-center gap-2 mb-2">
-                  <TrendingUp className="h-5 w-5 text-emerald-400" />
-                  <span className="text-sm opacity-60">Overall Score</span>
+                  <div className="icon-container icon-sm icon-soft-sage">
+                    <TrendingUp className="h-4 w-4" />
+                  </div>
+                  <span className="text-body-sm">Overall Score</span>
                 </div>
-                <div className="text-4xl font-bold" data-testid="text-overall-score">{overallScore}</div>
-                <p className="text-xs opacity-50 mt-1">Out of 100</p>
+                <div className="text-display-sm text-teal" data-testid="text-overall-score">{overallScore}</div>
+                <p className="text-caption mt-1">Out of 100</p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="card-bordered">
                 <div className="flex items-center gap-2 mb-2">
-                  <Flame className="h-5 w-5 text-orange-400" />
-                  <span className="text-sm opacity-60">Current Streak</span>
+                  <div className="icon-container icon-sm icon-soft-gold">
+                    <Flame className="h-4 w-4" />
+                  </div>
+                  <span className="text-body-sm">Current Streak</span>
                 </div>
-                <div className="text-4xl font-bold" data-testid="text-current-streak">{profile.currentStreak}</div>
-                <p className="text-xs opacity-50 mt-1">Days active</p>
+                <div className="text-display-sm text-teal" data-testid="text-current-streak">{profile.currentStreak}</div>
+                <p className="text-caption mt-1">Days active</p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="card-bordered">
                 <div className="flex items-center gap-2 mb-2">
-                  <Target className="h-5 w-5 text-purple-400" />
-                  <span className="text-sm opacity-60">Tools Used</span>
+                  <div className="icon-container icon-sm icon-soft-blush">
+                    <Target className="h-4 w-4" />
+                  </div>
+                  <span className="text-body-sm">Tools Used</span>
                 </div>
-                <div className="text-4xl font-bold" data-testid="text-tools-used">{profile.totalToolsUsed}</div>
-                <p className="text-xs opacity-50 mt-1">Of 37 available</p>
+                <div className="text-display-sm text-teal" data-testid="text-tools-used">{profile.totalToolsUsed}</div>
+                <p className="text-caption mt-1">Of 37 available</p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="card-bordered">
                 <div className="flex items-center gap-2 mb-2">
-                  <Calendar className="h-5 w-5 text-blue-400" />
-                  <span className="text-sm opacity-60">Weekly Reflections</span>
+                  <div className="icon-container icon-sm icon-soft-teal">
+                    <Calendar className="h-4 w-4" />
+                  </div>
+                  <span className="text-body-sm">Weekly Reflections</span>
                 </div>
-                <div className="text-4xl font-bold" data-testid="text-weekly-reflections">{profile.weeklyReflections}</div>
-                <p className="text-xs opacity-50 mt-1">This month</p>
+                <div className="text-display-sm text-teal" data-testid="text-weekly-reflections">{profile.weeklyReflections}</div>
+                <p className="text-caption mt-1">This month</p>
               </div>
             </div>
 
@@ -364,10 +375,11 @@ export default function ResilienceMetricsPage() {
         </div>
 
         <div className="mt-8 text-center">
-          <p className="text-xs opacity-40 max-w-md mx-auto">
+          <p className="text-caption max-w-md mx-auto">
             These metrics are invitations for reflection, not grades. Your growth is unique,
             non-linear, and always valid.
           </p>
+        </div>
         </div>
       </div>
     </div>

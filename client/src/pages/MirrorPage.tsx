@@ -82,45 +82,49 @@ export default function MirrorPage() {
   const renderInsightCard = (card: InsightCard) => (
     <Card 
       key={card.id} 
-      className="border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm"
+      className="card-bordered"
       data-testid={`card-insight-${card.id}`}
     >
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-2">
-          <CardTitle className="text-sm font-medium text-white/90">
+          <CardTitle className="text-heading-sm text-teal">
             {card.title}
           </CardTitle>
-          <Badge variant="outline" className="text-xs border-white/20 text-white/70">
+          <Badge variant="outline" className="text-xs border-[var(--sage-300)] text-[var(--sage-600)]">
             {card.badge}
           </Badge>
         </div>
         {card.subtitle && (
-          <p className="text-xs text-white/50">{card.subtitle}</p>
+          <p className="text-caption">{card.subtitle}</p>
         )}
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-white/80 leading-relaxed">{card.body}</p>
+        <p className="text-body-sm leading-relaxed">{card.body}</p>
         {card.cta && (
-          <p className="mt-3 text-xs text-white/50 italic">→ {card.cta}</p>
+          <p className="mt-3 text-caption italic text-[var(--sage-500)]">→ {card.cta}</p>
         )}
       </CardContent>
     </Card>
   );
 
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 py-8 space-y-8">
+    <main className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="mx-auto w-full max-w-4xl space-y-8">
       <header className="text-center space-y-2">
-        <h1 className="text-3xl font-semibold text-white/90 flex items-center justify-center gap-2">
-          <Sparkles className="w-7 h-7 text-amber-400" />
+        <div className="icon-container icon-xl icon-gradient-gold mx-auto mb-4">
+          <Sparkles className="w-7 h-7" />
+        </div>
+        <h1 className="text-display-lg text-teal" data-testid="text-page-title">
           Gentle Mirror
         </h1>
-        <p className="text-sm text-white/60 max-w-md mx-auto">
+        <p className="text-lead max-w-md mx-auto">
           Write honestly. Receive a gentle reflection. This is not therapy — 
           it's a space for self-compassion and clarity.
         </p>
       </header>
 
-      <Card className="border-white/10 bg-black/30 backdrop-blur-sm">
+      <Card className="card-bordered">
         <CardContent className="p-6 space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-sm text-white/70 italic">
@@ -232,12 +236,14 @@ export default function MirrorPage() {
         </div>
       )}
 
-      <footer className="text-center text-xs text-white/40 pt-4 border-t border-white/10">
+      <footer className="text-center text-caption pt-4 border-t border-[var(--sage-200)]">
         <p>
           This tool offers journaling support, not medical advice. 
           If you're in crisis, please contact a professional or call a helpline.
         </p>
       </footer>
+      </div>
+      </div>
     </main>
   );
 }

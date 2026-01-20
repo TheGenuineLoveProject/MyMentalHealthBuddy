@@ -117,50 +117,61 @@ export default function InsightCardsPage() {
   }, {} as Record<string, number>);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-5xl mx-auto">
         <header className="mb-8">
           <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
+            <a className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
               <ArrowLeft className="h-4 w-4" /> Back to Atlas
             </a>
           </Link>
           <div className="flex items-center gap-3 mb-2">
-            <Lightbulb className="h-10 w-10 text-amber-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent" data-testid="text-insight-title">
+            <div className="icon-container icon-xl icon-gradient-gold">
+              <Lightbulb className="h-8 w-8" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-insight-title">
               Insight Cards
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead">
             Collect and organize your wisdom. Save insights, tag themes, build your personal library.
           </p>
         </header>
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Lightbulb className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-2xl font-bold" data-testid="text-total-cards">{library.cards.length}</div>
-            <p className="text-xs opacity-50">Total Cards</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-2">
+              <Lightbulb className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-total-cards">{library.cards.length}</div>
+            <p className="text-caption">Total Cards</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Star className="h-6 w-6 mx-auto mb-2 text-yellow-400" />
-            <div className="text-2xl font-bold" data-testid="text-starred-count">{library.cards.filter(c => c.starred).length}</div>
-            <p className="text-xs opacity-50">Starred</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-sage mx-auto mb-2">
+              <Star className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-starred-count">{library.cards.filter(c => c.starred).length}</div>
+            <p className="text-caption">Starred</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Tag className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-            <div className="text-2xl font-bold" data-testid="text-themes-count">{Object.keys(themeCounts).length}</div>
-            <p className="text-xs opacity-50">Themes Used</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-2">
+              <Tag className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-themes-count">{Object.keys(themeCounts).length}</div>
+            <p className="text-caption">Themes Used</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Calendar className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
-            <div className="text-2xl font-bold" data-testid="text-this-week">
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-teal mx-auto mb-2">
+              <Calendar className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-this-week">
               {library.cards.filter(c => {
                 const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
                 return new Date(c.date).getTime() > weekAgo;
               }).length}
             </div>
-            <p className="text-xs opacity-50">This Week</p>
+            <p className="text-caption">This Week</p>
           </div>
         </div>
 
@@ -329,13 +340,14 @@ export default function InsightCardsPage() {
                     ))}
                   </div>
                 )}
-                <p className="text-xs opacity-30 mt-3">
+                <p className="text-caption mt-3">
                   {new Date(card.date).toLocaleDateString()}
                 </p>
               </div>
             ))}
           </div>
         )}
+        </div>
       </div>
     </div>
   );

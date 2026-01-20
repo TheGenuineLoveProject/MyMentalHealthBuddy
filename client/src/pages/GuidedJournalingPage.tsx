@@ -181,40 +181,49 @@ export default function GuidedJournalingPage() {
   const currentPrompt = selectedPath?.prompts[profile.currentPromptIndex];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-4xl mx-auto">
         <header className="mb-8">
           <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
+            <a className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
               <ArrowLeft className="h-4 w-4" /> Back to Atlas
             </a>
           </Link>
           <div className="flex items-center gap-3 mb-2">
-            <BookOpen className="h-10 w-10 text-emerald-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent" data-testid="text-journaling-title">
+            <div className="icon-container icon-xl icon-gradient-sage">
+              <BookOpen className="h-8 w-8" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-journaling-title">
               Guided Journaling
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead">
             Structured paths for healing. Each journey offers seven prompts designed with care.
           </p>
         </header>
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <BookOpen className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
-            <div className="text-2xl font-bold" data-testid="text-entries-count">{profile.entries.length}</div>
-            <p className="text-xs opacity-50">Journal Entries</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-sage mx-auto mb-2">
+              <BookOpen className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-entries-count">{profile.entries.length}</div>
+            <p className="text-caption">Journal Entries</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Check className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-2xl font-bold" data-testid="text-completed-count">{profile.completedPaths.length}</div>
-            <p className="text-xs opacity-50">Paths Completed</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-2">
+              <Check className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-completed-count">{profile.completedPaths.length}</div>
+            <p className="text-caption">Paths Completed</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <RefreshCw className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-            <div className="text-2xl font-bold" data-testid="text-paths-count">{JOURNALING_PATHS.length}</div>
-            <p className="text-xs opacity-50">Available Paths</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-2">
+              <RefreshCw className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-paths-count">{JOURNALING_PATHS.length}</div>
+            <p className="text-caption">Available Paths</p>
           </div>
         </div>
 
@@ -331,12 +340,13 @@ export default function GuidedJournalingPage() {
           </div>
         )}
 
-        <div className="mt-12 p-4 rounded-xl bg-amber-500/10 border border-amber-500/20">
-          <p className="text-sm text-amber-200/80">
+        <div className="mt-12 p-4 rounded-xl bg-[var(--gold-50)] border border-[var(--gold-200)]">
+          <p className="text-body-sm text-[var(--gold-700)]">
             <strong>A gentle reminder:</strong> This journaling space is for self-reflection and personal growth. 
             It is not a substitute for professional mental health support. If you're in crisis, please reach out 
             to a crisis helpline or mental health professional.
           </p>
+        </div>
         </div>
       </div>
     </div>

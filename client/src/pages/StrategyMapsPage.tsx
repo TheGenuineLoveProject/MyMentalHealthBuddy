@@ -332,25 +332,28 @@ export default function StrategyMapsPage() {
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "reflection": return "border-emerald-500/50 bg-emerald-500/10";
-      case "wisdom": return "border-purple-500/50 bg-purple-500/10";
-      case "advanced": return "border-amber-500/50 bg-amber-500/10";
-      case "mastery": return "border-indigo-500/50 bg-indigo-500/10";
-      default: return "border-white/20 bg-white/5";
+      case "reflection": return "border-[var(--sage-300)] bg-[var(--sage-50)]";
+      case "wisdom": return "border-[var(--teal-300)] bg-[var(--teal-50)]";
+      case "advanced": return "border-[var(--gold-300)] bg-[var(--gold-50)]";
+      case "mastery": return "border-[var(--blush-300)] bg-[var(--blush-50)]";
+      default: return "border-[var(--sage-200)] bg-white";
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-6xl mx-auto">
         <header className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Map className="h-10 w-10 text-amber-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-rose-400 bg-clip-text text-transparent" data-testid="text-strategy-title">
-              Strategy Maps
-            </h1>
+            <div className="icon-container icon-xl icon-gradient-gold">
+              <Map className="h-8 w-8" />
+            </div>
           </div>
-          <p className="text-lg opacity-70 max-w-2xl mx-auto" data-testid="text-strategy-subtitle">
+          <h1 className="text-display-lg text-teal mb-4" data-testid="text-strategy-title">
+            Strategy Maps
+          </h1>
+          <p className="text-lead max-w-2xl mx-auto" data-testid="text-strategy-subtitle">
             Cross-tool learning pathways connecting Reflection → Wisdom → Advanced → Mastery.
             Each journey builds upon the last.
           </p>
@@ -367,36 +370,36 @@ export default function StrategyMapsPage() {
                 <button
                   key={map.id}
                   onClick={() => selectMap(map.id)}
-                  className={`p-6 rounded-2xl bg-gradient-to-br ${map.theme} border border-white/10 hover:border-white/20 text-left transition-all group`}
+                  className="card-bordered text-left transition-all group hover:shadow-lg"
                   data-testid={`button-map-${map.id}`}
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 rounded-xl bg-white/10">
+                    <div className="icon-container icon-lg icon-gradient-sage">
                       <MapIcon className="h-6 w-6" />
                     </div>
                     <div className="flex-1">
-                      <h2 className="text-xl font-semibold group-hover:text-white transition-colors">{map.name}</h2>
-                      <div className="flex items-center gap-2 text-xs opacity-50 mt-1">
+                      <h2 className="text-heading-md text-teal group-hover:text-[var(--teal-700)] transition-colors">{map.name}</h2>
+                      <div className="flex items-center gap-2 text-caption mt-1">
                         <Clock className="h-3 w-3" />
                         {map.duration}
                         <span className="mx-1">•</span>
                         {map.nodes.length} milestones
                       </div>
                     </div>
-                    <ChevronRight className="h-5 w-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                    <ChevronRight className="h-5 w-5 text-[var(--sage-400)] group-hover:text-[var(--teal-600)] group-hover:translate-x-1 transition-all" />
                   </div>
                   
-                  <p className="text-sm opacity-70 mb-4">{map.description}</p>
+                  <p className="text-body-sm mb-4">{map.description}</p>
                   
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs">
-                      <span className="opacity-50">Progress</span>
-                      <span>{completedCount}/{map.nodes.length}</span>
+                    <div className="flex justify-between text-caption">
+                      <span>Progress</span>
+                      <span className="text-[var(--teal-600)]">{completedCount}/{map.nodes.length}</span>
                     </div>
-                    <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-[var(--sage-100)] rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-white/30 transition-all duration-500"
-                        style={{ width: `${progressPercent}%` }}
+                        className="h-full rounded-full transition-all duration-500"
+                        style={{ width: `${progressPercent}%`, background: 'linear-gradient(to right, var(--sage-400), var(--teal-500))' }}
                       />
                     </div>
                   </div>
@@ -410,37 +413,39 @@ export default function StrategyMapsPage() {
           <div>
             <button
               onClick={() => setActiveMap(null)}
-              className="mb-6 text-sm opacity-60 hover:opacity-100 flex items-center gap-1"
+              className="mb-6 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] flex items-center gap-1 transition"
               data-testid="button-back-maps"
             >
               ← Back to all maps
             </button>
 
-            <div className={`p-6 rounded-2xl bg-gradient-to-br ${activeMapData.theme} border border-white/10 mb-8`}>
+            <div className="card-bordered mb-8">
               <div className="flex items-center gap-4 mb-4">
-                <activeMapData.icon className="h-8 w-8" />
+                <div className="icon-container icon-lg icon-gradient-teal">
+                  <activeMapData.icon className="h-6 w-6" />
+                </div>
                 <div>
-                  <h2 className="text-2xl font-bold">{activeMapData.name}</h2>
-                  <p className="text-sm opacity-70">{activeMapData.description}</p>
+                  <h2 className="text-heading-lg text-teal">{activeMapData.name}</h2>
+                  <p className="text-body-sm">{activeMapData.description}</p>
                 </div>
               </div>
-              <div className="p-4 rounded-xl bg-white/10 mt-4">
-                <div className="flex items-center gap-2 text-sm mb-2">
-                  <Target className="h-4 w-4 text-emerald-400" />
-                  <span className="font-medium">Outcome</span>
+              <div className="p-4 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)] mt-4">
+                <div className="flex items-center gap-2 text-body-sm mb-2">
+                  <Target className="h-4 w-4 text-[var(--sage-600)]" />
+                  <span className="text-heading-sm text-teal">Outcome</span>
                 </div>
-                <p className="text-sm opacity-80">{activeMapData.outcome}</p>
+                <p className="text-body-sm">{activeMapData.outcome}</p>
               </div>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Compass className="h-5 w-5" />
+              <h3 className="text-heading-md text-teal flex items-center gap-2">
+                <Compass className="h-5 w-5 text-[var(--sage-500)]" />
                 Journey Milestones
               </h3>
               
               <div className="relative">
-                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-white/10" />
+                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-[var(--sage-200)]" />
                 
                 {activeMapData.nodes.map((node, index) => {
                   const isUnlocked = isNodeUnlocked(node);
@@ -451,10 +456,10 @@ export default function StrategyMapsPage() {
                       <div 
                         className={`absolute left-4 w-4 h-4 rounded-full border-2 ${
                           isCompleted 
-                            ? "bg-emerald-500 border-emerald-500" 
+                            ? "bg-[var(--sage-500)] border-[var(--sage-500)]" 
                             : isUnlocked 
-                              ? "bg-white/20 border-white/50" 
-                              : "bg-white/5 border-white/20"
+                              ? "bg-[var(--sage-100)] border-[var(--sage-400)]" 
+                              : "bg-[var(--sage-50)] border-[var(--sage-200)]"
                         }`}
                       >
                         {isCompleted && <Check className="h-3 w-3 text-white absolute -left-0.5 -top-0.5" />}
@@ -463,38 +468,38 @@ export default function StrategyMapsPage() {
                       <div 
                         className={`p-4 rounded-xl border transition-all ${
                           isUnlocked 
-                            ? `${getCategoryColor(node.category)} cursor-pointer hover:scale-[1.02]` 
-                            : "border-white/10 bg-white/5 opacity-50"
+                            ? `${getCategoryColor(node.category)} cursor-pointer hover:scale-[1.02] hover:shadow-md` 
+                            : "border-[var(--sage-200)] bg-[var(--sage-50)] opacity-60"
                         }`}
                         onClick={() => isUnlocked && setSelectedNode(node)}
                         data-testid={`card-node-${node.id}`}
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div>
-                            <span className="text-xs uppercase opacity-50">{node.category}</span>
-                            <h4 className="font-medium">{node.name}</h4>
+                            <span className="text-eyebrow text-[var(--sage-500)]">{node.category}</span>
+                            <h4 className="text-heading-sm text-teal">{node.name}</h4>
                           </div>
                           {isUnlocked && !isCompleted && (
                             <button
                               onClick={(e) => { e.stopPropagation(); completeNode(node.id); }}
-                              className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-xs"
+                              className="px-3 py-1 rounded-lg bg-[var(--sage-100)] hover:bg-[var(--sage-200)] text-caption text-[var(--teal-700)] transition"
                               data-testid={`button-complete-${node.id}`}
                             >
                               Mark Complete
                             </button>
                           )}
                         </div>
-                        <p className="text-sm opacity-70 mb-3">{node.description}</p>
+                        <p className="text-body-sm mb-3">{node.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {node.skillsGained.map(skill => (
-                            <span key={skill} className="px-2 py-1 rounded-full bg-white/10 text-xs">
+                            <span key={skill} className="px-2 py-1 rounded-full bg-[var(--sage-100)] text-caption text-[var(--teal-700)]">
                               {skill}
                             </span>
                           ))}
                         </div>
                         {isUnlocked && (
                           <Link href={node.route}>
-                            <a className="mt-3 inline-flex items-center gap-1 text-xs opacity-60 hover:opacity-100">
+                            <a className="mt-3 inline-flex items-center gap-1 text-caption text-[var(--sage-500)] hover:text-[var(--teal-600)] transition">
                               Open tool <ArrowRight className="h-3 w-3" />
                             </a>
                           </Link>
@@ -509,10 +514,11 @@ export default function StrategyMapsPage() {
         )}
 
         <div className="mt-12 text-center">
-          <p className="text-xs opacity-40 max-w-md mx-auto">
+          <p className="text-caption max-w-md mx-auto">
             These paths are invitations, not prescriptions. Progress at your own pace.
             Every step forward is a step toward growth.
           </p>
+        </div>
         </div>
       </div>
     </div>
