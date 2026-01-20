@@ -277,32 +277,32 @@ export default function AdaptiveCompanionPage() {
 
             <div className="space-y-4">
               {recommendations.map((tool, index) => (
-                <Link key={tool.id} href={tool.route}>
-                  <a 
-                    className="block p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all group"
-                    data-testid={`card-recommendation-${tool.id}`}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="p-3 rounded-xl bg-white/10 group-hover:bg-white/20 transition-all">
-                        <tool.icon className="h-6 w-6" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <h3 className="font-semibold group-hover:text-violet-400 transition-colors">{tool.name}</h3>
-                          <span className="text-xs opacity-50 capitalize">{tool.category}</span>
-                        </div>
-                        <p className="text-sm opacity-70 mb-2">{tool.reason}</p>
-                        <div className="flex items-center gap-4 text-xs opacity-50">
-                          <span className="flex items-center gap-1">
-                            <Clock className="h-3 w-3" />
-                            {tool.duration}
-                          </span>
-                          <span className="capitalize">{tool.intensity}</span>
-                        </div>
-                      </div>
-                      <ChevronRight className="h-5 w-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                <Link 
+                  key={tool.id} 
+                  href={tool.route}
+                  className="block p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all group"
+                  data-testid={`card-recommendation-${tool.id}`}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-xl bg-white/10 group-hover:bg-white/20 transition-all">
+                      <tool.icon className="h-6 w-6" />
                     </div>
-                  </a>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="font-semibold group-hover:text-violet-400 transition-colors">{tool.name}</h3>
+                        <span className="text-xs opacity-50 capitalize">{tool.category}</span>
+                      </div>
+                      <p className="text-sm opacity-70 mb-2">{tool.reason}</p>
+                      <div className="flex items-center gap-4 text-xs opacity-50">
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" />
+                          {tool.duration}
+                        </span>
+                        <span className="capitalize">{tool.intensity}</span>
+                      </div>
+                    </div>
+                    <ChevronRight className="h-5 w-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                  </div>
                 </Link>
               ))}
             </div>
@@ -310,10 +310,8 @@ export default function AdaptiveCompanionPage() {
             <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
               <p className="text-sm opacity-60">
                 Not sure where to start? 
-                <Link href="/atlas">
-                  <a className="text-violet-400 hover:text-violet-300 ml-1" data-testid="link-explore-all">
-                    Explore all 37 tools →
-                  </a>
+                <Link href="/atlas" className="text-violet-400 hover:text-violet-300 ml-1" data-testid="link-explore-all">
+                  Explore all 37 tools →
                 </Link>
               </p>
             </div>

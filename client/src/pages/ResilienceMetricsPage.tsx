@@ -354,23 +354,27 @@ export default function ResilienceMetricsPage() {
         )}
 
         <div className="mt-12 grid md:grid-cols-2 gap-4">
-          <Link href="/atlas">
-            <a className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group" data-testid="link-atlas">
-              <div className="flex items-center gap-3">
-                <Target className="h-5 w-5" />
-                <span>Explore More Tools</span>
-              </div>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+          <Link 
+            href="/atlas"
+            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group"
+            data-testid="link-atlas"
+          >
+            <div className="flex items-center gap-3">
+              <Target className="h-5 w-5" />
+              <span>Explore More Tools</span>
+            </div>
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
-          <Link href="/strategy-maps">
-            <a className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group" data-testid="link-strategy-maps">
-              <div className="flex items-center gap-3">
-                <Zap className="h-5 w-5" />
-                <span>Continue a Learning Path</span>
-              </div>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </a>
+          <Link 
+            href="/strategy-maps"
+            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group"
+            data-testid="link-strategy-maps"
+          >
+            <div className="flex items-center gap-3">
+              <Zap className="h-5 w-5" />
+              <span>Continue a Learning Path</span>
+            </div>
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
 
