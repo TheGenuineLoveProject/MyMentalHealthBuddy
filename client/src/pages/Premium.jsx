@@ -200,6 +200,7 @@ export default function Premium() {
               </button>
             </div>
           </div>
+          </header>
 
           {view === "pricing" ? (
             <div className="card-elevated p-6 md:p-8">
