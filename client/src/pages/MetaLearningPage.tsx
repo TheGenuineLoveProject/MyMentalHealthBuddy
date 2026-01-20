@@ -119,71 +119,79 @@ export default function MetaLearningPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
         <header className="mb-8">
-          <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Atlas
-            </a>
+          <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">
+            <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
-          <div className="flex items-center gap-3 mb-2">
-            <Zap className="h-10 w-10 text-yellow-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-red-400 bg-clip-text text-transparent" data-testid="text-title">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="icon-container icon-xl icon-gradient-gold">
+              <Zap className="h-7 w-7" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-title">
               Meta-Learning Dashboard
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead max-w-2xl">
             Learn how to learn. Track techniques, optimize retention, become a more effective learner.
           </p>
         </header>
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Clock className="h-6 w-6 mx-auto mb-2 text-blue-400" />
-            <div className="text-2xl font-bold" data-testid="text-minutes">{profile.totalMinutes}</div>
-            <p className="text-xs opacity-50">Total Minutes</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-teal mx-auto mb-3">
+              <Clock className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-minutes">{profile.totalMinutes}</div>
+            <p className="text-caption">Total Minutes</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <BookOpen className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
-            <div className="text-2xl font-bold" data-testid="text-sessions">{profile.sessions.length}</div>
-            <p className="text-xs opacity-50">Sessions Logged</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-sage mx-auto mb-3">
+              <BookOpen className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-sage-600" data-testid="text-sessions">{profile.sessions.length}</div>
+            <p className="text-caption">Sessions Logged</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <TrendingUp className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-2xl font-bold" data-testid="text-retention">{avgRetention}%</div>
-            <p className="text-xs opacity-50">Avg Retention</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-3">
+              <TrendingUp className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-gold-600" data-testid="text-retention">{avgRetention}%</div>
+            <p className="text-caption">Avg Retention</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Brain className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-            <div className="text-lg font-bold" data-testid="text-best">{topTechnique ? topTechnique[0].split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ") : "—"}</div>
-            <p className="text-xs opacity-50">Best Technique</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-3">
+              <Brain className="h-5 w-5" />
+            </div>
+            <div className="text-heading-sm text-blush-600" data-testid="text-best">{topTechnique ? topTechnique[0].split("-").map(w => w[0].toUpperCase() + w.slice(1)).join(" ") : "—"}</div>
+            <p className="text-caption">Best Technique</p>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Target className="h-5 w-5 text-yellow-400" />
+            <div className="card-bordered">
+              <h2 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+                <Target className="h-5 w-5 text-gold-500" />
                 Log Learning Session
               </h2>
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-sm opacity-70 mb-1 block">Topic</label>
+                  <label className="text-body-sm font-medium text-teal-600 mb-1 block">Topic</label>
                   <input
                     type="text"
                     value={topic}
                     onChange={(e) => setTopic(e.target.value)}
                     placeholder="What did you learn?"
-                    className="w-full p-3 rounded-xl bg-black/30 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
                     data-testid="input-topic"
                   />
                 </div>
 
                 <div>
-                  <label className="text-sm opacity-70 mb-1 block">Duration: {duration} min</label>
+                  <label className="text-body-sm font-medium text-teal-600 mb-1 block">Duration: {duration} min</label>
                   <input
                     type="range"
                     min="5"
@@ -191,19 +199,19 @@ export default function MetaLearningPage() {
                     step="5"
                     value={duration}
                     onChange={(e) => setDuration(parseInt(e.target.value))}
-                    className="w-full"
+                    className="w-full accent-sage-500"
                     data-testid="input-duration"
                   />
                 </div>
 
                 <div>
-                  <label className="text-sm opacity-70 mb-2 block">Technique Used</label>
+                  <label className="text-body-sm font-medium text-teal-600 mb-2 block">Technique Used</label>
                   <div className="grid grid-cols-2 gap-2">
                     {LEARNING_TECHNIQUES.map((t) => (
                       <button
                         key={t.id}
                         onClick={() => setSelectedTechnique(t.id)}
-                        className={`p-2 rounded-lg text-left text-sm transition-all ${selectedTechnique === t.id ? "bg-yellow-500/20 border border-yellow-500/30" : "bg-black/20 border border-white/5 hover:bg-white/5"}`}
+                        className={`p-2 rounded-lg text-left text-sm font-medium transition-all ${selectedTechnique === t.id ? "bg-sage-100 border border-sage-400 text-sage-700" : "bg-white border border-sage-200 text-teal-600 hover:bg-sage-50"}`}
                         data-testid={`button-tech-${t.id}`}
                       >
                         {t.name}
@@ -213,7 +221,7 @@ export default function MetaLearningPage() {
                 </div>
 
                 <div>
-                  <label className="text-sm opacity-70 mb-1 block">Self-Assessed Retention: {retention}%</label>
+                  <label className="text-body-sm font-medium text-teal-600 mb-1 block">Self-Assessed Retention: {retention}%</label>
                   <input
                     type="range"
                     min="0"
@@ -221,18 +229,18 @@ export default function MetaLearningPage() {
                     step="5"
                     value={retention}
                     onChange={(e) => setRetention(parseInt(e.target.value))}
-                    className="w-full"
+                    className="w-full accent-sage-500"
                     data-testid="input-retention"
                   />
                 </div>
 
                 <div>
-                  <label className="text-sm opacity-70 mb-1 block">Notes (optional)</label>
+                  <label className="text-body-sm font-medium text-teal-600 mb-1 block">Notes (optional)</label>
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="Key insights, difficulties, connections..."
-                    className="w-full h-20 p-3 rounded-xl bg-black/30 border border-white/10 text-white placeholder:text-white/30 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-500/50"
+                    className="w-full h-20 p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
                     data-testid="input-notes"
                   />
                 </div>
@@ -241,7 +249,7 @@ export default function MetaLearningPage() {
                   <button
                     onClick={logSession}
                     disabled={!topic.trim() || !selectedTechnique}
-                    className="flex-1 py-3 rounded-xl bg-gradient-to-r from-yellow-600 to-orange-600 font-semibold disabled:opacity-50"
+                    className="flex-1 btn-premium py-3 disabled:opacity-50"
                     data-testid="button-log"
                   >
                     <Save className="h-4 w-4 inline mr-2" />
@@ -249,7 +257,7 @@ export default function MetaLearningPage() {
                   </button>
                   <button
                     onClick={reset}
-                    className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10"
+                    className="px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-600 hover:bg-sage-50"
                     data-testid="button-reset"
                   >
                     <RefreshCw className="h-4 w-4" />
@@ -260,9 +268,9 @@ export default function MetaLearningPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Lightbulb className="h-5 w-5 text-cyan-400" />
+            <div className="card-bordered">
+              <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+                <Lightbulb className="h-5 w-5 text-teal-500" />
                 Evidence-Based Techniques
               </h3>
 
@@ -270,29 +278,29 @@ export default function MetaLearningPage() {
                 {LEARNING_TECHNIQUES.map((t) => (
                   <div
                     key={t.id}
-                    className={`p-3 rounded-lg border transition-all ${selectedTechnique === t.id ? "bg-cyan-500/10 border-cyan-500/30" : "bg-black/20 border-white/5"}`}
+                    className={`p-3 rounded-lg border transition-all ${selectedTechnique === t.id ? "bg-sage-50 border-sage-300" : "bg-white border-sage-200"}`}
                   >
-                    <h4 className="font-medium">{t.name}</h4>
-                    <p className="text-sm opacity-60 mt-1">{t.description}</p>
-                    <p className="text-xs text-cyan-400 mt-1 italic">{t.scienceNote}</p>
+                    <h4 className="text-body-sm font-medium text-teal-700">{t.name}</h4>
+                    <p className="text-caption mt-1">{t.description}</p>
+                    <p className="text-xs text-teal-500 mt-1 italic">{t.scienceNote}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-sm font-semibold mb-3">Meta-Strategies</h3>
+            <div className="card-bordered">
+              <h3 className="text-body-sm font-semibold text-teal-600 mb-3">Meta-Strategies</h3>
               <div className="grid grid-cols-2 gap-2">
                 {META_STRATEGIES.map((s, i) => (
                   <button
                     key={i}
                     onClick={() => setSelectedStrategy(selectedStrategy === i ? null : i)}
-                    className={`p-3 rounded-lg text-left transition-all ${selectedStrategy === i ? "bg-purple-500/10 border border-purple-500/30" : "bg-black/20 border border-white/5 hover:bg-white/5"}`}
+                    className={`p-3 rounded-lg text-left transition-all ${selectedStrategy === i ? "bg-blush-50 border border-blush-300" : "bg-white border border-sage-200 hover:bg-sage-50"}`}
                     data-testid={`button-strategy-${i}`}
                   >
-                    <div className="text-sm font-medium">{s.title}</div>
+                    <div className="text-body-sm font-medium text-teal-700">{s.title}</div>
                     {selectedStrategy === i && (
-                      <p className="text-xs opacity-60 mt-1">{s.description}</p>
+                      <p className="text-caption mt-1">{s.description}</p>
                     )}
                   </button>
                 ))}
@@ -300,18 +308,18 @@ export default function MetaLearningPage() {
             </div>
 
             {profile.sessions.length > 0 && (
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold mb-3 opacity-70">Recent Sessions</h3>
+              <div className="card-bordered">
+                <h3 className="text-body-sm font-semibold text-sage-600 mb-3">Recent Sessions</h3>
                 <div className="space-y-2 max-h-40 overflow-y-auto">
                   {profile.sessions.slice(0, 5).map((s) => (
-                    <div key={s.id} className="p-3 rounded-lg bg-black/20 border border-white/5">
+                    <div key={s.id} className="p-3 rounded-lg bg-sage-50 border border-sage-200">
                       <div className="flex justify-between items-center">
-                        <span className="font-medium text-sm">{s.topic}</span>
-                        <span className="text-xs opacity-50">{s.duration}min</span>
+                        <span className="text-body-sm font-medium text-teal-700">{s.topic}</span>
+                        <span className="text-caption">{s.duration}min</span>
                       </div>
                       <div className="flex justify-between items-center mt-1">
-                        <span className="text-xs opacity-50">{s.technique}</span>
-                        <span className={`text-xs ${s.retention >= 80 ? "text-emerald-400" : s.retention >= 60 ? "text-amber-400" : "text-red-400"}`}>
+                        <span className="text-caption">{s.technique}</span>
+                        <span className={`text-xs font-medium ${s.retention >= 80 ? "text-sage-600" : s.retention >= 60 ? "text-gold-600" : "text-blush-600"}`}>
                           {s.retention}% retention
                         </span>
                       </div>

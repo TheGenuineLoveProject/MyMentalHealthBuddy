@@ -188,42 +188,48 @@ export default function WisdomPracticesPage() {
   const todayPracticed = profile.lastPractice === getTodayStr();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
         <header className="mb-8">
-          <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Atlas
-            </a>
+          <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">
+            <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
-          <div className="flex items-center gap-3 mb-2">
-            <Sparkles className="h-10 w-10 text-violet-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400 bg-clip-text text-transparent" data-testid="text-wisdom-title">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="icon-container icon-xl icon-gradient-gold">
+              <Sparkles className="h-7 w-7" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-wisdom-title">
               Wisdom Practices
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead max-w-2xl">
             Daily practices for cultivating inner wisdom. Contemplation, gratitude, and presence.
           </p>
         </header>
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Calendar className="h-6 w-6 mx-auto mb-2 text-violet-400" />
-            <div className="text-2xl font-bold" data-testid="text-total-practices">
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-3">
+              <Calendar className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-gold-600" data-testid="text-total-practices">
               {profile.contemplations.length + profile.gratitudeEntries.length + profile.meditations.length}
             </div>
-            <p className="text-xs opacity-50">Total Practices</p>
+            <p className="text-caption">Total Practices</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Heart className="h-6 w-6 mx-auto mb-2 text-rose-400" />
-            <div className="text-2xl font-bold" data-testid="text-gratitude-count">{profile.gratitudeEntries.length}</div>
-            <p className="text-xs opacity-50">Gratitude Entries</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-3">
+              <Heart className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-blush-600" data-testid="text-gratitude-count">{profile.gratitudeEntries.length}</div>
+            <p className="text-caption">Gratitude Entries</p>
           </div>
-          <div className={`p-4 rounded-xl border text-center ${todayPracticed ? "bg-emerald-500/10 border-emerald-500/30" : "bg-white/5 border-white/10"}`}>
-            <Check className={`h-6 w-6 mx-auto mb-2 ${todayPracticed ? "text-emerald-400" : "opacity-40"}`} />
-            <div className="text-2xl font-bold" data-testid="text-today-status">{todayPracticed ? "Done" : "Pending"}</div>
-            <p className="text-xs opacity-50">Today's Practice</p>
+          <div className={`card-bordered text-center ${todayPracticed ? "bg-sage-50 border-sage-300" : ""}`}>
+            <div className={`icon-container icon-md mx-auto mb-3 ${todayPracticed ? "icon-soft-sage" : "icon-soft-teal"}`}>
+              <Check className="h-5 w-5" />
+            </div>
+            <div className={`text-heading-lg ${todayPracticed ? "text-sage-600" : "text-teal"}`} data-testid="text-today-status">{todayPracticed ? "Done" : "Pending"}</div>
+            <p className="text-caption">Today's Practice</p>
           </div>
         </div>
 
@@ -236,8 +242,8 @@ export default function WisdomPracticesPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-                activeTab === tab.id ? "bg-white/10" : "hover:bg-white/5"
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all font-medium ${
+                activeTab === tab.id ? "bg-sage-100 text-sage-700 border border-sage-300" : "bg-white border border-sage-200 text-teal-600 hover:bg-sage-50"
               }`}
               data-testid={`tab-${tab.id}`}
             >
@@ -249,14 +255,14 @@ export default function WisdomPracticesPage() {
 
         {activeTab === "contemplation" && (
           <div className="space-y-6">
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-violet-500/10 to-purple-500/10 border border-violet-500/20 text-center">
-              <Quote className="h-8 w-8 mx-auto mb-4 opacity-40" />
-              <p className="text-xl font-medium leading-relaxed mb-6" data-testid="text-contemplation-prompt">
+            <div className="card-bordered bg-gradient-to-br from-gold-50 via-blush-50 to-sage-50 text-center">
+              <Quote className="h-8 w-8 mx-auto mb-4 text-sage-400" />
+              <p className="text-xl font-medium leading-relaxed mb-6 text-teal-700" data-testid="text-contemplation-prompt">
                 {CONTEMPLATION_PROMPTS[currentPrompt]}
               </p>
               <button
                 onClick={nextPrompt}
-                className="text-sm opacity-60 hover:opacity-100 flex items-center gap-1 mx-auto"
+                className="text-body-sm text-sage-600 hover:text-teal-600 flex items-center gap-1 mx-auto transition-colors"
                 data-testid="button-next-prompt"
               >
                 <RefreshCw className="h-4 w-4" /> Different prompt
@@ -268,13 +274,13 @@ export default function WisdomPracticesPage() {
                 value={contemplationResponse}
                 onChange={e => setContemplationResponse(e.target.value)}
                 placeholder="Sit with this question. What arises?"
-                className="w-full h-40 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm resize-none"
+                className="w-full h-40 px-4 py-3 rounded-xl border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 resize-none"
                 data-testid="textarea-contemplation"
               />
               <button
                 onClick={saveContemplation}
                 disabled={!contemplationResponse.trim()}
-                className="w-full px-4 py-3 rounded-xl bg-violet-600 hover:bg-violet-500 disabled:opacity-50"
+                className="w-full btn-premium py-3 disabled:opacity-50"
                 data-testid="button-save-contemplation"
               >
                 Complete Contemplation
@@ -283,11 +289,11 @@ export default function WisdomPracticesPage() {
 
             {profile.contemplations.length > 0 && (
               <div className="space-y-3">
-                <h3 className="font-medium opacity-60">Recent Contemplations</h3>
+                <h3 className="text-body-sm font-semibold text-sage-600">Recent Contemplations</h3>
                 {profile.contemplations.slice(-3).reverse().map(c => (
-                  <div key={c.id} className="p-4 rounded-xl bg-white/5 border border-white/10">
-                    <p className="text-xs opacity-50 mb-2">{c.prompt}</p>
-                    <p className="text-sm">{c.response}</p>
+                  <div key={c.id} className="card-bordered">
+                    <p className="text-caption mb-2">{c.prompt}</p>
+                    <p className="text-body-sm text-teal-700">{c.response}</p>
                   </div>
                 ))}
               </div>
@@ -297,9 +303,9 @@ export default function WisdomPracticesPage() {
 
         {activeTab === "gratitude" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-rose-500/10 to-pink-500/10 border border-rose-500/20">
-              <h3 className="font-semibold mb-4 flex items-center gap-2">
-                <Heart className="h-5 w-5" /> Today's Gratitude
+            <div className="card-bordered bg-gradient-to-br from-blush-50 to-gold-50">
+              <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+                <Heart className="h-5 w-5 text-blush-500" /> Today's Gratitude
               </h3>
               <div className="space-y-3 mb-4">
                 {gratitudeItems.map((item, i) => (
@@ -312,7 +318,7 @@ export default function WisdomPracticesPage() {
                       setGratitudeItems(updated);
                     }}
                     placeholder={`I'm grateful for...`}
-                    className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm"
+                    className="w-full px-3 py-2 rounded-lg border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
                     data-testid={`input-gratitude-${i}`}
                   />
                 ))}
@@ -321,13 +327,13 @@ export default function WisdomPracticesPage() {
                 value={gratitudeSynthesis}
                 onChange={e => setGratitudeSynthesis(e.target.value)}
                 placeholder="What do these have in common? What pattern of blessing emerges?"
-                className="w-full h-20 px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm resize-none mb-4"
+                className="w-full h-20 px-3 py-2 rounded-lg border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 resize-none mb-4"
                 data-testid="textarea-gratitude-synthesis"
               />
               <button
                 onClick={saveGratitude}
                 disabled={gratitudeItems.every(i => !i.trim())}
-                className="w-full px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 disabled:opacity-50"
+                className="w-full btn-premium py-2 disabled:opacity-50"
                 data-testid="button-save-gratitude"
               >
                 Save Gratitude Practice
@@ -336,13 +342,13 @@ export default function WisdomPracticesPage() {
 
             {profile.gratitudeEntries.length > 0 && (
               <div className="space-y-3">
-                <h3 className="font-medium opacity-60">Recent Gratitude</h3>
+                <h3 className="text-body-sm font-semibold text-sage-600">Recent Gratitude</h3>
                 {profile.gratitudeEntries.slice(-3).reverse().map(g => (
-                  <div key={g.id} className="p-4 rounded-xl bg-white/5 border border-white/10">
-                    <ul className="text-sm mb-2">
+                  <div key={g.id} className="card-bordered">
+                    <ul className="text-body-sm text-teal-700 mb-2">
                       {g.items.map((item, i) => <li key={i}>• {item}</li>)}
                     </ul>
-                    {g.synthesis && <p className="text-xs opacity-60 italic">{g.synthesis}</p>}
+                    {g.synthesis && <p className="text-caption italic">{g.synthesis}</p>}
                   </div>
                 ))}
               </div>
@@ -353,36 +359,38 @@ export default function WisdomPracticesPage() {
         {activeTab === "meditation" && (
           <div className="space-y-6">
             {selectedMeditation && timerActive ? (
-              <div className="p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 text-center">
-                <h3 className="font-semibold mb-2">{selectedMeditation.name}</h3>
-                <p className="text-sm opacity-60 mb-6">{selectedMeditation.description}</p>
-                <div className="text-6xl font-mono mb-6" data-testid="text-timer">
+              <div className="card-bordered bg-gradient-to-br from-gold-50 to-sage-50 text-center">
+                <h3 className="text-heading-sm text-teal mb-2">{selectedMeditation.name}</h3>
+                <p className="text-body-sm mb-6">{selectedMeditation.description}</p>
+                <div className="text-6xl font-mono mb-6 text-teal-600" data-testid="text-timer">
                   {formatTime(timeRemaining)}
                 </div>
                 <button
                   onClick={() => setTimerActive(false)}
-                  className="px-6 py-2 rounded-lg bg-white/10 hover:bg-white/20"
+                  className="px-6 py-2 rounded-lg bg-sage-100 border border-sage-300 text-sage-700 hover:bg-sage-200"
                   data-testid="button-pause-meditation"
                 >
                   <Pause className="h-5 w-5 inline mr-2" /> Pause
                 </button>
               </div>
             ) : selectedMeditation && !timerActive && timeRemaining === 0 ? (
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 space-y-4">
+              <div className="card-bordered bg-gradient-to-br from-sage-50 to-teal-50 space-y-4">
                 <div className="text-center">
-                  <Check className="h-12 w-12 mx-auto mb-2 text-emerald-400" />
-                  <h3 className="font-semibold">{selectedMeditation.name} Complete</h3>
+                  <div className="icon-container icon-xl icon-gradient-sage mx-auto mb-3">
+                    <Check className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-heading-sm text-teal">{selectedMeditation.name} Complete</h3>
                 </div>
                 <textarea
                   value={meditationReflection}
                   onChange={e => setMeditationReflection(e.target.value)}
                   placeholder="Any insights or reflections from your practice?"
-                  className="w-full h-24 px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm resize-none"
+                  className="w-full h-24 px-3 py-2 rounded-lg border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
                   data-testid="textarea-meditation-reflection"
                 />
                 <button
                   onClick={saveMeditation}
-                  className="w-full px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500"
+                  className="w-full btn-premium py-2"
                   data-testid="button-save-meditation"
                 >
                   Complete Session
@@ -394,15 +402,15 @@ export default function WisdomPracticesPage() {
                   <button
                     key={type.id}
                     onClick={() => startMeditation(type)}
-                    className="p-5 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 text-left transition-all group"
+                    className="card-bordered hover:shadow-md text-left transition-all group"
                     data-testid={`button-meditation-${type.id}`}
                   >
                     <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-medium">{type.name}</h4>
-                      <span className="text-xs opacity-50">{type.duration} min</span>
+                      <h4 className="text-heading-sm text-teal">{type.name}</h4>
+                      <span className="text-caption">{type.duration} min</span>
                     </div>
-                    <p className="text-sm opacity-60">{type.description}</p>
-                    <div className="mt-3 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
+                    <p className="text-body-sm">{type.description}</p>
+                    <div className="mt-3 flex items-center gap-1 text-caption text-sage-400 group-hover:text-teal-600">
                       <Play className="h-3 w-3" /> Start Practice
                     </div>
                   </button>
@@ -412,14 +420,14 @@ export default function WisdomPracticesPage() {
 
             {profile.meditations.length > 0 && !selectedMeditation && (
               <div className="space-y-3">
-                <h3 className="font-medium opacity-60">Recent Sessions</h3>
+                <h3 className="text-body-sm font-semibold text-sage-600">Recent Sessions</h3>
                 {profile.meditations.slice(-3).reverse().map(m => (
-                  <div key={m.id} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                  <div key={m.id} className="card-bordered">
                     <div className="flex justify-between mb-1">
-                      <span className="text-sm font-medium">{m.type}</span>
-                      <span className="text-xs opacity-50">{m.duration} min</span>
+                      <span className="text-body-sm font-medium text-teal-700">{m.type}</span>
+                      <span className="text-caption">{m.duration} min</span>
                     </div>
-                    {m.reflection && <p className="text-xs opacity-60">{m.reflection}</p>}
+                    {m.reflection && <p className="text-caption italic">{m.reflection}</p>}
                   </div>
                 ))}
               </div>
@@ -427,8 +435,8 @@ export default function WisdomPracticesPage() {
           </div>
         )}
 
-        <div className="mt-12 text-center">
-          <p className="text-xs opacity-40 max-w-md mx-auto">
+        <div className="mt-12 p-4 rounded-xl bg-sage-50 border border-sage-200 text-center">
+          <p className="text-body-sm text-sage-600 max-w-md mx-auto">
             Wisdom grows through consistent practice. Small daily efforts compound into transformation.
           </p>
         </div>

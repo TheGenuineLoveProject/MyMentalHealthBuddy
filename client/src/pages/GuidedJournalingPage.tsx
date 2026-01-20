@@ -231,8 +231,8 @@ export default function GuidedJournalingPage() {
 
         {showPaths ? (
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold mb-4" data-testid="text-paths-header">Explore What Resonates</h2>
-            <p className="text-sm opacity-60 mb-6">
+            <h2 className="text-heading-md text-teal mb-4" data-testid="text-paths-header">Explore What Resonates</h2>
+            <p className="text-body-sm mb-6">
               These paths are offerings—gentle invitations to reflect. You might explore one fully or dip into several. There's no right way.
             </p>
             
@@ -245,27 +245,27 @@ export default function GuidedJournalingPage() {
                 <button
                   key={path.id}
                   onClick={() => startPath(path)}
-                  className="w-full p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-left group"
+                  className="w-full card-bordered hover:shadow-md transition-all text-left group"
                   data-testid={`button-path-${path.id}`}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-xl bg-gradient-to-br ${path.color}`}>
-                      <Icon className="h-6 w-6 text-white" />
+                    <div className="icon-container icon-lg icon-gradient-sage">
+                      <Icon className="h-6 w-6" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-semibold text-lg">{path.name}</h3>
+                        <h3 className="text-heading-sm text-teal">{path.name}</h3>
                         {isComplete && (
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400">
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-sage-100 text-sage-600 font-medium">
                             Completed
                           </span>
                         )}
                       </div>
-                      <p className="text-sm opacity-60 mb-3">{path.description}</p>
+                      <p className="text-body-sm mb-3">{path.description}</p>
                       <div className="flex items-center gap-3">
-                        <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div className="flex-1 h-1.5 bg-sage-100 rounded-full overflow-hidden">
                           <div 
-                            className={`h-full bg-gradient-to-r ${path.color} transition-all`}
+                            className="h-full bg-gradient-to-r from-sage-400 to-teal-400 transition-all"
                             style={{ width: `${progress * 100}%` }}
                           />
                         </div>
@@ -283,22 +283,22 @@ export default function GuidedJournalingPage() {
             <div className="flex items-center justify-between">
               <button
                 onClick={() => setShowPaths(true)}
-                className="text-sm opacity-60 hover:opacity-100"
+                className="text-body-sm text-sage-600 hover:text-teal-600 transition-colors"
                 data-testid="button-back-to-paths"
               >
                 ← Back to paths
               </button>
-              <span className="text-sm opacity-50" data-testid="text-prompt-progress">
+              <span className="text-caption" data-testid="text-prompt-progress">
                 {profile.currentPromptIndex + 1} of {selectedPath.prompts.length}
               </span>
             </div>
 
-            <div className={`p-6 rounded-xl bg-gradient-to-br ${selectedPath.color} bg-opacity-20`}>
+            <div className="card-bordered bg-gradient-to-br from-sage-50 via-gold-50 to-blush-50">
               <div className="flex items-center gap-2 mb-4">
-                <selectedPath.icon className="h-5 w-5" />
-                <span className="text-sm font-medium">{selectedPath.name}</span>
+                <selectedPath.icon className="h-5 w-5 text-sage-500" />
+                <span className="text-body-sm font-medium text-teal-600">{selectedPath.name}</span>
               </div>
-              <p className="text-xl leading-relaxed font-serif" data-testid="text-current-prompt">
+              <p className="text-xl leading-relaxed font-serif text-teal-700" data-testid="text-current-prompt">
                 {currentPrompt}
               </p>
             </div>
@@ -308,18 +308,18 @@ export default function GuidedJournalingPage() {
                 value={currentResponse}
                 onChange={e => setCurrentResponse(e.target.value)}
                 placeholder="Take your time. Write what comes naturally..."
-                className="w-full h-48 px-4 py-3 rounded-xl bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none resize-none"
+                className="w-full h-48 px-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 resize-none"
                 data-testid="textarea-journal-response"
               />
               
               <div className="flex justify-between items-center">
-                <p className="text-xs opacity-40">
+                <p className="text-caption">
                   Your words stay private on this device.
                 </p>
                 <button
                   onClick={saveEntry}
                   disabled={!currentResponse.trim()}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                  className="btn-premium flex items-center gap-2 px-5 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
                   data-testid="button-save-entry"
                 >
                   <Save className="h-4 w-4" />
@@ -333,8 +333,8 @@ export default function GuidedJournalingPage() {
                 <div
                   key={i}
                   className={`flex-1 h-1 rounded-full ${
-                    i < profile.currentPromptIndex ? "bg-emerald-400" :
-                    i === profile.currentPromptIndex ? "bg-white/40" : "bg-white/10"
+                    i < profile.currentPromptIndex ? "bg-sage-400" :
+                    i === profile.currentPromptIndex ? "bg-teal-400" : "bg-sage-100"
                   }`}
                 />
               ))}

@@ -234,32 +234,32 @@ export default function ResilienceMetricsPage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Activity className="h-5 w-5" />
+            <div className="card-bordered">
+              <h2 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+                <Activity className="h-5 w-5 text-sage-500" />
                 Growth Summary
               </h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {profile.metrics.map(metric => {
                   const MetricIcon = getMetricIcon(metric.dimension);
                   return (
-                    <div key={metric.dimension} className="p-4 rounded-xl bg-white/5 border border-white/10">
+                    <div key={metric.dimension} className="p-4 rounded-xl bg-sage-50 border border-sage-200">
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex items-center gap-2">
-                          <MetricIcon className="h-4 w-4 opacity-60" />
+                          <MetricIcon className="h-4 w-4 text-sage-500" />
                           <span className="text-sm font-medium">{getMetricName(metric.dimension)}</span>
                         </div>
                         <span className={`text-xs ${getTrendColor(metric.trend)}`}>
                           {metric.trend === "up" ? "↑" : metric.trend === "down" ? "↓" : "→"}
                         </span>
                       </div>
-                      <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+                      <div className="w-full h-2 bg-sage-100 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-emerald-500 to-teal-500"
+                          className="h-full bg-gradient-to-r from-sage-400 to-teal-500"
                           style={{ width: `${metric.score}%` }}
                         />
                       </div>
-                      <span className="text-xs opacity-50 mt-1">{metric.score}/100</span>
+                      <span className="text-caption mt-1">{metric.score}/100</span>
                     </div>
                   );
                 })}
@@ -275,25 +275,25 @@ export default function ResilienceMetricsPage() {
               const DimIcon = dim.icon;
               
               return (
-                <div key={dim.id} className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <div key={dim.id} className="card-bordered">
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-white/10">
+                    <div className="icon-container icon-lg icon-soft-sage">
                       <DimIcon className="h-6 w-6" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-semibold">{dim.name}</h3>
+                        <h3 className="text-heading-sm text-teal">{dim.name}</h3>
                         {metric && (
-                          <span className={`text-sm ${getTrendColor(metric.trend)}`}>
+                          <span className={`text-body-sm ${getTrendColor(metric.trend)}`}>
                             {metric.score}/100 {metric.trend === "up" ? "↑" : metric.trend === "down" ? "↓" : "→"}
                           </span>
                         )}
                       </div>
-                      <p className="text-sm opacity-60 mb-3">{dim.description}</p>
+                      <p className="text-body-sm mb-3">{dim.description}</p>
                       {metric && (
-                        <div className="w-full h-3 bg-white/10 rounded-full overflow-hidden">
+                        <div className="w-full h-3 bg-sage-100 rounded-full overflow-hidden">
                           <div 
-                            className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500"
+                            className="h-full bg-gradient-to-r from-sage-400 to-teal-500 transition-all duration-500"
                             style={{ width: `${metric.score}%` }}
                           />
                         </div>
@@ -308,37 +308,39 @@ export default function ResilienceMetricsPage() {
 
         {activeView === "milestones" && (
           <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-gradient-to-r from-amber-500/10 to-orange-500/10 border border-amber-500/20 flex items-center gap-4">
-              <Award className="h-6 w-6 text-amber-400" />
+            <div className="p-4 rounded-xl bg-gradient-to-r from-gold-50 to-blush-50 border border-gold-200 flex items-center gap-4">
+              <div className="icon-container icon-md icon-soft-gold">
+                <Award className="h-5 w-5" />
+              </div>
               <div>
-                <h3 className="font-medium">Your Journey Milestones</h3>
-                <p className="text-sm opacity-60">Each milestone marks a meaningful moment in your growth</p>
+                <h3 className="text-body-sm font-medium text-teal">Your Journey Milestones</h3>
+                <p className="text-caption">Each milestone marks a meaningful moment in your growth</p>
               </div>
             </div>
 
             {profile.milestones.length === 0 ? (
-              <div className="text-center py-12 opacity-60">
-                <Award className="h-12 w-12 mx-auto mb-4 opacity-40" />
-                <p>No milestones yet. Keep exploring the tools to earn your first!</p>
+              <div className="text-center py-12">
+                <Award className="h-12 w-12 mx-auto mb-4 text-sage-300" />
+                <p className="text-body-sm">No milestones yet. Keep exploring the tools to earn your first!</p>
               </div>
             ) : (
               <div className="relative">
-                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-white/10" />
+                <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-sage-200" />
                 
                 {profile.milestones.map(milestone => {
                   const MilestoneIcon = getMilestoneIcon(milestone.type);
                   
                   return (
                     <div key={milestone.id} className="relative pl-16 pb-6 last:pb-0">
-                      <div className="absolute left-4 w-4 h-4 rounded-full bg-amber-500/30 border-2 border-amber-500" />
+                      <div className="absolute left-4 w-4 h-4 rounded-full bg-gold-100 border-2 border-gold-400" />
                       
-                      <div className="p-4 rounded-xl bg-white/5 border border-white/10" data-testid={`card-milestone-${milestone.id}`}>
+                      <div className="card-bordered" data-testid={`card-milestone-${milestone.id}`}>
                         <div className="flex items-center gap-3 mb-2">
-                          <MilestoneIcon className="h-5 w-5 text-amber-400" />
-                          <span className="font-medium">{milestone.title}</span>
+                          <MilestoneIcon className="h-5 w-5 text-gold-500" />
+                          <span className="text-body-sm font-medium text-teal">{milestone.title}</span>
                         </div>
-                        <p className="text-sm opacity-70 mb-2">{milestone.description}</p>
-                        <div className="flex items-center gap-2 text-xs opacity-50">
+                        <p className="text-body-sm mb-2">{milestone.description}</p>
+                        <div className="flex items-center gap-2 text-caption">
                           <Clock className="h-3 w-3" />
                           {formatTimeAgo(milestone.date)}
                           <span className="mx-1">•</span>
@@ -356,25 +358,25 @@ export default function ResilienceMetricsPage() {
         <div className="mt-12 grid md:grid-cols-2 gap-4">
           <Link 
             href="/atlas"
-            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group"
+            className="card-bordered hover:shadow-md transition-all flex items-center justify-between group"
             data-testid="link-atlas"
           >
             <div className="flex items-center gap-3">
-              <Target className="h-5 w-5" />
-              <span>Explore More Tools</span>
+              <Target className="h-5 w-5 text-sage-500" />
+              <span className="text-body-sm text-teal">Explore More Tools</span>
             </div>
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="h-4 w-4 text-sage-400 group-hover:translate-x-1 group-hover:text-teal-600 transition-all" />
           </Link>
           <Link 
             href="/strategy-maps"
-            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all flex items-center justify-between group"
+            className="card-bordered hover:shadow-md transition-all flex items-center justify-between group"
             data-testid="link-strategy-maps"
           >
             <div className="flex items-center gap-3">
-              <Zap className="h-5 w-5" />
-              <span>Continue a Learning Path</span>
+              <Zap className="h-5 w-5 text-gold-500" />
+              <span className="text-body-sm text-teal">Continue a Learning Path</span>
             </div>
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="h-4 w-4 text-sage-400 group-hover:translate-x-1 group-hover:text-teal-600 transition-all" />
           </Link>
         </div>
 

@@ -141,66 +141,72 @@ export default function DailyWisdomOraclePage() {
   const isFavorited = profile.favorites.some(f => f.text === todaysWisdom.text);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
         <header className="mb-8">
-          <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Atlas
-            </a>
+          <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">
+            <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
-          <div className="flex items-center gap-3 mb-2">
-            <Sun className="h-10 w-10 text-amber-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 via-yellow-400 to-orange-400 bg-clip-text text-transparent" data-testid="text-title">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="icon-container icon-xl icon-gradient-gold">
+              <Sun className="h-7 w-7" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-title">
               Daily Wisdom Oracle
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead max-w-2xl">
             One piece of wisdom each day. Drawn from the world's great philosophical traditions.
           </p>
         </header>
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Star className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-2xl font-bold" data-testid="text-streak">{profile.streak}</div>
-            <p className="text-xs opacity-50">Day Streak</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-3">
+              <Star className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-gold-600" data-testid="text-streak">{profile.streak}</div>
+            <p className="text-caption">Day Streak</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Heart className="h-6 w-6 mx-auto mb-2 text-rose-400" />
-            <div className="text-2xl font-bold" data-testid="text-favorites">{profile.favorites.length}</div>
-            <p className="text-xs opacity-50">Saved Wisdom</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-3">
+              <Heart className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-blush-600" data-testid="text-favorites">{profile.favorites.length}</div>
+            <p className="text-caption">Saved Wisdom</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <BookOpen className="h-6 w-6 mx-auto mb-2 text-cyan-400" />
-            <div className="text-2xl font-bold" data-testid="text-reflections">{Object.keys(profile.reflections).length}</div>
-            <p className="text-xs opacity-50">Reflections</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-teal mx-auto mb-3">
+              <BookOpen className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-reflections">{Object.keys(profile.reflections).length}</div>
+            <p className="text-caption">Reflections</p>
           </div>
         </div>
 
-        <div className="p-8 rounded-2xl bg-gradient-to-br from-amber-500/10 via-orange-500/10 to-red-500/10 border border-amber-500/20 mb-8">
+        <div className="card-bordered bg-gradient-to-br from-gold-50 via-blush-50 to-sage-50 mb-8">
           <div className="text-center mb-6">
-            <span className="text-xs px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 mb-4 inline-block">
+            <span className="text-eyebrow bg-gold-100 text-gold-700 px-3 py-1 rounded-full mb-4 inline-block">
               {todaysWisdom.tradition}
             </span>
-            <blockquote className="text-2xl md:text-3xl font-serif italic leading-relaxed mb-4">
+            <blockquote className="text-2xl md:text-3xl font-serif italic leading-relaxed mb-4 text-teal-700">
               "{todaysWisdom.text}"
             </blockquote>
-            <p className="text-lg opacity-70">— {todaysWisdom.source}</p>
+            <p className="text-body-base">— {todaysWisdom.source}</p>
           </div>
 
           <div className="flex justify-center gap-3 mb-6">
             <button
               onClick={addToFavorites}
-              className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-all ${isFavorited ? "bg-rose-500/20 text-rose-300 border border-rose-500/30" : "bg-white/5 border border-white/10 hover:bg-white/10"}`}
+              className={`px-4 py-2 rounded-xl flex items-center gap-2 transition-all font-medium ${isFavorited ? "bg-blush-100 text-blush-600 border border-blush-300" : "bg-white border border-sage-200 text-teal-600 hover:bg-sage-50"}`}
               data-testid="button-favorite"
             >
-              <Heart className={`h-4 w-4 ${isFavorited ? "fill-rose-400" : ""}`} />
+              <Heart className={`h-4 w-4 ${isFavorited ? "fill-blush-500" : ""}`} />
               {isFavorited ? "Saved" : "Save"}
             </button>
             <button
               onClick={copyToClipboard}
-              className="px-4 py-2 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 flex items-center gap-2"
+              className="px-4 py-2 rounded-xl bg-white border border-sage-200 text-teal-600 hover:bg-sage-50 flex items-center gap-2 font-medium"
               data-testid="button-copy"
             >
               <Copy className="h-4 w-4" />
@@ -209,18 +215,18 @@ export default function DailyWisdomOraclePage() {
           </div>
 
           <div className="mt-6">
-            <h3 className="text-sm font-medium mb-2 opacity-70">Your Reflection</h3>
+            <h3 className="text-body-sm font-semibold text-teal-600 mb-2">Your Reflection</h3>
             <textarea
               value={reflection}
               onChange={(e) => setReflection(e.target.value)}
               placeholder="What does this wisdom mean to you today? How might you apply it?"
-              className="w-full h-24 p-4 rounded-xl bg-black/30 border border-white/10 text-white placeholder:text-white/30 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+              className="w-full h-24 p-4 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
               data-testid="input-reflection"
             />
             <button
               onClick={saveReflection}
               disabled={reflection.trim().length < 5}
-              className="mt-3 px-6 py-2 rounded-xl bg-amber-600 font-medium disabled:opacity-50 hover:bg-amber-500"
+              className="mt-3 btn-premium px-6 py-2 disabled:opacity-50"
               data-testid="button-save-reflection"
             >
               Save Reflection
@@ -229,10 +235,10 @@ export default function DailyWisdomOraclePage() {
         </div>
 
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-semibold">Wisdom Library</h2>
+          <h2 className="text-heading-md text-teal">Wisdom Library</h2>
           <button
             onClick={() => setShowAll(!showAll)}
-            className="text-sm opacity-60 hover:opacity-100"
+            className="text-body-sm text-sage-600 hover:text-teal-600 transition-colors"
             data-testid="button-toggle-library"
           >
             {showAll ? "Show Less" : `Show All ${WISDOM_LIBRARY.length}`}
@@ -243,27 +249,27 @@ export default function DailyWisdomOraclePage() {
           {(showAll ? WISDOM_LIBRARY : WISDOM_LIBRARY.slice(0, 6)).map((w, i) => (
             <div
               key={i}
-              className={`p-4 rounded-xl border transition-all ${w.text === todaysWisdom.text ? "bg-amber-500/10 border-amber-500/30" : "bg-white/5 border-white/10"}`}
+              className={`p-4 rounded-xl border transition-all ${w.text === todaysWisdom.text ? "bg-gold-50 border-gold-300" : "card-bordered"}`}
             >
-              <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 mb-2 inline-block">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-sage-100 text-sage-600 mb-2 inline-block">
                 {w.tradition}
               </span>
-              <p className="italic mb-2">"{w.text}"</p>
-              <p className="text-sm opacity-60">— {w.source}</p>
+              <p className="text-body-sm italic text-teal-700 mb-2">"{w.text}"</p>
+              <p className="text-caption">— {w.source}</p>
             </div>
           ))}
         </div>
 
         {profile.favorites.length > 0 && (
           <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Your Saved Wisdom</h2>
+            <h2 className="text-heading-md text-teal mb-4">Your Saved Wisdom</h2>
             <div className="space-y-3">
               {profile.favorites.slice(0, 5).map((f) => (
-                <div key={f.id} className="p-4 rounded-xl bg-white/5 border border-white/10">
-                  <p className="italic mb-2">"{f.text}"</p>
-                  <p className="text-sm opacity-60">— {f.source}</p>
+                <div key={f.id} className="card-bordered">
+                  <p className="text-body-sm italic text-teal-700 mb-2">"{f.text}"</p>
+                  <p className="text-caption">— {f.source}</p>
                   {f.reflection && (
-                    <p className="text-sm mt-2 p-2 rounded bg-white/5 opacity-70">
+                    <p className="text-body-sm mt-2 p-2 rounded bg-sage-50 text-sage-600">
                       Your reflection: {f.reflection}
                     </p>
                   )}

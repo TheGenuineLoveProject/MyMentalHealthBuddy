@@ -232,11 +232,13 @@ export default function CollaborativeLabPage() {
 
         {activeTab === "explore" && (
           <div className="space-y-4">
-            <div className="p-4 rounded-xl bg-gradient-to-r from-rose-500/10 to-purple-500/10 border border-rose-500/20 flex items-center gap-4">
-              <Shield className="h-6 w-6 text-rose-400 flex-shrink-0" />
+            <div className="p-4 rounded-xl bg-gradient-to-r from-blush-50 to-gold-50 border border-blush-200 flex items-center gap-4">
+              <div className="icon-container icon-md icon-soft-blush">
+                <Shield className="h-5 w-5" />
+              </div>
               <div>
-                <h3 className="font-medium text-sm">Anonymous & Private</h3>
-                <p className="text-xs opacity-60">All insights are shared anonymously. Your privacy is sacred.</p>
+                <h3 className="text-body-sm font-medium text-teal">Anonymous & Private</h3>
+                <p className="text-caption">All insights are shared anonymously. Your privacy is sacred.</p>
               </div>
             </div>
 
@@ -250,29 +252,29 @@ export default function CollaborativeLabPage() {
                 return (
                   <div
                     key={insight.id}
-                    className="p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
+                    className="card-bordered hover:shadow-md transition-all"
                     data-testid={`card-insight-${insight.id}`}
                   >
                     <div className="flex items-start gap-3 mb-3">
-                      <div className={`p-2 rounded-lg bg-white/10 ${getCategoryColor(insight.category)}`}>
+                      <div className="icon-container icon-sm icon-soft-sage">
                         <CategoryIcon className="h-4 w-4" />
                       </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs opacity-50 capitalize">{insight.category}</span>
-                          <span className="text-xs opacity-30">•</span>
-                          <span className="text-xs opacity-40">{formatTimeAgo(insight.timestamp)}</span>
+                          <span className="text-caption capitalize">{insight.category}</span>
+                          <span className="text-sage-300">•</span>
+                          <span className="text-caption">{formatTimeAgo(insight.timestamp)}</span>
                         </div>
                       </div>
                     </div>
                     
-                    <p className="text-sm leading-relaxed mb-4">{insight.content}</p>
+                    <p className="text-body-sm leading-relaxed mb-4 text-teal-700">{insight.content}</p>
                     
                     <div className="flex items-center gap-4">
                       <button
                         onClick={() => toggleResonance(insight.id)}
                         className={`flex items-center gap-1.5 text-xs transition-all ${
-                          isResonated ? "text-rose-400" : "opacity-50 hover:opacity-100"
+                          isResonated ? "text-blush-500" : "text-sage-400 hover:text-blush-500"
                         }`}
                         data-testid={`button-resonate-${insight.id}`}
                       >
@@ -282,7 +284,7 @@ export default function CollaborativeLabPage() {
                       <button
                         onClick={() => toggleBookmark(insight.id)}
                         className={`flex items-center gap-1.5 text-xs transition-all ${
-                          isBookmarked ? "text-amber-400" : "opacity-50 hover:opacity-100"
+                          isBookmarked ? "text-gold-500" : "text-sage-400 hover:text-gold-500"
                         }`}
                         data-testid={`button-bookmark-${insight.id}`}
                       >
@@ -299,15 +301,15 @@ export default function CollaborativeLabPage() {
 
         {activeTab === "share" && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-purple-500/10 to-rose-500/10 border border-purple-500/20">
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <MessageCircle className="h-5 w-5" />
+            <div className="card-bordered bg-gradient-to-br from-blush-50 to-gold-50">
+              <h2 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+                <MessageCircle className="h-5 w-5 text-teal-500" />
                 Share an Insight
               </h2>
 
               <div className="space-y-4">
                 <div>
-                  <label className="text-xs opacity-60 block mb-2">What type of insight?</label>
+                  <label className="form-label">What type of insight?</label>
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
                     {INSIGHT_CATEGORIES.map(cat => (
                       <button
@@ -315,25 +317,25 @@ export default function CollaborativeLabPage() {
                         onClick={() => setNewInsight(n => ({ ...n, category: cat.id as any }))}
                         className={`p-3 rounded-xl border transition-all text-center ${
                           newInsight.category === cat.id
-                            ? "border-white/30 bg-white/10"
-                            : "border-white/10 bg-white/5 hover:bg-white/10"
+                            ? "border-sage-400 bg-sage-50"
+                            : "border-sage-200 bg-white hover:bg-sage-50"
                         }`}
                         data-testid={`button-category-${cat.id}`}
                       >
-                        <cat.icon className={`h-4 w-4 mx-auto mb-1 ${cat.color}`} />
-                        <span className="text-xs">{cat.name}</span>
+                        <cat.icon className="h-4 w-4 mx-auto mb-1 text-sage-500" />
+                        <span className="text-caption">{cat.name}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs opacity-60 block mb-2">Your insight</label>
+                  <label className="form-label">Your insight</label>
                   <textarea
                     value={newInsight.content}
                     onChange={e => setNewInsight(n => ({ ...n, content: e.target.value }))}
                     placeholder="Share what you've learned, what you're questioning, or wisdom for fellow travelers..."
-                    className="w-full h-32 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm resize-none focus:border-purple-500/50 focus:outline-none"
+                    className="w-full h-32 px-4 py-3 rounded-xl border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 resize-none focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
                     data-testid="textarea-insight"
                   />
                 </div>
@@ -342,7 +344,7 @@ export default function CollaborativeLabPage() {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setIsAnonymous(!isAnonymous)}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 text-xs"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-sage-50 border border-sage-200 text-caption text-teal-600"
                       data-testid="button-toggle-anonymous"
                     >
                       {isAnonymous ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -353,7 +355,7 @@ export default function CollaborativeLabPage() {
                   <button
                     onClick={shareInsight}
                     disabled={!newInsight.content.trim()}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-sm"
+                    className="btn-premium flex items-center gap-2 px-4 py-2 disabled:opacity-50"
                     data-testid="button-share-insight"
                   >
                     <Send className="h-4 w-4" />
@@ -363,8 +365,8 @@ export default function CollaborativeLabPage() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-              <p className="text-xs opacity-60 text-center">
+            <div className="p-4 rounded-xl bg-sage-50 border border-sage-200">
+              <p className="text-caption text-center">
                 All shared insights are stored locally and displayed anonymously.
                 Your privacy is protected—we never collect identifying information.
               </p>
@@ -374,14 +376,14 @@ export default function CollaborativeLabPage() {
 
         {activeTab === "reflect" && (
           <div className="space-y-6">
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 text-center">
-              <Quote className="h-8 w-8 mx-auto mb-4 opacity-40" />
-              <p className="text-xl font-medium leading-relaxed mb-6" data-testid="text-prompt">
+            <div className="card-bordered bg-gradient-to-br from-gold-50 via-blush-50 to-sage-50 text-center">
+              <Quote className="h-8 w-8 mx-auto mb-4 text-sage-400" />
+              <p className="text-xl font-medium leading-relaxed mb-6 text-teal-700" data-testid="text-prompt">
                 {REFLECTION_PROMPTS[currentPrompt]}
               </p>
               <button
                 onClick={nextPrompt}
-                className="flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm transition-all"
+                className="flex items-center gap-2 mx-auto px-4 py-2 rounded-lg bg-sage-100 border border-sage-300 text-sage-700 hover:bg-sage-200 transition-all"
                 data-testid="button-next-prompt"
               >
                 <RefreshCw className="h-4 w-4" />
@@ -389,32 +391,32 @@ export default function CollaborativeLabPage() {
               </button>
             </div>
 
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-              <h3 className="font-medium mb-4 flex items-center gap-2">
-                <Brain className="h-5 w-5" />
+            <div className="card-bordered">
+              <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+                <Brain className="h-5 w-5 text-sage-500" />
                 Your Reflection
               </h3>
               <textarea
                 placeholder="Take your time with this prompt. There's no rush, no right answer..."
-                className="w-full h-40 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm resize-none focus:border-indigo-500/50 focus:outline-none"
+                className="w-full h-40 px-4 py-3 rounded-xl border border-sage-200 bg-white text-teal-700 placeholder:text-sage-400 resize-none focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
                 data-testid="textarea-reflection"
               />
-              <p className="text-xs opacity-40 mt-3 text-center">
+              <p className="text-caption mt-3 text-center">
                 This reflection stays private on your device.
               </p>
             </div>
 
             {profile.bookmarkedInsights.length > 0 && (
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <h3 className="font-medium mb-4 flex items-center gap-2">
-                  <Bookmark className="h-5 w-5" />
+              <div className="card-bordered">
+                <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+                  <Bookmark className="h-5 w-5 text-gold-500" />
                   Your Saved Insights
                 </h3>
                 <div className="space-y-3">
                   {allInsights
                     .filter(i => profile.bookmarkedInsights.includes(i.id))
                     .map(insight => (
-                      <div key={insight.id} className="p-3 rounded-lg bg-white/5 text-sm">
+                      <div key={insight.id} className="p-3 rounded-lg bg-sage-50 border border-sage-200 text-body-sm text-teal-700">
                         {insight.content}
                       </div>
                     ))}

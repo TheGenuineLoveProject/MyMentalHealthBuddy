@@ -103,57 +103,65 @@ export default function CognitiveArchitecturePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
         <header className="mb-8">
-          <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Atlas
-            </a>
+          <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">
+            <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
-          <div className="flex items-center gap-3 mb-2">
-            <Layers className="h-10 w-10 text-cyan-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent" data-testid="text-title">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="icon-container icon-xl icon-gradient-teal">
+              <Layers className="h-7 w-7" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-title">
               Cognitive Architecture Lab
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead max-w-2xl">
             {MENTAL_MODELS.length} mental models to sharpen your thinking. Build a latticework of wisdom.
           </p>
         </header>
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Brain className="h-6 w-6 mx-auto mb-2 text-cyan-400" />
-            <div className="text-2xl font-bold" data-testid="text-total">{MENTAL_MODELS.length}</div>
-            <p className="text-xs opacity-50">Mental Models</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-teal mx-auto mb-3">
+              <Brain className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-total">{MENTAL_MODELS.length}</div>
+            <p className="text-caption">Mental Models</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Star className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-2xl font-bold" data-testid="text-favorites">{profile.favorites.length}</div>
-            <p className="text-xs opacity-50">Favorites</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-3">
+              <Star className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-gold-600" data-testid="text-favorites">{profile.favorites.length}</div>
+            <p className="text-caption">Favorites</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Target className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
-            <div className="text-2xl font-bold" data-testid="text-practiced">{profile.practiced.length}</div>
-            <p className="text-xs opacity-50">Practiced</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-sage mx-auto mb-3">
+              <Target className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-sage-600" data-testid="text-practiced">{profile.practiced.length}</div>
+            <p className="text-caption">Practiced</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Lightbulb className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-            <div className="text-2xl font-bold" data-testid="text-categories">{CATEGORIES.length}</div>
-            <p className="text-xs opacity-50">Categories</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-3">
+              <Lightbulb className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-blush-600" data-testid="text-categories">{CATEGORIES.length}</div>
+            <p className="text-caption">Categories</p>
           </div>
         </div>
 
         <div className="flex flex-wrap gap-4 mb-6">
           <div className="flex-1 min-w-64 relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-40" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-sage-400" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search models, tags, or concepts..."
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-500/50"
+              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
               data-testid="input-search"
             />
           </div>
@@ -161,14 +169,14 @@ export default function CognitiveArchitecturePage() {
           <div className="flex gap-2">
             <button
               onClick={() => setViewMode("grid")}
-              className={`p-3 rounded-xl border transition-all ${viewMode === "grid" ? "bg-cyan-500/20 border-cyan-500/50" : "bg-white/5 border-white/10"}`}
+              className={`p-3 rounded-xl border transition-all ${viewMode === "grid" ? "bg-sage-100 border-sage-400 text-sage-700" : "bg-white border-sage-200 text-teal-600 hover:bg-sage-50"}`}
               data-testid="button-grid"
             >
               <Grid3X3 className="h-4 w-4" />
             </button>
             <button
               onClick={() => setViewMode("list")}
-              className={`p-3 rounded-xl border transition-all ${viewMode === "list" ? "bg-cyan-500/20 border-cyan-500/50" : "bg-white/5 border-white/10"}`}
+              className={`p-3 rounded-xl border transition-all ${viewMode === "list" ? "bg-sage-100 border-sage-400 text-sage-700" : "bg-white border-sage-200 text-teal-600 hover:bg-sage-50"}`}
               data-testid="button-list"
             >
               <List className="h-4 w-4" />
@@ -179,7 +187,7 @@ export default function CognitiveArchitecturePage() {
         <div className="flex flex-wrap gap-2 mb-6">
           <button
             onClick={() => setSelectedCategory(null)}
-            className={`px-4 py-2 rounded-full text-sm transition-all ${!selectedCategory ? "bg-cyan-500 text-white" : "bg-white/5 border border-white/10 hover:bg-white/10"}`}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${!selectedCategory ? "bg-sage-500 text-white" : "bg-white border border-sage-200 text-teal-600 hover:bg-sage-50"}`}
             data-testid="button-category-all"
           >
             All
@@ -188,7 +196,7 @@ export default function CognitiveArchitecturePage() {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)}
-              className={`px-4 py-2 rounded-full text-sm transition-all ${selectedCategory === cat ? "bg-cyan-500 text-white" : "bg-white/5 border border-white/10 hover:bg-white/10"}`}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${selectedCategory === cat ? "bg-sage-500 text-white" : "bg-white border border-sage-200 text-teal-600 hover:bg-sage-50"}`}
               data-testid={`button-category-${cat.toLowerCase()}`}
             >
               {cat}
@@ -197,25 +205,25 @@ export default function CognitiveArchitecturePage() {
         </div>
 
         {selectedModel ? (
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20">
+          <div className="card-bordered bg-gradient-to-br from-sage-50 to-teal-50">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <span className="text-xs px-2 py-1 rounded-full bg-cyan-500/20 text-cyan-300 mb-2 inline-block">
+                <span className="text-eyebrow bg-sage-100 text-sage-700 px-3 py-1 rounded-full mb-2 inline-block">
                   {selectedModel.category}
                 </span>
-                <h2 className="text-2xl font-bold">{selectedModel.name}</h2>
+                <h2 className="text-heading-lg text-teal">{selectedModel.name}</h2>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => toggleFavorite(selectedModel.id)}
-                  className={`p-2 rounded-lg ${profile.favorites.includes(selectedModel.id) ? "bg-amber-500/20 text-amber-400" : "bg-white/5 hover:bg-white/10"}`}
+                  className={`p-2 rounded-lg transition ${profile.favorites.includes(selectedModel.id) ? "bg-gold-100 text-gold-600" : "bg-white border border-sage-200 hover:bg-sage-50 text-teal-600"}`}
                   data-testid="button-favorite"
                 >
-                  <Star className={`h-5 w-5 ${profile.favorites.includes(selectedModel.id) ? "fill-amber-400" : ""}`} />
+                  <Star className={`h-5 w-5 ${profile.favorites.includes(selectedModel.id) ? "fill-gold-500" : ""}`} />
                 </button>
                 <button
                   onClick={() => setSelectedModel(null)}
-                  className="px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-sm"
+                  className="px-4 py-2 rounded-lg bg-white border border-sage-200 hover:bg-sage-50 text-teal-600 text-sm font-medium"
                   data-testid="button-close"
                 >
                   Close
@@ -225,27 +233,27 @@ export default function CognitiveArchitecturePage() {
 
             <div className="space-y-4">
               <div>
-                <h4 className="text-sm font-medium text-cyan-300 mb-1">Core Concept</h4>
-                <p className="opacity-80">{selectedModel.description}</p>
+                <h4 className="text-body-sm font-semibold text-teal-600 mb-1">Core Concept</h4>
+                <p className="text-body-sm">{selectedModel.description}</p>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-emerald-300 mb-1">Example</h4>
-                <p className="opacity-80 italic">"{selectedModel.example}"</p>
+                <h4 className="text-body-sm font-semibold text-sage-600 mb-1">Example</h4>
+                <p className="text-body-sm italic">"{selectedModel.example}"</p>
               </div>
               <div>
-                <h4 className="text-sm font-medium text-amber-300 mb-1">How to Apply</h4>
-                <p className="opacity-80">{selectedModel.application}</p>
+                <h4 className="text-body-sm font-semibold text-gold-600 mb-1">How to Apply</h4>
+                <p className="text-body-sm">{selectedModel.application}</p>
               </div>
               <div className="flex flex-wrap gap-2 pt-2">
                 {selectedModel.tags.map(tag => (
-                  <span key={tag} className="text-xs px-2 py-1 rounded-full bg-white/10">
+                  <span key={tag} className="text-xs px-2 py-1 rounded-full bg-sage-100 text-sage-600">
                     #{tag}
                   </span>
                 ))}
               </div>
               <button
                 onClick={() => { markPracticed(selectedModel.id); setSelectedModel(null); }}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 font-semibold hover:from-cyan-500 hover:to-blue-500 transition-all"
+                className="w-full btn-premium py-3"
                 data-testid="button-practice"
               >
                 Mark as Practiced
@@ -258,23 +266,23 @@ export default function CognitiveArchitecturePage() {
               <button
                 key={model.id}
                 onClick={() => setSelectedModel(model)}
-                className={`text-left p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group ${viewMode === "list" ? "w-full flex items-center gap-4" : ""}`}
+                className={`text-left card-bordered hover:shadow-md transition-all group ${viewMode === "list" ? "w-full flex items-center gap-4" : ""}`}
                 data-testid={`button-model-${model.id}`}
               >
                 <div className={viewMode === "list" ? "flex-1" : ""}>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-sage-100 text-sage-700">
                       {model.category}
                     </span>
                     {profile.favorites.includes(model.id) && (
-                      <Star className="h-3 w-3 text-amber-400 fill-amber-400" />
+                      <Star className="h-3 w-3 text-gold-500 fill-gold-500" />
                     )}
                     {profile.practiced.includes(model.id) && (
-                      <Target className="h-3 w-3 text-emerald-400" />
+                      <Target className="h-3 w-3 text-sage-500" />
                     )}
                   </div>
-                  <h3 className="font-semibold group-hover:text-cyan-300 transition-colors">{model.name}</h3>
-                  <p className="text-sm opacity-60 line-clamp-2 mt-1">{model.description}</p>
+                  <h3 className="text-heading-sm text-teal group-hover:text-sage-600 transition-colors">{model.name}</h3>
+                  <p className="text-caption line-clamp-2 mt-1">{model.description}</p>
                 </div>
               </button>
             ))}
@@ -282,9 +290,11 @@ export default function CognitiveArchitecturePage() {
         )}
 
         {filteredModels.length === 0 && (
-          <div className="text-center py-12 opacity-50">
-            <Search className="h-12 w-12 mx-auto mb-4" />
-            <p>No models match your search.</p>
+          <div className="text-center py-12">
+            <div className="icon-container icon-lg icon-soft-sage mx-auto mb-4">
+              <Search className="h-6 w-6" />
+            </div>
+            <p className="text-body-sm">No models match your search.</p>
           </div>
         )}
       </div>

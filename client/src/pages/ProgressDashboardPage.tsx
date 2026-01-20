@@ -160,100 +160,108 @@ export default function ProgressDashboardPage() {
   const maxWeeklyCount = Math.max(...weeklyActivity.map(d => d.count), 1);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
         <header className="mb-8">
-          <Link href="/dashboard">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
-            </a>
+          <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">
+            <ArrowLeft className="h-4 w-4" /> Back to Dashboard
           </Link>
-          <div className="flex items-center gap-3 mb-2">
-            <BarChart3 className="h-10 w-10 text-violet-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400 bg-clip-text text-transparent" data-testid="text-progress-title">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="icon-container icon-xl icon-gradient-teal">
+              <BarChart3 className="h-7 w-7" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-progress-title">
               Your Progress
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead max-w-2xl">
             Track your journey. Celebrate growth. Recognize patterns.
           </p>
         </header>
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="p-5 rounded-xl bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/20">
-            <Flame className="h-8 w-8 text-orange-400 mb-3" />
-            <div className="text-3xl font-bold" data-testid="text-current-streak">{streak.current}</div>
-            <p className="text-sm opacity-60">Day Streak</p>
-            <p className="text-xs opacity-40 mt-1">Longest: {streak.longest} days</p>
+          <div className="card-bordered bg-gradient-to-br from-gold-50 to-blush-50">
+            <div className="icon-container icon-lg icon-gradient-gold mb-3">
+              <Flame className="h-5 w-5" />
+            </div>
+            <div className="text-heading-xl text-gold-600" data-testid="text-current-streak">{streak.current}</div>
+            <p className="text-body-sm">Day Streak</p>
+            <p className="text-caption mt-1">Longest: {streak.longest} days</p>
           </div>
           
-          <div className="p-5 rounded-xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/20">
-            <Target className="h-8 w-8 text-emerald-400 mb-3" />
-            <div className="text-3xl font-bold" data-testid="text-total-activities">{totalActivities}</div>
-            <p className="text-sm opacity-60">Total Activities</p>
-            <p className="text-xs opacity-40 mt-1">Across all tools</p>
+          <div className="card-bordered bg-gradient-to-br from-sage-50 to-teal-50">
+            <div className="icon-container icon-lg icon-gradient-sage mb-3">
+              <Target className="h-5 w-5" />
+            </div>
+            <div className="text-heading-xl text-sage-600" data-testid="text-total-activities">{totalActivities}</div>
+            <p className="text-body-sm">Total Activities</p>
+            <p className="text-caption mt-1">Across all tools</p>
           </div>
           
-          <div className="p-5 rounded-xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-blue-500/20">
-            <TrendingUp className="h-8 w-8 text-blue-400 mb-3" />
-            <div className="text-3xl font-bold flex items-center gap-2" data-testid="text-mood-trend">
+          <div className="card-bordered bg-gradient-to-br from-teal-50 to-sage-50">
+            <div className="icon-container icon-lg icon-gradient-teal mb-3">
+              <TrendingUp className="h-5 w-5" />
+            </div>
+            <div className="text-heading-xl text-teal flex items-center gap-2" data-testid="text-mood-trend">
               {moodTrend.direction === "up" ? "↑" : moodTrend.direction === "down" ? "↓" : "→"}
               <span className="text-lg">{moodTrend.change}</span>
             </div>
-            <p className="text-sm opacity-60">Mood Trend</p>
-            <p className="text-xs opacity-40 mt-1">vs. last week</p>
+            <p className="text-body-sm">Mood Trend</p>
+            <p className="text-caption mt-1">vs. last week</p>
           </div>
           
-          <div className="p-5 rounded-xl bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/20">
-            <Calendar className="h-8 w-8 text-purple-400 mb-3" />
-            <div className="text-3xl font-bold" data-testid="text-active-days">
+          <div className="card-bordered bg-gradient-to-br from-blush-50 to-gold-50">
+            <div className="icon-container icon-lg icon-gradient-blush mb-3">
+              <Calendar className="h-5 w-5" />
+            </div>
+            <div className="text-heading-xl text-blush-600" data-testid="text-active-days">
               {new Set(activityDates.map(d => getDayKey(new Date(d)))).size}
             </div>
-            <p className="text-sm opacity-60">Active Days</p>
-            <p className="text-xs opacity-40 mt-1">Total unique days</p>
+            <p className="text-body-sm">Active Days</p>
+            <p className="text-caption mt-1">Total unique days</p>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <BarChart3 className="h-5 w-5 text-cyan-400" />
+          <div className="card-bordered">
+            <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+              <BarChart3 className="h-5 w-5 text-teal-500" />
               Weekly Activity
             </h3>
             <div className="flex items-end justify-between gap-2 h-32">
               {weeklyActivity.map((day, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center gap-2">
                   <div 
-                    className="w-full bg-gradient-to-t from-cyan-500 to-cyan-400 rounded-t-sm transition-all"
+                    className="w-full bg-gradient-to-t from-sage-500 to-teal-400 rounded-t-sm transition-all"
                     style={{ height: `${(day.count / maxWeeklyCount) * 100}%`, minHeight: day.count > 0 ? "8px" : "2px" }}
                     data-testid={`bar-${day.day.toLowerCase()}`}
                   />
-                  <span className="text-xs opacity-50">{day.day}</span>
+                  <span className="text-caption">{day.day}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-              <Heart className="h-5 w-5 text-rose-400" />
+          <div className="card-bordered">
+            <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+              <Heart className="h-5 w-5 text-blush-500" />
               Top Themes
             </h3>
             {topThemes.length === 0 ? (
-              <p className="text-sm opacity-50">No themes tracked yet. Use tools with theme tagging.</p>
+              <p className="text-body-sm">No themes tracked yet. Use tools with theme tagging.</p>
             ) : (
               <div className="space-y-3">
                 {topThemes.map((theme, i) => (
                   <div key={theme.theme} className="flex items-center gap-3">
-                    <span className="w-5 text-sm opacity-40">{i + 1}.</span>
+                    <span className="w-5 text-caption font-medium">{i + 1}.</span>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-sm">{theme.theme}</span>
-                        <span className="text-xs opacity-50">{theme.count}</span>
+                        <span className="text-body-sm">{theme.theme}</span>
+                        <span className="text-caption">{theme.count}</span>
                       </div>
-                      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                      <div className="h-1.5 bg-sage-100 rounded-full overflow-hidden">
                         <div 
-                          className="h-full bg-gradient-to-r from-rose-400 to-pink-400 rounded-full"
+                          className="h-full bg-gradient-to-r from-blush-400 to-blush-500 rounded-full"
                           style={{ width: `${(theme.count / topThemes[0].count) * 100}%` }}
                         />
                       </div>
@@ -265,24 +273,24 @@ export default function ProgressDashboardPage() {
           </div>
         </div>
 
-        <div className="p-6 rounded-xl bg-white/5 border border-white/10 mb-8">
-          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-emerald-400" />
+        <div className="card-bordered mb-8">
+          <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+            <TrendingUp className="h-5 w-5 text-sage-500" />
             Mood History (Last 14 Days)
           </h3>
           {moodData.length === 0 ? (
-            <p className="text-sm opacity-50">No mood data yet. Start tracking your emotional states.</p>
+            <p className="text-body-sm">No mood data yet. Start tracking your emotional states.</p>
           ) : (
             <div className="flex items-end justify-between gap-1 h-24">
               {Array(14).fill(0).map((_, i) => {
                 const date = getDayKey(new Date(Date.now() - (13 - i) * 86400000));
                 const entry = moodData.find(m => getDayKey(new Date(m.date)) === date);
                 const value = entry?.value || 0;
-                const colors = ["bg-red-400", "bg-orange-400", "bg-yellow-400", "bg-lime-400", "bg-emerald-400"];
+                const colors = ["bg-blush-300", "bg-gold-400", "bg-sage-300", "bg-sage-400", "bg-teal-400"];
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center gap-1">
                     <div 
-                      className={`w-full rounded-t-sm transition-all ${value > 0 ? colors[value - 1] : "bg-white/10"}`}
+                      className={`w-full rounded-t-sm transition-all ${value > 0 ? colors[value - 1] : "bg-sage-100"}`}
                       style={{ height: `${value > 0 ? (value / 5) * 100 : 10}%` }}
                       title={`${date}: ${value || "No data"}`}
                     />
@@ -291,42 +299,42 @@ export default function ProgressDashboardPage() {
               })}
             </div>
           )}
-          <div className="flex justify-between mt-2 text-xs opacity-40">
+          <div className="flex justify-between mt-2 text-caption">
             <span>14 days ago</span>
             <span>Today</span>
           </div>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4">
-          <Link href="/guided-journaling">
-            <a className="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group" data-testid="link-guided-journaling">
-              <Brain className="h-8 w-8 text-emerald-400 mb-3" />
-              <h4 className="font-semibold mb-1">Guided Journaling</h4>
-              <p className="text-sm opacity-60">Structured paths for healing</p>
-              <ChevronRight className="h-4 w-4 mt-2 opacity-40 group-hover:opacity-100 transition-opacity" />
-            </a>
+          <Link href="/guided-journaling" className="card-bordered hover:shadow-md transition-all group" data-testid="link-guided-journaling">
+            <div className="icon-container icon-lg icon-soft-sage mb-3">
+              <Brain className="h-5 w-5" />
+            </div>
+            <h4 className="text-heading-sm text-teal mb-1">Guided Journaling</h4>
+            <p className="text-caption">Structured paths for healing</p>
+            <ChevronRight className="h-4 w-4 mt-2 text-sage-400 group-hover:text-teal-600 transition-colors" />
           </Link>
-          <Link href="/insight-cards">
-            <a className="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group" data-testid="link-insight-cards">
-              <Sparkles className="h-8 w-8 text-amber-400 mb-3" />
-              <h4 className="font-semibold mb-1">Insight Cards</h4>
-              <p className="text-sm opacity-60">Your wisdom library</p>
-              <ChevronRight className="h-4 w-4 mt-2 opacity-40 group-hover:opacity-100 transition-opacity" />
-            </a>
+          <Link href="/insight-cards" className="card-bordered hover:shadow-md transition-all group" data-testid="link-insight-cards">
+            <div className="icon-container icon-lg icon-soft-gold mb-3">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <h4 className="text-heading-sm text-teal mb-1">Insight Cards</h4>
+            <p className="text-caption">Your wisdom library</p>
+            <ChevronRight className="h-4 w-4 mt-2 text-sage-400 group-hover:text-teal-600 transition-colors" />
           </Link>
-          <Link href="/daily-ritual">
-            <a className="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group" data-testid="link-daily-ritual">
-              <Award className="h-8 w-8 text-violet-400 mb-3" />
-              <h4 className="font-semibold mb-1">Daily Ritual</h4>
-              <p className="text-sm opacity-60">Mirror + tiny action</p>
-              <ChevronRight className="h-4 w-4 mt-2 opacity-40 group-hover:opacity-100 transition-opacity" />
-            </a>
+          <Link href="/daily-ritual" className="card-bordered hover:shadow-md transition-all group" data-testid="link-daily-ritual">
+            <div className="icon-container icon-lg icon-soft-blush mb-3">
+              <Award className="h-5 w-5" />
+            </div>
+            <h4 className="text-heading-sm text-teal mb-1">Daily Ritual</h4>
+            <p className="text-caption">Mirror + tiny action</p>
+            <ChevronRight className="h-4 w-4 mt-2 text-sage-400 group-hover:text-teal-600 transition-colors" />
           </Link>
         </div>
 
-        <div className="mt-8 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-          <p className="text-sm text-emerald-200/80">
-            <strong>Your journey matters.</strong> Every reflection, every insight, every moment of self-awareness 
+        <div className="mt-8 p-4 rounded-xl bg-sage-50 border border-sage-200">
+          <p className="text-body-sm text-sage-700">
+            <strong className="text-teal-600">Your journey matters.</strong> Every reflection, every insight, every moment of self-awareness 
             contributes to your growth. Progress isn't always linear—and that's perfectly okay.
           </p>
         </div>

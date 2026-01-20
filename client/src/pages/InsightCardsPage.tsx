@@ -179,13 +179,13 @@ export default function InsightCardsPage() {
 
         <div className="flex flex-wrap items-center gap-4 mb-6">
           <div className="flex-1 min-w-[200px] relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 opacity-40" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-sage-400" />
             <input
               type="text"
               placeholder="Search insights or tags..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
               data-testid="input-search"
             />
           </div>
@@ -193,7 +193,7 @@ export default function InsightCardsPage() {
           <button
             onClick={() => setShowStarredOnly(!showStarredOnly)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all ${
-              showStarredOnly ? "bg-yellow-500/20 text-yellow-400" : "bg-white/5 hover:bg-white/10"
+              showStarredOnly ? "bg-gold-100 border border-gold-300 text-gold-700" : "bg-sage-50 border border-sage-200 text-sage-600 hover:bg-sage-100"
             }`}
             data-testid="button-toggle-starred"
           >
@@ -203,7 +203,7 @@ export default function InsightCardsPage() {
 
           <button
             onClick={() => setShowForm(!showForm)}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 transition-all"
+            className="btn-premium flex items-center gap-2 px-4 py-2.5"
             data-testid="button-add-card"
           >
             <Plus className="h-4 w-4" />
@@ -215,7 +215,7 @@ export default function InsightCardsPage() {
           <button
             onClick={() => setSelectedTheme(null)}
             className={`px-3 py-1.5 rounded-full text-sm transition-all ${
-              !selectedTheme ? "bg-white/20" : "bg-white/5 hover:bg-white/10"
+              !selectedTheme ? "bg-sage-200 text-teal-700" : "bg-sage-50 border border-sage-200 text-sage-600 hover:bg-sage-100"
             }`}
             data-testid="button-filter-all"
           >
@@ -226,7 +226,7 @@ export default function InsightCardsPage() {
               key={theme}
               onClick={() => setSelectedTheme(selectedTheme === theme ? null : theme)}
               className={`px-3 py-1.5 rounded-full text-sm transition-all ${
-                selectedTheme === theme ? "bg-amber-500/30 text-amber-300" : "bg-white/5 hover:bg-white/10"
+                selectedTheme === theme ? "bg-gold-100 border border-gold-300 text-gold-700" : "bg-sage-50 border border-sage-200 text-sage-600 hover:bg-sage-100"
               }`}
               data-testid={`button-filter-${theme.toLowerCase().replace(/\s/g, '-')}`}
             >
@@ -236,13 +236,13 @@ export default function InsightCardsPage() {
         </div>
 
         {showForm && (
-          <div className="p-6 rounded-xl bg-white/5 border border-white/10 mb-6 space-y-4">
-            <h3 className="font-semibold text-lg">Add New Insight</h3>
+          <div className="card-bordered mb-6 space-y-4">
+            <h3 className="text-heading-sm text-teal">Add New Insight</h3>
             <textarea
               value={newCard.content}
               onChange={e => setNewCard({ ...newCard, content: e.target.value })}
               placeholder="Write your insight, quote, or wisdom..."
-              className="w-full h-32 px-4 py-3 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none resize-none"
+              className="w-full h-32 px-4 py-3 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none resize-none"
               data-testid="textarea-insight-content"
             />
             <div className="grid md:grid-cols-3 gap-4">
@@ -251,7 +251,7 @@ export default function InsightCardsPage() {
                 value={newCard.source}
                 onChange={e => setNewCard({ ...newCard, source: e.target.value })}
                 placeholder="Source (optional)"
-                className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+                className="px-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
                 data-testid="input-insight-source"
               />
               <input
@@ -259,17 +259,17 @@ export default function InsightCardsPage() {
                 value={newCard.tags}
                 onChange={e => setNewCard({ ...newCard, tags: e.target.value })}
                 placeholder="Tags (comma separated)"
-                className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+                className="px-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
                 data-testid="input-insight-tags"
               />
               <select
                 value={newCard.theme}
                 onChange={e => setNewCard({ ...newCard, theme: e.target.value })}
-                className="px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 focus:border-white/30 focus:outline-none"
+                className="px-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 focus:ring-2 focus:ring-sage-400/50 focus:outline-none"
                 data-testid="select-insight-theme"
               >
                 {SUGGESTED_THEMES.map(theme => (
-                  <option key={theme} value={theme} className="bg-slate-800">{theme}</option>
+                  <option key={theme} value={theme}>{theme}</option>
                 ))}
               </select>
             </div>
@@ -277,14 +277,14 @@ export default function InsightCardsPage() {
               <button
                 onClick={addCard}
                 disabled={!newCard.content.trim()}
-                className="px-5 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                className="btn-premium px-5 py-2.5 disabled:opacity-40 disabled:cursor-not-allowed"
                 data-testid="button-save-insight"
               >
                 Save Insight
               </button>
               <button
                 onClick={() => setShowForm(false)}
-                className="px-5 py-2.5 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+                className="px-5 py-2.5 rounded-lg bg-sage-50 border border-sage-200 text-sage-700 hover:bg-sage-100 transition-all"
                 data-testid="button-cancel-insight"
               >
                 Cancel
@@ -294,49 +294,49 @@ export default function InsightCardsPage() {
         )}
 
         {filteredCards.length === 0 ? (
-          <div className="text-center py-16 opacity-50">
-            <Bookmark className="h-12 w-12 mx-auto mb-4 opacity-40" />
-            <p>No insights yet. Start collecting your wisdom.</p>
+          <div className="text-center py-16">
+            <Bookmark className="h-12 w-12 mx-auto mb-4 text-sage-300" />
+            <p className="text-body-sm">No insights yet. Start collecting your wisdom.</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-4">
             {filteredCards.map(card => (
               <div
                 key={card.id}
-                className="p-5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/[0.07] transition-all group"
+                className="card-bordered hover:shadow-md transition-all group"
                 data-testid={`card-insight-${card.id}`}
               >
                 <div className="flex items-start justify-between mb-3">
-                  <span className="text-xs px-2 py-1 rounded-full bg-amber-500/20 text-amber-300">
+                  <span className="text-xs px-2 py-1 rounded-full bg-gold-100 border border-gold-200 text-gold-700">
                     {card.theme}
                   </span>
                   <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() => toggleStar(card.id)}
-                      className={`p-1.5 rounded-lg ${card.starred ? "text-yellow-400" : "text-white/40 hover:text-white/80"}`}
+                      className={`p-1.5 rounded-lg ${card.starred ? "text-gold-500" : "text-sage-400 hover:text-gold-500"}`}
                       data-testid={`button-star-${card.id}`}
                     >
                       <Star className="h-4 w-4" fill={card.starred ? "currentColor" : "none"} />
                     </button>
                     <button
                       onClick={() => deleteCard(card.id)}
-                      className="p-1.5 rounded-lg text-white/40 hover:text-red-400"
+                      className="p-1.5 rounded-lg text-sage-400 hover:text-blush-500"
                       data-testid={`button-delete-${card.id}`}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
-                <p className="text-base leading-relaxed mb-3" data-testid={`text-content-${card.id}`}>
+                <p className="text-body text-teal-700 leading-relaxed mb-3" data-testid={`text-content-${card.id}`}>
                   "{card.content}"
                 </p>
                 {card.source && (
-                  <p className="text-sm opacity-50 mb-3">— {card.source}</p>
+                  <p className="text-body-sm text-sage-500 mb-3">— {card.source}</p>
                 )}
                 {card.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5">
                     {card.tags.map(tag => (
-                      <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-white/10">
+                      <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-sage-100 border border-sage-200 text-sage-600">
                         #{tag}
                       </span>
                     ))}

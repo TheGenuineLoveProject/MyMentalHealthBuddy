@@ -139,49 +139,55 @@ export default function PhilosophicalInquiryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-5xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
         <header className="mb-8">
-          <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Atlas
-            </a>
+          <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">
+            <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
-          <div className="flex items-center gap-3 mb-2">
-            <MessageCircle className="h-10 w-10 text-amber-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-red-400 bg-clip-text text-transparent" data-testid="text-title">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="icon-container icon-xl icon-gradient-gold">
+              <MessageCircle className="h-7 w-7" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-title">
               Philosophical Inquiry
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead max-w-2xl">
             Socratic questioning and dialectical reasoning. Examine beliefs, discover assumptions, find synthesis.
           </p>
         </header>
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <HelpCircle className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-2xl font-bold" data-testid="text-inquiries">{profile.totalInquiries}</div>
-            <p className="text-xs opacity-50">Total Inquiries</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-3">
+              <HelpCircle className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-gold-600" data-testid="text-inquiries">{profile.totalInquiries}</div>
+            <p className="text-caption">Total Inquiries</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Lightbulb className="h-6 w-6 mx-auto mb-2 text-cyan-400" />
-            <div className="text-2xl font-bold" data-testid="text-insights">{profile.sessions.reduce((s, e) => s + e.insights.length, 0)}</div>
-            <p className="text-xs opacity-50">Insights Generated</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-teal mx-auto mb-3">
+              <Lightbulb className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-insights">{profile.sessions.reduce((s, e) => s + e.insights.length, 0)}</div>
+            <p className="text-caption">Insights Generated</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <BookOpen className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
-            <div className="text-2xl font-bold" data-testid="text-sessions">{profile.sessions.length}</div>
-            <p className="text-xs opacity-50">Saved Sessions</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-sage mx-auto mb-3">
+              <BookOpen className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-sage-600" data-testid="text-sessions">{profile.sessions.length}</div>
+            <p className="text-caption">Saved Sessions</p>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="space-y-4">
             {!currentSession ? (
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-amber-400" />
+              <div className="card-bordered">
+                <h2 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-gold-500" />
                   Begin an Inquiry
                 </h2>
                 
@@ -190,26 +196,26 @@ export default function PhilosophicalInquiryPage() {
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   placeholder="Enter a topic, belief, or question to examine..."
-                  className="w-full p-4 rounded-xl bg-black/30 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-amber-500/50 mb-4"
+                  className="w-full p-4 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 mb-4"
                   data-testid="input-topic"
                 />
 
                 <button
                   onClick={startInquiry}
                   disabled={topic.trim().length < 5}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-amber-600 to-orange-600 font-semibold disabled:opacity-50 hover:from-amber-500 hover:to-orange-500 transition-all"
+                  className="w-full btn-premium py-3 disabled:opacity-50"
                   data-testid="button-start"
                 >
                   Start Socratic Inquiry
                 </button>
               </div>
             ) : (
-              <div className="p-5 rounded-xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20">
+              <div className="card-bordered bg-gradient-to-br from-gold-50 to-blush-50">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold">Inquiry: {currentSession.topic}</h2>
+                  <h2 className="text-heading-sm text-teal">Inquiry: {currentSession.topic}</h2>
                   <button
                     onClick={reset}
-                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10"
+                    className="p-2 rounded-lg bg-white border border-sage-200 text-teal-600 hover:bg-sage-50"
                     data-testid="button-reset"
                   >
                     <RefreshCw className="h-4 w-4" />
@@ -219,14 +225,14 @@ export default function PhilosophicalInquiryPage() {
                 <div className="space-y-4 max-h-80 overflow-y-auto mb-4">
                   {currentSession.questions.map((q, i) => (
                     <div key={i} className="space-y-2">
-                      <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                        <div className="text-xs text-amber-400 mb-1">Question {i + 1}</div>
-                        <p className="font-medium">{q}</p>
+                      <div className="p-3 rounded-lg bg-gold-50 border border-gold-200">
+                        <div className="text-xs text-gold-600 font-medium mb-1">Question {i + 1}</div>
+                        <p className="text-body-sm font-medium text-teal-700">{q}</p>
                       </div>
                       {currentSession.responses[i] && (
-                        <div className="p-3 rounded-lg bg-white/5 border border-white/10 ml-4">
-                          <div className="text-xs opacity-50 mb-1">Your Response</div>
-                          <p className="text-sm opacity-80">{currentSession.responses[i]}</p>
+                        <div className="p-3 rounded-lg bg-white border border-sage-200 ml-4">
+                          <div className="text-caption font-medium mb-1">Your Response</div>
+                          <p className="text-body-sm">{currentSession.responses[i]}</p>
                         </div>
                       )}
                     </div>
@@ -239,13 +245,13 @@ export default function PhilosophicalInquiryPage() {
                       value={currentResponse}
                       onChange={(e) => setCurrentResponse(e.target.value)}
                       placeholder="Reflect and respond..."
-                      className="w-full h-24 p-3 rounded-xl bg-black/30 border border-white/10 text-white placeholder:text-white/30 resize-none focus:outline-none focus:ring-2 focus:ring-amber-500/50"
+                      className="w-full h-24 p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:outline-none focus:ring-2 focus:ring-sage-400/50"
                       data-testid="input-response"
                     />
                     <button
                       onClick={submitResponse}
                       disabled={currentResponse.trim().length < 5}
-                      className="w-full py-2 rounded-xl bg-amber-600 font-medium disabled:opacity-50 hover:bg-amber-500"
+                      className="w-full btn-premium py-2 disabled:opacity-50"
                       data-testid="button-respond"
                     >
                       <ChevronRight className="h-4 w-4 inline mr-1" />
@@ -257,7 +263,7 @@ export default function PhilosophicalInquiryPage() {
                 {currentSession.responses.length >= 3 && (
                   <button
                     onClick={saveSession}
-                    className="w-full py-3 rounded-xl bg-white/10 border border-white/20 hover:bg-white/20 transition-all font-medium mt-4"
+                    className="w-full py-3 rounded-xl bg-sage-100 border border-sage-300 text-sage-700 hover:bg-sage-200 transition-all font-medium mt-4"
                     data-testid="button-save"
                   >
                     <Save className="h-4 w-4 inline mr-2" />
@@ -268,15 +274,15 @@ export default function PhilosophicalInquiryPage() {
             )}
 
             {currentSession && currentSession.insights.length > 0 && (
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
-                  <Lightbulb className="h-4 w-4 text-cyan-400" />
+              <div className="card-bordered">
+                <h3 className="text-body-sm font-semibold text-teal-600 mb-3 flex items-center gap-2">
+                  <Lightbulb className="h-4 w-4 text-teal-500" />
                   Emerging Insights
                 </h3>
                 <ul className="space-y-2">
                   {currentSession.insights.map((ins, i) => (
-                    <li key={i} className="text-sm opacity-70 flex items-start gap-2">
-                      <span className="text-cyan-400 mt-1">•</span>
+                    <li key={i} className="text-body-sm flex items-start gap-2">
+                      <span className="text-teal-500 mt-1">•</span>
                       {ins}
                     </li>
                   ))}
@@ -286,9 +292,9 @@ export default function PhilosophicalInquiryPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-sm font-semibold mb-3">Dialectical Thinking</h3>
-              <p className="text-xs opacity-60 mb-4">
+            <div className="card-bordered">
+              <h3 className="text-body-sm font-semibold text-teal-600 mb-3">Dialectical Thinking</h3>
+              <p className="text-caption mb-4">
                 Explore how opposing ideas can lead to deeper truth through synthesis.
               </p>
               
@@ -297,17 +303,17 @@ export default function PhilosophicalInquiryPage() {
                   <button
                     key={i}
                     onClick={() => setSelectedDialectic(selectedDialectic === i ? null : i)}
-                    className={`w-full text-left p-3 rounded-lg border transition-all ${selectedDialectic === i ? "bg-purple-500/10 border-purple-500/30" : "bg-black/20 border-white/5 hover:bg-white/5"}`}
+                    className={`w-full text-left p-3 rounded-lg border transition-all ${selectedDialectic === i ? "bg-blush-50 border-blush-300" : "bg-white border-sage-200 hover:bg-sage-50"}`}
                     data-testid={`button-dialectic-${i}`}
                   >
-                    <div className="text-sm font-medium">{d.thesis}</div>
+                    <div className="text-body-sm font-medium text-teal-700">{d.thesis}</div>
                     {selectedDialectic === i && (
                       <div className="mt-3 space-y-2 text-xs">
-                        <div className="p-2 rounded bg-red-500/10 border border-red-500/20">
-                          <span className="text-red-400">Antithesis:</span> {d.antithesis}
+                        <div className="p-2 rounded bg-blush-50 border border-blush-200">
+                          <span className="text-blush-600 font-medium">Antithesis:</span> <span className="text-teal-600">{d.antithesis}</span>
                         </div>
-                        <div className="p-2 rounded bg-emerald-500/10 border border-emerald-500/20">
-                          <span className="text-emerald-400">Synthesis:</span> {d.synthesis}
+                        <div className="p-2 rounded bg-sage-50 border border-sage-200">
+                          <span className="text-sage-600 font-medium">Synthesis:</span> <span className="text-teal-600">{d.synthesis}</span>
                         </div>
                       </div>
                     )}
@@ -316,26 +322,26 @@ export default function PhilosophicalInquiryPage() {
               </div>
             </div>
 
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-sm font-semibold mb-3">Socratic Categories</h3>
+            <div className="card-bordered">
+              <h3 className="text-body-sm font-semibold text-teal-600 mb-3">Socratic Categories</h3>
               <div className="grid grid-cols-2 gap-2">
                 {SOCRATIC_TEMPLATES.map((cat, i) => (
-                  <div key={i} className="p-3 rounded-lg bg-black/20 border border-white/5">
-                    <div className="text-sm font-medium text-amber-300">{cat.category}</div>
-                    <div className="text-xs opacity-50 mt-1">{cat.questions.length} questions</div>
+                  <div key={i} className="p-3 rounded-lg bg-gold-50 border border-gold-200">
+                    <div className="text-body-sm font-medium text-gold-700">{cat.category}</div>
+                    <div className="text-caption mt-1">{cat.questions.length} questions</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {profile.sessions.length > 0 && (
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold mb-3 opacity-70">Recent Inquiries</h3>
+              <div className="card-bordered">
+                <h3 className="text-body-sm font-semibold text-sage-600 mb-3">Recent Inquiries</h3>
                 <div className="space-y-2 max-h-40 overflow-y-auto">
                   {profile.sessions.slice(0, 5).map((s) => (
-                    <div key={s.id} className="p-2 rounded-lg bg-black/20 border border-white/5">
-                      <div className="text-sm font-medium">{s.topic}</div>
-                      <div className="text-xs opacity-50">{s.responses.length} exchanges</div>
+                    <div key={s.id} className="p-2 rounded-lg bg-sage-50 border border-sage-200">
+                      <div className="text-body-sm font-medium text-teal-700">{s.topic}</div>
+                      <div className="text-caption">{s.responses.length} exchanges</div>
                     </div>
                   ))}
                 </div>

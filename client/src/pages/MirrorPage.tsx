@@ -127,14 +127,14 @@ export default function MirrorPage() {
       <Card className="card-bordered">
         <CardContent className="p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <p className="text-sm text-white/70 italic">
+            <p className="text-body-sm italic text-sage-500">
               Try this: "{currentPrompt}"
             </p>
             <Button 
               variant="ghost" 
               size="sm"
               onClick={cyclePrompt}
-              className="text-white/50 hover:text-white/80"
+              className="text-sage-500 hover:text-teal-600"
               data-testid="button-cycle-prompt"
             >
               <RefreshCw className="w-4 h-4 mr-1" />
@@ -146,18 +146,18 @@ export default function MirrorPage() {
             value={text}
             onChange={(e) => setText(e.target.value)}
             placeholder="What's on your mind? Write at least 10 characters..."
-            className="min-h-[150px] bg-white/5 border-white/10 text-white placeholder:text-white/40 resize-none"
+            className="min-h-[150px] bg-white border-sage-200 text-teal-700 placeholder:text-sage-400 resize-none focus:ring-2 focus:ring-sage-400/50"
             data-testid="input-mirror-text"
           />
 
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <Tabs value={mode} onValueChange={setMode} className="w-full sm:w-auto">
-              <TabsList className="bg-white/5 border border-white/10">
+              <TabsList className="bg-sage-50 border border-sage-200">
                 {REFLECTION_MODES.map((m) => (
                   <TabsTrigger 
                     key={m.id} 
                     value={m.id}
-                    className="data-[state=active]:bg-white/10 text-white/70 data-[state=active]:text-white"
+                    className="data-[state=active]:bg-sage-200 text-sage-600 data-[state=active]:text-teal-700"
                     data-testid={`tab-mode-${m.id}`}
                   >
                     <m.icon className="w-4 h-4 mr-1.5" />
@@ -170,7 +170,7 @@ export default function MirrorPage() {
             <Button
               onClick={handleReflect}
               disabled={text.trim().length < 10 || mutation.isPending}
-              className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white w-full sm:w-auto"
+              className="btn-premium w-full sm:w-auto"
               data-testid="button-reflect"
             >
               {mutation.isPending ? (
@@ -187,7 +187,7 @@ export default function MirrorPage() {
             </Button>
           </div>
 
-          <p className="text-xs text-white/40 text-center">
+          <p className="text-caption text-center">
             {REFLECTION_MODES.find(m => m.id === mode)?.description}
           </p>
         </CardContent>
@@ -195,28 +195,28 @@ export default function MirrorPage() {
 
       {response?.ok && (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <Card className="border-white/10 bg-gradient-to-br from-emerald-900/20 to-teal-900/20">
+          <Card className="card-bordered bg-gradient-to-br from-sage-50 via-teal-50 to-gold-50">
             <CardHeader className="pb-2">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg text-white/90 flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-emerald-400" />
+                <CardTitle className="text-heading-md text-teal flex items-center gap-2">
+                  <BookOpen className="w-5 h-5 text-sage-500" />
                   Your Reflection
                 </CardTitle>
                 <div className="flex items-center gap-2">
-                  <Badge variant="outline" className="text-xs border-emerald-500/30 text-emerald-400">
+                  <Badge variant="outline" className="text-xs border-sage-300 text-sage-600">
                     {response.framework}
                   </Badge>
-                  <Badge variant="outline" className="text-xs border-white/20 text-white/50">
+                  <Badge variant="outline" className="text-xs border-sage-200 text-sage-500">
                     {response.mode === "ai" ? "AI" : "Local"}
                   </Badge>
                 </div>
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-white/85 leading-relaxed whitespace-pre-wrap" data-testid="text-reflection">
+              <p className="text-body text-teal-700 leading-relaxed whitespace-pre-wrap" data-testid="text-reflection">
                 {response.reflection}
               </p>
-              <p className="mt-4 text-xs text-white/40 italic">
+              <p className="mt-4 text-caption italic">
                 {response.note}
               </p>
             </CardContent>
@@ -224,8 +224,8 @@ export default function MirrorPage() {
 
           {response.insightCards?.length > 0 && (
             <section className="space-y-4">
-              <h2 className="text-lg font-medium text-white/80 flex items-center gap-2">
-                <Lightbulb className="w-5 h-5 text-amber-400" />
+              <h2 className="text-heading-md text-teal flex items-center gap-2">
+                <Lightbulb className="w-5 h-5 text-gold-500" />
                 Insight Cards
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

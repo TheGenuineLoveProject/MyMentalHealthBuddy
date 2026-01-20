@@ -237,9 +237,9 @@ export default function GrowthAnalyticsPage() {
                       </div>
                       <span className="text-sm opacity-60" data-testid={`text-category-${category.toLowerCase()}`}>{value}</span>
                     </div>
-                    <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+                    <div className="h-2 rounded-full bg-sage-100 overflow-hidden">
                       <div 
-                        className={`h-full rounded-full ${config.bgColor.replace("/10", "/50")} transition-all`}
+                        className="h-full rounded-full bg-gradient-to-r from-sage-400 to-teal-400 transition-all"
                         style={{ width: `${Math.max(percentage, 2)}%` }}
                       />
                     </div>
@@ -249,27 +249,27 @@ export default function GrowthAnalyticsPage() {
             </div>
           </div>
 
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-            <h3 className="font-semibold mb-4 flex items-center gap-2">
-              <Calendar className="h-5 w-5" /> Weekly Activity
+          <div className="card-bordered">
+            <h3 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+              <Calendar className="h-5 w-5 text-[var(--sage-500)]" /> Weekly Activity
             </h3>
             <div className="flex items-end justify-between gap-2 h-32">
               {weeklyData.map((d, i) => (
                 <div key={d.day} className="flex-1 flex flex-col items-center gap-1">
                   <div 
-                    className="w-full rounded-t bg-gradient-to-t from-emerald-500/30 to-emerald-400/60 transition-all"
+                    className="w-full rounded-t bg-gradient-to-t from-sage-300 to-teal-400 transition-all"
                     style={{ height: `${Math.max(d.value * 15, 8)}px` }}
                   />
-                  <span className="text-xs opacity-50">{d.day}</span>
+                  <span className="text-caption">{d.day}</span>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-500/10 to-orange-500/10 border border-amber-500/20 mb-8">
-          <h3 className="font-semibold mb-4 flex items-center gap-2">
-            <Award className="h-5 w-5 text-amber-400" /> Milestones
+        <div className="card-bordered bg-gradient-to-br from-gold-50 via-blush-50 to-sage-50 mb-8">
+          <h3 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+            <Award className="h-5 w-5 text-gold-500" /> Milestones
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {milestones.map((milestone, i) => (
@@ -277,8 +277,8 @@ export default function GrowthAnalyticsPage() {
                 key={milestone.threshold}
                 className={`p-3 rounded-xl text-center transition-all ${
                   milestone.achieved 
-                    ? "bg-amber-500/20 border border-amber-500/40" 
-                    : "bg-white/5 border border-white/10 opacity-50"
+                    ? "bg-gold-100 border border-gold-300" 
+                    : "bg-white border border-sage-200 opacity-60"
                 }`}
                 data-testid={`milestone-${milestone.threshold}`}
               >
@@ -297,27 +297,33 @@ export default function GrowthAnalyticsPage() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <Link href="/knowledge-synthesis" className="block p-5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-500/40 transition-all group" data-testid="link-knowledge-synthesis">
-            <Brain className="h-6 w-6 mb-2 text-cyan-400" />
-            <h4 className="font-medium mb-1">Knowledge Synthesis</h4>
-            <p className="text-xs opacity-60">Build your concept map</p>
-            <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
+          <Link href="/knowledge-synthesis" className="card-bordered hover:shadow-md transition-all group" data-testid="link-knowledge-synthesis">
+            <div className="icon-container icon-md icon-soft-teal mb-3">
+              <Brain className="h-5 w-5" />
+            </div>
+            <h4 className="text-heading-sm text-teal mb-1">Knowledge Synthesis</h4>
+            <p className="text-caption">Build your concept map</p>
+            <div className="mt-2 flex items-center gap-1 text-caption text-sage-400 group-hover:text-teal-600">
               Open <ChevronRight className="h-3 w-3" />
             </div>
           </Link>
-          <Link href="/wisdom-practices" className="block p-5 rounded-xl bg-white/5 border border-white/10 hover:border-violet-500/40 transition-all group" data-testid="link-wisdom-practices">
-            <Sparkles className="h-6 w-6 mb-2 text-violet-400" />
-            <h4 className="font-medium mb-1">Wisdom Practices</h4>
-            <p className="text-xs opacity-60">Daily contemplation & gratitude</p>
-            <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
+          <Link href="/wisdom-practices" className="card-bordered hover:shadow-md transition-all group" data-testid="link-wisdom-practices">
+            <div className="icon-container icon-md icon-soft-gold mb-3">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <h4 className="text-heading-sm text-teal mb-1">Wisdom Practices</h4>
+            <p className="text-caption">Daily contemplation & gratitude</p>
+            <div className="mt-2 flex items-center gap-1 text-caption text-sage-400 group-hover:text-teal-600">
               Open <ChevronRight className="h-3 w-3" />
             </div>
           </Link>
-          <Link href="/atlas" className="block p-5 rounded-xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition-all group" data-testid="link-all-tools">
-            <Target className="h-6 w-6 mb-2 text-emerald-400" />
-            <h4 className="font-medium mb-1">Explore All Tools</h4>
-            <p className="text-xs opacity-60">Full intellectual toolkit</p>
-            <div className="mt-2 flex items-center gap-1 text-xs opacity-40 group-hover:opacity-100">
+          <Link href="/atlas" className="card-bordered hover:shadow-md transition-all group" data-testid="link-all-tools">
+            <div className="icon-container icon-md icon-soft-sage mb-3">
+              <Target className="h-5 w-5" />
+            </div>
+            <h4 className="text-heading-sm text-teal mb-1">Explore All Tools</h4>
+            <p className="text-caption">Full intellectual toolkit</p>
+            <div className="mt-2 flex items-center gap-1 text-caption text-sage-400 group-hover:text-teal-600">
               Open <ChevronRight className="h-3 w-3" />
             </div>
           </Link>

@@ -257,19 +257,19 @@ export default function AdaptiveCompanionPage() {
           <div className="space-y-6">
             <button
               onClick={() => setShowRecommendations(false)}
-              className="text-sm opacity-60 hover:opacity-100 flex items-center gap-1"
+              className="text-body-sm text-sage-500 hover:text-teal-600 flex items-center gap-1 transition"
               data-testid="button-back-state"
             >
               <RefreshCw className="h-4 w-4" />
               Update my state
             </button>
 
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-500/10 to-purple-500/10 border border-violet-500/20">
-              <h2 className="text-xl font-semibold mb-2 flex items-center gap-2">
-                <Sparkles className="h-5 w-5" />
+            <div className="card-bordered bg-gradient-to-br from-gold-50 via-blush-50 to-sage-50">
+              <h2 className="text-heading-md text-teal mb-2 flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-gold-500" />
                 Recommendations for You
               </h2>
-              <p className="text-sm opacity-60">
+              <p className="text-body-sm">
                 Based on your {state.energy} energy, {state.clarity} clarity
                 {state.goal && `, and focus on ${GOALS.find(g => g.id === state.goal)?.label.toLowerCase()}`}
               </p>
@@ -280,20 +280,20 @@ export default function AdaptiveCompanionPage() {
                 <Link 
                   key={tool.id} 
                   href={tool.route}
-                  className="block p-5 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all group"
+                  className="block card-bordered hover:shadow-md transition-all group"
                   data-testid={`card-recommendation-${tool.id}`}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-white/10 group-hover:bg-white/20 transition-all">
-                      <tool.icon className="h-6 w-6" />
+                    <div className="icon-container icon-md icon-soft-sage group-hover:icon-gradient-sage transition-all">
+                      <tool.icon className="h-5 w-5" />
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-semibold group-hover:text-violet-400 transition-colors">{tool.name}</h3>
-                        <span className="text-xs opacity-50 capitalize">{tool.category}</span>
+                        <h3 className="text-body-sm font-semibold text-teal group-hover:text-sage-600 transition-colors">{tool.name}</h3>
+                        <span className="text-caption capitalize">{tool.category}</span>
                       </div>
-                      <p className="text-sm opacity-70 mb-2">{tool.reason}</p>
-                      <div className="flex items-center gap-4 text-xs opacity-50">
+                      <p className="text-body-sm mb-2">{tool.reason}</p>
+                      <div className="flex items-center gap-4 text-caption">
                         <span className="flex items-center gap-1">
                           <Clock className="h-3 w-3" />
                           {tool.duration}
@@ -307,10 +307,10 @@ export default function AdaptiveCompanionPage() {
               ))}
             </div>
 
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-              <p className="text-sm opacity-60">
+            <div className="card-bordered text-center">
+              <p className="text-body-sm">
                 Not sure where to start? 
-                <Link href="/atlas" className="text-violet-400 hover:text-violet-300 ml-1" data-testid="link-explore-all">
+                <Link href="/atlas" className="text-sage-600 hover:text-teal-600 underline ml-1" data-testid="link-explore-all">
                   Explore all 37 tools →
                 </Link>
               </p>

@@ -119,53 +119,62 @@ export default function SystemsThinkingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-6xl mx-auto">
         <header className="mb-8">
-          <Link href="/atlas">
-            <a className="inline-flex items-center gap-2 text-sm opacity-60 hover:opacity-100 mb-4" data-testid="link-back">
-              <ArrowLeft className="h-4 w-4" /> Back to Atlas
-            </a>
+          <Link href="/atlas" className="inline-flex items-center gap-2 text-body-sm text-sage-500 hover:text-teal-600 mb-4 transition" data-testid="link-back">
+            <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
           <div className="flex items-center gap-3 mb-2">
-            <GitBranch className="h-10 w-10 text-teal-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-teal-400 via-cyan-400 to-blue-400 bg-clip-text text-transparent" data-testid="text-title">
+            <div className="icon-container icon-xl icon-gradient-teal">
+              <GitBranch className="h-8 w-8" />
+            </div>
+            <h1 className="text-display-lg text-teal" data-testid="text-title">
               Systems Thinking Toolkit
             </h1>
           </div>
-          <p className="text-lg opacity-70">
+          <p className="text-lead">
             Map feedback loops, identify leverage points, recognize system archetypes. See the whole.
           </p>
         </header>
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Layers className="h-6 w-6 mx-auto mb-2 text-teal-400" />
-            <div className="text-2xl font-bold" data-testid="text-maps">{profile.totalMaps}</div>
-            <p className="text-xs opacity-50">Systems Mapped</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-teal mx-auto mb-2">
+              <Layers className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-maps">{profile.totalMaps}</div>
+            <p className="text-caption">Systems Mapped</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Repeat className="h-6 w-6 mx-auto mb-2 text-emerald-400" />
-            <div className="text-2xl font-bold" data-testid="text-loops">{profile.maps.reduce((s, m) => s + m.loops.length, 0)}</div>
-            <p className="text-xs opacity-50">Loops Identified</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-sage mx-auto mb-2">
+              <Repeat className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-loops">{profile.maps.reduce((s, m) => s + m.loops.length, 0)}</div>
+            <p className="text-caption">Loops Identified</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Target className="h-6 w-6 mx-auto mb-2 text-amber-400" />
-            <div className="text-2xl font-bold" data-testid="text-leverage">{profile.maps.reduce((s, m) => s + m.leverage.length, 0)}</div>
-            <p className="text-xs opacity-50">Leverage Points</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-gold mx-auto mb-2">
+              <Target className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-leverage">{profile.maps.reduce((s, m) => s + m.leverage.length, 0)}</div>
+            <p className="text-caption">Leverage Points</p>
           </div>
-          <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
-            <Zap className="h-6 w-6 mx-auto mb-2 text-purple-400" />
-            <div className="text-2xl font-bold" data-testid="text-archetypes">{ARCHETYPES.length}</div>
-            <p className="text-xs opacity-50">Archetypes</p>
+          <div className="card-bordered text-center">
+            <div className="icon-container icon-md icon-soft-blush mx-auto mb-2">
+              <Zap className="h-5 w-5" />
+            </div>
+            <div className="text-heading-lg text-teal" data-testid="text-archetypes">{ARCHETYPES.length}</div>
+            <p className="text-caption">Archetypes</p>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6">
           <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Layers className="h-5 w-5 text-teal-400" />
+            <div className="card-bordered">
+              <h2 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+                <Layers className="h-5 w-5 text-sage-500" />
                 Build a System Map
               </h2>
 
@@ -174,12 +183,12 @@ export default function SystemsThinkingPage() {
                 value={systemName}
                 onChange={(e) => setSystemName(e.target.value)}
                 placeholder="Name your system (e.g., 'Team Productivity')"
-                className="w-full p-3 rounded-xl bg-black/30 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-teal-500/50 mb-4"
+                className="w-full p-3 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50 mb-4"
                 data-testid="input-system-name"
               />
 
               <div className="mb-4">
-                <h4 className="text-sm font-medium mb-2 opacity-70">System Elements</h4>
+                <h4 className="form-label">System Elements</h4>
                 <div className="flex gap-2 mb-2">
                   <input
                     type="text"
@@ -187,12 +196,12 @@ export default function SystemsThinkingPage() {
                     onChange={(e) => setNewElement(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && addElement()}
                     placeholder="Add an element..."
-                    className="flex-1 p-2 rounded-lg bg-black/30 border border-white/10 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50"
+                    className="flex-1 p-2 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-400/50"
                     data-testid="input-element"
                   />
                   <button
                     onClick={addElement}
-                    className="px-4 py-2 rounded-lg bg-teal-600 text-sm font-medium hover:bg-teal-500"
+                    className="btn-premium px-4 py-2"
                     data-testid="button-add-element"
                   >
                     Add
@@ -202,20 +211,20 @@ export default function SystemsThinkingPage() {
                   {elements.map((el, i) => (
                     <div
                       key={i}
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ${leverage.includes(el) ? "bg-amber-500/20 border border-amber-500/30" : "bg-white/10 border border-white/10"}`}
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm ${leverage.includes(el) ? "bg-gold-100 border border-gold-300 text-gold-700" : "bg-sage-50 border border-sage-200 text-teal-700"}`}
                     >
                       <span>{el}</span>
                       <button
                         onClick={() => toggleLeverage(el)}
-                        className="opacity-60 hover:opacity-100"
+                        className="text-sage-400 hover:text-gold-500"
                         title="Toggle as leverage point"
                         data-testid={`button-leverage-${i}`}
                       >
-                        <Target className={`h-3 w-3 ${leverage.includes(el) ? "text-amber-400" : ""}`} />
+                        <Target className={`h-3 w-3 ${leverage.includes(el) ? "text-gold-500" : ""}`} />
                       </button>
                       <button
                         onClick={() => removeElement(el)}
-                        className="opacity-60 hover:opacity-100"
+                        className="text-sage-400 hover:text-blush-500"
                         data-testid={`button-remove-${i}`}
                       >
                         ×
@@ -226,14 +235,14 @@ export default function SystemsThinkingPage() {
               </div>
 
               <div className="mb-4">
-                <h4 className="text-sm font-medium mb-2 opacity-70">Feedback Loops</h4>
+                <h4 className="form-label">Feedback Loops</h4>
                 <div className="flex gap-2 mb-3">
                   {FEEDBACK_TYPES.map((ft) => (
                     <button
                       key={ft.type}
                       onClick={() => addLoop(ft.type as "reinforcing" | "balancing")}
                       disabled={elements.length < 2}
-                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm disabled:opacity-30 ${ft.type === "reinforcing" ? "bg-emerald-500/20 border border-emerald-500/30" : "bg-blue-500/20 border border-blue-500/30"}`}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm disabled:opacity-30 ${ft.type === "reinforcing" ? "bg-sage-100 border border-sage-300 text-sage-700" : "bg-teal-50 border border-teal-200 text-teal-700"}`}
                       data-testid={`button-loop-${ft.type}`}
                     >
                       <ft.icon className="h-4 w-4" />
@@ -245,15 +254,15 @@ export default function SystemsThinkingPage() {
                   {loops.map((loop, i) => (
                     <div
                       key={i}
-                      className={`p-3 rounded-lg border ${loop.type === "reinforcing" ? "bg-emerald-500/10 border-emerald-500/20" : "bg-blue-500/10 border-blue-500/20"}`}
+                      className={`p-3 rounded-lg border ${loop.type === "reinforcing" ? "bg-sage-50 border-sage-200" : "bg-teal-50 border-teal-200"}`}
                     >
-                      <div className="flex items-center gap-2 text-sm mb-2">
-                        {loop.type === "reinforcing" ? <Plus className="h-4 w-4 text-emerald-400" /> : <Minus className="h-4 w-4 text-blue-400" />}
+                      <div className="flex items-center gap-2 text-sm mb-2 text-teal-700">
+                        {loop.type === "reinforcing" ? <Plus className="h-4 w-4 text-sage-500" /> : <Minus className="h-4 w-4 text-teal-500" />}
                         <span className="font-medium">{loop.type === "reinforcing" ? "Reinforcing" : "Balancing"} Loop</span>
                       </div>
                       <div className="flex flex-wrap gap-1">
                         {loop.elements.map((el, j) => (
-                          <span key={j} className="text-xs px-2 py-0.5 rounded bg-white/10">
+                          <span key={j} className="text-xs px-2 py-0.5 rounded bg-sage-100 text-teal-600">
                             {el} {j < loop.elements.length - 1 && "→"}
                           </span>
                         ))}
@@ -267,7 +276,7 @@ export default function SystemsThinkingPage() {
                 <button
                   onClick={saveMap}
                   disabled={!systemName.trim() || elements.length < 2}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-cyan-600 font-semibold disabled:opacity-50"
+                  className="btn-premium flex-1 py-3 disabled:opacity-50"
                   data-testid="button-save"
                 >
                   <Save className="h-4 w-4 inline mr-2" />
@@ -275,7 +284,7 @@ export default function SystemsThinkingPage() {
                 </button>
                 <button
                   onClick={reset}
-                  className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10"
+                  className="px-4 py-3 rounded-xl bg-sage-50 border border-sage-200 text-sage-700 hover:bg-sage-100"
                   data-testid="button-reset"
                 >
                   Reset
@@ -285,12 +294,12 @@ export default function SystemsThinkingPage() {
           </div>
 
           <div className="space-y-4">
-            <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <ArrowRightLeft className="h-5 w-5 text-purple-400" />
+            <div className="card-bordered">
+              <h3 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+                <ArrowRightLeft className="h-5 w-5 text-sage-500" />
                 System Archetypes
               </h3>
-              <p className="text-sm opacity-60 mb-4">
+              <p className="text-body-sm mb-4">
                 Common patterns that appear across different systems. Recognizing them helps predict behavior.
               </p>
 
@@ -299,18 +308,18 @@ export default function SystemsThinkingPage() {
                   <button
                     key={i}
                     onClick={() => setSelectedArchetype(selectedArchetype === i ? null : i)}
-                    className={`w-full text-left p-4 rounded-xl border transition-all ${selectedArchetype === i ? "bg-purple-500/10 border-purple-500/30" : "bg-black/20 border-white/5 hover:bg-white/5"}`}
+                    className={`w-full text-left p-4 rounded-xl border transition-all ${selectedArchetype === i ? "bg-gold-50 border-gold-300" : "bg-sage-50 border-sage-200 hover:bg-sage-100"}`}
                     data-testid={`button-archetype-${i}`}
                   >
-                    <h4 className="font-semibold mb-1">{arch.name}</h4>
+                    <h4 className="text-body-sm font-semibold text-teal mb-1">{arch.name}</h4>
                     <p className="text-sm opacity-60">{arch.description}</p>
                     {selectedArchetype === i && (
                       <div className="mt-3 space-y-2 text-sm">
-                        <div className="p-2 rounded bg-white/5">
-                          <span className="text-purple-400">Pattern:</span> {arch.pattern}
+                        <div className="p-2 rounded bg-teal-50 border border-teal-200">
+                          <span className="text-teal-600 font-medium">Pattern:</span> <span className="text-teal-700">{arch.pattern}</span>
                         </div>
-                        <div className="p-2 rounded bg-white/5">
-                          <span className="text-amber-400">Example:</span> {arch.example}
+                        <div className="p-2 rounded bg-gold-50 border border-gold-200">
+                          <span className="text-gold-600 font-medium">Example:</span> <span className="text-teal-700">{arch.example}</span>
                         </div>
                       </div>
                     )}
@@ -320,13 +329,13 @@ export default function SystemsThinkingPage() {
             </div>
 
             {profile.maps.length > 0 && (
-              <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                <h3 className="text-sm font-semibold mb-3 opacity-70">Your System Maps</h3>
+              <div className="card-bordered">
+                <h3 className="form-label mb-3">Your System Maps</h3>
                 <div className="space-y-2 max-h-40 overflow-y-auto">
                   {profile.maps.slice(0, 5).map((m) => (
-                    <div key={m.id} className="p-3 rounded-lg bg-black/20 border border-white/5">
-                      <div className="font-medium">{m.name}</div>
-                      <div className="text-xs opacity-50 mt-1">
+                    <div key={m.id} className="p-3 rounded-lg bg-sage-50 border border-sage-200">
+                      <div className="text-body-sm font-medium text-teal">{m.name}</div>
+                      <div className="text-caption mt-1">
                         {m.elements.length} elements • {m.loops.length} loops • {m.leverage.length} leverage points
                       </div>
                     </div>
@@ -335,6 +344,7 @@ export default function SystemsThinkingPage() {
               </div>
             )}
           </div>
+        </div>
         </div>
       </div>
     </div>
