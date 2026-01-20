@@ -202,12 +202,30 @@ async function startServer() {
   app.use("/api/personal-growth", personalGrowthRouter);
   app.use("/api/psychological-safety", psychologicalSafetyRouter);
 
+  const SERVER_START_TIME = Date.now();
+
   app.get("/api/health-check", (_req, res) => {
     res.json({ ok: true, env: "development" });
   });
 
   app.get("/healthz", (_req, res) => {
-    res.status(200).json({ ok: true });
+    res.status(200).json({ 
+      status: "ok",
+      version: "1.0.0",
+      buildTime: new Date().toISOString(),
+      commit: process.env.REPL_ID || "local",
+      uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
+    });
+  });
+
+  app.get("/health", (_req, res) => {
+    res.status(200).json({ 
+      status: "ok",
+      version: "1.0.0",
+      buildTime: new Date().toISOString(),
+      commit: process.env.REPL_ID || "local",
+      uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
+    });
   });
 
   const vite = await createViteServer({
