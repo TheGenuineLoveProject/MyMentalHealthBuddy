@@ -93,67 +93,50 @@ export default function CrisisResources() {
         title="Crisis Resources"
         description="24/7 crisis support hotlines and mental health resources. Find immediate help, emergency contacts, and self-care tips when you need them most."
       />
-      <div className="min-h-screen bg-[var(--bg)]">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent-rose)]/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--primary)]/5 rounded-full blur-3xl"></div>
-        </div>
+      <div className="min-h-screen hero-gradient">
+        <div className="decorative-orb decorative-orb-blush w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-sage w-[300px] h-[300px] bottom-20 -right-20 absolute" aria-hidden="true" />
         
         <div className="max-w-4xl mx-auto px-6 py-8 relative z-10">
-          <header className="flex items-center gap-4 mb-8">
+          <header className="mb-8">
             <Link 
-              href="/dashboard" 
-              className="w-10 h-10 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" 
-              data-testid="link-back"
-              aria-label="Back to dashboard"
+              href="/dashboard"
+              className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition mb-6"
             >
-              <ArrowLeft className="w-5 h-5" aria-hidden="true" />
+              <ArrowLeft className="w-4 h-4" />
+              Back to Dashboard
             </Link>
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--accent-rose)] to-rose-600 flex items-center justify-center shadow-lg">
-                <Heart className="w-6 h-6 text-white" aria-hidden="true" />
+            <div className="flex items-center gap-4">
+              <div className="icon-container icon-xl icon-gradient-blush">
+                <Heart className="w-7 h-7" />
               </div>
               <div>
-                <h1 className="text-2xl font-display font-bold text-[var(--text)]" data-testid="text-title">Crisis Resources</h1>
-                <p className="text-sm text-[var(--text-muted)]">You are not alone. Help is available.</p>
+                <h1 className="text-display-lg text-teal">Crisis Resources</h1>
+                <p className="text-lead">You're not alone. Help is available.</p>
               </div>
             </div>
           </header>
 
-          <div 
-            className="card-elevated p-6 mb-8 bg-gradient-to-r from-[var(--accent-rose-soft)] to-rose-50 dark:from-rose-900/20 dark:to-rose-900/10 border-[var(--accent-rose)]/30"
-            role="alert"
-            aria-labelledby="emergency-heading"
-          >
+          <div className="card-bordered bg-[var(--blush-50)] border-[var(--blush-200)] p-6 mb-8">
             <div className="flex items-start gap-4">
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[var(--accent-rose)] to-rose-600 flex items-center justify-center flex-shrink-0 shadow-lg">
-                <AlertTriangle className="w-7 h-7 text-white" aria-hidden="true" />
+              <div className="icon-container icon-lg icon-soft-blush flex-shrink-0">
+                <AlertTriangle className="w-6 h-6" />
               </div>
-              <div className="flex-1">
-                <h2 id="emergency-heading" className="text-xl font-display font-bold text-[var(--accent-rose)] mb-2">
-                  If you're in immediate danger
-                </h2>
-                <p className="text-[var(--text-secondary)] mb-4">
-                  Please call <strong className="text-[var(--text)]">911</strong> or go to your nearest emergency room. Your safety is the top priority.
+              <div>
+                <h2 className="text-heading-md text-[var(--blush-700)] mb-2">In immediate danger?</h2>
+                <p className="text-body-sm text-[var(--blush-600)]">
+                  Call 911 or go to your nearest emergency room. Your safety is the priority.
                 </p>
-                <a
-                  href="tel:911"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--accent-rose)] to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-medium rounded-xl transition-all shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent-rose)] focus:ring-offset-2"
-                  data-testid="link-call-911"
-                >
-                  <Phone className="w-5 h-5" aria-hidden="true" />
-                  Call 911 Now
-                </a>
               </div>
             </div>
           </div>
 
           <section aria-labelledby="hotlines-heading" className="mb-10">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--accent-violet)] flex items-center justify-center">
-                <Phone className="w-5 h-5 text-white" aria-hidden="true" />
+              <div className="icon-container icon-lg icon-soft-teal">
+                <Phone className="w-5 h-5" aria-hidden="true" />
               </div>
-              <h2 id="hotlines-heading" className="text-xl font-display font-bold text-[var(--text)]">
+              <h2 id="hotlines-heading" className="text-heading-lg text-teal">
                 Crisis Hotlines & Support
               </h2>
             </div>

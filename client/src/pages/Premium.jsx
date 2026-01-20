@@ -148,31 +148,33 @@ export default function Premium() {
         description="Unlock the full potential of your mental wellness journey with premium features including healing journeys, AI concierge, advanced analytics, and personalized recommendations."
       />
 
-      <div className="min-h-screen bg-[var(--bg)]">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--primary)]/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-[var(--accent-rose)]/5 rounded-full blur-3xl" />
-        </div>
+      <div className="min-h-screen hero-gradient">
+        <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-sage w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[200px] h-[200px] top-1/2 left-1/4 absolute" aria-hidden="true" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-8">
-          <div className="flex items-center gap-4 mb-8">
+          <header className="mb-8">
             <Link
               href="/dashboard"
-              className="p-2 rounded-xl bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--text)] transition-all"
+              className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition mb-6"
               data-testid="link-back-dashboard"
             >
-              <ArrowLeft className="w-5 h-5" />
+              <ArrowLeft className="w-4 h-4" />
+              Back to Dashboard
             </Link>
-            <div className="flex-1">
-              <h1 className="text-3xl font-display font-bold text-[var(--text)] flex items-center gap-3" data-testid="text-premium-title">
-                <Crown className="w-8 h-8 text-amber-500" />
-                Premium Features
-              </h1>
-              <p className="text-[var(--text-secondary)]">
-                Unlock your full wellness potential
-              </p>
-            </div>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="icon-container icon-xl icon-gradient-gold">
+                  <Crown className="w-7 h-7" />
+                </div>
+                <div>
+                  <h1 className="text-display-lg text-teal" data-testid="text-premium-title">
+                    Premium Features
+                  </h1>
+                  <p className="text-lead">Unlock your full wellness potential</p>
+                </div>
+              </div>
             <div className="flex gap-2">
               <button
                 onClick={() => setView("features")}

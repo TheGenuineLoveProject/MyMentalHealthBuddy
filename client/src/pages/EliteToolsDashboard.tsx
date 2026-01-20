@@ -87,35 +87,35 @@ export default function EliteToolsDashboard() {
           {healingData?.data?.map((modality) => {
             const Icon = getCategoryIcon(modality.category);
             return (
-              <div 
+              <article 
                 key={modality.id} 
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 group cursor-pointer"
+                className="card-bordered group cursor-pointer hover:shadow-lg transition-all duration-300"
                 data-testid={`card-healing-${modality.id}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform">
+                  <div className="icon-container icon-lg icon-soft-blush group-hover:scale-110 transition-transform">
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{modality.name}</h3>
-                    <span className="text-xs px-2 py-1 rounded-full bg-rose-100 dark:bg-rose-900/50 text-rose-700 dark:text-rose-300">
+                    <h3 className="text-heading-sm text-teal mb-1">{modality.name}</h3>
+                    <span className="text-xs px-2 py-1 rounded-full bg-[var(--blush-100)] text-[var(--blush-700)]">
                       {modality.category}
                     </span>
                   </div>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-4 line-clamp-2">{modality.description}</p>
-                <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
-                  <span className="text-xs text-gray-500">{modality.duration}</span>
+                <p className="text-body-sm mt-4 line-clamp-2">{modality.description}</p>
+                <div className="flex items-center justify-between mt-4 pt-4 border-t border-[var(--sage-200)]">
+                  <span className="text-caption">{modality.duration}</span>
                   <span className={`text-xs px-2 py-1 rounded-full ${
-                    modality.intensity === 'gentle' ? 'bg-green-100 text-green-700' :
-                    modality.intensity === 'moderate' ? 'bg-yellow-100 text-yellow-700' :
-                    modality.intensity === 'deep' ? 'bg-purple-100 text-purple-700' :
-                    'bg-blue-100 text-blue-700'
+                    modality.intensity === 'gentle' ? 'bg-[var(--sage-100)] text-[var(--sage-700)]' :
+                    modality.intensity === 'moderate' ? 'bg-[var(--gold-100)] text-[var(--gold-700)]' :
+                    modality.intensity === 'deep' ? 'bg-[var(--teal-100)] text-[var(--teal-700)]' :
+                    'bg-[var(--sage-100)] text-[var(--sage-700)]'
                   }`}>
                     {modality.intensity}
                   </span>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
@@ -129,33 +129,33 @@ export default function EliteToolsDashboard() {
           {cognitiveData?.data?.map((framework) => {
             const Icon = getCategoryIcon(framework.category);
             return (
-              <div 
+              <article 
                 key={framework.id} 
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 group cursor-pointer"
+                className="card-bordered group cursor-pointer hover:shadow-lg transition-all duration-300"
                 data-testid={`card-cognitive-${framework.id}`}
               >
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-violet-50 dark:bg-violet-900/30 text-violet-600 dark:text-violet-400 group-hover:scale-110 transition-transform">
+                  <div className="icon-container icon-lg icon-soft-teal group-hover:scale-110 transition-transform">
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{framework.name}</h3>
-                    <span className="text-xs px-2 py-1 rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-700 dark:text-violet-300">
+                    <h3 className="text-heading-sm text-teal mb-1">{framework.name}</h3>
+                    <span className="text-xs px-2 py-1 rounded-full bg-[var(--teal-100)] text-[var(--teal-700)]">
                       {framework.category}
                     </span>
                   </div>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mt-4 line-clamp-2">{framework.description}</p>
-                <div className="flex items-center justify-end mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+                <p className="text-body-sm mt-4 line-clamp-2">{framework.description}</p>
+                <div className="flex items-center justify-end mt-4 pt-4 border-t border-[var(--sage-200)]">
                   <span className={`text-xs px-2 py-1 rounded-full ${
-                    framework.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
-                    framework.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
-                    'bg-red-100 text-red-700'
+                    framework.difficulty === 'beginner' ? 'bg-[var(--sage-100)] text-[var(--sage-700)]' :
+                    framework.difficulty === 'intermediate' ? 'bg-[var(--gold-100)] text-[var(--gold-700)]' :
+                    'bg-[var(--blush-100)] text-[var(--blush-700)]'
                   }`}>
                     {framework.difficulty}
                   </span>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
@@ -167,16 +167,18 @@ export default function EliteToolsDashboard() {
       return (
         <div className="space-y-6">
           {dailyWisdom?.data && (
-            <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/30 dark:to-orange-900/30 rounded-2xl p-8 border border-amber-100 dark:border-amber-800">
+            <div className="card-bordered bg-[var(--gold-50)] border-[var(--gold-200)]">
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-5 h-5 text-amber-600" />
-                <span className="text-sm font-medium text-amber-700 dark:text-amber-300">Today's Wisdom</span>
+                <div className="icon-container icon-sm icon-soft-gold">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <span className="text-caption font-medium text-[var(--gold-700)]">Today's Wisdom</span>
               </div>
-              <blockquote className="text-2xl font-serif text-gray-900 dark:text-white italic mb-4">
+              <blockquote className="text-xl font-serif text-teal italic mb-4">
                 "{dailyWisdom.data.quote}"
               </blockquote>
-              <p className="text-amber-700 dark:text-amber-300">— {dailyWisdom.data.source}</p>
-              <span className="inline-block mt-4 text-xs px-3 py-1 rounded-full bg-amber-200/50 dark:bg-amber-800/50 text-amber-800 dark:text-amber-200">
+              <p className="text-[var(--gold-700)]">— {dailyWisdom.data.source}</p>
+              <span className="inline-block mt-4 text-xs px-3 py-1 rounded-full bg-[var(--gold-200)] text-[var(--gold-800)]">
                 {dailyWisdom.data.theme}
               </span>
             </div>
@@ -184,25 +186,27 @@ export default function EliteToolsDashboard() {
           
           <div className="grid md:grid-cols-2 gap-6">
             {wisdomData?.data?.map((pattern) => (
-              <div 
+              <article 
                 key={pattern.id} 
-                className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-100 dark:border-gray-700"
+                className="card-bordered"
                 data-testid={`card-wisdom-${pattern.id}`}
               >
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                  <Lightbulb className="w-5 h-5 text-amber-500" />
+                <h3 className="text-heading-sm text-teal mb-2 flex items-center gap-2">
+                  <div className="icon-container icon-sm icon-soft-gold">
+                    <Lightbulb className="w-4 h-4" />
+                  </div>
                   {pattern.name}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{pattern.description}</p>
+                <p className="text-body-sm mb-4">{pattern.description}</p>
                 <ul className="space-y-2">
                   {pattern.insights.slice(0, 3).map((insight, i) => (
-                    <li key={i} className="text-sm text-gray-500 dark:text-gray-400 flex items-start gap-2">
-                      <Star className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
+                    <li key={i} className="text-caption flex items-start gap-2">
+                      <Star className="w-4 h-4 text-[var(--gold-500)] mt-0.5 flex-shrink-0" />
                       {insight}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -211,7 +215,7 @@ export default function EliteToolsDashboard() {
 
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">Select a category to explore tools</p>
+        <p className="text-lead">Select a category to explore tools</p>
       </div>
     );
   };
@@ -223,17 +227,17 @@ export default function EliteToolsDashboard() {
         description="Access 700+ world-class intellectual instruments for MIT-level minds: healing modalities, cognitive frameworks, and wisdom synthesis."
       />
       
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      <div className="min-h-screen hero-gradient">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-violet-100 to-rose-100 dark:from-violet-900/50 dark:to-rose-900/50 text-violet-700 dark:text-violet-300 text-sm font-medium mb-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--sage-100)] border border-[var(--sage-200)] text-[var(--teal-700)] text-sm font-medium mb-4">
               <Sparkles className="w-4 h-4" />
               Elite Intelligence Suite
             </div>
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-gray-900 dark:text-white mb-4">
-              Intellectual Tools for <span className="bg-gradient-to-r from-violet-600 to-rose-600 bg-clip-text text-transparent">Deep Minds</span>
+            <h1 className="text-display-xl text-teal mb-4">
+              Intellectual Tools for <span className="text-gradient-brand">Deep Minds</span>
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lead max-w-2xl mx-auto">
               Access our comprehensive suite of 700+ intellectual instruments designed for those who think deeply and seek genuine transformation.
             </p>
           </div>
@@ -248,8 +252,8 @@ export default function EliteToolsDashboard() {
                   onClick={() => setActiveCategory(cat.id)}
                   className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-300 ${
                     isActive 
-                      ? 'bg-gradient-to-r from-violet-600 to-rose-600 text-white shadow-lg scale-105' 
-                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:shadow-md border border-gray-200 dark:border-gray-700'
+                      ? 'bg-gradient-to-r from-[var(--sage-600)] to-[var(--teal-600)] text-white shadow-lg scale-105' 
+                      : 'bg-white border border-[var(--sage-200)] text-[var(--sage-700)] hover:shadow-md hover:border-[var(--sage-300)]'
                   }`}
                   data-testid={`button-category-${cat.id}`}
                 >
@@ -262,7 +266,7 @@ export default function EliteToolsDashboard() {
 
           <div className="mb-8">
             {TOOL_CATEGORIES.find(c => c.id === activeCategory) && (
-              <p className="text-center text-gray-500 dark:text-gray-400">
+              <p className="text-center text-body-sm">
                 {TOOL_CATEGORIES.find(c => c.id === activeCategory)?.description}
               </p>
             )}
@@ -271,11 +275,12 @@ export default function EliteToolsDashboard() {
           {renderContent()}
 
           <div className="mt-16 text-center">
-            <Link href="/dashboard">
-              <a className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--glp-sage-deep)] to-[var(--glp-sage)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity">
-                <Compass className="w-5 h-5" />
-                Return to Dashboard
-              </a>
+            <Link 
+              href="/dashboard"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[var(--sage-600)] to-[var(--sage-500)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity"
+            >
+              <Compass className="w-5 h-5" />
+              Return to Dashboard
             </Link>
           </div>
         </div>

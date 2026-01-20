@@ -21,6 +21,9 @@ import BlogPost from "./pages/BlogPost.jsx";
 import Landing from "./pages/landing/Landing.jsx";
 import Ethics from "./pages/legal/Ethics.jsx";
 import Disclaimer from "./pages/legal/Disclaimer.jsx";
+import Terms from "./pages/Terms.tsx";
+import Privacy from "./pages/Privacy.tsx";
+import Legal from "./pages/Legal.tsx";
 
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
@@ -319,6 +322,9 @@ export default function App() {
               {/* Legal routes */}
               <Route path="/ethics" component={Ethics} />
               <Route path="/disclaimer" component={Disclaimer} />
+              <Route path="/terms" component={Terms} />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/legal" component={Legal} />
 
               {/* Fallback */}
               <Route component={NotFound} />
