@@ -81,10 +81,8 @@ export default function ChatConversation() {
         <div className="content-wrapper py-4">
           <div className="max-w-4xl mx-auto flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Link href="/dashboard">
-                <a className="icon-container icon-sm icon-soft-sage" data-testid="link-back">
-                  <ArrowLeft className="h-4 w-4" />
-                </a>
+              <Link href="/dashboard" className="icon-container icon-sm icon-soft-sage" data-testid="link-back">
+                <ArrowLeft className="h-4 w-4" />
               </Link>
               <div className="icon-container icon-md icon-gradient-teal">
                 <MessageCircle className="h-5 w-5" />

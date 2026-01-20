@@ -45,10 +45,8 @@ export default function ChatEmpty() {
       <div className="content-wrapper py-8">
         <div className="max-w-3xl mx-auto">
           <header className="mb-8">
-            <Link href="/dashboard">
-              <a className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
-                <ArrowLeft className="h-4 w-4" /> Back to Dashboard
-              </a>
+            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
             </Link>
           </header>
 
@@ -66,22 +64,22 @@ export default function ChatEmpty() {
             <h2 className="text-heading-md text-teal text-center mb-6">How can I help you today?</h2>
             <div className="grid md:grid-cols-2 gap-4">
               {CONVERSATION_STARTERS.map((starter, i) => (
-                <Link key={i} href="/chat/conversation">
-                  <a 
-                    className="card-bordered hover:shadow-md transition-shadow group cursor-pointer block"
-                    data-testid={`starter-${i}`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`icon-container icon-lg icon-soft-${starter.color}`}>
-                        <starter.icon className="h-6 w-6" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-heading-sm text-teal group-hover:text-[var(--teal-600)] transition">{starter.title}</h3>
-                        <p className="text-body-sm text-[var(--sage-500)]">{starter.prompt}</p>
-                      </div>
-                      <ArrowRight className="h-5 w-5 text-[var(--sage-400)] group-hover:text-[var(--teal-500)] transition" />
+                <Link 
+                  key={i} 
+                  href="/chat/conversation"
+                  className="card-bordered hover:shadow-md transition-shadow group cursor-pointer block"
+                  data-testid={`starter-${i}`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`icon-container icon-lg icon-soft-${starter.color}`}>
+                      <starter.icon className="h-6 w-6" />
                     </div>
-                  </a>
+                    <div className="flex-1">
+                      <h3 className="text-heading-sm text-teal group-hover:text-[var(--teal-600)] transition">{starter.title}</h3>
+                      <p className="text-body-sm text-[var(--sage-500)]">{starter.prompt}</p>
+                    </div>
+                    <ArrowRight className="h-5 w-5 text-[var(--sage-400)] group-hover:text-[var(--teal-500)] transition" />
+                  </div>
                 </Link>
               ))}
             </div>
@@ -114,10 +112,8 @@ export default function ChatEmpty() {
                 </div>
                 <div className="text-left">
                   <p className="text-body-sm font-medium">Feeling in crisis?</p>
-                  <Link href="/chat/crisis">
-                    <a className="text-[var(--teal-600)] hover:text-[var(--teal-700)] text-body-sm" data-testid="link-crisis">
-                      Access immediate support resources →
-                    </a>
+                  <Link href="/chat/crisis" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] text-body-sm" data-testid="link-crisis">
+                    Access immediate support resources →
                   </Link>
                 </div>
               </div>

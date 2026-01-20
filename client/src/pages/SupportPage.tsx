@@ -18,10 +18,8 @@ export default function SupportPage() {
       <div className="content-wrapper py-8">
         <div className="max-w-3xl mx-auto">
           <header className="mb-8">
-            <Link href="/dashboard">
-              <a className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
-                <ArrowLeft className="h-4 w-4" /> Back to Dashboard
-              </a>
+            <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+              <ArrowLeft className="h-4 w-4" /> Back to Dashboard
             </Link>
             <div className="flex items-center gap-3">
               <div className="icon-container icon-xl icon-gradient-teal">

@@ -63,11 +63,9 @@ export default function Overview() {
                   <Calendar className="h-5 w-5 text-[var(--sage-500)]" />
                   Today's Focus
                 </h2>
-                <Link href="/daily-ritual">
-                  <a className="text-body-sm text-[var(--teal-600)] hover:text-[var(--teal-700)] flex items-center gap-1">
-                    View all <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Link>
+                <Link href="/daily-ritual" className="text-body-sm text-[var(--teal-600)] hover:text-[var(--teal-700)] flex items-center gap-1">
+                View all <ArrowRight className="h-4 w-4" />
+              </Link>
               </div>
               <div className="space-y-4">
                 {[
@@ -93,13 +91,11 @@ export default function Overview() {
               </h2>
               <div className="grid grid-cols-2 gap-3">
                 {QUICK_ACTIONS.map((action, i) => (
-                  <Link key={i} href={action.href}>
-                    <a className="flex flex-col items-center gap-2 p-4 rounded-xl bg-[var(--sage-50)] hover:bg-[var(--sage-100)] transition" data-testid={`action-${action.label.toLowerCase()}`}>
-                      <div className={`icon-container icon-md icon-soft-${action.color}`}>
-                        <action.icon className="h-5 w-5" />
-                      </div>
-                      <span className="text-body-sm font-medium">{action.label}</span>
-                    </a>
+                  <Link key={i} href={action.href} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-[var(--sage-50)] hover:bg-[var(--sage-100)] transition" data-testid={`action-${action.label.toLowerCase()}`}>
+                    <div className={`icon-container icon-md icon-soft-${action.color}`}>
+                      <action.icon className="h-5 w-5" />
+                    </div>
+                    <span className="text-body-sm font-medium">{action.label}</span>
                   </Link>
                 ))}
               </div>
@@ -112,7 +108,7 @@ export default function Overview() {
             </div>
             <h3 className="text-heading-lg text-teal mb-2">Ready to deepen your practice?</h3>
             <p className="text-lead mb-6 max-w-lg mx-auto">Explore our AI-powered tools designed to support your healing journey.</p>
-            <Link href="/tools">
+            <Link href="/tools" className="inline-block">
               <Button className="btn-premium" data-testid="button-explore-tools">
                 Explore Wellness Tools <ArrowRight className="h-4 w-4 ml-2" />
               </Button>
