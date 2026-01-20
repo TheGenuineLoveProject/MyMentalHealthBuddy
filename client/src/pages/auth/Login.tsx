@@ -47,13 +47,11 @@ export default function Login() {
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/">
-            <a className="inline-flex items-center gap-2 mb-6" data-testid="link-home">
-              <div className="icon-container icon-lg icon-gradient-sage">
-                <Heart className="w-6 h-6" />
-              </div>
-              <span className="text-heading-lg text-teal">Genuine Love</span>
-            </a>
+          <Link href="/" className="inline-flex items-center gap-2 mb-6" data-testid="link-home">
+            <div className="icon-container icon-lg icon-gradient-sage">
+              <Heart className="w-6 h-6" />
+            </div>
+            <span className="text-heading-lg text-teal">Genuine Love</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Welcome Back</h1>
           <p className="text-lead">Continue your wellness journey</p>
@@ -100,10 +98,8 @@ export default function Login() {
                 <input type="checkbox" className="rounded border-[var(--sage-300)]" data-testid="checkbox-remember" />
                 <span className="text-[var(--sage-600)]">Remember me</span>
               </label>
-              <Link href="/forgot-password">
-                <a className="text-[var(--teal-600)] hover:text-[var(--teal-700)]" data-testid="link-forgot-password">
-                  Forgot password?
-                </a>
+              <Link href="/forgot-password" className="text-[var(--teal-600)] hover:text-[var(--teal-700)]" data-testid="link-forgot-password">
+                Forgot password?
               </Link>
             </div>
 
@@ -130,10 +126,8 @@ export default function Login() {
           <div className="mt-6 pt-6 border-t border-[var(--sage-200)] text-center">
             <p className="text-body-sm">
               New to Genuine Love?{" "}
-              <Link href="/signup">
-                <a className="text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium" data-testid="link-signup">
-                  Create an account
-                </a>
+              <Link href="/signup" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium" data-testid="link-signup">
+                Create an account
               </Link>
             </p>
           </div>

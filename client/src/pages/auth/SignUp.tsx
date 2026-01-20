@@ -63,13 +63,11 @@ export default function SignUp() {
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         <div className="text-center mb-8">
-          <Link href="/">
-            <a className="inline-flex items-center gap-2 mb-6" data-testid="link-home">
-              <div className="icon-container icon-lg icon-gradient-blush">
-                <Heart className="w-6 h-6" />
-              </div>
-              <span className="text-heading-lg text-teal">Genuine Love</span>
-            </a>
+          <Link href="/" className="inline-flex items-center gap-2 mb-6" data-testid="link-home">
+            <div className="icon-container icon-lg icon-gradient-blush">
+              <Heart className="w-6 h-6" />
+            </div>
+            <span className="text-heading-lg text-teal">Genuine Love</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Start Your Journey</h1>
           <p className="text-lead">Begin your path to healing and self-love</p>
@@ -169,10 +167,8 @@ export default function SignUp() {
             <div className="mt-6 pt-6 border-t border-[var(--sage-200)] text-center">
               <p className="text-body-sm">
                 Already have an account?{" "}
-                <Link href="/login">
-                  <a className="text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium" data-testid="link-login">
-                    Sign in
-                  </a>
+                <Link href="/login" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium" data-testid="link-login">
+                  Sign in
                 </Link>
               </p>
             </div>
