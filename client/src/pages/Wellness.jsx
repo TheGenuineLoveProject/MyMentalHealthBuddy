@@ -66,10 +66,10 @@ const CreativeExpression = lazy(() => import("../components/CreativeExpression.j
 const AchievementSystem = lazy(() => import("../components/AchievementSystem.jsx"));
 
 const ToolLoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-[200px] bg-white/80 dark:bg-gray-800/80 rounded-2xl backdrop-blur-sm">
+  <div className="flex items-center justify-center min-h-[200px] bg-white/80 rounded-2xl backdrop-blur-sm">
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="w-8 h-8 animate-spin text-violet-500" />
-      <p className="text-sm text-gray-500 dark:text-gray-400">Loading wellness tool...</p>
+      <Loader2 className="w-8 h-8 animate-spin text-sage-500" />
+      <p className="text-sm text-sage-400">Loading wellness tool...</p>
     </div>
   </div>
 );

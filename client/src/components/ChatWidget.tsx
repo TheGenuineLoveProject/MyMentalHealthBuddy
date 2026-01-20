@@ -81,37 +81,17 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
       role="dialog"
       aria-label="Chat with AI Buddy"
       aria-modal="true"
-      style={{
-        position: "fixed",
-        right: "1.5rem",
-        bottom: "1.5rem",
-        width: "340px",
-        maxHeight: "500px",
-        background: "white",
-        borderRadius: "16px",
-        boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
-        display: "flex",
-        flexDirection: "column",
-        zIndex: 60,
-        overflow: "hidden",
-      }}
+      className="fixed right-6 bottom-6 w-[340px] max-h-[500px] bg-white rounded-2xl shadow-2xl flex flex-col z-60 overflow-hidden"
     >
       <header
         data-testid="chat-widget-header"
-        style={{
-          padding: "1rem",
-          background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
-          color: "white",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+        className="p-4 bg-gradient-to-r from-sage-500 to-teal text-white flex justify-between items-center"
       >
         <div>
-          <div style={{ fontWeight: 700, fontSize: "1rem" }}>
+          <div className="font-bold text-base">
             Genuine Love
           </div>
-          <div style={{ fontSize: "0.75rem", opacity: 0.9 }}>
+          <div className="text-xs opacity-90">
             Live in Genuine Love
           </div>
         </div>
@@ -120,20 +100,7 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
           data-testid="button-close-chat"
           type="button"
           aria-label="Close chat"
-          style={{
-            background: "rgba(255,255,255,0.2)",
-            border: "none",
-            color: "white",
-            fontSize: "1.25rem",
-            width: "32px",
-            height: "32px",
-            borderRadius: "50%",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            transition: "background 0.2s",
-          }}
+          className="bg-white/20 border-none text-white text-xl w-8 h-8 rounded-full cursor-pointer flex items-center justify-center hover:bg-white/30 transition-colors"
         >
           ×
         </button>
@@ -142,20 +109,12 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
       <div
         data-testid="chat-messages"
         aria-label="Chat messages"
-        style={{
-          flex: 1,
-          padding: "1rem",
-          overflowY: "auto",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.75rem",
-          background: "#f9fafb",
-        }}
+        className="flex-1 p-4 overflow-y-auto flex flex-col gap-3 bg-sage-50"
       >
         {messages.length === 0 && (
-          <div style={{ textAlign: "center", color: "#6b7280", padding: "2rem 0" }}>
-            <p style={{ marginBottom: "0.5rem" }}>Hi there! 👋</p>
-            <p style={{ fontSize: "0.875rem" }}>
+          <div className="text-center text-sage-400 py-8">
+            <p className="mb-2">Hi there! 👋</p>
+            <p className="text-sm">
               I&apos;m here to listen and support you. How are you feeling today?
             </p>
           </div>
@@ -164,22 +123,14 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            style={{
-              display: "flex",
-              justifyContent: msg.role === "user" ? "flex-end" : "flex-start",
-            }}
+            className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
           >
             <div
-              style={{
-                maxWidth: "80%",
-                padding: "0.75rem 1rem",
-                borderRadius: msg.role === "user" ? "16px 16px 4px 16px" : "16px 16px 16px 4px",
-                background: msg.role === "user" ? "#4f46e5" : "white",
-                color: msg.role === "user" ? "white" : "#1f2937",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                fontSize: "0.9rem",
-                lineHeight: 1.5,
-              }}
+              className={`max-w-[80%] px-4 py-3 shadow-sm text-sm leading-relaxed ${
+                msg.role === "user"
+                  ? "bg-sage-600 text-white rounded-2xl rounded-br-sm"
+                  : "bg-white text-teal rounded-2xl rounded-bl-sm"
+              }`}
             >
               {msg.content}
             </div>
@@ -187,24 +138,15 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
         ))}
 
         {chatMutation.isPending && (
-          <div style={{ display: "flex", justifyContent: "flex-start" }} role="status" aria-live="polite">
-            <div
-              style={{
-                padding: "0.75rem 1rem",
-                borderRadius: "16px 16px 16px 4px",
-                background: "white",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                color: "#6b7280",
-                fontSize: "0.9rem",
-              }}
-            >
+          <div className="flex justify-start" role="status" aria-live="polite">
+            <div className="px-4 py-3 rounded-2xl rounded-bl-sm bg-white shadow-sm text-sage-400 text-sm">
               Thinking...
             </div>
           </div>
         )}
 
         {error && (
-          <div style={{ color: "#dc2626", fontSize: "0.875rem", textAlign: "center" }} role="alert">
+          <div className="text-red-600 text-sm text-center" role="alert">
             {error}
           </div>
         )}
@@ -214,13 +156,7 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
 
       <form
         onSubmit={sendMessage}
-        style={{
-          display: "flex",
-          padding: "0.75rem",
-          borderTop: "1px solid #e5e7eb",
-          gap: "0.5rem",
-          background: "white",
-        }}
+        className="flex p-3 border-t border-sage-200 gap-2 bg-white"
       >
         <label htmlFor="chat-widget-input" className="sr-only">
           Type your message
@@ -236,31 +172,18 @@ export default function ChatWidget({ onClose }: ChatWidgetProps) {
           maxLength={2000}
           disabled={chatMutation.isPending}
           autoComplete="off"
-          style={{
-            flex: 1,
-            padding: "0.6rem 1rem",
-            borderRadius: "24px",
-            border: "1px solid #d1d5db",
-            fontSize: "0.9rem",
-            outline: "none",
-          }}
+          className="flex-1 px-4 py-2.5 rounded-3xl border border-sage-300 text-sm outline-none focus:ring-2 focus:ring-sage-500 focus:border-transparent"
         />
         <button
           type="submit"
           disabled={chatMutation.isPending || !input.trim()}
           data-testid="button-send-chat"
           aria-label="Send message"
-          style={{
-            padding: "0.6rem 1rem",
-            borderRadius: "24px",
-            border: "none",
-            background: chatMutation.isPending || !input.trim() ? "#9ca3af" : "#4f46e5",
-            color: "white",
-            fontWeight: 600,
-            fontSize: "0.9rem",
-            cursor: chatMutation.isPending || !input.trim() ? "not-allowed" : "pointer",
-            transition: "background 0.2s",
-          }}
+          className={`px-4 py-2.5 rounded-3xl border-none text-white font-semibold text-sm transition-colors ${
+            chatMutation.isPending || !input.trim()
+              ? "bg-sage-400 cursor-not-allowed"
+              : "bg-sage-600 cursor-pointer hover:bg-sage-700"
+          }`}
         >
           {chatMutation.isPending ? "..." : "Send"}
         </button>

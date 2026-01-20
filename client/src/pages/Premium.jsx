@@ -19,10 +19,10 @@ const MoodVisualizer = lazy(() => import("../components/MoodVisualizer.jsx"));
 const MindfulBreathing = lazy(() => import("../components/MindfulBreathing.jsx"));
 
 const PremiumLoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-[300px] bg-white/80 dark:bg-gray-800/80 rounded-2xl backdrop-blur-sm">
+  <div className="flex items-center justify-center min-h-[300px] bg-white/80 rounded-2xl backdrop-blur-sm">
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="w-8 h-8 animate-spin text-violet-500" />
-      <p className="text-sm text-gray-500 dark:text-gray-400">Loading premium feature...</p>
+      <Loader2 className="w-8 h-8 animate-spin text-sage-500" />
+      <p className="text-sm text-sage-400">Loading premium feature...</p>
     </div>
   </div>
 );
@@ -118,8 +118,8 @@ function StripePricingTable() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-violet-500" />
-          <p className="text-sm text-gray-500 dark:text-gray-400">Loading pricing options...</p>
+          <Loader2 className="w-8 h-8 animate-spin text-sage-500" />
+          <p className="text-sm text-sage-400">Loading pricing options...</p>
         </div>
       </div>
     );
