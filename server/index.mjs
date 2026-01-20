@@ -261,7 +261,7 @@ app.get("/healthz", (req, res) => {
 const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));
 
-app.get("/{*splat}", (_req, res) => {
+app.get("*", (_req, res) => {
   res.sendFile(join(distPath, "index.html"));
 });
 
