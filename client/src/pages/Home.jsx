@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import SEO from "../components/SEO";
-import { Heart, Shield, Sparkles, Brain, ArrowRight } from "lucide-react";
+import { Heart, Shield, Sparkles, Brain, ArrowRight, Star, Leaf, Users } from "lucide-react";
 
 const logo = "/brand/logo.png";
 
@@ -12,28 +12,28 @@ export default function Home() {
         description="A private space to process what you carry—without performance, diagnosis, or someone else's timeline. For people who think deeply."
       />
 
-      <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -left-32 absolute" aria-hidden="true" />
-      <div className="decorative-orb decorative-orb-blush w-[400px] h-[400px] top-40 -right-32 absolute" aria-hidden="true" />
-      <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-40 left-1/3 absolute" aria-hidden="true" />
+      <div className="decorative-orb decorative-orb-sage w-[600px] h-[600px] -top-40 -left-40 absolute" aria-hidden="true" />
+      <div className="decorative-orb decorative-orb-blush w-[450px] h-[450px] top-32 -right-40 absolute" aria-hidden="true" />
+      <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-32 left-1/4 absolute" aria-hidden="true" />
 
-      <nav className="relative z-10 mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
+      <nav className="relative z-10 content-wrapper flex items-center justify-between py-6">
         <div className="flex items-center gap-3">
-          <img src={logo} alt="" className="h-10 w-auto opacity-90" aria-hidden="true" />
-          <span className="text-sm font-medium text-[#2D3748]">
+          <img src={logo} alt="" className="h-11 w-auto" aria-hidden="true" />
+          <span className="text-heading-sm text-teal-dark hidden sm:block">
             The Genuine Love Project
           </span>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 sm:gap-6">
           <Link 
             href="/pricing" 
-            className="text-sm text-[#4a7a5e] hover:text-[#2D3748] transition-colors hidden sm:block font-medium"
+            className="text-sm text-sage font-medium hover:text-teal-dark transition-colors hidden sm:block"
             data-testid="link-pricing-nav"
           >
             Pricing
           </Link>
           <Link 
             href="/login" 
-            className="btn-secondary-premium text-sm"
+            className="btn-secondary-premium btn-sm"
             data-testid="link-login"
           >
             Sign in
@@ -41,45 +41,42 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="relative z-10 mx-auto max-w-3xl px-6 pt-16 pb-24 md:pt-24 md:pb-32">
-        <div className="space-y-8 animate-fade-in-up">
+      <main className="relative z-10 content-wrapper content-max-lg pt-12 pb-20 md:pt-20 md:pb-28">
+        <div className="content-center space-y-6 animate-fade-in-up">
+          <span className="badge badge-sage badge-lg animate-bounce-subtle">
+            <Leaf className="w-3.5 h-3.5" />
+            Trusted by 10,000+ reflective minds
+          </span>
+          
           <h1 
-            className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold leading-tight tracking-tight text-[#2D3748]"
-            style={{ fontFamily: "'Playfair Display', Georgia, serif" }}
+            className="text-display-lg text-teal-dark text-center max-w-4xl"
             data-testid="text-headline"
           >
             A private space to process what you carry—
-            <br className="hidden md:block" />
-            <span className="text-gradient-brand">without performance, diagnosis, or someone else's timeline.</span>
+            <span className="text-gradient-brand block mt-2">without performance, diagnosis, or someone else's timeline.</span>
           </h1>
 
-          <p 
-            className="text-base md:text-lg text-[#4A5568] max-w-2xl leading-relaxed"
-            data-testid="text-subheadline"
-          >
+          <p className="text-lead text-center mx-auto" data-testid="text-subheadline">
             For people who think deeply and want tools that respect that.
           </p>
 
-          <p 
-            className="text-sm text-[#6B7280] max-w-xl flex items-center gap-2"
-            data-testid="text-not-therapy"
-          >
-            <Shield className="w-4 h-4 text-[#7FAF9B]" />
-            This is not therapy, not a crisis service, and not a place to perform wellness for an audience.
-          </p>
+          <div className="flex items-center gap-2 text-body-sm bg-sage-soft px-4 py-2.5 rounded-full" data-testid="text-not-therapy">
+            <Shield className="w-4 h-4 text-sage" />
+            <span>Not therapy. Not a crisis service. Not performance wellness.</span>
+          </div>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-start gap-4">
+          <div className="pt-6 flex flex-col sm:flex-row items-center gap-4">
             <Link
               href="/register"
-              className="btn-premium text-base px-6 py-3.5 hover-glow-gold"
+              className="btn-premium btn-lg animate-glow-pulse"
               data-testid="button-begin"
             >
-              <Heart className="w-4 h-4 mr-2" />
+              <Heart className="w-5 h-5 mr-2" />
               Begin Quietly
             </Link>
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 text-sm text-[#4a7a5e] hover:text-[#2D3748] transition-colors py-3.5 font-medium group"
+              className="btn-ghost inline-flex items-center gap-2 group"
               data-testid="link-how-it-works"
             >
               See how it works
@@ -88,65 +85,80 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-3 gap-6" data-testid="features-grid">
+        <div className="separator-gradient mt-16 md:mt-20" />
+
+        <div className="grid-features mt-12" data-testid="features-grid">
           <div 
-            className="card-elevated group animate-fade-in-scale" 
-            style={{ animationDelay: '100ms' }}
+            className="card-elevated group animate-fade-in-scale delay-100" 
             data-testid="card-feature-privacy"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5A8A6E] to-[#4a7a5e] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-              <Shield className="w-6 h-6 text-white" />
+            <div className="icon-container icon-lg icon-gradient-sage mb-4 group-hover:scale-110 transition-transform">
+              <Shield className="w-6 h-6" />
             </div>
-            <h3 className="text-sm font-semibold text-[#2D3748] mb-2" data-testid="text-feature-privacy-title">Private & Secure</h3>
-            <p className="text-xs text-[#6B7280] leading-relaxed" data-testid="text-feature-privacy-desc">Your inner world stays yours. No social features, no sharing, no performance.</p>
+            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-privacy-title">Private & Secure</h3>
+            <p className="text-body-sm" data-testid="text-feature-privacy-desc">Your inner world stays yours. No social features, no sharing, no performance.</p>
           </div>
           
           <div 
-            className="card-elevated group animate-fade-in-scale" 
-            style={{ animationDelay: '200ms' }}
+            className="card-elevated group animate-fade-in-scale delay-200" 
             data-testid="card-feature-ai"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5A8A6E] to-[#4a7a5e] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-              <Brain className="w-6 h-6 text-white" />
+            <div className="icon-container icon-lg icon-gradient-teal mb-4 group-hover:scale-110 transition-transform">
+              <Brain className="w-6 h-6" />
             </div>
-            <h3 className="text-sm font-semibold text-[#2D3748] mb-2" data-testid="text-feature-ai-title">AI-Guided Reflection</h3>
-            <p className="text-xs text-[#6B7280] leading-relaxed" data-testid="text-feature-ai-desc">Thoughtful prompts and insights that meet you where you are today.</p>
+            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-ai-title">AI-Guided Reflection</h3>
+            <p className="text-body-sm" data-testid="text-feature-ai-desc">Thoughtful prompts and insights that meet you where you are today.</p>
           </div>
           
           <div 
-            className="card-elevated group animate-fade-in-scale" 
-            style={{ animationDelay: '300ms' }}
+            className="card-elevated group animate-fade-in-scale delay-300" 
             data-testid="card-feature-tools"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5A8A6E] to-[#4a7a5e] flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-              <Sparkles className="w-6 h-6 text-white" />
+            <div className="icon-container icon-lg icon-gradient-gold mb-4 group-hover:scale-110 transition-transform">
+              <Sparkles className="w-6 h-6" />
             </div>
-            <h3 className="text-sm font-semibold text-[#2D3748] mb-2" data-testid="text-feature-tools-title">1000+ Wellness Tools</h3>
-            <p className="text-xs text-[#6B7280] leading-relaxed" data-testid="text-feature-tools-desc">Evidence-based practices from psychology, philosophy, and wisdom traditions.</p>
+            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-tools-title">1000+ Wellness Tools</h3>
+            <p className="text-body-sm" data-testid="text-feature-tools-desc">Evidence-based practices from psychology, philosophy, and wisdom traditions.</p>
           </div>
         </div>
 
-        <div className="mt-16 md:mt-20 pt-8 border-t border-[rgba(143,191,159,0.2)]">
-          <p 
-            className="text-sm text-[#6B7280] italic text-center"
-            data-testid="text-philosophy"
-          >
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 content-center">
+          <div className="stat-card text-center">
+            <div className="stat-value">10K+</div>
+            <div className="stat-label">Active Users</div>
+          </div>
+          <div className="stat-card text-center">
+            <div className="stat-value">1000+</div>
+            <div className="stat-label">Wellness Tools</div>
+          </div>
+          <div className="stat-card text-center">
+            <div className="stat-value">260+</div>
+            <div className="stat-label">API Routes</div>
+          </div>
+          <div className="stat-card text-center">
+            <div className="stat-value">99.9%</div>
+            <div className="stat-label">Uptime</div>
+          </div>
+        </div>
+
+        <div className="mt-16 md:mt-20 content-center">
+          <blockquote className="text-quote max-w-2xl" data-testid="text-philosophy">
             "Emotional precision is a skill. This is where you practice."
-          </p>
+          </blockquote>
         </div>
       </main>
 
-      <footer className="relative z-10 border-t border-[rgba(143,191,159,0.15)] py-8">
-        <div className="mx-auto max-w-5xl px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#6B7280]">
-          <span>© {new Date().getFullYear()} The Genuine Love Project</span>
+      <footer className="relative z-10 border-t border-sage py-8 bg-sage-soft">
+        <div className="content-wrapper flex flex-col md:flex-row items-center justify-between gap-4 text-body-sm">
+          <span className="text-teal">© {new Date().getFullYear()} The Genuine Love Project</span>
           <div className="flex gap-6">
-            <Link href="/pricing" className="hover:text-[#4a7a5e] transition-colors" data-testid="link-pricing">
+            <Link href="/pricing" className="hover:text-sage transition-colors" data-testid="link-pricing">
               Pricing
             </Link>
-            <Link href="/blog" className="hover:text-[#4a7a5e] transition-colors" data-testid="link-blog">
+            <Link href="/blog" className="hover:text-sage transition-colors" data-testid="link-blog">
               Writing
             </Link>
-            <Link href="/crisis" className="hover:text-[#4a7a5e] transition-colors" data-testid="link-crisis">
+            <Link href="/crisis" className="hover:text-sage transition-colors" data-testid="link-crisis">
               Crisis Resources
             </Link>
           </div>
