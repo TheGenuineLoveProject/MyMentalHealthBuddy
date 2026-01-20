@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, TrendingUp, TrendingDown, Calendar, Award, ArrowLeft, Minus } from "lucide-react";
+import { BarChart3, TrendingUp, TrendingDown, Calendar, Award, ArrowLeft, Minus, RefreshCw, Sparkles } from "lucide-react";
+import SEO from "../components/SEO";
 
 export default function Analytics() {
   const { data: stats, isLoading, error, refetch } = useQuery({
@@ -8,24 +9,39 @@ export default function Analytics() {
   });
 
   function getTrendIcon(avg) {
-    if (avg >= 7) return <TrendingUp className="w-6 h-6 text-green-400" />;
-    if (avg <= 4) return <TrendingDown className="w-6 h-6 text-red-400" />;
-    return <Minus className="w-6 h-6 text-neutral-400" />;
+    if (avg >= 7) return (
+      <div className="icon-container icon-md icon-soft-sage">
+        <TrendingUp className="w-5 h-5" />
+      </div>
+    );
+    if (avg <= 4) return (
+      <div className="icon-container icon-md icon-soft-blush">
+        <TrendingDown className="w-5 h-5" />
+      </div>
+    );
+    return (
+      <div className="icon-container icon-md icon-soft-teal">
+        <Minus className="w-5 h-5" />
+      </div>
+    );
   }
 
   if (isLoading) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950" role="status" aria-label="Loading analytics">
-        <div className="max-w-4xl mx-auto">
-          <div className="animate-pulse space-y-6">
-            <div className="h-8 bg-neutral-800 rounded w-1/4" aria-hidden="true"></div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-32 bg-neutral-800 rounded-xl" aria-hidden="true"></div>
-              ))}
+      <div className="min-h-screen p-6 hero-gradient" role="status" aria-label="Loading analytics">
+        <SEO title="Analytics - Loading" description="Loading your wellness analytics" />
+        <div className="content-wrapper">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-6">
+              <div className="h-8 bg-[var(--sage-100)] rounded-xl w-1/4 animate-pulse" aria-hidden="true"></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="h-32 bg-white/50 rounded-xl animate-pulse" aria-hidden="true"></div>
+                ))}
+              </div>
             </div>
+            <span className="sr-only">Loading your analytics data...</span>
           </div>
-          <span className="sr-only">Loading your analytics data...</span>
         </div>
       </div>
     );
@@ -33,14 +49,20 @@ export default function Analytics() {
 
   if (error) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 flex items-center justify-center" role="alert">
-        <div className="text-center text-white">
-          <p className="text-red-400 mb-4">{error.message || "Failed to load analytics"}</p>
+      <div className="min-h-screen p-6 hero-gradient flex items-center justify-center" role="alert">
+        <SEO title="Analytics - Error" description="Unable to load analytics" />
+        <div className="card-elevated text-center p-8 max-w-md">
+          <div className="icon-container icon-lg icon-soft-blush mx-auto mb-4">
+            <BarChart3 className="w-8 h-8" />
+          </div>
+          <h2 className="text-heading-md text-teal mb-2">Unable to load analytics</h2>
+          <p className="text-body-sm mb-6">{error.message || "Failed to load analytics"}</p>
           <button
             onClick={() => refetch()}
-            className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="btn-premium flex items-center gap-2 mx-auto"
             data-testid="button-retry"
           >
+            <RefreshCw className="w-4 h-4" />
             Try Again
           </button>
         </div>
@@ -49,91 +71,143 @@ export default function Analytics() {
   }
 
   return (
-    <div className="min-h-screen p-6 bg-gradient-to-b from-neutral-900 to-neutral-950 text-white">
-      <div className="max-w-4xl mx-auto">
-        <header className="flex items-center gap-4 mb-8">
-          <Link href="/dashboard" className="text-neutral-400 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-blue-400 rounded" data-testid="link-back" aria-label="Back to dashboard">
-            <ArrowLeft className="w-6 h-6" aria-hidden="true" />
-          </Link>
-          <h1 className="text-3xl font-bold" data-testid="text-title">Analytics</h1>
-        </header>
-
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-4" aria-label="Analytics overview">
-          <article className="bg-gradient-to-br from-green-900/50 to-green-800/30 p-5 rounded-xl border border-green-700/30" data-testid="card-trend">
-            <div className="flex items-center gap-3 mb-3">
-              {getTrendIcon(stats?.averageMood)}
-              <h2 className="text-lg font-semibold">Mood Trend</h2>
-            </div>
-            <p className="text-2xl font-bold" aria-label={`Current mood trend: ${stats?.averageMood !== null ? (stats.averageMood >= 7 ? "Positive" : stats.averageMood <= 4 ? "Needs Attention" : "Stable") : "No data"}`}>
-              {stats?.averageMood !== null ? (
-                stats.averageMood >= 7 ? "Positive" : stats.averageMood <= 4 ? "Needs Attention" : "Stable"
-              ) : "No data"}
-            </p>
-          </article>
-
-          <article className="bg-gradient-to-br from-blue-900/50 to-blue-800/30 p-5 rounded-xl border border-blue-700/30" data-testid="card-entries">
-            <div className="flex items-center gap-3 mb-3">
-              <Calendar className="w-6 h-6 text-blue-400" aria-hidden="true" />
-              <h2 className="text-lg font-semibold">Total Mood Entries</h2>
-            </div>
-            <p className="text-4xl font-bold" aria-label={`${stats?.moodCount || 0} total mood entries`}>{stats?.moodCount || 0}</p>
-          </article>
-
-          <article className="bg-gradient-to-br from-amber-900/50 to-amber-800/30 p-5 rounded-xl border border-amber-700/30" data-testid="card-average">
-            <div className="flex items-center gap-3 mb-3">
-              <Award className="w-6 h-6 text-amber-400" aria-hidden="true" />
-              <h2 className="text-lg font-semibold">Average Mood Rating</h2>
-            </div>
-            <div className="flex items-end gap-2">
-              <span className="text-4xl font-bold" aria-label={`Average mood: ${stats?.averageMood !== null ? stats.averageMood : 'no data'} out of 10`}>
-                {stats?.averageMood !== null ? stats.averageMood : "--"}
-              </span>
-              <span className="text-neutral-400 mb-1" aria-hidden="true">/10</span>
-            </div>
-          </article>
-
-          <article className="bg-gradient-to-br from-purple-900/50 to-purple-800/30 p-5 rounded-xl border border-purple-700/30" data-testid="card-journal">
-            <div className="flex items-center gap-3 mb-3">
-              <BarChart3 className="w-6 h-6 text-purple-400" aria-hidden="true" />
-              <h2 className="text-lg font-semibold">Journal Entries</h2>
-            </div>
-            <p className="text-4xl font-bold" aria-label={`${stats?.journalCount || 0} journal entries`}>{stats?.journalCount || 0}</p>
-          </article>
-        </section>
-
-        {stats?.recentMoods && stats.recentMoods.length > 0 && (
-          <section className="mt-8" aria-label="Recent mood history chart">
-            <h2 className="text-xl font-semibold mb-4">Recent Mood History</h2>
-            <div className="bg-neutral-800 rounded-xl p-4" role="img" aria-label={`Bar chart showing mood ratings over ${stats.recentMoods.length} days`}>
-              <div className="flex items-end justify-between h-32 gap-2">
-                {stats.recentMoods.map((mood, idx) => (
-                  <div key={idx} className="flex-1 flex flex-col items-center gap-2" role="presentation">
-                    <div
-                      className="w-full bg-blue-500 rounded-t transition-all"
-                      style={{ height: `${(mood.rating / 10) * 100}%` }}
-                      data-testid={`bar-mood-${idx}`}
-                      aria-hidden="true"
-                    ></div>
-                    <span className="text-xs text-neutral-400" aria-label={`${new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "long" })}: mood rating ${mood.rating}`}>
-                      {new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "short" })}
-                    </span>
-                  </div>
-                ))}
+    <>
+      <SEO 
+        title="Analytics - The Genuine Love Project"
+        description="View your wellness analytics including mood trends, journal entries, and personal growth insights."
+      />
+      <div className="min-h-screen p-6 hero-gradient">
+        <div className="content-wrapper">
+          <div className="max-w-4xl mx-auto">
+            <header className="flex items-center gap-4 mb-8">
+              <Link 
+                href="/dashboard" 
+                className="p-3 rounded-xl bg-white border border-[var(--sage-200)] text-[var(--teal-600)] hover:bg-[var(--sage-50)] transition shadow-sm" 
+                data-testid="link-back" 
+                aria-label="Back to dashboard"
+              >
+                <ArrowLeft className="w-5 h-5" aria-hidden="true" />
+              </Link>
+              <div className="flex items-center gap-3">
+                <div className="icon-container icon-lg icon-gradient-teal">
+                  <BarChart3 className="w-6 h-6" aria-hidden="true" />
+                </div>
+                <div>
+                  <h1 className="text-heading-xl text-teal" data-testid="text-title">Analytics</h1>
+                  <p className="text-body-sm">Your wellness insights at a glance</p>
+                </div>
               </div>
-            </div>
-          </section>
-        )}
+            </header>
 
-        <nav className="mt-8 text-center">
-          <Link
-            href="/dashboard"
-            className="inline-block px-6 py-3 bg-blue-600 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-400"
-            data-testid="link-dashboard"
-          >
-            Back to Dashboard
-          </Link>
-        </nav>
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" aria-label="Analytics overview">
+              <article className="card-bordered hover:shadow-lg transition-shadow" data-testid="card-trend">
+                <div className="flex items-center gap-4 mb-4">
+                  {getTrendIcon(stats?.averageMood)}
+                  <div>
+                    <h2 className="text-heading-sm text-teal">Mood Trend</h2>
+                    <p className="text-body-sm">Your current wellness direction</p>
+                  </div>
+                </div>
+                <p className="text-display-lg text-sage font-bold" aria-label={`Current mood trend: ${stats?.averageMood !== null ? (stats.averageMood >= 7 ? "Positive" : stats.averageMood <= 4 ? "Needs Attention" : "Stable") : "No data"}`}>
+                  {stats?.averageMood !== null ? (
+                    stats.averageMood >= 7 ? "Positive" : stats.averageMood <= 4 ? "Needs Attention" : "Stable"
+                  ) : "No data"}
+                </p>
+              </article>
+
+              <article className="card-bordered hover:shadow-lg transition-shadow" data-testid="card-entries">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="icon-container icon-md icon-soft-teal">
+                    <Calendar className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-heading-sm text-teal">Total Mood Entries</h2>
+                    <p className="text-body-sm">Entries logged so far</p>
+                  </div>
+                </div>
+                <p className="text-display-lg text-teal font-bold" aria-label={`${stats?.moodCount || 0} total mood entries`}>
+                  {stats?.moodCount || 0}
+                </p>
+              </article>
+
+              <article className="card-bordered hover:shadow-lg transition-shadow" data-testid="card-average">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="icon-container icon-md icon-soft-gold">
+                    <Award className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-heading-sm text-teal">Average Mood Rating</h2>
+                    <p className="text-body-sm">Your overall wellness score</p>
+                  </div>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-display-lg text-gold font-bold" aria-label={`Average mood: ${stats?.averageMood !== null ? stats.averageMood : 'no data'} out of 10`}>
+                    {stats?.averageMood !== null ? stats.averageMood : "--"}
+                  </span>
+                  <span className="text-heading-sm text-[var(--teal-400)]" aria-hidden="true">/10</span>
+                </div>
+              </article>
+
+              <article className="card-bordered hover:shadow-lg transition-shadow" data-testid="card-journal">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="icon-container icon-md icon-soft-blush">
+                    <Sparkles className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-heading-sm text-teal">Journal Entries</h2>
+                    <p className="text-body-sm">Reflections written</p>
+                  </div>
+                </div>
+                <p className="text-display-lg text-blush font-bold" aria-label={`${stats?.journalCount || 0} journal entries`}>
+                  {stats?.journalCount || 0}
+                </p>
+              </article>
+            </section>
+
+            {stats?.recentMoods && stats.recentMoods.length > 0 && (
+              <section className="mb-8" aria-label="Recent mood history chart">
+                <div className="card-bordered">
+                  <h2 className="text-heading-md text-teal mb-6 flex items-center gap-2">
+                    <BarChart3 className="w-5 h-5 text-[var(--sage-500)]" />
+                    Recent Mood History
+                  </h2>
+                  <div className="p-4 rounded-xl bg-[var(--sage-50)]" role="img" aria-label={`Bar chart showing mood ratings over ${stats.recentMoods.length} days`}>
+                    <div className="flex items-end justify-between h-32 gap-2">
+                      {stats.recentMoods.map((mood, idx) => (
+                        <div key={idx} className="flex-1 flex flex-col items-center gap-2" role="presentation">
+                          <div
+                            className="w-full rounded-t transition-all"
+                            style={{ 
+                              height: `${(mood.rating / 10) * 100}%`,
+                              background: `linear-gradient(to top, var(--sage-400), var(--sage-300))`
+                            }}
+                            data-testid={`bar-mood-${idx}`}
+                            aria-hidden="true"
+                          ></div>
+                          <span className="text-xs text-[var(--teal-500)]" aria-label={`${new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "long" })}: mood rating ${mood.rating}`}>
+                            {new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "short" })}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            <nav className="text-center">
+              <Link
+                href="/dashboard"
+                className="btn-premium inline-flex items-center gap-2"
+                data-testid="link-dashboard"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Dashboard
+              </Link>
+            </nav>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
