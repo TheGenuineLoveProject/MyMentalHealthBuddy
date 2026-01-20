@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { useMutation } from "@tanstack/react-query";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
@@ -10,16 +9,16 @@ import { Heart, Sparkles, Shield, Brain, Wind, Target, ChevronRight, ChevronLeft
 const STEPS = ["goals", "support", "reminders", "disclaimer"];
 
 const GOAL_OPTIONS = [
-  { id: "self_love", label: "Self Love", icon: Heart },
-  { id: "anxiety_relief", label: "Anxiety Relief", icon: Wind },
-  { id: "stress_management", label: "Stress Management", icon: Shield },
-  { id: "emotional_healing", label: "Emotional Healing", icon: Sparkles },
-  { id: "mindfulness", label: "Mindfulness", icon: Brain },
-  { id: "personal_growth", label: "Personal Growth", icon: Target },
-  { id: "better_sleep", label: "Better Sleep", icon: Moon },
-  { id: "confidence", label: "Build Confidence", icon: Sun },
-  { id: "relationships", label: "Relationships", icon: Heart },
-  { id: "grief_support", label: "Grief Support", icon: Leaf },
+  { id: "self_love", label: "Self Love", icon: Heart, color: "blush" },
+  { id: "anxiety_relief", label: "Anxiety Relief", icon: Wind, color: "teal" },
+  { id: "stress_management", label: "Stress Management", icon: Shield, color: "sage" },
+  { id: "emotional_healing", label: "Emotional Healing", icon: Sparkles, color: "gold" },
+  { id: "mindfulness", label: "Mindfulness", icon: Brain, color: "teal" },
+  { id: "personal_growth", label: "Personal Growth", icon: Target, color: "sage" },
+  { id: "better_sleep", label: "Better Sleep", icon: Moon, color: "blush" },
+  { id: "confidence", label: "Build Confidence", icon: Sun, color: "gold" },
+  { id: "relationships", label: "Relationships", icon: Heart, color: "blush" },
+  { id: "grief_support", label: "Grief Support", icon: Leaf, color: "sage" },
 ];
 
 const SUPPORT_MODES = [
@@ -44,15 +43,12 @@ export default function Onboarding() {
 
   const completeMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest("/api/onboarding/complete", {
-        method: "POST",
-        body: JSON.stringify({
-          goals: selectedGoals,
-          supportMode,
-          reminderTime: reminderTime || null,
-          reminderDays,
-          disclaimerAccepted,
-        }),
+      return apiRequest("POST", "/api/onboarding/complete", {
+        goals: selectedGoals,
+        supportMode,
+        reminderTime: reminderTime || null,
+        reminderDays,
+        disclaimerAccepted,
       });
     },
     onSuccess: () => {
@@ -106,47 +102,47 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-green-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl shadow-xl" data-testid="card-onboarding">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-4">
+    <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
+      <div className="w-full max-w-2xl card-bordered" data-testid="card-onboarding">
+        <div className="text-center mb-8">
+          <div className="flex justify-center mb-6">
             <div className="flex items-center gap-2">
               {STEPS.map((step, i) => (
                 <div key={step} className="flex items-center">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
                       i < currentStep
-                        ? "bg-green-600 text-white"
+                        ? "bg-[var(--sage-500)] text-white"
                         : i === currentStep
-                        ? "bg-green-600 text-white ring-2 ring-green-200"
-                        : "bg-gray-200 dark:bg-gray-700 text-gray-500"
+                        ? "bg-[var(--teal-500)] text-white ring-2 ring-[var(--teal-200)]"
+                        : "bg-[var(--sage-200)] text-[var(--sage-500)]"
                     }`}
                     data-testid={`step-indicator-${step}`}
                   >
-                    {i < currentStep ? <Check className="w-4 h-4" /> : i + 1}
+                    {i < currentStep ? <Check className="w-5 h-5" /> : i + 1}
                   </div>
                   {i < STEPS.length - 1 && (
-                    <div className={`w-8 h-0.5 ${i < currentStep ? "bg-green-600" : "bg-gray-200 dark:bg-gray-700"}`} />
+                    <div className={`w-10 h-1 rounded ${i < currentStep ? "bg-[var(--sage-500)]" : "bg-[var(--sage-200)]"}`} />
                   )}
                 </div>
               ))}
             </div>
           </div>
-          <CardTitle className="text-2xl text-green-700 dark:text-green-400" data-testid="text-onboarding-title">
+          <h1 className="text-display-lg text-teal" data-testid="text-onboarding-title">
             {STEPS[currentStep] === "goals" && "What brings you here?"}
             {STEPS[currentStep] === "support" && "How would you like support?"}
             {STEPS[currentStep] === "reminders" && "Set up reminders"}
             {STEPS[currentStep] === "disclaimer" && "Almost there!"}
-          </CardTitle>
-          <CardDescription data-testid="text-onboarding-description">
+          </h1>
+          <p className="text-lead mt-2" data-testid="text-onboarding-description">
             {STEPS[currentStep] === "goals" && "Select the areas you'd like to focus on"}
             {STEPS[currentStep] === "support" && "Choose your preferred support style"}
             {STEPS[currentStep] === "reminders" && "Optional: Get gentle nudges to check in"}
             {STEPS[currentStep] === "disclaimer" && "Please review and accept to continue"}
-          </CardDescription>
-        </CardHeader>
+          </p>
+        </div>
 
-        <CardContent className="space-y-6">
+        <div className="space-y-6">
           {STEPS[currentStep] === "goals" && (
             <div className="grid grid-cols-2 gap-3" data-testid="section-goals">
               {GOAL_OPTIONS.map((goal) => {
@@ -156,15 +152,17 @@ export default function Onboarding() {
                   <button
                     key={goal.id}
                     onClick={() => toggleGoal(goal.id)}
-                    className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    className={`p-4 rounded-xl border-2 text-left transition-all ${
                       isSelected
-                        ? "border-green-600 bg-green-50 dark:bg-green-900/20"
-                        : "border-gray-200 dark:border-gray-700 hover:border-green-400"
+                        ? `border-[var(--${goal.color}-500)] bg-[var(--${goal.color}-50)]`
+                        : "border-[var(--sage-200)] hover:border-[var(--sage-400)] bg-white"
                     }`}
                     data-testid={`button-goal-${goal.id}`}
                   >
-                    <Icon className={`w-5 h-5 mb-2 ${isSelected ? "text-green-600" : "text-gray-400"}`} />
-                    <span className={`font-medium ${isSelected ? "text-green-700 dark:text-green-400" : ""}`}>{goal.label}</span>
+                    <div className={`icon-container icon-sm mb-2 ${isSelected ? `icon-soft-${goal.color}` : 'icon-soft-sage'}`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                    <span className={`font-medium text-body-sm ${isSelected ? "text-[var(--teal-700)]" : ""}`}>{goal.label}</span>
                   </button>
                 );
               })}
@@ -177,21 +175,21 @@ export default function Onboarding() {
                 <button
                   key={mode.id}
                   onClick={() => setSupportMode(mode.id)}
-                  className={`w-full flex items-start space-x-3 p-4 rounded-lg border-2 text-left transition-all ${
+                  className={`w-full flex items-start gap-3 p-4 rounded-xl border-2 text-left transition-all ${
                     supportMode === mode.id
-                      ? "border-green-600 bg-green-50 dark:bg-green-900/20"
-                      : "border-gray-200 dark:border-gray-700 hover:border-green-400"
+                      ? "border-[var(--teal-500)] bg-[var(--sage-50)]"
+                      : "border-[var(--sage-200)] hover:border-[var(--sage-400)] bg-white"
                   }`}
                   data-testid={`option-support-${mode.id}`}
                 >
-                  <div className={`w-4 h-4 mt-1 rounded-full border-2 flex items-center justify-center ${
-                    supportMode === mode.id ? "border-green-600 bg-green-600" : "border-gray-400"
+                  <div className={`w-5 h-5 mt-1 rounded-full border-2 flex items-center justify-center ${
+                    supportMode === mode.id ? "border-[var(--teal-500)] bg-[var(--teal-500)]" : "border-[var(--sage-400)]"
                   }`}>
                     {supportMode === mode.id && <div className="w-2 h-2 bg-white rounded-full" />}
                   </div>
                   <div>
-                    <div className="font-medium">{mode.label}</div>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{mode.description}</p>
+                    <div className="text-heading-sm text-teal">{mode.label}</div>
+                    <p className="text-body-sm text-[var(--sage-500)]">{mode.description}</p>
                   </div>
                 </button>
               ))}
@@ -200,12 +198,12 @@ export default function Onboarding() {
 
           {STEPS[currentStep] === "reminders" && (
             <div className="space-y-6" data-testid="section-reminders">
-              <div>
-                <label className="block mb-2 font-medium">Reminder time (optional)</label>
+              <div className="form-group">
+                <label className="form-label">Reminder time (optional)</label>
                 <select
                   value={reminderTime}
                   onChange={(e) => setReminderTime(e.target.value)}
-                  className="w-full p-3 border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700"
+                  className="w-full p-3 rounded-xl border border-[var(--sage-200)] bg-white focus:border-[var(--sage-500)] focus:ring-2 focus:ring-[var(--sage-200)] outline-none"
                   data-testid="select-reminder-time"
                 >
                   <option value="">Select a time</option>
@@ -216,17 +214,17 @@ export default function Onboarding() {
               </div>
 
               {reminderTime && (
-                <div>
-                  <label className="block mb-2 font-medium">Which days?</label>
+                <div className="form-group">
+                  <label className="form-label">Which days?</label>
                   <div className="flex gap-2 flex-wrap">
                     {DAYS.map((day) => (
                       <button
                         key={day}
                         onClick={() => toggleDay(day)}
-                        className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                        className={`px-4 py-2 rounded-xl text-body-sm font-medium transition-colors ${
                           reminderDays.includes(day)
-                            ? "bg-green-600 text-white"
-                            : "bg-gray-100 dark:bg-gray-800 hover:bg-gray-200"
+                            ? "bg-[var(--teal-500)] text-white"
+                            : "bg-[var(--sage-100)] hover:bg-[var(--sage-200)]"
                         }`}
                         data-testid={`button-day-${day.toLowerCase()}`}
                       >
@@ -237,7 +235,7 @@ export default function Onboarding() {
                 </div>
               )}
 
-              <p className="text-sm text-gray-500">
+              <p className="text-caption">
                 You can skip this step and set up reminders later in settings.
               </p>
             </div>
@@ -245,38 +243,39 @@ export default function Onboarding() {
 
           {STEPS[currentStep] === "disclaimer" && (
             <div className="space-y-4" data-testid="section-disclaimer">
-              <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
-                <h4 className="font-medium text-amber-800 dark:text-amber-200 mb-2">Important Notice</h4>
-                <p className="text-sm text-amber-700 dark:text-amber-300">
+              <div className="p-4 bg-[var(--gold-50)] rounded-xl border border-[var(--gold-200)]">
+                <h4 className="text-heading-sm text-[var(--gold-700)] mb-2">Important Notice</h4>
+                <p className="text-body-sm text-[var(--gold-600)]">
                   This app provides wellness support and is not a substitute for professional mental health care.
                   If you're experiencing a mental health crisis, please contact emergency services or a crisis hotline.
                 </p>
               </div>
 
-              <label className="flex items-start space-x-3 p-4 rounded-lg border cursor-pointer">
+              <label className="flex items-start gap-3 p-4 rounded-xl border border-[var(--sage-200)] cursor-pointer hover:bg-[var(--sage-50)] transition">
                 <input
                   type="checkbox"
                   checked={disclaimerAccepted}
                   onChange={(e) => setDisclaimerAccepted(e.target.checked)}
-                  className="mt-1 w-5 h-5 accent-green-600"
+                  className="mt-1 w-5 h-5 rounded accent-[var(--teal-500)]"
                   data-testid="checkbox-disclaimer"
                 />
-                <span className="text-sm leading-relaxed">
+                <span className="text-body-sm leading-relaxed">
                   I understand that this app is for wellness support only and is not a replacement for professional
                   mental health services. I agree to the{" "}
-                  <a href="/terms" className="text-green-600 underline">Terms of Service</a>{" "}
+                  <a href="/terms" className="text-[var(--teal-600)] underline">Terms of Service</a>{" "}
                   and{" "}
-                  <a href="/privacy" className="text-green-600 underline">Privacy Policy</a>.
+                  <a href="/privacy" className="text-[var(--teal-600)] underline">Privacy Policy</a>.
                 </span>
               </label>
             </div>
           )}
 
-          <div className="flex justify-between pt-4">
+          <div className="flex justify-between pt-6 border-t border-[var(--sage-200)]">
             <Button
               variant="outline"
               onClick={handleBack}
               disabled={!canGoBack}
+              className="btn-secondary-premium"
               data-testid="button-back"
             >
               <ChevronLeft className="w-4 h-4 mr-1" />
@@ -286,7 +285,7 @@ export default function Onboarding() {
             <Button
               onClick={handleNext}
               disabled={completeMutation.isPending}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="btn-premium"
               data-testid="button-next"
             >
               {completeMutation.isPending ? (
@@ -298,8 +297,8 @@ export default function Onboarding() {
               )}
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
