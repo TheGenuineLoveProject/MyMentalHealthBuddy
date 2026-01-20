@@ -2,13 +2,11 @@ import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { 
-  FileText, Download, Save, Loader2, ChevronLeft,
+  FileText, Save, Loader2, ChevronLeft,
   Copy, Sparkles, FileJson, FileCode
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/Input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient.js";
@@ -124,36 +122,36 @@ export default function ContentStudioPage() {
   };
 
   const renderOutput = (format: string, data: any) => {
-    if (!data) return <p className="text-muted-foreground">No content generated for this format.</p>;
+    if (!data) return <p className="text-body-sm">No content generated for this format.</p>;
     
     return (
       <div className="space-y-4">
         {data.title && (
           <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Title</p>
-            <p className="font-semibold">{data.title}</p>
+            <p className="text-eyebrow text-[var(--sage-500)]">Title</p>
+            <p className="text-heading-sm text-teal">{data.title}</p>
           </div>
         )}
         {data.content && (
           <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Content</p>
-            <div className="bg-muted/50 p-3 rounded-lg whitespace-pre-wrap text-sm">{data.content}</div>
+            <p className="text-eyebrow text-[var(--sage-500)]">Content</p>
+            <div className="bg-[var(--sage-50)] p-3 rounded-xl border border-[var(--sage-200)] whitespace-pre-wrap text-body-sm">{data.content}</div>
           </div>
         )}
         {data.script && (
           <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Script</p>
-            <div className="bg-muted/50 p-3 rounded-lg whitespace-pre-wrap text-sm">{data.script}</div>
+            <p className="text-eyebrow text-[var(--sage-500)]">Script</p>
+            <div className="bg-[var(--sage-50)] p-3 rounded-xl border border-[var(--sage-200)] whitespace-pre-wrap text-body-sm">{data.script}</div>
           </div>
         )}
         {data.slides && (
           <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Slides</p>
+            <p className="text-eyebrow text-[var(--sage-500)]">Slides</p>
             <div className="space-y-2">
               {data.slides.map((slide: any, idx: number) => (
-                <div key={idx} className="bg-muted/50 p-3 rounded-lg">
-                  <span className="text-xs font-bold text-primary">Slide {idx + 1}</span>
-                  <p className="text-sm">{slide.text}</p>
+                <div key={idx} className="bg-[var(--sage-50)] p-3 rounded-xl border border-[var(--sage-200)]">
+                  <span className="text-caption font-bold text-[var(--teal-600)]">Slide {idx + 1}</span>
+                  <p className="text-body-sm">{slide.text}</p>
                 </div>
               ))}
             </div>
@@ -161,191 +159,196 @@ export default function ContentStudioPage() {
         )}
         {data.hashtags && (
           <div>
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">Hashtags</p>
-            <p className="text-sm text-primary">{data.hashtags.join(" ")}</p>
+            <p className="text-eyebrow text-[var(--sage-500)]">Hashtags</p>
+            <p className="text-body-sm text-[var(--teal-600)]">{data.hashtags.join(" ")}</p>
           </div>
         )}
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <button 
+          className="btn-secondary-premium inline-flex items-center gap-2"
           onClick={() => copyToClipboard(JSON.stringify(data, null, 2))}
           data-testid={`button-copy-${format}`}
         >
-          <Copy className="w-4 h-4 mr-2" /> Copy
-        </Button>
+          <Copy className="w-4 h-4" /> Copy
+        </button>
       </div>
     );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-7xl mx-auto">
         <div className="flex items-center gap-4 mb-8">
           <Link href="/dashboard">
-            <Button variant="ghost" size="icon" data-testid="button-back">
+            <button className="p-3 rounded-xl bg-white border border-[var(--sage-200)] text-[var(--teal-600)] hover:bg-[var(--sage-50)] transition shadow-sm" data-testid="button-back">
               <ChevronLeft className="w-5 h-5" />
-            </Button>
+            </button>
           </Link>
-          <div>
-            <h1 className="text-3xl font-bold flex items-center gap-3" data-testid="text-page-title">
-              <FileText className="w-8 h-8 text-primary" />
-              Content Studio
-            </h1>
-            <p className="text-muted-foreground">Transform your ideas into 10 platform-ready formats</p>
+          <div className="flex items-center gap-4">
+            <div className="icon-container icon-xl icon-gradient-gold">
+              <FileText className="w-7 h-7" />
+            </div>
+            <div>
+              <h1 className="text-display-lg text-teal" data-testid="text-page-title">
+                Content Studio
+              </h1>
+              <p className="text-body-sm">Transform your ideas into 10 platform-ready formats</p>
+            </div>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-primary" />
-                  Your Content
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label htmlFor="title" className="text-sm font-medium">Title (optional)</label>
+            <div className="card-bordered">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="icon-container icon-md icon-gradient-gold">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <h2 className="text-heading-md text-teal">Your Content</h2>
+              </div>
+              <div className="space-y-4">
+                <div className="form-group">
+                  <label htmlFor="title" className="form-label">Title (optional)</label>
                   <Input
                     id="title"
                     placeholder="Give your content a title..."
                     value={title}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+                    className="input-premium"
                     data-testid="input-title"
                   />
                 </div>
-                <div>
-                  <label htmlFor="content" className="text-sm font-medium">Content (min 50 characters)</label>
+                <div className="form-group">
+                  <label htmlFor="content" className="form-label">Content (min 50 characters)</label>
                   <Textarea
                     id="content"
                     placeholder="Paste or type your content here... This will be transformed into multiple platform-specific formats."
                     value={content}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)}
-                    className="min-h-[200px]"
+                    className="min-h-[200px] input-premium"
                     data-testid="input-content"
                   />
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="form-hint">
                     {content.length} / 50 minimum characters
                   </p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <span>Output Formats</span>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" onClick={selectAll} data-testid="button-select-all">
-                      Select All
-                    </Button>
-                    <Button variant="outline" size="sm" onClick={clearAll} data-testid="button-clear-all">
-                      Clear
-                    </Button>
-                  </div>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  {ALL_FORMATS.map((format) => (
-                    <div key={format.id} className="flex items-center gap-2">
-                      <input
-                        type="checkbox"
-                        id={format.id}
-                        checked={selectedFormats.includes(format.id)}
-                        onChange={() => toggleFormat(format.id)}
-                        className="w-4 h-4 rounded border-gray-300"
-                        data-testid={`checkbox-format-${format.id}`}
-                      />
-                      <label htmlFor={format.id} className="flex items-center gap-2 cursor-pointer text-sm">
-                        <span>{format.icon}</span>
-                        <span>{format.name}</span>
-                      </label>
-                    </div>
-                  ))}
+            <div className="card-bordered">
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-heading-md text-teal">Output Formats</h2>
+                <div className="flex gap-2">
+                  <button className="btn-secondary-premium btn-sm" onClick={selectAll} data-testid="button-select-all">
+                    Select All
+                  </button>
+                  <button className="btn-secondary-premium btn-sm" onClick={clearAll} data-testid="button-clear-all">
+                    Clear
+                  </button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {ALL_FORMATS.map((format) => (
+                  <div key={format.id} className="flex items-center gap-2 p-2 rounded-lg hover:bg-[var(--sage-50)] transition">
+                    <input
+                      type="checkbox"
+                      id={format.id}
+                      checked={selectedFormats.includes(format.id)}
+                      onChange={() => toggleFormat(format.id)}
+                      className="w-4 h-4 rounded accent-[var(--sage-500)] focus:ring-2 focus:ring-[var(--sage-400)]"
+                      data-testid={`checkbox-format-${format.id}`}
+                    />
+                    <label htmlFor={format.id} className="flex items-center gap-2 cursor-pointer text-body-sm">
+                      <span>{format.icon}</span>
+                      <span>{format.name}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             <div className="flex gap-3">
-              <Button
+              <button
                 onClick={() => generateMutation.mutate()}
                 disabled={content.length < 50 || selectedFormats.length === 0 || generateMutation.isPending}
-                className="flex-1"
+                className="btn-premium flex-1 flex items-center justify-center gap-2"
                 data-testid="button-generate"
               >
                 {generateMutation.isPending ? (
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin" />
                 ) : (
-                  <Sparkles className="w-4 h-4 mr-2" />
+                  <Sparkles className="w-4 h-4" />
                 )}
                 Generate Content
-              </Button>
+              </button>
             </div>
           </div>
 
           <div className="space-y-6">
-            <Card className="h-full">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <span>Generated Content</span>
-                  {generatedContent && (
-                    <div className="flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        onClick={() => saveMutation.mutate()}
-                        disabled={saveMutation.isPending}
-                        data-testid="button-save"
-                      >
-                        {saveMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                        <span className="ml-2">Save</span>
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={exportAsJSON} data-testid="button-export-json">
-                        <FileJson className="w-4 h-4 mr-2" /> JSON
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={exportAsMarkdown} data-testid="button-export-md">
-                        <FileCode className="w-4 h-4 mr-2" /> MD
-                      </Button>
-                    </div>
-                  )}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                {!generatedContent ? (
-                  <div className="text-center py-12 text-muted-foreground">
-                    <FileText className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <p>Your generated content will appear here</p>
-                    <p className="text-sm">Paste your content and click Generate</p>
+            <div className="card-bordered h-full">
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <div className="icon-container icon-md icon-gradient-teal">
+                    <FileText className="w-5 h-5" />
                   </div>
-                ) : (
-                  <Tabs value={activeTab} onValueChange={setActiveTab}>
-                    <TabsList className="flex flex-wrap gap-1 h-auto p-1">
-                      {Object.keys(generatedContent).map((format) => {
-                        const formatInfo = ALL_FORMATS.find(f => f.id === format);
-                        return (
-                          <TabsTrigger 
-                            key={format} 
-                            value={format} 
-                            className="text-xs"
-                            data-testid={`tab-${format}`}
-                          >
-                            {formatInfo?.icon} {formatInfo?.name?.split(" ")[0]}
-                          </TabsTrigger>
-                        );
-                      })}
-                    </TabsList>
-                    {Object.entries(generatedContent).map(([format, data]) => (
-                      <TabsContent key={format} value={format} className="mt-4 max-h-[400px] overflow-y-auto">
-                        {renderOutput(format, data)}
-                      </TabsContent>
-                    ))}
-                  </Tabs>
+                  <h2 className="text-heading-md text-teal">Generated Content</h2>
+                </div>
+                {generatedContent && (
+                  <div className="flex gap-2">
+                    <button 
+                      className="btn-secondary-premium btn-sm inline-flex items-center gap-2"
+                      onClick={() => saveMutation.mutate()}
+                      disabled={saveMutation.isPending}
+                      data-testid="button-save"
+                    >
+                      {saveMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                      Save
+                    </button>
+                    <button className="btn-secondary-premium btn-sm inline-flex items-center gap-2" onClick={exportAsJSON} data-testid="button-export-json">
+                      <FileJson className="w-4 h-4" /> JSON
+                    </button>
+                    <button className="btn-secondary-premium btn-sm inline-flex items-center gap-2" onClick={exportAsMarkdown} data-testid="button-export-md">
+                      <FileCode className="w-4 h-4" /> MD
+                    </button>
+                  </div>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+              
+              {!generatedContent ? (
+                <div className="text-center py-12">
+                  <div className="icon-container icon-xl icon-soft-sage mx-auto mb-4">
+                    <FileText className="w-8 h-8" />
+                  </div>
+                  <p className="text-heading-sm text-teal mb-2">Your generated content will appear here</p>
+                  <p className="text-body-sm">Paste your content and click Generate</p>
+                </div>
+              ) : (
+                <Tabs value={activeTab} onValueChange={setActiveTab}>
+                  <TabsList className="flex flex-wrap gap-1 h-auto p-1 bg-[var(--sage-100)] rounded-xl">
+                    {Object.keys(generatedContent).map((format) => {
+                      const formatInfo = ALL_FORMATS.find(f => f.id === format);
+                      return (
+                        <TabsTrigger 
+                          key={format} 
+                          value={format} 
+                          className="text-caption px-3 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm"
+                          data-testid={`tab-${format}`}
+                        >
+                          {formatInfo?.icon} {formatInfo?.name?.split(" ")[0]}
+                        </TabsTrigger>
+                      );
+                    })}
+                  </TabsList>
+                  {Object.entries(generatedContent).map(([format, data]) => (
+                    <TabsContent key={format} value={format} className="mt-4 max-h-[400px] overflow-y-auto">
+                      {renderOutput(format, data)}
+                    </TabsContent>
+                  ))}
+                </Tabs>
+              )}
+            </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

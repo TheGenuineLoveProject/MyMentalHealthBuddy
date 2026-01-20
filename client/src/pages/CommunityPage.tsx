@@ -1,20 +1,58 @@
+import { Link } from "wouter";
+import { ArrowLeft, Users, Heart } from "lucide-react";
 import { Community } from "@/features/community/Community";
+import SEO from "@/components/SEO";
 
 export default function CommunityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sage-50 to-white dark:from-sage-950 dark:to-sage-900">
-      <div className="container max-w-2xl mx-auto px-4 py-8">
-        <header className="text-center mb-8">
-          <h1 className="text-3xl font-serif text-sage-800 dark:text-sage-100 mb-2">
-            Shared Presence
-          </h1>
-          <p className="text-sage-600 dark:text-sage-400">
-            Anonymous reflections from others on the same path. No performance, no comparison — just shared humanity.
-          </p>
-        </header>
+    <>
+      <SEO 
+        title="Shared Presence - The Genuine Love Project"
+        description="Anonymous reflections from others on the same path. No performance, no comparison — just shared humanity."
+      />
+      <div className="min-h-screen hero-gradient">
+        <div className="content-wrapper py-8">
+          <div className="max-w-2xl mx-auto">
+            <header className="mb-8">
+              <Link 
+                href="/dashboard" 
+                className="inline-flex items-center gap-2 text-sm text-[var(--sage-600)] hover:text-[var(--teal-700)] transition mb-6"
+                data-testid="link-back"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back to Dashboard
+              </Link>
+              
+              <div className="flex items-center gap-4">
+                <div className="icon-container icon-lg icon-gradient-blush">
+                  <Users className="w-6 h-6" />
+                </div>
+                <div>
+                  <h1 className="text-heading-xl text-teal" data-testid="text-title">
+                    Shared Presence
+                  </h1>
+                  <p className="text-body-sm">
+                    Anonymous reflections from others on the same path
+                  </p>
+                </div>
+              </div>
+            </header>
 
-        <Community />
+            <div className="card-bordered mb-6">
+              <div className="flex items-center gap-3 mb-4 p-4 rounded-xl bg-[var(--sage-50)]">
+                <div className="icon-container icon-sm icon-soft-sage">
+                  <Heart className="w-4 h-4" />
+                </div>
+                <p className="text-body-sm">
+                  No performance, no comparison — just shared humanity.
+                </p>
+              </div>
+              
+              <Community />
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

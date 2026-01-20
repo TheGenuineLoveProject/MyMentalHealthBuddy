@@ -198,51 +198,58 @@ export default function AtlasDashboard() {
   const currentPath = LEARNING_PATHS.find(p => p.id === profile.currentPath);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
-      <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="min-h-screen hero-gradient">
+      <div className="content-wrapper py-8">
+        <div className="max-w-6xl mx-auto">
         <header className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <Compass className="h-10 w-10 text-purple-400" />
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-amber-400 bg-clip-text text-transparent" data-testid="text-atlas-title">
-              Intellectual Atlas
-            </h1>
+            <div className="icon-container icon-xl icon-gradient-teal">
+              <Compass className="h-8 w-8" />
+            </div>
           </div>
-          <p className="text-lg opacity-70 max-w-2xl mx-auto" data-testid="text-atlas-subtitle">
+          <h1 className="text-display-lg text-teal mb-4" data-testid="text-atlas-title">
+            Intellectual Atlas
+          </h1>
+          <p className="text-lead max-w-2xl mx-auto" data-testid="text-atlas-subtitle">
             Navigate 37 instruments for deep thinking, self-discovery, and mastery.
             Choose your path or explore freely.
           </p>
         </header>
 
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10">
+          <div className="card-bordered">
             <div className="flex items-center gap-3 mb-4">
-              <BarChart3 className="h-6 w-6 text-emerald-400" />
-              <span className="text-sm opacity-60">Progress</span>
+              <div className="icon-container icon-md icon-soft-sage">
+                <BarChart3 className="h-5 w-5" />
+              </div>
+              <span className="text-body-sm">Progress</span>
             </div>
-            <div className="text-3xl font-bold mb-2" data-testid="text-progress-percent">{progressPercent}%</div>
-            <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
+            <div className="text-display-lg text-sage font-bold mb-2" data-testid="text-progress-percent">{progressPercent}%</div>
+            <div className="w-full h-2 bg-[var(--sage-100)] rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-500"
-                style={{ width: `${progressPercent}%` }}
+                className="h-full rounded-full transition-all duration-500"
+                style={{ width: `${progressPercent}%`, background: 'linear-gradient(to right, var(--sage-400), var(--teal-500))' }}
               />
             </div>
-            <p className="text-xs opacity-50 mt-2">{completedCount} of {totalTools} tools explored</p>
+            <p className="text-caption mt-2">{completedCount} of {totalTools} tools explored</p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10">
+          <div className="card-bordered">
             <div className="flex items-center gap-3 mb-4">
-              <Target className="h-6 w-6 text-purple-400" />
-              <span className="text-sm opacity-60">Current Path</span>
+              <div className="icon-container icon-md icon-soft-teal">
+                <Target className="h-5 w-5" />
+              </div>
+              <span className="text-body-sm">Current Path</span>
             </div>
             {currentPath ? (
               <div>
-                <div className="text-lg font-semibold mb-1" data-testid="text-current-path">{currentPath.name}</div>
-                <p className="text-xs opacity-50">{currentPath.duration}</p>
+                <div className="text-heading-md text-teal mb-1" data-testid="text-current-path">{currentPath.name}</div>
+                <p className="text-caption">{currentPath.duration}</p>
               </div>
             ) : (
               <button
                 onClick={() => setShowPaths(true)}
-                className="text-purple-400 hover:text-purple-300 text-sm flex items-center gap-1"
+                className="text-[var(--sage-600)] hover:text-[var(--teal-700)] text-sm flex items-center gap-1 transition"
                 data-testid="button-choose-path"
               >
                 Choose a learning path <ChevronRight className="h-4 w-4" />
@@ -250,20 +257,24 @@ export default function AtlasDashboard() {
             )}
           </div>
 
-          <div className="p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10">
+          <div className="card-bordered">
             <div className="flex items-center gap-3 mb-4">
-              <Star className="h-6 w-6 text-amber-400" />
-              <span className="text-sm opacity-60">Favorites</span>
+              <div className="icon-container icon-md icon-soft-gold">
+                <Star className="h-5 w-5" />
+              </div>
+              <span className="text-body-sm">Favorites</span>
             </div>
-            <div className="text-3xl font-bold mb-2" data-testid="text-favorites-count">{profile.favoriteTools.length}</div>
-            <p className="text-xs opacity-50">Tools saved for quick access</p>
+            <div className="text-display-lg text-gold font-bold mb-2" data-testid="text-favorites-count">{profile.favoriteTools.length}</div>
+            <p className="text-caption">Tools saved for quick access</p>
           </div>
         </div>
 
         {showPaths && (
-          <div className="mb-12 p-6 rounded-2xl bg-gradient-to-br from-purple-500/10 to-indigo-500/10 border border-purple-500/20">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Compass className="h-5 w-5" />
+          <div className="mb-12 card-bordered">
+            <h2 className="text-heading-lg text-teal mb-4 flex items-center gap-3">
+              <div className="icon-container icon-md icon-gradient-teal">
+                <Compass className="h-5 w-5" />
+              </div>
               Choose Your Learning Path
             </h2>
             <div className="grid md:grid-cols-2 gap-4">
@@ -271,15 +282,17 @@ export default function AtlasDashboard() {
                 <button
                   key={path.id}
                   onClick={() => selectPath(path.id)}
-                  className="p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-left transition-all group"
+                  className="p-4 rounded-xl bg-[var(--sage-50)] hover:bg-[var(--sage-100)] border border-[var(--sage-200)] text-left transition-all group hover:shadow-md"
                   data-testid={`button-path-${path.id}`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <path.icon className="h-5 w-5 text-purple-400" />
-                    <span className="font-medium">{path.name}</span>
+                    <div className="icon-container icon-sm icon-soft-teal">
+                      <path.icon className="h-4 w-4" />
+                    </div>
+                    <span className="text-heading-sm text-teal">{path.name}</span>
                   </div>
-                  <p className="text-sm opacity-60 mb-2">{path.description}</p>
-                  <div className="flex items-center gap-2 text-xs opacity-40">
+                  <p className="text-body-sm mb-2">{path.description}</p>
+                  <div className="flex items-center gap-2 text-caption">
                     <Clock className="h-3 w-3" />
                     {path.duration}
                     <span className="mx-2">•</span>
@@ -291,7 +304,7 @@ export default function AtlasDashboard() {
           </div>
         )}
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {TOOL_CATEGORIES.map(category => {
             const CategoryIcon = category.icon;
             const isExpanded = activeCategory === category.id;
@@ -299,28 +312,30 @@ export default function AtlasDashboard() {
             return (
               <div 
                 key={category.id}
-                className={`rounded-2xl border ${category.borderColor} overflow-hidden transition-all`}
+                className="card-bordered overflow-hidden transition-all"
               >
                 <button
                   onClick={() => setActiveCategory(isExpanded ? null : category.id)}
-                  className={`w-full p-6 bg-gradient-to-r ${category.color} flex items-center justify-between hover:opacity-90 transition-all`}
+                  className={`w-full p-6 bg-[var(--sage-50)] flex items-center justify-between hover:bg-[var(--sage-100)] transition-all`}
                   data-testid={`button-category-${category.id}`}
                 >
                   <div className="flex items-center gap-4">
-                    <CategoryIcon className="h-8 w-8" />
+                    <div className="icon-container icon-lg icon-gradient-sage">
+                      <CategoryIcon className="h-6 w-6" />
+                    </div>
                     <div className="text-left">
-                      <h2 className="text-xl font-semibold">{category.name}</h2>
-                      <p className="text-sm opacity-70">{category.description}</p>
+                      <h2 className="text-heading-md text-teal">{category.name}</h2>
+                      <p className="text-body-sm">{category.description}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="text-sm opacity-60">{category.tools.length} tools</span>
-                    <ChevronRight className={`h-5 w-5 transition-transform ${isExpanded ? "rotate-90" : ""}`} />
+                    <span className="text-caption">{category.tools.length} tools</span>
+                    <ChevronRight className={`h-5 w-5 text-[var(--teal-500)] transition-transform ${isExpanded ? "rotate-90" : ""}`} />
                   </div>
                 </button>
 
                 {isExpanded && (
-                  <div className="p-6 bg-black/20">
+                  <div className="p-6 bg-white">
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
                       {category.tools.map(tool => {
                         const ToolIcon = tool.icon;
@@ -330,31 +345,33 @@ export default function AtlasDashboard() {
                         return (
                           <div
                             key={tool.id}
-                            className="p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all group"
+                            className="p-4 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)] hover:border-[var(--sage-400)] hover:shadow-md transition-all group"
                             data-testid={`card-tool-${tool.id}`}
                           >
                             <div className="flex items-start justify-between mb-2">
-                              <ToolIcon className="h-5 w-5 opacity-60" />
+                              <div className="icon-container icon-sm icon-soft-teal">
+                                <ToolIcon className="h-4 w-4" />
+                              </div>
                               <div className="flex items-center gap-2">
-                                {isCompleted && <Check className="h-4 w-4 text-emerald-400" />}
+                                {isCompleted && <Check className="h-4 w-4 text-[var(--sage-600)]" />}
                                 <button
                                   onClick={() => toggleFavorite(tool.id)}
-                                  className={`p-1 rounded transition-colors ${isFavorite ? "text-amber-400" : "opacity-40 hover:opacity-70"}`}
+                                  className={`p-1 rounded transition-colors ${isFavorite ? "text-[var(--gold-500)]" : "text-[var(--teal-400)] hover:text-[var(--gold-500)]"}`}
                                   data-testid={`button-favorite-${tool.id}`}
                                 >
                                   <Star className="h-4 w-4" fill={isFavorite ? "currentColor" : "none"} />
                                 </button>
                               </div>
                             </div>
-                            <h3 className="font-medium text-sm mb-1">{tool.name}</h3>
-                            <p className="text-xs opacity-50">{tool.description}</p>
+                            <h3 className="text-heading-sm text-teal mb-1">{tool.name}</h3>
+                            <p className="text-caption">{tool.description}</p>
                           </div>
                         );
                       })}
                     </div>
                     <Link 
                       href={category.route}
-                      className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-sm transition-all"
+                      className="btn-secondary-premium inline-flex items-center gap-2"
                       data-testid={`link-explore-${category.id}`}
                     >
                       Explore {category.name} <ArrowRight className="h-4 w-4" />
@@ -367,10 +384,11 @@ export default function AtlasDashboard() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-xs opacity-40 max-w-md mx-auto">
+          <p className="text-caption max-w-md mx-auto">
             These tools are offerings for your exploration. Take what serves you, leave what doesn't.
             Your journey is uniquely yours.
           </p>
+        </div>
         </div>
       </div>
     </div>
