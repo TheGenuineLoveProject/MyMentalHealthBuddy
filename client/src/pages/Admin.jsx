@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Users, FileText, Activity, Shield, TrendingUp, Clock, Server, Database, AlertTriangle, Download, RefreshCw } from "lucide-react";
 import SEO from "../components/SEO";
+import { apiRequest } from "../lib/queryClient.js";
 
 export default function Admin() {
   const { user } = useAuth();
@@ -9,24 +10,17 @@ export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchStats = () => {
+  const fetchStats = async () => {
     setLoading(true);
     setError(null);
-    fetch("/api/admin/stats", {
-      credentials: "include",
-    })
-      .then(r => {
-        if (!r.ok) throw new Error("Failed to fetch stats");
-        return r.json();
-      })
-      .then(data => {
-        setStats(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err.message);
-        setLoading(false);
-      });
+    try {
+      const data = await apiRequest("GET", "/api/admin/stats");
+      setStats(data);
+    } catch (err) {
+      setError(err.message || "Failed to fetch stats");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
