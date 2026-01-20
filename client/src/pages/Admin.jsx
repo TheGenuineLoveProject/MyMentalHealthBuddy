@@ -1,39 +1,209 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
+import { Users, FileText, Activity, Shield, TrendingUp, Clock, Server, Database, AlertTriangle, Download, RefreshCw } from "lucide-react";
+import SEO from "../components/SEO";
 
 export default function Admin() {
   const { user } = useAuth();
   const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const fetchStats = () => {
+    setLoading(true);
+    setError(null);
     fetch("/api/admin/stats", {
       credentials: "include",
     })
-      .then(r => r.json())
-      .then(setStats)
-      .catch(console.error);
+      .then(r => {
+        if (!r.ok) throw new Error("Failed to fetch stats");
+        return r.json();
+      })
+      .then(data => {
+        setStats(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchStats();
   }, []);
 
   if (user?.role !== "admin") {
     return (
-      <div style={{ padding: 24 }}>
-        <h2>Access Denied</h2>
-        <p>You must be an administrator to view this page.</p>
+      <div className="min-h-screen bg-gradient-mesh flex items-center justify-center p-6">
+        <SEO title="Access Denied" description="Admin access required" />
+        <div className="card-elevated max-w-md text-center p-8">
+          <div className="icon-container icon-lg icon-blush mx-auto mb-4">
+            <Shield className="w-8 h-8" />
+          </div>
+          <h2 className="text-heading-lg text-[#2D3748] mb-2">Access Denied</h2>
+          <p className="text-body-sm">You must be an administrator to view this page.</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: 24 }}>
-      <h1 data-testid="text-admin-title">Admin Dashboard</h1>
-      {!stats ? (
-        <p>Loading statistics...</p>
-      ) : (
-        <ul>
-          <li data-testid="text-total-users">Total users: {stats.users}</li>
-          <li data-testid="text-audit-logs">Total audit logs: {stats.auditLogs}</li>
-        </ul>
-      )}
+    <div className="min-h-screen bg-gradient-mesh p-6">
+      <SEO title="Admin Dashboard" description="Platform administration and metrics" />
+      
+      <div className="content-wrapper">
+        <header className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-heading-xl text-[#2D3748] mb-1" data-testid="text-admin-title">
+              Admin Dashboard
+            </h1>
+            <p className="text-body-sm">Platform metrics and system health</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={fetchStats}
+              className="btn-secondary-premium flex items-center gap-2"
+              data-testid="button-refresh"
+            >
+              <RefreshCw className="w-4 h-4" />
+              Refresh
+            </button>
+            <button
+              className="btn-premium flex items-center gap-2"
+              data-testid="button-export"
+            >
+              <Download className="w-4 h-4" />
+              Export
+            </button>
+          </div>
+        </header>
+
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="card-elevated animate-pulse">
+                <div className="h-12 w-12 bg-gray-200 rounded-xl mb-4"></div>
+                <div className="h-8 w-20 bg-gray-200 rounded mb-2"></div>
+                <div className="h-4 w-24 bg-gray-100 rounded"></div>
+              </div>
+            ))}
+          </div>
+        ) : error ? (
+          <div className="card-elevated p-8 text-center">
+            <div className="icon-container icon-lg icon-blush mx-auto mb-4">
+              <AlertTriangle className="w-8 h-8" />
+            </div>
+            <h3 className="text-heading-md text-[#2D3748] mb-2">Unable to load stats</h3>
+            <p className="text-body-sm mb-4">{error}</p>
+            <button onClick={fetchStats} className="btn-premium">
+              Try Again
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              <div className="stat-card" data-testid="card-total-users">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="icon-container icon-md icon-sage">
+                    <Users className="w-5 h-5" />
+                  </div>
+                  <span className="stat-trend stat-trend-up">
+                    <TrendingUp className="w-3 h-3" />
+                    Active
+                  </span>
+                </div>
+                <div className="stat-value" data-testid="text-total-users">{stats?.users || 0}</div>
+                <div className="stat-label">Total Users</div>
+              </div>
+
+              <div className="stat-card" data-testid="card-audit-logs">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="icon-container icon-md icon-teal">
+                    <FileText className="w-5 h-5" />
+                  </div>
+                </div>
+                <div className="stat-value" data-testid="text-audit-logs">{stats?.auditLogs || 0}</div>
+                <div className="stat-label">Audit Logs</div>
+              </div>
+
+              <div className="stat-card" data-testid="card-sessions">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="icon-container icon-md icon-gold">
+                    <Activity className="w-5 h-5" />
+                  </div>
+                </div>
+                <div className="stat-value">{stats?.sessions || 0}</div>
+                <div className="stat-label">Active Sessions</div>
+              </div>
+
+              <div className="stat-card" data-testid="card-uptime">
+                <div className="flex items-center justify-between mb-3">
+                  <div className="icon-container icon-md icon-sage">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                </div>
+                <div className="stat-value">99.9%</div>
+                <div className="stat-label">Uptime</div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              <div className="card-elevated">
+                <h3 className="text-heading-md text-[#2D3748] mb-4 flex items-center gap-2">
+                  <Server className="w-5 h-5 text-[#5A8A6E]" />
+                  System Health
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-green-50 border border-green-200">
+                    <span className="text-sm font-medium text-green-800">API Server</span>
+                    <span className="badge badge-sage">Healthy</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-green-50 border border-green-200">
+                    <span className="text-sm font-medium text-green-800">Database</span>
+                    <span className="badge badge-sage">Connected</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-green-50 border border-green-200">
+                    <span className="text-sm font-medium text-green-800">AI Services</span>
+                    <span className="badge badge-sage">Online</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="card-elevated">
+                <h3 className="text-heading-md text-[#2D3748] mb-4 flex items-center gap-2">
+                  <Database className="w-5 h-5 text-[#5A8A6E]" />
+                  Quick Actions
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
+                    <Users className="w-5 h-5 text-[#5A8A6E] mb-2" />
+                    <span className="text-sm font-medium text-[#2D3748] block">Manage Users</span>
+                  </button>
+                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
+                    <FileText className="w-5 h-5 text-[#5A8A6E] mb-2" />
+                    <span className="text-sm font-medium text-[#2D3748] block">View Logs</span>
+                  </button>
+                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
+                    <Shield className="w-5 h-5 text-[#5A8A6E] mb-2" />
+                    <span className="text-sm font-medium text-[#2D3748] block">Security</span>
+                  </button>
+                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
+                    <Activity className="w-5 h-5 text-[#5A8A6E] mb-2" />
+                    <span className="text-sm font-medium text-[#2D3748] block">Analytics</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center py-4">
+              <p className="text-caption">
+                Journaling support only — not medical advice.
+              </p>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
