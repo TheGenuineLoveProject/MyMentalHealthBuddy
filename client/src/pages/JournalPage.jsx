@@ -82,25 +82,27 @@ export default function JournalPage() {
         title="Journal"
         description="Write and reflect on your thoughts in a private, secure journal. Express yourself freely and track your mental wellness journey."
       />
-      <div className="min-h-screen p-6 bg-gradient-mesh">
+      <div className="min-h-screen p-6 hero-gradient">
         <div className="max-w-2xl mx-auto">
-          {/* Header */}
           <header className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
               <Link 
                 href="/dashboard" 
-                className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+                className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition" 
                 data-testid="link-back" 
                 aria-label="Back to dashboard"
               >
-                <ArrowLeft className="w-5 h-5" aria-hidden="true" />
+                <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+                Back
               </Link>
-              <div>
-                <h1 className="text-3xl font-bold tracking-tight flex items-center gap-2" data-testid="text-title">
-                  <Notebook className="w-8 h-8 text-[var(--primary)]" aria-hidden="true" />
-                  Journal
-                </h1>
-                <p className="text-[var(--text-secondary)] text-sm mt-1">Your private space for reflection</p>
+              <div className="flex items-center gap-3">
+                <div className="icon-container icon-lg icon-gradient-sage">
+                  <Notebook className="w-6 h-6" aria-hidden="true" />
+                </div>
+                <div>
+                  <h1 className="text-heading-xl text-teal" data-testid="text-title">Journal</h1>
+                  <p className="text-body-sm">Your private space for reflection</p>
+                </div>
               </div>
             </div>
             <button
