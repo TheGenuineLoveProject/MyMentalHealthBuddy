@@ -88,9 +88,9 @@ export default function Admin() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map(i => (
               <div key={i} className="card-elevated animate-pulse">
-                <div className="h-12 w-12 bg-gray-200 rounded-xl mb-4"></div>
-                <div className="h-8 w-20 bg-gray-200 rounded mb-2"></div>
-                <div className="h-4 w-24 bg-gray-100 rounded"></div>
+                <div className="h-12 w-12 bg-sage-100 rounded-xl mb-4"></div>
+                <div className="h-8 w-20 bg-sage-100 rounded mb-2"></div>
+                <div className="h-4 w-24 bg-sage-50 rounded"></div>
               </div>
             ))}
           </div>
@@ -99,7 +99,7 @@ export default function Admin() {
             <div className="icon-container icon-lg icon-blush mx-auto mb-4">
               <AlertTriangle className="w-8 h-8" />
             </div>
-            <h3 className="text-heading-md text-[#2D3748] mb-2">Unable to load stats</h3>
+            <h3 className="text-heading-md text-teal mb-2">Unable to load stats</h3>
             <p className="text-body-sm mb-4">{error}</p>
             <button onClick={fetchStats} className="btn-premium">
               Try Again
@@ -155,8 +155,8 @@ export default function Admin() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               <div className="card-elevated">
-                <h3 className="text-heading-md text-[#2D3748] mb-4 flex items-center gap-2">
-                  <Server className="w-5 h-5 text-[#5A8A6E]" />
+                <h3 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+                  <Server className="w-5 h-5 text-sage-600" />
                   System Health
                 </h3>
                 <div className="space-y-4">
@@ -176,26 +176,26 @@ export default function Admin() {
               </div>
 
               <div className="card-elevated">
-                <h3 className="text-heading-md text-[#2D3748] mb-4 flex items-center gap-2">
-                  <Database className="w-5 h-5 text-[#5A8A6E]" />
+                <h3 className="text-heading-md text-teal mb-4 flex items-center gap-2">
+                  <Database className="w-5 h-5 text-sage-600" />
                   Quick Actions
                 </h3>
                 <div className="grid grid-cols-2 gap-3">
-                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
-                    <Users className="w-5 h-5 text-[#5A8A6E] mb-2" />
-                    <span className="text-sm font-medium text-[#2D3748] block">Manage Users</span>
+                  <button className="p-4 rounded-xl border border-sage-200 hover:border-sage-400 hover:bg-sage-50 transition text-left">
+                    <Users className="w-5 h-5 text-sage-600 mb-2" />
+                    <span className="text-sm font-medium text-teal block">Manage Users</span>
                   </button>
-                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
-                    <FileText className="w-5 h-5 text-[#5A8A6E] mb-2" />
-                    <span className="text-sm font-medium text-[#2D3748] block">View Logs</span>
+                  <button className="p-4 rounded-xl border border-sage-200 hover:border-sage-400 hover:bg-sage-50 transition text-left">
+                    <FileText className="w-5 h-5 text-sage-600 mb-2" />
+                    <span className="text-sm font-medium text-teal block">View Logs</span>
                   </button>
-                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
-                    <Shield className="w-5 h-5 text-[#5A8A6E] mb-2" />
-                    <span className="text-sm font-medium text-[#2D3748] block">Security</span>
+                  <button className="p-4 rounded-xl border border-sage-200 hover:border-sage-400 hover:bg-sage-50 transition text-left">
+                    <Shield className="w-5 h-5 text-sage-600 mb-2" />
+                    <span className="text-sm font-medium text-teal block">Security</span>
                   </button>
-                  <button className="p-4 rounded-xl border border-[hsl(var(--border))] hover:border-[#8FBF9F] hover:bg-[rgba(143,191,159,0.05)] transition text-left">
-                    <Activity className="w-5 h-5 text-[#5A8A6E] mb-2" />
-                    <span className="text-sm font-medium text-[#2D3748] block">Analytics</span>
+                  <button className="p-4 rounded-xl border border-sage-200 hover:border-sage-400 hover:bg-sage-50 transition text-left">
+                    <Activity className="w-5 h-5 text-sage-600 mb-2" />
+                    <span className="text-sm font-medium text-teal block">Analytics</span>
                   </button>
                 </div>
               </div>

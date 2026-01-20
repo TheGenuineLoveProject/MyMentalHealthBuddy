@@ -53,19 +53,19 @@ export default function Login() {
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#5A8A6E] to-[#4a7a5e] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-sage-500 to-sage-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                 <Heart className="w-6 h-6 text-white" aria-hidden="true" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-[#2D3748]">The Genuine Love Project</span>
+              <span className="text-xl font-bold tracking-tight text-teal">The Genuine Love Project</span>
             </Link>
           </div>
 
           <div className="glass-premium rounded-2xl p-8">
             <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-[#2D3748]" style={{ fontFamily: "'Playfair Display', Georgia, serif" }}>
+              <h1 className="text-2xl font-bold text-teal font-display">
                 Welcome Back
               </h1>
-              <p className="text-[#6B7280] mt-2">Sign in to continue your journey</p>
+              <p className="text-sage-400 mt-2">Sign in to continue your journey</p>
             </div>
 
             {error && (
@@ -76,16 +76,16 @@ export default function Login() {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-[#2D3748] mb-2">
+                <label className="block text-sm font-medium text-teal mb-2">
                   Email
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sage-400" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border border-[rgba(143,191,159,0.3)] rounded-xl bg-white/80 focus:ring-2 focus:ring-[#5A8A6E] focus:border-transparent transition-all text-[#2D3748] placeholder:text-[#9CA3AF]"
+                    className="w-full pl-12 pr-4 py-3 border border-sage-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-all text-teal placeholder:text-sage-400"
                     placeholder="you@example.com"
                     required
                     data-testid="input-email"
@@ -94,16 +94,16 @@ export default function Login() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#2D3748] mb-2">
+                <label className="block text-sm font-medium text-teal mb-2">
                   Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sage-400" />
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border border-[rgba(143,191,159,0.3)] rounded-xl bg-white/80 focus:ring-2 focus:ring-[#5A8A6E] focus:border-transparent transition-all text-[#2D3748] placeholder:text-[#9CA3AF]"
+                    className="w-full pl-12 pr-4 py-3 border border-sage-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-all text-teal placeholder:text-sage-400"
                     placeholder="••••••••"
                     required
                     data-testid="input-password"
@@ -112,7 +112,7 @@ export default function Login() {
               </div>
 
               <div className="flex items-center justify-end">
-                <Link href="/forgot-password" className="text-sm text-[#4a7a5e] hover:text-[#2D3748] transition-colors font-medium">
+                <Link href="/forgot-password" className="text-sm text-sage-600 hover:text-teal transition-colors font-medium">
                   Forgot password?
                 </Link>
               </div>
@@ -137,17 +137,17 @@ export default function Login() {
               </button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-[rgba(143,191,159,0.2)] text-center">
-              <p className="text-[#6B7280] text-sm">
+            <div className="mt-6 pt-6 border-t border-sage-200/50 text-center">
+              <p className="text-sage-400 text-sm">
                 Don't have an account?{" "}
-                <Link href="/register" className="text-[#4a7a5e] hover:text-[#2D3748] font-semibold transition-colors">
+                <Link href="/register" className="text-sage-600 hover:text-teal font-semibold transition-colors">
                   Create one
                 </Link>
               </p>
             </div>
           </div>
 
-          <p className="text-center text-xs text-[#9CA3AF] mt-6">
+          <p className="text-center text-xs text-sage-400 mt-6">
             By signing in, you agree to our Terms of Service and Privacy Policy
           </p>
         </div>

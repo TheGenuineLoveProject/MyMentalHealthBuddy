@@ -73,7 +73,7 @@ export default function Pricing() {
         <div className="max-w-5xl mx-auto">
           <Link 
             href="/" 
-            className="inline-flex items-center gap-2 text-sm text-[#4a7a5e] hover:text-[#2D3748] transition-colors mb-8 font-medium"
+            className="inline-flex items-center gap-2 text-sm text-sage-600 hover:text-teal transition-colors mb-8 font-medium"
             data-testid="link-back-home"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -81,10 +81,10 @@ export default function Pricing() {
           </Link>
 
           <div className="text-center mb-12 animate-fade-in-up">
-            <h1 className="text-4xl md:text-5xl font-bold text-[#2D3748] mb-4" style={{ fontFamily: "'Playfair Display', Georgia, serif" }} data-testid="text-pricing-title">
+            <h1 className="text-4xl md:text-5xl font-bold text-teal mb-4 font-display" data-testid="text-pricing-title">
               Choose Your <span className="text-gradient-brand">Path</span>
             </h1>
-            <p className="text-lg text-[#4A5568] max-w-xl mx-auto">
+            <p className="text-lg text-sage-600 max-w-xl mx-auto">
               Start free, upgrade when you're ready. Cancel anytime.
             </p>
           </div>
@@ -95,34 +95,34 @@ export default function Pricing() {
               return (
                 <div 
                   key={tier.name} 
-                  className={`glass-premium rounded-2xl p-8 relative animate-fade-in-scale ${tier.popular ? 'ring-2 ring-[#D4AF37] shadow-xl' : ''}`}
+                  className={`glass-premium rounded-2xl p-8 relative animate-fade-in-scale ${tier.popular ? 'ring-2 ring-gold-500 shadow-xl' : ''}`}
                   style={{ animationDelay: `${index * 100}ms` }}
                   data-testid={`card-pricing-${tier.name.toLowerCase()}`}
                 >
                   {tier.popular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#D4AF37] to-[#C49B32] text-white text-xs font-semibold rounded-full shadow-md">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-gold-500 to-gold-600 text-white text-xs font-semibold rounded-full shadow-md">
                       Most Popular
                     </div>
                   )}
                   
                   <div className="flex items-center gap-3 mb-4">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${tier.popular ? 'bg-gradient-to-br from-[#D4AF37] to-[#C49B32]' : 'bg-gradient-to-br from-[#5A8A6E] to-[#4a7a5e]'}`}>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${tier.popular ? 'bg-gradient-to-br from-gold-500 to-gold-600' : 'bg-gradient-to-br from-sage-500 to-sage-600'}`}>
                       <Icon className="w-5 h-5 text-white" />
                     </div>
-                    <h2 className="text-2xl font-bold text-[#2D3748]">{tier.name}</h2>
+                    <h2 className="text-2xl font-bold text-teal">{tier.name}</h2>
                   </div>
                   
                   <div className="flex items-baseline gap-1 mb-2">
-                    <span className={`text-4xl font-bold ${tier.popular ? 'text-[#D4AF37]' : 'text-[#4a7a5e]'}`}>{tier.price}</span>
-                    <span className="text-[#6B7280] text-sm">{tier.period}</span>
+                    <span className={`text-4xl font-bold ${tier.popular ? 'text-gold-500' : 'text-sage-600'}`}>{tier.price}</span>
+                    <span className="text-sage-400 text-sm">{tier.period}</span>
                   </div>
                   
-                  <p className="text-sm text-[#6B7280] mb-6">{tier.description}</p>
+                  <p className="text-sm text-sage-400 mb-6">{tier.description}</p>
                   
                   <ul className="space-y-3 mb-8">
                     {tier.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-3 text-sm text-[#4A5568]">
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center ${tier.popular ? 'bg-[#D4AF37]/20 text-[#D4AF37]' : 'bg-[#5A8A6E]/20 text-[#5A8A6E]'}`}>
+                      <li key={feature} className="flex items-center gap-3 text-sm text-sage-600">
+                        <div className={`w-5 h-5 rounded-full flex items-center justify-center ${tier.popular ? 'bg-gold-100 text-gold-600' : 'bg-sage-100 text-sage-600'}`}>
                           <Check className="w-3 h-3" />
                         </div>
                         {feature}
@@ -153,8 +153,8 @@ export default function Pricing() {
           </div>
 
           <div className="mt-16 text-center">
-            <p className="text-sm text-[#6B7280]">
-              Questions? <Link href="/crisis" className="text-[#4a7a5e] hover:underline">Contact support</Link>
+            <p className="text-sm text-sage-400">
+              Questions? <Link href="/crisis" className="text-sage-600 hover:underline">Contact support</Link>
             </p>
           </div>
         </div>
