@@ -1,0 +1,144 @@
+MASTER COMMAND — PLATFORM PERFECTION GOVERNANCE (MIT / Production Grade)
+Repository: “The Genuine Love Project”
+Mission: Produce production-grade correctness + visually calming, premium “healing-luxury” UI across all modules—WITHOUT scope creep.
+
+══════════════════════════════════════════════════════════════════════
+ABSOLUTE CONSTRAINTS (HARD RULES)
+0) NO SCOPE CREEP. Do only what is required by this prompt. If not listed: do not do it.
+1) NO refactor. NO rename. NO delete. NO move. (Additive changes OK only when explicitly requested below.)
+2) Visual changes must be token-driven. NO raw hex colors anywhere except: `client/src/styles/brand-tokens.css`.
+3) Fonts allowed ONLY: Inter + Playfair Display (+ system fallbacks). No additional font families.
+4) Internal navigation must match canonical routes in `client/src/App.jsx` exactly (wouter Switch/Route). No drift.
+5) Prefer minimal diffs. Improve via existing tokens + Tailwind semantic classes. Avoid “big rewrites.”
+6) Do NOT loosen or bypass audits/tests. Fix failures properly.
+7) Do NOT invent new routes unless an intended page already exists and is referenced.
+8) Do NOT add new dependencies unless absolutely required to fix failing tests/audits (must justify and keep minimal).
+
+Brand/Safety: “Healing” tone is allowed, but do NOT make medical claims or promise cures. Use supportive language only.
+
+══════════════════════════════════════════════════════════════════════
+SOURCE OF TRUTH (READ FIRST)
+- Canonical router: `client/src/App.jsx`
+- Tokens: `client/src/styles/brand-tokens.css`
+- Brand CSS: `client/src/styles/brand.css` (if present)
+- Global CSS entry: `client/src/index.css` (and `client/src/main.css` if used)
+- Tailwind config: `tailwind.config.js`
+- Nav components: Header/Navbar/Footer/Sidebar + any Link/CTA usage
+- Audits: `tools/nav-link-audit.mjs`, `tools/visual-doctor.mjs`
+- Reports: `docs/NAV_LINK_AUDIT.md`, `docs/VISUAL_DOCTOR_REPORT.md`
+- Tests: `tests/auth.test.mjs` + `server/tests/*` (if present)
+
+══════════════════════════════════════════════════════════════════════
+GOVERNANCE LOOP (OPERATING SYSTEM)
+Run this loop exactly once end-to-end. No stopping early.
+
+PHASE 1 — BASELINE EVIDENCE (MUST CAPTURE)
+1) Environment:
+   - `node -v`
+   - `npm -v`
+   - `npm install`
+2) Port sanity (prevent EADDRINUSE / ECONNREFUSED):
+   - `lsof -i :5000 || true`
+   - `kill -9 $(lsof -t -i :5000) 2>/dev/null || true`
+   - `lsof -i :3000 || true`
+   - `kill -9 $(lsof -t -i :3000) 2>/dev/null || true`
+3) Baseline verification:
+   - `npm run test:auth || npx vitest run tests/auth.test.mjs`
+   - `npm run audit`
+Record pass/fail + key error excerpts.
+
+PHASE 2 — PLAN (SMALL, EXPLICIT)
+Create a tight plan with:
+- The exact files you will change (list)
+- The reason for each change (1 line)
+- The verification you will run after each change
+Constraint: If a change is not required to pass tests/audits or meet the UX requirements below, do not do it.
+
+PHASE 3 — IMPLEMENT (VISUAL + UX + NAV, MINIMAL DIFFS)
+You MUST implement the following, strictly within constraints:
+
+A) VISUAL HEALING-LUXURY CONSISTENCY (token-driven, no hex)
+- Buttons: unify primary/secondary/ghost/disabled states using tokens + consistent padding/radius/focus ring.
+- Links: teal text, underline on hover only, gold focus ring (token-driven).
+- Surfaces/Cards: consistent radius + soft shadow; use semantic tokens only.
+- Typography: Playfair for headings, Inter for body/UI; normalize hierarchy + line-height.
+- Motion: respect prefers-reduced-motion; reduce transitions in low-stim contexts (no heavy animation).
+
+B) MODE SYSTEM (3 modes) + persistence + accessibility
+- Use `document.documentElement.dataset.mode`:
+  - Default: unset or ""
+  - Low-Stim: "low-stim"
+  - Reading: "reading"
+- Add Mode toggle UI in TWO places:
+  1) Header top-right
+  2) Settings page (“Display/Mode” section with descriptions)
+- Persist with localStorage key `glp-mode`.
+- Apply mode BEFORE first paint (bootstrap in earliest client init, e.g., `client/src/main.jsx`).
+- Accessibility: keyboard reachable, correct aria state, visible focus ring using gold token.
+
+C) NAVIGATION LOCKDOWN (ZERO DRIFT)
+- Treat `client/src/App.jsx` as canonical.
+- Find ALL internal links in the app (header/footer/sidebar/CTAs/cards).
+- Every internal link path must match an App.jsx route EXACTLY.
+- If a link points to a missing route: fix to correct existing route OR remove it. Do not invent routes.
+
+D) NOTFOUND (404) PREMIUM EXPERIENCE
+- Upgrade NotFound used by fallback route in App.jsx:
+  - Playfair headline + calm supportive copy
+  - Primary “Go Home” + secondary “Go Back”
+  - “Quick Links” (4–6 max) using ONLY real routes from App.jsx
+  - Mobile/tablet crisp layout and spacing
+
+E) TOKENS + TAILWIND SANITY (NO NEW TOKEN NAMES)
+- Ensure Tailwind semantic colors map to existing `--glp-*` variables (no new token naming schemes).
+- Ensure Tailwind content globs cover all relevant files.
+- Ensure global CSS imports tokens/brand css correctly.
+- Replace any stray non-token colors with vars/classes.
+
+PHASE 4 — VERIFY (MUST RUN, MUST PASS)
+Run and record results:
+- `npm run test:auth` (must pass)
+- `npm run audit` (must pass)
+
+Confirm in reports:
+- `docs/NAV_LINK_AUDIT.md` shows 0 broken links
+- `docs/VISUAL_DOCTOR_REPORT.md` shows 0 violations
+Confirm codebase constraints:
+- No raw hex colors outside `client/src/styles/brand-tokens.css`
+- No fonts beyond Inter + Playfair Display (+ system fallbacks)
+- Mode toggle exists in Header AND Settings; persists via `glp-mode`; applies before paint
+- NotFound quick links match App.jsx routes
+
+PHASE 5 — DIFFS + DOCUMENTATION (REQUIRED OUTPUT)
+- Show concise diffs summary by file (what changed + why).
+- List exactly which components were visually standardized (buttons/links/cards/typography).
+- List NotFound Quick Links (label + exact path).
+- Provide a short “Manual Click-Test Script” (what to click in Preview).
+
+PHASE 6 — ROLLBACK (REQUIRED)
+Provide rollback steps that work immediately:
+- `git status`
+- `git diff`
+- `git checkout -- <file>` for each changed file (list files)
+- If multiple files: `git reset --hard HEAD` (warn: destroys local changes)
+
+══════════════════════════════════════════════════════════════════════
+OPTIONAL: “PERMANENT MASTER COMMAND” AUTOMATION (ONLY IF ALLOWED)
+If and only if the repo already uses git and scripts conventionally:
+- Add a single npm script (no new deps) named `governance:loop` that runs:
+  1) port cleanup (best-effort)
+  2) `npm run test:auth`
+  3) `npm run audit`
+- Document it in README.
+Do NOT add this if it risks breaking existing scripts or CI.
+
+══════════════════════════════════════════════════════════════════════
+FINAL RESPONSE FORMAT (MANDATORY)
+1) Completion checklist for Phases 1–6 (pass/fail).
+2) Exact commands run + results (include key excerpts).
+3) Files changed (1-line summary each).
+4) NotFound Quick Links (label + path).
+5) Rollback instructions.
+6) OPTIONAL improvements (clearly labeled OPTIONAL; not implemented unless requested).
+
+Proceed now. Do not stop early. Verify, then report.
