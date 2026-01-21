@@ -386,15 +386,222 @@ All enhanced components now have proper `.dark` variants:
 
 ---
 
+## Premium Visual Enhancements (January 2026 Update)
+
+### Unified Page Layout System
+```css
+.page-container    - Full-height flex container
+.page-main         - Flexible main content area with responsive padding
+.page-header       - Page header with consistent spacing
+.page-title        - Playfair Display 4xl heading
+.page-subtitle     - Secondary description text
+
+.section           - Standard section padding (3-5rem)
+.section-sm        - Compact section (1.5-2.5rem)
+.section-lg        - Large section (4-7rem)
+.section-title     - Playfair Display 3xl section header
+.section-description - Supporting description text
+```
+
+### Enhanced Typography Classes
+Display text (Playfair Display):
+```css
+.text-display-xl   - 6xl, tight tracking, hero headlines
+.text-display-lg   - 5xl, tight tracking, page titles
+.text-display-md   - 4xl, snug line height
+.text-display-sm   - 3xl, section headers
+```
+
+Heading text (Inter):
+```css
+.text-heading-xl   - 2xl, semibold
+.text-heading-lg   - xl, semibold
+.text-heading-md   - lg, semibold
+.text-heading-sm   - base, semibold
+```
+
+Body text (Inter):
+```css
+.text-body-lg      - lg, relaxed line height
+.text-body-base    - base, relaxed line height
+.text-body-sm      - sm, secondary color
+.text-caption      - xs, tertiary color
+.text-overline     - xs, uppercase, widest tracking
+.text-quote        - 2xl, Playfair, italic
+.text-lead         - xl, secondary, max 60ch
+```
+
+Semantic colors:
+```css
+.text-brand        - Deep teal (--glp-sage-deep)
+.text-accent       - Gold (--glp-gold)
+.text-teal         - Deep teal
+.text-teal-dark    - Teal 700
+.text-sage         - Sage
+.text-primary      - Primary text color
+.text-secondary    - 72% opacity
+.text-tertiary     - 56% opacity
+.text-muted        - Muted text
+.text-inverse      - Paper/white
+```
+
+Text gradients:
+```css
+.text-gradient-teal    - Sage to deep teal
+.text-gradient-gold    - Gold to gold-600
+.text-gradient-brand   - Sage → deep teal → gold
+.text-gradient-premium - Deep teal → sage → gold
+```
+
+### Enhanced Icon System
+Icon sizes:
+```css
+.icon-xs   - 14px
+.icon-sm   - 20px
+.icon-md   - 24px
+.icon-lg   - 28px
+.icon-xl   - 40px
+.icon-2xl  - 48px
+```
+
+Icon containers:
+```css
+.icon-container    - Base flex container
+.icon-circle-sm/md/lg/xl - Circular containers
+.icon-badge        - Padded badge container
+.icon-badge-sage/teal/gold/blush - Colored badge variants
+.icon-soft-sage/teal/gold/blush  - Subtle background variants
+.icon-gradient-sage/teal/gold/premium - Gradient backgrounds
+```
+
+### Premium Container & Alignment
+Width constraints:
+```css
+.container-xs/sm/md/lg/xl - Max-width containers with auto margins
+.content-wrapper   - Full width with responsive padding
+.content-max-sm/md/lg/xl - Max-width content blocks
+.content-center    - Flex column, centered, text-center
+.content-start     - Flex column, start-aligned
+```
+
+Flex utilities:
+```css
+.flex-center       - Center both axes
+.flex-between      - Space between, centered
+.flex-start        - Start alignment
+.flex-end          - End alignment
+.flex-col-center   - Column, centered
+```
+
+Stack utilities (vertical spacing):
+```css
+.stack-xs/sm/md/lg/xl - Adjacent element margins
+```
+
+Cluster utilities (horizontal gap):
+```css
+.cluster-xs/sm/md/lg - Flex wrap with gaps
+```
+
+Grid utilities:
+```css
+.grid-features     - Auto-fit, min 280px
+.grid-cards        - Auto-fill, min 300px
+.grid-stats        - Auto-fit, min 140px
+```
+
+### Premium Card Variants
+```css
+.card-premium      - Gradient background with backdrop blur, premium shadow
+.card-shimmer      - Animated shimmer effect overlay
+```
+
+### Premium Hover Effects
+```css
+.hover-lift        - translateY(-4px) on hover
+.hover-scale       - scale(1.02) on hover
+.hover-glow-sage   - Sage glow shadow
+.hover-glow-teal   - Teal glow shadow
+.hover-glow-gold   - Gold glow shadow
+```
+
+### Decorative Elements
+```css
+.decorative-orb    - Blurred gradient orb (absolute positioned)
+.decorative-orb-sage/teal/blush/gold - Color variants
+```
+
+### Soft Backgrounds
+```css
+.bg-sage-soft      - Sage-50 background
+.bg-teal-soft      - Teal-50 background
+.bg-gold-soft      - Gold-50 background
+.bg-blush-soft     - Blush-50 background
+```
+
+### Focus Ring System
+```css
+.focus-ring        - Gold ring on focus-visible
+.focus-ring-sage   - Sage ring variant
+.focus-ring-teal   - Teal ring variant
+```
+
+### Responsive Typography
+All display and section titles scale down on mobile (max-width: 640px)
+
+### Safe Area Support
+```css
+.safe-padding      - Insets for mobile notch/home indicator
+.px-responsive     - Responsive horizontal padding
+```
+
+---
+
+## 360° Visual Healing Guidelines
+
+### Sensory Engagement Principles
+1. **Color Psychology**: Use warm teal for trust, gold for hope, sage for growth
+2. **Visual Rhythm**: Consistent spacing creates calm, predictable experiences
+3. **Depth Hierarchy**: Subtle shadows guide attention without overwhelming
+4. **Motion Design**: Gentle animations suggest life without causing anxiety
+5. **Typography Balance**: Playfair elegance + Inter clarity = approachable expertise
+
+### Component Creation Checklist (Extended)
+- [ ] Uses CSS custom properties from brand-tokens.css
+- [ ] Typography uses fluid clamp-based sizing
+- [ ] Has hover, focus, and active states
+- [ ] Has complete dark mode variant
+- [ ] Includes data-testid for testing
+- [ ] Icons have aria-hidden="true" when decorative
+- [ ] Interactive elements have accessible labels
+- [ ] Follows 8px grid alignment
+- [ ] Uses standard spacing scale (stack/cluster utilities)
+- [ ] Has consistent border-radius (--glp-radius-1 or --glp-radius-2)
+- [ ] Transitions use 0.2s-0.3s with ease or var(--glp-ease)
+- [ ] Respects prefers-reduced-motion
+- [ ] Card padding: 1.5rem standard, 1.75rem premium
+- [ ] Shadows progress: xs → sm → md → lg → xl → 2xl
+- [ ] Focus rings use gold by default
+
+### Visual Mode Support
+The platform supports three visual modes:
+1. **Default** - Full brand palette with all effects
+2. **Low-Stim** (`data-mode="low-stim"`) - Reduced shadows, softer gold
+3. **Reading** (`data-mode="reading"`) - Maximum legibility, white surfaces
+
+---
+
 ## Summary
 
 The Genuine Love Project's visual system prioritizes:
 
-1. **Warmth** - Soft, healing color palette with extended shade ranges
+1. **Warmth** - Soft, healing color palette with extended 50-900 shade ranges
 2. **Clarity** - Clean typography hierarchy with responsive fluid sizing
 3. **Consistency** - Systematic spacing, alignment, and consolidated class definitions
 4. **Accessibility** - WCAG AA compliance with focus states and screen reader support
 5. **Performance** - Efficient CSS utilities with single source of truth
 6. **Maintainability** - Token-based design system with comprehensive dark mode support
+7. **Sensory Appeal** - Visual elements designed to engage and soothe user senses
+8. **Scalability** - Extended palettes and utilities support any future component needs
 
-Always design with empathy, remembering that users may be in vulnerable emotional states. The interface should feel like a safe, supportive space for reflection and growth.
+Always design with empathy, remembering that users may be in vulnerable emotional states. The interface should feel like a safe, supportive space for reflection and growth. Every pixel should convey care, every animation should breathe gently, and every interaction should feel intentional and healing.
