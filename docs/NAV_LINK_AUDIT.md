@@ -1,11 +1,11 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T13:17:41.081Z`
+Generated: `2026-01-21T13:24:25.864Z`
 
 ## Summary
-- Files scanned: **872**
-- Routes detected: **73**
-- Link occurrences: **471**
+- Files scanned: **884**
+- Routes detected: **79**
+- Link occurrences: **487**
 - Broken: **0**
 - Warnings: **0**
 
@@ -51,6 +51,12 @@ Generated: `2026-01-21T13:17:41.081Z`
 - `/affirmations`
 - `/meditation`
 - `/self-care`
+- `/glossary`
+- `/wellness-hub`
+- `/emotional-intelligence`
+- `/sleep-guide`
+- `/stress-response`
+- `/inner-child`
 - `/mirror`
 - `/community`
 - `/tools`

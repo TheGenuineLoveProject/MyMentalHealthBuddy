@@ -37,6 +37,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/wellness-hub" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-wellness-hub">
+                  <Heart className="h-4 w-4" />
+                  Wellness Hub
+                </Link>
+              </li>
+              <li>
+                <Link href="/glossary" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-glossary">
+                  <BookOpen className="h-4 w-4" />
+                  Wellness Glossary
+                </Link>
+              </li>
+              <li>
                 <Link href="/healing-library" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-healing-library">
                   <Library className="h-4 w-4" />
                   Healing Library
