@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Play, Pause, Volume2, VolumeX, Sun, Moon, Cloud, Waves, Trees, Mountain, Sparkles, Heart } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const scenes = [
   {
@@ -90,6 +92,11 @@ export default function CalmingScenesPage() {
   const [activeScene, setActiveScene] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+
+  useSEO({
+    title: "Calming Scenes",
+    description: "Immersive visual environments for relaxation and stress relief. Ocean waves, peaceful forests, mountain sunrises, and more calming scenes.",
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
@@ -201,7 +208,16 @@ export default function CalmingScenesPage() {
           </div>
         </div>
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
+        <RelatedNextSteps 
+          steps={[
+            { title: "Breathing Exercises", description: "Add breathwork to your practice", path: "/breathing" },
+            { title: "Grounding Techniques", description: "Sensory grounding for deeper calm", path: "/grounding" },
+            { title: "Journal Your Experience", description: "Reflect on what helped most", path: "/guided-journaling" },
+          ]}
+          title="Continue Your Journey"
+        />
+
+        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
           <p className="text-sm text-slate-500 dark:text-slate-500">
             These calming experiences are designed to complement, not replace, professional mental health support.
             If you're in crisis, please reach out to a crisis helpline or mental health professional.

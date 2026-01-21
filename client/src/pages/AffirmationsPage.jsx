@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Sparkles, RefreshCw, Copy, Check, Star, Sun, Shield, Flower2 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const affirmationCategories = [
   {
@@ -148,6 +150,11 @@ export default function AffirmationsPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dailyAffirmation, setDailyAffirmation] = useState("");
 
+  useSEO({
+    title: "Affirmations",
+    description: "Positive affirmations for self-love, healing, strength, and peace. Daily encouragement to nurture self-compassion and emotional wellbeing.",
+  });
+
   useEffect(() => {
     const allAffirmations = affirmationCategories.flatMap(c => c.affirmations);
     const today = new Date();
@@ -252,7 +259,16 @@ export default function AffirmationsPage() {
           </div>
         </div>
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
+        <RelatedNextSteps 
+          steps={[
+            { title: "Self-Compassion", description: "Deepen your self-love practice", path: "/self-compassion" },
+            { title: "Gratitude Practice", description: "Cultivate appreciation and joy", path: "/gratitude" },
+            { title: "Journal Reflection", description: "Write about your affirmation journey", path: "/guided-journaling" },
+          ]}
+          title="Continue Your Journey"
+        />
+
+        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
           <p className="text-sm text-slate-500 dark:text-slate-500">
             Affirmations are a supportive practice, not a replacement for professional mental health care.
             Be gentle with yourself as you build new thought patterns.

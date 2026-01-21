@@ -17,6 +17,8 @@ import {
   Sparkles,
   Shield
 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const cognitiveDistortions = [
   {
@@ -186,6 +188,11 @@ const mentalExercises = [
 export default function CognitiveToolsPage() {
   const [selectedExercise, setSelectedExercise] = useState(null);
 
+  useSEO({
+    title: "Cognitive Tools",
+    description: "CBT-based cognitive tools for identifying and reframing negative thought patterns. Learn about cognitive distortions and build mental resilience.",
+  });
+
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
@@ -349,7 +356,16 @@ export default function CognitiveToolsPage() {
             </Link>
           </section>
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
+          <RelatedNextSteps 
+            steps={[
+              { title: "Thought Diary", description: "Track and reframe thought patterns", path: "/thought-diary" },
+              { title: "Journal Reflection", description: "Deepen your cognitive insights", path: "/guided-journaling" },
+              { title: "Self-Compassion", description: "Be kind to yourself", path: "/self-compassion" },
+            ]}
+            title="Continue Your Journey"
+          />
+
+          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 mt-8">
             <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
               <strong>Important:</strong> These cognitive tools are most effective when practiced regularly. For persistent 
               negative thought patterns, anxiety, or depression, please work with a licensed therapist who can provide 

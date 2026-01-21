@@ -2,6 +2,7 @@ import { DISCLAIMERS_COPY } from "../copy/disclaimers";
 import { BRAND } from "@shared/brand.mjs";
 import { Link } from "wouter";
 import { Heart, Shield, FileText, AlertCircle } from "lucide-react";
+import NewsletterSignup from "./NewsletterSignup.jsx";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -59,10 +60,18 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-6 pt-6 border-t border-[var(--border)]">
-          <p className="text-caption text-center text-secondary">
-            &copy; {currentYear} {BRAND.name}. All rights reserved. Live in Genuine Love.
-          </p>
+        <div className="mt-8 pt-6 border-t border-[var(--border)]">
+          <div className="grid gap-8 md:grid-cols-2 items-start">
+            <div>
+              <NewsletterSignup source="footer" variant="footer" />
+            </div>
+            <div className="text-right md:self-end">
+              <p className="text-caption text-secondary">
+                &copy; {currentYear} {BRAND.name}. All rights reserved.
+              </p>
+              <p className="text-caption text-secondary mt-1">Live in Genuine Love.</p>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
