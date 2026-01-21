@@ -72,6 +72,9 @@ const ContentStudioPage = lazy(() => import("./pages/ContentStudioPage.tsx"));
 const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.tsx"));
 const EliteToolsDashboard = lazy(() => import("./pages/EliteToolsDashboard.tsx"));
 const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.jsx"));
+const FAQPage = lazy(() => import("./pages/FAQPage.jsx"));
+const ProfessionalResourcesPage = lazy(() => import("./pages/ProfessionalResourcesPage.jsx"));
+const SupportPage = lazy(() => import("./pages/SupportPage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -194,6 +197,9 @@ export default function App() {
                   <ContentAdminDashboard />
                 </RouteGuard>
               </Route>
+              <Route path="/faq" component={FAQPage} />
+              <Route path="/resources" component={ProfessionalResourcesPage} />
+              <Route path="/support" component={SupportPage} />
               <Route path="/mirror">
                 <RouteGuard>
                   <MirrorPage />
