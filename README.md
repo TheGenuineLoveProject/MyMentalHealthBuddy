@@ -295,6 +295,25 @@ npm run visual:doctor
 
 ---
 
+## 🔄 Quality Loop
+
+Run the full governance loop to verify platform health:
+
+```bash
+npm run governance:loop
+```
+
+This pure-Node script executes:
+1. `node -v` / `npm -v` - Version check
+2. `npm install` - Dependency sync
+3. `npm run test:auth` - Authentication tests (19 tests)
+4. `npm run audit` - Navigation + visual audits
+5. `npm run build` - Production build (if script exists)
+
+Use this before releases to ensure all gates pass.
+
+---
+
 ## 🧪 Testing
 
 *Test configuration to be added in future updates*
