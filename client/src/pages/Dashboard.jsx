@@ -1,6 +1,10 @@
 import { Link, useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut, Brain, Compass } from "lucide-react";
+import { 
+  BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, 
+  Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut, 
+  Brain, Compass, ChevronRight
+} from "lucide-react";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO";
 import DailyAffirmations from "../components/DailyAffirmations.jsx";
@@ -28,43 +32,18 @@ export default function Dashboard() {
     return { text: "Good evening", icon: Moon, color: "text-indigo-400" };
   }
 
-  function getTrendIcon(trend) {
-    if (trend === "improving") return (
-      <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium">
-        <TrendingUp className="w-4 h-4" aria-hidden="true" />
-        <span>Improving</span>
-      </div>
-    );
-    if (trend === "declining") return (
-      <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-red-500/10 text-red-400 text-sm font-medium">
-        <TrendingDown className="w-4 h-4" aria-hidden="true" />
-        <span>Declining</span>
-      </div>
-    );
-    return (
-      <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-neutral-500/10 text-neutral-400 text-sm font-medium">
-        <Minus className="w-4 h-4" aria-hidden="true" />
-        <span>Stable</span>
-      </div>
-    );
-  }
-
   if (isLoading) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-mesh" role="status" aria-label="Loading dashboard">
-        <div className="max-w-5xl mx-auto">
-          <div className="space-y-6">
-            <div className="skeleton h-12 w-1/3 rounded-xl"></div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30" role="status" aria-label="Loading dashboard">
+        <div className="max-w-5xl mx-auto px-6 py-10">
+          <div className="space-y-8 animate-pulse">
+            <div className="h-12 w-64 bg-slate-100 rounded-xl" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[1, 2].map((i) => (
-                <div key={i} className="skeleton-card"></div>
+                <div key={i} className="h-40 bg-slate-100 rounded-2xl" />
               ))}
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="skeleton h-28 rounded-xl"></div>
-              ))}
-            </div>
+            <div className="h-32 bg-slate-100 rounded-2xl" />
           </div>
           <span className="sr-only">Loading your wellness dashboard...</span>
         </div>
@@ -74,16 +53,16 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-mesh flex items-center justify-center" role="alert">
-        <div className="card-elevated p-8 text-center max-w-md">
-          <div className="w-16 h-16 rounded-full bg-[var(--accent-rose-soft)] flex items-center justify-center mx-auto mb-4">
-            <Heart className="w-8 h-8 text-[var(--accent-rose)]" aria-hidden="true" />
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30 flex items-center justify-center p-6" role="alert">
+        <div className="bg-white rounded-3xl p-10 text-center max-w-md shadow-sm border border-slate-100">
+          <div className="w-16 h-16 rounded-2xl bg-rose-50 flex items-center justify-center mx-auto mb-5">
+            <Heart className="w-8 h-8 text-rose-500" aria-hidden="true" />
           </div>
-          <h2 className="text-xl font-semibold mb-2">Unable to load dashboard</h2>
-          <p className="text-[var(--text-secondary)] mb-6">{error.message || "Something went wrong. Please try again."}</p>
+          <h2 className="text-xl font-semibold text-slate-800 mb-2">Unable to load dashboard</h2>
+          <p className="text-slate-500 mb-6">{error.message || "Something went wrong. Please try again."}</p>
           <button
             onClick={() => refetch()}
-            className="btn btn-primary"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-medium shadow-lg shadow-teal-500/25 hover:shadow-xl transition-all"
             data-testid="button-retry"
           >
             Try Again
@@ -104,223 +83,233 @@ export default function Dashboard() {
         title="Dashboard"
         description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with The Genuine Love Project."
       />
-      <div className="min-h-screen safe-padding hero-gradient">
-        <div className="container-lg px-responsive">
-          <header className="flex-between mb-8">
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30 relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-teal-100/40 to-sage-100/30 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 -left-32 w-80 h-80 bg-gradient-to-tr from-amber-50/40 to-rose-50/20 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6 py-10">
+          <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
             <div className="flex items-center gap-4">
-              <div className="icon-badge icon-badge-sage icon-circle-xl">
-                <GreetingIcon className="icon-lg" aria-hidden="true" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center shadow-sm">
+                <GreetingIcon className="w-7 h-7 text-amber-500" aria-hidden="true" />
               </div>
-              <div className="stack-xs">
-                <h1 className="text-display-sm text-brand" data-testid="text-greeting">
+              <div>
+                <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight" data-testid="text-greeting">
                   {greeting.text}, {user?.email?.split("@")[0] || "Friend"}
                 </h1>
-                <p className="text-body text-secondary">Here's your wellness overview</p>
+                <p className="text-slate-500 mt-0.5">Here's your wellness overview</p>
               </div>
             </div>
-            <div className="cluster-sm">
+            <div className="flex items-center gap-2">
               <Link 
                 href="/settings" 
-                className="p-3 rounded-xl surface-card-elevated icon-secondary hover:icon-primary hover-lift focus-ring" 
+                className="p-3 rounded-xl bg-white border border-slate-100 hover:border-slate-200 hover:bg-slate-50 text-slate-500 hover:text-slate-700 transition-all shadow-sm" 
                 data-testid="link-settings" 
                 aria-label="Settings"
               >
-                <Settings className="icon-md" aria-hidden="true" />
+                <Settings className="w-5 h-5" aria-hidden="true" />
               </Link>
               <button
                 onClick={handleLogout}
-                className="p-3 rounded-xl surface-card-elevated icon-secondary hover:text-[var(--glp-error)] hover-lift focus-ring"
+                className="p-3 rounded-xl bg-white border border-slate-100 hover:border-rose-200 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition-all shadow-sm"
                 data-testid="button-logout"
                 aria-label="Logout"
               >
-                <LogOut className="icon-md" aria-hidden="true" />
+                <LogOut className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
           </header>
 
           <GuardianHeartPanel name={user?.email?.split("@")[0]} />
 
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" aria-label="Wellness statistics">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10" aria-label="Wellness statistics">
             <article 
-              className="stat-card bg-gradient-to-br from-[var(--accent-sky)] to-blue-600 text-white shadow-lg"
+              className="relative overflow-hidden bg-gradient-to-br from-sky-500 to-blue-600 rounded-2xl p-6 text-white shadow-xl shadow-blue-500/20"
               data-testid="card-mood-score"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                    <Smile className="w-6 h-6" aria-hidden="true" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+              <div className="relative">
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                      <Smile className="w-5 h-5" aria-hidden="true" />
+                    </div>
+                    <span className="font-medium opacity-90">Average Mood</span>
                   </div>
-                  <h2 className="text-lg font-semibold opacity-90">Average Mood</h2>
+                  {moodData.trend && (
+                    <span className="px-3 py-1 rounded-full bg-white/20 text-sm font-medium backdrop-blur-sm">
+                      {moodData.trend === "improving" ? "↑ Up" : moodData.trend === "declining" ? "↓ Down" : "→ Stable"}
+                    </span>
+                  )}
                 </div>
-                {moodData.trend && (
-                  <div className="px-3 py-1.5 rounded-full bg-white/20 text-sm font-medium backdrop-blur-sm">
-                    {moodData.trend === "improving" ? "↑ Improving" : moodData.trend === "declining" ? "↓ Declining" : "→ Stable"}
-                  </div>
-                )}
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-4xl font-bold" aria-label={`Average mood score: ${moodData.averageMoodLast7Days || '--'} out of 10`}>
+                    {moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : "--"}
+                  </span>
+                  <span className="text-xl opacity-60">/10</span>
+                </div>
+                <p className="text-sm text-white/70 mt-2">
+                  {moodData.entriesLast7Days || 0} entries this week
+                </p>
               </div>
-              <div className="flex items-baseline gap-2">
-                <span 
-                  className="stat-value" 
-                  aria-label={`Average mood score: ${moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : 'no data'} out of 10`}
-                >
-                  {moodData.averageMoodLast7Days !== null ? moodData.averageMoodLast7Days : "--"}
-                </span>
-                <span className="text-2xl opacity-70">/10</span>
-              </div>
-              <p className="stat-label text-white/70 mt-3">
-                {moodData.entriesLast7Days || 0} entries this week
-              </p>
             </article>
 
             <article 
-              className="stat-card bg-gradient-to-br from-[var(--primary)] to-purple-600 text-white shadow-lg"
+              className="relative overflow-hidden bg-gradient-to-br from-violet-500 to-purple-600 rounded-2xl p-6 text-white shadow-xl shadow-purple-500/20"
               data-testid="card-journal"
             >
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
-                  <Notebook className="w-6 h-6" aria-hidden="true" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2" />
+              <div className="relative">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center backdrop-blur-sm">
+                    <Notebook className="w-5 h-5" aria-hidden="true" />
+                  </div>
+                  <span className="font-medium opacity-90">Journal Entries</span>
                 </div>
-                <h2 className="text-lg font-semibold opacity-90">Journal Entries</h2>
+                <span className="text-4xl font-bold" aria-label={`${journalData.totalEntries || 0} total journal entries`}>
+                  {journalData.totalEntries || 0}
+                </span>
+                <p className="text-sm text-white/70 mt-2">Total entries written</p>
               </div>
-              <span 
-                className="stat-value" 
-                aria-label={`${journalData.totalEntries || 0} total journal entries`}
-              >
-                {journalData.totalEntries || 0}
-              </span>
-              <p className="stat-label text-white/70 mt-3">Total entries written</p>
             </article>
           </section>
 
-          {/* Your Space Today - Primary Entry Point */}
           <Link 
             href="/today" 
-            className="block mb-8 p-6 rounded-2xl bg-gradient-to-br from-[var(--glp-sage)]/10 to-[var(--glp-sage)]/5 border border-[var(--glp-sage)]/20 hover:border-[var(--glp-sage)]/40 transition-all group"
+            className="block mb-10 p-5 rounded-2xl bg-gradient-to-r from-sage-50 to-teal-50/50 border border-sage-200/50 hover:border-sage-300 transition-all group shadow-sm"
             data-testid="link-today"
           >
             <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-lg font-medium text-[var(--glp-ink)] group-hover:text-[var(--glp-sage-deep)] transition-colors">
-                  Your Space Today
-                </h2>
-                <p className="text-sm text-[var(--glp-ink)]/50 mt-1">
-                  A place to pause, notice, and reflect — only if it feels supportive.
-                </p>
+              <div className="flex items-center gap-4">
+                <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                  <Heart className="w-5 h-5 text-sage-600" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-slate-800 group-hover:text-teal-700 transition-colors">
+                    Your Space Today
+                  </h2>
+                  <p className="text-sm text-slate-500 mt-0.5">
+                    A place to pause, notice, and reflect
+                  </p>
+                </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] group-hover:translate-x-1 transition-all" />
+              <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
             </div>
           </Link>
 
-          <nav aria-label="Quick actions" className="mb-8">
-            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
+          <section aria-label="Quick actions" className="mb-10">
+            <h2 className="text-lg font-semibold text-slate-800 mb-5 flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-amber-500" aria-hidden="true" />
               Quick Actions
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Link href="/mood" className="quick-action group" data-testid="link-mood">
-                <div className="quick-action-icon bg-[var(--accent-sky-soft)]">
-                  <Smile className="w-6 h-6 text-[var(--accent-sky)]" aria-hidden="true" />
-                </div>
-                <span className="font-medium">Track Mood</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
-
-              <Link href="/journal" className="quick-action group" data-testid="link-journal">
-                <div className="quick-action-icon bg-[var(--primary-soft)]">
-                  <Notebook className="w-6 h-6 text-[var(--primary)]" aria-hidden="true" />
-                </div>
-                <span className="font-medium">Write Journal</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
-
-              <Link href="/chat" className="quick-action group" data-testid="link-chat">
-                <div className="quick-action-icon bg-[var(--accent-teal-soft)]">
-                  <MessageCircle className="w-6 h-6 text-[var(--accent-teal)]" aria-hidden="true" />
-                </div>
-                <span className="font-medium">AI Chat</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
-
-              <Link href="/analytics" className="quick-action group" data-testid="link-analytics">
-                <div className="quick-action-icon bg-[var(--accent-amber-soft)]">
-                  <BarChart3 className="w-6 h-6 text-[var(--accent-amber)]" aria-hidden="true" />
-                </div>
-                <span className="font-medium">Analytics</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-[var(--primary)] group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
-
-              <Link href="/wellness" className="quick-action group" data-testid="link-wellness">
-                <div className="quick-action-icon bg-gradient-to-br from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30">
-                  <Wind className="w-6 h-6 text-emerald-500" aria-hidden="true" />
-                </div>
-                <span className="font-medium">Wellness Tools</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-emerald-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
-
-              <Link href="/wellness#habits" className="quick-action group" data-testid="link-habits">
-                <div className="quick-action-icon bg-gradient-to-br from-orange-100 to-amber-100 dark:from-orange-900/30 dark:to-amber-900/30">
-                  <Target className="w-6 h-6 text-orange-500" aria-hidden="true" />
-                </div>
-                <span className="font-medium">Daily Habits</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-orange-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
-
-              <Link href="/atlas" className="quick-action group" data-testid="link-atlas">
-                <div className="quick-action-icon bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30">
-                  <Compass className="w-6 h-6 text-cyan-500" aria-hidden="true" />
-                </div>
-                <span className="font-medium">Intellectual Atlas</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-cyan-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
-
-              <Link href="/growth-analytics" className="quick-action group" data-testid="link-growth">
-                <div className="quick-action-icon bg-gradient-to-br from-violet-100 to-purple-100 dark:from-violet-900/30 dark:to-purple-900/30">
-                  <Brain className="w-6 h-6 text-violet-500" aria-hidden="true" />
-                </div>
-                <span className="font-medium">Growth Analytics</span>
-                <ArrowRight className="w-4 h-4 text-[var(--text-muted)] group-hover:text-violet-500 group-hover:translate-x-1 transition-all mt-1" aria-hidden="true" />
-              </Link>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <QuickAction 
+                href="/mood" 
+                icon={Smile} 
+                label="Track Mood" 
+                color="sky"
+                testId="link-mood"
+              />
+              <QuickAction 
+                href="/journal" 
+                icon={Notebook} 
+                label="Write Journal" 
+                color="violet"
+                testId="link-journal"
+              />
+              <QuickAction 
+                href="/chat" 
+                icon={MessageCircle} 
+                label="AI Chat" 
+                color="teal"
+                testId="link-chat"
+              />
+              <QuickAction 
+                href="/analytics" 
+                icon={BarChart3} 
+                label="Analytics" 
+                color="amber"
+                testId="link-analytics"
+              />
             </div>
-          </nav>
+          </section>
 
-          <section className="mb-8" aria-label="Daily affirmation">
+          <section aria-label="Explore more" className="mb-10">
+            <h2 className="text-lg font-semibold text-slate-800 mb-5">Explore</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <ExploreCard 
+                href="/wellness" 
+                icon={Wind} 
+                title="Wellness Tools" 
+                description="Breathing, grounding & relaxation"
+                color="emerald"
+                testId="link-wellness"
+              />
+              <ExploreCard 
+                href="/atlas" 
+                icon={Compass} 
+                title="Intellectual Atlas" 
+                description="Explore knowledge domains"
+                color="cyan"
+                testId="link-atlas"
+              />
+              <ExploreCard 
+                href="/wellness#habits" 
+                icon={Target} 
+                title="Daily Habits" 
+                description="Build healthy routines"
+                color="orange"
+                testId="link-habits"
+              />
+              <ExploreCard 
+                href="/growth-analytics" 
+                icon={Brain} 
+                title="Growth Analytics" 
+                description="Track your progress"
+                color="violet"
+                testId="link-growth"
+              />
+            </div>
+          </section>
+
+          <section className="mb-10" aria-label="Daily affirmation">
             <DailyAffirmations compact />
           </section>
 
-          <div className="card-elevated p-5 bg-gradient-to-r from-[var(--accent-rose-soft)] to-transparent border-[var(--accent-rose)]/30 mb-8">
-            <Link href="/crisis" className="flex items-center justify-between group" data-testid="link-crisis-resources">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[var(--accent-rose-soft)] flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-[var(--accent-rose)]" aria-hidden="true" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[var(--accent-rose)]">Crisis Resources</h3>
-                  <p className="text-sm text-[var(--text-secondary)]">24/7 support hotlines and help when you need it most</p>
-                </div>
+          <Link 
+            href="/crisis" 
+            className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-r from-rose-50 to-pink-50/50 border border-rose-200/50 hover:border-rose-300 transition-all group shadow-sm mb-10"
+            data-testid="link-crisis-resources"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
+                <Heart className="w-5 h-5 text-rose-500" aria-hidden="true" />
               </div>
-              <ArrowRight className="w-5 h-5 text-[var(--accent-rose)] group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-            </Link>
-          </div>
+              <div>
+                <h3 className="font-semibold text-rose-700">Crisis Resources</h3>
+                <p className="text-sm text-rose-600/70">24/7 support when you need it most</p>
+              </div>
+            </div>
+            <ChevronRight className="w-5 h-5 text-rose-400 group-hover:text-rose-600 group-hover:translate-x-1 transition-all" aria-hidden="true" />
+          </Link>
 
           {moodData.recentMoods && moodData.recentMoods.length > 0 && (
-            <section className="mb-8" aria-label="Recent mood history">
-              <h2 className="text-xl font-semibold mb-4">Recent Moods</h2>
-              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" role="list" aria-label="Mood entries from recent days">
+            <section className="mb-10" aria-label="Recent mood history">
+              <h2 className="text-lg font-semibold text-slate-800 mb-5">Recent Moods</h2>
+              <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" role="list">
                 {moodData.recentMoods.map((mood, idx) => (
                   <div
                     key={idx}
-                    className="flex-shrink-0 card p-4 text-center min-w-[90px] hover:scale-105 transition-transform"
+                    className="flex-shrink-0 bg-white rounded-xl p-4 text-center min-w-[80px] border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all"
                     data-testid={`mood-entry-${idx}`}
                     role="listitem"
-                    aria-label={`Mood rating ${mood.rating} on ${new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "long" })}`}
                   >
-                    <div 
-                      className="text-3xl font-bold bg-gradient-to-br from-[var(--accent-sky)] to-[var(--primary)] bg-clip-text text-transparent" 
-                      aria-hidden="true"
-                    >
+                    <div className="text-2xl font-bold bg-gradient-to-br from-sky-500 to-violet-500 bg-clip-text text-transparent">
                       {mood.rating}
                     </div>
-                    <div className="text-xs text-[var(--text-secondary)] mt-1 font-medium" aria-hidden="true">
+                    <div className="text-xs text-slate-500 mt-1 font-medium">
                       {new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "short" })}
                     </div>
                   </div>
@@ -333,5 +322,55 @@ export default function Dashboard() {
         </div>
       </div>
     </>
+  );
+}
+
+function QuickAction({ href, icon: Icon, label, color, testId }) {
+  const colorMap = {
+    sky: { bg: 'bg-sky-50', icon: 'text-sky-600', hover: 'hover:border-sky-200' },
+    violet: { bg: 'bg-violet-50', icon: 'text-violet-600', hover: 'hover:border-violet-200' },
+    teal: { bg: 'bg-teal-50', icon: 'text-teal-600', hover: 'hover:border-teal-200' },
+    amber: { bg: 'bg-amber-50', icon: 'text-amber-600', hover: 'hover:border-amber-200' },
+  };
+  const colors = colorMap[color] || colorMap.sky;
+
+  return (
+    <Link 
+      href={href} 
+      className={`flex flex-col items-center gap-3 p-5 rounded-xl bg-white border border-slate-100 ${colors.hover} hover:shadow-md transition-all group`}
+      data-testid={testId}
+    >
+      <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center group-hover:scale-105 transition-transform`}>
+        <Icon className={`w-6 h-6 ${colors.icon}`} aria-hidden="true" />
+      </div>
+      <span className="text-sm font-medium text-slate-700">{label}</span>
+    </Link>
+  );
+}
+
+function ExploreCard({ href, icon: Icon, title, description, color, testId }) {
+  const colorMap = {
+    emerald: { bg: 'bg-emerald-50', icon: 'text-emerald-600' },
+    cyan: { bg: 'bg-cyan-50', icon: 'text-cyan-600' },
+    orange: { bg: 'bg-orange-50', icon: 'text-orange-600' },
+    violet: { bg: 'bg-violet-50', icon: 'text-violet-600' },
+  };
+  const colors = colorMap[color] || colorMap.emerald;
+
+  return (
+    <Link 
+      href={href} 
+      className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all group"
+      data-testid={testId}
+    >
+      <div className={`w-11 h-11 rounded-xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
+        <Icon className={`w-5 h-5 ${colors.icon}`} aria-hidden="true" />
+      </div>
+      <div className="min-w-0">
+        <h3 className="font-medium text-slate-800 group-hover:text-slate-900">{title}</h3>
+        <p className="text-sm text-slate-500 truncate">{description}</p>
+      </div>
+      <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-slate-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-auto" />
+    </Link>
   );
 }
