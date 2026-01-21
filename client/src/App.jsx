@@ -97,6 +97,8 @@ const BehaviorChangePage = lazy(() => import("./pages/BehaviorChangePage.jsx"));
 const HowToGuidesPage = lazy(() => import("./pages/HowToGuidesPage.jsx"));
 const DailyRoutinesPage = lazy(() => import("./pages/DailyRoutinesPage.jsx"));
 const CognitiveToolsPage = lazy(() => import("./pages/CognitiveToolsPage.jsx"));
+const GlossaryPage = lazy(() => import("./pages/GlossaryPage.jsx"));
+const ResourcesPage = lazy(() => import("./pages/ResourcesPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -244,6 +246,8 @@ export default function App() {
               <Route path="/how-to-guides" component={HowToGuidesPage} />
               <Route path="/daily-routines" component={DailyRoutinesPage} />
               <Route path="/cognitive-tools" component={CognitiveToolsPage} />
+              <Route path="/glossary-full" component={GlossaryPage} />
+              <Route path="/professional-resources" component={ResourcesPage} />
               <Route path="/mirror">
                 <RouteGuard>
                   <MirrorPage />
