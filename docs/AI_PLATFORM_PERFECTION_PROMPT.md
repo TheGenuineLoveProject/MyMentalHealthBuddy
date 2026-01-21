@@ -591,6 +591,119 @@ The platform supports three visual modes:
 
 ---
 
+## Extended Utility Classes (January 2026 Enhancement)
+
+### Stat Card System
+```css
+.stat-card        - Premium stat display with backdrop blur
+.stat-value       - Large display font for numbers
+.stat-label       - Muted label below value
+.stat-trend       - Inline trend indicator container
+.stat-trend-up    - Green positive trend
+.stat-trend-down  - Red negative trend
+.stat-trend-neutral - Gray stable trend
+```
+
+### Icon Color System
+```css
+.icon-primary     - Brand color (teal)
+.icon-secondary   - Secondary text color
+.icon-muted       - Muted/disabled state
+.icon-brand       - Brand teal color
+.icon-sage        - Sage accent
+.icon-teal        - Teal accent
+.icon-gold        - Gold accent
+.icon-blush       - Blush accent
+.icon-success     - Green success state
+.icon-warning     - Orange warning state
+.icon-danger      - Red error state
+.icon-info        - Blue info state
+```
+
+### Separator System
+```css
+.separator-gradient  - Gradient fade from transparent to sage
+.separator-solid     - Solid sage line
+.separator-dotted    - Dotted sage line
+```
+
+### Enhanced Badge System
+```css
+.badge            - Base badge styling
+.badge-sm         - Small badge variant
+.badge-lg         - Large badge variant
+.badge-sage       - Sage colored badge
+.badge-teal       - Teal colored badge
+.badge-gold       - Gold colored badge
+.badge-blush      - Blush colored badge
+.badge-premium    - Gradient teal-to-gold badge
+```
+
+### Surface System
+```css
+.surface-card          - Basic card surface
+.surface-card-elevated - Elevated card with shadow
+.surface-muted         - Subtle muted background
+```
+
+### Card Elevated Variant
+```css
+.card-elevated    - Premium elevated card with hover lift effect
+```
+
+### Animation Utilities
+```css
+.animate-fade-in-up    - Fade in with upward movement
+.animate-fade-in-scale - Fade in with scale effect
+.animate-glow-pulse    - Pulsing glow effect (great for CTAs)
+.animate-bounce-subtle - Gentle bounce animation
+
+/* Delay utilities */
+.delay-100 through .delay-500 - Animation delay in 100ms increments
+```
+
+### Usage Guidelines for New Utilities
+
+**Stat Cards:**
+```jsx
+<div className="stat-card text-center">
+  <div className="stat-value">10K+</div>
+  <div className="stat-label">Active Users</div>
+  <div className="stat-trend stat-trend-up">
+    <TrendingUp className="icon-xs" /> +12%
+  </div>
+</div>
+```
+
+**Icon Colors:**
+```jsx
+<Settings className="icon-md icon-secondary" />
+<Heart className="icon-lg icon-brand" />
+<AlertCircle className="icon-md icon-warning" />
+```
+
+**Badges:**
+```jsx
+<span className="badge badge-sage">
+  <Leaf className="icon-xs" />
+  Premium Member
+</span>
+```
+
+**Separators:**
+```jsx
+<div className="separator-gradient" />
+```
+
+**Animations with Stagger:**
+```jsx
+<div className="card-elevated animate-fade-in-scale delay-100" />
+<div className="card-elevated animate-fade-in-scale delay-200" />
+<div className="card-elevated animate-fade-in-scale delay-300" />
+```
+
+---
+
 ## Summary
 
 The Genuine Love Project's visual system prioritizes:

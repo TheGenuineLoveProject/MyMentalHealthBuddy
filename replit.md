@@ -118,15 +118,19 @@ Example: `document.documentElement.dataset.mode = "low-stim"`
 - **Safe Areas**: `.safe-padding`
 
 ### Premium Component Classes
-- **Cards**: `.card-premium`, `.card-premium-gold`, `.card-premium-teal`, `.card-shimmer`, `.surface-card`, `.surface-card-elevated`, `.glass-premium`
+- **Cards**: `.card-premium`, `.card-elevated`, `.card-shimmer`, `.surface-card`, `.surface-card-elevated`, `.surface-muted`, `.glass-premium`
+- **Stat Cards**: `.stat-card`, `.stat-value`, `.stat-label`, `.stat-trend`, `.stat-trend-up/down/neutral`
 - **Buttons**: `.btn-premium-teal`, `.btn-premium-gold`, `.btn-glass`, `.btn-ghost`
 - **Inputs**: `.input-premium`
 - **Skeletons**: `.skeleton-premium`, `.skeleton-premium-card`
-- **Icons**: `.icon-premium-*` (xs through 2xl), `.icon-teal-gradient`, `.icon-gold-gradient`, `.icon-sage-gradient`, `.icon-teal-soft`, `.icon-gold-soft`, `.icon-sage-soft`
-- **Badges**: `.badge-premium-teal`, `.badge-premium-gold`, `.badge-premium-sage`
-- **Text**: `.text-hero`, `.text-section-title`, `.text-card-title`, `.text-card-body`, `.text-meta`, `.text-overline`, `.text-gradient-premium`, `.text-gradient-gold`
+- **Icons**: `.icon-xs/sm/md/lg/xl/2xl` (sizing), `.icon-primary/secondary/muted/brand/sage/teal/gold/blush/success/warning/danger/info` (colors)
+- **Icon Containers**: `.icon-circle-sm/md/lg/xl`, `.icon-badge`, `.icon-badge-sage/teal/gold/blush`, `.icon-gradient-sage/teal/gold/premium`, `.icon-soft-sage/teal/gold/blush`
+- **Badges**: `.badge`, `.badge-sm/lg`, `.badge-sage/teal/gold/blush/premium`
+- **Separators**: `.separator-gradient`, `.separator-solid`, `.separator-dotted`
+- **Text**: `.text-display-xl/lg/md/sm`, `.text-heading-xl/lg/md/sm`, `.text-body-lg/base/sm`, `.text-lead`, `.text-quote`, `.text-caption`, `.text-overline`, `.text-gradient-teal/gold/premium`
 - **Shadows**: `.shadow-premium-sm/md/lg`, `.shadow-glow-teal/gold/sage`
 - **Interactions**: `.hover-lift`, `.hover-scale`, `.hover-glow-sage/gold/teal`
+- **Animations**: `.animate-fade-in-up`, `.animate-fade-in-scale`, `.animate-glow-pulse`, `.animate-bounce-subtle`, `.delay-100/200/300/400/500`
 - **Animations**: `animate-pulse-ring`, `animate-float`, `animate-fade-in-up-delayed`, `animate-fade-in-stagger`
 - **Focus**: `.focus-ring`
 
