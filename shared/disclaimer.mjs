@@ -26,3 +26,11 @@ return res.status(400).json({
   title: "Gentle Mirror",
   disclaimer: MIRROR_DISCLAIMER,
 });
+// =====================================================
+// FILE: shared/disclaimer.mjs
+// =====================================================
+export const DISCLAIMER_TEXT = "Some disclaimer text...";
+
+export function getDisclaimerText() {
+  return DISCLAIMER_TEXT;
+}
