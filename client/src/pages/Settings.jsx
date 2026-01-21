@@ -1,23 +1,39 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
-import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor } from "lucide-react";
+import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import SEO from "../components/SEO";
+
+const VISUAL_MODES = [
+  { id: "", label: "Default", icon: Sun, description: "Standard brand palette with Deep Teal primary + Gold accent" },
+  { id: "low-stim", label: "Low-Stim", icon: Moon, description: "Reduced shadows, softer colors, minimal decoration" },
+  { id: "reading", label: "Reading", icon: Eye, description: "Maximum legibility, white surfaces, darker text" },
+];
+const VISUAL_MODE_KEY = "glp-visual-mode";
 
 export default function Settings() {
   const [, setLocation] = useLocation();
   const { user, logout } = useAuth();
   const [notifications, setNotifications] = useState(true);
   const [theme, setTheme] = useState("light");
+  const [visualMode, setVisualMode] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     const savedNotifications = localStorage.getItem("notifications") !== "false";
+    const savedMode = localStorage.getItem(VISUAL_MODE_KEY) || "";
     setTheme(savedTheme);
     setNotifications(savedNotifications);
+    setVisualMode(savedMode);
   }, []);
+
+  function handleVisualModeChange(modeId) {
+    setVisualMode(modeId);
+    document.documentElement.dataset.mode = modeId;
+    localStorage.setItem(VISUAL_MODE_KEY, modeId);
+  }
 
   function handleSavePreferences() {
     setIsSaving(true);
@@ -172,6 +188,44 @@ export default function Settings() {
                         >
                           <Icon className={`w-5 h-5 ${isSelected ? "text-[var(--sage-600)]" : "text-[var(--teal-400)]"}`} />
                           <span className="text-sm font-medium">{option.label}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="form-label mb-3 block">Display Mode</label>
+                  <p className="text-body-sm mb-4">Adjust visual intensity for comfort and accessibility</p>
+                  <div className="space-y-2">
+                    {VISUAL_MODES.map((mode) => {
+                      const Icon = mode.icon;
+                      const isSelected = visualMode === mode.id;
+                      return (
+                        <button
+                          key={mode.id || "default"}
+                          type="button"
+                          onClick={() => handleVisualModeChange(mode.id)}
+                          aria-pressed={isSelected}
+                          data-testid={`button-visual-mode-${mode.id || "default"}`}
+                          className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 ${
+                            isSelected
+                              ? "border-[var(--glp-primary)] bg-[var(--surface-2)]"
+                              : "border-[var(--border)] bg-[var(--surface-1)] hover:border-[var(--glp-sage)]"
+                          }`}
+                        >
+                          <Icon className={`w-5 h-5 flex-shrink-0 ${isSelected ? "text-[var(--primary)]" : "text-[var(--text-2)]"}`} aria-hidden="true" />
+                          <div className="flex-1 min-w-0">
+                            <div className={`text-sm font-medium ${isSelected ? "text-[var(--primary)]" : "text-[var(--text-1)]"}`}>
+                              {mode.label}
+                            </div>
+                            <div className="text-xs text-[var(--text-2)] truncate">
+                              {mode.description}
+                            </div>
+                          </div>
+                          {isSelected && (
+                            <div className="w-2 h-2 rounded-full bg-[var(--accent)] flex-shrink-0" aria-hidden="true" />
+                          )}
                         </button>
                       );
                     })}
