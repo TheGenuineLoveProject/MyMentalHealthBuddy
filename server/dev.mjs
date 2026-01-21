@@ -7,6 +7,8 @@ import { createServer as createViteServer } from "vite";
 import { fileURLToPath } from "url";
 import { dirname, resolve } from "path";
 import authRouter from "./routes/auth.mjs";
+import githubAuthRouter from "./routes/github-auth.mjs";
+import passport from "passport";
 import adminRouter from "./routes/admin.mjs";
 import blogRouter from "./routes/blog.mjs";
 import journalRouter from "./routes/journal.mjs";
@@ -122,8 +124,10 @@ async function startServer() {
   
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
+  app.use(passport.initialize());
 
   app.use("/api/auth", authRouter);
+  app.use("/api/auth", githubAuthRouter);
   app.use("/api/admin", adminRouter);
   app.use("/api/blog", blogRouter);
   app.use("/api/journal", journalRouter);
