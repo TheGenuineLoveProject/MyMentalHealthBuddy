@@ -238,7 +238,7 @@ async function startServer() {
 
   app.get("/api/content/stats", async (req, res) => {
     try {
-      const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+      const { requireAuth } = await import("./middleware/auth.mjs");
       const authResult = await new Promise((resolve) => {
         requireAuth(req, res, (err) => resolve(err ? "auth_failed" : "ok"));
       });

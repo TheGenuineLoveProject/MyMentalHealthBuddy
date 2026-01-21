@@ -3,7 +3,7 @@ import path from "node:path";
 
 const PROJECT_ROOT = process.cwd();
 const OUT_PATH = path.join(PROJECT_ROOT, "docs", "VISUAL_DOCTOR_REPORT.md");
-const BRAND_TOKENS_PATH = "client/src/styles/brand-tokens.css";
+const _BRAND_TOKENS_PATH = "client/src/styles/brand-tokens.css";
 
 const scanDirs = [
   "client/src/pages",
@@ -116,7 +116,7 @@ function findFontViolations(filePath, content) {
     return violations;
   }
   
-  const fontFamilyPattern = /font-family\s*:\s*([^;]+);/gi;
+  const _fontFamilyPattern = /font-family\s*:\s*([^;]+);/gi;
   const lines = content.split("\n");
   
   lines.forEach((line, idx) => {
@@ -155,7 +155,7 @@ function findInlineStyleViolations(filePath, content) {
     return violations;
   }
   
-  const inlineStylePattern = /style\s*=\s*\{\s*\{([^}]+)\}\s*\}/g;
+  const _inlineStylePattern = /style\s*=\s*\{\s*\{([^}]+)\}\s*\}/g;
   const lines = content.split("\n");
   
   lines.forEach((line, idx) => {

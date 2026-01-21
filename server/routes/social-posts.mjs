@@ -2,7 +2,7 @@ import express from "express";
 import { randomUUID } from "crypto";
 import { db } from "../db/connection.mjs";
 import { socialPosts } from "../../shared/schema.mjs";
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";

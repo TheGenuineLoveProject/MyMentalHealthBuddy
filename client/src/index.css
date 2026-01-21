@@ -3870,3 +3870,627 @@ a, a:visited {
   outline: none;
   box-shadow: 0 0 0 3px rgba(var(--glp-gold-rgb), 0.3);
 }
+
+/* ========================================
+   COMPREHENSIVE VISUAL ENHANCEMENT SYSTEM
+   A-Z 360° Platform-Wide Improvements
+   ======================================== */
+
+/* --- SECTION 1: ADVANCED ALIGNMENT UTILITIES --- */
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.align-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.align-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.align-stretch {
+  display: flex;
+  align-items: stretch;
+}
+
+.content-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Consistent spacing scale */
+.space-section {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.space-content {
+  padding-top: clamp(1.5rem, 3vw, 2.5rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.gap-uniform-xs { gap: 0.25rem; }
+.gap-uniform-sm { gap: 0.5rem; }
+.gap-uniform-md { gap: 1rem; }
+.gap-uniform-lg { gap: 1.5rem; }
+.gap-uniform-xl { gap: 2rem; }
+.gap-uniform-2xl { gap: 3rem; }
+
+/* --- SECTION 2: ENHANCED TYPOGRAPHY SYSTEM --- */
+.heading-hero {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  color: var(--glp-ink);
+}
+
+.heading-section {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--glp-ink);
+}
+
+.heading-card {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--glp-ink);
+}
+
+.heading-compact {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--glp-ink);
+}
+
+.body-large {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: rgba(var(--glp-ink-rgb), 0.85);
+}
+
+.body-base {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: rgba(var(--glp-ink-rgb), 0.8);
+}
+
+.body-small {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: rgba(var(--glp-ink-rgb), 0.7);
+}
+
+.caption-text {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(var(--glp-ink-rgb), 0.6);
+  letter-spacing: 0.01em;
+}
+
+.label-text {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(var(--glp-ink-rgb), 0.55);
+}
+
+/* Typography color variants */
+.text-brand { color: var(--glp-sage-deep); }
+.text-accent { color: var(--glp-gold); }
+.text-muted { color: rgba(var(--glp-ink-rgb), 0.55); }
+.text-subtle { color: rgba(var(--glp-ink-rgb), 0.45); }
+
+/* --- SECTION 3: ENHANCED ICON SYSTEM --- */
+.icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Icon size scale (more refined) */
+.icon-3xs { width: 0.625rem; height: 0.625rem; }
+.icon-2xs { width: 0.75rem; height: 0.75rem; }
+.icon-xs { width: 0.875rem; height: 0.875rem; }
+.icon-sm { width: 1rem; height: 1rem; }
+.icon-base { width: 1.25rem; height: 1.25rem; }
+.icon-md { width: 1.5rem; height: 1.5rem; }
+.icon-lg { width: 1.75rem; height: 1.75rem; }
+.icon-xl { width: 2rem; height: 2rem; }
+.icon-2xl { width: 2.5rem; height: 2.5rem; }
+.icon-3xl { width: 3rem; height: 3rem; }
+
+/* Icon color variants */
+.icon-brand { color: var(--glp-sage-deep); }
+.icon-accent { color: var(--glp-gold); }
+.icon-sage { color: var(--glp-sage); }
+.icon-muted { color: rgba(var(--glp-ink-rgb), 0.45); }
+.icon-subtle { color: rgba(var(--glp-ink-rgb), 0.3); }
+.icon-success { color: #16a34a; }
+.icon-warning { color: #d97706; }
+.icon-danger { color: #dc2626; }
+.icon-info { color: #0284c7; }
+
+/* Icon containers with backgrounds */
+.icon-box-sm {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+}
+
+.icon-box-md {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+}
+
+.icon-box-lg {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+}
+
+.icon-box-xl {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.875rem;
+}
+
+/* Icon box color variants */
+.icon-box-teal {
+  background: linear-gradient(135deg, var(--glp-teal-50) 0%, var(--glp-teal-100) 100%);
+  color: var(--glp-sage-deep);
+}
+
+.icon-box-gold {
+  background: linear-gradient(135deg, var(--glp-gold-50) 0%, var(--glp-gold-100) 100%);
+  color: var(--glp-gold-600);
+}
+
+.icon-box-sage {
+  background: linear-gradient(135deg, var(--glp-sage-50) 0%, var(--glp-sage-100) 100%);
+  color: var(--glp-sage-600);
+}
+
+.icon-box-blush {
+  background: linear-gradient(135deg, var(--glp-blush-50) 0%, var(--glp-blush-100) 100%);
+  color: var(--glp-blush-700);
+}
+
+.icon-box-slate {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  color: #475569;
+}
+
+/* --- SECTION 4: ENHANCED COLOR PALETTE UTILITIES --- */
+/* Background colors */
+.bg-surface { background-color: var(--glp-paper); }
+.bg-surface-elevated { background-color: #ffffff; }
+.bg-surface-muted { background-color: rgba(var(--glp-sage-rgb), 0.05); }
+
+.bg-teal-subtle { background-color: var(--glp-teal-50); }
+.bg-gold-subtle { background-color: var(--glp-gold-50); }
+.bg-sage-subtle { background-color: var(--glp-sage-50); }
+.bg-blush-subtle { background-color: var(--glp-blush-50); }
+
+/* Enhanced gradients */
+.bg-gradient-hero {
+  background: linear-gradient(135deg, 
+    var(--glp-paper) 0%, 
+    var(--glp-teal-50) 50%, 
+    var(--glp-sage-50) 100%
+  );
+}
+
+.bg-gradient-warm {
+  background: linear-gradient(135deg,
+    var(--glp-paper) 0%,
+    var(--glp-gold-50) 50%,
+    var(--glp-blush-50) 100%
+  );
+}
+
+.bg-gradient-cool {
+  background: linear-gradient(135deg,
+    var(--glp-teal-50) 0%,
+    var(--glp-sage-50) 50%,
+    #f0fdf4 100%
+  );
+}
+
+.bg-gradient-premium {
+  background: linear-gradient(145deg,
+    rgba(var(--glp-sage-deep-rgb), 0.02) 0%,
+    rgba(var(--glp-gold-rgb), 0.04) 50%,
+    rgba(var(--glp-sage-rgb), 0.02) 100%
+  );
+}
+
+/* Border colors */
+.border-subtle { border-color: rgba(var(--glp-sage-rgb), 0.15); }
+.border-default { border-color: rgba(var(--glp-sage-rgb), 0.25); }
+.border-emphasis { border-color: var(--glp-sage-deep); }
+.border-accent { border-color: var(--glp-gold); }
+
+/* --- SECTION 5: CARD SYSTEM ENHANCEMENTS --- */
+.card-base {
+  background: white;
+  border-radius: 1rem;
+  border: 1px solid rgba(var(--glp-sage-rgb), 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: all 0.25s ease;
+}
+
+.card-base:hover {
+  border-color: rgba(var(--glp-sage-rgb), 0.2);
+  box-shadow: 0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.08);
+}
+
+.card-elevated {
+  background: white;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(var(--glp-sage-rgb), 0.1);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.03),
+    0 12px 32px rgba(var(--glp-sage-deep-rgb), 0.06);
+}
+
+.card-interactive {
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-interactive:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.12),
+    0 16px 48px rgba(var(--glp-sage-deep-rgb), 0.08);
+}
+
+.card-compact {
+  padding: 1rem;
+}
+
+.card-normal {
+  padding: 1.5rem;
+}
+
+.card-spacious {
+  padding: 2rem;
+}
+
+/* --- SECTION 6: STAT DISPLAY ENHANCEMENTS --- */
+.stat-value {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--glp-ink);
+}
+
+.stat-value-lg {
+  font-size: clamp(2.25rem, 4vw, 3rem);
+}
+
+.stat-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(var(--glp-ink-rgb), 0.6);
+  margin-top: 0.25rem;
+}
+
+.stat-change-positive {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+.stat-change-negative {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.stat-change-neutral {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(var(--glp-ink-rgb), 0.5);
+}
+
+/* --- SECTION 7: NAVIGATION ENHANCEMENTS --- */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  color: rgba(var(--glp-ink-rgb), 0.7);
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--glp-sage-deep);
+  background: rgba(var(--glp-sage-rgb), 0.08);
+}
+
+.nav-link-active {
+  color: var(--glp-sage-deep);
+  background: rgba(var(--glp-sage-deep-rgb), 0.08);
+  font-weight: 600;
+}
+
+/* --- SECTION 8: BADGE SYSTEM --- */
+.badge-base {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.badge-teal {
+  background: var(--glp-teal-100);
+  color: var(--glp-teal-700);
+}
+
+.badge-gold {
+  background: var(--glp-gold-100);
+  color: var(--glp-gold-700);
+}
+
+.badge-sage {
+  background: var(--glp-sage-100);
+  color: var(--glp-sage-700);
+}
+
+.badge-blush {
+  background: var(--glp-blush-100);
+  color: var(--glp-blush-700);
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-neutral {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+/* --- SECTION 9: IMPROVED ANIMATIONS --- */
+@keyframes slide-up-fade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes subtle-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-slide-up-fade {
+  animation: slide-up-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-scale-fade {
+  animation: scale-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-subtle-pulse {
+  animation: subtle-pulse 2s ease-in-out infinite;
+}
+
+/* Animation delays */
+.delay-75 { animation-delay: 75ms; }
+.delay-150 { animation-delay: 150ms; }
+.delay-225 { animation-delay: 225ms; }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .animate-slide-up-fade,
+  .animate-scale-fade,
+  .animate-subtle-pulse {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --- SECTION 10: RESPONSIVE CONTAINER UTILITIES --- */
+.container-narrow {
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 1.5rem);
+  padding-right: clamp(1rem, 4vw, 1.5rem);
+}
+
+.container-standard {
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+
+.container-wide {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+
+/* --- SECTION 11: DARK MODE ENHANCEMENTS --- */
+.dark .heading-hero,
+.dark .heading-section,
+.dark .heading-card,
+.dark .heading-compact {
+  color: var(--glp-paper);
+}
+
+.dark .body-large,
+.dark .body-base,
+.dark .body-small {
+  color: rgba(250, 250, 248, 0.85);
+}
+
+.dark .caption-text {
+  color: rgba(250, 250, 248, 0.6);
+}
+
+.dark .label-text {
+  color: rgba(250, 250, 248, 0.5);
+}
+
+.dark .card-base,
+.dark .card-elevated {
+  background: var(--glp-teal-800);
+  border-color: rgba(var(--glp-sage-rgb), 0.15);
+}
+
+.dark .bg-surface {
+  background-color: var(--glp-teal-900);
+}
+
+.dark .bg-surface-elevated {
+  background-color: var(--glp-teal-800);
+}
+
+.dark .stat-value {
+  color: var(--glp-paper);
+}
+
+.dark .stat-label {
+  color: rgba(250, 250, 248, 0.6);
+}
+
+/* --- SECTION 12: UTILITY HELPERS --- */
+.truncate-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.truncate-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.aspect-card {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-hero {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-square {
+  aspect-ratio: 1 / 1;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.no-select {
+  user-select: none;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grab:active {
+  cursor: grabbing;
+}

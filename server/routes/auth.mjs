@@ -74,12 +74,12 @@ function safeUserShape(user) {
   // remove sensitive fields if present
   // (handles different schema naming styles)
   const {
-    passwordHash,
-    password_hash,
-    refreshTokenHash,
-    refresh_token_hash,
-    mfaSecret,
-    mfa_backup_codes,
+    passwordHash: _passwordHash,
+    password_hash: _password_hash,
+    refreshTokenHash: _refreshTokenHash,
+    refresh_token_hash: _refresh_token_hash,
+    mfaSecret: _mfaSecret,
+    mfa_backup_codes: _mfa_backup_codes,
     ...rest
   } = user || {};
   return rest;
@@ -148,7 +148,7 @@ router.post("/register", authRateLimit, async (req, res) => {
     const refreshToken = signRefreshToken(newUser);
     setRefreshCookie(res, refreshToken);
 
-    return res.status(201).json({
+    return res.status(200).json({
       token: accessToken,
       user: {
         id: newUser.id,
@@ -172,7 +172,7 @@ router.post("/register", authRateLimit, async (req, res) => {
 router.post("/login", loginRateLimit, async (req, res) => {
   try {
     const parsed = LoginSchema.safeParse(req.body);
-    if (!parsed.success) return sendUniformAuthFailure(res, 401);
+    if (!parsed.success) return res.status(400).json({ message: "Email and password are required." });
 
     const email = String(parsed.data.email).toLowerCase();
     const password = String(parsed.data.password);
@@ -259,7 +259,7 @@ router.post("/refresh", async (req, res) => {
 // -------------------------
 router.post("/logout", (req, res) => {
   clearRefreshCookie(res);
-  return res.json({ message: "Logged out." });
+  return res.json({ message: "Logged out" });
 });
 
 // -------------------------
