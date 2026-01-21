@@ -75,6 +75,8 @@ const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.j
 const FAQPage = lazy(() => import("./pages/FAQPage.jsx"));
 const ProfessionalResourcesPage = lazy(() => import("./pages/ProfessionalResourcesPage.jsx"));
 const SupportPage = lazy(() => import("./pages/SupportPage.tsx"));
+const NewsPage = lazy(() => import("./pages/NewsPage.jsx"));
+const HealingLibraryPage = lazy(() => import("./pages/HealingLibraryPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -200,6 +202,8 @@ export default function App() {
               <Route path="/faq" component={FAQPage} />
               <Route path="/resources" component={ProfessionalResourcesPage} />
               <Route path="/support" component={SupportPage} />
+              <Route path="/news" component={NewsPage} />
+              <Route path="/healing-library" component={HealingLibraryPage} />
               <Route path="/mirror">
                 <RouteGuard>
                   <MirrorPage />

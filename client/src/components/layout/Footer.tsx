@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Heart, Mail, Shield, FileText, HelpCircle, BookOpen, LifeBuoy } from "lucide-react";
+import { Heart, Mail, Shield, FileText, HelpCircle, BookOpen, LifeBuoy, Newspaper, Library } from "lucide-react";
 import { BRAND } from "@shared/brand";
 
 export function Footer() {
@@ -37,13 +37,20 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/crisis" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-crisis">
-                  Crisis Support
+                <Link href="/healing-library" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-healing-library">
+                  <Library className="h-4 w-4" />
+                  Healing Library
                 </Link>
               </li>
               <li>
-                <Link href="/journal" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-journal">
-                  Journal
+                <Link href="/news" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-news">
+                  <Newspaper className="h-4 w-4" />
+                  News & Insights
+                </Link>
+              </li>
+              <li>
+                <Link href="/crisis" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-crisis">
+                  Crisis Support
                 </Link>
               </li>
             </ul>
