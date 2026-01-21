@@ -104,8 +104,8 @@
   <body>
     <script>
       (function() {
-        var mode = localStorage.getItem('glp-visual-mode') || '';
-        if (mode) document.documentElement.dataset.mode = mode;
+        var mode = localStorage.getItem('glp-mode') || '';
+        if (mode && mode !== 'default') document.documentElement.dataset.mode = mode;
       })();
     </script>
     <div id="root"></div>

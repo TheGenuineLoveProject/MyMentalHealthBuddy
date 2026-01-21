@@ -9,7 +9,7 @@ const VISUAL_MODES = [
   { id: "low-stim", label: "Low-Stim", icon: Moon, description: "Reduced shadows, softer colors, minimal decoration" },
   { id: "reading", label: "Reading", icon: Eye, description: "Maximum legibility, white surfaces, darker text" },
 ];
-const VISUAL_MODE_KEY = "glp-visual-mode";
+const VISUAL_MODE_KEY = "glp-mode";
 
 export default function Settings() {
   const [, setLocation] = useLocation();

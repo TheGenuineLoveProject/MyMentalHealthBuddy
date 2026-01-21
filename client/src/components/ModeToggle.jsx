@@ -7,7 +7,7 @@ const MODES = [
   { id: "reading", label: "Reading", icon: Eye, description: "Maximum legibility" },
 ];
 
-const STORAGE_KEY = "glp-visual-mode";
+const STORAGE_KEY = "glp-mode";
 
 export default function ModeToggle() {
   const [currentMode, setCurrentMode] = useState("");
