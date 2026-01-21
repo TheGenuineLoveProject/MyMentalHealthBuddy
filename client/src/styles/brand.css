@@ -494,7 +494,36 @@ body {
   animation: pulse-ring 2s ease-out infinite;
 }
 
-/* Reduced Motion Support */
+/* ============================================================
+   ACCESSIBILITY: SKIP TO CONTENT LINK
+============================================================ */
+
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  padding: 0.75rem 1.5rem;
+  background: var(--glp-primary);
+  color: var(--glp-primary-foreground);
+  font-weight: 600;
+  border-radius: var(--glp-radius-1);
+  text-decoration: none;
+  transition: top var(--glp-motion-fast) var(--glp-ease);
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+  outline: 2px solid var(--glp-ring);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   REDUCED MOTION SUPPORT
+   Respects prefers-reduced-motion AND Low-Stim mode
+============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -523,10 +552,37 @@ body {
   .animate-glow-pulse,
   .decorative-orb,
   .skeleton,
-  .skeleton-card {
+  .skeleton-card,
+  .card-shimmer::after {
     animation: none !important;
     opacity: 1 !important;
   }
+  
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .card-premium:hover,
+  .card-hover-lift:hover {
+    transform: none;
+  }
+}
+
+/* Low-Stim mode: reduce visual noise */
+html[data-mode="low-stim"] .decorative-orb,
+html[data-mode="low-stim"] .animate-breathe,
+html[data-mode="low-stim"] .animate-pulse-gold,
+html[data-mode="low-stim"] .animate-glow-pulse,
+html[data-mode="low-stim"] .card-shimmer::after,
+html[data-mode="low-stim"] .icon-glow-sage,
+html[data-mode="low-stim"] .icon-glow-gold,
+html[data-mode="low-stim"] .icon-glow-teal {
+  animation: none !important;
+  opacity: 0.6;
+}
+
+html[data-mode="low-stim"] .hover-lift:hover,
+html[data-mode="low-stim"] .hover-scale:hover,
+html[data-mode="low-stim"] .card-premium:hover {
+  transform: none;
 }
 
 /* ============================================================
@@ -1059,4 +1115,51 @@ html[data-mode="low-stim"] .surface-card-elevated {
 html[data-mode="low-stim"] .surface-card-elevated:hover {
   box-shadow: none;
   border-color: var(--glp-primary);
+}
+
+/* ============================================================
+   CONSISTENT SPACING & CONTAINER UTILITIES
+   Unified page rhythm for visual consistency
+============================================================ */
+
+.page-container {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .page-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.section-spacing {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.heading-spacing {
+  margin-bottom: 1.5rem;
+}
+
+.heading-spacing-lg {
+  margin-bottom: 2rem;
+}
+
+/* Consistent focus ring utility */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--glp-ring);
 }

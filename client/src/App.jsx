@@ -5,6 +5,7 @@ import { queryClient } from "./lib/queryClient.js";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
+import SkipToContent from "./components/SkipToContent.jsx";
 
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
@@ -86,6 +87,8 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ErrorBoundary>
+          <SkipToContent />
+          <main id="main-content">
           <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Public routes */}
@@ -330,6 +333,7 @@ export default function App() {
               <Route component={NotFound} />
             </Switch>
           </Suspense>
+          </main>
         </ErrorBoundary>
       </AuthProvider>
     </QueryClientProvider>
