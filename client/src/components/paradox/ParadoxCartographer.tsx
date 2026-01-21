@@ -20,6 +20,7 @@ export default function ParadoxCartographer() {
   const [newObservation, setNewObservation] = useState("");
   const [position, setPosition] = useState({ x: 50, y: 50 });
   const [thirdHorizonPrompt, setThirdHorizonPrompt] = useState(() => getRandomThirdHorizonPrompt());
+  const [newSynthesis, setNewSynthesis] = useState("");
 
   useEffect(() => {
     setSessions(getParadoxSessions());
@@ -197,6 +198,46 @@ export default function ParadoxCartographer() {
             ))}
           </div>
         )}
+
+        <div className="rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-transparent p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <Compass className="h-5 w-5 text-purple-400" />
+            <span className="font-medium">Synthesis Attempts</span>
+          </div>
+          <p className="text-sm opacity-60 mb-3">
+            Try to articulate how these opposites might coexist or what emerges from their tension.
+          </p>
+          <div className="flex gap-2 mb-3">
+            <input
+              type="text"
+              value={newSynthesis}
+              onChange={(e) => setNewSynthesis(e.target.value)}
+              placeholder="What synthesis emerges from this paradox?"
+              className="flex-1 rounded-lg border border-white/10 bg-black/20 px-3 py-2 text-sm"
+              data-testid="input-synthesis"
+            />
+            <button
+              onClick={() => {
+                handleAddSynthesis(newSynthesis);
+                setNewSynthesis("");
+              }}
+              disabled={!newSynthesis.trim()}
+              className="rounded-lg bg-purple-500/20 border border-purple-500/30 px-4 disabled:opacity-40"
+              data-testid="button-add-synthesis"
+            >
+              <Plus className="h-4 w-4" />
+            </button>
+          </div>
+          {activeSession.synthesisAttempts.length > 0 && (
+            <div className="space-y-2">
+              {activeSession.synthesisAttempts.map((s, idx) => (
+                <div key={idx} className="rounded-lg border border-white/10 bg-black/10 p-3 text-sm">
+                  {s}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Heart, Mail, Shield, FileText } from "lucide-react";
+import { Heart, Mail, Shield, FileText, HelpCircle, BookOpen, LifeBuoy } from "lucide-react";
 import { BRAND } from "@shared/brand";
 
 export function Footer() {
@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-100 bg-gray-50">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
               <Heart 
@@ -44,6 +44,30 @@ export function Footer() {
               <li>
                 <Link href="/journal" className="text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-journal">
                   Journal
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900 mb-4">Help & Support</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/faq" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-faq">
+                  <HelpCircle className="h-4 w-4" />
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/resources" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-resources">
+                  <BookOpen className="h-4 w-4" />
+                  Professional Resources
+                </Link>
+              </li>
+              <li>
+                <Link href="/support" className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-footer-support">
+                  <LifeBuoy className="h-4 w-4" />
+                  Support
                 </Link>
               </li>
             </ul>

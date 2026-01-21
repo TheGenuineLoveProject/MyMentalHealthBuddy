@@ -14,6 +14,10 @@ export default function MindscapeNavigator() {
   const [selectedState, setSelectedState] = useState<StateKey | null>(null);
   const [currentState, setCurrentState] = useState("");
   const [context, setContext] = useState("");
+  const [transitionFrom, setTransitionFrom] = useState<StateKey | "">("");
+  const [transitionTo, setTransitionTo] = useState<StateKey | "">("");
+  const [transitionMethod, setTransitionMethod] = useState("");
+  const [transitionNotes, setTransitionNotes] = useState("");
 
   useEffect(() => {
     saveMindscapeMap(mindscape);
@@ -30,6 +34,26 @@ export default function MindscapeNavigator() {
       }]
     }));
     setContext("");
+  };
+
+  const addTransition = () => {
+    if (!transitionFrom || !transitionTo || !transitionMethod) return;
+    const newTransition: StateTransition = {
+      from: transitionFrom,
+      to: transitionTo,
+      method: transitionMethod,
+      duration: "varies",
+      reliability: 3,
+      notes: transitionNotes
+    };
+    setMindscape(m => ({
+      ...m,
+      transitions: [...m.transitions, newTransition]
+    }));
+    setTransitionFrom("");
+    setTransitionTo("");
+    setTransitionMethod("");
+    setTransitionNotes("");
   };
 
   const state = selectedState ? ARCHETYPAL_STATES[selectedState] : null;
@@ -137,20 +161,80 @@ export default function MindscapeNavigator() {
             </p>
             
             <div className="grid gap-2 sm:grid-cols-2">
-              <select className="px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">
+              <select 
+                value={transitionFrom}
+                onChange={e => setTransitionFrom(e.target.value as StateKey | "")}
+                className="px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm"
+                data-testid="select-transition-from"
+              >
                 <option value="">From state...</option>
                 {(Object.keys(ARCHETYPAL_STATES) as StateKey[]).map(key => (
                   <option key={key} value={key}>{ARCHETYPAL_STATES[key].name}</option>
                 ))}
               </select>
-              <select className="px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm">
+              <select 
+                value={transitionTo}
+                onChange={e => setTransitionTo(e.target.value as StateKey | "")}
+                className="px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm"
+                data-testid="select-transition-to"
+              >
                 <option value="">To state...</option>
                 {(Object.keys(ARCHETYPAL_STATES) as StateKey[]).map(key => (
                   <option key={key} value={key}>{ARCHETYPAL_STATES[key].name}</option>
                 ))}
               </select>
             </div>
+
+            <select
+              value={transitionMethod}
+              onChange={e => setTransitionMethod(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm"
+              data-testid="select-transition-method"
+            >
+              <option value="">Select method...</option>
+              {TRANSITION_METHODS.map(method => (
+                <option key={method.name} value={method.name}>{method.name}</option>
+              ))}
+            </select>
+
+            <input
+              type="text"
+              value={transitionNotes}
+              onChange={e => setTransitionNotes(e.target.value)}
+              placeholder="Notes (optional)"
+              className="w-full px-3 py-2 rounded-lg border border-white/10 bg-white/5 text-sm"
+              data-testid="input-transition-notes"
+            />
+
+            <button
+              onClick={addTransition}
+              disabled={!transitionFrom || !transitionTo || !transitionMethod}
+              className="w-full px-4 py-2 rounded-lg bg-teal-500/20 hover:bg-teal-500/30 text-teal-300 text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              data-testid="button-add-transition"
+            >
+              <Plus className="h-4 w-4 inline mr-2" />
+              Add Transition
+            </button>
           </div>
+
+          {mindscape.transitions.length > 0 && (
+            <div className="p-4 rounded-xl border border-white/10 bg-white/5 space-y-3">
+              <h3 className="text-sm font-medium">Your Transitions ({mindscape.transitions.length})</h3>
+              <div className="space-y-2">
+                {mindscape.transitions.map((t, i) => (
+                  <div key={i} className="p-3 rounded-lg bg-white/5 text-xs">
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium">{ARCHETYPAL_STATES[t.from as StateKey]?.name || t.from}</span>
+                      <ChevronRight className="h-3 w-3" />
+                      <span className="font-medium">{ARCHETYPAL_STATES[t.to as StateKey]?.name || t.to}</span>
+                    </div>
+                    <div className="opacity-60 mt-1">via {t.method}</div>
+                    {t.notes && <div className="opacity-50 mt-1">{t.notes}</div>}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
