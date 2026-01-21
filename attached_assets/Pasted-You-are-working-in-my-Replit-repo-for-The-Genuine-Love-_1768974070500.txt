@@ -1,0 +1,100 @@
+You are working in my Replit repo for “The Genuine Love Project”.
+
+We have UI + auth issues:
+- Landing header: logo not visually centered and the top-right “Sign in” gets clipped/cut off on some viewports (safe-area + padding issue).
+- Icons feel too plain (need premium healing-luxury treatment but still minimal).
+- I cannot login reliably (client/server mismatch likely).
+- /forgot-password shows “500: {"ok":false,"message":"Server error"}” (backend route missing or throwing).
+
+════════════════════════════════════════════════════════════
+HARD RULES (DO NOT BREAK)
+1) Do NOT rename/refactor any existing CSS variable names. Keep all current `--glp-*` names exactly.
+2) No raw hex colors anywhere except `client/src/styles/brand-tokens.css`.
+3) Fonts allowed ONLY: Inter + Playfair Display (+ system fallbacks). No new font families.
+4) All internal navigation links must match canonical routes in `client/src/App.jsx` (wouter Switch/Route).
+5) Minimal diffs; no breaking refactors.
+
+════════════════════════════════════════════════════════════
+READ FIRST (SOURCE OF TRUTH)
+- Routes: `client/src/App.jsx`
+- Landing header is inside: `client/src/pages/landing/Landing.jsx` (not `components/Header.jsx` for landing)
+- Auth pages: `client/src/pages/Login.jsx`, `client/src/pages/Register.jsx`, `client/src/pages/ForgotPassword.jsx`
+- Auth server routes: `server/routes/auth.mjs` (and any account/password reset routes)
+- Server entry that mounts routers: search `server/index.*` or `server/app.*` and confirm what base path each router is mounted under.
+- API client: `client/src/lib/queryClient.js` (apiRequest) and `client/src/context/AuthContext.jsx`
+
+════════════════════════════════════════════════════════════
+GOALS (FIX ALL ISSUES END-TO-END)
+
+A) FIX LANDING HEADER LAYOUT + SAFE-AREA (NO CLIPPING)
+1) In `client/src/pages/landing/Landing.jsx` find the <header ... role="banner"> container.
+2) Add safe-area padding on BOTH sides EXACTLY using Tailwind arbitrary values:
+   - `pl-[calc(1rem+env(safe-area-inset-left))]`
+   - `pr-[calc(1rem+env(safe-area-inset-right))]`
+   Keep existing spacing but ensure the header never clips the right-side buttons.
+3) Make the header content alignment robust:
+   - Use a 3-column layout so the brand can be visually centered when needed:
+     left: brand, center: nav (md+), right: auth CTAs
+   - Ensure CTAs do not get pushed off-screen on narrow widths (use wrap or responsive hide rules).
+4) Specifically ensure “Sign in” and “Start free” are fully visible at 320px width and on iOS safe-area devices.
+
+B) IMPROVE ICONS (PREMIUM, NOT “PLAIN”) WITHOUT ADDING NEW ICON LIBS
+1) You already use `lucide-react`. Keep it.
+2) Apply a consistent “icon badge” system:
+   - 24px base icon size across nav + cards
+   - Use existing tokens via classes (no raw hex).
+   - Add subtle premium treatment: soft gradient badge background, light border, gentle shadow (but reduced in low-stim if that exists).
+3) Ensure icon colors are token-based and consistent across Landing, Login/Register/ForgotPassword.
+
+C) FIX AUTH: LOGIN/REGISTER RESPONSE SHAPE + CLIENT EXPECTATIONS
+1) Inspect `client/src/context/AuthContext.jsx` and how it stores user/token.
+2) Confirm what the client expects from login/register responses:
+   - If client expects `{ token, user }` then server MUST return both.
+   - If server returns only `{ token }`, update either server or client so they match.
+3) In `server/routes/auth.mjs`:
+   - Ensure POST `/login` returns `{ token, user }` where user is safe (no password hashes).
+   - Ensure POST `/register` returns `{ token, user }` similarly.
+   - Confirm `res.json(...)` includes the needed payload (some code paths currently only return token).
+4) Add/confirm a GET `/me` (already exists) that returns safe user and that client uses it correctly on refresh.
+
+D) FIX FORGOT PASSWORD 500 (ENDPOINT + ROUTE MOUNTING)
+1) In `client/src/pages/ForgotPassword.jsx` it calls:
+   POST `/api/account/password-reset/request`
+2) Verify the server actually has a matching route mounted at `/api/account/...`:
+   - Search for “password-reset” and “account” in server routes.
+   - If missing: implement a minimal route file such as `server/routes/account.mjs` (or whatever structure already exists) and mount it in the server entry under `/api/account`.
+3) Implement POST `/password-reset/request`:
+   - Validate input email with zod.
+   - Always return 200 `{ ok: true }` even if user doesn’t exist (avoid account enumeration).
+   - In dev, log a reset link token to console (no email integration required).
+   - Never throw 500; handle errors gracefully and return `{ ok:false, message:"..." }` with 400/500 only when truly necessary.
+4) Update the client ForgotPassword mutation error handling so it shows a friendly message and never dumps raw JSON into the UI.
+   - The screenshot shows the raw server response printed into the page. Replace with styled alert component (token-based).
+
+E) NAV + ROUTE CONSISTENCY
+1) Ensure Landing header links (Today/State/Journal/Blog/Login/Register) match routes in `client/src/App.jsx`.
+2) Ensure the “Forgot password” link path matches App.jsx route exactly.
+3) Ensure no route leads to NotFound unintentionally.
+
+F) VERIFY
+1) Run these commands and keep results:
+   - `npm run audit`
+   - Also manually hit in Preview:
+     - `/login`
+     - `/register`
+     - `/forgot-password`
+2) Confirm:
+   - Landing header no longer clips “Sign in” on narrow screens.
+   - Login/Register succeed and redirect properly.
+   - Forgot-password returns success UI instead of 500 and no raw JSON message is displayed.
+
+════════════════════════════════════════════════════════════
+OUTPUT REQUIREMENTS (MUST FOLLOW)
+When finished, respond with:
+1) Checklist A–F completed
+2) Commands run + results
+3) Files changed (each with 1-line summary)
+4) Exact endpoint(s) implemented for password reset + their mount path
+5) If you changed auth response shape, show before/after example JSON.
+
+Proceed now. Do not stop early.

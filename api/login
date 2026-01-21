@@ -18,5 +18,13 @@ app.post("/api/login", async (req, res) => {
   });
 
   // 🔑 THIS LINE IS REQUIRED
-  res.json({ token });
+const safeUser = {
+  id: user.id,
+  name: user.name,
+  email: user.email,
+  role: user.role,
+  subscription_status: user.subscription_status,
+};
+
+res.json({ token, user: safeUser });
 });

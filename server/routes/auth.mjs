@@ -104,7 +104,15 @@ router.post("/register", async (req, res) => {
 
     setRefreshCookie(res, refreshToken);
 
-    res.json({ token: accessToken });
+    res.json({
+      token: accessToken,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role || "user",
+      },
+    });
   } catch {
     res.status(400).json({ message: "Invalid registration data" });
   }
