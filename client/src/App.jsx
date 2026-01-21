@@ -77,6 +77,12 @@ const ProfessionalResourcesPage = lazy(() => import("./pages/ProfessionalResourc
 const SupportPage = lazy(() => import("./pages/SupportPage.tsx"));
 const NewsPage = lazy(() => import("./pages/NewsPage.jsx"));
 const HealingLibraryPage = lazy(() => import("./pages/HealingLibraryPage.jsx"));
+const CalmingScenesPage = lazy(() => import("./pages/CalmingScenesPage.jsx"));
+const BreathingExercisesPage = lazy(() => import("./pages/BreathingExercisesPage.jsx"));
+const GroundingTechniquesPage = lazy(() => import("./pages/GroundingTechniquesPage.jsx"));
+const AffirmationsPage = lazy(() => import("./pages/AffirmationsPage.jsx"));
+const MeditationGuidePage = lazy(() => import("./pages/MeditationGuidePage.jsx"));
+const SelfCareToolkitPage = lazy(() => import("./pages/SelfCareToolkitPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -204,6 +210,12 @@ export default function App() {
               <Route path="/support" component={SupportPage} />
               <Route path="/news" component={NewsPage} />
               <Route path="/healing-library" component={HealingLibraryPage} />
+              <Route path="/calming-scenes" component={CalmingScenesPage} />
+              <Route path="/breathing" component={BreathingExercisesPage} />
+              <Route path="/grounding" component={GroundingTechniquesPage} />
+              <Route path="/affirmations" component={AffirmationsPage} />
+              <Route path="/meditation" component={MeditationGuidePage} />
+              <Route path="/self-care" component={SelfCareToolkitPage} />
               <Route path="/mirror">
                 <RouteGuard>
                   <MirrorPage />

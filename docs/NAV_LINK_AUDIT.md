@@ -1,11 +1,11 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T13:06:38.909Z`
+Generated: `2026-01-21T13:17:41.081Z`
 
 ## Summary
-- Files scanned: **860**
-- Routes detected: **67**
-- Link occurrences: **447**
+- Files scanned: **872**
+- Routes detected: **73**
+- Link occurrences: **471**
 - Broken: **0**
 - Warnings: **0**
 
@@ -45,6 +45,12 @@ Generated: `2026-01-21T13:06:38.909Z`
 - `/support`
 - `/news`
 - `/healing-library`
+- `/calming-scenes`
+- `/breathing`
+- `/grounding`
+- `/affirmations`
+- `/meditation`
+- `/self-care`
 - `/mirror`
 - `/community`
 - `/tools`
