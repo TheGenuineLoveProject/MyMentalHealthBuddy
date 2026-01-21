@@ -4,6 +4,7 @@ import {
   Sun, Moon, Cloud, Leaf, ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useSEO } from "@/hooks/useSEO";
 
 const CONVERSATION_STARTERS = [
   {
@@ -40,6 +41,12 @@ const FEATURES = [
 ];
 
 export default function ChatEmpty() {
+  useSEO({
+    title: "Start AI Chat",
+    description: "Begin a supportive conversation with our AI wellness companion for emotional guidance.",
+    noIndex: true
+  });
+
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

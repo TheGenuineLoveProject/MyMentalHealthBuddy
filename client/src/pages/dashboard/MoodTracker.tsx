@@ -5,6 +5,7 @@ import {
   Sparkles, TrendingUp, Calendar, Plus, Check
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useSEO } from "@/hooks/useSEO";
 
 const MOODS = [
   { id: "great", icon: Smile, label: "Great", color: "sage", emoji: "😊" },
@@ -26,6 +27,12 @@ const FEELINGS = [
 ];
 
 export default function MoodTracker() {
+  useSEO({
+    title: "Mood Tracker",
+    description: "Track your emotional wellbeing with our gentle mood tracking tool designed for self-awareness and growth.",
+    noIndex: true
+  });
+
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [selectedEnergy, setSelectedEnergy] = useState<string | null>(null);
   const [selectedFeelings, setSelectedFeelings] = useState<string[]>([]);

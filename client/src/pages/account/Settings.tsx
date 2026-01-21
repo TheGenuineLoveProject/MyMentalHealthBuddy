@@ -8,8 +8,15 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Switch } from "@/components/ui/Switch";
 import { useToast } from "@/hooks/use-toast";
+import { useSEO } from "@/hooks/useSEO";
 
 export default function Settings() {
+  useSEO({
+    title: "Settings",
+    description: "Manage your account settings, preferences, and privacy options.",
+    noIndex: true
+  });
+
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
   const [theme, setTheme] = useState<"light" | "dark" | "system">("light");

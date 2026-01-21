@@ -4,6 +4,7 @@ import {
   Calendar, Target, Flame, ArrowRight, Brain, Sun, Moon
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useSEO } from "@/hooks/useSEO";
 
 const QUICK_ACTIONS = [
   { icon: Heart, label: "Check-In", href: "/mood-tracker", color: "blush" },
@@ -20,6 +21,12 @@ const STATS = [
 ];
 
 export default function Overview() {
+  useSEO({
+    title: "Wellness Dashboard",
+    description: "Your personal wellness dashboard for tracking your healing journey, celebrating progress, and nurturing emotional growth.",
+    noIndex: true
+  });
+
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
   const TimeIcon = hour < 18 ? Sun : Moon;

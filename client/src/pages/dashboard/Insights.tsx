@@ -4,6 +4,7 @@ import {
   Calendar, BarChart3, PieChart, Activity, Target, Award
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useSEO } from "@/hooks/useSEO";
 
 const WEEKLY_INSIGHTS = [
   {
@@ -47,6 +48,12 @@ const ACHIEVEMENTS = [
 ];
 
 export default function Insights() {
+  useSEO({
+    title: "Wellness Insights",
+    description: "Personalized insights into your emotional patterns, thought patterns, and wellness journey progress.",
+    noIndex: true
+  });
+
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { useSEO } from "@/hooks/useSEO";
 
 const SAMPLE_ENTRIES = [
   {
@@ -42,6 +43,12 @@ const PROMPTS = [
 ];
 
 export default function Journal() {
+  useSEO({
+    title: "Journal",
+    description: "Your private wellness journal for reflections, gratitude, and emotional processing with guided prompts.",
+    noIndex: true
+  });
+
   const [searchQuery, setSearchQuery] = useState("");
   const [activePrompt, setActivePrompt] = useState(0);
 

@@ -5,6 +5,7 @@ import {
   Download, Calendar, Shield, Sparkles, ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useSEO } from "@/hooks/useSEO";
 
 const PLANS = [
   {
@@ -44,6 +45,12 @@ const INVOICES = [
 ];
 
 export default function Billing() {
+  useSEO({
+    title: "Billing & Subscription",
+    description: "Manage your subscription plan and view your billing history.",
+    noIndex: true
+  });
+
   const [selectedPlan, setSelectedPlan] = useState("premium");
 
   return (

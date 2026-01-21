@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { useSEO } from "@/hooks/useSEO";
 
 interface Message {
   id: number;
@@ -36,6 +37,12 @@ const SUGGESTIONS = [
 ];
 
 export default function ChatConversation() {
+  useSEO({
+    title: "AI Wellness Chat",
+    description: "Have a supportive conversation with our AI companion for emotional guidance and wellness support.",
+    noIndex: true
+  });
+
   const [messages, setMessages] = useState<Message[]>(SAMPLE_MESSAGES);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);

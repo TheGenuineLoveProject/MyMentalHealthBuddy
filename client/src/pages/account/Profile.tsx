@@ -7,6 +7,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/use-toast";
+import { useSEO } from "@/hooks/useSEO";
 
 const ACHIEVEMENTS = [
   { icon: Heart, label: "Self-Love Champion", date: "Dec 2025" },
@@ -15,6 +16,12 @@ const ACHIEVEMENTS = [
 ];
 
 export default function Profile() {
+  useSEO({
+    title: "Your Profile",
+    description: "Manage your personal profile and view your wellness journey achievements.",
+    noIndex: true
+  });
+
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
   const [editing, setEditing] = useState(false);

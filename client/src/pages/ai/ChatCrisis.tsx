@@ -4,6 +4,7 @@ import {
   MessageCircle, ExternalLink, Sparkles, HandHeart
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useSEO } from "@/hooks/useSEO";
 
 const CRISIS_RESOURCES = [
   {
@@ -41,6 +42,12 @@ const GROUNDING_TECHNIQUES = [
 ];
 
 export default function ChatCrisis() {
+  useSEO({
+    title: "Crisis Support Resources",
+    description: "Immediate crisis support resources and grounding techniques. You are not alone - help is available 24/7.",
+    noIndex: true
+  });
+
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
