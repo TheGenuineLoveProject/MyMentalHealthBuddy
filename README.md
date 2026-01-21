@@ -299,6 +299,32 @@ npm run visual:doctor
 
 *Test configuration to be added in future updates*
 
+### API Authentication Testing
+
+Test the authentication endpoints using curl:
+
+```bash
+# Register a new user
+curl -X POST http://localhost:5000/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "test@example.com", "password": "password123", "name": "Test User"}'
+
+# Login with existing user
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "test@example.com", "password": "password123"}'
+
+# Dev admin fallback (development only)
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email": "admin@email.com", "password": "password"}'
+```
+
+**Expected responses:**
+- Register: `{"token": "...", "user": {...}}`
+- Login: `{"token": "...", "user": {...}}`
+- Invalid credentials: `{"message": "Invalid credentials"}`
+
 ---
 
 ## 🚀 Deployment
