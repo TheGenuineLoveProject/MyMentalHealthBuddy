@@ -42,6 +42,75 @@
   --glp-gold-800: #634314;
   --glp-gold-900: #422C0D;
 
+  /* Extended sage palette */
+  --glp-sage-50: #F0F7F2;
+  --glp-sage-100: #D9EBE0;
+  --glp-sage-200: #BFDDCA;
+  --glp-sage-300: #A1CDB2;
+  --glp-sage-400: #7FB39A;
+  --glp-sage-500: #5D9A7F;
+  --glp-sage-600: #4A7A65;
+  --glp-sage-700: #375A4B;
+  --glp-sage-800: #253D32;
+  --glp-sage-900: #131F1A;
+
+  /* Extended blush palette */
+  --glp-blush-50: #FDF6F5;
+  --glp-blush-100: #FAEAE8;
+  --glp-blush-200: #F5D5D2;
+  --glp-blush-300: #EFC0BB;
+  --glp-blush-400: #E8A9A3;
+  --glp-blush-500: #E0918A;
+  --glp-blush-600: #D47A72;
+  --glp-blush-700: #C4635A;
+  --glp-blush-800: #A54D45;
+  --glp-blush-900: #7A3933;
+
+  /* Shorthand aliases for utilities (teal/gold/sage/blush) */
+  --teal-50: var(--glp-teal-50);
+  --teal-100: var(--glp-teal-100);
+  --teal-200: var(--glp-teal-200);
+  --teal-300: var(--glp-teal-300);
+  --teal-400: var(--glp-teal-400);
+  --teal-500: var(--glp-teal-500);
+  --teal-600: var(--glp-teal-600);
+  --teal-700: var(--glp-teal-700);
+  --teal-800: var(--glp-teal-800);
+  --teal-900: var(--glp-teal-900);
+
+  --gold-50: var(--glp-gold-50);
+  --gold-100: var(--glp-gold-100);
+  --gold-200: var(--glp-gold-200);
+  --gold-300: var(--glp-gold-300);
+  --gold-400: var(--glp-gold-400);
+  --gold-500: var(--glp-gold-500);
+  --gold-600: var(--glp-gold-600);
+  --gold-700: var(--glp-gold-700);
+  --gold-800: var(--glp-gold-800);
+  --gold-900: var(--glp-gold-900);
+
+  --sage-50: var(--glp-sage-50);
+  --sage-100: var(--glp-sage-100);
+  --sage-200: var(--glp-sage-200);
+  --sage-300: var(--glp-sage-300);
+  --sage-400: var(--glp-sage-400);
+  --sage-500: var(--glp-sage-500);
+  --sage-600: var(--glp-sage-600);
+  --sage-700: var(--glp-sage-700);
+  --sage-800: var(--glp-sage-800);
+  --sage-900: var(--glp-sage-900);
+
+  --blush-50: var(--glp-blush-50);
+  --blush-100: var(--glp-blush-100);
+  --blush-200: var(--glp-blush-200);
+  --blush-300: var(--glp-blush-300);
+  --blush-400: var(--glp-blush-400);
+  --blush-500: var(--glp-blush-500);
+  --blush-600: var(--glp-blush-600);
+  --blush-700: var(--glp-blush-700);
+  --blush-800: var(--glp-blush-800);
+  --blush-900: var(--glp-blush-900);
+
   /* RGB helpers (for rgba(var(--x-rgb), a)) */
   --glp-sage-rgb: 127, 179, 154;
   --glp-sage-deep-rgb: 42, 84, 84;

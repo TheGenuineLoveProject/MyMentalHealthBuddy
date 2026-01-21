@@ -142,3 +142,14 @@ All premium visual classes have comprehensive `.dark` variant overrides for back
 - **Build Time**: ~15.6 seconds
 - **Visual Doctor**: 282 files clean, 0 violations
 - **Navigation Audit**: 57 routes, 0 broken links
+
+### AI Platform Perfection Prompt
+A comprehensive prompt for AI assistants is available at `docs/AI_PLATFORM_PERFECTION_PROMPT.md`. This document provides:
+- Complete color palette specifications with usage rules
+- Typography hierarchy and font guidelines
+- Alignment and layout system documentation
+- Icon, button, card, and badge system references
+- Animation guidelines with reduced-motion support
+- Dark mode requirements and implementation patterns
+- Accessibility checklist and test ID conventions
+- Component creation guidelines
