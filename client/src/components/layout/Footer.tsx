@@ -1,14 +1,7 @@
 import { Link } from "wouter";
 import { Heart, Mail, Shield, FileText } from "lucide-react";
-import React from "react";
 import { BRAND } from "@shared/brand";
 
-  return (
-    <footer style={{ padding: 16, borderTop: "1px solid rgba(0,0,0,0.06)", opacity: 0.8 }}>
-      <div>{BRAND.name} • {new Date().getFullYear()}</div>
-    </footer>
-  );
-}
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
