@@ -262,6 +262,7 @@ app.get("/api/health-check", (_req, res) => {
 
 app.get("/healthz", (_req, res) => {
   res.status(200).json({ 
+    ok: true,
     status: "ok",
     version: "1.0.0",
     buildTime: new Date().toISOString(),
