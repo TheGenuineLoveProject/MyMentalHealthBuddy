@@ -50,10 +50,8 @@ export default function Landing() {
       <div className="decorative-orb decorative-orb-sage w-[600px] h-[600px] -top-40 -left-40 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-blush w-[500px] h-[500px] top-20 -right-40 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-20 left-1/4 absolute" aria-hidden="true" />
-      <header
-        className="relative z-10 mx-auto max-w-6xl py-6 pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))]"
-        role="banner"
-      >
+      < header className="relative z-10 mx-auto max-w-6xl py-6 pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))]"
+        role="banner" >
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2 rounded-lg" aria-label="The Genuine Love Project home" data-testid="link-brand-home">
             <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-sage-500 to-sage-600 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
