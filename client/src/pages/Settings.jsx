@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
-import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye } from "lucide-react";
+import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import SEO from "../components/SEO";
 
@@ -18,6 +18,7 @@ export default function Settings() {
   const [theme, setTheme] = useState("light");
   const [visualMode, setVisualMode] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -59,6 +60,34 @@ export default function Settings() {
     if (confirmed) {
       logout();
       setLocation("/");
+    }
+  }
+
+  async function handleExportData() {
+    setIsExporting(true);
+    try {
+      const response = await fetch("/api/account/export", {
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error("Export failed");
+      
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `genuine-love-project-data-${new Date().toISOString().split("T")[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      
+      setMessage("Your data has been exported successfully!");
+      setTimeout(() => setMessage(""), 3000);
+    } catch (error) {
+      setMessage("Export failed. Please try again.");
+      setTimeout(() => setMessage(""), 3000);
+    } finally {
+      setIsExporting(false);
     }
   }
 
@@ -248,6 +277,48 @@ export default function Settings() {
                     "Save Preferences"
                   )}
                 </button>
+              </div>
+            </section>
+
+            <section data-testid="section-privacy" className="card-bordered mb-6" aria-labelledby="privacy-heading">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="icon-container icon-md icon-soft-sage">
+                  <Shield className="w-5 h-5" aria-hidden="true" />
+                </div>
+                <h2 id="privacy-heading" className="text-heading-md text-teal">Privacy & Data</h2>
+              </div>
+              
+              <p className="text-body-sm mb-4">
+                Your data belongs to you. Download a complete copy of all your wellness data, journal entries, mood logs, and chat history.
+              </p>
+
+              <button
+                onClick={handleExportData}
+                data-testid="button-export-data"
+                disabled={isExporting}
+                aria-busy={isExporting}
+                className="w-full flex items-center justify-center gap-2 p-3.5 rounded-xl border-2 border-[var(--sage-300)] bg-[var(--sage-50)] hover:bg-[var(--sage-100)] hover:border-[var(--sage-400)] transition text-[var(--teal-600)] font-medium disabled:opacity-50"
+              >
+                {isExporting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <div className="w-4 h-4 border-2 border-[var(--teal-300)] border-t-[var(--teal-600)] rounded-full animate-spin" />
+                    Preparing export...
+                  </span>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4" aria-hidden="true" />
+                    Download My Data
+                  </>
+                )}
+              </button>
+
+              <div className="mt-4 p-3 rounded-lg bg-[var(--sage-50)] border border-[var(--sage-200)]">
+                <div className="flex items-start gap-2">
+                  <FileText className="w-4 h-4 text-[var(--teal-500)] mt-0.5 flex-shrink-0" aria-hidden="true" />
+                  <p className="text-caption">
+                    Your export includes: profile info, mood entries, journal entries, and AI chat history in JSON format.
+                  </p>
+                </div>
               </div>
             </section>
 

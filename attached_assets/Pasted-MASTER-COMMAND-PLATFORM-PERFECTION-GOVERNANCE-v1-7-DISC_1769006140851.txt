@@ -1,0 +1,187 @@
+MASTER COMMAND — PLATFORM PERFECTION GOVERNANCE (v1.7 “DISCOVERY + SEO + CRM + SALES HYPERLOOP”)
+Repo: The Genuine Love Project
+
+Objective:
+Make the platform irresistibly easy to navigate (findability + orientation) AND add production-grade SEO + CRM + ethical marketing/sales,
+WITHOUT breaking stability, tests, audits, or creating scope creep.
+
+ABSOLUTE RULE: WORK IN WAVES WITH HARD GATES.
+Wave 1 must be GREEN before Wave 2. Wave 2 must be GREEN before Wave 3. Wave 3 must be GREEN before Wave 4.
+
+HARD CONSTRAINTS (NON-NEGOTIABLE)
+1) Do NOT rename/refactor existing CSS variable names. Keep `--glp-*` EXACT.
+2) No raw hex colors anywhere except: client/src/styles/brand-tokens.css
+3) Fonts allowed ONLY: Inter + Playfair Display (+ system fallbacks).
+4) All internal nav links MUST match canonical routes in client/src/App.jsx exactly.
+5) Minimal diffs. No broad rewrites. No new deps unless strictly required (must justify).
+6) No bypassing tests/audits. Fix root causes.
+7) Brand safety: supportive tone OK; DO NOT make medical claims, promise cures, or present content as medical advice.
+8) Ethical growth: NO dark patterns (no addictive infinite scroll, manipulative notifications, bait-and-switch).
+
+CANONICAL ROUTE SOURCE OF TRUTH
+- client/src/App.jsx route list is canonical.
+- Public routes are indexable; protected (RouteGuard) routes must be non-indexable.
+
+WAVE 1 — STABILITY (MUST PASS BEFORE ANY GROWTH WORK)
+- Fix test flakiness / ports / auth determinism
+- Must pass:
+  - npm run test:auth
+  - npm run audit
+
+WAVE 2 — UX CONSISTENCY (MUST PASS BEFORE SEO/CRM)
+- Modes + contrast + nav-lock + 404
+- Must pass:
+  - npm run audit (NAV_LINK_AUDIT 0 broken, VISUAL_DOCTOR 0 violations)
+
+WAVE 3 — DISCOVERY & ORIENTATION (CAPTIVATION THROUGH FINDABILITY)
+Goal: users can instantly find what they need, understand where they are, and know what to do next.
+
+A) GLOBAL “FIND” SYSTEM (NO NEW DEPS)
+- Add a global search entry point:
+  - Header: a “Search” control (icon + input or modal)
+  - Keyboard shortcut: Cmd/Ctrl+K opens search
+- Search must cover:
+  - Healing Library Index (/healing-library)
+  - FAQ (/faq)
+  - Glossary (/glossary, /glossary-full)
+  - How-to Guides (/how-to-guides)
+  - Tools overview (/tools) + key public tool pages
+  - News (/news)
+- Implementation: client-side search over a single in-repo dataset (JSON/TS), e.g.:
+  - client/src/content/searchIndex.ts (array of { title, description, tags, path, type })
+  - No external search dependency.
+- Results UI:
+  - grouped by type (Tool, Guide, Term, Q&A, News)
+  - shows title + 1-line snippet + tag chips
+  - enter navigates to exact canonical path
+
+B) PLATFORM ORIENTATION (NO ROUTE CHANGES)
+- Add consistent breadcrumbs for major sections (only where it improves clarity, minimal diff).
+- Add “Start Here” pathways on /healing-library:
+  - 3–5 user-intent tiles (e.g., “Calm Now”, “Build Habits”, “Learn Skills”, “Find Support”, “Explore Tools”)
+  - Each tile links ONLY to existing routes.
+- Add “Related next steps” blocks:
+  - On /breathing, /grounding, /stress-response, /sleep-guide, /guided-journaling, /cognitive-tools, etc.
+  - Must use existing routes only.
+- Add “Support” safety signposting:
+  - Soft links to /support and /crisis where appropriate (no medical claims, no diagnosing).
+
+C) INFORMATION ARCHITECTURE RULES (CAPTIVATING BUT CLEAN)
+- Keep Header minimal (avoid clutter). Route-heavy exploration lives in:
+  - /healing-library (Index hub)
+  - Search (Cmd/Ctrl+K)
+- Ensure every page has:
+  - clear H1
+  - 1 primary CTA
+  - 1–3 contextual next steps
+
+VERIFY WAVE 3
+- npm run audit must remain GREEN
+- nav-link audit must remain 0 broken links
+
+WAVE 4 — SEO + CRM + MARKETING + SALES (ETHICAL, PRODUCTION-GRADE)
+Goal: public pages index well; protected pages never index; leads captured with consent; conversions are clear.
+
+A) TECH SEO BASELINE (NO NEW DEPS)
+1) Robots + indexing policy
+- Add public/robots.txt:
+  - allow public pages
+  - disallow protected routes (all RouteGuard paths)
+  - disallow /admin, /content-admin, /dashboard, etc.
+- Add meta noindex for protected pages:
+  - In RouteGuard (or layout used by protected routes), set:
+    - <meta name="robots" content="noindex, nofollow" />
+  - Public pages should be indexable.
+
+2) Sitemap
+- Add public/sitemap.xml containing ONLY public/indexable routes (from App.jsx):
+  - Include /, /home, /news, /faq, /healing-library, /glossary, /glossary-full, /research, /how-to-guides, /daily-routines, /cognitive-tools, and other non-guarded library pages.
+  - Exclude all RouteGuard paths.
+- Provide a tiny node script to generate sitemap from a maintained allowlist:
+  - tools/generate-sitemap.mjs
+  - Run via npm script “seo:sitemap”
+  - Keep it simple: static list + lastmod = build date.
+
+3) Titles + meta descriptions + canonical
+- Add a minimal per-route SEO helper (no react-helmet):
+  - On each major public page component (News/FAQ/HealingLibrary/Glossary/Research/HowToGuides/etc.), use useEffect to set:
+    - document.title
+    - meta[name="description"]
+    - link[rel="canonical"]
+- Add OpenGraph + Twitter tags for key public pages:
+  - og:title, og:description, og:url
+  - twitter:card, twitter:title, twitter:description
+  - Use existing tokens/branding; do not add new deps.
+
+4) Structured data (JSON-LD, minimal)
+- Add JSON-LD on:
+  - /faq -> FAQPage schema
+  - /news + /blog -> Article schema where applicable
+  - /healing-library -> WebSite + SearchAction schema (points to your in-site search)
+- Keep wording educational/supportive; no medical claims.
+
+B) CRM (LEADS) — MINIMAL, OWNED, CONSENT-BASED
+Goal: capture emails with consent, store source attribution, let admin export.
+
+1) Lead capture UI (minimal)
+- Add “Newsletter / Updates” capture:
+  - Footer sitewide (public pages)
+  - Optional section on /news
+- Fields:
+  - email (required)
+  - consent checkbox (required)
+  - optional: interest tags (checkboxes)
+- Copy: supportive, non-manipulative, clear opt-out language.
+
+2) UTM & referral attribution
+- Add a tiny client utility:
+  - captures UTM params (utm_source, utm_medium, utm_campaign, utm_content, utm_term) from URL
+  - stores for 30 days in localStorage
+  - attaches to lead submissions
+
+3) Server endpoint (no new deps)
+- Add POST /api/leads:
+  - validates email + consent
+  - stores lead record (db if available; else file-based minimal storage if that’s what repo uses)
+  - returns 201 or safe error (400)
+- Add GET /api/leads/export (admin-only):
+  - returns CSV
+  - protected by server-side admin guard
+- Add minimal admin UI entry:
+  - link from /content-admin or /admin to “Export Leads CSV”
+  - do not build a full CRM; just export + minimal list view if easy.
+
+C) MARKETING + SALES (ETHICAL CONVERSION)
+Goal: make Pricing/Upgrade/Onboarding path clear, not pushy.
+
+1) Conversion clarity
+- /pricing:
+  - tighten sections: who it’s for, what you get, how to start
+  - single primary CTA -> /upgrade (or your checkout flow)
+- /upgrade:
+  - clear steps, remove friction, reassure privacy
+- /onboarding:
+  - ensure it routes users into /today or /dashboard with a clear “next”
+
+2) Gentle lifecycle nudges (NO dark patterns)
+- After key actions (e.g., finishing a guide), show “Next Step” card:
+  - save to journal (/journal)
+  - try related tool (/tools or specific public tool route)
+  - read a relevant guide (/how-to-guides)
+- No infinite scroll, no spam prompts, no manipulative timers.
+
+D) VERIFY WAVE 4 (MUST PASS)
+- npm run audit (must remain GREEN)
+- npm run test:auth (must remain GREEN)
+- Add optional lightweight checks:
+  - ensure sitemap exists and has only public routes
+  - ensure protected routes apply noindex
+
+FINAL REPORT FORMAT (MANDATORY)
+1) Wave 1–4 checklist (pass/fail).
+2) Commands run + key excerpts.
+3) Files changed (1 line each).
+4) SEO deliverables created (robots.txt, sitemap.xml, generate script, per-route meta helper).
+5) CRM deliverables (UI locations, API endpoints, admin export).
+6) Rollback steps (git checkout -- file list; reset warning).
+Proceed now. Verify as you go. No scope creep.
