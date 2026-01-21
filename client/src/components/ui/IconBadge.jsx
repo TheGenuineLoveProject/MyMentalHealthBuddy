@@ -1,32 +1,51 @@
 import { clsx } from "clsx";
 
 const VARIANTS = {
-  sage: "icon-gradient-sage",
-  teal: "icon-gradient-teal",
-  gold: "icon-gradient-gold",
+  teal: "icon-teal-gradient",
+  "teal-soft": "icon-teal-soft",
+  sage: "icon-sage-gradient",
+  "sage-soft": "icon-sage-soft",
+  gold: "icon-gold-gradient",
+  "gold-soft": "icon-gold-soft",
+  blush: "icon-blush-gradient",
+  "blush-soft": "icon-blush-soft",
   soft: "bg-[var(--surface-2)] text-[var(--glp-primary)]",
+  outline: "icon-outline border-2 border-current",
 };
 
 const SIZES = {
-  sm: "w-10 h-10 rounded-lg",
-  md: "w-12 h-12 rounded-xl",
-  lg: "w-16 h-16 rounded-2xl",
-  xl: "w-20 h-20 rounded-2xl",
+  xs: "icon-premium-xs",
+  sm: "icon-premium-sm",
+  md: "icon-premium-md",
+  lg: "icon-premium-lg",
+  xl: "icon-premium-xl",
+  "2xl": "icon-premium-2xl",
+};
+
+const GLOW = {
+  teal: "icon-glow-teal",
+  gold: "icon-glow-gold",
+  sage: "icon-glow",
+  none: "",
 };
 
 export default function IconBadge({
   children,
   variant = "teal",
   size = "md",
+  glow = "none",
+  hover = false,
   className = "",
   ...props
 }) {
   return (
     <div
       className={clsx(
-        "flex items-center justify-center shrink-0 shadow-md",
+        "icon-premium flex items-center justify-center shrink-0",
         SIZES[size] || SIZES.md,
         VARIANTS[variant] || VARIANTS.teal,
+        GLOW[glow] || "",
+        hover && "icon-hover-lift",
         className
       )}
       {...props}
