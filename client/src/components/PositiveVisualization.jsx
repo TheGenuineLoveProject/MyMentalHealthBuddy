@@ -187,19 +187,23 @@ export default function PositiveVisualization() {
         {!isPlaying && !completed && (
           <div className="grid grid-cols-2 gap-3 mb-6">
             {VISUALIZATIONS.map((viz) => (
-              <button
+              <div
                 key={viz.id}
                 onClick={() => selectVisualization(viz)}
-                className={`p-4 rounded-xl text-left transition-all relative ${
+                onKeyDown={(e) => e.key === 'Enter' && selectVisualization(viz)}
+                role="button"
+                tabIndex={0}
+                className={`p-4 rounded-xl text-left transition-all relative cursor-pointer ${
                   selectedViz.id === viz.id
                     ? `bg-gradient-to-br ${viz.color} text-white shadow-lg`
                     : "bg-[var(--surface)] hover:bg-[var(--surface-hover)]"
-                }`}
+                } focus:outline-none focus:ring-2 focus:ring-[var(--glp-gold)]`}
                 data-testid={`button-viz-${viz.id}`}
               >
                 <button
+                  type="button"
                   onClick={(e) => { e.stopPropagation(); toggleFavorite(viz.id); }}
-                  className="absolute top-2 right-2"
+                  className="absolute top-2 right-2 p-1 rounded-full hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--glp-gold)]"
                   aria-label={favorites.includes(viz.id) ? "Remove from favorites" : "Add to favorites"}
                 >
                   <Heart 
@@ -213,7 +217,7 @@ export default function PositiveVisualization() {
                 <span className={`text-xs ${selectedViz.id === viz.id ? "text-white/80" : "text-[var(--text-muted)]"}`}>
                   {Math.floor(viz.duration / 60)} min
                 </span>
-              </button>
+              </div>
             ))}
           </div>
         )}
