@@ -20,7 +20,10 @@ const leadSchema = z.object({
   utmCampaign: z.string().optional(),
   utmContent: z.string().optional(),
   utmTerm: z.string().optional(),
+  utmTimestamp: z.number().optional(),
 });
+
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
 router.post("/", authRateLimit, async (req, res) => {
   try {
@@ -29,7 +32,16 @@ router.post("/", authRateLimit, async (req, res) => {
       return badRequest(res, validation.error.errors[0].message);
     }
 
-    const { email, consent, interests, source, utmSource, utmMedium, utmCampaign, utmContent, utmTerm } = validation.data;
+    let { email, consent, interests, source, utmSource, utmMedium, utmCampaign, utmContent, utmTerm, utmTimestamp } = validation.data;
+    
+    const isUtmExpired = !utmTimestamp || (Date.now() - utmTimestamp) > THIRTY_DAYS_MS;
+    if (isUtmExpired) {
+      utmSource = undefined;
+      utmMedium = undefined;
+      utmCampaign = undefined;
+      utmContent = undefined;
+      utmTerm = undefined;
+    }
 
     const existing = await db
       .select({ id: leads.id })

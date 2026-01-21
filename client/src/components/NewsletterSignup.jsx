@@ -48,8 +48,6 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
     setStatus("loading");
     
     const utm = getStoredUtmParams();
-    const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
-    const validUtm = utm.timestamp && utm.timestamp > thirtyDaysAgo ? utm : {};
 
     try {
       const response = await fetch("/api/leads", {
@@ -59,11 +57,12 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
           email,
           consent,
           source,
-          utmSource: validUtm.utm_source,
-          utmMedium: validUtm.utm_medium,
-          utmCampaign: validUtm.utm_campaign,
-          utmContent: validUtm.utm_content,
-          utmTerm: validUtm.utm_term,
+          utmSource: utm.utm_source,
+          utmMedium: utm.utm_medium,
+          utmCampaign: utm.utm_campaign,
+          utmContent: utm.utm_content,
+          utmTerm: utm.utm_term,
+          utmTimestamp: utm.timestamp,
         }),
       });
 

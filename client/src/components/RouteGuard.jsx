@@ -8,18 +8,28 @@ export default function RouteGuard({ children }) {
 
   useEffect(() => {
     const metaRobots = document.querySelector('meta[name="robots"]');
+    const originalContent = metaRobots?.getAttribute("content") || null;
+    
     if (metaRobots) {
       metaRobots.setAttribute("content", "noindex, nofollow");
     } else {
       const meta = document.createElement("meta");
       meta.name = "robots";
       meta.content = "noindex, nofollow";
+      meta.dataset.routeGuard = "true";
       document.head.appendChild(meta);
     }
     
     return () => {
-      const meta = document.querySelector('meta[name="robots"]');
-      if (meta) meta.setAttribute("content", "index, follow");
+      const meta = document.querySelector('meta[name="robots"][data-route-guard="true"]');
+      if (meta) {
+        meta.remove();
+      } else {
+        const existingMeta = document.querySelector('meta[name="robots"]');
+        if (existingMeta && originalContent) {
+          existingMeta.setAttribute("content", originalContent);
+        }
+      }
     };
   }, []);
 
