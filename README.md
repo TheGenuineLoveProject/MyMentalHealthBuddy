@@ -46,6 +46,26 @@ Built to help you heal, grow, and live in Genuine Love.
 - Quick access to professional help
 - Crisis intervention information
 
+### 🎨 Visual Mode Toggle
+The platform offers three display modes for accessibility and comfort:
+
+| Mode | Description | Best For |
+|------|-------------|----------|
+| **Default** | Standard brand palette with Deep Teal + Gold | General use |
+| **Low-Stim** | Reduced shadows, softer colors, minimal decoration | Sensory sensitivity |
+| **Reading** | Maximum legibility, white surfaces, darker text | Extended reading |
+
+**Where to find it:**
+- **Header**: Mode toggle dropdown in top-right navigation
+- **Settings page**: Full Display Mode section with descriptions
+
+**Persistence**: Mode preference saves to `localStorage` (key: `glp-visual-mode`) and applies instantly on page load without flash.
+
+**Usage (programmatic):**
+```javascript
+document.documentElement.dataset.mode = "low-stim"; // or "reading" or ""
+```
+
 ---
 
 ## 🏗️ Technology Stack
