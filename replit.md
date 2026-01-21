@@ -118,14 +118,20 @@ Example: `document.documentElement.dataset.mode = "low-stim"`
 - **Safe Areas**: `.safe-padding`
 
 ### Premium Component Classes
-- **Cards**: `.card-premium`, `.card-shimmer`, `.surface-card`, `.surface-card-elevated`, `.glass-premium`
+- **Cards**: `.card-premium`, `.card-premium-gold`, `.card-premium-teal`, `.card-shimmer`, `.surface-card`, `.surface-card-elevated`, `.glass-premium`
+- **Buttons**: `.btn-premium-teal`, `.btn-premium-gold`, `.btn-glass`, `.btn-ghost`
 - **Inputs**: `.input-premium`
 - **Skeletons**: `.skeleton-premium`, `.skeleton-premium-card`
-- **Icons**: `.icon-glow-sage/gold/teal`, `.icon-badge-*`
-- **Text**: `.text-gradient-premium`, `.text-gradient-gold`, `.text-glow`
+- **Icons**: `.icon-premium-*` (xs through 2xl), `.icon-teal-gradient`, `.icon-gold-gradient`, `.icon-sage-gradient`, `.icon-teal-soft`, `.icon-gold-soft`, `.icon-sage-soft`
+- **Badges**: `.badge-premium-teal`, `.badge-premium-gold`, `.badge-premium-sage`
+- **Text**: `.text-hero`, `.text-section-title`, `.text-card-title`, `.text-card-body`, `.text-meta`, `.text-overline`, `.text-gradient-premium`, `.text-gradient-gold`
+- **Shadows**: `.shadow-premium-sm/md/lg`, `.shadow-glow-teal/gold/sage`
 - **Interactions**: `.hover-lift`, `.hover-scale`, `.hover-glow-sage/gold/teal`
-- **Animations**: `animate-pulse-ring`, `animate-float`, `animate-fade-in-up-delayed`
+- **Animations**: `animate-pulse-ring`, `animate-float`, `animate-fade-in-up-delayed`, `animate-fade-in-stagger`
 - **Focus**: `.focus-ring`
+
+### Dark Mode Support
+All premium visual classes have comprehensive `.dark` variant overrides for backgrounds, borders, text colors, shadows, and glow effects. Dark mode automatically adjusts color variables for proper contrast.
 
 ### QA Mode (Development Only)
 - **LocalStorage Key**: `glp-qa` - set to "1" to bypass authentication
