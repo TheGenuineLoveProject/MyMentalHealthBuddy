@@ -59,7 +59,7 @@ The platform offers three display modes for accessibility and comfort:
 - **Header**: Mode toggle dropdown in top-right navigation
 - **Settings page**: Full Display Mode section with descriptions
 
-**Persistence**: Mode preference saves to `localStorage` (key: `glp-visual-mode`) and applies instantly on page load without flash.
+**Persistence**: Mode preference saves to `localStorage` (key: `glp-mode`) and applies instantly on page load without flash.
 
 **Usage (programmatic):**
 ```javascript

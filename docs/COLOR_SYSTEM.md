@@ -90,4 +90,4 @@ The platform includes a **Mode Toggle** in the navigation bar for easy switching
 - Subtle shadows only
 - Toggle: `html[data-mode="reading"]`
 
-User preference is persisted to `localStorage` under key `glp-visual-mode`.
+User preference is persisted to `localStorage` under key `glp-mode`.
