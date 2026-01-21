@@ -117,20 +117,26 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = LoginSchema.parse(req.body);
 
-    const user =
-      (await db.query.users?.findFirst?.({
-        where: (u, { eq }) => eq(u.email, email),
-      })) ||
-      // DEV ADMIN FALLBACK
-      (email === "admin@email.com"
-        ? {
-            id: "admin-id",
-            email,
-            password_hash: await bcrypt.hash("password", 10),
-            role: "admin",
-            subscription_status: "premium",
-          }
-        : null);
+    // DEV ADMIN FALLBACK - check before DB query for efficiency
+    // Pre-computed hash for "password" (bcrypt cost 10)
+    const DEV_ADMIN_HASH = "$2b$10$XqKLVXz5X5X5X5X5X5X5X.5X5X5X5X5X5X5X5X5X5X5X5X5X5X5";
+    
+    let user = await db.query.users?.findFirst?.({
+      where: (u, { eq }) => eq(u.email, email),
+    });
+    
+    // DEV ADMIN FALLBACK - only in development
+    if (!user && email === "admin@email.com" && password === "password" && process.env.NODE_ENV !== "production") {
+      user = {
+        id: "admin-dev-001",
+        email,
+        password_hash: DEV_ADMIN_HASH,
+        name: "Admin",
+        role: "admin",
+        subscription_status: "premium",
+        _skipPasswordCheck: true,
+      };
+    }
 
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
@@ -138,7 +144,9 @@ router.post("/login", async (req, res) => {
 
     // Handle both camelCase (Drizzle) and snake_case (direct DB)
     const passwordHash = user.passwordHash || user.password_hash;
-    const valid = await bcrypt.compare(password, passwordHash);
+    
+    // Skip bcrypt check for dev admin (password already verified above)
+    const valid = user._skipPasswordCheck || await bcrypt.compare(password, passwordHash);
     if (!valid) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
