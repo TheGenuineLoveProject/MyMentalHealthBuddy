@@ -73,25 +73,25 @@ export default function Billing() {
         title="Billing - The Genuine Love Project"
         description="Manage your subscription and billing information."
       />
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen safe-padding hero-gradient">
         <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-sage w-[300px] h-[300px] bottom-20 -left-20 absolute" aria-hidden="true" />
         
-        <div className="relative z-10 max-w-2xl mx-auto px-6 py-8">
+        <div className="relative z-10 container-sm px-responsive py-8">
           <Link 
             href="/settings" 
-            className="inline-flex items-center gap-2 text-sm text-sage-600 hover:text-teal transition-colors mb-6 font-medium"
+            className="inline-flex items-center gap-2 text-body-sm text-secondary hover:text-brand transition focus-ring rounded-lg px-2 py-1 mb-6"
             data-testid="link-back-settings"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="icon-sm" />
             Back to Settings
           </Link>
 
-          <div className="mb-8">
-            <h1 className="text-heading-lg text-teal font-display mb-2" data-testid="text-billing-title">
+          <div className="mb-8 stack-xs">
+            <h1 className="text-display-sm text-brand" data-testid="text-billing-title">
               Billing & Subscription
             </h1>
-            <p className="text-body-md text-sage-600">
+            <p className="text-body text-secondary">
               Manage your plan and payment details
             </p>
           </div>

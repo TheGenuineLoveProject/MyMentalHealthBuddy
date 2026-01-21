@@ -21,19 +21,19 @@ export default function Upgrade() {
         title="Upgrade to Pro - The Genuine Love Project"
         description="Unlock advanced analytics, AI insights, premium journaling, and 1000+ wellness tools with a Pro subscription."
       />
-      <div className="min-h-screen hero-gradient overflow-hidden relative">
+      <div className="min-h-screen safe-padding hero-gradient overflow-hidden relative">
         <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
         <div className="decorative-orb decorative-orb-sage w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
 
-        <div className="content-wrapper py-12 relative z-10">
-          <div className="max-w-2xl mx-auto">
+        <div className="container-sm px-responsive py-12 relative z-10">
+          <div className="mx-auto">
             <header className="mb-8">
               <Link 
                 href="/dashboard" 
-                className="inline-flex items-center gap-2 text-sm text-[var(--sage-600)] hover:text-[var(--teal-700)] transition mb-6"
+                className="inline-flex items-center gap-2 text-body-sm text-secondary hover:text-brand transition focus-ring rounded-lg px-2 py-1 mb-6"
                 data-testid="link-back"
               >
-                <ArrowLeft className="w-4 h-4" />
+                <ArrowLeft className="icon-sm" />
                 Back to Dashboard
               </Link>
               

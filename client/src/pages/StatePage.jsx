@@ -14,29 +14,29 @@ const DIMENSION_INFO = [
 
 export default function StatePage() {
   return (
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen safe-padding hero-gradient">
       <SEO 
         title="State Check-in — The Genuine Love Project" 
         description="Notice your current state without judgment. Track energy, clarity, openness, regulation, presence, and pace."
       />
 
-      <div className="mx-auto max-w-xl px-6 py-8">
+      <div className="container-xs px-responsive py-8">
         <header className="mb-8">
           <Link 
             href="/dashboard" 
-            className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition mb-6"
+            className="inline-flex items-center gap-2 text-body-sm text-secondary hover:text-brand transition focus-ring rounded-lg px-2 py-1 mb-6"
             data-testid="link-back-dashboard"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="icon-sm" />
             Back to Dashboard
           </Link>
           <div className="flex items-center gap-4">
-            <div className="icon-container icon-lg icon-gradient-teal">
-              <Info className="w-6 h-6" />
+            <div className="icon-badge icon-badge-teal icon-circle-lg">
+              <Info className="icon-md" />
             </div>
-            <div>
-              <h1 className="text-heading-xl text-teal">State Check-in</h1>
-              <p className="text-body-sm">Notice your current state without judgment</p>
+            <div className="stack-xs">
+              <h1 className="text-display-sm text-brand">State Check-in</h1>
+              <p className="text-body-sm text-secondary">Notice your current state without judgment</p>
             </div>
           </div>
         </header>

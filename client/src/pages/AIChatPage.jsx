@@ -86,15 +86,15 @@ export default function AIChatPage() {
         title="AI Chat"
         description="Chat with your AI wellness companion. Get compassionate support and guidance for your mental health journey."
       />
-      <div className="min-h-screen flex flex-col hero-gradient">
-        <header className="flex items-center gap-4 p-4 border-b border-[var(--sage-200)] bg-white/80 backdrop-blur-xl sticky top-0 z-10">
+      <div className="min-h-screen flex flex-col safe-padding hero-gradient">
+        <header className="flex items-center gap-4 p-4 border-b border-[var(--glp-border)] glass-card sticky top-0 z-10">
           <Link 
             href="/dashboard" 
-            className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition" 
+            className="inline-flex items-center gap-2 text-body-sm text-secondary hover:text-brand transition focus-ring rounded-lg px-2 py-1" 
             data-testid="link-back" 
             aria-label="Back to dashboard"
           >
-            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+            <ArrowLeft className="icon-sm" aria-hidden="true" />
             Back
           </Link>
           

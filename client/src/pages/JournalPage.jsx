@@ -82,26 +82,26 @@ export default function JournalPage() {
         title="Journal"
         description="Write and reflect on your thoughts in a private, secure journal. Express yourself freely and track your mental wellness journey."
       />
-      <div className="min-h-screen p-6 hero-gradient">
-        <div className="max-w-2xl mx-auto">
-          <header className="flex items-center justify-between mb-8">
+      <div className="min-h-screen safe-padding hero-gradient">
+        <div className="container-sm px-responsive">
+          <header className="flex-between mb-8">
             <div className="flex items-center gap-4">
               <Link 
                 href="/dashboard" 
-                className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] transition" 
+                className="inline-flex items-center gap-2 text-body-sm text-secondary hover:text-brand transition focus-ring rounded-lg px-2 py-1" 
                 data-testid="link-back" 
                 aria-label="Back to dashboard"
               >
-                <ArrowLeft className="w-4 h-4" aria-hidden="true" />
+                <ArrowLeft className="icon-sm" aria-hidden="true" />
                 Back
               </Link>
               <div className="flex items-center gap-3">
-                <div className="icon-container icon-lg icon-gradient-sage">
-                  <Notebook className="w-6 h-6" aria-hidden="true" />
+                <div className="icon-badge icon-badge-sage icon-circle-lg">
+                  <Notebook className="icon-md" aria-hidden="true" />
                 </div>
-                <div>
-                  <h1 className="text-heading-xl text-teal" data-testid="text-title">Journal</h1>
-                  <p className="text-body-sm">Your private space for reflection</p>
+                <div className="stack-xs">
+                  <h1 className="text-display-sm text-brand" data-testid="text-title">Journal</h1>
+                  <p className="text-body-sm text-secondary">Your private space for reflection</p>
                 </div>
               </div>
             </div>
