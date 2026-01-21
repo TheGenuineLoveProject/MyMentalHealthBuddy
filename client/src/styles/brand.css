@@ -1,72 +1,16 @@
-/* Brand Design Tokens - The Genuine Love Project */
+/* Brand Component Styles - The Genuine Love Project */
+/* Token definitions are in brand-tokens.css - this file contains component styles only */
 
-:root {
-  /* Genuine Love Project — Serenity Sage System */
-  --glp-primary: #7FAF9B;
-  --glp-secondary: #F4C7C3;
-  --glp-accent: #D4AF37;
-  --glp-gold: #D4AF37;
-
-  /* Sage palette - LIGHT MODE */
-  --glp-sage: #8FBF9F;
-  --glp-sage-light: #B8D4C4;
-  --glp-sage-deep: #5A8A6E;
-  --glp-sage-deep-rgb: 90, 138, 110;
-
-  /* Blush palette */
-  --glp-blush: #F4C7C3;
-  --glp-clay: #C49A82;
-  --glp-heart: #E07070;
-
-  /* Backgrounds */
-  --glp-bg: #FAF9F7;
-  --glp-paper: #FAF9F7;
-  --glp-mist: #F8FAFC;
-  --glp-ivory: #FFFEF9;
-
-  /* Text */
-  --glp-text: #2D3748;
-  --glp-ink: #2D3748;
-
-  /* Utilities */
-  --glp-border: #E5E7EB;
-  --glp-muted: #6B7280;
-
-  /* Status */
-  --glp-success: #22C55E;
-  --glp-warning: #F59E0B;
-  --glp-danger: #EF4444;
-  --glp-info: #3B82F6;
-}
-
-/* Global “healing luxury” background */
+/* Global "healing luxury" background */
 body {
-  background: linear-gradient(180deg, var(--glp-bg), var(--glp-mist));
+  background: linear-gradient(180deg, var(--glp-bg), var(--glp-surface));
   color: var(--glp-text);
-}
-
-.dark {
-  --glp-sage: #6ea584;
-  --glp-sage-light: #4d8560;
-  --glp-sage-deep: #8fbf9f;
-  
-  --glp-blush: #d4a5a5;
-  --glp-clay: #a87d68;
-  --glp-gold: #c4a558;
-  
-  --glp-ink: #f5f5f5;
-  --glp-paper: #1a202c;
-  --glp-mist: #2d3748;
-  
-  --glp-heart: #c87070;
-  --glp-sun: #d4b048;
-  --glp-forest: #4a9a7a;
 }
 
 /* Navigation Links - Landing variant */
 .nav-link-landing {
-  color: var(--glp-sage-deep);
-  transition: color 0.2s ease;
+  color: var(--glp-primary);
+  transition: color var(--glp-motion-fast) var(--glp-ease);
   padding: 0.25rem 0.5rem;
 }
 
@@ -83,8 +27,9 @@ body {
 .glass-card {
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(var(--glp-sage-deep-rgb), 0.1);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--glp-border);
+  box-shadow: var(--glp-shadow-1);
+  border-radius: var(--glp-radius-2);
 }
 
 .dark .glass-card {
@@ -97,9 +42,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 0.5rem;
-  background: linear-gradient(135deg, var(--glp-sage-light), var(--glp-sage));
-  color: white;
+  border-radius: var(--glp-radius-1);
+  background: linear-gradient(135deg, var(--glp-sage), var(--glp-primary));
+  color: var(--glp-primary-foreground);
 }
 
 .icon-container-sm {
@@ -117,17 +62,55 @@ body {
   height: 2.5rem;
 }
 
+.icon-container-xl {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Icon soft variants */
+.icon-soft-sage {
+  background: rgba(143, 191, 159, 0.15);
+  color: var(--glp-sage);
+}
+
+.icon-soft-teal {
+  background: rgba(var(--glp-sage-deep-rgb), 0.12);
+  color: var(--glp-primary);
+}
+
+.icon-soft-gold {
+  background: rgba(var(--glp-gold-rgb), 0.12);
+  color: var(--glp-gold);
+}
+
+.icon-soft-blush {
+  background: rgba(var(--glp-blush-rgb), 0.2);
+  color: #C87070;
+}
+
+/* Gradient icon containers */
+.icon-gradient-sage {
+  background: linear-gradient(135deg, var(--glp-sage), var(--glp-primary));
+  color: white;
+}
+
+.icon-gradient-gold {
+  background: linear-gradient(135deg, var(--glp-gold), #D4A520);
+  color: #1A1A1A;
+}
+
 /* Enhanced CTA Buttons */
 .btn-premium {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
-  background: linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage));
-  color: white;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--glp-primary), var(--glp-sage));
+  color: var(--glp-primary-foreground);
   font-weight: 600;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
+  border-radius: var(--glp-radius-1);
+  transition: all var(--glp-motion-fast) var(--glp-ease);
   box-shadow: 0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.3);
 }
 
@@ -137,21 +120,32 @@ body {
 }
 
 .btn-premium:focus-visible {
-  outline: 2px solid var(--glp-gold);
+  outline: 2px solid var(--glp-ring);
   outline-offset: 2px;
+}
+
+.btn-premium.btn-lg {
+  padding: 0.875rem 1.75rem;
+  font-size: 1.0625rem;
+}
+
+.btn-premium.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
 }
 
 .btn-secondary-premium {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   background: transparent;
-  color: var(--glp-sage-deep);
+  color: var(--glp-primary);
   font-weight: 600;
-  border: 1.5px solid var(--glp-sage-deep);
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
+  border: 1.5px solid var(--glp-primary);
+  border-radius: var(--glp-radius-1);
+  transition: all var(--glp-motion-fast) var(--glp-ease);
 }
 
 .btn-secondary-premium:hover {
@@ -159,8 +153,237 @@ body {
 }
 
 .btn-secondary-premium:focus-visible {
-  outline: 2px solid var(--glp-sage-deep);
+  outline: 2px solid var(--glp-primary);
   outline-offset: 2px;
+}
+
+.btn-secondary-premium.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  color: var(--glp-text-muted);
+  font-weight: 500;
+  border-radius: var(--glp-radius-1);
+  transition: color var(--glp-motion-fast) var(--glp-ease);
+}
+
+.btn-ghost:hover {
+  color: var(--glp-primary);
+}
+
+/* Typography utilities */
+.text-teal-dark {
+  color: var(--glp-primary);
+}
+
+.text-sage {
+  color: var(--glp-sage);
+}
+
+.text-gold {
+  color: var(--glp-gold);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, var(--glp-primary), var(--glp-sage));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Content layout utilities */
+.content-wrapper {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .content-wrapper {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content-wrapper {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.content-max-lg {
+  max-width: 64rem;
+}
+
+.content-max-md {
+  max-width: 48rem;
+}
+
+.content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hero gradient backgrounds */
+.hero-gradient {
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(var(--glp-sage-rgb), 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(var(--glp-blush-rgb), 0.08), transparent),
+    linear-gradient(180deg, var(--glp-bg), var(--glp-surface));
+}
+
+/* Decorative orbs */
+.decorative-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.decorative-orb-sage {
+  background: radial-gradient(circle, rgba(var(--glp-sage-rgb), 0.4), transparent 70%);
+}
+
+.decorative-orb-blush {
+  background: radial-gradient(circle, rgba(var(--glp-blush-rgb), 0.35), transparent 70%);
+}
+
+.decorative-orb-gold {
+  background: radial-gradient(circle, rgba(var(--glp-gold-rgb), 0.25), transparent 70%);
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  background: var(--glp-surface);
+  border: 1px solid var(--glp-border);
+  color: var(--glp-text-muted);
+}
+
+.badge-sage {
+  background: rgba(var(--glp-sage-rgb), 0.1);
+  border-color: rgba(var(--glp-sage-rgb), 0.2);
+  color: var(--glp-primary);
+}
+
+.badge-gold {
+  background: rgba(var(--glp-gold-rgb), 0.1);
+  border-color: rgba(var(--glp-gold-rgb), 0.2);
+  color: #B08923;
+}
+
+.badge-lg {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+/* Soft background utilities */
+.bg-sage-soft {
+  background: rgba(var(--glp-sage-rgb), 0.08);
+}
+
+.bg-gold-soft {
+  background: rgba(var(--glp-gold-rgb), 0.08);
+}
+
+.bg-blush-soft {
+  background: rgba(var(--glp-blush-rgb), 0.12);
+}
+
+/* Card styles */
+.card-elevated {
+  background: var(--glp-surface);
+  border-radius: var(--glp-radius-2);
+  box-shadow: var(--glp-shadow-1);
+  border: 1px solid var(--glp-border);
+}
+
+.card-bordered {
+  background: var(--glp-surface);
+  border-radius: var(--glp-radius-2);
+  border: 1px solid var(--glp-border);
+  padding: 1.25rem;
+}
+
+/* Animation utilities */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s var(--glp-ease) both;
+}
+
+.animate-bounce-subtle {
+  animation: bounceSubtle 2s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.3); }
+  50% { box-shadow: 0 4px 20px rgba(var(--glp-sage-deep-rgb), 0.5); }
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, var(--glp-surface-2) 25%, var(--glp-surface) 50%, var(--glp-surface-2) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-card {
+  height: 12rem;
+  border-radius: var(--glp-radius-2);
+  background: linear-gradient(90deg, var(--glp-surface-2) 25%, var(--glp-surface) 50%, var(--glp-surface-2) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Gradient mesh background */
+.bg-gradient-mesh {
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(var(--glp-sage-rgb), 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(var(--glp-blush-rgb), 0.08) 0%, transparent 50%),
+    var(--glp-bg);
 }
 
 /* Reduced Motion Support */
@@ -188,7 +411,11 @@ body {
   .animate-fade-in-scale,
   .animate-breathe,
   .animate-pulse-gold,
-  .decorative-orb {
+  .animate-bounce-subtle,
+  .animate-glow-pulse,
+  .decorative-orb,
+  .skeleton,
+  .skeleton-card {
     animation: none !important;
     opacity: 1 !important;
   }
