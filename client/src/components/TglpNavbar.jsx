@@ -1,5 +1,6 @@
 import { Link, useLocation } from "wouter";
 import { Sparkles, BookOpen } from "lucide-react";
+import ModeToggle from "./ModeToggle.jsx";
 
 export default function TglpNavbar() {
   const [location] = useLocation();
@@ -25,7 +26,7 @@ export default function TglpNavbar() {
       <nav className="flex items-center gap-3" aria-label="Main navigation">
         <Link 
           href="/blog" 
-          className="nav-link hidden sm:flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 rounded" 
+          className="nav-link hidden sm:flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
           aria-current={isActive("/blog") ? "page" : undefined}
           data-testid="link-blog"
         >
@@ -34,15 +35,16 @@ export default function TglpNavbar() {
         </Link>
         <Link 
           href="/login" 
-          className="nav-link hidden sm:block focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 rounded" 
+          className="nav-link hidden sm:block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
           aria-current={isActive("/login") ? "page" : undefined}
           data-testid="link-login"
         >
           Sign In
         </Link>
+        <ModeToggle />
         <Link 
           href="/register" 
-          className="btn btn-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2" 
+          className="btn btn-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2" 
           data-testid="link-register"
         >
           <Sparkles className="w-4 h-4" aria-hidden="true" />
