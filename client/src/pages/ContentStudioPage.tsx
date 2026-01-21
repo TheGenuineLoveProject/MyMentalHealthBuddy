@@ -157,7 +157,7 @@ export default function ContentStudioPage() {
             </div>
           </div>
         )}
-        {data.hashtags && (
+        {Array.isArray(data.hashtags) && data.hashtags.length > 0 && (
           <div>
             <p className="text-eyebrow text-[var(--sage-500)]">Hashtags</p>
             <p className="text-body-sm text-[var(--teal-600)]">{data.hashtags.join(" ")}</p>
