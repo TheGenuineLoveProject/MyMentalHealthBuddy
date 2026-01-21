@@ -18,6 +18,8 @@ import {
   Calendar,
   BarChart3
 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const behaviorModules = [
   {
@@ -237,6 +239,11 @@ const implementationSteps = [
 export default function BehaviorChangePage() {
   const [selectedModule, setSelectedModule] = useState(behaviorModules[0]);
 
+  useSEO({
+    title: "Behavior Change",
+    description: "Science-backed tools for building healthy habits, breaking patterns, and sustainable behavior change for your wellness journey.",
+  });
+
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
@@ -375,7 +382,16 @@ export default function BehaviorChangePage() {
             </Link>
           </section>
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
+          <RelatedNextSteps 
+            steps={[
+              { title: "Daily Routines", description: "Build sustainable daily wellness habits", path: "/daily-routines" },
+              { title: "Gratitude Practice", description: "Cultivate appreciation and positivity", path: "/gratitude" },
+              { title: "Journal Reflection", description: "Track your progress and insights", path: "/guided-journaling" },
+            ]}
+            title="Continue Your Journey"
+          />
+
+          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 mt-8">
             <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
               <strong>Remember:</strong> Behavior change takes time and patience. Be compassionate with yourself through setbacks—they're 
               part of the process. For deeply ingrained patterns, consider working with a therapist or coach.

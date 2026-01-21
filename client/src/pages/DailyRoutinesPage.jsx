@@ -24,6 +24,8 @@ import {
   Timer,
   Star
 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const routines = [
   {
@@ -229,6 +231,11 @@ export default function DailyRoutinesPage() {
   const [selectedRoutine, setSelectedRoutine] = useState(routines[0]);
   const [completedActivities, setCompletedActivities] = useState({});
 
+  useSEO({
+    title: "Daily Routines",
+    description: "Wellness routines for morning, afternoon, and evening. Build sustainable daily habits for mental and emotional wellbeing.",
+  });
+
   const toggleActivity = (routineId, activityIndex) => {
     const key = `${routineId}-${activityIndex}`;
     setCompletedActivities(prev => ({
@@ -362,7 +369,16 @@ export default function DailyRoutinesPage() {
             </div>
           </div>
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
+          <RelatedNextSteps 
+            steps={[
+              { title: "Behavior Change", description: "Science-backed habit building", path: "/behavior-change" },
+              { title: "Body Wellness", description: "Physical wellbeing practices", path: "/body-wellness" },
+              { title: "Meditation Guide", description: "Deepen your mindfulness practice", path: "/meditation-guide" },
+            ]}
+            title="Continue Your Journey"
+          />
+
+          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 mt-8">
             <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
               <strong>Start Small:</strong> Don't try to implement everything at once. Pick 1-2 activities from one routine 
               and practice consistently for 2 weeks before adding more. Consistency beats perfection.

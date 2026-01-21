@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Brain, Eye, Ear, MessageCircle, Users, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const emotionWheel = {
   core: [
@@ -219,6 +221,11 @@ function EmotionWheelSection() {
 export default function EmotionalIntelligencePage() {
   const [selectedPillar, setSelectedPillar] = useState(eqPillars[0]);
 
+  useSEO({
+    title: "Emotional Intelligence",
+    description: "Develop self-awareness, empathy, and emotional regulation skills. Explore the emotion wheel and EQ pillars for deeper understanding.",
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white dark:from-slate-900 dark:to-slate-950">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -284,7 +291,16 @@ export default function EmotionalIntelligencePage() {
           </div>
         </div>
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
+        <RelatedNextSteps 
+          steps={[
+            { title: "Self-Compassion", description: "Cultivate kindness toward yourself", path: "/self-compassion" },
+            { title: "Cognitive Tools", description: "Work with thoughts and patterns", path: "/cognitive-tools" },
+            { title: "Journal Reflection", description: "Explore your emotional insights", path: "/guided-journaling" },
+          ]}
+          title="Continue Your Journey"
+        />
+
+        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
           <p className="text-sm text-slate-500 dark:text-slate-500">
             Developing emotional intelligence is a lifelong journey. Be patient and compassionate with yourself.
             For deeper work, consider working with a therapist or coach.

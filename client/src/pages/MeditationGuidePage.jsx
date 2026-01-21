@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Moon, Sun, Cloud, Leaf, Heart, Brain, Clock, Play, Pause, Volume2 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const meditations = [
   {
@@ -280,6 +282,11 @@ export default function MeditationGuidePage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedMeditation, setSelectedMeditation] = useState(meditations[0]);
 
+  useSEO({
+    title: "Meditation Guide",
+    description: "Guided meditations for relaxation, focus, and healing. Body scans, loving-kindness, and mindfulness practices for inner peace.",
+  });
+
   const filteredMeditations = selectedCategory === "all" 
     ? meditations 
     : meditations.filter(m => m.category === selectedCategory);
@@ -352,6 +359,15 @@ export default function MeditationGuidePage() {
             <MeditationPlayer meditation={selectedMeditation} />
           </div>
         </div>
+
+        <RelatedNextSteps 
+          steps={[
+            { title: "Breathing Exercises", description: "Foundation for meditation", path: "/breathing-exercises" },
+            { title: "Calming Scenes", description: "Visual relaxation journeys", path: "/calming-scenes" },
+            { title: "Body Wellness", description: "Physical practices for peace", path: "/body-wellness" },
+          ]}
+          title="Continue Your Journey"
+        />
 
         <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
           <p className="text-sm text-slate-500 dark:text-slate-500">

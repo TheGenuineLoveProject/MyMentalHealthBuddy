@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Anchor, Eye, Hand, Ear, Heart, Footprints, Sparkles, CheckCircle2 } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const techniques = [
   {
@@ -203,6 +205,11 @@ function TechniqueDetail({ technique }) {
 export default function GroundingTechniquesPage() {
   const [selectedTechnique, setSelectedTechnique] = useState(techniques[0]);
 
+  useSEO({
+    title: "Grounding Techniques",
+    description: "Calming grounding exercises to reconnect with the present moment. 5-4-3-2-1 senses, body awareness, and anchoring practices.",
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white dark:from-slate-900 dark:to-slate-950">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -237,6 +244,15 @@ export default function GroundingTechniquesPage() {
             <TechniqueDetail technique={selectedTechnique} />
           </div>
         </div>
+
+        <RelatedNextSteps 
+          steps={[
+            { title: "Breathing Exercises", description: "Calm your nervous system", path: "/breathing-exercises" },
+            { title: "Calming Scenes", description: "Visualize peaceful environments", path: "/calming-scenes" },
+            { title: "Crisis Resources", description: "Immediate support when needed", path: "/crisis-resources" },
+          ]}
+          title="Continue Your Journey"
+        />
 
         <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
           <p className="text-sm text-slate-500 dark:text-slate-500">

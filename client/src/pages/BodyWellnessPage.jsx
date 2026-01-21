@@ -19,6 +19,8 @@ import {
   Hand
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const bodyCategories = [
   {
@@ -301,6 +303,11 @@ export default function BodyWellnessPage() {
   const [selectedCategory, setSelectedCategory] = useState(bodyCategories[0]);
   const [expandedPractice, setExpandedPractice] = useState(null);
 
+  useSEO({
+    title: "Body Wellness",
+    description: "Gentle movement, nutrition, sleep, and body-based practices for holistic physical wellbeing and mind-body connection.",
+  });
+
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
@@ -448,7 +455,16 @@ export default function BodyWellnessPage() {
             </Link>
           </section>
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
+          <RelatedNextSteps 
+            steps={[
+              { title: "Breathing Exercises", description: "Calm your nervous system", path: "/breathing-exercises" },
+              { title: "Meditation Guide", description: "Deepen your mind-body connection", path: "/meditation-guide" },
+              { title: "Grounding Techniques", description: "Connect with the present moment", path: "/grounding-techniques" },
+            ]}
+            title="Continue Your Journey"
+          />
+
+          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 mt-8">
             <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
               <strong>Gentle Reminder:</strong> Listen to your body. If any practice feels uncomfortable, stop and try something else. 
               For chronic pain or physical conditions, consult a healthcare provider before starting new practices.
