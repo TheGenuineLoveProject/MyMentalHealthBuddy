@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, BookOpen, Search, ChevronRight, Filter } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
 
 const glossaryTerms = [
   { term: "Affirmation", category: "Practice", definition: "A positive statement repeated to reinforce self-belief and counter negative thought patterns. Most effective when stated in present tense ('I am') with emotional engagement.", example: "'I am worthy of love and belonging' - spoken daily, especially when self-doubt arises." },
@@ -48,6 +49,11 @@ const categories = [...new Set(glossaryTerms.map(t => t.category))].sort();
 export default function GlossaryPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useSEO({
+    title: "Mental Health Glossary",
+    description: "Comprehensive glossary of mental health, psychology, and wellness terms. Learn about therapy concepts, neuroscience, emotional regulation, and healing practices.",
+  });
 
   const filteredTerms = useMemo(() => {
     return glossaryTerms.filter(term => {

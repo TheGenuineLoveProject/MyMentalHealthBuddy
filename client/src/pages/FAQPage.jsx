@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, HelpCircle, ChevronDown, ChevronUp, MessageCircle, Shield, Heart, Sparkles } from "lucide-react";
+import { useSEO, createFAQSchema } from "../hooks/useSEO";
 
 const faqs = [
   {
@@ -171,6 +172,22 @@ function FAQItem({ question, answer }) {
 }
 
 export default function FAQPage() {
+  const faqItems = useMemo(() => {
+    const items = [];
+    faqs.forEach(category => {
+      category.questions.forEach(q => {
+        items.push({ question: q.q, answer: q.a });
+      });
+    });
+    return items;
+  }, []);
+
+  useSEO({
+    title: "FAQ",
+    description: "Frequently asked questions about The Genuine Love Project - mental wellness, trauma healing, therapy tools, and getting started with your healing journey.",
+    jsonLd: createFAQSchema(faqItems),
+  });
+
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

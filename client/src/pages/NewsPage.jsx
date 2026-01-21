@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { 
   Newspaper, Calendar, Heart, Brain, Sparkles, 
   BookOpen, ArrowRight, Clock, Star, TrendingUp
 } from "lucide-react";
 import { BRAND } from "@shared/brand";
+import { useSEO, createArticleSchema } from "../hooks/useSEO";
 
 const NEWS_CATEGORIES = [
   { id: "all", label: "All Updates", icon: Newspaper },
@@ -108,6 +109,23 @@ const WELLNESS_TIPS = [
 export default function NewsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [tipIndex] = useState(() => Math.floor(Math.random() * WELLNESS_TIPS.length));
+
+  const latestArticle = NEWS_ARTICLES[0];
+  const newsJsonLd = useMemo(() => {
+    if (!latestArticle) return null;
+    return createArticleSchema(
+      latestArticle.title,
+      latestArticle.summary,
+      latestArticle.date
+    );
+  }, []);
+
+  useSEO({
+    title: "News & Updates",
+    description: "Latest wellness tips, research insights, and platform updates from The Genuine Love Project. Stay informed about mental health and healing practices.",
+    ogType: "article",
+    jsonLd: newsJsonLd,
+  });
 
   const filteredArticles = activeCategory === "all" 
     ? NEWS_ARTICLES 

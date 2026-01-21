@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap } from "lucide-react";
+import { useSEO } from "../hooks/useSEO";
+import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const exercises = [
   {
@@ -198,6 +200,11 @@ export default function BreathingExercisesPage() {
   const [selectedExercise, setSelectedExercise] = useState(exercises[0]);
   const [completed, setCompleted] = useState(false);
 
+  useSEO({
+    title: "Breathing Exercises",
+    description: "Guided breathing exercises for stress relief, anxiety reduction, and relaxation. Box breathing, 4-7-8 technique, coherent breathing, and more.",
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white dark:from-slate-900 dark:to-slate-950">
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -287,6 +294,15 @@ export default function BreathingExercisesPage() {
             </div>
           </div>
         </div>
+
+        <RelatedNextSteps 
+          steps={[
+            { title: "Grounding Techniques", description: "Combine with grounding for deeper calm", path: "/grounding" },
+            { title: "Save to Journal", description: "Reflect on your breathing practice", path: "/journal" },
+            { title: "Sleep Guide", description: "Use breathwork for better sleep", path: "/sleep-guide" },
+          ]}
+          title="Continue Your Journey"
+        />
 
         <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
           <p className="text-sm text-slate-500 dark:text-slate-500">

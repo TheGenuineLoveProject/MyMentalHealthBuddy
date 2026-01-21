@@ -8,6 +8,7 @@ import {
 import { BRAND } from "@shared/brand";
 import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import StartHerePathways from "../components/StartHerePathways.jsx";
+import { useSEO, createWebSiteSchema } from "../hooks/useSEO";
 
 const HEALING_CATEGORIES = [
   { id: "all", label: "All Modalities", icon: Library },
@@ -133,6 +134,12 @@ const HEALING_MODALITIES = [
 export default function HealingLibraryPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [expandedModality, setExpandedModality] = useState(null);
+
+  useSEO({
+    title: "Healing Library",
+    description: "Explore evidence-based healing modalities for mind, body, and soul. Discover somatic healing, mindfulness, cognitive therapy, and integrative wellness practices.",
+    jsonLd: createWebSiteSchema(),
+  });
 
   const filteredModalities = activeCategory === "all"
     ? HEALING_MODALITIES
