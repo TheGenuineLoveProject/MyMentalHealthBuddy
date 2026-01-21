@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, Newspaper, HelpCircle, LifeBuoy, Palette, Activity, Microscope, Zap, Baby, MapPin, Target, Clock, RefreshCw, FileText } from "lucide-react";
+import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, Newspaper, HelpCircle, LifeBuoy, Palette, Activity, Microscope, Zap, Baby, MapPin, Target, Clock, RefreshCw, FileText, Lightbulb, MessageCircle, Compass } from "lucide-react";
 
 const toolCategories = [
   {
@@ -47,9 +47,12 @@ const toolCategories = [
     description: "Understand yourself better with evidence-based resources",
     color: "from-indigo-400 to-purple-500",
     tools: [
+      { name: "Content Library", description: "Browse all wellness content in one place", href: "/content-index", icon: Compass },
+      { name: "Practical Examples", description: "Real scenarios with step-by-step solutions", href: "/examples", icon: Lightbulb },
+      { name: "Q&A Center", description: "Answers to common wellness questions", href: "/qa", icon: MessageCircle },
       { name: "How-To Guides", description: "Step-by-step tool instructions", href: "/how-to-guides", icon: FileText },
       { name: "Research & Evidence", description: "The science behind healing practices", href: "/research", icon: Microscope },
-      { name: "Wellness Glossary", description: "Definitions and examples of key concepts", href: "/glossary", icon: BookOpen }
+      { name: "Wellness Glossary", description: "38 key terms with definitions", href: "/glossary-full", icon: BookOpen }
     ]
   },
   {

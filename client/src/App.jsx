@@ -99,6 +99,9 @@ const DailyRoutinesPage = lazy(() => import("./pages/DailyRoutinesPage.jsx"));
 const CognitiveToolsPage = lazy(() => import("./pages/CognitiveToolsPage.jsx"));
 const GlossaryPage = lazy(() => import("./pages/GlossaryPage.jsx"));
 const ResourcesPage = lazy(() => import("./pages/ResourcesPage.jsx"));
+const ContentIndexPage = lazy(() => import("./pages/ContentIndexPage.jsx"));
+const ExamplesPage = lazy(() => import("./pages/ExamplesPage.jsx"));
+const QAPage = lazy(() => import("./pages/QAPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -248,6 +251,9 @@ export default function App() {
               <Route path="/cognitive-tools" component={CognitiveToolsPage} />
               <Route path="/glossary-full" component={GlossaryPage} />
               <Route path="/professional-resources" component={ResourcesPage} />
+              <Route path="/content-index" component={ContentIndexPage} />
+              <Route path="/examples" component={ExamplesPage} />
+              <Route path="/qa" component={QAPage} />
               <Route path="/mirror">
                 <RouteGuard>
                   <MirrorPage />

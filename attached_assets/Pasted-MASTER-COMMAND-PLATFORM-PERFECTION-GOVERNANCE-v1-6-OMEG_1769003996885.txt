@@ -1,0 +1,184 @@
+MASTER COMMAND — PLATFORM PERFECTION GOVERNANCE (v1.6 “OMEGA 360° CONTENT HYPERLOOP”)
+Repo: The Genuine Love Project
+
+Objective:
+Deliver production-grade correctness + premium “healing-luxury” UX AND a structured knowledge/content system:
+- Index + News + Q&A + Glossary/Definitions + Examples
+- Resources/Referrals directory (non-medical, supportive)
+- Workflow/schema fixes where required
+- Automation loop for continuous improvement
+WITHOUT scope creep or breaking tests/audits.
+
+ABSOLUTE RULE: WORK IN WAVES WITH HARD GATES.
+Wave 1 must be green before Wave 2 begins.
+Wave 2 must be green before Wave 3 begins.
+
+══════════════════════════════════════════════════════════════════════
+HARD CONSTRAINTS (NON-NEGOTIABLE)
+1) Do NOT rename/refactor existing CSS variable names. Keep all `--glp-*` EXACT.
+2) No raw hex colors anywhere except: `client/src/styles/brand-tokens.css`.
+3) Fonts allowed ONLY: Inter + Playfair Display (+ system fallbacks). No other fonts.
+4) All internal navigation links MUST match canonical routes in `client/src/App.jsx` exactly.
+5) Prefer minimal diffs; no broad rewrites. Use tokens + Tailwind semantic classes.
+6) Do NOT loosen/bypass tests/audits. Fix root causes.
+7) DO NOT add dependencies unless strictly necessary (must justify).
+8) Brand safety: uplifting tone OK, but DO NOT make medical claims, promise cures, or present content as medical advice.
+
+══════════════════════════════════════════════════════════════════════
+SOURCE OF TRUTH
+- Router: client/src/App.jsx
+- Tokens: client/src/styles/brand-tokens.css
+- Audits: tools/nav-link-audit.mjs, tools/visual-doctor.mjs
+- Reports: docs/NAV_LINK_AUDIT.md, docs/VISUAL_DOCTOR_REPORT.md
+- Auth routes: server/routes/auth.mjs (or equivalent)
+- Tests: tests/auth.test.mjs + server/tests/* (if present)
+
+══════════════════════════════════════════════════════════════════════
+EXECUTION: 4 AGENTS IN SEQUENCE (STRICT ORDER)
+Agent 1: QA Guardian (Auth/Admin determinism)
+Agent 2: UX Finisher (UI consistency + modes + nav + 404)
+Agent 3: Content System Builder (Index/News/Q&A/Glossary/Examples/Resources + schema)
+Agent 4: Ops Automator (governance loop + content pipeline + docs)
+
+NO AGENT MAY START UNTIL PREVIOUS AGENT IS GREEN.
+
+══════════════════════════════════════════════════════════════════════
+WAVE 1 — PLATFORM STABILITY (AUTH + AUDITS + UX)
+Gate: MUST PASS `npm run test:auth` AND `npm run audit` before Wave 2.
+
+PHASE 0 — BASELINE EVIDENCE
+Run and capture output snippets for final report:
+- node -v
+- npm -v
+- npm install
+- lsof -i :5000 || true
+- kill -9 $(lsof -t -i :5000) 2>/dev/null || true
+- lsof -i :3000 || true
+- kill -9 $(lsof -t -i :3000) 2>/dev/null || true
+- npm run test:auth || npx vitest run tests/auth.test.mjs
+- npm run audit
+
+AGENT 1 — QA GUARDIAN
+Goal: tests deterministic; no ECONNREFUSED/EADDRINUSE; admin enforcement server-side.
+1) Make test:auth deterministic: start/stop server automatically; wait /api/health; teardown always.
+2) Auth safe statuses (only if needed): 400 missing; 401 invalid/rate-limited “Invalid credentials”; 401 unauth; 403 non-admin admin.
+3) Verify until green:
+   - npm run test:auth || npx vitest run tests/auth.test.mjs
+
+AGENT 2 — UX FINISHER
+Goal: premium healing-luxury, token-driven, high contrast; modes; nav lockdown; 404.
+1) Fix washed-out UI: raise text contrast via tokens, reduce divider noise, strengthen CTAs, improve card separation, forms readable.
+2) Modes: Default/Low-Stim/Reading via html data-mode, pre-paint apply, persist glp-mode, toggle in Header+Settings, accessible.
+3) Nav: all links must match App.jsx routes exactly (no drift).
+4) NotFound: premium 404 with 4–6 real quick links from App.jsx.
+5) Verify:
+   - npm run audit
+   - confirm docs/NAV_LINK_AUDIT.md = 0 broken
+   - confirm docs/VISUAL_DOCTOR_REPORT.md = 0 violations
+
+WAVE 1 GATE (MUST BE GREEN):
+- npm run test:auth passes
+- npm run audit passes
+STOP if not green; hyperloop only within failing scope.
+
+══════════════════════════════════════════════════════════════════════
+WAVE 2 — CONTENT SYSTEM EXPANSION (STRUCTURED, NON-MEDICAL, ENGAGING)
+Gate: Must keep audits passing; new routes allowed ONLY if added to App.jsx and fully linked/audited.
+
+AGENT 3 — CONTENT SYSTEM BUILDER (INDEX + NEWS + Q&A + GLOSSARY + EXAMPLES + RESOURCES)
+Goal: add structured content modules that are searchable, consistent, and safe.
+
+A) INFORMATION ARCHITECTURE (IA) + ROUTES (minimal, intentional)
+Implement ONLY these new sections (if not present), with clear route names and nav links updated to match:
+1) /index (or /library): “Index” page that lists all content modules and categories
+2) /news: “News/Updates” page (platform updates + curated links)
+3) /qa: “Q&A” page (common questions with expandable answers)
+4) /glossary: “Definitions/Terms” page (A–Z glossary + search/filter)
+5) /examples: “Examples” page (practical scenarios + step-by-step)
+6) /resources: “Resources” page (professional resources + referral guidance; non-medical)
+
+Do NOT create more pages than these in this wave.
+
+B) CONTENT MODEL (choose the smallest approach)
+Preferred:
+- JSON or MD files in a single content directory, e.g. `client/src/content/*`
+- A simple loader/helper that reads the data and renders cards/sections.
+If the repo already uses a CMS/data layer, reuse it; do not introduce a new one.
+
+C) QUALITY RULES FOR CONTENT (STRICT)
+- No medical claims, no “cures”, no diagnosing.
+- Use supportive educational language.
+- Each module includes:
+  - a short definition
+  - 3–7 bullet key points
+  - 1–3 examples
+  - a “Try this next” (non-clinical)
+  - a “When to seek professional help” note in neutral terms (optional)
+- Add citations/attribution sections ONLY if the repo already uses citations; otherwise keep it general.
+
+D) FEATURES (small but powerful)
+- Search/filter for glossary (client-side)
+- Expand/collapse for Q&A
+- “Updated” timestamps for News entries (manual)
+- Consistent UI components using existing tokens
+
+E) NAV + AUDITS
+- Add links to Header/Footer only if it doesn’t clutter; otherwise add to Index page.
+- Ensure EVERY internal link matches App.jsx routes.
+
+F) VERIFY WAVE 2
+- npm run audit must pass
+- nav-link audit must show 0 broken
+- visual-doctor must show 0 violations
+
+WAVE 2 GATE:
+- audits still green
+- new pages exist, accessible, and consistent
+
+══════════════════════════════════════════════════════════════════════
+WAVE 3 — OPS + AUTOMATION + CONTINUOUS EVOLUTION (NO DEPENDENCIES)
+AGENT 4 — OPS AUTOMATOR
+Goal: “self-evolving” platform loop via governance scripts + content maintenance workflow.
+
+A) PURE NODE GOVERNANCE LOOP (NO BASH ASSUMPTIONS)
+Create `tools/governance-loop.mjs`:
+- node -v, npm -v, npm install
+- npm run test:auth (fallback: npx vitest run tests/auth.test.mjs)
+- npm run audit
+- if build script exists: npm run build
+Add package.json script:
+- "governance:loop": "node tools/governance-loop.mjs"
+Document in README.
+
+B) CONTENT MAINTENANCE WORKFLOW (NO NEW DEPS)
+Create `docs/CONTENT_WORKFLOW.md`:
+- how to add glossary terms
+- how to add Q&A entries
+- how to add news posts
+- tone rules (uplifting, non-medical)
+- review checklist (broken links, readability, token compliance)
+
+C) GOVERNANCE DOCS KIT
+Create/update:
+- docs/COLOR_SYSTEM.md
+- docs/TYPOGRAPHY_GUIDE.md
+- docs/CANVA_TEMPLATE_SPECS.md (1080x1080 + 1080x1920 + naming)
+- docs/OPS_PLAYBOOK.md (release checklist + RBAC note + safety guardrails)
+- README.md: audits + mode switching + governance:loop
+
+D) FINAL VERIFICATION
+- npm run test:auth
+- npm run audit
+- (if build exists) npm run build
+
+══════════════════════════════════════════════════════════════════════
+FINAL RESPONSE FORMAT (MANDATORY)
+1) Wave 1–3 checklist (pass/fail).
+2) Exact commands run + results (key excerpts).
+3) Files changed (each with 1-line summary).
+4) All new routes added (path list).
+5) NotFound Quick Links (label + path).
+6) Rollback steps (git checkout -- file list; reset warning).
+7) OPTIONAL ideas (NOT implemented unless asked).
+
+Proceed now. Do not stop early. Verify, then report.

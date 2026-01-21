@@ -1,11 +1,11 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T13:53:08.422Z`
+Generated: `2026-01-21T14:05:18.721Z`
 
 ## Summary
-- Files scanned: **904**
-- Routes detected: **89**
-- Link occurrences: **525**
+- Files scanned: **910**
+- Routes detected: **92**
+- Link occurrences: **535**
 - Broken: **0**
 - Warnings: **0**
 
@@ -67,6 +67,9 @@ Generated: `2026-01-21T13:53:08.422Z`
 - `/cognitive-tools`
 - `/glossary-full`
 - `/professional-resources`
+- `/content-index`
+- `/examples`
+- `/qa`
 - `/mirror`
 - `/community`
 - `/tools`
@@ -87,10 +90,7 @@ Generated: `2026-01-21T13:53:08.422Z`
 - `/progress`
 - `/wisdom-synthesis`
 - `/cognitive-architecture`
-- `/philosophical-inquiry`
-- `/daily-wisdom`
-- `/systems-thinking`
-- … (9 more)
+- … (12 more)
 
 ## Broken Links
 ✅ None
