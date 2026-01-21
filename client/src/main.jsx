@@ -1,8 +1,16 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { applyBrand } from "./lib/brand";
+import { initUIMode } from "./lib/mode";
 import "./index.css";
 import "./styles/brand.css";
+
+// Apply mode BEFORE first paint to prevent FOUC
+try {
+  initUIMode();
+} catch (err) {
+  console.warn('Mode initialization failed:', err);
+}
 
 // Safe initialization - never let branding errors prevent app render
 try {
