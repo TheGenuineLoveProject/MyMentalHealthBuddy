@@ -59,10 +59,33 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 
 ## Design System
 
+### Visual Modes (3 Modes)
+Toggle modes by setting `document.documentElement.dataset.mode`:
+- **Default**: Standard brand palette with Deep Teal primary + Gold accent
+- **Low-Stim**: `data-mode="low-stim"` - Reduced shadows, softer gold, minimal decoration
+- **Reading**: `data-mode="reading"` - Maximum legibility, white surfaces, darker text
+
+Example: `document.documentElement.dataset.mode = "low-stim"`
+
+### Design Token System
+- **Source of Truth**: `client/src/styles/brand-tokens.css`
+- **Core Palette**: `--glp-sage`, `--glp-blush`, `--glp-sage-deep` (Deep Teal), `--glp-paper` (Ivory), `--glp-ink` (Charcoal), `--glp-gold`
+- **Semantic Tokens**: `--bg`, `--text-1`, `--text-2`, `--surface-1`, `--surface-2`, `--primary`, `--primary-contrast`, `--accent`, `--ring`, `--border`
+- **RGB Helpers**: `--glp-ink-rgb`, `--glp-paper-rgb`, `--glp-sage-deep-rgb`, `--glp-gold-rgb`
+
 ### Visual Doctor Tool
-- **Script**: `npm run visual:doctor` - scans all components for raw hex colors
+- **Script**: `npm run visual:doctor` - scans all components for raw hex colors, font violations, and inline style issues
 - **Report**: `docs/VISUAL_DOCTOR_REPORT.md` - auto-generated audit report
-- **Enforcement**: Fails build if raw hex colors found outside token files
+- **Enforcement**: Fails CI if violations found outside allowed token files
+
+### Navigation Link Audit
+- **Script**: `npm run nav:audit` - extracts routes from App.jsx and scans for broken links
+- **Report**: `docs/NAV_LINK_AUDIT.md` - auto-generated audit report
+- **Routes Doc**: `docs/ROUTES.md` - authoritative route list (57 routes)
+- **Enforcement**: Fails CI if broken internal links found
+
+### Combined Audit
+- **Script**: `npm run audit` - runs both nav:audit and visual:doctor
 
 ### Premium Visual System (January 2026)
 - **Typography Tokens**: Font families, weights (300-800), letter spacing, line heights
@@ -81,6 +104,6 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 - **Animations**: `animate-pulse-ring`, `animate-float`, `animate-fade-in-up-delayed`
 
 ### Build Metrics
-- **Build Time**: ~16 seconds
-- **Visual Doctor**: 267 files clean, 0 hex violations
-- **Navigation Audit**: 0 broken links
+- **Build Time**: ~15.6 seconds
+- **Visual Doctor**: 279 files clean, 0 violations
+- **Navigation Audit**: 57 routes, 0 broken links
