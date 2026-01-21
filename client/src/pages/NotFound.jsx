@@ -1,12 +1,14 @@
 import { Link } from "wouter";
-import { Home, ArrowLeft, Search, Heart, MessageSquare, BookOpen, BarChart3 } from "lucide-react";
+import { Home, ArrowLeft, Search, Heart, MessageSquare, BookOpen, BarChart3, Sparkles, Activity } from "lucide-react";
 import SEO from "../components/SEO";
 
 const QUICK_LINKS = [
-  { href: "/", label: "Home", icon: Home, description: "Return to the homepage" },
-  { href: "/dashboard", label: "Dashboard", icon: BarChart3, description: "View your wellness dashboard" },
-  { href: "/chat", label: "AI Chat", icon: MessageSquare, description: "Talk to your wellness companion" },
-  { href: "/journal", label: "Journal", icon: BookOpen, description: "Write in your journal" },
+  { href: "/", label: "Home", icon: Home },
+  { href: "/dashboard", label: "Dashboard", icon: BarChart3 },
+  { href: "/chat", label: "AI Chat", icon: MessageSquare },
+  { href: "/journal", label: "Journal", icon: BookOpen },
+  { href: "/mood", label: "Mood", icon: Activity },
+  { href: "/wellness", label: "Wellness", icon: Sparkles },
 ];
 
 export default function NotFound() {
@@ -34,15 +36,15 @@ export default function NotFound() {
           </Link>
           
           <div className="glass-premium rounded-2xl p-8 md:p-12">
-            <div className="mb-8">
-              <div className="text-8xl md:text-9xl font-display font-bold bg-gradient-to-r from-[var(--primary)] via-[var(--primary-light)] to-[var(--accent-gold)] bg-clip-text text-transparent mb-4">
+            <div className="mb-10">
+              <div className="text-8xl md:text-9xl font-display font-bold bg-gradient-to-r from-[var(--glp-primary)] via-[var(--glp-sage)] to-[var(--glp-gold)] bg-clip-text text-transparent mb-6 leading-none">
                 404
               </div>
-              <h1 className="text-2xl md:text-3xl font-display font-bold text-[var(--text)] mb-3" data-testid="text-title">
-                Oops! Page Not Found
+              <h1 className="text-2xl md:text-3xl font-display font-semibold text-[var(--glp-primary)] mb-4" data-testid="text-title">
+                Page Not Found
               </h1>
-              <p className="text-[var(--text-secondary)] max-w-md mx-auto">
-                The page you're looking for seems to have wandered off. Don't worry, it happens to the best of us. Let's get you back on track.
+              <p className="text-[var(--text-2)] max-w-md mx-auto leading-relaxed">
+                The page you're looking for seems to have wandered off. Let's guide you back to a place of calm.
               </p>
             </div>
 
@@ -66,11 +68,11 @@ export default function NotFound() {
             </div>
 
             <div className="border-t border-[var(--border)] pt-8">
-              <h2 className="text-sm font-medium text-[var(--text-muted)] uppercase tracking-wider mb-4 flex items-center justify-center gap-2">
+              <h2 className="text-sm font-medium text-[var(--text-2)] uppercase tracking-wider mb-5 flex items-center justify-center gap-2">
                 <Search className="w-4 h-4" aria-hidden="true" />
-                Quick Links
+                Try These Instead
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {QUICK_LINKS.map((link) => {
                   const Icon = link.icon;
                   return (
