@@ -154,6 +154,18 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(var(--glp-sage-rgb), 0.15);
 }
 
+.nav-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--glp-gold);
+}
+
+/* Global link focus styles */
+a:focus-visible {
+  outline: 2px solid var(--glp-gold);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* Section styles */
 .section-header {
   text-align: center;
@@ -2246,15 +2258,17 @@ a, a:visited {
   transition: all 0.2s ease;
 }
 
-/* Icon sizes */
-.icon-2xs { width: 0.875rem; height: 0.875rem; }
-.icon-xs { width: 1rem; height: 1rem; }
-.icon-sm { width: 1.25rem; height: 1.25rem; }
-.icon-md { width: 1.5rem; height: 1.5rem; }
-.icon-lg { width: 1.75rem; height: 1.75rem; }
-.icon-xl { width: 2rem; height: 2rem; }
-.icon-2xl { width: 2.5rem; height: 2.5rem; }
-.icon-3xl { width: 3rem; height: 3rem; }
+/* Icon sizes - standardized with 24px (1.5rem) as base */
+.icon-3xs { width: 0.75rem; height: 0.75rem; }   /* 12px */
+.icon-2xs { width: 0.875rem; height: 0.875rem; } /* 14px */
+.icon-xs { width: 1rem; height: 1rem; }          /* 16px */
+.icon-sm { width: 1.25rem; height: 1.25rem; }    /* 20px */
+.icon-base { width: 1.5rem; height: 1.5rem; }    /* 24px - standard base */
+.icon-md { width: 1.5rem; height: 1.5rem; }      /* 24px */
+.icon-lg { width: 1.75rem; height: 1.75rem; }    /* 28px */
+.icon-xl { width: 2rem; height: 2rem; }          /* 32px */
+.icon-2xl { width: 2.5rem; height: 2.5rem; }     /* 40px */
+.icon-3xl { width: 3rem; height: 3rem; }         /* 48px */
 
 /* Icon container sizes */
 .icon-container.icon-sm { width: 2rem; height: 2rem; }
@@ -2363,6 +2377,11 @@ a, a:visited {
   transform: translateY(0);
 }
 
+.btn-premium:focus-visible {
+  outline: none;
+  box-shadow: 0 4px 16px rgba(42, 84, 84, 0.25), 0 0 0 3px var(--glp-gold);
+}
+
 /* Secondary premium button */
 .btn-secondary-premium {
   display: inline-flex;
@@ -2386,6 +2405,11 @@ a, a:visited {
   transform: translateY(-1px);
 }
 
+.btn-secondary-premium:focus-visible {
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05), 0 0 0 3px var(--glp-gold);
+}
+
 /* Ghost button */
 .btn-ghost {
   display: inline-flex;
@@ -2403,6 +2427,11 @@ a, a:visited {
 
 .btn-ghost:hover {
   background: var(--sage-100);
+}
+
+.btn-ghost:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--glp-gold);
 }
 
 /* Button sizes */
