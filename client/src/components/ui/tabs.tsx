@@ -41,7 +41,7 @@ const TabsList = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         ref={ref}
         role="tablist"
         aria-orientation="horizontal"
-        className={`inline-flex h-10 items-center justify-center rounded-md bg-gray-100 p-1 text-gray-500 dark:bg-gray-800 dark:text-gray-400 ${className}`}
+        className={`inline-flex h-10 items-center justify-center rounded-xl bg-[var(--glp-sage-100)] p-1 text-[var(--glp-text-secondary)] dark:bg-[var(--glp-teal-800)] dark:text-[var(--glp-teal-300)] ${className}`}
         {...props}
       />
     );
@@ -78,10 +78,10 @@ const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         tabIndex={isSelected ? 0 : -1}
         onClick={() => onValueChange(value)}
         onKeyDown={handleKeyDown}
-        className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+        className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3 py-1.5 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
           isSelected
-            ? "bg-white text-gray-900 shadow-sm dark:bg-gray-900 dark:text-gray-100"
-            : "hover:bg-gray-50 dark:hover:bg-gray-700"
+            ? "bg-[var(--glp-surface)] text-[var(--glp-teal-700)] shadow-[var(--glp-shadow-sm)] dark:bg-[var(--glp-teal-900)] dark:text-[var(--glp-paper)]"
+            : "hover:bg-[var(--glp-sage-50)] dark:hover:bg-[var(--glp-teal-700)]"
         } ${className}`}
         data-state={isSelected ? "active" : "inactive"}
         {...props}
@@ -110,7 +110,7 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
         id={panelId}
         aria-labelledby={triggerId}
         tabIndex={0}
-        className={`mt-2 focus-visible:outline-none focus-visible:ring-2 ${className}`}
+        className={`mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] ${className}`}
         {...props}
       />
     );
