@@ -3,8 +3,8 @@ import { Heart, Sparkles, Shield, TrendingUp, Leaf, Sun, BookOpen } from "lucide
 
 function Pill({ children, icon: Icon }) {
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-sage-200 bg-white/80 backdrop-blur-sm px-3.5 py-1.5 text-xs font-medium text-sage-600 shadow-sm">
-      {Icon && <Icon className="h-3 w-3" aria-hidden="true" />}
+    <span className="badge badge-sage badge-lg">
+      {Icon && <Icon className="icon-xs" aria-hidden="true" />}
       {children}
     </span>
   );
@@ -13,19 +13,19 @@ function Pill({ children, icon: Icon }) {
 function FeatureCard({ title, label, description, icon: Icon, delay = 0 }) {
   return (
     <div 
-      className="card-elevated group"
+      className="surface-card-elevated hover-lift group"
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="flex items-center gap-2">
         {Icon && (
-          <div className="icon-container icon-container-sm">
-            <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+          <div className="icon-badge icon-badge-teal icon-circle-sm">
+            <Icon className="icon-xs" aria-hidden="true" />
           </div>
         )}
-        <div className="text-xs uppercase tracking-wider text-gold-600 font-semibold">{label}</div>
+        <div className="text-caption text-accent">{label}</div>
       </div>
-      <div className="mt-2 font-semibold text-teal group-hover:text-sage-600 transition-colors">{title}</div>
-      <div className="mt-1.5 text-sm text-sage-400 leading-relaxed max-w-prose">
+      <div className="mt-2 text-heading-sm text-brand group-hover:text-[var(--glp-sage)] transition-colors">{title}</div>
+      <div className="mt-1.5 text-body-sm text-secondary max-w-prose">
         {description}
       </div>
     </div>
@@ -103,12 +103,12 @@ export default function Landing() {
               <Pill icon={TrendingUp}>Progress you can feel</Pill>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-[3.25rem] font-bold tracking-tight leading-[1.15] text-teal font-display">
+            <h1 className="text-display-lg text-brand">
               A calm place to think clearly, feel supported, and grow—
-              <span className="text-gradient-brand">one real step at a time.</span>
+              <span className="text-gradient-premium">one real step at a time.</span>
             </h1>
 
-            <p className="mt-6 text-lg leading-relaxed text-sage-600 max-w-xl">
+            <p className="mt-6 text-body-lg text-secondary max-w-xl">
               The Genuine Love Project helps you map your inner state, reflect with care, and build
               sustainable habits—without shame, comparison, or pressure to "perform wellness."
             </p>

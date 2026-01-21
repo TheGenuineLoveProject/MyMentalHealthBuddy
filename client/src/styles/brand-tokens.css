@@ -143,9 +143,22 @@
   /* ------------------------------------------------------------
     Premium Typography System
   ------------------------------------------------------------ */
-  --glp-font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --glp-font-display: 'Playfair Display', Georgia, serif;
+  --glp-font-heading: 'Inter', system-ui, -apple-system, sans-serif;
   --glp-font-body: 'Inter', system-ui, -apple-system, sans-serif;
   --glp-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Type Scale (fluid, clamp-based for responsive) */
+  --glp-text-xs: clamp(0.6875rem, 0.65rem + 0.15vw, 0.75rem);
+  --glp-text-sm: clamp(0.8125rem, 0.78rem + 0.15vw, 0.875rem);
+  --glp-text-base: clamp(0.9375rem, 0.9rem + 0.18vw, 1rem);
+  --glp-text-lg: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+  --glp-text-xl: clamp(1.1875rem, 1.1rem + 0.4vw, 1.25rem);
+  --glp-text-2xl: clamp(1.375rem, 1.2rem + 0.6vw, 1.5rem);
+  --glp-text-3xl: clamp(1.625rem, 1.4rem + 0.9vw, 1.875rem);
+  --glp-text-4xl: clamp(2rem, 1.7rem + 1.2vw, 2.25rem);
+  --glp-text-5xl: clamp(2.5rem, 2rem + 2vw, 3rem);
+  --glp-text-6xl: clamp(3rem, 2.4rem + 2.5vw, 3.75rem);
 
   /* Font weights */
   --glp-weight-light: 300;
@@ -165,11 +178,22 @@
 
   /* Line heights */
   --glp-leading-none: 1;
-  --glp-leading-tight: 1.25;
-  --glp-leading-snug: 1.375;
+  --glp-leading-tight: 1.2;
+  --glp-leading-snug: 1.35;
   --glp-leading-normal: 1.5;
-  --glp-leading-relaxed: 1.625;
+  --glp-leading-relaxed: 1.65;
   --glp-leading-loose: 2;
+
+  /* ------------------------------------------------------------
+    Enhanced Semantic Text Colors
+  ------------------------------------------------------------ */
+  --glp-text-primary: var(--glp-ink);
+  --glp-text-secondary: rgba(var(--glp-ink-rgb), 0.72);
+  --glp-text-tertiary: rgba(var(--glp-ink-rgb), 0.56);
+  --glp-text-disabled: rgba(var(--glp-ink-rgb), 0.38);
+  --glp-text-inverse: var(--glp-paper);
+  --glp-text-brand: var(--glp-sage-deep);
+  --glp-text-accent: var(--glp-gold);
 
   /* ------------------------------------------------------------
     Enhanced Shadow System

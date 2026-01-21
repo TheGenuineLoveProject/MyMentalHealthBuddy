@@ -1299,3 +1299,483 @@ html[data-mode="low-stim"] .surface-card-elevated:hover {
   outline: none;
   box-shadow: 0 0 0 2px var(--glp-ring);
 }
+
+/* ============================================================
+  PREMIUM TYPOGRAPHY SYSTEM
+============================================================ */
+
+/* Display typography (Playfair Display for headlines) */
+.text-display-xl {
+  font-family: var(--glp-font-display);
+  font-size: var(--glp-text-6xl);
+  font-weight: var(--glp-weight-bold);
+  line-height: var(--glp-leading-tight);
+  letter-spacing: var(--glp-tracking-tight);
+}
+
+.text-display-lg {
+  font-family: var(--glp-font-display);
+  font-size: var(--glp-text-5xl);
+  font-weight: var(--glp-weight-bold);
+  line-height: var(--glp-leading-tight);
+  letter-spacing: var(--glp-tracking-tight);
+}
+
+.text-display-md {
+  font-family: var(--glp-font-display);
+  font-size: var(--glp-text-4xl);
+  font-weight: var(--glp-weight-semibold);
+  line-height: var(--glp-leading-tight);
+}
+
+.text-display-sm {
+  font-family: var(--glp-font-display);
+  font-size: var(--glp-text-3xl);
+  font-weight: var(--glp-weight-semibold);
+  line-height: var(--glp-leading-snug);
+}
+
+/* Heading typography (Inter for clean modern look) */
+.text-heading-xl {
+  font-family: var(--glp-font-heading);
+  font-size: var(--glp-text-3xl);
+  font-weight: var(--glp-weight-bold);
+  line-height: var(--glp-leading-snug);
+  letter-spacing: var(--glp-tracking-tight);
+}
+
+.text-heading-lg {
+  font-family: var(--glp-font-heading);
+  font-size: var(--glp-text-2xl);
+  font-weight: var(--glp-weight-semibold);
+  line-height: var(--glp-leading-snug);
+}
+
+.text-heading-md {
+  font-family: var(--glp-font-heading);
+  font-size: var(--glp-text-xl);
+  font-weight: var(--glp-weight-semibold);
+  line-height: var(--glp-leading-snug);
+}
+
+.text-heading-sm {
+  font-family: var(--glp-font-heading);
+  font-size: var(--glp-text-lg);
+  font-weight: var(--glp-weight-medium);
+  line-height: var(--glp-leading-normal);
+}
+
+/* Body typography */
+.text-body-lg {
+  font-family: var(--glp-font-body);
+  font-size: var(--glp-text-lg);
+  font-weight: var(--glp-weight-normal);
+  line-height: var(--glp-leading-relaxed);
+}
+
+.text-body {
+  font-family: var(--glp-font-body);
+  font-size: var(--glp-text-base);
+  font-weight: var(--glp-weight-normal);
+  line-height: var(--glp-leading-normal);
+}
+
+.text-body-sm {
+  font-family: var(--glp-font-body);
+  font-size: var(--glp-text-sm);
+  font-weight: var(--glp-weight-normal);
+  line-height: var(--glp-leading-normal);
+}
+
+/* Caption and label typography */
+.text-caption {
+  font-family: var(--glp-font-body);
+  font-size: var(--glp-text-xs);
+  font-weight: var(--glp-weight-medium);
+  line-height: var(--glp-leading-normal);
+  letter-spacing: var(--glp-tracking-wide);
+  text-transform: uppercase;
+}
+
+.text-label {
+  font-family: var(--glp-font-body);
+  font-size: var(--glp-text-sm);
+  font-weight: var(--glp-weight-medium);
+  line-height: var(--glp-leading-normal);
+}
+
+/* Semantic text colors */
+.text-primary { color: var(--glp-text-primary); }
+.text-secondary { color: var(--glp-text-secondary); }
+.text-tertiary { color: var(--glp-text-tertiary); }
+.text-disabled { color: var(--glp-text-disabled); }
+.text-inverse { color: var(--glp-text-inverse); }
+.text-brand { color: var(--glp-text-brand); }
+.text-accent { color: var(--glp-text-accent); }
+
+/* Premium text gradients */
+.text-gradient-premium {
+  background: linear-gradient(135deg, var(--glp-primary), var(--glp-sage));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--glp-gold), var(--glp-warning-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-teal {
+  background: linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Text glow effects */
+.text-glow {
+  text-shadow: 0 0 20px rgba(var(--glp-sage-deep-rgb), 0.3);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(var(--glp-gold-rgb), 0.4);
+}
+
+/* ============================================================
+  ENHANCED ICON SYSTEM
+============================================================ */
+
+/* Icon sizing (consistent with Lucide) */
+.icon-xs { width: 0.875rem; height: 0.875rem; }
+.icon-sm { width: 1.25rem; height: 1.25rem; }
+.icon-md { width: 1.5rem; height: 1.5rem; }
+.icon-lg { width: 1.75rem; height: 1.75rem; }
+.icon-xl { width: 2.5rem; height: 2.5rem; }
+.icon-2xl { width: 3rem; height: 3rem; }
+
+/* Semantic icon colors */
+.icon-primary { color: var(--glp-primary); }
+.icon-secondary { color: var(--glp-text-secondary); }
+.icon-accent { color: var(--glp-accent); }
+.icon-muted { color: var(--glp-text-tertiary); }
+.icon-success { color: var(--glp-success); }
+.icon-warning { color: var(--glp-warning); }
+.icon-danger { color: var(--glp-error); }
+.icon-info { color: var(--glp-info); }
+.icon-inherit { color: inherit; }
+
+/* Icon glow effects */
+.icon-glow-sage {
+  filter: drop-shadow(0 0 6px rgba(var(--glp-sage-rgb), 0.5));
+}
+
+.icon-glow-gold {
+  filter: drop-shadow(0 0 6px rgba(var(--glp-gold-rgb), 0.6));
+}
+
+.icon-glow-teal {
+  filter: drop-shadow(0 0 6px rgba(var(--glp-sage-deep-rgb), 0.5));
+}
+
+/* Icon containers with gradients */
+.icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.icon-circle-sm { width: 2rem; height: 2rem; }
+.icon-circle-md { width: 2.5rem; height: 2.5rem; }
+.icon-circle-lg { width: 3rem; height: 3rem; }
+.icon-circle-xl { width: 4rem; height: 4rem; }
+
+/* Premium icon badges */
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--glp-radius-1);
+  box-shadow: var(--glp-shadow-sm);
+}
+
+.icon-badge-sage {
+  background: linear-gradient(135deg, var(--glp-sage), var(--glp-primary));
+  color: white;
+}
+
+.icon-badge-teal {
+  background: linear-gradient(135deg, var(--glp-primary), var(--glp-sage-deep));
+  color: var(--glp-primary-foreground);
+}
+
+.icon-badge-gold {
+  background: linear-gradient(135deg, var(--glp-gold), var(--glp-warning-dark));
+  color: var(--glp-gray-900);
+}
+
+.icon-badge-soft {
+  background: var(--glp-surface-2);
+  color: var(--glp-primary);
+}
+
+/* ============================================================
+  ENHANCED ALIGNMENT & LAYOUT UTILITIES
+============================================================ */
+
+/* Flex alignment helpers */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Stack utilities (vertical spacing) */
+.stack-xs > * + * { margin-top: 0.25rem; }
+.stack-sm > * + * { margin-top: 0.5rem; }
+.stack-md > * + * { margin-top: 1rem; }
+.stack-lg > * + * { margin-top: 1.5rem; }
+.stack-xl > * + * { margin-top: 2rem; }
+
+/* Cluster utilities (horizontal spacing) */
+.cluster-xs { display: flex; flex-wrap: wrap; gap: 0.25rem; }
+.cluster-sm { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.cluster-md { display: flex; flex-wrap: wrap; gap: 1rem; }
+.cluster-lg { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+
+/* Container max-widths */
+.container-xs { max-width: 32rem; margin-left: auto; margin-right: auto; }
+.container-sm { max-width: 40rem; margin-left: auto; margin-right: auto; }
+.container-md { max-width: 48rem; margin-left: auto; margin-right: auto; }
+.container-lg { max-width: 64rem; margin-left: auto; margin-right: auto; }
+.container-xl { max-width: 80rem; margin-left: auto; margin-right: auto; }
+
+/* Responsive padding */
+.px-responsive {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .px-responsive {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .px-responsive {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Safe area aware padding */
+.safe-padding {
+  padding-top: calc(1rem + var(--glp-safe-top, 0px));
+  padding-bottom: calc(1rem + var(--glp-safe-bottom, 0px));
+  padding-left: calc(1rem + var(--glp-safe-left, 0px));
+  padding-right: calc(1rem + var(--glp-safe-right, 0px));
+}
+
+/* ============================================================
+  ENHANCED CARD SYSTEM
+============================================================ */
+
+.card-premium {
+  background: var(--glp-surface);
+  border-radius: var(--glp-radius-2);
+  box-shadow: var(--glp-shadow-md);
+  border: 1px solid var(--glp-border);
+  transition: all var(--glp-motion-fast) var(--glp-ease);
+}
+
+.card-premium:hover {
+  box-shadow: var(--glp-shadow-lg);
+  transform: translateY(-2px);
+}
+
+.card-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--glp-gradient-shimmer);
+  transform: translateX(-100%);
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Glass morphism premium */
+.glass-premium {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: var(--glp-shadow-lg);
+}
+
+/* Surface cards with elevation */
+.surface-card {
+  background: var(--glp-surface);
+  border-radius: var(--glp-radius-2);
+  padding: 1.5rem;
+}
+
+.surface-card-elevated {
+  background: var(--glp-surface);
+  border-radius: var(--glp-radius-2);
+  padding: 1.5rem;
+  box-shadow: var(--glp-shadow-md);
+  border: 1px solid var(--glp-border);
+}
+
+/* ============================================================
+  ENHANCED INTERACTION STATES
+============================================================ */
+
+.hover-lift {
+  transition: transform var(--glp-motion-fast) var(--glp-ease), box-shadow var(--glp-motion-fast) var(--glp-ease);
+}
+
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--glp-shadow-lg);
+}
+
+.hover-scale {
+  transition: transform var(--glp-motion-fast) var(--glp-ease);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-glow-sage:hover {
+  box-shadow: var(--glp-shadow-glow-sage);
+}
+
+.hover-glow-gold:hover {
+  box-shadow: var(--glp-shadow-glow-gold);
+}
+
+.hover-glow-teal:hover {
+  box-shadow: var(--glp-shadow-glow-teal);
+}
+
+/* ============================================================
+  PREMIUM ANIMATIONS
+============================================================ */
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-pulse-ring {
+  animation: pulseRing 2s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--glp-sage-deep-rgb), 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(var(--glp-sage-deep-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--glp-sage-deep-rgb), 0);
+  }
+}
+
+.animate-fade-in-up-delayed {
+  animation: fadeInUp 0.6s var(--glp-ease) 0.2s both;
+}
+
+/* Skeleton loading premium */
+.skeleton-premium {
+  background: linear-gradient(
+    90deg,
+    var(--glp-gray-100) 25%,
+    var(--glp-gray-200) 50%,
+    var(--glp-gray-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+  border-radius: var(--glp-radius-1);
+}
+
+.skeleton-premium-card {
+  height: 12rem;
+  border-radius: var(--glp-radius-2);
+}
+
+@keyframes skeletonShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ============================================================
+  INPUT PREMIUM STYLES
+============================================================ */
+
+.input-premium {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--glp-surface);
+  border: 1.5px solid var(--glp-border);
+  border-radius: var(--glp-radius-1);
+  font-size: var(--glp-text-base);
+  color: var(--glp-text);
+  transition: all var(--glp-motion-fast) var(--glp-ease);
+}
+
+.input-premium:focus {
+  outline: none;
+  border-color: var(--glp-primary);
+  box-shadow: 0 0 0 3px rgba(var(--glp-sage-deep-rgb), 0.15);
+}
+
+.input-premium::placeholder {
+  color: var(--glp-text-tertiary);
+}

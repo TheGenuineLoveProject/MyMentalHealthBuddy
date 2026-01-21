@@ -104,36 +104,36 @@ export default function Dashboard() {
         title="Dashboard"
         description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with The Genuine Love Project."
       />
-      <div className="min-h-screen p-6 hero-gradient">
-        <div className="max-w-5xl mx-auto">
-          <header className="flex items-start justify-between mb-8">
+      <div className="min-h-screen safe-padding hero-gradient">
+        <div className="container-lg px-responsive">
+          <header className="flex-between mb-8">
             <div className="flex items-center gap-4">
-              <div className="icon-container icon-xl icon-gradient-sage">
-                <GreetingIcon className="w-7 h-7" aria-hidden="true" />
+              <div className="icon-badge icon-badge-sage icon-circle-xl">
+                <GreetingIcon className="icon-lg" aria-hidden="true" />
               </div>
-              <div>
-                <h1 className="text-display-lg text-teal" data-testid="text-greeting">
+              <div className="stack-xs">
+                <h1 className="text-display-sm text-brand" data-testid="text-greeting">
                   {greeting.text}, {user?.email?.split("@")[0] || "Friend"}
                 </h1>
-                <p className="text-lead">Here's your wellness overview</p>
+                <p className="text-body text-secondary">Here's your wellness overview</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="cluster-sm">
               <Link 
                 href="/settings" 
-                className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--text)] hover:border-[var(--primary-light)] transition shadow-sm" 
+                className="p-3 rounded-xl surface-card-elevated icon-secondary hover:icon-primary hover-lift focus-ring" 
                 data-testid="link-settings" 
                 aria-label="Settings"
               >
-                <Settings className="w-5 h-5" aria-hidden="true" />
+                <Settings className="icon-md" aria-hidden="true" />
               </Link>
               <button
                 onClick={handleLogout}
-                className="p-3 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-rose)] hover:border-[var(--accent-rose)] transition shadow-sm"
+                className="p-3 rounded-xl surface-card-elevated icon-secondary hover:text-[var(--glp-error)] hover-lift focus-ring"
                 data-testid="button-logout"
                 aria-label="Logout"
               >
-                <LogOut className="w-5 h-5" aria-hidden="true" />
+                <LogOut className="icon-md" aria-hidden="true" />
               </button>
             </div>
           </header>
