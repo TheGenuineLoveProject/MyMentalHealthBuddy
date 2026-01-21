@@ -1,10 +1,48 @@
 import { Link } from "wouter";
-import { Heart, Sparkles, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Heart, Sparkles, Menu, X, Eye } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { BRAND } from "@shared/brand";
+
+const MODES = ["default", "low-stim", "reading"] as const;
+type Mode = typeof MODES[number];
 
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mode, setMode] = useState<Mode>(() => {
+    if (typeof window !== "undefined") {
+      return (localStorage.getItem("glp-mode") as Mode) || "default";
+    }
+    return "default";
+  });
+  const [modeMenuOpen, setModeMenuOpen] = useState(false);
+  const modeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (mode === "default") {
+      delete document.documentElement.dataset.mode;
+    } else {
+      document.documentElement.dataset.mode = mode;
+    }
+    localStorage.setItem("glp-mode", mode);
+  }, [mode]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (modeRef.current && !modeRef.current.contains(e.target as Node)) {
+        setModeMenuOpen(false);
+      }
+    };
+    if (modeMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [modeMenuOpen]);
+
+  const modeLabels: Record<Mode, string> = {
+    default: "Default",
+    "low-stim": "Low-Stim",
+    reading: "Reading",
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-gray-100 bg-white/80 backdrop-blur-md">
@@ -30,6 +68,34 @@ function Header() {
           <Link href="/journal" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors" data-testid="link-journal">
             Journal
           </Link>
+          
+          <div className="relative" ref={modeRef}>
+            <button
+              onClick={() => setModeMenuOpen(!modeMenuOpen)}
+              className="flex items-center gap-1.5 text-xs font-medium text-gray-500 hover:text-gray-700 transition-colors px-2 py-1 rounded border border-gray-200 hover:border-gray-300"
+              data-testid="button-mode-toggle"
+            >
+              <Eye className="h-3.5 w-3.5" />
+              <span>{modeLabels[mode]}</span>
+            </button>
+            {modeMenuOpen && (
+              <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg py-1 min-w-[100px] z-50">
+                {MODES.map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => { setMode(m); setModeMenuOpen(false); }}
+                    className={`block w-full text-left px-3 py-1.5 text-xs transition-colors ${
+                      mode === m ? "bg-gray-100 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-50"
+                    }`}
+                    data-testid={`button-mode-${m}`}
+                  >
+                    {modeLabels[m]}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link 
             href="/register" 
             className="flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white transition-all hover:opacity-90"
@@ -61,6 +127,26 @@ function Header() {
           <Link href="/journal" className="block text-sm font-medium text-gray-600 hover:text-gray-900 py-2" data-testid="link-mobile-journal">
             Journal
           </Link>
+          
+          <div className="flex items-center gap-2 py-2">
+            <Eye className="h-4 w-4 text-gray-500" />
+            <span className="text-xs text-gray-500">Mode:</span>
+            <div className="flex gap-1">
+              {MODES.map((m) => (
+                <button
+                  key={m}
+                  onClick={() => setMode(m)}
+                  className={`px-2 py-1 text-xs rounded transition-colors ${
+                    mode === m ? "bg-gray-200 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                  data-testid={`button-mobile-mode-${m}`}
+                >
+                  {modeLabels[m]}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <Link 
             href="/register" 
             className="flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-white"
