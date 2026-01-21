@@ -1,0 +1,95 @@
+You are Replit AI working in my existing Replit project for TheGenuineLoveProject.com.
+
+ROUTER FILE (SOURCE OF TRUTH):
+ROUTER_FILE_PATH = "<PASTE EXACT PATH HERE>"  (example: client/src/App.jsx)
+
+GOALS (EXECUTION GRADE):
+1) Lock Deep Teal + Gold system into tokens (no raw hex in components).
+2) Update Tailwind config (JS) to map palette + semantic tokens (no refactor required).
+3) Implement Default / Low-Stim / Reading modes via html[data-mode="..."] tokens.
+4) Fix navigation links so every header/footer/internal CTA resolves to an actual route.
+5) Add NAV Link Audit (fails CI on broken links).
+6) Add VISUAL DOCTOR (fails CI on raw hex outside brand-tokens.css).
+7) Provide proof: files changed, commands run, generated docs, ✅ checklist.
+
+NON-NEGOTIABLES:
+- JS/JSX only. Do not convert to TypeScript.
+- NO deletions unless I explicitly approve.
+- Keep existing --glp-* variables (do not rename/remove).
+- No duplicate stacks; extend existing.
+- Gold is accent/ring only; never body paragraph text.
+
+PHASE 0 — INVENTORY
+- Print project tree (top 3 levels) and confirm ROUTER_FILE_PATH exists.
+- Read ROUTER_FILE_PATH and list routes (including nested).
+- Identify where header/footer/nav links are defined.
+
+PHASE 1 — TOKENS
+- Replace client/src/styles/brand-tokens.css with a Deep Teal (#2F5D5D) + Gold (#EAC33B) tokens system:
+  Keep: --glp-sage, --glp-blush, --glp-sage-deep, --glp-paper, --glp-ink, --glp-gold + *-rgb helpers.
+  Set:
+   --glp-sage-deep=#2F5D5D, --glp-gold=#EAC33B, --glp-paper=#FAF9F7, --glp-ink=#3A3A3A
+  Add semantic tokens:
+   --glp-bg, --glp-surface, --glp-surface-2,
+   --glp-text, --glp-text-muted,
+   --glp-primary, --glp-primary-foreground,
+   --glp-accent, --glp-accent-foreground,
+   --glp-border, --glp-ring,
+   --glp-radius-1, --glp-radius-2,
+   --glp-shadow-1,
+   --glp-motion-fast, --glp-motion-med, --glp-ease
+  Add modes:
+   html[data-mode="low-stim"] { reduce shadows/decoration; keep teal primary; soften gold slightly if needed }
+   html[data-mode="reading"] { white surfaces; stronger text-muted; minimal decoration }
+
+PHASE 2 — CSS IMPORT ORDER
+- In client/src/index.css ensure EXACT order at top:
+  @import "./styles/brand-tokens.css";
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+- Ensure brand.css is not duplicating tokens; tokens must live only in brand-tokens.css.
+
+PHASE 3 — TAILWIND (JS)
+- Update tailwind.config.js:
+  Keep palette keys:
+   sage=var(--glp-sage), blossom=var(--glp-blush), teal=var(--glp-sage-deep),
+   ivory=var(--glp-paper), charcoal=var(--glp-ink), gold=var(--glp-gold)
+  Add semantic keys:
+   bg, surface, surface-2, text, text-muted,
+   primary, primary-foreground, accent, accent-foreground,
+   border, ring
+  Add fontFamily: Playfair Display (headings), Inter (body/UI)
+  Add fontSize scale matching Canva: 56/36/32/28/24/18/20/14
+  Add radius + shadow from tokens.
+
+PHASE 4 — NAVIGATION REPAIR (USE ROUTER_FILE_PATH)
+- Generate a route list from ROUTER_FILE_PATH (and any imported route modules).
+- Locate header/footer/nav link definitions in code.
+- Fix any broken internal href/to:
+  - Prefer updating links to existing routes.
+  - If a nav item is required but the route is missing, create the missing route page component (NO deletions).
+- Add a branded 404 route if routing supports it.
+
+PHASE 5 — AUDITS + CI
+- Implement NAV Link Audit:
+  tools/nav-link-audit.mjs -> writes docs/NAV_LINK_AUDIT.md and exits 1 on broken links.
+  Add package.json script: "nav:audit": "node tools/nav-link-audit.mjs"
+  Add CI: .github/workflows/nav-audit.yml -> runs npm ci + npm run nav:audit
+
+- Implement VISUAL DOCTOR (raw hex enforcement):
+  tools/visual-doctor.mjs -> fails if any raw hex colors exist outside client/src/styles/brand-tokens.css
+  Add package.json script: "visual:doctor": "node tools/visual-doctor.mjs"
+  Add CI: .github/workflows/visual-doctor.yml -> runs npm ci + npm run visual:doctor
+
+PHASE 6 — PROOF
+At end output:
+- Files changed list (paths)
+- Commands run:
+  npm run nav:audit
+  npm run visual:doctor
+  npm run build (if available)
+- Confirm docs/NAV_LINK_AUDIT.md exists
+- ✅ checklist for every phase
+- Any remaining TODOs only if truly blocked
+Proceed now without asking questions.
