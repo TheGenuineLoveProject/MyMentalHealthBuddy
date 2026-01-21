@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, Newspaper, HelpCircle, LifeBuoy, Palette, Activity, Microscope, Zap, Baby, MapPin } from "lucide-react";
+import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, Newspaper, HelpCircle, LifeBuoy, Palette, Activity, Microscope, Zap, Baby, MapPin, Target, Clock, RefreshCw, FileText } from "lucide-react";
 
 const toolCategories = [
   {
@@ -33,13 +33,23 @@ const toolCategories = [
     ]
   },
   {
+    title: "Skills & Techniques",
+    description: "Evidence-based methods for mental fitness",
+    color: "from-amber-400 to-orange-500",
+    tools: [
+      { name: "Behavior Change", description: "Habit science and CBT techniques", href: "/behavior-change", icon: Target },
+      { name: "Cognitive Tools", description: "Reframe thoughts and challenge patterns", href: "/cognitive-tools", icon: RefreshCw },
+      { name: "Daily Routines", description: "Morning, midday, and evening protocols", href: "/daily-routines", icon: Clock }
+    ]
+  },
+  {
     title: "Knowledge & Learning",
     description: "Understand yourself better with evidence-based resources",
     color: "from-indigo-400 to-purple-500",
     tools: [
-      { name: "Wellness Glossary", description: "Definitions and examples of key concepts", href: "/glossary", icon: BookOpen },
+      { name: "How-To Guides", description: "Step-by-step tool instructions", href: "/how-to-guides", icon: FileText },
       { name: "Research & Evidence", description: "The science behind healing practices", href: "/research", icon: Microscope },
-      { name: "Emotional Intelligence", description: "Build self-awareness and EQ skills", href: "/emotional-intelligence", icon: Brain }
+      { name: "Wellness Glossary", description: "Definitions and examples of key concepts", href: "/glossary", icon: BookOpen }
     ]
   },
   {

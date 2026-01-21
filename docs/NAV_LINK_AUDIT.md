@@ -1,11 +1,11 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T13:39:36.299Z`
+Generated: `2026-01-21T13:47:02.330Z`
 
 ## Summary
-- Files scanned: **892**
-- Routes detected: **83**
-- Link occurrences: **505**
+- Files scanned: **900**
+- Routes detected: **87**
+- Link occurrences: **521**
 - Broken: **0**
 - Warnings: **0**
 
@@ -61,6 +61,10 @@ Generated: `2026-01-21T13:39:36.299Z`
 - `/soul-wellness`
 - `/research`
 - `/healing-journeys`
+- `/behavior-change`
+- `/how-to-guides`
+- `/daily-routines`
+- `/cognitive-tools`
 - `/mirror`
 - `/community`
 - `/tools`
@@ -86,11 +90,7 @@ Generated: `2026-01-21T13:39:36.299Z`
 - `/systems-thinking`
 - `/meta-learning`
 - `/content-studio`
-- `/study-vault`
-- `/elite-tools`
-- `/ethics`
-- `/disclaimer`
-- … (3 more)
+- … (7 more)
 
 ## Broken Links
 ✅ None

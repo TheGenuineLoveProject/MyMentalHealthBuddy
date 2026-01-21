@@ -93,6 +93,10 @@ const BodyWellnessPage = lazy(() => import("./pages/BodyWellnessPage.jsx"));
 const SoulWellnessPage = lazy(() => import("./pages/SoulWellnessPage.jsx"));
 const ResearchEvidencePage = lazy(() => import("./pages/ResearchEvidencePage.jsx"));
 const HealingJourneysPage = lazy(() => import("./pages/HealingJourneysPage.jsx"));
+const BehaviorChangePage = lazy(() => import("./pages/BehaviorChangePage.jsx"));
+const HowToGuidesPage = lazy(() => import("./pages/HowToGuidesPage.jsx"));
+const DailyRoutinesPage = lazy(() => import("./pages/DailyRoutinesPage.jsx"));
+const CognitiveToolsPage = lazy(() => import("./pages/CognitiveToolsPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -236,6 +240,10 @@ export default function App() {
               <Route path="/soul-wellness" component={SoulWellnessPage} />
               <Route path="/research" component={ResearchEvidencePage} />
               <Route path="/healing-journeys" component={HealingJourneysPage} />
+              <Route path="/behavior-change" component={BehaviorChangePage} />
+              <Route path="/how-to-guides" component={HowToGuidesPage} />
+              <Route path="/daily-routines" component={DailyRoutinesPage} />
+              <Route path="/cognitive-tools" component={CognitiveToolsPage} />
               <Route path="/mirror">
                 <RouteGuard>
                   <MirrorPage />
