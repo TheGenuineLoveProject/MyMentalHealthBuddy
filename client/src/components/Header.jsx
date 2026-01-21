@@ -96,9 +96,9 @@ export default function Header() {
           aria-label={`${BRAND?.name ?? "Home"} home`}
         >
           <img
-            src="/brand/logo.svg"
+            src="/brand/logo-mark.png"
             alt={BRAND?.name ?? "Logo"}
-            className="h-8 w-8"
+            className="h-10 w-10 object-contain"
             draggable="false"
           />
           <span className="hidden sm:inline font-semibold tracking-tight text-foreground">

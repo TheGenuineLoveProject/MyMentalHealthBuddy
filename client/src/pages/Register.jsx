@@ -85,9 +85,12 @@ export default function Register() {
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-8">
             <Link href="/" className="inline-flex items-center gap-3 group">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                <Heart className="w-6 h-6 text-white" aria-hidden="true" />
-              </div>
+              <img 
+                src="/brand/logo-mark.png" 
+                alt="The Genuine Love Project" 
+                className="w-14 h-14 object-contain group-hover:scale-110 transition-transform"
+                data-testid="img-register-logo"
+              />
               <span className="text-xl font-bold tracking-tight text-[var(--text)]">The Genuine Love Project</span>
             </Link>
           </div>

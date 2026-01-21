@@ -24,9 +24,9 @@ export default function TglpNavbar() {
         data-testid="link-brand-home"
       >
         <img 
-          src="/brand/logo.png" 
+          src="/brand/logo-mark.png" 
           alt="The Genuine Love Project" 
-          className="h-14 w-auto group-hover:scale-105 transition-transform"
+          className="h-12 w-12 object-contain group-hover:scale-105 transition-transform"
           data-testid="img-brand-logo"
         />
         <div className="leading-tight hidden sm:block">

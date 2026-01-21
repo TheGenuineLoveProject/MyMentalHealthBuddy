@@ -63,10 +63,12 @@ export default function SignUp() {
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6" data-testid="link-home">
-            <div className="icon-container icon-lg icon-gradient-blush">
-              <Heart className="w-6 h-6" />
-            </div>
+          <Link href="/" className="inline-flex items-center gap-3 mb-6" data-testid="link-home">
+            <img 
+              src="/brand/logo-mark.png" 
+              alt="The Genuine Love Project" 
+              className="w-14 h-14 object-contain"
+            />
             <span className="text-heading-lg text-teal">Genuine Love</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Start Your Journey</h1>

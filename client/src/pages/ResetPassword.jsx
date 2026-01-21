@@ -144,10 +144,14 @@ export default function ResetPassword() {
         <div className="w-full max-w-md relative z-10 animate-fade-in-up">
           <Link 
             href="/" 
-            className="flex items-center justify-center gap-2 mb-8 text-[var(--primary)] hover:opacity-80 transition-opacity"
+            className="flex items-center justify-center gap-3 mb-8 hover:opacity-80 transition-opacity"
             data-testid="link-home"
           >
-            <Heart className="w-6 h-6" aria-hidden="true" />
+            <img 
+              src="/brand/logo-mark.png" 
+              alt="The Genuine Love Project" 
+              className="w-12 h-12 object-contain"
+            />
             <span className="font-display font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
           </Link>
           

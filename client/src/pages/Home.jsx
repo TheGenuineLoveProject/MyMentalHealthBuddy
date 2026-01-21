@@ -19,20 +19,12 @@ export default function Home() {
         role="banner"
       >
         <Link href="/" className="flex items-center gap-3 min-w-0">
-          <div 
-            style={{ 
-              width: '40px', 
-              height: '40px', 
-              borderRadius: '12px', 
-              backgroundColor: '#8FBF9F',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0
-            }}
-          >
-            <Heart style={{ width: '20px', height: '20px', color: 'white', fill: 'white' }} />
-          </div>
+          <img 
+            src="/brand/logo-mark.png" 
+            alt="The Genuine Love Project" 
+            className="h-12 w-12 object-contain flex-shrink-0"
+            data-testid="img-home-logo"
+          />
           <span className="text-heading-sm text-teal-dark hidden md:block">
             The Genuine Love Project
           </span>
