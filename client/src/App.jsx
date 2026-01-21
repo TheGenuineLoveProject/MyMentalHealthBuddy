@@ -9,6 +9,7 @@ import SkipToContent from "./components/SkipToContent.jsx";
 
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
+import LoginCallback from "./pages/LoginCallback.jsx";
 import Register from "./pages/Register.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
@@ -95,6 +96,7 @@ export default function App() {
               <Route path="/" component={Home} />
               <Route path="/home" component={Home} />
               <Route path="/login" component={Login} />
+              <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={ResetPassword} />

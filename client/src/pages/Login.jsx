@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Heart, Mail, Lock, ArrowRight } from "lucide-react";
+import { SiGithub } from "react-icons/si";
 import SEO from "../components/SEO";
 
 export default function Login() {
@@ -141,6 +142,18 @@ export default function Login() {
                 )}
               </button>
             </form>
+
+            <div className="mt-6 pt-6 border-t border-sage-200/50">
+              <p className="text-center text-sage-400 text-sm mb-4">Or continue with</p>
+              <a
+                href="/api/auth/github"
+                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-sage-200 bg-white hover:bg-sage-50 text-sage-700 font-medium transition-all hover:border-sage-300"
+                data-testid="button-github-login"
+              >
+                <SiGithub className="w-5 h-5" />
+                Continue with GitHub
+              </a>
+            </div>
 
             <div className="mt-6 pt-6 border-t border-sage-200/50 text-center">
               <p className="text-sage-400 text-sm">

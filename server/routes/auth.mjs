@@ -8,13 +8,13 @@ import { eq } from "drizzle-orm";
 import { db } from "../db/client.mjs";
 import { users } from "../../shared/schema.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
-import { authRateLimit } from "../middleware/rateLimit.mjs";
+import { authRateLimit, loginRateLimit } from "../middleware/rateLimit.mjs";
 import { logAudit, getClientIp, AUDIT_ACTIONS } from "../services/auditLog.mjs";
 
 const router = express.Router();
 router.use(cookieParser());
 
-router.post("/login", authRateLimit);
+router.post("/login", loginRateLimit);
 router.post("/register", authRateLimit);
 
 /* ================================

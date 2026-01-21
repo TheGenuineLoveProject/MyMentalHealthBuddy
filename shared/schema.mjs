@@ -11,7 +11,7 @@ import { pgTable, text, timestamp, uuid, integer, varchar, boolean } from "drizz
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   email: varchar("email", { length: 255 }).notNull().unique(),
-  passwordHash: varchar("password_hash", { length: 255 }).notNull(),
+  passwordHash: varchar("password_hash", { length: 255 }),
   name: varchar("name", { length: 255 }).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
@@ -23,6 +23,7 @@ export const users = pgTable("users", {
   stripeCustomerId: text("stripe_customer_id"),
   subscriptionStatus: text("subscription_status").default("free"),
   subscriptionExpiresAt: timestamp("subscription_expires_at"),
+  githubId: text("github_id"),
 });
 
 /* ================= JOURNALS ================= */

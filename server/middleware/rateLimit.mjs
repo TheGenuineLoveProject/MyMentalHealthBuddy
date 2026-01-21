@@ -1,37 +1,10 @@
 // server/middleware/rateLimit.mjs
-// Enhanced rate limiting with per-route configurations
+// Unified rate limiting with:
+// - apiRateLimit (429 generic)
+// - authRateLimit (429 generic for register, etc.)
+// - loginRateLimit (401 + "Invalid credentials" ALWAYS when blocked; security-uniform)
 
-import rateLimitLib from "express-rate-limit";
-
-// [MMB] In-memory limiter with health bypass + headers
-export function createRateLimiter({ windowMs, max, keyGenerator }) {
-  const hits = new Map();
-  return function rateLimiter(req, res, next) {
-    if (req.path === "/api/health") return next();
-    const key = (keyGenerator && keyGenerator(req)) || req.ip || "anon";
-    const now = Date.now();
-    const start = now - windowMs;
-    let bucket = hits.get(key);
-    if (!bucket) { bucket = []; hits.set(key, bucket); }
-    while (bucket.length && bucket[0] <= start) bucket.shift();
-    if (bucket.length >= max) {
-      const resetIn = bucket[0] + windowMs - now;
-      res.setHeader("X-RateLimit-Limit", String(max));
-      res.setHeader("X-RateLimit-Remaining", "0");
-      res.setHeader("X-RateLimit-Reset", String(Date.now() + resetIn));
-      return res.status(429).json({ ok: false, message: "Too many requests", errorCode: "RATE_LIMITED" });
-    }
-    bucket.push(now);
-    res.setHeader("X-RateLimit-Limit", String(max));
-    res.setHeader("X-RateLimit-Remaining", String(max - bucket.length));
-    next();
-  };
-}
-// =====================================================
-// FILE: server/middleware/rateLimit.mjs
-// Replaces/updates your current rateLimit middleware.
-// Provides both authRateLimit (generic) and loginRateLimit (security-uniform).
-// =====================================================
+import rateLimit from "express-rate-limit";
 
 const attempts = new Map(); // key -> { count, firstAt, blockedUntil }
 
@@ -39,7 +12,7 @@ function nowMs() {
   return Date.now();
 }
 
-function getKey(req) {
+function getClientKey(req) {
   const xf = req.headers["x-forwarded-for"];
   const ip = Array.isArray(xf) ? xf[0] : xf;
   return (ip || req.ip || "unknown").toString();
@@ -55,25 +28,29 @@ function sendJson(res, status, message) {
 }
 
 /**
- * Generic limiter. Use for non-auth endpoints if you want.
- * Returns 429 on block.
- *
- * @param {{ windowMs?: number, max?: number, blockMs?: number }} opts
+ * In-memory limiter factory.
+ * @param {{ windowMs?: number, max?: number, blockMs?: number, prefix?: string, status?: number, message?: string }} opts
  */
-function createRateLimit(opts = {}) {
+function createInMemoryLimiter(opts = {}) {
   const windowMs = opts.windowMs ?? 15 * 60 * 1000;
   const max = opts.max ?? 30;
   const blockMs = opts.blockMs ?? 15 * 60 * 1000;
+  const prefix = opts.prefix ?? "rl";
+  const status = opts.status ?? 429;
+  const message = opts.message ?? "Too many requests";
 
   return (req, res, next) => {
-    const key = getKey(req);
+    // Keep health checks unblocked if you use them.
+    if (req.path === "/api/health") return next();
+
+    const key = `${prefix}:${getClientKey(req)}`;
     const entry = attempts.get(key) || { count: 0, firstAt: nowMs(), blockedUntil: 0 };
     const t = nowMs();
 
     if (entry.blockedUntil && t < entry.blockedUntil) {
       const retryAfterSec = Math.ceil((entry.blockedUntil - t) / 1000);
       res.setHeader("Retry-After", String(retryAfterSec));
-      return sendJson(res, 429, "Too many requests");
+      return sendJson(res, status, message);
     }
 
     if (t - entry.firstAt > windowMs) {
@@ -83,12 +60,13 @@ function createRateLimit(opts = {}) {
     }
 
     entry.count += 1;
+
     if (entry.count > max) {
       entry.blockedUntil = t + blockMs;
       const retryAfterSec = Math.ceil(blockMs / 1000);
       res.setHeader("Retry-After", String(retryAfterSec));
       attempts.set(key, entry);
-      return sendJson(res, 429, "Too many requests");
+      return sendJson(res, status, message);
     }
 
     attempts.set(key, entry);
@@ -97,55 +75,9 @@ function createRateLimit(opts = {}) {
 }
 
 /**
- * Login limiter (SECURITY-UNIFORM).
- * IMPORTANT: Never reveals rate limiting in message body.
- * Always returns 401 + "Invalid credentials" when blocked.
- *
- * @param {{ windowMs?: number, max?: number, blockMs?: number }} opts
+ * API rate limit (generic) - 429 + message.
  */
-function createLoginRateLimit(opts = {}) {
-  const windowMs = opts.windowMs ?? 15 * 60 * 1000;
-  const max = opts.max ?? 5;
-  const blockMs = opts.blockMs ?? 15 * 60 * 1000;
-
-  return (req, res, next) => {
-    const key = `login:${getKey(req)}`;
-    const entry = attempts.get(key) || { count: 0, firstAt: nowMs(), blockedUntil: 0 };
-    const t = nowMs();
-
-    if (entry.blockedUntil && t < entry.blockedUntil) {
-      const retryAfterSec = Math.ceil((entry.blockedUntil - t) / 1000);
-      res.setHeader("Retry-After", String(retryAfterSec));
-      return sendJson(res, 401, "Invalid credentials");
-    }
-
-    if (t - entry.firstAt > windowMs) {
-      entry.count = 0;
-      entry.firstAt = t;
-      entry.blockedUntil = 0;
-    }
-
-    entry.count += 1;
-    if (entry.count > max) {
-      entry.blockedUntil = t + blockMs;
-      const retryAfterSec = Math.ceil(blockMs / 1000);
-      res.setHeader("Retry-After", String(retryAfterSec));
-      attempts.set(key, entry);
-      return sendJson(res, 401, "Invalid credentials");
-    }
-
-    attempts.set(key, entry);
-    return next();
-  };
-}
-
-// Keep your existing export name for compatibility:
-export const authRateLimit = createRateLimit({ max: 60 });
-
-// NEW: use this for /login
-export const loginRateLimit = createLoginRateLimit({ max: 5 });
-// Standard API rate limit (general endpoints)
-export const apiRateLimit = rateLimitLib({
+export const apiRateLimit = rateLimit({
   windowMs: 60 * 1000,
   max: 120,
   standardHeaders: true,
@@ -156,11 +88,42 @@ export const apiRateLimit = rateLimitLib({
   },
 });
 
-// NOTE: authRateLimit is exported above (line 143) using createRateLimit
-// The loginRateLimit (line 146) handles strict brute-force protection for /login
+/**
+ * Auth rate limit (generic) - for register / refresh if desired.
+ * Returns 429 and can be descriptive (not used for login to avoid leaking).
+ */
+export const authRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    ok: false,
+    message: "Too many requests. Please try again later.",
+  },
+});
 
-// AI chat rate limit (expensive operations)
-export const aiRateLimit = rateLimitLib({
+/**
+ * Login rate limit (SECURITY-UNIFORM).
+ * IMPORTANT: Never reveals rate limiting in message body.
+ * When blocked, always returns 401 + "Invalid credentials"
+ * (matches your tests expecting uniform auth errors).
+ *
+ * Uses in-memory limiter to fully control response shape/status.
+ */
+export const loginRateLimit = createInMemoryLimiter({
+  prefix: "login",
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  blockMs: 15 * 60 * 1000,
+  status: 401,
+  message: "Invalid credentials",
+});
+
+/**
+ * Optional: expensive operations (AI chat etc.)
+ */
+export const aiRateLimit = rateLimit({
   windowMs: 60 * 1000,
   max: 20,
   standardHeaders: true,
@@ -171,8 +134,10 @@ export const aiRateLimit = rateLimitLib({
   },
 });
 
-// Sensitive operations rate limit (password reset, account changes)
-export const sensitiveRateLimit = rateLimitLib({
+/**
+ * Optional: sensitive operations (password reset/account changes)
+ */
+export const sensitiveRateLimit = rateLimit({
   windowMs: 60 * 60 * 1000,
   max: 5,
   standardHeaders: true,
@@ -183,8 +148,10 @@ export const sensitiveRateLimit = rateLimitLib({
   },
 });
 
-// Mirror endpoint rate limit (gentle, reflective journaling)
-export const mirrorRateLimit = rateLimitLib({
+/**
+ * Optional: gentle journaling endpoint rate limit
+ */
+export const mirrorRateLimit = rateLimit({
   windowMs: 60 * 1000,
   max: 30,
   standardHeaders: true,
