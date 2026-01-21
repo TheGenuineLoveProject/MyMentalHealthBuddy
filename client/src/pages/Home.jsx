@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import SEO from "../components/SEO";
-import { Heart, Shield, Sparkles, Brain, ArrowRight, Star, Leaf, Users } from "lucide-react";
+import { Shield, Sparkles, Brain, ArrowRight, Star, Leaf, Users, Heart } from "lucide-react";
 
 export default function Home() {
   return (
@@ -18,9 +18,22 @@ export default function Home() {
         className="relative z-10 mx-auto max-w-6xl py-4 px-6 flex items-center justify-between"
         role="banner"
       >
-        <Link href="/" className="flex items-center gap-2 min-w-0">
-          <Heart className="w-6 h-6 text-teal-600 flex-shrink-0" aria-hidden="true" />
-          <span className="text-heading-sm text-teal-dark hidden sm:block truncate">
+        <Link href="/" className="flex items-center gap-3 min-w-0">
+          <div 
+            style={{ 
+              width: '40px', 
+              height: '40px', 
+              borderRadius: '12px', 
+              backgroundColor: '#8FBF9F',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}
+          >
+            <Heart style={{ width: '20px', height: '20px', color: 'white', fill: 'white' }} />
+          </div>
+          <span className="text-heading-sm text-teal-dark hidden md:block">
             The Genuine Love Project
           </span>
         </Link>
