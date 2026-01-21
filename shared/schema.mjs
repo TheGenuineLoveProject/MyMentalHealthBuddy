@@ -332,3 +332,53 @@ export const contentDrafts = pgTable("content_drafts", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+/* ================= SOCIAL MEDIA POSTS ================= */
+export const socialPosts = pgTable("social_posts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  content: text("content").notNull(),
+  platform: varchar("platform", { length: 50 }).notNull(), // instagram, twitter, linkedin, tiktok, pinterest
+  mediaUrl: text("media_url"),
+  scheduledAt: timestamp("scheduled_at"),
+  publishedAt: timestamp("published_at"),
+  status: varchar("status", { length: 20 }).default("draft").notNull(), // draft, scheduled, published
+  hashtags: text("hashtags"),
+  authorId: uuid("author_id").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+/* ================= DIGITAL PRODUCTS (E-books, Tools, Courses) ================= */
+export const digitalProducts = pgTable("digital_products", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  description: text("description"),
+  longDescription: text("long_description"),
+  type: varchar("type", { length: 50 }).notNull(), // ebook, tool, course, template
+  price: integer("price").default(0).notNull(), // price in cents
+  coverImage: text("cover_image"),
+  downloadUrl: text("download_url"),
+  previewUrl: text("preview_url"),
+  status: varchar("status", { length: 20 }).default("draft").notNull(), // draft, published, archived
+  featured: integer("featured").default(0).notNull(), // 0 = false, 1 = true
+  category: varchar("category", { length: 100 }),
+  tags: text("tags"),
+  authorId: uuid("author_id").notNull(),
+  salesCount: integer("sales_count").default(0).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+/* ================= PRODUCT PURCHASES ================= */
+export const productPurchases = pgTable("product_purchases", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  productId: uuid("product_id").notNull(),
+  userId: uuid("user_id").notNull(),
+  pricePaid: integer("price_paid").notNull(), // price in cents at time of purchase
+  paymentMethod: varchar("payment_method", { length: 50 }),
+  transactionId: varchar("transaction_id", { length: 255 }),
+  downloadedAt: timestamp("downloaded_at"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});

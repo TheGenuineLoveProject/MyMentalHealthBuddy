@@ -1,11 +1,11 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T05:44:56.388Z`
+Generated: `2026-01-21T10:31:59.199Z`
 
 ## Summary
-- Files scanned: **846**
-- Routes detected: **60**
-- Link occurrences: **407**
+- Files scanned: **851**
+- Routes detected: **62**
+- Link occurrences: **419**
 - Broken: **0**
 - Warnings: **0**
 
@@ -13,6 +13,7 @@ Generated: `2026-01-21T05:44:56.388Z`
 - `/`
 - `/home`
 - `/login`
+- `/login/callback`
 - `/register`
 - `/forgot-password`
 - `/reset-password`
@@ -38,6 +39,7 @@ Generated: `2026-01-21T05:44:56.388Z`
 - `/settings`
 - `/upgrade`
 - `/admin`
+- `/content-admin`
 - `/mirror`
 - `/community`
 - `/tools`

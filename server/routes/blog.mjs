@@ -4,7 +4,7 @@ import { db } from "../db/connection.mjs";
 import { blogPosts, blogComments, users } from "../../shared/schema.mjs";
 import { eq, desc, and, ilike, or } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
-import { requireAuth } from "../middleware/auth.mjs";
+import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
@@ -80,6 +80,21 @@ router.get("/", async (req, res) => {
     return success(res, postsWithAuthors, "Blog posts fetched.");
   } catch (err) {
     logger.error("Failed to fetch blog posts", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to fetch posts." });
+  }
+});
+
+router.get("/admin", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const posts = await db
+      .select()
+      .from(blogPosts)
+      .orderBy(desc(blogPosts.createdAt))
+      .limit(100);
+    
+    return success(res, posts);
+  } catch (err) {
+    logger.error("Failed to fetch admin blog posts", { error: err.message });
     return res.status(500).json({ ok: false, message: "Failed to fetch posts." });
   }
 });

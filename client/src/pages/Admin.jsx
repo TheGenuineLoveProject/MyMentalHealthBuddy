@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "wouter";
 import { useAuth } from "../context/AuthContext.jsx";
 import { 
   Users, FileText, Activity, Shield, TrendingUp, Clock, 
   Server, Database, AlertTriangle, Download, RefreshCw,
-  CheckCircle2, Zap, BarChart3, Settings
+  CheckCircle2, Zap, BarChart3, Settings, Sparkles
 } from "lucide-react";
 import SEO from "../components/SEO";
 import { apiRequest } from "../lib/queryClient.js";
@@ -79,6 +80,14 @@ export default function Admin() {
                 <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
                 Refresh
               </button>
+              <Link
+                href="/content-admin"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-gold-500 to-amber-500 text-white font-medium shadow-lg shadow-amber-500/25 hover:shadow-xl hover:shadow-amber-500/30 transition-all hover:-translate-y-0.5"
+                data-testid="link-content-admin"
+              >
+                <Sparkles className="w-4 h-4" />
+                Content Admin
+              </Link>
               <button
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-medium shadow-lg shadow-teal-500/25 hover:shadow-xl hover:shadow-teal-500/30 transition-all hover:-translate-y-0.5"
                 data-testid="button-export"

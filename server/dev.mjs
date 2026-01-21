@@ -86,6 +86,8 @@ import socialIntelligenceRouter from "./routes/social-intelligence.mjs";
 import peakPerformanceRouter from "./routes/peak-performance.mjs";
 import personalGrowthRouter from "./routes/personal-growth.mjs";
 import psychologicalSafetyRouter from "./routes/psychological-safety.mjs";
+import socialPostsRouter from "./routes/social-posts.mjs";
+import productsRouter from "./routes/products.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -205,6 +207,8 @@ async function startServer() {
   app.use("/api/peak-performance", peakPerformanceRouter);
   app.use("/api/personal-growth", personalGrowthRouter);
   app.use("/api/psychological-safety", psychologicalSafetyRouter);
+  app.use("/api/social/posts", socialPostsRouter);
+  app.use("/api/products", productsRouter);
 
   const SERVER_START_TIME = Date.now();
 
@@ -230,6 +234,50 @@ async function startServer() {
       commit: process.env.REPL_ID || "local",
       uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
     });
+  });
+
+  app.get("/api/content/stats", async (req, res) => {
+    try {
+      const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+      const authResult = await new Promise((resolve) => {
+        requireAuth(req, res, (err) => resolve(err ? "auth_failed" : "ok"));
+      });
+      if (authResult === "auth_failed") return;
+      
+      if (req.user?.role !== "admin") {
+        return res.status(403).json({ message: "Admin access required" });
+      }
+      
+      const { blogPosts, socialPosts, digitalProducts, productPurchases } = await import("../shared/schema.mjs");
+      const { db } = await import("./db/connection.mjs");
+      const { sql, eq } = await import("drizzle-orm");
+      
+      const [blogCount] = await db.select({ count: sql`count(*)` }).from(blogPosts);
+      const [publishedBlogCount] = await db.select({ count: sql`count(*)` }).from(blogPosts).where(eq(blogPosts.status, "published"));
+      const [socialCount] = await db.select({ count: sql`count(*)` }).from(socialPosts);
+      const [scheduledCount] = await db.select({ count: sql`count(*)` }).from(socialPosts).where(eq(socialPosts.status, "scheduled"));
+      const [productCount] = await db.select({ count: sql`count(*)` }).from(digitalProducts);
+      const [revenueResult] = await db.select({ total: sql`COALESCE(SUM(price_paid), 0)` }).from(productPurchases);
+      
+      res.json({
+        totalPosts: Number(blogCount?.count || 0),
+        publishedPosts: Number(publishedBlogCount?.count || 0),
+        socialPosts: Number(socialCount?.count || 0),
+        scheduledPosts: Number(scheduledCount?.count || 0),
+        totalProducts: Number(productCount?.count || 0),
+        totalRevenue: Number(revenueResult?.total || 0),
+      });
+    } catch (error) {
+      console.error("Content stats error:", error);
+      res.json({
+        totalPosts: 0,
+        publishedPosts: 0,
+        socialPosts: 0,
+        scheduledPosts: 0,
+        totalProducts: 0,
+        totalRevenue: 0,
+      });
+    }
   });
 
   const vite = await createViteServer({
