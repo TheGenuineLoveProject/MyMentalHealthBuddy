@@ -98,31 +98,31 @@ async function startServer() {
   app.use(requestId);
   app.use(requestLogger);
   
-  const allowedOrigins = [
-    process.env.REPLIT_DEV_DOMAIN ? `https://${process.env.REPLIT_DEV_DOMAIN}` : null,
-    process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : null,
-    'http://localhost:5000',
-    'http://127.0.0.1:5000',
-  ].filter(Boolean);
-  
+  // Universal CORS - allow all origins in development
   app.use(cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.some(allowed => origin.startsWith(allowed.replace(/:\d+$/, '')))) {
-        callback(null, true);
-      } else if (process.env.NODE_ENV === 'development') {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true
+    origin: true,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
   }));
   
-  // Security headers (relaxed for development)
+  // Security headers (fully relaxed for development and iframe embedding)
   app.use(helmet({
-    contentSecurityPolicy: false, // Disabled for Vite HMR
+    contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false,
+    crossOriginResourcePolicy: false,
+    frameguard: false
   }));
+  
+  // Additional headers for universal access
+  app.use((req, res, next) => {
+    res.setHeader('X-Frame-Options', 'ALLOWALL');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+    next();
+  });
   
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
