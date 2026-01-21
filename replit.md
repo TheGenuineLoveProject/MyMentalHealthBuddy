@@ -88,22 +88,51 @@ Example: `document.documentElement.dataset.mode = "low-stim"`
 - **Script**: `npm run audit` - runs both nav:audit and visual:doctor
 
 ### Premium Visual System (January 2026)
-- **Typography Tokens**: Font families, weights (300-800), letter spacing, line heights
+- **Typography Tokens**: Playfair Display for display, Inter for headings/body, fluid type scale (xs-6xl)
+- **Type Classes**: `.text-display-xl/lg/md/sm`, `.text-heading-xl/lg/md/sm`, `.text-body-lg/base/sm`, `.text-caption`, `.text-label`
 - **Shadow System**: xs through 2xl, inner shadows, glow variants (sage, gold, teal)
-- **Gradient Presets**: hero, card, glass, shimmer, sage, gold, premium
+- **Gradient Presets**: hero, card, glass, shimmer, sage, gold, premium, teal
 - **Animation Timing**: ease-in, ease-out, ease-in-out, bounce, elastic
 - **Z-Index Scale**: base, dropdown, sticky, modal, popover, tooltip, toast
+- **Safe Area Support**: `--glp-safe-top/bottom/left/right` for mobile notch support
+
+### Premium Typography Classes
+- **Display**: `.text-display-xl/lg/md/sm` (Playfair Display, large headlines)
+- **Headings**: `.text-heading-xl/lg/md/sm` (Inter, section headers)
+- **Body**: `.text-body-lg/base/sm` (Inter, paragraph text)
+- **Semantic Colors**: `.text-primary/secondary/tertiary/disabled/inverse/brand/accent`
+- **Gradients**: `.text-gradient-premium`, `.text-gradient-gold`, `.text-gradient-teal`
+- **Effects**: `.text-glow`, `.text-glow-gold`
+
+### Premium Icon System
+- **Sizes**: `.icon-xs` (14px), `.icon-sm` (20px), `.icon-md` (24px), `.icon-lg` (28px), `.icon-xl` (40px), `.icon-2xl` (48px)
+- **Colors**: `.icon-primary/secondary/accent/muted/success/warning/danger/info/inherit`
+- **Glow Effects**: `.icon-glow-sage/gold/teal`
+- **Containers**: `.icon-circle-sm/md/lg/xl`, `.icon-badge`, `.icon-badge-sage/teal/gold/soft`
+
+### Layout & Alignment Utilities
+- **Flex**: `.flex-center`, `.flex-between`, `.flex-start`, `.flex-end`, `.flex-col-center`
+- **Stack**: `.stack-xs/sm/md/lg/xl` (vertical spacing)
+- **Cluster**: `.cluster-xs/sm/md/lg` (horizontal gap)
+- **Containers**: `.container-xs/sm/md/lg/xl`, `.px-responsive`
+- **Safe Areas**: `.safe-padding`
 
 ### Premium Component Classes
-- **Cards**: `.card-premium`, `.card-shimmer`
+- **Cards**: `.card-premium`, `.card-shimmer`, `.surface-card`, `.surface-card-elevated`, `.glass-premium`
 - **Inputs**: `.input-premium`
 - **Skeletons**: `.skeleton-premium`, `.skeleton-premium-card`
-- **Icons**: `.icon-glow-sage/gold/teal`
+- **Icons**: `.icon-glow-sage/gold/teal`, `.icon-badge-*`
 - **Text**: `.text-gradient-premium`, `.text-gradient-gold`, `.text-glow`
-- **Interactions**: `.hover-lift`, `.hover-scale`, `.hover-glow`
+- **Interactions**: `.hover-lift`, `.hover-scale`, `.hover-glow-sage/gold/teal`
 - **Animations**: `animate-pulse-ring`, `animate-float`, `animate-fade-in-up-delayed`
+- **Focus**: `.focus-ring`
+
+### QA Mode (Development Only)
+- **LocalStorage Key**: `glp-qa` - set to "1" to bypass authentication
+- **Env Var**: `VITE_QA_BYPASS_AUTH=true` for automatic bypass
+- **Login Button**: "Enable QA Mode (DEV)" visible only in development
 
 ### Build Metrics
 - **Build Time**: ~15.6 seconds
-- **Visual Doctor**: 279 files clean, 0 violations
+- **Visual Doctor**: 282 files clean, 0 violations
 - **Navigation Audit**: 57 routes, 0 broken links
