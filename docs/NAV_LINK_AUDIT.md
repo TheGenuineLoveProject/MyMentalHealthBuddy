@@ -1,9 +1,9 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T04:07:16.006Z`
+Generated: `2026-01-21T04:17:29.311Z`
 
 ## Summary
-- Files scanned: **837**
+- Files scanned: **838**
 - Routes detected: **60**
 - Link occurrences: **405**
 - Broken: **0**

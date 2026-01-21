@@ -217,9 +217,55 @@ The following environment variables are automatically configured by Replit:
 ## 📖 Documentation
 
 - **[MONOREPO.md](MONOREPO.md)** - Detailed monorepo structure and workflow
+- **[docs/COLOR_SYSTEM.md](docs/COLOR_SYSTEM.md)** - Color tokens, semantic mapping, do/don't rules
+- **[docs/TYPOGRAPHY_GUIDE.md](docs/TYPOGRAPHY_GUIDE.md)** - Type scale, weights, spacing
+- **[docs/CANVA_TEMPLATE_SPECS.md](docs/CANVA_TEMPLATE_SPECS.md)** - Social media template specifications
 - **[docs/deployment/](docs/deployment/)** - Deployment guides
-- **[docs/cleanup/](docs/cleanup/)** - Platform cleanup history
 - **[replit.md](replit.md)** - Project overview and recent changes
+
+---
+
+## 🎨 Visual Modes
+
+The platform supports 3 visual modes for accessibility and user preference:
+
+### Default Mode
+Standard brand palette with Deep Teal primary and Gold accent.
+
+### Low-Stim Mode
+Reduced saturation, softer gold, minimal shadows. For calmer visual experience.
+
+```javascript
+document.documentElement.dataset.mode = "low-stim";
+```
+
+### Reading Mode
+Maximum legibility with white surfaces and stronger contrast.
+
+```javascript
+document.documentElement.dataset.mode = "reading";
+```
+
+---
+
+## 🔍 Running Audits
+
+The platform includes automated audits to enforce design consistency:
+
+```bash
+# Run all audits (navigation + visual)
+npm run audit
+
+# Run navigation link audit only
+npm run nav:audit
+
+# Run visual doctor only
+npm run visual:doctor
+```
+
+**Reports generated:**
+- `docs/NAV_LINK_AUDIT.md` - Navigation link validation
+- `docs/VISUAL_DOCTOR_REPORT.md` - Color and font compliance
 
 ---
 
