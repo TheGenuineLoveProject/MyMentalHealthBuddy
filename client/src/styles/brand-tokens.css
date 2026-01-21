@@ -11,20 +11,44 @@
   /* ------------------------------------------------------------
     Core palette (keep these names: your Tailwind config already uses them)
   ------------------------------------------------------------ */
-  --glp-sage: #8FBF9F;        /* supportive sage */
-  --glp-blush: #F4C7C3;       /* soft blush accent (sparingly) */
-  --glp-sage-deep: #2F5D5D;   /* Deep Teal (PRIMARY) */
-  --glp-paper: #FAF9F7;       /* Ivory background */
-  --glp-ink: #3A3A3A;         /* Charcoal text */
-  --glp-gold: #EAC33B;        /* Gold accent (RING/ACCENT) */
+  --glp-sage: #7FB39A;        /* supportive sage (richer) */
+  --glp-blush: #F2BDB8;       /* soft blush accent (warmer) */
+  --glp-sage-deep: #2A5454;   /* Deep Teal (PRIMARY - richer) */
+  --glp-paper: #FAFAF8;       /* Ivory background (warmer) */
+  --glp-ink: #2E3032;         /* Charcoal text (darker for contrast) */
+  --glp-gold: #D4A84B;        /* Gold accent (warmer, more luxurious) */
+
+  /* Extended teal palette for depth */
+  --glp-teal-50: #EDF5F5;
+  --glp-teal-100: #D5E8E8;
+  --glp-teal-200: #A8D1D1;
+  --glp-teal-300: #6FB3B3;
+  --glp-teal-400: #3D8585;
+  --glp-teal-500: #2A5454;
+  --glp-teal-600: #234747;
+  --glp-teal-700: #1C3939;
+  --glp-teal-800: #152C2C;
+  --glp-teal-900: #0E1F1F;
+
+  /* Extended gold palette for depth */
+  --glp-gold-50: #FCF8ED;
+  --glp-gold-100: #F7EDD4;
+  --glp-gold-200: #EDDBA8;
+  --glp-gold-300: #E3C87C;
+  --glp-gold-400: #D4A84B;
+  --glp-gold-500: #C4922D;
+  --glp-gold-600: #A47724;
+  --glp-gold-700: #845C1C;
+  --glp-gold-800: #634314;
+  --glp-gold-900: #422C0D;
 
   /* RGB helpers (for rgba(var(--x-rgb), a)) */
-  --glp-sage-rgb: 143, 191, 159;
-  --glp-sage-deep-rgb: 47, 93, 93;
-  --glp-blush-rgb: 244, 199, 195;
-  --glp-paper-rgb: 250, 249, 247;
-  --glp-ink-rgb: 58, 58, 58;
-  --glp-gold-rgb: 234, 195, 59;
+  --glp-sage-rgb: 127, 179, 154;
+  --glp-sage-deep-rgb: 42, 84, 84;
+  --glp-blush-rgb: 242, 189, 184;
+  --glp-paper-rgb: 250, 250, 248;
+  --glp-ink-rgb: 46, 48, 50;
+  --glp-gold-rgb: 212, 168, 75;
 
   /* ------------------------------------------------------------
     Semantic tokens (use these everywhere in new code)
