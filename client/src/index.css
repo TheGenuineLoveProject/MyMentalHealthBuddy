@@ -13,21 +13,21 @@
   --charcoal: var(--glp-ink);
   --gold: var(--glp-gold);
 
-  /* Semantic tokens */
+  /* Semantic tokens - ENHANCED CONTRAST */
   --background: 36 33% 98%;
-  --foreground: 0 0% 23%;
+  --foreground: 0 0% 15%;
   --card: 0 0% 100%;
-  --card-foreground: 0 0% 23%;
+  --card-foreground: 0 0% 15%;
   --popover: 0 0% 100%;
-  --popover-foreground: 0 0% 23%;
-  --primary: 145 25% 65%;
-  --primary-foreground: 0 0% 100%;
+  --popover-foreground: 0 0% 15%;
+  --primary: 173 40% 25%;
+  --primary-foreground: 36 33% 98%;
   --secondary: 6 68% 86%;
-  --secondary-foreground: 0 0% 12%;
-  --accent: 45 65% 53%;
-  --accent-foreground: 0 0% 10%;
+  --secondary-foreground: 0 0% 10%;
+  --accent: 42 55% 48%;
+  --accent-foreground: 0 0% 8%;
   --muted: 145 18% 90%;
-  --muted-foreground: 0 0% 45%;
+  --muted-foreground: 0 0% 35%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 98%;
   --border: 145 18% 86%;
@@ -104,21 +104,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #4a7a5e 0%, #5A8A6E 100%);
-  color: white;
-  box-shadow: 0 4px 14px rgba(var(--glp-sage-deep-rgb), 0.25);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: var(--glp-sage-deep);
+  color: var(--glp-paper);
+  box-shadow: 0 4px 14px rgba(var(--glp-sage-deep-rgb), 0.35);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(var(--glp-sage-deep-rgb), 0.35);
+  box-shadow: 0 8px 24px rgba(var(--glp-sage-deep-rgb), 0.45);
+  filter: brightness(1.08);
 }
 
 .btn-secondary {
-  background: white;
-  color: var(--teal);
-  border: 2px solid var(--sage);
+  background: var(--glp-surface);
+  color: var(--glp-sage-deep);
+  border: 2px solid var(--glp-sage);
 }
 
 .btn-secondary:hover {
@@ -630,9 +632,9 @@ button {
 }
 
 button.primary, .btn-primary {
-  background: linear-gradient(135deg, #4a7a5e 0%, #5A8A6E 100%);
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  background: var(--glp-sage-deep);
+  color: var(--glp-paper);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 a, a:visited {
