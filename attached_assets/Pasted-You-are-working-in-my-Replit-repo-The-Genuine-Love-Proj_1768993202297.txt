@@ -1,0 +1,49 @@
+You are working in my Replit repo “The Genuine Love Project”.
+Do ONE clean UX completion pass: Mode system (Default/Low-Stim/Reading), NotFound upgrade, and navigation lockdown.
+Keep diffs minimal and keep audits green.
+
+HARD RULES
+1) Do NOT rename/refactor any existing `--glp-*` variables.
+2) No raw hex colors except `client/src/styles/brand-tokens.css`.
+3) Fonts only Inter + Playfair Display (+ system fallbacks).
+4) Internal links must match canonical routes in `client/src/App.jsx` exactly.
+5) No audit bypassing. Fix root causes.
+
+A) MODE SYSTEM (real UI + persistence)
+- Modes: default (no dataset or empty), "low-stim", "reading"
+- Persist: localStorage key `glp-mode`
+- Apply BEFORE paint (set `document.documentElement.dataset.mode` early in `client/src/main.jsx` or earliest entry)
+- Add toggle in:
+  1) Header top-right (compact segmented control or dropdown)
+  2) Settings page (Display/Mode section with short descriptions)
+- A11y: keyboard reachable, active state uses aria-pressed/aria-current, focus-visible ring uses existing gold token (no hex)
+
+B) VISUAL CONSISTENCY (no new token names)
+- Standardize buttons: primary / ghost / disabled (use existing Tailwind semantics + `--glp-*`)
+- Links: teal text, underline on hover, gold focus ring
+- Low-stim: reduce shadows/gradients/motion (CSS via `[data-mode="low-stim"]` overrides)
+- Reading: maximize legibility (higher contrast, flatter surfaces, calmer spacing)
+
+C) NAV LOCKDOWN
+- Search for all internal links (Header/Footer/CTA/cards)
+- Ensure each path exists in `client/src/App.jsx`
+- Fix drift or remove broken links (do not invent routes)
+
+D) NOTFOUND
+- Upgrade NotFound component used by fallback route in App.jsx:
+  - Playfair headline + supportive copy
+  - Primary: “Go Home”
+  - Secondary: “Go Back”
+  - Quick Links: 4–6 items, must be real routes from App.jsx only
+- Run nav audit afterwards
+
+E) VERIFY (MUST RUN)
+- `npm run audit`
+- Manual click-test in Preview: header/footer links + NotFound quick links + mode persistence on refresh
+
+OUTPUT FORMAT (REQUIRED)
+1) Checklist A–E complete (with brief notes).
+2) Commands run + results (pass/fail).
+3) Files changed (each with 1-line summary).
+4) NotFound Quick Links (label + exact path).
+Proceed now.
