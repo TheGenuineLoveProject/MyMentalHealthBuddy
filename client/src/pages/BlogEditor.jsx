@@ -65,13 +65,18 @@ export default function BlogEditor() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-[var(--glp-paper)]">
+      <div className="min-h-screen hero-premium relative overflow-hidden">
         <TglpNavbar />
-        <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-2xl font-semibold text-[var(--glp-sage-deep)]">Sign in to write</h2>
-          <p className="mt-2 text-[var(--glp-ink)]/70">You need to be signed in to create blog posts.</p>
+        <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
+        <div className="max-w-3xl mx-auto px-4 py-20 text-center relative z-10">
+          <div className="icon-container icon-xl icon-glow-sage mx-auto mb-6">
+            <Save className="w-8 h-8" />
+          </div>
+          <h2 className="text-display-md text-teal mb-3">Sign in to write</h2>
+          <p className="text-body-md text-[var(--glp-ink)]/70 mb-8">You need to be signed in to create blog posts.</p>
           <Link href="/login">
-            <button className="mt-6 px-6 py-3 rounded-xl bg-[var(--glp-sage-deep)] text-white text-sm font-medium hover:bg-[var(--glp-sage)] transition-colors" data-testid="button-login">
+            <button className="btn-premium btn-lg" data-testid="button-login">
               Sign In
             </button>
           </Link>
@@ -81,11 +86,13 @@ export default function BlogEditor() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--glp-paper)]">
+    <div className="min-h-screen hero-premium relative overflow-hidden">
       <SEO title="Write a Post | The Genuine Love Project Blog" />
+      <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />
+      <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-20 -left-20 absolute" aria-hidden="true" />
       <TglpNavbar />
 
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className="max-w-4xl mx-auto px-4 py-8 relative z-10">
         <div className="flex items-center justify-between mb-8">
           <Link href="/blog">
             <button className="flex items-center gap-2 text-sm text-[var(--glp-sage-deep)] hover:text-[var(--glp-sage)] transition-colors" data-testid="button-back">
@@ -112,7 +119,7 @@ export default function BlogEditor() {
             <button
               onClick={handlePublish}
               disabled={createMutation.isPending || !title.trim() || !content.trim()}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--glp-sage-deep)] text-white text-sm font-medium hover:bg-[var(--glp-sage)] transition-colors disabled:opacity-50"
+              className="btn-premium flex items-center gap-2 disabled:opacity-50"
               data-testid="button-publish"
             >
               <Send className="w-4 h-4" /> Publish

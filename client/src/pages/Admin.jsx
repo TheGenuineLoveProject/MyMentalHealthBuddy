@@ -43,10 +43,12 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen hero-gradient p-6">
+    <div className="min-h-screen hero-premium relative overflow-hidden p-6">
       <SEO title="Admin Dashboard" description="Platform administration and metrics" />
+      <div className="decorative-orb decorative-orb-sage w-[600px] h-[600px] -top-40 -right-40 absolute" aria-hidden="true" />
+      <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] bottom-20 -left-32 absolute" aria-hidden="true" />
       
-      <div className="content-wrapper">
+      <div className="content-wrapper relative z-10">
         <header className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <div className="icon-container icon-xl icon-gradient-sage">

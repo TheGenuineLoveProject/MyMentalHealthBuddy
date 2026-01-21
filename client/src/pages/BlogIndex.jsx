@@ -88,14 +88,16 @@ export default function BlogIndex() {
   });
 
   return (
-    <div className="min-h-screen bg-[var(--glp-paper)]">
+    <div className="min-h-screen hero-premium relative overflow-hidden">
       <SEO
         title="Blog | The Genuine Love Project"
         description="Explore articles on mental wellness, self-love, and personal growth from The Genuine Love Project community."
       />
+      <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
+      <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-32 -left-32 absolute" aria-hidden="true" />
       <TglpNavbar />
 
-      <main className="mx-auto max-w-6xl px-4 py-10">
+      <main className="mx-auto max-w-6xl px-4 py-10 relative z-10">
         <section className="relative overflow-hidden rounded-3xl border border-[rgba(var(--glp-sage-rgb), 0.22)] bg-[rgba(250,249,247,0.55)] p-8 shadow-sm backdrop-blur mb-10">
           <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full blur-3xl opacity-40"
                style={{ background: "radial-gradient(circle, var(--glp-sage) 0%, transparent 60%)" }} />
