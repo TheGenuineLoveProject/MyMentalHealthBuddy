@@ -43,14 +43,7 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 5173,
     strictPort: false,
-    allowedHosts: [
-      'localhost',
-      '127.0.0.1',
-      '.replit.dev',
-      '.replit.app', 
-      '.repl.co',
-      '.spock.replit.dev'
-    ]
+    allowedHosts: true
   },
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
