@@ -81,10 +81,13 @@ export default function Admin() {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[1, 2, 3, 4].map(i => (
-              <div key={i} className="card-elevated animate-pulse">
-                <div className="h-12 w-12 bg-sage-100 rounded-xl mb-4"></div>
-                <div className="h-8 w-20 bg-sage-100 rounded mb-2"></div>
-                <div className="h-4 w-24 bg-sage-50 rounded"></div>
+              <div key={i} className="skeleton-premium-card">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-12 h-12 skeleton-premium rounded-xl"></div>
+                  <div className="w-16 h-5 skeleton-premium rounded-full"></div>
+                </div>
+                <div className="h-10 w-20 skeleton-premium rounded-lg mb-2"></div>
+                <div className="h-4 w-24 skeleton-premium rounded"></div>
               </div>
             ))}
           </div>

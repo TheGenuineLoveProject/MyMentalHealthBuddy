@@ -48,7 +48,10 @@ export default function ControlDashboard() {
         title="Control Dashboard - The Genuine Love Project"
         description="Platform administration and management controls."
       />
-      <div className="min-h-screen hero-gradient">
+      <div className="min-h-screen hero-premium relative overflow-hidden">
+        <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -left-40 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-gold w-[350px] h-[350px] bottom-32 -right-32 absolute" aria-hidden="true" />
+        
         <header className="sticky top-0 z-10 bg-white/80 backdrop-blur-xl border-b border-[var(--sage-200)]">
           <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -70,17 +73,18 @@ export default function ControlDashboard() {
           </div>
         </header>
 
-        <main className="max-w-6xl mx-auto px-4 py-8">
+        <main className="max-w-6xl mx-auto px-4 py-8 relative z-10">
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {CONTROL_CARDS.map((card, index) => {
               const Icon = card.icon;
               return (
                 <div 
                   key={index}
-                  className="card-bordered hover:shadow-lg transition-shadow cursor-pointer"
+                  className="card-premium hover-lift cursor-pointer p-6"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className={`icon-container icon-lg ${card.color}`}>
+                    <div className={`icon-container icon-lg ${card.color} group-hover:scale-110 transition-transform`}>
                       <Icon className="w-6 h-6" />
                     </div>
                     <div>

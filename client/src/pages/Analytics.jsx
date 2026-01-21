@@ -28,15 +28,26 @@ export default function Analytics() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen p-6 hero-gradient" role="status" aria-label="Loading analytics">
+      <div className="min-h-screen p-6 hero-premium relative overflow-hidden" role="status" aria-label="Loading analytics">
         <SEO title="Analytics - Loading" description="Loading your wellness analytics" />
-        <div className="content-wrapper">
+        <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-20 -left-20 absolute" aria-hidden="true" />
+        <div className="content-wrapper relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="space-y-6">
-              <div className="h-8 bg-[var(--sage-100)] rounded-xl w-1/4 animate-pulse" aria-hidden="true"></div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="h-10 skeleton-premium w-1/3" aria-hidden="true"></div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="h-32 bg-white/50 rounded-xl animate-pulse" aria-hidden="true"></div>
+                  <div key={i} className="skeleton-premium-card h-36" aria-hidden="true">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="w-12 h-12 skeleton-premium rounded-xl"></div>
+                      <div className="flex-1 space-y-2">
+                        <div className="h-4 skeleton-premium w-1/2"></div>
+                        <div className="h-3 skeleton-premium w-1/3"></div>
+                      </div>
+                    </div>
+                    <div className="h-8 skeleton-premium w-1/4"></div>
+                  </div>
                 ))}
               </div>
             </div>
