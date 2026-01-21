@@ -39,12 +39,12 @@ export default function SignUp() {
 
   const signUpMutation = useMutation({
     mutationFn: async (data: SignUpForm) => {
-      const res = await apiRequest("POST", "/api/auth/signup", {
+      const res = await apiRequest("POST", "/api/auth/register", {
         name: data.name,
         email: data.email,
         password: data.password
       });
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       toast({ title: "Welcome to Genuine Love!", description: "Your account has been created successfully." });
