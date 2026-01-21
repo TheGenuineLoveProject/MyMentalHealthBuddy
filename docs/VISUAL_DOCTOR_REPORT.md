@@ -1,25 +1,38 @@
 # Visual Doctor Report
 
-**Generated:** 2026-01-21T03:57:58.220Z  
+**Generated:** 2026-01-21T04:07:16.581Z  
 **Status:** ✅ PASS
 
 ## Summary
 
 | Metric | Count |
 |--------|-------|
-| Total Files Scanned | 267 |
-| Clean Files | 267 |
+| Total Files Scanned | 279 |
+| Clean Files | 279 |
 | Files with Violations | 0 |
-| Total Hex Violations | 0 |
+| Total Violations | 0 |
+| Hex Color Violations | 0 |
+| Font Violations | 0 |
+| Inline Style Violations | 0 |
 
 ## Rules
 
+### Hex Colors
 - All colors must use CSS variables from `brand-tokens.css`
 - Allowed exceptions: `#fff`, `#000`, `#ffffff`, `#000000`
-- Token files are exempt from this rule
+- Token files (`brand-tokens.css`, `tokens.css`) are exempt
+
+### Fonts
+- Only Inter + Playfair Display + system fallbacks are allowed
+- Font definitions must be in CSS files only
+
+### Inline Styles
+- Inline hex colors are disallowed in JSX/TSX files
+- Allowlisted: CSS variables (`var(--glp-...)`) and layout numeric styles
 
 ## Result
 
-🎉 **All files are compliant!** No raw hex colors found outside of token files.
+🎉 **All files are compliant!** No violations found.
 
 All colors are properly using the design token system via CSS variables.
+All fonts use the approved Inter + Playfair Display families.

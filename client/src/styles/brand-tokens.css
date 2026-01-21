@@ -41,6 +41,18 @@
   --glp-border: rgba(var(--glp-ink-rgb), 0.12);
   --glp-ring: var(--glp-gold);
 
+  /* Shorthand semantic aliases (for strict specification compliance) */
+  --bg: var(--glp-paper);
+  --text-1: var(--glp-ink);
+  --text-2: rgba(58, 58, 58, 0.72);
+  --surface-1: #FFFFFF;
+  --surface-2: rgba(250, 249, 247, 0.70);
+  --primary: var(--glp-sage-deep);
+  --primary-contrast: var(--glp-paper);
+  --accent: var(--glp-gold);
+  --ring: var(--glp-gold);
+  --border: rgba(58, 58, 58, 0.14);
+
   /* Radius tokens */
   --glp-radius-1: 12px;
   --glp-radius-2: 16px;
@@ -223,6 +235,12 @@ html[data-mode="low-stim"]{
   --glp-primary: var(--glp-sage-deep);
   --glp-accent: var(--glp-gold);
   --glp-ring: var(--glp-gold);
+
+  /* Semantic aliases for low-stim mode */
+  --accent: var(--glp-gold);
+  --ring: var(--glp-gold);
+  --border: rgba(58, 58, 58, 0.10);
+  --surface-2: rgba(244, 242, 239, 0.70);
 }
 
 /* ------------------------------------------------------------
@@ -248,4 +266,14 @@ html[data-mode="reading"]{
 
   /* keep ring visible */
   --glp-ring: var(--glp-gold);
+
+  /* Semantic aliases for reading mode */
+  --bg: #FFFFFF;
+  --text-1: #2A2A2A;
+  --text-2: rgba(42, 42, 42, 0.68);
+  --surface-1: #FFFFFF;
+  --surface-2: rgba(250, 250, 250, 0.85);
+  --primary-contrast: #FFFFFF;
+  --ring: var(--glp-gold);
+  --border: rgba(42, 42, 42, 0.16);
 }

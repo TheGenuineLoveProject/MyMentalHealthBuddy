@@ -19,7 +19,8 @@
     "typecheck": "npx tsc -p client/tsconfig.json --noEmit || true",
     "visual:report": "node scripts/visual-report.mjs",
     "visual:doctor": "node tools/visual-doctor.mjs",
-    "nav:audit": "node tools/nav-link-audit.mjs"
+    "nav:audit": "node tools/nav-link-audit.mjs",
+    "audit": "npm run nav:audit && npm run visual:doctor"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
