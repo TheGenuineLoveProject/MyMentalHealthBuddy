@@ -347,7 +347,7 @@ function ProductsSection() {
     },
   });
 
-  const digitalProducts = products || [];
+  const digitalProducts = Array.isArray(products) ? products : [];
 
   return (
     <div className="space-y-6">
