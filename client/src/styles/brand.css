@@ -1493,33 +1493,72 @@ html[data-mode="low-stim"] .surface-card-elevated:hover {
 .icon-circle-lg { width: 3rem; height: 3rem; }
 .icon-circle-xl { width: 4rem; height: 4rem; }
 
-/* Premium icon badges */
+/* Premium icon badges - healing luxury treatment */
 .icon-badge {
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--glp-radius-1);
-  box-shadow: var(--glp-shadow-sm);
+  box-shadow: 
+    var(--glp-shadow-sm),
+    0 0 0 1px rgba(var(--glp-ink-rgb), 0.04);
+  transition: transform var(--glp-motion-fast) var(--glp-ease),
+              box-shadow var(--glp-motion-fast) var(--glp-ease);
+}
+
+.icon-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    var(--glp-shadow-md),
+    0 0 0 1px rgba(var(--glp-ink-rgb), 0.06);
 }
 
 .icon-badge-sage {
-  background: linear-gradient(135deg, var(--glp-sage), var(--glp-primary));
+  background: linear-gradient(145deg, var(--glp-sage), var(--glp-primary));
   color: white;
+  box-shadow: 
+    var(--glp-shadow-sm),
+    0 4px 12px rgba(var(--glp-sage-rgb), 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
 .icon-badge-teal {
-  background: linear-gradient(135deg, var(--glp-primary), var(--glp-sage-deep));
+  background: linear-gradient(145deg, var(--glp-primary), var(--glp-sage-deep));
   color: var(--glp-primary-foreground);
+  box-shadow: 
+    var(--glp-shadow-sm),
+    0 4px 12px rgba(var(--glp-sage-deep-rgb), 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .icon-badge-gold {
-  background: linear-gradient(135deg, var(--glp-gold), var(--glp-warning-dark));
+  background: linear-gradient(145deg, var(--glp-gold), var(--glp-warning-dark));
   color: var(--glp-gray-900);
+  box-shadow: 
+    var(--glp-shadow-sm),
+    0 4px 12px rgba(var(--glp-gold-rgb), 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .icon-badge-soft {
   background: var(--glp-surface-2);
   color: var(--glp-primary);
+  border: 1px solid rgba(var(--glp-ink-rgb), 0.06);
+}
+
+/* Low-stim mode: reduce visual effects */
+[data-mode="low-stim"] .icon-badge {
+  box-shadow: var(--glp-shadow-xs);
+}
+
+[data-mode="low-stim"] .icon-badge:hover {
+  transform: none;
+}
+
+[data-mode="low-stim"] .icon-badge-sage,
+[data-mode="low-stim"] .icon-badge-teal,
+[data-mode="low-stim"] .icon-badge-gold {
+  box-shadow: var(--glp-shadow-xs);
 }
 
 /* ============================================================

@@ -16,14 +16,17 @@ export default function Home() {
       <div className="decorative-orb decorative-orb-blush w-[450px] h-[450px] top-32 -right-40 absolute" aria-hidden="true" />
       <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-32 left-1/4 absolute" aria-hidden="true" />
 
-      <nav className="relative z-10 content-wrapper flex items-center justify-between py-6">
-        <div className="flex items-center gap-3">
-          <img src={logo} alt="" className="h-11 w-auto" aria-hidden="true" />
-          <span className="text-heading-sm text-teal-dark hidden sm:block">
+      <nav 
+        className="relative z-10 mx-auto max-w-6xl py-6 pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))] flex items-center justify-between"
+        role="banner"
+      >
+        <div className="flex items-center gap-3 min-w-0">
+          <img src={logo} alt="" className="h-11 w-auto flex-shrink-0" aria-hidden="true" />
+          <span className="text-heading-sm text-teal-dark hidden sm:block truncate">
             The Genuine Love Project
           </span>
         </div>
-        <div className="flex items-center gap-4 sm:gap-6">
+        <div className="flex items-center gap-3 sm:gap-6 flex-shrink-0">
           <Link 
             href="/pricing" 
             className="text-sm text-sage font-medium hover:text-teal-dark transition-colors hidden sm:block"
@@ -33,7 +36,7 @@ export default function Home() {
           </Link>
           <Link 
             href="/login" 
-            className="btn-secondary-premium btn-sm"
+            className="btn-secondary-premium btn-sm whitespace-nowrap"
             data-testid="link-login"
           >
             Sign in
