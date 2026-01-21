@@ -3,8 +3,10 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser";
 import { z } from "zod";
+import { eq } from "drizzle-orm";
 
 import { db } from "../db/client.mjs";
+import { users } from "../../shared/schema.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 
 const router = express.Router();
@@ -78,8 +80,8 @@ router.post("/register", async (req, res) => {
   try {
     const data = RegisterSchema.parse(req.body);
 
-    const existing = await db.query.users?.findFirst?.({
-      where: (u, { eq }) => eq(u.email, data.email),
+    const existing = await db.query.users.findFirst({
+      where: eq(users.email, data.email),
     });
 
     if (existing) {
@@ -91,13 +93,13 @@ router.post("/register", async (req, res) => {
     const user = {
       id: crypto.randomUUID(),
       email: data.email,
-      password_hash: hashed,
-      name: data.name || null,
+      passwordHash: hashed,
+      name: data.name || data.email.split("@")[0],
       role: "user",
-      subscription_status: "free",
+      subscriptionStatus: "free",
     };
 
-    await db.insert?.(db.schema.users)?.values?.(user);
+    await db.insert(users).values(user);
 
     const accessToken = signAccessToken(user);
     const refreshToken = signRefreshToken(user);
@@ -113,8 +115,9 @@ router.post("/register", async (req, res) => {
         role: user.role || "user",
       },
     });
-  } catch {
-    res.status(400).json({ message: "Invalid registration data" });
+  } catch (error) {
+    console.error("Register error:", error);
+    res.status(400).json({ message: error.message || "Invalid registration data" });
   }
 });
 
@@ -129,8 +132,8 @@ router.post("/login", async (req, res) => {
     // Pre-computed hash for "password" (bcrypt cost 10)
     const DEV_ADMIN_HASH = "$2b$10$XqKLVXz5X5X5X5X5X5X5X.5X5X5X5X5X5X5X5X5X5X5X5X5X5X5";
     
-    let user = await db.query.users?.findFirst?.({
-      where: (u, { eq }) => eq(u.email, email),
+    let user = await db.query.users.findFirst({
+      where: eq(users.email, email),
     });
     
     // DEV ADMIN FALLBACK - only in development
