@@ -192,8 +192,8 @@ export default function MeditationTimer({ onComplete }) {
                 />
                 <defs>
                   <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#818cf8" />
-                    <stop offset="100%" stopColor="#a855f7" />
+                    <stop offset="0%" stopColor="var(--glp-indigo-light)" />
+                    <stop offset="100%" stopColor="var(--glp-purple-light)" />
                   </linearGradient>
                 </defs>
               </svg>

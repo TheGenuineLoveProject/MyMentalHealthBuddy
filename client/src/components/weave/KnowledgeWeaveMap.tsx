@@ -77,7 +77,7 @@ export default function KnowledgeWeaveMap() {
   if (activeWeave) {
     const clusters = findClusters(activeWeave.nodes, activeWeave.edges);
     const categoryColor = (catId: string) => 
-      KNOWLEDGE_CATEGORIES.find(c => c.id === catId)?.color || "#888";
+      KNOWLEDGE_CATEGORIES.find(c => c.id === catId)?.color || "var(--glp-gray-400)";
 
     return (
       <div className="space-y-6">

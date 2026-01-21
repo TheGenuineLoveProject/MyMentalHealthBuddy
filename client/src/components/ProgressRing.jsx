@@ -62,16 +62,16 @@ export default function ProgressRing({
 
 function getGradientColor(colorClass, position) {
   const colorMap = {
-    'from-purple-400': '#a78bfa',
-    'to-indigo-500': '#6366f1',
-    'from-pink-400': '#f472b6',
-    'to-rose-500': '#f43f5e',
-    'from-emerald-400': '#34d399',
-    'to-teal-500': '#14b8a6',
-    'from-amber-400': '#fbbf24',
-    'to-orange-500': '#f97316',
-    'from-cyan-400': '#22d3ee',
-    'to-blue-500': '#3b82f6',
+    'from-purple-400': 'var(--glp-purple-light)',
+    'to-indigo-500': 'var(--glp-indigo)',
+    'from-pink-400': 'var(--glp-pink-light)',
+    'to-rose-500': 'var(--glp-rose)',
+    'from-emerald-400': 'var(--glp-success-light)',
+    'to-teal-500': 'var(--glp-teal-light)',
+    'from-amber-400': 'var(--glp-warning-light)',
+    'to-orange-500': 'var(--glp-orange)',
+    'from-cyan-400': 'var(--glp-cyan-light)',
+    'to-blue-500': 'var(--glp-info)',
   };
 
   const parts = colorClass.split(' ');
@@ -79,5 +79,5 @@ function getGradientColor(colorClass, position) {
     ? parts.find(p => p.startsWith('from-'))
     : parts.find(p => p.startsWith('to-'));
   
-  return colorMap[target] || (position === 'from' ? '#a78bfa' : '#6366f1');
+  return colorMap[target] || (position === 'from' ? 'var(--glp-purple-light)' : 'var(--glp-indigo)');
 }

@@ -165,8 +165,8 @@ export default function HydrationTracker() {
               />
               <defs>
                 <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#06B6D4" />
-                  <stop offset="100%" stopColor="#3B82F6" />
+                  <stop offset="0%" stopColor="var(--glp-cyan)" />
+                  <stop offset="100%" stopColor="var(--glp-info)" />
                 </linearGradient>
               </defs>
             </svg>

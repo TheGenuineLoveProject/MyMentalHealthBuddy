@@ -203,8 +203,8 @@ export default function FocusTimer() {
               />
               <defs>
                 <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor={isBreak || isLongBreak ? "#10B981" : "#F43F5E"} />
-                  <stop offset="100%" stopColor={isBreak || isLongBreak ? "#14B8A6" : "#F97316"} />
+                  <stop offset="0%" stopColor={isBreak || isLongBreak ? "var(--glp-success)" : "var(--glp-rose)"} />
+                  <stop offset="100%" stopColor={isBreak || isLongBreak ? "var(--glp-teal-light)" : "var(--glp-orange)"} />
                 </linearGradient>
               </defs>
             </svg>

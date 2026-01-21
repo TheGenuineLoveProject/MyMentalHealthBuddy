@@ -58,7 +58,7 @@ const CodeCopilotPanel = ({ name }: CodeCopilotPanelProps) => {
             className="relative rounded-2xl overflow-hidden p-4"
             style={{
               background:
-                "radial-gradient(circle at 0% 0%, #22c55e 0%, transparent 45%), radial-gradient(circle at 100% 100%, #38bdf8 0%, transparent 45%), rgba(15,23,42,0.9)",
+                "radial-gradient(circle at 0% 0%, var(--glp-success) 0%, transparent 45%), radial-gradient(circle at 100% 100%, var(--glp-cyan-light) 0%, transparent 45%), rgba(15,23,42,0.9)",
               border: "1px solid rgba(148, 163, 184, 0.7)",
             }}
           >

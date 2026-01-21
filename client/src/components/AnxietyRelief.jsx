@@ -204,7 +204,7 @@ export default function AnxietyRelief() {
                 onChange={(e) => setAnxietyLevel(prev => ({ ...prev, before: Number(e.target.value) }))}
                 className="w-full h-3 rounded-full appearance-none cursor-pointer"
                 style={{
-                  background: `linear-gradient(to right, #10b981 0%, #f59e0b 50%, #ef4444 100%)`
+                  background: `linear-gradient(to right, var(--glp-success) 0%, var(--glp-warning) 50%, var(--glp-error) 100%)`
                 }}
                 data-testid="slider-anxiety-before"
                 aria-label="Anxiety level before"
@@ -356,7 +356,7 @@ export default function AnxietyRelief() {
                 onChange={(e) => setAnxietyLevel(prev => ({ ...prev, after: Number(e.target.value) }))}
                 className="w-full h-3 rounded-full appearance-none cursor-pointer"
                 style={{
-                  background: `linear-gradient(to right, #10b981 0%, #f59e0b 50%, #ef4444 100%)`
+                  background: `linear-gradient(to right, var(--glp-success) 0%, var(--glp-warning) 50%, var(--glp-error) 100%)`
                 }}
                 data-testid="slider-anxiety-after"
                 aria-label="Anxiety level after"

@@ -180,8 +180,8 @@ export default function WellnessTimer() {
             />
             <defs>
               <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#8b5cf6" />
-                <stop offset="100%" stopColor="#6366f1" />
+                <stop offset="0%" stopColor="var(--glp-purple)" />
+                <stop offset="100%" stopColor="var(--glp-indigo)" />
               </linearGradient>
             </defs>
           </svg>

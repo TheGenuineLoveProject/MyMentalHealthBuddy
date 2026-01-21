@@ -55,6 +55,72 @@
   --glp-motion-fast: 140ms;
   --glp-motion-med: 220ms;
   --glp-ease: cubic-bezier(.2,.8,.2,1);
+
+  /* ------------------------------------------------------------
+    Functional colors (for UI states, charts, and visualizations)
+  ------------------------------------------------------------ */
+  --glp-success: #10b981;
+  --glp-success-light: #34d399;
+  --glp-success-dark: #059669;
+  --glp-success-rgb: 16, 185, 129;
+
+  --glp-warning: #f59e0b;
+  --glp-warning-light: #fbbf24;
+  --glp-warning-dark: #d97706;
+  --glp-warning-rgb: 245, 158, 11;
+
+  --glp-error: #ef4444;
+  --glp-error-light: #f87171;
+  --glp-error-dark: #dc2626;
+  --glp-error-rgb: 239, 68, 68;
+
+  --glp-info: #3b82f6;
+  --glp-info-light: #60a5fa;
+  --glp-info-dark: #2563eb;
+  --glp-info-rgb: 59, 130, 246;
+
+  --glp-cyan: #06b6d4;
+  --glp-cyan-light: #22d3ee;
+  --glp-cyan-rgb: 6, 182, 212;
+
+  --glp-purple: #8b5cf6;
+  --glp-purple-light: #a78bfa;
+  --glp-purple-dark: #7c3aed;
+  --glp-purple-rgb: 139, 92, 246;
+
+  --glp-indigo: #6366f1;
+  --glp-indigo-light: #818cf8;
+  --glp-indigo-rgb: 99, 102, 241;
+
+  --glp-rose: #f43f5e;
+  --glp-rose-light: #fb7185;
+  --glp-rose-dark: #e11d48;
+  --glp-rose-rgb: 244, 63, 94;
+
+  --glp-orange: #f97316;
+  --glp-orange-light: #fb923c;
+  --glp-orange-rgb: 249, 115, 22;
+
+  --glp-lime: #84cc16;
+  --glp-lime-rgb: 132, 204, 22;
+
+  --glp-teal-light: #14b8a6;
+  --glp-teal-rgb: 20, 184, 166;
+
+  --glp-pink: #ec4899;
+  --glp-pink-light: #f472b6;
+  --glp-pink-rgb: 236, 72, 153;
+
+  /* Gray scale for neutral elements */
+  --glp-gray-100: #f3f4f6;
+  --glp-gray-200: #e5e7eb;
+  --glp-gray-300: #d1d5db;
+  --glp-gray-400: #9ca3af;
+  --glp-gray-500: #6b7280;
+  --glp-gray-600: #4b5563;
+  --glp-gray-700: #374151;
+  --glp-gray-800: #1f2937;
+  --glp-gray-900: #111827;
 }
 
 /* ------------------------------------------------------------

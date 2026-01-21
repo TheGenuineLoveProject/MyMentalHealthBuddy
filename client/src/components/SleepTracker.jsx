@@ -182,7 +182,7 @@ export default function SleepTracker() {
             onChange={(e) => setSleepData(prev => ({ ...prev, quality: Number(e.target.value) }))}
             className="w-full h-3 rounded-full appearance-none cursor-pointer"
             style={{
-              background: `linear-gradient(to right, #ef4444 0%, #f59e0b 25%, #84cc16 50%, #10b981 75%, #14b8a6 100%)`
+              background: `linear-gradient(to right, var(--glp-error) 0%, var(--glp-warning) 25%, var(--glp-lime) 50%, var(--glp-success) 75%, var(--glp-teal-light) 100%)`
             }}
             data-testid="slider-quality"
             aria-label="Sleep quality rating"

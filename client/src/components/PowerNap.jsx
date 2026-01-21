@@ -239,8 +239,8 @@ export default function PowerNap() {
                   />
                   <defs>
                     <linearGradient id="napGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#6366F1" />
-                      <stop offset="100%" stopColor="#A855F7" />
+                      <stop offset="0%" stopColor="var(--glp-indigo)" />
+                      <stop offset="100%" stopColor="var(--glp-purple-light)" />
                     </linearGradient>
                   </defs>
                 </svg>
