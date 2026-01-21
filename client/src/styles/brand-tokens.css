@@ -3,6 +3,11 @@
 /* SINGLE SOURCE OF TRUTH for all brand colors and semantic tokens */
 
 :root{
+  /* Safe area insets for mobile devices */
+  --glp-safe-top: env(safe-area-inset-top, 0px);
+  --glp-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --glp-safe-left: env(safe-area-inset-left, 0px);
+  --glp-safe-right: env(safe-area-inset-right, 0px);
   /* ------------------------------------------------------------
     Core palette (keep these names: your Tailwind config already uses them)
   ------------------------------------------------------------ */

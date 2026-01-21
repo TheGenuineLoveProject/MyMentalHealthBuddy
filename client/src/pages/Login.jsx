@@ -145,6 +145,22 @@ export default function Login() {
                 </Link>
               </p>
             </div>
+            
+            {import.meta.env.DEV && (
+              <div className="mt-4 pt-4 border-t border-dashed border-sage-200/50 text-center">
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.setItem("glp-qa", "1");
+                    setLocation("/dashboard");
+                  }}
+                  className="text-xs text-sage-400 hover:text-sage-600 underline transition-colors"
+                  data-testid="button-qa-mode"
+                >
+                  Enable QA Mode (DEV)
+                </button>
+              </div>
+            )}
           </div>
 
           <p className="text-center text-xs text-sage-400 mt-6">

@@ -8,22 +8,36 @@ export default function TglpNavbar() {
   const isActive = (path) => location === path;
   
   return (
-    <header className="relative z-50 py-5 px-6 flex items-center justify-between max-w-6xl mx-auto" role="banner">
-      <Link href="/" className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500 focus-visible:ring-offset-2 rounded-lg" aria-label="The Genuine Love Project home" data-testid="link-brand-home">
+    <header 
+      className="relative z-50 py-5 px-6 grid grid-cols-3 items-center max-w-6xl mx-auto" 
+      role="banner"
+      style={{ paddingTop: "calc(1.25rem + var(--glp-safe-top, 0px))" }}
+    >
+      <div className="flex items-center">
+        <ModeToggle />
+      </div>
+      
+      <Link 
+        href="/" 
+        className="flex items-center justify-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 rounded-lg justify-self-center" 
+        aria-label="The Genuine Love Project home" 
+        data-testid="link-brand-home"
+      >
         <img 
           src="/brand/logo.png" 
           alt="The Genuine Love Project" 
           className="h-14 w-auto group-hover:scale-105 transition-transform"
           data-testid="img-brand-logo"
         />
-        <div className="leading-tight">
+        <div className="leading-tight hidden sm:block">
           <span className="text-lg font-bold tracking-tight text-[var(--glp-sage-deep)] block" data-testid="text-brand-name">
             The Genuine Love Project
           </span>
           <span className="text-xs text-[var(--glp-ink)]/70">Live in Genuine Love</span>
         </div>
       </Link>
-      <nav className="flex items-center gap-3" aria-label="Main navigation">
+      
+      <nav className="flex items-center justify-end gap-3" aria-label="Main navigation">
         <Link 
           href="/blog" 
           className="nav-link hidden sm:flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
@@ -41,7 +55,6 @@ export default function TglpNavbar() {
         >
           Sign In
         </Link>
-        <ModeToggle />
         <Link 
           href="/register" 
           className="btn btn-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2" 
