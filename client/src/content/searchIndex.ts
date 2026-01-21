@@ -1,5 +1,4 @@
-export type SearchType = "Tool" | "Guide" | "Term" | "Q&A" | "News" | "Resource" | "Library" | "Definition"
-  | "Support" | "Evidence" | "Update" | "Platform";
+export type SearchType = "Tool" | "Guide" | "Term" | "Q&A" | "News" | "Resource" | "Library" | "Definition" | "Support" | "Evidence" | "Update" | "Platform";
 
 export interface SearchItem {
   id?: string;
