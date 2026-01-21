@@ -7,11 +7,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', "serif"],
-        sans: ['"Inter"', "system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+        serif: ['"Playfair Display"', "ui-serif", "Georgia", "serif"],
+        display: ['"Playfair Display"', "ui-serif", "Georgia", "serif"],
+        sans: ['"Inter"', "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial", "sans-serif"],
       },
 
       fontSize: {
+        /* Existing scale */
         "display-1": ["3.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
         "display-2": ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
         "heading-1": ["2rem", { lineHeight: "1.2" }],
@@ -20,6 +22,15 @@ export default {
         body: ["1.125rem", { lineHeight: "1.65" }],
         quote: ["1.25rem", { lineHeight: "1.6" }],
         caption: ["0.875rem", { lineHeight: "1.45" }],
+        /* Canva-style typography scale (tglp-*) */
+        "tglp-title": ["56px", { lineHeight: "1.15" }],
+        "tglp-subtitle": ["36px", { lineHeight: "1.2" }],
+        "tglp-heading": ["32px", { lineHeight: "1.25" }],
+        "tglp-subheading": ["28px", { lineHeight: "1.35" }],
+        "tglp-section": ["24px", { lineHeight: "1.35" }],
+        "tglp-body": ["18px", { lineHeight: "1.65" }],
+        "tglp-quote": ["20px", { lineHeight: "1.6" }],
+        "tglp-caption": ["14px", { lineHeight: "1.5" }],
       },
 
       borderRadius: {
@@ -27,11 +38,15 @@ export default {
         md: "var(--glp-radius-md)",
         xl: "1rem",
         "2xl": "1.25rem",
+        glp1: "var(--glp-radius-1)",
+        glp2: "var(--glp-radius-2)",
       },
 
       boxShadow: {
         soft: "0 6px 20px rgba(0,0,0,0.06)",
         1: "var(--glp-shadow-1)",
+        glp1: "var(--glp-shadow-1)",
+        glp2: "var(--glp-shadow-2)",
       },
 
       transitionDuration: {

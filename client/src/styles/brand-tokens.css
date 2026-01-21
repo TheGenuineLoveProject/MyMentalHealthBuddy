@@ -1,5 +1,6 @@
 /* client/src/styles/brand-tokens.css */
 /* The Genuine Love Project — Design Tokens (Deep Teal + Gold) */
+/* SINGLE SOURCE OF TRUTH for all brand colors and semantic tokens */
 
 :root{
   /* ------------------------------------------------------------
@@ -40,11 +41,17 @@
   --glp-border: rgba(var(--glp-ink-rgb), 0.12);
   --glp-ring: var(--glp-gold);
 
+  /* Radius tokens */
+  --glp-radius-1: 12px;
+  --glp-radius-2: 16px;
   --glp-radius-sm: 12px;
   --glp-radius-md: 16px;
 
+  /* Shadow tokens */
   --glp-shadow-1: 0 6px 20px rgba(0,0,0,0.06);
+  --glp-shadow-2: 0 10px 32px rgba(0,0,0,0.08);
 
+  /* Motion tokens */
   --glp-motion-fast: 140ms;
   --glp-motion-med: 220ms;
   --glp-ease: cubic-bezier(.2,.8,.2,1);
@@ -60,7 +67,8 @@ html[data-mode="low-stim"]{
 
   --glp-surface-2: #F4F2EF;
   --glp-border: rgba(var(--glp-ink-rgb), 0.10);
-  --glp-shadow-1: 0 0 0 rgba(0,0,0,0);
+  --glp-shadow-1: none;
+  --glp-shadow-2: none;
 
   /* keep primary teal (calm + accessible) */
   --glp-primary: var(--glp-sage-deep);
@@ -78,13 +86,16 @@ html[data-mode="reading"]{
   --glp-paper-rgb: 255, 255, 255;
 
   --glp-surface: #FFFFFF;
-  --glp-surface-2: #FFFFFF;
+  --glp-surface-2: #FAFAFA;
 
-  --glp-text: #2E2E2E;
-  --glp-ink: #2E2E2E;
-  --glp-ink-rgb: 46, 46, 46;
+  --glp-text: #2A2A2A;
+  --glp-ink: #2A2A2A;
+  --glp-ink-rgb: 42, 42, 42;
+  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.68);
 
-  --glp-border: rgba(var(--glp-ink-rgb), 0.14);
+  --glp-border: rgba(var(--glp-ink-rgb), 0.16);
+  --glp-shadow-1: 0 2px 8px rgba(0,0,0,0.04);
+  --glp-shadow-2: 0 4px 16px rgba(0,0,0,0.06);
 
   /* keep ring visible */
   --glp-ring: var(--glp-gold);
