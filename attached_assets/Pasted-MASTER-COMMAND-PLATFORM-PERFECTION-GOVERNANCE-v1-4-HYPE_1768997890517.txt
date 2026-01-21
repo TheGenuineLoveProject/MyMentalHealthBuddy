@@ -1,0 +1,236 @@
+MASTER COMMAND — PLATFORM PERFECTION GOVERNANCE (v1.4 “HYPERLOOP”)
+Repo: The Genuine Love Project
+
+Intent (professional translation of “360° A→Z × 100B × 100B evolution”):
+Run a strict, evidence-gated improvement loop across the full platform A→Z.
+If any gate fails, iterate ONLY within that failing scope until green (no scope expansion).
+Stop only when ALL gates pass and the final report includes diffs + rollback.
+
+ABSOLUTE RULE: NO SCOPE CREEP.
+If a change is not required by failing gates OR explicitly required below, do not do it.
+
+══════════════════════════════════════════════════════════════════════
+HARD CONSTRAINTS (NON-NEGOTIABLE)
+1) Do NOT rename/refactor existing CSS variable names. Keep all `--glp-*` names EXACT.
+2) No raw hex colors anywhere except: `client/src/styles/brand-tokens.css`.
+3) Fonts allowed ONLY: Inter + Playfair Display (+ system fallbacks). No other font families.
+4) All internal navigation links MUST match canonical routes in `client/src/App.jsx` exactly.
+5) Minimal diffs only. No broad rewrites. Improvements via tokens + Tailwind semantic classes.
+6) Do NOT loosen/bypass tests/audits. Fix root causes properly.
+7) Do NOT invent new routes unless a page already exists and is referenced.
+8) Do NOT add dependencies unless strictly necessary to fix failing tests/audits (must justify).
+
+Brand/Safety: supportive “healing-luxury” tone OK; do NOT make medical claims or promises.
+
+══════════════════════════════════════════════════════════════════════
+SOURCE OF TRUTH (READ FIRST)
+- Router: `client/src/App.jsx`
+- Tokens: `client/src/styles/brand-tokens.css`
+- Brand CSS: `client/src/styles/brand.css` (if present)
+- Global CSS entry: `client/src/index.css` (and `client/src/main.css` if used)
+- Tailwind config: `tailwind.config.js`
+- Tests: `tests/auth.test.mjs`, `server/tests/*` (if present)
+- Audits: `tools/nav-link-audit.mjs`, `tools/visual-doctor.mjs`
+- Reports: `docs/NAV_LINK_AUDIT.md`, `docs/VISUAL_DOCTOR_REPORT.md`
+
+══════════════════════════════════════════════════════════════════════
+360° A→Z COVERAGE MAP (GATES)
+A) Auth/login correctness + safe errors
+B) Admin access control correctness
+C) Build/run determinism (ports + health checks)
+D) Deterministic test harness (no manual dev server dependency)
+E) Token integrity (no stray hex, no rogue colors)
+F) Contrast/readability (fix washed-out UI evidence)
+G) Forms (inputs/labels/errors/help text/focus)
+H) Buttons & CTAs (clear hierarchy, accessible focus)
+I) Links (hover underline only + focus ring)
+J) Cards/surfaces (separation + consistent radius/elevation)
+K) Icons (24px baseline, token-driven)
+L) Typography (Playfair headings, Inter body; hierarchy)
+M) Modes (Default/Low-Stim/Reading) + pre-paint + persistence
+N) Navigation integrity (App.jsx canonical; zero drift)
+O) NotFound premium 404 (real quick links)
+P) Motion (prefers-reduced-motion + low-stim reduction)
+Q) Responsiveness sanity (mobile/tablet layout pass)
+R) Performance sanity (no heavy CSS churn; avoid obvious rerenders)
+S) Security hygiene (no stack leaks, consistent auth messages)
+T) Tooling & audits (nav-link-audit + visual-doctor clean)
+U) Upgrade docs (color/typography/canva/ops)
+V) Verification (commands actually run)
+W) Write rollback steps
+X) eXtra: production env docs (no invented secrets)
+Y) “You are here” cues (aria-current/active nav when applicable)
+Z) Zero regressions (minimal diffs + revert guidance)
+
+══════════════════════════════════════════════════════════════════════
+HYPERLOOP RULE (THE “100B × 100B” OPERATIONALIZER)
+If a gate fails:
+1) Revert the smallest failing diff (or isolate it),
+2) Apply a narrower fix within the same scope,
+3) Re-run only the failing gate(s),
+4) Repeat until green.
+Never expand scope to “nice-to-haves.”
+
+══════════════════════════════════════════════════════════════════════
+EXECUTION: THREE AGENTS IN SEQUENCE (STRICT ORDER)
+Agent 1: QA Guardian → Agent 2: UX Finisher → Agent 3: Ops + Content Curator
+Do not start Agent 2 until Agent 1 gates are green.
+
+══════════════════════════════════════════════════════════════════════
+PHASE 0 — BASELINE EVIDENCE (RUN FIRST)
+Run and capture outputs (include excerpts in final report):
+- `node -v`
+- `npm -v`
+- `npm install`
+
+Port hygiene (required; prevents EADDRINUSE/ECONNREFUSED):
+- `lsof -i :5000 || true`
+- `kill -9 $(lsof -t -i :5000) 2>/dev/null || true`
+- `lsof -i :3000 || true`
+- `kill -9 $(lsof -t -i :3000) 2>/dev/null || true`
+
+Baseline gates:
+- `npm run test:auth || npx vitest run tests/auth.test.mjs`
+- `npm run audit`
+If `npm run build` exists, run it and record pass/fail (do not add build if missing):
+- `npm run build || true`
+
+══════════════════════════════════════════════════════════════════════
+AGENT 1 — QA GUARDIAN (LOGIN + ADMIN + DETERMINISM)
+Goal: deterministic tests; no ECONNREFUSED/EADDRINUSE; login/admin behavior correct and safe.
+
+1) Inspect:
+- `package.json` scripts (test:auth/dev/start/build)
+- `tests/auth.test.mjs` (BASE_URL expectations, endpoints, security requirements)
+- server auth/admin route guards + error formatting
+
+2) Fix root causes of flakiness:
+Implement MINIMUM deterministic harness so tests never require a manually running dev server.
+Preferred:
+- Modify `test:auth` (or a small helper script it calls) to:
+  a) spawn server as child process
+  b) wait for `/api/health` with bounded polling + timeout
+  c) run vitest
+  d) always terminate server (even on failure)
+Alternative:
+- vitest `beforeAll/afterAll` for auth tests only to spawn/kill server.
+
+3) Auth safety/status consistency (only if required by tests):
+- Missing required fields → 400 (generic safe message)
+- Invalid credentials OR rate-limited login → 401 “Invalid credentials” (uniform; never reveal rate limiting)
+- Unauthenticated access → 401
+- Authenticated non-admin hitting admin routes → 403
+- Never leak stack traces/DB errors/internal IDs in responses
+
+4) Admin readiness (no scope creep):
+If admin login fails due to missing seeded admin:
+- Add a minimal dev/test-only seed guarded by env var (e.g., TEST_SEED_ADMIN=1) OR deterministic test fixture.
+- No new dependencies. No plaintext secrets. Use existing hashing/session patterns.
+
+5) Verify until green:
+- `npm run test:auth || npx vitest run tests/auth.test.mjs`
+Stop Agent 1 only when:
+- tests GREEN
+- no ECONNREFUSED/EADDRINUSE appears
+
+══════════════════════════════════════════════════════════════════════
+AGENT 2 — UX FINISHER (HIGH-CONTRAST HEALING-LUXURY + MODES + NAV + 404)
+Goal: fix washed-out UI from evidence; unify visuals; keep tokens; no hex outside token file.
+
+A) Fix washed-out / divider-heavy UI (minimal, systematic)
+- Increase text contrast via existing token mapping / semantic classes
+- Reduce divider dominance: replace repeated lines with spacing + surface separation
+- Strengthen CTA hierarchy: primary buttons unmistakable (teal/ivory)
+- Improve card separation: consistent radius + subtle shadow (reduced in low-stim)
+- Ensure forms are legible (labels, placeholders, errors, help text, focus)
+
+B) Unified component rules (token-driven)
+- Buttons: primary/secondary/ghost/disabled consistent padding/radius/hover/active/focus ring
+- Links: teal text, underline on hover only, gold focus ring for keyboard focus
+- Forms: consistent border/hover/focus/error states using tokens
+- Typography: Playfair headings + Inter body; normalize hierarchy + line-height
+- Icons: 24px baseline, outline feel, token colors only
+- Motion: respects prefers-reduced-motion; low-stim reduces transitions
+
+C) Mode system (Default / Low-Stim / Reading) + pre-paint + persistence
+- Use `document.documentElement.dataset.mode`:
+  Default: unset or ""
+  Low-Stim: "low-stim"
+  Reading: "reading"
+- Toggle UI in TWO places:
+  1) Header top-right
+  2) Settings page (Display/Mode section with descriptions)
+- Persist: localStorage key `glp-mode`
+- Apply BEFORE first paint (earliest init)
+- A11y: keyboard reachable; aria-pressed/aria-current; gold focus ring via tokens
+
+D) Navigation lockdown (zero drift)
+- App.jsx routes are canonical
+- Fix all internal links to match exactly
+- Remove/fix broken/missing route links (do not invent routes)
+
+E) NotFound (premium 404)
+- Playfair headline + calm supportive copy
+- Go Home (primary) + Go Back (secondary)
+- Quick Links (4–6) ONLY from App.jsx routes
+- Responsive layout + clean spacing
+
+F) Verify UX gates
+- `npm run audit`
+Confirm:
+- NAV_LINK_AUDIT = 0 broken
+- VISUAL_DOCTOR = 0 violations
+- No hex outside brand-tokens.css
+- Fonts only Inter + Playfair Display
+
+══════════════════════════════════════════════════════════════════════
+AGENT 3 — OPS + CONTENT CURATOR (PRODUCTION READINESS + PERFORMANCE + GOVERNANCE)
+Goal: permanent evolution system with no scope creep.
+
+A) Production readiness (no new deps)
+- If `npm run build` exists: run and report.
+- Ensure environment requirements are documented (do not invent secrets).
+- Confirm cookie/session flags are production-safe if applicable (change only if required by gates/tests).
+- Add docs/OPS_PLAYBOOK.md with:
+  - Release checklist: test:auth → audit → build (if exists) → manual click script
+  - Guardrails: no medical claims; safe auth errors; route canonicalization
+
+B) Performance evolution (no new deps, minimal)
+- Ensure mode bootstrap is pre-paint and does not flash
+- Avoid large global CSS churn
+- Only address obvious render waste if audits/gates show it (minimal diffs)
+
+C) Governance docs (create/update)
+- docs/COLOR_SYSTEM.md
+- docs/TYPOGRAPHY_GUIDE.md
+- docs/CANVA_TEMPLATE_SPECS.md
+- docs/OPS_PLAYBOOK.md
+- README.md updated for audits + mode switching
+
+D) Permanent master loop command (ONLY if safe)
+Add `npm run governance:loop` (no deps) to run:
+1) best-effort port cleanup
+2) `npm run test:auth`
+3) `npm run audit`
+Document in README.
+
+══════════════════════════════════════════════════════════════════════
+FINAL VERIFICATION (MUST RUN)
+- `npm run test:auth`
+- `npm run audit`
+If `npm run build` exists, run and report pass/fail.
+
+══════════════════════════════════════════════════════════════════════
+FINAL REPORT FORMAT (MANDATORY)
+1) Checklist confirming Agents 1–3 complete (pass/fail).
+2) Exact commands run + results (key excerpts).
+3) Files changed (each with 1-line summary).
+4) NotFound Quick Links (label + exact path).
+5) Rollback steps:
+   - `git status`
+   - `git diff`
+   - `git checkout -- <file>` (list changed files)
+   - Optional: `git reset --hard HEAD` (warn: destructive)
+6) OPTIONAL improvements (clearly labeled OPTIONAL; not implemented unless asked).
+
+Proceed now. Do not stop early. Verify, then report.
