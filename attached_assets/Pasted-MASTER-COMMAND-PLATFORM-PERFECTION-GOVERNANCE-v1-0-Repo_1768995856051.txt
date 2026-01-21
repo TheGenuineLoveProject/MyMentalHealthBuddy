@@ -1,0 +1,193 @@
+MASTER COMMAND — PLATFORM PERFECTION GOVERNANCE (v1.0)
+Repo: “The Genuine Love Project”
+
+Objective:
+Ship a production-grade pass that simultaneously:
+(1) eliminates auth/admin test flakiness (EADDRINUSE / ECONNREFUSED),
+(2) achieves coherent, premium “healing-luxury” visuals across all pages,
+(3) locks navigation to canonical routes,
+(4) upgrades NotFound (404),
+(5) verifies via commands, and reports diffs + rollback steps.
+
+ABSOLUTE RULE: NO SCOPE CREEP.
+If it’s not explicitly required below, do not change it.
+
+══════════════════════════════════════════════════════════════════════
+HARD CONSTRAINTS (NON-NEGOTIABLE)
+1) DO NOT rename/refactor existing CSS variable names. Keep `--glp-*` exactly as-is.
+2) NO raw hex colors anywhere except: `client/src/styles/brand-tokens.css`.
+3) Fonts allowed ONLY: Inter + Playfair Display (+ system fallbacks). No other font families.
+4) All internal navigation links must match canonical routes in `client/src/App.jsx` (wouter Switch/Route). No drift.
+5) Prefer minimal diffs. No big rewrites. Improve via tokens + Tailwind semantic classes.
+6) DO NOT loosen/bypass tests or audits. Fix properly.
+7) DO NOT invent new routes unless an intended page already exists and is referenced.
+8) DO NOT add new dependencies unless truly required to fix failing tests/audits (must justify).
+
+Tone/Safety: supportive “healing” brand tone is OK, but do NOT make medical claims or promise cures.
+
+SOURCE OF TRUTH (READ FIRST)
+- Canonical router: `client/src/App.jsx`
+- Tokens: `client/src/styles/brand-tokens.css`
+- Brand CSS: `client/src/styles/brand.css` (if present)
+- Tailwind: `tailwind.config.js`
+- Global CSS entry: `client/src/index.css` (and `client/src/main.css` if used)
+- Nav components: Header/Navbar/Footer/Sidebar + all internal CTA links
+- Audits: `tools/nav-link-audit.mjs`, `tools/visual-doctor.mjs`
+- Reports: `docs/NAV_LINK_AUDIT.md`, `docs/VISUAL_DOCTOR_REPORT.md`
+- Tests: `tests/auth.test.mjs` and `server/tests/*` (if present)
+
+══════════════════════════════════════════════════════════════════════
+RUN ORDER: 3 AGENTS IN SEQUENCE (STRICT)
+Agent 1: QA Guardian → Agent 2: UX Finisher → Agent 3: Content Curator
+
+══════════════════════════════════════════════════════════════════════
+AGENT 1 — QA GUARDIAN (Determinism, Ports, Auth/Admin)
+Goal: make `test:auth` stable and eliminate EADDRINUSE / ECONNREFUSED forever.
+
+A) Capture environment + install
+Run and record outputs (include in final report):
+- node -v
+- npm -v
+- npm install
+
+B) Kill port collisions (this is REQUIRED; your logs show EADDRINUSE on :5000)
+Run and record:
+- lsof -i :5000 || true
+- kill -9 $(lsof -t -i :5000) 2>/dev/null || true
+- lsof -i :3000 || true
+- kill -9 $(lsof -t -i :3000) 2>/dev/null || true
+
+C) Make auth tests deterministic (fix root cause, not symptoms)
+1) Open `package.json` and inspect `test:auth` and server start scripts.
+2) Open `tests/auth.test.mjs` and confirm what BASE_URL expects.
+3) Implement the minimal reliable approach so tests never depend on a manually running dev server:
+   Preferred options (choose smallest diff):
+   Option 1 (recommended): Modify `npm run test:auth` to start the server programmatically (child process), wait for /api/health, run vitest, then stop server.
+   Option 2: Add vitest setup hooks (beforeAll/afterAll) to start/stop the server for the auth test file only.
+
+D) Security + status consistency (apply only if tests require)
+- Missing required fields → 400 (safe generic message; no sensitive leaks)
+- Invalid credentials OR rate-limited login → 401 "Invalid credentials" (uniform; never reveal rate limiting)
+- Unauthenticated access → 401
+- Authenticated non-admin hitting admin routes → 403
+Keep error bodies consistent and non-sensitive.
+
+E) Verify Agent 1
+Run until green:
+- npm run test:auth || npx vitest run tests/auth.test.mjs
+
+Stop Agent 1 only when:
+- `test:auth` is GREEN
+- no ECONNREFUSED/EADDRINUSE occurs
+
+══════════════════════════════════════════════════════════════════════
+AGENT 2 — UX FINISHER (Premium UI + Mode + Nav + 404)
+Goal: unify the UI into a premium, calming “healing-luxury” look using tokens (no hex).
+
+A) Fix the “washed-out / low-contrast” issue (based on current UI evidence)
+Observed symptoms to correct (without new tokens, no hex):
+- thin divider lines dominate; content feels faint
+- CTA buttons lack contrast and hierarchy
+- link styling looks under-emphasized or inconsistent
+- card surfaces blend into the background (insufficient elevation/contrast)
+
+Implement minimal changes that:
+- increase contrast using existing semantic tokens
+- reduce visual noise (dividers), improve spacing rhythm
+- make primary actions visually decisive
+
+B) Mode system (3 modes) + persistence + pre-paint
+Requirements:
+1) Use html dataset:
+   - Default: dataset.mode unset or ""
+   - Low-Stim: "low-stim"
+   - Reading: "reading"
+2) Add Mode toggle UI in TWO locations:
+   - Header top-right
+   - Settings page (Display/Mode section with short descriptions)
+3) Persistence:
+   - localStorage key: glp-mode
+   - apply BEFORE first paint (tiny bootstrap in earliest init, e.g. client/src/main.jsx)
+4) A11y:
+   - keyboard reachable
+   - aria-pressed / aria-current for active option
+   - focus-visible ring uses gold ring token (no hex)
+5) Styling rules:
+   - Default: “healing luxury”
+   - Low-Stim: reduced saturation/shadows/gradients/motion
+   - Reading: max legibility (higher contrast text, flatter surfaces)
+
+C) Visual consistency system (minimal-diff, token-driven)
+- Buttons: Primary/Secondary/Ghost/Disabled unified spacing/radius/icon gap/hover/active/focus
+- Links: teal text, underline on hover only, gold focus ring on keyboard focus
+- Cards: consistent radius + soft shadow (Low-Stim reduces shadows)
+- Icons: 24px baseline, outline feel, token-driven colors only
+- Typography: Playfair headings; Inter UI/body; normalize hierarchy + line-height
+- Motion: prefers-reduced-motion respected; Low-Stim reduces transitions
+
+D) Navigation lockdown (canonical routes only)
+- Treat `client/src/App.jsx` route list as canonical.
+- Find ALL internal links (header/footer/sidebar/CTAs/cards).
+- Every internal link must match an App.jsx route EXACTLY.
+- Fix or remove anything that points to a missing route. Do NOT invent routes.
+
+E) NotFound (404) premium experience
+Upgrade NotFound used by App.jsx fallback route:
+- Playfair headline + calm supportive copy
+- Primary: Go Home
+- Secondary: Go Back
+- Quick Links (4–6 max) using ONLY real routes from App.jsx
+- Responsive layout; crisp spacing and typography
+
+F) Verify Agent 2
+Run:
+- npm run audit
+Confirm:
+- docs/NAV_LINK_AUDIT.md shows 0 broken links
+- docs/VISUAL_DOCTOR_REPORT.md shows 0 violations
+- no hex outside brand-tokens.css
+- only Inter + Playfair font families
+
+══════════════════════════════════════════════════════════════════════
+AGENT 3 — CONTENT CURATOR (Docs + Canva + Ops)
+Goal: finalize documentation to govern quality and keep future changes consistent.
+
+Create/update:
+1) docs/COLOR_SYSTEM.md
+   - list core --glp-* tokens (no renames)
+   - semantic mapping
+   - mode deltas (Default vs Low-Stim vs Reading)
+   - do/don’t rules (no hex outside brand-tokens.css)
+2) docs/TYPOGRAPHY_GUIDE.md
+   - Inter + Playfair usage
+   - hierarchy + spacing + line-height guidance
+3) docs/CANVA_TEMPLATE_SPECS.md
+   - 1080×1080 and 1080×1920
+   - safe margins, grid, spacing unit
+   - type scale (Playfair/Inter)
+   - color usage rules (teal/gold emphasis; ivory surfaces)
+   - export settings + naming conventions
+4) README.md
+   - how to run audits: npm run audit / nav:audit / visual:doctor
+   - how to switch modes (Header + Settings), localStorage key glp-mode, html data-mode
+
+OPTIONAL (ONLY if repo conventions allow; do not break CI):
+- Add a script `npm run governance:loop` that:
+  1) best-effort kills ports
+  2) runs test:auth
+  3) runs audit
+No new dependencies.
+
+══════════════════════════════════════════════════════════════════════
+FINAL VERIFICATION (MUST RUN)
+- npm run test:auth
+- npm run audit
+
+FINAL RESPONSE FORMAT (MANDATORY)
+1) Checklist confirming Agent 1–3 completion (pass/fail).
+2) Exact commands run + results (include key excerpts).
+3) Files changed (1-line summary each).
+4) NotFound Quick Links (label + exact path).
+5) Rollback instructions (git checkout -- file list, plus reset option).
+6) OPTIONAL improvements (clearly labeled OPTIONAL; not implemented unless asked).
+Proceed now. Do not stop early. Verify, then report.
