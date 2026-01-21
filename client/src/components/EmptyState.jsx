@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Smile, BookOpen, MessageCircle, BarChart3, Plus, ArrowRight } from "lucide-react";
+import { Smile, BookOpen, MessageCircle, BarChart3, Plus, ArrowRight, Heart } from "lucide-react";
 
 const EMPTY_STATE_CONFIGS = {
   moods: {
@@ -8,7 +8,7 @@ const EMPTY_STATE_CONFIGS = {
     description: "Start tracking your emotional well-being by logging your first mood. It only takes a moment.",
     actionText: "Log Your First Mood",
     actionHref: null,
-    gradient: "from-amber-500 to-orange-600",
+    variant: "sage",
   },
   journals: {
     icon: BookOpen,
@@ -16,7 +16,7 @@ const EMPTY_STATE_CONFIGS = {
     description: "Express your thoughts and feelings by writing your first journal entry. It's a great way to reflect and grow.",
     actionText: "Write First Entry",
     actionHref: null,
-    gradient: "from-emerald-500 to-teal-600",
+    variant: "teal",
   },
   chat: {
     icon: MessageCircle,
@@ -24,7 +24,7 @@ const EMPTY_STATE_CONFIGS = {
     description: "Your AI wellness companion is here to listen. Share what's on your mind and get supportive guidance.",
     actionText: "Begin Chat",
     actionHref: null,
-    gradient: "from-violet-500 to-purple-600",
+    variant: "teal",
   },
   analytics: {
     icon: BarChart3,
@@ -32,7 +32,15 @@ const EMPTY_STATE_CONFIGS = {
     description: "Start logging moods and journal entries to see insights about your wellness journey over time.",
     actionText: "Log a Mood",
     actionHref: "/mood",
-    gradient: "from-blue-500 to-indigo-600",
+    variant: "sage",
+  },
+  default: {
+    icon: Heart,
+    title: "Nothing here yet",
+    description: "This is where your content will appear. Take the first step on your wellness journey.",
+    actionText: "Get Started",
+    actionHref: "/dashboard",
+    variant: "teal",
   },
 };
 
@@ -44,17 +52,21 @@ export default function EmptyState({
   customActionText,
   showAction = true,
 }) {
-  const config = EMPTY_STATE_CONFIGS[type] || EMPTY_STATE_CONFIGS.moods;
+  const config = EMPTY_STATE_CONFIGS[type] || EMPTY_STATE_CONFIGS.default;
   const Icon = config.icon;
   
   const title = customTitle || config.title;
   const description = customDescription || config.description;
   const actionText = customActionText || config.actionText;
 
+  const iconContainerClass = config.variant === "sage" 
+    ? "icon-container icon-gradient-sage" 
+    : "icon-container icon-gradient-teal";
+
   const ActionButton = () => (
     <button
       onClick={onAction}
-      className="btn btn-gradient px-6 py-3 inline-flex items-center gap-2"
+      className="btn-premium px-6 py-3 inline-flex items-center gap-2"
       data-testid={`button-empty-${type}-action`}
     >
       <Plus className="w-5 h-5" aria-hidden="true" />
@@ -65,7 +77,7 @@ export default function EmptyState({
   const ActionLink = () => (
     <Link
       href={config.actionHref}
-      className="btn btn-gradient px-6 py-3 inline-flex items-center gap-2"
+      className="btn-premium px-6 py-3 inline-flex items-center gap-2"
       data-testid={`link-empty-${type}-action`}
     >
       {actionText}
@@ -74,15 +86,18 @@ export default function EmptyState({
   );
 
   return (
-    <div className="card-elevated p-8 text-center animate-fade-in-up" data-testid={`empty-state-${type}`}>
-      <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${config.gradient} flex items-center justify-center mx-auto mb-6 shadow-lg`}>
-        <Icon className="w-10 h-10 text-white" aria-hidden="true" />
+    <div className="surface-card-elevated p-8 text-center animate-fade-in-up" data-testid={`empty-state-${type}`}>
+      <div className={`w-20 h-20 rounded-2xl ${iconContainerClass} mx-auto mb-6 shadow-lg`}>
+        <Icon className="w-10 h-10" aria-hidden="true" />
       </div>
-      <h3 className="text-xl font-display font-bold text-[var(--text)] mb-2">
+      <h3 className="text-xl font-display font-semibold text-[var(--glp-primary)] mb-3">
         {title}
       </h3>
-      <p className="text-[var(--text-secondary)] max-w-md mx-auto mb-6 leading-relaxed">
+      <p className="text-[var(--text-2)] max-w-md mx-auto mb-6 leading-relaxed">
         {description}
+      </p>
+      <p className="text-sm text-[var(--text-2)] mb-6">
+        Take the first step on your healing journey.
       </p>
       {showAction && (
         config.actionHref ? <ActionLink /> : <ActionButton />
@@ -99,14 +114,14 @@ export function EmptyStateInline({
 }) {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center" data-testid="empty-state-inline">
-      <div className="w-12 h-12 rounded-xl bg-[var(--surface)] border border-[var(--border)] flex items-center justify-center mb-4">
-        <Icon className="w-6 h-6 text-[var(--text-muted)]" aria-hidden="true" />
+      <div className="w-12 h-12 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center mb-4">
+        <Icon className="w-6 h-6 text-[var(--text-2)]" aria-hidden="true" />
       </div>
-      <p className="text-[var(--text-muted)] mb-4">{message}</p>
+      <p className="text-[var(--text-2)] mb-4">{message}</p>
       {actionText && onAction && (
         <button
           onClick={onAction}
-          className="text-[var(--primary)] hover:text-[var(--primary-hover)] font-medium text-sm inline-flex items-center gap-1 transition-colors"
+          className="text-[var(--glp-primary)] hover:text-[var(--glp-sage)] font-medium text-sm inline-flex items-center gap-1 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded"
           data-testid="button-empty-inline-action"
         >
           <Plus className="w-4 h-4" aria-hidden="true" />

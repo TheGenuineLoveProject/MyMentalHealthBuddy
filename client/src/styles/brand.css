@@ -94,6 +94,11 @@ body {
   color: white;
 }
 
+.icon-gradient-teal {
+  background: linear-gradient(135deg, var(--glp-primary), var(--glp-sage-deep));
+  color: var(--glp-primary-foreground);
+}
+
 .icon-gradient-gold {
   background: linear-gradient(135deg, var(--glp-gold), var(--glp-warning-dark));
   color: var(--glp-gray-900);
