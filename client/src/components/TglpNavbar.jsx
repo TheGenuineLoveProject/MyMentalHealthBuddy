@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { Sparkles, BookOpen } from "lucide-react";
 import ModeToggle from "./ModeToggle.jsx";
+import GlobalSearch from "./GlobalSearch.jsx";
 
 export default function TglpNavbar() {
   const [location] = useLocation();
@@ -37,10 +38,11 @@ export default function TglpNavbar() {
         </div>
       </Link>
       
-      <nav className="flex items-center justify-end gap-3" aria-label="Main navigation">
+      <nav className="flex items-center justify-end gap-2 sm:gap-3" aria-label="Main navigation">
+        <GlobalSearch />
         <Link 
           href="/blog" 
-          className="nav-link hidden sm:flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
+          className="nav-link hidden md:flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
           aria-current={isActive("/blog") ? "page" : undefined}
           data-testid="link-blog"
         >
@@ -49,7 +51,7 @@ export default function TglpNavbar() {
         </Link>
         <Link 
           href="/login" 
-          className="nav-link hidden sm:block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
+          className="nav-link hidden md:block focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
           aria-current={isActive("/login") ? "page" : undefined}
           data-testid="link-login"
         >
@@ -61,7 +63,8 @@ export default function TglpNavbar() {
           data-testid="link-register"
         >
           <Sparkles className="w-4 h-4" aria-hidden="true" />
-          Get Started
+          <span className="hidden sm:inline">Get Started</span>
+          <span className="sm:hidden">Start</span>
         </Link>
       </nav>
     </header>

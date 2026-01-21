@@ -382,3 +382,19 @@ export const productPurchases = pgTable("product_purchases", {
   downloadedAt: timestamp("downloaded_at"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+/* ================= LEADS (CRM) ================= */
+export const leads = pgTable("leads", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
+  consent: boolean("consent").notNull().default(false),
+  interests: text("interests"), // JSON stringified array
+  source: varchar("source", { length: 100 }),
+  utmSource: varchar("utm_source", { length: 255 }),
+  utmMedium: varchar("utm_medium", { length: 255 }),
+  utmCampaign: varchar("utm_campaign", { length: 255 }),
+  utmContent: varchar("utm_content", { length: 255 }),
+  utmTerm: varchar("utm_term", { length: 255 }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});

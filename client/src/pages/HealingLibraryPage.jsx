@@ -6,6 +6,8 @@ import {
   Activity, Eye, Waves, Flame, Mountain
 } from "lucide-react";
 import { BRAND } from "@shared/brand";
+import Breadcrumbs from "../components/Breadcrumbs.jsx";
+import StartHerePathways from "../components/StartHerePathways.jsx";
 
 const HEALING_CATEGORIES = [
   { id: "all", label: "All Modalities", icon: Library },
@@ -139,6 +141,8 @@ export default function HealingLibraryPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-6xl mx-auto px-4 py-12">
+        <Breadcrumbs items={[{ label: "Healing Library", path: "/healing-library" }]} />
+        
         <div className="flex items-center gap-3 mb-2">
           <Library className="h-8 w-8" style={{ color: BRAND.colors.primary }} />
           <h1 className="text-3xl font-serif font-bold text-gray-900 dark:text-white">
@@ -148,6 +152,8 @@ export default function HealingLibraryPage() {
         <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl">
           Explore proven modalities for healing mind, body, and soul. Each approach is grounded in research and adapted for compassionate self-application.
         </p>
+        
+        <StartHerePathways />
 
         <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-6 mb-8 border border-emerald-100 dark:border-emerald-800/30">
           <div className="flex items-start gap-4">

@@ -86,6 +86,7 @@ import socialIntelligenceRouter from "./routes/social-intelligence.mjs";
 import peakPerformanceRouter from "./routes/peak-performance.mjs";
 import personalGrowthRouter from "./routes/personal-growth.mjs";
 import psychologicalSafetyRouter from "./routes/psychological-safety.mjs";
+import leadsRouter from "./routes/leads.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import { contentRouter } from "./routes/content.mjs";
 app.use("/api/content", contentRouter);
@@ -253,6 +254,7 @@ app.use('/api/social-intelligence', socialIntelligenceRouter);
 app.use('/api/peak-performance', peakPerformanceRouter);
 app.use('/api/personal-growth', personalGrowthRouter);
 app.use('/api/psychological-safety', psychologicalSafetyRouter);
+app.use('/api/leads', leadsRouter);
 
 const SERVER_START_TIME = Date.now();
 
