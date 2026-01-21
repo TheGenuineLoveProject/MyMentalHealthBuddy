@@ -891,3 +891,172 @@ body {
   animation-delay: 0.2s;
   opacity: 0;
 }
+
+/* ============================================================
+   ELITE NAVIGATION LINK STYLES
+   Consistent teal links with gold focus rings
+============================================================ */
+
+.nav-link {
+  color: var(--glp-primary);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.375rem 0.75rem;
+  border-radius: var(--glp-radius-sm);
+  transition: all var(--glp-motion-fast) var(--glp-ease);
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--glp-primary);
+  transition: all var(--glp-motion-fast) var(--glp-ease);
+  transform: translateX(-50%);
+}
+
+.nav-link:hover {
+  color: var(--glp-sage);
+}
+
+.nav-link:hover::after {
+  width: calc(100% - 1.5rem);
+}
+
+.nav-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--glp-ring);
+}
+
+.nav-link[aria-current="page"] {
+  color: var(--glp-sage);
+  font-weight: 600;
+}
+
+.nav-link[aria-current="page"]::after {
+  width: calc(100% - 1.5rem);
+  background: var(--glp-gold);
+}
+
+/* ============================================================
+   STANDARDIZED ICON UTILITIES
+   Consistent 24px base with semantic color variants
+============================================================ */
+
+.icon-base {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
+}
+
+.icon-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon-md {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.icon-lg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.icon-xl {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.icon-primary {
+  color: var(--glp-primary);
+}
+
+.icon-accent {
+  color: var(--glp-gold);
+}
+
+.icon-muted {
+  color: var(--glp-text-muted);
+}
+
+/* ============================================================
+   ENHANCED BUTTON STATES
+   Gold focus rings across all button variants
+============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-weight: 500;
+  border-radius: var(--glp-radius-1);
+  transition: all var(--glp-motion-fast) var(--glp-ease);
+  cursor: pointer;
+  border: none;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--glp-ring), 0 0 0 4px rgba(var(--glp-gold-rgb), 0.2);
+}
+
+.btn-primary {
+  background: var(--glp-primary);
+  color: var(--glp-primary-foreground);
+}
+
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--glp-primary) 85%, black);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--glp-primary);
+  color: var(--glp-primary);
+}
+
+.btn-outline:hover {
+  background: rgba(var(--glp-sage-deep-rgb), 0.08);
+}
+
+/* ============================================================
+   CARD SURFACE VARIANTS
+   Semantic surface tokens with consistent styling
+============================================================ */
+
+.surface-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--glp-radius-2);
+  padding: 1.5rem;
+}
+
+.surface-card-elevated {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--glp-radius-2);
+  padding: 1.5rem;
+  box-shadow: var(--glp-shadow-1);
+}
+
+.surface-card-elevated:hover {
+  box-shadow: var(--glp-shadow-2);
+}
+
+/* Low-stim mode: reduce card shadows */
+html[data-mode="low-stim"] .surface-card-elevated {
+  box-shadow: none;
+}
+
+html[data-mode="low-stim"] .surface-card-elevated:hover {
+  box-shadow: none;
+  border-color: var(--glp-primary);
+}
