@@ -1,0 +1,100 @@
+TITLE: TheGenuineLoveProject.com — VISUAL+NAV PERFECTION ADDENDUM v15 (Replit Agent)
+MODE: Execution-grade. Zero vague language. Always runnable. No deletions without explicit approval.
+GOAL: Upgrade visual system + styling + navigation integrity A→Z, aligned with brand and safety boundaries.
+
+============================================================
+A) VISUAL TARGET STATE (MEASURABLE)
+============================================================
+A1. Header/Nav:
+- Logo aligned to grid container with consistent padding.
+- Standard nav layout: left (logo), center (nav), right (auth CTA).
+- “Sign in” is not floating; it is in the header nav, consistent styling.
+
+A2. Typography:
+- One H1 per page.
+- Reading surfaces constrained to 60–75 characters/line.
+- Headline serif + body sans pairing consistent across all pages.
+
+A3. Color + Contrast:
+- CTA contrast passes accessibility targets; focus rings are visible.
+- “Sage highlight” text uses a consistent semantic token.
+- Low-stimulation mode reduces saturation and decorative effects.
+
+A4. Cards + Icons:
+- Cards use a single “Card” component with consistent border/shadow/radius tokens.
+- Icons are unified (single style system) and sized consistently.
+- All icon-only buttons have aria-labels.
+
+A5. Stats + Layout:
+- Stats block anchored into the grid, not floating.
+- Responsive spacing rhythm is consistent via layout primitives.
+
+============================================================
+B) VISUAL DOCTOR + STYLE DOCTOR + ICON DOCTOR + NAV DOCTOR (HARD GATES)
+============================================================
+B1. visual:doctor MUST fail build if:
+- raw hex/rgb/hsl outside token files
+- mixed icon styles
+- missing reduced-motion policy
+
+B2. style:doctor MUST fail build if:
+- unauthorized inline styles
+- arbitrary Tailwind values in component directories
+- non-scale spacing/typography drift
+
+B3. icon:doctor MUST fail build if:
+- SVG naming/viewBox/grid/style violations
+- mixed stroke/filled systems for core UI
+
+B4. nav:doctor MUST fail build if:
+- any broken internal link exists
+- any header/footer nav target does not resolve to a route
+
+============================================================
+C) NAVIGATION LINK FIXES (A→Z)
+============================================================
+C1. Build canonical route map and nav map.
+C2. Audit every internal href and router navigation.
+C3. Fix all broken links:
+- Correct href to existing route OR
+- Replace with “Coming soon” non-clickable label + badge OR
+- Feature-flag route shell (OFF by default)
+C4. Add/confirm app/not-found.tsx (calm copy + recovery links).
+C5. Ensure active nav uses aria-current="page" and keyboard focus is visible.
+
+============================================================
+D) VISUAL REFINEMENTS SPECIFIC TO YOUR CURRENT UI (FROM SCREENSHOTS)
+============================================================
+D1. Logo placement:
+- Enforce header container width + padding.
+- Reduce logo size slightly on mobile; ensure it doesn’t crowd the hero.
+
+D2. CTA “Begin Quietly”:
+- Increase contrast: darker button fill or lighter text.
+- Add stronger hover + focus ring.
+- Add secondary CTA styling for “See how it works”.
+
+D3. Feature cards:
+- Normalize icon style + background chips.
+- Ensure consistent card padding and heading weight.
+- Match icon chip colors to semantic tokens (not raw hard-coded colors).
+
+D4. Stats stack:
+- Convert to a grid-aligned “StatsCardStack” component.
+- Use consistent border/shadow tokens and center alignment.
+
+D5. Footer:
+- Ensure links are valid; fix broken routes.
+- Add disclaimer links carefully: “Not therapy. Not crisis support.” plus “Crisis resources” page with non-clinical language and attorney-review checklist.
+
+============================================================
+E) CONTENT ALIGNMENT (SOCIAL + ON-SITE)
+============================================================
+E1. Copy tone:
+- Calm, direct, empowering, non-shaming, non-clinical.
+E2. Microcopy consistency:
+- Standardize empty states, errors, button labels, disclaimers.
+E3. Brand phrase:
+- Use “Live in Genuine Love” consistently (no variants unless documented).
+
+END ADDENDUM v15

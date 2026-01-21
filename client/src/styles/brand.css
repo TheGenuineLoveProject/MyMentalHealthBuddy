@@ -62,3 +62,134 @@ body {
   --glp-sun: #d4b048;
   --glp-forest: #4a9a7a;
 }
+
+/* Navigation Links - Landing variant */
+.nav-link-landing {
+  color: var(--glp-sage-deep);
+  transition: color 0.2s ease;
+  padding: 0.25rem 0.5rem;
+}
+
+.nav-link-landing:hover {
+  color: var(--glp-sage);
+}
+
+.nav-link-landing[aria-current="page"] {
+  color: var(--glp-sage);
+  font-weight: 600;
+}
+
+/* Glass Card - consistent component */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(var(--glp-sage-deep-rgb), 0.1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.dark .glass-card {
+  background: rgba(45, 55, 72, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Icon Container - unified sizing */
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, var(--glp-sage-light), var(--glp-sage));
+  color: white;
+}
+
+.icon-container-sm {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-container-md {
+  width: 2rem;
+  height: 2rem;
+}
+
+.icon-container-lg {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+/* Enhanced CTA Buttons */
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage));
+  color: white;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(var(--glp-sage-deep-rgb), 0.3);
+}
+
+.btn-premium:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(var(--glp-sage-deep-rgb), 0.4);
+}
+
+.btn-premium:focus-visible {
+  outline: 2px solid var(--glp-gold);
+  outline-offset: 2px;
+}
+
+.btn-secondary-premium {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: transparent;
+  color: var(--glp-sage-deep);
+  font-weight: 600;
+  border: 1.5px solid var(--glp-sage-deep);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-premium:hover {
+  background: rgba(var(--glp-sage-deep-rgb), 0.08);
+}
+
+.btn-secondary-premium:focus-visible {
+  outline: 2px solid var(--glp-sage-deep);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .nav-link-landing,
+  .btn-premium,
+  .btn-secondary-premium,
+  .icon-container {
+    transition: none;
+  }
+  
+  .btn-premium:hover {
+    transform: none;
+  }
+  
+  .animate-fade-in-up,
+  .animate-fade-in-scale,
+  .animate-breathe,
+  .animate-pulse-gold,
+  .decorative-orb {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
