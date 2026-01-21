@@ -89,6 +89,10 @@ const EmotionalIntelligencePage = lazy(() => import("./pages/EmotionalIntelligen
 const SleepGuidePage = lazy(() => import("./pages/SleepGuidePage.jsx"));
 const StressResponseGuidePage = lazy(() => import("./pages/StressResponseGuidePage.jsx"));
 const InnerChildPage = lazy(() => import("./pages/InnerChildPage.jsx"));
+const BodyWellnessPage = lazy(() => import("./pages/BodyWellnessPage.jsx"));
+const SoulWellnessPage = lazy(() => import("./pages/SoulWellnessPage.jsx"));
+const ResearchEvidencePage = lazy(() => import("./pages/ResearchEvidencePage.jsx"));
+const HealingJourneysPage = lazy(() => import("./pages/HealingJourneysPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -228,6 +232,10 @@ export default function App() {
               <Route path="/sleep-guide" component={SleepGuidePage} />
               <Route path="/stress-response" component={StressResponseGuidePage} />
               <Route path="/inner-child" component={InnerChildPage} />
+              <Route path="/body-wellness" component={BodyWellnessPage} />
+              <Route path="/soul-wellness" component={SoulWellnessPage} />
+              <Route path="/research" component={ResearchEvidencePage} />
+              <Route path="/healing-journeys" component={HealingJourneysPage} />
               <Route path="/mirror">
                 <RouteGuard>
                   <MirrorPage />

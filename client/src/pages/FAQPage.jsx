@@ -17,6 +17,60 @@ const faqs = [
       {
         q: "How do I get started?",
         a: "Create a free account, complete a brief onboarding to personalize your experience, then explore the dashboard to find tools that resonate with you."
+      },
+      {
+        q: "What healing tools are available?",
+        a: "We offer breathing exercises, grounding techniques, meditation guides, affirmations, calming scenes, journaling prompts, mood tracking, emotional intelligence tools, sleep guides, stress response education, inner child healing, and AI chat support."
+      }
+    ]
+  },
+  {
+    category: "Mental Health Education",
+    questions: [
+      {
+        q: "What is trauma and how does it affect me?",
+        a: "Trauma is the emotional response to distressing experiences that overwhelm your ability to cope. It affects your nervous system, creating patterns of hypervigilance, avoidance, or numbing. The good news is healing is possible through neuroplasticity - your brain can rewire itself with proper support and practices."
+      },
+      {
+        q: "What is the difference between anxiety and normal worry?",
+        a: "Normal worry is temporary and proportional to a situation. Anxiety becomes concerning when it's persistent, excessive, difficult to control, and interferes with daily life. Physical symptoms like racing heart, trouble sleeping, and muscle tension often accompany anxiety disorders."
+      },
+      {
+        q: "What is emotional regulation?",
+        a: "Emotional regulation is the ability to manage and respond to emotions in healthy ways. It involves recognizing emotions, understanding their messages, and choosing how to express them constructively. This skill can be developed through mindfulness, breathing techniques, and cognitive reframing."
+      },
+      {
+        q: "Why do I feel triggered by certain things?",
+        a: "Triggers are sensory cues that remind your nervous system of past threatening experiences. Your brain creates these associations for protection. When triggered, your body activates the stress response as if the past danger is happening now. Understanding your triggers helps you develop coping strategies."
+      },
+      {
+        q: "What is the polyvagal theory?",
+        a: "Polyvagal theory explains how your autonomic nervous system responds to safety and threat. It identifies three states: ventral vagal (safe, social, calm), sympathetic (fight/flight), and dorsal vagal (freeze/shutdown). Understanding these helps you recognize patterns and choose practices to return to safety."
+      }
+    ]
+  },
+  {
+    category: "Healing Practices",
+    questions: [
+      {
+        q: "What is somatic healing?",
+        a: "Somatic healing recognizes that trauma is stored in the body, not just the mind. Practices like body scanning, breathwork, gentle movement, and grounding techniques help release stored tension and restore nervous system balance."
+      },
+      {
+        q: "How does journaling help with healing?",
+        a: "Journaling creates a safe space to process emotions, identify patterns, and gain clarity. Writing engages different brain regions than thinking alone, helping you access deeper insights. Research shows expressive writing reduces stress and accelerates emotional processing."
+      },
+      {
+        q: "What is inner child work?",
+        a: "Inner child work involves connecting with and healing the wounded parts of yourself from childhood. Many adult struggles stem from unmet childhood needs or early emotional wounds. By nurturing these younger parts, we can heal at the root level."
+      },
+      {
+        q: "How do affirmations actually work?",
+        a: "Affirmations work by rewiring neural pathways through repetition. When you consistently practice positive self-statements, you create new thought patterns that can replace negative self-beliefs. The key is choosing affirmations that feel believable."
+      },
+      {
+        q: "What are grounding techniques?",
+        a: "Grounding techniques help you reconnect with the present moment when feeling overwhelmed or dissociated. They engage your senses (5-4-3-2-1 technique), body awareness, or breath to bring you back to the here-and-now and out of stress responses."
       }
     ]
   },
@@ -51,6 +105,23 @@ const faqs = [
       {
         q: "What are the different visual modes?",
         a: "We offer three modes: Default (full brand experience), Low-Stim (reduced visual intensity for sensory sensitivity), and Reading (maximum legibility). Switch anytime from the header or Settings."
+      }
+    ]
+  },
+  {
+    category: "Crisis & Safety",
+    questions: [
+      {
+        q: "What should I do in a mental health crisis?",
+        a: "If in immediate danger, call 911. For suicidal thoughts, call the 988 Suicide & Crisis Lifeline. Text HOME to 741741 for Crisis Text Line. Reach out to a trusted person and go to a safe place. Remember: crises are temporary, and help is available."
+      },
+      {
+        q: "Is it normal to have bad days during recovery?",
+        a: "Absolutely. Healing is not linear - it involves ups and downs, progress and setbacks. Bad days don't erase your progress. They're often when deep processing happens. Be compassionate with yourself during difficult times."
+      },
+      {
+        q: "When should I seek professional help?",
+        a: "Consider professional support if you experience: persistent sadness or anxiety for over two weeks, difficulty functioning, changes in sleep or appetite, substance use to cope, thoughts of self-harm, or feeling like you can't cope. Seeking help is a sign of strength."
       }
     ]
   },

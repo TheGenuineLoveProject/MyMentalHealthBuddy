@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, Newspaper, HelpCircle, LifeBuoy, Palette } from "lucide-react";
+import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, Newspaper, HelpCircle, LifeBuoy, Palette, Activity, Microscope, Zap, Baby, MapPin } from "lucide-react";
 
 const toolCategories = [
   {
@@ -23,13 +23,23 @@ const toolCategories = [
     ]
   },
   {
+    title: "Mind, Body & Soul",
+    description: "Holistic approaches to complete wellbeing",
+    color: "from-green-400 to-emerald-500",
+    tools: [
+      { name: "Body Wellness", description: "Somatic healing, movement, and nutrition", href: "/body-wellness", icon: Activity },
+      { name: "Soul Wellness", description: "Meaning, purpose, and spiritual connection", href: "/soul-wellness", icon: Sparkles },
+      { name: "Healing Journeys", description: "Structured multi-week transformation paths", href: "/healing-journeys", icon: MapPin }
+    ]
+  },
+  {
     title: "Knowledge & Learning",
     description: "Understand yourself better with evidence-based resources",
     color: "from-indigo-400 to-purple-500",
     tools: [
       { name: "Wellness Glossary", description: "Definitions and examples of key concepts", href: "/glossary", icon: BookOpen },
-      { name: "Healing Library", description: "Evidence-based healing modalities", href: "/healing-library", icon: Library },
-      { name: "News & Insights", description: "Latest wellness research and updates", href: "/news", icon: Newspaper }
+      { name: "Research & Evidence", description: "The science behind healing practices", href: "/research", icon: Microscope },
+      { name: "Emotional Intelligence", description: "Build self-awareness and EQ skills", href: "/emotional-intelligence", icon: Brain }
     ]
   },
   {

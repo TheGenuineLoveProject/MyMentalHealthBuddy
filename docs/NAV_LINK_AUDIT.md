@@ -1,11 +1,11 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T13:24:25.864Z`
+Generated: `2026-01-21T13:39:36.299Z`
 
 ## Summary
-- Files scanned: **884**
-- Routes detected: **79**
-- Link occurrences: **487**
+- Files scanned: **892**
+- Routes detected: **83**
+- Link occurrences: **505**
 - Broken: **0**
 - Warnings: **0**
 
@@ -57,6 +57,10 @@ Generated: `2026-01-21T13:24:25.864Z`
 - `/sleep-guide`
 - `/stress-response`
 - `/inner-child`
+- `/body-wellness`
+- `/soul-wellness`
+- `/research`
+- `/healing-journeys`
 - `/mirror`
 - `/community`
 - `/tools`
@@ -86,9 +90,7 @@ Generated: `2026-01-21T13:24:25.864Z`
 - `/elite-tools`
 - `/ethics`
 - `/disclaimer`
-- `/terms`
-- `/privacy`
-- `/legal`
+- … (3 more)
 
 ## Broken Links
 ✅ None
