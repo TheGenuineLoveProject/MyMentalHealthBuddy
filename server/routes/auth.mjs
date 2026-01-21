@@ -8,9 +8,14 @@ import { eq } from "drizzle-orm";
 import { db } from "../db/client.mjs";
 import { users } from "../../shared/schema.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
+import { authRateLimit } from "../middleware/rateLimit.mjs";
+import { logAudit, getClientIp, AUDIT_ACTIONS } from "../services/auditLog.mjs";
 
 const router = express.Router();
 router.use(cookieParser());
+
+router.post("/login", authRateLimit);
+router.post("/register", authRateLimit);
 
 /* ================================
    ENVIRONMENT VALIDATION
@@ -101,6 +106,15 @@ router.post("/register", async (req, res) => {
 
     await db.insert(users).values(user);
 
+    await logAudit({
+      userId: user.id,
+      action: AUDIT_ACTIONS.REGISTER,
+      resourceType: "user",
+      resourceId: user.id,
+      ipAddress: getClientIp(req),
+      userAgent: req.headers["user-agent"],
+    });
+
     const accessToken = signAccessToken(user);
     const refreshToken = signRefreshToken(user);
 
@@ -128,39 +142,41 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = LoginSchema.parse(req.body);
 
-    // DEV ADMIN FALLBACK - check before DB query for efficiency
-    // Pre-computed hash for "password" (bcrypt cost 10)
-    const DEV_ADMIN_HASH = "$2b$10$XqKLVXz5X5X5X5X5X5X5X.5X5X5X5X5X5X5X5X5X5X5X5X5X5X5";
-    
-    let user = await db.query.users.findFirst({
+    const user = await db.query.users.findFirst({
       where: eq(users.email, email),
     });
-    
-    // DEV ADMIN FALLBACK - only in development
-    if (!user && email === "admin@email.com" && password === "password" && process.env.NODE_ENV !== "production") {
-      user = {
-        id: "admin-dev-001",
-        email,
-        password_hash: DEV_ADMIN_HASH,
-        name: "Admin",
-        role: "admin",
-        subscription_status: "premium",
-        _skipPasswordCheck: true,
-      };
-    }
 
     if (!user) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Handle both camelCase (Drizzle) and snake_case (direct DB)
     const passwordHash = user.passwordHash || user.password_hash;
     
-    // Skip bcrypt check for dev admin (password already verified above)
-    const valid = user._skipPasswordCheck || await bcrypt.compare(password, passwordHash);
-    if (!valid) {
+    if (!passwordHash) {
+      console.error(`User ${user.id} has no password hash set`);
       return res.status(401).json({ message: "Invalid credentials" });
     }
+
+    const valid = await bcrypt.compare(password, passwordHash);
+    if (!valid) {
+      await logAudit({
+        userId: user.id,
+        action: AUDIT_ACTIONS.LOGIN_FAILED,
+        metadata: { reason: "invalid_password" },
+        ipAddress: getClientIp(req),
+        userAgent: req.headers["user-agent"],
+      });
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    await logAudit({
+      userId: user.id,
+      action: AUDIT_ACTIONS.LOGIN_SUCCESS,
+      resourceType: "user",
+      resourceId: user.id,
+      ipAddress: getClientIp(req),
+      userAgent: req.headers["user-agent"],
+    });
 
     const accessToken = signAccessToken(user);
     const refreshToken = signRefreshToken(user);
@@ -176,7 +192,8 @@ router.post("/login", async (req, res) => {
         role: user.role || "user",
       },
     });
-  } catch {
+  } catch (err) {
+    console.error("Login error:", err?.message || err);
     res.status(400).json({ message: "Login failed" });
   }
 });
