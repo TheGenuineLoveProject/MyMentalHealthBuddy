@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from "react";
 import { Footprints, Play, Pause, CheckCircle, Clock, MapPin, Heart, Wind, Eye, Ear, Sparkles, RotateCcw } from "lucide-react";
-import { GamificationContext } from "../context/GamificationContext.jsx";
+import GamificationContext from "../context/GamificationContext.jsx";
 
 const WALKING_MEDITATIONS = [
   {

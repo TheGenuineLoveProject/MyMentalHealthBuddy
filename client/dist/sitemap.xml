@@ -1,95 +1,159 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-  
-  <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thegenuineloveproject.com/</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>daily</changefreq>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- AI Chat Therapy -->
   <url>
-    <loc>https://thegenuineloveproject.com/chat</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://thegenuineloveproject.com/home</loc>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- State Tracker -->
   <url>
-    <loc>https://thegenuineloveproject.com/track</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://thegenuineloveproject.com/healing-library</loc>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-  
-  <!-- Journal -->
   <url>
-    <loc>https://thegenuineloveproject.com/journal</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://thegenuineloveproject.com/news</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/blog</loc>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  
-  <!-- Mirror -->
   <url>
-    <loc>https://thegenuineloveproject.com/mirror</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Wisdom Tools -->
-  <url>
-    <loc>https://thegenuineloveproject.com/wisdom</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Resources Library -->
-  <url>
-    <loc>https://thegenuineloveproject.com/resources</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://thegenuineloveproject.com/faq</loc>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  
-  <!-- Crisis Resources -->
   <url>
-    <loc>https://thegenuineloveproject.com/crisis</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- About -->
-  <url>
-    <loc>https://thegenuineloveproject.com/about</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://thegenuineloveproject.com/glossary</loc>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
-  
-  <!-- Privacy Policy -->
   <url>
-    <loc>https://thegenuineloveproject.com/privacy</loc>
-    <lastmod>2025-12-29</lastmod>
+    <loc>https://thegenuineloveproject.com/glossary-full</loc>
+    <lastmod>2026-01-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.6</priority>
   </url>
-  
-  <!-- Terms of Service -->
+  <url>
+    <loc>https://thegenuineloveproject.com/research</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/how-to-guides</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/daily-routines</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/cognitive-tools</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/breathing</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/grounding</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/calming-scenes</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/stress-response</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/sleep-guide</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/guided-journaling</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/tools</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/support</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/crisis</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/pricing</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/about</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
   <url>
     <loc>https://thegenuineloveproject.com/terms</loc>
-    <lastmod>2025-12-29</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-  
+  <url>
+    <loc>https://thegenuineloveproject.com/privacy</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://thegenuineloveproject.com/legal</loc>
+    <lastmod>2026-01-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>
