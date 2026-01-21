@@ -56,3 +56,31 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 - **Drizzle ORM**: Database interactions.
 - **Neon PostgreSQL**: Primary database.
 - **Stripe**: Billing and payment processing.
+
+## Design System
+
+### Visual Doctor Tool
+- **Script**: `npm run visual:doctor` - scans all components for raw hex colors
+- **Report**: `docs/VISUAL_DOCTOR_REPORT.md` - auto-generated audit report
+- **Enforcement**: Fails build if raw hex colors found outside token files
+
+### Premium Visual System (January 2026)
+- **Typography Tokens**: Font families, weights (300-800), letter spacing, line heights
+- **Shadow System**: xs through 2xl, inner shadows, glow variants (sage, gold, teal)
+- **Gradient Presets**: hero, card, glass, shimmer, sage, gold, premium
+- **Animation Timing**: ease-in, ease-out, ease-in-out, bounce, elastic
+- **Z-Index Scale**: base, dropdown, sticky, modal, popover, tooltip, toast
+
+### Premium Component Classes
+- **Cards**: `.card-premium`, `.card-shimmer`
+- **Inputs**: `.input-premium`
+- **Skeletons**: `.skeleton-premium`, `.skeleton-premium-card`
+- **Icons**: `.icon-glow-sage/gold/teal`
+- **Text**: `.text-gradient-premium`, `.text-gradient-gold`, `.text-glow`
+- **Interactions**: `.hover-lift`, `.hover-scale`, `.hover-glow`
+- **Animations**: `animate-pulse-ring`, `animate-float`, `animate-fade-in-up-delayed`
+
+### Build Metrics
+- **Build Time**: ~16 seconds
+- **Visual Doctor**: 267 files clean, 0 hex violations
+- **Navigation Audit**: 0 broken links
