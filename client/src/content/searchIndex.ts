@@ -1,7 +1,8 @@
-export type SearchType = "Tool" | "Guide" | "Term" | "Q&A" | "News" | "Resource"; | "Library" | "Definition"
-| "Support" | "Evidence" | "Update" | "Platform";
+export type SearchType = "Tool" | "Guide" | "Term" | "Q&A" | "News" | "Resource" | "Library" | "Definition"
+  | "Support" | "Evidence" | "Update" | "Platform";
 
 export interface SearchItem {
+  id?: string;
   title: string;
   description: string;
   tags: string[];
@@ -301,15 +302,7 @@ export const searchIndex: SearchItem[] = [
   },
 ];
 
-export type SearchItem = {
-  id: string;
-  title: string;
-  description: string;
-  path: string;       // MUST match App.jsx exactly
-  type: SearchType;
-  tags: string[];
-  protected?: boolean; // RouteGuard paths
-};
+// SEARCH_INDEX uses the SearchItem interface defined above
 
 export const SEARCH_INDEX: SearchItem[] = [
   // ---- Library hub ----
