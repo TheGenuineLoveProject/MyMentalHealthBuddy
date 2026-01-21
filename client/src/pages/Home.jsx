@@ -2,8 +2,6 @@ import { Link } from "wouter";
 import SEO from "../components/SEO";
 import { Heart, Shield, Sparkles, Brain, ArrowRight, Star, Leaf, Users } from "lucide-react";
 
-const logo = "/brand/logo.png";
-
 export default function Home() {
   return (
     <div className="min-h-screen hero-gradient overflow-hidden relative">
@@ -17,15 +15,15 @@ export default function Home() {
       <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-32 left-1/4 absolute" aria-hidden="true" />
 
       <nav 
-        className="relative z-10 mx-auto max-w-6xl py-6 pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))] flex items-center justify-between"
+        className="relative z-10 mx-auto max-w-6xl py-4 px-6 flex items-center justify-between"
         role="banner"
       >
-        <div className="flex items-center gap-3 min-w-0">
-          <img src={logo} alt="" className="h-11 w-auto flex-shrink-0" aria-hidden="true" />
+        <Link href="/" className="flex items-center gap-2 min-w-0">
+          <Heart className="w-6 h-6 text-teal-600 flex-shrink-0" aria-hidden="true" />
           <span className="text-heading-sm text-teal-dark hidden sm:block truncate">
             The Genuine Love Project
           </span>
-        </div>
+        </Link>
         <div className="flex items-center gap-3 sm:gap-6 flex-shrink-0">
           <Link 
             href="/pricing" 

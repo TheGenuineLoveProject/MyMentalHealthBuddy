@@ -76,17 +76,18 @@ export default function Login() {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-medium text-teal mb-2">
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
                   Email
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sage-400" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border border-sage-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-all text-teal placeholder:text-sage-400"
+                    className="input pl-12"
                     placeholder="you@example.com"
+                    autoComplete="email"
                     required
                     data-testid="input-email"
                   />
@@ -94,17 +95,18 @@ export default function Login() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-teal mb-2">
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
                   Password
                 </label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sage-400" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border border-sage-200 rounded-xl bg-white/80 focus:ring-2 focus:ring-sage-500 focus:border-transparent transition-all text-teal placeholder:text-sage-400"
+                    className="input pl-12"
                     placeholder="••••••••"
+                    autoComplete="current-password"
                     required
                     data-testid="input-password"
                   />
