@@ -300,7 +300,7 @@ router.get("/export", requireAuth, sensitiveRateLimit, async (req, res) => {
     };
 
     res.setHeader("Content-Type", "application/json");
-    res.setHeader("Content-Disposition", `attachment; filename="mymentalhealthbuddy-export-${new Date().toISOString().split("T")[0]}.json"`);
+    res.setHeader("Content-Disposition", `attachment; filename="genuine-love-project-data-${new Date().toISOString().split("T")[0]}.json"`);
 
     return res.json(exportData);
   } catch (error) {
