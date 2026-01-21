@@ -24,7 +24,7 @@ The platform offers:
 - **Specialized APIs**: Covering areas such as Knowledge Synthesis, Philosophy, Metacognition, Creativity, Resilience, Foresight, Systems Compassion, Collective Intelligence, Wisdom Synthesis, Cognitive Lab, Contemplative, Ethical Reasoning, Existential, Embodiment, Narrative, Relational, Values, Neuro-Integration, Socio-Ecology, Praxis, Post-Trauma, Self-Mastery Intelligence, Universal Content, Trauma Healing Protocols, Spiritual Intelligence, Relationship Dynamics, Cognitive Enhancement, Emotional Resilience, Life Purpose, Mind-Body Integration, Social Intelligence, Peak Performance, Personal Growth, Psychological Safety, Consciousness Expansion, Human Potential, Wisdom Traditions, Life Design, and Healing Modalities.
 - **Advanced Features**: Deep Learning API, Purpose Compass API, Emotional Mastery API, Holistic Healing API, Mastery Excellence API, Content Studio API, Consciousness Expansion API, Human Potential API, Wisdom Traditions API, Life Design API, and Healing Modalities API.
 - **Navigation & Discovery**: Intellectual Atlas, Strategy Maps, Collaborative Intelligence Lab, Resilience Metrics, and Adaptive Companion.
-- **Security**: Rate limiting, CSP, input sanitization, CSRF protection, and account lifecycle management.
+- **Security**: Rate limiting (validation-before-rate-limit pattern), CSP, input sanitization, CSRF protection, and account lifecycle management. Login rate limit: 10/15min production, 100/15min test mode.
 - **Gamification**: XP, levels, streaks, and daily quests.
 - **Trauma-Informed NLP Layer**: Ensures supportive user-facing text and prompts.
 - **Content Studio**: UI for content transformation with save/export.
