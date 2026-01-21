@@ -114,7 +114,15 @@
 }
 
 .text-blush {
-  color: #C87070;
+  color: var(--glp-blush);
+}
+
+.text-ink {
+  color: var(--glp-ink);
+}
+
+.text-paper {
+  color: var(--glp-paper);
 }
 
 .bg-teal {
@@ -127,6 +135,14 @@
 
 .bg-gold {
   background-color: var(--glp-gold);
+}
+
+.bg-paper {
+  background-color: var(--glp-paper);
+}
+
+.bg-ink {
+  background-color: var(--glp-ink);
 }
 
 /* =============================================================================

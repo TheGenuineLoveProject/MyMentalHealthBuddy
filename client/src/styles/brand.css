@@ -1005,37 +1005,60 @@ html[data-mode="low-stim"] .card-premium:hover {
 
 /* ============================================================
    STANDARDIZED ICON UTILITIES
-   Consistent 24px base with semantic color variants
+   Consistent sizing system with semantic color variants
+   Base: 24px (1.5rem), Small: 20px, Large: 28px
 ============================================================ */
 
+/* Size variants */
 .icon-base {
   width: 1.5rem;
   height: 1.5rem;
   flex-shrink: 0;
 }
 
+.icon-xs {
+  width: 0.875rem;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
 .icon-sm {
-  width: 1rem;
-  height: 1rem;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
 }
 
 .icon-md {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex-shrink: 0;
 }
 
 .icon-lg {
-  width: 2rem;
-  height: 2rem;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
 }
 
 .icon-xl {
   width: 2.5rem;
   height: 2.5rem;
+  flex-shrink: 0;
 }
 
+.icon-2xl {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+}
+
+/* Semantic color variants */
 .icon-primary {
   color: var(--glp-primary);
+}
+
+.icon-secondary {
+  color: var(--glp-sage);
 }
 
 .icon-accent {
@@ -1044,6 +1067,22 @@ html[data-mode="low-stim"] .card-premium:hover {
 
 .icon-muted {
   color: var(--glp-text-muted);
+}
+
+.icon-success {
+  color: var(--glp-success);
+}
+
+.icon-warning {
+  color: var(--glp-warning);
+}
+
+.icon-danger {
+  color: var(--glp-error);
+}
+
+.icon-inherit {
+  color: currentColor;
 }
 
 /* ============================================================
@@ -1136,8 +1175,28 @@ html[data-mode="low-stim"] .surface-card-elevated:hover {
   padding-right: 1.5rem;
 }
 
+.page-container-sm {
+  width: 100%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.page-container-lg {
+  width: 100%;
+  max-width: 96rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 @media (min-width: 640px) {
-  .page-container {
+  .page-container,
+  .page-container-sm,
+  .page-container-lg {
     padding-left: 2rem;
     padding-right: 2rem;
   }
@@ -1148,10 +1207,28 @@ html[data-mode="low-stim"] .surface-card-elevated:hover {
   padding-bottom: 3rem;
 }
 
+.section-spacing-sm {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.section-spacing-lg {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
 @media (min-width: 768px) {
   .section-spacing {
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+  .section-spacing-sm {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .section-spacing-lg {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 }
 
@@ -1161,6 +1238,60 @@ html[data-mode="low-stim"] .surface-card-elevated:hover {
 
 .heading-spacing-lg {
   margin-bottom: 2rem;
+}
+
+/* Content alignment utilities */
+.content-center {
+  text-align: center;
+}
+
+.content-left {
+  text-align: left;
+}
+
+/* Card grid layouts */
+.card-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card-grid-2 {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.card-grid-3 {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+.card-grid-4 {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .card-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .card-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 /* Consistent focus ring utility */
