@@ -91,13 +91,40 @@ The application is production-optimized with code splitting, environment variabl
 
 ## Recent Visual Enhancements (January 2026)
 
-### Settings Page Brand Alignment
-- **Theme Selector**: Visual 3-button icon grid (Light/Dark/System) replacing dropdown
-- **Brand Colors**: Updated from dark theme (neutral-800/900) to sage/gold/blush/teal palette
-- **Icon Containers**: Applied icon-container utilities with gradient variants
-- **Card Styling**: card-bordered with proper padding and border-radius
-- **Form Elements**: form-group, form-label, form-hint classes with consistent styling
-- **SEO**: Added meta tags with title/description
+### Comprehensive Design Token System
+- **Single Source of Truth**: `brand-tokens.css` contains all color values
+- **Core Palette**: Deep Teal (#2F5D5D), Gold (#EAC33B), Sage (#8FBF9F), Blush (#F4C7C3), Ivory (#FAF9F7), Charcoal (#3A3A3A)
+- **Semantic Tokens**: `--glp-bg`, `--glp-surface`, `--glp-text`, `--glp-primary`, `--glp-accent`, `--glp-border`, `--glp-ring`
+- **Layout Tokens**: `--glp-radius-1/2`, `--glp-shadow-1/2`, `--glp-motion-fast/med`, `--glp-ease`
+
+### Visual Mode Toggle (Header)
+- **Default Mode**: Full visual richness with shadows and gradients
+- **Low-Stim Mode**: Removed shadows, quieter gold, minimal decoration
+- **Reading Mode**: White surfaces, darker text for maximum legibility
+- **Persistence**: Mode saved to localStorage, accessible via header dropdown
+
+### Enhanced Typography Scale (Canva-style)
+- `tglp-title`: 56px | `tglp-subtitle`: 36px | `tglp-heading`: 32px
+- `tglp-subheading`: 28px | `tglp-section`: 24px | `tglp-body`: 18px
+- `tglp-quote`: 20px | `tglp-caption`: 14px
+- Display variants: `text-display-xl/lg/md`, Heading variants: `text-heading-xl/lg/md/sm`
+
+### Icon System
+- **Containers**: `icon-container-sm/md/lg/xl` with gradient fills
+- **Soft Variants**: `icon-soft-sage/teal/gold/blush` for subtle backgrounds
+- **Gradients**: `icon-gradient-sage`, `icon-gradient-gold`
+- **Circle Styles**: `icon-circle`, `icon-circle-sm/lg`
+
+### Component Utilities
+- **Cards**: `card`, `card-sm/lg`, `card-shadow`, `card-border`, `card-hover`
+- **Buttons**: `btn-premium`, `btn-secondary-premium`, `btn-ghost`
+- **Glass Effects**: `glass`, `glass-premium` with backdrop-blur
+- **Hover Effects**: `hover-lift`, `hover-glow-gold`, `hover-glow-sage`
+
+### Navigation Link Audit
+- **Script**: `npm run nav:audit` validates all internal links
+- **Report**: `docs/NAV_LINK_AUDIT.md` with 0 broken links
+- **CI Integration**: GitHub Actions workflow for automated checks
 
 ## Previous Visual Enhancements (December 2025)
 
