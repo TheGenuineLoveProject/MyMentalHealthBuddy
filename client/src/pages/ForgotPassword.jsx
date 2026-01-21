@@ -44,13 +44,11 @@ export default function ForgotPassword() {
           title="Check Your Email"
           description="Password reset instructions have been sent to your email address."
         />
-        <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent-teal)]/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
-          </div>
+        <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+          <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
+          <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md card-elevated p-8 text-center relative z-10 animate-fade-in-up">
+          <div className="w-full max-w-md glass-premium rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
             <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
               <CheckCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
@@ -87,11 +85,9 @@ export default function ForgotPassword() {
         title="Forgot Password"
         description="Reset your Genuine Love Project password. We'll send you a secure link to create a new password."
       />
-      <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent-teal)]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
-        </div>
+      <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -right-20 absolute" aria-hidden="true" />
         
         <div className="w-full max-w-md relative z-10 animate-fade-in-up">
           <Link 

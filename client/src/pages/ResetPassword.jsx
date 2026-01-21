@@ -68,13 +68,11 @@ export default function ResetPassword() {
           title="Invalid Reset Link"
           description="This password reset link is invalid or has expired."
         />
-        <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent-rose)]/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
-          </div>
+        <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+          <div className="decorative-orb decorative-orb-blush w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
+          <div className="decorative-orb decorative-orb-sage w-[300px] h-[300px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md card-elevated p-8 text-center relative z-10 animate-fade-in-up">
+          <div className="w-full max-w-md glass-premium rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
             <div className="w-20 h-20 bg-gradient-to-br from-[var(--accent-rose)] to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
               <AlertCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
@@ -105,13 +103,11 @@ export default function ResetPassword() {
           title="Password Reset Complete"
           description="Your password has been successfully reset."
         />
-        <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent-teal)]/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
-          </div>
+        <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+          <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
+          <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
-          <div className="w-full max-w-md card-elevated p-8 text-center relative z-10 animate-fade-in-up">
+          <div className="w-full max-w-md glass-premium rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
             <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
               <CheckCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
@@ -141,11 +137,9 @@ export default function ResetPassword() {
         title="Reset Password"
         description="Create a new password for your Genuine Love Project account."
       />
-      <div className="min-h-screen flex items-center justify-center p-6 bg-[var(--bg)]">
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[var(--accent-teal)]/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[var(--primary)]/10 rounded-full blur-3xl"></div>
-        </div>
+      <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
+        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -right-20 absolute" aria-hidden="true" />
         
         <div className="w-full max-w-md relative z-10 animate-fade-in-up">
           <Link 

@@ -10,8 +10,11 @@ export default function Blog() {
         description="Healing articles, wellness resources, and insights for your journey to genuine love and emotional well-being."
       />
       
-      <div className="min-h-screen hero-gradient">
-        <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="min-h-screen hero-gradient overflow-hidden relative">
+        <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-40 -right-40 absolute" aria-hidden="true" />
+        <div className="decorative-orb decorative-orb-blush w-[300px] h-[300px] bottom-20 -left-20 absolute" aria-hidden="true" />
+        
+        <div className="max-w-4xl mx-auto px-4 py-12 relative z-10">
           <header className="text-center mb-12">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--sage-100)] border border-[var(--sage-200)] text-[var(--teal-700)] text-sm font-medium mb-4">
               <BookOpen className="w-4 h-4" />
