@@ -66,7 +66,7 @@ export default function ChatEmpty() {
               {CONVERSATION_STARTERS.map((starter, i) => (
                 <Link 
                   key={i} 
-                  href="/chat/conversation"
+                  href="/chat"
                   className="card-bordered hover:shadow-md transition-shadow group cursor-pointer block"
                   data-testid={`starter-${i}`}
                 >
@@ -112,7 +112,7 @@ export default function ChatEmpty() {
                 </div>
                 <div className="text-left">
                   <p className="text-body-sm font-medium">Feeling in crisis?</p>
-                  <Link href="/chat/crisis" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] text-body-sm" data-testid="link-crisis">
+                  <Link href="/crisis" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] text-body-sm" data-testid="link-crisis">
                     Access immediate support resources →
                   </Link>
                 </div>

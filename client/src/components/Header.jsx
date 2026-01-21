@@ -16,7 +16,7 @@ export default function Header() {
       <nav style={{ display: "flex", gap: 12 }}>
         <a href="/" style={{ color: "var(--gl-text)" }}>Home</a>
         <a href="/dashboard" style={{ color: "var(--gl-text)" }}>Dashboard</a>
-        <a href="/dashboard/design" style={{ color: "var(--gl-text)" }}>Design</a>
+        <a href="/settings" style={{ color: "var(--gl-text)" }}>Settings</a>
       </nav>
     </header>
   );

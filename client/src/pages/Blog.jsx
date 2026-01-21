@@ -97,7 +97,7 @@ export default function Blog() {
                   <p className="text-heading-sm text-teal">Want to contribute?</p>
                   <p className="text-caption">Share your healing journey with our community.</p>
                 </div>
-                <Link href="/blog/editor" className="btn-primary flex items-center gap-2" data-testid="link-write">
+                <Link href="/write" className="btn-primary flex items-center gap-2" data-testid="link-write">
                   Write <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

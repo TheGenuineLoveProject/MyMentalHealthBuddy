@@ -63,7 +63,7 @@ export default function Overview() {
                   <Calendar className="h-5 w-5 text-[var(--sage-500)]" />
                   Today's Focus
                 </h2>
-                <Link href="/daily-ritual" className="text-body-sm text-[var(--teal-600)] hover:text-[var(--teal-700)] flex items-center gap-1">
+                <Link href="/ritual" className="text-body-sm text-[var(--teal-600)] hover:text-[var(--teal-700)] flex items-center gap-1">
                 View all <ArrowRight className="h-4 w-4" />
               </Link>
               </div>

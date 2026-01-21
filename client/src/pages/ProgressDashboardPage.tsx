@@ -322,7 +322,7 @@ export default function ProgressDashboardPage() {
             <p className="text-caption">Your wisdom library</p>
             <ChevronRight className="h-4 w-4 mt-2 text-sage-400 group-hover:text-teal-600 transition-colors" />
           </Link>
-          <Link href="/daily-ritual" className="card-bordered hover:shadow-md transition-all group" data-testid="link-daily-ritual">
+          <Link href="/ritual" className="card-bordered hover:shadow-md transition-all group" data-testid="link-daily-ritual">
             <div className="icon-container icon-lg icon-soft-blush mb-3">
               <Award className="h-5 w-5" />
             </div>

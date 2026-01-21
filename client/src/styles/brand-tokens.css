@@ -1,17 +1,91 @@
 /* client/src/styles/brand-tokens.css */
+/* The Genuine Love Project — Design Tokens (Deep Teal + Gold) */
 
-:root {
-  /* Genuine Love Project (GLP) tokens */
-  --glp-sage: #a4c3b2;
-  --glp-sage-deep: #6d9b8d;
-  --glp-blush: #eac3b5;
-  --glp-gold: #eac33b;
-  --glp-ink: #1c1c1c;
-  --glp-paper: #f6f7f8;
+:root{
+  /* ------------------------------------------------------------
+    Core palette (keep these names: your Tailwind config already uses them)
+  ------------------------------------------------------------ */
+  --glp-sage: #8FBF9F;        /* supportive sage */
+  --glp-blush: #F4C7C3;       /* soft blush accent (sparingly) */
+  --glp-sage-deep: #2F5D5D;   /* Deep Teal (PRIMARY) */
+  --glp-paper: #FAF9F7;       /* Ivory background */
+  --glp-ink: #3A3A3A;         /* Charcoal text */
+  --glp-gold: #EAC33B;        /* Gold accent (RING/ACCENT) */
 
-  /* RGB helpers for rgba() replacements */
-  --glp-sage-rgb: 164, 195, 178;
-  --glp-sage-deep-rgb: 109, 155, 141;
-  --glp-blush-rgb: 234, 195, 181;
-  --glp-paper-rgb: 246, 247, 248;
+  /* RGB helpers (for rgba(var(--x-rgb), a)) */
+  --glp-sage-rgb: 143, 191, 159;
+  --glp-sage-deep-rgb: 47, 93, 93;
+  --glp-blush-rgb: 244, 199, 195;
+  --glp-paper-rgb: 250, 249, 247;
+  --glp-ink-rgb: 58, 58, 58;
+  --glp-gold-rgb: 234, 195, 59;
+
+  /* ------------------------------------------------------------
+    Semantic tokens (use these everywhere in new code)
+    (We keep raw palette above for compatibility with existing code)
+  ------------------------------------------------------------ */
+  --glp-bg: var(--glp-paper);
+  --glp-surface: #FFFFFF;
+  --glp-surface-2: #F6F4F1;
+
+  --glp-text: var(--glp-ink);
+  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.72);
+
+  --glp-primary: var(--glp-sage-deep);           /* Deep Teal */
+  --glp-primary-foreground: var(--glp-paper);    /* Ivory text on teal */
+
+  --glp-accent: var(--glp-gold);                 /* Gold */
+  --glp-accent-foreground: #1A1A1A;
+
+  --glp-border: rgba(var(--glp-ink-rgb), 0.12);
+  --glp-ring: var(--glp-gold);
+
+  --glp-radius-sm: 12px;
+  --glp-radius-md: 16px;
+
+  --glp-shadow-1: 0 6px 20px rgba(0,0,0,0.06);
+
+  --glp-motion-fast: 140ms;
+  --glp-motion-med: 220ms;
+  --glp-ease: cubic-bezier(.2,.8,.2,1);
+}
+
+/* ------------------------------------------------------------
+  MODE 1: Low-Stim (reduced saturation + minimal decoration)
+  Apply by setting: <html data-mode="low-stim">
+------------------------------------------------------------ */
+html[data-mode="low-stim"]{
+  --glp-gold: #D9B43A; /* quieter gold */
+  --glp-gold-rgb: 217, 180, 58;
+
+  --glp-surface-2: #F4F2EF;
+  --glp-border: rgba(var(--glp-ink-rgb), 0.10);
+  --glp-shadow-1: 0 0 0 rgba(0,0,0,0);
+
+  /* keep primary teal (calm + accessible) */
+  --glp-primary: var(--glp-sage-deep);
+  --glp-accent: var(--glp-gold);
+  --glp-ring: var(--glp-gold);
+}
+
+/* ------------------------------------------------------------
+  MODE 2: Reading (max legibility, no gradients, neutral surfaces)
+  Apply by setting: <html data-mode="reading">
+------------------------------------------------------------ */
+html[data-mode="reading"]{
+  --glp-bg: #FFFFFF;
+  --glp-paper: #FFFFFF;
+  --glp-paper-rgb: 255, 255, 255;
+
+  --glp-surface: #FFFFFF;
+  --glp-surface-2: #FFFFFF;
+
+  --glp-text: #2E2E2E;
+  --glp-ink: #2E2E2E;
+  --glp-ink-rgb: 46, 46, 46;
+
+  --glp-border: rgba(var(--glp-ink-rgb), 0.14);
+
+  /* keep ring visible */
+  --glp-ring: var(--glp-gold);
 }
