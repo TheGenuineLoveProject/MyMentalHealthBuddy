@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { Footprints, Play, Pause, CheckCircle, Clock, MapPin, Heart, Wind, Eye, Ear, Sparkles, RotateCcw } from "lucide-react";
-import { useGamification } from "../context/GamificationContext.jsx";
+import { GamificationContext } from "../context/GamificationContext.jsx";
 
 const WALKING_MEDITATIONS = [
   {
@@ -75,7 +75,8 @@ const WALKING_MEDITATIONS = [
 ];
 
 export default function MindfulWalking() {
-  const { recordSession } = useGamification();
+  const gamification = useContext(GamificationContext);
+  const recordSession = gamification?.recordSession || (() => {});
   const [selectedMeditation, setSelectedMeditation] = useState(WALKING_MEDITATIONS[0]);
   const [isActive, setIsActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
