@@ -136,5 +136,50 @@ npm run db:studio          # Open Drizzle Studio
 
 ---
 
+## 7) RBAC Matrix
+
+### Role Definitions
+| Role | Description |
+|------|-------------|
+| `user` | Standard authenticated user |
+| `staff` | Support staff with elevated access |
+| `admin` | Full administrative privileges |
+
+### Endpoint Access
+| Route Group | user | staff | admin |
+|-------------|------|-------|-------|
+| `/api/auth/*` | ✅ | ✅ | ✅ |
+| `/api/mood/*` | ✅ | ✅ | ✅ |
+| `/api/journal/*` | ✅ | ✅ | ✅ |
+| `/api/chat/*` | ✅ | ✅ | ✅ |
+| `/api/wellness/*` | ✅ | ✅ | ✅ |
+| `/api/admin/*` | ❌ | ❌ | ✅ |
+| `/api/admin/users` | ❌ | ✅ | ✅ |
+| `/api/admin/health` | ❌ | ❌ | ✅ |
+
+### Server Enforcement
+- RBAC is enforced via `requireAdmin` and `requireRole` middleware
+- Client-side checks are for UX only; server always validates
+- Admin routes return 403 for non-admin authenticated users
+
+---
+
+## 8) Governance Loop
+
+Run the full governance loop before releases:
+
+```bash
+npm run governance:loop
+```
+
+This pure-Node script executes:
+1. `node -v` / `npm -v` - Version check
+2. `npm install` - Dependency sync
+3. `npm run test:auth` - Authentication tests (19 tests)
+4. `npm run audit` - Navigation + visual audits
+5. `npm run build` - Production build (if exists)
+
+---
+
 **Maintainers:** The Genuine Love Project Team
 **Last Updated:** 2026-01-21
