@@ -227,22 +227,28 @@ The following environment variables are automatically configured by Replit:
 
 ## 🎨 Visual Modes
 
-The platform supports 3 visual modes for accessibility and user preference:
+The platform supports 3 visual modes for accessibility and user preference.
 
-### Default Mode
-Standard brand palette with Deep Teal primary and Gold accent.
+### Using the Mode Toggle
 
-### Low-Stim Mode
-Reduced saturation, softer gold, minimal shadows. For calmer visual experience.
+A **Mode Toggle** button is located in the navigation bar (top-right). Click it to switch between:
+
+- **Default** - Standard brand palette with Deep Teal primary and Gold accent
+- **Low-Stim** - Reduced saturation, softer gold, minimal shadows for a calmer experience
+- **Reading** - Maximum legibility with white surfaces and stronger contrast
+
+Your preference is automatically saved and restored on your next visit.
+
+### Programmatic Mode Switching
 
 ```javascript
+// Default mode
+document.documentElement.dataset.mode = "";
+
+// Low-Stim mode
 document.documentElement.dataset.mode = "low-stim";
-```
 
-### Reading Mode
-Maximum legibility with white surfaces and stronger contrast.
-
-```javascript
+// Reading mode
 document.documentElement.dataset.mode = "reading";
 ```
 

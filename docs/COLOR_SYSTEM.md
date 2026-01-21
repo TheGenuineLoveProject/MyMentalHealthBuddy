@@ -69,6 +69,25 @@
 - Shadow: minimal (disabled in low-stim mode)
 
 ## 6) Modes
-- **Default:** balanced teal/gold
-- **Low-Stimulation:** lower saturation + remove decorative shadows
-- **Reading:** maximize contrast + reduce decoration
+
+The platform includes a **Mode Toggle** in the navigation bar for easy switching.
+
+### Default Mode
+- Balanced teal/gold palette
+- Standard shadows and gradients
+- Full visual richness
+
+### Low-Stimulation Mode
+- Lower saturation gold (`#D9B43A`)
+- Decorative shadows disabled (`--glp-shadow-1: none`)
+- Reduced border opacity (10%)
+- Toggle: `html[data-mode="low-stim"]`
+
+### Reading Mode
+- Pure white backgrounds (`#FFFFFF`)
+- Darker text for contrast (`#2A2A2A`)
+- Minimal gradients and decoration
+- Subtle shadows only
+- Toggle: `html[data-mode="reading"]`
+
+User preference is persisted to `localStorage` under key `glp-visual-mode`.

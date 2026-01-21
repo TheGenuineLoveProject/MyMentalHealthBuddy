@@ -57,7 +57,7 @@ export default function NotFound() {
               </Link>
               <button
                 onClick={() => window.history.back()}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--surface)]/80 hover:bg-[var(--surface)] border border-[var(--border)] text-[var(--text)] font-medium rounded-xl transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--surface-1)]/80 hover:bg-[var(--surface-1)] border border-[var(--border)] text-[var(--text-1)] font-medium rounded-xl transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
                 data-testid="button-go-back"
               >
                 <ArrowLeft className="w-5 h-5" aria-hidden="true" />
@@ -77,7 +77,7 @@ export default function NotFound() {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="group p-4 rounded-xl bg-[var(--surface)]/50 hover:bg-[var(--surface)] border border-transparent hover:border-[var(--border)] transition-all text-center focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+                      className="group p-4 rounded-xl bg-[var(--surface-1)]/50 hover:bg-[var(--surface-1)] border border-transparent hover:border-[var(--border)] transition-all text-center focus:outline-none focus:ring-2 focus:ring-[var(--ring)]"
                       data-testid={`link-quick-${link.label.toLowerCase().replace(/\s/g, '-')}`}
                     >
                       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--primary-dark)] flex items-center justify-center mx-auto mb-2 shadow-md group-hover:scale-110 transition-transform">
