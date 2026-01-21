@@ -167,15 +167,23 @@ router.post("/register", authRateLimit, async (req, res) => {
 // LOGIN  (SECURITY-UNIFORM)
 // -------------------------
 // IMPORTANT:
+// - Validation runs FIRST (missing fields = 400)
+// - Rate limiting runs ONLY after valid input (failed auth = 401)
 // - Always return 401 "Invalid credentials" for any auth failure
-// - Even when rate-limited (your loginRateLimit must do that too)
-router.post("/login", loginRateLimit, async (req, res) => {
-  try {
-    const parsed = LoginSchema.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ message: "Email and password are required." });
+const validateLoginInput = (req, res, next) => {
+  const parsed = LoginSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ message: "Email and password are required." });
+  }
+  req.validatedLogin = parsed.data;
+  next();
+};
 
-    const email = String(parsed.data.email).toLowerCase();
-    const password = String(parsed.data.password);
+router.post("/login", validateLoginInput, loginRateLimit, async (req, res) => {
+  try {
+    const { email: rawEmail, password: rawPassword } = req.validatedLogin;
+    const email = String(rawEmail).toLowerCase();
+    const password = String(rawPassword);
 
     const user = await db.query.users.findFirst({
       where: eq(users.email, email),

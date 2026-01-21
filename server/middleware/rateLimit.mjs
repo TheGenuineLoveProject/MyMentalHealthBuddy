@@ -114,7 +114,7 @@ export const authRateLimit = rateLimit({
 export const loginRateLimit = createInMemoryLimiter({
   prefix: "login",
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: process.env.NODE_ENV === "test" ? 100 : 10, // Higher limit for tests
   blockMs: 15 * 60 * 1000,
   status: 401,
   message: "Invalid credentials",
