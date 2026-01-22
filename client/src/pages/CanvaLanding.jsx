@@ -669,34 +669,38 @@ export default function CanvaLanding() {
               </p>
             </div>
             
-            <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
-              <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
-                <li><Link href="/crm"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-dashboard">Dashboard</span></Link></li>
-                <li><Link href="/onboarding"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-onboarding">Get Started</span></Link></li>
-                <li><Link href="/pricing"><span className="hover:opacity-100 cursor-pointer transition-opacity">Pricing</span></Link></li>
-                <li><Link href="/tools"><span className="hover:opacity-100 cursor-pointer transition-opacity">Tools Library</span></Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
-              <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
-                <li><Link href="/content-index"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-content">Content Library</span></Link></li>
-                <li><Link href="/qa"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-qa">Q&A Community</span></Link></li>
-                <li><Link href="/crisis"><span className="hover:opacity-100 cursor-pointer transition-opacity">Crisis Support</span></Link></li>
-                <li><Link href="/study-vault"><span className="hover:opacity-100 cursor-pointer transition-opacity">Study Vault</span></Link></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
-              <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
-                <li><Link href="/privacy"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-privacy">Privacy Policy</span></Link></li>
-                <li><Link href="/terms"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-terms">Terms of Service</span></Link></li>
-                <li><Link href="/accessibility"><span className="hover:opacity-100 cursor-pointer transition-opacity">Accessibility</span></Link></li>
-                <li><Link href="/contact"><span className="hover:opacity-100 cursor-pointer transition-opacity">Contact Us</span></Link></li>
-              </ul>
+            <div className="md:col-span-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                <div className="text-center sm:text-left">
+                  <h4 className="font-semibold mb-4 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
+                  <ul className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                    <li><Link href="/crm"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-dashboard">Dashboard</span></Link></li>
+                    <li><Link href="/onboarding"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-onboarding">Get Started</span></Link></li>
+                    <li><Link href="/pricing"><span className="hover:underline cursor-pointer transition-all">Pricing</span></Link></li>
+                    <li><Link href="/tools"><span className="hover:underline cursor-pointer transition-all">Tools Library</span></Link></li>
+                  </ul>
+                </div>
+                
+                <div className="text-center sm:text-left">
+                  <h4 className="font-semibold mb-4 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
+                  <ul className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                    <li><Link href="/content-index"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-content">Content Library</span></Link></li>
+                    <li><Link href="/qa"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-qa">Q&A Community</span></Link></li>
+                    <li><Link href="/crisis"><span className="hover:underline cursor-pointer transition-all">Crisis Support</span></Link></li>
+                    <li><Link href="/study-vault"><span className="hover:underline cursor-pointer transition-all">Study Vault</span></Link></li>
+                  </ul>
+                </div>
+                
+                <div className="text-center sm:text-left">
+                  <h4 className="font-semibold mb-4 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
+                  <ul className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                    <li><Link href="/privacy"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-privacy">Privacy Policy</span></Link></li>
+                    <li><Link href="/terms"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-terms">Terms of Service</span></Link></li>
+                    <li><Link href="/accessibility"><span className="hover:underline cursor-pointer transition-all">Accessibility</span></Link></li>
+                    <li><Link href="/contact"><span className="hover:underline cursor-pointer transition-all">Contact Us</span></Link></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
           
