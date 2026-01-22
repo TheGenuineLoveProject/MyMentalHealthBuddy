@@ -614,12 +614,12 @@ export default function CanvaLanding() {
           </div>
           
           {/* Lotus in Teal Bar */}
-          <div className="w-32 mx-auto mb-5 h-5 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, transparent, var(--glp-sage-deep), var(--glp-sage-deep), transparent)' }}>
-            <div className="w-4 h-4 rounded-full flex items-center justify-center overflow-hidden" style={{ background: 'var(--glp-white)', boxShadow: '0 1px 4px rgba(0,0,0,0.1)' }}>
+          <div className="w-20 mx-auto mb-4 h-3 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, transparent, var(--glp-sage-deep), var(--glp-sage-deep), transparent)' }}>
+            <div className="w-2.5 h-2.5 rounded-full flex items-center justify-center overflow-hidden" style={{ background: 'var(--glp-white)' }}>
               <img 
                 src="/brand/footer-wellness-graphic.png" 
                 alt="Lotus flower" 
-                className="w-3 h-3 object-cover"
+                className="w-2 h-2 object-cover"
               />
             </div>
           </div>
