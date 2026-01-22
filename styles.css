@@ -127,3 +127,37 @@ body {
   border-radius: 6px;
   cursor: pointer;
 }
+.homepage-hero {
+  background: linear-gradient(120deg, #f4c7c3, #faf9f7);
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.modules {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.module-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  color: #3a3a3a;
+}
+
+.module-card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #2f5d5d;
+}
+
+.module-card a {
+  color: #2f5d5d;
+  text-decoration: underline;
+  font-weight: 500;
+}

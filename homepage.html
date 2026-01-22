@@ -5,22 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home – The Genuine Love Project</title>
   <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Your personalized dashboard for healing, connection, and support." />
 </head>
-<body>
+<body class="homepage">
+
+  <!-- Header -->
   <header class="header">
-    <h1>Welcome Back</h1>
-    <nav class="navbar">
-      <a href="/crm.html">CRM</a>
-      <a href="/content.html">Content</a>
-      <a href="/qa.html">Q&A</a>
-      <a href="/login.html">Logout</a>
+    <img src="/assets/logo.png" alt="The Genuine Love Project Logo" class="logo" />
+    <nav class="nav">
+      <a href="content.html" class="nav-link">Explore</a>
+      <a href="crm.html" class="nav-link">My Dashboard</a>
+      <a href="qa.html" class="nav-link">Community Q&A</a>
+      <a href="login.html" class="nav-link">Log Out</a>
     </nav>
   </header>
 
-  <main>
-    <section class="dashboard-welcome">
-      <p>Your wellness dashboard is ready. Explore resources and tools curated for you.</p>
-    </section>
-  </main>
+  <!-- Welcome Message -->
+  <section class="hero homepage-hero">
+    <h1 class="hero-title">Welcome Back, [User]</h1>
+    <p class="hero-subtitle">Let’s continue your journey toward emotional wellness.</p>
+  </section>
+
+  <!-- Wellness Modules -->
+  <section class="modules">
+    <div class="module-card">
+      <h2>Today’s Affirmation</h2>
+      <p>“You are enough. You are whole. You are loved.”</p>
+    </div>
+    <div class="module-card">
+      <h2>Recommended Resources</h2>
+      <ul>
+        <li><a href="content.html#guided">Guided Meditations</a></li>
+        <li><a href="content.html#journaling">Journaling Prompts</a></li>
+        <li><a href="content.html#mindfulness">Mindfulness Tools</a></li>
+      </ul>
+    </div>
+    <div class="module-card">
+      <h2>Quick Access</h2>
+      <ul>
+        <li><a href="crm.html">Your Dashboard</a></li>
+        <li><a href="qa.html">Ask a Question</a></li>
+        <li><a href="login.html">Profile Settings</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 The Genuine Love Project</p>
+  </footer>
 </body>
 </html>
