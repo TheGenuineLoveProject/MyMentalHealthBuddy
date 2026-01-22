@@ -766,8 +766,8 @@ export default function CanvaLanding() {
       <footer className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-6xl mx-auto">
           {/* Brand Logo Section - Now at Top */}
-          <div className="flex flex-col items-center justify-center text-center pb-12 mb-12" style={{ borderBottom: '1px solid var(--glp-sage-15)' }}>
-            <div className="flex items-center justify-center mb-3">
+          <div className="flex flex-col items-center justify-center text-center pb-6 mb-8" style={{ borderBottom: '1px solid var(--glp-sage-15)' }}>
+            <div className="flex items-center justify-center mb-1">
               <img 
                 src="/brand/footer-logo.png" 
                 alt="The Genuine Love Project" 
