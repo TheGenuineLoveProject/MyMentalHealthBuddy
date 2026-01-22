@@ -633,10 +633,10 @@ export default function CanvaLanding() {
           <p className="text-2xl md:text-3xl lg:text-4xl mb-12 text-white/90 max-w-3xl mx-auto font-medium text-center">
             Join thousands who have found peace, growth, and genuine love within themselves.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
             <Link href="/register">
               <button 
-                className="group px-10 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-2xl"
+                className="group px-14 py-6 rounded-full font-bold text-2xl md:text-3xl transition-all hover:scale-105 hover:shadow-2xl"
                 style={{
                   background: 'var(--glp-white)',
                   color: 'var(--glp-sage-deep)',
@@ -644,15 +644,15 @@ export default function CanvaLanding() {
                 }}
                 data-testid="button-final-cta"
               >
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-3">
                   Start Free Today
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-8 h-8 transition-transform group-hover:translate-x-1" />
                 </span>
               </button>
             </Link>
             <Link href="/pricing">
               <button 
-                className="px-8 py-4 rounded-full font-semibold text-white border-2 border-white/30 hover:border-white/60 hover:bg-white/10 transition-all"
+                className="px-14 py-6 rounded-full font-bold text-2xl md:text-3xl text-white border-3 border-white/40 hover:border-white/70 hover:bg-white/10 transition-all"
                 data-testid="button-view-pricing"
               >
                 View Pricing
