@@ -70,43 +70,43 @@ function Header() {
       style={{ paddingTop: "var(--glp-safe-top)" }}
       data-testid="header-main"
     >
-      <div className="mx-auto flex h-16 md:h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 gap-4">
+      <div className="mx-auto flex h-20 md:h-24 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10 gap-6">
         
-        {/* Logo Section - Fixed spacing */}
+        {/* Logo Section - Enhanced spacing and size */}
         <Link 
           href="/" 
-          className="flex items-center gap-3 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-sage)] focus-visible:ring-offset-2 rounded-xl py-1 px-2 -ml-2 transition-all hover:bg-[var(--glp-sage)]/5" 
+          className="flex items-center gap-4 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-sage)] focus-visible:ring-offset-2 rounded-xl py-2 px-3 -ml-2 transition-all hover:bg-[var(--glp-sage)]/5" 
           data-testid="link-home"
         >
           <div 
-            className="relative w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105"
+            className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105"
             style={{ 
               background: "var(--glp-logo-gradient)",
               boxShadow: "var(--glp-logo-shadow)",
             }}
           >
             <Heart 
-              className="w-5 h-5 md:w-6 md:h-6 transition-transform text-[var(--glp-sage)]" 
+              className="w-7 h-7 md:w-8 md:h-8 transition-transform text-[var(--glp-sage)]" 
               fill="currentColor"
             />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
-            <span className="text-base md:text-lg font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]">
+            <span className="text-lg md:text-xl font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]">
               {BRAND.name}
             </span>
-            <span className="text-[10px] md:text-xs font-medium tracking-wide text-[var(--glp-sage)]">
+            <span className="text-xs md:text-sm font-medium tracking-wide text-[var(--glp-sage)]">
               Live in Genuine Love
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation - Proper spacing */}
-        <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+        {/* Desktop Navigation - Enhanced spacing */}
+        <nav className="hidden lg:flex items-center gap-2" aria-label="Main navigation">
           {navLinks.map(({ href, label, icon: Icon }) => (
             <Link 
               key={href}
               href={href} 
-              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)]"
+              className="flex items-center gap-2.5 px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)]"
               data-testid={`link-nav-${label.toLowerCase()}`}
             >
               <Icon className="w-4 h-4 text-[var(--glp-sage)]" />
@@ -115,16 +115,16 @@ function Header() {
           ))}
         </nav>
 
-        {/* Right Actions - Fixed spacing */}
-        <div className="flex items-center gap-2 md:gap-3 shrink-0">
+        {/* Right Actions - Enhanced spacing */}
+        <div className="flex items-center gap-3 md:gap-5 shrink-0">
           {/* Mode Toggle */}
           <div className="relative hidden md:block" ref={modeRef}>
             <button
               onClick={() => setModeMenuOpen(!modeMenuOpen)}
-              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)] border border-[var(--glp-sage-20)]"
+              className="flex items-center gap-2 text-sm font-medium px-4 py-2.5 rounded-lg transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)] border border-[var(--glp-sage-20)]"
               data-testid="button-mode-toggle"
             >
-              <Eye className="w-3.5 h-3.5 text-[var(--glp-sage)]" />
+              <Eye className="w-4 h-4 text-[var(--glp-sage)]" />
               <span>{modeLabels[mode]}</span>
             </button>
             {modeMenuOpen && (
@@ -153,7 +153,7 @@ function Header() {
           {/* Sign In Link */}
           <Link 
             href="/login"
-            className="hidden md:flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)]"
+            className="hidden md:flex items-center px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)]"
             data-testid="link-signin"
           >
             Sign In
@@ -162,7 +162,7 @@ function Header() {
           {/* CTA Button */}
           <Link 
             href="/register" 
-            className="flex items-center gap-2 rounded-full px-4 md:px-5 py-2 md:py-2.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg text-[var(--glp-sage-deep)]"
+            className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg text-[var(--glp-sage-deep)]"
             style={{ 
               background: "var(--glp-gold-gradient)",
               boxShadow: "var(--glp-gold-shadow)",

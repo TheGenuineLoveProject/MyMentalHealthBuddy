@@ -37,22 +37,22 @@ export default function TglpNavbar() {
       role="banner"
       data-testid="navbar-main"
     >
-      <div className="mx-auto flex h-16 md:h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 gap-4">
+      <div className="mx-auto flex h-20 md:h-24 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10 gap-6">
         
         {/* Left: Mode Toggle */}
         <div className="hidden md:flex items-center shrink-0">
           <ModeToggle />
         </div>
         
-        {/* Center: Logo - Fixed spacing */}
+        {/* Center: Logo - Enhanced spacing and size */}
         <Link 
           href="/" 
-          className="flex items-center gap-3 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-sage)] focus-visible:ring-offset-2 rounded-xl py-1 px-2 transition-all hover:bg-[var(--glp-sage)]/5" 
+          className="flex items-center gap-4 group shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-sage)] focus-visible:ring-offset-2 rounded-xl py-2 px-3 transition-all hover:bg-[var(--glp-sage)]/5" 
           aria-label="The Genuine Love Project home" 
           data-testid="link-brand-home"
         >
           <div 
-            className="relative w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
+            className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
             style={{ 
               background: "var(--glp-logo-gradient)",
               boxShadow: "var(--glp-logo-shadow)",
@@ -61,7 +61,7 @@ export default function TglpNavbar() {
             <img 
               src="/brand/logo-mark.png" 
               alt="" 
-              className="w-7 h-7 md:w-8 md:h-8 object-contain"
+              className="w-10 h-10 md:w-11 md:h-11 object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling.style.display = 'block';
@@ -69,25 +69,25 @@ export default function TglpNavbar() {
               data-testid="img-brand-logo"
             />
             <Heart 
-              className="w-5 h-5 md:w-6 md:h-6 hidden text-[var(--glp-sage)]" 
+              className="w-7 h-7 md:w-8 md:h-8 hidden text-[var(--glp-sage)]" 
               fill="currentColor"
             />
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
             <span 
-              className="text-base md:text-lg font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]"
+              className="text-lg md:text-xl font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]"
               data-testid="text-brand-name"
             >
               The Genuine Love Project
             </span>
-            <span className="text-[10px] md:text-xs font-medium tracking-wide text-[var(--glp-sage)]">
+            <span className="text-xs md:text-sm font-medium tracking-wide text-[var(--glp-sage)]">
               Live in Genuine Love
             </span>
           </div>
         </Link>
         
         {/* Right: Navigation */}
-        <nav className="flex items-center gap-2 md:gap-3 shrink-0" aria-label="Main navigation">
+        <nav className="flex items-center gap-3 md:gap-5 shrink-0" aria-label="Main navigation">
           {/* Search */}
           <div className="hidden md:block">
             <GlobalSearch />
@@ -98,7 +98,7 @@ export default function TglpNavbar() {
             <Link 
               key={href}
               href={href} 
-              className={`hidden lg:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 ${
+              className={`hidden lg:flex items-center gap-2.5 px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 ${
                 isActive(href) 
                   ? "bg-[var(--glp-sage)]/15 text-[var(--glp-sage-deep)]" 
                   : "text-[var(--glp-ink)]"
@@ -114,7 +114,7 @@ export default function TglpNavbar() {
           {/* Sign In */}
           <Link 
             href="/login" 
-            className={`hidden md:flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)] ${
+            className={`hidden md:flex items-center px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)] ${
               isActive("/login") ? "bg-[var(--glp-sage)]/15" : ""
             }`}
             aria-current={isActive("/login") ? "page" : undefined}
@@ -126,7 +126,7 @@ export default function TglpNavbar() {
           {/* CTA Button */}
           <Link 
             href="/register" 
-            className="flex items-center gap-2 rounded-full px-4 md:px-5 py-2 md:py-2.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
+            className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
             style={{ 
               background: "var(--glp-gold-gradient)",
               boxShadow: "var(--glp-gold-shadow)",
