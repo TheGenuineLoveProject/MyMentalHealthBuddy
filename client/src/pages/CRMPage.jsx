@@ -5,6 +5,7 @@ import {
   CheckCircle, Star, MessageCircle, Activity, Target,
   ChevronRight, User, Settings, Home, BookOpen
 } from 'lucide-react';
+import SEO from '../components/SEO';
 
 export default function CRMPage() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -24,10 +25,10 @@ export default function CRMPage() {
   ];
 
   const stats = [
-    { label: 'Current Streak', value: '7 days', icon: Activity, color: 'text-[#eac33b]' },
-    { label: 'Mood Trend', value: '+15%', icon: TrendingUp, color: 'text-[#8fbf9f]' },
-    { label: 'Sessions', value: '23', icon: Heart, color: 'text-[#f4c7c3]' },
-    { label: 'XP Earned', value: '1,250', icon: Star, color: 'text-[#2f5d5d]' },
+    { label: 'Current Streak', value: '7 days', icon: Activity, colorVar: '--glp-gold' },
+    { label: 'Mood Trend', value: '+15%', icon: TrendingUp, colorVar: '--glp-sage' },
+    { label: 'Sessions', value: '23', icon: Heart, colorVar: '--glp-blush' },
+    { label: 'XP Earned', value: '1,250', icon: Star, colorVar: '--glp-sage-deep' },
   ];
 
   const quickActions = [
@@ -38,70 +39,79 @@ export default function CRMPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#faf9f7]" data-testid="crm-page">
-      <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center gap-8">
-              <Link href="/" className="flex items-center gap-2" data-testid="link-home">
-                <img src="/brand/logo-mark.png" alt="TGLP" className="h-8 w-8" />
-                <span className="font-semibold text-[#2f5d5d]">Dashboard</span>
-              </Link>
-              <div className="hidden md:flex items-center gap-6">
-                <Link href="/dashboard" className="text-sm text-[#3a3a3a] hover:text-[#2f5d5d]">Overview</Link>
-                <Link href="/journal" className="text-sm text-[#3a3a3a] hover:text-[#2f5d5d]">Journal</Link>
-                <Link href="/mood" className="text-sm text-[#3a3a3a] hover:text-[#2f5d5d]">Mood</Link>
-                <Link href="/tools" className="text-sm text-[#3a3a3a] hover:text-[#2f5d5d]">Tools</Link>
+    <>
+      <SEO 
+        title="Wellness Dashboard - The Genuine Love Project"
+        description="Your personal wellness command center. Track progress, manage your healing journey, and access all wellness tools."
+      />
+      <div className="min-h-screen" style={{ background: 'var(--glp-paper)' }} data-testid="crm-page">
+        <nav className="border-b sticky top-0 z-50 backdrop-blur-lg" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-20)' }}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex items-center gap-8">
+                <Link href="/" className="flex items-center gap-3" data-testid="link-home">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+                    <img src="/brand/logo-mark.png" alt="TGLP" className="h-6 w-6" />
+                  </div>
+                  <span className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Dashboard</span>
+                </Link>
+                <div className="hidden md:flex items-center gap-1">
+                  <Link href="/dashboard" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Overview</Link>
+                  <Link href="/journal" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Journal</Link>
+                  <Link href="/mood" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Mood</Link>
+                  <Link href="/tools" className="px-4 py-2 text-sm font-medium rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }}>Tools</Link>
+                </div>
               </div>
-            </div>
-            <div className="flex items-center gap-4">
-              <button className="p-2 text-[#3a3a3a] hover:text-[#2f5d5d]" data-testid="button-notifications">
-                <Bell className="h-5 w-5" />
-              </button>
-              <button className="p-2 text-[#3a3a3a] hover:text-[#2f5d5d]" data-testid="button-settings">
-                <Settings className="h-5 w-5" />
-              </button>
-              <div className="h-8 w-8 rounded-full bg-[#8fbf9f] flex items-center justify-center">
-                <User className="h-4 w-4 text-white" />
+              <div className="flex items-center gap-3">
+                <button className="p-2.5 rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }} data-testid="button-notifications">
+                  <Bell className="h-5 w-5" />
+                </button>
+                <button className="p-2.5 rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }} data-testid="button-settings">
+                  <Settings className="h-5 w-5" />
+                </button>
+                <div className="h-9 w-9 rounded-full flex items-center justify-center" style={{ background: 'var(--glp-sage)' }}>
+                  <User className="h-4 w-4 text-white" />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-[#2f5d5d] mb-2">Welcome Back</h1>
-          <p className="text-[#3a3a3a] opacity-70">Your personal wellness dashboard</p>
-        </div>
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          <div className="mb-10">
+            <h1 className="text-2xl lg:text-3xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Welcome Back</h1>
+            <p style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>Your personal wellness dashboard</p>
+          </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {stats.map((stat) => (
-            <div 
-              key={stat.label} 
-              className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm"
-              data-testid={`stat-${stat.label.toLowerCase().replace(' ', '-')}`}
-            >
-              <div className="flex items-center gap-3 mb-2">
-                <stat.icon className={`h-5 w-5 ${stat.color}`} />
-                <span className="text-sm text-[#3a3a3a] opacity-70">{stat.label}</span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 mb-10">
+            {stats.map((stat) => (
+              <div 
+                key={stat.label} 
+                className="rounded-2xl p-5 transition-all hover:-translate-y-1 hover:shadow-lg"
+                style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-10)' }}
+                data-testid={`stat-${stat.label.toLowerCase().replace(' ', '-')}`}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <stat.icon className="h-5 w-5" style={{ color: `var(${stat.colorVar})` }} />
+                  <span className="text-sm font-medium" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>{stat.label}</span>
+                </div>
+                <p className="text-2xl lg:text-3xl font-bold" style={{ color: 'var(--glp-sage-deep)' }}>{stat.value}</p>
               </div>
-              <p className="text-2xl font-bold text-[#2f5d5d]">{stat.value}</p>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           <div className="md:col-span-2 space-y-6">
-            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-[#2f5d5d] flex items-center gap-2">
+            <div className="rounded-2xl p-6" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-10)' }}>
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
                   <Calendar className="h-5 w-5" />
                   Today's Schedule
                 </h2>
                 <Link 
                   href="/dashboard" 
-                  className="text-sm text-[#8fbf9f] hover:underline flex items-center gap-1"
+                  className="text-sm font-medium flex items-center gap-1 hover:opacity-80 transition-opacity"
+                  style={{ color: 'var(--glp-sage)' }}
                   data-testid="link-calendar"
                 >
                   View All <ChevronRight className="h-4 w-4" />
@@ -111,20 +121,18 @@ export default function CRMPage() {
                 {upcomingEvents.map((event) => (
                   <li 
                     key={event.id}
-                    className={`flex items-center gap-3 p-3 rounded-lg border-l-3 ${
-                      event.type === 'practice' 
-                        ? 'border-l-[#eac33b] bg-[#eac33b]/10' 
-                        : event.type === 'community'
-                        ? 'border-l-[#f4c7c3] bg-[#f4c7c3]/20'
-                        : 'border-l-[#8fbf9f] bg-[#8fbf9f]/10'
-                    }`}
+                    className="flex items-center gap-3 p-4 rounded-xl border-l-4 transition-all hover:shadow-sm"
+                    style={{
+                      borderLeftColor: event.type === 'practice' ? 'var(--glp-gold)' : event.type === 'community' ? 'var(--glp-blush)' : 'var(--glp-sage)',
+                      background: event.type === 'practice' ? 'var(--glp-gold-10)' : event.type === 'community' ? 'var(--glp-rose-15)' : 'var(--glp-sage-10)'
+                    }}
                     data-testid={`event-${event.id}`}
                   >
-                    <Clock className="h-4 w-4 text-[#3a3a3a] opacity-50" />
-                    <span className="text-sm text-[#3a3a3a] opacity-60 w-20">{event.time}</span>
-                    <span className="font-medium text-[#2f5d5d] flex-1">{event.title}</span>
+                    <Clock className="h-4 w-4" style={{ color: 'var(--glp-ink)', opacity: 0.5 }} />
+                    <span className="text-sm w-20" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>{event.time}</span>
+                    <span className="font-medium flex-1" style={{ color: 'var(--glp-sage-deep)' }}>{event.title}</span>
                     {event.badge && (
-                      <span className="px-2 py-1 bg-[#eac33b] text-[#2f5d5d] text-xs font-semibold rounded-full">
+                      <span className="px-3 py-1 text-xs font-semibold rounded-full" style={{ background: 'var(--glp-gold)', color: 'var(--glp-sage-deep)' }}>
                         {event.badge}
                       </span>
                     )}
@@ -133,21 +141,22 @@ export default function CRMPage() {
               </ul>
             </div>
 
-            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <h2 className="text-lg font-semibold text-[#2f5d5d] mb-4 flex items-center gap-2">
+            <div className="rounded-2xl p-6" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-10)' }}>
+              <h2 className="text-lg font-semibold mb-5 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
                 <Target className="h-5 w-5" />
                 Quick Actions
               </h2>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-4">
                 {quickActions.map((action) => (
                   <Link
                     key={action.label}
                     href={action.href}
-                    className="flex items-center gap-3 p-4 rounded-lg bg-[#faf9f7] hover:bg-[#8fbf9f]/10 transition-colors border border-gray-100"
+                    className="flex items-center gap-3 p-4 rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg"
+                    style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-15)' }}
                     data-testid={`action-${action.label.toLowerCase().replace(' ', '-')}`}
                   >
-                    <action.icon className="h-5 w-5 text-[#8fbf9f]" />
-                    <span className="font-medium text-[#2f5d5d]">{action.label}</span>
+                    <action.icon className="h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
+                    <span className="font-medium" style={{ color: 'var(--glp-sage-deep)' }}>{action.label}</span>
                   </Link>
                 ))}
               </div>
@@ -155,13 +164,13 @@ export default function CRMPage() {
           </div>
 
           <div className="space-y-6">
-            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-[#2f5d5d] flex items-center gap-2">
+            <div className="rounded-2xl p-6" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-10)' }}>
+              <div className="flex items-center justify-between mb-5">
+                <h2 className="text-lg font-semibold flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
                   <Bell className="h-5 w-5" />
                   Notifications
                 </h2>
-                <span className="px-2 py-1 bg-[#f4c7c3] text-[#2f5d5d] text-xs font-semibold rounded-full">
+                <span className="px-3 py-1 text-xs font-semibold rounded-full" style={{ background: 'var(--glp-blush)', color: 'var(--glp-sage-deep)' }}>
                   {notifications.filter(n => !n.read).length} new
                 </span>
               </div>
@@ -169,24 +178,26 @@ export default function CRMPage() {
                 {notifications.map((notification) => (
                   <li 
                     key={notification.id}
-                    className="flex items-start gap-3 py-3 border-b border-gray-100 last:border-0"
+                    className="flex items-start gap-3 py-3 border-b last:border-0"
+                    style={{ borderColor: 'var(--glp-sage-10)' }}
                     data-testid={`notification-${notification.id}`}
                   >
-                    <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${
-                      notification.read ? 'bg-gray-300' : 'bg-[#eac33b]'
-                    }`} />
+                    <div 
+                      className="w-2 h-2 rounded-full mt-2 flex-shrink-0"
+                      style={{ background: notification.read ? 'var(--glp-sage-20)' : 'var(--glp-gold)' }}
+                    />
                     <div className="flex-1">
-                      <p className="text-sm text-[#3a3a3a]">{notification.text}</p>
-                      <span className="text-xs text-[#3a3a3a] opacity-50">{notification.time}</span>
+                      <p className="text-sm" style={{ color: 'var(--glp-ink)' }}>{notification.text}</p>
+                      <span className="text-xs" style={{ color: 'var(--glp-ink)', opacity: 0.5 }}>{notification.time}</span>
                     </div>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="bg-gradient-to-br from-[#2f5d5d] to-[#1a3a3a] rounded-xl p-6 text-white">
+            <div className="rounded-2xl p-6 text-white" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-800))' }}>
               <div className="flex items-center gap-2 mb-3">
-                <Star className="h-5 w-5 text-[#eac33b]" />
+                <Star className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
                 <span className="font-semibold">Daily Wisdom</span>
               </div>
               <p className="text-white/90 text-sm leading-relaxed mb-4">
@@ -195,27 +206,29 @@ export default function CRMPage() {
               <div className="text-xs text-white/60">— Lao Tzu</div>
             </div>
 
-            <div className="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
-              <h2 className="text-lg font-semibold text-[#2f5d5d] mb-4 flex items-center gap-2">
+            <div className="rounded-2xl p-6" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-10)' }}>
+              <h2 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
                 <Users className="h-5 w-5" />
                 Community
               </h2>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-5">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
                     <div 
                       key={i} 
-                      className="w-8 h-8 rounded-full bg-[#8fbf9f] border-2 border-white flex items-center justify-center"
+                      className="w-9 h-9 rounded-full border-2 border-white flex items-center justify-center shadow-sm"
+                      style={{ background: 'var(--glp-sage)' }}
                     >
                       <User className="h-4 w-4 text-white" />
                     </div>
                   ))}
                 </div>
-                <span className="text-sm text-[#3a3a3a]">+128 online</span>
+                <span className="text-sm" style={{ color: 'var(--glp-ink)' }}>+128 online</span>
               </div>
               <Link 
                 href="/community"
-                className="block w-full py-2 text-center bg-[#8fbf9f]/10 text-[#2f5d5d] rounded-lg font-medium hover:bg-[#8fbf9f]/20 transition-colors"
+                className="block w-full py-3 text-center rounded-xl font-medium transition-all hover:shadow-md"
+                style={{ background: 'var(--glp-sage-10)', color: 'var(--glp-sage-deep)' }}
                 data-testid="link-community"
               >
                 Join Circle
@@ -225,17 +238,18 @@ export default function CRMPage() {
         </div>
       </main>
 
-      <footer className="border-t border-gray-200 mt-12 py-6">
+      <footer className="border-t mt-12 py-8" style={{ borderColor: 'var(--glp-sage-15)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-[#3a3a3a] opacity-60">
-            <Link href="/" data-testid="link-footer-home">Home</Link>
-            <Link href="/content-index" data-testid="link-footer-content">Content</Link>
-            <Link href="/qa" data-testid="link-footer-qa">Q&A</Link>
-            <Link href="/privacy" data-testid="link-footer-privacy">Privacy</Link>
-            <Link href="/terms" data-testid="link-footer-terms">Terms</Link>
+          <div className="flex flex-wrap justify-center gap-8 text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>
+            <Link href="/" className="hover:opacity-80 transition-opacity" data-testid="link-footer-home">Home</Link>
+            <Link href="/content-index" className="hover:opacity-80 transition-opacity" data-testid="link-footer-content">Content</Link>
+            <Link href="/qa" className="hover:opacity-80 transition-opacity" data-testid="link-footer-qa">Q&A</Link>
+            <Link href="/privacy" className="hover:opacity-80 transition-opacity" data-testid="link-footer-privacy">Privacy</Link>
+            <Link href="/terms" className="hover:opacity-80 transition-opacity" data-testid="link-footer-terms">Terms</Link>
           </div>
         </div>
       </footer>
     </div>
+    </>
   );
 }
