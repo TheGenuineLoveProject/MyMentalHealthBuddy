@@ -60,8 +60,8 @@ export default function Admin() {
       <div className="min-h-screen hero-gradient flex items-center justify-center p-6">
         <SEO title="Access Denied" description="Admin access required" />
         <div className="glass-premium max-w-md text-center p-10 rounded-3xl animate-fade-in-up">
-          <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-rose-100 to-rose-50 flex items-center justify-center mx-auto mb-6 shadow-lg">
-            <Shield className="w-10 h-10 text-rose-500" />
+          <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-rose-15), var(--glp-paper))' }}>
+            <Shield className="w-10 h-10" style={{ color: 'var(--glp-rose)' }} />
           </div>
           <h2 className="text-heading-lg text-teal mb-3">Access Denied</h2>
           <p className="text-body-base text-sage-500 mb-6">You must be an administrator to view this page.</p>

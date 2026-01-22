@@ -25,8 +25,8 @@ const soulCategories = [
     id: "meaning",
     title: "Finding Meaning",
     icon: Compass,
-    color: "text-purple-600 dark:text-purple-400",
-    bgColor: "bg-purple-50 dark:bg-purple-900/20",
+    colorStyle: { color: 'var(--glp-sage-deep)' },
+    bgColorStyle: { background: 'var(--glp-sage-10)' },
     description: "Discovering purpose and significance in your life journey",
     practices: [
       {
@@ -53,8 +53,8 @@ const soulCategories = [
     id: "gratitude",
     title: "Gratitude Practices",
     icon: Heart,
-    color: "text-rose-600 dark:text-rose-400",
-    bgColor: "bg-rose-50 dark:bg-rose-900/20",
+    colorStyle: { color: 'var(--glp-rose)' },
+    bgColorStyle: { background: 'var(--glp-rose-15)' },
     description: "Cultivating appreciation that transforms perspective",
     practices: [
       {
@@ -81,8 +81,8 @@ const soulCategories = [
     id: "connection",
     title: "Sacred Connection",
     icon: Users,
-    color: "text-blue-600 dark:text-blue-400",
-    bgColor: "bg-blue-50 dark:bg-blue-900/20",
+    colorStyle: { color: 'var(--glp-sage)' },
+    bgColorStyle: { background: 'var(--glp-sage-10)' },
     description: "Deepening connection with yourself, others, and something greater",
     practices: [
       {
@@ -109,8 +109,8 @@ const soulCategories = [
     id: "presence",
     title: "Present Moment",
     icon: Sun,
-    color: "text-amber-600 dark:text-amber-400",
-    bgColor: "bg-amber-50 dark:bg-amber-900/20",
+    colorStyle: { color: 'var(--glp-gold)' },
+    bgColorStyle: { background: 'var(--glp-gold-30)' },
     description: "Finding peace and aliveness in the here and now",
     practices: [
       {
@@ -137,8 +137,8 @@ const soulCategories = [
     id: "wonder",
     title: "Awe & Wonder",
     icon: Star,
-    color: "text-indigo-600 dark:text-indigo-400",
-    bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
+    colorStyle: { color: 'var(--glp-sage-deep)' },
+    bgColorStyle: { background: 'var(--glp-sage-15)' },
     description: "Cultivating experiences of vastness that expand perspective",
     practices: [
       {
@@ -165,8 +165,8 @@ const soulCategories = [
     id: "rituals",
     title: "Sacred Rituals",
     icon: Flame,
-    color: "text-orange-600 dark:text-orange-400",
-    bgColor: "bg-orange-50 dark:bg-orange-900/20",
+    colorStyle: { color: 'var(--glp-gold)' },
+    bgColorStyle: { background: 'var(--glp-gold-30)' },
     description: "Creating meaningful practices that mark time and transitions",
     practices: [
       {
@@ -208,7 +208,7 @@ export default function SoulWellnessPage() {
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">
-            <Link href="/wellness-hub" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+            <Link href="/wellness-hub" className="inline-flex items-center gap-2 text-body-sm mb-4 transition" style={{ color: 'var(--glp-sage)' }} data-testid="link-back">
               <ArrowLeft className="h-4 w-4" /> Back to Wellness Hub
             </Link>
             <div className="flex items-center gap-3">
@@ -222,12 +222,12 @@ export default function SoulWellnessPage() {
             </div>
           </header>
 
-          <div className="card-bordered mb-8 bg-purple-50 dark:bg-purple-900/20">
+          <div className="card-bordered mb-8" style={{ background: 'var(--glp-sage-10)' }}>
             <div className="flex items-start gap-4">
-              <Feather className="h-6 w-6 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-1" />
+              <Feather className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--glp-sage-deep)' }} />
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Beyond Mind and Body</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Beyond Mind and Body</h3>
+                <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.8 }}>
                   Soul wellness encompasses the parts of human experience that transcend the physical—our search for meaning, 
                   our need for connection, our capacity for awe, and our relationship with something larger than ourselves. 
                   Whether you call it spirit, consciousness, or simply the deeper self, nurturing this dimension is essential 
@@ -246,10 +246,10 @@ export default function SoulWellnessPage() {
                   className="card-bordered text-center p-4 hover:shadow-md transition-shadow"
                   data-testid={`card-daily-${index}`}
                 >
-                  <practice.icon className="h-6 w-6 mx-auto mb-2 text-[var(--gold-500)]" />
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{practice.name}</p>
-                  <p className="text-xs text-[var(--sage-500)] mb-1">{practice.time}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">{practice.description}</p>
+                  <practice.icon className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-gold)' }} />
+                  <p className="text-sm font-medium" style={{ color: 'var(--glp-ink)' }}>{practice.name}</p>
+                  <p className="text-xs mb-1" style={{ color: 'var(--glp-sage)' }}>{practice.time}</p>
+                  <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>{practice.description}</p>
                 </div>
               ))}
             </div>
@@ -270,12 +270,12 @@ export default function SoulWellnessPage() {
             ))}
           </div>
 
-          <div className={`card-bordered ${selectedCategory.bgColor} mb-8`}>
+          <div className="card-bordered mb-8" style={selectedCategory.bgColorStyle}>
             <div className="flex items-center gap-3 mb-6">
-              <selectedCategory.icon className={`h-8 w-8 ${selectedCategory.color}`} />
+              <selectedCategory.icon className="h-8 w-8" style={selectedCategory.colorStyle} />
               <div>
-                <h2 className="text-heading-lg text-gray-900 dark:text-white">{selectedCategory.title}</h2>
-                <p className="text-body-sm text-[var(--sage-600)]">{selectedCategory.description}</p>
+                <h2 className="text-heading-lg" style={{ color: 'var(--glp-ink)' }}>{selectedCategory.title}</h2>
+                <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>{selectedCategory.description}</p>
               </div>
             </div>
 
@@ -283,25 +283,26 @@ export default function SoulWellnessPage() {
               {selectedCategory.practices.map((practice, index) => (
                 <div 
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700"
+                  className="rounded-xl p-5"
+                  style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
                   data-testid={`card-practice-${index}`}
                 >
                   <div className="flex items-center gap-2 mb-3">
-                    <Lightbulb className={`h-5 w-5 ${selectedCategory.color}`} />
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{practice.name}</h3>
+                    <Lightbulb className="h-5 w-5" style={selectedCategory.colorStyle} />
+                    <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>{practice.name}</h3>
                   </div>
                   
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">{practice.description}</p>
+                  <p className="text-sm mb-4" style={{ color: 'var(--glp-sage)' }}>{practice.description}</p>
                   
                   <div className="space-y-3">
-                    <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
-                      <p className="text-xs font-medium text-[var(--sage-500)] mb-1">Reflection:</p>
-                      <p className="text-sm italic text-gray-600 dark:text-gray-300">{practice.reflection}</p>
+                    <div className="rounded-lg p-3" style={{ background: 'var(--glp-sage-10)' }}>
+                      <p className="text-xs font-medium mb-1" style={{ color: 'var(--glp-sage)' }}>Reflection:</p>
+                      <p className="text-sm italic" style={{ color: 'var(--glp-ink)', opacity: 0.8 }}>{practice.reflection}</p>
                     </div>
                     
-                    <div className={`${selectedCategory.bgColor} rounded-lg p-3`}>
-                      <p className="text-xs font-medium text-[var(--sage-500)] mb-1">Exercise:</p>
-                      <p className="text-sm text-gray-700 dark:text-gray-300">{practice.exercise}</p>
+                    <div className="rounded-lg p-3" style={selectedCategory.bgColorStyle}>
+                      <p className="text-xs font-medium mb-1" style={{ color: 'var(--glp-sage)' }}>Exercise:</p>
+                      <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.8 }}>{practice.exercise}</p>
                     </div>
                   </div>
                 </div>
@@ -312,26 +313,26 @@ export default function SoulWellnessPage() {
           <section className="grid md:grid-cols-2 gap-6 mb-8">
             <Link href="/meditation" className="card-bordered hover:shadow-md transition-shadow" data-testid="link-meditation">
               <div className="flex items-center gap-3 mb-2">
-                <Eye className="h-6 w-6 text-indigo-500" />
+                <Eye className="h-6 w-6" style={{ color: 'var(--glp-sage-deep)' }} />
                 <h3 className="text-heading-md text-teal">Meditation Guide</h3>
               </div>
-              <p className="text-body-sm text-[var(--sage-600)]">
+              <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>
                 Guided practices for stillness, awareness, and inner peace
               </p>
             </Link>
             <Link href="/affirmations" className="card-bordered hover:shadow-md transition-shadow" data-testid="link-affirmations">
               <div className="flex items-center gap-3 mb-2">
-                <Heart className="h-6 w-6 text-rose-500" />
+                <Heart className="h-6 w-6" style={{ color: 'var(--glp-rose)' }} />
                 <h3 className="text-heading-md text-teal">Affirmations Library</h3>
               </div>
-              <p className="text-body-sm text-[var(--sage-600)]">
+              <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>
                 Positive statements to rewire thought patterns and beliefs
               </p>
             </Link>
           </section>
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
-            <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
+          <footer className="card-bordered" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+            <p className="text-sm text-center" style={{ color: 'var(--glp-ink)' }}>
               <strong>Gentle Reminder:</strong> Soul wellness is deeply personal. Take what resonates and leave what doesn't. 
               These practices are meant to complement, not replace, any spiritual or religious traditions that are meaningful to you.
             </p>
