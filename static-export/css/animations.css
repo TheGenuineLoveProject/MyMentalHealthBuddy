@@ -1,0 +1,304 @@
+/**
+ * ============================================================================
+ * SACRED ANIMATIONS - The Genuine Love Project
+ * ============================================================================
+ * 
+ * Healing-focused animations designed to soothe and calm.
+ * All animations respect prefers-reduced-motion for accessibility.
+ * ============================================================================
+ */
+
+/* ============================================
+   BREATHING ANIMATIONS
+   ============================================ */
+
+@keyframes breathingAura {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 1;
+  }
+}
+
+@keyframes breathingGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(143, 191, 159, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(143, 191, 159, 0.4);
+  }
+}
+
+@keyframes pulsingBorder {
+  0%, 100% {
+    border-color: rgba(143, 191, 159, 0.2);
+  }
+  50% {
+    border-color: rgba(143, 191, 159, 0.5);
+  }
+}
+
+/* ============================================
+   ORGANIC MOTION
+   ============================================ */
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-1deg);
+  }
+  75% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+}
+
+@keyframes gentleSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sacredRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   HEARTBEAT ANIMATION
+   ============================================ */
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   GLOW EFFECTS
+   ============================================ */
+
+@keyframes buttonGlow {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(234, 195, 59, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 40px rgba(234, 195, 59, 0.5);
+  }
+}
+
+@keyframes roseGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(244, 199, 195, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(244, 199, 195, 0.5);
+  }
+}
+
+@keyframes tealGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(47, 93, 93, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(47, 93, 93, 0.35);
+  }
+}
+
+/* ============================================
+   SHIMMER EFFECT
+   ============================================ */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* ============================================
+   ORGANIC BLOB MORPH
+   ============================================ */
+
+@keyframes organicBlobMorph {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 60% 40% 60% / 30% 70% 40% 70%;
+  }
+  75% {
+    border-radius: 40% 50% 60% 50% / 70% 40% 60% 30%;
+  }
+}
+
+/* ============================================
+   FADE ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   SACRED GEOMETRY ANIMATIONS
+   ============================================ */
+
+@keyframes sacredPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.08;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.03);
+    opacity: 0.15;
+  }
+}
+
+@keyframes flowerUnfold {
+  0% {
+    transform: scale(0.8) rotate(-30deg);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.animate-breathing {
+  animation: breathingGlow 4s ease-in-out infinite;
+}
+
+.animate-breathing-slow {
+  animation: breathingGlow 6s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: gentleFloat 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: gentleSpin 20s linear infinite;
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+
+.animate-pulse-border {
+  animation: pulsingBorder 3s ease-in-out infinite;
+}
+
+/* Staggered delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-breathing,
+  .animate-float,
+  .animate-spin-slow,
+  .animate-heartbeat,
+  .animate-pulse-border {
+    animation: none !important;
+  }
+}
