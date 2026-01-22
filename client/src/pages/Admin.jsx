@@ -83,7 +83,7 @@ export default function Admin() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30 relative overflow-hidden">
+    <div className="min-h-screen hero-gradient relative overflow-hidden">
       <SEO title="Admin Command Center" description="Advanced platform administration and real-time analytics" />
       
       <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
@@ -106,21 +106,21 @@ export default function Admin() {
               </div>
               <div>
                 <div className="flex items-center gap-3">
-                  <h1 className="text-3xl lg:text-4xl font-bold text-slate-800 tracking-tight" data-testid="text-admin-title">
+                  <h1 className="text-3xl lg:text-4xl font-bold tracking-tight" style={{ color: 'var(--glp-ink)' }} data-testid="text-admin-title">
                     Admin Command Center
                   </h1>
                   <span className="px-3 py-1 text-xs font-semibold bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-full">
                     PRO
                   </span>
                 </div>
-                <p className="text-lg text-slate-500 mt-1 flex items-center gap-2">
+                <p className="text-lg mt-1 flex items-center gap-2" style={{ color: 'var(--glp-sage)' }}>
                   <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                    <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--glp-sage)' }} />
                     Live
                   </span>
-                  <span className="text-slate-300">•</span>
+                  <span style={{ color: 'var(--glp-sage-20)' }}>•</span>
                   <span>{realtimeData.activeUsers} active users</span>
-                  <span className="text-slate-300">•</span>
+                  <span style={{ color: 'var(--glp-sage-20)' }}>•</span>
                   <span>{realtimeData.requestsPerMin} req/min</span>
                 </p>
               </div>
@@ -210,8 +210,8 @@ export default function Admin() {
           </div>
         )}
 
-        <footer className="mt-12 pt-8 border-t border-slate-100">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-400">
+        <footer className="mt-12 pt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm" style={{ color: 'var(--glp-sage)' }}>
             <p>The Genuine Love Project • Admin Dashboard v2.0</p>
             <p className="flex items-center gap-2">
               <Lock className="w-3.5 h-3.5" />

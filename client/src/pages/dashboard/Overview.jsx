@@ -42,8 +42,8 @@ export default function Overview() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <TimeIcon className="h-5 w-5 text-[var(--gold-500)]" />
-                  <span className="text-body-sm text-[var(--sage-500)]">{greeting}</span>
+                  <TimeIcon className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
+                  <span className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>{greeting}</span>
                 </div>
                 <h1 className="text-display-lg text-teal" data-testid="text-page-title">Your Wellness Dashboard</h1>
               </div>
@@ -67,10 +67,10 @@ export default function Overview() {
             <div className="lg:col-span-2 card-bordered">
               <div className="flex items-center justify-between mb-6">
                 <h2 className="text-heading-md text-teal flex items-center gap-2">
-                  <Calendar className="h-5 w-5 text-[var(--sage-500)]" />
+                  <Calendar className="h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
                   Today's Focus
                 </h2>
-                <Link href="/ritual" className="text-body-sm text-[var(--teal-600)] hover:text-[var(--teal-700)] flex items-center gap-1">
+                <Link href="/ritual" className="text-body-sm flex items-center gap-1" style={{ color: 'var(--glp-sage-deep)' }}>
                 View all <ArrowRight className="h-4 w-4" />
               </Link>
               </div>
@@ -81,11 +81,22 @@ export default function Overview() {
                   { task: "Journal your afternoon thoughts", done: false },
                   { task: "Evening self-compassion check-in", done: false }
                 ].map((item, i) => (
-                  <div key={i} className={`flex items-center gap-3 p-3 rounded-xl ${item.done ? 'bg-[var(--sage-50)]' : 'bg-white border border-[var(--sage-200)]'}`}>
-                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${item.done ? 'bg-[var(--sage-500)] border-[var(--sage-500)]' : 'border-[var(--sage-300)]'}`}>
-                      {item.done && <span className="text-white text-xs">✓</span>}
+                  <div 
+                    key={i} 
+                    className="flex items-center gap-3 p-3 rounded-xl"
+                    style={item.done 
+                      ? { background: 'var(--glp-sage-10)' } 
+                      : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
+                  >
+                    <div 
+                      className="w-5 h-5 rounded-full border-2 flex items-center justify-center"
+                      style={item.done 
+                        ? { background: 'var(--glp-sage)', borderColor: 'var(--glp-sage)' }
+                        : { borderColor: 'var(--glp-sage-20)' }}
+                    >
+                      {item.done && <span style={{ color: 'var(--glp-paper)' }} className="text-xs">✓</span>}
                     </div>
-                    <span className={`text-body-sm ${item.done ? 'line-through text-[var(--sage-400)]' : ''}`}>{item.task}</span>
+                    <span className={`text-body-sm ${item.done ? 'line-through' : ''}`} style={item.done ? { color: 'var(--glp-sage)' } : {}}>{item.task}</span>
                   </div>
                 ))}
               </div>
@@ -93,12 +104,12 @@ export default function Overview() {
 
             <div className="card-bordered">
               <h2 className="text-heading-md text-teal mb-4 flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-[var(--gold-500)]" />
+                <Sparkles className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
                 Quick Actions
               </h2>
               <div className="grid grid-cols-2 gap-3">
                 {QUICK_ACTIONS.map((action, i) => (
-                  <Link key={i} href={action.href} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-[var(--sage-50)] hover:bg-[var(--sage-100)] transition" data-testid={`action-${action.label.toLowerCase()}`}>
+                  <Link key={i} href={action.href} className="flex flex-col items-center gap-2 p-4 rounded-xl transition" style={{ background: 'var(--glp-sage-10)' }} data-testid={`action-${action.label.toLowerCase()}`}>
                     <div className={`icon-container icon-md icon-soft-${action.color}`}>
                       <action.icon className="h-5 w-5" />
                     </div>
