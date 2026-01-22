@@ -161,3 +161,51 @@ body {
   text-decoration: underline;
   font-weight: 500;
 }
+/* Global Typography Cleanup */
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  font-size: 16px;
+  background-color: #faf9f7;
+  color: #3a3a3a;
+}
+
+/* Add spacing around Q&A blocks */
+.qa-block {
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Distinct header */
+.qa-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* Better tag spacing */
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.category-tags span {
+  background: #8fbf9f;
+  color: white;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+    EDC
+/* Shared Reflections Styling */
+.shared-reflection {
+  font-style: italic;
+  margin-bottom: 1.2rem;
+  border-left: 4px solid #eac33b;
+  padding-left: 1rem;
+}

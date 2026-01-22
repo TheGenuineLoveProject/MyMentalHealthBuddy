@@ -141,20 +141,40 @@ export default function SharedReflectionsPage() {
     <div className="min-h-screen hero-gradient">
       <div className="mx-auto max-w-4xl px-6 py-10">
         {/* Header */}
-        <header className="text-center mb-10">
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #2f5d5d, #8fbf9f)' }}>
-              <MessageCircle className="w-8 h-8 text-white" aria-hidden="true" />
+        <header className="text-center mb-12">
+          <div className="flex justify-center mb-5">
+            <div className="section-header-icon w-16 h-16 rounded-2xl">
+              <MessageCircle className="w-8 h-8" aria-hidden="true" />
             </div>
           </div>
-          <h1 className="text-display-lg text-teal mb-2" data-testid="text-community-title">
+          <h1 className="text-display-lg text-teal mb-3" data-testid="text-community-title">
             Q&A Community
           </h1>
-          <p className="text-lead max-w-2xl mx-auto">
+          <p className="text-lead max-w-2xl mx-auto content-breathe">
             A safe space to ask questions, share wisdom, and support each other's healing journey.
             No judgment, only compassion.
           </p>
         </header>
+        
+        {/* Community Stats */}
+        <div className="community-stats" data-testid="community-stats">
+          <div className="community-stat">
+            <span className="community-stat-value">127</span>
+            <span className="community-stat-label">Questions</span>
+          </div>
+          <div className="community-stat">
+            <span className="community-stat-value">892</span>
+            <span className="community-stat-label">Answers</span>
+          </div>
+          <div className="community-stat">
+            <span className="community-stat-value">2.4k</span>
+            <span className="community-stat-label">Helpful Votes</span>
+          </div>
+          <div className="community-stat">
+            <span className="community-stat-value">156</span>
+            <span className="community-stat-label">Members</span>
+          </div>
+        </div>
 
         {/* Search + Ask */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -208,8 +228,16 @@ export default function SharedReflectionsPage() {
           </div>
         )}
 
+        {/* Section Header: Q&A Spotlight */}
+        <div className="section-header mt-8">
+          <div className="section-header-icon">
+            <Sparkles className="w-5 h-5" aria-hidden="true" />
+          </div>
+          <h2>Q&A Spotlight</h2>
+        </div>
+
         {/* Topic Navigation */}
-        <div className="flex flex-wrap gap-2 mb-8" data-testid="topic-navigation">
+        <div className="topic-nav" data-testid="topic-navigation">
           {TOPICS.map(topic => {
             const Icon = topic.icon;
             return (
@@ -218,8 +246,8 @@ export default function SharedReflectionsPage() {
                 onClick={() => setActiveTopic(topic.id)}
                 className={`inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal-400)] focus-visible:ring-offset-2 ${
                   activeTopic === topic.id
-                    ? "bg-[var(--teal-500)] text-white shadow-md"
-                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-[var(--teal-300)]"
+                    ? "bg-[var(--glp-sage-deep)] text-white shadow-md"
+                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-[var(--teal-300)] hover:bg-[var(--glp-sage-50)]"
                 }`}
                 data-testid={`topic-${topic.id}`}
               >
@@ -231,11 +259,11 @@ export default function SharedReflectionsPage() {
         </div>
 
         {/* Questions List */}
-        <div className="space-y-6 mb-12">
+        <div className="stack-lg mb-12 mt-6">
           {filteredPosts.map(post => (
             <article 
               key={post.id} 
-              className="p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow"
+              className="qa-block"
               data-testid={`post-${post.id}`}
             >
               {/* Question Header */}
@@ -306,33 +334,32 @@ export default function SharedReflectionsPage() {
           ))}
         </div>
 
+        {/* Visual Divider */}
+        <div className="section-divider" aria-hidden="true"></div>
+
         {/* Shared Reflections Section */}
-        <section className="pt-8 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(244, 199, 195, 0.3)' }}>
-              <Heart className="w-5 h-5" style={{ color: '#f4c7c3' }} aria-hidden="true" />
+        <section>
+          <div className="section-header">
+            <div className="section-header-icon" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-blush-400))' }}>
+              <Heart className="w-5 h-5" aria-hidden="true" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Shared Reflections</h2>
-              <p className="text-sm text-gray-500">Anonymous thoughts to remind you that you are not alone.</p>
+              <h2>Shared Reflections</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Anonymous thoughts to remind you that you are not alone.</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {REFLECTIONS.map((r, i) => (
               <div
                 key={i}
-                className="rounded-2xl p-5 transition-all hover:-translate-y-1"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(143, 191, 159, 0.1), rgba(244, 199, 195, 0.1))',
-                  border: '1px solid rgba(143, 191, 159, 0.2)'
-                }}
+                className="shared-reflection"
                 data-testid={`card-reflection-${i}`}
               >
-                <p className="text-gray-800 dark:text-gray-200 leading-relaxed italic">
+                <p className="text-gray-800 dark:text-gray-200 leading-relaxed">
                   "{r.text}"
                 </p>
-                <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1 not-italic">
                   <Star className="w-3 h-3" aria-hidden="true" /> {r.author}
                 </p>
               </div>
@@ -340,14 +367,24 @@ export default function SharedReflectionsPage() {
           </div>
         </section>
 
+        {/* Visual Divider */}
+        <div className="section-divider" aria-hidden="true"></div>
+
         {/* Community Guidelines */}
-        <footer className="mt-12 p-6 rounded-2xl bg-slate-50 dark:bg-gray-800/50 text-center">
-          <Shield className="w-8 h-8 text-teal-500 mx-auto mb-3" aria-hidden="true" />
-          <h3 className="font-semibold text-gray-800 dark:text-white mb-2">Community Guidelines</h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 max-w-xl mx-auto">
+        <footer className="resource-section text-center">
+          <Shield className="w-10 h-10 mx-auto mb-4" style={{ color: 'var(--glp-sage-deep)' }} aria-hidden="true" />
+          <h3 className="font-semibold text-lg mb-3" style={{ fontFamily: "'Playfair Display', Georgia, serif", color: 'var(--glp-sage-deep)' }}>
+            Community Guidelines
+          </h3>
+          <p className="text-gray-700 dark:text-gray-300 max-w-xl mx-auto content-breathe">
             This is a safe, moderated space. Be kind, be supportive, and remember that everyone is on their own healing journey. 
             No medical advice—seek professional help for clinical concerns.
           </p>
+          <div className="mt-4">
+            <a href="/safety" className="inline-flex items-center gap-2 text-sm font-medium hover:underline" style={{ color: 'var(--glp-sage-deep)' }}>
+              View Safety Resources →
+            </a>
+          </div>
         </footer>
       </div>
     </div>
