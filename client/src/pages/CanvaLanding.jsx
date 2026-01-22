@@ -649,6 +649,90 @@ export default function CanvaLanding() {
         </div>
       </section>
 
+      {/* Explore Our Platform Section */}
+      <section className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-sage-10) 0%, var(--glp-paper) 100%)' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
+              Explore Our Platform
+            </h2>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
+              Discover all the tools, resources, and support available for your healing journey
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Wellness Tools */}
+            <div className="p-6 rounded-2xl" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-20)', boxShadow: '0 6px 20px var(--glp-sage-15)' }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+                  <Smile className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Wellness Tools</h3>
+              </div>
+              <div className="space-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                <Link href="/mood-tracker"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Mood Tracker</div></Link>
+                <Link href="/journal"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Daily Journal</div></Link>
+                <Link href="/meditation"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Meditation</div></Link>
+                <Link href="/breathing"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Breathing Exercises</div></Link>
+                <Link href="/affirmations"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Affirmations</div></Link>
+              </div>
+            </div>
+
+            {/* AI & Support */}
+            <div className="p-6 rounded-2xl" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-gold-30)', boxShadow: '0 6px 20px var(--glp-gold-15)' }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))' }}>
+                  <MessageCircle className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>AI & Support</h3>
+              </div>
+              <div className="space-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                <Link href="/chat"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">AI Companion</div></Link>
+                <Link href="/therapy-chat"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Therapy Sessions</div></Link>
+                <Link href="/crisis"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Crisis Support</div></Link>
+                <Link href="/qa"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Q&A Community</div></Link>
+                <Link href="/support"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Help Center</div></Link>
+              </div>
+            </div>
+
+            {/* Learning & Growth */}
+            <div className="p-6 rounded-2xl" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-rose-20)', boxShadow: '0 6px 20px var(--glp-rose-10)' }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))' }}>
+                  <BookOpen className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Learning & Growth</h3>
+              </div>
+              <div className="space-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                <Link href="/content-index"><div className="p-2 rounded-lg hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all">Content Library</div></Link>
+                <Link href="/study-vault"><div className="p-2 rounded-lg hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all">Study Vault</div></Link>
+                <Link href="/healing-library"><div className="p-2 rounded-lg hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all">Healing Library</div></Link>
+                <Link href="/how-to-guides"><div className="p-2 rounded-lg hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all">How-To Guides</div></Link>
+                <Link href="/research"><div className="p-2 rounded-lg hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all">Research & Evidence</div></Link>
+              </div>
+            </div>
+
+            {/* Advanced Tools */}
+            <div className="p-6 rounded-2xl" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-30)', boxShadow: '0 6px 20px var(--glp-sage-10)' }}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))' }}>
+                  <Zap className="w-5 h-5 text-white" />
+                </div>
+                <h3 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Advanced Tools</h3>
+              </div>
+              <div className="space-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                <Link href="/tools"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Tools Library</div></Link>
+                <Link href="/intellectual-atlas"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Intellectual Atlas</div></Link>
+                <Link href="/cognitive-lab"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Cognitive Lab</div></Link>
+                <Link href="/purpose-compass"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Purpose Compass</div></Link>
+                <Link href="/mastery"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Mastery Suite</div></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-6xl mx-auto">
