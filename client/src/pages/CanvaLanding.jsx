@@ -153,11 +153,11 @@ export default function CanvaLanding() {
             {/* Logo - Compact on mobile, expanded on desktop */}
             <Link href="/">
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[64px] lg:h-[64px] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 overflow-hidden" style={{ boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+                <div className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[64px] lg:h-[64px] flex items-center justify-center transition-all duration-300 group-hover:scale-105">
                   <img 
-                    src="/brand/logo-mark.png" 
+                    src="/brand/logo-monogram.png" 
                     alt="The Genuine Love Project" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="flex flex-col leading-snug">
@@ -647,8 +647,8 @@ export default function CanvaLanding() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div className="md:col-span-1">
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-10 h-10 rounded-xl overflow-hidden" style={{ boxShadow: '0 2px 8px var(--glp-sage-20)' }}>
-                  <img src="/brand/logo-mark.png" alt="The Genuine Love Project" className="w-full h-full object-cover" />
+                <div className="w-10 h-10">
+                  <img src="/brand/logo-monogram.png" alt="The Genuine Love Project" className="w-full h-full object-contain" />
                 </div>
                 <span className="font-serif font-bold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>
                   Genuine Love
