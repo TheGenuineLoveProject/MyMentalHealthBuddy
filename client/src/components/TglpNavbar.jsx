@@ -30,13 +30,10 @@ export default function TglpNavbar() {
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled 
-          ? "bg-[var(--glp-paper)]/95 backdrop-blur-lg shadow-sm" 
+          ? "bg-[var(--glp-paper)]/95 backdrop-blur-lg shadow-sm border-b border-[var(--glp-sage-10)]" 
           : "bg-transparent"
       }`}
-      style={{ 
-        paddingTop: "var(--glp-safe-top, 0px)",
-        borderBottom: scrolled ? "1px solid var(--glp-sage-10, rgba(143, 191, 159, 0.1))" : "none",
-      }}
+      style={{ paddingTop: "var(--glp-safe-top)" }}
       role="banner"
       data-testid="navbar-main"
     >
@@ -57,8 +54,8 @@ export default function TglpNavbar() {
           <div 
             className="relative w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
             style={{ 
-              background: "linear-gradient(135deg, var(--glp-sage-20, rgba(143, 191, 159, 0.2)), var(--glp-rose-15, rgba(244, 199, 195, 0.15)))",
-              boxShadow: "0 2px 8px var(--glp-sage-15, rgba(143, 191, 159, 0.15))",
+              background: "var(--glp-logo-gradient)",
+              boxShadow: "var(--glp-logo-shadow)",
             }}
           >
             <img 
@@ -129,7 +126,11 @@ export default function TglpNavbar() {
           {/* CTA Button */}
           <Link 
             href="/register" 
-            className="flex items-center gap-2 rounded-full px-4 md:px-5 py-2 md:py-2.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 bg-gradient-to-r from-[var(--glp-gold)] to-[var(--glp-gold-dark,#ddb12d)] text-[var(--glp-sage-deep)] shadow-[0_4px_16px_var(--glp-gold-30,rgba(234,195,59,0.3))]" 
+            className="flex items-center gap-2 rounded-full px-4 md:px-5 py-2 md:py-2.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
+            style={{ 
+              background: "var(--glp-gold-gradient)",
+              boxShadow: "var(--glp-gold-shadow)",
+            }}
             data-testid="link-register"
           >
             <Sparkles className="w-4 h-4" aria-hidden="true" />
@@ -156,12 +157,10 @@ export default function TglpNavbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div 
-          className="lg:hidden px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage)]/10"
-        >
+        <div className="lg:hidden px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)]">
           {/* Mobile Search */}
           <div className="px-4 py-2 md:hidden">
-            <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-[var(--glp-sage)]/[0.08] border border-[var(--glp-sage)]/15">
+            <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-[var(--glp-sage)]/[0.08] border border-[var(--glp-sage-15)]">
               <Search className="w-4 h-4 text-[var(--glp-sage)]" />
               <input 
                 type="text" 
@@ -188,7 +187,7 @@ export default function TglpNavbar() {
             </Link>
           ))}
           
-          <div className="pt-3 mt-3 border-t border-[var(--glp-sage)]/10">
+          <div className="pt-3 mt-3 border-t border-[var(--glp-sage-10)]">
             <div className="px-4 mb-2">
               <ModeToggle />
             </div>
@@ -197,7 +196,7 @@ export default function TglpNavbar() {
           <div className="pt-4 px-4 space-y-2">
             <Link 
               href="/login"
-              className="block text-center px-4 py-3 rounded-xl text-sm font-medium transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep)]/20"
+              className="block text-center px-4 py-3 rounded-xl text-sm font-medium transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep-20)]"
               onClick={() => setMobileMenuOpen(false)}
               data-testid="link-mobile-signin"
             >
@@ -205,7 +204,8 @@ export default function TglpNavbar() {
             </Link>
             <Link 
               href="/register" 
-              className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold bg-gradient-to-r from-[var(--glp-gold)] to-[var(--glp-gold-dark,#ddb12d)] text-[var(--glp-sage-deep)]"
+              className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+              style={{ background: "var(--glp-gold-gradient)" }}
               onClick={() => setMobileMenuOpen(false)}
               data-testid="link-mobile-get-started"
             >

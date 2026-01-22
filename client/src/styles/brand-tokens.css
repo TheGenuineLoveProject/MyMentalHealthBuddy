@@ -14,10 +14,29 @@
   ------------------------------------------------------------ */
   --glp-sage: #8fbf9f;        /* Sage Green - calming, healing */
   --glp-blush: #f4c7c3;       /* Rose Pink - warm, nurturing */
+  --glp-rose: #f4c7c3;        /* Alias for blush */
   --glp-sage-deep: #2f5d5d;   /* Deep Teal - PRIMARY, grounding */
   --glp-paper: #faf9f7;       /* Cream/Ivory - soft background */
   --glp-ink: #3a3a3a;         /* Charcoal - readable text */
   --glp-gold: #eac33b;        /* Gold - premium accent, highlights */
+  --glp-gold-dark: #ddb12d;   /* Darker gold for gradients */
+
+  /* Opacity variants for UI components */
+  --glp-sage-10: rgba(143, 191, 159, 0.1);
+  --glp-sage-15: rgba(143, 191, 159, 0.15);
+  --glp-sage-20: rgba(143, 191, 159, 0.2);
+  --glp-sage-30: rgba(143, 191, 159, 0.3);
+  --glp-rose-15: rgba(244, 199, 195, 0.15);
+  --glp-rose-20: rgba(244, 199, 195, 0.2);
+  --glp-gold-30: rgba(234, 195, 59, 0.3);
+  --glp-sage-deep-12: rgba(47, 93, 93, 0.12);
+  --glp-sage-deep-20: rgba(47, 93, 93, 0.2);
+
+  /* Logo gradient and shadow */
+  --glp-logo-gradient: linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15));
+  --glp-logo-shadow: 0 2px 8px var(--glp-sage-15);
+  --glp-gold-gradient: linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark));
+  --glp-gold-shadow: 0 4px 16px var(--glp-gold-30);
 
   /* Extended teal palette for depth */
   --glp-teal-50: #EDF5F5;

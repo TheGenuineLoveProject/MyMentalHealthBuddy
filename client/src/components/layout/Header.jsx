@@ -64,12 +64,10 @@ function Header() {
     <header 
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled 
-          ? "bg-[var(--glp-paper)]/95 backdrop-blur-lg shadow-sm border-b border-[var(--glp-sage)]/10" 
+          ? "bg-[var(--glp-paper)]/95 backdrop-blur-lg shadow-sm border-b border-[var(--glp-sage-10)]" 
           : "bg-transparent"
       }`}
-      style={{
-        paddingTop: "var(--glp-safe-top, 0px)",
-      }}
+      style={{ paddingTop: "var(--glp-safe-top)" }}
       data-testid="header-main"
     >
       <div className="mx-auto flex h-16 md:h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 gap-4">
@@ -83,8 +81,8 @@ function Header() {
           <div 
             className="relative w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105"
             style={{ 
-              background: "linear-gradient(135deg, var(--glp-sage-20, rgba(143, 191, 159, 0.2)), var(--glp-rose-15, rgba(244, 199, 195, 0.15)))",
-              boxShadow: "0 2px 8px var(--glp-sage-15, rgba(143, 191, 159, 0.15))",
+              background: "var(--glp-logo-gradient)",
+              boxShadow: "var(--glp-logo-shadow)",
             }}
           >
             <Heart 
@@ -123,7 +121,7 @@ function Header() {
           <div className="relative hidden md:block" ref={modeRef}>
             <button
               onClick={() => setModeMenuOpen(!modeMenuOpen)}
-              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)] border border-[var(--glp-sage)]/20"
+              className="flex items-center gap-1.5 text-xs font-medium px-3 py-2 rounded-lg transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-ink)] border border-[var(--glp-sage-20)]"
               data-testid="button-mode-toggle"
             >
               <Eye className="w-3.5 h-3.5 text-[var(--glp-sage)]" />
@@ -131,7 +129,8 @@ function Header() {
             </button>
             {modeMenuOpen && (
               <div 
-                className="absolute right-0 top-full mt-2 rounded-xl py-2 min-w-[120px] z-50 bg-[var(--glp-paper)] border border-[var(--glp-sage)]/20 shadow-[0_10px_40px_var(--glp-sage-deep-12,rgba(47,93,93,0.12))]"
+                className="absolute right-0 top-full mt-2 rounded-xl py-2 min-w-[120px] z-50 bg-[var(--glp-paper)] border border-[var(--glp-sage-20)]"
+                style={{ boxShadow: "0 10px 40px var(--glp-sage-deep-12)" }}
               >
                 {MODES.map((m) => (
                   <button
@@ -163,7 +162,11 @@ function Header() {
           {/* CTA Button */}
           <Link 
             href="/register" 
-            className="flex items-center gap-2 rounded-full px-4 md:px-5 py-2 md:py-2.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg bg-gradient-to-r from-[var(--glp-gold)] to-[var(--glp-gold-dark,#ddb12d)] text-[var(--glp-sage-deep)] shadow-[0_4px_16px_var(--glp-gold-30,rgba(234,195,59,0.3))]"
+            className="flex items-center gap-2 rounded-full px-4 md:px-5 py-2 md:py-2.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg text-[var(--glp-sage-deep)]"
+            style={{ 
+              background: "var(--glp-gold-gradient)",
+              boxShadow: "var(--glp-gold-shadow)",
+            }}
             data-testid="link-get-started"
           >
             <Sparkles className="w-4 h-4" />
@@ -189,7 +192,7 @@ function Header() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage)]/10">
+        <div className="lg:hidden px-4 py-4 space-y-1 bg-[var(--glp-paper)] border-t border-[var(--glp-sage-10)]">
           {navLinks.map(({ href, label, icon: Icon }) => (
             <Link 
               key={href}
@@ -203,7 +206,7 @@ function Header() {
             </Link>
           ))}
           
-          <div className="pt-3 mt-3 border-t border-[var(--glp-sage)]/10">
+          <div className="pt-3 mt-3 border-t border-[var(--glp-sage-10)]">
             <div className="flex items-center gap-2 px-4 py-2">
               <Eye className="w-4 h-4 text-[var(--glp-sage)]" />
               <span className="text-xs text-[var(--glp-ink)]/70">Display Mode:</span>
@@ -213,7 +216,7 @@ function Header() {
                 <button
                   key={m}
                   onClick={() => setMode(m)}
-                  className={`px-3 py-2 text-xs rounded-lg transition-colors border border-[var(--glp-sage)]/20 ${
+                  className={`px-3 py-2 text-xs rounded-lg transition-colors border border-[var(--glp-sage-20)] ${
                     mode === m 
                       ? "bg-[var(--glp-sage)]/15 text-[var(--glp-sage-deep)] font-semibold" 
                       : "text-[var(--glp-ink)]"
@@ -229,7 +232,7 @@ function Header() {
           <div className="pt-4 px-4">
             <Link 
               href="/login"
-              className="block text-center px-4 py-3 rounded-xl text-sm font-medium mb-2 transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep)]/20"
+              className="block text-center px-4 py-3 rounded-xl text-sm font-medium mb-2 transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep-20)]"
               onClick={() => setMobileMenuOpen(false)}
               data-testid="link-mobile-signin"
             >
@@ -237,7 +240,8 @@ function Header() {
             </Link>
             <Link 
               href="/register" 
-              className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold bg-gradient-to-r from-[var(--glp-gold)] to-[var(--glp-gold-dark,#ddb12d)] text-[var(--glp-sage-deep)]"
+              className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+              style={{ background: "var(--glp-gold-gradient)" }}
               onClick={() => setMobileMenuOpen(false)}
               data-testid="link-mobile-get-started"
             >
