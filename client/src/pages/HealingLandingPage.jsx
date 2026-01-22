@@ -23,6 +23,7 @@ import {
 import HealingHero from "../components/HealingHero";
 import AboutSection from "../components/AboutSection";
 import BenefitsSection from "../components/BenefitsSection";
+import SacredFooter from "../components/SacredFooter";
 import "../styles/healing-animations.css";
 
 export default function HealingLandingPage() {
@@ -472,23 +473,8 @@ export default function HealingLandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer 
-        className="py-12 px-6 border-t"
-        style={{ borderColor: 'rgba(143, 191, 159, 0.15)' }}
-      >
-        <div className="max-w-6xl mx-auto text-center">
-          <p 
-            className="font-serif text-xl mb-4"
-            style={{ color: '#2f5d5d' }}
-          >
-            The Genuine Love Project
-          </p>
-          <p className="text-slate-500 dark:text-slate-400 text-sm">
-            © {new Date().getFullYear()} The Genuine Love Project. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      {/* Sacred Footer */}
+      <SacredFooter />
     </div>
   );
 }
