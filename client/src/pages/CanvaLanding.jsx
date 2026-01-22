@@ -767,11 +767,11 @@ export default function CanvaLanding() {
         <div className="max-w-6xl mx-auto">
           {/* Brand Logo Section - Now at Top */}
           <div className="flex flex-col items-center justify-center pb-12 mb-12" style={{ borderBottom: '1px solid var(--glp-sage-15)' }}>
-            <div className="mb-6">
+            <div className="w-full flex justify-center mb-6">
               <img 
                 src="/brand/footer-logo.png" 
                 alt="The Genuine Love Project" 
-                className="w-10 h-10 object-contain mx-auto"
+                className="w-10 h-10 object-contain"
               />
             </div>
             <p className="text-lg sm:text-xl text-center font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
