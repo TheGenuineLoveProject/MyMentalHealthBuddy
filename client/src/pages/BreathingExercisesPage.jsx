@@ -227,30 +227,30 @@ export default function BreathingExercisesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 50%, var(--glp-paper) 100%)' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage-deep)' }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-sky-400 to-blue-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full text-white mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
             <Wind className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Breathing for Nervous System Regulation</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Breathing for Nervous System Regulation</h1>
+          <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
             Your breath is the only autonomic function you can consciously control—making it your most accessible tool for nervous system regulation. 
             These evidence-based techniques, grounded in polyvagal theory, help shift your body from stress states into calm presence.
           </p>
         </div>
 
-        <div className="bg-teal-50 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800 rounded-2xl p-6 mb-12">
+        <div className="rounded-2xl p-6 mb-12" style={{ background: 'var(--glp-teal-50)', border: '1px solid var(--glp-sage-30)' }}>
           <div className="flex items-start gap-4">
-            <Brain className="h-6 w-6 text-teal-600 dark:text-teal-400 flex-shrink-0 mt-1" />
+            <Brain className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--glp-sage-deep)' }} />
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Why Breathing Works</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Why Breathing Works</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
                 <strong>Polyvagal insight:</strong> Your nervous system is constantly scanning for danger (neuroception). 
                 Slow, deep breathing—especially with extended exhales—activates the ventral vagal complex, 
                 signaling to your brain: "I am safe. I can rest." This isn't positive thinking; it's physiology.
@@ -261,7 +261,7 @@ export default function BreathingExercisesPage() {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1 space-y-4">
-            <h2 className="font-semibold text-slate-900 dark:text-white mb-4">Choose a Technique</h2>
+            <h2 className="font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Choose a Technique</h2>
             {exercises.map((ex) => (
               <button
                 key={ex.id}

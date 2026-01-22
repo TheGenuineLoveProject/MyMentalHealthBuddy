@@ -285,33 +285,33 @@ export default function AffirmationsPage() {
   const currentAffirmation = selectedCategory.affirmations[currentIndex];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-rose-10) 50%, var(--glp-paper) 100%)' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage-deep)' }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full text-white mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-sage))' }}>
             <Sparkles className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Transformational Affirmations</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Transformational Affirmations</h1>
+          <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
             Not positive thinking platitudes—evidence-based statements designed to rewire neural pathways.
             Each affirmation is crafted to speak directly to your nervous system, inner critic, and wounded parts with the compassion they deserve.
           </p>
         </div>
 
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-2xl p-6 mb-12 text-center border border-amber-200 dark:border-amber-800">
-          <Star className="h-6 w-6 text-amber-500 mx-auto mb-2" />
-          <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">Today's Affirmation</p>
-          <p className="text-xl font-medium text-slate-900 dark:text-white mb-3">"{dailyAffirmation}"</p>
-          <p className="text-xs text-amber-700 dark:text-amber-300">Speak this aloud three times. Place your hand on your heart. Let it land.</p>
+        <div className="rounded-2xl p-6 mb-12 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-gold-20), var(--glp-gold-10))', border: '1px solid var(--glp-gold-30)' }}>
+          <Star className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-gold)' }} />
+          <p className="text-sm mb-2" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>Today's Affirmation</p>
+          <p className="text-xl font-medium mb-3" style={{ color: 'var(--glp-sage-deep)' }}>"{dailyAffirmation}"</p>
+          <p className="text-xs" style={{ color: 'var(--glp-gold-dark)' }}>Speak this aloud three times. Place your hand on your heart. Let it land.</p>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 mb-12 shadow-sm">
-          <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 text-center">Choose Your Focus</h2>
+        <div className="rounded-2xl p-6 mb-12 shadow-sm" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
+          <h2 className="text-lg font-semibold mb-4 text-center" style={{ color: 'var(--glp-sage-deep)' }}>Choose Your Focus</h2>
           <div className="flex flex-wrap justify-center gap-3">
             {affirmationCategories.map((cat) => (
               <button
@@ -342,8 +342,8 @@ export default function AffirmationsPage() {
           />
         </div>
 
-        <div className="bg-teal-50 dark:bg-teal-950/30 rounded-2xl p-6 mb-12 border border-teal-200 dark:border-teal-800">
-          <Brain className="h-5 w-5 text-teal-600 dark:text-teal-400 mb-2" />
+        <div className="rounded-2xl p-6 mb-12" style={{ background: 'var(--glp-teal-50)', border: '1px solid var(--glp-sage-30)' }}>
+          <Brain className="h-5 w-5 mb-2" style={{ color: 'var(--glp-sage-deep)' }} />
           <p className="text-sm text-teal-800 dark:text-teal-200 italic">
             <strong>Research Note:</strong> {selectedCategory.researchNote}
           </p>

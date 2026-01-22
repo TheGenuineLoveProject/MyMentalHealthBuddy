@@ -36,16 +36,16 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30" role="status" aria-label="Loading dashboard">
+      <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }} role="status" aria-label="Loading dashboard">
         <div className="max-w-5xl mx-auto px-6 py-10">
           <div className="space-y-8 animate-pulse">
-            <div className="h-12 w-64 bg-slate-100 rounded-xl" />
+            <div className="h-12 w-64 rounded-xl" style={{ background: 'var(--glp-sage-10)' }} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[1, 2].map((i) => (
-                <div key={i} className="h-40 bg-slate-100 rounded-2xl" />
+                <div key={i} className="h-40 rounded-2xl" style={{ background: 'var(--glp-sage-10)' }} />
               ))}
             </div>
-            <div className="h-32 bg-slate-100 rounded-2xl" />
+            <div className="h-32 rounded-2xl" style={{ background: 'var(--glp-sage-10)' }} />
           </div>
           <span className="sr-only">Loading your wellness dashboard...</span>
         </div>
@@ -55,16 +55,17 @@ export default function Dashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30 flex items-center justify-center p-6" role="alert">
-        <div className="bg-white rounded-3xl p-10 text-center max-w-md shadow-sm border border-slate-100">
-          <div className="w-16 h-16 rounded-2xl bg-rose-50 flex items-center justify-center mx-auto mb-5">
-            <Heart className="w-8 h-8 text-rose-500" aria-hidden="true" />
+      <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }} role="alert">
+        <div className="rounded-3xl p-10 text-center max-w-md shadow-sm" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
+          <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5" style={{ background: 'var(--glp-rose-15)' }}>
+            <Heart className="w-8 h-8" style={{ color: 'var(--glp-blush)' }} aria-hidden="true" />
           </div>
-          <h2 className="text-xl font-semibold text-slate-800 mb-2">Unable to load dashboard</h2>
-          <p className="text-slate-500 mb-6">{error.message || "Something went wrong. Please try again."}</p>
+          <h2 className="text-xl font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Unable to load dashboard</h2>
+          <p className="mb-6" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>{error.message || "Something went wrong. Please try again."}</p>
           <button
             onClick={() => refetch()}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-teal-500 to-teal-600 text-white font-medium shadow-lg shadow-teal-500/25 hover:shadow-xl transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium shadow-lg hover:shadow-xl transition-all"
+            style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}
             data-testid="button-retry"
           >
             Try Again
@@ -85,29 +86,30 @@ export default function Dashboard() {
         title="Dashboard"
         description="View your wellness overview, mood trends, and journal entries. Track your mental health journey with The Genuine Love Project."
       />
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sage-50/30 relative overflow-hidden">
+      <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }}>
         <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute -top-32 -right-32 w-96 h-96 bg-gradient-to-br from-teal-100/40 to-sage-100/30 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 -left-32 w-80 h-80 bg-gradient-to-tr from-amber-50/40 to-rose-50/20 rounded-full blur-3xl" />
+          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} />
+          <div className="absolute bottom-0 -left-32 w-80 h-80 rounded-full blur-3xl" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)' }} />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 py-10">
           <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-100 to-orange-50 flex items-center justify-center shadow-sm">
-                <GreetingIcon className="w-7 h-7 text-amber-500" aria-hidden="true" />
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm" style={{ background: 'linear-gradient(135deg, var(--glp-gold-30), var(--glp-gold-10))' }}>
+                <GreetingIcon className="w-7 h-7" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
               </div>
               <div>
-                <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight" data-testid="text-greeting">
+                <h1 className="text-2xl lg:text-3xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-greeting">
                   {greeting.text}, {user?.email?.split("@")[0] || "Friend"}
                 </h1>
-                <p className="text-slate-500 mt-0.5">Your healing journey continues—here's where you are today</p>
+                <p style={{ color: 'var(--glp-ink)', opacity: 0.6 }} className="mt-0.5">Your healing journey continues—here's where you are today</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Link 
                 href="/settings" 
-                className="p-3 rounded-xl bg-white border border-slate-100 hover:border-slate-200 hover:bg-slate-50 text-slate-500 hover:text-slate-700 transition-all shadow-sm" 
+                className="p-3 rounded-xl transition-all shadow-sm hover:shadow-md" 
+                style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-ink)' }}
                 data-testid="link-settings" 
                 aria-label="Settings"
               >
@@ -115,7 +117,8 @@ export default function Dashboard() {
               </Link>
               <button
                 onClick={handleLogout}
-                className="p-3 rounded-xl bg-white border border-slate-100 hover:border-rose-200 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition-all shadow-sm"
+                className="p-3 rounded-xl transition-all shadow-sm hover:shadow-md"
+                style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)', color: 'var(--glp-ink)' }}
                 data-testid="button-logout"
                 aria-label="Logout"
               >
@@ -130,21 +133,21 @@ export default function Dashboard() {
           <section 
             className="mb-8 p-6 rounded-3xl relative overflow-hidden"
             style={{ 
-              background: 'linear-gradient(135deg, rgba(47, 93, 93, 0.05), rgba(143, 191, 159, 0.1))',
-              border: '2px solid rgba(143, 191, 159, 0.2)'
+              background: 'linear-gradient(135deg, var(--glp-sage-deep-12), var(--glp-sage-10))',
+              border: '2px solid var(--glp-sage-20)'
             }}
             aria-label="Daily healing focus"
             data-testid="section-daily-focus"
           >
             <div 
               className="absolute top-0 left-1/4 right-1/4 h-1 rounded-b-full"
-              style={{ background: 'linear-gradient(90deg, #8fbf9f, #eac33b, #f4c7c3)' }}
+              style={{ background: 'linear-gradient(90deg, var(--glp-sage), var(--glp-gold), var(--glp-blush))' }}
             />
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div className="flex items-center gap-4">
                 <div 
                   className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #8fbf9f, #2f5d5d)' }}
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
                 >
                   <Sparkles className="w-7 h-7 text-white" />
                 </div>
