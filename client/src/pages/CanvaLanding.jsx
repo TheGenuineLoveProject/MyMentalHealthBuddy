@@ -614,7 +614,7 @@ export default function CanvaLanding() {
           </div>
           
           {/* Lotus Accent */}
-          <div className="mx-auto mb-2 flex items-center justify-center" style={{ width: '5px', height: '0.5px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)' }}>
+          <div className="mx-auto mb-2 flex items-center justify-center" style={{ width: '10px', height: '0.5px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)' }}>
             <div className="rounded-full overflow-hidden" style={{ width: '0.5px', height: '0.5px', background: 'var(--glp-white)' }}>
               <img 
                 src="/brand/footer-wellness-graphic.png" 
