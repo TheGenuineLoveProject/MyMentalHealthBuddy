@@ -1,0 +1,222 @@
+{
+  "name": "The Genuine Love Project - Figma Component Map",
+  "version": "1.0.0",
+  "description": "HTML structure to Figma blocks mapping with class names",
+  "designTokens": {
+    "colors": {
+      "sage": { "value": "#8fbf9f", "figmaName": "Primary/Sage" },
+      "sageLight": { "value": "rgba(143, 191, 159, 0.15)", "figmaName": "Primary/Sage Light" },
+      "rose": { "value": "#f4c7c3", "figmaName": "Secondary/Rose" },
+      "roseLight": { "value": "rgba(244, 199, 195, 0.2)", "figmaName": "Secondary/Rose Light" },
+      "teal": { "value": "#2f5d5d", "figmaName": "Brand/Deep Teal" },
+      "tealDark": { "value": "#1f3f3f", "figmaName": "Brand/Deep Teal Dark" },
+      "cream": { "value": "#faf9f7", "figmaName": "Neutral/Cream" },
+      "charcoal": { "value": "#3a3a3a", "figmaName": "Neutral/Charcoal" },
+      "gold": { "value": "#eac33b", "figmaName": "Accent/Gold" },
+      "goldDark": { "value": "#d4a84b", "figmaName": "Accent/Gold Dark" },
+      "white": { "value": "#ffffff", "figmaName": "Neutral/White" }
+    },
+    "typography": {
+      "fontSans": { "value": "Poppins", "figmaName": "Body" },
+      "fontSerif": { "value": "Playfair Display", "figmaName": "Display" },
+      "sizes": {
+        "h1": { "size": "40px", "weight": "700", "lineHeight": "1.2" },
+        "h2": { "size": "32px", "weight": "700", "lineHeight": "1.2" },
+        "h3": { "size": "24px", "weight": "700", "lineHeight": "1.2" },
+        "h4": { "size": "20px", "weight": "600", "lineHeight": "1.3" },
+        "body": { "size": "16px", "weight": "400", "lineHeight": "1.6" },
+        "small": { "size": "14px", "weight": "400", "lineHeight": "1.5" }
+      }
+    },
+    "spacing": {
+      "unit": "8px",
+      "scale": [0, 4, 8, 12, 16, 24, 32, 48, 64, 96, 128]
+    },
+    "borderRadius": {
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "full": "9999px"
+    },
+    "shadows": {
+      "sm": "0 2px 8px rgba(47, 93, 93, 0.08)",
+      "md": "0 4px 20px rgba(47, 93, 93, 0.12)",
+      "lg": "0 8px 40px rgba(47, 93, 93, 0.16)"
+    }
+  },
+  "components": {
+    "navigation": {
+      "header": {
+        "htmlTag": "header",
+        "cssClass": ".header",
+        "figmaFrame": "NavBar",
+        "variants": ["default", "scrolled", "mobile-open"],
+        "children": ["logo", "nav-links", "actions", "mobile-menu"]
+      },
+      "logo": {
+        "htmlTag": "a.header__logo",
+        "figmaFrame": "NavBar/Logo",
+        "properties": { "height": "40px" }
+      },
+      "navLink": {
+        "htmlTag": "a.header__nav-link",
+        "figmaFrame": "NavBar/NavLink",
+        "states": ["default", "hover", "active"]
+      }
+    },
+    "buttons": {
+      "primary": {
+        "htmlTag": "button.btn.btn--primary",
+        "figmaFrame": "Button/Primary",
+        "properties": {
+          "background": "linear-gradient(135deg, #eac33b, #d4a84b)",
+          "color": "#2f5d5d",
+          "padding": "12px 24px",
+          "borderRadius": "24px"
+        },
+        "states": ["default", "hover", "active", "disabled"]
+      },
+      "secondary": {
+        "htmlTag": "button.btn.btn--secondary",
+        "figmaFrame": "Button/Secondary",
+        "properties": {
+          "background": "#ffffff",
+          "color": "#2f5d5d",
+          "border": "2px solid rgba(143, 191, 159, 0.2)",
+          "padding": "12px 24px",
+          "borderRadius": "24px"
+        },
+        "states": ["default", "hover", "active", "disabled"]
+      },
+      "outline": {
+        "htmlTag": "button.btn.btn--outline",
+        "figmaFrame": "Button/Outline",
+        "states": ["default", "hover", "active", "disabled"]
+      }
+    },
+    "cards": {
+      "feature": {
+        "htmlTag": "article.card",
+        "figmaFrame": "Card/Feature",
+        "children": ["icon", "title", "description"],
+        "properties": {
+          "background": "#ffffff",
+          "padding": "24px",
+          "borderRadius": "16px",
+          "shadow": "sm"
+        }
+      },
+      "testimonial": {
+        "htmlTag": "article.testimonial-card",
+        "figmaFrame": "Card/Testimonial",
+        "children": ["avatar", "quote", "name", "role"]
+      },
+      "stat": {
+        "htmlTag": "div.stat-card",
+        "figmaFrame": "Card/Stat",
+        "children": ["icon", "value", "label"]
+      }
+    },
+    "forms": {
+      "input": {
+        "htmlTag": "input.form-input",
+        "figmaFrame": "Form/Input",
+        "states": ["default", "focus", "error", "disabled"],
+        "properties": {
+          "border": "2px solid rgba(143, 191, 159, 0.2)",
+          "borderRadius": "12px",
+          "padding": "12px 16px"
+        }
+      },
+      "textarea": {
+        "htmlTag": "textarea.form-textarea",
+        "figmaFrame": "Form/Textarea",
+        "states": ["default", "focus", "error"]
+      },
+      "select": {
+        "htmlTag": "select.form-select",
+        "figmaFrame": "Form/Select",
+        "states": ["default", "focus", "open"]
+      },
+      "checkbox": {
+        "htmlTag": "input.form-checkbox",
+        "figmaFrame": "Form/Checkbox",
+        "states": ["unchecked", "checked", "indeterminate"]
+      }
+    },
+    "sections": {
+      "hero": {
+        "htmlTag": "section.hero",
+        "figmaFrame": "Section/Hero",
+        "children": ["badge", "title", "subtitle", "actions", "image"],
+        "properties": {
+          "background": "linear-gradient(180deg, rgba(143, 191, 159, 0.15) 0%, transparent 100%)",
+          "padding": "64px 0"
+        }
+      },
+      "features": {
+        "htmlTag": "section.features",
+        "figmaFrame": "Section/Features",
+        "children": ["heading", "grid"]
+      },
+      "testimonials": {
+        "htmlTag": "section.testimonials",
+        "figmaFrame": "Section/Testimonials",
+        "children": ["heading", "carousel"]
+      },
+      "faq": {
+        "htmlTag": "section.faq",
+        "figmaFrame": "Section/FAQ",
+        "children": ["heading", "accordion"]
+      },
+      "cta": {
+        "htmlTag": "section.cta-section",
+        "figmaFrame": "Section/CTA",
+        "children": ["heading", "text", "button"]
+      }
+    },
+    "modals": {
+      "dialog": {
+        "htmlTag": "div.modal",
+        "figmaFrame": "Modal/Dialog",
+        "children": ["overlay", "content", "header", "body", "footer"]
+      },
+      "login": {
+        "htmlTag": "div.modal#login-modal",
+        "figmaFrame": "Modal/Login",
+        "extends": "dialog"
+      },
+      "subscribe": {
+        "htmlTag": "div.modal#subscribe-modal",
+        "figmaFrame": "Modal/Subscribe",
+        "extends": "dialog"
+      }
+    },
+    "footer": {
+      "main": {
+        "htmlTag": "footer.footer",
+        "figmaFrame": "Footer",
+        "children": ["brand", "links", "social", "copyright"]
+      }
+    }
+  },
+  "pages": {
+    "landing": { "file": "index.html", "figmaPage": "Pages/Landing" },
+    "onboarding": { "file": "onboarding.html", "figmaPage": "Pages/Onboarding" },
+    "homepage": { "file": "home.html", "figmaPage": "Pages/Homepage" },
+    "crm": { "file": "crm.html", "figmaPage": "Pages/CRM Dashboard" },
+    "content": { "file": "content.html", "figmaPage": "Pages/Content" },
+    "qa": { "file": "qa.html", "figmaPage": "Pages/Q&A" },
+    "login": { "file": "login.html", "figmaPage": "Pages/Login" }
+  },
+  "webflowMapping": {
+    ".header": "Navbar",
+    ".hero": "Hero Section",
+    ".btn--primary": "Button Primary",
+    ".btn--secondary": "Button Secondary",
+    ".card": "Card",
+    ".form-input": "Input Field",
+    ".footer": "Footer"
+  }
+}

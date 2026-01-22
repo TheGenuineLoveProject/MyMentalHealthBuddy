@@ -1,0 +1,15 @@
+# The Genuine Love Project - robots.txt
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://thegenuineloveproject.com/sitemap.xml
+
+# Disallow admin/private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+# Crawl delay for respectful indexing
+Crawl-delay: 1
