@@ -1,0 +1,179 @@
+mkdir -p tools
+
+# Rename if they already exist
+[ -f tools/route_map.js ] && mv tools/route_map.js tools/route_map.cjs || true
+[ -f tools/link_scan.js ] && mv tools/link_scan.js tools/link_scan.cjs || true
+[ -f tools/auth_smoke.js ] && mv tools/auth_smoke.js tools/auth_smoke.cjs || true
+
+# If they didn't exist (or you want to overwrite), recreate them as .cjs:
+cat > tools/route_map.cjs <<'CJS'
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const EXCLUDE = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+
+function walk(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      if (!EXCLUDE.has(ent.name)) walk(p, out);
+    } else if (ent.isFile() && /\.(js|jsx|ts|tsx|mdx)$/.test(ent.name)) {
+      out.push(p);
+    }
+  }
+  return out;
+}
+
+function inferRoutes(base) {
+  const routes = new Set(["/"]);
+  for (const f of walk(base)) {
+    const rel = path.relative(base, f).replace(/\\/g, "/");
+    if (rel.startsWith("_") || rel.includes("[") || rel.includes("]")) continue;
+    let r = rel.replace(/\.(js|jsx|ts|tsx|mdx)$/, "");
+    r = r.replace(/\/(page|index)$/, "");
+    r = r === "index" ? "" : r;
+    routes.add("/" + r);
+  }
+  return routes;
+}
+
+const bases = [
+  path.join(ROOT, "pages"),
+  path.join(ROOT, "src", "pages"),
+  path.join(ROOT, "app"),
+  path.join(ROOT, "src", "app"),
+].filter(fs.existsSync);
+
+console.log("== ROUTE MAP ==");
+if (!bases.length) {
+  console.log("NOTE: No Next.js pages/app directories detected.");
+  process.exit(0);
+}
+
+const all = new Set(["/"]);
+for (const b of bases) for (const r of inferRoutes(b)) all.add(r.replace(/\/+$/, "") || "/");
+[...all].sort().forEach((r) => console.log(r));
+CJS
+
+cat > tools/link_scan.cjs <<'CJS'
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const EXCLUDE = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+const LINK_RE = /href\s*=\s*["'](\/[^"']*)["']/g;
+
+function walk(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      if (!EXCLUDE.has(ent.name)) walk(p, out);
+    } else if (ent.isFile() && /\.(js|jsx|ts|tsx|md|mdx|html)$/.test(p)) {
+      out.push(p);
+    }
+  }
+  return out;
+}
+
+function routeSet() {
+  const candidates = [
+    path.join(ROOT, "pages"),
+    path.join(ROOT, "src", "pages"),
+    path.join(ROOT, "app"),
+    path.join(ROOT, "src", "app"),
+  ].filter(fs.existsSync);
+
+  const routes = new Set(["/"]);
+  for (const base of candidates) {
+    const files = [];
+    const w = (d) => {
+      for (const ent of fs.readdirSync(d, { withFileTypes: true })) {
+        const p = path.join(d, ent.name);
+        if (ent.isDirectory()) w(p);
+        else if (ent.isFile() && /\.(js|jsx|ts|tsx|mdx)$/.test(ent.name)) files.push(p);
+      }
+    };
+    w(base);
+
+    for (const f of files) {
+      const rel = path.relative(base, f).replace(/\\/g, "/");
+      if (rel.startsWith("_") || rel.includes("[") || rel.includes("]")) continue;
+      let r = rel.replace(/\.(js|jsx|ts|tsx|mdx)$/, "");
+      r = r.replace(/\/(page|index)$/, "");
+      r = r === "index" ? "" : r;
+      routes.add("/" + r);
+    }
+  }
+  return routes;
+}
+
+const routes = routeSet();
+const seen = new Map();
+
+for (const f of walk(ROOT)) {
+  const txt = fs.readFileSync(f, "utf8");
+  let m;
+  while ((m = LINK_RE.exec(txt))) {
+    const href = m[1].split("#")[0].split("?")[0];
+    if (href.startsWith("/api")) continue;
+    if (!seen.has(href)) seen.set(href, new Set());
+    seen.get(href).add(path.relative(ROOT, f));
+  }
+}
+
+const suspicious = [];
+for (const [href, files] of seen.entries()) {
+  if (href !== "/" && !routes.has(href)) suspicious.push({ href, files: [...files] });
+}
+
+console.log("== LINK SCAN ==");
+console.log(`hrefs: ${seen.size} | routes: ${routes.size}`);
+if (!suspicious.length) {
+  console.log("PASS: No obvious dead internal links (best-effort).");
+  process.exit(0);
+}
+console.log("FAIL: Potential dead links:");
+suspicious.slice(0, 80).forEach(({ href, files }) => {
+  console.log(`- ${href}`);
+  files.slice(0, 5).forEach((f) => console.log(`   • ${f}`));
+});
+process.exit(1);
+CJS
+
+cat > tools/auth_smoke.cjs <<'CJS'
+const http = require("http");
+const https = require("https");
+
+const base = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || "http://localhost:3000";
+const candidates = ["/api/auth/session", "/api/auth/signin", "/api/login", "/api/admin"];
+
+function get(url) {
+  return new Promise((resolve) => {
+    const lib = url.startsWith("https") ? https : http;
+    const req = lib.get(url, (res) => {
+      res.resume();
+      resolve({ url, status: res.statusCode || 0 });
+    });
+    req.on("error", () => resolve({ url, status: 0 }));
+    req.setTimeout(2500, () => {
+      req.destroy();
+      resolve({ url, status: 0 });
+    });
+  });
+}
+
+(async () => {
+  console.log("== AUTH SMOKE ==");
+  console.log(`Base: ${base}`);
+  for (const p of candidates) {
+    const r = await get(base + p);
+    const ok = [200, 302, 401, 403].includes(r.status);
+    console.log(`${ok ? "OK " : "?? "} ${r.status} ${r.url}`);
+  }
+})();
+CJS
+
+node tools/route_map.cjs
+node tools/link_scan.cjs
