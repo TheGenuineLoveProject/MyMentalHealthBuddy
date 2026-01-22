@@ -341,10 +341,10 @@ export default function BodyWellnessPage() {
             </div>
           </div>
 
-          <section className="mb-10">
+          <section className="mb-12">
             <h2 className="text-heading-md text-teal mb-4">Quick Body Resets</h2>
-            <p className="text-body-sm text-[var(--sage-600)] mb-4">Instant practices when you need immediate relief:</p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+            <p className="text-body-sm text-[var(--sage-600)] mb-6">Instant practices when you need immediate relief:</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
               {quickPractices.map((practice, index) => (
                 <div 
                   key={index}

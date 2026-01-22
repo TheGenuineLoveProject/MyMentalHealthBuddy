@@ -162,7 +162,7 @@ export default function ProgressDashboardPage() {
   return (
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
-        <header className="mb-8">
+        <header className="mb-10">
           <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-sage-600 hover:text-teal-700 mb-4 transition-colors" data-testid="link-back">
             <ArrowLeft className="h-4 w-4" /> Back to Dashboard
           </Link>
@@ -179,7 +179,7 @@ export default function ProgressDashboardPage() {
           </p>
         </header>
 
-        <div className="grid md:grid-cols-4 gap-4 mb-8">
+        <div className="grid md:grid-cols-4 gap-4 mb-10">
           <div className="card-bordered bg-gradient-to-br from-gold-50 to-blush-50">
             <div className="icon-container icon-lg icon-gradient-gold mb-3">
               <Flame className="h-5 w-5" />
@@ -222,7 +222,7 @@ export default function ProgressDashboardPage() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
           <div className="card-bordered">
             <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-teal-500" />
@@ -252,7 +252,7 @@ export default function ProgressDashboardPage() {
             ) : (
               <div className="space-y-3">
                 {topThemes.map((theme, i) => (
-                  <div key={theme.theme} className="flex items-center gap-3">
+                  <div key={theme.theme} className="flex items-center gap-4">
                     <span className="w-5 text-caption font-medium">{i + 1}.</span>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
@@ -273,7 +273,7 @@ export default function ProgressDashboardPage() {
           </div>
         </div>
 
-        <div className="card-bordered mb-8">
+        <div className="card-bordered mb-10">
           <h3 className="text-heading-sm text-teal mb-4 flex items-center gap-2">
             <TrendingUp className="h-5 w-5 text-sage-500" />
             Mood History (Last 14 Days)

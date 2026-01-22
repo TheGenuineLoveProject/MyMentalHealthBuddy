@@ -95,7 +95,7 @@ export default function WisdomToolsPage() {
             </div>
           </header>
 
-          <nav className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+          <nav className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             {TOOLS.map((tool) => {
               const Icon = tool.icon;
               const isActive = activeTool === tool.id;

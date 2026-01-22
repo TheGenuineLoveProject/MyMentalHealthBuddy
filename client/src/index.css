@@ -819,13 +819,38 @@ a, a:visited {
 .align-baseline { align-items: baseline; }
 .align-stretch { align-items: stretch; }
 
+/* --- Breathing Room Utilities --- */
+.section-spacious {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.section-relaxed {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+.content-spacious {
+  padding: 2rem;
+}
+.grid-spacious {
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .section-spacious {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .grid-spacious {
+    gap: 2rem;
+  }
+}
+
 /* --- Premium Card Variants --- */
 .card-glass {
   background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 1.5rem;
-  padding: 1.75rem;
+  padding: 2rem;
   box-shadow: 
     0 0 1px rgba(0, 0, 0, 0.04),
     0 8px 32px rgba(90, 138, 110, 0.08);
@@ -835,7 +860,7 @@ a, a:visited {
   background: white;
   border: 2px solid var(--sage-200);
   border-radius: 1.25rem;
-  padding: 1.5rem;
+  padding: 1.75rem;
   transition: all 0.25s ease;
 }
 

@@ -78,7 +78,7 @@ export default function ToolsPage() {
       />
       <div className="min-h-screen hero-gradient px-4 py-10">
         <div className="mx-auto max-w-3xl">
-          <header className="mb-8">
+          <header className="mb-10">
             <Link 
               href="/dashboard" 
               className="inline-flex items-center gap-2 text-sm text-[var(--sage-600)] hover:text-[var(--teal-700)] transition mb-6"

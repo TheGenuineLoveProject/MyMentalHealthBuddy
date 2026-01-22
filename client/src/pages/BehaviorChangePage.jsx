@@ -277,9 +277,9 @@ export default function BehaviorChangePage() {
             </div>
           </div>
 
-          <section className="mb-10">
-            <h2 className="text-heading-md text-teal mb-4">6-Step Implementation Framework</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <section className="mb-12">
+            <h2 className="text-heading-md text-teal mb-6">6-Step Implementation Framework</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
               {implementationSteps.map((item) => (
                 <div 
                   key={item.step}
