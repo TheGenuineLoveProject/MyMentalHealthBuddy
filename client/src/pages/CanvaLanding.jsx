@@ -380,6 +380,48 @@ export default function CanvaLanding() {
         </div>
       </section>
 
+      {/* Featured Quote Section - QuoteBlock_1_Healing */}
+      <section className="py-16 px-6" style={{ background: 'var(--soft-ivory)' }}>
+        <div className="max-w-4xl mx-auto">
+          <div className="quote-block" data-testid="quote-block-healing">
+            <p className="quote-text relative z-10">
+              The wound is the place where the Light enters you. Your healing journey isn't about becoming 
+              someone new—it's about returning to who you've always been, beneath the layers of pain.
+            </p>
+            <p className="quote-author">— Rumi, adapted for modern healing</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Calming Welcome Banner with Breathing Pulse */}
+      <section className="py-16 px-6" style={{ background: 'linear-gradient(180deg, var(--soft-ivory), rgba(244, 199, 195, 0.1))' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="welcome-banner text-center" data-testid="welcome-banner">
+            <div className="flex justify-center mb-6">
+              <div 
+                className="w-20 h-20 rounded-full flex items-center justify-center breathing-pulse"
+                style={{ background: 'rgba(255, 255, 255, 0.2)' }}
+              >
+                <Heart className="w-10 h-10 text-white" />
+              </div>
+            </div>
+            <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4">
+              You Are Safe Here
+            </h3>
+            <p className="text-lg opacity-90 max-w-2xl mx-auto mb-8">
+              Take a deep breath. This is your sanctuary for healing, growth, and self-discovery. 
+              Every step forward is a victory.
+            </p>
+            <Link href="/onboarding">
+              <button className="mission-cta" data-testid="cta-join-now">
+                Begin Your Healing Journey
+                <ArrowRight className="inline ml-3 w-5 h-5" />
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Core Features Section */}
       <section id="features" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">

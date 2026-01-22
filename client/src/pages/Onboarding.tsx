@@ -4,9 +4,30 @@ import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
-import { Heart, Sparkles, Shield, Brain, Wind, Target, ChevronRight, ChevronLeft, Check, Sun, Moon, Leaf } from "lucide-react";
+import { Heart, Sparkles, Shield, Brain, Wind, Target, ChevronRight, ChevronLeft, Check, Sun, Moon, Leaf, Flower2, Users, BookOpen } from "lucide-react";
 
-const STEPS = ["goals", "support", "reminders", "disclaimer"];
+const STEPS = ["intro", "goals", "support", "reminders", "disclaimer"];
+
+const INTRO_SLIDES = [
+  {
+    icon: Heart,
+    title: "Welcome to Your Healing Journey",
+    description: "You've taken the first step towards genuine self-love and transformation. We're honored to walk this path with you.",
+    color: "#f4c7c3"
+  },
+  {
+    icon: Flower2,
+    title: "A Safe Space for Growth",
+    description: "This is your sanctuary—a judgment-free zone where you can explore, heal, and bloom at your own pace.",
+    color: "#8fbf9f"
+  },
+  {
+    icon: Users,
+    title: "You're Not Alone",
+    description: "Join a compassionate community of souls on similar journeys. Together, we heal stronger.",
+    color: "#eac33b"
+  }
+];
 
 const GOAL_OPTIONS = [
   { id: "self_love", label: "Self Love", icon: Heart, color: "blush" },
@@ -35,11 +56,20 @@ export default function Onboarding() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
+  const [introSlide, setIntroSlide] = useState(0);
   const [selectedGoals, setSelectedGoals] = useState<string[]>([]);
   const [supportMode, setSupportMode] = useState("reflection");
   const [reminderTime, setReminderTime] = useState("");
   const [reminderDays, setReminderDays] = useState<string[]>([]);
   const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
+
+  const handleIntroNext = () => {
+    if (introSlide < INTRO_SLIDES.length - 1) {
+      setIntroSlide(introSlide + 1);
+    } else {
+      setCurrentStep(1);
+    }
+  };
 
   const completeMutation = useMutation({
     mutationFn: async () => {
@@ -104,43 +134,111 @@ export default function Onboarding() {
   return (
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-2xl card-bordered" data-testid="card-onboarding">
-        <div className="text-center mb-8">
-          <div className="flex justify-center mb-6">
-            <div className="flex items-center gap-2">
-              {STEPS.map((step, i) => (
-                <div key={step} className="flex items-center">
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-                      i < currentStep
-                        ? "bg-[var(--sage-500)] text-white"
-                        : i === currentStep
-                        ? "bg-[var(--teal-500)] text-white ring-2 ring-[var(--teal-200)]"
-                        : "bg-[var(--sage-200)] text-[var(--sage-500)]"
-                    }`}
-                    data-testid={`step-indicator-${step}`}
-                  >
-                    {i < currentStep ? <Check className="w-5 h-5" /> : i + 1}
-                  </div>
-                  {i < STEPS.length - 1 && (
-                    <div className={`w-10 h-1 rounded ${i < currentStep ? "bg-[var(--sage-500)]" : "bg-[var(--sage-200)]"}`} />
-                  )}
-                </div>
+        {/* Intro Carousel */}
+        {STEPS[currentStep] === "intro" && (
+          <div className="text-center py-8" data-testid="section-intro-carousel">
+            {/* Carousel Slide */}
+            <div className="mb-8">
+              <div 
+                className="w-24 h-24 mx-auto mb-6 rounded-full flex items-center justify-center"
+                style={{ 
+                  background: `linear-gradient(135deg, ${INTRO_SLIDES[introSlide].color}, rgba(47, 93, 93, 0.2))`,
+                  animation: 'pulse 3s ease-in-out infinite'
+                }}
+              >
+                {(() => {
+                  const Icon = INTRO_SLIDES[introSlide].icon;
+                  return <Icon className="w-12 h-12 text-white" />;
+                })()}
+              </div>
+              <h1 className="text-display-lg text-teal mb-4" data-testid="text-intro-title">
+                {INTRO_SLIDES[introSlide].title}
+              </h1>
+              <p className="text-lead max-w-md mx-auto" data-testid="text-intro-description">
+                {INTRO_SLIDES[introSlide].description}
+              </p>
+            </div>
+
+            {/* Carousel Dots */}
+            <div className="flex justify-center gap-3 mb-8">
+              {INTRO_SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setIntroSlide(i)}
+                  className={`transition-all ${
+                    i === introSlide 
+                      ? "w-8 h-3 rounded-full bg-[var(--sage-500)]" 
+                      : "w-3 h-3 rounded-full bg-[var(--sage-200)] hover:bg-[var(--sage-300)]"
+                  }`}
+                  aria-label={`Go to slide ${i + 1}`}
+                  data-testid={`button-intro-dot-${i}`}
+                />
               ))}
             </div>
+
+            {/* Carousel Navigation */}
+            <div className="flex justify-center gap-4">
+              <Button
+                onClick={handleIntroNext}
+                className="px-8"
+                data-testid="button-intro-next"
+              >
+                {introSlide < INTRO_SLIDES.length - 1 ? "Next" : "Get Started"}
+                <ChevronRight className="ml-2 w-5 h-5" />
+              </Button>
+            </div>
+            <button
+              onClick={() => setCurrentStep(1)}
+              className="mt-4 text-sm text-[var(--sage-500)] hover:text-[var(--teal-500)] transition-colors"
+              data-testid="button-skip-intro"
+            >
+              Skip Introduction
+            </button>
           </div>
-          <h1 className="text-display-lg text-teal" data-testid="text-onboarding-title">
-            {STEPS[currentStep] === "goals" && "What brings you here?"}
-            {STEPS[currentStep] === "support" && "How would you like support?"}
-            {STEPS[currentStep] === "reminders" && "Set up reminders"}
-            {STEPS[currentStep] === "disclaimer" && "Almost there!"}
-          </h1>
-          <p className="text-lead mt-2" data-testid="text-onboarding-description">
-            {STEPS[currentStep] === "goals" && "Select the areas you'd like to focus on"}
-            {STEPS[currentStep] === "support" && "Choose your preferred support style"}
-            {STEPS[currentStep] === "reminders" && "Optional: Get gentle nudges to check in"}
-            {STEPS[currentStep] === "disclaimer" && "Please review and accept to continue"}
-          </p>
-        </div>
+        )}
+
+        {/* Regular Steps (Goals, Support, Reminders, Disclaimer) */}
+        {STEPS[currentStep] !== "intro" && (
+          <>
+            <div className="text-center mb-8">
+              <div className="flex justify-center mb-6">
+                <div className="flex items-center gap-2">
+                  {STEPS.filter(s => s !== "intro").map((step, i) => (
+                    <div key={step} className="flex items-center">
+                      <div
+                        className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
+                          i < currentStep - 1
+                            ? "bg-[var(--sage-500)] text-white"
+                            : i === currentStep - 1
+                            ? "bg-[var(--teal-500)] text-white ring-2 ring-[var(--teal-200)]"
+                            : "bg-[var(--sage-200)] text-[var(--sage-500)]"
+                        }`}
+                        data-testid={`step-indicator-${step}`}
+                      >
+                        {i < currentStep - 1 ? <Check className="w-5 h-5" /> : i + 1}
+                      </div>
+                      {i < STEPS.length - 2 && (
+                        <div className={`w-10 h-1 rounded ${i < currentStep - 1 ? "bg-[var(--sage-500)]" : "bg-[var(--sage-200)]"}`} />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <h1 className="text-display-lg text-teal" data-testid="text-onboarding-title">
+                {STEPS[currentStep] === "goals" && "What brings you here?"}
+                {STEPS[currentStep] === "support" && "How would you like support?"}
+                {STEPS[currentStep] === "reminders" && "Set up reminders"}
+                {STEPS[currentStep] === "disclaimer" && "Almost there!"}
+              </h1>
+              <p className="text-lead mt-2" data-testid="text-onboarding-description">
+                {STEPS[currentStep] === "goals" && "Select the areas you'd like to focus on"}
+                {STEPS[currentStep] === "support" && "Choose your preferred support style"}
+                {STEPS[currentStep] === "reminders" && "Optional: Get gentle nudges to check in"}
+                {STEPS[currentStep] === "disclaimer" && "Please review and accept to continue"}
+              </p>
+            </div>
+          </>
+        )}
 
         <div className="space-y-6">
           {STEPS[currentStep] === "goals" && (
