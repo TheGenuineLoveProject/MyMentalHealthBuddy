@@ -328,10 +328,10 @@ export default function CanvaLanding() {
       >
         <div className="max-w-5xl mx-auto text-center">
           <div 
-            className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-8 pulse-glow"
-            style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-blush))' }}
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-8 pulse-glow"
+            style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 8px 24px var(--glp-gold-30), inset 0 1px 0 rgba(255,255,255,0.3)', border: '2px solid var(--glp-gold)' }}
           >
-            <Heart className="w-10 h-10 text-white" />
+            <Heart className="w-8 h-8 text-white drop-shadow-sm" />
           </div>
 
           <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -350,8 +350,8 @@ export default function CanvaLanding() {
           {/* Values Grid */}
           <div className="grid md:grid-cols-3 gap-8 mt-16">
             <div className="reveal">
-              <div className="icon-circle mx-auto mb-4">
-                <Lightbulb className="w-10 h-10 text-white" />
+              <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 6px 20px var(--glp-gold-30), inset 0 1px 0 rgba(255,255,255,0.2)', border: '2px solid var(--glp-gold)' }}>
+                <Lightbulb className="w-7 h-7 text-white drop-shadow-sm" />
               </div>
               <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                 Wisdom
@@ -362,8 +362,8 @@ export default function CanvaLanding() {
             </div>
 
             <div className="reveal" style={{ animationDelay: '0.2s' }}>
-              <div className="icon-circle mx-auto mb-4">
-                <Users className="w-10 h-10 text-white" />
+              <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 6px 20px var(--glp-sage-30), inset 0 1px 0 rgba(255,255,255,0.2)', border: '2px solid var(--glp-sage)' }}>
+                <Users className="w-7 h-7 text-white drop-shadow-sm" />
               </div>
               <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                 Community
@@ -374,8 +374,8 @@ export default function CanvaLanding() {
             </div>
 
             <div className="reveal" style={{ animationDelay: '0.4s' }}>
-              <div className="icon-circle mx-auto mb-4">
-                <Zap className="w-10 h-10 text-white" />
+              <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 6px 20px var(--glp-rose-20), inset 0 1px 0 rgba(255,255,255,0.2)', border: '2px solid var(--glp-rose)' }}>
+                <Zap className="w-7 h-7 text-white drop-shadow-sm" />
               </div>
               <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                 Transformation
@@ -410,10 +410,10 @@ export default function CanvaLanding() {
           <div className="welcome-banner text-center" data-testid="welcome-banner">
             <div className="flex justify-center mb-6">
               <div 
-                className="w-20 h-20 rounded-full flex items-center justify-center breathing-pulse"
-                style={{ background: 'var(--glp-white-80)' }}
+                className="w-16 h-16 rounded-2xl flex items-center justify-center breathing-pulse"
+                style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 8px 24px var(--glp-rose-20), inset 0 1px 0 rgba(255,255,255,0.3)', border: '2px solid var(--glp-rose)' }}
               >
-                <Heart className="w-10 h-10 text-white" />
+                <Heart className="w-8 h-8 text-white drop-shadow-sm" />
               </div>
             </div>
             <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4">
@@ -486,12 +486,14 @@ export default function CanvaLanding() {
               <div key={index} className="step-card" data-testid={`step-card-${index}`}>
                 <div className="step-number" aria-label={`Step ${index + 1}`}>{index + 1}</div>
                 <div className="mb-4 flex justify-center">
-                  <step.icon className="w-10 h-10" style={{ color: 'var(--glp-sage)' }} />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-sage-10))', boxShadow: '0 4px 12px var(--glp-sage-20)', border: '2px solid var(--glp-sage-30)' }}>
+                    <step.icon className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} />
+                  </div>
                 </div>
                 <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
                   {step.title}
                 </h3>
-                <p className="text-sm" style={{ color: 'var(--glp-ink)' }}>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
                   {step.description}
                 </p>
               </div>
@@ -536,17 +538,23 @@ export default function CanvaLanding() {
 
           {/* Trust Badges */}
           <div className="flex flex-wrap justify-center gap-4 mt-16">
-            <div className="trust-badge">
-              <Lock className="w-4 h-4" />
-              <span>256-bit Encryption</span>
+            <div className="trust-badge" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-20)', boxShadow: '0 4px 12px var(--glp-sage-10)' }}>
+              <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}>
+                <Lock className="w-3.5 h-3.5" style={{ color: 'var(--glp-sage-deep)' }} />
+              </div>
+              <span style={{ color: 'var(--glp-ink)' }}>256-bit Encryption</span>
             </div>
-            <div className="trust-badge">
-              <Shield className="w-4 h-4" />
-              <span>GDPR Compliant</span>
+            <div className="trust-badge" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-20)', boxShadow: '0 4px 12px var(--glp-sage-10)' }}>
+              <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}>
+                <Shield className="w-3.5 h-3.5" style={{ color: 'var(--glp-sage-deep)' }} />
+              </div>
+              <span style={{ color: 'var(--glp-ink)' }}>GDPR Compliant</span>
             </div>
-            <div className="trust-badge">
-              <Clock className="w-4 h-4" />
-              <span>24/7 Support</span>
+            <div className="trust-badge" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-20)', boxShadow: '0 4px 12px var(--glp-sage-10)' }}>
+              <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}>
+                <Clock className="w-3.5 h-3.5" style={{ color: 'var(--glp-sage-deep)' }} />
+              </div>
+              <span style={{ color: 'var(--glp-ink)' }}>24/7 Support</span>
             </div>
           </div>
 
