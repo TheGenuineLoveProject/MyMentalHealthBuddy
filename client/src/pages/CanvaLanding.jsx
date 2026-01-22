@@ -650,54 +650,85 @@ export default function CanvaLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6" style={{ background: 'var(--glp-paper)', borderTop: '1px solid var(--glp-sage-15)' }}>
+      <footer className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            <div className="md:col-span-1 text-center">
-              <div className="rounded-2xl overflow-hidden mb-4 transition-transform hover:scale-[1.02] mx-auto" style={{ boxShadow: '0 8px 32px var(--glp-sage-20)', border: '2px solid var(--glp-sage-20)', maxWidth: '200px' }}>
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-16">
+            {/* Brand Column */}
+            <div className="lg:col-span-1 text-center lg:text-left">
+              <div className="rounded-3xl overflow-hidden mb-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl mx-auto lg:mx-0" style={{ boxShadow: '0 12px 40px var(--glp-sage-30)', border: '3px solid var(--glp-sage-20)', maxWidth: '220px', background: 'linear-gradient(135deg, var(--glp-white), var(--glp-sage-10))' }}>
                 <img 
                   src="/brand/footer-wellness-graphic.png" 
                   alt="Wellness and healing" 
                   className="w-full h-auto object-cover"
                 />
               </div>
-              <h4 className="font-serif font-bold text-lg mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+              <h4 className="font-serif font-bold text-xl mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                 The Genuine Love Project
               </h4>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--glp-ink)' }}>
                 Transformative healing through AI-powered support, mindfulness, and community.
               </p>
+              <div className="flex justify-center lg:justify-start gap-3">
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
+                  <Heart className="w-4 h-4 text-white" />
+                </div>
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 12px var(--glp-gold-30)' }}>
+                  <Sparkles className="w-4 h-4 text-white" />
+                </div>
+                <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 12px var(--glp-rose-20)' }}>
+                  <Star className="w-4 h-4 text-white" />
+                </div>
+              </div>
             </div>
             
-            <div className="md:col-span-3">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
-                <div className="text-center sm:text-left">
-                  <h4 className="font-semibold mb-5 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
+            {/* Navigation Columns */}
+            <div className="lg:col-span-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12">
+                {/* Platform */}
+                <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-15)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
+                  <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
+                      <Zap className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
+                  </div>
                   <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
-                    <li><Link href="/crm"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-dashboard">Dashboard</span></Link></li>
-                    <li><Link href="/onboarding"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-onboarding">Get Started</span></Link></li>
-                    <li><Link href="/pricing"><span className="hover:underline cursor-pointer transition-all">Pricing</span></Link></li>
-                    <li><Link href="/tools"><span className="hover:underline cursor-pointer transition-all">Tools Library</span></Link></li>
+                    <li><Link href="/crm"><span className="hover:text-[var(--glp-sage)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2" data-testid="link-footer-dashboard"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-sage)' }} />Dashboard</span></Link></li>
+                    <li><Link href="/onboarding"><span className="hover:text-[var(--glp-sage)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2" data-testid="link-footer-onboarding"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-sage)' }} />Get Started</span></Link></li>
+                    <li><Link href="/pricing"><span className="hover:text-[var(--glp-sage)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-sage)' }} />Pricing</span></Link></li>
+                    <li><Link href="/tools"><span className="hover:text-[var(--glp-sage)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-sage)' }} />Tools Library</span></Link></li>
                   </ul>
                 </div>
                 
-                <div className="text-center sm:text-left">
-                  <h4 className="font-semibold mb-5 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
+                {/* Resources */}
+                <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-gold-30)', boxShadow: '0 4px 16px var(--glp-gold-10)' }}>
+                  <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 12px var(--glp-gold-30)' }}>
+                      <BookOpen className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
+                  </div>
                   <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
-                    <li><Link href="/content-index"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-content">Content Library</span></Link></li>
-                    <li><Link href="/qa"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-qa">Q&A Community</span></Link></li>
-                    <li><Link href="/crisis"><span className="hover:underline cursor-pointer transition-all">Crisis Support</span></Link></li>
-                    <li><Link href="/study-vault"><span className="hover:underline cursor-pointer transition-all">Study Vault</span></Link></li>
+                    <li><Link href="/content-index"><span className="hover:text-[var(--glp-gold-dark)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2" data-testid="link-footer-content"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-gold)' }} />Content Library</span></Link></li>
+                    <li><Link href="/qa"><span className="hover:text-[var(--glp-gold-dark)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2" data-testid="link-footer-qa"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-gold)' }} />Q&A Community</span></Link></li>
+                    <li><Link href="/crisis"><span className="hover:text-[var(--glp-gold-dark)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-gold)' }} />Crisis Support</span></Link></li>
+                    <li><Link href="/study-vault"><span className="hover:text-[var(--glp-gold-dark)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-gold)' }} />Study Vault</span></Link></li>
                   </ul>
                 </div>
                 
-                <div className="text-center sm:text-left">
-                  <h4 className="font-semibold mb-5 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
+                {/* Legal */}
+                <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-rose-15)', boxShadow: '0 4px 16px var(--glp-rose-10)' }}>
+                  <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 12px var(--glp-rose-20)' }}>
+                      <Shield className="w-5 h-5 text-white" />
+                    </div>
+                    <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
+                  </div>
                   <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
-                    <li><Link href="/privacy"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-privacy">Privacy Policy</span></Link></li>
-                    <li><Link href="/terms"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-terms">Terms of Service</span></Link></li>
-                    <li><Link href="/accessibility"><span className="hover:underline cursor-pointer transition-all">Accessibility</span></Link></li>
-                    <li><Link href="/contact"><span className="hover:underline cursor-pointer transition-all">Contact Us</span></Link></li>
+                    <li><Link href="/privacy"><span className="hover:text-[var(--glp-rose)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2" data-testid="link-footer-privacy"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-rose)' }} />Privacy Policy</span></Link></li>
+                    <li><Link href="/terms"><span className="hover:text-[var(--glp-rose)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2" data-testid="link-footer-terms"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-rose)' }} />Terms of Service</span></Link></li>
+                    <li><Link href="/accessibility"><span className="hover:text-[var(--glp-rose)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-rose)' }} />Accessibility</span></Link></li>
+                    <li><Link href="/contact"><span className="hover:text-[var(--glp-rose)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-2"><ArrowRight className="w-3 h-3" style={{ color: 'var(--glp-rose)' }} />Contact Us</span></Link></li>
                   </ul>
                 </div>
               </div>
