@@ -23,6 +23,8 @@ import {
 import HealingHero from "../components/HealingHero";
 import AboutSection from "../components/AboutSection";
 import BenefitsSection from "../components/BenefitsSection";
+import JoinSection from "../components/JoinSection";
+import SacredPattern from "../components/SacredPattern";
 import SacredFooter from "../components/SacredFooter";
 import "../styles/healing-animations.css";
 
@@ -141,6 +143,9 @@ export default function HealingLandingPage() {
       style={{ background: 'var(--glp-paper, #faf9f7)' }}
       data-testid="page-healing-landing"
     >
+      {/* Global Sacred Pattern Background */}
+      <SacredPattern variant="flowerOfLife" opacity={0.06} />
+
       {/* Hero Section */}
       <HealingHero />
 
@@ -472,6 +477,9 @@ export default function HealingLandingPage() {
           </p>
         </div>
       </section>
+
+      {/* Join Section - CTA with Form */}
+      <JoinSection />
 
       {/* Sacred Footer */}
       <SacredFooter />
