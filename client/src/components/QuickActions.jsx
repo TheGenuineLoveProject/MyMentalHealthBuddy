@@ -103,16 +103,16 @@ export default function QuickActions({ limit = 4, columns = 4, showAll = false }
           <Link
             key={action.id}
             href={action.href}
-            className={`group p-5 rounded-2xl bg-gradient-to-br ${action.bgLight} dark:${action.bgDark} hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1`}
+            className="group p-5 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
             data-testid={`quick-action-${action.id}`}
           >
             <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.color} flex items-center justify-center shadow-lg mb-4 group-hover:scale-110 transition-transform`}>
               <Icon className="w-6 h-6 text-white" aria-hidden="true" />
             </div>
-            <h4 className="font-display font-bold text-[var(--text)] mb-1 group-hover:text-[var(--primary)] transition-colors">
+            <h4 className="font-display font-bold text-gray-900 dark:text-white mb-1 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
               {action.name}
             </h4>
-            <p className="text-sm text-[var(--text-secondary)]">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               {action.description}
             </p>
           </Link>
