@@ -11,6 +11,8 @@ import DailyAffirmations from "../components/DailyAffirmations.jsx";
 import DailyInsight from "../components/DailyInsight.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/brand.css";
+import QuoteBlock from "../components/ui/QuoteBlock.jsx";
+import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -391,6 +393,21 @@ export default function Dashboard() {
           )}
 
           <DailyInsight />
+
+          {/* CRM Widgets Section */}
+          <section className="mt-8 space-y-6" aria-label="Personal wellness hub">
+            <h2 className="text-lg font-semibold text-slate-800">Your Wellness Hub</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <QuickActionsWidget />
+              <CalendarWidget />
+              <ProgressWidget />
+            </div>
+            
+            {/* Daily Inspiration Quote */}
+            <div className="mt-6">
+              <QuoteBlock variant="card" />
+            </div>
+          </section>
         </div>
       </div>
     </>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp } from "lucide-react";
 import "../styles/canva-landing.css";
+import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -537,6 +538,11 @@ export default function CanvaLanding() {
               <Clock className="w-4 h-4" />
               <span>24/7 Support</span>
             </div>
+          </div>
+
+          {/* Rotating Quote Block */}
+          <div className="mt-16 max-w-3xl mx-auto">
+            <QuoteBlock variant="centered" />
           </div>
         </div>
       </section>
