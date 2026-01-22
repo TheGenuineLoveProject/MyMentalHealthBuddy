@@ -598,51 +598,111 @@ export default function CanvaLanding() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-20 px-6 text-center" style={{ background: 'linear-gradient(135deg, var(--deep-teal), var(--sage-green))' }}>
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-white">
-            Begin Your Healing Journey Today
+      <section className="py-24 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--deep-teal), var(--sage-green))' }}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
+        </div>
+        <div className="max-w-3xl mx-auto relative z-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-8">
+            <Sparkles className="w-4 h-4 text-white/80" />
+            <span className="text-sm text-white/80 font-medium">Start your transformation today</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white leading-tight">
+            Begin Your Healing
+            <br />
+            <span className="text-[var(--warm-gold)]">Journey Today</span>
           </h2>
-          <p className="text-xl mb-12 text-white opacity-90">
-            Join thousands of souls who have found peace, growth, and genuine love within themselves.
+          <p className="text-lg md:text-xl mb-10 text-white/85 max-w-xl mx-auto">
+            Join thousands who have found peace, growth, and genuine love within themselves.
           </p>
-          <Link href="/register">
-            <button 
-              className="px-12 py-5 rounded-full font-semibold text-lg transition-all"
-              style={{
-                background: 'white',
-                color: 'var(--deep-teal)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
-              }}
-              data-testid="button-final-cta"
-            >
-              Start Free Today
-            </button>
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/register">
+              <button 
+                className="group px-10 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-2xl"
+                style={{
+                  background: 'white',
+                  color: 'var(--deep-teal)',
+                  boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
+                }}
+                data-testid="button-final-cta"
+              >
+                <span className="flex items-center gap-2">
+                  Start Free Today
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </button>
+            </Link>
+            <Link href="/pricing">
+              <button 
+                className="px-8 py-4 rounded-full font-semibold text-white border-2 border-white/30 hover:border-white/60 hover:bg-white/10 transition-all"
+                data-testid="button-view-pricing"
+              >
+                View Pricing
+              </button>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-6" style={{ background: 'var(--soft-ivory)', borderTop: '1px solid rgba(143, 191, 159, 0.2)' }}>
+      <footer className="py-16 px-6" style={{ background: 'var(--soft-ivory)', borderTop: '1px solid rgba(143, 191, 159, 0.15)' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <Heart className="w-6 h-6" style={{ color: 'var(--sage-green)' }} />
-              <span className="font-serif font-bold" style={{ color: 'var(--deep-teal)' }}>
-                The Genuine Love Project
-              </span>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+            <div className="md:col-span-1">
+              <div className="flex items-center gap-2.5 mb-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--sage-green), var(--deep-teal))' }}>
+                  <Heart className="w-5 h-5 text-white" fill="currentColor" />
+                </div>
+                <span className="font-serif font-bold text-lg" style={{ color: 'var(--deep-teal)' }}>
+                  Genuine Love
+                </span>
+              </div>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                Transformative healing through AI-powered support, mindfulness, and community.
+              </p>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
-              <Link href="/onboarding"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-onboarding">Onboarding</span></Link>
-              <Link href="/crm"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-dashboard">Dashboard</span></Link>
-              <Link href="/content-index"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-content">Content</span></Link>
-              <Link href="/qa"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-qa">Q&A</span></Link>
-              <Link href="/privacy"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-privacy">Privacy</span></Link>
-              <Link href="/terms"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-terms">Terms</span></Link>
+            
+            <div>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Platform</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                <li><Link href="/crm"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-dashboard">Dashboard</span></Link></li>
+                <li><Link href="/onboarding"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-onboarding">Get Started</span></Link></li>
+                <li><Link href="/pricing"><span className="hover:opacity-100 cursor-pointer transition-opacity">Pricing</span></Link></li>
+                <li><Link href="/tools"><span className="hover:opacity-100 cursor-pointer transition-opacity">Tools Library</span></Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Resources</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                <li><Link href="/content-index"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-content">Content Library</span></Link></li>
+                <li><Link href="/qa"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-qa">Q&A Community</span></Link></li>
+                <li><Link href="/crisis"><span className="hover:opacity-100 cursor-pointer transition-opacity">Crisis Support</span></Link></li>
+                <li><Link href="/study-vault"><span className="hover:opacity-100 cursor-pointer transition-opacity">Study Vault</span></Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Legal</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                <li><Link href="/privacy"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-privacy">Privacy Policy</span></Link></li>
+                <li><Link href="/terms"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-terms">Terms of Service</span></Link></li>
+                <li><Link href="/accessibility"><span className="hover:opacity-100 cursor-pointer transition-opacity">Accessibility</span></Link></li>
+                <li><Link href="/contact"><span className="hover:opacity-100 cursor-pointer transition-opacity">Contact Us</span></Link></li>
+              </ul>
             </div>
           </div>
-          <div className="text-center mt-8 text-sm text-slate-500 dark:text-slate-400">
-            © {new Date().getFullYear()} The Genuine Love Project. All rights reserved.
+          
+          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid rgba(143, 191, 159, 0.15)' }}>
+            <p className="text-sm" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>
+              © {new Date().getFullYear()} The Genuine Love Project. All rights reserved.
+            </p>
+            <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>
+              <span>Made with</span>
+              <Heart className="w-4 h-4" style={{ color: 'var(--blush-pink)' }} fill="currentColor" />
+              <span>for your healing journey</span>
+            </div>
           </div>
         </div>
       </footer>
