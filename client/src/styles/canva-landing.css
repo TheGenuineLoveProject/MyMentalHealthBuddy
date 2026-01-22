@@ -1,18 +1,20 @@
 /* Canva Landing Page Styles - The Genuine Love Project */
+/* Uses --glp-* tokens from brand-tokens.css - single source of truth */
 
+/* Alias tokens for legacy class compatibility */
 :root {
-  --sage-green: #8fbf9f;
-  --blush-pink: #f4c7c3;
-  --deep-teal: #2f5d5d;
-  --soft-ivory: #faf9f7;
-  --charcoal: #3a3a3a;
-  --warm-gold: #eac33b;
+  --sage-green: var(--glp-sage);
+  --blush-pink: var(--glp-blush);
+  --deep-teal: var(--glp-sage-deep);
+  --soft-ivory: var(--glp-paper);
+  --charcoal: var(--glp-ink);
+  --warm-gold: var(--glp-gold);
 }
 
 .canva-landing {
   font-family: 'Lato', system-ui, sans-serif;
-  background-color: var(--soft-ivory);
-  color: var(--charcoal);
+  background-color: var(--glp-paper);
+  color: var(--glp-ink);
 }
 
 .canva-landing .font-serif {
@@ -54,23 +56,23 @@
   background: linear-gradient(135deg, var(--blush-pink) 0%, var(--soft-ivory) 100%);
 }
 
-/* Glass morphism effects */
+/* Glass morphism effects - uses glp token opacity variants */
 .canva-landing .glass-card {
-  background: rgba(250, 249, 247, 0.7);
+  background: var(--glp-paper-70);
   backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(143, 191, 159, 0.2);
+  border: 1px solid var(--glp-sage-20);
   box-shadow: 
-    0 8px 32px rgba(47, 93, 93, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 8px 32px var(--glp-sage-deep-12),
+    inset 0 1px 0 var(--glp-white-80);
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .canva-landing .glass-card:hover {
   transform: translateY(-8px);
   box-shadow: 
-    0 16px 48px rgba(47, 93, 93, 0.18),
-    0 0 0 2px var(--warm-gold),
-    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    0 16px 48px var(--glp-sage-deep-20),
+    0 0 0 2px var(--glp-gold),
+    inset 0 1px 0 var(--glp-white-80);
 }
 
 /* Floating animation */
@@ -89,13 +91,13 @@
   animation: canva-float-gentle 6s ease-in-out infinite;
 }
 
-/* Pulse glow */
+/* Pulse glow - uses glp token opacity variants */
 @keyframes canva-pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(234, 195, 59, 0.3);
+    box-shadow: 0 0 20px var(--glp-gold-30);
   }
   50% {
-    box-shadow: 0 0 40px rgba(234, 195, 59, 0.6);
+    box-shadow: 0 0 40px color-mix(in srgb, var(--glp-gold) 60%, transparent);
   }
 }
 
@@ -103,15 +105,15 @@
   animation: canva-pulse-glow 3s ease-in-out infinite;
 }
 
-/* Button styles */
+/* Button styles - uses glp token variables */
 .canva-landing .btn-primary {
-  background: linear-gradient(135deg, var(--deep-teal), var(--sage-green));
+  background: linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage));
   color: white;
   padding: 16px 40px;
   border-radius: 50px;
   font-weight: 600;
   transition: all 0.4s ease;
-  box-shadow: 0 8px 24px rgba(47, 93, 93, 0.3);
+  box-shadow: 0 8px 24px var(--glp-sage-30);
   border: none;
   cursor: pointer;
   font-family: 'Lato', sans-serif;
@@ -120,7 +122,7 @@
 
 .canva-landing .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(47, 93, 93, 0.4);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--glp-sage-deep) 40%, transparent);
 }
 
 .canva-landing .btn-secondary {
