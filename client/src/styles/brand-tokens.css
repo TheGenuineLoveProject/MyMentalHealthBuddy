@@ -282,7 +282,7 @@
     Enhanced Semantic Text Colors
   ------------------------------------------------------------ */
   --glp-text-primary: var(--glp-ink);
-  --glp-text-secondary: rgba(var(--glp-ink-rgb), 0.72);
+  --glp-text-secondary: rgba(var(--glp-ink-rgb), 0.78);
   --glp-text-tertiary: rgba(var(--glp-ink-rgb), 0.56);
   --glp-text-disabled: rgba(var(--glp-ink-rgb), 0.38);
   --glp-text-inverse: var(--glp-paper);
