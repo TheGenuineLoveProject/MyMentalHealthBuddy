@@ -1,11 +1,63 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
+import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp } from "lucide-react";
 import "../styles/canva-landing.css";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const steps = [
+    {
+      icon: PenLine,
+      title: "Create Your Profile",
+      description: "Tell us about your journey and what matters most to you"
+    },
+    {
+      icon: MessageCircle,
+      title: "Connect with AI",
+      description: "Start conversations with our compassionate AI companion"
+    },
+    {
+      icon: TrendingUp,
+      title: "Track Your Growth",
+      description: "Watch your progress unfold with personalized insights"
+    }
+  ];
+
+  const testimonials = [
+    {
+      initial: "S",
+      name: "Sarah M.",
+      text: "This platform helped me reconnect with myself after years of burnout. The AI companion feels like talking to a wise friend.",
+      role: "Teacher"
+    },
+    {
+      initial: "J",
+      name: "James K.",
+      text: "The mood tracking and journaling features have become essential to my daily routine. I feel more grounded than ever.",
+      role: "Software Engineer"
+    },
+    {
+      initial: "M",
+      name: "Maria L.",
+      text: "Finally, a wellness app that doesn't feel clinical. It's warm, supportive, and genuinely helpful.",
+      role: "Healthcare Worker"
+    }
+  ];
 
   const features = [
     {
@@ -364,6 +416,89 @@ export default function CanvaLanding() {
         </div>
       </section>
 
+      {/* How It Works Section */}
+      <section className="py-20 px-6" style={{ background: 'var(--soft-ivory)' }}>
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+              How It Works
+            </h2>
+            <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+              Begin your transformation in three simple steps
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mt-12">
+            {steps.map((step, index) => (
+              <div key={index} className="step-card" data-testid={`step-card-${index}`}>
+                <div className="step-number" aria-label={`Step ${index + 1}`}>{index + 1}</div>
+                <div className="mb-4 flex justify-center">
+                  <step.icon className="w-10 h-10" style={{ color: 'var(--sage-green)' }} />
+                </div>
+                <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--deep-teal)' }}>
+                  {step.title}
+                </h3>
+                <p className="text-sm" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section 
+        className="py-20 px-6"
+        style={{ background: 'linear-gradient(180deg, var(--soft-ivory), rgba(244, 199, 195, 0.15))' }}
+      >
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+              Voices of Healing
+            </h2>
+            <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+              Real stories from our community
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="testimonial-card" data-testid={`testimonial-${index}`}>
+                <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--charcoal)' }}>
+                  "{testimonial.text}"
+                </p>
+                <div className="flex items-center gap-4">
+                  <div className="testimonial-avatar" aria-hidden="true">
+                    {testimonial.initial}
+                  </div>
+                  <div>
+                    <p className="font-semibold" style={{ color: 'var(--deep-teal)' }}>{testimonial.name}</p>
+                    <p className="text-sm" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Trust Badges */}
+          <div className="flex flex-wrap justify-center gap-4 mt-16">
+            <div className="trust-badge">
+              <Lock className="w-4 h-4" />
+              <span>256-bit Encryption</span>
+            </div>
+            <div className="trust-badge">
+              <Shield className="w-4 h-4" />
+              <span>GDPR Compliant</span>
+            </div>
+            <div className="trust-badge">
+              <Clock className="w-4 h-4" />
+              <span>24/7 Support</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ Section */}
       <section 
         id="faq" 
@@ -447,6 +582,16 @@ export default function CanvaLanding() {
           </div>
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`scroll-to-top ${showScrollTop ? 'visible' : ''}`}
+        aria-label="Scroll to top"
+        data-testid="button-scroll-to-top"
+      >
+        <ArrowUp className="w-6 h-6" />
+      </button>
     </div>
   );
 }
