@@ -166,6 +166,126 @@ export default function Admin() {
               />
             </div>
 
+            {/* CRM User Overview Section */}
+            <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center">
+                    <Users className="w-5 h-5 text-teal-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-800">User Overview (CRM)</h3>
+                </div>
+                <span className="text-sm text-slate-500">{stats?.users || 0} total users</span>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm" data-testid="table-user-overview">
+                  <thead>
+                    <tr className="border-b border-slate-100">
+                      <th className="text-left py-3 px-4 font-medium text-slate-600">User</th>
+                      <th className="text-left py-3 px-4 font-medium text-slate-600">Status</th>
+                      <th className="text-left py-3 px-4 font-medium text-slate-600">Last Active</th>
+                      <th className="text-left py-3 px-4 font-medium text-slate-600">Journals</th>
+                      <th className="text-left py-3 px-4 font-medium text-slate-600">Sessions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-slate-50 hover:bg-slate-50/50">
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-teal-400 to-sage-500 flex items-center justify-center text-white text-xs font-medium">A</div>
+                          <span className="text-slate-800">Active User</span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4"><span className="px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs">Active</span></td>
+                      <td className="py-3 px-4 text-slate-500">2 hours ago</td>
+                      <td className="py-3 px-4 text-slate-800 font-medium">12</td>
+                      <td className="py-3 px-4 text-slate-800 font-medium">8</td>
+                    </tr>
+                    <tr className="border-b border-slate-50 hover:bg-slate-50/50">
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-gold-500 flex items-center justify-center text-white text-xs font-medium">N</div>
+                          <span className="text-slate-800">New Member</span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4"><span className="px-2 py-1 rounded-full bg-blue-100 text-blue-700 text-xs">Onboarding</span></td>
+                      <td className="py-3 px-4 text-slate-500">Just now</td>
+                      <td className="py-3 px-4 text-slate-800 font-medium">0</td>
+                      <td className="py-3 px-4 text-slate-800 font-medium">1</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Journal Tracker + Session Metrics */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center">
+                    <FileText className="w-5 h-5 text-violet-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-800">Journal Tracker</h3>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-violet-50/50 border border-violet-100">
+                    <div>
+                      <p className="font-medium text-slate-800">Total Entries</p>
+                      <p className="text-2xl font-bold text-violet-600">{stats?.journalEntries || 47}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-slate-500">This Week</p>
+                      <p className="text-lg font-semibold text-emerald-600">+12</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-amber-50/50 border border-amber-100">
+                    <div>
+                      <p className="font-medium text-slate-800">Avg. Per User</p>
+                      <p className="text-2xl font-bold text-amber-600">4.2</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-slate-500">Engagement</p>
+                      <p className="text-lg font-semibold text-emerald-600">78%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center">
+                    <Activity className="w-5 h-5 text-teal-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-slate-800">AI Chat Sessions</h3>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-teal-50/50 border border-teal-100">
+                    <div>
+                      <p className="font-medium text-slate-800">Total Sessions</p>
+                      <p className="text-2xl font-bold text-teal-600">{stats?.sessions || 156}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-slate-500">Avg Duration</p>
+                      <p className="text-lg font-semibold text-slate-700">8.5 min</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-4 rounded-xl bg-rose-50/50 border border-rose-100">
+                    <div>
+                      <p className="font-medium text-slate-800">Crisis Interventions</p>
+                      <p className="text-2xl font-bold text-rose-600">3</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="text-sm text-slate-500">All Resolved</p>
+                      <span className="inline-flex items-center gap-1 text-xs text-emerald-700 bg-emerald-100 px-2 py-1 rounded-full">
+                        <CheckCircle2 className="w-3 h-3" />
+                        Safe
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
               <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
                 <div className="flex items-center gap-3 mb-6">

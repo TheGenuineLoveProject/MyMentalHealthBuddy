@@ -124,6 +124,78 @@ export default function Dashboard() {
 
           <GuardianHeartPanel name={user?.email?.split("@")[0]} />
 
+          {/* Daily Healing Focus Card */}
+          <section 
+            className="mb-8 p-6 rounded-3xl relative overflow-hidden"
+            style={{ 
+              background: 'linear-gradient(135deg, rgba(47, 93, 93, 0.05), rgba(143, 191, 159, 0.1))',
+              border: '2px solid rgba(143, 191, 159, 0.2)'
+            }}
+            aria-label="Daily healing focus"
+            data-testid="section-daily-focus"
+          >
+            <div 
+              className="absolute top-0 left-1/4 right-1/4 h-1 rounded-b-full"
+              style={{ background: 'linear-gradient(90deg, #8fbf9f, #eac33b, #f4c7c3)' }}
+            />
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="flex items-center gap-4">
+                <div 
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, #8fbf9f, #2f5d5d)' }}
+                >
+                  <Sparkles className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-slate-800">Today's Healing Focus</h2>
+                  <p className="text-slate-600 mt-1">
+                    <em>"Embrace the present moment—it holds everything you need."</em>
+                  </p>
+                </div>
+              </div>
+              <Link href="/today">
+                <button 
+                  className="px-6 py-3 rounded-full font-semibold text-white transition-all hover:-translate-y-1"
+                  style={{ 
+                    background: 'linear-gradient(135deg, #2f5d5d, #8fbf9f)',
+                    boxShadow: '0 8px 24px rgba(47, 93, 93, 0.3)'
+                  }}
+                  data-testid="button-start-focus"
+                >
+                  Begin Focus Session
+                </button>
+              </Link>
+            </div>
+          </section>
+
+          {/* Quick Nav to CRM, Q&A, Support */}
+          <section className="mb-8 grid grid-cols-3 gap-4" aria-label="Quick navigation" data-testid="section-quick-nav">
+            <Link href="/community" className="group" data-testid="link-quick-community" aria-label="Go to Q&A Community">
+              <div className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-amber-200 hover:shadow-lg transition-all text-center">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'rgba(234, 195, 59, 0.15)' }}>
+                  <MessageCircle className="w-6 h-6" style={{ color: '#eac33b' }} aria-hidden="true" />
+                </div>
+                <span className="font-semibold text-slate-700 group-hover:text-amber-600 transition-colors">Q&A Community</span>
+              </div>
+            </Link>
+            <Link href="/crisis-resources" className="group" data-testid="link-quick-crisis" aria-label="Go to Crisis Support">
+              <div className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-rose-200 hover:shadow-lg transition-all text-center">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'rgba(244, 199, 195, 0.3)' }}>
+                  <Heart className="w-6 h-6" style={{ color: '#f4c7c3' }} aria-hidden="true" />
+                </div>
+                <span className="font-semibold text-slate-700 group-hover:text-rose-500 transition-colors">Crisis Support</span>
+              </div>
+            </Link>
+            <Link href="/tools" className="group" data-testid="link-quick-tools" aria-label="Go to Tools Library">
+              <div className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-teal-200 hover:shadow-lg transition-all text-center">
+                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'rgba(47, 93, 93, 0.1)' }}>
+                  <Brain className="w-6 h-6" style={{ color: '#2f5d5d' }} aria-hidden="true" />
+                </div>
+                <span className="font-semibold text-slate-700 group-hover:text-teal-600 transition-colors">Tools Library</span>
+              </div>
+            </Link>
+          </section>
+
           <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-10" aria-label="Wellness statistics">
             <article 
               className="relative overflow-hidden bg-gradient-to-br from-sky-500 to-blue-600 rounded-2xl p-6 text-white shadow-xl shadow-blue-500/20"

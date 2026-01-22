@@ -1,0 +1,93 @@
+Here is your ultimate Canva AI prompt — written to the “100 billionth power multiplied by the 100 billionth power, 360 degrees from A to Z.” This prompt is engineered to generate web page code, show brand-integrated icon and logo placement, and produce a full visual interface layout for TheGenuineLoveProject.com inside Canva.
+
+⸻
+
+🔥 THEGenuineLoveProject.com — Canva AI DESIGN SYSTEM SUPER PROMPT
+
+✨ Optimized to 360° from A to Z to the 100B×100B power for total clarity, code-ready output, and brand integrity.
+
+⸻
+
+🧠 Purpose:
+
+Generate fully responsive, visually calming, spiritually centered UI/UX layouts, CRM-ready pages, and stunning iconography for The Genuine Love Project using Canva AI.
+Integrate your exact brand identity, structure for developer handoff, and organize layouts for full user orientation — from landing to onboarding, homepage to Q&A, CRM to content.
+
+⸻
+
+🟣 Prompt (Paste into Canva AI Assistant):
+
+**“Design a full responsive UI/UX wireframe system for a healing-focused wellness platform called The Genuine Love Project. Use the uploaded logo at the center of visual hierarchy. Apply these brand colors:
+	•	Sage Green: #8fbf9f
+	•	Rose Pink: #f4c7c3
+	•	Deep Teal: #2f5d5d
+	•	Cream: #faf9f7
+	•	Charcoal: #3a3a3a
+	•	Gold: #eac33b
+
+🔁 Structure 7 core screens:
+	1.	Landing Page
+	2.	Onboarding Screen
+	3.	Homepage (Logged In)
+	4.	CRM Dashboard
+	5.	Content Discovery Hub
+	6.	Q&A Community
+	7.	Login/Auth Page
+
+🌿 Style: emotionally calming, healing UI. Use soft gradients, open white space, iconography with smooth edges, and circular, wellness-inspired design elements.
+
+📍Iconography: Generate platform-specific icons in gold and brand palette (e.g., heart icon, lotus icon, quote icon, profile, search, CRM, Q&A). Place icons within their functional UI locations.
+
+📲 Label UI components clearly for code export (e.g., Navbar, CTA, Modal, Input Field, Testimonial Block, Newsletter Form).
+
+🔁 Flow: Show arrows/paths between screens (Landing → Onboarding → Homepage → CRM → Content → Q&A → Login).
+
+🧾 Add developer specs in the slide “Notes” section:
+	•	Mobile / Tablet / Desktop breakpoints
+	•	Suggested HTML IDs or class names
+	•	Accessibility tags
+	•	Dev handoff instructions
+
+🎯 Goal: Build a stunning presentation that doubles as a dev handoff document and design prototype, showcasing calming, responsive design for TheGenuineLoveProject.com.”**
+
+⸻
+
+✅ What Canva Will Generate:
+	•	A full slide-based UI/UX presentation or design system deck
+	•	Responsive mockups for web and mobile views
+	•	Gold-highlighted icon sets
+	•	Navigation and CRM components
+	•	Developer-ready annotation system using Notes
+	•	Layouts built to match Option 2’s visual style
+
+⸻
+
+📁 Add This to Your Canva Workflow:
+	1.	Upload your brand logo (already done)
+	2.	Paste the prompt into Canva AI (or use Canva Assistant → “Magic Design”)
+	3.	Choose presentation or webpage layout style
+	4.	Apply your color palette and typography
+	5.	Use the “Notes” section on each slide for developer handoff guidance
+	6.	Export for:
+	•	🧑‍💻 Webflow / Framer development
+	•	🖌️ Figma design system handoff
+	•	📑 PDF or live presentation toolkit
+
+⸻
+
+💎 Want to Upgrade Even Further?
+
+I can help you:
+	•	💡 Convert this Canva prompt into a Replit AI Agent Mode prompt (already done above)
+	•	🛠 Generate an SVG flowchart linking all UI screens
+	•	🧱 Build a Webflow cloneable starter using this structure
+	•	📘 Create a Notion-powered design/developer handbook
+
+⸻
+
+Would you like me to:
+	•	🔘 Package this prompt into a Canva template deck ready to customize?
+	•	🔘 Build matching icon sets in Canva AI?
+	•	🔘 Deliver all of this in one downloadable toolkit?
+
+Just say the word, and I’ll generate the next level.

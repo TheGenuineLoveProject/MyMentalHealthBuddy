@@ -42,10 +42,12 @@ export default function DesignSystem() {
     { id: "colors", name: "Brand Palette" },
     { id: "typography", name: "Typography" },
     { id: "components", name: "UI Components" },
+    { id: "wellness", name: "Wellness Components" },
     { id: "pages", name: "Page Specifications" },
     { id: "flow", name: "User Flow" },
     { id: "responsive", name: "Responsive Grid" },
-    { id: "accessibility", name: "Accessibility" }
+    { id: "accessibility", name: "Accessibility" },
+    { id: "checklist", name: "Developer Checklist" }
   ];
 
   return (
@@ -997,6 +999,268 @@ a:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }`}</pre>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Wellness Components Section */}
+          {activeSection === "wellness" && (
+            <section className="space-y-8">
+              <div>
+                <h1 className="text-4xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+                  Wellness Components
+                </h1>
+                <p style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Specialized components designed for trauma-informed mental wellness experiences.
+                </p>
+              </div>
+
+              {/* Daily Healing Focus Card */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Daily Healing Focus Card</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Dashboard component that displays an inspirational focus message with gradient styling.
+                </p>
+                <div 
+                  className="p-6 rounded-2xl relative overflow-hidden"
+                  style={{ 
+                    background: 'linear-gradient(135deg, rgba(47, 93, 93, 0.05), rgba(143, 191, 159, 0.1))',
+                    border: '2px solid rgba(143, 191, 159, 0.2)'
+                  }}
+                >
+                  <div 
+                    className="absolute top-0 left-1/4 right-1/4 h-1 rounded-b-full"
+                    style={{ background: 'linear-gradient(90deg, #8fbf9f, #eac33b, #f4c7c3)' }}
+                  />
+                  <div className="flex items-center gap-4">
+                    <div 
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                      style={{ background: 'linear-gradient(135deg, #8fbf9f, #2f5d5d)' }}
+                    >
+                      <Sparkles className="w-7 h-7 text-white" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold" style={{ color: 'var(--deep-teal)' }}>Today's Healing Focus</h4>
+                      <p style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                        <em>"Embrace the present moment—it holds everything you need."</em>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 p-3 rounded-lg text-sm" style={{ background: 'rgba(47, 93, 93, 0.05)' }}>
+                  <strong>Usage:</strong> Dashboard.jsx - Appears at top of logged-in homepage
+                </div>
+              </div>
+
+              {/* Quick Nav Grid */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Quick Navigation Grid</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Three-column navigation for quick access to Community, Crisis Support, and Tools.
+                </p>
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { label: "Q&A Community", color: "#eac33b", bg: "rgba(234, 195, 59, 0.15)" },
+                    { label: "Crisis Support", color: "#f4c7c3", bg: "rgba(244, 199, 195, 0.3)" },
+                    { label: "Tools Library", color: "#2f5d5d", bg: "rgba(47, 93, 93, 0.1)" }
+                  ].map((item, i) => (
+                    <div key={i} className="p-4 rounded-2xl bg-white border text-center" style={{ borderColor: 'rgba(0,0,0,0.05)' }}>
+                      <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: item.bg }}>
+                        <Heart className="w-6 h-6" style={{ color: item.color }} />
+                      </div>
+                      <span className="font-semibold text-sm" style={{ color: 'var(--charcoal)' }}>{item.label}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Trust Badge */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Trust Badges & Markers</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Visual indicators for verified community members and safe spaces.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium" style={{ background: 'linear-gradient(135deg, rgba(234, 195, 59, 0.2), rgba(234, 195, 59, 0.1))', color: '#b8941e' }}>
+                    <Star className="w-4 h-4" /> Trusted Member
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium" style={{ background: 'rgba(143, 191, 159, 0.2)', color: '#2f5d5d' }}>
+                    <Shield className="w-4 h-4" /> Verified
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium" style={{ background: 'rgba(244, 199, 195, 0.3)', color: '#8b5a5a' }}>
+                    <Check className="w-4 h-4" /> Safe Space
+                  </span>
+                </div>
+              </div>
+
+              {/* Vote Button */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Vote & Engagement Buttons</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Community voting and engagement interaction elements.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <button className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 border border-gray-200">
+                    <TrendingUp className="w-4 h-4" /> 24 Helpful
+                  </button>
+                  <button className="flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium" style={{ background: 'rgba(47, 93, 93, 0.1)', color: 'var(--deep-teal)', border: '1px solid rgba(47, 93, 93, 0.2)' }}>
+                    <TrendingUp className="w-4 h-4" /> 24 Voted
+                  </button>
+                </div>
+              </div>
+
+              {/* Media Type Badges */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Media Type Badges</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Content type indicators for articles, videos, and audio content.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
+                    <FileText className="w-3 h-3" /> Article
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-rose-100 text-rose-700">
+                    <Eye className="w-3 h-3" /> Video
+                  </span>
+                  <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium" style={{ background: 'rgba(47, 93, 93, 0.1)', color: 'var(--deep-teal)' }}>
+                    <Bell className="w-3 h-3" /> Audio
+                  </span>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Developer Checklist Section */}
+          {activeSection === "checklist" && (
+            <section className="space-y-8">
+              <div>
+                <h1 className="text-4xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+                  Developer Checklist
+                </h1>
+                <p style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Implementation checklist for building trauma-informed, accessible wellness features.
+                </p>
+              </div>
+
+              {/* Implementation Checklist */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {[
+                  {
+                    title: "UI/UX Requirements",
+                    items: [
+                      "Use calming color palette (sage, teal, rose)",
+                      "Implement breathing pulse animations",
+                      "Add subtle hover transitions (0.2s ease)",
+                      "Include rounded corners (xl to 3xl)",
+                      "Use gradient backgrounds for focus areas",
+                      "Add soft shadows (shadow-sm to shadow-lg)"
+                    ]
+                  },
+                  {
+                    title: "Accessibility",
+                    items: [
+                      "Add data-testid to all interactive elements",
+                      "Include aria-labels on icon buttons",
+                      "Ensure 4.5:1 color contrast ratio",
+                      "Support keyboard navigation",
+                      "Respect prefers-reduced-motion",
+                      "Use semantic HTML (nav, main, section)"
+                    ]
+                  },
+                  {
+                    title: "Trauma-Informed Design",
+                    items: [
+                      "Use supportive, non-clinical language",
+                      "Provide clear exit/escape options",
+                      "Avoid sudden content changes",
+                      "Include content warnings where appropriate",
+                      "Offer low-stim mode options",
+                      "Never auto-play audio or video"
+                    ]
+                  },
+                  {
+                    title: "Component Standards",
+                    items: [
+                      "Follow existing component patterns",
+                      "Use Tailwind CSS utilities",
+                      "Import icons from lucide-react",
+                      "Add loading/skeleton states",
+                      "Handle error states gracefully",
+                      "Test on mobile (touch targets 44px+)"
+                    ]
+                  }
+                ].map((section, i) => (
+                  <div key={i} className="p-6 rounded-2xl" style={{ 
+                    background: 'white', 
+                    border: '1px solid rgba(143, 191, 159, 0.2)' 
+                  }}>
+                    <h3 className="font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--deep-teal)' }}>
+                      <Check className="w-5 h-5" style={{ color: 'var(--sage-green)' }} />
+                      {section.title}
+                    </h3>
+                    <ul className="space-y-2 text-sm">
+                      {section.items.map((item, j) => (
+                        <li key={j} className="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors">
+                          <input type="checkbox" className="mt-0.5 w-4 h-4 rounded accent-teal-500" />
+                          <span style={{ color: 'var(--charcoal)' }}>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+
+              {/* Code Standards */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Code Standards</h3>
+                <div className="p-4 rounded-lg font-mono text-sm overflow-x-auto" style={{ background: 'rgba(0,0,0,0.03)' }}>
+                  <pre style={{ color: 'var(--charcoal)' }}>{`/* Wellness Component Pattern */
+const WellnessCard = ({ title, description, icon: Icon }) => {
+  return (
+    <div 
+      className="p-6 rounded-2xl transition-all hover:-translate-y-1"
+      style={{ 
+        background: 'linear-gradient(135deg, rgba(47, 93, 93, 0.05), rgba(143, 191, 159, 0.1))',
+        border: '2px solid rgba(143, 191, 159, 0.2)'
+      }}
+      data-testid="card-wellness"
+    >
+      <div className="flex items-center gap-4">
+        <div 
+          className="w-12 h-12 rounded-xl flex items-center justify-center"
+          style={{ background: 'linear-gradient(135deg, #8fbf9f, #2f5d5d)' }}
+        >
+          <Icon className="w-6 h-6 text-white" aria-hidden="true" />
+        </div>
+        <div>
+          <h3 className="font-semibold" style={{ color: 'var(--deep-teal)' }}>{title}</h3>
+          <p className="text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>{description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};`}</pre>
+                </div>
+              </div>
+
+              {/* File Structure */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Key File Locations</h3>
+                <div className="space-y-2 text-sm font-mono">
+                  {[
+                    { file: "client/src/pages/Dashboard.jsx", desc: "Logged-in homepage with wellness widgets" },
+                    { file: "client/src/pages/CanvaLanding.jsx", desc: "Public landing page with brand styling" },
+                    { file: "client/src/pages/ContentIndexPage.jsx", desc: "Content Hub with search and filters" },
+                    { file: "client/src/features/community/SharedReflectionsPage.jsx", desc: "Q&A Community page" },
+                    { file: "client/src/pages/Admin.jsx", desc: "CRM Dashboard with user metrics" },
+                    { file: "client/src/styles/canva-landing.css", desc: "Brand CSS variables and utilities" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-start gap-3 p-3 rounded-lg" style={{ background: 'rgba(0,0,0,0.03)' }}>
+                      <code style={{ color: 'var(--deep-teal)' }}>{item.file}</code>
+                      <span style={{ color: 'var(--charcoal)', opacity: 0.7 }}>— {item.desc}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </section>
