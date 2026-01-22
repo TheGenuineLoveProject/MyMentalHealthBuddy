@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Begin your wellness journey with The Genuine Love Project - personalized onboarding experience.">
+  <title>Get Started - The Genuine Love Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .onboarding {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--sage-light) 0%, var(--rose-light) 100%);
+    }
+    .onboarding__card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem;
+      max-width: 560px;
+      width: 100%;
+      box-shadow: var(--shadow-lg);
+    }
+    .onboarding__progress {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    .onboarding__step {
+      flex: 1;
+      height: 4px;
+      background: var(--sage-light);
+      border-radius: 2px;
+    }
+    .onboarding__step--active {
+      background: linear-gradient(90deg, var(--sage), var(--gold));
+    }
+    .onboarding__step--completed {
+      background: var(--sage);
+    }
+    .onboarding__icon {
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border-radius: var(--radius-lg);
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .onboarding__title {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .onboarding__text {
+      color: var(--charcoal);
+      opacity: 0.75;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .onboarding__options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+    .onboarding__option {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--cream);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .onboarding__option:hover {
+      border-color: var(--sage);
+      background: var(--sage-light);
+    }
+    .onboarding__option--selected {
+      border-color: var(--gold);
+      background: rgba(234, 195, 59, 0.1);
+    }
+    .onboarding__option-icon {
+      font-size: 1.5rem;
+    }
+    .onboarding__option-text {
+      font-weight: 500;
+      color: var(--teal);
+    }
+    .onboarding__actions {
+      display: flex;
+      gap: 1rem;
+    }
+    .onboarding__actions .btn {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <main id="main-content" class="onboarding" aria-labelledby="onboarding-title">
+    <div class="onboarding__card" role="form" aria-label="Onboarding questionnaire">
+      <!-- Progress Steps -->
+      <div class="onboarding__progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" aria-label="Step 1 of 4">
+        <div class="onboarding__step onboarding__step--active"></div>
+        <div class="onboarding__step"></div>
+        <div class="onboarding__step"></div>
+        <div class="onboarding__step"></div>
+      </div>
+
+      <div class="onboarding__icon" aria-hidden="true">🌱</div>
+      
+      <h1 id="onboarding-title" class="onboarding__title">Welcome to Your Journey</h1>
+      <p class="onboarding__text">
+        We're so glad you're here. Let's personalize your experience so we can support you in the best way possible. 
+        <strong>This information stays private and helps us tailor your wellness path.</strong>
+      </p>
+
+      <fieldset class="onboarding__options" role="group" aria-label="What brings you here today?">
+        <legend class="sr-only">What brings you here today?</legend>
+        
+        <label class="onboarding__option" data-testid="option-self-love">
+          <input type="radio" name="goal" value="self-love" class="sr-only">
+          <span class="onboarding__option-icon" aria-hidden="true">💖</span>
+          <span class="onboarding__option-text">Building self-love and confidence</span>
+        </label>
+
+        <label class="onboarding__option" data-testid="option-healing">
+          <input type="radio" name="goal" value="healing" class="sr-only">
+          <span class="onboarding__option-icon" aria-hidden="true">🌿</span>
+          <span class="onboarding__option-text">Healing from past experiences</span>
+        </label>
+
+        <label class="onboarding__option" data-testid="option-stress">
+          <input type="radio" name="goal" value="stress" class="sr-only">
+          <span class="onboarding__option-icon" aria-hidden="true">🧘</span>
+          <span class="onboarding__option-text">Managing stress and anxiety</span>
+        </label>
+
+        <label class="onboarding__option" data-testid="option-growth">
+          <input type="radio" name="goal" value="growth" class="sr-only">
+          <span class="onboarding__option-icon" aria-hidden="true">✨</span>
+          <span class="onboarding__option-text">Personal growth and emotional intelligence</span>
+        </label>
+
+        <label class="onboarding__option" data-testid="option-explore">
+          <input type="radio" name="goal" value="explore" class="sr-only">
+          <span class="onboarding__option-icon" aria-hidden="true">🔮</span>
+          <span class="onboarding__option-text">Just exploring what's available</span>
+        </label>
+      </fieldset>
+
+      <div class="onboarding__actions">
+        <a href="index.html" class="btn btn--secondary" data-testid="button-back">
+          ← Back
+        </a>
+        <a href="home.html" class="btn btn--primary" data-testid="button-continue">
+          Continue →
+        </a>
+      </div>
+
+      <p class="text-center mt-3" style="font-size: 0.875rem; color: var(--charcoal); opacity: 0.6;">
+        Your data is encrypted and never shared. <a href="#" style="color: var(--teal);">Privacy Policy</a>
+      </p>
+    </div>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

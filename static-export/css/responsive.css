@@ -1,0 +1,197 @@
+/* ============================================================================
+   THE GENUINE LOVE PROJECT - RESPONSIVE STYLES
+   Mobile-First Breakpoints: 576px (sm), 768px (md), 992px (lg), 1200px (xl)
+   ============================================================================ */
+
+/* TABLET (768px+) */
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
+
+  h1 { font-size: 3rem; }
+  h2 { font-size: 2.5rem; }
+  h3 { font-size: 1.75rem; }
+
+  .container {
+    padding: 0 2rem;
+  }
+
+  .header__nav {
+    display: block;
+  }
+
+  .header__menu-btn {
+    display: none;
+  }
+
+  .hero {
+    padding: 6rem 0;
+  }
+
+  .hero__title {
+    font-size: 3.5rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1.25rem;
+  }
+
+  .section {
+    padding: 5rem 0;
+  }
+
+  .grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .quote-block {
+    padding: 4rem 3rem;
+  }
+
+  .quote-block__text {
+    font-size: 1.75rem;
+  }
+
+  .card {
+    padding: 2rem;
+  }
+}
+
+/* DESKTOP (992px+) */
+@media (min-width: 992px) {
+  html {
+    font-size: 18px;
+  }
+
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 2.75rem; }
+
+  .container {
+    padding: 0 3rem;
+  }
+
+  .header__logo img {
+    height: 48px;
+  }
+
+  .header__nav-list {
+    gap: 2.5rem;
+  }
+
+  .hero {
+    padding: 8rem 0;
+  }
+
+  .hero__title {
+    font-size: 4rem;
+  }
+
+  .section {
+    padding: 6rem 0;
+  }
+
+  .grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer__grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+}
+
+/* LARGE DESKTOP (1200px+) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1280px;
+  }
+
+  .hero__title {
+    font-size: 4.5rem;
+  }
+
+  .quote-block__text {
+    font-size: 2rem;
+  }
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* PRINT STYLES */
+@media print {
+  .header, .footer, .btn, .mobile-nav {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 12pt;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+
+  .card, .widget {
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: high) {
+  :root {
+    --sage: #006600;
+    --teal: #003333;
+    --gold: #996600;
+    --charcoal: #000000;
+    --border: #000000;
+  }
+
+  .btn--primary {
+    border: 2px solid var(--teal);
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    outline-width: 3px;
+  }
+}

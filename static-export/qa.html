@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Community Q&A - Connect with others on their wellness journey.">
+  <title>Community Q&A - The Genuine Love Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    .qa-hero {
+      padding: 3rem 0;
+      background: linear-gradient(180deg, var(--rose-light) 0%, transparent 100%);
+    }
+    .qa-hero__title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    .qa-hero__subtitle {
+      color: var(--charcoal);
+      opacity: 0.75;
+      margin-bottom: 1.5rem;
+    }
+    .qa-layout {
+      display: grid;
+      gap: 2rem;
+    }
+    .qa-question {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: all 0.2s ease;
+    }
+    .qa-question:hover {
+      border-color: var(--sage);
+      box-shadow: var(--shadow-sm);
+    }
+    .qa-question__header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .qa-question__avatar {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--sage), var(--teal));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .qa-question__author {
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 0.25rem;
+    }
+    .qa-question__meta {
+      font-size: 0.8125rem;
+      color: var(--charcoal);
+      opacity: 0.6;
+    }
+    .qa-question__title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+    .qa-question__content {
+      color: var(--charcoal);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .qa-question__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .qa-tag {
+      padding: 0.25rem 0.75rem;
+      background: var(--sage-light);
+      color: var(--teal);
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .qa-question__actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .qa-action {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--charcoal);
+      opacity: 0.7;
+      transition: all 0.2s ease;
+    }
+    .qa-action:hover {
+      color: var(--teal);
+      opacity: 1;
+    }
+    .qa-sidebar {
+      display: none;
+    }
+    .qa-sidebar__widget {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .qa-sidebar__title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+    .popular-tag {
+      display: inline-block;
+      padding: 0.375rem 0.875rem;
+      background: var(--sage-light);
+      color: var(--teal);
+      border-radius: 2rem;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      margin: 0.25rem;
+      transition: all 0.2s ease;
+    }
+    .popular-tag:hover {
+      background: var(--sage);
+      color: var(--white);
+    }
+    .contributor {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contributor:last-child {
+      border-bottom: none;
+    }
+    .contributor__avatar {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--sage), var(--teal));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    .contributor__name {
+      font-weight: 500;
+      color: var(--teal);
+      font-size: 0.9375rem;
+    }
+    .contributor__points {
+      font-size: 0.75rem;
+      color: var(--gold);
+    }
+    @media (min-width: 992px) {
+      .qa-hero__title {
+        font-size: 2.5rem;
+      }
+      .qa-layout {
+        grid-template-columns: 1fr 300px;
+      }
+      .qa-sidebar {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="The Genuine Love Project - Home">
+        <img src="images/logo.svg" alt="" aria-hidden="true">
+        <span class="header__logo-text">TGLP</span>
+      </a>
+
+      <nav class="header__nav" aria-label="Main navigation">
+        <ul class="header__nav-list" role="list">
+          <li><a href="home.html" class="header__nav-link">Home</a></li>
+          <li><a href="content.html" class="header__nav-link">Resources</a></li>
+          <li><a href="qa.html" class="header__nav-link header__nav-link--active">Community</a></li>
+          <li><a href="crm.html" class="header__nav-link">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="crm.html" class="btn btn--secondary btn--small" data-testid="button-profile">Profile</a>
+        <button class="header__menu-btn" aria-label="Open menu" aria-expanded="false" data-testid="button-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="qa-hero" aria-labelledby="qa-title">
+      <div class="container">
+        <h1 id="qa-title" class="qa-hero__title">Community Q&A</h1>
+        <p class="qa-hero__subtitle">
+          Connect with others on similar journeys. Ask questions, share experiences, and support each other.
+        </p>
+        <button class="btn btn--primary" data-testid="button-ask-question">
+          <span aria-hidden="true">✍️</span>
+          Ask a Question
+        </button>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Community questions">
+      <div class="container">
+        <div class="qa-layout">
+          <!-- Questions List -->
+          <div>
+            <article class="qa-question" data-testid="question-1">
+              <div class="qa-question__header">
+                <div class="qa-question__avatar" aria-hidden="true">A</div>
+                <div>
+                  <p class="qa-question__author">Anonymous User</p>
+                  <p class="qa-question__meta">Posted 2 hours ago</p>
+                </div>
+              </div>
+              <h2 class="qa-question__title">How do you deal with intrusive thoughts during meditation?</h2>
+              <p class="qa-question__content">
+                I've been trying to establish a meditation practice, but I find my mind constantly wandering to anxious thoughts. 
+                Any tips for staying present without fighting the thoughts?
+              </p>
+              <div class="qa-question__tags">
+                <span class="qa-tag">meditation</span>
+                <span class="qa-tag">anxiety</span>
+                <span class="qa-tag">mindfulness</span>
+              </div>
+              <div class="qa-question__actions">
+                <button class="qa-action" aria-label="3 helpful votes">
+                  <span aria-hidden="true">👍</span> 3 Helpful
+                </button>
+                <button class="qa-action" aria-label="5 replies">
+                  <span aria-hidden="true">💬</span> 5 Replies
+                </button>
+                <button class="qa-action" aria-label="Bookmark this question">
+                  <span aria-hidden="true">🔖</span> Save
+                </button>
+              </div>
+            </article>
+
+            <article class="qa-question" data-testid="question-2">
+              <div class="qa-question__header">
+                <div class="qa-question__avatar" style="background: linear-gradient(135deg, var(--rose), var(--gold));" aria-hidden="true">S</div>
+                <div>
+                  <p class="qa-question__author">Sarah M.</p>
+                  <p class="qa-question__meta">Posted 5 hours ago</p>
+                </div>
+              </div>
+              <h2 class="qa-question__title">What journaling prompts helped you the most with self-compassion?</h2>
+              <p class="qa-question__content">
+                I'm working on being kinder to myself and would love to hear what journal prompts have been 
+                meaningful for others on this journey. Looking for gentle, supportive prompts.
+              </p>
+              <div class="qa-question__tags">
+                <span class="qa-tag">journaling</span>
+                <span class="qa-tag">self-compassion</span>
+                <span class="qa-tag">self-love</span>
+              </div>
+              <div class="qa-question__actions">
+                <button class="qa-action" aria-label="8 helpful votes">
+                  <span aria-hidden="true">👍</span> 8 Helpful
+                </button>
+                <button class="qa-action" aria-label="12 replies">
+                  <span aria-hidden="true">💬</span> 12 Replies
+                </button>
+                <button class="qa-action" aria-label="Bookmark this question">
+                  <span aria-hidden="true">🔖</span> Save
+                </button>
+              </div>
+            </article>
+
+            <article class="qa-question" data-testid="question-3">
+              <div class="qa-question__header">
+                <div class="qa-question__avatar" style="background: linear-gradient(135deg, var(--teal), var(--sage));" aria-hidden="true">M</div>
+                <div>
+                  <p class="qa-question__author">Michael R.</p>
+                  <p class="qa-question__meta">Posted yesterday</p>
+                </div>
+              </div>
+              <h2 class="qa-question__title">How do you maintain boundaries while still being compassionate?</h2>
+              <p class="qa-question__content">
+                I often struggle with saying "no" to others because I don't want to seem uncaring. 
+                How do you set healthy boundaries without feeling guilty?
+              </p>
+              <div class="qa-question__tags">
+                <span class="qa-tag">boundaries</span>
+                <span class="qa-tag">relationships</span>
+                <span class="qa-tag">self-care</span>
+              </div>
+              <div class="qa-question__actions">
+                <button class="qa-action" aria-label="15 helpful votes">
+                  <span aria-hidden="true">👍</span> 15 Helpful
+                </button>
+                <button class="qa-action" aria-label="23 replies">
+                  <span aria-hidden="true">💬</span> 23 Replies
+                </button>
+                <button class="qa-action" aria-label="Bookmark this question">
+                  <span aria-hidden="true">🔖</span> Save
+                </button>
+              </div>
+            </article>
+
+            <article class="qa-question" data-testid="question-4">
+              <div class="qa-question__header">
+                <div class="qa-question__avatar" aria-hidden="true">E</div>
+                <div>
+                  <p class="qa-question__author">Elena K.</p>
+                  <p class="qa-question__meta">Posted 2 days ago</p>
+                </div>
+              </div>
+              <h2 class="qa-question__title">Tips for staying consistent with a wellness routine?</h2>
+              <p class="qa-question__content">
+                I start strong but always lose momentum after a few weeks. What strategies have helped you 
+                stay consistent with daily wellness practices?
+              </p>
+              <div class="qa-question__tags">
+                <span class="qa-tag">habits</span>
+                <span class="qa-tag">consistency</span>
+                <span class="qa-tag">motivation</span>
+              </div>
+              <div class="qa-question__actions">
+                <button class="qa-action" aria-label="21 helpful votes">
+                  <span aria-hidden="true">👍</span> 21 Helpful
+                </button>
+                <button class="qa-action" aria-label="18 replies">
+                  <span aria-hidden="true">💬</span> 18 Replies
+                </button>
+                <button class="qa-action" aria-label="Bookmark this question">
+                  <span aria-hidden="true">🔖</span> Save
+                </button>
+              </div>
+            </article>
+          </div>
+
+          <!-- Sidebar -->
+          <aside class="qa-sidebar" aria-label="Community sidebar">
+            <div class="qa-sidebar__widget">
+              <h3 class="qa-sidebar__title">Popular Topics</h3>
+              <div>
+                <a href="#" class="popular-tag">anxiety</a>
+                <a href="#" class="popular-tag">self-love</a>
+                <a href="#" class="popular-tag">meditation</a>
+                <a href="#" class="popular-tag">healing</a>
+                <a href="#" class="popular-tag">boundaries</a>
+                <a href="#" class="popular-tag">journaling</a>
+                <a href="#" class="popular-tag">relationships</a>
+                <a href="#" class="popular-tag">mindfulness</a>
+              </div>
+            </div>
+
+            <div class="qa-sidebar__widget">
+              <h3 class="qa-sidebar__title">Top Contributors</h3>
+              <div>
+                <div class="contributor">
+                  <div class="contributor__avatar">S</div>
+                  <div>
+                    <p class="contributor__name">Sarah M.</p>
+                    <p class="contributor__points">⭐ 2,450 XP</p>
+                  </div>
+                </div>
+                <div class="contributor">
+                  <div class="contributor__avatar" style="background: linear-gradient(135deg, var(--gold), var(--rose));">M</div>
+                  <div>
+                    <p class="contributor__name">Michael R.</p>
+                    <p class="contributor__points">⭐ 1,890 XP</p>
+                  </div>
+                </div>
+                <div class="contributor">
+                  <div class="contributor__avatar" style="background: linear-gradient(135deg, var(--rose), var(--sage));">E</div>
+                  <div>
+                    <p class="contributor__name">Elena K.</p>
+                    <p class="contributor__points">⭐ 1,650 XP</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="qa-sidebar__widget" style="background: linear-gradient(135deg, var(--sage-light), var(--rose-light));">
+              <h3 class="qa-sidebar__title">Community Guidelines</h3>
+              <ul style="list-style: none; font-size: 0.875rem; color: var(--charcoal);">
+                <li style="margin-bottom: 0.5rem;">✓ Be kind and supportive</li>
+                <li style="margin-bottom: 0.5rem;">✓ Respect privacy</li>
+                <li style="margin-bottom: 0.5rem;">✓ Share from experience</li>
+                <li>✓ Seek professional help when needed</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__bottom" style="border-top: none; padding-top: 0;">
+        <p class="footer__copy">© 2024 The Genuine Love Project</p>
+        <div class="footer__legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Help</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Genuine Love Project - AI-powered mental wellness platform focused on self-love, healing, and emotional growth.">
+  <meta name="theme-color" content="#2f5d5d">
+  <meta property="og:title" content="The Genuine Love Project">
+  <meta property="og:description" content="Your journey to self-love starts here. AI-assisted emotional guidance in a private, compassionate environment.">
+  <meta property="og:type" content="website">
+  <title>The Genuine Love Project - Live in Genuine Love</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="index.html" class="header__logo" aria-label="The Genuine Love Project - Home">
+        <img src="images/logo.svg" alt="" aria-hidden="true">
+        <span class="header__logo-text">TGLP</span>
+      </a>
+
+      <nav class="header__nav" aria-label="Main navigation">
+        <ul class="header__nav-list" role="list">
+          <li><a href="index.html" class="header__nav-link header__nav-link--active">Home</a></li>
+          <li><a href="content.html" class="header__nav-link">Resources</a></li>
+          <li><a href="qa.html" class="header__nav-link">Community</a></li>
+          <li><a href="crm.html" class="header__nav-link">Dashboard</a></li>
+        </ul>
+      </nav>
+
+      <div class="header__actions">
+        <a href="login.html" class="btn btn--secondary btn--small" data-testid="button-login">Log In</a>
+        <a href="onboarding.html" class="btn btn--primary btn--small hidden" data-testid="button-start">Get Started</a>
+        <button class="header__menu-btn" aria-label="Open menu" aria-expanded="false" data-testid="button-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <span class="hero__badge">
+          <span aria-hidden="true">✨</span>
+          AI-Powered Wellness
+        </span>
+        <h1 id="hero-title" class="hero__title">Live in Genuine Love</h1>
+        <p class="hero__subtitle">
+          Your journey to self-love starts here. Experience AI-assisted emotional guidance 
+          in a private, compassionate, and accessible environment.
+        </p>
+        <div class="hero__actions">
+          <a href="onboarding.html" class="btn btn--primary btn--large" data-testid="button-begin-journey">
+            Begin Your Journey
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="#features" class="btn btn--secondary btn--large" data-testid="button-learn-more">
+            Learn More
+          </a>
+        </div>
+
+        <div class="trust-badges" role="list" aria-label="Trust indicators">
+          <div class="trust-badge" role="listitem">
+            <span aria-hidden="true">🔒</span>
+            256-bit Encryption
+          </div>
+          <div class="trust-badge" role="listitem">
+            <span aria-hidden="true">🛡️</span>
+            GDPR Compliant
+          </div>
+          <div class="trust-badge" role="listitem">
+            <span aria-hidden="true">⏰</span>
+            24/7 Support
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="section section--alt" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 id="features-title" class="section__title">Your Wellness Toolkit</h2>
+          <p class="section__subtitle">
+            Evidence-based tools designed with trauma-informed care principles
+          </p>
+        </div>
+
+        <div class="grid grid--3">
+          <article class="card" data-testid="card-feature-chat">
+            <div class="card__icon" aria-hidden="true">💬</div>
+            <h3 class="card__title">AI Chat Therapy</h3>
+            <p class="card__text">
+              Compassionate AI companion trained in trauma-informed responses and crisis intervention.
+            </p>
+          </article>
+
+          <article class="card" data-testid="card-feature-mood">
+            <div class="card__icon" aria-hidden="true">📊</div>
+            <h3 class="card__title">Mood Tracking</h3>
+            <p class="card__text">
+              Understand your emotional patterns with gentle insights and personalized recommendations.
+            </p>
+          </article>
+
+          <article class="card" data-testid="card-feature-journal">
+            <div class="card__icon" aria-hidden="true">📝</div>
+            <h3 class="card__title">Guided Journaling</h3>
+            <p class="card__text">
+              Thoughtful prompts to help you process emotions and celebrate your growth journey.
+            </p>
+          </article>
+
+          <article class="card" data-testid="card-feature-resources">
+            <div class="card__icon" aria-hidden="true">📚</div>
+            <h3 class="card__title">Healing Resources</h3>
+            <p class="card__text">
+              Curated articles, videos, and exercises covering mind, body, and soul wellness.
+            </p>
+          </article>
+
+          <article class="card" data-testid="card-feature-community">
+            <div class="card__icon" aria-hidden="true">👥</div>
+            <h3 class="card__title">Supportive Community</h3>
+            <p class="card__text">
+              Connect with others on similar journeys in a moderated, safe environment.
+            </p>
+          </article>
+
+          <article class="card" data-testid="card-feature-progress">
+            <div class="card__icon" aria-hidden="true">🌟</div>
+            <h3 class="card__title">Progress Tracking</h3>
+            <p class="card__text">
+              Celebrate milestones with XP, streaks, and gentle encouragement along the way.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUOTE SECTION -->
+    <section class="section" aria-labelledby="quote-section">
+      <div class="container">
+        <div class="quote-block" role="region" aria-label="Inspirational quote">
+          <div class="quote-block__icon" aria-hidden="true">❝</div>
+          <blockquote>
+            <p class="quote-block__text">
+              "You are worthy of the love you so freely give to others."
+            </p>
+            <footer class="quote-block__author">— Self-Love Reminder</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="section section--alt" aria-labelledby="testimonials-title">
+      <div class="container">
+        <div class="section__header">
+          <h2 id="testimonials-title" class="section__title">Voices of Healing</h2>
+          <p class="section__subtitle">Real stories from our community</p>
+        </div>
+
+        <div class="grid grid--3">
+          <article class="testimonial" data-testid="testimonial-0">
+            <p class="testimonial__text">
+              "This platform helped me understand my emotions in ways I never could before. The AI companion feels like a trusted friend."
+            </p>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar" aria-hidden="true">S</div>
+              <div>
+                <p class="testimonial__name">Sarah M.</p>
+                <p class="testimonial__role">Member since 2024</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial" data-testid="testimonial-1">
+            <p class="testimonial__text">
+              "The journaling prompts have become an essential part of my healing routine. I feel seen and understood."
+            </p>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar" aria-hidden="true">M</div>
+              <div>
+                <p class="testimonial__name">Michael R.</p>
+                <p class="testimonial__role">3-month journey</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="testimonial" data-testid="testimonial-2">
+            <p class="testimonial__text">
+              "Finally, a wellness platform that doesn't feel clinical or judgmental. It's like having a gentle guide by your side."
+            </p>
+            <div class="testimonial__author">
+              <div class="testimonial__avatar" aria-hidden="true">E</div>
+              <div>
+                <p class="testimonial__name">Elena K.</p>
+                <p class="testimonial__role">Daily user</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="section" aria-labelledby="cta-title">
+      <div class="container text-center">
+        <h2 id="cta-title" class="section__title mb-3">Ready to Begin Your Journey?</h2>
+        <p class="section__subtitle mb-4">
+          Join thousands who are learning to live in genuine love. Start your free trial today.
+        </p>
+        <a href="onboarding.html" class="btn btn--primary btn--large" data-testid="button-start-free">
+          Start Free Trial
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="images/logo.svg" alt="">
+            <span class="footer__logo-text">The Genuine Love Project</span>
+          </div>
+          <p class="footer__tagline">
+            Empowering you to live in genuine love through compassionate AI guidance and evidence-based wellness tools.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer__section-title">Platform</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="content.html">Resources</a></li>
+            <li><a href="qa.html">Community</a></li>
+            <li><a href="crm.html">Dashboard</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer__section-title">Support</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Crisis Resources</a></li>
+            <li><a href="#">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer__section-title">Legal</h3>
+          <ul class="footer__links" role="list">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Ethics Statement</a></li>
+            <li><a href="#">Disclaimer</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2024 The Genuine Love Project. All rights reserved.</p>
+        <div class="footer__legal">
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
