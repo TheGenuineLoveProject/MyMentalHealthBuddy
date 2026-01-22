@@ -1,0 +1,127 @@
+<!-- 
+  COMPONENT: Newsletter Signup
+  DESCRIPTION: Email capture form for newsletter subscription
+  VARIANTS: inline, card, footer
+  FIGMA LAYER: Newsletter / Subscribe
+  CLASSES: .newsletter, .newsletter--inline, .newsletter--card
+-->
+
+<!-- Inline Newsletter (compact) -->
+<form class="newsletter newsletter--inline" id="newsletter-inline" data-testid="newsletter-inline">
+  <label for="email-inline" class="sr-only">Email address</label>
+  <input 
+    type="email" 
+    id="email-inline" 
+    class="newsletter__input" 
+    placeholder="Enter your email" 
+    required 
+    autocomplete="email"
+  />
+  <button type="submit" class="newsletter__btn btn btn--primary">Subscribe</button>
+</form>
+
+<!-- Card Newsletter (featured) -->
+<div class="newsletter newsletter--card" data-testid="newsletter-card">
+  <div class="newsletter__icon" aria-hidden="true">
+    <img src="/assets/icons/heart.svg" alt="" width="48" height="48" />
+  </div>
+  <h3 class="newsletter__title">Get Weekly Healing Insights</h3>
+  <p class="newsletter__text">Join thousands receiving gentle wisdom for their wellness journey.</p>
+  <form class="newsletter__form" id="newsletter-card-form">
+    <div class="form-group form-group--inline">
+      <label for="email-card" class="sr-only">Email address</label>
+      <input 
+        type="email" 
+        id="email-card" 
+        class="form-input" 
+        placeholder="Enter your email" 
+        required 
+        autocomplete="email"
+      />
+      <button type="submit" class="btn btn--primary">Subscribe</button>
+    </div>
+  </form>
+  <p class="newsletter__privacy">We respect your privacy. Unsubscribe anytime.</p>
+</div>
+
+<!-- Footer Newsletter -->
+<div class="newsletter newsletter--footer" data-testid="newsletter-footer">
+  <h4 class="newsletter__title">Stay Connected</h4>
+  <form class="newsletter__form" id="newsletter-footer-form">
+    <label for="email-footer" class="sr-only">Email address</label>
+    <input 
+      type="email" 
+      id="email-footer" 
+      class="newsletter__input" 
+      placeholder="your@email.com" 
+      required 
+      autocomplete="email"
+    />
+    <button type="submit" class="newsletter__btn" aria-label="Subscribe">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<!-- 
+  CSS DEPENDENCIES:
+  
+  .newsletter--inline {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .newsletter__input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid rgba(143, 191, 159, 0.2);
+    border-radius: 12px;
+    font-size: 1rem;
+  }
+  
+  .newsletter--card {
+    background: var(--sage-light);
+    padding: 32px;
+    border-radius: 16px;
+    text-align: center;
+  }
+  
+  .newsletter__title {
+    font-family: var(--font-serif);
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  
+  .newsletter__text {
+    color: var(--charcoal);
+    margin-bottom: 16px;
+  }
+  
+  .newsletter__privacy {
+    font-size: 0.75rem;
+    color: var(--charcoal);
+    opacity: 0.7;
+    margin-top: 12px;
+  }
+  
+  .newsletter--footer {
+    max-width: 300px;
+  }
+  
+  .newsletter--footer .newsletter__form {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .newsletter--footer .newsletter__btn {
+    padding: 12px;
+    background: var(--teal);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+-->

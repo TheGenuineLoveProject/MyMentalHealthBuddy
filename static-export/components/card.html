@@ -1,0 +1,114 @@
+<!-- 
+  COMPONENT: Card Layout
+  DESCRIPTION: Reusable card component for features, content, stats
+  VARIANTS: default, feature, stat, content, link
+  FIGMA LAYER: Card
+  CLASSES: .card, .card--feature, .card--stat, .card--content, .card--link
+-->
+
+<!-- Default Card -->
+<article class="card" data-testid="card-default">
+  <div class="card__content">
+    <h3 class="card__title">Card Title</h3>
+    <p class="card__description">Card description text goes here with supporting details.</p>
+  </div>
+</article>
+
+<!-- Feature Card (with icon) -->
+<article class="card card--feature" data-testid="card-feature">
+  <div class="card__icon" aria-hidden="true">
+    <img src="/assets/icons/brain.svg" alt="" width="32" height="32" />
+  </div>
+  <h3 class="card__title">AI Therapy</h3>
+  <p class="card__description">Compassionate, trauma-informed conversations available 24/7 to support your emotional wellbeing.</p>
+</article>
+
+<!-- Stat Card -->
+<div class="card card--stat" data-testid="card-stat">
+  <div class="card__icon" aria-hidden="true">
+    <img src="/assets/icons/sun.svg" alt="" width="24" height="24" />
+  </div>
+  <span class="card__value">14</span>
+  <span class="card__label">Day Streak</span>
+</div>
+
+<!-- Content Card (blog/article preview) -->
+<article class="card card--content" data-testid="card-content">
+  <div class="card__image">
+    <img src="/images/article-placeholder.jpg" alt="Article thumbnail" loading="lazy" />
+    <span class="card__tag">Mindfulness</span>
+  </div>
+  <div class="card__body">
+    <time class="card__date" datetime="2026-01-20">Jan 20, 2026</time>
+    <h3 class="card__title">The Art of Self-Compassion</h3>
+    <p class="card__description">Discover how practicing self-compassion can transform your relationship with yourself.</p>
+    <a href="#" class="card__link">Read more</a>
+  </div>
+</article>
+
+<!-- Link Card (clickable) -->
+<a href="#" class="card card--link" data-testid="card-link">
+  <div class="card__icon" aria-hidden="true">
+    <img src="/assets/icons/compass.svg" alt="" width="32" height="32" />
+  </div>
+  <h3 class="card__title">Getting Started</h3>
+  <p class="card__description">New to the platform? Start here.</p>
+  <span class="card__arrow" aria-hidden="true">→</span>
+</a>
+
+<!-- 
+  CSS DEPENDENCIES:
+  
+  .card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(47, 93, 93, 0.08);
+  }
+  
+  .card__icon {
+    width: 48px;
+    height: 48px;
+    background: var(--sage-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  
+  .card__title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+  
+  .card__description {
+    font-size: 0.9375rem;
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+  
+  .card--stat {
+    text-align: center;
+  }
+  
+  .card--stat .card__value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--teal);
+    display: block;
+  }
+  
+  .card--link {
+    display: block;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card--link:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(47, 93, 93, 0.12);
+  }
+-->

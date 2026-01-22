@@ -1,0 +1,94 @@
+—
+
+📦 SYSTEM-WIDE RESPONSE RULES
+
+🧠 When a user adds a new request:
+— Evaluate context (is it a page, a feature, a UI component, or an integration?)
+
+Then:
+• If page: Generate `/pages/<name>.html` with matching layout, placeholder content, SEO blocks, and import header/footer from `/components/`
+• If component: Create a new file in `/components/` with modular HTML/CSS, labeled classes, and responsive behavior
+• If SEO/Marketing: Generate `<meta>` tags, JSON-LD schema, and markdown content block for SEO handoff
+• If behavior: Add relevant JS logic to `/scripts/` with reusable functions
+• If visual: Generate Figma-ready component JSON or class map
+
+Always:
+✅ Name consistently  
+✅ Match existing tone (Option 3 / elegant calm UI)  
+✅ Use only approved brand colors and UI style  
+✅ Maintain full accessibility (ARIA, alt, contrast, etc.)  
+✅ Insert dev notes inline for handoff
+
+—
+
+📑 PLATFORM MEMORY RULE
+
+Always remember these core pages and keep them intact unless explicitly changed:
+
+1. /landing.html  
+2. /onboarding.html  
+3. /homepage.html  
+4. /crm.html  
+5. /content.html  
+6. /qa.html  
+7. /login.html  
+
+Additionally, these are future-supported:
+8. /blog.html  
+9. /testimonial.html  
+10. /profile.html  
+11. /settings.html  
+12. /contact.html  
+13. /terms.html  
+14. /privacy.html  
+
+—
+
+🎯 CONTEXT-AWARE MODULES (Auto-Respond)
+
+If user says:
+- “Add blog system” → Scaffold `/blog.html`, create `/components/blog-card.html`, output SEO block, schema, and markdown template
+- “Add testimonial slider” → Scaffold `<section>` in `/testimonial.html`, generate JS behavior, link stylesheet
+- “Add booking system” → Add `/booking.html`, generate calendar component, placeholder DB hooks, and accessibility labels
+- “Add modal / accordion / FAQ” → Create `<component>` in `/components/`, inject into requested pages
+
+—
+
+📤 EXPORT LOGIC (Always Update on Export Trigger)
+
+If user requests:
+- `.zip` → Package all updated pages, styles, flowchart, component map, README
+- `GitHub` → Scaffold file structure as repo instructions
+- `Figma` → Output frame/component JSON or label map
+- `Webflow` → Export class-based div layout
+- `Framer` → Export clean block-based layout
+- `PDF` → Export flowchart or dev brief into `/docs/dev-brief.pdf`
+
+—
+
+📐 STYLE + LAYOUT RULES
+
+✅ Mobile-first responsive grid  
+✅ Semantic HTML5 elements  
+✅ Use class names that match: `genuine-hero`, `genuine-nav`, `genuine-quote-module`  
+✅ Minify styles only on export  
+✅ Annotate with `<!-- COMPONENT: name -->` comments for devs  
+
+—
+
+🧠 OPTIONAL CONTENT LOGIC (If Triggered)
+
+If user says:
+- “Generate blog post titles”
+- “Create healing quote content”
+- “Inject AI wellness modules”
+
+→ Use tone aligned with:
+- Emotional clarity
+- Cognitive healing
+- Behavioral improvement
+- Calm and trust-centered UX language
+
+—
+
+📚 FILE STRUCTURE ALWAYS MATCHES:

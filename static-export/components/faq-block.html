@@ -1,0 +1,129 @@
+<!-- 
+  COMPONENT: FAQ Block / Q&A Expandable
+  DESCRIPTION: Accordion-style FAQ items
+  VARIANTS: default, grouped
+  FIGMA LAYER: FAQ / Accordion
+  CLASSES: .faq-list, .faq-item, .faq-item--open
+-->
+
+<!-- FAQ List -->
+<div class="faq-list" data-testid="faq-list">
+  
+  <!-- FAQ Item 1 -->
+  <details class="faq-item" data-testid="faq-item-1">
+    <summary class="faq-item__question">
+      <span class="faq-item__question-text">How do I get started with The Genuine Love Project?</span>
+      <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </summary>
+    <div class="faq-item__answer">
+      <p>Simply create an account, complete the brief onboarding questionnaire, and you'll be guided to your personalized dashboard. From there, you can explore AI therapy, journaling, mood tracking, and more.</p>
+    </div>
+  </details>
+  
+  <!-- FAQ Item 2 -->
+  <details class="faq-item" data-testid="faq-item-2">
+    <summary class="faq-item__question">
+      <span class="faq-item__question-text">Is my data private and secure?</span>
+      <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </summary>
+    <div class="faq-item__answer">
+      <p>Absolutely. We use end-to-end encryption, never sell your data, and follow strict privacy practices. Read our <a href="/privacy.html">Privacy Policy</a> for full details.</p>
+    </div>
+  </details>
+  
+  <!-- FAQ Item 3 -->
+  <details class="faq-item" data-testid="faq-item-3">
+    <summary class="faq-item__question">
+      <span class="faq-item__question-text">What is AI Therapy and how does it work?</span>
+      <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </summary>
+    <div class="faq-item__answer">
+      <p>Our AI Therapy feature provides compassionate, trauma-informed conversations to support your emotional wellbeing. It's available 24/7 and designed to complement (not replace) professional care.</p>
+    </div>
+  </details>
+  
+  <!-- FAQ Item 4 -->
+  <details class="faq-item" data-testid="faq-item-4">
+    <summary class="faq-item__question">
+      <span class="faq-item__question-text">How do I cancel my subscription?</span>
+      <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </summary>
+    <div class="faq-item__answer">
+      <p>Go to Settings → Billing → Cancel Subscription. You'll retain access until the end of your billing period. No refunds for partial months.</p>
+    </div>
+  </details>
+  
+  <!-- FAQ Item 5 -->
+  <details class="faq-item" data-testid="faq-item-5">
+    <summary class="faq-item__question">
+      <span class="faq-item__question-text">I'm in crisis. What should I do?</span>
+      <svg class="faq-item__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </summary>
+    <div class="faq-item__answer">
+      <p>If you're in immediate danger, please contact emergency services (911 in the US) or a crisis hotline like the 988 Suicide & Crisis Lifeline. Our platform is supportive but is not a replacement for emergency care.</p>
+    </div>
+  </details>
+
+</div>
+
+<!-- 
+  CSS DEPENDENCIES:
+  
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .faq-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(143, 191, 159, 0.2);
+  }
+  
+  .faq-item__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    list-style: none;
+    font-weight: 500;
+    color: var(--teal);
+  }
+  
+  .faq-item__question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .faq-item__icon {
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+  
+  .faq-item[open] .faq-item__icon {
+    transform: rotate(180deg);
+  }
+  
+  .faq-item__answer {
+    padding: 0 20px 16px;
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+  
+  .faq-item__answer a {
+    color: var(--teal);
+    text-decoration: underline;
+  }
+-->
