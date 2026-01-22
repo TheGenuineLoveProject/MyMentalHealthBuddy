@@ -3,100 +3,141 @@ import {
   Home, BookOpen, Heart, Brain, Sparkles, Leaf, Moon, 
   Sun, Wind, Users, Shield, Clock, Target, Compass,
   Lightbulb, Map, Star, Zap, ChevronRight, Search,
-  Play, Headphones, FileText, Bookmark, Share2, Filter
+  Play, Headphones, FileText, Bookmark, Share2, MessageCircle,
+  Activity, Eye, Layers, Award, TrendingUp, Settings,
+  Palette, BarChart3, Feather, Globe, ArrowLeft
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useToast } from "@/hooks/use-toast";
 
-const MEDIA_TYPES = {
-  text: { icon: FileText, label: "Article", color: "bg-amber-100 text-amber-700" },
-  video: { icon: Play, label: "Video", color: "bg-rose-100 text-rose-700" },
-  audio: { icon: Headphones, label: "Audio", color: "bg-teal-100 text-teal-700" }
+const allContent = [
+  { name: "Adaptive Companion", path: "/companion", description: "AI-powered personalized guidance", category: "Advanced Tools", icon: Users },
+  { name: "Admin Dashboard", path: "/admin", description: "Platform administration", category: "System", icon: Settings, protected: true },
+  { name: "Advanced Tools", path: "/advanced", description: "Deep transformation techniques", category: "Tools", icon: Zap, protected: true },
+  { name: "Affirmations", path: "/affirmations", description: "Positive self-talk practices", category: "Wellness", icon: Star },
+  { name: "AI Chat Therapy", path: "/chat", description: "Compassionate AI conversation", category: "AI/Chat", icon: MessageCircle, protected: true },
+  { name: "Analytics", path: "/analytics", description: "Track your wellness journey", category: "Dashboard", icon: BarChart3, protected: true },
+  { name: "Atlas Dashboard", path: "/atlas", description: "Intellectual navigation center", category: "Advanced Tools", icon: Globe, protected: true },
+  { name: "Behavior Change", path: "/behavior-change", description: "Habit science and CBT techniques", category: "Wellness", icon: TrendingUp },
+  { name: "Blog", path: "/blog", description: "Wellness articles and insights", category: "Content", icon: FileText },
+  { name: "Body Wellness", path: "/body-wellness", description: "Somatic practices for healing", category: "Wellness", icon: Heart },
+  { name: "Breathing Exercises", path: "/breathing", description: "Breathwork for calm and energy", category: "Wellness", icon: Wind },
+  { name: "Calming Scenes", path: "/calming-scenes", description: "Visual tranquility experiences", category: "Wellness", icon: Eye },
+  { name: "Cognitive Architecture", path: "/cognitive-architecture", description: "Mental framework design", category: "Mastery", icon: Layers, protected: true },
+  { name: "Cognitive Tools", path: "/cognitive-tools", description: "Thought reframing exercises", category: "Wellness", icon: Brain },
+  { name: "Collaborative Lab", path: "/collaborative-lab", description: "Group intelligence workspace", category: "Advanced Tools", icon: Users, protected: true },
+  { name: "Community", path: "/community", description: "Connect with fellow journeyers", category: "Community", icon: Users, protected: true },
+  { name: "Content Studio", path: "/content-studio", description: "Create and transform content", category: "Content", icon: Palette, protected: true },
+  { name: "Crisis Resources", path: "/crisis", description: "Immediate support and hotlines", category: "Support", icon: Shield, protected: true },
+  { name: "Daily Ritual", path: "/ritual", description: "Morning wellness routine", category: "Tools", icon: Sun, protected: true },
+  { name: "Daily Routines", path: "/daily-routines", description: "Morning to evening protocols", category: "Wellness", icon: Clock },
+  { name: "Daily Wisdom Oracle", path: "/daily-wisdom", description: "Daily inspiration and guidance", category: "Wisdom", icon: Sparkles, protected: true },
+  { name: "Dashboard", path: "/dashboard", description: "Your personal wellness hub", category: "Dashboard", icon: Home, protected: true },
+  { name: "Disclaimer", path: "/disclaimer", description: "Platform limitations notice", category: "Legal", icon: FileText },
+  { name: "Elite Tools", path: "/elite-tools", description: "Premium advanced features", category: "Mastery", icon: Award, protected: true },
+  { name: "Emotional Intelligence", path: "/emotional-intelligence", description: "Understanding emotions", category: "Wellness", icon: Heart },
+  { name: "Ethics", path: "/ethics", description: "Our ethical commitments", category: "Legal", icon: Shield },
+  { name: "FAQ", path: "/faq", description: "Common questions answered", category: "Support", icon: MessageCircle },
+  { name: "Glossary", path: "/glossary-full", description: "A-Z of wellness terms", category: "Knowledge", icon: BookOpen },
+  { name: "Grounding Techniques", path: "/grounding", description: "Body-based anxiety relief", category: "Wellness", icon: Leaf },
+  { name: "Growth Analytics", path: "/growth-analytics", description: "Personal development metrics", category: "Analytics", icon: TrendingUp, protected: true },
+  { name: "Guided Journaling", path: "/guided-journaling", description: "Structured reflection prompts", category: "Tools", icon: Feather, protected: true },
+  { name: "Healing Journeys", path: "/healing-journeys", description: "Structured healing pathways", category: "Wellness", icon: Map },
+  { name: "Healing Library", path: "/healing-library", description: "Curated healing resources", category: "Content", icon: BookOpen },
+  { name: "How-To Guides", path: "/how-to-guides", description: "Step-by-step instructions", category: "Content", icon: Compass },
+  { name: "Inner Child", path: "/inner-child", description: "Healing childhood wounds", category: "Wellness", icon: Heart },
+  { name: "Insight Cards", path: "/insight-cards", description: "Daily wisdom insights", category: "Tools", icon: Lightbulb, protected: true },
+  { name: "Journal", path: "/journal", description: "Personal reflection space", category: "Tools", icon: Feather, protected: true },
+  { name: "Knowledge Synthesis", path: "/knowledge-synthesis", description: "Integrate learning insights", category: "Advanced Tools", icon: Brain, protected: true },
+  { name: "Legal", path: "/legal", description: "Legal information hub", category: "Legal", icon: FileText },
+  { name: "Mastery Tools", path: "/mastery", description: "Peak performance techniques", category: "Mastery", icon: Award, protected: true },
+  { name: "Meditation Guide", path: "/meditation", description: "Mindfulness practices", category: "Wellness", icon: Moon },
+  { name: "Meta-Learning", path: "/meta-learning", description: "Learn how to learn better", category: "Advanced Tools", icon: Brain, protected: true },
+  { name: "Mirror", path: "/mirror", description: "Self-reflection exercises", category: "Tools", icon: Eye, protected: true },
+  { name: "Mood Tracker", path: "/mood", description: "Track emotional patterns", category: "Tools", icon: Activity, protected: true },
+  { name: "News & Updates", path: "/news", description: "Platform news and insights", category: "Content", icon: Globe },
+  { name: "Philosophical Inquiry", path: "/philosophical-inquiry", description: "Deep existential exploration", category: "Wisdom", icon: Lightbulb, protected: true },
+  { name: "Premium", path: "/premium", description: "Unlock premium features", category: "Account", icon: Star, protected: true },
+  { name: "Pricing", path: "/pricing", description: "Subscription plans", category: "Account", icon: Award },
+  { name: "Privacy Policy", path: "/privacy", description: "How we protect your data", category: "Legal", icon: Shield },
+  { name: "Professional Resources", path: "/professional-resources", description: "Therapist finders and support", category: "Support", icon: Users },
+  { name: "Progress Dashboard", path: "/progress", description: "Track your growth journey", category: "Analytics", icon: TrendingUp, protected: true },
+  { name: "Research & Evidence", path: "/research", description: "Science behind practices", category: "Knowledge", icon: BookOpen },
+  { name: "Resilience Metrics", path: "/resilience", description: "Measure emotional resilience", category: "Analytics", icon: Activity, protected: true },
+  { name: "Safety", path: "/safety", description: "Safety guidelines and resources", category: "Support", icon: Shield },
+  { name: "Self-Care Toolkit", path: "/self-care", description: "Nurturing practices", category: "Wellness", icon: Heart },
+  { name: "Settings", path: "/settings", description: "Account preferences", category: "Account", icon: Settings, protected: true },
+  { name: "Sleep Guide", path: "/sleep-guide", description: "Improve sleep quality", category: "Wellness", icon: Moon },
+  { name: "Soul Wellness", path: "/soul-wellness", description: "Meaning and purpose", category: "Wellness", icon: Sparkles },
+  { name: "State Tracker", path: "/state", description: "Monitor wellbeing states", category: "Tools", icon: Activity, protected: true },
+  { name: "Strategy Maps", path: "/strategy-maps", description: "Personal growth planning", category: "Advanced Tools", icon: Map, protected: true },
+  { name: "Stress Response Guide", path: "/stress-response", description: "Nervous system science", category: "Wellness", icon: Activity },
+  { name: "Study Vault", path: "/study-vault", description: "Evidence-based research", category: "Knowledge", icon: BookOpen, protected: true },
+  { name: "Support", path: "/support", description: "Get help and guidance", category: "Support", icon: MessageCircle },
+  { name: "Systems Thinking", path: "/systems-thinking", description: "Holistic perspective tools", category: "Advanced Tools", icon: Layers, protected: true },
+  { name: "Terms of Service", path: "/terms", description: "Usage terms and conditions", category: "Legal", icon: FileText },
+  { name: "Today", path: "/today", description: "Daily wellness flow", category: "Dashboard", icon: Sun, protected: true },
+  { name: "Tools", path: "/tools", description: "All wellness tools", category: "Tools", icon: Target, protected: true },
+  { name: "Upgrade", path: "/upgrade", description: "Upgrade your plan", category: "Account", icon: Zap, protected: true },
+  { name: "Wellness", path: "/wellness", description: "Wellness center", category: "Wellness", icon: Heart, protected: true },
+  { name: "Wellness Glossary", path: "/glossary", description: "Key wellness terms", category: "Knowledge", icon: BookOpen },
+  { name: "Wellness Hub", path: "/wellness-hub", description: "Central wellness navigation", category: "Wellness", icon: Compass },
+  { name: "Wisdom Practices", path: "/wisdom-practices", description: "Ancient wisdom techniques", category: "Wisdom", icon: Sparkles, protected: true },
+  { name: "Wisdom Synthesis", path: "/wisdom-synthesis", description: "Integrate wisdom insights", category: "Wisdom", icon: Lightbulb, protected: true },
+  { name: "Wisdom Tools", path: "/wisdom", description: "Wisdom and reflection tools", category: "Wisdom", icon: Lightbulb, protected: true }
+];
+
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+const categoryColors = {
+  "Wellness": "bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400",
+  "Tools": "bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400",
+  "Advanced Tools": "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400",
+  "Mastery": "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+  "Wisdom": "bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400",
+  "Dashboard": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
+  "Analytics": "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
+  "Content": "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
+  "Community": "bg-pink-100 text-pink-700 dark:bg-pink-900/30 dark:text-pink-400",
+  "Support": "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  "Knowledge": "bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400",
+  "Legal": "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-400",
+  "Account": "bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400",
+  "AI/Chat": "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-400",
+  "System": "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400"
 };
-
-const contentCategories = [
-  {
-    title: "Mind Wellness",
-    icon: Brain,
-    color: "bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400",
-    items: [
-      { name: "Cognitive Tools", path: "/cognitive-tools", description: "Thought reframing and mental exercises", type: "text" },
-      { name: "Emotional Intelligence", path: "/emotional-intelligence", description: "Understanding and managing emotions", type: "video" },
-      { name: "Stress Response Guide", path: "/stress-response", description: "How your nervous system works", type: "text" },
-      { name: "Behavior Change", path: "/behavior-change", description: "Habit science and CBT techniques", type: "text" },
-      { name: "Inner Child Healing", path: "/inner-child", description: "Healing childhood wounds", type: "audio" }
-    ]
-  },
-  {
-    title: "Body Wellness",
-    icon: Heart,
-    color: "bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400",
-    items: [
-      { name: "Breathing Exercises", path: "/breathing", description: "Breathwork for calm and energy", type: "video" },
-      { name: "Grounding Techniques", path: "/grounding", description: "Body-based anxiety relief", type: "audio" },
-      { name: "Body Wellness Guide", path: "/body-wellness", description: "Somatic practices for healing", type: "text" },
-      { name: "Sleep Guide", path: "/sleep-guide", description: "Improving sleep quality", type: "audio" },
-      { name: "Daily Routines", path: "/daily-routines", description: "Morning to evening protocols", type: "text" }
-    ]
-  },
-  {
-    title: "Soul & Spirit",
-    icon: Sparkles,
-    color: "bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400",
-    items: [
-      { name: "Soul Wellness", path: "/soul-wellness", description: "Meaning, purpose, and connection", type: "text" },
-      { name: "Meditation Guide", path: "/meditation", description: "Mindfulness and meditation", type: "audio" },
-      { name: "Affirmations", path: "/affirmations", description: "Positive self-talk practices", type: "audio" },
-      { name: "Calming Scenes", path: "/calming-scenes", description: "Visual tranquility experiences", type: "video" },
-      { name: "Self-Care Toolkit", path: "/self-care", description: "Nurturing practices for wellbeing", type: "text" }
-    ]
-  },
-  {
-    title: "Healing Journeys",
-    icon: Map,
-    color: "bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400",
-    items: [
-      { name: "Healing Journeys", path: "/healing-journeys", description: "Structured healing pathways", type: "video" },
-      { name: "How-To Guides", path: "/how-to-guides", description: "Step-by-step tool instructions", type: "text" },
-      { name: "Healing Library", path: "/healing-library", description: "Curated healing resources", type: "text" },
-      { name: "Research & Evidence", path: "/research", description: "Science behind practices", type: "text" }
-    ]
-  },
-  {
-    title: "Knowledge Base",
-    icon: BookOpen,
-    color: "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400",
-    items: [
-      { name: "Wellness Glossary", path: "/glossary-full", description: "A-Z of wellness terms", type: "text" },
-      { name: "FAQ", path: "/faq", description: "Common questions answered", type: "text" },
-      { name: "News & Updates", path: "/news", description: "Platform updates and insights", type: "text" },
-      { name: "Professional Resources", path: "/professional-resources", description: "Therapist finders and support", type: "text" }
-    ]
-  },
-  {
-    title: "Wellness Hub",
-    icon: Compass,
-    color: "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
-    items: [
-      { name: "Wellness Hub", path: "/wellness-hub", description: "Central wellness navigation", type: "text" },
-      { name: "Study Vault", path: "/study-vault", description: "Evidence-based research", type: "text" },
-      { name: "Support", path: "/support", description: "Getting help and guidance", type: "text" }
-    ]
-  }
-];
-
-const quickLinks = [
-  { name: "Start Here", path: "/wellness-hub", icon: Compass, color: "text-teal-500" },
-  { name: "Crisis Support", path: "/professional-resources", icon: Shield, color: "text-rose-500" },
-  { name: "Daily Practice", path: "/daily-routines", icon: Sun, color: "text-amber-500" },
-  { name: "Learn Terms", path: "/glossary-full", icon: BookOpen, color: "text-purple-500" }
-];
 
 export default function ContentIndexPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [savedItems, setSavedItems] = useState([]);
   const { toast } = useToast();
+
+  const categories = useMemo(() => {
+    const cats = [...new Set(allContent.map(item => item.category))].sort();
+    return ["all", ...cats];
+  }, []);
+
+  const filteredContent = useMemo(() => {
+    return allContent.filter(item => {
+      const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = selectedCategory === "all" || item.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    }).sort((a, b) => a.name.localeCompare(b.name));
+  }, [searchQuery, selectedCategory]);
+
+  const groupedByLetter = useMemo(() => {
+    const grouped = {};
+    filteredContent.forEach(item => {
+      const letter = item.name[0].toUpperCase();
+      if (!grouped[letter]) grouped[letter] = [];
+      grouped[letter].push(item);
+    });
+    return grouped;
+  }, [filteredContent]);
+
+  const availableLetters = Object.keys(groupedByLetter).sort();
 
   const handleSave = (item, e) => {
     e.preventDefault();
@@ -110,193 +151,189 @@ export default function ContentIndexPage() {
     }
   };
 
-  const handleShare = (item, e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigator.clipboard.writeText(window.location.origin + item.path);
-    toast({ title: "Link copied!", description: "Share it with someone who needs it" });
+  const scrollToLetter = (letter) => {
+    const element = document.getElementById(`section-${letter}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
-  const filteredCategories = contentCategories.map(cat => ({
-    ...cat,
-    items: cat.items.filter(item => {
-      const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesFilter = activeFilter === "all" || item.type === activeFilter;
-      return matchesSearch && matchesFilter;
-    })
-  })).filter(cat => cat.items.length > 0);
-
   return (
-    <div className="min-h-screen hero-gradient">
-      <div className="content-wrapper py-8">
-        <div className="max-w-5xl mx-auto">
-          <header className="text-center mb-10">
-            <div className="flex justify-center mb-4">
-              <div className="icon-container icon-xl icon-gradient-teal">
-                <BookOpen className="h-8 w-8" />
-              </div>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <Link href="/" className="inline-flex items-center gap-2 text-sm mb-6 transition-colors" style={{ color: 'var(--glp-sage)' }}>
+          <ArrowLeft className="h-4 w-4" /> Back to Home
+        </Link>
+
+        <header className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <div className="w-16 h-16 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+              <BookOpen className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-display-lg text-teal mb-2" data-testid="text-page-title">Content Library</h1>
-            <p className="text-lead max-w-2xl mx-auto">
-              Your complete guide to mind, body, and soul wellness. Explore evidence-based tools, 
-              healing practices, and transformative resources.
-            </p>
-          </header>
-
-          <div className="relative max-w-lg mx-auto mb-6">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" aria-hidden="true" />
-            <input
-              type="text"
-              placeholder="Search all content..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-[var(--teal-400)] focus:border-transparent shadow-sm"
-              data-testid="input-search"
-            />
           </div>
+          <h1 className="text-4xl font-bold font-serif mb-2" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-page-title">
+            Platform Directory A–Z
+          </h1>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
+            Find everything from Affirmations to Zen practices. 
+            Your complete guide to all platform features and content.
+          </p>
+        </header>
 
-          {/* Filter Tabs */}
-          <div className="flex justify-center gap-2 mb-8" role="tablist" aria-label="Filter content by type" data-testid="filter-tabs">
-            <button
-              onClick={() => setActiveFilter("all")}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeFilter === "all" 
-                  ? "bg-[var(--teal-500)] text-white shadow-md" 
-                  : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-[var(--teal-300)]"
-              }`}
-              data-testid="filter-all"
-              role="tab"
-              aria-selected={activeFilter === "all"}
-              aria-label="Show all content types"
-            >
-              <Filter className="inline h-4 w-4 mr-1" aria-hidden="true" /> All
-            </button>
-            {Object.entries(MEDIA_TYPES).map(([key, { icon: Icon, label, color }]) => (
-              <button
-                key={key}
-                onClick={() => setActiveFilter(key)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-1 ${
-                  activeFilter === key 
-                    ? `${color} shadow-md` 
-                    : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-[var(--teal-300)]"
-                }`}
-                data-testid={`filter-${key}`}
-                role="tab"
-                aria-selected={activeFilter === key}
-                aria-label={`Filter by ${label} content`}
-              >
-                <Icon className="h-4 w-4" aria-hidden="true" /> {label}
-              </button>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-10">
-            {quickLinks.map((link, idx) => (
-              <Link
-                key={idx}
-                href={link.path}
-                className="card-bordered flex items-center gap-3 hover:shadow-md transition-shadow"
-                data-testid={`link-quick-${idx}`}
-              >
-                <link.icon className={`h-5 w-5 ${link.color}`} aria-hidden="true" />
-                <span className="font-medium text-sm text-gray-900 dark:text-white">{link.name}</span>
-              </Link>
-            ))}
-          </div>
-
-          <div className="space-y-8">
-            {filteredCategories.map((category, catIdx) => (
-              <section key={catIdx} data-testid={`section-${category.title.toLowerCase().replace(/\s+/g, '-')}`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-2 rounded-lg ${category.color}`}>
-                    <category.icon className="h-5 w-5" aria-hidden="true" />
-                  </div>
-                  <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{category.title}</h2>
-                  <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full text-gray-500 dark:text-gray-400">
-                    {category.items.length} resources
-                  </span>
-                </div>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-                  {category.items.map((item, itemIdx) => {
-                    const mediaType = MEDIA_TYPES[item.type] || MEDIA_TYPES.text;
-                    const MediaIcon = mediaType.icon;
-                    return (
-                      <Link
-                        key={itemIdx}
-                        href={item.path}
-                        className="card-bordered group hover:shadow-md hover:border-[var(--teal-300)] transition-all relative"
-                        data-testid={`link-content-${item.path.slice(1)}`}
-                      >
-                        {/* Media Type Badge */}
-                        <div className={`absolute top-2 right-2 px-2 py-0.5 rounded-full text-xs font-medium flex items-center gap-1 ${mediaType.color}`} aria-label={`Content type: ${mediaType.label}`}>
-                          <MediaIcon className="h-3 w-3" aria-hidden="true" />
-                          {mediaType.label}
-                        </div>
-                        
-                        <div className="pr-16">
-                          <h3 className="font-medium text-gray-900 dark:text-white group-hover:text-[var(--teal-600)] transition">
-                            {item.name}
-                          </h3>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{item.description}</p>
-                        </div>
-                        
-                        {/* Save/Share Actions */}
-                        <div className="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
-                          <button
-                            onClick={(e) => handleSave(item, e)}
-                            className={`flex items-center gap-1 text-xs px-2 py-1 rounded-md transition ${
-                              savedItems.includes(item.path) 
-                                ? "bg-amber-100 text-amber-700" 
-                                : "bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 hover:bg-amber-50 hover:text-amber-600"
-                            }`}
-                            data-testid={`button-save-${item.path.slice(1)}`}
-                            aria-label={savedItems.includes(item.path) ? `Remove ${item.name} from saved` : `Save ${item.name} for later`}
-                            aria-pressed={savedItems.includes(item.path)}
-                          >
-                            <Bookmark className="h-3 w-3" aria-hidden="true" />
-                            {savedItems.includes(item.path) ? "Saved" : "Save"}
-                          </button>
-                          <button
-                            onClick={(e) => handleShare(item, e)}
-                            className="flex items-center gap-1 text-xs px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition"
-                            data-testid={`button-share-${item.path.slice(1)}`}
-                            aria-label={`Share ${item.name}`}
-                          >
-                            <Share2 className="h-3 w-3" aria-hidden="true" />
-                            Share
-                          </button>
-                          <ChevronRight className="ml-auto h-5 w-5 text-gray-300 dark:text-gray-600 group-hover:text-[var(--teal-500)] group-hover:translate-x-1 transition-all" aria-hidden="true" />
-                        </div>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </section>
-            ))}
-          </div>
-
-          {filteredCategories.length === 0 && (
-            <div className="text-center py-12 card-bordered">
-              <p className="text-gray-500 dark:text-gray-400">No content found matching your search.</p>
-              <button 
-                onClick={() => setSearchQuery("")}
-                className="mt-2 text-[var(--teal-600)] hover:underline"
-              >
-                Clear search
-              </button>
+        <div className="sticky top-0 z-20 py-4 mb-6" style={{ background: 'var(--glp-paper)' }}>
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
+              <input
+                type="text"
+                placeholder="Search all content..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-12 pr-4 py-3 rounded-xl border focus:ring-2 focus:ring-[var(--glp-sage)] focus:border-transparent"
+                style={{ borderColor: 'var(--glp-sage-20)', background: 'white' }}
+                data-testid="input-search"
+              />
             </div>
-          )}
-
-          <footer className="mt-12 text-center">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-[var(--sage-500)] hover:text-[var(--teal-600)] transition"
+            
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="px-4 py-3 rounded-xl border focus:ring-2 focus:ring-[var(--glp-sage)]"
+              style={{ borderColor: 'var(--glp-sage-20)', background: 'white', color: 'var(--glp-sage-deep)' }}
+              data-testid="select-category"
             >
-              <Home className="h-4 w-4" aria-hidden="true" /> Return Home
-            </Link>
-          </footer>
+              {categories.map(cat => (
+                <option key={cat} value={cat}>
+                  {cat === "all" ? "All Categories" : cat}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-1 mt-4" role="navigation" aria-label="Alphabetical navigation">
+            {alphabet.map(letter => {
+              const hasContent = availableLetters.includes(letter);
+              return (
+                <button
+                  key={letter}
+                  onClick={() => hasContent && scrollToLetter(letter)}
+                  disabled={!hasContent}
+                  className={`w-8 h-8 rounded-lg text-sm font-medium transition-all ${
+                    hasContent 
+                      ? "hover:scale-110 cursor-pointer" 
+                      : "opacity-30 cursor-not-allowed"
+                  }`}
+                  style={{ 
+                    background: hasContent ? 'var(--glp-sage-15)' : 'transparent',
+                    color: hasContent ? 'var(--glp-sage-deep)' : 'var(--glp-sage)'
+                  }}
+                  aria-label={`Jump to ${letter}`}
+                  data-testid={`nav-letter-${letter}`}
+                >
+                  {letter}
+                </button>
+              );
+            })}
+          </div>
         </div>
+
+        <div className="text-sm mb-6 text-center" style={{ color: 'var(--glp-sage)' }}>
+          Showing {filteredContent.length} items {selectedCategory !== "all" && `in ${selectedCategory}`}
+        </div>
+
+        <div className="space-y-8">
+          {availableLetters.map(letter => (
+            <section key={letter} id={`section-${letter}`} className="scroll-mt-48">
+              <div className="flex items-center gap-4 mb-4">
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl font-bold text-white"
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+                >
+                  {letter}
+                </div>
+                <div className="flex-1 h-px" style={{ background: 'var(--glp-sage-20)' }} />
+                <span className="text-sm" style={{ color: 'var(--glp-sage)' }}>
+                  {groupedByLetter[letter].length} items
+                </span>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {groupedByLetter[letter].map((item, idx) => {
+                  const ItemIcon = item.icon;
+                  return (
+                    <Link
+                      key={idx}
+                      href={item.path}
+                      className="group p-4 rounded-xl border transition-all hover:shadow-lg hover:-translate-y-0.5"
+                      style={{ 
+                        background: 'white', 
+                        borderColor: 'var(--glp-sage-15)'
+                      }}
+                      data-testid={`link-${item.path.slice(1)}`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 rounded-lg" style={{ background: 'var(--glp-sage-10)' }}>
+                          <ItemIcon className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <h3 className="font-semibold truncate group-hover:text-[var(--glp-sage-deep)] transition-colors" style={{ color: 'var(--glp-charcoal)' }}>
+                              {item.name}
+                            </h3>
+                            {item.protected && (
+                              <span className="text-xs px-1.5 py-0.5 rounded" style={{ background: 'var(--glp-gold-30)', color: 'var(--glp-charcoal)' }}>
+                                Pro
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm mt-1 line-clamp-2" style={{ color: 'var(--glp-sage)' }}>
+                            {item.description}
+                          </p>
+                          <div className="flex items-center justify-between mt-2">
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${categoryColors[item.category] || categoryColors.Wellness}`}>
+                              {item.category}
+                            </span>
+                            <ChevronRight className="h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" style={{ color: 'var(--glp-sage)' }} />
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        {filteredContent.length === 0 && (
+          <div className="text-center py-16 rounded-2xl" style={{ background: 'white', border: '1px solid var(--glp-sage-15)' }}>
+            <Search className="h-12 w-12 mx-auto mb-4" style={{ color: 'var(--glp-sage-30)' }} />
+            <p className="text-lg font-medium" style={{ color: 'var(--glp-sage-deep)' }}>No content found</p>
+            <p className="mt-2" style={{ color: 'var(--glp-sage)' }}>Try adjusting your search or filter</p>
+            <button 
+              onClick={() => { setSearchQuery(""); setSelectedCategory("all"); }}
+              className="mt-4 px-6 py-2 rounded-xl font-medium transition-colors"
+              style={{ background: 'var(--glp-sage)', color: 'white' }}
+              data-testid="button-clear-filters"
+            >
+              Clear Filters
+            </button>
+          </div>
+        )}
+
+        <footer className="mt-16 text-center pb-8">
+          <p className="text-sm mb-4" style={{ color: 'var(--glp-sage)' }}>
+            360° Support from A to Z — Live in Genuine Love
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all hover:shadow-lg"
+            style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'white' }}
+            data-testid="link-return-home"
+          >
+            <Home className="h-4 w-4" /> Return Home
+          </Link>
+        </footer>
       </div>
     </div>
   );
