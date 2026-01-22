@@ -1,17 +1,21 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-21T15:23:55.031Z`
+Generated: `2026-01-22T05:10:32.476Z`
 
 ## Summary
 - Files scanned: **925**
-- Routes detected: **92**
-- Link occurrences: **539**
+- Routes detected: **97**
+- Link occurrences: **619**
 - Broken: **0**
 - Warnings: **0**
 
 ## Routes Detected (sample)
 - `/`
 - `/home`
+- `/welcome`
+- `/original-home`
+- `/design-system`
+- `/wireframes`
 - `/login`
 - `/login/callback`
 - `/register`
@@ -22,6 +26,7 @@ Generated: `2026-01-21T15:23:55.031Z`
 - `/social`
 - `/control`
 - `/pricing`
+- `/crm`
 - `/blog`
 - `/blog/:slug`
 - `/write`
@@ -85,12 +90,7 @@ Generated: `2026-01-21T15:23:55.031Z`
 - `/knowledge-synthesis`
 - `/wisdom-practices`
 - `/growth-analytics`
-- `/guided-journaling`
-- `/insight-cards`
-- `/progress`
-- `/wisdom-synthesis`
-- `/cognitive-architecture`
-- … (12 more)
+- … (17 more)
 
 ## Broken Links
 ✅ None

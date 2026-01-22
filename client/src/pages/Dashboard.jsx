@@ -180,7 +180,7 @@ export default function Dashboard() {
                 <span className="font-semibold text-slate-700 group-hover:text-amber-600 transition-colors">Q&A Community</span>
               </div>
             </Link>
-            <Link href="/crisis-resources" className="group" data-testid="link-quick-crisis" aria-label="Go to Crisis Support">
+            <Link href="/crisis" className="group" data-testid="link-quick-crisis" aria-label="Go to Crisis Support">
               <div className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-rose-200 hover:shadow-lg transition-all text-center">
                 <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'rgba(244, 199, 195, 0.3)' }}>
                   <Heart className="w-6 h-6" style={{ color: '#f4c7c3' }} aria-hidden="true" />

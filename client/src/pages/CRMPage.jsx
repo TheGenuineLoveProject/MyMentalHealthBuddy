@@ -100,7 +100,7 @@ export default function CRMPage() {
                   Today's Schedule
                 </h2>
                 <Link 
-                  href="/calendar" 
+                  href="/dashboard" 
                   className="text-sm text-[#8fbf9f] hover:underline flex items-center gap-1"
                   data-testid="link-calendar"
                 >
