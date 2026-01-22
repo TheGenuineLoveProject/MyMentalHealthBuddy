@@ -613,15 +613,8 @@ export default function CanvaLanding() {
             <span className="text-sm text-white/80 font-medium">Start your transformation today</span>
           </div>
           
-          {/* Lotus in Teal Bar */}
-          <div className="w-12 mx-auto mb-3 h-1.5 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, transparent, var(--glp-sage-deep), var(--glp-sage-deep), transparent)' }}>
-            <div className="w-1.5 h-1.5 rounded-full flex items-center justify-center overflow-hidden" style={{ background: 'var(--glp-white)' }}>
-              <img 
-                src="/brand/footer-wellness-graphic.png" 
-                alt="Lotus flower" 
-                className="w-1 h-1 object-cover"
-              />
-            </div>
+          {/* Subtle Divider */}
+          <div className="w-8 mx-auto mb-3 h-px rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, transparent, var(--glp-white), transparent)' }}>
           </div>
           
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white leading-tight">
