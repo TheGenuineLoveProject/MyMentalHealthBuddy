@@ -700,13 +700,10 @@ export default function CanvaLanding() {
           
           {/* Centered Brand Logo Section */}
           <div className="flex flex-col items-center justify-center py-12" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-            <div className="w-32 h-32 sm:w-40 sm:h-40 mb-6">
+            <div className="w-40 h-40 sm:w-48 sm:h-48 mb-4">
               <img src="/brand/logo-monogram.png" alt="The Genuine Love Project" className="w-full h-full object-contain" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-center mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
-              The Genuine Love Project
-            </h3>
-            <p className="text-sm sm:text-base text-center tracking-widest uppercase" style={{ color: 'var(--glp-sage)' }}>
+            <p className="text-sm sm:text-base text-center tracking-widest uppercase font-medium" style={{ color: 'var(--glp-sage)' }}>
               Live in Genuine Love
             </p>
           </div>
