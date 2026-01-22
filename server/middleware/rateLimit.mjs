@@ -91,10 +91,12 @@ export const apiRateLimit = rateLimit({
 /**
  * Auth rate limit (generic) - for register / refresh if desired.
  * Returns 429 and can be descriptive (not used for login to avoid leaking).
+ * Higher limits for test environment.
  */
+const isTestEnv = process.env.NODE_ENV === "test" || process.env.VITEST === "true";
 export const authRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: isTestEnv ? 500 : 10,
   standardHeaders: true,
   legacyHeaders: false,
   message: {

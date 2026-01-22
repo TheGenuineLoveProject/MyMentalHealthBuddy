@@ -11,7 +11,7 @@
     "build": "vite build",
     "start": "node server/index.mjs",
     "db:push": "drizzle-kit push",
-    "test": "vitest run",
+    "test": "NODE_ENV=test vitest run",
     "test:auth": "vitest run tests/auth.test.mjs",
     "test:api": "vitest run tests/api.test.mjs",
     "test:all": "vitest run tests/",
