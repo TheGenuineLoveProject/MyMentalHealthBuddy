@@ -406,20 +406,19 @@ export default function MeditationGuidePage() {
               <button
                 key={med.id}
                 onClick={() => setSelectedMeditation(med)}
-                className={`w-full text-left p-4 rounded-xl transition-all ${
-                  selectedMeditation.id === med.id
-                    ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
-                    : "bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
-                }`}
+                className="w-full text-left p-4 rounded-xl transition-all"
+                style={selectedMeditation.id === med.id
+                  ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)', boxShadow: '0 10px 25px -3px rgba(0,0,0,0.15)' }
+                  : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
                 data-testid={`button-meditation-${med.id}`}
               >
                 <div className="flex items-center gap-3">
-                  <med.icon className={`h-5 w-5 ${selectedMeditation.id === med.id ? "text-white" : "text-indigo-500"}`} />
+                  <med.icon className="h-5 w-5" style={{ color: selectedMeditation.id === med.id ? 'var(--glp-paper)' : 'var(--glp-sage)' }} />
                   <div>
-                    <h3 className={`font-medium ${selectedMeditation.id === med.id ? "text-white" : "text-slate-900 dark:text-white"}`}>
+                    <h3 className="font-medium" style={{ color: selectedMeditation.id === med.id ? 'var(--glp-paper)' : 'var(--glp-ink)' }}>
                       {med.name}
                     </h3>
-                    <p className={`text-sm ${selectedMeditation.id === med.id ? "text-white/80" : "text-slate-500 dark:text-slate-400"}`}>
+                    <p className="text-sm" style={{ color: selectedMeditation.id === med.id ? 'rgba(255,255,255,0.8)' : 'var(--glp-sage)' }}>
                       {med.duration}
                     </p>
                   </div>
@@ -432,20 +431,20 @@ export default function MeditationGuidePage() {
           </div>
         </div>
 
-        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-amber-600" />
+        <div className="mt-12 rounded-2xl p-6" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+          <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <Sparkles className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
             Tips for Your Practice
           </h3>
-          <div className="grid md:grid-cols-3 gap-4 text-sm text-slate-600 dark:text-slate-400">
+          <div className="grid md:grid-cols-3 gap-4 text-sm" style={{ color: 'var(--glp-sage)' }}>
             <div>
-              <strong className="text-slate-800 dark:text-slate-200">Consistency over duration:</strong> 5 minutes daily beats 30 minutes occasionally. The brain changes through repetition.
+              <strong style={{ color: 'var(--glp-ink)' }}>Consistency over duration:</strong> 5 minutes daily beats 30 minutes occasionally. The brain changes through repetition.
             </div>
             <div>
-              <strong className="text-slate-800 dark:text-slate-200">Mind-wandering is normal:</strong> Noticing you've wandered and returning IS the practice. Each return strengthens attention.
+              <strong style={{ color: 'var(--glp-ink)' }}>Mind-wandering is normal:</strong> Noticing you've wandered and returning IS the practice. Each return strengthens attention.
             </div>
             <div>
-              <strong className="text-slate-800 dark:text-slate-200">No wrong way:</strong> If you're paying attention to your experience, you're meditating. Drop perfectionism.
+              <strong style={{ color: 'var(--glp-ink)' }}>No wrong way:</strong> If you're paying attention to your experience, you're meditating. Drop perfectionism.
             </div>
           </div>
         </div>
@@ -459,9 +458,9 @@ export default function MeditationGuidePage() {
           title="Continue Your Mindfulness Journey"
         />
 
-        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
-          <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2 text-center">How to Practice Safely</h4>
-          <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-2 max-w-2xl mx-auto">
+        <div className="mt-12 rounded-2xl p-6" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+          <h4 className="font-semibold mb-2 text-center" style={{ color: 'var(--glp-gold-dark)' }}>How to Practice Safely</h4>
+          <ul className="text-sm space-y-2 max-w-2xl mx-auto" style={{ color: 'var(--glp-sage-deep)' }}>
             <li>• Meditation is a practice, not a perfection. Be patient and compassionate with yourself.</li>
             <li>• If you experience significant distress, <strong>pause immediately</strong> and ground yourself (feet on floor, slow breaths).</li>
             <li>• For trauma survivors: parts work and body scans can sometimes bring up difficult material. Go slowly and stay within your window of tolerance.</li>
@@ -469,8 +468,8 @@ export default function MeditationGuidePage() {
             <li>• These guided practices are educational tools, not therapy or medical treatment.</li>
           </ul>
         </div>
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
+        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
             This content is for educational and wellness purposes and is not a substitute for professional mental health care.
           </p>
         </div>

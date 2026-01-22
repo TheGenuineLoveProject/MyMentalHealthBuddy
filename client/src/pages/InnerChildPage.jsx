@@ -190,16 +190,17 @@ function NeedCard({ need, isSelected, onSelect }) {
   return (
     <button
       onClick={onSelect}
-      className={`text-left p-6 rounded-2xl transition-all ${isSelected 
-        ? "bg-gradient-to-br from-rose-400 to-pink-500 text-white shadow-lg scale-105" 
-        : "bg-white dark:bg-slate-800 hover:shadow-md border border-slate-200 dark:border-slate-700"}`}
+      className="text-left p-6 rounded-2xl transition-all hover:shadow-md"
+      style={isSelected 
+        ? { background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))', color: 'var(--glp-paper)', boxShadow: '0 10px 25px -3px rgba(0,0,0,0.15)', transform: 'scale(1.05)' }
+        : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
       data-testid={`button-need-${need.need.toLowerCase().replace(/\s+/g, '-')}`}
     >
-      <need.icon className={`h-8 w-8 mb-3 ${isSelected ? "text-white" : "text-rose-500"}`} />
-      <h3 className={`font-semibold mb-1 ${isSelected ? "text-white" : "text-slate-900 dark:text-white"}`}>
+      <need.icon className="h-8 w-8 mb-3" style={{ color: isSelected ? 'var(--glp-paper)' : 'var(--glp-rose)' }} />
+      <h3 className="font-semibold mb-1" style={{ color: isSelected ? 'var(--glp-paper)' : 'var(--glp-ink)' }}>
         {need.need}
       </h3>
-      <p className={`text-sm ${isSelected ? "text-white/80" : "text-slate-600 dark:text-slate-400"}`}>
+      <p className="text-sm" style={{ color: isSelected ? 'rgba(255,255,255,0.8)' : 'var(--glp-sage)' }}>
         {need.description}
       </p>
     </button>
@@ -208,30 +209,30 @@ function NeedCard({ need, isSelected, onSelect }) {
 
 function NeedDetail({ need }) {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
+    <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)' }}>
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-4 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 text-white">
+        <div className="p-4 rounded-xl" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))', color: 'var(--glp-paper)' }}>
           <need.icon className="h-8 w-8" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">The Need for {need.need}</h2>
-          <p className="text-slate-600 dark:text-slate-400">{need.description}</p>
+          <h2 className="text-2xl font-bold" style={{ color: 'var(--glp-ink)' }}>The Need for {need.need}</h2>
+          <p style={{ color: 'var(--glp-sage)' }}>{need.description}</p>
         </div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 mb-6">
-        <div className="bg-rose-50 dark:bg-rose-950/30 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-3">When This Need Was Unmet</h3>
-          <p className="text-slate-600 dark:text-slate-400 text-sm mb-4">{need.whenUnmet}</p>
-          <h4 className="font-medium text-slate-800 dark:text-slate-200 text-sm mb-2">Common Origins:</h4>
-          <p className="text-slate-600 dark:text-slate-400 text-sm">{need.woundOrigins}</p>
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-rose-15)' }}>
+          <h3 className="font-semibold mb-3" style={{ color: 'var(--glp-ink)' }}>When This Need Was Unmet</h3>
+          <p className="text-sm mb-4" style={{ color: 'var(--glp-sage)' }}>{need.whenUnmet}</p>
+          <h4 className="font-medium text-sm mb-2" style={{ color: 'var(--glp-ink)' }}>Common Origins:</h4>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{need.woundOrigins}</p>
         </div>
-        <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-3">Healing Practices</h3>
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+          <h3 className="font-semibold mb-3" style={{ color: 'var(--glp-ink)' }}>Healing Practices</h3>
           <ul className="space-y-2">
             {need.healingPractices.map((practice, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-slate-600 dark:text-slate-400 text-sm">
-                <Sparkles className="h-4 w-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <li key={idx} className="flex items-start gap-2 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                <Sparkles className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-sage)' }} />
                 {practice}
               </li>
             ))}
@@ -239,16 +240,16 @@ function NeedDetail({ need }) {
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-xl p-6 mb-6">
-        <Heart className="h-6 w-6 text-rose-500 mb-2" />
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Affirmation</h3>
-        <p className="text-lg italic text-slate-700 dark:text-slate-300">"{need.affirmation}"</p>
+      <div className="rounded-xl p-6 mb-6" style={{ background: 'var(--glp-gold-30)' }}>
+        <Heart className="h-6 w-6 mb-2" style={{ color: 'var(--glp-rose)' }} />
+        <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Affirmation</h3>
+        <p className="text-lg italic" style={{ color: 'var(--glp-sage-deep)' }}>"{need.affirmation}"</p>
       </div>
 
-      <div className="bg-purple-50 dark:bg-purple-950/30 rounded-xl p-6">
-        <Gift className="h-5 w-5 text-purple-600 dark:text-purple-400 mb-2" />
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Reparenting Action</h3>
-        <p className="text-slate-600 dark:text-slate-400 text-sm">{need.reparentingAction}</p>
+      <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+        <Gift className="h-5 w-5 mb-2" style={{ color: 'var(--glp-sage-deep)' }} />
+        <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Reparenting Action</h3>
+        <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{need.reparentingAction}</p>
       </div>
     </div>
   );
@@ -331,18 +332,18 @@ export default function InnerChildPage() {
           <NeedDetail need={selectedNeed} />
         </div>
 
-        <div className="bg-indigo-50 dark:bg-indigo-950/30 rounded-2xl p-8 mb-12">
+        <div className="rounded-2xl p-8 mb-12" style={{ background: 'var(--glp-sage-10)' }}>
           <div className="flex items-center gap-3 mb-6">
-            <Brain className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-            <h2 className="text-xl font-bold text-slate-900 dark:text-white">{ifsPartsWork.title}</h2>
+            <Brain className="h-8 w-8" style={{ color: 'var(--glp-sage-deep)' }} />
+            <h2 className="text-xl font-bold" style={{ color: 'var(--glp-ink)' }}>{ifsPartsWork.title}</h2>
           </div>
-          <p className="text-slate-600 dark:text-slate-400 mb-6">{ifsPartsWork.description}</p>
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-6 mb-4">
-            <h3 className="font-semibold text-slate-900 dark:text-white mb-4">A Simple IFS Practice</h3>
+          <p className="mb-6" style={{ color: 'var(--glp-sage)' }}>{ifsPartsWork.description}</p>
+          <div className="rounded-xl p-6 mb-4" style={{ background: 'var(--glp-paper)' }}>
+            <h3 className="font-semibold mb-4" style={{ color: 'var(--glp-ink)' }}>A Simple IFS Practice</h3>
             <ol className="space-y-3">
               {ifsPartsWork.steps.map((step, idx) => (
-                <li key={idx} className="flex items-start gap-3 text-slate-600 dark:text-slate-400">
-                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-sm flex items-center justify-center font-medium">
+                <li key={idx} className="flex items-start gap-3" style={{ color: 'var(--glp-sage)' }}>
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full text-sm flex items-center justify-center font-medium" style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}>
                     {idx + 1}
                   </span>
                   {step}
@@ -350,19 +351,19 @@ export default function InnerChildPage() {
               ))}
             </ol>
           </div>
-          <div className="bg-indigo-100 dark:bg-indigo-900/50 rounded-xl p-4">
-            <p className="text-sm text-indigo-800 dark:text-indigo-200 italic">
+          <div className="rounded-xl p-4" style={{ background: 'var(--glp-sage-15)' }}>
+            <p className="text-sm italic" style={{ color: 'var(--glp-sage-deep)' }}>
               <strong>Key Principle:</strong> {ifsPartsWork.keyPrinciple}
             </p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg mb-12">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-            <MessageCircle className="h-6 w-6 text-purple-500" />
+        <div className="rounded-2xl p-8 shadow-lg mb-12" style={{ background: 'var(--glp-paper)' }}>
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <MessageCircle className="h-6 w-6" style={{ color: 'var(--glp-sage-deep)' }} />
             Letter to Your Inner Child
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-6">
+          <p className="mb-6" style={{ color: 'var(--glp-sage)' }}>
             Writing to your younger self is one of the most powerful healing practices. It bridges past and present, 
             giving your child self what they needed to hear while helping your adult self process old pain.
           </p>
@@ -371,59 +372,60 @@ export default function InnerChildPage() {
               <button
                 key={idx}
                 onClick={() => setSelectedPrompt(idx)}
-                className={`px-4 py-2 rounded-full text-sm transition-colors ${selectedPrompt === idx
-                  ? "bg-purple-500 text-white"
-                  : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600"}`}
+                className="px-4 py-2 rounded-full text-sm transition-colors"
+                style={selectedPrompt === idx
+                  ? { background: 'var(--glp-sage)', color: 'var(--glp-paper)' }
+                  : { background: 'var(--glp-sage-15)', color: 'var(--glp-sage)' }}
                 data-testid={`button-prompt-${idx}`}
               >
                 Prompt {idx + 1}
               </button>
             ))}
           </div>
-          <div className="bg-purple-50 dark:bg-purple-950/30 rounded-xl p-6">
-            <p className="text-lg text-purple-700 dark:text-purple-300 italic mb-3">
+          <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+            <p className="text-lg italic mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               "{healingLetterPrompts[selectedPrompt].prompt}"
             </p>
-            <p className="text-sm text-purple-600 dark:text-purple-400">
+            <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
               {healingLetterPrompts[selectedPrompt].guidance}
             </p>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-teal-50 to-emerald-50 dark:from-teal-950/30 dark:to-emerald-950/30 rounded-2xl p-8 mb-12">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">Developmental Stages & Wounds</h2>
-          <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
+        <div className="rounded-2xl p-8 mb-12" style={{ background: 'var(--glp-sage-10)' }}>
+          <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>Developmental Stages & Wounds</h2>
+          <p className="text-center mb-8 max-w-2xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
             Erik Erikson's developmental stages help us understand when certain wounds may have formed. 
             Identifying your stage-specific wounds can guide more targeted healing work.
           </p>
           <div className="space-y-4">
             {developmentalStages.map((stage, idx) => (
-              <div key={idx} className="bg-white dark:bg-slate-800 rounded-xl p-6">
+              <div key={idx} className="rounded-xl p-6" style={{ background: 'var(--glp-paper)' }}>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-teal-100 dark:bg-teal-900 flex items-center justify-center">
-                    <span className="text-teal-700 dark:text-teal-300 font-bold">{idx + 1}</span>
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}>
+                    <span className="font-bold" style={{ color: 'var(--glp-sage-deep)' }}>{idx + 1}</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-slate-900 dark:text-white">{stage.stage}</h3>
-                    <p className="text-sm text-teal-600 dark:text-teal-400">{stage.theme}</p>
+                    <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>{stage.stage}</h3>
+                    <p className="text-sm" style={{ color: 'var(--glp-sage-deep)' }}>{stage.theme}</p>
                   </div>
                 </div>
                 <div className="grid md:grid-cols-4 gap-4 text-sm">
                   <div>
-                    <h4 className="font-medium text-slate-800 dark:text-slate-200 mb-1">Core Needs</h4>
-                    <p className="text-slate-600 dark:text-slate-400">{stage.needs}</p>
+                    <h4 className="font-medium mb-1" style={{ color: 'var(--glp-ink)' }}>Core Needs</h4>
+                    <p style={{ color: 'var(--glp-sage)' }}>{stage.needs}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-slate-800 dark:text-slate-200 mb-1">When Wounded</h4>
-                    <p className="text-slate-600 dark:text-slate-400">{stage.wounds}</p>
+                    <h4 className="font-medium mb-1" style={{ color: 'var(--glp-ink)' }}>When Wounded</h4>
+                    <p style={{ color: 'var(--glp-sage)' }}>{stage.wounds}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-slate-800 dark:text-slate-200 mb-1">Adult Impact</h4>
-                    <p className="text-slate-600 dark:text-slate-400">{stage.adultManifestation}</p>
+                    <h4 className="font-medium mb-1" style={{ color: 'var(--glp-ink)' }}>Adult Impact</h4>
+                    <p style={{ color: 'var(--glp-sage)' }}>{stage.adultManifestation}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-slate-800 dark:text-slate-200 mb-1">Healing Focus</h4>
-                    <p className="text-slate-600 dark:text-slate-400">{stage.healingFocus}</p>
+                    <h4 className="font-medium mb-1" style={{ color: 'var(--glp-ink)' }}>Healing Focus</h4>
+                    <p style={{ color: 'var(--glp-sage)' }}>{stage.healingFocus}</p>
                   </div>
                 </div>
               </div>
@@ -431,44 +433,44 @@ export default function InnerChildPage() {
           </div>
         </div>
 
-        <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-2xl p-8 mb-12">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-            <Gift className="h-6 w-6 text-emerald-500" />
+        <div className="rounded-2xl p-8 mb-12" style={{ background: 'var(--glp-sage-10)' }}>
+          <h2 className="text-xl font-bold mb-6 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <Gift className="h-6 w-6" style={{ color: 'var(--glp-sage)' }} />
             Daily Acts of Reparenting
           </h2>
-          <p className="text-slate-600 dark:text-slate-400 mb-6">
+          <p className="mb-6" style={{ color: 'var(--glp-sage)' }}>
             Reparenting isn't a one-time event—it's a daily practice of treating yourself with the care you deserved all along.
           </p>
           <div className="grid md:grid-cols-2 gap-4">
             {reparentingActs.map((item, idx) => (
-              <div key={idx} className="bg-white dark:bg-slate-800 rounded-xl p-4 flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-900/50">
-                  <item.icon className="h-5 w-5 text-emerald-600 dark:text-emerald-400" />
+              <div key={idx} className="rounded-xl p-4 flex items-start gap-4" style={{ background: 'var(--glp-paper)' }}>
+                <div className="p-2 rounded-lg" style={{ background: 'var(--glp-sage-15)' }}>
+                  <item.icon className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
                 </div>
                 <div>
-                  <h3 className="font-medium text-slate-900 dark:text-white mb-1">{item.act}</h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{item.example}</p>
+                  <h3 className="font-medium mb-1" style={{ color: 'var(--glp-ink)' }}>{item.act}</h3>
+                  <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{item.example}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="text-center bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-950/30 dark:to-pink-950/30 rounded-2xl p-8 mb-12">
-          <Heart className="h-10 w-10 text-rose-500 mx-auto mb-4" />
-          <blockquote className="text-lg text-slate-700 dark:text-slate-300 max-w-2xl mx-auto italic mb-4">
+        <div className="text-center rounded-2xl p-8 mb-12" style={{ background: 'var(--glp-rose-15)' }}>
+          <Heart className="h-10 w-10 mx-auto mb-4" style={{ color: 'var(--glp-rose)' }} />
+          <blockquote className="text-lg max-w-2xl mx-auto italic mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
             "It's never too late to have a happy childhood. You can give your inner child now 
             what they didn't receive then. Every moment of conscious reparenting rewrites the story 
             your nervous system carries."
           </blockquote>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
             — Adapted from inner child healing traditions
           </p>
         </div>
 
-        <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6 mb-8">
-          <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">Important Safety Guidance</h4>
-          <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-2">
+        <div className="rounded-2xl p-6 mb-8" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+          <h4 className="font-semibold mb-2" style={{ color: 'var(--glp-gold-dark)' }}>Important Safety Guidance</h4>
+          <ul className="text-sm space-y-2" style={{ color: 'var(--glp-sage-deep)' }}>
             <li>• Inner child work can bring up intense emotions and memories. <strong>Move gently</strong> and stay within your window of tolerance.</li>
             <li>• If you feel overwhelmed, <strong>pause and ground yourself</strong>—try the 5-4-3-2-1 senses technique or step away.</li>
             <li>• This content is <strong>not therapy</strong> and is not a substitute for professional mental health care.</li>
@@ -477,8 +479,8 @@ export default function InnerChildPage() {
           </ul>
         </div>
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
+        <div className="text-center py-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
             This content is designed to support your healing but is not a replacement for professional mental health care.
           </p>
         </div>

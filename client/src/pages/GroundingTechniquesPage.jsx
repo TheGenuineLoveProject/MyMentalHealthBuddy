@@ -315,23 +315,23 @@ export default function GroundingTechniquesPage() {
           </div>
         </div>
 
-        <div className="mt-16 bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-2xl p-8">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">Building Your Grounding Toolkit</h2>
+        <div className="mt-16 rounded-2xl p-8" style={{ background: 'var(--glp-gold-30)' }}>
+          <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>Building Your Grounding Toolkit</h2>
           <div className="grid md:grid-cols-3 gap-6 text-sm">
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5">
-              <Zap className="h-6 w-6 text-amber-500 mb-3" />
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">For Intense Moments</h3>
-              <p className="text-slate-600 dark:text-slate-400">Ice/cold water, strong tastes (lemon, mint), 5-4-3-2-1 senses. These create immediate sensory input that's hard to ignore.</p>
+            <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)' }}>
+              <Zap className="h-6 w-6 mb-3" style={{ color: 'var(--glp-gold)' }} />
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>For Intense Moments</h3>
+              <p style={{ color: 'var(--glp-sage)' }}>Ice/cold water, strong tastes (lemon, mint), 5-4-3-2-1 senses. These create immediate sensory input that's hard to ignore.</p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5">
-              <Heart className="h-6 w-6 text-rose-500 mb-3" />
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">For Gentle Grounding</h3>
-              <p className="text-slate-600 dark:text-slate-400">Butterfly hug, feet on ground, safe place visualization. These are soothing and can be done anywhere, including in public.</p>
+            <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)' }}>
+              <Heart className="h-6 w-6 mb-3" style={{ color: 'var(--glp-rose)' }} />
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>For Gentle Grounding</h3>
+              <p style={{ color: 'var(--glp-sage)' }}>Butterfly hug, feet on ground, safe place visualization. These are soothing and can be done anywhere, including in public.</p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5">
-              <Brain className="h-6 w-6 text-indigo-500 mb-3" />
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">For Cognitive Grounding</h3>
-              <p className="text-slate-600 dark:text-slate-400">Categories game, counting backwards, naming objects. These engage your thinking brain to calm your emotional brain.</p>
+            <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)' }}>
+              <Brain className="h-6 w-6 mb-3" style={{ color: 'var(--glp-sage-deep)' }} />
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>For Cognitive Grounding</h3>
+              <p style={{ color: 'var(--glp-sage)' }}>Categories game, counting backwards, naming objects. These engage your thinking brain to calm your emotional brain.</p>
             </div>
           </div>
         </div>
@@ -345,17 +345,17 @@ export default function GroundingTechniquesPage() {
           title="Continue Your Healing Journey"
         />
 
-        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
-          <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2 text-center">How to Use These Tools Safely</h4>
-          <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-2 max-w-2xl mx-auto">
+        <div className="mt-12 rounded-2xl p-6" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+          <h4 className="font-semibold mb-2 text-center" style={{ color: 'var(--glp-gold-dark)' }}>How to Use These Tools Safely</h4>
+          <ul className="text-sm space-y-2 max-w-2xl mx-auto" style={{ color: 'var(--glp-sage-deep)' }}>
             <li>• Grounding techniques are <strong>coping tools</strong>, not treatments. They help in the moment but don't address root causes.</li>
             <li>• If a technique causes increased distress, <strong>stop and try a different approach</strong>. Not every tool works for every person.</li>
             <li>• For persistent distress, dissociation, or trauma symptoms, please reach out to a trauma-informed mental health professional.</li>
             <li>• These tools are not a substitute for professional care if you're experiencing a mental health crisis.</li>
           </ul>
         </div>
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
+        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
             This content is for educational purposes and is not medical or mental health advice.
           </p>
         </div>
