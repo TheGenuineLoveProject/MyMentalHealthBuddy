@@ -1,7 +1,7 @@
 entrypoint = "server/index.mjs"
 
 run = "echo 'Use npm run dev to start the server manually'"
-modules = ["nodejs-20", "postgresql-16"]
+modules = ["nodejs-20", "postgresql-16", "python-3.11"]
 
 [deployment]
 deploymentTarget = "gce"
