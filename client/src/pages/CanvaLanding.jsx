@@ -608,9 +608,9 @@ export default function CanvaLanding() {
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 backdrop-blur-sm mb-6">
-            <Sparkles className="w-5 h-5 text-[var(--glp-gold)]" />
-            <span className="text-xl md:text-2xl text-[var(--glp-gold)] font-serif font-bold">Start your transformation today</span>
+          <div className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-white/10 backdrop-blur-sm mb-6">
+            <Sparkles className="w-6 h-6 text-[var(--glp-gold)]" />
+            <span className="text-2xl md:text-3xl text-[var(--glp-gold)] font-serif font-bold">Start your transformation today</span>
           </div>
           
           {/* Lotus Accent */}
