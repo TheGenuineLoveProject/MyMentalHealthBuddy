@@ -615,7 +615,7 @@ export default function CanvaLanding() {
           </div>
           
           {/* Lotus Accent */}
-          <div className="w-full flex items-center justify-center my-12" style={{ position: 'relative' }}>
+          <div className="w-full flex items-center justify-center mt-20 mb-12" style={{ position: 'relative' }}>
             <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '6px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent)' }}></div>
             <div className="relative rounded-full overflow-hidden" style={{ width: '220px', height: '220px', background: 'var(--glp-white)', boxShadow: '0 14px 56px rgba(0,0,0,0.22)' }}>
               <img 
