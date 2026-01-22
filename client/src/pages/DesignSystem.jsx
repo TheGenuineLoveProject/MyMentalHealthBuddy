@@ -5,9 +5,10 @@ import {
   MessageCircle, LogIn, ChevronDown, ChevronRight, Smartphone, Tablet, 
   Monitor, Check, AlertCircle, Info, Sparkles, Menu, X, Bell, Settings,
   Search, Plus, Filter, Star, Calendar, TrendingUp, Users, FileText,
-  PenLine, Smile, BarChart3, Shield, Lock, Clock, Zap, Eye, Edit, Trash
+  PenLine, Smile, BarChart3, Shield, Lock, Clock, Zap, Eye, Edit, Trash, ExternalLink
 } from "lucide-react";
 import "../styles/canva-landing.css";
+import FlowDiagram from "../components/FlowDiagram.jsx";
 
 export default function DesignSystem() {
   const [activeSection, setActiveSection] = useState("overview");
@@ -756,40 +757,37 @@ export default function DesignSystem() {
           {/* User Flow Section */}
           {activeSection === "flow" && (
             <section className="space-y-8">
-              <div>
-                <h1 className="text-4xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
-                  User Flow
-                </h1>
-                <p style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
-                  Linear, user-centered journey through the platform.
-                </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-4xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+                    Screen Flow
+                  </h1>
+                  <p style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                    Linear, user-centered journey through the platform.
+                  </p>
+                </div>
+                <Link href="/wireframes">
+                  <button 
+                    className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+                    style={{ background: '#eac33b', color: '#2f5d5d' }}
+                    data-testid="link-wireframes"
+                  >
+                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                    View Wireframes
+                  </button>
+                </Link>
               </div>
 
-              {/* Flow Diagram */}
-              <div className="p-6 rounded-2xl overflow-x-auto" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
-                <div className="flex items-center gap-4 min-w-max">
-                  {[
-                    { icon: Home, label: "Landing", color: "#8fbf9f" },
-                    { icon: LogIn, label: "Auth", color: "#2f5d5d" },
-                    { icon: Sparkles, label: "Onboarding", color: "#eac33b" },
-                    { icon: LayoutDashboard, label: "Dashboard", color: "#2f5d5d" },
-                    { icon: MessageCircle, label: "AI Chat", color: "#8fbf9f" },
-                    { icon: BookOpen, label: "Content", color: "#f4c7c3" },
-                    { icon: Users, label: "Community", color: "#eac33b" }
-                  ].map((step, i, arr) => (
-                    <div key={i} className="flex items-center gap-4">
-                      <div className="flex flex-col items-center">
-                        <div className="w-16 h-16 rounded-full flex items-center justify-center mb-2" style={{ background: step.color }}>
-                          <step.icon className="w-8 h-8 text-white" />
-                        </div>
-                        <span className="text-sm font-semibold" style={{ color: 'var(--deep-teal)' }}>{step.label}</span>
-                      </div>
-                      {i < arr.length - 1 && (
-                        <ArrowRight className="w-8 h-8" style={{ color: 'var(--sage-green)' }} />
-                      )}
-                    </div>
-                  ))}
-                </div>
+              {/* SVG Flow Diagram */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Interactive Flow Diagram</h3>
+                <FlowDiagram />
+              </div>
+
+              {/* Compact Flow */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Compact Flow View</h3>
+                <FlowDiagram compact />
               </div>
 
               {/* Detailed Flows */}
