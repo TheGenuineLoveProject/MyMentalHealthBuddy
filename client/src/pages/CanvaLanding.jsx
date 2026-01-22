@@ -149,15 +149,15 @@ export default function CanvaLanding() {
       {/* Header / Navigation */}
       <header className="sticky top-0 z-50 backdrop-blur-xl border-b" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-15)', boxShadow: '0 2px 8px var(--glp-sage-deep-12)' }}>
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between h-[72px] sm:h-[84px] lg:h-[96px]">
+          <div className="flex items-center justify-between h-[80px] sm:h-[92px] lg:h-[108px]">
             {/* Logo - Compact on mobile, expanded on desktop */}
             <Link href="/">
-              <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-14 h-14 sm:w-[58px] sm:h-[58px] lg:w-[68px] lg:h-[68px] rounded-xl lg:rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+              <div className="flex items-center gap-5 sm:gap-6 lg:gap-7 cursor-pointer group shrink-0" data-testid="link-logo">
+                <div className="relative w-[60px] h-[60px] sm:w-[66px] sm:h-[66px] lg:w-[76px] lg:h-[76px] rounded-xl lg:rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
                   <img 
                     src="/brand/logo-mark.png" 
                     alt="" 
-                    className="w-9 h-9 sm:w-10 sm:h-10 lg:w-12 lg:h-12 object-contain"
+                    className="w-10 h-10 sm:w-11 sm:h-11 lg:w-[52px] lg:h-[52px] object-contain"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextElementSibling.style.display = 'flex';
@@ -166,10 +166,10 @@ export default function CanvaLanding() {
                   <Heart className="w-5 h-5 text-white hidden" fill="currentColor" style={{ display: 'none' }} />
                 </div>
                 <div className="hidden sm:flex flex-col leading-snug">
-                  <span className="text-lg lg:text-xl xl:text-[22px] font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
+                  <span className="text-xl lg:text-[22px] xl:text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
                     The Genuine Love Project
                   </span>
-                  <span className="text-[11px] lg:text-xs font-semibold tracking-[0.15em] uppercase mt-0.5" style={{ color: 'var(--glp-sage)' }}>
+                  <span className="text-xs lg:text-[13px] font-semibold tracking-[0.18em] uppercase mt-1" style={{ color: 'var(--glp-sage)' }}>
                     Live in Genuine Love
                   </span>
                 </div>
@@ -177,19 +177,19 @@ export default function CanvaLanding() {
             </Link>
 
             {/* Desktop Navigation - Centered */}
-            <nav className="hidden lg:flex items-center gap-3 xl:gap-4 absolute left-1/2 transform -translate-x-1/2">
-              <a href="#home" className="px-5 xl:px-6 py-2.5 text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Home</a>
-              <a href="#about" className="px-5 xl:px-6 py-2.5 text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>About</a>
-              <a href="#features" className="px-5 xl:px-6 py-2.5 text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Features</a>
-              <a href="#faq" className="px-5 xl:px-6 py-2.5 text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>FAQ</a>
-              <a href="/pricing" className="px-5 xl:px-6 py-2.5 text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Pricing</a>
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-5 absolute left-1/2 transform -translate-x-1/2">
+              <a href="#home" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Home</a>
+              <a href="#about" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>About</a>
+              <a href="#features" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Features</a>
+              <a href="#faq" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>FAQ</a>
+              <a href="/pricing" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Pricing</a>
             </nav>
 
             {/* CTA Buttons - Right aligned */}
-            <div className="flex items-center gap-4 sm:gap-5 shrink-0">
+            <div className="flex items-center gap-5 sm:gap-6 shrink-0">
               <Link href="/login">
                 <button 
-                  className="hidden md:inline-flex font-semibold text-sm lg:text-[15px] px-5 lg:px-6 py-2.5 lg:py-3 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:shadow-md"
+                  className="hidden md:inline-flex font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:shadow-md"
                   style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
                   data-testid="button-signin"
                 >
@@ -198,11 +198,11 @@ export default function CanvaLanding() {
               </Link>
               <Link href="/register">
                 <button 
-                  className="inline-flex items-center gap-2 font-semibold text-sm lg:text-[15px] px-5 lg:px-6 py-2.5 lg:py-3 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
+                  className="inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
                   style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 14px var(--glp-gold-30)' }}
                   data-testid="button-getstarted"
                 >
-                  <Sparkles className="w-4 h-4 lg:w-[18px] lg:h-[18px]" />
+                  <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
                   <span className="hidden sm:inline">Get Started</span>
                   <span className="sm:hidden">Start</span>
                 </button>

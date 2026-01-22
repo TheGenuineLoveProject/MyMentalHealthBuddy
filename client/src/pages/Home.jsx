@@ -6,38 +6,32 @@ const transformationalFeatures = [
   {
     icon: Brain,
     title: "AI-Powered Therapeutic Companion",
-    description: "A trauma-informed AI trained in IFS, polyvagal theory, and attachment science. Not a chatbot—a compassionate presence that meets you exactly where you are, without judgment or timelines.",
-    gradient: "from-teal-500 to-emerald-600"
+    description: "A trauma-informed AI trained in IFS, polyvagal theory, and attachment science. Not a chatbot—a compassionate presence that meets you exactly where you are, without judgment or timelines."
   },
   {
     icon: Heart,
     title: "Inner Child Healing",
-    description: "Gentle reparenting exercises to heal the wounds that formed before you had words for them. Give your younger self what they always needed: safety, validation, and unconditional love.",
-    gradient: "from-rose-500 to-pink-600"
+    description: "Gentle reparenting exercises to heal the wounds that formed before you had words for them. Give your younger self what they always needed: safety, validation, and unconditional love."
   },
   {
     icon: Shield,
     title: "Nervous System Regulation",
-    description: "Evidence-based tools grounded in polyvagal theory to shift from fight-flight-freeze into calm presence. Your nervous system isn't broken—it's protecting you. Learn to work with it.",
-    gradient: "from-indigo-500 to-purple-600"
+    description: "Evidence-based tools grounded in polyvagal theory to shift from fight-flight-freeze into calm presence. Your nervous system isn't broken—it's protecting you. Learn to work with it."
   },
   {
     icon: Compass,
     title: "Parts Work & IFS",
-    description: "Internal Family Systems-informed practices to befriend all parts of yourself—even the ones you've tried to hide. Every part has a purpose. Every part deserves compassion.",
-    gradient: "from-amber-500 to-orange-600"
+    description: "Internal Family Systems-informed practices to befriend all parts of yourself—even the ones you've tried to hide. Every part has a purpose. Every part deserves compassion."
   },
   {
     icon: Eye,
     title: "Somatic Awareness",
-    description: "The body keeps the score, and it also holds the path to healing. Gentle body-based practices to release stored trauma and reconnect with embodied wisdom.",
-    gradient: "from-sky-500 to-blue-600"
+    description: "The body keeps the score, and it also holds the path to healing. Gentle body-based practices to release stored trauma and reconnect with embodied wisdom."
   },
   {
     icon: Anchor,
     title: "Attachment Healing",
-    description: "Understand your relationship patterns and develop earned secure attachment. Whether anxious, avoidant, or disorganized—secure connection is possible at any age.",
-    gradient: "from-emerald-500 to-teal-600"
+    description: "Understand your relationship patterns and develop earned secure attachment. Whether anxious, avoidant, or disorganized—secure connection is possible at any age."
   }
 ];
 
@@ -119,24 +113,27 @@ export default function Home() {
       <div className="decorative-orb decorative-orb-gold w-[300px] h-[300px] bottom-32 left-1/4 absolute" aria-hidden="true" />
 
       <nav 
-        className="relative z-10 mx-auto max-w-6xl py-4 px-6 flex items-center justify-between"
+        className="relative z-10 mx-auto max-w-6xl py-5 px-6 flex items-center justify-between"
         role="banner"
       >
-        <Link href="/" className="flex items-center gap-3 min-w-0">
-          <img 
-            src="/brand/logo-mark.png" 
-            alt="The Genuine Love Project" 
-            className="h-12 w-12 object-contain flex-shrink-0"
-            data-testid="img-home-logo"
-          />
-          <span className="text-heading-sm text-teal-dark hidden md:block">
+        <Link href="/" className="flex items-center gap-4 min-w-0">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+            <img 
+              src="/brand/logo-mark.png" 
+              alt="The Genuine Love Project" 
+              className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
+              data-testid="img-home-logo"
+            />
+          </div>
+          <span className="text-xl font-bold hidden md:block" style={{ color: 'var(--glp-sage-deep)' }}>
             The Genuine Love Project
           </span>
         </Link>
-        <div className="flex items-center gap-3 sm:gap-6 flex-shrink-0">
+        <div className="flex items-center gap-4 sm:gap-6 flex-shrink-0">
           <Link 
             href="/pricing" 
-            className="text-sm text-sage font-medium hover:text-teal-dark transition-colors hidden sm:block"
+            className="text-sm font-medium transition-colors hidden sm:block hover:opacity-80"
+            style={{ color: 'var(--glp-sage)' }}
             data-testid="link-pricing-nav"
           >
             Pricing
@@ -159,7 +156,8 @@ export default function Home() {
           </span>
           
           <h1 
-            className="text-display-lg text-teal-dark text-center max-w-4xl"
+            className="text-display-lg text-center max-w-4xl"
+            style={{ color: 'var(--glp-sage-deep)' }}
             data-testid="text-headline"
           >
             Your sanctuary for emotional healing—
@@ -172,20 +170,20 @@ export default function Home() {
           </p>
 
           <div className="flex flex-wrap justify-center gap-3 text-body-sm" data-testid="text-not-therapy">
-            <span className="bg-sage-soft px-4 py-2 rounded-full flex items-center gap-2">
-              <Shield className="w-4 h-4 text-sage" />
+            <span className="px-4 py-2 rounded-full flex items-center gap-2" style={{ background: 'var(--glp-sage-10)' }}>
+              <Shield className="w-4 h-4" style={{ color: 'var(--glp-sage)' }} />
               Private by design
             </span>
-            <span className="bg-teal-50 dark:bg-teal-900/20 px-4 py-2 rounded-full flex items-center gap-2">
-              <Heart className="w-4 h-4 text-teal-600" />
+            <span className="px-4 py-2 rounded-full flex items-center gap-2" style={{ background: 'var(--glp-teal-50)' }}>
+              <Heart className="w-4 h-4" style={{ color: 'var(--glp-sage-deep)' }} />
               Trauma-informed
             </span>
-            <span className="bg-amber-50 dark:bg-amber-900/20 px-4 py-2 rounded-full flex items-center gap-2">
-              <Brain className="w-4 h-4 text-amber-600" />
+            <span className="px-4 py-2 rounded-full flex items-center gap-2" style={{ background: 'var(--glp-gold-10)' }}>
+              <Brain className="w-4 h-4" style={{ color: 'var(--glp-gold-dark)' }} />
               Evidence-based
             </span>
-            <span className="bg-rose-50 dark:bg-rose-900/20 px-4 py-2 rounded-full flex items-center gap-2">
-              <Star className="w-4 h-4 text-rose-600" />
+            <span className="px-4 py-2 rounded-full flex items-center gap-2" style={{ background: 'var(--glp-rose-15)' }}>
+              <Star className="w-4 h-4" style={{ color: 'var(--glp-rose)' }} />
               AI-powered 24/7
             </span>
           </div>
@@ -214,7 +212,7 @@ export default function Home() {
 
         <section className="mt-16 md:mt-20">
           <div className="content-center space-y-4 mb-12">
-            <h2 className="text-display-sm text-teal-dark text-center">Healing Modalities Grounded in Science</h2>
+            <h2 className="text-display-sm text-center" style={{ color: 'var(--glp-sage-deep)' }}>Healing Modalities Grounded in Science</h2>
             <p className="text-lead text-center max-w-3xl mx-auto">
               Not pop psychology or positive thinking platitudes. Real therapeutic approaches—IFS, polyvagal theory, somatic experiencing, attachment science—made accessible for your daily practice.
             </p>
@@ -228,19 +226,22 @@ export default function Home() {
                 style={{ animationDelay: `${idx * 100}ms` }}
                 data-testid={`card-feature-${idx}`}
               >
-                <div className={`icon-container icon-lg bg-gradient-to-br ${feature.gradient} text-white mb-4 group-hover:scale-110 transition-transform`}>
+                <div 
+                  className="w-14 h-14 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform"
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+                >
                   <feature.icon className="w-6 h-6" />
                 </div>
-                <h3 className="text-heading-sm text-teal-dark mb-2">{feature.title}</h3>
+                <h3 className="text-heading-sm mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{feature.title}</h3>
                 <p className="text-body-sm">{feature.description}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="mt-20 md:mt-28 bg-gradient-to-br from-sage-soft to-teal-50 dark:from-slate-800 dark:to-slate-900 rounded-3xl p-8 md:p-12">
+        <section className="mt-20 md:mt-28 rounded-3xl p-8 md:p-12" style={{ background: 'linear-gradient(135deg, var(--glp-sage-10), var(--glp-teal-50))' }}>
           <div className="content-center space-y-4 mb-10">
-            <h2 className="text-display-sm text-teal-dark text-center">The Journey of Genuine Healing</h2>
+            <h2 className="text-display-sm text-center" style={{ color: 'var(--glp-sage-deep)' }}>The Journey of Genuine Healing</h2>
             <p className="text-lead text-center max-w-2xl mx-auto">
               Healing isn't about becoming someone new—it's about coming home to who you've always been, beneath the wounds and adaptations.
             </p>
@@ -249,10 +250,10 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             {healingApproach.map((step, idx) => (
               <div key={idx} className="text-center">
-                <div className="w-16 h-16 mx-auto rounded-full bg-white dark:bg-slate-700 shadow-lg flex items-center justify-center mb-4">
-                  <step.icon className="w-8 h-8 text-teal-600" />
+                <div className="w-16 h-16 mx-auto rounded-full shadow-lg flex items-center justify-center mb-4" style={{ background: 'var(--glp-paper)' }}>
+                  <step.icon className="w-8 h-8" style={{ color: 'var(--glp-sage-deep)' }} />
                 </div>
-                <h3 className="text-heading-sm text-teal-dark mb-2">{step.title}</h3>
+                <h3 className="text-heading-sm mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{step.title}</h3>
                 <p className="text-body-sm">{step.description}</p>
               </div>
             ))}
@@ -262,12 +263,15 @@ export default function Home() {
         <section className="mt-20 md:mt-28">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {healingPillars.map((pillar, idx) => (
-              <div key={idx} className="card-bordered bg-white dark:bg-slate-800 text-center group hover:shadow-xl transition-shadow">
-                <div className="icon-container icon-lg icon-gradient-sage mx-auto mb-4 group-hover:scale-110 transition-transform">
+              <div key={idx} className="card-bordered text-center group hover:shadow-xl transition-shadow" style={{ background: 'var(--glp-paper)' }}>
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center text-white mx-auto mb-4 group-hover:scale-110 transition-transform"
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+                >
                   <pillar.icon className="w-6 h-6" />
                 </div>
-                <div className="text-2xl font-bold text-teal-600 mb-2">{pillar.stat}</div>
-                <h3 className="text-heading-sm text-teal-dark mb-2">{pillar.title}</h3>
+                <div className="text-2xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{pillar.stat}</div>
+                <h3 className="text-heading-sm mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{pillar.title}</h3>
                 <p className="text-body-sm">{pillar.description}</p>
               </div>
             ))}
@@ -276,7 +280,7 @@ export default function Home() {
 
         <section className="mt-20 md:mt-28">
           <div className="content-center space-y-4 mb-12">
-            <h2 className="text-display-sm text-teal-dark text-center">Words From The Healing Path</h2>
+            <h2 className="text-display-sm text-center" style={{ color: 'var(--glp-sage-deep)' }}>Words From The Healing Path</h2>
             <p className="text-lead text-center max-w-2xl mx-auto">
               Real experiences from people using these tools to transform their relationship with themselves.
             </p>
@@ -284,11 +288,11 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-8">
             {testimonialQuotes.map((testimonial, idx) => (
-              <div key={idx} className="card-elevated border-l-4 border-teal-500">
-                <blockquote className="text-body italic text-slate-700 dark:text-slate-300 mb-4">
+              <div key={idx} className="card-elevated" style={{ borderLeft: '4px solid var(--glp-sage)' }}>
+                <blockquote className="text-body italic mb-4" style={{ color: 'var(--glp-ink)' }}>
                   "{testimonial.quote}"
                 </blockquote>
-                <p className="text-body-sm text-slate-500">— {testimonial.attribution}</p>
+                <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>— {testimonial.attribution}</p>
               </div>
             ))}
           </div>
@@ -319,7 +323,7 @@ export default function Home() {
           </blockquote>
           
           <div className="max-w-3xl mx-auto text-center space-y-4">
-            <h3 className="text-heading-md text-teal-dark">Built for Real, Deep Healing</h3>
+            <h3 className="text-heading-md" style={{ color: 'var(--glp-sage-deep)' }}>Built for Real, Deep Healing</h3>
             <p className="text-body text-secondary">
               We understand that emotional work isn't linear. Some days you'll feel ready to dive deep into trauma processing. 
               Other days, you might just need a breathing exercise to regulate your nervous system. 
@@ -328,8 +332,8 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6 max-w-3xl mx-auto">
-            <p className="text-body-sm text-amber-800 dark:text-amber-200 text-center">
+          <div className="rounded-2xl p-6 max-w-3xl mx-auto" style={{ background: 'var(--glp-gold-10)', border: '1px solid var(--glp-gold-30)' }}>
+            <p className="text-body-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
               <strong>Important:</strong> This platform is designed to support your healing journey but is not a replacement for professional mental health care. 
               If you're in crisis, please reach out to a crisis line or mental health professional. 
               These tools are meant to complement therapy, not replace it.
@@ -338,7 +342,7 @@ export default function Home() {
         </section>
 
         <section className="mt-16 md:mt-20 content-center">
-          <div className="bg-gradient-to-br from-teal-600 to-emerald-700 rounded-3xl p-8 md:p-12 text-white text-center">
+          <div className="rounded-3xl p-8 md:p-12 text-white text-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
             <Heart className="w-12 h-12 mx-auto mb-4 opacity-80" />
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Begin Your Healing Journey Today</h2>
             <p className="text-lg opacity-90 mb-8 max-w-xl mx-auto">
@@ -346,7 +350,8 @@ export default function Home() {
             </p>
             <Link
               href="/register"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-teal-700 font-semibold rounded-xl hover:bg-cream transition-colors shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 font-semibold rounded-xl hover:opacity-90 transition-colors shadow-lg"
+              style={{ background: 'var(--glp-paper)', color: 'var(--glp-sage-deep)' }}
               data-testid="button-cta-bottom"
             >
               <Sparkles className="w-5 h-5" />
@@ -356,17 +361,17 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="relative z-10 border-t border-sage py-8 bg-sage-soft">
+      <footer className="relative z-10 py-8" style={{ borderTop: '1px solid var(--glp-sage-20)', background: 'var(--glp-sage-10)' }}>
         <div className="content-wrapper flex flex-col md:flex-row items-center justify-between gap-4 text-body-sm">
-          <span className="text-teal">© {new Date().getFullYear()} The Genuine Love Project</span>
+          <span style={{ color: 'var(--glp-sage-deep)' }}>© {new Date().getFullYear()} The Genuine Love Project</span>
           <div className="flex gap-6">
-            <Link href="/pricing" className="hover:text-sage transition-colors" data-testid="link-pricing">
+            <Link href="/pricing" className="transition-colors hover:opacity-80" style={{ color: 'var(--glp-sage)' }} data-testid="link-pricing">
               Pricing
             </Link>
-            <Link href="/blog" className="hover:text-sage transition-colors" data-testid="link-blog">
+            <Link href="/blog" className="transition-colors hover:opacity-80" style={{ color: 'var(--glp-sage)' }} data-testid="link-blog">
               Writing
             </Link>
-            <Link href="/crisis" className="hover:text-sage transition-colors" data-testid="link-crisis">
+            <Link href="/crisis" className="transition-colors hover:opacity-80" style={{ color: 'var(--glp-sage)' }} data-testid="link-crisis">
               Crisis Resources
             </Link>
           </div>

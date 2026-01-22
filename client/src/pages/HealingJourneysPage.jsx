@@ -30,9 +30,6 @@ const healingJourneys = [
     subtitle: "Building the foundation of unconditional self-acceptance",
     duration: "4 weeks",
     icon: Heart,
-    color: "text-rose-600 dark:text-rose-400",
-    bgColor: "bg-rose-50 dark:bg-rose-900/20",
-    borderColor: "border-rose-200 dark:border-rose-800",
     frameworks: ["Self-Compassion (Kristin Neff)", "Compassion-Focused Therapy", "IFS Self-Leadership"],
     description: "Transform your relationship with yourself through evidence-based practices of self-compassion, self-acceptance, and radical self-kindness. Grounded in Kristin Neff's research showing self-compassion is more beneficial than self-esteem, without the downsides. This journey rewires your inner critic into an inner ally.",
     outcomes: [
@@ -86,9 +83,6 @@ const healingJourneys = [
     subtitle: "From chronic anxiety to embodied calm",
     duration: "6 weeks",
     icon: Shield,
-    color: "text-blue-600 dark:text-blue-400",
-    bgColor: "bg-blue-50 dark:bg-blue-900/20",
-    borderColor: "border-blue-200 dark:border-blue-800",
     frameworks: ["Polyvagal Theory", "DBT Skills", "Cognitive Behavioral Therapy", "Somatic Approaches"],
     description: "Learn to understand, regulate, and reduce anxiety through a comprehensive program grounded in polyvagal theory and nervous system science. Move from feeling overwhelmed to experiencing genuine calm—not by fighting anxiety, but by befriending your nervous system and giving it what it needs to feel safe.",
     outcomes: [
@@ -133,9 +127,6 @@ const healingJourneys = [
     subtitle: "A gentle, somatic approach to trauma recovery",
     duration: "8 weeks",
     icon: Flower2,
-    color: "text-purple-600 dark:text-purple-400",
-    bgColor: "bg-purple-50 dark:bg-purple-900/20",
-    borderColor: "border-purple-200 dark:border-purple-800",
     frameworks: ["Somatic Experiencing (Peter Levine)", "Polyvagal Theory", "Trauma-Informed IFS", "Window of Tolerance"],
     description: "A trauma-informed journey that prioritizes safety, respects your pace, and never pushes you beyond your window of tolerance. This program combines psychoeducation with gentle somatic practices to support nervous system healing. Based on the understanding that trauma lives in the body—and so does the path to healing.",
     outcomes: [
@@ -189,9 +180,6 @@ const healingJourneys = [
     subtitle: "Reparenting yourself with the love you deserved",
     duration: "4 weeks",
     icon: Sun,
-    color: "text-amber-600 dark:text-amber-400",
-    bgColor: "bg-amber-50 dark:bg-amber-900/20",
-    borderColor: "border-amber-200 dark:border-amber-800",
     frameworks: ["Internal Family Systems", "Attachment Theory", "Developmental Psychology (Erikson)", "Reparenting Techniques"],
     description: "Connect with and nurture the wounded child parts within you. Through gentle IFS-informed exercises, learn to reparent yourself—giving yourself now what you needed then. This journey addresses core wounds from childhood that still affect your adult life, relationships, and self-perception.",
     outcomes: [
@@ -245,9 +233,6 @@ const healingJourneys = [
     subtitle: "Healing attachment patterns for healthier relationships",
     duration: "6 weeks",
     icon: Users,
-    color: "text-green-600 dark:text-green-400",
-    bgColor: "bg-green-50 dark:bg-green-900/20",
-    borderColor: "border-green-200 dark:border-green-800",
     frameworks: ["Attachment Theory (Bowlby/Ainsworth)", "Polyvagal Theory for Relationships", "Emotionally Focused Therapy Concepts"],
     description: "Understand your attachment style and learn to create healthier relationship patterns. Whether you tend toward anxious (fear of abandonment), avoidant (fear of intimacy), or disorganized (both) attachment, this journey helps you move toward earned secure attachment—the capacity for healthy interdependence.",
     outcomes: [
@@ -292,9 +277,6 @@ const healingJourneys = [
     subtitle: "Discovering your authentic life purpose",
     duration: "4 weeks",
     icon: Star,
-    color: "text-indigo-600 dark:text-indigo-400",
-    bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
-    borderColor: "border-indigo-200 dark:border-indigo-800",
     frameworks: ["ACT Values Work", "Ikigai", "Meaning-Making Psychology", "Existential Psychology"],
     description: "Move from feeling lost or unfulfilled to discovering what truly matters to you. This journey combines ACT values clarification, strengths discovery, and vision work to help you find your unique purpose—not imposed by others, but authentically yours. Purpose isn't found; it's uncovered from within.",
     outcomes: [
@@ -348,22 +330,23 @@ function JourneyCard({ journey, onSelect }) {
   return (
     <button
       onClick={() => onSelect(journey)}
-      className={`w-full text-left p-6 rounded-2xl ${journey.bgColor} ${journey.borderColor} border-2 hover:shadow-lg transition-all group`}
+      className="w-full text-left p-6 rounded-2xl hover:shadow-lg transition-all group"
+      style={{ background: 'var(--glp-sage-10)', border: '2px solid var(--glp-sage-20)' }}
       data-testid={`card-journey-${journey.id}`}
     >
       <div className="flex items-start gap-4">
-        <div className={`p-3 rounded-xl bg-white dark:bg-gray-800 shadow-sm`}>
-          <journey.icon className={`h-8 w-8 ${journey.color}`} />
+        <div className="p-3 rounded-xl shadow-sm" style={{ background: 'var(--glp-paper)' }}>
+          <journey.icon className="h-8 w-8" style={{ color: 'var(--glp-sage-deep)' }} />
         </div>
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-[var(--teal-600)] transition-colors">
+            <h3 className="text-lg font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
               {journey.title}
             </h3>
-            <ChevronRight className="h-5 w-5 text-gray-400 group-hover:text-[var(--teal-600)] transition-colors" />
+            <ChevronRight className="h-5 w-5 transition-colors" style={{ color: 'var(--glp-sage)' }} />
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{journey.subtitle}</p>
-          <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-sm mb-3" style={{ color: 'var(--glp-sage)' }}>{journey.subtitle}</p>
+          <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--glp-ink)' }}>
             <span className="flex items-center gap-1">
               <Calendar className="h-3 w-3" />
               {journey.duration}
@@ -384,21 +367,22 @@ function JourneyDetail({ journey, onBack }) {
     <div className="space-y-8">
       <button
         onClick={onBack}
-        className="inline-flex items-center gap-2 text-[var(--sage-500)] hover:text-[var(--teal-600)] transition"
+        className="inline-flex items-center gap-2 transition hover:opacity-80"
+        style={{ color: 'var(--glp-sage)' }}
         data-testid="button-back-to-journeys"
       >
         <ArrowLeft className="h-4 w-4" /> Back to all journeys
       </button>
 
-      <div className={`p-8 rounded-2xl ${journey.bgColor} ${journey.borderColor} border-2`}>
+      <div className="p-8 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '2px solid var(--glp-sage-20)' }}>
         <div className="flex items-center gap-4 mb-6">
-          <div className={`p-4 rounded-xl bg-white dark:bg-gray-800 shadow-sm`}>
-            <journey.icon className={`h-10 w-10 ${journey.color}`} />
+          <div className="p-4 rounded-xl shadow-sm" style={{ background: 'var(--glp-paper)' }}>
+            <journey.icon className="h-10 w-10" style={{ color: 'var(--glp-sage-deep)' }} />
           </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{journey.title}</h2>
-            <p className="text-gray-600 dark:text-gray-300">{journey.subtitle}</p>
-            <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400">
+            <h2 className="text-2xl font-bold" style={{ color: 'var(--glp-sage-deep)' }}>{journey.title}</h2>
+            <p style={{ color: 'var(--glp-sage)' }}>{journey.subtitle}</p>
+            <div className="flex items-center gap-4 mt-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
               <span className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" />
                 {journey.duration}
@@ -411,31 +395,31 @@ function JourneyDetail({ journey, onBack }) {
           </div>
         </div>
 
-        <p className="text-gray-700 dark:text-gray-300 mb-6">{journey.description}</p>
+        <p className="mb-6" style={{ color: 'var(--glp-ink)' }}>{journey.description}</p>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-5 mb-4">
-          <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-indigo-500" />
+        <div className="rounded-xl p-5 mb-4" style={{ background: 'var(--glp-paper)' }}>
+          <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+            <BookOpen className="h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
             Therapeutic Frameworks
           </h3>
           <div className="flex flex-wrap gap-2">
             {journey.frameworks.map((framework, idx) => (
-              <span key={idx} className="px-3 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-full text-xs">
+              <span key={idx} className="px-3 py-1 rounded-full text-xs" style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}>
                 {framework}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-5">
-          <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-amber-500" />
+        <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)' }}>
+          <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+            <Sparkles className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
             What You'll Achieve
           </h3>
           <ul className="space-y-2">
             {journey.outcomes.map((outcome, index) => (
-              <li key={index} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-300">
-                <CheckCircle2 className={`h-5 w-5 ${journey.color} flex-shrink-0 mt-0.5`} />
+              <li key={index} className="flex items-start gap-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-sage)' }} />
                 {outcome}
               </li>
             ))}
@@ -444,29 +428,32 @@ function JourneyDetail({ journey, onBack }) {
       </div>
 
       <div className="space-y-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Your Journey Roadmap</h3>
+        <h3 className="text-xl font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Your Journey Roadmap</h3>
         
         <div className="relative">
-          <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700" />
+          <div className="absolute left-6 top-0 bottom-0 w-0.5" style={{ background: 'var(--glp-sage-20)' }} />
           
           <div className="space-y-6">
             {journey.weeks.map((week, weekIndex) => (
               <div key={weekIndex} className="relative pl-16">
-                <div className={`absolute left-0 top-0 w-12 h-12 rounded-full ${journey.bgColor} ${journey.borderColor} border-2 flex items-center justify-center`}>
-                  <span className={`text-lg font-bold ${journey.color}`}>{weekIndex + 1}</span>
+                <div 
+                  className="absolute left-0 top-0 w-12 h-12 rounded-full flex items-center justify-center"
+                  style={{ background: 'var(--glp-sage-15)', border: '2px solid var(--glp-sage-30)' }}
+                >
+                  <span className="text-lg font-bold" style={{ color: 'var(--glp-sage-deep)' }}>{weekIndex + 1}</span>
                 </div>
                 
-                <div className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
-                  <h4 className="font-semibold text-gray-900 dark:text-white mb-1">{week.title}</h4>
-                  <p className="text-sm text-[var(--sage-500)] mb-4 italic">{week.theme}</p>
+                <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+                  <h4 className="font-semibold mb-1" style={{ color: 'var(--glp-sage-deep)' }}>{week.title}</h4>
+                  <p className="text-sm mb-4 italic" style={{ color: 'var(--glp-sage)' }}>{week.theme}</p>
                   
                   <div className="space-y-3">
                     {week.activities.map((activity, actIndex) => (
                       <div key={actIndex} className="flex items-start gap-3">
-                        <Circle className="h-4 w-4 text-gray-300 dark:text-gray-600 flex-shrink-0 mt-0.5" />
+                        <Circle className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-sage-30)' }} />
                         <div>
-                          <p className="text-sm font-medium text-gray-700 dark:text-gray-200">{activity.name}</p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">{activity.description}</p>
+                          <p className="text-sm font-medium" style={{ color: 'var(--glp-ink)' }}>{activity.name}</p>
+                          <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>{activity.description}</p>
                         </div>
                       </div>
                     ))}
@@ -481,14 +468,16 @@ function JourneyDetail({ journey, onBack }) {
       <div className="flex gap-4">
         <Link 
           href="/dashboard" 
-          className="flex-1 py-4 px-6 rounded-xl bg-[var(--teal-600)] text-white text-center font-semibold hover:bg-[var(--teal-700)] transition-colors"
+          className="flex-1 py-4 px-6 rounded-xl text-white text-center font-semibold hover:opacity-90 transition-colors"
+          style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
           data-testid="button-start-journey"
         >
           Begin This Journey
         </Link>
         <button 
           onClick={onBack}
-          className="py-4 px-6 rounded-xl border-2 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-semibold hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+          className="py-4 px-6 rounded-xl font-semibold transition-colors hover:opacity-80"
+          style={{ border: '2px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
           data-testid="button-explore-more"
         >
           Explore Other Journeys
@@ -507,37 +496,45 @@ export default function HealingJourneysPage() {
   });
 
   return (
-    <div className="min-h-screen hero-gradient">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
       <div className="content-wrapper py-8">
         <div className="max-w-4xl mx-auto">
           {!selectedJourney ? (
             <>
               <header className="mb-8">
-                <Link href="/wellness-hub" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+                <Link 
+                  href="/wellness-hub" 
+                  className="inline-flex items-center gap-2 text-body-sm mb-4 transition hover:opacity-80" 
+                  style={{ color: 'var(--glp-sage)' }}
+                  data-testid="link-back"
+                >
                   <ArrowLeft className="h-4 w-4" /> Back to Wellness Hub
                 </Link>
                 <div className="flex items-center gap-3">
-                  <div className="icon-container icon-xl icon-gradient-teal">
+                  <div 
+                    className="w-14 h-14 rounded-xl flex items-center justify-center text-white"
+                    style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+                  >
                     <MapPin className="h-7 w-7" />
                   </div>
                   <div>
-                    <h1 className="text-display-lg text-teal" data-testid="text-page-title">Healing Journeys</h1>
+                    <h1 className="text-display-lg" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-page-title">Healing Journeys</h1>
                     <p className="text-lead">Structured multi-week pathways for deep, lasting transformation</p>
                   </div>
                 </div>
               </header>
 
-              <div className="card-bordered mb-8 bg-indigo-50 dark:bg-indigo-900/20">
+              <div className="card-bordered mb-8 p-6 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
                 <div className="flex items-start gap-4">
-                  <Brain className="h-6 w-6 text-indigo-600 dark:text-indigo-400 flex-shrink-0 mt-1" />
+                  <Brain className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--glp-sage-deep)' }} />
                   <div>
-                    <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Evidence-Based Therapeutic Frameworks</h3>
-                    <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">
+                    <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Evidence-Based Therapeutic Frameworks</h3>
+                    <p className="text-sm mb-3" style={{ color: 'var(--glp-ink)' }}>
                       Each journey integrates proven therapeutic approaches—Internal Family Systems, polyvagal theory, 
                       attachment science, somatic experiencing, and more. These aren't pop psychology exercises; 
                       they're structured programs based on what research shows actually creates lasting change.
                     </p>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                    <p className="text-sm" style={{ color: 'var(--glp-ink)' }}>
                       Healing is not linear—honor your unique pace. You can pause, restart, or switch journeys at any time.
                     </p>
                   </div>
@@ -554,8 +551,8 @@ export default function HealingJourneysPage() {
                 ))}
               </div>
 
-              <footer className="mt-8 card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
-                <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
+              <footer className="mt-8 card-bordered p-6 rounded-2xl" style={{ background: 'var(--glp-gold-10)', border: '1px solid var(--glp-gold-30)' }}>
+                <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
                   <strong>Important:</strong> These journeys are supportive wellness programs, not therapy. 
                   For trauma healing especially, we strongly recommend working with a qualified therapist alongside these resources. 
                   Always prioritize your safety—if content feels too activating, pause and ground yourself.
