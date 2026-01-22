@@ -20,3 +20,19 @@ export const tokens = {
     xl: "40px",
   },
 };
+
+export const brand = {
+  name: "The Genuine Love Project",
+  tagline: "Live in Genuine Love",
+  colors: {
+    primary: "#8FBF9F",
+    sage: "#8FBF9F",
+    paper: "#FAF9F7",
+    ink: "#2D3748",
+    gold: "#D4AF37",
+  },
+  assets: {
+    logoMark: "/images/logo.svg",
+    logo: "/images/logo.svg",
+  },
+};

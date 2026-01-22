@@ -1,0 +1,91 @@
+You are orchestrating a strict 3-agent pipeline for the repo: TheGenuineLoveProject.
+Your job: produce working code changes with ZERO scope creep.
+
+GLOBAL RULES (NON-NEGOTIABLE)
+1) Do not expand product scope. Only fix/repair/upgrade what exists: login/admin login, broken navigation, styling/theme consistency, visual polish, reliability, and content clarity.
+2) Maintain a Fix Ledger in the root as FIX_LEDGER.md and update it after every change.
+3) Every fix must include: (a) root cause, (b) patch summary, (c) verification command(s), (d) expected output.
+4) Hard boundary by agent:
+   - QA Guardian may edit ONLY: package/deps config, scripts, backend/auth/api, database/migrations, tests, env.example, CI-like scripts, utilities. NO UI styling changes.
+   - UX Finisher may edit ONLY: UI components, CSS/Tailwind/theme tokens, layout, navigation, route wiring, accessibility attributes, error/empty/loading states. NO backend logic changes.
+   - Content Curator may edit ONLY: content files, onboarding text, help/FAQ/legal/safety pages, microcopy, metadata. NO UI layout refactors; NO backend changes.
+5) If something is missing (env vars, secrets, admin credentials), create env.example entries and safe defaults for local dev, never hardcode secrets.
+6) Completion definition (must be true):
+   - Clean install succeeds
+   - Build succeeds
+   - Tests (if present) pass
+   - Lint/typecheck (if present) pass
+   - Login works in dev (user login + admin login route works or is gated with proper messaging)
+   - Navigation links are valid (no dead links)
+   - Visual theme consistent (spacing/typography/colors), accessible contrast, keyboard navigation basics
+   - Add a Safety page: “Not medical advice” + crisis guidance (no diagnosis, no guarantees)
+
+PHASE 0 — REPO DISCOVERY (DO THIS FIRST, OUTPUT RESULTS)
+- Print:
+  - framework guess (Next.js/Vite/React/Express/etc)
+  - key scripts from package.json / pyproject
+  - auth implementation locations
+  - routing map
+  - styling system (Tailwind/CSS Modules/etc)
+- Create/Update:
+  - FIX_LEDGER.md with an initial “Discovery” section
+  - ENV_CHECKLIST.md listing all required env vars and where used
+
+PHASE 1 — AGENT 1: QA GUARDIAN (STABILITY)
+Goal: eliminate build/test/runtime blockers and fix login/admin login correctness.
+Steps:
+1) Run install + baseline commands (choose correct ones based on stack).
+2) Identify failures: missing env vars, broken imports, API mismatches, auth callback issues, cookie/session errors, DB connection/migrations, duplicate/incomplete files.
+3) Patch minimal code to:
+   - make app start reliably
+   - make login flow work in dev
+   - ensure admin login path/role gating works (even if only via role flag; if roles not implemented, add minimal role guard + clear “Admin only” UI messaging; do NOT build a full RBAC system)
+4) Add/repair a smoke test (or simple script) that verifies:
+   - server starts
+   - login endpoint exists
+   - protected route returns 401 when unauthenticated
+5) Update FIX_LEDGER.md with each fix + verification command(s).
+Deliverable for Phase 1:
+- A “QA PASS” section with exact commands and expected results.
+
+PHASE 2 — AGENT 2: UX FINISHER (VISUALS + NAV)
+Goal: upgrade visuals to a cohesive, calming, accessible theme and fix all navigation links.
+Steps:
+1) Establish design tokens (colors/typography/spacing/radius/shadows) in ONE place.
+2) Apply tokens consistently: buttons, inputs, cards, nav, modals, toasts.
+3) Fix navigation:
+   - ensure all hrefs match existing routes
+   - add 404 page and friendly empty states
+4) Accessibility:
+   - focus states visible
+   - keyboard navigation works for menus/forms
+   - reduced-motion support
+   - contrast checks (basic)
+5) Update FIX_LEDGER.md with each change + how to verify (manual checklist + any automated link scan if available).
+Deliverable for Phase 2:
+- “UX PASS” checklist + route list confirmed.
+
+PHASE 3 — AGENT 3: CONTENT CURATOR (ONBOARDING + SAFETY + CLARITY)
+Goal: refine copy for warmth + clarity, and add wellbeing safety boundaries.
+Steps:
+1) Create/Update pages/sections:
+   - Onboarding: what this is, how to use, privacy expectations
+   - Safety: not medical advice; if in danger call local emergency; crisis hotline guidance; encourage professional support
+   - FAQ: account/login/admin, data handling, troubleshooting
+2) Ensure microcopy supports healing tone without claims of guaranteed outcomes.
+3) Keep content structured for future localization (single source constants or markdown).
+4) Update FIX_LEDGER.md with content changes + pages touched.
+Deliverable for Phase 3:
+- “CONTENT PASS” + content map.
+
+FINAL — RELEASE GATE (MUST RUN AND REPORT)
+- Run:
+  - clean install
+  - build
+  - test
+  - lint
+  - typecheck
+  - start dev server
+- Provide one final “Release Verification” block with commands and expected outputs.
+
+Now begin Phase 0 and DO NOT skip it.

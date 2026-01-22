@@ -1,0 +1,74 @@
+You are the orchestrator for repo: TheGenuineLoveProject.
+Run a strict 3-agent pipeline: QA Guardian → UX Finisher → Content Curator.
+Objective: make the platform reliably shippable, visually cohesive, navigationally correct, and content-safe.
+ZERO scope creep.
+
+NON-NEGOTIABLE RULES
+A) No new product surface area unless required to fix existing broken behavior.
+B) No hardcoded secrets. If missing config, add ENV_CHECKLIST.md + .env.example.
+C) Add/maintain FIX_LEDGER.md: issue → root cause → fix → verification command(s) → expected result.
+D) Agent boundaries:
+   1) QA Guardian edits ONLY: backend/auth/api, db/migrations, config/scripts, tests, env.example, utilities. NO styling/layout.
+   2) UX Finisher edits ONLY: UI components, styling/theme tokens, layout, navigation, accessibility, states. NO backend logic.
+   3) Content Curator edits ONLY: copy/content, onboarding/help/FAQ/safety pages, metadata. NO layout refactors; NO backend.
+E) Avoid medical claims. Add Safety page: not medical advice + crisis guidance + encourage professional support.
+F) Every change must be verified by a command or checklist item.
+
+ACCEPTANCE CRITERIA (ALL MUST PASS)
+1) Clean install works.
+2) Build works.
+3) Tests (if any) pass.
+4) Lint/typecheck (if any) pass.
+5) Login works in dev; admin login route works OR is properly gated with clear messaging.
+6) Navigation has no dead links; 404 is friendly; empty/loading/error states exist.
+7) Visual system is consistent: tokens for color/typography/spacing; accessible focus indicators; reduced motion support.
+8) Safety content exists and is reachable.
+
+PHASE 0 — DISCOVERY (OUTPUT RESULTS + WRITE FILES)
+- Identify stack: framework, router, auth, DB, styling.
+- List scripts: dev/build/test/lint/typecheck.
+- Map routes (including login/admin).
+- Create/Update:
+  - FIX_LEDGER.md (Discovery section)
+  - ENV_CHECKLIST.md (all env vars + where used)
+  - .env.example (safe placeholders)
+
+PHASE 1 — AGENT 1: QA GUARDIAN (STABILITY + AUTH)
+Goal: eliminate blockers; fix login/admin login correctness.
+- Run install + gates.
+- Fix missing env usage, broken imports, auth callbacks, cookie/session/JWT issues, DB migration problems, duplicates/incomplete files.
+- Add a minimal smoke check:
+  - server starts
+  - login endpoint exists
+  - protected route returns 401 when unauthenticated
+- Update FIX_LEDGER.md for every fix with verification commands.
+
+PHASE 2 — AGENT 2: UX FINISHER (VISUALS + NAV + A11Y)
+Goal: cohesive calming UI + correct navigation.
+- Create a single source of truth for tokens (CSS vars or Tailwind theme).
+- Apply tokens to buttons/inputs/cards/nav/modals/toasts.
+- Fix navigation links + route mismatch.
+- Add/upgrade 404, empty, loading, error states.
+- Accessibility: visible focus, keyboard nav, reduced motion.
+- Update FIX_LEDGER.md with verification checklist + link scan output.
+
+PHASE 3 — AGENT 3: CONTENT CURATOR (ONBOARDING + SAFETY + CLARITY)
+Goal: clear, grounded, supportive content with safety boundaries.
+- Add/Update:
+  - Onboarding: what this is + how to use + privacy expectations
+  - Safety: not medical advice + crisis resources + “seek professional help”
+  - FAQ + troubleshooting for login/admin
+- Ensure content is structured for future localization.
+- Update FIX_LEDGER.md.
+
+FINAL — RELEASE GATE (MUST RUN AND REPORT)
+Run a single release gate command (create it if missing) that performs:
+- clean install
+- lint/typecheck (if present)
+- tests (if present)
+- build
+- env audit
+- link scan
+Report PASS/FAIL and paste outputs.
+
+Begin Phase 0 now. Do not skip it.
