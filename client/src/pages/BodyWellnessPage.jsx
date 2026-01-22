@@ -27,9 +27,6 @@ const bodyCategories = [
     id: "movement",
     title: "Gentle Movement",
     icon: Footprints,
-    color: "text-green-600 dark:text-green-400",
-    bgColor: "bg-green-50 dark:bg-green-900/20",
-    borderColor: "border-green-200 dark:border-green-800",
     description: "Movement practices that release tension and restore energy",
     practices: [
       {
@@ -80,9 +77,6 @@ const bodyCategories = [
     id: "breathwork",
     title: "Breathwork",
     icon: Wind,
-    color: "text-blue-600 dark:text-blue-400",
-    bgColor: "bg-blue-50 dark:bg-blue-900/20",
-    borderColor: "border-blue-200 dark:border-blue-800",
     description: "Breathing practices that regulate the nervous system",
     practices: [
       {
@@ -133,9 +127,6 @@ const bodyCategories = [
     id: "nutrition",
     title: "Nourishing Nutrition",
     icon: Utensils,
-    color: "text-amber-600 dark:text-amber-400",
-    bgColor: "bg-amber-50 dark:bg-amber-900/20",
-    borderColor: "border-amber-200 dark:border-amber-800",
     description: "Food choices that support mental health and energy",
     practices: [
       {
@@ -186,9 +177,6 @@ const bodyCategories = [
     id: "rest",
     title: "Rest & Recovery",
     icon: Moon,
-    color: "text-indigo-600 dark:text-indigo-400",
-    bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
-    borderColor: "border-indigo-200 dark:border-indigo-800",
     description: "Practices for deep rest and nervous system recovery",
     practices: [
       {
@@ -239,9 +227,6 @@ const bodyCategories = [
     id: "sensory",
     title: "Sensory Healing",
     icon: Eye,
-    color: "text-purple-600 dark:text-purple-400",
-    bgColor: "bg-purple-50 dark:bg-purple-900/20",
-    borderColor: "border-purple-200 dark:border-purple-800",
     description: "Using the senses to calm and ground the nervous system",
     practices: [
       {
@@ -327,12 +312,12 @@ export default function BodyWellnessPage() {
             </div>
           </header>
 
-          <div className="card-bordered mb-8 bg-green-50 dark:bg-green-900/20">
+          <div className="card-bordered mb-8 p-6 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
             <div className="flex items-start gap-4">
-              <Brain className="h-6 w-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-1" />
+              <Brain className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--glp-sage-deep)' }} />
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">The Mind-Body Connection</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>The Mind-Body Connection</h3>
+                <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                   Your body holds wisdom and stores experiences, including trauma. Somatic (body-based) practices help release 
                   what words cannot express. When we work with the body, we access healing pathways that the mind alone cannot reach.
                   Research in neuroscience confirms: the body is not separate from mental health—it's central to it.
@@ -374,12 +359,12 @@ export default function BodyWellnessPage() {
             ))}
           </div>
 
-          <div className={`card-bordered ${selectedCategory.bgColor} ${selectedCategory.borderColor} mb-8`}>
+          <div className="card-bordered mb-8 p-6 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
             <div className="flex items-center gap-3 mb-4">
-              <selectedCategory.icon className={`h-8 w-8 ${selectedCategory.color}`} />
+              <selectedCategory.icon className="h-8 w-8" style={{ color: 'var(--glp-sage-deep)' }} />
               <div>
-                <h2 className="text-heading-lg text-gray-900 dark:text-white">{selectedCategory.title}</h2>
-                <p className="text-body-sm text-[var(--sage-600)]">{selectedCategory.description}</p>
+                <h2 className="text-heading-lg" style={{ color: 'var(--glp-sage-deep)' }}>{selectedCategory.title}</h2>
+                <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>{selectedCategory.description}</p>
               </div>
             </div>
 
@@ -387,7 +372,8 @@ export default function BodyWellnessPage() {
               {selectedCategory.practices.map((practice, index) => (
                 <div 
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700"
+                  className="rounded-xl p-5"
+                  style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
                 >
                   <button
                     onClick={() => setExpandedPractice(expandedPractice === index ? null : index)}
@@ -395,27 +381,30 @@ export default function BodyWellnessPage() {
                     data-testid={`button-practice-${index}`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`p-2 rounded-lg ${selectedCategory.bgColor}`}>
-                        <Timer className={`h-5 w-5 ${selectedCategory.color}`} />
+                      <div className="p-2 rounded-lg" style={{ background: 'var(--glp-sage-15)' }}>
+                        <Timer className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
                       </div>
                       <div>
-                        <h3 className="font-semibold text-gray-900 dark:text-white">{practice.name}</h3>
-                        <p className="text-sm text-[var(--sage-500)]">{practice.duration}</p>
+                        <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>{practice.name}</h3>
+                        <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{practice.duration}</p>
                       </div>
                     </div>
-                    <Sparkles className={`h-5 w-5 ${selectedCategory.color}`} />
+                    <Sparkles className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
                   </button>
                   
-                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{practice.description}</p>
+                  <p className="mt-3 text-sm" style={{ color: 'var(--glp-sage)' }}>{practice.description}</p>
                   
                   {expandedPractice === index && (
                     <div className="mt-4 space-y-4">
-                      <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
-                        <h4 className="font-medium text-gray-900 dark:text-white mb-3">How to Practice:</h4>
+                      <div className="rounded-lg p-4" style={{ background: 'var(--glp-sage-10)' }}>
+                        <h4 className="font-medium mb-3" style={{ color: 'var(--glp-ink)' }}>How to Practice:</h4>
                         <ol className="space-y-2">
                           {practice.steps.map((step, stepIndex) => (
-                            <li key={stepIndex} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-300">
-                              <span className={`flex-shrink-0 w-6 h-6 rounded-full ${selectedCategory.bgColor} ${selectedCategory.color} flex items-center justify-center text-xs font-medium`}>
+                            <li key={stepIndex} className="flex items-start gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                              <span 
+                                className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium"
+                                style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}
+                              >
                                 {stepIndex + 1}
                               </span>
                               {step}
@@ -423,9 +412,9 @@ export default function BodyWellnessPage() {
                           ))}
                         </ol>
                       </div>
-                      <div className={`${selectedCategory.bgColor} rounded-lg p-4`}>
-                        <h4 className="font-medium text-gray-900 dark:text-white mb-1">Benefits:</h4>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{practice.benefits}</p>
+                      <div className="rounded-lg p-4" style={{ background: 'var(--glp-sage-15)' }}>
+                        <h4 className="font-medium mb-1" style={{ color: 'var(--glp-ink)' }}>Benefits:</h4>
+                        <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{practice.benefits}</p>
                       </div>
                     </div>
                   )}
@@ -435,21 +424,21 @@ export default function BodyWellnessPage() {
           </div>
 
           <section className="grid md:grid-cols-2 gap-6 mb-8">
-            <Link href="/breathing" className="card-bordered hover:shadow-md transition-shadow" data-testid="link-breathing">
+            <Link href="/breathing" className="card-bordered hover:shadow-md transition-shadow p-5 rounded-xl" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }} data-testid="link-breathing">
               <div className="flex items-center gap-3 mb-2">
-                <Wind className="h-6 w-6 text-blue-500" />
-                <h3 className="text-heading-md text-teal">Breathing Exercises</h3>
+                <Wind className="h-6 w-6" style={{ color: 'var(--glp-teal)' }} />
+                <h3 className="text-heading-md" style={{ color: 'var(--glp-sage-deep)' }}>Breathing Exercises</h3>
               </div>
-              <p className="text-body-sm text-[var(--sage-600)]">
+              <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>
                 Interactive guided breathing exercises with timers and animations
               </p>
             </Link>
-            <Link href="/grounding" className="card-bordered hover:shadow-md transition-shadow" data-testid="link-grounding">
+            <Link href="/grounding" className="card-bordered hover:shadow-md transition-shadow p-5 rounded-xl" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }} data-testid="link-grounding">
               <div className="flex items-center gap-3 mb-2">
-                <Leaf className="h-6 w-6 text-green-500" />
-                <h3 className="text-heading-md text-teal">Grounding Techniques</h3>
+                <Leaf className="h-6 w-6" style={{ color: 'var(--glp-sage)' }} />
+                <h3 className="text-heading-md" style={{ color: 'var(--glp-sage-deep)' }}>Grounding Techniques</h3>
               </div>
-              <p className="text-body-sm text-[var(--sage-600)]">
+              <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>
                 Somatic practices to reconnect with your body and the present moment
               </p>
             </Link>
@@ -464,8 +453,8 @@ export default function BodyWellnessPage() {
             title="Continue Your Journey"
           />
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 mt-8">
-            <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
+          <footer className="card-bordered mt-8 p-6 rounded-xl" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+            <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
               <strong>Gentle Reminder:</strong> Listen to your body. If any practice feels uncomfortable, stop and try something else. 
               For chronic pain or physical conditions, consult a healthcare provider before starting new practices.
             </p>

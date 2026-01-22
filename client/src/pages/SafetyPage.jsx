@@ -49,45 +49,47 @@ export default function SafetyPage() {
                   <Shield className="w-6 h-6" />
                 </div>
                 <div>
-                  <h1 className="text-heading-xl text-teal" data-testid="text-safety-title">Safety & Wellness Boundaries</h1>
+                  <h1 className="text-heading-xl" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-safety-title">Safety & Wellness Boundaries</h1>
                   <p className="text-body-sm">Your wellbeing is our priority</p>
                 </div>
               </div>
             </header>
 
             <div className="space-y-8">
-              <section className="card-bordered p-6 rounded-xl bg-red-50 border-red-200" data-testid="section-emergency">
+              <section className="card-bordered p-6 rounded-xl" style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-blush)' }} data-testid="section-emergency">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-red-100 flex-shrink-0">
-                    <Phone className="w-6 h-6 text-red-600" />
+                  <div className="p-3 rounded-xl flex-shrink-0" style={{ background: 'var(--glp-rose-20)' }}>
+                    <Phone className="w-6 h-6" style={{ color: 'var(--glp-rose-dark)' }} />
                   </div>
                   <div>
-                    <h2 className="text-xl font-semibold text-red-800 mb-3">If You Are in Immediate Danger</h2>
-                    <p className="text-red-700 mb-4">
+                    <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--glp-rose-dark)' }}>If You Are in Immediate Danger</h2>
+                    <p className="mb-4" style={{ color: 'var(--glp-rose)' }}>
                       If you or someone you know is in immediate danger, please contact emergency services right away.
                     </p>
                     <div className="space-y-3">
                       {CRISIS_HOTLINES.map((hotline) => (
-                        <div key={hotline.name} className="flex items-center gap-3 p-3 bg-white rounded-lg border border-red-100">
-                          <div className="font-semibold text-red-800">{hotline.name}</div>
+                        <div key={hotline.name} className="flex items-center gap-3 p-3 rounded-lg" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-rose-15)' }}>
+                          <div className="font-semibold" style={{ color: 'var(--glp-rose-dark)' }}>{hotline.name}</div>
                           {hotline.phone && (
                             <a 
                               href={`tel:${hotline.phone}`}
-                              className="px-3 py-1 bg-red-600 text-white rounded-full text-sm font-medium hover:bg-red-700 transition"
+                              className="px-3 py-1 rounded-full text-sm font-medium hover:opacity-90 transition"
+                              style={{ background: 'var(--glp-rose)', color: 'var(--glp-paper)' }}
                               data-testid={`link-call-${hotline.phone}`}
                             >
                               Call {hotline.phone}
                             </a>
                           )}
                           {hotline.text && (
-                            <span className="text-sm text-red-600">{hotline.text}</span>
+                            <span className="text-sm" style={{ color: 'var(--glp-rose)' }}>{hotline.text}</span>
                           )}
                         </div>
                       ))}
                     </div>
                     <Link 
                       href="/crisis"
-                      className="inline-flex items-center gap-2 mt-4 text-red-700 hover:text-red-800 font-medium"
+                      className="inline-flex items-center gap-2 mt-4 font-medium hover:opacity-80"
+                      style={{ color: 'var(--glp-rose-dark)' }}
                       data-testid="link-crisis-resources"
                     >
                       View All Crisis Resources <ExternalLink className="w-4 h-4" />
@@ -96,10 +98,10 @@ export default function SafetyPage() {
                 </div>
               </section>
 
-              <section className="card-bordered p-6 rounded-xl" data-testid="section-not-medical">
+              <section className="card-bordered p-6 rounded-xl" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-gold-30)' }} data-testid="section-not-medical">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-xl bg-amber-100 flex-shrink-0">
-                    <AlertTriangle className="w-6 h-6 text-amber-600" />
+                  <div className="p-3 rounded-xl flex-shrink-0" style={{ background: 'var(--glp-gold-30)' }}>
+                    <AlertTriangle className="w-6 h-6" style={{ color: 'var(--glp-gold-dark)' }} />
                   </div>
                   <div>
                     <h2 className="text-xl font-semibold text-[var(--glp-ink)] mb-3">This Is Not Medical Advice</h2>
@@ -108,19 +110,19 @@ export default function SafetyPage() {
                     </p>
                     <ul className="space-y-2 text-[var(--glp-text-muted)]">
                       <li className="flex items-start gap-2">
-                        <span className="text-amber-500 mt-1">•</span>
+                        <span className="mt-1" style={{ color: 'var(--glp-gold)' }}>•</span>
                         We do not diagnose or treat mental health conditions
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-amber-500 mt-1">•</span>
+                        <span className="mt-1" style={{ color: 'var(--glp-gold)' }}>•</span>
                         Our AI companion provides supportive reflection, not clinical therapy
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-amber-500 mt-1">•</span>
+                        <span className="mt-1" style={{ color: 'var(--glp-gold)' }}>•</span>
                         No content on this platform should replace professional medical advice
                       </li>
                       <li className="flex items-start gap-2">
-                        <span className="text-amber-500 mt-1">•</span>
+                        <span className="mt-1" style={{ color: 'var(--glp-gold)' }}>•</span>
                         We cannot guarantee specific outcomes or results
                       </li>
                     </ul>

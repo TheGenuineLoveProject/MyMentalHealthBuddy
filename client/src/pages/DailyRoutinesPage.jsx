@@ -33,9 +33,6 @@ const routines = [
     title: "Morning Routine",
     subtitle: "Start your day with intention and energy",
     icon: Sun,
-    color: "text-amber-600 dark:text-amber-400",
-    bgColor: "bg-amber-50 dark:bg-amber-900/20",
-    borderColor: "border-amber-200 dark:border-amber-800",
     timeRange: "6:00 AM - 9:00 AM",
     duration: "45-90 minutes",
     overview: "How you start your day sets the tone for everything that follows. A intentional morning routine primes your nervous system for resilience, clarity, and well-being.",
@@ -101,9 +98,6 @@ const routines = [
     title: "Midday Reset",
     subtitle: "Restore energy and maintain focus",
     icon: Sunset,
-    color: "text-orange-600 dark:text-orange-400",
-    bgColor: "bg-orange-50 dark:bg-orange-900/20",
-    borderColor: "border-orange-200 dark:border-orange-800",
     timeRange: "12:00 PM - 2:00 PM",
     duration: "30-60 minutes",
     overview: "Midday is when energy naturally dips. A reset routine prevents afternoon slumps and re-centers you for the second half of your day.",
@@ -161,9 +155,6 @@ const routines = [
     title: "Evening Wind-Down",
     subtitle: "Transition from doing to being",
     icon: Moon,
-    color: "text-indigo-600 dark:text-indigo-400",
-    bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
-    borderColor: "border-indigo-200 dark:border-indigo-800",
     timeRange: "7:00 PM - 10:00 PM",
     duration: "60-90 minutes",
     overview: "Evening routines prepare your body and mind for restorative sleep. They create a buffer between the day's demands and rest.",
@@ -257,25 +248,26 @@ export default function DailyRoutinesPage() {
                 <Clock className="h-7 w-7" />
               </div>
               <div>
-                <h1 className="text-display-lg text-teal" data-testid="text-page-title">Daily Wellness Routines</h1>
+                <h1 className="text-display-lg" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-page-title">Daily Wellness Routines</h1>
                 <p className="text-lead">Structured practices for morning, midday, and evening wellbeing</p>
               </div>
             </div>
           </header>
 
           <section className="mb-10">
-            <h2 className="text-heading-md text-teal mb-4">Quick Wins (No Routine Required)</h2>
+            <h2 className="text-heading-md mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Quick Wins (No Routine Required)</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
               {quickWins.map((item, index) => (
                 <div 
                   key={index}
-                  className="card-bordered text-center p-4"
+                  className="card-bordered text-center p-4 rounded-xl"
+                  style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
                   data-testid={`card-quick-${index}`}
                 >
-                  <item.icon className="h-6 w-6 mx-auto mb-2 text-[var(--teal-600)]" />
-                  <p className="text-sm font-medium text-gray-900 dark:text-white">{item.name}</p>
-                  <p className="text-xs text-[var(--sage-500)]">{item.time}</p>
-                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{item.when}</p>
+                  <item.icon className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-teal)' }} />
+                  <p className="text-sm font-medium" style={{ color: 'var(--glp-ink)' }}>{item.name}</p>
+                  <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>{item.time}</p>
+                  <p className="text-xs mt-1" style={{ color: 'var(--glp-sage)' }}>{item.when}</p>
                 </div>
               ))}
             </div>
@@ -286,30 +278,30 @@ export default function DailyRoutinesPage() {
               <button
                 key={routine.id}
                 onClick={() => setSelectedRoutine(routine)}
-                className={`flex-1 py-4 px-6 rounded-xl border-2 transition-all ${
-                  selectedRoutine.id === routine.id 
-                    ? `${routine.bgColor} ${routine.borderColor}` 
-                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-gray-300'
-                }`}
+                className="flex-1 py-4 px-6 rounded-xl border-2 transition-all"
+                style={selectedRoutine.id === routine.id 
+                  ? { background: 'var(--glp-sage-10)', border: '2px solid var(--glp-sage)' } 
+                  : { background: 'var(--glp-paper)', border: '2px solid var(--glp-sage-15)' }
+                }
                 data-testid={`button-routine-${routine.id}`}
               >
-                <routine.icon className={`h-8 w-8 mx-auto mb-2 ${routine.color}`} />
-                <p className="font-semibold text-gray-900 dark:text-white">{routine.title}</p>
-                <p className="text-xs text-[var(--sage-500)]">{routine.timeRange}</p>
+                <routine.icon className="h-8 w-8 mx-auto mb-2" style={{ color: 'var(--glp-sage-deep)' }} />
+                <p className="font-semibold" style={{ color: 'var(--glp-ink)' }}>{routine.title}</p>
+                <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>{routine.timeRange}</p>
               </button>
             ))}
           </div>
 
-          <div className={`card-bordered ${selectedRoutine.bgColor} ${selectedRoutine.borderColor} mb-8`}>
+          <div className="card-bordered mb-8 p-6 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
             <div className="flex items-center gap-3 mb-4">
-              <selectedRoutine.icon className={`h-8 w-8 ${selectedRoutine.color}`} />
+              <selectedRoutine.icon className="h-8 w-8" style={{ color: 'var(--glp-sage-deep)' }} />
               <div>
-                <h2 className="text-heading-lg text-gray-900 dark:text-white">{selectedRoutine.title}</h2>
-                <p className="text-sm text-[var(--sage-500)]">{selectedRoutine.subtitle} • {selectedRoutine.duration}</p>
+                <h2 className="text-heading-lg" style={{ color: 'var(--glp-sage-deep)' }}>{selectedRoutine.title}</h2>
+                <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{selectedRoutine.subtitle} • {selectedRoutine.duration}</p>
               </div>
             </div>
 
-            <p className="text-gray-700 dark:text-gray-300 mb-6">{selectedRoutine.overview}</p>
+            <p className="mb-6" style={{ color: 'var(--glp-sage)' }}>{selectedRoutine.overview}</p>
 
             <div className="space-y-4">
               {selectedRoutine.activities.map((activity, index) => {
@@ -318,11 +310,11 @@ export default function DailyRoutinesPage() {
                 return (
                   <div 
                     key={index}
-                    className={`bg-white dark:bg-gray-800 rounded-xl p-5 border transition-all ${
-                      isCompleted 
-                        ? 'border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/20' 
-                        : 'border-gray-100 dark:border-gray-700'
-                    }`}
+                    className="rounded-xl p-5 transition-all"
+                    style={isCompleted 
+                      ? { background: 'var(--glp-sage-15)', border: '1px solid var(--glp-sage)' }
+                      : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }
+                    }
                   >
                     <div className="flex items-start gap-4">
                       <button
@@ -331,37 +323,40 @@ export default function DailyRoutinesPage() {
                         data-testid={`button-activity-${index}`}
                       >
                         {isCompleted ? (
-                          <CheckCircle2 className="h-6 w-6 text-green-500" />
+                          <CheckCircle2 className="h-6 w-6" style={{ color: 'var(--glp-sage)' }} />
                         ) : (
-                          <Circle className={`h-6 w-6 ${selectedRoutine.color}`} />
+                          <Circle className="h-6 w-6" style={{ color: 'var(--glp-sage-deep)' }} />
                         )}
                       </button>
                       
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <activity.icon className={`h-5 w-5 ${selectedRoutine.color}`} />
-                          <h3 className={`font-semibold ${isCompleted ? 'line-through text-gray-400' : 'text-gray-900 dark:text-white'}`}>
+                          <activity.icon className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
+                          <h3 
+                            className={`font-semibold ${isCompleted ? 'line-through' : ''}`}
+                            style={{ color: isCompleted ? 'var(--glp-sage)' : 'var(--glp-ink)' }}
+                          >
                             {activity.name}
                           </h3>
-                          <span className="text-xs text-[var(--sage-500)]">{activity.duration}</span>
+                          <span className="text-xs" style={{ color: 'var(--glp-sage)' }}>{activity.duration}</span>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{activity.description}</p>
-                        <p className="text-xs text-[var(--sage-500)] italic">Why: {activity.why}</p>
+                        <p className="text-sm mb-2" style={{ color: 'var(--glp-sage)' }}>{activity.description}</p>
+                        <p className="text-xs italic" style={{ color: 'var(--glp-sage)' }}>Why: {activity.why}</p>
                       </div>
                       
-                      <span className="text-xs text-[var(--sage-400)] whitespace-nowrap">{activity.time}</span>
+                      <span className="text-xs whitespace-nowrap" style={{ color: 'var(--glp-sage)' }}>{activity.time}</span>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Tips for Success</h3>
+            <div className="mt-6 rounded-xl p-5" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+              <h3 className="font-semibold mb-3" style={{ color: 'var(--glp-ink)' }}>Tips for Success</h3>
               <ul className="space-y-2">
                 {selectedRoutine.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                    <Sparkles className={`h-4 w-4 ${selectedRoutine.color} flex-shrink-0 mt-0.5`} />
+                  <li key={index} className="flex items-start gap-2 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                    <Sparkles className="h-4 w-4 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-sage-deep)' }} />
                     {tip}
                   </li>
                 ))}
@@ -378,8 +373,8 @@ export default function DailyRoutinesPage() {
             title="Continue Your Journey"
           />
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 mt-8">
-            <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
+          <footer className="card-bordered mt-8 p-6 rounded-xl" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+            <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
               <strong>Start Small:</strong> Don't try to implement everything at once. Pick 1-2 activities from one routine 
               and practice consistently for 2 weeks before adding more. Consistency beats perfection.
             </p>
