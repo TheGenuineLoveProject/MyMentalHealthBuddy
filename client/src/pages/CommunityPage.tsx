@@ -32,7 +32,7 @@ export default function CommunityPage() {
                     Shared Presence
                   </h1>
                   <p className="text-body-sm">
-                    Anonymous reflections from others on the same path
+                    You're not alone. Anonymous reflections from others walking similar paths remind us of our shared humanity.
                   </p>
                 </div>
               </div>
@@ -44,7 +44,7 @@ export default function CommunityPage() {
                   <Heart className="w-4 h-4" />
                 </div>
                 <p className="text-body-sm">
-                  No performance, no comparison — just shared humanity.
+                  No performance metrics, no comparison traps—just anonymous wisdom from people who understand what it means to carry invisible weight. Find comfort in knowing others have felt what you're feeling.
                 </p>
               </div>
               

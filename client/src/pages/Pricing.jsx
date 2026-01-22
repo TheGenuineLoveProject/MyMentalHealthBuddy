@@ -8,8 +8,14 @@ const tiers = [
     name: "Free",
     price: "$0",
     period: "forever",
-    description: "Start your journey with essential tools",
-    features: ["Mood tracking", "Basic journaling", "Crisis resources", "Daily insights"],
+    description: "Begin your healing journey with foundational tools—no credit card required",
+    features: [
+      "Daily mood & energy tracking",
+      "Basic guided journaling",
+      "Breathing & grounding exercises",
+      "Crisis support resources",
+      "Daily affirmations & insights"
+    ],
     planId: null,
     icon: Star,
     popular: false,
@@ -18,8 +24,15 @@ const tiers = [
     name: "Plus",
     price: "$9",
     period: "/month",
-    description: "Unlock AI-powered reflection and deeper insights",
-    features: ["Everything in Free", "AI reflections", "Weekly insights", "Export journal", "Guided programs"],
+    description: "Unlock your AI companion and personalized healing insights",
+    features: [
+      "Everything in Free",
+      "Unlimited AI therapy chat",
+      "Personalized weekly reflections",
+      "Export journal to PDF",
+      "Guided healing programs",
+      "Advanced emotion tracking"
+    ],
     planId: "plus",
     icon: Zap,
     popular: true,
@@ -28,8 +41,15 @@ const tiers = [
     name: "Pro",
     price: "$19",
     period: "/month",
-    description: "Full access to all premium features",
-    features: ["Everything in Plus", "Advanced programs", "Voice + TTS", "Priority support", "1000+ tools"],
+    description: "Complete access to our entire healing ecosystem",
+    features: [
+      "Everything in Plus",
+      "1000+ premium wellness tools",
+      "Voice journaling with AI analysis",
+      "Trauma-informed programs",
+      "Priority 24/7 support",
+      "Custom healing pathways"
+    ],
     planId: "pro",
     icon: Crown,
     popular: false,
@@ -82,10 +102,11 @@ export default function Pricing() {
 
           <div className="text-center mb-12 animate-fade-in-up">
             <h1 className="text-4xl md:text-5xl font-bold text-teal mb-4 font-display" data-testid="text-pricing-title">
-              Choose Your <span className="text-gradient-brand">Path</span>
+              Invest in Your <span className="text-gradient-brand">Healing</span>
             </h1>
-            <p className="text-lg text-sage-600 max-w-xl mx-auto">
-              Start free, upgrade when you're ready. Cancel anytime.
+            <p className="text-lg text-sage-600 max-w-2xl mx-auto">
+              Your mental health is worth prioritizing. Start free and upgrade when you're ready for deeper support. 
+              Every plan includes access to trauma-informed tools designed with care. Cancel anytime—no questions asked.
             </p>
           </div>
           

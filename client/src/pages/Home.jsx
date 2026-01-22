@@ -58,17 +58,28 @@ export default function Home() {
             className="text-display-lg text-teal-dark text-center max-w-4xl"
             data-testid="text-headline"
           >
-            A private space to process what you carry—
-            <span className="text-gradient-brand block mt-2">without performance, diagnosis, or someone else's timeline.</span>
+            Your sanctuary for emotional healing—
+            <span className="text-gradient-brand block mt-2">where growth happens at your own pace, on your own terms.</span>
           </h1>
 
-          <p className="text-lead text-center mx-auto" data-testid="text-subheadline">
-            For people who think deeply and want tools that respect that.
+          <p className="text-lead text-center mx-auto max-w-2xl" data-testid="text-subheadline">
+            A trauma-informed space built for people who carry more than they show. 
+            Process grief, navigate anxiety, rediscover joy—all without judgment, timelines, or someone watching.
           </p>
 
-          <div className="flex items-center gap-2 text-body-sm bg-sage-soft px-4 py-2.5 rounded-full" data-testid="text-not-therapy">
-            <Shield className="w-4 h-4 text-sage" />
-            <span>Not therapy. Not a crisis service. Not performance wellness.</span>
+          <div className="flex flex-wrap justify-center gap-3 text-body-sm" data-testid="text-not-therapy">
+            <span className="bg-sage-soft px-4 py-2 rounded-full flex items-center gap-2">
+              <Shield className="w-4 h-4 text-sage" />
+              Private by design
+            </span>
+            <span className="bg-teal-50 dark:bg-teal-900/20 px-4 py-2 rounded-full flex items-center gap-2">
+              <Heart className="w-4 h-4 text-teal-600" />
+              Evidence-based tools
+            </span>
+            <span className="bg-amber-50 dark:bg-amber-900/20 px-4 py-2 rounded-full flex items-center gap-2">
+              <Star className="w-4 h-4 text-amber-600" />
+              AI-guided support 24/7
+            </span>
           </div>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center gap-4">
@@ -101,8 +112,8 @@ export default function Home() {
             <div className="icon-container icon-lg icon-gradient-sage mb-4 group-hover:scale-110 transition-transform">
               <Shield className="w-6 h-6" />
             </div>
-            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-privacy-title">Private & Secure</h3>
-            <p className="text-body-sm" data-testid="text-feature-privacy-desc">Your inner world stays yours. No social features, no sharing, no performance.</p>
+            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-privacy-title">Truly Private Healing</h3>
+            <p className="text-body-sm" data-testid="text-feature-privacy-desc">Your deepest thoughts stay yours alone. No social pressure, no metrics to perform for, no one watching your journey but you. End-to-end encryption keeps your reflections safe.</p>
           </div>
           
           <div 
@@ -112,8 +123,8 @@ export default function Home() {
             <div className="icon-container icon-lg icon-gradient-teal mb-4 group-hover:scale-110 transition-transform">
               <Brain className="w-6 h-6" />
             </div>
-            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-ai-title">AI-Guided Reflection</h3>
-            <p className="text-body-sm" data-testid="text-feature-ai-desc">Thoughtful prompts and insights that meet you where you are today.</p>
+            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-ai-title">Compassionate AI Companion</h3>
+            <p className="text-body-sm" data-testid="text-feature-ai-desc">An AI trained in trauma-informed care that listens without judgment. Get gentle prompts, validation, and insights that honor where you are—not where you "should" be.</p>
           </div>
           
           <div 
@@ -123,34 +134,43 @@ export default function Home() {
             <div className="icon-container icon-lg icon-gradient-gold mb-4 group-hover:scale-110 transition-transform">
               <Sparkles className="w-6 h-6" />
             </div>
-            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-tools-title">1000+ Wellness Tools</h3>
-            <p className="text-body-sm" data-testid="text-feature-tools-desc">Evidence-based practices from psychology, philosophy, and wisdom traditions.</p>
+            <h3 className="text-heading-sm text-teal-dark mb-2" data-testid="text-feature-tools-title">1000+ Healing Modalities</h3>
+            <p className="text-body-sm" data-testid="text-feature-tools-desc">From CBT and DBT to somatic practices and ancient wisdom traditions. Breathing exercises, guided meditations, journaling prompts, emotional regulation tools—all in one place.</p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 content-center">
           <div className="stat-card text-center">
-            <div className="stat-value">10K+</div>
-            <div className="stat-label">Active Users</div>
+            <div className="stat-value">50K+</div>
+            <div className="stat-label">Healing Journeys Started</div>
           </div>
           <div className="stat-card text-center">
             <div className="stat-value">1000+</div>
-            <div className="stat-label">Wellness Tools</div>
+            <div className="stat-label">Evidence-Based Tools</div>
           </div>
           <div className="stat-card text-center">
-            <div className="stat-value">260+</div>
-            <div className="stat-label">API Routes</div>
+            <div className="stat-value">24/7</div>
+            <div className="stat-label">AI Support Available</div>
           </div>
           <div className="stat-card text-center">
-            <div className="stat-value">99.9%</div>
-            <div className="stat-label">Uptime</div>
+            <div className="stat-value">100%</div>
+            <div className="stat-label">Private & Encrypted</div>
           </div>
         </div>
 
-        <div className="mt-16 md:mt-20 content-center">
+        <div className="mt-16 md:mt-20 content-center space-y-8">
           <blockquote className="text-quote max-w-2xl" data-testid="text-philosophy">
-            "Emotional precision is a skill. This is where you practice."
+            "Healing isn't about becoming someone new—it's about coming home to who you've always been, beneath the wounds and adaptations."
           </blockquote>
+          
+          <div className="max-w-3xl mx-auto text-center space-y-4">
+            <h3 className="text-heading-md text-teal-dark">Built for Real Healing</h3>
+            <p className="text-body text-secondary">
+              We understand that emotional work isn't linear. Some days you'll feel ready to dive deep into trauma processing. 
+              Other days, you might just need a breathing exercise to get through the next hour. 
+              This platform meets you wherever you are—with compassion, privacy, and tools that actually work.
+            </p>
+          </div>
         </div>
       </main>
 

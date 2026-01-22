@@ -4,8 +4,8 @@ import { Heart, BookOpen, MessageCircle, Sparkles, Wind, Target, Moon, AlertCirc
 const QUICK_ACTIONS = [
   {
     id: "mood",
-    name: "Track Mood",
-    description: "Log how you're feeling",
+    name: "Track Your State",
+    description: "Check in with how you're really feeling right now",
     icon: Heart,
     href: "/mood",
     color: "from-pink-400 to-rose-500",
@@ -14,8 +14,8 @@ const QUICK_ACTIONS = [
   },
   {
     id: "journal",
-    name: "Write Journal",
-    description: "Reflect on your day",
+    name: "Reflective Writing",
+    description: "Process thoughts with trauma-informed prompts",
     icon: BookOpen,
     href: "/journal",
     color: "from-purple-400 to-indigo-500",
@@ -24,8 +24,8 @@ const QUICK_ACTIONS = [
   },
   {
     id: "chat",
-    name: "AI Chat",
-    description: "Talk with your buddy",
+    name: "AI Companion",
+    description: "Talk through anything with compassionate AI",
     icon: MessageCircle,
     href: "/chat",
     color: "from-teal-400 to-cyan-500",
@@ -34,8 +34,8 @@ const QUICK_ACTIONS = [
   },
   {
     id: "wellness",
-    name: "Wellness Tools",
-    description: "Breathing & meditation",
+    name: "Healing Toolkit",
+    description: "1000+ evidence-based wellness practices",
     icon: Sparkles,
     href: "/wellness",
     color: "from-amber-400 to-orange-500",
@@ -44,8 +44,8 @@ const QUICK_ACTIONS = [
   },
   {
     id: "breathing",
-    name: "Breathe",
-    description: "Quick calming exercise",
+    name: "Nervous System Reset",
+    description: "Activate your body's natural calm response",
     icon: Wind,
     href: "/wellness#breathing",
     color: "from-cyan-400 to-blue-500",
@@ -54,8 +54,8 @@ const QUICK_ACTIONS = [
   },
   {
     id: "habits",
-    name: "Daily Habits",
-    description: "Track your progress",
+    name: "Micro-Healing Habits",
+    description: "Small daily practices that compound over time",
     icon: Target,
     href: "/wellness#habits",
     color: "from-emerald-400 to-teal-500",
@@ -64,8 +64,8 @@ const QUICK_ACTIONS = [
   },
   {
     id: "meditate",
-    name: "Meditate",
-    description: "Find your calm",
+    name: "Guided Stillness",
+    description: "Find peace in the present moment",
     icon: Moon,
     href: "/wellness#meditation",
     color: "from-indigo-400 to-purple-500",
@@ -74,8 +74,8 @@ const QUICK_ACTIONS = [
   },
   {
     id: "crisis",
-    name: "Crisis Help",
-    description: "Get immediate support",
+    name: "Immediate Support",
+    description: "Grounding tools and crisis resources",
     icon: AlertCircle,
     href: "/crisis",
     color: "from-red-400 to-rose-500",

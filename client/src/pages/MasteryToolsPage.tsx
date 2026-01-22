@@ -12,19 +12,19 @@ const TOOLS = [
   {
     id: "deepwork" as ActiveTool,
     name: "Deep Work Tracker",
-    description: "Track focused work sessions",
+    description: "Track and optimize focused work sessions—build the muscle of uninterrupted concentration",
     icon: Focus,
   },
   {
     id: "skills" as ActiveTool,
     name: "Skill Forge",
-    description: "Deliberate practice tracking",
+    description: "Apply deliberate practice principles to systematically develop mastery in any domain",
     icon: Flame,
   },
   {
     id: "models" as ActiveTool,
-    name: "Mental Models",
-    description: "Frameworks for thinking",
+    name: "Mental Models Library",
+    description: "Expand your cognitive toolkit with powerful frameworks for clearer thinking and better decisions",
     icon: Brain,
   }
 ];

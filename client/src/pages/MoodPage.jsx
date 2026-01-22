@@ -104,8 +104,8 @@ export default function MoodPage() {
                 <Smile className="icon-md" aria-hidden="true" />
               </div>
               <div className="stack-xs">
-                <h1 className="text-display-sm text-brand" data-testid="text-title">Track Your Mood</h1>
-                <p className="text-body-sm text-secondary">How are you feeling right now?</p>
+                <h1 className="text-display-sm text-brand" data-testid="text-title">Check In With Yourself</h1>
+                <p className="text-body-sm text-secondary">Pause, breathe, and notice what's present. There's no wrong answer—only honest awareness.</p>
               </div>
             </div>
           </header>
@@ -121,7 +121,7 @@ export default function MoodPage() {
             <fieldset className="card-elevated p-6">
               <legend className="text-lg font-semibold mb-6 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
-                How are you feeling? (1-10)
+                On a scale of 1-10, how would you rate your overall wellbeing right now?
               </legend>
               <div className="relative">
                 <div className="flex items-center justify-center mb-4">

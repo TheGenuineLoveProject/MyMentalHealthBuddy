@@ -101,7 +101,7 @@ export default function Dashboard() {
                 <h1 className="text-2xl lg:text-3xl font-bold text-slate-800 tracking-tight" data-testid="text-greeting">
                   {greeting.text}, {user?.email?.split("@")[0] || "Friend"}
                 </h1>
-                <p className="text-slate-500 mt-0.5">Here's your wellness overview</p>
+                <p className="text-slate-500 mt-0.5">Your healing journey continues—here's where you are today</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -149,9 +149,9 @@ export default function Dashboard() {
                   <Sparkles className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-slate-800">Today's Healing Focus</h2>
+                  <h2 className="text-xl font-bold text-slate-800">Today's Healing Intention</h2>
                   <p className="text-slate-600 mt-1">
-                    <em>"Embrace the present moment—it holds everything you need."</em>
+                    <em>"Healing isn't about forcing change—it's about creating the conditions where change can happen naturally. Today, be gentle with yourself."</em>
                   </p>
                 </div>
               </div>

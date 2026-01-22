@@ -12,12 +12,12 @@ import SEO from "@/components/SEO";
 type Tool = "beliefs" | "timed" | "silence" | "questions" | "timeline" | "export";
 
 const TOOLS: { id: Tool; name: string; description: string; icon: typeof Target }[] = [
-  { id: "beliefs", name: "Belief Mapping", description: "Track patterns in your thinking", icon: Target },
-  { id: "timed", name: "Timed Writing", description: "Flow state writing sessions", icon: Timer },
-  { id: "silence", name: "Silence Mode", description: "Private writing, no output", icon: VolumeX },
-  { id: "questions", name: "Question Reflection", description: "Socratic self-inquiry", icon: HelpCircle },
-  { id: "timeline", name: "Growth Timeline", description: "Your personal evolution", icon: TrendingUp },
-  { id: "export", name: "Export Data", description: "Download your reflections", icon: Download },
+  { id: "beliefs", name: "Belief Mapping", description: "Uncover hidden patterns in your thinking that shape your reality", icon: Target },
+  { id: "timed", name: "Timed Writing", description: "Enter a flow state with focused, distraction-free writing sessions", icon: Timer },
+  { id: "silence", name: "Silence Mode", description: "Write without saving—pure processing for what needs to move through you", icon: VolumeX },
+  { id: "questions", name: "Question Reflection", description: "Powerful Socratic questions that gently guide you toward insight", icon: HelpCircle },
+  { id: "timeline", name: "Growth Timeline", description: "Witness your evolution—see how far you've come over time", icon: TrendingUp },
+  { id: "export", name: "Export Your Journey", description: "Download your reflections, insights, and progress safely", icon: Download },
 ];
 
 export default function ToolsPage() {

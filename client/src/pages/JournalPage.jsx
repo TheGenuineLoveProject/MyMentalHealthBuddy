@@ -100,8 +100,8 @@ export default function JournalPage() {
                   <Notebook className="icon-md" aria-hidden="true" />
                 </div>
                 <div className="stack-xs">
-                  <h1 className="text-display-sm text-brand" data-testid="text-title">Journal</h1>
-                  <p className="text-body-sm text-secondary">Your private space for reflection</p>
+                  <h1 className="text-display-sm text-brand" data-testid="text-title">Reflective Journal</h1>
+                  <p className="text-body-sm text-secondary">A safe space to process thoughts, honor feelings, and witness your own growth</p>
                 </div>
               </div>
             </div>

@@ -33,50 +33,50 @@ const TOOL_CATEGORIES = [
     name: "Reasoning & Logic",
     iconVariant: "sage" as const,
     tools: [
-      { id: "logic" as ActiveTool, name: "Logic Lattice", description: "Map arguments", icon: Network },
-      { id: "decision" as ActiveTool, name: "Decision Architecture", description: "Structure choices", icon: Scale },
-      { id: "thought" as ActiveTool, name: "Thought Experiments", description: "Test intuitions", icon: Lightbulb },
-      { id: "moral" as ActiveTool, name: "Moral Reasoning", description: "Ethical frameworks", icon: Scale },
-      { id: "creative" as ActiveTool, name: "Creative Problem-Solving", description: "Generate solutions", icon: Sparkles }
+      { id: "logic" as ActiveTool, name: "Logic Lattice", description: "Map and deconstruct arguments to reveal hidden assumptions", icon: Network },
+      { id: "decision" as ActiveTool, name: "Decision Architecture", description: "Structure complex choices with clarity frameworks", icon: Scale },
+      { id: "thought" as ActiveTool, name: "Thought Experiments", description: "Test intuitions through philosophical scenarios", icon: Lightbulb },
+      { id: "moral" as ActiveTool, name: "Moral Reasoning", description: "Navigate ethical dilemmas with multiple frameworks", icon: Scale },
+      { id: "creative" as ActiveTool, name: "Creative Problem-Solving", description: "Generate innovative solutions through lateral thinking", icon: Sparkles }
     ]
   },
   {
     name: "Systems & Patterns",
     iconVariant: "teal" as const,
     tools: [
-      { id: "systems" as ActiveTool, name: "Systems Resonance", description: "Model feedback loops", icon: GitBranch },
-      { id: "paradox" as ActiveTool, name: "Paradox Cartographer", description: "Navigate tensions", icon: Compass },
-      { id: "synthesis" as ActiveTool, name: "Synthesis Collider", description: "Combine ideas", icon: Zap },
-      { id: "attention" as ActiveTool, name: "Attention Ecology", description: "Track focus", icon: Focus }
+      { id: "systems" as ActiveTool, name: "Systems Resonance", description: "Model complex feedback loops and interdependencies", icon: GitBranch },
+      { id: "paradox" as ActiveTool, name: "Paradox Cartographer", description: "Navigate contradictions and hold opposing truths", icon: Compass },
+      { id: "synthesis" as ActiveTool, name: "Synthesis Collider", description: "Combine disparate ideas into novel insights", icon: Zap },
+      { id: "attention" as ActiveTool, name: "Attention Ecology", description: "Understand and optimize your focus patterns", icon: Focus }
     ]
   },
   {
     name: "Knowledge & Learning",
     iconVariant: "gold" as const,
     tools: [
-      { id: "weave" as ActiveTool, name: "Knowledge Weave", description: "Connect concepts", icon: Share2 },
-      { id: "autodidact" as ActiveTool, name: "Autodidact Forge", description: "Self-directed learning", icon: Flame },
-      { id: "semantic" as ActiveTool, name: "Semantic Mapping", description: "Explore meaning", icon: Type }
+      { id: "weave" as ActiveTool, name: "Knowledge Weave", description: "Build interconnected concept maps of your understanding", icon: Share2 },
+      { id: "autodidact" as ActiveTool, name: "Autodidact Forge", description: "Design your own curriculum for self-directed mastery", icon: Flame },
+      { id: "semantic" as ActiveTool, name: "Semantic Mapping", description: "Explore the deep structure of meaning and language", icon: Type }
     ]
   },
   {
     name: "Self-Awareness",
     iconVariant: "blush" as const,
     tools: [
-      { id: "metacognition" as ActiveTool, name: "Metacognition", description: "Think about thinking", icon: Brain },
-      { id: "bias" as ActiveTool, name: "Bias Blind Spots", description: "Cognitive biases", icon: Eye },
-      { id: "epistemic" as ActiveTool, name: "Epistemic Calibration", description: "Track predictions", icon: Target },
-      { id: "mindscape" as ActiveTool, name: "Mindscape Navigator", description: "Map mental states", icon: Map }
+      { id: "metacognition" as ActiveTool, name: "Metacognition", description: "Develop awareness of your own thinking patterns", icon: Brain },
+      { id: "bias" as ActiveTool, name: "Bias Blind Spots", description: "Identify and overcome cognitive biases that limit you", icon: Eye },
+      { id: "epistemic" as ActiveTool, name: "Epistemic Calibration", description: "Improve the accuracy of your beliefs and predictions", icon: Target },
+      { id: "mindscape" as ActiveTool, name: "Mindscape Navigator", description: "Map and explore your inner mental landscape", icon: Map }
     ]
   },
   {
     name: "Identity & Meaning",
     iconVariant: "sage" as const,
     tools: [
-      { id: "values" as ActiveTool, name: "Values Clarification", description: "What matters most", icon: Heart },
-      { id: "narrative" as ActiveTool, name: "Narrative Identity", description: "Your life story", icon: BookOpen },
-      { id: "existential" as ActiveTool, name: "Existential Inquiry", description: "Ultimate questions", icon: Compass },
-      { id: "stance" as ActiveTool, name: "Philosophical Stance", description: "Map positions", icon: MapPin }
+      { id: "values" as ActiveTool, name: "Values Clarification", description: "Discover and prioritize what truly matters to you", icon: Heart },
+      { id: "narrative" as ActiveTool, name: "Narrative Identity", description: "Author your life story with meaning and purpose", icon: BookOpen },
+      { id: "existential" as ActiveTool, name: "Existential Inquiry", description: "Explore life's ultimate questions with depth", icon: Compass },
+      { id: "stance" as ActiveTool, name: "Philosophical Stance", description: "Map your intellectual positions and worldview", icon: MapPin }
     ]
   }
 ];

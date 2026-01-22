@@ -161,11 +161,12 @@ export default function Landing() {
             <Pill icon={Leaf}>Trauma-informed wellness</Pill>
             
             <h1 className="text-display-lg text-brand leading-tight">
-              A private space to process what you carry
+              Finally, a healing space that understands you
             </h1>
             
             <p className="text-body-lg text-secondary max-w-lg">
-              Without performance, diagnosis, or someone else's timeline. For people who think deeply and want tools that respect that.
+              Built for sensitive souls, deep thinkers, and anyone carrying invisible weight. 
+              Process trauma, anxiety, grief, and complex emotions with AI-guided support that's available 24/7—no appointments, no waitlists, no judgment.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -188,25 +189,25 @@ export default function Landing() {
           <div className="space-y-4">
             <FeatureCard 
               icon={Sun}
-              label="Today"
-              title="A single kind focus"
-              description="Choose one small compassionate action. Do it fully. Let that be your win."
+              label="Daily Practice"
+              title="Micro-healing that compounds"
+              description="One gentle intention each day. Small acts of self-compassion that build into profound transformation over time. No pressure, no guilt—just steady, kind progress."
               delay={100}
             />
 
             <FeatureCard 
               icon={TrendingUp}
-              label="State"
-              title="Energy • Clarity • Safety"
-              description="Track your inner conditions so support matches what you actually need."
+              label="Emotional Intelligence"
+              title="Understand your inner landscape"
+              description="Track energy, clarity, and felt safety. Get personalized insights that help you recognize patterns and respond to your needs before burnout hits."
               delay={200}
             />
 
             <FeatureCard 
               icon={BookOpen}
-              label="Journal"
-              title="Prompts that feel human"
-              description="Thoughtful questions that help you move forward without forcing conclusions."
+              label="Guided Journaling"
+              title="Prompts designed by therapists"
+              description="Evidence-based questions that gently guide you toward insight without retraumatization. Process difficult emotions at your own pace, in your own words."
               delay={300}
             />
           </div>
