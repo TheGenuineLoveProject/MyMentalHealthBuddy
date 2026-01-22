@@ -1,0 +1,226 @@
+{
+  "name": "The Genuine Love Project",
+  "version": "1.0.0",
+  "exportType": "webflow",
+  "description": "Webflow-ready component schema for TheGenuineLoveProject.com",
+  "styles": {
+    "colors": {
+      "Sage": "#8fbf9f",
+      "Sage Light": "rgba(143, 191, 159, 0.15)",
+      "Rose": "#f4c7c3",
+      "Rose Light": "rgba(244, 199, 195, 0.2)",
+      "Deep Teal": "#2f5d5d",
+      "Deep Teal Dark": "#1f3f3f",
+      "Cream": "#faf9f7",
+      "Charcoal": "#3a3a3a",
+      "Gold": "#eac33b",
+      "Gold Dark": "#d4a84b"
+    },
+    "typography": {
+      "Display": {
+        "fontFamily": "Playfair Display, Georgia, serif",
+        "weights": ["600", "700"]
+      },
+      "Body": {
+        "fontFamily": "Poppins, system-ui, sans-serif",
+        "weights": ["400", "500", "600", "700"]
+      }
+    },
+    "spacing": {
+      "unit": "8px",
+      "scale": {
+        "xs": "4px",
+        "sm": "8px",
+        "md": "16px",
+        "lg": "24px",
+        "xl": "32px",
+        "2xl": "48px",
+        "3xl": "64px"
+      }
+    },
+    "borderRadius": {
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "full": "9999px"
+    }
+  },
+  "components": [
+    {
+      "name": "Button Primary",
+      "className": ".btn.btn--primary",
+      "webflowClass": "Button Primary",
+      "styles": {
+        "background": "linear-gradient(135deg, #eac33b 0%, #d4a84b 100%)",
+        "color": "#2f5d5d",
+        "padding": "12px 24px",
+        "borderRadius": "24px",
+        "fontWeight": "600",
+        "fontSize": "16px"
+      },
+      "states": {
+        "hover": { "filter": "brightness(1.05)", "transform": "translateY(-2px)" },
+        "active": { "transform": "translateY(0)" },
+        "disabled": { "opacity": "0.5", "cursor": "not-allowed" }
+      }
+    },
+    {
+      "name": "Button Secondary",
+      "className": ".btn.btn--secondary",
+      "webflowClass": "Button Secondary",
+      "styles": {
+        "background": "#ffffff",
+        "color": "#2f5d5d",
+        "padding": "12px 24px",
+        "borderRadius": "24px",
+        "border": "2px solid rgba(143, 191, 159, 0.2)",
+        "fontWeight": "500"
+      }
+    },
+    {
+      "name": "Navbar",
+      "className": ".header",
+      "webflowClass": "Navbar",
+      "styles": {
+        "position": "sticky",
+        "top": "0",
+        "background": "rgba(250, 249, 247, 0.95)",
+        "backdropFilter": "blur(10px)",
+        "padding": "16px 0",
+        "zIndex": "100"
+      },
+      "children": ["Logo", "Nav Links", "Auth Buttons"]
+    },
+    {
+      "name": "Hero Section",
+      "className": ".hero",
+      "webflowClass": "Hero",
+      "styles": {
+        "padding": "80px 0",
+        "background": "linear-gradient(180deg, rgba(143, 191, 159, 0.15) 0%, transparent 100%)",
+        "textAlign": "center"
+      },
+      "children": ["Badge", "H1 Title", "Subtitle", "CTA Buttons"]
+    },
+    {
+      "name": "Card",
+      "className": ".card",
+      "webflowClass": "Card",
+      "styles": {
+        "background": "#ffffff",
+        "padding": "24px",
+        "borderRadius": "16px",
+        "boxShadow": "0 2px 8px rgba(47, 93, 93, 0.08)"
+      },
+      "children": ["Icon", "Title", "Description"]
+    },
+    {
+      "name": "Blog Card",
+      "className": ".blog-card",
+      "webflowClass": "Blog Card",
+      "styles": {
+        "background": "#ffffff",
+        "borderRadius": "16px",
+        "overflow": "hidden"
+      },
+      "children": ["Image", "Category Tag", "Date", "Title", "Excerpt", "Read More Link"]
+    },
+    {
+      "name": "Form Input",
+      "className": ".form-input",
+      "webflowClass": "Form Input",
+      "styles": {
+        "width": "100%",
+        "padding": "12px 16px",
+        "border": "2px solid rgba(143, 191, 159, 0.2)",
+        "borderRadius": "12px",
+        "fontSize": "16px",
+        "transition": "border-color 0.2s"
+      },
+      "states": {
+        "focus": { "borderColor": "#eac33b", "outline": "none" },
+        "error": { "borderColor": "#ef4444" }
+      }
+    },
+    {
+      "name": "Sidebar",
+      "className": ".sidebar",
+      "webflowClass": "Sidebar",
+      "styles": {
+        "width": "240px",
+        "height": "100vh",
+        "position": "fixed",
+        "left": "0",
+        "top": "0",
+        "background": "#faf9f7",
+        "borderRight": "1px solid rgba(143, 191, 159, 0.2)"
+      },
+      "children": ["Logo", "Nav List", "User Profile"]
+    },
+    {
+      "name": "Footer",
+      "className": ".footer",
+      "webflowClass": "Footer",
+      "styles": {
+        "background": "#faf9f7",
+        "padding": "48px 0 24px",
+        "borderTop": "1px solid rgba(143, 191, 159, 0.2)"
+      },
+      "children": ["Brand", "Nav Columns", "Social Links", "Copyright"]
+    },
+    {
+      "name": "Stats Card",
+      "className": ".stat-card",
+      "webflowClass": "Stat Card",
+      "styles": {
+        "background": "#ffffff",
+        "padding": "24px",
+        "borderRadius": "16px",
+        "textAlign": "center"
+      },
+      "children": ["Icon", "Value", "Label"]
+    },
+    {
+      "name": "Profile Card",
+      "className": ".profile-card",
+      "webflowClass": "Profile Card",
+      "styles": {
+        "background": "#ffffff",
+        "padding": "24px",
+        "borderRadius": "16px",
+        "marginBottom": "24px"
+      }
+    },
+    {
+      "name": "Toggle Switch",
+      "className": ".toggle",
+      "webflowClass": "Toggle Switch",
+      "styles": {
+        "width": "48px",
+        "height": "24px",
+        "borderRadius": "12px",
+        "background": "#e5e7eb"
+      },
+      "states": {
+        "checked": { "background": "#8fbf9f" }
+      }
+    }
+  ],
+  "pages": [
+    { "name": "Landing", "file": "index.html", "slug": "/" },
+    { "name": "Onboarding", "file": "onboarding.html", "slug": "/onboarding" },
+    { "name": "Homepage", "file": "home.html", "slug": "/home" },
+    { "name": "CRM Dashboard", "file": "crm.html", "slug": "/dashboard" },
+    { "name": "Content Hub", "file": "content.html", "slug": "/content" },
+    { "name": "Q&A", "file": "qa.html", "slug": "/qa" },
+    { "name": "Blog", "file": "blog.html", "slug": "/blog" },
+    { "name": "Profile", "file": "profile.html", "slug": "/profile" },
+    { "name": "Login", "file": "login.html", "slug": "/login" }
+  ],
+  "breakpoints": {
+    "mobile": { "maxWidth": "767px" },
+    "tablet": { "minWidth": "768px", "maxWidth": "1023px" },
+    "desktop": { "minWidth": "1024px" }
+  }
+}
