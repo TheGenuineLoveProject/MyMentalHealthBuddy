@@ -10,6 +10,7 @@ import SkipToContent from "./components/SkipToContent.jsx";
 import Home from "./pages/Home.jsx";
 import CanvaLanding from "./pages/CanvaLanding.jsx";
 import DesignSystem from "./pages/DesignSystem.jsx";
+import WireframeTemplates from "./pages/WireframeTemplates.jsx";
 import Login from "./pages/Login.jsx";
 import LoginCallback from "./pages/LoginCallback.jsx";
 import Register from "./pages/Register.jsx";
@@ -131,6 +132,7 @@ export default function App() {
               <Route path="/welcome" component={CanvaLanding} />
               <Route path="/original-home" component={Home} />
               <Route path="/design-system" component={DesignSystem} />
+              <Route path="/wireframes" component={WireframeTemplates} />
               <Route path="/login" component={Login} />
               <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />
