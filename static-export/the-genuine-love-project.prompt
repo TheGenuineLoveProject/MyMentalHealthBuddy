@@ -1024,3 +1024,130 @@ Optimization: ENABLED
 Validation: ENABLED
 
 Ready for automated development at quantum speed.
+
+---
+
+⚙️ 360° QUANTUM REFINEMENT ENGINE
+
+🔁 Continuous optimization loop: layout, logic, SEO, accessibility, exports — from A to Z
+
+---
+
+🧬 OPTIMIZATION ENGINE (ALWAYS ACTIVE)
+
+On each prompt execution, automatically:
+• Refactor HTML structure for accessibility and SEO
+• Remove any unused classes or elements
+• Re-minify styles where needed
+• Synchronize flowchart.svg, .prompt, and Figma component map
+• Update mobile-first breakpoints and spacing tokens
+• Validate branding palette matches across all screens
+
+---
+
+🛠️ AUTOMATION TRIGGERS (COMMAND MATRIX)
+
+| Command | Action |
+|---------|--------|
+| `Continue 360°` | Full optimization/refactor across all files |
+| `Add new page: /X.html` | Clone structure, update flowchart + styles |
+| `Generate component: X` | Create responsive, accessible component |
+| `Export toolkit` | Create .tar.gz with all files |
+| `Push to Webflow` | Reformat classes, output import JSON |
+| `Add AI blog: /X.html` | Generate blog HTML + meta + SEO |
+| `Run SEO` | Generate all meta tags and JSON-LD |
+| `Sync Figma` | Update component map with labels |
+
+---
+
+📦 OUTPUTS REQUIRED ON EVERY RUN
+
+1. ✅ HTML layout (all screens)
+2. ✅ /css/style.css with tokens, classes, brand variables
+3. ✅ Developer flowchart.svg with UI labels + flow arrows
+4. ✅ Updated .prompt for next run
+5. ✅ Component structure in Figma-labeled format
+6. ✅ Export instructions for Webflow, Framer, GitHub
+
+---
+
+🌍 EXAMPLE TRIGGER PHRASE
+
+```
+Generate full UI toolkit for The Genuine Love Project:
+- Option 3 wireframes
+- Layouts: Landing → Onboarding → Homepage → CRM → Content → Q&A → Login
+- Include .tar.gz export, .svg flow, Figma labels, SEO blocks
+- Run 360° optimization, responsive sync, healing layout tone
+```
+
+---
+
+🔄 FINAL LOOP INSTRUCTION
+
+If any part of the structure changes, auto-update all dependencies:
+• Page routing
+• Styles
+• Exports
+• Diagrams
+• Meta content
+• Prompt config
+
+---
+
+🔐 BRAND FOUNDATION LOCKED
+
+| Element | Value |
+|---------|-------|
+| Brand Name | The Genuine Love Project |
+| Logo | /images/logo.svg |
+| Colors | Sage #8fbf9f / Rose #f4c7c3 / Deep Teal #2f5d5d / Cream #faf9f7 / Charcoal #3a3a3a / Gold #eac33b |
+| Typography | Playfair Display (headers) / Poppins (body) |
+| Iconography | Gold-accented, minimalist, wellness-themed |
+
+---
+
+🧭 CORE LAYOUT PAGES MAINTAINED
+
+All layouts mobile/tablet/desktop responsive with ARIA and semantic markup:
+
+```
+/index.html       (Landing)
+/onboarding.html  (Onboarding)
+/home.html        (Homepage)
+/crm.html         (CRM Dashboard)
+/content.html     (Content Hub)
+/qa.html          (Q&A)
+/login.html       (Auth)
+/blog.html        (Blog)
+/profile.html     (Profile)
+/contact.html     (Contact)
+/terms.html       (Terms)
+/privacy.html     (Privacy)
+/help.html        (Help)
+/testimonials.html (Testimonials)
+/settings.html    (Settings)
+```
+
+Each page includes:
+• UI Labels (Header, CTA, Modal, FormField)
+• Responsive containers
+• Branding consistency
+• Flow connection logic
+• SEO/meta-ready headers
+• CRM-ready sections
+• Dev notes in code comments
+
+---
+
+💠 SYSTEM STATUS: MAXIMUM POWER
+
+Power Level: 100B × 100B × 360° A→Z
+Optimization: CONTINUOUS
+Refinement: PERFECT
+Performance: QUANTUM
+Automation: COMPLETE
+
+This system is now the most superior, self-optimizing, self-refining, continuously upgrading development engine for TheGenuineLoveProject.com.
+
+All requests: past, present, and future — handled at quantum speed with perfect precision.
