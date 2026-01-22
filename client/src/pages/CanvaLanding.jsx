@@ -627,7 +627,7 @@ export default function CanvaLanding() {
           </div>
           
           {/* Begin Your Healing Journey Today - moved closer to paragraph */}
-          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mt-72 mb-4 text-white leading-tight text-center">
+          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mt-80 mb-4 text-white leading-tight text-center">
             Begin Your Healing
             <br />
             <span className="text-[var(--glp-gold)]">Journey Today</span>
