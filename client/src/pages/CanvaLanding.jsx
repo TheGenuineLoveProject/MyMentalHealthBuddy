@@ -607,52 +607,52 @@ export default function CanvaLanding() {
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
-        <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
-          <div className="inline-flex items-center justify-center gap-5 px-10 py-6 rounded-full bg-white/10 backdrop-blur-sm mb-12">
-            <Sparkles className="w-12 h-12 text-[var(--glp-gold)]" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }} />
-            <span className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.15)' }}>Start your transformation today</span>
+        <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
+          <div className="inline-flex items-center justify-center gap-6 px-12 py-7 rounded-full bg-white/10 backdrop-blur-sm mb-14">
+            <Sparkles className="w-14 h-14 text-[var(--glp-gold)]" style={{ filter: 'drop-shadow(0 3px 5px rgba(0,0,0,0.25))' }} />
+            <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 3px 5px rgba(0,0,0,0.18)' }}>Start your transformation today</span>
           </div>
           
           {/* Lotus Accent */}
-          <div className="w-full flex items-center justify-center mb-12" style={{ position: 'relative' }}>
-            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '4px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent)' }}></div>
-            <div className="relative rounded-full overflow-hidden" style={{ width: '180px', height: '180px', background: 'var(--glp-white)', boxShadow: '0 10px 42px rgba(0,0,0,0.18)' }}>
+          <div className="w-full flex items-center justify-center mb-14" style={{ position: 'relative' }}>
+            <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)' }}></div>
+            <div className="relative rounded-full overflow-hidden" style={{ width: '200px', height: '200px', background: 'var(--glp-white)', boxShadow: '0 12px 48px rgba(0,0,0,0.2)' }}>
               <img 
                 src="/brand/footer-wellness-graphic.png" 
                 alt="Lotus flower" 
-                style={{ width: '180px', height: '180px', objectFit: 'cover' }}
+                style={{ width: '200px', height: '200px', objectFit: 'cover' }}
               />
             </div>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-12 text-white leading-tight text-center">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold mb-14 text-white leading-tight text-center">
             Begin Your Healing
             <br />
             <span className="text-[var(--glp-gold)]">Journey Today</span>
           </h2>
-          <p className="text-3xl md:text-4xl lg:text-5xl mb-14 text-white/90 max-w-4xl mx-auto font-medium text-center">
+          <p className="text-4xl md:text-5xl lg:text-6xl mb-16 text-white/90 max-w-5xl mx-auto font-medium text-center">
             Join thousands who have found peace, growth, and genuine love within themselves.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
             <Link href="/register">
               <button 
-                className="group px-16 py-7 rounded-full font-bold text-3xl md:text-4xl transition-all hover:scale-105 hover:shadow-2xl"
+                className="group px-20 py-8 rounded-full font-bold text-4xl md:text-5xl transition-all hover:scale-105 hover:shadow-2xl"
                 style={{
                   background: 'var(--glp-white)',
                   color: 'var(--glp-sage-deep)',
-                  boxShadow: '0 10px 40px var(--glp-overlay-50)'
+                  boxShadow: '0 12px 48px var(--glp-overlay-50)'
                 }}
                 data-testid="button-final-cta"
               >
-                <span className="flex items-center gap-4">
+                <span className="flex items-center gap-5">
                   Start Free Today
-                  <ArrowRight className="w-10 h-10 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="w-12 h-12 transition-transform group-hover:translate-x-1" />
                 </span>
               </button>
             </Link>
             <Link href="/pricing">
               <button 
-                className="px-16 py-7 rounded-full font-bold text-3xl md:text-4xl text-white border-4 border-white/40 hover:border-white/70 hover:bg-white/10 transition-all"
+                className="px-20 py-8 rounded-full font-bold text-4xl md:text-5xl text-white border-4 border-white/50 hover:border-white/80 hover:bg-white/10 transition-all"
                 data-testid="button-view-pricing"
               >
                 View Pricing
