@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+/**
+ * Env audit: discovers env var usage patterns and validates .env/.env.example coverage.
+ * Why: prevents "works on my machine" auth/login failures.
+ */
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -8,81 +13,117 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, '..');
 
-const REQUIRED_VARS = [
-  { name: 'DATABASE_URL', required: true, description: 'PostgreSQL connection string' },
-  { name: 'SESSION_SECRET', required: true, description: 'Express session secret' },
-  { name: 'GITHUB_CLIENT_ID', required: false, description: 'GitHub OAuth client ID' },
-  { name: 'GITHUB_CLIENT_SECRET', required: false, description: 'GitHub OAuth client secret' },
-  { name: 'ADMIN_TOKEN', required: false, description: 'Admin authentication token' },
-  { name: 'OPENAI_API_KEY', required: false, description: 'OpenAI API key for AI features' },
-  { name: 'STRIPE_SECRET_KEY', required: false, description: 'Stripe secret key for payments' },
-  { name: 'STRIPE_PUBLISHABLE_KEY', required: false, description: 'Stripe publishable key' },
-  { name: 'SENTRY_DSN', required: false, description: 'Sentry error tracking DSN' },
+const EXCLUDE_DIRS = new Set(['node_modules', '.git', 'dist', 'build', '.next', '.cache', '.vite']);
+const PATTERNS = [
+  /process\.env\.([A-Z0-9_]+)/g,
+  /import\.meta\.env\.([A-Z0-9_]+)/g,
 ];
 
-function checkEnvVars() {
-  console.log('== Environment Variable Audit ==\n');
-  
-  let passed = 0;
-  let failed = 0;
-  let optional = 0;
-  
-  for (const v of REQUIRED_VARS) {
-    const value = process.env[v.name];
-    const exists = value !== undefined && value !== '';
-    
-    if (v.required) {
-      if (exists) {
-        console.log(`✓ ${v.name} (required) - SET`);
-        passed++;
-      } else {
-        console.log(`✗ ${v.name} (required) - MISSING`);
-        failed++;
-      }
-    } else {
-      if (exists) {
-        console.log(`✓ ${v.name} (optional) - SET`);
-        optional++;
-      } else {
-        console.log(`- ${v.name} (optional) - not set`);
-      }
+const KNOWN_REQUIRED = new Set(['DATABASE_URL', 'SESSION_SECRET']);
+const KNOWN_OPTIONAL = new Set([
+  'NODE_ENV', 'PORT', 'REPL_ID', 'REPL_OWNER', 'REPLIT_DB_URL', 'REPLIT_DOMAINS',
+  'VITE_API_URL', 'VITE_PUBLIC_URL', 'BASE_URL', 'DEV', 'PROD', 'SSR', 'MODE'
+]);
+
+function walk(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (ent.isDirectory()) {
+      if (EXCLUDE_DIRS.has(ent.name)) continue;
+      walk(path.join(dir, ent.name), out);
+    } else if (ent.isFile()) {
+      const p = path.join(dir, ent.name);
+      if (/\.(js|jsx|ts|tsx|mjs|cjs|py|go|java|rb|php|md|mdx)$/.test(p)) out.push(p);
     }
   }
-  
-  console.log(`\n== Summary ==`);
-  console.log(`Required: ${passed}/${REQUIRED_VARS.filter(v => v.required).length} set`);
-  console.log(`Optional: ${optional}/${REQUIRED_VARS.filter(v => !v.required).length} set`);
-  
-  if (failed > 0) {
-    console.log(`\n⚠ WARNING: ${failed} required environment variable(s) missing`);
-    console.log('Some features may not work without them.');
-  } else {
-    console.log('\n✓ PASS: All required environment variables are set');
+  return out;
+}
+
+function parseDotEnv(filePath) {
+  if (!fs.existsSync(filePath)) return new Set();
+  const lines = fs.readFileSync(filePath, 'utf8').split(/\r?\n/);
+  const keys = new Set();
+  for (const line of lines) {
+    const t = line.trim();
+    if (!t || t.startsWith('#')) continue;
+    const idx = t.indexOf('=');
+    if (idx > 0) keys.add(t.slice(0, idx).trim());
+  }
+  return keys;
+}
+
+console.log('== ENV AUDIT ==\n');
+
+const files = walk(ROOT);
+const used = new Set();
+
+for (const f of files) {
+  const txt = fs.readFileSync(f, 'utf8');
+  for (const re of PATTERNS) {
+    re.lastIndex = 0;
+    let m;
+    while ((m = re.exec(txt))) used.add(m[1]);
   }
 }
 
-function checkEnvExample() {
-  const envExamplePath = path.join(ROOT, '.env.example');
-  
-  if (fs.existsSync(envExamplePath)) {
-    console.log('\n✓ .env.example exists');
+console.log(`Scanned ${files.length} files`);
+console.log(`Found ${used.size} unique env var references\n`);
+
+const envExample = parseDotEnv(path.join(ROOT, '.env.example'));
+const envLocal = parseDotEnv(path.join(ROOT, '.env'));
+
+const missingInExample = [...used].filter(k => !envExample.has(k) && !KNOWN_OPTIONAL.has(k)).sort();
+const missingLocally = [...used].filter(k => !envLocal.has(k) && !KNOWN_OPTIONAL.has(k) && !process.env[k]).sort();
+
+console.log('== Required Environment Variables ==');
+let requiredMissing = 0;
+for (const k of KNOWN_REQUIRED) {
+  if (process.env[k]) {
+    console.log(`✓ ${k} - SET`);
   } else {
-    console.log('\n- .env.example not found (optional)');
+    console.log(`✗ ${k} - MISSING`);
+    requiredMissing++;
   }
 }
 
-function checkEnvChecklist() {
-  const checklistPath = path.join(ROOT, 'ENV_CHECKLIST.md');
-  
-  if (fs.existsSync(checklistPath)) {
-    console.log('✓ ENV_CHECKLIST.md exists');
+console.log('\n== Discovered Environment Variables ==');
+const discovered = [...used].filter(k => !KNOWN_REQUIRED.has(k) && !KNOWN_OPTIONAL.has(k)).sort();
+for (const k of discovered) {
+  if (process.env[k]) {
+    console.log(`✓ ${k} - SET`);
   } else {
-    console.log('- ENV_CHECKLIST.md not found (optional)');
+    console.log(`- ${k} - not set`);
   }
 }
 
-checkEnvVars();
-checkEnvExample();
-checkEnvChecklist();
+if (missingInExample.length) {
+  console.log('\n== Missing in .env.example ==');
+  for (const k of missingInExample) console.log(`  - ${k}`);
+}
+
+if (missingLocally.length) {
+  console.log('\n== Note: Not in .env (may be in Replit Secrets) ==');
+  for (const k of missingLocally) console.log(`  - ${k}`);
+}
+
+console.log('\n== File Checks ==');
+if (fs.existsSync(path.join(ROOT, '.env.example'))) {
+  console.log('✓ .env.example exists');
+} else {
+  console.log('- .env.example not found');
+}
+
+if (fs.existsSync(path.join(ROOT, 'ENV_CHECKLIST.md'))) {
+  console.log('✓ ENV_CHECKLIST.md exists');
+} else {
+  console.log('- ENV_CHECKLIST.md not found');
+}
+
+console.log('\n== Summary ==');
+if (requiredMissing > 0) {
+  console.log(`⚠ WARNING: ${requiredMissing} required environment variable(s) missing`);
+} else {
+  console.log('✓ PASS: All required environment variables are set');
+}
 
 console.log('\n== Env Audit Complete ==');

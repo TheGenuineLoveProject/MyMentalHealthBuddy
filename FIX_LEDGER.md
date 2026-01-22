@@ -272,7 +272,12 @@ npm run link:scan     # Navigation link scan
 ```
 
 ### Latest Results
-- Environment Audit: ✅ 2/2 required, 6/7 optional set
-- Link Scan: ✅ 98 routes, 58 links, 0 broken
-- .env.example: ✅ exists
+- Environment Audit: ✅ 2/2 required set, 54 env vars discovered
+- Link Scan: ✅ 230 routes, 85 links, 0 broken
+- .env.example: ✅ exists (updated with all discovered vars)
 - ENV_CHECKLIST.md: ✅ exists
+- SAFETY.md: ✅ created
+
+### Upgraded Tool Features
+1. **env_audit.mjs** - Now scans entire codebase for `process.env.*` and `import.meta.env.*` patterns
+2. **link_scan.mjs** - Now includes route guessing from file structure + dynamic route detection

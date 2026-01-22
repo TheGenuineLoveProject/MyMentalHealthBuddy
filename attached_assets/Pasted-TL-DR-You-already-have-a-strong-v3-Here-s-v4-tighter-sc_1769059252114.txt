@@ -1,0 +1,558 @@
+TL;DR
+
+You already have a strong v3. Here’s v4: tighter scope locks, explicit file allowlists, rollback protocol, route map + auth smoke, UI token standard, and a single release-gate command that turns your repo into a self-checking, continuously improvable platform without chaos.
+
+⸻
+
+Plan (pseudocode)
+	1.	Contract v4: strict sequencing, explicit allowlists, change budget, rollback rules.
+	2.	Tooling: release gate + env audit + link scan + route map + auth smoke.
+	3.	QA Guardian: fix login/admin + build/runtime blockers; add smoke verification.
+	4.	UX Finisher: token system + navigation correctness + accessibility + states.
+	5.	Content Curator: onboarding + safety + FAQ; structured for localization.
+	6.	Final Gate: one PASS/FAIL verdict + logs.
+
+⸻
+
+
+================================================================================
+MASTER REPLIT PROMPT v4 (COPY/PASTE INTO REPLIT AI)
+================================================================================
+PROJECT: TheGenuineLoveProject
+EXECUTION MODE: Ship-grade engineering. Strict sequencing. No scope creep.
+
+PIPELINE (MUST RUN IN ORDER)
+1) QA Guardian → 2) UX Finisher → 3) Content Curator
+No parallel work. No skipping. Each phase ends with PASS/FAIL + verification outputs.
+
+SCOPE CONTRACT (NON-NEGOTIABLE)
+0) Prime Directive: Repair, stabilize, and polish what exists. Do not invent major new product features.
+1) Change Budget:
+   - QA Phase: only changes needed for install/build/auth correctness + smoke checks.
+   - UX Phase: only theme/tokens/components/navigation/accessibility/states.
+   - Content Phase: only copy/docs/pages; no layout or backend refactors.
+2) Rollback Protocol:
+   - Every phase must commit or logically group changes into a “Phase Patch Set”.
+   - If a phase causes regressions, revert that patch set and re-apply minimal fixes.
+3) Secrets:
+   - Never hardcode credentials or keys.
+   - All secrets via Replit Secrets; local placeholders in .env.example.
+4) Claims:
+   - No medical diagnosis, no guaranteed outcomes. Supportive, grounded language only.
+5) Files that MUST exist (create if missing):
+   - FIX_LEDGER.md (issue → root cause → patch → verification → expected output)
+   - ENV_CHECKLIST.md (env var → where used → why → how to set in Replit)
+   - .env.example
+   - docs/RUNBOOK.md (how to run gates, how to debug login, how to deploy)
+   - docs/UX_TOKENS.md (design tokens + usage rules)
+   - docs/CONTENT_TONE.md (voice + forbidden claims + safety language)
+   - SAFETY.md + an in-app Safety page linked from footer/help.
+
+AGENT ALLOWLISTS (HARD ENFORCEMENT)
+QA Guardian may edit ONLY:
+- package.json, lockfiles, tsconfig*, eslint/prettier configs, vite/next configs
+- server/**, api/**, backend/**, prisma/**, db/**, migrations/**
+- auth/**, middleware/**, utils/** (non-UI)
+- tests/**, tools/**, .env.example, ENV_CHECKLIST.md, FIX_LEDGER.md, docs/RUNBOOK.md
+QA Guardian must NOT edit:
+- ui/**, components/**, styles/**, pages/**, app/** (visual/layout), content/**
+
+UX Finisher may edit ONLY:
+- ui/**, components/**, styles/**, theme/**, app/**, pages/** (UI only)
+- public/** assets (icons, images) if already present
+- docs/UX_TOKENS.md, FIX_LEDGER.md
+UX Finisher must NOT edit:
+- auth logic, backend, database schemas, API behavior
+
+Content Curator may edit ONLY:
+- content/**, docs/** (content docs), markdown/mdx pages, localized strings
+- SAFETY.md and in-app Safety page copy
+- FIX_LEDGER.md, docs/CONTENT_TONE.md
+Content Curator must NOT edit:
+- backend/auth, layout refactors, routing structure
+
+ACCEPTANCE CRITERIA (ALL MUST PASS)
+A) Install succeeds (clean).
+B) Build succeeds.
+C) Lint/typecheck/test succeed IF scripts exist; otherwise add minimal smoke scripts.
+D) Dev server starts.
+E) Login works in dev (at least one happy path).
+F) Admin login route works OR is properly gated with clear messaging.
+G) Navigation: no dead internal links; friendly 404; empty/loading/error states exist.
+H) Visual system: single token source; consistent components; visible focus; reduced motion support.
+I) Safety page exists, reachable, and includes crisis guidance.
+
+PHASE 0 — DISCOVERY (DO FIRST, PRINT RESULTS)
+- Detect stack (Next/Vite/etc), router, auth method, DB, styling system.
+- Print scripts: dev/build/test/lint/typecheck.
+- Route inventory: login routes, admin routes, protected routes.
+- Run baseline gates (best-effort). Paste error excerpts.
+- Write:
+  - FIX_LEDGER.md (Discovery section)
+  - ENV_CHECKLIST.md
+  - .env.example
+  - docs/RUNBOOK.md
+  - tools/release_gate.sh
+  - tools/env_audit.js
+  - tools/link_scan.js
+  - tools/route_map.js
+  - tools/auth_smoke.js
+
+PHASE 1 — QA GUARDIAN (STABILITY + AUTH)
+- Run: bash tools/release_gate.sh
+- Fix blockers in smallest diffs possible.
+- Login/admin login:
+  - Identify auth flow + sessions/cookies/JWT
+  - Ensure protected routes return 401/redirect when unauthenticated
+  - If admin roles missing: add MINIMAL role flag + guard only (no RBAC system)
+- Add smoke checks:
+  - node tools/auth_smoke.js (or equivalent) to validate endpoints/guards
+- Update FIX_LEDGER.md per fix with exact verify commands + expected output.
+- End with: “QA PASS” + paste command outputs.
+
+PHASE 2 — UX FINISHER (VISUALS + NAV + A11Y)
+- Establish tokens in ONE place (CSS vars or Tailwind theme).
+- Create docs/UX_TOKENS.md with:
+  - palette, typography, spacing scale, radii, shadows, motion
+  - usage rules (“no raw hex in components”, etc.)
+- Apply tokens to key surfaces:
+  - auth screens, primary nav, dashboard/home, cards, forms, buttons
+- Fix navigation: all internal links map to real routes; add 404 + empty/loading/error states.
+- A11Y basics: focus rings, keyboard nav, reduced-motion support.
+- Update FIX_LEDGER.md.
+- End with: “UX PASS” checklist + link scan output.
+
+PHASE 3 — CONTENT CURATOR (ONBOARDING + SAFETY + CLARITY)
+- docs/CONTENT_TONE.md: warmth + clarity + prohibited claims + escalation language.
+- Create/Update:
+  - onboarding content
+  - Safety page (not medical advice + crisis guidance + professional support)
+  - FAQ: login/admin/troubleshooting/privacy
+- Structure content for localization-ready future (centralized strings or markdown directory).
+- Update FIX_LEDGER.md.
+- End with: “CONTENT PASS” + content map.
+
+FINAL — RELEASE GATE (REQUIRED)
+Run:
+- bash tools/release_gate.sh
+Report:
+- PASS/FAIL
+- If FAIL: list minimal next actions (bounded) + rerun output
+
+Begin Phase 0 now.
+================================================================================
+
+
+
+================================================================================
+TOOLS (DROP-IN FILES)
+================================================================================
+
+--- tools/release_gate.sh ---
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+echo "== Release Gate: TheGenuineLoveProject =="
+date
+echo "Repo: $ROOT"
+echo
+
+have_cmd() { command -v "$1" >/dev/null 2>&1; }
+have_file() { [ -f "$1" ]; }
+
+run() {
+  local label="$1"; shift
+  echo "== $label =="
+  "$@"
+  echo
+}
+
+node_pm() {
+  if have_file "pnpm-lock.yaml" && have_cmd pnpm; then echo "pnpm"; return; fi
+  if have_file "yarn.lock" && have_cmd yarn; then echo "yarn"; return; fi
+  if have_file "package-lock.json" && have_cmd npm; then echo "npm_ci"; return; fi
+  if have_file "package.json" && have_cmd npm; then echo "npm"; return; fi
+  echo ""
+}
+
+has_npm_script() {
+  local script="$1"
+  node -e "const p=require('./package.json'); process.exit(p.scripts && p.scripts['$script'] ? 0 : 1)" >/dev/null 2>&1
+}
+
+run_npm_script_if() {
+  local script="$1"
+  if has_npm_script "$script"; then run "npm run $script" npm run -s "$script"; else echo "SKIP: $script"; echo; fi
+}
+
+PM="$(node_pm)"
+
+if [ -n "$PM" ]; then
+  echo "== Node detected ($PM) =="
+  if [ "$PM" = "pnpm" ]; then run "pnpm install" pnpm install;
+  elif [ "$PM" = "yarn" ]; then run "yarn install" yarn install --frozen-lockfile || yarn install;
+  elif [ "$PM" = "npm_ci" ]; then run "npm ci" npm ci;
+  else run "npm install" npm install; fi
+
+  run_npm_script_if lint
+  run_npm_script_if typecheck
+  run_npm_script_if test
+  run_npm_script_if build
+
+  if have_file "tools/env_audit.js"; then run "env audit" node tools/env_audit.js; fi
+  if have_file "tools/route_map.js"; then run "route map" node tools/route_map.js; fi
+  if have_file "tools/link_scan.js"; then run "link scan" node tools/link_scan.js; fi
+  if have_file "tools/auth_smoke.js"; then run "auth smoke" node tools/auth_smoke.js; fi
+else
+  echo "== No Node package.json detected. =="
+  echo
+fi
+
+if have_file "requirements.txt" && have_cmd python; then
+  run "pip install" python -m pip install -r requirements.txt
+  if have_cmd pytest; then run "pytest" pytest -q; fi
+fi
+
+echo "== RELEASE GATE: PASS =="
+exit 0
+
+
+--- tools/env_audit.js ---
+/**
+ * Env audit: discovers env usage patterns and checks .env.example coverage.
+ */
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const EXCLUDE = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+
+const PATTERNS = [
+  /process\.env\.([A-Z0-9_]+)/g,
+  /import\.meta\.env\.([A-Z0-9_]+)/g,
+];
+
+function walk(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (ent.isDirectory()) {
+      if (EXCLUDE.has(ent.name)) continue;
+      walk(path.join(dir, ent.name), out);
+    } else if (ent.isFile()) {
+      const p = path.join(dir, ent.name);
+      if (/\.(js|jsx|ts|tsx|mjs|cjs|md|mdx|py)$/.test(p)) out.push(p);
+    }
+  }
+  return out;
+}
+
+function parseDotEnv(fp) {
+  if (!fs.existsSync(fp)) return new Set();
+  const keys = new Set();
+  for (const line of fs.readFileSync(fp, "utf8").split(/\r?\n/)) {
+    const t = line.trim();
+    if (!t || t.startsWith("#")) continue;
+    const i = t.indexOf("=");
+    if (i > 0) keys.add(t.slice(0, i).trim());
+  }
+  return keys;
+}
+
+const used = new Set();
+for (const f of walk(ROOT)) {
+  const txt = fs.readFileSync(f, "utf8");
+  for (const re of PATTERNS) {
+    let m;
+    while ((m = re.exec(txt))) used.add(m[1]);
+  }
+}
+
+const ex = parseDotEnv(path.join(ROOT, ".env.example"));
+const missing = [...used].filter((k) => !ex.has(k)).sort();
+
+console.log("== ENV AUDIT ==");
+console.log(`Detected env keys used in code: ${used.size}`);
+if (!used.size) {
+  console.log("NOTE: No env keys detected by regex; auth/DB may still require env.");
+  process.exit(0);
+}
+
+if (missing.length) {
+  console.log("FAIL: Missing in .env.example:");
+  missing.forEach((k) => console.log(`  - ${k}`));
+  process.exit(1);
+}
+console.log("PASS: .env.example covers detected env keys.");
+
+
+--- tools/route_map.js ---
+/**
+ * Route map (best-effort) for Next.js (pages/app).
+ */
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const EXCLUDE = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+
+function walk(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (ent.isDirectory()) {
+      if (EXCLUDE.has(ent.name)) continue;
+      walk(path.join(dir, ent.name), out);
+    } else if (ent.isFile()) {
+      if (/\.(js|jsx|ts|tsx|mdx)$/.test(ent.name)) out.push(path.join(dir, ent.name));
+    }
+  }
+  return out;
+}
+
+function inferRoutes(base) {
+  const routes = new Set();
+  for (const f of walk(base)) {
+    const rel = path.relative(base, f).replace(/\\/g, "/");
+    if (rel.startsWith("_")) continue;
+    if (rel.includes("[") && rel.includes("]")) continue;
+    let r = rel.replace(/\.(js|jsx|ts|tsx|mdx)$/, "");
+    r = r.replace(/\/(page|index)$/, "");
+    r = r === "index" ? "" : r;
+    routes.add("/" + r);
+  }
+  return routes;
+}
+
+const bases = [
+  path.join(ROOT, "pages"),
+  path.join(ROOT, "src", "pages"),
+  path.join(ROOT, "app"),
+  path.join(ROOT, "src", "app"),
+].filter(fs.existsSync);
+
+console.log("== ROUTE MAP ==");
+if (!bases.length) {
+  console.log("NOTE: No Next.js pages/app directories detected.");
+  process.exit(0);
+}
+
+const all = new Set(["/"]);
+for (const b of bases) for (const r of inferRoutes(b)) all.add(r.replace(/\/+$/, "") || "/");
+
+[...all].sort().forEach((r) => console.log(r));
+
+
+--- tools/link_scan.js ---
+/**
+ * Link scan: finds internal href="/..." and flags ones not in route map (best-effort).
+ */
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const EXCLUDE = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+const LINK_RE = /href\s*=\s*["'](\/[^"']*)["']/g;
+
+function walk(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (ent.isDirectory()) {
+      if (EXCLUDE.has(ent.name)) continue;
+      walk(path.join(dir, ent.name), out);
+    } else if (ent.isFile()) {
+      const p = path.join(dir, ent.name);
+      if (/\.(js|jsx|ts|tsx|md|mdx|html)$/.test(p)) out.push(p);
+    }
+  }
+  return out;
+}
+
+function routeSet() {
+  const candidates = [
+    path.join(ROOT, "pages"),
+    path.join(ROOT, "src", "pages"),
+    path.join(ROOT, "app"),
+    path.join(ROOT, "src", "app"),
+  ].filter(fs.existsSync);
+
+  const routes = new Set(["/"]);
+  for (const base of candidates) {
+    const files = [];
+    const w = (d) => {
+      for (const ent of fs.readdirSync(d, { withFileTypes: true })) {
+        const p = path.join(d, ent.name);
+        if (ent.isDirectory()) w(p);
+        else if (ent.isFile() && /\.(js|jsx|ts|tsx|mdx)$/.test(ent.name)) files.push(p);
+      }
+    };
+    w(base);
+    for (const f of files) {
+      const rel = path.relative(base, f).replace(/\\/g, "/");
+      if (rel.startsWith("_")) continue;
+      if (rel.includes("[") && rel.includes("]")) continue;
+      let r = rel.replace(/\.(js|jsx|ts|tsx|mdx)$/, "");
+      r = r.replace(/\/(page|index)$/, "");
+      r = r === "index" ? "" : r;
+      routes.add("/" + r);
+    }
+  }
+  return routes;
+}
+
+const routes = routeSet();
+const seen = new Map();
+
+for (const f of walk(ROOT)) {
+  const txt = fs.readFileSync(f, "utf8");
+  let m;
+  while ((m = LINK_RE.exec(txt))) {
+    const href = m[1].split("#")[0].split("?")[0];
+    if (href.startsWith("/api")) continue;
+    if (!seen.has(href)) seen.set(href, new Set());
+    seen.get(href).add(path.relative(ROOT, f));
+  }
+}
+
+const suspicious = [];
+for (const [href, files] of seen.entries()) {
+  if (!routes.has(href) && href !== "/") suspicious.push({ href, files: [...files] });
+}
+
+console.log("== LINK SCAN ==");
+console.log(`hrefs: ${seen.size} | routes: ${routes.size}`);
+if (!suspicious.length) {
+  console.log("PASS: No obvious dead internal links (best-effort).");
+  process.exit(0);
+}
+console.log("FAIL: Potential dead links:");
+suspicious.slice(0, 80).forEach(({ href, files }) => {
+  console.log(`- ${href}`);
+  files.slice(0, 5).forEach((f) => console.log(`   • ${f}`));
+  if (files.length > 5) console.log(`   • (+${files.length - 5} more)`);
+});
+process.exit(1);
+
+
+--- tools/auth_smoke.js ---
+/**
+ * Auth smoke: best-effort checks without knowing your exact stack.
+ * - Looks for common auth routes and prints guidance.
+ * - If NEXT_PUBLIC_APP_URL exists, attempts fetch.
+ */
+const http = require("http");
+const https = require("https");
+
+const base = process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || "http://localhost:3000";
+const candidates = [
+  "/api/auth/session",
+  "/api/auth/signin",
+  "/api/auth/callback",
+  "/api/login",
+  "/api/admin",
+];
+
+function get(url) {
+  return new Promise((resolve) => {
+    const lib = url.startsWith("https") ? https : http;
+    const req = lib.get(url, (res) => {
+      res.resume();
+      resolve({ url, status: res.statusCode || 0 });
+    });
+    req.on("error", () => resolve({ url, status: 0 }));
+    req.setTimeout(2500, () => {
+      req.destroy();
+      resolve({ url, status: 0 });
+    });
+  });
+}
+
+(async () => {
+  console.log("== AUTH SMOKE ==");
+  console.log(`Base: ${base}`);
+  const results = [];
+  for (const p of candidates) results.push(await get(base + p));
+
+  for (const r of results) {
+    const ok = [200, 302, 401, 403].includes(r.status);
+    console.log(`${ok ? "OK " : "?? "} ${r.status} ${r.url}`);
+  }
+
+  console.log("");
+  console.log("Interpretation:");
+  console.log("- 200/302: route exists and responds.");
+  console.log("- 401/403: protected/unauthenticated behavior is working.");
+  console.log("- 0: server not reachable OR route missing.");
+  process.exit(0);
+})();
+
+
+================================================================================
+DOCS (DROP-IN)
+================================================================================
+
+--- docs/RUNBOOK.md ---
+# Runbook (Dev → Fix → Ship)
+
+## One command ship check
+```bash
+bash tools/release_gate.sh
+
+Typical auth debugging
+	1.	Run dev server.
+	2.	Confirm env vars exist (Replit Secrets) and match ENV_CHECKLIST.md.
+	3.	Run:
+
+node tools/env_audit.js
+node tools/auth_smoke.js
+
+	4.	Check cookies/session storage behavior and auth callbacks.
+
+Navigation debugging
+
+node tools/route_map.js
+node tools/link_scan.js
+
+— docs/UX_TOKENS.md —
+
+UX Tokens
+
+Single source of truth for:
+	•	Color palette
+	•	Typography scale
+	•	Spacing scale
+	•	Radius, shadow
+	•	Motion (prefers-reduced-motion)
+Rules:
+	•	No raw hex in components (use tokens).
+	•	Every interactive element has a visible focus state.
+	•	Default motion reduced when user preference indicates.
+
+— docs/CONTENT_TONE.md —
+
+Content Tone
+	•	Warm, concise, grounded.
+	•	No diagnosis. No guaranteed outcomes.
+	•	Encourage professional support where appropriate.
+	•	Always link Safety page in footer/help.
+
+— SAFETY.md —
+
+Safety & Support
+
+This platform provides educational and self-reflection tools. It is not medical advice, diagnosis, or treatment.
+
+If you feel unsafe or may harm yourself or someone else, seek immediate help:
+	•	Call your local emergency number now.
+	•	If you are in the U.S., call or text 988 (Suicide & Crisis Lifeline).
+	•	Reach out to a trusted person and stay with them if possible.
+
+Consider contacting a licensed mental health professional for ongoing support.
+
+================================================================================
+SHELL COMMANDS (RUN IN REPLIT)
+
+chmod +x tools/release_gate.sh
+bash tools/release_gate.sh
+
+**a.** Paste your repo’s `package.json` + the current login/admin route files; I’ll output **exact minimal diffs** (by file path) to make auth + admin stable.  
+**b.** Tell me whether you use **Next.js + Tailwind** (or other). I’ll generate a **token-driven calm theme** + the exact component updates (buttons/inputs/nav/cards) with zero backend touch.
