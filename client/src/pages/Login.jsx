@@ -47,7 +47,7 @@ export default function Login() {
         title="Sign In - The Genuine Love Project"
         description="Sign in to your Genuine Love Project account. Continue your mental wellness journey."
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
@@ -55,12 +55,9 @@ export default function Login() {
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-10">
             <Link href="/" className="inline-flex items-center gap-4 group">
-              <img 
-                src="/brand/logo-mark.png" 
-                alt="The Genuine Love Project" 
-                className="w-14 h-14 object-contain transition-all group-hover:scale-105"
-                data-testid="img-login-logo"
-              />
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 16px var(--glp-rose-20)' }}>
+                <Heart className="w-6 h-6 text-white fill-white" />
+              </div>
               <span className="text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
