@@ -242,3 +242,37 @@ npm run dev                    # ✅ Running on port 5000
 5. Added `/safety` route to App.jsx
 
 **No Scope Creep:** All changes targeted existing issues only
+
+---
+
+## Release Gate Tools (Integrated)
+
+### New Scripts Added to `package.json`
+```json
+"env:audit": "node tools/env_audit.mjs",
+"link:scan": "node tools/link_scan.mjs",
+"release:gate": "bash tools/release_gate.sh"
+```
+
+### Tool Files Created
+| File | Purpose |
+|------|---------|
+| `tools/release_gate.sh` | Master release gate script (install, lint, typecheck, test, build, env audit, link scan) |
+| `tools/env_audit.mjs` | Checks required/optional environment variables |
+| `tools/link_scan.mjs` | Scans for broken internal navigation links |
+
+### Usage
+```bash
+# Full release gate
+npm run release:gate
+
+# Individual checks
+npm run env:audit     # Environment variable audit
+npm run link:scan     # Navigation link scan
+```
+
+### Latest Results
+- Environment Audit: ✅ 2/2 required, 6/7 optional set
+- Link Scan: ✅ 98 routes, 58 links, 0 broken
+- .env.example: ✅ exists
+- ENV_CHECKLIST.md: ✅ exists
