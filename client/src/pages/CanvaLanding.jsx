@@ -832,11 +832,11 @@ export default function CanvaLanding() {
 
           {/* Brand Column - Now at Bottom */}
           <div className="flex flex-col items-center text-center py-8 mb-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-            <div className="rounded-3xl overflow-hidden mb-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl" style={{ boxShadow: '0 12px 40px var(--glp-sage-30)', border: '3px solid var(--glp-sage-20)', maxWidth: '180px', background: 'linear-gradient(135deg, var(--glp-white), var(--glp-sage-10))' }}>
+            <div className="mb-6">
               <img 
-                src="/brand/footer-wellness-graphic.png" 
-                alt="Wellness and healing" 
-                className="w-full h-auto object-cover"
+                src="/brand/logo-monogram.png" 
+                alt="The Genuine Love Project" 
+                className="w-16 h-16 object-contain mx-auto"
               />
             </div>
             <h4 className="font-serif font-bold text-xl mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
