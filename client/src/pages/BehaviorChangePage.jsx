@@ -26,8 +26,8 @@ const behaviorModules = [
     id: "habit-science",
     title: "The Science of Habits",
     icon: Brain,
-    color: "text-purple-600 dark:text-purple-400",
-    bgColor: "bg-purple-50 dark:bg-purple-900/20",
+    colorStyle: { color: 'var(--glp-sage-deep)' },
+    bgColorStyle: { background: 'var(--glp-sage-10)' },
     content: {
       overview: "Habits are automatic behaviors triggered by cues. Understanding the habit loop—cue, routine, reward—is the foundation of behavior change.",
       keyPoints: [
@@ -59,8 +59,8 @@ const behaviorModules = [
     id: "tiny-habits",
     title: "Tiny Habits Method",
     icon: Zap,
-    color: "text-amber-600 dark:text-amber-400",
-    bgColor: "bg-amber-50 dark:bg-amber-900/20",
+    colorStyle: { color: 'var(--glp-gold)' },
+    bgColorStyle: { background: 'var(--glp-gold-30)' },
     content: {
       overview: "Dr. BJ Fogg's research shows that tiny changes—behaviors taking less than 30 seconds—are the most reliable path to lasting change. Start small, grow from there.",
       keyPoints: [
@@ -93,8 +93,8 @@ const behaviorModules = [
     id: "cbt-basics",
     title: "Cognitive Restructuring",
     icon: RefreshCw,
-    color: "text-blue-600 dark:text-blue-400",
-    bgColor: "bg-blue-50 dark:bg-blue-900/20",
+    colorStyle: { color: 'var(--glp-sage)' },
+    bgColorStyle: { background: 'var(--glp-sage-10)' },
     content: {
       overview: "Cognitive Behavioral Therapy (CBT) shows that thoughts, feelings, and behaviors are interconnected. By changing thought patterns, we can change how we feel and act.",
       keyPoints: [
@@ -127,8 +127,8 @@ const behaviorModules = [
     id: "motivation",
     title: "Motivation & Drive",
     icon: TrendingUp,
-    color: "text-green-600 dark:text-green-400",
-    bgColor: "bg-green-50 dark:bg-green-900/20",
+    colorStyle: { color: 'var(--glp-sage)' },
+    bgColorStyle: { background: 'var(--glp-sage-10)' },
     content: {
       overview: "Motivation is unreliable but can be cultivated. Understanding intrinsic vs. extrinsic motivation and learning to harness both leads to sustainable change.",
       keyPoints: [
@@ -161,8 +161,8 @@ const behaviorModules = [
     id: "breaking-habits",
     title: "Breaking Bad Habits",
     icon: AlertCircle,
-    color: "text-rose-600 dark:text-rose-400",
-    bgColor: "bg-rose-50 dark:bg-rose-900/20",
+    colorStyle: { color: 'var(--glp-rose)' },
+    bgColorStyle: { background: 'var(--glp-rose-15)' },
     content: {
       overview: "Stopping unwanted habits requires different strategies than building new ones. Focus on disrupting the cue, adding friction, and replacing rather than just eliminating.",
       keyPoints: [
@@ -195,8 +195,8 @@ const behaviorModules = [
     id: "consistency",
     title: "Building Consistency",
     icon: Calendar,
-    color: "text-indigo-600 dark:text-indigo-400",
-    bgColor: "bg-indigo-50 dark:bg-indigo-900/20",
+    colorStyle: { color: 'var(--glp-sage-deep)' },
+    bgColorStyle: { background: 'var(--glp-sage-10)' },
     content: {
       overview: "Consistency beats intensity. Small, regular actions compound over time into remarkable results. The key is making consistency easy and sustainable.",
       keyPoints: [
@@ -249,7 +249,7 @@ export default function BehaviorChangePage() {
       <div className="content-wrapper py-8">
         <div className="max-w-6xl mx-auto">
           <header className="mb-8">
-            <Link href="/wellness-hub" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
+            <Link href="/wellness-hub" className="inline-flex items-center gap-2 text-body-sm mb-4 transition" style={{ color: 'var(--glp-sage)' }} data-testid="link-back">
               <ArrowLeft className="h-4 w-4" /> Back to Wellness Hub
             </Link>
             <div className="flex items-center gap-3">
@@ -263,12 +263,12 @@ export default function BehaviorChangePage() {
             </div>
           </header>
 
-          <div className="card-bordered mb-8 bg-blue-50 dark:bg-blue-900/20">
+          <div className="card-bordered mb-8" style={{ background: 'var(--glp-sage-10)' }}>
             <div className="flex items-start gap-4">
-              <Lightbulb className="h-6 w-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
+              <Lightbulb className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--glp-sage)' }} />
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">The Science of Change</h3>
-                <p className="text-sm text-gray-700 dark:text-gray-300">
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>The Science of Change</h3>
+                <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.8 }}>
                   Lasting behavior change isn't about willpower—it's about understanding how habits work and designing 
                   systems that make good behaviors automatic. This guide draws from the latest research in behavioral 
                   science, including the work of BJ Fogg, James Clear, and CBT principles.
@@ -287,12 +287,12 @@ export default function BehaviorChangePage() {
                   data-testid={`card-step-${item.step}`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--teal-100)] text-[var(--teal-600)] flex items-center justify-center font-bold">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center font-bold" style={{ background: 'var(--glp-sage-10)', color: 'var(--glp-sage-deep)' }}>
                       {item.step}
                     </span>
-                    <h3 className="font-semibold text-gray-900 dark:text-white">{item.title}</h3>
+                    <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>{item.title}</h3>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 ml-11">{item.description}</p>
+                  <p className="text-sm ml-11" style={{ color: 'var(--glp-sage)' }}>{item.description}</p>
                 </div>
               ))}
             </div>
@@ -303,11 +303,10 @@ export default function BehaviorChangePage() {
               <button
                 key={module.id}
                 onClick={() => setSelectedModule(module)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                  selectedModule.id === module.id 
-                    ? 'bg-[var(--teal-600)] text-white' 
-                    : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-[var(--teal-400)]'
-                }`}
+                className="px-4 py-2 rounded-full text-sm font-medium transition-colors"
+                style={selectedModule.id === module.id 
+                  ? { background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }
+                  : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', color: 'var(--glp-ink)' }}
                 data-testid={`button-module-${module.id}`}
               >
                 <module.icon className="h-4 w-4 inline mr-2" />
@@ -316,42 +315,43 @@ export default function BehaviorChangePage() {
             ))}
           </div>
 
-          <div className={`card-bordered ${selectedModule.bgColor} mb-8`}>
+          <div className="card-bordered mb-8" style={selectedModule.bgColorStyle}>
             <div className="flex items-center gap-3 mb-4">
-              <selectedModule.icon className={`h-8 w-8 ${selectedModule.color}`} />
-              <h2 className="text-heading-lg text-gray-900 dark:text-white">{selectedModule.title}</h2>
+              <selectedModule.icon className="h-8 w-8" style={selectedModule.colorStyle} />
+              <h2 className="text-heading-lg" style={{ color: 'var(--glp-ink)' }}>{selectedModule.title}</h2>
             </div>
             
-            <p className="text-gray-700 dark:text-gray-300 mb-6">{selectedModule.content.overview}</p>
+            <p className="mb-6" style={{ color: 'var(--glp-ink)', opacity: 0.8 }}>{selectedModule.content.overview}</p>
 
             <div className="space-y-6">
               {selectedModule.content.keyPoints.map((point, index) => (
                 <div 
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700"
+                  className="rounded-xl p-5"
+                  style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
                 >
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-2 flex items-center gap-2">
-                    <CheckCircle2 className={`h-5 w-5 ${selectedModule.color}`} />
+                  <h3 className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+                    <CheckCircle2 className="h-5 w-5" style={selectedModule.colorStyle} />
                     {point.title}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{point.description}</p>
-                  <div className={`${selectedModule.bgColor} rounded-lg p-4`}>
-                    <p className="text-xs font-medium text-[var(--sage-500)] mb-1">Example:</p>
-                    <p className="text-sm text-gray-700 dark:text-gray-300">{point.example}</p>
+                  <p className="text-sm mb-3" style={{ color: 'var(--glp-sage)' }}>{point.description}</p>
+                  <div className="rounded-lg p-4" style={selectedModule.bgColorStyle}>
+                    <p className="text-xs font-medium mb-1" style={{ color: 'var(--glp-sage)' }}>Example:</p>
+                    <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.8 }}>{point.example}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl p-5 border border-gray-100 dark:border-gray-700">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                <ArrowRight className={`h-5 w-5 ${selectedModule.color}`} />
+            <div className="mt-6 rounded-xl p-5" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+              <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+                <ArrowRight className="h-5 w-5" style={selectedModule.colorStyle} />
                 Action Steps
               </h3>
               <ol className="space-y-2">
                 {selectedModule.content.actionSteps.map((step, index) => (
-                  <li key={index} className="flex items-start gap-3 text-sm text-gray-600 dark:text-gray-300">
-                    <span className={`flex-shrink-0 w-6 h-6 rounded-full ${selectedModule.bgColor} ${selectedModule.color} flex items-center justify-center text-xs font-medium`}>
+                  <li key={index} className="flex items-start gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium" style={{ ...selectedModule.bgColorStyle, ...selectedModule.colorStyle }}>
                       {index + 1}
                     </span>
                     {step}
@@ -364,19 +364,19 @@ export default function BehaviorChangePage() {
           <section className="grid md:grid-cols-2 gap-6 mb-8">
             <Link href="/healing-journeys" className="card-bordered hover:shadow-md transition-shadow" data-testid="link-journeys">
               <div className="flex items-center gap-3 mb-2">
-                <Award className="h-6 w-6 text-indigo-500" />
+                <Award className="h-6 w-6" style={{ color: 'var(--glp-sage)' }} />
                 <h3 className="text-heading-md text-teal">Healing Journeys</h3>
               </div>
-              <p className="text-body-sm text-[var(--sage-600)]">
+              <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>
                 Structured multi-week programs to transform specific areas of your life
               </p>
             </Link>
             <Link href="/research" className="card-bordered hover:shadow-md transition-shadow" data-testid="link-research">
               <div className="flex items-center gap-3 mb-2">
-                <BarChart3 className="h-6 w-6 text-purple-500" />
+                <BarChart3 className="h-6 w-6" style={{ color: 'var(--glp-sage-deep)' }} />
                 <h3 className="text-heading-md text-teal">Research & Evidence</h3>
               </div>
-              <p className="text-body-sm text-[var(--sage-600)]">
+              <p className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>
                 The scientific foundations behind behavior change principles
               </p>
             </Link>
@@ -391,8 +391,8 @@ export default function BehaviorChangePage() {
             title="Continue Your Journey"
           />
 
-          <footer className="card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 mt-8">
-            <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
+          <footer className="card-bordered mt-8" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+            <p className="text-sm text-center" style={{ color: 'var(--glp-ink)' }}>
               <strong>Remember:</strong> Behavior change takes time and patience. Be compassionate with yourself through setbacks—they're 
               part of the process. For deeply ingrained patterns, consider working with a therapist or coach.
             </p>

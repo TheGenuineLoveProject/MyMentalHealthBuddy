@@ -120,16 +120,17 @@ function PillarCard({ pillar, isSelected, onSelect }) {
   return (
     <button
       onClick={onSelect}
-      className={`text-left p-6 rounded-2xl transition-all ${isSelected 
-        ? "bg-gradient-to-br from-indigo-500 to-purple-500 text-white shadow-lg scale-105" 
-        : "bg-white dark:bg-slate-800 hover:shadow-md"}`}
+      className="text-left p-6 rounded-2xl transition-all"
+      style={isSelected 
+        ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)', boxShadow: 'var(--glp-shadow-lg)', transform: 'scale(1.05)' }
+        : { background: 'var(--glp-paper)' }}
       data-testid={`button-pillar-${pillar.id}`}
     >
-      <pillar.icon className={`h-8 w-8 mb-4 ${isSelected ? "text-white" : "text-indigo-500"}`} />
-      <h3 className={`font-semibold mb-2 ${isSelected ? "text-white" : "text-slate-900 dark:text-white"}`}>
+      <pillar.icon className="h-8 w-8 mb-4" style={{ color: isSelected ? 'var(--glp-paper)' : 'var(--glp-sage)' }} />
+      <h3 className="font-semibold mb-2" style={{ color: isSelected ? 'var(--glp-paper)' : 'var(--glp-ink)' }}>
         {pillar.name}
       </h3>
-      <p className={`text-sm ${isSelected ? "text-white/80" : "text-slate-600 dark:text-slate-400"}`}>
+      <p className="text-sm" style={{ color: isSelected ? 'rgba(255,255,255,0.8)' : 'var(--glp-sage)' }}>
         {pillar.description}
       </p>
     </button>
@@ -138,36 +139,36 @@ function PillarCard({ pillar, isSelected, onSelect }) {
 
 function PillarDetail({ pillar }) {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
+    <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)' }}>
       <div className="flex items-center gap-4 mb-6">
-        <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 text-white">
+        <div className="p-4 rounded-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
           <pillar.icon className="h-8 w-8" />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{pillar.name}</h2>
-          <p className="text-slate-600 dark:text-slate-400">{pillar.description}</p>
+          <h2 className="text-2xl font-bold" style={{ color: 'var(--glp-ink)' }}>{pillar.name}</h2>
+          <p style={{ color: 'var(--glp-sage)' }}>{pillar.description}</p>
         </div>
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 mb-8">
-        <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Key Skills</h3>
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+          <h3 className="font-semibold mb-4" style={{ color: 'var(--glp-ink)' }}>Key Skills</h3>
           <ul className="space-y-3">
             {pillar.skills.map((skill, idx) => (
-              <li key={idx} className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
-                <CheckCircle2 className="h-5 w-5 text-emerald-500 flex-shrink-0" />
+              <li key={idx} className="flex items-center gap-3" style={{ color: 'var(--glp-ink)', opacity: 0.8 }}>
+                <CheckCircle2 className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--glp-sage)' }} />
                 {skill}
               </li>
             ))}
           </ul>
         </div>
-        <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-4">Practice Exercises</h3>
+        <div className="rounded-xl p-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage-10), var(--glp-sage-15))' }}>
+          <h3 className="font-semibold mb-4" style={{ color: 'var(--glp-ink)' }}>Practice Exercises</h3>
           <div className="space-y-4">
             {pillar.exercises.map((exercise, idx) => (
               <div key={idx}>
-                <h4 className="font-medium text-indigo-700 dark:text-indigo-300">{exercise.name}</h4>
-                <p className="text-sm text-slate-600 dark:text-slate-400">{exercise.description}</p>
+                <h4 className="font-medium" style={{ color: 'var(--glp-sage-deep)' }}>{exercise.name}</h4>
+                <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{exercise.description}</p>
               </div>
             ))}
           </div>
@@ -181,9 +182,9 @@ function EmotionWheelSection() {
   const [selectedCore, setSelectedCore] = useState(null);
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
-      <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-4 text-center">Emotion Wheel</h2>
-      <p className="text-slate-600 dark:text-slate-400 text-center mb-8">
+    <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)' }}>
+      <h2 className="text-xl font-bold mb-4 text-center" style={{ color: 'var(--glp-ink)' }}>Emotion Wheel</h2>
+      <p className="text-center mb-8" style={{ color: 'var(--glp-sage)' }}>
         Click a core emotion to explore its nuanced variations. Naming emotions precisely increases emotional intelligence.
       </p>
       
@@ -192,7 +193,8 @@ function EmotionWheelSection() {
           <button
             key={emotion.name}
             onClick={() => setSelectedCore(selectedCore === emotion.name ? null : emotion.name)}
-            className={`px-6 py-3 rounded-full font-medium transition-all ${emotion.color} text-white hover:opacity-90 ${selectedCore === emotion.name ? "ring-4 ring-offset-2 ring-slate-400" : ""}`}
+            className={`px-6 py-3 rounded-full font-medium transition-all ${emotion.color} text-white hover:opacity-90 ${selectedCore === emotion.name ? "ring-4 ring-offset-2" : ""}`}
+            style={selectedCore === emotion.name ? { ringColor: 'var(--glp-sage)' } : {}}
             data-testid={`button-emotion-${emotion.name.toLowerCase()}`}
           >
             {emotion.name}
@@ -201,13 +203,13 @@ function EmotionWheelSection() {
       </div>
 
       {selectedCore && (
-        <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-4 text-center">
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+          <h3 className="font-semibold mb-4 text-center" style={{ color: 'var(--glp-ink)' }}>
             Variations of {selectedCore}
           </h3>
           <div className="flex flex-wrap justify-center gap-2">
             {emotionWheel.core.find(e => e.name === selectedCore)?.variants.map((variant, idx) => (
-              <span key={idx} className="px-4 py-2 bg-white dark:bg-slate-800 rounded-full text-slate-700 dark:text-slate-300 text-sm shadow-sm">
+              <span key={idx} className="px-4 py-2 rounded-full text-sm shadow-sm" style={{ background: 'var(--glp-paper)', color: 'var(--glp-ink)' }}>
                 {variant}
               </span>
             ))}
@@ -227,19 +229,19 @@ export default function EmotionalIntelligencePage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-sage-10), var(--glp-paper))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage)' }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
             <Heart className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Emotional Intelligence Toolkit</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-ink)' }}>Emotional Intelligence Toolkit</h1>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
             Develop the skills to understand, manage, and express your emotions effectively.
             Emotional intelligence is the foundation of healthy relationships and personal wellbeing.
           </p>
@@ -250,7 +252,7 @@ export default function EmotionalIntelligencePage() {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 text-center">The Five Pillars of Emotional Intelligence</h2>
+          <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--glp-ink)' }}>The Five Pillars of Emotional Intelligence</h2>
           <div className="grid md:grid-cols-5 gap-4 mb-8">
             {eqPillars.map((pillar) => (
               <PillarCard
@@ -264,27 +266,27 @@ export default function EmotionalIntelligencePage() {
           <PillarDetail pillar={selectedPillar} />
         </div>
 
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-2xl p-8 mb-12">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">Daily EQ Practice</h2>
+        <div className="rounded-2xl p-8 mb-12" style={{ background: 'linear-gradient(135deg, var(--glp-gold-30), var(--glp-rose-15))' }}>
+          <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--glp-ink)' }}>Daily EQ Practice</h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-6">
+            <div className="rounded-xl p-6" style={{ background: 'var(--glp-paper)' }}>
               <div className="text-3xl mb-4">🌅</div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Morning Check-In</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Morning Check-In</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 Before starting your day, pause and ask: "What am I feeling? What do I need today?"
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-6">
+            <div className="rounded-xl p-6" style={{ background: 'var(--glp-paper)' }}>
               <div className="text-3xl mb-4">🌊</div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Emotion Surfing</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Emotion Surfing</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 When strong emotions arise, observe them like waves—they rise, peak, and pass.
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-6">
+            <div className="rounded-xl p-6" style={{ background: 'var(--glp-paper)' }}>
               <div className="text-3xl mb-4">🌙</div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Evening Reflection</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Evening Reflection</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 Review your emotional journey today. What triggered you? How did you respond?
               </p>
             </div>
@@ -300,8 +302,8 @@ export default function EmotionalIntelligencePage() {
           title="Continue Your Journey"
         />
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
+        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
             Developing emotional intelligence is a lifelong journey. Be patient and compassionate with yourself.
             For deeper work, consider working with a therapist or coach.
           </p>

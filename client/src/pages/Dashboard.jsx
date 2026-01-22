@@ -29,9 +29,9 @@ export default function Dashboard() {
 
   function getGreeting() {
     const hour = new Date().getHours();
-    if (hour < 12) return { text: "Good morning", icon: Sun, color: "text-amber-400" };
-    if (hour < 18) return { text: "Good afternoon", icon: Sun, color: "text-orange-400" };
-    return { text: "Good evening", icon: Moon, color: "text-indigo-400" };
+    if (hour < 12) return { text: "Good morning", icon: Sun, color: "var(--glp-gold)" };
+    if (hour < 18) return { text: "Good afternoon", icon: Sun, color: "var(--glp-gold)" };
+    return { text: "Good evening", icon: Moon, color: "var(--glp-sage-deep)" };
   }
 
   if (isLoading) {
@@ -152,8 +152,8 @@ export default function Dashboard() {
                   <Sparkles className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-slate-800">Today's Healing Intention</h2>
-                  <p className="text-slate-600 mt-1">
+                  <h2 className="text-xl font-bold" style={{ color: 'var(--glp-ink)' }}>Today's Healing Intention</h2>
+                  <p className="mt-1" style={{ color: 'var(--glp-sage)' }}>
                     <em>"Healing isn't about forcing change—it's about creating the conditions where change can happen naturally. Today, be gentle with yourself."</em>
                   </p>
                 </div>
@@ -176,27 +176,27 @@ export default function Dashboard() {
           {/* Quick Nav to CRM, Q&A, Support */}
           <section className="mb-8 grid grid-cols-3 gap-4" aria-label="Quick navigation" data-testid="section-quick-nav">
             <Link href="/community" className="group" data-testid="link-quick-community" aria-label="Go to Q&A Community">
-              <div className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-amber-200 hover:shadow-lg transition-all text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'rgba(234, 195, 59, 0.15)' }}>
-                  <MessageCircle className="w-6 h-6" style={{ color: '#eac33b' }} aria-hidden="true" />
+              <div className="p-4 rounded-2xl transition-all text-center" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-gold-30)' }}>
+                  <MessageCircle className="w-6 h-6" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
                 </div>
-                <span className="font-semibold text-slate-700 group-hover:text-amber-600 transition-colors">Q&A Community</span>
+                <span className="font-semibold transition-colors" style={{ color: 'var(--glp-ink)' }}>Q&A Community</span>
               </div>
             </Link>
             <Link href="/crisis" className="group" data-testid="link-quick-crisis" aria-label="Go to Crisis Support">
-              <div className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-rose-200 hover:shadow-lg transition-all text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'rgba(244, 199, 195, 0.3)' }}>
-                  <Heart className="w-6 h-6" style={{ color: '#f4c7c3' }} aria-hidden="true" />
+              <div className="p-4 rounded-2xl transition-all text-center" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}>
+                  <Heart className="w-6 h-6" style={{ color: 'var(--glp-rose)' }} aria-hidden="true" />
                 </div>
-                <span className="font-semibold text-slate-700 group-hover:text-rose-500 transition-colors">Crisis Support</span>
+                <span className="font-semibold transition-colors" style={{ color: 'var(--glp-ink)' }}>Crisis Support</span>
               </div>
             </Link>
             <Link href="/tools" className="group" data-testid="link-quick-tools" aria-label="Go to Tools Library">
-              <div className="p-4 rounded-2xl bg-white border border-slate-100 hover:border-teal-200 hover:shadow-lg transition-all text-center">
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'rgba(47, 93, 93, 0.1)' }}>
-                  <Brain className="w-6 h-6" style={{ color: '#2f5d5d' }} aria-hidden="true" />
+              <div className="p-4 rounded-2xl transition-all text-center" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
+                <div className="w-12 h-12 mx-auto mb-3 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-sage-10)' }}>
+                  <Brain className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} aria-hidden="true" />
                 </div>
-                <span className="font-semibold text-slate-700 group-hover:text-teal-600 transition-colors">Tools Library</span>
+                <span className="font-semibold transition-colors" style={{ color: 'var(--glp-ink)' }}>Tools Library</span>
               </div>
             </Link>
           </section>
@@ -260,25 +260,25 @@ export default function Dashboard() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                  <Heart className="w-5 h-5 text-sage-600" />
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm" style={{ background: 'var(--glp-paper)' }}>
+                  <Heart className="w-5 h-5" style={{ color: 'var(--glp-sage)' }} />
                 </div>
                 <div>
-                  <h2 className="font-semibold text-slate-800 group-hover:text-teal-700 transition-colors">
+                  <h2 className="font-semibold transition-colors" style={{ color: 'var(--glp-ink)' }}>
                     Your Space Today
                   </h2>
-                  <p className="text-sm text-slate-500 mt-0.5">
+                  <p className="text-sm mt-0.5" style={{ color: 'var(--glp-sage)' }}>
                     A place to pause, notice, and reflect
                   </p>
                 </div>
               </div>
-              <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-teal-600 group-hover:translate-x-1 transition-all" />
+              <ChevronRight className="w-5 h-5 transition-all" style={{ color: 'var(--glp-sage)' }} />
             </div>
           </Link>
 
           <section aria-label="Quick actions" className="mb-10">
-            <h2 className="text-lg font-semibold text-slate-800 mb-5 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-500" aria-hidden="true" />
+            <h2 className="text-lg font-semibold mb-5 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+              <Sparkles className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
               Quick Actions
             </h2>
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -314,7 +314,7 @@ export default function Dashboard() {
           </section>
 
           <section aria-label="Explore more" className="mb-10">
-            <h2 className="text-lg font-semibold text-slate-800 mb-5">Explore</h2>
+            <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Explore</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <ExploreCard 
                 href="/wellness" 
@@ -357,36 +357,38 @@ export default function Dashboard() {
 
           <Link 
             href="/crisis" 
-            className="flex items-center justify-between p-5 rounded-2xl bg-gradient-to-r from-rose-50 to-pink-50/50 border border-rose-200/50 hover:border-rose-300 transition-all group shadow-sm mb-10"
+            className="flex items-center justify-between p-5 rounded-2xl transition-all group shadow-sm mb-10"
+            style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-rose)' }}
             data-testid="link-crisis-resources"
           >
             <div className="flex items-center gap-4">
-              <div className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shadow-sm">
-                <Heart className="w-5 h-5 text-rose-500" aria-hidden="true" />
+              <div className="w-11 h-11 rounded-xl flex items-center justify-center shadow-sm" style={{ background: 'var(--glp-paper)' }}>
+                <Heart className="w-5 h-5" style={{ color: 'var(--glp-rose)' }} aria-hidden="true" />
               </div>
               <div>
-                <h3 className="font-semibold text-rose-700">Crisis Resources</h3>
-                <p className="text-sm text-rose-600/70">24/7 support when you need it most</p>
+                <h3 className="font-semibold" style={{ color: 'var(--glp-rose-dark)' }}>Crisis Resources</h3>
+                <p className="text-sm" style={{ color: 'var(--glp-rose)', opacity: 0.8 }}>24/7 support when you need it most</p>
               </div>
             </div>
-            <ChevronRight className="w-5 h-5 text-rose-400 group-hover:text-rose-600 group-hover:translate-x-1 transition-all" aria-hidden="true" />
+            <ChevronRight className="w-5 h-5 transition-all" style={{ color: 'var(--glp-rose)' }} aria-hidden="true" />
           </Link>
 
           {moodData.recentMoods && moodData.recentMoods.length > 0 && (
             <section className="mb-10" aria-label="Recent mood history">
-              <h2 className="text-lg font-semibold text-slate-800 mb-5">Recent Moods</h2>
+              <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Recent Moods</h2>
               <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" role="list">
                 {moodData.recentMoods.map((mood, idx) => (
                   <div
                     key={idx}
-                    className="flex-shrink-0 bg-white rounded-xl p-4 text-center min-w-[80px] border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all"
+                    className="flex-shrink-0 rounded-xl p-4 text-center min-w-[80px] transition-all"
+                    style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
                     data-testid={`mood-entry-${idx}`}
                     role="listitem"
                   >
-                    <div className="text-2xl font-bold bg-gradient-to-br from-sky-500 to-violet-500 bg-clip-text text-transparent">
+                    <div className="text-2xl font-bold" style={{ color: 'var(--glp-sage-deep)' }}>
                       {mood.rating}
                     </div>
-                    <div className="text-xs text-slate-500 mt-1 font-medium">
+                    <div className="text-xs mt-1 font-medium" style={{ color: 'var(--glp-sage)' }}>
                       {new Date(mood.createdAt).toLocaleDateString("en-US", { weekday: "short" })}
                     </div>
                   </div>
@@ -399,7 +401,7 @@ export default function Dashboard() {
 
           {/* CRM Widgets Section */}
           <section className="mt-8 space-y-6" aria-label="Personal wellness hub">
-            <h2 className="text-lg font-semibold text-slate-800">Your Wellness Hub</h2>
+            <h2 className="text-lg font-semibold" style={{ color: 'var(--glp-ink)' }}>Your Wellness Hub</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <QuickActionsWidget />
               <CalendarWidget />
@@ -419,50 +421,52 @@ export default function Dashboard() {
 
 function QuickAction({ href, icon: Icon, label, color, testId }) {
   const colorMap = {
-    sky: { bg: 'bg-sky-50', icon: 'text-sky-600', hover: 'hover:border-sky-200' },
-    violet: { bg: 'bg-violet-50', icon: 'text-violet-600', hover: 'hover:border-violet-200' },
-    teal: { bg: 'bg-teal-50', icon: 'text-teal-600', hover: 'hover:border-teal-200' },
-    amber: { bg: 'bg-amber-50', icon: 'text-amber-600', hover: 'hover:border-amber-200' },
+    sky: { bg: 'var(--glp-sage-10)', icon: 'var(--glp-sage-deep)' },
+    violet: { bg: 'var(--glp-sage-15)', icon: 'var(--glp-sage-deep)' },
+    teal: { bg: 'var(--glp-sage-10)', icon: 'var(--glp-sage)' },
+    amber: { bg: 'var(--glp-gold-30)', icon: 'var(--glp-gold)' },
   };
   const colors = colorMap[color] || colorMap.sky;
 
   return (
     <Link 
       href={href} 
-      className={`flex flex-col items-center gap-3 p-5 rounded-xl bg-white border border-slate-100 ${colors.hover} hover:shadow-md transition-all group`}
+      className="flex flex-col items-center gap-3 p-5 rounded-xl hover:shadow-md transition-all group"
+      style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
       data-testid={testId}
     >
-      <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center group-hover:scale-105 transition-transform`}>
-        <Icon className={`w-6 h-6 ${colors.icon}`} aria-hidden="true" />
+      <div className="w-12 h-12 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform" style={{ background: colors.bg }}>
+        <Icon className="w-6 h-6" style={{ color: colors.icon }} aria-hidden="true" />
       </div>
-      <span className="text-sm font-medium text-slate-700">{label}</span>
+      <span className="text-sm font-medium" style={{ color: 'var(--glp-ink)' }}>{label}</span>
     </Link>
   );
 }
 
 function ExploreCard({ href, icon: Icon, title, description, color, testId }) {
   const colorMap = {
-    emerald: { bg: 'bg-emerald-50', icon: 'text-emerald-600' },
-    cyan: { bg: 'bg-cyan-50', icon: 'text-cyan-600' },
-    orange: { bg: 'bg-orange-50', icon: 'text-orange-600' },
-    violet: { bg: 'bg-violet-50', icon: 'text-violet-600' },
+    emerald: { bg: 'var(--glp-sage-10)', icon: 'var(--glp-sage)' },
+    cyan: { bg: 'var(--glp-sage-10)', icon: 'var(--glp-sage-deep)' },
+    orange: { bg: 'var(--glp-gold-30)', icon: 'var(--glp-gold)' },
+    violet: { bg: 'var(--glp-sage-15)', icon: 'var(--glp-sage-deep)' },
   };
   const colors = colorMap[color] || colorMap.emerald;
 
   return (
     <Link 
       href={href} 
-      className="flex items-center gap-4 p-4 rounded-xl bg-white border border-slate-100 hover:border-slate-200 hover:shadow-sm transition-all group"
+      className="flex items-center gap-4 p-4 rounded-xl hover:shadow-sm transition-all group"
+      style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
       data-testid={testId}
     >
-      <div className={`w-11 h-11 rounded-xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
-        <Icon className={`w-5 h-5 ${colors.icon}`} aria-hidden="true" />
+      <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: colors.bg }}>
+        <Icon className="w-5 h-5" style={{ color: colors.icon }} aria-hidden="true" />
       </div>
       <div className="min-w-0">
-        <h3 className="font-medium text-slate-800 group-hover:text-slate-900">{title}</h3>
-        <p className="text-sm text-slate-500 truncate">{description}</p>
+        <h3 className="font-medium" style={{ color: 'var(--glp-ink)' }}>{title}</h3>
+        <p className="text-sm truncate" style={{ color: 'var(--glp-sage)' }}>{description}</p>
       </div>
-      <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-slate-500 group-hover:translate-x-0.5 transition-all flex-shrink-0 ml-auto" />
+      <ChevronRight className="w-5 h-5 transition-all flex-shrink-0 ml-auto" style={{ color: 'var(--glp-sage)' }} />
     </Link>
   );
 }

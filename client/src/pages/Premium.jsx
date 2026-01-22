@@ -19,10 +19,10 @@ const MoodVisualizer = lazy(() => import("../components/MoodVisualizer.jsx"));
 const MindfulBreathing = lazy(() => import("../components/MindfulBreathing.jsx"));
 
 const PremiumLoadingFallback = () => (
-  <div className="flex items-center justify-center min-h-[300px] bg-white/80 rounded-2xl backdrop-blur-sm">
+  <div className="flex items-center justify-center min-h-[300px] rounded-2xl backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.8)' }}>
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="w-8 h-8 animate-spin text-sage-500" />
-      <p className="text-sm text-sage-400">Loading premium feature...</p>
+      <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--glp-sage)' }} />
+      <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Loading premium feature...</p>
     </div>
   </div>
 );
@@ -33,7 +33,7 @@ const PREMIUM_FEATURES = [
     name: "Healing Journeys",
     description: "Structured therapeutic programs for lasting transformation",
     icon: Sparkles,
-    color: "from-violet-500 to-purple-600",
+    gradient: "linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))",
     component: HealingJourneys
   },
   {
@@ -41,7 +41,7 @@ const PREMIUM_FEATURES = [
     name: "Progress Analytics",
     description: "Comprehensive insights into your wellness journey",
     icon: BarChart3,
-    color: "from-emerald-500 to-teal-600",
+    gradient: "linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))",
     component: ProgressAnalytics
   },
   {
@@ -49,7 +49,7 @@ const PREMIUM_FEATURES = [
     name: "Goal Tracker",
     description: "Set and achieve your wellness objectives",
     icon: Target,
-    color: "from-amber-500 to-orange-600",
+    gradient: "linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))",
     component: WellnessGoalTracker
   },
   {
@@ -57,7 +57,7 @@ const PREMIUM_FEATURES = [
     name: "AI Concierge",
     description: "Personalized recommendations powered by AI",
     icon: Brain,
-    color: "from-blue-500 to-indigo-600",
+    gradient: "linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))",
     component: AIWellnessConcierge
   },
   {
@@ -65,7 +65,7 @@ const PREMIUM_FEATURES = [
     name: "Daily Planner",
     description: "Plan your wellness activities for each day",
     icon: Calendar,
-    color: "from-rose-500 to-pink-600",
+    gradient: "linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))",
     component: DailyWellnessPlanner
   },
   {
@@ -73,7 +73,7 @@ const PREMIUM_FEATURES = [
     name: "Wellness Timer",
     description: "Timed sessions for mindful practice",
     icon: Bell,
-    color: "from-indigo-500 to-purple-600",
+    gradient: "linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))",
     component: WellnessTimer
   },
   {
@@ -81,7 +81,7 @@ const PREMIUM_FEATURES = [
     name: "Mood Visualizer",
     description: "Explore your emotional patterns visually",
     icon: Heart,
-    color: "from-pink-500 to-rose-600",
+    gradient: "linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))",
     component: MoodVisualizer
   },
   {
@@ -89,7 +89,7 @@ const PREMIUM_FEATURES = [
     name: "Mindful Breathing",
     description: "Advanced breathing exercises with patterns",
     icon: Zap,
-    color: "from-cyan-500 to-blue-600",
+    gradient: "linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))",
     component: MindfulBreathing
   }
 ];
@@ -118,8 +118,8 @@ function StripePricingTable() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-sage-500" />
-          <p className="text-sm text-sage-400">Loading pricing options...</p>
+          <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--glp-sage)' }} />
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Loading pricing options...</p>
         </div>
       </div>
     );
@@ -218,8 +218,8 @@ export default function Premium() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
               <div className="lg:col-span-1 space-y-2">
                 <div className="card-elevated p-4">
-                  <h3 className="font-semibold text-[var(--text)] mb-4 flex items-center gap-2">
-                    <Star className="w-5 h-5 text-amber-500" />
+                  <h3 className="font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+                    <Star className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} />
                     Premium Tools
                   </h3>
                   {PREMIUM_FEATURES.map(feature => {
@@ -230,25 +230,24 @@ export default function Premium() {
                       <button
                         key={feature.id}
                         onClick={() => setActiveFeature(feature.id)}
-                        className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all text-left mb-2 ${
-                          isActive
-                            ? `bg-gradient-to-r ${feature.color} text-white`
-                            : "hover:bg-[var(--surface)] text-[var(--text)]"
-                        }`}
+                        className="w-full flex items-center gap-3 p-3 rounded-xl transition-all text-left mb-2"
+                        style={isActive
+                          ? { background: feature.gradient, color: 'var(--glp-paper)' }
+                          : { color: 'var(--glp-ink)' }}
                         data-testid={`feature-${feature.id}`}
                       >
-                        <div className={`p-2 rounded-lg ${
-                          isActive ? "bg-white/20" : `bg-gradient-to-br ${feature.color} text-white`
-                        }`}>
+                        <div className="p-2 rounded-lg" style={isActive
+                          ? { background: 'rgba(255,255,255,0.2)' }
+                          : { background: feature.gradient, color: 'var(--glp-paper)' }}>
                           <Icon className="w-4 h-4" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-sm truncate">{feature.name}</p>
-                          <p className={`text-xs truncate ${isActive ? "text-white/80" : "text-[var(--text-secondary)]"}`}>
+                          <p className="text-xs truncate" style={{ color: isActive ? 'rgba(255,255,255,0.8)' : 'var(--glp-sage)' }}>
                             {feature.description}
                           </p>
                         </div>
-                        <ChevronRight className={`w-4 h-4 ${isActive ? "text-white" : "text-[var(--text-secondary)]"}`} />
+                        <ChevronRight className="w-4 h-4" style={{ color: isActive ? 'var(--glp-paper)' : 'var(--glp-sage)' }} />
                       </button>
                     );
                   })}

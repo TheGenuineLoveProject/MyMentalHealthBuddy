@@ -93,22 +93,22 @@ const sleepStages = [
 
 function TipCard({ category }) {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm">
+    <div className="rounded-xl p-6 shadow-sm" style={{ background: 'var(--glp-paper)' }}>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-3 rounded-lg bg-indigo-100 dark:bg-indigo-900/50">
-          <category.icon className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+        <div className="p-3 rounded-lg" style={{ background: 'var(--glp-sage-10)' }}>
+          <category.icon className="h-6 w-6" style={{ color: 'var(--glp-sage-deep)' }} />
         </div>
-        <h3 className="font-semibold text-slate-900 dark:text-white">{category.category}</h3>
+        <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>{category.category}</h3>
       </div>
       <ul className="space-y-3">
         {category.tips.map((tip, idx) => (
           <li key={idx} className="flex items-start gap-3 text-sm">
             {tip.do ? (
-              <CheckCircle2 className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-sage)' }} />
             ) : (
-              <XCircle className="h-5 w-5 text-rose-500 flex-shrink-0 mt-0.5" />
+              <XCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-rose)' }} />
             )}
-            <span className={tip.do ? "text-slate-600 dark:text-slate-400" : "text-slate-500 dark:text-slate-500"}>
+            <span style={{ color: 'var(--glp-ink)', opacity: tip.do ? 0.8 : 0.6 }}>
               {tip.text}
             </span>
           </li>
@@ -122,19 +122,19 @@ export default function SleepGuidePage() {
   const [activeTab, setActiveTab] = useState("hygiene");
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-950 to-slate-900">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-sage-deep), var(--glp-ink))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-paper)', opacity: 0.7 }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
             <Moon className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-white mb-4">Sleep & Rest Guide</h1>
-          <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-paper)' }}>Sleep & Rest Guide</h1>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-paper)', opacity: 0.7 }}>
             Quality sleep is the foundation of mental and physical health.
             Learn evidence-based strategies to transform your rest.
           </p>
@@ -149,9 +149,10 @@ export default function SleepGuidePage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-full transition-colors ${activeTab === tab.id
-                ? "bg-indigo-500 text-white"
-                : "bg-slate-800 text-slate-400 hover:bg-slate-700"}`}
+              className="flex items-center gap-2 px-5 py-3 rounded-full transition-colors"
+              style={activeTab === tab.id
+                ? { background: 'var(--glp-sage)', color: 'var(--glp-paper)' }
+                : { background: 'rgba(255,255,255,0.1)', color: 'var(--glp-paper)', opacity: 0.7 }}
               data-testid={`button-tab-${tab.id}`}
             >
               <tab.icon className="h-5 w-5" />
@@ -170,26 +171,26 @@ export default function SleepGuidePage() {
 
         {activeTab === "wind-down" && (
           <div className="space-y-8 mb-12">
-            <div className="bg-slate-800 rounded-2xl p-8">
-              <h2 className="text-xl font-bold text-white mb-6">Wind-Down Activities</h2>
+            <div className="rounded-2xl p-8" style={{ background: 'rgba(255,255,255,0.1)' }}>
+              <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--glp-paper)' }}>Wind-Down Activities</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {windDownActivities.map((activity, idx) => (
-                  <div key={idx} className="bg-slate-900 rounded-xl p-4 flex items-start gap-4">
-                    <div className="p-2 rounded-lg bg-indigo-900/50">
-                      <Moon className="h-5 w-5 text-indigo-400" />
+                  <div key={idx} className="rounded-xl p-4 flex items-start gap-4" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="p-2 rounded-lg" style={{ background: 'var(--glp-sage-10)' }}>
+                      <Moon className="h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-medium text-white">{activity.name}</h3>
-                      <p className="text-sm text-slate-400">{activity.description}</p>
-                      <span className="inline-block mt-2 text-xs text-indigo-400">{activity.duration}</span>
+                      <h3 className="font-medium" style={{ color: 'var(--glp-paper)' }}>{activity.name}</h3>
+                      <p className="text-sm" style={{ color: 'var(--glp-paper)', opacity: 0.7 }}>{activity.description}</p>
+                      <span className="inline-block mt-2 text-xs" style={{ color: 'var(--glp-sage)' }}>{activity.duration}</span>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-2xl p-8">
-              <h2 className="text-xl font-bold text-white mb-6">Sample Evening Routine</h2>
+            <div className="rounded-2xl p-8" style={{ background: 'linear-gradient(135deg, rgba(143,191,159,0.2), rgba(47,93,93,0.3))' }}>
+              <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--glp-paper)' }}>Sample Evening Routine</h2>
               <div className="space-y-4">
                 {[
                   { time: "2 hours before bed", action: "Dim lights, stop caffeine, finish eating" },
@@ -199,9 +200,9 @@ export default function SleepGuidePage() {
                   { time: "In bed", action: "Deep breathing or body scan meditation" }
                 ].map((step, idx) => (
                   <div key={idx} className="flex items-center gap-4">
-                    <div className="w-32 text-right text-sm font-medium text-indigo-400">{step.time}</div>
-                    <div className="w-3 h-3 rounded-full bg-indigo-500" />
-                    <div className="flex-1 text-slate-300">{step.action}</div>
+                    <div className="w-32 text-right text-sm font-medium" style={{ color: 'var(--glp-sage)' }}>{step.time}</div>
+                    <div className="w-3 h-3 rounded-full" style={{ background: 'var(--glp-sage)' }} />
+                    <div className="flex-1" style={{ color: 'var(--glp-paper)', opacity: 0.85 }}>{step.action}</div>
                   </div>
                 ))}
               </div>
@@ -211,34 +212,34 @@ export default function SleepGuidePage() {
 
         {activeTab === "science" && (
           <div className="space-y-8 mb-12">
-            <div className="bg-slate-800 rounded-2xl p-8">
-              <h2 className="text-xl font-bold text-white mb-6">Sleep Cycle Stages</h2>
+            <div className="rounded-2xl p-8" style={{ background: 'rgba(255,255,255,0.1)' }}>
+              <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--glp-paper)' }}>Sleep Cycle Stages</h2>
               <div className="grid md:grid-cols-2 gap-4">
                 {sleepStages.map((stage, idx) => (
-                  <div key={idx} className="bg-slate-900 rounded-xl p-4">
+                  <div key={idx} className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.05)' }}>
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-medium text-white">{stage.stage}</h3>
-                      <span className="text-sm text-indigo-400">{stage.duration}</span>
+                      <h3 className="font-medium" style={{ color: 'var(--glp-paper)' }}>{stage.stage}</h3>
+                      <span className="text-sm" style={{ color: 'var(--glp-sage)' }}>{stage.duration}</span>
                     </div>
-                    <p className="text-sm text-slate-400 mb-2">{stage.description}</p>
-                    <p className="text-xs text-slate-500">Purpose: {stage.purpose}</p>
+                    <p className="text-sm mb-2" style={{ color: 'var(--glp-paper)', opacity: 0.7 }}>{stage.description}</p>
+                    <p className="text-xs" style={{ color: 'var(--glp-paper)', opacity: 0.5 }}>Purpose: {stage.purpose}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-slate-800 rounded-2xl p-8">
-              <h2 className="text-xl font-bold text-white mb-6">Sleep Myths Busted</h2>
+            <div className="rounded-2xl p-8" style={{ background: 'rgba(255,255,255,0.1)' }}>
+              <h2 className="text-xl font-bold mb-6" style={{ color: 'var(--glp-paper)' }}>Sleep Myths Busted</h2>
               <div className="space-y-4">
                 {sleepMyths.map((item, idx) => (
-                  <div key={idx} className="bg-slate-900 rounded-xl p-4">
+                  <div key={idx} className="rounded-xl p-4" style={{ background: 'rgba(255,255,255,0.05)' }}>
                     <div className="flex items-start gap-3 mb-2">
-                      <XCircle className="h-5 w-5 text-rose-500 flex-shrink-0 mt-0.5" />
-                      <p className="text-rose-400 font-medium">Myth: {item.myth}</p>
+                      <XCircle className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-rose)' }} />
+                      <p className="font-medium" style={{ color: 'var(--glp-rose)' }}>Myth: {item.myth}</p>
                     </div>
                     <div className="flex items-start gap-3 ml-8">
-                      <CheckCircle2 className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <p className="text-slate-300">Truth: {item.truth}</p>
+                      <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--glp-sage)' }} />
+                      <p style={{ color: 'var(--glp-paper)', opacity: 0.85 }}>Truth: {item.truth}</p>
                     </div>
                   </div>
                 ))}
@@ -247,8 +248,8 @@ export default function SleepGuidePage() {
           </div>
         )}
 
-        <div className="text-center py-8 border-t border-slate-700">
-          <p className="text-sm text-slate-500">
+        <div className="text-center py-8" style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-paper)', opacity: 0.5 }}>
             If you experience persistent sleep problems, please consult a healthcare provider.
             Sleep disorders like insomnia or sleep apnea require professional evaluation.
           </p>
