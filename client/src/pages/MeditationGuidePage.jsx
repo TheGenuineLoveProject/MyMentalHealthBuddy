@@ -1,89 +1,94 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Moon, Sun, Cloud, Leaf, Heart, Brain, Clock, Play, Pause, Volume2 } from "lucide-react";
+import { ArrowLeft, Moon, Sun, Cloud, Leaf, Heart, Brain, Clock, Play, Pause, Volume2, Sparkles, Shield, BookOpen, Eye, Anchor } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
 const meditations = [
   {
     id: "body-scan",
-    name: "Body Scan Relaxation",
+    name: "Progressive Body Scan",
     duration: "10-15 min",
     category: "relaxation",
     icon: Heart,
-    description: "Systematically relax each part of your body from head to toe",
-    benefits: ["Releases physical tension", "Improves body awareness", "Promotes deep relaxation"],
+    description: "Systematically release tension from head to toe, developing interoception—your ability to sense internal body states, which is key to emotional regulation.",
+    benefits: ["Releases stored physical tension", "Develops body awareness (interoception)", "Activates parasympathetic response", "Improves emotional granularity"],
+    researchNote: "Body scan meditation increases activity in the insula, the brain region responsible for interoception. Better body awareness = better emotional regulation.",
     script: [
-      "Find a comfortable position, lying down or seated.",
-      "Close your eyes and take three deep breaths.",
-      "Bring your attention to the top of your head.",
-      "Notice any tension in your scalp and let it soften.",
-      "Move your awareness to your forehead, relaxing any tightness.",
-      "Soften the muscles around your eyes and cheeks.",
-      "Relax your jaw, letting your teeth part slightly.",
-      "Feel your neck and shoulders releasing tension.",
-      "Allow relaxation to flow down through your arms and hands.",
-      "Breathe into your chest and belly, letting them expand freely.",
-      "Relax your lower back and hips.",
-      "Feel warmth and relaxation moving down your legs.",
-      "Relax your feet and toes completely.",
-      "Rest in this state of full-body relaxation.",
-      "When ready, gently wiggle your fingers and toes.",
-      "Slowly open your eyes, feeling refreshed and calm."
+      "Find a comfortable position, lying down or seated. Close your eyes.",
+      "Take three deep breaths, letting your body settle into the support beneath you.",
+      "Bring your attention to the very top of your head.",
+      "Notice any tension in your scalp. As you exhale, let it soften and release.",
+      "Move your awareness to your forehead. Smooth out any furrows or tightness.",
+      "Soften the small muscles around your eyes. Let your eyelids grow heavy.",
+      "Relax your jaw, allowing your teeth to part slightly. Release your tongue from the roof of your mouth.",
+      "Feel your neck and shoulders. This is where many of us carry stress. Let them drop away from your ears.",
+      "Allow relaxation to flow down through your arms, into your hands, to each fingertip.",
+      "Breathe into your chest and belly. With each inhale, they expand freely. With each exhale, they release.",
+      "Relax your lower back—a common holding place. Let the muscles soften.",
+      "Feel warmth and relaxation moving through your hips and down your legs.",
+      "Release any gripping in your thighs, knees, calves.",
+      "Relax your feet completely, including each toe.",
+      "Rest in this state of full-body relaxation. You are safe. You are held.",
+      "When ready, gently wiggle your fingers and toes. Take a deeper breath.",
+      "Slowly open your eyes, carrying this relaxation with you."
     ]
   },
   {
     id: "loving-kindness",
-    name: "Loving-Kindness Meditation",
+    name: "Loving-Kindness (Metta)",
     duration: "10-20 min",
     category: "compassion",
     icon: Heart,
-    description: "Cultivate feelings of love and compassion for yourself and others",
-    benefits: ["Increases self-compassion", "Improves relationships", "Reduces anxiety and depression"],
+    description: "Cultivate unconditional love for yourself and others. Research shows this practice literally changes brain structure toward greater compassion and reduces self-criticism.",
+    benefits: ["Increases self-compassion significantly", "Reduces anxiety and depression", "Improves relationship satisfaction", "Decreases self-criticism and shame"],
+    researchNote: "Richard Davidson's research at the University of Wisconsin shows loving-kindness meditation increases positive emotions and activity in brain regions associated with empathy.",
     script: [
-      "Sit comfortably and close your eyes.",
-      "Take a few deep breaths to center yourself.",
-      "Begin by directing loving-kindness toward yourself.",
+      "Sit comfortably and close your eyes. Take a few deep breaths to arrive here.",
+      "Begin by directing loving-kindness toward yourself. This can feel vulnerable—that's okay.",
       "Silently repeat: 'May I be happy. May I be healthy. May I be safe. May I live with ease.'",
-      "Feel the warmth of these wishes in your heart.",
-      "Now think of someone you love deeply.",
+      "Feel the warmth of these wishes settling into your heart. You deserve this kindness.",
+      "If resistance arises, simply notice it. You can say: 'May I learn to accept love.'",
+      "Now think of someone you love deeply—someone whose wellbeing brings you joy.",
       "Direct loving-kindness toward them: 'May you be happy. May you be healthy. May you be safe. May you live with ease.'",
-      "Think of a neutral person—someone you neither like nor dislike.",
-      "Extend the same wishes to them.",
-      "Now think of someone you find difficult.",
-      "With courage, offer them the same loving-kindness.",
-      "Finally, expand your wishes to all beings everywhere.",
+      "Feel your genuine care for this person. Let that love flow freely.",
+      "Think of a neutral person—someone you neither like nor dislike, perhaps a stranger you've seen.",
+      "Extend the same wishes to them. They too have hopes, fears, and struggles.",
+      "Now, if you feel ready: think of someone you find difficult. Start with someone mildly challenging.",
+      "With courage, offer them the same loving-kindness. This doesn't condone harm—it frees you.",
+      "Finally, expand your wishes to all beings everywhere—all humans, all creatures, all life.",
       "'May all beings be happy. May all beings be healthy. May all beings be safe. May all beings live with ease.'",
-      "Rest in this expansive feeling of universal love.",
-      "Gently return your attention to your breath.",
-      "Open your eyes when ready."
+      "Rest in this expansive feeling of universal love. You are connected to all of life.",
+      "Gently return your attention to your breath. Let the love remain.",
+      "Open your eyes when ready, carrying this compassion into your day."
     ]
   },
   {
     id: "breath-awareness",
-    name: "Breath Awareness",
+    name: "Mindful Breath Awareness",
     duration: "5-10 min",
     category: "mindfulness",
     icon: Cloud,
-    description: "Simple mindfulness practice focusing on the natural rhythm of breathing",
-    benefits: ["Calms the mind", "Reduces stress", "Improves focus"],
+    description: "The foundation of all meditation—simple, profound attention to the breath. This practice strengthens the prefrontal cortex and reduces amygdala reactivity.",
+    benefits: ["Calms the mind quickly", "Reduces stress hormones", "Improves focus and attention", "Builds meditation foundation"],
+    researchNote: "8 weeks of mindfulness practice shows measurable changes in brain structure: increased prefrontal cortex density, reduced amygdala volume.",
     script: [
-      "Sit in a comfortable position with your spine straight.",
+      "Sit in a comfortable position with your spine gently upright.",
       "Let your hands rest naturally on your lap or knees.",
-      "Close your eyes or soften your gaze.",
-      "Notice your breathing without trying to change it.",
+      "Close your eyes or soften your gaze downward.",
+      "Simply notice your breathing without trying to change it.",
       "Feel the cool air entering through your nostrils.",
-      "Notice your chest and belly expanding with each inhale.",
+      "Notice your chest and belly gently expanding with each inhale.",
       "Feel the warm air leaving with each exhale.",
-      "When thoughts arise, simply notice them and return to the breath.",
-      "No need to judge yourself for wandering—this is natural.",
-      "Each return to the breath strengthens your mindfulness.",
-      "Continue observing the rhythm of your breathing.",
-      "Notice the pause between inhale and exhale.",
-      "Feel the natural peace in simply breathing.",
-      "Rest in this awareness for as long as you like.",
-      "When ready, take a deeper breath.",
-      "Slowly open your eyes."
+      "When thoughts arise—and they will—simply notice them without judgment.",
+      "Say 'thinking' gently to yourself, then return to the breath.",
+      "No need to judge yourself for wandering. This IS the practice—noticing and returning.",
+      "Each time you return to the breath, you strengthen your attention muscle.",
+      "Notice the natural pause at the top of the inhale... and the bottom of the exhale.",
+      "Feel the natural rhythm of your breathing—effortless, alive.",
+      "Rest in this simple awareness for as long as you like.",
+      "When ready, take a slightly deeper breath to transition.",
+      "Slowly open your eyes, maintaining this quality of presence."
     ]
   },
   {
@@ -92,79 +97,111 @@ const meditations = [
     duration: "5-7 min",
     category: "intention",
     icon: Sun,
-    description: "Start your day with clarity and positive intention",
-    benefits: ["Sets positive tone for the day", "Increases motivation", "Improves focus"],
+    description: "Start your day with clarity and positive intention. Morning practices are powerful because the brain is particularly receptive in the transition from sleep.",
+    benefits: ["Sets positive tone for the day", "Increases sense of purpose", "Improves focus and motivation", "Creates coherence between values and action"],
+    researchNote: "Setting intentions activates the prefrontal cortex and creates a cognitive framework that influences perception and behavior throughout the day.",
     script: [
-      "Sit comfortably as you begin your day.",
-      "Take three deep breaths to arrive fully in this moment.",
-      "Feel gratitude for a new day full of possibilities.",
+      "Sit comfortably in bed or in a quiet space as you begin your day.",
+      "Take three deep breaths to transition from sleep to wakefulness.",
+      "Feel gratitude for this new day—a fresh start full of possibility.",
       "Ask yourself: 'How do I want to feel today?'",
-      "Choose one or two words that describe this feeling.",
-      "Visualize yourself moving through the day with this energy.",
+      "Choose one or two words that describe this feeling—peace, presence, courage, joy.",
+      "Visualize yourself moving through the day embodying this energy.",
       "See yourself handling challenges with calm and grace.",
-      "What is one small thing you can do today for your wellbeing?",
-      "Set this as your intention for the day.",
+      "What is one small thing you can do today to honor your wellbeing?",
+      "Set this as your intention—not a to-do, but a way of being.",
       "Repeat silently: 'Today, I choose [your intention].'",
-      "Feel this intention settling into your body.",
-      "Trust that you have everything you need for today.",
-      "Take one more deep breath.",
-      "Carry this peaceful, intentional energy with you.",
-      "Open your eyes, ready for your day.",
-      "Remember: You can return to this intention anytime."
+      "Feel this intention settling into your body like a gentle glow.",
+      "Trust that you have everything you need for whatever this day brings.",
+      "Take one more deep, centering breath.",
+      "Carry this peaceful, intentional energy with you as you rise.",
+      "Remember: you can return to this intention whenever you need it.",
+      "Open your eyes, ready for your day."
     ]
   },
   {
     id: "evening",
-    name: "Evening Reflection",
+    name: "Evening Release & Reflection",
     duration: "5-10 min",
     category: "reflection",
     icon: Moon,
-    description: "Wind down and process your day with gentle awareness",
-    benefits: ["Promotes restful sleep", "Processes the day's events", "Cultivates gratitude"],
+    description: "Wind down and process your day with gentle awareness. Evening meditation helps the brain consolidate learning and prepares the nervous system for restorative sleep.",
+    benefits: ["Promotes restful sleep", "Processes the day's experiences", "Cultivates gratitude", "Releases accumulated tension"],
+    researchNote: "Evening reflection practices reduce rumination and cortisol levels, allowing for deeper sleep and better emotional processing during REM cycles.",
     script: [
       "Settle into a comfortable position as your day winds down.",
       "Close your eyes and take several slow, deep breaths.",
-      "Allow your body to sink into relaxation.",
-      "Let go of any remaining tension from the day.",
-      "Gently review your day without judgment.",
-      "What moments brought you joy or satisfaction?",
-      "Acknowledge any challenges you faced with compassion.",
-      "You did your best with what you had today.",
-      "Think of three things you're grateful for.",
-      "Feel appreciation for these blessings, big or small.",
-      "Release any worries about tomorrow—they can wait.",
-      "Let your mind become quiet and still.",
-      "Feel yourself preparing for restful sleep.",
-      "Know that you are safe in this moment.",
-      "Rest in the peace of simply being.",
-      "Drift gently toward sleep when ready."
+      "Allow your body to sink into relaxation—you've earned this rest.",
+      "With each exhale, release the weight of the day.",
+      "Gently review your day without judgment, as if watching a movie.",
+      "What moments brought you joy, satisfaction, or connection?",
+      "Acknowledge any challenges you faced. You did your best with what you had.",
+      "Is there anything you need to release to sleep well? Exhale it out.",
+      "Think of three things you're grateful for today, no matter how small.",
+      "Feel appreciation for these blessings. Let gratitude fill your heart.",
+      "Release any worries about tomorrow—they can wait until you're rested.",
+      "Let your mind become quiet, like a still pond after the ripples settle.",
+      "Feel yourself preparing for deep, restorative sleep.",
+      "You are safe in this moment. Nothing needs to be done right now.",
+      "Rest in the peace of simply being, simply breathing.",
+      "Drift gently toward sleep whenever your body is ready."
     ]
   },
   {
     id: "grounding",
-    name: "Grounding Meditation",
+    name: "Earth Grounding Meditation",
     duration: "5-10 min",
     category: "grounding",
     icon: Leaf,
-    description: "Connect with the earth and find stability in the present moment",
-    benefits: ["Reduces anxiety", "Creates sense of stability", "Anchors you in the present"],
+    description: "Connect with the stability of the earth beneath you. This practice is especially helpful when you feel untethered, anxious, or disconnected from your body.",
+    benefits: ["Reduces anxiety quickly", "Creates profound sense of stability", "Anchors in present moment", "Helpful for dissociation"],
+    researchNote: "Grounding practices activate proprioception and interoception, helping the brain orient to present-moment safety rather than past trauma or future worry.",
     script: [
-      "Sit or stand with your feet flat on the ground.",
-      "Close your eyes and feel your connection to the earth.",
-      "Notice the solid support beneath you.",
-      "Imagine roots growing from your feet deep into the earth.",
-      "These roots anchor you, stable and secure.",
-      "With each exhale, send any tension down through your roots.",
-      "Let the earth absorb and transform this energy.",
-      "With each inhale, draw up calm, grounding energy.",
-      "Feel this stability rising through your body.",
-      "Your roots go deep—you cannot be easily shaken.",
-      "Notice the weight of your body being fully supported.",
-      "Feel the steadiness of the ground beneath you.",
-      "You are connected to something vast and ancient.",
-      "Rest in this grounded, centered feeling.",
-      "Know you can return here whenever you need stability.",
-      "Gently open your eyes, remaining grounded."
+      "Stand or sit with your feet flat on the ground, hip-width apart.",
+      "Close your eyes and feel your connection to the earth beneath you.",
+      "Notice the solid, unwavering support that's always there.",
+      "The earth has been holding you your entire life. It will not let you fall.",
+      "Imagine roots growing from the soles of your feet, deep into the earth.",
+      "These roots extend down through soil, through rock, toward the center of the planet.",
+      "You are anchored, stable, unmovable.",
+      "With each exhale, send any tension, worry, or heaviness down through your roots.",
+      "Let the earth absorb and transform this energy. It knows how.",
+      "With each inhale, draw up calm, grounding energy from the earth.",
+      "Feel this stability rising through your roots, through your legs, into your core.",
+      "Notice the weight of your body being fully supported by the ground.",
+      "You don't have to hold yourself up. You are held.",
+      "Your roots go deep—you cannot be easily shaken by surface storms.",
+      "You are connected to something vast, ancient, and enduring.",
+      "Carry this grounded, centered feeling with you. You can return here anytime."
+    ]
+  },
+  {
+    id: "parts-work",
+    name: "Parts Awareness (IFS-Informed)",
+    duration: "10-15 min",
+    category: "self-awareness",
+    icon: Eye,
+    description: "A meditation based on Internal Family Systems (IFS) to connect with different parts of yourself with curiosity and compassion, rather than judgment.",
+    benefits: ["Develops self-awareness", "Reduces internal conflict", "Cultivates self-compassion", "Helps understand reactive patterns"],
+    researchNote: "IFS-informed practices help people relate to their inner experience with more curiosity and less shame, leading to better emotional regulation.",
+    script: [
+      "Settle into a comfortable position and close your eyes.",
+      "Take several deep breaths, arriving fully in this moment.",
+      "Notice how you're feeling right now. What's present?",
+      "If you notice a strong emotion or reaction, get curious about it.",
+      "In IFS, we understand this as a 'part' of you. Say hello to this part.",
+      "Notice: Where do you feel this part in your body?",
+      "Ask gently: 'How old is this part?'",
+      "Often, strong reactions come from younger parts trying to protect you.",
+      "Ask the part: 'What are you trying to protect me from?'",
+      "Listen without judgment. There's always a good intention behind every part.",
+      "Thank this part for trying to help, even if its methods haven't served you.",
+      "Ask: 'What does this part need from me right now?'",
+      "From your centered Self—characterized by curiosity, compassion, and calm—offer what the part needs.",
+      "This might be reassurance, acknowledgment, or simply your presence.",
+      "Notice any shifts in how you feel toward this part of yourself.",
+      "You can return to dialogue with your parts anytime. They want to be heard.",
+      "Take a deep breath and gently open your eyes."
     ]
   }
 ];
@@ -175,7 +212,9 @@ const categories = [
   { id: "compassion", name: "Compassion", icon: Heart },
   { id: "mindfulness", name: "Mindfulness", icon: Leaf },
   { id: "intention", name: "Morning", icon: Sun },
-  { id: "reflection", name: "Evening", icon: Moon }
+  { id: "reflection", name: "Evening", icon: Moon },
+  { id: "grounding", name: "Grounding", icon: Anchor },
+  { id: "self-awareness", name: "Self-Awareness", icon: Eye }
 ];
 
 function MeditationPlayer({ meditation }) {
@@ -196,7 +235,7 @@ function MeditationPlayer({ meditation }) {
 
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
-      <div className="flex items-start gap-4 mb-8">
+      <div className="flex items-start gap-4 mb-6">
         <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 text-white">
           <meditation.icon className="h-8 w-8" />
         </div>
@@ -218,7 +257,7 @@ function MeditationPlayer({ meditation }) {
           <span className="text-sm text-slate-500 dark:text-slate-400 mb-4 block">
             Step {currentStep + 1} of {meditation.script.length}
           </span>
-          <p className="text-xl text-slate-900 dark:text-white leading-relaxed min-h-20">
+          <p className="text-xl text-slate-900 dark:text-white leading-relaxed min-h-24">
             {meditation.script[currentStep]}
           </p>
         </div>
@@ -264,14 +303,27 @@ function MeditationPlayer({ meditation }) {
         </div>
       </div>
 
-      <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-xl p-6">
-        <h3 className="font-semibold text-slate-900 dark:text-white mb-3">Benefits</h3>
-        <div className="flex flex-wrap gap-2">
-          {meditation.benefits.map((benefit, idx) => (
-            <span key={idx} className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-full text-sm">
-              {benefit}
-            </span>
-          ))}
+      <div className="grid md:grid-cols-2 gap-4 mb-6">
+        <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-xl p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-emerald-500" />
+            Benefits
+          </h3>
+          <ul className="space-y-2">
+            {meditation.benefits.map((benefit, idx) => (
+              <li key={idx} className="text-slate-600 dark:text-slate-400 text-sm flex items-start gap-2">
+                <span className="text-emerald-500 mt-0.5">•</span>
+                {benefit}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-indigo-50 dark:bg-indigo-950/30 rounded-xl p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+            <BookOpen className="h-5 w-5 text-indigo-500" />
+            Research Note
+          </h3>
+          <p className="text-slate-600 dark:text-slate-400 text-sm">{meditation.researchNote}</p>
         </div>
       </div>
     </div>
@@ -283,8 +335,8 @@ export default function MeditationGuidePage() {
   const [selectedMeditation, setSelectedMeditation] = useState(meditations[0]);
 
   useSEO({
-    title: "Meditation Guide",
-    description: "Guided meditations for relaxation, focus, and healing. Body scans, loving-kindness, and mindfulness practices for inner peace.",
+    title: "Guided Meditations | Evidence-Based Mindfulness | The Genuine Love Project",
+    description: "Research-backed guided meditations for calm, clarity, and self-compassion. Body scans, loving-kindness, mindfulness, and IFS-informed practices.",
   });
 
   const filteredMeditations = selectedCategory === "all" 
@@ -304,10 +356,25 @@ export default function MeditationGuidePage() {
             <Brain className="h-8 w-8" />
           </div>
           <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Meditation Guide</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Guided meditations for calm, clarity, and connection. Each practice includes step-by-step 
-            guidance to support your mindfulness journey.
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+            Evidence-based guided meditations that literally change your brain. Research shows just 8 weeks of regular practice 
+            increases prefrontal cortex density (self-regulation) while reducing amygdala volume (fear response). 
+            Each practice includes step-by-step guidance to support your inner journey.
           </p>
+        </div>
+
+        <div className="bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 rounded-2xl p-6 mb-8">
+          <div className="flex items-start gap-4">
+            <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">How Meditation Changes the Brain</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                Neuroimaging studies show meditation increases gray matter in areas responsible for learning, memory, emotional regulation, 
+                and perspective-taking. It also reduces the size of the amygdala, your brain's fear center. 
+                These aren't temporary states—they're lasting structural changes that accumulate with practice.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -337,7 +404,7 @@ export default function MeditationGuidePage() {
                 className={`w-full text-left p-4 rounded-xl transition-all ${
                   selectedMeditation.id === med.id
                     ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
-                    : "bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700"
+                    : "bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"
                 }`}
                 data-testid={`button-meditation-${med.id}`}
               >
@@ -360,19 +427,37 @@ export default function MeditationGuidePage() {
           </div>
         </div>
 
+        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-amber-600" />
+            Tips for Your Practice
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4 text-sm text-slate-600 dark:text-slate-400">
+            <div>
+              <strong className="text-slate-800 dark:text-slate-200">Consistency over duration:</strong> 5 minutes daily beats 30 minutes occasionally. The brain changes through repetition.
+            </div>
+            <div>
+              <strong className="text-slate-800 dark:text-slate-200">Mind-wandering is normal:</strong> Noticing you've wandered and returning IS the practice. Each return strengthens attention.
+            </div>
+            <div>
+              <strong className="text-slate-800 dark:text-slate-200">No wrong way:</strong> If you're paying attention to your experience, you're meditating. Drop perfectionism.
+            </div>
+          </div>
+        </div>
+
         <RelatedNextSteps 
           steps={[
-            { title: "Breathing Exercises", description: "Foundation for meditation", path: "/breathing-exercises" },
-            { title: "Calming Scenes", description: "Visual relaxation journeys", path: "/calming-scenes" },
-            { title: "Body Wellness", description: "Physical practices for peace", path: "/body-wellness" },
+            { title: "Breathing Exercises", description: "Foundation for deeper meditation", path: "/breathing-exercises" },
+            { title: "Grounding Techniques", description: "Prepare your nervous system", path: "/grounding" },
+            { title: "Inner Child Work", description: "Deepen self-compassion", path: "/inner-child" },
           ]}
-          title="Continue Your Journey"
+          title="Continue Your Mindfulness Journey"
         />
 
         <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
           <p className="text-sm text-slate-500 dark:text-slate-500">
-            Meditation is a practice, not a perfection. Be patient and compassionate with yourself as you develop this skill.
-            If you experience significant distress, please consult a mental health professional.
+            Meditation is a practice, not a perfection. Be patient and compassionate with yourself. 
+            If you experience significant distress during meditation, pause and ground yourself, or consult a mental health professional.
           </p>
         </div>
       </div>

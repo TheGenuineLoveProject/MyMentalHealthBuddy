@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap } from "lucide-react";
+import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap, Brain, Shield, Moon, Sun, Sparkles, BookOpen } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 
@@ -8,44 +8,77 @@ const exercises = [
   {
     id: "box",
     name: "Box Breathing",
-    description: "Equal-duration breathing for balance and calm. Used by Navy SEALs for stress management.",
+    description: "Equal-duration breathing for balance and nervous system reset. Used by Navy SEALs to maintain composure under extreme stress.",
     pattern: { inhale: 4, hold1: 4, exhale: 4, hold2: 4 },
-    benefits: ["Reduces stress", "Improves focus", "Balances nervous system", "Promotes relaxation"],
-    bestFor: "Acute stress, before important events, centering yourself"
+    benefits: ["Activates parasympathetic response", "Improves focus and clarity", "Balances autonomic nervous system", "Creates predictable rhythm for safety"],
+    bestFor: "Acute stress, before important events, centering yourself, anxiety management",
+    polyvagalNote: "The equal rhythm creates predictability, which signals safety to your nervous system. The holds give your vagus nerve time to activate."
   },
   {
     id: "478",
-    name: "4-7-8 Relaxation",
-    description: "Dr. Andrew Weil's calming breath. Activates the parasympathetic nervous system for deep relaxation.",
+    name: "4-7-8 Relaxation Breath",
+    description: "Dr. Andrew Weil's powerful technique based on ancient pranayama. The extended exhale directly activates your parasympathetic nervous system.",
     pattern: { inhale: 4, hold1: 7, exhale: 8, hold2: 0 },
-    benefits: ["Promotes sleep", "Reduces anxiety", "Calms racing thoughts", "Lowers blood pressure"],
-    bestFor: "Before sleep, anxiety relief, calming panic"
+    benefits: ["Promotes deep sleep", "Reduces anxiety rapidly", "Calms racing thoughts", "Lowers cortisol levels"],
+    bestFor: "Before sleep, acute anxiety, calming panic, breaking worry cycles",
+    polyvagalNote: "The 8-count exhale is key—exhalation activates the ventral vagal complex, signaling to your body that you are safe and can rest."
   },
   {
     id: "coherent",
     name: "Coherent Breathing",
-    description: "5-second rhythm that synchronizes heart rate variability for optimal nervous system balance.",
+    description: "5-second rhythm scientifically shown to optimize heart rate variability (HRV), the gold standard measure of nervous system health.",
     pattern: { inhale: 5, hold1: 0, exhale: 5, hold2: 0 },
-    benefits: ["Heart coherence", "Emotional balance", "Stress resilience", "Mental clarity"],
-    bestFor: "Daily practice, emotional regulation, building resilience"
+    benefits: ["Maximizes heart-brain coherence", "Emotional equilibrium", "Builds stress resilience over time", "Optimal vagal tone"],
+    bestFor: "Daily practice, emotional regulation, building long-term resilience, baseline nervous system health",
+    polyvagalNote: "Research by Dr. Patricia Gerbarg shows 5-7 breaths per minute creates optimal conditions for vagal stimulation and nervous system balance."
   },
   {
     id: "calming",
-    name: "Calming Breath",
-    description: "Extended exhale activates the vagus nerve and signals safety to your body.",
+    name: "Extended Exhale",
+    description: "The exhale is your access point to calm. By lengthening the exhale beyond the inhale, you directly activate the parasympathetic 'rest and digest' response.",
     pattern: { inhale: 4, hold1: 2, exhale: 6, hold2: 0 },
-    benefits: ["Vagus nerve activation", "Deep relaxation", "Anxiety reduction", "Promotes safety"],
-    bestFor: "Anxiety, overwhelm, grounding during stress"
+    benefits: ["Direct vagus nerve activation", "Signals safety to the brain", "Rapid anxiety reduction", "Shifts from fight-flight to rest-digest"],
+    bestFor: "Anxiety relief, overwhelm, grounding during stress, returning to your window of tolerance",
+    polyvagalNote: "Exhalation is controlled by the parasympathetic nervous system. Lengthening it literally tells your body: 'I am safe enough to breathe slowly.'"
   },
   {
     id: "energizing",
     name: "Energizing Breath",
-    description: "Shorter, more dynamic breathing pattern to increase alertness and energy.",
+    description: "Shorter, more dynamic breathing to gently increase sympathetic activation when you need alertness without anxiety.",
     pattern: { inhale: 4, hold1: 0, exhale: 2, hold2: 0 },
-    benefits: ["Increases energy", "Improves alertness", "Clears mental fog", "Boosts motivation"],
-    bestFor: "Morning wake-up, afternoon slump, before exercise"
+    benefits: ["Increases alertness naturally", "Clears mental fog", "Boosts motivation", "Gentle energy without caffeine"],
+    bestFor: "Morning wake-up, afternoon slump, before exercise, when fatigue is protective avoidance",
+    polyvagalNote: "Shorter exhales maintain mild sympathetic activation—the 'ready for action' state without tipping into fight-or-flight."
+  },
+  {
+    id: "physiological",
+    name: "Physiological Sigh",
+    description: "A double-inhale followed by a long exhale—the fastest way to calm down, discovered by Stanford neuroscientist Dr. Andrew Huberman.",
+    pattern: { inhale: 2, hold1: 1, exhale: 6, hold2: 0 },
+    benefits: ["Fastest calming technique known", "Reinflates collapsed lung sacs", "Rapid CO2 offload", "Immediate nervous system reset"],
+    bestFor: "Immediate stress relief, panic moments, before difficult conversations, real-time regulation",
+    polyvagalNote: "The double inhale opens collapsed alveoli in the lungs, allowing more efficient CO2 release, which immediately calms the nervous system."
   }
 ];
+
+const scienceOfBreathing = {
+  vagusNerve: {
+    title: "The Vagus Nerve Connection",
+    content: "Your vagus nerve is the longest cranial nerve, running from your brainstem through your neck, heart, and into your gut. It's the 'information highway' between body and brain. Slow breathing directly stimulates this nerve, sending safety signals to your brain."
+  },
+  polyvagal: {
+    title: "Polyvagal Theory & Breath",
+    content: "According to Dr. Stephen Porges' polyvagal theory, your nervous system has three states: ventral vagal (safe/social), sympathetic (fight/flight), and dorsal vagal (freeze/shutdown). Conscious breathing is one of the few tools that can consciously shift between these states."
+  },
+  hrv: {
+    title: "Heart Rate Variability",
+    content: "HRV—the variation in time between heartbeats—is the gold standard measure of nervous system flexibility. Higher HRV = better stress resilience. Coherent breathing at 5-7 breaths per minute has been shown to optimize HRV in as little as 5 minutes."
+  },
+  research: {
+    title: "What Research Shows",
+    content: "Studies demonstrate that just 5 minutes of slow, diaphragmatic breathing reduces cortisol, lowers blood pressure, decreases anxiety symptoms, and improves cognitive performance. Regular practice creates lasting changes in nervous system baseline."
+  }
+};
 
 const phases = ["Inhale", "Hold", "Exhale", "Hold"];
 
@@ -130,21 +163,9 @@ function BreathingTimer({ exercise, onComplete }) {
           <span className="text-lg text-slate-600 dark:text-slate-400 mt-2">{instruction || "..."}</span>
         </div>
         <svg className="absolute inset-0 w-full h-full -rotate-90">
+          <circle cx="128" cy="128" r="120" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="8" />
           <circle
-            cx="128"
-            cy="128"
-            r="120"
-            fill="none"
-            stroke="rgba(255,255,255,0.3)"
-            strokeWidth="8"
-          />
-          <circle
-            cx="128"
-            cy="128"
-            r="120"
-            fill="none"
-            stroke="white"
-            strokeWidth="8"
+            cx="128" cy="128" r="120" fill="none" stroke="white" strokeWidth="8"
             strokeDasharray={2 * Math.PI * 120}
             strokeDashoffset={2 * Math.PI * 120 * (1 - timeLeft / phaseDurations[currentPhase])}
             className="transition-all duration-1000"
@@ -201,8 +222,8 @@ export default function BreathingExercisesPage() {
   const [completed, setCompleted] = useState(false);
 
   useSEO({
-    title: "Breathing Exercises",
-    description: "Guided breathing exercises for stress relief, anxiety reduction, and relaxation. Box breathing, 4-7-8 technique, coherent breathing, and more.",
+    title: "Breathing Exercises for Nervous System Regulation | The Genuine Love Project",
+    description: "Evidence-based breathing techniques grounded in polyvagal theory for stress relief, anxiety reduction, and nervous system regulation. Box breathing, 4-7-8 technique, coherent breathing.",
   });
 
   return (
@@ -217,11 +238,25 @@ export default function BreathingExercisesPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-sky-400 to-blue-500 text-white mb-6">
             <Wind className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Breathing Exercises</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Evidence-based breathing techniques to calm your nervous system, reduce anxiety, and restore balance.
-            Your breath is a powerful tool for healing.
+          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Breathing for Nervous System Regulation</h1>
+          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+            Your breath is the only autonomic function you can consciously control—making it your most accessible tool for nervous system regulation. 
+            These evidence-based techniques, grounded in polyvagal theory, help shift your body from stress states into calm presence.
           </p>
+        </div>
+
+        <div className="bg-teal-50 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800 rounded-2xl p-6 mb-12">
+          <div className="flex items-start gap-4">
+            <Brain className="h-6 w-6 text-teal-600 dark:text-teal-400 flex-shrink-0 mt-1" />
+            <div>
+              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Why Breathing Works</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                <strong>Polyvagal insight:</strong> Your nervous system is constantly scanning for danger (neuroception). 
+                Slow, deep breathing—especially with extended exhales—activates the ventral vagal complex, 
+                signaling to your brain: "I am safe. I can rest." This isn't positive thinking; it's physiology.
+              </p>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -233,7 +268,7 @@ export default function BreathingExercisesPage() {
                 onClick={() => { setSelectedExercise(ex); setCompleted(false); }}
                 className={`w-full text-left p-4 rounded-xl transition-all ${selectedExercise.id === ex.id
                   ? "bg-gradient-to-r from-sky-500 to-blue-500 text-white shadow-lg"
-                  : "bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700"}`}
+                  : "bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"}`}
                 data-testid={`button-exercise-${ex.id}`}
               >
                 <h3 className={`font-medium ${selectedExercise.id === ex.id ? "text-white" : "text-slate-900 dark:text-white"}`}>
@@ -254,8 +289,9 @@ export default function BreathingExercisesPage() {
               {completed ? (
                 <div className="text-center py-12">
                   <Heart className="h-16 w-16 text-rose-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Well Done!</h3>
-                  <p className="text-slate-600 dark:text-slate-400 mb-6">You've completed your breathing practice.</p>
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Beautiful Work</h3>
+                  <p className="text-slate-600 dark:text-slate-400 mb-4">Take a moment to notice how you feel now compared to before.</p>
+                  <p className="text-sm text-teal-600 dark:text-teal-400 mb-6">Each practice builds your capacity for calm. Your nervous system is learning.</p>
                   <button
                     onClick={() => setCompleted(false)}
                     className="px-6 py-3 rounded-full bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-colors"
@@ -291,23 +327,64 @@ export default function BreathingExercisesPage() {
                   <p className="text-slate-600 dark:text-slate-400 text-sm">{selectedExercise.bestFor}</p>
                 </div>
               </div>
+
+              <div className="mt-6 bg-indigo-50 dark:bg-indigo-950/30 rounded-xl p-6">
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                  <Brain className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                  Polyvagal Note
+                </h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">{selectedExercise.polyvagalNote}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-2xl p-8">
+          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-8 text-center flex items-center justify-center gap-2">
+            <BookOpen className="h-6 w-6 text-indigo-600" />
+            The Science Behind Breathwork
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {Object.values(scienceOfBreathing).map((item, idx) => (
+              <div key={idx} className="bg-white dark:bg-slate-800 rounded-xl p-6">
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-3">{item.title}</h3>
+                <p className="text-slate-600 dark:text-slate-400 text-sm">{item.content}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
+          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-amber-600" />
+            Tips for Practice
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4 text-sm text-slate-600 dark:text-slate-400">
+            <div>
+              <strong className="text-slate-800 dark:text-slate-200">Build gradually:</strong> Start with 3-5 cycles. Overwhelm activates stress, not calm.
+            </div>
+            <div>
+              <strong className="text-slate-800 dark:text-slate-200">Practice when calm:</strong> Train your nervous system during neutral times, not only during crisis.
+            </div>
+            <div>
+              <strong className="text-slate-800 dark:text-slate-200">Consistency matters:</strong> 5 minutes daily creates more change than 30 minutes occasionally.
             </div>
           </div>
         </div>
 
         <RelatedNextSteps 
           steps={[
-            { title: "Grounding Techniques", description: "Combine with grounding for deeper calm", path: "/grounding" },
-            { title: "Save to Journal", description: "Reflect on your breathing practice", path: "/journal" },
-            { title: "Sleep Guide", description: "Use breathwork for better sleep", path: "/sleep-guide" },
+            { title: "Grounding Techniques", description: "Combine with grounding for deeper nervous system reset", path: "/grounding" },
+            { title: "Meditation Guide", description: "Deepen your breath awareness practice", path: "/meditation-guide" },
+            { title: "Sleep Guide", description: "Use breathwork for restorative sleep", path: "/sleep-guide" },
           ]}
-          title="Continue Your Journey"
+          title="Continue Your Regulation Journey"
         />
 
         <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
           <p className="text-sm text-slate-500 dark:text-slate-500">
-            Breathing exercises are supportive wellness tools, not a replacement for professional mental health care.
-            If you experience dizziness or discomfort, return to normal breathing. Consult a healthcare provider if symptoms persist.
+            Breathing exercises are powerful nervous system tools but not a replacement for professional mental health care.
+            If you experience dizziness or discomfort, return to natural breathing. Your body's signals are always valid.
           </p>
         </div>
       </div>
