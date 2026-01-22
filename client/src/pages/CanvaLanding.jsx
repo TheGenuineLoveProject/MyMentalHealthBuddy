@@ -607,14 +607,14 @@ export default function CanvaLanding() {
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
-        <div className="max-w-4xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-4 px-8 py-5 rounded-full bg-white/10 backdrop-blur-sm mb-8 mt-12">
-            <Sparkles className="w-8 h-8 text-[var(--glp-gold)]" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }} />
-            <span className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.15)' }}>Start your transformation today</span>
+        <div className="max-w-4xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
+          <div className="inline-flex items-center justify-center gap-4 px-8 py-5 rounded-full bg-white/10 backdrop-blur-sm mb-10">
+            <Sparkles className="w-10 h-10 text-[var(--glp-gold)]" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }} />
+            <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.15)' }}>Start your transformation today</span>
           </div>
           
           {/* Lotus Accent */}
-          <div className="w-full flex items-center justify-center mb-8" style={{ position: 'relative' }}>
+          <div className="w-full flex items-center justify-center mb-10" style={{ position: 'relative' }}>
             <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '3px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)' }}></div>
             <div className="relative rounded-full overflow-hidden" style={{ width: '160px', height: '160px', background: 'var(--glp-white)', boxShadow: '0 8px 38px rgba(0,0,0,0.15)' }}>
               <img 
@@ -625,12 +625,12 @@ export default function CanvaLanding() {
             </div>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-8 text-white leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-10 text-white leading-tight text-center">
             Begin Your Healing
             <br />
             <span className="text-[var(--glp-gold)]">Journey Today</span>
           </h2>
-          <p className="text-xl md:text-2xl lg:text-3xl mb-12 text-white/90 max-w-2xl mx-auto font-medium">
+          <p className="text-2xl md:text-3xl lg:text-4xl mb-12 text-white/90 max-w-3xl mx-auto font-medium text-center">
             Join thousands who have found peace, growth, and genuine love within themselves.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
