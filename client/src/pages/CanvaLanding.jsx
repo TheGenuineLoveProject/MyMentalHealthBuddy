@@ -765,13 +765,13 @@ export default function CanvaLanding() {
       {/* Footer */}
       <footer className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-6xl mx-auto">
-          {/* Inspirational Words Section - Now at Top */}
+          {/* Brand Logo Section - Now at Top */}
           <div className="flex flex-col items-center justify-center pb-12 mb-12" style={{ borderBottom: '1px solid var(--glp-sage-15)' }}>
-            <div className="w-full max-w-4xl mb-6 rounded-2xl overflow-hidden" style={{ boxShadow: '0 12px 40px var(--glp-sage-20)' }}>
+            <div className="mb-6">
               <img 
-                src="/brand/inspirational-words.png" 
-                alt="Genuine Love, Healing, Transformation, Compassion, Growth, Peace, Wisdom, Hope, Strength, Courage" 
-                className="w-full h-auto object-cover"
+                src="/brand/logo-monogram.png" 
+                alt="The Genuine Love Project" 
+                className="w-20 h-20 object-contain mx-auto"
               />
             </div>
             <p className="text-lg sm:text-xl text-center font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -832,13 +832,6 @@ export default function CanvaLanding() {
 
           {/* Brand Column - Now at Bottom */}
           <div className="flex flex-col items-center text-center py-8 mb-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-            <div className="mb-6">
-              <img 
-                src="/brand/logo-monogram.png" 
-                alt="The Genuine Love Project" 
-                className="w-10 h-10 object-contain mx-auto"
-              />
-            </div>
             <h4 className="font-serif font-bold text-xl mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
               The Genuine Love Project
             </h4>
