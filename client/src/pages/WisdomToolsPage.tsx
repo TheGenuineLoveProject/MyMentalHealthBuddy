@@ -71,7 +71,7 @@ export default function WisdomToolsPage() {
     <>
       <SEO 
         title="Wisdom Tools - The Genuine Love Project" 
-        description="Advanced intellectual frameworks for deep self-inquiry including cognitive models, dialectical inquiry, and philosophical traditions." 
+        description="Timeless wisdom from across traditions. Explore cognitive frameworks, philosophical inquiry, and contemplative practices at your own pace." 
       />
       <div className="min-h-screen hero-gradient px-4 py-10">
         <div className="mx-auto w-full max-w-4xl">

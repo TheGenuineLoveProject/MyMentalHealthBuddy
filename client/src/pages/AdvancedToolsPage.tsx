@@ -89,8 +89,8 @@ export default function AdvancedToolsPage() {
   return (
     <>
       <SEO 
-        title="Advanced Intellectual Tools - The Genuine Love Project" 
-        description="20 rigorous instruments for self-inquiry including logic, ethics, identity, systems, creativity, and philosophical mapping." 
+        title="Advanced Exploration Tools - The Genuine Love Project" 
+        description="Thoughtful tools for gentle self-discovery. Explore logic, ethics, identity, and meaning at your own pace with compassionate guidance." 
       />
       <div className="min-h-screen hero-gradient px-4 py-10">
         <div className="mx-auto w-full max-w-6xl">
@@ -108,8 +108,8 @@ export default function AdvancedToolsPage() {
                 <Brain className="w-6 h-6" />
               </div>
               <div>
-                <h1 className="text-heading-xl text-teal">Advanced Intellectual Tools</h1>
-                <p className="text-body-sm">20 instruments for rigorous self-inquiry — logic, ethics, identity, systems, creativity, and philosophical mapping.</p>
+                <h1 className="text-heading-xl text-teal">Advanced Exploration Tools</h1>
+                <p className="text-body-sm">Gentle yet powerful instruments for self-discovery. Explore logic, ethics, identity, and meaning—at your own pace, in your own way.</p>
               </div>
             </div>
           </header>

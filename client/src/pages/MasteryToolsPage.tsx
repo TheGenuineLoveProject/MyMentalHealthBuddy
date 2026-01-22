@@ -12,19 +12,19 @@ const TOOLS = [
   {
     id: "deepwork" as ActiveTool,
     name: "Deep Work Tracker",
-    description: "Track and optimize focused work sessions—build the muscle of uninterrupted concentration",
+    description: "Gently track focused sessions at your own rhythm—notice what helps you concentrate without judgment",
     icon: Focus,
   },
   {
     id: "skills" as ActiveTool,
     name: "Skill Forge",
-    description: "Apply deliberate practice principles to systematically develop mastery in any domain",
+    description: "Explore deliberate practice at your own pace—growth happens in seasons, not straight lines",
     icon: Flame,
   },
   {
     id: "models" as ActiveTool,
     name: "Mental Models Library",
-    description: "Expand your cognitive toolkit with powerful frameworks for clearer thinking and better decisions",
+    description: "Discover thinking frameworks when you're ready—tools to support clarity, not add pressure",
     icon: Brain,
   }
 ];
@@ -55,7 +55,7 @@ export default function MasteryToolsPage() {
               </div>
               <div>
                 <h1 className="text-heading-xl text-teal">Mastery Tools</h1>
-                <p className="text-body-sm">Instruments for deep work, deliberate practice, and intellectual leverage — becoming excellent at what matters.</p>
+                <p className="text-body-sm">Gentle instruments for focused growth. Use at your own pace—there's no pressure here, only support for becoming who you want to be.</p>
               </div>
             </div>
           </header>

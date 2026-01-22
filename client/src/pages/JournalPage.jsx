@@ -79,8 +79,8 @@ export default function JournalPage() {
   return (
     <>
       <SEO 
-        title="Journal"
-        description="Write and reflect on your thoughts in a private, secure journal. Express yourself freely and track your mental wellness journey."
+        title="Reflective Journal - The Genuine Love Project"
+        description="A safe, private space to process thoughts, honor feelings, and witness your growth. Express yourself freely with compassionate journaling."
       />
       <div className="min-h-screen safe-padding hero-gradient">
         <div className="container-sm px-responsive">

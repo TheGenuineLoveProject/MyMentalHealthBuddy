@@ -84,8 +84,8 @@ export default function MoodPage() {
   return (
     <>
       <SEO 
-        title="Log Mood"
-        description="Track your emotional state and well-being. Log your daily mood, select emotions, and note activities that affect how you feel."
+        title="Check In With Yourself - The Genuine Love Project"
+        description="Pause, breathe, and notice what's present. Track your emotional state with gentleness—there's no wrong answer, only honest awareness."
       />
       <div className="min-h-screen safe-padding hero-gradient">
         <div className="container-xs px-responsive">
