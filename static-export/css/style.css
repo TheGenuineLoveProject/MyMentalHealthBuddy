@@ -753,3 +753,384 @@ h4 { font-size: 1.25rem; }
 .gap-1 { gap: 0.5rem; }
 .gap-2 { gap: 1rem; }
 .gap-3 { gap: 1.5rem; }
+
+/* ============================================================================
+   ANNOUNCEMENT BAR
+   ============================================================================ */
+.announcement-bar {
+  background: linear-gradient(90deg, var(--teal), var(--teal-dark));
+  color: var(--white);
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+}
+
+.announcement-bar .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.announcement-bar__text {
+  text-align: center;
+}
+
+.announcement-bar__link {
+  color: var(--gold);
+  font-weight: 600;
+  margin-left: 0.5rem;
+}
+
+.announcement-bar__link:hover {
+  color: var(--white);
+}
+
+.announcement-bar__close {
+  color: var(--white);
+  opacity: 0.7;
+  font-size: 1.25rem;
+  padding: 0.25rem;
+}
+
+.announcement-bar__close:hover {
+  opacity: 1;
+}
+
+/* ============================================================================
+   DROPDOWN NAVIGATION
+   ============================================================================ */
+.header__nav-dropdown {
+  position: relative;
+}
+
+.header__nav-link--dropdown {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  color: var(--charcoal);
+  cursor: pointer;
+  padding: 0.5rem 0;
+}
+
+.header__nav-link--dropdown svg {
+  transition: transform 0.2s ease;
+}
+
+.header__nav-dropdown:hover .header__nav-link--dropdown svg,
+.header__nav-link--dropdown[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+.header__dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 180px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 0.5rem 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  list-style: none;
+  z-index: 50;
+}
+
+.header__nav-dropdown:hover .header__dropdown-menu,
+.header__nav-dropdown:focus-within .header__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+.header__dropdown-menu a {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--charcoal);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.header__dropdown-menu a:hover {
+  background: var(--sage-light);
+  color: var(--teal);
+}
+
+/* ============================================================================
+   SOCIAL PROOF / HERO EXTRAS
+   ============================================================================ */
+.hero__social-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.hero__avatars {
+  display: flex;
+}
+
+.hero__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sage), var(--teal));
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--cream);
+  margin-left: -8px;
+}
+
+.hero__avatar:first-child {
+  margin-left: 0;
+}
+
+.hero__proof-text {
+  font-size: 0.875rem;
+  color: var(--charcoal);
+}
+
+/* ============================================================================
+   STATS SECTION
+   ============================================================================ */
+.stats-section {
+  background: var(--white);
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.stats-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem 3rem;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item__number {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--teal);
+  line-height: 1;
+}
+
+.stat-item__label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--charcoal);
+  opacity: 0.7;
+  margin-top: 0.25rem;
+}
+
+/* ============================================================================
+   SECTION EYEBROW
+   ============================================================================ */
+.section__eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+/* ============================================================================
+   HOW IT WORKS / STEPS
+   ============================================================================ */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.step {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.step__number {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.step__content {
+  flex: 1;
+  padding-top: 0.25rem;
+}
+
+.step__title {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.step__text {
+  color: var(--charcoal);
+  opacity: 0.8;
+}
+
+/* ============================================================================
+   CARD VARIANTS & ENHANCEMENTS
+   ============================================================================ */
+.card--hover:hover {
+  border-color: var(--sage);
+}
+
+.card__icon--sage {
+  background: var(--sage-light);
+}
+
+.card__icon--rose {
+  background: var(--rose-light);
+}
+
+.card__icon--teal {
+  background: rgba(47, 93, 93, 0.1);
+}
+
+.card__icon--gold {
+  background: rgba(234, 195, 59, 0.15);
+}
+
+.card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sage);
+  margin-top: 1rem;
+}
+
+.card__link:hover {
+  color: var(--teal);
+}
+
+/* ============================================================================
+   CTA SECTION
+   ============================================================================ */
+.section--cta {
+  background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+  padding: 5rem 0;
+}
+
+.section__title--white {
+  color: var(--white);
+}
+
+.section__subtitle--white {
+  color: var(--white);
+  opacity: 0.9;
+}
+
+.btn--gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--teal);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--gold:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cta-actions {
+  margin-top: 2rem;
+}
+
+.cta-note {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: var(--white);
+  opacity: 0.7;
+}
+
+/* ============================================================================
+   TESTIMONIAL STARS
+   ============================================================================ */
+.testimonial__stars {
+  color: var(--gold);
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: 2px;
+}
+
+/* ============================================================================
+   FOOTER SOCIAL
+   ============================================================================ */
+.footer__social {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.footer__social a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: var(--white);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer__social a:hover {
+  background: var(--gold);
+  color: var(--teal);
+  transform: translateY(-2px);
+}
+
+/* ============================================================================
+   MOBILE NAV ENHANCEMENTS
+   ============================================================================ */
+.mobile-nav__divider {
+  height: 1px;
+  background: var(--border);
+  margin: 1rem 0;
+}
+
+.btn--block {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* ============================================================================
+   SECTION QUOTE VARIANT
+   ============================================================================ */
+.section--quote {
+  background: var(--cream);
+}

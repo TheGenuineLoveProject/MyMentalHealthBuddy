@@ -25,6 +25,10 @@
     display: none;
   }
 
+  .header__logo-text {
+    display: block;
+  }
+
   .hero {
     padding: 6rem 0;
   }
@@ -74,6 +78,33 @@
   .card {
     padding: 2rem;
   }
+
+  /* Stats section - tablet */
+  .stats-grid {
+    gap: 3rem 4rem;
+  }
+
+  .stat-item__number {
+    font-size: 2.5rem;
+  }
+
+  /* Steps - tablet */
+  .steps {
+    gap: 2.5rem;
+  }
+
+  .step__number {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+
+  /* Social proof - tablet */
+  .hero__avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+  }
 }
 
 /* DESKTOP (992px+) */
@@ -120,6 +151,25 @@
   .footer__grid {
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 3rem;
+  }
+
+  /* Stats section - desktop */
+  .stats-grid {
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .stat-item {
+    flex: 1;
+  }
+
+  .stat-item__number {
+    font-size: 3rem;
+  }
+
+  /* CTA section - desktop */
+  .section--cta {
+    padding: 6rem 0;
   }
 }
 
