@@ -712,8 +712,12 @@ a, a:visited {
 .text-lead {
   font-size: 1.25rem;
   line-height: 1.65;
-  color: hsl(var(--foreground) / 0.75);
+  color: hsl(var(--foreground) / 0.85);
   max-width: 40ch;
+}
+
+.dark .text-lead {
+  color: hsl(var(--foreground) / 0.9);
 }
 
 .text-quote {

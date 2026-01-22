@@ -290,19 +290,19 @@ export default function CanvaLanding() {
           <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto mt-20">
             <div className="text-center reveal">
               <div className="stat-number">10K+</div>
-              <p className="text-sm uppercase tracking-wider mt-2" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>
+              <p className="text-sm uppercase tracking-wider mt-2 text-slate-600 dark:text-slate-400">
                 Active Members
               </p>
             </div>
             <div className="text-center reveal" style={{ animationDelay: '0.2s' }}>
               <div className="stat-number">500+</div>
-              <p className="text-sm uppercase tracking-wider mt-2" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>
+              <p className="text-sm uppercase tracking-wider mt-2 text-slate-600 dark:text-slate-400">
                 Resources
               </p>
             </div>
             <div className="text-center reveal" style={{ animationDelay: '0.4s' }}>
               <div className="stat-number">24/7</div>
-              <p className="text-sm uppercase tracking-wider mt-2" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>
+              <p className="text-sm uppercase tracking-wider mt-2 text-slate-600 dark:text-slate-400">
                 Support
               </p>
             </div>
@@ -517,7 +517,7 @@ export default function CanvaLanding() {
                   </div>
                   <div>
                     <p className="font-semibold" style={{ color: 'var(--deep-teal)' }}>{testimonial.name}</p>
-                    <p className="text-sm" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>{testimonial.role}</p>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">{testimonial.role}</p>
                   </div>
                 </div>
               </div>
@@ -627,7 +627,7 @@ export default function CanvaLanding() {
               <Link href="/terms"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-terms">Terms</span></Link>
             </div>
           </div>
-          <div className="text-center mt-8 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.5 }}>
+          <div className="text-center mt-8 text-sm text-slate-500 dark:text-slate-400">
             © {new Date().getFullYear()} The Genuine Love Project. All rights reserved.
           </div>
         </div>

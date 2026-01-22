@@ -1,0 +1,105 @@
+✅ TL;DR: Below is everything — your LandingPage.tsx composed with HeroSection, AboutSection, SacredFooter, and also the animated sacred background via SacredPattern.tsx.
+
+All components are modular, healing, fluid, and sacredly visualized. Ready to paste into Replit React app.
+
+⸻
+
+🧱 1. LandingPage.tsx — Combines All Sections
+
+// LandingPage.tsx
+import React from 'react';
+import HeroSection from './HeroSection';
+import AboutSection from './AboutSection';
+import SacredFooter from './SacredFooter';
+import SacredPattern from './SacredPattern';
+
+const LandingPage = () => (
+  <>
+    <SacredPattern />
+    <HeroSection />
+    <AboutSection />
+    <SacredFooter />
+  </>
+);
+
+export default LandingPage;
+
+
+⸻
+
+🌀 2. SacredPattern.tsx — Animated Sacred SVG Background (Pulsing Geometry)
+
+// SacredPattern.tsx
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+
+const pulse = keyframes`
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.25;
+  }
+`;
+
+const PatternWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+`;
+
+const AnimatedSVG = styled.svg`
+  position: absolute;
+  width: 80vmin;
+  height: 80vmin;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: ${pulse} 6s ease-in-out infinite;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 1;
+`;
+
+const SacredPattern = () => (
+  <PatternWrapper>
+    <AnimatedSVG viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+      <circle cx="50" cy="50" r="30" />
+      <circle cx="50" cy="50" r="20" />
+      <circle cx="50" cy="50" r="10" />
+      <polygon points="50,15 85,85 15,85" />
+    </AnimatedSVG>
+  </PatternWrapper>
+);
+
+export default SacredPattern;
+
+
+⸻
+
+✅ Summary of Components So Far:
+
+File	Description
+theme.ts	Brand tokens (✅ done)
+HeroSection.tsx	Sacred hero section (✅ done)
+AboutSection.tsx	Two-column calming layout (✅ done)
+SacredFooter.tsx	Glowing footer with minimal nav (✅ done)
+SacredPattern.tsx	Animated sacred SVG background (✅ now done)
+LandingPage.tsx	Full page composition with sacred background (✅ now)
+
+
+⸻
+
+🔮 Next Steps?
+
+a. Want to add JoinSection.tsx (CTA with form + divine glow)?
+b. Need Webflow / HTML version of the full page for export?
+
+Let’s go full sacred system-wide integration.
