@@ -613,8 +613,15 @@ export default function CanvaLanding() {
             <span className="text-sm text-white/80 font-medium">Start your transformation today</span>
           </div>
           
-          {/* Subtle Divider */}
-          <div className="w-8 mx-auto mb-3 h-px rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, transparent, var(--glp-white), transparent)' }}>
+          {/* Lotus Accent */}
+          <div className="w-6 mx-auto mb-3 h-1 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)' }}>
+            <div className="w-1 h-1 rounded-full overflow-hidden" style={{ background: 'var(--glp-white)' }}>
+              <img 
+                src="/brand/footer-wellness-graphic.png" 
+                alt="" 
+                className="w-1 h-1 object-cover opacity-80"
+              />
+            </div>
           </div>
           
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white leading-tight">
