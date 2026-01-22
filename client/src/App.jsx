@@ -8,6 +8,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
 
 import Home from "./pages/Home.jsx";
+import CanvaLanding from "./pages/CanvaLanding.jsx";
 import Login from "./pages/Login.jsx";
 import LoginCallback from "./pages/LoginCallback.jsx";
 import Register from "./pages/Register.jsx";
@@ -126,6 +127,7 @@ export default function App() {
               {/* Public routes */}
               <Route path="/" component={Home} />
               <Route path="/home" component={Home} />
+              <Route path="/welcome" component={CanvaLanding} />
               <Route path="/login" component={Login} />
               <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />

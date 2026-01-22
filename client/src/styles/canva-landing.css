@@ -1,0 +1,317 @@
+/* Canva Landing Page Styles - The Genuine Love Project */
+
+:root {
+  --sage-green: #8fbf9f;
+  --blush-pink: #f4c7c3;
+  --deep-teal: #2f5d5d;
+  --soft-ivory: #faf9f7;
+  --charcoal: #3a3a3a;
+  --warm-gold: #eac33b;
+}
+
+.canva-landing {
+  font-family: 'Lato', system-ui, sans-serif;
+  background-color: var(--soft-ivory);
+  color: var(--charcoal);
+}
+
+.canva-landing .font-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Navigation styles */
+.canva-landing .nav-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.canva-landing .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--warm-gold);
+  transition: width 0.3s ease;
+}
+
+.canva-landing .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Gradient backgrounds */
+.canva-landing .gradient-sage-ivory {
+  background: linear-gradient(135deg, var(--sage-green) 0%, var(--soft-ivory) 100%);
+}
+
+.canva-landing .gradient-teal-sage {
+  background: linear-gradient(135deg, var(--deep-teal) 0%, var(--sage-green) 100%);
+}
+
+.canva-landing .gradient-blush-ivory {
+  background: linear-gradient(135deg, var(--blush-pink) 0%, var(--soft-ivory) 100%);
+}
+
+/* Glass morphism effects */
+.canva-landing .glass-card {
+  background: rgba(250, 249, 247, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(143, 191, 159, 0.2);
+  box-shadow: 
+    0 8px 32px rgba(47, 93, 93, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.canva-landing .glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 16px 48px rgba(47, 93, 93, 0.18),
+    0 0 0 2px var(--warm-gold),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Floating animation */
+@keyframes canva-float-gentle {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+    opacity: 0.25;
+  }
+}
+
+.canva-landing .float-element {
+  animation: canva-float-gentle 6s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes canva-pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(234, 195, 59, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(234, 195, 59, 0.6);
+  }
+}
+
+.canva-landing .pulse-glow {
+  animation: canva-pulse-glow 3s ease-in-out infinite;
+}
+
+/* Button styles */
+.canva-landing .btn-primary {
+  background: linear-gradient(135deg, var(--deep-teal), var(--sage-green));
+  color: white;
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 24px rgba(47, 93, 93, 0.3);
+  border: none;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+}
+
+.canva-landing .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(47, 93, 93, 0.4);
+}
+
+.canva-landing .btn-secondary {
+  background: transparent;
+  color: var(--deep-teal);
+  padding: 16px 40px;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.4s ease;
+  border: 2px solid var(--deep-teal);
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+}
+
+.canva-landing .btn-secondary:hover {
+  background: var(--deep-teal);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* Section reveal animation */
+@keyframes canva-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.canva-landing .reveal {
+  animation: canva-fade-in-up 0.8s ease-out forwards;
+}
+
+/* Icon containers */
+.canva-landing .icon-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--sage-green), var(--blush-pink));
+  box-shadow: 0 8px 24px rgba(143, 191, 159, 0.3);
+  transition: all 0.4s ease;
+}
+
+.canva-landing .icon-circle:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 32px rgba(143, 191, 159, 0.5);
+}
+
+/* Testimonial card */
+.canva-landing .testimonial-card {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  position: relative;
+  box-shadow: 0 12px 40px rgba(47, 93, 93, 0.12);
+  border: 1px solid rgba(143, 191, 159, 0.2);
+}
+
+.canva-landing .testimonial-card::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: 30px;
+  font-size: 120px;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--blush-pink);
+  opacity: 0.3;
+  line-height: 1;
+}
+
+/* Decorative elements */
+.canva-landing .decorative-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(60px);
+}
+
+/* Section divider */
+.canva-landing .section-divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--warm-gold), transparent);
+  margin: 80px auto;
+  max-width: 400px;
+  opacity: 0.4;
+}
+
+/* Stats counter */
+.canva-landing .stat-number {
+  font-size: 48px;
+  font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--deep-teal);
+  line-height: 1;
+}
+
+/* Feature icon SVG styling */
+.canva-landing .feature-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--deep-teal);
+}
+
+/* Header styles */
+.canva-landing .canva-header {
+  background: rgba(250, 249, 247, 0.98);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(143, 191, 159, 0.2);
+  box-shadow: 0 4px 20px rgba(47, 93, 93, 0.08);
+}
+
+/* Mobile menu */
+.canva-landing .mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 400px;
+  height: 100%;
+  background: white;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  transition: right 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1000;
+  padding: 80px 40px 40px;
+  overflow-y: auto;
+}
+
+.canva-landing .mobile-menu.active {
+  right: 0;
+}
+
+.canva-landing .mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 999;
+}
+
+.canva-landing .mobile-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* FAQ accordion */
+.canva-landing .faq-item {
+  border-bottom: 1px solid rgba(143, 191, 159, 0.2);
+  padding: 24px 0;
+  transition: all 0.3s ease;
+}
+
+.canva-landing .faq-question {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  color: var(--deep-teal);
+  font-size: 18px;
+}
+
+.canva-landing .faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, margin-top 0.4s ease;
+  color: var(--charcoal);
+  opacity: 0.8;
+  line-height: 1.7;
+}
+
+.canva-landing .faq-item.active .faq-answer {
+  max-height: 300px;
+  margin-top: 16px;
+}
+
+.canva-landing .faq-icon {
+  transition: transform 0.3s ease;
+}
+
+.canva-landing .faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
