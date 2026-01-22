@@ -152,24 +152,15 @@ export default function CanvaLanding() {
           <div className="flex items-center justify-between h-[80px] sm:h-[92px] lg:h-[108px]">
             {/* Logo - Compact on mobile, expanded on desktop */}
             <Link href="/">
-              <div className="flex items-center gap-5 sm:gap-6 lg:gap-7 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-[60px] h-[60px] sm:w-[66px] sm:h-[66px] lg:w-[76px] lg:h-[76px] rounded-xl lg:rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
-                  <img 
-                    src="/brand/logo-mark.png" 
-                    alt="" 
-                    className="w-10 h-10 sm:w-11 sm:h-11 lg:w-[52px] lg:h-[52px] object-contain"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.nextElementSibling.style.display = 'flex';
-                    }}
-                  />
-                  <Heart className="w-5 h-5 text-white hidden" fill="currentColor" style={{ display: 'none' }} />
+              <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
+                <div className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[64px] lg:h-[64px] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+                  <Heart className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="currentColor" />
                 </div>
-                <div className="hidden sm:flex flex-col leading-snug">
-                  <span className="text-xl lg:text-[22px] xl:text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
+                <div className="flex flex-col leading-snug">
+                  <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
                     The Genuine Love Project
                   </span>
-                  <span className="text-xs lg:text-[13px] font-semibold tracking-[0.18em] uppercase mt-1" style={{ color: 'var(--glp-sage)' }}>
+                  <span className="text-[10px] sm:text-xs lg:text-[13px] font-semibold tracking-[0.12em] sm:tracking-[0.18em] uppercase mt-0.5" style={{ color: 'var(--glp-sage)' }}>
                     Live in Genuine Love
                   </span>
                 </div>
