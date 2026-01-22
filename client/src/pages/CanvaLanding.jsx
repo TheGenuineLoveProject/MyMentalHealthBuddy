@@ -626,47 +626,49 @@ export default function CanvaLanding() {
             </div>
           </div>
           
-          {/* Begin Your Healing Journey Today */}
-          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold my-12 text-white leading-tight text-center">
+          {/* Begin Your Healing Journey Today - moved closer to paragraph */}
+          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mt-16 mb-4 text-white leading-tight text-center">
             Begin Your Healing
             <br />
             <span className="text-[var(--glp-gold)]">Journey Today</span>
           </h2>
           
-          {/* Paragraph */}
-          <p className="text-5xl md:text-6xl lg:text-7xl my-12 text-white/90 max-w-6xl mx-auto font-medium text-center">
+          {/* Paragraph - close to heading */}
+          <p className="text-5xl md:text-6xl lg:text-7xl mt-4 mb-12 text-white/90 max-w-6xl mx-auto font-medium text-center">
             Join thousands who have found peace, growth, and genuine love within themselves.
           </p>
           
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-12 mt-12">
+          {/* Buttons - refined shape with gold text */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12">
             <Link href="/register">
               <button 
-                className="group px-24 py-10 rounded-full font-bold text-5xl md:text-6xl transition-all duration-300 hover:scale-105 min-h-[100px]"
+                className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105"
                 style={{
                   background: 'var(--glp-white)',
-                  color: 'var(--glp-sage-deep)',
-                  boxShadow: '0 0 30px rgba(143, 191, 159, 0.4), 0 16px 56px var(--glp-overlay-50)'
+                  color: 'var(--glp-gold)',
+                  boxShadow: '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 50px rgba(143, 191, 159, 0.6), 0 20px 64px var(--glp-overlay-50)'}
-                onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 30px rgba(143, 191, 159, 0.4), 0 16px 56px var(--glp-overlay-50)'}
+                onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 40px rgba(234, 195, 59, 0.5), 0 16px 48px var(--glp-overlay-50)'}
+                onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'}
                 data-testid="button-final-cta"
               >
-                <span className="flex items-center gap-6">
+                <span className="flex items-center gap-4">
                   Start Free Today
-                  <ArrowRight className="w-14 h-14 transition-transform group-hover:translate-x-2" />
+                  <ArrowRight className="w-10 h-10 transition-transform group-hover:translate-x-2" />
                 </span>
               </button>
             </Link>
             <Link href="/pricing">
               <button 
-                className="px-24 py-10 rounded-full font-bold text-5xl md:text-6xl text-white border-4 transition-all duration-300 hover:scale-105 min-h-[100px]"
+                className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105"
                 style={{
-                  borderColor: 'rgba(255,255,255,0.5)',
-                  boxShadow: '0 0 25px rgba(234, 195, 59, 0.3), 0 12px 48px rgba(0,0,0,0.2)'
+                  background: 'transparent',
+                  color: 'var(--glp-gold)',
+                  border: '3px solid var(--glp-gold)',
+                  boxShadow: '0 0 20px rgba(234, 195, 59, 0.3), 0 10px 36px rgba(0,0,0,0.15)'
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.8)'; e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.boxShadow = '0 0 45px rgba(234, 195, 59, 0.5), 0 16px 56px rgba(0,0,0,0.25)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.5)'; e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.boxShadow = '0 0 25px rgba(234, 195, 59, 0.3), 0 12px 48px rgba(0,0,0,0.2)'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--glp-gold)'; e.currentTarget.style.color = 'var(--glp-charcoal)'; e.currentTarget.style.boxShadow = '0 0 35px rgba(234, 195, 59, 0.5), 0 14px 44px rgba(0,0,0,0.2)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--glp-gold)'; e.currentTarget.style.boxShadow = '0 0 20px rgba(234, 195, 59, 0.3), 0 10px 36px rgba(0,0,0,0.15)'; }}
                 data-testid="button-view-pricing"
               >
                 View Pricing
