@@ -454,10 +454,19 @@ export default function MeditationGuidePage() {
           title="Continue Your Mindfulness Journey"
         />
 
-        <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
+        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
+          <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2 text-center">How to Practice Safely</h4>
+          <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-2 max-w-2xl mx-auto">
+            <li>• Meditation is a practice, not a perfection. Be patient and compassionate with yourself.</li>
+            <li>• If you experience significant distress, <strong>pause immediately</strong> and ground yourself (feet on floor, slow breaths).</li>
+            <li>• For trauma survivors: parts work and body scans can sometimes bring up difficult material. Go slowly and stay within your window of tolerance.</li>
+            <li>• If meditation consistently increases anxiety or distress, this is important information—consider working with a therapist who specializes in trauma.</li>
+            <li>• These guided practices are educational tools, not therapy or medical treatment.</li>
+          </ul>
+        </div>
+        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
           <p className="text-sm text-slate-500 dark:text-slate-500">
-            Meditation is a practice, not a perfection. Be patient and compassionate with yourself. 
-            If you experience significant distress during meditation, pause and ground yourself, or consult a mental health professional.
+            This content is for educational and wellness purposes and is not a substitute for professional mental health care.
           </p>
         </div>
       </div>

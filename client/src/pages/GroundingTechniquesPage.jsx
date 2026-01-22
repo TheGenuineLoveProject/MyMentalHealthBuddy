@@ -343,10 +343,18 @@ export default function GroundingTechniquesPage() {
           title="Continue Your Healing Journey"
         />
 
-        <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
+        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
+          <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2 text-center">How to Use These Tools Safely</h4>
+          <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-2 max-w-2xl mx-auto">
+            <li>• Grounding techniques are <strong>coping tools</strong>, not treatments. They help in the moment but don't address root causes.</li>
+            <li>• If a technique causes increased distress, <strong>stop and try a different approach</strong>. Not every tool works for every person.</li>
+            <li>• For persistent distress, dissociation, or trauma symptoms, please reach out to a trauma-informed mental health professional.</li>
+            <li>• These tools are not a substitute for professional care if you're experiencing a mental health crisis.</li>
+          </ul>
+        </div>
+        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
           <p className="text-sm text-slate-500 dark:text-slate-500">
-            Grounding techniques are coping tools for moment-to-moment regulation. If you're experiencing persistent distress, 
-            dissociation, or trauma symptoms, please reach out to a trauma-informed mental health professional for personalized support.
+            This content is for educational purposes and is not medical or mental health advice.
           </p>
         </div>
       </div>

@@ -12,7 +12,7 @@ const exercises = [
     pattern: { inhale: 4, hold1: 4, exhale: 4, hold2: 4 },
     benefits: ["Activates parasympathetic response", "Improves focus and clarity", "Balances autonomic nervous system", "Creates predictable rhythm for safety"],
     bestFor: "Acute stress, before important events, centering yourself, anxiety management",
-    polyvagalNote: "The equal rhythm creates predictability, which signals safety to your nervous system. The holds give your vagus nerve time to activate."
+    polyvagalNote: "The equal rhythm creates predictability, which may help signal safety to your nervous system. The holds provide pauses that support regulation."
   },
   {
     id: "478",
@@ -21,7 +21,7 @@ const exercises = [
     pattern: { inhale: 4, hold1: 7, exhale: 8, hold2: 0 },
     benefits: ["Promotes deep sleep", "Reduces anxiety rapidly", "Calms racing thoughts", "Lowers cortisol levels"],
     bestFor: "Before sleep, acute anxiety, calming panic, breaking worry cycles",
-    polyvagalNote: "The 8-count exhale is key—exhalation activates the ventral vagal complex, signaling to your body that you are safe and can rest."
+    polyvagalNote: "The extended exhale is thought to stimulate the parasympathetic nervous system, which may help signal safety and promote rest."
   },
   {
     id: "coherent",
@@ -53,11 +53,11 @@ const exercises = [
   {
     id: "physiological",
     name: "Physiological Sigh",
-    description: "A double-inhale followed by a long exhale—the fastest way to calm down, discovered by Stanford neuroscientist Dr. Andrew Huberman.",
+    description: "A double-inhale followed by a long exhale—research from Stanford suggests this may be one of the quickest ways to reduce stress in real-time.",
     pattern: { inhale: 2, hold1: 1, exhale: 6, hold2: 0 },
-    benefits: ["Fastest calming technique known", "Reinflates collapsed lung sacs", "Rapid CO2 offload", "Immediate nervous system reset"],
-    bestFor: "Immediate stress relief, panic moments, before difficult conversations, real-time regulation",
-    polyvagalNote: "The double inhale opens collapsed alveoli in the lungs, allowing more efficient CO2 release, which immediately calms the nervous system."
+    benefits: ["May quickly reduce stress", "Helps reinflate lung sacs", "Supports CO2 release", "Can help reset nervous system state"],
+    bestFor: "Immediate stress relief, anxious moments, before difficult conversations, real-time regulation",
+    polyvagalNote: "Research suggests the double inhale helps open alveoli in the lungs, supporting more efficient CO2 release, which may contribute to calming effects."
   }
 ];
 
@@ -72,7 +72,7 @@ const scienceOfBreathing = {
   },
   hrv: {
     title: "Heart Rate Variability",
-    content: "HRV—the variation in time between heartbeats—is the gold standard measure of nervous system flexibility. Higher HRV = better stress resilience. Coherent breathing at 5-7 breaths per minute has been shown to optimize HRV in as little as 5 minutes."
+    content: "HRV—the variation in time between heartbeats—is considered an important indicator of nervous system flexibility. Research suggests higher HRV may be associated with better stress resilience. Studies indicate coherent breathing at 5-7 breaths per minute may support improved HRV."
   },
   research: {
     title: "What Research Shows",

@@ -1,0 +1,127 @@
+✅ TL;DR: Here’s the full theme.ts + HeroSection.tsx — regenerated clean and exact — ready for copy-paste into Replit or any modern React project.
+
+⸻
+
+theme.ts — Brand Tokens for The Genuine Love Project
+
+// theme.ts
+export const brandColors = {
+  sageGreen: '#8fbf9f',
+  dustyRose: '#f4c7c3',
+  deepTeal: '#2f5d5d',
+  softWhite: '#faf9f7',
+  charcoal: '#3a3a3a',
+  goldenYellow: '#eac33b',
+};
+
+export const brandFonts = {
+  primary: `'Poppins', sans-serif`,
+  display: `'Cormorant Garamond', serif`,
+};
+
+export const shadows = {
+  softGlow: '0 0 20px rgba(143, 191, 159, 0.3)',
+};
+
+export const radii = {
+  soft: '12px',
+};
+
+export const gradients = {
+  radiantHealing: `linear-gradient(135deg, #8fbf9f, #f4c7c3, #eac33b)`,
+};
+
+
+⸻
+
+HeroSection.tsx — Healing Hero Component with Glow + Gradient
+
+// HeroSection.tsx
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import { brandColors, brandFonts, gradients, shadows } from './theme';
+
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+`;
+
+const glowPulse = keyframes`
+  0%, 100% { box-shadow: 0 0 20px rgba(143, 191, 159, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(143, 191, 159, 0.5); }
+`;
+
+const HeroContainer = styled.section`
+  background: ${gradients.radiantHealing};
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  animation: ${fadeIn} 2s ease;
+  font-family: ${brandFonts.primary};
+`;
+
+const Logo = styled.div`
+  width: 120px;
+  height: 120px;
+  background: url('/logo.svg') no-repeat center;
+  background-size: contain;
+  margin-bottom: 2rem;
+`;
+
+const Title = styled.h1`
+  font-size: 3rem;
+  color: ${brandColors.charcoal};
+  font-family: ${brandFonts.display};
+  margin-bottom: 1rem;
+`;
+
+const Subtitle = styled.p`
+  max-width: 600px;
+  font-size: 1.25rem;
+  color: ${brandColors.deepTeal};
+`;
+
+const CallToAction = styled.a`
+  margin-top: 2rem;
+  padding: 0.75rem 2rem;
+  background: ${brandColors.deepTeal};
+  color: ${brandColors.softWhite};
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: ${shadows.softGlow};
+  text-decoration: none;
+  transition: all 0.3s ease;
+  animation: ${glowPulse} 4s ease-in-out infinite;
+
+  &:hover {
+    background: ${brandColors.sageGreen};
+    transform: scale(1.05);
+  }
+`;
+
+const HeroSection = () => (
+  <HeroContainer>
+    <Logo />
+    <Title>The Genuine Love Project</Title>
+    <Subtitle>
+      Healing hearts. Inspiring minds. Awakening love—through sacred design and conscious visuals.
+    </Subtitle>
+    <CallToAction href="#explore">Begin Your Journey</CallToAction>
+  </HeroContainer>
+);
+
+export default HeroSection;
+
+
+⸻
+
+✅ Next Task Suggestions
+
+a. Build AboutSection.tsx — calming 2-column layout with sacred pattern
+b. Generate SacredFooter.tsx — deep, golden-yellow glow + minimal links
+
+Let me know which one to build next.

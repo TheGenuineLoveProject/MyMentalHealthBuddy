@@ -467,11 +467,14 @@ export default function InnerChildPage() {
         </div>
 
         <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6 mb-8">
-          <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
-            <strong>Important:</strong> Inner child work can bring up intense emotions and memories. 
-            Move gently, stay within your window of tolerance, and consider working with a trauma-informed therapist 
-            for deeper processing. Your safety comes first—always. You can pause and return when you're ready.
-          </p>
+          <h4 className="font-semibold text-amber-900 dark:text-amber-100 mb-2">Important Safety Guidance</h4>
+          <ul className="text-sm text-amber-800 dark:text-amber-200 space-y-2">
+            <li>• Inner child work can bring up intense emotions and memories. <strong>Move gently</strong> and stay within your window of tolerance.</li>
+            <li>• If you feel overwhelmed, <strong>pause and ground yourself</strong>—try the 5-4-3-2-1 senses technique or step away.</li>
+            <li>• This content is <strong>not therapy</strong> and is not a substitute for professional mental health care.</li>
+            <li>• For deeper trauma processing, we strongly recommend working with a trauma-informed therapist.</li>
+            <li>• If you're in crisis, please contact a crisis line or mental health professional immediately.</li>
+          </ul>
         </div>
 
         <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
