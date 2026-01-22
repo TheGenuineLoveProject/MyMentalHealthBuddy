@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | The Genuine Love Project</title>
+  <meta name="description" content="Get in touch with The Genuine Love Project. We're here to support your healing journey." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#2f5d5d" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- COMPONENT: Header NavBar -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <a href="/" class="header__logo" aria-label="Home">
+        <img src="images/logo.svg" alt="" width="40" height="40" />
+        <span class="header__logo-text">The Genuine Love Project</span>
+      </a>
+      <nav class="header__nav" aria-label="Main navigation">
+        <ul class="header__nav-list" role="menubar">
+          <li role="none"><a href="/" class="header__nav-link" role="menuitem">Home</a></li>
+          <li role="none"><a href="crm.html" class="header__nav-link" role="menuitem">Dashboard</a></li>
+          <li role="none"><a href="content.html" class="header__nav-link" role="menuitem">Content</a></li>
+        </ul>
+      </nav>
+      <div class="header__actions">
+        <a href="login.html" class="btn btn--outline btn--small">Sign In</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- COMPONENT: Contact Hero -->
+    <section class="hero hero--compact" aria-labelledby="contact-title">
+      <div class="container">
+        <span class="hero__badge">
+          <img src="assets/icons/heart.svg" alt="" width="16" height="16" aria-hidden="true" />
+          We're Here For You
+        </span>
+        <h1 id="contact-title" class="hero__title">Get in Touch</h1>
+        <p class="hero__subtitle">Questions, feedback, or just want to connect? We'd love to hear from you.</p>
+      </div>
+    </section>
+
+    <!-- COMPONENT: Contact Form -->
+    <section class="section section--contact" aria-labelledby="form-title">
+      <div class="container container--narrow">
+        <div class="contact-card">
+          <h2 id="form-title" class="contact-card__title">Send Us a Message</h2>
+          <form class="form" id="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name" class="form-label">Your Name</label>
+                <input type="text" id="contact-name" class="form-input" placeholder="Jane Doe" required data-testid="input-name" />
+              </div>
+              <div class="form-group">
+                <label for="contact-email" class="form-label">Email Address</label>
+                <input type="email" id="contact-email" class="form-input" placeholder="you@example.com" required data-testid="input-email" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="contact-subject" class="form-label">Subject</label>
+              <select id="contact-subject" class="form-select" required data-testid="select-subject">
+                <option value="" disabled selected>Select a topic</option>
+                <option value="general">General Inquiry</option>
+                <option value="support">Technical Support</option>
+                <option value="billing">Billing Question</option>
+                <option value="feedback">Feedback</option>
+                <option value="partnership">Partnership</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="contact-message" class="form-label">Your Message</label>
+              <textarea id="contact-message" class="form-textarea" rows="5" placeholder="Tell us how we can help..." required data-testid="input-message"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--large" data-testid="button-submit">Send Message</button>
+          </form>
+        </div>
+
+        <!-- COMPONENT: Contact Info -->
+        <div class="contact-info">
+          <div class="contact-info__item">
+            <img src="assets/icons/shield.svg" alt="" width="24" height="24" aria-hidden="true" />
+            <div>
+              <h3>Privacy First</h3>
+              <p>Your information is always kept confidential and secure.</p>
+            </div>
+          </div>
+          <div class="contact-info__item">
+            <img src="assets/icons/sun.svg" alt="" width="24" height="24" aria-hidden="true" />
+            <div>
+              <h3>Response Time</h3>
+              <p>We typically respond within 24-48 hours.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- COMPONENT: Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo"><span>The Genuine Love Project</span></a>
+        <p class="footer__tagline">Live in Genuine Love</p>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2026 The Genuine Love Project. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/main.js"></script>
+</body>
+</html>
