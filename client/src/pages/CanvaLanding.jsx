@@ -147,140 +147,154 @@ export default function CanvaLanding() {
       </nav>
 
       {/* Header / Navigation */}
-      <header className="canva-header sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/">
-            <div className="flex items-center gap-3 cursor-pointer" data-testid="link-logo">
-              <img 
-                src="/brand/logo-mark.png" 
-                alt="The Genuine Love Project" 
-                className="h-12 w-auto"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
-              <span className="font-serif text-xl font-bold hidden sm:block" style={{ color: 'var(--deep-teal)' }}>
-                The Genuine Love Project
-              </span>
-            </div>
-          </Link>
+      <header className="sticky top-0 z-50 bg-[var(--soft-white)]/95 backdrop-blur-md border-b border-[var(--sage-green)]/10 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 md:h-18">
+            {/* Logo */}
+            <Link href="/">
+              <div className="flex items-center gap-2.5 cursor-pointer group" data-testid="link-logo">
+                <div className="relative w-9 h-9 md:w-10 md:h-10 rounded-xl overflow-hidden flex items-center justify-center transition-transform group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--sage-green), var(--deep-teal))' }}>
+                  <img 
+                    src="/brand/logo-mark.png" 
+                    alt="" 
+                    className="w-6 h-6 md:w-7 md:h-7 object-contain"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                      e.target.nextElementSibling.style.display = 'flex';
+                    }}
+                  />
+                  <Heart className="w-5 h-5 text-white hidden" fill="currentColor" style={{ display: 'none' }} />
+                </div>
+                <div className="hidden sm:flex flex-col leading-tight">
+                  <span className="text-base md:text-lg font-bold tracking-tight" style={{ color: 'var(--deep-teal)' }}>
+                    The Genuine Love Project
+                  </span>
+                  <span className="text-[10px] md:text-xs font-medium tracking-wide" style={{ color: 'var(--sage-green)' }}>
+                    Live in Genuine Love
+                  </span>
+                </div>
+              </div>
+            </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            <a href="#home" className="nav-link font-medium" style={{ color: 'var(--deep-teal)' }}>Home</a>
-            <a href="#about" className="nav-link font-medium" style={{ color: 'var(--deep-teal)' }}>About</a>
-            <a href="#features" className="nav-link font-medium" style={{ color: 'var(--deep-teal)' }}>Features</a>
-            <a href="#faq" className="nav-link font-medium" style={{ color: 'var(--deep-teal)' }}>FAQ</a>
-          </nav>
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
+              <a href="#home" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--sage-green)]/10" style={{ color: 'var(--deep-teal)' }}>Home</a>
+              <a href="#about" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--sage-green)]/10" style={{ color: 'var(--deep-teal)' }}>About</a>
+              <a href="#features" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--sage-green)]/10" style={{ color: 'var(--deep-teal)' }}>Features</a>
+              <a href="#faq" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--sage-green)]/10" style={{ color: 'var(--deep-teal)' }}>FAQ</a>
+              <a href="/pricing" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--sage-green)]/10" style={{ color: 'var(--deep-teal)' }}>Pricing</a>
+            </nav>
 
-          {/* CTA Buttons */}
-          <div className="hidden md:flex items-center gap-4">
-            <Link href="/login">
+            {/* CTA Buttons */}
+            <div className="flex items-center gap-3">
+              <Link href="/login">
+                <button 
+                  className="hidden md:inline-flex font-semibold text-sm px-5 py-2.5 rounded-full transition-all hover:bg-[var(--deep-teal)]/5"
+                  style={{ color: 'var(--deep-teal)' }}
+                  data-testid="button-signin"
+                >
+                  Sign In
+                </button>
+              </Link>
+              <Link href="/register">
+                <button 
+                  className="inline-flex items-center gap-2 font-semibold text-sm px-5 py-2.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
+                  style={{ background: 'linear-gradient(135deg, var(--sage-green), var(--deep-teal))' }}
+                  data-testid="button-getstarted"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span className="hidden sm:inline">Get Started</span>
+                  <span className="sm:hidden">Start</span>
+                </button>
+              </Link>
+
+              {/* Mobile Menu Button */}
               <button 
-                className="font-semibold px-6 py-2 rounded-full transition-all"
-                style={{ color: 'var(--deep-teal)', border: '2px solid var(--deep-teal)' }}
-                data-testid="button-signin"
+                onClick={() => setMobileMenuOpen(true)}
+                className="lg:hidden p-2 rounded-lg transition-colors hover:bg-[var(--sage-green)]/10"
+                style={{ color: 'var(--deep-teal)' }}
+                data-testid="button-open-mobile-menu"
               >
-                Sign In
+                <Menu className="w-6 h-6" />
               </button>
-            </Link>
-            <Link href="/register">
-              <button className="btn-primary" style={{ padding: '12px 28px' }} data-testid="button-getstarted">
-                Get Started
-              </button>
-            </Link>
+            </div>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            onClick={() => setMobileMenuOpen(true)}
-            className="md:hidden w-10 h-10 flex items-center justify-center"
-            style={{ color: 'var(--deep-teal)' }}
-            data-testid="button-open-mobile-menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative py-20 md:py-32 px-6 overflow-hidden">
+      <section id="home" className="relative py-16 md:py-24 lg:py-32 px-4 sm:px-6 overflow-hidden">
         {/* Decorative Background Elements */}
-        <div 
-          className="decorative-circle float-element"
-          style={{
-            width: '400px',
-            height: '400px',
-            background: 'radial-gradient(circle, rgba(143, 191, 159, 0.2), transparent)',
-            position: 'absolute',
-            top: '-100px',
-            right: '-100px'
-          }}
-        />
-        <div 
-          className="decorative-circle float-element"
-          style={{
-            width: '500px',
-            height: '500px',
-            background: 'radial-gradient(circle, rgba(244, 199, 195, 0.15), transparent)',
-            position: 'absolute',
-            bottom: '-150px',
-            left: '-150px',
-            animationDelay: '2s'
-          }}
-        />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div 
+            className="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-40"
+            style={{ background: 'radial-gradient(circle, rgba(143, 191, 159, 0.3), transparent 70%)' }}
+          />
+          <div 
+            className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full opacity-30"
+            style={{ background: 'radial-gradient(circle, rgba(244, 199, 195, 0.3), transparent 70%)' }}
+          />
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10"
+            style={{ background: 'radial-gradient(circle, rgba(234, 195, 59, 0.2), transparent 70%)' }}
+          />
+        </div>
 
-        <div className="max-w-6xl mx-auto relative z-10">
-          <div className="text-center mb-12">
+        <div className="max-w-5xl mx-auto relative z-10">
+          <div className="text-center">
             {/* Badge */}
             <div 
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-8"
+              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full mb-8 shadow-sm"
               style={{
-                background: 'linear-gradient(135deg, rgba(143, 191, 159, 0.15), rgba(244, 199, 195, 0.15))',
-                border: '1px solid rgba(143, 191, 159, 0.3)'
+                background: 'linear-gradient(135deg, rgba(143, 191, 159, 0.12), rgba(244, 199, 195, 0.12))',
+                border: '1px solid rgba(143, 191, 159, 0.25)'
               }}
             >
-              <Star className="w-5 h-5" style={{ color: 'var(--sage-green)' }} />
-              <span className="font-semibold uppercase tracking-wider text-sm" style={{ color: 'var(--deep-teal)' }}>
+              <Star className="w-4 h-4" style={{ color: 'var(--sage-green)' }} />
+              <span className="font-semibold uppercase tracking-widest text-xs" style={{ color: 'var(--deep-teal)' }}>
                 Transformative Healing Platform
               </span>
             </div>
 
             {/* Main Headline */}
-            <h1 
-              className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight"
-              style={{ color: 'var(--deep-teal)' }}
-            >
-              Heal Your Mind,<br />Body & Soul
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-6 leading-[1.1] tracking-tight" style={{ color: 'var(--deep-teal)' }}>
+              Heal Your Mind,
+              <br />
+              <span className="bg-gradient-to-r from-[var(--sage-green)] to-[var(--deep-teal)] bg-clip-text text-transparent">
+                Body & Soul
+              </span>
             </h1>
 
             {/* Subheadline */}
-            <p 
-              className="text-xl md:text-3xl font-serif mb-8"
-              style={{ color: 'var(--sage-green)', fontWeight: 500 }}
-            >
+            <p className="text-lg sm:text-xl md:text-2xl font-serif mb-6" style={{ color: 'var(--sage-green)', fontWeight: 500 }}>
               360° Transformation from A to Z
             </p>
 
             {/* Description */}
-            <p 
-              className="text-lg md:text-xl max-w-3xl mx-auto mb-12 leading-relaxed"
-              style={{ color: 'var(--charcoal)', opacity: 0.8 }}
-            >
-              Discover a comprehensive platform designed to guide you through every step of your healing journey—from mindfulness practices to personal growth tools.
+            <p className="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed" style={{ color: 'var(--charcoal)', opacity: 0.85 }}>
+              A comprehensive platform designed to guide you through every step of your healing journey—from mindfulness to personal growth.
             </p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <Link href="/register">
-                <button className="btn-primary" data-testid="button-hero-begin">
+                <button 
+                  className="group inline-flex items-center gap-2.5 font-semibold text-base px-8 py-4 rounded-full transition-all hover:opacity-90 hover:shadow-xl hover:-translate-y-0.5 text-white"
+                  style={{ background: 'linear-gradient(135deg, var(--sage-green), var(--deep-teal))' }}
+                  data-testid="button-hero-begin"
+                >
+                  <Sparkles className="w-5 h-5" />
                   Begin Your Journey
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </Link>
               <Link href="/crm">
-                <button className="btn-secondary" data-testid="button-hero-dashboard">
-                  Go to Dashboard
+                <button 
+                  className="inline-flex items-center gap-2 font-semibold text-base px-8 py-4 rounded-full transition-all hover:bg-[var(--deep-teal)]/5"
+                  style={{ color: 'var(--deep-teal)', border: '2px solid var(--deep-teal)' }}
+                  data-testid="button-hero-dashboard"
+                >
+                  Explore Dashboard
                 </button>
               </Link>
             </div>
