@@ -43,10 +43,12 @@ export default function DesignSystem() {
     { id: "typography", name: "Typography" },
     { id: "components", name: "UI Components" },
     { id: "wellness", name: "Wellness Components" },
+    { id: "iconography", name: "Gold Iconography" },
     { id: "pages", name: "Page Specifications" },
-    { id: "flow", name: "User Flow" },
+    { id: "flow", name: "Screen Flow" },
     { id: "responsive", name: "Responsive Grid" },
     { id: "accessibility", name: "Accessibility" },
+    { id: "devspecs", name: "Dev Handoff Specs" },
     { id: "checklist", name: "Developer Checklist" }
   ];
 
@@ -1126,6 +1128,226 @@ a:focus-visible {
                   <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium" style={{ background: 'rgba(47, 93, 93, 0.1)', color: 'var(--deep-teal)' }}>
                     <Bell className="w-3 h-3" /> Audio
                   </span>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Gold Iconography Section - Canva AI Design System */}
+          {activeSection === "iconography" && (
+            <section className="space-y-8">
+              <div>
+                <h1 className="text-4xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+                  Gold Wellness Iconography
+                </h1>
+                <p style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Platform-specific icons in gold and brand palette per Canva AI Design System.
+                </p>
+              </div>
+
+              {/* Icon Gallery */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Icon Styles</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                  {[
+                    { name: "Gold Highlight", class: "icon-wellness icon-wellness-lg icon-wellness-gold", desc: "Primary CTAs" },
+                    { name: "Healing Heart", class: "icon-wellness icon-wellness-lg icon-healing-heart", desc: "Wellness focus" },
+                    { name: "Lotus/Growth", class: "icon-wellness icon-wellness-lg icon-lotus", desc: "Progress" },
+                    { name: "Wisdom", class: "icon-wellness icon-wellness-lg icon-wisdom", desc: "Quotes" },
+                    { name: "Gold Soft", class: "icon-wellness icon-wellness-lg icon-wellness-gold-soft", desc: "Subtle accent" },
+                    { name: "Gold Outline", class: "icon-wellness icon-wellness-lg icon-wellness-gold-outline", desc: "Secondary" },
+                    { name: "CRM", class: "icon-wellness icon-wellness-lg icon-crm", desc: "Dashboard" },
+                    { name: "Community", class: "icon-wellness icon-wellness-lg icon-community", desc: "Q&A" }
+                  ].map((icon, i) => (
+                    <div key={i} className="text-center">
+                      <div className={icon.class + " mx-auto mb-3"}>
+                        <Heart className="w-6 h-6" />
+                      </div>
+                      <p className="font-semibold text-sm" style={{ color: 'var(--deep-teal)' }}>{icon.name}</p>
+                      <p className="text-xs" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>{icon.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Icon Sizes */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Icon Sizes</h3>
+                <div className="flex items-end gap-8 justify-center">
+                  {[
+                    { size: "sm", dim: "2rem" },
+                    { size: "md", dim: "3rem" },
+                    { size: "lg", dim: "4rem" },
+                    { size: "xl", dim: "5rem" }
+                  ].map((s, i) => (
+                    <div key={i} className="text-center">
+                      <div className={`icon-wellness icon-wellness-${s.size} icon-wellness-gold mx-auto mb-2`}>
+                        <Sparkles className="w-full h-full" />
+                      </div>
+                      <code className="text-xs" style={{ color: 'var(--charcoal)' }}>{s.size} ({s.dim})</code>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Usage Code */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>CSS Classes</h3>
+                <div className="p-4 rounded-lg font-mono text-sm overflow-x-auto" style={{ background: 'rgba(0,0,0,0.03)' }}>
+                  <pre style={{ color: 'var(--charcoal)' }}>{`/* Gold wellness icon example */
+<div className="icon-wellness icon-wellness-lg icon-wellness-gold">
+  <Heart className="w-6 h-6" aria-hidden="true" />
+</div>
+
+/* Available classes */
+.icon-wellness          // Base container
+.icon-wellness-sm/md/lg/xl  // Sizes
+.icon-wellness-gold     // Gold gradient
+.icon-wellness-gold-soft    // Subtle gold
+.icon-wellness-gold-outline // Gold border
+.icon-healing-heart     // Blush gradient
+.icon-lotus             // Sage gradient
+.icon-wisdom            // Teal with gold icon
+.icon-crm              // Gold-rose gradient
+.icon-community        // Sage-rose gradient
+.icon-wellness-animated // Breathing animation`}</pre>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Dev Handoff Specs Section - Canva AI Design System */}
+          {activeSection === "devspecs" && (
+            <section className="space-y-8">
+              <div>
+                <h1 className="text-4xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+                  Dev Handoff Specs
+                </h1>
+                <p style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Developer specifications for Canva AI Design System implementation.
+                </p>
+              </div>
+
+              {/* UI Component Labels */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>UI Component Labels</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  Standard naming conventions for code export and developer handoff.
+                </p>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  {[
+                    "Navbar", "CTA", "Modal", "Input Field", 
+                    "Testimonial Block", "Newsletter Form", "Card", "Badge",
+                    "Hero Section", "Footer", "Sidebar", "Accordion"
+                  ].map((label, i) => (
+                    <span key={i} className="ui-component-label">{label}</span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Breakpoint Specs */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Breakpoint Specifications</h3>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {[
+                    { name: "Mobile", badge: "breakpoint-mobile", size: "< 640px", desc: "1 column, 16px padding" },
+                    { name: "Tablet", badge: "breakpoint-tablet", size: "640px - 1024px", desc: "2 columns, 24px padding" },
+                    { name: "Desktop", badge: "breakpoint-desktop", size: "> 1024px", desc: "3-4 columns, 32px padding" }
+                  ].map((bp, i) => (
+                    <div key={i} className="p-4 rounded-xl" style={{ background: 'rgba(47, 93, 93, 0.03)' }}>
+                      <span className={`breakpoint-badge ${bp.badge} mb-3`}>{bp.name}</span>
+                      <p className="font-mono text-sm mt-2" style={{ color: 'var(--deep-teal)' }}>{bp.size}</p>
+                      <p className="text-xs mt-1" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>{bp.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* HTML ID/Class Suggestions */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Suggested HTML IDs & Classes</h3>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr style={{ borderBottom: '2px solid rgba(143, 191, 159, 0.2)' }}>
+                        <th className="text-left py-3 px-4" style={{ color: 'var(--deep-teal)' }}>Element</th>
+                        <th className="text-left py-3 px-4" style={{ color: 'var(--deep-teal)' }}>ID</th>
+                        <th className="text-left py-3 px-4" style={{ color: 'var(--deep-teal)' }}>Class</th>
+                        <th className="text-left py-3 px-4" style={{ color: 'var(--deep-teal)' }}>data-testid</th>
+                      </tr>
+                    </thead>
+                    <tbody className="font-mono text-xs">
+                      {[
+                        { el: "Header Nav", id: "#main-nav", cls: ".canva-header", test: "nav-main" },
+                        { el: "Hero CTA", id: "#hero-cta", cls: ".btn-primary", test: "button-hero-cta" },
+                        { el: "Daily Focus", id: "#daily-focus", cls: ".daily-focus-card", test: "card-daily-focus" },
+                        { el: "Content Card", id: "#content-{id}", cls: ".card-bordered", test: "link-content-{id}" },
+                        { el: "Q&A Post", id: "#post-{id}", cls: ".glass-card", test: "card-post-{id}" },
+                        { el: "Vote Button", id: "#vote-{id}", cls: ".btn-ghost", test: "button-vote-{id}" }
+                      ].map((row, i) => (
+                        <tr key={i} style={{ borderBottom: '1px solid rgba(143, 191, 159, 0.1)' }}>
+                          <td className="py-3 px-4" style={{ color: 'var(--deep-teal)' }}>{row.el}</td>
+                          <td className="py-3 px-4" style={{ color: 'var(--charcoal)' }}>{row.id}</td>
+                          <td className="py-3 px-4" style={{ color: 'var(--charcoal)' }}>{row.cls}</td>
+                          <td className="py-3 px-4" style={{ color: 'var(--sage-green)' }}>{row.test}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Accessibility Tags */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Accessibility Tags</h3>
+                <div className="space-y-3">
+                  {[
+                    { tag: "aria-label", example: 'aria-label="Save for later"', usage: "Icon-only buttons" },
+                    { tag: "aria-hidden", example: 'aria-hidden="true"', usage: "Decorative icons" },
+                    { tag: "role", example: 'role="tab"', usage: "Tab navigation" },
+                    { tag: "aria-selected", example: 'aria-selected="true"', usage: "Active tab state" },
+                    { tag: "data-testid", example: 'data-testid="button-submit"', usage: "All interactive elements" }
+                  ].map((item, i) => (
+                    <div key={i} className="flex items-center gap-4 p-3 rounded-lg" style={{ background: 'rgba(47, 93, 93, 0.03)' }}>
+                      <span className="a11y-tag">{item.tag}</span>
+                      <code className="text-xs" style={{ color: 'var(--charcoal)' }}>{item.example}</code>
+                      <span className="text-xs ml-auto" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>{item.usage}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Screen Flow */}
+              <div className="p-6 rounded-2xl" style={{ background: 'white', border: '1px solid rgba(143, 191, 159, 0.2)' }}>
+                <h3 className="font-semibold mb-6" style={{ color: 'var(--deep-teal)' }}>Screen Flow Navigation</h3>
+                <p className="text-sm mb-4" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+                  User journey flow between the 7 core screens.
+                </p>
+                <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
+                  {[
+                    { name: "Landing", icon: Home },
+                    { name: "Onboarding", icon: Sparkles },
+                    { name: "Homepage", icon: LayoutDashboard },
+                    { name: "CRM", icon: Users },
+                    { name: "Content", icon: BookOpen },
+                    { name: "Q&A", icon: MessageCircle },
+                    { name: "Auth", icon: LogIn }
+                  ].map((screen, i, arr) => {
+                    const Icon = screen.icon;
+                    return (
+                      <div key={i} className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ background: 'rgba(47, 93, 93, 0.08)' }}>
+                          <Icon className="w-4 h-4" style={{ color: 'var(--deep-teal)' }} />
+                          <span style={{ color: 'var(--deep-teal)' }}>{screen.name}</span>
+                        </div>
+                        {i < arr.length - 1 && (
+                          <div className="flow-arrow-icon">
+                            <ArrowRight className="w-3 h-3" />
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </section>

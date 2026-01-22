@@ -9,14 +9,15 @@
   --glp-safe-left: env(safe-area-inset-left, 0px);
   --glp-safe-right: env(safe-area-inset-right, 0px);
   /* ------------------------------------------------------------
-    Core palette (keep these names: your Tailwind config already uses them)
+    Core palette - Canva AI Design System Colors
+    (Exact match to: TheGenuineLoveProject.com brand spec)
   ------------------------------------------------------------ */
-  --glp-sage: #7FB39A;        /* supportive sage (richer) */
-  --glp-blush: #F2BDB8;       /* soft blush accent (warmer) */
-  --glp-sage-deep: #2A5454;   /* Deep Teal (PRIMARY - richer) */
-  --glp-paper: #FAFAF8;       /* Ivory background (warmer) */
-  --glp-ink: #2E3032;         /* Charcoal text (darker for contrast) */
-  --glp-gold: #D4A84B;        /* Gold accent (warmer, more luxurious) */
+  --glp-sage: #8fbf9f;        /* Sage Green - calming, healing */
+  --glp-blush: #f4c7c3;       /* Rose Pink - warm, nurturing */
+  --glp-sage-deep: #2f5d5d;   /* Deep Teal - PRIMARY, grounding */
+  --glp-paper: #faf9f7;       /* Cream/Ivory - soft background */
+  --glp-ink: #3a3a3a;         /* Charcoal - readable text */
+  --glp-gold: #eac33b;        /* Gold - premium accent, highlights */
 
   /* Extended teal palette for depth */
   --glp-teal-50: #EDF5F5;
@@ -111,13 +112,13 @@
   --blush-800: var(--glp-blush-800);
   --blush-900: var(--glp-blush-900);
 
-  /* RGB helpers (for rgba(var(--x-rgb), a)) */
-  --glp-sage-rgb: 127, 179, 154;
-  --glp-sage-deep-rgb: 42, 84, 84;
-  --glp-blush-rgb: 242, 189, 184;
-  --glp-paper-rgb: 250, 250, 248;
-  --glp-ink-rgb: 46, 48, 50;
-  --glp-gold-rgb: 212, 168, 75;
+  /* RGB helpers (for rgba(var(--x-rgb), a)) - Canva AI Design System */
+  --glp-sage-rgb: 143, 191, 159;     /* #8fbf9f */
+  --glp-sage-deep-rgb: 47, 93, 93;   /* #2f5d5d */
+  --glp-blush-rgb: 244, 199, 195;    /* #f4c7c3 */
+  --glp-paper-rgb: 250, 249, 247;    /* #faf9f7 */
+  --glp-ink-rgb: 58, 58, 58;         /* #3a3a3a */
+  --glp-gold-rgb: 234, 195, 59;      /* #eac33b */
 
   /* ------------------------------------------------------------
     Semantic tokens (use these everywhere in new code)

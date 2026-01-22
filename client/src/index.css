@@ -5358,3 +5358,258 @@ a, a:visited {
     color: var(--glp-ink);
   }
 }
+
+/* ===== CANVA AI DESIGN SYSTEM - GOLD WELLNESS ICONOGRAPHY ===== */
+/* Platform-specific icons in gold and brand palette */
+
+/* Gold-Highlighted Icon Base */
+.icon-wellness {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s var(--glp-ease);
+}
+
+/* Gold Icon Variants - Primary Highlights */
+.icon-wellness-gold {
+  background: linear-gradient(135deg, #eac33b 0%, #d4a84b 100%);
+  color: #2f5d5d;
+  box-shadow: 0 4px 16px rgba(234, 195, 59, 0.35);
+}
+
+.icon-wellness-gold-soft {
+  background: rgba(234, 195, 59, 0.15);
+  color: #eac33b;
+}
+
+.icon-wellness-gold-outline {
+  background: transparent;
+  border: 2px solid #eac33b;
+  color: #eac33b;
+}
+
+/* Healing Heart Icon */
+.icon-healing-heart {
+  background: linear-gradient(135deg, #f4c7c3 0%, #e6a9a4 100%);
+  color: #2f5d5d;
+  box-shadow: 0 4px 16px rgba(244, 199, 195, 0.4);
+}
+
+/* Lotus/Wellness Icon */
+.icon-lotus {
+  background: linear-gradient(135deg, #8fbf9f 0%, #5a8a6e 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(143, 191, 159, 0.4);
+}
+
+/* Quote/Wisdom Icon */
+.icon-wisdom {
+  background: linear-gradient(135deg, #2f5d5d 0%, #1f3f3f 100%);
+  color: #eac33b;
+  box-shadow: 0 4px 16px rgba(47, 93, 93, 0.4);
+}
+
+/* Profile/User Icon */
+.icon-profile {
+  background: linear-gradient(135deg, #faf9f7 0%, #e5e5e5 100%);
+  color: #2f5d5d;
+  border: 2px solid rgba(47, 93, 93, 0.15);
+}
+
+/* Search Icon */
+.icon-search {
+  background: rgba(143, 191, 159, 0.15);
+  color: #2f5d5d;
+}
+
+/* CRM Icon */
+.icon-crm {
+  background: linear-gradient(135deg, #eac33b 0%, #f4c7c3 100%);
+  color: #2f5d5d;
+}
+
+/* Q&A Community Icon */
+.icon-community {
+  background: linear-gradient(135deg, #8fbf9f 0%, #f4c7c3 100%);
+  color: #2f5d5d;
+}
+
+/* Icon Sizes - Canva Spec */
+.icon-wellness-sm {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.375rem;
+}
+
+.icon-wellness-md {
+  width: 3rem;
+  height: 3rem;
+  padding: 0.625rem;
+}
+
+.icon-wellness-lg {
+  width: 4rem;
+  height: 4rem;
+  padding: 0.875rem;
+}
+
+.icon-wellness-xl {
+  width: 5rem;
+  height: 5rem;
+  padding: 1.125rem;
+}
+
+/* Icon Hover States */
+.icon-wellness:hover {
+  transform: scale(1.08) rotate(3deg);
+}
+
+/* Icon Animation - Breathing Pulse for wellness */
+@keyframes icon-breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 16px rgba(234, 195, 59, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px rgba(234, 195, 59, 0.5);
+  }
+}
+
+.icon-wellness-animated {
+  animation: icon-breathe 4s ease-in-out infinite;
+}
+
+/* Canva Flow Connector Lines */
+.flow-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(234, 195, 59, 0.6);
+}
+
+.flow-connector-horizontal {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #eac33b, transparent);
+}
+
+.flow-connector-vertical {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #eac33b, transparent);
+}
+
+/* Screen Flow Arrows */
+.flow-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2f5d5d;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.flow-arrow-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  background: linear-gradient(135deg, #eac33b, #d4a84b);
+  color: #2f5d5d;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Canva UI Component Labels */
+.ui-component-label {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: rgba(47, 93, 93, 0.1);
+  color: #2f5d5d;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.ui-component-label-primary {
+  background: #2f5d5d;
+  color: #faf9f7;
+}
+
+.ui-component-label-gold {
+  background: rgba(234, 195, 59, 0.2);
+  color: #8B7023;
+}
+
+/* Canva Dev Spec Notes */
+.dev-spec-note {
+  background: rgba(47, 93, 93, 0.05);
+  border-left: 3px solid #eac33b;
+  padding: 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.dev-spec-note code {
+  background: rgba(47, 93, 93, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+}
+
+/* Canva Breakpoint Indicators */
+.breakpoint-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.breakpoint-mobile {
+  background: #f4c7c3;
+  color: #2f5d5d;
+}
+
+.breakpoint-tablet {
+  background: #8fbf9f;
+  color: white;
+}
+
+.breakpoint-desktop {
+  background: #2f5d5d;
+  color: white;
+}
+
+/* Canva Accessibility Tags */
+.a11y-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Reduced motion for all Canva animations */
+@media (prefers-reduced-motion: reduce) {
+  .icon-wellness:hover {
+    transform: none;
+  }
+  .icon-wellness-animated {
+    animation: none;
+  }
+}
