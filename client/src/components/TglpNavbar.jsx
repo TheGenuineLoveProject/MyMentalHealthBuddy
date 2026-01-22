@@ -1,5 +1,5 @@
 import { Link, useLocation } from "wouter";
-import { Sparkles, BookOpen } from "lucide-react";
+import { Sparkles, BookOpen, LayoutDashboard } from "lucide-react";
 import ModeToggle from "./ModeToggle.jsx";
 import GlobalSearch from "./GlobalSearch.jsx";
 
@@ -40,6 +40,15 @@ export default function TglpNavbar() {
       
       <nav className="flex items-center justify-end gap-2 sm:gap-3" aria-label="Main navigation">
         <GlobalSearch />
+        <Link 
+          href="/crm" 
+          className="nav-link hidden md:flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 
+          aria-current={isActive("/crm") ? "page" : undefined}
+          data-testid="link-dashboard"
+        >
+          <LayoutDashboard className="w-4 h-4" aria-hidden="true" />
+          Dashboard
+        </Link>
         <Link 
           href="/blog" 
           className="nav-link hidden md:flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] rounded" 

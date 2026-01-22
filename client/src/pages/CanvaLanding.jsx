@@ -278,11 +278,11 @@ export default function CanvaLanding() {
                   Begin Your Journey
                 </button>
               </Link>
-              <a href="#features">
-                <button className="btn-secondary" data-testid="button-hero-explore">
-                  Explore Resources
+              <Link href="/crm">
+                <button className="btn-secondary" data-testid="button-hero-dashboard">
+                  Go to Dashboard
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -618,11 +618,13 @@ export default function CanvaLanding() {
                 The Genuine Love Project
               </span>
             </div>
-            <div className="flex items-center gap-6 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
-              <Link href="/privacy"><span className="hover:opacity-100 cursor-pointer">Privacy</span></Link>
-              <Link href="/terms"><span className="hover:opacity-100 cursor-pointer">Terms</span></Link>
-              <Link href="/ethics"><span className="hover:opacity-100 cursor-pointer">Ethics</span></Link>
-              <Link href="/disclaimer"><span className="hover:opacity-100 cursor-pointer">Disclaimer</span></Link>
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+              <Link href="/onboarding"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-onboarding">Onboarding</span></Link>
+              <Link href="/crm"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-dashboard">Dashboard</span></Link>
+              <Link href="/content-index"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-content">Content</span></Link>
+              <Link href="/qa"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-qa">Q&A</span></Link>
+              <Link href="/privacy"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-privacy">Privacy</span></Link>
+              <Link href="/terms"><span className="hover:opacity-100 cursor-pointer" data-testid="link-footer-terms">Terms</span></Link>
             </div>
           </div>
           <div className="text-center mt-8 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.5 }}>
