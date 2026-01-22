@@ -264,47 +264,47 @@ export default function InnerChildPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-rose-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-paper), var(--glp-rose-15))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage)' }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))', color: 'var(--glp-paper)' }}>
             <Baby className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Inner Child Healing</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Inner Child Healing</h1>
+          <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
             Inside you lives every age you've ever been. Your inner child holds both your deepest wounds and your most authentic joy. 
             Healing happens when you finally give that child what they always needed: safety, love, and someone who stays.
           </p>
         </div>
 
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-2xl p-8 mb-12">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">Understanding Inner Child Work</h2>
+        <div className="rounded-2xl p-8 mb-12" style={{ background: 'var(--glp-gold-30)' }}>
+          <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>Understanding Inner Child Work</h2>
           <div className="grid md:grid-cols-3 gap-6 text-center">
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5">
-              <Baby className="h-10 w-10 text-amber-500 mx-auto mb-3" />
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">The Inner Child</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+            <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)' }}>
+              <Baby className="h-10 w-10 mx-auto mb-3" style={{ color: 'var(--glp-gold)' }} />
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>The Inner Child</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 The part of you that holds your earliest experiences, emotions, and unmet needs. 
                 This part still influences your adult reactions, relationships, and self-perception.
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5">
-              <Heart className="h-10 w-10 text-rose-500 mx-auto mb-3" />
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Reparenting</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+            <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)' }}>
+              <Heart className="h-10 w-10 mx-auto mb-3" style={{ color: 'var(--glp-rose)' }} />
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Reparenting</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 The practice of giving yourself now what you needed then—the love, safety, validation, and care you deserved. 
                 You become the good parent you never had (or supplement what was missing).
               </p>
             </div>
-            <div className="bg-white dark:bg-slate-800 rounded-xl p-5">
-              <Sparkles className="h-10 w-10 text-indigo-500 mx-auto mb-3" />
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Integration</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+            <div className="rounded-xl p-5" style={{ background: 'var(--glp-paper)' }}>
+              <Sparkles className="h-10 w-10 mx-auto mb-3" style={{ color: 'var(--glp-sage-deep)' }} />
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Integration</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 Bringing your inner child into your present life—not leaving them in the past, 
                 but carrying them with you, finally safe and finally loved.
               </p>
@@ -313,8 +313,8 @@ export default function InnerChildPage() {
         </div>
 
         <div className="mb-12">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 text-center">Core Childhood Needs</h2>
-          <p className="text-center text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>Core Childhood Needs</h2>
+          <p className="text-center mb-8 max-w-2xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
             Every child has fundamental needs. When these weren't met, we develop coping strategies that persist into adulthood. 
             Healing begins with understanding what was missing—and learning to provide it for yourself now.
           </p>

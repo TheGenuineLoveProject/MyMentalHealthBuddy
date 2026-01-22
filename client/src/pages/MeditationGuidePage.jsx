@@ -234,14 +234,14 @@ function MeditationPlayer({ meditation }) {
   };
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
+    <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)' }}>
       <div className="flex items-start gap-4 mb-6">
-        <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-500 text-white">
+        <div className="p-4 rounded-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
           <meditation.icon className="h-8 w-8" />
         </div>
         <div className="flex-1">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{meditation.name}</h2>
-          <div className="flex items-center gap-4 mt-2 text-slate-600 dark:text-slate-400">
+          <h2 className="text-2xl font-bold" style={{ color: 'var(--glp-ink)' }}>{meditation.name}</h2>
+          <div className="flex items-center gap-4 mt-2" style={{ color: 'var(--glp-sage)' }}>
             <span className="flex items-center gap-1">
               <Clock className="h-4 w-4" />
               {meditation.duration}
@@ -250,14 +250,14 @@ function MeditationPlayer({ meditation }) {
         </div>
       </div>
 
-      <p className="text-slate-600 dark:text-slate-400 mb-6">{meditation.description}</p>
+      <p className="mb-6" style={{ color: 'var(--glp-sage)' }}>{meditation.description}</p>
 
-      <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-xl p-8 mb-6">
+      <div className="rounded-xl p-8 mb-6" style={{ background: 'var(--glp-sage-10)' }}>
         <div className="text-center">
-          <span className="text-sm text-slate-500 dark:text-slate-400 mb-4 block">
+          <span className="text-sm mb-4 block" style={{ color: 'var(--glp-sage)' }}>
             Step {currentStep + 1} of {meditation.script.length}
           </span>
-          <p className="text-xl text-slate-900 dark:text-white leading-relaxed min-h-24">
+          <p className="text-xl leading-relaxed min-h-24" style={{ color: 'var(--glp-ink)' }}>
             {meditation.script[currentStep]}
           </p>
         </div>
@@ -267,14 +267,16 @@ function MeditationPlayer({ meditation }) {
         <button
           onClick={handlePrev}
           disabled={currentStep === 0}
-          className="px-6 py-3 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors disabled:opacity-50"
+          className="px-6 py-3 rounded-full transition-colors disabled:opacity-50"
+          style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage)' }}
           data-testid="button-prev-step"
         >
           Previous
         </button>
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-medium hover:from-indigo-600 hover:to-purple-600 transition-all"
+          className="flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all"
+          style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
           data-testid="button-toggle-meditation"
         >
           {isPlaying ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
@@ -283,7 +285,8 @@ function MeditationPlayer({ meditation }) {
         <button
           onClick={handleNext}
           disabled={currentStep === meditation.script.length - 1}
-          className="px-6 py-3 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors disabled:opacity-50"
+          className="px-6 py-3 rounded-full transition-colors disabled:opacity-50"
+          style={{ background: 'var(--glp-sage-15)', color: 'var(--glp-sage)' }}
           data-testid="button-next-step"
         >
           Next
@@ -296,7 +299,10 @@ function MeditationPlayer({ meditation }) {
             <button
               key={idx}
               onClick={() => setCurrentStep(idx)}
-              className={`w-2 h-2 rounded-full transition-all ${idx === currentStep ? "bg-indigo-500 w-4" : "bg-slate-300 dark:bg-slate-600"}`}
+              className="rounded-full transition-all"
+              style={idx === currentStep 
+                ? { width: '1rem', height: '0.5rem', background: 'var(--glp-sage)' } 
+                : { width: '0.5rem', height: '0.5rem', background: 'var(--glp-sage-20)' }}
               data-testid={`button-step-dot-${idx}`}
             />
           ))}
@@ -304,26 +310,26 @@ function MeditationPlayer({ meditation }) {
       </div>
 
       <div className="grid md:grid-cols-2 gap-4 mb-6">
-        <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-emerald-500" />
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+          <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <Sparkles className="h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
             Benefits
           </h3>
           <ul className="space-y-2">
             {meditation.benefits.map((benefit, idx) => (
-              <li key={idx} className="text-slate-600 dark:text-slate-400 text-sm flex items-start gap-2">
-                <span className="text-emerald-500 mt-0.5">•</span>
+              <li key={idx} className="text-sm flex items-start gap-2" style={{ color: 'var(--glp-sage)' }}>
+                <span className="mt-0.5" style={{ color: 'var(--glp-sage)' }}>•</span>
                 {benefit}
               </li>
             ))}
           </ul>
         </div>
-        <div className="bg-indigo-50 dark:bg-indigo-950/30 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-indigo-500" />
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+          <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <BookOpen className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
             Research Note
           </h3>
-          <p className="text-slate-600 dark:text-slate-400 text-sm">{meditation.researchNote}</p>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{meditation.researchNote}</p>
         </div>
       </div>
     </div>
@@ -344,31 +350,31 @@ export default function MeditationGuidePage() {
     : meditations.filter(m => m.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-paper), var(--glp-sage-10))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage)' }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
             <Brain className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Meditation Guide</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Meditation Guide</h1>
+          <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
             Evidence-based guided meditations that literally change your brain. Research shows just 8 weeks of regular practice 
             increases prefrontal cortex density (self-regulation) while reducing amygdala volume (fear response). 
             Each practice includes step-by-step guidance to support your inner journey.
           </p>
         </div>
 
-        <div className="bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 rounded-2xl p-6 mb-8">
+        <div className="rounded-2xl p-6 mb-8" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
           <div className="flex items-start gap-4">
-            <Brain className="h-6 w-6 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-1" />
+            <Brain className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--glp-sage-deep)' }} />
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">How Meditation Changes the Brain</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>How Meditation Changes the Brain</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 Neuroimaging studies show meditation increases gray matter in areas responsible for learning, memory, emotional regulation, 
                 and perspective-taking. It also reduces the size of the amygdala, your brain's fear center. 
                 These aren't temporary states—they're lasting structural changes that accumulate with practice.
@@ -382,11 +388,10 @@ export default function MeditationGuidePage() {
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all ${
-                selectedCategory === cat.id
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
-                  : "bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700"
-              }`}
+              className="flex items-center gap-2 px-4 py-2 rounded-full transition-all"
+              style={selectedCategory === cat.id
+                ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)', boxShadow: 'var(--glp-shadow-lg)' }
+                : { background: 'var(--glp-paper)', color: 'var(--glp-sage)', border: '1px solid var(--glp-sage-15)' }}
               data-testid={`button-filter-${cat.id}`}
             >
               <cat.icon className="h-4 w-4" />

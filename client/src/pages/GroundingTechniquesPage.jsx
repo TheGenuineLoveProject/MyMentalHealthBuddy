@@ -139,16 +139,17 @@ function TechniqueCard({ technique, onSelect, isSelected }) {
   return (
     <button
       onClick={onSelect}
-      className={`text-left p-6 rounded-2xl transition-all ${isSelected 
-        ? "bg-gradient-to-br from-emerald-500 to-teal-500 text-white shadow-lg scale-105" 
-        : "bg-white dark:bg-slate-800 hover:shadow-md hover:scale-102 border border-slate-200 dark:border-slate-700"}`}
+      className="text-left p-6 rounded-2xl transition-all hover:shadow-md"
+      style={isSelected 
+        ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)', boxShadow: 'var(--glp-shadow-lg)', transform: 'scale(1.05)' }
+        : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
       data-testid={`button-technique-${technique.id}`}
     >
-      <technique.icon className={`h-8 w-8 mb-4 ${isSelected ? "text-white" : "text-emerald-500"}`} />
-      <h3 className={`font-semibold mb-2 ${isSelected ? "text-white" : "text-slate-900 dark:text-white"}`}>
+      <technique.icon className="h-8 w-8 mb-4" style={{ color: isSelected ? 'var(--glp-paper)' : 'var(--glp-sage)' }} />
+      <h3 className="font-semibold mb-2" style={{ color: isSelected ? 'var(--glp-paper)' : 'var(--glp-ink)' }}>
         {technique.name}
       </h3>
-      <p className={`text-sm ${isSelected ? "text-white/80" : "text-slate-600 dark:text-slate-400"}`}>
+      <p className="text-sm" style={{ color: isSelected ? 'rgba(255,255,255,0.8)' : 'var(--glp-sage)' }}>
         {technique.description}
       </p>
     </button>
@@ -167,23 +168,23 @@ function TechniqueDetail({ technique }) {
   const allComplete = completedSteps.length === technique.steps.length;
 
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
+    <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)' }}>
       <div className="flex items-start gap-4 mb-6">
-        <div className="p-4 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white">
+        <div className="p-4 rounded-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
           <technique.icon className="h-8 w-8" />
         </div>
         <div className="flex-1">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{technique.name}</h2>
-          <p className="text-slate-600 dark:text-slate-400 mt-1">{technique.description}</p>
+          <h2 className="text-2xl font-bold" style={{ color: 'var(--glp-ink)' }}>{technique.name}</h2>
+          <p className="mt-1" style={{ color: 'var(--glp-sage)' }}>{technique.description}</p>
         </div>
       </div>
 
-      <div className="bg-amber-50 dark:bg-amber-900/20 rounded-xl p-4 mb-6">
+      <div className="rounded-xl p-4 mb-6" style={{ background: 'var(--glp-gold-30)' }}>
         <div className="flex items-center gap-2 mb-1">
-          <AlertCircle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-          <span className="font-medium text-slate-900 dark:text-white text-sm">Best Used When:</span>
+          <AlertCircle className="h-4 w-4" style={{ color: 'var(--glp-gold-dark)' }} />
+          <span className="font-medium text-sm" style={{ color: 'var(--glp-ink)' }}>Best Used When:</span>
         </div>
-        <p className="text-slate-600 dark:text-slate-400 text-sm">{technique.whenToUse}</p>
+        <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{technique.whenToUse}</p>
       </div>
 
       <div className="space-y-4 mb-8">
@@ -191,29 +192,29 @@ function TechniqueDetail({ technique }) {
           <button
             key={idx}
             onClick={() => toggleStep(idx)}
-            className={`w-full text-left p-4 rounded-xl transition-all flex items-start gap-4 ${
-              completedSteps.includes(idx) 
-                ? "bg-emerald-50 dark:bg-emerald-950/30 border-2 border-emerald-500" 
-                : "bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800"}`}
+            className="w-full text-left p-4 rounded-xl transition-all flex items-start gap-4"
+            style={completedSteps.includes(idx) 
+              ? { background: 'var(--glp-sage-10)', border: '2px solid var(--glp-sage)' } 
+              : { background: 'var(--glp-sage-10)', border: '1px solid transparent' }}
             data-testid={`button-step-${idx}`}
           >
-            <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-              completedSteps.includes(idx) 
-                ? "bg-emerald-500 text-white" 
-                : "bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400"}`}>
+            <div className="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center"
+              style={completedSteps.includes(idx) 
+                ? { background: 'var(--glp-sage)', color: 'var(--glp-paper)' } 
+                : { background: 'var(--glp-sage-15)', color: 'var(--glp-sage)' }}>
               {completedSteps.includes(idx) ? <CheckCircle2 className="h-5 w-5" /> : idx + 1}
             </div>
             <div className="flex-1">
               {step.count && (
-                <span className="inline-block px-2 py-1 text-xs font-medium bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 rounded-full mb-2">
+                <span className="inline-block px-2 py-1 text-xs font-medium rounded-full mb-2" style={{ background: 'var(--glp-gold-30)', color: 'var(--glp-gold-dark)' }}>
                   {step.count} × {step.sense}
                 </span>
               )}
-              <p className={`font-medium ${completedSteps.includes(idx) ? "text-emerald-700 dark:text-emerald-300" : "text-slate-900 dark:text-white"}`}>
+              <p className="font-medium" style={{ color: completedSteps.includes(idx) ? 'var(--glp-sage-deep)' : 'var(--glp-ink)' }}>
                 {step.instruction}
               </p>
               {step.examples && (
-                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Examples: {step.examples}</p>
+                <p className="text-sm mt-1" style={{ color: 'var(--glp-sage)' }}>Examples: {step.examples}</p>
               )}
             </div>
           </button>
@@ -221,14 +222,15 @@ function TechniqueDetail({ technique }) {
       </div>
 
       {allComplete && (
-        <div className="text-center py-8 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 rounded-xl mb-8">
-          <Heart className="h-12 w-12 text-rose-500 mx-auto mb-4" />
-          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">You're Grounded</h3>
-          <p className="text-slate-600 dark:text-slate-400 mb-2">Take a moment to notice how you feel now compared to before.</p>
-          <p className="text-sm text-teal-600 dark:text-teal-400">Each practice strengthens your nervous system's capacity to return to calm.</p>
+        <div className="text-center py-8 rounded-xl mb-8" style={{ background: 'var(--glp-sage-10)' }}>
+          <Heart className="h-12 w-12 mx-auto mb-4" style={{ color: 'var(--glp-rose)' }} />
+          <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--glp-ink)' }}>You're Grounded</h3>
+          <p className="mb-2" style={{ color: 'var(--glp-sage)' }}>Take a moment to notice how you feel now compared to before.</p>
+          <p className="text-sm" style={{ color: 'var(--glp-sage-deep)' }}>Each practice strengthens your nervous system's capacity to return to calm.</p>
           <button
             onClick={() => setCompletedSteps([])}
-            className="mt-4 px-6 py-2 rounded-full bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-colors"
+            className="mt-4 px-6 py-2 rounded-full font-medium transition-colors"
+            style={{ background: 'var(--glp-sage)', color: 'var(--glp-paper)' }}
             data-testid="button-reset-steps"
           >
             Start Over
@@ -237,19 +239,19 @@ function TechniqueDetail({ technique }) {
       )}
 
       <div className="space-y-4">
-        <div className="bg-sky-50 dark:bg-sky-950/30 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-sky-600 dark:text-sky-400" />
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+          <h3 className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <BookOpen className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
             The Science
           </h3>
-          <p className="text-slate-600 dark:text-slate-400 text-sm">{technique.scienceNote}</p>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{technique.scienceNote}</p>
         </div>
-        <div className="bg-indigo-50 dark:bg-indigo-950/30 rounded-xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-            <Brain className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+        <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)' }}>
+          <h3 className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <Brain className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
             Polyvagal Perspective
           </h3>
-          <p className="text-slate-600 dark:text-slate-400 text-sm">{technique.polyvagalNote}</p>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>{technique.polyvagalNote}</p>
         </div>
       </div>
     </div>
@@ -265,30 +267,30 @@ export default function GroundingTechniquesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-paper), var(--glp-sage-10))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage)' }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
             <Anchor className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Grounding Techniques</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Grounding Techniques</h1>
+          <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
             When anxiety pulls you into the future, or trauma pulls you into the past, grounding anchors you in the one moment that is actually happening: right now. 
             These evidence-based techniques help your nervous system remember: <em>I am here. I am safe. This moment is okay.</em>
           </p>
         </div>
 
-        <div className="bg-teal-50 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-800 rounded-2xl p-6 mb-12">
+        <div className="rounded-2xl p-6 mb-12" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
           <div className="flex items-start gap-4">
-            <Brain className="h-6 w-6 text-teal-600 dark:text-teal-400 flex-shrink-0 mt-1" />
+            <Brain className="h-6 w-6 flex-shrink-0 mt-1" style={{ color: 'var(--glp-sage-deep)' }} />
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Why Grounding Works</h3>
-              <p className="text-sm text-slate-600 dark:text-slate-400">
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-ink)' }}>Why Grounding Works</h3>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 <strong>Polyvagal insight:</strong> Your nervous system is designed to scan for danger. When you're anxious or dissociating, 
                 your neuroception (unconscious threat detection) is activated. Grounding techniques orient you to the present environment, 
                 sending safety cues through your senses that tell your brain: "Right now, in this moment, I am not in danger."
