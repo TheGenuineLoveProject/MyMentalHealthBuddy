@@ -129,7 +129,7 @@
   --glp-surface-2: #F6F4F1;
 
   --glp-text: var(--glp-ink);
-  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.72);
+  --glp-text-muted: rgba(var(--glp-ink-rgb), 0.78);
 
   --glp-primary: var(--glp-sage-deep);           /* Deep Teal */
   --glp-primary-foreground: var(--glp-paper);    /* Ivory text on teal */
@@ -143,7 +143,7 @@
   /* Shorthand semantic aliases (for strict specification compliance) */
   --bg: var(--glp-paper);
   --text-1: var(--glp-ink);
-  --text-2: rgba(58, 58, 58, 0.72);
+  --text-2: rgba(58, 58, 58, 0.78);
   --surface-1: #FFFFFF;
   --surface-2: rgba(250, 249, 247, 0.70);
   --primary: var(--glp-sage-deep);
