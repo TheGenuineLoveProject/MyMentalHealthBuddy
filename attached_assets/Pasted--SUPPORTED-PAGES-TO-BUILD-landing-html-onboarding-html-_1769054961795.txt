@@ -1,0 +1,120 @@
+—
+
+📄 SUPPORTED PAGES TO BUILD:
+
+- landing.html  
+- onboarding.html  
+- homepage.html  
+- crm.html  
+- content.html  
+- qa.html  
+- login.html  
+- blog.html  
+- testimonial.html  
+- settings.html  
+- terms.html  
+- privacy.html  
+- contact.html  
+- profile.html  
+- help.html  
+
+Each page must:
+✅ Include semantic HTML layout  
+✅ Use modular CSS (scoped or global styles.css)  
+✅ Use accessible tags, alt attributes, and ARIA landmarks  
+✅ Be mobile/tablet/desktop responsive  
+✅ Reference brand colors + spacing from above  
+✅ Include developer comments and section markers  
+✅ Use <main>, <section>, <header>, <footer> for structure  
+✅ Follow naming convention: kebab-case, lowercase
+
+—
+
+🧩 UI COMPONENTS TO INCLUDE AS NEEDED:
+
+Use modular reusable files:
+- Navbar
+- Footer
+- Form block
+- Card layout
+- Quote module
+- Testimonial slider
+- CRM dashboard module
+- Q&A expandable block
+- Blog article grid
+
+—
+
+📊 DEVELOPER HANDOFF LABELS
+
+In each HTML file:
+- Label components with HTML comments for `<!-- Header -->`, `<!-- Quote Module -->`, `<!-- CRM Entry -->`, etc.
+- Include class/id naming for easy Figma/CSS/JS translation
+
+—
+
+🧠 AI CONTENT GENERATION RULES
+
+If asked, auto-generate:
+- <meta> SEO blocks per page
+- JSON-LD article schema
+- Placeholder blog content (wellness tone)
+- FAQ content
+- Testimonial quotes (tone: calming, supportive)
+
+—
+
+🧭 USER JOURNEY FLOW:
+
+Follow and connect:
+Landing → Onboarding → Homepage → CRM → Content → Q&A → Login
+
+Create flowchart as `/docs/flowchart.svg` when asked.
+
+—
+
+📦 EXPORT LOGIC
+
+When user types:
+“Export Toolkit” → Automatically generate:
+- `/pages/*.html`
+- `/styles/styles.css`
+- `.prompt` file
+- `.zip` of full project
+- `/docs/flowchart.svg` + figma-map.json
+- README.md with integration instructions
+
+—
+
+🔁 UPDATE LOGIC
+
+If user types:
+- “Add page: X” → Create page + placeholder structure + note in README
+- “Continue” → Resume where left off
+- “Scaffold components” → Generate all modular components
+- “Rebuild flowchart” → Regenerate SVG map
+- “Export” → Trigger export logic
+
+—
+
+🚫 DO NOT:
+
+- Use lorem ipsum (generate meaningful placeholder copy)
+- Break naming rules or structure
+- Add images unless specified
+- Overload layout with unnecessary animation
+- Repeat brand logic already embedded
+
+—
+
+✅ FINAL OBJECTIVE
+
+Build a living design/dev system for TheGenuineLoveProject.com  
+Every output must be: production-ready, minimal-diff, accessible, clean, responsive, modular, and emotionally engaging.
+
+Output HTML/CSS is always paired with:
+• Figma-ready label JSON  
+• Flow logic in SVG  
+• Dev notes inline or in README  
+• Branding embedded and editable  
+• AI meta/SEO content when requested  
