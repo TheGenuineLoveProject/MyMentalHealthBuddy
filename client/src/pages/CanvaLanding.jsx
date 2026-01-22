@@ -153,8 +153,12 @@ export default function CanvaLanding() {
             {/* Logo - Compact on mobile, expanded on desktop */}
             <Link href="/">
               <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[64px] lg:h-[64px] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
-                  <Heart className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 text-white" fill="currentColor" />
+                <div className="relative w-[48px] h-[48px] sm:w-[56px] sm:h-[56px] lg:w-[64px] lg:h-[64px] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105 overflow-hidden" style={{ boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+                  <img 
+                    src="/brand/logo-mark.png" 
+                    alt="The Genuine Love Project" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="flex flex-col leading-snug">
                   <span className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -444,8 +448,8 @@ export default function CanvaLanding() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div key={index} className="glass-card rounded-3xl p-8">
-                <div className="mb-6">
-                  <feature.icon className="feature-icon" strokeWidth={1.5} />
+                <div className="mb-6 flex items-center justify-center w-14 h-14 rounded-2xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15))', boxShadow: '0 4px 12px var(--glp-sage-20)' }}>
+                  <feature.icon className="w-7 h-7" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} />
                 </div>
                 <h3 className="text-2xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                   {feature.title}
@@ -643,8 +647,8 @@ export default function CanvaLanding() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div className="md:col-span-1">
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
-                  <Heart className="w-5 h-5 text-white" fill="currentColor" />
+                <div className="w-10 h-10 rounded-xl overflow-hidden" style={{ boxShadow: '0 2px 8px var(--glp-sage-20)' }}>
+                  <img src="/brand/logo-mark.png" alt="The Genuine Love Project" className="w-full h-full object-cover" />
                 </div>
                 <span className="font-serif font-bold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>
                   Genuine Love
