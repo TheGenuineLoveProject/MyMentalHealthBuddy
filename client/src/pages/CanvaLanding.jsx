@@ -653,8 +653,8 @@ export default function CanvaLanding() {
       <footer className="py-16 px-6" style={{ background: 'var(--glp-paper)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-            <div className="md:col-span-1">
-              <div className="rounded-2xl overflow-hidden mb-4 transition-transform hover:scale-[1.02]" style={{ boxShadow: '0 8px 32px var(--glp-sage-20)', border: '2px solid var(--glp-sage-20)' }}>
+            <div className="md:col-span-1 text-center">
+              <div className="rounded-2xl overflow-hidden mb-4 transition-transform hover:scale-[1.02] mx-auto" style={{ boxShadow: '0 8px 32px var(--glp-sage-20)', border: '2px solid var(--glp-sage-20)', maxWidth: '200px' }}>
                 <img 
                   src="/brand/footer-wellness-graphic.png" 
                   alt="Wellness and healing" 
@@ -670,10 +670,10 @@ export default function CanvaLanding() {
             </div>
             
             <div className="md:col-span-3">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
                 <div className="text-center sm:text-left">
-                  <h4 className="font-semibold mb-4 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
-                  <ul className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                  <h4 className="font-semibold mb-5 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
+                  <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
                     <li><Link href="/crm"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-dashboard">Dashboard</span></Link></li>
                     <li><Link href="/onboarding"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-onboarding">Get Started</span></Link></li>
                     <li><Link href="/pricing"><span className="hover:underline cursor-pointer transition-all">Pricing</span></Link></li>
@@ -682,8 +682,8 @@ export default function CanvaLanding() {
                 </div>
                 
                 <div className="text-center sm:text-left">
-                  <h4 className="font-semibold mb-4 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
-                  <ul className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                  <h4 className="font-semibold mb-5 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
+                  <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
                     <li><Link href="/content-index"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-content">Content Library</span></Link></li>
                     <li><Link href="/qa"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-qa">Q&A Community</span></Link></li>
                     <li><Link href="/crisis"><span className="hover:underline cursor-pointer transition-all">Crisis Support</span></Link></li>
@@ -692,8 +692,8 @@ export default function CanvaLanding() {
                 </div>
                 
                 <div className="text-center sm:text-left">
-                  <h4 className="font-semibold mb-4 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
-                  <ul className="flex flex-wrap justify-center sm:justify-start gap-x-4 gap-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
+                  <h4 className="font-semibold mb-5 text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
+                  <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)' }}>
                     <li><Link href="/privacy"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-privacy">Privacy Policy</span></Link></li>
                     <li><Link href="/terms"><span className="hover:underline cursor-pointer transition-all" data-testid="link-footer-terms">Terms of Service</span></Link></li>
                     <li><Link href="/accessibility"><span className="hover:underline cursor-pointer transition-all">Accessibility</span></Link></li>
