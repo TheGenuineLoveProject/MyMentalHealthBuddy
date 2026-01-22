@@ -125,9 +125,10 @@ export default function App() {
           <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Public routes */}
-              <Route path="/" component={Home} />
-              <Route path="/home" component={Home} />
+              <Route path="/" component={CanvaLanding} />
+              <Route path="/home" component={CanvaLanding} />
               <Route path="/welcome" component={CanvaLanding} />
+              <Route path="/original-home" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />
