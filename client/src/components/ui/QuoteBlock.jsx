@@ -180,7 +180,7 @@ export default function QuoteBlock({
               }}
               role="tab"
               aria-selected={i === currentIndex}
-              aria-label={`Quote ${i + 1}`}
+              aria-label={`View quote ${i + 1} of ${quotes.length}: ${quotes[i].author}`}
               data-testid={`quote-dot-${i}`}
             />
           ))}

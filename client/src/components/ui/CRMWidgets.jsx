@@ -104,40 +104,44 @@ export function CalendarWidget({ events = [] }) {
         </button>
       </div>
 
-      <div className="space-y-3">
+      <ul className="space-y-3" role="list" aria-label="Upcoming events">
         {displayEvents.map((event) => {
           const colors = typeColors[event.type] || typeColors.session;
           return (
-            <div 
+            <li 
               key={event.id}
               className="flex items-center gap-3 p-3 rounded-xl transition-colors hover:bg-gray-50 cursor-pointer"
               style={{ background: colors.bg, borderLeft: `3px solid ${colors.border}` }}
               data-testid={`event-${event.id}`}
+              role="listitem"
+              aria-label={`${event.title} at ${event.time}${event.today ? ', scheduled for today' : ''}`}
             >
               <div className="flex-1">
                 <p className="font-medium text-sm" style={{ color: '#2f5d5d' }}>{event.title}</p>
                 <p className="text-xs flex items-center gap-1" style={{ color: '#3a3a3a', opacity: 0.6 }}>
                   <Clock className="w-3 h-3" aria-hidden="true" />
-                  {event.time}
+                  <time>{event.time}</time>
                 </p>
               </div>
               {event.today && (
                 <span 
                   className="px-2 py-0.5 rounded-full text-xs font-medium"
                   style={{ background: '#eac33b', color: '#2f5d5d' }}
+                  aria-hidden="true"
                 >
                   Today
                 </span>
               )}
-            </div>
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <button 
         className="w-full mt-4 p-3 rounded-xl text-sm font-medium flex items-center justify-center gap-2 transition-colors hover:bg-teal-50"
         style={{ border: '1px dashed rgba(47, 93, 93, 0.3)', color: '#2f5d5d' }}
         data-testid="button-add-event"
+        aria-label="Schedule a new wellness session"
       >
         <Plus className="w-4 h-4" aria-hidden="true" />
         Schedule Session
@@ -232,7 +236,7 @@ export function QuickActionsWidget({ actions = [] }) {
     >
       <h3 className="font-semibold mb-4" style={{ color: '#2f5d5d' }}>Quick Actions</h3>
       
-      <div className="space-y-2">
+      <nav className="space-y-2" aria-label="Quick actions">
         {displayActions.map((action) => {
           const Icon = action.icon || ChevronRight;
           return (
@@ -245,6 +249,7 @@ export function QuickActionsWidget({ actions = [] }) {
                 color: action.primary ? '#2f5d5d' : '#3a3a3a'
               }}
               data-testid={`action-${action.id}`}
+              aria-label={action.label}
             >
               <Icon className="w-5 h-5" aria-hidden="true" />
               <span className="flex-1 font-medium text-sm">{action.label}</span>
@@ -252,7 +257,7 @@ export function QuickActionsWidget({ actions = [] }) {
             </a>
           );
         })}
-      </div>
+      </nav>
     </div>
   );
 }

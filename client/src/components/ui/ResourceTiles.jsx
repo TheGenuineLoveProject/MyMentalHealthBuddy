@@ -142,7 +142,7 @@ export function ResourceTile({
                 <button 
                   onClick={(e) => { e.preventDefault(); onBookmark?.(id); }}
                   className="p-2 rounded-full hover:bg-white/10 transition-colors"
-                  aria-label="Bookmark this resource"
+                  aria-label={`Save ${title} to your bookmarks`}
                   data-testid={`button-bookmark-${id}`}
                 >
                   <Bookmark className="w-5 h-5 text-white" aria-hidden="true" />
@@ -216,7 +216,7 @@ export function ResourceTile({
             <button 
               onClick={(e) => { e.preventDefault(); onBookmark?.(id); }}
               className="absolute top-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white transition-colors opacity-0 group-hover:opacity-100"
-              aria-label="Bookmark this resource"
+              aria-label={`Save ${title} to your bookmarks`}
               data-testid={`button-bookmark-${id}`}
             >
               <Bookmark className="w-4 h-4" style={{ color: '#2f5d5d' }} aria-hidden="true" />
