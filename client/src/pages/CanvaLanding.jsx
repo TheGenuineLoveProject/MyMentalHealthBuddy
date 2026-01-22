@@ -284,8 +284,6 @@ export default function CanvaLanding() {
             offering comprehensive tools, wisdom, and community support for your holistic wellness.
           </p>
 
-          <div className="section-divider" />
-
           {/* Values Grid */}
           <div className="grid md:grid-cols-3 gap-8 mt-16">
             <div className="reveal">
@@ -324,6 +322,9 @@ export default function CanvaLanding() {
               </p>
             </div>
           </div>
+
+          {/* Centered decorative line below stages */}
+          <div className="section-divider mx-auto mt-16" />
         </div>
       </section>
 
