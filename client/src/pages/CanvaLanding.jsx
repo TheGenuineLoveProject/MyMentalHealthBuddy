@@ -608,10 +608,22 @@ export default function CanvaLanding() {
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
         <div className="max-w-3xl mx-auto relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm mb-6">
             <Sparkles className="w-4 h-4 text-white/80" />
             <span className="text-sm text-white/80 font-medium">Start your transformation today</span>
           </div>
+          
+          {/* Lotus in Teal Bar */}
+          <div className="w-full max-w-md mx-auto mb-6 h-12 rounded-full flex items-center justify-center" style={{ background: 'linear-gradient(90deg, transparent, var(--glp-sage-deep), var(--glp-sage-deep), transparent)' }}>
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: 'var(--glp-white)', boxShadow: '0 4px 16px rgba(0,0,0,0.2)' }}>
+              <img 
+                src="/brand/logo-monogram.png" 
+                alt="Lotus" 
+                className="w-7 h-7 object-contain"
+              />
+            </div>
+          </div>
+          
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white leading-tight">
             Begin Your Healing
             <br />
