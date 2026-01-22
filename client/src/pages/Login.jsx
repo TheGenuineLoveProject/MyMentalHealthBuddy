@@ -54,14 +54,14 @@ export default function Login() {
         
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-10">
-            <Link href="/" className="inline-flex items-center gap-4 group">
+            <Link href="/" className="inline-flex flex-col items-center gap-3 group">
               <img 
                 src="/brand/login-logo.png" 
                 alt="The Genuine Love Project" 
-                className="w-16 h-16 object-contain transition-all group-hover:scale-105"
+                className="w-24 h-24 object-contain transition-all group-hover:scale-105"
                 data-testid="img-login-logo"
               />
-              <span className="text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
+              <span className="text-xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
 
