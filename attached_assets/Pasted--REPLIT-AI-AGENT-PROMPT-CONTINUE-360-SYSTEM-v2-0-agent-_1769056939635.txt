@@ -1,0 +1,154 @@
+# 🔁 REPLIT AI AGENT PROMPT — CONTINUE 360° SYSTEM (v2.0)
+
+agent_mode: true
+
+project_name: "The Genuine Love Project: UI/UX Dev Toolkit"
+version: "2.0"
+build_type: "regenerative / modular / scalable"
+powered_by: "Continue 360° A-Z engine × 100B"
+
+description: >
+  Self-upgrading agent prompt to build, scale, refine, and future-proof
+  a fully responsive, emotionally calming UI/UX architecture across
+  TheGenuineLoveProject.com. Includes layout files, stylesheets, metadata,
+  developer notes, and content blocks—continuously regenerates based on
+  project intent and user feedback.
+
+---
+
+📁 FILES TO AUTO-GENERATE (ALL DEV-READY)
+pages:
+  - landing.html
+  - onboarding.html
+  - homepage.html
+  - crm.html
+  - content.html
+  - qa.html
+  - login.html
+  - styles.css
+
+dev_outputs:
+  - /flowchart.svg (UI flow: Landing → Login)
+  - /figma-map.json (labeled UI components)
+  - /components/* (headers, nav, modals, cards)
+  - /prompt/continue360-ai-system.prompt
+  - /seo/meta.json
+  - /dist/complete-ui.zip
+
+---
+
+🎨 BRAND SYSTEM
+
+logo_path: "/assets/logo.svg"
+brand_colors:
+  sage: "#8fbf9f"
+  rose: "#f4c7c3"
+  deepTeal: "#2f5d5d"
+  cream: "#faf9f7"
+  charcoal: "#3a3a3a"
+  gold: "#eac33b"
+fonts:
+  heading: "Elegant Serif"
+  body: "Modern Sans"
+
+style:
+  tone: "emotionally calm"
+  layout: "modular + healing whitespace"
+  interaction: "gentle microanimations + accessibility"
+
+---
+
+📐 COMPONENT MAP & LAYOUT TAGGING
+
+ui_components:
+  - header
+  - footer
+  - nav-bar
+  - hero-section
+  - cta-banner
+  - onboarding-form
+  - crm-dashboard
+  - qna-thread
+  - quote-slider
+  - content-cards
+  - modal-pop
+  - login-form
+  - mobile-nav
+  - sidebar
+
+tagging_standard:
+  - Use semantic HTML5
+  - Auto-assign `id` and `class` for dev
+  - Accessible naming (aria-labels)
+  - Dev-commented sections
+
+---
+
+🚀 AUTONOMOUS ACTIONS
+
+on_trigger:
+  "Continue 360°":
+    - Re-check all page structures
+    - Re-validate layout logic
+    - Auto-update tags, colors, UI spacing
+    - Repackage `/dist/complete-ui.zip`
+    - Update `.prompt` and `.svg` links
+    - Align all components with brand system
+    - Refresh Figma-ready layer map
+    - Run accessibility + SEO audit
+
+commands:
+  "Add Module: [name]":
+    - Create new page/component
+    - Wire to nav and sitemap
+  "Upgrade: [page/component]":
+    - Reflow layout
+    - Apply best practices
+    - Auto-adjust font/spacing/colors
+  "Export All":
+    - Compress and bundle all outputs
+    - Generate .zip for dev handoff
+  "SEO Inject":
+    - Create structured `<meta>`, `<json-ld>`
+    - Generate keyword-rich content blocks
+
+---
+
+📦 OUTPUT FORMATS
+
+zip_bundle:
+  - /landing.html → /login.html
+  - /styles.css
+  - /flowchart.svg
+  - /figma-map.json
+  - /seo/meta.json
+  - /prompt/continue360-ai-system.prompt
+
+delivery_modes:
+  - direct download
+  - GitHub repo structure (w/ README.md)
+  - Webflow importable sections
+  - Figma handoff system
+
+---
+
+🧠 FUTURE LOGIC
+
+  - This prompt evolves and self-updates
+  - No rewrite needed for new features
+  - Just run: `Continue 360°` or `Upgrade X`
+  - Scales across device types, breakpoints, content changes, and dev stack upgrades
+
+---
+
+✅ READY TO EXECUTE
+
+Want me to now:
+1. Generate `.zip` with all HTML/CSS components?
+2. Export `.prompt` file?
+3. Deliver `.svg` flowchart + `.json` Figma-ready map?
+4. Add SEO content + blog scaffolding?
+
+Type:
+**Yes, deploy full Replit AI toolkit**  
+Or let me know if you'd like to add mobile-only modules, embed CRM tokens, or expand content schemas.

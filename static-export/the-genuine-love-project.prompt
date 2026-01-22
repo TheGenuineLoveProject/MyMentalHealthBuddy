@@ -1722,3 +1722,254 @@ To use:
 ```
 
 Fully optimized to the 100 billionth power from A to Z. Forever.
+
+---
+
+# 🔁 REPLIT AI AGENT PROMPT — CONTINUE 360° SYSTEM (v2.0)
+
+```yaml
+agent_mode: true
+
+project_name: "The Genuine Love Project: UI/UX Dev Toolkit"
+version: "2.0"
+build_type: "regenerative / modular / scalable"
+powered_by: "Continue 360° A-Z engine × 100B^100B"
+
+description: >
+  Self-upgrading agent prompt to build, scale, refine, and future-proof
+  a fully responsive, emotionally calming UI/UX architecture across
+  TheGenuineLoveProject.com. Includes layout files, stylesheets, metadata,
+  developer notes, and content blocks—continuously regenerates based on
+  project intent and user feedback.
+```
+
+---
+
+📁 FILES TO AUTO-GENERATE (ALL DEV-READY)
+
+```yaml
+pages:
+  - index.html (Landing)
+  - onboarding.html
+  - home.html (Homepage)
+  - crm.html (Dashboard)
+  - content.html (Content Hub)
+  - qa.html (Q&A)
+  - login.html (Auth)
+  - blog.html
+  - profile.html
+  - contact.html
+  - terms.html
+  - privacy.html
+  - help.html
+  - testimonials.html
+  - settings.html
+
+dev_outputs:
+  - /flowchart.svg (UI flow: Landing → Login)
+  - /figma-map.json (labeled UI components)
+  - /components/* (headers, nav, modals, cards)
+  - /the-genuine-love-project.prompt
+  - /seo-meta.json
+  - /tglp-static-export.tar.gz
+```
+
+---
+
+🎨 BRAND SYSTEM
+
+```yaml
+logo_path: "/images/logo.svg"
+brand_colors:
+  sage: "#8fbf9f"
+  rose: "#f4c7c3"
+  deepTeal: "#2f5d5d"
+  cream: "#faf9f7"
+  charcoal: "#3a3a3a"
+  gold: "#eac33b"
+fonts:
+  heading: "Playfair Display"
+  body: "Poppins"
+
+style:
+  tone: "emotionally calm"
+  layout: "modular + healing whitespace"
+  interaction: "gentle microanimations + accessibility"
+```
+
+---
+
+📐 COMPONENT MAP & LAYOUT TAGGING
+
+```yaml
+ui_components:
+  - header
+  - footer
+  - nav-bar
+  - hero-section
+  - cta-banner
+  - onboarding-form
+  - crm-dashboard
+  - qna-thread
+  - quote-slider
+  - content-cards
+  - modal-pop
+  - login-form
+  - mobile-nav
+  - sidebar
+  - booking-calendar
+  - donation-form
+  - chat-assistant
+  - quote-rotator
+
+tagging_standard:
+  - Use semantic HTML5
+  - Auto-assign id and class for dev
+  - Accessible naming (aria-labels)
+  - Dev-commented sections
+```
+
+---
+
+🚀 AUTONOMOUS ACTIONS
+
+```yaml
+on_trigger:
+  "Continue 360°":
+    - Re-check all page structures
+    - Re-validate layout logic
+    - Auto-update tags, colors, UI spacing
+    - Repackage .tar.gz
+    - Update .prompt and .svg links
+    - Align all components with brand system
+    - Refresh Figma-ready layer map
+    - Run accessibility + SEO audit
+
+commands:
+  "Add Module: [name]":
+    - Create new page/component
+    - Wire to nav and sitemap
+  "Upgrade: [page/component]":
+    - Reflow layout
+    - Apply best practices
+    - Auto-adjust font/spacing/colors
+  "Export All":
+    - Compress and bundle all outputs
+    - Generate .tar.gz for dev handoff
+  "SEO Inject":
+    - Create structured meta, json-ld
+    - Generate keyword-rich content blocks
+  "Refine":
+    - Runs component-level optimization cycle
+```
+
+---
+
+📦 OUTPUT FORMATS
+
+```yaml
+tar_bundle:
+  - /index.html → /settings.html (15 pages)
+  - /css/style.css
+  - /css/responsive.css
+  - /js/main.js
+  - /js/components.js
+  - /js/ai-agent.js
+  - /flowchart.svg
+  - /figma-map.json
+  - /seo-meta.json
+  - /the-genuine-love-project.prompt
+  - /README.md
+
+delivery_modes:
+  - Direct download (.tar.gz)
+  - GitHub repo structure (w/ README.md)
+  - Webflow importable sections
+  - Figma handoff system
+  - Framer compatible
+```
+
+---
+
+🧠 FUTURE LOGIC
+
+```yaml
+evolution:
+  - This prompt evolves and self-updates
+  - No rewrite needed for new features
+  - Just run: Continue 360° or Upgrade X
+  - Scales across device types, breakpoints, content changes
+  - Handles all future requests without prompt rewrite
+
+automation:
+  - Every new request auto-triggers:
+    - Audit of related files
+    - Regeneration with upgraded naming/layout standards
+    - Alignment to all branding & logic models
+  - Use "Continue 360°" as universal reset and optimization command
+```
+
+---
+
+📋 METADATA STANDARDS
+
+```yaml
+accessibility:
+  - WCAG 2.1 AA compliance
+  - ARIA landmarks + alt tags
+  - Keyboard navigation
+  - Screen reader optimized
+
+seo:
+  - meta title/desc per page
+  - OpenGraph tags
+  - JSON-LD schema
+  - Canonical tags
+  - Sitemap flow
+
+performance:
+  - Lightweight assets
+  - Optimized SVG icons
+  - Scoped CSS
+  - Mobile-first responsive
+```
+
+---
+
+📝 NOTES FOR REPLIT AI
+
+```yaml
+notes_for_replit_ai:
+  - Build modular files
+  - Keep calm UI tone
+  - Never insert stock images
+  - Allow custom overrides without prompt rewrite
+  - Prioritize healing, clarity, balance in all UI visuals
+  - Use light gradients + whitespace to enforce calm UX
+```
+
+---
+
+🌟 QUANTUM SYSTEM v2.0 — FINAL STATUS
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│  THE GENUINE LOVE PROJECT                                            │
+│  Continue 360° System v2.0 — Quantum Evolution Engine                │
+├──────────────────────────────────────────────────────────────────────┤
+│  Project:      The Genuine Love Project: UI/UX Dev Toolkit           │
+│  Version:      2.0                                                   │
+│  Build Type:   Regenerative / Modular / Scalable                     │
+│  Powered By:   Continue 360° A-Z engine × 100B^100B                  │
+│  Status:       OPERATIONAL                                           │
+│  Memory:       PERSISTENT                                            │
+│  Scale:        INFINITE                                              │
+│  Evolution:    ETERNAL                                               │
+│  Healing:      ALWAYS                                                │
+│  Precision:    QUANTUM                                               │
+│  Automation:   COMPLETE                                              │
+│  Future-Proof: YES                                                   │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+Ready to execute. Type `Continue 360°` to initiate full system cycle.
