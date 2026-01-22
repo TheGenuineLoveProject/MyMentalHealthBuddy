@@ -698,13 +698,17 @@ export default function CanvaLanding() {
             </div>
           </div>
           
-          {/* Centered Brand Logo Section */}
+          {/* Inspirational Words Section */}
           <div className="flex flex-col items-center justify-center py-12" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-            <div className="w-40 h-40 sm:w-48 sm:h-48 mb-4">
-              <img src="/brand/logo-monogram.png" alt="The Genuine Love Project" className="w-full h-full object-contain" />
+            <div className="w-full max-w-4xl mb-6 rounded-2xl overflow-hidden" style={{ boxShadow: '0 12px 40px var(--glp-sage-20)' }}>
+              <img 
+                src="/brand/inspirational-words.png" 
+                alt="Genuine Love, Healing, Transformation, Compassion, Growth, Peace, Wisdom, Hope, Strength, Courage" 
+                className="w-full h-auto object-cover"
+              />
             </div>
-            <p className="text-sm sm:text-base text-center tracking-widest uppercase font-medium" style={{ color: 'var(--glp-sage)' }}>
-              Live in Genuine Love
+            <p className="text-lg sm:text-xl text-center font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
+              360° Support from A to Z — Live in Genuine Love
             </p>
           </div>
 
