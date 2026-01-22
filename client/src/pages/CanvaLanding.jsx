@@ -387,12 +387,12 @@ export default function CanvaLanding() {
           </div>
 
           {/* Centered decorative line below stages */}
-          <div className="section-divider mx-auto mt-16" />
+          <div className="section-divider mx-auto mt-8" />
         </div>
       </section>
 
       {/* Featured Quote Section - QuoteBlock_1_Healing */}
-      <section className="py-16 px-6" style={{ background: 'var(--glp-paper)' }}>
+      <section className="py-8 px-6" style={{ background: 'var(--glp-paper)' }}>
         <div className="max-w-4xl mx-auto">
           <div className="quote-block" data-testid="quote-block-healing">
             <p className="quote-text relative z-10">
