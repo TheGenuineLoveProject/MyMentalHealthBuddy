@@ -1,5 +1,6 @@
 @import "./styles/brand-tokens.css";
 @import "./styles/tokens.css";
+@import "./styles/healing-animations.css";
 
 @tailwind base;
 @tailwind components;
@@ -62,15 +63,35 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   min-height: 100vh;
+  line-height: 1.7;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
   letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Sacred Typography */
+.font-sacred {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
+.font-healing {
+  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+}
+
+:root {
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-body: 'Poppins', 'Inter', system-ui, sans-serif;
 }
 
 /* Gradient backgrounds */
