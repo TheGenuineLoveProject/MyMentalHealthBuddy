@@ -1,0 +1,470 @@
+TL;DR
+
+Here’s a hard-scoped, enterprise-grade “Master Replit Prompt v2” (QA Guardian → UX Finisher → Content Curator) plus a drop-in automation kit (release gate script, env audit, link scan, auth smoke scaffolding) to make TheGenuineLoveProject self-checking and continuously improvable without scope creep.
+
+I’m not going to write claims like “instant healing” or “guaranteed outcomes.” I will give you implementable product + engineering steps that reliably improve wellbeing UX and safety.
+
+⸻
+
+Plan (pseudocode, strict)
+	1.	Create guardrails: scope boundaries, acceptance criteria, “Fix Ledger”.
+	2.	Add automation: one command that runs install → lint → typecheck → test → build → link scan → env audit.
+	3.	QA Guardian: fix login/admin login, runtime blockers, missing envs, duplicates/incomplete files.
+	4.	UX Finisher: unify design tokens, accessibility basics, navigation correctness, empty/error states.
+	5.	Content Curator: onboard + safety + microcopy clarity (no medical promises), crisis page, FAQ.
+	6.	Release Gate: a single “ship/no-ship” verdict.
+
+⸻
+
+✅ Master Replit Prompt v2 (paste into Replit AI)
+
+You are the orchestrator for repo: TheGenuineLoveProject.
+Run a strict 3-agent pipeline: QA Guardian → UX Finisher → Content Curator.
+Objective: make the platform reliably shippable, visually cohesive, navigationally correct, and content-safe.
+ZERO scope creep.
+
+NON-NEGOTIABLE RULES
+A) No new product surface area unless required to fix existing broken behavior.
+B) No hardcoded secrets. If missing config, add ENV_CHECKLIST.md + .env.example.
+C) Add/maintain FIX_LEDGER.md: issue → root cause → fix → verification command(s) → expected result.
+D) Agent boundaries:
+   1) QA Guardian edits ONLY: backend/auth/api, db/migrations, config/scripts, tests, env.example, utilities. NO styling/layout.
+   2) UX Finisher edits ONLY: UI components, styling/theme tokens, layout, navigation, accessibility, states. NO backend logic.
+   3) Content Curator edits ONLY: copy/content, onboarding/help/FAQ/safety pages, metadata. NO layout refactors; NO backend.
+E) Avoid medical claims. Add Safety page: not medical advice + crisis guidance + encourage professional support.
+F) Every change must be verified by a command or checklist item.
+
+ACCEPTANCE CRITERIA (ALL MUST PASS)
+1) Clean install works.
+2) Build works.
+3) Tests (if any) pass.
+4) Lint/typecheck (if any) pass.
+5) Login works in dev; admin login route works OR is properly gated with clear messaging.
+6) Navigation has no dead links; 404 is friendly; empty/loading/error states exist.
+7) Visual system is consistent: tokens for color/typography/spacing; accessible focus indicators; reduced motion support.
+8) Safety content exists and is reachable.
+
+PHASE 0 — DISCOVERY (OUTPUT RESULTS + WRITE FILES)
+- Identify stack: framework, router, auth, DB, styling.
+- List scripts: dev/build/test/lint/typecheck.
+- Map routes (including login/admin).
+- Create/Update:
+  - FIX_LEDGER.md (Discovery section)
+  - ENV_CHECKLIST.md (all env vars + where used)
+  - .env.example (safe placeholders)
+
+PHASE 1 — AGENT 1: QA GUARDIAN (STABILITY + AUTH)
+Goal: eliminate blockers; fix login/admin login correctness.
+- Run install + gates.
+- Fix missing env usage, broken imports, auth callbacks, cookie/session/JWT issues, DB migration problems, duplicates/incomplete files.
+- Add a minimal smoke check:
+  - server starts
+  - login endpoint exists
+  - protected route returns 401 when unauthenticated
+- Update FIX_LEDGER.md for every fix with verification commands.
+
+PHASE 2 — AGENT 2: UX FINISHER (VISUALS + NAV + A11Y)
+Goal: cohesive calming UI + correct navigation.
+- Create a single source of truth for tokens (CSS vars or Tailwind theme).
+- Apply tokens to buttons/inputs/cards/nav/modals/toasts.
+- Fix navigation links + route mismatch.
+- Add/upgrade 404, empty, loading, error states.
+- Accessibility: visible focus, keyboard nav, reduced motion.
+- Update FIX_LEDGER.md with verification checklist + link scan output.
+
+PHASE 3 — AGENT 3: CONTENT CURATOR (ONBOARDING + SAFETY + CLARITY)
+Goal: clear, grounded, supportive content with safety boundaries.
+- Add/Update:
+  - Onboarding: what this is + how to use + privacy expectations
+  - Safety: not medical advice + crisis resources + “seek professional help”
+  - FAQ + troubleshooting for login/admin
+- Ensure content is structured for future localization.
+- Update FIX_LEDGER.md.
+
+FINAL — RELEASE GATE (MUST RUN AND REPORT)
+Run a single release gate command (create it if missing) that performs:
+- clean install
+- lint/typecheck (if present)
+- tests (if present)
+- build
+- env audit
+- link scan
+Report PASS/FAIL and paste outputs.
+
+Begin Phase 0 now. Do not skip it.
+
+
+⸻
+
+🧰 Drop-in “self-monitoring / self-repair” automation kit
+
+Paste these files into your repo (or have Replit AI create them). Then run bash tools/release_gate.sh.
+
+# File: tools/release_gate.sh
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT"
+
+echo "== Release Gate: TheGenuineLoveProject =="
+echo "Repo: $ROOT"
+echo
+
+have_cmd() { command -v "$1" >/dev/null 2>&1; }
+have_file() { [ -f "$1" ]; }
+
+run_if() {
+  local label="$1"; shift
+  echo "== $label =="
+  if "$@"; then
+    echo "OK: $label"
+  else
+    echo "FAIL: $label"
+    return 1
+  fi
+  echo
+}
+
+detect_node_pm() {
+  if have_file "pnpm-lock.yaml" && have_cmd pnpm; then echo "pnpm"; return; fi
+  if have_file "yarn.lock" && have_cmd yarn; then echo "yarn"; return; fi
+  if have_file "package-lock.json" && have_cmd npm; then echo "npm_ci"; return; fi
+  if have_file "package.json" && have_cmd npm; then echo "npm"; return; fi
+  echo ""
+}
+
+run_node_script_if_exists() {
+  local script="$1"
+  if node -e "const p=require('./package.json'); process.exit((p.scripts&&p.scripts['$script'])?0:1)" >/dev/null 2>&1; then
+    run_if "npm run $script" npm run -s "$script"
+  else
+    echo "SKIP: npm run $script (script missing)"
+    echo
+  fi
+}
+
+run_python_if_present() {
+  if have_file "pyproject.toml" || have_file "requirements.txt"; then
+    echo "== Python detected =="
+    if have_cmd python; then python --version; fi
+    if have_file "requirements.txt"; then
+      run_if "pip install -r requirements.txt" python -m pip install -r requirements.txt
+    fi
+    if have_cmd pytest; then
+      run_if "pytest" pytest -q
+    else
+      echo "SKIP: pytest not installed"
+      echo
+    fi
+  fi
+}
+
+PM="$(detect_node_pm)"
+
+if [ -n "$PM" ]; then
+  echo "== Node project detected ($PM) =="
+  if [ "$PM" = "pnpm" ]; then
+    run_if "pnpm install" pnpm install
+    run_node_script_if_exists lint
+    run_node_script_if_exists typecheck
+    run_node_script_if_exists test
+    run_node_script_if_exists build
+  elif [ "$PM" = "yarn" ]; then
+    run_if "yarn install" yarn install --frozen-lockfile || yarn install
+    run_node_script_if_exists lint
+    run_node_script_if_exists typecheck
+    run_node_script_if_exists test
+    run_node_script_if_exists build
+  elif [ "$PM" = "npm_ci" ]; then
+    run_if "npm ci" npm ci
+    run_node_script_if_exists lint
+    run_node_script_if_exists typecheck
+    run_node_script_if_exists test
+    run_node_script_if_exists build
+  else
+    run_if "npm install" npm install
+    run_node_script_if_exists lint
+    run_node_script_if_exists typecheck
+    run_node_script_if_exists test
+    run_node_script_if_exists build
+  fi
+
+  if have_file "tools/env_audit.js"; then
+    run_if "env audit" node tools/env_audit.js
+  fi
+
+  if have_file "tools/link_scan.js"; then
+    run_if "link scan" node tools/link_scan.js
+  fi
+else
+  echo "== No package.json detected (skipping Node gates) =="
+  echo
+fi
+
+run_python_if_present
+
+echo "== RELEASE GATE: PASS =="
+
+// File: tools/env_audit.js
+/**
+ * Env audit: discovers env var usage patterns and validates .env/.env.example coverage.
+ * Why: prevents "works on my machine" auth/login failures.
+ */
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const EXCLUDE_DIRS = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+const PATTERNS = [
+  /process\.env\.([A-Z0-9_]+)/g,
+  /import\.meta\.env\.([A-Z0-9_]+)/g,
+];
+
+function walk(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (ent.isDirectory()) {
+      if (EXCLUDE_DIRS.has(ent.name)) continue;
+      walk(path.join(dir, ent.name), out);
+    } else if (ent.isFile()) {
+      const p = path.join(dir, ent.name);
+      if (/\.(js|jsx|ts|tsx|mjs|cjs|py|go|java|rb|php|md|mdx)$/.test(p)) out.push(p);
+    }
+  }
+  return out;
+}
+
+function parseDotEnv(filePath) {
+  if (!fs.existsSync(filePath)) return new Set();
+  const lines = fs.readFileSync(filePath, "utf8").split(/\r?\n/);
+  const keys = new Set();
+  for (const line of lines) {
+    const t = line.trim();
+    if (!t || t.startsWith("#")) continue;
+    const idx = t.indexOf("=");
+    if (idx > 0) keys.add(t.slice(0, idx).trim());
+  }
+  return keys;
+}
+
+const files = walk(ROOT);
+const used = new Set();
+
+for (const f of files) {
+  const txt = fs.readFileSync(f, "utf8");
+  for (const re of PATTERNS) {
+    let m;
+    while ((m = re.exec(txt))) used.add(m[1]);
+  }
+}
+
+const envExample = parseDotEnv(path.join(ROOT, ".env.example"));
+const envLocal = parseDotEnv(path.join(ROOT, ".env"));
+
+const missingInExample = [...used].filter((k) => !envExample.has(k)).sort();
+const missingLocally = [...used].filter((k) => !envLocal.has(k)).sort();
+
+console.log("== ENV AUDIT ==");
+console.log(`Found env usages: ${used.size}`);
+console.log("");
+
+if (missingInExample.length) {
+  console.log("MISSING in .env.example:");
+  for (const k of missingInExample) console.log(`  - ${k}`);
+  console.log("");
+} else {
+  console.log("OK: .env.example covers all discovered env keys.");
+  console.log("");
+}
+
+if (missingLocally.length) {
+  console.log("NOTE: Missing in .env (local). This may be fine on Replit if configured in Secrets:");
+  for (const k of missingLocally) console.log(`  - ${k}`);
+  console.log("");
+} else {
+  console.log("OK: .env includes all discovered env keys.");
+  console.log("");
+}
+
+if (missingInExample.length) {
+  console.log("FAIL: Update .env.example and ENV_CHECKLIST.md.");
+  process.exit(1);
+}
+
+console.log("PASS: Env coverage ok.");
+
+// File: tools/link_scan.js
+/**
+ * Route/link scan (best-effort).
+ * Why: dead links wreck trust and funnel drop-off.
+ */
+const fs = require("fs");
+const path = require("path");
+
+const ROOT = path.resolve(__dirname, "..");
+const EXCLUDE_DIRS = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+const LINK_RE = /href\s*=\s*["'](\/[^"']*)["']/g;
+
+function walk(dir, out = []) {
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (ent.isDirectory()) {
+      if (EXCLUDE_DIRS.has(ent.name)) continue;
+      walk(path.join(dir, ent.name), out);
+    } else if (ent.isFile()) {
+      const p = path.join(dir, ent.name);
+      if (/\.(js|jsx|ts|tsx|md|mdx|html)$/.test(p)) out.push(p);
+    }
+  }
+  return out;
+}
+
+function guessRouteSet() {
+  // Best-effort for Next.js: pages/ or app/ routes.
+  const routes = new Set(["/"]);
+  const candidates = [
+    path.join(ROOT, "pages"),
+    path.join(ROOT, "src", "pages"),
+    path.join(ROOT, "app"),
+    path.join(ROOT, "src", "app"),
+  ];
+
+  for (const base of candidates) {
+    if (!fs.existsSync(base)) continue;
+    const files = [];
+    const walkRoutes = (d) => {
+      for (const ent of fs.readdirSync(d, { withFileTypes: true })) {
+        const p = path.join(d, ent.name);
+        if (ent.isDirectory()) walkRoutes(p);
+        else if (ent.isFile() && /\.(js|jsx|ts|tsx|mdx)$/.test(ent.name)) files.push(p);
+      }
+    };
+    walkRoutes(base);
+
+    for (const f of files) {
+      const rel = path.relative(base, f).replace(/\\/g, "/");
+      if (rel.startsWith("_")) continue;
+      if (rel.includes("[") && rel.includes("]")) continue; // dynamic
+      const cleaned = rel
+        .replace(/\.(js|jsx|ts|tsx|mdx)$/, "")
+        .replace(/\/(page|index)$/, "")
+        .replace(/^index$/, "");
+      const route = "/" + cleaned;
+      routes.add(route.replace(/\/+$/, "") || "/");
+    }
+  }
+  return routes;
+}
+
+const allFiles = walk(ROOT);
+const links = new Map(); // link -> [file...]
+for (const f of allFiles) {
+  const txt = fs.readFileSync(f, "utf8");
+  let m;
+  while ((m = LINK_RE.exec(txt))) {
+    const href = m[1].split("#")[0].split("?")[0];
+    if (!links.has(href)) links.set(href, []);
+    links.get(href).push(path.relative(ROOT, f));
+  }
+}
+
+const routes = guessRouteSet();
+const suspicious = [];
+
+for (const [href, files] of links.entries()) {
+  if (href.startsWith("/api")) continue;
+  if (href === "/") continue;
+  if (!routes.has(href)) suspicious.push({ href, files: [...new Set(files)] });
+}
+
+console.log("== LINK SCAN ==");
+console.log(`Discovered href routes: ${links.size}`);
+console.log(`Guessed implemented routes: ${routes.size}`);
+console.log("");
+
+if (!suspicious.length) {
+  console.log("PASS: No obvious dead internal links found (best-effort).");
+  process.exit(0);
+}
+
+console.log("POTENTIAL DEAD LINKS (verify/fix):");
+for (const item of suspicious.slice(0, 80)) {
+  console.log(`- ${item.href}`);
+  for (const f of item.files.slice(0, 5)) console.log(`   • ${f}`);
+  if (item.files.length > 5) console.log(`   • (+${item.files.length - 5} more)`);
+}
+console.log("");
+console.log("FAIL: Fix routes or update links.");
+process.exit(1);
+
+<!-- File: SAFETY.md -->
+# Safety & Support
+
+This platform provides educational and self-reflection tools. It is not medical advice, diagnosis, or treatment.
+
+If you feel unsafe or may harm yourself or someone else, seek immediate help:
+- Call your local emergency number now.
+- If you can, contact a trusted person and stay with them.
+- If you are in the U.S., you can call or text 988 (Suicide & Crisis Lifeline).
+
+If you are dealing with ongoing distress, consider contacting a licensed mental health professional.
+
+<!-- File: ENV_CHECKLIST.md -->
+# Environment Checklist
+
+List every required environment variable here, where it is used, and what it does.
+
+## Required
+- DATABASE_URL — used in: <path>
+- AUTH_SECRET — used in: <path>
+- AUTH_CALLBACK_URL — used in: <path>
+
+## Optional
+- LOG_LEVEL — used in: <path>
+
+<!-- File: FIX_LEDGER.md -->
+# Fix Ledger
+
+## Discovery
+- Stack:
+- Router:
+- Auth:
+- DB:
+- Styling:
+- Scripts:
+
+## Fixes
+For each fix:
+- Issue:
+- Root cause:
+- Patch:
+- Verify:
+- Expected:
+
+
+⸻
+
+Exact shell command sequence to start “real fixes” now
+
+chmod +x tools/release_gate.sh
+node -v || true
+npm -v || true
+
+# Run the gate. It will tell you exactly what fails first.
+bash tools/release_gate.sh
+
+
+⸻
+
+“#1 platform” strategy (tight + implementable)
+	•	Reliability first: auth + nav + build gate. (If trust breaks, growth dies.)
+	•	Calming UX system: one token source; consistent components; accessible.
+	•	Onboarding that converts: 3 screens max → value → first action.
+	•	Safety boundaries: clear disclaimers + crisis routing page.
+	•	Continuous improvement loop: Release Gate + Fix Ledger + weekly UX/content iteration.
+
+⸻
+
+Next
+
+a. Paste your repo tree + package.json + the login/admin files, and I’ll generate exact patches by file path.
+b. Want a “Calm Healing Theme” token set (Tailwind or CSS vars) + component recipes (buttons/inputs/cards/nav) matched to your current stack?

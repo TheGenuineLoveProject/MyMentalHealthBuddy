@@ -106,6 +106,7 @@ const ContentIndexPage = lazy(() => import("./pages/ContentIndexPage.jsx"));
 const ExamplesPage = lazy(() => import("./pages/ExamplesPage.jsx"));
 const QAPage = lazy(() => import("./pages/QAPage.jsx"));
 const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
+const SafetyPage = lazy(() => import("./pages/SafetyPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -409,6 +410,7 @@ export default function App() {
               <Route path="/terms" component={Terms} />
               <Route path="/privacy" component={Privacy} />
               <Route path="/legal" component={Legal} />
+              <Route path="/safety" component={SafetyPage} />
 
               {/* Fallback */}
               <Route component={NotFound} />

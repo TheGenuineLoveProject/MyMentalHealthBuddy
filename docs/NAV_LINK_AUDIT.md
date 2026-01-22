@@ -1,11 +1,11 @@
 # NAV LINK AUDIT
 
-Generated: `2026-01-22T05:10:32.476Z`
+Generated: `2026-01-22T05:13:44.210Z`
 
 ## Summary
-- Files scanned: **925**
-- Routes detected: **97**
-- Link occurrences: **619**
+- Files scanned: **927**
+- Routes detected: **98**
+- Link occurrences: **629**
 - Broken: **0**
 - Warnings: **0**
 
@@ -90,7 +90,7 @@ Generated: `2026-01-22T05:10:32.476Z`
 - `/knowledge-synthesis`
 - `/wisdom-practices`
 - `/growth-analytics`
-- … (17 more)
+- … (18 more)
 
 ## Broken Links
 ✅ None
