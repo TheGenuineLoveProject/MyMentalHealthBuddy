@@ -94,30 +94,57 @@ const __dirname = dirname(__filename);
 
 const isProduction = process.env.NODE_ENV === "production";
 
-// Production environment variable check (with fallbacks)
-if (isProduction) {
-  // Generate fallback secrets if not provided
-  if (!process.env.JWT_SECRET) {
-    process.env.JWT_SECRET = process.env.SESSION_SECRET || 'tglp-jwt-secret-' + Date.now();
-    console.warn('WARNING: JWT_SECRET not set, using fallback');
-  }
-  if (!process.env.JWT_REFRESH_SECRET) {
-    process.env.JWT_REFRESH_SECRET = process.env.SESSION_SECRET || 'tglp-jwt-refresh-' + Date.now();
-    console.warn('WARNING: JWT_REFRESH_SECRET not set, using fallback');
-  }
-  
-  const requiredEnvVars = [
+// Environment variable validation with categories
+const envValidation = {
+  critical: [
     { name: 'DATABASE_URL', value: process.env.DATABASE_URL },
     { name: 'SESSION_SECRET', value: process.env.SESSION_SECRET },
-  ];
-  
-  const missingRequired = requiredEnvVars.filter(v => !v.value);
-  
-  if (missingRequired.length > 0) {
-    console.error(`DEPLOY WARNING: Missing environment variables: ${missingRequired.map(v => v.name).join(', ')}`);
-    // Don't exit - allow graceful degradation
+  ],
+  recommended: [
+    { name: 'OPENAI_API_KEY', value: process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY },
+    { name: 'STRIPE_SECRET_KEY', value: process.env.STRIPE_SECRET_KEY },
+    { name: 'STRIPE_WEBHOOK_SECRET', value: process.env.STRIPE_WEBHOOK_SECRET },
+    { name: 'SENTRY_DSN', value: process.env.SENTRY_DSN },
+  ],
+  optional: [
+    { name: 'GITHUB_CLIENT_ID', value: process.env.GITHUB_CLIENT_ID },
+    { name: 'GITHUB_CLIENT_SECRET', value: process.env.GITHUB_CLIENT_SECRET },
+  ],
+};
+
+// JWT secret handling - use SESSION_SECRET for token signing (consistent approach)
+if (isProduction) {
+  if (!process.env.SESSION_SECRET) {
+    console.error('CRITICAL: SESSION_SECRET required in production');
+    process.exit(1);
   }
+  process.env.JWT_SECRET = process.env.JWT_SECRET || process.env.SESSION_SECRET;
+  process.env.JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || process.env.SESSION_SECRET;
+} else {
+  process.env.JWT_SECRET = process.env.JWT_SECRET || process.env.SESSION_SECRET || 'dev-jwt-secret';
+  process.env.JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || process.env.SESSION_SECRET || 'dev-jwt-refresh';
 }
+
+const missingCritical = envValidation.critical.filter(v => !v.value);
+const missingRecommended = envValidation.recommended.filter(v => !v.value);
+const missingOptional = envValidation.optional.filter(v => !v.value);
+
+if (missingCritical.length > 0 && isProduction) {
+  console.error(`CRITICAL: Missing required env vars: ${missingCritical.map(v => v.name).join(', ')}`);
+  console.error('Server cannot start in production without these. Exiting.');
+  process.exit(1);
+}
+
+if (missingRecommended.length > 0) {
+  console.warn(`WARNING: Missing recommended env vars: ${missingRecommended.map(v => v.name).join(', ')}`);
+  console.warn('Some features may not work correctly.');
+}
+
+if (missingOptional.length > 0) {
+  console.info(`INFO: Optional env vars not set: ${missingOptional.map(v => v.name).join(', ')}`);
+}
+
+console.log(`Environment validation complete. Mode: ${isProduction ? 'PRODUCTION' : 'DEVELOPMENT'}`);
 
 const app = express();
 
@@ -127,25 +154,31 @@ app.set('trust proxy', 1);
 app.use(requestId);
 app.use(requestLogger);
 
+const allowedDomains = process.env.REPLIT_DOMAINS
+  ? process.env.REPLIT_DOMAINS.split(",").map(d => `https://${d.trim()}`)
+  : ["https://localhost:5000"];
+const frameAncestorsDomains = isProduction
+  ? ["'self'", ...allowedDomains, "https://*.replit.dev", "https://*.replit.com"]
+  : ["'self'", "https://*.replit.dev", "https://*.replit.com", "http://localhost:*"];
+
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://fonts.googleapis.com", "https://js.stripe.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://js.stripe.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
       imgSrc: ["'self'", "data:", "blob:", "https:"],
       connectSrc: ["'self'", "https://api.openai.com", "https://api.stripe.com", "wss:", "ws:", "https:"],
       frameSrc: ["'self'", "https://js.stripe.com"],
-      frameAncestors: ["*"],
+      frameAncestors: frameAncestorsDomains,
       objectSrc: ["'none'"],
       upgradeInsecureRequests: isProduction ? [] : null,
     },
   },
   crossOriginEmbedderPolicy: false,
-  crossOriginOpenerPolicy: false,
-  crossOriginResourcePolicy: false,
-  frameguard: false,
+  crossOriginOpenerPolicy: { policy: "same-origin-allow-popups" },
+  crossOriginResourcePolicy: { policy: "cross-origin" },
 }));
 app.use(compression());
 app.use(express.json({ limit: '1mb' }));
@@ -153,20 +186,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
 
-// Universal CORS configuration for all origins
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
+const corsOrigins = isProduction
+  ? [...allowedDomains, /\.replit\.dev$/, /\.replit\.com$/]
+  : [/\.replit\.dev$/, /\.replit\.com$/, /localhost:\d+$/];
 
-// Universal access headers for iframe embedding
-app.use((req, res, next) => {
-  res.setHeader('X-Frame-Options', 'ALLOWALL');
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  next();
-});
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    const isAllowed = corsOrigins.some(allowed =>
+      typeof allowed === "string" ? allowed === origin : allowed.test(origin)
+    );
+    if (isAllowed) {
+      callback(null, true);
+    } else if (!isProduction) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "X-CSRF-Token"],
+}));
 
 app.use('/api/auth', authRouter);
 app.use('/api/auth', githubAuthRouter);
