@@ -614,12 +614,12 @@ export default function CanvaLanding() {
           </div>
           
           {/* Lotus Accent */}
-          <div className="mx-auto mb-2 flex items-center justify-center" style={{ width: '10px', height: '0.5px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)' }}>
-            <div className="rounded-full overflow-hidden" style={{ width: '0.5px', height: '0.5px', background: 'var(--glp-white)' }}>
+          <div className="mx-auto mb-3 flex items-center justify-center" style={{ width: '60px', height: '6px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)' }}>
+            <div className="rounded-full overflow-hidden" style={{ width: '16px', height: '16px', background: 'var(--glp-white)', boxShadow: '0 2px 8px rgba(0,0,0,0.15)' }}>
               <img 
                 src="/brand/footer-wellness-graphic.png" 
-                alt="" 
-                style={{ width: '0.5px', height: '0.5px', objectFit: 'cover', opacity: 0.4 }}
+                alt="Lotus flower" 
+                style={{ width: '16px', height: '16px', objectFit: 'cover' }}
               />
             </div>
           </div>
