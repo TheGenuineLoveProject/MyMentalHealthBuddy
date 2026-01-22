@@ -94,6 +94,10 @@ if [ -n "$PM" ]; then
   if have_file "tools/link_scan.mjs"; then
     run_if "link scan" node tools/link_scan.mjs
   fi
+
+  if have_file "tools/route_map.mjs"; then
+    run_if "route map" node tools/route_map.mjs
+  fi
 else
   echo "== No package.json detected (skipping Node gates) =="
   echo

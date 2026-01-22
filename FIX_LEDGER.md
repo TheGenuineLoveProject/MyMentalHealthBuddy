@@ -279,5 +279,12 @@ npm run link:scan     # Navigation link scan
 - SAFETY.md: ✅ created
 
 ### Upgraded Tool Features
-1. **env_audit.mjs** - Now scans entire codebase for `process.env.*` and `import.meta.env.*` patterns
-2. **link_scan.mjs** - Now includes route guessing from file structure + dynamic route detection
+1. **env_audit.mjs** - Scans entire codebase for `process.env.*` and `import.meta.env.*` patterns
+2. **link_scan.mjs** - Route guessing from file structure + dynamic route detection
+3. **route_map.mjs** - Categorized route inventory (auth, admin, legal, tools)
+4. **auth_smoke.mjs** - Auth endpoint smoke tests
+
+### Documentation Created
+- `docs/RUNBOOK.md` - Operations guide, debugging, deployment
+- `docs/UX_TOKENS.md` - Design token specification
+- `docs/CONTENT_TONE.md` - Voice, tone, and content guidelines

@@ -29,6 +29,8 @@
     "governance:loop": "node tools/governance-loop.mjs",
     "env:audit": "node tools/env_audit.mjs",
     "link:scan": "node tools/link_scan.mjs",
+    "route:map": "node tools/route_map.mjs",
+    "auth:smoke": "node tools/auth_smoke.mjs",
     "release:gate": "bash tools/release_gate.sh"
   },
   "dependencies": {
