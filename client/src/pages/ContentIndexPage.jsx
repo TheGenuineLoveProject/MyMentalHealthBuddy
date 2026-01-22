@@ -180,6 +180,25 @@ export default function ContentIndexPage() {
           </p>
         </header>
 
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+          <Link href="/dashboard" className="p-4 rounded-xl text-center transition-all hover:shadow-lg hover:-translate-y-0.5" style={{ background: 'white', border: '1px solid var(--glp-sage-15)' }} data-testid="quick-link-dashboard">
+            <Home className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-sage-deep)' }} />
+            <span className="text-sm font-medium" style={{ color: 'var(--glp-charcoal)' }}>Dashboard</span>
+          </Link>
+          <Link href="/wellness-hub" className="p-4 rounded-xl text-center transition-all hover:shadow-lg hover:-translate-y-0.5" style={{ background: 'white', border: '1px solid var(--glp-rose-15)' }} data-testid="quick-link-wellness">
+            <Heart className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-rose)' }} />
+            <span className="text-sm font-medium" style={{ color: 'var(--glp-charcoal)' }}>Wellness Hub</span>
+          </Link>
+          <Link href="/chat" className="p-4 rounded-xl text-center transition-all hover:shadow-lg hover:-translate-y-0.5" style={{ background: 'white', border: '1px solid var(--glp-gold-30)' }} data-testid="quick-link-chat">
+            <MessageCircle className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-gold)' }} />
+            <span className="text-sm font-medium" style={{ color: 'var(--glp-charcoal)' }}>AI Chat</span>
+          </Link>
+          <Link href="/crisis" className="p-4 rounded-xl text-center transition-all hover:shadow-lg hover:-translate-y-0.5" style={{ background: 'white', border: '1px solid var(--glp-sage-15)' }} data-testid="quick-link-crisis">
+            <Shield className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-sage-deep)' }} />
+            <span className="text-sm font-medium" style={{ color: 'var(--glp-charcoal)' }}>Crisis Support</span>
+          </Link>
+        </div>
+
         <div className="sticky top-0 z-20 py-4 mb-6" style={{ background: 'var(--glp-paper)' }}>
           <div className="flex flex-col sm:flex-row gap-4 items-center">
             <div className="relative flex-1 max-w-md">
