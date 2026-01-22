@@ -21,6 +21,8 @@ import {
   Zap, TrendingUp, Award, Check
 } from "lucide-react";
 import HealingHero from "../components/HealingHero";
+import AboutSection from "../components/AboutSection";
+import BenefitsSection from "../components/BenefitsSection";
 import "../styles/healing-animations.css";
 
 export default function HealingLandingPage() {
@@ -140,6 +142,12 @@ export default function HealingLandingPage() {
     >
       {/* Hero Section */}
       <HealingHero />
+
+      {/* About Section - Sacred Mission */}
+      <AboutSection />
+
+      {/* Benefits Section - Why Choose Us */}
+      <BenefitsSection />
 
       {/* Features Section */}
       <section 
