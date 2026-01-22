@@ -9,7 +9,6 @@ const affirmationCategories = [
     id: "self-love",
     name: "Self-Love",
     icon: Heart,
-    color: "from-rose-400 to-pink-500",
     description: "Rewire your inner dialogue toward unconditional self-acceptance",
     researchNote: "Dr. Kristin Neff's research shows self-compassion is more strongly associated with mental health than self-esteem, without the downsides of narcissism.",
     affirmations: [
@@ -31,7 +30,6 @@ const affirmationCategories = [
     id: "healing",
     name: "Healing",
     icon: Flower2,
-    color: "from-emerald-400 to-teal-500",
     description: "Honor your non-linear healing journey with patience and trust",
     researchNote: "Neuroplasticity research confirms the brain can rewire throughout life. Each practice of self-compassion literally creates new neural pathways.",
     affirmations: [
@@ -53,7 +51,6 @@ const affirmationCategories = [
     id: "peace",
     name: "Inner Peace",
     icon: Sun,
-    color: "from-amber-400 to-orange-500",
     description: "Cultivate nervous system calm and present-moment awareness",
     researchNote: "Polyvagal theory shows that true calm comes from a regulated nervous system. These affirmations help signal safety to your brain.",
     affirmations: [
@@ -75,7 +72,6 @@ const affirmationCategories = [
     id: "resilience",
     name: "Resilience",
     icon: Shield,
-    color: "from-indigo-400 to-purple-500",
     description: "Recognize and honor the strength you've already demonstrated",
     researchNote: "Post-traumatic growth research shows that struggle often leads to profound positive change. Your challenges have built capacities you may not yet recognize.",
     affirmations: [
@@ -97,7 +93,6 @@ const affirmationCategories = [
     id: "growth",
     name: "Growth",
     icon: Sparkles,
-    color: "from-cyan-400 to-blue-500",
     description: "Embrace transformation as your natural state of being",
     researchNote: "Carol Dweck's growth mindset research shows that believing in your capacity to grow actually increases your capacity to grow.",
     affirmations: [
@@ -119,7 +114,6 @@ const affirmationCategories = [
     id: "boundaries",
     name: "Boundaries",
     icon: Target,
-    color: "from-violet-400 to-purple-500",
     description: "Reclaim your right to protect your peace and honor your needs",
     researchNote: "Research shows that healthy boundaries are associated with lower anxiety, depression, and burnout, and higher relationship satisfaction.",
     affirmations: [
@@ -141,7 +135,6 @@ const affirmationCategories = [
     id: "worthiness",
     name: "Worthiness",
     icon: Star,
-    color: "from-yellow-400 to-amber-500",
     description: "Reclaim your inherent value that was never meant to be earned",
     researchNote: "Brené Brown's research shows that worthiness is not earned through achievement—it is our birthright that must be claimed.",
     affirmations: [
@@ -163,7 +156,6 @@ const affirmationCategories = [
     id: "nervous-system",
     name: "Nervous System",
     icon: Zap,
-    color: "from-teal-400 to-cyan-500",
     description: "Speak directly to your autonomic nervous system with calming truths",
     researchNote: "Polyvagal theory explains how words and intentions can shift nervous system states. These affirmations help signal safety.",
     affirmations: [
@@ -224,7 +216,7 @@ function AffirmationCard({ affirmation, onNext, category }) {
   };
 
   return (
-    <div className={`relative rounded-3xl bg-gradient-to-br ${category.color} p-8 md:p-12 text-white text-center shadow-xl`}>
+    <div className="relative rounded-3xl p-8 md:p-12 text-white text-center shadow-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
       <category.icon className="h-12 w-12 mx-auto mb-6 opacity-80" />
       
       <p className="text-2xl md:text-3xl font-medium leading-relaxed mb-8">
@@ -234,7 +226,8 @@ function AffirmationCard({ affirmation, onNext, category }) {
       <div className="flex justify-center gap-4">
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors"
+          style={{ background: 'var(--glp-white-20)' }}
           data-testid="button-copy-affirmation"
         >
           {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
@@ -242,7 +235,8 @@ function AffirmationCard({ affirmation, onNext, category }) {
         </button>
         <button
           onClick={() => setLiked(!liked)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-full transition-colors ${liked ? "bg-white text-rose-500" : "bg-white/20 hover:bg-white/30"}`}
+          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors"
+          style={liked ? { background: 'white', color: 'var(--glp-blush)' } : { background: 'var(--glp-white-20)' }}
           data-testid="button-like-affirmation"
         >
           <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
@@ -250,7 +244,8 @@ function AffirmationCard({ affirmation, onNext, category }) {
         </button>
         <button
           onClick={onNext}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors"
+          style={{ background: 'var(--glp-white-20)' }}
           data-testid="button-next-affirmation"
         >
           <RefreshCw className="h-5 w-5" />
@@ -317,11 +312,10 @@ export default function AffirmationsPage() {
               <button
                 key={cat.id}
                 onClick={() => { setSelectedCategory(cat); setCurrentIndex(0); }}
-                className={`flex items-center gap-2 px-5 py-3 rounded-full transition-all ${
-                  selectedCategory.id === cat.id
-                    ? `bg-gradient-to-r ${cat.color} text-white shadow-lg`
-                    : "bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-600"
-                }`}
+                className="flex items-center gap-2 px-5 py-3 rounded-full transition-all"
+                style={selectedCategory.id === cat.id
+                  ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'white', boxShadow: '0 4px 12px var(--glp-overlay-30)' }
+                  : { background: 'var(--glp-sage-10)', color: 'var(--glp-sage-deep)' }}
                 data-testid={`button-category-${cat.id}`}
               >
                 <cat.icon className="h-5 w-5" />
@@ -329,7 +323,7 @@ export default function AffirmationsPage() {
               </button>
             ))}
           </div>
-          <p className="text-center text-sm text-slate-500 dark:text-slate-400 mt-4">
+          <p className="text-center text-sm mt-4" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>
             {selectedCategory.description}
           </p>
         </div>
@@ -344,13 +338,13 @@ export default function AffirmationsPage() {
 
         <div className="rounded-2xl p-6 mb-12" style={{ background: 'var(--glp-teal-50)', border: '1px solid var(--glp-sage-30)' }}>
           <Brain className="h-5 w-5 mb-2" style={{ color: 'var(--glp-sage-deep)' }} />
-          <p className="text-sm text-teal-800 dark:text-teal-200 italic">
+          <p className="text-sm italic" style={{ color: 'var(--glp-sage-deep)' }}>
             <strong>Research Note:</strong> {selectedCategory.researchNote}
           </p>
         </div>
 
-        <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 mb-12 shadow-sm">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">
+        <div className="rounded-2xl p-8 mb-12 shadow-sm" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
+          <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>
             All {selectedCategory.name} Affirmations
           </h2>
           <div className="grid md:grid-cols-2 gap-4">
@@ -358,11 +352,10 @@ export default function AffirmationsPage() {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`text-left p-4 rounded-xl transition-all ${
-                  currentIndex === idx
-                    ? "bg-gradient-to-r " + selectedCategory.color + " text-white"
-                    : "bg-slate-50 dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
-                }`}
+                className="text-left p-4 rounded-xl transition-all"
+                style={currentIndex === idx
+                  ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'white' }
+                  : { background: 'var(--glp-sage-10)', color: 'var(--glp-ink)' }}
                 data-testid={`button-affirmation-${idx}`}
               >
                 "{aff}"
@@ -371,44 +364,44 @@ export default function AffirmationsPage() {
           </div>
         </div>
 
-        <div className="bg-indigo-50 dark:bg-indigo-950/30 rounded-2xl p-8 mb-12">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center">How to Practice Affirmations Effectively</h2>
+        <div className="rounded-2xl p-8 mb-12" style={{ background: 'var(--glp-teal-50)', border: '1px solid var(--glp-sage-30)' }}>
+          <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>How to Practice Affirmations Effectively</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {affirmationPractices.map((practice, idx) => (
-              <div key={idx} className="bg-white dark:bg-slate-800 rounded-xl p-5">
+              <div key={idx} className="rounded-xl p-5" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 rounded-lg bg-indigo-100 dark:bg-indigo-900/50">
-                    <practice.icon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                  <div className="p-2 rounded-lg" style={{ background: 'var(--glp-sage-20)' }}>
+                    <practice.icon className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
                   </div>
-                  <h3 className="font-semibold text-slate-900 dark:text-white">{practice.title}</h3>
+                  <h3 className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>{practice.title}</h3>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">{practice.description}</p>
+                <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{practice.description}</p>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/30 dark:to-pink-950/30 rounded-2xl p-8 mb-12">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center flex items-center justify-center gap-2">
-            <Brain className="h-6 w-6 text-purple-600" />
+        <div className="rounded-2xl p-8 mb-12" style={{ background: 'linear-gradient(135deg, var(--glp-rose-10), var(--glp-teal-50))' }}>
+          <h2 className="text-xl font-bold mb-6 text-center flex items-center justify-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+            <Brain className="h-6 w-6" style={{ color: 'var(--glp-sage-deep)' }} />
             The Science of Affirmations
           </h2>
           <div className="grid md:grid-cols-2 gap-6 text-sm">
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Neuroplasticity</h3>
-              <p className="text-slate-600 dark:text-slate-400">{scienceOfAffirmations.neuroplasticity}</p>
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Neuroplasticity</h3>
+              <p style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{scienceOfAffirmations.neuroplasticity}</p>
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">The Self-Talk Statistics</h3>
-              <p className="text-slate-600 dark:text-slate-400">{scienceOfAffirmations.selfTalkResearch}</p>
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>The Self-Talk Statistics</h3>
+              <p style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{scienceOfAffirmations.selfTalkResearch}</p>
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Embodiment Matters</h3>
-              <p className="text-slate-600 dark:text-slate-400">{scienceOfAffirmations.embodiment}</p>
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Embodiment Matters</h3>
+              <p style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{scienceOfAffirmations.embodiment}</p>
             </div>
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white mb-2">Timing & Personalization</h3>
-              <p className="text-slate-600 dark:text-slate-400">{scienceOfAffirmations.timing}</p>
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Timing & Personalization</h3>
+              <p style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{scienceOfAffirmations.timing}</p>
             </div>
           </div>
         </div>
@@ -422,8 +415,8 @@ export default function AffirmationsPage() {
           title="Deepen Your Practice"
         />
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
+        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.5 }}>
             Affirmations are a supportive practice, not a replacement for professional mental health care.
             If an affirmation triggers strong resistance, approach that part of yourself with curiosity—it has something to teach you.
           </p>

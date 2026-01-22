@@ -96,13 +96,13 @@ function BreathingTimer({ exercise, onComplete }) {
     exercise.pattern.hold2
   ];
 
-  const getPhaseColor = () => {
+  const getPhaseGradient = () => {
     switch (currentPhase) {
-      case 0: return "from-sky-400 to-blue-500";
-      case 1: return "from-purple-400 to-violet-500";
-      case 2: return "from-amber-400 to-orange-500";
-      case 3: return "from-rose-400 to-pink-500";
-      default: return "from-slate-400 to-gray-500";
+      case 0: return 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))';
+      case 1: return 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-ink))';
+      case 2: return 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))';
+      case 3: return 'linear-gradient(135deg, var(--glp-blush), var(--glp-rose))';
+      default: return 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))';
     }
   };
 
@@ -157,13 +157,13 @@ function BreathingTimer({ exercise, onComplete }) {
 
   return (
     <div className="text-center">
-      <div className={`relative w-64 h-64 mx-auto mb-8 rounded-full bg-gradient-to-br ${getPhaseColor()} flex items-center justify-center transition-all duration-1000`}>
-        <div className="absolute inset-4 rounded-full bg-white dark:bg-slate-900 flex flex-col items-center justify-center">
-          <span className="text-5xl font-bold text-slate-900 dark:text-white">{timeLeft}</span>
-          <span className="text-lg text-slate-600 dark:text-slate-400 mt-2">{instruction || "..."}</span>
+      <div className="relative w-64 h-64 mx-auto mb-8 rounded-full flex items-center justify-center transition-all duration-1000" style={{ background: getPhaseGradient() }}>
+        <div className="absolute inset-4 rounded-full flex flex-col items-center justify-center" style={{ background: 'var(--glp-paper)' }}>
+          <span className="text-5xl font-bold" style={{ color: 'var(--glp-sage-deep)' }}>{timeLeft}</span>
+          <span className="text-lg mt-2" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>{instruction || "..."}</span>
         </div>
         <svg className="absolute inset-0 w-full h-full -rotate-90">
-          <circle cx="128" cy="128" r="120" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth="8" />
+          <circle cx="128" cy="128" r="120" fill="none" stroke="var(--glp-white-30)" strokeWidth="8" />
           <circle
             cx="128" cy="128" r="120" fill="none" stroke="white" strokeWidth="8"
             strokeDasharray={2 * Math.PI * 120}
@@ -176,7 +176,8 @@ function BreathingTimer({ exercise, onComplete }) {
       <div className="flex items-center justify-center gap-4 mb-6">
         <button
           onClick={() => setIsRunning(!isRunning)}
-          className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-medium hover:from-emerald-600 hover:to-teal-600 transition-all"
+          className="flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium transition-all"
+          style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
           data-testid="button-toggle-breathing"
         >
           {isRunning ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
@@ -184,28 +185,30 @@ function BreathingTimer({ exercise, onComplete }) {
         </button>
         <button
           onClick={reset}
-          className="p-3 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+          className="p-3 rounded-full transition-colors"
+          style={{ background: 'var(--glp-sage-10)', color: 'var(--glp-sage-deep)' }}
           data-testid="button-reset-breathing"
         >
           <RotateCcw className="h-5 w-5" />
         </button>
       </div>
 
-      <div className="flex items-center justify-center gap-2 text-slate-600 dark:text-slate-400">
+      <div className="flex items-center justify-center gap-2" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>
         <Timer className="h-4 w-4" />
         <span>Cycle {cycles + 1} of {totalBreaths}</span>
       </div>
 
       <div className="mt-6">
-        <label className="text-sm text-slate-600 dark:text-slate-400 block mb-2">Number of breaths:</label>
+        <label className="text-sm block mb-2" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>Number of breaths:</label>
         <div className="flex justify-center gap-2">
           {[3, 4, 5, 6, 8, 10].map((num) => (
             <button
               key={num}
               onClick={() => { setTotalBreaths(num); reset(); }}
-              className={`px-4 py-2 rounded-full text-sm transition-colors ${totalBreaths === num 
-                ? "bg-emerald-500 text-white" 
-                : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700"}`}
+              className="px-4 py-2 rounded-full text-sm transition-colors"
+              style={totalBreaths === num 
+                ? { background: 'var(--glp-sage)', color: 'white' } 
+                : { background: 'var(--glp-sage-10)', color: 'var(--glp-sage-deep)' }}
               data-testid={`button-breaths-${num}`}
             >
               {num}
@@ -266,15 +269,16 @@ export default function BreathingExercisesPage() {
               <button
                 key={ex.id}
                 onClick={() => { setSelectedExercise(ex); setCompleted(false); }}
-                className={`w-full text-left p-4 rounded-xl transition-all ${selectedExercise.id === ex.id
-                  ? "bg-gradient-to-r from-sky-500 to-blue-500 text-white shadow-lg"
-                  : "bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700"}`}
+                className="w-full text-left p-4 rounded-xl transition-all"
+                style={selectedExercise.id === ex.id
+                  ? { background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'white', boxShadow: '0 4px 12px var(--glp-overlay-30)' }
+                  : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}
                 data-testid={`button-exercise-${ex.id}`}
               >
-                <h3 className={`font-medium ${selectedExercise.id === ex.id ? "text-white" : "text-slate-900 dark:text-white"}`}>
+                <h3 className="font-medium" style={{ color: selectedExercise.id === ex.id ? 'white' : 'var(--glp-sage-deep)' }}>
                   {ex.name}
                 </h3>
-                <p className={`text-sm mt-1 ${selectedExercise.id === ex.id ? "text-white/80" : "text-slate-600 dark:text-slate-400"}`}>
+                <p className="text-sm mt-1" style={{ color: selectedExercise.id === ex.id ? 'var(--glp-white-80)' : 'var(--glp-ink)', opacity: selectedExercise.id === ex.id ? 1 : 0.6 }}>
                   {ex.pattern.inhale}-{ex.pattern.hold1 || "0"}-{ex.pattern.exhale}-{ex.pattern.hold2 || "0"}
                 </p>
               </button>
@@ -282,19 +286,20 @@ export default function BreathingExercisesPage() {
           </div>
 
           <div className="lg:col-span-2">
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{selectedExercise.name}</h2>
-              <p className="text-slate-600 dark:text-slate-400 mb-8">{selectedExercise.description}</p>
+            <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
+              <h2 className="text-2xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>{selectedExercise.name}</h2>
+              <p className="mb-8" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{selectedExercise.description}</p>
 
               {completed ? (
                 <div className="text-center py-12">
-                  <Heart className="h-16 w-16 text-rose-500 mx-auto mb-4" />
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Beautiful Work</h3>
-                  <p className="text-slate-600 dark:text-slate-400 mb-4">Take a moment to notice how you feel now compared to before.</p>
-                  <p className="text-sm text-teal-600 dark:text-teal-400 mb-6">Each practice builds your capacity for calm. Your nervous system is learning.</p>
+                  <Heart className="h-16 w-16 mx-auto mb-4" style={{ color: 'var(--glp-blush)' }} />
+                  <h3 className="text-2xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>Beautiful Work</h3>
+                  <p className="mb-4" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>Take a moment to notice how you feel now compared to before.</p>
+                  <p className="text-sm mb-6" style={{ color: 'var(--glp-sage-deep)' }}>Each practice builds your capacity for calm. Your nervous system is learning.</p>
                   <button
                     onClick={() => setCompleted(false)}
-                    className="px-6 py-3 rounded-full bg-emerald-500 text-white font-medium hover:bg-emerald-600 transition-colors"
+                    className="px-6 py-3 rounded-full text-white font-medium transition-colors"
+                    style={{ background: 'var(--glp-sage)' }}
                     data-testid="button-practice-again"
                   >
                     Practice Again
@@ -305,50 +310,50 @@ export default function BreathingExercisesPage() {
               )}
 
               <div className="mt-12 grid md:grid-cols-2 gap-6">
-                <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6">
-                  <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                    <Zap className="h-5 w-5 text-amber-500" />
+                <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
+                  <h3 className="font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                    <Zap className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
                     Benefits
                   </h3>
                   <ul className="space-y-2">
                     {selectedExercise.benefits.map((benefit, idx) => (
-                      <li key={idx} className="text-slate-600 dark:text-slate-400 text-sm flex items-start gap-2">
-                        <span className="text-emerald-500 mt-1">•</span>
+                      <li key={idx} className="text-sm flex items-start gap-2" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
+                        <span style={{ color: 'var(--glp-sage)' }} className="mt-1">•</span>
                         {benefit}
                       </li>
                     ))}
                   </ul>
                 </div>
-                <div className="bg-slate-50 dark:bg-slate-900 rounded-xl p-6">
-                  <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
-                    <Heart className="h-5 w-5 text-rose-500" />
+                <div className="rounded-xl p-6" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
+                  <h3 className="font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                    <Heart className="h-5 w-5" style={{ color: 'var(--glp-blush)' }} />
                     Best For
                   </h3>
-                  <p className="text-slate-600 dark:text-slate-400 text-sm">{selectedExercise.bestFor}</p>
+                  <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{selectedExercise.bestFor}</p>
                 </div>
               </div>
 
-              <div className="mt-6 bg-indigo-50 dark:bg-indigo-950/30 rounded-xl p-6">
-                <h3 className="font-semibold text-slate-900 dark:text-white mb-2 flex items-center gap-2">
-                  <Brain className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+              <div className="mt-6 rounded-xl p-6" style={{ background: 'var(--glp-teal-50)', border: '1px solid var(--glp-sage-30)' }}>
+                <h3 className="font-semibold mb-2 flex items-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                  <Brain className="h-5 w-5" style={{ color: 'var(--glp-sage-deep)' }} />
                   Polyvagal Note
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm">{selectedExercise.polyvagalNote}</p>
+                <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{selectedExercise.polyvagalNote}</p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-16 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-2xl p-8">
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-8 text-center flex items-center justify-center gap-2">
-            <BookOpen className="h-6 w-6 text-indigo-600" />
+        <div className="mt-16 rounded-2xl p-8" style={{ background: 'linear-gradient(135deg, var(--glp-teal-50), var(--glp-rose-10))' }}>
+          <h2 className="text-xl font-bold mb-8 text-center flex items-center justify-center gap-2" style={{ color: 'var(--glp-sage-deep)' }}>
+            <BookOpen className="h-6 w-6" style={{ color: 'var(--glp-sage-deep)' }} />
             The Science Behind Breathwork
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             {Object.values(scienceOfBreathing).map((item, idx) => (
-              <div key={idx} className="bg-white dark:bg-slate-800 rounded-xl p-6">
-                <h3 className="font-semibold text-slate-900 dark:text-white mb-3">{item.title}</h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm">{item.content}</p>
+              <div key={idx} className="rounded-xl p-6" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
+                <h3 className="font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>{item.title}</h3>
+                <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>{item.content}</p>
               </div>
             ))}
           </div>
