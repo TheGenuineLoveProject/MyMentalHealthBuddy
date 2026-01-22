@@ -607,14 +607,15 @@ export default function CanvaLanding() {
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
         </div>
-        <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center justify-center text-center">
-          <div className="inline-flex items-center justify-center gap-6 px-12 py-7 rounded-full bg-white/10 backdrop-blur-sm mb-14">
+        <div className="max-w-6xl mx-auto relative z-10 flex flex-col items-center justify-center text-center py-16">
+          {/* Start your transformation today */}
+          <div className="inline-flex items-center justify-center gap-6 px-12 py-7 rounded-full bg-white/10 backdrop-blur-sm mb-10">
             <Sparkles className="w-14 h-14 text-[var(--glp-gold)]" style={{ filter: 'drop-shadow(0 3px 5px rgba(0,0,0,0.25))' }} />
             <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 3px 5px rgba(0,0,0,0.18)' }}>Start your transformation today</span>
           </div>
           
           {/* Lotus Accent */}
-          <div className="w-full flex items-center justify-center mb-14" style={{ position: 'relative' }}>
+          <div className="w-full flex items-center justify-center my-10" style={{ position: 'relative' }}>
             <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2" style={{ height: '5px', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)' }}></div>
             <div className="relative rounded-full overflow-hidden" style={{ width: '200px', height: '200px', background: 'var(--glp-white)', boxShadow: '0 12px 48px rgba(0,0,0,0.2)' }}>
               <img 
@@ -625,15 +626,20 @@ export default function CanvaLanding() {
             </div>
           </div>
           
-          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold mb-14 text-white leading-tight text-center">
+          {/* Begin Your Healing Journey Today */}
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold my-10 text-white leading-tight text-center">
             Begin Your Healing
             <br />
             <span className="text-[var(--glp-gold)]">Journey Today</span>
           </h2>
-          <p className="text-4xl md:text-5xl lg:text-6xl mb-16 text-white/90 max-w-5xl mx-auto font-medium text-center">
+          
+          {/* Paragraph */}
+          <p className="text-4xl md:text-5xl lg:text-6xl my-10 text-white/90 max-w-5xl mx-auto font-medium text-center">
             Join thousands who have found peace, growth, and genuine love within themselves.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
+          
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-10 mt-10">
             <Link href="/register">
               <button 
                 className="group px-20 py-8 rounded-full font-bold text-4xl md:text-5xl transition-all hover:scale-105 hover:shadow-2xl"
