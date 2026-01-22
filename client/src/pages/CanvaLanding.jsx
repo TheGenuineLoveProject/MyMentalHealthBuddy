@@ -147,17 +147,17 @@ export default function CanvaLanding() {
       </nav>
 
       {/* Header / Navigation */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl border-b shadow-sm" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-20)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-18 lg:h-20">
+      <header className="sticky top-0 z-50 backdrop-blur-xl border-b" style={{ background: 'var(--glp-paper-98)', borderColor: 'var(--glp-sage-15)', boxShadow: '0 1px 3px var(--glp-sage-deep-12)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+          <div className="flex items-center justify-between h-16 sm:h-[70px] lg:h-20">
             {/* Logo - Compact on mobile, expanded on desktop */}
             <Link href="/">
-              <div className="flex items-center gap-3 cursor-pointer group shrink-0" data-testid="link-logo">
-                <div className="relative w-10 h-10 sm:w-11 sm:h-11 lg:w-12 lg:h-12 rounded-xl lg:rounded-2xl overflow-hidden flex items-center justify-center transition-all group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
+              <div className="flex items-center gap-2.5 sm:gap-3.5 cursor-pointer group shrink-0" data-testid="link-logo">
+                <div className="relative w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl lg:rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 14px var(--glp-sage-30)' }}>
                   <img 
                     src="/brand/logo-mark.png" 
                     alt="" 
-                    className="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 object-contain"
+                    className="w-7 h-7 sm:w-8 sm:h-8 lg:w-9 lg:h-9 object-contain"
                     onError={(e) => {
                       e.target.style.display = 'none';
                       e.target.nextElementSibling.style.display = 'flex';
@@ -166,10 +166,10 @@ export default function CanvaLanding() {
                   <Heart className="w-5 h-5 text-white hidden" fill="currentColor" style={{ display: 'none' }} />
                 </div>
                 <div className="hidden sm:flex flex-col leading-tight">
-                  <span className="text-base lg:text-lg font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
+                  <span className="text-base lg:text-lg xl:text-xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>
                     The Genuine Love Project
                   </span>
-                  <span className="text-[10px] lg:text-xs font-medium tracking-wide" style={{ color: 'var(--glp-sage)' }}>
+                  <span className="text-[10px] lg:text-xs font-medium tracking-widest uppercase" style={{ color: 'var(--glp-sage)' }}>
                     Live in Genuine Love
                   </span>
                 </div>
@@ -177,16 +177,16 @@ export default function CanvaLanding() {
             </Link>
 
             {/* Desktop Navigation - Centered */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2 absolute left-1/2 transform -translate-x-1/2">
-              <a href="#home" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Home</a>
-              <a href="#about" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>About</a>
-              <a href="#features" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Features</a>
-              <a href="#faq" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>FAQ</a>
-              <a href="/pricing" className="px-4 py-2 text-sm font-medium rounded-lg transition-all hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Pricing</a>
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 absolute left-1/2 transform -translate-x-1/2">
+              <a href="#home" className="px-4 xl:px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Home</a>
+              <a href="#about" className="px-4 xl:px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>About</a>
+              <a href="#features" className="px-4 xl:px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Features</a>
+              <a href="#faq" className="px-4 xl:px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>FAQ</a>
+              <a href="/pricing" className="px-4 xl:px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Pricing</a>
             </nav>
 
             {/* CTA Buttons - Right aligned */}
-            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            <div className="flex items-center gap-2.5 sm:gap-3.5 shrink-0">
               <Link href="/login">
                 <button 
                   className="hidden md:inline-flex font-medium text-sm px-4 lg:px-5 py-2 lg:py-2.5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white"

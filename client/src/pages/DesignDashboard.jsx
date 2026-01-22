@@ -14,7 +14,7 @@ export default function DesignDashboard() {
       />
       
       <div className="min-h-screen hero-gradient">
-        <header className="sticky top-0 z-10 bg-[var(--paper)]/85 backdrop-blur-md border-b border-[var(--sage-200)]">
+        <header className="sticky top-0 z-10 bg-[var(--glp-paper)]/85 backdrop-blur-md border-b border-[var(--sage-200)]">
           <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
             <div>
               <Link href="/dashboard" className="text-caption hover:text-[var(--teal-600)] transition">
