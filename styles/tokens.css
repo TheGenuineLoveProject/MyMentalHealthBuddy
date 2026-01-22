@@ -1,0 +1,59 @@
+:root{
+  /* Brand */
+  --brand-50:#f2fbff;
+  --brand-100:#dff4ff;
+  --brand-200:#bfeaff;
+  --brand-300:#8fdcff;
+  --brand-400:#56c6ff;
+  --brand-500:#22a7ff;
+  --brand-600:#0a84ff;
+  --brand-700:#0b68d6;
+  --brand-800:#0d53ad;
+  --brand-900:#0f468f;
+
+  /* Neutral */
+  --bg:#0b0f14;
+  --surface:#0f1620;
+  --surface-2:#131c28;
+  --border:#223042;
+  --text:#eaf2ff;
+  --muted:#a8b3c6;
+
+  /* Semantic */
+  --success:#22c55e;
+  --warning:#fbbf24;
+  --danger:#ef4444;
+
+  /* Typography */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+
+  /* Radius */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+
+  /* Spacing */
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:20px; --s-6:24px;
+
+  /* Shadows (soft, healing vibe) */
+  --shadow-1: 0 8px 30px rgba(0,0,0,.35);
+  --shadow-2: 0 12px 48px rgba(0,0,0,.45);
+
+  /* Motion */
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --ease: cubic-bezier(.2,.8,.2,1);
+
+  /* Focus */
+  --focus: 0 0 0 3px rgba(34,167,255,.35);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: 1ms !important; transition-duration: 1ms !important; scroll-behavior: auto !important; }
+}
