@@ -1,0 +1,148 @@
+{
+  "site": {
+    "name": "The Genuine Love Project",
+    "tagline": "Live in Genuine Love",
+    "description": "AI-powered mental wellness platform for self-love, healing, and emotional growth",
+    "url": "https://thegenuineloveproject.com",
+    "logo": "/brand/logo-mark.png",
+    "language": "en-US",
+    "themeColor": "#2f5d5d"
+  },
+  "brand": {
+    "colors": {
+      "sage": "#8fbf9f",
+      "rose": "#f4c7c3",
+      "deepTeal": "#2f5d5d",
+      "cream": "#faf9f7",
+      "charcoal": "#3a3a3a",
+      "gold": "#eac33b"
+    },
+    "fonts": {
+      "sans": "Poppins, Nunito, system-ui, sans-serif",
+      "serif": "Playfair Display, Georgia, serif"
+    }
+  },
+  "pages": {
+    "landing": {
+      "path": "/",
+      "file": "index.html",
+      "title": "The Genuine Love Project - Heal Your Mind, Body & Soul",
+      "description": "Discover a transformative healing platform with AI-powered guidance, journaling, mood tracking, and evidence-based wellness tools.",
+      "keywords": ["mental wellness", "self-love", "healing", "AI therapy", "mindfulness", "emotional growth"],
+      "og": {
+        "type": "website",
+        "image": "/brand/og-landing.png"
+      },
+      "schema": ["WebSite", "Organization", "SoftwareApplication"]
+    },
+    "onboarding": {
+      "path": "/onboarding",
+      "file": "onboarding.html",
+      "title": "Get Started - The Genuine Love Project",
+      "description": "Begin your personalized healing journey with our guided onboarding process.",
+      "keywords": ["onboarding", "get started", "wellness journey", "personalization"],
+      "og": {
+        "type": "website",
+        "image": "/brand/og-onboarding.png"
+      }
+    },
+    "homepage": {
+      "path": "/home",
+      "file": "home.html",
+      "title": "Your Wellness Home - The Genuine Love Project",
+      "description": "Your personalized wellness dashboard with daily practices, insights, and progress tracking.",
+      "keywords": ["wellness dashboard", "daily practice", "mental health", "self-care"],
+      "og": {
+        "type": "website",
+        "image": "/brand/og-home.png"
+      }
+    },
+    "crm": {
+      "path": "/crm",
+      "file": "crm.html",
+      "title": "Dashboard - The Genuine Love Project",
+      "description": "Track your wellness journey with mood insights, streaks, achievements, and personalized recommendations.",
+      "keywords": ["dashboard", "mood tracking", "progress", "wellness analytics"],
+      "og": {
+        "type": "website",
+        "image": "/brand/og-dashboard.png"
+      }
+    },
+    "content": {
+      "path": "/content",
+      "file": "content.html",
+      "title": "Content Library - The Genuine Love Project",
+      "description": "Explore our comprehensive library of healing resources, articles, and guided practices.",
+      "keywords": ["content library", "healing resources", "articles", "wellness guides"],
+      "og": {
+        "type": "website",
+        "image": "/brand/og-content.png"
+      }
+    },
+    "qa": {
+      "path": "/qa",
+      "file": "qa.html",
+      "title": "Questions & Answers - The Genuine Love Project",
+      "description": "Find answers to common questions about healing, practices, and mental wellness.",
+      "keywords": ["FAQ", "questions", "answers", "mental health help"],
+      "og": {
+        "type": "website",
+        "image": "/brand/og-qa.png"
+      },
+      "schema": ["FAQPage"]
+    },
+    "login": {
+      "path": "/login",
+      "file": "login.html",
+      "title": "Sign In - The Genuine Love Project",
+      "description": "Sign in to access your personalized wellness dashboard and continue your healing journey.",
+      "keywords": ["login", "sign in", "account"],
+      "og": {
+        "type": "website",
+        "image": "/brand/og-login.png"
+      }
+    }
+  },
+  "navigation": {
+    "flow": ["landing", "onboarding", "homepage", "crm", "content", "qa", "login"],
+    "header": [
+      { "label": "Home", "path": "/" },
+      { "label": "Dashboard", "path": "/crm" },
+      { "label": "Content", "path": "/content" },
+      { "label": "Q&A", "path": "/qa" }
+    ],
+    "footer": [
+      { "label": "Privacy", "path": "/privacy" },
+      { "label": "Terms", "path": "/terms" },
+      { "label": "Ethics", "path": "/ethics" }
+    ]
+  },
+  "social": {
+    "twitter": "@GenuineLoveProj",
+    "instagram": "@thegenuineloveproject",
+    "facebook": "TheGenuineLoveProject"
+  },
+  "structuredData": {
+    "organization": {
+      "@type": "Organization",
+      "name": "The Genuine Love Project",
+      "url": "https://thegenuineloveproject.com",
+      "logo": "https://thegenuineloveproject.com/brand/logo-mark.png",
+      "sameAs": [
+        "https://twitter.com/GenuineLoveProj",
+        "https://instagram.com/thegenuineloveproject"
+      ]
+    },
+    "application": {
+      "@type": "SoftwareApplication",
+      "name": "The Genuine Love Project",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+  }
+}

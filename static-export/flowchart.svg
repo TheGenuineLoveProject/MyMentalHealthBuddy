@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" fill="none">
+  <style>
+    .page-box { fill: #faf9f7; stroke: #2f5d5d; stroke-width: 2; rx: 12; }
+    .page-box-active { fill: #8fbf9f; stroke: #2f5d5d; stroke-width: 2; rx: 12; }
+    .page-text { font-family: Poppins, sans-serif; font-size: 14px; fill: #2f5d5d; font-weight: 600; }
+    .page-subtitle { font-family: Poppins, sans-serif; font-size: 11px; fill: #3a3a3a; opacity: 0.7; }
+    .arrow { stroke: #8fbf9f; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+    .component-box { fill: #f4c7c3; stroke: #2f5d5d; stroke-width: 1; rx: 6; opacity: 0.8; }
+    .component-text { font-family: Poppins, sans-serif; font-size: 10px; fill: #2f5d5d; }
+    .title { font-family: Playfair Display, Georgia, serif; font-size: 24px; fill: #2f5d5d; font-weight: 700; }
+    .subtitle { font-family: Poppins, sans-serif; font-size: 12px; fill: #3a3a3a; }
+    .legend-box { fill: white; stroke: #eac33b; stroke-width: 2; rx: 8; }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8fbf9f"/>
+    </marker>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2f5d5d"/>
+      <stop offset="100%" style="stop-color:#8fbf9f"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="1200" height="60" fill="url(#headerGrad)"/>
+  <text x="600" y="38" text-anchor="middle" class="title" fill="white">The Genuine Love Project - UI/UX Flow</text>
+  
+  <!-- Main Flow: Page Boxes -->
+  
+  <!-- Landing -->
+  <rect x="50" y="100" width="140" height="80" class="page-box-active"/>
+  <text x="120" y="135" text-anchor="middle" class="page-text">Landing</text>
+  <text x="120" y="155" text-anchor="middle" class="page-subtitle">index.html</text>
+  
+  <!-- Onboarding -->
+  <rect x="230" y="100" width="140" height="80" class="page-box"/>
+  <text x="300" y="135" text-anchor="middle" class="page-text">Onboarding</text>
+  <text x="300" y="155" text-anchor="middle" class="page-subtitle">onboarding.html</text>
+  
+  <!-- Homepage -->
+  <rect x="410" y="100" width="140" height="80" class="page-box"/>
+  <text x="480" y="135" text-anchor="middle" class="page-text">Homepage</text>
+  <text x="480" y="155" text-anchor="middle" class="page-subtitle">home.html</text>
+  
+  <!-- CRM -->
+  <rect x="590" y="100" width="140" height="80" class="page-box"/>
+  <text x="660" y="135" text-anchor="middle" class="page-text">CRM Dashboard</text>
+  <text x="660" y="155" text-anchor="middle" class="page-subtitle">crm.html</text>
+  
+  <!-- Content -->
+  <rect x="770" y="100" width="140" height="80" class="page-box"/>
+  <text x="840" y="135" text-anchor="middle" class="page-text">Content</text>
+  <text x="840" y="155" text-anchor="middle" class="page-subtitle">content.html</text>
+  
+  <!-- Q&A -->
+  <rect x="950" y="100" width="140" height="80" class="page-box"/>
+  <text x="1020" y="135" text-anchor="middle" class="page-text">Q&A</text>
+  <text x="1020" y="155" text-anchor="middle" class="page-subtitle">qa.html</text>
+  
+  <!-- Login (separate) -->
+  <rect x="590" y="220" width="140" height="80" class="page-box"/>
+  <text x="660" y="255" text-anchor="middle" class="page-text">Login</text>
+  <text x="660" y="275" text-anchor="middle" class="page-subtitle">login.html</text>
+  
+  <!-- Flow Arrows -->
+  <path d="M190 140 L220 140" class="arrow"/>
+  <path d="M370 140 L400 140" class="arrow"/>
+  <path d="M550 140 L580 140" class="arrow"/>
+  <path d="M730 140 L760 140" class="arrow"/>
+  <path d="M910 140 L940 140" class="arrow"/>
+  
+  <!-- Login Arrow from Landing -->
+  <path d="M120 180 L120 240 L580 240" class="arrow"/>
+  
+  <!-- Component Blocks -->
+  
+  <!-- Shared Components -->
+  <text x="100" y="350" class="page-text">Shared Components:</text>
+  
+  <rect x="50" y="370" width="100" height="40" class="component-box"/>
+  <text x="100" y="395" text-anchor="middle" class="component-text">NavBar</text>
+  
+  <rect x="160" y="370" width="100" height="40" class="component-box"/>
+  <text x="210" y="395" text-anchor="middle" class="component-text">Footer</text>
+  
+  <rect x="270" y="370" width="100" height="40" class="component-box"/>
+  <text x="320" y="395" text-anchor="middle" class="component-text">CTA Button</text>
+  
+  <rect x="380" y="370" width="100" height="40" class="component-box"/>
+  <text x="430" y="395" text-anchor="middle" class="component-text">Modal</text>
+  
+  <rect x="490" y="370" width="100" height="40" class="component-box"/>
+  <text x="540" y="395" text-anchor="middle" class="component-text">Form Fields</text>
+  
+  <rect x="600" y="370" width="100" height="40" class="component-box"/>
+  <text x="650" y="395" text-anchor="middle" class="component-text">Card</text>
+  
+  <rect x="710" y="370" width="100" height="40" class="component-box"/>
+  <text x="760" y="395" text-anchor="middle" class="component-text">Hero Section</text>
+  
+  <!-- Page-Specific Components -->
+  <text x="100" y="450" class="page-text">Page Components:</text>
+  
+  <rect x="50" y="470" width="120" height="40" class="component-box"/>
+  <text x="110" y="495" text-anchor="middle" class="component-text">Stats Grid</text>
+  
+  <rect x="180" y="470" width="120" height="40" class="component-box"/>
+  <text x="240" y="495" text-anchor="middle" class="component-text">Event Calendar</text>
+  
+  <rect x="310" y="470" width="120" height="40" class="component-box"/>
+  <text x="370" y="495" text-anchor="middle" class="component-text">Content Cards</text>
+  
+  <rect x="440" y="470" width="120" height="40" class="component-box"/>
+  <text x="500" y="495" text-anchor="middle" class="component-text">FAQ Accordion</text>
+  
+  <rect x="570" y="470" width="120" height="40" class="component-box"/>
+  <text x="630" y="495" text-anchor="middle" class="component-text">Auth Form</text>
+  
+  <rect x="700" y="470" width="120" height="40" class="component-box"/>
+  <text x="760" y="495" text-anchor="middle" class="component-text">Testimonials</text>
+  
+  <rect x="830" y="470" width="120" height="40" class="component-box"/>
+  <text x="890" y="495" text-anchor="middle" class="component-text">Feature Grid</text>
+  
+  <!-- Legend -->
+  <rect x="950" y="350" width="200" height="170" class="legend-box"/>
+  <text x="1050" y="375" text-anchor="middle" class="page-text">Legend</text>
+  
+  <rect x="970" y="395" width="20" height="20" fill="#8fbf9f" rx="4"/>
+  <text x="1000" y="410" class="component-text">Active/Entry Page</text>
+  
+  <rect x="970" y="425" width="20" height="20" fill="#faf9f7" stroke="#2f5d5d" rx="4"/>
+  <text x="1000" y="440" class="component-text">Page</text>
+  
+  <rect x="970" y="455" width="20" height="20" fill="#f4c7c3" rx="4"/>
+  <text x="1000" y="470" class="component-text">Component</text>
+  
+  <line x1="970" y1="495" x2="990" y2="495" stroke="#8fbf9f" stroke-width="3"/>
+  <text x="1000" y="500" class="component-text">Navigation Flow</text>
+  
+  <!-- Brand Colors -->
+  <text x="100" y="560" class="page-text">Brand Palette:</text>
+  <rect x="220" y="545" width="30" height="30" fill="#8fbf9f" rx="4"/>
+  <text x="260" y="565" class="component-text">Sage</text>
+  <rect x="300" y="545" width="30" height="30" fill="#f4c7c3" rx="4"/>
+  <text x="340" y="565" class="component-text">Rose</text>
+  <rect x="380" y="545" width="30" height="30" fill="#2f5d5d" rx="4"/>
+  <text x="420" y="565" class="component-text">Teal</text>
+  <rect x="460" y="545" width="30" height="30" fill="#faf9f7" stroke="#ccc" rx="4"/>
+  <text x="500" y="565" class="component-text">Cream</text>
+  <rect x="540" y="545" width="30" height="30" fill="#3a3a3a" rx="4"/>
+  <text x="580" y="565" class="component-text">Charcoal</text>
+  <rect x="630" y="545" width="30" height="30" fill="#eac33b" rx="4"/>
+  <text x="670" y="565" class="component-text">Gold</text>
+</svg>
