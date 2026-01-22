@@ -37,7 +37,7 @@ export default function TglpNavbar() {
       role="banner"
       data-testid="navbar-main"
     >
-      <div className="mx-auto flex h-20 md:h-24 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-10 gap-6">
+      <div className="mx-auto flex h-24 md:h-28 max-w-7xl items-center justify-between px-6 sm:px-10 lg:px-12 gap-8">
         
         {/* Left: Mode Toggle */}
         <div className="hidden md:flex items-center shrink-0">
@@ -52,7 +52,7 @@ export default function TglpNavbar() {
           data-testid="link-brand-home"
         >
           <div 
-            className="relative w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
+            className="relative w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center overflow-hidden transition-transform group-hover:scale-105"
             style={{ 
               background: "var(--glp-logo-gradient)",
               boxShadow: "var(--glp-logo-shadow)",
@@ -61,7 +61,7 @@ export default function TglpNavbar() {
             <img 
               src="/brand/logo-mark.png" 
               alt="" 
-              className="w-10 h-10 md:w-11 md:h-11 object-contain"
+              className="w-11 h-11 md:w-14 md:h-14 object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';
                 e.currentTarget.nextElementSibling.style.display = 'block';
@@ -75,19 +75,19 @@ export default function TglpNavbar() {
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
             <span 
-              className="text-lg md:text-xl font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]"
+              className="text-xl md:text-2xl font-semibold tracking-tight font-sacred text-[var(--glp-sage-deep)]"
               data-testid="text-brand-name"
             >
               The Genuine Love Project
             </span>
-            <span className="text-xs md:text-sm font-medium tracking-wide text-[var(--glp-sage)]">
+            <span className="text-sm md:text-base font-medium tracking-wide text-[var(--glp-sage)]">
               Live in Genuine Love
             </span>
           </div>
         </Link>
         
         {/* Right: Navigation */}
-        <nav className="flex items-center gap-3 md:gap-5 shrink-0" aria-label="Main navigation">
+        <nav className="flex items-center gap-4 md:gap-6 shrink-0" aria-label="Main navigation">
           {/* Search */}
           <div className="hidden md:block">
             <GlobalSearch />

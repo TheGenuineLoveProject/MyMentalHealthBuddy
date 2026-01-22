@@ -216,7 +216,7 @@ function AffirmationCard({ affirmation, onNext, category }) {
   };
 
   return (
-    <div className="relative rounded-3xl p-8 md:p-12 text-white text-center shadow-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+    <div className="relative rounded-3xl p-8 md:p-12 text-center shadow-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
       <category.icon className="h-12 w-12 mx-auto mb-6 opacity-80" />
       
       <p className="text-2xl md:text-3xl font-medium leading-relaxed mb-8">
@@ -288,7 +288,7 @@ export default function AffirmationsPage() {
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full text-white mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-sage))' }}>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-sage))', color: 'var(--glp-paper)' }}>
             <Sparkles className="h-8 w-8" />
           </div>
           <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Transformational Affirmations</h1>

@@ -99,19 +99,19 @@ export default function CalmingScenesPage() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-paper), var(--glp-sage-10))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
-        <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">
+        <Link href="/" className="inline-flex items-center gap-2 transition-colors mb-8" style={{ color: 'var(--glp-sage)' }} data-testid="link-back-home">
           <ArrowLeft className="h-4 w-4" />
           Back to Home
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-sky-400 to-indigo-500 text-white mb-6">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
             <Sparkles className="h-8 w-8" />
           </div>
-          <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-4">Calming Scenes</h1>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Calming Scenes</h1>
+          <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-sage)' }}>
             Immerse yourself in peaceful environments designed to reduce stress, ease anxiety, and restore inner calm. 
             Each scene combines visualization, breathing guidance, and positive affirmations.
           </p>
@@ -126,18 +126,18 @@ export default function CalmingScenesPage() {
                   className="p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
                   data-testid="button-toggle-play"
                 >
-                  {isPlaying ? <Pause className="h-5 w-5 text-white" /> : <Play className="h-5 w-5 text-white" />}
+                  {isPlaying ? <Pause className="h-5 w-5" style={{ color: 'var(--glp-paper)' }} /> : <Play className="h-5 w-5" style={{ color: 'var(--glp-paper)' }} />}
                 </button>
                 <button
                   onClick={() => setIsMuted(!isMuted)}
                   className="p-3 rounded-full bg-white/20 hover:bg-white/30 transition-colors"
                   data-testid="button-toggle-mute"
                 >
-                  {isMuted ? <VolumeX className="h-5 w-5 text-white" /> : <Volume2 className="h-5 w-5 text-white" />}
+                  {isMuted ? <VolumeX className="h-5 w-5" style={{ color: 'var(--glp-paper)' }} /> : <Volume2 className="h-5 w-5" style={{ color: 'var(--glp-paper)' }} />}
                 </button>
               </div>
 
-              <div className="text-center text-white">
+              <div className="text-center" style={{ color: 'var(--glp-paper)' }}>
                 <activeScene.icon className="h-16 w-16 mx-auto mb-6 opacity-90" />
                 <h2 className="text-3xl font-bold mb-4">{activeScene.name}</h2>
                 <p className="text-xl opacity-90 mb-8 max-w-xl mx-auto">{activeScene.description}</p>
@@ -163,7 +163,8 @@ export default function CalmingScenesPage() {
 
               <button
                 onClick={() => setActiveScene(null)}
-                className="absolute bottom-4 left-4 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-full text-white text-sm transition-colors"
+                className="absolute bottom-4 left-4 px-4 py-2 bg-white/20 hover:bg-white/30 rounded-full text-sm transition-colors"
+                style={{ color: 'var(--glp-paper)' }}
                 data-testid="button-close-scene"
               >
                 Close Scene
@@ -177,26 +178,27 @@ export default function CalmingScenesPage() {
             <button
               key={scene.id}
               onClick={() => setActiveScene(scene)}
-              className={`text-left rounded-2xl overflow-hidden bg-gradient-to-br ${scene.gradient} ${scene.darkGradient} p-6 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-amber-400`}
+              className={`text-left rounded-2xl overflow-hidden bg-gradient-to-br ${scene.gradient} ${scene.darkGradient} p-6 transition-transform hover:scale-105 focus:outline-none focus:ring-2`}
+              style={{ '--tw-ring-color': 'var(--glp-gold)' }}
               data-testid={`button-scene-${scene.id}`}
             >
-              <scene.icon className="h-10 w-10 text-white mb-4 opacity-90" />
-              <h3 className="text-xl font-bold text-white mb-2">{scene.name}</h3>
-              <p className="text-white/80 text-sm">{scene.description}</p>
+              <scene.icon className="h-10 w-10 mb-4 opacity-90" style={{ color: 'var(--glp-paper)' }} />
+              <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--glp-paper)' }}>{scene.name}</h3>
+              <p className="text-sm" style={{ color: 'rgba(255,255,255,0.8)' }}>{scene.description}</p>
             </button>
           ))}
         </div>
 
-        <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/30 dark:to-orange-950/30 rounded-3xl p-8 mb-12">
-          <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 text-center">Quick Calm Techniques</h2>
+        <div className="rounded-3xl p-8 mb-12" style={{ background: 'var(--glp-gold-30)' }}>
+          <h2 className="text-2xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>Quick Calm Techniques</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {quickCalm.map((technique, idx) => (
-              <div key={idx} className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm">
-                <h3 className="font-semibold text-slate-900 dark:text-white mb-4">{technique.title}</h3>
+              <div key={idx} className="rounded-xl p-6 shadow-sm" style={{ background: 'var(--glp-paper)' }}>
+                <h3 className="font-semibold mb-4" style={{ color: 'var(--glp-ink)' }}>{technique.title}</h3>
                 <ol className="space-y-2">
                   {technique.steps.map((step, stepIdx) => (
-                    <li key={stepIdx} className="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-amber-100 dark:bg-amber-900/50 text-amber-700 dark:text-amber-300 flex items-center justify-center text-xs font-medium">
+                    <li key={stepIdx} className="flex items-start gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium" style={{ background: 'var(--glp-gold-30)', color: 'var(--glp-gold-dark)' }}>
                         {stepIdx + 1}
                       </span>
                       {step}
@@ -217,8 +219,8 @@ export default function CalmingScenesPage() {
           title="Continue Your Journey"
         />
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800 mt-8">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
+        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
             These calming experiences are designed to complement, not replace, professional mental health support.
             If you're in crisis, please reach out to a crisis helpline or mental health professional.
           </p>

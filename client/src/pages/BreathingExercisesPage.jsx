@@ -176,8 +176,8 @@ function BreathingTimer({ exercise, onComplete }) {
       <div className="flex items-center justify-center gap-4 mb-6">
         <button
           onClick={() => setIsRunning(!isRunning)}
-          className="flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium transition-all"
-          style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+          className="flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all"
+          style={{ color: 'var(--glp-paper)', background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
           data-testid="button-toggle-breathing"
         >
           {isRunning ? <Pause className="h-5 w-5" /> : <Play className="h-5 w-5" />}
@@ -238,7 +238,7 @@ export default function BreathingExercisesPage() {
         </Link>
 
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full text-white mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
             <Wind className="h-8 w-8" />
           </div>
           <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Breathing for Nervous System Regulation</h1>
@@ -298,8 +298,8 @@ export default function BreathingExercisesPage() {
                   <p className="text-sm mb-6" style={{ color: 'var(--glp-sage-deep)' }}>Each practice builds your capacity for calm. Your nervous system is learning.</p>
                   <button
                     onClick={() => setCompleted(false)}
-                    className="px-6 py-3 rounded-full text-white font-medium transition-colors"
-                    style={{ background: 'var(--glp-sage)' }}
+                    className="px-6 py-3 rounded-full font-medium transition-colors"
+                    style={{ color: 'var(--glp-paper)', background: 'var(--glp-sage)' }}
                     data-testid="button-practice-again"
                   >
                     Practice Again
@@ -359,20 +359,20 @@ export default function BreathingExercisesPage() {
           </div>
         </div>
 
-        <div className="mt-12 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-6">
-          <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-amber-600" />
+        <div className="mt-12 rounded-2xl p-6" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
+          <h3 className="font-semibold mb-3 flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+            <Sparkles className="h-5 w-5" style={{ color: 'var(--glp-gold-dark)' }} />
             Tips for Practice
           </h3>
-          <div className="grid md:grid-cols-3 gap-4 text-sm text-slate-600 dark:text-slate-400">
+          <div className="grid md:grid-cols-3 gap-4 text-sm" style={{ color: 'var(--glp-sage)' }}>
             <div>
-              <strong className="text-slate-800 dark:text-slate-200">Build gradually:</strong> Start with 3-5 cycles. Overwhelm activates stress, not calm.
+              <strong style={{ color: 'var(--glp-ink)' }}>Build gradually:</strong> Start with 3-5 cycles. Overwhelm activates stress, not calm.
             </div>
             <div>
-              <strong className="text-slate-800 dark:text-slate-200">Practice when calm:</strong> Train your nervous system during neutral times, not only during crisis.
+              <strong style={{ color: 'var(--glp-ink)' }}>Practice when calm:</strong> Train your nervous system during neutral times, not only during crisis.
             </div>
             <div>
-              <strong className="text-slate-800 dark:text-slate-200">Consistency matters:</strong> 5 minutes daily creates more change than 30 minutes occasionally.
+              <strong style={{ color: 'var(--glp-ink)' }}>Consistency matters:</strong> 5 minutes daily creates more change than 30 minutes occasionally.
             </div>
           </div>
         </div>
@@ -386,8 +386,8 @@ export default function BreathingExercisesPage() {
           title="Continue Your Regulation Journey"
         />
 
-        <div className="mt-12 text-center py-8 border-t border-slate-200 dark:border-slate-800">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
+        <div className="mt-12 text-center py-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
             Breathing exercises are powerful nervous system tools but not a replacement for professional mental health care.
             If you experience dizziness or discomfort, return to natural breathing. Your body's signals are always valid.
           </p>
