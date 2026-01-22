@@ -30,17 +30,27 @@ tar -xzvf tglp-static-export.tar.gz
 | Charcoal | `#3a3a3a` | Body text |
 | Gold | `#eac33b` | Achievements, ratings |
 
+## Pipeline
+
+**System Name**: GenuineLove360_UIUX_Pipeline  
+**Last Updated**: January 2026
+
+---
+
 ## File Structure
 
 ```
 static-export/
-├── index.html              # Landing page
+├── index.html              # Redirect to landing
+├── landing.html            # Hero + CTA + Features ← NEW
 ├── onboarding.html         # User onboarding flow
 ├── home.html               # Logged-in homepage
 ├── crm.html                # CRM dashboard
 ├── content.html            # Content hub
 ├── qa.html                 # Q&A / FAQ page
 ├── login.html              # Auth page
+├── tools.html              # Wellness tools grid ← NEW
+├── crisis.html             # Crisis resources + grounding ← NEW
 ├── blog.html               # Blog listing
 ├── profile.html            # User profile
 ├── contact.html            # Contact form
