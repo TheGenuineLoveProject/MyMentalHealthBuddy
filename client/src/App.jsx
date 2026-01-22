@@ -9,6 +9,7 @@ import SkipToContent from "./components/SkipToContent.jsx";
 
 import Home from "./pages/Home.jsx";
 import CanvaLanding from "./pages/CanvaLanding.jsx";
+import HealingLandingPage from "./pages/HealingLandingPage.jsx";
 import DesignSystem from "./pages/DesignSystem.jsx";
 import WireframeTemplates from "./pages/WireframeTemplates.jsx";
 import Login from "./pages/Login.jsx";
@@ -134,6 +135,7 @@ export default function App() {
               <Route path="/home" component={CanvaLanding} />
               <Route path="/welcome" component={CanvaLanding} />
               <Route path="/original-home" component={Home} />
+              <Route path="/healing" component={HealingLandingPage} />
               <Route path="/design-system" component={DesignSystem} />
               <Route path="/wireframes" component={WireframeTemplates} />
               <Route path="/login" component={Login} />
