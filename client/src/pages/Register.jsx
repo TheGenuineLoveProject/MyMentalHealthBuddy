@@ -77,35 +77,38 @@ export default function Register() {
         title="Create Account"
         description="Create your free Genuine Love Project account. Start your mental wellness journey with AI-powered support, mood tracking, and journaling."
       />
-      <div className="min-h-screen hero-gradient overflow-hidden relative flex items-center justify-center p-6">
-        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
-        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -left-20 absolute" aria-hidden="true" />
-        <div className="decorative-orb decorative-orb-gold w-[200px] h-[200px] top-1/3 left-10 absolute" aria-hidden="true" />
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
+        <div className="absolute -top-24 -right-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
+        <div className="absolute bottom-0 -left-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
+        <div className="absolute top-1/3 left-10 w-[250px] h-[250px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 70%)' }} aria-hidden="true" />
         
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <img 
-                src="/brand/logo-mark.png" 
-                alt="The Genuine Love Project" 
-                className="w-14 h-14 object-contain group-hover:scale-110 transition-transform"
-                data-testid="img-register-logo"
-              />
-              <span className="text-xl font-bold tracking-tight text-[var(--text)]">The Genuine Love Project</span>
+          <div className="text-center mb-10">
+            <Link href="/" className="inline-flex items-center gap-4 group">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+                <img 
+                  src="/brand/logo-mark.png" 
+                  alt="The Genuine Love Project" 
+                  className="w-10 h-10 object-contain"
+                  data-testid="img-register-logo"
+                />
+              </div>
+              <span className="text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
 
           <form 
             onSubmit={handleSubmit(onSubmit)}
-            className="glass-premium rounded-2xl p-8"
+            className="rounded-3xl p-8 shadow-2xl"
+            style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}
             data-testid="form-register"
             noValidate
           >
-            <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-[var(--text)] mb-2 font-display" data-testid="text-register-title">
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold font-display mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-register-title">
                 Start Your Wellness Journey
               </h1>
-              <p className="text-[var(--text-secondary)]">Create your free account today</p>
+              <p style={{ color: 'var(--glp-sage)' }}>Create your free account today</p>
             </div>
 
             <div className="mb-6 p-4 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)]/20">

@@ -49,7 +49,7 @@ export default function ForgotPassword() {
           <div className="decorative-orb decorative-orb-gold w-[250px] h-[250px] bottom-10 -right-10 absolute" aria-hidden="true" />
           
           <div className="w-full max-w-md glass-premium rounded-2xl p-8 text-center relative z-10 animate-fade-in-up">
-            <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+            <div className="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
               <CheckCircle className="w-10 h-10 text-white" aria-hidden="true" />
             </div>
             <h1 className="text-2xl font-display font-bold mb-3 text-[var(--text)]" data-testid="text-success-title">
@@ -85,22 +85,24 @@ export default function ForgotPassword() {
         title="Forgot Password"
         description="Reset your Genuine Love Project password. We'll send you a secure link to create a new password."
       />
-      <div className="min-h-screen flex items-center justify-center p-6 hero-gradient overflow-hidden relative">
-        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
-        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -right-20 absolute" aria-hidden="true" />
+      <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
+        <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
+        <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
         
         <div className="w-full max-w-md relative z-10 animate-fade-in-up">
           <Link 
             href="/" 
-            className="flex items-center justify-center gap-3 mb-8 hover:opacity-80 transition-opacity"
+            className="flex items-center justify-center gap-4 mb-10 hover:opacity-90 transition-opacity group"
             data-testid="link-home"
           >
-            <img 
-              src="/brand/logo-mark.png" 
-              alt="The Genuine Love Project" 
-              className="w-12 h-12 object-contain"
-            />
-            <span className="font-display font-semibold text-lg text-[var(--text)]">The Genuine Love Project</span>
+            <div className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+              <img 
+                src="/brand/logo-mark.png" 
+                alt="The Genuine Love Project" 
+                className="w-9 h-9 object-contain"
+              />
+            </div>
+            <span className="font-display font-bold text-xl" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
           </Link>
           
           <div className="card-elevated p-8">

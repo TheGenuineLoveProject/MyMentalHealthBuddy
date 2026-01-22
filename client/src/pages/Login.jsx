@@ -47,33 +47,36 @@ export default function Login() {
         title="Sign In - The Genuine Love Project"
         description="Sign in to your Genuine Love Project account. Continue your mental wellness journey."
       />
-      <div className="min-h-screen hero-gradient overflow-hidden relative flex items-center justify-center px-4">
-        <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] -top-20 -left-20 absolute" aria-hidden="true" />
-        <div className="decorative-orb decorative-orb-blush w-[350px] h-[350px] bottom-10 -right-20 absolute" aria-hidden="true" />
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
+        <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
+        <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }} aria-hidden="true" />
         
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
-          <div className="text-center mb-8">
-            <Link href="/" className="inline-flex items-center gap-3 group">
-              <img 
-                src="/brand/logo-mark.png" 
-                alt="The Genuine Love Project" 
-                className="w-14 h-14 object-contain group-hover:scale-110 transition-transform"
-                data-testid="img-login-logo"
-              />
-              <span className="text-xl font-bold tracking-tight text-teal">The Genuine Love Project</span>
+          <div className="text-center mb-10">
+            <Link href="/" className="inline-flex items-center gap-4 group">
+              <div className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all group-hover:scale-105 group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}>
+                <img 
+                  src="/brand/logo-mark.png" 
+                  alt="The Genuine Love Project" 
+                  className="w-10 h-10 object-contain"
+                  data-testid="img-login-logo"
+                />
+              </div>
+              <span className="text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
 
-          <div className="glass-premium rounded-2xl p-8">
-            <div className="text-center mb-6">
-              <h1 className="text-2xl font-bold text-teal font-display">
+          <div className="rounded-3xl p-8 shadow-2xl" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
+            <div className="text-center mb-8">
+              <h1 className="text-3xl font-bold font-display" style={{ color: 'var(--glp-sage-deep)' }}>
                 Welcome Back
               </h1>
-              <p className="text-sage-400 mt-2">Sign in to continue your journey</p>
+              <p className="mt-3" style={{ color: 'var(--glp-sage)' }}>Sign in to continue your healing journey</p>
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl mb-6 text-sm" role="alert" data-testid="text-error">
+              <div className="p-4 rounded-xl mb-6 text-sm" style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-blush)', color: 'var(--glp-rose-dark)' }} role="alert" data-testid="text-error">
                 {error}
               </div>
             )}
@@ -118,7 +121,7 @@ export default function Login() {
               </div>
 
               <div className="flex items-center justify-end">
-                <Link href="/forgot-password" className="text-sm text-sage-600 hover:text-teal transition-colors font-medium">
+                <Link href="/forgot-password" className="text-sm font-medium transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
                   Forgot password?
                 </Link>
               </div>
@@ -143,11 +146,12 @@ export default function Login() {
               </button>
             </form>
 
-            <div className="mt-6 pt-6 border-t border-sage-200/50">
-              <p className="text-center text-sage-400 text-sm mb-4">Or continue with</p>
+            <div className="mt-6 pt-6" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
+              <p className="text-center text-sm mb-4" style={{ color: 'var(--glp-sage)' }}>Or continue with</p>
               <a
                 href="/api/auth/github"
-                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl border border-sage-200 bg-white hover:bg-sage-50 text-sage-700 font-medium transition-all hover:border-sage-300"
+                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl font-medium transition-all"
+                style={{ border: '1px solid var(--glp-sage-20)', background: 'var(--glp-paper)', color: 'var(--glp-sage-deep)' }}
                 data-testid="button-github-login"
               >
                 <SiGithub className="w-5 h-5" />
@@ -155,24 +159,25 @@ export default function Login() {
               </a>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-sage-200/50 text-center">
-              <p className="text-sage-400 text-sm">
+            <div className="mt-6 pt-6 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 Don't have an account?{" "}
-                <Link href="/register" className="text-sage-600 hover:text-teal font-semibold transition-colors">
+                <Link href="/register" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
                   Create one
                 </Link>
               </p>
             </div>
             
             {import.meta.env.DEV && (
-              <div className="mt-4 pt-4 border-t border-dashed border-sage-200/50 text-center">
+              <div className="mt-4 pt-4 text-center" style={{ borderTop: '1px dashed var(--glp-sage-20)' }}>
                 <button
                   type="button"
                   onClick={() => {
                     localStorage.setItem("glp-qa", "1");
                     setLocation("/dashboard");
                   }}
-                  className="text-xs text-sage-400 hover:text-sage-600 underline transition-colors"
+                  className="text-xs underline transition-colors"
+                  style={{ color: 'var(--glp-sage)' }}
                   data-testid="button-qa-mode"
                 >
                   Enable QA Mode (DEV)
@@ -181,7 +186,7 @@ export default function Login() {
             )}
           </div>
 
-          <p className="text-center text-xs text-sage-400 mt-6">
+          <p className="text-center text-xs mt-6" style={{ color: 'var(--glp-sage)' }}>
             By signing in, you agree to our Terms of Service and Privacy Policy
           </p>
         </div>
