@@ -55,9 +55,12 @@ export default function Login() {
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-10">
             <Link href="/" className="inline-flex items-center gap-4 group">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all group-hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 16px var(--glp-rose-20)' }}>
-                <Heart className="w-6 h-6 text-white fill-white" />
-              </div>
+              <img 
+                src="/brand/login-logo.png" 
+                alt="The Genuine Love Project" 
+                className="w-16 h-16 object-contain transition-all group-hover:scale-105"
+                data-testid="img-login-logo"
+              />
               <span className="text-2xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }}>The Genuine Love Project</span>
             </Link>
           </div>
