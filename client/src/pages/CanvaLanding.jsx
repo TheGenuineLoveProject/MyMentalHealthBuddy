@@ -836,7 +836,7 @@ export default function CanvaLanding() {
               <img 
                 src="/brand/logo-monogram.png" 
                 alt="The Genuine Love Project" 
-                className="w-16 h-16 object-contain mx-auto"
+                className="w-10 h-10 object-contain mx-auto"
               />
             </div>
             <h4 className="font-serif font-bold text-xl mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
