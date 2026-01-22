@@ -654,14 +654,16 @@ export default function CanvaLanding() {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div className="md:col-span-1">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
-                  <Heart className="w-5 h-5 text-white" />
-                </div>
-                <span className="font-serif font-bold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>
-                  Genuine Love
-                </span>
+              <div className="rounded-2xl overflow-hidden mb-4 transition-transform hover:scale-[1.02]" style={{ boxShadow: '0 8px 32px var(--glp-sage-20)', border: '2px solid var(--glp-sage-20)' }}>
+                <img 
+                  src="/brand/footer-wellness-graphic.png" 
+                  alt="Wellness and healing" 
+                  className="w-full h-auto object-cover"
+                />
               </div>
+              <h4 className="font-serif font-bold text-lg mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                The Genuine Love Project
+              </h4>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
                 Transformative healing through AI-powered support, mindfulness, and community.
               </p>
