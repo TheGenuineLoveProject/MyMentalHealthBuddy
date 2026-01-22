@@ -105,6 +105,7 @@ const ResourcesPage = lazy(() => import("./pages/ResourcesPage.jsx"));
 const ContentIndexPage = lazy(() => import("./pages/ContentIndexPage.jsx"));
 const ExamplesPage = lazy(() => import("./pages/ExamplesPage.jsx"));
 const QAPage = lazy(() => import("./pages/QAPage.jsx"));
+const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -143,6 +144,11 @@ export default function App() {
               <Route path="/social" component={SocialHub} />
               <Route path="/control" component={ControlDashboard} />
               <Route path="/pricing" component={Pricing} />
+              <Route path="/crm">
+                <RouteGuard>
+                  <CRMPage />
+                </RouteGuard>
+              </Route>
               
               {/* Blog routes */}
               <Route path="/blog" component={BlogIndex} />
