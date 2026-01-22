@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { Link, useLocation } from "wouter";
 import { 
   MessageCircle, ThumbsUp, Heart, Shield, Award, Star,
-  Filter, Search, Send, CheckCircle, Clock, Users, Sparkles
+  Filter, Search, Send, CheckCircle, Clock, Users, Sparkles, ArrowRight
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -88,7 +89,7 @@ function VoteButton({ count, voted, onVote, postId }) {
   return (
     <button 
       onClick={onVote}
-      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+      className={`inline-flex items-center gap-1.5 min-h-[44px] px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal-400)] focus-visible:ring-offset-2 ${
         voted 
           ? "bg-teal-100 text-teal-700 border border-teal-200" 
           : "bg-gray-100 text-gray-600 hover:bg-teal-50 hover:text-teal-600 border border-gray-200 hover:border-teal-200"
@@ -215,7 +216,7 @@ export default function SharedReflectionsPage() {
               <button
                 key={topic.id}
                 onClick={() => setActiveTopic(topic.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-full text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal-400)] focus-visible:ring-offset-2 ${
                   activeTopic === topic.id
                     ? "bg-[var(--teal-500)] text-white shadow-md"
                     : "bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 hover:border-[var(--teal-300)]"
@@ -292,9 +293,14 @@ export default function SharedReflectionsPage() {
                     {post.answers} answers
                   </span>
                 </div>
-                <button className="text-sm text-teal-600 hover:text-teal-700 font-medium" data-testid={`button-view-${post.id}`}>
-                  View Discussion →
-                </button>
+                <Link 
+                  href={`/community/discussion/${post.id}`}
+                  className="inline-flex items-center gap-2 min-h-[44px] px-4 py-2 rounded-xl text-sm font-medium text-[var(--teal-600)] hover:text-white hover:bg-[var(--teal-500)] border border-[var(--teal-200)] hover:border-[var(--teal-500)] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--teal-400)] focus-visible:ring-offset-2"
+                  data-testid={`link-view-discussion-${post.id}`}
+                >
+                  View Discussion
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
               </div>
             </article>
           ))}

@@ -48,6 +48,7 @@ const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
 const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
+const DiscussionPage = lazy(() => import("./features/community/DiscussionPage.jsx"));
 const TodayPage = lazy(() => import("./features/today/TodayPage.jsx"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage.tsx"));
 const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
@@ -276,6 +277,11 @@ export default function App() {
               <Route path="/community">
                 <RouteGuard>
                   <CommunityPage />
+                </RouteGuard>
+              </Route>
+              <Route path="/community/discussion/:id">
+                <RouteGuard>
+                  <DiscussionPage />
                 </RouteGuard>
               </Route>
               <Route path="/tools">

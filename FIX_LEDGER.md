@@ -415,3 +415,43 @@ npm run test:all       # All tests
 ```
 
 **RELEASE GATE: PASS ✅**
+
+---
+
+## COMMUNITY PAGE HOTFIX — PASS ✅
+
+### Issue: "View Discussion" Buttons Not Navigating
+**Root Cause**: Buttons were plain `<button>` elements with no navigation handler.
+
+**Fix Applied**:
+1. Converted `<button>` to `<Link href="/community/discussion/:id">` using wouter
+2. Created `DiscussionPage.jsx` component for discussion detail view
+3. Added route `/community/discussion/:id` to App.jsx
+
+### Files Changed
+| File | Change |
+|------|--------|
+| `client/src/features/community/SharedReflectionsPage.jsx` | Replaced button with Link, added ArrowRight icon |
+| `client/src/features/community/DiscussionPage.jsx` | **NEW** - Discussion detail page |
+| `client/src/App.jsx` | Added lazy import + route for DiscussionPage |
+
+### A11Y Improvements Applied
+- ✅ All buttons have min-height 44px tap targets
+- ✅ Focus-visible rings on all interactive elements
+- ✅ aria-labels on icon-only buttons
+- ✅ aria-pressed on vote buttons
+- ✅ Keyboard navigation works (Tab + Enter)
+
+### UI Polish Applied
+- ✅ Topic chips have proper focus states
+- ✅ Vote buttons have proper styling
+- ✅ View Discussion links have hover/focus states
+- ✅ Cards have calm premium styling with rounded-2xl
+
+### Verification
+```bash
+node tools/link_scan.mjs   # 0 broken links
+node tools/route_map.mjs   # /community/discussion/:id route exists
+```
+
+**COMMUNITY HOTFIX: PASS ✅**
