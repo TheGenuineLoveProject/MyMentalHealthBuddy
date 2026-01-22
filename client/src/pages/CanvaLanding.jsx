@@ -736,91 +736,8 @@ export default function CanvaLanding() {
       {/* Footer */}
       <footer className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', borderTop: '1px solid var(--glp-sage-15)' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-16">
-            {/* Brand Column */}
-            <div className="lg:col-span-1 text-center lg:text-left">
-              <div className="rounded-3xl overflow-hidden mb-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl mx-auto lg:mx-0" style={{ boxShadow: '0 12px 40px var(--glp-sage-30)', border: '3px solid var(--glp-sage-20)', maxWidth: '220px', background: 'linear-gradient(135deg, var(--glp-white), var(--glp-sage-10))' }}>
-                <img 
-                  src="/brand/footer-wellness-graphic.png" 
-                  alt="Wellness and healing" 
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <h4 className="font-serif font-bold text-xl mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-                The Genuine Love Project
-              </h4>
-              <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--glp-ink)' }}>
-                Transformative healing through AI-powered support, mindfulness, and community.
-              </p>
-              <div className="flex justify-center lg:justify-start gap-3">
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
-                  <Heart className="w-4 h-4 text-white" />
-                </div>
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 12px var(--glp-gold-30)' }}>
-                  <Sparkles className="w-4 h-4 text-white" />
-                </div>
-                <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 12px var(--glp-rose-20)' }}>
-                  <Star className="w-4 h-4 text-white" />
-                </div>
-              </div>
-            </div>
-            
-            {/* Navigation Columns */}
-            <div className="lg:col-span-3">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12">
-                {/* Platform */}
-                <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-15)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
-                  <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
-                      <Zap className="w-5 h-5 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
-                  </div>
-                  <div className="space-y-2 text-sm">
-                    <Link href="/crm"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-dashboard"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Dashboard</span></div></Link>
-                    <Link href="/onboarding"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-onboarding"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Get Started</span></div></Link>
-                    <Link href="/pricing"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Pricing</span></div></Link>
-                    <Link href="/tools"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Tools Library</span></div></Link>
-                  </div>
-                </div>
-                
-                {/* Resources */}
-                <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-gold-30)', boxShadow: '0 4px 16px var(--glp-gold-10)' }}>
-                  <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 12px var(--glp-gold-30)' }}>
-                      <BookOpen className="w-5 h-5 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
-                  </div>
-                  <div className="space-y-2 text-sm">
-                    <Link href="/content-index"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-content"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Content Library</span></div></Link>
-                    <Link href="/qa"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-qa"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Q&A Community</span></div></Link>
-                    <Link href="/crisis"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Crisis Support</span></div></Link>
-                    <Link href="/study-vault"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Study Vault</span></div></Link>
-                  </div>
-                </div>
-                
-                {/* Legal */}
-                <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-rose-15)', boxShadow: '0 4px 16px var(--glp-rose-10)' }}>
-                  <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 12px var(--glp-rose-20)' }}>
-                      <Shield className="w-5 h-5 text-white" />
-                    </div>
-                    <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
-                  </div>
-                  <div className="space-y-2 text-sm">
-                    <Link href="/privacy"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-privacy"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Privacy Policy</span></div></Link>
-                    <Link href="/terms"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-terms"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Terms of Service</span></div></Link>
-                    <Link href="/accessibility"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Accessibility</span></div></Link>
-                    <Link href="/contact"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Contact Us</span></div></Link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          {/* Inspirational Words Section */}
-          <div className="flex flex-col items-center justify-center py-12" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+          {/* Inspirational Words Section - Now at Top */}
+          <div className="flex flex-col items-center justify-center pb-12 mb-12" style={{ borderBottom: '1px solid var(--glp-sage-15)' }}>
             <div className="w-full max-w-4xl mb-6 rounded-2xl overflow-hidden" style={{ boxShadow: '0 12px 40px var(--glp-sage-20)' }}>
               <img 
                 src="/brand/inspirational-words.png" 
@@ -831,6 +748,85 @@ export default function CanvaLanding() {
             <p className="text-lg sm:text-xl text-center font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
               360° Support from A to Z — Live in Genuine Love
             </p>
+          </div>
+
+          {/* Platform, Resources, Legal - Full Width */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
+            {/* Platform */}
+            <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-15)', boxShadow: '0 4px 16px var(--glp-sage-10)' }}>
+              <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
+                  <Zap className="w-5 h-5 text-white" />
+                </div>
+                <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
+              </div>
+              <div className="space-y-2 text-sm">
+                <Link href="/crm"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-dashboard"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Dashboard</span></div></Link>
+                <Link href="/onboarding"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-onboarding"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Get Started</span></div></Link>
+                <Link href="/pricing"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Pricing</span></div></Link>
+                <Link href="/tools"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-sage-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-sage-deep)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Tools Library</span></div></Link>
+              </div>
+            </div>
+            
+            {/* Resources */}
+            <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-gold-30)', boxShadow: '0 4px 16px var(--glp-gold-10)' }}>
+              <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 12px var(--glp-gold-30)' }}>
+                  <BookOpen className="w-5 h-5 text-white" />
+                </div>
+                <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
+              </div>
+              <div className="space-y-2 text-sm">
+                <Link href="/content-index"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-content"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Content Library</span></div></Link>
+                <Link href="/qa"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-qa"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Q&A Community</span></div></Link>
+                <Link href="/crisis"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Crisis Support</span></div></Link>
+                <Link href="/study-vault"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Study Vault</span></div></Link>
+              </div>
+            </div>
+            
+            {/* Legal */}
+            <div className="p-6 rounded-2xl text-center sm:text-left transition-all hover:shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-rose-15)', boxShadow: '0 4px 16px var(--glp-rose-10)' }}>
+              <div className="flex items-center justify-center sm:justify-start gap-3 mb-5">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 12px var(--glp-rose-20)' }}>
+                  <Shield className="w-5 h-5 text-white" />
+                </div>
+                <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
+              </div>
+              <div className="space-y-2 text-sm">
+                <Link href="/privacy"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-privacy"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Privacy Policy</span></div></Link>
+                <Link href="/terms"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-terms"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Terms of Service</span></div></Link>
+                <Link href="/accessibility"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Accessibility</span></div></Link>
+                <Link href="/contact"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-rose-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-rose-15)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-rose)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Contact Us</span></div></Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Brand Column - Now at Bottom */}
+          <div className="flex flex-col items-center text-center py-8 mb-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+            <div className="rounded-3xl overflow-hidden mb-6 transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl" style={{ boxShadow: '0 12px 40px var(--glp-sage-30)', border: '3px solid var(--glp-sage-20)', maxWidth: '180px', background: 'linear-gradient(135deg, var(--glp-white), var(--glp-sage-10))' }}>
+              <img 
+                src="/brand/footer-wellness-graphic.png" 
+                alt="Wellness and healing" 
+                className="w-full h-auto object-cover"
+              />
+            </div>
+            <h4 className="font-serif font-bold text-xl mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
+              The Genuine Love Project
+            </h4>
+            <p className="text-sm leading-relaxed mb-4 max-w-md" style={{ color: 'var(--glp-ink)' }}>
+              Transformative healing through AI-powered support, mindfulness, and community.
+            </p>
+            <div className="flex justify-center gap-3">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
+                <Heart className="w-4 h-4 text-white" />
+              </div>
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 12px var(--glp-gold-30)' }}>
+                <Sparkles className="w-4 h-4 text-white" />
+              </div>
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 12px var(--glp-rose-20)' }}>
+                <Star className="w-4 h-4 text-white" />
+              </div>
+            </div>
           </div>
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
