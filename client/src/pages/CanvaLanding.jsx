@@ -125,16 +125,16 @@ export default function CanvaLanding() {
         <button 
           onClick={() => setMobileMenuOpen(false)}
           className="absolute top-6 right-6 w-10 h-10 flex items-center justify-center"
-          style={{ color: 'var(--charcoal)' }}
+          style={{ color: 'var(--glp-ink)' }}
           data-testid="button-close-mobile-menu"
         >
           <X className="w-6 h-6" />
         </button>
         <div className="space-y-6">
-          <a href="#home" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--deep-teal)' }}>Home</a>
-          <a href="#about" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--deep-teal)' }}>About</a>
-          <a href="#features" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--deep-teal)' }}>Features</a>
-          <a href="#faq" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--deep-teal)' }}>FAQ</a>
+          <a href="#home" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Home</a>
+          <a href="#about" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>About</a>
+          <a href="#features" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Features</a>
+          <a href="#faq" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>FAQ</a>
           <div className="pt-6 mt-6 border-t" style={{ borderColor: 'var(--glp-sage-30)' }}>
             <Link href="/login">
               <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Sign In</button>
@@ -316,7 +316,7 @@ export default function CanvaLanding() {
               </p>
             </div>
             <div className="text-center p-6 rounded-2xl transition-all hover:scale-105" style={{ background: 'var(--glp-paper-70)', border: '1px solid var(--glp-sage-20)' }}>
-              <div className="text-4xl md:text-5xl font-bold mb-2" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-rose)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-rose))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>24/7</div>
               <p className="text-sm font-semibold uppercase tracking-wider" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
                 AI Support
               </p>
@@ -334,18 +334,18 @@ export default function CanvaLanding() {
         <div className="max-w-5xl mx-auto text-center">
           <div 
             className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-8 pulse-glow"
-            style={{ background: 'linear-gradient(135deg, var(--warm-gold), var(--blush-pink))' }}
+            style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-blush))' }}
           >
             <Heart className="w-10 h-10 text-white" />
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6" style={{ color: 'var(--deep-teal)' }}>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6" style={{ color: 'var(--glp-sage-deep)' }}>
             Our Mission
           </h2>
 
           <p 
             className="text-xl md:text-2xl leading-relaxed font-serif"
-            style={{ color: 'var(--charcoal)', opacity: 0.85 }}
+            style={{ color: 'var(--glp-ink)', opacity: 0.85 }}
           >
             We believe healing begins with genuine love—love for yourself, your journey, and your potential. 
             Our platform provides a sacred space where mind, body, and soul unite in transformative growth, 
@@ -358,10 +358,10 @@ export default function CanvaLanding() {
               <div className="icon-circle mx-auto mb-4">
                 <Lightbulb className="w-10 h-10 text-white" />
               </div>
-              <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--deep-teal)' }}>
+              <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                 Wisdom
               </h3>
-              <p className="leading-relaxed" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+              <p className="leading-relaxed" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
                 Curated insights from ancient traditions to modern psychology
               </p>
             </div>
@@ -370,10 +370,10 @@ export default function CanvaLanding() {
               <div className="icon-circle mx-auto mb-4">
                 <Users className="w-10 h-10 text-white" />
               </div>
-              <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--deep-teal)' }}>
+              <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                 Community
               </h3>
-              <p className="leading-relaxed" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+              <p className="leading-relaxed" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
                 Connect with kindred spirits on similar healing paths
               </p>
             </div>
@@ -382,10 +382,10 @@ export default function CanvaLanding() {
               <div className="icon-circle mx-auto mb-4">
                 <Zap className="w-10 h-10 text-white" />
               </div>
-              <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--deep-teal)' }}>
+              <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                 Transformation
               </h3>
-              <p className="leading-relaxed" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+              <p className="leading-relaxed" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
                 Evidence-based tools for measurable personal growth
               </p>
             </div>
@@ -397,7 +397,7 @@ export default function CanvaLanding() {
       </section>
 
       {/* Featured Quote Section - QuoteBlock_1_Healing */}
-      <section className="py-16 px-6" style={{ background: 'var(--soft-ivory)' }}>
+      <section className="py-16 px-6" style={{ background: 'var(--glp-paper)' }}>
         <div className="max-w-4xl mx-auto">
           <div className="quote-block" data-testid="quote-block-healing">
             <p className="quote-text relative z-10">
@@ -410,13 +410,13 @@ export default function CanvaLanding() {
       </section>
 
       {/* Calming Welcome Banner with Breathing Pulse */}
-      <section className="py-16 px-6" style={{ background: 'linear-gradient(180deg, var(--soft-ivory), rgba(244, 199, 195, 0.1))' }}>
+      <section className="py-16 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-10))' }}>
         <div className="max-w-5xl mx-auto">
           <div className="welcome-banner text-center" data-testid="welcome-banner">
             <div className="flex justify-center mb-6">
               <div 
                 className="w-20 h-20 rounded-full flex items-center justify-center breathing-pulse"
-                style={{ background: 'rgba(255, 255, 255, 0.2)' }}
+                style={{ background: 'var(--glp-white-80)' }}
               >
                 <Heart className="w-10 h-10 text-white" />
               </div>
@@ -442,10 +442,10 @@ export default function CanvaLanding() {
       <section id="features" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
               Your Complete Wellness Toolkit
             </h2>
-            <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+            <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
               Comprehensive resources designed to support every aspect of your healing journey
             </p>
           </div>
@@ -456,14 +456,14 @@ export default function CanvaLanding() {
                 <div className="mb-6">
                   <feature.icon className="feature-icon" strokeWidth={1.5} />
                 </div>
-                <h3 className="text-2xl font-serif font-semibold mb-3" style={{ color: 'var(--deep-teal)' }}>
+                <h3 className="text-2xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
                   {feature.title}
                 </h3>
-                <p className="leading-relaxed mb-4" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+                <p className="leading-relaxed mb-4" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
                   {feature.description}
                 </p>
                 <Link href="/register">
-                  <span className="inline-flex items-center font-semibold cursor-pointer" style={{ color: 'var(--sage-green)' }}>
+                  <span className="inline-flex items-center font-semibold cursor-pointer" style={{ color: 'var(--glp-sage)' }}>
                     Learn More
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </span>
@@ -475,13 +475,13 @@ export default function CanvaLanding() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-20 px-6" style={{ background: 'var(--soft-ivory)' }}>
+      <section className="py-20 px-6" style={{ background: 'var(--glp-paper)' }}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
               How It Works
             </h2>
-            <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+            <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
               Begin your transformation in three simple steps
             </p>
           </div>
@@ -491,12 +491,12 @@ export default function CanvaLanding() {
               <div key={index} className="step-card" data-testid={`step-card-${index}`}>
                 <div className="step-number" aria-label={`Step ${index + 1}`}>{index + 1}</div>
                 <div className="mb-4 flex justify-center">
-                  <step.icon className="w-10 h-10" style={{ color: 'var(--sage-green)' }} />
+                  <step.icon className="w-10 h-10" style={{ color: 'var(--glp-sage)' }} />
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--deep-teal)' }}>
+                <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
                   {step.title}
                 </h3>
-                <p className="text-sm" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+                <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
                   {step.description}
                 </p>
               </div>
@@ -508,14 +508,14 @@ export default function CanvaLanding() {
       {/* Testimonials Section */}
       <section 
         className="py-20 px-6"
-        style={{ background: 'linear-gradient(180deg, var(--soft-ivory), rgba(244, 199, 195, 0.15))' }}
+        style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-15))' }}
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
               Voices of Healing
             </h2>
-            <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--charcoal)', opacity: 0.75 }}>
+            <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)', opacity: 0.75 }}>
               Real stories from our community
             </p>
           </div>
@@ -523,7 +523,7 @@ export default function CanvaLanding() {
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="testimonial-card" data-testid={`testimonial-${index}`}>
-                <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--charcoal)' }}>
+                <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--glp-ink)' }}>
                   "{testimonial.text}"
                 </p>
                 <div className="flex items-center gap-4">
@@ -531,8 +531,8 @@ export default function CanvaLanding() {
                     {testimonial.initial}
                   </div>
                   <div>
-                    <p className="font-semibold" style={{ color: 'var(--deep-teal)' }}>{testimonial.name}</p>
-                    <p className="text-sm text-slate-600 dark:text-slate-400">{testimonial.role}</p>
+                    <p className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>{testimonial.name}</p>
+                    <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>{testimonial.role}</p>
                   </div>
                 </div>
               </div>
@@ -570,7 +570,7 @@ export default function CanvaLanding() {
       >
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--deep-teal)' }}>
+            <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
               Frequently Asked Questions
             </h2>
           </div>
@@ -599,7 +599,7 @@ export default function CanvaLanding() {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-24 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--deep-teal), var(--sage-green))' }}>
+      <section className="py-24 px-6 text-center relative overflow-hidden" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))' }}>
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-64 h-64 rounded-full bg-white/5 blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full bg-white/5 blur-3xl" />
@@ -612,7 +612,7 @@ export default function CanvaLanding() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-6 text-white leading-tight">
             Begin Your Healing
             <br />
-            <span className="text-[var(--warm-gold)]">Journey Today</span>
+            <span className="text-[var(--glp-gold)]">Journey Today</span>
           </h2>
           <p className="text-lg md:text-xl mb-10 text-white/85 max-w-xl mx-auto">
             Join thousands who have found peace, growth, and genuine love within themselves.
@@ -622,9 +622,9 @@ export default function CanvaLanding() {
               <button 
                 className="group px-10 py-4 rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-2xl"
                 style={{
-                  background: 'white',
-                  color: 'var(--deep-teal)',
-                  boxShadow: '0 8px 32px rgba(0,0,0,0.2)'
+                  background: 'var(--glp-white)',
+                  color: 'var(--glp-sage-deep)',
+                  boxShadow: '0 8px 32px var(--glp-overlay-50)'
                 }}
                 data-testid="button-final-cta"
               >
@@ -652,21 +652,21 @@ export default function CanvaLanding() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div className="md:col-span-1">
               <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--sage-green), var(--deep-teal))' }}>
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
                   <Heart className="w-5 h-5 text-white" fill="currentColor" />
                 </div>
-                <span className="font-serif font-bold text-lg" style={{ color: 'var(--deep-teal)' }}>
+                <span className="font-serif font-bold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>
                   Genuine Love
                 </span>
               </div>
-              <p className="text-sm leading-relaxed" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
                 Transformative healing through AI-powered support, mindfulness, and community.
               </p>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Platform</h4>
-              <ul className="space-y-3 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Platform</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
                 <li><Link href="/crm"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-dashboard">Dashboard</span></Link></li>
                 <li><Link href="/onboarding"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-onboarding">Get Started</span></Link></li>
                 <li><Link href="/pricing"><span className="hover:opacity-100 cursor-pointer transition-opacity">Pricing</span></Link></li>
@@ -675,8 +675,8 @@ export default function CanvaLanding() {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Resources</h4>
-              <ul className="space-y-3 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
                 <li><Link href="/content-index"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-content">Content Library</span></Link></li>
                 <li><Link href="/qa"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-qa">Q&A Community</span></Link></li>
                 <li><Link href="/crisis"><span className="hover:opacity-100 cursor-pointer transition-opacity">Crisis Support</span></Link></li>
@@ -685,8 +685,8 @@ export default function CanvaLanding() {
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4" style={{ color: 'var(--deep-teal)' }}>Legal</h4>
-              <ul className="space-y-3 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.7 }}>
+              <h4 className="font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Legal</h4>
+              <ul className="space-y-3 text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
                 <li><Link href="/privacy"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-privacy">Privacy Policy</span></Link></li>
                 <li><Link href="/terms"><span className="hover:opacity-100 cursor-pointer transition-opacity" data-testid="link-footer-terms">Terms of Service</span></Link></li>
                 <li><Link href="/accessibility"><span className="hover:opacity-100 cursor-pointer transition-opacity">Accessibility</span></Link></li>
@@ -696,12 +696,12 @@ export default function CanvaLanding() {
           </div>
           
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-            <p className="text-sm" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>
+            <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>
               © {new Date().getFullYear()} The Genuine Love Project. All rights reserved.
             </p>
-            <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--charcoal)', opacity: 0.6 }}>
+            <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>
               <span>Made with</span>
-              <Heart className="w-4 h-4" style={{ color: 'var(--blush-pink)' }} fill="currentColor" />
+              <Heart className="w-4 h-4" style={{ color: 'var(--glp-blush)' }} fill="currentColor" />
               <span>for your healing journey</span>
             </div>
           </div>
