@@ -66,6 +66,10 @@ const SocialDashboard = lazy(() => import("./pages/admin/SocialDashboard.jsx"));
 const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
 const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
 const SocialCalendar = lazy(() => import("./pages/admin/SocialCalendar.jsx"));
+const ValuesFinderPage = lazy(() => import("./pages/ValuesFinderPage.jsx"));
+const BoundariesPage = lazy(() => import("./pages/BoundariesPage.jsx"));
+const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
+const CoherenceLadderPage = lazy(() => import("./pages/CoherenceLadderPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -310,6 +314,20 @@ export default function App() {
               <Route path="/wellness/movement">{() => <ConfigRoute route="/wellness/movement" />}</Route>
               <Route path="/wellness/nature">{() => <ConfigRoute route="/wellness/nature" />}</Route>
               <Route path="/wellness/creativity">{() => <ConfigRoute route="/wellness/creativity" />}</Route>
+
+              {/* Wellness Tools - Interactive */}
+              <Route path="/tools/values">
+                <ProtectedRoute><ValuesFinderPage /></ProtectedRoute>
+              </Route>
+              <Route path="/tools/boundaries">
+                <ProtectedRoute><BoundariesPage /></ProtectedRoute>
+              </Route>
+              <Route path="/tools/movement-snacks">
+                <ProtectedRoute><MovementSnacksPage /></ProtectedRoute>
+              </Route>
+              <Route path="/tools/coherence">
+                <ProtectedRoute><CoherenceLadderPage /></ProtectedRoute>
+              </Route>
 
               {/* Additional AI Routes - Config Driven */}
               <Route path="/ai/insights">
