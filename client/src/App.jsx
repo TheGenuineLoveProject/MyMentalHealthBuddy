@@ -62,6 +62,10 @@ const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.j
 const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
 const DashboardOverview = lazy(() => import("./pages/dashboard/Overview.jsx"));
 const AdminCommandCenter = lazy(() => import("./pages/admin/CommandCenter.jsx"));
+const SocialDashboard = lazy(() => import("./pages/admin/SocialDashboard.jsx"));
+const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
+const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
+const SocialCalendar = lazy(() => import("./pages/admin/SocialCalendar.jsx"));
 
 function LoadingFallback() {
   return (
@@ -335,6 +339,18 @@ export default function App() {
               {/* Admin Routes */}
               <Route path="/admin">
                 <ProtectedRoute><AdminCommandCenter /></ProtectedRoute>
+              </Route>
+              <Route path="/admin/social">
+                <ProtectedRoute><SocialDashboard /></ProtectedRoute>
+              </Route>
+              <Route path="/admin/social/generate">
+                <ProtectedRoute><SocialGenerator /></ProtectedRoute>
+              </Route>
+              <Route path="/admin/social/library">
+                <ProtectedRoute><SocialLibrary /></ProtectedRoute>
+              </Route>
+              <Route path="/admin/social/calendar">
+                <ProtectedRoute><SocialCalendar /></ProtectedRoute>
               </Route>
               <Route path="/content-admin">
                 <ProtectedRoute><ContentAdminDashboard /></ProtectedRoute>
