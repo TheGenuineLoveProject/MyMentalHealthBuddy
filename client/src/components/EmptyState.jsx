@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Smile, BookOpen, MessageCircle, BarChart3, Plus, ArrowRight, Heart } from "lucide-react";
+import { pickSlot } from "../content/microcopy/wellnessMicrocopy";
 
 const EMPTY_STATE_CONFIGS = {
   moods: {
@@ -97,7 +98,7 @@ export default function EmptyState({
         {description}
       </p>
       <p className="text-sm text-[var(--text-2)] mb-6">
-        Take the first step on your healing journey.
+        {pickSlot('encouragement', 'beginner', type)}
       </p>
       {showAction && (
         config.actionHref ? <ActionLink /> : <ActionButton />
@@ -108,16 +109,18 @@ export default function EmptyState({
 
 export function EmptyStateInline({ 
   icon: Icon = Smile, 
-  message = "Nothing here yet",
+  message,
   actionText,
   onAction,
+  seed = 'inline',
 }) {
+  const displayMessage = message || pickSlot('emptyStates', 'beginner', seed);
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center" data-testid="empty-state-inline">
       <div className="w-12 h-12 rounded-xl bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center mb-4">
         <Icon className="w-6 h-6 text-[var(--text-2)]" aria-hidden="true" />
       </div>
-      <p className="text-[var(--text-2)] mb-4">{message}</p>
+      <p className="text-[var(--text-2)] mb-4">{displayMessage}</p>
       {actionText && onAction && (
         <button
           onClick={onAction}
