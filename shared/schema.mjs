@@ -398,3 +398,103 @@ export const leads = pgTable("leads", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
+
+/* =====================================================
+ * ADMIN SOCIAL STUDIO TABLES
+ * Content creation, scheduling, and approval workflow
+ * =====================================================
+ */
+
+/* ================= POST DRAFTS ================= */
+export const postDrafts = pgTable("post_drafts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  platform: varchar("platform", { length: 50 }), // instagram, tiktok, threads, youtube
+  hook: text("hook"),
+  caption: text("caption"),
+  cta: text("cta"),
+  hashtags: text("hashtags"),
+  disclaimer: text("disclaimer"),
+  status: varchar("status", { length: 20 }).default("draft"), // draft, review, approved, scheduled, exported
+  scheduledFor: timestamp("scheduled_for"),
+  theme: varchar("theme", { length: 100 }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+/* ================= CONTENT TEMPLATES ================= */
+export const contentTemplates = pgTable("content_templates", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  type: varchar("type", { length: 50 }), // hook, caption, thread, carousel, cta, disclaimer
+  name: varchar("name", { length: 100 }),
+  structure: text("structure").notNull(),
+  voiceRules: text("voice_rules"),
+  level: varchar("level", { length: 20 }), // beginner, intermediate, advanced
+  isActive: boolean("is_active").default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= CALENDAR ENTRIES ================= */
+export const calendarEntries = pgTable("calendar_entries", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  draftId: uuid("draft_id").notNull(),
+  scheduledDate: timestamp("scheduled_date").notNull(),
+  platform: varchar("platform", { length: 50 }),
+  theme: varchar("theme", { length: 100 }),
+  status: varchar("status", { length: 20 }).default("scheduled"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* =====================================================
+ * WELLNESS TOOLS TABLES
+ * User entries for values, boundaries, movement, coherence
+ * =====================================================
+ */
+
+/* ================= VALUES ENTRIES ================= */
+export const valuesEntries = pgTable("values_entries", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  coreValues: text("core_values"), // JSON array of top values
+  reflections: text("reflections"),
+  priorityRanking: text("priority_ranking"), // JSON array
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+/* ================= BOUNDARY SCRIPTS ================= */
+export const boundaryScripts = pgTable("boundary_scripts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  situation: text("situation"),
+  boundaryType: varchar("boundary_type", { length: 50 }), // time, emotional, physical, digital
+  script: text("script"),
+  softVersion: text("soft_version"),
+  practiceNotes: text("practice_notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+/* ================= MOVEMENT LOGS ================= */
+export const movementLogs = pgTable("movement_logs", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  movementType: varchar("movement_type", { length: 50 }), // stretch, walk, dance, shake, yoga
+  durationSeconds: integer("duration_seconds"),
+  energyBefore: integer("energy_before"),
+  energyAfter: integer("energy_after"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= COHERENCE ENTRIES ================= */
+export const coherenceEntries = pgTable("coherence_entries", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  alignmentLevel: integer("alignment_level"), // 1-10 scale
+  bodyState: text("body_state"),
+  mindState: text("mind_state"),
+  heartState: text("heart_state"),
+  integrationNotes: text("integration_notes"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
