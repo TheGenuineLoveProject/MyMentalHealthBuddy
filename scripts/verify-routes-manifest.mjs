@@ -9,6 +9,9 @@
  *   2. reports/routes.config.snapshot.json matches reports/routes.config.sha256
  *   3. Stored snapshot matches freshly computed snapshot from routes.js
  * 
+ * On drift, writes reports/routes.diff.json for machine-readable PR comments.
+ * On clean, deletes reports/routes.diff.json if it exists.
+ * 
  * Usage:
  *   node scripts/verify-routes-manifest.mjs           (verify only)
  *   node scripts/verify-routes-manifest.mjs --fix     (auto-repair locally)
@@ -16,10 +19,6 @@
  * CI Integration:
  *   npm run gen:pages:all
  *   npm run verify:routes
- * 
- * If this script fails, it means the route manifest or config snapshot has
- * drifted from the committed version. Run `npm run gen:pages:all` and commit
- * the updated reports/* files.
  * 
  * ============================================================================
  */
@@ -40,6 +39,7 @@ const MANIFEST_PATH = path.join(ROOT, 'reports', 'routes.generated.json');
 const MANIFEST_HASH_PATH = path.join(ROOT, 'reports', 'routes.generated.sha256');
 const CONFIG_PATH = path.join(ROOT, 'reports', 'routes.config.snapshot.json');
 const CONFIG_HASH_PATH = path.join(ROOT, 'reports', 'routes.config.sha256');
+const DIFF_PATH = path.join(ROOT, 'reports', 'routes.diff.json');
 
 // Parse arguments
 const args = process.argv.slice(2);
@@ -105,7 +105,8 @@ async function verifySnapshotFreshness() {
     error: null,
     storedHash: null,
     freshHash: null,
-    diffSummary: null
+    diffSummary: null,
+    diffData: null
   };
 
   if (!fs.existsSync(CONFIG_PATH)) {
@@ -131,8 +132,10 @@ async function verifySnapshotFreshness() {
 
   result.error = 'Snapshot is stale (routes.js has changed)';
 
-  // Compute diff summary
-  result.diffSummary = computeDiff(storedSnapshot, freshSnapshot);
+  // Compute diff (returns both summary for console and data for JSON)
+  const { summary, data } = computeDiff(storedSnapshot, freshSnapshot);
+  result.diffSummary = summary;
+  result.diffData = data;
 
   return result;
 }
@@ -148,23 +151,39 @@ function computeDiff(stored, fresh) {
     freshRoutes.set(entry.route, entry);
   }
 
-  const addedRoutes = [];
-  const removedRoutes = [];
-  const changedTitles = [];
-  const changedCategories = [];
-  const changedHashes = [];
+  // Arrays for console summary (simple)
+  const addedRoutesSummary = [];
+  const removedRoutesSummary = [];
+  const changedTitlesSummary = [];
+  const changedCategoriesSummary = [];
+  const changedHashesSummary = [];
+
+  // Arrays for JSON data (rich)
+  const addedRoutesData = [];
+  const removedRoutesData = [];
+  const titleChangedData = [];
+  const categoryChangedData = [];
+  const hashChangedData = [];
 
   // Added (in fresh but not stored)
-  for (const [route] of freshRoutes) {
+  for (const [route, freshEntry] of freshRoutes) {
     if (!storedRoutes.has(route)) {
-      addedRoutes.push(route);
+      addedRoutesSummary.push(route);
+      addedRoutesData.push({
+        route,
+        category: freshEntry.category || null
+      });
     }
   }
 
   // Removed (in stored but not fresh)
-  for (const [route] of storedRoutes) {
+  for (const [route, storedEntry] of storedRoutes) {
     if (!freshRoutes.has(route)) {
-      removedRoutes.push(route);
+      removedRoutesSummary.push(route);
+      removedRoutesData.push({
+        route,
+        category: storedEntry.category || null
+      });
     }
   }
 
@@ -175,19 +194,31 @@ function computeDiff(stored, fresh) {
 
     // Track title changes
     if (storedEntry.title !== freshEntry.title) {
-      changedTitles.push({
+      changedTitlesSummary.push({
         route,
         oldTitle: storedEntry.title || '(null)',
         newTitle: freshEntry.title || '(null)'
+      });
+      titleChangedData.push({
+        route,
+        fromTitle: storedEntry.title || null,
+        toTitle: freshEntry.title || null,
+        category: freshEntry.category || null
       });
     }
 
     // Track category changes (separate from title)
     if (storedEntry.category !== freshEntry.category) {
-      changedCategories.push({
+      changedCategoriesSummary.push({
         route,
         fromCategory: storedEntry.category || '(null)',
         toCategory: freshEntry.category || '(null)'
+      });
+      categoryChangedData.push({
+        route,
+        fromCategory: storedEntry.category || null,
+        toCategory: freshEntry.category || null,
+        title: freshEntry.title || null
       });
     }
 
@@ -195,12 +226,82 @@ function computeDiff(stored, fresh) {
     if (storedEntry.routeHash !== freshEntry.routeHash &&
         storedEntry.title === freshEntry.title &&
         storedEntry.category === freshEntry.category) {
-      changedHashes.push(route);
+      changedHashesSummary.push(route);
+      hashChangedData.push({
+        route,
+        category: freshEntry.category || null,
+        title: freshEntry.title || null,
+        fromRouteHash: storedEntry.routeHash,
+        toRouteHash: freshEntry.routeHash
+      });
     }
   }
 
-  return { addedRoutes, removedRoutes, changedTitles, changedCategories, changedHashes };
+  // Sort all arrays by route for deterministic output
+  const sortByRoute = (a, b) => (a.route || a).localeCompare(b.route || b);
+  addedRoutesData.sort(sortByRoute);
+  removedRoutesData.sort(sortByRoute);
+  titleChangedData.sort(sortByRoute);
+  categoryChangedData.sort(sortByRoute);
+  hashChangedData.sort(sortByRoute);
+  addedRoutesSummary.sort();
+  removedRoutesSummary.sort();
+
+  return {
+    summary: {
+      addedRoutes: addedRoutesSummary,
+      removedRoutes: removedRoutesSummary,
+      changedTitles: changedTitlesSummary,
+      changedCategories: changedCategoriesSummary,
+      changedHashes: changedHashesSummary
+    },
+    data: {
+      added: addedRoutesData,
+      removed: removedRoutesData,
+      titleChanged: titleChangedData,
+      categoryChanged: categoryChangedData,
+      hashChanged: hashChangedData
+    }
+  };
 }
+
+// ============================================================================
+// DIFF JSON FILE MANAGEMENT
+// ============================================================================
+
+function writeDiffJson(diffData) {
+  const diffJson = {
+    generatedAt: new Date().toISOString(),
+    status: 'drift',
+    mode: 'verify',
+    summary: {
+      added: diffData.added.length,
+      removed: diffData.removed.length,
+      titleChanged: diffData.titleChanged.length,
+      categoryChanged: diffData.categoryChanged.length,
+      hashChanged: diffData.hashChanged.length
+    },
+    added: diffData.added,
+    removed: diffData.removed,
+    titleChanged: diffData.titleChanged,
+    categoryChanged: diffData.categoryChanged,
+    hashChanged: diffData.hashChanged,
+    limits: { printedMax: 10 }
+  };
+
+  fs.writeFileSync(DIFF_PATH, JSON.stringify(diffJson, null, 2) + '\n');
+  console.log(`\n📝 Wrote ${path.relative(ROOT, DIFF_PATH)}`);
+}
+
+function deleteDiffJson() {
+  if (fs.existsSync(DIFF_PATH)) {
+    fs.unlinkSync(DIFF_PATH);
+  }
+}
+
+// ============================================================================
+// CONSOLE OUTPUT
+// ============================================================================
 
 function printResult(result) {
   if (result.ok) {
@@ -292,6 +393,10 @@ function printDiffSummary(diff) {
   }
 }
 
+// ============================================================================
+// VERIFICATION RUNNER
+// ============================================================================
+
 async function runVerification() {
   console.log('🔍 Verifying route manifest integrity...\n');
 
@@ -315,8 +420,14 @@ async function runVerification() {
 
   const allOk = manifestResult.ok && configResult.ok && freshnessResult.ok;
 
+  // Manage diff JSON file
   if (allOk) {
+    // Clean: delete diff file if exists
+    deleteDiffJson();
     console.log('\n✅ All verifications passed. No drift detected.\n');
+  } else if (freshnessResult.diffData) {
+    // Drift: write diff file
+    writeDiffJson(freshnessResult.diffData);
   }
 
   return { allOk, manifestResult, configResult, freshnessResult };
