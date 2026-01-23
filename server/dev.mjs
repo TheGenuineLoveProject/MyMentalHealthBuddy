@@ -337,10 +337,58 @@ async function startServer() {
     }
   });
 
-  const PORT = process.env.PORT || 5000;
-  const server = app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Dev server listening on http://0.0.0.0:${PORT}`);
-  });
+  const preferredPort = parseInt(process.env.PORT, 10) || 5000;
+  const fallbackPorts = [preferredPort, 5001, 5002, 5003];
+  
+  async function tryListen(port) {
+    return new Promise((resolve, reject) => {
+      const server = app.listen(port, "0.0.0.0");
+      server.once('listening', () => resolve(server));
+      server.once('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+          reject(err);
+        } else {
+          reject(err);
+        }
+      });
+    });
+  }
+  
+  let server = null;
+  let boundPort = null;
+  
+  for (const port of fallbackPorts) {
+    try {
+      server = await tryListen(port);
+      boundPort = port;
+      break;
+    } catch (err) {
+      if (err.code === 'EADDRINUSE') {
+        console.log(`Port ${port} is busy, trying next...`);
+        try {
+          const { execSync } = await import('child_process');
+          const pids = execSync(`lsof -ti tcp:${port} 2>/dev/null || true`, { encoding: 'utf-8' }).trim();
+          if (pids) {
+            console.log(`  Blocked by PID(s): ${pids.split('\n').join(', ')}`);
+            console.log(`  To free: kill -9 ${pids.split('\n').join(' ')}`);
+          }
+        } catch (e) {}
+      } else {
+        throw err;
+      }
+    }
+  }
+  
+  if (!server) {
+    console.error(`Could not bind to any port: ${fallbackPorts.join(', ')}`);
+    console.error(`Run: npm run dev:free && npm run dev`);
+    process.exit(1);
+  }
+  
+  console.log(`Dev server listening on http://0.0.0.0:${boundPort}`);
+  if (boundPort !== preferredPort) {
+    console.log(`  (preferred port ${preferredPort} was busy)`);
+  }
 
   function gracefulShutdown(signal) {
     console.log(`${signal} received, shutting down...`);
