@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle, Sparkles, Heart } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const INITIAL_MESSAGE = {
   role: "assistant",
@@ -219,10 +220,7 @@ export default function AIChatPage() {
               <Send className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
-          <p className="text-xs text-[var(--text-muted)] mt-3 text-center flex items-center justify-center gap-1.5" role="note">
-            <Heart className="w-3 h-3" aria-hidden="true" />
-            This is a supportive companion, not a replacement for professional mental health care.
-          </p>
+          <SafetyFooter variant="compact" showDisclaimer={true} className="mt-4 max-w-4xl mx-auto" />
         </form>
       </div>
     </>

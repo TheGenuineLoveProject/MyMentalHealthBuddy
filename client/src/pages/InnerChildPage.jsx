@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Baby, Sparkles, Shield, Sun, MessageCircle, Gift, Home, Star, Brain, Eye, Feather, BookOpen, Flower2, Zap } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const innerChildNeeds = [
   {
@@ -479,11 +480,7 @@ export default function InnerChildPage() {
           </ul>
         </div>
 
-        <div className="text-center py-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-            This content is designed to support your healing but is not a replacement for professional mental health care.
-          </p>
-        </div>
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );
