@@ -1,10 +1,18 @@
 #!/usr/bin/env node
 /**
  * print-routes-diff.mjs
- * Reads reports/routes.diff.json and prints a PR-ready Markdown comment to stdout.
+ * Reads reports/routes.diff.json and prints a PR-ready Markdown comment or
+ * GitHub Actions annotations to stdout.
  * 
  * Usage:
- *   node scripts/print-routes-diff.mjs [--file=<path>] [--max=<n>]
+ *   node scripts/print-routes-diff.mjs [options]
+ * 
+ * Options:
+ *   --file=<path>     Path to diff JSON (default: reports/routes.diff.json)
+ *   --max=<n>         Limit items per section (default: 10)
+ *   --format=md|gha   Output format (default: md)
+ *   --title="..."     Custom title (default: "Route manifest drift detected")
+ *   --ci              Force --format=gha unless explicitly set
  * 
  * Exit codes:
  *   0 - Clean (no drift or file missing)
@@ -21,7 +29,11 @@ import path from 'path';
 function parseArgs(argv) {
   const args = {
     file: 'reports/routes.diff.json',
-    max: 10
+    max: 10,
+    format: 'md',
+    title: 'Route manifest drift detected',
+    ci: false,
+    formatExplicit: false
   };
 
   for (const arg of argv.slice(2)) {
@@ -32,7 +44,22 @@ function parseArgs(argv) {
       if (!isNaN(val) && val > 0) {
         args.max = val;
       }
+    } else if (arg.startsWith('--format=')) {
+      const fmt = arg.slice(9).toLowerCase();
+      if (fmt === 'md' || fmt === 'gha') {
+        args.format = fmt;
+        args.formatExplicit = true;
+      }
+    } else if (arg.startsWith('--title=')) {
+      args.title = arg.slice(8).replace(/^["']|["']$/g, '');
+    } else if (arg === '--ci') {
+      args.ci = true;
     }
+  }
+
+  // --ci forces gha unless --format was explicitly set
+  if (args.ci && !args.formatExplicit) {
+    args.format = 'gha';
   }
 
   return args;
@@ -76,15 +103,18 @@ function formatHashChanged(item) {
   return `~ ${item.route} (hash changed)`;
 }
 
-function renderSection(title, items, formatter, max) {
-  if (!items || items.length === 0) return '';
-
-  const sorted = [...items].sort((a, b) => {
+function sortByRoute(items) {
+  return [...items].sort((a, b) => {
     const routeA = typeof a === 'string' ? a : a.route;
     const routeB = typeof b === 'string' ? b : b.route;
     return routeA.localeCompare(routeB);
   });
+}
 
+function renderSection(title, items, formatter, max) {
+  if (!items || items.length === 0) return '';
+
+  const sorted = sortByRoute(items);
   const { shown, remaining } = truncateList(sorted, max);
   const lines = [
     `### ${title}`,
@@ -142,6 +172,63 @@ function generateMarkdown(diffData, max) {
 }
 
 // ============================================================================
+// GITHUB ACTIONS ANNOTATION GENERATION
+// ============================================================================
+
+function ghaEscape(str) {
+  // Escape special characters for GHA annotations
+  return String(str).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+}
+
+function generateGhaClean() {
+  return '::notice title=Routes::Routes manifest clean';
+}
+
+function generateGhaDrift(diffData, max, title) {
+  const lines = [];
+  const summary = diffData.summary || {};
+  const cmd = diffData.recommendedCommand || 'npm run gen:pages:all && npm run verify:routes';
+
+  // Main error line
+  lines.push(`::error title=Routes::${ghaEscape(title)}. Run: ${ghaEscape(cmd)}`);
+
+  // Summary warning
+  const summaryParts = [];
+  summaryParts.push(`Added: ${summary.added || 0}`);
+  summaryParts.push(`Removed: ${summary.removed || 0}`);
+  summaryParts.push(`Title changed: ${summary.titleChanged || 0}`);
+  summaryParts.push(`Category changed: ${summary.categoryChanged || 0}`);
+  summaryParts.push(`Hash changed: ${summary.hashChanged || 0}`);
+  lines.push(`::warning title=Routes::${summaryParts.join(', ')}`);
+
+  // Per-route warnings
+  const sections = [
+    { items: diffData.added, formatter: formatAddedItem },
+    { items: diffData.removed, formatter: formatRemovedItem },
+    { items: diffData.titleChanged, formatter: formatTitleChanged },
+    { items: diffData.categoryChanged, formatter: formatCategoryChanged },
+    { items: diffData.hashChanged, formatter: formatHashChanged }
+  ];
+
+  for (const section of sections) {
+    if (!section.items || section.items.length === 0) continue;
+    const sorted = sortByRoute(section.items);
+    const { shown, remaining } = truncateList(sorted, max);
+
+    for (const item of shown) {
+      const formatted = section.formatter(item);
+      lines.push(`::warning title=Routes::${ghaEscape(formatted)}`);
+    }
+
+    if (remaining > 0) {
+      lines.push(`::warning title=Routes::…and ${remaining} more`);
+    }
+  }
+
+  return lines.join('\n');
+}
+
+// ============================================================================
 // MAIN
 // ============================================================================
 
@@ -149,11 +236,17 @@ function main() {
   const args = parseArgs(process.argv);
   const diffPath = path.resolve(args.file);
 
+  // File missing
   if (!fs.existsSync(diffPath)) {
-    console.log('✅ Routes manifest clean (no reports/routes.diff.json found).');
+    if (args.format === 'gha') {
+      console.log(generateGhaClean());
+    } else {
+      console.log('✅ Routes manifest clean (no reports/routes.diff.json found).');
+    }
     process.exit(0);
   }
 
+  // Read diff file
   let diffData;
   try {
     const content = fs.readFileSync(diffPath, 'utf-8');
@@ -163,18 +256,32 @@ function main() {
     process.exit(1);
   }
 
+  // Status clean
   if (diffData.status === 'clean') {
-    console.log('✅ Routes manifest is clean. No drift detected.');
+    if (args.format === 'gha') {
+      console.log(generateGhaClean());
+    } else {
+      console.log('✅ Routes manifest is clean. No drift detected.');
+    }
     process.exit(0);
   }
 
+  // Status drift
   if (diffData.status === 'drift') {
-    const markdown = generateMarkdown(diffData, args.max);
-    console.log(markdown);
+    if (args.format === 'gha') {
+      console.log(generateGhaDrift(diffData, args.max, args.title));
+    } else {
+      console.log(generateMarkdown(diffData, args.max));
+    }
     process.exit(2);
   }
 
-  console.log('✅ Routes manifest status unknown. Assuming clean.');
+  // Unknown status
+  if (args.format === 'gha') {
+    console.log(generateGhaClean());
+  } else {
+    console.log('✅ Routes manifest status unknown. Assuming clean.');
+  }
   process.exit(0);
 }
 

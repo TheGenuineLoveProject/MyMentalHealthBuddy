@@ -28,6 +28,8 @@
     "verify:routes:fix": "node scripts/verify-routes-manifest.mjs --fix",
     "print:routes:diff": "node scripts/print-routes-diff.mjs",
     "print:routes:diff:ci": "node scripts/print-routes-diff.mjs --max=20",
+    "print:routes:diff:gha": "node scripts/print-routes-diff.mjs --format=gha --ci",
+    "print:routes:diff:gha:max20": "node scripts/print-routes-diff.mjs --format=gha --max=20 --ci",
     "typecheck": "npx tsc -p client/tsconfig.json --noEmit || true",
     "visual:report": "node scripts/visual-report.mjs",
     "visual:doctor": "node tools/visual-doctor.mjs",
