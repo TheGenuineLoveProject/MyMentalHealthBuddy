@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-01-23T05:12:45.502Z",
+  "generatedAt": "2026-01-23T06:03:10.705Z",
   "mode": "all",
   "category": null,
   "from": null,
@@ -21,10 +21,10 @@
   ],
   "counts": {
     "created": 0,
-    "updated": 107,
+    "updated": 122,
     "skippedManual": 0,
     "aliasRedirects": 2,
-    "totalWritten": 107
+    "totalWritten": 122
   },
   "files": {
     "created": [],
@@ -36,6 +36,9 @@
       "client/src/pages/generated/admin.jsx",
       "client/src/pages/generated/advanced.jsx",
       "client/src/pages/generated/affirmations.jsx",
+      "client/src/pages/generated/ai-coach.jsx",
+      "client/src/pages/generated/ai-insights.jsx",
+      "client/src/pages/generated/ai-meditation.jsx",
       "client/src/pages/generated/analytics.jsx",
       "client/src/pages/generated/atlas.jsx",
       "client/src/pages/generated/behavior-change.jsx",
@@ -48,7 +51,11 @@
       "client/src/pages/generated/cognitive-architecture.jsx",
       "client/src/pages/generated/cognitive-tools.jsx",
       "client/src/pages/generated/collaborative-lab.jsx",
+      "client/src/pages/generated/community-challenges.jsx",
       "client/src/pages/generated/community-discussion-[param].jsx",
+      "client/src/pages/generated/community-events.jsx",
+      "client/src/pages/generated/community-mentors.jsx",
+      "client/src/pages/generated/community-stories.jsx",
       "client/src/pages/generated/community.jsx",
       "client/src/pages/generated/companion.jsx",
       "client/src/pages/generated/content-admin.jsx",
@@ -122,6 +129,9 @@
       "client/src/pages/generated/strategy-maps.jsx",
       "client/src/pages/generated/stress-response.jsx",
       "client/src/pages/generated/study-vault.jsx",
+      "client/src/pages/generated/support-accessibility.jsx",
+      "client/src/pages/generated/support-feedback.jsx",
+      "client/src/pages/generated/support-guides.jsx",
       "client/src/pages/generated/support.jsx",
       "client/src/pages/generated/systems-thinking.jsx",
       "client/src/pages/generated/terms.jsx",
@@ -129,7 +139,12 @@
       "client/src/pages/generated/tools.jsx",
       "client/src/pages/generated/upgrade.jsx",
       "client/src/pages/generated/welcome.jsx",
+      "client/src/pages/generated/wellness-creativity.jsx",
       "client/src/pages/generated/wellness-hub.jsx",
+      "client/src/pages/generated/wellness-movement.jsx",
+      "client/src/pages/generated/wellness-nature.jsx",
+      "client/src/pages/generated/wellness-nutrition.jsx",
+      "client/src/pages/generated/wellness-sleep.jsx",
       "client/src/pages/generated/wellness.jsx",
       "client/src/pages/generated/wireframes.jsx",
       "client/src/pages/generated/wisdom-practices.jsx",
@@ -197,6 +212,27 @@
       "route": "/affirmations",
       "category": "landing",
       "pageFile": "client/src/pages/generated/affirmations.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/ai/coach",
+      "category": "ai",
+      "pageFile": "client/src/pages/generated/ai-coach.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/ai/insights",
+      "category": "ai",
+      "pageFile": "client/src/pages/generated/ai-insights.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/ai/meditation",
+      "category": "ai",
+      "pageFile": "client/src/pages/generated/ai-meditation.jsx",
       "kind": "static",
       "canonical": null
     },
@@ -292,10 +328,38 @@
       "canonical": null
     },
     {
+      "route": "/community/challenges",
+      "category": "community",
+      "pageFile": "client/src/pages/generated/community-challenges.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
       "route": "/community/discussion/:id",
       "category": "community",
       "pageFile": "client/src/pages/generated/community-discussion-[param].jsx",
       "kind": "dynamic",
+      "canonical": null
+    },
+    {
+      "route": "/community/events",
+      "category": "community",
+      "pageFile": "client/src/pages/generated/community-events.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/community/mentors",
+      "category": "community",
+      "pageFile": "client/src/pages/generated/community-mentors.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/community/stories",
+      "category": "community",
+      "pageFile": "client/src/pages/generated/community-stories.jsx",
+      "kind": "static",
       "canonical": null
     },
     {
@@ -803,6 +867,27 @@
       "canonical": null
     },
     {
+      "route": "/support/accessibility",
+      "category": "support",
+      "pageFile": "client/src/pages/generated/support-accessibility.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/support/feedback",
+      "category": "support",
+      "pageFile": "client/src/pages/generated/support-feedback.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/support/guides",
+      "category": "support",
+      "pageFile": "client/src/pages/generated/support-guides.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
       "route": "/systems-thinking",
       "category": "advanced",
       "pageFile": "client/src/pages/generated/systems-thinking.jsx",
@@ -855,6 +940,41 @@
       "route": "/wellness-hub",
       "category": "landing",
       "pageFile": "client/src/pages/generated/wellness-hub.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wellness/creativity",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-creativity.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wellness/movement",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-movement.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wellness/nature",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-nature.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wellness/nutrition",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-nutrition.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wellness/sleep",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-sleep.jsx",
       "kind": "static",
       "canonical": null
     },

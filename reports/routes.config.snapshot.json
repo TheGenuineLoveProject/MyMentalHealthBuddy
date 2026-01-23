@@ -1,5 +1,5 @@
 {
-  "snapshotHash": "db31b8cba93871dfd2ce046083c6afd20600fab4afc0bb4ac1ef88c722e49f6f",
+  "snapshotHash": "084540180c62926200314b0748dd065ad2ee05bb8d96b07083fa171ef8104cb4",
   "categoryOrder": [
     {
       "letter": "A",
@@ -55,13 +55,16 @@
     }
   ],
   "routeHashes": {
-    "/": "90429ae619174fb32a82bbb4840fdc4dec1e5d38c75e5026df6b5d8d6506bc46",
+    "/": "d900a20bdb487884490ea62010feebd525befe4e2a22a08a7049fa38d37b29ff",
     "/account/billing": "008c9b886aa29358b339bef2e5d6e8ecfe013366d8dcf0f6d8822f3a949d8242",
     "/account/profile": "8de958679cc9cd89aec2687dfddc07c93311f75fd41366affc1a6e4de6ed032f",
     "/account/settings": "86e58e1e829e854b1f06621efa8502c7091d3307f7420056e44c43ff4db87cbe",
     "/admin": "b626cbfc0cc98cda3b609b6a8f587fd4f52a48ddf250ca7af3f0988ddd1a6a8f",
     "/advanced": "139d33c76acbad663ff0f07a980d4d3ac5b20ae53bbbd4286b98f6bf83856f85",
     "/affirmations": "e20b9df24f79d50f20f6df24ff57be881243399985b47a1da0929dc1bbd65355",
+    "/ai/coach": "8cb8cb15b6c1a1cf9ef6d726fdea810ca694ef1fbc98f98463678e98ce8f717b",
+    "/ai/insights": "5d02364c8dd4b55c847ec22c06a3c90ce4067041c2420ac79eb6dffab92504ab",
+    "/ai/meditation": "df47cc8d9acdbe4b5e82b980e5be590442c5e0a24a649fd2a9e047a3c1fe8c9c",
     "/analytics": "ec6feea496bf272917827cb5d1a850474e57bf01ec42ef06f6e768323a8c5eca",
     "/atlas": "f2cdc15452d59870a703d3514de1a1a32f1740718196f21fcb13ad9cf8c98fa5",
     "/behavior-change": "617f613a003f67e511a95b9d5f0d9613f393363d93059a004a76f800304e6c51",
@@ -75,7 +78,11 @@
     "/cognitive-tools": "6d4448f6d614c2b738bc78456e2569a8340fa7e2bd244006b4799b461edd12af",
     "/collaborative-lab": "a23983248617aba3c609fb01fb6bec07a45d5a47b40c1310e1115f4e9dbffe85",
     "/community": "f0d729dbacfb4765ca171bc82a460fa6e73d62c36bf84e68c55b22e467ba0ac9",
+    "/community/challenges": "314cda1b9605fcbfd43ac8b1334a29ac41811f7bd04f363e50677b4e56c430fb",
     "/community/discussion/:id": "c522a4184246bdc0f4531c8ca6db00243ce1171d7f2f0ded7e4a93c29de361b8",
+    "/community/events": "e243718a56eb678e8ce7a2aa6aea1546cf23fb3656ac99a9d3ec73181f3562be",
+    "/community/mentors": "1fb2c85820401e6fecb00124015423e88c0068004c8989d57df4bf7ea3659d06",
+    "/community/stories": "10b946af3f91ae5317998737b614978de4b7a3acf4bdb6e133aa221b29dbe202",
     "/companion": "0c844315977074db2e1d84490ce08022046d53bf310e6a94c52f2629511b44dc",
     "/content-admin": "804ade050fe3d11333f95d84c24f0b10a35ac213eec384fc7510abe419664286",
     "/content-index": "7852c2027724b3335ff23bee9b2213d3f35a7760a7442ec772c5e05ea1372b09",
@@ -100,7 +107,7 @@
     "/grounding": "052c0ae21b6583dc6313d5907f2b01fb79513c3f9b3fdb66158aafdd8aa78214",
     "/growth-analytics": "6ed6eec86acb36d9b913e8eb576401a0f9cd3ff07d266dfe9227356fff56088e",
     "/guided-journaling": "3a773f1e944e6e02b2151c72e6e057bd5caf24978616ab401d0637d0afa27f52",
-    "/healing": "c60018d6250f51baf91bb4adb2d75dd16b8985d202536a0db3c171c4b9ff1568",
+    "/healing": "78dd13f3d5b2b58d5b90ec28b8fcb269e18b0c77d2dc4397cd2df5ce6d973c8e",
     "/healing-journeys": "1bba3e2e3df1f6fc1c3154c38c24364e6777e3060b70d03853367214216739a6",
     "/healing-library": "320db38d4c01f2f710a2ca8eccdf61a8c481833b203601f608ce9f6547479d04",
     "/health": "bd355c0aca8a950941918b5930d5fb51a8ae2e6bb62c6457d14ff99346fc9371",
@@ -110,7 +117,7 @@
     "/insight-cards": "fe4bfab9af318a6c4ed712ca08b2264bb3e981d7d37f33064e848c03171a6b36",
     "/journal": "55f03dbb1c3c09fce9580447f9f625bb00fa8b634b5e7dc5222e7e2d12f6421b",
     "/knowledge-synthesis": "655e6f4c4da1d93e5624f14b69cf3026e76db6874a943fa1b20e61d387837480",
-    "/landing": "cc031edf62d839d177eaaa55b09865801ea909841e6ea8d0409d8ec10a636a43",
+    "/landing": "4f0bcb34d847df97e98d187d592e2f50d45b5260385a31ddab6dc0647a2d5710",
     "/legal": "d92429d5e92479b9be083da8346eee38fc43926322e02349f0964ae8b01c0051",
     "/login": "01ba1492005a6c57bdba2f1588dc14d3f833890507ca3d9c7e72c5f8682081f7",
     "/login/callback": "7102f7ff3a2d3228b9319ddd6b76c8b8de02f9031f6dcc2e786bf2cc624734fe",
@@ -122,10 +129,10 @@
     "/news": "675e4de370cc3ca2e20ae35d1a2305723afdd87ee6e34f3d40ee3219b6107de3",
     "/not-found": "019a89e7d1fd468369590ccb7484f7b349dc89404d265724e8d48883be603266",
     "/onboarding": "a5e423937394070443ea9e81dd5ef586bc4b5a84eb2bf0e2ac34dcbab939782b",
-    "/original-home": "63681735c744aacebb6df4c710a604b20bc6dc319c8e505c79108d16e5404504",
+    "/original-home": "f7e4bda392691091935b930af1cc8657fe58d0cb5cb3fd425cf01a4f9140338e",
     "/philosophical-inquiry": "a7f004bd2b57513580adb5775de99ffd0a688052c2ce99a609dea8e7c39830e5",
     "/premium": "92e148ec262fd4f6fecbb5115c1989ef58b10c7fc4b6bb242706c628ebe36d59",
-    "/pricing": "d45322b7f6a0e66e5156e4d8495a6165f9573d427f05d650cd0834850f11d7d2",
+    "/pricing": "5539f3c3c1df0f7a5ff5765c8beaf702990c58bca7ed7535d851ffe536713148",
     "/privacy": "8edabe77d880c24cc94d53acd75e4aa7b0e1a592fd67c035cac474a7ec6edfa3",
     "/professional-resources": "89633f4a858d4e20b8d9de40e79e30a1dbc7a942c5125faaf8e484232899e427",
     "/progress": "43e423f3c2390b2784c3a92ad45366575f839a9866230b8f1556b0a46f3f838b",
@@ -148,6 +155,9 @@
     "/stress-response": "30431bb5e64f3f239a9635cdc2eb35889383446f71576ff9b739749960848ff6",
     "/study-vault": "8eb0b90be51de5359df870e0cc8a09f8e10ed7886df859dc411d7f3984fd2f94",
     "/support": "4512365c09fb51806b796ca682814bb32d929d56f9d131b717d21aa41653f583",
+    "/support/accessibility": "b9233fb7734b9eef389bcb0c50817b85e0deac103e4fcdeb5f2e93ec90db698f",
+    "/support/feedback": "e2ffca0d0b588c24695374c1f0833245230378c1900d878e7b1bdb1c5306a5de",
+    "/support/guides": "66a4836431c4663fb3e3f434c053b654fb54ac85db1610094b02846fcfc4e263",
     "/systems-thinking": "8be2c0f28b881ef656b9d86aa4834ba6ba232368c18b01604d837348edea2811",
     "/terms": "b5fde2c991184a1eab0a8519bc2a81158949a62c8a513ad4f12f5935b6d45407",
     "/today": "2577c927eacfe017ee864fb40c607604443af90bd27ee3f6e10a5f1f3b08a7cb",
@@ -156,6 +166,11 @@
     "/welcome": "a9aec92f46ec4fd6710b064adc7033978b81eb433391626303b062b21207df2d",
     "/wellness": "fcf17a9617c832120cd8d69772683fa67b5a5a2dd1e6eb9d32ea748413ed4653",
     "/wellness-hub": "bd6a8b53ed5e1701ccb0f11a734145296db058c333fbcb62dd0427f77f21a850",
+    "/wellness/creativity": "3c3acec12ce7cc20a8ffda65ad3ddb018c4a372845a50161c5941bba80e69c6a",
+    "/wellness/movement": "eca46e81ddea90f66ebbd16209a3533b82a380b00f6118f90997eff4a7310dfc",
+    "/wellness/nature": "103ad669e968be3a2d1f79607d234d126b8159f98a3a7d9206139ef97c36c037",
+    "/wellness/nutrition": "667e86e396c79393b8b133e31b20ea74937070a1e70609092008975ace4e346b",
+    "/wellness/sleep": "7aca5e6206cb21b5a08dfa6442ce4be4780b207c197f697fd61b34a948cf8113",
     "/wireframes": "3fd3b5b76a151f9fa93f94c41137ca545c3b9d08187d4afbf59f3b4ede8f28ef",
     "/wisdom": "da90d3f013b03e932a9d6b6531324f01f22b4f64ec5359a4530616a15aea63b4",
     "/wisdom-practices": "7996f3327fdf3a3f96bc99d3742580d07fdcfd9f8e3667cd13dd094662646a31",
@@ -174,17 +189,17 @@
         "title": "You deserve a gentle space",
         "subtitle": "This is a quiet corner of the internet built for people who carry more than they show. Here, you can process grief, calm your nervous system, reconnect with your inner child, and learn to hold yourself with compassion—all in complete privacy.",
         "primaryCta": {
-          "label": "Start gently",
+          "label": "Begin when you're ready",
           "href": "/register"
         },
         "secondaryCta": {
           "label": "Explore at your pace",
-          "href": "#pathways"
+          "href": "#how-it-works"
         }
       },
-      "sectionsCount": 3,
-      "modulesCount": 0,
-      "routeHash": "90429ae619174fb32a82bbb4840fdc4dec1e5d38c75e5026df6b5d8d6506bc46"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "d900a20bdb487884490ea62010feebd525befe4e2a22a08a7049fa38d37b29ff"
     },
     {
       "route": "/account/billing",
@@ -323,6 +338,75 @@
       "sectionsCount": 1,
       "modulesCount": 0,
       "routeHash": "e20b9df24f79d50f20f6df24ff57be881243399985b47a1da0929dc1bbd65355"
+    },
+    {
+      "route": "/ai/coach",
+      "category": "ai",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "AI Coach — The Genuine Love Project",
+      "description": "Your personal AI wellness coaching companion.",
+      "hero": {
+        "title": "AI",
+        "subtitle": "Compassionate AI guidance for your healing journey.",
+        "primaryCta": {
+          "label": "Meet Your Coach",
+          "href": "#coach"
+        },
+        "secondaryCta": {
+          "label": "Coaching Plans",
+          "href": "#plans"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "8cb8cb15b6c1a1cf9ef6d726fdea810ca694ef1fbc98f98463678e98ce8f717b"
+    },
+    {
+      "route": "/ai/insights",
+      "category": "ai",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "AI Insights — The Genuine Love Project",
+      "description": "AI-generated insights about your wellness journey.",
+      "hero": {
+        "title": "AI",
+        "subtitle": "Personalized insights from your wellness data.",
+        "primaryCta": {
+          "label": "View Insights",
+          "href": "#insights"
+        },
+        "secondaryCta": {
+          "label": "Recommendations",
+          "href": "#recommendations"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "5d02364c8dd4b55c847ec22c06a3c90ce4067041c2420ac79eb6dffab92504ab"
+    },
+    {
+      "route": "/ai/meditation",
+      "category": "ai",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "AI Meditation — The Genuine Love Project",
+      "description": "AI-guided meditation sessions.",
+      "hero": {
+        "title": "AI",
+        "subtitle": "Personalized meditation sessions created just for you.",
+        "primaryCta": {
+          "label": "Start Meditation",
+          "href": "#meditate"
+        },
+        "secondaryCta": {
+          "label": "Session Library",
+          "href": "#library"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "df47cc8d9acdbe4b5e82b980e5be590442c5e0a24a649fd2a9e047a3c1fe8c9c"
     },
     {
       "route": "/analytics",
@@ -624,6 +708,29 @@
       "routeHash": "f0d729dbacfb4765ca171bc82a460fa6e73d62c36bf84e68c55b22e467ba0ac9"
     },
     {
+      "route": "/community/challenges",
+      "category": "community",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Challenges — The Genuine Love Project",
+      "description": "Join community wellness challenges.",
+      "hero": {
+        "title": "Wellness",
+        "subtitle": "Join supportive challenges with the community.",
+        "primaryCta": {
+          "label": "Join Challenge",
+          "href": "#challenges"
+        },
+        "secondaryCta": {
+          "label": "Create Challenge",
+          "href": "#create"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "314cda1b9605fcbfd43ac8b1334a29ac41811f7bd04f363e50677b4e56c430fb"
+    },
+    {
       "route": "/community/discussion/:id",
       "category": "community",
       "aliasOf": null,
@@ -645,6 +752,75 @@
       "sectionsCount": 0,
       "modulesCount": 0,
       "routeHash": "c522a4184246bdc0f4531c8ca6db00243ce1171d7f2f0ded7e4a93c29de361b8"
+    },
+    {
+      "route": "/community/events",
+      "category": "community",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Events — The Genuine Love Project",
+      "description": "Community events and gatherings.",
+      "hero": {
+        "title": "Community",
+        "subtitle": "Join healing circles, workshops, and community gatherings.",
+        "primaryCta": {
+          "label": "Browse Events",
+          "href": "#events"
+        },
+        "secondaryCta": {
+          "label": "Host Event",
+          "href": "#host"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "e243718a56eb678e8ce7a2aa6aea1546cf23fb3656ac99a9d3ec73181f3562be"
+    },
+    {
+      "route": "/community/mentors",
+      "category": "community",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Mentorship — The Genuine Love Project",
+      "description": "Connect with experienced mentors.",
+      "hero": {
+        "title": "Find a",
+        "subtitle": "Connect with those who've walked the path before.",
+        "primaryCta": {
+          "label": "Find Mentor",
+          "href": "#mentors"
+        },
+        "secondaryCta": {
+          "label": "Become Mentor",
+          "href": "#become"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "1fb2c85820401e6fecb00124015423e88c0068004c8989d57df4bf7ea3659d06"
+    },
+    {
+      "route": "/community/stories",
+      "category": "community",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Stories — The Genuine Love Project",
+      "description": "Read and share healing journeys.",
+      "hero": {
+        "title": "Healing",
+        "subtitle": "Read inspiring stories from fellow travelers.",
+        "primaryCta": {
+          "label": "Read Stories",
+          "href": "#stories"
+        },
+        "secondaryCta": {
+          "label": "Share Yours",
+          "href": "#share"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "10b946af3f91ae5317998737b614978de4b7a3acf4bdb6e133aa221b29dbe202"
     },
     {
       "route": "/companion",
@@ -1207,19 +1383,19 @@
       "description": "Explore gentle, evidence-based approaches to emotional healing. Somatic practices, inner child work, and nervous system regulation—all designed with your safety in mind.",
       "hero": {
         "title": "There is no wrong way",
-        "subtitle": "Whether you're just starting to explore or have been on this path for years, these resources are here to support you. Each tool is grounded in research and designed to feel safe, not overwhelming.",
+        "subtitle": "Whether you are just starting to explore or have been on this path for years, these resources are here to support you. Each tool is grounded in research and designed to feel safe, not overwhelming.",
         "primaryCta": {
-          "label": "Begin a practice",
+          "label": "Explore healing tools",
           "href": "/wellness-hub"
         },
         "secondaryCta": {
-          "label": "Learn about our approach",
-          "href": "#philosophy"
+          "label": "See how it works",
+          "href": "#how-it-works"
         }
       },
-      "sectionsCount": 3,
-      "modulesCount": 0,
-      "routeHash": "c60018d6250f51baf91bb4adb2d75dd16b8985d202536a0db3c171c4b9ff1568"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "78dd13f3d5b2b58d5b90ec28b8fcb269e18b0c77d2dc4397cd2df5ce6d973c8e"
     },
     {
       "route": "/healing-journeys",
@@ -1437,8 +1613,8 @@
         }
       },
       "sectionsCount": 3,
-      "modulesCount": 0,
-      "routeHash": "cc031edf62d839d177eaaa55b09865801ea909841e6ea8d0409d8ec10a636a43"
+      "modulesCount": 3,
+      "routeHash": "4f0bcb34d847df97e98d187d592e2f50d45b5260385a31ddab6dc0647a2d5710"
     },
     {
       "route": "/legal",
@@ -1712,9 +1888,9 @@
           "href": "#story"
         }
       },
-      "sectionsCount": 2,
-      "modulesCount": 0,
-      "routeHash": "63681735c744aacebb6df4c710a604b20bc6dc319c8e505c79108d16e5404504"
+      "sectionsCount": 3,
+      "modulesCount": 3,
+      "routeHash": "f7e4bda392691091935b930af1cc8657fe58d0cb5cb3fd425cf01a4f9140338e"
     },
     {
       "route": "/philosophical-inquiry",
@@ -1768,22 +1944,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Pricing — The Genuine Love Project",
-      "description": "Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you're ready.",
+      "description": "Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you are ready.",
       "hero": {
         "title": "Healing support should be",
-        "subtitle": "We believe cost shouldn't be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.",
+        "subtitle": "We believe cost should not be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.",
         "primaryCta": {
-          "label": "Start free",
+          "label": "Start free today",
           "href": "/register"
         },
         "secondaryCta": {
-          "label": "See what's included",
-          "href": "#plans"
+          "label": "See how it works",
+          "href": "#how-it-works"
         }
       },
-      "sectionsCount": 3,
-      "modulesCount": 0,
-      "routeHash": "d45322b7f6a0e66e5156e4d8495a6165f9573d427f05d650cd0834850f11d7d2"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "5539f3c3c1df0f7a5ff5765c8beaf702990c58bca7ed7535d851ffe536713148"
     },
     {
       "route": "/privacy",
@@ -2292,6 +2468,75 @@
       "routeHash": "4512365c09fb51806b796ca682814bb32d929d56f9d131b717d21aa41653f583"
     },
     {
+      "route": "/support/accessibility",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Accessibility — The Genuine Love Project",
+      "description": "Our commitment to accessibility.",
+      "hero": {
+        "title": "Accessibility",
+        "subtitle": "Our commitment to making healing accessible to all.",
+        "primaryCta": {
+          "label": "Learn More",
+          "href": "#accessibility"
+        },
+        "secondaryCta": {
+          "label": "Report Issue",
+          "href": "#report"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "b9233fb7734b9eef389bcb0c50817b85e0deac103e4fcdeb5f2e93ec90db698f"
+    },
+    {
+      "route": "/support/feedback",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Feedback — The Genuine Love Project",
+      "description": "Share your feedback with us.",
+      "hero": {
+        "title": "Share",
+        "subtitle": "Help us improve your experience.",
+        "primaryCta": {
+          "label": "Give Feedback",
+          "href": "#feedback"
+        },
+        "secondaryCta": {
+          "label": "Feature Requests",
+          "href": "#requests"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "e2ffca0d0b588c24695374c1f0833245230378c1900d878e7b1bdb1c5306a5de"
+    },
+    {
+      "route": "/support/guides",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Guides — The Genuine Love Project",
+      "description": "Helpful guides and tutorials.",
+      "hero": {
+        "title": "User",
+        "subtitle": "Step-by-step guides to help you use the platform.",
+        "primaryCta": {
+          "label": "Browse Guides",
+          "href": "#guides"
+        },
+        "secondaryCta": {
+          "label": "Video Tutorials",
+          "href": "#videos"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0,
+      "routeHash": "66a4836431c4663fb3e3f434c053b654fb54ac85db1610094b02846fcfc4e263"
+    },
+    {
       "route": "/systems-thinking",
       "category": "advanced",
       "aliasOf": null,
@@ -2463,6 +2708,121 @@
       "sectionsCount": 1,
       "modulesCount": 0,
       "routeHash": "bd6a8b53ed5e1701ccb0f11a734145296db058c333fbcb62dd0427f77f21a850"
+    },
+    {
+      "route": "/wellness/creativity",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Creative Expression — The Genuine Love Project",
+      "description": "Use creativity as a path to healing.",
+      "hero": {
+        "title": "Creative",
+        "subtitle": "Explore art, music, and writing as healing tools.",
+        "primaryCta": {
+          "label": "Start Creating",
+          "href": "#create"
+        },
+        "secondaryCta": {
+          "label": "Art Therapy",
+          "href": "#art"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0,
+      "routeHash": "3c3acec12ce7cc20a8ffda65ad3ddb018c4a372845a50161c5941bba80e69c6a"
+    },
+    {
+      "route": "/wellness/movement",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Movement — The Genuine Love Project",
+      "description": "Gentle movement practices for body and mind.",
+      "hero": {
+        "title": "Healing",
+        "subtitle": "Gentle exercises that honor your body's needs.",
+        "primaryCta": {
+          "label": "Start Moving",
+          "href": "#movement"
+        },
+        "secondaryCta": {
+          "label": "Yoga Flows",
+          "href": "#yoga"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0,
+      "routeHash": "eca46e81ddea90f66ebbd16209a3533b82a380b00f6118f90997eff4a7310dfc"
+    },
+    {
+      "route": "/wellness/nature",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Nature Connection — The Genuine Love Project",
+      "description": "Connect with nature for healing and grounding.",
+      "hero": {
+        "title": "Nature",
+        "subtitle": "Find peace and grounding in the natural world.",
+        "primaryCta": {
+          "label": "Connect with Nature",
+          "href": "#nature"
+        },
+        "secondaryCta": {
+          "label": "Grounding Practices",
+          "href": "#grounding"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0,
+      "routeHash": "103ad669e968be3a2d1f79607d234d126b8159f98a3a7d9206139ef97c36c037"
+    },
+    {
+      "route": "/wellness/nutrition",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Nutrition — The Genuine Love Project",
+      "description": "Mindful eating and nutritional wellness.",
+      "hero": {
+        "title": "Mindful",
+        "subtitle": "Develop a healthy relationship with food and nourishment.",
+        "primaryCta": {
+          "label": "Explore Nutrition",
+          "href": "#nutrition"
+        },
+        "secondaryCta": {
+          "label": "Meal Ideas",
+          "href": "#meals"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0,
+      "routeHash": "667e86e396c79393b8b133e31b20ea74937070a1e70609092008975ace4e346b"
+    },
+    {
+      "route": "/wellness/sleep",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Sleep Wellness — The Genuine Love Project",
+      "description": "Tools and resources for better sleep and rest.",
+      "hero": {
+        "title": "Better",
+        "subtitle": "Gentle practices for restful, healing sleep.",
+        "primaryCta": {
+          "label": "Start Sleep Journey",
+          "href": "#sleep"
+        },
+        "secondaryCta": {
+          "label": "Evening Routine",
+          "href": "#routine"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0,
+      "routeHash": "7aca5e6206cb21b5a08dfa6442ce4be4780b207c197f697fd61b34a948cf8113"
     },
     {
       "route": "/wireframes",
