@@ -1,85 +1,218 @@
 {
-  "generatedAt": "2026-01-23T04:44:09.725Z",
-  "mode": "landing",
-  "category": null,
+  "generatedAt": "2026-01-23T04:47:11.583Z",
+  "mode": "category",
+  "category": "wellness",
   "from": null,
   "to": null,
   "selectedCategories": [
-    "landing"
+    "wellness"
   ],
   "counts": {
-    "created": 0,
-    "updated": 7,
+    "created": 24,
+    "updated": 0,
     "skippedManual": 0,
-    "aliasRedirects": 2,
-    "totalWritten": 7
+    "aliasRedirects": 0,
+    "totalWritten": 24
   },
   "files": {
-    "created": [],
-    "updated": [
-      "client/src/pages/generated/healing.jsx",
-      "client/src/pages/generated/home.jsx",
-      "client/src/pages/generated/index.jsx",
-      "client/src/pages/generated/landing.jsx",
-      "client/src/pages/generated/original-home.jsx",
-      "client/src/pages/generated/pricing.jsx",
-      "client/src/pages/generated/welcome.jsx"
+    "created": [
+      "client/src/pages/generated/affirmations.jsx",
+      "client/src/pages/generated/behavior-change.jsx",
+      "client/src/pages/generated/body-wellness.jsx",
+      "client/src/pages/generated/breathing.jsx",
+      "client/src/pages/generated/calming-scenes.jsx",
+      "client/src/pages/generated/cognitive-tools.jsx",
+      "client/src/pages/generated/daily-routines.jsx",
+      "client/src/pages/generated/emotional-intelligence.jsx",
+      "client/src/pages/generated/grounding.jsx",
+      "client/src/pages/generated/healing-journeys.jsx",
+      "client/src/pages/generated/healing-library.jsx",
+      "client/src/pages/generated/inner-child.jsx",
+      "client/src/pages/generated/meditation.jsx",
+      "client/src/pages/generated/mirror.jsx",
+      "client/src/pages/generated/ritual.jsx",
+      "client/src/pages/generated/self-care.jsx",
+      "client/src/pages/generated/sleep-guide.jsx",
+      "client/src/pages/generated/soul-wellness.jsx",
+      "client/src/pages/generated/stress-response.jsx",
+      "client/src/pages/generated/wellness-hub.jsx",
+      "client/src/pages/generated/wellness.jsx",
+      "client/src/pages/generated/wisdom-practices.jsx",
+      "client/src/pages/generated/wisdom-synthesis.jsx",
+      "client/src/pages/generated/wisdom.jsx"
     ],
+    "updated": [],
     "skippedManual": [],
-    "aliasRedirects": [
-      "client/src/pages/generated/home.jsx",
-      "client/src/pages/generated/welcome.jsx"
-    ]
+    "aliasRedirects": []
   },
   "routes": [
     {
-      "route": "/",
-      "category": "landing",
-      "pageFile": "client/src/pages/generated/index.jsx",
+      "route": "/affirmations",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/affirmations.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/healing",
-      "category": "landing",
-      "pageFile": "client/src/pages/generated/healing.jsx",
+      "route": "/behavior-change",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/behavior-change.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/home",
-      "category": "landing",
-      "pageFile": "client/src/pages/generated/home.jsx",
-      "kind": "aliasRedirect",
-      "canonical": "/"
-    },
-    {
-      "route": "/landing",
-      "category": "landing",
-      "pageFile": "client/src/pages/generated/landing.jsx",
+      "route": "/body-wellness",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/body-wellness.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/original-home",
-      "category": "landing",
-      "pageFile": "client/src/pages/generated/original-home.jsx",
+      "route": "/breathing",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/breathing.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/pricing",
-      "category": "landing",
-      "pageFile": "client/src/pages/generated/pricing.jsx",
+      "route": "/calming-scenes",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/calming-scenes.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/welcome",
-      "category": "landing",
-      "pageFile": "client/src/pages/generated/welcome.jsx",
-      "kind": "aliasRedirect",
-      "canonical": "/"
+      "route": "/cognitive-tools",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/cognitive-tools.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/daily-routines",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/daily-routines.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/emotional-intelligence",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/emotional-intelligence.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/grounding",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/grounding.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/healing-journeys",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/healing-journeys.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/healing-library",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/healing-library.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/inner-child",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/inner-child.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/meditation",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/meditation.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/mirror",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/mirror.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/ritual",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/ritual.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/self-care",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/self-care.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/sleep-guide",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/sleep-guide.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/soul-wellness",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/soul-wellness.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/stress-response",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/stress-response.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wellness",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wellness-hub",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-hub.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wisdom",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wisdom.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wisdom-practices",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wisdom-practices.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/wisdom-synthesis",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wisdom-synthesis.jsx",
+      "kind": "static",
+      "canonical": null
     }
   ]
 }

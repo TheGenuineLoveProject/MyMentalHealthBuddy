@@ -28,6 +28,13 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import {
+  CATEGORY_ORDER,
+  ORDERED_LETTERS,
+  getCategoriesInRange,
+  getCategoryByLetter,
+  isValidLetter
+} from '../content/categoryOrder.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -39,44 +46,6 @@ const GENERATED_MARKER = '// @generated';
 // Manifest output path
 const REPORTS_DIR = path.join(ROOT, 'reports');
 const MANIFEST_PATH = path.join(REPORTS_DIR, 'routes.generated.json');
-
-// ============================================================================
-// A→Z CATEGORY ORDER (Single Source of Truth)
-// ============================================================================
-
-const CATEGORY_ORDER = {
-  A: 'landing',
-  B: 'auth',
-  C: 'core',
-  D: 'ai',
-  E: 'wellness',
-  F: 'advanced',
-  G: 'content',
-  H: 'community',
-  I: 'support',
-  J: 'legal',
-  K: 'account',
-  L: 'admin',
-  M: 'system'
-};
-
-const CATEGORY_DISPLAY_NAMES = {
-  landing: 'Landing & Marketing',
-  auth: 'Authentication',
-  core: 'Dashboard & Core',
-  ai: 'AI & Chat',
-  wellness: 'Wellness & Healing Tools',
-  advanced: 'Advanced & Mastery',
-  content: 'Content & Learning',
-  community: 'Community & Social',
-  support: 'Support & Resources',
-  legal: 'Legal & Policy',
-  account: 'Account & Settings',
-  admin: 'Admin',
-  system: 'System & Utility'
-};
-
-const ORDERED_LETTERS = Object.keys(CATEGORY_ORDER).sort();
 
 // ============================================================================
 // PARSE COMMAND LINE ARGUMENTS
@@ -112,19 +81,19 @@ if (mode === 'range') {
     console.error(`❌ Range mode requires --from=<Letter> and --to=<Letter>`);
     console.error(`   Example: node scripts/generate-pages.mjs --mode=range --from=A --to=C`);
     console.error(`\n📋 Available letters:`);
-    for (const [letter, cat] of Object.entries(CATEGORY_ORDER)) {
-      console.error(`   ${letter} = ${cat} (${CATEGORY_DISPLAY_NAMES[cat]})`);
+    for (const { letter, category: cat } of CATEGORY_ORDER) {
+      console.error(`   ${letter} = ${cat}`);
     }
     process.exit(1);
   }
   
-  if (!CATEGORY_ORDER[fromLetter]) {
+  if (!isValidLetter(fromLetter)) {
     console.error(`❌ Invalid --from letter: "${fromLetter}"`);
     console.error(`   Valid letters: ${ORDERED_LETTERS.join(', ')}`);
     process.exit(1);
   }
   
-  if (!CATEGORY_ORDER[toLetter]) {
+  if (!isValidLetter(toLetter)) {
     console.error(`❌ Invalid --to letter: "${toLetter}"`);
     console.error(`   Valid letters: ${ORDERED_LETTERS.join(', ')}`);
     process.exit(1);
@@ -383,7 +352,7 @@ function generateLandingPages() {
     static: [],
     aliases: [],
     errors: [],
-    selectedCategories: ['landing']
+    selectedCategories: ['Landing']
   };
 
   ensureDir(PAGES_DIR);
@@ -400,7 +369,7 @@ function generateLandingPages() {
       }
       manifestRoutes.push({
         route,
-        category: 'landing',
+        category: 'Landing',
         pageFile: result.file,
         kind: 'static',
         canonical: null
@@ -427,7 +396,7 @@ function generateLandingPages() {
       }
       manifestRoutes.push({
         route: alias.route,
-        category: 'landing',
+        category: 'Landing',
         pageFile: result.file,
         kind: 'aliasRedirect',
         canonical: alias.canonical
@@ -575,25 +544,26 @@ async function generateRangePages(from, to) {
 
   ensureDir(PAGES_DIR);
 
-  // Compute inclusive subset of categories
-  const fromIndex = ORDERED_LETTERS.indexOf(from);
-  const toIndex = ORDERED_LETTERS.indexOf(to);
-  const selectedLetters = ORDERED_LETTERS.slice(fromIndex, toIndex + 1);
-  const selectedCategories = selectedLetters.map(letter => CATEGORY_ORDER[letter]);
+  // Use shared category order module
+  const selectedCategoryEntries = getCategoriesInRange(from, to);
+  const selectedCategories = selectedCategoryEntries.map(c => c.category);
   report.selectedCategories = selectedCategories;
 
   console.log('📋 Selected categories:');
-  for (const letter of selectedLetters) {
-    const cat = CATEGORY_ORDER[letter];
-    console.log(`   ${letter} = ${cat} (${CATEGORY_DISPLAY_NAMES[cat]})`);
-    report.categories.push({ letter, category: cat, displayName: CATEGORY_DISPLAY_NAMES[cat] });
+  for (const { letter, category: cat } of selectedCategoryEntries) {
+    console.log(`   ${letter} = ${cat}`);
+    report.categories.push({ letter, category: cat });
   }
   console.log('');
 
   const routes = await loadRoutes();
   
-  const categorySet = new Set(selectedCategories);
-  const categoryRoutes = routes.filter(r => categorySet.has(r.category) && !r.aliasOf);
+  // Match routes by category (case-insensitive partial match for flexibility)
+  const categorySet = new Set(selectedCategories.map(c => c.toLowerCase()));
+  const categoryRoutes = routes.filter(r => {
+    if (!r.category || r.aliasOf) return false;
+    return categorySet.has(r.category.toLowerCase());
+  });
 
   console.log(`📊 Found ${categoryRoutes.length} routes across ${selectedCategories.length} categories\n`);
 
@@ -693,7 +663,7 @@ async function generateAllPages() {
     aliases: [],
     special: [],
     errors: [],
-    selectedCategories: Object.values(CATEGORY_ORDER)
+    selectedCategories: CATEGORY_ORDER.map(c => c.category)
   };
 
   ensureDir(PAGES_DIR);
@@ -789,7 +759,7 @@ async function generateAllPages() {
     }
     manifestRoutes.push({
       route: '/404',
-      category: 'system',
+      category: 'System & Utility',
       pageFile: result.file,
       kind: 'notFound',
       canonical: null
@@ -858,7 +828,7 @@ function printReport(report, mode, extras = {}) {
   if (mode === 'range' && report.categories) {
     console.log('📋 Selected Categories:');
     for (const cat of report.categories) {
-      console.log(`   ${cat.letter} = ${cat.category} (${cat.displayName})`);
+      console.log(`   ${cat.letter} = ${cat.category}`);
     }
     console.log('');
   }
