@@ -9,15 +9,17 @@
  * - Alias route resolution (/home -> /)
  * - Dynamic pattern matching (/blog/:slug)
  * - Safe fallback for unknown routes
+ * - Automatic route protection based on config.protected
  * - AOS with once:true (gentle animations)
  * - GSAP respects prefers-reduced-motion
  * - Sacred UI components with CSS tokens
  * ============================================================================
  */
 
-import { useLocation, useRoute } from 'wouter';
+import { useLocation } from 'wouter';
 import { getRouteConfig } from '../content/routes.js';
 import PageTemplate from '../components/PageTemplate.jsx';
+import RouteGuard from '../components/RouteGuard.jsx';
 
 export default function AutopilotPage({ route }) {
   const [location] = useLocation();
@@ -56,7 +58,13 @@ export default function AutopilotPage({ route }) {
     );
   }
   
-  return <PageTemplate config={config} />;
+  const page = <PageTemplate config={config} />;
+  
+  if (config.protected) {
+    return <RouteGuard>{page}</RouteGuard>;
+  }
+  
+  return page;
 }
 
 export { AutopilotPage };
