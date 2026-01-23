@@ -3497,6 +3497,38 @@ const rawRoutes = [
       subtitle: 'Gentle practices for restful, healing sleep.',
       primaryCta: { label: 'Start Sleep Journey', href: '#sleep' },
       secondaryCta: { label: 'Evening Routine', href: '#routine' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Rest Is Healing',
+        subtitle: 'Sleep helps your body and mind repair.',
+        bulletPoints: [
+          'Your body heals while you sleep—it\'s not lazy to rest.',
+          'A dark, cool room helps you sleep better.',
+          'Try putting your phone away an hour before bed.',
+          'Your one next step: Set a gentle bedtime reminder for tonight.'
+        ]
+      },
+      intermediate: {
+        title: 'Sleep Hygiene Practices',
+        subtitle: 'Build habits that support deeper, more restorative sleep.',
+        bulletPoints: [
+          'Create a consistent wind-down routine 30–60 minutes before bed.',
+          'Limit caffeine after 2pm and alcohol close to bedtime.',
+          'Use relaxation techniques like body scans or breathing exercises.',
+          'Your one next step: Try a 5-minute body scan before bed tonight.'
+        ]
+      },
+      advanced: {
+        title: 'Sleep Science & Restoration',
+        subtitle: 'Sleep is critical for memory consolidation and emotional processing (Walker, 2017).',
+        bulletPoints: [
+          'REM sleep processes emotional memories; slow-wave sleep restores physical energy.',
+          'Trauma can disrupt sleep architecture; gentle interventions help restore patterns.',
+          'Circadian rhythm alignment improves mood, cognition, and immune function.',
+          'Your one next step: Track your sleep-wake times for one week to find patterns.'
+        ]
+      }
     }
   },
   {
@@ -3512,6 +3544,38 @@ const rawRoutes = [
       subtitle: 'Develop a healthy relationship with food and nourishment.',
       primaryCta: { label: 'Explore Nutrition', href: '#nutrition' },
       secondaryCta: { label: 'Meal Ideas', href: '#meals' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Food Is Fuel and Comfort',
+        subtitle: 'Eating is how we care for our bodies.',
+        bulletPoints: [
+          'There are no "bad" foods—all eating is valid.',
+          'Try eating slowly and noticing how food tastes.',
+          'Drinking water throughout the day helps you feel better.',
+          'Your one next step: Enjoy your next meal without screens.'
+        ]
+      },
+      intermediate: {
+        title: 'Mindful Eating Practices',
+        subtitle: 'Build a peaceful relationship with food and nourishment.',
+        bulletPoints: [
+          'Practice hunger awareness: eat when hungry, stop when satisfied.',
+          'Notice emotional eating triggers without judgment.',
+          'Add variety and color to meals for balanced nutrition.',
+          'Your one next step: Before your next meal, pause and check your hunger level.'
+        ]
+      },
+      advanced: {
+        title: 'Gut-Brain Axis & Nourishment',
+        subtitle: 'The gut microbiome influences mood and mental health (Mayer, 2016).',
+        bulletPoints: [
+          '90% of serotonin is produced in the gut; food affects mood directly.',
+          'Intuitive eating research shows restriction often backfires (Tribole & Resch, 2012).',
+          'Anti-inflammatory foods may support trauma recovery and nervous system health.',
+          'Your one next step: Add one fermented or fiber-rich food to your day.'
+        ]
+      }
     }
   },
   {
@@ -3527,6 +3591,38 @@ const rawRoutes = [
       subtitle: 'Gentle exercises that honor your body\'s needs.',
       primaryCta: { label: 'Start Moving', href: '#movement' },
       secondaryCta: { label: 'Yoga Flows', href: '#yoga' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Move Your Body Gently',
+        subtitle: 'Any movement counts—even stretching in bed.',
+        bulletPoints: [
+          'You don\'t have to exercise hard to feel better.',
+          'Gentle stretching, walking, or dancing all count.',
+          'Listen to your body—rest when you need to.',
+          'Your one next step: Try stretching your arms above your head right now.'
+        ]
+      },
+      intermediate: {
+        title: 'Trauma-Sensitive Movement',
+        subtitle: 'Move in ways that feel safe and honoring to your body.',
+        bulletPoints: [
+          'Choose movement that feels good, not punishing.',
+          'Yoga, walking, swimming, and dance are gentle options.',
+          'Notice how movement affects your mood and energy.',
+          'Your one next step: Try a 10-minute gentle yoga or stretch routine.'
+        ]
+      },
+      advanced: {
+        title: 'Somatic Movement Science',
+        subtitle: 'Movement releases stored tension and completes stress cycles (Nagoski & Nagoski, 2019).',
+        bulletPoints: [
+          'The body stores trauma; movement helps discharge stuck survival energy.',
+          'Trauma-sensitive yoga improves PTSD symptoms (Van der Kolk, 2014).',
+          'Bilateral movement (walking) supports nervous system integration.',
+          'Your one next step: Try a "shake-out" practice to release tension.'
+        ]
+      }
     }
   },
   {
@@ -3542,6 +3638,38 @@ const rawRoutes = [
       subtitle: 'Find peace and grounding in the natural world.',
       primaryCta: { label: 'Connect with Nature', href: '#nature' },
       secondaryCta: { label: 'Grounding Practices', href: '#grounding' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Go Outside and Breathe',
+        subtitle: 'Nature helps you feel calm and grounded.',
+        bulletPoints: [
+          'Even a few minutes outside can lift your mood.',
+          'Look at the sky, touch a tree, or listen to birds.',
+          'You don\'t need a forest—a window or houseplant counts.',
+          'Your one next step: Step outside for 2 minutes and take 3 deep breaths.'
+        ]
+      },
+      intermediate: {
+        title: 'Nature as Medicine',
+        subtitle: 'Regular nature exposure supports mental and physical health.',
+        bulletPoints: [
+          'Aim for 20+ minutes in nature 2–3 times per week.',
+          'Try "forest bathing"—slow, mindful time in green spaces.',
+          'Bring nature indoors with plants, natural light, or nature sounds.',
+          'Your one next step: Schedule a 20-minute walk in a park this week.'
+        ]
+      },
+      advanced: {
+        title: 'Ecotherapy & Biophilia',
+        subtitle: 'Nature exposure reduces cortisol and activates the parasympathetic system (Li, 2010).',
+        bulletPoints: [
+          'Biophilia hypothesis: humans have an innate need to connect with nature (Wilson, 1984).',
+          'Shinrin-yoku (forest bathing) research shows reduced stress hormones and blood pressure.',
+          'Nature connection correlates with lower depression, anxiety, and rumination.',
+          'Your one next step: Try a "sit spot" practice—sit quietly in nature for 10 minutes.'
+        ]
+      }
     }
   },
   {
@@ -3557,6 +3685,38 @@ const rawRoutes = [
       subtitle: 'Explore art, music, and writing as healing tools.',
       primaryCta: { label: 'Start Creating', href: '#create' },
       secondaryCta: { label: 'Art Therapy', href: '#art' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Make Something—Anything',
+        subtitle: 'Creativity isn\'t about being good; it\'s about expressing.',
+        bulletPoints: [
+          'Doodling, humming, or coloring all count as creative acts.',
+          'You don\'t have to show anyone what you make.',
+          'There\'s no wrong way to be creative.',
+          'Your one next step: Draw a shape or hum a tune—just for you.'
+        ]
+      },
+      intermediate: {
+        title: 'Creative Expression Practice',
+        subtitle: 'Use art, music, or writing to process emotions.',
+        bulletPoints: [
+          'Try journaling, drawing, singing, or playing music regularly.',
+          'Create without judgment—focus on the process, not the product.',
+          'Notice how creative expression shifts your mood.',
+          'Your one next step: Spend 15 minutes on a creative activity today.'
+        ]
+      },
+      advanced: {
+        title: 'Art Therapy & Expressive Arts',
+        subtitle: 'Creative expression accesses non-verbal processing pathways (Malchiodi, 2011).',
+        bulletPoints: [
+          'Trauma is often stored in non-verbal, right-brain areas; art bypasses words.',
+          'Expressive arts therapy integrates visual art, music, movement, and writing.',
+          'Creating externalizes internal experiences, making them more manageable.',
+          'Your one next step: Try drawing how you feel without using words.'
+        ]
+      }
     }
   },
   

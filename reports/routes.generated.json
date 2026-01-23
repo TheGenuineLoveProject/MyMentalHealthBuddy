@@ -1,104 +1,64 @@
 {
-  "generatedAt": "2026-01-23T07:16:46.295Z",
+  "generatedAt": "2026-01-23T07:19:28.198Z",
   "mode": "category",
-  "category": "core",
+  "category": "wellness",
   "from": null,
   "to": null,
   "selectedCategories": [
-    "core"
+    "wellness"
   ],
   "counts": {
     "created": 0,
-    "updated": 10,
+    "updated": 5,
     "skippedManual": 0,
     "aliasRedirects": 0,
-    "totalWritten": 10
+    "totalWritten": 5
   },
   "files": {
     "created": [],
     "updated": [
-      "client/src/pages/generated/analytics.jsx",
-      "client/src/pages/generated/crm.jsx",
-      "client/src/pages/generated/dashboard.jsx",
-      "client/src/pages/generated/growth-analytics.jsx",
-      "client/src/pages/generated/guided-journaling.jsx",
-      "client/src/pages/generated/journal.jsx",
-      "client/src/pages/generated/mood.jsx",
-      "client/src/pages/generated/progress.jsx",
-      "client/src/pages/generated/state.jsx",
-      "client/src/pages/generated/today.jsx"
+      "client/src/pages/generated/wellness-creativity.jsx",
+      "client/src/pages/generated/wellness-movement.jsx",
+      "client/src/pages/generated/wellness-nature.jsx",
+      "client/src/pages/generated/wellness-nutrition.jsx",
+      "client/src/pages/generated/wellness-sleep.jsx"
     ],
     "skippedManual": [],
     "aliasRedirects": []
   },
   "routes": [
     {
-      "route": "/analytics",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/analytics.jsx",
+      "route": "/wellness/creativity",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-creativity.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/crm",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/crm.jsx",
+      "route": "/wellness/movement",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-movement.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/dashboard",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/dashboard.jsx",
+      "route": "/wellness/nature",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-nature.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/growth-analytics",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/growth-analytics.jsx",
+      "route": "/wellness/nutrition",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-nutrition.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/guided-journaling",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/guided-journaling.jsx",
-      "kind": "static",
-      "canonical": null
-    },
-    {
-      "route": "/journal",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/journal.jsx",
-      "kind": "static",
-      "canonical": null
-    },
-    {
-      "route": "/mood",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/mood.jsx",
-      "kind": "static",
-      "canonical": null
-    },
-    {
-      "route": "/progress",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/progress.jsx",
-      "kind": "static",
-      "canonical": null
-    },
-    {
-      "route": "/state",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/state.jsx",
-      "kind": "static",
-      "canonical": null
-    },
-    {
-      "route": "/today",
-      "category": "core",
-      "pageFile": "client/src/pages/generated/today.jsx",
+      "route": "/wellness/sleep",
+      "category": "wellness",
+      "pageFile": "client/src/pages/generated/wellness-sleep.jsx",
       "kind": "static",
       "canonical": null
     }
