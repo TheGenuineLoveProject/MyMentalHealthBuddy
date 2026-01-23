@@ -1,5 +1,5 @@
 {
-  "snapshotHash": "118e9fb16244f172d996867dcbad4f3e9e42651056ebebd15587b390741c991c",
+  "snapshotHash": "272ba07cb75364413073a26d24679ba0a3d439c6fe8d6b40f166c2ad74ce9f37",
   "categoryOrder": [
     {
       "letter": "A",
@@ -57,7 +57,7 @@
     "/account/settings": "86e58e1e829e854b1f06621efa8502c7091d3307f7420056e44c43ff4db87cbe",
     "/admin": "b626cbfc0cc98cda3b609b6a8f587fd4f52a48ddf250ca7af3f0988ddd1a6a8f",
     "/advanced": "139d33c76acbad663ff0f07a980d4d3ac5b20ae53bbbd4286b98f6bf83856f85",
-    "/affirmations": "e20b9df24f79d50f20f6df24ff57be881243399985b47a1da0929dc1bbd65355",
+    "/affirmations": "ca96797a429d852cd0af96d63df4cc97288e56983b1181b4028c81f536e45da9",
     "/ai/coach": "8cb8cb15b6c1a1cf9ef6d726fdea810ca694ef1fbc98f98463678e98ce8f717b",
     "/ai/insights": "5d02364c8dd4b55c847ec22c06a3c90ce4067041c2420ac79eb6dffab92504ab",
     "/ai/meditation": "df47cc8d9acdbe4b5e82b980e5be590442c5e0a24a649fd2a9e047a3c1fe8c9c",
@@ -67,7 +67,7 @@
     "/blog": "812f5a88c9bf5aeb9cfd1fc0a9e2318cd4789e62def83a6908bca0b37b74e382",
     "/blog/:slug": "7d07e6022095cfa5a4cd12f1acc852ad79f9f6cc24ed662b618f608f1c681cfa",
     "/body-wellness": "c520c2b7fd3f461b34a19a645f8ffe79d7209421d1b8d5b97dbed33aab0d89c3",
-    "/breathing": "61be34d1a3ec12556e9ad3d662c2e9527f3fcbd23c6fc86eec4be85039b6baec",
+    "/breathing": "475cb1f3af4f108a99ead31b2b51a0b8633e31b8a86ea2fcd1c45f6e71d75eb8",
     "/calming-scenes": "3f16050327144ad56a82f8f9946944fa69a1b959e246cfe3387cb3b42edeff0a",
     "/chat": "ba0472213c58bd4992e077eee468749046b070de86d17fb919aefbdeebc368b5",
     "/cognitive-architecture": "5434c13e857f033afecbe2cde8716c9c872a3c9b2cc0cc85b01cbfe584c4e5f9",
@@ -93,14 +93,14 @@
     "/design-system": "5a826edc12eace7d6ed303096ca5cc9e68504ce94630d4de99c8cfdca6a5bbb3",
     "/disclaimer": "53a767befbb0fa8c5d1504d939b31a7f1251b50bab0b87f945a1639c69bc48a6",
     "/elite-tools": "c46dcaf05b46a6c5dbbc395cb155aaaeb5080aae2814e5faa8828e8b2a99858e",
-    "/emotional-intelligence": "4904a5f85d7332a047d625ebd6aa7db2d7940a80183271cda14d2cceb649c9e6",
+    "/emotional-intelligence": "af57936a9c9bb8c31a3905daa27007a1c34d1f1fca29076981b6b994503228bc",
     "/ethics": "4d451a3f546fe506aa48fd85c08ee04f557aee0cc8df8f2794ca186a2e68f398",
     "/examples": "950e7105c69dbd86424984501bde264ec4f35c645416644091edcac9839b4eed",
     "/faq": "ef25d321160ea3631496f454bc4fe8bcde8747bd9c4dcdede7fa169895a7fdf6",
     "/forgot-password": "b34a1e6d05492ce10fd64b08a8154367daae5ce0e7e371b3bbd4f2e86747bc96",
     "/glossary": "94eaf217f415a54e9f36b9afe0244c9e009b02782dc0832013cabb7626f350b6",
     "/glossary-full": "5add1c65e5445a759688c5ba3d3bece7893d6ba1b4a6c1891d664ab8d8abf4aa",
-    "/grounding": "052c0ae21b6583dc6313d5907f2b01fb79513c3f9b3fdb66158aafdd8aa78214",
+    "/grounding": "f020757983e778b6398b50a98fe6beda007bc2579ec57b1356e72854bb58686d",
     "/growth-analytics": "6ed6eec86acb36d9b913e8eb576401a0f9cd3ff07d266dfe9227356fff56088e",
     "/guided-journaling": "3a773f1e944e6e02b2151c72e6e057bd5caf24978616ab401d0637d0afa27f52",
     "/healing": "78dd13f3d5b2b58d5b90ec28b8fcb269e18b0c77d2dc4397cd2df5ce6d973c8e",
@@ -109,7 +109,7 @@
     "/health": "bd355c0aca8a950941918b5930d5fb51a8ae2e6bb62c6457d14ff99346fc9371",
     "/home": "faabd5426e8ee6c0075861a9945d02f92da007a2fa800f0263f349ed11635feb",
     "/how-to-guides": "df7adc704f9e94359d85849b1a24d64e9e9847a7cbf8a16cd2ce2778838ce836",
-    "/inner-child": "9b4e1c4df1f6aa77449fb998fe89aed48b06ef29cb49f09d312db8d655e42fb5",
+    "/inner-child": "760faf0b69f343f2435c9ee60ec455e6945fbb359c6528144d899d37d602e48b",
     "/insight-cards": "fe4bfab9af318a6c4ed712ca08b2264bb3e981d7d37f33064e848c03171a6b36",
     "/journal": "55f03dbb1c3c09fce9580447f9f625bb00fa8b634b5e7dc5222e7e2d12f6421b",
     "/knowledge-synthesis": "655e6f4c4da1d93e5624f14b69cf3026e76db6874a943fa1b20e61d387837480",
@@ -118,7 +118,7 @@
     "/login": "01ba1492005a6c57bdba2f1588dc14d3f833890507ca3d9c7e72c5f8682081f7",
     "/login/callback": "7102f7ff3a2d3228b9319ddd6b76c8b8de02f9031f6dcc2e786bf2cc624734fe",
     "/mastery": "de4edbf2188a84495102f847acb0ba0852adeac2ce2a4759a80cf9b4bbc2a3fc",
-    "/meditation": "694c4f8cdc438f1b0e37d5344ed89e452e096989d02182a1383b8924ba042683",
+    "/meditation": "d96960b6d3dc0abc5c120146d74e0be87b35d6449628a702de1c4af36a661fcb",
     "/meta-learning": "ecef45ff7c5152ee902227e3b939b6296736c96b241afcad98caa82b837b4743",
     "/mirror": "486b801722f58936f8926acd0a3635211fda8c46fa5f07ddc014e61be8eafb7e",
     "/mood": "8d6351584e7377b87974674ac2198404dee789f039ed73a3038c5a8db6d879c9",
@@ -141,14 +141,14 @@
     "/resources": "b9ef4313b2028fc78089a00319107532124768ff150d9c201ac62cfa0ecfbf91",
     "/ritual": "3a4c18a8381ce5ba0410758475c8a7dc011c721ef7af952ff2272294534c04d8",
     "/safety": "7161cb1ac10e266c82a8ec7e85cc0febbc19b3f775adb24b8865a3e7be8bca8e",
-    "/self-care": "9c512bd3a765d3daf15026a66a371d98da1870bf61e9833ad5c0819a1b83a02b",
+    "/self-care": "b6c5b7e0ab16def7886f42bc05b15868271c3c8a18a43bfa16433f90879b336f",
     "/settings": "e9150c69aaec8083ee7290733f2f9909cf8be252ca2e5d29d17025bff7b7de3f",
     "/sleep-guide": "b905876c0acfd28bd17dda757227c1ff560884eaa17fc88139c0afbc4c05d096",
     "/social": "2076ee0d9d4e88f82ff19dc3c3496b1997dd0d66e7cdfac650fef5b0e0172d33",
     "/soul-wellness": "80eafc6ec6d206f9033ad9ac115e3ca815675bbbd778b5379a5058481d29231c",
     "/state": "64c403379c5d90fec8f171021f8467541089dfe9190328c393447905459a1278",
     "/strategy-maps": "118cabe7291c6935218ac08fd4a2d0173e9ea499f5732e76e1f2a59e8843b19b",
-    "/stress-response": "30431bb5e64f3f239a9635cdc2eb35889383446f71576ff9b739749960848ff6",
+    "/stress-response": "d49d1432a35c7a632509a3a48699b87e141a88a099a63f09f75717a3fc5aa0b4",
     "/study-vault": "8eb0b90be51de5359df870e0cc8a09f8e10ed7886df859dc411d7f3984fd2f94",
     "/support": "4512365c09fb51806b796ca682814bb32d929d56f9d131b717d21aa41653f583",
     "/support/accessibility": "b9233fb7734b9eef389bcb0c50817b85e0deac103e4fcdeb5f2e93ec90db698f",
@@ -318,22 +318,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Affirmations — The Genuine Love Project",
-      "description": "Positive affirmations for healing, self-love, and personal growth.",
+      "description": "Supportive self-statements rooted in self-compassion research. A gentle practice for building a kinder inner voice.",
       "hero": {
-        "title": "Rewire your mind with",
-        "subtitle": "Affirmations that speak to your healing journey.",
+        "title": "Speak to yourself with",
+        "subtitle": "Affirmations are not about forcing positivity. They are small reminders that you are allowed to be gentle with yourself. Research on self-compassion suggests this practice can reduce self-criticism over time.",
         "primaryCta": {
-          "label": "Daily Affirmation",
-          "href": "#daily"
+          "label": "Try an Affirmation",
+          "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Create Your Own",
-          "href": "#custom"
+          "label": "Learn the Approach",
+          "href": "#approach"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "e20b9df24f79d50f20f6df24ff57be881243399985b47a1da0929dc1bbd65355"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "ca96797a429d852cd0af96d63df4cc97288e56983b1181b4028c81f536e45da9"
     },
     {
       "route": "/ai/coach",
@@ -548,22 +548,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Breathing Exercises — The Genuine Love Project",
-      "description": "Calming breath practices to regulate your nervous system.",
+      "description": "Evidence-based breathing practices to help regulate your nervous system. Grounded in research on vagal tone and respiratory science.",
       "hero": {
         "title": "Find calm through",
-        "subtitle": "Simple yet powerful techniques to soothe your nervous system.",
+        "subtitle": "Your breath is always with you. These simple techniques, supported by research on the nervous system, can help you feel more grounded in moments of stress.",
         "primaryCta": {
-          "label": "Start Breathing",
+          "label": "Try a Quick Exercise",
           "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Learn the Science",
+          "label": "Learn How It Works",
           "href": "#science"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "61be34d1a3ec12556e9ad3d662c2e9527f3fcbd23c6fc86eec4be85039b6baec"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "475cb1f3af4f108a99ead31b2b51a0b8633e31b8a86ea2fcd1c45f6e71d75eb8"
     },
     {
       "route": "/calming-scenes",
@@ -1146,22 +1146,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Emotional Intelligence — The Genuine Love Project",
-      "description": "Develop your emotional awareness and regulation skills.",
+      "description": "Develop awareness and regulation skills. Based on research in emotional intelligence, DBT, and affect science.",
       "hero": {
-        "title": "Master the art of",
-        "subtitle": "Build skills for understanding and managing emotions.",
+        "title": "Understand and navigate",
+        "subtitle": "Emotional intelligence is not about controlling feelings. It is about noticing them, naming them, and responding with awareness. These skills can be learned at any age.",
         "primaryCta": {
-          "label": "Start Learning",
-          "href": "#modules"
+          "label": "Try an Exercise",
+          "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "EQ Assessment",
-          "href": "#assessment"
+          "label": "Learn the Framework",
+          "href": "#framework"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "4904a5f85d7332a047d625ebd6aa7db2d7940a80183271cda14d2cceb649c9e6"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "af57936a9c9bb8c31a3905daa27007a1c34d1f1fca29076981b6b994503228bc"
     },
     {
       "route": "/ethics",
@@ -1307,22 +1307,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Grounding Techniques — The Genuine Love Project",
-      "description": "Somatic grounding practices to anchor you in the present moment.",
+      "description": "Evidence-based grounding practices to anchor you in the present moment. Drawn from somatic therapy and mindfulness research.",
       "hero": {
         "title": "Return to",
-        "subtitle": "Gentle techniques to bring you back when you feel unmoored.",
+        "subtitle": "When you feel disconnected, overwhelmed, or far away from yourself, these gentle techniques can help you feel more present. You can use them anytime, anywhere.",
         "primaryCta": {
-          "label": "Start Grounding",
-          "href": "#techniques"
+          "label": "Try a Grounding Exercise",
+          "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Emergency Grounding",
-          "href": "#emergency"
+          "label": "Quick Reset",
+          "href": "#quick"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "052c0ae21b6583dc6313d5907f2b01fb79513c3f9b3fdb66158aafdd8aa78214"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "f020757983e778b6398b50a98fe6beda007bc2579ec57b1356e72854bb58686d"
     },
     {
       "route": "/growth-analytics",
@@ -1503,22 +1503,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Inner Child Work — The Genuine Love Project",
-      "description": "Reconnect with and heal your inner child through guided exercises.",
+      "description": "Gentle, trauma-informed exercises for reconnecting with your younger self. Drawn from IFS and attachment research.",
       "hero": {
         "title": "Reconnect with your",
-        "subtitle": "Gentle exercises to heal childhood wounds and reclaim lost joy.",
+        "subtitle": "Inside you is a younger version of yourself who may still carry old wounds. Gently acknowledging that part of you can be a path toward healing. This work is tender—go slowly.",
         "primaryCta": {
-          "label": "Meet Your Inner Child",
+          "label": "Try a Gentle Exercise",
           "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Learn About Inner Child",
-          "href": "#learn"
+          "label": "Understand the Approach",
+          "href": "#approach"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "9b4e1c4df1f6aa77449fb998fe89aed48b06ef29cb49f09d312db8d655e42fb5"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "760faf0b69f343f2435c9ee60ec455e6945fbb359c6528144d899d37d602e48b"
     },
     {
       "route": "/insight-cards",
@@ -1710,22 +1710,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Meditation Guide — The Genuine Love Project",
-      "description": "Guided meditations for healing, relaxation, and inner peace.",
+      "description": "Accessible meditation practices grounded in mindfulness research. Start with just one minute—no experience needed.",
       "hero": {
-        "title": "Discover peace",
-        "subtitle": "Guided meditations for every mood and moment.",
+        "title": "A few moments of",
+        "subtitle": "Meditation does not require emptying your mind. It is simply noticing what is already here. Research shows even brief daily practice can reduce stress and improve focus over time.",
         "primaryCta": {
-          "label": "Start Meditating",
-          "href": "#meditations"
+          "label": "Try a Short Practice",
+          "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Quick 3-Minute",
-          "href": "#quick"
+          "label": "Learn the Basics",
+          "href": "#basics"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "694c4f8cdc438f1b0e37d5344ed89e452e096989d02182a1383b8924ba042683"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "d96960b6d3dc0abc5c120146d74e0be87b35d6449628a702de1c4af36a661fcb"
     },
     {
       "route": "/meta-learning",
@@ -2239,22 +2239,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Self-Care Toolkit — The Genuine Love Project",
-      "description": "Practical self-care tools and practices for daily wellness.",
+      "description": "Practical, evidence-informed self-care practices. Small actions that support your nervous system and wellbeing.",
       "hero": {
         "title": "Self-care is",
-        "subtitle": "Practical tools to nurture your body, mind, and spirit.",
+        "subtitle": "Self-care is not about luxury or indulgence. It is about small, consistent actions that help your body and mind feel safer. Research shows even micro-moments of care can reduce stress.",
         "primaryCta": {
-          "label": "Build Your Toolkit",
-          "href": "#toolkit"
+          "label": "Find a Practice",
+          "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Quick Self-Care",
-          "href": "#quick"
+          "label": "Learn the Approach",
+          "href": "#approach"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "9c512bd3a765d3daf15026a66a371d98da1870bf61e9833ad5c0819a1b83a02b"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "b6c5b7e0ab16def7886f42bc05b15868271c3c8a18a43bfa16433f90879b336f"
     },
     {
       "route": "/settings",
@@ -2400,22 +2400,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Stress Response Guide — The Genuine Love Project",
-      "description": "Understand and regulate your stress response system.",
+      "description": "Understand fight, flight, freeze, and fawn responses. Polyvagal-informed education for nervous system awareness.",
       "hero": {
         "title": "Understand your",
-        "subtitle": "Learn about fight, flight, freeze, and fawn responses.",
+        "subtitle": "Your nervous system is designed to protect you. Sometimes it overprotects. Learning how it works can help you respond with more awareness and self-compassion.",
         "primaryCta": {
-          "label": "Take Assessment",
-          "href": "#assessment"
+          "label": "Learn the Basics",
+          "href": "#basics"
         },
         "secondaryCta": {
-          "label": "Learn Regulation",
-          "href": "#regulation"
+          "label": "Try a Regulation Exercise",
+          "href": "#exercises"
         }
       },
-      "sectionsCount": 1,
-      "modulesCount": 0,
-      "routeHash": "30431bb5e64f3f239a9635cdc2eb35889383446f71576ff9b739749960848ff6"
+      "sectionsCount": 4,
+      "modulesCount": 3,
+      "routeHash": "d49d1432a35c7a632509a3a48699b87e141a88a099a63f09f75717a3fc5aa0b4"
     },
     {
       "route": "/study-vault",

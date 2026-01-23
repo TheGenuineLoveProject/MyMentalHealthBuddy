@@ -1081,27 +1081,73 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Breathing Exercises',
     title: 'Breathing Exercises — The Genuine Love Project',
-    description: 'Calming breath practices to regulate your nervous system.',
+    description: 'Evidence-based breathing practices to help regulate your nervous system. Grounded in research on vagal tone and respiratory science.',
+    safetyNotice: {
+      type: 'supportive',
+      text: 'These practices are supportive tools, not medical treatment. If you feel dizzy or uncomfortable, stop and breathe normally. For persistent breathing difficulties, please consult a healthcare provider.'
+    },
     hero: {
       eyebrow: 'Breathwork',
       title: 'Find calm through',
       titleHighlight: 'conscious breathing.',
-      subtitle: 'Simple yet powerful techniques to soothe your nervous system.',
-      primaryCta: { label: 'Start Breathing', href: '#exercises' },
-      secondaryCta: { label: 'Learn the Science', href: '#science' }
+      subtitle: 'Your breath is always with you. These simple techniques, supported by research on the nervous system, can help you feel more grounded in moments of stress.',
+      primaryCta: { label: 'Try a Quick Exercise', href: '#exercises' },
+      secondaryCta: { label: 'Learn How It Works', href: '#science' }
     },
+    modules: [
+      { icon: 'Activity', title: 'Activates Rest Response', description: 'Slow, deep breathing stimulates the parasympathetic nervous system.' },
+      { icon: 'Heart', title: 'Supports Heart Coherence', description: 'Rhythmic breathing helps synchronize heart rate variability.' },
+      { icon: 'Brain', title: 'Calms the Mind', description: 'Focused breath interrupts racing thoughts and grounds attention.' }
+    ],
     sections: [
       {
-        id: 'techniques',
-        eyebrow: 'Techniques',
-        title: 'Breathwork practices',
-        subtitle: 'Choose the right breath for your current state.',
+        id: 'exercises',
+        eyebrow: 'Micro-Exercises',
+        title: 'Three practices for right now',
+        subtitle: 'Each takes 30–120 seconds. Start with whichever feels most approachable.',
         variant: 'glow',
         cards: [
-          { icon: 'Activity', title: 'Box Breathing', text: '4-4-4-4 pattern for grounding and focus.' },
-          { icon: 'Moon', title: '4-7-8 Sleep Breath', text: 'Calming breath for rest and relaxation.' },
-          { icon: 'Zap', title: 'Energizing Breath', text: 'Quick practices to boost alertness.' },
-          { icon: 'Heart', title: 'Heart Coherence', text: 'Sync breath with heart for emotional balance.' }
+          { icon: 'Activity', title: 'Box Breathing (60 sec)', text: 'Inhale 4 counts, hold 4, exhale 4, hold 4. Repeat 3 times. Used by first responders for calm under pressure.' },
+          { icon: 'Moon', title: '4-7-8 Relaxation (90 sec)', text: 'Inhale 4 counts, hold 7, exhale slowly for 8. Repeat 3 times. Helpful before sleep or when anxious.' },
+          { icon: 'Leaf', title: 'Simple Belly Breath (30 sec)', text: 'Place hand on belly. Breathe so your belly rises, not your chest. 5 slow breaths. The gentlest entry point.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Progress at your own pace',
+        subtitle: 'There is no rush. Many people stay at beginner level for months—that is completely fine.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Smile', title: 'Beginner', text: 'Simple belly breathing, 3-breath resets, counting inhales. Focus on noticing breath, not controlling it.' },
+          { icon: 'Star', title: 'Intermediate', text: 'Box breathing, 4-7-8 pattern, coherent breathing (5 breaths per minute). Build consistency.' },
+          { icon: 'Sparkles', title: 'Advanced', text: 'Extended exhales, breath holds, heart rate variability training. Only after months of practice.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'If you feel overwhelmed, lightheaded, or uncomfortable at any point, stop immediately.',
+        variant: 'plain',
+        bullets: [
+          'Return to normal breathing—no special technique needed.',
+          'Place your feet firmly on the ground.',
+          'If discomfort persists, step away and take a break.',
+          'You can always come back later. There is no pressure.'
+        ]
+      },
+      {
+        id: 'science',
+        eyebrow: 'The Research',
+        title: 'Why breathing works',
+        subtitle: 'The science behind breath regulation—explained simply.',
+        variant: 'glow',
+        bullets: [
+          'Slow exhales activate the vagus nerve, which signals safety to your brain.',
+          'Rhythmic breathing reduces cortisol (the stress hormone) over time.',
+          'Heart rate variability improves with consistent practice, linked to emotional resilience.',
+          'Even one minute of focused breathing can shift your nervous system state.'
         ]
       }
     ]
@@ -1111,27 +1157,73 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Grounding',
     title: 'Grounding Techniques — The Genuine Love Project',
-    description: 'Somatic grounding practices to anchor you in the present moment.',
+    description: 'Evidence-based grounding practices to anchor you in the present moment. Drawn from somatic therapy and mindfulness research.',
+    safetyNotice: {
+      type: 'supportive',
+      text: 'Grounding is a supportive skill, not therapy. If you experience persistent dissociation, flashbacks, or distress, please reach out to a mental health professional.'
+    },
     hero: {
       eyebrow: 'Present Moment',
       title: 'Return to',
       titleHighlight: 'the here and now.',
-      subtitle: 'Gentle techniques to bring you back when you feel unmoored.',
-      primaryCta: { label: 'Start Grounding', href: '#techniques' },
-      secondaryCta: { label: 'Emergency Grounding', href: '#emergency' }
+      subtitle: 'When you feel disconnected, overwhelmed, or far away from yourself, these gentle techniques can help you feel more present. You can use them anytime, anywhere.',
+      primaryCta: { label: 'Try a Grounding Exercise', href: '#exercises' },
+      secondaryCta: { label: 'Quick Reset', href: '#quick' }
     },
+    modules: [
+      { icon: 'Eye', title: 'Engages Your Senses', description: 'Sensory focus interrupts spiraling thoughts and anchors attention.' },
+      { icon: 'Leaf', title: 'Calms the Nervous System', description: 'Body-based practices signal safety to your brain.' },
+      { icon: 'MapPin', title: 'Reconnects You to Now', description: 'When the mind wanders to past or future, the body is always here.' }
+    ],
     sections: [
       {
-        id: 'methods',
-        eyebrow: 'Methods',
-        title: 'Grounding practices',
-        subtitle: 'Multiple pathways back to presence.',
+        id: 'exercises',
+        eyebrow: 'Micro-Exercises',
+        title: 'Three practices for right now',
+        subtitle: 'Each takes 30–120 seconds. Choose the one that feels most doable.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Eye', title: '5-4-3-2-1 Senses (90 sec)', text: 'Name 5 things you see, 4 you hear, 3 you can touch, 2 you smell, 1 you taste. A classic grounding technique from trauma-informed care.' },
+          { icon: 'MapPin', title: 'Feet on Floor (30 sec)', text: 'Press your feet into the ground. Notice the pressure. Feel the floor holding you. Breathe. You are here.' },
+          { icon: 'Hand', title: 'Hold Something Cold (60 sec)', text: 'Hold ice, cold water, or a frozen object. Focus on the sensation. The cold brings attention back to the present.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Build your grounding practice',
+        subtitle: 'Start simple. Over time, grounding becomes faster and more automatic.',
         variant: 'pattern',
         cards: [
-          { icon: 'Eye', title: '5-4-3-2-1 Senses', text: 'Engage all senses to anchor to now.' },
-          { icon: 'Leaf', title: 'Body Scan', text: 'Progressive awareness through your body.' },
-          { icon: 'MapPin', title: 'Feet on Ground', text: 'Feel the earth supporting you.' },
-          { icon: 'Activity', title: 'Cold Water Reset', text: 'Shock the nervous system back to baseline.' }
+          { icon: 'Smile', title: 'Beginner', text: 'Feet on floor, hold an object, name what you see. Focus on one sense at a time. No rush.' },
+          { icon: 'Star', title: 'Intermediate', text: '5-4-3-2-1 full sequence, body scan, orienting to the room. Practice daily, even when calm.' },
+          { icon: 'Sparkles', title: 'Advanced', text: 'Grounding in motion, eyes-open meditation, somatic tracking. Helpful for ongoing regulation.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'Grounding should feel calming. If it brings up distress, it is okay to stop.',
+        variant: 'plain',
+        bullets: [
+          'If you feel more overwhelmed, pause the exercise.',
+          'Return to simple breathing or open your eyes.',
+          'You do not have to finish any exercise.',
+          'If distress continues, consider reaching out for support.'
+        ]
+      },
+      {
+        id: 'quick',
+        eyebrow: 'Emergency Reset',
+        title: 'When you need to ground quickly',
+        subtitle: 'For moments when you feel very disconnected or overwhelmed.',
+        variant: 'glow',
+        bullets: [
+          'Splash cold water on your face or hold ice.',
+          'Press your feet firmly into the ground and push.',
+          'Name 3 things you can see right now, out loud.',
+          'If safe to do so, step outside and feel the air.'
         ]
       }
     ]
@@ -1141,60 +1233,304 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Affirmations',
     title: 'Affirmations — The Genuine Love Project',
-    description: 'Positive affirmations for healing, self-love, and personal growth.',
+    description: 'Supportive self-statements rooted in self-compassion research. A gentle practice for building a kinder inner voice.',
+    safetyNotice: {
+      type: 'supportive',
+      text: 'Affirmations are one tool among many. If positive statements feel forced or bring up difficult feelings, that is normal—go gently. This is not a substitute for professional support.'
+    },
     hero: {
-      eyebrow: 'Positive Self-Talk',
-      title: 'Rewire your mind with',
-      titleHighlight: 'loving words.',
-      subtitle: 'Affirmations that speak to your healing journey.',
-      primaryCta: { label: 'Daily Affirmation', href: '#daily' },
-      secondaryCta: { label: 'Create Your Own', href: '#custom' }
-    }
+      eyebrow: 'Compassionate Self-Talk',
+      title: 'Speak to yourself with',
+      titleHighlight: 'kindness.',
+      subtitle: 'Affirmations are not about forcing positivity. They are small reminders that you are allowed to be gentle with yourself. Research on self-compassion suggests this practice can reduce self-criticism over time.',
+      primaryCta: { label: 'Try an Affirmation', href: '#exercises' },
+      secondaryCta: { label: 'Learn the Approach', href: '#approach' }
+    },
+    modules: [
+      { icon: 'Heart', title: 'Builds Self-Compassion', description: 'Kind self-talk reduces the harshness of your inner critic.' },
+      { icon: 'RefreshCw', title: 'Creates New Patterns', description: 'Repeated gentle words can slowly shift habitual thoughts.' },
+      { icon: 'Shield', title: 'Provides a Buffer', description: 'Self-compassion helps you weather difficult moments with more resilience.' }
+    ],
+    sections: [
+      {
+        id: 'exercises',
+        eyebrow: 'Micro-Exercises',
+        title: 'Three ways to practice',
+        subtitle: 'Each takes 30–90 seconds. Choose what feels authentic to you.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Heart', title: 'Mirror Moment (60 sec)', text: 'Look at yourself and say: "I am doing my best, and that is enough." Notice how it feels without judgment.' },
+          { icon: 'Hand', title: 'Hand on Heart (30 sec)', text: 'Place your hand on your chest. Say: "I am allowed to feel what I feel." Breathe.' },
+          { icon: 'Pencil', title: 'Write Three Kind Words (90 sec)', text: 'Write three things you would say to comfort a friend. Then read them to yourself.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Find your entry point',
+        subtitle: 'If affirmations feel uncomfortable, start with neutral statements and build from there.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Smile', title: 'Beginner', text: 'Neutral statements: "I am learning." "I am allowed to rest." "I am here." No forced positivity.' },
+          { icon: 'Star', title: 'Intermediate', text: 'Compassionate statements: "I deserve kindness." "My feelings are valid." "I am enough as I am."' },
+          { icon: 'Sparkles', title: 'Advanced', text: 'Personalized affirmations written for your specific challenges. Regular journaling practice.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'Affirmations should not feel like pressure. If they bring up resistance, that is information, not failure.',
+        variant: 'plain',
+        bullets: [
+          'If an affirmation feels false, try a more neutral statement.',
+          'It is okay to modify or skip any affirmation.',
+          'Resistance often signals a belief worth exploring—gently.',
+          'If distress continues, consider talking to someone supportive.'
+        ]
+      },
+      {
+        id: 'approach',
+        eyebrow: 'The Research',
+        title: 'Why self-compassion works',
+        subtitle: 'Affirmations rooted in self-compassion research—not toxic positivity.',
+        variant: 'glow',
+        bullets: [
+          'Dr. Kristin Neff\'s research shows self-compassion reduces anxiety and depression symptoms.',
+          'Neutral affirmations work better than overly positive ones for people with low self-esteem.',
+          'Regular practice (not intensity) creates gradual shifts in self-talk patterns.',
+          'Self-compassion is a skill—it can be learned and strengthened over time.'
+        ]
+      }
+    ]
   },
   {
     route: '/meditation',
     category: 'landing',
     pageLabel: 'Meditation',
     title: 'Meditation Guide — The Genuine Love Project',
-    description: 'Guided meditations for healing, relaxation, and inner peace.',
+    description: 'Accessible meditation practices grounded in mindfulness research. Start with just one minute—no experience needed.',
+    safetyNotice: {
+      type: 'supportive',
+      text: 'Meditation is a practice, not a cure. If meditation brings up difficult emotions or memories, it is okay to stop. For trauma-related experiences, please work with a trained professional.'
+    },
     hero: {
-      eyebrow: 'Inner Stillness',
-      title: 'Discover peace',
-      titleHighlight: 'within yourself.',
-      subtitle: 'Guided meditations for every mood and moment.',
-      primaryCta: { label: 'Start Meditating', href: '#meditations' },
-      secondaryCta: { label: 'Quick 3-Minute', href: '#quick' }
-    }
+      eyebrow: 'Mindful Awareness',
+      title: 'A few moments of',
+      titleHighlight: 'stillness.',
+      subtitle: 'Meditation does not require emptying your mind. It is simply noticing what is already here. Research shows even brief daily practice can reduce stress and improve focus over time.',
+      primaryCta: { label: 'Try a Short Practice', href: '#exercises' },
+      secondaryCta: { label: 'Learn the Basics', href: '#basics' }
+    },
+    modules: [
+      { icon: 'Brain', title: 'Supports Focus', description: 'Regular practice strengthens attention and reduces mind-wandering.' },
+      { icon: 'Heart', title: 'Builds Emotional Awareness', description: 'Noticing thoughts and feelings without reacting to them.' },
+      { icon: 'Moon', title: 'Improves Rest', description: 'Mindfulness before sleep can support relaxation and sleep quality.' }
+    ],
+    sections: [
+      {
+        id: 'exercises',
+        eyebrow: 'Micro-Practices',
+        title: 'Three meditations for right now',
+        subtitle: 'Each takes 60–120 seconds. You do not need to be good at this.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Wind', title: 'Breath Awareness (60 sec)', text: 'Close your eyes. Notice your breath. When your mind wanders, gently return to breath. That is the practice.' },
+          { icon: 'Eye', title: 'Open-Eye Presence (90 sec)', text: 'Soften your gaze. Notice colors, shapes, movement. Let thoughts pass like clouds. Stay curious.' },
+          { icon: 'Heart', title: 'Loving-Kindness (120 sec)', text: 'Silently say: "May I be safe. May I be well. May I be at ease." Then extend to someone you care about.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Build your practice gradually',
+        subtitle: 'One minute counts. Consistency matters more than duration.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Smile', title: 'Beginner', text: '1–3 minutes. Breath awareness, body scan, or open-eye gazing. Expect a wandering mind—that is normal.' },
+          { icon: 'Star', title: 'Intermediate', text: '5–10 minutes. Guided meditation, loving-kindness, or noting practice. Build a daily habit.' },
+          { icon: 'Sparkles', title: 'Advanced', text: '15+ minutes. Unguided sits, body-based awareness, or silent retreats. After months of practice.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'Meditation should feel supportive. If it does not, it is okay to stop.',
+        variant: 'plain',
+        bullets: [
+          'If you feel more anxious or distressed, open your eyes.',
+          'Movement-based practices may be easier for some people.',
+          'You can meditate for 30 seconds. There is no minimum.',
+          'If meditation brings up trauma responses, please seek support.'
+        ]
+      },
+      {
+        id: 'basics',
+        eyebrow: 'The Research',
+        title: 'Why meditation helps',
+        subtitle: 'Decades of research support mindfulness practice—here is what we know.',
+        variant: 'glow',
+        bullets: [
+          'Mindfulness-Based Stress Reduction (MBSR) has strong evidence for reducing anxiety and stress.',
+          'Regular practice changes brain structure in areas related to attention and emotion regulation.',
+          'Even brief daily practice (5–10 minutes) produces measurable benefits over time.',
+          'The key is consistency, not intensity. Start small and stay steady.'
+        ]
+      }
+    ]
   },
   {
     route: '/self-care',
     category: 'landing',
     pageLabel: 'Self-Care',
     title: 'Self-Care Toolkit — The Genuine Love Project',
-    description: 'Practical self-care tools and practices for daily wellness.',
+    description: 'Practical, evidence-informed self-care practices. Small actions that support your nervous system and wellbeing.',
+    safetyNotice: {
+      type: 'supportive',
+      text: 'Self-care supports wellbeing but does not replace professional care. If you are struggling with your mental health, please reach out to a qualified provider.'
+    },
     hero: {
       eyebrow: 'Nurturing Yourself',
       title: 'Self-care is',
       titleHighlight: 'not selfish.',
-      subtitle: 'Practical tools to nurture your body, mind, and spirit.',
-      primaryCta: { label: 'Build Your Toolkit', href: '#toolkit' },
-      secondaryCta: { label: 'Quick Self-Care', href: '#quick' }
-    }
+      subtitle: 'Self-care is not about luxury or indulgence. It is about small, consistent actions that help your body and mind feel safer. Research shows even micro-moments of care can reduce stress.',
+      primaryCta: { label: 'Find a Practice', href: '#exercises' },
+      secondaryCta: { label: 'Learn the Approach', href: '#approach' }
+    },
+    modules: [
+      { icon: 'Battery', title: 'Restores Energy', description: 'Small acts of care prevent depletion and burnout.' },
+      { icon: 'Heart', title: 'Signals Self-Worth', description: 'Taking care of yourself reinforces that you matter.' },
+      { icon: 'Shield', title: 'Builds Resilience', description: 'Regular self-care creates a buffer against stress.' }
+    ],
+    sections: [
+      {
+        id: 'exercises',
+        eyebrow: 'Micro-Practices',
+        title: 'Three self-care moments',
+        subtitle: 'Each takes 30–120 seconds. Start with what feels easiest.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Droplet', title: 'Hydration Check (30 sec)', text: 'Drink a glass of water slowly. Notice how it feels. Basic needs are self-care.' },
+          { icon: 'Sun', title: 'Sunlight Moment (60 sec)', text: 'Step near a window or outside. Feel the light on your skin. Even brief daylight supports mood.' },
+          { icon: 'Hand', title: 'Self-Touch (90 sec)', text: 'Place a hand on your heart or give yourself a gentle squeeze. Touch activates the calming nervous system.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Build your self-care practice',
+        subtitle: 'Start with the basics. Add more as you have capacity.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Smile', title: 'Beginner', text: 'Basic needs: hydration, rest, one small pleasure daily. No elaborate rituals needed.' },
+          { icon: 'Star', title: 'Intermediate', text: 'Boundaries, saying no, scheduling rest. Recognizing when you are depleted.' },
+          { icon: 'Sparkles', title: 'Advanced', text: 'Preventive self-care, regular rhythms, supporting others from a place of fullness.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'Self-care should feel nourishing. If it feels like another obligation, simplify.',
+        variant: 'plain',
+        bullets: [
+          'If self-care feels exhausting, you may need rest more than activity.',
+          'It is okay to do less. Basic needs count as self-care.',
+          'Guilt about self-care is common—notice it without acting on it.',
+          'If you cannot care for yourself, please ask for support.'
+        ]
+      },
+      {
+        id: 'approach',
+        eyebrow: 'The Research',
+        title: 'Why self-care works',
+        subtitle: 'Evidence-informed approaches to caring for yourself.',
+        variant: 'glow',
+        bullets: [
+          'Behavioral activation research shows small positive actions improve mood over time.',
+          'Meeting basic needs (sleep, food, water, movement) is foundational to mental health.',
+          'Self-compassion research links self-care with reduced anxiety and depression.',
+          'Consistency matters more than intensity—one minute daily beats one hour weekly.'
+        ]
+      }
+    ]
   },
   {
     route: '/emotional-intelligence',
     category: 'landing',
     pageLabel: 'Emotional Intelligence',
     title: 'Emotional Intelligence — The Genuine Love Project',
-    description: 'Develop your emotional awareness and regulation skills.',
+    description: 'Develop awareness and regulation skills. Based on research in emotional intelligence, DBT, and affect science.',
+    safetyNotice: {
+      type: 'supportive',
+      text: 'Emotional awareness is a skill that develops over time. If exploring emotions brings up significant distress, please work with a mental health professional.'
+    },
     hero: {
-      eyebrow: 'EQ Development',
-      title: 'Master the art of',
-      titleHighlight: 'emotional wisdom.',
-      subtitle: 'Build skills for understanding and managing emotions.',
-      primaryCta: { label: 'Start Learning', href: '#modules' },
-      secondaryCta: { label: 'EQ Assessment', href: '#assessment' }
-    }
+      eyebrow: 'Emotional Awareness',
+      title: 'Understand and navigate',
+      titleHighlight: 'your emotions.',
+      subtitle: 'Emotional intelligence is not about controlling feelings. It is about noticing them, naming them, and responding with awareness. These skills can be learned at any age.',
+      primaryCta: { label: 'Try an Exercise', href: '#exercises' },
+      secondaryCta: { label: 'Learn the Framework', href: '#framework' }
+    },
+    modules: [
+      { icon: 'Eye', title: 'Awareness', description: 'Noticing emotions as they arise, without judgment.' },
+      { icon: 'MessageCircle', title: 'Naming', description: 'Putting words to feelings reduces their intensity.' },
+      { icon: 'Compass', title: 'Responding', description: 'Choosing how to act, rather than reacting automatically.' }
+    ],
+    sections: [
+      {
+        id: 'exercises',
+        eyebrow: 'Micro-Exercises',
+        title: 'Three practices for emotional awareness',
+        subtitle: 'Each takes 30–90 seconds. Start with noticing—no action required.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Eye', title: 'Body Check (30 sec)', text: 'Pause. Notice where you feel tension or sensation. This is often where emotion lives in the body.' },
+          { icon: 'MessageCircle', title: 'Name It (60 sec)', text: 'Ask: "What am I feeling right now?" Name it simply: sad, frustrated, anxious, tired. Naming calms the brain.' },
+          { icon: 'Scale', title: 'Rate It (30 sec)', text: 'On a scale of 1–10, how intense is this feeling? This creates distance and perspective.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Build emotional skills gradually',
+        subtitle: 'Awareness comes before regulation. Start where you are.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Smile', title: 'Beginner', text: 'Notice emotions after they pass. Name basic feelings: happy, sad, angry, scared. No judgment.' },
+          { icon: 'Star', title: 'Intermediate', text: 'Notice emotions in real-time. Expand vocabulary: frustrated, overwhelmed, disappointed. Pause before reacting.' },
+          { icon: 'Sparkles', title: 'Advanced', text: 'Notice triggers and patterns. Respond rather than react. Support others in navigating emotions.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'Emotional work should feel manageable. If it becomes overwhelming, stop.',
+        variant: 'plain',
+        bullets: [
+          'If exploring emotions brings up intense distress, pause.',
+          'You do not have to process everything at once.',
+          'Grounding exercises can help if you feel flooded.',
+          'If this work feels too big, please seek professional support.'
+        ]
+      },
+      {
+        id: 'framework',
+        eyebrow: 'The Research',
+        title: 'Understanding emotional intelligence',
+        subtitle: 'Evidence-based frameworks for emotional awareness.',
+        variant: 'glow',
+        bullets: [
+          'Research by Salovey and Mayer defines EQ as perceiving, using, understanding, and managing emotions.',
+          'DBT teaches that emotions are not good or bad—they are information about our needs.',
+          'Naming emotions activates the prefrontal cortex and calms the amygdala (affect labeling research).',
+          'Emotional skills can be learned and strengthened at any age with practice.'
+        ]
+      }
+    ]
   },
   {
     route: '/sleep-guide',
@@ -1216,30 +1552,157 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Stress Response',
     title: 'Stress Response Guide — The Genuine Love Project',
-    description: 'Understand and regulate your stress response system.',
+    description: 'Understand fight, flight, freeze, and fawn responses. Polyvagal-informed education for nervous system awareness.',
+    safetyNotice: {
+      type: 'supportive',
+      text: 'Understanding your stress response is educational, not diagnostic. If you experience chronic dysregulation, panic attacks, or trauma symptoms, please work with a trauma-informed therapist.'
+    },
     hero: {
       eyebrow: 'Nervous System Education',
       title: 'Understand your',
       titleHighlight: 'stress response.',
-      subtitle: 'Learn about fight, flight, freeze, and fawn responses.',
-      primaryCta: { label: 'Take Assessment', href: '#assessment' },
-      secondaryCta: { label: 'Learn Regulation', href: '#regulation' }
-    }
+      subtitle: 'Your nervous system is designed to protect you. Sometimes it overprotects. Learning how it works can help you respond with more awareness and self-compassion.',
+      primaryCta: { label: 'Learn the Basics', href: '#basics' },
+      secondaryCta: { label: 'Try a Regulation Exercise', href: '#exercises' }
+    },
+    modules: [
+      { icon: 'Zap', title: 'Fight or Flight', description: 'Mobilization for action—heart racing, muscles tense, ready to move.' },
+      { icon: 'Pause', title: 'Freeze or Shutdown', description: 'Immobilization—feeling stuck, numb, disconnected, or foggy.' },
+      { icon: 'Heart', title: 'Safe and Social', description: 'The calm, connected state where healing and connection happen.' }
+    ],
+    sections: [
+      {
+        id: 'basics',
+        eyebrow: 'Understanding',
+        title: 'How your nervous system works',
+        subtitle: 'This is not a flaw—it is a survival system. Here is what happens.',
+        variant: 'glow',
+        bullets: [
+          'Fight/Flight: Your body prepares for action. Heart races, breath quickens, muscles tense.',
+          'Freeze: When action feels impossible, the system shuts down. You may feel numb or stuck.',
+          'Fawn: Appeasing others to stay safe. Common in relational trauma.',
+          'Safe and Social: The ventral vagal state—calm, connected, able to think clearly.'
+        ]
+      },
+      {
+        id: 'exercises',
+        eyebrow: 'Micro-Exercises',
+        title: 'Three ways to support regulation',
+        subtitle: 'Each takes 30–90 seconds. These are calming signals for your nervous system.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Wind', title: 'Long Exhale (30 sec)', text: 'Exhale longer than you inhale. 4 in, 6–8 out. This activates the calming branch of your nervous system.' },
+          { icon: 'Eye', title: 'Orienting (60 sec)', text: 'Slowly look around the room. Name 5 safe things you see. This signals safety to your brain.' },
+          { icon: 'Hand', title: 'Bilateral Touch (90 sec)', text: 'Alternate tapping your shoulders or knees. Left, right, left, right. This can help settle activation.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Build regulation skills',
+        subtitle: 'Start with noticing. Regulation follows awareness.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Smile', title: 'Beginner', text: 'Notice when you are activated or shut down. Name it: "I think I am in flight mode." No need to fix.' },
+          { icon: 'Star', title: 'Intermediate', text: 'Practice regulation during calm moments. Build a toolkit of what helps you.' },
+          { icon: 'Sparkles', title: 'Advanced', text: 'Recognize triggers and choose responses. Support co-regulation with others.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'If working with your nervous system feels too activating, stop.',
+        variant: 'plain',
+        bullets: [
+          'If exercises increase distress, pause and do something grounding instead.',
+          'You do not have to understand everything at once.',
+          'If you have trauma history, work with a professional before deep nervous system work.',
+          'Your safety matters more than any exercise.'
+        ]
+      }
+    ]
   },
   {
     route: '/inner-child',
     category: 'landing',
     pageLabel: 'Inner Child',
     title: 'Inner Child Work — The Genuine Love Project',
-    description: 'Reconnect with and heal your inner child through guided exercises.',
+    description: 'Gentle, trauma-informed exercises for reconnecting with your younger self. Drawn from IFS and attachment research.',
+    safetyNotice: {
+      type: 'trauma-aware',
+      text: 'Inner child work can bring up intense emotions or memories. This is supportive content, not therapy. If you have significant trauma history, please work with a trauma-informed therapist before engaging deeply with this material.'
+    },
+    crisisBanner: {
+      enabled: true,
+      message: 'If you are in crisis or experiencing thoughts of self-harm, please reach out for support.',
+      cta: { label: 'Crisis Resources', href: '/crisis' }
+    },
     hero: {
       eyebrow: 'Inner Child Healing',
       title: 'Reconnect with your',
       titleHighlight: 'younger self.',
-      subtitle: 'Gentle exercises to heal childhood wounds and reclaim lost joy.',
-      primaryCta: { label: 'Meet Your Inner Child', href: '#exercises' },
-      secondaryCta: { label: 'Learn About Inner Child', href: '#learn' }
-    }
+      subtitle: 'Inside you is a younger version of yourself who may still carry old wounds. Gently acknowledging that part of you can be a path toward healing. This work is tender—go slowly.',
+      primaryCta: { label: 'Try a Gentle Exercise', href: '#exercises' },
+      secondaryCta: { label: 'Understand the Approach', href: '#approach' }
+    },
+    modules: [
+      { icon: 'Heart', title: 'Reconnection', description: 'Acknowledging the younger parts of yourself with compassion.' },
+      { icon: 'Shield', title: 'Reparenting', description: 'Offering your younger self what was needed but not received.' },
+      { icon: 'Sparkles', title: 'Integration', description: 'Bringing childhood joy, creativity, and wonder into your adult life.' }
+    ],
+    sections: [
+      {
+        id: 'exercises',
+        eyebrow: 'Gentle Practices',
+        title: 'Three ways to begin',
+        subtitle: 'Each takes 60–120 seconds. Start with what feels safe. You can stop anytime.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Image', title: 'Photo Reflection (90 sec)', text: 'Look at a childhood photo. Notice what you feel. Silently say: "I see you. You are safe now."' },
+          { icon: 'Pencil', title: 'Letter to Younger Self (120 sec)', text: 'Write a few sentences to yourself as a child. What did you need to hear? What do you wish someone had said?' },
+          { icon: 'Heart', title: 'Hand on Heart (60 sec)', text: 'Place your hand on your heart. Imagine your child self receiving comfort. Breathe slowly and gently.' }
+        ]
+      },
+      {
+        id: 'levels',
+        eyebrow: 'Skill Levels',
+        title: 'Progress with care',
+        subtitle: 'This work is not linear. Move at the pace that feels right for your nervous system.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Smile', title: 'Beginner', text: 'Simple acknowledgment: "I had a childhood. Parts of it were hard." No detailed exploration yet.' },
+          { icon: 'Star', title: 'Intermediate', text: 'Writing, visualization, noticing emotions that feel young. Working with a therapist recommended.' },
+          { icon: 'Sparkles', title: 'Advanced', text: 'Deep parts work, reparenting practices, integration. Only with professional support.' }
+        ]
+      },
+      {
+        id: 'stop-rule',
+        eyebrow: 'Safety First',
+        title: 'The pause rule',
+        subtitle: 'Inner child work can be intense. Your safety comes first.',
+        variant: 'plain',
+        bullets: [
+          'If you feel overwhelmed, open your eyes and ground yourself.',
+          'You do not have to revisit painful memories to heal.',
+          'If distress persists after an exercise, please reach out for support.',
+          'This content is not a substitute for trauma therapy.'
+        ]
+      },
+      {
+        id: 'approach',
+        eyebrow: 'The Research',
+        title: 'Understanding inner child work',
+        subtitle: 'Approaches grounded in attachment and parts-based therapy.',
+        variant: 'glow',
+        bullets: [
+          'Internal Family Systems (IFS) views the psyche as containing multiple parts, including younger selves.',
+          'Attachment research shows early experiences shape adult patterns—and can be updated.',
+          'Reparenting involves offering yourself the care, safety, and validation you needed as a child.',
+          'This work is most effective when done with a trained therapist, especially for trauma survivors.'
+        ]
+      }
+    ]
   },
   {
     route: '/body-wellness',
