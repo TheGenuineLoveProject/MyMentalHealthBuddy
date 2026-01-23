@@ -1,85 +1,74 @@
 {
-  "generatedAt": "2026-01-23T07:08:21.782Z",
-  "mode": "landing",
-  "category": null,
+  "generatedAt": "2026-01-23T07:12:18.782Z",
+  "mode": "category",
+  "category": "auth",
   "from": null,
   "to": null,
   "selectedCategories": [
-    "Landing"
+    "auth"
   ],
   "counts": {
     "created": 0,
-    "updated": 7,
+    "updated": 6,
     "skippedManual": 0,
-    "aliasRedirects": 2,
-    "totalWritten": 7
+    "aliasRedirects": 0,
+    "totalWritten": 6
   },
   "files": {
     "created": [],
     "updated": [
-      "client/src/pages/generated/healing.jsx",
-      "client/src/pages/generated/home.jsx",
-      "client/src/pages/generated/index.jsx",
-      "client/src/pages/generated/landing.jsx",
-      "client/src/pages/generated/original-home.jsx",
-      "client/src/pages/generated/pricing.jsx",
-      "client/src/pages/generated/welcome.jsx"
+      "client/src/pages/generated/forgot-password.jsx",
+      "client/src/pages/generated/login-callback.jsx",
+      "client/src/pages/generated/login.jsx",
+      "client/src/pages/generated/onboarding.jsx",
+      "client/src/pages/generated/register.jsx",
+      "client/src/pages/generated/reset-password.jsx"
     ],
     "skippedManual": [],
-    "aliasRedirects": [
-      "client/src/pages/generated/home.jsx",
-      "client/src/pages/generated/welcome.jsx"
-    ]
+    "aliasRedirects": []
   },
   "routes": [
     {
-      "route": "/",
-      "category": "Landing",
-      "pageFile": "client/src/pages/generated/index.jsx",
+      "route": "/forgot-password",
+      "category": "auth",
+      "pageFile": "client/src/pages/generated/forgot-password.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/healing",
-      "category": "Landing",
-      "pageFile": "client/src/pages/generated/healing.jsx",
+      "route": "/login",
+      "category": "auth",
+      "pageFile": "client/src/pages/generated/login.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/home",
-      "category": "Landing",
-      "pageFile": "client/src/pages/generated/home.jsx",
-      "kind": "aliasRedirect",
-      "canonical": "/"
-    },
-    {
-      "route": "/landing",
-      "category": "Landing",
-      "pageFile": "client/src/pages/generated/landing.jsx",
+      "route": "/login/callback",
+      "category": "auth",
+      "pageFile": "client/src/pages/generated/login-callback.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/original-home",
-      "category": "Landing",
-      "pageFile": "client/src/pages/generated/original-home.jsx",
+      "route": "/onboarding",
+      "category": "auth",
+      "pageFile": "client/src/pages/generated/onboarding.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/pricing",
-      "category": "Landing",
-      "pageFile": "client/src/pages/generated/pricing.jsx",
+      "route": "/register",
+      "category": "auth",
+      "pageFile": "client/src/pages/generated/register.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/welcome",
-      "category": "Landing",
-      "pageFile": "client/src/pages/generated/welcome.jsx",
-      "kind": "aliasRedirect",
-      "canonical": "/"
+      "route": "/reset-password",
+      "category": "auth",
+      "pageFile": "client/src/pages/generated/reset-password.jsx",
+      "kind": "static",
+      "canonical": null
     }
   ]
 }
