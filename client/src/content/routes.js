@@ -855,6 +855,38 @@ const rawRoutes = [
     pageLabel: 'Sign In',
     title: 'Sign In — The Genuine Love Project',
     description: 'Welcome back to your healing sanctuary. Sign in to continue your journey.',
+    contentLevels: {
+      beginner: {
+        title: 'Welcome Back',
+        subtitle: 'Your space is ready for you.',
+        bulletPoints: [
+          'Just enter your email and password',
+          'If you forgot your password, we can help with that',
+          'Take your time—there\'s no rush',
+          'Your one next step: Enter your email to sign in'
+        ]
+      },
+      intermediate: {
+        title: 'Continue Where You Left Off',
+        subtitle: 'Your progress and insights are waiting.',
+        bulletPoints: [
+          'Your journal entries and reflections are safe',
+          'Pick up your healing journey right where you left it',
+          'All your tools and settings are preserved',
+          'Your one next step: Sign in to access your dashboard'
+        ]
+      },
+      advanced: {
+        title: 'Secure Access to Your Sanctuary',
+        subtitle: 'Privacy-first authentication for your peace of mind.',
+        bulletPoints: [
+          'End-to-end encrypted sessions protect your data',
+          'OAuth options available for passwordless convenience',
+          'Session management lets you control access across devices',
+          'Your one next step: Choose your preferred sign-in method'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Welcome Back',
       title: 'Continue your',
@@ -870,6 +902,38 @@ const rawRoutes = [
     pageLabel: 'Login Callback',
     title: 'Completing Sign In — The Genuine Love Project',
     description: 'Completing your sign in process.',
+    contentLevels: {
+      beginner: {
+        title: 'Almost There',
+        subtitle: 'We\'re finishing up your sign in.',
+        bulletPoints: [
+          'This only takes a moment',
+          'You\'ll be in your space soon',
+          'If it takes too long, you can try again',
+          'Your one next step: Wait just a moment while we complete sign in'
+        ]
+      },
+      intermediate: {
+        title: 'Verifying Your Identity',
+        subtitle: 'Securely completing your authentication.',
+        bulletPoints: [
+          'We\'re confirming your login with our secure system',
+          'Your session is being created safely',
+          'You\'ll be redirected to your dashboard shortly',
+          'Your one next step: Wait for automatic redirect to your dashboard'
+        ]
+      },
+      advanced: {
+        title: 'OAuth Callback Processing',
+        subtitle: 'Completing secure token exchange.',
+        bulletPoints: [
+          'Exchanging authorization code for access tokens',
+          'Validating session and creating secure cookies',
+          'Syncing your profile with the authentication provider',
+          'Your one next step: The system will redirect you automatically'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'One Moment',
       title: 'Completing',
@@ -885,6 +949,38 @@ const rawRoutes = [
     pageLabel: 'Create Account',
     title: 'Create Account — The Genuine Love Project',
     description: 'Join thousands on their healing journey. Create your free account today.',
+    contentLevels: {
+      beginner: {
+        title: 'Create Your Free Account',
+        subtitle: 'It only takes a minute.',
+        bulletPoints: [
+          'You just need an email and a password',
+          'It\'s completely free to start',
+          'You can explore at your own pace',
+          'Your one next step: Enter your email to begin'
+        ]
+      },
+      intermediate: {
+        title: 'Start Your Healing Journey',
+        subtitle: 'A private sanctuary designed just for you.',
+        bulletPoints: [
+          'Immediate access to journaling, breathing exercises, and grounding tools',
+          'Your own AI companion available whenever you need to talk',
+          'Track your progress and notice patterns over time',
+          'Your one next step: Create your account to access all free tools'
+        ]
+      },
+      advanced: {
+        title: 'Join a Trauma-Informed Community',
+        subtitle: 'Evidence-based tools with privacy at the core.',
+        bulletPoints: [
+          'All data encrypted and stored securely—never shared or sold',
+          'Built on attachment theory, IFS, and polyvagal principles',
+          'Upgrade path available when you\'re ready for deeper work',
+          'Your one next step: Create your account to join thousands on their healing path'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Begin Your Journey',
       title: 'Create your',
@@ -900,6 +996,38 @@ const rawRoutes = [
     pageLabel: 'Forgot Password',
     title: 'Reset Password — The Genuine Love Project',
     description: 'Reset your password to regain access to your healing sanctuary.',
+    contentLevels: {
+      beginner: {
+        title: 'Forgot Your Password?',
+        subtitle: 'No worries—it happens to everyone.',
+        bulletPoints: [
+          'We\'ll send you an email with a link to reset it',
+          'Check your inbox (and spam folder) after you submit',
+          'You\'ll be back in your space soon',
+          'Your one next step: Enter your email address'
+        ]
+      },
+      intermediate: {
+        title: 'Reset Your Password',
+        subtitle: 'Regain access to your healing sanctuary.',
+        bulletPoints: [
+          'Enter the email you used when you signed up',
+          'We\'ll send a secure reset link within minutes',
+          'The link expires after 24 hours for your security',
+          'Your one next step: Enter your email to receive the reset link'
+        ]
+      },
+      advanced: {
+        title: 'Secure Password Recovery',
+        subtitle: 'Privacy-first account recovery process.',
+        bulletPoints: [
+          'One-time token sent via encrypted email',
+          'Token expires after 24 hours for security',
+          'No password hints stored—we never see your password',
+          'Your one next step: Request the secure reset link'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Password Recovery',
       title: 'Reset your',
@@ -915,6 +1043,38 @@ const rawRoutes = [
     pageLabel: 'Reset Password',
     title: 'Create New Password — The Genuine Love Project',
     description: 'Create a new password for your account.',
+    contentLevels: {
+      beginner: {
+        title: 'Create a New Password',
+        subtitle: 'Pick something you\'ll remember.',
+        bulletPoints: [
+          'Type your new password twice to confirm',
+          'Make it at least 8 characters',
+          'You\'ll be signed in right after',
+          'Your one next step: Enter your new password'
+        ]
+      },
+      intermediate: {
+        title: 'Set Your New Password',
+        subtitle: 'Secure your account with a strong password.',
+        bulletPoints: [
+          'Use a mix of letters, numbers, and symbols for strength',
+          'Avoid common words or patterns',
+          'Consider using a password manager',
+          'Your one next step: Create a password you\'ll remember'
+        ]
+      },
+      advanced: {
+        title: 'Secure Password Update',
+        subtitle: 'Best practices for account security.',
+        bulletPoints: [
+          'Minimum 8 characters with mixed character types recommended',
+          'All passwords hashed with bcrypt—we never store plaintext',
+          'Consider enabling two-factor authentication after reset',
+          'Your one next step: Set a strong, unique password'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'New Password',
       title: 'Create a new',
@@ -930,6 +1090,38 @@ const rawRoutes = [
     pageLabel: 'Onboarding',
     title: 'Welcome — The Genuine Love Project',
     description: 'Let\'s personalize your healing journey.',
+    contentLevels: {
+      beginner: {
+        title: 'Let\'s Get to Know You',
+        subtitle: 'A few simple questions to help us help you.',
+        bulletPoints: [
+          'Answer only what feels comfortable',
+          'You can skip anything you\'re not sure about',
+          'We use this to show you the right tools',
+          'Your one next step: Answer the first question when you\'re ready'
+        ]
+      },
+      intermediate: {
+        title: 'Personalize Your Experience',
+        subtitle: 'Help us tailor your healing journey.',
+        bulletPoints: [
+          'Tell us what areas you\'d like to focus on',
+          'Share your preferences for how we communicate with you',
+          'Let us know your experience level with healing practices',
+          'Your one next step: Complete onboarding to unlock personalized recommendations'
+        ]
+      },
+      advanced: {
+        title: 'Configure Your Healing Path',
+        subtitle: 'Detailed customization for your unique journey.',
+        bulletPoints: [
+          'Select from evidence-based modalities that resonate with you',
+          'Set notification and reminder preferences',
+          'Choose content complexity level (this setting)',
+          'Your one next step: Complete all steps to fully personalize your experience'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Welcome',
       title: 'Let\'s personalize your',
