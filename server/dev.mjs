@@ -128,7 +128,8 @@ async function startServer() {
   app.use(cookieParser());
   app.use(passport.initialize());
 
-  // Server-side redirects for alias routes (permanent 301)
+  // Server-side redirects for alias routes (308 Permanent Redirect)
+  // 308 preserves the HTTP method (unlike 301 which may change POST to GET)
   // These must come before API routes and Vite middleware
   const aliasRedirects = {
     '/home': '/',
@@ -138,7 +139,10 @@ async function startServer() {
   app.use((req, res, next) => {
     const canonical = aliasRedirects[req.path];
     if (canonical) {
-      return res.redirect(301, canonical);
+      // Use 308 Permanent Redirect to preserve HTTP method
+      res.set('Location', canonical);
+      res.set('Cache-Control', 'public, max-age=31536000, immutable');
+      return res.status(308).end();
     }
     next();
   });
