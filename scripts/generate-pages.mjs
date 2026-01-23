@@ -36,6 +36,11 @@ import {
   getCategoryByLetter,
   isValidLetter
 } from '../content/categoryOrder.js';
+import {
+  routeToGeneratedFile,
+  routeToGeneratedFileAbs,
+  runSelfCheck as runRouteMapSelfCheck
+} from '../client/src/content/routeFileMap.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -287,8 +292,7 @@ function ensureDir(dir) {
 }
 
 function routeToFilePath(route) {
-  if (route === '/') return 'index.jsx';
-  return route.slice(1).replace(/\//g, '-') + '.jsx';
+  return routeToGeneratedFile(route);
 }
 
 function canOverwrite(filePath) {
@@ -504,7 +508,7 @@ async function generateCategoryPages(targetCategory) {
         const paramMatch = routeConfig.route.match(/:(\w+)/);
         const paramName = paramMatch ? paramMatch[1] : 'id';
         const content = createDynamicPageTemplate(routeConfig.route, paramName);
-        const result = safeWritePageFile(routeConfig.route.replace(/:\w+/g, '[param]'), content);
+        const result = safeWritePageFile(routeConfig.route, content);
         if (!result.skipped) {
           report.dynamic.push({ route: routeConfig.route, file: result.file, action: result.action });
           console.log(`   ✓ ${routeConfig.route} (${result.action})`);
@@ -629,7 +633,7 @@ async function generateRangePages(from, to) {
         const paramMatch = routeConfig.route.match(/:(\w+)/);
         const paramName = paramMatch ? paramMatch[1] : 'id';
         const content = createDynamicPageTemplate(routeConfig.route, paramName);
-        const result = safeWritePageFile(routeConfig.route.replace(/:\w+/g, '[param]'), content);
+        const result = safeWritePageFile(routeConfig.route, content);
         if (!result.skipped) {
           report.dynamic.push({ route: routeConfig.route, file: result.file, action: result.action, category: routeConfig.category });
           console.log(`   ✓ ${routeConfig.route} [${routeConfig.category}] (${result.action})`);
@@ -730,7 +734,7 @@ async function generateAllPages() {
       const paramMatch = routeConfig.route.match(/:(\w+)/);
       const paramName = paramMatch ? paramMatch[1] : 'id';
       const content = createDynamicPageTemplate(routeConfig.route, paramName);
-      const result = safeWritePageFile(routeConfig.route.replace(/:\w+/g, '[param]'), content);
+      const result = safeWritePageFile(routeConfig.route, content);
       if (!result.skipped) {
         report.dynamic.push({ route: routeConfig.route, file: result.file, action: result.action });
         console.log(`   ✓ ${routeConfig.route} (${result.action})`);
@@ -779,11 +783,12 @@ async function generateAllPages() {
   console.log('\n📛 Generating 404 page...');
   try {
     const content = create404Template();
-    const filePath = path.join(PAGES_DIR, '404.jsx');
+    const notFoundFile = routeToFilePath('/404');
+    const filePath = path.join(PAGES_DIR, notFoundFile);
     const result = safeWriteFile(filePath, content);
     if (!result.skipped) {
-      report.special.push({ route: '404', file: result.file, action: result.action });
-      console.log(`   ✓ 404.jsx (${result.action})`);
+      report.special.push({ route: '/404', file: result.file, action: result.action });
+      console.log(`   ✓ ${notFoundFile} (${result.action})`);
     }
     manifestRoutes.push({
       route: '/404',
@@ -1116,6 +1121,13 @@ async function main() {
   } else {
     report = await generateAllPages();
     await printReport(report, mode);
+  }
+
+  // Run route→file mapping self-check
+  const selfCheckPassed = runRouteMapSelfCheck();
+  if (!selfCheckPassed) {
+    console.error('❌ Route→file mapping self-check failed!');
+    process.exit(1);
   }
 
   console.log('🎉 Page generation complete!\n');

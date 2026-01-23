@@ -28,6 +28,7 @@ import path from 'path';
 import crypto from 'crypto';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
+import { routeToGeneratedFile } from '../client/src/content/routeFileMap.js';
 import { buildSnapshotWithHash } from './routes-snapshot.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -320,8 +321,8 @@ function deleteDiffJson() {
 // ============================================================================
 
 function routeToFilePath(route) {
-  const sanitized = route === '/' ? 'home' : route.slice(1).replace(/\//g, '-');
-  const filePath = path.join(GENERATED_PAGES_DIR, `${sanitized}.jsx`);
+  const fileName = routeToGeneratedFile(route);
+  const filePath = path.join(GENERATED_PAGES_DIR, fileName);
   if (fs.existsSync(filePath)) {
     return path.relative(ROOT, filePath);
   }
