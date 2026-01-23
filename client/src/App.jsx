@@ -134,7 +134,7 @@ export default function App() {
               <Route path="/chat">
                 <ProtectedRoute><AIChatPage /></ProtectedRoute>
               </Route>
-              <Route path="/therapy">{() => <ConfigRoute route="/therapy" />}</Route>
+              {/* Route renamed: /therapy → /companion (see line 243) */}
               <Route path="/ai-chat">{() => <ConfigRoute route="/ai-chat" />}</Route>
               <Route path="/analytics">
                 <ProtectedRoute><Analytics /></ProtectedRoute>

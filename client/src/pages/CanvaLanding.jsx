@@ -718,7 +718,7 @@ export default function CanvaLanding() {
               </div>
               <div className="space-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
                 <Link href="/chat"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">AI Companion</div></Link>
-                <Link href="/therapy-chat"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Therapy Sessions</div></Link>
+                <Link href="/companion"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Wellness Companion</div></Link>
                 <Link href="/crisis"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Crisis Support</div></Link>
                 <Link href="/qa"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Q&A Community</div></Link>
                 <Link href="/support"><div className="p-2 rounded-lg hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all">Help Center</div></Link>

@@ -555,7 +555,7 @@ function NotificationsSection({ settings, toggleSetting }) {
 
 function IntegrationsSection({ settings, toggleSetting }) {
   const integrations = [
-    { name: "OpenAI", description: "AI chat therapy and content generation", status: "connected", icon: "🤖" },
+    { name: "OpenAI", description: "AI wellness companion and content generation", status: "connected", icon: "🤖" },
     { name: "Stripe", description: "Payment processing and subscriptions", status: "connected", icon: "💳" },
     { name: "GitHub", description: "OAuth authentication", status: "connected", icon: "🐙" },
     { name: "SendGrid", description: "Email delivery service", status: "available", icon: "📧" },

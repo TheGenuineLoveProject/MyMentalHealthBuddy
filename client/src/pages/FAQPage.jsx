@@ -184,7 +184,7 @@ export default function FAQPage() {
 
   useSEO({
     title: "FAQ",
-    description: "Frequently asked questions about The Genuine Love Project - mental wellness, trauma healing, therapy tools, and getting started with your healing journey.",
+    description: "Frequently asked questions about The Genuine Love Project - mental wellness, trauma healing, wellness tools, and getting started with your healing journey.",
     jsonLd: createFAQSchema(faqItems),
   });
 
