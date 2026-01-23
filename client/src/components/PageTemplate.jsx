@@ -7,6 +7,7 @@
  * - GSAP logo animation (disabled for reduced motion)
  * - Semantic HTML with accessibility
  * - Playfair Display + Inter typography
+ * - 3-level reading modes (Kids / Standard / Deep)
  */
 
 import { useEffect, useRef } from 'react';
@@ -28,6 +29,9 @@ import SacredFooter from './sacred/SacredFooter.jsx';
 import SacredSection from './sacred/SacredSection.jsx';
 import SEO, { SITE_URL } from './SEO.tsx';
 import ContentLevelToggle, { useContentLevel, ContentLevelContent } from './ContentLevelToggle.jsx';
+import ReadingLevelToggle from './ReadingLevelToggle.jsx';
+import { useReadingLevel } from '../context/ReadingLevelContext.jsx';
+import { getVariant, getBulletVariant } from '../content/readingLevels.js';
 import { NotMedicalAdvice, CrisisNotice } from './SafetyDisclaimer.jsx';
 import SocialShare from './SocialShare.jsx';
 import styles from './PageTemplate.module.css';
@@ -47,7 +51,7 @@ function getIcon(iconName) {
   return iconMap[iconName] || Heart;
 }
 
-function HeroSection({ hero }) {
+function HeroSection({ hero, readingLevel = 'standard' }) {
   const logoRef = useRef(null);
   const prefersReducedMotion = useRef(false);
 
@@ -67,6 +71,13 @@ function HeroSection({ hero }) {
 
   if (!hero) return null;
 
+  const eyebrow = getVariant(hero.eyebrow, readingLevel);
+  const title = getVariant(hero.title, readingLevel);
+  const titleHighlight = getVariant(hero.titleHighlight, readingLevel);
+  const subtitle = getVariant(hero.subtitle, readingLevel);
+  const primaryLabel = hero.primaryCta ? getVariant(hero.primaryCta.label, readingLevel) : null;
+  const secondaryLabel = hero.secondaryCta ? getVariant(hero.secondaryCta.label, readingLevel) : null;
+
   return (
     <section 
       className={styles.heroSection}
@@ -83,14 +94,14 @@ function HeroSection({ hero }) {
           <span className={styles.logoBadgeText}>Genuine Love</span>
         </div>
 
-        {hero.eyebrow && (
+        {eyebrow && (
           <p 
             className={styles.eyebrow}
             data-aos="fade-up"
             data-aos-delay="200"
           >
             <LinkIcon className={styles.eyebrowIcon} />
-            {hero.eyebrow}
+            {eyebrow}
           </p>
         )}
 
@@ -100,24 +111,24 @@ function HeroSection({ hero }) {
           data-aos="fade-up"
           data-aos-delay="300"
         >
-          {hero.title}
-          {hero.titleHighlight && (
+          {title}
+          {titleHighlight && (
             <>
               <br />
               <span className={styles.gradientText}>
-                {hero.titleHighlight}
+                {titleHighlight}
               </span>
             </>
           )}
         </h1>
 
-        {hero.subtitle && (
+        {subtitle && (
           <p 
             className={styles.heroSubtitle}
             data-aos="fade-up"
             data-aos-delay="400"
           >
-            {hero.subtitle}
+            {subtitle}
           </p>
         )}
 
@@ -135,7 +146,7 @@ function HeroSection({ hero }) {
                 className={styles.primaryCta}
                 data-testid="button-hero-primary"
               >
-                {hero.primaryCta.label}
+                {primaryLabel}
                 <ArrowRight className={styles.ctaIcon} />
               </Link>
             )}
@@ -145,7 +156,7 @@ function HeroSection({ hero }) {
                 className={styles.secondaryCta}
                 data-testid="button-hero-secondary"
               >
-                {hero.secondaryCta.label}
+                {secondaryLabel}
                 <ChevronRight className={styles.ctaIcon} />
               </Link>
             )}
@@ -156,24 +167,26 @@ function HeroSection({ hero }) {
   );
 }
 
-function SacredCard({ card, index }) {
+function SacredCard({ card, index, readingLevel = 'standard' }) {
   const IconComponent = getIcon(card.icon);
+  const title = getVariant(card.title, readingLevel);
+  const text = getVariant(card.text, readingLevel);
   
   return (
     <article
       className={styles.card}
       data-aos="fade-up"
       data-aos-delay={100 + (index * 100)}
-      data-testid={`card-${card.title?.toLowerCase().replace(/\s+/g, '-') || index}`}
+      data-testid={`card-${typeof title === 'string' ? title.toLowerCase().replace(/\s+/g, '-') : index}`}
     >
       <div className={styles.cardIconWrapper}>
         <IconComponent className={styles.cardIcon} />
       </div>
       <h3 className={styles.cardTitle}>
-        {card.title}
+        {title}
       </h3>
       <p className={styles.cardText}>
-        {card.text}
+        {text}
       </p>
     </article>
   );
@@ -840,19 +853,24 @@ function BulletList({ bullets }) {
   );
 }
 
-function ContentSection({ section, index }) {
+function ContentSection({ section, index, readingLevel = 'standard' }) {
+  const eyebrow = getVariant(section.eyebrow, readingLevel);
+  const title = getVariant(section.title, readingLevel);
+  const subtitle = getVariant(section.subtitle, readingLevel);
+  const bullets = getBulletVariant(section.bullets, readingLevel);
+
   return (
     <SacredSection
       id={section.id}
-      eyebrow={section.eyebrow}
-      title={section.title}
-      subtitle={section.subtitle}
+      eyebrow={eyebrow}
+      title={title}
+      subtitle={subtitle}
       variant={section.variant || 'default'}
       aosDelay={index * 100}
-      ariaLabel={section.title}
+      ariaLabel={typeof title === 'string' ? title : section.id}
     >
-      {section.bullets && section.bullets.length > 0 && (
-        <BulletList bullets={section.bullets} />
+      {bullets && bullets.length > 0 && (
+        <BulletList bullets={bullets} />
       )}
       {section.cards && section.cards.length > 0 && (
         <div 
@@ -860,7 +878,7 @@ function ContentSection({ section, index }) {
           role="list"
         >
           {section.cards.map((card, cardIndex) => (
-            <SacredCard key={cardIndex} card={card} index={cardIndex} />
+            <SacredCard key={cardIndex} card={card} index={cardIndex} readingLevel={readingLevel} />
           ))}
         </div>
       )}
@@ -871,6 +889,7 @@ function ContentSection({ section, index }) {
 export default function PageTemplate({ config, children }) {
   const prefersReducedMotion = useRef(false);
   const [contentLevel, setContentLevel] = useContentLevel();
+  const { readingLevel, setReadingLevel, setRouteDefault, isReady } = useReadingLevel();
 
   useEffect(() => {
     prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -883,6 +902,12 @@ export default function PageTemplate({ config, children }) {
       disable: prefersReducedMotion.current
     });
   }, []);
+
+  useEffect(() => {
+    if (config?.defaultReadingLevel) {
+      setRouteDefault(config.defaultReadingLevel);
+    }
+  }, [config?.defaultReadingLevel, setRouteDefault]);
 
   if (!config) {
     return (
@@ -899,6 +924,7 @@ export default function PageTemplate({ config, children }) {
   const toneClass = tone === 'quiet' ? styles.toneQuiet : tone === 'structured' ? styles.toneStructured : '';
 
   const showSocialShare = tone === 'practice' && config.category === 'wellness';
+  const showReadingToggle = config.readingLevelsEnabled !== false;
 
   return (
     <SacredLayout className={toneClass}>
@@ -924,6 +950,13 @@ export default function PageTemplate({ config, children }) {
           </Link>
 
           <div className={styles.navActions}>
+            {showReadingToggle && isReady && (
+              <ReadingLevelToggle
+                value={readingLevel}
+                onChange={setReadingLevel}
+                className={styles.navReadingToggle}
+              />
+            )}
             <Link
               href="/login"
               className={styles.navSignIn}
@@ -938,7 +971,7 @@ export default function PageTemplate({ config, children }) {
       <main id="main-content" className={toneClass}>
         {config.stimulationProfile === 'quiet' ? (
           <QuietProfileWrapper quietProfile={config.quietProfile}>
-            <HeroSection hero={config.hero} />
+            <HeroSection hero={config.hero} readingLevel={readingLevel} />
             <ReassuranceBlock reassurance={config.reassurance} tone={tone} />
             
             {hasContentLevels && (
@@ -959,7 +992,7 @@ export default function PageTemplate({ config, children }) {
           </QuietProfileWrapper>
         ) : config.stimulationProfile === 'structured' ? (
           <>
-            <HeroSection hero={config.hero} />
+            <HeroSection hero={config.hero} readingLevel={readingLevel} />
             <NextStepBlock 
               nextStep={config.nextStep} 
               isProminent={config.structuredProfile?.nextStepProminent}
@@ -994,7 +1027,7 @@ export default function PageTemplate({ config, children }) {
           </>
         ) : (
           <>
-            <HeroSection hero={config.hero} />
+            <HeroSection hero={config.hero} readingLevel={readingLevel} />
             <ReassuranceBlock reassurance={config.reassurance} tone={tone} />
             <NextStepBlock nextStep={config.nextStep} />
             <TieredPracticeBlock practice={config.practice} microcopy={config.microcopy} />
@@ -1044,7 +1077,7 @@ export default function PageTemplate({ config, children }) {
             <ModulesGrid modules={config.modules} />
 
             {config.sections && config.sections.map((section, index) => (
-              <ContentSection key={section.id || index} section={section} index={index} />
+              <ContentSection key={section.id || index} section={section} index={index} readingLevel={readingLevel} />
             ))}
 
             <GentleDisclaimer disclaimer={config.disclaimer} tone={tone} />

@@ -63,26 +63,114 @@ const categoryPresets = {
   landing: {
     motion: { level: 'rich' },
     protected: false,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'Welcome to Genuine Love',
-      title: 'Your sanctuary for',
-      titleHighlight: 'emotional healing.',
-      subtitle: 'A trauma-informed space for healing, growth, and self-discovery.',
-      primaryCta: { label: 'Begin Your Journey', href: '/register' },
-      secondaryCta: { label: 'Learn More', href: '#features' }
+      title: {
+        kids: 'A safe place for',
+        standard: 'Your sanctuary for',
+        deep: 'A trauma-informed environment for'
+      },
+      titleHighlight: {
+        kids: 'feeling better.',
+        standard: 'emotional healing.',
+        deep: 'psychological restoration.'
+      },
+      subtitle: {
+        kids: 'A friendly place to feel calm and happy.',
+        standard: 'A trauma-informed space for healing, growth, and self-discovery.',
+        deep: 'An evidence-informed platform integrating somatic awareness, cognitive reframing, and compassion-focused approaches.'
+      },
+      primaryCta: { 
+        label: {
+          kids: 'Start Now',
+          standard: 'Begin Your Journey',
+          deep: 'Explore the Framework'
+        }, 
+        href: '/register' 
+      },
+      secondaryCta: { 
+        label: {
+          kids: 'What Is This?',
+          standard: 'Learn More',
+          deep: 'Review Methodology'
+        }, 
+        href: '#features' 
+      }
     },
     defaultSections: [
       {
         id: 'features',
-        eyebrow: 'What We Offer',
-        title: 'Healing tools designed with care',
-        subtitle: 'Evidence-based approaches wrapped in compassion.',
+        eyebrow: {
+          kids: 'Cool Stuff',
+          standard: 'What We Offer',
+          deep: 'Core Modalities'
+        },
+        title: {
+          kids: 'Things that may help',
+          standard: 'Healing tools designed with care',
+          deep: 'Evidence-informed approaches for emotional regulation'
+        },
+        subtitle: {
+          kids: 'Simple ways to feel calmer.',
+          standard: 'Evidence-based approaches wrapped in compassion.',
+          deep: 'Grounded in research on nervous system regulation and attachment theory.'
+        },
         variant: 'glow',
         cards: [
-          { icon: 'Heart', title: 'Self-Compassion', text: 'Learn to treat yourself with kindness.' },
-          { icon: 'Brain', title: 'Emotional Awareness', text: 'Understand your inner landscape.' },
-          { icon: 'Shield', title: 'Safe Space', text: 'A private sanctuary for your journey.' },
-          { icon: 'Sparkles', title: 'Guided Support', text: 'Tools and resources when you need them.' }
+          { 
+            icon: 'Heart', 
+            title: {
+              kids: 'Be Kind to You',
+              standard: 'Self-Compassion',
+              deep: 'Compassion-Focused Practice'
+            }, 
+            text: {
+              kids: 'Say nice things to yourself.',
+              standard: 'Learn to treat yourself with kindness.',
+              deep: 'Cultivate self-directed compassion through structured exercises.'
+            }
+          },
+          { 
+            icon: 'Brain', 
+            title: {
+              kids: 'Know Your Feelings',
+              standard: 'Emotional Awareness',
+              deep: 'Interoceptive Awareness'
+            }, 
+            text: {
+              kids: 'Notice how you feel inside.',
+              standard: 'Understand your inner landscape.',
+              deep: 'Develop sensitivity to internal states and somatic markers.'
+            }
+          },
+          { 
+            icon: 'Shield', 
+            title: {
+              kids: 'Your Private Space',
+              standard: 'Safe Space',
+              deep: 'Psychological Safety'
+            }, 
+            text: {
+              kids: 'A quiet place just for you.',
+              standard: 'A private sanctuary for your journey.',
+              deep: 'An environment designed for secure exploration of inner experience.'
+            }
+          },
+          { 
+            icon: 'Sparkles', 
+            title: {
+              kids: 'Help When Needed',
+              standard: 'Guided Support',
+              deep: 'Structured Scaffolding'
+            }, 
+            text: {
+              kids: 'Get help when you want it.',
+              standard: 'Tools and resources when you need them.',
+              deep: 'Progressive frameworks with adaptive complexity.'
+            }
+          }
         ]
       }
     ]
@@ -92,6 +180,8 @@ const categoryPresets = {
     motion: { level: 'minimal' },
     protected: false,
     isAuthPage: true,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: false,
     defaultHero: {
       eyebrow: 'Welcome',
       title: 'Continue your',
@@ -106,6 +196,8 @@ const categoryPresets = {
   core: {
     motion: { level: 'calm' },
     protected: true,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'Your Sanctuary',
       title: 'Welcome to your',
@@ -134,6 +226,8 @@ const categoryPresets = {
   ai: {
     motion: { level: 'calm' },
     protected: true,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'AI Support',
       title: 'Compassionate',
@@ -149,6 +243,8 @@ const categoryPresets = {
     motion: { level: 'calm' },
     protected: false,
     stimulationProfile: 'practice',
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'Wellness Practice',
       title: 'Nurture your',
@@ -242,6 +338,8 @@ const categoryPresets = {
   advanced: {
     motion: { level: 'calm' },
     protected: true,
+    defaultReadingLevel: 'deep',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'Advanced Practice',
       title: 'Deepen your',
@@ -270,6 +368,8 @@ const categoryPresets = {
   content: {
     motion: { level: 'calm' },
     protected: false,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'Learning Resources',
       title: 'Knowledge for',
@@ -298,6 +398,8 @@ const categoryPresets = {
   community: {
     motion: { level: 'calm' },
     protected: true,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'Community',
       title: 'You are',
@@ -312,6 +414,8 @@ const categoryPresets = {
   support: {
     motion: { level: 'minimal' },
     protected: false,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
     defaultHero: {
       eyebrow: 'We\'re Here to Help',
       title: 'Get the support',
@@ -326,6 +430,8 @@ const categoryPresets = {
   legal: {
     motion: { level: 'minimal' },
     protected: false,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: false,
     defaultHero: {
       eyebrow: 'Legal Information',
       title: 'Clear and',
@@ -340,6 +446,8 @@ const categoryPresets = {
   account: {
     motion: { level: 'minimal' },
     protected: true,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: false,
     defaultHero: {
       eyebrow: 'Your Account',
       title: 'Manage your',
@@ -355,6 +463,8 @@ const categoryPresets = {
     motion: { level: 'minimal' },
     protected: true,
     adminOnly: true,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: false,
     defaultHero: {
       eyebrow: 'Administration',
       title: 'Platform',
@@ -369,6 +479,8 @@ const categoryPresets = {
   system: {
     motion: { level: 'minimal' },
     protected: false,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: false,
     defaultHero: {
       eyebrow: 'System',
       title: 'Platform',

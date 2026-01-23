@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient.js";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { ReadingLevelProvider } from "./context/ReadingLevelContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
@@ -85,10 +86,11 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <ErrorBoundary>
-          <SkipToContent />
-          <main id="main-content">
-          <Suspense fallback={<LoadingFallback />}>
+        <ReadingLevelProvider>
+          <ErrorBoundary>
+            <SkipToContent />
+            <main id="main-content">
+            <Suspense fallback={<LoadingFallback />}>
             <Switch>
               {/* Landing & Public Pages - Config Driven */}
               <Route path="/">{() => <ConfigRoute route="/" />}</Route>
@@ -364,7 +366,8 @@ export default function App() {
             </Switch>
           </Suspense>
           </main>
-        </ErrorBoundary>
+          </ErrorBoundary>
+        </ReadingLevelProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
