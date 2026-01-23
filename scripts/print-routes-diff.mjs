@@ -41,8 +41,8 @@ function parseArgs(argv) {
   };
 
   for (const arg of argv.slice(2)) {
-    if (arg.startsWith('--file=')) {
-      args.file = arg.slice(7);
+    if (arg.startsWith('--file=') || arg.startsWith('--in=')) {
+      args.file = arg.includes('=') ? arg.split('=')[1] : args.file;
     } else if (arg.startsWith('--max=')) {
       const val = parseInt(arg.slice(6), 10);
       if (!isNaN(val) && val > 0) {
@@ -80,6 +80,73 @@ function parseArgs(argv) {
 }
 
 // ============================================================================
+// ROUTE LINK RESOLUTION
+// ============================================================================
+
+const PAGE_SEARCH_PATHS = [
+  'client/src/pages/generated',
+  'client/src/pages',
+  'pages'
+];
+
+function routeToFileCandidates(route) {
+  // Normalize route
+  let normalized = route.replace(/^\/+/, '');
+  
+  // Handle root route
+  if (normalized === '' || normalized === '/') {
+    return ['index.jsx', 'home.jsx'];
+  }
+  
+  // Replace dynamic segments :param with [param]
+  normalized = normalized.replace(/:([^/]+)/g, '[$1]');
+  
+  // Generate candidates
+  const candidates = [];
+  
+  // Direct file match
+  candidates.push(`${normalized}.jsx`);
+  candidates.push(`${normalized}.tsx`);
+  
+  // Index file in directory
+  candidates.push(`${normalized}/index.jsx`);
+  candidates.push(`${normalized}/index.tsx`);
+  
+  return candidates;
+}
+
+function resolveRouteLink(route) {
+  const candidates = routeToFileCandidates(route);
+  
+  for (const searchPath of PAGE_SEARCH_PATHS) {
+    // Skip if search path doesn't exist
+    if (!fs.existsSync(searchPath)) continue;
+    
+    for (const candidate of candidates) {
+      const fullPath = path.join(searchPath, candidate);
+      if (fs.existsSync(fullPath)) {
+        return {
+          kind: 'file',
+          href: fullPath,
+          label: route
+        };
+      }
+    }
+  }
+  
+  // Fallback to route path
+  return {
+    kind: 'path',
+    href: route,
+    label: route
+  };
+}
+
+function formatLink(label, href) {
+  return `[${label}](${href})`;
+}
+
+// ============================================================================
 // UTILITIES
 // ============================================================================
 
@@ -106,7 +173,7 @@ function getRoute(item) {
 }
 
 // ============================================================================
-// FORMATTERS
+// FORMATTERS (plain text, no links)
 // ============================================================================
 
 function formatAddedItem(item) {
@@ -134,33 +201,85 @@ function formatHashChanged(item) {
 }
 
 // ============================================================================
+// FORMATTERS WITH LINKS (for Top changes in md mode)
+// ============================================================================
+
+function formatAddedItemWithLink(item) {
+  const route = typeof item === 'string' ? item : item.route;
+  const category = typeof item === 'object' ? item.category : null;
+  const link = resolveRouteLink(route);
+  const linkedRoute = formatLink(route, link.href);
+  return category ? `+ ${linkedRoute} (${category})` : `+ ${linkedRoute}`;
+}
+
+function formatRemovedItemWithLink(item) {
+  const route = typeof item === 'string' ? item : item.route;
+  const category = typeof item === 'object' ? item.category : null;
+  const link = resolveRouteLink(route);
+  const linkedRoute = formatLink(route, link.href);
+  return category ? `- ${linkedRoute} (${category})` : `- ${linkedRoute}`;
+}
+
+function formatTitleChangedWithLink(item) {
+  const link = resolveRouteLink(item.route);
+  const linkedRoute = formatLink(item.route, link.href);
+  return `~ ${linkedRoute}: "${item.fromTitle}" → "${item.toTitle}"`;
+}
+
+function formatCategoryChangedWithLink(item) {
+  const link = resolveRouteLink(item.route);
+  const linkedRoute = formatLink(item.route, link.href);
+  return `~ ${linkedRoute}: "${item.fromCategory}" → "${item.toCategory}"`;
+}
+
+function formatHashChangedWithLink(item) {
+  const link = resolveRouteLink(item.route);
+  const linkedRoute = formatLink(item.route, link.href);
+  return `~ ${linkedRoute} (content changed)`;
+}
+
+// ============================================================================
 // TOP CHANGES SECTION
 // ============================================================================
 
-function buildTopChanges(diffData, topCount, topMode) {
+function buildTopChanges(diffData, topCount, topMode, withLinks = false) {
   const seen = new Set();
   const result = [];
+
+  const formatters = withLinks ? {
+    title: formatTitleChangedWithLink,
+    category: formatCategoryChangedWithLink,
+    hash: formatHashChangedWithLink,
+    added: formatAddedItemWithLink,
+    removed: formatRemovedItemWithLink
+  } : {
+    title: formatTitleChanged,
+    category: formatCategoryChanged,
+    hash: formatHashChanged,
+    added: formatAddedItem,
+    removed: formatRemovedItem
+  };
 
   const buckets = {
     title: sortByRoute(diffData.titleChanged || []).map(item => ({
       route: item.route,
-      formatted: formatTitleChanged(item)
+      formatted: formatters.title(item)
     })),
     category: sortByRoute(diffData.categoryChanged || []).map(item => ({
       route: item.route,
-      formatted: formatCategoryChanged(item)
+      formatted: formatters.category(item)
     })),
     hash: sortByRoute(diffData.hashChanged || []).map(item => ({
       route: item.route,
-      formatted: formatHashChanged(item)
+      formatted: formatters.hash(item)
     })),
     added: sortByRoute(diffData.added || []).map(item => ({
       route: getRoute(item),
-      formatted: formatAddedItem(item)
+      formatted: formatters.added(item)
     })),
     removed: sortByRoute(diffData.removed || []).map(item => ({
       route: getRoute(item),
-      formatted: formatRemovedItem(item)
+      formatted: formatters.removed(item)
     }))
   };
 
@@ -276,8 +395,8 @@ function generateMarkdown(diffData, max, topCount, topMode) {
     lines.push('');
   }
 
-  // Top changes section
-  const topChanges = buildTopChanges(diffData, topCount, topMode);
+  // Top changes section with links
+  const topChanges = buildTopChanges(diffData, topCount, topMode, true);
   if (topChanges.length > 0) {
     lines.push(`### Top changes (${topChanges.length})`);
     lines.push('');
@@ -322,13 +441,28 @@ function generateGhaDrift(diffData, max, title, topCount, topMode) {
   // Main error line
   lines.push(`::error title=Routes::${ghaEscape(title)}. Run: ${ghaEscape(cmd)}`);
 
-  // Top changes notice
-  const topChanges = buildTopChanges(diffData, topCount, topMode);
+  // Top changes notice (plain text, no links for GHA)
+  const topChanges = buildTopChanges(diffData, topCount, topMode, false);
   if (topChanges.length > 0) {
     const maxNoticeItems = 3;
     const truncated = topChanges.length > maxNoticeItems;
     const shownItems = truncated ? topChanges.slice(0, maxNoticeItems) : topChanges;
-    let topNotice = shownItems.join(' | ');
+    
+    // For GHA, also include file path if resolved
+    const itemsWithFiles = shownItems.map(item => {
+      // Extract route from the formatted string
+      const routeMatch = item.match(/[+\-~]\s+(\S+)/);
+      if (routeMatch) {
+        const route = routeMatch[1].replace(/[:\s].*$/, '');
+        const link = resolveRouteLink(route);
+        if (link.kind === 'file') {
+          return `${item} → ${link.href}`;
+        }
+      }
+      return item;
+    });
+    
+    let topNotice = itemsWithFiles.join(' | ');
     if (truncated) {
       topNotice += ' | …';
     }
