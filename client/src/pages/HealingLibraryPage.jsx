@@ -9,6 +9,7 @@ import { BRAND } from "@shared/brand";
 import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import StartHerePathways from "../components/StartHerePathways.jsx";
 import { useSEO, createWebSiteSchema } from "../hooks/useSEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const HEALING_CATEGORIES = [
   { id: "all", label: "All Modalities", icon: Library },
@@ -337,6 +338,8 @@ export default function HealingLibraryPage() {
             </span>
           </Link>
         </div>
+
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

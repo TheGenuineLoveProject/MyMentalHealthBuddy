@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const cognitiveDistortions = [
   {
@@ -360,13 +361,7 @@ export default function CognitiveToolsPage() {
             title="Continue Your Journey"
           />
 
-          <footer className="card-bordered mt-8 p-6 rounded-xl" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
-            <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
-              <strong>Important:</strong> These cognitive tools are most effective when practiced regularly. For persistent 
-              negative thought patterns, anxiety, or depression, please work with a licensed therapist who can provide 
-              personalized guidance.
-            </p>
-          </footer>
+          <SafetyFooter variant="prominent" />
         </div>
       </div>
     </div>

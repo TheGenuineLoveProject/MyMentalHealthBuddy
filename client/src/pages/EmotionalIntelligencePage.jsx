@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Heart, Brain, Eye, Ear, MessageCircle, Users, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const emotionWheel = {
   core: [
@@ -302,12 +303,7 @@ export default function EmotionalIntelligencePage() {
           title="Continue Your Journey"
         />
 
-        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-            Developing emotional intelligence is a lifelong journey. Be patient and compassionate with yourself.
-            For deeper work, consider working with a therapist or coach.
-          </p>
-        </div>
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );

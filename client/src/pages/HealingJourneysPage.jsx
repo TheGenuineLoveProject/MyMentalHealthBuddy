@@ -22,6 +22,7 @@ import {
   Eye
 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const healingJourneys = [
   {
@@ -551,13 +552,7 @@ export default function HealingJourneysPage() {
                 ))}
               </div>
 
-              <footer className="mt-8 card-bordered p-6 rounded-2xl" style={{ background: 'var(--glp-gold-10)', border: '1px solid var(--glp-gold-30)' }}>
-                <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
-                  <strong>Important:</strong> These journeys are supportive wellness programs, not therapy. 
-                  For trauma healing especially, we strongly recommend working with a qualified therapist alongside these resources. 
-                  Always prioritize your safety—if content feels too activating, pause and ground yourself.
-                </p>
-              </footer>
+              <SafetyFooter variant="prominent" />
             </>
           ) : (
             <JourneyDetail journey={selectedJourney} onBack={() => setSelectedJourney(null)} />
