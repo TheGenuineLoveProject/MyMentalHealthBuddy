@@ -1,0 +1,60 @@
+TASK: BUILD THE 119-ROUTE CONFIG-DRIVEN AUTOPILOT (NO TODOs, MUST COMPILE).
+
+GOAL:
+Every route in the platform map renders instantly from /content/routes.js using:
+- /pages/_autopilot.jsx -> getRouteConfig(pathname) -> <PageTemplate config={...} />
+
+REQUIREMENTS:
+A) /content/routes.js must export:
+- export const routes = [...]  (119+ entries including aliases + dynamic patterns)
+- export function getRouteConfig(pathname) { ... }
+- export function listRoutesByCategory() { ... }  (for reporting)
+- Must support:
+  - exact match routes (e.g., "/pricing")
+  - alias routes (aliasOf or redirectTo behavior)
+  - dynamic match:
+    - "/blog/:slug" -> /pages/blog/[slug].jsx
+    - "/community/discussion/:id" -> /pages/community/discussion/[id].jsx
+  - wildcard fallback "/*" -> Not Found config
+
+B) CATEGORY PRESETS:
+Implement category presets so “stub routes” auto-render as complete sacred pages even if only route+category+pageLabel exist.
+Categories: Landing, Authentication, Dashboard, AI, Wellness, Advanced, Content, Community, Support, Legal, Account, Admin, System
+Each preset must define:
+- default heroTitle + heroCopy
+- primaryCta + secondaryCta
+- default sections[] (2–4)
+- default modules[] (0–6 depending on category)
+Auth/Legal/System must be ultra-minimal and low stimulation.
+
+C) /components/PageTemplate.jsx (+ CSS Modules)
+- Accepts config
+- Renders:
+  SacredLayout -> Hero -> sections map -> modules grid -> SacredFooter
+- Adds AOS attributes per section/card (fade-up/slide-in) and triggers once globally
+- Keeps DOM shallow and spacing breathable
+- SEO meta via Layout: title/description/og tags
+
+D) Ensure required Sacred components exist (create/upgrade):
+Layout, Hero, SacredSection, SacredButton, PlatformComponent, SacredFooter
+
+E) Global setup:
+- /pages/_app.jsx imports global css + sacred css + AOS css
+- /pages/_document.jsx loads fonts
+- /styles/globals.css defines tokens + type scale utilities
+- /styles/sacred.css defines sacred overlays + reduced-motion rules
+
+F) Assets check:
+Ensure these exist, else create minimal placeholders:
+- /public/logo.svg
+- /public/sacred-pattern.svg
+- /public/icons/icon1.svg, icon2.svg, icon3.svg
+
+OUTPUT:
+1) IMPLEMENTATION CHECKLIST (before)
+2) FULL code grouped by file path (every changed/created file)
+3) ROUTE COMPLETION REPORT grouped by category (all 119)
+4) COMPLETED CHECKLIST (after)
+5) DONE GATE results — must all be ✅
+
+FAIL THE RUN if any DONE GATE item is not satisfied.
