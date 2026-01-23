@@ -1745,3 +1745,249 @@
     justify-content: center;
   }
 }
+
+/* ============================================================================
+   QUIET PROFILE STYLES (Authentication pages)
+   ============================================================================ */
+
+.quietProfileWrapper {
+  max-width: var(--quiet-max-width, 420px);
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.decorativeLow {
+  position: relative;
+}
+
+.decorativeLow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--sacred-sage-30, rgba(143, 191, 159, 0.3));
+  border-radius: 1px;
+}
+
+.toneQuiet .heroSection {
+  text-align: center;
+  padding: 2rem 0 1.5rem;
+}
+
+.toneQuiet .heroTitle {
+  font-size: 1.75rem;
+}
+
+.toneQuiet .heroSubtitle {
+  font-size: 1rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.toneQuiet .reassuranceBlock {
+  font-size: 0.9375rem;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+}
+
+/* ============================================================================
+   STRUCTURED PROFILE STYLES (Dashboard pages)
+   ============================================================================ */
+
+.toneStructured {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.nextStepProminent {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.nextStepProminent .nextStepCard {
+  background: linear-gradient(135deg, var(--sacred-cream, #f8f6f0) 0%, var(--glp-white, #fafaf8) 100%);
+  border: 2px solid var(--sacred-sage-20, rgba(143, 191, 159, 0.2));
+  box-shadow: 0 4px 20px rgba(47, 93, 93, 0.08);
+}
+
+.nextStepProminent .nextStepLabel {
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+}
+
+.structuredToolsSection {
+  margin: 2.5rem 0;
+  text-align: center;
+}
+
+.structuredEyebrow {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sacred-sage, #8fbf9f);
+  margin-bottom: 0.5rem;
+}
+
+.structuredToolsTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.5rem;
+  color: var(--sacred-teal, #2f5d5d);
+  margin-bottom: 1.5rem;
+}
+
+.structuredToolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.structuredToolCard {
+  background: var(--glp-white, #fafaf8);
+  border: 1px solid var(--sacred-sage-15, rgba(143, 191, 159, 0.15));
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  text-align: center;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.structuredToolCard:hover {
+  border-color: var(--sacred-sage-30, rgba(143, 191, 159, 0.3));
+  box-shadow: 0 2px 12px rgba(47, 93, 93, 0.06);
+}
+
+.structuredToolIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0 auto 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sacred-sage-10, rgba(143, 191, 159, 0.1));
+  border-radius: 0.5rem;
+  color: var(--sacred-teal, #2f5d5d);
+}
+
+.structuredToolIcon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.structuredToolName {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  margin: 0 0 0.375rem;
+}
+
+.structuredToolText {
+  font-size: 0.8125rem;
+  color: var(--glp-charcoal-60, rgba(51, 51, 51, 0.6));
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Pause Microcopy */
+.pauseMicrocopy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  margin: 1.5rem auto;
+  max-width: 500px;
+  background: var(--sacred-sage-10, rgba(143, 191, 159, 0.1));
+  border-radius: 2rem;
+}
+
+.pauseIcon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--sacred-sage, #8fbf9f);
+}
+
+.pauseText {
+  font-size: 0.875rem;
+  color: var(--glp-charcoal, #333);
+  margin: 0;
+}
+
+/* Your Space Reassurance */
+.yourSpaceSection {
+  margin: 2rem 0;
+  padding: 0 1rem;
+}
+
+.yourSpaceCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, var(--sacred-cream, #f8f6f0) 0%, var(--glp-white, #fafaf8) 100%);
+  border: 1px solid var(--sacred-sage-15, rgba(143, 191, 159, 0.15));
+  border-radius: 0.75rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.yourSpaceIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--sacred-sage, #8fbf9f);
+  flex-shrink: 0;
+}
+
+.yourSpaceContent {
+  flex: 1;
+}
+
+.yourSpaceTitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  margin: 0 0 0.25rem;
+}
+
+.yourSpaceText {
+  font-size: 0.8125rem;
+  color: var(--glp-charcoal-60, rgba(51, 51, 51, 0.6));
+  margin: 0;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .quietProfileWrapper {
+    padding: 1.5rem 1rem;
+  }
+  
+  .structuredToolsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .yourSpaceCard {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .structuredToolsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .structuredToolCard {
+    transition: none;
+  }
+}

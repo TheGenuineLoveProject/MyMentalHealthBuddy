@@ -218,17 +218,17 @@ function ModulesGrid({ modules }) {
   );
 }
 
-function NextStepBlock({ nextStep }) {
+function NextStepBlock({ nextStep, isProminent = false }) {
   if (!nextStep) return null;
   
   const IconComponent = nextStep.icon ? getIcon(nextStep.icon) : Target;
   
   return (
     <section 
-      className={styles.nextStepSection}
+      className={`${styles.nextStepSection} ${isProminent ? styles.nextStepProminent : ''}`}
       aria-label="Your next step"
       data-aos="fade-up"
-      data-aos-delay="200"
+      data-aos-delay="100"
     >
       <div className={styles.nextStepCard}>
         <div className={styles.nextStepHeader}>
@@ -253,6 +253,102 @@ function NextStepBlock({ nextStep }) {
             <ArrowRight className={styles.ctaIcon} />
           </Link>
         )}
+      </div>
+    </section>
+  );
+}
+
+function QuietProfileWrapper({ children, quietProfile }) {
+  const maxWidth = quietProfile?.maxWidth || '420px';
+  const decorativeIntensity = quietProfile?.decorativeIntensity || 'low';
+  
+  return (
+    <div 
+      className={`${styles.quietProfileWrapper} ${styles[`decorative${decorativeIntensity.charAt(0).toUpperCase() + decorativeIntensity.slice(1)}`] || ''}`}
+      style={{ '--quiet-max-width': maxWidth }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function StructuredToolCards({ sections, toolCardsCount = 4 }) {
+  if (!sections || sections.length === 0) return null;
+  
+  const toolSection = sections.find(s => s.id === 'quick-access' || s.cards);
+  if (!toolSection || !toolSection.cards) return null;
+  
+  const displayedCards = toolSection.cards.slice(0, toolCardsCount);
+  
+  return (
+    <section 
+      className={styles.structuredToolsSection}
+      aria-label={toolSection.title || 'Your tools'}
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      {toolSection.eyebrow && (
+        <span className={styles.structuredEyebrow}>{toolSection.eyebrow}</span>
+      )}
+      {toolSection.title && (
+        <h2 className={styles.structuredToolsTitle}>{toolSection.title}</h2>
+      )}
+      <div className={styles.structuredToolsGrid}>
+        {displayedCards.map((card, index) => {
+          const IconComponent = card.icon ? getIcon(card.icon) : Sparkles;
+          return (
+            <article 
+              key={index}
+              className={styles.structuredToolCard}
+              data-aos="fade-up"
+              data-aos-delay={250 + index * 50}
+            >
+              <div className={styles.structuredToolIcon}>
+                <IconComponent />
+              </div>
+              <h3 className={styles.structuredToolName}>{card.title}</h3>
+              <p className={styles.structuredToolText}>{card.text}</p>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+function PauseMicrocopy({ pauseMicrocopy }) {
+  if (!pauseMicrocopy) return null;
+  
+  return (
+    <div 
+      className={styles.pauseMicrocopy}
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
+      <RefreshCw className={styles.pauseIcon} />
+      <p className={styles.pauseText}>{pauseMicrocopy}</p>
+    </div>
+  );
+}
+
+function YourSpaceReassurance({ tone }) {
+  if (tone !== 'structured') return null;
+  
+  return (
+    <section 
+      className={styles.yourSpaceSection}
+      aria-label="Your space"
+      data-aos="fade-up"
+      data-aos-delay="350"
+    >
+      <div className={styles.yourSpaceCard}>
+        <Shield className={styles.yourSpaceIcon} />
+        <div className={styles.yourSpaceContent}>
+          <h3 className={styles.yourSpaceTitle}>This is your space</h3>
+          <p className={styles.yourSpaceText}>
+            Everything here is private. Go at your own pace. There's no judgment.
+          </p>
+        </div>
       </div>
     </section>
   );
@@ -757,49 +853,104 @@ export default function PageTemplate({ config, children }) {
       </header>
 
       <main id="main-content" className={toneClass}>
-        <HeroSection hero={config.hero} />
+        {config.stimulationProfile === 'quiet' ? (
+          <QuietProfileWrapper quietProfile={config.quietProfile}>
+            <HeroSection hero={config.hero} />
+            <ReassuranceBlock reassurance={config.reassurance} tone={tone} />
+            
+            {hasContentLevels && (
+              <ContentLevelToggle 
+                level={contentLevel} 
+                onChange={setContentLevel} 
+              />
+            )}
+            {hasContentLevels && (
+              <ContentLevelContent 
+                level={contentLevel} 
+                contentLevels={config.contentLevels}
+              />
+            )}
+            
+            <GentleDisclaimer disclaimer={config.disclaimer} tone={tone} />
+            {children}
+          </QuietProfileWrapper>
+        ) : config.stimulationProfile === 'structured' ? (
+          <>
+            <HeroSection hero={config.hero} />
+            <NextStepBlock 
+              nextStep={config.nextStep} 
+              isProminent={config.structuredProfile?.nextStepProminent}
+            />
+            
+            <StructuredToolCards 
+              sections={config.sections}
+              toolCardsCount={config.structuredProfile?.toolCardsCount}
+            />
+            
+            {config.structuredProfile?.pauseMicrocopy && (
+              <PauseMicrocopy pauseMicrocopy={config.structuredProfile.pauseMicrocopy} />
+            )}
+            
+            <YourSpaceReassurance tone={tone} />
 
-        <ReassuranceBlock reassurance={config.reassurance} tone={tone} />
+            {hasContentLevels && (
+              <ContentLevelToggle 
+                level={contentLevel} 
+                onChange={setContentLevel} 
+              />
+            )}
+            {hasContentLevels && (
+              <ContentLevelContent 
+                level={contentLevel} 
+                contentLevels={config.contentLevels}
+              />
+            )}
 
-        <NextStepBlock nextStep={config.nextStep} />
+            <GentleDisclaimer disclaimer={config.disclaimer} tone={tone} />
+            {children}
+          </>
+        ) : (
+          <>
+            <HeroSection hero={config.hero} />
+            <ReassuranceBlock reassurance={config.reassurance} tone={tone} />
+            <NextStepBlock nextStep={config.nextStep} />
+            <TieredPracticeBlock practice={config.practice} microcopy={config.microcopy} />
 
-        <TieredPracticeBlock practice={config.practice} microcopy={config.microcopy} />
+            {config.stimulationProfile === 'practice' && config.practiceSections && (
+              <PracticeSectionsRenderer 
+                practiceSections={config.practiceSections}
+                practiceTiers={config.practiceTiers}
+                microcopy={config.microcopy}
+              />
+            )}
 
-        {config.stimulationProfile === 'practice' && config.practiceSections && (
-          <PracticeSectionsRenderer 
-            practiceSections={config.practiceSections}
-            practiceTiers={config.practiceTiers}
-            microcopy={config.microcopy}
-          />
+            {config.practices && config.practices.map((practice, index) => (
+              <PracticeSection key={practice.timeTag || index} practice={practice} />
+            ))}
+
+            {hasContentLevels && (
+              <ContentLevelToggle 
+                level={contentLevel} 
+                onChange={setContentLevel} 
+              />
+            )}
+            {hasContentLevels && (
+              <ContentLevelContent 
+                level={contentLevel} 
+                contentLevels={config.contentLevels}
+              />
+            )}
+
+            <ModulesGrid modules={config.modules} />
+
+            {config.sections && config.sections.map((section, index) => (
+              <ContentSection key={section.id || index} section={section} index={index} />
+            ))}
+
+            <GentleDisclaimer disclaimer={config.disclaimer} tone={tone} />
+            {children}
+          </>
         )}
-
-        {config.practices && config.practices.map((practice, index) => (
-          <PracticeSection key={practice.timeTag || index} practice={practice} />
-        ))}
-
-        {hasContentLevels && (
-          <ContentLevelToggle 
-            level={contentLevel} 
-            onChange={setContentLevel} 
-          />
-        )}
-
-        {hasContentLevels && (
-          <ContentLevelContent 
-            level={contentLevel} 
-            contentLevels={config.contentLevels}
-          />
-        )}
-
-        <ModulesGrid modules={config.modules} />
-
-        {config.sections && config.sections.map((section, index) => (
-          <ContentSection key={section.id || index} section={section} index={index} />
-        ))}
-
-        <GentleDisclaimer disclaimer={config.disclaimer} tone={tone} />
-
-        {children}
       </main>
 
       <SacredFooter />
