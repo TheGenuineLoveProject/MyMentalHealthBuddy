@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap, Brain, Shield, Moon, Sun, Sparkles, BookOpen } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const exercises = [
   {
@@ -386,12 +387,7 @@ export default function BreathingExercisesPage() {
           title="Continue Your Regulation Journey"
         />
 
-        <div className="mt-12 text-center py-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-            Breathing exercises are powerful nervous system tools but not a replacement for professional mental health care.
-            If you experience dizziness or discomfort, return to natural breathing. Your body's signals are always valid.
-          </p>
-        </div>
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Anchor, Eye, Hand, Ear, Heart, Footprints, Sparkles, CheckCircle2, Brain, Shield, Zap, BookOpen, AlertCircle } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const techniques = [
   {
@@ -354,11 +355,7 @@ export default function GroundingTechniquesPage() {
             <li>• These tools are not a substitute for professional care if you're experiencing a mental health crisis.</li>
           </ul>
         </div>
-        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-            This content is for educational purposes and is not medical or mental health advice.
-          </p>
-        </div>
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );

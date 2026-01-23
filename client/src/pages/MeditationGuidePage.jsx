@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Moon, Sun, Cloud, Leaf, Heart, Brain, Clock, Play, Pause, Volume2, Sparkles, Shield, BookOpen, Eye, Anchor } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const meditations = [
   {
@@ -468,11 +469,7 @@ export default function MeditationGuidePage() {
             <li>• These guided practices are educational tools, not therapy or medical treatment.</li>
           </ul>
         </div>
-        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-            This content is for educational and wellness purposes and is not a substitute for professional mental health care.
-          </p>
-        </div>
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );
