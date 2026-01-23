@@ -859,7 +859,17 @@ const rawRoutes = [
     title: 'Sign In — The Genuine Love Project',
     description: 'Welcome back to your healing sanctuary. Sign in to continue your journey.',
     tone: 'quiet',
+    stimulationProfile: 'quiet',
     reassurance: 'You can go slowly. You\'re safe here.',
+    disclaimerShort: 'This platform provides wellness tools, not medical or therapeutic advice.',
+    crisisLinkEnabled: true,
+    quietProfile: {
+      maxWidth: '420px',
+      motionLevel: 'minimal',
+      decorativeIntensity: 'low',
+      formFocus: true,
+      singleAction: true
+    },
     contentLevels: {
       beginner: {
         title: 'Welcome Back',
@@ -908,7 +918,17 @@ const rawRoutes = [
     title: 'Completing Sign In — The Genuine Love Project',
     description: 'Completing your sign in process.',
     tone: 'quiet',
+    stimulationProfile: 'quiet',
     reassurance: 'Just a moment. Everything is working.',
+    disclaimerShort: 'This platform provides wellness tools, not medical or therapeutic advice.',
+    crisisLinkEnabled: true,
+    quietProfile: {
+      maxWidth: '420px',
+      motionLevel: 'minimal',
+      decorativeIntensity: 'low',
+      formFocus: false,
+      singleAction: true
+    },
     contentLevels: {
       beginner: {
         title: 'Almost There',
@@ -957,7 +977,17 @@ const rawRoutes = [
     title: 'Create Account — The Genuine Love Project',
     description: 'Join thousands on their healing journey. Create your free account today.',
     tone: 'quiet',
+    stimulationProfile: 'quiet',
     reassurance: 'Take your time. There\'s no rush here.',
+    disclaimerShort: 'This platform provides wellness tools, not medical or therapeutic advice.',
+    crisisLinkEnabled: true,
+    quietProfile: {
+      maxWidth: '420px',
+      motionLevel: 'minimal',
+      decorativeIntensity: 'low',
+      formFocus: true,
+      singleAction: true
+    },
     contentLevels: {
       beginner: {
         title: 'Create Your Free Account',
@@ -1006,7 +1036,17 @@ const rawRoutes = [
     title: 'Reset Password — The Genuine Love Project',
     description: 'Reset your password to regain access to your healing sanctuary.',
     tone: 'quiet',
+    stimulationProfile: 'quiet',
     reassurance: 'It happens to everyone. We\'ll help you get back in.',
+    disclaimerShort: 'This platform provides wellness tools, not medical or therapeutic advice.',
+    crisisLinkEnabled: true,
+    quietProfile: {
+      maxWidth: '420px',
+      motionLevel: 'minimal',
+      decorativeIntensity: 'low',
+      formFocus: true,
+      singleAction: true
+    },
     contentLevels: {
       beginner: {
         title: 'Forgot Your Password?',
@@ -1055,7 +1095,17 @@ const rawRoutes = [
     title: 'Create New Password — The Genuine Love Project',
     description: 'Create a new password for your account.',
     tone: 'quiet',
+    stimulationProfile: 'quiet',
     reassurance: 'Almost there. Just choose a new password.',
+    disclaimerShort: 'This platform provides wellness tools, not medical or therapeutic advice.',
+    crisisLinkEnabled: true,
+    quietProfile: {
+      maxWidth: '420px',
+      motionLevel: 'minimal',
+      decorativeIntensity: 'low',
+      formFocus: true,
+      singleAction: true
+    },
     contentLevels: {
       beginner: {
         title: 'Create a New Password',
@@ -1104,7 +1154,17 @@ const rawRoutes = [
     title: 'Welcome — The Genuine Love Project',
     description: 'Let\'s personalize your healing journey.',
     tone: 'quiet',
+    stimulationProfile: 'quiet',
     reassurance: 'Skip anything that doesn\'t feel right. Your pace is the right pace.',
+    disclaimerShort: 'This platform provides wellness tools, not medical or therapeutic advice.',
+    crisisLinkEnabled: true,
+    quietProfile: {
+      maxWidth: '520px',
+      motionLevel: 'minimal',
+      decorativeIntensity: 'low',
+      formFocus: true,
+      singleAction: false
+    },
     contentLevels: {
       beginner: {
         title: 'Let\'s Get to Know You',
@@ -1157,6 +1217,14 @@ const rawRoutes = [
     title: 'Dashboard — The Genuine Love Project',
     description: 'Your personal healing dashboard. Track progress, access tools, and continue your journey.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 4,
+      showInsights: true,
+      pauseMicrocopy: null
+    },
     nextStep: {
       icon: 'Target',
       title: 'Start today with a gentle check-in',
@@ -1226,6 +1294,14 @@ const rawRoutes = [
     title: 'Relationship Manager — The Genuine Love Project',
     description: 'Track and nurture your important relationships.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 3,
+      showInsights: false,
+      pauseMicrocopy: null
+    },
     nextStep: {
       icon: 'Users',
       title: 'Add one person you care about',
@@ -1280,6 +1356,14 @@ const rawRoutes = [
     title: 'Today — The Genuine Love Project',
     description: 'Your daily healing ritual. Check in, reflect, and nurture yourself.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 3,
+      showInsights: false,
+      pauseMicrocopy: 'You can pause anytime and come back when you\'re ready.'
+    },
     nextStep: {
       icon: 'Sun',
       title: 'Take one breath and begin',
@@ -1334,6 +1418,14 @@ const rawRoutes = [
     title: 'Mood Tracking — The Genuine Love Project',
     description: 'Track and understand your emotional patterns over time.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 2,
+      showInsights: true,
+      pauseMicrocopy: 'You can save your progress and continue later.'
+    },
     nextStep: {
       icon: 'Activity',
       title: 'How do you feel right now?',
@@ -1388,6 +1480,14 @@ const rawRoutes = [
     title: 'State Tracker — The Genuine Love Project',
     description: 'Monitor your nervous system state and learn regulation techniques.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 2,
+      showInsights: true,
+      pauseMicrocopy: 'There\'s no rush. Take all the time you need.'
+    },
     nextStep: {
       icon: 'Shield',
       title: 'Notice your body right now',
@@ -1442,6 +1542,14 @@ const rawRoutes = [
     title: 'Journal — The Genuine Love Project',
     description: 'A safe space for reflection and emotional processing through guided journaling.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 4,
+      showInsights: false,
+      pauseMicrocopy: 'Your draft is saved automatically. Continue anytime.'
+    },
     nextStep: {
       icon: 'BookOpen',
       title: 'Write one sentence',
@@ -1511,6 +1619,14 @@ const rawRoutes = [
     title: 'Analytics — The Genuine Love Project',
     description: 'Deep insights into your healing journey with data visualization.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 3,
+      showInsights: true,
+      pauseMicrocopy: null
+    },
     nextStep: {
       icon: 'TrendingUp',
       title: 'Look at your streak counter',
@@ -1565,6 +1681,14 @@ const rawRoutes = [
     title: 'Your Progress — The Genuine Love Project',
     description: 'Track your healing journey milestones and achievements.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 3,
+      showInsights: true,
+      pauseMicrocopy: null
+    },
     nextStep: {
       icon: 'Award',
       title: 'Find one milestone to celebrate',
@@ -1619,6 +1743,14 @@ const rawRoutes = [
     title: 'Growth Analytics — The Genuine Love Project',
     description: 'Advanced analytics for tracking personal growth patterns.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 2,
+      showInsights: true,
+      pauseMicrocopy: null
+    },
     nextStep: {
       icon: 'BarChart',
       title: 'Compare this month to last month',
@@ -1673,6 +1805,14 @@ const rawRoutes = [
     title: 'Guided Journaling — The Genuine Love Project',
     description: 'Structured journaling exercises for deeper self-reflection.',
     tone: 'structured',
+    stimulationProfile: 'structured',
+    structuredProfile: {
+      layout: 'next-step-first',
+      nextStepProminent: true,
+      toolCardsCount: 3,
+      showInsights: false,
+      pauseMicrocopy: 'Your draft is saved. Take a break and return when you\'re ready.'
+    },
     nextStep: {
       icon: 'PenTool',
       title: 'Pick a prompt and write freely',
