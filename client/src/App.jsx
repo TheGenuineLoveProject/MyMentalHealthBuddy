@@ -59,6 +59,8 @@ const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.tsx"));
 const EliteToolsDashboard = lazy(() => import("./pages/EliteToolsDashboard.tsx"));
 const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.jsx"));
 const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
+const DashboardOverview = lazy(() => import("./pages/dashboard/Overview.jsx"));
+const AdminCommandCenter = lazy(() => import("./pages/admin/CommandCenter.jsx"));
 
 function LoadingFallback() {
   return (
@@ -292,6 +294,14 @@ export default function App() {
               <Route path="/resources">{() => <ConfigRoute route="/resources" />}</Route>
               <Route path="/contact">{() => <ConfigRoute route="/contact" />}</Route>
               <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
+
+              {/* Enhanced Dashboard & Admin */}
+              <Route path="/dashboard/overview">
+                <ProtectedRoute><DashboardOverview /></ProtectedRoute>
+              </Route>
+              <Route path="/admin/command-center">
+                <ProtectedRoute><AdminCommandCenter /></ProtectedRoute>
+              </Route>
 
               {/* Admin Routes */}
               <Route path="/admin">
