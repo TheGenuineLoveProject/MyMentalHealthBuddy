@@ -1,5 +1,56 @@
 import * as LucideIcons from 'lucide-react';
 
+// Composable card primitives (shadcn-style)
+export function CardHeader({ children, className = '' }) {
+  return (
+    <div className={`flex flex-col space-y-1.5 p-6 ${className}`} data-testid="card-header">
+      {children}
+    </div>
+  );
+}
+
+export function CardTitle({ children, className = '' }) {
+  return (
+    <h3 className={`text-lg font-semibold leading-none tracking-tight text-[var(--glp-ink)] ${className}`} data-testid="card-title">
+      {children}
+    </h3>
+  );
+}
+
+export function CardDescription({ children, className = '' }) {
+  return (
+    <p className={`text-sm text-[var(--glp-ink)]/70 ${className}`} data-testid="card-description">
+      {children}
+    </p>
+  );
+}
+
+export function CardContent({ children, className = '' }) {
+  return (
+    <div className={`p-6 pt-0 ${className}`} data-testid="card-content">
+      {children}
+    </div>
+  );
+}
+
+export function CardFooter({ children, className = '' }) {
+  return (
+    <div className={`flex items-center p-6 pt-0 ${className}`} data-testid="card-footer">
+      {children}
+    </div>
+  );
+}
+
+// Full card wrapper for composable usage
+export function CardWrapper({ children, className = '' }) {
+  return (
+    <div className={`rounded-2xl border border-[var(--glp-sage-20)] bg-white shadow-sm ${className}`} data-testid="card-wrapper">
+      {children}
+    </div>
+  );
+}
+
+// Legacy Card component with icon/title/text props
 export function Card({
   icon,
   title,
