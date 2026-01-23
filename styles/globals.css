@@ -1,0 +1,73 @@
+/* === Canva Type Scale Utilities (Source of Truth) === */
+:root {
+  --font-heading: "Playfair Display", ui-serif, Georgia, serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.t-title {
+  font-family: var(--font-heading);
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+}
+
+.t-subtitle {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.t-heading {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.t-subheading {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.t-section {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.t-quote {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.t-caption {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* Responsive clamp helpers (optional but safe) */
+@media (max-width: 520px) {
+  .t-title { font-size: 42px; }
+  .t-subtitle { font-size: 28px; }
+  .t-heading { font-size: 26px; }
+  .t-subheading { font-size: 22px; }
+  .t-section { font-size: 20px; }
+  .t-body { font-size: 17px; }
+}
