@@ -25,6 +25,10 @@ export function useWellnessContent(routeKey = 'default') {
       reflection: getWellnessCopy('reflection', level, routeKey),
       encouragement: getWellnessCopy('encouragement', level, routeKey),
       tryAgain: getWellnessCopy('tryAgain', level, routeKey),
+      emotionalValidation: getWellnessCopy('emotionalValidation', level, routeKey),
+      supportSafety: getWellnessCopy('supportSafety', level, routeKey),
+      journalingPrompts: getWellnessCopy('journalingPrompts', level, routeKey),
+      tierSelectors: getWellnessCopy('tierSelectors', level, routeKey),
       
       ctaPrimary: pickSlot('ctaPrimary', level, routeKey),
       ctaSecondary: pickSlot('ctaSecondary', level, routeKey),

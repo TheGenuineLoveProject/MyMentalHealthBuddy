@@ -2,10 +2,27 @@
  * Wellness Microcopy Library
  * Single source of truth for conscious-aware, legally-safer wellness copy.
  * 
+ * MICROCOPY PRINCIPLES:
+ * - Always inviting, never commanding
+ * - Default to gentle
+ * - Never promise outcomes
+ * - Replace "must" with "you can / if you'd like / when you're ready"
+ * - Keep it short: 2–8 words
+ * 
  * COPY SAFETY RULES:
  * - Never: "cures", "treats", "heals", "guarantees", "clinically proven"
  * - Allowed: "may help", "some people find", "often used for", "you might notice"
  * - Always: choice language, consent cues, pause/stop options
+ * 
+ * ANTI-REPETITION ROTATION RULES:
+ * - Use slot + rotation so pages stay consistent but never copy-pasted
+ * - Never reuse the same phrase within the same page
+ * - Avoid reusing phrases on consecutive pages
+ * - Use pickSlot(category, level, seed) for deterministic selection
+ * 
+ * SLOTS PER PAGE:
+ * - CTA_PRIMARY_SLOT, CTA_SECONDARY_SLOT, CONSENT_SLOT
+ * - VALIDATION_SLOT, SUCCESS_SLOT, ERROR_SLOT
  */
 
 export const wellnessMicrocopy = {
@@ -222,6 +239,102 @@ export const wellnessMicrocopy = {
       'Building practice over time is sustainable.',
       'Your readiness will fluctuate naturally.',
       'Returning after a break often brings fresh perspective.'
+    ]
+  },
+
+  emotionalValidation: {
+    beginner: [
+      'That makes sense.',
+      'You\'re not alone.',
+      'This is a real moment.',
+      'It\'s okay to feel this.',
+      'You\'re doing your best.'
+    ],
+    intermediate: [
+      'It\'s okay to go slow.',
+      'You can be gentle with you.',
+      'This is hard—and you\'re here.',
+      'You don\'t have to fix it all.',
+      'You\'re allowed to begin again.'
+    ],
+    advanced: [
+      'Your experience is valid data.',
+      'Emotions provide useful information.',
+      'Acknowledging feelings supports regulation.',
+      'Complexity is part of human experience.',
+      'Self-compassion facilitates change.'
+    ]
+  },
+
+  supportSafety: {
+    beginner: [
+      'If this feels too much, pause.',
+      'Try grounding first.',
+      'Switch to the softer version.',
+      'Want a calmer step?',
+      'Let\'s slow it down.'
+    ],
+    intermediate: [
+      'Take a breath first.',
+      'Your safety matters most.',
+      'If you feel overwhelmed, stop.',
+      'You deserve support.',
+      'Help is always allowed.'
+    ],
+    advanced: [
+      'Recognizing thresholds supports sustainability.',
+      'Titration prevents overwhelm.',
+      'Support-seeking is adaptive behavior.',
+      'Safety is the foundation of growth.',
+      'Resource access is part of the practice.'
+    ]
+  },
+
+  journalingPrompts: {
+    beginner: [
+      'What do I need?',
+      'What feels heavy?',
+      'What feels true?',
+      'What can I release?',
+      'What would help today?'
+    ],
+    intermediate: [
+      'What\'s one small win?',
+      'What\'s one kind thought?',
+      'What do I want next?',
+      'What\'s one safe step?',
+      'What do I want to remember?'
+    ],
+    advanced: [
+      'What patterns am I noticing?',
+      'What needs my attention?',
+      'What am I learning about myself?',
+      'What would my future self appreciate?',
+      'What supports my wellbeing?'
+    ]
+  },
+
+  tierSelectors: {
+    beginner: [
+      'Simple',
+      'Explain like I\'m new',
+      'Show the quick version',
+      'Keep it gentle',
+      'Basics only'
+    ],
+    intermediate: [
+      'Standard',
+      'Explain with examples',
+      'Show the steps',
+      'Show the "why"',
+      'Include context'
+    ],
+    advanced: [
+      'Advanced',
+      'Explain the science (gently)',
+      'Show the "how"',
+      'Include evidence',
+      'Full detail'
     ]
   }
 };
