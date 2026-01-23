@@ -22,6 +22,7 @@
     "gen:pages": "node tools/generate_pages_from_routes.mjs",
     "gen:pages:landing": "node scripts/generate-pages.mjs --mode=landing",
     "gen:pages:category": "node scripts/generate-pages.mjs --mode=category --category=\"wellness\"",
+    "gen:pages:range": "node scripts/generate-pages.mjs --mode=range --from=A --to=C",
     "gen:pages:all": "node scripts/generate-pages.mjs --mode=all",
     "typecheck": "npx tsc -p client/tsconfig.json --noEmit || true",
     "visual:report": "node scripts/visual-report.mjs",

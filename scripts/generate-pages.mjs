@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 /**
  * ============================================================================
- * GENERATE-PAGES.MJS - Page Generator with Landing/Category/All Mode Support
+ * GENERATE-PAGES.MJS - Page Generator with Landing/Category/Range/All Mode Support
  * ============================================================================
  * 
  * Generates page files from routes.js configuration.
  * 
  * Usage:
- *   node scripts/generate-pages.mjs --mode=landing                    (Landing routes only)
- *   node scripts/generate-pages.mjs --mode=category --category="X"    (Category X only)
- *   node scripts/generate-pages.mjs --mode=all                        (All 119+ routes)
- *   node scripts/generate-pages.mjs                                   (defaults to landing)
+ *   node scripts/generate-pages.mjs --mode=landing                         (Landing routes only)
+ *   node scripts/generate-pages.mjs --mode=category --category="X"         (Category X only)
+ *   node scripts/generate-pages.mjs --mode=range --from=A --to=C           (Categories A through C)
+ *   node scripts/generate-pages.mjs --mode=all                             (All 119+ routes)
+ *   node scripts/generate-pages.mjs                                        (defaults to landing)
  * 
  * Safety Rules:
  *   - Files without "// @generated" header are NEVER overwritten (manual pages)
@@ -31,17 +32,62 @@ const ROOT = path.resolve(__dirname, '..');
 // Generated file marker
 const GENERATED_MARKER = '// @generated';
 
-// Parse command line arguments
+// ============================================================================
+// A→Z CATEGORY ORDER (Single Source of Truth)
+// ============================================================================
+
+const CATEGORY_ORDER = {
+  A: 'landing',
+  B: 'auth',
+  C: 'core',
+  D: 'ai',
+  E: 'wellness',
+  F: 'advanced',
+  G: 'content',
+  H: 'community',
+  I: 'support',
+  J: 'legal',
+  K: 'account',
+  L: 'admin',
+  M: 'system'
+};
+
+const CATEGORY_DISPLAY_NAMES = {
+  landing: 'Landing & Marketing',
+  auth: 'Authentication',
+  core: 'Dashboard & Core',
+  ai: 'AI & Chat',
+  wellness: 'Wellness & Healing Tools',
+  advanced: 'Advanced & Mastery',
+  content: 'Content & Learning',
+  community: 'Community & Social',
+  support: 'Support & Resources',
+  legal: 'Legal & Policy',
+  account: 'Account & Settings',
+  admin: 'Admin',
+  system: 'System & Utility'
+};
+
+const ORDERED_LETTERS = Object.keys(CATEGORY_ORDER).sort();
+
+// ============================================================================
+// PARSE COMMAND LINE ARGUMENTS
+// ============================================================================
+
 const args = process.argv.slice(2);
 const modeArg = args.find(arg => arg.startsWith('--mode='));
 const categoryArg = args.find(arg => arg.startsWith('--category='));
+const fromArg = args.find(arg => arg.startsWith('--from='));
+const toArg = args.find(arg => arg.startsWith('--to='));
 
 const mode = modeArg ? modeArg.split('=')[1] : 'landing';
 const category = categoryArg ? categoryArg.split('=')[1].replace(/^["']|["']$/g, '') : null;
+const fromLetter = fromArg ? fromArg.split('=')[1].toUpperCase() : null;
+const toLetter = toArg ? toArg.split('=')[1].toUpperCase() : null;
 
 // Validate mode
-if (!['landing', 'category', 'all'].includes(mode)) {
-  console.error(`❌ Invalid mode: ${mode}. Use --mode=landing, --mode=category, or --mode=all`);
+if (!['landing', 'category', 'range', 'all'].includes(mode)) {
+  console.error(`❌ Invalid mode: ${mode}. Use --mode=landing, --mode=category, --mode=range, or --mode=all`);
   process.exit(1);
 }
 
@@ -52,9 +98,46 @@ if (mode === 'category' && !category) {
   process.exit(1);
 }
 
+// Validate range mode requirements
+if (mode === 'range') {
+  if (!fromLetter || !toLetter) {
+    console.error(`❌ Range mode requires --from=<Letter> and --to=<Letter>`);
+    console.error(`   Example: node scripts/generate-pages.mjs --mode=range --from=A --to=C`);
+    console.error(`\n📋 Available letters:`);
+    for (const [letter, cat] of Object.entries(CATEGORY_ORDER)) {
+      console.error(`   ${letter} = ${cat} (${CATEGORY_DISPLAY_NAMES[cat]})`);
+    }
+    process.exit(1);
+  }
+  
+  if (!CATEGORY_ORDER[fromLetter]) {
+    console.error(`❌ Invalid --from letter: "${fromLetter}"`);
+    console.error(`   Valid letters: ${ORDERED_LETTERS.join(', ')}`);
+    process.exit(1);
+  }
+  
+  if (!CATEGORY_ORDER[toLetter]) {
+    console.error(`❌ Invalid --to letter: "${toLetter}"`);
+    console.error(`   Valid letters: ${ORDERED_LETTERS.join(', ')}`);
+    process.exit(1);
+  }
+  
+  const fromIndex = ORDERED_LETTERS.indexOf(fromLetter);
+  const toIndex = ORDERED_LETTERS.indexOf(toLetter);
+  
+  if (fromIndex > toIndex) {
+    console.error(`❌ Invalid range: --from=${fromLetter} must be <= --to=${toLetter}`);
+    console.error(`   ${fromLetter} (index ${fromIndex}) comes after ${toLetter} (index ${toIndex})`);
+    process.exit(1);
+  }
+}
+
 console.log(`\n🌱 Page Generator - Mode: ${mode.toUpperCase()}`);
 if (category) {
   console.log(`📂 Category: "${category}"`);
+}
+if (mode === 'range') {
+  console.log(`📊 Range: ${fromLetter} → ${toLetter}`);
 }
 console.log('');
 
@@ -201,9 +284,6 @@ function routeToFilePath(route) {
   return route.slice(1).replace(/\//g, '-') + '.jsx';
 }
 
-/**
- * Check if a file can be overwritten (has @generated marker or doesn't exist)
- */
 function canOverwrite(filePath) {
   if (!fs.existsSync(filePath)) {
     return { allowed: true, reason: 'new' };
@@ -220,9 +300,6 @@ function canOverwrite(filePath) {
   }
 }
 
-/**
- * Safely write a page file with overwrite protection
- */
 function safeWritePageFile(route, content) {
   const fileName = routeToFilePath(route);
   const filePath = path.join(PAGES_DIR, fileName);
@@ -247,9 +324,6 @@ function safeWritePageFile(route, content) {
   return { skipped: false, file: relPath, action: check.reason === 'new' ? 'created' : 'updated' };
 }
 
-/**
- * Safely write a file directly (for 404, etc.)
- */
 function safeWriteFile(filePath, content) {
   const relPath = path.relative(ROOT, filePath);
   
@@ -359,10 +433,7 @@ async function generateCategoryPages(targetCategory) {
 
   const routes = await loadRoutes();
   
-  // Get all available categories for validation
   const availableCategories = [...new Set(routes.map(r => r.category).filter(Boolean))];
-  
-  // Check if category exists (exact match)
   const categoryRoutes = routes.filter(r => r.category === targetCategory && !r.aliasOf);
   
   if (categoryRoutes.length === 0) {
@@ -376,13 +447,9 @@ async function generateCategoryPages(targetCategory) {
 
   console.log(`📊 Found ${categoryRoutes.length} routes in category "${targetCategory}"\n`);
 
-  // Get canonical routes in this category (for alias detection)
   const categoryCanonicalRoutes = new Set(categoryRoutes.map(r => r.route));
-
-  // Find aliases that point to routes in this category
   const categoryAliases = routes.filter(r => r.aliasOf && categoryCanonicalRoutes.has(r.aliasOf));
 
-  // Generate static pages
   console.log('📄 Generating static pages...');
   const staticRoutes = categoryRoutes.filter(r => !r.route.includes(':'));
   for (const routeConfig of staticRoutes) {
@@ -399,7 +466,6 @@ async function generateCategoryPages(targetCategory) {
     }
   }
 
-  // Generate dynamic page stubs
   const dynamicRoutes = categoryRoutes.filter(r => r.route.includes(':'));
   if (dynamicRoutes.length > 0) {
     console.log('\n🔀 Generating dynamic page stubs...');
@@ -420,7 +486,114 @@ async function generateCategoryPages(targetCategory) {
     }
   }
 
-  // Generate alias redirect pages for this category
+  if (categoryAliases.length > 0) {
+    console.log('\n🔄 Generating alias redirect pages...');
+    for (const routeConfig of categoryAliases) {
+      try {
+        const content = createAliasRedirectTemplate(routeConfig.route, routeConfig.aliasOf);
+        const result = safeWritePageFile(routeConfig.route, content);
+        if (!result.skipped) {
+          report.aliases.push({ 
+            route: routeConfig.route, 
+            canonical: routeConfig.aliasOf,
+            file: result.file,
+            action: result.action
+          });
+          console.log(`   ✓ ${routeConfig.route} → ${routeConfig.aliasOf} (${result.action})`);
+        }
+      } catch (err) {
+        report.errors.push({ route: routeConfig.route, error: err.message });
+        console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
+      }
+    }
+  }
+
+  return report;
+}
+
+// ============================================================================
+// RANGE MODE GENERATION
+// ============================================================================
+
+async function generateRangePages(from, to) {
+  const report = {
+    range: { from, to },
+    categories: [],
+    static: [],
+    dynamic: [],
+    aliases: [],
+    errors: []
+  };
+
+  ensureDir(PAGES_DIR);
+
+  // Compute inclusive subset of categories
+  const fromIndex = ORDERED_LETTERS.indexOf(from);
+  const toIndex = ORDERED_LETTERS.indexOf(to);
+  const selectedLetters = ORDERED_LETTERS.slice(fromIndex, toIndex + 1);
+  const selectedCategories = selectedLetters.map(letter => CATEGORY_ORDER[letter]);
+
+  console.log('📋 Selected categories:');
+  for (const letter of selectedLetters) {
+    const cat = CATEGORY_ORDER[letter];
+    console.log(`   ${letter} = ${cat} (${CATEGORY_DISPLAY_NAMES[cat]})`);
+    report.categories.push({ letter, category: cat, displayName: CATEGORY_DISPLAY_NAMES[cat] });
+  }
+  console.log('');
+
+  const routes = await loadRoutes();
+  
+  // Filter routes by selected categories
+  const categorySet = new Set(selectedCategories);
+  const categoryRoutes = routes.filter(r => categorySet.has(r.category) && !r.aliasOf);
+
+  console.log(`📊 Found ${categoryRoutes.length} routes across ${selectedCategories.length} categories\n`);
+
+  // Get canonical routes in selected categories (for alias detection)
+  const categoryCanonicalRoutes = new Set(categoryRoutes.map(r => r.route));
+
+  // Find aliases that point to routes in selected categories
+  const categoryAliases = routes.filter(r => r.aliasOf && categoryCanonicalRoutes.has(r.aliasOf));
+
+  // Generate static pages
+  console.log('📄 Generating static pages...');
+  const staticRoutes = categoryRoutes.filter(r => !r.route.includes(':'));
+  for (const routeConfig of staticRoutes) {
+    try {
+      const content = createStaticPageTemplate(routeConfig.route, routeConfig.pageLabel);
+      const result = safeWritePageFile(routeConfig.route, content);
+      if (!result.skipped) {
+        report.static.push({ route: routeConfig.route, file: result.file, action: result.action, category: routeConfig.category });
+        console.log(`   ✓ ${routeConfig.route} [${routeConfig.category}] (${result.action})`);
+      }
+    } catch (err) {
+      report.errors.push({ route: routeConfig.route, error: err.message });
+      console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
+    }
+  }
+
+  // Generate dynamic page stubs
+  const dynamicRoutes = categoryRoutes.filter(r => r.route.includes(':'));
+  if (dynamicRoutes.length > 0) {
+    console.log('\n🔀 Generating dynamic page stubs...');
+    for (const routeConfig of dynamicRoutes) {
+      try {
+        const paramMatch = routeConfig.route.match(/:(\w+)/);
+        const paramName = paramMatch ? paramMatch[1] : 'id';
+        const content = createDynamicPageTemplate(routeConfig.route, paramName);
+        const result = safeWritePageFile(routeConfig.route.replace(/:\w+/g, '[param]'), content);
+        if (!result.skipped) {
+          report.dynamic.push({ route: routeConfig.route, file: result.file, action: result.action, category: routeConfig.category });
+          console.log(`   ✓ ${routeConfig.route} [${routeConfig.category}] (${result.action})`);
+        }
+      } catch (err) {
+        report.errors.push({ route: routeConfig.route, error: err.message });
+        console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
+      }
+    }
+  }
+
+  // Generate alias redirect pages for routes in selected categories
   if (categoryAliases.length > 0) {
     console.log('\n🔄 Generating alias redirect pages...');
     for (const routeConfig of categoryAliases) {
@@ -541,16 +714,27 @@ async function generateAllPages() {
 // REPORT GENERATION
 // ============================================================================
 
-function printReport(report, mode, category = null) {
+function printReport(report, mode, extras = {}) {
   console.log('\n' + '═'.repeat(60));
   console.log('📋 GENERATOR REPORT');
   console.log('═'.repeat(60));
   
   console.log(`\nMode: ${mode.toUpperCase()}`);
-  if (category) {
-    console.log(`Category: "${category}"`);
+  if (extras.category) {
+    console.log(`Category: "${extras.category}"`);
+  }
+  if (extras.range) {
+    console.log(`Range: ${extras.range.from} → ${extras.range.to}`);
   }
   console.log(`Output Directory: client/src/pages/generated/\n`);
+
+  if (mode === 'range' && report.categories) {
+    console.log('📋 Selected Categories:');
+    for (const cat of report.categories) {
+      console.log(`   ${cat.letter} = ${cat.category} (${cat.displayName})`);
+    }
+    console.log('');
+  }
 
   if (mode === 'landing') {
     console.log('📄 Static Landing Pages:');
@@ -564,16 +748,18 @@ function printReport(report, mode, category = null) {
         console.log(`   • ${item.route} → ${item.canonical} (${item.action})`);
       }
     }
-  } else if (mode === 'category') {
+  } else if (mode === 'category' || mode === 'range') {
     console.log('📄 Static Pages:');
     for (const item of report.static) {
-      console.log(`   • ${item.route} → ${item.file} (${item.action})`);
+      const catLabel = item.category ? ` [${item.category}]` : '';
+      console.log(`   • ${item.route}${catLabel} → ${item.file} (${item.action})`);
     }
     
     if (report.dynamic.length > 0) {
       console.log('\n🔀 Dynamic Stubs:');
       for (const item of report.dynamic) {
-        console.log(`   • ${item.route} → ${item.file} (${item.action})`);
+        const catLabel = item.category ? ` [${item.category}]` : '';
+        console.log(`   • ${item.route}${catLabel} → ${item.file} (${item.action})`);
       }
     }
     
@@ -653,7 +839,10 @@ async function main() {
     printReport(report, mode);
   } else if (mode === 'category') {
     report = await generateCategoryPages(category);
-    printReport(report, mode, category);
+    printReport(report, mode, { category });
+  } else if (mode === 'range') {
+    report = await generateRangePages(fromLetter, toLetter);
+    printReport(report, mode, { range: { from: fromLetter, to: toLetter } });
   } else {
     report = await generateAllPages();
     printReport(report, mode);
