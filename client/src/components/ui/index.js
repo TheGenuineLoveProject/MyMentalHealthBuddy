@@ -4,6 +4,7 @@ export { SectionContainer } from './SectionContainer';
 export { Card, CardGrid } from './Card';
 export { Button } from './Button';
 export { Footer } from './Footer';
+export { default as SafetyFooter } from './SafetyFooter';
 export { SafetyNotice } from './SafetyNotice';
 export { EvidenceNote } from './EvidenceNote';
 export { Steps, StepsCompact } from './Steps';

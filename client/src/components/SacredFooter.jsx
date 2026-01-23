@@ -3,10 +3,15 @@
  * SACRED FOOTER - HEALING DESIGN
  * ============================================================================
  * 
- * A beautiful footer with sacred geometry accents, breathing animations,
- * and the healing brand aesthetic of The Genuine Love Project.
+ * @deprecated SPECIALIZED COMPONENT - Use sparingly
  * 
- * 🌿 Visual Energy: Grounded, warm, sacred
+ * Canonical Footer: import { Footer } from '@/components/ui'
+ * Safety Footer: import SafetyFooter from '@/components/ui/SafetyFooter'
+ * 
+ * This elaborate footer is for marketing/landing pages only.
+ * For tool pages, use SafetyFooter instead.
+ * 
+ * Last audit: 2026-01-23
  * ============================================================================
  */
 
