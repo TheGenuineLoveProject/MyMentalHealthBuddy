@@ -1,5 +1,4 @@
 import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
 
 export default function SacredSection({
   children,
