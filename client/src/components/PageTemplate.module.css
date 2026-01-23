@@ -2035,3 +2035,153 @@
     transition: none;
   }
 }
+
+/* ============================================================================
+   GENTLE BENEFITS SECTION - "How it may help" legally safer content
+   ============================================================================ */
+
+.gentleBenefitsSection {
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+  max-width: 700px;
+}
+
+.gentleBenefitsCard {
+  background: linear-gradient(135deg, var(--sacred-cream, #faf9f7) 0%, #fff 100%);
+  border-radius: 1rem;
+  border: 1px solid var(--sacred-sage-20, rgba(143, 191, 159, 0.2));
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(47, 93, 93, 0.08);
+}
+
+.gentleBenefitsHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.gentleBenefitsIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--sacred-sage, #8fbf9f);
+  flex-shrink: 0;
+}
+
+.gentleBenefitsTitle {
+  font-family: var(--font-heading, 'Playfair Display', serif);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  margin: 0;
+}
+
+.gentleBenefitsSubtitle {
+  font-size: 0.9375rem;
+  color: var(--glp-charcoal-70, rgba(58, 58, 58, 0.7));
+  line-height: 1.6;
+  margin: 0 0 1.25rem 0;
+}
+
+.gentleBenefitsList {
+  list-style: none;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.gentleBenefitsItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--glp-charcoal, #3a3a3a);
+  line-height: 1.5;
+}
+
+.gentleBenefitsCheck {
+  width: 1rem;
+  height: 1rem;
+  color: var(--sacred-sage, #8fbf9f);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+
+.gentleBenefitsFooter {
+  border-top: 1px solid var(--sacred-sage-15, rgba(143, 191, 159, 0.15));
+  padding-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gentleBenefitsStop {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--glp-charcoal-70, rgba(58, 58, 58, 0.7));
+  margin: 0;
+}
+
+.gentleBenefitsStopIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--sacred-sage, #8fbf9f);
+  flex-shrink: 0;
+}
+
+.gentleBenefitsCrisis {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--glp-charcoal-70, rgba(58, 58, 58, 0.7));
+  margin: 0;
+}
+
+.gentleBenefitsCrisisIcon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--sacred-teal, #2f5d5d);
+  flex-shrink: 0;
+}
+
+.gentleBenefitsCrisisLink {
+  color: var(--sacred-teal, #2f5d5d);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.gentleBenefitsCrisisLink:hover {
+  color: var(--sacred-sage, #8fbf9f);
+}
+
+.gentleBenefitsCrisisLink:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (max-width: 640px) {
+  .gentleBenefitsSection {
+    padding: 0 1rem;
+  }
+  
+  .gentleBenefitsCard {
+    padding: 1.5rem;
+  }
+  
+  .gentleBenefitsTitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gentleBenefitsCrisisLink {
+    transition: none;
+  }
+}

@@ -10,6 +10,7 @@ The Genuine Love Project is an AI-powered mental wellness platform focused on se
 - UX philosophy: Gentle, compassionate, accessible
 
 ## Recent Changes (January 2026)
+- **GentleBenefitsSection**: Added legally safer "How it may help" sections to all 29 wellness routes with evidence-informed language (may help / some people notice), stop/pause messaging, and crisis line links
 - **Sacred UI Component Library** (client/src/components/ui/): LayoutWrapper, Hero, SectionContainer (4 variants), Card/CardGrid, Button (4 variants, 3 sizes), Footer, SafetyNotice, EvidenceNote, Steps/StepsCompact, Callout (4 variants), Quote
 - **Unified JS Design Tokens** (client/src/brand/tokens.ts): Colors, spacing, radii, shadows, zIndex, motion, typography, breakpoints matching CSS tokens
 - **/design-system route**: Config-driven component catalog with 3-level content (beginner/intermediate/advanced)

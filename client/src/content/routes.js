@@ -207,6 +207,21 @@ const categoryPresets = {
     },
     disclaimerShort: 'Educational support only—not medical advice.',
     crisisLinkEnabled: true,
+    defaultGentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone is different. Here are some things people notice:',
+      bullets: [
+        'Some people find this helps them feel more grounded.',
+        'You may notice a slight shift in how you feel.',
+        'Many find it easier to pause and breathe.'
+      ],
+      stopPause: 'You can stop or pause anytime. There is no wrong way to do this.',
+      crisisLine: {
+        text: 'If you feel overwhelmed,',
+        href: '/crisis',
+        linkLabel: 'crisis support is here'
+      }
+    },
     defaultSections: [
       {
         id: 'practices',
@@ -2027,6 +2042,17 @@ const rawRoutes = [
         { label: 'Crisis Support (988)', href: 'tel:988', external: true },
         { label: 'Grounding Exercise', href: '/grounding' }
       ]
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Some things people notice:',
+      bullets: [
+        'Some people find regular pauses help them feel more present.',
+        'You may notice it becomes easier to slow down over time.',
+        'Many find even short practices help create a sense of calm.'
+      ],
+      stopPause: 'You can stop or pause anytime. There is no wrong way to do this.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -2091,6 +2117,18 @@ const rawRoutes = [
       resources: [
         { label: 'Crisis Support (988)', href: 'tel:988', external: true }
       ]
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find having many options helps them find what fits.',
+        'You may notice certain tools resonate more on different days.',
+        'Many find it helpful to start with just one practice.',
+        'Exploring at your own pace may help you build your personal toolkit.'
+      ],
+      stopPause: 'There is no pressure to try everything. Start with what calls to you.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -2155,6 +2193,18 @@ const rawRoutes = [
         { label: 'Crisis Support (988)', href: 'tel:988', external: true },
         { label: 'Grounding Exercise', href: '/grounding' }
       ]
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find reading about healing helps them understand their experiences.',
+        'You may notice certain topics resonate when you are ready for them.',
+        'Many find knowledge empowering on the healing journey.',
+        'Learning at your own pace may help you integrate new ideas.'
+      ],
+      stopPause: 'If reading brings up difficult feelings, take a break and ground yourself.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -2219,6 +2269,17 @@ const rawRoutes = [
       resources: [
         { label: 'Crisis Support (988)', href: 'tel:988', external: true }
       ]
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Experiences vary. Some things people notice:',
+      bullets: [
+        'Some people find calming visuals help their mind settle.',
+        'You may notice your breathing slows naturally.',
+        'Many find it helpful to have something peaceful to focus on.'
+      ],
+      stopPause: 'You can stop or pause anytime. There is no wrong way to do this.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -2387,7 +2448,19 @@ const rawRoutes = [
           'Even one minute of focused breathing can shift your nervous system state.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find slower breathing helps them feel calmer.',
+        'You may notice your body relaxing, even just a little.',
+        'Many find it easier to pause and reset during stressful moments.',
+        'A longer exhale may help signal safety to your nervous system.'
+      ],
+      stopPause: 'If you feel dizzy or uncomfortable, stop and breathe normally. You can always try again later.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+    }
   },
   {
     route: '/grounding',
@@ -2513,7 +2586,19 @@ const rawRoutes = [
           'If safe to do so, step outside and feel the air.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find naming what they sense helps them feel more present.',
+        'You may notice your thoughts slow down, even briefly.',
+        'Many find physical sensations (feet on floor, hands on surfaces) help redirect focus.',
+        'Engaging your senses can interrupt spiraling thoughts.'
+      ],
+      stopPause: 'You can stop or pause anytime. If grounding brings up difficult feelings, that is okay.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+    }
   },
   {
     route: '/affirmations',
@@ -2664,7 +2749,19 @@ const rawRoutes = [
           'Self-compassion is a skill—it can be learned and strengthened over time.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Experiences vary. Here are some things people notice:',
+      bullets: [
+        'Some people find kind self-talk gradually becomes more natural.',
+        'You may notice fewer harsh inner critic moments over time.',
+        'Many find affirmations help when paired with self-compassion.',
+        'Neutral statements often feel more believable than very positive ones.'
+      ],
+      stopPause: 'If an affirmation does not feel true, skip it or try a softer version.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+    }
   },
   {
     route: '/meditation',
@@ -2790,7 +2887,19 @@ const rawRoutes = [
           'The key is consistency, not intensity. Start small and stay steady.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find sitting quietly helps their mind settle.',
+        'You may notice thoughts coming and going without holding on.',
+        'Many find even one minute helps them feel a bit more grounded.',
+        'Regular practice may make it easier to return to calm.'
+      ],
+      stopPause: 'If your mind wanders, that is normal. You can stop anytime.',
+      crisisLine: { text: 'If difficult emotions arise,', href: '/crisis', linkLabel: 'support is available' }
+    }
   },
   {
     route: '/self-care',
@@ -2958,7 +3067,19 @@ const rawRoutes = [
           'Consistency matters more than intensity—one minute daily beats one hour weekly.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find small acts of care add up over time.',
+        'You may notice meeting basic needs helps you feel steadier.',
+        'Many find tiny steps are easier to maintain than big changes.',
+        'Self-care routines may help your nervous system feel safer.'
+      ],
+      stopPause: 'Start with what feels manageable. There is no perfect routine.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+    }
   },
   {
     route: '/emotional-intelligence',
@@ -3125,7 +3246,19 @@ const rawRoutes = [
           'Emotional skills can be learned and strengthened at any age with practice.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find naming emotions helps them feel less overwhelmed.',
+        'You may notice patterns in what triggers certain feelings.',
+        'Many find it easier to respond thoughtfully rather than react.',
+        'Understanding emotions as information can reduce self-judgment.'
+      ],
+      stopPause: 'If exploring emotions feels too intense, pause and do something grounding.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+    }
   },
   {
     route: '/sleep-guide',
@@ -3232,6 +3365,18 @@ const rawRoutes = [
       subtitle: 'Evidence-based approaches to improve your sleep quality.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Sleep Assessment', href: '#assessment' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find a consistent wind-down routine helps them relax.',
+        'You may notice reducing screens before bed makes a difference.',
+        'Many find a dark, cool room supports better rest.',
+        'Small changes to sleep habits may gradually improve how you feel.'
+      ],
+      stopPause: 'If sleep struggles persist, consider speaking with a healthcare provider.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -3401,7 +3546,19 @@ const rawRoutes = [
           'Your safety matters more than any exercise.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find understanding their stress responses reduces self-blame.',
+        'You may notice patterns in how your body responds to stress.',
+        'Many find it helpful to know fight/flight/freeze are normal survival responses.',
+        'Learning about your nervous system may help you feel more in control.'
+      ],
+      stopPause: 'If this information feels activating, take a break and ground yourself.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+    }
   },
   {
     route: '/inner-child',
@@ -3575,7 +3732,19 @@ const rawRoutes = [
           'This work is most effective when done with a trained therapist, especially for trauma survivors.'
         ]
       }
-    ]
+    ],
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Experiences vary widely. Here are some things people notice:',
+      bullets: [
+        'Some people find acknowledging their younger self brings compassion.',
+        'You may notice patterns from childhood showing up in adult life.',
+        'Many find gentle reparenting exercises soothing.',
+        'This work often goes deeper with a trained therapist.'
+      ],
+      stopPause: 'If this brings up difficult memories, pause and ground yourself. Go slowly.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
+    }
   },
   {
     route: '/body-wellness',
@@ -3657,6 +3826,18 @@ const rawRoutes = [
       subtitle: 'Practices to reconnect with and honor your physical self.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Movement Practices', href: '#movement' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find gentle movement helps release stored tension.',
+        'You may notice your body feels lighter after stretching.',
+        'Many find body awareness practices help them feel more grounded.',
+        'Paying attention to physical sensations may help you tune in to your needs.'
+      ],
+      stopPause: 'If any movement causes pain or discomfort, stop and rest.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -3738,6 +3919,18 @@ const rawRoutes = [
       subtitle: 'Practices for meaning, purpose, and connection to something greater.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Daily Reflection', href: '#reflection' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find connecting to purpose brings a sense of peace.',
+        'You may notice moments of gratitude arising naturally.',
+        'Many find spiritual practices help them feel less alone.',
+        'Reflecting on meaning may help during difficult times.'
+      ],
+      stopPause: 'If spiritual topics bring up difficult feelings, take a break.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -3819,6 +4012,18 @@ const rawRoutes = [
       subtitle: 'Multi-week journeys designed for specific healing goals.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Continue Journey', href: '#continue' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find structured pathways help them feel supported.',
+        'You may notice progress when you take it one step at a time.',
+        'Many find it helpful to have a gentle roadmap for healing.',
+        'Going at your own pace tends to create more lasting change.'
+      ],
+      stopPause: 'If a journey feels too intense, pause and return when ready.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -3900,6 +4105,18 @@ const rawRoutes = [
       subtitle: 'Science-backed approaches to behavioral transformation.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Habit Library', href: '#library' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find tiny steps are easier than big changes.',
+        'You may notice small habits become automatic over time.',
+        'Many find it helpful to start with just one small change.',
+        'Celebrating tiny wins may help build momentum.'
+      ],
+      stopPause: 'If you miss a day, simply start again without self-judgment.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -3981,6 +4198,18 @@ const rawRoutes = [
       subtitle: 'Build a daily structure that supports your healing.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Templates', href: '#templates' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find predictable routines help reduce overwhelm.',
+        'You may notice certain times of day work better for certain activities.',
+        'Many find morning routines set a calmer tone for the day.',
+        'Evening routines may help signal to your body that it is time to rest.'
+      ],
+      stopPause: 'Routines should support you, not stress you. Adjust as needed.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -4063,6 +4292,18 @@ const rawRoutes = [
       subtitle: 'Evidence-based cognitive techniques for mental wellness.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Thought Record', href: '#record' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find questioning thoughts helps them feel less stuck.',
+        'You may notice there is often more than one way to see a situation.',
+        'Many find gentle reframing reduces the intensity of difficult thoughts.',
+        'Noticing patterns in thinking may help you respond differently over time.'
+      ],
+      stopPause: 'If thought work feels too intense, take a break and ground yourself.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -4145,6 +4386,18 @@ const rawRoutes = [
       subtitle: 'Powerful self-love practices using the mirror.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Learn More', href: '#learn' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Experiences vary widely. Here are some things people notice:',
+      bullets: [
+        'Some people find speaking kindly to their reflection feels healing.',
+        'You may notice self-critical thoughts becoming quieter over time.',
+        'Many find this practice challenging at first—that is completely normal.',
+        'Even small moments of self-acceptance may build over time.'
+      ],
+      stopPause: 'If this feels too intense, start with just a few seconds.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -4226,6 +4479,18 @@ const rawRoutes = [
       subtitle: 'Mark transitions and honor your journey with sacred practices.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Create Your Own', href: '#create' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find rituals help mark transitions and create closure.',
+        'You may notice certain practices bring a sense of peace or meaning.',
+        'Many find small daily rituals create a sense of stability.',
+        'Intentional practices may help you feel more grounded.'
+      ],
+      stopPause: 'Rituals should feel supportive, not obligatory. Adjust as needed.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -4307,6 +4572,18 @@ const rawRoutes = [
       subtitle: 'Timeless insights to illuminate your path.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse Collection', href: '#collection' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find wise perspectives help them see challenges differently.',
+        'You may notice certain words resonate when you need them most.',
+        'Many find reading wisdom a calming part of their day.',
+        'Reflecting on meaning may provide comfort during difficult times.'
+      ],
+      stopPause: 'Take what resonates and leave the rest.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -4389,6 +4666,18 @@ const rawRoutes = [
       subtitle: 'Turn wisdom into daily practice.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse Traditions', href: '#traditions' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find ancient practices surprisingly relevant today.',
+        'You may notice certain traditions resonate more than others.',
+        'Many find applied wisdom helps bridge knowing and doing.',
+        'Practice often deepens understanding over time.'
+      ],
+      stopPause: 'Explore at your own pace. There is no rush.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -4470,6 +4759,18 @@ const rawRoutes = [
       subtitle: 'Draw from the best of all traditions.',
       primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Create Your Path', href: '#create' }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find integrating wisdom traditions deepens understanding.',
+        'You may notice common threads across different sources.',
+        'Many find synthesis helps create a personal practice that fits.',
+        'Drawing from multiple traditions may expand your toolkit.'
+      ],
+      stopPause: 'There is no right way to integrate wisdom. Follow what resonates.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   
@@ -5463,6 +5764,18 @@ const rawRoutes = [
           'Your one next step: Track your sleep-wake times for one week to find patterns.'
         ]
       }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find a consistent bedtime helps them fall asleep more easily.',
+        'You may notice reducing screens before bed makes a difference.',
+        'Many find a dark, cool room supports more restful sleep.',
+        'Gentle wind-down routines may help signal to your body it is time to rest.'
+      ],
+      stopPause: 'If sleep difficulties persist, consider speaking with a healthcare provider.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -5555,6 +5868,18 @@ const rawRoutes = [
           'Your one next step: Add one fermented or fiber-rich food to your day.'
         ]
       }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find eating more slowly helps them enjoy food more.',
+        'You may notice patterns between what you eat and how you feel.',
+        'Many find removing judgment around food reduces stress.',
+        'Mindful eating may help you tune into hunger and fullness signals.'
+      ],
+      stopPause: 'If you have concerns about eating patterns, consider speaking with a professional.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -5647,6 +5972,18 @@ const rawRoutes = [
           'Your one next step: Try a "shake-out" practice to release tension.'
         ]
       }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find gentle movement helps release stored tension.',
+        'You may notice your mood shifts after even brief movement.',
+        'Many find movement that feels good is easier to maintain.',
+        'Listening to your body may help you find what works for you.'
+      ],
+      stopPause: "If any movement causes pain, stop and rest. Honor your body's limits.",
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -5739,6 +6076,18 @@ const rawRoutes = [
           'Your one next step: Try a "sit spot" practice—sit quietly in nature for 10 minutes.'
         ]
       }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find being in nature helps them feel calmer.',
+        'You may notice your breathing naturally slows outdoors.',
+        'Many find even a few minutes outside shifts their mood.',
+        'Nature connection may help you feel more grounded and present.'
+      ],
+      stopPause: 'Any amount of nature time counts. Start with what is accessible to you.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   {
@@ -5831,6 +6180,18 @@ const rawRoutes = [
           'Your one next step: Try drawing how you feel without using words.'
         ]
       }
+    },
+    gentleBenefits: {
+      title: 'How it may help',
+      subtitle: 'Everyone responds differently. Here are some things people notice:',
+      bullets: [
+        'Some people find creative expression helps them process difficult feelings.',
+        'You may notice making something—anything—can feel freeing.',
+        'Many find there is no "wrong" way to be creative.',
+        'Creating without judgment may open up new ways of expressing yourself.'
+      ],
+      stopPause: 'You do not have to show anyone what you create. This is just for you.',
+      crisisLine: { text: 'If you feel overwhelmed,', href: '/crisis', linkLabel: 'crisis support is here' }
     }
   },
   
@@ -6212,6 +6573,13 @@ function injectMicrocopy(config) {
           ]
         }
       ];
+    }
+    
+    if (!config.gentleBenefits) {
+      const preset = categoryPresets.wellness;
+      enhanced.gentleBenefits = preset.defaultGentleBenefits;
+    } else {
+      enhanced.gentleBenefits = config.gentleBenefits;
     }
     
     return enhanced;

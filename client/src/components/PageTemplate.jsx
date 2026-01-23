@@ -745,6 +745,64 @@ function GentleDisclaimer({ disclaimer, tone }) {
   );
 }
 
+function GentleBenefitsSection({ gentleBenefits, tone }) {
+  if (!gentleBenefits || tone !== 'practice') return null;
+  
+  const { title, subtitle, bullets, stopPause, crisisLine } = gentleBenefits;
+  
+  return (
+    <section 
+      className={styles.gentleBenefitsSection}
+      aria-labelledby="gentle-benefits-title"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <div className={styles.gentleBenefitsCard}>
+        <header className={styles.gentleBenefitsHeader}>
+          <Sparkles className={styles.gentleBenefitsIcon} />
+          <h2 id="gentle-benefits-title" className={styles.gentleBenefitsTitle}>
+            {title || 'How it may help'}
+          </h2>
+        </header>
+        {subtitle && (
+          <p className={styles.gentleBenefitsSubtitle}>{subtitle}</p>
+        )}
+        {bullets && bullets.length > 0 && (
+          <ul className={styles.gentleBenefitsList} role="list">
+            {bullets.map((bullet, idx) => (
+              <li key={idx} className={styles.gentleBenefitsItem}>
+                <Check className={styles.gentleBenefitsCheck} />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className={styles.gentleBenefitsFooter}>
+          {stopPause && (
+            <p className={styles.gentleBenefitsStop}>
+              <RefreshCw className={styles.gentleBenefitsStopIcon} />
+              {stopPause}
+            </p>
+          )}
+          {crisisLine && (
+            <p className={styles.gentleBenefitsCrisis}>
+              <Shield className={styles.gentleBenefitsCrisisIcon} />
+              {crisisLine.text}{' '}
+              <Link 
+                href={crisisLine.href || '/crisis'} 
+                className={styles.gentleBenefitsCrisisLink}
+                data-testid="link-gentle-crisis"
+              >
+                {crisisLine.linkLabel || 'crisis resources'}
+              </Link>
+            </p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ReassuranceBlock({ reassurance, tone }) {
   if (!reassurance || tone !== 'quiet') return null;
   
@@ -943,6 +1001,10 @@ export default function PageTemplate({ config, children }) {
                   practiceTiers={config.practiceTiers}
                   microcopy={config.microcopy}
                   crisisLinkEnabled={config.crisisLinkEnabled}
+                />
+                <GentleBenefitsSection 
+                  gentleBenefits={config.gentleBenefits} 
+                  tone={tone} 
                 />
                 <PracticeCrisisLink crisisLinkEnabled={config.crisisLinkEnabled} />
               </>
