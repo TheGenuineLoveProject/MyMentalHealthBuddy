@@ -1,0 +1,145 @@
+TASK: CATEGORY RUN — 3-Level Reading Modes (Kids / Standard / Deep)
+Goal: Add a platform-wide 3-level reading mode system that works for ALL routes rendered via config-driven autopilot, without breaking existing routes.
+
+NON-NEGOTIABLES:
+- Next.js (pages router), React
+- CSS Modules only
+- AOS once:true, GSAP off under prefers-reduced-motion
+- Accessibility: semantic landmarks + skip link + focus-visible + ARIA
+- Copy must be original and legally safer: no diagnosis, no medical/treatment claims, no guarantees, no plagiarism, no quotes.
+
+SCOPE (FILES TO CREATE/UPDATE):
+1) /content/routes.js
+2) /components/PageTemplate.jsx
+3) /components/Layout.jsx (+ styles if needed)
+4) NEW: /components/ReadingLevelToggle.jsx + /components/ReadingLevelToggle.module.css
+5) NEW: /content/readingLevels.js (constants + helpers)
+6) OPTIONAL: /styles/globals.css (add small utility for visually-hidden label if missing)
+
+DATA MODEL REQUIREMENTS:
+A) Per-route defaults in /content/routes.js:
+- Add field: defaultReadingLevel: "standard" (or "kids" for beginner-heavy pages, "deep" for advanced tools)
+- Add field: readingLevelsEnabled: true (default true, allow disabling for legal/system pages if desired)
+
+B) Copy variants:
+- For each route config, hero + sections must support variants:
+  hero: {
+    title: { kids, standard, deep },
+    subtitle: { kids, standard, deep },
+    primaryCta: { label: { kids, standard, deep }, href: "..." },
+    secondaryCta: { label: { kids, standard, deep }, href: "..." }
+  }
+- Sections:
+  sections: [
+    {
+      id,
+      eyebrow: { kids, standard, deep },
+      title: { kids, standard, deep },
+      subtitle: { kids, standard, deep },
+      variant,
+      cards: [
+        { icon, title: { kids, standard, deep }, text: { kids, standard, deep } }
+      ],
+      bullets: {
+        kids: [...],
+        standard: [...],
+        deep: [...]
+      }
+    }
+  ]
+
+C) Fallback rule:
+- If a variant is missing for a field, fallback to standard.
+- If standard missing, fallback to first available string.
+
+READING LEVEL BEHAVIOR:
+1) UI toggle (global, per user):
+- Render a ReadingLevelToggle in Layout (top-right in nav or below nav).
+- Control must be a <fieldset> with <legend> (visually hidden ok).
+- Use radio inputs:
+  - value="kids" label "Kids"
+  - value="standard" label "Standard"
+  - value="deep" label "Deep"
+- Must be keyboard navigable (Tab + Arrow keys).
+- Must show focus-visible ring.
+- Must announce current selection for screen readers.
+
+2) Persistence + URL:
+- Reading level resolution order:
+  a) URL query ?level=kids|standard|deep (if present)
+  b) localStorage "glp_reading_level" (if present)
+  c) route.defaultReadingLevel
+  d) "standard"
+- When user changes toggle:
+  - update state
+  - set localStorage
+  - update URL query (shallow routing) without full reload
+- SSR-safe: do not access window/localStorage until useEffect.
+
+3) PageTemplate rendering:
+- PageTemplate receives config + resolved readingLevel
+- Use helper getVariant(field, level) to pick correct text.
+- Render hero/sections/cards using resolved variant strings.
+
+COPY SAFETY RULES (STRICT):
+- Always use supportive language: “may help”, “some people notice…”
+- Never: “cures”, “treats”, “guarantees”, “clinically proven to fix you”
+- Include a short disclaimer on practice-heavy pages (and optionally globally):
+  “Educational support only — not medical advice.” + link to /crisis
+- No references to named universities or experts unless provided by owner with proof.
+
+IMPLEMENTATION STEPS:
+1) Create /content/readingLevels.js:
+- export const READING_LEVELS = ["kids","standard","deep"]
+- export function normalizeReadingLevel(input)
+- export function getVariant(value, level): handles string OR {kids,standard,deep}
+- export function resolveReadingLevel({ routerQuery, stored, routeDefault })
+
+2) Create /components/ReadingLevelToggle.jsx:
+- Props: value, onChange
+- Accessible fieldset/legend, radio group
+- aria-label="Reading level"
+- Use CSS Modules for calm segmented control look
+
+3) Update /components/Layout.jsx:
+- Add reading level state
+- On mount: load localStorage if no ?level
+- Watch router query changes
+- Render <ReadingLevelToggle />
+- Keep skip link and sacred background layers intact
+
+4) Update /components/PageTemplate.jsx:
+- Accept { config }
+- Read readingLevel from Layout (prop drilling) OR via a tiny context (choose simplest)
+- Use getVariant on hero/sections/cards/bullets
+- Ensure minimal DOM nesting
+
+5) Update /content/routes.js:
+- Add defaultReadingLevel and readingLevelsEnabled for every route stub
+- For now, you may generate “starter” variants with different depth:
+  - kids: very short, simple words, 1-step instructions
+  - standard: warm grounded, 2–4 bullets, gentle CTAs
+  - deep: more explanatory, definitions, frameworks, still calm
+- DO NOT leave TODOs; stubs must compile.
+
+OUTPUT FORMAT (MANDATORY):
+1) IMPLEMENTATION CHECKLIST (before)
+2) Code grouped by file path (FULL file contents for changed/created files)
+3) COMPLETED CHECKLIST (after) with ✅ or N/A for:
+   - routes.js includes defaults + variants + fallback
+   - toggle is accessible (fieldset/legend/radios/focus-visible)
+   - persistence works (query + localStorage)
+   - PageTemplate uses variants correctly
+   - SSR safe
+   - copy safety rules applied
+4) Provide quick manual test steps:
+   - visit /?level=kids, toggle to deep, refresh, verify persistence
+
+DONE GATE — FAIL IF ANY NOT MET:
+✅ npm run dev works (no build errors)
+✅ no console errors on load
+✅ toggle works via keyboard + screen reader semantics
+✅ URL query level works and persists to localStorage
+✅ missing variant falls back to standard without crashing
+✅ AOS once:true and GSAP reduced-motion safe remain intact
+✅ no medical claims, no plagiarism, no fake endorsements
