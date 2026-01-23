@@ -151,6 +151,7 @@ function computeDiff(stored, fresh) {
   const addedRoutes = [];
   const removedRoutes = [];
   const changedTitles = [];
+  const changedCategories = [];
   const changedHashes = [];
 
   // Added (in fresh but not stored)
@@ -172,18 +173,33 @@ function computeDiff(stored, fresh) {
     const storedEntry = storedRoutes.get(route);
     if (!storedEntry) continue;
 
+    // Track title changes
     if (storedEntry.title !== freshEntry.title) {
       changedTitles.push({
         route,
         oldTitle: storedEntry.title || '(null)',
         newTitle: freshEntry.title || '(null)'
       });
-    } else if (storedEntry.routeHash !== freshEntry.routeHash) {
+    }
+
+    // Track category changes (separate from title)
+    if (storedEntry.category !== freshEntry.category) {
+      changedCategories.push({
+        route,
+        fromCategory: storedEntry.category || '(null)',
+        toCategory: freshEntry.category || '(null)'
+      });
+    }
+
+    // Track other hash changes (not title or category)
+    if (storedEntry.routeHash !== freshEntry.routeHash &&
+        storedEntry.title === freshEntry.title &&
+        storedEntry.category === freshEntry.category) {
       changedHashes.push(route);
     }
   }
 
-  return { addedRoutes, removedRoutes, changedTitles, changedHashes };
+  return { addedRoutes, removedRoutes, changedTitles, changedCategories, changedHashes };
 }
 
 function printResult(result) {
@@ -222,10 +238,11 @@ function printList(items, prefix, maxItems = 10) {
 function printDiffSummary(diff) {
   if (!diff) return;
 
-  const { addedRoutes, removedRoutes, changedTitles, changedHashes } = diff;
+  const { addedRoutes, removedRoutes, changedTitles, changedCategories, changedHashes } = diff;
 
   const hasChanges = addedRoutes.length > 0 || removedRoutes.length > 0 ||
-                     changedTitles.length > 0 || changedHashes.length > 0;
+                     changedTitles.length > 0 || changedCategories.length > 0 ||
+                     changedHashes.length > 0;
 
   if (!hasChanges) {
     console.log('\n   No route-level changes detected (possible formatting diff).\n');
@@ -256,6 +273,15 @@ function printDiffSummary(diff) {
       return `${c.route}: "${oldShort}" → "${newShort}"`;
     });
     printList(titleItems, '~');
+    console.log('');
+  }
+
+  if (changedCategories.length > 0) {
+    console.log(`   ~ Category changed: ${changedCategories.length}`);
+    const categoryItems = changedCategories.map(c => 
+      `${c.route}: "${c.fromCategory}" → "${c.toCategory}"`
+    );
+    printList(categoryItems, '~');
     console.log('');
   }
 
