@@ -5,6 +5,7 @@ import {
   Brain, Heart, Calendar, Bell, ChevronRight, Zap, Loader2
 } from "lucide-react";
 import SEO from "../components/SEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const STRIPE_PRICING_TABLE_ID = "prctbl_1SanK5RtwDw9mKhaSKDHxmn5";
 const STRIPE_PUBLISHABLE_KEY = "pk_live_51RIV9vRtwDw9mKhaldQnCVBo6Grjc2KXIjwyolZbTClMNgMGySVBrT6LayaZhBebFDUaQI0yoXoxiAjyLXLOl2b800NJXSDcQd";
@@ -261,6 +262,7 @@ export default function Premium() {
               </div>
             </div>
           )}
+          <SafetyFooter variant="compact" className="mt-12" />
         </div>
       </div>
     </>

@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp } from "lucide-react";
 import "../styles/canva-landing.css";
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -861,6 +862,7 @@ export default function CanvaLanding() {
               <span>for your healing journey</span>
             </div>
           </div>
+          <SafetyFooter variant="compact" className="mt-8" />
         </div>
       </footer>
 
