@@ -128,6 +128,21 @@ async function startServer() {
   app.use(cookieParser());
   app.use(passport.initialize());
 
+  // Server-side redirects for alias routes (permanent 301)
+  // These must come before API routes and Vite middleware
+  const aliasRedirects = {
+    '/home': '/',
+    '/welcome': '/'
+  };
+  
+  app.use((req, res, next) => {
+    const canonical = aliasRedirects[req.path];
+    if (canonical) {
+      return res.redirect(301, canonical);
+    }
+    next();
+  });
+
   app.use("/api/auth", authRouter);
   app.use("/api/auth", githubAuthRouter);
   app.use("/api/admin", adminRouter);

@@ -1,0 +1,49 @@
+TASK: Add a fourth generator mode: --mode=range --from=A --to=C to generate multiple categories in one run (A→Z batches).
+
+REQUIREMENTS:
+- Update /scripts/generate-pages.mjs to accept:
+  --mode=landing | --mode=category | --mode=range | --mode=all
+  --from=<Letter> (required when mode=range)
+  --to=<Letter>   (required when mode=range)
+- Define a stable “A→Z category order” list INSIDE the generator (single source of truth) mapping letters to category names.
+  Example mapping:
+    A = "Landing"
+    B = "Authentication"
+    C = "Dashboard & Core"
+    D = "AI & Chat"
+    E = "Wellness & Healing Tools"
+    F = "Advanced & Mastery"
+    G = "Content & Learning"
+    H = "Community & Social"
+    I = "Support & Resources"
+    J = "Legal & Policy"
+    K = "Account & Settings"
+    L = "Admin"
+    M = "System & Utility"
+- In range mode:
+  - compute the inclusive subset of categories between --from and --to in that ordered list
+  - generate ONLY routes whose route.category is in that subset
+  - include alias redirect pages for any canonical route in the subset (alias pages may live outside categories; still generate them)
+  - do NOT touch pages outside the subset except alias redirect pages for routes in the subset
+- Validate input:
+  - from/to must exist in mapping
+  - from must be <= to in the mapping order; else throw with a clear error
+
+PACKAGE SCRIPTS:
+- Update package.json:
+  "gen:pages:range": "node scripts/generate-pages.mjs --mode=range --from=A --to=C"
+(Keep existing scripts.)
+
+OUTPUT REQUIREMENTS:
+- Provide FULL updated /scripts/generate-pages.mjs
+- Provide FULL updated package.json (only if changed)
+- Generator output must print:
+  - Selected categories list
+  - Generated file paths list + counts
+  - Skipped manual files list (due to // @generated rule)
+
+DONE GATE:
+✅ npm run gen:pages:range runs without errors
+✅ npm run dev works
+✅ Only selected categories’ pages were created/updated (plus alias redirects for those pages)
+FAIL THE RUN if any DONE GATE item is not satisfied.

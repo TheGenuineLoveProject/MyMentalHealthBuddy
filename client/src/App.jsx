@@ -90,8 +90,7 @@ export default function App() {
             <Switch>
               {/* Landing & Public Pages - Config Driven */}
               <Route path="/">{() => <ConfigRoute route="/" />}</Route>
-              <Route path="/home">{() => <ConfigRoute route="/home" />}</Route>
-              <Route path="/welcome">{() => <ConfigRoute route="/welcome" />}</Route>
+              {/* /home and /welcome are handled by server-side 301 redirects to "/" */}
               <Route path="/landing">{() => <ConfigRoute route="/landing" />}</Route>
               <Route path="/original-home">{() => <ConfigRoute route="/original-home" />}</Route>
               <Route path="/healing">{() => <ConfigRoute route="/healing" />}</Route>
