@@ -346,41 +346,53 @@ const rawRoutes = [
     route: '/',
     category: 'landing',
     pageLabel: 'Main Landing',
-    title: 'The Genuine Love Project — Your Sanctuary for Emotional Healing',
-    description: 'A trauma-informed sanctuary for emotional healing. AI-powered therapy tools, inner child work, nervous system regulation, and parts work—all in complete privacy.',
+    title: 'The Genuine Love Project — A Gentle Space for Healing',
+    description: 'A private, trauma-informed sanctuary for emotional healing. Evidence-based tools for inner child work, nervous system regulation, and self-compassion—available whenever you need them.',
     hero: {
-      eyebrow: 'Trusted by 50,000+ healing hearts',
-      title: 'Your sanctuary for emotional healing',
-      titleHighlight: 'where transformation happens at your own pace.',
-      subtitle: 'A trauma-informed space built for people who carry more than they show. Process grief, calm your nervous system, heal attachment wounds, meet your inner child—all in complete privacy.',
-      primaryCta: { label: 'Begin Your Journey', href: '/register' },
-      secondaryCta: { label: 'Learn More', href: '#features' }
+      eyebrow: 'A safe place to begin',
+      title: 'You deserve a gentle space',
+      titleHighlight: 'to heal at your own pace.',
+      subtitle: 'This is a quiet corner of the internet built for people who carry more than they show. Here, you can process grief, calm your nervous system, reconnect with your inner child, and learn to hold yourself with compassion—all in complete privacy.',
+      primaryCta: { label: 'Start gently', href: '/register' },
+      secondaryCta: { label: 'Explore at your pace', href: '#pathways' }
     },
     sections: [
       {
         id: 'pathways',
-        eyebrow: 'Sacred Pathways',
-        title: 'Healing tools designed with compassion',
-        subtitle: 'Evidence-based approaches wrapped in gentle, trauma-informed care.',
+        eyebrow: 'Gentle Pathways',
+        title: 'Evidence-based tools wrapped in compassion',
+        subtitle: 'Each practice here is grounded in research and designed with your nervous system in mind.',
         variant: 'glow',
         cards: [
-          { icon: 'Heart', title: 'Inner Child Work', text: 'Reconnect with your younger self through guided healing exercises.' },
-          { icon: 'Brain', title: 'Nervous System Care', text: 'Learn to regulate your nervous system with somatic practices.' },
-          { icon: 'Shield', title: 'Parts Work', text: 'Understand and integrate all parts of yourself with IFS-inspired tools.' },
-          { icon: 'Sparkles', title: 'AI Companion', text: '24/7 trauma-informed AI support for your healing journey.' }
+          { icon: 'Heart', title: 'Inner Child Work', text: 'Gentle exercises to reconnect with and comfort younger parts of yourself.' },
+          { icon: 'Brain', title: 'Nervous System Care', text: 'Simple somatic practices to help you find calm when you feel overwhelmed.' },
+          { icon: 'Shield', title: 'Parts Work', text: 'IFS-inspired tools to understand the different voices within you.' },
+          { icon: 'Sparkles', title: 'AI Companion', text: 'A patient, trauma-informed presence available whenever you need support.' }
         ]
       },
       {
         id: 'features',
-        eyebrow: 'Platform Features',
-        title: 'Everything you need to heal',
-        subtitle: 'A comprehensive toolkit for your emotional wellness journey.',
+        eyebrow: 'What You\'ll Find Here',
+        title: 'Tools that meet you where you are',
+        subtitle: 'No pressure. No judgment. Just resources waiting when you\'re ready.',
         variant: 'pattern',
         cards: [
-          { icon: 'BookOpen', title: 'Guided Journaling', text: 'Process emotions with therapeutic writing prompts.' },
-          { icon: 'Activity', title: 'State Tracking', text: 'Monitor your emotional patterns and progress over time.' },
-          { icon: 'MessageCircle', title: 'AI Therapy Chat', text: 'Compassionate conversations whenever you need support.' },
-          { icon: 'Users', title: 'Community Support', text: 'Connect with others on similar healing journeys.' }
+          { icon: 'BookOpen', title: 'Guided Journaling', text: 'Gentle prompts to help you process and make sense of your experiences.' },
+          { icon: 'Activity', title: 'State Awareness', text: 'Simple check-ins to help you notice patterns and celebrate small progress.' },
+          { icon: 'MessageCircle', title: 'Compassionate Chat', text: 'Talk through difficult moments with understanding, anytime you need.' },
+          { icon: 'Leaf', title: 'Grounding Practices', text: 'Quick exercises to bring you back when you feel untethered.' }
+        ]
+      },
+      {
+        id: 'trust',
+        eyebrow: 'Built With Care',
+        title: 'Your privacy and safety come first',
+        subtitle: 'This space was created by people who understand what it means to need a safe place.',
+        variant: 'plain',
+        cards: [
+          { icon: 'Lock', title: 'Completely Private', text: 'Your reflections and progress are yours alone. We never share your data.' },
+          { icon: 'Shield', title: 'Trauma-Informed', text: 'Every feature is designed to feel safe and never overwhelming.' },
+          { icon: 'Clock', title: 'Your Timeline', text: 'There\'s no rush here. Move at whatever pace feels right for you.' }
         ]
       }
     ]
@@ -416,28 +428,55 @@ const rawRoutes = [
     route: '/healing',
     category: 'landing',
     pageLabel: 'Healing Landing',
-    title: 'Healing Hub — The Genuine Love Project',
-    description: 'Discover evidence-based healing modalities for trauma recovery, emotional regulation, and personal growth.',
+    title: 'Healing Resources — The Genuine Love Project',
+    description: 'Explore gentle, evidence-based approaches to emotional healing. Somatic practices, inner child work, and nervous system regulation—all designed with your safety in mind.',
     hero: {
-      eyebrow: 'Your Healing Journey Starts Here',
-      title: 'Gentle pathways to',
-      titleHighlight: 'emotional freedom.',
-      subtitle: 'Explore trauma-informed healing tools, somatic practices, and therapeutic techniques designed to support your unique journey.',
-      primaryCta: { label: 'Explore Healing Tools', href: '/healing-library' },
-      secondaryCta: { label: 'View Resources', href: '/resources' }
+      eyebrow: 'Healing happens in small moments',
+      title: 'There is no wrong way',
+      titleHighlight: 'to begin healing.',
+      subtitle: 'Whether you\'re just starting to explore or have been on this path for years, these resources are here to support you. Each tool is grounded in research and designed to feel safe, not overwhelming.',
+      primaryCta: { label: 'Begin a practice', href: '/wellness-hub' },
+      secondaryCta: { label: 'Learn about our approach', href: '#philosophy' }
     },
     sections: [
       {
+        id: 'philosophy',
+        eyebrow: 'Our Approach',
+        title: 'Healing that respects your pace',
+        subtitle: 'We believe real healing happens when you feel safe enough to show up as you are.',
+        variant: 'plain',
+        cards: [
+          { icon: 'Heart', title: 'Compassion First', text: 'Every tool begins with kindness toward yourself, exactly as you are today.' },
+          { icon: 'Shield', title: 'Trauma-Informed', text: 'Nothing here will push you faster than your nervous system is ready for.' },
+          { icon: 'Clock', title: 'No Timelines', text: 'Healing isn\'t linear. We celebrate small steps and honor difficult days.' }
+        ]
+      },
+      {
         id: 'modalities',
-        eyebrow: 'Healing Modalities',
-        title: 'Evidence-based approaches',
-        subtitle: 'Therapeutic techniques backed by research and wrapped in compassion.',
+        eyebrow: 'Evidence-Based Modalities',
+        title: 'Gentle tools grounded in research',
+        subtitle: 'These approaches have helped many people. They might help you too.',
         variant: 'glow',
         cards: [
-          { icon: 'Heart', title: 'Somatic Healing', text: 'Body-based practices to release stored trauma.' },
-          { icon: 'Brain', title: 'EMDR-Inspired', text: 'Bilateral stimulation for processing difficult memories.' },
-          { icon: 'Leaf', title: 'Mindfulness', text: 'Present-moment awareness for emotional regulation.' },
-          { icon: 'Shield', title: 'Parts Work (IFS)', text: 'Internal Family Systems for self-understanding.' }
+          { icon: 'Activity', title: 'Somatic Practices', text: 'Simple body-based exercises to help release tension you may be holding.' },
+          { icon: 'Brain', title: 'Nervous System Care', text: 'Learn to recognize your window of tolerance and expand it gently over time.' },
+          { icon: 'Eye', title: 'Inner Child Work', text: 'Reconnect with younger parts of yourself that may still need comfort.' },
+          { icon: 'Leaf', title: 'Mindful Awareness', text: 'Present-moment practices to help you feel more grounded.' },
+          { icon: 'MessageCircle', title: 'Parts Work', text: 'Understand and befriend the different voices and feelings within you.' },
+          { icon: 'Sun', title: 'Self-Compassion', text: 'Learn to speak to yourself the way you would a dear friend.' }
+        ]
+      },
+      {
+        id: 'start',
+        eyebrow: 'Where to Begin',
+        title: 'You don\'t need to know where to start',
+        subtitle: 'If you\'re not sure what you need, that\'s okay. Here are some gentle entry points.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Activity', title: 'Breathing Exercises', text: 'A simple place to begin. Just a few minutes can shift how you feel.' },
+          { icon: 'MapPin', title: 'Grounding Techniques', text: 'Helpful when you feel disconnected or overwhelmed.' },
+          { icon: 'BookOpen', title: 'Journaling Prompts', text: 'Gentle questions to help you process what you\'re carrying.' },
+          { icon: 'Sparkles', title: 'Talk to AI Companion', text: 'Share what\'s on your mind with a patient, understanding presence.' }
         ]
       }
     ]
@@ -447,26 +486,50 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Pricing',
     title: 'Pricing — The Genuine Love Project',
-    description: 'Simple, transparent pricing for your healing journey. Free tier available.',
+    description: 'Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you\'re ready.',
     hero: {
-      eyebrow: 'Simple Pricing',
-      title: 'Invest in your',
-      titleHighlight: 'healing.',
-      subtitle: 'Accessible pricing because everyone deserves support on their healing journey.',
-      primaryCta: { label: 'Get Started Free', href: '/register' },
-      secondaryCta: { label: 'Compare Plans', href: '#plans' }
+      eyebrow: 'Transparent and accessible',
+      title: 'Healing support should be',
+      titleHighlight: 'available to everyone.',
+      subtitle: 'We believe cost shouldn\'t be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.',
+      primaryCta: { label: 'Start free', href: '/register' },
+      secondaryCta: { label: 'See what\'s included', href: '#plans' }
     },
     sections: [
       {
         id: 'plans',
-        eyebrow: 'Choose Your Path',
-        title: 'Plans for every journey',
-        subtitle: 'Start free, upgrade when you\'re ready.',
+        eyebrow: 'Simple Options',
+        title: 'Take what you need, when you need it',
+        subtitle: 'There\'s no pressure here. Many people find the free tools are enough.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Heart', title: 'Free Forever', text: 'Core journaling, mood tracking, breathing exercises, and grounding practices. No credit card needed.' },
+          { icon: 'Star', title: 'Premium', text: 'Unlimited AI companion conversations, advanced healing journeys, and personalized insights. $12/month.' },
+          { icon: 'Sparkles', title: 'Lifetime Access', text: 'Everything in Premium, forever. One payment, no recurring charges. $149 once.' }
+        ]
+      },
+      {
+        id: 'philosophy',
+        eyebrow: 'Our Promise',
+        title: 'We\'re not here to sell you anything',
+        subtitle: 'Our goal is to support your healing, not pressure you into purchases.',
         variant: 'plain',
         cards: [
-          { icon: 'Heart', title: 'Free', text: 'Basic tools to begin your journey.' },
-          { icon: 'Star', title: 'Premium', text: 'Full access to all healing tools.' },
-          { icon: 'Sparkles', title: 'Lifetime', text: 'One-time investment, forever access.' }
+          { icon: 'Shield', title: 'No Dark Patterns', text: 'We\'ll never use urgency tactics or manipulative pricing. What you see is what you get.' },
+          { icon: 'Clock', title: 'Cancel Anytime', text: 'If Premium isn\'t serving you, cancel with one click. No questions, no guilt.' },
+          { icon: 'Lock', title: 'Your Data Stays Yours', text: 'Even if you leave, you can export everything you\'ve written. It belongs to you.' }
+        ]
+      },
+      {
+        id: 'faq',
+        eyebrow: 'Common Questions',
+        title: 'You might be wondering',
+        subtitle: 'Here are answers to questions we hear often.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'HelpCircle', title: 'Is the free version really free?', text: 'Yes. No trial period, no hidden fees. Use it as long as you like.' },
+          { icon: 'CreditCard', title: 'Can I try Premium first?', text: 'Absolutely. Your first 7 days of Premium are free to explore.' },
+          { icon: 'Users', title: 'Do you offer reduced pricing?', text: 'Yes. If cost is a barrier, reach out and we\'ll find a way to help.' }
         ]
       }
     ]
