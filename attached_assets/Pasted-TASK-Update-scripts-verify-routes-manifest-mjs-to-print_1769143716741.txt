@@ -1,0 +1,48 @@
+TASK: Update /scripts/verify-routes-manifest.mjs to print a short diff summary when drift is detected:
+- Added routes
+- Removed routes
+- Title changes (and optionally description changes)
+- Identify changed routes via per-route hash deltas
+
+REQUIREMENTS:
+1) Verification checks remain:
+   A) reports/routes.generated.json vs reports/routes.generated.sha256
+   B) reports/routes.config.snapshot.json vs reports/routes.config.sha256
+
+2) When mismatch occurs:
+   - Load current snapshot JSON (reports/routes.config.snapshot.json).
+   - Recompute an “expected snapshot” in-memory from /content/routes.js using the SAME canonical snapshot logic (reuse code by extracting a helper module OR duplicate carefully but keep identical).
+   - Compute diffs between CURRENT (file) and EXPECTED (fresh):
+     - addedRoutes: routes in expected but not in current
+     - removedRoutes: routes in current but not in expected
+     - changedTitles: same route exists in both, but title differs
+     - changedHashes: same route exists in both, but routeHash differs (use routeHashes map)
+   - Print a concise summary:
+     Route drift summary:
+     + Added: <n>  (list up to 10)
+     - Removed: <n> (list up to 10)
+     ~ Title changed: <n> (list up to 10 with "route: old -> new")
+     ~ Other changes (hash): <n> (list up to 10 routes)
+
+3) Output limits:
+   - If any list > 10, print first 10 and then “…and N more”
+   - Keep output readable and short.
+
+4) With --fix:
+   - Keep existing behavior: regenerate --mode=all then re-run verify
+   - After regeneration, if changes were fixed, print “Fixed. Commit reports/* changes.”
+
+5) CI rule:
+   - If process.env.CI truthy and --fix used, exit non-zero with “Do not use --fix in CI.”
+
+OUTPUT REQUIREMENTS:
+- Provide FULL updated /scripts/verify-routes-manifest.mjs
+- If you factor shared snapshot logic into a helper:
+  - Provide FULL new helper file (e.g., /scripts/routes-snapshot.mjs) and update generator + verifier to import it.
+
+DONE GATE:
+✅ If you change a route title in /content/routes.js, verify prints it under “Title changed”
+✅ If you add/remove a route, verify prints it under Added/Removed
+✅ If you change a non-title field (hero copy), verify flags under “Other changes (hash)”
+✅ verify:routes exits non-zero on drift; verify:routes:fix resolves locally
+FAIL THE RUN if any DONE GATE item is not satisfied.

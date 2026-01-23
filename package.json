@@ -24,6 +24,7 @@
     "gen:pages:category": "node scripts/generate-pages.mjs --mode=category --category=\"wellness\"",
     "gen:pages:range": "node scripts/generate-pages.mjs --mode=range --from=A --to=C",
     "gen:pages:all": "node scripts/generate-pages.mjs --mode=all",
+    "verify:routes": "node scripts/verify-routes-manifest.mjs",
     "typecheck": "npx tsc -p client/tsconfig.json --noEmit || true",
     "visual:report": "node scripts/visual-report.mjs",
     "visual:doctor": "node tools/visual-doctor.mjs",

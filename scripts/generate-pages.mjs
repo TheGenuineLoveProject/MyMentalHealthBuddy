@@ -27,6 +27,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import {
   CATEGORY_ORDER,
@@ -43,9 +44,10 @@ const ROOT = path.resolve(__dirname, '..');
 // Generated file marker
 const GENERATED_MARKER = '// @generated';
 
-// Manifest output path
+// Manifest output paths
 const REPORTS_DIR = path.join(ROOT, 'reports');
 const MANIFEST_PATH = path.join(REPORTS_DIR, 'routes.generated.json');
+const HASH_PATH = path.join(REPORTS_DIR, 'routes.generated.sha256');
 
 // ============================================================================
 // PARSE COMMAND LINE ARGUMENTS
@@ -803,8 +805,14 @@ function writeManifest(report) {
     routes: manifestRoutes.sort((a, b) => a.route.localeCompare(b.route))
   };
 
-  fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf8');
+  const manifestJson = JSON.stringify(manifest, null, 2);
+  fs.writeFileSync(MANIFEST_PATH, manifestJson, 'utf8');
   console.log(`\n📄 Manifest written: ${path.relative(ROOT, MANIFEST_PATH)}`);
+
+  // Write sha256 hash of manifest for CI drift detection
+  const hash = crypto.createHash('sha256').update(manifestJson).digest('hex');
+  fs.writeFileSync(HASH_PATH, hash + '\n', 'utf8');
+  console.log(`🔐 Hash written: ${path.relative(ROOT, HASH_PATH)}`);
 }
 
 // ============================================================================
