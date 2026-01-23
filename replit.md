@@ -10,6 +10,10 @@ The Genuine Love Project is an AI-powered mental wellness platform focused on se
 - UX philosophy: Gentle, compassionate, accessible
 
 ## Recent Changes (January 2026)
+- **Sacred UI Component Library** (client/src/components/ui/): LayoutWrapper, Hero, SectionContainer (4 variants), Card/CardGrid, Button (4 variants, 3 sizes), Footer, SafetyNotice, EvidenceNote, Steps/StepsCompact, Callout (4 variants), Quote
+- **Unified JS Design Tokens** (client/src/brand/tokens.ts): Colors, spacing, radii, shadows, zIndex, motion, typography, breakpoints matching CSS tokens
+- **/design-system route**: Config-driven component catalog with 3-level content (beginner/intermediate/advanced)
+- All UI primitives include: data-testid attributes, focus-visible rings, aria labels, prefers-reduced-motion support, semantic HTML
 - Content Studio social media template generator with 4 formats (short post, carousel, thread, newsletter), 7 wellness topics, and 3 audience levels (beginner/intermediate/advanced)
 - Trauma-informed content templates with safety disclaimers, crisis resources (988 lifeline), and evidence-based frameworks
 - ContentLevelToggle component with localStorage persistence for content complexity preferences
