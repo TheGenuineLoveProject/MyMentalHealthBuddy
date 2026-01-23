@@ -1142,6 +1142,13 @@ const rawRoutes = [
     pageLabel: 'Dashboard',
     title: 'Dashboard — The Genuine Love Project',
     description: 'Your personal healing dashboard. Track progress, access tools, and continue your journey.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'Target',
+      title: 'Start today with a gentle check-in',
+      description: 'Take 30 seconds to notice how you feel right now.',
+      cta: { label: 'Begin Check-In', href: '/today' }
+    },
     hero: {
       eyebrow: 'Your Sanctuary',
       title: 'Welcome to your',
@@ -1204,6 +1211,13 @@ const rawRoutes = [
     pageLabel: 'Relationship Manager',
     title: 'Relationship Manager — The Genuine Love Project',
     description: 'Track and nurture your important relationships.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'Users',
+      title: 'Add one person you care about',
+      description: 'Start small - just one name to begin building your circle.',
+      cta: { label: 'Add Connection', href: '#add' }
+    },
     hero: {
       eyebrow: 'Connections',
       title: 'Nurture your',
@@ -1251,6 +1265,13 @@ const rawRoutes = [
     pageLabel: 'Today',
     title: 'Today — The Genuine Love Project',
     description: 'Your daily healing ritual. Check in, reflect, and nurture yourself.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'Sun',
+      title: 'Take one breath and begin',
+      description: 'No pressure. Just notice how you feel right now.',
+      cta: { label: 'Start Check-In', href: '#checkin' }
+    },
     hero: {
       eyebrow: 'Daily Practice',
       title: 'How are you',
@@ -1298,6 +1319,13 @@ const rawRoutes = [
     pageLabel: 'Mood Tracker',
     title: 'Mood Tracking — The Genuine Love Project',
     description: 'Track and understand your emotional patterns over time.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'Activity',
+      title: 'How do you feel right now?',
+      description: 'Pick a word or emoji - it takes just 5 seconds.',
+      cta: { label: 'Log Mood', href: '#log' }
+    },
     hero: {
       eyebrow: 'Emotional Awareness',
       title: 'Understand your',
@@ -1345,6 +1373,13 @@ const rawRoutes = [
     pageLabel: 'State Tracker',
     title: 'State Tracker — The Genuine Love Project',
     description: 'Monitor your nervous system state and learn regulation techniques.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'Shield',
+      title: 'Notice your body right now',
+      description: 'Are you calm, wound up, or shut down? Just notice.',
+      cta: { label: 'Check State', href: '#check' }
+    },
     hero: {
       eyebrow: 'Nervous System Awareness',
       title: 'Know your',
@@ -1392,6 +1427,13 @@ const rawRoutes = [
     pageLabel: 'Journal',
     title: 'Journal — The Genuine Love Project',
     description: 'A safe space for reflection and emotional processing through guided journaling.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'BookOpen',
+      title: 'Write one sentence',
+      description: 'Start anywhere. Spelling does not matter here.',
+      cta: { label: 'Start Writing', href: '#new-entry' }
+    },
     hero: {
       eyebrow: 'Sacred Writing',
       title: 'Your words hold',
@@ -1454,6 +1496,13 @@ const rawRoutes = [
     pageLabel: 'Analytics',
     title: 'Analytics — The Genuine Love Project',
     description: 'Deep insights into your healing journey with data visualization.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'TrendingUp',
+      title: 'Look at your streak counter',
+      description: 'Data is information, not judgment. Just notice.',
+      cta: { label: 'View Progress', href: '#analytics' }
+    },
     hero: {
       eyebrow: 'Your Progress',
       title: 'See how far',
@@ -1501,6 +1550,13 @@ const rawRoutes = [
     pageLabel: 'Progress',
     title: 'Your Progress — The Genuine Love Project',
     description: 'Track your healing journey milestones and achievements.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'Award',
+      title: 'Find one milestone to celebrate',
+      description: 'Every step forward is worth acknowledging.',
+      cta: { label: 'View Milestones', href: '#milestones' }
+    },
     hero: {
       eyebrow: 'Celebrate Growth',
       title: 'Every step',
@@ -1548,6 +1604,13 @@ const rawRoutes = [
     pageLabel: 'Growth Analytics',
     title: 'Growth Analytics — The Genuine Love Project',
     description: 'Advanced analytics for tracking personal growth patterns.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'BarChart',
+      title: 'Compare this month to last month',
+      description: 'Data is information, not judgment. Growth is not linear.',
+      cta: { label: 'View Comparison', href: '#compare' }
+    },
     hero: {
       eyebrow: 'Deep Insights',
       title: 'Understand your',
@@ -1595,6 +1658,13 @@ const rawRoutes = [
     pageLabel: 'Guided Journaling',
     title: 'Guided Journaling — The Genuine Love Project',
     description: 'Structured journaling exercises for deeper self-reflection.',
+    tone: 'structured',
+    nextStep: {
+      icon: 'PenTool',
+      title: 'Pick a prompt and write freely',
+      description: 'Five minutes of unedited writing - no rules, just flow.',
+      cta: { label: 'Start Session', href: '#session' }
+    },
     hero: {
       eyebrow: 'Guided Practice',
       title: 'Journaling with',

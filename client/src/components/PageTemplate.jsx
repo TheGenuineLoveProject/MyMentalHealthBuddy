@@ -217,6 +217,46 @@ function ModulesGrid({ modules }) {
   );
 }
 
+function NextStepBlock({ nextStep }) {
+  if (!nextStep) return null;
+  
+  const IconComponent = nextStep.icon ? getIcon(nextStep.icon) : Target;
+  
+  return (
+    <section 
+      className={styles.nextStepSection}
+      aria-label="Your next step"
+      data-aos="fade-up"
+      data-aos-delay="200"
+    >
+      <div className={styles.nextStepCard}>
+        <div className={styles.nextStepHeader}>
+          <div className={styles.nextStepIconWrapper}>
+            <IconComponent className={styles.nextStepIcon} />
+          </div>
+          <div className={styles.nextStepContent}>
+            <span className={styles.nextStepLabel}>Your one next step</span>
+            <h2 className={styles.nextStepTitle}>{nextStep.title}</h2>
+            {nextStep.description && (
+              <p className={styles.nextStepDescription}>{nextStep.description}</p>
+            )}
+          </div>
+        </div>
+        {nextStep.cta && (
+          <Link
+            href={nextStep.cta.href}
+            className={styles.nextStepCta}
+            data-testid="button-next-step"
+          >
+            {nextStep.cta.label}
+            <ArrowRight className={styles.ctaIcon} />
+          </Link>
+        )}
+      </div>
+    </section>
+  );
+}
+
 function BulletList({ bullets }) {
   return (
     <ul className={styles.bulletList} role="list">
@@ -326,6 +366,8 @@ export default function PageTemplate({ config, children }) {
 
       <main id="main-content">
         <HeroSection hero={config.hero} />
+
+        <NextStepBlock nextStep={config.nextStep} />
 
         {hasContentLevels && (
           <ContentLevelToggle 
