@@ -21,12 +21,17 @@ import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
+import { 
+  routeToGeneratedFile, 
+  GENERATED_PAGES_DIR,
+  ROUTE_FILE_OVERRIDES 
+} from '../content/routeFileMap.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = path.resolve(__dirname, '..');
 
-const GENERATED_DIR = path.join(ROOT, 'client/src/pages/generated');
+const GENERATED_DIR = path.join(ROOT, GENERATED_PAGES_DIR);
 const REPORTS_DIR = path.join(ROOT, 'reports');
 const BACKUPS_DIR = path.join(REPORTS_DIR, 'backups');
 const ROUTES_FILE = path.join(ROOT, 'client/src/content/routes.js');
@@ -74,6 +79,11 @@ async function loadCategoryOrder() {
 }
 
 function routeToFilename(route) {
+  // Use routeFileMap.js as single source of truth
+  return routeToGeneratedFile(route);
+}
+
+function routeToFilenameOld(route) {
   if (route === '/') return 'index.jsx';
   if (route === '/404') return '404.jsx';
   
