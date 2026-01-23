@@ -11,14 +11,14 @@ import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const PLATFORMS = [
-  { id: "instagram", name: "Instagram", icon: Instagram, color: "#E4405F" },
-  { id: "facebook", name: "Facebook", icon: MessageCircle, color: "#1877F2" },
-  { id: "tiktok", name: "TikTok", icon: MessageCircle, color: "#000000" },
-  { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000" },
-  { id: "x", name: "X (Twitter)", icon: Twitter, color: "#000000" },
-  { id: "threads", name: "Threads", icon: MessageCircle, color: "#000000" },
-  { id: "pinterest", name: "Pinterest", icon: MessageCircle, color: "#E60023" },
-  { id: "linkedin", name: "LinkedIn", icon: Linkedin, color: "#0A66C2" },
+  { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000", handle: "@GenuineLoveProject", url: "https://youtube.com/@GenuineLoveProject", status: "verified" },
+  { id: "tiktok", name: "TikTok", icon: MessageCircle, color: "#000000", handle: "@genuineloveproject", url: "https://tiktok.com/@genuineloveproject", status: "live" },
+  { id: "instagram", name: "Instagram", icon: Instagram, color: "#E4405F", handle: "@thegenuineloveproject", url: "https://instagram.com/thegenuineloveproject", status: "active" },
+  { id: "facebook", name: "Facebook", icon: MessageCircle, color: "#1877F2", handle: "Page", url: "https://facebook.com/profile.php?id=61583664864191", status: "live" },
+  { id: "x", name: "X", icon: Twitter, color: "#000000", handle: "@GenuineLoveProj", url: "https://x.com/GenuineLoveProj", status: "active" },
+  { id: "threads", name: "Threads", icon: MessageCircle, color: "#000000", handle: null, status: "pending" },
+  { id: "pinterest", name: "Pinterest", icon: MessageCircle, color: "#E60023", handle: null, status: "pending" },
+  { id: "linkedin", name: "LinkedIn", icon: Linkedin, color: "#0A66C2", handle: null, status: "pending" },
 ];
 
 const STATUS_CONFIG = {
@@ -181,14 +181,19 @@ function PlatformConnections() {
           const isConnected = status?.connected;
           const PlatformIcon = platform.icon;
           
+          const hasHandle = platform.handle && platform.status !== 'pending';
+          
           return (
-            <div 
+            <a
               key={platform.id}
-              className={`flex flex-col items-center p-3 rounded-lg border transition-all ${
-                isConnected 
+              href={platform.url || '#'}
+              target={platform.url ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              className={`flex flex-col items-center p-3 rounded-lg border transition-all hover:shadow-sm ${
+                hasHandle
                   ? "border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20" 
                   : "border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 opacity-60"
-              }`}
+              } ${platform.url ? 'cursor-pointer' : ''}`}
               data-testid={`platform-status-${platform.id}`}
             >
               <div 
@@ -200,20 +205,30 @@ function PlatformConnections() {
               <span className="text-xs font-medium text-slate-700 dark:text-slate-300 text-center">
                 {platform.name}
               </span>
+              {platform.handle && (
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-full">
+                  {platform.handle}
+                </span>
+              )}
               <div className="flex items-center gap-1 mt-1">
-                {isConnected ? (
+                {hasHandle ? (
+                  <>
+                    <CheckCircle className="w-3 h-3 text-emerald-500" />
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400 capitalize">{platform.status}</span>
+                  </>
+                ) : isConnected ? (
                   <>
                     <Wifi className="w-3 h-3 text-emerald-500" />
-                    <span className="text-xs text-emerald-600 dark:text-emerald-400">Ready</span>
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400">API Ready</span>
                   </>
                 ) : (
                   <>
                     <WifiOff className="w-3 h-3 text-slate-400" />
-                    <span className="text-xs text-slate-500">Not set</span>
+                    <span className="text-xs text-slate-500">Pending</span>
                   </>
                 )}
               </div>
-            </div>
+            </a>
           );
         })}
       </div>

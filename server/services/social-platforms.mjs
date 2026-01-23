@@ -1,7 +1,27 @@
 /**
  * Social Media Platforms Configuration
  * Supports: Instagram, TikTok, X (Twitter), YouTube, Facebook, Pinterest, Threads, LinkedIn
+ * 
+ * VERIFIED CHANNEL MAP - The Genuine Love Project
+ * ================================================
+ * YouTube (Primary):  @GenuineLoveProject - youtube.com/@GenuineLoveProject
+ * YouTube (Legacy):   @TheGenuineLoveProject - youtube.com/@thegenuineloveproject (merge/redirect)
+ * TikTok:             @genuineloveproject - tiktok.com/@genuineloveproject
+ * Instagram:          @thegenuineloveproject - instagram.com/thegenuineloveproject
+ * Facebook:           facebook.com/profile.php?id=61583664864191
+ * X (Twitter):        @GenuineLoveProj
  */
+
+export const VERIFIED_CHANNELS = {
+  youtube: {
+    primary: { handle: '@GenuineLoveProject', url: 'https://youtube.com/@GenuineLoveProject', status: 'verified' },
+    legacy: { handle: '@TheGenuineLoveProject', url: 'https://youtube.com/@thegenuineloveproject', status: 'redirect' },
+  },
+  tiktok: { handle: '@genuineloveproject', url: 'https://tiktok.com/@genuineloveproject', status: 'live' },
+  instagram: { handle: '@thegenuineloveproject', url: 'https://instagram.com/thegenuineloveproject', status: 'active' },
+  facebook: { handle: 'The Genuine Love Project', url: 'https://facebook.com/profile.php?id=61583664864191', status: 'live' },
+  x: { handle: '@GenuineLoveProj', url: 'https://x.com/GenuineLoveProj', status: 'active' },
+};
 
 export const PLATFORMS = {
   instagram: {
@@ -9,6 +29,8 @@ export const PLATFORMS = {
     name: 'Instagram',
     icon: 'instagram',
     color: '#E4405F',
+    handle: '@thegenuineloveproject',
+    profileUrl: 'https://instagram.com/thegenuineloveproject',
     maxCharacters: 2200,
     maxHashtags: 30,
     supportsImages: true,
@@ -27,6 +49,8 @@ export const PLATFORMS = {
     name: 'Facebook',
     icon: 'facebook',
     color: '#1877F2',
+    handle: 'The Genuine Love Project',
+    profileUrl: 'https://facebook.com/profile.php?id=61583664864191',
     maxCharacters: 63206,
     supportsImages: true,
     supportsVideos: true,
@@ -44,6 +68,8 @@ export const PLATFORMS = {
     name: 'TikTok',
     icon: 'music',
     color: '#000000',
+    handle: '@genuineloveproject',
+    profileUrl: 'https://tiktok.com/@genuineloveproject',
     maxCharacters: 2200,
     maxHashtags: 100,
     supportsImages: true,
@@ -60,6 +86,9 @@ export const PLATFORMS = {
     name: 'YouTube',
     icon: 'youtube',
     color: '#FF0000',
+    handle: '@GenuineLoveProject',
+    profileUrl: 'https://youtube.com/@GenuineLoveProject',
+    legacyHandle: '@TheGenuineLoveProject',
     maxCharacters: 5000,
     supportsImages: false,
     supportsVideos: true,
@@ -75,6 +104,8 @@ export const PLATFORMS = {
     name: 'X (Twitter)',
     icon: 'twitter',
     color: '#000000',
+    handle: '@GenuineLoveProj',
+    profileUrl: 'https://x.com/GenuineLoveProj',
     maxCharacters: 280,
     supportsImages: true,
     supportsVideos: true,
@@ -168,4 +199,15 @@ export function getAllRequiredEnvKeys() {
   const allKeys = new Set();
   PLATFORM_LIST.forEach(p => p.envKeys.forEach(k => allKeys.add(k)));
   return Array.from(allKeys);
+}
+
+export function getVerifiedChannels() {
+  return VERIFIED_CHANNELS;
+}
+
+export function getActivePlatforms() {
+  return ['youtube', 'tiktok', 'instagram', 'facebook', 'x'].map(id => ({
+    ...PLATFORMS[id],
+    channel: VERIFIED_CHANNELS[id],
+  }));
 }
