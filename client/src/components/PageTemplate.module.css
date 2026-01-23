@@ -2185,3 +2185,14 @@
     transition: none;
   }
 }
+
+/* ============================================
+   SOCIAL SHARE WRAPPER
+   ============================================ */
+.socialShareWrapper {
+  padding: 2rem 0;
+  margin: 2rem auto;
+  max-width: 36rem;
+  border-top: 1px solid var(--glp-sage-15, rgba(143, 191, 159, 0.15));
+  border-bottom: 1px solid var(--glp-sage-15, rgba(143, 191, 159, 0.15));
+}

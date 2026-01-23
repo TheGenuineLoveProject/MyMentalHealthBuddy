@@ -26,9 +26,10 @@ import {
 import SacredLayout from './sacred/SacredLayout.jsx';
 import SacredFooter from './sacred/SacredFooter.jsx';
 import SacredSection from './sacred/SacredSection.jsx';
-import SEO from './SEO.tsx';
+import SEO, { SITE_URL } from './SEO.tsx';
 import ContentLevelToggle, { useContentLevel, ContentLevelContent } from './ContentLevelToggle.jsx';
 import { NotMedicalAdvice, CrisisNotice } from './SafetyDisclaimer.jsx';
+import SocialShare from './SocialShare.jsx';
 import styles from './PageTemplate.module.css';
 
 const iconMap = {
@@ -897,11 +898,15 @@ export default function PageTemplate({ config, children }) {
   const tone = config.tone || 'default';
   const toneClass = tone === 'quiet' ? styles.toneQuiet : tone === 'structured' ? styles.toneStructured : '';
 
+  const showSocialShare = tone === 'practice' && config.category === 'wellness';
+
   return (
     <SacredLayout className={toneClass}>
       <SEO 
         title={config.title}
         description={config.description}
+        route={config.route}
+        canonicalUrl={config.route ? `${SITE_URL}${config.route}` : undefined}
       />
 
       <header role="banner">
@@ -1006,6 +1011,15 @@ export default function PageTemplate({ config, children }) {
                   gentleBenefits={config.gentleBenefits} 
                   tone={tone} 
                 />
+                {showSocialShare && (
+                  <div className={styles.socialShareWrapper}>
+                    <SocialShare 
+                      url={config.route ? `${SITE_URL}${config.route}` : undefined}
+                      title={config.title}
+                      description={config.description}
+                    />
+                  </div>
+                )}
                 <PracticeCrisisLink crisisLinkEnabled={config.crisisLinkEnabled} />
               </>
             )}

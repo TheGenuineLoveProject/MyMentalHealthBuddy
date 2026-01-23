@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { BRAND } from "@shared/brand.mjs";
 
+export const SITE_URL = "https://thegenuineloveproject.com";
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -8,6 +10,9 @@ interface SEOProps {
   image?: string;
   noindex?: boolean;
   canonicalUrl?: string;
+  route?: string;
+  datePublished?: string;
+  dateModified?: string;
 }
 
 const defaultMeta = {
@@ -23,7 +28,10 @@ export function SEO({
   type = defaultMeta.type,
   image = defaultMeta.image,
   noindex = false,
-  canonicalUrl
+  canonicalUrl,
+  route,
+  datePublished,
+  dateModified
 }: SEOProps) {
   const fullTitle = title 
     ? `${title} | ${BRAND.name}` 
@@ -86,10 +94,42 @@ export function SEO({
       if (robotsMeta) robotsMeta.remove();
     }
 
+    const pageUrl = route ? `${SITE_URL}${route}` : (canonicalUrl || window.location.href.split('?')[0]);
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": fullTitle,
+      "description": description,
+      "url": pageUrl,
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": BRAND.name,
+        "url": SITE_URL
+      },
+      ...(datePublished && { "datePublished": datePublished }),
+      ...(dateModified && { "dateModified": dateModified }),
+      "publisher": {
+        "@type": "Organization",
+        "name": BRAND.name,
+        "url": SITE_URL
+      }
+    };
+
+    let jsonLdScript = document.querySelector('script[type="application/ld+json"][data-seo]') as HTMLScriptElement | null;
+    if (!jsonLdScript) {
+      jsonLdScript = document.createElement("script");
+      jsonLdScript.type = "application/ld+json";
+      jsonLdScript.setAttribute("data-seo", "true");
+      document.head.appendChild(jsonLdScript);
+    }
+    jsonLdScript.textContent = JSON.stringify(jsonLd);
+
     return () => {
       document.title = defaultMeta.title;
+      const existingJsonLd = document.querySelector('script[type="application/ld+json"][data-seo]');
+      if (existingJsonLd) existingJsonLd.remove();
     };
-  }, [fullTitle, description, type, image, noindex, canonicalUrl]);
+  }, [fullTitle, description, type, image, noindex, canonicalUrl, route, datePublished, dateModified]);
 
   return null;
 }
