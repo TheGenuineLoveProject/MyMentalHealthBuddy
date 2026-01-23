@@ -2,8 +2,8 @@
  * routeFileMap.js
  * Deterministic route → generated file mapping table and resolver.
  * 
- * Provides a reliable way to convert route paths to their corresponding
- * generated page file paths without filesystem guessing.
+ * Auto-detects whether generated pages use flattened filenames (account-profile.jsx)
+ * or nested folders (account/profile.jsx) and maps routes accordingly.
  */
 
 import fs from 'fs';
@@ -13,36 +13,59 @@ export const GENERATED_PAGES_DIR = "client/src/pages/generated";
 
 export const ROUTE_FILE_OVERRIDES = {
   "/": "index.jsx",
+  "/home": "home.jsx",
+  "/welcome": "welcome.jsx",
   "/404": "404.jsx",
   "/*": "404.jsx",
-  "/home": "index.jsx",
-  "/welcome": "index.jsx"
+  "/blog/:slug": "blog-[param].jsx",
+  "/community/discussion/:id": "community-discussion-[param].jsx"
 };
 
-let detectedStrategy = null;
+const SENTINEL_CHECKS = {
+  nested: [
+    "account/profile.jsx",
+    "blog/[slug].jsx",
+    "community/discussion/[id].jsx"
+  ],
+  flat: [
+    "account-profile.jsx",
+    "blog-[param].jsx",
+    "community-discussion-[param].jsx"
+  ]
+};
 
-function detectNamingStrategy() {
-  if (detectedStrategy !== null) {
-    return detectedStrategy;
+let cachedLayout = null;
+
+function detectGeneratedLayout() {
+  if (cachedLayout !== null) {
+    return cachedLayout;
   }
   
-  const flattenedProbe = path.join(GENERATED_PAGES_DIR, "account-profile.jsx");
-  const nestedProbe = path.join(GENERATED_PAGES_DIR, "account", "profile.jsx");
-  
-  try {
-    if (fs.existsSync(flattenedProbe)) {
-      detectedStrategy = 'flattened';
-    } else if (fs.existsSync(nestedProbe)) {
-      detectedStrategy = 'nested';
-    } else {
-      detectedStrategy = 'flattened';
-    }
-  } catch {
-    detectedStrategy = 'flattened';
+  for (const sentinel of SENTINEL_CHECKS.nested) {
+    const fullPath = path.join(GENERATED_PAGES_DIR, sentinel);
+    try {
+      if (fs.existsSync(fullPath)) {
+        cachedLayout = "nested";
+        return cachedLayout;
+      }
+    } catch {}
   }
   
-  return detectedStrategy;
+  for (const sentinel of SENTINEL_CHECKS.flat) {
+    const fullPath = path.join(GENERATED_PAGES_DIR, sentinel);
+    try {
+      if (fs.existsSync(fullPath)) {
+        cachedLayout = "flat";
+        return cachedLayout;
+      }
+    } catch {}
+  }
+  
+  cachedLayout = "flat";
+  return cachedLayout;
 }
+
+export const GENERATED_LAYOUT = detectGeneratedLayout();
 
 function normalizeRouteSegment(segment) {
   if (segment.startsWith(':')) {
@@ -52,7 +75,7 @@ function normalizeRouteSegment(segment) {
 }
 
 export function routeToGeneratedFile(route) {
-  if (ROUTE_FILE_OVERRIDES.hasOwnProperty(route)) {
+  if (Object.prototype.hasOwnProperty.call(ROUTE_FILE_OVERRIDES, route)) {
     return ROUTE_FILE_OVERRIDES[route];
   }
   
@@ -64,9 +87,9 @@ export function routeToGeneratedFile(route) {
   
   const segments = normalized.split('/').map(normalizeRouteSegment);
   
-  const strategy = detectNamingStrategy();
+  const layout = detectGeneratedLayout();
   
-  if (strategy === 'flattened') {
+  if (layout === "flat") {
     const filename = segments.join('-') + '.jsx';
     return filename;
   } else {
@@ -79,7 +102,17 @@ export function routeToGeneratedFile(route) {
   }
 }
 
-export function resolveRouteToFile(route) {
+export function resolveRouteToFile(route, aliasOf = null) {
+  if (aliasOf) {
+    const canonicalResolved = resolveRouteToFile(aliasOf);
+    if (canonicalResolved.exists) {
+      return {
+        ...canonicalResolved,
+        aliasOf: aliasOf
+      };
+    }
+  }
+  
   const relativePath = routeToGeneratedFile(route);
   const fullPath = path.join(GENERATED_PAGES_DIR, relativePath);
   
@@ -92,8 +125,7 @@ export function resolveRouteToFile(route) {
         exists: true
       };
     }
-  } catch {
-  }
+  } catch {}
   
   return {
     kind: 'path',

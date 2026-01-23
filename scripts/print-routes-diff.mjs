@@ -90,7 +90,8 @@ function parseArgs(argv) {
 import { 
   routeToGeneratedFile, 
   resolveRouteToFile, 
-  GENERATED_PAGES_DIR 
+  GENERATED_PAGES_DIR,
+  GENERATED_LAYOUT
 } from '../content/routeFileMap.js';
 
 const PAGE_SEARCH_PATHS = [
