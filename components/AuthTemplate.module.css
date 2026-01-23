@@ -1,0 +1,155 @@
+/* /components/AuthTemplate.module.css */
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.card {
+  border-radius: var(--radius-lg);
+  background: rgba(250, 249, 247, 0.72);
+  border: 1px solid rgba(58, 58, 58, 0.10);
+  box-shadow: var(--shadow-sm);
+  padding: 18px;
+}
+
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.label {
+  font-weight: 700;
+  font-size: 14px;
+  color: rgba(58, 58, 58, 0.88);
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(58, 58, 58, 0.16);
+  background: rgba(250, 249, 247, 0.86);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--charcoal);
+  outline: none;
+  transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.input:focus,
+.select:focus {
+  border-color: rgba(234, 195, 59, 0.75);
+  box-shadow: 0 0 0 4px rgba(234, 195, 59, 0.18);
+}
+
+.helper {
+  margin: 0;
+  color: rgba(58, 58, 58, 0.76);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.bottomLink {
+  margin: 10px 0 0;
+  font-size: 14px;
+  color: rgba(58, 58, 58, 0.76);
+}
+
+.bottomLink a {
+  color: rgba(47, 93, 93, 0.95);
+  text-decoration: none;
+  padding: 4px 6px;
+  border-radius: 999px;
+}
+
+.bottomLink a:hover {
+  background: rgba(47, 93, 93, 0.08);
+}
+
+.bottomLink a:focus-visible {
+  outline: 2px solid rgba(234, 195, 59, 0.75);
+  outline-offset: 2px;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(58, 58, 58, 0.10);
+  background: rgba(250, 249, 247, 0.66);
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+}
+
+.checkboxLabel {
+  font-size: 14px;
+  color: rgba(58, 58, 58, 0.82);
+}
+
+.note {
+  margin: 14px 0 0;
+  color: rgba(58, 58, 58, 0.72);
+  font-size: 14px;
+  text-align: center;
+}
+
+.callback {
+  text-align: center;
+  padding: 8px 8px;
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  margin: 4px auto 10px;
+  border-radius: 999px;
+  border: 4px solid rgba(47, 93, 93, 0.16);
+  border-top-color: rgba(47, 93, 93, 0.82);
+  animation: spin 1.1s linear infinite;
+}
+
+.callbackTitle {
+  margin: 0 0 6px;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--deep-teal);
+  font-size: 22px;
+}
+
+.callbackText {
+  margin: 0 auto 12px;
+  max-width: 52ch;
+  color: rgba(58, 58, 58, 0.78);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation: none;
+  }
+}

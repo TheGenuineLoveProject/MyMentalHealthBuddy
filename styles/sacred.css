@@ -1,0 +1,40 @@
+/* /styles/sacred.css */
+.sacred-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(47, 93, 93, 0.18),
+    rgba(234, 195, 59, 0.26),
+    rgba(47, 93, 93, 0.18),
+    transparent
+  );
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* /styles/sacred.css */
+/* Calm helpers + reduced motion guardrails */
+
+[data-aos] {
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,10 @@
+<!-- /public/logo.svg -->
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="26" y="26" width="108" height="108" rx="18" fill="#FAF9F7" stroke="#3A3A3A" stroke-opacity="0.35"/>
+  <path d="M80 18L130 80L80 142L30 80L80 18Z" stroke="#2F5D5D" stroke-opacity="0.55" stroke-width="2"/>
+  <path d="M80 30L120 80L80 130L40 80L80 30Z" stroke="#8FBF9F" stroke-opacity="0.55" stroke-width="2"/>
+  <circle cx="80" cy="80" r="5" fill="#EAC33B" fill-opacity="0.7"/>
+  <text x="80" y="76" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#3A3A3A">THE</text>
+  <text x="80" y="92" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#3A3A3A">GENUINE</text>
+  <text x="80" y="108" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#3A3A3A">LOVE</text>
+</svg>

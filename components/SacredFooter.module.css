@@ -1,0 +1,107 @@
+/* /components/SacredFooter.module.css */
+.wrap {
+  padding: 10px 0 40px;
+}
+
+.container {
+  width: min(1100px, 92vw);
+  margin: 0 auto;
+}
+
+.card {
+  background: rgba(244, 199, 195, 0.18);
+  border: 1px solid rgba(58, 58, 58, 0.10);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: var(--charcoal);
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(58, 58, 58, 0.92);
+}
+
+.text a {
+  color: var(--teal);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.footer {
+  padding: 44px 18px 56px;
+}
+.inner {
+  max-width: 1120px;
+  margin: 0 auto;
+}
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(47, 93, 93, 0.25),
+    rgba(234, 195, 59, 0.30),
+    rgba(47, 93, 93, 0.25),
+    transparent
+  );
+  margin-bottom: 18px;
+}
+.meta {
+  margin: 8px 0 0;
+  color: rgba(58, 58, 58, 0.72);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.small {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(58, 58, 58, 0.72);
+}
+
+.links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.links a {
+  text-decoration: none;
+  font-size: 14px;
+  color: rgba(58, 58, 58, 0.8);
+  padding: 6px 8px;
+  border-radius: 999px;
+}
+
+.links a:hover {
+  background: rgba(47, 93, 93, 0.08);
+}
+
+.links a:focus-visible {
+  outline: 2px solid rgba(234, 195, 59, 0.72);
+  outline-offset: 2px;
+}

@@ -1,15 +1,43 @@
-/* === Canva Type Scale Utilities (Source of Truth) === */
+/* /styles/globals.css */
 :root {
-  --font-heading: "Playfair Display", ui-serif, Georgia, serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --sage: #8fbf9f;
+  --rose: #f4c7c3;
+  --teal: #2f5d5d;
+  --soft-white: #faf9f7;
+  --charcoal: #3a3a3a;
+  --gold: #eac33b;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
 }
 
+* { box-sizing: border-box; }
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  background: var(--soft-white);
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(234, 195, 59, 0.35);
+  border-radius: 10px;
+}
+
+/* Canva-aligned type scale utilities */
 .t-title {
   font-family: var(--font-heading);
   font-size: 56px;
   font-weight: 700;
   line-height: 1.05;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-align: center;
 }
 
 .t-subtitle {
@@ -17,6 +45,7 @@
   font-size: 36px;
   font-weight: 600;
   line-height: 1.15;
+  margin: 0;
 }
 
 .t-heading {
@@ -24,6 +53,7 @@
   font-size: 32px;
   font-weight: 500;
   line-height: 1.2;
+  margin: 0;
 }
 
 .t-subheading {
@@ -31,6 +61,7 @@
   font-size: 28px;
   font-weight: 400;
   line-height: 1.25;
+  margin: 0;
 }
 
 .t-section {
@@ -38,36 +69,35 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 1.25;
+  margin: 0;
 }
 
 .t-body {
   font-family: var(--font-body);
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.75;
+  margin: 0;
+  max-width: 70ch;
+  color: rgba(58, 58, 58, 0.92);
+  text-align: center;
 }
 
 .t-quote {
   font-family: var(--font-body);
   font-size: 20px;
   font-style: italic;
-  font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
 .t-caption {
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* Responsive clamp helpers (optional but safe) */
-@media (max-width: 520px) {
+@media (max-width: 540px) {
   .t-title { font-size: 42px; }
-  .t-subtitle { font-size: 28px; }
-  .t-heading { font-size: 26px; }
-  .t-subheading { font-size: 22px; }
-  .t-section { font-size: 20px; }
-  .t-body { font-size: 17px; }
+  .t-body { font-size: 16px; }
 }
