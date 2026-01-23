@@ -73,6 +73,10 @@
   line-height: 1.6;
 }
 
+.socialLinks {
+  margin-top: 1.25rem;
+}
+
 /* Link columns */
 .linkColumn h4 {
   font-family: var(--font-body, 'Inter', sans-serif);

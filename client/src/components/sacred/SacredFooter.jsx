@@ -11,6 +11,7 @@
 import { Link } from 'wouter';
 import { Heart } from 'lucide-react';
 import styles from './SacredFooter.module.css';
+import SocialLinks from '../SocialLinks';
 
 const footerLinks = {
   platform: [
@@ -62,6 +63,9 @@ export default function SacredFooter({ className = '' }) {
               A trauma-informed sanctuary for emotional healing. AI-powered therapy tools, 
               inner child work, and nervous system regulation—all in complete privacy.
             </p>
+            <div className={styles.socialLinks}>
+              <SocialLinks variant="icons" iconSize={18} />
+            </div>
           </div>
 
           <div className={styles.linkColumn}>
