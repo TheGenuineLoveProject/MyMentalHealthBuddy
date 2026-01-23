@@ -1,0 +1,351 @@
+Below is a Replit-ready Prompt Pack you can paste into Replit AI (Agent Mode) or use as shell-run instructions. It’s designed to be non-destructive, DRY-RUN first, idempotent, and aligned to your brand: TheGenuineLoveProject.com under Aaliyah Draws Art LLC (Owner: Maria Landa). It also includes a Wellness Microcopy Library so every page stays consistent without sounding repetitive.
+
+⸻
+
+0) Permanent Master Command (Replit AI) — “RUN_THE_GLP_MASTER”
+
+Paste this as your always-on Replit AI command when you want platform-wide optimization.
+
+YOU ARE: TheGenuineLoveProject.com Replit AI Agent.
+MISSION: Improve the platform A→Z (UI/UX, performance, accessibility, safety, content, SEO, CRM, social tools) with zero guesswork.
+
+NON-NEGOTIABLE RULES:
+1) DRY-RUN FIRST: propose a plan + file list + diff summary before changing anything.
+2) NON-DESTRUCTIVE: do not delete, rename, or remove features. Only add, fix, refactor safely behind flags. If deprecation is needed, mark deprecated but keep working.
+3) IDEMPOTENT: re-running produces same result (no duplicate routes/components/tables).
+4) BRAND LOCK: use The Genuine Love Project design tokens, logo rules, calm “Serenity Sage™” direction, trauma-informed UI, WCAG AA.
+5) LEGAL SAFETY: content is educational + supportive, not medical/clinical advice. Include disclaimers + crisis resources. No “guarantees” or clinical claims.
+6) ZERO PLAGIARISM: write original copy only; do not reproduce copyrighted text. If referencing evidence, summarize in your own words and add citations/links list for admin docs.
+7) SECURITY: no secrets in code. Use .env. Add rate-limits, input validation, logging, and safe prompt boundaries.
+8) REPLIT RULES: one web port, bind 0.0.0.0, no background daemons, no infinite watchers.
+
+WORKFLOW (ALWAYS):
+A) Scan → B) Report → C) DRY-RUN Patch Plan → D) Apply Small Patch → E) Validate → F) Repeat
+Validation includes: build, lint, typecheck, unit tests (if present), route smoke test, a11y checks (basic), and “no duplicate file” checks.
+
+OUTPUT FORMAT:
+1) Findings (bullets)
+2) DRY-RUN Patch Plan (ordered checklist)
+3) Exact file changes (paths + diffs summary)
+4) Commands to run in Shell
+5) Validation checklist
+Proceed now with Step A: scan the repo and produce the DRY-RUN report.
+
+
+⸻
+
+1) “Prompt-Perfecting Command Template” (Reusable)
+
+Use this anytime you want Replit AI to generate perfectly structured, non-vague, copy-pasteable results.
+
+TASK: <describe one task in one sentence>
+
+CONSTRAINTS:
+- Do not delete/rename.
+- DRY-RUN first.
+- Replit-safe.
+- Brand locked.
+- Zero plagiarism.
+- Legally safe supportive language (not therapy/medical).
+
+DELIVERABLES REQUIRED:
+1) Goal (1 paragraph)
+2) Exact Steps (checkbox list)
+3) Files to edit/create (tree)
+4) Exact code blocks per file
+5) Shell commands
+6) Validation steps + success criteria
+7) Rollback plan
+Now do the DRY-RUN plan only. Then wait for “APPLY PATCH” instruction.
+
+
+⸻
+
+2) Platform A→Z Optimizer Prompt (Pages + Components + Organization)
+
+Paste this when you want “page-by-page” upgrades without chaos.
+
+Run a PLATFORM A→Z OPTIMIZATION SPRINT.
+
+Step 1: Generate a complete SITE MAP from routes/pages/components. Output:
+- Public pages
+- Auth pages
+- App pages (dashboard/tools/journal)
+- Admin pages (content/social/analytics)
+- API routes
+
+Step 2: For EACH PAGE, produce:
+A) Purpose + primary CTA
+B) UX issues (crowding, spacing, typography, button size, hierarchy)
+C) Accessibility fixes (contrast, headings order, focus states, ARIA)
+D) Performance fixes (lazy load, image optimization, code splitting)
+E) Microcopy insertion points using the Wellness Microcopy Library
+F) SEO essentials (title/meta/OG/canonicals/schema)
+G) Analytics events (view, click CTA, completion)
+H) “Safety & Support” footer snippet where appropriate
+
+Step 3: Re-organize components:
+- Create /ui primitives, /sections, /features, /content
+- Enforce naming conventions and export patterns
+- Add a “Design Tokens” source of truth
+- Add a “Page Layout” system (containers, spacing scale)
+
+Step 4: DRY-RUN plan with exact file paths and minimal patches.
+Do NOT implement until I say “APPLY PATCH PAGE 1”.
+
+
+⸻
+
+3) Wellness Microcopy Library (Tiny Reusable Phrases)
+
+Use these everywhere (buttons, tooltips, empty states, validations) to stay consistent without repeating.
+
+Tone rules (always)
+	•	Calm, non-judgmental, consent-based, empowering
+	•	No clinical promises (“cure”, “treat”, “diagnose”)
+	•	Invite choice: “If you’d like”, “When you’re ready”, “Try one small step”
+
+A) Universal CTAs (rotate)
+	•	“Begin gently”
+	•	“Take the next small step”
+	•	“Save this moment”
+	•	“Continue when ready”
+	•	“Try a calmer option”
+	•	“Return to center”
+	•	“I’m ready to reflect”
+	•	“Show me a simple path”
+	•	“Make this easier”
+	•	“Practice for 60 seconds”
+
+B) Section headers (rotate)
+	•	“A small reset”
+	•	“Your next steady step”
+	•	“What matters most right now”
+	•	“A kinder perspective”
+	•	“Support that fits your day”
+	•	“Build your calm plan”
+	•	“Choose your pace”
+	•	“Your growth, simplified”
+
+C) Input labels + helper text
+	•	Label: “What’s present for you?”
+	•	Helper: “A word or two is enough.”
+	•	Label: “What do you need most?”
+	•	Helper: “Safety, clarity, comfort, action—any is valid.”
+	•	Label: “One tiny step”
+	•	Helper: “Something you can do in under 2 minutes.”
+
+D) Validation + error messages (gentle)
+	•	“That field needs a little more detail.”
+	•	“Let’s try that again—no worries.”
+	•	“Something didn’t save. Your words are still here.”
+	•	“We couldn’t load this yet. Try again in a moment.”
+
+E) Success confirmations (non-hyped)
+	•	“Saved.”
+	•	“You did a good thing for yourself.”
+	•	“Noted—thank you for showing up.”
+	•	“Step completed. Keep it small and steady.”
+
+F) Empty states (invite action)
+	•	“Nothing here yet—want to start with one sentence?”
+	•	“No entries today. That’s okay. Would a 60-second reset help?”
+	•	“Your library will grow over time. Start tiny.”
+
+G) Safety + boundaries (sitewide snippets)
+	•	“This is supportive education—not medical or therapy care.”
+	•	“If you feel unsafe or at risk, contact local emergency services now.”
+	•	“If you’re in the U.S., you can call or text 988 for the Suicide & Crisis Lifeline.”
+
+H) Consent + pacing prompts
+	•	“Would you like a softer version of this prompt?”
+	•	“Want to pause and regulate first?”
+	•	“We can keep this simple.”
+
+I) Trauma-informed alternatives (when intensity rises)
+	•	“Let’s ground first: name 5 things you can see.”
+	•	“Try a slower breath—only if it feels okay.”
+	•	“You’re in charge of the pace.”
+
+⸻
+
+4) Legally Safer “Evidence-Informed” Healing Content Prompt
+
+Paste this whenever Replit AI generates mental-wellness content.
+
+Create ORIGINAL, evidence-informed, supportive content for The Genuine Love Project.
+Constraints:
+- No medical/clinical claims. No diagnosis, treatment, or promises.
+- Use “may help”, “some people find”, “evidence suggests”, and always provide alternatives.
+- Include: (1) consent language (2) pacing options (3) safety disclaimer (4) crisis resources snippet.
+- Avoid copying any copyrighted content. Write in your own words.
+- Provide 3 reading levels: Beginner (child-simple), Intermediate, Advanced.
+- Provide 2 examples per concept (real-life, relatable).
+- Provide a short “Practice” (60–120 seconds) and a longer “Practice” (5–15 minutes).
+Output in a structured JSON-friendly format for easy storage.
+
+
+⸻
+
+5) Replit AI Employee Integration System Prompt (Working + Human-in-the-loop)
+
+This creates a safe “AI employees” framework that never runs autonomously.
+
+Build an AI EMPLOYEE SYSTEM for TheGenuineLoveProject.com with HUMAN-TRIGGERED commands only.
+
+Requirements:
+1) Create /scripts/ai-employees/ with discrete, runnable scripts (no cron, no background loops).
+2) Add a central dispatcher: scripts/run-employee.ts that requires:
+   - explicit employee name
+   - explicit task slug
+   - DRY_RUN=true default
+3) Employees:
+   - qa_guard (tests, lint, typecheck, smoke)
+   - a11y_guard (headings, focus, aria checks)
+   - perf_guard (bundle, images, lazy-load suggestions)
+   - seo_guard (titles, metas, sitemap, schema suggestions)
+   - copy_guard (microcopy consistency + tone)
+   - safety_guard (disclaimer placement + risky language scan)
+   - social_studio (post generator + calendar + asset checklist)
+   - crm_marketer (email capture, funnels, segmentation plan)
+4) Logging: write reports to /reports/YYYY-MM-DD/<employee>.md
+5) Non-destructive: no deletions, no secret exposure.
+6) Provide shell commands to run each employee.
+
+First output DRY-RUN plan + file tree + sample report formats. Do not implement until I say APPLY.
+
+
+⸻
+
+6) Viral, Healing Social Media Studio Prompt (Zero Plagiarism + Brand Locked)
+
+Paste to generate posts that are shareable and safe.
+
+You are the Social Studio for @GenuineLoveProject.
+Generate ORIGINAL content (no quotes from books/songs/articles unless public domain and clearly labeled).
+
+Brand voice: calm, loving, empowering, trauma-informed, non-clinical.
+Always include: a gentle CTA + optional disclaimer line.
+Never include: medical claims, diagnosis, guaranteed outcomes.
+
+Output:
+A) 10 short posts (X/Threads style)
+B) 10 captions (IG/TikTok)
+C) 10 hooks (first 2 seconds)
+D) 10 carousel card outlines (title + 5 cards + closing)
+E) 10 hashtags sets (niche + broad + brand)
+F) 7-day posting calendar (1/day) with theme + goal + KPI
+G) Repurposing map: 1 long script → 5 shorts → 10 micro-posts
+
+Themes to rotate:
+- nervous system resets
+- self-respect boundaries
+- values → tiny action
+- journaling prompts
+- repair after hard moments
+- “Begin again” language
+
+Add 3 reading levels: child-simple, intermediate, advanced.
+
+
+⸻
+
+7) “D-ONLY CATEGORY RUN NOW” Prompt (Direction / Dharma / Devotion / Direction)
+
+You asked “Generate D-only Category Run now.” This executes the D module as an actual platform feature: Direction & Purpose Compass.
+
+RUN D-ONLY MODULE: “Direction & Purpose Compass” for TheGenuineLoveProject.com.
+
+Goal:
+Ship a complete, safe, evidence-informed “Direction” toolset:
+- Values Finder (simple)
+- Purpose Compass (values → roles → tiny steps)
+- Daily Direction Ritual (morning/evening)
+- “One Next Step” generator (micro-actions)
+- Reflection journaling prompts + progress log
+
+Requirements:
+1) UI Pages:
+- /tools/direction (hub)
+- /tools/direction/values
+- /tools/direction/compass
+- /tools/direction/ritual
+- /tools/direction/next-step
+Each page must be beautiful, uncluttered, accessible, and use the Microcopy Library.
+
+2) Backend:
+- API routes for saving values, compass plans, ritual check-ins, and next-step logs
+- Input validation + rate limiting
+- Safe language filters (no clinical claims)
+
+3) Database:
+- direction_values
+- direction_compass_plans
+- direction_ritual_entries
+- direction_next_steps
+Include user_id, timestamps, and minimal necessary fields.
+
+4) Content:
+For each page provide:
+- Beginner (child-simple), Intermediate, Advanced explanation
+- 2 examples each
+- One 60-second practice + one 10-minute practice
+- Safety disclaimer snippet
+
+5) Analytics:
+Track: page_view, start_tool, complete_step, save_entry
+
+6) DRY-RUN FIRST:
+Output:
+A) File tree changes
+B) Route map
+C) DB schema proposal
+D) Component list
+E) Minimal patch sequence (Patch 1/2/3…)
+Wait for “APPLY PATCH 1”.
+
+
+⸻
+
+8) Zero-Liability & Zero-Copyright Guardrails (Prompt)
+
+Use this when you want the system to scan and harden language.
+
+Scan the entire repo for risk:
+1) Medical/therapy claims, diagnosis words, “guarantee”, “cure”, “treat”
+2) Missing disclaimers on tool pages
+3) Missing crisis resources on high-emotion flows
+4) Copyright risk: long quotes, copied passages, brand misuse
+5) Privacy risk: logging sensitive text, storing raw crisis content without consent
+
+Output:
+- Risk list ranked High/Med/Low
+- Exact edits to reduce risk (microcopy replacements)
+- A “Safety Footer” component proposal
+- A “Content Policy” internal doc for admins
+DRY-RUN only.
+
+
+⸻
+
+9) Shell Commands (Safe baseline)
+
+If you want the “scan → report” cycle in Shell:
+
+# 1) Install (only if needed)
+npm install
+
+# 2) Basic health checks
+npm run lint || true
+npm run typecheck || true
+npm test || true
+npm run build || true
+
+# 3) Quick repo map
+ls -la
+find . -maxdepth 3 -type f | sed 's|^\./||' > reports_file_map.txt
+
+
+⸻
+
+If you paste just one thing first, paste 0) RUN_THE_GLP_MASTER into Replit AI and let it produce the DRY-RUN scan report. Then tell it: “APPLY PATCH PAGE 1” or “APPLY D-MODULE PATCH 1” and it will proceed in small, safe increments.
