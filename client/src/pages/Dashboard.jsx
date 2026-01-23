@@ -14,6 +14,7 @@ import "../styles/brand.css";
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import MoodHistoryChart from "../components/MoodHistoryChart.jsx";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -252,6 +253,30 @@ export default function Dashboard() {
                 <p className="text-sm text-white/70 mt-2">Total entries written</p>
               </div>
             </article>
+          </section>
+
+          {/* Mood History Visual */}
+          <section 
+            className="mb-8 p-6 rounded-2xl"
+            style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
+            aria-label="Your mood history"
+            data-testid="section-mood-history"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+                <BarChart3 className="w-4 h-4" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
+                Your Week at a Glance
+              </h3>
+              <Link 
+                href="/analytics" 
+                className="text-sm transition-colors"
+                style={{ color: 'var(--glp-sage)' }}
+                data-testid="link-full-analytics"
+              >
+                View Full Analytics →
+              </Link>
+            </div>
+            <MoodHistoryChart />
           </section>
 
           <Link 
