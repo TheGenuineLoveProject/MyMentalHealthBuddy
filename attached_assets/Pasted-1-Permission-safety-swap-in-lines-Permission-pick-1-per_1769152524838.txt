@@ -1,0 +1,174 @@
+1) Permission + safety (swap-in lines)
+
+Permission (pick 1 per page)
+	•	“Go at your pace. You can pause anytime.”
+	•	“If this feels like too much, you can stop and come back later.”
+	•	“There’s nothing to prove here—small is enough.”
+	•	“You’re in charge. Change or skip any step.”
+
+Choice language (sprinkle lightly)
+	•	“If you can…”
+	•	“If it helps…”
+	•	“If not, that’s okay.”
+	•	“You can try a smaller version.”
+
+Safety / crisis (short)
+	•	“Need immediate support? Visit Crisis Resources.”
+	•	“If you feel unsafe right now, go to Crisis Resources.”
+
+⸻
+
+2) “What to expect” (1 line, non-promissory)
+
+Pick one and keep it near the top:
+	•	“You might notice a softer breath, a tiny bit of space, or nothing at all—any outcome is okay.”
+	•	“This is a practice, not a test. Subtle changes count.”
+	•	“If your mind wanders, that’s normal. Just return gently.”
+
+⸻
+
+3) Tier labels + CTA text (consistent, not repetitive)
+
+Beginner (10s) labels
+	•	“10-second reset”
+	•	“Quick reset (10s)”
+	•	“10s grounding”
+
+Beginner CTA (rotate)
+	•	“Start 10-second reset”
+	•	“Do the quick reset”
+	•	“Begin (10 seconds)”
+
+Intermediate (1–3 min) labels
+	•	“1–3 minute practice”
+	•	“Short practice (1–3 min)”
+	•	“Steady practice (1–3 min)”
+
+Intermediate CTA
+	•	“Start 1–3 minute practice”
+	•	“Try the short practice”
+	•	“Begin the 1–3 minute version”
+
+Advanced (3–10 min) labels
+	•	“3–10 minute practice”
+	•	“Deeper practice (3–10 min)”
+	•	“Longer practice (3–10 min)”
+
+Advanced CTA
+	•	“Start 3–10 minute practice”
+	•	“Try the longer practice”
+	•	“Begin the deeper version”
+
+⸻
+
+4) Stop / pause / reset microcopy (every page)
+
+Use one near the practice block and one near the bottom:
+	•	“You can pause, stop, or switch to the 10-second reset anytime.”
+	•	“If you get overwhelmed, stop and return to your feet or your breath.”
+	•	“Reset option: do one exhale, then decide what’s next.”
+	•	“Shorter counts. Stopping counts. Coming back counts.”
+
+⸻
+
+5) Body-cue starters (gentle, concrete)
+
+Pick 1–2 to start any tier:
+	•	“Feel your feet on the floor.”
+	•	“Let your jaw unclench (even a little).”
+	•	“Drop your shoulders one millimeter.”
+	•	“Notice where your body touches the chair.”
+	•	“Place a hand on your chest or belly—only if that feels okay.”
+
+⸻
+
+6) Breath cues (non-triggering, flexible)
+	•	“Breathe normally and simply notice it.”
+	•	“Let your exhale be a little longer than your inhale.”
+	•	“No need to breathe ‘right’—just breathe.”
+	•	“If breath focus feels hard, switch to feeling your feet.”
+
+⸻
+
+7) Grounding cues (sensory-friendly)
+	•	“Name 3 things you can see.”
+	•	“Press your toes down and release.”
+	•	“Notice 2 sounds—near, then far.”
+	•	“Rub thumb and fingertips together slowly.”
+	•	“Look around and find one calming color.”
+
+⸻
+
+8) Emotion language (non-judgmental, beginner-friendly)
+
+Naming feelings
+	•	“What’s here right now?”
+	•	“If you had to pick one word, what fits best?”
+	•	“Where do you feel it in your body (if you can tell)?”
+
+Normalize
+	•	“It makes sense to feel this.”
+	•	“Your body is doing its best to protect you.”
+	•	“We’re just noticing—no fixing required.”
+
+⸻
+
+9) Reframe / cognition tools (soft, not preachy)
+	•	“Is there a kinder sentence you could try?”
+	•	“What would you say to a friend in this moment?”
+	•	“What’s one small step that doesn’t cost too much energy?”
+	•	“Can you trade ‘always’ for ‘sometimes’?”
+
+⸻
+
+10) Reflection prompts (use max 1–2, advanced tier only)
+	•	“What helped, even 1%?”
+	•	“What felt too much (so we can adjust next time)?”
+	•	“What do you want to remember from this?”
+	•	“What’s one gentle thing you’ll do next?”
+
+⸻
+
+11) End-of-practice closers (warm, grounded)
+	•	“You did enough for today.”
+	•	“Notice one thing that feels slightly easier.”
+	•	“Take one last look around—remind your body you’re here, now.”
+	•	“If you want, drink water or stretch.”
+
+⸻
+
+12) Page-to-page navigation microcopy (keeps flow calm)
+
+Next step suggestions
+	•	“If you want another option, try…”
+	•	“Next gentle step: …”
+	•	“Prefer something quieter? Try…”
+
+Return
+	•	“Back to Wellness Hub”
+	•	“Choose another practice”
+
+⸻
+
+13) Consistency rules (so it stays coherent across 24 pages)
+	•	Use 1 permission line + 1 what-to-expect line per page.
+	•	Every tier: starts with body cue, ends with close.
+	•	Always include a stop/pause line.
+	•	Keep steps short (one sentence each).
+	•	Avoid: “must/should,” guarantees, diagnoses, “fix,” “cure.”
+
+⸻
+
+14) Drop-in snippet for route configs (optional)
+
+If your /content/routes.js supports it, you can store this library once:
+	•	microcopy.permission[]
+	•	microcopy.whatToExpect[]
+	•	microcopy.stopNotes[]
+	•	microcopy.cta.beginner[], etc.
+
+Then each route selects by index (stable, deterministic) to avoid repetition.
+
+⸻
+
+If you want, I can also give you a per-route “microcopy seed map” (e.g., hash(route) → pick phrases) so each page gets consistent variations automatically without manual editing.

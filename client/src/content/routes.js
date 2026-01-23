@@ -1149,6 +1149,38 @@ const rawRoutes = [
       primaryCta: { label: 'Start Today\'s Practice', href: '/today' },
       secondaryCta: { label: 'View Progress', href: '/progress' }
     },
+    contentLevels: {
+      beginner: {
+        title: 'Your Home Base',
+        subtitle: 'This is your safe space. Everything you need is right here.',
+        bulletPoints: [
+          'All your tools are in one place—no searching needed.',
+          'Start with a quick check-in or write in your journal.',
+          'See your progress at a glance anytime.',
+          'Your one next step: Tap "Start Today\'s Practice" to begin.'
+        ]
+      },
+      intermediate: {
+        title: 'Your Daily Dashboard',
+        subtitle: 'Quick access to all your healing tools and progress tracking.',
+        bulletPoints: [
+          'Jump between journal, mood tracking, and AI chat from here.',
+          'Your streak and daily goals update in real-time.',
+          'Customize your dashboard widgets to match your needs.',
+          'Your one next step: Set up your first daily goal.'
+        ]
+      },
+      advanced: {
+        title: 'Command Center for Growth',
+        subtitle: 'Research shows that tracking progress increases follow-through by 40% (Harkin et al., 2016).',
+        bulletPoints: [
+          'Dashboard design follows habit-loop psychology: cue → routine → reward.',
+          'Widget-based architecture supports personalized therapeutic workflows.',
+          'Progress visualization activates intrinsic motivation circuits.',
+          'Your one next step: Explore the analytics section for deeper pattern recognition.'
+        ]
+      }
+    },
     sections: [
       {
         id: 'quick-access',
@@ -1178,6 +1210,38 @@ const rawRoutes = [
       subtitle: 'Tools to strengthen the bonds that matter most.',
       primaryCta: { label: 'View Connections', href: '#connections' },
       secondaryCta: { label: 'Add Relationship', href: '#add' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Keep Track of People You Love',
+        subtitle: 'A simple way to remember who matters to you.',
+        bulletPoints: [
+          'Add the names of people important to you.',
+          'Set reminders to reach out and say hello.',
+          'Note little things—birthdays, favorite snacks, inside jokes.',
+          'Your one next step: Add one person you want to connect with more.'
+        ]
+      },
+      intermediate: {
+        title: 'Relationship Health Tracker',
+        subtitle: 'Intentionally nurture your connections with gentle reminders.',
+        bulletPoints: [
+          'Track the last time you connected with each person.',
+          'Set relationship goals—weekly calls, monthly coffee dates.',
+          'Reflect on relationship patterns and areas for growth.',
+          'Your one next step: Schedule a check-in with someone you miss.'
+        ]
+      },
+      advanced: {
+        title: 'Attachment & Connection Science',
+        subtitle: 'Attachment theory shows secure relationships are built through consistent, attuned contact (Bowlby, 1969).',
+        bulletPoints: [
+          'Uses relationship science to help you maintain healthy attachment patterns.',
+          'Tracks bidirectionality: giving and receiving support in balance.',
+          'Identifies relationships that may need repair or boundary-setting.',
+          'Your one next step: Review your relationship dashboard for patterns.'
+        ]
+      }
     }
   },
   {
@@ -1193,6 +1257,38 @@ const rawRoutes = [
       subtitle: 'Take a moment to check in with yourself.',
       primaryCta: { label: 'Begin Check-In', href: '#checkin' },
       secondaryCta: { label: 'Skip to Journal', href: '/journal' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Start Your Day Gently',
+        subtitle: 'A few minutes to notice how you feel right now.',
+        bulletPoints: [
+          'No pressure—just notice what\'s happening inside you.',
+          'Pick a word or emoji that matches your mood.',
+          'Take three slow breaths before you start.',
+          'Your one next step: Tap "Begin Check-In" and answer honestly.'
+        ]
+      },
+      intermediate: {
+        title: 'Daily Check-In Practice',
+        subtitle: 'Build self-awareness through consistent daily reflection.',
+        bulletPoints: [
+          'Track your emotional state each morning to spot patterns.',
+          'Connect how you slept with how you feel today.',
+          'Set one small intention for the day ahead.',
+          'Your one next step: Complete your check-in and set today\'s intention.'
+        ]
+      },
+      advanced: {
+        title: 'Circadian Emotional Rhythm',
+        subtitle: 'Research shows morning check-ins improve emotional regulation throughout the day (Lyubomirsky & Layous, 2013).',
+        bulletPoints: [
+          'Morning reflection primes the prefrontal cortex for better decision-making.',
+          'Naming emotions (affect labeling) reduces amygdala reactivity.',
+          'Consistent timing builds automaticity, reducing willpower drain.',
+          'Your one next step: Notice your body sensations during today\'s check-in.'
+        ]
+      }
     }
   },
   {
@@ -1208,6 +1304,38 @@ const rawRoutes = [
       subtitle: 'Gain insights into your mood fluctuations and triggers.',
       primaryCta: { label: 'Log Mood', href: '#log' },
       secondaryCta: { label: 'View Trends', href: '#trends' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'How Do You Feel?',
+        subtitle: 'Just pick a color or emoji that matches your mood.',
+        bulletPoints: [
+          'There are no wrong answers—every feeling is valid.',
+          'You can log as many times a day as you want.',
+          'Over time, you\'ll see your patterns in a pretty chart.',
+          'Your one next step: Log how you feel right now—it takes 5 seconds.'
+        ]
+      },
+      intermediate: {
+        title: 'Track Your Emotional Waves',
+        subtitle: 'See patterns in your moods across days and weeks.',
+        bulletPoints: [
+          'Notice what triggers mood shifts—sleep, food, people, events.',
+          'Use tags to categorize moods (work stress, family joy, etc.).',
+          'Spot your high-energy and low-energy times of day.',
+          'Your one next step: Log your mood with a context tag today.'
+        ]
+      },
+      advanced: {
+        title: 'Emotional Granularity Science',
+        subtitle: 'Studies show that precise emotion labeling improves emotional regulation (Barrett, 2017).',
+        bulletPoints: [
+          'Emotional granularity: the more precise your labels, the better your coping.',
+          'Mood tracking reveals circadian, weekly, and seasonal patterns.',
+          'Correlate mood data with sleep, activity, and journal entries.',
+          'Your one next step: Try using a more specific emotion word in your next log.'
+        ]
+      }
     }
   },
   {
@@ -1223,6 +1351,38 @@ const rawRoutes = [
       subtitle: 'Track your nervous system states and build regulation capacity.',
       primaryCta: { label: 'Check State', href: '#check' },
       secondaryCta: { label: 'Learn Regulation', href: '/grounding' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Notice Your Body\'s Signals',
+        subtitle: 'Your body tells you how it feels—let\'s learn to listen.',
+        bulletPoints: [
+          'Are you feeling calm, wound up, or shut down right now?',
+          'Check in with your shoulders, belly, and jaw for clues.',
+          'There\'s no "wrong" state—we\'re just noticing.',
+          'Your one next step: Tap "Check State" and pick what feels closest.'
+        ]
+      },
+      intermediate: {
+        title: 'Window of Tolerance Tracking',
+        subtitle: 'Learn to recognize when you\'re in or out of your comfort zone.',
+        bulletPoints: [
+          'Track whether you feel hyper-aroused (anxious) or hypo-aroused (numb).',
+          'Notice what activities or people shift your state.',
+          'Build a toolkit of go-to regulation strategies.',
+          'Your one next step: After logging, try one grounding technique.'
+        ]
+      },
+      advanced: {
+        title: 'Polyvagal-Informed Tracking',
+        subtitle: 'Based on Polyvagal Theory, which maps nervous system states to social engagement (Porges, 2011).',
+        bulletPoints: [
+          'Three states: ventral vagal (safe), sympathetic (fight/flight), dorsal vagal (shutdown).',
+          'State awareness is the first step in expanding your window of tolerance.',
+          'Co-regulation (safe relationships) helps shift states faster than self-regulation alone.',
+          'Your one next step: Note which state you\'re in and what cue triggered it.'
+        ]
+      }
     }
   },
   {
@@ -1238,6 +1398,38 @@ const rawRoutes = [
       subtitle: 'Express, process, and release through the art of journaling.',
       primaryCta: { label: 'Start Writing', href: '#new-entry' },
       secondaryCta: { label: 'View Past Entries', href: '#entries' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Write What You Feel',
+        subtitle: 'No rules—just put words on the page.',
+        bulletPoints: [
+          'You can write anything: one sentence or ten pages.',
+          'Nobody else will see this unless you choose to share.',
+          'Spelling and grammar don\'t matter here.',
+          'Your one next step: Write one sentence about how you feel right now.'
+        ]
+      },
+      intermediate: {
+        title: 'Guided Journaling Practice',
+        subtitle: 'Use prompts to explore your inner world with intention.',
+        bulletPoints: [
+          'Choose from self-compassion, gratitude, or shadow-work prompts.',
+          'Write for 5–15 minutes without stopping to edit.',
+          'Revisit past entries to notice growth and patterns.',
+          'Your one next step: Pick a prompt and write freely for 5 minutes.'
+        ]
+      },
+      advanced: {
+        title: 'Expressive Writing Science',
+        subtitle: 'Pennebaker\'s research shows expressive writing improves immune function and emotional well-being (Pennebaker & Chung, 2011).',
+        bulletPoints: [
+          'Write about difficult experiences for 15–20 minutes to unlock therapeutic benefits.',
+          'Coherence-building: linking events to emotions creates narrative meaning.',
+          'Shadow work journaling helps integrate disowned parts of self (Jung, 1959).',
+          'Your one next step: Try a timed free-write about something you\'ve been avoiding.'
+        ]
+      }
     },
     sections: [
       {
@@ -1268,6 +1460,38 @@ const rawRoutes = [
       subtitle: 'Visual insights into your growth and patterns.',
       primaryCta: { label: 'View Analytics', href: '#analytics' },
       secondaryCta: { label: 'Export Data', href: '#export' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'See Your Journey',
+        subtitle: 'Pretty charts that show how you\'re doing over time.',
+        bulletPoints: [
+          'See how many days in a row you\'ve checked in.',
+          'Watch your mood patterns in colorful graphs.',
+          'Celebrate the small wins—every entry counts.',
+          'Your one next step: Look at your streak counter and smile.'
+        ]
+      },
+      intermediate: {
+        title: 'Pattern Recognition',
+        subtitle: 'Spot trends in your moods, habits, and growth.',
+        bulletPoints: [
+          'Compare weeks and months to see what\'s changing.',
+          'Find connections between activities and emotional states.',
+          'Use filters to focus on specific tools or time periods.',
+          'Your one next step: Compare this week to last week on the mood chart.'
+        ]
+      },
+      advanced: {
+        title: 'Behavioral Data Science',
+        subtitle: 'Self-tracking + reflection = metacognitive growth (Quantified Self research).',
+        bulletPoints: [
+          'Multi-dimensional data: mood, state, journal sentiment, streaks, goals.',
+          'Time-series analysis reveals circadian, weekly, and seasonal cycles.',
+          'Export data for personal use or to share with a therapist.',
+          'Your one next step: Export a monthly summary to review with support.'
+        ]
+      }
     }
   },
   {
@@ -1283,6 +1507,38 @@ const rawRoutes = [
       subtitle: 'Review your milestones and celebrate your progress.',
       primaryCta: { label: 'View Milestones', href: '#milestones' },
       secondaryCta: { label: 'Set New Goals', href: '#goals' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'You\'re Doing Great',
+        subtitle: 'Every little step forward is worth celebrating.',
+        bulletPoints: [
+          'See the badges and milestones you\'ve earned.',
+          'Look back at where you started—you\'ve grown.',
+          'No need to rush; healing is not a race.',
+          'Your one next step: Find one milestone you\'re proud of.'
+        ]
+      },
+      intermediate: {
+        title: 'Milestones & Achievements',
+        subtitle: 'Track your journey markers and set meaningful goals.',
+        bulletPoints: [
+          'Unlock achievements as you build consistency.',
+          'Set SMART goals for the week or month ahead.',
+          'Reflect on challenges you\'ve overcome.',
+          'Your one next step: Set one small goal for this week.'
+        ]
+      },
+      advanced: {
+        title: 'Progress Monitoring Theory',
+        subtitle: 'Goal-progress monitoring increases goal attainment by 25% (Harkin et al., 2016).',
+        bulletPoints: [
+          'Visible progress activates dopamine reward pathways.',
+          'Milestones create "fresh start" motivation (temporal landmarks).',
+          'Balance process goals (daily habits) and outcome goals (results).',
+          'Your one next step: Review your weekly goal completion rate.'
+        ]
+      }
     }
   },
   {
@@ -1298,6 +1554,38 @@ const rawRoutes = [
       subtitle: 'Advanced analytics to illuminate your journey.',
       primaryCta: { label: 'Explore Insights', href: '#insights' },
       secondaryCta: { label: 'Compare Periods', href: '#compare' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Watch Yourself Grow',
+        subtitle: 'See how you\'ve changed over weeks and months.',
+        bulletPoints: [
+          'Simple charts show your progress in easy-to-read colors.',
+          'Compare "you now" to "you before" and see the difference.',
+          'Celebrate patterns of improvement—even tiny ones.',
+          'Your one next step: Look at your 30-day summary.'
+        ]
+      },
+      intermediate: {
+        title: 'Growth Pattern Analysis',
+        subtitle: 'Uncover the deeper trends in your healing journey.',
+        bulletPoints: [
+          'Compare different time periods: week-over-week, month-over-month.',
+          'See which tools and practices are having the biggest impact.',
+          'Identify plateaus and breakthroughs in your growth.',
+          'Your one next step: Compare the last two months side by side.'
+        ]
+      },
+      advanced: {
+        title: 'Longitudinal Growth Science',
+        subtitle: 'Long-term tracking reveals non-linear healing patterns (Van der Kolk, 2014).',
+        bulletPoints: [
+          'Growth follows spiral patterns—revisiting themes at deeper levels.',
+          'Regression is often a sign of integration, not failure.',
+          'Multi-metric correlation: mood, state, journal themes, behavior.',
+          'Your one next step: Look for spiral patterns in your growth data.'
+        ]
+      }
     }
   },
   {
@@ -1313,6 +1601,38 @@ const rawRoutes = [
       subtitle: 'Structured exercises to guide your reflective writing.',
       primaryCta: { label: 'Start Session', href: '#session' },
       secondaryCta: { label: 'Browse Prompts', href: '#prompts' }
+    },
+    contentLevels: {
+      beginner: {
+        title: 'Writing with Help',
+        subtitle: 'Prompts and questions to guide your writing—no blank-page fear.',
+        bulletPoints: [
+          'Each session gives you a question to answer.',
+          'Write as much or as little as you want.',
+          'There\'s no wrong way to do this.',
+          'Your one next step: Pick a prompt that sounds interesting and start writing.'
+        ]
+      },
+      intermediate: {
+        title: 'Structured Reflection Sessions',
+        subtitle: 'Themed journaling exercises for deeper exploration.',
+        bulletPoints: [
+          'Choose from gratitude, self-compassion, shadow work, or future visioning.',
+          'Follow step-by-step prompts for a complete session.',
+          'Track which themes help you most over time.',
+          'Your one next step: Complete one full guided session today.'
+        ]
+      },
+      advanced: {
+        title: 'Therapeutic Journaling Protocols',
+        subtitle: 'Based on evidence-based practices like Cognitive Processing Therapy and IFS journaling.',
+        bulletPoints: [
+          'Structured protocols help process trauma safely (Resick et al., 2016).',
+          'Internal Family Systems journaling: dialogue with different parts of self.',
+          'Narrative coherence: building a meaningful story of your experiences.',
+          'Your one next step: Try the IFS-inspired "parts dialogue" prompt.'
+        ]
+      }
     }
   },
   
