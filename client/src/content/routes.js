@@ -1576,19 +1576,485 @@ export const routes = [
     },
     sections: [],
     protected: false
+  },
+  {
+    route: '/home',
+    aliasOf: '/',
+    category: 'landing'
+  },
+  {
+    route: '/welcome',
+    aliasOf: '/',
+    category: 'landing'
+  },
+  {
+    route: '/reset-password',
+    category: 'auth',
+    title: 'Reset Password — The Genuine Love Project',
+    description: 'Create a new password for your account.',
+    hero: {
+      eyebrow: 'Almost There',
+      title: 'Create your new',
+      titleHighlight: 'password.',
+      subtitle: 'Choose a strong, unique password for your account.',
+      primaryCta: { label: 'Reset Password', href: '#reset-form' },
+      secondaryCta: { label: 'Back to Sign In', href: '/login' }
+    },
+    sections: [],
+    protected: false,
+    isAuthPage: true
+  },
+  {
+    route: '/onboarding',
+    category: 'core',
+    title: 'Welcome — The Genuine Love Project',
+    description: 'Get started with your personalized healing journey.',
+    hero: {
+      eyebrow: 'Getting Started',
+      title: 'Let\'s personalize your',
+      titleHighlight: 'healing journey.',
+      subtitle: 'A few questions to tailor your experience.',
+      primaryCta: { label: 'Continue', href: '#next' },
+      secondaryCta: null
+    },
+    sections: [],
+    protected: true
+  },
+  {
+    route: '/billing',
+    category: 'core',
+    title: 'Billing — The Genuine Love Project',
+    description: 'Manage your subscription and payment methods.',
+    hero: {
+      eyebrow: 'Account',
+      title: 'Manage your',
+      titleHighlight: 'billing.',
+      subtitle: 'View invoices and update payment methods.',
+      primaryCta: { label: 'View Plans', href: '/pricing' },
+      secondaryCta: { label: 'Payment History', href: '#history' }
+    },
+    sections: [],
+    protected: true
+  },
+  {
+    route: '/profile',
+    category: 'core',
+    title: 'Profile — The Genuine Love Project',
+    description: 'View and edit your personal profile.',
+    hero: {
+      eyebrow: 'Your Profile',
+      title: 'This is',
+      titleHighlight: 'you.',
+      subtitle: 'Manage your profile and preferences.',
+      primaryCta: { label: 'Edit Profile', href: '#edit' },
+      secondaryCta: { label: 'View Settings', href: '/settings' }
+    },
+    sections: [],
+    protected: true
+  },
+  {
+    route: '/overview',
+    category: 'core',
+    title: 'Overview — The Genuine Love Project',
+    description: 'Quick overview of your healing journey.',
+    hero: {
+      eyebrow: 'At a Glance',
+      title: 'Your healing',
+      titleHighlight: 'overview.',
+      subtitle: 'See your progress and upcoming activities.',
+      primaryCta: { label: 'View Details', href: '/dashboard' },
+      secondaryCta: { label: 'Today\'s Focus', href: '/today' }
+    },
+    sections: [],
+    protected: true
+  },
+  {
+    route: '/insights',
+    category: 'core',
+    title: 'Insights — The Genuine Love Project',
+    description: 'Personal insights from your healing journey.',
+    hero: {
+      eyebrow: 'Your Insights',
+      title: 'Patterns &',
+      titleHighlight: 'discoveries.',
+      subtitle: 'AI-generated insights about your progress.',
+      primaryCta: { label: 'View Insights', href: '#insights' },
+      secondaryCta: { label: 'Share Insight', href: '#share' }
+    },
+    sections: [],
+    protected: true
+  },
+  {
+    route: '/glossary-full',
+    aliasOf: '/glossary',
+    category: 'content'
+  },
+  {
+    route: '/write',
+    category: 'content',
+    title: 'Write — The Genuine Love Project',
+    description: 'Share your healing story with the community.',
+    hero: {
+      eyebrow: 'Share Your Voice',
+      title: 'Write your',
+      titleHighlight: 'story.',
+      subtitle: 'Contribute to our community blog.',
+      primaryCta: { label: 'Start Writing', href: '#editor' },
+      secondaryCta: { label: 'Writing Guidelines', href: '#guidelines' }
+    },
+    sections: [],
+    protected: true
+  },
+  {
+    route: '/blog/:slug',
+    category: 'content',
+    isDynamic: true,
+    title: 'Article — The Genuine Love Project',
+    description: 'Read this healing insight.',
+    hero: {
+      eyebrow: 'Blog',
+      title: 'Article',
+      titleHighlight: '',
+      subtitle: 'Insights for your healing journey.',
+      primaryCta: null,
+      secondaryCta: { label: 'Back to Blog', href: '/blog' }
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/community/discussion/:id',
+    category: 'community',
+    isDynamic: true,
+    title: 'Discussion — The Genuine Love Project',
+    description: 'Community discussion thread.',
+    hero: {
+      eyebrow: 'Community',
+      title: 'Discussion',
+      titleHighlight: '',
+      subtitle: 'Join the conversation.',
+      primaryCta: null,
+      secondaryCta: { label: 'Back to Community', href: '/community' }
+    },
+    sections: [],
+    protected: true
+  },
+  {
+    route: '/publishing',
+    category: 'admin',
+    title: 'Publishing — The Genuine Love Project',
+    description: 'Content publishing management.',
+    hero: {
+      eyebrow: 'Content',
+      title: 'Publishing',
+      titleHighlight: 'center.',
+      subtitle: 'Manage and publish content.',
+      primaryCta: { label: 'View Queue', href: '#queue' },
+      secondaryCta: { label: 'Create Post', href: '/write' }
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/design-system',
+    category: 'admin',
+    title: 'Design System — The Genuine Love Project',
+    description: 'Platform design system documentation.',
+    hero: {
+      eyebrow: 'Design',
+      title: 'Design',
+      titleHighlight: 'System.',
+      subtitle: 'Component library and style guide.',
+      primaryCta: { label: 'View Components', href: '#components' },
+      secondaryCta: { label: 'Colors', href: '#colors' }
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/wireframes',
+    category: 'admin',
+    title: 'Wireframes — The Genuine Love Project',
+    description: 'UI wireframe templates.',
+    hero: {
+      eyebrow: 'Design',
+      title: 'Wireframe',
+      titleHighlight: 'Templates.',
+      subtitle: 'Page layout templates and patterns.',
+      primaryCta: { label: 'View Templates', href: '#templates' },
+      secondaryCta: null
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/design-dashboard',
+    category: 'admin',
+    title: 'Design Dashboard — The Genuine Love Project',
+    description: 'Design team dashboard.',
+    hero: {
+      eyebrow: 'Design Team',
+      title: 'Design',
+      titleHighlight: 'Dashboard.',
+      subtitle: 'Monitor design system usage and updates.',
+      primaryCta: { label: 'View Metrics', href: '#metrics' },
+      secondaryCta: { label: 'Components', href: '/design-system' }
+    },
+    sections: [],
+    protected: true,
+    adminOnly: true
+  },
+  {
+    route: '/canva-landing',
+    category: 'landing',
+    title: 'Welcome — The Genuine Love Project',
+    description: 'Beautiful landing page for The Genuine Love Project.',
+    hero: {
+      eyebrow: 'Discover',
+      title: 'Your path to',
+      titleHighlight: 'genuine love.',
+      subtitle: 'A beautiful journey of self-discovery and healing.',
+      primaryCta: { label: 'Get Started', href: '/register' },
+      secondaryCta: { label: 'Learn More', href: '#features' }
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/about',
+    category: 'landing',
+    title: 'About — The Genuine Love Project',
+    description: 'Learn about our mission and the team behind The Genuine Love Project.',
+    hero: {
+      eyebrow: 'Our Story',
+      title: 'Why we built',
+      titleHighlight: 'Genuine Love.',
+      subtitle: 'A platform born from personal healing journeys.',
+      primaryCta: { label: 'Join Us', href: '/register' },
+      secondaryCta: { label: 'Our Mission', href: '#mission' }
+    },
+    sections: [
+      {
+        id: 'values',
+        eyebrow: 'Our Values',
+        title: 'What we believe',
+        subtitle: 'Core principles that guide everything we do.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Heart', title: 'Compassion First', text: 'Every feature is designed with empathy.' },
+          { icon: 'Shield', title: 'Safety Always', text: 'Your privacy and security are sacred.' },
+          { icon: 'Sparkles', title: 'Evidence-Based', text: 'Grounded in science, delivered with love.' },
+          { icon: 'Users', title: 'Community Driven', text: 'Built for and with our healing community.' }
+        ]
+      }
+    ],
+    protected: false
+  },
+  {
+    route: '/features',
+    category: 'landing',
+    title: 'Features — The Genuine Love Project',
+    description: 'Explore all the healing tools and features available.',
+    hero: {
+      eyebrow: 'Platform Features',
+      title: 'Everything you need to',
+      titleHighlight: 'heal and grow.',
+      subtitle: 'A comprehensive toolkit for emotional wellness.',
+      primaryCta: { label: 'Try Free', href: '/register' },
+      secondaryCta: { label: 'View Pricing', href: '/pricing' }
+    },
+    sections: [
+      {
+        id: 'core-features',
+        eyebrow: 'Core Features',
+        title: 'Your healing toolkit',
+        subtitle: 'Essential tools for every stage of your journey.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'MessageCircle', title: 'AI Companion', text: '24/7 trauma-informed chat support.' },
+          { icon: 'BookOpen', title: 'Journaling', text: 'Guided prompts for deep reflection.' },
+          { icon: 'Activity', title: 'Mood Tracking', text: 'Understand your emotional patterns.' },
+          { icon: 'Heart', title: 'Inner Child Work', text: 'Heal your younger self.' }
+        ]
+      }
+    ],
+    protected: false
+  },
+  {
+    route: '/testimonials',
+    category: 'landing',
+    title: 'Testimonials — The Genuine Love Project',
+    description: 'Stories from our healing community.',
+    hero: {
+      eyebrow: 'Real Stories',
+      title: 'Hear from our',
+      titleHighlight: 'healing community.',
+      subtitle: 'Stories of transformation from people like you.',
+      primaryCta: { label: 'Start Your Story', href: '/register' },
+      secondaryCta: { label: 'Share Yours', href: '#share' }
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/contact',
+    category: 'support',
+    title: 'Contact — The Genuine Love Project',
+    description: 'Get in touch with our team.',
+    hero: {
+      eyebrow: 'Reach Out',
+      title: 'We\'d love to',
+      titleHighlight: 'hear from you.',
+      subtitle: 'Questions, feedback, or partnership inquiries.',
+      primaryCta: { label: 'Send Message', href: '#contact-form' },
+      secondaryCta: { label: 'FAQ', href: '/faq' }
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/accessibility',
+    category: 'legal',
+    title: 'Accessibility — The Genuine Love Project',
+    description: 'Our commitment to accessible design.',
+    hero: {
+      eyebrow: 'Inclusive Design',
+      title: 'Accessible to',
+      titleHighlight: 'everyone.',
+      subtitle: 'Our commitment to inclusive, accessible design.',
+      primaryCta: { label: 'Accessibility Features', href: '#features' },
+      secondaryCta: { label: 'Report Issue', href: '#report' }
+    },
+    sections: [],
+    protected: false
+  },
+  {
+    route: '/cookies',
+    category: 'legal',
+    title: 'Cookie Policy — The Genuine Love Project',
+    description: 'How we use cookies on our platform.',
+    hero: {
+      eyebrow: 'Legal',
+      title: 'Cookie',
+      titleHighlight: 'Policy.',
+      subtitle: 'How we use cookies to improve your experience.',
+      primaryCta: null,
+      secondaryCta: null
+    },
+    sections: [],
+    protected: false,
+    isLegalPage: true
+  },
+  {
+    route: '/landing',
+    aliasOf: '/',
+    category: 'landing'
+  },
+  {
+    route: '/signup',
+    aliasOf: '/register',
+    category: 'auth'
+  },
+  {
+    route: '/sign-up',
+    aliasOf: '/register',
+    category: 'auth'
+  },
+  {
+    route: '/signin',
+    aliasOf: '/login',
+    category: 'auth'
+  },
+  {
+    route: '/sign-in',
+    aliasOf: '/login',
+    category: 'auth'
+  },
+  {
+    route: '/help',
+    aliasOf: '/support',
+    category: 'support'
+  },
+  {
+    route: '/therapy',
+    aliasOf: '/chat',
+    category: 'core'
+  },
+  {
+    route: '/ai-chat',
+    aliasOf: '/chat',
+    category: 'core'
+  },
+  {
+    route: '/tos',
+    aliasOf: '/terms',
+    category: 'legal'
+  },
+  {
+    route: '/not-found',
+    category: 'support',
+    title: 'Page Not Found — The Genuine Love Project',
+    description: 'The page you\'re looking for couldn\'t be found.',
+    hero: {
+      eyebrow: 'Oops',
+      title: 'Page not',
+      titleHighlight: 'found.',
+      subtitle: 'The page you\'re looking for doesn\'t exist or has been moved.',
+      primaryCta: { label: 'Go Home', href: '/' },
+      secondaryCta: { label: 'Contact Support', href: '/support' }
+    },
+    sections: [],
+    protected: false
   }
 ];
 
+const aliasRoutes = routes.filter(r => r.aliasOf);
+const dynamicRoutes = routes.filter(r => r.isDynamic);
+const staticRoutes = routes.filter(r => !r.aliasOf && !r.isDynamic);
+
+function matchDynamicRoute(path) {
+  for (const route of dynamicRoutes) {
+    const pattern = route.route.replace(/:[\w]+/g, '([^/]+)');
+    const regex = new RegExp(`^${pattern}$`);
+    if (regex.test(path)) {
+      return route;
+    }
+  }
+  return null;
+}
+
 export const getRouteConfig = (path) => {
-  return routes.find(r => r.route === path) || null;
+  const directMatch = staticRoutes.find(r => r.route === path);
+  if (directMatch) return directMatch;
+  
+  const aliasMatch = aliasRoutes.find(r => r.route === path);
+  if (aliasMatch) {
+    const target = staticRoutes.find(r => r.route === aliasMatch.aliasOf);
+    return target ? { ...target, route: path } : null;
+  }
+  
+  const dynamicMatch = matchDynamicRoute(path);
+  if (dynamicMatch) return dynamicMatch;
+  
+  return routes.find(r => r.route === '/not-found') || null;
 };
 
 export const getRoutesByCategory = (category) => {
-  return routes.filter(r => r.category === category);
+  return routes.filter(r => r.category === category && !r.aliasOf);
 };
 
 export const getAllCategories = () => {
-  return [...new Set(routes.map(r => r.category))];
+  return [...new Set(routes.filter(r => !r.aliasOf).map(r => r.category))];
+};
+
+export const isProtectedRoute = (path) => {
+  const config = getRouteConfig(path);
+  return config?.protected ?? false;
+};
+
+export const isAdminRoute = (path) => {
+  const config = getRouteConfig(path);
+  return config?.adminOnly ?? false;
 };
 
 export default routes;
