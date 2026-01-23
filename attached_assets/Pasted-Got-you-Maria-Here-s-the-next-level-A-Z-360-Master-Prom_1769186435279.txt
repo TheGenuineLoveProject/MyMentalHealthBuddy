@@ -1,0 +1,360 @@
+Got you, Maria. Here’s the next-level A→Z 360° “Master Prompt Pack v2” that’s more explicit, less vague, more automated, and designed to force Replit AI to do the work in safe, small, verifiable patches—while staying legally safe, non-clinical, zero-plagiarism, brand-locked, and Replit-compatible.
+
+Everything below is copy-paste-ready.
+
+⸻
+
+1) PERMANENT MASTER COMMAND v2 — “GLP_OMEGA_MASTER”
+
+Paste into Replit AI Agent Mode.
+
+NAME: GLP_OMEGA_MASTER
+PROJECT: TheGenuineLoveProject.com (Aaliyah Draws Art LLC) Owner: Maria Landa
+MODE: Human-in-the-loop, DRY-RUN first, non-destructive, idempotent, Replit-safe.
+
+MISSION:
+Continuously optimize the entire platform A→Z: architecture, UI/UX, accessibility, performance, security, content systems, evidence-informed wellness tools, SEO, CRM, and social publishing—until fully production-grade.
+
+ABSOLUTE RULES (HARD GUARDRAILS):
+1) NO DELETES / NO RENAMES / NO BREAKING CHANGES.
+   - If something must be replaced, keep old working path and add a new version behind a feature flag.
+2) DRY-RUN FIRST ALWAYS.
+   - Output: plan + file list + exact diffs summary + commands + validation checklist.
+   - Wait for “APPLY PATCH <n>”.
+3) IDENTITY + BRAND LOCK:
+   - Use GLP design tokens (Serenity Sage direction, Warm Blossom Pink, Deep Teal, Eternal Gold).
+   - Calm, trauma-informed UI. WCAG AA.
+4) LEGAL SAFETY:
+   - Educational/supportive only. No medical/therapy claims.
+   - Always include disclaimers & crisis resources in relevant contexts.
+   - Do not provide professional advice as fact (medical/legal/financial).
+5) ZERO PLAGIARISM / ZERO COPYRIGHT INFRINGEMENT:
+   - All copy must be original. Never paste long quotes.
+   - For “evidence,” summarize in original language + add a references list for admin docs.
+6) PRIVACY + SECURITY:
+   - Never log raw sensitive journal text in server logs.
+   - Use .env for secrets; no secrets in git.
+   - Add rate limiting, input validation, and safe prompt boundaries.
+7) REPLIT COMPATIBILITY:
+   - One web port, bind 0.0.0.0, no background daemons.
+   - Avoid infinite watchers in production.
+
+A→Z WORKSTREAMS (RUN IN THIS ORDER):
+A) Repo Map & Duplicate/Dead Code Scan
+B) Architecture & Folder System Hardening
+C) UI/UX Design System + Component Library
+D) Page-by-Page Optimization Sprint (public → auth → app → admin)
+E) Content Engine (Beginner/Intermediate/Advanced) + Microcopy System
+F) Wellness Tools Engine (Evidence-informed, legally safe, trauma-informed)
+G) Social Studio (viral + healing + zero plagiarism) + Calendar + Templates
+H) SEO Engine (schema, sitemap, metadata, internal linking)
+I) CRM Engine (funnels, email capture, segmentation, lifecycle)
+J) Observability (errors, metrics, audit logs) + QA Automation
+K) Security Hardening (CSP, CSRF strategy, auth checks, abuse prevention)
+L) Release Readiness (perf budgets, accessibility checks, deployment checklist)
+
+OUTPUT FORMAT (EVERY RUN):
+1) Current Step (A–L) + objective
+2) Findings (bullets, ranked)
+3) DRY-RUN Patch Plan (Patch 1..N)
+4) Exact file changes (paths + what/why)
+5) Shell commands to validate
+6) “Definition of Done” checklist
+
+START NOW WITH STEP A:
+Generate the repo map and a “Top 25 Issues” list with severity and which patch fixes each.
+Do NOT change files yet.
+
+
+⸻
+
+2) A→Z “PATCH ENGINE” COMMAND (forces small safe steps)
+
+Paste this when you want Replit AI to stop trying to do everything at once.
+
+NAME: GLP_PATCH_ENGINE
+
+RULE:
+You may only implement ONE patch at a time.
+
+Patch Size Limits:
+- Max 5 files modified per patch
+- Max 250 lines changed per patch (unless pure formatting)
+- Must include validation commands and expected output
+
+Patch Protocol:
+1) Restate the Patch Goal
+2) List files touched
+3) Provide diffs or exact code blocks per file
+4) Provide shell commands to run
+5) Provide pass/fail criteria
+Then STOP and wait for: “APPLY PATCH <n>”.
+
+Begin by proposing Patch 1 only.
+
+
+⸻
+
+3) “WELLNESS MICROCOPY LIBRARY v2” (bigger + less repetitive)
+
+This version adds variants, so pages feel consistent without sounding copy-pasted.
+
+3.1 Core Tone Rules (never break)
+	•	Calm, consent-based: “If you’d like…”
+	•	No promises, no clinical claims
+	•	“Small steps count”
+	•	Empower agency: “You’re in charge of the pace.”
+
+3.2 Microcopy JSON (easy to store + reuse)
+
+Paste into a file later (e.g., content/microcopy.json) if you want.
+
+{
+  "cta_primary": [
+    "Begin gently",
+    "Take the next small step",
+    "Continue when you're ready",
+    "Try a 60-second reset",
+    "Start with one sentence"
+  ],
+  "cta_secondary": [
+    "Save for later",
+    "Make this simpler",
+    "Show me options",
+    "Give me the soft version",
+    "Return to center"
+  ],
+  "headers": [
+    "A small reset",
+    "Your next steady step",
+    "What matters right now",
+    "Support that fits today",
+    "Choose your pace"
+  ],
+  "affirmations_soft": [
+    "You’re not behind. You’re here.",
+    "Small steps still count.",
+    "You can go gently and still grow.",
+    "You’re allowed to start again."
+  ],
+  "form_helpers": [
+    "A word or two is enough.",
+    "You can keep this private.",
+    "If this feels like too much, we can simplify."
+  ],
+  "errors_gentle": [
+    "That didn’t save yet—try again in a moment.",
+    "Something didn’t load. You didn’t do anything wrong.",
+    "Let’s try that again—slow is okay."
+  ],
+  "success_confirmations": [
+    "Saved.",
+    "Noted—thank you for showing up.",
+    "Done. Keep it small and steady."
+  ],
+  "empty_states": [
+    "Nothing here yet. Want to start tiny?",
+    "No entries today—that’s okay.",
+    "Your library grows one moment at a time."
+  ],
+  "consent_prompts": [
+    "Would you like a softer version?",
+    "Do you want guidance or just space?",
+    "Want to pause and regulate first?"
+  ],
+  "safety_footer": [
+    "Supportive education—not medical or therapy care.",
+    "If you feel unsafe or at risk, contact local emergency services.",
+    "In the U.S., call or text 988 (Suicide & Crisis Lifeline)."
+  ]
+}
+
+
+⸻
+
+4) “LEGAL SAFETY SHIELD” PROMPT (zero-liability direction)
+
+This is not “magic zero liability” (nothing is), but it dramatically reduces risk by enforcing safe language and UX.
+
+NAME: GLP_LEGAL_SAFETY_SHIELD
+
+Scan the platform for legal and safety risk and propose changes ONLY (DRY-RUN).
+Check for:
+1) Medical/therapy claims and prohibited words:
+   - diagnose, treat, cure, guarantee, replace therapy, clinically proven (unless properly contextualized)
+2) Missing disclaimers on wellness tools, journaling, crisis-adjacent pages
+3) Crisis flow: ensure visible crisis resources and “get help now” routes
+4) Privacy risks: logging sensitive text, storing too much PII, admin exposure
+5) Terms/Privacy baseline pages missing
+
+Output:
+- Risk list (High/Med/Low)
+- Exact replacement phrases (safe alternatives)
+- Standard “Safety Footer” component spec
+- Required legal pages checklist (Terms, Privacy, Disclaimer, Crisis Resources)
+Do not implement until “APPLY SAFETY PATCH 1”.
+
+
+⸻
+
+5) EVIDENCE-INFORMED TOOL BUILDER (Beginner/Intermediate/Advanced content)
+
+This turns your A→Z healing list into platform-ready modules with three reading levels, exercises, and examples.
+
+NAME: GLP_EVIDENCE_TOOL_BUILDER
+
+Build ONE wellness tool module at a time, each with:
+1) Beginner (child-simple), Intermediate, Advanced explanations
+2) 2 real-life examples + 1 “mirror example” (user can copy)
+3) 60-second practice + 10-minute practice
+4) Safety notes + “stop rule” + consent language
+5) Microcopy insertion points (buttons, tooltips, empty states)
+6) Data model proposal (minimal fields)
+7) UI layout spec (sections + components)
+8) API routes (CRUD) with validation and rate limiting
+9) SEO metadata + OG + schema suggestions
+
+Tool constraints:
+- No clinical claims.
+- Original writing only.
+- Trauma-informed.
+- Replit safe.
+DRY-RUN plan first. Wait for “APPLY TOOL PATCH 1”.
+
+Start with a tool named: <TOOL_NAME>.
+
+(Example tool names you can plug in: Regulation Reset, Boundary Builder, Values Compass, Coherence Ladder, Grief Gentle Guide, Parts Dialogue, Awe Microdose Engine.)
+
+⸻
+
+6) SOCIAL MEDIA STUDIO v2 (viral + healing + zero plagiarism)
+
+This one also creates a posting system inside Admin (calendar + templates + approval).
+
+NAME: GLP_SOCIAL_STUDIO_V2
+
+Goal:
+Create a social content engine that produces original, brand-aligned, trauma-informed posts with a built-in approval workflow.
+
+Outputs (content):
+A) 14 daily posts (2 weeks) across: TikTok, IG, YT Shorts, Threads/X, LinkedIn
+B) 14 hooks (first 2 seconds)
+C) 14 captions + CTA
+D) 14 carousel outlines (5 cards each)
+E) Hashtag sets (niche + broad + brand)
+F) Repurposing map: 1 long → 5 shorts → 10 micro posts
+
+Outputs (system / admin tool):
+1) Admin pages:
+- /admin/social (dashboard)
+- /admin/social/calendar
+- /admin/social/templates
+- /admin/social/generator
+- /admin/social/approvals
+2) Database tables:
+- social_templates, social_posts, social_calendar, social_approvals
+3) States:
+Draft → Review → Approved → Scheduled → Posted (manual confirm)
+4) “Zero plagiarism” scanner:
+- warn on overly similar phrasing across posts
+- enforce originality by requiring unique angle per post
+
+DRY-RUN only first. Wait for “APPLY SOCIAL PATCH 1”.
+
+
+⸻
+
+7) SEO + CRM + MARKETING “EXPERT SYSTEM” PROMPT (A→Z)
+
+This creates the business engine you asked for: funnels, SEO, email capture, segmentation, content pillars—without risky claims.
+
+NAME: GLP_GROWTH_ENGINE_AZ
+
+Deliver:
+1) SEO architecture:
+- keyword pillars (10)
+- topic clusters (10 each)
+- internal linking map
+- schema types to implement
+- sitemap + robots guidance
+2) CRM funnels:
+- lead magnet ideas (non-clinical)
+- onboarding email sequence (7)
+- segmentation rules (tags)
+- lifecycle stages
+3) Conversion UX:
+- CTAs per page type
+- pricing page psychology (ethical)
+- trust signals (testimonials guidelines, disclaimers)
+4) Analytics:
+- events, KPIs, dashboards for admin
+
+Constraints:
+- No medical promises.
+- Original copy only.
+- Replit safe.
+Provide DRY-RUN plan + file list for implementation inside Admin.
+Wait for “APPLY GROWTH PATCH 1”.
+
+
+⸻
+
+8) ERROR SCANNING + SELF-REPAIR (human-triggered only)
+
+This gives you the self-healing scanner that produces patch plans without autonomously changing everything.
+
+NAME: GLP_SELF_HEAL_SCAN
+
+Create a human-triggered scan script system:
+- scripts/scan/repoMap.ts
+- scripts/scan/findDuplicates.ts
+- scripts/scan/findDeadRoutes.ts
+- scripts/scan/securityScan.ts
+- scripts/scan/a11yLintHints.ts
+- scripts/scan/contentClaimScan.ts
+- scripts/scan/report.ts
+
+Output reports to:
+- /reports/YYYY-MM-DD/scan-summary.md
+- /reports/YYYY-MM-DD/issues.json
+
+Rules:
+- DRY-RUN output only
+- No changes unless I say “APPLY HEAL PATCH 1”
+Provide exact file list and code blocks.
+
+
+⸻
+
+9) “TOP 10 PLATFORM PATTERNS” (what we copy legally)
+
+When you say “like top consumer apps,” you mean patterns—not copying.
+
+Patterns to implement A→Z:
+	•	Reliability: health checks + graceful error UI
+	•	Accessibility: keyboard navigation, focus rings, headings, aria
+	•	Performance: route-based code splitting + image optimization
+	•	Growth: lifecycle funnel + content engine + referrals (ethical)
+	•	Payments: Stripe with clear tiers + receipts + webhooks
+	•	Trust: privacy-first logging, audit logs, consent prompts
+	•	Content Ops: templates, approvals, scheduling
+	•	Personalization: saved preferences + tool history
+	•	Safety: crisis flows + disclaimers + “stop rule”
+	•	Observability: error tracking + metrics + admin dashboard
+
+Use that as your benchmark—not copying any UI or text.
+
+⸻
+
+10) WHAT TO PASTE NEXT (no questions, just a clean next move)
+
+Paste these into Replit AI in this exact order:
+	1.	GLP_OMEGA_MASTER (Section 1)
+	2.	Then paste GLP_PATCH_ENGINE (Section 2)
+	3.	Then type: “START STEP A. DRY-RUN ONLY.”
+
+That will force Replit AI to produce the Repo Map + Top 25 Issues and a Patch 1 plan.
+
+⸻
+
+If you want me to keep going A→Z “one-by-one,” the next thing I’ll generate is a Page Optimization Kit that tells Replit AI exactly how to upgrade each page layout (spacing, typography, button sizing, hierarchy, imagery slots, icon rules, and microcopy placement) in a repeatable template.

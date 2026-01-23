@@ -1,0 +1,304 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "created": "2026-01-23",
+    "author": "The Genuine Love Project",
+    "license": "proprietary",
+    "disclaimer": "Educational content only. Not medical advice, diagnosis, or treatment."
+  },
+  "practices": [
+    {
+      "id": "body-scan-awareness",
+      "title": {
+        "beginner": "Noticing How Your Body Feels",
+        "intermediate": "Gentle Body Scan",
+        "advanced": "Interoceptive Body Scan for Somatic Awareness"
+      },
+      "description": {
+        "beginner": "Your body is always telling you things. Sometimes it feels tight, sometimes relaxed. This practice helps you listen to your body by paying attention to different parts, one at a time.",
+        "intermediate": "A body scan is a practice of moving your attention slowly through your body, noticing sensations without trying to change them. It can help you become more aware of where you hold tension and what your body needs.",
+        "advanced": "Body scanning cultivates interoceptive awareness—the perception of internal bodily states. Research suggests that enhanced interoception may support emotional regulation and embodied self-awareness. This practice develops the capacity to notice subtle somatic signals."
+      },
+      "evidenceBasis": "Body scan practices draw from mindfulness-based approaches. Research suggests they may help some people develop greater body awareness and reduce perceived stress. Individual experiences vary significantly.",
+      "consent": {
+        "intro": "This practice involves focusing on your body. If any part of your body doesn't feel safe to notice right now, you can skip it.",
+        "midPractice": "You can move quickly past any area that feels uncomfortable, or skip it entirely.",
+        "closing": "Whatever you noticed—or didn't notice—is perfectly valid. Thank you for listening to your body."
+      },
+      "pacing": {
+        "options": [
+          "Scan just one body area that feels safe",
+          "Move through the whole body quickly",
+          "Spend more time on areas that feel neutral or pleasant",
+          "Skip areas that hold trauma or discomfort"
+        ],
+        "reminder": "This is your body and your practice. Modify it to feel safe and supportive."
+      },
+      "examples": [
+        {
+          "title": "Noticing Tension Before It Builds",
+          "scenario": "Priya realized she'd been clenching her jaw all morning without knowing it. During a quick body scan at lunch, she moved her attention from her head downward and noticed her jaw felt like a tight fist. Just noticing it helped her relax it a little. She set a reminder to check in with her jaw throughout the day.",
+          "readingLevel": "intermediate"
+        },
+        {
+          "title": "A Child Learning About Their Body",
+          "scenario": "Six-year-old Milo was learning to notice his feelings. His teacher said, 'Close your eyes and pretend you're a friendly alien visiting your body for the first time. What do you notice in your feet? Your tummy? Your face?' Milo noticed his tummy felt a little funny. 'That might mean I'm nervous about the spelling test,' he said. Knowing that made him feel a bit better.",
+          "readingLevel": "beginner"
+        }
+      ],
+      "practices": {
+        "quick": {
+          "duration": "90-120 seconds",
+          "title": "Quick Body Check-In",
+          "steps": {
+            "beginner": [
+              "Close your eyes or look at one spot.",
+              "Think about your feet. How do they feel?",
+              "Now your tummy. Is it tight? Relaxed?",
+              "Now your shoulders. Are they up by your ears?",
+              "Now your face. Is your jaw tight?",
+              "Take a breath. You just listened to your body."
+            ],
+            "intermediate": [
+              "Pause and close your eyes or soften your gaze.",
+              "Bring attention to your feet. Notice temperature, pressure, any sensations.",
+              "Move to your legs and lower body. Just notice.",
+              "Shift to your abdomen and chest. What do you find there?",
+              "Notice your shoulders, neck, and face.",
+              "Take a breath and thank your body for its information."
+            ],
+            "advanced": [
+              "Close eyes. Establish breath awareness briefly.",
+              "Direct attention to feet—proprioceptive and tactile sensations.",
+              "Scan upward through legs, pelvis, noticing muscular tension patterns.",
+              "Observe core—diaphragm movement, gut sensations, spinal alignment.",
+              "Continue through thorax, shoulders, cervical spine, facial musculature.",
+              "Note global interoceptive state. Observe without interpretation."
+            ]
+          },
+          "whenToPause": "If focusing on your body brings up difficult emotions or memories, stop and use grounding instead. Body scanning isn't for everyone at every moment."
+        },
+        "extended": {
+          "duration": "12-15 minutes",
+          "title": "Full Body Scan Journey",
+          "steps": {
+            "beginner": [
+              "Lie down or sit comfortably. You can use a blanket if you want.",
+              "Close your eyes. Take 3 slow breaths.",
+              "We're going to visit different parts of your body, like saying hello to old friends.",
+              "Start with your toes. Wiggle them if you want. How do they feel?",
+              "Now your feet. Warm? Cold? Tired? Happy?",
+              "Move up to your legs. Are they heavy? Light? Tingly?",
+              "Now your tummy. Take a breath and feel your tummy move.",
+              "Is your tummy tight or soft? Both are okay.",
+              "Think about your chest. Can you feel your heart beating?",
+              "Now your hands. Wiggle your fingers. How do they feel?",
+              "Your arms—are they heavy? Relaxed?",
+              "Think about your shoulders. Are they up high or relaxed down?",
+              "Now your neck. Is it stiff? Roll your head gently if you want.",
+              "Your face—is your jaw tight? Your forehead wrinkled?",
+              "Let your whole face be soft, like melted butter.",
+              "Now feel your whole body at once. You're safe. You're here.",
+              "Take 3 more breaths. Wiggle your fingers and toes.",
+              "Open your eyes when you're ready. Great job listening to your body!"
+            ],
+            "intermediate": [
+              "Find a comfortable lying or seated position. Close your eyes.",
+              "Take 5 slow breaths to settle into this practice.",
+              "Begin at the soles of your feet. Notice any sensations—tingling, warmth, pressure.",
+              "Move to the tops of your feet, ankles, lower legs.",
+              "Continue to your knees, thighs, and hips. Just observe.",
+              "Bring attention to your pelvis and lower back. This area often holds tension.",
+              "Scan your abdomen. Notice the rise and fall with your breath.",
+              "Move to your chest. Feel your ribs expand and contract.",
+              "Notice your upper back and shoulder blades.",
+              "Bring awareness to your shoulders—a common tension area.",
+              "Scan down your arms to your hands and fingertips.",
+              "Return to your neck and throat.",
+              "Notice your jaw, cheeks, eyes, forehead, and scalp.",
+              "Now sense your body as a whole. What is its overall quality right now?",
+              "Take 3 breaths with this whole-body awareness.",
+              "Gently wiggle fingers and toes. Open your eyes slowly.",
+              "Notice how you feel compared to when you started."
+            ],
+            "advanced": [
+              "Assume a supine position with spine neutral and limbs uncrossed.",
+              "Establish 2 minutes of breath awareness to transition to interoceptive mode.",
+              "Begin at the distal extremities: toes. Notice texture of sensation—sharp, dull, absent.",
+              "Progress through soles, dorsum of feet, ankles. Note proprioceptive data.",
+              "Scan calves, shins, knees (front and back), thighs.",
+              "Observe hip joints, pelvic floor, gluteal muscles.",
+              "Bring attention to lumbar spine, sacrum, lower abdominal cavity.",
+              "Notice visceral sensations—gut motility, fullness, emptiness.",
+              "Scan thoracic cavity: diaphragm movement, intercostal muscles, cardiac rhythm.",
+              "Observe sternum, clavicles, shoulder girdle, rotator cuff area.",
+              "Track down arms: biceps, triceps, elbows, forearms, wrists, hands, fingers.",
+              "Return to cervical spine, throat, larynx.",
+              "Scan jaw (masseter, temporalis), tongue, cheeks.",
+              "Notice orbital muscles, sinuses, forehead, temporal regions, scalp.",
+              "Expand to global body sensation—sensing the body as a unified field.",
+              "Observe overall interoceptive tone: activated, calm, numb, mixed.",
+              "Gradually return to external orientation over 2-3 minutes.",
+              "Before moving, set intention to maintain body awareness going forward."
+            ]
+          },
+          "reflection": [
+            "Which areas of your body were easiest to sense?",
+            "Were there areas that felt blank or hard to connect with?",
+            "Did you notice anything surprising about how your body feels right now?"
+          ],
+          "whenToPause": "If body focus triggers dissociation, panic, or intrusive memories, stop immediately. Open your eyes, press your feet into the floor, and orient to the present moment. Body scanning may not be suitable for everyone, especially after trauma."
+        }
+      },
+      "alternatives": [
+        "If lying still feels unsafe, try a walking body scan instead",
+        "If full-body focus feels too much, just scan your hands and feet",
+        "Some people prefer movement-based body awareness (gentle stretching)",
+        "If sensations feel overwhelming, focus only on the soles of your feet"
+      ],
+      "safetyDisclaimer": "Body scanning is an educational awareness practice, not medical treatment. It may be supportive for some people but is not appropriate for everyone, particularly those with certain trauma histories or dissociative conditions. Please consult a mental health professional if body-focused practices cause distress.",
+      "crisisResources": {
+        "text": "If you are in crisis or need immediate support:",
+        "resources": [
+          {"name": "988 Suicide & Crisis Lifeline", "contact": "Call or text 988", "region": "USA"},
+          {"name": "Crisis Text Line", "contact": "Text HOME to 741741", "region": "USA"},
+          {"name": "International Association for Suicide Prevention", "contact": "https://www.iasp.info/resources/Crisis_Centres/", "region": "International"}
+        ],
+        "reminder": "Your body is doing its best. You deserve care and support."
+      },
+      "tags": ["body-scan", "interoception", "body-awareness", "mindfulness", "somatic", "relaxation"]
+    },
+    {
+      "id": "gratitude-reflection",
+      "title": {
+        "beginner": "Thinking About Good Things",
+        "intermediate": "Gratitude Reflection Practice",
+        "advanced": "Cognitive Reframing Through Gratitude Orientation"
+      },
+      "description": {
+        "beginner": "Even when things are hard, there might be some small good things too. Noticing them doesn't mean the hard stuff doesn't matter—it just helps you remember that good things are also real.",
+        "intermediate": "Gratitude practice involves deliberately noticing and appreciating positive aspects of your life, even small ones. Research suggests that regular gratitude practice may support well-being for some people by broadening attention beyond problems.",
+        "advanced": "Gratitude practices may function as cognitive reframing interventions, shifting attentional bias toward positive stimuli. Some research associates gratitude journaling with enhanced subjective well-being and prosocial behavior, though mechanisms and effect sizes vary."
+      },
+      "evidenceBasis": "Studies on gratitude interventions suggest they may be associated with improved mood and life satisfaction for some individuals. Effects vary, and gratitude practices work best as a complement to other coping strategies, not a replacement for addressing real problems.",
+      "consent": {
+        "intro": "This practice is an invitation, not a requirement. If gratitude feels forced right now, that's okay.",
+        "midPractice": "If any part of this feels inauthentic or dismissive of real struggles, you can stop or adapt.",
+        "closing": "Thank you for exploring this. Gratitude is a practice—some days it flows, other days it doesn't."
+      },
+      "pacing": {
+        "options": [
+          "Notice just one small thing you appreciate",
+          "Write down three things over the course of a day",
+          "Spend a few minutes reflecting on gratitude",
+          "Try a longer written gratitude letter (when ready)"
+        ],
+        "reminder": "Gratitude isn't about ignoring problems. It's about also noticing what's working. Both can be true."
+      },
+      "examples": [
+        {
+          "title": "Finding Small Goods on a Hard Day",
+          "scenario": "Kenji's day was terrible—he missed his bus, his laptop crashed, and he had an argument with his partner. Before bed, he tried his gratitude practice even though he didn't feel like it. He wrote: 'My neighbor held the door for me. I had a warm shower. My cat sat on my lap.' None of those fixed his problems, but he fell asleep feeling slightly less defeated.",
+          "readingLevel": "intermediate"
+        },
+        {
+          "title": "A Kid Remembering Good Things",
+          "scenario": "Nine-year-old Zara was upset because her best friend moved away. Her aunt asked, 'What's one thing that made you smile today, even for a second?' Zara thought hard and said, 'The dog across the street wagged his tail at me.' Her aunt said, 'That's a good thing. The sad things are real, and the good things are real too.'",
+          "readingLevel": "beginner"
+        }
+      ],
+      "practices": {
+        "quick": {
+          "duration": "60-90 seconds",
+          "title": "Three Good Things",
+          "steps": {
+            "beginner": [
+              "Think of 3 things that were okay today. Even tiny things count.",
+              "Maybe something tasted good? Someone was nice? The sun came out?",
+              "Say them out loud or in your head: 'I'm glad about...'",
+              "Take a breath. You noticed good things. That's a skill."
+            ],
+            "intermediate": [
+              "Pause and think of 3 positive things from your day, however small.",
+              "For each one, notice why it mattered to you.",
+              "Let yourself feel a moment of appreciation for each.",
+              "Take a breath and carry that awareness forward."
+            ],
+            "advanced": [
+              "Identify 3 positive elements from recent experience.",
+              "For each, articulate the causal chain—what led to this positive?",
+              "Notice the felt sense of appreciation in the body.",
+              "Observe any shift in cognitive or affective state."
+            ]
+          },
+          "whenToPause": "If gratitude feels forced, fake, or dismissive of real pain, stop. This practice should feel like adding, not erasing."
+        },
+        "extended": {
+          "duration": "10-12 minutes",
+          "title": "Gratitude Journaling Practice",
+          "steps": {
+            "beginner": [
+              "Get a piece of paper or a notebook.",
+              "Write the date at the top.",
+              "Think about your day (or this week). What was a tiny bit good?",
+              "Write down 3 things. They can be small: 'My cereal was crunchy' counts.",
+              "For each thing, write why it made you happy. Even one word is okay.",
+              "Draw a little picture if you want. Or just write.",
+              "When you're done, read what you wrote out loud.",
+              "Say 'thank you' to yourself for noticing good things.",
+              "Tomorrow, try to notice good things during the day so you can remember them."
+            ],
+            "intermediate": [
+              "Find a quiet space with your journal or paper.",
+              "Take a few breaths to arrive in this moment.",
+              "Reflect on the past 24 hours. What went well, even slightly?",
+              "Write down 3-5 things you feel grateful for.",
+              "For each one, write 1-2 sentences about why it mattered.",
+              "Include at least one thing about yourself you appreciate.",
+              "Include at least one thing about someone else.",
+              "Read through what you wrote.",
+              "Notice how it feels to recall these positives.",
+              "Close with a moment of appreciation for your capacity to notice."
+            ],
+            "advanced": [
+              "Create conditions for reflective writing. Minimize distractions.",
+              "Begin with 2 minutes of breath awareness to settle the mind.",
+              "Review recent experience through a lens of appreciation. What worked?",
+              "Document 5 items across categories: personal, relational, circumstantial, sensory, existential.",
+              "For each, explore attribution: What contributed to this positive? What was your role? Others' roles?",
+              "Notice the savoring effect—does attention to positives enhance their felt value?",
+              "Write one item of self-appreciation that may feel uncomfortable but true.",
+              "Consider: What would you want to express to someone who contributed to a positive?",
+              "Synthesize: What themes emerge in what you appreciate?",
+              "Close with noting current affective state compared to before.",
+              "Consider making this a regular practice and tracking effects over time."
+            ]
+          },
+          "reflection": [
+            "Was it easy or difficult to think of good things today?",
+            "Did you notice any resistance to appreciation?",
+            "How did it feel to acknowledge positives explicitly?"
+          ],
+          "whenToPause": "If gratitude practice feels like toxic positivity or gaslighting yourself, stop. It's okay if this practice doesn't work for you right now. Real struggles deserve acknowledgment too."
+        }
+      },
+      "alternatives": [
+        "If writing feels tedious, try a mental gratitude list before sleep",
+        "If solo gratitude feels hollow, share appreciations with someone else",
+        "If focusing on today feels hard, think about any time in your life",
+        "Some people prefer gratitude for difficulties (what they learned) rather than positives"
+      ],
+      "safetyDisclaimer": "Gratitude practices are supplementary well-being exercises, not treatments. They may help some people shift perspective but should not replace addressing real problems or seeking professional support. If you're struggling with depression or trauma, gratitude practice may feel inaccessible or harmful—that's valid.",
+      "crisisResources": {
+        "text": "If you are in crisis or need immediate support:",
+        "resources": [
+          {"name": "988 Suicide & Crisis Lifeline", "contact": "Call or text 988", "region": "USA"},
+          {"name": "Crisis Text Line", "contact": "Text HOME to 741741", "region": "USA"},
+          {"name": "International Association for Suicide Prevention", "contact": "https://www.iasp.info/resources/Crisis_Centres/", "region": "International"}
+        ],
+        "reminder": "It's okay if gratitude feels impossible right now. You still deserve support."
+      },
+      "tags": ["gratitude", "positive-psychology", "journaling", "cognitive-reframing", "well-being", "beginner-friendly"]
+    }
+  ]
+}
