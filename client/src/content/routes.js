@@ -414,15 +414,43 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Original Home',
     title: 'Welcome Home — The Genuine Love Project',
-    description: 'Welcome to your healing sanctuary. Begin your journey to emotional wellness.',
+    description: 'The original vision of Genuine Love: a quiet sanctuary for those seeking peace, healing, and self-understanding. Begin wherever you are.',
+    motion: { level: 'calm' },
     hero: {
-      eyebrow: 'Welcome Home',
-      title: 'A gentle space for',
-      titleHighlight: 'healing hearts.',
-      subtitle: 'You\'ve found a safe place to begin or continue your healing journey.',
-      primaryCta: { label: 'Enter Sanctuary', href: '/dashboard' },
-      secondaryCta: { label: 'Learn About Us', href: '#about' }
-    }
+      eyebrow: 'Where it all began',
+      title: 'A quiet place for',
+      titleHighlight: 'weary hearts.',
+      subtitle: 'This is where Genuine Love started—a simple idea that everyone deserves a safe space to heal. That vision hasn\'t changed.',
+      primaryCta: { label: 'Come in', href: '/dashboard' },
+      secondaryCta: { label: 'Our story', href: '#story' }
+    },
+    sections: [
+      {
+        id: 'story',
+        eyebrow: 'Our Beginning',
+        title: 'Built by people who understand',
+        subtitle: 'Genuine Love was created by people who needed a space like this themselves.',
+        variant: 'plain',
+        cards: [
+          { icon: 'Heart', title: 'Born from Need', text: 'We built what we wished existed when we were struggling.' },
+          { icon: 'Users', title: 'Community First', text: 'Every feature was shaped by real people sharing real experiences.' },
+          { icon: 'Shield', title: 'Always Safe', text: 'Privacy and gentleness have been core values from day one.' }
+        ]
+      },
+      {
+        id: 'values',
+        eyebrow: 'What We Believe',
+        title: 'Healing happens in relationship',
+        subtitle: 'With yourself, with others, with the present moment.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Eye', title: 'Self-Understanding', text: 'Knowing yourself is the foundation of change.' },
+          { icon: 'Activity', title: 'Embodied Presence', text: 'Your body holds wisdom. We help you listen.' },
+          { icon: 'Leaf', title: 'Patient Growth', text: 'Real transformation unfolds slowly, like seasons.' },
+          { icon: 'Sun', title: 'Radical Compassion', text: 'You are worthy of kindness, especially from yourself.' }
+        ]
+      }
+    ]
   },
   {
     route: '/healing',
@@ -538,16 +566,57 @@ const rawRoutes = [
     route: '/landing',
     category: 'landing',
     pageLabel: 'Marketing Landing',
-    title: 'Transform Your Life — The Genuine Love Project',
-    description: 'Discover the AI-powered mental wellness platform trusted by thousands for healing and growth.',
+    title: 'A Space for Healing — The Genuine Love Project',
+    description: 'Discover a trauma-informed mental wellness platform with AI-powered support, journaling, and evidence-based healing tools. Free to start, private by design.',
+    motion: { level: 'rich' },
     hero: {
-      eyebrow: 'Transform Your Life',
-      title: 'The future of',
-      titleHighlight: 'mental wellness.',
-      subtitle: 'Join thousands who have transformed their relationship with themselves.',
-      primaryCta: { label: 'Start Free Trial', href: '/register' },
-      secondaryCta: { label: 'Watch Demo', href: '#demo' }
-    }
+      eyebrow: 'For those ready to begin',
+      title: 'Finally, a wellness space that',
+      titleHighlight: 'actually feels safe.',
+      subtitle: 'No toxic positivity. No pressure to be fixed. Just evidence-based tools, compassionate AI support, and a community that understands—available whenever you need it.',
+      primaryCta: { label: 'Start for free', href: '/register' },
+      secondaryCta: { label: 'See how it works', href: '#how' }
+    },
+    sections: [
+      {
+        id: 'how',
+        eyebrow: 'How It Works',
+        title: 'Simple tools for complex feelings',
+        subtitle: 'We\'ve made healing accessible without making it shallow.',
+        variant: 'glow',
+        cards: [
+          { icon: 'MessageCircle', title: 'Talk to AI Companion', text: 'Share what\'s on your mind with a patient, trauma-informed presence. No appointments needed.' },
+          { icon: 'BookOpen', title: 'Journal Your Way', text: 'Guided prompts help you process. Free-write when you need to. Your words stay private.' },
+          { icon: 'Activity', title: 'Track Your State', text: 'Simple check-ins help you notice patterns and celebrate small wins over time.' },
+          { icon: 'Leaf', title: 'Practice Regulation', text: 'Breathing exercises, grounding techniques, and somatic practices for difficult moments.' }
+        ]
+      },
+      {
+        id: 'different',
+        eyebrow: 'Why We\'re Different',
+        title: 'Built with your nervous system in mind',
+        subtitle: 'Most apps want you to hustle toward happiness. We want you to feel safe first.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Shield', title: 'Trauma-Informed', text: 'Everything is designed to avoid re-triggering or overwhelming you.' },
+          { icon: 'Lock', title: 'Genuinely Private', text: 'We don\'t sell your data. Your reflections belong to you alone.' },
+          { icon: 'Clock', title: 'No Timelines', text: 'Use it daily or once a month. There\'s no streak guilt here.' },
+          { icon: 'Heart', title: 'Actually Gentle', text: 'The tone, the colors, the pacing—all designed to feel calm.' }
+        ]
+      },
+      {
+        id: 'cta',
+        eyebrow: 'Ready When You Are',
+        title: 'Start with the free tools',
+        subtitle: 'No credit card. No commitment. Just support waiting when you need it.',
+        variant: 'plain',
+        cards: [
+          { icon: 'Sparkles', title: 'Free Forever', text: 'Core features never expire. Upgrade only if you want more.' },
+          { icon: 'Users', title: 'Join Quietly', text: 'No social features required. Be as anonymous as you like.' },
+          { icon: 'Target', title: 'Your Pace', text: 'We\'ll never push you. You lead your own journey.' }
+        ]
+      }
+    ]
   },
   
   // =========================================================================

@@ -93,6 +93,7 @@ export default function App() {
               <Route path="/home">{() => <ConfigRoute route="/home" />}</Route>
               <Route path="/welcome">{() => <ConfigRoute route="/welcome" />}</Route>
               <Route path="/landing">{() => <ConfigRoute route="/landing" />}</Route>
+              <Route path="/original-home">{() => <ConfigRoute route="/original-home" />}</Route>
               <Route path="/healing">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/about">{() => <ConfigRoute route="/about" />}</Route>
               <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
