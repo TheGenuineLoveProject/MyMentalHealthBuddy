@@ -205,15 +205,51 @@ const categoryPresets = {
     motion: { level: 'minimal' },
     protected: false,
     isAuthPage: true,
-    defaultReadingLevel: 'standard',
-    readingLevelsEnabled: false,
+    stimulationProfile: 'quiet',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
     defaultHero: {
-      eyebrow: 'Welcome',
-      title: 'Continue your',
-      titleHighlight: 'healing journey.',
-      subtitle: 'A safe space awaits you.',
-      primaryCta: { label: 'Continue', href: '#form' },
-      secondaryCta: { label: 'Need Help?', href: '/support' }
+      eyebrow: {
+        beginner: 'Welcome',
+        standard: 'Welcome Back',
+        deep: 'Secure Access'
+      },
+      title: {
+        beginner: 'Sign in to your',
+        standard: 'Continue your',
+        deep: 'Access your'
+      },
+      titleHighlight: {
+        beginner: 'safe space.',
+        standard: 'healing journey.',
+        deep: 'personal sanctuary.'
+      },
+      subtitle: {
+        beginner: 'Take your time.',
+        standard: 'A safe space awaits you.',
+        deep: 'Your data and progress are securely stored.'
+      },
+      helperLine: {
+        beginner: 'No pressure. Go at your pace.',
+        standard: 'Your information is safe with us.',
+        deep: 'All connections are encrypted.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Continue',
+          standard: 'Sign In',
+          deep: 'Authenticate'
+        }, 
+        href: '#form' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Need help?',
+          standard: 'Need Help?',
+          deep: 'Support Options'
+        }, 
+        href: '/support' 
+      }
     },
     defaultSections: []
   },
@@ -221,28 +257,144 @@ const categoryPresets = {
   core: {
     motion: { level: 'calm' },
     protected: true,
+    stimulationProfile: 'structured',
     defaultReadingLevel: 'standard',
     readingLevelsEnabled: true,
     defaultHero: {
-      eyebrow: 'Your Sanctuary',
-      title: 'Welcome to your',
-      titleHighlight: 'healing space.',
-      subtitle: 'Everything you need, all in one place.',
-      primaryCta: { label: 'Get Started', href: '#main' },
-      secondaryCta: { label: 'View Progress', href: '/progress' }
+      eyebrow: {
+        beginner: 'Your Space',
+        standard: 'Your Sanctuary',
+        deep: 'Personal Dashboard'
+      },
+      title: {
+        beginner: 'Welcome to your',
+        standard: 'Welcome to your',
+        deep: 'Access your'
+      },
+      titleHighlight: {
+        beginner: 'safe place.',
+        standard: 'healing space.',
+        deep: 'wellness tools.'
+      },
+      subtitle: {
+        beginner: 'One step at a time.',
+        standard: 'Everything you need, all in one place.',
+        deep: 'Organized tools for self-directed growth.'
+      },
+      helperLine: {
+        beginner: 'Start wherever feels right.',
+        standard: 'Your next step is ready when you are.',
+        deep: 'Tools adapt to your preferences.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Start',
+          standard: 'Get Started',
+          deep: 'Begin Session'
+        }, 
+        href: '#main' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See progress',
+          standard: 'View Progress',
+          deep: 'Analytics'
+        }, 
+        href: '/progress' 
+      }
     },
     defaultSections: [
       {
         id: 'quick-actions',
-        eyebrow: 'Quick Actions',
-        title: 'Your daily tools',
-        subtitle: 'Simple steps for meaningful progress.',
+        eyebrow: {
+          beginner: 'Today',
+          standard: 'Quick Actions',
+          deep: 'Daily Tools'
+        },
+        title: {
+          beginner: 'What feels right?',
+          standard: 'Your daily tools',
+          deep: 'Available practices'
+        },
+        subtitle: {
+          beginner: 'Pick one thing.',
+          standard: 'Simple steps for meaningful progress.',
+          deep: 'Each tool is designed for gradual integration.'
+        },
         variant: 'plain',
         cards: [
-          { icon: 'BookOpen', title: 'Journal', text: 'Reflect and process.' },
-          { icon: 'Activity', title: 'Check-In', text: 'Track your state.' },
-          { icon: 'MessageCircle', title: 'Chat', text: 'Talk it through.' },
-          { icon: 'Target', title: 'Goals', text: 'Small steps forward.' }
+          { 
+            icon: 'BookOpen', 
+            title: {
+              beginner: 'Write',
+              standard: 'Journal',
+              deep: 'Reflective Writing'
+            }, 
+            text: {
+              beginner: 'A few words help.',
+              standard: 'Reflect and process.',
+              deep: 'Structured prompts for insight.'
+            },
+            meta: {
+              beginner: '1 min',
+              standard: '5 min',
+              deep: 'Flexible'
+            }
+          },
+          { 
+            icon: 'Activity', 
+            title: {
+              beginner: 'Check in',
+              standard: 'Check-In',
+              deep: 'State Assessment'
+            }, 
+            text: {
+              beginner: 'How are you now?',
+              standard: 'Track your state.',
+              deep: 'Monitor patterns over time.'
+            },
+            meta: {
+              beginner: '10 sec',
+              standard: '1 min',
+              deep: '2 min'
+            }
+          },
+          { 
+            icon: 'MessageCircle', 
+            title: {
+              beginner: 'Talk',
+              standard: 'Chat',
+              deep: 'AI Companion'
+            }, 
+            text: {
+              beginner: 'Say what you need.',
+              standard: 'Talk it through.',
+              deep: 'Trauma-informed dialogue support.'
+            },
+            meta: {
+              beginner: 'Any time',
+              standard: 'Available 24/7',
+              deep: 'On-demand'
+            }
+          },
+          { 
+            icon: 'Target', 
+            title: {
+              beginner: 'One step',
+              standard: 'Goals',
+              deep: 'Micro-Goals'
+            }, 
+            text: {
+              beginner: 'Tiny wins count.',
+              standard: 'Small steps forward.',
+              deep: 'Incremental progress tracking.'
+            },
+            meta: {
+              beginner: 'Your pace',
+              standard: 'Daily',
+              deep: 'Customizable'
+            }
+          }
         ]
       }
     ]
@@ -268,51 +420,157 @@ const categoryPresets = {
     motion: { level: 'calm' },
     protected: false,
     stimulationProfile: 'practice',
-    defaultReadingLevel: 'standard',
+    defaultReadingLevel: 'beginner',
     readingLevelsEnabled: true,
     defaultHero: {
-      eyebrow: 'Wellness Practice',
-      title: 'Nurture your',
-      titleHighlight: 'well-being.',
-      subtitle: 'Gentle practices for mind, body, and spirit.',
-      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
-      secondaryCta: { label: 'Browse All', href: '/wellness-hub' }
+      eyebrow: {
+        beginner: 'Gentle Practice',
+        standard: 'Wellness Practice',
+        deep: 'Evidence-Informed Practice'
+      },
+      title: {
+        beginner: 'A moment for',
+        standard: 'Nurture your',
+        deep: 'Support your'
+      },
+      titleHighlight: {
+        beginner: 'you.',
+        standard: 'well-being.',
+        deep: 'nervous system.'
+      },
+      subtitle: {
+        beginner: 'Start small. Go slow.',
+        standard: 'Gentle practices for mind, body, and spirit.',
+        deep: 'Practices grounded in somatic and contemplative research.'
+      },
+      helperLine: {
+        beginner: 'You can stop any time.',
+        standard: 'Take what helps. Leave what doesn\'t.',
+        deep: 'Listen to your body\'s signals.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try 10 seconds',
+          standard: 'Start 10-second reset',
+          deep: 'Begin micro-practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See all',
+          standard: 'Browse All',
+          deep: 'Explore Library'
+        }, 
+        href: '/wellness-hub' 
+      }
     },
     defaultPracticeTiers: {
       quick10s: {
-        title: '10-second reset',
+        title: {
+          beginner: '10 seconds',
+          standard: '10-second reset',
+          deep: 'Micro-regulation (10s)'
+        },
         duration: '10 seconds',
-        steps: [
-          'Pause what you\'re doing.',
-          'Take one slow breath in.',
-          'Let it out gently.'
-        ],
-        ctaLabel: 'Start 10 seconds'
+        steps: {
+          beginner: [
+            'Pause.',
+            'Breathe in.',
+            'Breathe out.'
+          ],
+          standard: [
+            'Pause what you\'re doing.',
+            'Take one slow breath in.',
+            'Let it out gently.'
+          ],
+          deep: [
+            'Pause and orient to your environment.',
+            'Inhale through nose for 4 counts.',
+            'Exhale slowly, activating vagal tone.'
+          ]
+        },
+        whenToPause: 'If you feel lightheaded, stop and breathe normally.',
+        ctaLabel: {
+          beginner: 'Try it',
+          standard: 'Start 10 seconds',
+          deep: 'Begin'
+        }
       },
       short1to3: {
-        title: '1–3 minute practice',
+        title: {
+          beginner: '1–3 minutes',
+          standard: '1–3 minute practice',
+          deep: 'Short practice (1–3 min)'
+        },
         duration: '1–3 minutes',
-        steps: [
-          'Find a comfortable position.',
-          'Close your eyes or soften your gaze.',
-          'Take three slow breaths.',
-          'Notice how your body feels.',
-          'Open your eyes when ready.'
-        ],
-        ctaLabel: 'Start short practice'
+        steps: {
+          beginner: [
+            'Sit or stand comfortably.',
+            'Close your eyes if it feels safe.',
+            'Take 3 slow breaths.',
+            'Notice how you feel.',
+            'Open your eyes.'
+          ],
+          standard: [
+            'Find a comfortable position.',
+            'Close your eyes or soften your gaze.',
+            'Take three slow breaths.',
+            'Notice how your body feels.',
+            'Open your eyes when ready.'
+          ],
+          deep: [
+            'Find a supported posture.',
+            'Allow eyes to close or maintain soft gaze.',
+            'Establish rhythmic breathing (4-4 or 4-6).',
+            'Scan body for areas of holding.',
+            'Complete with orienting to space.'
+          ]
+        },
+        whenToPause: 'If emotions intensify, open your eyes and ground yourself.',
+        ctaLabel: {
+          beginner: 'Try short',
+          standard: 'Start short practice',
+          deep: 'Begin short session'
+        }
       },
       long3to10: {
-        title: '3–10 minute practice',
+        title: {
+          beginner: '3–10 minutes',
+          standard: '3–10 minute practice',
+          deep: 'Deeper practice (3–10 min)'
+        },
         duration: '3–10 minutes',
-        steps: [
-          'Settle into a comfortable position.',
-          'Take 5 slow breaths to arrive.',
-          'Scan your body from head to toe.',
-          'Breathe into any areas of tension.',
-          'Notice your emotional state without judgment.',
-          'Set one gentle intention.',
-          'When ready, slowly open your eyes.'
-        ],
+        steps: {
+          beginner: [
+            'Get comfortable.',
+            'Take 5 slow breaths.',
+            'Notice your body.',
+            'Breathe into tight spots.',
+            'Notice your feelings.',
+            'Think of one kind wish for yourself.',
+            'Open your eyes slowly.'
+          ],
+          standard: [
+            'Settle into a comfortable position.',
+            'Take 5 slow breaths to arrive.',
+            'Scan your body from head to toe.',
+            'Breathe into any areas of tension.',
+            'Notice your emotional state without judgment.',
+            'Set one gentle intention.',
+            'When ready, slowly open your eyes.'
+          ],
+          deep: [
+            'Establish grounded, supported posture.',
+            'Use 5 conscious breaths to transition.',
+            'Progressive body scan with interoceptive awareness.',
+            'Direct breath to areas of somatic holding.',
+            'Observe emotional tone without narrative.',
+            'Set intention aligned with values.',
+            'Gradual re-orientation to external environment.'
+          ]
+        },
+        whenToPause: 'If you feel overwhelmed, pause and use grounding (5-4-3-2-1).',
         reflection: [
           'What did you notice in your body?',
           'What feels different now?'
