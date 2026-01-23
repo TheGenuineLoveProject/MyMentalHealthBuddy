@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ArrowLeft, Phone, MessageSquare, Globe, Heart, AlertTriangle, Shield, ExternalLink, Sparkles, Wind, Users, HandHeart } from "lucide-react";
 import SEO from "../components/SEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const CRISIS_HOTLINES = [
   {
@@ -288,12 +289,7 @@ export default function CrisisResources() {
             </div>
           </section>
 
-          <footer className="mt-8 text-center text-sm p-4" style={{ color: 'var(--glp-sage)' }}>
-            <p>
-              This page provides general information and resources. 
-              It is not a substitute for professional mental health treatment.
-            </p>
-          </footer>
+          <SafetyFooter variant="prominent" />
         </div>
       </div>
     </>

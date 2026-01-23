@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Moon, Sun, Clock, Coffee, Smartphone, Wind, ThermometerSun, Bed, CheckCircle2, XCircle, Sparkles } from "lucide-react";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const sleepHygieneTips = [
   {
@@ -248,12 +249,7 @@ export default function SleepGuidePage() {
           </div>
         )}
 
-        <div className="text-center py-8" style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-paper)', opacity: 0.5 }}>
-            If you experience persistent sleep problems, please consult a healthcare provider.
-            Sleep disorders like insomnia or sleep apnea require professional evaluation.
-          </p>
-        </div>
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Sparkles, Heart, Sun, Moon, Droplets, Utensils, Move, Users, Palette, BookOpen, Music, CheckCircle2 } from "lucide-react";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const toolkitCategories = [
   {
@@ -279,12 +280,7 @@ export default function SelfCareToolkitPage() {
           </p>
         </div>
 
-        <div className="mt-12 text-center py-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
-            Self-care supports but does not replace professional mental health treatment.
-            If you're struggling, please reach out to a healthcare provider.
-          </p>
-        </div>
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

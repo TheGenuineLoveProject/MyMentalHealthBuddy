@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Zap, Snowflake, Heart, Shield, Brain, Activity, ArrowRight, CheckCircle2 } from "lucide-react";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const stressResponses = [
   {
@@ -338,12 +339,7 @@ export default function StressResponseGuidePage() {
           </div>
         </div>
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
-            Understanding stress responses takes time and practice. Be compassionate with yourself.
-            For persistent dysregulation, consider working with a trauma-informed therapist.
-          </p>
-        </div>
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );
