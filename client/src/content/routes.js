@@ -856,6 +856,8 @@ const rawRoutes = [
     pageLabel: 'Sign In',
     title: 'Sign In — The Genuine Love Project',
     description: 'Welcome back to your healing sanctuary. Sign in to continue your journey.',
+    tone: 'quiet',
+    reassurance: 'You can go slowly. You\'re safe here.',
     contentLevels: {
       beginner: {
         title: 'Welcome Back',
@@ -903,6 +905,8 @@ const rawRoutes = [
     pageLabel: 'Login Callback',
     title: 'Completing Sign In — The Genuine Love Project',
     description: 'Completing your sign in process.',
+    tone: 'quiet',
+    reassurance: 'Just a moment. Everything is working.',
     contentLevels: {
       beginner: {
         title: 'Almost There',
@@ -950,6 +954,8 @@ const rawRoutes = [
     pageLabel: 'Create Account',
     title: 'Create Account — The Genuine Love Project',
     description: 'Join thousands on their healing journey. Create your free account today.',
+    tone: 'quiet',
+    reassurance: 'Take your time. There\'s no rush here.',
     contentLevels: {
       beginner: {
         title: 'Create Your Free Account',
@@ -997,6 +1003,8 @@ const rawRoutes = [
     pageLabel: 'Forgot Password',
     title: 'Reset Password — The Genuine Love Project',
     description: 'Reset your password to regain access to your healing sanctuary.',
+    tone: 'quiet',
+    reassurance: 'It happens to everyone. We\'ll help you get back in.',
     contentLevels: {
       beginner: {
         title: 'Forgot Your Password?',
@@ -1044,6 +1052,8 @@ const rawRoutes = [
     pageLabel: 'Reset Password',
     title: 'Create New Password — The Genuine Love Project',
     description: 'Create a new password for your account.',
+    tone: 'quiet',
+    reassurance: 'Almost there. Just choose a new password.',
     contentLevels: {
       beginner: {
         title: 'Create a New Password',
@@ -1091,6 +1101,8 @@ const rawRoutes = [
     pageLabel: 'Onboarding',
     title: 'Welcome — The Genuine Love Project',
     description: 'Let\'s personalize your healing journey.',
+    tone: 'quiet',
+    reassurance: 'Skip anything that doesn\'t feel right. Your pace is the right pace.',
     contentLevels: {
       beginner: {
         title: 'Let\'s Get to Know You',
