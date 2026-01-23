@@ -2570,6 +2570,21 @@ function matchDynamicRoute(path) {
   return null;
 }
 
+export function matchDynamic(pattern, path) {
+  const regexPattern = pattern.replace(/:[\w]+/g, '([^/]+)');
+  const regex = new RegExp(`^${regexPattern}$`);
+  const match = path.match(regex);
+  if (match) {
+    const paramNames = [...pattern.matchAll(/:(\w+)/g)].map(m => m[1]);
+    const params = {};
+    paramNames.forEach((name, i) => {
+      params[name] = match[i + 1];
+    });
+    return { matched: true, params };
+  }
+  return null;
+}
+
 export function getRouteConfig(path) {
   const directMatch = staticRoutes.find(r => r.route === path);
   if (directMatch) return directMatch;
@@ -2577,13 +2592,14 @@ export function getRouteConfig(path) {
   const aliasMatch = aliasRoutes.find(r => r.route === path);
   if (aliasMatch) {
     const target = staticRoutes.find(r => r.route === aliasMatch.aliasOf);
-    return target ? { ...target, route: path } : null;
+    return target ? { ...target, route: path, aliasOf: aliasMatch.aliasOf } : null;
   }
   
   const dynamicMatch = matchDynamicRoute(path);
   if (dynamicMatch) return dynamicMatch;
   
-  return routes.find(r => r.route === '/not-found') || null;
+  const notFound = routes.find(r => r.route === '/not-found' || r.route === '/404');
+  return notFound ? { ...notFound, is404: true } : { route: path, title: 'Page Not Found', is404: true };
 }
 
 export function getRoutesByCategory(category) {
