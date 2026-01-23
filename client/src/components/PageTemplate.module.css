@@ -98,13 +98,30 @@
   color: var(--sacred-charcoal, #3a3a3a);
   opacity: 0.85;
   max-width: 42rem;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 1.5rem;
   line-height: 1.7;
 }
 
 @media (max-width: 768px) {
   .heroSubtitle {
     font-size: 1rem; /* 16px on mobile */
+  }
+}
+
+.heroHelperLine {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--glp-sage, #8fbf9f);
+  font-style: italic;
+  max-width: 32rem;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .heroHelperLine {
+    font-size: 0.875rem;
   }
 }
 
@@ -323,6 +340,16 @@
   color: var(--sacred-charcoal, #3a3a3a);
   opacity: 0.85;
   line-height: 1.6;
+}
+
+.cardMeta {
+  display: block;
+  margin-top: 0.75rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--glp-sage, #8fbf9f);
+  font-style: italic;
 }
 
 /* ============================================

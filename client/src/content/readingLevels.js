@@ -1,5 +1,5 @@
 /**
- * readingLevels.js - Reading Level System Constants & Helpers
+ * readingLevels.js - Conscious-Aware Reading Level System
  * 
  * Features:
  * - Three levels: beginner (simple), standard (warm), deep (explanatory)
@@ -7,16 +7,25 @@
  * - URL query support (?level=beginner|standard|deep)
  * - Fallback chain: URL > localStorage > route default > standard
  * 
+ * CONSCIOUS-AWARE DESIGN PRINCIPLES:
+ * - Consent-led: user always chooses intensity; default is gentle
+ * - Non-coercive: never push; always offer options ("you can", "if you'd like")
+ * - Identity-safe: do not assume culture, gender, ability, belief, or background
+ * - Non-pathologizing: avoid labeling people; avoid "fixing you" language
+ * - Nervous-system respectful: slow motion, breathable spacing, no surprise intensity
+ * - Trauma-aware: include pause/stop cues; offer grounding exits; link crisis resources
+ * - Culturally humble: avoid universal claims; present practices as optional tools
+ * - Legally safer: educational support only; no diagnosis, no medical/treatment claims
+ * 
  * STRICT COPY RULES:
  * - Beginner: Sentences under 10 words, respectful + empowering (not childish)
  * - Standard: Paragraphs max 2 sentences, warm/grounded tone
  * - Deep: One short definition per section, gentle tone
  * 
- * INCLUSIVE LANGUAGE (MANDATORY):
- * - Use person-first, non-stigmatizing language
- * - Avoid assumptions about identity, culture, ability
- * - Avoid moralizing terms ("should", "weak", "normal/abnormal")
- * - Avoid infantilizing tone
+ * AUTONOMY LANGUAGE:
+ * - "You can try...", "If you'd like...", "Take what helps..."
+ * - "It's okay to pause.", "Go at your pace."
+ * - Avoid prescriptive "should" and moral framing
  * 
  * COPY SAFETY:
  * - Allowed: "may help", "some people find...", "often used for..."

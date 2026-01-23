@@ -27,7 +27,7 @@ export default function ReadingLevelToggle({ value, onChange, className = '' }) 
         Reading level
       </legend>
       <span className={styles.helperText}>
-        Choose the level of detail you prefer.
+        Choose how much detail you want.
       </span>
       
       <div className={styles.radioGroup} role="radiogroup">
@@ -58,7 +58,7 @@ export default function ReadingLevelToggle({ value, onChange, className = '' }) 
               </span>
               <span 
                 id={`${inputId}-desc`}
-                className={styles.radioDescription}
+                className={styles.srOnly}
               >
                 {meta.description}
               </span>
@@ -66,6 +66,9 @@ export default function ReadingLevelToggle({ value, onChange, className = '' }) 
           );
         })}
       </div>
+      <span className={styles.microcopy}>
+        You can change this any time.
+      </span>
     </fieldset>
   );
 }

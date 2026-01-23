@@ -82,6 +82,11 @@ const categoryPresets = {
         standard: 'A trauma-informed space for healing and growth.',
         deep: 'Trauma-informed care means we honor your pace and boundaries.'
       },
+      helperLine: {
+        beginner: 'You choose what feels right.',
+        standard: 'Go at your own pace.',
+        deep: 'Take what helps. Leave what doesn\'t.'
+      },
       primaryCta: { 
         label: {
           beginner: 'Start Now',
@@ -130,6 +135,11 @@ const categoryPresets = {
               beginner: 'Say nice things to yourself.',
               standard: 'Learn to treat yourself with kindness.',
               deep: 'Self-compassion means treating yourself as you would a dear friend.'
+            },
+            meta: {
+              beginner: '2 min',
+              standard: '5–10 min',
+              deep: 'Practice at your pace'
             }
           },
           { 
@@ -143,6 +153,11 @@ const categoryPresets = {
               beginner: 'Notice how you feel inside.',
               standard: 'Understand your inner landscape.',
               deep: 'Awareness means gently noticing what arises without judgment.'
+            },
+            meta: {
+              beginner: '1 min',
+              standard: '3–5 min',
+              deep: 'Gentle daily check-in'
             }
           },
           { 
@@ -156,6 +171,11 @@ const categoryPresets = {
               beginner: 'A quiet place just for you.',
               standard: 'A private sanctuary for your journey.',
               deep: 'Safety here means you set the pace and boundaries.'
+            },
+            meta: {
+              beginner: 'Always here',
+              standard: 'Available anytime',
+              deep: 'You control the environment'
             }
           },
           { 
@@ -169,6 +189,11 @@ const categoryPresets = {
               beginner: 'Get help when you want it.',
               standard: 'Tools and resources when you need them.',
               deep: 'Scaffolding means gentle structure that meets you where you are.'
+            },
+            meta: {
+              beginner: 'If you want',
+              standard: 'Optional guidance',
+              deep: 'Step-by-step when helpful'
             }
           }
         ]

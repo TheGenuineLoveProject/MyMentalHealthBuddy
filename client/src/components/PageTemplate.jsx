@@ -75,6 +75,7 @@ function HeroSection({ hero, readingLevel = 'standard' }) {
   const title = getVariant(hero.title, readingLevel);
   const titleHighlight = getVariant(hero.titleHighlight, readingLevel);
   const subtitle = getVariant(hero.subtitle, readingLevel);
+  const helperLine = hero.helperLine ? getVariant(hero.helperLine, readingLevel) : null;
   const primaryLabel = hero.primaryCta ? getVariant(hero.primaryCta.label, readingLevel) : null;
   const secondaryLabel = hero.secondaryCta ? getVariant(hero.secondaryCta.label, readingLevel) : null;
 
@@ -132,6 +133,16 @@ function HeroSection({ hero, readingLevel = 'standard' }) {
           </p>
         )}
 
+        {helperLine && (
+          <p 
+            className={styles.heroHelperLine}
+            data-aos="fade-up"
+            data-aos-delay="500"
+          >
+            {helperLine}
+          </p>
+        )}
+
         {(hero.primaryCta || hero.secondaryCta) && (
           <div 
             className={styles.ctaGroup}
@@ -171,6 +182,7 @@ function SacredCard({ card, index, readingLevel = 'standard' }) {
   const IconComponent = getIcon(card.icon);
   const title = getVariant(card.title, readingLevel);
   const text = getVariant(card.text, readingLevel);
+  const meta = card.meta ? getVariant(card.meta, readingLevel) : null;
   
   return (
     <article
@@ -188,6 +200,11 @@ function SacredCard({ card, index, readingLevel = 'standard' }) {
       <p className={styles.cardText}>
         {text}
       </p>
+      {meta && (
+        <span className={styles.cardMeta}>
+          {meta}
+        </span>
+      )}
     </article>
   );
 }
