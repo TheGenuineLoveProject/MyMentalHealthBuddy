@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { Crown, Check, ArrowLeft, Sparkles, Zap, Shield, Star, ArrowRight } from "lucide-react";
 import SEO from "../components/SEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const PRO_FEATURES = [
   { name: "Advanced analytics", description: "Deep insights into your wellness patterns", icon: Sparkles },
@@ -91,11 +92,7 @@ export default function Upgrade() {
               </p>
             </div>
 
-            <div className="text-center">
-              <p className="text-body-sm">
-                Questions? <Link href="/crisis" className="text-[var(--sage-600)] hover:underline">Contact support</Link>
-              </p>
-            </div>
+            <SafetyFooter variant="compact" className="mt-8" />
           </div>
         </div>
       </div>

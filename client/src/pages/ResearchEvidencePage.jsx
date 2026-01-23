@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import SafetyFooter from "../components/ui/SafetyFooter";
 import { 
   ArrowLeft, 
   BookOpen, 
@@ -322,12 +323,7 @@ export default function ResearchEvidencePage() {
             </div>
           </section>
 
-          <footer className="mt-8 card-bordered bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
-            <p className="text-sm text-amber-800 dark:text-amber-200 text-center">
-              <strong>Note:</strong> This page provides general information about research findings. It is not medical advice. 
-              Always consult qualified healthcare professionals for diagnosis and treatment of mental health conditions.
-            </p>
-          </footer>
+          <SafetyFooter variant="default" />
         </div>
       </div>
     </div>

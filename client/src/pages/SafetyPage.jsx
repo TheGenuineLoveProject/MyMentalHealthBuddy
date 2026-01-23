@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft, AlertTriangle, Phone, Heart, Shield, ExternalLink, BookOpen, Users } from "lucide-react";
 import SEO from "../components/SEO";
 import TglpNavbar from "../components/TglpNavbar";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const CRISIS_HOTLINES = [
   {
@@ -246,6 +247,8 @@ export default function SafetyPage() {
                   Frequently Asked Questions
                 </Link>
               </div>
+
+              <SafetyFooter variant="prominent" />
             </div>
           </div>
         </div>

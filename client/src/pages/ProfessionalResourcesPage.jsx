@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ArrowLeft, Users, Phone, Globe, BookOpen, Heart, Shield, ExternalLink, Sparkles } from "lucide-react";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const resources = [
   {
@@ -196,12 +197,7 @@ export default function ProfessionalResourcesPage() {
               </div>
             </section>
 
-            <footer className="text-center py-4">
-              <p className="text-caption flex items-center justify-center gap-1">
-                <Sparkles className="h-4 w-4 text-[var(--gold-500)]" />
-                You deserve support
-              </p>
-            </footer>
+            <SafetyFooter variant="prominent" />
           </div>
         </div>
       </div>

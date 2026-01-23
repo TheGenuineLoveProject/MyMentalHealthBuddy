@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, BookOpen, Search, ChevronDown, ChevronUp, Lightbulb, Heart, Brain, Sparkles } from "lucide-react";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const glossaryTerms = [
   {
@@ -468,12 +469,7 @@ export default function WellnessGlossaryPage() {
           )}
         </div>
 
-        <div className="text-center py-8 border-t border-slate-200 dark:border-slate-800">
-          <p className="text-sm text-slate-500 dark:text-slate-500">
-            This glossary provides general information for educational purposes only.
-            Please consult a mental health professional for personalized guidance and support.
-          </p>
-        </div>
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

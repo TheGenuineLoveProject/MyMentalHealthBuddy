@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import SafetyFooter from "../components/ui/SafetyFooter";
 import { 
   ArrowLeft, 
   ExternalLink,
@@ -273,14 +274,7 @@ export default function ResourcesPage() {
             </div>
           </section>
 
-          <footer className="card-bordered p-5 rounded-xl" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
-            <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
-              <strong>Disclaimer:</strong> This directory is provided for informational purposes only. 
-              The Genuine Love Project is not affiliated with these organizations and does not provide 
-              medical advice, diagnosis, or treatment. Always consult with qualified professionals for 
-              your specific needs.
-            </p>
-          </footer>
+          <SafetyFooter variant="prominent" />
         </div>
       </div>
     </div>
