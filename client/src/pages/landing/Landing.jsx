@@ -8,6 +8,8 @@ import {
   Sun,
   BookOpen,
 } from "lucide-react";
+import { useSEO } from "../../hooks/useSEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 function Pill({ children, icon: Icon }) {
   return (
@@ -56,6 +58,12 @@ function StatsCard({ value, label }) {
 export default function Landing() {
   const [location] = useLocation();
   const isActive = (path) => location === path;
+
+  useSEO({
+    title: "The Genuine Love Project — A Gentle Space for Healing",
+    description: "A private, trauma-informed sanctuary for emotional healing. Evidence-based tools for inner child work, nervous system regulation, and self-compassion.",
+    canonical: "/",
+  });
 
   return (
     <div className="min-h-screen hero-gradient overflow-hidden relative">
@@ -225,6 +233,8 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
+        <SafetyFooter variant="compact" className="mt-12" />
       </main>
     </div>
   );
