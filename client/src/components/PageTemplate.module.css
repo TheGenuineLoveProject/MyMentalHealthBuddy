@@ -1039,3 +1039,89 @@
     transform: none;
   }
 }
+
+/* ============================================
+   TONE-BASED STYLES
+   ============================================ */
+
+/* Quiet tone (Auth pages) - minimal stimulation, calm, safe */
+.toneQuiet {
+  --hero-bg-opacity: 0.02;
+  --pattern-opacity: 0.01;
+  --aura-opacity: 0.03;
+}
+
+.toneQuiet .heroSection {
+  min-height: 50vh;
+  padding: 3rem 1.5rem;
+}
+
+.toneQuiet .logoBadge {
+  opacity: 0.9;
+  box-shadow: 0 4px 16px rgba(143, 191, 159, 0.15);
+}
+
+/* Structured tone (Dashboard pages) - organized, clear next step */
+.toneStructured {
+  --hero-bg-opacity: 0.04;
+  --pattern-opacity: 0.02;
+}
+
+.toneStructured .heroSection {
+  min-height: 40vh;
+  padding: 2.5rem 1.5rem;
+}
+
+/* ============================================
+   REASSURANCE BLOCK (Quiet tone pages)
+   ============================================ */
+.reassuranceSection {
+  padding: 0 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.reassuranceCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  max-width: 480px;
+  margin: 0 auto;
+  background: linear-gradient(
+    135deg,
+    rgba(143, 191, 159, 0.08),
+    rgba(244, 199, 195, 0.06)
+  );
+  border: 1px solid rgba(143, 191, 159, 0.15);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.reassuranceIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--sacred-sage, #8fbf9f);
+  flex-shrink: 0;
+}
+
+.reassuranceText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--sacred-teal, #2f5d5d);
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .reassuranceSection {
+    padding: 0 1rem;
+  }
+  
+  .reassuranceCard {
+    padding: 0.875rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

@@ -360,6 +360,24 @@ function GentleDisclaimer({ disclaimer }) {
   );
 }
 
+function ReassuranceBlock({ reassurance, tone }) {
+  if (!reassurance || tone !== 'quiet') return null;
+  
+  return (
+    <aside 
+      className={styles.reassuranceSection}
+      aria-label="Reassurance"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <div className={styles.reassuranceCard}>
+        <Heart className={styles.reassuranceIcon} />
+        <p className={styles.reassuranceText}>{reassurance}</p>
+      </div>
+    </aside>
+  );
+}
+
 function BulletList({ bullets }) {
   return (
     <ul className={styles.bulletList} role="list">
@@ -433,9 +451,11 @@ export default function PageTemplate({ config, children }) {
   }
 
   const hasContentLevels = config.contentLevels && Object.keys(config.contentLevels).length > 0;
+  const tone = config.tone || 'default';
+  const toneClass = tone === 'quiet' ? styles.toneQuiet : tone === 'structured' ? styles.toneStructured : '';
 
   return (
-    <SacredLayout>
+    <SacredLayout className={toneClass}>
       <SEO 
         title={config.title}
         description={config.description}
@@ -467,8 +487,10 @@ export default function PageTemplate({ config, children }) {
         </nav>
       </header>
 
-      <main id="main-content">
+      <main id="main-content" className={toneClass}>
         <HeroSection hero={config.hero} />
+
+        <ReassuranceBlock reassurance={config.reassurance} tone={tone} />
 
         <NextStepBlock nextStep={config.nextStep} />
 
