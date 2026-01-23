@@ -274,6 +274,7 @@ function writeDiffJson(diffData) {
     generatedAt: new Date().toISOString(),
     status: 'drift',
     mode: 'verify',
+    recommendedCommand: 'npm run gen:pages:all && npm run verify:routes',
     summary: {
       added: diffData.added.length,
       removed: diffData.removed.length,
