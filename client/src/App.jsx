@@ -10,6 +10,7 @@ import SkipToContent from "./components/SkipToContent.jsx";
 import Home from "./pages/Home.jsx";
 import CanvaLanding from "./pages/CanvaLanding.jsx";
 import HealingLandingPage from "./pages/HealingLandingPage.jsx";
+import { AutopilotPage } from "./pages/_autopilot.jsx";
 import DesignSystem from "./pages/DesignSystem.jsx";
 import WireframeTemplates from "./pages/WireframeTemplates.jsx";
 import Login from "./pages/Login.jsx";
@@ -135,7 +136,7 @@ export default function App() {
               <Route path="/home" component={Home} />
               <Route path="/welcome" component={Home} />
               <Route path="/canva-landing" component={CanvaLanding} />
-              <Route path="/healing" component={HealingLandingPage} />
+              <Route path="/healing">{() => <AutopilotPage route="/healing" />}</Route>
               <Route path="/design-system" component={DesignSystem} />
               <Route path="/wireframes" component={WireframeTemplates} />
               <Route path="/login" component={Login} />

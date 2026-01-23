@@ -1,0 +1,90 @@
+/* SacredButton.module.css - Sacred Button CSS Module */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+}
+
+/* Primary variant */
+.primary {
+  background: linear-gradient(135deg, var(--sacred-teal, #2f5d5d), #1f4040);
+  color: white;
+  box-shadow: 0 4px 20px rgba(47, 93, 93, 0.3);
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(47, 93, 93, 0.4);
+}
+
+/* Secondary variant */
+.secondary {
+  background: transparent;
+  color: var(--sacred-teal, #2f5d5d);
+  border-color: var(--sacred-teal, #2f5d5d);
+}
+
+.secondary:hover {
+  background: rgba(143, 191, 159, 0.1);
+  border-color: var(--sacred-teal, #2f5d5d);
+}
+
+/* Ghost variant */
+.ghost {
+  background: transparent;
+  color: var(--sacred-teal, #2f5d5d);
+  border: none;
+}
+
+.ghost:hover {
+  background: rgba(143, 191, 159, 0.1);
+}
+
+/* Size variants */
+.sm {
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+}
+
+.lg {
+  padding: 1rem 2.25rem;
+  font-size: 1.125rem;
+}
+
+/* Icon styling */
+.button svg,
+.icon {
+  transform: scale(0.7);
+  transition: transform 0.2s ease;
+}
+
+.button:hover svg,
+.button:hover .icon {
+  transform: scale(0.7) translateX(2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  
+  .button:hover {
+    transform: none;
+  }
+}
