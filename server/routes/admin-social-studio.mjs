@@ -267,4 +267,100 @@ router.post("/export", requireAuth, requireAdmin, async (req, res) => {
   }
 });
 
+/* =====================================================
+ * ANALYTICS & METRICS
+ * ===================================================== */
+
+router.get("/analytics", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const allDrafts = await db.select().from(postDrafts);
+    const allEntries = await db.select().from(calendarEntries);
+    const allTemplates = await db.select().from(contentTemplates);
+    
+    const statusCounts = {
+      draft: 0,
+      review: 0,
+      approved: 0,
+      scheduled: 0,
+      exported: 0,
+      published: 0
+    };
+    
+    const platformCounts = {};
+    const weeklyPosts = {};
+    
+    allDrafts.forEach(draft => {
+      statusCounts[draft.status] = (statusCounts[draft.status] || 0) + 1;
+      platformCounts[draft.platform] = (platformCounts[draft.platform] || 0) + 1;
+      
+      const weekStart = getWeekStart(draft.createdAt);
+      weeklyPosts[weekStart] = (weeklyPosts[weekStart] || 0) + 1;
+    });
+    
+    const upcomingCount = allEntries.filter(e => new Date(e.scheduledDate) > new Date()).length;
+    
+    return success(res, {
+      totals: {
+        drafts: allDrafts.length,
+        templates: allTemplates.length,
+        scheduledEntries: allEntries.length,
+        upcoming: upcomingCount
+      },
+      statusBreakdown: statusCounts,
+      platformBreakdown: platformCounts,
+      weeklyActivity: Object.entries(weeklyPosts).slice(-8).map(([week, count]) => ({ week, count })),
+      contentHealth: {
+        pendingReview: statusCounts.review,
+        readyToPublish: statusCounts.approved,
+        inPipeline: statusCounts.draft + statusCounts.review
+      }
+    });
+  } catch (error) {
+    logger.error("Failed to fetch analytics:", error);
+    return badRequest(res, "Failed to fetch analytics");
+  }
+});
+
+function getWeekStart(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day;
+  const weekStart = new Date(d.setDate(diff));
+  return weekStart.toISOString().split('T')[0];
+}
+
+router.get("/analytics/content-calendar", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { month, year } = req.query;
+    const targetMonth = month ? parseInt(month) : new Date().getMonth();
+    const targetYear = year ? parseInt(year) : new Date().getFullYear();
+    
+    const startDate = new Date(targetYear, targetMonth, 1);
+    const endDate = new Date(targetYear, targetMonth + 1, 0);
+    
+    const entries = await db.select().from(calendarEntries);
+    const monthEntries = entries.filter(e => {
+      const entryDate = new Date(e.scheduledDate);
+      return entryDate >= startDate && entryDate <= endDate;
+    });
+    
+    const dayMap = {};
+    monthEntries.forEach(entry => {
+      const day = new Date(entry.scheduledDate).getDate();
+      if (!dayMap[day]) dayMap[day] = [];
+      dayMap[day].push(entry);
+    });
+    
+    return success(res, {
+      month: targetMonth,
+      year: targetYear,
+      totalPosts: monthEntries.length,
+      calendarDays: dayMap
+    });
+  } catch (error) {
+    logger.error("Failed to fetch calendar analytics:", error);
+    return badRequest(res, "Failed to fetch calendar analytics");
+  }
+});
+
 export default router;

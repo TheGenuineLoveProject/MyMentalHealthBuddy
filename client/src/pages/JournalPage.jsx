@@ -1,10 +1,69 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X } from "lucide-react";
+import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+
+const JOURNAL_PROMPTS = [
+  { category: "Gratitude", prompt: "What's one small thing that brought you comfort today?" },
+  { category: "Reflection", prompt: "What emotion have you been sitting with lately?" },
+  { category: "Self-Compassion", prompt: "If your best friend felt how you feel right now, what would you say to them?" },
+  { category: "Growth", prompt: "What's something you handled better this week than you would have before?" },
+  { category: "Present Moment", prompt: "What do you notice in your body right now?" },
+  { category: "Boundaries", prompt: "Is there something you need to say 'no' to that you've been avoiding?" },
+  { category: "Inner Child", prompt: "What would your younger self want you to know?" },
+  { category: "Release", prompt: "What are you ready to let go of?" },
+  { category: "Hope", prompt: "What possibility are you allowing yourself to believe in?" },
+  { category: "Safety", prompt: "Where in your life do you feel most safe and settled?" },
+];
+
+function JournalPrompts({ onSelectPrompt }) {
+  const [currentPrompt, setCurrentPrompt] = useState(() => 
+    JOURNAL_PROMPTS[Math.floor(Math.random() * JOURNAL_PROMPTS.length)]
+  );
+  
+  const refreshPrompt = () => {
+    const newPrompt = JOURNAL_PROMPTS[Math.floor(Math.random() * JOURNAL_PROMPTS.length)];
+    setCurrentPrompt(newPrompt);
+  };
+  
+  return (
+    <div className="mb-6 p-4 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)]/20" data-testid="journal-prompts">
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3 flex-1">
+          <div className="w-8 h-8 rounded-lg bg-[var(--primary)]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <Lightbulb className="w-4 h-4 text-[var(--primary)]" aria-hidden="true" />
+          </div>
+          <div>
+            <span className="text-xs font-medium text-[var(--primary)] uppercase tracking-wide">{currentPrompt.category}</span>
+            <p className="text-sm text-[var(--text-primary)] mt-1">{currentPrompt.prompt}</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <button
+            type="button"
+            onClick={refreshPrompt}
+            className="p-2 rounded-lg hover:bg-[var(--primary)]/20 transition text-[var(--primary)]"
+            aria-label="Get new prompt"
+            data-testid="button-refresh-prompt"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => onSelectPrompt(currentPrompt)}
+            className="px-3 py-1.5 text-xs font-medium bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition"
+            data-testid="button-use-prompt"
+          >
+            Use This
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function JournalPage() {
   const [showForm, setShowForm] = useState(false);
@@ -12,6 +71,12 @@ export default function JournalPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
+  
+  const handleSelectPrompt = (prompt) => {
+    setTitle(prompt.category + " Reflection");
+    setContent(prompt.prompt + "\n\n");
+    setShowForm(true);
+  };
 
   const { data: entries = [], isLoading } = useQuery({
     queryKey: ["/api/journal"],
@@ -118,6 +183,9 @@ export default function JournalPage() {
             </button>
           </header>
 
+          {/* Journal Prompts */}
+          {!showForm && <JournalPrompts onSelectPrompt={handleSelectPrompt} />}
+          
           {/* Error Alert */}
           {error && (
             <div className="mb-6 p-4 rounded-xl bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 text-[var(--accent-rose)] flex items-center justify-between" role="alert" data-testid="text-error">

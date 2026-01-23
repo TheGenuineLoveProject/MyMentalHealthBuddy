@@ -5,7 +5,8 @@ import {
   ArrowLeft, Plus, Calendar, FileText, CheckCircle, Clock, 
   Send, LayoutGrid, ListFilter, Sparkles, Instagram, 
   Twitter, Youtube, MessageCircle, Linkedin, AlertCircle,
-  ExternalLink, Settings, Wifi, WifiOff
+  ExternalLink, Settings, Wifi, WifiOff, TrendingUp, BarChart2,
+  Activity, PieChart
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -253,6 +254,130 @@ function PlatformConnections() {
   );
 }
 
+function ContentAnalytics() {
+  const { data: analytics, isLoading } = useQuery({
+    queryKey: ["/api/admin/social/analytics"],
+  });
+  
+  if (isLoading) {
+    return (
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+        <div className="animate-pulse">
+          <div className="h-5 bg-slate-200 dark:bg-slate-700 rounded w-48 mb-4" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map(i => (
+              <div key={i} className="h-20 bg-slate-200 dark:bg-slate-700 rounded" />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
+  if (!analytics) return null;
+  
+  const { totals, contentHealth, platformBreakdown, weeklyActivity } = analytics;
+  
+  return (
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+      <div className="flex items-center gap-3 mb-6">
+        <BarChart2 className="w-5 h-5 text-[var(--glp-sage)]" />
+        <h3 className="font-semibold text-slate-900 dark:text-white">Content Analytics</h3>
+      </div>
+      
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <FileText className="w-4 h-4 text-slate-500" />
+            <span className="text-xs text-slate-500 dark:text-slate-400">Total Drafts</span>
+          </div>
+          <p className="text-2xl font-bold text-slate-900 dark:text-white">{totals?.drafts || 0}</p>
+        </div>
+        <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <CheckCircle className="w-4 h-4 text-emerald-500" />
+            <span className="text-xs text-emerald-600 dark:text-emerald-400">Ready to Publish</span>
+          </div>
+          <p className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">{contentHealth?.readyToPublish || 0}</p>
+        </div>
+        <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <Clock className="w-4 h-4 text-amber-500" />
+            <span className="text-xs text-amber-600 dark:text-amber-400">Pending Review</span>
+          </div>
+          <p className="text-2xl font-bold text-amber-700 dark:text-amber-300">{contentHealth?.pendingReview || 0}</p>
+        </div>
+        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+          <div className="flex items-center gap-2 mb-2">
+            <Calendar className="w-4 h-4 text-blue-500" />
+            <span className="text-xs text-blue-600 dark:text-blue-400">Scheduled</span>
+          </div>
+          <p className="text-2xl font-bold text-blue-700 dark:text-blue-300">{totals?.upcoming || 0}</p>
+        </div>
+      </div>
+      
+      <div className="grid md:grid-cols-2 gap-6">
+        <div>
+          <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+            <PieChart className="w-4 h-4" />
+            Content by Platform
+          </h4>
+          <div className="space-y-2">
+            {Object.entries(platformBreakdown || {}).map(([platform, count]) => {
+              const platformInfo = PLATFORMS.find(p => p.id === platform);
+              return (
+                <div key={platform} className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/50 rounded">
+                  <div className="flex items-center gap-2">
+                    <div 
+                      className="w-6 h-6 rounded flex items-center justify-center"
+                      style={{ backgroundColor: `${platformInfo?.color || '#666'}20` }}
+                    >
+                      {platformInfo?.icon && <platformInfo.icon className="w-3 h-3" style={{ color: platformInfo.color }} />}
+                    </div>
+                    <span className="text-sm text-slate-700 dark:text-slate-300 capitalize">{platform}</span>
+                  </div>
+                  <span className="text-sm font-medium text-slate-900 dark:text-white">{count}</span>
+                </div>
+              );
+            })}
+            {Object.keys(platformBreakdown || {}).length === 0 && (
+              <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+                No platform data yet
+              </p>
+            )}
+          </div>
+        </div>
+        
+        <div>
+          <h4 className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3 flex items-center gap-2">
+            <Activity className="w-4 h-4" />
+            Weekly Activity
+          </h4>
+          <div className="space-y-2">
+            {(weeklyActivity || []).slice(-5).map(({ week, count }) => (
+              <div key={week} className="flex items-center gap-3">
+                <span className="text-xs text-slate-500 dark:text-slate-400 w-20">{week}</span>
+                <div className="flex-1 h-3 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-[var(--glp-sage)] rounded-full transition-all"
+                    style={{ width: `${Math.min(100, (count / 10) * 100)}%` }}
+                  />
+                </div>
+                <span className="text-xs font-medium text-slate-700 dark:text-slate-300 w-8 text-right">{count}</span>
+              </div>
+            ))}
+            {(weeklyActivity || []).length === 0 && (
+              <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+                No activity data yet
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function SocialDashboard() {
   const [filter, setFilter] = useState("all");
   
@@ -296,6 +421,8 @@ export default function SocialDashboard() {
         </div>
         
         <QuickStats drafts={drafts} />
+        
+        <ContentAnalytics />
         
         <PlatformConnections />
         
