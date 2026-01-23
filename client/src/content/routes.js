@@ -569,70 +569,57 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Pricing',
     title: 'Pricing — The Genuine Love Project',
-    description: 'Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you are ready.',
+    description: 'Simple, transparent pricing. Start free and stay free as long as you need. Upgrade only when it feels right.',
     hero: {
-      eyebrow: 'Transparent and accessible',
-      title: 'Healing support should be',
-      titleHighlight: 'available to everyone.',
-      subtitle: 'We believe cost should not be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.',
-      primaryCta: { label: 'Start free today', href: '/register' },
-      secondaryCta: { label: 'See how it works', href: '#how-it-works' }
+      eyebrow: 'Simple and clear',
+      title: 'Start free.',
+      titleHighlight: 'Stay as long as you need.',
+      subtitle: 'Our free tools are genuinely free—no trials, no hidden fees. If you ever want more, options are here. No pressure either way.',
+      primaryCta: { label: 'Create free account', href: '/register' },
+      secondaryCta: { label: 'Explore what is included', href: '#how-it-works' }
     },
     modules: [
-      { icon: 'Heart', title: 'Free Core Tools', description: 'Journaling, mood tracking, and grounding practices—free forever, no strings attached.' },
-      { icon: 'Star', title: 'Premium Support', description: 'Unlimited AI companion, advanced healing journeys, and personalized insights.' },
-      { icon: 'Sparkles', title: 'Lifetime Access', description: 'One payment, forever access. No recurring charges, complete peace of mind.' }
+      { icon: 'Heart', title: 'Begin with free tools', description: 'Journaling, mood tracking, and grounding—yours to keep.' },
+      { icon: 'Star', title: 'Expand when ready', description: 'Unlock unlimited AI companion and deeper healing journeys.' },
+      { icon: 'Sparkles', title: 'One-time option available', description: 'Lifetime access with a single payment, if that feels better.' }
     ],
     sections: [
       {
-        id: 'how-it-works',
-        eyebrow: 'How It Works',
-        title: 'Getting started is simple',
-        subtitle: 'No pressure, no commitments. Just support when you need it.',
-        variant: 'glow',
-        cards: [
-          { icon: 'User', title: 'Step 1: Create Your Account', text: 'Sign up in under a minute. No credit card required for free access.' },
-          { icon: 'Compass', title: 'Step 2: Explore Free Tools', text: 'Use journaling, breathing exercises, and grounding practices as long as you like.' },
-          { icon: 'Star', title: 'Step 3: Upgrade If You Wish', text: 'When you want more, Premium unlocks unlimited AI companion and advanced features.' },
-          { icon: 'Heart', title: 'Step 4: Heal at Your Pace', text: 'Whether free or Premium, this space is here whenever you need it.' }
-        ]
-      },
-      {
-        id: 'plans',
-        eyebrow: 'Simple Options',
-        title: 'Take what you need, when you need it',
-        subtitle: 'There is no pressure here. Many people find the free tools are enough.',
-        variant: 'pattern',
-        cards: [
-          { icon: 'Heart', title: 'Free Forever', text: 'Core journaling, mood tracking, breathing exercises, and grounding practices. No credit card needed.' },
-          { icon: 'Star', title: 'Premium', text: 'Unlimited AI companion conversations, advanced healing journeys, and personalized insights. $12/month.' },
-          { icon: 'Sparkles', title: 'Lifetime Access', text: 'Everything in Premium, forever. One payment, no recurring charges. $149 once.' }
-        ]
-      },
-      {
-        id: 'philosophy',
-        eyebrow: 'Our Promise',
-        title: 'We are not here to sell you anything',
-        subtitle: 'Our goal is to support your healing, not pressure you into purchases.',
+        id: 'safety',
+        eyebrow: 'What to Expect',
+        title: 'No surprises, no pressure',
+        subtitle: 'We want you to feel safe here—including around money.',
         variant: 'plain',
         bullets: [
-          'We will never use urgency tactics or manipulative pricing',
-          'Cancel Premium anytime with one click—no questions, no guilt',
-          'Your data stays yours. Export everything, even if you leave',
-          'If cost is a barrier, reach out. We will find a way to help',
-          'Free tools are genuinely free—no trial periods, no hidden fees'
+          'Free means free. No credit card required, no trial countdown.',
+          'Cancel anytime with one click. No hoops, no guilt.',
+          'Your data stays yours. Export everything, even if you leave.',
+          'If cost is a barrier, reach out. We will find a way.'
         ]
       },
       {
-        id: 'faq',
-        eyebrow: 'Common Questions',
-        title: 'You might be wondering',
-        subtitle: 'Here are answers to questions we hear often.',
+        id: 'how-it-works',
+        eyebrow: 'How It Works',
+        title: 'Three simple steps',
+        subtitle: 'Start where you are. Move at your own pace.',
         variant: 'glow',
         cards: [
-          { icon: 'HelpCircle', title: 'Is the free version really free?', text: 'Yes. No trial period, no hidden fees. Use it as long as you like.' },
-          { icon: 'CreditCard', title: 'Can I try Premium first?', text: 'Absolutely. Your first 7 days of Premium are free to explore.' },
-          { icon: 'Users', title: 'Do you offer reduced pricing?', text: 'Yes. If cost is a barrier, reach out and we will find a way to help.' }
+          { icon: 'User', title: 'Create your account', text: 'Sign up in under a minute. Free access starts immediately.' },
+          { icon: 'Compass', title: 'Explore the tools', text: 'Use journaling, breathing exercises, and grounding practices.' },
+          { icon: 'Heart', title: 'Upgrade if you wish', text: 'Premium unlocks more when you are ready. No rush.' }
+        ]
+      },
+      {
+        id: 'trust',
+        eyebrow: 'Our Approach',
+        title: 'Built on evidence, not hype',
+        subtitle: 'We draw from trauma-informed research and respect your boundaries.',
+        variant: 'pattern',
+        bullets: [
+          'Tools grounded in somatic, cognitive, and compassion-based practices.',
+          'No urgency tactics. No countdown timers. No guilt.',
+          'Designed by people who understand healing takes time.',
+          'Your nervous system deserves a calm experience—even on a pricing page.'
         ]
       }
     ]

@@ -1,5 +1,5 @@
 {
-  "snapshotHash": "0c94fae01896f1ced08e109ece1cc6625d69bd2c88cf90a466ee70503f2245f7",
+  "snapshotHash": "118e9fb16244f172d996867dcbad4f3e9e42651056ebebd15587b390741c991c",
   "categoryOrder": [
     {
       "letter": "A",
@@ -128,7 +128,7 @@
     "/original-home": "f7e4bda392691091935b930af1cc8657fe58d0cb5cb3fd425cf01a4f9140338e",
     "/philosophical-inquiry": "a7f004bd2b57513580adb5775de99ffd0a688052c2ce99a609dea8e7c39830e5",
     "/premium": "92e148ec262fd4f6fecbb5115c1989ef58b10c7fc4b6bb242706c628ebe36d59",
-    "/pricing": "5539f3c3c1df0f7a5ff5765c8beaf702990c58bca7ed7535d851ffe536713148",
+    "/pricing": "34f6179cde7558c781af476cfdeeedae642514f76829a572656e7403cb3d0c58",
     "/privacy": "8edabe77d880c24cc94d53acd75e4aa7b0e1a592fd67c035cac474a7ec6edfa3",
     "/professional-resources": "89633f4a858d4e20b8d9de40e79e30a1dbc7a942c5125faaf8e484232899e427",
     "/progress": "43e423f3c2390b2784c3a92ad45366575f839a9866230b8f1556b0a46f3f838b",
@@ -1940,22 +1940,22 @@
       "aliasOf": null,
       "pattern": null,
       "title": "Pricing — The Genuine Love Project",
-      "description": "Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you are ready.",
+      "description": "Simple, transparent pricing. Start free and stay free as long as you need. Upgrade only when it feels right.",
       "hero": {
-        "title": "Healing support should be",
-        "subtitle": "We believe cost should not be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.",
+        "title": "Start free.",
+        "subtitle": "Our free tools are genuinely free—no trials, no hidden fees. If you ever want more, options are here. No pressure either way.",
         "primaryCta": {
-          "label": "Start free today",
+          "label": "Create free account",
           "href": "/register"
         },
         "secondaryCta": {
-          "label": "See how it works",
+          "label": "Explore what is included",
           "href": "#how-it-works"
         }
       },
-      "sectionsCount": 4,
+      "sectionsCount": 3,
       "modulesCount": 3,
-      "routeHash": "5539f3c3c1df0f7a5ff5765c8beaf702990c58bca7ed7535d851ffe536713148"
+      "routeHash": "34f6179cde7558c781af476cfdeeedae642514f76829a572656e7403cb3d0c58"
     },
     {
       "route": "/privacy",
