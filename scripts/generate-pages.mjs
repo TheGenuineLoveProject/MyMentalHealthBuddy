@@ -48,6 +48,8 @@ const GENERATED_MARKER = '// @generated';
 const REPORTS_DIR = path.join(ROOT, 'reports');
 const MANIFEST_PATH = path.join(REPORTS_DIR, 'routes.generated.json');
 const HASH_PATH = path.join(REPORTS_DIR, 'routes.generated.sha256');
+const CONFIG_SNAPSHOT_PATH = path.join(REPORTS_DIR, 'routes.config.snapshot.json');
+const CONFIG_HASH_PATH = path.join(REPORTS_DIR, 'routes.config.sha256');
 
 // ============================================================================
 // PARSE COMMAND LINE ARGUMENTS
@@ -816,10 +818,83 @@ function writeManifest(report) {
 }
 
 // ============================================================================
+// CONFIG SNAPSHOT GENERATION (Stable/Deterministic)
+// ============================================================================
+
+async function writeConfigSnapshot() {
+  ensureDir(REPORTS_DIR);
+
+  // Load routes from config
+  const routes = await loadRoutes();
+
+  // Build stable routes index with only deterministic fields
+  const routesIndex = routes.map(routeConfig => {
+    // Normalize undefined to null for consistent output
+    const normalize = (val) => (val === undefined ? null : val);
+
+    // Detect if route is a pattern (has :param)
+    const pattern = routeConfig.route.includes(':') ? routeConfig.route : null;
+
+    // Count sections and modules if present
+    const sectionsCount = Array.isArray(routeConfig.sections) ? routeConfig.sections.length : 0;
+    const modulesCount = Array.isArray(routeConfig.modules) ? routeConfig.modules.length : 0;
+
+    // Build hero object if present
+    let hero = null;
+    if (routeConfig.hero) {
+      hero = {
+        title: normalize(routeConfig.hero.title),
+        subtitle: normalize(routeConfig.hero.subtitle),
+        primaryCta: routeConfig.hero.primaryCta ? {
+          label: normalize(routeConfig.hero.primaryCta.label),
+          href: normalize(routeConfig.hero.primaryCta.href)
+        } : null,
+        secondaryCta: routeConfig.hero.secondaryCta ? {
+          label: normalize(routeConfig.hero.secondaryCta.label),
+          href: normalize(routeConfig.hero.secondaryCta.href)
+        } : null
+      };
+    }
+
+    return {
+      route: routeConfig.route,
+      category: normalize(routeConfig.category),
+      aliasOf: normalize(routeConfig.aliasOf),
+      pattern,
+      title: normalize(routeConfig.title || routeConfig.pageLabel),
+      description: normalize(routeConfig.description),
+      hero,
+      sectionsCount,
+      modulesCount
+    };
+  });
+
+  // Sort by route ascending for deterministic output
+  routesIndex.sort((a, b) => a.route.localeCompare(b.route));
+
+  // Build canonical snapshot
+  const snapshot = {
+    categoryOrder: CATEGORY_ORDER,
+    routesIndex
+  };
+
+  // Write snapshot with stable formatting
+  const snapshotJson = JSON.stringify(snapshot, null, 2);
+  fs.writeFileSync(CONFIG_SNAPSHOT_PATH, snapshotJson, 'utf8');
+
+  // Compute and write sha256 hash
+  const snapshotHash = crypto.createHash('sha256').update(snapshotJson).digest('hex');
+  fs.writeFileSync(CONFIG_HASH_PATH, snapshotHash + '\n', 'utf8');
+
+  console.log(`📸 Config snapshot written: ${path.relative(ROOT, CONFIG_SNAPSHOT_PATH)}`);
+  console.log(`🔐 Config hash written: ${path.relative(ROOT, CONFIG_HASH_PATH)}`);
+}
+
+// ============================================================================
 // REPORT GENERATION
 // ============================================================================
 
-function printReport(report, mode, extras = {}) {
+async function printReport(report, mode, extras = {}) {
   console.log('\n' + '═'.repeat(60));
   console.log('📋 GENERATOR REPORT');
   console.log('═'.repeat(60));
@@ -930,6 +1005,9 @@ function printReport(report, mode, extras = {}) {
   // Write manifest
   writeManifest(report);
 
+  // Write config snapshot (stable/deterministic)
+  await writeConfigSnapshot();
+
   if (report.errors.length > 0) {
     process.exit(1);
   }
@@ -944,16 +1022,16 @@ async function main() {
   
   if (mode === 'landing') {
     report = generateLandingPages();
-    printReport(report, mode);
+    await printReport(report, mode);
   } else if (mode === 'category') {
     report = await generateCategoryPages(category);
-    printReport(report, mode, { category });
+    await printReport(report, mode, { category });
   } else if (mode === 'range') {
     report = await generateRangePages(fromLetter, toLetter);
-    printReport(report, mode, { range: { from: fromLetter, to: toLetter } });
+    await printReport(report, mode, { range: { from: fromLetter, to: toLetter } });
   } else {
     report = await generateAllPages();
-    printReport(report, mode);
+    await printReport(report, mode);
   }
 
   console.log('🎉 Page generation complete!\n');

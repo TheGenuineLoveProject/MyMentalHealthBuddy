@@ -1,0 +1,2368 @@
+{
+  "categoryOrder": [
+    {
+      "letter": "A",
+      "category": "Landing"
+    },
+    {
+      "letter": "B",
+      "category": "Authentication"
+    },
+    {
+      "letter": "C",
+      "category": "Dashboard & Core"
+    },
+    {
+      "letter": "D",
+      "category": "AI & Chat"
+    },
+    {
+      "letter": "E",
+      "category": "Wellness & Healing Tools"
+    },
+    {
+      "letter": "F",
+      "category": "Advanced & Mastery"
+    },
+    {
+      "letter": "G",
+      "category": "Content & Learning"
+    },
+    {
+      "letter": "H",
+      "category": "Community & Social"
+    },
+    {
+      "letter": "I",
+      "category": "Support & Resources"
+    },
+    {
+      "letter": "J",
+      "category": "Legal & Policy"
+    },
+    {
+      "letter": "K",
+      "category": "Account & Settings"
+    },
+    {
+      "letter": "L",
+      "category": "Admin"
+    },
+    {
+      "letter": "M",
+      "category": "System & Utility"
+    }
+  ],
+  "routesIndex": [
+    {
+      "route": "/",
+      "category": "landing",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "The Genuine Love Project — A Gentle Space for Healing",
+      "description": "A private, trauma-informed sanctuary for emotional healing. Evidence-based tools for inner child work, nervous system regulation, and self-compassion—available whenever you need them.",
+      "hero": {
+        "title": "You deserve a gentle space",
+        "subtitle": "This is a quiet corner of the internet built for people who carry more than they show. Here, you can process grief, calm your nervous system, reconnect with your inner child, and learn to hold yourself with compassion—all in complete privacy.",
+        "primaryCta": {
+          "label": "Start gently",
+          "href": "/register"
+        },
+        "secondaryCta": {
+          "label": "Explore at your pace",
+          "href": "#pathways"
+        }
+      },
+      "sectionsCount": 3,
+      "modulesCount": 0
+    },
+    {
+      "route": "/account/billing",
+      "category": "account",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Billing — The Genuine Love Project",
+      "description": "Manage your subscription and billing.",
+      "hero": {
+        "title": "Billing &",
+        "subtitle": "Manage your payment and subscription details.",
+        "primaryCta": {
+          "label": "Manage Billing",
+          "href": "#billing"
+        },
+        "secondaryCta": {
+          "label": "View History",
+          "href": "#history"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/account/profile",
+      "category": "account",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Profile — The Genuine Love Project",
+      "description": "Manage your profile information.",
+      "hero": {
+        "title": "Profile",
+        "subtitle": "Manage your personal information.",
+        "primaryCta": {
+          "label": "Edit Profile",
+          "href": "#profile"
+        },
+        "secondaryCta": {
+          "label": "View Public Profile",
+          "href": "#public"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/account/settings",
+      "category": "account",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Account Settings — The Genuine Love Project",
+      "description": "Manage your account settings and preferences.",
+      "hero": {
+        "title": "Account",
+        "subtitle": "Security, notifications, and account preferences.",
+        "primaryCta": {
+          "label": "Edit Settings",
+          "href": "#settings"
+        },
+        "secondaryCta": {
+          "label": "Security",
+          "href": "#security"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/admin",
+      "category": "admin",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Admin — The Genuine Love Project",
+      "description": "Platform administration dashboard.",
+      "hero": {
+        "title": "Admin",
+        "subtitle": "Platform management and oversight.",
+        "primaryCta": {
+          "label": "View Stats",
+          "href": "#stats"
+        },
+        "secondaryCta": {
+          "label": "User Management",
+          "href": "#users"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/advanced",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Advanced Practices — The Genuine Love Project",
+      "description": "Advanced healing practices for experienced practitioners.",
+      "hero": {
+        "title": "Advanced practices for",
+        "subtitle": "For those ready to explore deeper dimensions.",
+        "primaryCta": {
+          "label": "Start Advanced",
+          "href": "#advanced"
+        },
+        "secondaryCta": {
+          "label": "Prerequisites",
+          "href": "#prerequisites"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/affirmations",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Affirmations — The Genuine Love Project",
+      "description": "Positive affirmations for healing, self-love, and personal growth.",
+      "hero": {
+        "title": "Rewire your mind with",
+        "subtitle": "Affirmations that speak to your healing journey.",
+        "primaryCta": {
+          "label": "Daily Affirmation",
+          "href": "#daily"
+        },
+        "secondaryCta": {
+          "label": "Create Your Own",
+          "href": "#custom"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/analytics",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Analytics — The Genuine Love Project",
+      "description": "Deep insights into your healing journey with data visualization.",
+      "hero": {
+        "title": "See how far",
+        "subtitle": "Visual insights into your growth and patterns.",
+        "primaryCta": {
+          "label": "View Analytics",
+          "href": "#analytics"
+        },
+        "secondaryCta": {
+          "label": "Export Data",
+          "href": "#export"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/atlas",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Intellectual Atlas — The Genuine Love Project",
+      "description": "Navigate the landscape of healing knowledge.",
+      "hero": {
+        "title": "Navigate the",
+        "subtitle": "A comprehensive map of healing concepts and connections.",
+        "primaryCta": {
+          "label": "Explore Atlas",
+          "href": "#atlas"
+        },
+        "secondaryCta": {
+          "label": "Start Here",
+          "href": "#start"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/behavior-change",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Behavior Change — The Genuine Love Project",
+      "description": "Evidence-based tools for creating lasting positive changes.",
+      "hero": {
+        "title": "Build habits that",
+        "subtitle": "Science-backed approaches to behavioral transformation.",
+        "primaryCta": {
+          "label": "Start Tracking",
+          "href": "#track"
+        },
+        "secondaryCta": {
+          "label": "Habit Library",
+          "href": "#library"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/blog",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Blog — The Genuine Love Project",
+      "description": "Articles and insights on healing, growth, and emotional wellness.",
+      "hero": {
+        "title": "Stories of",
+        "subtitle": "Articles, essays, and insights to support your journey.",
+        "primaryCta": {
+          "label": "Read Latest",
+          "href": "#latest"
+        },
+        "secondaryCta": {
+          "label": "Browse Topics",
+          "href": "#topics"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/blog/:slug",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": "/blog/:slug",
+      "title": "Article — The Genuine Love Project",
+      "description": "Read this article on healing and growth.",
+      "hero": {
+        "title": "Reading",
+        "subtitle": "Take your time with this content.",
+        "primaryCta": {
+          "label": "Continue Reading",
+          "href": "#content"
+        },
+        "secondaryCta": {
+          "label": "More Articles",
+          "href": "/blog"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/body-wellness",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Body Wellness — The Genuine Love Project",
+      "description": "Mind-body connection practices for physical and emotional healing.",
+      "hero": {
+        "title": "Listen to your",
+        "subtitle": "Practices to reconnect with and honor your physical self.",
+        "primaryCta": {
+          "label": "Body Check-In",
+          "href": "#checkin"
+        },
+        "secondaryCta": {
+          "label": "Movement Practices",
+          "href": "#movement"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/breathing",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Breathing Exercises — The Genuine Love Project",
+      "description": "Calming breath practices to regulate your nervous system.",
+      "hero": {
+        "title": "Find calm through",
+        "subtitle": "Simple yet powerful techniques to soothe your nervous system.",
+        "primaryCta": {
+          "label": "Start Breathing",
+          "href": "#exercises"
+        },
+        "secondaryCta": {
+          "label": "Learn the Science",
+          "href": "#science"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/calming-scenes",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Calming Scenes — The Genuine Love Project",
+      "description": "Immersive visual and audio experiences for relaxation.",
+      "hero": {
+        "title": "Find serenity in",
+        "subtitle": "Immersive scenes to calm your mind and soothe your soul.",
+        "primaryCta": {
+          "label": "Explore Scenes",
+          "href": "#scenes"
+        },
+        "secondaryCta": {
+          "label": "Sleep Sounds",
+          "href": "#sounds"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/chat",
+      "category": "ai",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "AI Companion — The Genuine Love Project",
+      "description": "Your 24/7 trauma-informed AI companion for emotional support and guidance.",
+      "hero": {
+        "title": "A compassionate ear",
+        "subtitle": "Talk through anything with our trauma-informed AI companion.",
+        "primaryCta": {
+          "label": "Start Conversation",
+          "href": "#chat"
+        },
+        "secondaryCta": {
+          "label": "Learn About AI Safety",
+          "href": "/safety"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/cognitive-architecture",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Cognitive Architecture — The Genuine Love Project",
+      "description": "Understand and reshape your cognitive patterns.",
+      "hero": {
+        "title": "Architect your",
+        "subtitle": "Understand and deliberately shape how you think.",
+        "primaryCta": {
+          "label": "Explore Architecture",
+          "href": "#architecture"
+        },
+        "secondaryCta": {
+          "label": "Assessment",
+          "href": "#assessment"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/cognitive-tools",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Cognitive Tools — The Genuine Love Project",
+      "description": "Tools for reframing thoughts and managing cognitive patterns.",
+      "hero": {
+        "title": "Reshape your",
+        "subtitle": "Evidence-based cognitive techniques for mental wellness.",
+        "primaryCta": {
+          "label": "Explore Tools",
+          "href": "#tools"
+        },
+        "secondaryCta": {
+          "label": "Thought Record",
+          "href": "#record"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/collaborative-lab",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Collaborative Lab — The Genuine Love Project",
+      "description": "Explore and experiment with healing practices together.",
+      "hero": {
+        "title": "The healing",
+        "subtitle": "A space to explore and experiment with new approaches.",
+        "primaryCta": {
+          "label": "Enter Lab",
+          "href": "#lab"
+        },
+        "secondaryCta": {
+          "label": "Current Projects",
+          "href": "#projects"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/community",
+      "category": "community",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Community — The Genuine Love Project",
+      "description": "A safe, moderated space for shared healing.",
+      "hero": {
+        "title": "Healing",
+        "subtitle": "A safe, moderated community of healing hearts.",
+        "primaryCta": {
+          "label": "Enter Community",
+          "href": "#community"
+        },
+        "secondaryCta": {
+          "label": "Guidelines",
+          "href": "/ethics"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/community/discussion/:id",
+      "category": "community",
+      "aliasOf": null,
+      "pattern": "/community/discussion/:id",
+      "title": "Discussion — The Genuine Love Project",
+      "description": "Join this community discussion.",
+      "hero": {
+        "title": "Join the",
+        "subtitle": "Share your thoughts in a safe space.",
+        "primaryCta": {
+          "label": "Add Reply",
+          "href": "#reply"
+        },
+        "secondaryCta": {
+          "label": "Back to Community",
+          "href": "/community"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/companion",
+      "category": "ai",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Your AI Companion — The Genuine Love Project",
+      "description": "A personalized AI companion for your healing journey.",
+      "hero": {
+        "title": "Meet your",
+        "subtitle": "An AI designed to understand and support your unique journey.",
+        "primaryCta": {
+          "label": "Start Chat",
+          "href": "#companion"
+        },
+        "secondaryCta": {
+          "label": "Customize Companion",
+          "href": "#settings"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/content-admin",
+      "category": "admin",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Content Admin — The Genuine Love Project",
+      "description": "Manage platform content.",
+      "hero": {
+        "title": "Content",
+        "subtitle": "Manage and moderate platform content.",
+        "primaryCta": {
+          "label": "Manage Content",
+          "href": "#content"
+        },
+        "secondaryCta": {
+          "label": "Moderation Queue",
+          "href": "#queue"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/content-index",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Content Index — The Genuine Love Project",
+      "description": "Browse all content organized by topic.",
+      "hero": {
+        "title": "Find what",
+        "subtitle": "Our complete content library, organized for easy browsing.",
+        "primaryCta": {
+          "label": "Browse All",
+          "href": "#index"
+        },
+        "secondaryCta": {
+          "label": "Search",
+          "href": "#search"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/content-studio",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Content Studio — The Genuine Love Project",
+      "description": "Create and manage your personal content.",
+      "hero": {
+        "title": "Your creative",
+        "subtitle": "Tools for creating and organizing your personal content.",
+        "primaryCta": {
+          "label": "Open Studio",
+          "href": "#studio"
+        },
+        "secondaryCta": {
+          "label": "My Content",
+          "href": "#my-content"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/control",
+      "category": "admin",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Control Panel — The Genuine Love Project",
+      "description": "Platform control panel.",
+      "hero": {
+        "title": "Control",
+        "subtitle": "System controls and configuration.",
+        "primaryCta": {
+          "label": "View Controls",
+          "href": "#controls"
+        },
+        "secondaryCta": {
+          "label": "System Status",
+          "href": "/health"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/crisis",
+      "category": "ai",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Crisis Support — The Genuine Love Project",
+      "description": "Immediate support and resources if you're in crisis.",
+      "hero": {
+        "title": "Immediate",
+        "subtitle": "If you're in crisis, we're here to help you find support right now.",
+        "primaryCta": {
+          "label": "Get Support Now",
+          "href": "#support"
+        },
+        "secondaryCta": {
+          "label": "Crisis Resources",
+          "href": "#resources"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/crm",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Relationship Manager — The Genuine Love Project",
+      "description": "Track and nurture your important relationships.",
+      "hero": {
+        "title": "Nurture your",
+        "subtitle": "Tools to strengthen the bonds that matter most.",
+        "primaryCta": {
+          "label": "View Connections",
+          "href": "#connections"
+        },
+        "secondaryCta": {
+          "label": "Add Relationship",
+          "href": "#add"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/daily-routines",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Daily Routines — The Genuine Love Project",
+      "description": "Create nurturing daily routines for consistent well-being.",
+      "hero": {
+        "title": "Routines that",
+        "subtitle": "Build a daily structure that supports your healing.",
+        "primaryCta": {
+          "label": "Build Routine",
+          "href": "#build"
+        },
+        "secondaryCta": {
+          "label": "Templates",
+          "href": "#templates"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/daily-wisdom",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Daily Wisdom — The Genuine Love Project",
+      "description": "Advanced daily wisdom practices.",
+      "hero": {
+        "title": "Wisdom for",
+        "subtitle": "Start each day with meaningful insight.",
+        "primaryCta": {
+          "label": "Today's Wisdom",
+          "href": "#today"
+        },
+        "secondaryCta": {
+          "label": "Archive",
+          "href": "#archive"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/dashboard",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Dashboard — The Genuine Love Project",
+      "description": "Your personal healing dashboard. Track progress, access tools, and continue your journey.",
+      "hero": {
+        "title": "Welcome to your",
+        "subtitle": "Everything you need, all in one place.",
+        "primaryCta": {
+          "label": "Start Today's Practice",
+          "href": "/today"
+        },
+        "secondaryCta": {
+          "label": "View Progress",
+          "href": "/progress"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/design-dashboard",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Design Dashboard — The Genuine Love Project",
+      "description": "Design metrics and overview.",
+      "hero": {
+        "title": "Design",
+        "subtitle": "Overview of design system usage and metrics.",
+        "primaryCta": {
+          "label": "View Metrics",
+          "href": "#metrics"
+        },
+        "secondaryCta": {
+          "label": "Component Stats",
+          "href": "#stats"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/design-system",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Design System — The Genuine Love Project",
+      "description": "Platform design system and component library.",
+      "hero": {
+        "title": "Design",
+        "subtitle": "Our component library and design guidelines.",
+        "primaryCta": {
+          "label": "Browse Components",
+          "href": "#components"
+        },
+        "secondaryCta": {
+          "label": "Guidelines",
+          "href": "#guidelines"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/disclaimer",
+      "category": "legal",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Disclaimer — The Genuine Love Project",
+      "description": "Important disclaimers about our services.",
+      "hero": {
+        "title": "Disclaimer.",
+        "subtitle": "Important information about the nature of our services.",
+        "primaryCta": {
+          "label": "Read Disclaimer",
+          "href": "#disclaimer"
+        },
+        "secondaryCta": {
+          "label": "Questions?",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/elite-tools",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Elite Tools — The Genuine Love Project",
+      "description": "Premium tools for advanced practitioners.",
+      "hero": {
+        "title": "Elite tools for",
+        "subtitle": "The most powerful tools in our collection.",
+        "primaryCta": {
+          "label": "Access Tools",
+          "href": "#tools"
+        },
+        "secondaryCta": {
+          "label": "Upgrade",
+          "href": "/upgrade"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/emotional-intelligence",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Emotional Intelligence — The Genuine Love Project",
+      "description": "Develop your emotional awareness and regulation skills.",
+      "hero": {
+        "title": "Master the art of",
+        "subtitle": "Build skills for understanding and managing emotions.",
+        "primaryCta": {
+          "label": "Start Learning",
+          "href": "#modules"
+        },
+        "secondaryCta": {
+          "label": "EQ Assessment",
+          "href": "#assessment"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/ethics",
+      "category": "legal",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Ethics & Guidelines — The Genuine Love Project",
+      "description": "Our ethical guidelines and community standards.",
+      "hero": {
+        "title": "Ethics &",
+        "subtitle": "The principles that guide our platform and community.",
+        "primaryCta": {
+          "label": "Read Guidelines",
+          "href": "#guidelines"
+        },
+        "secondaryCta": {
+          "label": "Report Issue",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/examples",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Examples — The Genuine Love Project",
+      "description": "Real examples of healing practices in action.",
+      "hero": {
+        "title": "Real",
+        "subtitle": "See how others use these tools in their practice.",
+        "primaryCta": {
+          "label": "Browse Examples",
+          "href": "#examples"
+        },
+        "secondaryCta": {
+          "label": "Submit Your Own",
+          "href": "#submit"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/faq",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "FAQ — The Genuine Love Project",
+      "description": "Frequently asked questions about the platform.",
+      "hero": {
+        "title": "Common",
+        "subtitle": "Find answers to frequently asked questions.",
+        "primaryCta": {
+          "label": "Browse FAQ",
+          "href": "#faq"
+        },
+        "secondaryCta": {
+          "label": "Contact Support",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/forgot-password",
+      "category": "auth",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Reset Password — The Genuine Love Project",
+      "description": "Reset your password to regain access to your healing sanctuary.",
+      "hero": {
+        "title": "Reset your",
+        "subtitle": "We'll send you a secure link to create a new password.",
+        "primaryCta": {
+          "label": "Send Reset Link",
+          "href": "#reset-form"
+        },
+        "secondaryCta": {
+          "label": "Back to Sign In",
+          "href": "/login"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/glossary",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Glossary — The Genuine Love Project",
+      "description": "Definitions of key healing and wellness terms.",
+      "hero": {
+        "title": "Understand the",
+        "subtitle": "Clear explanations of key concepts and terms.",
+        "primaryCta": {
+          "label": "Browse Terms",
+          "href": "#terms"
+        },
+        "secondaryCta": {
+          "label": "Search",
+          "href": "#search"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/glossary-full",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Complete Glossary — The Genuine Love Project",
+      "description": "Comprehensive glossary of all healing terms.",
+      "hero": {
+        "title": "Every term",
+        "subtitle": "Our complete reference of healing terminology.",
+        "primaryCta": {
+          "label": "Browse All",
+          "href": "#all"
+        },
+        "secondaryCta": {
+          "label": "By Category",
+          "href": "#categories"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/grounding",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Grounding Techniques — The Genuine Love Project",
+      "description": "Somatic grounding practices to anchor you in the present moment.",
+      "hero": {
+        "title": "Return to",
+        "subtitle": "Gentle techniques to bring you back when you feel unmoored.",
+        "primaryCta": {
+          "label": "Start Grounding",
+          "href": "#techniques"
+        },
+        "secondaryCta": {
+          "label": "Emergency Grounding",
+          "href": "#emergency"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/growth-analytics",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Growth Analytics — The Genuine Love Project",
+      "description": "Advanced analytics for tracking personal growth patterns.",
+      "hero": {
+        "title": "Understand your",
+        "subtitle": "Advanced analytics to illuminate your journey.",
+        "primaryCta": {
+          "label": "Explore Insights",
+          "href": "#insights"
+        },
+        "secondaryCta": {
+          "label": "Compare Periods",
+          "href": "#compare"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/guided-journaling",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Guided Journaling — The Genuine Love Project",
+      "description": "Structured journaling exercises for deeper self-reflection.",
+      "hero": {
+        "title": "Journaling with",
+        "subtitle": "Structured exercises to guide your reflective writing.",
+        "primaryCta": {
+          "label": "Start Session",
+          "href": "#session"
+        },
+        "secondaryCta": {
+          "label": "Browse Prompts",
+          "href": "#prompts"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/healing",
+      "category": "landing",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Healing Resources — The Genuine Love Project",
+      "description": "Explore gentle, evidence-based approaches to emotional healing. Somatic practices, inner child work, and nervous system regulation—all designed with your safety in mind.",
+      "hero": {
+        "title": "There is no wrong way",
+        "subtitle": "Whether you're just starting to explore or have been on this path for years, these resources are here to support you. Each tool is grounded in research and designed to feel safe, not overwhelming.",
+        "primaryCta": {
+          "label": "Begin a practice",
+          "href": "/wellness-hub"
+        },
+        "secondaryCta": {
+          "label": "Learn about our approach",
+          "href": "#philosophy"
+        }
+      },
+      "sectionsCount": 3,
+      "modulesCount": 0
+    },
+    {
+      "route": "/healing-journeys",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Healing Journeys — The Genuine Love Project",
+      "description": "Structured healing pathways for specific challenges.",
+      "hero": {
+        "title": "Structured paths to",
+        "subtitle": "Multi-week journeys designed for specific healing goals.",
+        "primaryCta": {
+          "label": "Choose Your Path",
+          "href": "#paths"
+        },
+        "secondaryCta": {
+          "label": "Continue Journey",
+          "href": "#continue"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/healing-library",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Healing Library — The Genuine Love Project",
+      "description": "A comprehensive library of healing resources and modalities.",
+      "hero": {
+        "title": "Your library of",
+        "subtitle": "Evidence-based resources for your healing journey.",
+        "primaryCta": {
+          "label": "Browse Library",
+          "href": "#library"
+        },
+        "secondaryCta": {
+          "label": "Recommended",
+          "href": "#recommended"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/health",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "System Health — The Genuine Love Project",
+      "description": "Platform health and status.",
+      "hero": {
+        "title": "System",
+        "subtitle": "Current platform status and health metrics.",
+        "primaryCta": {
+          "label": "View Status",
+          "href": "#status"
+        },
+        "secondaryCta": {
+          "label": "Report Issue",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/home",
+      "category": "landing",
+      "aliasOf": "/",
+      "pattern": null,
+      "title": "Home (Alias)",
+      "description": null,
+      "hero": null,
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/how-to-guides",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "How-To Guides — The Genuine Love Project",
+      "description": "Step-by-step guides for healing practices.",
+      "hero": {
+        "title": "Step-by-step",
+        "subtitle": "Clear, actionable guides for every practice.",
+        "primaryCta": {
+          "label": "Browse Guides",
+          "href": "#guides"
+        },
+        "secondaryCta": {
+          "label": "Getting Started",
+          "href": "#start"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/inner-child",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Inner Child Work — The Genuine Love Project",
+      "description": "Reconnect with and heal your inner child through guided exercises.",
+      "hero": {
+        "title": "Reconnect with your",
+        "subtitle": "Gentle exercises to heal childhood wounds and reclaim lost joy.",
+        "primaryCta": {
+          "label": "Meet Your Inner Child",
+          "href": "#exercises"
+        },
+        "secondaryCta": {
+          "label": "Learn About Inner Child",
+          "href": "#learn"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/insight-cards",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Insight Cards — The Genuine Love Project",
+      "description": "Quick insights and wisdom in card format.",
+      "hero": {
+        "title": "Bite-sized",
+        "subtitle": "Powerful ideas in a digestible format.",
+        "primaryCta": {
+          "label": "Draw a Card",
+          "href": "#draw"
+        },
+        "secondaryCta": {
+          "label": "Browse All",
+          "href": "#all"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/journal",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Journal — The Genuine Love Project",
+      "description": "A safe space for reflection and emotional processing through guided journaling.",
+      "hero": {
+        "title": "Your words hold",
+        "subtitle": "Express, process, and release through the art of journaling.",
+        "primaryCta": {
+          "label": "Start Writing",
+          "href": "#new-entry"
+        },
+        "secondaryCta": {
+          "label": "View Past Entries",
+          "href": "#entries"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/knowledge-synthesis",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Knowledge Synthesis — The Genuine Love Project",
+      "description": "Integrate and synthesize your learning.",
+      "hero": {
+        "title": "Connect the dots of",
+        "subtitle": "Synthesize insights from across your journey.",
+        "primaryCta": {
+          "label": "Begin Synthesis",
+          "href": "#synthesis"
+        },
+        "secondaryCta": {
+          "label": "Review Learning",
+          "href": "#review"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/landing",
+      "category": "landing",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "A Space for Healing — The Genuine Love Project",
+      "description": "Discover a trauma-informed mental wellness platform with AI-powered support, journaling, and evidence-based healing tools. Free to start, private by design.",
+      "hero": {
+        "title": "Finally, a wellness space that",
+        "subtitle": "No toxic positivity. No pressure to be fixed. Just evidence-based tools, compassionate AI support, and a community that understands—available whenever you need it.",
+        "primaryCta": {
+          "label": "Start for free",
+          "href": "/register"
+        },
+        "secondaryCta": {
+          "label": "See how it works",
+          "href": "#how"
+        }
+      },
+      "sectionsCount": 3,
+      "modulesCount": 0
+    },
+    {
+      "route": "/legal",
+      "category": "legal",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Legal Information — The Genuine Love Project",
+      "description": "Legal notices and information.",
+      "hero": {
+        "title": "Legal",
+        "subtitle": "Important legal notices and information.",
+        "primaryCta": {
+          "label": "View All",
+          "href": "#legal"
+        },
+        "secondaryCta": {
+          "label": "Contact",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/login",
+      "category": "auth",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Sign In — The Genuine Love Project",
+      "description": "Welcome back to your healing sanctuary. Sign in to continue your journey.",
+      "hero": {
+        "title": "Continue your",
+        "subtitle": "Your progress and insights are waiting for you.",
+        "primaryCta": {
+          "label": "Sign In",
+          "href": "#login-form"
+        },
+        "secondaryCta": {
+          "label": "Create Account",
+          "href": "/register"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/login/callback",
+      "category": "auth",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Completing Sign In — The Genuine Love Project",
+      "description": "Completing your sign in process.",
+      "hero": {
+        "title": "Completing",
+        "subtitle": "Please wait while we securely complete your authentication.",
+        "primaryCta": {
+          "label": "Go to Dashboard",
+          "href": "/dashboard"
+        },
+        "secondaryCta": {
+          "label": "Need Help?",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/mastery",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Mastery Path — The Genuine Love Project",
+      "description": "The path to emotional and psychological mastery.",
+      "hero": {
+        "title": "Walk the path of",
+        "subtitle": "Develop deep competence in emotional intelligence.",
+        "primaryCta": {
+          "label": "Begin Mastery",
+          "href": "#mastery"
+        },
+        "secondaryCta": {
+          "label": "View Progress",
+          "href": "/progress"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/meditation",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Meditation Guide — The Genuine Love Project",
+      "description": "Guided meditations for healing, relaxation, and inner peace.",
+      "hero": {
+        "title": "Discover peace",
+        "subtitle": "Guided meditations for every mood and moment.",
+        "primaryCta": {
+          "label": "Start Meditating",
+          "href": "#meditations"
+        },
+        "secondaryCta": {
+          "label": "Quick 3-Minute",
+          "href": "#quick"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/meta-learning",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Meta-Learning — The Genuine Love Project",
+      "description": "Learn how to learn more effectively.",
+      "hero": {
+        "title": "Master the art of",
+        "subtitle": "Become more effective at acquiring new skills and knowledge.",
+        "primaryCta": {
+          "label": "Start Learning",
+          "href": "#learning"
+        },
+        "secondaryCta": {
+          "label": "Strategies",
+          "href": "#strategies"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/mirror",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Mirror Work — The Genuine Love Project",
+      "description": "Self-love practices using mirror work techniques.",
+      "hero": {
+        "title": "See yourself with",
+        "subtitle": "Powerful self-love practices using the mirror.",
+        "primaryCta": {
+          "label": "Start Practice",
+          "href": "#practice"
+        },
+        "secondaryCta": {
+          "label": "Learn More",
+          "href": "#learn"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/mood",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Mood Tracking — The Genuine Love Project",
+      "description": "Track and understand your emotional patterns over time.",
+      "hero": {
+        "title": "Understand your",
+        "subtitle": "Gain insights into your mood fluctuations and triggers.",
+        "primaryCta": {
+          "label": "Log Mood",
+          "href": "#log"
+        },
+        "secondaryCta": {
+          "label": "View Trends",
+          "href": "#trends"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/news",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "News — The Genuine Love Project",
+      "description": "Updates and announcements from the platform.",
+      "hero": {
+        "title": "What's",
+        "subtitle": "Platform updates, new features, and announcements.",
+        "primaryCta": {
+          "label": "Read Latest",
+          "href": "#latest"
+        },
+        "secondaryCta": {
+          "label": "Subscribe",
+          "href": "#subscribe"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/not-found",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Page Not Found — The Genuine Love Project",
+      "description": "The page you're looking for couldn't be found.",
+      "hero": {
+        "title": "Page not",
+        "subtitle": "The page you're looking for doesn't exist or has been moved.",
+        "primaryCta": {
+          "label": "Go Home",
+          "href": "/"
+        },
+        "secondaryCta": {
+          "label": "Contact Support",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/onboarding",
+      "category": "auth",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Welcome — The Genuine Love Project",
+      "description": "Let's personalize your healing journey.",
+      "hero": {
+        "title": "Let's personalize your",
+        "subtitle": "A few questions to help us support you better.",
+        "primaryCta": {
+          "label": "Continue",
+          "href": "#onboarding"
+        },
+        "secondaryCta": {
+          "label": "Skip for Now",
+          "href": "/dashboard"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/original-home",
+      "category": "landing",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Welcome Home — The Genuine Love Project",
+      "description": "The original vision of Genuine Love: a quiet sanctuary for those seeking peace, healing, and self-understanding. Begin wherever you are.",
+      "hero": {
+        "title": "A quiet place for",
+        "subtitle": "This is where Genuine Love started—a simple idea that everyone deserves a safe space to heal. That vision hasn't changed.",
+        "primaryCta": {
+          "label": "Come in",
+          "href": "/dashboard"
+        },
+        "secondaryCta": {
+          "label": "Our story",
+          "href": "#story"
+        }
+      },
+      "sectionsCount": 2,
+      "modulesCount": 0
+    },
+    {
+      "route": "/philosophical-inquiry",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Philosophical Inquiry — The Genuine Love Project",
+      "description": "Deep philosophical exploration for meaning and purpose.",
+      "hero": {
+        "title": "Explore life's",
+        "subtitle": "Philosophical tools for meaning and purpose.",
+        "primaryCta": {
+          "label": "Begin Inquiry",
+          "href": "#inquiry"
+        },
+        "secondaryCta": {
+          "label": "Reading List",
+          "href": "#reading"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/premium",
+      "category": "account",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Premium — The Genuine Love Project",
+      "description": "Unlock the full power of your healing journey.",
+      "hero": {
+        "title": "Go",
+        "subtitle": "Unlock all features and accelerate your healing.",
+        "primaryCta": {
+          "label": "Upgrade Now",
+          "href": "#upgrade"
+        },
+        "secondaryCta": {
+          "label": "Compare Plans",
+          "href": "/pricing"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/pricing",
+      "category": "landing",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Pricing — The Genuine Love Project",
+      "description": "Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you're ready.",
+      "hero": {
+        "title": "Healing support should be",
+        "subtitle": "We believe cost shouldn't be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.",
+        "primaryCta": {
+          "label": "Start free",
+          "href": "/register"
+        },
+        "secondaryCta": {
+          "label": "See what's included",
+          "href": "#plans"
+        }
+      },
+      "sectionsCount": 3,
+      "modulesCount": 0
+    },
+    {
+      "route": "/privacy",
+      "category": "legal",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Privacy Policy — The Genuine Love Project",
+      "description": "How we protect and handle your data.",
+      "hero": {
+        "title": "Privacy",
+        "subtitle": "Your privacy is important to us. Here's how we protect it.",
+        "primaryCta": {
+          "label": "Read Policy",
+          "href": "#policy"
+        },
+        "secondaryCta": {
+          "label": "Data Request",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/professional-resources",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Professional Resources — The Genuine Love Project",
+      "description": "Resources for mental health professionals.",
+      "hero": {
+        "title": "Professional",
+        "subtitle": "Tools and information for mental health professionals.",
+        "primaryCta": {
+          "label": "Browse Resources",
+          "href": "#resources"
+        },
+        "secondaryCta": {
+          "label": "Partner With Us",
+          "href": "#partner"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/progress",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Your Progress — The Genuine Love Project",
+      "description": "Track your healing journey milestones and achievements.",
+      "hero": {
+        "title": "Every step",
+        "subtitle": "Review your milestones and celebrate your progress.",
+        "primaryCta": {
+          "label": "View Milestones",
+          "href": "#milestones"
+        },
+        "secondaryCta": {
+          "label": "Set New Goals",
+          "href": "#goals"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/publishing",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Publishing — The Genuine Love Project",
+      "description": "Content publishing tools.",
+      "hero": {
+        "title": "Publishing",
+        "subtitle": "Tools for publishing and managing content.",
+        "primaryCta": {
+          "label": "Start Publishing",
+          "href": "#publish"
+        },
+        "secondaryCta": {
+          "label": "Drafts",
+          "href": "#drafts"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/qa",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Q&A — The Genuine Love Project",
+      "description": "Ask questions and get answers from the community.",
+      "hero": {
+        "title": "Questions &",
+        "subtitle": "Get answers from our community of healers.",
+        "primaryCta": {
+          "label": "Ask a Question",
+          "href": "#ask"
+        },
+        "secondaryCta": {
+          "label": "Browse Questions",
+          "href": "#browse"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/register",
+      "category": "auth",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Create Account — The Genuine Love Project",
+      "description": "Join thousands on their healing journey. Create your free account today.",
+      "hero": {
+        "title": "Create your",
+        "subtitle": "A safe, private space designed just for you.",
+        "primaryCta": {
+          "label": "Get Started Free",
+          "href": "#register-form"
+        },
+        "secondaryCta": {
+          "label": "Already have an account?",
+          "href": "/login"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/research",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Research — The Genuine Love Project",
+      "description": "The science behind healing and emotional wellness.",
+      "hero": {
+        "title": "Research-backed",
+        "subtitle": "Understanding the evidence behind what we do.",
+        "primaryCta": {
+          "label": "Explore Research",
+          "href": "#research"
+        },
+        "secondaryCta": {
+          "label": "Key Findings",
+          "href": "#findings"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/reset-password",
+      "category": "auth",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Create New Password — The Genuine Love Project",
+      "description": "Create a new password for your account.",
+      "hero": {
+        "title": "Create a new",
+        "subtitle": "Choose a secure password to protect your account.",
+        "primaryCta": {
+          "label": "Reset Password",
+          "href": "#form"
+        },
+        "secondaryCta": {
+          "label": "Back to Sign In",
+          "href": "/login"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/resilience",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Resilience Building — The Genuine Love Project",
+      "description": "Build lasting resilience and emotional strength.",
+      "hero": {
+        "title": "Build unshakeable",
+        "subtitle": "Develop the capacity to weather life's storms.",
+        "primaryCta": {
+          "label": "Start Building",
+          "href": "#build"
+        },
+        "secondaryCta": {
+          "label": "Assessment",
+          "href": "#assessment"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/resources",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Resources — The Genuine Love Project",
+      "description": "Additional resources for your healing journey.",
+      "hero": {
+        "title": "More",
+        "subtitle": "Curated external resources to support your journey.",
+        "primaryCta": {
+          "label": "Browse Resources",
+          "href": "#resources"
+        },
+        "secondaryCta": {
+          "label": "Crisis Resources",
+          "href": "/crisis"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/ritual",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Sacred Rituals — The Genuine Love Project",
+      "description": "Create meaningful rituals for healing and transition.",
+      "hero": {
+        "title": "Create rituals that",
+        "subtitle": "Mark transitions and honor your journey with sacred practices.",
+        "primaryCta": {
+          "label": "Explore Rituals",
+          "href": "#rituals"
+        },
+        "secondaryCta": {
+          "label": "Create Your Own",
+          "href": "#create"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/safety",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Safety — The Genuine Love Project",
+      "description": "Platform safety information and resources.",
+      "hero": {
+        "title": "Safety",
+        "subtitle": "Information about how we keep you safe.",
+        "primaryCta": {
+          "label": "Learn More",
+          "href": "#safety"
+        },
+        "secondaryCta": {
+          "label": "Crisis Resources",
+          "href": "/crisis"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/self-care",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Self-Care Toolkit — The Genuine Love Project",
+      "description": "Practical self-care tools and practices for daily wellness.",
+      "hero": {
+        "title": "Self-care is",
+        "subtitle": "Practical tools to nurture your body, mind, and spirit.",
+        "primaryCta": {
+          "label": "Build Your Toolkit",
+          "href": "#toolkit"
+        },
+        "secondaryCta": {
+          "label": "Quick Self-Care",
+          "href": "#quick"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/settings",
+      "category": "account",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Settings — The Genuine Love Project",
+      "description": "Customize your healing sanctuary.",
+      "hero": {
+        "title": "Your",
+        "subtitle": "Customize your experience.",
+        "primaryCta": {
+          "label": "Edit Settings",
+          "href": "#settings"
+        },
+        "secondaryCta": {
+          "label": "Account",
+          "href": "/account/profile"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/sleep-guide",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Sleep Guide — The Genuine Love Project",
+      "description": "Tools and techniques for better, more restful sleep.",
+      "hero": {
+        "title": "Embrace deep,",
+        "subtitle": "Evidence-based approaches to improve your sleep quality.",
+        "primaryCta": {
+          "label": "Sleep Assessment",
+          "href": "#assessment"
+        },
+        "secondaryCta": {
+          "label": "Tonight's Routine",
+          "href": "#routine"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/social",
+      "category": "community",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Social — The Genuine Love Project",
+      "description": "Connect with your healing community.",
+      "hero": {
+        "title": "You're not",
+        "subtitle": "Connect with others walking similar paths.",
+        "primaryCta": {
+          "label": "Join Community",
+          "href": "#community"
+        },
+        "secondaryCta": {
+          "label": "Find Groups",
+          "href": "#groups"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/soul-wellness",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Soul Wellness — The Genuine Love Project",
+      "description": "Spiritual practices for meaning, purpose, and transcendence.",
+      "hero": {
+        "title": "Nourish your",
+        "subtitle": "Practices for meaning, purpose, and connection to something greater.",
+        "primaryCta": {
+          "label": "Explore Practices",
+          "href": "#practices"
+        },
+        "secondaryCta": {
+          "label": "Daily Reflection",
+          "href": "#reflection"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/state",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "State Tracker — The Genuine Love Project",
+      "description": "Monitor your nervous system state and learn regulation techniques.",
+      "hero": {
+        "title": "Know your",
+        "subtitle": "Track your nervous system states and build regulation capacity.",
+        "primaryCta": {
+          "label": "Check State",
+          "href": "#check"
+        },
+        "secondaryCta": {
+          "label": "Learn Regulation",
+          "href": "/grounding"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/strategy-maps",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Strategy Maps — The Genuine Love Project",
+      "description": "Visual maps for navigating complex healing journeys.",
+      "hero": {
+        "title": "Map your",
+        "subtitle": "Visual tools for planning and tracking complex journeys.",
+        "primaryCta": {
+          "label": "View Maps",
+          "href": "#maps"
+        },
+        "secondaryCta": {
+          "label": "Create Map",
+          "href": "#create"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/stress-response",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Stress Response Guide — The Genuine Love Project",
+      "description": "Understand and regulate your stress response system.",
+      "hero": {
+        "title": "Understand your",
+        "subtitle": "Learn about fight, flight, freeze, and fawn responses.",
+        "primaryCta": {
+          "label": "Take Assessment",
+          "href": "#assessment"
+        },
+        "secondaryCta": {
+          "label": "Learn Regulation",
+          "href": "#regulation"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/study-vault",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Study Vault — The Genuine Love Project",
+      "description": "Research-backed resources and studies on healing.",
+      "hero": {
+        "title": "Evidence-based",
+        "subtitle": "Scientific research supporting our healing approaches.",
+        "primaryCta": {
+          "label": "Browse Studies",
+          "href": "#studies"
+        },
+        "secondaryCta": {
+          "label": "Topic Search",
+          "href": "#search"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/support",
+      "category": "support",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Support — The Genuine Love Project",
+      "description": "Get help with the platform or your journey.",
+      "hero": {
+        "title": "How can we",
+        "subtitle": "Get the support you need.",
+        "primaryCta": {
+          "label": "Contact Us",
+          "href": "#contact"
+        },
+        "secondaryCta": {
+          "label": "Browse FAQ",
+          "href": "/faq"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/systems-thinking",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Systems Thinking — The Genuine Love Project",
+      "description": "See patterns and connections in your life systems.",
+      "hero": {
+        "title": "See the",
+        "subtitle": "Understand how all the pieces of your life connect.",
+        "primaryCta": {
+          "label": "Start Mapping",
+          "href": "#mapping"
+        },
+        "secondaryCta": {
+          "label": "Examples",
+          "href": "#examples"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/terms",
+      "category": "legal",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Terms of Service — The Genuine Love Project",
+      "description": "Our terms of service and usage agreement.",
+      "hero": {
+        "title": "Terms of",
+        "subtitle": "Please read these terms carefully.",
+        "primaryCta": {
+          "label": "Read Terms",
+          "href": "#terms"
+        },
+        "secondaryCta": {
+          "label": "Contact Legal",
+          "href": "/support"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/today",
+      "category": "core",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Today — The Genuine Love Project",
+      "description": "Your daily healing ritual. Check in, reflect, and nurture yourself.",
+      "hero": {
+        "title": "How are you",
+        "subtitle": "Take a moment to check in with yourself.",
+        "primaryCta": {
+          "label": "Begin Check-In",
+          "href": "#checkin"
+        },
+        "secondaryCta": {
+          "label": "Skip to Journal",
+          "href": "/journal"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/tools",
+      "category": "advanced",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Advanced Tools — The Genuine Love Project",
+      "description": "Sophisticated tools for deeper healing work.",
+      "hero": {
+        "title": "Powerful tools for",
+        "subtitle": "Advanced resources for those ready to go deeper.",
+        "primaryCta": {
+          "label": "Explore Tools",
+          "href": "#tools"
+        },
+        "secondaryCta": {
+          "label": "Recommended",
+          "href": "#recommended"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/upgrade",
+      "category": "account",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Upgrade — The Genuine Love Project",
+      "description": "Upgrade your account for full access.",
+      "hero": {
+        "title": "Upgrade your",
+        "subtitle": "Get access to all premium features.",
+        "primaryCta": {
+          "label": "Choose Plan",
+          "href": "#plans"
+        },
+        "secondaryCta": {
+          "label": "Learn More",
+          "href": "/pricing"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/welcome",
+      "category": "landing",
+      "aliasOf": "/",
+      "pattern": null,
+      "title": "Welcome (Alias)",
+      "description": null,
+      "hero": null,
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/wellness",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Wellness — The Genuine Love Project",
+      "description": "Your complete wellness toolkit for mind, body, and spirit.",
+      "hero": {
+        "title": "Nurture every part of",
+        "subtitle": "Tools and practices for complete well-being.",
+        "primaryCta": {
+          "label": "Explore Tools",
+          "href": "#tools"
+        },
+        "secondaryCta": {
+          "label": "Today's Practice",
+          "href": "/today"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/wellness-hub",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Wellness Hub — The Genuine Love Project",
+      "description": "Central hub for all wellness tools and practices.",
+      "hero": {
+        "title": "Your wellness",
+        "subtitle": "Everything you need for holistic well-being in one place.",
+        "primaryCta": {
+          "label": "Browse All",
+          "href": "#all"
+        },
+        "secondaryCta": {
+          "label": "Recommended",
+          "href": "#recommended"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/wireframes",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Wireframes — The Genuine Love Project",
+      "description": "Platform wireframes and prototypes.",
+      "hero": {
+        "title": "Wireframes.",
+        "subtitle": "View platform wireframes and design prototypes.",
+        "primaryCta": {
+          "label": "View Wireframes",
+          "href": "#wireframes"
+        },
+        "secondaryCta": {
+          "label": "Design System",
+          "href": "/design-system"
+        }
+      },
+      "sectionsCount": 0,
+      "modulesCount": 0
+    },
+    {
+      "route": "/wisdom",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Wisdom — The Genuine Love Project",
+      "description": "Curated wisdom for daily inspiration and reflection.",
+      "hero": {
+        "title": "Ancient wisdom for",
+        "subtitle": "Timeless insights to illuminate your path.",
+        "primaryCta": {
+          "label": "Today's Wisdom",
+          "href": "#today"
+        },
+        "secondaryCta": {
+          "label": "Browse Collection",
+          "href": "#collection"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/wisdom-practices",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Wisdom Practices — The Genuine Love Project",
+      "description": "Practical applications of timeless wisdom traditions.",
+      "hero": {
+        "title": "Practice the",
+        "subtitle": "Turn wisdom into daily practice.",
+        "primaryCta": {
+          "label": "Start Practice",
+          "href": "#practice"
+        },
+        "secondaryCta": {
+          "label": "Browse Traditions",
+          "href": "#traditions"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/wisdom-synthesis",
+      "category": "wellness",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Wisdom Synthesis — The Genuine Love Project",
+      "description": "Integrate wisdom from multiple traditions into your practice.",
+      "hero": {
+        "title": "Synthesize wisdom from",
+        "subtitle": "Draw from the best of all traditions.",
+        "primaryCta": {
+          "label": "Explore Synthesis",
+          "href": "#synthesis"
+        },
+        "secondaryCta": {
+          "label": "Create Your Path",
+          "href": "#create"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    },
+    {
+      "route": "/write",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Write — The Genuine Love Project",
+      "description": "Share your healing story with the community.",
+      "hero": {
+        "title": "Your voice",
+        "subtitle": "Contribute to our community of healing.",
+        "primaryCta": {
+          "label": "Start Writing",
+          "href": "#editor"
+        },
+        "secondaryCta": {
+          "label": "Writing Guidelines",
+          "href": "#guidelines"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 0
+    }
+  ]
+}
