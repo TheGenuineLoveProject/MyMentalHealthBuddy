@@ -226,10 +226,132 @@ export const wellnessMicrocopy = {
   }
 };
 
+export const ctaPrimary = {
+  beginner: [
+    'Begin gently',
+    'Start small',
+    'Try 60 seconds',
+    'Do the easy version',
+    'Keep it simple'
+  ],
+  standard: [
+    'Continue when ready',
+    'Save this for later',
+    'Take the next step',
+    'I\'m ready to begin',
+    'Show me a calm option'
+  ],
+  deep: [
+    'Explore this practice',
+    'Begin the full version',
+    'Start the deeper path',
+    'Engage with intention',
+    'Commit to practice'
+  ]
+};
+
+export const ctaSecondary = {
+  beginner: [
+    'Not right now',
+    'I\'ll come back',
+    'Maybe later',
+    'Show fewer steps',
+    'Skip this'
+  ],
+  standard: [
+    'I want a softer version',
+    'Give me an example',
+    'Explain it simply',
+    'Show more options',
+    'Reset this page'
+  ],
+  deep: [
+    'Explain it deeper',
+    'Show the science',
+    'View advanced options',
+    'Customize this practice',
+    'See alternatives'
+  ]
+};
+
+export const emptyStates = {
+  beginner: [
+    'Nothing saved yet',
+    'Start with one note',
+    'Your space is ready',
+    'Try one small entry',
+    'No pressure—begin anytime'
+  ],
+  standard: [
+    'Your drafts live here',
+    'We\'ll keep it simple',
+    'This will build over time',
+    'One step creates progress',
+    'You can return later'
+  ],
+  deep: [
+    'Your practice history will appear here',
+    'Entries accumulate insights over time',
+    'Begin building your pattern data',
+    'Track your journey from here',
+    'Your progress starts with one entry'
+  ]
+};
+
+export const successStates = {
+  beginner: [
+    'Saved gently',
+    'Nice work',
+    'That counts',
+    'You did it',
+    'Small progress matters'
+  ],
+  standard: [
+    'Logged for later',
+    'One step completed',
+    'You showed up today',
+    'This is a strong start',
+    'Keep going only if you want'
+  ],
+  deep: [
+    'Practice recorded successfully',
+    'Your data has been saved',
+    'Entry added to your journey',
+    'Progress documented',
+    'Insight captured'
+  ]
+};
+
+export const errorStates = {
+  beginner: [
+    'Something didn\'t save',
+    'Try again gently',
+    'Let\'s retry that',
+    'No worries—one more time',
+    'Check your connection'
+  ],
+  standard: [
+    'We didn\'t catch that input',
+    'Please try a shorter entry',
+    'That didn\'t load—refresh',
+    'We\'ll fix this soon',
+    'Thanks for your patience'
+  ],
+  deep: [
+    'An error occurred during processing',
+    'The request could not be completed',
+    'Please verify your input and retry',
+    'This may be a temporary issue',
+    'Contact support if this persists'
+  ]
+};
+
 export const safetyFooter = {
   disclaimer: 'Educational support — not medical advice.',
   emergency: 'If you feel unsafe or in immediate danger, contact local emergency services.',
-  crisisLink: { label: 'Crisis resources', href: '/crisis' }
+  crisisLink: { label: 'Crisis resources', href: '/crisis' },
+  crisisHotline: { label: '988 Suicide & Crisis Lifeline', phone: '988' },
+  textLine: { label: 'Crisis Text Line', text: 'HOME to 741741' }
 };
 
 export const whenToPause = {
@@ -276,12 +398,33 @@ export function getWellnessCopy(category, level = 'standard', seed = 0) {
   return pick(seed, list);
 }
 
+export function pickSlot(category, level = 'standard', seed = '') {
+  const categories = {
+    ctaPrimary,
+    ctaSecondary,
+    emptyStates,
+    successStates,
+    errorStates,
+    ...wellnessMicrocopy
+  };
+  
+  const list = categories[category]?.[level] || categories[category]?.standard;
+  if (!list) return '';
+  return pick(seed || category, list);
+}
+
 export default {
   wellnessMicrocopy,
+  ctaPrimary,
+  ctaSecondary,
+  emptyStates,
+  successStates,
+  errorStates,
   safetyFooter,
   whenToPause,
   gentleExits,
   pick,
+  pickSlot,
   buildTierCopy,
   getWellnessCopy
 };
