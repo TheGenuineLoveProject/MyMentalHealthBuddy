@@ -257,6 +257,109 @@ function NextStepBlock({ nextStep }) {
   );
 }
 
+function PracticeSection({ practice }) {
+  if (!practice) return null;
+  
+  const IconComponent = practice.icon ? getIcon(practice.icon) : Play;
+  
+  return (
+    <section 
+      className={styles.practiceSection}
+      aria-label={practice.title || 'Practice'}
+      data-aos="fade-up"
+      data-aos-delay="150"
+    >
+      <div className={styles.practiceCard}>
+        <div className={styles.practiceHeader}>
+          {practice.timeTag && (
+            <span className={styles.practiceTimeTag}>
+              <Clock className={styles.timeIcon} />
+              {practice.timeTag}
+            </span>
+          )}
+          <div className={styles.practiceTitleRow}>
+            <div className={styles.practiceIconWrapper}>
+              <IconComponent className={styles.practiceIcon} />
+            </div>
+            <h2 className={styles.practiceTitle}>{practice.title}</h2>
+          </div>
+          {practice.subtitle && (
+            <p className={styles.practiceSubtitle}>{practice.subtitle}</p>
+          )}
+        </div>
+        
+        {practice.steps && practice.steps.length > 0 && (
+          <ol className={styles.practiceSteps} role="list">
+            {practice.steps.map((step, index) => (
+              <li 
+                key={index} 
+                className={styles.practiceStep}
+                data-aos="fade-up"
+                data-aos-delay={200 + (index * 100)}
+              >
+                <span className={styles.stepNumber}>{index + 1}</span>
+                <span className={styles.stepText}>{step}</span>
+              </li>
+            ))}
+          </ol>
+        )}
+        
+        {practice.cta && (
+          <Link
+            href={practice.cta.href}
+            className={styles.practiceCta}
+            data-testid={`button-practice-${practice.timeTag?.replace(/\s+/g, '-') || 'start'}`}
+          >
+            {practice.cta.label}
+            <ArrowRight className={styles.ctaIcon} />
+          </Link>
+        )}
+      </div>
+    </section>
+  );
+}
+
+function GentleDisclaimer({ disclaimer }) {
+  if (!disclaimer) return null;
+  
+  return (
+    <aside 
+      className={styles.disclaimerSection}
+      aria-label="Important notice"
+      data-aos="fade-up"
+      data-aos-delay="300"
+    >
+      <div className={styles.disclaimerCard}>
+        <div className={styles.disclaimerHeader}>
+          <AlertTriangle className={styles.disclaimerIcon} />
+          <h3 className={styles.disclaimerTitle}>
+            {disclaimer.title || 'If this feels hard'}
+          </h3>
+        </div>
+        <p className={styles.disclaimerText}>
+          {disclaimer.text}
+        </p>
+        {disclaimer.resources && disclaimer.resources.length > 0 && (
+          <ul className={styles.disclaimerResources}>
+            {disclaimer.resources.map((resource, index) => (
+              <li key={index} className={styles.disclaimerResource}>
+                <a 
+                  href={resource.href}
+                  className={styles.disclaimerLink}
+                  target={resource.external ? '_blank' : undefined}
+                  rel={resource.external ? 'noopener noreferrer' : undefined}
+                >
+                  {resource.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </aside>
+  );
+}
+
 function BulletList({ bullets }) {
   return (
     <ul className={styles.bulletList} role="list">
@@ -369,6 +472,10 @@ export default function PageTemplate({ config, children }) {
 
         <NextStepBlock nextStep={config.nextStep} />
 
+        {config.practices && config.practices.map((practice, index) => (
+          <PracticeSection key={practice.timeTag || index} practice={practice} />
+        ))}
+
         {hasContentLevels && (
           <ContentLevelToggle 
             level={contentLevel} 
@@ -388,6 +495,8 @@ export default function PageTemplate({ config, children }) {
         {config.sections && config.sections.map((section, index) => (
           <ContentSection key={section.id || index} section={section} index={index} />
         ))}
+
+        <GentleDisclaimer disclaimer={config.disclaimer} />
 
         {children}
       </main>
