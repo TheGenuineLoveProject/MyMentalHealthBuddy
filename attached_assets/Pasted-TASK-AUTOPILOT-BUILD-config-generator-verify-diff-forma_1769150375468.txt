@@ -1,0 +1,65 @@
+TASK: AUTOPILOT BUILD (config + generator + verify + diff formatter backbone)
+
+GOALS:
+1) Ensure /content/routes.js contains ALL 119 routes across 13 categories (including aliases + dynamic patterns + /*).
+2) Add a tiny deterministic route→file mapping module that exactly matches generator outputs under:
+   client/src/pages/generated/*.jsx
+3) Implement generator with modes:
+   --mode=all
+   --mode=landing
+   --mode=category --category="Wellness & Healing Tools"
+   --mode=range --from=A --to=C
+4) Overwrite protection:
+   Generator MUST refuse to overwrite any manually edited page unless first line contains:
+   // @generated
+5) Reports + hashes:
+   - reports/routes.generated.json (manifest)
+   - reports/routes.generated.sha256
+   - reports/routes.config.snapshot.json (snapshot of route configs + per-route hash)
+   - reports/routes.config.sha256 (stable hash of configs themselves)
+   Snapshot must include:
+     globalConfigHash, perRouteHash[route], and resolved filePath for each route.
+6) Verifier:
+   npm run verify:routes
+   - detects drift vs reports/
+   - supports --fix to regenerate snapshot + hashes locally
+   - prints short diff summary: added/removed routes + changed titles + category moves
+   - writes machine-readable reports/routes.diff.json including recommendedCommand
+
+7) Formatter:
+   scripts/print-routes-diff.mjs
+   - reads reports/routes.diff.json
+   - outputs:
+     --format=markdown (PR-ready comment)
+     --format=annotations (GitHub Actions ::error:: style)
+     --format=json (compact bot summary)
+   - includes “Top 5 changed routes” based on per-route hash changes
+   - includes deep links:
+       if physical page file exists => link to file path
+       else => link to route path
+   - includes recommended command in output and in routes.diff.json
+
+ALIAS HANDLING (LOCK THIS DECISION):
+Use canonical render + redirect:
+- routes with aliasOf must 308 redirect to canonical route in router layer if possible;
+- otherwise render canonical content but emit <link rel="canonical"> pointing to canonical route.
+
+OUTPUT REQUIREMENTS:
+- Provide FULL updated contents for:
+  /content/routes.js
+  /content/categoryOrder.js
+  /scripts/route-map.mjs
+  /scripts/gen-pages.mjs
+  /scripts/verify-routes-manifest.mjs
+  /scripts/routes-diff.mjs (if you split logic)
+  /scripts/print-routes-diff.mjs
+  package.json scripts section updates
+- Stable formatting: 2-space indent JSON, deterministic key ordering where relevant.
+- End with a ROUTE COMPLETION REPORT grouped by category and generator output count.
+- No TODOs. Everything must run.
+
+DONE GATE:
+✅ npm run gen:pages:all writes pages + reports without errors
+✅ npm run verify:routes passes on clean state
+✅ npm run print:routes:diff -- --format=markdown works
+If any fails, fix before finishing.
