@@ -4,16 +4,21 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
   ArrowLeft, Plus, Calendar, FileText, CheckCircle, Clock, 
   Send, LayoutGrid, ListFilter, Sparkles, Instagram, 
-  Twitter, Youtube, MessageCircle
+  Twitter, Youtube, MessageCircle, Linkedin, AlertCircle,
+  ExternalLink, Settings, Wifi, WifiOff
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const PLATFORMS = [
   { id: "instagram", name: "Instagram", icon: Instagram, color: "#E4405F" },
+  { id: "facebook", name: "Facebook", icon: MessageCircle, color: "#1877F2" },
   { id: "tiktok", name: "TikTok", icon: MessageCircle, color: "#000000" },
-  { id: "threads", name: "Threads/X", icon: Twitter, color: "#1DA1F2" },
   { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000" },
+  { id: "x", name: "X (Twitter)", icon: Twitter, color: "#000000" },
+  { id: "threads", name: "Threads", icon: MessageCircle, color: "#000000" },
+  { id: "pinterest", name: "Pinterest", icon: MessageCircle, color: "#E60023" },
+  { id: "linkedin", name: "LinkedIn", icon: Linkedin, color: "#0A66C2" },
 ];
 
 const STATUS_CONFIG = {
@@ -129,6 +134,110 @@ function QuickStats({ drafts }) {
   );
 }
 
+function PlatformConnections() {
+  const { data: platformStatus = {}, isLoading } = useQuery({
+    queryKey: ["/api/social-posting/platforms/status"],
+  });
+  
+  if (isLoading) {
+    return (
+      <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+        <div className="animate-pulse flex items-center gap-3">
+          <div className="w-5 h-5 bg-slate-200 dark:bg-slate-700 rounded" />
+          <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-40" />
+        </div>
+      </div>
+    );
+  }
+  
+  const platforms = platformStatus.platforms || [];
+  const connectedCount = platforms.filter(p => p.connected).length;
+  
+  return (
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <Settings className="w-5 h-5 text-slate-500" />
+          <h3 className="font-semibold text-slate-900 dark:text-white">Platform Connections</h3>
+          <span className="text-xs px-2 py-1 bg-slate-100 dark:bg-slate-700 rounded-full text-slate-600 dark:text-slate-400">
+            {connectedCount}/{platforms.length} connected
+          </span>
+        </div>
+        <a 
+          href="https://docs.replit.com/hosting/secrets" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-xs text-[var(--glp-sage)] hover:underline flex items-center gap-1"
+          data-testid="link-secrets-help"
+        >
+          <ExternalLink className="w-3 h-3" />
+          How to add API keys
+        </a>
+      </div>
+      
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
+        {PLATFORMS.map(platform => {
+          const status = platforms.find(p => p.id === platform.id);
+          const isConnected = status?.connected;
+          const PlatformIcon = platform.icon;
+          
+          return (
+            <div 
+              key={platform.id}
+              className={`flex flex-col items-center p-3 rounded-lg border transition-all ${
+                isConnected 
+                  ? "border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20" 
+                  : "border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 opacity-60"
+              }`}
+              data-testid={`platform-status-${platform.id}`}
+            >
+              <div 
+                className="w-10 h-10 rounded-lg flex items-center justify-center mb-2"
+                style={{ backgroundColor: `${platform.color}15` }}
+              >
+                <PlatformIcon className="w-5 h-5" style={{ color: platform.color }} />
+              </div>
+              <span className="text-xs font-medium text-slate-700 dark:text-slate-300 text-center">
+                {platform.name}
+              </span>
+              <div className="flex items-center gap-1 mt-1">
+                {isConnected ? (
+                  <>
+                    <Wifi className="w-3 h-3 text-emerald-500" />
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400">Ready</span>
+                  </>
+                ) : (
+                  <>
+                    <WifiOff className="w-3 h-3 text-slate-400" />
+                    <span className="text-xs text-slate-500">Not set</span>
+                  </>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      
+      {connectedCount === 0 && (
+        <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+          <div className="flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-medium text-amber-800 dark:text-amber-200">
+                No platforms connected yet
+              </p>
+              <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
+                Add your social media API keys in Replit Secrets to enable automated posting. 
+                Content will be generated for manual export until platforms are connected.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function SocialDashboard() {
   const [filter, setFilter] = useState("all");
   
@@ -172,6 +281,8 @@ export default function SocialDashboard() {
         </div>
         
         <QuickStats drafts={drafts} />
+        
+        <PlatformConnections />
         
         <div className="flex flex-col md:flex-row gap-4 mb-6">
           <div className="flex gap-2">
