@@ -348,6 +348,38 @@ const rawRoutes = [
     pageLabel: 'Main Landing',
     title: 'The Genuine Love Project — A Gentle Space for Healing',
     description: 'A private, trauma-informed sanctuary for emotional healing. Evidence-based tools for inner child work, nervous system regulation, and self-compassion—available whenever you need them.',
+    contentLevels: {
+      beginner: {
+        title: 'A Safe Place to Start',
+        subtitle: 'This is a quiet, kind space just for you.',
+        bulletPoints: [
+          'You can take breaks whenever you need—no pressure',
+          'Everything here moves at your speed, not ours',
+          'It\'s okay if you don\'t know where to begin',
+          'Your one next step: Just look around and see what feels right'
+        ]
+      },
+      intermediate: {
+        title: 'Tools That Meet You Where You Are',
+        subtitle: 'Practical exercises for when you\'re ready to explore a bit more.',
+        bulletPoints: [
+          'Guided journaling helps you process what you\'re carrying',
+          'Breathing exercises can shift how you feel in moments',
+          'AI companion conversations available whenever you need support',
+          'Your one next step: Try one tool today—just one'
+        ]
+      },
+      advanced: {
+        title: 'Evidence-Based Healing Modalities',
+        subtitle: 'Deeper exploration grounded in trauma-informed research.',
+        bulletPoints: [
+          'Inner child work draws from attachment theory and IFS (Internal Family Systems)',
+          'Nervous system practices incorporate polyvagal theory and somatic experiencing',
+          'All approaches respect your window of tolerance and pace of healing',
+          'Your one next step: Explore a modality that resonates with your current needs'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'A safe place to begin',
       title: 'You deserve a gentle space',
@@ -436,6 +468,38 @@ const rawRoutes = [
     title: 'Welcome Home — The Genuine Love Project',
     description: 'The original vision of Genuine Love: a quiet sanctuary for those seeking peace, healing, and self-understanding. Begin wherever you are.',
     motion: { level: 'calm' },
+    contentLevels: {
+      beginner: {
+        title: 'You\'re Welcome Here',
+        subtitle: 'This is a safe, quiet place where you can just be.',
+        bulletPoints: [
+          'There\'s nothing you have to do or prove here',
+          'Take your time looking around—no rush',
+          'You can leave and come back anytime',
+          'Your one next step: Just breathe and notice how you feel'
+        ]
+      },
+      intermediate: {
+        title: 'Where Genuine Love Began',
+        subtitle: 'The original vision: simple tools for real healing.',
+        bulletPoints: [
+          'Self-compassion practices to treat yourself with kindness',
+          'Grounding techniques for when you feel overwhelmed',
+          'Daily rituals to anchor your mornings and evenings',
+          'Your one next step: Try one grounding practice today'
+        ]
+      },
+      advanced: {
+        title: 'The Philosophy Behind Our Approach',
+        subtitle: 'Understanding the values that shape everything here.',
+        bulletPoints: [
+          'Rooted in self-compassion research by Kristin Neff and Christopher Germer',
+          'Draws from contemplative traditions and evidence-based psychology',
+          'Emphasizes relational healing—with yourself, others, and the present moment',
+          'Your one next step: Reflect on what self-compassion means for you right now'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Where it all began',
       title: 'A quiet place for',
@@ -495,6 +559,38 @@ const rawRoutes = [
     pageLabel: 'Healing Landing',
     title: 'Healing Resources — The Genuine Love Project',
     description: 'Explore gentle, evidence-based approaches to emotional healing. Somatic practices, inner child work, and nervous system regulation—all designed with your safety in mind.',
+    contentLevels: {
+      beginner: {
+        title: 'Healing Can Start Small',
+        subtitle: 'You don\'t need to know what you need. That\'s okay.',
+        bulletPoints: [
+          'Healing isn\'t about fixing—it\'s about listening to yourself',
+          'Even tiny steps count, like taking a deep breath right now',
+          'You can go slow and still be making progress',
+          'Your one next step: Notice one feeling you\'re having right now'
+        ]
+      },
+      intermediate: {
+        title: 'Gentle Tools for Your Journey',
+        subtitle: 'Practical exercises you can try when you\'re ready.',
+        bulletPoints: [
+          'Breathing exercises calm your nervous system in minutes',
+          'Grounding techniques help when you feel disconnected',
+          'Journaling prompts help you process what you\'re carrying',
+          'Your one next step: Pick one tool and give it three minutes'
+        ]
+      },
+      advanced: {
+        title: 'Evidence-Based Healing Modalities',
+        subtitle: 'Deeper understanding of the approaches available here.',
+        bulletPoints: [
+          'Somatic practices based on Peter Levine\'s Somatic Experiencing',
+          'Nervous system regulation grounded in Stephen Porges\' polyvagal theory',
+          'Inner child work informed by attachment theory and IFS',
+          'Your one next step: Explore one modality that aligns with your current needs'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Healing happens in small moments',
       title: 'There is no wrong way',
@@ -570,6 +666,38 @@ const rawRoutes = [
     pageLabel: 'Pricing',
     title: 'Pricing — The Genuine Love Project',
     description: 'Simple, transparent pricing. Start free and stay free as long as you need. Upgrade only when it feels right.',
+    contentLevels: {
+      beginner: {
+        title: 'It\'s Free to Start',
+        subtitle: 'No tricks, no pressure. Really.',
+        bulletPoints: [
+          'You can use our core tools forever without paying',
+          'No credit card needed to sign up',
+          'If you ever upgrade, you can cancel anytime',
+          'Your one next step: Create your free account when you\'re ready'
+        ]
+      },
+      intermediate: {
+        title: 'What\'s Included at Each Level',
+        subtitle: 'A clear breakdown so you can decide what\'s right for you.',
+        bulletPoints: [
+          'Free: Journaling, mood tracking, breathing exercises, grounding tools',
+          'Premium: Unlimited AI companion, deeper healing journeys, advanced analytics',
+          'Lifetime option: One-time payment for forever access',
+          'Your one next step: Start with free and see how it feels'
+        ]
+      },
+      advanced: {
+        title: 'Our Pricing Philosophy',
+        subtitle: 'Transparent, trauma-informed, and designed for your nervous system.',
+        bulletPoints: [
+          'No urgency tactics, countdown timers, or manufactured scarcity',
+          'If cost is a barrier, reach out—we\'ll find a way',
+          'Data export available even if you leave, because your data is yours',
+          'Your one next step: Review the tiers and reach out if you have questions'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Simple and clear',
       title: 'Start free.',
@@ -631,6 +759,38 @@ const rawRoutes = [
     title: 'A Space for Healing — The Genuine Love Project',
     description: 'Discover a trauma-informed mental wellness platform with AI-powered support, journaling, and evidence-based healing tools. Free to start, private by design.',
     motion: { level: 'rich' },
+    contentLevels: {
+      beginner: {
+        title: 'A Calm Place for You',
+        subtitle: 'If you\'re looking for something gentler, you found it.',
+        bulletPoints: [
+          'No toxic positivity—just honest, kind support',
+          'Tools designed to feel safe, not overwhelming',
+          'You can use this space however works for you',
+          'Your one next step: Scroll down and see what feels interesting'
+        ]
+      },
+      intermediate: {
+        title: 'What Makes This Different',
+        subtitle: 'Practical tools that respect your pace and boundaries.',
+        bulletPoints: [
+          'AI companion available 24/7 for trauma-informed conversation',
+          'Guided journaling with prompts that help you process',
+          'State tracking to notice patterns over time',
+          'Your one next step: Try the AI companion or a journaling prompt'
+        ]
+      },
+      advanced: {
+        title: 'Built with Your Nervous System in Mind',
+        subtitle: 'Every design decision is intentional and research-backed.',
+        bulletPoints: [
+          'Colors, pacing, and tone designed for nervous system regulation',
+          'No streak guilt or gamification that creates anxiety',
+          'Privacy-first architecture—your data stays yours',
+          'Your one next step: Explore the modalities and see what resonates'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'For those ready to begin',
       title: 'Finally, a wellness space that',
