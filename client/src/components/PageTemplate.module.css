@@ -1991,3 +1991,47 @@
     transition: none;
   }
 }
+
+/* ============================================================================
+   PRACTICE PROFILE - Crisis Link
+   ============================================================================ */
+
+.practiceCrisisLink {
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  max-width: 600px;
+  text-align: center;
+  background: var(--sacred-cream, #f8f6f0);
+  border-radius: 0.75rem;
+  border: 1px solid var(--sacred-sage-15, rgba(143, 191, 159, 0.15));
+}
+
+.practiceCrisisText {
+  font-size: 0.9375rem;
+  color: var(--glp-charcoal, #333);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.practiceCrisisAnchor {
+  color: var(--sacred-teal, #2f5d5d);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.practiceCrisisAnchor:hover {
+  color: var(--sacred-sage, #8fbf9f);
+}
+
+.practiceCrisisAnchor:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .practiceCrisisAnchor {
+    transition: none;
+  }
+}

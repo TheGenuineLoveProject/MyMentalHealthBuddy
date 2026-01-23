@@ -534,7 +534,27 @@ function TieredPracticeBlock({ practice, microcopy }) {
   );
 }
 
-function PracticeSectionsRenderer({ practiceSections, practiceTiers, microcopy }) {
+function PracticeCrisisLink({ crisisLinkEnabled }) {
+  if (!crisisLinkEnabled) return null;
+  
+  return (
+    <aside 
+      className={styles.practiceCrisisLink}
+      data-aos="fade-up"
+      data-aos-delay="400"
+    >
+      <p className={styles.practiceCrisisText}>
+        If this practice brings up difficult feelings, that's okay. You can{' '}
+        <Link href="/crisis" className={styles.practiceCrisisAnchor} data-testid="link-practice-crisis">
+          visit our crisis resources
+        </Link>{' '}
+        anytime.
+      </p>
+    </aside>
+  );
+}
+
+function PracticeSectionsRenderer({ practiceSections, practiceTiers, microcopy, crisisLinkEnabled }) {
   if (!practiceSections || practiceSections.length === 0) return null;
 
   return (
@@ -917,11 +937,15 @@ export default function PageTemplate({ config, children }) {
             <TieredPracticeBlock practice={config.practice} microcopy={config.microcopy} />
 
             {config.stimulationProfile === 'practice' && config.practiceSections && (
-              <PracticeSectionsRenderer 
-                practiceSections={config.practiceSections}
-                practiceTiers={config.practiceTiers}
-                microcopy={config.microcopy}
-              />
+              <>
+                <PracticeSectionsRenderer 
+                  practiceSections={config.practiceSections}
+                  practiceTiers={config.practiceTiers}
+                  microcopy={config.microcopy}
+                  crisisLinkEnabled={config.crisisLinkEnabled}
+                />
+                <PracticeCrisisLink crisisLinkEnabled={config.crisisLinkEnabled} />
+              </>
             )}
 
             {config.practices && config.practices.map((practice, index) => (

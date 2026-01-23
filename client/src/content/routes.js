@@ -148,14 +148,65 @@ const categoryPresets = {
   wellness: {
     motion: { level: 'calm' },
     protected: false,
+    stimulationProfile: 'practice',
     defaultHero: {
       eyebrow: 'Wellness Practice',
       title: 'Nurture your',
       titleHighlight: 'well-being.',
       subtitle: 'Gentle practices for mind, body, and spirit.',
-      primaryCta: { label: 'Start Practice', href: '#practice' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse All', href: '/wellness-hub' }
     },
+    defaultPracticeTiers: {
+      quick10s: {
+        title: '10-second reset',
+        duration: '10 seconds',
+        steps: [
+          'Pause what you\'re doing.',
+          'Take one slow breath in.',
+          'Let it out gently.'
+        ],
+        ctaLabel: 'Start 10 seconds'
+      },
+      short1to3: {
+        title: '1–3 minute practice',
+        duration: '1–3 minutes',
+        steps: [
+          'Find a comfortable position.',
+          'Close your eyes or soften your gaze.',
+          'Take three slow breaths.',
+          'Notice how your body feels.',
+          'Open your eyes when ready.'
+        ],
+        ctaLabel: 'Start short practice'
+      },
+      long3to10: {
+        title: '3–10 minute practice',
+        duration: '3–10 minutes',
+        steps: [
+          'Settle into a comfortable position.',
+          'Take 5 slow breaths to arrive.',
+          'Scan your body from head to toe.',
+          'Breathe into any areas of tension.',
+          'Notice your emotional state without judgment.',
+          'Set one gentle intention.',
+          'When ready, slowly open your eyes.'
+        ],
+        reflection: [
+          'What did you notice in your body?',
+          'What feels different now?'
+        ],
+        ctaLabel: 'Start longer practice'
+      }
+    },
+    defaultMicrocopy: {
+      permissionLine: 'Choose what fits today. You can stop anytime.',
+      whatToExpectLine: 'You may feel a little more grounded. That\'s enough.',
+      stopPauseLine: 'If anything feels too intense, pause or switch to the 10-second version.',
+      closerLine: 'When you\'re ready, take one small next step.'
+    },
+    disclaimerShort: 'Educational support only—not medical advice.',
+    crisisLinkEnabled: true,
     defaultSections: [
       {
         id: 'practices',
@@ -5328,13 +5379,58 @@ const rawRoutes = [
     pageLabel: 'Sleep Wellness',
     title: 'Sleep Wellness — The Genuine Love Project',
     description: 'Tools and resources for better sleep and rest.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Rest & Recovery',
       title: 'Better',
       titleHighlight: 'Sleep.',
       subtitle: 'Gentle practices for restful, healing sleep.',
-      primaryCta: { label: 'Start Sleep Journey', href: '#sleep' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Evening Routine', href: '#routine' }
+    },
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second sleep prep',
+        steps: [
+          'Soften your jaw and shoulders.',
+          'Take one slow, deep breath.',
+          'Let your eyelids feel heavy.'
+        ],
+        ctaLabel: 'Start 10 seconds'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute wind-down',
+        steps: [
+          'Find a comfortable position.',
+          'Close your eyes gently.',
+          'Take 5 slow breaths, lengthening each exhale.',
+          'Imagine tension draining from your body.',
+          'Let your breathing settle naturally.'
+        ],
+        ctaLabel: 'Start short practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute body scan',
+        steps: [
+          'Lie down comfortably.',
+          'Close your eyes and take 3 centering breaths.',
+          'Scan from your feet upward, noticing each body part.',
+          'At each area, consciously relax the muscles.',
+          'When you reach your head, let your whole body feel heavy.',
+          'Allow thoughts to pass like clouds.',
+          'Rest in stillness as you drift toward sleep.'
+        ],
+        reflection: [
+          'What helped you relax most?',
+          'Where did you hold the most tension?'
+        ],
+        ctaLabel: 'Start longer practice'
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second version anytime.'
     },
     contentLevels: {
       beginner: {
@@ -5375,13 +5471,58 @@ const rawRoutes = [
     pageLabel: 'Nutrition & Nourishment',
     title: 'Nutrition — The Genuine Love Project',
     description: 'Mindful eating and nutritional wellness.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Nourish',
       title: 'Mindful',
       titleHighlight: 'Eating.',
       subtitle: 'Develop a healthy relationship with food and nourishment.',
-      primaryCta: { label: 'Explore Nutrition', href: '#nutrition' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Meal Ideas', href: '#meals' }
+    },
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second gratitude',
+        steps: [
+          'Look at your food.',
+          'Take one deep breath.',
+          'Acknowledge the nourishment.'
+        ],
+        ctaLabel: 'Start 10 seconds'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute mindful bite',
+        steps: [
+          'Take one bite of food.',
+          'Chew slowly, noticing textures.',
+          'Notice the flavors as they develop.',
+          'Swallow mindfully.',
+          'Pause before your next bite.'
+        ],
+        ctaLabel: 'Start short practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute mindful meal',
+        steps: [
+          'Before eating, pause and take 3 breaths.',
+          'Look at your food and appreciate its colors.',
+          'Take your first bite slowly.',
+          'Put down your utensil between bites.',
+          'Notice hunger and fullness signals.',
+          'Halfway through, check in with your body.',
+          'Finish when you feel satisfied, not stuffed.'
+        ],
+        reflection: [
+          'How did eating slowly change the experience?',
+          'What signals did your body give you?'
+        ],
+        ctaLabel: 'Start longer practice'
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second version anytime.'
     },
     contentLevels: {
       beginner: {
@@ -5422,13 +5563,58 @@ const rawRoutes = [
     pageLabel: 'Gentle Movement',
     title: 'Movement — The Genuine Love Project',
     description: 'Gentle movement practices for body and mind.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Move Gently',
       title: 'Healing',
       titleHighlight: 'Movement.',
       subtitle: 'Gentle exercises that honor your body\'s needs.',
-      primaryCta: { label: 'Start Moving', href: '#movement' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Yoga Flows', href: '#yoga' }
+    },
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second stretch',
+        steps: [
+          'Reach your arms up slowly.',
+          'Stretch gently in any direction.',
+          'Release and let your arms fall.'
+        ],
+        ctaLabel: 'Start 10 seconds'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute gentle flow',
+        steps: [
+          'Stand or sit comfortably.',
+          'Roll your shoulders back 5 times.',
+          'Gently turn your head side to side.',
+          'Reach up, then fold forward slowly.',
+          'Rise back up and shake out your hands.'
+        ],
+        ctaLabel: 'Start short practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute body flow',
+        steps: [
+          'Start standing with feet hip-width apart.',
+          'Take 3 deep breaths, settling in.',
+          'Roll your shoulders and neck gently.',
+          'Reach up, then fold forward at your hips.',
+          'Hang loosely, swaying if it feels good.',
+          'Slowly roll back up, one vertebra at a time.',
+          'Finish with hands on heart, noticing your body.'
+        ],
+        reflection: [
+          'Where did your body feel stiff?',
+          'How does movement affect your mood?'
+        ],
+        ctaLabel: 'Start longer practice'
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second version anytime.'
     },
     contentLevels: {
       beginner: {
@@ -5469,13 +5655,58 @@ const rawRoutes = [
     pageLabel: 'Nature Connection',
     title: 'Nature Connection — The Genuine Love Project',
     description: 'Connect with nature for healing and grounding.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Earth Connection',
       title: 'Nature',
       titleHighlight: 'Healing.',
       subtitle: 'Find peace and grounding in the natural world.',
-      primaryCta: { label: 'Connect with Nature', href: '#nature' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Grounding Practices', href: '#grounding' }
+    },
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second nature pause',
+        steps: [
+          'Look outside or at something natural.',
+          'Take one deep breath.',
+          'Notice one thing you see.'
+        ],
+        ctaLabel: 'Start 10 seconds'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute 5-4-3-2-1',
+        steps: [
+          'Go outside or sit by a window.',
+          'Name 5 things you can see in nature.',
+          'Name 4 things you can feel (wind, sun, ground).',
+          'Name 3 things you can hear.',
+          'Take 2 deep breaths, then notice 1 thing you smell.'
+        ],
+        ctaLabel: 'Start short practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute nature immersion',
+        steps: [
+          'Find a quiet spot outdoors.',
+          'Sit or stand comfortably.',
+          'Close your eyes and listen to all sounds around you.',
+          'Open your eyes and slowly look around.',
+          'Touch something natural—grass, bark, leaves.',
+          'Breathe deeply, imagining you\'re breathing in nature.',
+          'Before leaving, express silent gratitude to this place.'
+        ],
+        reflection: [
+          'What surprised you about slowing down outside?',
+          'How does your body feel after this practice?'
+        ],
+        ctaLabel: 'Start longer practice'
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second version anytime.'
     },
     contentLevels: {
       beginner: {
@@ -5516,13 +5747,58 @@ const rawRoutes = [
     pageLabel: 'Creative Expression',
     title: 'Creative Expression — The Genuine Love Project',
     description: 'Use creativity as a path to healing.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Express',
       title: 'Creative',
       titleHighlight: 'Healing.',
       subtitle: 'Explore art, music, and writing as healing tools.',
-      primaryCta: { label: 'Start Creating', href: '#create' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Art Therapy', href: '#art' }
+    },
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second creative spark',
+        steps: [
+          'Pick up a pen or pencil.',
+          'Draw one simple shape or line.',
+          'Let it be whatever it is.'
+        ],
+        ctaLabel: 'Start 10 seconds'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute free expression',
+        steps: [
+          'Get paper and something to draw with.',
+          'Set a timer for 2 minutes.',
+          'Draw, doodle, or write without thinking.',
+          'Don\'t judge—let your hand move freely.',
+          'When the timer ends, pause and notice how you feel.'
+        ],
+        ctaLabel: 'Start short practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute expressive art',
+        steps: [
+          'Gather art supplies (paper, colors, anything).',
+          'Take 3 breaths and ask: "How do I feel right now?"',
+          'Without planning, start creating something.',
+          'Use colors, shapes, or words that match your feeling.',
+          'Don\'t worry about it looking "good."',
+          'When finished, look at what you made without judgment.',
+          'Write one word that describes this experience.'
+        ],
+        reflection: [
+          'What did creating this feel like?',
+          'Did anything surprising emerge?'
+        ],
+        ctaLabel: 'Start longer practice'
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second version anytime.'
     },
     contentLevels: {
       beginner: {
