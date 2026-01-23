@@ -204,20 +204,24 @@ export default function DynamicPage() {
 }
 
 function canOverwrite(filePath, force) {
-  if (!fs.existsSync(filePath)) return true;
+  if (!fs.existsSync(filePath)) return { allowed: true, reason: 'new' };
   
   const content = fs.readFileSync(filePath, 'utf-8');
-  if (content.includes(GENERATED_MARKER)) return true;
+  const firstLines = content.split('\n').slice(0, 5).join('\n');
+  
+  if (firstLines.includes(GENERATED_MARKER)) {
+    return { allowed: true, reason: 'generated' };
+  }
   
   if (force) {
     const backupPath = path.join(BACKUPS_DIR, `${path.basename(filePath)}.${Date.now()}.bak`);
     fs.mkdirSync(BACKUPS_DIR, { recursive: true });
     fs.copyFileSync(filePath, backupPath);
-    console.log(`  Backed up to ${path.relative(ROOT, backupPath)}`);
-    return true;
+    console.log(`  📦 Backed up to ${path.relative(ROOT, backupPath)}`);
+    return { allowed: true, reason: 'forced' };
   }
   
-  return false;
+  return { allowed: false, reason: 'manual' };
 }
 
 function sha256(content) {
@@ -292,8 +296,9 @@ async function main() {
     
     perRouteHashes[routePath] = sha256(normalizeConfig(route));
     
-    if (!canOverwrite(filePath, args.force)) {
-      console.log(`  ⏭️  Skipped (manual): ${filename}`);
+    const overwriteCheck = canOverwrite(filePath, args.force);
+    if (!overwriteCheck.allowed) {
+      console.log(`  🔒 Manual file preserved: ${filename}`);
       stats.skipped++;
       continue;
     }
@@ -321,11 +326,15 @@ async function main() {
   
   if (args.mode === 'all' || args.mode === 'landing') {
     const notFoundPath = path.join(GENERATED_DIR, '404.jsx');
-    if (canOverwrite(notFoundPath, args.force)) {
+    const notFoundCheck = canOverwrite(notFoundPath, args.force);
+    if (notFoundCheck.allowed) {
       fs.writeFileSync(notFoundPath, generate404Page(), 'utf-8');
       console.log(`  ✅ Generated: 404.jsx`);
       manifest['/404'] = { file: 'generated/404.jsx', category: 'system', title: 'Not Found' };
       stats.generated++;
+    } else {
+      console.log(`  🔒 Manual file preserved: 404.jsx`);
+      stats.skipped++;
     }
   }
   
@@ -337,7 +346,8 @@ async function main() {
       const filename = routeToFilename(route.route);
       const filePath = path.join(GENERATED_DIR, filename);
       
-      if (canOverwrite(filePath, args.force)) {
+      const dynamicCheck = canOverwrite(filePath, args.force);
+      if (dynamicCheck.allowed) {
         fs.writeFileSync(filePath, generateDynamicStub(route.route, paramName), 'utf-8');
         console.log(`  ✅ Generated dynamic: ${filename}`);
         manifest[route.route] = { 
@@ -348,6 +358,9 @@ async function main() {
           param: paramName
         };
         stats.generated++;
+      } else {
+        console.log(`  🔒 Manual file preserved: ${filename}`);
+        stats.skipped++;
       }
     }
   }
