@@ -1,0 +1,298 @@
+Absolutely — continuing A→Z one-by-one with the next missing “system piece” you asked for:
+
+✅ PAGE OPTIMIZATION KIT (A→Z) — Replit AI Prompts that upgrade every page consistently
+
+This is the repeatable template that forces Replit AI to:
+	•	fix crowding / spacing / font hierarchy / button sizing
+	•	apply brand tokens + design language
+	•	add microcopy placements
+	•	add SEO + a11y + analytics
+	•	stay non-destructive + DRY-RUN first + idempotent
+
+Copy/paste the kit below into Replit AI.
+
+⸻
+
+1) MASTER PAGE UPGRADE PROMPT — “GLP_PAGE_UPGRADE_ENGINE”
+
+Use this for each page, one at a time.
+
+NAME: GLP_PAGE_UPGRADE_ENGINE
+TARGET: <PASTE EXACT ROUTE OR FILE PATH OF PAGE>
+GOAL: Upgrade this page to GLP “Serenity Sage” visual/cognitive calm: clarity, hierarchy, spacing, accessible buttons, supportive microcopy.
+
+NON-NEGOTIABLE RULES:
+- DRY-RUN FIRST. Do not modify files until “APPLY PAGE PATCH 1”.
+- NO deletes/renames. Keep existing routes working.
+- Use GLP tokens + calm UI + WCAG AA.
+- Add microcopy via the Wellness Microcopy Library (rotate variants, avoid repetition).
+- No clinical promises; add safety footer if page is emotionally intense.
+- Keep changes minimal per patch: max 5 files, max 250 LOC changed.
+
+OUTPUT FORMAT (DRY-RUN):
+1) Page Intent + Primary CTA
+2) Problems found (crowding, hierarchy, buttons, contrast, alignment)
+3) Proposed new layout blueprint (sections order + what goes where)
+4) Typography scale + spacing scale used
+5) Button sizing rules + component changes
+6) Microcopy placement map (where and which variant)
+7) Accessibility fixes (headings, labels, focus, aria)
+8) SEO metadata (title/meta/OG/canonical + schema suggestion)
+9) Analytics events to add (view/click/complete)
+10) Patch plan: Patch 1..N (each patch small)
+STOP and wait for: “APPLY PAGE PATCH 1”.
+
+Now run DRY-RUN for the TARGET page.
+
+
+⸻
+
+2) UNIVERSAL “SERENITY SAGE” LAYOUT BLUEPRINT (apply everywhere)
+
+Paste once, then reuse.
+
+GLP LAYOUT BLUEPRINT (apply to each page):
+Section order (default):
+1) Calm Hero (Title + 1-line benefit + primary CTA + secondary CTA)
+2) Trust Strip (3 tiny points: privacy-first, supportive education, begin gently)
+3) Main Content (2-column on desktop, 1-column on mobile; no cramped text)
+4) Guided Steps (3–5 steps max; each step card has 1 action)
+5) Support Panel (micro-resets, “soft version” toggle, help link)
+6) Footer (Safety + disclaimer; crisis resources on relevant pages)
+
+Spacing rules:
+- Max width: 960–1100px for reading
+- Section padding: 48–72px desktop, 28–40px mobile
+- Card gap: 16–24px
+- Line length: 55–75 characters
+
+Typography:
+- H1: 40–56px desktop, 30–36px mobile
+- H2: 28–32px desktop, 22–26px mobile
+- Body: 16–18px
+- Buttons: 14–16px with min height 44px
+
+Button sizing:
+- Min height 44px (mobile accessible)
+- Primary button prominent, secondary subtle
+- No tiny buttons anywhere (fix all)
+
+No overcrowding:
+- Limit to 1 primary CTA per section
+- Replace long paragraphs with bullets + microcards
+
+
+⸻
+
+3) “FIX CROWDED PAGE” PROMPT (instant declutter)
+
+Use when a page looks dense/plain/crowded.
+
+NAME: GLP_DECROWD_PAGE
+TARGET: <ROUTE OR FILE PATH>
+
+Task:
+1) Identify overcrowding sources (too many elements in one section, long text blocks, too many CTAs).
+2) Rebuild into 5–7 simple sections max using the GLP Layout Blueprint.
+3) Convert long text into:
+   - bullets
+   - accordion blocks
+   - short “micro-cards”
+4) Enforce button min height 44px and consistent spacing.
+5) Add calm whitespace and clear hierarchy.
+
+DRY-RUN only. Output new section list + exact component changes.
+Wait for “APPLY DECROWD PATCH 1”.
+
+
+⸻
+
+4) “H1/H2 FONT MATCH + TITLE BALANCE” PROMPT (your exact pain point)
+
+Use for the “top title font not matching” problem.
+
+NAME: GLP_TITLE_SCALE_FIX
+TARGET: <ROUTE OR FILE PATH>
+
+Goal:
+- Make top title (H1) visually balanced with the largest headline (“Begin Your Healing Journey Today” etc.)
+- Ensure consistent typography scale across hero + headings.
+- Fix wrapping and spacing so titles align cleanly.
+
+Rules:
+- H1 must be the largest text on the page.
+- Enforce a single typography scale file or tokens source.
+- Ensure responsive sizes (mobile/desktop).
+- DRY-RUN first. Provide exact className changes.
+Wait for “APPLY TITLE PATCH 1”.
+
+
+⸻
+
+5) “MICROCOPY INJECTION MAP” PROMPT (adds consistency without repetition)
+
+This maps microcopy to each component type.
+
+NAME: GLP_MICROCOPY_INJECTION
+TARGET: <ROUTE OR FILE PATH>
+
+Task:
+1) Identify places microcopy is needed:
+- CTA buttons
+- empty states
+- form helper text
+- success toasts
+- error messages
+- tooltips
+- section headers
+
+2) Insert microcopy variants from the Microcopy Library with rotation rules:
+- Never reuse the same CTA phrase twice on the same page.
+- Prefer softer variants for sensitive pages.
+- Keep confirmations short (“Saved.”).
+
+DRY-RUN only. Provide a table:
+Component → location → microcopy variant key → exact string.
+Wait for “APPLY MICROCOPY PATCH 1”.
+
+
+⸻
+
+6) ACCESSIBILITY PATCH PROMPT (WCAG AA basics every page)
+
+NAME: GLP_A11Y_PAGE_PATCH
+TARGET: <ROUTE OR FILE PATH>
+
+Checklist to enforce:
+- One H1 only; headings in order
+- Buttons have accessible names
+- Form fields have labels + describedBy
+- Focus visible styles exist
+- Contrast meets AA
+- Keyboard navigation works
+- ARIA only when necessary
+
+DRY-RUN only. Provide exact fixes + file paths.
+Wait for “APPLY A11Y PATCH 1”.
+
+
+⸻
+
+7) SEO + OG + SCHEMA PROMPT (per page)
+
+NAME: GLP_SEO_PAGE_PATCH
+TARGET: <ROUTE OR FILE PATH>
+
+Deliver:
+- Title tag (50–60 chars)
+- Meta description (140–160 chars)
+- OG title + OG description
+- Canonical URL suggestion
+- Schema type suggestion (WebPage, FAQPage, Article, etc.)
+- Internal links suggestions (3–5) to other relevant pages
+
+DRY-RUN only.
+Wait for “APPLY SEO PATCH 1”.
+
+
+⸻
+
+8) PAGE “DEFINITION OF DONE” (Replit AI must satisfy this)
+
+Paste this so each page is objectively “done.”
+
+GLP PAGE DONE CHECKLIST:
+UI:
+- Not crowded, clear sectioning, consistent spacing
+- Buttons never tiny (>=44px height)
+- H1 biggest; typography consistent
+
+Content:
+- Microcopy injected (no repetition)
+- Beginner-friendly language available
+- No clinical claims; disclaimers present
+
+A11Y:
+- Headings correct
+- Keyboard navigation usable
+- Focus states visible
+- Labels/ARIA correct
+
+SEO:
+- Title/meta/OG/canonical set
+- Schema suggestion included
+- Internal links added
+
+Performance:
+- No oversized images
+- Avoid heavy components above the fold
+
+Validation:
+- Build passes
+- Page renders without console errors
+
+
+⸻
+
+9) PAGE-BY-PAGE “RUN LIST” (A→Z sequence)
+
+Use this prompt to force Replit AI to generate the actual order list from your repo:
+
+NAME: GLP_PAGE_RUNLIST_GENERATOR
+
+Task:
+Scan the app and output a page-by-page optimization order:
+1) Public marketing pages
+2) Auth pages
+3) Core tools pages
+4) Dashboard pages
+5) Admin pages
+
+For each page, output:
+- route
+- file path(s)
+- primary CTA
+- risk level (needs safety footer? yes/no)
+- recommended first patch (crowding, typography, buttons, microcopy, a11y, SEO)
+
+DRY-RUN only.
+
+
+⸻
+
+10) NEXT: “COMPONENT OPTIMIZATION KIT” (A→Z)
+
+You also asked for components organization A→Z. Paste this when ready:
+
+NAME: GLP_COMPONENT_LIBRARY_REFACTOR (NON-DESTRUCTIVE)
+
+Goal:
+Create a clean component system without breaking anything:
+- /components/ui (primitives)
+- /components/sections (page sections)
+- /components/features (tool-specific)
+- /content (copy + microcopy JSON)
+- /styles (tokens)
+
+Rules:
+- Keep old imports working (re-export index files).
+- Do not rename exported component names that are used widely.
+- DRY-RUN first with a mapping plan.
+Wait for “APPLY COMPONENT PATCH 1”.
+
+
+⸻
+
+✅ Exactly what to do next (no guesswork)
+
+In Replit AI, paste in this order:
+	1.	GLP_PAGE_RUNLIST_GENERATOR (Section 9)
+	2.	Then pick Page 1 from the list
+	3.	Paste GLP_PAGE_UPGRADE_ENGINE with that route/path
+	4.	Then reply: “APPLY PAGE PATCH 1”
+
+⸻
+
+If you want, I can also give you the next kit immediately after this:
+✅ “Wellness Tools Module Kit” (turn each A→Z healing concept into a tool page with DB + API + content levels + safety)
+✅ “Admin Social Studio Kit” (calendar + templates + approvals + generator)

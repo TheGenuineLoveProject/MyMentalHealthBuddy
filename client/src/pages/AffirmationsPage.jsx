@@ -416,7 +416,7 @@ export default function AffirmationsPage() {
           title="Deepen Your Practice"
         />
 
-        <SafetyFooter variant="default" />
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );

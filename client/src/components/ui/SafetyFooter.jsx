@@ -10,9 +10,9 @@
 import { Link } from 'wouter';
 
 const DISCLAIMER = {
-  default: "This tool supports self-reflection and emotional awareness. It is not therapy, medical advice, or crisis intervention.",
-  compact: "For reflection support, not clinical care.",
-  prominent: "Important: The Genuine Love Project provides educational and reflective tools only. We do not diagnose, treat, or provide therapy. If you are experiencing a mental health crisis, please contact a professional or crisis service immediately."
+  default: "This tool supports self-reflection and emotional awareness. It is not therapy, medical advice, or crisis intervention. You can pause or stop at any time.",
+  compact: "For reflection support, not clinical care. Stop anytime.",
+  prominent: "Important: The Genuine Love Project provides educational and reflective tools only. We do not diagnose, treat, or provide therapy. You are in control — skip any step that doesn't feel right, and pause or stop at any time. If you are experiencing a mental health crisis, please contact a professional or crisis service immediately."
 };
 
 export default function SafetyFooter({ 

@@ -250,7 +250,7 @@ export default function MoodPage() {
             </button>
           </form>
 
-          <SafetyFooter variant="default" />
+          <SafetyFooter variant="prominent" />
         </div>
       </div>
     </>

@@ -70,7 +70,7 @@ export default function StatePage() {
           States fluctuate. This is normal.
         </p>
 
-        <SafetyFooter variant="default" />
+        <SafetyFooter variant="prominent" />
       </div>
     </div>
   );

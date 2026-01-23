@@ -1,3 +1,13 @@
+/**
+ * @deprecated DUPLICATE COMPONENT
+ * 
+ * Canonical Button: import { Button } from '@/components/ui'
+ * (resolves to Button.jsx which has 4 variants and 3 sizes)
+ * 
+ * This .tsx version exists for TypeScript compatibility.
+ * 
+ * Last audit: 2026-01-23
+ */
 import { forwardRef, ButtonHTMLAttributes } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

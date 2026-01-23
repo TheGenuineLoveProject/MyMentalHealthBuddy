@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, HelpCircle, ChevronDown, ChevronUp, MessageCircle, Shield, Heart, Sparkles } from "lucide-react";
 import { useSEO, createFAQSchema } from "../hooks/useSEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const faqs = [
   {
@@ -30,7 +31,7 @@ const faqs = [
     questions: [
       {
         q: "What is trauma and how does it affect me?",
-        a: "Trauma is the emotional response to distressing experiences that overwhelm your ability to cope. It affects your nervous system, creating patterns of hypervigilance, avoidance, or numbing. The good news is healing is possible through neuroplasticity - your brain can rewire itself with proper support and practices."
+        a: "Trauma is the emotional response to distressing experiences that overwhelm your ability to cope. It affects your nervous system, creating patterns of hypervigilance, avoidance, or numbing. Research suggests that with proper support and practices, the brain's neuroplasticity may help people move forward in their healing journey."
       },
       {
         q: "What is the difference between anxiety and normal worry?",
@@ -54,20 +55,20 @@ const faqs = [
     category: "Healing Practices",
     questions: [
       {
-        q: "What is somatic healing?",
-        a: "Somatic healing recognizes that trauma is stored in the body, not just the mind. Practices like body scanning, breathwork, gentle movement, and grounding techniques help release stored tension and restore nervous system balance."
+        q: "What are somatic practices?",
+        a: "Somatic practices recognize the connection between body and mind. Practices like body scanning, breathwork, gentle movement, and grounding techniques may help release stored tension and support nervous system balance. For deeper somatic work, consider working with a trained practitioner."
       },
       {
-        q: "How does journaling help with healing?",
-        a: "Journaling creates a safe space to process emotions, identify patterns, and gain clarity. Writing engages different brain regions than thinking alone, helping you access deeper insights. Research shows expressive writing reduces stress and accelerates emotional processing."
+        q: "How does journaling support emotional wellness?",
+        a: "Journaling creates a safe space to process emotions, identify patterns, and gain clarity. Writing engages different brain regions than thinking alone, which some people find helps access deeper insights. Research suggests expressive writing may reduce stress and support emotional processing."
       },
       {
         q: "What is inner child work?",
-        a: "Inner child work involves connecting with and healing the wounded parts of yourself from childhood. Many adult struggles stem from unmet childhood needs or early emotional wounds. By nurturing these younger parts, we can heal at the root level."
+        a: "Inner child work involves connecting with the younger parts of yourself that may carry childhood experiences. Some adult patterns stem from unmet childhood needs or early emotional experiences. By nurturing these younger parts, some people find they can address concerns at a deeper level. For significant childhood trauma, consider professional support."
       },
       {
-        q: "How do affirmations actually work?",
-        a: "Affirmations work by rewiring neural pathways through repetition. When you consistently practice positive self-statements, you create new thought patterns that can replace negative self-beliefs. The key is choosing affirmations that feel believable."
+        q: "How do affirmations work?",
+        a: "Affirmations involve repeating positive self-statements. Some research suggests that consistent practice may help create new thought patterns that can support more balanced self-beliefs. Many people find that choosing affirmations that feel believable works best."
       },
       {
         q: "What are grounding techniques?",
@@ -239,12 +240,7 @@ export default function FAQPage() {
               </div>
             </section>
 
-            <footer className="text-center py-4">
-              <p className="text-caption flex items-center justify-center gap-1">
-                <Sparkles className="h-4 w-4 text-[var(--gold-500)]" />
-                Your questions matter to us
-              </p>
-            </footer>
+            <SafetyFooter variant="default" />
           </div>
         </div>
       </div>

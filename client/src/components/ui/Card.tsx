@@ -1,3 +1,14 @@
+/**
+ * @deprecated DUPLICATE COMPONENT
+ * 
+ * Canonical Card: import { Card, CardGrid } from '@/components/ui'
+ * (resolves to Card.jsx which has more features)
+ * 
+ * This .tsx version exists for TypeScript compatibility but Card.jsx
+ * is the primary implementation with icon/title/text props and CardGrid.
+ * 
+ * Last audit: 2026-01-23
+ */
 import { forwardRef, HTMLAttributes } from "react";
 
 const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(

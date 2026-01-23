@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, BookOpen, Search, ChevronRight, Filter } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const glossaryTerms = [
   { term: "Affirmation", category: "Practice", definition: "A positive statement repeated to reinforce self-belief and counter negative thought patterns. Most effective when stated in present tense ('I am') with emotional engagement.", example: "'I am worthy of love and belonging' - spoken daily, especially when self-doubt arises." },
@@ -10,7 +11,7 @@ const glossaryTerms = [
   { term: "Body Scan", category: "Practice", definition: "A mindfulness technique involving systematic attention to physical sensations throughout the body, often used to release tension and increase body awareness.", example: "Starting at the crown of your head, slowly notice sensations as you move attention down to your toes." },
   { term: "Boundaries", category: "Relationships", definition: "Personal limits that define what behavior you will and won't accept from others. Healthy boundaries protect your emotional wellbeing while respecting others.", example: "Saying 'I can't take calls after 9pm' is setting a time boundary to protect your rest." },
   { term: "Burnout", category: "Mental Health", definition: "A state of chronic physical and emotional exhaustion caused by prolonged stress, often work-related. Characterized by reduced effectiveness, cynicism, and detachment.", example: "Feeling emotionally drained, dreading work, and unable to feel satisfaction from accomplishments." },
-  { term: "Cognitive Behavioral Therapy (CBT)", category: "Therapy", definition: "An evidence-based therapy approach that identifies and changes unhelpful thought patterns and behaviors. Based on the connection between thoughts, feelings, and actions.", example: "Challenging the thought 'I always fail' by examining evidence and creating a more balanced perspective." },
+  { term: "Cognitive Behavioral Therapy (CBT)", category: "Therapy", definition: "An evidence-based therapy approach that identifies and changes unhelpful thought patterns and behaviors. Based on the connection between thoughts, feelings, and actions. Note: CBT is a professional therapy modality—seek a licensed therapist for therapeutic application.", example: "Challenging the thought 'I always fail' by examining evidence and creating a more balanced perspective." },
   { term: "Cognitive Distortion", category: "Psychology", definition: "Automatic, irrational thought patterns that reinforce negative thinking. Common types include catastrophizing, all-or-nothing thinking, and mind reading.", example: "Catastrophizing: 'If I make one mistake, my entire career is ruined.'" },
   { term: "Cortisol", category: "Neuroscience", definition: "The primary stress hormone released by the adrenal glands. Chronic elevation can impair immune function, sleep, and cognitive performance.", example: "Morning cortisol helps you wake up, but constant high cortisol from chronic stress causes exhaustion." },
   { term: "Dissociation", category: "Mental Health", definition: "A disconnection from thoughts, feelings, surroundings, or identity. Ranges from daydreaming to more severe experiences. Often a protective response to overwhelming stress.", example: "Feeling like you're watching yourself from outside your body, or that the world seems unreal." },
@@ -35,7 +36,7 @@ const glossaryTerms = [
   { term: "Resilience", category: "Psychology", definition: "The ability to adapt and recover from adversity, stress, or trauma. Not about avoiding difficulty but developing the capacity to cope and grow.", example: "Bouncing back from job loss by learning new skills and building a support network." },
   { term: "Rumination", category: "Psychology", definition: "Repetitive, passive focus on negative thoughts and their causes. Unlike problem-solving, rumination keeps you stuck in the problem.", example: "Replaying a past argument over and over, focusing on what you should have said." },
   { term: "Self-Compassion", category: "Practice", definition: "Treating yourself with the same kindness and understanding you would offer a good friend. Includes self-kindness, common humanity, and mindfulness.", example: "Instead of berating yourself for a mistake, acknowledging 'This is hard, and everyone struggles sometimes.'" },
-  { term: "Somatic Experiencing", category: "Therapy", definition: "A body-based therapy approach that addresses trauma stored in the body. Focuses on physical sensations rather than just talking about events.", example: "Noticing where you feel tension in your body when discussing a difficult memory." },
+  { term: "Somatic Experiencing", category: "Therapy", definition: "A body-based therapy approach that addresses trauma stored in the body. Focuses on physical sensations rather than just talking about events. Note: SE is a professional therapy modality—seek a trained practitioner for therapeutic application.", example: "Noticing where you feel tension in your body when discussing a difficult memory." },
   { term: "Sympathetic Nervous System", category: "Neuroscience", definition: "The 'fight or flight' branch of the nervous system that prepares the body for action in response to perceived threats.", example: "Your heart racing and palms sweating before giving a presentation." },
   { term: "Thought Challenging", category: "Skills", definition: "A CBT technique that examines evidence for and against automatic negative thoughts, leading to more balanced perspectives.", example: "Questioning 'Nobody likes me' by listing evidence that contradicts this belief." },
   { term: "Trigger", category: "Mental Health", definition: "A stimulus (sound, smell, word, situation) that activates a strong emotional or physical response, often related to past trauma.", example: "A certain song reminding you of a painful breakup and bringing back the associated feelings." },
@@ -172,12 +173,7 @@ export default function GlossaryPage() {
             </div>
           )}
 
-          <footer className="mt-8 card-bordered bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800">
-            <p className="text-sm text-blue-800 dark:text-blue-200 text-center">
-              These definitions are educational summaries, not clinical or medical advice. For personalized guidance, 
-              please consult with a qualified mental health professional.
-            </p>
-          </footer>
+          <SafetyFooter variant="default" />
         </div>
       </div>
     </div>
