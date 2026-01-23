@@ -827,6 +827,30 @@ async function writeConfigSnapshot() {
   // Load routes from config
   const routes = await loadRoutes();
 
+  /**
+   * Stable stringify: sorts object keys for deterministic output.
+   * Handles nested objects and arrays consistently.
+   */
+  function stableStringify(obj) {
+    return JSON.stringify(obj, (key, value) => {
+      if (value && typeof value === 'object' && !Array.isArray(value)) {
+        return Object.keys(value).sort().reduce((sorted, k) => {
+          sorted[k] = value[k];
+          return sorted;
+        }, {});
+      }
+      return value;
+    });
+  }
+
+  /**
+   * Compute sha256 hash of an object using stable stringification.
+   */
+  function computeRouteHash(routeEntry) {
+    const stableJson = stableStringify(routeEntry);
+    return crypto.createHash('sha256').update(stableJson).digest('hex');
+  }
+
   // Build stable routes index with only deterministic fields
   const routesIndex = routes.map(routeConfig => {
     // Normalize undefined to null for consistent output
@@ -856,7 +880,8 @@ async function writeConfigSnapshot() {
       };
     }
 
-    return {
+    // Build route entry without hash first
+    const routeEntry = {
       route: routeConfig.route,
       category: normalize(routeConfig.category),
       aliasOf: normalize(routeConfig.aliasOf),
@@ -867,27 +892,57 @@ async function writeConfigSnapshot() {
       sectionsCount,
       modulesCount
     };
+
+    // Compute per-route hash
+    const routeHash = computeRouteHash(routeEntry);
+
+    // Return entry with hash included
+    return {
+      ...routeEntry,
+      routeHash
+    };
   });
 
   // Sort by route ascending for deterministic output
   routesIndex.sort((a, b) => a.route.localeCompare(b.route));
 
+  // Build routeHashes map for fast lookup
+  const routeHashes = {};
+  for (const entry of routesIndex) {
+    routeHashes[entry.route] = entry.routeHash;
+  }
+
   // Build canonical snapshot
   const snapshot = {
     categoryOrder: CATEGORY_ORDER,
+    routeHashes,
     routesIndex
   };
 
   // Write snapshot with stable formatting
   const snapshotJson = JSON.stringify(snapshot, null, 2);
-  fs.writeFileSync(CONFIG_SNAPSHOT_PATH, snapshotJson, 'utf8');
 
-  // Compute and write sha256 hash
-  const snapshotHash = crypto.createHash('sha256').update(snapshotJson).digest('hex');
-  fs.writeFileSync(CONFIG_HASH_PATH, snapshotHash + '\n', 'utf8');
+  // Compute snapshot hash
+  const snapshotHashValue = crypto.createHash('sha256').update(snapshotJson).digest('hex');
+
+  // Add snapshotHash to the final output for convenience
+  const snapshotWithHash = {
+    snapshotHash: snapshotHashValue,
+    categoryOrder: CATEGORY_ORDER,
+    routeHashes,
+    routesIndex
+  };
+
+  const finalSnapshotJson = JSON.stringify(snapshotWithHash, null, 2);
+  fs.writeFileSync(CONFIG_SNAPSHOT_PATH, finalSnapshotJson, 'utf8');
+
+  // Write sha256 hash file (of the final JSON bytes)
+  const fileHash = crypto.createHash('sha256').update(finalSnapshotJson).digest('hex');
+  fs.writeFileSync(CONFIG_HASH_PATH, fileHash + '\n', 'utf8');
 
   console.log(`📸 Config snapshot written: ${path.relative(ROOT, CONFIG_SNAPSHOT_PATH)}`);
   console.log(`🔐 Config hash written: ${path.relative(ROOT, CONFIG_HASH_PATH)}`);
+  console.log(`   Routes: ${routesIndex.length}, Route hashes: ${Object.keys(routeHashes).length}`);
 }
 
 // ============================================================================

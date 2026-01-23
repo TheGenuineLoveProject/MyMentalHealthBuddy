@@ -1,4 +1,5 @@
 {
+  "snapshotHash": "2a997f238cb0417cf1499e5232c73cb5c301fb97f6debca990be04783720b8a3",
   "categoryOrder": [
     {
       "letter": "A",
@@ -53,6 +54,114 @@
       "category": "System & Utility"
     }
   ],
+  "routeHashes": {
+    "/": "90429ae619174fb32a82bbb4840fdc4dec1e5d38c75e5026df6b5d8d6506bc46",
+    "/account/billing": "008c9b886aa29358b339bef2e5d6e8ecfe013366d8dcf0f6d8822f3a949d8242",
+    "/account/profile": "8de958679cc9cd89aec2687dfddc07c93311f75fd41366affc1a6e4de6ed032f",
+    "/account/settings": "86e58e1e829e854b1f06621efa8502c7091d3307f7420056e44c43ff4db87cbe",
+    "/admin": "b626cbfc0cc98cda3b609b6a8f587fd4f52a48ddf250ca7af3f0988ddd1a6a8f",
+    "/advanced": "139d33c76acbad663ff0f07a980d4d3ac5b20ae53bbbd4286b98f6bf83856f85",
+    "/affirmations": "dc4fc0f19cdf6def8ec14b27031eb644b79e105101687d2b217069215047be8c",
+    "/analytics": "ec6feea496bf272917827cb5d1a850474e57bf01ec42ef06f6e768323a8c5eca",
+    "/atlas": "f2cdc15452d59870a703d3514de1a1a32f1740718196f21fcb13ad9cf8c98fa5",
+    "/behavior-change": "8a03c085fbe22d1780b0e0b8d19171cb786704c5a95f174639f041be4e0cdc6c",
+    "/blog": "812f5a88c9bf5aeb9cfd1fc0a9e2318cd4789e62def83a6908bca0b37b74e382",
+    "/blog/:slug": "7d07e6022095cfa5a4cd12f1acc852ad79f9f6cc24ed662b618f608f1c681cfa",
+    "/body-wellness": "2e8f43833c9e5d01c07dc56387435b9955cac99b3381a4af4b71440bdff03cc5",
+    "/breathing": "ee7eb39e432f9f0169c6cf425df2e3fb36088d3f36249f10f0f4d0fde572a2b0",
+    "/calming-scenes": "661e588639e493c8f365ed26969ce8d3f442ceda18e96c093e842c37d21c3b64",
+    "/chat": "ba0472213c58bd4992e077eee468749046b070de86d17fb919aefbdeebc368b5",
+    "/cognitive-architecture": "5434c13e857f033afecbe2cde8716c9c872a3c9b2cc0cc85b01cbfe584c4e5f9",
+    "/cognitive-tools": "88c091f38335154be5cbd313a0c9b113fc35427643f1afc351d3362750922dff",
+    "/collaborative-lab": "a23983248617aba3c609fb01fb6bec07a45d5a47b40c1310e1115f4e9dbffe85",
+    "/community": "f0d729dbacfb4765ca171bc82a460fa6e73d62c36bf84e68c55b22e467ba0ac9",
+    "/community/discussion/:id": "c522a4184246bdc0f4531c8ca6db00243ce1171d7f2f0ded7e4a93c29de361b8",
+    "/companion": "0c844315977074db2e1d84490ce08022046d53bf310e6a94c52f2629511b44dc",
+    "/content-admin": "804ade050fe3d11333f95d84c24f0b10a35ac213eec384fc7510abe419664286",
+    "/content-index": "7852c2027724b3335ff23bee9b2213d3f35a7760a7442ec772c5e05ea1372b09",
+    "/content-studio": "c37f917b06894b77696c86b92625c17584f7b2c835ae7d01568ecf37fe8f8737",
+    "/control": "3e3e87b1f6a22cf6f9821ba91109039b05827b82f8138c4cf4c7adf30e47c912",
+    "/crisis": "5f24881450aa7173d42fbf4a59acf79af6f80a5c46ce022bba1d2f7682767bec",
+    "/crm": "91358e7ce1f080c644aa67063bbce054704bced6a5bafc9beb3326f817a3a797",
+    "/daily-routines": "cbed947ad4e92d1474ed14263538e123a4ab02f408b3e67b5958b7cc61b054d6",
+    "/daily-wisdom": "75d9bdf2a6b7fa328348227c6f890968f3638c4da6b7baa223b83909c25c3f14",
+    "/dashboard": "d5b76ee61c4f5ca0960a6c05ff1c51b38f4b99cc294fb8bf26087da482fbd0f2",
+    "/design-dashboard": "f1a90aa1175cdaec438b709fa550dbb3b8f57bb27bf6268b5b5b88ec4889f04f",
+    "/design-system": "5a826edc12eace7d6ed303096ca5cc9e68504ce94630d4de99c8cfdca6a5bbb3",
+    "/disclaimer": "53a767befbb0fa8c5d1504d939b31a7f1251b50bab0b87f945a1639c69bc48a6",
+    "/elite-tools": "c46dcaf05b46a6c5dbbc395cb155aaaeb5080aae2814e5faa8828e8b2a99858e",
+    "/emotional-intelligence": "0e2abd4b5d42f78ac60fbdb3882c70607563c3e77f3dabc47534577cbfcee399",
+    "/ethics": "4d451a3f546fe506aa48fd85c08ee04f557aee0cc8df8f2794ca186a2e68f398",
+    "/examples": "950e7105c69dbd86424984501bde264ec4f35c645416644091edcac9839b4eed",
+    "/faq": "ef25d321160ea3631496f454bc4fe8bcde8747bd9c4dcdede7fa169895a7fdf6",
+    "/forgot-password": "b34a1e6d05492ce10fd64b08a8154367daae5ce0e7e371b3bbd4f2e86747bc96",
+    "/glossary": "94eaf217f415a54e9f36b9afe0244c9e009b02782dc0832013cabb7626f350b6",
+    "/glossary-full": "5add1c65e5445a759688c5ba3d3bece7893d6ba1b4a6c1891d664ab8d8abf4aa",
+    "/grounding": "70e8e71949d647d98c19f0d1fd51e9deaabc0aa823d6681532b069bb0e0295b2",
+    "/growth-analytics": "6ed6eec86acb36d9b913e8eb576401a0f9cd3ff07d266dfe9227356fff56088e",
+    "/guided-journaling": "3a773f1e944e6e02b2151c72e6e057bd5caf24978616ab401d0637d0afa27f52",
+    "/healing": "c60018d6250f51baf91bb4adb2d75dd16b8985d202536a0db3c171c4b9ff1568",
+    "/healing-journeys": "b2b1e13e9f13838af0abf27588c78558a3d8cdcbe1466116cf9593a308b57d17",
+    "/healing-library": "8784df35f620a666d85a1b2955a729e5c4340d3f5087396025e210008c53483b",
+    "/health": "bd355c0aca8a950941918b5930d5fb51a8ae2e6bb62c6457d14ff99346fc9371",
+    "/home": "faabd5426e8ee6c0075861a9945d02f92da007a2fa800f0263f349ed11635feb",
+    "/how-to-guides": "df7adc704f9e94359d85849b1a24d64e9e9847a7cbf8a16cd2ce2778838ce836",
+    "/inner-child": "728f2554ccb932bc06272a202d37d791431ee9280ca8455b696e2d448b80ea94",
+    "/insight-cards": "fe4bfab9af318a6c4ed712ca08b2264bb3e981d7d37f33064e848c03171a6b36",
+    "/journal": "55f03dbb1c3c09fce9580447f9f625bb00fa8b634b5e7dc5222e7e2d12f6421b",
+    "/knowledge-synthesis": "655e6f4c4da1d93e5624f14b69cf3026e76db6874a943fa1b20e61d387837480",
+    "/landing": "cc031edf62d839d177eaaa55b09865801ea909841e6ea8d0409d8ec10a636a43",
+    "/legal": "d92429d5e92479b9be083da8346eee38fc43926322e02349f0964ae8b01c0051",
+    "/login": "01ba1492005a6c57bdba2f1588dc14d3f833890507ca3d9c7e72c5f8682081f7",
+    "/login/callback": "7102f7ff3a2d3228b9319ddd6b76c8b8de02f9031f6dcc2e786bf2cc624734fe",
+    "/mastery": "de4edbf2188a84495102f847acb0ba0852adeac2ce2a4759a80cf9b4bbc2a3fc",
+    "/meditation": "fb65f05ff7b041ce37e1bcf9ef290404fa9e2d8ba7ac3c2d4b6a6318e3098988",
+    "/meta-learning": "ecef45ff7c5152ee902227e3b939b6296736c96b241afcad98caa82b837b4743",
+    "/mirror": "794d3da96b4c63e65297a07a2d33f2cf8da736bbe50c2041534f40c8efb46e44",
+    "/mood": "8d6351584e7377b87974674ac2198404dee789f039ed73a3038c5a8db6d879c9",
+    "/news": "675e4de370cc3ca2e20ae35d1a2305723afdd87ee6e34f3d40ee3219b6107de3",
+    "/not-found": "019a89e7d1fd468369590ccb7484f7b349dc89404d265724e8d48883be603266",
+    "/onboarding": "a5e423937394070443ea9e81dd5ef586bc4b5a84eb2bf0e2ac34dcbab939782b",
+    "/original-home": "63681735c744aacebb6df4c710a604b20bc6dc319c8e505c79108d16e5404504",
+    "/philosophical-inquiry": "a7f004bd2b57513580adb5775de99ffd0a688052c2ce99a609dea8e7c39830e5",
+    "/premium": "92e148ec262fd4f6fecbb5115c1989ef58b10c7fc4b6bb242706c628ebe36d59",
+    "/pricing": "d45322b7f6a0e66e5156e4d8495a6165f9573d427f05d650cd0834850f11d7d2",
+    "/privacy": "8edabe77d880c24cc94d53acd75e4aa7b0e1a592fd67c035cac474a7ec6edfa3",
+    "/professional-resources": "89633f4a858d4e20b8d9de40e79e30a1dbc7a942c5125faaf8e484232899e427",
+    "/progress": "43e423f3c2390b2784c3a92ad45366575f839a9866230b8f1556b0a46f3f838b",
+    "/publishing": "893634dae03b461b9ecc41932a65378a5bcf5392fb56c00ccf246be70f1bced0",
+    "/qa": "74b0a47ec1852438be7b9da554c3277547243c77bb23ae9c878ff7b4a73fe6e6",
+    "/register": "b44b5bcf772205d2abfeef0134e5963104d67ae791a07049e52b2ba47d718240",
+    "/research": "edfda4830ecb1c15308da6562e475d3cbf528aaa23b8f3526a894d67480499b0",
+    "/reset-password": "4fc2ff0890843ad441145783c8a1d034d4a807dc4cb144ed9802d1e8ff7873eb",
+    "/resilience": "e6070915d0ed98edc18dc29130900863f1d7d9c2a45de63a868715ab472901a8",
+    "/resources": "b9ef4313b2028fc78089a00319107532124768ff150d9c201ac62cfa0ecfbf91",
+    "/ritual": "ce6fe5d2fee102019a89d6eb4c60e4f88530f4eced677f0de4c7073e3ca79b52",
+    "/safety": "7161cb1ac10e266c82a8ec7e85cc0febbc19b3f775adb24b8865a3e7be8bca8e",
+    "/self-care": "4216189edb63023ec5c7cc93597ae4eb67e6368201adb6a307834d44035f5001",
+    "/settings": "e9150c69aaec8083ee7290733f2f9909cf8be252ca2e5d29d17025bff7b7de3f",
+    "/sleep-guide": "e5bb7014e8a2910ee57ce516e4f74409c077dadd0b32903b06df24ecf13c4f77",
+    "/social": "2076ee0d9d4e88f82ff19dc3c3496b1997dd0d66e7cdfac650fef5b0e0172d33",
+    "/soul-wellness": "a89d3ddfb8fd2adea684ebe9209b412562ddcad556b0c598fc32c980f9e177a1",
+    "/state": "64c403379c5d90fec8f171021f8467541089dfe9190328c393447905459a1278",
+    "/strategy-maps": "118cabe7291c6935218ac08fd4a2d0173e9ea499f5732e76e1f2a59e8843b19b",
+    "/stress-response": "743fca97c98e23f640ea047f4788ce80c066430cffe0eeefa8122948e055e85e",
+    "/study-vault": "8eb0b90be51de5359df870e0cc8a09f8e10ed7886df859dc411d7f3984fd2f94",
+    "/support": "4512365c09fb51806b796ca682814bb32d929d56f9d131b717d21aa41653f583",
+    "/systems-thinking": "8be2c0f28b881ef656b9d86aa4834ba6ba232368c18b01604d837348edea2811",
+    "/terms": "b5fde2c991184a1eab0a8519bc2a81158949a62c8a513ad4f12f5935b6d45407",
+    "/today": "2577c927eacfe017ee864fb40c607604443af90bd27ee3f6e10a5f1f3b08a7cb",
+    "/tools": "9e70ee9f20752a07a6b9ea6d892d425133712681b702f63caf95846d34c7d7b8",
+    "/upgrade": "893c3667f0308f997e898335460f706a0b4420d11b44393ab92ca497b007811e",
+    "/welcome": "a9aec92f46ec4fd6710b064adc7033978b81eb433391626303b062b21207df2d",
+    "/wellness": "77db7f217081b349f0b1df0546821f7d3a54312c1de29ae6b24fd8a467700581",
+    "/wellness-hub": "718bae2b3c9d2868b5606d4ca13a2915b5ee22bef9a2ff02b679a6ee00bc6d9e",
+    "/wireframes": "3fd3b5b76a151f9fa93f94c41137ca545c3b9d08187d4afbf59f3b4ede8f28ef",
+    "/wisdom": "3e0e6a70b636b00ff763b8a208e3a76344d1501ebc75cfd9ea1518fa5eebba86",
+    "/wisdom-practices": "8e08a92d51424b709a4f8eb66bb6ef19c238133fa817b9ab598896fc2ce9d648",
+    "/wisdom-synthesis": "6355889655fd42451e2007112be33705156f848429719a159f41d8ee3fe7771e",
+    "/write": "6e6d0aed3e22ce723b555069c3fad23302d3ed3124dff7d9420541eb2e4e5541"
+  },
   "routesIndex": [
     {
       "route": "/",
@@ -74,7 +183,8 @@
         }
       },
       "sectionsCount": 3,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "90429ae619174fb32a82bbb4840fdc4dec1e5d38c75e5026df6b5d8d6506bc46"
     },
     {
       "route": "/account/billing",
@@ -96,7 +206,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "008c9b886aa29358b339bef2e5d6e8ecfe013366d8dcf0f6d8822f3a949d8242"
     },
     {
       "route": "/account/profile",
@@ -118,7 +229,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8de958679cc9cd89aec2687dfddc07c93311f75fd41366affc1a6e4de6ed032f"
     },
     {
       "route": "/account/settings",
@@ -140,7 +252,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "86e58e1e829e854b1f06621efa8502c7091d3307f7420056e44c43ff4db87cbe"
     },
     {
       "route": "/admin",
@@ -162,7 +275,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "b626cbfc0cc98cda3b609b6a8f587fd4f52a48ddf250ca7af3f0988ddd1a6a8f"
     },
     {
       "route": "/advanced",
@@ -184,7 +298,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "139d33c76acbad663ff0f07a980d4d3ac5b20ae53bbbd4286b98f6bf83856f85"
     },
     {
       "route": "/affirmations",
@@ -206,7 +321,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "dc4fc0f19cdf6def8ec14b27031eb644b79e105101687d2b217069215047be8c"
     },
     {
       "route": "/analytics",
@@ -228,7 +344,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "ec6feea496bf272917827cb5d1a850474e57bf01ec42ef06f6e768323a8c5eca"
     },
     {
       "route": "/atlas",
@@ -250,7 +367,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "f2cdc15452d59870a703d3514de1a1a32f1740718196f21fcb13ad9cf8c98fa5"
     },
     {
       "route": "/behavior-change",
@@ -272,7 +390,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8a03c085fbe22d1780b0e0b8d19171cb786704c5a95f174639f041be4e0cdc6c"
     },
     {
       "route": "/blog",
@@ -294,7 +413,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "812f5a88c9bf5aeb9cfd1fc0a9e2318cd4789e62def83a6908bca0b37b74e382"
     },
     {
       "route": "/blog/:slug",
@@ -316,7 +436,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "7d07e6022095cfa5a4cd12f1acc852ad79f9f6cc24ed662b618f608f1c681cfa"
     },
     {
       "route": "/body-wellness",
@@ -338,7 +459,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "2e8f43833c9e5d01c07dc56387435b9955cac99b3381a4af4b71440bdff03cc5"
     },
     {
       "route": "/breathing",
@@ -360,7 +482,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "ee7eb39e432f9f0169c6cf425df2e3fb36088d3f36249f10f0f4d0fde572a2b0"
     },
     {
       "route": "/calming-scenes",
@@ -382,7 +505,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "661e588639e493c8f365ed26969ce8d3f442ceda18e96c093e842c37d21c3b64"
     },
     {
       "route": "/chat",
@@ -404,7 +528,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "ba0472213c58bd4992e077eee468749046b070de86d17fb919aefbdeebc368b5"
     },
     {
       "route": "/cognitive-architecture",
@@ -426,7 +551,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "5434c13e857f033afecbe2cde8716c9c872a3c9b2cc0cc85b01cbfe584c4e5f9"
     },
     {
       "route": "/cognitive-tools",
@@ -448,7 +574,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "88c091f38335154be5cbd313a0c9b113fc35427643f1afc351d3362750922dff"
     },
     {
       "route": "/collaborative-lab",
@@ -470,7 +597,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "a23983248617aba3c609fb01fb6bec07a45d5a47b40c1310e1115f4e9dbffe85"
     },
     {
       "route": "/community",
@@ -492,7 +620,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "f0d729dbacfb4765ca171bc82a460fa6e73d62c36bf84e68c55b22e467ba0ac9"
     },
     {
       "route": "/community/discussion/:id",
@@ -514,7 +643,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "c522a4184246bdc0f4531c8ca6db00243ce1171d7f2f0ded7e4a93c29de361b8"
     },
     {
       "route": "/companion",
@@ -536,7 +666,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "0c844315977074db2e1d84490ce08022046d53bf310e6a94c52f2629511b44dc"
     },
     {
       "route": "/content-admin",
@@ -558,7 +689,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "804ade050fe3d11333f95d84c24f0b10a35ac213eec384fc7510abe419664286"
     },
     {
       "route": "/content-index",
@@ -580,7 +712,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "7852c2027724b3335ff23bee9b2213d3f35a7760a7442ec772c5e05ea1372b09"
     },
     {
       "route": "/content-studio",
@@ -602,7 +735,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "c37f917b06894b77696c86b92625c17584f7b2c835ae7d01568ecf37fe8f8737"
     },
     {
       "route": "/control",
@@ -624,7 +758,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "3e3e87b1f6a22cf6f9821ba91109039b05827b82f8138c4cf4c7adf30e47c912"
     },
     {
       "route": "/crisis",
@@ -646,7 +781,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "5f24881450aa7173d42fbf4a59acf79af6f80a5c46ce022bba1d2f7682767bec"
     },
     {
       "route": "/crm",
@@ -668,7 +804,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "91358e7ce1f080c644aa67063bbce054704bced6a5bafc9beb3326f817a3a797"
     },
     {
       "route": "/daily-routines",
@@ -690,7 +827,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "cbed947ad4e92d1474ed14263538e123a4ab02f408b3e67b5958b7cc61b054d6"
     },
     {
       "route": "/daily-wisdom",
@@ -712,7 +850,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "75d9bdf2a6b7fa328348227c6f890968f3638c4da6b7baa223b83909c25c3f14"
     },
     {
       "route": "/dashboard",
@@ -734,7 +873,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "d5b76ee61c4f5ca0960a6c05ff1c51b38f4b99cc294fb8bf26087da482fbd0f2"
     },
     {
       "route": "/design-dashboard",
@@ -756,7 +896,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "f1a90aa1175cdaec438b709fa550dbb3b8f57bb27bf6268b5b5b88ec4889f04f"
     },
     {
       "route": "/design-system",
@@ -778,7 +919,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "5a826edc12eace7d6ed303096ca5cc9e68504ce94630d4de99c8cfdca6a5bbb3"
     },
     {
       "route": "/disclaimer",
@@ -800,7 +942,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "53a767befbb0fa8c5d1504d939b31a7f1251b50bab0b87f945a1639c69bc48a6"
     },
     {
       "route": "/elite-tools",
@@ -822,7 +965,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "c46dcaf05b46a6c5dbbc395cb155aaaeb5080aae2814e5faa8828e8b2a99858e"
     },
     {
       "route": "/emotional-intelligence",
@@ -844,7 +988,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "0e2abd4b5d42f78ac60fbdb3882c70607563c3e77f3dabc47534577cbfcee399"
     },
     {
       "route": "/ethics",
@@ -866,7 +1011,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "4d451a3f546fe506aa48fd85c08ee04f557aee0cc8df8f2794ca186a2e68f398"
     },
     {
       "route": "/examples",
@@ -888,7 +1034,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "950e7105c69dbd86424984501bde264ec4f35c645416644091edcac9839b4eed"
     },
     {
       "route": "/faq",
@@ -910,7 +1057,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "ef25d321160ea3631496f454bc4fe8bcde8747bd9c4dcdede7fa169895a7fdf6"
     },
     {
       "route": "/forgot-password",
@@ -932,7 +1080,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "b34a1e6d05492ce10fd64b08a8154367daae5ce0e7e371b3bbd4f2e86747bc96"
     },
     {
       "route": "/glossary",
@@ -954,7 +1103,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "94eaf217f415a54e9f36b9afe0244c9e009b02782dc0832013cabb7626f350b6"
     },
     {
       "route": "/glossary-full",
@@ -976,7 +1126,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "5add1c65e5445a759688c5ba3d3bece7893d6ba1b4a6c1891d664ab8d8abf4aa"
     },
     {
       "route": "/grounding",
@@ -998,7 +1149,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "70e8e71949d647d98c19f0d1fd51e9deaabc0aa823d6681532b069bb0e0295b2"
     },
     {
       "route": "/growth-analytics",
@@ -1020,7 +1172,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "6ed6eec86acb36d9b913e8eb576401a0f9cd3ff07d266dfe9227356fff56088e"
     },
     {
       "route": "/guided-journaling",
@@ -1042,7 +1195,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "3a773f1e944e6e02b2151c72e6e057bd5caf24978616ab401d0637d0afa27f52"
     },
     {
       "route": "/healing",
@@ -1064,7 +1218,8 @@
         }
       },
       "sectionsCount": 3,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "c60018d6250f51baf91bb4adb2d75dd16b8985d202536a0db3c171c4b9ff1568"
     },
     {
       "route": "/healing-journeys",
@@ -1086,7 +1241,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "b2b1e13e9f13838af0abf27588c78558a3d8cdcbe1466116cf9593a308b57d17"
     },
     {
       "route": "/healing-library",
@@ -1108,7 +1264,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8784df35f620a666d85a1b2955a729e5c4340d3f5087396025e210008c53483b"
     },
     {
       "route": "/health",
@@ -1130,7 +1287,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "bd355c0aca8a950941918b5930d5fb51a8ae2e6bb62c6457d14ff99346fc9371"
     },
     {
       "route": "/home",
@@ -1141,7 +1299,8 @@
       "description": null,
       "hero": null,
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "faabd5426e8ee6c0075861a9945d02f92da007a2fa800f0263f349ed11635feb"
     },
     {
       "route": "/how-to-guides",
@@ -1163,7 +1322,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "df7adc704f9e94359d85849b1a24d64e9e9847a7cbf8a16cd2ce2778838ce836"
     },
     {
       "route": "/inner-child",
@@ -1185,7 +1345,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "728f2554ccb932bc06272a202d37d791431ee9280ca8455b696e2d448b80ea94"
     },
     {
       "route": "/insight-cards",
@@ -1207,7 +1368,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "fe4bfab9af318a6c4ed712ca08b2264bb3e981d7d37f33064e848c03171a6b36"
     },
     {
       "route": "/journal",
@@ -1229,7 +1391,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "55f03dbb1c3c09fce9580447f9f625bb00fa8b634b5e7dc5222e7e2d12f6421b"
     },
     {
       "route": "/knowledge-synthesis",
@@ -1251,7 +1414,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "655e6f4c4da1d93e5624f14b69cf3026e76db6874a943fa1b20e61d387837480"
     },
     {
       "route": "/landing",
@@ -1273,7 +1437,8 @@
         }
       },
       "sectionsCount": 3,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "cc031edf62d839d177eaaa55b09865801ea909841e6ea8d0409d8ec10a636a43"
     },
     {
       "route": "/legal",
@@ -1295,7 +1460,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "d92429d5e92479b9be083da8346eee38fc43926322e02349f0964ae8b01c0051"
     },
     {
       "route": "/login",
@@ -1317,7 +1483,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "01ba1492005a6c57bdba2f1588dc14d3f833890507ca3d9c7e72c5f8682081f7"
     },
     {
       "route": "/login/callback",
@@ -1339,7 +1506,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "7102f7ff3a2d3228b9319ddd6b76c8b8de02f9031f6dcc2e786bf2cc624734fe"
     },
     {
       "route": "/mastery",
@@ -1361,7 +1529,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "de4edbf2188a84495102f847acb0ba0852adeac2ce2a4759a80cf9b4bbc2a3fc"
     },
     {
       "route": "/meditation",
@@ -1383,7 +1552,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "fb65f05ff7b041ce37e1bcf9ef290404fa9e2d8ba7ac3c2d4b6a6318e3098988"
     },
     {
       "route": "/meta-learning",
@@ -1405,7 +1575,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "ecef45ff7c5152ee902227e3b939b6296736c96b241afcad98caa82b837b4743"
     },
     {
       "route": "/mirror",
@@ -1427,7 +1598,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "794d3da96b4c63e65297a07a2d33f2cf8da736bbe50c2041534f40c8efb46e44"
     },
     {
       "route": "/mood",
@@ -1449,7 +1621,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8d6351584e7377b87974674ac2198404dee789f039ed73a3038c5a8db6d879c9"
     },
     {
       "route": "/news",
@@ -1471,7 +1644,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "675e4de370cc3ca2e20ae35d1a2305723afdd87ee6e34f3d40ee3219b6107de3"
     },
     {
       "route": "/not-found",
@@ -1493,7 +1667,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "019a89e7d1fd468369590ccb7484f7b349dc89404d265724e8d48883be603266"
     },
     {
       "route": "/onboarding",
@@ -1515,7 +1690,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "a5e423937394070443ea9e81dd5ef586bc4b5a84eb2bf0e2ac34dcbab939782b"
     },
     {
       "route": "/original-home",
@@ -1537,7 +1713,8 @@
         }
       },
       "sectionsCount": 2,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "63681735c744aacebb6df4c710a604b20bc6dc319c8e505c79108d16e5404504"
     },
     {
       "route": "/philosophical-inquiry",
@@ -1559,7 +1736,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "a7f004bd2b57513580adb5775de99ffd0a688052c2ce99a609dea8e7c39830e5"
     },
     {
       "route": "/premium",
@@ -1581,7 +1759,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "92e148ec262fd4f6fecbb5115c1989ef58b10c7fc4b6bb242706c628ebe36d59"
     },
     {
       "route": "/pricing",
@@ -1603,7 +1782,8 @@
         }
       },
       "sectionsCount": 3,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "d45322b7f6a0e66e5156e4d8495a6165f9573d427f05d650cd0834850f11d7d2"
     },
     {
       "route": "/privacy",
@@ -1625,7 +1805,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8edabe77d880c24cc94d53acd75e4aa7b0e1a592fd67c035cac474a7ec6edfa3"
     },
     {
       "route": "/professional-resources",
@@ -1647,7 +1828,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "89633f4a858d4e20b8d9de40e79e30a1dbc7a942c5125faaf8e484232899e427"
     },
     {
       "route": "/progress",
@@ -1669,7 +1851,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "43e423f3c2390b2784c3a92ad45366575f839a9866230b8f1556b0a46f3f838b"
     },
     {
       "route": "/publishing",
@@ -1691,7 +1874,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "893634dae03b461b9ecc41932a65378a5bcf5392fb56c00ccf246be70f1bced0"
     },
     {
       "route": "/qa",
@@ -1713,7 +1897,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "74b0a47ec1852438be7b9da554c3277547243c77bb23ae9c878ff7b4a73fe6e6"
     },
     {
       "route": "/register",
@@ -1735,7 +1920,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "b44b5bcf772205d2abfeef0134e5963104d67ae791a07049e52b2ba47d718240"
     },
     {
       "route": "/research",
@@ -1757,7 +1943,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "edfda4830ecb1c15308da6562e475d3cbf528aaa23b8f3526a894d67480499b0"
     },
     {
       "route": "/reset-password",
@@ -1779,7 +1966,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "4fc2ff0890843ad441145783c8a1d034d4a807dc4cb144ed9802d1e8ff7873eb"
     },
     {
       "route": "/resilience",
@@ -1801,7 +1989,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "e6070915d0ed98edc18dc29130900863f1d7d9c2a45de63a868715ab472901a8"
     },
     {
       "route": "/resources",
@@ -1823,7 +2012,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "b9ef4313b2028fc78089a00319107532124768ff150d9c201ac62cfa0ecfbf91"
     },
     {
       "route": "/ritual",
@@ -1845,7 +2035,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "ce6fe5d2fee102019a89d6eb4c60e4f88530f4eced677f0de4c7073e3ca79b52"
     },
     {
       "route": "/safety",
@@ -1867,7 +2058,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "7161cb1ac10e266c82a8ec7e85cc0febbc19b3f775adb24b8865a3e7be8bca8e"
     },
     {
       "route": "/self-care",
@@ -1889,7 +2081,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "4216189edb63023ec5c7cc93597ae4eb67e6368201adb6a307834d44035f5001"
     },
     {
       "route": "/settings",
@@ -1911,7 +2104,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "e9150c69aaec8083ee7290733f2f9909cf8be252ca2e5d29d17025bff7b7de3f"
     },
     {
       "route": "/sleep-guide",
@@ -1933,7 +2127,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "e5bb7014e8a2910ee57ce516e4f74409c077dadd0b32903b06df24ecf13c4f77"
     },
     {
       "route": "/social",
@@ -1955,7 +2150,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "2076ee0d9d4e88f82ff19dc3c3496b1997dd0d66e7cdfac650fef5b0e0172d33"
     },
     {
       "route": "/soul-wellness",
@@ -1977,7 +2173,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "a89d3ddfb8fd2adea684ebe9209b412562ddcad556b0c598fc32c980f9e177a1"
     },
     {
       "route": "/state",
@@ -1999,7 +2196,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "64c403379c5d90fec8f171021f8467541089dfe9190328c393447905459a1278"
     },
     {
       "route": "/strategy-maps",
@@ -2021,7 +2219,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "118cabe7291c6935218ac08fd4a2d0173e9ea499f5732e76e1f2a59e8843b19b"
     },
     {
       "route": "/stress-response",
@@ -2043,7 +2242,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "743fca97c98e23f640ea047f4788ce80c066430cffe0eeefa8122948e055e85e"
     },
     {
       "route": "/study-vault",
@@ -2065,7 +2265,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8eb0b90be51de5359df870e0cc8a09f8e10ed7886df859dc411d7f3984fd2f94"
     },
     {
       "route": "/support",
@@ -2087,7 +2288,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "4512365c09fb51806b796ca682814bb32d929d56f9d131b717d21aa41653f583"
     },
     {
       "route": "/systems-thinking",
@@ -2109,7 +2311,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8be2c0f28b881ef656b9d86aa4834ba6ba232368c18b01604d837348edea2811"
     },
     {
       "route": "/terms",
@@ -2131,7 +2334,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "b5fde2c991184a1eab0a8519bc2a81158949a62c8a513ad4f12f5935b6d45407"
     },
     {
       "route": "/today",
@@ -2153,7 +2357,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "2577c927eacfe017ee864fb40c607604443af90bd27ee3f6e10a5f1f3b08a7cb"
     },
     {
       "route": "/tools",
@@ -2175,7 +2380,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "9e70ee9f20752a07a6b9ea6d892d425133712681b702f63caf95846d34c7d7b8"
     },
     {
       "route": "/upgrade",
@@ -2197,7 +2403,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "893c3667f0308f997e898335460f706a0b4420d11b44393ab92ca497b007811e"
     },
     {
       "route": "/welcome",
@@ -2208,7 +2415,8 @@
       "description": null,
       "hero": null,
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "a9aec92f46ec4fd6710b064adc7033978b81eb433391626303b062b21207df2d"
     },
     {
       "route": "/wellness",
@@ -2230,7 +2438,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "77db7f217081b349f0b1df0546821f7d3a54312c1de29ae6b24fd8a467700581"
     },
     {
       "route": "/wellness-hub",
@@ -2252,7 +2461,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "718bae2b3c9d2868b5606d4ca13a2915b5ee22bef9a2ff02b679a6ee00bc6d9e"
     },
     {
       "route": "/wireframes",
@@ -2274,7 +2484,8 @@
         }
       },
       "sectionsCount": 0,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "3fd3b5b76a151f9fa93f94c41137ca545c3b9d08187d4afbf59f3b4ede8f28ef"
     },
     {
       "route": "/wisdom",
@@ -2296,7 +2507,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "3e0e6a70b636b00ff763b8a208e3a76344d1501ebc75cfd9ea1518fa5eebba86"
     },
     {
       "route": "/wisdom-practices",
@@ -2318,7 +2530,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "8e08a92d51424b709a4f8eb66bb6ef19c238133fa817b9ab598896fc2ce9d648"
     },
     {
       "route": "/wisdom-synthesis",
@@ -2340,7 +2553,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "6355889655fd42451e2007112be33705156f848429719a159f41d8ee3fe7771e"
     },
     {
       "route": "/write",
@@ -2362,7 +2576,8 @@
         }
       },
       "sectionsCount": 1,
-      "modulesCount": 0
+      "modulesCount": 0,
+      "routeHash": "6e6d0aed3e22ce723b555069c3fad23302d3ed3124dff7d9420541eb2e4e5541"
     }
   ]
 }
