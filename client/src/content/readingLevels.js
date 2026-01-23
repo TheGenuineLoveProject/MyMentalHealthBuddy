@@ -2,25 +2,35 @@
  * readingLevels.js - Reading Level System Constants & Helpers
  * 
  * Features:
- * - Three levels: kids (simple), standard (warm), deep (explanatory)
+ * - Three levels: beginner (simple), standard (warm), deep (explanatory)
  * - SSR-safe localStorage handling
- * - URL query support (?level=kids|standard|deep)
+ * - URL query support (?level=beginner|standard|deep)
  * - Fallback chain: URL > localStorage > route default > standard
  * 
  * STRICT COPY RULES:
- * - Kids: Sentences under 10 words when possible
- * - Standard: Paragraphs max 2 sentences
- * - Deep: One short definition per section, keep tone gentle
+ * - Beginner: Sentences under 10 words, respectful + empowering (not childish)
+ * - Standard: Paragraphs max 2 sentences, warm/grounded tone
+ * - Deep: One short definition per section, gentle tone
+ * 
+ * INCLUSIVE LANGUAGE (MANDATORY):
+ * - Use person-first, non-stigmatizing language
+ * - Avoid assumptions about identity, culture, ability
+ * - Avoid moralizing terms ("should", "weak", "normal/abnormal")
+ * - Avoid infantilizing tone
+ * 
+ * COPY SAFETY:
+ * - Allowed: "may help", "some people find...", "often used for..."
+ * - Never: "cures", "treats", "guarantees", "clinically proven"
  */
 
-export const READING_LEVELS = ['kids', 'standard', 'deep'];
+export const READING_LEVELS = ['beginner', 'standard', 'deep'];
 
 export const READING_LEVEL_META = {
-  kids: {
-    label: 'Kids',
-    description: 'Simple words, short sentences',
-    aria: 'Kids mode: very simple, easy-to-understand language',
-    copyRule: 'Sentences under 10 words when possible'
+  beginner: {
+    label: 'Beginner',
+    description: 'Plain language, short sentences',
+    aria: 'Beginner mode: clear, accessible language',
+    copyRule: 'Sentences under 10 words, respectful and empowering'
   },
   standard: {
     label: 'Standard',
@@ -30,8 +40,8 @@ export const READING_LEVEL_META = {
   },
   deep: {
     label: 'Deep',
-    description: 'Frameworks and definitions',
-    aria: 'Deep mode: detailed explanations with frameworks and definitions',
+    description: 'More context and definitions',
+    aria: 'Deep mode: detailed explanations with definitions',
     copyRule: 'One short definition per section, gentle tone'
   }
 };
@@ -58,6 +68,16 @@ export function normalizeReadingLevel(input) {
  * @param {string} level - Target reading level
  * @returns {string} - Resolved text
  */
+/**
+ * Get variant text for a field based on reading level
+ * Handles both string values and { beginner, standard, deep } objects
+ * Also handles legacy { kids, standard, deep } format
+ * Fallback chain: requested level > standard > first available string
+ * 
+ * @param {string|object} value - String or variant object
+ * @param {string} level - Target reading level
+ * @returns {string} - Resolved text
+ */
 export function getVariant(value, level) {
   if (value === null || value === undefined) {
     return '';
@@ -74,6 +94,10 @@ export function getVariant(value, level) {
       return value[normalizedLevel];
     }
     
+    if (normalizedLevel === 'beginner' && value.kids !== undefined) {
+      return value.kids;
+    }
+    
     if (value.standard !== undefined) {
       return value.standard;
     }
@@ -82,6 +106,10 @@ export function getVariant(value, level) {
       if (value[lvl] !== undefined) {
         return value[lvl];
       }
+    }
+    
+    if (value.kids !== undefined) {
+      return value.kids;
     }
     
     const firstKey = Object.keys(value)[0];
@@ -95,7 +123,8 @@ export function getVariant(value, level) {
 
 /**
  * Get variant array for bullets/lists based on reading level
- * @param {object} bullets - { kids: [...], standard: [...], deep: [...] }
+ * Handles { beginner, standard, deep } and legacy { kids, standard, deep }
+ * @param {object} bullets - Variant object with arrays
  * @param {string} level - Target reading level
  * @returns {array} - Resolved array
  */
@@ -114,6 +143,10 @@ export function getBulletVariant(bullets, level) {
     return bullets[normalizedLevel];
   }
   
+  if (normalizedLevel === 'beginner' && Array.isArray(bullets.kids)) {
+    return bullets.kids;
+  }
+  
   if (Array.isArray(bullets.standard)) {
     return bullets.standard;
   }
@@ -122,6 +155,10 @@ export function getBulletVariant(bullets, level) {
     if (Array.isArray(bullets[lvl])) {
       return bullets[lvl];
     }
+  }
+  
+  if (Array.isArray(bullets.kids)) {
+    return bullets.kids;
   }
   
   return [];

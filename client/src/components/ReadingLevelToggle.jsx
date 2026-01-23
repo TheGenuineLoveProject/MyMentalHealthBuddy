@@ -2,12 +2,13 @@
  * ReadingLevelToggle.jsx - 3-Level Reading Mode Selector
  * 
  * Features:
- * - Kids / Standard / Deep toggle
- * - Accessible fieldset with legend
- * - Radio inputs with keyboard navigation
+ * - Beginner / Standard / Deep toggle
+ * - Accessible fieldset with legend (visually hidden)
+ * - Radio inputs with keyboard navigation (Tab + Arrow keys)
  * - Focus-visible rings
  * - Screen reader announcements
  * - Respects reduced-motion
+ * - Helper text: "Choose the level of detail you prefer."
  */
 
 import { useId } from 'react';
@@ -25,6 +26,9 @@ export default function ReadingLevelToggle({ value, onChange, className = '' }) 
       <legend className={styles.legend}>
         Reading level
       </legend>
+      <span className={styles.helperText}>
+        Choose the level of detail you prefer.
+      </span>
       
       <div className={styles.radioGroup} role="radiogroup">
         {READING_LEVELS.map((level) => {

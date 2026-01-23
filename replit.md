@@ -14,7 +14,7 @@ The Genuine Love Project is an AI-powered mental wellness platform focused on se
 - **SacredForm.jsx**: Non-coercive email capture component with consent checkbox, privacy link, no dark patterns
 - **SocialShare.jsx**: Calm "copy link" button with no viral pressure language ("Share if it resonates")
 - **AdvisorySection.jsx**: Evidence-informed standards section with role placeholders (Clinical/Research/Accessibility/Safety reviewers), no named experts unless verified
-- **3-Level Reading Mode System**: Kids/Standard/Deep reading level toggle with URL query (?level=), localStorage persistence, route-specific defaults, and variant resolution for hero/sections/cards
+- **3-Level Reading Mode System**: Beginner/Standard/Deep reading level toggle with URL query (?level=beginner|standard|deep), localStorage persistence, route-specific defaults, and variant resolution for hero/sections/cards. Inclusive language guidelines: person-first, non-stigmatizing, no moralizing terms.
 - **GentleBenefitsSection**: Added legally safer "How it may help" sections to all 29 wellness routes with evidence-informed language (may help / some people notice), stop/pause messaging, and crisis line links
 - **Sacred UI Component Library** (client/src/components/ui/): LayoutWrapper, Hero, SectionContainer (4 variants), Card/CardGrid, Button (4 variants, 3 sizes), Footer, SafetyNotice, EvidenceNote, Steps/StepsCompact, Callout (4 variants), Quote
 - **Unified JS Design Tokens** (client/src/brand/tokens.ts): Colors, spacing, radii, shadows, zIndex, motion, typography, breakpoints matching CSS tokens

@@ -68,23 +68,23 @@ const categoryPresets = {
     defaultHero: {
       eyebrow: 'Welcome to Genuine Love',
       title: {
-        kids: 'A safe place for',
+        beginner: 'A safe place for',
         standard: 'Your sanctuary for',
         deep: 'A gentle space for'
       },
       titleHighlight: {
-        kids: 'feeling better.',
+        beginner: 'feeling better.',
         standard: 'emotional healing.',
         deep: 'deep healing.'
       },
       subtitle: {
-        kids: 'A friendly place to feel calm.',
+        beginner: 'A friendly place to feel calm.',
         standard: 'A trauma-informed space for healing and growth.',
         deep: 'Trauma-informed care means we honor your pace and boundaries.'
       },
       primaryCta: { 
         label: {
-          kids: 'Start Now',
+          beginner: 'Start Now',
           standard: 'Begin Your Journey',
           deep: 'Explore the Framework'
         }, 
@@ -92,7 +92,7 @@ const categoryPresets = {
       },
       secondaryCta: { 
         label: {
-          kids: 'What Is This?',
+          beginner: 'What Is This?',
           standard: 'Learn More',
           deep: 'Review Methodology'
         }, 
@@ -103,17 +103,17 @@ const categoryPresets = {
       {
         id: 'features',
         eyebrow: {
-          kids: 'Cool Stuff',
+          beginner: 'Cool Stuff',
           standard: 'What We Offer',
           deep: 'Core Offerings'
         },
         title: {
-          kids: 'Things that may help',
+          beginner: 'Things that may help',
           standard: 'Healing tools designed with care',
           deep: 'Gentle tools for your journey'
         },
         subtitle: {
-          kids: 'Simple ways to feel calmer.',
+          beginner: 'Simple ways to feel calmer.',
           standard: 'Evidence-based approaches wrapped in compassion.',
           deep: 'Evidence-based means these practices are supported by research.'
         },
@@ -122,12 +122,12 @@ const categoryPresets = {
           { 
             icon: 'Heart', 
             title: {
-              kids: 'Be Kind to You',
+              beginner: 'Be Kind to You',
               standard: 'Self-Compassion',
               deep: 'Self-Compassion'
             }, 
             text: {
-              kids: 'Say nice things to yourself.',
+              beginner: 'Say nice things to yourself.',
               standard: 'Learn to treat yourself with kindness.',
               deep: 'Self-compassion means treating yourself as you would a dear friend.'
             }
@@ -135,12 +135,12 @@ const categoryPresets = {
           { 
             icon: 'Brain', 
             title: {
-              kids: 'Know Your Feelings',
+              beginner: 'Know Your Feelings',
               standard: 'Emotional Awareness',
               deep: 'Emotional Awareness'
             }, 
             text: {
-              kids: 'Notice how you feel inside.',
+              beginner: 'Notice how you feel inside.',
               standard: 'Understand your inner landscape.',
               deep: 'Awareness means gently noticing what arises without judgment.'
             }
@@ -148,12 +148,12 @@ const categoryPresets = {
           { 
             icon: 'Shield', 
             title: {
-              kids: 'Your Private Space',
+              beginner: 'Your Private Space',
               standard: 'Safe Space',
               deep: 'Safe Space'
             }, 
             text: {
-              kids: 'A quiet place just for you.',
+              beginner: 'A quiet place just for you.',
               standard: 'A private sanctuary for your journey.',
               deep: 'Safety here means you set the pace and boundaries.'
             }
@@ -161,12 +161,12 @@ const categoryPresets = {
           { 
             icon: 'Sparkles', 
             title: {
-              kids: 'Help When Needed',
+              beginner: 'Help When Needed',
               standard: 'Guided Support',
               deep: 'Guided Support'
             }, 
             text: {
-              kids: 'Get help when you want it.',
+              beginner: 'Get help when you want it.',
               standard: 'Tools and resources when you need them.',
               deep: 'Scaffolding means gentle structure that meets you where you are.'
             }
