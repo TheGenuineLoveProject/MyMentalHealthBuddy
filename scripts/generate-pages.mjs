@@ -18,6 +18,10 @@
  *   - All generated files include "// @generated" header
  *   - Idempotent: running twice produces same result, skips manual pages
  * 
+ * Output:
+ *   - Generated page files in client/src/pages/generated/
+ *   - Manifest file at reports/routes.generated.json
+ * 
  * ============================================================================
  */
 
@@ -31,6 +35,10 @@ const ROOT = path.resolve(__dirname, '..');
 
 // Generated file marker
 const GENERATED_MARKER = '// @generated';
+
+// Manifest output path
+const REPORTS_DIR = path.join(ROOT, 'reports');
+const MANIFEST_PATH = path.join(REPORTS_DIR, 'routes.generated.json');
 
 // ============================================================================
 // A→Z CATEGORY ORDER (Single Source of Truth)
@@ -142,7 +150,7 @@ if (mode === 'range') {
 console.log('');
 
 // ============================================================================
-// SAFETY TRACKING
+// SAFETY TRACKING & MANIFEST DATA
 // ============================================================================
 
 const safetyStats = {
@@ -150,6 +158,8 @@ const safetyStats = {
   updated: [],
   skipped: []
 };
+
+const manifestRoutes = [];
 
 // ============================================================================
 // LANDING ROUTES DEFINITION
@@ -372,7 +382,8 @@ function generateLandingPages() {
   const report = {
     static: [],
     aliases: [],
-    errors: []
+    errors: [],
+    selectedCategories: ['landing']
   };
 
   ensureDir(PAGES_DIR);
@@ -387,6 +398,13 @@ function generateLandingPages() {
         report.static.push({ route, file: result.file, action: result.action });
         console.log(`   ✓ ${route} → ${result.file} (${result.action})`);
       }
+      manifestRoutes.push({
+        route,
+        category: 'landing',
+        pageFile: result.file,
+        kind: 'static',
+        canonical: null
+      });
     } catch (err) {
       report.errors.push({ route, error: err.message });
       console.error(`   ✗ ${route}: ${err.message}`);
@@ -407,6 +425,13 @@ function generateLandingPages() {
         });
         console.log(`   ✓ ${alias.route} → ${alias.canonical} (${result.action})`);
       }
+      manifestRoutes.push({
+        route: alias.route,
+        category: 'landing',
+        pageFile: result.file,
+        kind: 'aliasRedirect',
+        canonical: alias.canonical
+      });
     } catch (err) {
       report.errors.push({ route: alias.route, error: err.message });
       console.error(`   ✗ ${alias.route}: ${err.message}`);
@@ -426,7 +451,8 @@ async function generateCategoryPages(targetCategory) {
     static: [],
     dynamic: [],
     aliases: [],
-    errors: []
+    errors: [],
+    selectedCategories: [targetCategory]
   };
 
   ensureDir(PAGES_DIR);
@@ -460,6 +486,13 @@ async function generateCategoryPages(targetCategory) {
         report.static.push({ route: routeConfig.route, file: result.file, action: result.action });
         console.log(`   ✓ ${routeConfig.route} (${result.action})`);
       }
+      manifestRoutes.push({
+        route: routeConfig.route,
+        category: routeConfig.category,
+        pageFile: result.file,
+        kind: 'static',
+        canonical: null
+      });
     } catch (err) {
       report.errors.push({ route: routeConfig.route, error: err.message });
       console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -479,6 +512,13 @@ async function generateCategoryPages(targetCategory) {
           report.dynamic.push({ route: routeConfig.route, file: result.file, action: result.action });
           console.log(`   ✓ ${routeConfig.route} (${result.action})`);
         }
+        manifestRoutes.push({
+          route: routeConfig.route,
+          category: routeConfig.category,
+          pageFile: result.file,
+          kind: 'dynamic',
+          canonical: null
+        });
       } catch (err) {
         report.errors.push({ route: routeConfig.route, error: err.message });
         console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -501,6 +541,13 @@ async function generateCategoryPages(targetCategory) {
           });
           console.log(`   ✓ ${routeConfig.route} → ${routeConfig.aliasOf} (${result.action})`);
         }
+        manifestRoutes.push({
+          route: routeConfig.route,
+          category: routeConfig.category || 'alias',
+          pageFile: result.file,
+          kind: 'aliasRedirect',
+          canonical: routeConfig.aliasOf
+        });
       } catch (err) {
         report.errors.push({ route: routeConfig.route, error: err.message });
         console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -522,7 +569,8 @@ async function generateRangePages(from, to) {
     static: [],
     dynamic: [],
     aliases: [],
-    errors: []
+    errors: [],
+    selectedCategories: []
   };
 
   ensureDir(PAGES_DIR);
@@ -532,6 +580,7 @@ async function generateRangePages(from, to) {
   const toIndex = ORDERED_LETTERS.indexOf(to);
   const selectedLetters = ORDERED_LETTERS.slice(fromIndex, toIndex + 1);
   const selectedCategories = selectedLetters.map(letter => CATEGORY_ORDER[letter]);
+  report.selectedCategories = selectedCategories;
 
   console.log('📋 Selected categories:');
   for (const letter of selectedLetters) {
@@ -543,19 +592,14 @@ async function generateRangePages(from, to) {
 
   const routes = await loadRoutes();
   
-  // Filter routes by selected categories
   const categorySet = new Set(selectedCategories);
   const categoryRoutes = routes.filter(r => categorySet.has(r.category) && !r.aliasOf);
 
   console.log(`📊 Found ${categoryRoutes.length} routes across ${selectedCategories.length} categories\n`);
 
-  // Get canonical routes in selected categories (for alias detection)
   const categoryCanonicalRoutes = new Set(categoryRoutes.map(r => r.route));
-
-  // Find aliases that point to routes in selected categories
   const categoryAliases = routes.filter(r => r.aliasOf && categoryCanonicalRoutes.has(r.aliasOf));
 
-  // Generate static pages
   console.log('📄 Generating static pages...');
   const staticRoutes = categoryRoutes.filter(r => !r.route.includes(':'));
   for (const routeConfig of staticRoutes) {
@@ -566,13 +610,19 @@ async function generateRangePages(from, to) {
         report.static.push({ route: routeConfig.route, file: result.file, action: result.action, category: routeConfig.category });
         console.log(`   ✓ ${routeConfig.route} [${routeConfig.category}] (${result.action})`);
       }
+      manifestRoutes.push({
+        route: routeConfig.route,
+        category: routeConfig.category,
+        pageFile: result.file,
+        kind: 'static',
+        canonical: null
+      });
     } catch (err) {
       report.errors.push({ route: routeConfig.route, error: err.message });
       console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
     }
   }
 
-  // Generate dynamic page stubs
   const dynamicRoutes = categoryRoutes.filter(r => r.route.includes(':'));
   if (dynamicRoutes.length > 0) {
     console.log('\n🔀 Generating dynamic page stubs...');
@@ -586,6 +636,13 @@ async function generateRangePages(from, to) {
           report.dynamic.push({ route: routeConfig.route, file: result.file, action: result.action, category: routeConfig.category });
           console.log(`   ✓ ${routeConfig.route} [${routeConfig.category}] (${result.action})`);
         }
+        manifestRoutes.push({
+          route: routeConfig.route,
+          category: routeConfig.category,
+          pageFile: result.file,
+          kind: 'dynamic',
+          canonical: null
+        });
       } catch (err) {
         report.errors.push({ route: routeConfig.route, error: err.message });
         console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -593,7 +650,6 @@ async function generateRangePages(from, to) {
     }
   }
 
-  // Generate alias redirect pages for routes in selected categories
   if (categoryAliases.length > 0) {
     console.log('\n🔄 Generating alias redirect pages...');
     for (const routeConfig of categoryAliases) {
@@ -609,6 +665,13 @@ async function generateRangePages(from, to) {
           });
           console.log(`   ✓ ${routeConfig.route} → ${routeConfig.aliasOf} (${result.action})`);
         }
+        manifestRoutes.push({
+          route: routeConfig.route,
+          category: routeConfig.category || 'alias',
+          pageFile: result.file,
+          kind: 'aliasRedirect',
+          canonical: routeConfig.aliasOf
+        });
       } catch (err) {
         report.errors.push({ route: routeConfig.route, error: err.message });
         console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -629,7 +692,8 @@ async function generateAllPages() {
     dynamic: [],
     aliases: [],
     special: [],
-    errors: []
+    errors: [],
+    selectedCategories: Object.values(CATEGORY_ORDER)
   };
 
   ensureDir(PAGES_DIR);
@@ -648,6 +712,13 @@ async function generateAllPages() {
         report.static.push({ route: routeConfig.route, file: result.file, action: result.action });
         console.log(`   ✓ ${routeConfig.route} (${result.action})`);
       }
+      manifestRoutes.push({
+        route: routeConfig.route,
+        category: routeConfig.category,
+        pageFile: result.file,
+        kind: 'static',
+        canonical: null
+      });
     } catch (err) {
       report.errors.push({ route: routeConfig.route, error: err.message });
       console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -666,6 +737,13 @@ async function generateAllPages() {
         report.dynamic.push({ route: routeConfig.route, file: result.file, action: result.action });
         console.log(`   ✓ ${routeConfig.route} (${result.action})`);
       }
+      manifestRoutes.push({
+        route: routeConfig.route,
+        category: routeConfig.category,
+        pageFile: result.file,
+        kind: 'dynamic',
+        canonical: null
+      });
     } catch (err) {
       report.errors.push({ route: routeConfig.route, error: err.message });
       console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -687,6 +765,13 @@ async function generateAllPages() {
         });
         console.log(`   ✓ ${routeConfig.route} → ${routeConfig.aliasOf} (${result.action})`);
       }
+      manifestRoutes.push({
+        route: routeConfig.route,
+        category: routeConfig.category || 'alias',
+        pageFile: result.file,
+        kind: 'aliasRedirect',
+        canonical: routeConfig.aliasOf
+      });
     } catch (err) {
       report.errors.push({ route: routeConfig.route, error: err.message });
       console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
@@ -702,12 +787,54 @@ async function generateAllPages() {
       report.special.push({ route: '404', file: result.file, action: result.action });
       console.log(`   ✓ 404.jsx (${result.action})`);
     }
+    manifestRoutes.push({
+      route: '/404',
+      category: 'system',
+      pageFile: result.file,
+      kind: 'notFound',
+      canonical: null
+    });
   } catch (err) {
     report.errors.push({ route: '404', error: err.message });
     console.error(`   ✗ 404: ${err.message}`);
   }
 
   return report;
+}
+
+// ============================================================================
+// MANIFEST GENERATION
+// ============================================================================
+
+function writeManifest(report) {
+  ensureDir(REPORTS_DIR);
+
+  // Build manifest
+  const manifest = {
+    generatedAt: new Date().toISOString(),
+    mode,
+    category: category || null,
+    from: fromLetter || null,
+    to: toLetter || null,
+    selectedCategories: report.selectedCategories || [],
+    counts: {
+      created: safetyStats.created.length,
+      updated: safetyStats.updated.length,
+      skippedManual: safetyStats.skipped.length,
+      aliasRedirects: manifestRoutes.filter(r => r.kind === 'aliasRedirect').length,
+      totalWritten: safetyStats.created.length + safetyStats.updated.length
+    },
+    files: {
+      created: safetyStats.created.map(f => f.file).sort(),
+      updated: safetyStats.updated.map(f => f.file).sort(),
+      skippedManual: safetyStats.skipped.map(f => f.file).sort(),
+      aliasRedirects: manifestRoutes.filter(r => r.kind === 'aliasRedirect').map(r => r.pageFile).sort()
+    },
+    routes: manifestRoutes.sort((a, b) => a.route.localeCompare(b.route))
+  };
+
+  fs.writeFileSync(MANIFEST_PATH, JSON.stringify(manifest, null, 2), 'utf8');
+  console.log(`\n📄 Manifest written: ${path.relative(ROOT, MANIFEST_PATH)}`);
 }
 
 // ============================================================================
@@ -821,6 +948,9 @@ function printReport(report, mode, extras = {}) {
   console.log(`⏭️  Total files skipped: ${safetyStats.skipped.length}`);
   console.log(`❌ Errors: ${report.errors.length}`);
   console.log('─'.repeat(60) + '\n');
+
+  // Write manifest
+  writeManifest(report);
 
   if (report.errors.length > 0) {
     process.exit(1);

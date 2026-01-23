@@ -1,0 +1,85 @@
+{
+  "generatedAt": "2026-01-23T04:44:09.725Z",
+  "mode": "landing",
+  "category": null,
+  "from": null,
+  "to": null,
+  "selectedCategories": [
+    "landing"
+  ],
+  "counts": {
+    "created": 0,
+    "updated": 7,
+    "skippedManual": 0,
+    "aliasRedirects": 2,
+    "totalWritten": 7
+  },
+  "files": {
+    "created": [],
+    "updated": [
+      "client/src/pages/generated/healing.jsx",
+      "client/src/pages/generated/home.jsx",
+      "client/src/pages/generated/index.jsx",
+      "client/src/pages/generated/landing.jsx",
+      "client/src/pages/generated/original-home.jsx",
+      "client/src/pages/generated/pricing.jsx",
+      "client/src/pages/generated/welcome.jsx"
+    ],
+    "skippedManual": [],
+    "aliasRedirects": [
+      "client/src/pages/generated/home.jsx",
+      "client/src/pages/generated/welcome.jsx"
+    ]
+  },
+  "routes": [
+    {
+      "route": "/",
+      "category": "landing",
+      "pageFile": "client/src/pages/generated/index.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/healing",
+      "category": "landing",
+      "pageFile": "client/src/pages/generated/healing.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/home",
+      "category": "landing",
+      "pageFile": "client/src/pages/generated/home.jsx",
+      "kind": "aliasRedirect",
+      "canonical": "/"
+    },
+    {
+      "route": "/landing",
+      "category": "landing",
+      "pageFile": "client/src/pages/generated/landing.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/original-home",
+      "category": "landing",
+      "pageFile": "client/src/pages/generated/original-home.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/pricing",
+      "category": "landing",
+      "pageFile": "client/src/pages/generated/pricing.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/welcome",
+      "category": "landing",
+      "pageFile": "client/src/pages/generated/welcome.jsx",
+      "kind": "aliasRedirect",
+      "canonical": "/"
+    }
+  ]
+}

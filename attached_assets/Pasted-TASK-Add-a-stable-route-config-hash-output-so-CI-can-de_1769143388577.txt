@@ -1,0 +1,59 @@
+TASK: Add a stable “route config hash” output so CI can detect drift in /content/routes.js even if reports/routes.generated.json was not regenerated.
+
+REQUIREMENTS:
+1) Generator outputs two additional files on every run:
+   - reports/routes.config.snapshot.json
+   - reports/routes.config.sha256
+
+2) Snapshot content (MUST be stable/deterministic):
+   - Load route configs from /content/routes.js (routes array + any presets used to resolve final configs)
+   - Produce a “canonical snapshot” JSON that includes ONLY deterministic fields:
+     {
+       "categoryOrder": CATEGORY_ORDER,
+       "routesIndex": [
+         {
+           "route": "/path",
+           "category": "Category",
+           "aliasOf": "/canonical-or-null",
+           "pattern": "/blog/:slug" | null,
+           "title": "...",
+           "description": "...",
+           "hero": {
+             "title": "...",
+             "subtitle": "...",
+             "primaryCta": { "label": "...", "href": "..." },
+             "secondaryCta": { "label": "...", "href": "..." }
+           },
+           "sectionsCount": <n>,
+           "modulesCount": <n>
+         },
+         ...
+       ]
+     }
+   - IMPORTANT:
+     - Do NOT include runtime timestamps, random IDs, or computed “generatedAt”.
+     - Sort routesIndex by route ascending.
+     - Ensure all undefined values are normalized to null or omitted consistently.
+     - If getRouteConfig merges presets + overrides, the snapshot should reflect the FINAL resolved config for each route (excluding dynamic params values). For patterns, include the pattern string.
+
+3) Stable hashing:
+   - Write reports/routes.config.snapshot.json with pretty stable formatting (2-space indent).
+   - Compute sha256 of the exact bytes of snapshot JSON and write to reports/routes.config.sha256 (hash + newline).
+
+4) Update generator report output:
+   - Print: “Wrote config snapshot + hash: reports/routes.config.*”
+
+OUTPUT REQUIREMENTS:
+- Provide FULL updated /scripts/generate-pages.mjs showing:
+  - snapshot builder
+  - stable sorting/normalization
+  - snapshot + sha write
+- Confirm files written:
+  - reports/routes.config.snapshot.json
+  - reports/routes.config.sha256
+
+DONE GATE:
+✅ Running generator twice without config changes produces identical reports/routes.config.sha256
+✅ Changing /content/routes.js changes reports/routes.config.sha256
+✅ npm run dev still works
+FAIL THE RUN if any DONE GATE item is not satisfied.
