@@ -12,6 +12,7 @@
  * - Dynamic pattern matching (/blog/:slug, /community/discussion/:id)
  * - Route protection for authenticated pages
  * - Motion presets (minimal/calm/rich) per category
+ * - Deterministic microcopy selection for wellness routes
  * 
  * Usage:
  *   import { getRouteConfig, listRoutesByCategory } from './routes.js';
@@ -21,6 +22,7 @@
  * ============================================================================
  */
 
+import { getMicrocopyForRoute } from './microcopy.js';
 import { 
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf, 
   BookOpen, MessageCircle, Users, Zap, Target, Compass,
@@ -5728,18 +5730,28 @@ export function matchDynamic(pattern, path) {
   return null;
 }
 
+function injectMicrocopy(config) {
+  if (config && config.tone === 'practice' && !config.microcopy) {
+    return {
+      ...config,
+      microcopy: getMicrocopyForRoute(config.route)
+    };
+  }
+  return config;
+}
+
 export function getRouteConfig(path) {
   const directMatch = staticRoutes.find(r => r.route === path);
-  if (directMatch) return directMatch;
+  if (directMatch) return injectMicrocopy(directMatch);
   
   const aliasMatch = aliasRoutes.find(r => r.route === path);
   if (aliasMatch) {
     const target = staticRoutes.find(r => r.route === aliasMatch.aliasOf);
-    return target ? { ...target, route: path, aliasOf: aliasMatch.aliasOf } : null;
+    return target ? injectMicrocopy({ ...target, route: path, aliasOf: aliasMatch.aliasOf }) : null;
   }
   
   const dynamicMatch = matchDynamicRoute(path);
-  if (dynamicMatch) return dynamicMatch;
+  if (dynamicMatch) return injectMicrocopy(dynamicMatch);
   
   const notFound = routes.find(r => r.route === '/not-found' || r.route === '/404');
   return notFound ? { ...notFound, is404: true } : { route: path, title: 'Page Not Found', is404: true };

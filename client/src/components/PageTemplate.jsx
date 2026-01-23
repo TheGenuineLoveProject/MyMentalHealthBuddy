@@ -319,7 +319,7 @@ function PracticeSection({ practice }) {
   );
 }
 
-function TieredPracticeBlock({ practice }) {
+function TieredPracticeBlock({ practice, microcopy }) {
   if (!practice) return null;
   
   const tiers = [
@@ -329,9 +329,12 @@ function TieredPracticeBlock({ practice }) {
   ].filter(t => t.tier);
   
   if (tiers.length === 0) return null;
+
+  const mc = microcopy || {};
   
   return (
     <section 
+      id="practice"
       className={styles.tieredPracticeSection}
       aria-label="Practice options"
       data-aos="fade-up"
@@ -339,8 +342,13 @@ function TieredPracticeBlock({ practice }) {
     >
       <div className={styles.tieredPracticeHeader}>
         <p className={styles.permissionNote}>
-          If this feels like too much, you can pause or come back later.
+          {mc.permission || "Go at your pace. You can pause anytime."}
         </p>
+        {mc.whatToExpect && (
+          <p className={styles.whatToExpect}>
+            {mc.whatToExpect}
+          </p>
+        )}
         {practice.safetyLink && (
           <Link 
             href={practice.safetyLink.href} 
@@ -356,6 +364,8 @@ function TieredPracticeBlock({ practice }) {
       <div className={styles.tieredPracticeGrid}>
         {tiers.map(({ key, tier, icon, variant }) => {
           const IconComponent = getIcon(icon);
+          const tierLabel = mc.tierLabels?.[key] || tier.title;
+          const tierCta = mc.cta?.[key] || tier.ctaLabel;
           return (
             <article 
               key={key}
@@ -371,7 +381,7 @@ function TieredPracticeBlock({ practice }) {
                 <div className={styles.tierIconWrapper}>
                   <IconComponent className={styles.tierIcon} />
                 </div>
-                <h3 className={styles.tierTitle}>{tier.title}</h3>
+                <h3 className={styles.tierTitle}>{tierLabel}</h3>
               </div>
               
               {tier.steps && tier.steps.length > 0 && (
@@ -394,12 +404,16 @@ function TieredPracticeBlock({ practice }) {
                 </div>
               )}
               
+              {tier.closer && (
+                <p className={styles.tierCloser}>{tier.closer}</p>
+              )}
+              
               <Link
                 href="#practice"
                 className={styles.tierCta}
                 data-testid={`button-tier-${key}`}
               >
-                {tier.ctaLabel}
+                {tierCta}
                 <ArrowRight className={styles.ctaIcon} />
               </Link>
             </article>
@@ -407,10 +421,16 @@ function TieredPracticeBlock({ practice }) {
         })}
       </div>
       
-      {practice.stopNote && (
+      {(practice.stopNote || mc.stopNote) && (
         <p className={styles.stopNote}>
           <RefreshCw className={styles.stopNoteIcon} />
-          {practice.stopNote}
+          {mc.stopNote || practice.stopNote}
+        </p>
+      )}
+
+      {mc.closer && (
+        <p className={styles.practiceCloser} data-aos="fade-up" data-aos-delay="400">
+          {mc.closer}
         </p>
       )}
     </section>
@@ -592,7 +612,7 @@ export default function PageTemplate({ config, children }) {
 
         <NextStepBlock nextStep={config.nextStep} />
 
-        <TieredPracticeBlock practice={config.practice} />
+        <TieredPracticeBlock practice={config.practice} microcopy={config.microcopy} />
 
         {config.practices && config.practices.map((practice, index) => (
           <PracticeSection key={practice.timeTag || index} practice={practice} />

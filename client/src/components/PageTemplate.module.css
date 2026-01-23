@@ -1381,6 +1381,36 @@
   color: var(--sacred-sage, #8fbf9f);
 }
 
+.whatToExpect {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.75;
+  margin: 0;
+  max-width: 32rem;
+}
+
+.tierCloser {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--sacred-teal, #2f5d5d);
+  margin: 0.75rem 0 0 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--sacred-sage-20, rgba(143, 191, 159, 0.2));
+}
+
+.practiceCloser {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  color: var(--sacred-teal, #2f5d5d);
+  text-align: center;
+  margin: 2rem 0 0 0;
+  padding: 1rem;
+  background: var(--sacred-sage-10, rgba(143, 191, 159, 0.1));
+  border-radius: 0.75rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tierCard,
   .tierCta {
