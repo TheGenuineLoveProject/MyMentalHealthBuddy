@@ -104,16 +104,23 @@ function generatePageContent(route, config, isAlias = false, canonicalRoute = nu
   const lines = [GENERATED_MARKER];
   
   if (isAlias && canonicalRoute) {
+    // Canonical render: import and re-export the canonical page component
+    // This ensures SEO and UI remain consistent (no redirect)
+    const canonicalFile = routeToGeneratedFile(canonicalRoute);
+    const canonicalImport = './' + canonicalFile.replace(/\.jsx$/, '');
+    
     lines.push(`/**`);
     lines.push(` * Alias page for ${route}`);
     lines.push(` * Canonical: ${canonicalRoute}`);
+    lines.push(` * `);
+    lines.push(` * LOCKED: Canonical render (no redirect)`);
+    lines.push(` * This alias imports and re-exports the canonical page component`);
+    lines.push(` * to maintain SEO consistency and identical UI rendering.`);
     lines.push(` */`);
     lines.push(``);
-    lines.push(`import AutopilotPage from '../_autopilot.jsx';`);
+    lines.push(`import CanonicalPage from '${canonicalImport}';`);
     lines.push(``);
-    lines.push(`export default function AliasPage() {`);
-    lines.push(`  return <AutopilotPage />;`);
-    lines.push(`}`);
+    lines.push(`export default CanonicalPage;`);
   } else {
     lines.push(`/**`);
     lines.push(` * Generated page for ${route}`);
