@@ -1,0 +1,74 @@
+TASK: Implement a physical page generator (optional) that outputs Next.js pages into client/src/pages/generated/ and supports multiple modes.
+
+CREATE/UPDATE:
+- scripts/gen-pages.mjs
+- scripts/verify-routes-manifest.mjs
+- scripts/print-routes-diff.mjs
+- content/categoryOrder.js
+- reports/ (generated artifacts)
+
+GENERATOR OUTPUT ROOT (LOCKED):
+client/src/pages/generated/
+
+GENERATOR MODES (REQUIRED):
+1) --mode=all
+   - generates pages for all routes in /content/routes.js
+2) --mode=landing
+   - generates ONLY Landing routes + aliases + dynamic stubs + 404
+3) --mode=category --category="Wellness & Healing Tools"
+   - generates only that category
+4) --mode=range --from=A --to=C
+   - generates all categories between letters inclusive (A→Z mapping from content/categoryOrder.js)
+
+OVERWRITE SAFETY (MANDATORY):
+- Generator MUST refuse to overwrite any existing page unless the file contains a line:
+  // @generated
+- If missing, skip and log "skipped (manual)".
+- Generator must also support --force to override (still must preserve a backup copy into reports/backups/).
+
+ALIAS HANDLING (LOCKED CHOICE):
+- Use canonical render (no redirect): generated alias files must import and re-export canonical page component, so SEO stays stable and UI consistent.
+
+DYNAMIC ROUTES:
+- Generate flat dynamic stubs matching current pattern:
+  blog-[param].jsx and community-discussion-[param].jsx
+- Ensure they compile and render via autopilot config resolution.
+
+EDGE ROUTES:
+- /404 => 404.jsx
+- /* => 404.jsx (or not-found.jsx if that's your system, but be consistent)
+
+MANIFEST + HASH OUTPUTS (REQUIRED):
+Write these files deterministically:
+- reports/routes.generated.json (manifest: route->file + category + title)
+- reports/routes.generated.sha256 (hash of manifest file contents)
+- reports/routes.config.snapshot.json (normalized snapshot of route configs, stable sort)
+- reports/routes.config.sha256 (hash of config snapshot)
+- reports/routes.perRoute.sha256.json (per-route hash map: route -> sha256 of normalized config)
+
+VERIFY SCRIPT (REQUIRED):
+npm run verify:routes runs scripts/verify-routes-manifest.mjs:
+- compares current outputs with committed hashes
+- exits non-zero on drift
+- supports --fix to regenerate + rewrite sha files locally (NOT for CI)
+
+DIFF ARTIFACT (REQUIRED):
+On drift, write:
+- reports/routes.diff.json containing:
+  addedRoutes, removedRoutes,
+  changedRoutes: [{route, from:{title,category,hash}, to:{title,category,hash}}],
+  movedCategories: [{route, fromCategory, toCategory}],
+  recommendedCommand: "npm run gen:pages:all && npm run verify:routes"
+- Also write a short human summary to stdout.
+
+OUTPUT REQUIREMENTS:
+- Full file contents for each created/updated script and config.
+- Update package.json scripts to include:
+  gen:pages:all, gen:pages:landing, gen:pages:category, gen:pages:range, verify:routes, print:routes:diff
+- No TODOs. Must run.
+
+DONE GATE:
+✅ node scripts/gen-pages.mjs --mode=landing works
+✅ node scripts/gen-pages.mjs --mode=all works
+✅ npm run verify:routes returns 0 when clean, non-zero on drift
+✅ reports artifacts are deterministic (no timestamps)
