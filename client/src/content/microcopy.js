@@ -190,18 +190,27 @@ export function getMicrocopyForRoute(route) {
     tierLabels: {
       beginner: pickByRoute(route, microcopy.tierLabels.beginner, 8),
       intermediate: pickByRoute(route, microcopy.tierLabels.intermediate, 9),
-      advanced: pickByRoute(route, microcopy.tierLabels.advanced, 10)
+      advanced: pickByRoute(route, microcopy.tierLabels.advanced, 10),
+      quick10s: pickByRoute(route, microcopy.tierLabels.beginner, 8),
+      short1to3: pickByRoute(route, microcopy.tierLabels.intermediate, 9),
+      long3to10: pickByRoute(route, microcopy.tierLabels.advanced, 10)
     },
     cta: {
       beginner: pickByRoute(route, microcopy.cta.beginner, 11),
       intermediate: pickByRoute(route, microcopy.cta.intermediate, 12),
-      advanced: pickByRoute(route, microcopy.cta.advanced, 13)
+      advanced: pickByRoute(route, microcopy.cta.advanced, 13),
+      quick10s: pickByRoute(route, microcopy.cta.beginner, 11),
+      short1to3: pickByRoute(route, microcopy.cta.intermediate, 12),
+      long3to10: pickByRoute(route, microcopy.cta.advanced, 13)
     },
     reflection: pickByRoute(route, microcopy.reflectionPrompts, 14),
     navigation: {
       nextStep: pickByRoute(route, microcopy.navigation.nextStep, 15),
       returnLink: pickByRoute(route, microcopy.navigation.returnLinks, 16)
-    }
+    },
+    disclaimerShort: "Educational support only — not medical advice.",
+    crisisLinkEnabled: true,
+    stimulationProfile: "practice"
   };
 }
 

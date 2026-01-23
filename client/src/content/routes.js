@@ -5731,11 +5731,35 @@ export function matchDynamic(pattern, path) {
 }
 
 function injectMicrocopy(config) {
-  if (config && config.tone === 'practice' && !config.microcopy) {
-    return {
+  if (config && config.tone === 'practice') {
+    const microcopyData = getMicrocopyForRoute(config.route);
+    const enhanced = {
       ...config,
-      microcopy: getMicrocopyForRoute(config.route)
+      microcopy: config.microcopy || microcopyData,
+      disclaimerShort: config.disclaimerShort || microcopyData.disclaimerShort,
+      crisisLinkEnabled: config.crisisLinkEnabled ?? true,
+      stimulationProfile: config.stimulationProfile || 'practice'
     };
+    
+    if (config.practice && !config.practiceTiers) {
+      enhanced.practiceTiers = {
+        quick10s: {
+          steps: config.practice.beginner?.steps || [],
+          ctaLabel: microcopyData.cta.quick10s
+        },
+        short1to3: {
+          steps: config.practice.intermediate?.steps || [],
+          ctaLabel: microcopyData.cta.short1to3
+        },
+        long3to10: {
+          steps: config.practice.advanced?.steps || [],
+          ctaLabel: microcopyData.cta.long3to10,
+          reflection: config.practice.advanced?.reflection || [microcopyData.reflection]
+        }
+      };
+    }
+    
+    return enhanced;
   }
   return config;
 }
