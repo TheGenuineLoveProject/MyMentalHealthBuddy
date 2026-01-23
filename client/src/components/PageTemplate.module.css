@@ -1,0 +1,442 @@
+/* PageTemplate.module.css - Page Template CSS Module */
+/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.heroSection {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.5rem;
+}
+
+.heroContent {
+  text-align: center;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.logoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  box-shadow: 0 8px 32px rgba(143, 191, 159, 0.25);
+}
+
+.logoBadgeIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: white;
+  transform: scale(0.7);
+}
+
+.logoBadgeText {
+  color: white;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.eyebrowIcon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--sacred-teal, #2f5d5d);
+  transform: scale(0.7);
+}
+
+/* Typography Scale - EXACT from Canva:
+   Title: 56px, Subtitle: 36px, Heading: 32px, 
+   Subheading: 28px, Section-Header: 24px, Body: 18px, Caption: 14px */
+.heroTitle {
+  font-family: var(--font-sacred, 'Playfair Display', serif);
+  font-size: 3.5rem; /* 56px - Title */
+  font-weight: 700;
+  color: var(--sacred-charcoal, #3a3a3a);
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem; /* 40px on mobile */
+  }
+}
+
+.gradientText {
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.125rem; /* 18px - Body */
+  font-weight: 400;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.85;
+  max-width: 42rem;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .heroSubtitle {
+    font-size: 1rem; /* 16px on mobile */
+  }
+}
+
+.ctaGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .ctaGroup {
+    flex-direction: row;
+  }
+}
+
+.primaryCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  box-shadow: 0 4px 16px rgba(143, 191, 159, 0.3);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.primaryCta:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(143, 191, 159, 0.4);
+}
+
+.primaryCta:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+}
+
+.secondaryCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  background: transparent;
+  border: 2px solid var(--sacred-sage, #8fbf9f);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.secondaryCta:hover {
+  background: var(--sacred-teal, #2f5d5d);
+  color: white;
+}
+
+.secondaryCta:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+}
+
+.ctaIcon {
+  width: 1rem;
+  height: 1rem;
+  transform: scale(0.7);
+}
+
+/* ============================================
+   CONTENT SECTIONS
+   ============================================ */
+.contentSection {
+  position: relative;
+  padding: 6rem 1.5rem;
+}
+
+.patternOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/brand/sacred-pattern.svg');
+  background-size: 200px;
+  background-repeat: repeat;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+.sectionInner {
+  position: relative;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.sectionEyebrow {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  font-family: var(--font-sacred, 'Playfair Display', serif);
+  font-size: 2rem; /* 32px - Heading */
+  font-weight: 600;
+  color: var(--sacred-charcoal, #3a3a3a);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 1.75rem; /* 28px on mobile */
+  }
+}
+
+.sectionSubtitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.125rem; /* 18px - Body */
+  font-weight: 400;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.8;
+  max-width: 42rem;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Section variants */
+.glowBackground {
+  background: radial-gradient(ellipse at center, rgba(143, 191, 159, 0.08), transparent 70%);
+}
+
+/* ============================================
+   CARDS
+   ============================================ */
+.card {
+  padding: 2rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(143, 191, 159, 0.2);
+  box-shadow: 0 4px 24px rgba(47, 93, 93, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(47, 93, 93, 0.12);
+}
+
+.cardIconWrapper {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, rgba(143, 191, 159, 0.15), rgba(47, 93, 93, 0.1));
+}
+
+.cardIcon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--sacred-teal, #2f5d5d);
+  transform: scale(0.7);
+}
+
+.cardTitle {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.5rem; /* 24px - Section Header */
+  font-weight: 600;
+  color: var(--sacred-charcoal, #3a3a3a);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.cardText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+.nav {
+  position: relative;
+  z-index: 10;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navLogo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.navLogoIcon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  box-shadow: 0 4px 16px rgba(143, 191, 159, 0.3);
+}
+
+.navLogoIcon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: white;
+}
+
+.navLogoText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1.75rem; /* 28px - Subheading */
+  font-weight: 600;
+  color: var(--sacred-charcoal, #3a3a3a);
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .navLogoText {
+    display: block;
+  }
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navSignIn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-weight: 500;
+  color: var(--sacred-teal, #2f5d5d);
+  border: 2px solid var(--sacred-sage, #8fbf9f);
+  background: transparent;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.navSignIn:hover {
+  background: var(--sacred-teal, #2f5d5d);
+  color: white;
+}
+
+.navSignIn:focus-visible {
+  outline: 2px solid var(--sacred-teal, #2f5d5d);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.errorPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.errorText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  color: var(--sacred-charcoal, #3a3a3a);
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .primaryCta,
+  .secondaryCta,
+  .card,
+  .navSignIn {
+    transition: none;
+  }
+  
+  .primaryCta:hover,
+  .card:hover {
+    transform: none;
+  }
+}

@@ -28,10 +28,12 @@
   margin-bottom: 4rem;
 }
 
-/* Typography Scale - EXACT from Canva */
+/* Typography Scale - EXACT from Canva:
+   Title: 56px, Subtitle: 36px, Heading: 32px, 
+   Subheading: 28px, Section-Header: 24px, Body: 18px, Caption: 14px */
 .eyebrow {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.875rem; /* 14px */
+  font-size: 0.875rem; /* 14px - Caption */
   font-weight: 600;
   color: var(--sacred-teal, #2f5d5d);
   letter-spacing: 0.1em;
@@ -41,16 +43,22 @@
 
 .title {
   font-family: var(--font-sacred, 'Playfair Display', serif);
-  font-size: clamp(1.75rem, 4vw, 2.25rem); /* 36px at max */
+  font-size: 2.25rem; /* 36px - Subtitle */
   font-weight: 600;
   color: var(--sacred-charcoal, #3a3a3a);
   margin-bottom: 1rem;
   line-height: 1.2;
 }
 
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.75rem; /* 28px on mobile */
+  }
+}
+
 .subtitle {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(1rem, 1.5vw, 1.125rem); /* 18px at max */
+  font-size: 1.125rem; /* 18px - Body */
   font-weight: 400;
   color: var(--sacred-charcoal, #3a3a3a);
   opacity: 0.8;

@@ -1,3 +1,14 @@
+/**
+ * PageTemplate.jsx - CSS Module-based Page Template Component
+ * 
+ * Features:
+ * - CSS Modules ONLY (no Tailwind)
+ * - AOS animations with once:true
+ * - GSAP logo animation (disabled for reduced motion)
+ * - Semantic HTML with accessibility
+ * - Playfair Display + Inter typography
+ */
+
 import { useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 import AOS from 'aos';
@@ -15,6 +26,7 @@ import {
 import SacredLayout from './sacred/SacredLayout.jsx';
 import SacredFooter from './sacred/SacredFooter.jsx';
 import SEO from './SEO.tsx';
+import styles from './PageTemplate.module.css';
 
 const iconMap = {
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,
@@ -52,38 +64,34 @@ function HeroSection({ hero }) {
 
   return (
     <section 
-      className="relative min-h-[70vh] flex items-center justify-center py-20 px-6"
+      className={styles.heroSection}
       aria-labelledby="hero-title"
     >
-      <div className="text-center max-w-4xl mx-auto">
+      <div className={styles.heroContent}>
         <div 
           ref={logoRef}
-          className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl mb-8"
-          style={{ 
-            background: 'linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d))',
-            boxShadow: '0 8px 32px rgba(143, 191, 159, 0.25)'
-          }}
+          className={styles.logoBadge}
           data-aos="fade-down"
           data-aos-delay="100"
         >
-          <Heart className="w-5 h-5 text-white sacred-icon" style={{ transform: 'scale(0.7)' }} />
-          <span className="text-white font-medium text-sm tracking-wide">Genuine Love</span>
+          <Heart className={styles.logoBadgeIcon} />
+          <span className={styles.logoBadgeText}>Genuine Love</span>
         </div>
 
         {hero.eyebrow && (
           <p 
-            className="sacred-eyebrow mb-4 flex items-center justify-center gap-2"
+            className={styles.eyebrow}
             data-aos="fade-up"
             data-aos-delay="200"
           >
-            <LinkIcon className="w-4 h-4 sacred-icon" style={{ color: 'var(--sacred-teal, #2f5d5d)' }} />
+            <LinkIcon className={styles.eyebrowIcon} />
             {hero.eyebrow}
           </p>
         )}
 
         <h1 
           id="hero-title"
-          className="sacred-title mb-8"
+          className={styles.heroTitle}
           data-aos="fade-up"
           data-aos-delay="300"
         >
@@ -91,15 +99,7 @@ function HeroSection({ hero }) {
           {hero.titleHighlight && (
             <>
               <br />
-              <span 
-                className="sacred-gradient-text"
-                style={{
-                  background: 'linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
+              <span className={styles.gradientText}>
                 {hero.titleHighlight}
               </span>
             </>
@@ -108,8 +108,7 @@ function HeroSection({ hero }) {
 
         {hero.subtitle && (
           <p 
-            className="sacred-body text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
-            style={{ color: 'var(--sacred-body, #4a5e5a)' }}
+            className={styles.heroSubtitle}
             data-aos="fade-up"
             data-aos-delay="400"
           >
@@ -119,7 +118,7 @@ function HeroSection({ hero }) {
 
         {(hero.primaryCta || hero.secondaryCta) && (
           <div 
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            className={styles.ctaGroup}
             role="group"
             aria-label="Call to action"
             data-aos="fade-up"
@@ -128,30 +127,21 @@ function HeroSection({ hero }) {
             {hero.primaryCta && (
               <Link
                 href={hero.primaryCta.href}
-                className="sacred-button-primary inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                style={{
-                  background: 'linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d))',
-                  color: 'white',
-                  boxShadow: '0 4px 16px rgba(143, 191, 159, 0.3)'
-                }}
+                className={styles.primaryCta}
                 data-testid="button-hero-primary"
               >
                 {hero.primaryCta.label}
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className={styles.ctaIcon} />
               </Link>
             )}
             {hero.secondaryCta && (
               <Link
                 href={hero.secondaryCta.href}
-                className="sacred-button-secondary inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                style={{
-                  border: '2px solid var(--sacred-sage, #8fbf9f)',
-                  color: 'var(--sacred-teal, #2f5d5d)'
-                }}
+                className={styles.secondaryCta}
                 data-testid="button-hero-secondary"
               >
                 {hero.secondaryCta.label}
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className={styles.ctaIcon} />
               </Link>
             )}
           </div>
@@ -166,38 +156,18 @@ function SacredCard({ card, index }) {
   
   return (
     <article
-      className="sacred-card p-8 rounded-3xl transition-all duration-300 hover:scale-[1.02]"
-      style={{
-        background: 'rgba(255, 255, 255, 0.8)',
-        backdropFilter: 'blur(10px)',
-        border: '1px solid rgba(143, 191, 159, 0.2)',
-        boxShadow: '0 4px 24px rgba(47, 93, 93, 0.08)'
-      }}
+      className={styles.card}
       data-aos="fade-up"
       data-aos-delay={100 + (index * 100)}
       data-testid={`card-${card.title?.toLowerCase().replace(/\s+/g, '-') || index}`}
     >
-      <div 
-        className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6"
-        style={{
-          background: 'linear-gradient(135deg, rgba(143, 191, 159, 0.15), rgba(47, 93, 93, 0.1))'
-        }}
-      >
-        <IconComponent 
-          className="w-7 h-7 sacred-icon" 
-          style={{ color: 'var(--sacred-teal, #2f5d5d)', transform: 'scale(0.7)' }} 
-        />
+      <div className={styles.cardIconWrapper}>
+        <IconComponent className={styles.cardIcon} />
       </div>
-      <h3 
-        className="sacred-subheading mb-3"
-        style={{ color: 'var(--sacred-heading, #1a3a3a)' }}
-      >
+      <h3 className={styles.cardTitle}>
         {card.title}
       </h3>
-      <p 
-        className="sacred-body leading-relaxed"
-        style={{ color: 'var(--sacred-body, #4a5e5a)' }}
-      >
+      <p className={styles.cardText}>
         {card.text}
       </p>
     </article>
@@ -205,44 +175,27 @@ function SacredCard({ card, index }) {
 }
 
 function ContentSection({ section, index }) {
-  const getVariantStyles = (variant) => {
-    switch (variant) {
-      case 'glow':
-        return {
-          background: 'radial-gradient(ellipse at center, rgba(143, 191, 159, 0.08), transparent 70%)'
-        };
-      case 'pattern':
-        return {
-          backgroundImage: 'url(/sacred-pattern.svg)',
-          backgroundSize: '200px',
-          backgroundRepeat: 'repeat',
-          opacity: 0.03
-        };
-      default:
-        return {};
-    }
-  };
+  const isGlow = section.variant === 'glow';
+  const isPattern = section.variant === 'pattern';
 
   return (
     <section
       id={section.id}
-      className="relative py-24 px-6"
+      className={`${styles.contentSection} ${isGlow ? styles.glowBackground : ''}`}
       aria-labelledby={`section-title-${section.id}`}
-      style={section.variant === 'glow' ? getVariantStyles('glow') : {}}
     >
-      {section.variant === 'pattern' && (
+      {isPattern && (
         <div 
-          className="absolute inset-0 pointer-events-none"
-          style={getVariantStyles('pattern')}
+          className={styles.patternOverlay}
           aria-hidden="true"
         />
       )}
       
-      <div className="relative max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+      <div className={styles.sectionInner}>
+        <div className={styles.sectionHeader}>
           {section.eyebrow && (
             <p 
-              className="sacred-eyebrow mb-4"
+              className={styles.sectionEyebrow}
               data-aos="fade-up"
             >
               {section.eyebrow}
@@ -250,8 +203,7 @@ function ContentSection({ section, index }) {
           )}
           <h2 
             id={`section-title-${section.id}`}
-            className="sacred-heading mb-4"
-            style={{ color: 'var(--sacred-heading, #1a3a3a)' }}
+            className={styles.sectionTitle}
             data-aos="fade-up"
             data-aos-delay="100"
           >
@@ -259,8 +211,7 @@ function ContentSection({ section, index }) {
           </h2>
           {section.subtitle && (
             <p 
-              className="sacred-body text-lg max-w-2xl mx-auto"
-              style={{ color: 'var(--sacred-body, #4a5e5a)' }}
+              className={styles.sectionSubtitle}
               data-aos="fade-up"
               data-aos-delay="200"
             >
@@ -271,7 +222,7 @@ function ContentSection({ section, index }) {
 
         {section.cards && section.cards.length > 0 && (
           <div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            className={styles.cardsGrid}
             role="list"
           >
             {section.cards.map((card, cardIndex) => (
@@ -302,8 +253,8 @@ export default function PageTemplate({ config, children }) {
   if (!config) {
     return (
       <SacredLayout>
-        <div className="min-h-screen flex items-center justify-center">
-          <p className="sacred-body">Page configuration not found.</p>
+        <div className={styles.errorPage}>
+          <p className={styles.errorText}>Page configuration not found.</p>
         </div>
       </SacredLayout>
     );
@@ -318,35 +269,22 @@ export default function PageTemplate({ config, children }) {
 
       <header role="banner">
         <nav 
-          className="relative z-10 mx-auto max-w-6xl py-5 px-6 flex items-center justify-between"
+          className={styles.nav}
           aria-label="Main navigation"
         >
-          <Link href="/" className="flex items-center gap-4 min-w-0">
-            <div 
-              className="w-14 h-14 rounded-xl overflow-hidden flex items-center justify-center flex-shrink-0" 
-              style={{ 
-                background: 'linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d))', 
-                boxShadow: '0 4px 16px rgba(143, 191, 159, 0.3)' 
-              }}
-            >
-              <Heart className="h-7 w-7 text-white" />
+          <Link href="/" className={styles.navLogo} data-testid="link-nav-logo">
+            <div className={styles.navLogoIcon}>
+              <Heart />
             </div>
-            <span 
-              className="sacred-subheading hidden sm:block"
-              style={{ color: 'var(--sacred-heading, #1a3a3a)' }}
-            >
+            <span className={styles.navLogoText}>
               Genuine Love
             </span>
           </Link>
 
-          <div className="flex items-center gap-4">
+          <div className={styles.navActions}>
             <Link
               href="/login"
-              className="px-6 py-3 rounded-full transition-all duration-300 font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              style={{
-                border: '2px solid var(--sacred-sage, #8fbf9f)',
-                color: 'var(--sacred-teal, #2f5d5d)'
-              }}
+              className={styles.navSignIn}
               data-testid="link-nav-signin"
             >
               Sign in
