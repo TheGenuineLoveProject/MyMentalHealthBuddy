@@ -438,6 +438,144 @@ function TieredPracticeBlock({ practice, microcopy }) {
   );
 }
 
+function PracticeSectionsRenderer({ practiceSections, practiceTiers, microcopy }) {
+  if (!practiceSections || practiceSections.length === 0) return null;
+
+  return (
+    <div className={styles.practiceSectionsWrapper}>
+      {practiceSections.map((section, index) => {
+        if (section.type === 'tier-cards' && practiceTiers) {
+          return (
+            <section 
+              key={section.id}
+              id={section.id}
+              className={styles.practiceSection}
+              data-aos="fade-up"
+              data-aos-delay={100}
+            >
+              <h2 className={styles.practiceSectionTitle}>{section.title}</h2>
+              {section.subtitle && (
+                <p className={styles.practiceSectionSubtitle}>{section.subtitle}</p>
+              )}
+              <div className={styles.tierCardsGrid}>
+                {Object.entries(practiceTiers).map(([key, tier], tierIdx) => (
+                  <details 
+                    key={key} 
+                    className={styles.tierCardDetails}
+                    data-aos="fade-up"
+                    data-aos-delay={150 + tierIdx * 100}
+                  >
+                    <summary className={styles.tierCardSummary} data-testid={`tier-summary-${key}`}>
+                      <div className={styles.tierCardHeader}>
+                        <Clock className={styles.tierTimeIcon} />
+                        <span className={styles.tierDurationLabel}>{tier.duration}</span>
+                      </div>
+                      <h3 className={styles.tierCardTitle}>{tier.title}</h3>
+                      <ChevronRight className={styles.tierExpandIcon} />
+                    </summary>
+                    <div className={styles.tierCardContent}>
+                      {tier.steps && tier.steps.length > 0 && (
+                        <ol className={styles.tierStepsList}>
+                          {tier.steps.map((step, stepIdx) => (
+                            <li key={stepIdx} className={styles.tierStepItem}>
+                              <span className={styles.tierStepNum}>{stepIdx + 1}</span>
+                              <span className={styles.tierStepText}>{step}</span>
+                            </li>
+                          ))}
+                        </ol>
+                      )}
+                      {tier.reflection && tier.reflection.length > 0 && key === 'long3to10' && (
+                        <div className={styles.tierReflectionBox}>
+                          <p className={styles.tierReflectionLabel}>Optional reflection:</p>
+                          {tier.reflection.map((r, rIdx) => (
+                            <p key={rIdx} className={styles.tierReflectionText}>{r}</p>
+                          ))}
+                        </div>
+                      )}
+                      <button 
+                        className={styles.tierStartBtn}
+                        data-testid={`button-start-${key}`}
+                      >
+                        {tier.ctaLabel}
+                        <ArrowRight className={styles.tierBtnIcon} />
+                      </button>
+                    </div>
+                  </details>
+                ))}
+              </div>
+            </section>
+          );
+        }
+
+        if (section.type === 'guidance' && section.content) {
+          return (
+            <section 
+              key={section.id}
+              id={section.id}
+              className={styles.guidanceSection}
+              data-aos="fade-up"
+              data-aos-delay={200}
+            >
+              <h2 className={styles.guidanceSectionTitle}>{section.title}</h2>
+              <div className={styles.guidanceCards}>
+                {section.content.permission && (
+                  <div className={styles.guidanceCard} data-aos="fade-up" data-aos-delay={250}>
+                    <Shield className={styles.guidanceIcon} />
+                    <p className={styles.guidanceText}>{section.content.permission}</p>
+                  </div>
+                )}
+                {section.content.stopNote && (
+                  <div className={styles.guidanceCard} data-aos="fade-up" data-aos-delay={300}>
+                    <RefreshCw className={styles.guidanceIcon} />
+                    <p className={styles.guidanceText}>{section.content.stopNote}</p>
+                  </div>
+                )}
+                {section.content.whatToExpect && (
+                  <div className={styles.guidanceCard} data-aos="fade-up" data-aos-delay={350}>
+                    <Sparkles className={styles.guidanceIcon} />
+                    <p className={styles.guidanceText}>{section.content.whatToExpect}</p>
+                  </div>
+                )}
+              </div>
+            </section>
+          );
+        }
+
+        if (section.type === 'navigation' && section.links) {
+          return (
+            <section 
+              key={section.id}
+              id={section.id}
+              className={styles.navigationSection}
+              data-aos="fade-up"
+              data-aos-delay={300}
+            >
+              <h2 className={styles.navigationSectionTitle}>{section.title}</h2>
+              <div className={styles.navigationLinks}>
+                {section.links.map((link, linkIdx) => (
+                  <Link
+                    key={linkIdx}
+                    href={link.href}
+                    className={styles.navigationLink}
+                    data-testid={`link-next-${linkIdx}`}
+                    data-aos="fade-up"
+                    data-aos-delay={350 + linkIdx * 50}
+                  >
+                    {link.label}
+                    <ArrowRight className={styles.navLinkIcon} />
+                  </Link>
+                ))}
+              </div>
+            </section>
+          );
+        }
+
+        return null;
+      })}
+    </div>
+  );
+}
+
 function GentleDisclaimer({ disclaimer, tone }) {
   if (!disclaimer) return null;
   
@@ -626,6 +764,14 @@ export default function PageTemplate({ config, children }) {
         <NextStepBlock nextStep={config.nextStep} />
 
         <TieredPracticeBlock practice={config.practice} microcopy={config.microcopy} />
+
+        {config.stimulationProfile === 'practice' && config.practiceSections && (
+          <PracticeSectionsRenderer 
+            practiceSections={config.practiceSections}
+            practiceTiers={config.practiceTiers}
+            microcopy={config.microcopy}
+          />
+        )}
 
         {config.practices && config.practices.map((practice, index) => (
           <PracticeSection key={practice.timeTag || index} practice={practice} />

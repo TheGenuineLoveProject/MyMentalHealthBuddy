@@ -5744,14 +5744,20 @@ function injectMicrocopy(config) {
     if (config.practice && !config.practiceTiers) {
       enhanced.practiceTiers = {
         quick10s: {
+          duration: '10 seconds',
+          title: config.practice.beginner?.title || microcopyData.tierLabels.quick10s,
           steps: config.practice.beginner?.steps || [],
           ctaLabel: microcopyData.cta.quick10s
         },
         short1to3: {
+          duration: '1–3 minutes',
+          title: config.practice.intermediate?.title || microcopyData.tierLabels.short1to3,
           steps: config.practice.intermediate?.steps || [],
           ctaLabel: microcopyData.cta.short1to3
         },
         long3to10: {
+          duration: '3–10 minutes',
+          title: config.practice.advanced?.title || microcopyData.tierLabels.long3to10,
           steps: config.practice.advanced?.steps || [],
           ctaLabel: microcopyData.cta.long3to10,
           reflection: config.practice.advanced?.reflection || [microcopyData.reflection]
@@ -5759,9 +5765,54 @@ function injectMicrocopy(config) {
       };
     }
     
+    if (enhanced.stimulationProfile === 'practice' && !config.practiceSections) {
+      const routeName = config.pageLabel || 'Practice';
+      const neighborRoutes = getNeighborWellnessRoutes(config.route);
+      
+      enhanced.practiceSections = [
+        {
+          id: 'choose-time',
+          title: 'Choose a time',
+          subtitle: 'Start where you are. Any length is enough.',
+          type: 'tier-cards'
+        },
+        {
+          id: 'how-to-easier',
+          title: 'How to make this easier',
+          type: 'guidance',
+          content: {
+            permission: microcopyData.permission,
+            stopNote: microcopyData.stopNote,
+            whatToExpect: microcopyData.whatToExpect
+          }
+        },
+        {
+          id: 'what-next',
+          title: 'What next',
+          type: 'navigation',
+          links: [
+            { label: 'Browse all wellness tools', href: '/wellness-hub' },
+            ...neighborRoutes.map(r => ({ label: r.label, href: r.route }))
+          ]
+        }
+      ];
+    }
+    
     return enhanced;
   }
   return config;
+}
+
+function getNeighborWellnessRoutes(currentRoute) {
+  const wellnessRoutes = routes.filter(r => r.tone === 'practice' && r.route !== currentRoute);
+  const hash = currentRoute.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const idx = hash % wellnessRoutes.length;
+  const neighbors = [];
+  if (wellnessRoutes[idx]) neighbors.push({ route: wellnessRoutes[idx].route, label: wellnessRoutes[idx].pageLabel });
+  if (wellnessRoutes[(idx + 1) % wellnessRoutes.length]) {
+    neighbors.push({ route: wellnessRoutes[(idx + 1) % wellnessRoutes.length].route, label: wellnessRoutes[(idx + 1) % wellnessRoutes.length].pageLabel });
+  }
+  return neighbors.slice(0, 2);
 }
 
 export function getRouteConfig(path) {
