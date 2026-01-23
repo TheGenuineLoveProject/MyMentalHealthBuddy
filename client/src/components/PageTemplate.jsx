@@ -175,6 +175,46 @@ function SacredCard({ card, index }) {
   );
 }
 
+function ModuleCard({ module, index }) {
+  const IconComponent = getIcon(module.icon);
+  
+  return (
+    <article
+      className={styles.moduleCard}
+      data-aos="fade-up"
+      data-aos-delay={150 + (index * 100)}
+      data-testid={`module-${module.title?.toLowerCase().replace(/\s+/g, '-') || index}`}
+    >
+      <div className={styles.moduleIconWrapper}>
+        <IconComponent className={styles.moduleIcon} />
+      </div>
+      <h3 className={styles.moduleTitle}>
+        {module.title}
+      </h3>
+      <p className={styles.moduleDescription}>
+        {module.description}
+      </p>
+    </article>
+  );
+}
+
+function ModulesGrid({ modules }) {
+  if (!modules || modules.length === 0) return null;
+  
+  return (
+    <section 
+      className={styles.modulesSection}
+      aria-label="Core features"
+    >
+      <div className={styles.modulesGrid}>
+        {modules.map((module, index) => (
+          <ModuleCard key={index} module={module} index={index} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function ContentSection({ section, index }) {
   return (
     <SacredSection
@@ -260,6 +300,8 @@ export default function PageTemplate({ config, children }) {
 
       <main id="main">
         <HeroSection hero={config.hero} />
+
+        <ModulesGrid modules={config.modules} />
 
         {config.sections && config.sections.map((section, index) => (
           <ContentSection key={section.id || index} section={section} index={index} />

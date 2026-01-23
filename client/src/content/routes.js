@@ -356,6 +356,11 @@ const rawRoutes = [
       primaryCta: { label: 'Start gently', href: '/register' },
       secondaryCta: { label: 'Explore at your pace', href: '#pathways' }
     },
+    modules: [
+      { icon: 'Heart', title: 'Inner Child Work', description: 'Gentle exercises to reconnect with younger parts of yourself that may still need comfort.' },
+      { icon: 'Brain', title: 'Nervous System Care', description: 'Simple somatic practices to help you find calm when everything feels like too much.' },
+      { icon: 'MessageCircle', title: 'AI Companion', description: 'A patient, trauma-informed presence available whenever you need someone to talk to.' }
+    ],
     sections: [
       {
         id: 'pathways',
@@ -424,6 +429,11 @@ const rawRoutes = [
       primaryCta: { label: 'Come in', href: '/dashboard' },
       secondaryCta: { label: 'Our story', href: '#story' }
     },
+    modules: [
+      { icon: 'Heart', title: 'Self-Compassion', description: 'Learn to hold yourself with the same kindness you would offer a dear friend.' },
+      { icon: 'Leaf', title: 'Grounding Practices', description: 'Simple techniques to help you feel present and connected to this moment.' },
+      { icon: 'Sun', title: 'Daily Rituals', description: 'Gentle morning and evening practices to bookend your days with intention.' }
+    ],
     sections: [
       {
         id: 'story',
@@ -449,6 +459,18 @@ const rawRoutes = [
           { icon: 'Leaf', title: 'Patient Growth', text: 'Real transformation unfolds slowly, like seasons.' },
           { icon: 'Sun', title: 'Radical Compassion', text: 'You are worthy of kindness, especially from yourself.' }
         ]
+      },
+      {
+        id: 'invitation',
+        eyebrow: 'An Invitation',
+        title: 'This space is here whenever you need it',
+        subtitle: 'There is no right time to begin. You are welcome exactly as you are.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Clock', title: 'No Rush', text: 'Take as long as you need. Healing unfolds in its own time.' },
+          { icon: 'Lock', title: 'Complete Privacy', text: 'What you share here stays here. Always.' },
+          { icon: 'Sparkles', title: 'Gentle Support', text: 'When you want guidance, compassionate tools are waiting.' }
+        ]
       }
     ]
   },
@@ -466,6 +488,11 @@ const rawRoutes = [
       primaryCta: { label: 'Begin a practice', href: '/wellness-hub' },
       secondaryCta: { label: 'Learn about our approach', href: '#philosophy' }
     },
+    modules: [
+      { icon: 'Activity', title: 'Somatic Practices', description: 'Body-based exercises to help release what words cannot express.' },
+      { icon: 'Eye', title: 'Inner Child Work', description: 'Gentle reconnection with younger parts of yourself that need comfort.' },
+      { icon: 'Brain', title: 'Nervous System Regulation', description: 'Tools to widen your window of tolerance and find more moments of calm.' }
+    ],
     sections: [
       {
         id: 'philosophy',
@@ -523,6 +550,11 @@ const rawRoutes = [
       primaryCta: { label: 'Start free', href: '/register' },
       secondaryCta: { label: 'See what\'s included', href: '#plans' }
     },
+    modules: [
+      { icon: 'Heart', title: 'Free Core Tools', description: 'Journaling, mood tracking, and grounding practices—free forever, no strings attached.' },
+      { icon: 'Star', title: 'Premium Support', description: 'Unlimited AI companion, advanced healing journeys, and personalized insights.' },
+      { icon: 'Sparkles', title: 'Lifetime Access', description: 'One payment, forever access. No recurring charges, complete peace of mind.' }
+    ],
     sections: [
       {
         id: 'plans',
@@ -577,6 +609,11 @@ const rawRoutes = [
       primaryCta: { label: 'Start for free', href: '/register' },
       secondaryCta: { label: 'See how it works', href: '#how' }
     },
+    modules: [
+      { icon: 'MessageCircle', title: 'AI Companion', description: 'A patient, trauma-informed presence available whenever you need someone to listen.' },
+      { icon: 'BookOpen', title: 'Guided Journaling', description: 'Thoughtful prompts to help you process and make sense of your experiences.' },
+      { icon: 'Activity', title: 'State Tracking', description: 'Simple check-ins that help you notice patterns and celebrate small progress.' }
+    ],
     sections: [
       {
         id: 'how',

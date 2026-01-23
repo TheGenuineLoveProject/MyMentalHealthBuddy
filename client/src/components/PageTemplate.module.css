@@ -440,3 +440,101 @@
     transform: none;
   }
 }
+
+/* ============================================
+   MODULES GRID
+   ============================================ */
+.modulesSection {
+  padding: 4rem 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(143, 191, 159, 0.05) 0%,
+    rgba(47, 93, 93, 0.05) 100%
+  );
+}
+
+.modulesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.moduleCard {
+  background: var(--sacred-cream, #faf9f7);
+  border: 1px solid rgba(143, 191, 159, 0.2);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.moduleCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(47, 93, 93, 0.15);
+}
+
+.moduleIconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px rgba(143, 191, 159, 0.3);
+}
+
+.moduleIcon {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: white;
+}
+
+.moduleTitle {
+  font-family: var(--font-sacred, 'Playfair Display', serif);
+  font-size: 1.5rem; /* 24px - Section Header */
+  font-weight: 600;
+  color: var(--sacred-charcoal, #3a3a3a);
+  margin-bottom: 0.75rem;
+}
+
+.moduleDescription {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--sacred-charcoal, #3a3a3a);
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .modulesSection {
+    padding: 3rem 1rem;
+  }
+  
+  .modulesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .moduleCard {
+    padding: 1.5rem;
+  }
+  
+  .moduleTitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moduleCard {
+    transition: none;
+  }
+  
+  .moduleCard:hover {
+    transform: none;
+  }
+}
