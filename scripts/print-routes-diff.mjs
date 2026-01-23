@@ -1,18 +1,19 @@
 #!/usr/bin/env node
 /**
  * print-routes-diff.mjs
- * Reads reports/routes.diff.json and prints a PR-ready Markdown comment or
- * GitHub Actions annotations to stdout.
+ * Reads reports/routes.diff.json and prints a PR-ready Markdown comment,
+ * GitHub Actions annotations, or compact JSON to stdout.
  * 
  * Usage:
  *   node scripts/print-routes-diff.mjs [options]
  * 
  * Options:
- *   --file=<path>       Path to diff JSON (default: reports/routes.diff.json)
+ *   --in=<path>         Path to diff JSON (default: reports/routes.diff.json)
+ *   --file=<path>       Alias for --in
  *   --max=<n>           Limit items per section (default: 10)
- *   --format=md|gha     Output format (default: md)
+ *   --format=...        Output format: markdown|annotations|json (default: markdown)
  *   --title="..."       Custom title (default: "Route manifest drift detected")
- *   --ci                Force --format=gha unless explicitly set
+ *   --ci                Force --format=annotations unless explicitly set
  *   --top=<n>           Number of top changes to show (default: 5)
  *   --topMode=...       Priority mode: hash|title|category|mixed (default: mixed)
  * 
@@ -32,7 +33,7 @@ function parseArgs(argv) {
   const args = {
     file: 'reports/routes.diff.json',
     max: 10,
-    format: 'md',
+    format: 'markdown',
     title: 'Route manifest drift detected',
     ci: false,
     formatExplicit: false,
@@ -42,7 +43,7 @@ function parseArgs(argv) {
 
   for (const arg of argv.slice(2)) {
     if (arg.startsWith('--file=') || arg.startsWith('--in=')) {
-      args.file = arg.includes('=') ? arg.split('=')[1] : args.file;
+      args.file = arg.split('=')[1];
     } else if (arg.startsWith('--max=')) {
       const val = parseInt(arg.slice(6), 10);
       if (!isNaN(val) && val > 0) {
@@ -50,8 +51,11 @@ function parseArgs(argv) {
       }
     } else if (arg.startsWith('--format=')) {
       const fmt = arg.slice(9).toLowerCase();
-      if (fmt === 'md' || fmt === 'gha') {
-        args.format = fmt;
+      if (['markdown', 'md', 'annotations', 'gha', 'json'].includes(fmt)) {
+        // Normalize aliases
+        if (fmt === 'md') args.format = 'markdown';
+        else if (fmt === 'gha') args.format = 'annotations';
+        else args.format = fmt;
         args.formatExplicit = true;
       }
     } else if (arg.startsWith('--title=')) {
@@ -71,9 +75,9 @@ function parseArgs(argv) {
     }
   }
 
-  // --ci forces gha unless --format was explicitly set
+  // --ci forces annotations unless --format was explicitly set
   if (args.ci && !args.formatExplicit) {
-    args.format = 'gha';
+    args.format = 'annotations';
   }
 
   return args;
@@ -90,25 +94,17 @@ const PAGE_SEARCH_PATHS = [
 ];
 
 function routeToFileCandidates(route) {
-  // Normalize route
   let normalized = route.replace(/^\/+/, '');
   
-  // Handle root route
   if (normalized === '' || normalized === '/') {
     return ['index.jsx', 'home.jsx'];
   }
   
-  // Replace dynamic segments :param with [param]
   normalized = normalized.replace(/:([^/]+)/g, '[$1]');
   
-  // Generate candidates
   const candidates = [];
-  
-  // Direct file match
   candidates.push(`${normalized}.jsx`);
   candidates.push(`${normalized}.tsx`);
-  
-  // Index file in directory
   candidates.push(`${normalized}/index.jsx`);
   candidates.push(`${normalized}/index.tsx`);
   
@@ -119,7 +115,6 @@ function resolveRouteLink(route) {
   const candidates = routeToFileCandidates(route);
   
   for (const searchPath of PAGE_SEARCH_PATHS) {
-    // Skip if search path doesn't exist
     if (!fs.existsSync(searchPath)) continue;
     
     for (const candidate of candidates) {
@@ -134,7 +129,6 @@ function resolveRouteLink(route) {
     }
   }
   
-  // Fallback to route path
   return {
     kind: 'path',
     href: route,
@@ -201,7 +195,7 @@ function formatHashChanged(item) {
 }
 
 // ============================================================================
-// FORMATTERS WITH LINKS (for Top changes in md mode)
+// FORMATTERS WITH LINKS (for Top changes in markdown mode)
 // ============================================================================
 
 function formatAddedItemWithLink(item) {
@@ -318,7 +312,6 @@ function buildTopChanges(diffData, topCount, topMode, withLinks = false) {
       break;
     case 'mixed':
     default:
-      // Interleave: title, category, hash, added, removed
       const order = ['title', 'category', 'hash', 'added', 'removed'];
       const indices = { title: 0, category: 0, hash: 0, added: 0, removed: 0 };
       
@@ -338,7 +331,141 @@ function buildTopChanges(diffData, topCount, topMode, withLinks = false) {
             }
           }
         }
-        if (!added) break; // No more items
+        if (!added) break;
+      }
+      break;
+  }
+
+  return result;
+}
+
+// Build structured top changes for JSON output
+function buildTopChangesStructured(diffData, topCount, topMode) {
+  const seen = new Set();
+  const result = [];
+
+  const buckets = {
+    title: sortByRoute(diffData.titleChanged || []).map(item => ({
+      route: item.route,
+      changeType: 'titleChanged',
+      fromCategory: null,
+      toCategory: null,
+      titleBefore: item.fromTitle,
+      titleAfter: item.toTitle
+    })),
+    category: sortByRoute(diffData.categoryChanged || []).map(item => ({
+      route: item.route,
+      changeType: 'categoryChanged',
+      fromCategory: item.fromCategory,
+      toCategory: item.toCategory,
+      titleBefore: null,
+      titleAfter: null
+    })),
+    hash: sortByRoute(diffData.hashChanged || []).map(item => ({
+      route: item.route,
+      changeType: 'hashChanged',
+      fromCategory: null,
+      toCategory: null,
+      titleBefore: null,
+      titleAfter: null
+    })),
+    added: sortByRoute(diffData.added || []).map(item => ({
+      route: getRoute(item),
+      changeType: 'added',
+      fromCategory: null,
+      toCategory: typeof item === 'object' ? item.category : null,
+      titleBefore: null,
+      titleAfter: null
+    })),
+    removed: sortByRoute(diffData.removed || []).map(item => ({
+      route: getRoute(item),
+      changeType: 'removed',
+      fromCategory: typeof item === 'object' ? item.category : null,
+      toCategory: null,
+      titleBefore: null,
+      titleAfter: null
+    }))
+  };
+
+  function addFromBucket(bucketName) {
+    const bucket = buckets[bucketName];
+    for (const item of bucket) {
+      if (result.length >= topCount) return;
+      if (!seen.has(item.route)) {
+        seen.add(item.route);
+        const link = resolveRouteLink(item.route);
+        result.push({
+          route: item.route,
+          changeType: item.changeType,
+          fromCategory: item.fromCategory,
+          toCategory: item.toCategory,
+          titleBefore: item.titleBefore,
+          titleAfter: item.titleAfter,
+          link: {
+            kind: link.kind,
+            href: link.href
+          }
+        });
+      }
+    }
+  }
+
+  switch (topMode) {
+    case 'hash':
+      addFromBucket('hash');
+      addFromBucket('title');
+      addFromBucket('category');
+      addFromBucket('added');
+      addFromBucket('removed');
+      break;
+    case 'title':
+      addFromBucket('title');
+      addFromBucket('category');
+      addFromBucket('hash');
+      addFromBucket('added');
+      addFromBucket('removed');
+      break;
+    case 'category':
+      addFromBucket('category');
+      addFromBucket('title');
+      addFromBucket('hash');
+      addFromBucket('added');
+      addFromBucket('removed');
+      break;
+    case 'mixed':
+    default:
+      const order = ['title', 'category', 'hash', 'added', 'removed'];
+      const indices = { title: 0, category: 0, hash: 0, added: 0, removed: 0 };
+      
+      while (result.length < topCount) {
+        let added = false;
+        for (const bucketName of order) {
+          if (result.length >= topCount) break;
+          const bucket = buckets[bucketName];
+          while (indices[bucketName] < bucket.length) {
+            const item = bucket[indices[bucketName]];
+            indices[bucketName]++;
+            if (!seen.has(item.route)) {
+              seen.add(item.route);
+              const link = resolveRouteLink(item.route);
+              result.push({
+                route: item.route,
+                changeType: item.changeType,
+                fromCategory: item.fromCategory,
+                toCategory: item.toCategory,
+                titleBefore: item.titleBefore,
+                titleAfter: item.titleAfter,
+                link: {
+                  kind: link.kind,
+                  href: link.href
+                }
+              });
+              added = true;
+              break;
+            }
+          }
+        }
+        if (!added) break;
       }
       break;
   }
@@ -395,7 +522,6 @@ function generateMarkdown(diffData, max, topCount, topMode) {
     lines.push('');
   }
 
-  // Top changes section with links
   const topChanges = buildTopChanges(diffData, topCount, topMode, true);
   if (topChanges.length > 0) {
     lines.push(`### Top changes (${topChanges.length})`);
@@ -438,19 +564,15 @@ function generateGhaDrift(diffData, max, title, topCount, topMode) {
   const summary = diffData.summary || {};
   const cmd = diffData.recommendedCommand || 'npm run gen:pages:all && npm run verify:routes';
 
-  // Main error line
   lines.push(`::error title=Routes::${ghaEscape(title)}. Run: ${ghaEscape(cmd)}`);
 
-  // Top changes notice (plain text, no links for GHA)
   const topChanges = buildTopChanges(diffData, topCount, topMode, false);
   if (topChanges.length > 0) {
     const maxNoticeItems = 3;
     const truncated = topChanges.length > maxNoticeItems;
     const shownItems = truncated ? topChanges.slice(0, maxNoticeItems) : topChanges;
     
-    // For GHA, also include file path if resolved
     const itemsWithFiles = shownItems.map(item => {
-      // Extract route from the formatted string
       const routeMatch = item.match(/[+\-~]\s+(\S+)/);
       if (routeMatch) {
         const route = routeMatch[1].replace(/[:\s].*$/, '');
@@ -469,7 +591,6 @@ function generateGhaDrift(diffData, max, title, topCount, topMode) {
     lines.push(`::notice title=Routes::Top changes: ${ghaEscape(topNotice)}`);
   }
 
-  // Summary warning
   const summaryParts = [];
   summaryParts.push(`Added: ${summary.added || 0}`);
   summaryParts.push(`Removed: ${summary.removed || 0}`);
@@ -478,7 +599,6 @@ function generateGhaDrift(diffData, max, title, topCount, topMode) {
   summaryParts.push(`Hash changed: ${summary.hashChanged || 0}`);
   lines.push(`::warning title=Routes::${summaryParts.join(', ')}`);
 
-  // Per-route warnings
   const sections = [
     { items: diffData.added, formatter: formatAddedItem },
     { items: diffData.removed, formatter: formatRemovedItem },
@@ -506,6 +626,49 @@ function generateGhaDrift(diffData, max, title, topCount, topMode) {
 }
 
 // ============================================================================
+// JSON OUTPUT GENERATION
+// ============================================================================
+
+function generateJsonClean() {
+  return JSON.stringify({
+    ok: true,
+    summary: {
+      added: 0,
+      removed: 0,
+      changed: 0,
+      categoryMoved: 0,
+      totalChanged: 0
+    },
+    topChanges: [],
+    recommendedCommand: null
+  });
+}
+
+function generateJsonDrift(diffData, topCount, topMode) {
+  const summary = diffData.summary || {};
+  const added = summary.added || 0;
+  const removed = summary.removed || 0;
+  const titleChanged = summary.titleChanged || 0;
+  const categoryChanged = summary.categoryChanged || 0;
+  const hashChanged = summary.hashChanged || 0;
+
+  const topChanges = buildTopChangesStructured(diffData, topCount, topMode);
+
+  return JSON.stringify({
+    ok: false,
+    summary: {
+      added,
+      removed,
+      changed: titleChanged + hashChanged,
+      categoryMoved: categoryChanged,
+      totalChanged: added + removed + titleChanged + categoryChanged + hashChanged
+    },
+    topChanges,
+    recommendedCommand: diffData.recommendedCommand || null
+  });
+}
+
+// ============================================================================
 // MAIN
 // ============================================================================
 
@@ -515,7 +678,9 @@ function main() {
 
   // File missing
   if (!fs.existsSync(diffPath)) {
-    if (args.format === 'gha') {
+    if (args.format === 'json') {
+      console.log(generateJsonClean());
+    } else if (args.format === 'annotations') {
       console.log(generateGhaClean());
     } else {
       console.log('✅ Routes manifest clean (no reports/routes.diff.json found).');
@@ -535,7 +700,9 @@ function main() {
 
   // Status clean
   if (diffData.status === 'clean') {
-    if (args.format === 'gha') {
+    if (args.format === 'json') {
+      console.log(generateJsonClean());
+    } else if (args.format === 'annotations') {
       console.log(generateGhaClean());
     } else {
       console.log('✅ Routes manifest is clean. No drift detected.');
@@ -545,7 +712,9 @@ function main() {
 
   // Status drift
   if (diffData.status === 'drift') {
-    if (args.format === 'gha') {
+    if (args.format === 'json') {
+      console.log(generateJsonDrift(diffData, args.top, args.topMode));
+    } else if (args.format === 'annotations') {
       console.log(generateGhaDrift(diffData, args.max, args.title, args.top, args.topMode));
     } else {
       console.log(generateMarkdown(diffData, args.max, args.top, args.topMode));
@@ -554,7 +723,9 @@ function main() {
   }
 
   // Unknown status
-  if (args.format === 'gha') {
+  if (args.format === 'json') {
+    console.log(generateJsonClean());
+  } else if (args.format === 'annotations') {
     console.log(generateGhaClean());
   } else {
     console.log('✅ Routes manifest status unknown. Assuming clean.');
