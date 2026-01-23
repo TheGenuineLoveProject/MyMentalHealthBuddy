@@ -70,17 +70,17 @@ const categoryPresets = {
       title: {
         kids: 'A safe place for',
         standard: 'Your sanctuary for',
-        deep: 'A trauma-informed environment for'
+        deep: 'A gentle space for'
       },
       titleHighlight: {
         kids: 'feeling better.',
         standard: 'emotional healing.',
-        deep: 'psychological restoration.'
+        deep: 'deep healing.'
       },
       subtitle: {
-        kids: 'A friendly place to feel calm and happy.',
-        standard: 'A trauma-informed space for healing, growth, and self-discovery.',
-        deep: 'An evidence-informed platform integrating somatic awareness, cognitive reframing, and compassion-focused approaches.'
+        kids: 'A friendly place to feel calm.',
+        standard: 'A trauma-informed space for healing and growth.',
+        deep: 'Trauma-informed care means we honor your pace and boundaries.'
       },
       primaryCta: { 
         label: {
@@ -105,17 +105,17 @@ const categoryPresets = {
         eyebrow: {
           kids: 'Cool Stuff',
           standard: 'What We Offer',
-          deep: 'Core Modalities'
+          deep: 'Core Offerings'
         },
         title: {
           kids: 'Things that may help',
           standard: 'Healing tools designed with care',
-          deep: 'Evidence-informed approaches for emotional regulation'
+          deep: 'Gentle tools for your journey'
         },
         subtitle: {
           kids: 'Simple ways to feel calmer.',
           standard: 'Evidence-based approaches wrapped in compassion.',
-          deep: 'Grounded in research on nervous system regulation and attachment theory.'
+          deep: 'Evidence-based means these practices are supported by research.'
         },
         variant: 'glow',
         cards: [
@@ -124,12 +124,12 @@ const categoryPresets = {
             title: {
               kids: 'Be Kind to You',
               standard: 'Self-Compassion',
-              deep: 'Compassion-Focused Practice'
+              deep: 'Self-Compassion'
             }, 
             text: {
               kids: 'Say nice things to yourself.',
               standard: 'Learn to treat yourself with kindness.',
-              deep: 'Cultivate self-directed compassion through structured exercises.'
+              deep: 'Self-compassion means treating yourself as you would a dear friend.'
             }
           },
           { 
@@ -137,12 +137,12 @@ const categoryPresets = {
             title: {
               kids: 'Know Your Feelings',
               standard: 'Emotional Awareness',
-              deep: 'Interoceptive Awareness'
+              deep: 'Emotional Awareness'
             }, 
             text: {
               kids: 'Notice how you feel inside.',
               standard: 'Understand your inner landscape.',
-              deep: 'Develop sensitivity to internal states and somatic markers.'
+              deep: 'Awareness means gently noticing what arises without judgment.'
             }
           },
           { 
@@ -150,12 +150,12 @@ const categoryPresets = {
             title: {
               kids: 'Your Private Space',
               standard: 'Safe Space',
-              deep: 'Psychological Safety'
+              deep: 'Safe Space'
             }, 
             text: {
               kids: 'A quiet place just for you.',
               standard: 'A private sanctuary for your journey.',
-              deep: 'An environment designed for secure exploration of inner experience.'
+              deep: 'Safety here means you set the pace and boundaries.'
             }
           },
           { 
@@ -163,12 +163,12 @@ const categoryPresets = {
             title: {
               kids: 'Help When Needed',
               standard: 'Guided Support',
-              deep: 'Structured Scaffolding'
+              deep: 'Guided Support'
             }, 
             text: {
               kids: 'Get help when you want it.',
               standard: 'Tools and resources when you need them.',
-              deep: 'Progressive frameworks with adaptive complexity.'
+              deep: 'Scaffolding means gentle structure that meets you where you are.'
             }
           }
         ]

@@ -6,6 +6,11 @@
  * - SSR-safe localStorage handling
  * - URL query support (?level=kids|standard|deep)
  * - Fallback chain: URL > localStorage > route default > standard
+ * 
+ * STRICT COPY RULES:
+ * - Kids: Sentences under 10 words when possible
+ * - Standard: Paragraphs max 2 sentences
+ * - Deep: One short definition per section, keep tone gentle
  */
 
 export const READING_LEVELS = ['kids', 'standard', 'deep'];
@@ -14,17 +19,20 @@ export const READING_LEVEL_META = {
   kids: {
     label: 'Kids',
     description: 'Simple words, short sentences',
-    aria: 'Kids mode: very simple, easy-to-understand language'
+    aria: 'Kids mode: very simple, easy-to-understand language',
+    copyRule: 'Sentences under 10 words when possible'
   },
   standard: {
     label: 'Standard',
     description: 'Warm and grounded',
-    aria: 'Standard mode: warm, grounded language with moderate detail'
+    aria: 'Standard mode: warm, grounded language with moderate detail',
+    copyRule: 'Paragraphs max 2 sentences'
   },
   deep: {
     label: 'Deep',
     description: 'Frameworks and definitions',
-    aria: 'Deep mode: detailed explanations with frameworks and definitions'
+    aria: 'Deep mode: detailed explanations with frameworks and definitions',
+    copyRule: 'One short definition per section, gentle tone'
   }
 };
 
