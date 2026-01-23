@@ -1086,6 +1086,48 @@ const rawRoutes = [
       type: 'supportive',
       text: 'These practices are supportive tools, not medical treatment. If you feel dizzy or uncomfortable, stop and breathe normally. For persistent breathing difficulties, please consult a healthcare provider.'
     },
+    contentLevels: {
+      beginner: {
+        summary: 'Breathing exercises help you feel calmer. When you breathe slowly, your body relaxes. You can do this anytime, anywhere.',
+        steps: [
+          'Find a comfortable place to sit or stand.',
+          'Put one hand on your belly.',
+          'Breathe in slowly through your nose. Feel your belly rise.',
+          'Breathe out slowly through your mouth. Feel your belly fall.',
+          'Do this 5 times. That is it!'
+        ],
+        reassurance: 'There is no wrong way to breathe. If your mind wanders, that is okay. Just gently come back to noticing your breath.'
+      },
+      intermediate: {
+        summary: 'Controlled breathing activates your parasympathetic nervous system, shifting your body from stress mode to rest mode. Regular practice builds this skill.',
+        guidance: [
+          'Practice daily for 2–5 minutes, ideally at the same time each day.',
+          'Box breathing (4-4-4-4) is excellent for focus and grounding.',
+          'The 4-7-8 pattern is best used before sleep or during anxiety.',
+          'Track your practice to notice patterns and progress.',
+          'Combine with grounding techniques when overwhelmed.'
+        ],
+        examples: [
+          'Morning routine: 3 minutes of belly breathing before starting your day.',
+          'Work break: 1 minute of box breathing between tasks.',
+          'Evening wind-down: 4-7-8 breathing for 5 cycles before bed.'
+        ]
+      },
+      advanced: {
+        summary: 'Respiratory regulation is a gateway to autonomic nervous system modulation. Extended practice develops interoceptive awareness and vagal tone optimization.',
+        deeperDive: [
+          'Heart rate variability (HRV) training uses breath to maximize parasympathetic tone. Target 5–6 breaths per minute for coherence.',
+          'Extended exhales (inhale 4, exhale 8) strongly activate the vagus nerve via stretch receptors in the lungs.',
+          'Breath retention (kumbhaka) practices should be approached gradually and only after establishing a stable daily practice.',
+          'Consider biofeedback devices to measure HRV response to different techniques.'
+        ],
+        references: [
+          'Porges, S. (2011). The Polyvagal Theory.',
+          'Brown, R. & Gerbarg, P. (2012). The Healing Power of the Breath.',
+          'Lehrer, P. & Gevirtz, R. (2014). Heart rate variability biofeedback.'
+        ]
+      }
+    },
     hero: {
       eyebrow: 'Breathwork',
       title: 'Find calm through',

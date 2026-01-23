@@ -27,6 +27,7 @@ import SacredLayout from './sacred/SacredLayout.jsx';
 import SacredFooter from './sacred/SacredFooter.jsx';
 import SacredSection from './sacred/SacredSection.jsx';
 import SEO from './SEO.tsx';
+import ContentLevelToggle, { useContentLevel, ContentLevelContent } from './ContentLevelToggle.jsx';
 import styles from './PageTemplate.module.css';
 
 const iconMap = {
@@ -264,6 +265,7 @@ function ContentSection({ section, index }) {
 
 export default function PageTemplate({ config, children }) {
   const prefersReducedMotion = useRef(false);
+  const [contentLevel, setContentLevel] = useContentLevel();
 
   useEffect(() => {
     prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -286,6 +288,8 @@ export default function PageTemplate({ config, children }) {
       </SacredLayout>
     );
   }
+
+  const hasContentLevels = config.contentLevels && Object.keys(config.contentLevels).length > 0;
 
   return (
     <SacredLayout>
@@ -322,6 +326,20 @@ export default function PageTemplate({ config, children }) {
 
       <main id="main">
         <HeroSection hero={config.hero} />
+
+        {hasContentLevels && (
+          <ContentLevelToggle 
+            level={contentLevel} 
+            onChange={setContentLevel} 
+          />
+        )}
+
+        {hasContentLevels && (
+          <ContentLevelContent 
+            level={contentLevel} 
+            contentLevels={config.contentLevels}
+          />
+        )}
 
         <ModulesGrid modules={config.modules} />
 
