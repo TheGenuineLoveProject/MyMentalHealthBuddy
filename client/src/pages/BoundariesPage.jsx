@@ -29,7 +29,8 @@ const SCRIPT_TEMPLATES = [
 export default function BoundariesPage() {
   const [selectedType, setSelectedType] = useState("emotional");
   const [situation, setSituation] = useState("");
-  const [customScript, setCustomScript] = useState("");
+  const [script, setScript] = useState("");
+  const [softVersion, setSoftVersion] = useState("");
   const [copiedId, setCopiedId] = useState(null);
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -48,8 +49,12 @@ export default function BoundariesPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
       setSituation("");
-      setCustomScript("");
+      setScript("");
+      setSoftVersion("");
       toast({ title: "Script saved", description: "Your boundary script has been saved for future reference." });
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Could not save script. Please try again.", variant: "destructive" });
     },
   });
 
@@ -61,15 +66,22 @@ export default function BoundariesPage() {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
       toast({ title: "Script removed", description: "The boundary script has been removed." });
     },
+    onError: () => {
+      toast({ title: "Error", description: "Could not delete script. Please try again.", variant: "destructive" });
+    },
   });
 
   const handleSaveScript = () => {
-    if (!situation.trim() || !customScript.trim()) return;
+    if (!situation.trim() || !script.trim()) {
+      toast({ title: "Missing information", description: "Please fill in the situation and script.", variant: "destructive" });
+      return;
+    }
     createMutation.mutate({
+      situation: situation.trim(),
       boundaryType: selectedType,
-      situation: situation,
-      scriptText: customScript,
-      tags: [],
+      script: script.trim(),
+      softVersion: softVersion.trim() || null,
+      practiceNotes: null,
     });
   };
 
@@ -101,10 +113,10 @@ export default function BoundariesPage() {
                 <Shield className="w-6 h-6 text-[var(--primary)]" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
+                <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2" data-testid="heading-intro">
                   Setting boundaries is a form of self-care
                 </h2>
-                <p className="text-[var(--text-secondary)] leading-relaxed">
+                <p className="text-[var(--text-secondary)] leading-relaxed" data-testid="text-intro">
                   Boundaries help protect your energy, time, and wellbeing. Having ready-made phrases can make it easier 
                   to communicate your needs, especially in difficult moments. These scripts are starting points — 
                   adapt them to feel natural for you.
@@ -127,6 +139,7 @@ export default function BoundariesPage() {
                       : "bg-[var(--surface-secondary)] text-[var(--text-secondary)] hover:bg-[var(--surface-tertiary)]"
                   }`}
                   data-testid={`tab-${type.id}`}
+                  aria-pressed={isActive}
                 >
                   <Icon className="w-4 h-4" />
                   {type.label}
@@ -135,7 +148,7 @@ export default function BoundariesPage() {
             })}
           </div>
 
-          <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4">
+          <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4" data-testid="heading-templates">
             Template scripts
           </h3>
 
@@ -144,16 +157,17 @@ export default function BoundariesPage() {
               <Card key={idx} data-testid={`card-template-${idx}`}>
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <span className="text-sm font-medium text-[var(--text-muted)] mb-2 block">
+                    <span className="text-sm font-medium text-[var(--text-muted)] mb-2 block" data-testid={`text-context-${idx}`}>
                       {template.context}
                     </span>
-                    <p className="text-[var(--text-primary)] italic">
+                    <p className="text-[var(--text-primary)] italic" data-testid={`text-script-${idx}`}>
                       "{template.script}"
                     </p>
                   </div>
                   <button
                     onClick={() => handleCopyScript(template.script, `template-${idx}`)}
                     className="p-2 text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors"
+                    aria-label={`Copy script: ${template.context}`}
                     data-testid={`button-copy-template-${idx}`}
                   >
                     {copiedId === `template-${idx}` ? (
@@ -168,15 +182,16 @@ export default function BoundariesPage() {
           </CardGrid>
 
           <div className="mt-12 p-6 bg-[var(--surface-elevated)] rounded-2xl border border-[var(--border-subtle)]" data-testid="section-create-script">
-            <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4">
+            <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4" data-testid="heading-create">
               Create your own script
             </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2" htmlFor="situation" data-testid="label-situation">
                   Situation
                 </label>
                 <input
+                  id="situation"
                   type="text"
                   value={situation}
                   onChange={(e) => setSituation(e.target.value)}
@@ -186,69 +201,100 @@ export default function BoundariesPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2" htmlFor="script" data-testid="label-script">
                   Your script
                 </label>
                 <textarea
-                  value={customScript}
-                  onChange={(e) => setCustomScript(e.target.value)}
+                  id="script"
+                  value={script}
+                  onChange={(e) => setScript(e.target.value)}
                   placeholder="What you might say..."
                   rows={3}
                   className="w-full px-4 py-3 rounded-xl border border-[var(--border-default)] bg-[var(--surface-primary)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
                   data-testid="textarea-script"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2" htmlFor="soft-version" data-testid="label-soft-version">
+                  Softer version (optional)
+                </label>
+                <textarea
+                  id="soft-version"
+                  value={softVersion}
+                  onChange={(e) => setSoftVersion(e.target.value)}
+                  placeholder="A gentler way to say the same thing..."
+                  rows={2}
+                  className="w-full px-4 py-3 rounded-xl border border-[var(--border-default)] bg-[var(--surface-primary)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
+                  data-testid="textarea-soft-version"
+                />
+              </div>
               <Button
                 onClick={handleSaveScript}
-                disabled={!situation.trim() || !customScript.trim() || createMutation.isPending}
+                disabled={!situation.trim() || !script.trim() || createMutation.isPending}
                 data-testid="button-save-script"
               >
-                <Plus className="w-4 h-4 mr-2" />
-                Save Script
+                {createMutation.isPending ? (
+                  <span className="flex items-center gap-2">
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Saving...
+                  </span>
+                ) : (
+                  <>
+                    <Plus className="w-4 h-4 mr-2" />
+                    Save Script
+                  </>
+                )}
               </Button>
             </div>
           </div>
 
           {scripts.length > 0 && (
             <div className="mt-12" data-testid="section-my-scripts">
-              <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4">
+              <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4" data-testid="heading-my-scripts">
                 My Scripts ({scripts.length})
               </h3>
               <div className="grid gap-3">
-                {scripts.map((script) => (
+                {scripts.map((s) => (
                   <div
-                    key={script.id}
+                    key={s.id}
                     className="p-4 bg-[var(--surface-elevated)] rounded-xl border border-[var(--border-subtle)]"
-                    data-testid={`card-script-${script.id}`}
+                    data-testid={`card-script-${s.id}`}
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1">
-                        <span className="text-sm font-medium text-[var(--text-muted)] block mb-1">
-                          {script.situation}
+                        <span className="text-sm font-medium text-[var(--text-muted)] block mb-1" data-testid={`text-situation-${s.id}`}>
+                          {s.situation}
                         </span>
-                        <p className="text-[var(--text-primary)] italic">
-                          "{script.scriptText}"
+                        <p className="text-[var(--text-primary)] italic" data-testid={`text-script-${s.id}`}>
+                          "{s.script}"
                         </p>
-                        <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full bg-[var(--surface-secondary)] text-[var(--text-muted)]">
-                          {script.boundaryType}
+                        {s.softVersion && (
+                          <p className="text-sm text-[var(--text-secondary)] italic mt-2" data-testid={`text-soft-${s.id}`}>
+                            Softer: "{s.softVersion}"
+                          </p>
+                        )}
+                        <span className="inline-block mt-2 text-xs px-2 py-1 rounded-full bg-[var(--surface-secondary)] text-[var(--text-muted)]" data-testid={`badge-type-${s.id}`}>
+                          {s.boundaryType}
                         </span>
                       </div>
                       <div className="flex gap-2">
                         <button
-                          onClick={() => handleCopyScript(script.scriptText, script.id)}
+                          onClick={() => handleCopyScript(s.script, s.id)}
                           className="p-2 text-[var(--text-muted)] hover:text-[var(--primary)] transition-colors"
-                          data-testid={`button-copy-${script.id}`}
+                          aria-label="Copy script"
+                          data-testid={`button-copy-${s.id}`}
                         >
-                          {copiedId === script.id ? (
+                          {copiedId === s.id ? (
                             <CheckCircle className="w-4 h-4 text-[var(--success)]" />
                           ) : (
                             <Copy className="w-4 h-4" />
                           )}
                         </button>
                         <button
-                          onClick={() => deleteMutation.mutate(script.id)}
+                          onClick={() => deleteMutation.mutate(s.id)}
                           className="p-2 text-[var(--text-muted)] hover:text-[var(--error)] transition-colors"
-                          data-testid={`button-delete-${script.id}`}
+                          aria-label="Delete script"
+                          data-testid={`button-delete-${s.id}`}
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -263,6 +309,7 @@ export default function BoundariesPage() {
           {isLoading && (
             <div className="text-center py-8" data-testid="loading-state">
               <div className="w-8 h-8 border-2 border-[var(--primary)] border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-sm text-[var(--text-muted)] mt-2">Loading your scripts...</p>
             </div>
           )}
         </div>

@@ -7,7 +7,7 @@ import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
-import { Layers, ArrowUp, ArrowDown, Star, Check, TrendingUp, MessageCircle, Sparkles } from "lucide-react";
+import { Layers, ArrowUp, ArrowDown, Check, TrendingUp, MessageCircle, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const COHERENCE_LEVELS = [
@@ -22,6 +22,10 @@ const COHERENCE_LEVELS = [
   { level: 2, label: "Discouragement", description: "Doubt, disappointment, low motivation", color: "var(--error)" },
   { level: 1, label: "Fear / Grief / Depression", description: "Deep sadness, powerlessness, despair", color: "var(--error)" },
 ];
+
+const BODY_STATES = ["Tense", "Tired", "Neutral", "Relaxed", "Energized"];
+const MIND_STATES = ["Scattered", "Foggy", "Neutral", "Clear", "Focused"];
+const HEART_STATES = ["Closed", "Guarded", "Neutral", "Open", "Expansive"];
 
 const SHIFT_SUGGESTIONS = {
   1: ["If you can, take 3 slow breaths", "You don't have to fix this right now", "Would it help to talk to someone?"],
@@ -38,6 +42,9 @@ const SHIFT_SUGGESTIONS = {
 
 export default function CoherenceLadderPage() {
   const [selectedLevel, setSelectedLevel] = useState(null);
+  const [bodyState, setBodyState] = useState("");
+  const [mindState, setMindState] = useState("");
+  const [heartState, setHeartState] = useState("");
   const [note, setNote] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -56,23 +63,34 @@ export default function CoherenceLadderPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
       setSelectedLevel(null);
+      setBodyState("");
+      setMindState("");
+      setHeartState("");
       setNote("");
-      toast({ title: "Level logged", description: "Your emotional state has been recorded." });
+      toast({ title: "Check-in logged", description: "Your coherence state has been recorded." });
+    },
+    onError: () => {
+      toast({ title: "Error", description: "Could not save check-in. Please try again.", variant: "destructive" });
     },
   });
 
   const handleLogLevel = () => {
-    if (!selectedLevel) return;
+    if (!selectedLevel) {
+      toast({ title: "Select a level", description: "Please select your current emotional level.", variant: "destructive" });
+      return;
+    }
     createMutation.mutate({
-      currentLevel: selectedLevel,
-      notes: note || null,
-      loggedAt: new Date().toISOString(),
+      alignmentLevel: selectedLevel,
+      bodyState: bodyState || null,
+      mindState: mindState || null,
+      heartState: heartState || null,
+      integrationNotes: note || null,
     });
   };
 
   const recentEntries = entries.slice(0, 7);
   const averageLevel = recentEntries.length > 0
-    ? Math.round(recentEntries.reduce((sum, e) => sum + e.currentLevel, 0) / recentEntries.length * 10) / 10
+    ? Math.round(recentEntries.reduce((sum, e) => sum + (e.alignmentLevel || 0), 0) / recentEntries.length * 10) / 10
     : null;
 
   const levelInfo = selectedLevel ? COHERENCE_LEVELS.find(l => l.level === selectedLevel) : null;
@@ -95,10 +113,10 @@ export default function CoherenceLadderPage() {
                 <Layers className="w-6 h-6 text-[var(--primary)]" />
               </div>
               <div>
-                <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
+                <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2" data-testid="heading-intro">
                   Understanding your emotional state
                 </h2>
-                <p className="text-[var(--text-secondary)] leading-relaxed">
+                <p className="text-[var(--text-secondary)] leading-relaxed" data-testid="text-intro">
                   The coherence ladder is a simple way to check in with your emotional state. There's no goal to always be at the top — 
                   it's about awareness and gentle movement. Sometimes just naming where you are can bring relief. 
                   Small shifts often feel more sustainable than big jumps.
@@ -111,16 +129,16 @@ export default function CoherenceLadderPage() {
             <div className="flex items-center justify-between p-4 bg-[var(--surface-elevated)] rounded-xl border border-[var(--border-subtle)] mb-8" data-testid="section-average">
               <div className="flex items-center gap-3">
                 <TrendingUp className="w-5 h-5 text-[var(--primary)]" />
-                <span className="text-[var(--text-secondary)]">Your 7-day average</span>
+                <span className="text-[var(--text-secondary)]" data-testid="label-average">Your 7-day average</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-2xl font-semibold text-[var(--text-primary)]">{averageLevel}</span>
+                <span className="text-2xl font-semibold text-[var(--text-primary)]" data-testid="value-average">{averageLevel}</span>
                 <span className="text-sm text-[var(--text-muted)]">/ 10</span>
               </div>
             </div>
           )}
 
-          <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4">
+          <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4" data-testid="heading-where">
             Where are you right now?
           </h3>
 
@@ -137,6 +155,7 @@ export default function CoherenceLadderPage() {
                       : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] hover:border-[var(--border-default)]"
                   }`}
                   data-testid={`level-${level.level}`}
+                  aria-pressed={isSelected}
                 >
                   <div className="flex items-center gap-4">
                     <div
@@ -146,8 +165,8 @@ export default function CoherenceLadderPage() {
                       {level.level}
                     </div>
                     <div className="flex-1">
-                      <p className="font-medium text-[var(--text-primary)]">{level.label}</p>
-                      <p className="text-sm text-[var(--text-secondary)]">{level.description}</p>
+                      <p className="font-medium text-[var(--text-primary)]" data-testid={`text-level-label-${level.level}`}>{level.label}</p>
+                      <p className="text-sm text-[var(--text-secondary)]" data-testid={`text-level-desc-${level.level}`}>{level.description}</p>
                     </div>
                     {isSelected && <Check className="w-5 h-5 text-[var(--primary)]" />}
                   </div>
@@ -161,18 +180,18 @@ export default function CoherenceLadderPage() {
               <div className="space-y-4">
                 <div className="flex items-center gap-2 text-[var(--text-primary)]">
                   <Sparkles className="w-5 h-5 text-[var(--primary)]" />
-                  <span className="font-medium">You selected: {levelInfo?.label}</span>
+                  <span className="font-medium" data-testid="text-selected-level">You selected: {levelInfo?.label}</span>
                 </div>
 
                 {suggestions.length > 0 && (
                   <div className="p-4 bg-[var(--surface-secondary)] rounded-lg">
-                    <p className="text-sm font-medium text-[var(--text-secondary)] mb-2">
+                    <p className="text-sm font-medium text-[var(--text-secondary)] mb-2" data-testid="label-suggestions">
                       <MessageCircle className="w-4 h-4 inline mr-2" />
                       Gentle suggestions:
                     </p>
-                    <ul className="space-y-1">
+                    <ul className="space-y-1" data-testid="list-suggestions">
                       {suggestions.map((suggestion, idx) => (
-                        <li key={idx} className="text-sm text-[var(--text-secondary)]">
+                        <li key={idx} className="text-sm text-[var(--text-secondary)]" data-testid={`text-suggestion-${idx}`}>
                           • {suggestion}
                         </li>
                       ))}
@@ -180,22 +199,76 @@ export default function CoherenceLadderPage() {
                   </div>
                 )}
 
-                <textarea
-                  value={note}
-                  onChange={(e) => setNote(e.target.value)}
-                  placeholder="Optional: Any notes or context? (you can skip this)"
-                  rows={2}
-                  className="w-full px-4 py-3 rounded-xl border border-[var(--border-default)] bg-[var(--surface-primary)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
-                  data-testid="textarea-note"
-                />
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2" data-testid="label-body-state">Body</label>
+                    <select
+                      value={bodyState}
+                      onChange={(e) => setBodyState(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-[var(--border-default)] bg-[var(--surface-primary)] text-[var(--text-primary)]"
+                      data-testid="select-body-state"
+                    >
+                      <option value="">Select...</option>
+                      {BODY_STATES.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2" data-testid="label-mind-state">Mind</label>
+                    <select
+                      value={mindState}
+                      onChange={(e) => setMindState(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-[var(--border-default)] bg-[var(--surface-primary)] text-[var(--text-primary)]"
+                      data-testid="select-mind-state"
+                    >
+                      <option value="">Select...</option>
+                      {MIND_STATES.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2" data-testid="label-heart-state">Heart</label>
+                    <select
+                      value={heartState}
+                      onChange={(e) => setHeartState(e.target.value)}
+                      className="w-full px-3 py-2 rounded-lg border border-[var(--border-default)] bg-[var(--surface-primary)] text-[var(--text-primary)]"
+                      data-testid="select-heart-state"
+                    >
+                      <option value="">Select...</option>
+                      {HEART_STATES.map(s => <option key={s} value={s}>{s}</option>)}
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2" htmlFor="integration-notes" data-testid="label-notes">
+                    Notes (optional)
+                  </label>
+                  <textarea
+                    id="integration-notes"
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                    placeholder="Any notes or context? (you can skip this)"
+                    rows={2}
+                    className="w-full px-4 py-3 rounded-xl border border-[var(--border-default)] bg-[var(--surface-primary)] text-[var(--text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] resize-none"
+                    data-testid="textarea-note"
+                  />
+                </div>
 
                 <Button
                   onClick={handleLogLevel}
                   disabled={createMutation.isPending}
                   data-testid="button-log"
                 >
-                  <Check className="w-4 h-4 mr-2" />
-                  Log This Check-In
+                  {createMutation.isPending ? (
+                    <span className="flex items-center gap-2">
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Saving...
+                    </span>
+                  ) : (
+                    <>
+                      <Check className="w-4 h-4 mr-2" />
+                      Log This Check-In
+                    </>
+                  )}
                 </Button>
               </div>
             </Card>
@@ -203,14 +276,14 @@ export default function CoherenceLadderPage() {
 
           {recentEntries.length > 0 && (
             <div className="mt-8" data-testid="section-history">
-              <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4">
+              <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4" data-testid="heading-history">
                 Recent check-ins
               </h3>
               <div className="grid gap-2">
-                {recentEntries.map((entry) => {
-                  const level = COHERENCE_LEVELS.find(l => l.level === entry.currentLevel);
-                  const prevEntry = entries.find(e => new Date(e.createdAt) < new Date(entry.createdAt));
-                  const trend = prevEntry ? entry.currentLevel - prevEntry.currentLevel : 0;
+                {recentEntries.map((entry, idx) => {
+                  const level = COHERENCE_LEVELS.find(l => l.level === entry.alignmentLevel);
+                  const prevEntry = recentEntries[idx + 1];
+                  const trend = prevEntry ? (entry.alignmentLevel || 0) - (prevEntry.alignmentLevel || 0) : 0;
                   
                   return (
                     <div
@@ -222,24 +295,25 @@ export default function CoherenceLadderPage() {
                         <div
                           className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white text-sm"
                           style={{ backgroundColor: level?.color || "var(--text-muted)" }}
+                          data-testid={`badge-level-${entry.id}`}
                         >
-                          {entry.currentLevel}
+                          {entry.alignmentLevel}
                         </div>
-                        <span className="text-[var(--text-primary)]">
-                          {level?.label || `Level ${entry.currentLevel}`}
+                        <span className="text-[var(--text-primary)]" data-testid={`text-level-${entry.id}`}>
+                          {level?.label || `Level ${entry.alignmentLevel}`}
                         </span>
-                        {entry.notes && (
-                          <span className="text-sm text-[var(--text-muted)]">— {entry.notes}</span>
+                        {entry.integrationNotes && (
+                          <span className="text-sm text-[var(--text-muted)]" data-testid={`text-notes-${entry.id}`}>— {entry.integrationNotes}</span>
                         )}
                       </div>
                       <div className="flex items-center gap-3">
                         {trend !== 0 && (
-                          <span className={`flex items-center text-sm ${trend > 0 ? "text-[var(--success)]" : "text-[var(--error)]"}`}>
+                          <span className={`flex items-center text-sm ${trend > 0 ? "text-[var(--success)]" : "text-[var(--error)]"}`} data-testid={`trend-${entry.id}`}>
                             {trend > 0 ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
                             {Math.abs(trend)}
                           </span>
                         )}
-                        <span className="text-sm text-[var(--text-muted)]">
+                        <span className="text-sm text-[var(--text-muted)]" data-testid={`date-${entry.id}`}>
                           {new Date(entry.createdAt).toLocaleDateString()}
                         </span>
                       </div>
@@ -253,6 +327,7 @@ export default function CoherenceLadderPage() {
           {isLoading && (
             <div className="text-center py-8" data-testid="loading-state">
               <div className="w-8 h-8 border-2 border-[var(--primary)] border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-sm text-[var(--text-muted)] mt-2">Loading your check-ins...</p>
             </div>
           )}
         </div>
