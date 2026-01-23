@@ -10,13 +10,56 @@ import { eq, desc, and, lte, isNull } from 'drizzle-orm';
 import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
 import { success, badRequest } from '../utils/response.mjs';
 import { logger } from '../utils/logger.mjs';
-import { PLATFORMS, getConfiguredPlatforms, checkPlatformCredentials, getAllRequiredEnvKeys } from '../services/social-platforms.mjs';
+import { PLATFORMS, getConfiguredPlatforms, checkPlatformCredentials, getAllRequiredEnvKeys, VERIFIED_CHANNELS, getActivePlatforms } from '../services/social-platforms.mjs';
 import { postToPlatform, postToMultiplePlatforms } from '../services/social-posting.mjs';
 
 const router = express.Router();
 
 /**
- * Get all platform configurations and their status
+ * Get verified channel information (public endpoint)
+ * Returns official social media handles and profile URLs
+ */
+router.get('/channels', async (req, res) => {
+  try {
+    const activePlatforms = getActivePlatforms();
+    return success(res, {
+      channels: VERIFIED_CHANNELS,
+      platforms: activePlatforms.map(p => ({
+        id: p.id,
+        name: p.name,
+        handle: p.handle,
+        profileUrl: p.profileUrl,
+        color: p.color,
+      })),
+    });
+  } catch (error) {
+    logger.error('Failed to get channels:', error);
+    return badRequest(res, 'Failed to get channel information');
+  }
+});
+
+/**
+ * Get platform connection status (public, for dashboard display)
+ */
+router.get('/platforms/status', async (req, res) => {
+  try {
+    const platforms = Object.values(PLATFORMS).map(p => ({
+      id: p.id,
+      name: p.name,
+      handle: p.handle || null,
+      profileUrl: p.profileUrl || null,
+      connected: p.envKeys.every(key => !!process.env[key]),
+    }));
+    
+    return success(res, { platforms });
+  } catch (error) {
+    logger.error('Failed to get platform status:', error);
+    return badRequest(res, 'Failed to get platform status');
+  }
+});
+
+/**
+ * Get all platform configurations and their status (admin only)
  */
 router.get('/platforms', requireAdmin, async (req, res) => {
   try {

@@ -52,6 +52,36 @@ The platform offers:
 - **Content Studio**: UI for content transformation with save/export.
 - **Study Vault**: Evidence-based research summaries.
 - **Admin Health Dashboard**: Monitors uptime, DB status, and system metrics.
+- **Admin Social Studio**: Multi-platform social media content management with 4 pages (Dashboard, Generator, Library, Calendar), automated posting integration, and verified channel configuration.
+
+### Social Media Integration
+The platform includes automated social media posting capabilities with verified channel configuration:
+
+**Verified Channels:**
+- YouTube (Primary): @GenuineLoveProject - youtube.com/@GenuineLoveProject
+- TikTok: @genuineloveproject - tiktok.com/@genuineloveproject  
+- Instagram: @thegenuineloveproject - instagram.com/thegenuineloveproject
+- Facebook: facebook.com/profile.php?id=61583664864191
+- X (Twitter): @GenuineLoveProj
+
+**Supported Platforms (8 total):**
+Instagram, Facebook, TikTok, YouTube, X (Twitter), Threads, Pinterest, LinkedIn
+
+**API Endpoints:**
+- `GET /api/social-posting/channels` - Public verified channels
+- `GET /api/social-posting/platforms/status` - Platform connection status
+- `POST /api/social-posting/post` - Post to platforms (admin)
+- `POST /api/social-posting/schedule` - Schedule posts (admin)
+- `POST /api/social-posting/publish-draft/:id` - Publish approved draft (admin)
+
+**Required Secrets for API Integration:**
+- META_ACCESS_TOKEN, INSTAGRAM_BUSINESS_ACCOUNT_ID, FACEBOOK_PAGE_ID
+- TIKTOK_ACCESS_TOKEN, TIKTOK_OPEN_ID
+- YOUTUBE_API_KEY, YOUTUBE_CHANNEL_ID, YOUTUBE_REFRESH_TOKEN
+- X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET, X_BEARER_TOKEN
+- THREADS_ACCESS_TOKEN, THREADS_USER_ID
+- PINTEREST_ACCESS_TOKEN, PINTEREST_BOARD_ID
+- LINKEDIN_ACCESS_TOKEN, LINKEDIN_ORGANIZATION_ID
 
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
