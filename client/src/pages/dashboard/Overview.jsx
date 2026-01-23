@@ -1,138 +1,163 @@
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { 
-  LayoutDashboard, Heart, BookOpen, TrendingUp, Sparkles, 
-  Calendar, Target, Flame, ArrowRight, Brain, Sun, Moon,
-  MessageCircle, Activity, Award, Clock, CheckCircle2, Circle,
-  Zap, BarChart3, Users, Star, RefreshCw
+  Sun, Moon, Heart, BookOpen, Sparkles, TrendingUp,
+  Calendar, MessageSquare, Compass, Target, Flame, Zap,
+  Star, Activity, ArrowRight, Check, RefreshCw, AlertCircle,
+  Brain, Lightbulb, Shield
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { useSEO } from "@/hooks/useSEO";
-
-const QUICK_ACTIONS = [
-  { icon: Heart, label: "Check-In", href: "/mood", color: "blush", desc: "How are you feeling?" },
-  { icon: BookOpen, label: "Journal", href: "/journal", color: "sage", desc: "Reflect & write" },
-  { icon: Brain, label: "AI Chat", href: "/chat", color: "teal", desc: "Talk with Luna" },
-  { icon: Target, label: "Daily Ritual", href: "/ritual", color: "gold", desc: "Your practice" },
-  { icon: Sparkles, label: "Affirmations", href: "/affirmations", color: "blush", desc: "Positive thoughts" },
-  { icon: Activity, label: "Breathing", href: "/breathing", color: "sage", desc: "Calm your mind" }
-];
+import styles from "./Overview.module.css";
 
 const RECENT_ACTIVITY = [
-  { type: "journal", text: "Completed morning reflection", time: "2 hours ago", icon: BookOpen },
-  { type: "mood", text: "Logged feeling peaceful", time: "4 hours ago", icon: Heart },
-  { type: "achievement", text: "Earned 7-day streak badge", time: "Yesterday", icon: Award },
-  { type: "chat", text: "Had a supportive chat with Luna", time: "Yesterday", icon: MessageCircle },
-  { type: "breathing", text: "Completed 5-min breathing exercise", time: "2 days ago", icon: Activity }
+  { type: "journal", title: "Morning Gratitude", time: "2 hours ago", xp: 15, color: "sage" },
+  { type: "reflection", title: "Self-Compassion Check-in", time: "4 hours ago", xp: 10, color: "blush" },
+  { type: "wisdom", title: "Daily Wisdom Reading", time: "Yesterday", xp: 20, color: "gold" },
+  { type: "chat", title: "AI Therapy Session", time: "Yesterday", xp: 25, color: "sage" }
+];
+
+const QUICK_ACTIONS = [
+  { label: "Start Journal", icon: BookOpen, href: "/journal", color: "sage" },
+  { label: "Chat Therapy", icon: MessageSquare, href: "/chat", color: "gold" },
+  { label: "Daily Wisdom", icon: Lightbulb, href: "/wisdom", color: "blush" },
+  { label: "Mood Check", icon: Heart, href: "/state-tracker", color: "teal" }
 ];
 
 const WELLNESS_INSIGHTS = [
-  { title: "Mood Trend", value: "↑ Improving", detail: "Your mood has been more positive this week", color: "sage" },
-  { title: "Best Time", value: "Morning", detail: "You feel most energized in the morning", color: "gold" },
-  { title: "Top Tool", value: "Journaling", detail: "Your most used wellness tool", color: "blush" }
+  { icon: Brain, title: "Mindfulness Streak", description: "You've been consistent with your practice for 7 days!" },
+  { icon: Shield, title: "Emotional Resilience", description: "Your coping skills have improved by 15% this month." },
+  { icon: Flame, title: "Growth Momentum", description: "You're making steady progress on your healing journey." }
 ];
 
-function StatCard({ label, value, icon: Icon, color, trend }) {
-  return (
-    <div className="card-bordered text-center group hover:shadow-lg transition-all duration-300" data-testid={`stat-${label.toLowerCase().replace(' ', '-')}`}>
-      <div className={`icon-container icon-lg icon-soft-${color} mx-auto mb-3 group-hover:scale-110 transition-transform`}>
-        <Icon className="h-6 w-6" />
-      </div>
-      <p className="text-display-md text-teal">{value}</p>
-      <p className="text-caption">{label}</p>
-      {trend && (
-        <p className="text-xs mt-1" style={{ color: trend.includes('+') ? 'var(--glp-sage)' : 'var(--glp-sage)' }}>
-          {trend}
-        </p>
-      )}
-    </div>
-  );
+function getIconClass(color) {
+  const map = {
+    sage: styles.activityIconSage,
+    gold: styles.activityIconGold,
+    blush: styles.activityIconBlush,
+    teal: styles.activityIconTeal
+  };
+  return map[color] || styles.activityIconSage;
+}
+
+function getStatIconClass(color) {
+  const map = {
+    sage: styles.statIconSage,
+    gold: styles.statIconGold,
+    blush: styles.statIconBlush,
+    teal: styles.statIconTeal
+  };
+  return map[color] || styles.statIconSage;
+}
+
+function getQuickActionIconClass(color) {
+  const map = {
+    sage: styles.quickActionIconSage,
+    gold: styles.quickActionIconGold,
+    blush: styles.quickActionIconBlush,
+    teal: styles.quickActionIconTeal
+  };
+  return map[color] || styles.quickActionIconSage;
+}
+
+function getActivityIcon(type) {
+  const icons = {
+    journal: BookOpen,
+    reflection: Heart,
+    wisdom: Sparkles,
+    chat: MessageSquare,
+    mood: Activity
+  };
+  return icons[type] || Activity;
 }
 
 function ActivityItem({ activity }) {
-  const Icon = activity.icon;
-  return (
-    <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-sage-5 transition-colors">
-      <div className="icon-container icon-sm icon-soft-sage flex-shrink-0">
-        <Icon className="h-4 w-4" />
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-body-sm font-medium truncate">{activity.text}</p>
-        <p className="text-caption flex items-center gap-1">
-          <Clock className="h-3 w-3" />
-          {activity.time}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function TodaysFocus({ tasks }) {
-  const completed = tasks.filter(t => t.done).length;
-  const progress = (completed / tasks.length) * 100;
+  const Icon = getActivityIcon(activity.type);
   
   return (
-    <div className="card-bordered">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-heading-md text-teal flex items-center gap-2">
-          <Calendar className="h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
-          Today's Focus
-        </h2>
-        <Link href="/ritual" className="text-body-sm flex items-center gap-1" style={{ color: 'var(--glp-sage-deep)' }}>
-          View all <ArrowRight className="h-4 w-4" />
-        </Link>
+    <div className={styles.activityItem} data-testid={`activity-item-${activity.type}`}>
+      <div className={`${styles.activityIcon} ${getIconClass(activity.color)}`}>
+        <Icon className={styles.activityIconInner} />
       </div>
-      
-      <div className="mb-4">
-        <div className="flex items-center justify-between text-body-sm mb-2">
-          <span>{completed} of {tasks.length} completed</span>
-          <span className="font-medium" style={{ color: 'var(--glp-sage)' }}>{Math.round(progress)}%</span>
-        </div>
-        <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--glp-sage-10)' }}>
-          <div 
-            className="h-full rounded-full transition-all duration-500"
-            style={{ width: `${progress}%`, background: 'var(--glp-sage)' }}
-          />
-        </div>
+      <div className={styles.activityContent}>
+        <p className={styles.activityTitle} data-testid={`activity-title-${activity.type}`}>{activity.title}</p>
+        <p className={styles.activityMeta} data-testid={`activity-time-${activity.type}`}>{activity.time}</p>
       </div>
-      
-      <div className="space-y-3">
-        {tasks.map((item, i) => (
-          <div 
-            key={i} 
-            className="flex items-center gap-3 p-3 rounded-xl transition-all hover:scale-[1.01]"
-            style={item.done 
-              ? { background: 'var(--glp-sage-10)' } 
-              : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
-          >
-            {item.done ? (
-              <CheckCircle2 className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--glp-sage)' }} />
-            ) : (
-              <Circle className="h-5 w-5 flex-shrink-0" style={{ color: 'var(--glp-sage-30)' }} />
-            )}
-            <span className={`text-body-sm flex-1 ${item.done ? 'line-through' : ''}`} style={item.done ? { color: 'var(--glp-sage)' } : {}}>
-              {item.task}
-            </span>
-            {item.xp && !item.done && (
-              <span className="text-xs px-2 py-1 rounded-full" style={{ background: 'var(--glp-gold-30)', color: 'var(--glp-gold-deep)' }}>
-                +{item.xp} XP
-              </span>
-            )}
-          </div>
-        ))}
+      <span className={styles.activityXp}>+{activity.xp} XP</span>
+    </div>
+  );
+}
+
+function StatCard({ stat }) {
+  const Icon = stat.icon;
+  
+  return (
+    <div className={styles.statCard} data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
+      <div className={styles.statHeader}>
+        <div className={`${styles.statIconContainer} ${getStatIconClass(stat.color)}`}>
+          <Icon className={styles.statIcon} />
+        </div>
+        {stat.trend && <span className={styles.statTrend}>{stat.trend}</span>}
+      </div>
+      <p className={styles.statValue} data-testid={`stat-value-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>{stat.value}</p>
+      <p className={styles.statLabel} data-testid={`stat-label-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>{stat.label}</p>
+    </div>
+  );
+}
+
+function TaskItem({ task }) {
+  return (
+    <div className={styles.taskItem} data-testid={`task-${task.done ? 'done' : 'pending'}`}>
+      <div className={task.done ? `${styles.taskCheckbox} ${styles.taskCheckboxDone}` : `${styles.taskCheckbox} ${styles.taskCheckboxPending}`}>
+        {task.done && <Check className={styles.taskCheckIcon} />}
+      </div>
+      <span 
+        className={task.done ? `${styles.taskText} ${styles.taskTextDone}` : `${styles.taskText} ${styles.taskTextPending}`}
+        data-testid={`task-text-${task.done ? 'done' : 'pending'}`}
+      >
+        {task.task}
+      </span>
+      <span className={styles.taskXp}>+{task.xp} XP</span>
+    </div>
+  );
+}
+
+function QuickActionButton({ action }) {
+  const Icon = action.icon;
+  
+  return (
+    <Link href={action.href} className={styles.quickActionButton} data-testid={`quick-action-${action.label.toLowerCase().replace(/\s+/g, '-')}`}>
+      <div className={`${styles.quickActionIcon} ${getQuickActionIconClass(action.color)}`}>
+        <Icon className={styles.quickActionIconInner} />
+      </div>
+      <span className={styles.quickActionText}>{action.label}</span>
+    </Link>
+  );
+}
+
+function InsightItem({ insight }) {
+  const Icon = insight.icon;
+  
+  return (
+    <div className={styles.insightItem} data-testid="insight-item">
+      <div className={styles.insightIcon}>
+        <Icon className={styles.insightIconInner} />
+      </div>
+      <div className={styles.insightContent}>
+        <p className={styles.insightTitle}>{insight.title}</p>
+        <p className={styles.insightDescription}>{insight.description}</p>
       </div>
     </div>
   );
 }
 
-export default function Overview() {
+export default function DashboardOverview() {
   useSEO({
-    title: "Wellness Dashboard",
+    title: "Your Dashboard - The Genuine Love Project",
     description: "Your personal wellness dashboard for tracking your healing journey, celebrating progress, and nurturing emotional growth.",
     noIndex: true
   });
 
-  const { data: userStats, isLoading, error, refetch } = useQuery({
+  const { data: userStats, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ['/api/user/stats'],
     retry: false,
     staleTime: 60000
@@ -153,10 +178,10 @@ export default function Overview() {
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
   const TimeIcon = hour < 18 ? Sun : Moon;
-  
+
   const stats = [
-    { label: "Day Streak", value: userStats?.streak || "7", icon: Flame, color: "gold", trend: "+2 this week" },
-    { label: "Entries", value: userStats?.entries || "24", icon: BookOpen, color: "sage", trend: "+5 this week" },
+    { label: "Current Streak", value: userStats?.streak || "7 days", icon: Flame, color: "gold" },
+    { label: "Sessions", value: userStats?.sessions || "24", icon: Calendar, color: "sage" },
     { label: "Insights", value: userStats?.insights || "12", icon: Sparkles, color: "blush" },
     { label: "Growth Score", value: userStats?.growthScore || "78%", icon: TrendingUp, color: "teal", trend: "↑ 4%" }
   ];
@@ -169,139 +194,132 @@ export default function Overview() {
   ];
 
   const recentActivity = activityData?.activities || RECENT_ACTIVITY;
+  const completedTasks = todaysTasks.filter(t => t.done).length;
+  const totalTasks = todaysTasks.length;
+  const progressPercent = Math.round((completedTasks / totalTasks) * 100);
+
+  if (isLoading) {
+    return (
+      <div className={styles.loadingContainer}>
+        <RefreshCw className={styles.loadingSpinner} />
+        <p className={styles.loadingText} data-testid="text-loading">Loading your wellness dashboard...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={styles.errorContainer}>
+        <AlertCircle className={styles.errorIcon} />
+        <h2 className={styles.errorTitle} data-testid="text-error-title">Unable to load dashboard</h2>
+        <p className={styles.errorText} data-testid="text-error-message">We're having trouble loading your wellness data. Please try again.</p>
+        <button className={styles.retryButton} onClick={() => refetch()} data-testid="button-retry">
+          Try Again
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen hero-gradient">
-      <div className="content-wrapper py-8">
-        <div className="max-w-7xl mx-auto">
-          <header className="mb-8">
-            <div className="flex items-center justify-between flex-wrap gap-4">
-              <div className="flex items-center gap-3">
-                <div className="icon-container icon-xl icon-gradient-sage">
-                  <LayoutDashboard className="h-7 w-7" />
+    <div className={styles.pageContainer}>
+      <div className={styles.contentWrapper}>
+        <header className={styles.header}>
+          <div className={styles.headerTop}>
+            <div>
+              <div className={styles.greetingContainer}>
+                <div className={styles.greetingIcon}>
+                  <TimeIcon className={styles.greetingIconInner} />
                 </div>
                 <div>
-                  <div className="flex items-center gap-2">
-                    <TimeIcon className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
-                    <span className="text-body-sm" style={{ color: 'var(--glp-sage)' }}>{greeting}</span>
-                  </div>
-                  <h1 className="text-display-lg text-teal" data-testid="text-page-title">Your Wellness Dashboard</h1>
+                  <p className={styles.greetingText} data-testid="text-greeting">{greeting}</p>
+                  <h1 className={styles.pageTitle} data-testid="text-page-title">Your Wellness Dashboard</h1>
                 </div>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ background: 'var(--glp-gold-30)' }} data-testid="display-xp">
-                  <Zap className="h-4 w-4" style={{ color: 'var(--glp-gold-deep)' }} />
-                  <span className="text-body-sm font-medium" style={{ color: 'var(--glp-gold-deep)' }}>
-                    {userStats?.xp || 1250} XP
-                  </span>
-                </div>
-                <div className="px-4 py-2 rounded-xl flex items-center gap-2" style={{ background: 'var(--glp-sage-10)' }} data-testid="display-level">
-                  <Star className="h-4 w-4" style={{ color: 'var(--glp-sage)' }} />
-                  <span className="text-body-sm font-medium">Level {userStats?.level || 5}</span>
-                </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={() => refetch()} 
-                  data-testid="button-refresh-dashboard"
-                  disabled={isLoading}
-                >
-                  <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
-                </Button>
-              </div>
             </div>
-            <p className="text-lead max-w-2xl mt-2">Track your journey, celebrate your progress, and nurture your growth.</p>
-          </header>
-
-          <div className="grid md:grid-cols-4 gap-4 mb-8">
-            {stats.map((stat, i) => (
-              <StatCard key={i} {...stat} />
-            ))}
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-6 mb-8">
-            <div className="lg:col-span-2">
-              <TodaysFocus tasks={todaysTasks} />
-            </div>
-
-            <div className="card-bordered">
-              <h2 className="text-heading-md text-teal mb-4 flex items-center gap-2">
-                <Activity className="h-5 w-5" style={{ color: 'var(--glp-sage)' }} />
-                Recent Activity
-              </h2>
-              <div className="space-y-1">
-                {recentActivity.slice(0, 4).map((activity, i) => (
-                  <ActivityItem key={i} activity={activity} />
-                ))}
+            <div className={styles.headerActions}>
+              <div className={styles.xpBadge} data-testid="display-xp">
+                <Zap className={styles.xpIcon} />
+                <span className={styles.xpText}>{userStats?.xp || 1250} XP</span>
               </div>
-              <Link href="/analytics" className="mt-4 text-body-sm flex items-center justify-center gap-1 p-2 rounded-lg hover:bg-sage-5 transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
-                View all activity <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className={styles.levelBadge} data-testid="display-level">
+                <Star className={styles.levelIcon} />
+                <span className={styles.levelText}>Level {userStats?.level || 5}</span>
+              </div>
+              <button 
+                className={styles.refreshButton}
+                onClick={() => refetch()} 
+                data-testid="button-refresh-dashboard"
+                disabled={isLoading || isRefetching}
+              >
+                <RefreshCw className={`${styles.refreshIcon} ${isRefetching ? styles.refreshIconSpinning : ''}`} />
+              </button>
             </div>
           </div>
+          <p className={styles.leadText}>Track your journey, celebrate your progress, and nurture your growth.</p>
+        </header>
 
-          <div className="grid lg:grid-cols-3 gap-6 mb-8">
-            <div className="lg:col-span-2 card-bordered">
-              <h2 className="text-heading-md text-teal mb-6 flex items-center gap-2">
-                <Sparkles className="h-5 w-5" style={{ color: 'var(--glp-gold)' }} />
-                Quick Actions
-              </h2>
-              <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-                {QUICK_ACTIONS.map((action, i) => (
-                  <Link 
-                    key={i} 
-                    href={action.href} 
-                    className="flex items-center gap-3 p-4 rounded-xl transition-all hover:scale-[1.02] hover:shadow-md" 
-                    style={{ background: 'var(--glp-sage-10)' }} 
-                    data-testid={`action-${action.label.toLowerCase().replace(' ', '-')}`}
-                  >
-                    <div className={`icon-container icon-md icon-soft-${action.color}`}>
-                      <action.icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <span className="text-body-sm font-medium block">{action.label}</span>
-                      <span className="text-caption">{action.desc}</span>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
+        <div className={styles.statsGrid}>
+          {stats.map((stat, i) => (
+            <StatCard key={i} stat={stat} />
+          ))}
+        </div>
 
-            <div className="card-bordered">
-              <h2 className="text-heading-md text-teal mb-4 flex items-center gap-2">
-                <BarChart3 className="h-5 w-5" style={{ color: 'var(--glp-blush)' }} />
-                Wellness Insights
-              </h2>
-              <div className="space-y-4">
-                {WELLNESS_INSIGHTS.map((insight, i) => (
-                  <div key={i} className="p-3 rounded-xl" style={{ background: 'var(--glp-sage-10)' }}>
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-caption">{insight.title}</span>
-                      <span className="text-body-sm font-medium" style={{ color: `var(--glp-${insight.color})` }}>
-                        {insight.value}
-                      </span>
-                    </div>
-                    <p className="text-xs" style={{ color: 'var(--glp-sage)' }}>{insight.detail}</p>
-                  </div>
-                ))}
-              </div>
-              <Link href="/analytics" className="mt-4 text-body-sm flex items-center justify-center gap-1 p-2 rounded-lg hover:bg-sage-5 transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
-                View full analytics <ArrowRight className="h-4 w-4" />
-              </Link>
+        <div className={styles.mainGrid}>
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <Activity className={styles.cardHeaderIcon} />
+              <h2 className={styles.cardTitle}>Recent Activity</h2>
             </div>
-          </div>
-
-          <div className="card-glass text-center py-8">
-            <div className="icon-container icon-xl icon-gradient-gold mx-auto mb-4">
-              <Heart className="h-7 w-7" />
+            <div className={styles.activityList}>
+              {recentActivity.slice(0, 4).map((activity, i) => (
+                <ActivityItem key={i} activity={activity} />
+              ))}
             </div>
-            <h3 className="text-heading-lg text-teal mb-2">Ready to deepen your practice?</h3>
-            <p className="text-lead mb-6 max-w-lg mx-auto">Explore our AI-powered tools designed to support your healing journey.</p>
-            <Link href="/tools" className="inline-block">
-              <Button className="btn-premium" data-testid="button-explore-tools">
-                Explore Wellness Tools <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
+            <Link href="/analytics" className={styles.viewAllLink} data-testid="link-view-activity">
+              View all activity <ArrowRight className={styles.viewAllIcon} />
             </Link>
+          </div>
+
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <Target className={styles.cardHeaderIcon} />
+              <h2 className={styles.cardTitle}>Today's Focus</h2>
+            </div>
+            <div className={styles.taskList}>
+              {todaysTasks.map((task, i) => (
+                <TaskItem key={i} task={task} />
+              ))}
+            </div>
+            <div className={styles.progressBar}>
+              <div className={styles.progressFill} style={{ width: `${progressPercent}%` }} />
+            </div>
+            <p className={styles.progressText}>{completedTasks} of {totalTasks} completed</p>
+          </div>
+        </div>
+
+        <div className={styles.secondaryGrid}>
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <Compass className={styles.cardHeaderIcon} />
+              <h2 className={styles.cardTitle}>Quick Actions</h2>
+            </div>
+            <div className={styles.quickActionsGrid}>
+              {QUICK_ACTIONS.map((action, i) => (
+                <QuickActionButton key={i} action={action} />
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.card}>
+            <div className={styles.cardHeader}>
+              <Sparkles className={styles.cardHeaderIcon} />
+              <h2 className={styles.cardTitle}>Wellness Insights</h2>
+            </div>
+            <div className={styles.insightsList}>
+              {WELLNESS_INSIGHTS.map((insight, i) => (
+                <InsightItem key={i} insight={insight} />
+              ))}
+            </div>
           </div>
         </div>
       </div>

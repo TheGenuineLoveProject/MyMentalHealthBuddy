@@ -115,7 +115,7 @@ export default function App() {
 
               {/* Protected Core Routes - Special Components */}
               <Route path="/dashboard">
-                <ProtectedRoute><Dashboard /></ProtectedRoute>
+                <ProtectedRoute><DashboardOverview /></ProtectedRoute>
               </Route>
               <Route path="/today">
                 <ProtectedRoute><DailyFlow /></ProtectedRoute>
@@ -295,17 +295,9 @@ export default function App() {
               <Route path="/contact">{() => <ConfigRoute route="/contact" />}</Route>
               <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
 
-              {/* Enhanced Dashboard & Admin */}
-              <Route path="/dashboard/overview">
-                <ProtectedRoute><DashboardOverview /></ProtectedRoute>
-              </Route>
-              <Route path="/admin/command-center">
-                <ProtectedRoute><AdminCommandCenter /></ProtectedRoute>
-              </Route>
-
               {/* Admin Routes */}
               <Route path="/admin">
-                <ProtectedRoute><Admin /></ProtectedRoute>
+                <ProtectedRoute><AdminCommandCenter /></ProtectedRoute>
               </Route>
               <Route path="/content-admin">
                 <ProtectedRoute><ContentAdminDashboard /></ProtectedRoute>
