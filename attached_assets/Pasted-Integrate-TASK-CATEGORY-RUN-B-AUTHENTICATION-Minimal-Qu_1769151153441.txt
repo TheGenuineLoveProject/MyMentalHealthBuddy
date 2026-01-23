@@ -1,0 +1,55 @@
+Integrate:TASK — CATEGORY RUN (B) AUTHENTICATION — Minimal/Quiet/Safe
+
+SCOPE (HARD): Only modify route configs + page content for these routes:
+- /login
+- /login/callback
+- /register
+- /forgot-password
+- /reset-password
+- /onboarding
+DO NOT change other routes except shared components/styles if required for consistency.
+
+STIMULATION LEVEL RULES (AUTH = MINIMAL):
+- Visual tone: “quiet clinic + warm hug” (clarity > flair).
+- Background: keep sacred-pattern VERY low opacity; aura gradient extremely subtle or disabled on auth pages.
+- Motion: minimal. Prefer AOS only on first load sections. No looping glows except very subtle logo breathe (or disable entirely if it distracts).
+- No animated decorative shapes near forms. No parallax. No shimmer. No high-contrast gradients behind inputs.
+- Typography and tokens: use existing brand tokens + typography utilities already in /styles/globals.css as source of truth. Do NOT invent new fonts or colors.
+
+CONTENT RULES (AUTH COPY):
+- Reading level: “calm and simple.” Short sentences. No pressure language.
+- Each page must have:
+  - 1 clear primary action
+  - 1 optional secondary link
+  - 1 short reassurance line (“You can go slowly. You’re safe here.”)
+- Error states: gentle, specific, actionable (no shame wording).
+
+UI RULES (AUTH LAYOUT):
+- Centered card layout, max-width ~420–520px, ample padding, high readability.
+- Inputs: large tap targets, clear labels (not placeholder-only), helper text where helpful.
+- CTA group: primary + ghost secondary. No extra buttons.
+- Add a “Back to home” link on all auth pages (except callback).
+
+ACCESSIBILITY (MANDATORY):
+- Semantic landmarks: header/nav/main/footer
+- Skip link to #main
+- Form labels + aria-describedby for helper/error text
+- Focus-visible rings and keyboard tab order
+- prefers-reduced-motion disables GSAP & AOS animations
+
+IMPLEMENTATION REQUIREMENTS:
+1) Update /content/routes.js configs for the listed auth routes:
+   - heroTitle, heroCopy, primaryCta, secondaryCta
+   - sections should be minimal: 0–1 small section after the form (“What happens next”).
+2) Ensure PageTemplate supports a “tone” or “variant” on config (e.g., tone:"quiet") so auth pages render calmer defaults without duplicating code.
+3) If generated physical pages exist (client/src/pages/generated/*), do not overwrite manually edited ones unless they contain // @generated.
+4) After changes, ensure scripts still pass:
+   - npm run verify:routes
+   - npm run print:routes:diff -- --format=markdown (or equivalent)
+
+OUTPUT FORMAT (MANDATORY):
+1) IMPLEMENTATION CHECKLIST (before)
+2) Full file contents for any changed files (grouped by path)
+3) COMPLETED CHECKLIST (after) — every item ✅ or N/A
+4) Next category suggestion: C Dashboard & Core
+FAIL THE RUN if any checklist item is not satisfied.

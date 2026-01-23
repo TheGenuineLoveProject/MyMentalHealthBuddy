@@ -2206,6 +2206,44 @@ const rawRoutes = [
     }
   },
   {
+    route: '/content-studio',
+    category: 'content',
+    pageLabel: 'Content Studio',
+    title: 'Content Studio — The Genuine Love Project',
+    description: 'Create supportive, trauma-informed social media content with brand-aligned templates. Generate posts, carousels, threads, and newsletters that prioritize safety and warmth.',
+    customComponent: 'ContentStudio',
+    hero: {
+      eyebrow: 'Content Creation',
+      title: 'Create content that',
+      titleHighlight: 'heals, not harms.',
+      subtitle: 'Generate warm, grounded social media content with built-in safety guidelines. Every template is trauma-informed and evidence-based—no medical claims, just supportive guidance.',
+      primaryCta: { label: 'Start Creating', href: '#studio' },
+      secondaryCta: { label: 'Content Guidelines', href: '#guidelines' }
+    },
+    modules: [
+      { icon: 'FileText', title: 'Multiple Formats', description: 'Short posts, carousel outlines, thread structures, and newsletter snippets.' },
+      { icon: 'Shield', title: 'Safety Built In', description: 'Every template includes appropriate disclaimers and crisis resources.' },
+      { icon: 'Heart', title: 'Warm & Grounded', description: 'Tone that is supportive without being clinical or making promises.' }
+    ],
+    sections: [
+      {
+        id: 'guidelines',
+        eyebrow: 'Content Philosophy',
+        title: 'Our content principles',
+        subtitle: 'Every piece of content we create follows these guidelines.',
+        variant: 'glow',
+        bullets: [
+          'No medical claims or diagnoses—we share supportive information, not treatment',
+          'Always include safety disclaimers and crisis resources where relevant',
+          'Warm, grounded tone—not clinical, not toxic positivity',
+          'Evidence-informed but accessible—cite research without overwhelming',
+          'Meet people where they are—beginner, intermediate, and advanced content levels',
+          'Respect autonomy—invite engagement without pressure'
+        ]
+      }
+    ]
+  },
+  {
     route: '/study-vault',
     category: 'content',
     pageLabel: 'Study Vault',

@@ -1,5 +1,5 @@
 {
-  "snapshotHash": "272ba07cb75364413073a26d24679ba0a3d439c6fe8d6b40f166c2ad74ce9f37",
+  "snapshotHash": "0730fce526edf6a66640118c0a1f18601e8040d6c714922fb343f6580938d05d",
   "categoryOrder": [
     {
       "letter": "A",
@@ -82,7 +82,7 @@
     "/companion": "0c844315977074db2e1d84490ce08022046d53bf310e6a94c52f2629511b44dc",
     "/content-admin": "804ade050fe3d11333f95d84c24f0b10a35ac213eec384fc7510abe419664286",
     "/content-index": "7852c2027724b3335ff23bee9b2213d3f35a7760a7442ec772c5e05ea1372b09",
-    "/content-studio": "c37f917b06894b77696c86b92625c17584f7b2c835ae7d01568ecf37fe8f8737",
+    "/content-studio": "953bce7c104f56ecdbebffb430a1aac6054d866bfef3e765868b06a932ddaada",
     "/control": "3e3e87b1f6a22cf6f9821ba91109039b05827b82f8138c4cf4c7adf30e47c912",
     "/crisis": "5f24881450aa7173d42fbf4a59acf79af6f80a5c46ce022bba1d2f7682767bec",
     "/crm": "91358e7ce1f080c644aa67063bbce054704bced6a5bafc9beb3326f817a3a797",
@@ -909,6 +909,29 @@
       "sectionsCount": 1,
       "modulesCount": 0,
       "routeHash": "c37f917b06894b77696c86b92625c17584f7b2c835ae7d01568ecf37fe8f8737"
+    },
+    {
+      "route": "/content-studio",
+      "category": "content",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Content Studio — The Genuine Love Project",
+      "description": "Create supportive, trauma-informed social media content with brand-aligned templates. Generate posts, carousels, threads, and newsletters that prioritize safety and warmth.",
+      "hero": {
+        "title": "Create content that",
+        "subtitle": "Generate warm, grounded social media content with built-in safety guidelines. Every template is trauma-informed and evidence-based—no medical claims, just supportive guidance.",
+        "primaryCta": {
+          "label": "Start Creating",
+          "href": "#studio"
+        },
+        "secondaryCta": {
+          "label": "Content Guidelines",
+          "href": "#guidelines"
+        }
+      },
+      "sectionsCount": 1,
+      "modulesCount": 3,
+      "routeHash": "953bce7c104f56ecdbebffb430a1aac6054d866bfef3e765868b06a932ddaada"
     },
     {
       "route": "/control",

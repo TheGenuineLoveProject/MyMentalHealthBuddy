@@ -3,13 +3,14 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { 
   FileText, Save, Loader2, ChevronLeft,
-  Copy, Sparkles, FileJson, FileCode
+  Copy, Sparkles, FileJson, FileCode, Layers, MessageSquare
 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/Input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient.js";
+import ContentStudio from "@/components/ContentStudio.jsx";
 
 const ALL_FORMATS = [
   { id: "blog", name: "Blog Post", icon: "📝" },
@@ -26,6 +27,7 @@ const ALL_FORMATS = [
 
 export default function ContentStudioPage() {
   const { toast } = useToast();
+  const [studioMode, setStudioMode] = useState<"ai" | "templates">("templates");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [selectedFormats, setSelectedFormats] = useState<string[]>(ALL_FORMATS.map(f => f.id));
@@ -192,11 +194,49 @@ export default function ContentStudioPage() {
               <h1 className="text-display-lg text-teal" data-testid="text-page-title">
                 Content Studio
               </h1>
-              <p className="text-body-sm">Transform your ideas into 10 platform-ready formats</p>
+              <p className="text-body-sm">Create trauma-informed, brand-aligned content</p>
             </div>
           </div>
         </div>
 
+        <div className="flex gap-2 mb-8" role="tablist" aria-label="Content studio mode">
+          <button
+            role="tab"
+            aria-selected={studioMode === "templates"}
+            onClick={() => setStudioMode("templates")}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition ${
+              studioMode === "templates"
+                ? "bg-[linear-gradient(135deg,var(--sage-400),var(--teal-600))] text-white shadow-md"
+                : "bg-white border border-[var(--sage-200)] text-[var(--charcoal)] hover:bg-[var(--sage-50)]"
+            }`}
+            data-testid="tab-templates"
+          >
+            <MessageSquare className="w-4 h-4" />
+            Social Templates
+          </button>
+          <button
+            role="tab"
+            aria-selected={studioMode === "ai"}
+            onClick={() => setStudioMode("ai")}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition ${
+              studioMode === "ai"
+                ? "bg-[linear-gradient(135deg,var(--sage-400),var(--teal-600))] text-white shadow-md"
+                : "bg-white border border-[var(--sage-200)] text-[var(--charcoal)] hover:bg-[var(--sage-50)]"
+            }`}
+            data-testid="tab-ai-generation"
+          >
+            <Sparkles className="w-4 h-4" />
+            AI Generation
+          </button>
+        </div>
+
+        {studioMode === "templates" && (
+          <div className="mb-8">
+            <ContentStudio />
+          </div>
+        )}
+
+        {studioMode === "ai" && (
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-6">
             <div className="card-bordered">
@@ -349,6 +389,7 @@ export default function ContentStudioPage() {
             </div>
           </div>
         </div>
+        )}
         </div>
       </div>
     </div>

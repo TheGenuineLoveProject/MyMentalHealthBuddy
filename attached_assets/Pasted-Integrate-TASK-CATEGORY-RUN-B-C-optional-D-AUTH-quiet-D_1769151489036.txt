@@ -1,0 +1,150 @@
+Integrate:TASK — CATEGORY RUN (B + C + optional D) — AUTH (quiet) + DASHBOARD (structured) + WELLNESS (practice-first)
+
+GOAL:
+Upgrade Authentication + Dashboard & Core in ONE run.
+OPTIONALLY upgrade Wellness & Healing Tools in the SAME run using a third stimulation profile: tone:"practice".
+Keep every other route/config on existing presets and do not rewrite unrelated content.
+
+SCOPE SWITCH (SET THIS):
+- UPGRADE_WELLNESS = false  (set true when ready)
+
+SCOPE (HARD — DO NOT EXPAND):
+Only modify route configs/content for:
+B) Authentication routes
+C) Dashboard & Core routes
+D) Wellness routes ONLY IF UPGRADE_WELLNESS === true
+You may also modify shared PageTemplate/renderer logic ONLY if necessary to support category-specific tone defaults.
+Do NOT change other routes except shared component/style changes required for consistency.
+
+B) AUTHENTICATION ROUTES (Quiet / Minimal):
+- /login
+- /login/callback
+- /register
+- /forgot-password
+- /reset-password
+- /onboarding
+
+C) DASHBOARD & CORE ROUTES (Structured / One-Next-Step):
+- /dashboard
+- /crm
+- /today
+- /mood
+- /state
+- /journal
+- /analytics
+- /progress
+- /growth-analytics
+- /guided-journaling
+
+D) WELLNESS & HEALING TOOLS ROUTES (Practice-first) — ONLY IF UPGRADE_WELLNESS === true:
+- /wellness
+- /wellness-hub
+- /healing-library
+- /calming-scenes
+- /breathing
+- /grounding
+- /affirmations
+- /meditation
+- /self-care
+- /emotional-intelligence
+- /sleep-guide
+- /stress-response
+- /inner-child
+- /body-wellness
+- /soul-wellness
+- /healing-journeys
+- /behavior-change
+- /daily-routines
+- /cognitive-tools
+- /mirror
+- /ritual
+- /wisdom
+- /wisdom-practices
+- /wisdom-synthesis
+
+CATEGORY-SPECIFIC STIMULATION RULES (NON-NEGOTIABLE):
+
+(1) AUTH = QUIET / MINIMAL / SAFE  (tone:"quiet")
+- Visual tone: quiet, minimal, safe. Clarity > flourish.
+- Background: sacred-pattern opacity extremely low; aura gradient very subtle OR disabled on auth pages.
+- Motion: minimal. AOS allowed for gentle entrance only. No looping glows near forms. No shimmer. No parallax.
+- Layout: centered form card, max-width ~420–520px, generous padding, high contrast.
+- CTAs: 1 primary action + 1 secondary link only.
+- Copy: short sentences. No pressure. Add 1 reassurance line per page (“You can go slowly. You’re safe here.”)
+- Error states: gentle, specific, actionable (no shame language).
+
+(2) DASHBOARD = STRUCTURED / LOW COGNITIVE LOAD (tone:"structured")
+- Visual tone: calm, organized, “one clear next step.”
+- Background: pattern + aura allowed but restrained.
+- Motion: purposeful entrances only (AOS once:true). GSAP micro only (opacity/transform).
+- Layout: scannable grid, consistent spacing, no dense walls of text.
+- Above the fold must include:
+  A) Title + one-sentence purpose
+  B) “Next best step” primary CTA (single)
+  C) 2–4 small status cards/chips (optional)
+- Below the fold: “Today’s focus” + “Recent/Saved” (if applicable) + “Guided options” (<= 3 cards)
+
+(3) WELLNESS = PRACTICE-FIRST / SOMATIC / SHORT ACTIONS (tone:"practice")
+- Visual tone: soothing, embodied, sensory-friendly. The practice is the product.
+- Background: pattern + aura allowed but SOFT; no sharp contrast patterns; avoid visual noise.
+- Motion: “breath-paced” and optional. AOS once:true. GSAP micro only. No fast transitions. No flash.
+- Layout rules:
+  - Put the practice UI above the fold (a single “Start” action).
+  - Default to 1–3 minute options.
+  - Provide “Stop / Pause / Reset” affordance in copy and/or UI.
+  - Content chunking: short paragraphs + bullets; no long sections.
+- Copy rules:
+  - Begin with body cue + permission (“If you can, soften your shoulders… If not, that’s okay.”)
+  - Use neutral, non-triggering language.
+  - Avoid absolutes (“always/never”), avoid pressure (“must/should”).
+- Add a “Safety exit” link on every wellness page:
+  - label: “Need immediate support?” href: “/crisis”
+- Add three-tier content (Beginner / Intermediate / Advanced) but practice-oriented:
+  - Beginner: 1 tiny step (10–30 seconds)
+  - Intermediate: 1–3 minutes
+  - Advanced: 3–10 minutes, reflection prompt optional
+
+GLOBAL SAFETY REQUIREMENTS (APPLY TO ALL THREE):
+- Respect prefers-reduced-motion: disable GSAP & AOS when reduced.
+- AOS MUST be once:true globally.
+- Accessibility: header/nav/main/footer, skip link to #main, focus-visible rings, aria-labels for nav/cta groups, proper form labels.
+- Performance: shallow DOM, avoid layout-thrashing animations (transform/opacity only), lazy-load non-critical images.
+
+IMPLEMENTATION REQUIREMENTS (DO THESE EXACTLY):
+1) Update /content/routes.js ONLY for the scoped routes above (and only D when UPGRADE_WELLNESS is true):
+   - Fill/upgrade heroTitle, heroCopy, primaryCta, secondaryCta
+   - Ensure modules + sections match each category’s stimulation rules
+   - Add explicit tone field:
+     - Auth routes: tone: "quiet"
+     - Dashboard routes: tone: "structured"
+     - Wellness routes (if upgraded): tone: "practice"
+   - Add optional fields to support structured rendering without duplicating layouts:
+     - For dashboard: nextStep { title, text, cta }
+     - For wellness: practice { duration, steps[], ctaLabel, safetyLink:true }
+2) Update /components/PageTemplate.jsx (or active renderer) to apply defaults by config.tone:
+   - tone="quiet": reduce/disable decorative background + disable decorative motion near forms
+   - tone="structured": render nextStep + tier blocks; keep “one next step” prominent
+   - tone="practice": render practice block ABOVE fold + “Stop/Pause/Reset” microcopy + safety link to /crisis
+   Keep DOM shallow; do not duplicate template logic.
+3) If physical generated pages exist (e.g., client/src/pages/generated/*), do NOT overwrite any manually edited file unless it contains EXACT header:
+   // @generated
+   If missing, SKIP and report it.
+4) Ensure deterministic route→file mapping is centralized:
+   - If routeFileMap helper exists, use it.
+   - If not, create it and update generator + formatter to use it consistently.
+
+VALIDATION (MUST PASS BEFORE FINISHING):
+- npm run verify:routes passes
+- diff output works (npm run print:routes:diff or equivalent) and reflects only scoped changes
+- No console errors for auth + dashboard pages (and wellness if enabled)
+- Reduced-motion mode disables animations
+
+OUTPUT FORMAT (MANDATORY):
+1) IMPLEMENTATION CHECKLIST (before) — list every requirement above
+2) Code grouped by file path — FULL FILE CONTENT for any file you change/create
+3) COMPLETED CHECKLIST (after) — every item ✅ or N/A
+4) NEXT CATEGORY suggestion:
+   - If UPGRADE_WELLNESS=false: D Wellness & Healing Tools (practice-first)
+   - If UPGRADE_WELLNESS=true: E Advanced & Mastery (clean+cerebral but warm)
+
+FAIL THE RUN if any checklist item is not satisfied or if you changed out-of-scope routes.

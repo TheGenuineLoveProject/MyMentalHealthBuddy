@@ -1,0 +1,64 @@
+Integrate:TASK — CATEGORY RUN (C) DASHBOARD & CORE — Structured / One-Next-Step
+
+SCOPE (HARD): Only modify route configs + page content for these routes:
+- /dashboard
+- /crm
+- /today
+- /mood
+- /state
+- /journal
+- /analytics
+- /progress
+- /growth-analytics
+- /guided-journaling
+DO NOT change other routes except shared components/styles if required for consistency.
+
+STIMULATION LEVEL RULES (DASHBOARD = STRUCTURED, LOW COGNITIVE LOAD):
+- Visual tone: calm, organized, “one clear next step.”
+- Background: sacred pattern + aura gradient allowed, but restrained.
+- Motion: subtle and purposeful (entrance only, no distraction). AOS once:true. GSAP micro only (opacity/transform).
+- Layout: grid-based, scannable, consistent spacing, no dense text walls.
+
+INFORMATION ARCHITECTURE (REQUIRED PER PAGE):
+- Above the fold:
+  1) Page title + one-sentence purpose
+  2) “Next best step” primary CTA (single)
+  3) 2–4 small status chips/cards (optional)
+- Below fold:
+  - “Today’s focus” section
+  - “Recent / Saved” section (if applicable)
+  - “Guided options” section (3 cards max)
+
+CONTENT TIERS (BEGINNER/INTERMEDIATE/ADVANCED):
+- Add config sections that clearly label:
+  - Beginner: child-level simple (“Try this first”)
+  - Intermediate: “Build consistency”
+  - Advanced: “Deepen insight”
+Keep copy short and non-clinical; evidence-based tone.
+
+DASHBOARD MICROCOPY RULES:
+- No pressure, no streak guilt, no “crush goals” language.
+- Use: “Start small”, “One step”, “Return when ready.”
+- Add gentle guardrails for analytics pages: “Data is information, not judgment.”
+
+ACCESSIBILITY + PERFORMANCE (MANDATORY):
+- Semantic landmarks + skip link
+- Keyboard navigable cards (button/link semantics)
+- No motion under prefers-reduced-motion
+- Keep DOM shallow; avoid nested wrappers
+
+IMPLEMENTATION REQUIREMENTS:
+1) Update /content/routes.js configs ONLY for these routes:
+   - heroTitle, heroCopy, CTAs, modules, sections (include the 3-tier content)
+2) Extend PageTemplate to render a “Next best step” block when config.nextStep exists.
+3) Ensure generated physical pages (client/src/pages/generated/*) are NOT overwritten unless // @generated header is present.
+4) Run/keep passing:
+   - npm run verify:routes
+   - npm run print:routes:diff -- --format=markdown
+
+OUTPUT FORMAT (MANDATORY):
+1) IMPLEMENTATION CHECKLIST (before)
+2) Full file contents for any changed files (grouped by path)
+3) COMPLETED CHECKLIST (after)
+4) Next category suggestion: D Wellness & Healing Tools
+FAIL THE RUN if any checklist item is not satisfied.
