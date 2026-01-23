@@ -1,72 +1,104 @@
 {
-  "generatedAt": "2026-01-23T07:12:18.782Z",
+  "generatedAt": "2026-01-23T07:16:46.295Z",
   "mode": "category",
-  "category": "auth",
+  "category": "core",
   "from": null,
   "to": null,
   "selectedCategories": [
-    "auth"
+    "core"
   ],
   "counts": {
     "created": 0,
-    "updated": 6,
+    "updated": 10,
     "skippedManual": 0,
     "aliasRedirects": 0,
-    "totalWritten": 6
+    "totalWritten": 10
   },
   "files": {
     "created": [],
     "updated": [
-      "client/src/pages/generated/forgot-password.jsx",
-      "client/src/pages/generated/login-callback.jsx",
-      "client/src/pages/generated/login.jsx",
-      "client/src/pages/generated/onboarding.jsx",
-      "client/src/pages/generated/register.jsx",
-      "client/src/pages/generated/reset-password.jsx"
+      "client/src/pages/generated/analytics.jsx",
+      "client/src/pages/generated/crm.jsx",
+      "client/src/pages/generated/dashboard.jsx",
+      "client/src/pages/generated/growth-analytics.jsx",
+      "client/src/pages/generated/guided-journaling.jsx",
+      "client/src/pages/generated/journal.jsx",
+      "client/src/pages/generated/mood.jsx",
+      "client/src/pages/generated/progress.jsx",
+      "client/src/pages/generated/state.jsx",
+      "client/src/pages/generated/today.jsx"
     ],
     "skippedManual": [],
     "aliasRedirects": []
   },
   "routes": [
     {
-      "route": "/forgot-password",
-      "category": "auth",
-      "pageFile": "client/src/pages/generated/forgot-password.jsx",
+      "route": "/analytics",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/analytics.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/login",
-      "category": "auth",
-      "pageFile": "client/src/pages/generated/login.jsx",
+      "route": "/crm",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/crm.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/login/callback",
-      "category": "auth",
-      "pageFile": "client/src/pages/generated/login-callback.jsx",
+      "route": "/dashboard",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/dashboard.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/onboarding",
-      "category": "auth",
-      "pageFile": "client/src/pages/generated/onboarding.jsx",
+      "route": "/growth-analytics",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/growth-analytics.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/register",
-      "category": "auth",
-      "pageFile": "client/src/pages/generated/register.jsx",
+      "route": "/guided-journaling",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/guided-journaling.jsx",
       "kind": "static",
       "canonical": null
     },
     {
-      "route": "/reset-password",
-      "category": "auth",
-      "pageFile": "client/src/pages/generated/reset-password.jsx",
+      "route": "/journal",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/journal.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/mood",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/mood.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/progress",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/progress.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/state",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/state.jsx",
+      "kind": "static",
+      "canonical": null
+    },
+    {
+      "route": "/today",
+      "category": "core",
+      "pageFile": "client/src/pages/generated/today.jsx",
       "kind": "static",
       "canonical": null
     }
