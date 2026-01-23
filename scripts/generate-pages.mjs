@@ -1,19 +1,24 @@
 #!/usr/bin/env node
 /**
  * ============================================================================
- * GENERATE-PAGES.MJS - Page Generator with Landing/All Mode Support
+ * GENERATE-PAGES.MJS - Page Generator with Landing/Category/All Mode Support
  * ============================================================================
  * 
  * Generates page files from routes.js configuration.
  * 
  * Usage:
- *   node scripts/generate-pages.mjs --mode=landing  (Landing routes only)
- *   node scripts/generate-pages.mjs --mode=all      (All 119+ routes)
- *   node scripts/generate-pages.mjs                 (defaults to landing)
+ *   node scripts/generate-pages.mjs --mode=landing                    (Landing routes only)
+ *   node scripts/generate-pages.mjs --mode=category --category="X"    (Category X only)
+ *   node scripts/generate-pages.mjs --mode=all                        (All 119+ routes)
+ *   node scripts/generate-pages.mjs                                   (defaults to landing)
  * 
  * Landing mode generates:
  *   - /, /healing, /pricing, /landing, /original-home (static pages)
  *   - /home, /welcome (server-side redirect files with permanent:true)
+ * 
+ * Category mode generates:
+ *   - All routes matching the exact category string
+ *   - Alias redirect pages for routes in that category
  * 
  * All mode generates:
  *   - All static routes
@@ -34,14 +39,29 @@ const ROOT = path.resolve(__dirname, '..');
 // Parse command line arguments
 const args = process.argv.slice(2);
 const modeArg = args.find(arg => arg.startsWith('--mode='));
-const mode = modeArg ? modeArg.split('=')[1] : 'landing';
+const categoryArg = args.find(arg => arg.startsWith('--category='));
 
-if (!['landing', 'all'].includes(mode)) {
-  console.error(`❌ Invalid mode: ${mode}. Use --mode=landing or --mode=all`);
+const mode = modeArg ? modeArg.split('=')[1] : 'landing';
+const category = categoryArg ? categoryArg.split('=')[1].replace(/^["']|["']$/g, '') : null;
+
+// Validate mode
+if (!['landing', 'category', 'all'].includes(mode)) {
+  console.error(`❌ Invalid mode: ${mode}. Use --mode=landing, --mode=category, or --mode=all`);
   process.exit(1);
 }
 
-console.log(`\n🌱 Page Generator - Mode: ${mode.toUpperCase()}\n`);
+// Validate category requirement for category mode
+if (mode === 'category' && !category) {
+  console.error(`❌ Category mode requires --category="<Category Name>"`);
+  console.error(`   Example: node scripts/generate-pages.mjs --mode=category --category="Wellness & Healing Tools"`);
+  process.exit(1);
+}
+
+console.log(`\n🌱 Page Generator - Mode: ${mode.toUpperCase()}`);
+if (category) {
+  console.log(`📂 Category: "${category}"`);
+}
+console.log('');
 
 // ============================================================================
 // LANDING ROUTES DEFINITION
@@ -179,6 +199,24 @@ function writePageFile(route, content, type = 'static') {
 }
 
 // ============================================================================
+// LOAD ROUTES FROM CONFIG
+// ============================================================================
+
+async function loadRoutes() {
+  try {
+    const routesModule = await import(path.join(ROOT, 'client', 'src', 'content', 'routes.js'));
+    const routes = routesModule.routes || routesModule.default?.routes || [];
+    if (!Array.isArray(routes) || routes.length === 0) {
+      throw new Error('No routes found in routes.js');
+    }
+    return routes;
+  } catch (err) {
+    console.error(`❌ Failed to load routes.js: ${err.message}`);
+    process.exit(1);
+  }
+}
+
+// ============================================================================
 // LANDING MODE GENERATION
 // ============================================================================
 
@@ -226,6 +264,103 @@ function generateLandingPages() {
 }
 
 // ============================================================================
+// CATEGORY MODE GENERATION
+// ============================================================================
+
+async function generateCategoryPages(targetCategory) {
+  const report = {
+    category: targetCategory,
+    static: [],
+    dynamic: [],
+    aliases: [],
+    errors: []
+  };
+
+  ensureDir(PAGES_DIR);
+
+  const routes = await loadRoutes();
+  
+  // Get all available categories for validation
+  const availableCategories = [...new Set(routes.map(r => r.category).filter(Boolean))];
+  
+  // Check if category exists (exact match)
+  const categoryRoutes = routes.filter(r => r.category === targetCategory && !r.aliasOf);
+  
+  if (categoryRoutes.length === 0) {
+    console.error(`❌ No routes found for category: "${targetCategory}"`);
+    console.error(`\n📋 Available categories:`);
+    for (const cat of availableCategories.sort()) {
+      console.error(`   • ${cat}`);
+    }
+    process.exit(1);
+  }
+
+  console.log(`📊 Found ${categoryRoutes.length} routes in category "${targetCategory}"\n`);
+
+  // Get canonical routes in this category (for alias detection)
+  const categoryCanonicalRoutes = new Set(categoryRoutes.map(r => r.route));
+
+  // Find aliases that point to routes in this category
+  const categoryAliases = routes.filter(r => r.aliasOf && categoryCanonicalRoutes.has(r.aliasOf));
+
+  // Generate static pages
+  console.log('📄 Generating static pages...');
+  const staticRoutes = categoryRoutes.filter(r => !r.route.includes(':'));
+  for (const routeConfig of staticRoutes) {
+    try {
+      const content = createStaticPageTemplate(routeConfig.route, routeConfig.pageLabel);
+      const filePath = writePageFile(routeConfig.route, content);
+      report.static.push({ route: routeConfig.route, file: path.relative(ROOT, filePath) });
+      console.log(`   ✓ ${routeConfig.route}`);
+    } catch (err) {
+      report.errors.push({ route: routeConfig.route, error: err.message });
+      console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
+    }
+  }
+
+  // Generate dynamic page stubs
+  const dynamicRoutes = categoryRoutes.filter(r => r.route.includes(':'));
+  if (dynamicRoutes.length > 0) {
+    console.log('\n🔀 Generating dynamic page stubs...');
+    for (const routeConfig of dynamicRoutes) {
+      try {
+        const paramMatch = routeConfig.route.match(/:(\w+)/);
+        const paramName = paramMatch ? paramMatch[1] : 'id';
+        const content = createDynamicPageTemplate(routeConfig.route, paramName);
+        const filePath = writePageFile(routeConfig.route.replace(/:\w+/g, '[param]'), content);
+        report.dynamic.push({ route: routeConfig.route, file: path.relative(ROOT, filePath) });
+        console.log(`   ✓ ${routeConfig.route} (param: ${paramName})`);
+      } catch (err) {
+        report.errors.push({ route: routeConfig.route, error: err.message });
+        console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
+      }
+    }
+  }
+
+  // Generate alias redirect pages for this category
+  if (categoryAliases.length > 0) {
+    console.log('\n🔄 Generating alias redirect pages...');
+    for (const routeConfig of categoryAliases) {
+      try {
+        const content = createAliasRedirectTemplate(routeConfig.route, routeConfig.aliasOf);
+        const filePath = writePageFile(routeConfig.route, content, 'alias');
+        report.aliases.push({ 
+          route: routeConfig.route, 
+          canonical: routeConfig.aliasOf,
+          file: path.relative(ROOT, filePath) 
+        });
+        console.log(`   ✓ ${routeConfig.route} → ${routeConfig.aliasOf} (301 redirect)`);
+      } catch (err) {
+        report.errors.push({ route: routeConfig.route, error: err.message });
+        console.error(`   ✗ ${routeConfig.route}: ${err.message}`);
+      }
+    }
+  }
+
+  return report;
+}
+
+// ============================================================================
 // ALL MODE GENERATION
 // ============================================================================
 
@@ -240,17 +375,7 @@ async function generateAllPages() {
 
   ensureDir(PAGES_DIR);
 
-  let routes;
-  try {
-    const routesModule = await import(path.join(ROOT, 'client', 'src', 'content', 'routes.js'));
-    routes = routesModule.routes || routesModule.default?.routes || [];
-    if (!Array.isArray(routes) || routes.length === 0) {
-      throw new Error('No routes found in routes.js');
-    }
-  } catch (err) {
-    console.error(`❌ Failed to load routes.js: ${err.message}`);
-    process.exit(1);
-  }
+  const routes = await loadRoutes();
 
   console.log(`📊 Found ${routes.length} routes in configuration\n`);
 
@@ -321,12 +446,15 @@ async function generateAllPages() {
 // REPORT GENERATION
 // ============================================================================
 
-function printReport(report, mode) {
+function printReport(report, mode, category = null) {
   console.log('\n' + '═'.repeat(60));
   console.log('📋 GENERATOR REPORT');
   console.log('═'.repeat(60));
   
   console.log(`\nMode: ${mode.toUpperCase()}`);
+  if (category) {
+    console.log(`Category: "${category}"`);
+  }
   console.log(`Output Directory: client/src/pages/generated/\n`);
 
   if (mode === 'landing') {
@@ -341,6 +469,29 @@ function printReport(report, mode) {
       console.log(`     File: ${item.file}`);
       console.log(`     Redirect Type: permanent (301)`);
     }
+  } else if (mode === 'category') {
+    console.log('📄 Static Pages Generated:');
+    for (const item of report.static) {
+      console.log(`   • ${item.route} → ${item.file}`);
+    }
+    
+    if (report.dynamic.length > 0) {
+      console.log('\n🔀 Dynamic Stubs Generated:');
+      for (const item of report.dynamic) {
+        console.log(`   • ${item.route} → ${item.file}`);
+      }
+    }
+    
+    if (report.aliases.length > 0) {
+      console.log('\n🔄 Alias Redirects (Server-side 301):');
+      for (const item of report.aliases) {
+        console.log(`   • ${item.route} → ${item.canonical}`);
+        console.log(`     File: ${item.file}`);
+      }
+    }
+
+    console.log('\n✅ Non-target pages were NOT modified');
+    console.log('   Only pages for the selected category were created/updated.');
   } else {
     console.log(`📄 Static Pages: ${report.static.length}`);
     console.log(`🔀 Dynamic Stubs: ${report.dynamic.length}`);
@@ -379,11 +530,15 @@ async function main() {
   
   if (mode === 'landing') {
     report = generateLandingPages();
+    printReport(report, mode);
+  } else if (mode === 'category') {
+    report = await generateCategoryPages(category);
+    printReport(report, mode, category);
   } else {
     report = await generateAllPages();
+    printReport(report, mode);
   }
 
-  printReport(report, mode);
   console.log('🎉 Page generation complete!\n');
 }
 
