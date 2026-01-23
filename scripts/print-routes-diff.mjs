@@ -8,11 +8,13 @@
  *   node scripts/print-routes-diff.mjs [options]
  * 
  * Options:
- *   --file=<path>     Path to diff JSON (default: reports/routes.diff.json)
- *   --max=<n>         Limit items per section (default: 10)
- *   --format=md|gha   Output format (default: md)
- *   --title="..."     Custom title (default: "Route manifest drift detected")
- *   --ci              Force --format=gha unless explicitly set
+ *   --file=<path>       Path to diff JSON (default: reports/routes.diff.json)
+ *   --max=<n>           Limit items per section (default: 10)
+ *   --format=md|gha     Output format (default: md)
+ *   --title="..."       Custom title (default: "Route manifest drift detected")
+ *   --ci                Force --format=gha unless explicitly set
+ *   --top=<n>           Number of top changes to show (default: 5)
+ *   --topMode=...       Priority mode: hash|title|category|mixed (default: mixed)
  * 
  * Exit codes:
  *   0 - Clean (no drift or file missing)
@@ -33,7 +35,9 @@ function parseArgs(argv) {
     format: 'md',
     title: 'Route manifest drift detected',
     ci: false,
-    formatExplicit: false
+    formatExplicit: false,
+    top: 5,
+    topMode: 'mixed'
   };
 
   for (const arg of argv.slice(2)) {
@@ -54,6 +58,16 @@ function parseArgs(argv) {
       args.title = arg.slice(8).replace(/^["']|["']$/g, '');
     } else if (arg === '--ci') {
       args.ci = true;
+    } else if (arg.startsWith('--top=')) {
+      const val = parseInt(arg.slice(6), 10);
+      if (!isNaN(val) && val > 0) {
+        args.top = val;
+      }
+    } else if (arg.startsWith('--topMode=')) {
+      const mode = arg.slice(10).toLowerCase();
+      if (['hash', 'title', 'category', 'mixed'].includes(mode)) {
+        args.topMode = mode;
+      }
     }
   }
 
@@ -66,7 +80,7 @@ function parseArgs(argv) {
 }
 
 // ============================================================================
-// MARKDOWN GENERATION
+// UTILITIES
 // ============================================================================
 
 function truncateList(items, max) {
@@ -78,6 +92,22 @@ function truncateList(items, max) {
     remaining: items.length - max
   };
 }
+
+function sortByRoute(items) {
+  return [...items].sort((a, b) => {
+    const routeA = typeof a === 'string' ? a : a.route;
+    const routeB = typeof b === 'string' ? b : b.route;
+    return routeA.localeCompare(routeB);
+  });
+}
+
+function getRoute(item) {
+  return typeof item === 'string' ? item : item.route;
+}
+
+// ============================================================================
+// FORMATTERS
+// ============================================================================
 
 function formatAddedItem(item) {
   const route = typeof item === 'string' ? item : item.route;
@@ -100,16 +130,106 @@ function formatCategoryChanged(item) {
 }
 
 function formatHashChanged(item) {
-  return `~ ${item.route} (hash changed)`;
+  return `~ ${item.route} (content changed)`;
 }
 
-function sortByRoute(items) {
-  return [...items].sort((a, b) => {
-    const routeA = typeof a === 'string' ? a : a.route;
-    const routeB = typeof b === 'string' ? b : b.route;
-    return routeA.localeCompare(routeB);
-  });
+// ============================================================================
+// TOP CHANGES SECTION
+// ============================================================================
+
+function buildTopChanges(diffData, topCount, topMode) {
+  const seen = new Set();
+  const result = [];
+
+  const buckets = {
+    title: sortByRoute(diffData.titleChanged || []).map(item => ({
+      route: item.route,
+      formatted: formatTitleChanged(item)
+    })),
+    category: sortByRoute(diffData.categoryChanged || []).map(item => ({
+      route: item.route,
+      formatted: formatCategoryChanged(item)
+    })),
+    hash: sortByRoute(diffData.hashChanged || []).map(item => ({
+      route: item.route,
+      formatted: formatHashChanged(item)
+    })),
+    added: sortByRoute(diffData.added || []).map(item => ({
+      route: getRoute(item),
+      formatted: formatAddedItem(item)
+    })),
+    removed: sortByRoute(diffData.removed || []).map(item => ({
+      route: getRoute(item),
+      formatted: formatRemovedItem(item)
+    }))
+  };
+
+  function addFromBucket(bucketName) {
+    const bucket = buckets[bucketName];
+    for (const item of bucket) {
+      if (result.length >= topCount) return;
+      if (!seen.has(item.route)) {
+        seen.add(item.route);
+        result.push(item.formatted);
+      }
+    }
+  }
+
+  switch (topMode) {
+    case 'hash':
+      addFromBucket('hash');
+      addFromBucket('title');
+      addFromBucket('category');
+      addFromBucket('added');
+      addFromBucket('removed');
+      break;
+    case 'title':
+      addFromBucket('title');
+      addFromBucket('category');
+      addFromBucket('hash');
+      addFromBucket('added');
+      addFromBucket('removed');
+      break;
+    case 'category':
+      addFromBucket('category');
+      addFromBucket('title');
+      addFromBucket('hash');
+      addFromBucket('added');
+      addFromBucket('removed');
+      break;
+    case 'mixed':
+    default:
+      // Interleave: title, category, hash, added, removed
+      const order = ['title', 'category', 'hash', 'added', 'removed'];
+      const indices = { title: 0, category: 0, hash: 0, added: 0, removed: 0 };
+      
+      while (result.length < topCount) {
+        let added = false;
+        for (const bucketName of order) {
+          if (result.length >= topCount) break;
+          const bucket = buckets[bucketName];
+          while (indices[bucketName] < bucket.length) {
+            const item = bucket[indices[bucketName]];
+            indices[bucketName]++;
+            if (!seen.has(item.route)) {
+              seen.add(item.route);
+              result.push(item.formatted);
+              added = true;
+              break;
+            }
+          }
+        }
+        if (!added) break; // No more items
+      }
+      break;
+  }
+
+  return result;
 }
+
+// ============================================================================
+// MARKDOWN GENERATION
+// ============================================================================
 
 function renderSection(title, items, formatter, max) {
   if (!items || items.length === 0) return '';
@@ -133,7 +253,7 @@ function renderSection(title, items, formatter, max) {
   return lines.join('\n');
 }
 
-function generateMarkdown(diffData, max) {
+function generateMarkdown(diffData, max, topCount, topMode) {
   const lines = [];
 
   lines.push('## Route Manifest Drift Detected');
@@ -153,6 +273,17 @@ function generateMarkdown(diffData, max) {
     lines.push('```bash');
     lines.push(diffData.recommendedCommand);
     lines.push('```');
+    lines.push('');
+  }
+
+  // Top changes section
+  const topChanges = buildTopChanges(diffData, topCount, topMode);
+  if (topChanges.length > 0) {
+    lines.push(`### Top changes (${topChanges.length})`);
+    lines.push('');
+    for (const change of topChanges) {
+      lines.push(change);
+    }
     lines.push('');
   }
 
@@ -176,7 +307,6 @@ function generateMarkdown(diffData, max) {
 // ============================================================================
 
 function ghaEscape(str) {
-  // Escape special characters for GHA annotations
   return String(str).replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
 }
 
@@ -184,13 +314,26 @@ function generateGhaClean() {
   return '::notice title=Routes::Routes manifest clean';
 }
 
-function generateGhaDrift(diffData, max, title) {
+function generateGhaDrift(diffData, max, title, topCount, topMode) {
   const lines = [];
   const summary = diffData.summary || {};
   const cmd = diffData.recommendedCommand || 'npm run gen:pages:all && npm run verify:routes';
 
   // Main error line
   lines.push(`::error title=Routes::${ghaEscape(title)}. Run: ${ghaEscape(cmd)}`);
+
+  // Top changes notice
+  const topChanges = buildTopChanges(diffData, topCount, topMode);
+  if (topChanges.length > 0) {
+    const maxNoticeItems = 3;
+    const truncated = topChanges.length > maxNoticeItems;
+    const shownItems = truncated ? topChanges.slice(0, maxNoticeItems) : topChanges;
+    let topNotice = shownItems.join(' | ');
+    if (truncated) {
+      topNotice += ' | …';
+    }
+    lines.push(`::notice title=Routes::Top changes: ${ghaEscape(topNotice)}`);
+  }
 
   // Summary warning
   const summaryParts = [];
@@ -269,9 +412,9 @@ function main() {
   // Status drift
   if (diffData.status === 'drift') {
     if (args.format === 'gha') {
-      console.log(generateGhaDrift(diffData, args.max, args.title));
+      console.log(generateGhaDrift(diffData, args.max, args.title, args.top, args.topMode));
     } else {
-      console.log(generateMarkdown(diffData, args.max));
+      console.log(generateMarkdown(diffData, args.max, args.top, args.topMode));
     }
     process.exit(2);
   }

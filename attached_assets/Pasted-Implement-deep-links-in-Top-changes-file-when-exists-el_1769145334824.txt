@@ -1,0 +1,36 @@
+Implement deep links in “Top changes” (file when exists, else path)
+
+Paste into Replit AI as a single task prompt:
+
+TASK: Upgrade scripts/print-routes-diff.mjs to enhance the “Top changes” section with deep links.
+
+REQUIREMENTS (NO SKIPS):
+	1.	Add route link resolution that prefers physical route files when they exist, otherwise falls back to route path.
+	2.	Physical file detection must work for these common layouts (check in this order):
+	•	client/src/pages/generated/<route>.jsx
+	•	client/src/pages/<route>.jsx
+	•	pages/<route>.jsx (Next pages router)
+	•	also support index routing: / → index.jsx (and home.jsx if your generator uses it), and nested routes like /account/profile → account/profile.jsx
+	3.	Dynamic routes must resolve to bracket files if present:
+	•	/blog/:slug → blog/[slug].jsx
+	•	/community/discussion/:id → community/discussion/[id].jsx
+	4.	The “Top changes” section must include a clickable markdown link:
+	•	If file exists → link text is the route (or short label), link target is the relative file path (e.g., client/src/pages/generated/pricing.jsx).
+	•	If file does not exist → link text is the route, link target is the route path (e.g., /pricing).
+	5.	Keep output stable and deterministic: sort consistently, stable formatting, no timestamps.
+	6.	Do NOT change routes.diff.json schema unless necessary. If you must, keep it backward compatible.
+
+IMPLEMENTATION DETAILS:
+	•	Add a helper: resolveRouteLink(route, options) returning:
+{ kind: "file"|"path", href: string, label: string }
+	•	Add a helper to convert a route path to a candidate file path (strip leading /, map / to index, replace :param with [param]).
+	•	Use fs.existsSync to detect files.
+	•	In markdown mode, render link as: [${label}](${href})
+	•	In annotation mode (if you already have it), include the resolved file path when present.
+
+DONE GATE:
+	•	Script runs: node scripts/print-routes-diff.mjs --in reports/routes.diff.json
+	•	“Top changes” shows links and correctly chooses file links when a file exists
+	•	No crashes if some folders don’t exist
+
+OUTPUT: Provide the full updated contents of scripts/print-routes-diff.mjs (and any small helper file you create). No TODOs.
