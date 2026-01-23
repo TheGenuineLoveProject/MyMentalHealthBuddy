@@ -40,11 +40,23 @@ const MANIFEST_HASH_PATH = path.join(ROOT, 'reports', 'routes.generated.sha256')
 const CONFIG_PATH = path.join(ROOT, 'reports', 'routes.config.snapshot.json');
 const CONFIG_HASH_PATH = path.join(ROOT, 'reports', 'routes.config.sha256');
 const DIFF_PATH = path.join(ROOT, 'reports', 'routes.diff.json');
+const DIFF_MD_PATH = path.join(ROOT, 'reports', 'routes.diff.md');
+const PER_ROUTE_HASHES_PATH = path.join(ROOT, 'reports', 'routes.perRouteHashes.json');
+const GENERATED_PAGES_DIR = path.join(ROOT, 'client', 'src', 'pages', 'generated');
 
 // Parse arguments
 const args = process.argv.slice(2);
 const fixMode = args.includes('--fix');
+const formatArg = args.find(arg => arg.startsWith('--format='));
+const outputFormat = formatArg ? formatArg.split('=')[1] : 'console';
 const isCI = process.env.CI === 'true' || process.env.CI === '1' || !!process.env.CI;
+
+// Validate format
+if (!['console', 'markdown', 'annotations', 'json'].includes(outputFormat)) {
+  console.error(`❌ Invalid format: ${outputFormat}`);
+  console.error('   Valid formats: console, markdown, annotations, json');
+  process.exit(1);
+}
 
 // ============================================================================
 // CI SAFETY CHECK
@@ -298,6 +310,208 @@ function deleteDiffJson() {
   if (fs.existsSync(DIFF_PATH)) {
     fs.unlinkSync(DIFF_PATH);
   }
+  if (fs.existsSync(DIFF_MD_PATH)) {
+    fs.unlinkSync(DIFF_MD_PATH);
+  }
+}
+
+// ============================================================================
+// DEEP LINK HELPERS
+// ============================================================================
+
+function routeToFilePath(route) {
+  const sanitized = route === '/' ? 'home' : route.slice(1).replace(/\//g, '-');
+  const filePath = path.join(GENERATED_PAGES_DIR, `${sanitized}.jsx`);
+  if (fs.existsSync(filePath)) {
+    return path.relative(ROOT, filePath);
+  }
+  return null;
+}
+
+function getDeepLink(route) {
+  const filePath = routeToFilePath(route);
+  if (filePath) {
+    return { type: 'file', path: filePath };
+  }
+  return { type: 'route', path: route };
+}
+
+// ============================================================================
+// FORMATTER: MARKDOWN
+// ============================================================================
+
+function formatMarkdown(diffData, results) {
+  const lines = [];
+  lines.push('# Route Drift Report');
+  lines.push('');
+  lines.push(`Generated: ${new Date().toISOString()}`);
+  lines.push('');
+  
+  if (!results.allOk) {
+    lines.push('## Summary');
+    lines.push('');
+    lines.push('| Change Type | Count |');
+    lines.push('|-------------|-------|');
+    lines.push(`| Added | ${diffData.added.length} |`);
+    lines.push(`| Removed | ${diffData.removed.length} |`);
+    lines.push(`| Title Changed | ${diffData.titleChanged.length} |`);
+    lines.push(`| Category Changed | ${diffData.categoryChanged.length} |`);
+    lines.push(`| Hash Changed | ${diffData.hashChanged.length} |`);
+    lines.push('');
+    
+    if (diffData.added.length > 0) {
+      lines.push('## Added Routes');
+      lines.push('');
+      for (const item of diffData.added.slice(0, 10)) {
+        const link = getDeepLink(item.route);
+        if (link.type === 'file') {
+          lines.push(`- [\`${item.route}\`](${link.path}) (${item.category || 'uncategorized'})`);
+        } else {
+          lines.push(`- \`${item.route}\` (${item.category || 'uncategorized'})`);
+        }
+      }
+      if (diffData.added.length > 10) {
+        lines.push(`- ... and ${diffData.added.length - 10} more`);
+      }
+      lines.push('');
+    }
+    
+    if (diffData.removed.length > 0) {
+      lines.push('## Removed Routes');
+      lines.push('');
+      for (const item of diffData.removed.slice(0, 10)) {
+        lines.push(`- \`${item.route}\` (was: ${item.category || 'uncategorized'})`);
+      }
+      if (diffData.removed.length > 10) {
+        lines.push(`- ... and ${diffData.removed.length - 10} more`);
+      }
+      lines.push('');
+    }
+    
+    if (diffData.titleChanged.length > 0) {
+      lines.push('## Title Changes');
+      lines.push('');
+      for (const item of diffData.titleChanged.slice(0, 10)) {
+        const link = getDeepLink(item.route);
+        if (link.type === 'file') {
+          lines.push(`- [\`${item.route}\`](${link.path}): "${item.fromTitle}" → "${item.toTitle}"`);
+        } else {
+          lines.push(`- \`${item.route}\`: "${item.fromTitle}" → "${item.toTitle}"`);
+        }
+      }
+      if (diffData.titleChanged.length > 10) {
+        lines.push(`- ... and ${diffData.titleChanged.length - 10} more`);
+      }
+      lines.push('');
+    }
+    
+    if (diffData.categoryChanged.length > 0) {
+      lines.push('## Category Changes');
+      lines.push('');
+      for (const item of diffData.categoryChanged.slice(0, 10)) {
+        const link = getDeepLink(item.route);
+        if (link.type === 'file') {
+          lines.push(`- [\`${item.route}\`](${link.path}): "${item.fromCategory}" → "${item.toCategory}"`);
+        } else {
+          lines.push(`- \`${item.route}\`: "${item.fromCategory}" → "${item.toCategory}"`);
+        }
+      }
+      if (diffData.categoryChanged.length > 10) {
+        lines.push(`- ... and ${diffData.categoryChanged.length - 10} more`);
+      }
+      lines.push('');
+    }
+    
+    if (diffData.hashChanged.length > 0) {
+      lines.push('## Other Content Changes');
+      lines.push('');
+      for (const item of diffData.hashChanged.slice(0, 10)) {
+        const link = getDeepLink(item.route);
+        if (link.type === 'file') {
+          lines.push(`- [\`${item.route}\`](${link.path}) (${item.category || 'uncategorized'})`);
+        } else {
+          lines.push(`- \`${item.route}\` (${item.category || 'uncategorized'})`);
+        }
+      }
+      if (diffData.hashChanged.length > 10) {
+        lines.push(`- ... and ${diffData.hashChanged.length - 10} more`);
+      }
+      lines.push('');
+    }
+    
+    lines.push('## Resolution');
+    lines.push('');
+    lines.push('```bash');
+    lines.push('npm run gen:pages:all && npm run verify:routes');
+    lines.push('```');
+  } else {
+    lines.push('No drift detected.');
+  }
+  
+  return lines.join('\n');
+}
+
+// ============================================================================
+// FORMATTER: GITHUB ANNOTATIONS
+// ============================================================================
+
+function formatAnnotations(diffData, results) {
+  const lines = [];
+  
+  if (!results.allOk) {
+    const total = diffData.added.length + diffData.removed.length + 
+                  diffData.titleChanged.length + diffData.categoryChanged.length + 
+                  diffData.hashChanged.length;
+    
+    lines.push(`::error file=reports/routes.config.snapshot.json,title=Route Drift Detected::Found ${total} route changes. Run: npm run gen:pages:all && npm run verify:routes`);
+    
+    for (const item of diffData.added.slice(0, 5)) {
+      const filePath = routeToFilePath(item.route);
+      if (filePath) {
+        lines.push(`::warning file=${filePath},title=New Route::Route ${item.route} added`);
+      }
+    }
+    
+    for (const item of diffData.removed.slice(0, 5)) {
+      lines.push(`::error file=reports/routes.config.snapshot.json,title=Route Removed::Route ${item.route} was removed`);
+    }
+    
+    for (const item of diffData.titleChanged.slice(0, 5)) {
+      const filePath = routeToFilePath(item.route);
+      if (filePath) {
+        lines.push(`::warning file=${filePath},title=Title Changed::${item.route}: "${item.fromTitle}" → "${item.toTitle}"`);
+      }
+    }
+  }
+  
+  return lines.join('\n');
+}
+
+// ============================================================================
+// FORMATTER: JSON (COMPACT)
+// ============================================================================
+
+function formatJson(diffData, results) {
+  return JSON.stringify({
+    ok: results.allOk,
+    timestamp: new Date().toISOString(),
+    summary: {
+      added: diffData.added.length,
+      removed: diffData.removed.length,
+      titleChanged: diffData.titleChanged.length,
+      categoryChanged: diffData.categoryChanged.length,
+      hashChanged: diffData.hashChanged.length,
+      total: diffData.added.length + diffData.removed.length + 
+             diffData.titleChanged.length + diffData.categoryChanged.length + 
+             diffData.hashChanged.length
+    },
+    topChanges: [
+      ...diffData.added.slice(0, 3).map(i => ({ type: 'added', route: i.route, file: routeToFilePath(i.route) })),
+      ...diffData.removed.slice(0, 3).map(i => ({ type: 'removed', route: i.route })),
+      ...diffData.titleChanged.slice(0, 3).map(i => ({ type: 'titleChanged', route: i.route, file: routeToFilePath(i.route) }))
+    ],
+    recommendation: results.allOk ? null : 'npm run gen:pages:all && npm run verify:routes'
+  });
 }
 
 // ============================================================================
@@ -421,17 +635,32 @@ async function runVerification() {
 
   const allOk = manifestResult.ok && configResult.ok && freshnessResult.ok;
 
+  // Build empty diffData if no changes
+  const diffData = freshnessResult.diffData || {
+    added: [],
+    removed: [],
+    titleChanged: [],
+    categoryChanged: [],
+    hashChanged: []
+  };
+
   // Manage diff JSON file
   if (allOk) {
-    // Clean: delete diff file if exists
     deleteDiffJson();
-    console.log('\n✅ All verifications passed. No drift detected.\n');
+    if (outputFormat === 'console') {
+      console.log('\n✅ All verifications passed. No drift detected.\n');
+    }
   } else if (freshnessResult.diffData) {
-    // Drift: write diff file
     writeDiffJson(freshnessResult.diffData);
+    
+    if (outputFormat === 'markdown') {
+      const markdown = formatMarkdown(freshnessResult.diffData, { allOk });
+      fs.writeFileSync(DIFF_MD_PATH, markdown + '\n');
+      console.log(`📝 Wrote ${path.relative(ROOT, DIFF_MD_PATH)}`);
+    }
   }
 
-  return { allOk, manifestResult, configResult, freshnessResult };
+  return { allOk, manifestResult, configResult, freshnessResult, diffData };
 }
 
 // ============================================================================
@@ -474,9 +703,22 @@ async function main() {
   if (fixMode) {
     await runFix();
   } else {
-    const { allOk } = await runVerification();
+    const { allOk, diffData } = await runVerification();
 
-    if (!allOk) {
+    // Output in requested format
+    if (outputFormat === 'json') {
+      console.log(formatJson(diffData, { allOk }));
+    } else if (outputFormat === 'annotations') {
+      if (!allOk) {
+        console.log(formatAnnotations(diffData, { allOk }));
+      }
+    } else if (outputFormat === 'markdown') {
+      if (allOk) {
+        console.log('No drift detected.');
+      }
+    }
+
+    if (!allOk && outputFormat === 'console') {
       console.error('❌ ROUTE MANIFEST DRIFT DETECTED');
       console.error('');
       console.error('   ┌─────────────────────────────────────────────────────────────┐');
@@ -494,7 +736,7 @@ async function main() {
       process.exit(1);
     }
 
-    process.exit(0);
+    process.exit(allOk ? 0 : 1);
   }
 }
 

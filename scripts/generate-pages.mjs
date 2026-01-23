@@ -50,6 +50,7 @@ const MANIFEST_PATH = path.join(REPORTS_DIR, 'routes.generated.json');
 const HASH_PATH = path.join(REPORTS_DIR, 'routes.generated.sha256');
 const CONFIG_SNAPSHOT_PATH = path.join(REPORTS_DIR, 'routes.config.snapshot.json');
 const CONFIG_HASH_PATH = path.join(REPORTS_DIR, 'routes.config.sha256');
+const PER_ROUTE_HASHES_PATH = path.join(REPORTS_DIR, 'routes.perRouteHashes.json');
 
 // ============================================================================
 // PARSE COMMAND LINE ARGUMENTS
@@ -966,6 +967,11 @@ async function writeConfigSnapshot() {
   console.log(`📸 Config snapshot written: ${path.relative(ROOT, CONFIG_SNAPSHOT_PATH)}`);
   console.log(`🔐 Config hash written: ${path.relative(ROOT, CONFIG_HASH_PATH)}`);
   console.log(`   Routes: ${routesIndex.length}, Route hashes: ${Object.keys(routeHashes).length}`);
+
+  // Write per-route hashes file for easy lookup
+  const perRouteHashesJson = JSON.stringify(routeHashes, null, 2);
+  fs.writeFileSync(PER_ROUTE_HASHES_PATH, perRouteHashesJson, 'utf8');
+  console.log(`📊 Per-route hashes written: ${path.relative(ROOT, PER_ROUTE_HASHES_PATH)}`);
 }
 
 // ============================================================================

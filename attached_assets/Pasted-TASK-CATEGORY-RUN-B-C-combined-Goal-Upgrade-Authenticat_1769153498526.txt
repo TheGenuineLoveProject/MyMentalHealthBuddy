@@ -1,0 +1,55 @@
+TASK: CATEGORY RUN — B + C combined
+Goal: Upgrade Authentication (quiet/minimal) + Dashboard/Core (structured/one-next-step) in a single pass while enforcing different stimulation profiles per category.
+
+SCOPE:
+- Update only /content/routes.js configs for these routes + ensure PageTemplate renders profiles correctly.
+- Do NOT modify Landing or Wellness configs (leave on presets).
+
+ROUTES:
+B) Authentication (stimulationProfile="quiet"):
+/login
+/login/callback
+/register
+/forgot-password
+/reset-password
+/onboarding
+
+C) Dashboard & Core (stimulationProfile="structured"):
+/dashboard
+/crm
+/today
+/mood
+/state
+/journal
+/analytics
+/progress
+/growth-analytics
+/guided-journaling
+
+PROFILE RULES:
+1) quiet (Auth):
+- Minimal motion: AOS only, very subtle; no GSAP loops.
+- Simple page: one primary action, one secondary link.
+- Copy rules: reassuring, step-by-step, no pressure.
+- Must include: “Not medical advice” line in footer area and link to /crisis (small, non-alarming).
+- Forms: clear labels, helper text, inline validation hints, focus-visible, ARIA.
+
+2) structured (Dashboard):
+- Layout: “One next step” panel at top, then 2–3 secondary cards, then optional insights.
+- Motion: subtle entrance only; no pulsing CTAs on dashboard (use calmer button style variant).
+- Copy rules: grounded, concise, action-oriented, low cognitive load.
+- Must include: “Pause / continue later” microcopy line on key flows (journal, mood, state).
+
+IMPLEMENTATION REQUIREMENTS:
+- In /content/routes.js: add/upgrade hero + sections + CTAs per route, with unique title/description.
+- In /components/PageTemplate.jsx: support stimulationProfile:
+  - quiet: fewer sections, tighter max widths, reduced decorative layers intensity
+  - structured: “Next step” section + “Tools” cards + “Your space” reassurance section
+- Keep brand + typography locked (Playfair Display + Inter + scale utilities).
+- AOS once:true everywhere, GSAP disabled under prefers-reduced-motion.
+
+OUTPUT:
+1) IMPLEMENTATION CHECKLIST (before)
+2) Code changes by file path (FULL CONTENT)
+3) COMPLETED CHECKLIST (after)
+4) Print list of B routes updated and C routes updated
