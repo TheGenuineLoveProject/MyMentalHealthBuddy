@@ -1,0 +1,57 @@
+TASK: AUTOPILOT BUILD (Config-driven platform must compile)
+
+GOAL:
+Implement/repair the config-driven “autopilot” rendering so ALL routes resolve from /content/routes.js and render through one template. Must compile. No TODOs.
+
+MUST USE (match existing repo):
+- Route registry lives in: /content/routes.js (or /content/routes.jsx if already used)
+- Autopilot page entry exists or must be created: /pages/_autopilot.jsx
+- Template renderer exists or must be created: /components/PageTemplate.jsx
+
+NON-NEGOTIABLES:
+- CSS Modules only
+- AOS + GSAP
+  - AOS init once: true
+  - GSAP respects prefers-reduced-motion (no motion when reduced)
+- Accessibility: skip link to #main, semantic landmarks, focus-visible
+- Performance: minimal nesting, transform/opacity only animations
+
+AUTOPILOT CONTRACT:
+1) /content/routes.js must export:
+- export const routes = [...]  (all route configs)
+- export function getRouteConfig(pathname) { ... }
+- export function matchDynamic(pattern, pathname) { ... }
+
+2) getRouteConfig must resolve in this order:
+(a) exact match
+(b) alias resolution (aliasOf)
+(c) dynamic match (e.g. /blog/:slug, /community/discussion/:id)
+(d) fallback “Not Found” config
+
+3) /components/PageTemplate.jsx
+- Accepts { config }
+- Renders Layout → Hero → Sections → Modules/Cards → Footer
+- Adds AOS attributes to sections/cards
+- GSAP micro-animations only if motion allowed
+
+4) /pages/_autopilot.jsx
+- Uses window.location.pathname (client) or routeOverride prop
+- Calls getRouteConfig(path)
+- Renders <PageTemplate config={config} />
+
+OUTPUT REQUIREMENTS:
+1) IMPLEMENTATION CHECKLIST (before)
+2) FULL FILE CONTENTS for every file changed/created
+3) ROUTE COMPLETION REPORT grouped by category (count must match your registry)
+4) COMPLETED CHECKLIST (after)
+5) Print EXACT shell commands to run after this prompt:
+   - npm run dev
+   - npm run verify:routes
+
+DONE GATE (must pass):
+✅ npm run dev runs without errors
+✅ no console errors on load
+✅ AOS once:true triggers only once
+✅ GSAP disabled under prefers-reduced-motion
+✅ skip link focuses #main
+If any fails, fix before finishing.
