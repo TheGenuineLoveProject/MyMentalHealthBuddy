@@ -6,33 +6,15 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
-
-import Home from "./pages/Home.jsx";
-import CanvaLanding from "./pages/CanvaLanding.jsx";
-import HealingLandingPage from "./pages/HealingLandingPage.jsx";
 import { AutopilotPage } from "./pages/_autopilot.jsx";
-import DesignSystem from "./pages/DesignSystem.jsx";
-import WireframeTemplates from "./pages/WireframeTemplates.jsx";
-import Login from "./pages/Login.jsx";
-import LoginCallback from "./pages/LoginCallback.jsx";
-import Register from "./pages/Register.jsx";
-import ForgotPassword from "./pages/ForgotPassword.jsx";
-import ResetPassword from "./pages/ResetPassword.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import HealthPage from "./pages/HealthPage.jsx";
-import Publishing from "./pages/Publishing.jsx";
-import SocialHub from "./pages/SocialHub.jsx";
-import ControlDashboard from "./pages/ControlDashboard.jsx";
-import BlogIndex from "./pages/BlogIndex.jsx";
-import BlogPost from "./pages/BlogPost.jsx";
-import Landing from "./pages/landing/Landing.jsx";
-import Ethics from "./pages/legal/Ethics.jsx";
-import Disclaimer from "./pages/legal/Disclaimer.jsx";
-import Terms from "./pages/Terms.tsx";
-import Privacy from "./pages/Privacy.tsx";
-import Legal from "./pages/Legal.tsx";
 
+const Login = lazy(() => import("./pages/Login.jsx"));
+const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
+const Register = lazy(() => import("./pages/Register.jsx"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
 const BlogEditor = lazy(() => import("./pages/BlogEditor.jsx"));
+const BlogPost = lazy(() => import("./pages/BlogPost.jsx"));
 const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
 const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
 const StatePage = lazy(() => import("./pages/StatePage.jsx"));
@@ -44,14 +26,12 @@ const Settings = lazy(() => import("./pages/Settings.jsx"));
 const Wellness = lazy(() => import("./pages/Wellness.jsx"));
 const Premium = lazy(() => import("./pages/Premium.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
-const Pricing = lazy(() => import("./pages/Pricing.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
 const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
 const DiscussionPage = lazy(() => import("./features/community/DiscussionPage.jsx"));
-const TodayPage = lazy(() => import("./features/today/TodayPage.jsx"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage.tsx"));
 const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
 const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
@@ -78,38 +58,7 @@ const ContentStudioPage = lazy(() => import("./pages/ContentStudioPage.tsx"));
 const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.tsx"));
 const EliteToolsDashboard = lazy(() => import("./pages/EliteToolsDashboard.tsx"));
 const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.jsx"));
-const FAQPage = lazy(() => import("./pages/FAQPage.jsx"));
-const ProfessionalResourcesPage = lazy(() => import("./pages/ProfessionalResourcesPage.jsx"));
-const SupportPage = lazy(() => import("./pages/SupportPage.tsx"));
-const NewsPage = lazy(() => import("./pages/NewsPage.jsx"));
-const HealingLibraryPage = lazy(() => import("./pages/HealingLibraryPage.jsx"));
-const CalmingScenesPage = lazy(() => import("./pages/CalmingScenesPage.jsx"));
-const BreathingExercisesPage = lazy(() => import("./pages/BreathingExercisesPage.jsx"));
-const GroundingTechniquesPage = lazy(() => import("./pages/GroundingTechniquesPage.jsx"));
-const AffirmationsPage = lazy(() => import("./pages/AffirmationsPage.jsx"));
-const MeditationGuidePage = lazy(() => import("./pages/MeditationGuidePage.jsx"));
-const SelfCareToolkitPage = lazy(() => import("./pages/SelfCareToolkitPage.jsx"));
-const WellnessGlossaryPage = lazy(() => import("./pages/WellnessGlossaryPage.jsx"));
-const WellnessHubPage = lazy(() => import("./pages/WellnessHubPage.jsx"));
-const EmotionalIntelligencePage = lazy(() => import("./pages/EmotionalIntelligencePage.jsx"));
-const SleepGuidePage = lazy(() => import("./pages/SleepGuidePage.jsx"));
-const StressResponseGuidePage = lazy(() => import("./pages/StressResponseGuidePage.jsx"));
-const InnerChildPage = lazy(() => import("./pages/InnerChildPage.jsx"));
-const BodyWellnessPage = lazy(() => import("./pages/BodyWellnessPage.jsx"));
-const SoulWellnessPage = lazy(() => import("./pages/SoulWellnessPage.jsx"));
-const ResearchEvidencePage = lazy(() => import("./pages/ResearchEvidencePage.jsx"));
-const HealingJourneysPage = lazy(() => import("./pages/HealingJourneysPage.jsx"));
-const BehaviorChangePage = lazy(() => import("./pages/BehaviorChangePage.jsx"));
-const HowToGuidesPage = lazy(() => import("./pages/HowToGuidesPage.jsx"));
-const DailyRoutinesPage = lazy(() => import("./pages/DailyRoutinesPage.jsx"));
-const CognitiveToolsPage = lazy(() => import("./pages/CognitiveToolsPage.jsx"));
-const GlossaryPage = lazy(() => import("./pages/GlossaryPage.jsx"));
-const ResourcesPage = lazy(() => import("./pages/ResourcesPage.jsx"));
-const ContentIndexPage = lazy(() => import("./pages/ContentIndexPage.jsx"));
-const ExamplesPage = lazy(() => import("./pages/ExamplesPage.jsx"));
-const QAPage = lazy(() => import("./pages/QAPage.jsx"));
 const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
-const SafetyPage = lazy(() => import("./pages/SafetyPage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -122,6 +71,14 @@ function LoadingFallback() {
   );
 }
 
+function ConfigRoute({ route }) {
+  return <AutopilotPage route={route} />;
+}
+
+function ProtectedRoute({ children }) {
+  return <RouteGuard>{children}</RouteGuard>;
+}
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -131,298 +88,242 @@ export default function App() {
           <main id="main-content">
           <Suspense fallback={<LoadingFallback />}>
             <Switch>
-              {/* Public routes */}
-              <Route path="/" component={Home} />
-              <Route path="/home" component={Home} />
-              <Route path="/welcome" component={Home} />
-              <Route path="/canva-landing" component={CanvaLanding} />
-              <Route path="/healing">{() => <AutopilotPage route="/healing" />}</Route>
-              <Route path="/design-system" component={DesignSystem} />
-              <Route path="/wireframes" component={WireframeTemplates} />
+              {/* Landing & Public Pages - Config Driven */}
+              <Route path="/">{() => <ConfigRoute route="/" />}</Route>
+              <Route path="/home">{() => <ConfigRoute route="/home" />}</Route>
+              <Route path="/welcome">{() => <ConfigRoute route="/welcome" />}</Route>
+              <Route path="/landing">{() => <ConfigRoute route="/landing" />}</Route>
+              <Route path="/healing">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/about">{() => <ConfigRoute route="/about" />}</Route>
+              <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
+              <Route path="/canva-landing">{() => <ConfigRoute route="/canva-landing" />}</Route>
+              <Route path="/pricing">{() => <ConfigRoute route="/pricing" />}</Route>
+
+              {/* Auth Pages - Special Components */}
               <Route path="/login" component={Login} />
               <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />
+              <Route path="/signup">{() => <ConfigRoute route="/signup" />}</Route>
+              <Route path="/sign-up">{() => <ConfigRoute route="/sign-up" />}</Route>
+              <Route path="/signin">{() => <ConfigRoute route="/signin" />}</Route>
+              <Route path="/sign-in">{() => <ConfigRoute route="/sign-in" />}</Route>
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={ResetPassword} />
-              <Route path="/health" component={HealthPage} />
-              <Route path="/publishing" component={Publishing} />
-              <Route path="/social" component={SocialHub} />
-              <Route path="/control" component={ControlDashboard} />
-              <Route path="/pricing" component={Pricing} />
-              <Route path="/crm">
-                <RouteGuard>
-                  <CRMPage />
-                </RouteGuard>
-              </Route>
-              
-              {/* Blog routes */}
-              <Route path="/blog" component={BlogIndex} />
-              <Route path="/blog/:slug" component={BlogPost} />
-              <Route path="/write">
-                <RouteGuard>
-                  <BlogEditor />
-                </RouteGuard>
-              </Route>
 
-              {/* Onboarding - protected but before main app */}
-              <Route path="/onboarding">
-                <RouteGuard>
-                  <Onboarding />
-                </RouteGuard>
-              </Route>
-
-              {/* Protected routes */}
+              {/* Protected Core Routes - Special Components */}
               <Route path="/dashboard">
-                <RouteGuard>
-                  <Dashboard />
-                </RouteGuard>
+                <ProtectedRoute><Dashboard /></ProtectedRoute>
               </Route>
               <Route path="/today">
-                <RouteGuard>
-                  <DailyFlow />
-                </RouteGuard>
+                <ProtectedRoute><DailyFlow /></ProtectedRoute>
               </Route>
               <Route path="/mood">
-                <RouteGuard>
-                  <MoodPage />
-                </RouteGuard>
+                <ProtectedRoute><MoodPage /></ProtectedRoute>
               </Route>
               <Route path="/state">
-                <RouteGuard>
-                  <StatePage />
-                </RouteGuard>
+                <ProtectedRoute><StatePage /></ProtectedRoute>
               </Route>
               <Route path="/journal">
-                <RouteGuard>
-                  <JournalPage />
-                </RouteGuard>
+                <ProtectedRoute><JournalPage /></ProtectedRoute>
               </Route>
               <Route path="/chat">
-                <RouteGuard>
-                  <AIChatPage />
-                </RouteGuard>
+                <ProtectedRoute><AIChatPage /></ProtectedRoute>
               </Route>
+              <Route path="/therapy">{() => <ConfigRoute route="/therapy" />}</Route>
+              <Route path="/ai-chat">{() => <ConfigRoute route="/ai-chat" />}</Route>
               <Route path="/analytics">
-                <RouteGuard>
-                  <Analytics />
-                </RouteGuard>
+                <ProtectedRoute><Analytics /></ProtectedRoute>
               </Route>
               <Route path="/crisis">
-                <RouteGuard>
-                  <CrisisResources />
-                </RouteGuard>
-              </Route>
-              <Route path="/wellness">
-                <RouteGuard>
-                  <Wellness />
-                </RouteGuard>
-              </Route>
-              <Route path="/premium">
-                <RouteGuard>
-                  <Premium />
-                </RouteGuard>
+                <ProtectedRoute><CrisisResources /></ProtectedRoute>
               </Route>
               <Route path="/settings">
-                <RouteGuard>
-                  <Settings />
-                </RouteGuard>
+                <ProtectedRoute><Settings /></ProtectedRoute>
+              </Route>
+              <Route path="/wellness">
+                <ProtectedRoute><Wellness /></ProtectedRoute>
+              </Route>
+              <Route path="/premium">
+                <ProtectedRoute><Premium /></ProtectedRoute>
               </Route>
               <Route path="/upgrade">
-                <RouteGuard>
-                  <Upgrade />
-                </RouteGuard>
+                <ProtectedRoute><Upgrade /></ProtectedRoute>
               </Route>
-              <Route path="/admin">
-                <RouteGuard>
-                  <Admin />
-                </RouteGuard>
+              <Route path="/onboarding">
+                <ProtectedRoute><Onboarding /></ProtectedRoute>
               </Route>
-              <Route path="/content-admin">
-                <RouteGuard>
-                  <ContentAdminDashboard />
-                </RouteGuard>
-              </Route>
-              <Route path="/faq" component={FAQPage} />
-              <Route path="/resources" component={ProfessionalResourcesPage} />
-              <Route path="/support" component={SupportPage} />
-              <Route path="/news" component={NewsPage} />
-              <Route path="/healing-library" component={HealingLibraryPage} />
-              <Route path="/calming-scenes" component={CalmingScenesPage} />
-              <Route path="/breathing" component={BreathingExercisesPage} />
-              <Route path="/grounding" component={GroundingTechniquesPage} />
-              <Route path="/affirmations" component={AffirmationsPage} />
-              <Route path="/meditation" component={MeditationGuidePage} />
-              <Route path="/self-care" component={SelfCareToolkitPage} />
-              <Route path="/glossary" component={WellnessGlossaryPage} />
-              <Route path="/wellness-hub" component={WellnessHubPage} />
-              <Route path="/emotional-intelligence" component={EmotionalIntelligencePage} />
-              <Route path="/sleep-guide" component={SleepGuidePage} />
-              <Route path="/stress-response" component={StressResponseGuidePage} />
-              <Route path="/inner-child" component={InnerChildPage} />
-              <Route path="/body-wellness" component={BodyWellnessPage} />
-              <Route path="/soul-wellness" component={SoulWellnessPage} />
-              <Route path="/research" component={ResearchEvidencePage} />
-              <Route path="/healing-journeys" component={HealingJourneysPage} />
-              <Route path="/behavior-change" component={BehaviorChangePage} />
-              <Route path="/how-to-guides" component={HowToGuidesPage} />
-              <Route path="/daily-routines" component={DailyRoutinesPage} />
-              <Route path="/cognitive-tools" component={CognitiveToolsPage} />
-              <Route path="/glossary-full" component={GlossaryPage} />
-              <Route path="/professional-resources" component={ResourcesPage} />
-              <Route path="/content-index" component={ContentIndexPage} />
-              <Route path="/examples" component={ExamplesPage} />
-              <Route path="/qa" component={QAPage} />
-              <Route path="/mirror">
-                <RouteGuard>
-                  <MirrorPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/community">
-                <RouteGuard>
-                  <CommunityPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/community/discussion/:id">
-                <RouteGuard>
-                  <DiscussionPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/tools">
-                <RouteGuard>
-                  <ToolsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/ritual">
-                <RouteGuard>
-                  <DailyRitualPage />
-                </RouteGuard>
-              </Route>
+              <Route path="/profile">{() => <ConfigRoute route="/profile" />}</Route>
+              <Route path="/billing">{() => <ConfigRoute route="/billing" />}</Route>
+              <Route path="/overview">{() => <ConfigRoute route="/overview" />}</Route>
+              <Route path="/insights">{() => <ConfigRoute route="/insights" />}</Route>
+
+              {/* Wellness Pages - Config Driven */}
+              <Route path="/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
+              <Route path="/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
+              <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+              <Route path="/sleep-guide">{() => <ConfigRoute route="/sleep-guide" />}</Route>
+              <Route path="/stress-response">{() => <ConfigRoute route="/stress-response" />}</Route>
+              <Route path="/emotional-intelligence">{() => <ConfigRoute route="/emotional-intelligence" />}</Route>
+
+              {/* Healing Pages - Config Driven */}
+              <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
+              <Route path="/healing-library">{() => <ConfigRoute route="/healing-library" />}</Route>
+              <Route path="/healing-journeys">{() => <ConfigRoute route="/healing-journeys" />}</Route>
+              <Route path="/body-wellness">{() => <ConfigRoute route="/body-wellness" />}</Route>
+              <Route path="/soul-wellness">{() => <ConfigRoute route="/soul-wellness" />}</Route>
+
+              {/* Wisdom Pages - Protected */}
               <Route path="/wisdom">
-                <RouteGuard>
-                  <WisdomToolsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/advanced">
-                <RouteGuard>
-                  <AdvancedToolsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/mastery">
-                <RouteGuard>
-                  <MasteryToolsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/atlas">
-                <RouteGuard>
-                  <AtlasDashboard />
-                </RouteGuard>
-              </Route>
-              <Route path="/strategy-maps">
-                <RouteGuard>
-                  <StrategyMapsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/collaborative-lab">
-                <RouteGuard>
-                  <CollaborativeLabPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/resilience">
-                <RouteGuard>
-                  <ResilienceMetricsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/companion">
-                <RouteGuard>
-                  <AdaptiveCompanionPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/knowledge-synthesis">
-                <RouteGuard>
-                  <KnowledgeSynthesisPage />
-                </RouteGuard>
+                <ProtectedRoute><WisdomToolsPage /></ProtectedRoute>
               </Route>
               <Route path="/wisdom-practices">
-                <RouteGuard>
-                  <WisdomPracticesPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/growth-analytics">
-                <RouteGuard>
-                  <GrowthAnalyticsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/guided-journaling">
-                <RouteGuard>
-                  <GuidedJournalingPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/insight-cards">
-                <RouteGuard>
-                  <InsightCardsPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/progress">
-                <RouteGuard>
-                  <ProgressDashboardPage />
-                </RouteGuard>
+                <ProtectedRoute><WisdomPracticesPage /></ProtectedRoute>
               </Route>
               <Route path="/wisdom-synthesis">
-                <RouteGuard>
-                  <WisdomSynthesisPage />
-                </RouteGuard>
-              </Route>
-              <Route path="/cognitive-architecture">
-                <RouteGuard>
-                  <CognitiveArchitecturePage />
-                </RouteGuard>
-              </Route>
-              <Route path="/philosophical-inquiry">
-                <RouteGuard>
-                  <PhilosophicalInquiryPage />
-                </RouteGuard>
+                <ProtectedRoute><WisdomSynthesisPage /></ProtectedRoute>
               </Route>
               <Route path="/daily-wisdom">
-                <RouteGuard>
-                  <DailyWisdomOraclePage />
-                </RouteGuard>
+                <ProtectedRoute><DailyWisdomOraclePage /></ProtectedRoute>
               </Route>
-              <Route path="/systems-thinking">
-                <RouteGuard>
-                  <SystemsThinkingPage />
-                </RouteGuard>
+
+              {/* Advanced Tools - Protected */}
+              <Route path="/tools">
+                <ProtectedRoute><ToolsPage /></ProtectedRoute>
+              </Route>
+              <Route path="/advanced">
+                <ProtectedRoute><AdvancedToolsPage /></ProtectedRoute>
+              </Route>
+              <Route path="/mastery">
+                <ProtectedRoute><MasteryToolsPage /></ProtectedRoute>
+              </Route>
+              <Route path="/ritual">
+                <ProtectedRoute><DailyRitualPage /></ProtectedRoute>
+              </Route>
+              <Route path="/atlas">
+                <ProtectedRoute><AtlasDashboard /></ProtectedRoute>
+              </Route>
+              <Route path="/strategy-maps">
+                <ProtectedRoute><StrategyMapsPage /></ProtectedRoute>
               </Route>
               <Route path="/meta-learning">
-                <RouteGuard>
-                  <MetaLearningPage />
-                </RouteGuard>
+                <ProtectedRoute><MetaLearningPage /></ProtectedRoute>
+              </Route>
+              <Route path="/systems-thinking">
+                <ProtectedRoute><SystemsThinkingPage /></ProtectedRoute>
+              </Route>
+              <Route path="/cognitive-architecture">
+                <ProtectedRoute><CognitiveArchitecturePage /></ProtectedRoute>
+              </Route>
+              <Route path="/philosophical-inquiry">
+                <ProtectedRoute><PhilosophicalInquiryPage /></ProtectedRoute>
+              </Route>
+              <Route path="/knowledge-synthesis">
+                <ProtectedRoute><KnowledgeSynthesisPage /></ProtectedRoute>
               </Route>
               <Route path="/content-studio">
-                <RouteGuard>
-                  <ContentStudioPage />
-                </RouteGuard>
+                <ProtectedRoute><ContentStudioPage /></ProtectedRoute>
               </Route>
               <Route path="/study-vault">
-                <RouteGuard>
-                  <StudyVaultPage />
-                </RouteGuard>
+                <ProtectedRoute><StudyVaultPage /></ProtectedRoute>
               </Route>
               <Route path="/elite-tools">
-                <RouteGuard>
-                  <EliteToolsDashboard />
-                </RouteGuard>
+                <ProtectedRoute><EliteToolsDashboard /></ProtectedRoute>
+              </Route>
+              <Route path="/resilience">
+                <ProtectedRoute><ResilienceMetricsPage /></ProtectedRoute>
+              </Route>
+              <Route path="/companion">
+                <ProtectedRoute><AdaptiveCompanionPage /></ProtectedRoute>
+              </Route>
+              <Route path="/collaborative-lab">
+                <ProtectedRoute><CollaborativeLabPage /></ProtectedRoute>
+              </Route>
+              <Route path="/growth-analytics">
+                <ProtectedRoute><GrowthAnalyticsPage /></ProtectedRoute>
+              </Route>
+              <Route path="/guided-journaling">
+                <ProtectedRoute><GuidedJournalingPage /></ProtectedRoute>
+              </Route>
+              <Route path="/insight-cards">
+                <ProtectedRoute><InsightCardsPage /></ProtectedRoute>
+              </Route>
+              <Route path="/progress">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
+              <Route path="/mirror">
+                <ProtectedRoute><MirrorPage /></ProtectedRoute>
               </Route>
 
-              {/* Legal routes */}
-              <Route path="/ethics" component={Ethics} />
-              <Route path="/disclaimer" component={Disclaimer} />
-              <Route path="/terms" component={Terms} />
-              <Route path="/privacy" component={Privacy} />
-              <Route path="/legal" component={Legal} />
-              <Route path="/safety" component={SafetyPage} />
+              {/* Community Routes */}
+              <Route path="/community">
+                <ProtectedRoute><CommunityPage /></ProtectedRoute>
+              </Route>
+              <Route path="/community/discussion/:id">
+                <ProtectedRoute><DiscussionPage /></ProtectedRoute>
+              </Route>
+              <Route path="/social">{() => <ConfigRoute route="/social" />}</Route>
 
-              {/* Fallback */}
-              <Route component={NotFound} />
+              {/* Blog & Content - Config Driven */}
+              <Route path="/blog">{() => <ConfigRoute route="/blog" />}</Route>
+              <Route path="/blog/:slug" component={BlogPost} />
+              <Route path="/write">
+                <ProtectedRoute><BlogEditor /></ProtectedRoute>
+              </Route>
+              <Route path="/news">{() => <ConfigRoute route="/news" />}</Route>
+              <Route path="/research">{() => <ConfigRoute route="/research" />}</Route>
+              <Route path="/glossary">{() => <ConfigRoute route="/glossary" />}</Route>
+              <Route path="/glossary-full">{() => <ConfigRoute route="/glossary-full" />}</Route>
+              <Route path="/how-to-guides">{() => <ConfigRoute route="/how-to-guides" />}</Route>
+              <Route path="/daily-routines">{() => <ConfigRoute route="/daily-routines" />}</Route>
+              <Route path="/cognitive-tools">{() => <ConfigRoute route="/cognitive-tools" />}</Route>
+              <Route path="/behavior-change">{() => <ConfigRoute route="/behavior-change" />}</Route>
+              <Route path="/wellness-hub">{() => <ConfigRoute route="/wellness-hub" />}</Route>
+              <Route path="/content-index">{() => <ConfigRoute route="/content-index" />}</Route>
+              <Route path="/examples">{() => <ConfigRoute route="/examples" />}</Route>
+              <Route path="/professional-resources">{() => <ConfigRoute route="/professional-resources" />}</Route>
+
+              {/* Support Pages - Config Driven */}
+              <Route path="/faq">{() => <ConfigRoute route="/faq" />}</Route>
+              <Route path="/support">{() => <ConfigRoute route="/support" />}</Route>
+              <Route path="/resources">{() => <ConfigRoute route="/resources" />}</Route>
+              <Route path="/contact">{() => <ConfigRoute route="/contact" />}</Route>
+              <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
+
+              {/* Admin Routes */}
+              <Route path="/admin">
+                <ProtectedRoute><Admin /></ProtectedRoute>
+              </Route>
+              <Route path="/content-admin">
+                <ProtectedRoute><ContentAdminDashboard /></ProtectedRoute>
+              </Route>
+              <Route path="/crm">
+                <ProtectedRoute><CRMPage /></ProtectedRoute>
+              </Route>
+              <Route path="/control">{() => <ConfigRoute route="/control" />}</Route>
+              <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
+              <Route path="/publishing">{() => <ConfigRoute route="/publishing" />}</Route>
+              <Route path="/qa">{() => <ConfigRoute route="/qa" />}</Route>
+              <Route path="/design-system">{() => <ConfigRoute route="/design-system" />}</Route>
+              <Route path="/wireframes">{() => <ConfigRoute route="/wireframes" />}</Route>
+              <Route path="/design-dashboard">{() => <ConfigRoute route="/design-dashboard" />}</Route>
+
+              {/* Legal Pages - Config Driven */}
+              <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
+              <Route path="/tos">{() => <ConfigRoute route="/tos" />}</Route>
+              <Route path="/privacy">{() => <ConfigRoute route="/privacy" />}</Route>
+              <Route path="/legal">{() => <ConfigRoute route="/legal" />}</Route>
+              <Route path="/ethics">{() => <ConfigRoute route="/ethics" />}</Route>
+              <Route path="/disclaimer">{() => <ConfigRoute route="/disclaimer" />}</Route>
+              <Route path="/safety">{() => <ConfigRoute route="/safety" />}</Route>
+              <Route path="/accessibility">{() => <ConfigRoute route="/accessibility" />}</Route>
+              <Route path="/cookies">{() => <ConfigRoute route="/cookies" />}</Route>
+
+              {/* Fallback - Config Driven Not Found */}
+              <Route>{() => <ConfigRoute route="/not-found" />}</Route>
             </Switch>
           </Suspense>
           </main>
