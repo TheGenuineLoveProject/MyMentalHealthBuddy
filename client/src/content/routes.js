@@ -1761,70 +1761,205 @@ const rawRoutes = [
   // =========================================================================
   {
     route: '/wellness',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Wellness Home',
     title: 'Wellness — The Genuine Love Project',
     description: 'Your complete wellness toolkit for mind, body, and spirit.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Holistic Wellness',
       title: 'Nurture every part of',
       titleHighlight: 'yourself.',
       subtitle: 'Tools and practices for complete well-being.',
-      primaryCta: { label: 'Explore Tools', href: '#tools' },
-      secondaryCta: { label: 'Today\'s Practice', href: '/today' }
+      primaryCta: { label: 'Start Now', href: '/breathing' },
+      secondaryCta: { label: 'Browse All', href: '/wellness-hub' }
+    },
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Wind',
+        title: 'One-Minute Start',
+        subtitle: 'A tiny practice you can do right now.',
+        steps: [
+          'Take one slow breath in through your nose.',
+          'Let it out gently through your mouth.',
+          'Notice how your body feels. That is enough.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Wellness practices are gentle invitations, not requirements. If anything feels overwhelming, pause. You can always return later.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
     }
   },
   {
     route: '/wellness-hub',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Wellness Hub',
     title: 'Wellness Hub — The Genuine Love Project',
     description: 'Central hub for all wellness tools and practices.',
+    tone: 'practice',
     hero: {
       eyebrow: 'All-in-One',
       title: 'Your wellness',
       titleHighlight: 'headquarters.',
       subtitle: 'Everything you need for holistic well-being in one place.',
-      primaryCta: { label: 'Browse All', href: '#all' },
-      secondaryCta: { label: 'Recommended', href: '#recommended' }
+      primaryCta: { label: 'Start a Practice', href: '/breathing' },
+      secondaryCta: { label: 'Browse All', href: '#all' }
+    },
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Heart',
+        title: 'Quick Grounding',
+        subtitle: 'Connect with your body right now.',
+        steps: [
+          'Feel your feet on the floor.',
+          'Name three things you can see.',
+          'Take one slow breath.'
+        ],
+        cta: { label: 'More Grounding', href: '/grounding' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'There is no pressure to do everything. Start with what feels gentle and manageable.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
     }
   },
   {
     route: '/healing-library',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Healing Library',
     title: 'Healing Library — The Genuine Love Project',
     description: 'A comprehensive library of healing resources and modalities.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Knowledge Base',
       title: 'Your library of',
       titleHighlight: 'healing wisdom.',
       subtitle: 'Evidence-based resources for your healing journey.',
-      primaryCta: { label: 'Browse Library', href: '#library' },
-      secondaryCta: { label: 'Recommended', href: '#recommended' }
+      primaryCta: { label: 'Start Reading', href: '#library' },
+      secondaryCta: { label: 'Browse Topics', href: '#topics' }
+    },
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'BookOpen',
+        title: 'Micro-Learning',
+        subtitle: 'One small insight to carry with you today.',
+        steps: [
+          'Pick any topic that calls to you.',
+          'Read just the first paragraph.',
+          'Notice if any word or phrase stands out.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Learning about healing can sometimes bring up difficult feelings. Take breaks as needed.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
     }
   },
   {
     route: '/calming-scenes',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Calming Scenes',
     title: 'Calming Scenes — The Genuine Love Project',
     description: 'Immersive visual and audio experiences for relaxation.',
+    tone: 'practice',
     hero: {
       eyebrow: 'Peaceful Escapes',
       title: 'Find serenity in',
       titleHighlight: 'beautiful places.',
       subtitle: 'Immersive scenes to calm your mind and soothe your soul.',
-      primaryCta: { label: 'Explore Scenes', href: '#scenes' },
+      primaryCta: { label: 'Start Watching', href: '#scenes' },
       secondaryCta: { label: 'Sleep Sounds', href: '#sounds' }
+    },
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Eye',
+        title: 'Quick Visual Escape',
+        subtitle: 'Let your eyes rest on something peaceful.',
+        steps: [
+          'Choose a scene that feels soothing.',
+          'Let your gaze soften.',
+          'Breathe slowly as you watch.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Sometimes we need distraction; sometimes we need presence. Both are valid.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
     }
   },
   {
     route: '/breathing',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Breathing Exercises',
     title: 'Breathing Exercises — The Genuine Love Project',
     description: 'Evidence-based breathing practices to help regulate your nervous system. Grounded in research on vagal tone and respiratory science.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Wind',
+        title: 'One-Minute Calm',
+        subtitle: 'The simplest way to start.',
+        steps: [
+          'Breathe in slowly through your nose (count to 4).',
+          'Hold gently for a moment.',
+          'Breathe out slowly through your mouth (count to 4).'
+        ],
+        cta: { label: 'Try It Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'Activity',
+        title: 'Box Breathing Practice',
+        subtitle: 'A technique used by first responders.',
+        steps: [
+          'Breathe in for 4 counts.',
+          'Hold for 4 counts.',
+          'Breathe out for 4 counts.',
+          'Hold empty for 4 counts.',
+          'Repeat for 5 minutes.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Brain',
+        title: 'Heart Rate Variability Training',
+        subtitle: 'Advanced practice for nervous system regulation.',
+        steps: [
+          'Use a slow 5-6 breaths per minute rhythm.',
+          'Extend your exhale longer than your inhale.',
+          'Practice for 10-20 minutes daily.',
+          'Consider HRV biofeedback devices for measurement.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'If you feel dizzy or uncomfortable, stop and breathe normally. These practices are supportive tools, not medical treatment.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     safetyNotice: {
       type: 'supportive',
       text: 'These practices are supportive tools, not medical treatment. If you feel dizzy or uncomfortable, stop and breathe normally. For persistent breathing difficulties, please consult a healthcare provider.'
@@ -1939,10 +2074,58 @@ const rawRoutes = [
   },
   {
     route: '/grounding',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Grounding',
     title: 'Grounding Techniques — The Genuine Love Project',
     description: 'Evidence-based grounding practices to anchor you in the present moment. Drawn from somatic therapy and mindfulness research.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Target',
+        title: '5-4-3-2-1 Grounding',
+        subtitle: 'Use your senses to come back to now.',
+        steps: [
+          'Name 5 things you can see.',
+          'Name 4 things you can touch.',
+          'Name 3 things you can hear.'
+        ],
+        cta: { label: 'Start Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'Leaf',
+        title: 'Body Scan Grounding',
+        subtitle: 'Feel your body from feet to head.',
+        steps: [
+          'Start at your feet. Notice how they feel.',
+          'Slowly move attention up through your legs, belly, chest.',
+          'Notice your arms, neck, and face.',
+          'Take a breath and open your eyes.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Shield',
+        title: 'Somatic Anchoring',
+        subtitle: 'Advanced body-based presence practice.',
+        steps: [
+          'Find a comfortable seated position.',
+          'Press your feet firmly into the floor.',
+          'Place one hand on your chest, one on your belly.',
+          'Breathe slowly, feeling both hands rise and fall.',
+          'Stay here for 10-20 minutes.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Grounding can sometimes bring up difficult feelings. If you feel overwhelmed, pause and try just breathing slowly.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Breathing Exercise', href: '/breathing' }
+      ]
+    },
     safetyNotice: {
       type: 'supportive',
       text: 'Grounding is a supportive skill, not therapy. If you experience persistent dissociation, flashbacks, or distress, please reach out to a mental health professional.'
@@ -1952,7 +2135,7 @@ const rawRoutes = [
       title: 'Return to',
       titleHighlight: 'the here and now.',
       subtitle: 'When you feel disconnected, overwhelmed, or far away from yourself, these gentle techniques can help you feel more present. You can use them anytime, anywhere.',
-      primaryCta: { label: 'Try a Grounding Exercise', href: '#exercises' },
+      primaryCta: { label: 'Start Grounding', href: '#exercises' },
       secondaryCta: { label: 'Quick Reset', href: '#quick' }
     },
     modules: [
@@ -2015,10 +2198,57 @@ const rawRoutes = [
   },
   {
     route: '/affirmations',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Affirmations',
     title: 'Affirmations — The Genuine Love Project',
     description: 'Supportive self-statements rooted in self-compassion research. A gentle practice for building a kinder inner voice.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Heart',
+        title: 'One Kind Statement',
+        subtitle: 'Start with just one gentle phrase.',
+        steps: [
+          'Place your hand on your heart.',
+          'Say quietly: "I am doing my best."',
+          'Take a breath and let the words settle.'
+        ],
+        cta: { label: 'Try It Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'RefreshCw',
+        title: 'Morning Affirmation Ritual',
+        subtitle: 'A brief daily practice.',
+        steps: [
+          'Choose 3 affirmations that feel true.',
+          'Read each one slowly, out loud if comfortable.',
+          'Notice any feelings that arise without judgment.',
+          'Repeat daily for best results.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'BookOpen',
+        title: 'Personalized Affirmation Writing',
+        subtitle: 'Create statements that resonate deeply.',
+        steps: [
+          'Reflect on a struggle you face.',
+          'Write what you wish someone would say to you.',
+          'Reframe it as an "I" statement.',
+          'Practice this affirmation daily for a week.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'If affirmations feel forced or bring up difficult feelings, that is completely normal. Go gently. You can pause anytime.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     safetyNotice: {
       type: 'supportive',
       text: 'Affirmations are one tool among many. If positive statements feel forced or bring up difficult feelings, that is normal—go gently. This is not a substitute for professional support.'
@@ -2028,7 +2258,7 @@ const rawRoutes = [
       title: 'Speak to yourself with',
       titleHighlight: 'kindness.',
       subtitle: 'Affirmations are not about forcing positivity. They are small reminders that you are allowed to be gentle with yourself. Research on self-compassion suggests this practice can reduce self-criticism over time.',
-      primaryCta: { label: 'Try an Affirmation', href: '#exercises' },
+      primaryCta: { label: 'Start Practice', href: '#exercises' },
       secondaryCta: { label: 'Learn the Approach', href: '#approach' }
     },
     modules: [
@@ -2091,10 +2321,60 @@ const rawRoutes = [
   },
   {
     route: '/meditation',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Meditation',
     title: 'Meditation Guide — The Genuine Love Project',
     description: 'Accessible meditation practices grounded in mindfulness research. Start with just one minute—no experience needed.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Moon',
+        title: 'One-Minute Stillness',
+        subtitle: 'The simplest meditation there is.',
+        steps: [
+          'Close your eyes or soften your gaze.',
+          'Take three slow breaths.',
+          'Just notice what you notice. That is it.'
+        ],
+        cta: { label: 'Try It Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'Brain',
+        title: 'Breath Awareness Meditation',
+        subtitle: 'A foundational mindfulness practice.',
+        steps: [
+          'Find a comfortable seated position.',
+          'Set a gentle timer for 5 minutes.',
+          'Focus on the sensation of breathing.',
+          'When your mind wanders, gently return to breath.',
+          'End by noticing how you feel.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Sparkles',
+        title: 'Loving-Kindness Meditation',
+        subtitle: 'Cultivate compassion for yourself and others.',
+        steps: [
+          'Begin with breath awareness for 2 minutes.',
+          'Silently repeat: "May I be safe. May I be well."',
+          'Extend these wishes to someone you love.',
+          'Extend them to a neutral person.',
+          'Finally, extend them to all beings.',
+          'Practice for 15-20 minutes.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Meditation can sometimes bring up difficult emotions. If it feels too much, stop and try a grounding exercise instead.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     safetyNotice: {
       type: 'supportive',
       text: 'Meditation is a practice, not a cure. If meditation brings up difficult emotions or memories, it is okay to stop. For trauma-related experiences, please work with a trained professional.'
@@ -2104,7 +2384,7 @@ const rawRoutes = [
       title: 'A few moments of',
       titleHighlight: 'stillness.',
       subtitle: 'Meditation does not require emptying your mind. It is simply noticing what is already here. Research shows even brief daily practice can reduce stress and improve focus over time.',
-      primaryCta: { label: 'Try a Short Practice', href: '#exercises' },
+      primaryCta: { label: 'Start Practice', href: '#exercises' },
       secondaryCta: { label: 'Learn the Basics', href: '#basics' }
     },
     modules: [
@@ -2167,10 +2447,58 @@ const rawRoutes = [
   },
   {
     route: '/self-care',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Self-Care',
     title: 'Self-Care Toolkit — The Genuine Love Project',
     description: 'Practical, evidence-informed self-care practices. Small actions that support your nervous system and wellbeing.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Heart',
+        title: 'Micro Self-Care Moment',
+        subtitle: 'One tiny act of kindness for yourself.',
+        steps: [
+          'Take a sip of water slowly.',
+          'Roll your shoulders back.',
+          'Say silently: "I matter."'
+        ],
+        cta: { label: 'Try It Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'Sun',
+        title: 'Morning Check-In',
+        subtitle: 'A brief practice to start your day gently.',
+        steps: [
+          'Before getting out of bed, take 3 breaths.',
+          'Ask yourself: "What do I need today?"',
+          'Choose one small thing to prioritize.',
+          'Set an intention for self-compassion.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Calendar',
+        title: 'Self-Care Audit',
+        subtitle: 'Reflect on how you are caring for yourself.',
+        steps: [
+          'List the areas: sleep, food, movement, connection, rest.',
+          'Rate each 1-10 for how nourished you feel.',
+          'Pick the lowest one.',
+          'Commit to one tiny improvement this week.',
+          'Journal about what gets in the way.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Self-care can feel impossible when you are struggling. That is okay. Even noticing you need care is a first step.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     safetyNotice: {
       type: 'supportive',
       text: 'Self-care supports wellbeing but does not replace professional care. If you are struggling with your mental health, please reach out to a qualified provider.'
@@ -2180,7 +2508,7 @@ const rawRoutes = [
       title: 'Self-care is',
       titleHighlight: 'not selfish.',
       subtitle: 'Self-care is not about luxury or indulgence. It is about small, consistent actions that help your body and mind feel safer. Research shows even micro-moments of care can reduce stress.',
-      primaryCta: { label: 'Find a Practice', href: '#exercises' },
+      primaryCta: { label: 'Start Practice', href: '#exercises' },
       secondaryCta: { label: 'Learn the Approach', href: '#approach' }
     },
     modules: [
@@ -2243,10 +2571,57 @@ const rawRoutes = [
   },
   {
     route: '/emotional-intelligence',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Emotional Intelligence',
     title: 'Emotional Intelligence — The Genuine Love Project',
     description: 'Develop awareness and regulation skills. Based on research in emotional intelligence, DBT, and affect science.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Eye',
+        title: 'Emotion Check-In',
+        subtitle: 'Notice what you are feeling right now.',
+        steps: [
+          'Pause and take one breath.',
+          'Ask: "What am I feeling?"',
+          'Name it without judgment: angry, sad, anxious, okay.'
+        ],
+        cta: { label: 'Try It Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'MessageCircle',
+        title: 'Name and Locate',
+        subtitle: 'Where does this emotion live in your body?',
+        steps: [
+          'Name the emotion you are feeling.',
+          'Close your eyes and scan your body.',
+          'Notice where you feel it: chest, stomach, throat?',
+          'Breathe gently into that area.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Brain',
+        title: 'Emotion Journaling',
+        subtitle: 'Reflect on patterns over time.',
+        steps: [
+          'At the end of each day, write 3 emotions you felt.',
+          'Note what triggered each one.',
+          'Notice patterns after a week.',
+          'Reflect: What are my emotional themes?'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Exploring emotions can bring up difficult feelings. Go slowly and take breaks as needed.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     safetyNotice: {
       type: 'supportive',
       text: 'Emotional awareness is a skill that develops over time. If exploring emotions brings up significant distress, please work with a mental health professional.'
@@ -2256,7 +2631,7 @@ const rawRoutes = [
       title: 'Understand and navigate',
       titleHighlight: 'your emotions.',
       subtitle: 'Emotional intelligence is not about controlling feelings. It is about noticing them, naming them, and responding with awareness. These skills can be learned at any age.',
-      primaryCta: { label: 'Try an Exercise', href: '#exercises' },
+      primaryCta: { label: 'Start Practice', href: '#exercises' },
       secondaryCta: { label: 'Learn the Framework', href: '#framework' }
     },
     modules: [
@@ -2319,25 +2694,122 @@ const rawRoutes = [
   },
   {
     route: '/sleep-guide',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Sleep Guide',
     title: 'Sleep Guide — The Genuine Love Project',
     description: 'Tools and techniques for better, more restful sleep.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Moon',
+        title: 'Pre-Sleep Breath',
+        subtitle: 'Calm your nervous system before bed.',
+        steps: [
+          'Lie down comfortably.',
+          'Breathe in for 4 counts.',
+          'Breathe out for 8 counts.',
+          'Repeat 3 times.'
+        ],
+        cta: { label: 'Try It Now', href: '#routine' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'Star',
+        title: 'Evening Wind-Down',
+        subtitle: 'A brief routine to signal sleep time.',
+        steps: [
+          'Dim the lights in your space.',
+          'Put away screens.',
+          'Do a brief body scan or breathing exercise.',
+          'Set an intention for rest.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Clock',
+        title: 'Sleep Hygiene Audit',
+        subtitle: 'Optimize your sleep environment.',
+        steps: [
+          'Check room temperature (cool is better).',
+          'Reduce light and noise.',
+          'Set a consistent bedtime.',
+          'Limit caffeine after 2pm.',
+          'Journal about sleep patterns for a week.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Sleep difficulties can be frustrating. Be patient with yourself. These are gentle suggestions, not rules.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Restful Nights',
       title: 'Embrace deep,',
       titleHighlight: 'healing sleep.',
       subtitle: 'Evidence-based approaches to improve your sleep quality.',
-      primaryCta: { label: 'Sleep Assessment', href: '#assessment' },
-      secondaryCta: { label: 'Tonight\'s Routine', href: '#routine' }
+      primaryCta: { label: 'Start Practice', href: '#routine' },
+      secondaryCta: { label: 'Sleep Assessment', href: '#assessment' }
     }
   },
   {
     route: '/stress-response',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Stress Response',
     title: 'Stress Response Guide — The Genuine Love Project',
     description: 'Understand fight, flight, freeze, and fawn responses. Polyvagal-informed education for nervous system awareness.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Shield',
+        title: 'Quick State Check',
+        subtitle: 'Notice your nervous system right now.',
+        steps: [
+          'Am I feeling revved up (fight/flight)?',
+          'Am I feeling numb or foggy (freeze)?',
+          'Or am I feeling calm and present (safe)?'
+        ],
+        cta: { label: 'Try It Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'Activity',
+        title: 'Shake It Off',
+        subtitle: 'Release stress energy through movement.',
+        steps: [
+          'Stand up and shake your hands.',
+          'Shake your arms, then your legs.',
+          'Let your whole body shake gently.',
+          'Stop and notice how you feel.',
+          'Take 3 slow breaths.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Brain',
+        title: 'Nervous System Mapping',
+        subtitle: 'Learn your personal stress patterns.',
+        steps: [
+          'Journal about a recent stressful moment.',
+          'What did your body do? (heart racing, freezing, etc.)',
+          'What thoughts came up?',
+          'What helped you return to calm?',
+          'Notice your patterns over time.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Learning about your stress response can sometimes activate it. If you feel overwhelmed, pause and try a grounding exercise.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     safetyNotice: {
       type: 'supportive',
       text: 'Understanding your stress response is educational, not diagnostic. If you experience chronic dysregulation, panic attacks, or trauma symptoms, please work with a trauma-informed therapist.'
@@ -2347,8 +2819,8 @@ const rawRoutes = [
       title: 'Understand your',
       titleHighlight: 'stress response.',
       subtitle: 'Your nervous system is designed to protect you. Sometimes it overprotects. Learning how it works can help you respond with more awareness and self-compassion.',
-      primaryCta: { label: 'Learn the Basics', href: '#basics' },
-      secondaryCta: { label: 'Try a Regulation Exercise', href: '#exercises' }
+      primaryCta: { label: 'Start Practice', href: '#exercises' },
+      secondaryCta: { label: 'Learn the Basics', href: '#basics' }
     },
     modules: [
       { icon: 'Zap', title: 'Fight or Flight', description: 'Mobilization for action—heart racing, muscles tense, ready to move.' },
@@ -2410,10 +2882,59 @@ const rawRoutes = [
   },
   {
     route: '/inner-child',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Inner Child',
     title: 'Inner Child Work — The Genuine Love Project',
     description: 'Gentle, trauma-informed exercises for reconnecting with your younger self. Drawn from IFS and attachment research.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Heart',
+        title: 'A Moment of Acknowledgment',
+        subtitle: 'Simply notice the younger you.',
+        steps: [
+          'Close your eyes gently.',
+          'Picture yourself as a child.',
+          'Say silently: "I see you. You matter."'
+        ],
+        cta: { label: 'Try It Now', href: '#exercises' }
+      },
+      {
+        timeTag: '5 min',
+        icon: 'MessageCircle',
+        title: 'Letter to Your Younger Self',
+        subtitle: 'Write what you wish you could have heard.',
+        steps: [
+          'Think of an age when you struggled.',
+          'Write a short letter to that child.',
+          'Tell them what you wish they knew.',
+          'Read it aloud if comfortable.'
+        ]
+      },
+      {
+        timeTag: 'Deeper',
+        icon: 'Shield',
+        title: 'Safe Place Visualization',
+        subtitle: 'Create an inner sanctuary for your younger self.',
+        steps: [
+          'Close your eyes and breathe slowly.',
+          'Imagine a safe, warm place.',
+          'Invite your younger self there.',
+          'Let them know they are protected.',
+          'Stay as long as feels right.',
+          'Journal about the experience.'
+        ]
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Inner child work can bring up intense emotions. Go very slowly. It is okay to stop and return another time.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     safetyNotice: {
       type: 'trauma-aware',
       text: 'Inner child work can bring up intense emotions or memories. This is supportive content, not therapy. If you have significant trauma history, please work with a trauma-informed therapist before engaging deeply with this material.'
@@ -2428,7 +2949,7 @@ const rawRoutes = [
       title: 'Reconnect with your',
       titleHighlight: 'younger self.',
       subtitle: 'Inside you is a younger version of yourself who may still carry old wounds. Gently acknowledging that part of you can be a path toward healing. This work is tender—go slowly.',
-      primaryCta: { label: 'Try a Gentle Exercise', href: '#exercises' },
+      primaryCta: { label: 'Start Gently', href: '#exercises' },
       secondaryCta: { label: 'Understand the Approach', href: '#approach' }
     },
     modules: [
@@ -2491,40 +3012,107 @@ const rawRoutes = [
   },
   {
     route: '/body-wellness',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Body Wellness',
     title: 'Body Wellness — The Genuine Love Project',
     description: 'Mind-body connection practices for physical and emotional healing.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Activity',
+        title: 'Quick Body Check',
+        subtitle: 'Scan your body for how it feels.',
+        steps: [
+          'Close your eyes and take a breath.',
+          'Notice your shoulders. Are they tense?',
+          'Notice your jaw. Is it clenched?'
+        ],
+        cta: { label: 'Try It Now', href: '#checkin' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Body awareness can sometimes feel uncomfortable. Go at your own pace.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     hero: {
       eyebrow: 'Embodiment',
       title: 'Listen to your',
       titleHighlight: 'body\'s wisdom.',
       subtitle: 'Practices to reconnect with and honor your physical self.',
-      primaryCta: { label: 'Body Check-In', href: '#checkin' },
+      primaryCta: { label: 'Start Practice', href: '#checkin' },
       secondaryCta: { label: 'Movement Practices', href: '#movement' }
     }
   },
   {
     route: '/soul-wellness',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Soul Wellness',
     title: 'Soul Wellness — The Genuine Love Project',
     description: 'Spiritual practices for meaning, purpose, and transcendence.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Sparkles',
+        title: 'Moment of Gratitude',
+        subtitle: 'Connect to something meaningful.',
+        steps: [
+          'Take a slow breath.',
+          'Think of one thing you are grateful for.',
+          'Let that feeling expand in your chest.'
+        ],
+        cta: { label: 'Try It Now', href: '#practices' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Spiritual practices are personal. There is no right or wrong way.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Spiritual Care',
       title: 'Nourish your',
       titleHighlight: 'spirit.',
       subtitle: 'Practices for meaning, purpose, and connection to something greater.',
-      primaryCta: { label: 'Explore Practices', href: '#practices' },
+      primaryCta: { label: 'Start Practice', href: '#practices' },
       secondaryCta: { label: 'Daily Reflection', href: '#reflection' }
     }
   },
   {
     route: '/healing-journeys',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Healing Journeys',
     title: 'Healing Journeys — The Genuine Love Project',
     description: 'Structured healing pathways for specific challenges.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Compass',
+        title: 'Choose Your First Step',
+        subtitle: 'Every journey begins with one step.',
+        steps: [
+          'Look at the available journeys.',
+          'Notice which one calls to you.',
+          'Trust your intuition.'
+        ],
+        cta: { label: 'Browse Paths', href: '#paths' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Healing is not linear. It is okay to start, pause, and return.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Guided Pathways',
       title: 'Structured paths to',
@@ -2536,55 +3124,145 @@ const rawRoutes = [
   },
   {
     route: '/behavior-change',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Behavior Change',
     title: 'Behavior Change — The Genuine Love Project',
     description: 'Evidence-based tools for creating lasting positive changes.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Target',
+        title: 'One Tiny Habit',
+        subtitle: 'Start impossibly small.',
+        steps: [
+          'Pick one tiny behavior (e.g., drink water).',
+          'Attach it to something you already do.',
+          'Celebrate immediately after.'
+        ],
+        cta: { label: 'Start Now', href: '#track' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Change is hard. Start smaller than you think. Progress over perfection.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Lasting Change',
       title: 'Build habits that',
       titleHighlight: 'serve you.',
       subtitle: 'Science-backed approaches to behavioral transformation.',
-      primaryCta: { label: 'Start Tracking', href: '#track' },
+      primaryCta: { label: 'Start Practice', href: '#track' },
       secondaryCta: { label: 'Habit Library', href: '#library' }
     }
   },
   {
     route: '/daily-routines',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Daily Routines',
     title: 'Daily Routines — The Genuine Love Project',
     description: 'Create nurturing daily routines for consistent well-being.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Sun',
+        title: 'Morning Intention',
+        subtitle: 'Set one gentle intention for today.',
+        steps: [
+          'Before getting out of bed, pause.',
+          'Ask: "How do I want to feel today?"',
+          'Set one intention (e.g., "I will be gentle with myself").'
+        ],
+        cta: { label: 'Try It Now', href: '#build' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Routines should serve you, not stress you. Start with one tiny anchor.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Structure for Peace',
       title: 'Routines that',
       titleHighlight: 'nurture you.',
       subtitle: 'Build a daily structure that supports your healing.',
-      primaryCta: { label: 'Build Routine', href: '#build' },
+      primaryCta: { label: 'Start Practice', href: '#build' },
       secondaryCta: { label: 'Templates', href: '#templates' }
     }
   },
   {
     route: '/cognitive-tools',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Cognitive Tools',
     title: 'Cognitive Tools — The Genuine Love Project',
     description: 'Tools for reframing thoughts and managing cognitive patterns.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Brain',
+        title: 'Thought Check',
+        subtitle: 'Notice your thoughts without judgment.',
+        steps: [
+          'Pause and ask: "What am I thinking?"',
+          'Notice the thought without changing it.',
+          'Ask: "Is this thought helping me?"'
+        ],
+        cta: { label: 'Try It Now', href: '#tools' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Changing thought patterns takes time. Be patient with yourself.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     hero: {
       eyebrow: 'Mind Tools',
       title: 'Reshape your',
       titleHighlight: 'thought patterns.',
       subtitle: 'Evidence-based cognitive techniques for mental wellness.',
-      primaryCta: { label: 'Explore Tools', href: '#tools' },
+      primaryCta: { label: 'Start Practice', href: '#tools' },
       secondaryCta: { label: 'Thought Record', href: '#record' }
     }
   },
   {
     route: '/mirror',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Mirror Work',
     title: 'Mirror Work — The Genuine Love Project',
     description: 'Self-love practices using mirror work techniques.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Eye',
+        title: 'Gentle Mirror Moment',
+        subtitle: 'Look at yourself with kindness.',
+        steps: [
+          'Stand in front of a mirror.',
+          'Look into your own eyes gently.',
+          'Say: "I see you. You are doing your best."'
+        ],
+        cta: { label: 'Try It Now', href: '#practice' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Mirror work can bring up strong emotions. Go at your own pace.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true },
+        { label: 'Grounding Exercise', href: '/grounding' }
+      ]
+    },
     hero: {
       eyebrow: 'Self-Reflection',
       title: 'See yourself with',
@@ -2596,40 +3274,107 @@ const rawRoutes = [
   },
   {
     route: '/ritual',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Sacred Rituals',
     title: 'Sacred Rituals — The Genuine Love Project',
     description: 'Create meaningful rituals for healing and transition.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Sparkles',
+        title: 'Micro-Ritual',
+        subtitle: 'A tiny meaningful moment.',
+        steps: [
+          'Light a candle or take a deep breath.',
+          'Set one intention for this moment.',
+          'Blow out the candle or exhale slowly.'
+        ],
+        cta: { label: 'Try It Now', href: '#rituals' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Rituals are personal. There is no wrong way to create meaning.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Intentional Practice',
       title: 'Create rituals that',
       titleHighlight: 'hold meaning.',
       subtitle: 'Mark transitions and honor your journey with sacred practices.',
-      primaryCta: { label: 'Explore Rituals', href: '#rituals' },
+      primaryCta: { label: 'Start Practice', href: '#rituals' },
       secondaryCta: { label: 'Create Your Own', href: '#create' }
     }
   },
   {
     route: '/wisdom',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Wisdom',
     title: 'Wisdom — The Genuine Love Project',
     description: 'Curated wisdom for daily inspiration and reflection.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'BookOpen',
+        title: 'One Insight',
+        subtitle: 'Let one piece of wisdom land.',
+        steps: [
+          'Read today\'s wisdom quote.',
+          'Close your eyes and let it settle.',
+          'Ask: "What does this mean for me today?"'
+        ],
+        cta: { label: 'Today\'s Wisdom', href: '#today' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'Wisdom is meant to inspire, not pressure. Take what resonates.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Daily Wisdom',
       title: 'Ancient wisdom for',
       titleHighlight: 'modern healing.',
       subtitle: 'Timeless insights to illuminate your path.',
-      primaryCta: { label: 'Today\'s Wisdom', href: '#today' },
+      primaryCta: { label: 'Start Practice', href: '#today' },
       secondaryCta: { label: 'Browse Collection', href: '#collection' }
     }
   },
   {
     route: '/wisdom-practices',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Wisdom Practices',
     title: 'Wisdom Practices — The Genuine Love Project',
     description: 'Practical applications of timeless wisdom traditions.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Star',
+        title: 'Ancient Breath',
+        subtitle: 'A practice used for thousands of years.',
+        steps: [
+          'Sit comfortably and close your eyes.',
+          'Breathe in slowly through your nose.',
+          'Breathe out slowly through your nose.',
+          'Repeat 5 times.'
+        ],
+        cta: { label: 'Try It Now', href: '#practice' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'These practices have helped many. Go gently at your own pace.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Applied Wisdom',
       title: 'Practice the',
@@ -2641,16 +3386,38 @@ const rawRoutes = [
   },
   {
     route: '/wisdom-synthesis',
-    category: 'landing',
+    category: 'wellness',
     pageLabel: 'Wisdom Synthesis',
     title: 'Wisdom Synthesis — The Genuine Love Project',
     description: 'Integrate wisdom from multiple traditions into your practice.',
+    tone: 'practice',
+    practices: [
+      {
+        timeTag: '1 min',
+        icon: 'Compass',
+        title: 'Find Your Thread',
+        subtitle: 'What theme connects for you?',
+        steps: [
+          'Notice which traditions call to you.',
+          'Look for a common thread.',
+          'Trust your intuition about what serves you.'
+        ],
+        cta: { label: 'Explore Now', href: '#synthesis' }
+      }
+    ],
+    disclaimer: {
+      title: 'If this feels hard',
+      text: 'You do not need to master everything. Take what helps and leave the rest.',
+      resources: [
+        { label: 'Crisis Support (988)', href: 'tel:988', external: true }
+      ]
+    },
     hero: {
       eyebrow: 'Integration',
       title: 'Synthesize wisdom from',
       titleHighlight: 'many sources.',
       subtitle: 'Draw from the best of all traditions.',
-      primaryCta: { label: 'Explore Synthesis', href: '#synthesis' },
+      primaryCta: { label: 'Start Practice', href: '#synthesis' },
       secondaryCta: { label: 'Create Your Path', href: '#create' }
     }
   },
