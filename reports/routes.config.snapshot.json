@@ -1,9 +1,9 @@
 {
-  "snapshotHash": "084540180c62926200314b0748dd065ad2ee05bb8d96b07083fa171ef8104cb4",
+  "snapshotHash": "0c94fae01896f1ced08e109ece1cc6625d69bd2c88cf90a466ee70503f2245f7",
   "categoryOrder": [
     {
       "letter": "A",
-      "category": "Landing"
+      "category": "Landing & Marketing"
     },
     {
       "letter": "B",
@@ -15,42 +15,38 @@
     },
     {
       "letter": "D",
-      "category": "AI & Chat"
-    },
-    {
-      "letter": "E",
       "category": "Wellness & Healing Tools"
     },
     {
-      "letter": "F",
-      "category": "Advanced & Mastery"
+      "letter": "E",
+      "category": "Advanced & Mastery Tools"
     },
     {
-      "letter": "G",
+      "letter": "F",
       "category": "Content & Learning"
     },
     {
-      "letter": "H",
+      "letter": "G",
       "category": "Community & Social"
     },
     {
-      "letter": "I",
+      "letter": "H",
       "category": "Support & Resources"
     },
     {
-      "letter": "J",
+      "letter": "I",
       "category": "Legal & Policy"
     },
     {
-      "letter": "K",
+      "letter": "J",
       "category": "Account & Settings"
     },
     {
-      "letter": "L",
+      "letter": "K",
       "category": "Admin"
     },
     {
-      "letter": "M",
+      "letter": "L",
       "category": "System & Utility"
     }
   ],
