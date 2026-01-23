@@ -166,7 +166,7 @@ export default function Landing() {
             
             <p className="text-body-lg text-secondary max-w-lg">
               Built for sensitive souls, deep thinkers, and anyone carrying invisible weight. 
-              Process trauma, anxiety, grief, and complex emotions with AI-guided support that's available 24/7—no appointments, no waitlists, no judgment.
+              Explore tools for processing difficult emotions with supportive guidance available 24/7—no appointments, no waitlists, no judgment.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -206,8 +206,8 @@ export default function Landing() {
             <FeatureCard 
               icon={BookOpen}
               label="Guided Journaling"
-              title="Prompts designed by therapists"
-              description="Evidence-based questions that gently guide you toward insight without retraumatization. Process difficult emotions at your own pace, in your own words."
+              title="Trauma-informed prompts"
+              description="Evidence-informed questions that gently guide you toward insight. Process difficult emotions at your own pace, in your own words."
               delay={300}
             />
           </div>
@@ -219,7 +219,7 @@ export default function Landing() {
           <p className="text-body-sm text-tertiary mb-6 text-center">Trusted by people seeking genuine growth</p>
           <div className="glass-card rounded-2xl p-6 max-w-2xl mx-auto">
             <div className="grid grid-cols-3 divide-x divide-sage-200">
-              <StatsCard value="1000+" label="Wellness Tools" />
+              <StatsCard value="100+" label="Wellness Tools" />
               <StatsCard value="24/7" label="AI Support" />
               <StatsCard value="100%" label="Privacy First" />
             </div>
