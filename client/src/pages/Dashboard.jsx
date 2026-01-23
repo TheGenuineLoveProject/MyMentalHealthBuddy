@@ -13,6 +13,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/brand.css";
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -413,6 +414,8 @@ export default function Dashboard() {
               <QuoteBlock variant="card" />
             </div>
           </section>
+
+          <SafetyFooter variant="compact" className="mt-8" />
         </div>
       </div>
     </>
