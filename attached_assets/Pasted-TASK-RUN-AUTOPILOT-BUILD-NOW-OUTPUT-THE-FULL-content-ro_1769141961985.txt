@@ -1,0 +1,210 @@
+TASK: RUN AUTOPILOT BUILD NOW. OUTPUT THE FULL /content/routes.js WITH ALL 119 ROUTE STUBS + CATEGORIES.
+
+NON-NEGOTIABLE:
+- Next.js PAGES ROUTER
+- CSS Modules only
+- AOS + GSAP (AOS once:true; GSAP disabled under prefers-reduced-motion)
+- Sacred background (sacred-pattern overlay + aura gradients)
+- Accessibility (header/nav/main/footer + skip link)
+- Output must compile. NO TODOs. No partials.
+
+GOAL:
+Create/replace /content/routes.js as the single source of truth so EVERY route renders instantly via:
+- /pages/_autopilot.jsx -> getRouteConfig(pathname) -> <PageTemplate config={...} />
+
+REQUIREMENTS FOR /content/routes.js:
+1) Export a complete routes registry:
+- export const routes = [ ...ALL ROUTES BELOW... ]
+Each entry MUST include at minimum:
+{
+  route: "/path",
+  category: "<Category>",
+  pageLabel: "<Human label>",
+  title: "<SEO title>",
+  description: "<SEO description>",
+  hero: { title, copy, primaryCta, secondaryCta },
+  sections: [ ... ],
+  modules: [ ... ],
+  motion: { level: "minimal|calm|rich" }
+}
+Use category presets to fill defaults so each route is “complete” even if only route/category/pageLabel is supplied.
+
+2) Export utilities:
+- export function getRouteConfig(pathname) { ... }
+  - supports exact match
+  - supports aliases via aliasOf (e.g., /home -> /)
+  - supports dynamic patterns:
+    - /blog/:slug
+    - /community/discussion/:id
+  - returns NotFound config for unknown paths
+- export function listRoutesByCategory() { ... }  // returns grouped route list for reporting
+
+3) Category presets (built into routes.js):
+Implement presets keyed by category that auto-generate hero/CTAs/sections/modules:
+- Landing (rich but calm; clarity→safety→action)
+- Authentication (minimal stimulation, step clarity, gentle reassurance)
+- Dashboard & Core (structured, “one next step”, low cognitive load)
+- AI & Chat (supportive, safe tone, calm)
+- Wellness & Healing Tools (practice-first, calming, short actions)
+- Advanced & Mastery (clean, cerebral, warm)
+- Content & Learning (readable, scannable, soft spacing)
+- Community (safe, moderated tone)
+- Support & Resources (clarity, reassurance, easy escalation)
+- Legal & Policy (plain, clear, minimal)
+- Account & Settings (plain, clear)
+- Admin (plain, structured)
+- System & Utility (plain, structured)
+Each preset must define:
+- default title/description
+- default hero title/copy + CTAs
+- default 2–4 sections
+- default 0–6 modules depending on category
+Auth/Legal/System must be minimal.
+
+4) Ensure aliases:
+- /home aliasOf "/"
+- /welcome aliasOf "/"
+(Keep /original-home as its own route.)
+
+5) Output FULL FILE CONTENT of /content/routes.js (not a diff).
+Also output a ROUTE COMPLETION REPORT grouped by category with total counts.
+
+ROUTE LIST (MUST INCLUDE ALL OF THESE):
+Landing & Marketing (7)
+- / (Canva Landing Main)
+- /home (Alias)
+- /welcome (Alias)
+- /original-home (Original Home)
+- /healing (Healing Landing)
+- /pricing (Pricing)
+- /landing (Marketing Landing)
+
+Authentication (6)
+- /login
+- /login/callback
+- /register
+- /forgot-password
+- /reset-password
+- /onboarding
+
+Dashboard & Core (10)
+- /dashboard
+- /crm
+- /today
+- /mood
+- /state
+- /journal
+- /analytics
+- /progress
+- /growth-analytics
+- /guided-journaling
+
+AI & Chat (3)
+- /chat
+- /crisis
+- /companion
+
+Wellness & Healing Tools (24)
+- /wellness
+- /wellness-hub
+- /healing-library
+- /calming-scenes
+- /breathing
+- /grounding
+- /affirmations
+- /meditation
+- /self-care
+- /emotional-intelligence
+- /sleep-guide
+- /stress-response
+- /inner-child
+- /body-wellness
+- /soul-wellness
+- /healing-journeys
+- /behavior-change
+- /daily-routines
+- /cognitive-tools
+- /mirror
+- /ritual
+- /wisdom
+- /wisdom-practices
+- /wisdom-synthesis
+
+Advanced & Mastery (14)
+- /tools
+- /advanced
+- /mastery
+- /elite-tools
+- /atlas
+- /strategy-maps
+- /collaborative-lab
+- /resilience
+- /knowledge-synthesis
+- /cognitive-architecture
+- /philosophical-inquiry
+- /systems-thinking
+- /meta-learning
+- /daily-wisdom
+
+Content & Learning (13)
+- /blog
+- /blog/:slug
+- /write
+- /content-index
+- /content-studio
+- /study-vault
+- /research
+- /how-to-guides
+- /glossary
+- /glossary-full
+- /insight-cards
+- /news
+- /examples
+
+Community & Social (3)
+- /social
+- /community
+- /community/discussion/:id
+
+Support & Resources (5)
+- /faq
+- /resources
+- /support
+- /professional-resources
+- /qa
+
+Legal & Policy (5)
+- /terms
+- /privacy
+- /legal
+- /ethics
+- /disclaimer
+
+Account & Settings (6)
+- /settings
+- /premium
+- /upgrade
+- /account/profile
+- /account/billing
+- /account/settings
+
+Admin (3)
+- /admin
+- /content-admin
+- /control
+
+System & Utility (7)
+- /health
+- /publishing
+- /design-system
+- /wireframes
+- /design-dashboard
+- /safety
+- /* (404 Not Found)
+
+IMPORTANT:
+- No TODOs.
+- Don’t omit any route above.
+- Output full /content/routes.js only after ensuring it is valid JS and exports match imports used elsewhere.
+- Add a final “DONE GATE” checklist and ensure all boxes can be checked.
+FAIL THE RUN if any DONE GATE item is not satisfied.

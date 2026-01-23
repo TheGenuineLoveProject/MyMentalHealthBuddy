@@ -1,3 +1,26 @@
+/**
+ * ============================================================================
+ * ROUTES.JS - Single Source of Truth for All Platform Routes
+ * ============================================================================
+ * 
+ * Config-driven routing system for The Genuine Love Project
+ * 
+ * Features:
+ * - 119 routes + aliases (120 total)
+ * - Category presets with defaults for hero/sections/modules
+ * - Alias resolution (/home -> /)
+ * - Dynamic pattern matching (/blog/:slug, /community/discussion/:id)
+ * - Route protection for authenticated pages
+ * - Motion presets (minimal/calm/rich) per category
+ * 
+ * Usage:
+ *   import { getRouteConfig, listRoutesByCategory } from './routes.js';
+ *   const config = getRouteConfig('/dashboard');
+ *   const grouped = listRoutesByCategory();
+ * 
+ * ============================================================================
+ */
+
 import { 
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf, 
   BookOpen, MessageCircle, Users, Zap, Target, Compass,
@@ -5,28 +28,324 @@ import {
   FileText, Settings, Lock, CreditCard, HelpCircle, Mail,
   Scale, AlertTriangle, Bookmark, Palette, Layout, PenTool,
   BarChart, Calendar, MapPin, Mic, Camera, Video,
-  Database, Code, Terminal, Cloud, Globe, Link
+  Database, Code, Terminal, Cloud, Globe, Link, Home,
+  Feather, Layers, Search, Edit, CheckCircle, XCircle
 } from 'lucide-react';
 
+// ============================================================================
+// CATEGORY DEFINITIONS
+// ============================================================================
+
 export const routeCategories = {
-  landing: 'Landing',
+  landing: 'Landing & Marketing',
   auth: 'Authentication',
-  core: 'Core Experience',
-  wellness: 'Wellness Tools',
-  healing: 'Healing Resources',
-  wisdom: 'Wisdom & Growth',
-  advanced: 'Advanced Tools',
-  community: 'Community',
-  content: 'Content & Resources',
+  core: 'Dashboard & Core',
+  ai: 'AI & Chat',
+  wellness: 'Wellness & Healing Tools',
+  advanced: 'Advanced & Mastery',
+  content: 'Content & Learning',
+  community: 'Community & Social',
+  support: 'Support & Resources',
+  legal: 'Legal & Policy',
+  account: 'Account & Settings',
   admin: 'Admin',
-  legal: 'Legal',
-  support: 'Support'
+  system: 'System & Utility'
 };
 
-export const routes = [
+// ============================================================================
+// CATEGORY PRESETS - Auto-generate defaults per category
+// ============================================================================
+
+const categoryPresets = {
+  landing: {
+    motion: { level: 'rich' },
+    protected: false,
+    defaultHero: {
+      eyebrow: 'Welcome to Genuine Love',
+      title: 'Your sanctuary for',
+      titleHighlight: 'emotional healing.',
+      subtitle: 'A trauma-informed space for healing, growth, and self-discovery.',
+      primaryCta: { label: 'Begin Your Journey', href: '/register' },
+      secondaryCta: { label: 'Learn More', href: '#features' }
+    },
+    defaultSections: [
+      {
+        id: 'features',
+        eyebrow: 'What We Offer',
+        title: 'Healing tools designed with care',
+        subtitle: 'Evidence-based approaches wrapped in compassion.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Heart', title: 'Self-Compassion', text: 'Learn to treat yourself with kindness.' },
+          { icon: 'Brain', title: 'Emotional Awareness', text: 'Understand your inner landscape.' },
+          { icon: 'Shield', title: 'Safe Space', text: 'A private sanctuary for your journey.' },
+          { icon: 'Sparkles', title: 'Guided Support', text: 'Tools and resources when you need them.' }
+        ]
+      }
+    ]
+  },
+  
+  auth: {
+    motion: { level: 'minimal' },
+    protected: false,
+    isAuthPage: true,
+    defaultHero: {
+      eyebrow: 'Welcome',
+      title: 'Continue your',
+      titleHighlight: 'healing journey.',
+      subtitle: 'A safe space awaits you.',
+      primaryCta: { label: 'Continue', href: '#form' },
+      secondaryCta: { label: 'Need Help?', href: '/support' }
+    },
+    defaultSections: []
+  },
+  
+  core: {
+    motion: { level: 'calm' },
+    protected: true,
+    defaultHero: {
+      eyebrow: 'Your Sanctuary',
+      title: 'Welcome to your',
+      titleHighlight: 'healing space.',
+      subtitle: 'Everything you need, all in one place.',
+      primaryCta: { label: 'Get Started', href: '#main' },
+      secondaryCta: { label: 'View Progress', href: '/progress' }
+    },
+    defaultSections: [
+      {
+        id: 'quick-actions',
+        eyebrow: 'Quick Actions',
+        title: 'Your daily tools',
+        subtitle: 'Simple steps for meaningful progress.',
+        variant: 'plain',
+        cards: [
+          { icon: 'BookOpen', title: 'Journal', text: 'Reflect and process.' },
+          { icon: 'Activity', title: 'Check-In', text: 'Track your state.' },
+          { icon: 'MessageCircle', title: 'Chat', text: 'Talk it through.' },
+          { icon: 'Target', title: 'Goals', text: 'Small steps forward.' }
+        ]
+      }
+    ]
+  },
+  
+  ai: {
+    motion: { level: 'calm' },
+    protected: true,
+    defaultHero: {
+      eyebrow: 'AI Support',
+      title: 'Compassionate',
+      titleHighlight: 'guidance awaits.',
+      subtitle: 'Trauma-informed AI support for your healing journey.',
+      primaryCta: { label: 'Start Conversation', href: '#chat' },
+      secondaryCta: { label: 'Learn About Safety', href: '/safety' }
+    },
+    defaultSections: []
+  },
+  
+  wellness: {
+    motion: { level: 'calm' },
+    protected: false,
+    defaultHero: {
+      eyebrow: 'Wellness Practice',
+      title: 'Nurture your',
+      titleHighlight: 'well-being.',
+      subtitle: 'Gentle practices for mind, body, and spirit.',
+      primaryCta: { label: 'Start Practice', href: '#practice' },
+      secondaryCta: { label: 'Browse All', href: '/wellness-hub' }
+    },
+    defaultSections: [
+      {
+        id: 'practices',
+        eyebrow: 'Available Practices',
+        title: 'Choose your path',
+        subtitle: 'Find what resonates with you today.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Activity', title: 'Breathwork', text: 'Calm your nervous system.' },
+          { icon: 'Leaf', title: 'Grounding', text: 'Return to the present.' },
+          { icon: 'Heart', title: 'Self-Care', text: 'Nurture yourself.' },
+          { icon: 'Moon', title: 'Rest', text: 'Honor your need for quiet.' }
+        ]
+      }
+    ]
+  },
+  
+  advanced: {
+    motion: { level: 'calm' },
+    protected: true,
+    defaultHero: {
+      eyebrow: 'Advanced Practice',
+      title: 'Deepen your',
+      titleHighlight: 'understanding.',
+      subtitle: 'Sophisticated tools for those ready to go deeper.',
+      primaryCta: { label: 'Explore Tools', href: '#tools' },
+      secondaryCta: { label: 'View Progress', href: '/progress' }
+    },
+    defaultSections: [
+      {
+        id: 'modules',
+        eyebrow: 'Learning Modules',
+        title: 'Advanced concepts',
+        subtitle: 'Expand your healing toolkit.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Brain', title: 'Cognitive Tools', text: 'Reshape thought patterns.' },
+          { icon: 'Compass', title: 'Strategy Maps', text: 'Navigate complexity.' },
+          { icon: 'Layers', title: 'Systems Thinking', text: 'See the bigger picture.' },
+          { icon: 'Lightbulb', title: 'Insights', text: 'Discover new perspectives.' }
+        ]
+      }
+    ]
+  },
+  
+  content: {
+    motion: { level: 'calm' },
+    protected: false,
+    defaultHero: {
+      eyebrow: 'Learning Resources',
+      title: 'Knowledge for',
+      titleHighlight: 'your journey.',
+      subtitle: 'Articles, guides, and resources to support your growth.',
+      primaryCta: { label: 'Start Reading', href: '#content' },
+      secondaryCta: { label: 'Browse Topics', href: '#topics' }
+    },
+    defaultSections: [
+      {
+        id: 'topics',
+        eyebrow: 'Topics',
+        title: 'Explore by theme',
+        subtitle: 'Find what speaks to you.',
+        variant: 'plain',
+        cards: [
+          { icon: 'BookOpen', title: 'Articles', text: 'In-depth explorations.' },
+          { icon: 'FileText', title: 'Guides', text: 'Step-by-step support.' },
+          { icon: 'Bookmark', title: 'Resources', text: 'Curated collections.' },
+          { icon: 'Search', title: 'Search', text: 'Find what you need.' }
+        ]
+      }
+    ]
+  },
+  
+  community: {
+    motion: { level: 'calm' },
+    protected: true,
+    defaultHero: {
+      eyebrow: 'Community',
+      title: 'You are',
+      titleHighlight: 'not alone.',
+      subtitle: 'Connect with others on similar journeys in a safe, moderated space.',
+      primaryCta: { label: 'Join Community', href: '#community' },
+      secondaryCta: { label: 'Community Guidelines', href: '/ethics' }
+    },
+    defaultSections: []
+  },
+  
+  support: {
+    motion: { level: 'minimal' },
+    protected: false,
+    defaultHero: {
+      eyebrow: 'We\'re Here to Help',
+      title: 'Get the support',
+      titleHighlight: 'you need.',
+      subtitle: 'Clear answers and resources for your questions.',
+      primaryCta: { label: 'Find Answers', href: '#faq' },
+      secondaryCta: { label: 'Contact Us', href: '/support' }
+    },
+    defaultSections: []
+  },
+  
+  legal: {
+    motion: { level: 'minimal' },
+    protected: false,
+    defaultHero: {
+      eyebrow: 'Legal Information',
+      title: 'Clear and',
+      titleHighlight: 'transparent.',
+      subtitle: 'Our policies explained in plain language.',
+      primaryCta: { label: 'Read Document', href: '#content' },
+      secondaryCta: { label: 'Contact Legal', href: '/support' }
+    },
+    defaultSections: []
+  },
+  
+  account: {
+    motion: { level: 'minimal' },
+    protected: true,
+    defaultHero: {
+      eyebrow: 'Your Account',
+      title: 'Manage your',
+      titleHighlight: 'settings.',
+      subtitle: 'Control your experience and preferences.',
+      primaryCta: { label: 'Edit Settings', href: '#settings' },
+      secondaryCta: { label: 'Get Help', href: '/support' }
+    },
+    defaultSections: []
+  },
+  
+  admin: {
+    motion: { level: 'minimal' },
+    protected: true,
+    adminOnly: true,
+    defaultHero: {
+      eyebrow: 'Administration',
+      title: 'Platform',
+      titleHighlight: 'management.',
+      subtitle: 'Tools for platform administration.',
+      primaryCta: { label: 'View Dashboard', href: '#dashboard' },
+      secondaryCta: { label: 'View Logs', href: '#logs' }
+    },
+    defaultSections: []
+  },
+  
+  system: {
+    motion: { level: 'minimal' },
+    protected: false,
+    defaultHero: {
+      eyebrow: 'System',
+      title: 'Platform',
+      titleHighlight: 'utilities.',
+      subtitle: 'System information and tools.',
+      primaryCta: { label: 'View Status', href: '#status' },
+      secondaryCta: { label: 'Get Help', href: '/support' }
+    },
+    defaultSections: []
+  }
+};
+
+// ============================================================================
+// HELPER: Apply category preset to route
+// ============================================================================
+
+function applyPreset(route) {
+  const preset = categoryPresets[route.category] || categoryPresets.system;
+  
+  return {
+    ...route,
+    motion: route.motion || preset.motion,
+    protected: route.protected ?? preset.protected,
+    adminOnly: route.adminOnly ?? preset.adminOnly,
+    isAuthPage: route.isAuthPage ?? preset.isAuthPage,
+    hero: route.hero || {
+      ...preset.defaultHero,
+      title: route.pageLabel || preset.defaultHero.title,
+    },
+    sections: route.sections || preset.defaultSections,
+    modules: route.modules || []
+  };
+}
+
+// ============================================================================
+// ROUTES REGISTRY - ALL 119 ROUTES + ALIASES
+// ============================================================================
+
+const rawRoutes = [
+  // =========================================================================
+  // LANDING & MARKETING (7 routes)
+  // =========================================================================
   {
     route: '/',
     category: 'landing',
+    pageLabel: 'Main Landing',
     title: 'The Genuine Love Project — Your Sanctuary for Emotional Healing',
     description: 'A trauma-informed sanctuary for emotional healing. AI-powered therapy tools, inner child work, nervous system regulation, and parts work—all in complete privacy.',
     hero: {
@@ -64,12 +383,39 @@ export const routes = [
           { icon: 'Users', title: 'Community Support', text: 'Connect with others on similar healing journeys.' }
         ]
       }
-    ],
-    protected: false
+    ]
+  },
+  {
+    route: '/home',
+    aliasOf: '/',
+    category: 'landing',
+    pageLabel: 'Home (Alias)'
+  },
+  {
+    route: '/welcome',
+    aliasOf: '/',
+    category: 'landing',
+    pageLabel: 'Welcome (Alias)'
+  },
+  {
+    route: '/original-home',
+    category: 'landing',
+    pageLabel: 'Original Home',
+    title: 'Welcome Home — The Genuine Love Project',
+    description: 'Welcome to your healing sanctuary. Begin your journey to emotional wellness.',
+    hero: {
+      eyebrow: 'Welcome Home',
+      title: 'A gentle space for',
+      titleHighlight: 'healing hearts.',
+      subtitle: 'You\'ve found a safe place to begin or continue your healing journey.',
+      primaryCta: { label: 'Enter Sanctuary', href: '/dashboard' },
+      secondaryCta: { label: 'Learn About Us', href: '#about' }
+    }
   },
   {
     route: '/healing',
     category: 'landing',
+    pageLabel: 'Healing Landing',
     title: 'Healing Hub — The Genuine Love Project',
     description: 'Discover evidence-based healing modalities for trauma recovery, emotional regulation, and personal growth.',
     hero: {
@@ -94,12 +440,60 @@ export const routes = [
           { icon: 'Shield', title: 'Parts Work (IFS)', text: 'Internal Family Systems for self-understanding.' }
         ]
       }
-    ],
-    protected: false
+    ]
   },
+  {
+    route: '/pricing',
+    category: 'landing',
+    pageLabel: 'Pricing',
+    title: 'Pricing — The Genuine Love Project',
+    description: 'Simple, transparent pricing for your healing journey. Free tier available.',
+    hero: {
+      eyebrow: 'Simple Pricing',
+      title: 'Invest in your',
+      titleHighlight: 'healing.',
+      subtitle: 'Accessible pricing because everyone deserves support on their healing journey.',
+      primaryCta: { label: 'Get Started Free', href: '/register' },
+      secondaryCta: { label: 'Compare Plans', href: '#plans' }
+    },
+    sections: [
+      {
+        id: 'plans',
+        eyebrow: 'Choose Your Path',
+        title: 'Plans for every journey',
+        subtitle: 'Start free, upgrade when you\'re ready.',
+        variant: 'plain',
+        cards: [
+          { icon: 'Heart', title: 'Free', text: 'Basic tools to begin your journey.' },
+          { icon: 'Star', title: 'Premium', text: 'Full access to all healing tools.' },
+          { icon: 'Sparkles', title: 'Lifetime', text: 'One-time investment, forever access.' }
+        ]
+      }
+    ]
+  },
+  {
+    route: '/landing',
+    category: 'landing',
+    pageLabel: 'Marketing Landing',
+    title: 'Transform Your Life — The Genuine Love Project',
+    description: 'Discover the AI-powered mental wellness platform trusted by thousands for healing and growth.',
+    hero: {
+      eyebrow: 'Transform Your Life',
+      title: 'The future of',
+      titleHighlight: 'mental wellness.',
+      subtitle: 'Join thousands who have transformed their relationship with themselves.',
+      primaryCta: { label: 'Start Free Trial', href: '/register' },
+      secondaryCta: { label: 'Watch Demo', href: '#demo' }
+    }
+  },
+  
+  // =========================================================================
+  // AUTHENTICATION (6 routes)
+  // =========================================================================
   {
     route: '/login',
     category: 'auth',
+    pageLabel: 'Sign In',
     title: 'Sign In — The Genuine Love Project',
     description: 'Welcome back to your healing sanctuary. Sign in to continue your journey.',
     hero: {
@@ -109,14 +503,27 @@ export const routes = [
       subtitle: 'Your progress and insights are waiting for you.',
       primaryCta: { label: 'Sign In', href: '#login-form' },
       secondaryCta: { label: 'Create Account', href: '/register' }
-    },
-    sections: [],
-    protected: false,
-    isAuthPage: true
+    }
+  },
+  {
+    route: '/login/callback',
+    category: 'auth',
+    pageLabel: 'Login Callback',
+    title: 'Completing Sign In — The Genuine Love Project',
+    description: 'Completing your sign in process.',
+    hero: {
+      eyebrow: 'One Moment',
+      title: 'Completing',
+      titleHighlight: 'sign in...',
+      subtitle: 'Please wait while we securely complete your authentication.',
+      primaryCta: { label: 'Go to Dashboard', href: '/dashboard' },
+      secondaryCta: { label: 'Need Help?', href: '/support' }
+    }
   },
   {
     route: '/register',
     category: 'auth',
+    pageLabel: 'Create Account',
     title: 'Create Account — The Genuine Love Project',
     description: 'Join thousands on their healing journey. Create your free account today.',
     hero: {
@@ -126,14 +533,12 @@ export const routes = [
       subtitle: 'A safe, private space designed just for you.',
       primaryCta: { label: 'Get Started Free', href: '#register-form' },
       secondaryCta: { label: 'Already have an account?', href: '/login' }
-    },
-    sections: [],
-    protected: false,
-    isAuthPage: true
+    }
   },
   {
     route: '/forgot-password',
     category: 'auth',
+    pageLabel: 'Forgot Password',
     title: 'Reset Password — The Genuine Love Project',
     description: 'Reset your password to regain access to your healing sanctuary.',
     hero: {
@@ -143,14 +548,46 @@ export const routes = [
       subtitle: 'We\'ll send you a secure link to create a new password.',
       primaryCta: { label: 'Send Reset Link', href: '#reset-form' },
       secondaryCta: { label: 'Back to Sign In', href: '/login' }
-    },
-    sections: [],
-    protected: false,
-    isAuthPage: true
+    }
   },
+  {
+    route: '/reset-password',
+    category: 'auth',
+    pageLabel: 'Reset Password',
+    title: 'Create New Password — The Genuine Love Project',
+    description: 'Create a new password for your account.',
+    hero: {
+      eyebrow: 'New Password',
+      title: 'Create a new',
+      titleHighlight: 'password.',
+      subtitle: 'Choose a secure password to protect your account.',
+      primaryCta: { label: 'Reset Password', href: '#form' },
+      secondaryCta: { label: 'Back to Sign In', href: '/login' }
+    }
+  },
+  {
+    route: '/onboarding',
+    category: 'auth',
+    pageLabel: 'Onboarding',
+    title: 'Welcome — The Genuine Love Project',
+    description: 'Let\'s personalize your healing journey.',
+    hero: {
+      eyebrow: 'Welcome',
+      title: 'Let\'s personalize your',
+      titleHighlight: 'journey.',
+      subtitle: 'A few questions to help us support you better.',
+      primaryCta: { label: 'Continue', href: '#onboarding' },
+      secondaryCta: { label: 'Skip for Now', href: '/dashboard' }
+    }
+  },
+  
+  // =========================================================================
+  // DASHBOARD & CORE (10 routes)
+  // =========================================================================
   {
     route: '/dashboard',
     category: 'core',
+    pageLabel: 'Dashboard',
     title: 'Dashboard — The Genuine Love Project',
     description: 'Your personal healing dashboard. Track progress, access tools, and continue your journey.',
     hero: {
@@ -175,12 +612,27 @@ export const routes = [
           { icon: 'Target', title: 'Daily Goals', text: 'Small steps, big progress.' }
         ]
       }
-    ],
-    protected: true
+    ]
+  },
+  {
+    route: '/crm',
+    category: 'core',
+    pageLabel: 'Relationship Manager',
+    title: 'Relationship Manager — The Genuine Love Project',
+    description: 'Track and nurture your important relationships.',
+    hero: {
+      eyebrow: 'Connections',
+      title: 'Nurture your',
+      titleHighlight: 'relationships.',
+      subtitle: 'Tools to strengthen the bonds that matter most.',
+      primaryCta: { label: 'View Connections', href: '#connections' },
+      secondaryCta: { label: 'Add Relationship', href: '#add' }
+    }
   },
   {
     route: '/today',
     category: 'core',
+    pageLabel: 'Today',
     title: 'Today — The Genuine Love Project',
     description: 'Your daily healing ritual. Check in, reflect, and nurture yourself.',
     hero: {
@@ -190,13 +642,42 @@ export const routes = [
       subtitle: 'Take a moment to check in with yourself.',
       primaryCta: { label: 'Begin Check-In', href: '#checkin' },
       secondaryCta: { label: 'Skip to Journal', href: '/journal' }
-    },
-    sections: [],
-    protected: true
+    }
+  },
+  {
+    route: '/mood',
+    category: 'core',
+    pageLabel: 'Mood Tracker',
+    title: 'Mood Tracking — The Genuine Love Project',
+    description: 'Track and understand your emotional patterns over time.',
+    hero: {
+      eyebrow: 'Emotional Awareness',
+      title: 'Understand your',
+      titleHighlight: 'emotional patterns.',
+      subtitle: 'Gain insights into your mood fluctuations and triggers.',
+      primaryCta: { label: 'Log Mood', href: '#log' },
+      secondaryCta: { label: 'View Trends', href: '#trends' }
+    }
+  },
+  {
+    route: '/state',
+    category: 'core',
+    pageLabel: 'State Tracker',
+    title: 'State Tracker — The Genuine Love Project',
+    description: 'Monitor your nervous system state and learn regulation techniques.',
+    hero: {
+      eyebrow: 'Nervous System Awareness',
+      title: 'Know your',
+      titleHighlight: 'window of tolerance.',
+      subtitle: 'Track your nervous system states and build regulation capacity.',
+      primaryCta: { label: 'Check State', href: '#check' },
+      secondaryCta: { label: 'Learn Regulation', href: '/grounding' }
+    }
   },
   {
     route: '/journal',
     category: 'core',
+    pageLabel: 'Journal',
     title: 'Journal — The Genuine Love Project',
     description: 'A safe space for reflection and emotional processing through guided journaling.',
     hero: {
@@ -221,60 +702,12 @@ export const routes = [
           { icon: 'Sun', title: 'Future Self', text: 'Envision who you\'re becoming.' }
         ]
       }
-    ],
-    protected: true
-  },
-  {
-    route: '/chat',
-    category: 'core',
-    title: 'AI Companion — The Genuine Love Project',
-    description: 'Your 24/7 trauma-informed AI companion for emotional support and guidance.',
-    hero: {
-      eyebrow: 'Always Here For You',
-      title: 'A compassionate ear',
-      titleHighlight: 'whenever you need it.',
-      subtitle: 'Talk through anything with our trauma-informed AI companion.',
-      primaryCta: { label: 'Start Conversation', href: '#chat' },
-      secondaryCta: { label: 'Learn About AI Safety', href: '/safety' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/mood',
-    category: 'core',
-    title: 'Mood Tracking — The Genuine Love Project',
-    description: 'Track and understand your emotional patterns over time.',
-    hero: {
-      eyebrow: 'Emotional Awareness',
-      title: 'Understand your',
-      titleHighlight: 'emotional patterns.',
-      subtitle: 'Gain insights into your mood fluctuations and triggers.',
-      primaryCta: { label: 'Log Mood', href: '#log' },
-      secondaryCta: { label: 'View Trends', href: '#trends' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/state',
-    category: 'core',
-    title: 'State Tracker — The Genuine Love Project',
-    description: 'Monitor your nervous system state and learn regulation techniques.',
-    hero: {
-      eyebrow: 'Nervous System Awareness',
-      title: 'Know your',
-      titleHighlight: 'window of tolerance.',
-      subtitle: 'Track your nervous system states and build regulation capacity.',
-      primaryCta: { label: 'Check State', href: '#check' },
-      secondaryCta: { label: 'Learn Regulation', href: '/grounding' }
-    },
-    sections: [],
-    protected: true
+    ]
   },
   {
     route: '/analytics',
     category: 'core',
+    pageLabel: 'Analytics',
     title: 'Analytics — The Genuine Love Project',
     description: 'Deep insights into your healing journey with data visualization.',
     hero: {
@@ -284,29 +717,170 @@ export const routes = [
       subtitle: 'Visual insights into your growth and patterns.',
       primaryCta: { label: 'View Analytics', href: '#analytics' },
       secondaryCta: { label: 'Export Data', href: '#export' }
-    },
-    sections: [],
-    protected: true
+    }
   },
   {
-    route: '/settings',
+    route: '/progress',
     category: 'core',
-    title: 'Settings — The Genuine Love Project',
-    description: 'Customize your healing sanctuary to suit your needs.',
+    pageLabel: 'Progress',
+    title: 'Your Progress — The Genuine Love Project',
+    description: 'Track your healing journey milestones and achievements.',
     hero: {
-      eyebrow: 'Personalization',
-      title: 'Make this space',
-      titleHighlight: 'truly yours.',
-      subtitle: 'Customize notifications, privacy, and display preferences.',
-      primaryCta: { label: 'Edit Profile', href: '#profile' },
-      secondaryCta: { label: 'Privacy Settings', href: '#privacy' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Celebrate Growth',
+      title: 'Every step',
+      titleHighlight: 'matters.',
+      subtitle: 'Review your milestones and celebrate your progress.',
+      primaryCta: { label: 'View Milestones', href: '#milestones' },
+      secondaryCta: { label: 'Set New Goals', href: '#goals' }
+    }
+  },
+  {
+    route: '/growth-analytics',
+    category: 'core',
+    pageLabel: 'Growth Analytics',
+    title: 'Growth Analytics — The Genuine Love Project',
+    description: 'Advanced analytics for tracking personal growth patterns.',
+    hero: {
+      eyebrow: 'Deep Insights',
+      title: 'Understand your',
+      titleHighlight: 'growth patterns.',
+      subtitle: 'Advanced analytics to illuminate your journey.',
+      primaryCta: { label: 'Explore Insights', href: '#insights' },
+      secondaryCta: { label: 'Compare Periods', href: '#compare' }
+    }
+  },
+  {
+    route: '/guided-journaling',
+    category: 'core',
+    pageLabel: 'Guided Journaling',
+    title: 'Guided Journaling — The Genuine Love Project',
+    description: 'Structured journaling exercises for deeper self-reflection.',
+    hero: {
+      eyebrow: 'Guided Practice',
+      title: 'Journaling with',
+      titleHighlight: 'intention.',
+      subtitle: 'Structured exercises to guide your reflective writing.',
+      primaryCta: { label: 'Start Session', href: '#session' },
+      secondaryCta: { label: 'Browse Prompts', href: '#prompts' }
+    }
+  },
+  
+  // =========================================================================
+  // AI & CHAT (3 routes)
+  // =========================================================================
+  {
+    route: '/chat',
+    category: 'ai',
+    pageLabel: 'AI Chat',
+    title: 'AI Companion — The Genuine Love Project',
+    description: 'Your 24/7 trauma-informed AI companion for emotional support and guidance.',
+    hero: {
+      eyebrow: 'Always Here For You',
+      title: 'A compassionate ear',
+      titleHighlight: 'whenever you need it.',
+      subtitle: 'Talk through anything with our trauma-informed AI companion.',
+      primaryCta: { label: 'Start Conversation', href: '#chat' },
+      secondaryCta: { label: 'Learn About AI Safety', href: '/safety' }
+    }
+  },
+  {
+    route: '/crisis',
+    category: 'ai',
+    pageLabel: 'Crisis Support',
+    title: 'Crisis Support — The Genuine Love Project',
+    description: 'Immediate support and resources if you\'re in crisis.',
+    hero: {
+      eyebrow: 'You\'re Not Alone',
+      title: 'Immediate',
+      titleHighlight: 'support.',
+      subtitle: 'If you\'re in crisis, we\'re here to help you find support right now.',
+      primaryCta: { label: 'Get Support Now', href: '#support' },
+      secondaryCta: { label: 'Crisis Resources', href: '#resources' }
+    }
+  },
+  {
+    route: '/companion',
+    category: 'ai',
+    pageLabel: 'AI Companion',
+    title: 'Your AI Companion — The Genuine Love Project',
+    description: 'A personalized AI companion for your healing journey.',
+    hero: {
+      eyebrow: 'Your Personal Guide',
+      title: 'Meet your',
+      titleHighlight: 'healing companion.',
+      subtitle: 'An AI designed to understand and support your unique journey.',
+      primaryCta: { label: 'Start Chat', href: '#companion' },
+      secondaryCta: { label: 'Customize Companion', href: '#settings' }
+    }
+  },
+  
+  // =========================================================================
+  // WELLNESS & HEALING TOOLS (24 routes)
+  // =========================================================================
+  {
+    route: '/wellness',
+    category: 'wellness',
+    pageLabel: 'Wellness Home',
+    title: 'Wellness — The Genuine Love Project',
+    description: 'Your complete wellness toolkit for mind, body, and spirit.',
+    hero: {
+      eyebrow: 'Holistic Wellness',
+      title: 'Nurture every part of',
+      titleHighlight: 'yourself.',
+      subtitle: 'Tools and practices for complete well-being.',
+      primaryCta: { label: 'Explore Tools', href: '#tools' },
+      secondaryCta: { label: 'Today\'s Practice', href: '/today' }
+    }
+  },
+  {
+    route: '/wellness-hub',
+    category: 'wellness',
+    pageLabel: 'Wellness Hub',
+    title: 'Wellness Hub — The Genuine Love Project',
+    description: 'Central hub for all wellness tools and practices.',
+    hero: {
+      eyebrow: 'All-in-One',
+      title: 'Your wellness',
+      titleHighlight: 'headquarters.',
+      subtitle: 'Everything you need for holistic well-being in one place.',
+      primaryCta: { label: 'Browse All', href: '#all' },
+      secondaryCta: { label: 'Recommended', href: '#recommended' }
+    }
+  },
+  {
+    route: '/healing-library',
+    category: 'wellness',
+    pageLabel: 'Healing Library',
+    title: 'Healing Library — The Genuine Love Project',
+    description: 'A comprehensive library of healing resources and modalities.',
+    hero: {
+      eyebrow: 'Knowledge Base',
+      title: 'Your library of',
+      titleHighlight: 'healing wisdom.',
+      subtitle: 'Evidence-based resources for your healing journey.',
+      primaryCta: { label: 'Browse Library', href: '#library' },
+      secondaryCta: { label: 'Recommended', href: '#recommended' }
+    }
+  },
+  {
+    route: '/calming-scenes',
+    category: 'wellness',
+    pageLabel: 'Calming Scenes',
+    title: 'Calming Scenes — The Genuine Love Project',
+    description: 'Immersive visual and audio experiences for relaxation.',
+    hero: {
+      eyebrow: 'Peaceful Escapes',
+      title: 'Find serenity in',
+      titleHighlight: 'beautiful places.',
+      subtitle: 'Immersive scenes to calm your mind and soothe your soul.',
+      primaryCta: { label: 'Explore Scenes', href: '#scenes' },
+      secondaryCta: { label: 'Sleep Sounds', href: '#sounds' }
+    }
   },
   {
     route: '/breathing',
     category: 'wellness',
+    pageLabel: 'Breathing Exercises',
     title: 'Breathing Exercises — The Genuine Love Project',
     description: 'Calming breath practices to regulate your nervous system.',
     hero: {
@@ -331,12 +905,12 @@ export const routes = [
           { icon: 'Heart', title: 'Heart Coherence', text: 'Sync breath with heart for emotional balance.' }
         ]
       }
-    ],
-    protected: false
+    ]
   },
   {
     route: '/grounding',
     category: 'wellness',
+    pageLabel: 'Grounding',
     title: 'Grounding Techniques — The Genuine Love Project',
     description: 'Somatic grounding practices to anchor you in the present moment.',
     hero: {
@@ -361,42 +935,12 @@ export const routes = [
           { icon: 'Activity', title: 'Cold Water Reset', text: 'Shock the nervous system back to baseline.' }
         ]
       }
-    ],
-    protected: false
-  },
-  {
-    route: '/meditation',
-    category: 'wellness',
-    title: 'Meditation Guide — The Genuine Love Project',
-    description: 'Guided meditations for healing, relaxation, and inner peace.',
-    hero: {
-      eyebrow: 'Inner Stillness',
-      title: 'Discover peace',
-      titleHighlight: 'within yourself.',
-      subtitle: 'Guided meditations for every mood and moment.',
-      primaryCta: { label: 'Start Meditating', href: '#meditations' },
-      secondaryCta: { label: 'Quick 3-Minute', href: '#quick' }
-    },
-    sections: [
-      {
-        id: 'types',
-        eyebrow: 'Meditation Types',
-        title: 'Find your practice',
-        subtitle: 'Different styles for different needs.',
-        variant: 'glow',
-        cards: [
-          { icon: 'Heart', title: 'Loving-Kindness', text: 'Cultivate compassion for self and others.' },
-          { icon: 'Leaf', title: 'Mindfulness', text: 'Present-moment awareness without judgment.' },
-          { icon: 'Brain', title: 'Body Scan', text: 'Release tension stored in the body.' },
-          { icon: 'Sparkles', title: 'Visualization', text: 'Healing imagery for the subconscious.' }
-        ]
-      }
-    ],
-    protected: false
+    ]
   },
   {
     route: '/affirmations',
     category: 'wellness',
+    pageLabel: 'Affirmations',
     title: 'Affirmations — The Genuine Love Project',
     description: 'Positive affirmations for healing, self-love, and personal growth.',
     hero: {
@@ -406,27 +950,27 @@ export const routes = [
       subtitle: 'Affirmations that speak to your healing journey.',
       primaryCta: { label: 'Daily Affirmation', href: '#daily' },
       secondaryCta: { label: 'Create Your Own', href: '#custom' }
-    },
-    sections: [
-      {
-        id: 'categories',
-        eyebrow: 'Categories',
-        title: 'Affirmation themes',
-        subtitle: 'Words of healing for every need.',
-        variant: 'pattern',
-        cards: [
-          { icon: 'Heart', title: 'Self-Love', text: 'Embrace and accept yourself fully.' },
-          { icon: 'Shield', title: 'Boundaries', text: 'Honor your needs and limits.' },
-          { icon: 'Sun', title: 'Hope', text: 'Believe in your capacity to heal.' },
-          { icon: 'Star', title: 'Worth', text: 'Know your inherent value.' }
-        ]
-      }
-    ],
-    protected: false
+    }
+  },
+  {
+    route: '/meditation',
+    category: 'wellness',
+    pageLabel: 'Meditation',
+    title: 'Meditation Guide — The Genuine Love Project',
+    description: 'Guided meditations for healing, relaxation, and inner peace.',
+    hero: {
+      eyebrow: 'Inner Stillness',
+      title: 'Discover peace',
+      titleHighlight: 'within yourself.',
+      subtitle: 'Guided meditations for every mood and moment.',
+      primaryCta: { label: 'Start Meditating', href: '#meditations' },
+      secondaryCta: { label: 'Quick 3-Minute', href: '#quick' }
+    }
   },
   {
     route: '/self-care',
     category: 'wellness',
+    pageLabel: 'Self-Care',
     title: 'Self-Care Toolkit — The Genuine Love Project',
     description: 'Practical self-care tools and practices for daily wellness.',
     hero: {
@@ -436,75 +980,12 @@ export const routes = [
       subtitle: 'Practical tools to nurture your body, mind, and spirit.',
       primaryCta: { label: 'Build Your Toolkit', href: '#toolkit' },
       secondaryCta: { label: 'Quick Self-Care', href: '#quick' }
-    },
-    sections: [
-      {
-        id: 'areas',
-        eyebrow: 'Self-Care Areas',
-        title: 'Holistic wellness',
-        subtitle: 'Care for all aspects of your being.',
-        variant: 'glow',
-        cards: [
-          { icon: 'Activity', title: 'Physical', text: 'Movement, rest, and nourishment.' },
-          { icon: 'Brain', title: 'Mental', text: 'Boundaries, stimulation, and quiet.' },
-          { icon: 'Heart', title: 'Emotional', text: 'Expression, connection, and validation.' },
-          { icon: 'Sparkles', title: 'Spiritual', text: 'Meaning, purpose, and transcendence.' }
-        ]
-      }
-    ],
-    protected: false
-  },
-  {
-    route: '/calming-scenes',
-    category: 'wellness',
-    title: 'Calming Scenes — The Genuine Love Project',
-    description: 'Immersive visual and audio experiences for relaxation.',
-    hero: {
-      eyebrow: 'Peaceful Escapes',
-      title: 'Find serenity in',
-      titleHighlight: 'beautiful places.',
-      subtitle: 'Immersive scenes to calm your mind and soothe your soul.',
-      primaryCta: { label: 'Explore Scenes', href: '#scenes' },
-      secondaryCta: { label: 'Sleep Sounds', href: '#sounds' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/sleep-guide',
-    category: 'wellness',
-    title: 'Sleep Guide — The Genuine Love Project',
-    description: 'Tools and techniques for better, more restful sleep.',
-    hero: {
-      eyebrow: 'Restful Nights',
-      title: 'Embrace deep,',
-      titleHighlight: 'healing sleep.',
-      subtitle: 'Evidence-based approaches to improve your sleep quality.',
-      primaryCta: { label: 'Sleep Assessment', href: '#assessment' },
-      secondaryCta: { label: 'Tonight\'s Routine', href: '#routine' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/stress-response',
-    category: 'wellness',
-    title: 'Stress Response Guide — The Genuine Love Project',
-    description: 'Understand and regulate your stress response system.',
-    hero: {
-      eyebrow: 'Nervous System Education',
-      title: 'Understand your',
-      titleHighlight: 'stress response.',
-      subtitle: 'Learn about fight, flight, freeze, and fawn responses.',
-      primaryCta: { label: 'Take Assessment', href: '#assessment' },
-      secondaryCta: { label: 'Learn Regulation', href: '#regulation' }
-    },
-    sections: [],
-    protected: false
+    }
   },
   {
     route: '/emotional-intelligence',
     category: 'wellness',
+    pageLabel: 'Emotional Intelligence',
     title: 'Emotional Intelligence — The Genuine Love Project',
     description: 'Develop your emotional awareness and regulation skills.',
     hero: {
@@ -514,13 +995,42 @@ export const routes = [
       subtitle: 'Build skills for understanding and managing emotions.',
       primaryCta: { label: 'Start Learning', href: '#modules' },
       secondaryCta: { label: 'EQ Assessment', href: '#assessment' }
-    },
-    sections: [],
-    protected: false
+    }
+  },
+  {
+    route: '/sleep-guide',
+    category: 'wellness',
+    pageLabel: 'Sleep Guide',
+    title: 'Sleep Guide — The Genuine Love Project',
+    description: 'Tools and techniques for better, more restful sleep.',
+    hero: {
+      eyebrow: 'Restful Nights',
+      title: 'Embrace deep,',
+      titleHighlight: 'healing sleep.',
+      subtitle: 'Evidence-based approaches to improve your sleep quality.',
+      primaryCta: { label: 'Sleep Assessment', href: '#assessment' },
+      secondaryCta: { label: 'Tonight\'s Routine', href: '#routine' }
+    }
+  },
+  {
+    route: '/stress-response',
+    category: 'wellness',
+    pageLabel: 'Stress Response',
+    title: 'Stress Response Guide — The Genuine Love Project',
+    description: 'Understand and regulate your stress response system.',
+    hero: {
+      eyebrow: 'Nervous System Education',
+      title: 'Understand your',
+      titleHighlight: 'stress response.',
+      subtitle: 'Learn about fight, flight, freeze, and fawn responses.',
+      primaryCta: { label: 'Take Assessment', href: '#assessment' },
+      secondaryCta: { label: 'Learn Regulation', href: '#regulation' }
+    }
   },
   {
     route: '/inner-child',
-    category: 'healing',
+    category: 'wellness',
+    pageLabel: 'Inner Child',
     title: 'Inner Child Work — The Genuine Love Project',
     description: 'Reconnect with and heal your inner child through guided exercises.',
     hero: {
@@ -530,43 +1040,42 @@ export const routes = [
       subtitle: 'Gentle exercises to heal childhood wounds and reclaim lost joy.',
       primaryCta: { label: 'Meet Your Inner Child', href: '#exercises' },
       secondaryCta: { label: 'Learn About Inner Child', href: '#learn' }
-    },
-    sections: [
-      {
-        id: 'exercises',
-        eyebrow: 'Healing Exercises',
-        title: 'Inner child practices',
-        subtitle: 'Safe, guided ways to connect with younger parts.',
-        variant: 'glow',
-        cards: [
-          { icon: 'Heart', title: 'Letter Writing', text: 'Write to your younger self with compassion.' },
-          { icon: 'Eye', title: 'Visualization', text: 'Visit and comfort your inner child.' },
-          { icon: 'MessageCircle', title: 'Dialogue', text: 'Learn what your inner child needs.' },
-          { icon: 'Star', title: 'Reparenting', text: 'Give yourself what you needed then.' }
-        ]
-      }
-    ],
-    protected: false
+    }
   },
   {
-    route: '/healing-library',
-    category: 'healing',
-    title: 'Healing Library — The Genuine Love Project',
-    description: 'A comprehensive library of healing resources and modalities.',
+    route: '/body-wellness',
+    category: 'wellness',
+    pageLabel: 'Body Wellness',
+    title: 'Body Wellness — The Genuine Love Project',
+    description: 'Mind-body connection practices for physical and emotional healing.',
     hero: {
-      eyebrow: 'Knowledge Base',
-      title: 'Your library of',
-      titleHighlight: 'healing wisdom.',
-      subtitle: 'Evidence-based resources for your healing journey.',
-      primaryCta: { label: 'Browse Library', href: '#library' },
-      secondaryCta: { label: 'Recommended', href: '#recommended' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Embodiment',
+      title: 'Listen to your',
+      titleHighlight: 'body\'s wisdom.',
+      subtitle: 'Practices to reconnect with and honor your physical self.',
+      primaryCta: { label: 'Body Check-In', href: '#checkin' },
+      secondaryCta: { label: 'Movement Practices', href: '#movement' }
+    }
+  },
+  {
+    route: '/soul-wellness',
+    category: 'wellness',
+    pageLabel: 'Soul Wellness',
+    title: 'Soul Wellness — The Genuine Love Project',
+    description: 'Spiritual practices for meaning, purpose, and transcendence.',
+    hero: {
+      eyebrow: 'Spiritual Care',
+      title: 'Nourish your',
+      titleHighlight: 'spirit.',
+      subtitle: 'Practices for meaning, purpose, and connection to something greater.',
+      primaryCta: { label: 'Explore Practices', href: '#practices' },
+      secondaryCta: { label: 'Daily Reflection', href: '#reflection' }
+    }
   },
   {
     route: '/healing-journeys',
-    category: 'healing',
+    category: 'wellness',
+    pageLabel: 'Healing Journeys',
     title: 'Healing Journeys — The Genuine Love Project',
     description: 'Structured healing pathways for specific challenges.',
     hero: {
@@ -576,1423 +1085,991 @@ export const routes = [
       subtitle: 'Multi-week journeys designed for specific healing goals.',
       primaryCta: { label: 'Choose Your Path', href: '#paths' },
       secondaryCta: { label: 'Continue Journey', href: '#continue' }
-    },
-    sections: [],
-    protected: false
+    }
   },
   {
-    route: '/body-wellness',
-    category: 'healing',
-    title: 'Body Wellness — The Genuine Love Project',
-    description: 'Somatic practices for body-based healing and awareness.',
+    route: '/behavior-change',
+    category: 'wellness',
+    pageLabel: 'Behavior Change',
+    title: 'Behavior Change — The Genuine Love Project',
+    description: 'Evidence-based tools for creating lasting positive changes.',
     hero: {
-      eyebrow: 'Somatic Healing',
-      title: 'The body keeps',
-      titleHighlight: 'the score.',
-      subtitle: 'Somatic practices to release trauma stored in the body.',
-      primaryCta: { label: 'Body Practices', href: '#practices' },
-      secondaryCta: { label: 'Body Scan', href: '#scan' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Lasting Change',
+      title: 'Build habits that',
+      titleHighlight: 'serve you.',
+      subtitle: 'Science-backed approaches to behavioral transformation.',
+      primaryCta: { label: 'Start Tracking', href: '#track' },
+      secondaryCta: { label: 'Habit Library', href: '#library' }
+    }
   },
   {
-    route: '/soul-wellness',
-    category: 'healing',
-    title: 'Soul Wellness — The Genuine Love Project',
-    description: 'Spiritual practices for meaning, purpose, and transcendence.',
+    route: '/daily-routines',
+    category: 'wellness',
+    pageLabel: 'Daily Routines',
+    title: 'Daily Routines — The Genuine Love Project',
+    description: 'Create nurturing daily routines for consistent well-being.',
     hero: {
-      eyebrow: 'Spiritual Nourishment',
-      title: 'Nurture your',
-      titleHighlight: 'deepest self.',
-      subtitle: 'Practices for meaning, purpose, and spiritual connection.',
-      primaryCta: { label: 'Soul Practices', href: '#practices' },
-      secondaryCta: { label: 'Daily Reflection', href: '#reflection' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Structure for Peace',
+      title: 'Routines that',
+      titleHighlight: 'nurture you.',
+      subtitle: 'Build a daily structure that supports your healing.',
+      primaryCta: { label: 'Build Routine', href: '#build' },
+      secondaryCta: { label: 'Templates', href: '#templates' }
+    }
   },
   {
-    route: '/crisis',
-    category: 'healing',
-    title: 'Crisis Resources — The Genuine Love Project',
-    description: 'Immediate support and resources for moments of crisis.',
+    route: '/cognitive-tools',
+    category: 'wellness',
+    pageLabel: 'Cognitive Tools',
+    title: 'Cognitive Tools — The Genuine Love Project',
+    description: 'Tools for reframing thoughts and managing cognitive patterns.',
     hero: {
-      eyebrow: 'You Are Not Alone',
-      title: 'Crisis support',
-      titleHighlight: 'is available.',
-      subtitle: 'Immediate resources and grounding techniques for difficult moments.',
-      primaryCta: { label: 'Get Help Now', href: '#resources' },
-      secondaryCta: { label: 'Grounding Exercise', href: '/grounding' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Mind Tools',
+      title: 'Reshape your',
+      titleHighlight: 'thought patterns.',
+      subtitle: 'Evidence-based cognitive techniques for mental wellness.',
+      primaryCta: { label: 'Explore Tools', href: '#tools' },
+      secondaryCta: { label: 'Thought Record', href: '#record' }
+    }
+  },
+  {
+    route: '/mirror',
+    category: 'wellness',
+    pageLabel: 'Mirror Work',
+    title: 'Mirror Work — The Genuine Love Project',
+    description: 'Self-love practices using mirror work techniques.',
+    hero: {
+      eyebrow: 'Self-Reflection',
+      title: 'See yourself with',
+      titleHighlight: 'loving eyes.',
+      subtitle: 'Powerful self-love practices using the mirror.',
+      primaryCta: { label: 'Start Practice', href: '#practice' },
+      secondaryCta: { label: 'Learn More', href: '#learn' }
+    }
+  },
+  {
+    route: '/ritual',
+    category: 'wellness',
+    pageLabel: 'Sacred Rituals',
+    title: 'Sacred Rituals — The Genuine Love Project',
+    description: 'Create meaningful rituals for healing and transition.',
+    hero: {
+      eyebrow: 'Intentional Practice',
+      title: 'Create rituals that',
+      titleHighlight: 'hold meaning.',
+      subtitle: 'Mark transitions and honor your journey with sacred practices.',
+      primaryCta: { label: 'Explore Rituals', href: '#rituals' },
+      secondaryCta: { label: 'Create Your Own', href: '#create' }
+    }
   },
   {
     route: '/wisdom',
-    category: 'wisdom',
-    title: 'Wisdom Tools — The Genuine Love Project',
-    description: 'Deep wisdom practices for personal growth and insight.',
+    category: 'wellness',
+    pageLabel: 'Wisdom',
+    title: 'Wisdom — The Genuine Love Project',
+    description: 'Curated wisdom for daily inspiration and reflection.',
     hero: {
-      eyebrow: 'Deep Wisdom',
-      title: 'Cultivate inner',
-      titleHighlight: 'wisdom.',
-      subtitle: 'Practices that connect you to deeper knowing.',
-      primaryCta: { label: 'Explore Wisdom', href: '#tools' },
-      secondaryCta: { label: 'Daily Oracle', href: '/daily-wisdom' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Daily Wisdom',
+      title: 'Ancient wisdom for',
+      titleHighlight: 'modern healing.',
+      subtitle: 'Timeless insights to illuminate your path.',
+      primaryCta: { label: 'Today\'s Wisdom', href: '#today' },
+      secondaryCta: { label: 'Browse Collection', href: '#collection' }
+    }
   },
   {
     route: '/wisdom-practices',
-    category: 'wisdom',
+    category: 'wellness',
+    pageLabel: 'Wisdom Practices',
     title: 'Wisdom Practices — The Genuine Love Project',
-    description: 'Daily practices for cultivating wisdom and insight.',
+    description: 'Practical applications of timeless wisdom traditions.',
     hero: {
-      eyebrow: 'Daily Wisdom',
-      title: 'Small practices,',
-      titleHighlight: 'profound shifts.',
-      subtitle: 'Daily rituals that cultivate deep wisdom over time.',
-      primaryCta: { label: 'Start Practice', href: '#practices' },
-      secondaryCta: { label: 'Build Habit', href: '#habit' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Applied Wisdom',
+      title: 'Practice the',
+      titleHighlight: 'ancient arts.',
+      subtitle: 'Turn wisdom into daily practice.',
+      primaryCta: { label: 'Start Practice', href: '#practice' },
+      secondaryCta: { label: 'Browse Traditions', href: '#traditions' }
+    }
   },
   {
     route: '/wisdom-synthesis',
-    category: 'wisdom',
+    category: 'wellness',
+    pageLabel: 'Wisdom Synthesis',
     title: 'Wisdom Synthesis — The Genuine Love Project',
-    description: 'Integrate insights from multiple wisdom traditions.',
+    description: 'Integrate wisdom from multiple traditions into your practice.',
     hero: {
-      eyebrow: 'Integrated Wisdom',
-      title: 'Ancient wisdom meets',
-      titleHighlight: 'modern science.',
-      subtitle: 'Synthesize insights from psychology, philosophy, and spirituality.',
+      eyebrow: 'Integration',
+      title: 'Synthesize wisdom from',
+      titleHighlight: 'many sources.',
+      subtitle: 'Draw from the best of all traditions.',
       primaryCta: { label: 'Explore Synthesis', href: '#synthesis' },
-      secondaryCta: { label: 'Traditions', href: '#traditions' }
-    },
-    sections: [],
-    protected: true
+      secondaryCta: { label: 'Create Your Path', href: '#create' }
+    }
   },
-  {
-    route: '/daily-wisdom',
-    category: 'wisdom',
-    title: 'Daily Wisdom Oracle — The Genuine Love Project',
-    description: 'Receive daily wisdom and guidance for your journey.',
-    hero: {
-      eyebrow: 'Daily Guidance',
-      title: 'Your daily dose of',
-      titleHighlight: 'sacred wisdom.',
-      subtitle: 'Receive a personalized insight each day.',
-      primaryCta: { label: 'Draw Card', href: '#oracle' },
-      secondaryCta: { label: 'Past Readings', href: '#history' }
-    },
-    sections: [],
-    protected: true
-  },
+  
+  // =========================================================================
+  // ADVANCED & MASTERY (14 routes)
+  // =========================================================================
   {
     route: '/tools',
     category: 'advanced',
-    title: 'Tools — The Genuine Love Project',
-    description: 'Your complete toolkit for healing and personal growth.',
+    pageLabel: 'Tools',
+    title: 'Advanced Tools — The Genuine Love Project',
+    description: 'Sophisticated tools for deeper healing work.',
     hero: {
-      eyebrow: 'Your Toolkit',
-      title: 'All tools in',
-      titleHighlight: 'one place.',
-      subtitle: 'Quick access to every healing resource.',
-      primaryCta: { label: 'Browse All', href: '#all' },
-      secondaryCta: { label: 'Favorites', href: '#favorites' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Advanced Toolkit',
+      title: 'Powerful tools for',
+      titleHighlight: 'deep work.',
+      subtitle: 'Advanced resources for those ready to go deeper.',
+      primaryCta: { label: 'Explore Tools', href: '#tools' },
+      secondaryCta: { label: 'Recommended', href: '#recommended' }
+    }
   },
   {
     route: '/advanced',
     category: 'advanced',
-    title: 'Advanced Tools — The Genuine Love Project',
-    description: 'Deep-dive tools for experienced practitioners.',
+    pageLabel: 'Advanced',
+    title: 'Advanced Practices — The Genuine Love Project',
+    description: 'Advanced healing practices for experienced practitioners.',
     hero: {
-      eyebrow: 'Advanced Practice',
-      title: 'Go deeper into',
-      titleHighlight: 'your healing.',
-      subtitle: 'Sophisticated tools for the committed practitioner.',
-      primaryCta: { label: 'Advanced Tools', href: '#tools' },
-      secondaryCta: { label: 'Readiness Check', href: '#check' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Deep Dive',
+      title: 'Advanced practices for',
+      titleHighlight: 'profound healing.',
+      subtitle: 'For those ready to explore deeper dimensions.',
+      primaryCta: { label: 'Start Advanced', href: '#advanced' },
+      secondaryCta: { label: 'Prerequisites', href: '#prerequisites' }
+    }
   },
   {
     route: '/mastery',
     category: 'advanced',
-    title: 'Mastery Tools — The Genuine Love Project',
-    description: 'Elite-level tools for healing mastery.',
+    pageLabel: 'Mastery',
+    title: 'Mastery Path — The Genuine Love Project',
+    description: 'The path to emotional and psychological mastery.',
     hero: {
-      eyebrow: 'Mastery Path',
-      title: 'Master the art of',
-      titleHighlight: 'self-healing.',
-      subtitle: 'Premium tools for those committed to deep transformation.',
-      primaryCta: { label: 'Mastery Suite', href: '#suite' },
-      secondaryCta: { label: 'Prerequisites', href: '#prereq' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Excellence',
+      title: 'Walk the path of',
+      titleHighlight: 'mastery.',
+      subtitle: 'Develop deep competence in emotional intelligence.',
+      primaryCta: { label: 'Begin Mastery', href: '#mastery' },
+      secondaryCta: { label: 'View Progress', href: '/progress' }
+    }
   },
   {
-    route: '/ritual',
+    route: '/elite-tools',
     category: 'advanced',
-    title: 'Daily Ritual — The Genuine Love Project',
-    description: 'Create and maintain healing rituals.',
+    pageLabel: 'Elite Tools',
+    title: 'Elite Tools — The Genuine Love Project',
+    description: 'Premium tools for advanced practitioners.',
     hero: {
-      eyebrow: 'Sacred Rituals',
-      title: 'Transform your day with',
-      titleHighlight: 'intentional rituals.',
-      subtitle: 'Build consistent practices that anchor your healing.',
-      primaryCta: { label: 'Create Ritual', href: '#create' },
-      secondaryCta: { label: 'Morning Ritual', href: '#morning' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Premium Access',
+      title: 'Elite tools for',
+      titleHighlight: 'serious practitioners.',
+      subtitle: 'The most powerful tools in our collection.',
+      primaryCta: { label: 'Access Tools', href: '#tools' },
+      secondaryCta: { label: 'Upgrade', href: '/upgrade' }
+    }
   },
   {
     route: '/atlas',
     category: 'advanced',
+    pageLabel: 'Intellectual Atlas',
     title: 'Intellectual Atlas — The Genuine Love Project',
-    description: 'Map your knowledge and growth across domains.',
+    description: 'Navigate the landscape of healing knowledge.',
     hero: {
-      eyebrow: 'Knowledge Mapping',
-      title: 'Navigate your',
-      titleHighlight: 'intellectual landscape.',
-      subtitle: 'Visualize connections between concepts and insights.',
-      primaryCta: { label: 'Open Atlas', href: '#atlas' },
-      secondaryCta: { label: 'Add Concept', href: '#add' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Knowledge Map',
+      title: 'Navigate the',
+      titleHighlight: 'healing landscape.',
+      subtitle: 'A comprehensive map of healing concepts and connections.',
+      primaryCta: { label: 'Explore Atlas', href: '#atlas' },
+      secondaryCta: { label: 'Start Here', href: '#start' }
+    }
   },
   {
     route: '/strategy-maps',
     category: 'advanced',
+    pageLabel: 'Strategy Maps',
     title: 'Strategy Maps — The Genuine Love Project',
-    description: 'Visual strategies for achieving your healing goals.',
+    description: 'Visual maps for navigating complex healing journeys.',
     hero: {
-      eyebrow: 'Strategic Planning',
-      title: 'Map your path to',
-      titleHighlight: 'lasting change.',
-      subtitle: 'Visual planning tools for your healing journey.',
-      primaryCta: { label: 'Create Map', href: '#create' },
-      secondaryCta: { label: 'Templates', href: '#templates' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Strategic Navigation',
+      title: 'Map your',
+      titleHighlight: 'healing strategy.',
+      subtitle: 'Visual tools for planning and tracking complex journeys.',
+      primaryCta: { label: 'View Maps', href: '#maps' },
+      secondaryCta: { label: 'Create Map', href: '#create' }
+    }
   },
   {
-    route: '/meta-learning',
+    route: '/collaborative-lab',
     category: 'advanced',
-    title: 'Meta Learning — The Genuine Love Project',
-    description: 'Learn how to learn more effectively.',
+    pageLabel: 'Collaborative Lab',
+    title: 'Collaborative Lab — The Genuine Love Project',
+    description: 'Explore and experiment with healing practices together.',
     hero: {
-      eyebrow: 'Learning Mastery',
-      title: 'Accelerate your',
-      titleHighlight: 'learning capacity.',
-      subtitle: 'Techniques to learn faster and retain more.',
-      primaryCta: { label: 'Start Learning', href: '#start' },
+      eyebrow: 'Experimentation',
+      title: 'The healing',
+      titleHighlight: 'laboratory.',
+      subtitle: 'A space to explore and experiment with new approaches.',
+      primaryCta: { label: 'Enter Lab', href: '#lab' },
+      secondaryCta: { label: 'Current Projects', href: '#projects' }
+    }
+  },
+  {
+    route: '/resilience',
+    category: 'advanced',
+    pageLabel: 'Resilience',
+    title: 'Resilience Building — The Genuine Love Project',
+    description: 'Build lasting resilience and emotional strength.',
+    hero: {
+      eyebrow: 'Inner Strength',
+      title: 'Build unshakeable',
+      titleHighlight: 'resilience.',
+      subtitle: 'Develop the capacity to weather life\'s storms.',
+      primaryCta: { label: 'Start Building', href: '#build' },
       secondaryCta: { label: 'Assessment', href: '#assessment' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/systems-thinking',
-    category: 'advanced',
-    title: 'Systems Thinking — The Genuine Love Project',
-    description: 'See the bigger picture of your life patterns.',
-    hero: {
-      eyebrow: 'Holistic View',
-      title: 'See the systems',
-      titleHighlight: 'shaping your life.',
-      subtitle: 'Understand how all the pieces of your life connect.',
-      primaryCta: { label: 'Map Systems', href: '#map' },
-      secondaryCta: { label: 'Learn Basics', href: '#basics' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/cognitive-architecture',
-    category: 'advanced',
-    title: 'Cognitive Architecture — The Genuine Love Project',
-    description: 'Understand and optimize your mental patterns.',
-    hero: {
-      eyebrow: 'Mind Mapping',
-      title: 'Architect your',
-      titleHighlight: 'optimal mind.',
-      subtitle: 'Understand and reshape your cognitive patterns.',
-      primaryCta: { label: 'Start Mapping', href: '#map' },
-      secondaryCta: { label: 'Assessment', href: '#assessment' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/philosophical-inquiry',
-    category: 'advanced',
-    title: 'Philosophical Inquiry — The Genuine Love Project',
-    description: 'Deep questions for profound self-understanding.',
-    hero: {
-      eyebrow: 'Deep Questions',
-      title: 'Explore life\'s',
-      titleHighlight: 'biggest questions.',
-      subtitle: 'Philosophical inquiry as a path to self-knowledge.',
-      primaryCta: { label: 'Begin Inquiry', href: '#inquiry' },
-      secondaryCta: { label: 'Topics', href: '#topics' }
-    },
-    sections: [],
-    protected: true
+    }
   },
   {
     route: '/knowledge-synthesis',
     category: 'advanced',
+    pageLabel: 'Knowledge Synthesis',
     title: 'Knowledge Synthesis — The Genuine Love Project',
     description: 'Integrate and synthesize your learning.',
     hero: {
       eyebrow: 'Integration',
       title: 'Connect the dots of',
       titleHighlight: 'your knowledge.',
-      subtitle: 'Synthesize insights across domains for deeper understanding.',
-      primaryCta: { label: 'Synthesize', href: '#synthesize' },
-      secondaryCta: { label: 'View Connections', href: '#connections' }
-    },
-    sections: [],
-    protected: true
+      subtitle: 'Synthesize insights from across your journey.',
+      primaryCta: { label: 'Begin Synthesis', href: '#synthesis' },
+      secondaryCta: { label: 'Review Learning', href: '#review' }
+    }
   },
   {
-    route: '/content-studio',
+    route: '/cognitive-architecture',
     category: 'advanced',
-    title: 'Content Studio — The Genuine Love Project',
-    description: 'Create and transform content for your healing journey.',
+    pageLabel: 'Cognitive Architecture',
+    title: 'Cognitive Architecture — The Genuine Love Project',
+    description: 'Understand and reshape your cognitive patterns.',
     hero: {
-      eyebrow: 'Creative Space',
-      title: 'Transform your insights',
-      titleHighlight: 'into content.',
-      subtitle: 'Tools to create, organize, and share your wisdom.',
-      primaryCta: { label: 'Open Studio', href: '#studio' },
-      secondaryCta: { label: 'Templates', href: '#templates' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Mind Design',
+      title: 'Architect your',
+      titleHighlight: 'cognitive patterns.',
+      subtitle: 'Understand and deliberately shape how you think.',
+      primaryCta: { label: 'Explore Architecture', href: '#architecture' },
+      secondaryCta: { label: 'Assessment', href: '#assessment' }
+    }
   },
   {
-    route: '/study-vault',
+    route: '/philosophical-inquiry',
     category: 'advanced',
-    title: 'Study Vault — The Genuine Love Project',
-    description: 'Evidence-based research summaries for informed healing.',
+    pageLabel: 'Philosophical Inquiry',
+    title: 'Philosophical Inquiry — The Genuine Love Project',
+    description: 'Deep philosophical exploration for meaning and purpose.',
     hero: {
-      eyebrow: 'Research Hub',
-      title: 'Science-backed',
-      titleHighlight: 'healing knowledge.',
-      subtitle: 'Accessible summaries of the latest research.',
-      primaryCta: { label: 'Browse Studies', href: '#studies' },
-      secondaryCta: { label: 'Topics', href: '#topics' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Deep Questions',
+      title: 'Explore life\'s',
+      titleHighlight: 'big questions.',
+      subtitle: 'Philosophical tools for meaning and purpose.',
+      primaryCta: { label: 'Begin Inquiry', href: '#inquiry' },
+      secondaryCta: { label: 'Reading List', href: '#reading' }
+    }
   },
   {
-    route: '/elite-tools',
+    route: '/systems-thinking',
     category: 'advanced',
-    title: 'Elite Tools — The Genuine Love Project',
-    description: 'Premium tools for advanced practitioners.',
+    pageLabel: 'Systems Thinking',
+    title: 'Systems Thinking — The Genuine Love Project',
+    description: 'See patterns and connections in your life systems.',
     hero: {
-      eyebrow: 'Premium Suite',
-      title: 'Access elite-level',
-      titleHighlight: 'healing technology.',
-      subtitle: 'The most sophisticated tools for serious practitioners.',
-      primaryCta: { label: 'Access Suite', href: '#suite' },
-      secondaryCta: { label: 'Upgrade', href: '/upgrade' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Holistic View',
+      title: 'See the',
+      titleHighlight: 'whole system.',
+      subtitle: 'Understand how all the pieces of your life connect.',
+      primaryCta: { label: 'Start Mapping', href: '#mapping' },
+      secondaryCta: { label: 'Examples', href: '#examples' }
+    }
   },
   {
-    route: '/resilience',
+    route: '/meta-learning',
     category: 'advanced',
-    title: 'Resilience Metrics — The Genuine Love Project',
-    description: 'Track and build your emotional resilience.',
+    pageLabel: 'Meta-Learning',
+    title: 'Meta-Learning — The Genuine Love Project',
+    description: 'Learn how to learn more effectively.',
     hero: {
-      eyebrow: 'Resilience Building',
-      title: 'Measure and grow your',
-      titleHighlight: 'inner strength.',
-      subtitle: 'Quantify and develop your capacity to bounce back.',
-      primaryCta: { label: 'View Metrics', href: '#metrics' },
-      secondaryCta: { label: 'Build Resilience', href: '#build' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Learning to Learn',
+      title: 'Master the art of',
+      titleHighlight: 'learning itself.',
+      subtitle: 'Become more effective at acquiring new skills and knowledge.',
+      primaryCta: { label: 'Start Learning', href: '#learning' },
+      secondaryCta: { label: 'Strategies', href: '#strategies' }
+    }
   },
   {
-    route: '/companion',
+    route: '/daily-wisdom',
     category: 'advanced',
-    title: 'Adaptive Companion — The Genuine Love Project',
-    description: 'An AI companion that adapts to your unique needs.',
+    pageLabel: 'Daily Wisdom',
+    title: 'Daily Wisdom — The Genuine Love Project',
+    description: 'Advanced daily wisdom practices.',
     hero: {
-      eyebrow: 'Personalized Support',
-      title: 'A companion who',
-      titleHighlight: 'truly knows you.',
-      subtitle: 'AI that learns your patterns and adapts its support.',
-      primaryCta: { label: 'Meet Companion', href: '#companion' },
-      secondaryCta: { label: 'Customize', href: '#customize' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Daily Practice',
+      title: 'Wisdom for',
+      titleHighlight: 'every day.',
+      subtitle: 'Start each day with meaningful insight.',
+      primaryCta: { label: 'Today\'s Wisdom', href: '#today' },
+      secondaryCta: { label: 'Archive', href: '#archive' }
+    }
   },
-  {
-    route: '/collaborative-lab',
-    category: 'advanced',
-    title: 'Collaborative Lab — The Genuine Love Project',
-    description: 'Collaborative tools for group healing work.',
-    hero: {
-      eyebrow: 'Group Work',
-      title: 'Heal together in',
-      titleHighlight: 'community.',
-      subtitle: 'Collaborative tools for shared healing experiences.',
-      primaryCta: { label: 'Enter Lab', href: '#lab' },
-      secondaryCta: { label: 'Join Group', href: '#join' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/growth-analytics',
-    category: 'advanced',
-    title: 'Growth Analytics — The Genuine Love Project',
-    description: 'Deep analytics on your personal growth.',
-    hero: {
-      eyebrow: 'Growth Tracking',
-      title: 'Data-driven',
-      titleHighlight: 'personal growth.',
-      subtitle: 'Detailed insights into your transformation journey.',
-      primaryCta: { label: 'View Analytics', href: '#analytics' },
-      secondaryCta: { label: 'Set Goals', href: '#goals' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/guided-journaling',
-    category: 'advanced',
-    title: 'Guided Journaling — The Genuine Love Project',
-    description: 'Advanced guided journaling with AI support.',
-    hero: {
-      eyebrow: 'Deep Writing',
-      title: 'AI-guided',
-      titleHighlight: 'transformative writing.',
-      subtitle: 'Intelligent prompts that adapt to your journey.',
-      primaryCta: { label: 'Start Writing', href: '#write' },
-      secondaryCta: { label: 'Browse Prompts', href: '#prompts' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/insight-cards',
-    category: 'advanced',
-    title: 'Insight Cards — The Genuine Love Project',
-    description: 'Capture and organize your healing insights.',
-    hero: {
-      eyebrow: 'Insight Capture',
-      title: 'Collect moments of',
-      titleHighlight: 'clarity.',
-      subtitle: 'Never lose an important insight again.',
-      primaryCta: { label: 'Add Insight', href: '#add' },
-      secondaryCta: { label: 'Browse Cards', href: '#browse' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/progress',
-    category: 'advanced',
-    title: 'Progress Dashboard — The Genuine Love Project',
-    description: 'Comprehensive view of your healing progress.',
-    hero: {
-      eyebrow: 'Your Journey',
-      title: 'Celebrate how far',
-      titleHighlight: 'you\'ve come.',
-      subtitle: 'A comprehensive view of your growth and achievements.',
-      primaryCta: { label: 'View Progress', href: '#progress' },
-      secondaryCta: { label: 'Milestones', href: '#milestones' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/mirror',
-    category: 'advanced',
-    title: 'Mirror Work — The Genuine Love Project',
-    description: 'Powerful self-reflection exercises.',
-    hero: {
-      eyebrow: 'Self-Reflection',
-      title: 'See yourself with',
-      titleHighlight: 'loving eyes.',
-      subtitle: 'Mirror work exercises for deep self-acceptance.',
-      primaryCta: { label: 'Begin Mirror Work', href: '#mirror' },
-      secondaryCta: { label: 'Learn More', href: '#learn' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/community',
-    category: 'community',
-    title: 'Community — The Genuine Love Project',
-    description: 'Connect with others on similar healing journeys.',
-    hero: {
-      eyebrow: 'You\'re Not Alone',
-      title: 'Heal in',
-      titleHighlight: 'community.',
-      subtitle: 'Connect with others who understand your journey.',
-      primaryCta: { label: 'Join Community', href: '#community' },
-      secondaryCta: { label: 'Browse Discussions', href: '#discussions' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/social',
-    category: 'community',
-    title: 'Social Hub — The Genuine Love Project',
-    description: 'Your social connections and community activity.',
-    hero: {
-      eyebrow: 'Connection',
-      title: 'Build meaningful',
-      titleHighlight: 'connections.',
-      subtitle: 'Engage with your healing community.',
-      primaryCta: { label: 'View Activity', href: '#activity' },
-      secondaryCta: { label: 'Find Friends', href: '#find' }
-    },
-    sections: [],
-    protected: false
-  },
+  
+  // =========================================================================
+  // CONTENT & LEARNING (13 routes)
+  // =========================================================================
   {
     route: '/blog',
     category: 'content',
+    pageLabel: 'Blog',
     title: 'Blog — The Genuine Love Project',
-    description: 'Articles and insights on healing and personal growth.',
+    description: 'Articles and insights on healing, growth, and emotional wellness.',
     hero: {
-      eyebrow: 'Healing Insights',
+      eyebrow: 'Latest Insights',
       title: 'Stories of',
-      titleHighlight: 'transformation.',
-      subtitle: 'Articles, guides, and insights for your healing journey.',
+      titleHighlight: 'healing.',
+      subtitle: 'Articles, essays, and insights to support your journey.',
       primaryCta: { label: 'Read Latest', href: '#latest' },
-      secondaryCta: { label: 'Topics', href: '#topics' }
-    },
-    sections: [],
-    protected: false
+      secondaryCta: { label: 'Browse Topics', href: '#topics' }
+    }
   },
   {
-    route: '/news',
+    route: '/blog/:slug',
     category: 'content',
-    title: 'News — The Genuine Love Project',
-    description: 'Latest updates and announcements.',
+    pageLabel: 'Blog Post',
+    isDynamic: true,
+    title: 'Article — The Genuine Love Project',
+    description: 'Read this article on healing and growth.',
     hero: {
-      eyebrow: 'Updates',
-      title: 'What\'s new at',
-      titleHighlight: 'Genuine Love.',
-      subtitle: 'Stay informed about platform updates and new features.',
-      primaryCta: { label: 'Latest News', href: '#news' },
-      secondaryCta: { label: 'Subscribe', href: '#subscribe' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Article',
+      title: 'Reading',
+      titleHighlight: 'in progress.',
+      subtitle: 'Take your time with this content.',
+      primaryCta: { label: 'Continue Reading', href: '#content' },
+      secondaryCta: { label: 'More Articles', href: '/blog' }
+    }
   },
   {
-    route: '/research',
+    route: '/write',
     category: 'content',
-    title: 'Research & Evidence — The Genuine Love Project',
-    description: 'Scientific foundation of our healing approaches.',
+    pageLabel: 'Write',
+    title: 'Write — The Genuine Love Project',
+    description: 'Share your healing story with the community.',
     hero: {
-      eyebrow: 'Evidence-Based',
-      title: 'Science behind',
-      titleHighlight: 'the healing.',
-      subtitle: 'The research foundation of our therapeutic approaches.',
-      primaryCta: { label: 'View Research', href: '#research' },
-      secondaryCta: { label: 'Studies', href: '#studies' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/glossary',
-    category: 'content',
-    title: 'Wellness Glossary — The Genuine Love Project',
-    description: 'Definitions of healing and wellness terms.',
-    hero: {
-      eyebrow: 'Reference',
-      title: 'Understanding',
-      titleHighlight: 'healing language.',
-      subtitle: 'Clear definitions of therapeutic terms and concepts.',
-      primaryCta: { label: 'Browse Terms', href: '#terms' },
-      secondaryCta: { label: 'Search', href: '#search' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/how-to-guides',
-    category: 'content',
-    title: 'How-To Guides — The Genuine Love Project',
-    description: 'Step-by-step guides for healing practices.',
-    hero: {
-      eyebrow: 'Practical Guides',
-      title: 'Learn how to',
-      titleHighlight: 'heal yourself.',
-      subtitle: 'Step-by-step instructions for healing practices.',
-      primaryCta: { label: 'Browse Guides', href: '#guides' },
-      secondaryCta: { label: 'Popular', href: '#popular' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/daily-routines',
-    category: 'content',
-    title: 'Daily Routines — The Genuine Love Project',
-    description: 'Healing routines for morning, day, and night.',
-    hero: {
-      eyebrow: 'Routine Building',
-      title: 'Routines that',
-      titleHighlight: 'transform.',
-      subtitle: 'Daily practices for sustainable healing.',
-      primaryCta: { label: 'Browse Routines', href: '#routines' },
-      secondaryCta: { label: 'Build Custom', href: '#custom' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/cognitive-tools',
-    category: 'content',
-    title: 'Cognitive Tools — The Genuine Love Project',
-    description: 'Tools for reframing thoughts and beliefs.',
-    hero: {
-      eyebrow: 'Thought Work',
-      title: 'Reframe your',
-      titleHighlight: 'thoughts.',
-      subtitle: 'Cognitive tools for changing unhelpful thought patterns.',
-      primaryCta: { label: 'Start Reframing', href: '#tools' },
-      secondaryCta: { label: 'Learn CBT', href: '#cbt' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/behavior-change',
-    category: 'content',
-    title: 'Behavior Change — The Genuine Love Project',
-    description: 'Science of lasting behavior change.',
-    hero: {
-      eyebrow: 'Habit Science',
-      title: 'Change that',
-      titleHighlight: 'actually lasts.',
-      subtitle: 'Evidence-based approaches to sustainable change.',
-      primaryCta: { label: 'Start Journey', href: '#journey' },
-      secondaryCta: { label: 'Assessment', href: '#assessment' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/wellness-hub',
-    category: 'content',
-    title: 'Wellness Hub — The Genuine Love Project',
-    description: 'Central hub for all wellness resources.',
-    hero: {
-      eyebrow: 'Resource Center',
-      title: 'Everything wellness',
-      titleHighlight: 'in one place.',
-      subtitle: 'Your central hub for all wellness resources.',
-      primaryCta: { label: 'Explore Hub', href: '#hub' },
-      secondaryCta: { label: 'Categories', href: '#categories' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Share Your Story',
+      title: 'Your voice',
+      titleHighlight: 'matters.',
+      subtitle: 'Contribute to our community of healing.',
+      primaryCta: { label: 'Start Writing', href: '#editor' },
+      secondaryCta: { label: 'Writing Guidelines', href: '#guidelines' }
+    }
   },
   {
     route: '/content-index',
     category: 'content',
+    pageLabel: 'Content Index',
     title: 'Content Index — The Genuine Love Project',
-    description: 'Complete index of all platform content.',
+    description: 'Browse all content organized by topic.',
     hero: {
-      eyebrow: 'Full Index',
-      title: 'Find anything',
+      eyebrow: 'All Content',
+      title: 'Find what',
       titleHighlight: 'you need.',
-      subtitle: 'Searchable index of all content and resources.',
-      primaryCta: { label: 'Browse Index', href: '#index' },
+      subtitle: 'Our complete content library, organized for easy browsing.',
+      primaryCta: { label: 'Browse All', href: '#index' },
       secondaryCta: { label: 'Search', href: '#search' }
-    },
-    sections: [],
-    protected: false
+    }
+  },
+  {
+    route: '/content-studio',
+    category: 'content',
+    pageLabel: 'Content Studio',
+    title: 'Content Studio — The Genuine Love Project',
+    description: 'Create and manage your personal content.',
+    hero: {
+      eyebrow: 'Create',
+      title: 'Your creative',
+      titleHighlight: 'studio.',
+      subtitle: 'Tools for creating and organizing your personal content.',
+      primaryCta: { label: 'Open Studio', href: '#studio' },
+      secondaryCta: { label: 'My Content', href: '#my-content' }
+    }
+  },
+  {
+    route: '/study-vault',
+    category: 'content',
+    pageLabel: 'Study Vault',
+    title: 'Study Vault — The Genuine Love Project',
+    description: 'Research-backed resources and studies on healing.',
+    hero: {
+      eyebrow: 'Research',
+      title: 'Evidence-based',
+      titleHighlight: 'resources.',
+      subtitle: 'Scientific research supporting our healing approaches.',
+      primaryCta: { label: 'Browse Studies', href: '#studies' },
+      secondaryCta: { label: 'Topic Search', href: '#search' }
+    }
+  },
+  {
+    route: '/research',
+    category: 'content',
+    pageLabel: 'Research',
+    title: 'Research — The Genuine Love Project',
+    description: 'The science behind healing and emotional wellness.',
+    hero: {
+      eyebrow: 'The Science',
+      title: 'Research-backed',
+      titleHighlight: 'healing.',
+      subtitle: 'Understanding the evidence behind what we do.',
+      primaryCta: { label: 'Explore Research', href: '#research' },
+      secondaryCta: { label: 'Key Findings', href: '#findings' }
+    }
+  },
+  {
+    route: '/how-to-guides',
+    category: 'content',
+    pageLabel: 'How-To Guides',
+    title: 'How-To Guides — The Genuine Love Project',
+    description: 'Step-by-step guides for healing practices.',
+    hero: {
+      eyebrow: 'Practical Guides',
+      title: 'Step-by-step',
+      titleHighlight: 'instructions.',
+      subtitle: 'Clear, actionable guides for every practice.',
+      primaryCta: { label: 'Browse Guides', href: '#guides' },
+      secondaryCta: { label: 'Getting Started', href: '#start' }
+    }
+  },
+  {
+    route: '/glossary',
+    category: 'content',
+    pageLabel: 'Glossary',
+    title: 'Glossary — The Genuine Love Project',
+    description: 'Definitions of key healing and wellness terms.',
+    hero: {
+      eyebrow: 'Definitions',
+      title: 'Understand the',
+      titleHighlight: 'terminology.',
+      subtitle: 'Clear explanations of key concepts and terms.',
+      primaryCta: { label: 'Browse Terms', href: '#terms' },
+      secondaryCta: { label: 'Search', href: '#search' }
+    }
+  },
+  {
+    route: '/glossary-full',
+    category: 'content',
+    pageLabel: 'Full Glossary',
+    title: 'Complete Glossary — The Genuine Love Project',
+    description: 'Comprehensive glossary of all healing terms.',
+    hero: {
+      eyebrow: 'Complete Reference',
+      title: 'Every term',
+      titleHighlight: 'explained.',
+      subtitle: 'Our complete reference of healing terminology.',
+      primaryCta: { label: 'Browse All', href: '#all' },
+      secondaryCta: { label: 'By Category', href: '#categories' }
+    }
+  },
+  {
+    route: '/insight-cards',
+    category: 'content',
+    pageLabel: 'Insight Cards',
+    title: 'Insight Cards — The Genuine Love Project',
+    description: 'Quick insights and wisdom in card format.',
+    hero: {
+      eyebrow: 'Quick Wisdom',
+      title: 'Bite-sized',
+      titleHighlight: 'insights.',
+      subtitle: 'Powerful ideas in a digestible format.',
+      primaryCta: { label: 'Draw a Card', href: '#draw' },
+      secondaryCta: { label: 'Browse All', href: '#all' }
+    }
+  },
+  {
+    route: '/news',
+    category: 'content',
+    pageLabel: 'News',
+    title: 'News — The Genuine Love Project',
+    description: 'Updates and announcements from the platform.',
+    hero: {
+      eyebrow: 'Latest Updates',
+      title: 'What\'s',
+      titleHighlight: 'new.',
+      subtitle: 'Platform updates, new features, and announcements.',
+      primaryCta: { label: 'Read Latest', href: '#latest' },
+      secondaryCta: { label: 'Subscribe', href: '#subscribe' }
+    }
   },
   {
     route: '/examples',
     category: 'content',
+    pageLabel: 'Examples',
     title: 'Examples — The Genuine Love Project',
-    description: 'Example practices and use cases.',
+    description: 'Real examples of healing practices in action.',
     hero: {
       eyebrow: 'See It In Action',
-      title: 'Learn by',
-      titleHighlight: 'example.',
-      subtitle: 'Real examples of healing practices in action.',
+      title: 'Real',
+      titleHighlight: 'examples.',
+      subtitle: 'See how others use these tools in their practice.',
       primaryCta: { label: 'Browse Examples', href: '#examples' },
-      secondaryCta: { label: 'Categories', href: '#categories' }
-    },
-    sections: [],
-    protected: false
+      secondaryCta: { label: 'Submit Your Own', href: '#submit' }
+    }
+  },
+  
+  // =========================================================================
+  // COMMUNITY & SOCIAL (3 routes)
+  // =========================================================================
+  {
+    route: '/social',
+    category: 'community',
+    pageLabel: 'Social',
+    title: 'Social — The Genuine Love Project',
+    description: 'Connect with your healing community.',
+    hero: {
+      eyebrow: 'Connection',
+      title: 'You\'re not',
+      titleHighlight: 'alone.',
+      subtitle: 'Connect with others walking similar paths.',
+      primaryCta: { label: 'Join Community', href: '#community' },
+      secondaryCta: { label: 'Find Groups', href: '#groups' }
+    }
   },
   {
-    route: '/professional-resources',
-    category: 'content',
-    title: 'Professional Resources — The Genuine Love Project',
-    description: 'Resources for therapists and professionals.',
+    route: '/community',
+    category: 'community',
+    pageLabel: 'Community',
+    title: 'Community — The Genuine Love Project',
+    description: 'A safe, moderated space for shared healing.',
     hero: {
-      eyebrow: 'For Professionals',
-      title: 'Tools for',
-      titleHighlight: 'practitioners.',
-      subtitle: 'Resources for mental health professionals.',
-      primaryCta: { label: 'Access Resources', href: '#resources' },
-      secondaryCta: { label: 'Verify Credentials', href: '#verify' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Together',
+      title: 'Healing',
+      titleHighlight: 'together.',
+      subtitle: 'A safe, moderated community of healing hearts.',
+      primaryCta: { label: 'Enter Community', href: '#community' },
+      secondaryCta: { label: 'Guidelines', href: '/ethics' }
+    }
   },
   {
-    route: '/pricing',
-    category: 'support',
-    title: 'Pricing — The Genuine Love Project',
-    description: 'Choose the plan that fits your healing journey.',
+    route: '/community/discussion/:id',
+    category: 'community',
+    pageLabel: 'Discussion',
+    isDynamic: true,
+    title: 'Discussion — The Genuine Love Project',
+    description: 'Join this community discussion.',
     hero: {
-      eyebrow: 'Investment in You',
-      title: 'Plans for every',
-      titleHighlight: 'healing journey.',
-      subtitle: 'Affordable access to premium healing tools.',
-      primaryCta: { label: 'View Plans', href: '#plans' },
-      secondaryCta: { label: 'Compare Features', href: '#compare' }
-    },
-    sections: [
-      {
-        id: 'plans',
-        eyebrow: 'Choose Your Path',
-        title: 'Simple, transparent pricing',
-        subtitle: 'Start free, upgrade when you\'re ready.',
-        variant: 'glow',
-        cards: [
-          { icon: 'Heart', title: 'Free', text: 'Essential tools to begin your journey.' },
-          { icon: 'Star', title: 'Premium', text: 'Full access to all healing tools.' },
-          { icon: 'Sparkles', title: 'Mastery', text: 'Elite tools for serious practitioners.' }
-        ]
-      }
-    ],
-    protected: false
+      eyebrow: 'Discussion',
+      title: 'Join the',
+      titleHighlight: 'conversation.',
+      subtitle: 'Share your thoughts in a safe space.',
+      primaryCta: { label: 'Add Reply', href: '#reply' },
+      secondaryCta: { label: 'Back to Community', href: '/community' }
+    }
   },
-  {
-    route: '/upgrade',
-    category: 'support',
-    title: 'Upgrade — The Genuine Love Project',
-    description: 'Unlock premium features for deeper healing.',
-    hero: {
-      eyebrow: 'Go Deeper',
-      title: 'Unlock your full',
-      titleHighlight: 'healing potential.',
-      subtitle: 'Premium features for accelerated growth.',
-      primaryCta: { label: 'Upgrade Now', href: '#upgrade' },
-      secondaryCta: { label: 'Compare Plans', href: '/pricing' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/premium',
-    category: 'support',
-    title: 'Premium — The Genuine Love Project',
-    description: 'Your premium membership benefits.',
-    hero: {
-      eyebrow: 'Premium Member',
-      title: 'Your premium',
-      titleHighlight: 'benefits.',
-      subtitle: 'Thank you for investing in your healing.',
-      primaryCta: { label: 'View Benefits', href: '#benefits' },
-      secondaryCta: { label: 'Manage Subscription', href: '/settings' }
-    },
-    sections: [],
-    protected: true
-  },
+  
+  // =========================================================================
+  // SUPPORT & RESOURCES (5 routes)
+  // =========================================================================
   {
     route: '/faq',
     category: 'support',
+    pageLabel: 'FAQ',
     title: 'FAQ — The Genuine Love Project',
     description: 'Frequently asked questions about the platform.',
     hero: {
       eyebrow: 'Questions',
-      title: 'How can we',
-      titleHighlight: 'help you?',
-      subtitle: 'Find answers to common questions.',
-      primaryCta: { label: 'Browse FAQs', href: '#faqs' },
+      title: 'Common',
+      titleHighlight: 'questions.',
+      subtitle: 'Find answers to frequently asked questions.',
+      primaryCta: { label: 'Browse FAQ', href: '#faq' },
       secondaryCta: { label: 'Contact Support', href: '/support' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/support',
-    category: 'support',
-    title: 'Support — The Genuine Love Project',
-    description: 'Get help with the platform.',
-    hero: {
-      eyebrow: 'We\'re Here',
-      title: 'Need',
-      titleHighlight: 'help?',
-      subtitle: 'Our team is here to support you.',
-      primaryCta: { label: 'Contact Support', href: '#contact' },
-      secondaryCta: { label: 'Browse FAQs', href: '/faq' }
-    },
-    sections: [],
-    protected: false
+    }
   },
   {
     route: '/resources',
     category: 'support',
+    pageLabel: 'Resources',
     title: 'Resources — The Genuine Love Project',
-    description: 'Helpful resources for your journey.',
+    description: 'Additional resources for your healing journey.',
     hero: {
-      eyebrow: 'Resource Library',
-      title: 'Helpful',
+      eyebrow: 'External Resources',
+      title: 'More',
       titleHighlight: 'resources.',
-      subtitle: 'Curated resources to support your healing.',
+      subtitle: 'Curated external resources to support your journey.',
       primaryCta: { label: 'Browse Resources', href: '#resources' },
-      secondaryCta: { label: 'Request Resource', href: '#request' }
-    },
-    sections: [],
-    protected: false
+      secondaryCta: { label: 'Crisis Resources', href: '/crisis' }
+    }
   },
   {
-    route: '/admin',
-    category: 'admin',
-    title: 'Admin — The Genuine Love Project',
-    description: 'Platform administration dashboard.',
+    route: '/support',
+    category: 'support',
+    pageLabel: 'Support',
+    title: 'Support — The Genuine Love Project',
+    description: 'Get help with the platform or your journey.',
     hero: {
-      eyebrow: 'Administration',
-      title: 'Platform',
-      titleHighlight: 'management.',
-      subtitle: 'Monitor and manage platform operations.',
-      primaryCta: { label: 'View Dashboard', href: '#dashboard' },
-      secondaryCta: { label: 'Reports', href: '#reports' }
-    },
-    sections: [],
-    protected: true,
-    adminOnly: true
+      eyebrow: 'We\'re Here',
+      title: 'How can we',
+      titleHighlight: 'help?',
+      subtitle: 'Get the support you need.',
+      primaryCta: { label: 'Contact Us', href: '#contact' },
+      secondaryCta: { label: 'Browse FAQ', href: '/faq' }
+    }
   },
   {
-    route: '/control',
-    category: 'admin',
-    title: 'Control Dashboard — The Genuine Love Project',
-    description: 'System control and monitoring.',
+    route: '/professional-resources',
+    category: 'support',
+    pageLabel: 'Professional Resources',
+    title: 'Professional Resources — The Genuine Love Project',
+    description: 'Resources for mental health professionals.',
     hero: {
-      eyebrow: 'System Control',
-      title: 'Platform',
-      titleHighlight: 'controls.',
-      subtitle: 'System monitoring and configuration.',
-      primaryCta: { label: 'View Status', href: '#status' },
-      secondaryCta: { label: 'Settings', href: '#settings' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/content-admin',
-    category: 'admin',
-    title: 'Content Admin — The Genuine Love Project',
-    description: 'Manage platform content.',
-    hero: {
-      eyebrow: 'Content Management',
-      title: 'Manage',
-      titleHighlight: 'content.',
-      subtitle: 'Create, edit, and organize platform content.',
-      primaryCta: { label: 'View Content', href: '#content' },
-      secondaryCta: { label: 'Create New', href: '#create' }
-    },
-    sections: [],
-    protected: true,
-    adminOnly: true
-  },
-  {
-    route: '/health',
-    category: 'admin',
-    title: 'Health — The Genuine Love Project',
-    description: 'System health monitoring.',
-    hero: {
-      eyebrow: 'System Health',
-      title: 'Platform',
-      titleHighlight: 'status.',
-      subtitle: 'Real-time system health monitoring.',
-      primaryCta: { label: 'View Status', href: '#status' },
-      secondaryCta: { label: 'History', href: '#history' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'For Professionals',
+      title: 'Professional',
+      titleHighlight: 'resources.',
+      subtitle: 'Tools and information for mental health professionals.',
+      primaryCta: { label: 'Browse Resources', href: '#resources' },
+      secondaryCta: { label: 'Partner With Us', href: '#partner' }
+    }
   },
   {
     route: '/qa',
-    category: 'admin',
-    title: 'QA — The Genuine Love Project',
-    description: 'Quality assurance testing.',
+    category: 'support',
+    pageLabel: 'Q&A',
+    title: 'Q&A — The Genuine Love Project',
+    description: 'Ask questions and get answers from the community.',
     hero: {
-      eyebrow: 'Quality Assurance',
-      title: 'Platform',
-      titleHighlight: 'testing.',
-      subtitle: 'Quality assurance and testing tools.',
-      primaryCta: { label: 'Run Tests', href: '#tests' },
-      secondaryCta: { label: 'Reports', href: '#reports' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Ask & Answer',
+      title: 'Questions &',
+      titleHighlight: 'answers.',
+      subtitle: 'Get answers from our community of healers.',
+      primaryCta: { label: 'Ask a Question', href: '#ask' },
+      secondaryCta: { label: 'Browse Questions', href: '#browse' }
+    }
   },
-  {
-    route: '/crm',
-    category: 'admin',
-    title: 'CRM — The Genuine Love Project',
-    description: 'Customer relationship management.',
-    hero: {
-      eyebrow: 'CRM',
-      title: 'User',
-      titleHighlight: 'management.',
-      subtitle: 'Customer relationship and user management.',
-      primaryCta: { label: 'View Users', href: '#users' },
-      secondaryCta: { label: 'Analytics', href: '#analytics' }
-    },
-    sections: [],
-    protected: true,
-    adminOnly: true
-  },
+  
+  // =========================================================================
+  // LEGAL & POLICY (5 routes)
+  // =========================================================================
   {
     route: '/terms',
     category: 'legal',
+    pageLabel: 'Terms of Service',
     title: 'Terms of Service — The Genuine Love Project',
-    description: 'Terms and conditions of platform use.',
+    description: 'Our terms of service and usage agreement.',
     hero: {
       eyebrow: 'Legal',
       title: 'Terms of',
       titleHighlight: 'Service.',
       subtitle: 'Please read these terms carefully.',
-      primaryCta: null,
-      secondaryCta: null
-    },
-    sections: [],
-    protected: false,
-    isLegalPage: true
+      primaryCta: { label: 'Read Terms', href: '#terms' },
+      secondaryCta: { label: 'Contact Legal', href: '/support' }
+    }
   },
   {
     route: '/privacy',
     category: 'legal',
+    pageLabel: 'Privacy Policy',
     title: 'Privacy Policy — The Genuine Love Project',
     description: 'How we protect and handle your data.',
     hero: {
-      eyebrow: 'Legal',
+      eyebrow: 'Your Privacy',
       title: 'Privacy',
       titleHighlight: 'Policy.',
-      subtitle: 'Your privacy is sacred to us.',
-      primaryCta: null,
-      secondaryCta: null
-    },
-    sections: [],
-    protected: false,
-    isLegalPage: true
+      subtitle: 'Your privacy is important to us. Here\'s how we protect it.',
+      primaryCta: { label: 'Read Policy', href: '#policy' },
+      secondaryCta: { label: 'Data Request', href: '/support' }
+    }
   },
   {
     route: '/legal',
     category: 'legal',
-    title: 'Legal — The Genuine Love Project',
-    description: 'Legal information and policies.',
+    pageLabel: 'Legal',
+    title: 'Legal Information — The Genuine Love Project',
+    description: 'Legal notices and information.',
     hero: {
       eyebrow: 'Legal',
       title: 'Legal',
       titleHighlight: 'Information.',
-      subtitle: 'Important legal documents and policies.',
-      primaryCta: null,
-      secondaryCta: null
-    },
-    sections: [],
-    protected: false,
-    isLegalPage: true
+      subtitle: 'Important legal notices and information.',
+      primaryCta: { label: 'View All', href: '#legal' },
+      secondaryCta: { label: 'Contact', href: '/support' }
+    }
   },
   {
     route: '/ethics',
     category: 'legal',
-    title: 'Ethics — The Genuine Love Project',
-    description: 'Our ethical guidelines and commitments.',
+    pageLabel: 'Ethics',
+    title: 'Ethics & Guidelines — The Genuine Love Project',
+    description: 'Our ethical guidelines and community standards.',
     hero: {
       eyebrow: 'Our Values',
-      title: 'Ethical',
-      titleHighlight: 'Commitments.',
-      subtitle: 'Our commitment to ethical AI and mental health care.',
-      primaryCta: null,
-      secondaryCta: null
-    },
-    sections: [],
-    protected: false,
-    isLegalPage: true
+      title: 'Ethics &',
+      titleHighlight: 'Guidelines.',
+      subtitle: 'The principles that guide our platform and community.',
+      primaryCta: { label: 'Read Guidelines', href: '#guidelines' },
+      secondaryCta: { label: 'Report Issue', href: '/support' }
+    }
   },
   {
     route: '/disclaimer',
     category: 'legal',
+    pageLabel: 'Disclaimer',
     title: 'Disclaimer — The Genuine Love Project',
     description: 'Important disclaimers about our services.',
     hero: {
-      eyebrow: 'Legal',
+      eyebrow: 'Important',
       title: 'Disclaimer.',
       titleHighlight: '',
-      subtitle: 'Important information about our services.',
-      primaryCta: null,
-      secondaryCta: null
-    },
-    sections: [],
-    protected: false,
-    isLegalPage: true
+      subtitle: 'Important information about the nature of our services.',
+      primaryCta: { label: 'Read Disclaimer', href: '#disclaimer' },
+      secondaryCta: { label: 'Questions?', href: '/support' }
+    }
   },
+  
+  // =========================================================================
+  // ACCOUNT & SETTINGS (6 routes)
+  // =========================================================================
   {
-    route: '/safety',
-    category: 'legal',
-    title: 'Safety — The Genuine Love Project',
-    description: 'Safety information and crisis resources.',
+    route: '/settings',
+    category: 'account',
+    pageLabel: 'Settings',
+    title: 'Settings — The Genuine Love Project',
+    description: 'Customize your healing sanctuary.',
     hero: {
-      eyebrow: 'Your Safety Matters',
-      title: 'Safety',
-      titleHighlight: 'First.',
-      subtitle: 'Important safety information and resources.',
-      primaryCta: { label: 'Crisis Resources', href: '/crisis' },
-      secondaryCta: { label: 'Contact Support', href: '/support' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Personalization',
+      title: 'Your',
+      titleHighlight: 'settings.',
+      subtitle: 'Customize your experience.',
+      primaryCta: { label: 'Edit Settings', href: '#settings' },
+      secondaryCta: { label: 'Account', href: '/account/profile' }
+    }
   },
   {
-    route: '/home',
-    aliasOf: '/',
-    category: 'landing'
-  },
-  {
-    route: '/welcome',
-    aliasOf: '/',
-    category: 'landing'
-  },
-  {
-    route: '/reset-password',
-    category: 'auth',
-    title: 'Reset Password — The Genuine Love Project',
-    description: 'Create a new password for your account.',
+    route: '/premium',
+    category: 'account',
+    pageLabel: 'Premium',
+    title: 'Premium — The Genuine Love Project',
+    description: 'Unlock the full power of your healing journey.',
     hero: {
-      eyebrow: 'Almost There',
-      title: 'Create your new',
-      titleHighlight: 'password.',
-      subtitle: 'Choose a strong, unique password for your account.',
-      primaryCta: { label: 'Reset Password', href: '#reset-form' },
-      secondaryCta: { label: 'Back to Sign In', href: '/login' }
-    },
-    sections: [],
-    protected: false,
-    isAuthPage: true
+      eyebrow: 'Upgrade',
+      title: 'Go',
+      titleHighlight: 'Premium.',
+      subtitle: 'Unlock all features and accelerate your healing.',
+      primaryCta: { label: 'Upgrade Now', href: '#upgrade' },
+      secondaryCta: { label: 'Compare Plans', href: '/pricing' }
+    }
   },
   {
-    route: '/onboarding',
-    category: 'core',
-    title: 'Welcome — The Genuine Love Project',
-    description: 'Get started with your personalized healing journey.',
+    route: '/upgrade',
+    category: 'account',
+    pageLabel: 'Upgrade',
+    title: 'Upgrade — The Genuine Love Project',
+    description: 'Upgrade your account for full access.',
     hero: {
-      eyebrow: 'Getting Started',
-      title: 'Let\'s personalize your',
-      titleHighlight: 'healing journey.',
-      subtitle: 'A few questions to tailor your experience.',
-      primaryCta: { label: 'Continue', href: '#next' },
-      secondaryCta: null
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Full Access',
+      title: 'Upgrade your',
+      titleHighlight: 'journey.',
+      subtitle: 'Get access to all premium features.',
+      primaryCta: { label: 'Choose Plan', href: '#plans' },
+      secondaryCta: { label: 'Learn More', href: '/pricing' }
+    }
   },
   {
-    route: '/billing',
-    category: 'core',
-    title: 'Billing — The Genuine Love Project',
-    description: 'Manage your subscription and payment methods.',
-    hero: {
-      eyebrow: 'Account',
-      title: 'Manage your',
-      titleHighlight: 'billing.',
-      subtitle: 'View invoices and update payment methods.',
-      primaryCta: { label: 'View Plans', href: '/pricing' },
-      secondaryCta: { label: 'Payment History', href: '#history' }
-    },
-    sections: [],
-    protected: true
-  },
-  {
-    route: '/profile',
-    category: 'core',
+    route: '/account/profile',
+    category: 'account',
+    pageLabel: 'Profile',
     title: 'Profile — The Genuine Love Project',
-    description: 'View and edit your personal profile.',
+    description: 'Manage your profile information.',
     hero: {
       eyebrow: 'Your Profile',
-      title: 'This is',
-      titleHighlight: 'you.',
-      subtitle: 'Manage your profile and preferences.',
-      primaryCta: { label: 'Edit Profile', href: '#edit' },
-      secondaryCta: { label: 'View Settings', href: '/settings' }
-    },
-    sections: [],
-    protected: true
+      title: 'Profile',
+      titleHighlight: 'settings.',
+      subtitle: 'Manage your personal information.',
+      primaryCta: { label: 'Edit Profile', href: '#profile' },
+      secondaryCta: { label: 'View Public Profile', href: '#public' }
+    }
   },
   {
-    route: '/overview',
-    category: 'core',
-    title: 'Overview — The Genuine Love Project',
-    description: 'Quick overview of your healing journey.',
+    route: '/account/billing',
+    category: 'account',
+    pageLabel: 'Billing',
+    title: 'Billing — The Genuine Love Project',
+    description: 'Manage your subscription and billing.',
     hero: {
-      eyebrow: 'At a Glance',
-      title: 'Your healing',
-      titleHighlight: 'overview.',
-      subtitle: 'See your progress and upcoming activities.',
-      primaryCta: { label: 'View Details', href: '/dashboard' },
-      secondaryCta: { label: 'Today\'s Focus', href: '/today' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Billing',
+      title: 'Billing &',
+      titleHighlight: 'subscription.',
+      subtitle: 'Manage your payment and subscription details.',
+      primaryCta: { label: 'Manage Billing', href: '#billing' },
+      secondaryCta: { label: 'View History', href: '#history' }
+    }
   },
   {
-    route: '/insights',
-    category: 'core',
-    title: 'Insights — The Genuine Love Project',
-    description: 'Personal insights from your healing journey.',
+    route: '/account/settings',
+    category: 'account',
+    pageLabel: 'Account Settings',
+    title: 'Account Settings — The Genuine Love Project',
+    description: 'Manage your account settings and preferences.',
     hero: {
-      eyebrow: 'Your Insights',
-      title: 'Patterns &',
-      titleHighlight: 'discoveries.',
-      subtitle: 'AI-generated insights about your progress.',
-      primaryCta: { label: 'View Insights', href: '#insights' },
-      secondaryCta: { label: 'Share Insight', href: '#share' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Account',
+      title: 'Account',
+      titleHighlight: 'settings.',
+      subtitle: 'Security, notifications, and account preferences.',
+      primaryCta: { label: 'Edit Settings', href: '#settings' },
+      secondaryCta: { label: 'Security', href: '#security' }
+    }
   },
+  
+  // =========================================================================
+  // ADMIN (3 routes)
+  // =========================================================================
   {
-    route: '/glossary-full',
-    aliasOf: '/glossary',
-    category: 'content'
-  },
-  {
-    route: '/write',
-    category: 'content',
-    title: 'Write — The Genuine Love Project',
-    description: 'Share your healing story with the community.',
+    route: '/admin',
+    category: 'admin',
+    pageLabel: 'Admin Dashboard',
+    title: 'Admin — The Genuine Love Project',
+    description: 'Platform administration dashboard.',
     hero: {
-      eyebrow: 'Share Your Voice',
-      title: 'Write your',
-      titleHighlight: 'story.',
-      subtitle: 'Contribute to our community blog.',
-      primaryCta: { label: 'Start Writing', href: '#editor' },
-      secondaryCta: { label: 'Writing Guidelines', href: '#guidelines' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Administration',
+      title: 'Admin',
+      titleHighlight: 'Dashboard.',
+      subtitle: 'Platform management and oversight.',
+      primaryCta: { label: 'View Stats', href: '#stats' },
+      secondaryCta: { label: 'User Management', href: '#users' }
+    }
   },
   {
-    route: '/blog/:slug',
-    category: 'content',
-    isDynamic: true,
-    title: 'Article — The Genuine Love Project',
-    description: 'Read this healing insight.',
+    route: '/content-admin',
+    category: 'admin',
+    pageLabel: 'Content Admin',
+    title: 'Content Admin — The Genuine Love Project',
+    description: 'Manage platform content.',
     hero: {
-      eyebrow: 'Blog',
-      title: 'Article',
-      titleHighlight: '',
-      subtitle: 'Insights for your healing journey.',
-      primaryCta: null,
-      secondaryCta: { label: 'Back to Blog', href: '/blog' }
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Content Management',
+      title: 'Content',
+      titleHighlight: 'Admin.',
+      subtitle: 'Manage and moderate platform content.',
+      primaryCta: { label: 'Manage Content', href: '#content' },
+      secondaryCta: { label: 'Moderation Queue', href: '#queue' }
+    }
   },
   {
-    route: '/community/discussion/:id',
-    category: 'community',
-    isDynamic: true,
-    title: 'Discussion — The Genuine Love Project',
-    description: 'Community discussion thread.',
+    route: '/control',
+    category: 'admin',
+    pageLabel: 'Control Panel',
+    title: 'Control Panel — The Genuine Love Project',
+    description: 'Platform control panel.',
     hero: {
-      eyebrow: 'Community',
-      title: 'Discussion',
-      titleHighlight: '',
-      subtitle: 'Join the conversation.',
-      primaryCta: null,
-      secondaryCta: { label: 'Back to Community', href: '/community' }
-    },
-    sections: [],
-    protected: true
+      eyebrow: 'Control',
+      title: 'Control',
+      titleHighlight: 'Panel.',
+      subtitle: 'System controls and configuration.',
+      primaryCta: { label: 'View Controls', href: '#controls' },
+      secondaryCta: { label: 'System Status', href: '/health' }
+    }
+  },
+  
+  // =========================================================================
+  // SYSTEM & UTILITY (7 routes)
+  // =========================================================================
+  {
+    route: '/health',
+    category: 'system',
+    pageLabel: 'Health Check',
+    title: 'System Health — The Genuine Love Project',
+    description: 'Platform health and status.',
+    hero: {
+      eyebrow: 'Status',
+      title: 'System',
+      titleHighlight: 'Health.',
+      subtitle: 'Current platform status and health metrics.',
+      primaryCta: { label: 'View Status', href: '#status' },
+      secondaryCta: { label: 'Report Issue', href: '/support' }
+    }
   },
   {
     route: '/publishing',
-    category: 'admin',
+    category: 'system',
+    pageLabel: 'Publishing',
     title: 'Publishing — The Genuine Love Project',
-    description: 'Content publishing management.',
+    description: 'Content publishing tools.',
     hero: {
-      eyebrow: 'Content',
+      eyebrow: 'Publish',
       title: 'Publishing',
-      titleHighlight: 'center.',
-      subtitle: 'Manage and publish content.',
-      primaryCta: { label: 'View Queue', href: '#queue' },
-      secondaryCta: { label: 'Create Post', href: '/write' }
-    },
-    sections: [],
-    protected: false
+      titleHighlight: 'Tools.',
+      subtitle: 'Tools for publishing and managing content.',
+      primaryCta: { label: 'Start Publishing', href: '#publish' },
+      secondaryCta: { label: 'Drafts', href: '#drafts' }
+    }
   },
   {
     route: '/design-system',
-    category: 'admin',
+    category: 'system',
+    pageLabel: 'Design System',
     title: 'Design System — The Genuine Love Project',
-    description: 'Platform design system documentation.',
+    description: 'Platform design system and component library.',
     hero: {
       eyebrow: 'Design',
       title: 'Design',
       titleHighlight: 'System.',
-      subtitle: 'Component library and style guide.',
-      primaryCta: { label: 'View Components', href: '#components' },
-      secondaryCta: { label: 'Colors', href: '#colors' }
-    },
-    sections: [],
-    protected: false
+      subtitle: 'Our component library and design guidelines.',
+      primaryCta: { label: 'Browse Components', href: '#components' },
+      secondaryCta: { label: 'Guidelines', href: '#guidelines' }
+    }
   },
   {
     route: '/wireframes',
-    category: 'admin',
+    category: 'system',
+    pageLabel: 'Wireframes',
     title: 'Wireframes — The Genuine Love Project',
-    description: 'UI wireframe templates.',
+    description: 'Platform wireframes and prototypes.',
     hero: {
-      eyebrow: 'Design',
-      title: 'Wireframe',
-      titleHighlight: 'Templates.',
-      subtitle: 'Page layout templates and patterns.',
-      primaryCta: { label: 'View Templates', href: '#templates' },
-      secondaryCta: null
-    },
-    sections: [],
-    protected: false
+      eyebrow: 'Prototypes',
+      title: 'Wireframes.',
+      titleHighlight: '',
+      subtitle: 'View platform wireframes and design prototypes.',
+      primaryCta: { label: 'View Wireframes', href: '#wireframes' },
+      secondaryCta: { label: 'Design System', href: '/design-system' }
+    }
   },
   {
     route: '/design-dashboard',
-    category: 'admin',
+    category: 'system',
+    pageLabel: 'Design Dashboard',
     title: 'Design Dashboard — The Genuine Love Project',
-    description: 'Design team dashboard.',
+    description: 'Design metrics and overview.',
     hero: {
-      eyebrow: 'Design Team',
+      eyebrow: 'Design Metrics',
       title: 'Design',
       titleHighlight: 'Dashboard.',
-      subtitle: 'Monitor design system usage and updates.',
+      subtitle: 'Overview of design system usage and metrics.',
       primaryCta: { label: 'View Metrics', href: '#metrics' },
-      secondaryCta: { label: 'Components', href: '/design-system' }
-    },
-    sections: [],
-    protected: true,
-    adminOnly: true
+      secondaryCta: { label: 'Component Stats', href: '#stats' }
+    }
   },
   {
-    route: '/canva-landing',
-    category: 'landing',
-    title: 'Welcome — The Genuine Love Project',
-    description: 'Beautiful landing page for The Genuine Love Project.',
+    route: '/safety',
+    category: 'system',
+    pageLabel: 'Safety',
+    title: 'Safety — The Genuine Love Project',
+    description: 'Platform safety information and resources.',
     hero: {
-      eyebrow: 'Discover',
-      title: 'Your path to',
-      titleHighlight: 'genuine love.',
-      subtitle: 'A beautiful journey of self-discovery and healing.',
-      primaryCta: { label: 'Get Started', href: '/register' },
-      secondaryCta: { label: 'Learn More', href: '#features' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/about',
-    category: 'landing',
-    title: 'About — The Genuine Love Project',
-    description: 'Learn about our mission and the team behind The Genuine Love Project.',
-    hero: {
-      eyebrow: 'Our Story',
-      title: 'Why we built',
-      titleHighlight: 'Genuine Love.',
-      subtitle: 'A platform born from personal healing journeys.',
-      primaryCta: { label: 'Join Us', href: '/register' },
-      secondaryCta: { label: 'Our Mission', href: '#mission' }
-    },
-    sections: [
-      {
-        id: 'values',
-        eyebrow: 'Our Values',
-        title: 'What we believe',
-        subtitle: 'Core principles that guide everything we do.',
-        variant: 'glow',
-        cards: [
-          { icon: 'Heart', title: 'Compassion First', text: 'Every feature is designed with empathy.' },
-          { icon: 'Shield', title: 'Safety Always', text: 'Your privacy and security are sacred.' },
-          { icon: 'Sparkles', title: 'Evidence-Based', text: 'Grounded in science, delivered with love.' },
-          { icon: 'Users', title: 'Community Driven', text: 'Built for and with our healing community.' }
-        ]
-      }
-    ],
-    protected: false
-  },
-  {
-    route: '/features',
-    category: 'landing',
-    title: 'Features — The Genuine Love Project',
-    description: 'Explore all the healing tools and features available.',
-    hero: {
-      eyebrow: 'Platform Features',
-      title: 'Everything you need to',
-      titleHighlight: 'heal and grow.',
-      subtitle: 'A comprehensive toolkit for emotional wellness.',
-      primaryCta: { label: 'Try Free', href: '/register' },
-      secondaryCta: { label: 'View Pricing', href: '/pricing' }
-    },
-    sections: [
-      {
-        id: 'core-features',
-        eyebrow: 'Core Features',
-        title: 'Your healing toolkit',
-        subtitle: 'Essential tools for every stage of your journey.',
-        variant: 'pattern',
-        cards: [
-          { icon: 'MessageCircle', title: 'AI Companion', text: '24/7 trauma-informed chat support.' },
-          { icon: 'BookOpen', title: 'Journaling', text: 'Guided prompts for deep reflection.' },
-          { icon: 'Activity', title: 'Mood Tracking', text: 'Understand your emotional patterns.' },
-          { icon: 'Heart', title: 'Inner Child Work', text: 'Heal your younger self.' }
-        ]
-      }
-    ],
-    protected: false
-  },
-  {
-    route: '/testimonials',
-    category: 'landing',
-    title: 'Testimonials — The Genuine Love Project',
-    description: 'Stories from our healing community.',
-    hero: {
-      eyebrow: 'Real Stories',
-      title: 'Hear from our',
-      titleHighlight: 'healing community.',
-      subtitle: 'Stories of transformation from people like you.',
-      primaryCta: { label: 'Start Your Story', href: '/register' },
-      secondaryCta: { label: 'Share Yours', href: '#share' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/contact',
-    category: 'support',
-    title: 'Contact — The Genuine Love Project',
-    description: 'Get in touch with our team.',
-    hero: {
-      eyebrow: 'Reach Out',
-      title: 'We\'d love to',
-      titleHighlight: 'hear from you.',
-      subtitle: 'Questions, feedback, or partnership inquiries.',
-      primaryCta: { label: 'Send Message', href: '#contact-form' },
-      secondaryCta: { label: 'FAQ', href: '/faq' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/accessibility',
-    category: 'legal',
-    title: 'Accessibility — The Genuine Love Project',
-    description: 'Our commitment to accessible design.',
-    hero: {
-      eyebrow: 'Inclusive Design',
-      title: 'Accessible to',
-      titleHighlight: 'everyone.',
-      subtitle: 'Our commitment to inclusive, accessible design.',
-      primaryCta: { label: 'Accessibility Features', href: '#features' },
-      secondaryCta: { label: 'Report Issue', href: '#report' }
-    },
-    sections: [],
-    protected: false
-  },
-  {
-    route: '/cookies',
-    category: 'legal',
-    title: 'Cookie Policy — The Genuine Love Project',
-    description: 'How we use cookies on our platform.',
-    hero: {
-      eyebrow: 'Legal',
-      title: 'Cookie',
-      titleHighlight: 'Policy.',
-      subtitle: 'How we use cookies to improve your experience.',
-      primaryCta: null,
-      secondaryCta: null
-    },
-    sections: [],
-    protected: false,
-    isLegalPage: true
-  },
-  {
-    route: '/landing',
-    aliasOf: '/',
-    category: 'landing'
-  },
-  {
-    route: '/signup',
-    aliasOf: '/register',
-    category: 'auth'
-  },
-  {
-    route: '/sign-up',
-    aliasOf: '/register',
-    category: 'auth'
-  },
-  {
-    route: '/signin',
-    aliasOf: '/login',
-    category: 'auth'
-  },
-  {
-    route: '/sign-in',
-    aliasOf: '/login',
-    category: 'auth'
-  },
-  {
-    route: '/help',
-    aliasOf: '/support',
-    category: 'support'
-  },
-  {
-    route: '/therapy',
-    aliasOf: '/chat',
-    category: 'core'
-  },
-  {
-    route: '/ai-chat',
-    aliasOf: '/chat',
-    category: 'core'
-  },
-  {
-    route: '/tos',
-    aliasOf: '/terms',
-    category: 'legal'
+      eyebrow: 'Your Safety',
+      title: 'Safety',
+      titleHighlight: 'First.',
+      subtitle: 'Information about how we keep you safe.',
+      primaryCta: { label: 'Learn More', href: '#safety' },
+      secondaryCta: { label: 'Crisis Resources', href: '/crisis' }
+    }
   },
   {
     route: '/not-found',
-    category: 'support',
+    category: 'system',
+    pageLabel: '404 Not Found',
     title: 'Page Not Found — The Genuine Love Project',
     description: 'The page you\'re looking for couldn\'t be found.',
     hero: {
@@ -2002,11 +2079,24 @@ export const routes = [
       subtitle: 'The page you\'re looking for doesn\'t exist or has been moved.',
       primaryCta: { label: 'Go Home', href: '/' },
       secondaryCta: { label: 'Contact Support', href: '/support' }
-    },
-    sections: [],
-    protected: false
+    }
   }
 ];
+
+// ============================================================================
+// PROCESS ROUTES - Apply presets and create final routes array
+// ============================================================================
+
+export const routes = rawRoutes.map(route => {
+  if (route.aliasOf) {
+    return route;
+  }
+  return applyPreset(route);
+});
+
+// ============================================================================
+// ROUTE UTILITIES
+// ============================================================================
 
 const aliasRoutes = routes.filter(r => r.aliasOf);
 const dynamicRoutes = routes.filter(r => r.isDynamic);
@@ -2023,7 +2113,7 @@ function matchDynamicRoute(path) {
   return null;
 }
 
-export const getRouteConfig = (path) => {
+export function getRouteConfig(path) {
   const directMatch = staticRoutes.find(r => r.route === path);
   if (directMatch) return directMatch;
   
@@ -2037,24 +2127,42 @@ export const getRouteConfig = (path) => {
   if (dynamicMatch) return dynamicMatch;
   
   return routes.find(r => r.route === '/not-found') || null;
-};
+}
 
-export const getRoutesByCategory = (category) => {
+export function getRoutesByCategory(category) {
   return routes.filter(r => r.category === category && !r.aliasOf);
-};
+}
 
-export const getAllCategories = () => {
+export function getAllCategories() {
   return [...new Set(routes.filter(r => !r.aliasOf).map(r => r.category))];
-};
+}
 
-export const isProtectedRoute = (path) => {
+export function listRoutesByCategory() {
+  const grouped = {};
+  for (const route of routes) {
+    if (route.aliasOf) continue;
+    const category = routeCategories[route.category] || route.category;
+    if (!grouped[category]) {
+      grouped[category] = [];
+    }
+    grouped[category].push({
+      route: route.route,
+      label: route.pageLabel,
+      protected: route.protected,
+      isDynamic: route.isDynamic
+    });
+  }
+  return grouped;
+}
+
+export function isProtectedRoute(path) {
   const config = getRouteConfig(path);
   return config?.protected ?? false;
-};
+}
 
-export const isAdminRoute = (path) => {
+export function isAdminRoute(path) {
   const config = getRouteConfig(path);
   return config?.adminOnly ?? false;
-};
+}
 
 export default routes;
