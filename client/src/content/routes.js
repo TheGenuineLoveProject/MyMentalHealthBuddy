@@ -951,7 +951,7 @@ const rawRoutes = [
   // =========================================================================
   {
     route: '/wellness',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Wellness Home',
     title: 'Wellness — The Genuine Love Project',
     description: 'Your complete wellness toolkit for mind, body, and spirit.',
@@ -966,7 +966,7 @@ const rawRoutes = [
   },
   {
     route: '/wellness-hub',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Wellness Hub',
     title: 'Wellness Hub — The Genuine Love Project',
     description: 'Central hub for all wellness tools and practices.',
@@ -981,7 +981,7 @@ const rawRoutes = [
   },
   {
     route: '/healing-library',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Healing Library',
     title: 'Healing Library — The Genuine Love Project',
     description: 'A comprehensive library of healing resources and modalities.',
@@ -996,7 +996,7 @@ const rawRoutes = [
   },
   {
     route: '/calming-scenes',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Calming Scenes',
     title: 'Calming Scenes — The Genuine Love Project',
     description: 'Immersive visual and audio experiences for relaxation.',
@@ -1011,7 +1011,7 @@ const rawRoutes = [
   },
   {
     route: '/breathing',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Breathing Exercises',
     title: 'Breathing Exercises — The Genuine Love Project',
     description: 'Calming breath practices to regulate your nervous system.',
@@ -1041,7 +1041,7 @@ const rawRoutes = [
   },
   {
     route: '/grounding',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Grounding',
     title: 'Grounding Techniques — The Genuine Love Project',
     description: 'Somatic grounding practices to anchor you in the present moment.',
@@ -1071,7 +1071,7 @@ const rawRoutes = [
   },
   {
     route: '/affirmations',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Affirmations',
     title: 'Affirmations — The Genuine Love Project',
     description: 'Positive affirmations for healing, self-love, and personal growth.',
@@ -1086,7 +1086,7 @@ const rawRoutes = [
   },
   {
     route: '/meditation',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Meditation',
     title: 'Meditation Guide — The Genuine Love Project',
     description: 'Guided meditations for healing, relaxation, and inner peace.',
@@ -1101,7 +1101,7 @@ const rawRoutes = [
   },
   {
     route: '/self-care',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Self-Care',
     title: 'Self-Care Toolkit — The Genuine Love Project',
     description: 'Practical self-care tools and practices for daily wellness.',
@@ -1116,7 +1116,7 @@ const rawRoutes = [
   },
   {
     route: '/emotional-intelligence',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Emotional Intelligence',
     title: 'Emotional Intelligence — The Genuine Love Project',
     description: 'Develop your emotional awareness and regulation skills.',
@@ -1131,7 +1131,7 @@ const rawRoutes = [
   },
   {
     route: '/sleep-guide',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Sleep Guide',
     title: 'Sleep Guide — The Genuine Love Project',
     description: 'Tools and techniques for better, more restful sleep.',
@@ -1146,7 +1146,7 @@ const rawRoutes = [
   },
   {
     route: '/stress-response',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Stress Response',
     title: 'Stress Response Guide — The Genuine Love Project',
     description: 'Understand and regulate your stress response system.',
@@ -1161,7 +1161,7 @@ const rawRoutes = [
   },
   {
     route: '/inner-child',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Inner Child',
     title: 'Inner Child Work — The Genuine Love Project',
     description: 'Reconnect with and heal your inner child through guided exercises.',
@@ -1176,7 +1176,7 @@ const rawRoutes = [
   },
   {
     route: '/body-wellness',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Body Wellness',
     title: 'Body Wellness — The Genuine Love Project',
     description: 'Mind-body connection practices for physical and emotional healing.',
@@ -1191,7 +1191,7 @@ const rawRoutes = [
   },
   {
     route: '/soul-wellness',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Soul Wellness',
     title: 'Soul Wellness — The Genuine Love Project',
     description: 'Spiritual practices for meaning, purpose, and transcendence.',
@@ -1206,7 +1206,7 @@ const rawRoutes = [
   },
   {
     route: '/healing-journeys',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Healing Journeys',
     title: 'Healing Journeys — The Genuine Love Project',
     description: 'Structured healing pathways for specific challenges.',
@@ -1221,7 +1221,7 @@ const rawRoutes = [
   },
   {
     route: '/behavior-change',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Behavior Change',
     title: 'Behavior Change — The Genuine Love Project',
     description: 'Evidence-based tools for creating lasting positive changes.',
@@ -1236,7 +1236,7 @@ const rawRoutes = [
   },
   {
     route: '/daily-routines',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Daily Routines',
     title: 'Daily Routines — The Genuine Love Project',
     description: 'Create nurturing daily routines for consistent well-being.',
@@ -1251,7 +1251,7 @@ const rawRoutes = [
   },
   {
     route: '/cognitive-tools',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Cognitive Tools',
     title: 'Cognitive Tools — The Genuine Love Project',
     description: 'Tools for reframing thoughts and managing cognitive patterns.',
@@ -1266,7 +1266,7 @@ const rawRoutes = [
   },
   {
     route: '/mirror',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Mirror Work',
     title: 'Mirror Work — The Genuine Love Project',
     description: 'Self-love practices using mirror work techniques.',
@@ -1281,7 +1281,7 @@ const rawRoutes = [
   },
   {
     route: '/ritual',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Sacred Rituals',
     title: 'Sacred Rituals — The Genuine Love Project',
     description: 'Create meaningful rituals for healing and transition.',
@@ -1296,7 +1296,7 @@ const rawRoutes = [
   },
   {
     route: '/wisdom',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Wisdom',
     title: 'Wisdom — The Genuine Love Project',
     description: 'Curated wisdom for daily inspiration and reflection.',
@@ -1311,7 +1311,7 @@ const rawRoutes = [
   },
   {
     route: '/wisdom-practices',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Wisdom Practices',
     title: 'Wisdom Practices — The Genuine Love Project',
     description: 'Practical applications of timeless wisdom traditions.',
@@ -1326,7 +1326,7 @@ const rawRoutes = [
   },
   {
     route: '/wisdom-synthesis',
-    category: 'wellness',
+    category: 'landing',
     pageLabel: 'Wisdom Synthesis',
     title: 'Wisdom Synthesis — The Genuine Love Project',
     description: 'Integrate wisdom from multiple traditions into your practice.',

@@ -26,6 +26,8 @@
     "gen:pages:all": "node scripts/generate-pages.mjs --mode=all",
     "verify:routes": "node scripts/verify-routes-manifest.mjs",
     "verify:routes:fix": "node scripts/verify-routes-manifest.mjs --fix",
+    "print:routes:diff": "node scripts/print-routes-diff.mjs",
+    "print:routes:diff:ci": "node scripts/print-routes-diff.mjs --max=20",
     "typecheck": "npx tsc -p client/tsconfig.json --noEmit || true",
     "visual:report": "node scripts/visual-report.mjs",
     "visual:doctor": "node tools/visual-doctor.mjs",

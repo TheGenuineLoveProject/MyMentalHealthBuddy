@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-01-23T04:59:31.117Z",
+  "generatedAt": "2026-01-23T05:12:45.502Z",
   "mode": "all",
   "category": null,
   "from": null,
@@ -195,7 +195,7 @@
     },
     {
       "route": "/affirmations",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/affirmations.jsx",
       "kind": "static",
       "canonical": null
@@ -216,7 +216,7 @@
     },
     {
       "route": "/behavior-change",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/behavior-change.jsx",
       "kind": "static",
       "canonical": null
@@ -237,21 +237,21 @@
     },
     {
       "route": "/body-wellness",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/body-wellness.jsx",
       "kind": "static",
       "canonical": null
     },
     {
       "route": "/breathing",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/breathing.jsx",
       "kind": "static",
       "canonical": null
     },
     {
       "route": "/calming-scenes",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/calming-scenes.jsx",
       "kind": "static",
       "canonical": null
@@ -272,7 +272,7 @@
     },
     {
       "route": "/cognitive-tools",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/cognitive-tools.jsx",
       "kind": "static",
       "canonical": null
@@ -349,7 +349,7 @@
     },
     {
       "route": "/daily-routines",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/daily-routines.jsx",
       "kind": "static",
       "canonical": null
@@ -398,7 +398,7 @@
     },
     {
       "route": "/emotional-intelligence",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/emotional-intelligence.jsx",
       "kind": "static",
       "canonical": null
@@ -447,7 +447,7 @@
     },
     {
       "route": "/grounding",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/grounding.jsx",
       "kind": "static",
       "canonical": null
@@ -475,14 +475,14 @@
     },
     {
       "route": "/healing-journeys",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/healing-journeys.jsx",
       "kind": "static",
       "canonical": null
     },
     {
       "route": "/healing-library",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/healing-library.jsx",
       "kind": "static",
       "canonical": null
@@ -510,7 +510,7 @@
     },
     {
       "route": "/inner-child",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/inner-child.jsx",
       "kind": "static",
       "canonical": null
@@ -573,7 +573,7 @@
     },
     {
       "route": "/meditation",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/meditation.jsx",
       "kind": "static",
       "canonical": null
@@ -587,7 +587,7 @@
     },
     {
       "route": "/mirror",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/mirror.jsx",
       "kind": "static",
       "canonical": null
@@ -720,7 +720,7 @@
     },
     {
       "route": "/ritual",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/ritual.jsx",
       "kind": "static",
       "canonical": null
@@ -734,7 +734,7 @@
     },
     {
       "route": "/self-care",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/self-care.jsx",
       "kind": "static",
       "canonical": null
@@ -748,7 +748,7 @@
     },
     {
       "route": "/sleep-guide",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/sleep-guide.jsx",
       "kind": "static",
       "canonical": null
@@ -762,7 +762,7 @@
     },
     {
       "route": "/soul-wellness",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/soul-wellness.jsx",
       "kind": "static",
       "canonical": null
@@ -783,7 +783,7 @@
     },
     {
       "route": "/stress-response",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/stress-response.jsx",
       "kind": "static",
       "canonical": null
@@ -846,14 +846,14 @@
     },
     {
       "route": "/wellness",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/wellness.jsx",
       "kind": "static",
       "canonical": null
     },
     {
       "route": "/wellness-hub",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/wellness-hub.jsx",
       "kind": "static",
       "canonical": null
@@ -867,21 +867,21 @@
     },
     {
       "route": "/wisdom",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/wisdom.jsx",
       "kind": "static",
       "canonical": null
     },
     {
       "route": "/wisdom-practices",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/wisdom-practices.jsx",
       "kind": "static",
       "canonical": null
     },
     {
       "route": "/wisdom-synthesis",
-      "category": "wellness",
+      "category": "landing",
       "pageFile": "client/src/pages/generated/wisdom-synthesis.jsx",
       "kind": "static",
       "canonical": null

@@ -1,5 +1,5 @@
 {
-  "snapshotHash": "2a997f238cb0417cf1499e5232c73cb5c301fb97f6debca990be04783720b8a3",
+  "snapshotHash": "db31b8cba93871dfd2ce046083c6afd20600fab4afc0bb4ac1ef88c722e49f6f",
   "categoryOrder": [
     {
       "letter": "A",
@@ -61,18 +61,18 @@
     "/account/settings": "86e58e1e829e854b1f06621efa8502c7091d3307f7420056e44c43ff4db87cbe",
     "/admin": "b626cbfc0cc98cda3b609b6a8f587fd4f52a48ddf250ca7af3f0988ddd1a6a8f",
     "/advanced": "139d33c76acbad663ff0f07a980d4d3ac5b20ae53bbbd4286b98f6bf83856f85",
-    "/affirmations": "dc4fc0f19cdf6def8ec14b27031eb644b79e105101687d2b217069215047be8c",
+    "/affirmations": "e20b9df24f79d50f20f6df24ff57be881243399985b47a1da0929dc1bbd65355",
     "/analytics": "ec6feea496bf272917827cb5d1a850474e57bf01ec42ef06f6e768323a8c5eca",
     "/atlas": "f2cdc15452d59870a703d3514de1a1a32f1740718196f21fcb13ad9cf8c98fa5",
-    "/behavior-change": "8a03c085fbe22d1780b0e0b8d19171cb786704c5a95f174639f041be4e0cdc6c",
+    "/behavior-change": "617f613a003f67e511a95b9d5f0d9613f393363d93059a004a76f800304e6c51",
     "/blog": "812f5a88c9bf5aeb9cfd1fc0a9e2318cd4789e62def83a6908bca0b37b74e382",
     "/blog/:slug": "7d07e6022095cfa5a4cd12f1acc852ad79f9f6cc24ed662b618f608f1c681cfa",
-    "/body-wellness": "2e8f43833c9e5d01c07dc56387435b9955cac99b3381a4af4b71440bdff03cc5",
-    "/breathing": "ee7eb39e432f9f0169c6cf425df2e3fb36088d3f36249f10f0f4d0fde572a2b0",
-    "/calming-scenes": "661e588639e493c8f365ed26969ce8d3f442ceda18e96c093e842c37d21c3b64",
+    "/body-wellness": "c520c2b7fd3f461b34a19a645f8ffe79d7209421d1b8d5b97dbed33aab0d89c3",
+    "/breathing": "61be34d1a3ec12556e9ad3d662c2e9527f3fcbd23c6fc86eec4be85039b6baec",
+    "/calming-scenes": "3f16050327144ad56a82f8f9946944fa69a1b959e246cfe3387cb3b42edeff0a",
     "/chat": "ba0472213c58bd4992e077eee468749046b070de86d17fb919aefbdeebc368b5",
     "/cognitive-architecture": "5434c13e857f033afecbe2cde8716c9c872a3c9b2cc0cc85b01cbfe584c4e5f9",
-    "/cognitive-tools": "88c091f38335154be5cbd313a0c9b113fc35427643f1afc351d3362750922dff",
+    "/cognitive-tools": "6d4448f6d614c2b738bc78456e2569a8340fa7e2bd244006b4799b461edd12af",
     "/collaborative-lab": "a23983248617aba3c609fb01fb6bec07a45d5a47b40c1310e1115f4e9dbffe85",
     "/community": "f0d729dbacfb4765ca171bc82a460fa6e73d62c36bf84e68c55b22e467ba0ac9",
     "/community/discussion/:id": "c522a4184246bdc0f4531c8ca6db00243ce1171d7f2f0ded7e4a93c29de361b8",
@@ -83,30 +83,30 @@
     "/control": "3e3e87b1f6a22cf6f9821ba91109039b05827b82f8138c4cf4c7adf30e47c912",
     "/crisis": "5f24881450aa7173d42fbf4a59acf79af6f80a5c46ce022bba1d2f7682767bec",
     "/crm": "91358e7ce1f080c644aa67063bbce054704bced6a5bafc9beb3326f817a3a797",
-    "/daily-routines": "cbed947ad4e92d1474ed14263538e123a4ab02f408b3e67b5958b7cc61b054d6",
+    "/daily-routines": "c3eea458bbd6aa5e02e5049b6cf6323aedb805e91e7fb82ec3d5df2a565efc16",
     "/daily-wisdom": "75d9bdf2a6b7fa328348227c6f890968f3638c4da6b7baa223b83909c25c3f14",
     "/dashboard": "d5b76ee61c4f5ca0960a6c05ff1c51b38f4b99cc294fb8bf26087da482fbd0f2",
     "/design-dashboard": "f1a90aa1175cdaec438b709fa550dbb3b8f57bb27bf6268b5b5b88ec4889f04f",
     "/design-system": "5a826edc12eace7d6ed303096ca5cc9e68504ce94630d4de99c8cfdca6a5bbb3",
     "/disclaimer": "53a767befbb0fa8c5d1504d939b31a7f1251b50bab0b87f945a1639c69bc48a6",
     "/elite-tools": "c46dcaf05b46a6c5dbbc395cb155aaaeb5080aae2814e5faa8828e8b2a99858e",
-    "/emotional-intelligence": "0e2abd4b5d42f78ac60fbdb3882c70607563c3e77f3dabc47534577cbfcee399",
+    "/emotional-intelligence": "4904a5f85d7332a047d625ebd6aa7db2d7940a80183271cda14d2cceb649c9e6",
     "/ethics": "4d451a3f546fe506aa48fd85c08ee04f557aee0cc8df8f2794ca186a2e68f398",
     "/examples": "950e7105c69dbd86424984501bde264ec4f35c645416644091edcac9839b4eed",
     "/faq": "ef25d321160ea3631496f454bc4fe8bcde8747bd9c4dcdede7fa169895a7fdf6",
     "/forgot-password": "b34a1e6d05492ce10fd64b08a8154367daae5ce0e7e371b3bbd4f2e86747bc96",
     "/glossary": "94eaf217f415a54e9f36b9afe0244c9e009b02782dc0832013cabb7626f350b6",
     "/glossary-full": "5add1c65e5445a759688c5ba3d3bece7893d6ba1b4a6c1891d664ab8d8abf4aa",
-    "/grounding": "70e8e71949d647d98c19f0d1fd51e9deaabc0aa823d6681532b069bb0e0295b2",
+    "/grounding": "052c0ae21b6583dc6313d5907f2b01fb79513c3f9b3fdb66158aafdd8aa78214",
     "/growth-analytics": "6ed6eec86acb36d9b913e8eb576401a0f9cd3ff07d266dfe9227356fff56088e",
     "/guided-journaling": "3a773f1e944e6e02b2151c72e6e057bd5caf24978616ab401d0637d0afa27f52",
     "/healing": "c60018d6250f51baf91bb4adb2d75dd16b8985d202536a0db3c171c4b9ff1568",
-    "/healing-journeys": "b2b1e13e9f13838af0abf27588c78558a3d8cdcbe1466116cf9593a308b57d17",
-    "/healing-library": "8784df35f620a666d85a1b2955a729e5c4340d3f5087396025e210008c53483b",
+    "/healing-journeys": "1bba3e2e3df1f6fc1c3154c38c24364e6777e3060b70d03853367214216739a6",
+    "/healing-library": "320db38d4c01f2f710a2ca8eccdf61a8c481833b203601f608ce9f6547479d04",
     "/health": "bd355c0aca8a950941918b5930d5fb51a8ae2e6bb62c6457d14ff99346fc9371",
     "/home": "faabd5426e8ee6c0075861a9945d02f92da007a2fa800f0263f349ed11635feb",
     "/how-to-guides": "df7adc704f9e94359d85849b1a24d64e9e9847a7cbf8a16cd2ce2778838ce836",
-    "/inner-child": "728f2554ccb932bc06272a202d37d791431ee9280ca8455b696e2d448b80ea94",
+    "/inner-child": "9b4e1c4df1f6aa77449fb998fe89aed48b06ef29cb49f09d312db8d655e42fb5",
     "/insight-cards": "fe4bfab9af318a6c4ed712ca08b2264bb3e981d7d37f33064e848c03171a6b36",
     "/journal": "55f03dbb1c3c09fce9580447f9f625bb00fa8b634b5e7dc5222e7e2d12f6421b",
     "/knowledge-synthesis": "655e6f4c4da1d93e5624f14b69cf3026e76db6874a943fa1b20e61d387837480",
@@ -115,9 +115,9 @@
     "/login": "01ba1492005a6c57bdba2f1588dc14d3f833890507ca3d9c7e72c5f8682081f7",
     "/login/callback": "7102f7ff3a2d3228b9319ddd6b76c8b8de02f9031f6dcc2e786bf2cc624734fe",
     "/mastery": "de4edbf2188a84495102f847acb0ba0852adeac2ce2a4759a80cf9b4bbc2a3fc",
-    "/meditation": "fb65f05ff7b041ce37e1bcf9ef290404fa9e2d8ba7ac3c2d4b6a6318e3098988",
+    "/meditation": "694c4f8cdc438f1b0e37d5344ed89e452e096989d02182a1383b8924ba042683",
     "/meta-learning": "ecef45ff7c5152ee902227e3b939b6296736c96b241afcad98caa82b837b4743",
-    "/mirror": "794d3da96b4c63e65297a07a2d33f2cf8da736bbe50c2041534f40c8efb46e44",
+    "/mirror": "486b801722f58936f8926acd0a3635211fda8c46fa5f07ddc014e61be8eafb7e",
     "/mood": "8d6351584e7377b87974674ac2198404dee789f039ed73a3038c5a8db6d879c9",
     "/news": "675e4de370cc3ca2e20ae35d1a2305723afdd87ee6e34f3d40ee3219b6107de3",
     "/not-found": "019a89e7d1fd468369590ccb7484f7b349dc89404d265724e8d48883be603266",
@@ -136,16 +136,16 @@
     "/reset-password": "4fc2ff0890843ad441145783c8a1d034d4a807dc4cb144ed9802d1e8ff7873eb",
     "/resilience": "e6070915d0ed98edc18dc29130900863f1d7d9c2a45de63a868715ab472901a8",
     "/resources": "b9ef4313b2028fc78089a00319107532124768ff150d9c201ac62cfa0ecfbf91",
-    "/ritual": "ce6fe5d2fee102019a89d6eb4c60e4f88530f4eced677f0de4c7073e3ca79b52",
+    "/ritual": "3a4c18a8381ce5ba0410758475c8a7dc011c721ef7af952ff2272294534c04d8",
     "/safety": "7161cb1ac10e266c82a8ec7e85cc0febbc19b3f775adb24b8865a3e7be8bca8e",
-    "/self-care": "4216189edb63023ec5c7cc93597ae4eb67e6368201adb6a307834d44035f5001",
+    "/self-care": "9c512bd3a765d3daf15026a66a371d98da1870bf61e9833ad5c0819a1b83a02b",
     "/settings": "e9150c69aaec8083ee7290733f2f9909cf8be252ca2e5d29d17025bff7b7de3f",
-    "/sleep-guide": "e5bb7014e8a2910ee57ce516e4f74409c077dadd0b32903b06df24ecf13c4f77",
+    "/sleep-guide": "b905876c0acfd28bd17dda757227c1ff560884eaa17fc88139c0afbc4c05d096",
     "/social": "2076ee0d9d4e88f82ff19dc3c3496b1997dd0d66e7cdfac650fef5b0e0172d33",
-    "/soul-wellness": "a89d3ddfb8fd2adea684ebe9209b412562ddcad556b0c598fc32c980f9e177a1",
+    "/soul-wellness": "80eafc6ec6d206f9033ad9ac115e3ca815675bbbd778b5379a5058481d29231c",
     "/state": "64c403379c5d90fec8f171021f8467541089dfe9190328c393447905459a1278",
     "/strategy-maps": "118cabe7291c6935218ac08fd4a2d0173e9ea499f5732e76e1f2a59e8843b19b",
-    "/stress-response": "743fca97c98e23f640ea047f4788ce80c066430cffe0eeefa8122948e055e85e",
+    "/stress-response": "30431bb5e64f3f239a9635cdc2eb35889383446f71576ff9b739749960848ff6",
     "/study-vault": "8eb0b90be51de5359df870e0cc8a09f8e10ed7886df859dc411d7f3984fd2f94",
     "/support": "4512365c09fb51806b796ca682814bb32d929d56f9d131b717d21aa41653f583",
     "/systems-thinking": "8be2c0f28b881ef656b9d86aa4834ba6ba232368c18b01604d837348edea2811",
@@ -154,12 +154,12 @@
     "/tools": "9e70ee9f20752a07a6b9ea6d892d425133712681b702f63caf95846d34c7d7b8",
     "/upgrade": "893c3667f0308f997e898335460f706a0b4420d11b44393ab92ca497b007811e",
     "/welcome": "a9aec92f46ec4fd6710b064adc7033978b81eb433391626303b062b21207df2d",
-    "/wellness": "77db7f217081b349f0b1df0546821f7d3a54312c1de29ae6b24fd8a467700581",
-    "/wellness-hub": "718bae2b3c9d2868b5606d4ca13a2915b5ee22bef9a2ff02b679a6ee00bc6d9e",
+    "/wellness": "fcf17a9617c832120cd8d69772683fa67b5a5a2dd1e6eb9d32ea748413ed4653",
+    "/wellness-hub": "bd6a8b53ed5e1701ccb0f11a734145296db058c333fbcb62dd0427f77f21a850",
     "/wireframes": "3fd3b5b76a151f9fa93f94c41137ca545c3b9d08187d4afbf59f3b4ede8f28ef",
-    "/wisdom": "3e0e6a70b636b00ff763b8a208e3a76344d1501ebc75cfd9ea1518fa5eebba86",
-    "/wisdom-practices": "8e08a92d51424b709a4f8eb66bb6ef19c238133fa817b9ab598896fc2ce9d648",
-    "/wisdom-synthesis": "6355889655fd42451e2007112be33705156f848429719a159f41d8ee3fe7771e",
+    "/wisdom": "da90d3f013b03e932a9d6b6531324f01f22b4f64ec5359a4530616a15aea63b4",
+    "/wisdom-practices": "7996f3327fdf3a3f96bc99d3742580d07fdcfd9f8e3667cd13dd094662646a31",
+    "/wisdom-synthesis": "c00604ad9d0ec317d8b15dfeba7d9fc3a611af8fa0c7f72f2cc1c381aea4f9de",
     "/write": "6e6d0aed3e22ce723b555069c3fad23302d3ed3124dff7d9420541eb2e4e5541"
   },
   "routesIndex": [
@@ -303,7 +303,7 @@
     },
     {
       "route": "/affirmations",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Affirmations — The Genuine Love Project",
@@ -322,7 +322,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "dc4fc0f19cdf6def8ec14b27031eb644b79e105101687d2b217069215047be8c"
+      "routeHash": "e20b9df24f79d50f20f6df24ff57be881243399985b47a1da0929dc1bbd65355"
     },
     {
       "route": "/analytics",
@@ -372,7 +372,7 @@
     },
     {
       "route": "/behavior-change",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Behavior Change — The Genuine Love Project",
@@ -391,7 +391,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "8a03c085fbe22d1780b0e0b8d19171cb786704c5a95f174639f041be4e0cdc6c"
+      "routeHash": "617f613a003f67e511a95b9d5f0d9613f393363d93059a004a76f800304e6c51"
     },
     {
       "route": "/blog",
@@ -441,7 +441,7 @@
     },
     {
       "route": "/body-wellness",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Body Wellness — The Genuine Love Project",
@@ -460,11 +460,11 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "2e8f43833c9e5d01c07dc56387435b9955cac99b3381a4af4b71440bdff03cc5"
+      "routeHash": "c520c2b7fd3f461b34a19a645f8ffe79d7209421d1b8d5b97dbed33aab0d89c3"
     },
     {
       "route": "/breathing",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Breathing Exercises — The Genuine Love Project",
@@ -483,11 +483,11 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "ee7eb39e432f9f0169c6cf425df2e3fb36088d3f36249f10f0f4d0fde572a2b0"
+      "routeHash": "61be34d1a3ec12556e9ad3d662c2e9527f3fcbd23c6fc86eec4be85039b6baec"
     },
     {
       "route": "/calming-scenes",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Calming Scenes — The Genuine Love Project",
@@ -506,7 +506,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "661e588639e493c8f365ed26969ce8d3f442ceda18e96c093e842c37d21c3b64"
+      "routeHash": "3f16050327144ad56a82f8f9946944fa69a1b959e246cfe3387cb3b42edeff0a"
     },
     {
       "route": "/chat",
@@ -556,7 +556,7 @@
     },
     {
       "route": "/cognitive-tools",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Cognitive Tools — The Genuine Love Project",
@@ -575,7 +575,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "88c091f38335154be5cbd313a0c9b113fc35427643f1afc351d3362750922dff"
+      "routeHash": "6d4448f6d614c2b738bc78456e2569a8340fa7e2bd244006b4799b461edd12af"
     },
     {
       "route": "/collaborative-lab",
@@ -809,7 +809,7 @@
     },
     {
       "route": "/daily-routines",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Daily Routines — The Genuine Love Project",
@@ -828,7 +828,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "cbed947ad4e92d1474ed14263538e123a4ab02f408b3e67b5958b7cc61b054d6"
+      "routeHash": "c3eea458bbd6aa5e02e5049b6cf6323aedb805e91e7fb82ec3d5df2a565efc16"
     },
     {
       "route": "/daily-wisdom",
@@ -970,7 +970,7 @@
     },
     {
       "route": "/emotional-intelligence",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Emotional Intelligence — The Genuine Love Project",
@@ -989,7 +989,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "0e2abd4b5d42f78ac60fbdb3882c70607563c3e77f3dabc47534577cbfcee399"
+      "routeHash": "4904a5f85d7332a047d625ebd6aa7db2d7940a80183271cda14d2cceb649c9e6"
     },
     {
       "route": "/ethics",
@@ -1131,7 +1131,7 @@
     },
     {
       "route": "/grounding",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Grounding Techniques — The Genuine Love Project",
@@ -1150,7 +1150,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "70e8e71949d647d98c19f0d1fd51e9deaabc0aa823d6681532b069bb0e0295b2"
+      "routeHash": "052c0ae21b6583dc6313d5907f2b01fb79513c3f9b3fdb66158aafdd8aa78214"
     },
     {
       "route": "/growth-analytics",
@@ -1223,7 +1223,7 @@
     },
     {
       "route": "/healing-journeys",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Healing Journeys — The Genuine Love Project",
@@ -1242,11 +1242,11 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "b2b1e13e9f13838af0abf27588c78558a3d8cdcbe1466116cf9593a308b57d17"
+      "routeHash": "1bba3e2e3df1f6fc1c3154c38c24364e6777e3060b70d03853367214216739a6"
     },
     {
       "route": "/healing-library",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Healing Library — The Genuine Love Project",
@@ -1265,7 +1265,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "8784df35f620a666d85a1b2955a729e5c4340d3f5087396025e210008c53483b"
+      "routeHash": "320db38d4c01f2f710a2ca8eccdf61a8c481833b203601f608ce9f6547479d04"
     },
     {
       "route": "/health",
@@ -1327,7 +1327,7 @@
     },
     {
       "route": "/inner-child",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Inner Child Work — The Genuine Love Project",
@@ -1346,7 +1346,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "728f2554ccb932bc06272a202d37d791431ee9280ca8455b696e2d448b80ea94"
+      "routeHash": "9b4e1c4df1f6aa77449fb998fe89aed48b06ef29cb49f09d312db8d655e42fb5"
     },
     {
       "route": "/insight-cards",
@@ -1534,7 +1534,7 @@
     },
     {
       "route": "/meditation",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Meditation Guide — The Genuine Love Project",
@@ -1553,7 +1553,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "fb65f05ff7b041ce37e1bcf9ef290404fa9e2d8ba7ac3c2d4b6a6318e3098988"
+      "routeHash": "694c4f8cdc438f1b0e37d5344ed89e452e096989d02182a1383b8924ba042683"
     },
     {
       "route": "/meta-learning",
@@ -1580,7 +1580,7 @@
     },
     {
       "route": "/mirror",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Mirror Work — The Genuine Love Project",
@@ -1599,7 +1599,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "794d3da96b4c63e65297a07a2d33f2cf8da736bbe50c2041534f40c8efb46e44"
+      "routeHash": "486b801722f58936f8926acd0a3635211fda8c46fa5f07ddc014e61be8eafb7e"
     },
     {
       "route": "/mood",
@@ -2017,7 +2017,7 @@
     },
     {
       "route": "/ritual",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Sacred Rituals — The Genuine Love Project",
@@ -2036,7 +2036,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "ce6fe5d2fee102019a89d6eb4c60e4f88530f4eced677f0de4c7073e3ca79b52"
+      "routeHash": "3a4c18a8381ce5ba0410758475c8a7dc011c721ef7af952ff2272294534c04d8"
     },
     {
       "route": "/safety",
@@ -2063,7 +2063,7 @@
     },
     {
       "route": "/self-care",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Self-Care Toolkit — The Genuine Love Project",
@@ -2082,7 +2082,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "4216189edb63023ec5c7cc93597ae4eb67e6368201adb6a307834d44035f5001"
+      "routeHash": "9c512bd3a765d3daf15026a66a371d98da1870bf61e9833ad5c0819a1b83a02b"
     },
     {
       "route": "/settings",
@@ -2109,7 +2109,7 @@
     },
     {
       "route": "/sleep-guide",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Sleep Guide — The Genuine Love Project",
@@ -2128,7 +2128,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "e5bb7014e8a2910ee57ce516e4f74409c077dadd0b32903b06df24ecf13c4f77"
+      "routeHash": "b905876c0acfd28bd17dda757227c1ff560884eaa17fc88139c0afbc4c05d096"
     },
     {
       "route": "/social",
@@ -2155,7 +2155,7 @@
     },
     {
       "route": "/soul-wellness",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Soul Wellness — The Genuine Love Project",
@@ -2174,7 +2174,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "a89d3ddfb8fd2adea684ebe9209b412562ddcad556b0c598fc32c980f9e177a1"
+      "routeHash": "80eafc6ec6d206f9033ad9ac115e3ca815675bbbd778b5379a5058481d29231c"
     },
     {
       "route": "/state",
@@ -2224,7 +2224,7 @@
     },
     {
       "route": "/stress-response",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Stress Response Guide — The Genuine Love Project",
@@ -2243,7 +2243,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "743fca97c98e23f640ea047f4788ce80c066430cffe0eeefa8122948e055e85e"
+      "routeHash": "30431bb5e64f3f239a9635cdc2eb35889383446f71576ff9b739749960848ff6"
     },
     {
       "route": "/study-vault",
@@ -2420,7 +2420,7 @@
     },
     {
       "route": "/wellness",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Wellness — The Genuine Love Project",
@@ -2439,11 +2439,11 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "77db7f217081b349f0b1df0546821f7d3a54312c1de29ae6b24fd8a467700581"
+      "routeHash": "fcf17a9617c832120cd8d69772683fa67b5a5a2dd1e6eb9d32ea748413ed4653"
     },
     {
       "route": "/wellness-hub",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Wellness Hub — The Genuine Love Project",
@@ -2462,7 +2462,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "718bae2b3c9d2868b5606d4ca13a2915b5ee22bef9a2ff02b679a6ee00bc6d9e"
+      "routeHash": "bd6a8b53ed5e1701ccb0f11a734145296db058c333fbcb62dd0427f77f21a850"
     },
     {
       "route": "/wireframes",
@@ -2489,7 +2489,7 @@
     },
     {
       "route": "/wisdom",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Wisdom — The Genuine Love Project",
@@ -2508,11 +2508,11 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "3e0e6a70b636b00ff763b8a208e3a76344d1501ebc75cfd9ea1518fa5eebba86"
+      "routeHash": "da90d3f013b03e932a9d6b6531324f01f22b4f64ec5359a4530616a15aea63b4"
     },
     {
       "route": "/wisdom-practices",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Wisdom Practices — The Genuine Love Project",
@@ -2531,11 +2531,11 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "8e08a92d51424b709a4f8eb66bb6ef19c238133fa817b9ab598896fc2ce9d648"
+      "routeHash": "7996f3327fdf3a3f96bc99d3742580d07fdcfd9f8e3667cd13dd094662646a31"
     },
     {
       "route": "/wisdom-synthesis",
-      "category": "wellness",
+      "category": "landing",
       "aliasOf": null,
       "pattern": null,
       "title": "Wisdom Synthesis — The Genuine Love Project",
@@ -2554,7 +2554,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "6355889655fd42451e2007112be33705156f848429719a159f41d8ee3fe7771e"
+      "routeHash": "c00604ad9d0ec317d8b15dfeba7d9fc3a611af8fa0c7f72f2cc1c381aea4f9de"
     },
     {
       "route": "/write",
