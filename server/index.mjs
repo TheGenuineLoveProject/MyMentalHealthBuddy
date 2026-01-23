@@ -87,6 +87,8 @@ import peakPerformanceRouter from "./routes/peak-performance.mjs";
 import personalGrowthRouter from "./routes/personal-growth.mjs";
 import psychologicalSafetyRouter from "./routes/psychological-safety.mjs";
 import leadsRouter from "./routes/leads.mjs";
+import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
+import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import { contentRouter } from "./routes/content.mjs";
 const __filename = fileURLToPath(import.meta.url);
@@ -307,6 +309,8 @@ app.use('/api/peak-performance', peakPerformanceRouter);
 app.use('/api/personal-growth', personalGrowthRouter);
 app.use('/api/psychological-safety', psychologicalSafetyRouter);
 app.use('/api/leads', leadsRouter);
+app.use('/api/admin/social', adminSocialStudioRouter);
+app.use('/api/wellness-tools', wellnessToolsRouter);
 app.use('/api/content', contentRouter);
 
 const SERVER_START_TIME = Date.now();
