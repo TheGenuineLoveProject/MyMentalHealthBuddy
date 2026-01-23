@@ -1,6 +1,17 @@
+/**
+ * SacredButton.jsx - CSS Module-based Sacred Button Component
+ * 
+ * Features:
+ * - CSS Modules ONLY (no Tailwind)
+ * - GSAP hover animation (disabled for reduced motion)
+ * - Icons scaled ~0.7
+ * - Accessibility with focus-visible
+ */
+
 import { forwardRef, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'wouter';
+import styles from './SacredButton.module.css';
 
 const SacredButton = forwardRef(function SacredButton(
   {
@@ -11,7 +22,7 @@ const SacredButton = forwardRef(function SacredButton(
     onClick,
     disabled = false,
     icon,
-    iconPosition = 'left',
+    iconPosition = 'right',
     className = '',
     type = 'button',
     animate = true,
@@ -47,32 +58,32 @@ const SacredButton = forwardRef(function SacredButton(
     });
   };
 
-  const sizeClasses = {
-    small: 'py-2 px-4 text-sm',
-    default: 'py-3 px-6 text-base',
-    large: 'py-4 px-8 text-lg',
-  };
+  const sizeClass = {
+    small: styles.sm,
+    default: '',
+    large: styles.lg,
+  }[size] || '';
 
-  const baseClassName = `
-    sacred-button
-    sacred-button--${variant}
-    ${sizeClasses[size]}
-    ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
-    ${className}
-  `.trim().replace(/\s+/g, ' ');
+  const variantClass = {
+    primary: styles.primary,
+    secondary: styles.secondary,
+    ghost: styles.ghost,
+  }[variant] || styles.primary;
+
+  const buttonClassName = `${styles.button} ${variantClass} ${sizeClass} ${disabled ? styles.disabled : ''} ${className}`.trim();
 
   const testId = `button-${children?.toString().toLowerCase().replace(/\s+/g, '-') || 'action'}`;
 
   const content = (
     <>
       {icon && iconPosition === 'left' && (
-        <span className="sacred-icon" aria-hidden="true">
+        <span className={styles.icon} aria-hidden="true">
           {icon}
         </span>
       )}
       <span>{children}</span>
       {icon && iconPosition === 'right' && (
-        <span className="sacred-icon" aria-hidden="true">
+        <span className={styles.icon} aria-hidden="true">
           {icon}
         </span>
       )}
@@ -96,7 +107,7 @@ const SacredButton = forwardRef(function SacredButton(
             if (ref) ref.current = el;
           }}
           href={href}
-          className={baseClassName}
+          className={buttonClassName}
           target="_blank"
           rel="noopener noreferrer"
           {...commonProps}
@@ -113,7 +124,7 @@ const SacredButton = forwardRef(function SacredButton(
           buttonRef.current = el;
           if (ref) ref.current = el;
         }}
-        className={baseClassName}
+        className={buttonClassName}
         {...commonProps}
       >
         {content}
@@ -128,7 +139,7 @@ const SacredButton = forwardRef(function SacredButton(
         if (ref) ref.current = el;
       }}
       type={type}
-      className={baseClassName}
+      className={buttonClassName}
       onClick={onClick}
       disabled={disabled}
       {...commonProps}

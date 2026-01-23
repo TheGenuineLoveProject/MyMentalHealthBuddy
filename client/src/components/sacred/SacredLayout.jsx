@@ -1,7 +1,19 @@
+/**
+ * SacredLayout.jsx - CSS Module-based Sacred Layout Component
+ * 
+ * Features:
+ * - CSS Modules ONLY (no Tailwind)
+ * - AOS with once:true
+ * - GSAP disabled under prefers-reduced-motion
+ * - Skip link to #main
+ * - Sacred pattern + aura overlay
+ */
+
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import styles from './Layout.module.css';
 
 export default function SacredLayout({ 
   children, 
@@ -41,7 +53,7 @@ export default function SacredLayout({
     <>
       <a 
         href={skipLinkTarget} 
-        className="skip-link"
+        className={styles.skipLink}
         data-testid="skip-link"
       >
         Skip to main content
@@ -49,18 +61,18 @@ export default function SacredLayout({
       
       <div 
         ref={layoutRef}
-        className={`sacred-layout ${className}`}
+        className={`${styles.layout} ${className}`}
         data-testid="sacred-layout"
       >
         {showPattern && (
-          <div className="sacred-pattern-overlay" aria-hidden="true" />
+          <div className={styles.patternOverlay} aria-hidden="true" />
         )}
         
         {showAura && (
-          <div className="sacred-aura-overlay" aria-hidden="true" />
+          <div className={styles.auraOverlay} aria-hidden="true" />
         )}
         
-        <div className="sacred-content">
+        <div className={styles.content}>
           {children}
         </div>
       </div>

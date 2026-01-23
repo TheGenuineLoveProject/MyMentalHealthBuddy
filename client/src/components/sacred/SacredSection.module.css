@@ -1,4 +1,5 @@
 /* SacredSection.module.css - Sacred Section CSS Module */
+/* Brand Tokens: Sage #8fbf9f, Dusty Rose #f4c7c3, Deep Teal #2f5d5d, Soft White #faf9f7, Charcoal #3a3a3a, Golden Yellow #eac33b */
 
 .section {
   position: relative;
@@ -27,9 +28,10 @@
   margin-bottom: 4rem;
 }
 
+/* Typography Scale - EXACT from Canva */
 .eyebrow {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* 14px */
   font-weight: 600;
   color: var(--sacred-teal, #2f5d5d);
   letter-spacing: 0.1em;
@@ -39,7 +41,7 @@
 
 .title {
   font-family: var(--font-sacred, 'Playfair Display', serif);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(1.75rem, 4vw, 2.25rem); /* 36px at max */
   font-weight: 600;
   color: var(--sacred-charcoal, #3a3a3a);
   margin-bottom: 1rem;
@@ -48,7 +50,8 @@
 
 .subtitle {
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  font-size: clamp(1rem, 1.5vw, 1.125rem); /* 18px at max */
+  font-weight: 400;
   color: var(--sacred-charcoal, #3a3a3a);
   opacity: 0.8;
   max-width: 600px;
@@ -72,6 +75,16 @@
   .cardsGrid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(143, 191, 159, 0.3) 50%, 
+    transparent 100%
+  );
+  margin-top: 4rem;
 }
 
 /* Section Variants */
@@ -103,4 +116,16 @@
 
 .variantAlt {
   background: rgba(47, 93, 93, 0.03);
+}
+
+.variantSage {
+  background: rgba(143, 191, 159, 0.08);
+}
+
+.variantRose {
+  background: rgba(244, 199, 195, 0.08);
+}
+
+.variantTeal {
+  background: rgba(47, 93, 93, 0.05);
 }

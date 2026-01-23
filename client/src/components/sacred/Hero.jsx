@@ -1,16 +1,30 @@
+/**
+ * Hero.jsx - CSS Module-based Sacred Hero Component
+ * 
+ * Features:
+ * - CSS Modules ONLY (no Tailwind)
+ * - GSAP logo breathe animation (disabled for reduced motion)
+ * - Icons scaled ~0.7
+ * - Playfair Display + Inter typography
+ */
+
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { Link } from 'wouter';
+import { Heart, ArrowRight, ChevronRight } from 'lucide-react';
+import styles from './Hero.module.css';
 
 export default function Hero({
   logo,
   badge,
+  eyebrow,
   title,
   titleHighlight,
   subtitle,
   primaryCta,
   secondaryCta,
   trustBadges,
+  sectionTitle,
   className = '',
 }) {
   const heroRef = useRef(null);
@@ -37,125 +51,122 @@ export default function Hero({
   return (
     <section
       ref={heroRef}
-      className={`sacred-hero relative min-h-[90vh] flex flex-col items-center justify-center text-center px-6 py-16 md:py-24 ${className}`}
+      className={`${styles.hero} ${className}`}
       role="banner"
+      aria-label="Hero section"
       data-testid="hero-section"
     >
-      {logo && (
-        <div
-          ref={logoRef}
-          className="mb-6"
-          data-aos="sacred-scale"
-          data-aos-delay="100"
+      <div className={styles.heroInner}>
+        {logo && (
+          <div
+            ref={logoRef}
+            className={styles.logoBadge}
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            {typeof logo === 'string' ? (
+              <img 
+                src={logo} 
+                alt="The Genuine Love Project" 
+                className={styles.logoBadgeIcon}
+                data-testid="hero-logo"
+              />
+            ) : (
+              <>
+                <Heart className={styles.logoBadgeIcon} aria-hidden="true" />
+                <span className={styles.logoBadgeText}>{logo}</span>
+              </>
+            )}
+          </div>
+        )}
+
+        {badge && (
+          <div
+            className={styles.logoBadge}
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <Heart className={styles.logoBadgeIcon} aria-hidden="true" />
+            <span className={styles.logoBadgeText}>{badge}</span>
+          </div>
+        )}
+
+        {eyebrow && (
+          <p
+            className={styles.eyebrow}
+            data-aos="fade-up"
+            data-aos-delay="150"
+          >
+            {eyebrow}
+          </p>
+        )}
+
+        <h1
+          className={styles.title}
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-testid="hero-title"
         >
-          {typeof logo === 'string' ? (
-            <img 
-              src={logo} 
-              alt="The Genuine Love Project" 
-              className="w-20 h-20 md:w-24 md:h-24 object-contain"
-              data-testid="hero-logo"
-            />
-          ) : (
-            logo
+          {title}
+          {titleHighlight && (
+            <>
+              <br />
+              <span className={styles.titleHighlight}>{titleHighlight}</span>
+            </>
           )}
-        </div>
-      )}
+        </h1>
 
-      {badge && (
-        <div
-          className="mb-6"
-          data-aos="sacred-fade-up"
-          data-aos-delay="150"
-        >
-          {badge}
-        </div>
-      )}
-
-      <h1
-        className="sacred-title max-w-4xl mb-6"
-        style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
-        data-aos="sacred-fade-up"
-        data-aos-delay="200"
-        data-testid="hero-title"
-      >
-        {title}
-        {titleHighlight && (
-          <span 
-            className="block mt-2"
-            style={{
-              background: 'linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d))',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
+        {subtitle && (
+          <p
+            className={styles.subtitle}
+            data-aos="fade-up"
+            data-aos-delay="250"
+            data-testid="hero-subtitle"
           >
-            {titleHighlight}
-          </span>
-        )}
-      </h1>
-
-      {subtitle && (
-        <p
-          className="sacred-body max-w-2xl mb-8"
-          style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
-          data-aos="sacred-fade-up"
-          data-aos-delay="300"
-          data-testid="hero-subtitle"
-        >
-          {subtitle}
-        </p>
-      )}
-
-      {trustBadges && (
-        <div
-          className="flex flex-wrap justify-center gap-3 mb-8"
-          data-aos="sacred-fade-up"
-          data-aos-delay="350"
-          role="list"
-          aria-label="Trust badges"
-        >
-          {trustBadges}
-        </div>
-      )}
-
-      <div
-        className="flex flex-col sm:flex-row items-center gap-4"
-        data-aos="sacred-fade-up"
-        data-aos-delay="400"
-        role="group"
-        aria-label="Call to action"
-      >
-        {primaryCta && (
-          <Link
-            href={primaryCta.href}
-            className="sacred-button sacred-button--primary py-4 px-8 text-lg"
-            data-testid="hero-primary-cta"
-          >
-            {primaryCta.icon && (
-              <span className="sacred-icon mr-2" aria-hidden="true">
-                {primaryCta.icon}
-              </span>
-            )}
-            {primaryCta.label}
-          </Link>
+            {subtitle}
+          </p>
         )}
 
-        {secondaryCta && (
-          <Link
-            href={secondaryCta.href}
-            className="sacred-button sacred-button--ghost group"
-            data-testid="hero-secondary-cta"
-          >
-            {secondaryCta.label}
-            {secondaryCta.icon && (
-              <span 
-                className="sacred-icon ml-2 transition-transform group-hover:translate-x-1" 
-                aria-hidden="true"
-              >
-                {secondaryCta.icon}
+        {trustBadges && trustBadges.length > 0 && (
+          <div className={styles.trustBadges} data-aos="fade-up" data-aos-delay="300">
+            {trustBadges.map((badge, idx) => (
+              <span key={idx} className={styles.trustBadge}>
+                {badge.icon && <span className={styles.trustBadgeIcon}>{badge.icon}</span>}
+                {badge.text || badge}
               </span>
+            ))}
+          </div>
+        )}
+
+        {(primaryCta || secondaryCta) && (
+          <div className={styles.actions} data-aos="fade-up" data-aos-delay="350">
+            {primaryCta && (
+              <Link href={primaryCta.href || '/register'}>
+                <a className={styles.primaryBtn} data-testid="hero-primary-cta">
+                  {primaryCta.text || primaryCta}
+                  <ArrowRight className={styles.btnIcon} aria-hidden="true" />
+                </a>
+              </Link>
             )}
-          </Link>
+            {secondaryCta && (
+              <Link href={secondaryCta.href || '/about'}>
+                <a className={styles.secondaryBtn} data-testid="hero-secondary-cta">
+                  {secondaryCta.text || secondaryCta}
+                  <ChevronRight className={styles.btnIcon} aria-hidden="true" />
+                </a>
+              </Link>
+            )}
+          </div>
+        )}
+
+        {sectionTitle && (
+          <h2
+            className={styles.sectionTitle}
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            {sectionTitle}
+          </h2>
         )}
       </div>
     </section>

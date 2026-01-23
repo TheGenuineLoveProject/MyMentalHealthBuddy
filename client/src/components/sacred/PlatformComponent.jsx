@@ -1,5 +1,16 @@
+/**
+ * PlatformComponent.jsx - CSS Module-based Sacred Card Component
+ * 
+ * Features:
+ * - CSS Modules ONLY (no Tailwind)
+ * - GSAP hover animation (disabled for reduced motion)
+ * - Icons scaled ~0.7
+ * - Typography using Playfair + Inter
+ */
+
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import styles from './PlatformComponent.module.css';
 
 export default function PlatformComponent({
   icon,
@@ -39,68 +50,37 @@ export default function PlatformComponent({
     });
   };
 
-  const variantStyles = {
-    default: {
-      background: 'var(--sacred-white, #faf9f7)',
-      border: '1px solid rgba(143, 191, 159, 0.2)',
-    },
-    sage: {
-      background: 'rgba(143, 191, 159, 0.08)',
-      border: '1px solid rgba(143, 191, 159, 0.25)',
-    },
-    rose: {
-      background: 'rgba(244, 199, 195, 0.08)',
-      border: '1px solid rgba(244, 199, 195, 0.25)',
-    },
-    teal: {
-      background: 'rgba(47, 93, 93, 0.05)',
-      border: '1px solid rgba(47, 93, 93, 0.2)',
-    },
-  };
+  const variantClass = {
+    default: '',
+    sage: styles.variantSage,
+    rose: styles.variantRose,
+    teal: styles.variantTeal,
+  }[variant] || '';
 
   return (
     <article
       ref={cardRef}
-      className={`platform-component ${className}`}
-      style={{
-        ...variantStyles[variant],
-        padding: '2rem',
-        borderRadius: '1rem',
-        boxShadow: '0 4px 20px rgba(47, 93, 93, 0.08)',
-        transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-      }}
+      className={`${styles.card} ${variantClass} ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      data-aos="sacred-fade-up"
+      data-aos="fade-up"
       data-aos-delay={aosDelay}
       data-testid={`platform-${title?.toLowerCase().replace(/\s+/g, '-') || 'component'}`}
     >
       {icon && (
-        <div 
-          className="platform-icon mb-4"
-          style={{ 
-            color: 'var(--sacred-teal, #2f5d5d)',
-          }}
-          aria-hidden="true"
-        >
-          <span className="sacred-icon-lg">{icon}</span>
+        <div className={styles.iconWrapper} aria-hidden="true">
+          <span className={styles.icon}>{icon}</span>
         </div>
       )}
       
       {title && (
-        <h3 
-          className="sacred-section-header mb-2"
-          style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
-        >
+        <h3 className={styles.title}>
           {title}
         </h3>
       )}
       
       {description && (
-        <p 
-          className="sacred-body"
-          style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
-        >
+        <p className={styles.description}>
           {description}
         </p>
       )}
