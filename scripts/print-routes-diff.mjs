@@ -87,45 +87,57 @@ function parseArgs(argv) {
 // ROUTE LINK RESOLUTION
 // ============================================================================
 
+import { 
+  routeToGeneratedFile, 
+  resolveRouteToFile, 
+  GENERATED_PAGES_DIR 
+} from '../content/routeFileMap.js';
+
 const PAGE_SEARCH_PATHS = [
-  'client/src/pages/generated',
+  GENERATED_PAGES_DIR,
   'client/src/pages',
   'pages'
 ];
 
-function routeToFileCandidates(route) {
-  let normalized = route.replace(/^\/+/, '');
+function resolveRouteLink(route) {
+  const resolved = resolveRouteToFile(route);
   
-  if (normalized === '' || normalized === '/') {
-    return ['index.jsx', 'home.jsx'];
+  if (resolved.exists) {
+    return {
+      kind: 'file',
+      href: resolved.href,
+      label: route
+    };
   }
   
-  normalized = normalized.replace(/:([^/]+)/g, '[$1]');
-  
-  const candidates = [];
-  candidates.push(`${normalized}.jsx`);
-  candidates.push(`${normalized}.tsx`);
-  candidates.push(`${normalized}/index.jsx`);
-  candidates.push(`${normalized}/index.tsx`);
-  
-  return candidates;
-}
-
-function resolveRouteLink(route) {
-  const candidates = routeToFileCandidates(route);
-  
-  for (const searchPath of PAGE_SEARCH_PATHS) {
-    if (!fs.existsSync(searchPath)) continue;
-    
-    for (const candidate of candidates) {
-      const fullPath = path.join(searchPath, candidate);
-      if (fs.existsSync(fullPath)) {
-        return {
-          kind: 'file',
-          href: fullPath,
-          label: route
-        };
+  for (const searchPath of PAGE_SEARCH_PATHS.slice(1)) {
+    try {
+      if (!fs.existsSync(searchPath)) continue;
+      
+      let normalized = route.replace(/^\/+/, '');
+      if (normalized === '' || normalized === '/') {
+        normalized = 'index';
       }
+      normalized = normalized.replace(/:([^/]+)/g, '[$1]');
+      
+      const candidates = [
+        `${normalized}.jsx`,
+        `${normalized}.tsx`,
+        `${normalized}/index.jsx`,
+        `${normalized}/index.tsx`
+      ];
+      
+      for (const candidate of candidates) {
+        const fullPath = path.join(searchPath, candidate);
+        if (fs.existsSync(fullPath)) {
+          return {
+            kind: 'file',
+            href: fullPath,
+            label: route
+          };
+        }
+      }
+    } catch {
     }
   }
   
