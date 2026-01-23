@@ -4,7 +4,7 @@ export function Steps({ steps = [], className = '' }) {
   return (
     <ol className={`space-y-4 ${className}`} role="list">
       {steps.map((step, index) => (
-        <li key={index} className="flex items-start gap-4">
+        <li key={index} className="flex items-start gap-4" data-testid={`step-${index + 1}`}>
           <span
             className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--glp-sage-deep)] text-white flex items-center justify-center text-sm font-semibold"
             aria-hidden="true"
@@ -13,14 +13,14 @@ export function Steps({ steps = [], className = '' }) {
           </span>
           <div className="flex-1 pt-1">
             {typeof step === 'string' ? (
-              <p className="text-[var(--glp-ink)]/80">{step}</p>
+              <p className="text-[var(--glp-ink)]/80" data-testid={`step-text-${index + 1}`}>{step}</p>
             ) : (
               <>
                 {step.title && (
-                  <h4 className="font-medium text-[var(--glp-ink)] mb-1">{step.title}</h4>
+                  <h4 className="font-medium text-[var(--glp-ink)] mb-1" data-testid={`step-title-${index + 1}`}>{step.title}</h4>
                 )}
                 {step.text && (
-                  <p className="text-sm text-[var(--glp-ink)]/70">{step.text}</p>
+                  <p className="text-sm text-[var(--glp-ink)]/70" data-testid={`step-text-${index + 1}`}>{step.text}</p>
                 )}
               </>
             )}

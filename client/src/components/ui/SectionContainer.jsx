@@ -34,6 +34,7 @@ export function SectionContainer({
               <h2
                 id={id ? `${id}-title` : undefined}
                 className={`font-sacred text-2xl sm:text-3xl md:text-4xl font-semibold mb-4 ${variant === 'dark' ? 'text-white' : 'text-[var(--glp-ink)]'}`}
+                data-testid={id ? `section-title-${id}` : 'section-title'}
               >
                 {title}
               </h2>

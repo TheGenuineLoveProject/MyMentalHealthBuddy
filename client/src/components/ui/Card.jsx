@@ -19,12 +19,12 @@ export function Card({
         </div>
       )}
       {title && (
-        <h3 className="text-lg font-semibold text-[var(--glp-ink)] mb-2">
+        <h3 className="text-lg font-semibold text-[var(--glp-ink)] mb-2" data-testid={`card-title-${title?.toLowerCase().replace(/\s+/g, '-') || 'untitled'}`}>
           {title}
         </h3>
       )}
       {text && (
-        <p className="text-[var(--glp-ink)]/70 text-sm leading-relaxed">
+        <p className="text-[var(--glp-ink)]/70 text-sm leading-relaxed" data-testid={`card-text-${title?.toLowerCase().replace(/\s+/g, '-') || 'untitled'}`}>
           {text}
         </p>
       )}

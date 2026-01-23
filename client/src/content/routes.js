@@ -29,7 +29,8 @@ import {
   Scale, AlertTriangle, Bookmark, Palette, Layout, PenTool,
   BarChart, Calendar, MapPin, Mic, Camera, Video,
   Database, Code, Terminal, Cloud, Globe, Link, Home,
-  Feather, Layers, Search, Edit, CheckCircle, XCircle
+  Feather, Layers, Search, Edit, CheckCircle, XCircle,
+  Grid, List, Quote, Keyboard
 } from 'lucide-react';
 
 // ============================================================================
@@ -3960,8 +3961,8 @@ const rawRoutes = [
           intermediate: { text: 'The SafetyNotice component displays crisis resources in a gentle, non-alarming way.' },
           advanced: { text: 'Compliant with trauma-informed design principles. Never gated behind authentication.' }
         },
-        modules: [
-          { type: 'SafetyNotice' }
+        cards: [
+          { icon: 'Heart', title: 'Crisis Support', text: 'Call 988 anytime — the Suicide & Crisis Lifeline is free and available 24/7.' }
         ]
       }
     ]
