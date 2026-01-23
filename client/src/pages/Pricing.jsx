@@ -2,6 +2,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "wouter";
 import { Check, Star, Zap, Crown, ArrowLeft } from "lucide-react";
 import SEO from "../components/SEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const tiers = [
   {
@@ -27,10 +28,10 @@ const tiers = [
     description: "Unlock your AI companion and personalized healing insights",
     features: [
       "Everything in Free",
-      "Unlimited AI therapy chat",
+      "Unlimited AI companion chat",
       "Personalized weekly reflections",
       "Export journal to PDF",
-      "Guided healing programs",
+      "Guided wellness programs",
       "Advanced emotion tracking"
     ],
     planId: "plus",
@@ -44,11 +45,11 @@ const tiers = [
     description: "Complete access to our entire healing ecosystem",
     features: [
       "Everything in Plus",
-      "1000+ premium wellness tools",
-      "Voice journaling with AI analysis",
+      "100+ premium wellness tools",
+      "Voice journaling with AI insights",
       "Trauma-informed programs",
       "Priority 24/7 support",
-      "Custom healing pathways"
+      "Personalized wellness pathways"
     ],
     planId: "pro",
     icon: Crown,
@@ -181,9 +182,11 @@ export default function Pricing() {
 
           <div className="mt-16 text-center">
             <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-              Questions? <Link href="/crisis" className="hover:underline" style={{ color: 'var(--glp-sage-deep)' }}>Contact support</Link>
+              Questions? <Link href="/support" className="hover:underline" style={{ color: 'var(--glp-sage-deep)' }}>Contact support</Link>
             </p>
           </div>
+
+          <SafetyFooter variant="compact" className="mt-12" />
         </div>
       </div>
     </div>
