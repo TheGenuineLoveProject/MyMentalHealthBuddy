@@ -25,6 +25,7 @@ import {
 } from 'lucide-react';
 import SacredLayout from './sacred/SacredLayout.jsx';
 import SacredFooter from './sacred/SacredFooter.jsx';
+import SacredSection from './sacred/SacredSection.jsx';
 import SEO from './SEO.tsx';
 import styles from './PageTemplate.module.css';
 
@@ -175,63 +176,27 @@ function SacredCard({ card, index }) {
 }
 
 function ContentSection({ section, index }) {
-  const isGlow = section.variant === 'glow';
-  const isPattern = section.variant === 'pattern';
-
   return (
-    <section
+    <SacredSection
       id={section.id}
-      className={`${styles.contentSection} ${isGlow ? styles.glowBackground : ''}`}
-      aria-labelledby={`section-title-${section.id}`}
+      eyebrow={section.eyebrow}
+      title={section.title}
+      subtitle={section.subtitle}
+      variant={section.variant || 'default'}
+      aosDelay={index * 100}
+      ariaLabel={section.title}
     >
-      {isPattern && (
+      {section.cards && section.cards.length > 0 && (
         <div 
-          className={styles.patternOverlay}
-          aria-hidden="true"
-        />
-      )}
-      
-      <div className={styles.sectionInner}>
-        <div className={styles.sectionHeader}>
-          {section.eyebrow && (
-            <p 
-              className={styles.sectionEyebrow}
-              data-aos="fade-up"
-            >
-              {section.eyebrow}
-            </p>
-          )}
-          <h2 
-            id={`section-title-${section.id}`}
-            className={styles.sectionTitle}
-            data-aos="fade-up"
-            data-aos-delay="100"
-          >
-            {section.title}
-          </h2>
-          {section.subtitle && (
-            <p 
-              className={styles.sectionSubtitle}
-              data-aos="fade-up"
-              data-aos-delay="200"
-            >
-              {section.subtitle}
-            </p>
-          )}
+          className={styles.cardsGrid}
+          role="list"
+        >
+          {section.cards.map((card, cardIndex) => (
+            <SacredCard key={cardIndex} card={card} index={cardIndex} />
+          ))}
         </div>
-
-        {section.cards && section.cards.length > 0 && (
-          <div 
-            className={styles.cardsGrid}
-            role="list"
-          >
-            {section.cards.map((card, cardIndex) => (
-              <SacredCard key={cardIndex} card={card} index={cardIndex} />
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
+      )}
+    </SacredSection>
   );
 }
 

@@ -2198,6 +2198,251 @@ const rawRoutes = [
       secondaryCta: { label: 'Crisis Resources', href: '/crisis' }
     }
   },
+  
+  // =========================================================================
+  // ADDITIONAL WELLNESS ROUTES (5 routes to reach 119)
+  // =========================================================================
+  {
+    route: '/wellness/sleep',
+    category: 'wellness',
+    pageLabel: 'Sleep Wellness',
+    title: 'Sleep Wellness — The Genuine Love Project',
+    description: 'Tools and resources for better sleep and rest.',
+    hero: {
+      eyebrow: 'Rest & Recovery',
+      title: 'Better',
+      titleHighlight: 'Sleep.',
+      subtitle: 'Gentle practices for restful, healing sleep.',
+      primaryCta: { label: 'Start Sleep Journey', href: '#sleep' },
+      secondaryCta: { label: 'Evening Routine', href: '#routine' }
+    }
+  },
+  {
+    route: '/wellness/nutrition',
+    category: 'wellness',
+    pageLabel: 'Nutrition & Nourishment',
+    title: 'Nutrition — The Genuine Love Project',
+    description: 'Mindful eating and nutritional wellness.',
+    hero: {
+      eyebrow: 'Nourish',
+      title: 'Mindful',
+      titleHighlight: 'Eating.',
+      subtitle: 'Develop a healthy relationship with food and nourishment.',
+      primaryCta: { label: 'Explore Nutrition', href: '#nutrition' },
+      secondaryCta: { label: 'Meal Ideas', href: '#meals' }
+    }
+  },
+  {
+    route: '/wellness/movement',
+    category: 'wellness',
+    pageLabel: 'Gentle Movement',
+    title: 'Movement — The Genuine Love Project',
+    description: 'Gentle movement practices for body and mind.',
+    hero: {
+      eyebrow: 'Move Gently',
+      title: 'Healing',
+      titleHighlight: 'Movement.',
+      subtitle: 'Gentle exercises that honor your body\'s needs.',
+      primaryCta: { label: 'Start Moving', href: '#movement' },
+      secondaryCta: { label: 'Yoga Flows', href: '#yoga' }
+    }
+  },
+  {
+    route: '/wellness/nature',
+    category: 'wellness',
+    pageLabel: 'Nature Connection',
+    title: 'Nature Connection — The Genuine Love Project',
+    description: 'Connect with nature for healing and grounding.',
+    hero: {
+      eyebrow: 'Earth Connection',
+      title: 'Nature',
+      titleHighlight: 'Healing.',
+      subtitle: 'Find peace and grounding in the natural world.',
+      primaryCta: { label: 'Connect with Nature', href: '#nature' },
+      secondaryCta: { label: 'Grounding Practices', href: '#grounding' }
+    }
+  },
+  {
+    route: '/wellness/creativity',
+    category: 'wellness',
+    pageLabel: 'Creative Expression',
+    title: 'Creative Expression — The Genuine Love Project',
+    description: 'Use creativity as a path to healing.',
+    hero: {
+      eyebrow: 'Express',
+      title: 'Creative',
+      titleHighlight: 'Healing.',
+      subtitle: 'Explore art, music, and writing as healing tools.',
+      primaryCta: { label: 'Start Creating', href: '#create' },
+      secondaryCta: { label: 'Art Therapy', href: '#art' }
+    }
+  },
+  
+  // =========================================================================
+  // ADDITIONAL AI ROUTES (3 routes)
+  // =========================================================================
+  {
+    route: '/ai/insights',
+    category: 'ai',
+    pageLabel: 'AI Insights',
+    title: 'AI Insights — The Genuine Love Project',
+    description: 'AI-generated insights about your wellness journey.',
+    hero: {
+      eyebrow: 'Your Insights',
+      title: 'AI',
+      titleHighlight: 'Insights.',
+      subtitle: 'Personalized insights from your wellness data.',
+      primaryCta: { label: 'View Insights', href: '#insights' },
+      secondaryCta: { label: 'Recommendations', href: '#recommendations' }
+    }
+  },
+  {
+    route: '/ai/coach',
+    category: 'ai',
+    pageLabel: 'AI Wellness Coach',
+    title: 'AI Coach — The Genuine Love Project',
+    description: 'Your personal AI wellness coaching companion.',
+    hero: {
+      eyebrow: 'Personalized Coaching',
+      title: 'AI',
+      titleHighlight: 'Coach.',
+      subtitle: 'Compassionate AI guidance for your healing journey.',
+      primaryCta: { label: 'Meet Your Coach', href: '#coach' },
+      secondaryCta: { label: 'Coaching Plans', href: '#plans' }
+    }
+  },
+  {
+    route: '/ai/meditation',
+    category: 'ai',
+    pageLabel: 'AI Meditation',
+    title: 'AI Meditation — The Genuine Love Project',
+    description: 'AI-guided meditation sessions.',
+    hero: {
+      eyebrow: 'Guided Peace',
+      title: 'AI',
+      titleHighlight: 'Meditation.',
+      subtitle: 'Personalized meditation sessions created just for you.',
+      primaryCta: { label: 'Start Meditation', href: '#meditate' },
+      secondaryCta: { label: 'Session Library', href: '#library' }
+    }
+  },
+  
+  // =========================================================================
+  // ADDITIONAL COMMUNITY ROUTES (4 routes)
+  // =========================================================================
+  {
+    route: '/community/events',
+    category: 'community',
+    pageLabel: 'Community Events',
+    title: 'Events — The Genuine Love Project',
+    description: 'Community events and gatherings.',
+    hero: {
+      eyebrow: 'Connect',
+      title: 'Community',
+      titleHighlight: 'Events.',
+      subtitle: 'Join healing circles, workshops, and community gatherings.',
+      primaryCta: { label: 'Browse Events', href: '#events' },
+      secondaryCta: { label: 'Host Event', href: '#host' }
+    }
+  },
+  {
+    route: '/community/stories',
+    category: 'community',
+    pageLabel: 'Healing Stories',
+    title: 'Stories — The Genuine Love Project',
+    description: 'Read and share healing journeys.',
+    hero: {
+      eyebrow: 'Shared Journeys',
+      title: 'Healing',
+      titleHighlight: 'Stories.',
+      subtitle: 'Read inspiring stories from fellow travelers.',
+      primaryCta: { label: 'Read Stories', href: '#stories' },
+      secondaryCta: { label: 'Share Yours', href: '#share' }
+    }
+  },
+  {
+    route: '/community/mentors',
+    category: 'community',
+    pageLabel: 'Mentorship',
+    title: 'Mentorship — The Genuine Love Project',
+    description: 'Connect with experienced mentors.',
+    hero: {
+      eyebrow: 'Guidance',
+      title: 'Find a',
+      titleHighlight: 'Mentor.',
+      subtitle: 'Connect with those who\'ve walked the path before.',
+      primaryCta: { label: 'Find Mentor', href: '#mentors' },
+      secondaryCta: { label: 'Become Mentor', href: '#become' }
+    }
+  },
+  {
+    route: '/community/challenges',
+    category: 'community',
+    pageLabel: 'Wellness Challenges',
+    title: 'Challenges — The Genuine Love Project',
+    description: 'Join community wellness challenges.',
+    hero: {
+      eyebrow: 'Grow Together',
+      title: 'Wellness',
+      titleHighlight: 'Challenges.',
+      subtitle: 'Join supportive challenges with the community.',
+      primaryCta: { label: 'Join Challenge', href: '#challenges' },
+      secondaryCta: { label: 'Create Challenge', href: '#create' }
+    }
+  },
+  
+  // =========================================================================
+  // ADDITIONAL SUPPORT ROUTES (3 routes)
+  // =========================================================================
+  {
+    route: '/support/guides',
+    category: 'support',
+    pageLabel: 'User Guides',
+    title: 'Guides — The Genuine Love Project',
+    description: 'Helpful guides and tutorials.',
+    hero: {
+      eyebrow: 'Learn',
+      title: 'User',
+      titleHighlight: 'Guides.',
+      subtitle: 'Step-by-step guides to help you use the platform.',
+      primaryCta: { label: 'Browse Guides', href: '#guides' },
+      secondaryCta: { label: 'Video Tutorials', href: '#videos' }
+    }
+  },
+  {
+    route: '/support/feedback',
+    category: 'support',
+    pageLabel: 'Feedback',
+    title: 'Feedback — The Genuine Love Project',
+    description: 'Share your feedback with us.',
+    hero: {
+      eyebrow: 'Your Voice',
+      title: 'Share',
+      titleHighlight: 'Feedback.',
+      subtitle: 'Help us improve your experience.',
+      primaryCta: { label: 'Give Feedback', href: '#feedback' },
+      secondaryCta: { label: 'Feature Requests', href: '#requests' }
+    }
+  },
+  {
+    route: '/support/accessibility',
+    category: 'support',
+    pageLabel: 'Accessibility',
+    title: 'Accessibility — The Genuine Love Project',
+    description: 'Our commitment to accessibility.',
+    hero: {
+      eyebrow: 'Inclusive Design',
+      title: 'Accessibility',
+      titleHighlight: 'First.',
+      subtitle: 'Our commitment to making healing accessible to all.',
+      primaryCta: { label: 'Learn More', href: '#accessibility' },
+      secondaryCta: { label: 'Report Issue', href: '#report' }
+    }
+  },
+  
+  // =========================================================================
+  // 404 AND WILDCARD FALLBACK
+  // =========================================================================
   {
     route: '/not-found',
     category: 'system',

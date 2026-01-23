@@ -294,6 +294,41 @@ export default function App() {
               <Route path="/resources">{() => <ConfigRoute route="/resources" />}</Route>
               <Route path="/contact">{() => <ConfigRoute route="/contact" />}</Route>
               <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
+              <Route path="/support/guides">{() => <ConfigRoute route="/support/guides" />}</Route>
+              <Route path="/support/feedback">{() => <ConfigRoute route="/support/feedback" />}</Route>
+              <Route path="/support/accessibility">{() => <ConfigRoute route="/support/accessibility" />}</Route>
+
+              {/* Additional Wellness Routes - Config Driven */}
+              <Route path="/wellness/sleep">{() => <ConfigRoute route="/wellness/sleep" />}</Route>
+              <Route path="/wellness/nutrition">{() => <ConfigRoute route="/wellness/nutrition" />}</Route>
+              <Route path="/wellness/movement">{() => <ConfigRoute route="/wellness/movement" />}</Route>
+              <Route path="/wellness/nature">{() => <ConfigRoute route="/wellness/nature" />}</Route>
+              <Route path="/wellness/creativity">{() => <ConfigRoute route="/wellness/creativity" />}</Route>
+
+              {/* Additional AI Routes - Config Driven */}
+              <Route path="/ai/insights">
+                <ProtectedRoute><ConfigRoute route="/ai/insights" /></ProtectedRoute>
+              </Route>
+              <Route path="/ai/coach">
+                <ProtectedRoute><ConfigRoute route="/ai/coach" /></ProtectedRoute>
+              </Route>
+              <Route path="/ai/meditation">
+                <ProtectedRoute><ConfigRoute route="/ai/meditation" /></ProtectedRoute>
+              </Route>
+
+              {/* Additional Community Routes - Config Driven */}
+              <Route path="/community/events">
+                <ProtectedRoute><ConfigRoute route="/community/events" /></ProtectedRoute>
+              </Route>
+              <Route path="/community/stories">
+                <ProtectedRoute><ConfigRoute route="/community/stories" /></ProtectedRoute>
+              </Route>
+              <Route path="/community/mentors">
+                <ProtectedRoute><ConfigRoute route="/community/mentors" /></ProtectedRoute>
+              </Route>
+              <Route path="/community/challenges">
+                <ProtectedRoute><ConfigRoute route="/community/challenges" /></ProtectedRoute>
+              </Route>
 
               {/* Admin Routes */}
               <Route path="/admin">
