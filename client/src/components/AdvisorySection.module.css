@@ -1,0 +1,113 @@
+.section {
+  padding: var(--glp-space-12) var(--glp-space-4);
+  background: var(--glp-cream);
+}
+
+.container {
+  max-width: 56rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.heading {
+  font-family: var(--glp-font-sacred);
+  font-size: var(--glp-text-2xl);
+  font-weight: 500;
+  color: var(--glp-sage);
+  margin-bottom: var(--glp-space-4);
+}
+
+.statement {
+  font-size: var(--glp-text-lg);
+  color: var(--glp-charcoal);
+  max-width: 32rem;
+  margin: 0 auto var(--glp-space-8);
+  line-height: 1.6;
+}
+
+.rolesGrid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--glp-space-4);
+  margin-bottom: var(--glp-space-8);
+}
+
+@media (min-width: 640px) {
+  .rolesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .rolesGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.roleCard {
+  background: white;
+  border-radius: var(--glp-radius-lg);
+  padding: var(--glp-space-6);
+  box-shadow: var(--glp-shadow-sm);
+  transition: box-shadow 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roleCard {
+    transition: none;
+  }
+}
+
+.roleCard:hover {
+  box-shadow: var(--glp-shadow-md);
+}
+
+.iconWrapper {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--glp-radius-full);
+  background: var(--glp-sage-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--glp-space-3);
+}
+
+.icon {
+  color: var(--glp-sage);
+}
+
+.roleTitle {
+  font-family: var(--glp-font-sacred);
+  font-size: var(--glp-text-base);
+  font-weight: 500;
+  color: var(--glp-charcoal);
+  margin-bottom: var(--glp-space-2);
+}
+
+.roleDescription {
+  font-size: var(--glp-text-sm);
+  color: var(--glp-charcoal-60);
+  line-height: 1.5;
+  margin-bottom: var(--glp-space-3);
+}
+
+.advisorName {
+  font-size: var(--glp-text-sm);
+  font-weight: 500;
+  color: var(--glp-sage);
+}
+
+.placeholder {
+  font-size: var(--glp-text-xs);
+  color: var(--glp-charcoal-40);
+  font-style: italic;
+}
+
+.note {
+  font-size: var(--glp-text-sm);
+  color: var(--glp-charcoal-60);
+  max-width: 28rem;
+  margin: 0 auto;
+  line-height: 1.5;
+}
