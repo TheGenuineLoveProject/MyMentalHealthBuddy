@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 export default function JournalPage() {
   const [showForm, setShowForm] = useState(false);
@@ -293,6 +294,8 @@ export default function JournalPage() {
               ))}
             </section>
           )}
+
+          <SafetyFooter variant="prominent" />
         </div>
       </div>
     </>

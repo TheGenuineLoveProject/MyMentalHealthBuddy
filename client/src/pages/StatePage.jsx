@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Info } from "lucide-react";
 import SEO from "../components/SEO";
 import { StateTracker } from "../components/state/StateTracker.tsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const DIMENSION_INFO = [
   { name: "Energy", desc: "Physical and mental fuel available" },
@@ -68,6 +69,8 @@ export default function StatePage() {
         <p className="mt-6 text-xs text-center text-[var(--glp-ink)]/30">
           States fluctuate. This is normal.
         </p>
+
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

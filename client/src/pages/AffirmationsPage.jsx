@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Heart, Sparkles, RefreshCw, Copy, Check, Star, Sun, Shield, Flower2, Brain, Zap, Compass, BookOpen, Moon, Target, Users } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const affirmationCategories = [
   {
@@ -415,12 +416,7 @@ export default function AffirmationsPage() {
           title="Deepen Your Practice"
         />
 
-        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.5 }}>
-            Affirmations are a supportive practice, not a replacement for professional mental health care.
-            If an affirmation triggers strong resistance, approach that part of yourself with curiosity—it has something to teach you.
-          </p>
-        </div>
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

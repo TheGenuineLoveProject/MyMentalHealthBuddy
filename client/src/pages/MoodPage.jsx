@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Smile, Frown, Meh, Sun, Moon, Zap, Check, Sparkles } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "var(--mood-happy)", bgColor: "var(--mood-happy-soft)" },
@@ -248,6 +249,8 @@ export default function MoodPage() {
               )}
             </button>
           </form>
+
+          <SafetyFooter variant="default" />
         </div>
       </div>
     </>
