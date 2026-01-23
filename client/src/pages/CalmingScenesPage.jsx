@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Play, Pause, Volume2, VolumeX, Sun, Moon, Cloud, Waves, Trees, Mountain, Sparkles, Heart } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const scenes = [
   {
@@ -219,12 +220,7 @@ export default function CalmingScenesPage() {
           title="Continue Your Journey"
         />
 
-        <div className="text-center py-8 mt-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-            These calming experiences are designed to complement, not replace, professional mental health support.
-            If you're in crisis, please reach out to a crisis helpline or mental health professional.
-          </p>
-        </div>
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

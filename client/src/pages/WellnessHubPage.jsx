@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, Shield, Users, Flower2, Library, Newspaper, HelpCircle, LifeBuoy, Palette, Activity, Microscope, Zap, Baby, MapPin, Target, Clock, RefreshCw, FileText, Lightbulb, MessageCircle, Compass } from "lucide-react";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const toolCategories = [
   {
@@ -196,12 +197,7 @@ export default function WellnessHubPage() {
           </p>
         </div>
 
-        <div className="text-center py-8" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
-          <p className="text-sm" style={{ color: 'var(--glp-ink)', opacity: 0.7 }}>
-            These tools support your wellness journey but are not a substitute for professional mental health care.
-            If you're struggling, please reach out to a qualified professional.
-          </p>
-        </div>
+        <SafetyFooter variant="default" />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import SafetyFooter from "../components/ui/SafetyFooter";
 import { 
   ArrowLeft, 
   Sun,
@@ -373,12 +374,7 @@ export default function DailyRoutinesPage() {
             title="Continue Your Journey"
           />
 
-          <footer className="card-bordered mt-8 p-6 rounded-xl" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
-            <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
-              <strong>Start Small:</strong> Don't try to implement everything at once. Pick 1-2 activities from one routine 
-              and practice consistently for 2 weeks before adding more. Consistency beats perfection.
-            </p>
-          </footer>
+          <SafetyFooter variant="default" />
         </div>
       </div>
     </div>

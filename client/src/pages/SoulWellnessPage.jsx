@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import SafetyFooter from "../components/ui/SafetyFooter";
 import { 
   ArrowLeft, 
   Sparkles, 
@@ -331,12 +332,7 @@ export default function SoulWellnessPage() {
             </Link>
           </section>
 
-          <footer className="card-bordered" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
-            <p className="text-sm text-center" style={{ color: 'var(--glp-ink)' }}>
-              <strong>Gentle Reminder:</strong> Soul wellness is deeply personal. Take what resonates and leave what doesn't. 
-              These practices are meant to complement, not replace, any spiritual or religious traditions that are meaningful to you.
-            </p>
-          </footer>
+          <SafetyFooter variant="default" />
         </div>
       </div>
     </div>

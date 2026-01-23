@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import SafetyFooter from "../components/ui/SafetyFooter";
 import { 
   ArrowLeft, 
   Activity, 
@@ -453,12 +454,7 @@ export default function BodyWellnessPage() {
             title="Continue Your Journey"
           />
 
-          <footer className="card-bordered mt-8 p-6 rounded-xl" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
-            <p className="text-sm text-center" style={{ color: 'var(--glp-gold-dark)' }}>
-              <strong>Gentle Reminder:</strong> Listen to your body. If any practice feels uncomfortable, stop and try something else. 
-              For chronic pain or physical conditions, consult a healthcare provider before starting new practices.
-            </p>
-          </footer>
+          <SafetyFooter variant="default" />
         </div>
       </div>
     </div>

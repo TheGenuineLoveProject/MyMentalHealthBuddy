@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import SafetyFooter from "../components/ui/SafetyFooter";
 import { 
   ArrowLeft, 
   Target, 
@@ -391,12 +392,7 @@ export default function BehaviorChangePage() {
             title="Continue Your Journey"
           />
 
-          <footer className="card-bordered mt-8" style={{ background: 'var(--glp-gold-30)', border: '1px solid var(--glp-gold)' }}>
-            <p className="text-sm text-center" style={{ color: 'var(--glp-ink)' }}>
-              <strong>Remember:</strong> Behavior change takes time and patience. Be compassionate with yourself through setbacks—they're 
-              part of the process. For deeply ingrained patterns, consider working with a therapist or coach.
-            </p>
-          </footer>
+          <SafetyFooter variant="default" />
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import SEO from "../components/SEO";
 import { useGamification } from "../context/GamificationContext.jsx";
+import SafetyFooter from "../components/ui/SafetyFooter";
 
 const BreathingExercise = lazy(() => import("../components/BreathingExercise.jsx"));
 const MeditationTimer = lazy(() => import("../components/MeditationTimer.jsx"));
@@ -496,11 +497,7 @@ export default function Wellness() {
             </div>
           </div>
 
-          <div className="mt-12 text-center">
-            <p className="text-sm text-[var(--text-muted)]">
-              💡 Tip: Consistent practice yields the best results. Try using at least one tool daily.
-            </p>
-          </div>
+          <SafetyFooter variant="compact" className="mt-12" />
         </div>
       </div>
     </>
