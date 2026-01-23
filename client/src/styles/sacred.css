@@ -31,56 +31,66 @@
 }
 
 /* =========================================
-   Type Scale Utilities (CANVA DEFAULTS)
+   Type Scale Utilities (CANVA EXACT — DO NOT CHANGE)
+   Title: 56px, Subtitle: 36px, Heading: 32px,
+   Subheading: 28px, Section Header: 24px, Body: 18px,
+   Quote: 20px, Caption: 14px
    ========================================= */
 .sacred-title {
   font-family: var(--font-sacred);
-  font-size: clamp(2.5rem, 5vw, 3.5rem); /* 56px */
+  font-size: 3.5rem; /* 56px */
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.01em;
+  color: var(--sacred-charcoal);
 }
 
 .sacred-subtitle {
   font-family: var(--font-sacred);
-  font-size: clamp(1.75rem, 4vw, 2.25rem); /* 36px */
+  font-size: 2.25rem; /* 36px */
   font-weight: 600;
   line-height: 1.2;
+  color: var(--sacred-charcoal);
 }
 
 .sacred-heading {
   font-family: var(--font-sacred);
-  font-size: clamp(1.5rem, 3vw, 2rem); /* 32px */
+  font-size: 2rem; /* 32px */
   font-weight: 500;
   line-height: 1.25;
+  color: var(--sacred-charcoal);
 }
 
 .sacred-subheading {
   font-family: var(--font-sacred);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem); /* 28px */
+  font-size: 1.75rem; /* 28px */
   font-weight: 400;
   line-height: 1.3;
+  color: var(--sacred-charcoal);
 }
 
 .sacred-section-header {
   font-family: var(--font-body);
-  font-size: clamp(1.25rem, 2vw, 1.5rem); /* 24px */
+  font-size: 1.5rem; /* 24px */
   font-weight: 700;
   line-height: 1.35;
+  color: var(--sacred-charcoal);
 }
 
 .sacred-body {
   font-family: var(--font-body);
-  font-size: clamp(1rem, 1.5vw, 1.125rem); /* 18px */
+  font-size: 1.125rem; /* 18px */
   font-weight: 400;
   line-height: 1.7;
+  color: var(--sacred-charcoal);
 }
 
 .sacred-quote {
   font-family: var(--font-body);
-  font-size: clamp(1.125rem, 1.75vw, 1.25rem); /* 20px */
+  font-size: 1.25rem; /* 20px */
   font-style: italic;
   line-height: 1.6;
+  color: var(--sacred-charcoal);
 }
 
 .sacred-caption {
@@ -88,6 +98,18 @@
   font-size: 0.875rem; /* 14px */
   font-weight: 300;
   line-height: 1.5;
+  color: var(--sacred-charcoal);
+}
+
+/* Mobile responsive type scale */
+@media (max-width: 768px) {
+  .sacred-title { font-size: 2.5rem; /* 40px */ }
+  .sacred-subtitle { font-size: 1.75rem; /* 28px */ }
+  .sacred-heading { font-size: 1.75rem; /* 28px */ }
+  .sacred-subheading { font-size: 1.5rem; /* 24px */ }
+  .sacred-section-header { font-size: 1.25rem; /* 20px */ }
+  .sacred-body { font-size: 1rem; /* 16px */ }
+  .sacred-quote { font-size: 1.125rem; /* 18px */ }
 }
 
 /* Legacy class aliases */
