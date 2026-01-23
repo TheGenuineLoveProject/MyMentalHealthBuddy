@@ -1,0 +1,418 @@
+/* Sacred UI Styles - The Genuine Love Project */
+/* GSAP + AOS Animation Utilities with Reduced Motion Safety */
+
+/* =========================================
+   Google Fonts - Sacred Typography
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* =========================================
+   Typography Tokens
+   ========================================= */
+:root {
+  --font-sacred: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  
+  /* Animation timing */
+  --sacred-timing-slow: 1.5s;
+  --sacred-timing-medium: 0.8s;
+  --sacred-timing-fast: 0.4s;
+  --sacred-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --sacred-easing-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* =========================================
+   Sacred Typography Classes
+   ========================================= */
+.font-sacred {
+  font-family: var(--font-sacred);
+  letter-spacing: 0.02em;
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.sacred-heading {
+  font-family: var(--font-sacred);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.sacred-heading-large {
+  font-family: var(--font-sacred);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 4rem);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.sacred-body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* =========================================
+   GSAP Animation Keyframes
+   ========================================= */
+@keyframes sacred-breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
+@keyframes sacred-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(143, 191, 159, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px 8px rgba(143, 191, 159, 0.1);
+  }
+}
+
+@keyframes sacred-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 8px rgba(234, 195, 59, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 16px rgba(234, 195, 59, 0.5));
+  }
+}
+
+@keyframes sacred-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes sacred-rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sacred-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sacred-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================================
+   Animation Utility Classes
+   ========================================= */
+.sacred-animate-breathe {
+  animation: sacred-breathe 4s var(--sacred-easing) infinite;
+}
+
+.sacred-animate-pulse {
+  animation: sacred-pulse 3s var(--sacred-easing) infinite;
+}
+
+.sacred-animate-glow {
+  animation: sacred-glow 3s var(--sacred-easing) infinite;
+}
+
+.sacred-animate-float {
+  animation: sacred-float 4s var(--sacred-easing) infinite;
+}
+
+.sacred-animate-rotate-slow {
+  animation: sacred-rotate-slow 60s linear infinite;
+}
+
+.sacred-animate-fade-in-up {
+  animation: sacred-fade-in-up var(--sacred-timing-medium) var(--sacred-easing) forwards;
+}
+
+.sacred-animate-scale-in {
+  animation: sacred-scale-in var(--sacred-timing-medium) var(--sacred-easing) forwards;
+}
+
+/* =========================================
+   Reduced Motion Safety
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .sacred-animate-breathe,
+  .sacred-animate-pulse,
+  .sacred-animate-glow,
+  .sacred-animate-float,
+  .sacred-animate-rotate-slow,
+  .sacred-animate-fade-in-up,
+  .sacred-animate-scale-in {
+    animation: none !important;
+  }
+  
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* =========================================
+   Sacred Layout Styles
+   ========================================= */
+.sacred-layout {
+  position: relative;
+  min-height: 100vh;
+  background: var(--glp-paper, #faf9f7);
+  overflow-x: hidden;
+}
+
+.sacred-layout::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(143, 191, 159, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(244, 199, 195, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(234, 195, 59, 0.03) 0%, transparent 70%);
+}
+
+.sacred-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================
+   Sacred Section Styles
+   ========================================= */
+.sacred-section {
+  position: relative;
+  padding: 4rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .sacred-section {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sacred-section {
+    padding: 8rem 2rem;
+  }
+}
+
+.sacred-section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================================
+   Sacred Button Styles
+   ========================================= */
+.sacred-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--sacred-timing-fast) var(--sacred-easing);
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.sacred-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity var(--sacred-timing-fast) var(--sacred-easing);
+}
+
+.sacred-button:hover::before {
+  opacity: 1;
+}
+
+.sacred-button:focus-visible {
+  outline: 2px solid var(--glp-gold, #eac33b);
+  outline-offset: 3px;
+}
+
+.sacred-button--primary {
+  background: linear-gradient(135deg, var(--glp-sage-deep, #2f5d5d), #3d7a7a);
+  color: white;
+  box-shadow: 0 4px 16px rgba(47, 93, 93, 0.3);
+}
+
+.sacred-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(47, 93, 93, 0.4);
+}
+
+.sacred-button--secondary {
+  background: transparent;
+  color: var(--glp-sage-deep, #2f5d5d);
+  border: 2px solid var(--glp-sage, #8fbf9f);
+}
+
+.sacred-button--secondary:hover {
+  background: var(--glp-sage-10, rgba(143, 191, 159, 0.1));
+  border-color: var(--glp-sage-deep, #2f5d5d);
+}
+
+.sacred-button--ghost {
+  background: transparent;
+  color: var(--glp-sage-deep, #2f5d5d);
+}
+
+.sacred-button--ghost:hover {
+  background: var(--glp-sage-10, rgba(143, 191, 159, 0.1));
+}
+
+/* Icon scaling */
+.sacred-button svg,
+.sacred-button .icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  transform: scale(0.7);
+}
+
+/* =========================================
+   Sacred Pattern Overlay
+   ========================================= */
+.sacred-pattern-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.03;
+  background-image: url('/brand/sacred-pattern.svg');
+  background-repeat: repeat;
+  background-size: 300px 300px;
+}
+
+/* =========================================
+   Accessibility Enhancements
+   ========================================= */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--glp-sage-deep, #2f5d5d);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  z-index: 9999;
+  transition: top 0.2s ease;
+  font-family: var(--font-body);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus visible states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--glp-sage, #8fbf9f);
+  outline-offset: 2px;
+}
+
+/* =========================================
+   AOS Custom Animations
+   ========================================= */
+[data-aos="sacred-fade-up"] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition-property: opacity, transform;
+}
+
+[data-aos="sacred-fade-up"].aos-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-aos="sacred-scale"] {
+  opacity: 0;
+  transform: scale(0.95);
+  transition-property: opacity, transform;
+}
+
+[data-aos="sacred-scale"].aos-animate {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-aos="sacred-fade-left"] {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition-property: opacity, transform;
+}
+
+[data-aos="sacred-fade-left"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+[data-aos="sacred-fade-right"] {
+  opacity: 0;
+  transform: translateX(30px);
+  transition-property: opacity, transform;
+}
+
+[data-aos="sacred-fade-right"].aos-animate {
+  opacity: 1;
+  transform: translateX(0);
+}

@@ -4,6 +4,7 @@ import { applyBrand } from "./lib/brand";
 import { initUIMode } from "./lib/mode";
 import "./index.css";
 import "./styles/brand.css";
+import "./styles/sacred.css";
 
 // Apply mode BEFORE first paint to prevent FOUC
 try {

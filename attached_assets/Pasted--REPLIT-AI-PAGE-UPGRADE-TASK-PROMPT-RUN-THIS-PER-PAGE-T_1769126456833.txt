@@ -1,0 +1,42 @@
+# REPLIT AI — PAGE UPGRADE TASK PROMPT (RUN THIS PER PAGE)
+TASK: Upgrade the page route: <ROUTE_HERE> (example: "/")
+CONTEXT:
+- Project: The Genuine Love Project (trauma-soothing mental wellness platform).
+- Use existing components if present; if missing, create them in /components as specified.
+- Must adhere to Sacred UI: SacredLayout, HeroSection, SacredSection, PlatformComponent, SacredButton, SacredFooter.
+- Must integrate GSAP + AOS (AOS once: true). 
+- Must be mobile-first, responsive, SEO-optimized, accessible.
+
+DELIVERABLES (REQUIRED)
+A) Implement/upgrade:
+   - /components/Layout.jsx (+ Layout.module.css)
+   - /components/Hero.jsx (+ Hero.module.css)
+   - /components/SacredSection.jsx (+ SacredSection.module.css)
+   - /components/SacredButton.jsx (+ SacredButton.module.css)
+   - /components/PlatformComponent.jsx (+ PlatformComponent.module.css)
+   - /components/SacredFooter.jsx (+ SacredFooter.module.css)
+B) Ensure /styles/globals.css + /styles/sacred.css include brand tokens + reduced-motion safety.
+C) Ensure /pages/<route-file>.jsx uses the components, has SEO meta (title/description), and matches the healing design theory:
+   - light-shadow balance
+   - gentle hierarchy
+   - animation timing + "space to breathe"
+D) Ensure /public assets exist:
+   - /public/logo.svg
+   - /public/sacred-pattern.svg
+   - /public/icons/icon1.svg, icon2.svg, icon3.svg
+   If missing, generate minimal placeholder SVGs that match palette and compile.
+
+ACCEPTANCE CRITERIA (MUST PASS)
+- `npm run dev` works without errors.
+- No console errors on load.
+- AOS animations trigger only once.
+- GSAP animations respect prefers-reduced-motion.
+- Semantic structure: header/nav/main/footer + skip link.
+- Icons render crisp and scaled down ~30%.
+- The page feels calm: no abrupt motion, no flashing, no fast loops.
+
+OUTPUT FORMAT
+1) "IMPLEMENTATION CHECKLIST (before)" (bullets)
+2) Code changes grouped by file path (each file shown fully if changed)
+3) "COMPLETED CHECKLIST (after)" with checkmarks
+4) Short note: next page in the route list to upgrade next
