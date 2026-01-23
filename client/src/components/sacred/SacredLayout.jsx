@@ -5,7 +5,7 @@
  * - CSS Modules ONLY (no Tailwind)
  * - AOS with once:true
  * - GSAP disabled under prefers-reduced-motion
- * - Skip link to #main
+ * - Skip link to #main-content
  * - Sacred pattern + aura overlay
  */
 
@@ -20,7 +20,7 @@ export default function SacredLayout({
   className = '', 
   showPattern = true,
   showAura = true,
-  skipLinkTarget = '#main'
+  skipLinkTarget = '#main-content'
 }) {
   const layoutRef = useRef(null);
   const prefersReducedMotion = useRef(false);

@@ -324,7 +324,7 @@ export default function PageTemplate({ config, children }) {
         </nav>
       </header>
 
-      <main id="main">
+      <main id="main-content">
         <HeroSection hero={config.hero} />
 
         {hasContentLevels && (

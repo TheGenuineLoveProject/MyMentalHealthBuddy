@@ -7,22 +7,42 @@ import { Link } from 'wouter';
 
 export default function NotFoundPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#faf9f7]">
-      <div className="text-center px-6">
-        <h1 className="text-6xl font-serif text-[#2f5d5d] mb-4">404</h1>
-        <h2 className="text-2xl font-serif text-[#3a3a3a] mb-6">
+    <div 
+      className="min-h-screen flex items-center justify-center"
+      style={{ background: 'var(--sacred-cream, #faf9f7)' }}
+    >
+      <main id="main-content" className="text-center px-6">
+        <h1 
+          className="text-6xl font-serif mb-4"
+          style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
+        >
+          404
+        </h1>
+        <p 
+          className="text-2xl font-serif mb-6"
+          style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
+        >
           This page doesn't exist yet
-        </h2>
-        <p className="text-lg text-[#3a3a3a]/70 mb-8 max-w-md mx-auto">
+        </p>
+        <p 
+          className="text-lg mb-8 max-w-md mx-auto"
+          style={{ color: 'var(--sacred-charcoal, #3a3a3a)', opacity: 0.7 }}
+        >
           Perhaps you were looking for something else. 
           Let's guide you back to a gentle space.
         </p>
-        <Link href="/">
-          <a className="inline-block px-6 py-3 bg-[#8fbf9f] text-white rounded-lg hover:bg-[#7aa98a] transition-colors">
-            Return Home
-          </a>
+        <Link 
+          href="/"
+          className="inline-block px-6 py-3 text-white rounded-lg transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          style={{ 
+            background: 'var(--sacred-sage, #8fbf9f)',
+            outlineColor: 'var(--sacred-teal, #2f5d5d)'
+          }}
+          data-testid="link-return-home"
+        >
+          Return Home
         </Link>
-      </div>
+      </main>
     </div>
   );
 }

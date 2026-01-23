@@ -206,7 +206,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main id="main" className="relative z-10">
+      <main id="main-content" className="relative z-10">
         <Hero
           logo={
             <div 
