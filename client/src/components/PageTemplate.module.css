@@ -1125,3 +1125,270 @@
     gap: 0.5rem;
   }
 }
+
+/* ============================================
+   TIERED PRACTICE BLOCK (Wellness pages)
+   ============================================ */
+.tieredPracticeSection {
+  padding: 2rem 1.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.tieredPracticeHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.permissionNote {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: var(--sacred-teal, #2f5d5d);
+  opacity: 0.85;
+  margin: 0;
+}
+
+.safetyLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(244, 199, 195, 0.15);
+  border: 1px solid rgba(244, 199, 195, 0.3);
+  color: var(--sacred-charcoal, #3a3a3a);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.safetyLink:hover {
+  background: rgba(244, 199, 195, 0.25);
+  border-color: rgba(244, 199, 195, 0.5);
+}
+
+.safetyIcon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--sacred-rose, #f4c7c3);
+}
+
+.tieredPracticeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .tieredPracticeGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.tierCard {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: var(--sacred-white, #faf9f7);
+  border: 1px solid rgba(143, 191, 159, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tierCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.tierCardBeginner {
+  border-color: rgba(143, 191, 159, 0.3);
+  background: linear-gradient(180deg, rgba(143, 191, 159, 0.08), var(--sacred-white, #faf9f7));
+}
+
+.tierCardIntermediate {
+  border-color: rgba(47, 93, 93, 0.2);
+  background: linear-gradient(180deg, rgba(47, 93, 93, 0.06), var(--sacred-white, #faf9f7));
+}
+
+.tierCardAdvanced {
+  border-color: rgba(234, 195, 59, 0.25);
+  background: linear-gradient(180deg, rgba(234, 195, 59, 0.06), var(--sacred-white, #faf9f7));
+}
+
+.tierHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tierDuration {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  background: rgba(143, 191, 159, 0.15);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tierIconWrapper {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+}
+
+.tierIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+}
+
+.tierTitle {
+  font-family: var(--font-sacred, 'Playfair Display', serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--sacred-charcoal, #3a3a3a);
+  margin: 0;
+}
+
+.tierSteps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  flex: 1;
+}
+
+.tierStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(143, 191, 159, 0.1);
+}
+
+.tierStep:last-child {
+  border-bottom: none;
+}
+
+.tierStepNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(143, 191, 159, 0.15);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+}
+
+.tierStepText {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  color: var(--sacred-charcoal, #3a3a3a);
+  line-height: 1.5;
+}
+
+.tierReflection {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  background: rgba(234, 195, 59, 0.08);
+  border: 1px solid rgba(234, 195, 59, 0.15);
+}
+
+.tierReflectionLabel {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--sacred-teal, #2f5d5d);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 0.5rem 0;
+}
+
+.tierReflectionPrompt {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--sacred-charcoal, #3a3a3a);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.tierCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, var(--sacred-sage, #8fbf9f), var(--sacred-teal, #2f5d5d));
+  color: white;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tierCta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(143, 191, 159, 0.3);
+}
+
+.stopNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--sacred-teal, #2f5d5d);
+  opacity: 0.8;
+  text-align: center;
+  margin: 0;
+}
+
+.stopNoteIcon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--sacred-sage, #8fbf9f);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tierCard,
+  .tierCta {
+    transition: none;
+  }
+  
+  .tierCard:hover,
+  .tierCta:hover {
+    transform: none;
+  }
+}

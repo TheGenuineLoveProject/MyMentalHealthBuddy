@@ -1783,22 +1783,50 @@ const rawRoutes = [
       title: 'Nurture every part of',
       titleHighlight: 'yourself.',
       subtitle: 'Tools and practices for complete well-being.',
-      primaryCta: { label: 'Start Now', href: '/breathing' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse All', href: '/wellness-hub' }
     },
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'Wind',
-        title: 'One-Minute Start',
-        subtitle: 'A tiny practice you can do right now.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
+          'If you can, soften your shoulders. If not, that\'s okay.',
           'Take one slow breath in through your nose.',
-          'Let it out gently through your mouth.',
-          'Notice how your body feels. That is enough.'
-        ]
-      }
-    ],
+          'Let it out gently. Notice how your body feels.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'Find a comfortable position, sitting or standing.',
+          'Close your eyes or soften your gaze.',
+          'Take three slow breaths, noticing each one.',
+          'Scan your body from head to toe—just notice, no fixing.',
+          'Open your eyes when you feel ready.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'Settle into a comfortable position.',
+          'Take 5 slow breaths to arrive.',
+          'Scan your body, pausing at areas of tension.',
+          'Breathe into any tightness, offering it space.',
+          'Notice your emotional state without judgment.',
+          'Set one gentle intention for your day.',
+          'When ready, slowly open your eyes.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What did you notice in your body today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Wellness practices are gentle invitations, not requirements. If anything feels overwhelming, pause. You can always return later.',
@@ -1820,23 +1848,50 @@ const rawRoutes = [
       title: 'Your wellness',
       titleHighlight: 'headquarters.',
       subtitle: 'Everything you need for holistic well-being in one place.',
-      primaryCta: { label: 'Start a Practice', href: '/breathing' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse All', href: '#all' }
     },
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'Heart',
-        title: 'Quick Grounding',
-        subtitle: 'Connect with your body right now.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
           'Feel your feet on the floor.',
-          'Name three things you can see.',
+          'Name one thing you can see.',
           'Take one slow breath.'
         ],
-        cta: { label: 'More Grounding', href: '/grounding' }
-      }
-    ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'Find a comfortable position.',
+          'Feel your feet grounded on the floor.',
+          'Name 5 things you can see, 4 you can touch.',
+          'Take three slow breaths.',
+          'Notice how you feel now compared to before.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'Settle into stillness.',
+          'Complete a full 5-4-3-2-1 grounding: see, touch, hear, smell, taste.',
+          'Scan your body from head to toe.',
+          'Breathe into any areas of tension.',
+          'Notice your emotional landscape.',
+          'Set one intention for your wellness today.',
+          'Gently return to the room.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What wellness practice calls to you most right now?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'There is no pressure to do everything. Start with what feels gentle and manageable.',
@@ -1857,22 +1912,49 @@ const rawRoutes = [
       title: 'Your library of',
       titleHighlight: 'healing wisdom.',
       subtitle: 'Evidence-based resources for your healing journey.',
-      primaryCta: { label: 'Start Reading', href: '#library' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse Topics', href: '#topics' }
     },
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'BookOpen',
-        title: 'Micro-Learning',
-        subtitle: 'One small insight to carry with you today.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
-          'Pick any topic that calls to you.',
-          'Read just the first paragraph.',
-          'Notice if any word or phrase stands out.'
-        ]
-      }
-    ],
+          'Pick one topic that calls to you.',
+          'Read just the first sentence.',
+          'Let it settle.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'Choose a topic that resonates.',
+          'Read the first paragraph slowly.',
+          'Pause and notice what stands out.',
+          'Write down one word that feels important.',
+          'Close the page when ready.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'Select a topic you want to explore.',
+          'Read the full article mindfully.',
+          'Pause after each section to breathe.',
+          'Notice what resonates or challenges you.',
+          'Journal one insight.',
+          'Consider how you might apply this today.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What healing wisdom do you need most right now?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Learning about healing can sometimes bring up difficult feelings. Take breaks as needed.',
@@ -1894,22 +1976,50 @@ const rawRoutes = [
       title: 'Find serenity in',
       titleHighlight: 'beautiful places.',
       subtitle: 'Immersive scenes to calm your mind and soothe your soul.',
-      primaryCta: { label: 'Start Watching', href: '#scenes' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Sleep Sounds', href: '#sounds' }
     },
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'Eye',
-        title: 'Quick Visual Escape',
-        subtitle: 'Let your eyes rest on something peaceful.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
           'Choose a scene that feels soothing.',
-          'Let your gaze soften.',
-          'Breathe slowly as you watch.'
-        ]
-      }
-    ],
+          'Let your gaze soften for a moment.',
+          'Take one slow breath.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'Select a calming scene.',
+          'Let your gaze rest without focusing.',
+          'Breathe slowly as you watch.',
+          'Notice any tension releasing.',
+          'When ready, gently look away.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'Choose a scene and settle in.',
+          'Take 5 slow breaths to arrive.',
+          'Let your eyes rest on the movement.',
+          'Imagine yourself in this peaceful place.',
+          'Notice how your body responds.',
+          'Stay as long as feels good.',
+          'Gently return when ready.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['Where in your body do you feel most relaxed now?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Sometimes we need distraction; sometimes we need presence. Both are valid.',
@@ -1925,45 +2035,47 @@ const rawRoutes = [
     title: 'Breathing Exercises — The Genuine Love Project',
     description: 'Evidence-based breathing practices to help regulate your nervous system. Grounded in research on vagal tone and respiratory science.',
     tone: 'practice',
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'Wind',
-        title: 'One-Minute Calm',
-        subtitle: 'The simplest way to start.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
-          'Breathe in slowly through your nose (count to 4).',
-          'Hold gently for a moment.',
-          'Breathe out slowly through your mouth (count to 4).'
+          'If you can, let your shoulders drop. If not, that\'s okay.',
+          'Breathe in slowly through your nose.',
+          'Breathe out gently through your mouth.'
         ],
-        cta: { label: 'Try It Now', href: '#exercises' }
+        ctaLabel: 'Start 10-second reset'
       },
-      {
-        timeTag: '5 min',
-        icon: 'Activity',
-        title: 'Box Breathing Practice',
-        subtitle: 'A technique used by first responders.',
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
         steps: [
+          'Find a comfortable position.',
           'Breathe in for 4 counts.',
-          'Hold for 4 counts.',
+          'Hold gently for 4 counts.',
           'Breathe out for 4 counts.',
-          'Hold empty for 4 counts.',
-          'Repeat for 5 minutes.'
-        ]
+          'Repeat 5-10 times.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
       },
-      {
-        timeTag: 'Deeper',
-        icon: 'Brain',
-        title: 'Heart Rate Variability Training',
-        subtitle: 'Advanced practice for nervous system regulation.',
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
         steps: [
-          'Use a slow 5-6 breaths per minute rhythm.',
-          'Extend your exhale longer than your inhale.',
-          'Practice for 10-20 minutes daily.',
-          'Consider HRV biofeedback devices for measurement.'
-        ]
-      }
-    ],
+          'Settle into stillness.',
+          'Begin with 3 natural breaths.',
+          'Shift to box breathing: 4-4-4-4 pattern.',
+          'Continue for 3 minutes.',
+          'Extend to 4-7-8 pattern if ready.',
+          'Notice how your body responds.',
+          'Return to natural breathing gently.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What did you notice about your breath today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'If you feel dizzy or uncomfortable, stop and breathe normally. These practices are supportive tools, not medical treatment.',
@@ -2091,45 +2203,47 @@ const rawRoutes = [
     title: 'Grounding Techniques — The Genuine Love Project',
     description: 'Evidence-based grounding practices to anchor you in the present moment. Drawn from somatic therapy and mindfulness research.',
     tone: 'practice',
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'Target',
-        title: '5-4-3-2-1 Grounding',
-        subtitle: 'Use your senses to come back to now.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
+          'Feel your feet on the floor.',
+          'Name one thing you can see.',
+          'Take one slow breath.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'Press your feet firmly into the ground.',
           'Name 5 things you can see.',
           'Name 4 things you can touch.',
-          'Name 3 things you can hear.'
+          'Name 3 things you can hear.',
+          'Take three slow breaths.'
         ],
-        cta: { label: 'Start Now', href: '#exercises' }
+        ctaLabel: 'Start 1–3 minute practice'
       },
-      {
-        timeTag: '5 min',
-        icon: 'Leaf',
-        title: 'Body Scan Grounding',
-        subtitle: 'Feel your body from feet to head.',
-        steps: [
-          'Start at your feet. Notice how they feel.',
-          'Slowly move attention up through your legs, belly, chest.',
-          'Notice your arms, neck, and face.',
-          'Take a breath and open your eyes.'
-        ]
-      },
-      {
-        timeTag: 'Deeper',
-        icon: 'Shield',
-        title: 'Somatic Anchoring',
-        subtitle: 'Advanced body-based presence practice.',
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
         steps: [
           'Find a comfortable seated position.',
-          'Press your feet firmly into the floor.',
-          'Place one hand on your chest, one on your belly.',
-          'Breathe slowly, feeling both hands rise and fall.',
-          'Stay here for 10-20 minutes.'
-        ]
-      }
-    ],
+          'Press your feet into the floor.',
+          'Place one hand on chest, one on belly.',
+          'Complete a full 5-4-3-2-1 sensory grounding.',
+          'Do a slow body scan from feet to head.',
+          'Breathe slowly, noticing both hands rise.',
+          'Stay as long as feels right.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['Where do you feel most grounded in your body right now?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Grounding can sometimes bring up difficult feelings. If you feel overwhelmed, pause and try just breathing slowly.',
@@ -2215,19 +2329,47 @@ const rawRoutes = [
     title: 'Affirmations — The Genuine Love Project',
     description: 'Supportive self-statements rooted in self-compassion research. A gentle practice for building a kinder inner voice.',
     tone: 'practice',
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'Heart',
-        title: 'One Kind Statement',
-        subtitle: 'Start with just one gentle phrase.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
-          'Place your hand on your heart.',
+          'Place your hand on your heart if comfortable.',
           'Say quietly: "I am doing my best."',
-          'Take a breath and let the words settle.'
+          'Take one slow breath.'
         ],
-        cta: { label: 'Try It Now', href: '#exercises' }
+        ctaLabel: 'Start 10-second reset'
       },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'Find a quiet moment.',
+          'Choose one affirmation that feels true.',
+          'Say it out loud or silently three times.',
+          'Notice how it feels in your body.',
+          'Let the words settle.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'Settle into stillness.',
+          'Choose 3 affirmations that resonate.',
+          'Speak each one slowly, pausing between.',
+          'Notice where you feel resistance or ease.',
+          'Write down any that feel especially true.',
+          'Return to your favorite throughout the day.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['Which affirmation felt most true for you today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
+    practices: [
       {
         timeTag: '5 min',
         icon: 'RefreshCw',
@@ -2338,47 +2480,47 @@ const rawRoutes = [
     title: 'Meditation Guide — The Genuine Love Project',
     description: 'Accessible meditation practices grounded in mindfulness research. Start with just one minute—no experience needed.',
     tone: 'practice',
-    practices: [
-      {
-        timeTag: '1 min',
-        icon: 'Moon',
-        title: 'One-Minute Stillness',
-        subtitle: 'The simplest meditation there is.',
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
         steps: [
           'Close your eyes or soften your gaze.',
-          'Take three slow breaths.',
-          'Just notice what you notice. That is it.'
+          'Take one slow breath.',
+          'Just notice what you notice.'
         ],
-        cta: { label: 'Try It Now', href: '#exercises' }
+        ctaLabel: 'Start 10-second reset'
       },
-      {
-        timeTag: '5 min',
-        icon: 'Brain',
-        title: 'Breath Awareness Meditation',
-        subtitle: 'A foundational mindfulness practice.',
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
         steps: [
-          'Find a comfortable seated position.',
-          'Set a gentle timer for 5 minutes.',
+          'Find a comfortable position.',
+          'Close your eyes or soften your gaze.',
           'Focus on the sensation of breathing.',
-          'When your mind wanders, gently return to breath.',
+          'When your mind wanders, gently return.',
           'End by noticing how you feel.'
-        ]
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
       },
-      {
-        timeTag: 'Deeper',
-        icon: 'Sparkles',
-        title: 'Loving-Kindness Meditation',
-        subtitle: 'Cultivate compassion for yourself and others.',
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
         steps: [
-          'Begin with breath awareness for 2 minutes.',
+          'Settle into stillness.',
+          'Begin with breath awareness.',
+          'Expand to body sensations.',
+          'Notice thoughts without engaging.',
           'Silently repeat: "May I be safe. May I be well."',
-          'Extend these wishes to someone you love.',
-          'Extend them to a neutral person.',
-          'Finally, extend them to all beings.',
-          'Practice for 15-20 minutes.'
-        ]
-      }
-    ],
+          'Extend these wishes outward.',
+          'Return gently when ready.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What quality of mind do you notice after sitting?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Meditation can sometimes bring up difficult emotions. If it feels too much, stop and try a grounding exercise instead.',
@@ -2503,6 +2645,50 @@ const rawRoutes = [
         ]
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, place one hand on your heart.',
+          'Take one slow breath in through your nose.',
+          'Exhale gently and say silently: "I matter."',
+          'If not, that\'s okay—simply notice you are here.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, find a comfortable seated position.',
+          'Place both hands on your chest or belly.',
+          'Take 3 slow breaths, noticing the rise and fall.',
+          'Ask yourself gently: "What do I need right now?"',
+          'Choose one small act of care to do next.',
+          'If nothing comes, that\'s okay—resting counts.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, sit or lie down in a quiet space.',
+          'Close your eyes gently or soften your gaze.',
+          'Scan your body from head to toe—notice any tension.',
+          'Ask: "What areas of my life need more care?"',
+          'Consider: sleep, nourishment, rest, connection, movement.',
+          'Choose one area to nurture this week.',
+          'Set a tiny, achievable intention.',
+          'End by placing a hand on your heart and saying: "I deserve care."'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What is one small way I can show myself kindness today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Self-care can feel impossible when you are struggling. That is okay. Even noticing you need care is a first step.',
@@ -2520,7 +2706,7 @@ const rawRoutes = [
       title: 'Self-care is',
       titleHighlight: 'not selfish.',
       subtitle: 'Self-care is not about luxury or indulgence. It is about small, consistent actions that help your body and mind feel safer. Research shows even micro-moments of care can reduce stress.',
-      primaryCta: { label: 'Start Practice', href: '#exercises' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Learn the Approach', href: '#approach' }
     },
     modules: [
@@ -2626,6 +2812,50 @@ const rawRoutes = [
         ]
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause whatever you are doing.',
+          'Take one breath and ask: "What am I feeling?"',
+          'Name it simply: happy, sad, anxious, tired, okay.',
+          'If nothing comes, that\'s okay—just notice.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, close your eyes gently.',
+          'Take 3 slow breaths to settle.',
+          'Ask: "What emotion is present right now?"',
+          'Notice where you feel it in your body.',
+          'Breathe gently into that area.',
+          'If it feels too intense, open your eyes and ground.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Close your eyes and take 5 slow breaths.',
+          'Scan your body from head to toe for sensations.',
+          'Notice where emotion lives—chest, belly, throat, shoulders.',
+          'Ask: "What is this emotion trying to tell me?"',
+          'Listen without needing to fix or change anything.',
+          'If intensity rises, ground yourself with your feet on the floor.',
+          'End by naming the emotion and thanking yourself for listening.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What patterns do I notice in my emotional landscape?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Exploring emotions can bring up difficult feelings. Go slowly and take breaks as needed.',
@@ -2643,7 +2873,7 @@ const rawRoutes = [
       title: 'Understand and navigate',
       titleHighlight: 'your emotions.',
       subtitle: 'Emotional intelligence is not about controlling feelings. It is about noticing them, naming them, and responding with awareness. These skills can be learned at any age.',
-      primaryCta: { label: 'Start Practice', href: '#exercises' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Learn the Framework', href: '#framework' }
     },
     modules: [
@@ -2751,6 +2981,50 @@ const rawRoutes = [
         ]
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, soften your shoulders and unclench your jaw.',
+          'Take one slow breath in through your nose.',
+          'Exhale for twice as long through your mouth.',
+          'If not, that\'s okay—just notice your breath.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, lie down or recline comfortably.',
+          'Place one hand on your belly, one on your chest.',
+          'Breathe in for 4 counts, feeling your belly rise.',
+          'Breathe out for 6–8 counts, feeling it fall.',
+          'Repeat 5–8 times, slowing your exhale each time.',
+          'If your mind wanders, gently return to the breath.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, dim the lights and put away screens.',
+          'Lie down in a comfortable position.',
+          'Close your eyes and take 3 settling breaths.',
+          'Scan your body from toes to head, releasing tension.',
+          'Breathe in for 4 counts, hold for 4, exhale for 8.',
+          'Imagine each exhale carrying away today\'s stress.',
+          'Set an intention: "I release this day and welcome rest."',
+          'Continue the breathing pattern until you feel drowsy.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What would help me release the day and welcome rest tonight?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Sleep difficulties can be frustrating. Be patient with yourself. These are gentle suggestions, not rules.',
@@ -2763,7 +3037,7 @@ const rawRoutes = [
       title: 'Embrace deep,',
       titleHighlight: 'healing sleep.',
       subtitle: 'Evidence-based approaches to improve your sleep quality.',
-      primaryCta: { label: 'Start Practice', href: '#routine' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Sleep Assessment', href: '#assessment' }
     }
   },
@@ -2814,6 +3088,50 @@ const rawRoutes = [
         ]
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, feel your feet on the ground.',
+          'Take one slow breath and exhale longer than you inhale.',
+          'Notice: Am I activated, frozen, or calm?',
+          'If not sure, that\'s okay—just notice what you feel.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, stand or sit with both feet flat on the floor.',
+          'Take 3 slow breaths, exhaling longer each time.',
+          'Slowly look around the room and name 3 safe things you see.',
+          'Notice any shift in your body.',
+          'Shake your hands gently for 10 seconds.',
+          'Take one more slow breath and notice how you feel now.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space where you feel safe.',
+          'Stand up and gently shake your hands, then arms.',
+          'Let the shaking spread to your shoulders, torso, and legs.',
+          'Shake your whole body gently for 1–2 minutes.',
+          'Stop and stand still—notice tingling, warmth, or calm.',
+          'Slowly look around the room, naming safe objects.',
+          'Take 5 slow breaths, exhaling fully each time.',
+          'End by placing a hand on your heart: "I am safe in this moment."'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What signals tell me my nervous system needs support?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Learning about your stress response can sometimes activate it. If you feel overwhelmed, pause and try a grounding exercise.',
@@ -2831,7 +3149,7 @@ const rawRoutes = [
       title: 'Understand your',
       titleHighlight: 'stress response.',
       subtitle: 'Your nervous system is designed to protect you. Sometimes it overprotects. Learning how it works can help you respond with more awareness and self-compassion.',
-      primaryCta: { label: 'Start Practice', href: '#exercises' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Learn the Basics', href: '#basics' }
     },
     modules: [
@@ -2939,6 +3257,50 @@ const rawRoutes = [
         ]
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, place a hand on your heart.',
+          'Take one slow breath.',
+          'Say silently: "I see you. You matter."',
+          'If this feels too much, that\'s okay—just notice.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, close your eyes gently.',
+          'Take 3 slow breaths to settle.',
+          'Picture yourself as a child—any age that comes to mind.',
+          'Notice how that child feels: scared, lonely, joyful?',
+          'Say silently: "I am here with you now."',
+          'If emotions arise, breathe gently and stay grounded.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet, safe space.',
+          'Close your eyes and take 5 slow breaths.',
+          'Imagine a warm, safe place—real or imagined.',
+          'Invite your younger self to join you there.',
+          'Notice their expression—what do they need?',
+          'Offer them what they needed: safety, love, presence.',
+          'Stay as long as feels right, breathing gently.',
+          'When ready, thank them and slowly open your eyes.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What does my younger self need to hear from me today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Inner child work can bring up intense emotions. Go very slowly. It is okay to stop and return another time.',
@@ -2961,7 +3323,7 @@ const rawRoutes = [
       title: 'Reconnect with your',
       titleHighlight: 'younger self.',
       subtitle: 'Inside you is a younger version of yourself who may still carry old wounds. Gently acknowledging that part of you can be a path toward healing. This work is tender—go slowly.',
-      primaryCta: { label: 'Start Gently', href: '#exercises' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Understand the Approach', href: '#approach' }
     },
     modules: [
@@ -3043,6 +3405,50 @@ const rawRoutes = [
         cta: { label: 'Try It Now', href: '#checkin' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, roll your shoulders back gently.',
+          'Unclench your jaw and relax your tongue.',
+          'Take one slow breath, feeling your body.',
+          'If not, that\'s okay—just notice where you are.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, stand or sit with feet flat on the ground.',
+          'Take 3 slow breaths, feeling your chest and belly move.',
+          'Scan from your head down: notice any tension or sensation.',
+          'Pause at any tight spots—breathe into them.',
+          'Roll your shoulders, stretch your neck gently.',
+          'End with one deep breath and notice how you feel.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, lie down or sit comfortably.',
+          'Close your eyes and take 5 slow breaths.',
+          'Scan your body from toes to head, inch by inch.',
+          'At each area, ask: "What does this part need?"',
+          'Notice without judgment: tension, pain, numbness, warmth.',
+          'Breathe into areas that call for attention.',
+          'Move or stretch any part that wants to release.',
+          'End by thanking your body for carrying you today.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What is my body trying to tell me today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Body awareness can sometimes feel uncomfortable. Go at your own pace.',
@@ -3056,7 +3462,7 @@ const rawRoutes = [
       title: 'Listen to your',
       titleHighlight: 'body\'s wisdom.',
       subtitle: 'Practices to reconnect with and honor your physical self.',
-      primaryCta: { label: 'Start Practice', href: '#checkin' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Movement Practices', href: '#movement' }
     }
   },
@@ -3081,6 +3487,50 @@ const rawRoutes = [
         cta: { label: 'Try It Now', href: '#practices' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause and take one slow breath.',
+          'Think of one small thing you are grateful for.',
+          'Let that feeling settle in your chest.',
+          'If nothing comes, that\'s okay—just breathe.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, close your eyes gently.',
+          'Take 3 slow breaths to settle.',
+          'Bring to mind something that gives your life meaning.',
+          'Notice where you feel it in your body.',
+          'Let gratitude or awe expand with each breath.',
+          'If your mind wanders, gently return to the feeling.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Close your eyes and take 5 slow, deep breaths.',
+          'Ask yourself: "What gives my life meaning?"',
+          'Notice what arises—images, feelings, memories.',
+          'Breathe into the feeling of connection or purpose.',
+          'If resistance arises, notice it with compassion.',
+          'Spend a few moments in silence, just being.',
+          'End by placing a hand on your heart: "I am part of something greater."'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What brings a sense of meaning or wonder to my life?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Spiritual practices are personal. There is no right or wrong way.',
@@ -3093,7 +3543,7 @@ const rawRoutes = [
       title: 'Nourish your',
       titleHighlight: 'spirit.',
       subtitle: 'Practices for meaning, purpose, and connection to something greater.',
-      primaryCta: { label: 'Start Practice', href: '#practices' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Daily Reflection', href: '#reflection' }
     }
   },
@@ -3118,6 +3568,50 @@ const rawRoutes = [
         cta: { label: 'Browse Paths', href: '#paths' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause and take one slow breath.',
+          'Ask yourself: "What do I need most right now?"',
+          'Trust the first answer that comes.',
+          'If nothing comes, that\'s okay—just notice.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, close your eyes gently.',
+          'Take 3 slow breaths to settle.',
+          'Ask: "What aspect of healing calls to me today?"',
+          'Notice what arises: grief, boundaries, self-worth, calm?',
+          'Trust your intuition about where to begin.',
+          'Choose one small step toward that healing.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Close your eyes and take 5 slow breaths.',
+          'Reflect on your healing journey so far.',
+          'What has shifted? What still needs attention?',
+          'Ask: "What is my next right step?"',
+          'Listen without forcing an answer.',
+          'Trust that the path will reveal itself.',
+          'Set one intention for your continued journey.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What aspect of my healing journey needs attention today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Healing is not linear. It is okay to start, pause, and return.',
@@ -3130,7 +3624,7 @@ const rawRoutes = [
       title: 'Structured paths to',
       titleHighlight: 'lasting healing.',
       subtitle: 'Multi-week journeys designed for specific healing goals.',
-      primaryCta: { label: 'Choose Your Path', href: '#paths' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Continue Journey', href: '#continue' }
     }
   },
@@ -3155,6 +3649,50 @@ const rawRoutes = [
         cta: { label: 'Start Now', href: '#track' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause and take one slow breath.',
+          'Think of one tiny action you can do right now.',
+          'Do it or commit to doing it in the next minute.',
+          'If nothing comes, that\'s okay—noticing is progress.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, sit comfortably and take 3 breaths.',
+          'Think of one small behavior you want to build.',
+          'Make it tiny—impossibly small (e.g., one sip of water).',
+          'Attach it to something you already do (after breakfast).',
+          'Visualize yourself doing it successfully.',
+          'Celebrate immediately after—a smile or "yes!" counts.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Take 5 slow breaths to settle your mind.',
+          'Identify one behavior you want to change or build.',
+          'Ask: "What is the tiniest version of this I could do?"',
+          'Identify your cue (when/where) and your reward.',
+          'Write it down: After [CUE], I will [TINY BEHAVIOR].',
+          'Visualize doing it for 7 days in a row.',
+          'Set a reminder and commit to starting tomorrow.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What tiny change would have the biggest positive ripple in my life?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Change is hard. Start smaller than you think. Progress over perfection.',
@@ -3167,7 +3705,7 @@ const rawRoutes = [
       title: 'Build habits that',
       titleHighlight: 'serve you.',
       subtitle: 'Science-backed approaches to behavioral transformation.',
-      primaryCta: { label: 'Start Practice', href: '#track' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Habit Library', href: '#library' }
     }
   },
@@ -3192,6 +3730,50 @@ const rawRoutes = [
         cta: { label: 'Try It Now', href: '#build' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause before your next action.',
+          'Take one slow breath.',
+          'Ask: "What is one kind thing I can do for myself today?"',
+          'If nothing comes, that\'s okay—just pause.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, sit or stand comfortably.',
+          'Take 3 slow breaths to settle.',
+          'Ask: "How do I want to feel today?"',
+          'Choose one gentle intention for the day.',
+          'Think of one small action that supports that feeling.',
+          'Commit to doing it in the next few hours.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet moment—morning works well.',
+          'Close your eyes and take 5 slow breaths.',
+          'Reflect: "What anchors help me feel grounded?"',
+          'Consider: a morning ritual, an evening wind-down, a midday pause.',
+          'Choose one small routine to try this week.',
+          'Visualize yourself doing it each day.',
+          'Set a gentle reminder if it helps.',
+          'End by saying: "I am building a life that supports me."'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What daily anchor would most support my well-being?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Routines should serve you, not stress you. Start with one tiny anchor.',
@@ -3204,7 +3786,7 @@ const rawRoutes = [
       title: 'Routines that',
       titleHighlight: 'nurture you.',
       subtitle: 'Build a daily structure that supports your healing.',
-      primaryCta: { label: 'Start Practice', href: '#build' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Templates', href: '#templates' }
     }
   },
@@ -3229,6 +3811,50 @@ const rawRoutes = [
         cta: { label: 'Try It Now', href: '#tools' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause and take one slow breath.',
+          'Ask: "What am I thinking right now?"',
+          'Notice the thought without judgment.',
+          'If it\'s hard to notice, that\'s okay—just breathe.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, close your eyes gently.',
+          'Take 3 slow breaths to settle.',
+          'Notice what thoughts are present right now.',
+          'Ask: "Is this thought helpful or unhelpful?"',
+          'If unhelpful, ask: "What would be a kinder thought?"',
+          'If nothing comes, that\'s okay—just notice without forcing.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Close your eyes and take 5 slow breaths.',
+          'Notice any recurring or sticky thoughts.',
+          'Ask: "What feeling does this thought create?"',
+          'Ask: "Is there evidence for and against this thought?"',
+          'Consider: "What would I tell a friend thinking this?"',
+          'Reframe to a more balanced perspective if possible.',
+          'End by saying: "Thoughts are not facts."'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What thought pattern would I like to gently shift?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Changing thought patterns takes time. Be patient with yourself.',
@@ -3242,7 +3868,7 @@ const rawRoutes = [
       title: 'Reshape your',
       titleHighlight: 'thought patterns.',
       subtitle: 'Evidence-based cognitive techniques for mental wellness.',
-      primaryCta: { label: 'Start Practice', href: '#tools' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Thought Record', href: '#record' }
     }
   },
@@ -3267,6 +3893,50 @@ const rawRoutes = [
         cta: { label: 'Try It Now', href: '#practice' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, catch your reflection—a mirror, window, or phone.',
+          'Look at yourself for a moment without judgment.',
+          'Say silently: "I see you."',
+          'If this feels hard, that\'s okay—just notice.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, stand in front of a mirror.',
+          'Take 3 slow breaths and soften your gaze.',
+          'Look gently into your own eyes.',
+          'Say: "I see you. You are doing your best."',
+          'Notice any emotions that arise—let them be.',
+          'End by placing a hand on your heart.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a private space with a mirror.',
+          'Stand or sit comfortably and take 5 slow breaths.',
+          'Look into your own eyes with curiosity, not criticism.',
+          'Say: "I see you. I accept you as you are."',
+          'Notice any resistance—what does your inner critic say?',
+          'Respond with kindness: "You are worthy of love."',
+          'Stay present, breathing gently, for a few more moments.',
+          'End by saying: "I am learning to love myself."'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What would it feel like to look at myself with complete acceptance?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Mirror work can bring up strong emotions. Go at your own pace.',
@@ -3280,7 +3950,7 @@ const rawRoutes = [
       title: 'See yourself with',
       titleHighlight: 'loving eyes.',
       subtitle: 'Powerful self-love practices using the mirror.',
-      primaryCta: { label: 'Start Practice', href: '#practice' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Learn More', href: '#learn' }
     }
   },
@@ -3305,6 +3975,50 @@ const rawRoutes = [
         cta: { label: 'Try It Now', href: '#rituals' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause and take one slow, intentional breath.',
+          'Set one small intention for this moment.',
+          'Exhale slowly, releasing what does not serve you.',
+          'If this feels odd, that\'s okay—ritual is personal.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, light a candle or hold something meaningful.',
+          'Take 3 slow breaths to mark the beginning.',
+          'Set an intention: "May this moment be sacred."',
+          'Sit in silence for a moment, feeling the intention.',
+          'Close with a gesture—a bow, a hand on heart.',
+          'If candle is lit, blow it out slowly.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, create a sacred space—dim lights, quiet music.',
+          'Light a candle or gather objects with meaning.',
+          'Take 5 slow breaths to enter the ritual mindset.',
+          'State your intention aloud or silently.',
+          'Reflect on what you are honoring, releasing, or inviting.',
+          'Spend time in silence, letting the ritual unfold.',
+          'Close with gratitude for this moment of intention.',
+          'Extinguish the candle and carry the intention forward.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What transition in my life deserves to be honored with ritual?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Rituals are personal. There is no wrong way to create meaning.',
@@ -3317,7 +4031,7 @@ const rawRoutes = [
       title: 'Create rituals that',
       titleHighlight: 'hold meaning.',
       subtitle: 'Mark transitions and honor your journey with sacred practices.',
-      primaryCta: { label: 'Start Practice', href: '#rituals' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Create Your Own', href: '#create' }
     }
   },
@@ -3342,6 +4056,50 @@ const rawRoutes = [
         cta: { label: 'Today\'s Wisdom', href: '#today' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause and take one slow breath.',
+          'Bring to mind one word that represents wisdom to you.',
+          'Let that word settle in your awareness.',
+          'If nothing comes, that\'s okay—just breathe.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, close your eyes gently.',
+          'Take 3 slow breaths to settle.',
+          'Recall a piece of wisdom that has stayed with you.',
+          'Ask: "What does this mean for me today?"',
+          'Notice any insight or feeling that arises.',
+          'Carry that wisdom with you as you continue your day.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Close your eyes and take 5 slow, deep breaths.',
+          'Read or recall a piece of wisdom that speaks to you.',
+          'Let the words settle without analyzing them.',
+          'Ask: "How might I embody this wisdom today?"',
+          'Notice what arises—images, feelings, intentions.',
+          'Commit to one small action aligned with this wisdom.',
+          'End by expressing gratitude for the teachers who came before.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What timeless wisdom is asking to be lived through me today?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'Wisdom is meant to inspire, not pressure. Take what resonates.',
@@ -3354,7 +4112,7 @@ const rawRoutes = [
       title: 'Ancient wisdom for',
       titleHighlight: 'modern healing.',
       subtitle: 'Timeless insights to illuminate your path.',
-      primaryCta: { label: 'Start Practice', href: '#today' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse Collection', href: '#collection' }
     }
   },
@@ -3380,6 +4138,50 @@ const rawRoutes = [
         cta: { label: 'Try It Now', href: '#practice' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, sit or stand with feet grounded.',
+          'Take one slow breath in through your nose.',
+          'Exhale slowly through your nose.',
+          'If this is all you do, it is enough.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, sit comfortably and close your eyes.',
+          'Take 3 slow breaths through your nose.',
+          'With each inhale, imagine drawing in calm.',
+          'With each exhale, release tension or worry.',
+          'Let the breath be natural—no forcing.',
+          'End with a moment of gratitude for the breath.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Close your eyes and take 5 slow, deep breaths.',
+          'Choose a simple breath practice: equal inhale and exhale.',
+          'Breathe in for 4 counts, out for 4 counts.',
+          'Continue for 3–5 minutes, letting thoughts pass.',
+          'If your mind wanders, gently return to the count.',
+          'End with 3 natural breaths and a moment of stillness.',
+          'Open your eyes and carry this calm forward.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What ancient practice calls to me for deeper exploration?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'These practices have helped many. Go gently at your own pace.',
@@ -3392,7 +4194,7 @@ const rawRoutes = [
       title: 'Practice the',
       titleHighlight: 'ancient arts.',
       subtitle: 'Turn wisdom into daily practice.',
-      primaryCta: { label: 'Start Practice', href: '#practice' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Browse Traditions', href: '#traditions' }
     }
   },
@@ -3417,6 +4219,50 @@ const rawRoutes = [
         cta: { label: 'Explore Now', href: '#synthesis' }
       }
     ],
+    practice: {
+      beginner: {
+        duration: '10s',
+        title: '10-second reset',
+        steps: [
+          'If you can, pause and take one slow breath.',
+          'Ask: "What wisdom serves me right now?"',
+          'Trust the first answer that comes.',
+          'If nothing comes, that\'s okay—just breathe.'
+        ],
+        ctaLabel: 'Start 10-second reset'
+      },
+      intermediate: {
+        duration: '1–3 min',
+        title: '1–3 minute practice',
+        steps: [
+          'If you can, close your eyes gently.',
+          'Take 3 slow breaths to settle.',
+          'Reflect on wisdom traditions that resonate with you.',
+          'Ask: "What common thread connects them for me?"',
+          'Notice any insight—a word, image, or feeling.',
+          'Trust your intuition about what serves you.'
+        ],
+        ctaLabel: 'Start 1–3 minute practice'
+      },
+      advanced: {
+        duration: '3–10 min',
+        title: '3–10 minute practice',
+        steps: [
+          'If you can, find a quiet space and sit comfortably.',
+          'Close your eyes and take 5 slow, deep breaths.',
+          'Consider: What wisdom traditions speak to you?',
+          'Notice the themes they share—compassion, presence, growth.',
+          'Ask: "How can I weave these insights into my daily life?"',
+          'Identify one practice from each tradition you might try.',
+          'Commit to exploring one this week.',
+          'End by honoring the wisdom keepers across time and culture.'
+        ],
+        ctaLabel: 'Start 3–10 minute practice',
+        reflection: ['What common thread connects the wisdom I am drawn to?']
+      },
+      safetyLink: { label: 'Need immediate support?', href: '/crisis' },
+      stopNote: 'You can pause, stop, or switch to the 10-second reset anytime.'
+    },
     disclaimer: {
       title: 'If this feels hard',
       text: 'You do not need to master everything. Take what helps and leave the rest.',
@@ -3429,7 +4275,7 @@ const rawRoutes = [
       title: 'Synthesize wisdom from',
       titleHighlight: 'many sources.',
       subtitle: 'Draw from the best of all traditions.',
-      primaryCta: { label: 'Start Practice', href: '#synthesis' },
+      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
       secondaryCta: { label: 'Create Your Path', href: '#create' }
     }
   },

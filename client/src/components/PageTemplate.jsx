@@ -319,6 +319,104 @@ function PracticeSection({ practice }) {
   );
 }
 
+function TieredPracticeBlock({ practice }) {
+  if (!practice) return null;
+  
+  const tiers = [
+    { key: 'beginner', tier: practice.beginner, icon: 'Zap', variant: 'beginner' },
+    { key: 'intermediate', tier: practice.intermediate, icon: 'Activity', variant: 'intermediate' },
+    { key: 'advanced', tier: practice.advanced, icon: 'Brain', variant: 'advanced' }
+  ].filter(t => t.tier);
+  
+  if (tiers.length === 0) return null;
+  
+  return (
+    <section 
+      className={styles.tieredPracticeSection}
+      aria-label="Practice options"
+      data-aos="fade-up"
+      data-aos-delay="100"
+    >
+      <div className={styles.tieredPracticeHeader}>
+        <p className={styles.permissionNote}>
+          If this feels like too much, you can pause or come back later.
+        </p>
+        {practice.safetyLink && (
+          <Link 
+            href={practice.safetyLink.href} 
+            className={styles.safetyLink}
+            data-testid="link-safety-crisis"
+          >
+            <AlertTriangle className={styles.safetyIcon} />
+            {practice.safetyLink.label}
+          </Link>
+        )}
+      </div>
+      
+      <div className={styles.tieredPracticeGrid}>
+        {tiers.map(({ key, tier, icon, variant }) => {
+          const IconComponent = getIcon(icon);
+          return (
+            <article 
+              key={key}
+              className={`${styles.tierCard} ${styles[`tierCard${variant.charAt(0).toUpperCase() + variant.slice(1)}`]}`}
+              data-aos="fade-up"
+              data-aos-delay={key === 'beginner' ? 150 : key === 'intermediate' ? 250 : 350}
+            >
+              <div className={styles.tierHeader}>
+                <span className={styles.tierDuration}>
+                  <Clock className={styles.timeIcon} />
+                  {tier.duration}
+                </span>
+                <div className={styles.tierIconWrapper}>
+                  <IconComponent className={styles.tierIcon} />
+                </div>
+                <h3 className={styles.tierTitle}>{tier.title}</h3>
+              </div>
+              
+              {tier.steps && tier.steps.length > 0 && (
+                <ol className={styles.tierSteps}>
+                  {tier.steps.map((step, index) => (
+                    <li key={index} className={styles.tierStep}>
+                      <span className={styles.tierStepNumber}>{index + 1}</span>
+                      <span className={styles.tierStepText}>{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              )}
+              
+              {tier.reflection && tier.reflection.length > 0 && (
+                <div className={styles.tierReflection}>
+                  <p className={styles.tierReflectionLabel}>Optional reflection:</p>
+                  {tier.reflection.map((prompt, i) => (
+                    <p key={i} className={styles.tierReflectionPrompt}>{prompt}</p>
+                  ))}
+                </div>
+              )}
+              
+              <Link
+                href="#practice"
+                className={styles.tierCta}
+                data-testid={`button-tier-${key}`}
+              >
+                {tier.ctaLabel}
+                <ArrowRight className={styles.ctaIcon} />
+              </Link>
+            </article>
+          );
+        })}
+      </div>
+      
+      {practice.stopNote && (
+        <p className={styles.stopNote}>
+          <RefreshCw className={styles.stopNoteIcon} />
+          {practice.stopNote}
+        </p>
+      )}
+    </section>
+  );
+}
+
 function GentleDisclaimer({ disclaimer }) {
   if (!disclaimer) return null;
   
@@ -493,6 +591,8 @@ export default function PageTemplate({ config, children }) {
         <ReassuranceBlock reassurance={config.reassurance} tone={tone} />
 
         <NextStepBlock nextStep={config.nextStep} />
+
+        <TieredPracticeBlock practice={config.practice} />
 
         {config.practices && config.practices.map((practice, index) => (
           <PracticeSection key={practice.timeTag || index} practice={practice} />
