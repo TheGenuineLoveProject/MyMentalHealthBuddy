@@ -9,20 +9,17 @@ export default function SacredSection({
   aosDuration = 800,
   variant = 'default',
   as: Component = 'section',
+  showDivider = false,
+  ariaLabel,
 }) {
   const sectionRef = useRef(null);
-  const prefersReducedMotion = useRef(false);
-
-  useEffect(() => {
-    prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }, []);
 
   const variantStyles = {
     default: {},
-    sage: { background: 'var(--glp-sage-10)' },
-    rose: { background: 'var(--glp-rose-10)' },
-    paper: { background: 'var(--glp-paper)' },
-    teal: { background: 'var(--glp-sage-deep-12)' },
+    sage: { background: 'rgba(143, 191, 159, 0.08)' },
+    rose: { background: 'rgba(244, 199, 195, 0.08)' },
+    paper: { background: 'var(--sacred-white, #faf9f7)' },
+    teal: { background: 'rgba(47, 93, 93, 0.05)' },
   };
 
   return (
@@ -35,10 +32,15 @@ export default function SacredSection({
       data-aos-delay={aosDelay}
       data-aos-duration={aosDuration}
       data-testid={id ? `section-${id}` : 'sacred-section'}
+      aria-label={ariaLabel}
     >
       <div className="sacred-section-inner">
         {children}
       </div>
+      
+      {showDivider && (
+        <div className="sacred-divider" aria-hidden="true" />
+      )}
     </Component>
   );
 }

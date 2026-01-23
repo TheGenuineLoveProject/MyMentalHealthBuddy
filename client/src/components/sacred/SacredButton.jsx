@@ -15,6 +15,7 @@ const SacredButton = forwardRef(function SacredButton(
     className = '',
     type = 'button',
     animate = true,
+    ariaLabel,
     ...props
   },
   ref
@@ -58,23 +59,33 @@ const SacredButton = forwardRef(function SacredButton(
     ${sizeClasses[size]}
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
     ${className}
-  `.trim();
+  `.trim().replace(/\s+/g, ' ');
+
+  const testId = `button-${children?.toString().toLowerCase().replace(/\s+/g, '-') || 'action'}`;
 
   const content = (
     <>
       {icon && iconPosition === 'left' && (
-        <span className="icon" aria-hidden="true" style={{ transform: 'scale(0.7)' }}>
+        <span className="sacred-icon" aria-hidden="true">
           {icon}
         </span>
       )}
       <span>{children}</span>
       {icon && iconPosition === 'right' && (
-        <span className="icon" aria-hidden="true" style={{ transform: 'scale(0.7)' }}>
+        <span className="sacred-icon" aria-hidden="true">
           {icon}
         </span>
       )}
     </>
   );
+
+  const commonProps = {
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+    'data-testid': testId,
+    'aria-label': ariaLabel,
+    ...props
+  };
 
   if (href) {
     if (href.startsWith('http')) {
@@ -86,12 +97,9 @@ const SacredButton = forwardRef(function SacredButton(
           }}
           href={href}
           className={baseClassName}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
           target="_blank"
           rel="noopener noreferrer"
-          data-testid={`button-${children?.toString().toLowerCase().replace(/\s+/g, '-') || 'link'}`}
-          {...props}
+          {...commonProps}
         >
           {content}
         </a>
@@ -106,10 +114,7 @@ const SacredButton = forwardRef(function SacredButton(
           if (ref) ref.current = el;
         }}
         className={baseClassName}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        data-testid={`button-${children?.toString().toLowerCase().replace(/\s+/g, '-') || 'link'}`}
-        {...props}
+        {...commonProps}
       >
         {content}
       </Link>
@@ -126,10 +131,7 @@ const SacredButton = forwardRef(function SacredButton(
       className={baseClassName}
       onClick={onClick}
       disabled={disabled}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      data-testid={`button-${children?.toString().toLowerCase().replace(/\s+/g, '-') || 'action'}`}
-      {...props}
+      {...commonProps}
     >
       {content}
     </button>

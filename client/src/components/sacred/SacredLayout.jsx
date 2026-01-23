@@ -3,7 +3,13 @@ import { gsap } from 'gsap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-export default function SacredLayout({ children, className = '', showPattern = true }) {
+export default function SacredLayout({ 
+  children, 
+  className = '', 
+  showPattern = true,
+  showAura = true,
+  skipLinkTarget = '#main'
+}) {
   const layoutRef = useRef(null);
   const prefersReducedMotion = useRef(false);
 
@@ -32,18 +38,32 @@ export default function SacredLayout({ children, className = '', showPattern = t
   }, []);
 
   return (
-    <div 
-      ref={layoutRef}
-      className={`sacred-layout ${className}`}
-      data-testid="sacred-layout"
-    >
-      {showPattern && (
-        <div className="sacred-pattern-overlay" aria-hidden="true" />
-      )}
+    <>
+      <a 
+        href={skipLinkTarget} 
+        className="skip-link"
+        data-testid="skip-link"
+      >
+        Skip to main content
+      </a>
       
-      <div className="sacred-content">
-        {children}
+      <div 
+        ref={layoutRef}
+        className={`sacred-layout ${className}`}
+        data-testid="sacred-layout"
+      >
+        {showPattern && (
+          <div className="sacred-pattern-overlay" aria-hidden="true" />
+        )}
+        
+        {showAura && (
+          <div className="sacred-aura-overlay" aria-hidden="true" />
+        )}
+        
+        <div className="sacred-content">
+          {children}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
