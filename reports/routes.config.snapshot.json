@@ -1,5 +1,5 @@
 {
-  "snapshotHash": "0730fce526edf6a66640118c0a1f18601e8040d6c714922fb343f6580938d05d",
+  "snapshotHash": "46121425b9c724ad7e1042dd92e6e8934c6a227d73c5752735e6e5575d34ab74",
   "categoryOrder": [
     {
       "letter": "A",
@@ -90,7 +90,7 @@
     "/daily-wisdom": "75d9bdf2a6b7fa328348227c6f890968f3638c4da6b7baa223b83909c25c3f14",
     "/dashboard": "d5b76ee61c4f5ca0960a6c05ff1c51b38f4b99cc294fb8bf26087da482fbd0f2",
     "/design-dashboard": "f1a90aa1175cdaec438b709fa550dbb3b8f57bb27bf6268b5b5b88ec4889f04f",
-    "/design-system": "5a826edc12eace7d6ed303096ca5cc9e68504ce94630d4de99c8cfdca6a5bbb3",
+    "/design-system": "50a7c9374e2f1aa1823fa5a444065185dc8a9817f5b9e200075e86f20d495459",
     "/disclaimer": "53a767befbb0fa8c5d1504d939b31a7f1251b50bab0b87f945a1639c69bc48a6",
     "/elite-tools": "c46dcaf05b46a6c5dbbc395cb155aaaeb5080aae2814e5faa8828e8b2a99858e",
     "/emotional-intelligence": "af57936a9c9bb8c31a3905daa27007a1c34d1f1fca29076981b6b994503228bc",
@@ -1116,6 +1116,29 @@
       "sectionsCount": 0,
       "modulesCount": 0,
       "routeHash": "5a826edc12eace7d6ed303096ca5cc9e68504ce94630d4de99c8cfdca6a5bbb3"
+    },
+    {
+      "route": "/design-system",
+      "category": "system",
+      "aliasOf": null,
+      "pattern": null,
+      "title": "Sacred UI — Design System | The Genuine Love Project",
+      "description": "Component catalog and design tokens for The Genuine Love Project. Accessible, trauma-informed, and built with care.",
+      "hero": {
+        "title": "Sacred UI",
+        "subtitle": "A comprehensive catalog of reusable, accessible, trauma-informed components built with care.",
+        "primaryCta": {
+          "label": "View Components",
+          "href": "#components"
+        },
+        "secondaryCta": {
+          "label": "Get Started",
+          "href": "#colors"
+        }
+      },
+      "sectionsCount": 4,
+      "modulesCount": 0,
+      "routeHash": "50a7c9374e2f1aa1823fa5a444065185dc8a9817f5b9e200075e86f20d495459"
     },
     {
       "route": "/disclaimer",

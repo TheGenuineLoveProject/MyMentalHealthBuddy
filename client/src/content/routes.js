@@ -3883,6 +3883,91 @@ const rawRoutes = [
   },
   
   // =========================================================================
+  // DESIGN SYSTEM - Component Catalog
+  // =========================================================================
+  {
+    route: '/design-system',
+    category: 'system',
+    pageLabel: 'Design System',
+    title: 'Sacred UI — Design System | The Genuine Love Project',
+    description: 'Component catalog and design tokens for The Genuine Love Project. Accessible, trauma-informed, and built with care.',
+    hero: {
+      eyebrow: 'Design System',
+      title: 'Sacred UI',
+      titleHighlight: 'Components',
+      subtitle: 'A comprehensive catalog of reusable, accessible, trauma-informed components built with care.',
+      primaryCta: { label: 'View Components', href: '#components' },
+      secondaryCta: { label: 'Get Started', href: '#colors' }
+    },
+    sections: [
+      {
+        id: 'colors',
+        eyebrow: 'Foundation',
+        title: 'Brand Colors',
+        subtitle: 'Core palette designed for calm, clarity, and accessibility.',
+        variant: 'glow',
+        contentLevels: {
+          beginner: { text: 'Our colors are chosen to feel calming and easy on the eyes.' },
+          intermediate: { text: 'Each color serves a purpose: sage for healing, gold for highlights, deep teal for trust.' },
+          advanced: { text: 'WCAG AA compliant contrast ratios. HSL-based token system for predictable theming.' }
+        }
+      },
+      {
+        id: 'components',
+        eyebrow: 'UI Library',
+        title: 'Core Components',
+        subtitle: 'Reusable building blocks for consistent, accessible interfaces.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Layout', title: 'LayoutWrapper', text: 'Page wrapper with skip links, reduced-motion support, and SEO.' },
+          { icon: 'Star', title: 'Hero', text: 'Flexible hero section with eyebrow, title, subtitle, and CTAs.' },
+          { icon: 'Layers', title: 'SectionContainer', text: 'Section wrapper with 4 variants: plain, glow, pattern, dark.' },
+          { icon: 'Grid', title: 'Card & CardGrid', text: 'Content cards with icons, responsive grid layouts.' },
+          { icon: 'Zap', title: 'Button', text: '4 variants (primary, secondary, ghost, gold) with 3 sizes.' },
+          { icon: 'Heart', title: 'SafetyNotice', text: 'Crisis resources with 988 hotline prominently displayed.' },
+          { icon: 'BookOpen', title: 'EvidenceNote', text: 'Research citations and evidence-based callouts.' },
+          { icon: 'List', title: 'Steps', text: 'Numbered step lists and compact check lists.' },
+          { icon: 'AlertCircle', title: 'Callout', text: '4 variants: info, warning, success, tip.' },
+          { icon: 'Quote', title: 'Quote', text: 'Block quotes with author attribution.' }
+        ],
+        contentLevels: {
+          beginner: { text: 'These are the basic pieces we use to build every page.' },
+          intermediate: { text: 'Import from @/components/ui and compose pages with semantic structure.' },
+          advanced: { text: 'All components use CSS custom properties (--glp-*) for theming. Full keyboard and screen reader support.' }
+        }
+      },
+      {
+        id: 'accessibility',
+        eyebrow: 'Standards',
+        title: 'Accessibility First',
+        subtitle: 'Every component is built with accessibility as a foundation, not an afterthought.',
+        variant: 'plain',
+        cards: [
+          { icon: 'Eye', title: 'Focus Visible', text: 'Clear focus indicators on all interactive elements.' },
+          { icon: 'Keyboard', title: 'Keyboard Navigation', text: 'Full keyboard support throughout.' },
+          { icon: 'MessageCircle', title: 'Screen Readers', text: 'Semantic HTML and ARIA labels.' },
+          { icon: 'Zap', title: 'Reduced Motion', text: 'Respects prefers-reduced-motion preference.' }
+        ]
+      },
+      {
+        id: 'safety',
+        eyebrow: 'Trauma-Informed',
+        title: 'Safety Notice Component',
+        subtitle: 'Crisis resources are always accessible.',
+        variant: 'glow',
+        contentLevels: {
+          beginner: { text: 'If you ever need help, call 988 — it\'s free and available 24/7.' },
+          intermediate: { text: 'The SafetyNotice component displays crisis resources in a gentle, non-alarming way.' },
+          advanced: { text: 'Compliant with trauma-informed design principles. Never gated behind authentication.' }
+        },
+        modules: [
+          { type: 'SafetyNotice' }
+        ]
+      }
+    ]
+  },
+  
+  // =========================================================================
   // 404 AND WILDCARD FALLBACK
   // =========================================================================
   {
