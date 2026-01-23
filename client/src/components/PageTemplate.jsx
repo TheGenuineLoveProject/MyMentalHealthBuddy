@@ -28,6 +28,7 @@ import SacredFooter from './sacred/SacredFooter.jsx';
 import SacredSection from './sacred/SacredSection.jsx';
 import SEO from './SEO.tsx';
 import ContentLevelToggle, { useContentLevel, ContentLevelContent } from './ContentLevelToggle.jsx';
+import { NotMedicalAdvice, CrisisNotice } from './SafetyDisclaimer.jsx';
 import styles from './PageTemplate.module.css';
 
 const iconMap = {
@@ -437,8 +438,10 @@ function TieredPracticeBlock({ practice, microcopy }) {
   );
 }
 
-function GentleDisclaimer({ disclaimer }) {
+function GentleDisclaimer({ disclaimer, tone }) {
   if (!disclaimer) return null;
+  
+  const isPracticeTone = tone === 'practice';
   
   return (
     <aside 
@@ -473,7 +476,17 @@ function GentleDisclaimer({ disclaimer }) {
             ))}
           </ul>
         )}
+        {isPracticeTone && (
+          <div className={styles.crisisNoticeWrapper}>
+            <CrisisNotice />
+          </div>
+        )}
       </div>
+      {isPracticeTone && (
+        <div className={styles.notMedicalAdviceWrapper}>
+          <NotMedicalAdvice />
+        </div>
+      )}
     </aside>
   );
 }
@@ -638,7 +651,7 @@ export default function PageTemplate({ config, children }) {
           <ContentSection key={section.id || index} section={section} index={index} />
         ))}
 
-        <GentleDisclaimer disclaimer={config.disclaimer} />
+        <GentleDisclaimer disclaimer={config.disclaimer} tone={tone} />
 
         {children}
       </main>

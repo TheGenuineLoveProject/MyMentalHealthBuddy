@@ -1411,6 +1411,17 @@
   border-radius: 0.75rem;
 }
 
+.crisisNoticeWrapper {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--sacred-sage-20, rgba(143, 191, 159, 0.2));
+}
+
+.notMedicalAdviceWrapper {
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .tierCard,
   .tierCta {
