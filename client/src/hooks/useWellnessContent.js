@@ -13,7 +13,7 @@ export function useWellnessContent(routeKey = 'default') {
   const { readingLevel, isReady } = useReadingLevel();
 
   const content = useMemo(() => {
-    const level = readingLevel || 'standard';
+    const level = readingLevel || 'intermediate';
     
     return {
       consent: getWellnessCopy('consent', level, routeKey),
@@ -43,14 +43,14 @@ export function useWellnessContent(routeKey = 'default') {
     return (tier) => buildTierCopy({ 
       routeKey, 
       tier, 
-      level: readingLevel || 'standard' 
+      level: readingLevel || 'intermediate' 
     });
   }, [readingLevel, routeKey]);
 
   const compile = useMemo(() => {
     return (baseContent, options = {}) => compileForLevel(
       baseContent, 
-      readingLevel || 'standard', 
+      readingLevel || 'intermediate', 
       options
     );
   }, [readingLevel]);
@@ -58,7 +58,7 @@ export function useWellnessContent(routeKey = 'default') {
   const validate = useMemo(() => {
     return (contentToCheck) => validateContent(
       contentToCheck, 
-      readingLevel || 'standard'
+      readingLevel || 'intermediate'
     );
   }, [readingLevel]);
 

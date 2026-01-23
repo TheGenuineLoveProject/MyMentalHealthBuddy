@@ -51,7 +51,7 @@ function getIcon(iconName) {
   return iconMap[iconName] || Heart;
 }
 
-function HeroSection({ hero, readingLevel = 'standard' }) {
+function HeroSection({ hero, readingLevel = 'intermediate' }) {
   const logoRef = useRef(null);
   const prefersReducedMotion = useRef(false);
 
@@ -178,7 +178,7 @@ function HeroSection({ hero, readingLevel = 'standard' }) {
   );
 }
 
-function SacredCard({ card, index, readingLevel = 'standard' }) {
+function SacredCard({ card, index, readingLevel = 'intermediate' }) {
   const IconComponent = getIcon(card.icon);
   const title = getVariant(card.title, readingLevel);
   const text = getVariant(card.text, readingLevel);
@@ -870,7 +870,7 @@ function BulletList({ bullets }) {
   );
 }
 
-function ContentSection({ section, index, readingLevel = 'standard' }) {
+function ContentSection({ section, index, readingLevel = 'intermediate' }) {
   const eyebrow = getVariant(section.eyebrow, readingLevel);
   const title = getVariant(section.title, readingLevel);
   const subtitle = getVariant(section.subtitle, readingLevel);

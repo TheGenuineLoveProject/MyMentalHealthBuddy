@@ -3,7 +3,7 @@
  * 
  * Features:
  * - Global reading level state
- * - URL query sync (?level=kids|standard|deep)
+ * - URL query sync (?level=beginner|intermediate|advanced)
  * - localStorage persistence
  * - SSR-safe initialization
  * - Shallow routing without full reload
@@ -20,16 +20,16 @@ import {
 } from '../content/readingLevels.js';
 
 const ReadingLevelContext = createContext({
-  readingLevel: 'standard',
+  readingLevel: 'intermediate',
   setReadingLevel: () => {},
   setRouteDefault: () => {},
   isReady: false
 });
 
 export function ReadingLevelProvider({ children }) {
-  const [readingLevel, setReadingLevelState] = useState('standard');
+  const [readingLevel, setReadingLevelState] = useState('intermediate');
   const [isReady, setIsReady] = useState(false);
-  const [routeDefault, setRouteDefaultState] = useState('standard');
+  const [routeDefault, setRouteDefaultState] = useState('intermediate');
   const search = useSearch();
 
   useEffect(() => {

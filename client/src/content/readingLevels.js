@@ -2,10 +2,10 @@
  * readingLevels.js - Conscious-Aware Reading Level System
  * 
  * Features:
- * - Three levels: beginner (simple), standard (warm), deep (explanatory)
+ * - Three levels: beginner (simple), intermediate (warm), advanced (explanatory)
  * - SSR-safe localStorage handling
- * - URL query support (?level=beginner|standard|deep)
- * - Fallback chain: URL > localStorage > route default > standard
+ * - URL query support (?level=beginner|intermediate|advanced)
+ * - Fallback chain: URL > localStorage > route default > intermediate
  * 
  * CONSCIOUS-AWARE DESIGN PRINCIPLES:
  * - Consent-led: user always chooses intensity; default is gentle
@@ -19,8 +19,8 @@
  * 
  * STRICT COPY RULES:
  * - Beginner: Sentences under 10 words, respectful + empowering (not childish)
- * - Standard: Paragraphs max 2 sentences, warm/grounded tone
- * - Deep: One short definition per section, gentle tone
+ * - Intermediate: Paragraphs max 2 sentences, warm/grounded tone
+ * - Advanced: One short definition per section, gentle tone
  * 
  * AUTONOMY LANGUAGE:
  * - "You can try...", "If you'd like...", "Take what helps..."
@@ -32,7 +32,7 @@
  * - Never: "cures", "treats", "guarantees", "clinically proven"
  */
 
-export const READING_LEVELS = ['beginner', 'standard', 'deep'];
+export const READING_LEVELS = ['beginner', 'intermediate', 'advanced'];
 
 export const READING_LEVEL_META = {
   beginner: {
@@ -41,16 +41,16 @@ export const READING_LEVEL_META = {
     aria: 'Beginner mode: clear, accessible language',
     copyRule: 'Sentences under 10 words, respectful and empowering'
   },
-  standard: {
-    label: 'Standard',
+  intermediate: {
+    label: 'Intermediate',
     description: 'Warm and grounded',
-    aria: 'Standard mode: warm, grounded language with moderate detail',
+    aria: 'Intermediate mode: warm, grounded language with moderate detail',
     copyRule: 'Paragraphs max 2 sentences'
   },
-  deep: {
-    label: 'Deep',
+  advanced: {
+    label: 'Advanced',
     description: 'More context and definitions',
-    aria: 'Deep mode: detailed explanations with definitions',
+    aria: 'Advanced mode: detailed explanations with definitions',
     copyRule: 'One short definition per section, gentle tone'
   }
 };
@@ -97,7 +97,7 @@ export function getVariant(value, level) {
   }
 
   if (typeof value === 'object' && !Array.isArray(value)) {
-    const normalizedLevel = normalizeReadingLevel(level) || 'standard';
+    const normalizedLevel = normalizeReadingLevel(level) || 'intermediate';
     
     if (value[normalizedLevel] !== undefined) {
       return value[normalizedLevel];
@@ -107,8 +107,8 @@ export function getVariant(value, level) {
       return value.kids;
     }
     
-    if (value.standard !== undefined) {
-      return value.standard;
+    if (value.intermediate !== undefined) {
+      return value.intermediate;
     }
     
     for (const lvl of READING_LEVELS) {
@@ -132,7 +132,7 @@ export function getVariant(value, level) {
 
 /**
  * Get variant array for bullets/lists based on reading level
- * Handles { beginner, standard, deep } and legacy { kids, standard, deep }
+ * Handles { beginner, intermediate, advanced } and legacy { kids, intermediate, advanced }
  * @param {object} bullets - Variant object with arrays
  * @param {string} level - Target reading level
  * @returns {array} - Resolved array
@@ -146,7 +146,7 @@ export function getBulletVariant(bullets, level) {
     return bullets;
   }
 
-  const normalizedLevel = normalizeReadingLevel(level) || 'standard';
+  const normalizedLevel = normalizeReadingLevel(level) || 'intermediate';
   
   if (Array.isArray(bullets[normalizedLevel])) {
     return bullets[normalizedLevel];
@@ -156,8 +156,8 @@ export function getBulletVariant(bullets, level) {
     return bullets.kids;
   }
   
-  if (Array.isArray(bullets.standard)) {
-    return bullets.standard;
+  if (Array.isArray(bullets.intermediate)) {
+    return bullets.intermediate;
   }
   
   for (const lvl of READING_LEVELS) {
@@ -175,8 +175,8 @@ export function getBulletVariant(bullets, level) {
 
 /**
  * Resolve reading level from multiple sources
- * Priority: URL query > localStorage > route default > 'standard'
- * SSR-safe: returns only from routeDefault or 'standard' during SSR
+ * Priority: URL query > localStorage > route default > 'intermediate'
+ * SSR-safe: returns only from routeDefault or 'intermediate' during SSR
  * 
  * @param {object} options
  * @param {string} options.queryLevel - URL query parameter value
@@ -194,7 +194,7 @@ export function resolveReadingLevel({ queryLevel, storedLevel, routeDefault }) {
   const fromRoute = normalizeReadingLevel(routeDefault);
   if (fromRoute) return fromRoute;
   
-  return 'standard';
+  return 'intermediate';
 }
 
 /**

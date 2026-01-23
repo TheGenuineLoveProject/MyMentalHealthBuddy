@@ -17,14 +17,14 @@ export const wellnessMicrocopy = {
       'It\'s always your choice.',
       'Try what feels right for you.'
     ],
-    standard: [
+    intermediate: [
       'Participate at your own comfort level.',
       'Modify or skip anything that doesn\'t work for you.',
       'Your body knows what it needs.',
       'There\'s no right way to do this.',
       'Honor what feels true for you.'
     ],
-    deep: [
+    advanced: [
       'Autonomy is central to this practice.',
       'Adapt instructions to suit your needs.',
       'Self-attunement guides the process.',
@@ -41,14 +41,14 @@ export const wellnessMicrocopy = {
       'Move at your pace.',
       'Pause when you need to.'
     ],
-    standard: [
+    intermediate: [
       'Move at whatever pace feels right.',
       'There\'s no hurry here.',
       'Let yourself settle in gradually.',
       'Take all the time you need.',
       'This isn\'t a race.'
     ],
-    deep: [
+    advanced: [
       'Pacing yourself supports nervous system regulation.',
       'Slower often means deeper integration.',
       'Your internal rhythm guides the timing.',
@@ -65,14 +65,14 @@ export const wellnessMicrocopy = {
       'Feel something solid.',
       'Take a breath.'
     ],
-    standard: [
+    intermediate: [
       'Notice the weight of your body where you sit or stand.',
       'Feel the surface beneath you.',
       'Orient to your surroundings.',
       'Let gravity hold you.',
       'Anchor into the present moment.'
     ],
-    deep: [
+    advanced: [
       'Orienting to your environment activates the social engagement system.',
       'Physical sensation anchors awareness in the present.',
       'Grounding interrupts stress response patterns.',
@@ -89,14 +89,14 @@ export const wellnessMicrocopy = {
       'This is just practice.',
       'It gets easier.'
     ],
-    standard: [
+    intermediate: [
       'Whatever arises is valid.',
       'This is a learning process.',
       'Every experience is useful information.',
       'Challenges are part of growth.',
       'Progress isn\'t always linear.'
     ],
-    deep: [
+    advanced: [
       'Difficulty with a practice often signals where growth is possible.',
       'The nervous system learns through repetition and rest.',
       'Awareness itself is a form of progress.',
@@ -113,14 +113,14 @@ export const wellnessMicrocopy = {
       'It\'s okay to rest.',
       'Try again another day.'
     ],
-    standard: [
+    intermediate: [
       'You can pause or stop at any point.',
       'Return to this whenever you\'re ready.',
       'Taking a break is always an option.',
       'Step away if you need to.',
       'There\'s no obligation to finish.'
     ],
-    deep: [
+    advanced: [
       'Knowing when to stop is a skill worth developing.',
       'Pausing supports sustainable practice.',
       'Rest allows consolidation of new patterns.',
@@ -137,14 +137,14 @@ export const wellnessMicrocopy = {
       'It\'s okay to ask for support.',
       'Reach out if you need to.'
     ],
-    standard: [
+    intermediate: [
       'If you feel overwhelmed, pause and ground yourself.',
       'Support is available if you need it.',
       'Seeking help is a strength.',
       'You deserve care and support.',
       'Professional resources exist for harder moments.'
     ],
-    deep: [
+    advanced: [
       'Recognizing when you need external support is adaptive.',
       'Some experiences benefit from professional guidance.',
       'Crisis resources provide immediate support.',
@@ -161,14 +161,14 @@ export const wellnessMicrocopy = {
       'Anything different?',
       'What helped?'
     ],
-    standard: [
+    intermediate: [
       'What shifted during the practice?',
       'Notice any changes in your body or mind.',
       'What would you like to remember?',
       'What felt supportive?',
       'What might you try differently next time?'
     ],
-    deep: [
+    advanced: [
       'What patterns did you observe in your experience?',
       'How did your nervous system respond?',
       'What insights emerged during the practice?',
@@ -185,14 +185,14 @@ export const wellnessMicrocopy = {
       'You tried something new.',
       'That\'s enough for today.'
     ],
-    standard: [
+    intermediate: [
       'Showing up is the foundation.',
       'Every practice builds on the last.',
       'Your effort matters.',
       'Growth happens in small moments.',
       'You\'re building something valuable.'
     ],
-    deep: [
+    advanced: [
       'Consistent practice shapes neural pathways over time.',
       'Each session contributes to cumulative change.',
       'Intention and attention are powerful tools.',
@@ -209,14 +209,14 @@ export const wellnessMicrocopy = {
       'Rest first, then try.',
       'When you\'re ready.'
     ],
-    standard: [
+    intermediate: [
       'This will be here when you\'re ready.',
       'Return whenever it feels right.',
       'Sometimes timing matters.',
       'Give yourself permission to come back later.',
       'There\'s no deadline for wellness.'
     ],
-    deep: [
+    advanced: [
       'Timing affects receptivity to practice.',
       'What doesn\'t land today may resonate later.',
       'Building practice over time is sustainable.',
@@ -234,17 +234,17 @@ export const ctaPrimary = {
     'Do the easy version',
     'Keep it simple'
   ],
-  standard: [
+  intermediate: [
     'Continue when ready',
     'Save this for later',
     'Take the next step',
     'I\'m ready to begin',
     'Show me a calm option'
   ],
-  deep: [
+  advanced: [
     'Explore this practice',
     'Begin the full version',
-    'Start the deeper path',
+    'Start the advanced path',
     'Engage with intention',
     'Commit to practice'
   ]
@@ -258,15 +258,15 @@ export const ctaSecondary = {
     'Show fewer steps',
     'Skip this'
   ],
-  standard: [
+  intermediate: [
     'I want a softer version',
     'Give me an example',
     'Explain it simply',
     'Show more options',
     'Reset this page'
   ],
-  deep: [
-    'Explain it deeper',
+  advanced: [
+    'Explain it in more detail',
     'Show the science',
     'View advanced options',
     'Customize this practice',
@@ -282,14 +282,14 @@ export const emptyStates = {
     'Try one small entry',
     'No pressure—begin anytime'
   ],
-  standard: [
+  intermediate: [
     'Your drafts live here',
     'We\'ll keep it simple',
     'This will build over time',
     'One step creates progress',
     'You can return later'
   ],
-  deep: [
+  advanced: [
     'Your practice history will appear here',
     'Entries accumulate insights over time',
     'Begin building your pattern data',
@@ -306,14 +306,14 @@ export const successStates = {
     'You did it',
     'Small progress matters'
   ],
-  standard: [
+  intermediate: [
     'Logged for later',
     'One step completed',
     'You showed up today',
     'This is a strong start',
     'Keep going only if you want'
   ],
-  deep: [
+  advanced: [
     'Practice recorded successfully',
     'Your data has been saved',
     'Entry added to your journey',
@@ -330,14 +330,14 @@ export const errorStates = {
     'No worries—one more time',
     'Check your connection'
   ],
-  standard: [
+  intermediate: [
     'We didn\'t catch that input',
     'Please try a shorter entry',
     'That didn\'t load—refresh',
     'We\'ll fix this soon',
     'Thanks for your patience'
   ],
-  deep: [
+  advanced: [
     'An error occurred during processing',
     'The request could not be completed',
     'Please verify your input and retry',
@@ -362,8 +362,8 @@ export const whenToPause = {
 
 export const gentleExits = {
   beginner: 'It\'s okay to stop here.',
-  standard: 'You can pause whenever you need.',
-  deep: 'Knowing when to stop is a valuable skill.'
+  intermediate: 'You can pause whenever you need.',
+  advanced: 'Knowing when to stop is a valuable skill.'
 };
 
 export function pick(seed, list) {
@@ -374,16 +374,16 @@ export function pick(seed, list) {
   return list[Math.abs(hash) % list.length];
 }
 
-export function buildTierCopy({ routeKey, tier, level = 'standard' }) {
+export function buildTierCopy({ routeKey, tier, level = 'intermediate' }) {
   const tierLabels = {
-    quick10s: { beginner: '10 seconds', standard: '10-second reset', deep: 'Micro-regulation (10s)' },
-    short1to3: { beginner: '1–3 minutes', standard: '1–3 minute practice', deep: 'Short practice (1–3 min)' },
-    long3to10: { beginner: '3–10 minutes', standard: '3–10 minute practice', deep: 'Deeper practice (3–10 min)' }
+    quick10s: { beginner: '10 seconds', intermediate: '10-second reset', advanced: 'Micro-regulation (10s)' },
+    short1to3: { beginner: '1–3 minutes', intermediate: '1–3 minute practice', advanced: 'Short practice (1–3 min)' },
+    long3to10: { beginner: '3–10 minutes', intermediate: '3–10 minute practice', advanced: 'Extended practice (3–10 min)' }
   };
 
   const seed = `${routeKey}-${tier}`;
   return {
-    title: tierLabels[tier]?.[level] || tierLabels[tier]?.standard,
+    title: tierLabels[tier]?.[level] || tierLabels[tier]?.intermediate,
     consent: pick(seed + '-consent', wellnessMicrocopy.consent[level]),
     pacing: pick(seed + '-pacing', wellnessMicrocopy.pacing[level]),
     whenToPause: whenToPause[tier],
@@ -392,13 +392,13 @@ export function buildTierCopy({ routeKey, tier, level = 'standard' }) {
   };
 }
 
-export function getWellnessCopy(category, level = 'standard', seed = 0) {
+export function getWellnessCopy(category, level = 'intermediate', seed = 0) {
   const list = wellnessMicrocopy[category]?.[level];
   if (!list) return '';
   return pick(seed, list);
 }
 
-export function pickSlot(category, level = 'standard', seed = '') {
+export function pickSlot(category, level = 'intermediate', seed = '') {
   const categories = {
     ctaPrimary,
     ctaSecondary,
@@ -408,7 +408,7 @@ export function pickSlot(category, level = 'standard', seed = '') {
     ...wellnessMicrocopy
   };
   
-  const list = categories[category]?.[level] || categories[category]?.standard;
+  const list = categories[category]?.[level] || categories[category]?.intermediate;
   if (!list) return '';
   return pick(seed || category, list);
 }
