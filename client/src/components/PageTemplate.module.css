@@ -538,3 +538,69 @@
     transform: none;
   }
 }
+
+/* ============================================
+   BULLET LIST
+   ============================================ */
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bulletItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.75rem;
+  background: var(--sacred-cream, #faf9f7);
+  border: 1px solid rgba(143, 191, 159, 0.15);
+  border-radius: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bulletItem:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(47, 93, 93, 0.1);
+}
+
+.bulletIcon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--sacred-sage, #8fbf9f);
+  margin-top: 0.125rem;
+}
+
+.bulletItem span {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--sacred-charcoal, #3a3a3a);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .bulletItem {
+    padding: 0.875rem 1rem;
+    gap: 0.75rem;
+  }
+  
+  .bulletItem span {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bulletItem {
+    transition: none;
+  }
+  
+  .bulletItem:hover {
+    transform: none;
+  }
+}

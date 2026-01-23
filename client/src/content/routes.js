@@ -353,8 +353,8 @@ const rawRoutes = [
       title: 'You deserve a gentle space',
       titleHighlight: 'to heal at your own pace.',
       subtitle: 'This is a quiet corner of the internet built for people who carry more than they show. Here, you can process grief, calm your nervous system, reconnect with your inner child, and learn to hold yourself with compassion—all in complete privacy.',
-      primaryCta: { label: 'Start gently', href: '/register' },
-      secondaryCta: { label: 'Explore at your pace', href: '#pathways' }
+      primaryCta: { label: 'Begin when you\'re ready', href: '/register' },
+      secondaryCta: { label: 'Explore at your pace', href: '#how-it-works' }
     },
     modules: [
       { icon: 'Heart', title: 'Inner Child Work', description: 'Gentle exercises to reconnect with younger parts of yourself that may still need comfort.' },
@@ -363,11 +363,24 @@ const rawRoutes = [
     ],
     sections: [
       {
+        id: 'how-it-works',
+        eyebrow: 'How It Works',
+        title: 'A gentle path, one step at a time',
+        subtitle: 'There is no rush. Each step unfolds naturally when you are ready.',
+        variant: 'glow',
+        cards: [
+          { icon: 'User', title: 'Step 1: Create Your Space', text: 'Sign up in moments. Your private sanctuary is ready—no credit card, no commitments.' },
+          { icon: 'Compass', title: 'Step 2: Choose Your Path', text: 'Explore journaling, breathing exercises, or simply talk to your AI companion. Start wherever feels right.' },
+          { icon: 'Activity', title: 'Step 3: Notice Small Shifts', text: 'Over time, gentle check-ins help you see patterns and celebrate quiet progress.' },
+          { icon: 'Sun', title: 'Step 4: Return Whenever', text: 'This space is always here. Come back daily or once a month—there is no streak guilt.' }
+        ]
+      },
+      {
         id: 'pathways',
         eyebrow: 'Gentle Pathways',
         title: 'Evidence-based tools wrapped in compassion',
         subtitle: 'Each practice here is grounded in research and designed with your nervous system in mind.',
-        variant: 'glow',
+        variant: 'pattern',
         cards: [
           { icon: 'Heart', title: 'Inner Child Work', text: 'Gentle exercises to reconnect with and comfort younger parts of yourself.' },
           { icon: 'Brain', title: 'Nervous System Care', text: 'Simple somatic practices to help you find calm when you feel overwhelmed.' },
@@ -380,12 +393,14 @@ const rawRoutes = [
         eyebrow: 'What You\'ll Find Here',
         title: 'Tools that meet you where you are',
         subtitle: 'No pressure. No judgment. Just resources waiting when you\'re ready.',
-        variant: 'pattern',
-        cards: [
-          { icon: 'BookOpen', title: 'Guided Journaling', text: 'Gentle prompts to help you process and make sense of your experiences.' },
-          { icon: 'Activity', title: 'State Awareness', text: 'Simple check-ins to help you notice patterns and celebrate small progress.' },
-          { icon: 'MessageCircle', title: 'Compassionate Chat', text: 'Talk through difficult moments with understanding, anytime you need.' },
-          { icon: 'Leaf', title: 'Grounding Practices', text: 'Quick exercises to bring you back when you feel untethered.' }
+        variant: 'plain',
+        bullets: [
+          'Guided journaling with gentle, open-ended prompts',
+          'Breathing exercises for moments of overwhelm',
+          'Mood and state tracking without judgment',
+          'Grounding techniques for when you feel untethered',
+          'AI companion conversations available anytime',
+          'Evidence-based healing modalities explained simply'
         ]
       },
       {
@@ -393,11 +408,11 @@ const rawRoutes = [
         eyebrow: 'Built With Care',
         title: 'Your privacy and safety come first',
         subtitle: 'This space was created by people who understand what it means to need a safe place.',
-        variant: 'plain',
+        variant: 'glow',
         cards: [
           { icon: 'Lock', title: 'Completely Private', text: 'Your reflections and progress are yours alone. We never share your data.' },
           { icon: 'Shield', title: 'Trauma-Informed', text: 'Every feature is designed to feel safe and never overwhelming.' },
-          { icon: 'Clock', title: 'Your Timeline', text: 'There\'s no rush here. Move at whatever pace feels right for you.' }
+          { icon: 'Clock', title: 'Your Timeline', text: 'There is no rush here. Move at whatever pace feels right for you.' }
         ]
       }
     ]
@@ -484,9 +499,9 @@ const rawRoutes = [
       eyebrow: 'Healing happens in small moments',
       title: 'There is no wrong way',
       titleHighlight: 'to begin healing.',
-      subtitle: 'Whether you\'re just starting to explore or have been on this path for years, these resources are here to support you. Each tool is grounded in research and designed to feel safe, not overwhelming.',
-      primaryCta: { label: 'Begin a practice', href: '/wellness-hub' },
-      secondaryCta: { label: 'Learn about our approach', href: '#philosophy' }
+      subtitle: 'Whether you are just starting to explore or have been on this path for years, these resources are here to support you. Each tool is grounded in research and designed to feel safe, not overwhelming.',
+      primaryCta: { label: 'Explore healing tools', href: '/wellness-hub' },
+      secondaryCta: { label: 'See how it works', href: '#how-it-works' }
     },
     modules: [
       { icon: 'Activity', title: 'Somatic Practices', description: 'Body-based exercises to help release what words cannot express.' },
@@ -495,15 +510,30 @@ const rawRoutes = [
     ],
     sections: [
       {
+        id: 'how-it-works',
+        eyebrow: 'How It Works',
+        title: 'Your healing journey, step by step',
+        subtitle: 'Each step is optional. Take what resonates and leave what does not.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Compass', title: 'Step 1: Choose a Starting Point', text: 'Browse our modalities—somatic work, journaling, breathwork—and pick what calls to you.' },
+          { icon: 'Play', title: 'Step 2: Try a Gentle Practice', text: 'Each exercise is designed to be short and safe. You can stop anytime.' },
+          { icon: 'Activity', title: 'Step 3: Notice What Arises', text: 'There is no right or wrong. Simply observe how your body and mind respond.' },
+          { icon: 'RefreshCw', title: 'Step 4: Return and Repeat', text: 'Healing unfolds over time. Come back whenever you feel ready.' }
+        ]
+      },
+      {
         id: 'philosophy',
         eyebrow: 'Our Approach',
         title: 'Healing that respects your pace',
         subtitle: 'We believe real healing happens when you feel safe enough to show up as you are.',
         variant: 'plain',
-        cards: [
-          { icon: 'Heart', title: 'Compassion First', text: 'Every tool begins with kindness toward yourself, exactly as you are today.' },
-          { icon: 'Shield', title: 'Trauma-Informed', text: 'Nothing here will push you faster than your nervous system is ready for.' },
-          { icon: 'Clock', title: 'No Timelines', text: 'Healing isn\'t linear. We celebrate small steps and honor difficult days.' }
+        bullets: [
+          'Every tool begins with kindness toward yourself, exactly as you are today',
+          'Nothing here will push you faster than your nervous system is ready for',
+          'Healing is not linear—we celebrate small steps and honor difficult days',
+          'You are the expert on your own experience; we simply offer support',
+          'All practices are grounded in trauma-informed, evidence-based research'
         ]
       },
       {
@@ -511,27 +541,25 @@ const rawRoutes = [
         eyebrow: 'Evidence-Based Modalities',
         title: 'Gentle tools grounded in research',
         subtitle: 'These approaches have helped many people. They might help you too.',
-        variant: 'glow',
+        variant: 'pattern',
         cards: [
           { icon: 'Activity', title: 'Somatic Practices', text: 'Simple body-based exercises to help release tension you may be holding.' },
           { icon: 'Brain', title: 'Nervous System Care', text: 'Learn to recognize your window of tolerance and expand it gently over time.' },
           { icon: 'Eye', title: 'Inner Child Work', text: 'Reconnect with younger parts of yourself that may still need comfort.' },
-          { icon: 'Leaf', title: 'Mindful Awareness', text: 'Present-moment practices to help you feel more grounded.' },
-          { icon: 'MessageCircle', title: 'Parts Work', text: 'Understand and befriend the different voices and feelings within you.' },
-          { icon: 'Sun', title: 'Self-Compassion', text: 'Learn to speak to yourself the way you would a dear friend.' }
+          { icon: 'Leaf', title: 'Mindful Awareness', text: 'Present-moment practices to help you feel more grounded.' }
         ]
       },
       {
         id: 'start',
         eyebrow: 'Where to Begin',
-        title: 'You don\'t need to know where to start',
-        subtitle: 'If you\'re not sure what you need, that\'s okay. Here are some gentle entry points.',
-        variant: 'pattern',
+        title: 'You do not need to know where to start',
+        subtitle: 'If you are not sure what you need, that is okay. Here are some gentle entry points.',
+        variant: 'glow',
         cards: [
-          { icon: 'Activity', title: 'Breathing Exercises', text: 'A simple place to begin. Just a few minutes can shift how you feel.' },
+          { icon: 'Wind', title: 'Breathing Exercises', text: 'A simple place to begin. Just a few minutes can shift how you feel.' },
           { icon: 'MapPin', title: 'Grounding Techniques', text: 'Helpful when you feel disconnected or overwhelmed.' },
-          { icon: 'BookOpen', title: 'Journaling Prompts', text: 'Gentle questions to help you process what you\'re carrying.' },
-          { icon: 'Sparkles', title: 'Talk to AI Companion', text: 'Share what\'s on your mind with a patient, understanding presence.' }
+          { icon: 'BookOpen', title: 'Journaling Prompts', text: 'Gentle questions to help you process what you are carrying.' },
+          { icon: 'MessageCircle', title: 'Talk to AI Companion', text: 'Share what is on your mind with a patient, understanding presence.' }
         ]
       }
     ]
@@ -541,14 +569,14 @@ const rawRoutes = [
     category: 'landing',
     pageLabel: 'Pricing',
     title: 'Pricing — The Genuine Love Project',
-    description: 'Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you\'re ready.',
+    description: 'Transparent, accessible pricing for your healing journey. Start free with no pressure to upgrade. Premium features available when you are ready.',
     hero: {
       eyebrow: 'Transparent and accessible',
       title: 'Healing support should be',
       titleHighlight: 'available to everyone.',
-      subtitle: 'We believe cost shouldn\'t be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.',
-      primaryCta: { label: 'Start free', href: '/register' },
-      secondaryCta: { label: 'See what\'s included', href: '#plans' }
+      subtitle: 'We believe cost should not be a barrier to emotional wellness. Start with our free tools for as long as you need. Upgrade only when it feels right for you.',
+      primaryCta: { label: 'Start free today', href: '/register' },
+      secondaryCta: { label: 'See how it works', href: '#how-it-works' }
     },
     modules: [
       { icon: 'Heart', title: 'Free Core Tools', description: 'Journaling, mood tracking, and grounding practices—free forever, no strings attached.' },
@@ -557,11 +585,24 @@ const rawRoutes = [
     ],
     sections: [
       {
+        id: 'how-it-works',
+        eyebrow: 'How It Works',
+        title: 'Getting started is simple',
+        subtitle: 'No pressure, no commitments. Just support when you need it.',
+        variant: 'glow',
+        cards: [
+          { icon: 'User', title: 'Step 1: Create Your Account', text: 'Sign up in under a minute. No credit card required for free access.' },
+          { icon: 'Compass', title: 'Step 2: Explore Free Tools', text: 'Use journaling, breathing exercises, and grounding practices as long as you like.' },
+          { icon: 'Star', title: 'Step 3: Upgrade If You Wish', text: 'When you want more, Premium unlocks unlimited AI companion and advanced features.' },
+          { icon: 'Heart', title: 'Step 4: Heal at Your Pace', text: 'Whether free or Premium, this space is here whenever you need it.' }
+        ]
+      },
+      {
         id: 'plans',
         eyebrow: 'Simple Options',
         title: 'Take what you need, when you need it',
-        subtitle: 'There\'s no pressure here. Many people find the free tools are enough.',
-        variant: 'glow',
+        subtitle: 'There is no pressure here. Many people find the free tools are enough.',
+        variant: 'pattern',
         cards: [
           { icon: 'Heart', title: 'Free Forever', text: 'Core journaling, mood tracking, breathing exercises, and grounding practices. No credit card needed.' },
           { icon: 'Star', title: 'Premium', text: 'Unlimited AI companion conversations, advanced healing journeys, and personalized insights. $12/month.' },
@@ -571,13 +612,15 @@ const rawRoutes = [
       {
         id: 'philosophy',
         eyebrow: 'Our Promise',
-        title: 'We\'re not here to sell you anything',
+        title: 'We are not here to sell you anything',
         subtitle: 'Our goal is to support your healing, not pressure you into purchases.',
         variant: 'plain',
-        cards: [
-          { icon: 'Shield', title: 'No Dark Patterns', text: 'We\'ll never use urgency tactics or manipulative pricing. What you see is what you get.' },
-          { icon: 'Clock', title: 'Cancel Anytime', text: 'If Premium isn\'t serving you, cancel with one click. No questions, no guilt.' },
-          { icon: 'Lock', title: 'Your Data Stays Yours', text: 'Even if you leave, you can export everything you\'ve written. It belongs to you.' }
+        bullets: [
+          'We will never use urgency tactics or manipulative pricing',
+          'Cancel Premium anytime with one click—no questions, no guilt',
+          'Your data stays yours. Export everything, even if you leave',
+          'If cost is a barrier, reach out. We will find a way to help',
+          'Free tools are genuinely free—no trial periods, no hidden fees'
         ]
       },
       {
@@ -585,11 +628,11 @@ const rawRoutes = [
         eyebrow: 'Common Questions',
         title: 'You might be wondering',
         subtitle: 'Here are answers to questions we hear often.',
-        variant: 'pattern',
+        variant: 'glow',
         cards: [
           { icon: 'HelpCircle', title: 'Is the free version really free?', text: 'Yes. No trial period, no hidden fees. Use it as long as you like.' },
           { icon: 'CreditCard', title: 'Can I try Premium first?', text: 'Absolutely. Your first 7 days of Premium are free to explore.' },
-          { icon: 'Users', title: 'Do you offer reduced pricing?', text: 'Yes. If cost is a barrier, reach out and we\'ll find a way to help.' }
+          { icon: 'Users', title: 'Do you offer reduced pricing?', text: 'Yes. If cost is a barrier, reach out and we will find a way to help.' }
         ]
       }
     ]

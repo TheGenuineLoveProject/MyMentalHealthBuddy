@@ -21,7 +21,7 @@ import {
   Scale, AlertTriangle, Bookmark, Palette, Layout, PenTool,
   BarChart, Calendar, MapPin, Mic, Camera, Video,
   Database, Code, Terminal, Cloud, Globe, Link as LinkIcon,
-  ArrowRight, ChevronRight
+  ArrowRight, ChevronRight, Check, User, Play, Wind, RefreshCw
 } from 'lucide-react';
 import SacredLayout from './sacred/SacredLayout.jsx';
 import SacredFooter from './sacred/SacredFooter.jsx';
@@ -36,7 +36,8 @@ const iconMap = {
   FileText, Settings, Lock, CreditCard, HelpCircle, Mail,
   Scale, AlertTriangle, Bookmark, Palette, Layout, PenTool,
   BarChart, Calendar, MapPin, Mic, Camera, Video,
-  Database, Code, Terminal, Cloud, Globe, Link: LinkIcon
+  Database, Code, Terminal, Cloud, Globe, Link: LinkIcon,
+  Check, User, Play, Wind, RefreshCw
 };
 
 function getIcon(iconName) {
@@ -215,6 +216,24 @@ function ModulesGrid({ modules }) {
   );
 }
 
+function BulletList({ bullets }) {
+  return (
+    <ul className={styles.bulletList} role="list">
+      {bullets.map((bullet, index) => (
+        <li 
+          key={index} 
+          className={styles.bulletItem}
+          data-aos="fade-up"
+          data-aos-delay={100 + (index * 50)}
+        >
+          <Check className={styles.bulletIcon} />
+          <span>{bullet}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function ContentSection({ section, index }) {
   return (
     <SacredSection
@@ -226,6 +245,9 @@ function ContentSection({ section, index }) {
       aosDelay={index * 100}
       ariaLabel={section.title}
     >
+      {section.bullets && section.bullets.length > 0 && (
+        <BulletList bullets={section.bullets} />
+      )}
       {section.cards && section.cards.length > 0 && (
         <div 
           className={styles.cardsGrid}
