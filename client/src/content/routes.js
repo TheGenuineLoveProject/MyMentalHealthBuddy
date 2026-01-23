@@ -2381,13 +2381,52 @@ const rawRoutes = [
     title: 'Wellness — The Genuine Love Project',
     description: 'Your complete wellness toolkit for mind, body, and spirit.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['breath', 'grounding', 'body scan', 'self-compassion'],
     hero: {
-      eyebrow: 'Holistic Wellness',
-      title: 'Nurture every part of',
-      titleHighlight: 'yourself.',
-      subtitle: 'Tools and practices for complete well-being.',
-      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
-      secondaryCta: { label: 'Browse All', href: '/wellness-hub' }
+      eyebrow: {
+        beginner: 'Gentle Tools',
+        standard: 'Holistic Wellness',
+        deep: 'Evidence-Informed Practices'
+      },
+      title: {
+        beginner: 'A moment for',
+        standard: 'Nurture every part of',
+        deep: 'Support your'
+      },
+      titleHighlight: {
+        beginner: 'you.',
+        standard: 'yourself.',
+        deep: 'whole self.'
+      },
+      subtitle: {
+        beginner: 'Start small. Go slow.',
+        standard: 'Tools and practices for complete well-being.',
+        deep: 'Practices grounded in somatic and contemplative research.'
+      },
+      helperLine: {
+        beginner: 'You can stop any time.',
+        standard: 'Take what helps. Leave what doesn\'t.',
+        deep: 'Listen to your body\'s signals.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try 10 seconds',
+          standard: 'Start 10-second reset',
+          deep: 'Begin micro-practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See all',
+          standard: 'Browse All',
+          deep: 'Explore Library'
+        }, 
+        href: '/wellness-hub' 
+      }
     },
     practice: {
       beginner: {
@@ -2457,13 +2496,52 @@ const rawRoutes = [
     title: 'Wellness Hub — The Genuine Love Project',
     description: 'Central hub for all wellness tools and practices.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['breath', 'grounding', 'cognitive reframe', 'self-compassion', 'body scan'],
     hero: {
-      eyebrow: 'All-in-One',
-      title: 'Your wellness',
-      titleHighlight: 'headquarters.',
-      subtitle: 'Everything you need for holistic well-being in one place.',
-      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
-      secondaryCta: { label: 'Browse All', href: '#all' }
+      eyebrow: {
+        beginner: 'All Your Tools',
+        standard: 'All-in-One',
+        deep: 'Integrated Wellness Library'
+      },
+      title: {
+        beginner: 'Everything in',
+        standard: 'Your wellness',
+        deep: 'Your complete'
+      },
+      titleHighlight: {
+        beginner: 'one place.',
+        standard: 'headquarters.',
+        deep: 'wellness toolkit.'
+      },
+      subtitle: {
+        beginner: 'Pick what feels right.',
+        standard: 'Everything you need for holistic well-being in one place.',
+        deep: 'A curated collection of evidence-informed practices.'
+      },
+      helperLine: {
+        beginner: 'Start with just one.',
+        standard: 'Explore at your own pace.',
+        deep: 'Tools adapt to your needs.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try 10 seconds',
+          standard: 'Start 10-second reset',
+          deep: 'Begin micro-practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See all',
+          standard: 'Browse All',
+          deep: 'View Categories'
+        }, 
+        href: '#all' 
+      }
     },
     practice: {
       beginner: {
@@ -2529,6 +2607,10 @@ const rawRoutes = [
   {
     route: '/healing-library',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['healing resources', 'curated library', 'educational'],
     pageLabel: 'Healing Library',
     title: 'Healing Library — The Genuine Love Project',
     description: 'A comprehensive library of healing resources and modalities.',
@@ -2605,6 +2687,10 @@ const rawRoutes = [
   {
     route: '/calming-scenes',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['visual calming', 'sensory grounding', 'distraction'],
     pageLabel: 'Calming Scenes',
     title: 'Calming Scenes — The Genuine Love Project',
     description: 'Immersive visual and audio experiences for relaxation.',
@@ -2684,6 +2770,10 @@ const rawRoutes = [
     title: 'Breathing Exercises — The Genuine Love Project',
     description: 'Evidence-based breathing practices to help regulate your nervous system. Grounded in research on vagal tone and respiratory science.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['breath', 'paced exhale', 'box breathing', 'vagal tone'],
     practice: {
       beginner: {
         duration: '10s',
@@ -2780,12 +2870,47 @@ const rawRoutes = [
       }
     },
     hero: {
-      eyebrow: 'Breathwork',
-      title: 'Find calm through',
-      titleHighlight: 'conscious breathing.',
-      subtitle: 'Your breath is always with you. These simple techniques, supported by research on the nervous system, can help you feel more grounded in moments of stress.',
-      primaryCta: { label: 'Try a Quick Exercise', href: '#exercises' },
-      secondaryCta: { label: 'Learn How It Works', href: '#science' }
+      eyebrow: {
+        beginner: 'Simple Breathing',
+        standard: 'Breathwork',
+        deep: 'Respiratory Regulation'
+      },
+      title: {
+        beginner: 'Slow your breath,',
+        standard: 'Find calm through',
+        deep: 'Regulate your nervous system with'
+      },
+      titleHighlight: {
+        beginner: 'feel calmer.',
+        standard: 'conscious breathing.',
+        deep: 'intentional breath.'
+      },
+      subtitle: {
+        beginner: 'Breathing slow can help you feel better. Try one now.',
+        standard: 'Your breath is always with you. These simple techniques can help you feel more grounded.',
+        deep: 'Respiratory practices supported by vagal tone research and autonomic regulation science.'
+      },
+      helperLine: {
+        beginner: 'Stop if you feel dizzy.',
+        standard: 'Pause anytime it feels too much.',
+        deep: 'Listen to your body\'s signals.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try now',
+          standard: 'Try a Quick Exercise',
+          deep: 'Begin Practice'
+        }, 
+        href: '#exercises' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn more',
+          standard: 'Learn How It Works',
+          deep: 'View Research'
+        }, 
+        href: '#science' 
+      }
     },
     modules: [
       { icon: 'Activity', title: 'Activates Rest Response', description: 'Slow, deep breathing stimulates the parasympathetic nervous system.' },
@@ -2864,6 +2989,10 @@ const rawRoutes = [
     title: 'Grounding Techniques — The Genuine Love Project',
     description: 'Evidence-based grounding practices to anchor you in the present moment. Drawn from somatic therapy and mindfulness research.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['grounding', '5-4-3-2-1', 'orientation', 'temperature cues', 'somatic'],
     practice: {
       beginner: {
         duration: '10s',
@@ -3002,6 +3131,10 @@ const rawRoutes = [
     title: 'Affirmations — The Genuine Love Project',
     description: 'Supportive self-statements rooted in self-compassion research. A gentle practice for building a kinder inner voice.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['self-compassion', 'supportive inner voice', 'hand-on-heart'],
     practice: {
       beginner: {
         duration: '10s',
@@ -3165,6 +3298,10 @@ const rawRoutes = [
     title: 'Meditation Guide — The Genuine Love Project',
     description: 'Accessible meditation practices grounded in mindfulness research. Start with just one minute—no experience needed.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['meditation', 'mindfulness', 'attention training', 'present moment'],
     practice: {
       beginner: {
         duration: '10s',
@@ -3303,6 +3440,10 @@ const rawRoutes = [
     title: 'Self-Care Toolkit — The Genuine Love Project',
     description: 'Practical, evidence-informed self-care practices. Small actions that support your nervous system and wellbeing.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['self-care', 'nervous system support', 'one small step'],
     practices: [
       {
         timeTag: '1 min',
@@ -3483,6 +3624,10 @@ const rawRoutes = [
     title: 'Emotional Intelligence — The Genuine Love Project',
     description: 'Develop awareness and regulation skills. Based on research in emotional intelligence, DBT, and affect science.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['emotional awareness', 'feelings wheel', 'name it to tame it', 'needs naming'],
     practices: [
       {
         timeTag: '1 min',
@@ -3662,6 +3807,10 @@ const rawRoutes = [
     title: 'Sleep Guide — The Genuine Love Project',
     description: 'Tools and techniques for better, more restful sleep.',
     tone: 'practice',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['sleep hygiene', 'wind-down routine', 'stimulus control'],
     practices: [
       {
         timeTag: '1 min',
@@ -3777,6 +3926,10 @@ const rawRoutes = [
   {
     route: '/stress-response',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['stress response', 'fight/flight/freeze', 'nervous system education'],
     pageLabel: 'Stress Response',
     title: 'Stress Response Guide — The Genuine Love Project',
     description: 'Understand fight, flight, freeze, and fawn responses. Polyvagal-informed education for nervous system awareness.',
@@ -3958,6 +4111,10 @@ const rawRoutes = [
   {
     route: '/inner-child',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['inner child', 'parts work', 'self-compassion', 'reparenting'],
     pageLabel: 'Inner Child',
     title: 'Inner Child Work — The Genuine Love Project',
     description: 'Gentle, trauma-informed exercises for reconnecting with your younger self. Drawn from IFS and attachment research.',
@@ -4144,6 +4301,10 @@ const rawRoutes = [
   {
     route: '/body-wellness',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['body awareness', 'somatic', 'interoception', 'movement'],
     pageLabel: 'Body Wellness',
     title: 'Body Wellness — The Genuine Love Project',
     description: 'Mind-body connection practices for physical and emotional healing.',
@@ -4238,6 +4399,10 @@ const rawRoutes = [
   {
     route: '/soul-wellness',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['meaning', 'values', 'contemplative', 'spiritual wellness'],
     pageLabel: 'Soul Wellness',
     title: 'Soul Wellness — The Genuine Love Project',
     description: 'Spiritual practices for meaning, purpose, and transcendence.',
@@ -4331,6 +4496,10 @@ const rawRoutes = [
   {
     route: '/healing-journeys',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['healing', 'guided imagery', 'narrative', 'integration'],
     pageLabel: 'Healing Journeys',
     title: 'Healing Journeys — The Genuine Love Project',
     description: 'Structured healing pathways for specific challenges.',
@@ -4424,6 +4593,10 @@ const rawRoutes = [
   {
     route: '/behavior-change',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['behavioral activation', 'habit formation', 'one small step'],
     pageLabel: 'Behavior Change',
     title: 'Behavior Change — The Genuine Love Project',
     description: 'Evidence-based tools for creating lasting positive changes.',
@@ -4517,6 +4690,10 @@ const rawRoutes = [
   {
     route: '/daily-routines',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['routine', 'structure', 'daily practices'],
     pageLabel: 'Daily Routines',
     title: 'Daily Routines — The Genuine Love Project',
     description: 'Create nurturing daily routines for consistent well-being.',
@@ -4610,6 +4787,10 @@ const rawRoutes = [
   {
     route: '/cognitive-tools',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['cognitive reframe', 'thought defusion', 'labeling thoughts'],
     pageLabel: 'Cognitive Tools',
     title: 'Cognitive Tools — The Genuine Love Project',
     description: 'Tools for reframing thoughts and managing cognitive patterns.',
@@ -4704,6 +4885,10 @@ const rawRoutes = [
   {
     route: '/mirror',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['self-compassion', 'mirror work', 'self-acceptance'],
     pageLabel: 'Mirror Work',
     title: 'Mirror Work — The Genuine Love Project',
     description: 'Self-love practices using mirror work techniques.',
@@ -4798,6 +4983,10 @@ const rawRoutes = [
   {
     route: '/ritual',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['ritual', 'meaning-making', 'transitions'],
     pageLabel: 'Sacred Rituals',
     title: 'Sacred Rituals — The Genuine Love Project',
     description: 'Create meaningful rituals for healing and transition.',
@@ -4891,6 +5080,10 @@ const rawRoutes = [
   {
     route: '/wisdom',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['wisdom', 'reflection', 'perspective'],
     pageLabel: 'Wisdom',
     title: 'Wisdom — The Genuine Love Project',
     description: 'Curated wisdom for daily inspiration and reflection.',
@@ -4984,6 +5177,10 @@ const rawRoutes = [
   {
     route: '/wisdom-practices',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['wisdom traditions', 'contemplative', 'philosophical inquiry'],
     pageLabel: 'Wisdom Practices',
     title: 'Wisdom Practices — The Genuine Love Project',
     description: 'Practical applications of timeless wisdom traditions.',
@@ -5078,6 +5275,10 @@ const rawRoutes = [
   {
     route: '/wisdom-synthesis',
     category: 'wellness',
+    stimulationProfile: 'practice',
+    defaultReadingLevel: 'beginner',
+    readingLevelsEnabled: true,
+    techniqueTags: ['integration', 'synthesis', 'holistic perspective'],
     pageLabel: 'Wisdom Synthesis',
     title: 'Wisdom Synthesis — The Genuine Love Project',
     description: 'Integrate wisdom from multiple traditions into your practice.',
