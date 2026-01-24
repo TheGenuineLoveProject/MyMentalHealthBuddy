@@ -431,10 +431,82 @@ export const wellnessMicrocopy = {
     ],
     advanced: [
       'Data minimization guides our architecture.',
-      'Your entries are encrypted at rest.',
+      'Your entries are private to your account.',
       'We never sell your personal data.',
       'Transparency about data practices is a priority.',
       'Full data export is always available.'
+    ]
+  },
+
+  nonAddictiveProgress: {
+    beginner: [
+      'Consistency over intensity.',
+      'Gentle momentum is still momentum.',
+      'Skip days are allowed.',
+      'Small is valid.',
+      'Rest is part of the process.'
+    ],
+    intermediate: [
+      'Sustainable practice beats intense bursts.',
+      'Missing a day doesn\'t break anything.',
+      'Your rhythm matters more than streaks.',
+      'Kindness to yourself supports lasting change.',
+      'There\'s no penalty for taking breaks.'
+    ],
+    advanced: [
+      'Non-pressuring progress supports intrinsic motivation.',
+      'Shame-free language maintains engagement.',
+      'Opt-out-first design respects autonomy.',
+      'Sustainable habit loops prioritize wellbeing over metrics.',
+      'Self-paced growth outperforms performance pressure.'
+    ]
+  },
+
+  consentControl: {
+    beginner: [
+      'You\'re in charge here.',
+      'Pause, skip, or stop anytime.',
+      'Choose the gentlest option that still feels supportive.',
+      'No pressure. Small is valid.',
+      'Your comfort matters.'
+    ],
+    intermediate: [
+      'You decide what feels right.',
+      'Every step is optional.',
+      'Trust your own timing.',
+      'Opt out whenever you need to.',
+      'Your boundaries are respected here.'
+    ],
+    advanced: [
+      'Autonomy is central to this practice.',
+      'Self-determination supports lasting change.',
+      'Consent-based interaction protects your wellbeing.',
+      'You are the expert on your own experience.',
+      'Agency is built into every feature.'
+    ]
+  },
+
+  encouragementNonClinical: {
+    beginner: [
+      'That makes sense.',
+      'You\'re not alone in this.',
+      'Let\'s aim for one kind step.',
+      'Even one honest sentence counts.',
+      'You\'re doing something meaningful.'
+    ],
+    intermediate: [
+      'Your effort is valuable.',
+      'This is real work you\'re doing.',
+      'Small wins add up.',
+      'You\'re building something lasting.',
+      'Progress isn\'t always visible—but it\'s happening.'
+    ],
+    advanced: [
+      'Intentional reflection supports integration.',
+      'Consistent practice shapes new patterns.',
+      'Your awareness is itself a form of growth.',
+      'Each session contributes to cumulative change.',
+      'You\'re developing lasting internal resources.'
     ]
   }
 };

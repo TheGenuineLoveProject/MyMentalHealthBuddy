@@ -115,6 +115,33 @@ export const miUpgradeCtas = {
   ]
 };
 
+export const personInEnvironment = {
+  supportPrompts: [
+    "What in your environment supports this goal?",
+    "Who in your life might help with this?",
+    "What space or place helps you feel calm?",
+    "What resources do you already have access to?"
+  ],
+  barrierPrompts: [
+    "What makes this harder? (time, people, space, money, energy)",
+    "What obstacle feels most pressing right now?",
+    "What's competing for your attention?",
+    "What part of your environment works against this?"
+  ],
+  practicalSupport: [
+    "What practical support would help this week?",
+    "What's one environmental change that might make this easier?",
+    "If you could adjust one external thing, what would it be?",
+    "What accommodation would help you succeed?"
+  ],
+  strengthsBased: [
+    "What's already working that you could build on?",
+    "When has something similar worked for you before?",
+    "What resources have helped you in the past?",
+    "What part of this comes naturally to you?"
+  ]
+};
+
 export function pickMiPattern(category, subcategory, index = 0) {
   const patterns = miMicroPatterns[category] || miPrinciples[category] || [];
   if (!patterns.length) return '';
@@ -131,6 +158,7 @@ export default {
   patterns: miMicroPatterns,
   prompts: miReflectivePrompts,
   ctas: miUpgradeCtas,
+  pie: personInEnvironment,
   pick: pickMiPattern,
   random: getRandomMiPrinciple
 };
