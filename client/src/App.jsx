@@ -71,6 +71,8 @@ const ValuesFinderPage = lazy(() => import("./pages/ValuesFinderPage.jsx"));
 const BoundariesPage = lazy(() => import("./pages/BoundariesPage.jsx"));
 const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
 const CoherenceLadderPage = lazy(() => import("./pages/CoherenceLadderPage.jsx"));
+const Challenge = lazy(() => import("./pages/Challenge.jsx"));
+const ChallengeDay = lazy(() => import("./pages/ChallengeDay.jsx"));
 
 function LoadingFallback() {
   return (
@@ -112,6 +114,8 @@ export default function App() {
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing">{() => <ConfigRoute route="/canva-landing" />}</Route>
               <Route path="/pricing">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/challenge" component={Challenge} />
+              <Route path="/challenge/day/:dayNum" component={ChallengeDay} />
 
               {/* Auth Pages - Special Components */}
               <Route path="/login" component={Login} />

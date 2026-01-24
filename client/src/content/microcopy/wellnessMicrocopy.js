@@ -336,6 +336,78 @@ export const wellnessMicrocopy = {
       'Include evidence',
       'Full detail'
     ]
+  },
+
+  boundaries: {
+    beginner: [
+      'What would self-respect look like here?',
+      'What\'s a "good enough" boundary for today?',
+      'You can care and still say no.',
+      'Your needs matter too.',
+      'It\'s okay to protect your energy.'
+    ],
+    intermediate: [
+      'Boundaries are a form of self-care.',
+      'Saying no creates space for what matters.',
+      'You can set limits without explanation.',
+      'Clear boundaries support healthy connection.',
+      'Your capacity has limits—and that\'s human.'
+    ],
+    advanced: [
+      'Boundaries regulate the nervous system.',
+      'Limit-setting is an adaptive skill.',
+      'Relational boundaries protect your window of tolerance.',
+      'Self-advocacy supports sustainable wellbeing.',
+      'Boundaries are communication, not rejection.'
+    ]
+  },
+
+  progress: {
+    beginner: [
+      'Small progress counts.',
+      'Consistency over intensity.',
+      'Even one honest sentence is growth.',
+      'You showed up. That matters.',
+      'Tiny steps add up.'
+    ],
+    intermediate: [
+      'Progress isn\'t always visible.',
+      'Showing up repeatedly builds momentum.',
+      'Your effort compounds over time.',
+      'Growth often happens in small increments.',
+      'You\'re further along than you think.'
+    ],
+    advanced: [
+      'Neuroplasticity responds to repeated practice.',
+      'Incremental change creates lasting shifts.',
+      'Sustainable progress prioritizes consistency.',
+      'Non-linear progress is still progress.',
+      'Your baseline is quietly shifting.'
+    ]
+  },
+
+  privacy: {
+    beginner: [
+      'Your reflections belong to you.',
+      'You can delete entries anytime.',
+      'This stays private.',
+      'Only you see this.',
+      'Your data, your choice.'
+    ],
+    intermediate: [
+      'We collect only what we need to run the experience.',
+      'Your journal entries are yours to manage.',
+      'Delete or export anytime—no questions.',
+      'Privacy is built into everything we make.',
+      'You control what stays and what goes.'
+    ],
+    advanced: [
+      'Data minimization guides our architecture.',
+      'Your entries are encrypted at rest.',
+      'We never sell your personal data.',
+      'Transparency about data practices is a priority.',
+      'Full data export is always available.'
+    ]
   }
 };
 

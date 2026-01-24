@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Check, Star, Zap, Crown, ArrowLeft } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { TrustSignals, BeforeAfter } from "../components/benefits";
 
 const tiers = [
   {
@@ -179,6 +180,8 @@ export default function Pricing() {
               );
             })}
           </div>
+
+          <TrustSignals variant="banner" className="mt-12" />
 
           <div className="mt-16 text-center">
             <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>

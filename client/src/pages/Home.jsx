@@ -11,6 +11,7 @@ import {
   PlatformComponent, 
   SacredFooter 
 } from '../components/sacred';
+import { BenefitsStrip, BeforeAfter, TrustSignals } from '../components/benefits';
 import { 
   Shield, Sparkles, Brain, ArrowRight, Star, Leaf, 
   Heart, Compass, BookOpen, Moon, Zap, Target, 
@@ -20,33 +21,33 @@ import {
 const transformationalFeatures = [
   {
     icon: Brain,
-    title: "AI-Powered Therapeutic Companion",
-    description: "A trauma-informed AI trained in IFS, polyvagal theory, and attachment science. A compassionate presence that meets you exactly where you are."
+    title: "AI-Powered Reflective Companion",
+    description: "A supportive AI trained in evidence-informed approaches. A compassionate presence that meets you exactly where you are."
   },
   {
     icon: Heart,
-    title: "Inner Child Healing",
-    description: "Gentle reparenting exercises to heal wounds that formed before you had words for them. Give your younger self what they always needed."
+    title: "Inner Child Work",
+    description: "Gentle self-compassion exercises to reconnect with younger parts of yourself. Offer your past self the understanding they needed."
   },
   {
     icon: Shield,
-    title: "Nervous System Regulation",
-    description: "Evidence-based tools grounded in polyvagal theory to shift from fight-flight-freeze into calm presence."
+    title: "Nervous System Education",
+    description: "Evidence-informed tools grounded in regulation science to help you notice and shift your internal state."
   },
   {
     icon: Compass,
-    title: "Parts Work & IFS",
-    description: "Internal Family Systems-informed practices to befriend all parts of yourself—even the ones you've tried to hide."
+    title: "Parts Work & Self-Understanding",
+    description: "IFS-informed practices to explore and befriend all parts of yourself—even the ones you've tried to hide."
   },
   {
     icon: Eye,
     title: "Somatic Awareness",
-    description: "Gentle body-based practices to release stored trauma and reconnect with embodied wisdom."
+    description: "Gentle body-based practices to notice sensations and reconnect with embodied wisdom."
   },
   {
     icon: Anchor,
-    title: "Attachment Healing",
-    description: "Understand your relationship patterns and develop earned secure attachment at any age."
+    title: "Attachment Patterns",
+    description: "Understand your relationship patterns and explore ways to build more secure connections at any age."
   }
 ];
 
@@ -58,16 +59,16 @@ const healingPillars = [
     stat: "Zero data shared"
   },
   {
-    title: "Trauma-Informed",
+    title: "Consent-First",
     icon: Heart,
-    description: "Every interaction designed with trauma sensitivity. We respect your pace.",
-    stat: "100% trauma-aware"
+    description: "Every interaction designed with sensitivity. Pause or stop anytime. We respect your pace.",
+    stat: "100% consent-based"
   },
   {
-    title: "Evidence-Based",
+    title: "Evidence-Informed",
     icon: BookOpen,
-    description: "Grounded in IFS, polyvagal theory, attachment science, DBT, ACT, and somatic experiencing.",
-    stat: "50+ research studies"
+    description: "Educational tools informed by IFS, polyvagal theory, attachment science, DBT, and ACT principles.",
+    stat: "Research-grounded"
   },
   {
     title: "Available Always",
@@ -251,6 +252,8 @@ export default function Home() {
           }}
           trustBadges={trustBadges}
         />
+
+        <BenefitsStrip className="bg-[var(--glp-sage-10)] dark:bg-slate-900" />
 
         <div className="sacred-divider" aria-hidden="true" />
 
@@ -552,6 +555,8 @@ export default function Home() {
             </Link>
           </div>
         </SacredSection>
+
+        <TrustSignals />
       </main>
 
       <SacredFooter />
