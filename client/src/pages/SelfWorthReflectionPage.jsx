@@ -26,26 +26,37 @@ const TRUTH_STATEMENTS = [
     id: "meta-thinking",
     title: "Meta-thinking takes intelligence",
     icon: Brain,
-    insight: "People who question themselves deeply, reflect on patterns of behavior, and care about integrity — that takes intelligence. The fact that you're examining your own thoughts is proof of a sophisticated mind."
+    insight: "People who question themselves deeply, reflect on patterns of behavior, and care about integrity — that takes intelligence. The fact that you're examining your own thoughts is proof of a sophisticated mind.",
+    deeperTruth: "What you're doing right now — thinking about thinking — is called meta-cognition. It's one of the highest forms of intelligence. People who lack awareness don't question themselves this way."
   },
   {
     id: "punished-for-noticing",
     title: "You were punished for understanding, not for being wrong",
     icon: Eye,
-    insight: "When someone grows up being punished for noticing, understanding, and naming patterns, the brain learns a protective shortcut: 'If I'm hurting this much, maybe I'm stupid.' That belief is protective, not accurate."
+    insight: "When someone grows up being punished for noticing, understanding, and naming patterns, the brain learns a protective shortcut: 'If I'm hurting this much, maybe I'm stupid.' That belief is protective, not accurate.",
+    deeperTruth: "You were not beaten because you were stupid. You were not punished because you were wrong. You were not silenced because you lacked understanding. You were punished because you understood too much in an unsafe environment."
   },
   {
     id: "stress-response",
     title: "Confusion is a stress response, not a measure",
     icon: Activity,
-    insight: "When the nervous system is overloaded, even very intelligent people feel confused, scattered, foggy, and ashamed. You wouldn't call someone stupid for limping after being injured. Your mind is doing the same thing."
+    insight: "When the nervous system is overloaded, even very intelligent people feel confused, scattered, foggy, and ashamed. You wouldn't call someone stupid for limping after being injured. Your mind is doing the same thing.",
+    deeperTruth: "Right now your system is flooded. That's not a measure of intelligence — that's a stress response. The fog will lift when your nervous system feels safe again."
   },
   {
     id: "carrying-alone",
     title: "The problem isn't your mind",
     icon: Heart,
-    insight: "The problem is that your mind has been carrying too much alone for too long. Overwhelm is not the same as incapacity."
+    insight: "The problem is that your mind has been carrying too much alone for too long. Overwhelm is not the same as incapacity.",
+    deeperTruth: "This does not make you superior. It does not make you broken. It makes you someone whose nervous system learned to survive. And now it can learn something new."
   }
+];
+
+const CLEAR_GROUNDING_TRUTHS = [
+  "You were not beaten because you were stupid",
+  "You were not punished because you were wrong", 
+  "You were not silenced because you lacked understanding",
+  "You were punished because you understood too much in an unsafe environment"
 ];
 
 const REFRAME_PRACTICES = [
@@ -220,6 +231,14 @@ export default function SelfWorthReflectionPage() {
                         {truth.insight}
                       </p>
 
+                      {truth.deeperTruth && (
+                        <div className="p-4 rounded-xl bg-violet-50 dark:bg-violet-900/20 border-l-4 border-violet-500">
+                          <p className="text-violet-800 dark:text-violet-200 font-medium" data-testid={`text-deeper-${truth.id}`}>
+                            {truth.deeperTruth}
+                          </p>
+                        </div>
+                      )}
+
                       <Button
                         onClick={() => handleAcknowledge(truth.id)}
                         variant="secondary"
@@ -234,6 +253,26 @@ export default function SelfWorthReflectionPage() {
                 </div>
               );
             })}
+          </div>
+
+          <div className="bg-[var(--surface-elevated)] rounded-2xl border border-[var(--border-subtle)] p-6 mb-10" data-testid="section-clear-truths">
+            <h3 className="text-lg font-semibold text-[var(--text-primary)] mb-4 flex items-center gap-2">
+              <Shield className="w-5 h-5 text-violet-500" />
+              Let's Be Very Clear and Grounded
+            </h3>
+            <div className="space-y-3">
+              {CLEAR_GROUNDING_TRUTHS.map((truth, idx) => (
+                <div 
+                  key={idx}
+                  className={`p-4 rounded-xl ${idx === 3 ? "bg-violet-100 dark:bg-violet-900/30 border-2 border-violet-300 dark:border-violet-700" : "bg-[var(--surface-secondary)]"}`}
+                  data-testid={`grounding-truth-${idx}`}
+                >
+                  <p className={`${idx === 3 ? "text-violet-800 dark:text-violet-200 font-semibold" : "text-[var(--text-primary)]"}`}>
+                    {idx === 3 ? "→ " : "• "}{truth}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4 flex items-center gap-2" data-testid="heading-reframes">
