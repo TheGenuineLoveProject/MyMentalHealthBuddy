@@ -71,6 +71,8 @@ export default function SocialGenerator() {
   const [aiGenerated, setAiGenerated] = useState(null);
   const [complianceResult, setComplianceResult] = useState(null);
   const [alternativeHooks, setAlternativeHooks] = useState([]);
+  const [generatedImage, setGeneratedImage] = useState(null);
+  const [enhancementSuggestions, setEnhancementSuggestions] = useState(null);
   
   const { data: platformSpecs = {} } = useQuery({
     queryKey: ["/api/admin/social/platforms/specs"],
@@ -114,6 +116,16 @@ export default function SocialGenerator() {
         checkCompliance(data.rewritten);
       }
     },
+  });
+  
+  const imageGenerateMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate/image", data),
+    onSuccess: (data) => setGeneratedImage(data),
+  });
+  
+  const enhanceMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/admin/social/enhance", data),
+    onSuccess: (data) => setEnhancementSuggestions(data),
   });
   
   const handleChange = (field, value) => {
@@ -524,6 +536,108 @@ export default function SocialGenerator() {
                 <p className="text-sm text-slate-600 dark:text-slate-400">
                   {aiGenerated.contentNotes}
                 </p>
+              </div>
+            )}
+            
+            <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Zap className="w-4 h-4 text-purple-500" />
+                  AI Image Generation
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => imageGenerateMutation.mutate({
+                    theme: form.theme || "self-care",
+                    platform: form.platform,
+                    style: "minimalist"
+                  })}
+                  disabled={imageGenerateMutation.isPending}
+                  className="text-xs px-3 py-1.5 rounded-lg bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50 flex items-center gap-1"
+                  data-testid="button-generate-image"
+                >
+                  {imageGenerateMutation.isPending ? (
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  ) : (
+                    <Sparkles className="w-3 h-3" />
+                  )}
+                  Generate Visual
+                </button>
+              </div>
+              
+              {generatedImage?.image ? (
+                <div className="space-y-3">
+                  <img 
+                    src={generatedImage.image} 
+                    alt="AI-generated visual" 
+                    className="w-full rounded-lg border border-slate-200 dark:border-slate-700"
+                  />
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Trauma-informed visual for {generatedImage.platform}
+                  </p>
+                </div>
+              ) : (
+                <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
+                  Generate a calming, brand-aligned visual for your post
+                </p>
+              )}
+            </div>
+            
+            {form.caption && (
+              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                    <Zap className="w-4 h-4 text-blue-500" />
+                    Content Enhancement
+                  </h3>
+                  <div className="flex gap-2">
+                    {["engagement", "accessibility", "emotional"].map(type => (
+                      <button
+                        key={type}
+                        type="button"
+                        onClick={() => enhanceMutation.mutate({ text: form.caption, type })}
+                        disabled={enhanceMutation.isPending}
+                        className="text-xs px-2 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200 capitalize"
+                        data-testid={`button-enhance-${type}`}
+                      >
+                        {type}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                
+                {enhancementSuggestions?.suggestions && (
+                  <div className="space-y-3">
+                    {enhancementSuggestions.suggestions.map((sug, idx) => (
+                      <div key={idx} className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                        <p className="text-sm font-medium text-blue-800 dark:text-blue-200">{sug.title}</p>
+                        <p className="text-xs text-blue-600 dark:text-blue-300 mt-1">{sug.description}</p>
+                        {sug.example && (
+                          <p className="text-xs mt-2 p-2 bg-white dark:bg-slate-700 rounded border border-blue-100 dark:border-blue-800 italic">
+                            "{sug.example}"
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                    
+                    {enhancementSuggestions.enhancedVersion && (
+                      <div className="pt-3 border-t border-blue-100 dark:border-blue-800">
+                        <p className="text-xs font-medium text-blue-800 dark:text-blue-200 mb-2">Enhanced Version:</p>
+                        <p className="text-sm text-slate-700 dark:text-slate-300 p-2 bg-white dark:bg-slate-700 rounded">
+                          {enhancementSuggestions.enhancedVersion}
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => setForm(prev => ({ ...prev, caption: enhancementSuggestions.enhancedVersion }))}
+                          className="mt-2 text-xs px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700"
+                          data-testid="button-apply-enhanced"
+                        >
+                          Apply Enhanced Version
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             )}
             

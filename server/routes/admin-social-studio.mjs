@@ -440,13 +440,13 @@ OUTPUT FORMAT (JSON):
 }`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-5.1",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: `Create social media content about: ${theme}\n\nStyle: ${style}` }
       ],
       response_format: { type: "json_object" },
-      max_tokens: 1000,
+      max_completion_tokens: 1000,
     });
     
     const content = JSON.parse(response.choices[0]?.message?.content || "{}");
@@ -478,7 +478,7 @@ router.post("/generate/repurpose", requireAuth, requireAdmin, async (req, res) =
       const spec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
       
       const response = await openai.chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-5.1",
         messages: [
           { 
             role: "system", 
@@ -491,7 +491,7 @@ OUTPUT JSON: { "hook": "...", "caption": "...", "cta": "...", "hashtags": "..." 
           { role: "user", content: `Repurpose this content for ${platform}:\n\n${content}` }
         ],
         response_format: { type: "json_object" },
-        max_tokens: 800,
+        max_completion_tokens: 800,
       });
       
       repurposed[platform] = JSON.parse(response.choices[0]?.message?.content || "{}");
@@ -586,7 +586,7 @@ router.post("/compliance/rewrite", requireAuth, requireAdmin, async (req, res) =
     }
     
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-5.1",
       messages: [
         { 
           role: "system", 
@@ -604,7 +604,7 @@ OUTPUT JSON: { "rewritten": "...", "changes": ["list of key changes made"] }`
         { role: "user", content: `Rewrite this content:\n\n${text}\n\nIssues to address: ${JSON.stringify(issues || [])}` }
       ],
       response_format: { type: "json_object" },
-      max_tokens: 800,
+      max_completion_tokens: 800,
     });
     
     const result = JSON.parse(response.choices[0]?.message?.content || "{}");
@@ -613,6 +613,167 @@ OUTPUT JSON: { "rewritten": "...", "changes": ["list of key changes made"] }`
   } catch (error) {
     logger.error("Rewrite failed:", error);
     return badRequest(res, "Failed to rewrite content");
+  }
+});
+
+/* =====================================================
+ * IMAGE GENERATION
+ * ===================================================== */
+
+router.post("/generate/image", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { theme, platform, style = "minimalist" } = req.body;
+    
+    if (!theme) {
+      return badRequest(res, "Theme is required");
+    }
+    
+    const platformSpec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
+    const sizeMap = {
+      instagram: "1024x1024",
+      tiktok: "1024x1024",
+      youtube: "1024x1024",
+      pinterest: "1024x1024",
+      default: "1024x1024"
+    };
+    
+    const imagePrompt = `Create a calming, trauma-informed wellness social media graphic for The Genuine Love Project.
+
+THEME: ${theme}
+STYLE: ${style} - gentle, warm, non-triggering imagery
+AESTHETIC: Soft earth tones, sage green, warm gold, gentle gradients
+MOOD: Peaceful, supportive, grounding, safe
+
+REQUIREMENTS:
+- Abstract or nature-inspired (no people/faces to avoid triggers)
+- Clean, uncluttered composition
+- Professional quality for ${platform}
+- No text overlay (captions added separately)
+- Soothing color palette that evokes safety and warmth
+- Subtle, calming visual elements`;
+
+    const response = await openai.images.generate({
+      model: "gpt-image-1",
+      prompt: imagePrompt,
+      n: 1,
+      size: sizeMap[platform] || sizeMap.default,
+    });
+    
+    const imageData = response.data[0]?.b64_json;
+    
+    return success(res, {
+      image: imageData ? `data:image/png;base64,${imageData}` : null,
+      prompt: imagePrompt,
+      platform,
+      theme,
+      generatedAt: new Date().toISOString()
+    });
+  } catch (error) {
+    logger.error("Image generation failed:", error);
+    return badRequest(res, "Failed to generate image: " + error.message);
+  }
+});
+
+/* =====================================================
+ * BATCH CONTENT GENERATION
+ * ===================================================== */
+
+router.post("/generate/batch", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { themes, platform, style = "warm", level = "intermediate" } = req.body;
+    
+    if (!themes?.length) {
+      return badRequest(res, "Themes array is required");
+    }
+    
+    if (themes.length > 5) {
+      return badRequest(res, "Maximum 5 themes per batch");
+    }
+    
+    const platformSpec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
+    const results = [];
+    
+    for (const theme of themes) {
+      try {
+        const response = await openai.chat.completions.create({
+          model: "gpt-5.1",
+          messages: [
+            { 
+              role: "system", 
+              content: `You are a trauma-informed social media content creator. Create content for ${platform}.
+PLATFORM: ${platform}, MAX CHARS: ${platformSpec.maxChars}, HASHTAGS: ${platformSpec.hashtagLimit}
+READING LEVEL: ${level}
+Use consent-led language, avoid prescriptive terms, use evidence-informed phrasing.
+OUTPUT JSON: { "hook": "...", "caption": "...", "cta": "...", "hashtags": "...", "disclaimer": "..." }` 
+            },
+            { role: "user", content: `Create content about: ${theme}\nStyle: ${style}` }
+          ],
+          response_format: { type: "json_object" },
+          max_completion_tokens: 800,
+        });
+        
+        const content = JSON.parse(response.choices[0]?.message?.content || "{}");
+        results.push({ theme, success: true, content, platform });
+      } catch (e) {
+        results.push({ theme, success: false, error: e.message });
+      }
+      
+      await new Promise(r => setTimeout(r, 500));
+    }
+    
+    return success(res, { 
+      processed: results.length,
+      successful: results.filter(r => r.success).length,
+      results,
+      generatedAt: new Date().toISOString()
+    });
+  } catch (error) {
+    logger.error("Batch generation failed:", error);
+    return badRequest(res, "Failed to generate batch content");
+  }
+});
+
+/* =====================================================
+ * CONTENT ENHANCEMENT SUGGESTIONS
+ * ===================================================== */
+
+router.post("/enhance", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { text, type = "engagement" } = req.body;
+    
+    if (!text) {
+      return badRequest(res, "Text is required");
+    }
+    
+    const enhancePrompts = {
+      engagement: "Suggest 3 ways to make this content more engaging while maintaining trauma-informed principles",
+      accessibility: "Suggest 3 ways to make this content more accessible (reading level, clarity, inclusivity)",
+      emotional: "Suggest 3 ways to enhance the emotional resonance while keeping it safe and grounding",
+      crisis: "Suggest appropriate crisis resources and safety disclaimers to add"
+    };
+    
+    const response = await openai.chat.completions.create({
+      model: "gpt-5.1",
+      messages: [
+        { 
+          role: "system", 
+          content: `You are a trauma-informed content enhancement specialist.
+${enhancePrompts[type] || enhancePrompts.engagement}
+Maintain consent-led language and avoid prescriptive terms.
+OUTPUT JSON: { "suggestions": [{ "title": "...", "description": "...", "example": "..." }], "enhancedVersion": "..." }` 
+        },
+        { role: "user", content: `Enhance this content:\n\n${text}` }
+      ],
+      response_format: { type: "json_object" },
+      max_completion_tokens: 1000,
+    });
+    
+    const result = JSON.parse(response.choices[0]?.message?.content || "{}");
+    
+    return success(res, { ...result, type, original: text });
+  } catch (error) {
+    logger.error("Enhancement failed:", error);
+    return badRequest(res, "Failed to enhance content");
   }
 });
 
