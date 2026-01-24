@@ -1,5 +1,5 @@
 {
-  "snapshotHash": "8359206eaa93600228bd8e26a99609728e5cef8f7476dc65b67848f0cc7abcc4",
+  "snapshotHash": "93e1cc9e4d20a0a75b5f14e81064092b2f80a788bef8ae4d68051dbf8e24dc49",
   "categoryOrder": [
     {
       "letter": "A",
@@ -67,8 +67,8 @@
     "/blog": "812f5a88c9bf5aeb9cfd1fc0a9e2318cd4789e62def83a6908bca0b37b74e382",
     "/blog/:slug": "7d07e6022095cfa5a4cd12f1acc852ad79f9f6cc24ed662b618f608f1c681cfa",
     "/body-wellness": "725e99959900370be6a544704e1262fdebf9bc09d35d27c715ebd1906bd51677",
-    "/breathing": "90aecd7f03868e0470824e92e5326f9451624b1962016a0b9b29683e9a5883bf",
-    "/calming-scenes": "3a76529533299328507073fdceb18aa17596b7f84ab7b6c98eba3e11e1b91c1a",
+    "/breathing": "93e2c2c450ccdd3d3ecb37b619f68ac4b40dc97f95c432941e23e37496bea400",
+    "/calming-scenes": "650f8e73fd903e0faf5945eb2dd3068883811532fb7fad3f4990d6fc0feff7af",
     "/chat": "ba0472213c58bd4992e077eee468749046b070de86d17fb919aefbdeebc368b5",
     "/cognitive-architecture": "5434c13e857f033afecbe2cde8716c9c872a3c9b2cc0cc85b01cbfe584c4e5f9",
     "/cognitive-tools": "c84a909da0e91131de680d12b83972e7a50169a6ed5920599d880e64c66b1872",
@@ -100,12 +100,12 @@
     "/forgot-password": "b34a1e6d05492ce10fd64b08a8154367daae5ce0e7e371b3bbd4f2e86747bc96",
     "/glossary": "94eaf217f415a54e9f36b9afe0244c9e009b02782dc0832013cabb7626f350b6",
     "/glossary-full": "5add1c65e5445a759688c5ba3d3bece7893d6ba1b4a6c1891d664ab8d8abf4aa",
-    "/grounding": "4f92e2fb36ab4b054599e217e625d31b53b3620ac5d71e0ee68ea01328d897ea",
+    "/grounding": "5e2b2ea86d1b3a8e62f9d0dd0aa01076b39ae53fad863975c5333aedc0f6e2d1",
     "/growth-analytics": "6ed6eec86acb36d9b913e8eb576401a0f9cd3ff07d266dfe9227356fff56088e",
     "/guided-journaling": "3a773f1e944e6e02b2151c72e6e057bd5caf24978616ab401d0637d0afa27f52",
     "/healing": "78dd13f3d5b2b58d5b90ec28b8fcb269e18b0c77d2dc4397cd2df5ce6d973c8e",
     "/healing-journeys": "1262fc709f1f6747dda88437739c08e41e262e8684caa620a33fa427579acf14",
-    "/healing-library": "6cbb5f37a2f5d04ca424ad5c7047289cd9630c384678ccbf5f187ce4ab5796ab",
+    "/healing-library": "102726cf02a001d146daa6635b4bab3f8dfb2133d9338b46b99eb68e3b93ce2e",
     "/health": "bd355c0aca8a950941918b5930d5fb51a8ae2e6bb62c6457d14ff99346fc9371",
     "/home": "faabd5426e8ee6c0075861a9945d02f92da007a2fa800f0263f349ed11635feb",
     "/how-to-guides": "df7adc704f9e94359d85849b1a24d64e9e9847a7cbf8a16cd2ce2778838ce836",
@@ -160,13 +160,13 @@
     "/tools": "9e70ee9f20752a07a6b9ea6d892d425133712681b702f63caf95846d34c7d7b8",
     "/upgrade": "893c3667f0308f997e898335460f706a0b4420d11b44393ab92ca497b007811e",
     "/welcome": "a9aec92f46ec4fd6710b064adc7033978b81eb433391626303b062b21207df2d",
-    "/wellness": "d90a5812b4585cd2e6472a5c038b9a327e377f0a511e0bb622533a804537b8cc",
-    "/wellness-hub": "1000fbf96047dda0870a44b8acce0dd9c11e19a3660ecbf6d1976425de2eea9f",
-    "/wellness/creativity": "3c3acec12ce7cc20a8ffda65ad3ddb018c4a372845a50161c5941bba80e69c6a",
-    "/wellness/movement": "eca46e81ddea90f66ebbd16209a3533b82a380b00f6118f90997eff4a7310dfc",
-    "/wellness/nature": "103ad669e968be3a2d1f79607d234d126b8159f98a3a7d9206139ef97c36c037",
-    "/wellness/nutrition": "667e86e396c79393b8b133e31b20ea74937070a1e70609092008975ace4e346b",
-    "/wellness/sleep": "7aca5e6206cb21b5a08dfa6442ce4be4780b207c197f697fd61b34a948cf8113",
+    "/wellness": "b0d5d325e7bad4ad59c902046350dddd9c03dcf209ed2756a3c0b896f0169fb6",
+    "/wellness-hub": "bf5889b32f27abac2f79146a06e733f2155392d155f14a1e1223dd4e476fa3c5",
+    "/wellness/creativity": "1d3539893c3e3d5f6309cf76b6e78500651f75764d94199b9a7311d2b0fdadfa",
+    "/wellness/movement": "8a6df039b9ea8742d485af6c6ea0b0566b75d929894e9efdc63e4f76a6b379a2",
+    "/wellness/nature": "2811ec2194dd24b3e91e75e50963dcd2e356483963cfb1b5ddb916c1d6be2438",
+    "/wellness/nutrition": "ac83ae30733af0f07297d1a6ec97341463fb82455e23a0529fea170a3c59b04a",
+    "/wellness/sleep": "56a5098fff27485f7ffdf97598b6699a539f98293b20cf11970ca3ab9860d70e",
     "/wireframes": "3fd3b5b76a151f9fa93f94c41137ca545c3b9d08187d4afbf59f3b4ede8f28ef",
     "/wisdom": "745d76173bebfe2157effe3d9cc82c67a0e39efad09fb859a755f4e65d58e47f",
     "/wisdom-practices": "b374051e400a6b7a2c30960db2c60f05a89fa46047ff865c69a6465e21d8be73",
@@ -550,20 +550,36 @@
       "title": "Breathing Exercises — The Genuine Love Project",
       "description": "Evidence-based breathing practices to help regulate your nervous system. Grounded in research on vagal tone and respiratory science.",
       "hero": {
-        "title": "Find calm through",
-        "subtitle": "Your breath is always with you. These simple techniques, supported by research on the nervous system, can help you feel more grounded in moments of stress.",
+        "title": {
+          "beginner": "Slow your breath,",
+          "standard": "Find calm through",
+          "deep": "Regulate your nervous system with"
+        },
+        "subtitle": {
+          "beginner": "Breathing slow can help you feel better. Try one now.",
+          "standard": "Your breath is always with you. These simple techniques can help you feel more grounded.",
+          "deep": "Respiratory practices supported by vagal tone research and autonomic regulation science."
+        },
         "primaryCta": {
-          "label": "Try a Quick Exercise",
+          "label": {
+            "beginner": "Try now",
+            "standard": "Try a Quick Exercise",
+            "deep": "Begin Practice"
+          },
           "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Learn How It Works",
+          "label": {
+            "beginner": "Learn more",
+            "standard": "Learn How It Works",
+            "deep": "View Research"
+          },
           "href": "#science"
         }
       },
       "sectionsCount": 4,
       "modulesCount": 3,
-      "routeHash": "90aecd7f03868e0470824e92e5326f9451624b1962016a0b9b29683e9a5883bf"
+      "routeHash": "93e2c2c450ccdd3d3ecb37b619f68ac4b40dc97f95c432941e23e37496bea400"
     },
     {
       "route": "/calming-scenes",
@@ -573,20 +589,36 @@
       "title": "Calming Scenes — The Genuine Love Project",
       "description": "Immersive visual and audio experiences for relaxation.",
       "hero": {
-        "title": "Find serenity in",
-        "subtitle": "Immersive scenes to calm your mind and soothe your soul.",
+        "title": {
+          "beginner": "Rest your eyes on",
+          "standard": "Find serenity in",
+          "deep": "Access visual grounding through"
+        },
+        "subtitle": {
+          "beginner": "Just look. Let your mind quiet.",
+          "standard": "Immersive scenes to calm your mind.",
+          "deep": "Sensory grounding and nervous system regulation."
+        },
         "primaryCta": {
-          "label": "Start 10-second reset",
+          "label": {
+            "beginner": "Find calm",
+            "standard": "Start 10-second reset",
+            "deep": "Begin practice"
+          },
           "href": "#practice"
         },
         "secondaryCta": {
-          "label": "Sleep Sounds",
+          "label": {
+            "beginner": "See scenes",
+            "standard": "Sleep Sounds",
+            "deep": "View All Scenes"
+          },
           "href": "#sounds"
         }
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "3a76529533299328507073fdceb18aa17596b7f84ab7b6c98eba3e11e1b91c1a"
+      "routeHash": "650f8e73fd903e0faf5945eb2dd3068883811532fb7fad3f4990d6fc0feff7af"
     },
     {
       "route": "/chat",
@@ -1355,20 +1387,36 @@
       "title": "Grounding Techniques — The Genuine Love Project",
       "description": "Evidence-based grounding practices to anchor you in the present moment. Drawn from somatic therapy and mindfulness research.",
       "hero": {
-        "title": "Return to",
-        "subtitle": "When you feel disconnected, overwhelmed, or far away from yourself, these gentle techniques can help you feel more present. You can use them anytime, anywhere.",
+        "title": {
+          "beginner": "Come back to",
+          "standard": "Return to",
+          "deep": "Anchor in"
+        },
+        "subtitle": {
+          "beginner": "Simple ways to feel more here.",
+          "standard": "Gentle techniques to help you feel more present.",
+          "deep": "Body-based practices drawn from somatic therapy research."
+        },
         "primaryCta": {
-          "label": "Start Grounding",
+          "label": {
+            "beginner": "Try 10 seconds",
+            "standard": "Start Grounding",
+            "deep": "Begin practice"
+          },
           "href": "#exercises"
         },
         "secondaryCta": {
-          "label": "Quick Reset",
+          "label": {
+            "beginner": "See quick tips",
+            "standard": "Quick Reset",
+            "deep": "Explore 5-4-3-2-1"
+          },
           "href": "#quick"
         }
       },
       "sectionsCount": 4,
       "modulesCount": 3,
-      "routeHash": "4f92e2fb36ab4b054599e217e625d31b53b3620ac5d71e0ee68ea01328d897ea"
+      "routeHash": "5e2b2ea86d1b3a8e62f9d0dd0aa01076b39ae53fad863975c5333aedc0f6e2d1"
     },
     {
       "route": "/growth-analytics",
@@ -1470,20 +1518,36 @@
       "title": "Healing Library — The Genuine Love Project",
       "description": "A comprehensive library of healing resources and modalities.",
       "hero": {
-        "title": "Your library of",
-        "subtitle": "Evidence-based resources for your healing journey.",
+        "title": {
+          "beginner": "Learn about",
+          "standard": "Explore",
+          "deep": "Access evidence-based"
+        },
+        "subtitle": {
+          "beginner": "Simple explanations of healing concepts.",
+          "standard": "Evidence-based resources for your journey.",
+          "deep": "A curated library of therapeutic frameworks and modalities."
+        },
         "primaryCta": {
-          "label": "Start 10-second reset",
+          "label": {
+            "beginner": "Start exploring",
+            "standard": "Start 10-second reset",
+            "deep": "Begin practice"
+          },
           "href": "#practice"
         },
         "secondaryCta": {
-          "label": "Browse Topics",
+          "label": {
+            "beginner": "See topics",
+            "standard": "Browse Topics",
+            "deep": "View All Resources"
+          },
           "href": "#topics"
         }
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "6cbb5f37a2f5d04ca424ad5c7047289cd9630c384678ccbf5f187ce4ab5796ab"
+      "routeHash": "102726cf02a001d146daa6635b4bab3f8dfb2133d9338b46b99eb68e3b93ce2e"
     },
     {
       "route": "/health",
@@ -2713,20 +2777,36 @@
       "title": "Wellness — The Genuine Love Project",
       "description": "Your complete wellness toolkit for mind, body, and spirit.",
       "hero": {
-        "title": "Nurture every part of",
-        "subtitle": "Tools and practices for complete well-being.",
+        "title": {
+          "beginner": "A moment for",
+          "standard": "Nurture every part of",
+          "deep": "Support your"
+        },
+        "subtitle": {
+          "beginner": "Start small. Go slow.",
+          "standard": "Tools and practices for complete well-being.",
+          "deep": "Practices grounded in somatic and contemplative research."
+        },
         "primaryCta": {
-          "label": "Start 10-second reset",
+          "label": {
+            "beginner": "Try 10 seconds",
+            "standard": "Start 10-second reset",
+            "deep": "Begin micro-practice"
+          },
           "href": "#practice"
         },
         "secondaryCta": {
-          "label": "Browse All",
+          "label": {
+            "beginner": "See all",
+            "standard": "Browse All",
+            "deep": "Explore Library"
+          },
           "href": "/wellness-hub"
         }
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "d90a5812b4585cd2e6472a5c038b9a327e377f0a511e0bb622533a804537b8cc"
+      "routeHash": "b0d5d325e7bad4ad59c902046350dddd9c03dcf209ed2756a3c0b896f0169fb6"
     },
     {
       "route": "/wellness-hub",
@@ -2736,20 +2816,36 @@
       "title": "Wellness Hub — The Genuine Love Project",
       "description": "Central hub for all wellness tools and practices.",
       "hero": {
-        "title": "Your wellness",
-        "subtitle": "Everything you need for holistic well-being in one place.",
+        "title": {
+          "beginner": "Everything in",
+          "standard": "Your wellness",
+          "deep": "Your complete"
+        },
+        "subtitle": {
+          "beginner": "Pick what feels right.",
+          "standard": "Everything you need for holistic well-being in one place.",
+          "deep": "A curated collection of evidence-informed practices."
+        },
         "primaryCta": {
-          "label": "Start 10-second reset",
+          "label": {
+            "beginner": "Try 10 seconds",
+            "standard": "Start 10-second reset",
+            "deep": "Begin micro-practice"
+          },
           "href": "#practice"
         },
         "secondaryCta": {
-          "label": "Browse All",
+          "label": {
+            "beginner": "See all",
+            "standard": "Browse All",
+            "deep": "View Categories"
+          },
           "href": "#all"
         }
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "1000fbf96047dda0870a44b8acce0dd9c11e19a3660ecbf6d1976425de2eea9f"
+      "routeHash": "bf5889b32f27abac2f79146a06e733f2155392d155f14a1e1223dd4e476fa3c5"
     },
     {
       "route": "/wellness/creativity",
@@ -2762,8 +2858,8 @@
         "title": "Creative",
         "subtitle": "Explore art, music, and writing as healing tools.",
         "primaryCta": {
-          "label": "Start Creating",
-          "href": "#create"
+          "label": "Start 10-second reset",
+          "href": "#practice"
         },
         "secondaryCta": {
           "label": "Art Therapy",
@@ -2772,7 +2868,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "3c3acec12ce7cc20a8ffda65ad3ddb018c4a372845a50161c5941bba80e69c6a"
+      "routeHash": "1d3539893c3e3d5f6309cf76b6e78500651f75764d94199b9a7311d2b0fdadfa"
     },
     {
       "route": "/wellness/movement",
@@ -2785,8 +2881,8 @@
         "title": "Healing",
         "subtitle": "Gentle exercises that honor your body's needs.",
         "primaryCta": {
-          "label": "Start Moving",
-          "href": "#movement"
+          "label": "Start 10-second reset",
+          "href": "#practice"
         },
         "secondaryCta": {
           "label": "Yoga Flows",
@@ -2795,7 +2891,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "eca46e81ddea90f66ebbd16209a3533b82a380b00f6118f90997eff4a7310dfc"
+      "routeHash": "8a6df039b9ea8742d485af6c6ea0b0566b75d929894e9efdc63e4f76a6b379a2"
     },
     {
       "route": "/wellness/nature",
@@ -2808,8 +2904,8 @@
         "title": "Nature",
         "subtitle": "Find peace and grounding in the natural world.",
         "primaryCta": {
-          "label": "Connect with Nature",
-          "href": "#nature"
+          "label": "Start 10-second reset",
+          "href": "#practice"
         },
         "secondaryCta": {
           "label": "Grounding Practices",
@@ -2818,7 +2914,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "103ad669e968be3a2d1f79607d234d126b8159f98a3a7d9206139ef97c36c037"
+      "routeHash": "2811ec2194dd24b3e91e75e50963dcd2e356483963cfb1b5ddb916c1d6be2438"
     },
     {
       "route": "/wellness/nutrition",
@@ -2831,8 +2927,8 @@
         "title": "Mindful",
         "subtitle": "Develop a healthy relationship with food and nourishment.",
         "primaryCta": {
-          "label": "Explore Nutrition",
-          "href": "#nutrition"
+          "label": "Start 10-second reset",
+          "href": "#practice"
         },
         "secondaryCta": {
           "label": "Meal Ideas",
@@ -2841,7 +2937,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "667e86e396c79393b8b133e31b20ea74937070a1e70609092008975ace4e346b"
+      "routeHash": "ac83ae30733af0f07297d1a6ec97341463fb82455e23a0529fea170a3c59b04a"
     },
     {
       "route": "/wellness/sleep",
@@ -2854,8 +2950,8 @@
         "title": "Better",
         "subtitle": "Gentle practices for restful, healing sleep.",
         "primaryCta": {
-          "label": "Start Sleep Journey",
-          "href": "#sleep"
+          "label": "Start 10-second reset",
+          "href": "#practice"
         },
         "secondaryCta": {
           "label": "Evening Routine",
@@ -2864,7 +2960,7 @@
       },
       "sectionsCount": 1,
       "modulesCount": 0,
-      "routeHash": "7aca5e6206cb21b5a08dfa6442ce4be4780b207c197f697fd61b34a948cf8113"
+      "routeHash": "56a5098fff27485f7ffdf97598b6699a539f98293b20cf11970ca3ab9860d70e"
     },
     {
       "route": "/wireframes",
