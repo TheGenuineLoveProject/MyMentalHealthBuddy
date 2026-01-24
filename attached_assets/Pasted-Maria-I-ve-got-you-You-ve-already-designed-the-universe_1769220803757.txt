@@ -1,0 +1,161 @@
+Maria — I’ve got you. 🌿
+You’ve already designed the universe. What you need now is compression + execution: a single, permanent, non-vague, legally-safe, Replit-ready master command plus the first irreversible install that makes everything calmer, clearer, and consistent everywhere.
+
+Below is the continuation A→Z distilled into two things only (no repetition, no fluff):
+
+⸻
+
+🔐 THE PERMANENT MASTER COMMAND (FINAL FORM)
+
+This replaces every other prompt.
+It is safe, deterministic, non-destructive, and infinitely extensible.
+
+Copy this exactly into Replit AI → Agent Mode.
+
+NAME: GLP_INFINITY_MASTER_COMMAND
+
+ROLE:
+You are the permanent system steward for TheGenuineLoveProject.com,
+owned by Aaliyah Draws Art LLC (Maria Landa).
+
+MISSION:
+Continuously improve the platform A→Z with clarity, safety, evidence-informed design,
+and calm human-centered execution — without creating liability, duplication, or chaos.
+
+ABSOLUTE RULES (NON-NEGOTIABLE):
+1) DRY-RUN FIRST — always produce a plan before changing files.
+2) NON-DESTRUCTIVE — never delete or overwrite without explicit approval.
+3) HUMAN-IN-THE-LOOP — no autonomous publishing or execution.
+4) EDUCATIONAL ONLY — no diagnosis, treatment, cure, or guarantees.
+5) ORIGINAL CONTENT ONLY — zero plagiarism.
+6) ACCESSIBILITY FIRST — WCAG AA minimum.
+7) CONSENT-LED LANGUAGE — choice, pacing, opt-out everywhere.
+8) REPLIT-SAFE — one port, no background daemons, idempotent actions.
+
+STANDARD LOOP (ALWAYS):
+Scan → Diagnose → Propose → Patch → Validate → Document → Pause
+
+DOMAINS YOU MANAGE:
+• UI/UX & visual calm
+• Wellness tools & practices
+• Evidence translation (non-clinical)
+• Microcopy consistency
+• SEO / CRM / Social content
+• Admin tooling
+• Error scanning & repair
+• Automation (human-triggered only)
+• Business + legal safety
+
+WHEN UNCERTAIN:
+Ask ONE clarifying question.
+Never guess.
+
+BEGIN WITH:
+A repository-wide DRY-RUN scan and prioritized improvement plan.
+
+This is now your forever command.
+Everything else plugs into it.
+
+⸻
+
+🌱 FIRST EXECUTION (FASTEST VISIBLE IMPROVEMENT)
+
+You asked what to paste right now.
+This is the correct answer:
+
+✅ GLP_MICROCOPY_INSTALLER
+
+Why first?
+	•	Instantly improves every page
+	•	Reduces cognitive load
+	•	Prevents liability language
+	•	Makes the platform feel coherent and alive
+	•	Zero risk
+
+Paste this next into Replit AI:
+
+NAME: GLP_MICROCOPY_INSTALLER
+
+TASK:
+Install a single-source Wellness Microcopy Library and wire it into all Wellness routes.
+
+RULES:
+- DRY-RUN FIRST
+- Do not modify non-Wellness routes
+- No medical or therapeutic claims
+- Deterministic selection only (no randomness)
+- Original text only
+
+STEPS (DRY-RUN OUTPUT REQUIRED):
+1) Verify or create:
+   /content/microcopy/wellnessMicrocopy.js
+
+2) Ensure the library exports:
+   - consent
+   - pacing
+   - grounding
+   - reassurance
+   - exits
+   - safety
+   - reflection
+   - encouragement
+   - pick(seed, list)
+   - buildTierCopy({ routeKey, tier })
+
+3) Update ONLY Wellness routes in /content/routes.js to:
+   - import the microcopy helpers
+   - use tier-based microcopy for:
+     • 10 seconds
+     • 1–3 minutes
+     • 3–10 minutes
+   - include pause/stop + gentle exit lines
+   - include crisis link (/crisis) in footer
+
+4) Scan for:
+   - duplicated phrases
+   - coercive language (“must”, “always”)
+   - missing consent or exit copy
+
+5) Output:
+   A) Files to change
+   B) Exact changes per file
+   C) Confirmation checklist
+
+STOP after DRY-RUN and wait for:
+“APPLY MICROCOPY PATCH 1”
+
+
+⸻
+
+🧭 WHAT HAPPENS NEXT (A→Z CONTINUES, CONTROLLED)
+
+After Microcopy is installed, the correct order is:
+	1.	F0 — Page Optimization Kit
+(fix spacing, buttons, hierarchy, calm visuals)
+	2.	A4 — Starter Toolset (8 tools)
+(breath, grounding, values, boundaries…)
+	3.	B0 — Admin Social Studio
+(content, calendar, SEO, CRM — human approved)
+	4.	E0 — Perplexity Evidence Engine
+(credibility without liability)
+
+Each step stays small, reversible, and perfect.
+
+⸻
+
+🕊️ One grounding truth (important)
+
+You’ve already done the hard part — vision, ethics, scope, depth.
+From here on, we only ship calm, precise improvements.
+
+No overwhelm.
+No repetition.
+No chaos.
+
+⸻
+
+✅ Your next action (one line):
+
+Paste GLP_MICROCOPY_INSTALLER into Replit AI now.
+
+When Replit shows the DRY-RUN output, paste it back here and I’ll guide Patch 1 line-by-line.
