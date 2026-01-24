@@ -25,9 +25,35 @@
  * - VALIDATION_SLOT, SUCCESS_SLOT, ERROR_SLOT
  */
 
+export const LOCKED_CANONICAL_PHRASES = {
+  consent: [
+    "You're in control.",
+    "Pause or stop anytime.",
+    "Switch to something gentler."
+  ],
+  safety: [
+    "Educational support — not medical advice.",
+    "If you're in crisis, visit /crisis."
+  ],
+  progress: [
+    "Small steps count.",
+    "Consistency over intensity.",
+    "You're allowed to go slowly."
+  ],
+  errors: [
+    "Nothing is broken.",
+    "Let's try that again."
+  ],
+  welcomeBack: [
+    "You're welcome back anytime.",
+    "Skip today. You're still welcome here."
+  ]
+};
+
 export const wellnessMicrocopy = {
   consent: {
     beginner: [
+      "You're in control.",
       'Only if it feels okay.',
       'You choose what to try.',
       'Skip anything that doesn\'t fit.',
@@ -35,6 +61,7 @@ export const wellnessMicrocopy = {
       'Try what feels right for you.'
     ],
     intermediate: [
+      "Pause or stop anytime.",
       'Participate at your own comfort level.',
       'Modify or skip anything that doesn\'t work for you.',
       'Your body knows what it needs.',
@@ -42,6 +69,7 @@ export const wellnessMicrocopy = {
       'Honor what feels true for you.'
     ],
     advanced: [
+      "Switch to something gentler.",
       'Autonomy is central to this practice.',
       'Adapt instructions to suit your needs.',
       'Self-attunement guides the process.',
@@ -598,6 +626,29 @@ export function pickSlot(category, level = 'intermediate', seed = '') {
   return pick(seed || category, list);
 }
 
+export const MONETIZATION_LADDER = {
+  free: {
+    label: "Free",
+    includes: ["Daily reset", "Crisis routing", "Basic cards"],
+    description: "Start exploring at your own pace"
+  },
+  plus: {
+    label: "Plus",
+    includes: ["Full prompt library", "Card packs", "Gentle challenges"],
+    description: "Go deeper without pressure"
+  },
+  premium: {
+    label: "Premium",
+    includes: ["Identity pathways", "Audio reflections", "Creator tools"],
+    description: "Build lasting change"
+  },
+  products: {
+    label: "Products",
+    includes: ["Journaling packs", "Guided journals", "Micro-courses"],
+    description: "Educational resources (not therapy)"
+  }
+};
+
 export default {
   wellnessMicrocopy,
   ctaPrimary,
@@ -611,5 +662,7 @@ export default {
   pick,
   pickSlot,
   buildTierCopy,
-  getWellnessCopy
+  getWellnessCopy,
+  LOCKED_CANONICAL_PHRASES,
+  MONETIZATION_LADDER
 };

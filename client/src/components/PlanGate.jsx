@@ -2,6 +2,19 @@ import { Link } from "wouter";
 import { Lock, Sparkles, ArrowRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
+const PLAN_BENEFITS = {
+  plus: {
+    label: "Plus",
+    tagline: "Go deeper without pressure",
+    includes: ["Full prompt library", "Card packs", "Gentle challenges"]
+  },
+  pro: {
+    label: "Premium",
+    tagline: "Build lasting change",
+    includes: ["Identity pathways", "Audio reflections", "Creator tools"]
+  }
+};
+
 export default function PlanGate({ 
   requiredPlan = "plus",
   feature = "this feature",
@@ -29,7 +42,8 @@ export default function PlanGate({
     return null;
   }
 
-  const planName = requiredPlan === "pro" ? "Pro" : "Plus";
+  const planInfo = PLAN_BENEFITS[requiredPlan] || PLAN_BENEFITS.plus;
+  const planName = planInfo.label;
   
   return (
     <div 
