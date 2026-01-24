@@ -90,6 +90,7 @@ import leadsRouter from "./routes/leads.mjs";
 import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
 import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import socialPostingRouter from "./routes/social-posting.mjs";
+import userRouter from "./routes/user.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import { contentRouter } from "./routes/content.mjs";
 const __filename = fileURLToPath(import.meta.url);
@@ -233,6 +234,7 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', authRouter);
 app.use('/api/auth', githubAuthRouter);
+app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/journal', journalRouter);

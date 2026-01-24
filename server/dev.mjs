@@ -91,6 +91,7 @@ import productsRouter from "./routes/products.mjs";
 import socialPostingRouter from "./routes/social-posting.mjs";
 import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
 import wellnessToolsRouter from "./routes/wellness-tools.mjs";
+import userRouter from "./routes/user.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -234,6 +235,7 @@ async function startServer() {
   app.use("/api/social-posting", socialPostingRouter);
   app.use("/api/admin/social", adminSocialStudioRouter);
   app.use("/api/wellness-tools", wellnessToolsRouter);
+  app.use("/api/user", userRouter);
 
   const SERVER_START_TIME = Date.now();
 
