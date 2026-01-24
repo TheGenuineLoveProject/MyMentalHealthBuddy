@@ -154,13 +154,13 @@ export default function App() {
                 <WellnessRoute><MoodPage /></WellnessRoute>
               </Route>
               <Route path="/state">
-                <ProtectedRoute><StatePage /></ProtectedRoute>
+                <WellnessRoute><StatePage /></WellnessRoute>
               </Route>
               <Route path="/journal">
                 <WellnessRoute><JournalPage /></WellnessRoute>
               </Route>
               <Route path="/chat">
-                <ProtectedRoute><AIChatPage /></ProtectedRoute>
+                <WellnessRoute><AIChatPage /></WellnessRoute>
               </Route>
               {/* Route renamed: /therapy → /companion (see line 243) */}
               <Route path="/ai-chat">{() => <ConfigRoute route="/ai-chat" />}</Route>
@@ -174,7 +174,7 @@ export default function App() {
                 <ProtectedRoute><Settings /></ProtectedRoute>
               </Route>
               <Route path="/wellness">
-                <ProtectedRoute><Wellness /></ProtectedRoute>
+                <WellnessRoute><Wellness /></WellnessRoute>
               </Route>
               <Route path="/premium">
                 <ProtectedRoute><Premium /></ProtectedRoute>
@@ -340,30 +340,30 @@ export default function App() {
               <Route path="/wellness/nature">{() => <ConfigRoute route="/wellness/nature" />}</Route>
               <Route path="/wellness/creativity">{() => <ConfigRoute route="/wellness/creativity" />}</Route>
 
-              {/* Wellness Tools - Interactive */}
+              {/* Wellness Tools - Interactive (Age-Gated) */}
               <Route path="/tools/values">
-                <ProtectedRoute><ValuesFinderPage /></ProtectedRoute>
+                <WellnessRoute><ValuesFinderPage /></WellnessRoute>
               </Route>
               <Route path="/tools/boundaries">
-                <ProtectedRoute><BoundariesPage /></ProtectedRoute>
+                <WellnessRoute><BoundariesPage /></WellnessRoute>
               </Route>
               <Route path="/tools/movement-snacks">
-                <ProtectedRoute><MovementSnacksPage /></ProtectedRoute>
+                <WellnessRoute><MovementSnacksPage /></WellnessRoute>
               </Route>
               <Route path="/tools/coherence">
-                <ProtectedRoute><CoherenceLadderPage /></ProtectedRoute>
+                <WellnessRoute><CoherenceLadderPage /></WellnessRoute>
               </Route>
               <Route path="/tools/perception-refinement">
-                <ProtectedRoute><PerceptionRefinementPage /></ProtectedRoute>
+                <WellnessRoute><PerceptionRefinementPage /></WellnessRoute>
               </Route>
               <Route path="/tools/nervous-system-flooding">
-                <ProtectedRoute><NervousSystemFloodingPage /></ProtectedRoute>
+                <WellnessRoute><NervousSystemFloodingPage /></WellnessRoute>
               </Route>
               <Route path="/tools/permaculture">
-                <ProtectedRoute><PermacultureWellnessPage /></ProtectedRoute>
+                <WellnessRoute><PermacultureWellnessPage /></WellnessRoute>
               </Route>
               <Route path="/tools/self-worth">
-                <ProtectedRoute><SelfWorthReflectionPage /></ProtectedRoute>
+                <WellnessRoute><SelfWorthReflectionPage /></WellnessRoute>
               </Route>
 
               {/* Additional AI Routes - Config Driven */}
