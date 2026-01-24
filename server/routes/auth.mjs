@@ -15,6 +15,7 @@ import { authRateLimit, loginRateLimit } from "../middleware/rateLimit.mjs";
 import { requireAuth } from "../middleware/requireAuth.mjs";
 
 import { logAudit, getClientIp, AUDIT_ACTIONS } from "../services/auditLog.mjs";
+import { sendWelcomeEmail } from "../services/email.mjs";
 
 const router = express.Router();
 router.use(cookieParser());
@@ -142,6 +143,10 @@ router.post("/register", authRateLimit, async (req, res) => {
       resourceId: newUser.id,
       ipAddress: getClientIp(req),
       userAgent: req.headers["user-agent"],
+    });
+
+    sendWelcomeEmail(email, name).catch(err => {
+      console.error("[Auth] Failed to send welcome email:", err);
     });
 
     const accessToken = signAccessToken(newUser);

@@ -69,7 +69,7 @@ class AuthStorage {
           updatedAt: new Date(),
         })
         .returning();
-      return user;
+      return { ...user, isNewUser: true };
     }
   }
 }
