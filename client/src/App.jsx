@@ -66,6 +66,7 @@ const SocialDashboard = lazy(() => import("./pages/admin/SocialDashboard.jsx"));
 const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
 const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
 const SocialCalendar = lazy(() => import("./pages/admin/SocialCalendar.jsx"));
+const SocialAnalytics = lazy(() => import("./pages/admin/SocialAnalytics.jsx"));
 const ValuesFinderPage = lazy(() => import("./pages/ValuesFinderPage.jsx"));
 const BoundariesPage = lazy(() => import("./pages/BoundariesPage.jsx"));
 const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
@@ -369,6 +370,9 @@ export default function App() {
               </Route>
               <Route path="/admin/social/calendar">
                 <ProtectedRoute><SocialCalendar /></ProtectedRoute>
+              </Route>
+              <Route path="/admin/social/analytics">
+                <ProtectedRoute><SocialAnalytics /></ProtectedRoute>
               </Route>
               <Route path="/content-admin">
                 <ProtectedRoute><ContentAdminDashboard /></ProtectedRoute>

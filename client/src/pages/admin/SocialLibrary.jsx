@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Plus, FileText, Trash2, BookOpen } from "lucide-react";
+import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, Sparkles } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 
@@ -46,6 +46,13 @@ export default function SocialLibrary() {
     },
   });
   
+  const seedMutation = useMutation({
+    mutationFn: () => apiRequest("POST", "/api/admin/social/templates/seed"),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/templates"] });
+    },
+  });
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.structure.trim()) return;
@@ -75,14 +82,29 @@ export default function SocialLibrary() {
             </div>
           </div>
           
-          <button
-            onClick={() => setShowForm(!showForm)}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity"
-            data-testid="button-add-template"
-          >
-            <Plus className="w-4 h-4" />
-            Add Template
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => seedMutation.mutate()}
+              disabled={seedMutation.isPending}
+              className="inline-flex items-center gap-2 px-4 py-2 border border-[var(--glp-sage)] text-[var(--glp-sage)] rounded-lg hover:bg-[var(--glp-sage-10)] transition-colors disabled:opacity-50"
+              data-testid="button-seed-templates"
+            >
+              {seedMutation.isPending ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Download className="w-4 h-4" />
+              )}
+              Load Presets
+            </button>
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity"
+              data-testid="button-add-template"
+            >
+              <Plus className="w-4 h-4" />
+              Add Template
+            </button>
+          </div>
         </div>
         
         {showForm && (

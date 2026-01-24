@@ -41,7 +41,7 @@ function StatusBadge({ status }) {
   );
 }
 
-function DraftCard({ draft, onApprove, onDelete, bulkMode, isSelected, onToggleSelect }) {
+function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected, onToggleSelect }) {
   const platform = PLATFORMS.find(p => p.id === draft.platform) || PLATFORMS[0];
   const PlatformIcon = platform.icon;
   
@@ -106,6 +106,16 @@ function DraftCard({ draft, onApprove, onDelete, bulkMode, isSelected, onToggleS
                 data-testid={`button-approve-${draft.id}`}
               >
                 Approve
+              </button>
+            )}
+            {draft.status === "approved" && (
+              <button
+                onClick={(e) => { e.stopPropagation(); onPublish?.(draft); }}
+                className="text-xs px-2 py-1 bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors flex items-center gap-1"
+                data-testid={`button-publish-${draft.id}`}
+              >
+                <Send className="w-3 h-3" />
+                Publish
               </button>
             )}
             <button
@@ -394,6 +404,9 @@ export default function SocialDashboard() {
   const [filter, setFilter] = useState("all");
   const [selectedIds, setSelectedIds] = useState([]);
   const [bulkMode, setBulkMode] = useState(false);
+  const [showPublishModal, setShowPublishModal] = useState(false);
+  const [publishDraft, setPublishDraft] = useState(null);
+  const [publishPlatforms, setPublishPlatforms] = useState([]);
   
   const { data: drafts = [], isLoading } = useQuery({
     queryKey: ["/api/admin/social/drafts"],
@@ -430,6 +443,36 @@ export default function SocialDashboard() {
       setBulkMode(false);
     },
   });
+  
+  const batchPublishMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/admin/social/publish/batch", data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+      setShowPublishModal(false);
+      setPublishDraft(null);
+      setPublishPlatforms([]);
+    },
+  });
+  
+  const handleOpenPublish = (draft) => {
+    setPublishDraft(draft);
+    setPublishPlatforms([draft.platform]);
+    setShowPublishModal(true);
+  };
+  
+  const togglePublishPlatform = (platformId) => {
+    setPublishPlatforms(prev => 
+      prev.includes(platformId) ? prev.filter(p => p !== platformId) : [...prev, platformId]
+    );
+  };
+  
+  const handleBatchPublish = () => {
+    if (!publishDraft || publishPlatforms.length === 0) return;
+    batchPublishMutation.mutate({
+      draftId: publishDraft.id,
+      platforms: publishPlatforms,
+    });
+  };
   
   const filteredDrafts = filter === "all" 
     ? drafts 
@@ -494,6 +537,14 @@ export default function SocialDashboard() {
             >
               <Calendar className="w-4 h-4" />
               Calendar
+            </Link>
+            <Link 
+              href="/admin/social/analytics"
+              className="inline-flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors"
+              data-testid="link-analytics"
+            >
+              <BarChart2 className="w-4 h-4" />
+              Analytics
             </Link>
             <button
               type="button"
@@ -593,6 +644,7 @@ export default function SocialDashboard() {
                 draft={draft}
                 onApprove={(id) => approveMutation.mutate(id)}
                 onDelete={(id) => deleteMutation.mutate(id)}
+                onPublish={handleOpenPublish}
                 bulkMode={bulkMode}
                 isSelected={selectedIds.includes(draft.id)}
                 onToggleSelect={toggleSelect}
@@ -603,6 +655,105 @@ export default function SocialDashboard() {
         
         <SafetyFooter variant="compact" className="mt-12" />
       </div>
+      
+      {showPublishModal && publishDraft && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-lg">
+            <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+                <Send className="w-5 h-5 text-purple-500" />
+                Publish to Platforms
+              </h2>
+              <button
+                onClick={() => setShowPublishModal(false)}
+                className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg transition-colors"
+              >
+                <span className="sr-only">Close</span>
+                <svg className="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <div className="p-4 space-y-4">
+              <div className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                <p className="text-sm font-medium text-purple-800 dark:text-purple-200 mb-1">
+                  {publishDraft.hook?.slice(0, 60) || "Draft Content"}
+                </p>
+                <p className="text-xs text-purple-600 dark:text-purple-300">
+                  {publishDraft.caption?.slice(0, 100)}...
+                </p>
+              </div>
+              
+              <div>
+                <p className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-3">
+                  Select platforms to publish:
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  {PLATFORMS.filter(p => p.status !== "pending").map(platform => {
+                    const isSelected = publishPlatforms.includes(platform.id);
+                    const PlatformIcon = platform.icon;
+                    
+                    return (
+                      <button
+                        key={platform.id}
+                        type="button"
+                        onClick={() => togglePublishPlatform(platform.id)}
+                        className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
+                          isSelected 
+                            ? "border-purple-500 bg-purple-50 dark:bg-purple-900/20" 
+                            : "border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700"
+                        }`}
+                        data-testid={`toggle-platform-${platform.id}`}
+                      >
+                        <div 
+                          className="w-8 h-8 rounded-lg flex items-center justify-center"
+                          style={{ backgroundColor: `${platform.color}15` }}
+                        >
+                          <PlatformIcon className="w-4 h-4" style={{ color: platform.color }} />
+                        </div>
+                        <div className="text-left">
+                          <p className="text-sm font-medium text-slate-900 dark:text-white">{platform.name}</p>
+                          {platform.handle && (
+                            <p className="text-xs text-slate-500">{platform.handle}</p>
+                          )}
+                        </div>
+                        {isSelected && (
+                          <CheckCircle className="w-5 h-5 text-purple-500 ml-auto" />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowPublishModal(false)}
+                  className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleBatchPublish}
+                  disabled={batchPublishMutation.isPending || publishPlatforms.length === 0}
+                  className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
+                  data-testid="button-confirm-publish"
+                >
+                  {batchPublishMutation.isPending ? (
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Send className="w-4 h-4" />
+                  )}
+                  Publish to {publishPlatforms.length} Platform{publishPlatforms.length !== 1 ? "s" : ""}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
