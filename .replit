@@ -41,7 +41,7 @@ NODE_ENV = "development"
 
 [agent]
 expertMode = true
-integrations = ["javascript_openai_ai_integrations:2.0.0", "stripe:2.0.0", "perplexity_v0:1.0.0", "javascript_log_in_with_replit:2.0.0", "resend:1.0.0"]
+integrations = ["javascript_openai_ai_integrations:2.0.0", "stripe:2.0.0", "perplexity_v0:1.0.0", "javascript_log_in_with_replit:2.0.0", "resend:1.0.0", "javascript_google_analytics:1.0.0", "javascript_object_storage:2.0.0", "javascript_websocket:1.0.0"]
 
 [workflows]
 runButton = "Project"

@@ -95,6 +95,9 @@ import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import userRouter from "./routes/user.mjs";
 import perplexityRouter from "./routes/perplexity.mjs";
 import emailRouter from "./routes/email.mjs";
+import adminSecurityRouter from "./routes/admin-security.mjs";
+import objectStorageRouter from "./routes/object-storage.mjs";
+import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -245,6 +248,8 @@ async function startServer() {
   app.use("/api/user", userRouter);
   app.use("/api/perplexity", perplexityRouter);
   app.use("/api/email", emailRouter);
+  app.use("/api/admin/security", adminSecurityRouter);
+  app.use("/api/uploads", objectStorageRouter);
 
   const SERVER_START_TIME = Date.now();
 
