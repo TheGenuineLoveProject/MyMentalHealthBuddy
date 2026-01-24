@@ -431,7 +431,7 @@ export const wellnessMicrocopy = {
     ],
     advanced: [
       'Data minimization guides our architecture.',
-      'Your entries are private to your account.',
+      'You control access to your entries.',
       'We never sell your personal data.',
       'Transparency about data practices is a priority.',
       'Full data export is always available.'

@@ -114,12 +114,14 @@ export default function ShareableReflectionCard({
               backgroundColor: `${themeStyles.accent}20`,
               color: themeStyles.accent 
             }}
+            data-testid="text-card-category"
           >
             {category}
           </span>
           <span 
             className="text-xs opacity-60"
             style={{ color: themeStyles.text }}
+            data-testid="text-card-date"
           >
             {date}
           </span>
@@ -128,6 +130,7 @@ export default function ShareableReflectionCard({
         <p 
           className="text-lg leading-relaxed mb-6 font-serif"
           style={{ color: themeStyles.text }}
+          data-testid="text-card-reflection"
         >
           "{truncatedReflection}"
         </p>
@@ -135,13 +138,14 @@ export default function ShareableReflectionCard({
         <div className="flex items-center justify-between pt-4 border-t" style={{ borderColor: themeStyles.border }}>
           <div className="flex items-center gap-2 opacity-60">
             <Heart className="w-4 h-4" style={{ color: themeStyles.accent }} aria-hidden="true" />
-            <span className="text-xs" style={{ color: themeStyles.text }}>
+            <span className="text-xs" style={{ color: themeStyles.text }} data-testid="text-card-url">
               {SITE_URL}
             </span>
           </div>
           <span 
             className="text-xs italic opacity-50"
             style={{ color: themeStyles.text }}
+            data-testid="text-card-cta"
           >
             {WATERMARK_CTA}
           </span>
