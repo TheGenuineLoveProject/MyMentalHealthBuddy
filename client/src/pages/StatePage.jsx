@@ -3,6 +3,7 @@ import { ArrowLeft, Info } from "lucide-react";
 import SEO from "../components/SEO";
 import { StateTracker } from "../components/state/StateTracker.tsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "../components/BenefitsBlock";
 
 const DIMENSION_INFO = [
   { name: "Energy", desc: "Physical and mental fuel available" },
@@ -41,6 +42,14 @@ export default function StatePage() {
             </div>
           </div>
         </header>
+
+        <BenefitsBlock 
+          benefit="Observe your internal state and track patterns in energy and regulation"
+          duration="1-2 minutes"
+          control="Neutral observations, no 'right' answers"
+          disclaimer="Educational wellness support only"
+          className="mb-6"
+        />
 
         <div className="mb-6 p-4 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)]">
           <div className="flex items-start gap-3">

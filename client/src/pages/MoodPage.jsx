@@ -5,6 +5,7 @@ import { ArrowLeft, Smile, Frown, Meh, Sun, Moon, Zap, Check, Sparkles } from "l
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "../components/BenefitsBlock";
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "var(--mood-happy)", bgColor: "var(--mood-happy-soft)" },
@@ -110,6 +111,14 @@ export default function MoodPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock 
+            benefit="Track emotional patterns, gain insights, and build self-awareness"
+            duration="2-3 minutes"
+            control="You choose what to share"
+            disclaimer="Educational wellness support only"
+            className="mb-8"
+          />
 
           {error && (
             <div className="mb-6 p-4 rounded-xl bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 text-[var(--accent-rose)]" role="alert" data-testid="text-error">

@@ -5,6 +5,7 @@ import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Cal
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "../components/BenefitsBlock";
 import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivationalInterviewing.js";
 
 const JOURNAL_PROMPTS = [
@@ -187,6 +188,14 @@ export default function JournalPage() {
               <span className="hidden sm:inline">New Entry</span>
             </button>
           </header>
+
+          <BenefitsBlock 
+            benefit="A private space to process thoughts and track your emotional growth"
+            duration="5-15 minutes"
+            control="Write as much or little as feels right"
+            disclaimer="Educational wellness support only"
+            className="mb-6"
+          />
 
           {/* Journal Prompts */}
           {!showForm && <JournalPrompts onSelectPrompt={handleSelectPrompt} />}
