@@ -91,6 +91,7 @@ import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
 import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import socialPostingRouter from "./routes/social-posting.mjs";
 import userRouter from "./routes/user.mjs";
+import perplexityRouter from "./routes/perplexity.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import { contentRouter } from "./routes/content.mjs";
 const __filename = fileURLToPath(import.meta.url);
@@ -316,6 +317,7 @@ app.use('/api/admin/social', adminSocialStudioRouter);
 app.use('/api/wellness-tools', wellnessToolsRouter);
 app.use('/api/social-posting', socialPostingRouter);
 app.use('/api/content', contentRouter);
+app.use('/api/perplexity', perplexityRouter);
 
 const SERVER_START_TIME = Date.now();
 

@@ -92,6 +92,7 @@ import socialPostingRouter from "./routes/social-posting.mjs";
 import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
 import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import userRouter from "./routes/user.mjs";
+import perplexityRouter from "./routes/perplexity.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -236,6 +237,7 @@ async function startServer() {
   app.use("/api/admin/social", adminSocialStudioRouter);
   app.use("/api/wellness-tools", wellnessToolsRouter);
   app.use("/api/user", userRouter);
+  app.use("/api/perplexity", perplexityRouter);
 
   const SERVER_START_TIME = Date.now();
 
