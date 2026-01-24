@@ -13,6 +13,7 @@ import { useSEO } from "@/hooks/useSEO";
 import styles from "./CommandCenter.module.css";
 
 function StatusBadge({ status }) {
+  const safeStatus = typeof status === 'string' ? status : 'healthy';
   const statusStyles = {
     healthy: styles.statusHealthy,
     warning: styles.statusWarning,
@@ -23,12 +24,12 @@ function StatusBadge({ status }) {
     warning: AlertTriangle,
     error: AlertCircle
   };
-  const Icon = icons[status] || CheckCircle;
+  const Icon = icons[safeStatus] || CheckCircle;
   
   return (
-    <span className={`${styles.statusBadge} ${statusStyles[status] || styles.statusHealthy}`}>
+    <span className={`${styles.statusBadge} ${statusStyles[safeStatus] || styles.statusHealthy}`}>
       <Icon className={styles.statusIcon} />
-      {status.charAt(0).toUpperCase() + status.slice(1)}
+      {safeStatus.charAt(0).toUpperCase() + safeStatus.slice(1)}
     </span>
   );
 }

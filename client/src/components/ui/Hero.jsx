@@ -1,10 +1,11 @@
-import { Link } from 'wouter';
+import { Button } from './Button';
 
 export function Hero({
   eyebrow,
   title,
   titleHighlight,
   subtitle,
+  helperLine,
   primaryCta,
   secondaryCta,
   className = '',
@@ -33,32 +34,38 @@ export function Hero({
         </h1>
 
         {subtitle && (
-          <p className="text-lg md:text-xl text-[var(--glp-ink)]/70 max-w-2xl mx-auto mb-8" data-testid="hero-subtitle">
+          <p className="text-lg md:text-xl text-[var(--glp-ink)]/70 max-w-2xl mx-auto mb-4" data-testid="hero-subtitle">
             {subtitle}
           </p>
         )}
 
+        {helperLine && (
+          <p className="text-sm md:text-base text-[var(--glp-sage)] italic max-w-xl mx-auto mb-8" data-testid="hero-helper-line">
+            {helperLine}
+          </p>
+        )}
+
         {(primaryCta || secondaryCta) && (
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
             {primaryCta && (
-              <Link href={primaryCta.href}>
-                <a
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-xl bg-[var(--glp-sage-deep)] text-white hover:bg-[var(--glp-teal-600)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 transition-colors motion-safe:transition-transform motion-safe:hover:scale-[1.02]"
-                  data-testid="hero-primary-cta"
-                >
-                  {primaryCta.label}
-                </a>
-              </Link>
+              <Button
+                href={primaryCta.href}
+                variant="primary"
+                size="md"
+                data-testid="hero-primary-cta"
+              >
+                {primaryCta.label}
+              </Button>
             )}
             {secondaryCta && (
-              <Link href={secondaryCta.href}>
-                <a
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-xl border-2 border-[var(--glp-sage-deep)] text-[var(--glp-sage-deep)] hover:bg-[var(--glp-sage-10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 transition-colors"
-                  data-testid="hero-secondary-cta"
-                >
-                  {secondaryCta.label}
-                </a>
-              </Link>
+              <Button
+                href={secondaryCta.href}
+                variant="secondary"
+                size="md"
+                data-testid="hero-secondary-cta"
+              >
+                {secondaryCta.label}
+              </Button>
             )}
           </div>
         )}
