@@ -63,32 +63,43 @@ const REFRAME_PRACTICES = [
   {
     old: "Am I stupid?",
     new: "I am overwhelmed, not unintelligent.",
-    guidance: "Say it slowly. Even if you don't believe it yet. Repetition rewires."
+    guidance: "Say it slowly. Even if you don't believe it yet.",
+    primary: true
   },
   {
     old: "Why can't I figure this out?",
     new: "My nervous system is in protection mode. Clarity will return.",
-    guidance: "Clarity requires calm. You can't think clearly while your body is bracing."
+    guidance: "Clarity requires calm. You can't think clearly while your body is bracing.",
+    primary: false
   },
   {
     old: "Everyone else seems to handle things better.",
     new: "I'm carrying invisible weight. I don't know what others are carrying either.",
-    guidance: "Comparison without context is always unfair — especially to yourself."
+    guidance: "Comparison without context is always unfair — especially to yourself.",
+    primary: false
   },
   {
     old: "I should know better by now.",
     new: "Healing isn't linear. Today I'm doing what I can.",
-    guidance: "Knowledge and capacity are different things. You can know something and still struggle."
+    guidance: "Knowledge and capacity are different things. You can know something and still struggle.",
+    primary: false
   }
 ];
 
 const SIGNS_OF_INTELLIGENCE = [
-  { text: "Questioning yourself deeply", icon: Brain },
-  { text: "Reflecting on patterns of behavior", icon: RefreshCw },
-  { text: "Caring about integrity and truth", icon: Shield },
-  { text: "Trying to understand why things happened", icon: Lightbulb },
-  { text: "Worrying about the impact of your words", icon: MessageCircle },
-  { text: "Seeking growth and understanding", icon: Sparkles }
+  { text: "Question themselves this deeply", icon: Brain },
+  { text: "Reflect on patterns of behavior", icon: RefreshCw },
+  { text: "Care about integrity and truth", icon: Shield },
+  { text: "Try to understand why things happened", icon: Lightbulb },
+  { text: "Worry about the impact of their words and actions", icon: MessageCircle }
+];
+
+const WHAT_I_SEE = [
+  { text: "Perceptive", icon: Eye },
+  { text: "Thoughtful", icon: Brain },
+  { text: "Morally serious", icon: Shield },
+  { text: "Emotionally intelligent", icon: Heart },
+  { text: "Trying very hard to be accurate and good", icon: Sparkles }
 ];
 
 export default function SelfWorthReflectionPage() {
@@ -114,35 +125,55 @@ export default function SelfWorthReflectionPage() {
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-[var(--surface-elevated)] p-6 rounded-2xl border border-[var(--border-subtle)] mb-8" data-testid="section-intro">
-            <div className="flex items-start gap-4">
-              <div className="p-3 rounded-xl bg-violet-100 dark:bg-violet-900/30">
-                <Heart className="w-6 h-6 text-violet-600 dark:text-violet-400" />
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2" data-testid="heading-intro">
-                  This is about self-doubt, not truth
-                </h2>
-                <p className="text-[var(--text-secondary)] leading-relaxed" data-testid="text-intro">
-                  When someone grows up being punished for noticing, understanding, and telling the truth, 
-                  their brain learns a protective shortcut: "If I'm hurting this much, maybe I'm the problem." 
-                  That belief was protective then. It's not accurate now.
-                </p>
-              </div>
+          <div className="bg-violet-50 dark:bg-violet-900/20 p-6 rounded-2xl border border-violet-200 dark:border-violet-800 mb-8" data-testid="section-intro">
+            <p className="text-2xl font-bold text-violet-800 dark:text-violet-200 mb-4" data-testid="text-answer">
+              No. You are not stupid.
+            </p>
+            <p className="text-[var(--text-secondary)] leading-relaxed" data-testid="text-intro">
+              And I want to answer this in a way that really lands, not just comfort-talk.
+            </p>
+          </div>
+
+          <div className="bg-[var(--surface-elevated)] p-6 rounded-2xl border border-[var(--border-subtle)] mb-8" data-testid="section-why">
+            <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4" data-testid="heading-why">
+              Why this question is coming up now
+            </h2>
+            <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
+              When someone grows up being punished for noticing, understanding, naming patterns, and telling the truth — 
+              their brain learns a shortcut:
+            </p>
+            <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 mb-4">
+              <p className="text-amber-800 dark:text-amber-200 italic">
+                "If I'm hurting this much, maybe I'm stupid."
+              </p>
             </div>
+            <p className="text-[var(--text-secondary)] leading-relaxed mb-2">
+              That belief is protective, not accurate.
+            </p>
+            <p className="text-[var(--text-secondary)] leading-relaxed mb-4">
+              It shifts blame away from the people who hurt you and puts it on you, because as a child that felt safer.
+            </p>
+            <p className="text-[var(--text-primary)] font-medium">
+              So this question isn't really about intelligence. It's about self-doubt born from abuse.
+            </p>
           </div>
 
           <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 rounded-xl p-4 mb-8" data-testid="safety-note">
             <div className="flex items-start gap-3">
               <Phone className="w-5 h-5 text-rose-600 dark:text-rose-400 mt-0.5 flex-shrink-0" />
               <div>
-                <h3 className="font-medium text-rose-800 dark:text-rose-200 mb-1">
-                  If this feels intense
-                </h3>
-                <p className="text-sm text-rose-700 dark:text-rose-300">
-                  If this conversation starts to feel too intense or destabilizing, it's important to loop in 
-                  live human support. In the U.S., call or text <strong>988</strong> for immediate, calm support. 
-                  You don't have to figure this out all at once.
+                <p className="text-sm text-rose-700 dark:text-rose-300 mb-2">
+                  If at any point this conversation starts to feel too intense, confusing, or destabilizing, 
+                  it's really important to loop in live human support — not because you're weak, but because 
+                  what you went through was real.
+                </p>
+                <p className="text-sm text-rose-700 dark:text-rose-300 mb-2">
+                  If you're in the U.S., you can call or text <strong>988</strong> for immediate, calm support. 
+                  They are there for moments of emotional overload like this.
+                </p>
+                <p className="text-sm text-rose-800 dark:text-rose-200 font-medium">
+                  You don't have to figure this out all at once. And you don't have to define yourself by a 
+                  question that came from pain.
                 </p>
               </div>
             </div>
@@ -157,25 +188,55 @@ export default function SelfWorthReflectionPage() {
             </div>
           )}
 
-          <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4 flex items-center gap-2" data-testid="heading-signs">
-            <Brain className="w-5 h-5 text-violet-500" />
-            Signs of Intelligence You Already Show
-          </h3>
+          <div className="bg-[var(--surface-elevated)] p-6 rounded-2xl border border-[var(--border-subtle)] mb-8" data-testid="section-people-who">
+            <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4" data-testid="heading-signs">
+              People who are stupid do not:
+            </h3>
+            <div className="space-y-3">
+              {SIGNS_OF_INTELLIGENCE.map((sign, idx) => {
+                const Icon = sign.icon;
+                return (
+                  <div 
+                    key={idx}
+                    className="p-3 rounded-xl bg-[var(--surface-secondary)] flex items-center gap-3"
+                    data-testid={`card-sign-${idx}`}
+                  >
+                    <Icon className="w-5 h-5 text-violet-500 flex-shrink-0" />
+                    <span className="text-[var(--text-primary)]">{sign.text}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="mt-4 text-[var(--text-primary)] font-medium">
+              What you're doing right now is meta-thinking — thinking about thinking. That takes intelligence.
+            </p>
+          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-10">
-            {SIGNS_OF_INTELLIGENCE.map((sign, idx) => {
-              const Icon = sign.icon;
-              return (
-                <div 
-                  key={idx}
-                  className="p-4 rounded-xl bg-[var(--surface-elevated)] border border-[var(--border-subtle)] flex items-center gap-3"
-                  data-testid={`card-sign-${idx}`}
-                >
-                  <Icon className="w-5 h-5 text-violet-500 flex-shrink-0" />
-                  <span className="text-sm text-[var(--text-primary)]">{sign.text}</span>
-                </div>
-              );
-            })}
+          <div className="bg-emerald-50 dark:bg-emerald-900/20 p-6 rounded-2xl border border-emerald-200 dark:border-emerald-800 mb-10" data-testid="section-what-i-see">
+            <h3 className="text-lg font-medium text-emerald-800 dark:text-emerald-200 mb-4" data-testid="heading-what-i-see">
+              Let me reflect what I actually see
+            </h3>
+            <p className="text-emerald-700 dark:text-emerald-300 mb-4">I see someone who is:</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+              {WHAT_I_SEE.map((quality, idx) => {
+                const Icon = quality.icon;
+                return (
+                  <div 
+                    key={idx}
+                    className="p-3 rounded-xl bg-white/50 dark:bg-emerald-900/30 flex items-center gap-2"
+                    data-testid={`card-quality-${idx}`}
+                  >
+                    <Icon className="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                    <span className="text-sm text-emerald-800 dark:text-emerald-200">{quality.text}</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="pt-4 border-t border-emerald-200 dark:border-emerald-700">
+              <p className="text-emerald-800 dark:text-emerald-200 font-medium">
+                The problem is not your mind. It's that your mind has been carrying too much alone for too long.
+              </p>
+            </div>
           </div>
 
           <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4 flex items-center gap-2" data-testid="heading-truths">
@@ -275,10 +336,13 @@ export default function SelfWorthReflectionPage() {
             </div>
           </div>
 
-          <h3 className="text-lg font-medium text-[var(--text-primary)] mb-4 flex items-center gap-2" data-testid="heading-reframes">
+          <h3 className="text-lg font-medium text-[var(--text-primary)] mb-2 flex items-center gap-2" data-testid="heading-reframes">
             <RefreshCw className="w-5 h-5 text-emerald-500" />
-            Reframe the Self-Attack
+            One sentence to replace the self-attack
           </h3>
+          <p className="text-[var(--text-secondary)] mb-4">
+            When "Am I stupid?" comes up, try:
+          </p>
 
           <div className="space-y-4 mb-10">
             {REFRAME_PRACTICES.map((reframe, idx) => {
@@ -381,35 +445,13 @@ export default function SelfWorthReflectionPage() {
             )}
           </div>
 
-          <div className="bg-violet-50 dark:bg-violet-900/20 rounded-2xl border border-violet-200 dark:border-violet-800 p-6" data-testid="section-closing">
-            <h3 className="font-semibold text-violet-800 dark:text-violet-200 mb-3 flex items-center gap-2">
-              <Sparkles className="w-5 h-5" />
-              What I See in You
-            </h3>
-            <ul className="space-y-2 text-violet-700 dark:text-violet-300 mb-4">
-              <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Someone who is perceptive</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Someone who is thoughtful</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Someone who is morally serious</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Someone who is emotionally intelligent</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Someone trying very hard to be accurate and good</span>
-              </li>
-            </ul>
-            <p className="text-violet-800 dark:text-violet-200 font-medium text-center italic">
-              "You don't need to be refined into something else. You need to be supported into balance."
+          <div className="bg-violet-50 dark:bg-violet-900/20 rounded-2xl border border-violet-200 dark:border-violet-800 p-6 text-center" data-testid="section-closing">
+            <Heart className="w-10 h-10 text-violet-500 mx-auto mb-4" />
+            <p className="text-2xl font-bold text-violet-800 dark:text-violet-200 mb-2">
+              I'm here with you.
+            </p>
+            <p className="text-xl text-violet-700 dark:text-violet-300">
+              You're not stupid.
             </p>
           </div>
         </div>
