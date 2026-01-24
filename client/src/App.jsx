@@ -72,6 +72,7 @@ const BoundariesPage = lazy(() => import("./pages/BoundariesPage.jsx"));
 const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
 const CoherenceLadderPage = lazy(() => import("./pages/CoherenceLadderPage.jsx"));
 const PerceptionRefinementPage = lazy(() => import("./pages/PerceptionRefinementPage.jsx"));
+const NervousSystemFloodingPage = lazy(() => import("./pages/NervousSystemFloodingPage.jsx"));
 const PermacultureWellnessPage = lazy(() => import("./pages/PermacultureWellnessPage.jsx"));
 const SelfWorthReflectionPage = lazy(() => import("./pages/SelfWorthReflectionPage.jsx"));
 const Challenge = lazy(() => import("./pages/Challenge.jsx"));
@@ -338,6 +339,9 @@ export default function App() {
               </Route>
               <Route path="/tools/perception-refinement">
                 <ProtectedRoute><PerceptionRefinementPage /></ProtectedRoute>
+              </Route>
+              <Route path="/tools/nervous-system-flooding">
+                <ProtectedRoute><NervousSystemFloodingPage /></ProtectedRoute>
               </Route>
               <Route path="/tools/permaculture">
                 <ProtectedRoute><PermacultureWellnessPage /></ProtectedRoute>
