@@ -155,6 +155,7 @@ const TOOL_CATEGORIES = {
     tools: [
       { id: "crisis", name: "Crisis Stabilizer", icon: Shield, color: "from-rose-500 to-pink-600" },
       { id: "somatic", name: "Somatic Release", icon: Activity, color: "from-violet-400 to-purple-500" },
+      { id: "perception", name: "Perception Refinement", icon: Eye, color: "from-teal-400 to-cyan-500", link: "/tools/perception-refinement" },
       { id: "sleepsanctuary", name: "Sleep Sanctuary", icon: Moon, color: "from-indigo-500 to-purple-600" },
       { id: "rituals", name: "Morning/Evening Rituals", icon: Sunrise, color: "from-amber-400 to-orange-500" },
       { id: "laughter", name: "Laughter Therapy", icon: Smile, color: "from-yellow-400 to-orange-500" },
@@ -372,6 +373,20 @@ export default function Wellness() {
                           {category.tools.map((tool) => {
                             const ToolIcon = tool.icon;
                             const isToolActive = activeTool === tool.id;
+                            
+                            if (tool.link) {
+                              return (
+                                <Link
+                                  key={tool.id}
+                                  href={tool.link}
+                                  className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all hover:bg-[var(--surface)] text-[var(--text-secondary)]`}
+                                  data-testid={`button-tool-${tool.id}`}
+                                >
+                                  <ToolIcon className="w-4 h-4" />
+                                  <span className="text-sm">{tool.name}</span>
+                                </Link>
+                              );
+                            }
                             
                             return (
                               <button
