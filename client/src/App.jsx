@@ -73,6 +73,7 @@ const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
 const CoherenceLadderPage = lazy(() => import("./pages/CoherenceLadderPage.jsx"));
 const PerceptionRefinementPage = lazy(() => import("./pages/PerceptionRefinementPage.jsx"));
 const PermacultureWellnessPage = lazy(() => import("./pages/PermacultureWellnessPage.jsx"));
+const SelfWorthReflectionPage = lazy(() => import("./pages/SelfWorthReflectionPage.jsx"));
 const Challenge = lazy(() => import("./pages/Challenge.jsx"));
 const ChallengeDay = lazy(() => import("./pages/ChallengeDay.jsx"));
 
@@ -340,6 +341,9 @@ export default function App() {
               </Route>
               <Route path="/tools/permaculture">
                 <ProtectedRoute><PermacultureWellnessPage /></ProtectedRoute>
+              </Route>
+              <Route path="/tools/self-worth">
+                <ProtectedRoute><SelfWorthReflectionPage /></ProtectedRoute>
               </Route>
 
               {/* Additional AI Routes - Config Driven */}
