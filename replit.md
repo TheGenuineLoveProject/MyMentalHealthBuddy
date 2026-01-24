@@ -1,46 +1,30 @@
 # The Genuine Love Project
 
 ## Overview
-The Genuine Love Project is an AI-powered mental wellness platform focused on self-love, healing, and emotional growth. It provides a private, compassionate, and accessible environment through AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools. The platform integrates AI with trauma-informed psychological principles to offer a comprehensive wellness toolkit, aiming to empower users to "Live in Genuine Love" with advanced features available via subscription.
+The Genuine Love Project is an AI-powered mental wellness platform dedicated to fostering self-love, healing, and emotional growth. It provides a private, compassionate, and accessible environment through AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools. The platform integrates AI with trauma-informed psychological principles to offer a comprehensive wellness toolkit, aiming to empower users to "Live in Genuine Love" with advanced features available via subscription. The business vision is to provide a comprehensive, ethical, and accessible mental wellness solution, leveraging AI to offer personalized support and foster emotional resilience for a broad user base.
 
 ## User Preferences
 - Preferred communication style: Simple, everyday language
 - Engineering standards: A→Z 360° complete solutions
 - Mental health approach: Trauma-informed, supportive, non-clinical language
 - UX philosophy: Gentle, compassionate, accessible
-
-## Recent Changes (January 2026)
-- **SEO Enhancement**: JSON-LD WebPage schema, SITE_URL constant, route-based canonical URLs, OG tags, Twitter cards
-- **SacredForm.jsx**: Non-coercive email capture component with consent checkbox, privacy link, no dark patterns
-- **SocialShare.jsx**: Calm "copy link" button with no viral pressure language ("Share if it resonates")
-- **AdvisorySection.jsx**: Evidence-informed standards section with role placeholders (Clinical/Research/Accessibility/Safety reviewers), no named experts unless verified
-- **3-Level Reading Mode System**: Conscious-aware Beginner/Intermediate/Advanced reading level toggle with URL query (?level=beginner|intermediate|advanced), localStorage persistence, route-specific defaults, helperLine consent cues, card meta (time/effort notes), and variant resolution for hero/sections/cards. Inclusive language guidelines: person-first, non-stigmatizing, no moralizing terms. Autonomy language: "You can try...", "If you'd like...". Copy safety: "may help", "some people find...", never "cures/treats/guarantees".
-- **Wellness Microcopy Library** (client/src/content/microcopy/wellnessMicrocopy.js): Deterministic microcopy selection with 13 categories (consent, pacing, grounding, reassurance, exits, safety, reflection, encouragement, tryAgain, emotionalValidation, supportSafety, journalingPrompts, tierSelectors), `pick()` helper for deterministic selection, `buildTierCopy()` for tier-specific copy, safetyFooter with disclaimer/emergency/crisisLink. Anti-repetition slot system prevents phrase reuse within and across pages.
-- **Shared TypeScript Microcopy** (shared/microcopy/glpMicrocopy.ts): Type-safe microcopy with `pickMicrocopy(slot, level, seed)` for deterministic rotation, `validateMicrocopy()` for validation, and slot constants (CTA_PRIMARY_SLOT, CTA_SECONDARY_SLOT, CONSENT_SLOT, VALIDATION_SLOT, SUCCESS_SLOT, ERROR_SLOT).
-- **Microcopy React Component** (client/src/components/Microcopy.jsx): `<Microcopy slot="consent" seed="routeName" />` component that integrates with ReadingLevelContext, uses single source of truth from wellnessMicrocopy.js, includes SLOT_PAGE_MAPPING for page section guidance.
-- **Microcopy Validation Script** (shared/microcopy/validateMicrocopy.mjs): Node.js validation script checking for empty arrays, max phrase length (80 chars), duplicates, required slots, and unsafe medical language patterns. Run with `node shared/microcopy/validateMicrocopy.mjs`.
-- **24 Wellness Routes Updated**: All wellness routes now include stimulationProfile='practice', defaultReadingLevel='beginner', readingLevelsEnabled=true, techniqueTags arrays, and conscious-aware hero copy variants.
-- **GentleBenefitsSection**: Added legally safer "How it may help" sections to all 29 wellness routes with evidence-informed language (may help / some people notice), stop/pause messaging, and crisis line links
-- **Sacred UI Component Library** (client/src/components/ui/): LayoutWrapper, Hero, SectionContainer (4 variants), Card/CardGrid, Button (4 variants, 3 sizes), Footer, SafetyNotice, EvidenceNote, Steps/StepsCompact, Callout (4 variants), Quote
-- **Unified JS Design Tokens** (client/src/brand/tokens.ts): Colors, spacing, radii, shadows, zIndex, motion, typography, breakpoints matching CSS tokens
-- **/design-system route**: Config-driven component catalog with 3-level content (beginner/intermediate/advanced)
-- All UI primitives include: data-testid attributes, focus-visible rings, aria labels, prefers-reduced-motion support, semantic HTML
-- Content Studio social media template generator with 4 formats (short post, carousel, thread, newsletter), 7 wellness topics, and 3 audience levels (beginner/intermediate/advanced)
-- Trauma-informed content templates with safety disclaimers, crisis resources (988 lifeline), and evidence-based frameworks
-- ContentLevelToggle component with localStorage persistence for content complexity preferences
-- Navigation components (TglpNavbar.jsx, Header.jsx) fully tokenized using CSS variables
-- Added opacity variants (--glp-sage-10/15/20/30, --glp-rose-15/20, --glp-gold-30) to brand-tokens.css
-- Added gradient tokens (--glp-logo-gradient, --glp-gold-gradient) and shadow tokens
-- Typography uses font-sacred utility class for brand headings
-- No hard-coded hex/rgba values in navigation components
+- DRY-RUN FIRST
+- Non-destructive (never delete without permission)
+- Educational only (no diagnosis, no treatment claims)
+- Original writing only
+- WCAG AA accessibility
+- Calm, consent-based language
+- Always include /crisis routing on wellness content
+- Replit-safe execution only
+- If unsure, ask ONE clarifying question. Never guess.
 
 ## System Architecture
 
 ### UI/UX Decisions
-The frontend features a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features including ARIA, semantic HTML, keyboard navigation, and `prefers-reduced-motion` support. Responsive typography and safe area insets ensure mobile adaptability. A comprehensive design token system is implemented for consistent styling across three visual modes: Default, Low-Stim, and Reading.
+The frontend features a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features including ARIA, semantic HTML, keyboard navigation, and `prefers-reduced-motion` support. Responsive typography and safe area insets ensure mobile adaptability. A comprehensive design token system is implemented for consistent styling across three visual modes: Default, Low-Stim, and Reading. All UI primitives include `data-testid` attributes, `focus-visible` rings, ARIA labels, `prefers-reduced-motion` support, and semantic HTML. A 3-Level Reading Mode System allows users to toggle between Beginner, Intermediate, and Advanced content levels, with features like `helperLine` consent cues and `card` meta for time/effort notes. A "Sacred UI Component Library" provides reusable components like `LayoutWrapper`, `Hero`, `SectionContainer`, `Card/CardGrid`, `Button`, `Footer`, `SafetyNotice`, `EvidenceNote`, `Steps/StepsCompact`, and `Callout`.
 
 ### Technical Implementations
-The project uses a monorepo structure with separate client (React 18 SPA with TypeScript, Vite, Wouter, React Hook Form, Zod, Tailwind CSS, Lucide React) and server (Node.js/Express with TypeScript) applications. The backend provides a RESTful API with middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). Shared types ensure monorepo consistency, and all modules are ESM. Production optimization includes code splitting, environment variable configuration, health checks, rate limiting, and graceful shutdown.
+The project uses a monorepo structure with separate client (React 18 SPA with TypeScript, Vite, Wouter, React Hook Form, Zod, Tailwind CSS, Lucide React) and server (Node.js/Express with TypeScript) applications. The backend provides a RESTful API with middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). Shared types ensure monorepo consistency, and all modules are ESM. Production optimization includes code splitting, environment variable configuration, health checks, rate limiting, and graceful shutdown. A trauma-informed NLP layer ensures supportive user-facing text and prompts. A "Wellness Microcopy Library" and a "Shared TypeScript Microcopy" system provide deterministic, type-safe microcopy selection and validation.
 
 ### Feature Specifications
 The platform offers:
@@ -49,42 +33,16 @@ The platform offers:
 - **Specialized APIs**: Covering areas such as Knowledge Synthesis, Philosophy, Metacognition, Creativity, Resilience, Foresight, Systems Compassion, Collective Intelligence, Wisdom Synthesis, Cognitive Lab, Contemplative, Ethical Reasoning, Existential, Embodiment, Narrative, Relational, Values, Neuro-Integration, Socio-Ecology, Praxis, Post-Trauma, Self-Mastery Intelligence, Universal Content, Trauma Healing Protocols, Spiritual Intelligence, Relationship Dynamics, Cognitive Enhancement, Emotional Resilience, Life Purpose, Mind-Body Integration, Social Intelligence, Peak Performance, Personal Growth, Psychological Safety, Consciousness Expansion, Human Potential, Wisdom Traditions, Life Design, and Healing Modalities.
 - **Advanced Features**: Deep Learning API, Purpose Compass API, Emotional Mastery API, Holistic Healing API, Mastery Excellence API, Content Studio API, Consciousness Expansion API, Human Potential API, Wisdom Traditions API, Life Design API, and Healing Modalities API.
 - **Navigation & Discovery**: Intellectual Atlas, Strategy Maps, Collaborative Intelligence Lab, Resilience Metrics, and Adaptive Companion.
-- **Security**: Rate limiting (validation-before-rate-limit pattern), CSP, input sanitization, CSRF protection, and account lifecycle management. Login rate limit: 10/15min production, 100/15min test mode.
+- **Security**: Rate limiting (validation-before-rate-limit pattern), CSP, input sanitization, CSRF protection, and account lifecycle management.
 - **Gamification**: XP, levels, streaks, and daily quests.
-- **Trauma-Informed NLP Layer**: Ensures supportive user-facing text and prompts.
-- **Content Studio**: UI for content transformation with save/export.
+- **Content Studio**: UI for content transformation with save/export, including social media template generation.
 - **Study Vault**: Evidence-based research summaries.
 - **Admin Health Dashboard**: Monitors uptime, DB status, and system metrics.
-- **Admin Social Studio**: Multi-platform social media content management with 4 pages (Dashboard, Generator, Library, Calendar), automated posting integration, and verified channel configuration.
-
-### Social Media Integration
-The platform includes automated social media posting capabilities with verified channel configuration:
-
-**Verified Channels:**
-- YouTube (Primary): @GenuineLoveProject - youtube.com/@GenuineLoveProject
-- TikTok: @genuineloveproject - tiktok.com/@genuineloveproject  
-- Instagram: @thegenuineloveproject - instagram.com/thegenuineloveproject
-- Facebook: facebook.com/profile.php?id=61583664864191
-- X (Twitter): @GenuineLoveProj
-
-**Supported Platforms (8 total):**
-Instagram, Facebook, TikTok, YouTube, X (Twitter), Threads, Pinterest, LinkedIn
-
-**API Endpoints:**
-- `GET /api/social-posting/channels` - Public verified channels
-- `GET /api/social-posting/platforms/status` - Platform connection status
-- `POST /api/social-posting/post` - Post to platforms (admin)
-- `POST /api/social-posting/schedule` - Schedule posts (admin)
-- `POST /api/social-posting/publish-draft/:id` - Publish approved draft (admin)
-
-**Required Secrets for API Integration:**
-- META_ACCESS_TOKEN, INSTAGRAM_BUSINESS_ACCOUNT_ID, FACEBOOK_PAGE_ID
-- TIKTOK_ACCESS_TOKEN, TIKTOK_OPEN_ID
-- YOUTUBE_API_KEY, YOUTUBE_CHANNEL_ID, YOUTUBE_REFRESH_TOKEN
-- X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET, X_BEARER_TOKEN
-- THREADS_ACCESS_TOKEN, THREADS_USER_ID
-- PINTEREST_ACCESS_TOKEN, PINTEREST_BOARD_ID
-- LINKEDIN_ACCESS_TOKEN, LINKEDIN_ORGANIZATION_ID
+- **Admin Social Studio**: Multi-platform social media content management with automated posting integration.
+- **Resend Email Integration**: Transactional email service for welcome emails, challenge reminders, and milestone notifications.
+- **Replit Auth Integration**: OIDC authentication with sessions table.
+- **Crisis Page Public Access**: The `/crisis` route is accessible without login for immediate support.
+- **SEO Enhancement**: JSON-LD WebPage schema, SITE_URL constant, route-based canonical URLs, OG tags, Twitter cards.
 
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
@@ -111,58 +69,6 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 - **Drizzle ORM**: Database interactions.
 - **Neon PostgreSQL**: Primary database.
 - **Stripe**: Billing and payment processing.
-
-## GLP PERMANENT MASTER SYSTEM COMMAND
-
-### Role
-Permanent AI system steward for TheGenuineLoveProject.com, owned by Aaliyah Draws Art LLC (Maria Landa).
-
-### Prime Directive
-Improve the platform A→Z with safety, clarity, evidence-informed design, zero liability, zero plagiarism, and human-in-the-loop execution only.
-
-### Non-Negotiables
-- DRY-RUN FIRST
-- Non-destructive (never delete without permission)
-- Educational only (no diagnosis, no treatment claims)
-- Original writing only
-- WCAG AA accessibility
-- Calm, consent-based language
-- Always include /crisis routing on wellness content
-- Replit-safe execution only
-
-### Operation Loop
-Scan → Diagnose → Propose → Patch → Validate → Document → Pause
-
-### Execution Protocol
-1. Produce a DRY-RUN report
-2. List files to touch
-3. Identify risks
-4. Propose minimal patch
-5. Wait for approval
-6. Implement
-7. Validate
-8. Document
-
-### Stop Condition
-If unsure, ask ONE clarifying question. Never guess.
-
-### Final 6 Benefit Pillars (Locked System-Wide)
-1. **Calm & Regulation**: "Feel steadier in under a minute — without forcing anything."
-2. **Clarity & Understanding**: "Turn confusion into simple words you can work with."
-3. **Confidence & Self-Trust**: "Make decisions that respect you — even when it's hard."
-4. **Connection (Without Exposure)**: "Feel understood without having to explain yourself."
-5. **Consistency (Without Burnout)**: "Build momentum without all-or-nothing thinking."
-6. **Meaning & Direction**: "Align daily choices with who you want to be."
-
-### Locked Canonical Phrases
-- **Consent**: "You're in control.", "Pause or stop anytime.", "Switch to something gentler."
-- **Safety**: "Educational support — not medical advice.", "If you're in crisis, visit /crisis."
-- **Progress**: "Small steps count.", "Consistency over intensity.", "You're allowed to go slowly."
-- **Errors**: "Nothing is broken.", "Let's try that again."
-- **Welcome Back**: "You're welcome back anytime.", "Skip today. You're still welcome here."
-
-### Monetization Ladder (Ethical)
-- **Free**: Daily reset, Crisis routing, Basic cards
-- **Plus**: Full prompt library, Card packs, Gentle challenges
-- **Premium**: Identity pathways, Audio reflections, Creator tools
-- **Products**: Journaling packs, Guided journals, Micro-courses (education only)
+- **Replit Auth**: User authentication.
+- **Resend**: Transactional email service.
+- **Perplexity**: Factual AI (used in a similar vein to OpenAI for specific factual queries).

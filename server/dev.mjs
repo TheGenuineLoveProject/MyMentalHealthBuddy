@@ -94,6 +94,7 @@ import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
 import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import userRouter from "./routes/user.mjs";
 import perplexityRouter from "./routes/perplexity.mjs";
+import emailRouter from "./routes/email.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
 const app = express();
@@ -243,6 +244,7 @@ async function startServer() {
   app.use("/api/wellness-tools", wellnessToolsRouter);
   app.use("/api/user", userRouter);
   app.use("/api/perplexity", perplexityRouter);
+  app.use("/api/email", emailRouter);
 
   const SERVER_START_TIME = Date.now();
 
