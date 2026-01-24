@@ -137,6 +137,163 @@ const BLOG_ARTICLES = [
     categoryColor: "gold",
     icon: PenTool,
   },
+  {
+    id: "understanding-nervous-system",
+    title: "Understanding Your Nervous System: A Guide to Regulation",
+    excerpt: "Learn how your nervous system responds to stress and discover simple practices to help yourself feel safer and more grounded in daily life.",
+    content: `
+      <p>Have you ever wondered why your heart races before a difficult conversation? Or why you freeze when you feel overwhelmed? Your nervous system is constantly working to keep you safe—and understanding it can transform how you navigate life's challenges.</p>
+      
+      <h3>The Autonomic Nervous System</h3>
+      <p>Your autonomic nervous system operates largely outside your conscious control, managing vital functions like heart rate, breathing, and digestion. It has three main states:</p>
+      
+      <p><strong>1. Ventral Vagal (Safe & Social)</strong></p>
+      <p>When you feel safe, your system allows you to connect, think clearly, and engage with others. Your breathing is easy, your face is expressive, and you can access creativity and problem-solving.</p>
+      
+      <p><strong>2. Sympathetic (Fight or Flight)</strong></p>
+      <p>When you perceive danger, your body mobilizes energy: heart racing, muscles tensing, breath quickening. This prepares you to fight or flee. While protective, chronic activation leads to anxiety and exhaustion.</p>
+      
+      <p><strong>3. Dorsal Vagal (Freeze or Shutdown)</strong></p>
+      <p>When threat feels overwhelming, your system may immobilize you—creating feelings of numbness, disconnection, or collapse. This ancient response can feel confusing but was designed to protect you.</p>
+      
+      <h3>Signs of Dysregulation</h3>
+      <ul>
+        <li>Difficulty calming down after stress</li>
+        <li>Feeling "on edge" even when safe</li>
+        <li>Numbness or disconnection from your body</li>
+        <li>Startling easily at sounds or movements</li>
+        <li>Difficulty sleeping or constant fatigue</li>
+      </ul>
+      
+      <h3>Simple Regulation Practices</h3>
+      
+      <p><strong>Physiological Sigh</strong></p>
+      <p>Inhale through your nose, then take a second small inhale to fully fill your lungs. Exhale slowly through your mouth. This activates your calming system within seconds.</p>
+      
+      <p><strong>Cold Water on Wrists</strong></p>
+      <p>Running cold water over your wrists or splashing your face activates the dive reflex, quickly calming your heart rate.</p>
+      
+      <p><strong>Grounding Through the Senses</strong></p>
+      <p>Name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell, and 1 you can taste. This anchors you in the present moment.</p>
+      
+      <p>Your nervous system learned to protect you based on your experiences. With patience and practice, you can help it learn new patterns of safety.</p>
+    `,
+    author: "The Genuine Love Team",
+    date: "January 23, 2026",
+    readTime: "9 min read",
+    category: "Education",
+    categoryColor: "sage",
+    icon: BookOpen,
+  },
+  {
+    id: "boundaries-self-love",
+    title: "Boundaries as an Act of Self-Love",
+    excerpt: "Discover how setting healthy boundaries protects your energy, strengthens relationships, and honors your inherent worth.",
+    content: `
+      <p>Many of us grew up learning that putting others first makes us good people. But when we consistently ignore our own needs, we deplete ourselves—and often build resentment in the process.</p>
+      
+      <h3>What Are Boundaries, Really?</h3>
+      <p>Boundaries are the limits we set to protect our physical, emotional, and mental well-being. They're not walls to keep people out—they're gates that let us choose what comes in and what stays out.</p>
+      
+      <p>Healthy boundaries include:</p>
+      <ul>
+        <li><strong>Physical:</strong> Personal space, touch preferences, rest needs</li>
+        <li><strong>Emotional:</strong> What you share, take on from others, or engage with</li>
+        <li><strong>Time:</strong> How you spend your hours and energy</li>
+        <li><strong>Material:</strong> Your possessions, money, resources</li>
+        <li><strong>Digital:</strong> Screen time, social media, communication availability</li>
+      </ul>
+      
+      <h3>Why Boundaries Feel Hard</h3>
+      <p>If you learned early that your needs didn't matter, or that love was conditional on compliance, boundaries may feel selfish or scary. You might fear:</p>
+      <ul>
+        <li>Being seen as mean or difficult</li>
+        <li>Losing relationships</li>
+        <li>Feeling guilty for prioritizing yourself</li>
+        <li>Others' disappointment or anger</li>
+      </ul>
+      
+      <p>These fears are understandable—but they're not facts. Healthy relationships can hold boundaries.</p>
+      
+      <h3>Setting Boundaries with Kindness</h3>
+      
+      <p><strong>Use "I" Statements</strong></p>
+      <p>"I need some quiet time after work before I can engage" is clearer and gentler than "You're always so demanding."</p>
+      
+      <p><strong>Keep It Simple</strong></p>
+      <p>You don't need to justify, argue, defend, or explain (J.A.D.E.). "I'm not available for that" is a complete sentence.</p>
+      
+      <p><strong>Expect Adjustment Time</strong></p>
+      <p>People who benefited from your lack of boundaries may push back. This doesn't mean your boundary is wrong—it means it's new.</p>
+      
+      <h3>The Gift of Boundaries</h3>
+      <p>When you honor your limits, you show up more fully in your relationships. You have more energy. You reduce resentment. And you teach others how to treat you.</p>
+      
+      <p>Setting boundaries isn't about being less loving—it's about loving yourself too.</p>
+    `,
+    author: "The Genuine Love Team",
+    date: "January 24, 2026",
+    readTime: "7 min read",
+    category: "Self-Care",
+    categoryColor: "blush",
+    icon: Heart,
+  },
+  {
+    id: "healing-from-perfectionism",
+    title: "Healing from Perfectionism: Embracing 'Good Enough'",
+    excerpt: "Explore the roots of perfectionism and learn gentler ways to pursue growth while accepting your beautifully imperfect self.",
+    content: `
+      <p>Do you set impossibly high standards for yourself? Feel like a failure unless everything is perfect? Perfectionism often masquerades as a virtue, but it's frequently rooted in fear—fear of judgment, rejection, or not being enough.</p>
+      
+      <h3>Understanding Perfectionism</h3>
+      <p>Perfectionism isn't about being excellent or having high standards. It's an anxiety-driven belief that if we're perfect enough, we can avoid pain and criticism. Researcher Brené Brown calls it "the 20-ton shield" we carry to protect ourselves.</p>
+      
+      <p>Signs of perfectionism:</p>
+      <ul>
+        <li>All-or-nothing thinking ("If it's not perfect, it's a failure")</li>
+        <li>Procrastination (fear of not doing it perfectly delays starting)</li>
+        <li>Harsh self-criticism when you fall short</li>
+        <li>Difficulty celebrating achievements</li>
+        <li>Tying your worth to productivity or accomplishments</li>
+        <li>Fear of making mistakes visible to others</li>
+      </ul>
+      
+      <h3>Where Perfectionism Comes From</h3>
+      <p>Often, perfectionism develops in childhood when love felt conditional—when being "good" or "successful" seemed necessary for acceptance. It can also arise from environments where mistakes were heavily criticized or where chaos made control feel essential for safety.</p>
+      
+      <h3>The Cost of Perfectionism</h3>
+      <p>Perfectionism is associated with:</p>
+      <ul>
+        <li>Higher rates of anxiety and depression</li>
+        <li>Burnout and exhaustion</li>
+        <li>Strained relationships</li>
+        <li>Reduced creativity and risk-taking</li>
+        <li>Paradoxically, lower performance over time</li>
+      </ul>
+      
+      <h3>Practices for Healing</h3>
+      
+      <p><strong>Notice the Inner Critic</strong></p>
+      <p>Start observing your self-talk. Would you speak to a friend this way? Practice naming the critic ("There's that perfectionist voice again") without believing it.</p>
+      
+      <p><strong>Embrace "Good Enough"</strong></p>
+      <p>Psychologist D.W. Winnicott coined the term "good enough" parent—the idea that perfection isn't necessary or even desirable. Apply this to yourself: good enough is actually... good enough.</p>
+      
+      <p><strong>Celebrate Progress, Not Perfection</strong></p>
+      <p>Notice what you completed today, not what you didn't. Growth happens in small steps, not quantum leaps.</p>
+      
+      <p><strong>Practice Intentional Imperfection</strong></p>
+      <p>Send an email without proofreading it three times. Leave the bed unmade. Notice that the world doesn't end.</p>
+      
+      <p>You are worthy of love and belonging right now—not when you've finally achieved enough, lost enough weight, or gotten it all together. Right now. As you are.</p>
+    `,
+    author: "The Genuine Love Team",
+    date: "January 24, 2026",
+    readTime: "8 min read",
+    category: "Healing",
+    categoryColor: "sage",
+    icon: Sparkles,
+  },
 ];
 
 const CATEGORY_STYLES = {
@@ -151,6 +308,10 @@ const CATEGORY_STYLES = {
   gold: {
     bg: "bg-[var(--gold-100)]",
     text: "text-[var(--gold-700)]",
+  },
+  teal: {
+    bg: "bg-[var(--teal-100)]",
+    text: "text-[var(--teal-700)]",
   },
 };
 

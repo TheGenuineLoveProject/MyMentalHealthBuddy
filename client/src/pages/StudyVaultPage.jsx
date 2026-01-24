@@ -225,6 +225,63 @@ const RESEARCH_TOPICS = [
       { title: "In an Unspoken Voice - Peter Levine", type: "Book" },
     ],
   },
+  {
+    id: "shame",
+    title: "Healing Shame",
+    icon: Heart,
+    summary: "Shame is the painful feeling that something is fundamentally wrong with us. Unlike guilt, which says 'I did something bad,' shame says 'I am bad.' Healing shame is central to emotional wellness.",
+    keyPoints: [
+      "Shame thrives in secrecy and silence",
+      "Empathy is the antidote to shame",
+      "Shame resilience can be developed",
+      "Distinguishing shame from guilt is liberating",
+      "Perfectionism is often a shame-based coping mechanism",
+    ],
+    sources: [
+      { title: "Daring Greatly - Brené Brown", type: "Book" },
+      { title: "Healing the Shame That Binds You - John Bradshaw", type: "Book" },
+      { title: "Shame and Guilt - June Tangney", type: "Research" },
+      { title: "The Gifts of Imperfection - Brené Brown", type: "Book" },
+    ],
+  },
+  {
+    id: "anxiety",
+    title: "Understanding Anxiety",
+    icon: Shield,
+    summary: "Anxiety is the body's natural alarm system. While uncomfortable, it evolved to protect us. Understanding anxiety helps reduce its grip.",
+    keyPoints: [
+      "Anxiety is your nervous system trying to keep you safe",
+      "Avoidance maintains and strengthens anxiety",
+      "Anxiety thoughts are not facts",
+      "The body's fight-or-flight response is temporary",
+      "Exposure and acceptance reduce anxiety over time",
+    ],
+    sources: [
+      { title: "The Anxiety and Phobia Workbook - Edmund Bourne", type: "Book" },
+      { title: "Dare: The New Way to End Anxiety - Barry McDonagh", type: "Book" },
+      { title: "Acceptance and Commitment Therapy Research", type: "Research" },
+      { title: "Anxiety and Depression Association of America", type: "Resource" },
+    ],
+  },
+  {
+    id: "inner-critic",
+    title: "Transforming the Inner Critic",
+    icon: Sparkles,
+    summary: "The inner critic is the harsh internal voice that judges and criticizes us. While it often developed as protection, learning to work with it can transform self-relationship.",
+    keyPoints: [
+      "The inner critic often formed to protect us from external criticism",
+      "Harsh self-talk activates the threat system",
+      "The inner critic isn't your true voice",
+      "Compassionate reframes can quiet the critic",
+      "Internal Family Systems views critics as protective parts",
+    ],
+    sources: [
+      { title: "Self-Therapy - Jay Earley", type: "Book" },
+      { title: "Taming Your Gremlin - Rick Carson", type: "Book" },
+      { title: "The Mindful Path to Self-Compassion - Christopher Germer", type: "Book" },
+      { title: "IFS Institute Research", type: "Resource" },
+    ],
+  },
 ];
 
 const WHAT_WE_BELIEVE = [

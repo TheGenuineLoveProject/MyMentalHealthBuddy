@@ -29,6 +29,7 @@ const Premium = lazy(() => import("./pages/Premium.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
+const Profile = lazy(() => import("./pages/Profile.jsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
 const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
@@ -174,7 +175,9 @@ export default function App() {
               <Route path="/onboarding">
                 <ProtectedRoute><Onboarding /></ProtectedRoute>
               </Route>
-              <Route path="/profile">{() => <ConfigRoute route="/profile" />}</Route>
+              <Route path="/profile">
+                <ProtectedRoute><Profile /></ProtectedRoute>
+              </Route>
               <Route path="/billing">{() => <ConfigRoute route="/billing" />}</Route>
               <Route path="/overview">{() => <ConfigRoute route="/overview" />}</Route>
               <Route path="/insights">{() => <ConfigRoute route="/insights" />}</Route>

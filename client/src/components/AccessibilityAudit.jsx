@@ -136,6 +136,74 @@ export default function AccessibilityAudit() {
         : 'Consider adding a skip-to-content link',
     });
 
+    const mainLandmark = document.querySelector('main, [role="main"]');
+    const navLandmark = document.querySelector('nav, [role="navigation"]');
+    const hasLandmarks = mainLandmark && navLandmark;
+    auditResults.push({
+      category: 'Navigation',
+      rule: 'WCAG 1.3.6 - Identify Purpose',
+      status: hasLandmarks ? 'pass' : 'warning',
+      message: hasLandmarks
+        ? 'Page has main and navigation landmarks'
+        : `Missing landmarks: ${!mainLandmark ? 'main ' : ''}${!navLandmark ? 'navigation' : ''}`.trim(),
+    });
+
+    const focusableElements = document.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+    let hasFocusVisible = true;
+    focusableElements.forEach(el => {
+      const styles = window.getComputedStyle(el);
+      if (styles.outline === 'none' && !el.classList.toString().includes('focus')) {
+        hasFocusVisible = false;
+      }
+    });
+    auditResults.push({
+      category: 'Keyboard',
+      rule: 'WCAG 2.4.7 - Focus Visible',
+      status: hasFocusVisible ? 'pass' : 'warning',
+      message: hasFocusVisible
+        ? 'Focus indicators appear present'
+        : 'Some elements may lack visible focus indicators',
+      element: `${focusableElements.length} focusable elements checked`,
+    });
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const animations = document.querySelectorAll('[class*="animate"], [class*="transition"]');
+    auditResults.push({
+      category: 'Motion',
+      rule: 'WCAG 2.3.3 - Animation from Interactions',
+      status: 'pass',
+      message: reducedMotion.matches 
+        ? 'Reduced motion preference detected - verify animations respect it'
+        : `${animations.length} animated elements found - verify reduced motion support`,
+    });
+
+    const interactiveAria = document.querySelectorAll('button[aria-pressed], [role="switch"], [aria-expanded]');
+    interactiveAria.forEach((el, idx) => {
+      const hasValidState = el.getAttribute('aria-pressed') !== null || 
+                           el.getAttribute('aria-expanded') !== null;
+      auditResults.push({
+        category: 'Interactive Elements',
+        rule: 'WCAG 4.1.2 - State Changes',
+        status: hasValidState ? 'pass' : 'warning',
+        message: hasValidState ? 'Interactive element has ARIA state' : 'Check state communication',
+        element: `ARIA element[${idx}]`,
+      });
+    });
+
+    const dialogElements = document.querySelectorAll('[role="dialog"], [role="alertdialog"], dialog');
+    dialogElements.forEach((dialog, idx) => {
+      const hasLabel = dialog.hasAttribute('aria-label') || dialog.hasAttribute('aria-labelledby');
+      auditResults.push({
+        category: 'Interactive Elements',
+        rule: 'WCAG 4.1.2 - Modal Accessibility',
+        status: hasLabel ? 'pass' : 'fail',
+        message: hasLabel ? 'Dialog has accessible name' : 'Dialog missing aria-label or aria-labelledby',
+        element: `dialog[${idx}]`,
+      });
+    });
+
     const passed = auditResults.filter(r => r.status === 'pass').length;
     const warnings = auditResults.filter(r => r.status === 'warning').length;
     const failed = auditResults.filter(r => r.status === 'fail').length;
@@ -178,6 +246,8 @@ export default function AccessibilityAudit() {
         return <Contrast className="w-4 h-4" />;
       case 'Links':
         return <Volume2 className="w-4 h-4" />;
+      case 'Motion':
+        return <RefreshCw className="w-4 h-4" />;
       default:
         return <Eye className="w-4 h-4" />;
     }
