@@ -38,19 +38,19 @@ export const READING_LEVEL_META = {
   beginner: {
     label: 'Beginner',
     description: 'Plain language, short sentences',
-    aria: 'Beginner mode: clear, accessible language',
+    aria: 'Beginner: clear, accessible language',
     copyRule: 'Sentences under 10 words, respectful and empowering'
   },
   intermediate: {
     label: 'Intermediate',
     description: 'Warm and grounded',
-    aria: 'Intermediate mode: warm, grounded language with moderate detail',
+    aria: 'Intermediate: warm, grounded language with moderate detail',
     copyRule: 'Paragraphs max 2 sentences'
   },
   advanced: {
     label: 'Advanced',
     description: 'More context and definitions',
-    aria: 'Advanced mode: detailed explanations with definitions',
+    aria: 'Advanced: detailed explanations with definitions',
     copyRule: 'One short definition per section, gentle tone'
   }
 };

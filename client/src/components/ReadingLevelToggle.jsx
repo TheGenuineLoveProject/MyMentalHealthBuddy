@@ -1,14 +1,14 @@
 /**
- * ReadingLevelToggle.jsx - 3-Level Reading Mode Selector
+ * ReadingLevelToggle.jsx - 3-Level Content Mode Selector
  * 
  * Features:
- * - Beginner / Standard / Deep toggle
+ * - Beginner / Intermediate / Advanced toggle
  * - Accessible fieldset with legend (visually hidden)
  * - Radio inputs with keyboard navigation (Tab + Arrow keys)
  * - Focus-visible rings
  * - Screen reader announcements
  * - Respects reduced-motion
- * - Helper text: "Choose the level of detail you prefer."
+ * - Helper text: "Choose how much detail you want."
  */
 
 import { useId } from 'react';
@@ -21,10 +21,10 @@ export default function ReadingLevelToggle({ value, onChange, className = '' }) 
   return (
     <fieldset 
       className={`${styles.fieldset} ${className}`}
-      aria-label="Reading level"
+      aria-label="Content level"
     >
       <legend className={styles.legend}>
-        Reading level
+        Level
       </legend>
       <span className={styles.helperText}>
         Choose how much detail you want.
@@ -41,12 +41,12 @@ export default function ReadingLevelToggle({ value, onChange, className = '' }) 
               key={level}
               htmlFor={inputId}
               className={`${styles.radioLabel} ${isSelected ? styles.selected : ''}`}
-              data-testid={`radio-reading-level-${level}`}
+              data-testid={`radio-level-${level}`}
             >
               <input
                 type="radio"
                 id={inputId}
-                name={`reading-level-${groupId}`}
+                name={`level-${groupId}`}
                 value={level}
                 checked={isSelected}
                 onChange={() => onChange(level)}
