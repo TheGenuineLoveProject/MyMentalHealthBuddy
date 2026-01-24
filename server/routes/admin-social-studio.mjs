@@ -5,6 +5,37 @@ import { eq, desc, and } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
+import OpenAI from "openai";
+
+const openai = new OpenAI({
+  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
+  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+});
+
+const PLATFORM_SPECS = {
+  instagram: { maxChars: 2200, hashtagLimit: 30, bestTimes: ["9am", "12pm", "7pm"], format: "Square/Vertical" },
+  tiktok: { maxChars: 2200, hashtagLimit: 5, bestTimes: ["7pm", "8pm", "9pm"], format: "Vertical 9:16" },
+  youtube: { maxChars: 5000, hashtagLimit: 15, bestTimes: ["3pm", "5pm"], format: "Horizontal 16:9" },
+  x: { maxChars: 280, hashtagLimit: 3, bestTimes: ["9am", "12pm", "5pm"], format: "Any" },
+  threads: { maxChars: 500, hashtagLimit: 0, bestTimes: ["12pm", "7pm"], format: "Any" },
+  facebook: { maxChars: 63206, hashtagLimit: 5, bestTimes: ["1pm", "4pm"], format: "Any" },
+  linkedin: { maxChars: 3000, hashtagLimit: 5, bestTimes: ["10am", "12pm"], format: "Horizontal" },
+  pinterest: { maxChars: 500, hashtagLimit: 20, bestTimes: ["8pm", "9pm"], format: "Vertical 2:3" },
+};
+
+const TRAUMA_INFORMED_GUIDELINES = {
+  avoid: [
+    "you should", "you must", "you need to", "you have to",
+    "just", "simply", "easy", "quick fix", "cure", "treat",
+    "broken", "damaged", "toxic", "crazy", "insane", "psycho",
+    "attention seeking", "drama", "overreacting", "too sensitive",
+    "get over it", "move on", "let go", "forgive and forget"
+  ],
+  prefer: [
+    "you might consider", "you could try", "if it feels right",
+    "when you're ready", "at your own pace", "may help", "some find"
+  ]
+};
 
 const router = express.Router();
 
@@ -360,6 +391,288 @@ router.get("/analytics/content-calendar", requireAuth, requireAdmin, async (req,
   } catch (error) {
     logger.error("Failed to fetch calendar analytics:", error);
     return badRequest(res, "Failed to fetch calendar analytics");
+  }
+});
+
+/* =====================================================
+ * AI CONTENT GENERATION
+ * ===================================================== */
+
+router.post("/generate", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { theme, platform, style = "warm", level = "intermediate" } = req.body;
+    
+    if (!theme) {
+      return badRequest(res, "Theme is required");
+    }
+    
+    const platformSpec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
+    
+    const systemPrompt = `You are a trauma-informed social media content creator for The Genuine Love Project, a mental wellness platform.
+
+CORE PRINCIPLES:
+- Use consent-led, autonomy-respecting language ("you might", "if you'd like", "when you're ready")
+- Never use prescriptive language ("you should", "you must", "you need to")
+- Avoid pathologizing terms ("broken", "toxic", "damaged", "crazy")
+- Use evidence-informed phrasing ("may help", "some people find", "research suggests")
+- Include gentle pacing cues ("take your time", "go at your pace")
+- Educational only - no medical claims, no diagnosis, no treatment promises
+
+PLATFORM: ${platform}
+MAX CHARACTERS: ${platformSpec.maxChars}
+HASHTAG LIMIT: ${platformSpec.hashtagLimit}
+BEST POST TIMES: ${platformSpec.bestTimes.join(", ")}
+
+READING LEVEL: ${level}
+- beginner: Simple sentences under 10 words, warm and accessible
+- intermediate: Up to 2 sentences per thought, grounded tone
+- advanced: Detailed explanations with definitions, scholarly yet gentle
+
+OUTPUT FORMAT (JSON):
+{
+  "hook": "2-second attention grabber (under 15 words)",
+  "caption": "Main content (platform-appropriate length)",
+  "cta": "Gentle call to action (consent-led)",
+  "hashtags": "Comma-separated relevant hashtags (within limit)",
+  "disclaimer": "Brief safety disclaimer",
+  "alternativeHooks": ["2 more hook options"],
+  "contentNotes": "Brief note on trauma-informed considerations"
+}`;
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: `Create social media content about: ${theme}\n\nStyle: ${style}` }
+      ],
+      response_format: { type: "json_object" },
+      max_tokens: 1000,
+    });
+    
+    const content = JSON.parse(response.choices[0]?.message?.content || "{}");
+    
+    return success(res, {
+      ...content,
+      platform,
+      theme,
+      platformSpec,
+      generatedAt: new Date().toISOString()
+    });
+  } catch (error) {
+    logger.error("AI generation failed:", error);
+    return badRequest(res, "Failed to generate content: " + error.message);
+  }
+});
+
+router.post("/generate/repurpose", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { content, sourcePlatform, targetPlatforms } = req.body;
+    
+    if (!content || !targetPlatforms?.length) {
+      return badRequest(res, "Content and target platforms are required");
+    }
+    
+    const repurposed = {};
+    
+    for (const platform of targetPlatforms) {
+      const spec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
+      
+      const response = await openai.chat.completions.create({
+        model: "gpt-4o",
+        messages: [
+          { 
+            role: "system", 
+            content: `You are a trauma-informed content repurposing specialist. Adapt content for ${platform}.
+MAX CHARACTERS: ${spec.maxChars}
+HASHTAG LIMIT: ${spec.hashtagLimit}
+MAINTAIN: Trauma-informed language, consent-led phrasing, educational framing.
+OUTPUT JSON: { "hook": "...", "caption": "...", "cta": "...", "hashtags": "..." }` 
+          },
+          { role: "user", content: `Repurpose this content for ${platform}:\n\n${content}` }
+        ],
+        response_format: { type: "json_object" },
+        max_tokens: 800,
+      });
+      
+      repurposed[platform] = JSON.parse(response.choices[0]?.message?.content || "{}");
+    }
+    
+    return success(res, { repurposed, generatedAt: new Date().toISOString() });
+  } catch (error) {
+    logger.error("Repurpose failed:", error);
+    return badRequest(res, "Failed to repurpose content");
+  }
+});
+
+/* =====================================================
+ * COMPLIANCE CHECKER
+ * ===================================================== */
+
+router.post("/compliance/check", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { text } = req.body;
+    
+    if (!text) {
+      return badRequest(res, "Text is required");
+    }
+    
+    const issues = [];
+    const suggestions = [];
+    const lowerText = text.toLowerCase();
+    
+    TRAUMA_INFORMED_GUIDELINES.avoid.forEach(phrase => {
+      if (lowerText.includes(phrase.toLowerCase())) {
+        issues.push({
+          type: "avoid",
+          phrase,
+          severity: phrase.includes("should") || phrase.includes("must") ? "high" : "medium",
+          suggestion: `Consider replacing "${phrase}" with more autonomy-respecting language`
+        });
+      }
+    });
+    
+    const hasAutonomyLanguage = TRAUMA_INFORMED_GUIDELINES.prefer.some(
+      phrase => lowerText.includes(phrase.toLowerCase())
+    );
+    
+    if (!hasAutonomyLanguage && text.length > 50) {
+      suggestions.push({
+        type: "enhance",
+        message: "Consider adding autonomy-respecting phrases like 'you might', 'if you'd like', or 'when you're ready'"
+      });
+    }
+    
+    if (!lowerText.includes("988") && !lowerText.includes("crisis") && text.length > 200) {
+      suggestions.push({
+        type: "safety",
+        message: "For longer posts about mental wellness, consider including crisis resources (988 Lifeline)"
+      });
+    }
+    
+    const medicalClaims = ["cure", "treat", "heal", "fix", "diagnose", "therapy", "clinical"];
+    medicalClaims.forEach(term => {
+      if (lowerText.includes(term) && !lowerText.includes("not a substitute") && !lowerText.includes("educational")) {
+        suggestions.push({
+          type: "disclaimer",
+          message: `Content includes "${term}" - ensure educational disclaimer is present`
+        });
+      }
+    });
+    
+    const score = Math.max(0, 100 - (issues.length * 15) - (suggestions.length * 5));
+    
+    return success(res, {
+      score,
+      status: score >= 80 ? "pass" : score >= 60 ? "review" : "revise",
+      issues,
+      suggestions,
+      guidelines: {
+        avoid: TRAUMA_INFORMED_GUIDELINES.avoid.slice(0, 10),
+        prefer: TRAUMA_INFORMED_GUIDELINES.prefer
+      }
+    });
+  } catch (error) {
+    logger.error("Compliance check failed:", error);
+    return badRequest(res, "Failed to check compliance");
+  }
+});
+
+router.post("/compliance/rewrite", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { text, issues } = req.body;
+    
+    if (!text) {
+      return badRequest(res, "Text is required");
+    }
+    
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        { 
+          role: "system", 
+          content: `You are a trauma-informed content editor. Rewrite the given text to be more trauma-informed and consent-led.
+
+RULES:
+- Replace prescriptive language ("should", "must", "need to") with autonomy language ("might", "could", "if you'd like")
+- Remove pathologizing terms ("broken", "toxic", "damaged")
+- Use evidence-informed phrasing ("may help", "some find", "research suggests")
+- Maintain the original message and intent
+- Keep a warm, supportive tone
+
+OUTPUT JSON: { "rewritten": "...", "changes": ["list of key changes made"] }` 
+        },
+        { role: "user", content: `Rewrite this content:\n\n${text}\n\nIssues to address: ${JSON.stringify(issues || [])}` }
+      ],
+      response_format: { type: "json_object" },
+      max_tokens: 800,
+    });
+    
+    const result = JSON.parse(response.choices[0]?.message?.content || "{}");
+    
+    return success(res, result);
+  } catch (error) {
+    logger.error("Rewrite failed:", error);
+    return badRequest(res, "Failed to rewrite content");
+  }
+});
+
+/* =====================================================
+ * PLATFORM SPECIFICATIONS
+ * ===================================================== */
+
+router.get("/platforms/specs", requireAuth, requireAdmin, async (req, res) => {
+  return success(res, PLATFORM_SPECS);
+});
+
+/* =====================================================
+ * BULK OPERATIONS
+ * ===================================================== */
+
+router.post("/drafts/bulk/approve", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { ids } = req.body;
+    
+    if (!ids?.length) {
+      return badRequest(res, "Draft IDs are required");
+    }
+    
+    const results = [];
+    for (const id of ids) {
+      try {
+        const [draft] = await db
+          .update(postDrafts)
+          .set({ status: "approved", updatedAt: new Date() })
+          .where(eq(postDrafts.id, id))
+          .returning();
+        results.push({ id, success: true, draft });
+      } catch (e) {
+        results.push({ id, success: false, error: e.message });
+      }
+    }
+    
+    return success(res, { processed: results.length, results });
+  } catch (error) {
+    logger.error("Bulk approve failed:", error);
+    return badRequest(res, "Failed to bulk approve");
+  }
+});
+
+router.post("/drafts/bulk/delete", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { ids } = req.body;
+    
+    if (!ids?.length) {
+      return badRequest(res, "Draft IDs are required");
+    }
+    
+    for (const id of ids) {
+      await db.delete(postDrafts).where(eq(postDrafts.id, id));
+    }
+    
+    return success(res, { deleted: ids.length });
+  } catch (error) {
+    logger.error("Bulk delete failed:", error);
+    return badRequest(res, "Failed to bulk delete");
   }
 });
 

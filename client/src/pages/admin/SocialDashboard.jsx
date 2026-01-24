@@ -41,17 +41,27 @@ function StatusBadge({ status }) {
   );
 }
 
-function DraftCard({ draft, onApprove, onDelete }) {
+function DraftCard({ draft, onApprove, onDelete, bulkMode, isSelected, onToggleSelect }) {
   const platform = PLATFORMS.find(p => p.id === draft.platform) || PLATFORMS[0];
   const PlatformIcon = platform.icon;
   
   return (
     <div 
-      className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4 hover:shadow-md transition-shadow"
+      className={`bg-white dark:bg-slate-800 rounded-xl border p-4 hover:shadow-md transition-all ${
+        isSelected ? "border-purple-500 ring-2 ring-purple-200" : "border-slate-200 dark:border-slate-700"
+      }`}
       data-testid={`card-draft-${draft.id}`}
+      onClick={() => bulkMode && onToggleSelect?.(draft.id)}
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
+          {bulkMode && (
+            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center ${
+              isSelected ? "bg-purple-600 border-purple-600" : "border-slate-300 dark:border-slate-600"
+            }`}>
+              {isSelected && <CheckCircle className="w-3 h-3 text-white" />}
+            </div>
+          )}
           <div 
             className="w-8 h-8 rounded-lg flex items-center justify-center"
             style={{ backgroundColor: `${platform.color}20` }}
@@ -87,24 +97,26 @@ function DraftCard({ draft, onApprove, onDelete }) {
         <span className="text-xs text-slate-500">
           {new Date(draft.createdAt).toLocaleDateString()}
         </span>
-        <div className="flex gap-2">
-          {draft.status === "draft" && (
+        {!bulkMode && (
+          <div className="flex gap-2">
+            {draft.status === "draft" && (
+              <button
+                onClick={(e) => { e.stopPropagation(); onApprove(draft.id); }}
+                className="text-xs px-2 py-1 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition-colors"
+                data-testid={`button-approve-${draft.id}`}
+              >
+                Approve
+              </button>
+            )}
             <button
-              onClick={() => onApprove(draft.id)}
-              className="text-xs px-2 py-1 bg-emerald-100 text-emerald-700 rounded hover:bg-emerald-200 transition-colors"
-              data-testid={`button-approve-${draft.id}`}
+              onClick={(e) => { e.stopPropagation(); onDelete(draft.id); }}
+              className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
+              data-testid={`button-delete-${draft.id}`}
             >
-              Approve
+              Delete
             </button>
-          )}
-          <button
-            onClick={() => onDelete(draft.id)}
-            className="text-xs px-2 py-1 bg-red-100 text-red-700 rounded hover:bg-red-200 transition-colors"
-            data-testid={`button-delete-${draft.id}`}
-          >
-            Delete
-          </button>
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -380,6 +392,8 @@ function ContentAnalytics() {
 
 export default function SocialDashboard() {
   const [filter, setFilter] = useState("all");
+  const [selectedIds, setSelectedIds] = useState([]);
+  const [bulkMode, setBulkMode] = useState(false);
   
   const { data: drafts = [], isLoading } = useQuery({
     queryKey: ["/api/admin/social/drafts"],
@@ -399,9 +413,38 @@ export default function SocialDashboard() {
     },
   });
   
+  const bulkApproveMutation = useMutation({
+    mutationFn: (ids) => apiRequest("POST", "/api/admin/social/drafts/bulk/approve", { ids }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+      setSelectedIds([]);
+      setBulkMode(false);
+    },
+  });
+  
+  const bulkDeleteMutation = useMutation({
+    mutationFn: (ids) => apiRequest("POST", "/api/admin/social/drafts/bulk/delete", { ids }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
+      setSelectedIds([]);
+      setBulkMode(false);
+    },
+  });
+  
   const filteredDrafts = filter === "all" 
     ? drafts 
     : drafts.filter(d => d.status === filter);
+  
+  const toggleSelect = (id) => {
+    setSelectedIds(prev => 
+      prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]
+    );
+  };
+  
+  const selectAll = () => {
+    const allIds = filteredDrafts.map(d => d.id);
+    setSelectedIds(prev => prev.length === allIds.length ? [] : allIds);
+  };
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
@@ -427,7 +470,7 @@ export default function SocialDashboard() {
         <PlatformConnections />
         
         <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <Link 
               href="/admin/social/generate"
               className="inline-flex items-center gap-2 px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90 transition-opacity"
@@ -452,6 +495,19 @@ export default function SocialDashboard() {
               <Calendar className="w-4 h-4" />
               Calendar
             </Link>
+            <button
+              type="button"
+              onClick={() => { setBulkMode(!bulkMode); setSelectedIds([]); }}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                bulkMode 
+                  ? "bg-purple-600 text-white" 
+                  : "bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600"
+              }`}
+              data-testid="button-bulk-mode"
+            >
+              <Settings className="w-4 h-4" />
+              {bulkMode ? "Exit Bulk Mode" : "Bulk Actions"}
+            </button>
           </div>
           
           <div className="flex items-center gap-2 md:ml-auto">
@@ -470,6 +526,43 @@ export default function SocialDashboard() {
             </select>
           </div>
         </div>
+        
+        {bulkMode && (
+          <div className="flex items-center gap-4 p-4 mb-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl border border-purple-200 dark:border-purple-800">
+            <button
+              type="button"
+              onClick={selectAll}
+              className="text-sm text-purple-700 dark:text-purple-300 hover:underline"
+              data-testid="button-select-all"
+            >
+              {selectedIds.length === filteredDrafts.length ? "Deselect All" : "Select All"}
+            </button>
+            <span className="text-sm text-purple-600 dark:text-purple-400">
+              {selectedIds.length} selected
+            </span>
+            <div className="flex gap-2 ml-auto">
+              <button
+                type="button"
+                onClick={() => bulkApproveMutation.mutate(selectedIds)}
+                disabled={selectedIds.length === 0 || bulkApproveMutation.isPending}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 disabled:opacity-50 transition-colors"
+                data-testid="button-bulk-approve"
+              >
+                <CheckCircle className="w-4 h-4" />
+                Approve Selected
+              </button>
+              <button
+                type="button"
+                onClick={() => bulkDeleteMutation.mutate(selectedIds)}
+                disabled={selectedIds.length === 0 || bulkDeleteMutation.isPending}
+                className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 transition-colors"
+                data-testid="button-bulk-delete"
+              >
+                Delete Selected
+              </button>
+            </div>
+          </div>
+        )}
         
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
@@ -500,6 +593,9 @@ export default function SocialDashboard() {
                 draft={draft}
                 onApprove={(id) => approveMutation.mutate(id)}
                 onDelete={(id) => deleteMutation.mutate(id)}
+                bulkMode={bulkMode}
+                isSelected={selectedIds.includes(draft.id)}
+                onToggleSelect={toggleSelect}
               />
             ))}
           </div>
