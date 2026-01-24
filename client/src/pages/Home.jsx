@@ -12,6 +12,7 @@ import {
   SacredFooter 
 } from '../components/sacred';
 import { BenefitsStrip, BeforeAfter, TrustSignals } from '../components/benefits';
+import { IdentityMirror } from '../components/share';
 import { 
   Shield, Sparkles, Brain, ArrowRight, Star, Leaf, 
   Heart, Compass, BookOpen, Moon, Zap, Target, 
@@ -22,36 +23,36 @@ const transformationalFeatures = [
   {
     icon: Brain,
     title: "AI-Powered Reflective Companion",
-    description: "A supportive AI trained in evidence-informed approaches. A compassionate presence that meets you exactly where you are."
+    description: "A supportive AI companion for daily reflection. A compassionate presence that meets you exactly where you are."
   },
   {
     icon: Heart,
-    title: "Inner Child Work",
-    description: "Gentle self-compassion exercises to reconnect with younger parts of yourself. Offer your past self the understanding they needed."
+    title: "Self-Compassion Exercises",
+    description: "Gentle practices to reconnect with younger parts of yourself. Offer your past self the understanding they needed."
   },
   {
     icon: Shield,
-    title: "Nervous System Education",
-    description: "Evidence-informed tools grounded in regulation science to help you notice and shift your internal state."
+    title: "Calm & Regulation Tools",
+    description: "Evidence-informed tools to help you notice and shift your internal state. Pause or stop anytime."
   },
   {
     icon: Compass,
-    title: "Parts Work & Self-Understanding",
-    description: "IFS-informed practices to explore and befriend all parts of yourself—even the ones you've tried to hide."
+    title: "Self-Understanding Practices",
+    description: "Explore and befriend all parts of yourself—even the ones you've tried to hide."
   },
   {
     icon: Eye,
-    title: "Somatic Awareness",
+    title: "Body Awareness",
     description: "Gentle body-based practices to notice sensations and reconnect with embodied wisdom."
   },
   {
     icon: Anchor,
-    title: "Attachment Patterns",
+    title: "Relationship Patterns",
     description: "Understand your relationship patterns and explore ways to build more secure connections at any age."
   }
 ];
 
-const healingPillars = [
+const wellnessPillars = [
   {
     title: "Private By Design",
     icon: Shield,
@@ -67,32 +68,32 @@ const healingPillars = [
   {
     title: "Evidence-Informed",
     icon: BookOpen,
-    description: "Educational tools informed by IFS, polyvagal theory, attachment science, DBT, and ACT principles.",
+    description: "Educational tools informed by research-grounded principles and best practices in wellness education.",
     stat: "Research-grounded"
   },
   {
     title: "Available Always",
     icon: Moon,
-    description: "Whether it's 3 AM anxiety or a Sunday breakthrough, we're here.",
+    description: "Whether it's 3 AM restlessness or a Sunday breakthrough, we're here.",
     stat: "24/7 availability"
   }
 ];
 
-const healingApproach = [
+const wellnessApproach = [
   {
     icon: Lightbulb,
     title: "Understand",
-    description: "Psychoeducation helps you make sense of your experience. When you understand why, shame dissolves into compassion."
+    description: "Education helps you make sense of your experience. When you understand why, shame dissolves into compassion."
   },
   {
     icon: Feather,
     title: "Feel",
-    description: "Gentle practices to safely access emotions that were too overwhelming to feel at the time."
+    description: "Gentle practices to notice emotions with curiosity and kindness."
   },
   {
     icon: Zap,
     title: "Regulate",
-    description: "Nervous system tools to expand your window of tolerance and move from survival into presence."
+    description: "Calming tools to help you feel steadier and more present in your daily life."
   },
   {
     icon: Target,
@@ -104,15 +105,15 @@ const healingApproach = [
 const testimonialQuotes = [
   {
     quote: "For the first time, I understand why I react the way I do. This platform helped me see my patterns not as flaws, but as adaptations.",
-    attribution: "From someone healing attachment wounds"
+    attribution: "From someone exploring relationship patterns"
   },
   {
-    quote: "The inner child work brought up tears I'd been holding for decades. The way it's structured made it feel safe for the first time.",
-    attribution: "From a trauma survivor"
+    quote: "The self-compassion exercises brought up tears I'd been holding for decades. The way it's structured made it feel safe for the first time.",
+    attribution: "From someone on a growth journey"
   },
   {
-    quote: "I've been in therapy for years, and this platform amplifies that work beautifully. It gives me tools to practice between sessions.",
-    attribution: "From someone on their healing journey"
+    quote: "This platform gives me tools to reflect and practice self-understanding between my weekly sessions with a professional.",
+    attribution: "From someone building daily wellness habits"
   }
 ];
 
@@ -147,8 +148,8 @@ export default function Home() {
   const trustBadges = (
     <>
       <TrustBadge icon={Shield} label="Private by design" bgColor="rgba(143, 191, 159, 0.15)" />
-      <TrustBadge icon={Heart} label="Trauma-informed" bgColor="rgba(47, 93, 93, 0.1)" />
-      <TrustBadge icon={Brain} label="Evidence-based" bgColor="rgba(234, 195, 59, 0.15)" />
+      <TrustBadge icon={Heart} label="Consent-first" bgColor="rgba(47, 93, 93, 0.1)" />
+      <TrustBadge icon={Brain} label="Evidence-informed" bgColor="rgba(234, 195, 59, 0.15)" />
       <TrustBadge icon={Star} label="AI-powered 24/7" bgColor="rgba(244, 199, 195, 0.2)" />
     </>
   );
@@ -156,8 +157,8 @@ export default function Home() {
   return (
     <SacredLayout>
       <SEO 
-        title="The Genuine Love Project — Heal at Your Own Pace" 
-        description="A trauma-informed sanctuary for emotional healing. AI-powered therapy tools, inner child work, nervous system regulation, and parts work—all in complete privacy."
+        title="The Genuine Love Project — Grow at Your Own Pace" 
+        description="A supportive space for emotional wellness and self-understanding. Evidence-informed reflection tools and self-compassion practices—all in complete privacy."
       />
 
       <header role="banner">
@@ -234,15 +235,15 @@ export default function Home() {
               }}
             >
               <Leaf className="w-4 h-4 sacred-icon" />
-              Trusted by 50,000+ healing hearts
+              Trusted by 50,000+ growing hearts
             </span>
           }
-          title="Your sanctuary for emotional healing—"
-          titleHighlight="where transformation happens at your own pace."
-          subtitle="A trauma-informed space built for people who carry more than they show. Process grief, calm your nervous system, heal attachment wounds, meet your inner child—all in complete privacy."
+          title="Your sanctuary for emotional wellness—"
+          titleHighlight="where growth happens at your own pace."
+          subtitle="A supportive space built for people who carry more than they show. Process grief, find calm, understand yourself better, and reconnect with who you are—all in complete privacy."
           primaryCta={{ 
             href: '/register', 
-            label: 'Begin Your Healing Journey',
+            label: 'Begin Your Wellness Journey',
             icon: <Heart className="w-5 h-5" />
           }}
           secondaryCta={{ 
@@ -260,20 +261,20 @@ export default function Home() {
         <SacredSection 
           id="features" 
           variant="paper"
-          ariaLabel="Healing modalities"
+          ariaLabel="Wellness modalities"
         >
           <div className="text-center mb-12" data-aos="sacred-fade-up">
             <h2 
               className="sacred-subtitle mb-4"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              Healing Modalities Grounded in Science
+              Wellness Approaches Grounded in Research
             </h2>
             <p 
               className="sacred-body max-w-3xl mx-auto"
               style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
             >
-              Real therapeutic approaches—IFS, polyvagal theory, somatic experiencing, attachment science—made accessible for your daily practice.
+              Evidence-informed approaches—self-understanding practices, body awareness, and relationship patterns—made accessible for your daily practice.
             </p>
           </div>
           
@@ -294,25 +295,25 @@ export default function Home() {
         <SacredSection 
           id="approach" 
           variant="sage"
-          ariaLabel="Our healing approach"
+          ariaLabel="Our wellness approach"
         >
           <div className="text-center mb-10" data-aos="sacred-fade-up">
             <h2 
               className="sacred-subtitle mb-4"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              The Journey of Genuine Healing
+              The Journey of Genuine Growth
             </h2>
             <p 
               className="sacred-body max-w-2xl mx-auto"
               style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
             >
-              Healing isn't about becoming someone new—it's about coming home to who you've always been.
+              Growth isn't about becoming someone new—it's about coming home to who you've always been.
             </p>
           </div>
           
           <div className="grid md:grid-cols-4 gap-8">
-            {healingApproach.map((step, idx) => (
+            {wellnessApproach.map((step, idx) => (
               <div 
                 key={idx} 
                 className="text-center"
@@ -351,7 +352,7 @@ export default function Home() {
           ariaLabel="Our commitments"
         >
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {healingPillars.map((pillar, idx) => (
+            {wellnessPillars.map((pillar, idx) => (
               <article
                 key={idx}
                 className="text-center p-6 rounded-2xl transition-shadow hover:shadow-lg"
@@ -401,7 +402,7 @@ export default function Home() {
               className="sacred-subtitle mb-4"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              Words From The Healing Path
+              Words From The Wellness Path
             </h2>
             <p 
               className="sacred-body max-w-2xl mx-auto"
@@ -447,8 +448,8 @@ export default function Home() {
             aria-label="Platform statistics"
           >
             {[
-              { value: '50K+', label: 'Healing Journeys Started' },
-              { value: '1000+', label: 'Therapeutic Tools' },
+              { value: '50K+', label: 'Wellness Journeys Started' },
+              { value: '1000+', label: 'Reflection Tools' },
               { value: '24/7', label: 'AI Companion Available' },
               { value: '100%', label: 'Private & Encrypted' },
             ].map((stat, idx) => (
@@ -486,14 +487,14 @@ export default function Home() {
               className="sacred-quote text-xl md:text-2xl mb-8"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              "Your nervous system isn't broken—it's protecting you based on what it learned. Healing is teaching it that you're safe now."
+              "Your body isn't broken—it's protecting you based on what it learned. Growth is teaching it that you're safe now."
             </blockquote>
             
             <h3 
               className="sacred-heading mb-4"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              Built for Real, Deep Healing
+              Built for Real, Deep Wellness
             </h3>
             <p 
               className="sacred-body mb-6"
@@ -513,7 +514,7 @@ export default function Home() {
                 className="sacred-caption"
                 style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
               >
-                <strong>Important:</strong> This platform supports your healing journey but is not a replacement for professional mental health care. If you're in crisis, please reach out to a crisis line or mental health professional.
+                <strong>Important:</strong> This platform supports your wellness journey but is not a replacement for professional mental health care. If you're in crisis, please reach out to a crisis line or mental health professional.
               </p>
             </div>
           </div>
@@ -534,7 +535,7 @@ export default function Home() {
             <h2 
               className="sacred-subtitle text-white mb-4"
             >
-              Begin Your Healing Journey Today
+              Begin Your Wellness Journey Today
             </h2>
             <p 
               className="sacred-body text-white opacity-90 mb-8 max-w-xl mx-auto"
@@ -554,6 +555,22 @@ export default function Home() {
               Start Free—No Credit Card Required
             </Link>
           </div>
+        </SacredSection>
+
+        <SacredSection id="identity-mirror" variant="paper">
+          <div className="max-w-2xl mx-auto text-center mb-8">
+            <h2 className="sacred-subtitle mb-3">Who Are You Becoming?</h2>
+            <p className="sacred-body text-slate-600">
+              Reflect on the identity you're growing into. Share if it resonates.
+            </p>
+          </div>
+          <IdentityMirror className="max-w-xl mx-auto" />
+          <p className="text-center text-xs text-slate-400 mt-6">
+            Educational support only.{" "}
+            <a href="/crisis" className="text-[var(--glp-sage)] hover:underline">
+              If you're in crisis, get help now →
+            </a>
+          </p>
         </SacredSection>
 
         <TrustSignals />

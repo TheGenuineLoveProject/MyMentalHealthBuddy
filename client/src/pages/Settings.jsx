@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
-import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText } from "lucide-react";
+import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText, Gift } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import SEO from "../components/SEO";
+import { ReferralInvite } from "../components/referral";
 
 const VISUAL_MODES = [
   { id: "", label: "Default", icon: Sun, description: "Standard brand palette with Deep Teal primary + Gold accent" },
@@ -320,6 +321,14 @@ export default function Settings() {
                   </p>
                 </div>
               </div>
+            </section>
+
+            <section data-testid="section-referral" className="card-bordered" aria-labelledby="referral-heading">
+              <h2 id="referral-heading" className="text-heading-md text-teal mb-5 flex items-center gap-2">
+                <Gift className="w-5 h-5" />
+                Invite Friends
+              </h2>
+              <ReferralInvite />
             </section>
 
             <section data-testid="section-actions" className="card-bordered" aria-labelledby="actions-heading">
