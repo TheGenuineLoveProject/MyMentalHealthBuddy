@@ -9,6 +9,7 @@ import { dirname, resolve } from "path";
 import authRouter from "./routes/auth.mjs";
 import githubAuthRouter from "./routes/github-auth.mjs";
 import passport from "passport";
+import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
 import adminRouter from "./routes/admin.mjs";
 import blogRouter from "./routes/blog.mjs";
 import journalRouter from "./routes/journal.mjs";
@@ -131,7 +132,11 @@ async function startServer() {
   
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
-  app.use(passport.initialize());
+  
+  // Setup Replit Auth (must be before other routes)
+  // Integration: blueprint:javascript_log_in_with_replit
+  await setupAuth(app);
+  registerAuthRoutes(app);
 
   // Server-side redirects for alias routes (308 Permanent Redirect)
   // 308 preserves the HTTP method (unlike 301 which may change POST to GET)

@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, uuid, integer, varchar, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid, integer, varchar, boolean, jsonb, index } from "drizzle-orm/pg-core";
 
 /**
  * =====================================================
@@ -24,6 +24,8 @@ export const users = pgTable("users", {
   subscriptionStatus: text("subscription_status").default("free"),
   subscriptionExpiresAt: timestamp("subscription_expires_at"),
   githubId: text("github_id"),
+  replitId: text("replit_id").unique(),
+  profileImageUrl: text("profile_image_url"),
 });
 
 /* ================= JOURNALS ================= */
@@ -498,3 +500,14 @@ export const coherenceEntries = pgTable("coherence_entries", {
   integrationNotes: text("integration_notes"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+/* ================= SESSIONS (Passport/Replit Auth) ================= */
+export const sessions = pgTable(
+  "sessions",
+  {
+    sid: varchar("sid").primaryKey(),
+    sess: jsonb("sess").notNull(),
+    expire: timestamp("expire").notNull(),
+  },
+  (table) => [index("IDX_session_expire").on(table.expire)]
+);
