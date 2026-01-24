@@ -156,6 +156,7 @@ const TOOL_CATEGORIES = {
       { id: "crisis", name: "Crisis Stabilizer", icon: Shield, color: "from-rose-500 to-pink-600" },
       { id: "somatic", name: "Somatic Release", icon: Activity, color: "from-violet-400 to-purple-500" },
       { id: "perception", name: "Perception Refinement", icon: Eye, color: "from-teal-400 to-cyan-500", link: "/tools/perception-refinement" },
+      { id: "permaculture", name: "Permaculture Wellness", icon: Sunrise, color: "from-emerald-400 to-green-500", link: "/tools/permaculture" },
       { id: "sleepsanctuary", name: "Sleep Sanctuary", icon: Moon, color: "from-indigo-500 to-purple-600" },
       { id: "rituals", name: "Morning/Evening Rituals", icon: Sunrise, color: "from-amber-400 to-orange-500" },
       { id: "laughter", name: "Laughter Therapy", icon: Smile, color: "from-yellow-400 to-orange-500" },
