@@ -153,7 +153,7 @@ export default function App() {
                 <ProtectedRoute><Analytics /></ProtectedRoute>
               </Route>
               <Route path="/crisis">
-                <ProtectedRoute><CrisisResources /></ProtectedRoute>
+                <CrisisResources />
               </Route>
               <Route path="/settings">
                 <ProtectedRoute><Settings /></ProtectedRoute>
