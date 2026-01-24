@@ -8,6 +8,7 @@ import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
 import { AutopilotPage } from "./pages/_autopilot.jsx";
+import AgeConsentGate from "./components/AgeConsentGate.jsx";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
@@ -78,6 +79,7 @@ const PermacultureWellnessPage = lazy(() => import("./pages/PermacultureWellness
 const SelfWorthReflectionPage = lazy(() => import("./pages/SelfWorthReflectionPage.jsx"));
 const Challenge = lazy(() => import("./pages/Challenge.jsx"));
 const ChallengeDay = lazy(() => import("./pages/ChallengeDay.jsx"));
+const AlignmentPath = lazy(() => import("./pages/AlignmentPath.jsx"));
 
 function LoadingFallback() {
   return (
@@ -96,6 +98,14 @@ function ConfigRoute({ route }) {
 
 function ProtectedRoute({ children }) {
   return <RouteGuard>{children}</RouteGuard>;
+}
+
+function WellnessRoute({ children }) {
+  return (
+    <AgeConsentGate>
+      <RouteGuard>{children}</RouteGuard>
+    </AgeConsentGate>
+  );
 }
 
 export default function App() {
@@ -141,13 +151,13 @@ export default function App() {
                 <ProtectedRoute><DailyFlow /></ProtectedRoute>
               </Route>
               <Route path="/mood">
-                <ProtectedRoute><MoodPage /></ProtectedRoute>
+                <WellnessRoute><MoodPage /></WellnessRoute>
               </Route>
               <Route path="/state">
                 <ProtectedRoute><StatePage /></ProtectedRoute>
               </Route>
               <Route path="/journal">
-                <ProtectedRoute><JournalPage /></ProtectedRoute>
+                <WellnessRoute><JournalPage /></WellnessRoute>
               </Route>
               <Route path="/chat">
                 <ProtectedRoute><AIChatPage /></ProtectedRoute>
@@ -217,6 +227,9 @@ export default function App() {
               {/* Advanced Tools - Protected */}
               <Route path="/tools">
                 <ProtectedRoute><ToolsPage /></ProtectedRoute>
+              </Route>
+              <Route path="/alignment-path">
+                <WellnessRoute><AlignmentPath /></WellnessRoute>
               </Route>
               <Route path="/advanced">
                 <ProtectedRoute><AdvancedToolsPage /></ProtectedRoute>

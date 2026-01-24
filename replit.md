@@ -23,6 +23,16 @@ The Genuine Love Project is an AI-powered mental wellness platform dedicated to 
 ### UI/UX Decisions
 The frontend features a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features including ARIA, semantic HTML, keyboard navigation, and `prefers-reduced-motion` support. Responsive typography and safe area insets ensure mobile adaptability. A comprehensive design token system is implemented for consistent styling across three visual modes: Default, Low-Stim, and Reading. All UI primitives include `data-testid` attributes, `focus-visible` rings, ARIA labels, `prefers-reduced-motion` support, and semantic HTML. A 3-Level Reading Mode System allows users to toggle between Beginner, Intermediate, and Advanced content levels, with features like `helperLine` consent cues and `card` meta for time/effort notes. A "Sacred UI Component Library" provides reusable components like `LayoutWrapper`, `Hero`, `SectionContainer`, `Card/CardGrid`, `Button`, `Footer`, `SafetyNotice`, `EvidenceNote`, `Steps/StepsCompact`, and `Callout`.
 
+### Social Work-Informed Frameworks
+The platform integrates evidence-based social work approaches:
+- **Motivational Interviewing (MI)**: Language patterns for autonomy, evocation, collaboration, and compassion. Used in journaling prompts, onboarding, check-ins, and upgrade CTAs (non-pressuring).
+- **Strengths-Based Approach**: "Build on what's already working" framing. Environmental reflection prompts for boundaries and habit tools.
+- **The 12-Phase Self-Alignment Path™**: Educational, non-religious transformation framework covering Mind/Body/Values/Action domains. All phases optional, self-paced, with opt-out at every step.
+- **Ethical NLP Patterns**: Future pacing, identity statements, reframing, language awareness. Guardrails: no hypnosis, no embedded commands, no coercive persuasion.
+- **18+ Age Gating**: AgeConsentGate component with localStorage persistence, consent language, crisis links. WellnessRoute wrapper enforces gating on wellness pages.
+- **Benefits Block**: Explicit benefits on every wellness page (what you get, time, control, disclaimer).
+- **Persistent Disclaimers**: Footer bar with 18+ notice, educational disclaimer, pause/stop messaging, and crisis link.
+
 ### Technical Implementations
 The project uses a monorepo structure with separate client (React 18 SPA with TypeScript, Vite, Wouter, React Hook Form, Zod, Tailwind CSS, Lucide React) and server (Node.js/Express with TypeScript) applications. The backend provides a RESTful API with middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). Shared types ensure monorepo consistency, and all modules are ESM. Production optimization includes code splitting, environment variable configuration, health checks, rate limiting, and graceful shutdown. A trauma-informed NLP layer ensures supportive user-facing text and prompts. A "Wellness Microcopy Library" and a "Shared TypeScript Microcopy" system provide deterministic, type-safe microcopy selection and validation.
 

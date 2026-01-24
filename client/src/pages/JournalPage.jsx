@@ -5,6 +5,7 @@ import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Cal
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivationalInterviewing.js";
 
 const JOURNAL_PROMPTS = [
   { category: "Gratitude", prompt: "What's one small thing that brought you comfort today?" },
@@ -17,6 +18,10 @@ const JOURNAL_PROMPTS = [
   { category: "Release", prompt: "What are you ready to let go of?" },
   { category: "Hope", prompt: "What possibility are you allowing yourself to believe in?" },
   { category: "Safety", prompt: "Where in your life do you feel most safe and settled?" },
+  ...miReflectivePrompts.journaling.map((prompt, i) => ({
+    category: ["Values", "Progress", "Obstacles", "Meaning", "Connection"][i % 5],
+    prompt
+  }))
 ];
 
 function JournalPrompts({ onSelectPrompt }) {

@@ -60,8 +60,8 @@ export default function SacredFooter({ className = '' }) {
               </span>
             </Link>
             <p className={styles.brandTagline}>
-              A trauma-informed sanctuary for emotional healing. AI-powered therapy tools, 
-              inner child work, and nervous system regulation—all in complete privacy.
+              A trauma-informed sanctuary for emotional wellness. Educational self-care tools, 
+              journaling, and nervous system support—all in complete privacy.
             </p>
             <div className={styles.socialLinks}>
               <SocialLinks variant="icons" iconSize={18} />
@@ -125,9 +125,19 @@ export default function SacredFooter({ className = '' }) {
 
         <div className={styles.divider} aria-hidden="true" />
 
+        <div className={styles.disclaimerBar}>
+          <p className={styles.disclaimerText}>
+            18+ only · Educational wellness support — not medical advice · 
+            Pause or stop anytime · Need help now?{' '}
+            <Link href="/crisis" className={styles.crisisLink}>
+              Crisis Support
+            </Link>
+          </p>
+        </div>
+
         <div className={styles.bottomBar}>
           <p className={styles.copyright}>
-            &copy; {currentYear} The Genuine Love Project. All rights reserved.
+            &copy; {currentYear} The Genuine Love Project by Aaliyah Draws Art LLC. All rights reserved.
           </p>
           <p className={styles.madeWith}>
             Made with <Heart aria-hidden="true" /> for healing hearts
