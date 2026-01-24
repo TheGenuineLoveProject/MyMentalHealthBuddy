@@ -118,14 +118,19 @@ export default function SocialGenerator() {
     },
   });
   
+  const [imageError, setImageError] = useState(null);
+  const [enhanceError, setEnhanceError] = useState(null);
+  
   const imageGenerateMutation = useMutation({
     mutationFn: (data) => apiRequest("POST", "/api/admin/social/generate/image", data),
-    onSuccess: (data) => setGeneratedImage(data),
+    onSuccess: (data) => { setGeneratedImage(data); setImageError(null); },
+    onError: (err) => setImageError(err.message || "Failed to generate image"),
   });
   
   const enhanceMutation = useMutation({
     mutationFn: (data) => apiRequest("POST", "/api/admin/social/enhance", data),
-    onSuccess: (data) => setEnhancementSuggestions(data),
+    onSuccess: (data) => { setEnhancementSuggestions(data); setEnhanceError(null); },
+    onError: (err) => setEnhanceError(err.message || "Failed to enhance content"),
   });
   
   const handleChange = (field, value) => {
@@ -565,6 +570,13 @@ export default function SocialGenerator() {
                 </button>
               </div>
               
+              {imageError && (
+                <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg text-sm text-red-700 dark:text-red-300 flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4" />
+                  {imageError}
+                </div>
+              )}
+              
               {generatedImage?.image ? (
                 <div className="space-y-3">
                   <img 
@@ -576,7 +588,7 @@ export default function SocialGenerator() {
                     Trauma-informed visual for {generatedImage.platform}
                   </p>
                 </div>
-              ) : (
+              ) : !imageError && (
                 <p className="text-sm text-slate-500 dark:text-slate-400 text-center py-4">
                   Generate a calming, brand-aligned visual for your post
                 </p>
@@ -605,6 +617,20 @@ export default function SocialGenerator() {
                     ))}
                   </div>
                 </div>
+                
+                {enhanceError && (
+                  <div className="p-3 bg-red-50 dark:bg-red-900/20 rounded-lg text-sm text-red-700 dark:text-red-300 flex items-center gap-2">
+                    <AlertCircle className="w-4 h-4" />
+                    {enhanceError}
+                  </div>
+                )}
+                
+                {enhanceMutation.isPending && (
+                  <div className="flex items-center justify-center py-4 text-slate-500 dark:text-slate-400">
+                    <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                    Analyzing content...
+                  </div>
+                )}
                 
                 {enhancementSuggestions?.suggestions && (
                   <div className="space-y-3">
