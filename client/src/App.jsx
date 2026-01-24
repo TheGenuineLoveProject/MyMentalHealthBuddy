@@ -56,7 +56,7 @@ const DailyWisdomOraclePage = lazy(() => import("./pages/DailyWisdomOraclePage.t
 const SystemsThinkingPage = lazy(() => import("./pages/SystemsThinkingPage.tsx"));
 const MetaLearningPage = lazy(() => import("./pages/MetaLearningPage.tsx"));
 const ContentStudioPage = lazy(() => import("./pages/ContentStudioPage.tsx"));
-const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.tsx"));
+const StudyVaultPage = lazy(() => import("./pages/StudyVaultPage.jsx"));
 const EliteToolsDashboard = lazy(() => import("./pages/EliteToolsDashboard.tsx"));
 const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.jsx"));
 const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
