@@ -1,10 +1,18 @@
 import { createContext, useContext, useState, useEffect, useRef, useCallback } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 const AuthContext = createContext(null);
 
 const TOKEN_KEY = "mmhb_token";
 const USER_KEY = "mmhb_user";
 const TOKEN_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minutes
+
+async function fetchReplitUser() {
+  const response = await fetch("/api/auth/user", { credentials: "include" });
+  if (response.status === 401) return null;
+  if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
+  return response.json();
+}
 
 function parseJwt(token) {
   try {
@@ -56,6 +64,15 @@ function safeRemoveItem(key) {
 }
 
 export function AuthProvider({ children }) {
+  const queryClient = useQueryClient();
+  
+  const { data: replitUser, isLoading: replitLoading } = useQuery({
+    queryKey: ["/api/auth/user"],
+    queryFn: fetchReplitUser,
+    retry: false,
+    staleTime: 1000 * 60 * 5,
+  });
+
   const [token, setToken] = useState(() => {
     if (typeof window !== "undefined") {
       const stored = safeGetItem(TOKEN_KEY);
@@ -69,7 +86,7 @@ export function AuthProvider({ children }) {
     return null;
   });
 
-  const [user, setUser] = useState(() => {
+  const [localUser, setLocalUser] = useState(() => {
     if (typeof window !== "undefined") {
       const stored = safeGetItem(USER_KEY);
       try {
@@ -83,17 +100,23 @@ export function AuthProvider({ children }) {
 
   const [isLoading, setIsLoading] = useState(true);
   const refreshTimerRef = useRef(null);
+  
+  const user = replitUser || localUser;
 
   const logout = useCallback(() => {
     setToken(null);
-    setUser(null);
+    setLocalUser(null);
     safeRemoveItem(TOKEN_KEY);
     safeRemoveItem(USER_KEY);
+    queryClient.setQueryData(["/api/auth/user"], null);
     if (refreshTimerRef.current) {
       clearInterval(refreshTimerRef.current);
       refreshTimerRef.current = null;
     }
-  }, []);
+    if (replitUser) {
+      window.location.href = "/api/logout";
+    }
+  }, [queryClient, replitUser]);
 
   const refreshToken = useCallback(async () => {
     const currentToken = safeGetItem(TOKEN_KEY);
@@ -114,7 +137,7 @@ export function AuthProvider({ children }) {
           setToken(data.token);
           safeSetItem(TOKEN_KEY, data.token);
           if (data.user) {
-            setUser(data.user);
+            setLocalUser(data.user);
             safeSetItem(USER_KEY, JSON.stringify(data.user));
           }
         }
@@ -143,7 +166,7 @@ export function AuthProvider({ children }) {
 
   const login = (newToken, userData = null) => {
     setToken(newToken);
-    setUser(userData);
+    setLocalUser(userData);
     safeSetItem(TOKEN_KEY, newToken);
     if (userData) {
       safeSetItem(USER_KEY, JSON.stringify(userData));
@@ -157,7 +180,9 @@ export function AuthProvider({ children }) {
   };
 
   const isAuthenticated = () => {
-    // Check both state and localStorage for token (handles race conditions after login)
+    // Check Replit auth first, then local auth
+    if (replitUser) return true;
+    
     const currentToken = token || safeGetItem(TOKEN_KEY);
     if (!currentToken) return false;
     if (isTokenExpired(currentToken)) {
@@ -166,17 +191,25 @@ export function AuthProvider({ children }) {
     }
     return true;
   };
+  
+  const combinedLoading = isLoading || replitLoading;
+
+  const loginWithReplit = () => {
+    window.location.href = "/api/login";
+  };
 
   return (
     <AuthContext.Provider
       value={{
         token,
         user,
-        isLoading,
+        isLoading: combinedLoading,
         isAuthenticated,
         login,
+        loginWithReplit,
         logout,
         refreshToken,
+        replitUser,
       }}
     >
       {children}
