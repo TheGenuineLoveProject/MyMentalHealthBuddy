@@ -1,0 +1,113 @@
+D-ONLY CATEGORY RUN — WELLNESS (24 routes) + Microcopy Library + Legally-Safer Guardrails
+
+TASK: CATEGORY RUN — D) Wellness & Healing Tools (24 routes)
+GOAL:
+Upgrade ONLY the Wellness & Healing Tools category in /content/routes.js using a practice-first structure with consistent tiers (10s / 1–3 min / 3–10 min), conscious-aware language, beginner/standard/deep reading modes, and legally-safer disclaimers — while leaving all other routes unchanged.
+
+NON-NEGOTIABLES:
+- No medical claims. No guarantees. No diagnosis. No “treat/cure/heal” promises.
+- “Educational support — not medical advice” disclaimer is present.
+- Provide opt-out language + “pause/stop” on every practice.
+- Always include safety routing link: /crisis (or equivalent) on Wellness pages.
+- Copy must be original (no plagiarism) and culturally/identity inclusive.
+
+SCOPE:
+Update ONLY these routes:
+- /wellness
+- /wellness-hub
+- /healing-library
+- /calming-scenes
+- /breathing
+- /grounding
+- /affirmations
+- /meditation
+- /self-care
+- /emotional-intelligence
+- /sleep-guide
+- /stress-response
+- /inner-child
+- /body-wellness
+- /soul-wellness
+- /healing-journeys
+- /behavior-change
+- /daily-routines
+- /cognitive-tools
+- /mirror
+- /ritual
+- /wisdom
+- /wisdom-practices
+- /wisdom-synthesis
+
+IMPLEMENTATION REQUIREMENTS:
+1) Add a microcopy library (single source of truth):
+   - Create /content/microcopy/wellnessMicrocopy.js
+   - Export an object with small reusable strings grouped by:
+     - consent, pacing, grounding, reassurance, exits, safety, reflection, encouragement, “try again later”
+   - Also export helper functions:
+     - pick(seed, list) => deterministic selection (no randomness)
+     - buildTierCopy({ routeKey, tier }) => returns consistent tier microcopy
+
+2) Update /content/routes.js:
+   For each Wellness route config:
+   - category: "Wellness & Healing Tools"
+   - stimulationProfile: "practice"
+   - readingLevelsEnabled: true
+   - defaultReadingLevel: "beginner"
+   - hero.title/subtitle/copy: variants { beginner, standard, deep }
+   - primaryCta + secondaryCta: variants { beginner, standard, deep }
+   - sections must include at least:
+     A) "Practice in layers" section with the 3 tiers:
+        - Tier 1: 10 seconds (micro)
+        - Tier 2: 1–3 minutes (short)
+        - Tier 3: 3–10 minutes (deeper)
+        Each tier must contain:
+        - title
+        - 3–6 steps (transform/behavioral instructions, not medical)
+        - “pause/stop anytime” line
+        - “gentle exit” line
+     B) "When this might help" section (soft, optional language)
+     C) "If this feels hard" section with alternatives and the /crisis link
+   - Add a per-route “techniqueTags” array:
+     Examples: ["breath", "grounding", "cognitive reframe", "values", "self-compassion", "body scan"]
+     (Tags are descriptive, not claims.)
+
+3) Use consistent evidence-aligned techniques (legally safe wording):
+   - Breathing: paced exhale, box breathing (offer as “some people find…”)
+   - Grounding: 5-4-3-2-1, orientation, temperature cues
+   - Cognitive tools: labeling thoughts, “name it to tame it” (as a gentle practice), thought defusion
+   - Self-compassion: supportive inner voice, “hand-on-heart” optional
+   - Behavioral activation: “one small step” planning (no claims)
+   - Sleep hygiene: light, wind-down routine, stimulus control phrased cautiously
+   - Emotional intelligence: feelings wheel check-in, needs naming
+   - Stress response: fight/flight/freeze/fawn education with inclusive language
+
+4) Add a “Legal & Safety Footer Snippet” to every Wellness page config:
+   - “Educational support — not medical advice.”
+   - “If you feel unsafe or in immediate danger, contact local emergency services.”
+   - Link: { label: "Crisis resources", href: "/crisis" }
+
+STYLE/TONE RULES (CONSCIOUS-AWARE + BEGINNER-FRIENDLY):
+- Beginner = simplest words, shortest sentences, one idea at a time.
+- Standard = normal supportive tone, still concise.
+- Deep = more context + gentle psychoeducation, still non-clinical.
+- Always: choice language (“If you’d like…”, “Try what fits.”), consent (“Only if it feels okay.”)
+- Avoid: “should”, “must”, identity assumptions, spiritual absolutism.
+
+OUTPUT FORMAT (MANDATORY):
+1) IMPLEMENTATION CHECKLIST (before)
+2) /content/microcopy/wellnessMicrocopy.js (FULL FILE)
+3) /content/routes.js (FULL FILE) with ONLY Wellness routes changed + helpers updated
+4) COMPLETED CHECKLIST (after) ✅ / N/A
+5) Quick manual test plan:
+   - Visit /breathing?level=beginner
+   - Switch to deep via toggle (if implemented)
+   - Confirm tiers show: 10s / 1–3 / 3–10 and crisis link present
+
+DONE GATE — FAIL THE RUN IF ANY FAILS:
+✅ npm run dev works
+✅ No console errors
+✅ Wellness routes have practice tiers + safety link
+✅ No medical/guarantee language
+✅ Copy variants exist for beginner/standard/deep
+✅ Deterministic microcopy (no randomness)
+✅ Other categories unchanged

@@ -2616,12 +2616,47 @@ const rawRoutes = [
     description: 'A comprehensive library of healing resources and modalities.',
     tone: 'practice',
     hero: {
-      eyebrow: 'Knowledge Base',
-      title: 'Your library of',
-      titleHighlight: 'healing wisdom.',
-      subtitle: 'Evidence-based resources for your healing journey.',
-      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
-      secondaryCta: { label: 'Browse Topics', href: '#topics' }
+      eyebrow: {
+        beginner: 'Healing Ideas',
+        standard: 'Healing Library',
+        deep: 'Curated Resources'
+      },
+      title: {
+        beginner: 'Learn about',
+        standard: 'Explore',
+        deep: 'Access evidence-based'
+      },
+      titleHighlight: {
+        beginner: 'what helps.',
+        standard: 'healing wisdom.',
+        deep: 'healing modalities.'
+      },
+      subtitle: {
+        beginner: 'Simple explanations of healing concepts.',
+        standard: 'Evidence-based resources for your journey.',
+        deep: 'A curated library of therapeutic frameworks and modalities.'
+      },
+      helperLine: {
+        beginner: 'Pick what interests you.',
+        standard: 'Browse at your own pace.',
+        deep: 'Depth follows curiosity.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Start exploring',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See topics',
+          standard: 'Browse Topics',
+          deep: 'View All Resources'
+        }, 
+        href: '#topics' 
+      }
     },
     practice: {
       beginner: {
@@ -2696,12 +2731,47 @@ const rawRoutes = [
     description: 'Immersive visual and audio experiences for relaxation.',
     tone: 'practice',
     hero: {
-      eyebrow: 'Peaceful Escapes',
-      title: 'Find serenity in',
-      titleHighlight: 'beautiful places.',
-      subtitle: 'Immersive scenes to calm your mind and soothe your soul.',
-      primaryCta: { label: 'Start 10-second reset', href: '#practice' },
-      secondaryCta: { label: 'Sleep Sounds', href: '#sounds' }
+      eyebrow: {
+        beginner: 'Calm Spaces',
+        standard: 'Calming Scenes',
+        deep: 'Visual Regulation'
+      },
+      title: {
+        beginner: 'Rest your eyes on',
+        standard: 'Find serenity in',
+        deep: 'Access visual grounding through'
+      },
+      titleHighlight: {
+        beginner: 'peaceful places.',
+        standard: 'beautiful places.',
+        deep: 'immersive environments.'
+      },
+      subtitle: {
+        beginner: 'Just look. Let your mind quiet.',
+        standard: 'Immersive scenes to calm your mind.',
+        deep: 'Sensory grounding and nervous system regulation.'
+      },
+      helperLine: {
+        beginner: 'No task—just be.',
+        standard: 'Let your gaze soften.',
+        deep: 'Passive visual input supports regulation.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Find calm',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See scenes',
+          standard: 'Sleep Sounds',
+          deep: 'View All Scenes'
+        }, 
+        href: '#sounds' 
+      }
     },
     practice: {
       beginner: {
@@ -2774,6 +2844,49 @@ const rawRoutes = [
     defaultReadingLevel: 'beginner',
     readingLevelsEnabled: true,
     techniqueTags: ['breath', 'paced exhale', 'box breathing', 'vagal tone'],
+    hero: {
+      eyebrow: {
+        beginner: 'Calm Breathing',
+        standard: 'Breathwork Practices',
+        deep: 'Respiratory Regulation'
+      },
+      title: {
+        beginner: 'Slow down with',
+        standard: 'Regulate your system with',
+        deep: 'Modulate your nervous system through'
+      },
+      titleHighlight: {
+        beginner: 'gentle breaths.',
+        standard: 'conscious breathing.',
+        deep: 'breath.'
+      },
+      subtitle: {
+        beginner: 'Simple exercises to help you feel calmer.',
+        standard: 'Evidence-based practices to shift from stress to calm.',
+        deep: 'Practices grounded in vagal tone and HRV research.'
+      },
+      helperLine: {
+        beginner: 'If you feel dizzy, stop.',
+        standard: 'Stop if you feel uncomfortable.',
+        deep: 'Listen to your body\'s signals.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try 10 seconds',
+          standard: 'Start 10-second reset',
+          deep: 'Begin micro-practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See options',
+          standard: 'Browse All',
+          deep: 'Explore Techniques'
+        }, 
+        href: '#techniques' 
+      }
+    },
     practice: {
       beginner: {
         duration: '10s',
@@ -3047,12 +3160,47 @@ const rawRoutes = [
       text: 'Grounding is a supportive skill, not therapy. If you experience persistent dissociation, flashbacks, or distress, please reach out to a mental health professional.'
     },
     hero: {
-      eyebrow: 'Present Moment',
-      title: 'Return to',
-      titleHighlight: 'the here and now.',
-      subtitle: 'When you feel disconnected, overwhelmed, or far away from yourself, these gentle techniques can help you feel more present. You can use them anytime, anywhere.',
-      primaryCta: { label: 'Start Grounding', href: '#exercises' },
-      secondaryCta: { label: 'Quick Reset', href: '#quick' }
+      eyebrow: {
+        beginner: 'Feel Your Feet',
+        standard: 'Present Moment',
+        deep: 'Somatic Anchoring'
+      },
+      title: {
+        beginner: 'Come back to',
+        standard: 'Return to',
+        deep: 'Anchor in'
+      },
+      titleHighlight: {
+        beginner: 'right now.',
+        standard: 'the here and now.',
+        deep: 'the present moment.'
+      },
+      subtitle: {
+        beginner: 'Simple ways to feel more here.',
+        standard: 'Gentle techniques to help you feel more present.',
+        deep: 'Body-based practices drawn from somatic therapy research.'
+      },
+      helperLine: {
+        beginner: 'Stop any time you want.',
+        standard: 'Pause whenever you need.',
+        deep: 'Honor your body\'s signals.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try 10 seconds',
+          standard: 'Start Grounding',
+          deep: 'Begin practice'
+        }, 
+        href: '#exercises' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See quick tips',
+          standard: 'Quick Reset',
+          deep: 'Explore 5-4-3-2-1'
+        }, 
+        href: '#quick' 
+      }
     },
     modules: [
       { icon: 'Eye', title: 'Engages Your Senses', description: 'Sensory focus interrupts spiraling thoughts and anchors attention.' },
@@ -3135,6 +3283,49 @@ const rawRoutes = [
     defaultReadingLevel: 'beginner',
     readingLevelsEnabled: true,
     techniqueTags: ['self-compassion', 'supportive inner voice', 'hand-on-heart'],
+    hero: {
+      eyebrow: {
+        beginner: 'Kind Words',
+        standard: 'Self-Compassion Practice',
+        deep: 'Cognitive Reframing'
+      },
+      title: {
+        beginner: 'Speak gently to',
+        standard: 'Build a kinder relationship with',
+        deep: 'Transform your inner dialogue through'
+      },
+      titleHighlight: {
+        beginner: 'yourself.',
+        standard: 'yourself.',
+        deep: 'self-compassion.'
+      },
+      subtitle: {
+        beginner: 'Simple words that help.',
+        standard: 'Supportive self-statements rooted in research.',
+        deep: 'Practices informed by Dr. Kristin Neff\'s self-compassion framework.'
+      },
+      helperLine: {
+        beginner: 'Skip what doesn\'t fit.',
+        standard: 'Use what resonates, leave the rest.',
+        deep: 'Adapt statements to your experience.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try one',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See examples',
+          standard: 'Browse Affirmations',
+          deep: 'Explore Framework'
+        }, 
+        href: '#examples' 
+      }
+    },
     practice: {
       beginner: {
         duration: '10s',
@@ -3302,6 +3493,49 @@ const rawRoutes = [
     defaultReadingLevel: 'beginner',
     readingLevelsEnabled: true,
     techniqueTags: ['meditation', 'mindfulness', 'attention training', 'present moment'],
+    hero: {
+      eyebrow: {
+        beginner: 'Just Sit',
+        standard: 'Meditation Practice',
+        deep: 'Contemplative Training'
+      },
+      title: {
+        beginner: 'Rest in',
+        standard: 'Find stillness in',
+        deep: 'Cultivate present-moment awareness through'
+      },
+      titleHighlight: {
+        beginner: 'stillness.',
+        standard: 'the present moment.',
+        deep: 'meditation.'
+      },
+      subtitle: {
+        beginner: 'Start with one breath.',
+        standard: 'Accessible practices—no experience needed.',
+        deep: 'Mindfulness-based techniques grounded in attention research.'
+      },
+      helperLine: {
+        beginner: 'Your mind will wander—that\'s okay.',
+        standard: 'Wandering minds are normal.',
+        deep: 'Noticing distraction is part of the practice.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try 10 seconds',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn more',
+          standard: 'Explore Styles',
+          deep: 'View Research'
+        }, 
+        href: '#styles' 
+      }
+    },
     practice: {
       beginner: {
         duration: '10s',
@@ -3444,6 +3678,49 @@ const rawRoutes = [
     defaultReadingLevel: 'beginner',
     readingLevelsEnabled: true,
     techniqueTags: ['self-care', 'nervous system support', 'one small step'],
+    hero: {
+      eyebrow: {
+        beginner: 'Small Acts',
+        standard: 'Self-Care Toolkit',
+        deep: 'Nervous System Support'
+      },
+      title: {
+        beginner: 'Do one small thing for',
+        standard: 'Practical tools for caring for',
+        deep: 'Evidence-informed practices for'
+      },
+      titleHighlight: {
+        beginner: 'you.',
+        standard: 'yourself.',
+        deep: 'sustainable self-care.'
+      },
+      subtitle: {
+        beginner: 'Tiny steps matter.',
+        standard: 'Small actions that support your wellbeing.',
+        deep: 'Building capacity through micro-practices.'
+      },
+      helperLine: {
+        beginner: 'Pick what sounds easiest.',
+        standard: 'Start with what feels manageable.',
+        deep: 'Sustainable care builds over time.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try one thing',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See ideas',
+          standard: 'Browse Tools',
+          deep: 'Explore Practices'
+        }, 
+        href: '#exercises' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -3628,6 +3905,49 @@ const rawRoutes = [
     defaultReadingLevel: 'beginner',
     readingLevelsEnabled: true,
     techniqueTags: ['emotional awareness', 'feelings wheel', 'name it to tame it', 'needs naming'],
+    hero: {
+      eyebrow: {
+        beginner: 'Notice Feelings',
+        standard: 'Emotional Intelligence',
+        deep: 'Affect Regulation'
+      },
+      title: {
+        beginner: 'Understand what you',
+        standard: 'Develop awareness of what you',
+        deep: 'Build regulation skills through understanding'
+      },
+      titleHighlight: {
+        beginner: 'feel.',
+        standard: 'feel.',
+        deep: 'your emotions.'
+      },
+      subtitle: {
+        beginner: 'Naming helps.',
+        standard: 'Awareness and regulation skills.',
+        deep: 'Research-based practices from DBT and affect science.'
+      },
+      helperLine: {
+        beginner: 'All feelings are okay.',
+        standard: 'Emotions carry information.',
+        deep: 'Naming activates prefrontal regulation.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Check in now',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See feeling words',
+          standard: 'Feelings Wheel',
+          deep: 'View Framework'
+        }, 
+        href: '#wheel' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -3811,6 +4131,49 @@ const rawRoutes = [
     defaultReadingLevel: 'beginner',
     readingLevelsEnabled: true,
     techniqueTags: ['sleep hygiene', 'wind-down routine', 'stimulus control'],
+    hero: {
+      eyebrow: {
+        beginner: 'Rest Better',
+        standard: 'Sleep Guide',
+        deep: 'Sleep Hygiene'
+      },
+      title: {
+        beginner: 'Get more',
+        standard: 'Tools for better',
+        deep: 'Evidence-based practices for'
+      },
+      titleHighlight: {
+        beginner: 'rest.',
+        standard: 'sleep.',
+        deep: 'restorative sleep.'
+      },
+      subtitle: {
+        beginner: 'Simple tips for bedtime.',
+        standard: 'Techniques for more restful sleep.',
+        deep: 'Stimulus control and circadian-aligned practices.'
+      },
+      helperLine: {
+        beginner: 'Start with one change.',
+        standard: 'Small adjustments add up.',
+        deep: 'Consistency matters more than intensity.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try tonight',
+          standard: 'Start Wind-Down',
+          deep: 'Begin practice'
+        }, 
+        href: '#routine' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See tips',
+          standard: 'Sleep Hygiene Tips',
+          deep: 'View Research'
+        }, 
+        href: '#tips' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -3934,6 +4297,49 @@ const rawRoutes = [
     title: 'Stress Response Guide — The Genuine Love Project',
     description: 'Understand fight, flight, freeze, and fawn responses. Polyvagal-informed education for nervous system awareness.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Your Body\'s Signals',
+        standard: 'Stress Response Guide',
+        deep: 'Polyvagal Education'
+      },
+      title: {
+        beginner: 'Understand your',
+        standard: 'Learn about your',
+        deep: 'Develop awareness of'
+      },
+      titleHighlight: {
+        beginner: 'stress signals.',
+        standard: 'stress responses.',
+        deep: 'nervous system states.'
+      },
+      subtitle: {
+        beginner: 'Your body is trying to help.',
+        standard: 'Fight, flight, freeze, and fawn explained.',
+        deep: 'Polyvagal-informed education for autonomic awareness.'
+      },
+      helperLine: {
+        beginner: 'These are normal reactions.',
+        standard: 'All responses are adaptive.',
+        deep: 'Your nervous system is doing its job.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Check my state',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn more',
+          standard: 'Explore States',
+          deep: 'View Polyvagal Theory'
+        }, 
+        href: '#states' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4119,6 +4525,49 @@ const rawRoutes = [
     title: 'Inner Child Work — The Genuine Love Project',
     description: 'Gentle, trauma-informed exercises for reconnecting with your younger self. Drawn from IFS and attachment research.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'The Younger You',
+        standard: 'Inner Child Work',
+        deep: 'Parts Work & Reparenting'
+      },
+      title: {
+        beginner: 'Be kind to',
+        standard: 'Reconnect with',
+        deep: 'Integrate and nurture'
+      },
+      titleHighlight: {
+        beginner: 'your younger self.',
+        standard: 'your inner child.',
+        deep: 'younger parts of yourself.'
+      },
+      subtitle: {
+        beginner: 'You deserved love then. You deserve it now.',
+        standard: 'Gentle exercises for healing and reconnection.',
+        deep: 'Trauma-informed practices from IFS and attachment research.'
+      },
+      helperLine: {
+        beginner: 'Go slowly. This can be tender.',
+        standard: 'Pace yourself with this work.',
+        deep: 'Titration supports sustainable healing.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Start gently',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn more',
+          standard: 'Explore Exercises',
+          deep: 'View IFS Framework'
+        }, 
+        href: '#exercises' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4309,6 +4758,49 @@ const rawRoutes = [
     title: 'Body Wellness — The Genuine Love Project',
     description: 'Mind-body connection practices for physical and emotional healing.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Body Check',
+        standard: 'Body Wellness',
+        deep: 'Somatic Practices'
+      },
+      title: {
+        beginner: 'Notice your',
+        standard: 'Connect with your',
+        deep: 'Develop interoceptive awareness through'
+      },
+      titleHighlight: {
+        beginner: 'body.',
+        standard: 'physical self.',
+        deep: 'embodiment.'
+      },
+      subtitle: {
+        beginner: 'Your body holds wisdom.',
+        standard: 'Mind-body practices for wellbeing.',
+        deep: 'Somatic and interoceptive practices for integration.'
+      },
+      helperLine: {
+        beginner: 'Just notice—no need to change anything.',
+        standard: 'Awareness without judgment.',
+        deep: 'Noticing is the practice.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Check in now',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn more',
+          standard: 'Explore Practices',
+          deep: 'View Research'
+        }, 
+        href: '#checkin' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4407,6 +4899,49 @@ const rawRoutes = [
     title: 'Soul Wellness — The Genuine Love Project',
     description: 'Spiritual practices for meaning, purpose, and transcendence.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'What Matters',
+        standard: 'Soul Wellness',
+        deep: 'Contemplative Practices'
+      },
+      title: {
+        beginner: 'Connect to',
+        standard: 'Nurture your',
+        deep: 'Cultivate meaning through'
+      },
+      titleHighlight: {
+        beginner: 'what matters.',
+        standard: 'inner life.',
+        deep: 'contemplation.'
+      },
+      subtitle: {
+        beginner: 'Moments of quiet meaning.',
+        standard: 'Practices for purpose and transcendence.',
+        deep: 'Values-aligned and contemplative practices.'
+      },
+      helperLine: {
+        beginner: 'No specific beliefs required.',
+        standard: 'Adapt to your own spiritual framework.',
+        deep: 'These practices are framework-agnostic.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Start simply',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See practices',
+          standard: 'Explore Practices',
+          deep: 'View Contemplative Traditions'
+        }, 
+        href: '#practices' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4504,6 +5039,49 @@ const rawRoutes = [
     title: 'Healing Journeys — The Genuine Love Project',
     description: 'Structured healing pathways for specific challenges.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Your Path',
+        standard: 'Healing Journeys',
+        deep: 'Structured Pathways'
+      },
+      title: {
+        beginner: 'Start your',
+        standard: 'Walk your own',
+        deep: 'Navigate structured'
+      },
+      titleHighlight: {
+        beginner: 'healing path.',
+        standard: 'healing journey.',
+        deep: 'healing pathways.'
+      },
+      subtitle: {
+        beginner: 'Step by step. At your pace.',
+        standard: 'Guided pathways for specific challenges.',
+        deep: 'Integration-focused narrative and imagery practices.'
+      },
+      helperLine: {
+        beginner: 'Pick one path to start.',
+        standard: 'Choose what resonates.',
+        deep: 'Trust your process.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'See paths',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn more',
+          standard: 'Browse Paths',
+          deep: 'View All Journeys'
+        }, 
+        href: '#paths' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4601,6 +5179,49 @@ const rawRoutes = [
     title: 'Behavior Change — The Genuine Love Project',
     description: 'Evidence-based tools for creating lasting positive changes.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Small Steps',
+        standard: 'Behavior Change',
+        deep: 'Behavioral Activation'
+      },
+      title: {
+        beginner: 'Change starts with',
+        standard: 'Build lasting change through',
+        deep: 'Create sustainable shifts via'
+      },
+      titleHighlight: {
+        beginner: 'one tiny step.',
+        standard: 'small habits.',
+        deep: 'micro-behaviors.'
+      },
+      subtitle: {
+        beginner: 'Start impossibly small.',
+        standard: 'Evidence-based tools for lasting change.',
+        deep: 'Habit formation science applied to wellbeing.'
+      },
+      helperLine: {
+        beginner: 'Tinier is better.',
+        standard: 'Consistency beats intensity.',
+        deep: 'Small behaviors compound over time.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Pick one thing',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn how',
+          standard: 'Explore Habits',
+          deep: 'View Research'
+        }, 
+        href: '#track' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4698,6 +5319,49 @@ const rawRoutes = [
     title: 'Daily Routines — The Genuine Love Project',
     description: 'Create nurturing daily routines for consistent well-being.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Daily Flow',
+        standard: 'Daily Routines',
+        deep: 'Structured Rhythms'
+      },
+      title: {
+        beginner: 'Build a gentle',
+        standard: 'Create nurturing',
+        deep: 'Design intentional'
+      },
+      titleHighlight: {
+        beginner: 'daily rhythm.',
+        standard: 'daily routines.',
+        deep: 'daily structures.'
+      },
+      subtitle: {
+        beginner: 'Small moments shape your day.',
+        standard: 'Consistent practices for wellbeing.',
+        deep: 'Routine as a container for self-regulation.'
+      },
+      helperLine: {
+        beginner: 'Start with morning or evening.',
+        standard: 'Build one routine at a time.',
+        deep: 'Anchor routines to transitions.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Start one',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See ideas',
+          standard: 'Build Your Routine',
+          deep: 'View Templates'
+        }, 
+        href: '#build' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4795,6 +5459,49 @@ const rawRoutes = [
     title: 'Cognitive Tools — The Genuine Love Project',
     description: 'Tools for reframing thoughts and managing cognitive patterns.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Mind Tools',
+        standard: 'Cognitive Tools',
+        deep: 'Cognitive Flexibility'
+      },
+      title: {
+        beginner: 'Notice your',
+        standard: 'Work with your',
+        deep: 'Develop flexibility in'
+      },
+      titleHighlight: {
+        beginner: 'thoughts.',
+        standard: 'thinking patterns.',
+        deep: 'cognitive processes.'
+      },
+      subtitle: {
+        beginner: 'Thoughts are just thoughts.',
+        standard: 'Tools for reframing and defusion.',
+        deep: 'ACT and CBT-informed cognitive practices.'
+      },
+      helperLine: {
+        beginner: 'You don\'t have to believe every thought.',
+        standard: 'Thoughts are suggestions, not facts.',
+        deep: 'Defusion creates space between stimulus and response.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Check in',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Learn more',
+          standard: 'Explore Tools',
+          deep: 'View Framework'
+        }, 
+        href: '#tools' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4893,6 +5600,49 @@ const rawRoutes = [
     title: 'Mirror Work — The Genuine Love Project',
     description: 'Self-love practices using mirror work techniques.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'See Yourself',
+        standard: 'Mirror Work',
+        deep: 'Self-Regard Practice'
+      },
+      title: {
+        beginner: 'Look at yourself with',
+        standard: 'Practice seeing yourself with',
+        deep: 'Cultivate self-regard through'
+      },
+      titleHighlight: {
+        beginner: 'kindness.',
+        standard: 'compassion.',
+        deep: 'mirror work.'
+      },
+      subtitle: {
+        beginner: 'You deserve gentle eyes.',
+        standard: 'Self-love practices using mirror techniques.',
+        deep: 'A practice for reshaping self-perception.'
+      },
+      helperLine: {
+        beginner: 'This can feel hard—go slow.',
+        standard: 'Start with neutral observation.',
+        deep: 'Titrate exposure if needed.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try it gently',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Why this helps',
+          standard: 'Learn More',
+          deep: 'View Research'
+        }, 
+        href: '#about' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -4991,6 +5741,49 @@ const rawRoutes = [
     title: 'Sacred Rituals — The Genuine Love Project',
     description: 'Create meaningful rituals for healing and transition.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Meaningful Moments',
+        standard: 'Sacred Rituals',
+        deep: 'Ritual as Container'
+      },
+      title: {
+        beginner: 'Create',
+        standard: 'Design meaningful',
+        deep: 'Craft intentional'
+      },
+      titleHighlight: {
+        beginner: 'meaningful moments.',
+        standard: 'rituals.',
+        deep: 'ritual containers.'
+      },
+      subtitle: {
+        beginner: 'Mark what matters.',
+        standard: 'Rituals for healing and transition.',
+        deep: 'Meaning-making through structured practice.'
+      },
+      helperLine: {
+        beginner: 'A ritual can be tiny.',
+        standard: 'Simple rituals are powerful.',
+        deep: 'The container matters more than complexity.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try one',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See ideas',
+          standard: 'Browse Rituals',
+          deep: 'View Framework'
+        }, 
+        href: '#rituals' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -5088,6 +5881,49 @@ const rawRoutes = [
     title: 'Wisdom — The Genuine Love Project',
     description: 'Curated wisdom for daily inspiration and reflection.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Daily Insight',
+        standard: 'Wisdom',
+        deep: 'Perennial Wisdom'
+      },
+      title: {
+        beginner: 'One thought to carry',
+        standard: 'Curated wisdom for',
+        deep: 'Timeless insights for'
+      },
+      titleHighlight: {
+        beginner: 'with you.',
+        standard: 'daily reflection.',
+        deep: 'perspective shifts.'
+      },
+      subtitle: {
+        beginner: 'Simple ideas with depth.',
+        standard: 'Curated wisdom for inspiration.',
+        deep: 'Cross-tradition insights for reflective practice.'
+      },
+      helperLine: {
+        beginner: 'Let one thing land.',
+        standard: 'Take what resonates.',
+        deep: 'Integration happens over time.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'See today\'s wisdom',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'Browse more',
+          standard: 'Explore Library',
+          deep: 'View Collections'
+        }, 
+        href: '#library' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -5185,6 +6021,49 @@ const rawRoutes = [
     title: 'Wisdom Practices — The Genuine Love Project',
     description: 'Practical applications of timeless wisdom traditions.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Ancient Tools',
+        standard: 'Wisdom Practices',
+        deep: 'Contemplative Traditions'
+      },
+      title: {
+        beginner: 'Try practices from',
+        standard: 'Apply timeless',
+        deep: 'Engage with'
+      },
+      titleHighlight: {
+        beginner: 'across time.',
+        standard: 'wisdom traditions.',
+        deep: 'philosophical inquiry.'
+      },
+      subtitle: {
+        beginner: 'Old practices that still work.',
+        standard: 'Practical applications of timeless wisdom.',
+        deep: 'Contemplative and philosophical practices from global traditions.'
+      },
+      helperLine: {
+        beginner: 'These have helped people for ages.',
+        standard: 'Adapt to what serves you.',
+        deep: 'Traditions are invitations, not prescriptions.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Try one',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See traditions',
+          standard: 'Explore Traditions',
+          deep: 'View Framework'
+        }, 
+        href: '#traditions' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
@@ -5283,6 +6162,49 @@ const rawRoutes = [
     title: 'Wisdom Synthesis — The Genuine Love Project',
     description: 'Integrate wisdom from multiple traditions into your practice.',
     tone: 'practice',
+    hero: {
+      eyebrow: {
+        beginner: 'Your Blend',
+        standard: 'Wisdom Synthesis',
+        deep: 'Integrative Practice'
+      },
+      title: {
+        beginner: 'Find what fits',
+        standard: 'Integrate wisdom from',
+        deep: 'Synthesize insights across'
+      },
+      titleHighlight: {
+        beginner: 'for you.',
+        standard: 'multiple traditions.',
+        deep: 'frameworks and lineages.'
+      },
+      subtitle: {
+        beginner: 'Take bits from everywhere.',
+        standard: 'Create your own integrated practice.',
+        deep: 'Cross-tradition synthesis for holistic development.'
+      },
+      helperLine: {
+        beginner: 'Mix and match freely.',
+        standard: 'Trust your intuition.',
+        deep: 'Synthesis is personal and emergent.'
+      },
+      primaryCta: { 
+        label: {
+          beginner: 'Start exploring',
+          standard: 'Start 10-second reset',
+          deep: 'Begin practice'
+        }, 
+        href: '#practice' 
+      },
+      secondaryCta: { 
+        label: {
+          beginner: 'See options',
+          standard: 'Explore Synthesis',
+          deep: 'View Integrations'
+        }, 
+        href: '#synthesis' 
+      }
+    },
     practices: [
       {
         timeTag: '1 min',
