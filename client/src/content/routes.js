@@ -827,7 +827,7 @@ const rawRoutes = [
         title: 'Tools That Meet You Where You Are',
         subtitle: 'Practical exercises for when you\'re ready to explore a bit more.',
         bulletPoints: [
-          'Guided journaling helps you process what you\'re carrying',
+          'Guided journaling may help you process what you\'re carrying',
           'Breathing exercises can shift how you feel in moments',
           'AI companion conversations available whenever you need support',
           'Your one next step: Try one tool today—just one'
@@ -3415,7 +3415,7 @@ const rawRoutes = [
     modules: [
       { icon: 'Heart', title: 'Builds Self-Compassion', description: 'Kind self-talk reduces the harshness of your inner critic.' },
       { icon: 'RefreshCw', title: 'Creates New Patterns', description: 'Repeated gentle words can slowly shift habitual thoughts.' },
-      { icon: 'Shield', title: 'Provides a Buffer', description: 'Self-compassion helps you weather difficult moments with more resilience.' }
+      { icon: 'Shield', title: 'Provides a Buffer', description: 'Self-compassion may help you weather difficult moments with more resilience.' }
     ],
     sections: [
       {
@@ -3886,7 +3886,7 @@ const rawRoutes = [
       subtitle: 'Everyone responds differently. Here are some things people notice:',
       bullets: [
         'Some people find small acts of care add up over time.',
-        'You may notice meeting basic needs helps you feel steadier.',
+        'You may notice meeting basic needs may help you feel steadier.',
         'Many find tiny steps are easier to maintain than big changes.',
         'Self-care routines may help your nervous system feel safer.'
       ],
@@ -4483,7 +4483,7 @@ const rawRoutes = [
         variant: 'glow',
         cards: [
           { icon: 'Smile', title: 'Beginner', text: 'Notice when you are activated or shut down. Name it: "I think I am in flight mode." No need to fix.' },
-          { icon: 'Star', title: 'Intermediate', text: 'Practice regulation during calm moments. Build a toolkit of what helps you.' },
+          { icon: 'Star', title: 'Intermediate', text: 'Practice regulation during calm moments. Build a toolkit of what may work for you.' },
           { icon: 'Sparkles', title: 'Advanced', text: 'Recognize triggers and choose responses. Support co-regulation with others.' }
         ]
       },
@@ -6595,7 +6595,7 @@ const rawRoutes = [
     hero: {
       eyebrow: 'Content Creation',
       title: 'Create content that',
-      titleHighlight: 'heals, not harms.',
+      titleHighlight: 'supports, not harms.',
       subtitle: 'Generate warm, grounded social media content with built-in safety guidelines. Every template is trauma-informed and evidence-based—no medical claims, just supportive guidance.',
       primaryCta: { label: 'Start Creating', href: '#studio' },
       secondaryCta: { label: 'Content Guidelines', href: '#guidelines' }
@@ -7253,11 +7253,11 @@ const rawRoutes = [
     },
     contentLevels: {
       beginner: {
-        title: 'Rest Is Healing',
-        subtitle: 'Sleep helps your body and mind repair.',
+        title: 'Rest Is Restorative',
+        subtitle: 'Sleep may support your body and mind.',
         bulletPoints: [
-          'Your body heals while you sleep—it\'s not lazy to rest.',
-          'A dark, cool room helps you sleep better.',
+          'Your body restores while you sleep—it\'s not lazy to rest.',
+          'A dark, cool room may support better sleep.',
           'Try putting your phone away an hour before bed.',
           'Your one next step: Set a gentle bedtime reminder for tonight.'
         ]
@@ -7362,7 +7362,7 @@ const rawRoutes = [
         bulletPoints: [
           'There are no "bad" foods—all eating is valid.',
           'Try eating slowly and noticing how food tastes.',
-          'Drinking water throughout the day helps you feel better.',
+          'Drinking water throughout the day may help you feel better.',
           'Your one next step: Enjoy your next meal without screens.'
         ]
       },
@@ -7566,9 +7566,9 @@ const rawRoutes = [
     contentLevels: {
       beginner: {
         title: 'Go Outside and Breathe',
-        subtitle: 'Nature helps you feel calm and grounded.',
+        subtitle: 'Some people find nature calming and grounding.',
         bulletPoints: [
-          'Even a few minutes outside can lift your mood.',
+          'Even a few minutes outside may help lift your mood.',
           'Look at the sky, touch a tree, or listen to birds.',
           'You don\'t need a forest—a window or houseplant counts.',
           'Your one next step: Step outside for 2 minutes and take 3 deep breaths.'
