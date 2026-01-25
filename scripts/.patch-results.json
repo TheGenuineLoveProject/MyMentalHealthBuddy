@@ -1,0 +1,506 @@
+{
+  "timestamp": "2026-01-25T05:04:48.314Z",
+  "dryRun": true,
+  "stats": {
+    "filesScanned": 506,
+    "filesPatched": 82,
+    "patchesApplied": 83,
+    "skipped": 1,
+    "errors": []
+  },
+  "patchLog": [
+    {
+      "file": "client/src/pages/AdaptiveCompanionPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/AffirmationsPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/BehaviorChangePage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/BodyWellnessPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/BoundariesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/BreathingExercisesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/CalmingScenesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/CognitiveArchitecturePage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/CognitiveToolsPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/CoherenceLadderPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/CollaborativeLabPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ContentIndexPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ContentStudioPage.tsx",
+      "patches": [
+        "add-disclaimer-to-page",
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/DailyRitualPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/DailyRoutinesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/DailyWisdomOraclePage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/EmotionalIntelligencePage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ExamplesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/FAQPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/GlossaryPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/GroundingTechniquesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/GrowthAnalyticsPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/GuidedJournalingPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/HealingJourneysPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/HealingLandingPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/HealingLibraryPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/HowToGuidesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/InnerChildPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/InsightCardsPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/KnowledgeSynthesisPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/MeditationGuidePage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/MetaLearningPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/MirrorPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/MovementSnacksPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/NervousSystemFloodingPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/NewsPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/PerceptionRefinementPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/PermacultureWellnessPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/PhilosophicalInquiryPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ProfessionalResourcesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ProgressDashboardPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/QAPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ResearchEvidencePage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ResilienceMetricsPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ResourcesPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/SelfWorthReflectionPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/SleepGuidePage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/SoulWellnessPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/StrategyMapsPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/StressResponseGuidePage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/StudyVaultPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/SystemMapPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/SystemsThinkingPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/ValuesFinderPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/WellnessGlossaryPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/WellnessHubPage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/WisdomPracticesPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/WisdomSynthesisPage.tsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/404.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/blog-[param].jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/blog-slug.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/chat.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/community-discussion-[param].jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/community-discussion-id.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/crm.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/dashboard.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/forgot-password.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/healing-test.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/healing.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/home.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/index.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/landing.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/login-callback.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/login.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/not-found.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/onboarding.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/original-home.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/pricing.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/register.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/reset-password.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/generated/welcome.jsx",
+      "patches": [
+        "ensure-benefits-block-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/tools/ReframePage.jsx",
+      "patches": [
+        "add-seo-import"
+      ]
+    }
+  ]
+}
