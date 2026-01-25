@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { SEO } from "@/components/SEO";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email"),
@@ -44,6 +45,11 @@ export default function Login() {
   };
 
   return (
+    <>
+      <SEO
+        title="Login | The Genuine Love Project"
+        description="Sign in to your wellness journey. Educational wellness tools for adults 18+."
+      />
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
@@ -140,8 +146,12 @@ export default function Login() {
             <Sparkles className="w-4 h-4 text-[var(--gold-500)]" />
             Live in Genuine Love
           </p>
+          <p className="text-sm opacity-70 mt-2">
+            Adults 18+ only. Educational wellness tools, not medical care.
+          </p>
         </div>
       </div>
     </div>
+    </>
   );
 }

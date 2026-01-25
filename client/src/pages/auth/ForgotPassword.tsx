@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { SEO } from "@/components/SEO";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -23,6 +24,11 @@ export default function ForgotPassword() {
   };
 
   return (
+    <>
+      <SEO
+        title="Reset Password | The Genuine Love Project"
+        description="Reset your password. Educational wellness tools for adults 18+."
+      />
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
@@ -123,8 +129,12 @@ export default function ForgotPassword() {
             <Sparkles className="w-4 h-4 text-[var(--gold-500)]" />
             Live in Genuine Love
           </p>
+          <p className="text-sm opacity-70 mt-2">
+            Adults 18+ only. Educational wellness tools, not medical care.
+          </p>
         </div>
       </div>
     </div>
+    </>
   );
 }

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { SEO } from "@/components/SEO";
 
 const signUpSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -60,6 +61,11 @@ export default function SignUp() {
   };
 
   return (
+    <>
+      <SEO
+        title="Sign Up | The Genuine Love Project"
+        description="Begin your wellness journey. Educational wellness tools for adults 18+."
+      />
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
         <div className="text-center mb-8">
@@ -194,11 +200,15 @@ export default function SignUp() {
                   <Sparkles className="w-4 h-4 text-[var(--gold-500)]" />
                   Your privacy is sacred to us
                 </p>
+                <p className="text-sm opacity-70 mt-2">
+                  Adults 18+ only. Educational wellness tools, not medical care.
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }
