@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { X, Download, Edit3, Quote, Heart, Footprints, ExternalLink, CheckCircle } from "lucide-react";
 
 const VALUES_SUGGESTIONS = [
@@ -20,6 +20,15 @@ export default function ReflectionCardExport({
   const [showPreview, setShowPreview] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
   const canvasRef = useRef(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEsc = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isOpen, onClose]);
 
   const generateCard = useCallback(() => {
     const canvas = canvasRef.current;
