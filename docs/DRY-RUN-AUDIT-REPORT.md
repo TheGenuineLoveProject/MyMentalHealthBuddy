@@ -43,6 +43,10 @@
 | client/src/pages/Challenge.jsx | No BenefitsBlock | Medium | ✓ Fixed |
 | client/src/pages/DailyRitualPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
 | client/src/pages/GuidedJournalingPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/WisdomPracticesPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/MetaLearningPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/PhilosophicalInquiryPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/DailyWisdomOraclePage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
 
 ### 2. MISSING SAFETY DISCLAIMERS
 
