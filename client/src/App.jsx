@@ -63,6 +63,14 @@ const EmotionalIntelligenceHubPage = lazy(() => import("./pages/hubs/EmotionalIn
 const PersonalGrowthHubPage = lazy(() => import("./pages/hubs/PersonalGrowthHubPage.jsx"));
 const InnerPeaceHubPage = lazy(() => import("./pages/hubs/InnerPeaceHubPage.jsx"));
 const HubsIndexPage = lazy(() => import("./pages/hubs/HubsIndexPage.jsx"));
+const HealingJourneyHubPage = lazy(() => import("./pages/hubs/HealingJourneyHubPage.jsx"));
+const SelfCareHubPage = lazy(() => import("./pages/hubs/SelfCareHubPage.jsx"));
+const CopingSkillsHubPage = lazy(() => import("./pages/hubs/CopingSkillsHubPage.jsx"));
+const InnerWorkHubPage = lazy(() => import("./pages/hubs/InnerWorkHubPage.jsx"));
+const BreathworkHubPage = lazy(() => import("./pages/hubs/BreathworkHubPage.jsx"));
+const JournalingHubPage = lazy(() => import("./pages/hubs/JournalingHubPage.jsx"));
+const BodyMindHubPage = lazy(() => import("./pages/hubs/BodyMindHubPage.jsx"));
+const DailyPracticeHubPage = lazy(() => import("./pages/hubs/DailyPracticeHubPage.jsx"));
 const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
 const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
 const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
@@ -239,6 +247,30 @@ export default function App() {
               </Route>
               <Route path="/hubs">
                 <WellnessRoute><HubsIndexPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/healing-journey">
+                <WellnessRoute><HealingJourneyHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/self-care">
+                <WellnessRoute><SelfCareHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/coping-skills">
+                <WellnessRoute><CopingSkillsHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/inner-work">
+                <WellnessRoute><InnerWorkHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/breathwork">
+                <WellnessRoute><BreathworkHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/journaling">
+                <WellnessRoute><JournalingHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/body-mind">
+                <WellnessRoute><BodyMindHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/daily-practice">
+                <WellnessRoute><DailyPracticeHubPage /></WellnessRoute>
               </Route>
               <Route path="/premium">
                 <ProtectedRoute><Premium /></ProtectedRoute>

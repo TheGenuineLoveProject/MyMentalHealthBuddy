@@ -8,7 +8,7 @@ import { Link } from "wouter";
 import { 
   Moon, Shield, Heart, Zap, Wind, Users, 
   Feather, Sparkles, Eye, Brain, TrendingUp, 
-  ArrowRight 
+  Sun, ArrowRight 
 } from "lucide-react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -99,6 +99,54 @@ const ALL_HUBS = [
     description: "Cultivate serenity",
     href: "/hubs/inner-peace",
     icon: Sparkles
+  },
+  {
+    title: "Healing Journey",
+    description: "Path to wholeness",
+    href: "/hubs/healing-journey",
+    icon: Heart
+  },
+  {
+    title: "Self-Care",
+    description: "Prioritize your wellbeing",
+    href: "/hubs/self-care",
+    icon: Sun
+  },
+  {
+    title: "Coping Skills",
+    description: "Healthy strategies",
+    href: "/hubs/coping-skills",
+    icon: Shield
+  },
+  {
+    title: "Inner Work",
+    description: "Deep self-discovery",
+    href: "/hubs/inner-work",
+    icon: Eye
+  },
+  {
+    title: "Breathwork",
+    description: "Power of breath",
+    href: "/hubs/breathwork",
+    icon: Wind
+  },
+  {
+    title: "Journaling",
+    description: "Written reflection",
+    href: "/hubs/journaling",
+    icon: Feather
+  },
+  {
+    title: "Body-Mind",
+    description: "Somatic practices",
+    href: "/hubs/body-mind",
+    icon: Heart
+  },
+  {
+    title: "Daily Practice",
+    description: "Sustainable habits",
+    href: "/hubs/daily-practice",
+    icon: Sun
   }
 ];
 
