@@ -49,3 +49,8 @@ export const BENEFITS: Record<BenefitKey, { title: string; body: string }> = {
   community: { title: "Share your journey", body: "Supportive spaces that encourage respect, kindness, and boundaries." },
   privacy: { title: "Privacy-first by design", body: "You control what you save, share, or keep private—always." },
 };
+
+export function getBenefitDescription(token: BenefitToken): string {
+  const benefit = BENEFITS[token as BenefitKey];
+  return benefit?.body ?? "";
+}

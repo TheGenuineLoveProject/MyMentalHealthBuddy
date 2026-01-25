@@ -1,9 +1,9 @@
 /**
  * Trauma-Informed Microcopy Library
- * Re-exports from the single source of truth: wellnessMicrocopy.js
+ * Re-exports from the single source of truth: wellnessMicrocopy
  * 
  * This file maintains backwards compatibility for existing imports.
- * All new code should import directly from './microcopy/wellnessMicrocopy.js'
+ * All new code should import directly from './microcopy/wellnessMicrocopy'
  */
 
 import wellnessMicrocopyModule, {
@@ -20,7 +20,7 @@ import wellnessMicrocopyModule, {
   pickSlot,
   buildTierCopy,
   getWellnessCopy
-} from './microcopy/wellnessMicrocopy.js';
+} from './microcopy/wellnessMicrocopy';
 
 export const microcopy = {
   permission: [

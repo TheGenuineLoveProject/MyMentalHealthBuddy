@@ -9,7 +9,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "../components/BenefitsBlock";
 import ClarityCard from "../components/content/ClarityCard";
 import ExamplesAccordion from "../components/content/ExamplesAccordion";
-import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivationalInterviewing.js";
+import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivationalInterviewing";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
