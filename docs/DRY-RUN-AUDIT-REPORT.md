@@ -47,6 +47,10 @@
 | client/src/pages/MetaLearningPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
 | client/src/pages/PhilosophicalInquiryPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
 | client/src/pages/DailyWisdomOraclePage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/CognitiveArchitecturePage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/ResilienceMetricsPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/SystemsThinkingPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/KnowledgeSynthesisPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
 
 ### 2. MISSING SAFETY DISCLAIMERS
 
