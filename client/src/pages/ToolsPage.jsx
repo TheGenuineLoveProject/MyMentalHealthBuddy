@@ -9,6 +9,7 @@ import GrowthTimeline from "@/components/growth/GrowthTimeline";
 import ExportPanel from "@/components/export/ExportPanel";
 import SEO from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { useReadingLevel } from "@/context/ReadingLevelContext";
 import { Hero } from "@/components/ui";
 import Microcopy from "@/components/Microcopy";
@@ -120,6 +121,14 @@ export default function ToolsPage() {
 
         <div className="px-4 pb-16">
           <div className="mx-auto max-w-3xl">
+            <BenefitsBlock
+              benefit="Agency, gentle habits, and your pace"
+              duration="Varies by tool"
+              control="Pause or stop anytime"
+              disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+              variant="minimal"
+              className="mb-8"
+            />
             <p className="text-center text-sm text-[var(--glp-ink)]/60 italic mb-8">
               <Microcopy slot="consent" seed="tools-page" as="span" />
             </p>

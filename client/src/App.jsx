@@ -210,35 +210,35 @@ export default function App() {
               <Route path="/body-wellness">{() => <ConfigRoute route="/body-wellness" />}</Route>
               <Route path="/soul-wellness">{() => <ConfigRoute route="/soul-wellness" />}</Route>
 
-              {/* Wisdom Pages - Protected */}
+              {/* Wisdom Pages - Wellness Gated */}
               <Route path="/wisdom">
-                <ProtectedRoute><WisdomToolsPage /></ProtectedRoute>
+                <WellnessRoute><WisdomToolsPage /></WellnessRoute>
               </Route>
               <Route path="/wisdom-practices">
-                <ProtectedRoute><WisdomPracticesPage /></ProtectedRoute>
+                <WellnessRoute><WisdomPracticesPage /></WellnessRoute>
               </Route>
               <Route path="/wisdom-synthesis">
-                <ProtectedRoute><WisdomSynthesisPage /></ProtectedRoute>
+                <WellnessRoute><WisdomSynthesisPage /></WellnessRoute>
               </Route>
               <Route path="/daily-wisdom">
-                <ProtectedRoute><DailyWisdomOraclePage /></ProtectedRoute>
+                <WellnessRoute><DailyWisdomOraclePage /></WellnessRoute>
               </Route>
 
-              {/* Advanced Tools - Protected */}
+              {/* Advanced Tools - Wellness Gated */}
               <Route path="/tools">
-                <ProtectedRoute><ToolsPage /></ProtectedRoute>
+                <WellnessRoute><ToolsPage /></WellnessRoute>
               </Route>
               <Route path="/alignment-path">
                 <WellnessRoute><AlignmentPath /></WellnessRoute>
               </Route>
               <Route path="/advanced">
-                <ProtectedRoute><AdvancedToolsPage /></ProtectedRoute>
+                <WellnessRoute><AdvancedToolsPage /></WellnessRoute>
               </Route>
               <Route path="/mastery">
-                <ProtectedRoute><MasteryToolsPage /></ProtectedRoute>
+                <WellnessRoute><MasteryToolsPage /></WellnessRoute>
               </Route>
               <Route path="/ritual">
-                <ProtectedRoute><DailyRitualPage /></ProtectedRoute>
+                <WellnessRoute><DailyRitualPage /></WellnessRoute>
               </Route>
               <Route path="/atlas">
                 <ProtectedRoute><AtlasDashboard /></ProtectedRoute>
@@ -283,10 +283,10 @@ export default function App() {
                 <ProtectedRoute><GrowthAnalyticsPage /></ProtectedRoute>
               </Route>
               <Route path="/guided-journaling">
-                <ProtectedRoute><GuidedJournalingPage /></ProtectedRoute>
+                <WellnessRoute><GuidedJournalingPage /></WellnessRoute>
               </Route>
               <Route path="/insight-cards">
-                <ProtectedRoute><InsightCardsPage /></ProtectedRoute>
+                <WellnessRoute><InsightCardsPage /></WellnessRoute>
               </Route>
               <Route path="/progress">
                 <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
