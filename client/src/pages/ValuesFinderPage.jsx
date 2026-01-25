@@ -8,8 +8,49 @@ import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { Heart, Star, Compass, Target, CheckCircle2, Plus, Trash2, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const VALUES_CLARITY = {
+  what: "A guided exploration tool to help you identify and clarify your core personal values.",
+  who: "Anyone seeking to understand what truly matters to them and align their life with their values.",
+  when: "During life transitions, when feeling uncertain, or when you want more intentional living.",
+  why: "Knowing your values helps you make decisions, set boundaries, and live more authentically.",
+  howSteps: [
+    "Browse value categories that resonate with you",
+    "Select values that feel genuinely important",
+    "Add any custom values that aren't listed",
+    "Reflect on why these values matter to you"
+  ],
+  whereLinkText: "Explore values-based living",
+  whereHref: "/wisdom/values"
+};
+
+const VALUES_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Discovering your first core values",
+    situation: "You've never formally thought about your values and want to start somewhere.",
+    action: "Browse each category and select 2-3 values that immediately resonate without overthinking.",
+    result: "You identify 'Connection' and 'Growth' as core themes, giving you a foundation to build on."
+  },
+  {
+    level: "intermediate",
+    title: "Resolving a values conflict",
+    situation: "You feel torn between career advancement and family time.",
+    action: "Use the values finder to rank both values and reflect on what 'enough' looks like for each.",
+    result: "You realize you value 'Presence' over 'Achievement' and adjust your work boundaries."
+  },
+  {
+    level: "advanced",
+    title: "Living your values daily",
+    situation: "You know your values but struggle to embody them consistently.",
+    action: "Review your saved values and write specific behaviors for each in different life domains.",
+    result: "You create a personal values code with concrete actions for work, relationships, and self-care."
+  }
+];
 
 const VALUE_CATEGORIES = [
   { id: "connection", label: "Connection", icon: Heart, examples: ["Family", "Friendship", "Community", "Belonging"] },
@@ -89,6 +130,14 @@ export default function ValuesFinderPage() {
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">
+          <ClarityCard {...VALUES_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={VALUES_EXAMPLES} 
+            title="See how others use values exploration"
+            className="mb-8"
+          />
+
           <div className="bg-[var(--surface-elevated)] p-6 rounded-2xl border border-[var(--border-subtle)] mb-8" data-testid="section-intro">
             <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-3" data-testid="heading-intro">
               What are values?

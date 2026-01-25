@@ -6,7 +6,48 @@ import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "../components/BenefitsBlock";
+import ClarityCard from "../components/content/ClarityCard";
+import ExamplesAccordion from "../components/content/ExamplesAccordion";
 import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivationalInterviewing.js";
+
+const JOURNAL_CLARITY = {
+  what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",
+  who: "Anyone seeking a safe place to reflect, process feelings, or track their inner journey.",
+  when: "Daily practice, during emotional moments, or whenever you need to 'write it out.'",
+  why: "Writing helps externalize thoughts, process emotions, and notice patterns over time.",
+  howSteps: [
+    "Choose a prompt or write freely",
+    "Write without editing or judging yourself",
+    "Save your entry (or use silence mode for no-save writing)",
+    "Review past entries to notice patterns and growth"
+  ],
+  whereLinkText: "Learn about journaling benefits",
+  whereHref: "/wisdom/journaling"
+};
+
+const JOURNAL_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Your first journal entry",
+    situation: "You've never journaled before and feel unsure what to write.",
+    action: "Use the random prompt button and write for just 3 minutes without stopping.",
+    result: "You discover journaling feels less intimidating than expected and want to try again."
+  },
+  {
+    level: "intermediate",
+    title: "Processing a difficult emotion",
+    situation: "You're feeling anxious about a work presentation and can't stop ruminating.",
+    action: "Write out every worry without filtering, then ask yourself 'What's the worst that could happen?'",
+    result: "The worries feel smaller on paper, and you identify one concrete action to prepare."
+  },
+  {
+    level: "advanced",
+    title: "Tracking emotional patterns",
+    situation: "You notice you feel low every Sunday evening but don't know why.",
+    action: "Journal specifically about Sunday evenings for several weeks, noting what you did, thought, and felt.",
+    result: "You discover the pattern relates to anticipatory anxiety about Mondays and create a calming Sunday ritual."
+  }
+];
 
 const JOURNAL_PROMPTS = [
   { category: "Gratitude", prompt: "What's one small thing that brought you comfort today?" },
@@ -195,6 +236,14 @@ export default function JournalPage() {
             control="Write as much or little as feels right"
             disclaimer="Educational wellness support only"
             className="mb-6"
+          />
+
+          <ClarityCard {...JOURNAL_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={JOURNAL_EXAMPLES} 
+            title="See how others use journaling"
+            className="mb-8"
           />
 
           {/* Journal Prompts */}

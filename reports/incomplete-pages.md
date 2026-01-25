@@ -15,9 +15,9 @@ Generated: 2026-01-25
 | Missing Crisis Link (wellness) | 80 |
 | Missing Consent Language (wellness) | 149 |
 | Missing SafetyFooter (wellness) | 105 |
-| Missing ClarityCard (wellness) | 159 |
-| Missing ExamplesAccordion (wellness) | 159 |
-| **Total Issues** | **1092** |
+| Missing ClarityCard (wellness) | 154 |
+| Missing ExamplesAccordion (wellness) | 154 |
+| **Total Issues** | **1082** |
 
 ## Detection Criteria
 
@@ -374,11 +374,11 @@ Consent language must include:
   `placeholder="Write a reply..."`
 - **client/src/pages/BlogPost.jsx:106** - `placeholder`
   `placeholder="Share your thoughts..."`
-- **client/src/pages/BoundariesPage.jsx:199** - `placeholder`
+- **client/src/pages/BoundariesPage.jsx:248** - `placeholder`
   `placeholder="e.g., When someone asks me to work late..."`
-- **client/src/pages/BoundariesPage.jsx:212** - `placeholder`
+- **client/src/pages/BoundariesPage.jsx:261** - `placeholder`
   `placeholder="What you might say..."`
-- **client/src/pages/BoundariesPage.jsx:226** - `placeholder`
+- **client/src/pages/BoundariesPage.jsx:275** - `placeholder`
   `placeholder="A gentler way to say the same thing..."`
 - **client/src/pages/ChallengeDay.jsx:102** - `placeholder`
   `placeholder="Write your reflection here... (only you see this)"`
@@ -444,9 +444,9 @@ Consent language must include:
   `placeholder="Tags (comma separated)"`
 - **client/src/pages/InsightCardsPage.tsx:277** - `placeholder`
   `className="px-4 py-2.5 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sag`
-- **client/src/pages/JournalPage.jsx:240** - `placeholder`
+- **client/src/pages/JournalPage.jsx:289** - `placeholder`
   `placeholder="Give your entry a title..."`
-- **client/src/pages/JournalPage.jsx:253** - `placeholder`
+- **client/src/pages/JournalPage.jsx:302** - `placeholder`
   `placeholder="Write your thoughts..."`
 - **client/src/pages/KnowledgeSynthesisPage.tsx:268** - `placeholder`
   `placeholder="Search concepts..."`
@@ -512,7 +512,7 @@ Consent language must include:
   `placeholder="What's on your mind? Write at least 10 characters..."`
 - **client/src/pages/MirrorPage.tsx:149** - `placeholder`
   `className="min-h-[150px] bg-white border-sage-200 text-teal-700 placeholder:text-sage-400 resize-non`
-- **client/src/pages/MoodPage.jsx:233** - `placeholder`
+- **client/src/pages/MoodPage.jsx:282** - `placeholder`
   `placeholder="Any thoughts you'd like to add..."`
 - **client/src/pages/MovementSnacksPage.jsx:230** - `placeholder`
   `placeholder="How do you feel? (you can skip this)"`
@@ -552,9 +552,9 @@ Consent language must include:
   `placeholder="Add an element..."`
 - **client/src/pages/SystemsThinkingPage.tsx:209** - `placeholder`
   `className="flex-1 p-2 rounded-lg bg-white border border-sage-200 text-teal-700 placeholder:text-sage`
-- **client/src/pages/ValuesFinderPage.jsx:180** - `placeholder`
+- **client/src/pages/ValuesFinderPage.jsx:229** - `placeholder`
   `placeholder="Type a value that resonates with you..."`
-- **client/src/pages/ValuesFinderPage.jsx:193** - `placeholder`
+- **client/src/pages/ValuesFinderPage.jsx:242** - `placeholder`
   `placeholder="Why do these values matter to you? What do they mean in your life?"`
 - **client/src/pages/WellnessGlossaryPage.jsx:422** - `placeholder`
   `placeholder="Search terms..."`
@@ -1147,7 +1147,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/BlogEditor.jsx
 - client/src/pages/BlogIndex.jsx
 - client/src/pages/BodyWellnessPage.jsx
-- client/src/pages/BoundariesPage.jsx
 - client/src/pages/BreathingExercisesPage.jsx
 - client/src/pages/CRMPage.jsx
 - client/src/pages/CalmingScenesPage.jsx
@@ -1186,7 +1185,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/HowToGuidesPage.jsx
 - client/src/pages/InnerChildPage.jsx
 - client/src/pages/InsightCardsPage.tsx
-- client/src/pages/JournalPage.jsx
 - client/src/pages/KnowledgeSynthesisPage.tsx
 - client/src/pages/Legal.tsx
 - client/src/pages/Login.jsx
@@ -1194,7 +1192,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/MeditationGuidePage.jsx
 - client/src/pages/MetaLearningPage.tsx
 - client/src/pages/MirrorPage.tsx
-- client/src/pages/MoodPage.jsx
 - client/src/pages/MovementSnacksPage.jsx
 - client/src/pages/NervousSystemFloodingPage.jsx
 - client/src/pages/NewsPage.jsx
@@ -1228,9 +1225,7 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/SupportPage.tsx
 - client/src/pages/SystemsThinkingPage.tsx
 - client/src/pages/Terms.tsx
-- client/src/pages/ToolsPage.jsx
 - client/src/pages/Upgrade.jsx
-- client/src/pages/ValuesFinderPage.jsx
 - client/src/pages/Wellness.jsx
 - client/src/pages/WellnessGlossaryPage.jsx
 - client/src/pages/WellnessHubPage.jsx
@@ -1311,7 +1306,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/BlogEditor.jsx
 - client/src/pages/BlogIndex.jsx
 - client/src/pages/BodyWellnessPage.jsx
-- client/src/pages/BoundariesPage.jsx
 - client/src/pages/BreathingExercisesPage.jsx
 - client/src/pages/CRMPage.jsx
 - client/src/pages/CalmingScenesPage.jsx
@@ -1350,7 +1344,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/HowToGuidesPage.jsx
 - client/src/pages/InnerChildPage.jsx
 - client/src/pages/InsightCardsPage.tsx
-- client/src/pages/JournalPage.jsx
 - client/src/pages/KnowledgeSynthesisPage.tsx
 - client/src/pages/Legal.tsx
 - client/src/pages/Login.jsx
@@ -1358,7 +1351,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/MeditationGuidePage.jsx
 - client/src/pages/MetaLearningPage.tsx
 - client/src/pages/MirrorPage.tsx
-- client/src/pages/MoodPage.jsx
 - client/src/pages/MovementSnacksPage.jsx
 - client/src/pages/NervousSystemFloodingPage.jsx
 - client/src/pages/NewsPage.jsx
@@ -1392,9 +1384,7 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/SupportPage.tsx
 - client/src/pages/SystemsThinkingPage.tsx
 - client/src/pages/Terms.tsx
-- client/src/pages/ToolsPage.jsx
 - client/src/pages/Upgrade.jsx
-- client/src/pages/ValuesFinderPage.jsx
 - client/src/pages/Wellness.jsx
 - client/src/pages/WellnessGlossaryPage.jsx
 - client/src/pages/WellnessHubPage.jsx

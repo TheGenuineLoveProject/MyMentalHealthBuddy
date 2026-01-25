@@ -13,6 +13,47 @@ import BenefitsBlock from "@/components/BenefitsBlock";
 import { useReadingLevel } from "@/context/ReadingLevelContext";
 import { Hero } from "@/components/ui";
 import Microcopy from "@/components/Microcopy";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const TOOLS_CLARITY = {
+  what: "A collection of gentle self-reflection tools including belief mapping, timed writing, silence mode, and growth tracking.",
+  who: "Anyone seeking to understand themselves better through structured reflection practices.",
+  when: "When you want dedicated time for self-discovery, processing thoughts, or tracking personal growth.",
+  why: "Reflection helps you notice patterns, process emotions, and build self-awareness over time.",
+  howSteps: [
+    "Choose a tool that matches your current need or mood",
+    "Set aside uninterrupted time (5-20 minutes)",
+    "Engage with the prompts or exercises honestly",
+    "Review your insights and notice any patterns"
+  ],
+  whereLinkText: "Explore the System Map",
+  whereHref: "/system-map"
+};
+
+const TOOLS_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting your first reflection",
+    situation: "You're feeling uncertain and want to explore your thoughts but don't know where to start.",
+    action: "Open Timed Writing, set a 5-minute timer, and write whatever comes to mind without editing.",
+    result: "You discover you've been holding tension about a conversation you need to have."
+  },
+  {
+    level: "intermediate",
+    title: "Examining a recurring pattern",
+    situation: "You notice you often feel drained after certain social situations.",
+    action: "Use Belief Mapping to explore what you believe about social obligations and your energy.",
+    result: "You identify a belief that 'good friends always say yes' that doesn't serve you."
+  },
+  {
+    level: "advanced",
+    title: "Deep processing with Silence Mode",
+    situation: "You're processing a major life decision and need clarity without saving anything.",
+    action: "Enter Silence Mode and write freely about your fears, hopes, and the decision for 20 minutes.",
+    result: "The act of writing clarifies your values, and you feel more confident about your direction."
+  }
+];
 
 const TOOLS = [
   { id: "beliefs", name: "Belief Mapping", description: "Uncover hidden patterns in your thinking that shape your reality", icon: Target, effort: "10-15 min", level: "beginner" },
@@ -129,6 +170,15 @@ export default function ToolsPage() {
               variant="minimal"
               className="mb-8"
             />
+
+            <ClarityCard {...TOOLS_CLARITY} variant="compact" className="mb-6" />
+
+            <ExamplesAccordion 
+              examples={TOOLS_EXAMPLES} 
+              title="See how others use these tools"
+              className="mb-8"
+            />
+
             <p className="text-center text-sm text-[var(--glp-ink)]/60 italic mb-8">
               <Microcopy slot="consent" seed="tools-page" as="span" />
             </p>

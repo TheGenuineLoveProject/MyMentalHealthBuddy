@@ -6,6 +6,47 @@ import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "../components/BenefitsBlock";
+import ClarityCard from "../components/content/ClarityCard";
+import ExamplesAccordion from "../components/content/ExamplesAccordion";
+
+const MOOD_CLARITY = {
+  what: "A quick check-in tool to track your emotional state, energy level, and daily activities.",
+  who: "Anyone wanting to build emotional awareness and notice patterns in their wellbeing.",
+  when: "Daily (morning, evening, or both), or whenever you want to pause and check in with yourself.",
+  why: "Tracking moods helps you notice patterns, identify triggers, and celebrate progress over time.",
+  howSteps: [
+    "Rate your overall mood on the scale",
+    "Select the emotion that fits best right now",
+    "Note any activities that may have influenced your mood",
+    "Add optional notes for more context"
+  ],
+  whereLinkText: "Learn about emotional awareness",
+  whereHref: "/wisdom/emotions"
+};
+
+const MOOD_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Your first mood check-in",
+    situation: "You want to start tracking your moods but aren't sure how to rate them.",
+    action: "Pick a number that feels right without overthinking, then select the closest emotion.",
+    result: "You complete your first check-in in under a minute and feel good about starting."
+  },
+  {
+    level: "intermediate",
+    title: "Noticing activity connections",
+    situation: "After a week of tracking, you want to understand what affects your mood.",
+    action: "Review your entries and look for patterns between activities and mood ratings.",
+    result: "You discover that 'Outdoors' entries consistently have higher mood scores."
+  },
+  {
+    level: "advanced",
+    title: "Using mood data for self-care",
+    situation: "You've tracked for a month and want to use the insights practically.",
+    action: "Identify your top 3 mood-boosting activities and schedule them during typically low periods.",
+    result: "Your average mood scores improve as you proactively support your wellbeing."
+  }
+];
 
 const EMOTIONS = [
   { name: "Happy", icon: Smile, color: "var(--mood-happy)", bgColor: "var(--mood-happy-soft)" },
@@ -117,6 +158,14 @@ export default function MoodPage() {
             duration="2-3 minutes"
             control="You choose what to share"
             disclaimer="Educational wellness support only"
+            className="mb-8"
+          />
+
+          <ClarityCard {...MOOD_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={MOOD_EXAMPLES} 
+            title="See how others use mood tracking"
             className="mb-8"
           />
 

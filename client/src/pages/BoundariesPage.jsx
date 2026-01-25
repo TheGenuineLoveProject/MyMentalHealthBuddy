@@ -8,8 +8,49 @@ import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { Shield, MessageCircle, Clock, Users, Home, Heart, Plus, Trash2, Copy, CheckCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const BOUNDARIES_CLARITY = {
+  what: "A tool for creating and practicing boundary scripts for different situations in your life.",
+  who: "Anyone who wants to set healthier limits but struggles with the words to use.",
+  when: "When preparing for difficult conversations, or when you want to practice assertive communication.",
+  why: "Having prepared scripts reduces anxiety and helps you respond consistently to boundary violations.",
+  howSteps: [
+    "Choose the type of boundary you need to set",
+    "Describe the specific situation",
+    "Write your boundary statement (or use a template)",
+    "Practice saying it aloud before the real conversation"
+  ],
+  whereLinkText: "Learn about healthy boundaries",
+  whereHref: "/wisdom/boundaries"
+};
+
+const BOUNDARIES_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Your first boundary script",
+    situation: "A friend frequently cancels plans last minute and you want to address it.",
+    action: "Use the 'Expressing a need' template and customize: 'I'd feel more respected if we could confirm plans 24 hours ahead.'",
+    result: "You have clear words ready, which reduces anxiety about the conversation."
+  },
+  {
+    level: "intermediate",
+    title: "Setting work-life limits",
+    situation: "Your manager expects responses to emails at night and on weekends.",
+    action: "Create a time boundary script: 'I'll respond to non-urgent messages during work hours. For emergencies, please call.'",
+    result: "You communicate your limits professionally and your evening stress decreases."
+  },
+  {
+    level: "advanced",
+    title: "Maintaining boundaries with family",
+    situation: "A parent consistently criticizes your life choices during visits.",
+    action: "Prepare a gentle emotional boundary: 'I appreciate your care, and I'm not open to feedback on this topic right now. Can we talk about something else?'",
+    result: "You feel more confident redirecting conversations, and visits become more manageable over time."
+  }
+];
 
 const BOUNDARY_TYPES = [
   { id: "emotional", label: "Emotional", icon: Heart, description: "Protecting your feelings and emotional energy" },
@@ -108,6 +149,14 @@ export default function BoundariesPage() {
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">
+          <ClarityCard {...BOUNDARIES_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={BOUNDARIES_EXAMPLES} 
+            title="See how others use boundary scripts"
+            className="mb-8"
+          />
+
           <div className="bg-[var(--surface-elevated)] p-6 rounded-2xl border border-[var(--border-subtle)] mb-8" data-testid="section-intro">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-xl bg-[var(--primary-muted)]">
