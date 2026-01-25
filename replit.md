@@ -102,3 +102,21 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
   - Streak tracking and top strength recognition
   - MI affirmation integration for supportive messaging
   - Added to Dashboard Overview between mainGrid and secondaryGrid
+
+**Phase 3: A→Z Infrastructure & Performance**
+- Created Wellness Microcopy Library (wellnessMicrocopy.js):
+  - 8 categories: consentControl, encouragement, boundaries, progress, errorsEmptyStates, miReadiness, strengthsBased, crisisReminders
+  - Rotation logic with getMicrocopy(), getRandomMicrocopy(), getMicrocopySet()
+  - safetyFooter constant for persistent disclaimer
+- Added Performance Utilities (performance.ts):
+  - prefersReducedMotion() check for accessibility
+  - getAnimationDuration() capped at 600ms per spec
+  - createLazyLoadObserver() for efficient loading
+  - debounce() and throttle() helpers
+- Added Security Utilities (security.ts):
+  - Anti-copy deterrence (disableTextSelection, disableContextMenu)
+  - Canvas watermarking for premium content
+  - Basic bot detection heuristic
+  - Content access logging for audit trails
+- Updated frameworks index to export all new modules
+- BenefitsBlock expanded to 20+ wellness pages
