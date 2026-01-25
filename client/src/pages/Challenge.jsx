@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "../components/BenefitsBlock";
 
 const CHALLENGE_DAYS = [
   {
@@ -93,6 +94,15 @@ export default function Challenge() {
             </p>
           </div>
         </div>
+        
+        <BenefitsBlock
+          benefit="Daily self-reflection, emotional awareness, and gentle growth"
+          duration="60 seconds – 3 minutes per day"
+          control="Skip any day, return anytime — no streak pressure"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
         
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-6 mb-8">
           <div className="flex items-center justify-between mb-4">

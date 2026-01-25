@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { reflectionModes, getRandomQuestion } from "@/lib/reflectionModes";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const stateDimensions = {
   energy: {
@@ -159,6 +160,15 @@ export default function DailyRitualPage() {
             A gentle practice for noticing where you are — no fixing required.
           </p>
         </header>
+        
+        <BenefitsBlock
+          benefit="Self-awareness, gentle insight, and daily grounding"
+          duration="5–10 minutes"
+          control="Notice without fixing — you define what you need"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="mb-6 flex items-center justify-center gap-2">
           {["state", "mode", "reflect", "insights", "complete"].map((s, i) => (

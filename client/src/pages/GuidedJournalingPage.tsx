@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, BookOpen, Heart, Shield, Users, Compass, ChevronRight, Check, Sparkles, Save, RefreshCw } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_guided_journaling";
 
@@ -192,6 +193,16 @@ export default function GuidedJournalingPage() {
           >
             <ArrowLeft className="h-4 w-4" /> Back to Atlas
           </Link>
+          
+          <BenefitsBlock
+            benefit="Guided reflection, emotional processing, and self-discovery"
+            duration="10–20 minutes per path"
+            control="Choose your path, pause anytime, save your progress"
+            disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+            variant="minimal"
+            className="mb-6"
+          />
+          
           <div className="flex items-center gap-3 mb-2">
             <div className="icon-container icon-xl icon-gradient-sage">
               <BookOpen className="h-8 w-8" />
