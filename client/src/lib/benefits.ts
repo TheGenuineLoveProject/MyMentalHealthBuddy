@@ -18,7 +18,7 @@ export const BENEFIT_LIBRARY = {
   },
   clarity: {
     title: "Clarity",
-    micro: "Name what’s happening. Find one next step.",
+    micro: "Name what is happening. Find one next step.",
   },
   agency: {
     title: "Agency",
@@ -30,7 +30,23 @@ export const BENEFIT_LIBRARY = {
   },
   selfRespect: {
     title: "Self-Respect",
-    micro: "Boundaries + alignment with your values.",
+    micro: "Boundaries and alignment with your values.",
+  },
+  consistency: {
+    title: "Consistency",
+    micro: "Tiny habits that build lasting change.",
+  },
+  growth: {
+    title: "Growth",
+    micro: "Strengthen your inner voice with guidance.",
+  },
+  community: {
+    title: "Community",
+    micro: "Supportive spaces for shared healing.",
+  },
+  privacy: {
+    title: "Privacy",
+    micro: "You control what you keep or share.",
   },
 } as const;
 
@@ -41,13 +57,13 @@ export function pickBenefits(keys: Array<keyof typeof BENEFIT_LIBRARY>, limit = 
 export const BENEFITS: Record<BenefitKey, { title: string; body: string }> = {
   calm: { title: "Feel calmer faster", body: "Use short tools that reduce stress and bring you back to center." },
   clarity: { title: "Get clear next steps", body: "Turn messy thoughts into a simple plan you can act on today." },
-  agency: { title: "Choose your own pace", body: "You decide when, how, and what to explore—always optional." },
+  agency: { title: "Choose your own pace", body: "You decide when, how, and what to explore - always optional." },
   connection: { title: "Feel less alone", body: "Build self-kindness and meaningful inner connection." },
   selfRespect: { title: "Honor your boundaries", body: "Practice alignment with your values and personal limits." },
-  consistency: { title: "Build healthy habits", body: "Tiny routines that actually stick—without pressure or shame." },
+  consistency: { title: "Build healthy habits", body: "Tiny routines that actually stick - without pressure or shame." },
   growth: { title: "Grow self-trust", body: "Reflect, learn, and strengthen your inner voice with guidance." },
   community: { title: "Share your journey", body: "Supportive spaces that encourage respect, kindness, and boundaries." },
-  privacy: { title: "Privacy-first by design", body: "You control what you save, share, or keep private—always." },
+  privacy: { title: "Privacy-first by design", body: "You control what you save, share, or keep private - always." },
 };
 
 export function getBenefitDescription(token: BenefitToken): string {
