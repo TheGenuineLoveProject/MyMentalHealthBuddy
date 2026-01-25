@@ -88,21 +88,25 @@ export default function AgeConsentGate({ children, onConsent }) {
         </div>
 
         <div className="border-t border-[var(--sage-200)] pt-6 mb-6">
-          <p className="text-sm text-[var(--neutral-700)] text-center mb-4">
+          <p className="text-base font-medium text-[var(--neutral-800)] text-center mb-5">
             By continuing, you confirm:
           </p>
-          <ul className="text-sm text-[var(--neutral-600)] space-y-2 mb-6">
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--sage-500)]" aria-hidden="true"></span>
-              You are 18 years of age or older
+          <ul className="space-y-4 mb-6">
+            <li className="flex items-center gap-4 p-3 bg-[var(--sage-50)] rounded-lg border border-[var(--sage-200)]">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--sage-500)] text-white font-bold text-sm flex-shrink-0" aria-hidden="true">18+</span>
+              <span className="text-base text-[var(--neutral-800)] font-medium">You are 18 years of age or older</span>
             </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--sage-500)]" aria-hidden="true"></span>
-              You understand this is educational wellness support only
+            <li className="flex items-center gap-4 p-3 bg-[var(--sage-50)] rounded-lg border border-[var(--sage-200)]">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--sage-500)] flex-shrink-0" aria-hidden="true">
+                <Heart className="w-4 h-4 text-white" />
+              </span>
+              <span className="text-base text-[var(--neutral-800)] font-medium">You understand this is educational wellness support only</span>
             </li>
-            <li className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[var(--sage-500)]" aria-hidden="true"></span>
-              You may pause or stop using the platform at any time
+            <li className="flex items-center gap-4 p-3 bg-[var(--sage-50)] rounded-lg border border-[var(--sage-200)]">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--sage-500)] flex-shrink-0" aria-hidden="true">
+                <Shield className="w-4 h-4 text-white" />
+              </span>
+              <span className="text-base text-[var(--neutral-800)] font-medium">You may pause or stop using the platform at any time</span>
             </li>
           </ul>
         </div>
