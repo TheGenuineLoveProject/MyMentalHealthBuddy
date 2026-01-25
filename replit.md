@@ -82,3 +82,23 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 - **Replit Auth**: User authentication.
 - **Resend**: Transactional email service.
 - **Perplexity**: Factual AI (used in a similar vein to OpenAI for specific factual queries).
+
+## Recent Changes (January 2026)
+
+### A→Z Platform Perfection Upgrade - Phase 1 & 2
+
+**Phase 1: Safety Infrastructure**
+- Extended WellnessRoute 18+ age gating to cover 15+ additional routes: /wisdom, /wisdom-practices, /wisdom-synthesis, /daily-wisdom, /tools, /advanced, /mastery, /ritual, /guided-journaling, /insight-cards
+- Created A→Z Benefit Index (benefitTokens.js) with 26 tokens (A=Agency through Z=Zero pressure) and preset configurations
+- Added BenefitsBlock component to wellness tool pages (ToolsPage, ValuesFinderPage, BoundariesPage)
+
+**Phase 2: UX/Content Enhancements**
+- Enhanced journalPrompts.js with MI (Motivational Interviewing) patterns:
+  - 6 new MI categories: readiness, strengths, ambivalence, incremental, values, environment
+  - Each category has 4 prompts with follow-up questions
+  - Added helper functions: getMiPrompt(), getDailyMiPrompt(), getMiAffirmation()
+- Created WeeklyRecap component for dashboard showing:
+  - Weekly activity stats (journal entries, mood check-ins, AI sessions, wellness practices)
+  - Streak tracking and top strength recognition
+  - MI affirmation integration for supportive messaging
+  - Added to Dashboard Overview between mainGrid and secondaryGrid
