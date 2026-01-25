@@ -8,6 +8,8 @@ import { CrisisNotice } from "@/components/PersistentDisclaimer";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
+import { ShareCardPrompt } from "@/components/share/ShareCardPrompt";
 
 const REFRAME_TEMPLATES = [
   {
@@ -245,8 +247,18 @@ export default function ReframePage() {
             <p className="text-xs text-muted-foreground mt-4 italic">
               Pause or stop anytime—only do what feels safe.
             </p>
+
+            <ShareCardPrompt
+              quote={reframes[0]}
+              microTool="Cognitive reframing"
+              action={nextStep}
+              variant="minimal"
+              className="mt-4"
+            />
           </section>
         )}
+
+        <MIPromptCard context="reflection" className="my-6" />
 
         <section
           className="p-4 rounded-xl bg-[hsl(var(--gray-50))] dark:bg-[hsl(var(--gray-800))] border border-[hsl(var(--gray-200))] dark:border-[hsl(var(--gray-700))]"

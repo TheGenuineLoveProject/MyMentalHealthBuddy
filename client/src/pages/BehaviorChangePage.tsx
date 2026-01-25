@@ -6,6 +6,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
+import { ShareCardPrompt } from "@/components/share/ShareCardPrompt";
 import { 
   MessageCircle,
   Heart,
@@ -295,6 +296,13 @@ export default function BehaviorChangePage() {
                 data-testid="textarea-reflection"
               />
             </div>
+
+            <ShareCardPrompt
+              microTool="Behavior change reflection"
+              action={reflection || changeGoal}
+              variant="minimal"
+              className="mb-6"
+            />
 
             <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
               <p className="text-amber-800 dark:text-amber-200 text-sm text-center">
