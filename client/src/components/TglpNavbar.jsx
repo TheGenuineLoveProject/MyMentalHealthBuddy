@@ -60,7 +60,7 @@ export default function TglpNavbar() {
           >
             <img 
               src="/brand/logo-mark.png" 
-              alt="" 
+              alt="The Genuine Love Project" 
               className="w-11 h-11 md:w-14 md:h-14 object-contain"
               onError={(e) => {
                 e.currentTarget.style.display = 'none';

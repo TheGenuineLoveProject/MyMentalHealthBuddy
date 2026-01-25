@@ -241,7 +241,7 @@ export default function Home() {
             >
               <img 
                 src="/brand/logo.svg" 
-                alt="" 
+                alt="Decorative illustration" 
                 className="w-12 h-12 md:w-14 md:h-14 object-contain"
                 aria-hidden="true"
               />

@@ -114,7 +114,7 @@ export default function HeroSection({
                 >
                   <img 
                     src={image} 
-                    alt="" 
+                    alt="Hero background image" 
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />

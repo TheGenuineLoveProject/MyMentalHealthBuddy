@@ -22,7 +22,7 @@ export default function BrandShell({ children, logoSrc = "/logo.png" }) {
             >
               <img
                 src={logoSrc}
-                alt=""
+                alt="The Genuine Love Project"
                 className="w-full h-full object-cover rounded-lg"
                 onError={(e) => {
                   e.currentTarget.style.display = "none";
