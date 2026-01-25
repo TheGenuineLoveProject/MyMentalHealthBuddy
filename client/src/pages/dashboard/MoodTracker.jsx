@@ -35,12 +35,12 @@ export default function MoodTracker() {
     noIndex: true
   });
 
-  const [selectedMood, setSelectedMood] = useState<string | null>(null);
-  const [selectedEnergy, setSelectedEnergy] = useState<string | null>(null);
-  const [selectedFeelings, setSelectedFeelings] = useState<string[]>([]);
+  const [selectedMood, setSelectedMood] = useState(null);
+  const [selectedEnergy, setSelectedEnergy] = useState(null);
+  const [selectedFeelings, setSelectedFeelings] = useState([]);
   const [saved, setSaved] = useState(false);
 
-  const toggleFeeling = (feeling: string) => {
+  const toggleFeeling = (feeling) => {
     setSelectedFeelings(prev => 
       prev.includes(feeling) 
         ? prev.filter(f => f !== feeling)
@@ -57,7 +57,7 @@ export default function MoodTracker() {
   <WellnessPageShell
     title="MoodTracker"
     subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
       why: "To support clarity, values alignment, and gentle next steps.",
