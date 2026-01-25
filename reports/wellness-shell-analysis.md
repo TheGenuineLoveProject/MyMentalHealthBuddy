@@ -1,0 +1,298 @@
+# Wellness Shell Analysis Report
+
+Generated: 2026-01-25T02:29:29.206Z
+
+## Summary
+
+| Status | Count |
+|--------|-------|
+| Using WellnessPageShell | 0 |
+| Complete (all components) | 2 |
+| Partial (some missing) | 71 |
+| Needs Work (no components) | 35 |
+| **Total** | **108** |
+
+## Pages Needing Work
+
+### Partial (Missing Some Components)
+
+- `AIChatPage.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `AdaptiveCompanionPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `AdvancedToolsPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `AffirmationsPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `AlignmentPath.jsx`
+  - Has: BenefitsBlock
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `BehaviorChangePage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `BodyWellnessPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `BoundariesPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion
+  - Missing: ConsentStrip, CrisisLink
+- `BreathingExercisesPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `CalmingScenesPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `Challenge.jsx`
+  - Has: BenefitsBlock, SafetyFooter, CrisisLink
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip
+- `ChallengeDay.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `CognitiveArchitecturePage.tsx`
+  - Has: BenefitsBlock, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: SafetyFooter, ConsentStrip
+- `CognitiveToolsPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `CoherenceLadderPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `CollaborativeLabPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `ContentIndexPage.jsx`
+  - Has: CrisisLink
+  - Missing: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `CrisisResources.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `DailyRitualPage.tsx`
+  - Has: BenefitsBlock, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: SafetyFooter, ConsentStrip
+- `DailyRoutinesPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `DailyWisdomOraclePage.tsx`
+  - Has: BenefitsBlock, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: SafetyFooter, ConsentStrip
+- `Dashboard.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `EmotionalIntelligencePage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `FAQPage.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `GlossaryPage.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `GroundingTechniquesPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `GrowthAnalyticsPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `GuidedJournalingPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `HealingJourneysPage.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `HealingLibraryPage.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `HowToGuidesPage.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `InnerChildPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `InsightCardsPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `JournalPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion
+  - Missing: ConsentStrip, CrisisLink
+- `KnowledgeSynthesisPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `MasteryToolsPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `MeditationGuidePage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `MetaLearningPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `MoodPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion
+  - Missing: ConsentStrip, CrisisLink
+- `MovementSnacksPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `NervousSystemFloodingPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, CrisisLink
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip
+- `NotFound.jsx`
+  - Has: CrisisLink
+  - Missing: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `PerceptionRefinementPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, CrisisLink
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip
+- `PermacultureWellnessPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, CrisisLink
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip
+- `PhilosophicalInquiryPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `Premium.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `Pricing.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `ProfessionalResourcesPage.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `ResearchEvidencePage.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `ResilienceMetricsPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `ResourcesPage.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `SafetyPage.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `SelfWorthReflectionPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, CrisisLink
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip
+- `SleepGuidePage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: ConsentStrip
+- `SoulWellnessPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, CrisisLink
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip
+- `StatePage.jsx`
+  - Has: BenefitsBlock, SafetyFooter
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `StrategyMapsPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `StressResponseGuidePage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, CrisisLink
+  - Missing: ClarityCard, ExamplesAccordion, ConsentStrip
+- `StudyVaultPage.jsx`
+  - Has: SafetyFooter, ConsentStrip
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, CrisisLink
+- `SystemMapPage.jsx`
+  - Has: BenefitsBlock, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: SafetyFooter, ConsentStrip
+- `SystemsThinkingPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `Upgrade.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `ValuesFinderPage.jsx`
+  - Has: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion
+  - Missing: ConsentStrip, CrisisLink
+- `Wellness.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `WellnessGlossaryPage.jsx`
+  - Has: SafetyFooter
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip, CrisisLink
+- `WellnessHubPage.jsx`
+  - Has: SafetyFooter, CrisisLink
+  - Missing: BenefitsBlock, ClarityCard, ExamplesAccordion, ConsentStrip
+- `WisdomPracticesPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `WisdomSynthesisPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `WisdomToolsPage.tsx`
+  - Has: BenefitsBlock, CrisisLink
+  - Missing: SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `ai/ChatEmpty.tsx`
+  - Has: CrisisLink
+  - Missing: BenefitsBlock, SafetyFooter, ClarityCard, ExamplesAccordion, ConsentStrip
+- `tools/ReframePage.jsx`
+  - Has: BenefitsBlock, ClarityCard, ExamplesAccordion, CrisisLink
+  - Missing: SafetyFooter, ConsentStrip
+
+### Needs Full Shell
+
+- `AtlasDashboard.tsx`
+- `CRMPage.jsx`
+- `CommunityPage.tsx`
+- `ContentAdminDashboard.jsx`
+- `ContentStudioPage.tsx`
+- `ControlDashboard.jsx`
+- `DesignDashboard.jsx`
+- `DesignSystem.jsx`
+- `Disclaimer.tsx`
+- `EliteToolsDashboard.tsx`
+- `EthicsPage.tsx`
+- `ExamplesPage.jsx`
+- `ForgotPassword.jsx`
+- `HealingLandingPage.jsx`
+- `HealthPage.jsx`
+- `Legal.tsx`
+- `Login.jsx`
+- `LoginCallback.jsx`
+- `MirrorPage.tsx`
+- `NewsPage.jsx`
+- `Onboarding.tsx`
+- `Privacy.tsx`
+- `Profile.jsx`
+- `ProgressDashboardPage.tsx`
+- `Publishing.jsx`
+- `QAPage.jsx`
+- `Register.jsx`
+- `ResetPassword.jsx`
+- `Settings.jsx`
+- `SocialHub.jsx`
+- `SupportPage.tsx`
+- `Terms.tsx`
+- `WireframeTemplates.jsx`
+- `ai/ChatConversation.tsx`
+- `ai/ChatCrisis.tsx`
+
+## Excluded Directories
+
+- `auth/`
+- `admin/`
+- `legal/`
+- `account/`
+- `generated/`
+- `landing/`
+- `marketing/`
+- `dashboard/`
+
+## Excluded Files
+
+- `Admin`
+- `Analytics`
+- `Blog`
+- `BlogEditor`
+- `BlogIndex`
+- `BlogPost`
+- `Crisis`
+- `CrisisPage`
+- `Home`
+- `HomePage`
+- `Landing`
+- `LandingPage`
+- `CanvaLanding`
+- `404`
+- `_autopilot`

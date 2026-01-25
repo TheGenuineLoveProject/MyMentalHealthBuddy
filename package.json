@@ -44,7 +44,9 @@
     "route:map": "node tools/route_map.mjs",
     "auth:smoke": "node tools/auth_smoke.mjs",
     "release:gate": "bash tools/release_gate.sh",
-    "scan:incomplete": "node scripts/scanIncomplete.mjs"
+    "scan:incomplete": "node scripts/scanIncomplete.mjs",
+    "patch:wellness:dry": "DRY_RUN=1 node scripts/applyWellnessShell.mjs",
+    "patch:wellness": "DRY_RUN=0 node scripts/applyWellnessShell.mjs"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
