@@ -137,7 +137,7 @@ export default function SacredFooter() {
             <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="Your email address"
+                This page is being refined. Use the navigation to explore tools while we finish this section.="Your email address"
                 className="flex-1 px-4 py-3 rounded-full text-sm transition-all duration-300 focus:outline-none focus:ring-2"
                 style={{ 
                   background: 'rgba(255, 255, 255, 0.8)',

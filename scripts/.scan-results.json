@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-01-25T05:04:46.563Z",
+  "timestamp": "2026-01-25T05:20:46.431Z",
   "summary": {
     "totalFiles": 500,
     "wellnessPages": 197,
     "generatedPages": 123,
-    "withSEO": 152,
-    "withDisclaimer": 231,
-    "withSafetyFooter": 62,
+    "withSEO": 155,
+    "withDisclaimer": 230,
+    "withSafetyFooter": 67,
     "withBenefits": 229,
     "withMI": 4,
-    "issuesFound": 267,
+    "issuesFound": 263,
     "issuesByType": {
       "missing-seo": [
         "client/src/pages/AdaptiveCompanionPage.tsx",
@@ -70,10 +70,8 @@
         "client/src/pages/WellnessHubPage.jsx",
         "client/src/pages/WisdomPracticesPage.tsx",
         "client/src/pages/WisdomSynthesisPage.tsx",
-        "client/src/pages/generated/blog-[param].jsx",
         "client/src/pages/generated/blog-slug.jsx",
         "client/src/pages/generated/chat.jsx",
-        "client/src/pages/generated/community-discussion-[param].jsx",
         "client/src/pages/generated/community-discussion-id.jsx",
         "client/src/pages/generated/crm.jsx",
         "client/src/pages/generated/dashboard.jsx",
@@ -96,10 +94,8 @@
       "missing-safety": [
         "client/src/pages/ContentStudioPage.tsx",
         "client/src/pages/SystemMapPage.jsx",
-        "client/src/pages/generated/blog-[param].jsx",
         "client/src/pages/generated/blog-slug.jsx",
         "client/src/pages/generated/chat.jsx",
-        "client/src/pages/generated/community-discussion-[param].jsx",
         "client/src/pages/generated/community-discussion-id.jsx",
         "client/src/pages/generated/crm.jsx",
         "client/src/pages/generated/dashboard.jsx",
@@ -229,7 +225,6 @@
         "client/src/components/ResilienceStories.jsx",
         "client/src/components/RouteGuard.jsx",
         "client/src/components/SEO.tsx",
-        "client/src/components/SacredFooter.jsx",
         "client/src/components/SacredForm.jsx",
         "client/src/components/SacredGeometryBg.jsx",
         "client/src/components/SelfCompassion.jsx",
@@ -237,6 +232,7 @@
         "client/src/components/SocialConnection.jsx",
         "client/src/components/SocialLinks.jsx",
         "client/src/components/StateTracker.jsx",
+        "client/src/components/StateTracker.tsx",
         "client/src/components/StressMonitor.jsx",
         "client/src/components/TglpNavbar.jsx",
         "client/src/components/ValuesExplorer.jsx",
@@ -271,11 +267,11 @@
         "client/src/components/narrative/NarrativeIdentityStudio.tsx",
         "client/src/components/paradox/ParadoxCartographer.tsx",
         "client/src/components/patterns/InsightPatternLab.tsx",
+        "client/src/components/sacred/SacredFooter.jsx",
         "client/src/components/semantic/SemanticMapping.tsx",
         "client/src/components/share/ReflectionCard.jsx",
         "client/src/components/share/ShareModal.jsx",
         "client/src/components/stance/PhilosophicalStanceMapper.tsx",
-        "client/src/components/state/StateTracker.tsx",
         "client/src/components/synthesis/SynthesisCollider.tsx",
         "client/src/components/systems/SystemsResonance.tsx",
         "client/src/components/temporal/TemporalReflection.tsx",
@@ -1616,17 +1612,15 @@
     },
     {
       "path": "client/src/pages/generated/blog-[param].jsx",
-      "hasSEO": false,
+      "hasSEO": true,
       "hasDisclaimer": false,
-      "hasSafetyFooter": false,
+      "hasSafetyFooter": true,
       "hasBenefitsBlock": false,
       "hasMIPatterns": false,
       "isGenerated": true,
       "isWellnessPage": true,
       "disallowed": [],
       "issues": [
-        "missing-seo",
-        "missing-safety",
         "missing-benefits"
       ]
     },
@@ -1664,17 +1658,15 @@
     },
     {
       "path": "client/src/pages/generated/community-discussion-[param].jsx",
-      "hasSEO": false,
+      "hasSEO": true,
       "hasDisclaimer": false,
-      "hasSafetyFooter": false,
+      "hasSafetyFooter": true,
       "hasBenefitsBlock": false,
       "hasMIPatterns": false,
       "isGenerated": true,
       "isWellnessPage": true,
       "disallowed": [],
       "issues": [
-        "missing-seo",
-        "missing-safety",
         "missing-benefits"
       ]
     },
@@ -2346,7 +2338,7 @@
       "path": "client/src/components/PageTemplate.jsx",
       "hasSEO": true,
       "hasDisclaimer": false,
-      "hasSafetyFooter": false,
+      "hasSafetyFooter": true,
       "hasBenefitsBlock": false,
       "hasMIPatterns": false,
       "isGenerated": false,
@@ -2472,22 +2464,6 @@
       ]
     },
     {
-      "path": "client/src/components/SacredFooter.jsx",
-      "hasSEO": false,
-      "hasDisclaimer": false,
-      "hasSafetyFooter": true,
-      "hasBenefitsBlock": false,
-      "hasMIPatterns": false,
-      "isGenerated": false,
-      "isWellnessPage": false,
-      "disallowed": [
-        "placeholder"
-      ],
-      "issues": [
-        "contains-disallowed: placeholder"
-      ]
-    },
-    {
       "path": "client/src/components/SacredForm.jsx",
       "hasSEO": false,
       "hasDisclaimer": false,
@@ -2585,6 +2561,22 @@
     },
     {
       "path": "client/src/components/StateTracker.jsx",
+      "hasSEO": false,
+      "hasDisclaimer": false,
+      "hasSafetyFooter": false,
+      "hasBenefitsBlock": false,
+      "hasMIPatterns": false,
+      "isGenerated": false,
+      "isWellnessPage": false,
+      "disallowed": [
+        "placeholder"
+      ],
+      "issues": [
+        "contains-disallowed: placeholder"
+      ]
+    },
+    {
+      "path": "client/src/components/StateTracker.tsx",
       "hasSEO": false,
       "hasDisclaimer": false,
       "hasSafetyFooter": false,
@@ -2924,9 +2916,9 @@
     },
     {
       "path": "client/src/components/insights/InsightCards.tsx",
-      "hasSEO": false,
+      "hasSEO": true,
       "hasDisclaimer": false,
-      "hasSafetyFooter": false,
+      "hasSafetyFooter": true,
       "hasBenefitsBlock": false,
       "hasMIPatterns": false,
       "isGenerated": false,
@@ -3148,6 +3140,22 @@
       ]
     },
     {
+      "path": "client/src/components/sacred/SacredFooter.jsx",
+      "hasSEO": false,
+      "hasDisclaimer": false,
+      "hasSafetyFooter": true,
+      "hasBenefitsBlock": false,
+      "hasMIPatterns": false,
+      "isGenerated": false,
+      "isWellnessPage": false,
+      "disallowed": [
+        "placeholder"
+      ],
+      "issues": [
+        "contains-disallowed: placeholder"
+      ]
+    },
+    {
       "path": "client/src/components/semantic/SemanticMapping.tsx",
       "hasSEO": false,
       "hasDisclaimer": false,
@@ -3210,22 +3218,6 @@
       ],
       "issues": [
         "contains-disallowed: placeholder, return null"
-      ]
-    },
-    {
-      "path": "client/src/components/state/StateTracker.tsx",
-      "hasSEO": false,
-      "hasDisclaimer": false,
-      "hasSafetyFooter": false,
-      "hasBenefitsBlock": false,
-      "hasMIPatterns": false,
-      "isGenerated": false,
-      "isWellnessPage": false,
-      "disallowed": [
-        "placeholder"
-      ],
-      "issues": [
-        "contains-disallowed: placeholder"
       ]
     },
     {

@@ -57,7 +57,9 @@
     "platform:report:full": "node scripts/reportPlatform.mjs --full",
     "platform:patch": "node scripts/applyContentPatches.mjs",
     "platform:patch:dry": "node scripts/applyContentPatches.mjs --dry-run",
-    "platform:patch:verbose": "node scripts/applyContentPatches.mjs --verbose"
+    "platform:patch:verbose": "node scripts/applyContentPatches.mjs --verbose",
+    "platform:fix": "node scripts/patchFlaggedFiles.mjs",
+    "platform:fix:dry": "node scripts/patchFlaggedFiles.mjs --dry-run"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",

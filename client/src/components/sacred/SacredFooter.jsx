@@ -1,147 +1,265 @@
 /**
- * SacredFooter.jsx - CSS Module-based Sacred Footer Component
+ * ============================================================================
+ * SACRED FOOTER - HEALING DESIGN
+ * ============================================================================
  * 
- * Features:
- * - CSS Modules ONLY (no Tailwind)
- * - Icons scaled ~0.7
- * - Semantic HTML with accessibility
- * - Playfair Display + Inter typography
+ * @deprecated SPECIALIZED COMPONENT - Use sparingly
+ * 
+ * Canonical Footer: import { Footer } from '@/components/ui'
+ * Safety Footer: import SafetyFooter from '@/components/ui/SafetyFooter'
+ * 
+ * This elaborate footer is for marketing/landing pages only.
+ * For tool pages, use SafetyFooter instead.
+ * 
+ * Last audit: 2026-01-23
+ * ============================================================================
  */
 
-import { Link } from 'wouter';
-import { Heart } from 'lucide-react';
-import styles from './SacredFooter.module.css';
-import SocialLinks from '../SocialLinks';
+import { Link } from "wouter";
+import { Heart, Mail, Instagram, Twitter, Facebook, Sparkles } from "lucide-react";
+import SacredGeometryBg from "./SacredGeometryBg";
+import "../styles/healing-animations.css";
 
-const footerLinks = {
-  platform: [
-    { label: 'Features', href: '/features' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'Blog', href: '/blog' },
-    { label: 'About', href: '/about' },
-  ],
-  resources: [
-    { label: 'Crisis Resources', href: '/crisis' },
-    { label: 'FAQ', href: '/faq' },
-    { label: 'Support', href: '/support' },
-    { label: 'Contact', href: '/contact' },
-  ],
-  legal: [
-    { label: 'Privacy', href: '/privacy' },
-    { label: 'Terms', href: '/terms' },
-    { label: 'Ethics', href: '/ethics' },
-    { label: 'Accessibility', href: '/accessibility' },
-  ],
-};
-
-export default function SacredFooter({ className = '' }) {
+export default function SacredFooter() {
   const currentYear = new Date().getFullYear();
 
+  const footerLinks = {
+    explore: [
+      { label: "Features", href: "/features" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "About", href: "/about" },
+      { label: "Blog", href: "/blog" },
+    ],
+    support: [
+      { label: "Help Center", href: "/faq" },
+      { label: "Crisis Resources", href: "/crisis" },
+      { label: "Contact", href: "/contact" },
+      { label: "Community", href: "/community" },
+    ],
+    legal: [
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Ethics", href: "/ethics" },
+      { label: "Disclaimer", href: "/disclaimer" },
+    ],
+  };
+
+  const socialLinks = [
+    { icon: Instagram, href: "#", label: "Instagram" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Facebook, href: "#", label: "Facebook" },
+  ];
+
   return (
-    <footer
-      className={`${styles.footer} ${className}`}
-      role="contentinfo"
-      aria-label="Site footer"
-      data-testid="sacred-footer"
+    <footer 
+      className="relative py-16 lg:py-20 px-6 overflow-hidden"
+      style={{ 
+        background: 'linear-gradient(180deg, #faf9f7 0%, rgba(47, 93, 93, 0.05) 50%, rgba(47, 93, 93, 0.08) 100%)',
+      }}
+      data-component="SacredFooter"
+      data-testid="footer-sacred"
     >
-      <div className={styles.footerInner}>
-        <div className={styles.footerGrid}>
-          <div className={styles.brandColumn}>
-            <Link 
-              href="/" 
-              className={styles.brandLogo}
-              data-testid="footer-logo-link"
-            >
-              <span className={styles.brandLogoIcon}>
-                <Heart aria-hidden="true" />
-              </span>
-              <span className={styles.brandName}>
+      {/* Sacred Geometry Background */}
+      <SacredGeometryBg variant="seedOfLife" opacity={0.04} animated={false} />
+
+      {/* Decorative Top Border */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{ 
+          background: 'linear-gradient(90deg, transparent 10%, rgba(143, 191, 159, 0.3) 50%, transparent 90%)',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative max-w-6xl mx-auto">
+        {/* Top Section - Brand & Newsletter */}
+        <div className="grid lg:grid-cols-2 gap-12 mb-16 pb-12 border-b" style={{ borderColor: 'rgba(143, 191, 159, 0.15)' }}>
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div 
+                className="w-10 h-10 rounded-full flex items-center justify-center animate-breathing"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(143, 191, 159, 0.3), rgba(244, 199, 195, 0.2))',
+                }}
+              >
+                <Heart className="w-5 h-5" style={{ color: '#8fbf9f' }} />
+              </div>
+              <span 
+                className="font-serif text-xl font-semibold"
+                style={{ color: '#2f5d5d', fontFamily: "'Cormorant Garamond', serif" }}
+              >
                 The Genuine Love Project
               </span>
-            </Link>
-            <p className={styles.brandTagline}>
-              A trauma-informed sanctuary for emotional wellness. Educational self-care tools, 
-              journaling, and nervous system support—all in complete privacy.
+            </div>
+            <p 
+              className="text-sm leading-relaxed max-w-md mb-6"
+              style={{ color: '#3a3a3a', opacity: 0.75 }}
+            >
+              A sacred space for healing, growth, and genuine self-love. We believe every soul 
+              deserves access to compassionate support on their journey to wholeness.
             </p>
-            <div className={styles.socialLinks}>
-              <SocialLinks variant="icons" iconSize={18} />
+            
+            {/* Social Links */}
+            <div className="flex gap-3">
+              {socialLinks.map((social, index) => (
+                <a
+                  key={index}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 hover-glow"
+                  style={{ 
+                    background: 'rgba(143, 191, 159, 0.1)',
+                    border: '1px solid rgba(143, 191, 159, 0.2)',
+                  }}
+                  data-testid={`link-social-${social.label.toLowerCase()}`}
+                >
+                  <social.icon className="w-4 h-4" style={{ color: '#2f5d5d' }} />
+                </a>
+              ))}
             </div>
           </div>
 
-          <div className={styles.linkColumn}>
-            <h4>Platform</h4>
-            <nav aria-label="Platform links">
-              <ul>
-                {footerLinks.platform.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      data-testid={`footer-link-${link.label.toLowerCase()}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          <div className={styles.linkColumn}>
-            <h4>Resources</h4>
-            <nav aria-label="Resources links">
-              <ul>
-                {footerLinks.resources.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, '-')}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </div>
-
-          <div className={styles.linkColumn}>
-            <h4>Legal</h4>
-            <nav aria-label="Legal links">
-              <ul>
-                {footerLinks.legal.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      data-testid={`footer-link-${link.label.toLowerCase()}`}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          {/* Newsletter */}
+          <div className="lg:pl-12">
+            <h3 
+              className="font-serif text-lg font-semibold mb-3"
+              style={{ color: '#2f5d5d', fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              Join Our Healing Community
+            </h3>
+            <p 
+              className="text-sm mb-4"
+              style={{ color: '#3a3a3a', opacity: 0.75 }}
+            >
+              Receive weekly wisdom, healing practices, and gentle reminders for your journey.
+            </p>
+            <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="Your email address"
+                className="flex-1 px-4 py-3 rounded-full text-sm transition-all duration-300 focus:outline-none focus:ring-2"
+                style={{ 
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  border: '1px solid rgba(143, 191, 159, 0.2)',
+                  color: '#3a3a3a',
+                }}
+                data-testid="input-newsletter-email"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 hover-glow-gold"
+                style={{ 
+                  background: 'linear-gradient(135deg, #eac33b, #ddb12d)',
+                  color: '#2f5d5d',
+                }}
+                data-testid="button-newsletter-submit"
+              >
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
 
-        <div className={styles.divider} aria-hidden="true" />
+        {/* Links Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12">
+          {/* Explore */}
+          <div>
+            <h4 
+              className="font-semibold text-sm uppercase tracking-wider mb-4"
+              style={{ color: '#2f5d5d' }}
+            >
+              Explore
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.explore.map((link, index) => (
+                <li key={index}>
+                  <Link href={link.href}>
+                    <span 
+                      className="text-sm transition-colors duration-300 cursor-pointer hover:opacity-100"
+                      style={{ color: '#3a3a3a', opacity: 0.7 }}
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+                    >
+                      {link.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className={styles.disclaimerBar}>
-          <p className={styles.disclaimerText}>
-            18+ only · Educational wellness support — not medical advice · 
-            Pause or stop anytime · Need help now?{' '}
-            <Link href="/crisis" className={styles.crisisLink}>
-              Crisis Support
-            </Link>
-          </p>
+          {/* Support */}
+          <div>
+            <h4 
+              className="font-semibold text-sm uppercase tracking-wider mb-4"
+              style={{ color: '#2f5d5d' }}
+            >
+              Support
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.support.map((link, index) => (
+                <li key={index}>
+                  <Link href={link.href}>
+                    <span 
+                      className="text-sm transition-colors duration-300 cursor-pointer hover:opacity-100"
+                      style={{ color: '#3a3a3a', opacity: 0.7 }}
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+                    >
+                      {link.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h4 
+              className="font-semibold text-sm uppercase tracking-wider mb-4"
+              style={{ color: '#2f5d5d' }}
+            >
+              Legal
+            </h4>
+            <ul className="space-y-2">
+              {footerLinks.legal.map((link, index) => (
+                <li key={index}>
+                  <Link href={link.href}>
+                    <span 
+                      className="text-sm transition-colors duration-300 cursor-pointer hover:opacity-100"
+                      style={{ color: '#3a3a3a', opacity: 0.7 }}
+                      data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+                    >
+                      {link.label}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div className={styles.bottomBar}>
-          <p className={styles.copyright}>
-            &copy; {currentYear} The Genuine Love Project by Aaliyah Draws Art LLC. All rights reserved.
+        {/* Bottom Section */}
+        <div 
+          className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t"
+          style={{ borderColor: 'rgba(143, 191, 159, 0.1)' }}
+        >
+          <p 
+            className="text-sm text-center md:text-left"
+            style={{ color: '#3a3a3a', opacity: 0.6 }}
+          >
+            © {currentYear} The Genuine Love Project. All rights reserved.
           </p>
-          <p className={styles.madeWith}>
-            Made with <Heart aria-hidden="true" /> for healing hearts
-          </p>
+          
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4" style={{ color: '#eac33b' }} />
+            <span 
+              className="text-sm italic"
+              style={{ color: '#8fbf9f', fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              Live in Genuine Love
+            </span>
+          </div>
         </div>
       </div>
     </footer>

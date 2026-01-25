@@ -6,6 +6,8 @@
  */
 import { useParams } from 'wouter';
 import ConfigRoute from '../pages/_autopilot.jsx';
+import { SEO } from "../../components/SEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 export default function BlogPage() {
   const params = useParams();
