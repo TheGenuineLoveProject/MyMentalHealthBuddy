@@ -120,13 +120,27 @@ export default function QuestPanel({ compact = false }) {
       </div>
 
       <div className="p-6">
+        {/* Educational-only: Empty state with calm explanation */}
         {quests.length === 0 ? (
           <div className="text-center py-8">
             <div className="w-16 h-16 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
               <Clock className="w-8 h-8 text-slate-600" />
             </div>
-            <h3 className="text-lg font-medium text-white mb-2">New Quests Coming Soon</h3>
-            <p className="text-slate-400 text-sm">Check back for your daily challenges!</p>
+            <h3 className="text-lg font-medium text-white mb-2">Quests Are Being Prepared</h3>
+            <p className="text-slate-400 text-sm mb-4">
+              Daily quests help you build gentle wellness habits at your own pace. 
+              This feature is in development.
+            </p>
+            <button
+              onClick={() => {
+                localStorage.setItem('glp_quest_interest', 'true');
+                alert('Saved! We will notify you when quests are ready.');
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-violet-600 text-white hover:bg-violet-700 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+              data-testid="btn-save-quest-interest"
+            >
+              Save for later
+            </button>
           </div>
         ) : (
           <div className="space-y-4">

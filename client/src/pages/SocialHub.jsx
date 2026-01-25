@@ -83,10 +83,18 @@ export default function SocialHub() {
                 );
               })}
             </div>
-            <div className="mt-6 p-4 rounded-xl bg-[var(--gold-50)] border border-[var(--gold-200)]">
-              <p className="text-body-sm text-[var(--gold-700)]">
-                Coming soon: Connect Canva exports and post generator integration.
+            {/* Educational-only: Future feature notice with single CTA */}
+            <div className="mt-6 p-5 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)]">
+              <p className="text-body-sm text-[var(--sage-700)] mb-3">
+                We're building Canva export and post scheduling tools. This feature is in development and will be available when ready.
               </p>
+              <button
+                onClick={() => window.open('/waitlist?feature=social-hub', '_self')}
+                className="inline-flex items-center gap-2 px-4 py-2 text-body-sm font-medium rounded-lg bg-[var(--teal-600)] text-white hover:bg-[var(--teal-700)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--teal-500)] focus:ring-offset-2"
+                data-testid="btn-waitlist-social-hub"
+              >
+                Join the waitlist
+              </button>
             </div>
           </div>
         </div>
