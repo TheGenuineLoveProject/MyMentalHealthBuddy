@@ -89,6 +89,7 @@ const NervousSystemHubPage = lazy(() => import("./pages/hubs/NervousSystemHubPag
 const PresenceHubPage = lazy(() => import("./pages/hubs/PresenceHubPage.jsx"));
 const WisdomHubPage = lazy(() => import("./pages/hubs/WisdomHubPage.jsx"));
 const SelfDiscoveryHubPage = lazy(() => import("./pages/hubs/SelfDiscoveryHubPage.jsx"));
+const TwelvePracticesPage = lazy(() => import("./pages/TwelvePracticesPage.jsx"));
 const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
 const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
 const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
@@ -343,6 +344,12 @@ export default function App() {
               </Route>
               <Route path="/hubs/self-discovery">
                 <WellnessRoute><SelfDiscoveryHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/twelve-practices">
+                <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
+              </Route>
+              <Route path="/paths/12-practices">
+                <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
               </Route>
               <Route path="/premium">
                 <ProtectedRoute><Premium /></ProtectedRoute>
