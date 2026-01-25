@@ -9,6 +9,7 @@ import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const AFFIRMATIONS_CLARITY = {
   what: "Evidence-based affirmations designed to rewire neural pathways toward self-love, healing, resilience, and nervous system regulation.",
@@ -502,6 +503,8 @@ export default function AffirmationsPage() {
           ]}
           title="Deepen Your Practice"
         />
+
+        <MIPromptCard context="general" className="mb-6" />
 
         <SafetyFooter variant="prominent" />
       </div>

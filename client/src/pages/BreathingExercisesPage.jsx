@@ -9,6 +9,7 @@ import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const BREATHING_CLARITY = {
   what: "Evidence-based breathing techniques grounded in polyvagal theory for stress relief, anxiety reduction, and nervous system regulation.",
@@ -475,6 +476,8 @@ export default function BreathingExercisesPage() {
             </div>
           </div>
         </div>
+
+        <MIPromptCard context="general" className="mb-6" />
 
         <RelatedNextSteps 
           steps={[

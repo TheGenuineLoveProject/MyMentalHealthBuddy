@@ -12,6 +12,7 @@ import ExamplesAccordion from "../components/content/ExamplesAccordion";
 import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivationalInterviewing";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const JOURNAL_CLARITY = {
   what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",
@@ -460,6 +461,8 @@ export default function JournalPage() {
               ))}
             </section>
           )}
+
+          <MIPromptCard context="journal" className="mb-6" />
 
           <SafetyFooter variant="prominent" />
         </div>

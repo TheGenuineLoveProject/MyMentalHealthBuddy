@@ -27,6 +27,7 @@ import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const BODY_CLARITY = {
   what: "Trauma-informed body wellness practices including somatic movement, breathwork, sensory grounding, and nervous system care.",
@@ -540,6 +541,8 @@ export default function BodyWellnessPage() {
             ]}
             title="Continue Your Journey"
           />
+
+          <MIPromptCard context="general" className="mb-6" />
 
           <SafetyFooter variant="default" />
         </div>

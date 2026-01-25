@@ -5,6 +5,8 @@ import { SectionContainer } from "@/components/ui/SectionContainer";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
+import { ShareCardPrompt } from "@/components/share/ShareCardPrompt";
 import { 
   Heart, 
   Eye, 
@@ -257,7 +259,16 @@ export default function TwelveStepsPage() {
               })}
             </div>
 
-            <div className="mt-8 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800 text-center">
+            <MIPromptCard context="values" className="mt-8" />
+
+            <ShareCardPrompt
+              microTool="12 Steps of Genuine Love"
+              action={`Completed ${Object.values(completedSteps).filter(Boolean).length} of 12 practices`}
+              variant="minimal"
+              className="mt-6"
+            />
+
+            <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800 text-center">
               <p className="text-amber-800 dark:text-amber-200 text-sm">
                 Completed {Object.values(completedSteps).filter(Boolean).length} of 12 practices. 
                 Progress is saved in your browser.
