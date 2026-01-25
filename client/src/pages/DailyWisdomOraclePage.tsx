@@ -2,6 +2,47 @@ import { useState, useMemo, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Sun, Moon, Star, Sparkles, BookOpen, RefreshCw, Heart, Share2, Copy } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const WISDOM_CLARITY = {
+  what: "Daily wisdom quotes from diverse traditions—Stoicism, Buddhism, psychology, philosophy—with reflection prompts.",
+  who: "Anyone seeking perspective, inspiration, or a moment of contemplation in their day.",
+  when: "Morning for intention-setting, during breaks for perspective, or evening for reflection.",
+  why: "Wisdom traditions offer time-tested insights. Brief daily exposure gradually shifts how you see yourself and the world.",
+  howSteps: [
+    "Read today's wisdom quote slowly",
+    "Notice your initial response—what resonates or challenges you?",
+    "Write a brief reflection if you wish",
+    "Save favorites to build your personal wisdom collection"
+  ],
+  whereLinkText: "Explore meditation",
+  whereHref: "/meditation"
+};
+
+const WISDOM_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Receiving today's wisdom",
+    situation: "You're feeling stuck and need fresh perspective.",
+    action: "Read the daily wisdom quote slowly. Let it sit with you rather than rushing past.",
+    result: "A single insight can shift your entire day—'The obstacle is the way' might reframe your challenge."
+  },
+  {
+    level: "intermediate",
+    title: "Deepening with reflection",
+    situation: "A quote resonates but you want to integrate it more deeply.",
+    action: "Write a brief reflection: How does this apply to your life? What would change if you lived this truth?",
+    result: "The wisdom moves from intellectual understanding to embodied knowing."
+  },
+  {
+    level: "advanced",
+    title: "Building a wisdom practice",
+    situation: "You want wisdom to be more than occasional inspiration.",
+    action: "Visit daily, save favorites, and review your collection weekly. Notice themes that keep appearing.",
+    result: "Over time, you develop a personal philosophy—a collection of truths that guide your life."
+  }
+];
 
 const STORAGE_KEY = "glp_daily_wisdom";
 
@@ -168,6 +209,14 @@ export default function DailyWisdomOraclePage() {
           disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
           variant="minimal"
           className="mb-6"
+        />
+
+        <ClarityCard {...WISDOM_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={WISDOM_EXAMPLES} 
+          title="See how others use Daily Wisdom"
+          className="mb-8"
         />
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">

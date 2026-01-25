@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { 
   ArrowLeft, 
   Target, 
@@ -22,6 +24,45 @@ import {
 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+
+const BEHAVIOR_CLARITY = {
+  what: "Science-based behavior change frameworks including habit science, tiny habits, and sustainable change strategies.",
+  who: "Anyone wanting to build new habits, break unwanted patterns, or make lasting positive changes.",
+  when: "When starting new goals, struggling with consistency, or wanting to understand why change is hard.",
+  why: "Understanding the science of behavior change makes it easier to work with your brain rather than against it.",
+  howSteps: [
+    "Learn the habit loop (cue → routine → reward)",
+    "Start with tiny habits attached to existing routines",
+    "Design your environment to make good choices automatic",
+    "Celebrate small wins to wire in the new behavior"
+  ],
+  whereLinkText: "Explore daily routines",
+  whereHref: "/daily-routines"
+};
+
+const BEHAVIOR_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Understanding your current habits",
+    situation: "You want to stop scrolling social media before bed but can't seem to break the pattern.",
+    action: "Map the habit loop: Cue (lying in bed), Routine (scrolling), Reward (distraction from thoughts). Now you can intervene.",
+    result: "You understand why willpower alone doesn't work and can design a better approach."
+  },
+  {
+    level: "intermediate",
+    title: "Attaching a tiny habit",
+    situation: "You want to start meditating but never seem to find the time.",
+    action: "Use Tiny Habits: 'After I pour my morning coffee, I will take three deep breaths.' Start absurdly small.",
+    result: "The anchor habit (coffee) reminds you. The tiny behavior (3 breaths) grows into a meditation practice."
+  },
+  {
+    level: "advanced",
+    title: "Designing your environment",
+    situation: "You keep buying junk food despite wanting to eat healthier.",
+    action: "Redesign your environment: don't keep junk food at home, prep healthy snacks on Sunday, put fruit visible on counter.",
+    result: "Good choices become automatic because you've removed friction from healthy options and added it to unhealthy ones."
+  }
+];
 
 const behaviorModules = [
   {
@@ -277,6 +318,14 @@ export default function BehaviorChangePage() {
             crisisLink="/crisis"
             variant="minimal"
             className="mb-6"
+          />
+
+          <ClarityCard {...BEHAVIOR_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={BEHAVIOR_EXAMPLES} 
+            title="See how others build new habits"
+            className="mb-8"
           />
 
           <div className="card-bordered mb-8" style={{ background: 'var(--glp-sage-10)' }}>

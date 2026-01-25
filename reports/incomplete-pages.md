@@ -15,9 +15,9 @@ Generated: 2026-01-25
 | Missing Crisis Link (wellness) | 80 |
 | Missing Consent Language (wellness) | 149 |
 | Missing SafetyFooter (wellness) | 105 |
-| Missing ClarityCard (wellness) | 142 |
-| Missing ExamplesAccordion (wellness) | 142 |
-| **Total Issues** | **1058** |
+| Missing ClarityCard (wellness) | 136 |
+| Missing ExamplesAccordion (wellness) | 136 |
+| **Total Issues** | **1046** |
 
 ## Detection Criteria
 
@@ -382,11 +382,11 @@ Consent language must include:
   `placeholder="A gentler way to say the same thing..."`
 - **client/src/pages/ChallengeDay.jsx:102** - `placeholder`
   `placeholder="Write your reflection here... (only you see this)"`
-- **client/src/pages/CognitiveArchitecturePage.tsx:173** - `placeholder`
+- **client/src/pages/CognitiveArchitecturePage.tsx:222** - `placeholder`
   `placeholder="Search models, tags, or concepts..."`
-- **client/src/pages/CognitiveArchitecturePage.tsx:174** - `placeholder`
+- **client/src/pages/CognitiveArchitecturePage.tsx:223** - `placeholder`
   `className="w-full pl-10 pr-4 py-3 rounded-xl bg-white border border-sage-200 text-teal-700 placehold`
-- **client/src/pages/CoherenceLadderPage.jsx:261** - `placeholder`
+- **client/src/pages/CoherenceLadderPage.jsx:310** - `placeholder`
   `placeholder="Any notes or context? (you can skip this)"`
 - **client/src/pages/CollaborativeLabPage.tsx:353** - `placeholder`
   `placeholder="Share what you've learned, what you're questioning, or wisdom for fellow travelers..."`
@@ -412,11 +412,11 @@ Consent language must include:
   `placeholder="Give your content a title..."`
 - **client/src/pages/ContentStudioPage.tsx:265** - `placeholder`
   `placeholder="Paste or type your content here... This will be transformed into multiple platform-spec`
-- **client/src/pages/DailyRitualPage.tsx:327** - `placeholder`
+- **client/src/pages/DailyRitualPage.tsx:376** - `placeholder`
   `placeholder="Write whatever comes up... no one will judge."`
-- **client/src/pages/DailyWisdomOraclePage.tsx:232** - `placeholder`
+- **client/src/pages/DailyWisdomOraclePage.tsx:281** - `placeholder`
   `placeholder="What does this wisdom mean to you today? How might you apply it?"`
-- **client/src/pages/DailyWisdomOraclePage.tsx:233** - `placeholder`
+- **client/src/pages/DailyWisdomOraclePage.tsx:282** - `placeholder`
   `className="w-full h-24 p-4 rounded-xl bg-white border border-sage-200 text-teal-700 placeholder:text`
 - **client/src/pages/DesignSystem.jsx:341** - `placeholder`
   `placeholder="Enter your email..."`
@@ -1141,25 +1141,19 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/AlignmentPath.jsx
 - client/src/pages/Analytics.jsx
 - client/src/pages/AtlasDashboard.tsx
-- client/src/pages/BehaviorChangePage.jsx
 - client/src/pages/Blog.jsx
 - client/src/pages/BlogEditor.jsx
 - client/src/pages/BlogIndex.jsx
-- client/src/pages/BodyWellnessPage.jsx
 - client/src/pages/CRMPage.jsx
 - client/src/pages/CanvaLanding.jsx
 - client/src/pages/Challenge.jsx
 - client/src/pages/ChallengeDay.jsx
-- client/src/pages/CognitiveArchitecturePage.tsx
-- client/src/pages/CoherenceLadderPage.jsx
 - client/src/pages/CollaborativeLabPage.tsx
 - client/src/pages/CommunityPage.tsx
 - client/src/pages/ContentIndexPage.jsx
 - client/src/pages/ContentStudioPage.tsx
 - client/src/pages/ControlDashboard.jsx
 - client/src/pages/CrisisResources.jsx
-- client/src/pages/DailyRitualPage.tsx
-- client/src/pages/DailyWisdomOraclePage.tsx
 - client/src/pages/Dashboard.jsx
 - client/src/pages/DesignDashboard.jsx
 - client/src/pages/DesignSystem.jsx
@@ -1288,25 +1282,19 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/AlignmentPath.jsx
 - client/src/pages/Analytics.jsx
 - client/src/pages/AtlasDashboard.tsx
-- client/src/pages/BehaviorChangePage.jsx
 - client/src/pages/Blog.jsx
 - client/src/pages/BlogEditor.jsx
 - client/src/pages/BlogIndex.jsx
-- client/src/pages/BodyWellnessPage.jsx
 - client/src/pages/CRMPage.jsx
 - client/src/pages/CanvaLanding.jsx
 - client/src/pages/Challenge.jsx
 - client/src/pages/ChallengeDay.jsx
-- client/src/pages/CognitiveArchitecturePage.tsx
-- client/src/pages/CoherenceLadderPage.jsx
 - client/src/pages/CollaborativeLabPage.tsx
 - client/src/pages/CommunityPage.tsx
 - client/src/pages/ContentIndexPage.jsx
 - client/src/pages/ContentStudioPage.tsx
 - client/src/pages/ControlDashboard.jsx
 - client/src/pages/CrisisResources.jsx
-- client/src/pages/DailyRitualPage.tsx
-- client/src/pages/DailyWisdomOraclePage.tsx
 - client/src/pages/Dashboard.jsx
 - client/src/pages/DesignDashboard.jsx
 - client/src/pages/DesignSystem.jsx

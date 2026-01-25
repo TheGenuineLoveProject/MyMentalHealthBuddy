@@ -8,8 +8,49 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { Layers, ArrowUp, ArrowDown, Check, TrendingUp, MessageCircle, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const COHERENCE_CLARITY = {
+  what: "A 10-level emotional awareness scale to track your inner state across body, mind, and heart dimensions.",
+  who: "Anyone wanting to build emotional awareness, track mood patterns, or learn to shift emotional states.",
+  when: "Daily check-ins, when feeling off, or when you want to consciously shift your emotional state.",
+  why: "Naming your emotional state is the first step to understanding and influencing it. Tracking reveals patterns.",
+  howSteps: [
+    "Select your current emotional level (1-10)",
+    "Rate your body, mind, and heart states",
+    "Review the suggested shifts for your level",
+    "Log your check-in to track patterns over time"
+  ],
+  whereLinkText: "Explore emotional intelligence",
+  whereHref: "/emotional-intelligence"
+};
+
+const COHERENCE_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Naming your current state",
+    situation: "You feel 'off' but can't pinpoint what's wrong.",
+    action: "Use the Coherence Ladder to identify your level. Perhaps it's a 4 (Frustration) with a tense body and scattered mind.",
+    result: "Naming it precisely ('I'm frustrated and my body is tense') creates clarity and opens options."
+  },
+  {
+    level: "intermediate",
+    title: "Using shift suggestions",
+    situation: "You're at level 3 (Worry/Overwhelm) before an important meeting.",
+    action: "Review the suggestions: 'Name what you're feeling without judgment' and 'This feeling is temporary.'",
+    result: "The suggestions help you move from overwhelm toward a more resourceful state."
+  },
+  {
+    level: "advanced",
+    title: "Tracking patterns over time",
+    situation: "You want to understand your emotional patterns better.",
+    action: "Log check-ins daily for 2 weeks. Notice: What times/situations correlate with lower states? What helps you shift up?",
+    result: "You identify triggers and effective responses, building emotional self-mastery."
+  }
+];
 
 const COHERENCE_LEVELS = [
   { level: 10, label: "Joy / Appreciation", description: "Deep gratitude, love, or excitement", color: "var(--success)" },
@@ -114,6 +155,14 @@ export default function CoherenceLadderPage() {
           disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
           variant="minimal"
           className="mb-6"
+        />
+
+        <ClarityCard {...COHERENCE_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={COHERENCE_EXAMPLES} 
+          title="See how others use the Coherence Ladder"
+          className="mb-8"
         />
       </SectionContainer>
 

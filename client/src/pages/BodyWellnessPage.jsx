@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { 
   ArrowLeft, 
   Activity, 
@@ -23,6 +25,45 @@ import {
 import { Button } from "@/components/ui/Button";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+
+const BODY_CLARITY = {
+  what: "Trauma-informed body wellness practices including somatic movement, breathwork, sensory grounding, and nervous system care.",
+  who: "Anyone wanting to reconnect with their body, release stored tension, or support physical wellbeing.",
+  when: "During stress, when feeling disconnected from your body, or as part of daily self-care.",
+  why: "The body stores experiences and emotions. Gentle body practices help complete stress cycles and restore balance.",
+  howSteps: [
+    "Explore categories: movement, breathwork, sensory, nourishment, rest",
+    "Choose one practice that feels accessible today",
+    "Follow the steps slowly, listening to your body",
+    "Notice any shifts in sensation or emotion without judgment"
+  ],
+  whereLinkText: "Try movement snacks",
+  whereHref: "/tools/movement-snacks"
+};
+
+const BODY_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Releasing shoulder tension",
+    situation: "You notice your shoulders are up by your ears after a stressful meeting.",
+    action: "Try Somatic Stretching: slowly roll shoulders back, hold for 30 seconds, breathe into the tight areas.",
+    result: "Physical tension releases, and you feel your body starting to relax."
+  },
+  {
+    level: "intermediate",
+    title: "Completing a stress cycle",
+    situation: "You had a near-miss while driving and feel shaky but 'fine.'",
+    action: "Use Shake & Release: stand and let your whole body shake for 2-3 minutes, then stand still and notice.",
+    result: "The adrenaline discharges naturally, and your nervous system returns to baseline."
+  },
+  {
+    level: "advanced",
+    title: "Building body awareness practice",
+    situation: "You often feel disconnected from your body or miss physical signals.",
+    action: "Commit to daily Walking Meditation: 15 minutes of slow, mindful walking, noticing each sensation of movement.",
+    result: "Over time, you develop interoception—the ability to sense and respond to your body's signals."
+  }
+];
 
 const bodyCategories = [
   {
@@ -326,6 +367,14 @@ export default function BodyWellnessPage() {
             crisisLink="/crisis"
             variant="minimal"
             className="mb-6"
+          />
+
+          <ClarityCard {...BODY_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={BODY_EXAMPLES} 
+            title="See how others practice body wellness"
+            className="mb-8"
           />
 
           <div className="card-bordered mb-8 p-6 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>

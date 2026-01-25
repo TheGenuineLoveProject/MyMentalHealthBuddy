@@ -2,6 +2,47 @@ import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Brain, Search, Star, BookOpen, Lightbulb, Target, Layers, Grid3X3, List } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const COGNITIVE_CLARITY = {
+  what: "A library of 25+ mental models—thinking tools used by great thinkers to make better decisions and understand complex systems.",
+  who: "Anyone wanting to improve their thinking, make better decisions, or understand how the world works.",
+  when: "When facing decisions, solving problems, or wanting to see situations from new angles.",
+  why: "Mental models are cognitive shortcuts that compress wisdom. Building a toolkit of models improves every area of thinking.",
+  howSteps: [
+    "Browse models by category or search for specific topics",
+    "Read the description, example, and application",
+    "Try applying the model to a current situation in your life",
+    "Save favorites and track which models you've practiced"
+  ],
+  whereLinkText: "Explore cognitive tools",
+  whereHref: "/cognitive-tools"
+};
+
+const COGNITIVE_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Learning your first mental model",
+    situation: "You tend to overthink decisions and want a clearer framework.",
+    action: "Learn 'Reversibility': Is this decision easily reversible? If yes, decide quickly. If no, think carefully.",
+    result: "You stop agonizing over reversible choices and save your mental energy for decisions that matter."
+  },
+  {
+    level: "intermediate",
+    title: "Applying a model to real life",
+    situation: "You're frustrated with a colleague who forgot to reply to your email.",
+    action: "Apply Hanlon's Razor: 'Never attribute to malice what can be explained by incompetence or oversight.'",
+    result: "You shift from 'They're ignoring me' to 'They're probably just busy'—reducing unnecessary conflict."
+  },
+  {
+    level: "advanced",
+    title: "Building a mental model toolkit",
+    situation: "You want mental models to become second nature in your thinking.",
+    action: "Practice one model per week. Apply it to multiple situations. Note when it helps and when it doesn't.",
+    result: "Over time, you automatically see situations through multiple lenses, making you a better thinker."
+  }
+];
 
 const STORAGE_KEY = "glp_cognitive_models";
 
@@ -130,6 +171,14 @@ export default function CognitiveArchitecturePage() {
           disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
           variant="minimal"
           className="mb-6"
+        />
+
+        <ClarityCard {...COGNITIVE_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={COGNITIVE_EXAMPLES} 
+          title="See how others use mental models"
+          className="mb-8"
         />
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">

@@ -1,6 +1,47 @@
 import { useState, useMemo } from "react";
 import { reflectionModes, getRandomQuestion } from "@/lib/reflectionModes";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const RITUAL_CLARITY = {
+  what: "A daily check-in practice to assess your inner state across six dimensions: energy, clarity, openness, regulation, presence, and pace.",
+  who: "Anyone wanting to build self-awareness, track wellbeing patterns, or start each day with intention.",
+  when: "Ideally morning (to set intentions) or evening (to reflect). Consistency matters more than timing.",
+  why: "Regular check-ins build the muscle of self-awareness. Over time, you learn your patterns and what supports your wellbeing.",
+  howSteps: [
+    "Rate each of the six dimensions honestly",
+    "Choose a reflection mode that resonates today",
+    "Answer the reflection question thoughtfully",
+    "Review any insights that emerge from your patterns"
+  ],
+  whereLinkText: "Explore daily routines",
+  whereHref: "/daily-routines"
+};
+
+const RITUAL_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting a daily check-in",
+    situation: "You want to be more self-aware but don't know where to start.",
+    action: "Complete your first Daily Ritual: rate energy, clarity, openness, regulation, presence, and pace. Just notice, don't judge.",
+    result: "You have a snapshot of your inner state—the first step toward understanding your patterns."
+  },
+  {
+    level: "intermediate",
+    title: "Choosing meaningful reflection",
+    situation: "You've been checking in but the practice feels rote.",
+    action: "Try different reflection modes—Heart, Systems, Contemplative—to find questions that spark genuine insight.",
+    result: "The right question opens new understanding about yourself and your life."
+  },
+  {
+    level: "advanced",
+    title: "Tracking patterns over time",
+    situation: "You want to understand what affects your wellbeing.",
+    action: "Practice daily for 2 weeks, then review: When is energy highest? What correlates with clarity vs. fog?",
+    result: "You discover actionable patterns—like how sleep affects your clarity or how certain activities boost regulation."
+  }
+];
 
 const stateDimensions = {
   energy: {
@@ -168,6 +209,14 @@ export default function DailyRitualPage() {
           disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
           variant="minimal"
           className="mb-6"
+        />
+
+        <ClarityCard {...RITUAL_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={RITUAL_EXAMPLES} 
+          title="See how others use Daily Ritual"
+          className="mb-8"
         />
 
         <div className="mb-6 flex items-center justify-center gap-2">
