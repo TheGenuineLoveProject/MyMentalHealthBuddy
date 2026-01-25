@@ -17,8 +17,8 @@ export const FIGMA_TO_REACT = {
   "AI Chat – Conversation": "pages/ai/Chat.tsx",
   "AI Chat – Crisis State": "pages/ai/Crisis.tsx",
 
-  "Profile": "pages/account/Profile.tsx",
-  "Settings": "pages/account/Settings.tsx",
+  "Profile": "pages/account/Profile.jsx",
+  "Settings": "pages/account/Settings.jsx",
   "Billing": "pages/account/Billing.tsx",
 
   "Privacy Policy": "pages/legal/Privacy.tsx",
