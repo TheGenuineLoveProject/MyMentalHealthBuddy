@@ -82,6 +82,8 @@ const ChallengeDay = lazy(() => import("./pages/ChallengeDay.jsx"));
 const AlignmentPath = lazy(() => import("./pages/AlignmentPath.jsx"));
 const SystemMapPage = lazy(() => import("./pages/SystemMapPage.jsx"));
 const ReframePage = lazy(() => import("./pages/tools/ReframePage.jsx"));
+const TwelveStepsPage = lazy(() => import("./pages/TwelveStepsPage.tsx"));
+const BehaviorChangePage = lazy(() => import("./pages/BehaviorChangePage.tsx"));
 
 function LoadingFallback() {
   return (
@@ -372,6 +374,12 @@ export default function App() {
               </Route>
               <Route path="/tools/self-worth">
                 <WellnessRoute><SelfWorthReflectionPage /></WellnessRoute>
+              </Route>
+              <Route path="/tools/twelve-steps">
+                <WellnessRoute><TwelveStepsPage /></WellnessRoute>
+              </Route>
+              <Route path="/tools/behavior-change">
+                <WellnessRoute><BehaviorChangePage /></WellnessRoute>
               </Route>
 
               {/* Additional AI Routes - Config Driven */}
