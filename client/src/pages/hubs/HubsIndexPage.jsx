@@ -7,8 +7,8 @@
 import { Link } from "wouter";
 import { 
   Moon, Shield, Heart, Zap, Wind, Users, 
-  Feather, Sparkles, Eye, Brain, TrendingUp, 
-  Sun, ArrowRight 
+  Feather, Sparkles, Eye, Brain, TrendingUp, Flame, 
+  Sun, ArrowRight, BookOpen, Compass 
 } from "lucide-react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -147,6 +147,114 @@ const ALL_HUBS = [
     description: "Sustainable habits",
     href: "/hubs/daily-practice",
     icon: Sun
+  },
+  {
+    title: "Gratitude",
+    description: "Cultivate appreciation",
+    href: "/hubs/gratitude",
+    icon: Heart
+  },
+  {
+    title: "Thoughtwork",
+    description: "Work with your mind",
+    href: "/hubs/thoughtwork",
+    icon: Brain
+  },
+  {
+    title: "Life Purpose",
+    description: "Meaning and direction",
+    href: "/hubs/life-purpose",
+    icon: TrendingUp
+  },
+  {
+    title: "Communication",
+    description: "Express yourself clearly",
+    href: "/hubs/communication",
+    icon: Users
+  },
+  {
+    title: "Forgiveness",
+    description: "Release and let go",
+    href: "/hubs/forgiveness",
+    icon: Heart
+  },
+  {
+    title: "Energy Management",
+    description: "Prevent burnout",
+    href: "/hubs/energy-management",
+    icon: Zap
+  },
+  {
+    title: "Healthy Habits",
+    description: "Sustainable practices",
+    href: "/hubs/habits",
+    icon: TrendingUp
+  },
+  {
+    title: "Confidence",
+    description: "Build self-belief",
+    href: "/hubs/confidence",
+    icon: Sparkles
+  },
+  {
+    title: "Focus",
+    description: "Sharpen attention",
+    href: "/hubs/focus",
+    icon: Eye
+  },
+  {
+    title: "Spirituality",
+    description: "Inner connection",
+    href: "/hubs/spirituality",
+    icon: Sparkles
+  },
+  {
+    title: "Motivation",
+    description: "Fuel your drive",
+    href: "/hubs/motivation",
+    icon: Flame
+  },
+  {
+    title: "Acceptance",
+    description: "Peace with what is",
+    href: "/hubs/acceptance",
+    icon: Heart
+  },
+  {
+    title: "Creativity",
+    description: "Creative expression",
+    href: "/hubs/creativity",
+    icon: Sparkles
+  },
+  {
+    title: "Self-Awareness",
+    description: "Know yourself deeply",
+    href: "/hubs/self-awareness",
+    icon: Eye
+  },
+  {
+    title: "Nervous System",
+    description: "Regulate and restore",
+    href: "/hubs/nervous-system",
+    icon: Zap
+  },
+  {
+    title: "Presence",
+    description: "Be here now",
+    href: "/hubs/presence",
+    icon: Sun
+  },
+  {
+    title: "Wisdom",
+    description: "Timeless insights",
+    href: "/hubs/wisdom",
+    icon: BookOpen
+  },
+  {
+    title: "Self-Discovery",
+    description: "Explore who you are",
+    href: "/hubs/self-discovery",
+    icon: Compass
   }
 ];
 

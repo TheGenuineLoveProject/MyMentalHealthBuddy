@@ -71,6 +71,24 @@ const BreathworkHubPage = lazy(() => import("./pages/hubs/BreathworkHubPage.jsx"
 const JournalingHubPage = lazy(() => import("./pages/hubs/JournalingHubPage.jsx"));
 const BodyMindHubPage = lazy(() => import("./pages/hubs/BodyMindHubPage.jsx"));
 const DailyPracticeHubPage = lazy(() => import("./pages/hubs/DailyPracticeHubPage.jsx"));
+const GratitudeHubPage = lazy(() => import("./pages/hubs/GratitudeHubPage.jsx"));
+const ThoughtworkHubPage = lazy(() => import("./pages/hubs/ThoughtworkHubPage.jsx"));
+const LifePurposeHubPage = lazy(() => import("./pages/hubs/LifePurposeHubPage.jsx"));
+const CommunicationHubPage = lazy(() => import("./pages/hubs/CommunicationHubPage.jsx"));
+const ForgivenessHubPage = lazy(() => import("./pages/hubs/ForgivenessHubPage.jsx"));
+const EnergyManagementHubPage = lazy(() => import("./pages/hubs/EnergyManagementHubPage.jsx"));
+const HabitsHubPage = lazy(() => import("./pages/hubs/HabitsHubPage.jsx"));
+const ConfidenceHubPage = lazy(() => import("./pages/hubs/ConfidenceHubPage.jsx"));
+const FocusHubPage = lazy(() => import("./pages/hubs/FocusHubPage.jsx"));
+const SpiritualityHubPage = lazy(() => import("./pages/hubs/SpiritualityHubPage.jsx"));
+const MotivationHubPage = lazy(() => import("./pages/hubs/MotivationHubPage.jsx"));
+const AcceptanceHubPage = lazy(() => import("./pages/hubs/AcceptanceHubPage.jsx"));
+const CreativityHubPage = lazy(() => import("./pages/hubs/CreativityHubPage.jsx"));
+const SelfAwarenessHubPage = lazy(() => import("./pages/hubs/SelfAwarenessHubPage.jsx"));
+const NervousSystemHubPage = lazy(() => import("./pages/hubs/NervousSystemHubPage.jsx"));
+const PresenceHubPage = lazy(() => import("./pages/hubs/PresenceHubPage.jsx"));
+const WisdomHubPage = lazy(() => import("./pages/hubs/WisdomHubPage.jsx"));
+const SelfDiscoveryHubPage = lazy(() => import("./pages/hubs/SelfDiscoveryHubPage.jsx"));
 const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
 const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
 const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
@@ -271,6 +289,60 @@ export default function App() {
               </Route>
               <Route path="/hubs/daily-practice">
                 <WellnessRoute><DailyPracticeHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/gratitude">
+                <WellnessRoute><GratitudeHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/thoughtwork">
+                <WellnessRoute><ThoughtworkHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/life-purpose">
+                <WellnessRoute><LifePurposeHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/communication">
+                <WellnessRoute><CommunicationHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/forgiveness">
+                <WellnessRoute><ForgivenessHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/energy-management">
+                <WellnessRoute><EnergyManagementHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/habits">
+                <WellnessRoute><HabitsHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/confidence">
+                <WellnessRoute><ConfidenceHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/focus">
+                <WellnessRoute><FocusHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/spirituality">
+                <WellnessRoute><SpiritualityHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/motivation">
+                <WellnessRoute><MotivationHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/acceptance">
+                <WellnessRoute><AcceptanceHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/creativity">
+                <WellnessRoute><CreativityHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/self-awareness">
+                <WellnessRoute><SelfAwarenessHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/nervous-system">
+                <WellnessRoute><NervousSystemHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/presence">
+                <WellnessRoute><PresenceHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/wisdom">
+                <WellnessRoute><WisdomHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/self-discovery">
+                <WellnessRoute><SelfDiscoveryHubPage /></WellnessRoute>
               </Route>
               <Route path="/premium">
                 <ProtectedRoute><Premium /></ProtectedRoute>
