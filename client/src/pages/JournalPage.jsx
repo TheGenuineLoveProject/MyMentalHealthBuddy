@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw } from "lucide-react";
+import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw, Share2 } from "lucide-react";
+import ReflectionCardExport from "../components/ReflectionCardExport";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -139,6 +140,8 @@ export default function JournalPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
+  const [reflectionCardOpen, setReflectionCardOpen] = useState(false);
+  const [selectedEntryForCard, setSelectedEntryForCard] = useState(null);
   
   const handleSelectPrompt = (prompt) => {
     setTitle(prompt.category + " Reflection");
@@ -440,6 +443,18 @@ export default function JournalPage() {
                       className="px-5 pb-5 border-t border-[var(--border)] pt-5 ml-16"
                     >
                       <p className="text-[var(--text)] leading-relaxed whitespace-pre-wrap">{entry.content}</p>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedEntryForCard(entry);
+                          setReflectionCardOpen(true);
+                        }}
+                        className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] hover:bg-[var(--primary)]/20 transition"
+                        data-testid={`btn-reflection-card-${entry.id}`}
+                      >
+                        <Share2 className="w-4 h-4" />
+                        Create Reflection Card
+                      </button>
                     </div>
                   )}
                 </article>
@@ -450,6 +465,16 @@ export default function JournalPage() {
           <SafetyFooter variant="prominent" />
         </div>
       </div>
+
+      <ReflectionCardExport
+        isOpen={reflectionCardOpen}
+        onClose={() => {
+          setReflectionCardOpen(false);
+          setSelectedEntryForCard(null);
+        }}
+        suggestedQuotes={selectedEntryForCard?.content?.split('\n').filter(line => line.trim().length > 10).slice(0, 5) || []}
+        source="journal"
+      />
     </>
   </WellnessPageShell>
   );

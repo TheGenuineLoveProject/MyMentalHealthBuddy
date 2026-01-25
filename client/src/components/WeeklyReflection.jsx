@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Calendar, ChevronLeft, ChevronRight, Sparkles, Save, Star, TrendingUp, Heart, Zap } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, Sparkles, Save, Star, TrendingUp, Heart, Zap, Share2 } from "lucide-react";
+import ReflectionCardExport from "./ReflectionCardExport";
 
 const REFLECTION_PROMPTS = {
   wins: {
@@ -60,6 +61,7 @@ export default function WeeklyReflection() {
   const [saved, setSaved] = useState(false);
   const [reflections, setReflections] = useState({});
   const [activeSection, setActiveSection] = useState("wins");
+  const [reflectionCardOpen, setReflectionCardOpen] = useState(false);
 
   function getWeekStart(date) {
     const d = new Date(date);
@@ -286,28 +288,38 @@ export default function WeeklyReflection() {
           </div>
         </div>
 
-        <button
-          onClick={saveReflection}
-          disabled={!hasContent}
-          className={`w-full py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
-            saved
-              ? "bg-emerald-500 text-white"
-              : "btn-gradient shadow-lg hover:shadow-xl disabled:opacity-50"
-          }`}
-          data-testid="button-save-reflection"
-        >
-          {saved ? (
-            <>
-              <Star className="w-5 h-5" />
-              Saved!
-            </>
-          ) : (
-            <>
-              <Save className="w-5 h-5" />
-              Save Reflection
-            </>
-          )}
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={saveReflection}
+            disabled={!hasContent}
+            className={`flex-1 py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+              saved
+                ? "bg-emerald-500 text-white"
+                : "btn-gradient shadow-lg hover:shadow-xl disabled:opacity-50"
+            }`}
+            data-testid="button-save-reflection"
+          >
+            {saved ? (
+              <>
+                <Star className="w-5 h-5" />
+                Saved!
+              </>
+            ) : (
+              <>
+                <Save className="w-5 h-5" />
+                Save
+              </>
+            )}
+          </button>
+          <button
+            onClick={() => setReflectionCardOpen(true)}
+            disabled={!hasContent}
+            className="px-5 py-4 rounded-xl font-semibold bg-[var(--surface)] hover:bg-[var(--surface-hover)] border border-[var(--border)] transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            data-testid="button-export-card"
+          >
+            <Share2 className="w-5 h-5 text-[var(--text-muted)]" />
+          </button>
+        </div>
 
         {Object.keys(reflections).length > 0 && (
           <div className="mt-6 pt-4 border-t border-[var(--border)]">
@@ -317,6 +329,13 @@ export default function WeeklyReflection() {
           </div>
         )}
       </div>
+
+      <ReflectionCardExport
+        isOpen={reflectionCardOpen}
+        onClose={() => setReflectionCardOpen(false)}
+        suggestedQuotes={[reflection.wins, reflection.gratitude, reflection.growth, reflection.intentions].filter(Boolean)}
+        source="weekly-reflection"
+      />
     </div>
   );
 }
