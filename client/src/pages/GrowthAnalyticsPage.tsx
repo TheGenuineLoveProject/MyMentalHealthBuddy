@@ -5,6 +5,7 @@ import {
   Sparkles, Brain, Heart, Zap, Flame, Award, ChevronRight,
   Activity, Eye, Clock, Star
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 interface ActivityLog {
   tool: string;
@@ -185,6 +186,20 @@ export default function GrowthAnalyticsPage() {
             Track your intellectual growth journey. See progress across all tool categories.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefits={[
+            "Visualize your growth journey across all wellness tools",
+            "Track streaks, milestones, and category progress",
+            "All data stays local—your journey remains private"
+          ]}
+          duration="2–5 min"
+          control="View-only—no changes required"
+          disclaimer="Educational insight tool—not clinical assessment. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           <div className="card-bordered text-center">

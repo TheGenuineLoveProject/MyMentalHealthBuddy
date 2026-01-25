@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   ArrowLeft, 
   Activity, 
@@ -312,6 +313,20 @@ export default function BodyWellnessPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "Somatic practices for movement, breathwork, nutrition, and rest",
+              "Quick body resets you can do in under 5 minutes",
+              "All wellness data stays local—your journey remains private"
+            ]}
+            duration="5–30 min per practice"
+            control="Pause, skip, or stop anytime"
+            disclaimer="Educational body wellness—not medical advice. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <div className="card-bordered mb-8 p-6 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
             <div className="flex items-start gap-4">

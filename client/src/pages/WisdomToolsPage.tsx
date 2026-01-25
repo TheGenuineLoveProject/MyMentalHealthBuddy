@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Brain, Scale, Clock, Sparkles, Map, Eye, Activity, Route, BookOpen } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import FrameworkExplorer from "@/components/frameworks/FrameworkExplorer";
 import DialecticalInquiry from "@/components/inquiry/DialecticalInquiry";
 import TemporalReflection from "@/components/temporal/TemporalReflection";
@@ -94,6 +95,20 @@ export default function WisdomToolsPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "8 wisdom tools from philosophy, psychology, and contemplative traditions",
+              "Explore at your own pace—no pressure to complete",
+              "All data stays local—your reflections remain private"
+            ]}
+            duration="5–30 min per tool"
+            control="Pause, skip, or stop anytime"
+            disclaimer="Educational inquiry tools—not clinical guidance. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <nav className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
             {TOOLS.map((tool) => {

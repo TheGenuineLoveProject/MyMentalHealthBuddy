@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   ArrowLeft, 
   Target, 
@@ -263,6 +264,20 @@ export default function BehaviorChangePage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "Science-backed behavior change frameworks",
+              "Tiny habits method and implementation steps",
+              "Build sustainable habits at your own pace"
+            ]}
+            duration="10–20 min per module"
+            control="Start small and scale gradually"
+            disclaimer="Educational behavior science—not clinical advice. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <div className="card-bordered mb-8" style={{ background: 'var(--glp-sage-10)' }}>
             <div className="flex items-start gap-4">

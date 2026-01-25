@@ -10,6 +10,7 @@
  */
 
 import { Clock, Pause, Heart, Info } from 'lucide-react';
+import { Link } from 'wouter';
 
 const variants = {
   minimal: {
@@ -27,14 +28,20 @@ const variants = {
 };
 
 export default function BenefitsBlock({
-  benefit = "Clarity, calm, and one next step",
+  benefit,
+  benefits,
   duration = "30–90 seconds",
   control = "Pause or stop anytime",
   disclaimer = "Educational wellness support only",
+  crisisLink,
   variant = "standard",
   className = ""
 }) {
   const style = variants[variant] || variants.standard;
+  
+  const benefitContent = benefits && benefits.length > 0 
+    ? benefits.join(" • ") 
+    : (benefit || "Clarity, calm, and one next step");
 
   if (variant === 'minimal') {
     return (
@@ -45,10 +52,12 @@ export default function BenefitsBlock({
         aria-label="What to expect"
       >
         <p>
-          <strong>What you'll get:</strong> {benefit} · <strong>Time:</strong> {duration} · <strong>Control:</strong> {control}
+          <strong>What you'll get:</strong> {benefitContent} · <strong>Time:</strong> {duration} · <strong>Control:</strong> {control}
         </p>
         <p className="text-xs text-[var(--neutral-500)] mt-1">
-          Note: {disclaimer}
+          Note: {disclaimer}{crisisLink && (
+            <> <Link href={crisisLink} className="text-[var(--teal-600)] hover:underline font-medium">/crisis</Link>.</>
+          )}
         </p>
       </div>
     );
@@ -73,7 +82,7 @@ export default function BenefitsBlock({
               What you'll get
             </p>
             <p className="text-sm text-[var(--neutral-700)] font-medium">
-              {benefit}
+              {benefitContent}
             </p>
           </div>
         </div>
@@ -121,7 +130,9 @@ export default function BenefitsBlock({
               Note
             </p>
             <p className="text-sm text-[var(--neutral-600)]">
-              {disclaimer}
+              {disclaimer}{crisisLink && (
+                <> <Link href={crisisLink} className="text-[var(--teal-600)] hover:underline font-medium">/crisis</Link>.</>
+              )}
             </p>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Play, Pause, Volume2, VolumeX, Sun, Moon, Cloud, Waves, Trees, Mountain, Sparkles, Heart } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -117,6 +118,20 @@ export default function CalmingScenesPage() {
             Each scene combines visualization, breathing guidance, and positive affirmations.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "6 immersive calming scenes with visualization guidance",
+            "Breathing prompts and positive affirmations for each scene",
+            "Quick calm techniques for immediate relief"
+          ]}
+          duration="5–15 min per scene"
+          control="Pause or switch scenes anytime"
+          disclaimer="Relaxation visualization—not therapy. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         {activeScene ? (
           <div className="mb-12">

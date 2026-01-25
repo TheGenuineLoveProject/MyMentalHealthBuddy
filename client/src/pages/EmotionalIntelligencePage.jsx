@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Brain, Eye, Ear, MessageCircle, Users, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -247,6 +248,20 @@ export default function EmotionalIntelligencePage() {
             Emotional intelligence is the foundation of healthy relationships and personal wellbeing.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "Explore the emotion wheel and EQ pillars for deeper understanding",
+            "Practical exercises for self-awareness and self-regulation",
+            "All data stays local—your emotional journey remains private"
+          ]}
+          duration="10–20 min per pillar"
+          control="Explore at your own pace"
+          disclaimer="Educational emotional support—not therapy. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="mb-12">
           <EmotionWheelSection />

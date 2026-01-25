@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Sparkles, RefreshCw, Copy, Check, Star, Sun, Shield, Flower2, Brain, Zap, Compass, BookOpen, Moon, Target, Users } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -298,6 +299,20 @@ export default function AffirmationsPage() {
             Each affirmation is crafted to speak directly to your nervous system, inner critic, and wounded parts with the compassion they deserve.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "10 categories of trauma-informed affirmations grounded in research",
+            "Daily affirmations based on psychological research",
+            "Copy, save, and practice affirmations at your own pace"
+          ]}
+          duration="3–10 min daily practice"
+          control="Choose categories that resonate with you"
+          disclaimer="Supportive affirmations—not clinical treatment. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="rounded-2xl p-6 mb-12 text-center" style={{ background: 'linear-gradient(135deg, var(--glp-gold-20), var(--glp-gold-10))', border: '1px solid var(--glp-gold-30)' }}>
           <Star className="h-6 w-6 mx-auto mb-2" style={{ color: 'var(--glp-gold)' }} />

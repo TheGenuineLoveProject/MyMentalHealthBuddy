@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Lightbulb, Tag, Search, Trash2, Plus, Filter, Calendar, Star, Bookmark } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_insight_cards";
 
@@ -140,6 +141,20 @@ export default function InsightCardsPage() {
             Collect and organize your wisdom. Save insights, tag themes, build your personal library.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefits={[
+            "Build your personal wisdom library with tagged insights",
+            "Search and filter your collected wisdom easily",
+            "All cards stay local—your insights remain private"
+          ]}
+          duration="2–10 min"
+          control="Add, edit, or delete anytime"
+          disclaimer="Personal organization tool—not clinical guidance. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           <div className="card-bordered text-center">

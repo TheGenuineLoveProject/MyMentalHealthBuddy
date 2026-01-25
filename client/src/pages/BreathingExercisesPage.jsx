@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap, Brain, Shield, Moon, Sun, Sparkles, BookOpen } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -248,6 +249,20 @@ export default function BreathingExercisesPage() {
             These evidence-based techniques, grounded in polyvagal theory, help shift your body from stress states into calm presence.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "6 evidence-based breathing techniques for nervous system regulation",
+            "Interactive timers with customizable breath counts",
+            "Grounded in polyvagal theory for stress relief and calm"
+          ]}
+          duration="3–10 min per exercise"
+          control="Pause, reset, or change exercises anytime"
+          disclaimer="Educational breathing practice—not medical advice. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="rounded-2xl p-6 mb-12" style={{ background: 'var(--glp-teal-50)', border: '1px solid var(--glp-sage-30)' }}>
           <div className="flex items-start gap-4">

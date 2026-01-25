@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Focus, Flame, Brain, Trophy } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import DeepWorkTracker from "@/components/mastery/DeepWorkTracker";
 import SkillForge from "@/components/mastery/SkillForge";
 import MentalModelsLibrary from "@/components/mastery/MentalModelsLibrary";
@@ -59,6 +60,20 @@ export default function MasteryToolsPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "Track deep work sessions at your own rhythm",
+              "Explore deliberate practice without pressure",
+              "Build mental models for clearer thinking"
+            ]}
+            duration="5–20 min per session"
+            control="Pause, skip, or stop anytime"
+            disclaimer="Educational support—not clinical guidance. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <nav className="grid grid-cols-3 gap-4 mb-8">
             {TOOLS.map((tool) => {

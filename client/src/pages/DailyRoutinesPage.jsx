@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   ArrowLeft, 
   Sun,
@@ -254,6 +255,20 @@ export default function DailyRoutinesPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "Morning, afternoon, and evening routine templates",
+              "Quick wins that take just 2-5 minutes",
+              "Build habits gradually at your own pace"
+            ]}
+            duration="45–90 min full routines; 2–10 min quick wins"
+            control="Mix and match activities that work for you"
+            disclaimer="Wellness education—not medical advice. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <section className="mb-10">
             <h2 className="text-heading-md mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Quick Wins (No Routine Required)</h2>

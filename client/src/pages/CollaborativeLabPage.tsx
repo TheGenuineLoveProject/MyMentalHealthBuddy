@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import {
   Users, Heart, MessageCircle, Shield, Eye, EyeOff, Send,
   Sparkles, Brain, Lightbulb, RefreshCw, Clock, ChevronRight,
-  Quote, ThumbsUp, Bookmark, Share2
+  Quote, ThumbsUp, Bookmark, Share2, ArrowLeft
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 interface SharedInsight {
   id: string;
@@ -209,6 +211,20 @@ export default function CollaborativeLabPage() {
             Connect through insights, not identities.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefits={[
+            "Share insights anonymously with fellow seekers",
+            "Explore curated reflection prompts for deeper thinking",
+            "Connect through wisdom, not identity—privacy is sacred"
+          ]}
+          duration="5–15 min"
+          control="Share only what feels right—pause anytime"
+          disclaimer="Peer insight sharing—not clinical advice. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="flex items-center justify-center gap-4 p-2 rounded-xl bg-[var(--sage-50)] border border-[var(--sage-200)] mb-8">
           {[

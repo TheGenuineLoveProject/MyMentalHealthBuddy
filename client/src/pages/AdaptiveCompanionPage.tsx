@@ -3,8 +3,9 @@ import { Link } from "wouter";
 import {
   Sparkles, Brain, Heart, Target, Compass, ArrowRight,
   Sun, Moon, Clock, Zap, RefreshCw, ChevronRight,
-  BookOpen, Lightbulb, Shield, Users, Flame, Focus
+  BookOpen, Lightbulb, Shield, Users, Flame, Focus, ArrowLeft
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 interface UserState {
   energy: "low" | "medium" | "high";
@@ -134,6 +135,20 @@ export default function AdaptiveCompanionPage() {
             Tell me how you're feeling, and I'll suggest tools that might serve you right now.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefits={[
+            "Get personalized tool suggestions based on your current state",
+            "Match your energy and clarity to the right intensity level",
+            "Your preferences stay local—no tracking"
+          ]}
+          duration="2–5 min to receive suggestions"
+          control="Change your answers anytime"
+          disclaimer="Educational tool finder—not clinical guidance. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-6"
+        />
 
         {!showRecommendations ? (
           <div className="space-y-8">

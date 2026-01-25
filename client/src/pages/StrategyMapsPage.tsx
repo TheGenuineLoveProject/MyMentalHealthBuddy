@@ -3,8 +3,9 @@ import { Link } from "wouter";
 import {
   Map, ArrowRight, ChevronRight, Compass, Brain, Heart,
   Target, Lightbulb, Shield, Flame, Clock, Check, Star,
-  BookOpen, Eye, Scale, Sparkles, Trophy, Zap, Users
+  BookOpen, Eye, Scale, Sparkles, Trophy, Zap, Users, ArrowLeft
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 interface StrategyNode {
   id: string;
@@ -358,6 +359,20 @@ export default function StrategyMapsPage() {
             Each journey builds upon the last.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefits={[
+            "Structured learning pathways across all wellness tool categories",
+            "Track your progress through interconnected skill-building journeys",
+            "All progress stays local—your journey remains private"
+          ]}
+          duration="8–12 weeks per pathway"
+          control="Start, pause, or change pathways anytime"
+          disclaimer="Educational growth framework—not clinical guidance. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         {!activeMap && (
           <div className="grid md:grid-cols-2 gap-6">

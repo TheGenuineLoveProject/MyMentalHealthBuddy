@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Anchor, Eye, Hand, Ear, Heart, Footprints, Sparkles, CheckCircle2, Brain, Shield, Zap, BookOpen, AlertCircle } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -285,6 +286,20 @@ export default function GroundingTechniquesPage() {
             These evidence-based techniques help your nervous system remember: <em>I am here. I am safe. This moment is okay.</em>
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "8 evidence-based grounding techniques for anxiety and dissociation",
+            "Step-by-step interactive guidance for each technique",
+            "Polyvagal-informed exercises grounded in neuroscience"
+          ]}
+          duration="5–15 min per technique"
+          control="Pause or switch techniques anytime"
+          disclaimer="Educational grounding practice—not therapy. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="rounded-2xl p-6 mb-12" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
           <div className="flex items-start gap-4">

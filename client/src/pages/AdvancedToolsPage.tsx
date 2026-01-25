@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Network, GitBranch, Compass, Zap, Share2, Flame, Scale, Target, Lightbulb, Brain, Eye, Type, MapPin, Heart, BookOpen, Focus, Map, Sparkles } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import LogicLatticeLab from "@/components/logic/LogicLatticeLab";
 import SystemsResonance from "@/components/systems/SystemsResonance";
 import ParadoxCartographer from "@/components/paradox/ParadoxCartographer";
@@ -113,6 +114,20 @@ export default function AdvancedToolsPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "20 specialized thinking tools for deeper self-discovery",
+              "Explore logic, ethics, identity, and meaning frameworks",
+              "All data stays on your device—private by design"
+            ]}
+            duration="5–30 min per tool"
+            control="Pause, skip, or stop anytime"
+            disclaimer="Educational support—not clinical guidance. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 mb-8">
             {TOOL_CATEGORIES.map(category => (

@@ -17,6 +17,7 @@ import {
   Sparkles,
   Shield
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -204,6 +205,20 @@ export default function CognitiveToolsPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "CBT-based tools for identifying cognitive distortions",
+              "5-step thought challenge framework",
+              "Practical exercises like thought logs and worry time"
+            ]}
+            duration="10–20 min per tool"
+            control="Practice at your own pace"
+            disclaimer="Educational CBT tools—not therapy. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <div className="card-bordered mb-8 rounded-xl p-6" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
             <div className="flex items-start gap-4">

@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Brain, Lightbulb, Layers, Sparkles, BookOpen, Target, Zap, Save, RefreshCw } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_wisdom_synthesis";
 
@@ -185,10 +186,24 @@ export default function WisdomSynthesisPage() {
               Wisdom Synthesis Engine
             </h1>
           </div>
-          <p className="text-lead">
+          <p className="text-body-sm">
             Transform raw thoughts into structured insights. Extract patterns, discover connections, find actionable wisdom.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefits={[
+            "Transform thoughts into structured insights automatically",
+            "Extract patterns and discover hidden connections",
+            "Generate actionable wisdom from your reflections"
+          ]}
+          duration="5–15 min per synthesis"
+          control="Pause, save, or stop anytime"
+          disclaimer="Educational reflection tool—not clinical guidance. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           <div className="card-bordered text-center">
