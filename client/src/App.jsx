@@ -27,6 +27,7 @@ const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));
 const Wellness = lazy(() => import("./pages/Wellness.jsx"));
 const Premium = lazy(() => import("./pages/Premium.jsx"));
+const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
@@ -356,6 +357,9 @@ export default function App() {
               </Route>
               <Route path="/upgrade">
                 <ProtectedRoute><Upgrade /></ProtectedRoute>
+              </Route>
+              <Route path="/what-you-get">
+                <ProtectedRoute><SubscriberBenefitsPage /></ProtectedRoute>
               </Route>
               <Route path="/onboarding">
                 <ProtectedRoute><Onboarding /></ProtectedRoute>
