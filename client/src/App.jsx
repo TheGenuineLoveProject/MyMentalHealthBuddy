@@ -80,6 +80,8 @@ const SelfWorthReflectionPage = lazy(() => import("./pages/SelfWorthReflectionPa
 const Challenge = lazy(() => import("./pages/Challenge.jsx"));
 const ChallengeDay = lazy(() => import("./pages/ChallengeDay.jsx"));
 const AlignmentPath = lazy(() => import("./pages/AlignmentPath.jsx"));
+const SystemMapPage = lazy(() => import("./pages/SystemMapPage.jsx"));
+const ReframePage = lazy(() => import("./pages/tools/ReframePage.jsx"));
 
 function LoadingFallback() {
   return (
@@ -230,6 +232,12 @@ export default function App() {
               </Route>
               <Route path="/alignment-path">
                 <WellnessRoute><AlignmentPath /></WellnessRoute>
+              </Route>
+              <Route path="/system-map">
+                <WellnessRoute><SystemMapPage /></WellnessRoute>
+              </Route>
+              <Route path="/tools/reframe">
+                <WellnessRoute><ReframePage /></WellnessRoute>
               </Route>
               <Route path="/advanced">
                 <WellnessRoute><AdvancedToolsPage /></WellnessRoute>

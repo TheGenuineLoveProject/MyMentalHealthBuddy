@@ -9,13 +9,15 @@ Generated: 2026-01-25
 | Category | Count |
 |----------|-------|
 | TODOs/FIXMEs | 0 |
-| Coming Soon/Placeholders | 302 |
+| Coming Soon/Placeholders | 304 |
 | Empty Components | 25 |
 | Missing BenefitsBlock (wellness) | 111 |
 | Missing Crisis Link (wellness) | 80 |
 | Missing Consent Language (wellness) | 149 |
 | Missing SafetyFooter (wellness) | 105 |
-| **Total Issues** | **772** |
+| Missing ClarityCard (wellness) | 159 |
+| Missing ExamplesAccordion (wellness) | 159 |
+| **Total Issues** | **1092** |
 
 ## Detection Criteria
 
@@ -632,6 +634,10 @@ Consent language must include:
   `placeholder="Search your entries..."`
 - **client/src/pages/dashboard/MoodTracker.tsx:155** - `placeholder`
   `placeholder="What's on your mind? Any context you'd like to add..."`
+- **client/src/pages/tools/ReframePage.jsx:150** - `placeholder`
+  `placeholder="e.g., &quot;I'm failing at everything&quot; or &quot;I'll never get better&quot;"`
+- **client/src/pages/tools/ReframePage.jsx:151** - `placeholder`
+  `className="w-full p-4 rounded-xl border bg-background dark:bg-[hsl(var(--gray-800))] border-[hsl(var`
 - **server/routes/figma.mjs:5** - `Placeholder`
   `// Placeholder route (keeps the platform stable even if Figma is not configured yet)`
 - **server/routes/figma.mjs:10** - `placeholder`
@@ -1117,6 +1123,334 @@ Required: "Pause or stop anytime", "opt-out", or "only do what feels safe"
 - client/src/pages/generated/wisdom-practices.jsx
 - client/src/pages/generated/wisdom-synthesis.jsx
 - client/src/pages/generated/wisdom.jsx
+- client/src/pages/legal/Disclaimer.jsx
+- client/src/pages/legal/Ethics.jsx
+- client/src/pages/marketing/LandingCTA.tsx
+- client/src/pages/marketing/LandingFeatures.tsx
+- client/src/pages/marketing/LandingHero.tsx
+- client/src/pages/marketing/LandingTestimonials.tsx
+
+## Wellness Pages Missing ClarityCard
+
+ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
+
+- client/src/pages/AIChatPage.jsx
+- client/src/pages/AdaptiveCompanionPage.tsx
+- client/src/pages/Admin.jsx
+- client/src/pages/AdvancedToolsPage.tsx
+- client/src/pages/AffirmationsPage.jsx
+- client/src/pages/AlignmentPath.jsx
+- client/src/pages/Analytics.jsx
+- client/src/pages/AtlasDashboard.tsx
+- client/src/pages/BehaviorChangePage.jsx
+- client/src/pages/Blog.jsx
+- client/src/pages/BlogEditor.jsx
+- client/src/pages/BlogIndex.jsx
+- client/src/pages/BodyWellnessPage.jsx
+- client/src/pages/BoundariesPage.jsx
+- client/src/pages/BreathingExercisesPage.jsx
+- client/src/pages/CRMPage.jsx
+- client/src/pages/CalmingScenesPage.jsx
+- client/src/pages/CanvaLanding.jsx
+- client/src/pages/Challenge.jsx
+- client/src/pages/ChallengeDay.jsx
+- client/src/pages/CognitiveArchitecturePage.tsx
+- client/src/pages/CognitiveToolsPage.jsx
+- client/src/pages/CoherenceLadderPage.jsx
+- client/src/pages/CollaborativeLabPage.tsx
+- client/src/pages/CommunityPage.tsx
+- client/src/pages/ContentIndexPage.jsx
+- client/src/pages/ContentStudioPage.tsx
+- client/src/pages/ControlDashboard.jsx
+- client/src/pages/CrisisResources.jsx
+- client/src/pages/DailyRitualPage.tsx
+- client/src/pages/DailyRoutinesPage.jsx
+- client/src/pages/DailyWisdomOraclePage.tsx
+- client/src/pages/Dashboard.jsx
+- client/src/pages/DesignDashboard.jsx
+- client/src/pages/DesignSystem.jsx
+- client/src/pages/Disclaimer.tsx
+- client/src/pages/EliteToolsDashboard.tsx
+- client/src/pages/EmotionalIntelligencePage.jsx
+- client/src/pages/ExamplesPage.jsx
+- client/src/pages/FAQPage.jsx
+- client/src/pages/GlossaryPage.jsx
+- client/src/pages/GroundingTechniquesPage.jsx
+- client/src/pages/GrowthAnalyticsPage.tsx
+- client/src/pages/GuidedJournalingPage.tsx
+- client/src/pages/HealingJourneysPage.jsx
+- client/src/pages/HealingLandingPage.jsx
+- client/src/pages/HealingLibraryPage.jsx
+- client/src/pages/HealthPage.jsx
+- client/src/pages/Home.jsx
+- client/src/pages/HowToGuidesPage.jsx
+- client/src/pages/InnerChildPage.jsx
+- client/src/pages/InsightCardsPage.tsx
+- client/src/pages/JournalPage.jsx
+- client/src/pages/KnowledgeSynthesisPage.tsx
+- client/src/pages/Legal.tsx
+- client/src/pages/Login.jsx
+- client/src/pages/MasteryToolsPage.tsx
+- client/src/pages/MeditationGuidePage.jsx
+- client/src/pages/MetaLearningPage.tsx
+- client/src/pages/MirrorPage.tsx
+- client/src/pages/MoodPage.jsx
+- client/src/pages/MovementSnacksPage.jsx
+- client/src/pages/NervousSystemFloodingPage.jsx
+- client/src/pages/NewsPage.jsx
+- client/src/pages/NotFound.jsx
+- client/src/pages/Onboarding.tsx
+- client/src/pages/PerceptionRefinementPage.jsx
+- client/src/pages/PermacultureWellnessPage.jsx
+- client/src/pages/PhilosophicalInquiryPage.tsx
+- client/src/pages/Premium.jsx
+- client/src/pages/Pricing.jsx
+- client/src/pages/Privacy.tsx
+- client/src/pages/ProfessionalResourcesPage.jsx
+- client/src/pages/Profile.jsx
+- client/src/pages/ProgressDashboardPage.tsx
+- client/src/pages/Publishing.jsx
+- client/src/pages/QAPage.jsx
+- client/src/pages/Register.jsx
+- client/src/pages/ResearchEvidencePage.jsx
+- client/src/pages/ResilienceMetricsPage.tsx
+- client/src/pages/ResourcesPage.jsx
+- client/src/pages/SafetyPage.jsx
+- client/src/pages/SelfCareToolkitPage.jsx
+- client/src/pages/SelfWorthReflectionPage.jsx
+- client/src/pages/Settings.jsx
+- client/src/pages/SleepGuidePage.jsx
+- client/src/pages/SoulWellnessPage.jsx
+- client/src/pages/StatePage.jsx
+- client/src/pages/StrategyMapsPage.tsx
+- client/src/pages/StressResponseGuidePage.jsx
+- client/src/pages/StudyVaultPage.jsx
+- client/src/pages/SupportPage.tsx
+- client/src/pages/SystemsThinkingPage.tsx
+- client/src/pages/Terms.tsx
+- client/src/pages/ToolsPage.jsx
+- client/src/pages/Upgrade.jsx
+- client/src/pages/ValuesFinderPage.jsx
+- client/src/pages/Wellness.jsx
+- client/src/pages/WellnessGlossaryPage.jsx
+- client/src/pages/WellnessHubPage.jsx
+- client/src/pages/WireframeTemplates.jsx
+- client/src/pages/WisdomPracticesPage.tsx
+- client/src/pages/WisdomSynthesisPage.tsx
+- client/src/pages/WisdomToolsPage.tsx
+- client/src/pages/account/Billing.tsx
+- client/src/pages/account/Profile.tsx
+- client/src/pages/account/Settings.tsx
+- client/src/pages/admin/SocialAnalytics.jsx
+- client/src/pages/admin/SocialDashboard.jsx
+- client/src/pages/admin/SocialGenerator.jsx
+- client/src/pages/ai/ChatConversation.tsx
+- client/src/pages/ai/ChatCrisis.tsx
+- client/src/pages/ai/ChatEmpty.tsx
+- client/src/pages/auth/Login.tsx
+- client/src/pages/auth/SignUp.tsx
+- client/src/pages/dashboard/Insights.tsx
+- client/src/pages/dashboard/Journal.tsx
+- client/src/pages/dashboard/MoodTracker.tsx
+- client/src/pages/dashboard/Overview.jsx
+- client/src/pages/generated/advanced.jsx
+- client/src/pages/generated/body-wellness.jsx
+- client/src/pages/generated/cognitive-architecture.jsx
+- client/src/pages/generated/cognitive-tools.jsx
+- client/src/pages/generated/crisis.jsx
+- client/src/pages/generated/daily-wisdom.jsx
+- client/src/pages/generated/emotional-intelligence.jsx
+- client/src/pages/generated/guided-journaling.jsx
+- client/src/pages/generated/healing-journeys.jsx
+- client/src/pages/generated/healing-library.jsx
+- client/src/pages/generated/healing-test.jsx
+- client/src/pages/generated/healing.jsx
+- client/src/pages/generated/insight-cards.jsx
+- client/src/pages/generated/journal.jsx
+- client/src/pages/generated/mastery.jsx
+- client/src/pages/generated/mood.jsx
+- client/src/pages/generated/resilience.jsx
+- client/src/pages/generated/ritual.jsx
+- client/src/pages/generated/self-care.jsx
+- client/src/pages/generated/social.jsx
+- client/src/pages/generated/soul-wellness.jsx
+- client/src/pages/generated/systems-thinking.jsx
+- client/src/pages/generated/tools.jsx
+- client/src/pages/generated/wellness-creativity.jsx
+- client/src/pages/generated/wellness-hub.jsx
+- client/src/pages/generated/wellness-movement.jsx
+- client/src/pages/generated/wellness-nature.jsx
+- client/src/pages/generated/wellness-nutrition.jsx
+- client/src/pages/generated/wellness-sleep.jsx
+- client/src/pages/generated/wellness.jsx
+- client/src/pages/generated/wisdom-practices.jsx
+- client/src/pages/generated/wisdom-synthesis.jsx
+- client/src/pages/generated/wisdom.jsx
+- client/src/pages/landing/Landing.jsx
+- client/src/pages/legal/Disclaimer.jsx
+- client/src/pages/legal/Ethics.jsx
+- client/src/pages/marketing/LandingCTA.tsx
+- client/src/pages/marketing/LandingFeatures.tsx
+- client/src/pages/marketing/LandingHero.tsx
+- client/src/pages/marketing/LandingTestimonials.tsx
+
+## Wellness Pages Missing ExamplesAccordion
+
+ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
+
+- client/src/pages/AIChatPage.jsx
+- client/src/pages/AdaptiveCompanionPage.tsx
+- client/src/pages/Admin.jsx
+- client/src/pages/AdvancedToolsPage.tsx
+- client/src/pages/AffirmationsPage.jsx
+- client/src/pages/AlignmentPath.jsx
+- client/src/pages/Analytics.jsx
+- client/src/pages/AtlasDashboard.tsx
+- client/src/pages/BehaviorChangePage.jsx
+- client/src/pages/Blog.jsx
+- client/src/pages/BlogEditor.jsx
+- client/src/pages/BlogIndex.jsx
+- client/src/pages/BodyWellnessPage.jsx
+- client/src/pages/BoundariesPage.jsx
+- client/src/pages/BreathingExercisesPage.jsx
+- client/src/pages/CRMPage.jsx
+- client/src/pages/CalmingScenesPage.jsx
+- client/src/pages/CanvaLanding.jsx
+- client/src/pages/Challenge.jsx
+- client/src/pages/ChallengeDay.jsx
+- client/src/pages/CognitiveArchitecturePage.tsx
+- client/src/pages/CognitiveToolsPage.jsx
+- client/src/pages/CoherenceLadderPage.jsx
+- client/src/pages/CollaborativeLabPage.tsx
+- client/src/pages/CommunityPage.tsx
+- client/src/pages/ContentIndexPage.jsx
+- client/src/pages/ContentStudioPage.tsx
+- client/src/pages/ControlDashboard.jsx
+- client/src/pages/CrisisResources.jsx
+- client/src/pages/DailyRitualPage.tsx
+- client/src/pages/DailyRoutinesPage.jsx
+- client/src/pages/DailyWisdomOraclePage.tsx
+- client/src/pages/Dashboard.jsx
+- client/src/pages/DesignDashboard.jsx
+- client/src/pages/DesignSystem.jsx
+- client/src/pages/Disclaimer.tsx
+- client/src/pages/EliteToolsDashboard.tsx
+- client/src/pages/EmotionalIntelligencePage.jsx
+- client/src/pages/ExamplesPage.jsx
+- client/src/pages/FAQPage.jsx
+- client/src/pages/GlossaryPage.jsx
+- client/src/pages/GroundingTechniquesPage.jsx
+- client/src/pages/GrowthAnalyticsPage.tsx
+- client/src/pages/GuidedJournalingPage.tsx
+- client/src/pages/HealingJourneysPage.jsx
+- client/src/pages/HealingLandingPage.jsx
+- client/src/pages/HealingLibraryPage.jsx
+- client/src/pages/HealthPage.jsx
+- client/src/pages/Home.jsx
+- client/src/pages/HowToGuidesPage.jsx
+- client/src/pages/InnerChildPage.jsx
+- client/src/pages/InsightCardsPage.tsx
+- client/src/pages/JournalPage.jsx
+- client/src/pages/KnowledgeSynthesisPage.tsx
+- client/src/pages/Legal.tsx
+- client/src/pages/Login.jsx
+- client/src/pages/MasteryToolsPage.tsx
+- client/src/pages/MeditationGuidePage.jsx
+- client/src/pages/MetaLearningPage.tsx
+- client/src/pages/MirrorPage.tsx
+- client/src/pages/MoodPage.jsx
+- client/src/pages/MovementSnacksPage.jsx
+- client/src/pages/NervousSystemFloodingPage.jsx
+- client/src/pages/NewsPage.jsx
+- client/src/pages/NotFound.jsx
+- client/src/pages/Onboarding.tsx
+- client/src/pages/PerceptionRefinementPage.jsx
+- client/src/pages/PermacultureWellnessPage.jsx
+- client/src/pages/PhilosophicalInquiryPage.tsx
+- client/src/pages/Premium.jsx
+- client/src/pages/Pricing.jsx
+- client/src/pages/Privacy.tsx
+- client/src/pages/ProfessionalResourcesPage.jsx
+- client/src/pages/Profile.jsx
+- client/src/pages/ProgressDashboardPage.tsx
+- client/src/pages/Publishing.jsx
+- client/src/pages/QAPage.jsx
+- client/src/pages/Register.jsx
+- client/src/pages/ResearchEvidencePage.jsx
+- client/src/pages/ResilienceMetricsPage.tsx
+- client/src/pages/ResourcesPage.jsx
+- client/src/pages/SafetyPage.jsx
+- client/src/pages/SelfCareToolkitPage.jsx
+- client/src/pages/SelfWorthReflectionPage.jsx
+- client/src/pages/Settings.jsx
+- client/src/pages/SleepGuidePage.jsx
+- client/src/pages/SoulWellnessPage.jsx
+- client/src/pages/StatePage.jsx
+- client/src/pages/StrategyMapsPage.tsx
+- client/src/pages/StressResponseGuidePage.jsx
+- client/src/pages/StudyVaultPage.jsx
+- client/src/pages/SupportPage.tsx
+- client/src/pages/SystemsThinkingPage.tsx
+- client/src/pages/Terms.tsx
+- client/src/pages/ToolsPage.jsx
+- client/src/pages/Upgrade.jsx
+- client/src/pages/ValuesFinderPage.jsx
+- client/src/pages/Wellness.jsx
+- client/src/pages/WellnessGlossaryPage.jsx
+- client/src/pages/WellnessHubPage.jsx
+- client/src/pages/WireframeTemplates.jsx
+- client/src/pages/WisdomPracticesPage.tsx
+- client/src/pages/WisdomSynthesisPage.tsx
+- client/src/pages/WisdomToolsPage.tsx
+- client/src/pages/account/Billing.tsx
+- client/src/pages/account/Profile.tsx
+- client/src/pages/account/Settings.tsx
+- client/src/pages/admin/SocialAnalytics.jsx
+- client/src/pages/admin/SocialDashboard.jsx
+- client/src/pages/admin/SocialGenerator.jsx
+- client/src/pages/ai/ChatConversation.tsx
+- client/src/pages/ai/ChatCrisis.tsx
+- client/src/pages/ai/ChatEmpty.tsx
+- client/src/pages/auth/Login.tsx
+- client/src/pages/auth/SignUp.tsx
+- client/src/pages/dashboard/Insights.tsx
+- client/src/pages/dashboard/Journal.tsx
+- client/src/pages/dashboard/MoodTracker.tsx
+- client/src/pages/dashboard/Overview.jsx
+- client/src/pages/generated/advanced.jsx
+- client/src/pages/generated/body-wellness.jsx
+- client/src/pages/generated/cognitive-architecture.jsx
+- client/src/pages/generated/cognitive-tools.jsx
+- client/src/pages/generated/crisis.jsx
+- client/src/pages/generated/daily-wisdom.jsx
+- client/src/pages/generated/emotional-intelligence.jsx
+- client/src/pages/generated/guided-journaling.jsx
+- client/src/pages/generated/healing-journeys.jsx
+- client/src/pages/generated/healing-library.jsx
+- client/src/pages/generated/healing-test.jsx
+- client/src/pages/generated/healing.jsx
+- client/src/pages/generated/insight-cards.jsx
+- client/src/pages/generated/journal.jsx
+- client/src/pages/generated/mastery.jsx
+- client/src/pages/generated/mood.jsx
+- client/src/pages/generated/resilience.jsx
+- client/src/pages/generated/ritual.jsx
+- client/src/pages/generated/self-care.jsx
+- client/src/pages/generated/social.jsx
+- client/src/pages/generated/soul-wellness.jsx
+- client/src/pages/generated/systems-thinking.jsx
+- client/src/pages/generated/tools.jsx
+- client/src/pages/generated/wellness-creativity.jsx
+- client/src/pages/generated/wellness-hub.jsx
+- client/src/pages/generated/wellness-movement.jsx
+- client/src/pages/generated/wellness-nature.jsx
+- client/src/pages/generated/wellness-nutrition.jsx
+- client/src/pages/generated/wellness-sleep.jsx
+- client/src/pages/generated/wellness.jsx
+- client/src/pages/generated/wisdom-practices.jsx
+- client/src/pages/generated/wisdom-synthesis.jsx
+- client/src/pages/generated/wisdom.jsx
+- client/src/pages/landing/Landing.jsx
 - client/src/pages/legal/Disclaimer.jsx
 - client/src/pages/legal/Ethics.jsx
 - client/src/pages/marketing/LandingCTA.tsx

@@ -29,6 +29,8 @@ export const twelvePhases = [
       "Where do I feel tension or unease?",
       "What would I notice if I slowed down?"
     ],
+    example: "I've been snapping at people lately. Something is bothering me beneath the surface.",
+    tinyAction: "Name the feeling in 3 words or less.",
     estimatedTime: "5-10 minutes",
     canSkip: true
   },
@@ -46,6 +48,8 @@ export const twelvePhases = [
       "Where is my resistance? What is it protecting?",
       "What would willingness look like today?"
     ],
+    example: "I'm not ready to change everything, but I'm curious about trying one small thing.",
+    tinyAction: "Complete: 'I'm willing to try...' (one sentence only).",
     estimatedTime: "5-10 minutes",
     canSkip: true
   },
@@ -63,6 +67,8 @@ export const twelvePhases = [
       "What story have I been telling that isn't quite true?",
       "What needs acknowledgment?"
     ],
+    example: "The truth is, I'm more exhausted than I've been admitting—even to myself.",
+    tinyAction: "Write one honest sentence starting with 'The truth is...'",
     estimatedTime: "10-15 minutes",
     canSkip: true
   },
@@ -80,6 +86,8 @@ export const twelvePhases = [
       "Where can I take action?",
       "What do I need to let go of?"
     ],
+    example: "I can't control others, but I can control my boundary. I can say 'no' to this request.",
+    tinyAction: "Write one boundary sentence: 'I can/I can't control...'",
     estimatedTime: "10-15 minutes",
     canSkip: true
   },
@@ -103,6 +111,8 @@ export const twelvePhases = [
       "Justice", "Kindness", "Love", "Loyalty", "Peace", "Respect",
       "Responsibility", "Security", "Service", "Wisdom"
     ],
+    example: "I value honesty, but I've been avoiding a hard conversation. My actions don't match my values.",
+    tinyAction: "Circle one value that feels important today.",
     estimatedTime: "15-20 minutes",
     canSkip: true
   },
@@ -120,6 +130,8 @@ export const twelvePhases = [
       "What patterns did I learn growing up?",
       "What would breaking this pattern look like?"
     ],
+    example: "I notice I shut down when people raise their voice. This pattern started in childhood.",
+    tinyAction: "Name one pattern: 'When X happens, I usually Y.'",
     estimatedTime: "15-20 minutes",
     canSkip: true
   },
@@ -137,6 +149,8 @@ export const twelvePhases = [
       "What would I release if I trusted I'd be okay?",
       "What does 'letting go' mean to me?"
     ],
+    example: "I'm releasing the belief that I have to be perfect to be loved.",
+    tinyAction: "Write: 'I'm ready to release...' (one thing only).",
     estimatedTime: "15-20 minutes",
     canSkip: true
   },
@@ -159,6 +173,8 @@ export const twelvePhases = [
       "Saying no", "Emotional regulation", "Active listening",
       "Self-advocacy", "Mindful pause", "Gratitude practice"
     ],
+    example: "Practice a 60-second breath reset. Stop if needed.",
+    tinyAction: "Pick one skill. Practice for 60 seconds—then stop.",
     estimatedTime: "Ongoing",
     canSkip: true
   },
@@ -176,6 +192,8 @@ export const twelvePhases = [
       "What relationship deserves more care?",
       "What would repair look like in practice?"
     ],
+    example: "I've been neglecting my own rest. Repair starts with myself.",
+    tinyAction: "Name one relationship (even with yourself) that needs care.",
     estimatedTime: "20-30 minutes",
     canSkip: true
   },
@@ -193,6 +211,8 @@ export const twelvePhases = [
       "What support do I need?",
       "What will remind me of this when I forget?"
     ],
+    example: "I'll add a 2-minute morning check-in to my routine.",
+    tinyAction: "Choose one small ritual to try tomorrow.",
     estimatedTime: "15-20 minutes",
     canSkip: true
   },
@@ -210,6 +230,8 @@ export const twelvePhases = [
       "What cause or community matters to me?",
       "What would meaningful contribution look like?"
     ],
+    example: "Send one encouraging text to someone who might need it.",
+    tinyAction: "Do one kind thing for someone (or yourself) today.",
     estimatedTime: "Ongoing",
     canSkip: true
   },
@@ -227,6 +249,8 @@ export const twelvePhases = [
       "What anchors me?",
       "What does 'enough' look like?"
     ],
+    example: "When I slip, I'll say: 'That's human. What's one gentle next step?'",
+    tinyAction: "Write one sentence: 'When I slip, I'll...'",
     estimatedTime: "15-20 minutes",
     canSkip: true
   }
