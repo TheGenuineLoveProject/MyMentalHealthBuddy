@@ -17,6 +17,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import MoodHistoryChart from "../components/MoodHistoryChart.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { StreakShare } from "@/components/share/StreakShare";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -167,6 +168,17 @@ export default function Dashboard() {
           </header>
 
           <GuardianHeartPanel name={user?.email?.split("@")[0]} />
+
+          {/* Streak Share Card */}
+          {data?.stats?.streak > 0 && (
+            <section className="mb-8" aria-label="Your wellness streak" data-testid="section-streak">
+              <StreakShare 
+                streakDays={data.stats.streak} 
+                activityType="wellness practice"
+                milestone={data.stats.streak >= 7 || data.stats.streak >= 30 || data.stats.streak >= 100}
+              />
+            </section>
+          )}
 
           {/* Daily Healing Focus Card */}
           <section 

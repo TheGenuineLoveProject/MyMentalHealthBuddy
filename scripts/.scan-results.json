@@ -1,21 +1,83 @@
 {
-  "timestamp": "2026-01-25T06:48:02.409Z",
+  "timestamp": "2026-01-25T06:53:16.203Z",
   "summary": {
-    "totalFiles": 510,
-    "wellnessPages": 199,
+    "totalFiles": 514,
+    "wellnessPages": 203,
     "generatedPages": 123,
     "withSEO": 265,
-    "withDisclaimer": 233,
-    "withSafetyFooter": 121,
-    "withBenefits": 254,
+    "withDisclaimer": 237,
+    "withSafetyFooter": 125,
+    "withBenefits": 258,
     "withMI": 30,
-    "issuesFound": 0,
+    "issuesFound": 4,
     "issuesByType": {
-      "missing-seo": [],
+      "missing-seo": [
+        "client/src/pages/hubs/BoundariesHubPage.jsx",
+        "client/src/pages/hubs/ResilienceHubPage.jsx",
+        "client/src/pages/hubs/SelfWorthHubPage.jsx",
+        "client/src/pages/hubs/SleepHubPage.jsx"
+      ],
       "missing-safety": [],
       "missing-benefits": [],
       "contains-disallowed": []
     }
   },
-  "filesWithIssues": []
+  "filesWithIssues": [
+    {
+      "path": "client/src/pages/hubs/BoundariesHubPage.jsx",
+      "hasSEO": false,
+      "hasDisclaimer": true,
+      "hasSafetyFooter": true,
+      "hasBenefitsBlock": true,
+      "hasMIPatterns": false,
+      "isGenerated": false,
+      "isWellnessPage": true,
+      "disallowed": [],
+      "issues": [
+        "missing-seo"
+      ]
+    },
+    {
+      "path": "client/src/pages/hubs/ResilienceHubPage.jsx",
+      "hasSEO": false,
+      "hasDisclaimer": true,
+      "hasSafetyFooter": true,
+      "hasBenefitsBlock": true,
+      "hasMIPatterns": false,
+      "isGenerated": false,
+      "isWellnessPage": true,
+      "disallowed": [],
+      "issues": [
+        "missing-seo"
+      ]
+    },
+    {
+      "path": "client/src/pages/hubs/SelfWorthHubPage.jsx",
+      "hasSEO": false,
+      "hasDisclaimer": true,
+      "hasSafetyFooter": true,
+      "hasBenefitsBlock": true,
+      "hasMIPatterns": false,
+      "isGenerated": false,
+      "isWellnessPage": true,
+      "disallowed": [],
+      "issues": [
+        "missing-seo"
+      ]
+    },
+    {
+      "path": "client/src/pages/hubs/SleepHubPage.jsx",
+      "hasSEO": false,
+      "hasDisclaimer": true,
+      "hasSafetyFooter": true,
+      "hasBenefitsBlock": true,
+      "hasMIPatterns": false,
+      "isGenerated": false,
+      "isWellnessPage": true,
+      "disallowed": [],
+      "issues": [
+        "missing-seo"
+      ]
+    }
+  ]
 }
