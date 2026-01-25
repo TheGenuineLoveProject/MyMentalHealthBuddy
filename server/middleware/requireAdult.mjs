@@ -20,9 +20,11 @@ export function requireAdult(req, res, next) {
 
   return res.status(403).json({
     error: "Age verification required",
-    message: "This content requires confirmation that you are 18 years or older. " +
-             "These are educational wellness tools only, not medical or mental health treatment.",
-    action: "Please confirm your age to continue.",
+    message: "This content requires confirmation that you are 18 years or older.",
+    educationalNotice: "These are educational wellness tools designed for self-guided personal growth. " +
+                       "This is not medical advice, mental health treatment, or a substitute for professional care. " +
+                       "If you are in crisis, please visit our crisis resources page immediately.",
+    action: "Please confirm your age on the wellness page to continue.",
     disclaimerUrl: "/legal/disclaimer",
     crisisUrl: "/crisis",
     code: "AGE_CONFIRMATION_REQUIRED"
