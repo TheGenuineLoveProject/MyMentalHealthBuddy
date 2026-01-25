@@ -335,8 +335,21 @@ function addBenefitsUsage(content, filePath) {
   return content;
 }
 
+const SKIP_FILES = [
+  "SEO.tsx",
+  "SafetyFooter.jsx",
+  "BenefitsBlock.jsx",
+  "BenefitsBlock.tsx",
+  "PageScaffold.tsx"
+];
+
 function patchFile(filePath, issues) {
   const fullPath = path.join(ROOT, filePath);
+  const fileName = path.basename(filePath);
+  
+  if (SKIP_FILES.includes(fileName)) {
+    return { success: false, reason: "Skipped (component file)" };
+  }
   
   if (!fs.existsSync(fullPath)) {
     return { success: false, reason: "File not found" };

@@ -1,15 +1,15 @@
 {
-  "timestamp": "2026-01-25T05:43:41.086Z",
+  "timestamp": "2026-01-25T05:52:53.878Z",
   "summary": {
     "totalFiles": 501,
     "wellnessPages": 197,
     "generatedPages": 123,
-    "withSEO": 264,
+    "withSEO": 263,
     "withDisclaimer": 230,
-    "withSafetyFooter": 122,
+    "withSafetyFooter": 121,
     "withBenefits": 252,
     "withMI": 4,
-    "issuesFound": 115,
+    "issuesFound": 116,
     "issuesByType": {
       "missing-seo": [],
       "missing-safety": [],
@@ -81,6 +81,7 @@
         "client/src/components/PositiveReframing.jsx",
         "client/src/components/ReflectionCardExport.jsx",
         "client/src/components/ResilienceStories.jsx",
+        "client/src/components/SEO.tsx",
         "client/src/components/SacredFooter.jsx",
         "client/src/components/SacredForm.jsx",
         "client/src/components/SelfCompassion.jsx",
@@ -1188,6 +1189,22 @@
       ],
       "issues": [
         "contains-disallowed: placeholder"
+      ]
+    },
+    {
+      "path": "client/src/components/SEO.tsx",
+      "hasSEO": false,
+      "hasDisclaimer": false,
+      "hasSafetyFooter": false,
+      "hasBenefitsBlock": false,
+      "hasMIPatterns": false,
+      "isGenerated": false,
+      "isWellnessPage": false,
+      "disallowed": [
+        "return null"
+      ],
+      "issues": [
+        "contains-disallowed: return null"
       ]
     },
     {

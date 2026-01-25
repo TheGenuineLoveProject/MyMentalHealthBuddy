@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { BRAND } from "@shared/brand.mjs";
-import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export const SITE_URL = "https://thegenuineloveproject.com";
 
@@ -133,18 +131,7 @@ export function SEO({
     };
   }, [fullTitle, description, type, image, noindex, canonicalUrl, route, datePublished, dateModified]);
 
-  return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="S E O — The Genuine Love Project" description="Explore s e o tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">S E O</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  return null;
 }
 
 export default SEO;
