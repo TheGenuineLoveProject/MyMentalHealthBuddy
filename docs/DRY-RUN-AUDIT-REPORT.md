@@ -11,7 +11,7 @@
 
 | Category | Issues Found | Severity | Status |
 |----------|-------------|----------|--------|
-| Missing Benefit Blocks | 40+ pages | Medium | ✓ 15 pages fixed |
+| Missing Benefit Blocks | 40+ pages | Medium | ✓ 12 pages fixed |
 | Missing Safety Disclaimers | 30+ pages | High | ✓ All wellness pages have SafetyFooter |
 | Missing Crisis Links | 15+ pages | High | ✓ All wellness pages have crisis links |
 | Rate Limiting | Configured ✓ | Low | ✓ Complete |
@@ -40,9 +40,9 @@
 | client/src/pages/NervousSystemFloodingPage.jsx | No BenefitsBlock | Medium | ✓ Fixed |
 | client/src/pages/PermacultureWellnessPage.jsx | No BenefitsBlock | Medium | ✓ Fixed |
 | client/src/pages/SelfWorthReflectionPage.jsx | No BenefitsBlock | Medium | ✓ Fixed |
-| client/src/pages/Challenge.jsx | No BenefitsBlock | Medium | Pending |
-| client/src/pages/DailyRitualPage.tsx | No BenefitsBlock | Medium | Pending |
-| client/src/pages/GuidedJournalingPage.tsx | No BenefitsBlock | Medium | Pending |
+| client/src/pages/Challenge.jsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/DailyRitualPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
+| client/src/pages/GuidedJournalingPage.tsx | No BenefitsBlock | Medium | ✓ Fixed |
 
 ### 2. MISSING SAFETY DISCLAIMERS
 
