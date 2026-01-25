@@ -738,3 +738,41 @@ export default {
   LOCKED_CANONICAL_PHRASES,
   MONETIZATION_LADDER
 };
+export const MICROCOPY = {
+  buttons: {
+    continue: "Continue",
+    save: "Save",
+    tryAgain: "Try again",
+    oneSmallStep: "One small step",
+    gentleStart: "Gentle start",
+    useThis: "Use this",
+    refresh: "New prompt",
+  },
+  tone: {
+    supportive: [
+      "You don’t have to do this perfectly.",
+      "Small counts. Quiet counts.",
+      "Go at your pace.",
+      "If it helps, keep it. If not, skip it.",
+    ],
+    grounding: [
+      "Take one slow breath.",
+      "Feel your feet on the floor.",
+      "Name 3 things you can see.",
+    ],
+  },
+  benefitsLines: [
+    "More calm, less overwhelm.",
+    "Clearer next steps.",
+    "Stronger self-respect.",
+    "Gentle, evidence-informed tools.",
+  ],
+  disclaimersShort: [
+    "Educational wellness tools — not medical care.",
+    "Adults 18+ only.",
+  ],
+  seoSnippets: {
+    mood: "Track mood patterns with gentle, educational self-reflection tools.",
+    journal: "Private journaling prompts for clarity, calm, and self-respect.",
+  },
+} as const;

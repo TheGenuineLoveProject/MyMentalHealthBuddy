@@ -162,3 +162,37 @@ export default {
   pick: pickMiPattern,
   random: getRandomMiPrinciple
 };
+export const MI = {
+  name: "Motivational Interviewing (Educational Self-Reflection)",
+  principles: [
+    "Partnership: you are the expert on you",
+    "Acceptance: non-judgment + self-respect",
+    "Compassion: reduce shame, increase care",
+    "Evocation: draw out your own reasons for change",
+  ],
+  oars: {
+    openQuestions: [
+      "What matters most about changing this right now?",
+      "If things improved by 10%, what would look different?",
+      "What have you already tried that helped even a little?",
+    ],
+    affirmations: [
+      "It makes sense you feel this way.",
+      "You’re showing courage by looking at this.",
+      "You don’t need perfection to make progress.",
+    ],
+    reflections: [
+      "Part of you wants change, and part of you wants safety.",
+      "You’re tired of this pattern, and you want a kinder way forward.",
+    ],
+    summaries: [
+      "Here’s what I’m hearing: what matters, what’s hard, and your next step.",
+    ],
+  },
+  changeTalkPrompts: [
+    "Why might you want this change?",
+    "What would be the benefits if you did it?",
+    "What would be the cost of staying the same?",
+    "What’s one small step you’re willing to try this week?",
+  ],
+} as const;

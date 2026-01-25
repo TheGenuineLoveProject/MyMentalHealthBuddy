@@ -27,8 +27,7 @@
     "gen:pages:all": "node scripts/generate-pages.mjs --mode=all",
     "verify:routes": "node scripts/verify-routes-manifest.mjs",
     "verify:routes:fix": "node scripts/verify-routes-manifest.mjs --fix",
-    "patch:wellness:dry": "DRY_RUN=1 node scripts/applyWellnessShell.mjs",
-    "patch:wellness": "DRY_RUN=0 node scripts/applyWellnessShell.mjs",
+    "patch:wellness:dry": "DRY_RUN=1 node scripts/applyWellnessShell.mjs",                           "patch:wellness": "DRY_RUN=0 node scripts/applyWellnessShell.mjs",
     "print:routes:diff": "node scripts/print-routes-diff.mjs",
     "print:routes:diff:ci": "node scripts/print-routes-diff.mjs --max=20",
     "print:routes:diff:gha": "node scripts/print-routes-diff.mjs --format=gha --ci",
@@ -46,7 +45,8 @@
     "route:map": "node tools/route_map.mjs",
     "auth:smoke": "node tools/auth_smoke.mjs",
     "release:gate": "bash tools/release_gate.sh",
-    "scan:incomplete": "node scripts/scanIncomplete.mjs"
+    "scan:incomplete": "node scripts/scanIncomplete.mjs",
+    "scan:pages": "node scripts/scanIncompletePages.mjs"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
