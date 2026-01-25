@@ -8,6 +8,7 @@ import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { 
   Brain, 
   Heart, 
@@ -169,6 +170,8 @@ export default function SelfWorthReflectionPage() {
               And I want to answer this in a way that really lands, not just comfort-talk.
             </p>
           </div>
+
+          <MIPromptCard context="reflection" className="mb-8" />
 
           <div className="bg-[var(--surface-elevated)] p-6 rounded-2xl border border-[var(--border-subtle)] mb-8" data-testid="section-why">
             <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-4" data-testid="heading-why">

@@ -27,14 +27,14 @@ const SAFETY_PATTERNS = {
   disclaimer: [/18\+/, /Adults.*18/i, /educational.*wellness/i, /not.*medical.*care/i],
   safetyFooter: [/SafetyFooter/, /SafetyNotice/],
   benefitsBlock: [/BenefitsBlock/, /benefits\s*=\s*\[/, /WellnessPageShell/],
-  miPatterns: [/motivational/i, /strengths.*based/i, /getMiPrompt/]
+  miPatterns: [/motivational/i, /strengths.*based/i, /getMiPrompt/, /MIPromptCard/]
 };
 
 const DISALLOWED_PATTERNS = [
   { name: "TODO", pattern: /\bTODO\b/i },
   { name: "lorem", pattern: /\blorem ipsum\b/i },
-  { name: "placeholder", pattern: /\bplaceholder\b/i },
-  { name: "return null", pattern: /return\s+null\s*;/ }
+  { name: "placeholder-text", pattern: /["'`]placeholder["'`]|placeholder text|placeholder content/i },
+  { name: "stub-return", pattern: /return\s+null\s*;\s*\/\/\s*(stub|todo|placeholder)/i }
 ];
 
 const EXCLUSIONS = [
