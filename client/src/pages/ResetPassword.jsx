@@ -114,11 +114,30 @@ export default function ResetPassword() {
           </div>
         </div>
       </>
+    </WellnessPageShell>
     );
   }
 
   if (resetMutation.isSuccess) {
     return (
+      <WellnessPageShell
+        title="Password Reset Complete"
+        subtitle="Your password has been successfully reset"
+        benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+        clarity={{
+          what: "Password reset confirmation.",
+          why: "To confirm your password was successfully changed.",
+          who: "For users who just reset their password.",
+          when: "After completing a password reset.",
+          where: "Right here.",
+          how: "Click to sign in with your new password."
+        }}
+        examples={[
+          { label: "Beginner", examples: ["Click sign in.", "Enter your new password."] },
+          { label: "Intermediate", examples: ["Use a password manager.", "Enable two-factor authentication."] },
+          { label: "Advanced", examples: ["Review security settings.", "Set up recovery options."] }
+        ]}
+      >
       <>
         <SEO 
           title="Password Reset Complete"
@@ -149,10 +168,29 @@ export default function ResetPassword() {
           </div>
         </div>
       </>
+    </WellnessPageShell>
     );
   }
 
   return (
+    <WellnessPageShell
+      title="Reset Password"
+      subtitle="Create a new secure password"
+      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      clarity={{
+        what: "A secure password reset form.",
+        why: "To help you regain access to your account safely.",
+        who: "For users who need to reset their password.",
+        when: "When you have a valid reset link.",
+        where: "Right here.",
+        how: "Enter your new password twice and submit."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Choose a password you'll remember.", "Make it at least 6 characters."] },
+        { label: "Intermediate", examples: ["Use a mix of letters and numbers.", "Avoid common words."] },
+        { label: "Advanced", examples: ["Use a password manager.", "Enable two-factor authentication."] }
+      ]}
+    >
     <>
       <SEO 
         title="Reset Password"

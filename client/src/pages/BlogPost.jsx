@@ -29,25 +29,6 @@ function CommentItem({ comment, postId, slug }) {
   };
 
   return (
-  <WellnessPageShell
-    title="BlogPost"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
     <div className="border-l-2 border-[rgba(143,191,159,0.3)] pl-4 py-3" data-testid={`comment-${comment.id}`}>
       <div className="flex items-center gap-2 text-xs text-[var(--glp-ink)]/60 mb-2">
         <User className="w-3 h-3" />
@@ -226,6 +207,20 @@ export default function BlogPost() {
     : "";
 
   return (
+    <WellnessPageShell
+      title="Blog Post"
+      subtitle="Insights and reflections from the community"
+      benefits={pickBenefits(["Agency","Calm","Clarity","Connection","Growth"], 5)}
+      clarity={{
+        what: "A blog post from our community.",
+        why: "To share insights and perspectives.",
+        who: "For readers seeking wisdom and connection.",
+        when: "Whenever you want inspiration.",
+        where: "Right here.",
+        how: "Read, reflect, and comment if you wish."
+      }}
+      examples={[]}
+    >
     <div className="min-h-screen bg-[var(--glp-paper)]">
       <SEO
         title={`${post.title} | The Genuine Love Project Blog`}

@@ -80,25 +80,6 @@ function JournalPrompts({ onSelectPrompt }) {
   };
   
   return (
-  <WellnessPageShell
-    title="JournalPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
     <div className="mb-6 p-4 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)]/20" data-testid="journal-prompts">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1">
@@ -214,6 +195,24 @@ export default function JournalPage() {
   }
 
   return (
+    <WellnessPageShell
+      title="Reflective Journal"
+      subtitle="A safe space for self-expression"
+      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      clarity={{
+        what: "A private journaling space with gentle prompts.",
+        why: "To process thoughts, honor feelings, and witness growth.",
+        who: "Anyone seeking a safe place to reflect.",
+        when: "Daily practice or whenever you need to write it out.",
+        where: "Right here, in complete privacy.",
+        how: "Choose a prompt or write freely, then save."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Write one honest sentence about today.", "Name one emotion you're feeling."] },
+        { label: "Intermediate", examples: ["Explore a challenging situation.", "Write a letter to yourself."] },
+        { label: "Advanced", examples: ["Track patterns over time.", "Practice deep self-reflection."] }
+      ]}
+    >
     <>
       <SEO 
         title="Reflective Journal - The Genuine Love Project"

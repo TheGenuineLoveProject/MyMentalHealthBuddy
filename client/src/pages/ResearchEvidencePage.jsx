@@ -1,8 +1,8 @@
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
-import { 
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { 
   ArrowLeft, 
   BookOpen, 
   Brain, 

@@ -103,10 +103,29 @@ export default function BlogEditor() {
           </Link>
         </div>
       </div>
+    </WellnessPageShell>
     );
   }
 
   return (
+    <WellnessPageShell
+      title="Write a Post"
+      subtitle="Share your thoughts and insights"
+      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      clarity={{
+        what: "A blog writing tool for sharing wellness insights.",
+        why: "To contribute to the community with your experiences.",
+        who: "For signed-in members who want to share.",
+        when: "When inspiration strikes.",
+        where: "Right here.",
+        how: "Write, preview, and publish when ready."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Share a simple reflection.", "Write about one thing you learned."] },
+        { label: "Intermediate", examples: ["Explore a wellness topic in depth.", "Share a personal growth story."] },
+        { label: "Advanced", examples: ["Write a comprehensive guide.", "Analyze a pattern you've noticed."] }
+      ]}
+    >
     <div className="min-h-screen hero-premium relative overflow-hidden">
       <SEO title="Write a Post | The Genuine Love Project Blog" />
       <div className="decorative-orb decorative-orb-sage w-[500px] h-[500px] -top-32 -right-32 absolute" aria-hidden="true" />

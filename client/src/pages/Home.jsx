@@ -13,9 +13,9 @@ import {
 } from '../components/sacred';
 import { BenefitsStrip, BeforeAfter, TrustSignals } from '../components/benefits';
 import { IdentityMirror } from '../components/share';
-import { 
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { 
   Shield, Sparkles, Brain, ArrowRight, Star, Leaf, 
   Heart, Compass, BookOpen, Moon, Zap, Target, 
   Lightbulb, Feather, Eye, Anchor 

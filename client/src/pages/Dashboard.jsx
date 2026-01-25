@@ -73,11 +73,26 @@ export default function Dashboard() {
           <span className="sr-only">Loading your wellness dashboard...</span>
         </div>
       </div>
+    </WellnessPageShell>
     );
   }
 
   if (error) {
     return (
+      <WellnessPageShell
+        title="Dashboard Error"
+        subtitle="Something went wrong"
+        benefits={pickBenefits(["Agency","Calm","Clarity"], 3)}
+        clarity={{
+          what: "Error loading your dashboard.",
+          why: "Sometimes things need a moment.",
+          who: "For you.",
+          when: "Right now.",
+          where: "Here.",
+          how: "Try refreshing."
+        }}
+        examples={[]}
+      >
       <div className="min-h-screen flex items-center justify-center p-6" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }} role="alert">
         <div className="rounded-3xl p-10 text-center max-w-md shadow-sm" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-20)' }}>
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5" style={{ background: 'var(--glp-rose-15)' }}>
@@ -95,6 +110,7 @@ export default function Dashboard() {
           </button>
         </div>
       </div>
+      </WellnessPageShell>
     );
   }
 
@@ -517,6 +533,5 @@ function ExploreCard({ href, icon: Icon, title, description, color, testId }) {
       </div>
       <ChevronRight className="w-5 h-5 transition-all flex-shrink-0 ml-auto" style={{ color: 'var(--glp-sage)' }} />
     </Link>
-  </WellnessPageShell>
   );
 }

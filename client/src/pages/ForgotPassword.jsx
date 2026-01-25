@@ -97,15 +97,34 @@ export default function ForgotPassword() {
           </div>
         </div>
       </>
+    </WellnessPageShell>
     );
   }
 
   return (
-    <>
-      <SEO 
-        title="Forgot Password"
-        description="Reset your Genuine Love Project password. We'll send you a secure link to create a new password."
-      />
+    <WellnessPageShell
+      title="Forgot Password"
+      subtitle="Reset your password securely"
+      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      clarity={{
+        what: "A secure password reset tool.",
+        why: "To help you regain access to your account safely.",
+        who: "For users who need to reset their password.",
+        when: "Anytime you've forgotten your password.",
+        where: "Right here, securely.",
+        how: "Enter your email and follow the link we send."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Enter your email address.", "Check your inbox for the reset link."] },
+        { label: "Intermediate", examples: ["Click the reset link within 1 hour.", "Create a new secure password."] },
+        { label: "Advanced", examples: ["Use a password manager for security.", "Enable two-factor authentication."] }
+      ]}
+    >
+      <>
+        <SEO 
+          title="Forgot Password"
+          description="Reset your Genuine Love Project password. We'll send you a secure link to create a new password."
+        />
       <div className="min-h-screen flex items-center justify-center p-6 overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
         <div className="absolute bottom-0 -right-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />

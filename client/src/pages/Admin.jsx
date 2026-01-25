@@ -54,26 +54,7 @@ export default function Admin() {
         errorRate: Math.max(0, Math.min(0.1, prev.errorRate + (Math.random() * 0.02) - 0.01)),
       }));
     }, 3000);
-    return (
-  <WellnessPageShell
-    title="Admin"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-) => clearInterval(interval);
+    return () => clearInterval(interval);
   }, []);
 
   if (user?.role !== "admin") {
@@ -104,6 +85,20 @@ export default function Admin() {
   ];
 
   return (
+    <WellnessPageShell
+      title="Admin Command Center"
+      subtitle="Platform administration and analytics"
+      benefits={pickBenefits(["Agency","Clarity","Control"], 3)}
+      clarity={{
+        what: "Admin dashboard for platform management.",
+        why: "To monitor and manage the platform.",
+        who: "For administrators only.",
+        when: "As needed for platform oversight.",
+        where: "Right here.",
+        how: "Navigate tabs to manage different areas."
+      }}
+      examples={[]}
+    >
     <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
       <SEO title="Admin Command Center" description="Advanced platform administration and real-time analytics" />
       
@@ -245,6 +240,7 @@ export default function Admin() {
         </footer>
       </div>
     </div>
+    </WellnessPageShell>
   );
 }
 
@@ -1150,6 +1146,5 @@ function SecurityEvent({ type, message, time }) {
         <p className="text-xs mt-1" style={{ color: 'var(--glp-sage)' }}>{time}</p>
       </div>
     </div>
-  </WellnessPageShell>
   );
 }

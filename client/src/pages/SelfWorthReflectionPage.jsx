@@ -6,9 +6,9 @@ import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
-import { 
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { 
   Brain, 
   Heart, 
   Shield, 

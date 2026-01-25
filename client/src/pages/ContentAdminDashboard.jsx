@@ -57,25 +57,6 @@ function StatCard({ icon: Icon, label, value, trend, color = "sage" }) {
   };
   
   return (
-  <WellnessPageShell
-    title="ContentAdminDashboard"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
     <div className="card-bordered p-5 hover:shadow-md transition-all" data-testid={`stat-${label.toLowerCase().replace(/\s/g, "-")}`}>
       <div className="flex items-center gap-4">
         <div className={`icon-container icon-lg ${colorClasses[color]}`}>
@@ -544,6 +525,20 @@ export default function ContentAdminDashboard() {
   };
 
   return (
+    <WellnessPageShell
+      title="Content Admin"
+      subtitle="Manage your content hub"
+      benefits={pickBenefits(["Agency","Clarity","Control"], 3)}
+      clarity={{
+        what: "Content management dashboard.",
+        why: "To create and manage platform content.",
+        who: "For content administrators.",
+        when: "As needed for content management.",
+        where: "Right here.",
+        how: "Navigate tabs to manage different content types."
+      }}
+      examples={[]}
+    >
     <>
       <SEO 
         title="Content Admin - The Genuine Love Project"

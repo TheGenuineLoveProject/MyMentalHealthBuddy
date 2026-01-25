@@ -163,10 +163,29 @@ export default function ToolsPage() {
         </div>
         <SafetyFooter />
       </>
+    </WellnessPageShell>
     );
   }
 
   return (
+    <WellnessPageShell
+      title="Reflection Tools"
+      subtitle="A gentle toolkit for self-discovery"
+      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      clarity={{
+        what: "Educational reflection tools you control.",
+        why: "To support self-discovery and gentle growth.",
+        who: "For adults (18+) seeking wellness tools.",
+        when: "Whenever you want to reflect or process.",
+        where: "Right here, in complete privacy.",
+        how: "Choose a tool, use at your own pace."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Try a 3-minute timed writing.", "Map one belief."] },
+        { label: "Intermediate", examples: ["Track growth over weeks.", "Use silence mode for deep reflection."] },
+        { label: "Advanced", examples: ["Export your journey.", "Create patterns of practice."] }
+      ]}
+    >
     <>
       <SEO 
         title="Reflection Tools - The Genuine Love Project" 

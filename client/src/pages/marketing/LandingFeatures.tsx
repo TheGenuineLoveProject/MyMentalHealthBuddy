@@ -1,6 +1,6 @@
-import { 
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { 
   MessageCircle, 
   TrendingUp, 
   BookOpen, 

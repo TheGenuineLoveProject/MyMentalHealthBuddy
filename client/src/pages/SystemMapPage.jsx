@@ -97,25 +97,6 @@ function LeverCard({ lever, isSelected, onSelect }) {
   const Icon = lever.icon;
 
   return (
-  <WellnessPageShell
-    title="SystemMapPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
     <button
       onClick={() => onSelect(lever.id)}
       className={`
@@ -214,6 +195,20 @@ export default function SystemMapPage() {
   const selectedLever = SYSTEM_LEVERS.find((l) => l.id === selectedLeverId);
 
   return (
+    <WellnessPageShell
+      title="System Map"
+      subtitle="Understand how life areas work together"
+      benefits={pickBenefits(["Agency","Clarity","Awareness"], 3)}
+      clarity={{
+        what: "Interactive map of 6 life areas.",
+        why: "To understand how body, mind, emotions, behavior, environment, and meaning work together.",
+        who: "For adults exploring personal growth.",
+        when: "When you want to shift something in your life.",
+        where: "Right here.",
+        how: "Select a lever to learn more and find small steps."
+      }}
+      examples={[]}
+    >
     <PageTemplate
       title="The Genuine Love System Map"
       description="Understand how body, mind, emotions, behavior, environment, and meaning work together—and choose one lever to shift."

@@ -38,25 +38,6 @@ function PhaseCard({ phase, isExpanded, onToggle, isCompleted, onComplete }) {
   const color = domainColors[phase.domain];
 
   return (
-  <WellnessPageShell
-    title="AlignmentPath"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-
     <div 
       className={`
         bg-background dark:bg-[hsl(var(--gray-900))] rounded-xl border transition-all duration-300
@@ -255,6 +236,20 @@ export default function AlignmentPath() {
   };
 
   return (
+    <WellnessPageShell
+      title="12-Phase Self-Alignment Path"
+      subtitle="A gentle, self-paced journey of personal growth"
+      benefits={pickBenefits(["Agency","Your pace","Clarity"], 3)}
+      clarity={{
+        what: "A 12-phase personal growth framework.",
+        why: "To support self-alignment across mind, body, values, and action.",
+        who: "For adults seeking intentional growth.",
+        when: "At your own pace, whenever it feels right.",
+        where: "Right here.",
+        how: "Explore phases, mark progress, skip what doesn't resonate."
+      }}
+      examples={[]}
+    >
     <PageTemplate
       title="The 12-Phase Self-Alignment Path"
       subtitle={pathwayMetadata.tagline}

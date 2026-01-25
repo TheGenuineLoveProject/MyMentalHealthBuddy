@@ -104,26 +104,7 @@ export default function WisdomPracticesPage() {
     } else if (timeRemaining === 0 && timerActive) {
       setTimerActive(false);
     }
-    return (
-  <WellnessPageShell
-    title="WisdomPracticesPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-) => { if (interval) clearInterval(interval); };
+    return () => { if (interval) clearInterval(interval); };
   }, [timerActive, timeRemaining]);
 
   const saveContemplation = () => {
@@ -210,6 +191,20 @@ export default function WisdomPracticesPage() {
   const todayPracticed = profile.lastPractice === getTodayStr();
 
   return (
+    <WellnessPageShell
+      title="Wisdom Practices"
+      subtitle="Daily contemplation and gratitude practices"
+      benefits={pickBenefits(["Agency","Calm","Reflection"], 3)}
+      clarity={{
+        what: "Contemplation, gratitude, and meditation practices.",
+        why: "To cultivate wisdom and inner peace.",
+        who: "For anyone seeking daily reflection.",
+        when: "Whenever you have a few quiet moments.",
+        where: "Right here.",
+        how: "Choose a practice, engage at your own pace."
+      }}
+      examples={[]}
+    >
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
         <header className="mb-8">

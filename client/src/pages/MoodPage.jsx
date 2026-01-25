@@ -142,10 +142,29 @@ export default function MoodPage() {
           <p className="text-[var(--text-secondary)]">Redirecting to dashboard...</p>
         </div>
       </div>
+    </WellnessPageShell>
     );
   }
 
   return (
+    <WellnessPageShell
+      title="Mood Check-In"
+      subtitle="Track your emotional state with gentleness"
+      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      clarity={{
+        what: "A gentle mood tracking tool.",
+        why: "To build self-awareness and notice patterns.",
+        who: "For adults (18+) exploring emotional awareness.",
+        when: "Anytime you want to check in with yourself.",
+        where: "Anywhere you feel safe to reflect.",
+        how: "Rate your mood, add notes, save."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Rate how you feel right now.", "Note one thing affecting your mood."] },
+        { label: "Intermediate", examples: ["Track mood patterns over a week.", "Connect activities to emotions."] },
+        { label: "Advanced", examples: ["Identify emotional triggers.", "Develop personalized coping strategies."] }
+      ]}
+    >
     <>
       <SEO 
         title="Check In With Yourself - The Genuine Love Project"

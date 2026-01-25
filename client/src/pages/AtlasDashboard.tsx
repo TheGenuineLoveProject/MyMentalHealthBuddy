@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { 
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { 
   Compass, Brain, Lightbulb, Target, Sparkles, ArrowRight,
   BookOpen, Mic, Timer, HelpCircle, TrendingUp, Download,
   Layers, Clock, Sunrise, Quote, Scale, Zap, Network,
