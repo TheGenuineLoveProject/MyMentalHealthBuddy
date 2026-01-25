@@ -9,6 +9,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import { InfinityHeartCard } from "@/components/share/InfinityHeartCard";
+import SEO from "@/components/SEO";
 
 const BOUNDARIES_RESOURCES = [
   {
@@ -39,6 +40,11 @@ const BOUNDARIES_RESOURCES = [
 
 export default function BoundariesHubPage() {
   return (
+    <>
+    <SEO 
+      title="Boundaries Hub | The Genuine Love Project"
+      description="Educational tools for setting healthy boundaries and protecting your energy. Learn to establish limits with care and communicate needs clearly."
+    />
     <WellnessPageShell
       title="Boundaries Hub"
       subtitle="Tools for setting healthy limits and protecting your energy"
@@ -90,5 +96,6 @@ export default function BoundariesHubPage() {
         <SafetyFooter />
       </div>
     </WellnessPageShell>
+    </>
   );
 }

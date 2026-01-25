@@ -9,6 +9,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import { InfinityHeartCard } from "@/components/share/InfinityHeartCard";
+import SEO from "@/components/SEO";
 
 const SELF_WORTH_RESOURCES = [
   {
@@ -39,6 +40,11 @@ const SELF_WORTH_RESOURCES = [
 
 export default function SelfWorthHubPage() {
   return (
+    <>
+    <SEO 
+      title="Self-Worth Hub | The Genuine Love Project"
+      description="Gentle wellness tools for building self-compassion and inherent value. Educational resources for developing a healthy self-image through supportive practices."
+    />
     <WellnessPageShell
       title="Self-Worth Hub"
       subtitle="Gentle tools for building self-compassion and inherent value"
@@ -90,5 +96,6 @@ export default function SelfWorthHubPage() {
         <SafetyFooter />
       </div>
     </WellnessPageShell>
+    </>
   );
 }

@@ -175,7 +175,7 @@ export default function Dashboard() {
               <StreakShare 
                 streakDays={data.stats.streak} 
                 activityType="wellness practice"
-                milestone={data.stats.streak >= 7 || data.stats.streak >= 30 || data.stats.streak >= 100}
+                milestone={[7, 14, 30, 60, 90, 100, 365].includes(data.stats.streak)}
               />
             </section>
           )}

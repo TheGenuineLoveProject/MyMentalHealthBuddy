@@ -9,6 +9,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import { InfinityHeartCard } from "@/components/share/InfinityHeartCard";
+import SEO from "@/components/SEO";
 
 const SLEEP_RESOURCES = [
   {
@@ -39,6 +40,11 @@ const SLEEP_RESOURCES = [
 
 export default function SleepHubPage() {
   return (
+    <>
+    <SEO 
+      title="Sleep & Rest Hub | The Genuine Love Project"
+      description="Gentle wellness tools for peaceful nights and restful sleep. Educational resources for building healthy sleep habits through calming practices."
+    />
     <WellnessPageShell
       title="Sleep & Rest Hub"
       subtitle="Gentle tools for peaceful nights and restful sleep"
@@ -90,5 +96,6 @@ export default function SleepHubPage() {
         <SafetyFooter />
       </div>
     </WellnessPageShell>
+    </>
   );
 }

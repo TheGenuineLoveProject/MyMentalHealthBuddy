@@ -1,83 +1,21 @@
 {
-  "timestamp": "2026-01-25T06:53:16.203Z",
+  "timestamp": "2026-01-25T06:54:34.591Z",
   "summary": {
     "totalFiles": 514,
     "wellnessPages": 203,
     "generatedPages": 123,
-    "withSEO": 265,
+    "withSEO": 269,
     "withDisclaimer": 237,
     "withSafetyFooter": 125,
     "withBenefits": 258,
     "withMI": 30,
-    "issuesFound": 4,
+    "issuesFound": 0,
     "issuesByType": {
-      "missing-seo": [
-        "client/src/pages/hubs/BoundariesHubPage.jsx",
-        "client/src/pages/hubs/ResilienceHubPage.jsx",
-        "client/src/pages/hubs/SelfWorthHubPage.jsx",
-        "client/src/pages/hubs/SleepHubPage.jsx"
-      ],
+      "missing-seo": [],
       "missing-safety": [],
       "missing-benefits": [],
       "contains-disallowed": []
     }
   },
-  "filesWithIssues": [
-    {
-      "path": "client/src/pages/hubs/BoundariesHubPage.jsx",
-      "hasSEO": false,
-      "hasDisclaimer": true,
-      "hasSafetyFooter": true,
-      "hasBenefitsBlock": true,
-      "hasMIPatterns": false,
-      "isGenerated": false,
-      "isWellnessPage": true,
-      "disallowed": [],
-      "issues": [
-        "missing-seo"
-      ]
-    },
-    {
-      "path": "client/src/pages/hubs/ResilienceHubPage.jsx",
-      "hasSEO": false,
-      "hasDisclaimer": true,
-      "hasSafetyFooter": true,
-      "hasBenefitsBlock": true,
-      "hasMIPatterns": false,
-      "isGenerated": false,
-      "isWellnessPage": true,
-      "disallowed": [],
-      "issues": [
-        "missing-seo"
-      ]
-    },
-    {
-      "path": "client/src/pages/hubs/SelfWorthHubPage.jsx",
-      "hasSEO": false,
-      "hasDisclaimer": true,
-      "hasSafetyFooter": true,
-      "hasBenefitsBlock": true,
-      "hasMIPatterns": false,
-      "isGenerated": false,
-      "isWellnessPage": true,
-      "disallowed": [],
-      "issues": [
-        "missing-seo"
-      ]
-    },
-    {
-      "path": "client/src/pages/hubs/SleepHubPage.jsx",
-      "hasSEO": false,
-      "hasDisclaimer": true,
-      "hasSafetyFooter": true,
-      "hasBenefitsBlock": true,
-      "hasMIPatterns": false,
-      "isGenerated": false,
-      "isWellnessPage": true,
-      "disallowed": [],
-      "issues": [
-        "missing-seo"
-      ]
-    }
-  ]
+  "filesWithIssues": []
 }

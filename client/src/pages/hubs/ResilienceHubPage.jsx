@@ -9,6 +9,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import { InfinityHeartCard } from "@/components/share/InfinityHeartCard";
+import SEO from "@/components/SEO";
 
 const RESILIENCE_RESOURCES = [
   {
@@ -39,6 +40,11 @@ const RESILIENCE_RESOURCES = [
 
 export default function ResilienceHubPage() {
   return (
+    <>
+    <SEO 
+      title="Resilience Hub | The Genuine Love Project"
+      description="Educational tools for building emotional strength and bouncing back. Gentle practices for developing resilience through regulation and self-care."
+    />
     <WellnessPageShell
       title="Resilience Hub"
       subtitle="Tools for building emotional strength and bouncing back"
@@ -90,5 +96,6 @@ export default function ResilienceHubPage() {
         <SafetyFooter />
       </div>
     </WellnessPageShell>
+    </>
   );
 }
