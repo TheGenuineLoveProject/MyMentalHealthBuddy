@@ -8,6 +8,8 @@
 
 export { MIPromptCard } from './MIPromptCard';
 export { MicroCommitmentEngine } from './MicroCommitmentEngine';
+export { ReframingToolkit } from './ReframingToolkit';
+export { ReadinessScale } from './ReadinessScale';
 
 export {
   MI_STEPS,
