@@ -1,7 +1,9 @@
-import { type BenefitToken, getBenefitDescription } from "@/lib/benefits";
+import { type BenefitToken, type BenefitKey, getBenefitDescription, BENEFIT_LIBRARY } from "@/lib/benefits";
+
+type BenefitItem = BenefitToken | { title: string; micro: string; family?: string };
 
 interface BenefitBlockProps {
-  benefits: BenefitToken[];
+  benefits: BenefitItem[];
   columns?: 2 | 3 | 4;
 }
 
@@ -14,17 +16,24 @@ export function BenefitBlock({ benefits, columns = 3 }: BenefitBlockProps) {
 
   return (
     <div className={`grid gap-3 ${gridCols[columns]}`}>
-      {benefits.map((token) => (
-        <div
-          key={token}
-          className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
-        >
-          <div className="font-semibold text-[var(--text)]">{token}</div>
-          <div className="mt-1 text-sm text-[var(--text-muted)]">
-            {getBenefitDescription(token)}
+      {benefits.map((item, index) => {
+        const isObject = typeof item === "object" && item !== null;
+        const title = isObject ? item.title : item;
+        const description = isObject ? item.micro : getBenefitDescription(item as BenefitToken);
+        const key = isObject ? `${item.title}-${index}` : item;
+        
+        return (
+          <div
+            key={key}
+            className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
+          >
+            <div className="font-semibold text-[var(--text)]">{title}</div>
+            <div className="mt-1 text-sm text-[var(--text-muted)]">
+              {description}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
