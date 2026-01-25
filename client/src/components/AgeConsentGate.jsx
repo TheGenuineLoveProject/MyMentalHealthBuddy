@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { Shield, Heart, AlertCircle, ExternalLink } from 'lucide-react';
 
-const CONSENT_STORAGE_KEY = 'glp_age_consent_v1';
+const CONSENT_STORAGE_KEY = 'glp_age_confirmed';
 
 export default function AgeConsentGate({ children, onConsent }) {
   const [hasConsented, setHasConsented] = useState(false);
