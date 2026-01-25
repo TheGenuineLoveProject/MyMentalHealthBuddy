@@ -30,6 +30,7 @@ import "../styles/healing-animations.css";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 export default function HealingLandingPage() {
   const [visibleSections, setVisibleSections] = useState({});
@@ -504,6 +505,8 @@ export default function HealingLandingPage() {
 
       {/* Join Section - CTA with Form */}
       <JoinSection />
+
+      <MIPromptCard context="general" className="max-w-4xl mx-auto px-8 mt-12 mb-8" />
 
       {/* Sacred Footer */}
       <SacredFooter />

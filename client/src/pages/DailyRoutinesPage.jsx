@@ -32,6 +32,7 @@ import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const ROUTINES_CLARITY = {
   what: "Research-backed morning, afternoon, and evening routines designed to regulate your nervous system and optimize wellbeing.",
@@ -460,6 +461,8 @@ export default function DailyRoutinesPage() {
             ]}
             title="Continue Your Journey"
           />
+
+          <MIPromptCard context="general" className="mb-6" />
 
           <SafetyFooter variant="default" />
         </div>

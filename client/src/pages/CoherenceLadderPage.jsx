@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const COHERENCE_CLARITY = {
   what: "A 10-level emotional awareness scale to track your inner state across body, mind, and heart dimensions.",
@@ -417,6 +418,8 @@ export default function CoherenceLadderPage() {
           )}
         </div>
       </SectionContainer>
+
+      <MIPromptCard context="mood" className="mt-8 mb-6" />
 
       <SafetyFooter />
     </LayoutWrapper>

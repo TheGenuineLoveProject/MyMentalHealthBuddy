@@ -9,6 +9,7 @@ import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const MEDITATION_CLARITY = {
   what: "Research-backed guided meditations that literally change your brain structure through practices like body scans, loving-kindness, and mindfulness.",
@@ -556,6 +557,8 @@ export default function MeditationGuidePage() {
             <li>• These guided practices are educational tools, not therapy or medical treatment.</li>
           </ul>
         </div>
+        <MIPromptCard context="general" className="mb-6" />
+
         <SafetyFooter variant="prominent" />
       </div>
     </div>

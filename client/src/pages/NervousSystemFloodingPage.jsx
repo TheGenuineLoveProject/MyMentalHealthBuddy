@@ -7,6 +7,7 @@ import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { 
   Brain, 
   Heart, 
@@ -460,6 +461,8 @@ export default function NervousSystemFloodingPage() {
           </div>
         </div>
       </SectionContainer>
+
+      <MIPromptCard context="general" className="mt-8 mb-6" />
 
       <SafetyFooter />
     </LayoutWrapper>

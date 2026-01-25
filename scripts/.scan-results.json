@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-01-25T06:40:12.646Z",
+  "timestamp": "2026-01-25T06:48:02.409Z",
   "summary": {
-    "totalFiles": 507,
+    "totalFiles": 510,
     "wellnessPages": 199,
     "generatedPages": 123,
     "withSEO": 265,
     "withDisclaimer": 233,
     "withSafetyFooter": 121,
     "withBenefits": 254,
-    "withMI": 20,
+    "withMI": 30,
     "issuesFound": 0,
     "issuesByType": {
       "missing-seo": [],

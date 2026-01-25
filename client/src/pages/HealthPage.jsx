@@ -4,6 +4,7 @@ import { ArrowLeft, CheckCircle, XCircle, Loader2, Activity } from "lucide-react
 import SEO from "../components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 export default function HealthPage() {
   const { data, isLoading, error } = useQuery({
@@ -93,6 +94,8 @@ export default function HealthPage() {
               </div>
             )}
           </div>
+
+          <MIPromptCard context="general" className="mt-8" />
         </div>
       </div>
     </>

@@ -8,6 +8,7 @@ import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 
 const INNERCHILD_CLARITY = {
   what: "Gentle tools for healing childhood wounds and reparenting yourself with the love and safety you deserved.",
@@ -566,6 +567,8 @@ export default function InnerChildPage() {
             <li>• If you're in crisis, please contact a crisis line or mental health professional immediately.</li>
           </ul>
         </div>
+
+        <MIPromptCard context="reflection" className="mb-6" />
 
         <SafetyFooter variant="prominent" />
       </div>
