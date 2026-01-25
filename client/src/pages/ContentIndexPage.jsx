@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import { useState, useMemo } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 const allContent = [
   { name: "Adaptive Companion", path: "/companion", description: "AI-powered personalized guidance", category: "Advanced Tools", icon: Users },
@@ -159,6 +161,25 @@ export default function ContentIndexPage() {
   };
 
   return (
+  <WellnessPageShell
+    title="ContentIndexPage"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
     <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">
         <Link href="/" className="inline-flex items-center gap-2 text-sm mb-6 transition-colors" style={{ color: 'var(--glp-sage)' }}>
@@ -355,5 +376,6 @@ export default function ContentIndexPage() {
         </footer>
       </div>
     </div>
+  </WellnessPageShell>
   );
 }

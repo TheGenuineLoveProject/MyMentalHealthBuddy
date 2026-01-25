@@ -10,6 +10,8 @@ import Breadcrumbs from "../components/Breadcrumbs.jsx";
 import StartHerePathways from "../components/StartHerePathways.jsx";
 import { useSEO, createWebSiteSchema } from "../hooks/useSEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 const HEALING_CATEGORIES = [
   { id: "all", label: "All Modalities", icon: Library },
@@ -147,6 +149,25 @@ export default function HealingLibraryPage() {
     : HEALING_MODALITIES.filter(m => m.category === activeCategory);
 
   return (
+  <WellnessPageShell
+    title="HealingLibraryPage"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-6xl mx-auto px-4 py-12">
         <Breadcrumbs items={[{ label: "Healing Library", path: "/healing-library" }]} />
@@ -342,5 +363,6 @@ export default function HealingLibraryPage() {
         <SafetyFooter variant="default" />
       </div>
     </div>
+  </WellnessPageShell>
   );
 }

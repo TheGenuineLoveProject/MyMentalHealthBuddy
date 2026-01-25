@@ -6,6 +6,8 @@ import {
 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 const STRIPE_PRICING_TABLE_ID = "prctbl_1SanK5RtwDw9mKhaSKDHxmn5";
 const STRIPE_PUBLISHABLE_KEY = "pk_live_51RIV9vRtwDw9mKhaldQnCVBo6Grjc2KXIjwyolZbTClMNgMGySVBrT6LayaZhBebFDUaQI0yoXoxiAjyLXLOl2b800NJXSDcQd";
@@ -110,7 +112,26 @@ function StripePricingTable() {
     script.onload = () => setIsLoaded(true);
     document.head.appendChild(script);
 
-    return () => {
+    return (
+  <WellnessPageShell
+    title="Premium"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+) => {
       // Keep script loaded for subsequent visits
     };
   }, []);
@@ -266,5 +287,6 @@ export default function Premium() {
         </div>
       </div>
     </>
+  </WellnessPageShell>
   );
 }

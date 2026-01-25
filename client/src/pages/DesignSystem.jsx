@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import "../styles/canva-landing.css";
 import FlowDiagram from "../components/FlowDiagram.jsx";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 export default function DesignSystem() {
   const [activeSection, setActiveSection] = useState("overview");
@@ -54,6 +56,25 @@ export default function DesignSystem() {
   ];
 
   return (
+  <WellnessPageShell
+    title="DesignSystem"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
     <div className="min-h-screen" style={{ background: 'var(--soft-ivory)', fontFamily: "'Lato', sans-serif" }}>
       {/* Header */}
       <header className="sticky top-0 z-50 px-6 py-4" style={{ 
@@ -1488,5 +1509,6 @@ const WellnessCard = ({ title, description, icon: Icon }) => {
         </main>
       </div>
     </div>
+  </WellnessPageShell>
   );
 }

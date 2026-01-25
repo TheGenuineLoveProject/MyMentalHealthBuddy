@@ -4,6 +4,8 @@ import {
   Clock, Target, Star, CheckCircle2, ArrowRight
 } from "lucide-react";
 import { useState } from "react";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 const practicalExamples = [
   {
@@ -140,6 +142,25 @@ function ExampleCard({ example }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
+  <WellnessPageShell
+    title="ExamplesPage"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
     <div 
       className="card-bordered"
       data-testid={`card-example-${example.id}`}
@@ -285,5 +306,6 @@ export default function ExamplesPage() {
         </div>
       </div>
     </div>
+  </WellnessPageShell>
   );
 }

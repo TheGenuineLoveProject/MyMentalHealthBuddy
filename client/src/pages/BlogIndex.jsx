@@ -4,6 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Search, Calendar, Clock, User, ArrowRight, BookOpen } from "lucide-react";
 import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 function BlogCard({ post }) {
   const formattedDate = post.publishedAt
@@ -15,6 +17,25 @@ function BlogCard({ post }) {
     : "";
 
   return (
+  <WellnessPageShell
+    title="BlogIndex"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
     <article className="card-glass p-6 hover:shadow-lg transition-shadow" data-testid={`card-post-${post.id}`}>
       {post.featuredImage && (
         <img
@@ -164,5 +185,6 @@ export default function BlogIndex() {
         )}
       </main>
     </div>
+  </WellnessPageShell>
   );
 }

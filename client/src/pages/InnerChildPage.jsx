@@ -6,6 +6,8 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 const INNERCHILD_CLARITY = {
   what: "Gentle tools for healing childhood wounds and reparenting yourself with the love and safety you deserved.",
@@ -231,6 +233,25 @@ const ifsPartsWork = {
 
 function NeedCard({ need, isSelected, onSelect }) {
   return (
+  <WellnessPageShell
+    title="InnerChildPage"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
     <button
       onClick={onSelect}
       className="text-left p-6 rounded-2xl transition-all hover:shadow-md"
@@ -547,5 +568,6 @@ export default function InnerChildPage() {
         <SafetyFooter variant="prominent" />
       </div>
     </div>
+  </WellnessPageShell>
   );
 }

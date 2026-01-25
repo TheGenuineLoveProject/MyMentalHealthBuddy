@@ -9,6 +9,8 @@ import {
 import { useSEO } from "@/hooks/useSEO";
 import styles from "./Overview.module.css";
 import WeeklyRecap from "@/components/dashboard/WeeklyRecap";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 const RECENT_ACTIVITY = [
   { type: "journal", title: "Morning Gratitude", time: "2 hours ago", xp: 15, color: "sage" },
@@ -75,6 +77,25 @@ function ActivityItem({ activity }) {
   const Icon = getActivityIcon(activity.type);
   
   return (
+  <WellnessPageShell
+    title="Overview"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
     <div className={styles.activityItem} data-testid={`activity-item-${activity.type}`}>
       <div className={`${styles.activityIcon} ${getIconClass(activity.color)}`}>
         <Icon className={styles.activityIconInner} />
@@ -327,5 +348,6 @@ export default function DashboardOverview() {
         </div>
       </div>
     </div>
+  </WellnessPageShell>
   );
 }

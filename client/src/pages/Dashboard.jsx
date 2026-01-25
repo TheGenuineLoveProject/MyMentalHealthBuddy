@@ -15,6 +15,8 @@ import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import MoodHistoryChart from "../components/MoodHistoryChart.jsx";
+import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
+import { pickBenefits } from "@/lib/benefits";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -38,6 +40,25 @@ export default function Dashboard() {
 
   if (isLoading) {
     return (
+  <WellnessPageShell
+    title="Dashboard"
+    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    clarity={{
+      what: "A self-paced reflection tool you control.",
+      why: "To support clarity, values alignment, and gentle next steps.",
+      who: "For adults (18+) who want educational wellness tools (not medical care).",
+      when: "Anytime you want a small reset or a thoughtful pause.",
+      where: "Anywhere you can breathe and write for 1–5 minutes.",
+      how: "Pick one prompt, answer briefly, stop whenever you want."
+    }}
+    examples={[
+      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+    ]}
+  >
+
       <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }} role="status" aria-label="Loading dashboard">
         <div className="max-w-5xl mx-auto px-6 py-10">
           <div className="space-y-8 animate-pulse">
@@ -496,5 +517,6 @@ function ExploreCard({ href, icon: Icon, title, description, color, testId }) {
       </div>
       <ChevronRight className="w-5 h-5 transition-all flex-shrink-0 ml-auto" style={{ color: 'var(--glp-sage)' }} />
     </Link>
+  </WellnessPageShell>
   );
 }
