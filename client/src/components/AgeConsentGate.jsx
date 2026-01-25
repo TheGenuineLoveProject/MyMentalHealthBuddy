@@ -107,13 +107,23 @@ export default function AgeConsentGate({ children, onConsent }) {
           </ul>
         </div>
 
-        <button
-          onClick={handleConsent}
-          className="w-full py-3 px-6 bg-[var(--sage-600)] hover:bg-[var(--sage-700)] text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sage-500)] focus-visible:ring-offset-2"
-          data-testid="button-confirm-consent"
-        >
-          I Confirm & Continue
-        </button>
+        <div className="flex flex-col gap-3">
+          <button
+            onClick={handleConsent}
+            className="w-full py-3 px-6 bg-[var(--sage-600)] hover:bg-[var(--sage-700)] text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sage-500)] focus-visible:ring-offset-2"
+            data-testid="button-confirm-consent"
+          >
+            I Confirm & Continue
+          </button>
+
+          <Link
+            href="/"
+            className="w-full py-3 px-6 bg-[var(--neutral-100)] hover:bg-[var(--neutral-200)] text-[var(--neutral-700)] font-medium rounded-lg transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] focus-visible:ring-offset-2"
+            data-testid="button-exit"
+          >
+            Exit
+          </Link>
+        </div>
 
         <div className="mt-6 text-center">
           <p className="text-xs text-[var(--neutral-500)] mb-2">
