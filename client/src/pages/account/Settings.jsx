@@ -21,7 +21,7 @@ export default function Settings() {
 
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
-  const [theme, setTheme] = useState<"light" | "dark" | "system">("light");
+  const [theme, setTheme] = useState("light");
   const [notifications, setNotifications] = useState({
     email: true,
     push: false,
@@ -122,7 +122,7 @@ export default function Settings() {
                   ].map(option => (
                     <button
                       key={option.id}
-                      onClick={() => setTheme(option.id as any)}
+                      onClick={() => setTheme(option.id)}
                       className={`flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
                         theme === option.id 
                           ? "bg-[var(--sage-100)] border-[var(--sage-500)]" 
@@ -160,7 +160,7 @@ export default function Settings() {
                       <p className="text-caption">{item.desc}</p>
                     </div>
                     <Switch 
-                      checked={notifications[item.key as keyof typeof notifications]}
+                      checked={notifications[item.key]}
                       onCheckedChange={(checked) => setNotifications(prev => ({ ...prev, [item.key]: checked }))}
                       data-testid={`switch-${item.key}`}
                     />
