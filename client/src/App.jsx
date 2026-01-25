@@ -52,6 +52,9 @@ const SleepHubPage = lazy(() => import("./pages/hubs/SleepHubPage.jsx"));
 const BoundariesHubPage = lazy(() => import("./pages/hubs/BoundariesHubPage.jsx"));
 const SelfWorthHubPage = lazy(() => import("./pages/hubs/SelfWorthHubPage.jsx"));
 const ResilienceHubPage = lazy(() => import("./pages/hubs/ResilienceHubPage.jsx"));
+const AnxietyHubPage = lazy(() => import("./pages/hubs/AnxietyHubPage.jsx"));
+const RelationshipsHubPage = lazy(() => import("./pages/hubs/RelationshipsHubPage.jsx"));
+const GriefHubPage = lazy(() => import("./pages/hubs/GriefHubPage.jsx"));
 const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
 const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
 const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
@@ -195,6 +198,15 @@ export default function App() {
               </Route>
               <Route path="/hubs/resilience">
                 <WellnessRoute><ResilienceHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/anxiety">
+                <WellnessRoute><AnxietyHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/relationships">
+                <WellnessRoute><RelationshipsHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/grief">
+                <WellnessRoute><GriefHubPage /></WellnessRoute>
               </Route>
               <Route path="/premium">
                 <ProtectedRoute><Premium /></ProtectedRoute>
