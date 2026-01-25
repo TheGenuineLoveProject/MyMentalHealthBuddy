@@ -1,5 +1,6 @@
 import { SEO } from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import { BenefitsBlock } from "@/components/BenefitsBlock";
 // @generated
 /**
  * Server-side redirect for alias route: /home → /
@@ -24,6 +25,11 @@ export default function HomeRedirect() {
     <div className="min-h-screen safe-padding hero-gradient">
       <SEO title="home — The Genuine Love Project" description="Welcome to The Genuine Love Project." />
       <main className="container mx-auto px-4 py-8">
+        <BenefitsBlock
+          benefit="Educational support for your personal growth journey"
+          bullets={["Discover tools for personal growth","Learn at your own pace","Access crisis resources anytime"]}
+        />
+
         <h1 className="text-3xl font-bold mb-4">home</h1>
         <p className="text-muted-foreground mb-8">
           This page is being refined. Use the navigation to explore tools while we finish this section.

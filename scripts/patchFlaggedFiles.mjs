@@ -266,6 +266,75 @@ function fixPlaceholder(content) {
   return content;
 }
 
+function addBenefitsImport(content) {
+  const importPath = "@/components/BenefitsBlock";
+  const importLine = `import { BenefitsBlock } from "${importPath}";\n`;
+  
+  if (/import\s*{\s*BenefitsBlock\s*}/.test(content) || /import\s+BenefitsBlock/.test(content) || /from\s+["'][^"']*BenefitsBlock/.test(content)) {
+    return content;
+  }
+  
+  const lastImportMatch = content.match(/^import[^;]+;/gm);
+  if (lastImportMatch) {
+    const lastImport = lastImportMatch[lastImportMatch.length - 1];
+    const lastImportIdx = content.lastIndexOf(lastImport) + lastImport.length;
+    return content.slice(0, lastImportIdx) + "\n" + importLine + content.slice(lastImportIdx + 1);
+  }
+  
+  return importLine + content;
+}
+
+function addBenefitsUsage(content, filePath) {
+  if (/<BenefitsBlock/.test(content) || /benefitsBlock/.test(content)) {
+    return content;
+  }
+  
+  const pageName = extractPageName(filePath);
+  
+  const benefitsMap = {
+    "404": ["Educational resources for your journey", "Crisis support links always available", "Explore our wellness tools"],
+    "blog": ["Learn evidence-based wellness approaches", "Read at your own pace", "Bookmark for later reference"],
+    "chat": ["Practice supportive self-reflection", "AI-assisted exploration", "Private and judgment-free"],
+    "community": ["Connect with others on similar journeys", "Share experiences safely", "Learn from community insights"],
+    "crm": ["Track your personal growth journey", "See patterns over time", "Celebrate small wins"],
+    "dashboard": ["View your wellness at a glance", "Track progress over time", "Set personal goals"],
+    "forgot-password": ["Secure account recovery", "Quick reset process", "Your data stays protected"],
+    "healing": ["Gentle approaches to emotional wellness", "Evidence-informed practices", "Go at your own pace"],
+    "home": ["Discover tools for personal growth", "Learn at your own pace", "Access crisis resources anytime"],
+    "landing": ["Begin your self-discovery journey", "Free educational resources", "No pressure, no commitment"],
+    "login": ["Access your personal progress", "Pick up where you left off", "Your journey continues"],
+    "not-found": ["Let us help you find your way", "Explore wellness tools", "Crisis support available"],
+    "onboarding": ["Personalize your experience", "Set your own pace", "Choose what resonates"],
+    "original-home": ["Welcome to your growth journey", "Explore at your pace", "Support always available"],
+    "pricing": ["Choose what works for you", "No hidden costs", "Cancel anytime"],
+    "register": ["Start your personal journey", "Free to explore", "Your privacy protected"],
+    "reset-password": ["Secure account recovery", "Quick and easy", "Get back on track"],
+    "welcome": ["Begin your wellness journey", "Explore supportive tools", "Go at your own pace"]
+  };
+  
+  const key = Object.keys(benefitsMap).find(k => pageName.toLowerCase().includes(k.toLowerCase()));
+  const benefits = key ? benefitsMap[key] : ["Educational self-reflection tools", "Learn at your own pace", "Crisis support always available"];
+  
+  const benefitsBlock = `        <BenefitsBlock
+          benefit="Educational support for your personal growth journey"
+          bullets={${JSON.stringify(benefits)}}
+        />\n`;
+  
+  const mainOrDivMatch = content.match(/<(main|div)[^>]*className[^>]*container[^>]*>/);
+  if (mainOrDivMatch) {
+    const insertPos = content.indexOf(mainOrDivMatch[0]) + mainOrDivMatch[0].length;
+    return content.slice(0, insertPos) + "\n" + benefitsBlock + content.slice(insertPos);
+  }
+  
+  const firstSectionMatch = content.match(/<(section|div)[^>]*className[^>]*>/);
+  if (firstSectionMatch) {
+    const insertPos = content.indexOf(firstSectionMatch[0]) + firstSectionMatch[0].length;
+    return content.slice(0, insertPos) + "\n" + benefitsBlock + content.slice(insertPos);
+  }
+  
+  return content;
+}
+
 function patchFile(filePath, issues) {
   const fullPath = path.join(ROOT, filePath);
   
@@ -289,6 +358,13 @@ function patchFile(filePath, issues) {
     if (!patchesApplied.includes("SafetyFooter") && content !== originalContent) {
       patchesApplied.push("SafetyFooter");
     }
+  }
+  
+  if (issues.includes("missing-benefits")) {
+    const beforeBenefits = content;
+    content = addBenefitsImport(content);
+    content = addBenefitsUsage(content, fullPath);
+    if (content !== beforeBenefits) patchesApplied.push("BenefitsBlock");
   }
   
   if (issues.includes("contains-disallowed")) {
@@ -342,6 +418,7 @@ function main() {
     byCategory: {
       SEO: 0,
       SafetyFooter: 0,
+      BenefitsBlock: 0,
       "return-null-fix": 0,
       "placeholder-fix": 0
     }
@@ -377,6 +454,7 @@ function main() {
   log("By Category:");
   log(`  SEO added:           ${stats.byCategory.SEO}`);
   log(`  SafetyFooter added:  ${stats.byCategory.SafetyFooter}`);
+  log(`  BenefitsBlock added: ${stats.byCategory.BenefitsBlock}`);
   log(`  return null fixed:   ${stats.byCategory["return-null-fix"]}`);
   log(`  placeholder fixed:   ${stats.byCategory["placeholder-fix"]}`);
   

@@ -1,7 +1,6 @@
 // @generated - Bulk patched by scripts/bulk-patch-generated.mjs
 import { Link } from 'wouter';
 import { SEO } from "@/components/SEO";
-import { BenefitsBlock } from "@/components/BenefitsBlock";
 
 export default function NotFoundPage() {
   return (
@@ -14,11 +13,6 @@ export default function NotFoundPage() {
         className="min-h-screen flex items-center justify-center"
         style={{ background: 'var(--sacred-cream, #faf9f7)' }}
       >
-        <BenefitsBlock
-          benefit="Educational support for your personal growth journey"
-          bullets={["Educational resources for your journey","Crisis support links always available","Explore our wellness tools"]}
-        />
-
         <main id="main-content" className="text-center px-6">
           <h1 
             className="text-6xl font-serif mb-4"

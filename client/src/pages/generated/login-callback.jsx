@@ -7,6 +7,7 @@
 import ConfigRoute from '../pages/_autopilot.jsx';
 import { SEO } from "@/components/SEO";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import { BenefitsBlock } from "@/components/BenefitsBlock";
 
 export default function LogincallbackPage() {
   return <ConfigRoute route="/login/callback" />;
