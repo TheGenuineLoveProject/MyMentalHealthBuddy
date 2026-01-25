@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import styles from "./Overview.module.css";
+import WeeklyRecap from "@/components/dashboard/WeeklyRecap";
 
 const RECENT_ACTIVITY = [
   { type: "journal", title: "Morning Gratitude", time: "2 hours ago", xp: 15, color: "sage" },
@@ -296,6 +297,8 @@ export default function DashboardOverview() {
             <p className={styles.progressText}>{completedTasks} of {totalTasks} completed</p>
           </div>
         </div>
+
+        <WeeklyRecap className="mb-6" />
 
         <div className={styles.secondaryGrid}>
           <div className={styles.card}>

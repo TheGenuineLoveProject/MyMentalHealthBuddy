@@ -1,3 +1,13 @@
+/**
+ * Journal Prompts with MI (Motivational Interviewing) Integration
+ * 
+ * Combines traditional reflection prompts with MI principles:
+ * - Autonomy: You choose what feels right
+ * - Evocation: Drawing out your own wisdom
+ * - Collaboration: Partnership in exploration
+ * - Compassion: Non-judgmental support
+ */
+
 export const journalPrompts = {
   awareness: [
     "What am I avoiding noticing right now?",
@@ -33,6 +43,69 @@ export const journalPrompts = {
   ],
 };
 
+export const miEnhancedPrompts = {
+  readiness: {
+    label: "Readiness Check",
+    description: "Exploring where you are right now—no pressure to change",
+    prompts: [
+      { question: "On a scale of 1–10, how ready do you feel to explore this area?", followUp: "What would move you one number higher?" },
+      { question: "What part of you wants change? What part doesn't?", followUp: "Both parts have wisdom—what might they be saying?" },
+      { question: "If this changed tomorrow, what would be different?", followUp: "How important is that difference to you?" },
+      { question: "What would 'success' look like for you here?", followUp: "What's one small sign you'd notice first?" },
+    ]
+  },
+  strengths: {
+    label: "Strengths Discovery",
+    description: "Recognizing what's already working in your life",
+    prompts: [
+      { question: "What helped you get through hard things before?", followUp: "How might that same quality help now?" },
+      { question: "What are you already doing well, even if imperfectly?", followUp: "What would it mean to do a little more of that?" },
+      { question: "What would someone who loves you say about your strengths?", followUp: "Can you allow that to be true?" },
+      { question: "What resources—internal or external—do you already have?", followUp: "Which one feels most accessible right now?" },
+    ]
+  },
+  ambivalence: {
+    label: "Holding Complexity",
+    description: "Making space for mixed feelings without rushing resolution",
+    prompts: [
+      { question: "What's one thing you both want and fear?", followUp: "How does it feel to name both sides?" },
+      { question: "Where are you saying 'yes' when you mean 'maybe'?", followUp: "What would it take to be more honest?" },
+      { question: "What are you not ready to change—and is that okay for now?", followUp: "What support would help when you are ready?" },
+      { question: "What would happen if you stopped pushing yourself?", followUp: "What might self-compassion look like here?" },
+    ]
+  },
+  incremental: {
+    label: "Small Steps",
+    description: "Finding the tiniest next step that still feels meaningful",
+    prompts: [
+      { question: "What's the smallest possible step you could take?", followUp: "What would make even that 1% easier?" },
+      { question: "What could you try for just 5 minutes?", followUp: "What would you learn from that experiment?" },
+      { question: "If you couldn't fail, what would you try first?", followUp: "What's a low-risk version of that?" },
+      { question: "What's one thing you could do differently today—just today?", followUp: "What support would help you try it?" },
+    ]
+  },
+  values: {
+    label: "Values Exploration",
+    description: "Connecting to what matters most to you",
+    prompts: [
+      { question: "What value is this connected to for you?", followUp: "When have you lived that value well?" },
+      { question: "If this change happened, what would it mean about who you are?", followUp: "How does that feel?" },
+      { question: "What's one reason—your reason—that this matters?", followUp: "Where did that reason come from?" },
+      { question: "Who do you want to become, and how does this fit?", followUp: "What's one quality of that future self you already have?" },
+    ]
+  },
+  environment: {
+    label: "Environment Scan",
+    description: "Looking at what supports or challenges your growth",
+    prompts: [
+      { question: "What in your environment supports your goals?", followUp: "How can you access more of that?" },
+      { question: "What obstacle feels most pressing right now?", followUp: "What's one way to work with it, not against it?" },
+      { question: "Who in your life might help with this?", followUp: "What would you need from them?" },
+      { question: "What practical change would make this easier?", followUp: "What's stopping you from making it?" },
+    ]
+  }
+};
+
 export const promptCategories = {
   awareness: {
     label: "Awareness",
@@ -66,6 +139,46 @@ export function getDailyPrompt() {
   const prompts = journalPrompts[category];
   const promptIndex = dayOfYear % prompts.length;
   return { category, prompt: prompts[promptIndex] };
+}
+
+export function getMiPrompt(category, index = 0) {
+  const section = miEnhancedPrompts[category];
+  if (!section) return null;
+  const promptData = section.prompts[index % section.prompts.length];
+  return {
+    ...promptData,
+    category: section.label,
+    description: section.description
+  };
+}
+
+export function getDailyMiPrompt() {
+  const categories = Object.keys(miEnhancedPrompts);
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  const categoryIndex = dayOfYear % categories.length;
+  const category = categories[categoryIndex];
+  const section = miEnhancedPrompts[category];
+  const promptIndex = dayOfYear % section.prompts.length;
+  return {
+    category,
+    label: section.label,
+    description: section.description,
+    ...section.prompts[promptIndex]
+  };
+}
+
+export function getMiAffirmation() {
+  const affirmations = [
+    "You're the expert on your own life.",
+    "This is your pace, your path.",
+    "Nothing here is forced.",
+    "Every small step counts.",
+    "You don't have to have it all figured out.",
+    "Mixed feelings are a sign you're thinking deeply.",
+    "You're doing something brave just by being here."
+  ];
+  const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+  return affirmations[dayOfYear % affirmations.length];
 }
 
 export default journalPrompts;
