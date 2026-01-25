@@ -1,13 +1,13 @@
 {
-  "timestamp": "2026-01-25T08:08:43.801Z",
+  "timestamp": "2026-01-25T08:13:59.344Z",
   "summary": {
-    "totalFiles": 517,
-    "wellnessPages": 206,
+    "totalFiles": 525,
+    "wellnessPages": 214,
     "generatedPages": 123,
-    "withSEO": 272,
+    "withSEO": 280,
     "withDisclaimer": 237,
-    "withSafetyFooter": 128,
-    "withBenefits": 261,
+    "withSafetyFooter": 136,
+    "withBenefits": 269,
     "withMI": 30,
     "issuesFound": 0,
     "issuesByType": {

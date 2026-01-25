@@ -55,6 +55,14 @@ const ResilienceHubPage = lazy(() => import("./pages/hubs/ResilienceHubPage.jsx"
 const AnxietyHubPage = lazy(() => import("./pages/hubs/AnxietyHubPage.jsx"));
 const RelationshipsHubPage = lazy(() => import("./pages/hubs/RelationshipsHubPage.jsx"));
 const GriefHubPage = lazy(() => import("./pages/hubs/GriefHubPage.jsx"));
+const SelfCompassionHubPage = lazy(() => import("./pages/hubs/SelfCompassionHubPage.jsx"));
+const MindfulnessHubPage = lazy(() => import("./pages/hubs/MindfulnessHubPage.jsx"));
+const StressHubPage = lazy(() => import("./pages/hubs/StressHubPage.jsx"));
+const TraumaHealingHubPage = lazy(() => import("./pages/hubs/TraumaHealingHubPage.jsx"));
+const EmotionalIntelligenceHubPage = lazy(() => import("./pages/hubs/EmotionalIntelligenceHubPage.jsx"));
+const PersonalGrowthHubPage = lazy(() => import("./pages/hubs/PersonalGrowthHubPage.jsx"));
+const InnerPeaceHubPage = lazy(() => import("./pages/hubs/InnerPeaceHubPage.jsx"));
+const HubsIndexPage = lazy(() => import("./pages/hubs/HubsIndexPage.jsx"));
 const GuidedJournalingPage = lazy(() => import("./pages/GuidedJournalingPage.tsx"));
 const InsightCardsPage = lazy(() => import("./pages/InsightCardsPage.tsx"));
 const ProgressDashboardPage = lazy(() => import("./pages/ProgressDashboardPage.tsx"));
@@ -207,6 +215,30 @@ export default function App() {
               </Route>
               <Route path="/hubs/grief">
                 <WellnessRoute><GriefHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/self-compassion">
+                <WellnessRoute><SelfCompassionHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/mindfulness">
+                <WellnessRoute><MindfulnessHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/stress">
+                <WellnessRoute><StressHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/trauma-healing">
+                <WellnessRoute><TraumaHealingHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/emotional-intelligence">
+                <WellnessRoute><EmotionalIntelligenceHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/personal-growth">
+                <WellnessRoute><PersonalGrowthHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/inner-peace">
+                <WellnessRoute><InnerPeaceHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs">
+                <WellnessRoute><HubsIndexPage /></WellnessRoute>
               </Route>
               <Route path="/premium">
                 <ProtectedRoute><Premium /></ProtectedRoute>
