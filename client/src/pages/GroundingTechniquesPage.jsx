@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Anchor, Eye, Hand, Ear, Heart, Footprints, Sparkles, CheckCircle2, Brain, Shield, Zap, BookOpen, AlertCircle } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
@@ -364,6 +365,8 @@ export default function GroundingTechniquesPage() {
           variant="minimal"
           className="mb-8"
         />
+
+        <MIPromptCard context="reflection" className="mb-8" />
 
         <ClarityCard {...GROUNDING_CLARITY} variant="compact" className="mb-6" />
 

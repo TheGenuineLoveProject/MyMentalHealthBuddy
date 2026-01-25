@@ -22,6 +22,7 @@ import {
   Eye
 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -547,6 +548,8 @@ export default function HealingJourneysPage() {
                   </div>
                 </div>
               </header>
+
+              <MIPromptCard context="reflection" className="mb-8" />
 
               <div className="card-bordered mb-8 p-6 rounded-2xl" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
                 <div className="flex items-start gap-4">

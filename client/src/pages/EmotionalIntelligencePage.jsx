@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Brain, Eye, Ear, MessageCircle, Users, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
@@ -326,6 +327,8 @@ export default function EmotionalIntelligencePage() {
           variant="minimal"
           className="mb-8"
         />
+
+        <MIPromptCard context="reflection" className="mb-8" />
 
         <ClarityCard {...EQ_CLARITY} variant="compact" className="mb-6" />
 

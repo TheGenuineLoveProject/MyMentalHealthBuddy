@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, BookOpen, Heart, Shield, Users, Compass, ChevronRight, Check, Sparkles, Save, RefreshCw } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
@@ -226,6 +227,8 @@ export default function GuidedJournalingPage() {
             variant="minimal"
             className="mb-6"
           />
+
+          <MIPromptCard context="journal" className="mb-6" />
           
           <div className="flex items-center gap-3 mb-2">
             <div className="icon-container icon-xl icon-gradient-sage">
