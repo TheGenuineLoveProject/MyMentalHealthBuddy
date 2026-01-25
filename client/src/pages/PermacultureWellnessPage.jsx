@@ -5,6 +5,7 @@ import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   Leaf, 
   Sun, 
@@ -173,6 +174,17 @@ export default function PermacultureWellnessPage() {
         variant="wellness"
         data-testid="hero-permaculture-wellness"
       />
+      
+      <SectionContainer>
+        <BenefitsBlock
+          benefit="Ecological wisdom, sustainable practices, and rooted healing"
+          duration="10–20 minutes"
+          control="Explore what resonates — leave what doesn't"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
+      </SectionContainer>
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">

@@ -4,6 +4,7 @@ import { Hero } from "@/components/ui/Hero";
 import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   Brain, 
   Heart, 
@@ -96,6 +97,17 @@ export default function NervousSystemFloodingPage() {
         variant="wellness"
         data-testid="hero-flooding"
       />
+      
+      <SectionContainer>
+        <BenefitsBlock
+          benefit="Grounding, calm, and understanding what's happening in your body"
+          duration="5–15 minutes"
+          control="Go at your own pace — this is not a test"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
+      </SectionContainer>
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">

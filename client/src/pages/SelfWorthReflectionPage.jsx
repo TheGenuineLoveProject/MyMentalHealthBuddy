@@ -5,6 +5,7 @@ import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   Brain, 
   Heart, 
@@ -122,6 +123,17 @@ export default function SelfWorthReflectionPage() {
         variant="wellness"
         data-testid="hero-self-worth"
       />
+      
+      <SectionContainer>
+        <BenefitsBlock
+          benefit="Reframing self-doubt, reclaiming your intelligence, and gentle truth"
+          duration="10–15 minutes"
+          control="Take what helps — skip what doesn't fit"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
+      </SectionContainer>
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">

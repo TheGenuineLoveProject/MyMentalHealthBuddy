@@ -5,6 +5,7 @@ import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   Brain, 
   Filter, 
@@ -107,6 +108,17 @@ export default function PerceptionRefinementPage() {
         variant="wellness"
         data-testid="hero-perception-refinement"
       />
+      
+      <SectionContainer>
+        <BenefitsBlock
+          benefit="Nervous system regulation, clearer perception, and reduced overwhelm"
+          duration="5–10 minutes"
+          control="Pause or stop anytime — you're in charge"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
+      </SectionContainer>
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">

@@ -7,6 +7,7 @@ import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { Activity, Clock, Heart, Wind, Zap, Play, Check, TrendingUp, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -104,6 +105,17 @@ export default function MovementSnacksPage() {
         variant="wellness"
         data-testid="hero-movement"
       />
+      
+      <SectionContainer>
+        <BenefitsBlock
+          benefit="Body awareness, gentle energy, and grounding"
+          duration="20–60 seconds per snack"
+          control="Choose what feels right, skip what doesn't"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
+      </SectionContainer>
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">

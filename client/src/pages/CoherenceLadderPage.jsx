@@ -7,6 +7,7 @@ import { SectionContainer } from "@/components/ui/SectionContainer";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { Layers, ArrowUp, ArrowDown, Check, TrendingUp, MessageCircle, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -104,6 +105,17 @@ export default function CoherenceLadderPage() {
         variant="wellness"
         data-testid="hero-coherence"
       />
+      
+      <SectionContainer>
+        <BenefitsBlock
+          benefit="Emotional awareness, gentle insight, and next-step clarity"
+          duration="2–5 minutes"
+          control="You define where you are — no judgment"
+          disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
+      </SectionContainer>
 
       <SectionContainer variant="default">
         <div className="max-w-4xl mx-auto">
