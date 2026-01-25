@@ -43,7 +43,8 @@
     "link:scan": "node tools/link_scan.mjs",
     "route:map": "node tools/route_map.mjs",
     "auth:smoke": "node tools/auth_smoke.mjs",
-    "release:gate": "bash tools/release_gate.sh"
+    "release:gate": "bash tools/release_gate.sh",
+    "scan:incomplete": "node scripts/scanIncomplete.mjs"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
