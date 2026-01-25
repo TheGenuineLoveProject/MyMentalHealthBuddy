@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { 
   ArrowLeft, 
   Sun,
@@ -28,6 +30,45 @@ import {
 } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
+
+const ROUTINES_CLARITY = {
+  what: "Research-backed morning, afternoon, and evening routines designed to regulate your nervous system and optimize wellbeing.",
+  who: "Anyone wanting to create structure, build healthy habits, or support their mental health through daily rhythms.",
+  when: "Use as templates to build your own routines—adapt times and activities to fit your life.",
+  why: "Consistent routines create predictability that calms your nervous system and builds automatic healthy behaviors.",
+  howSteps: [
+    "Start with one routine (morning, afternoon, or evening)",
+    "Read why each activity matters for wellbeing",
+    "Choose 2-3 activities to try first",
+    "Gradually add more as these become automatic"
+  ],
+  whereLinkText: "Explore self-care",
+  whereHref: "/self-care"
+};
+
+const ROUTINES_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting with a simple morning",
+    situation: "You currently scroll your phone first thing and feel rushed all morning.",
+    action: "Try just two activities: Gentle Awakening (3 breaths before phone) and Hydration (water before coffee).",
+    result: "Small wins build momentum, and you notice feeling less reactive in the morning."
+  },
+  {
+    level: "intermediate",
+    title: "Adding an evening wind-down",
+    situation: "You struggle to sleep because your mind is still 'on' from the day.",
+    action: "Build an evening routine: screen shutdown at 9pm, gentle stretching, then reading or journaling.",
+    result: "The consistent wind-down cues your body that it's time to rest."
+  },
+  {
+    level: "advanced",
+    title: "Creating a full daily rhythm",
+    situation: "You want routines that support your nervous system throughout the entire day.",
+    action: "Implement activities from morning, afternoon transition, and evening routines. Track completion for a week.",
+    result: "Consistent daily rhythms become automatic, creating a foundation of stability that supports all other healing work."
+  }
+];
 
 const routines = [
   {
@@ -268,6 +309,14 @@ export default function DailyRoutinesPage() {
             crisisLink="/crisis"
             variant="minimal"
             className="mb-6"
+          />
+
+          <ClarityCard {...ROUTINES_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={ROUTINES_EXAMPLES} 
+            title="See how others build daily routines"
+            className="mb-8"
           />
 
           <section className="mb-10">

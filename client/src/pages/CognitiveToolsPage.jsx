@@ -18,9 +18,50 @@ import {
   Shield
 } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+
+const COGNITIVE_CLARITY = {
+  what: "Evidence-based cognitive tools from CBT and DBT to identify and reframe unhelpful thinking patterns.",
+  who: "Anyone experiencing negative self-talk, anxiety spirals, or wanting to understand their thought patterns.",
+  when: "When you notice recurring negative thoughts, before/after stressful situations, or during daily reflection.",
+  why: "Your thoughts shape your emotions and behaviors. Learning to catch and examine thoughts gives you power to change your inner experience.",
+  howSteps: [
+    "Learn to recognize common cognitive distortions",
+    "Practice the 4-step thought challenge process",
+    "Try the interactive reframe tool with your own thoughts",
+    "Notice patterns in your thinking over time"
+  ],
+  whereLinkText: "Explore emotional intelligence",
+  whereHref: "/emotional-intelligence"
+};
+
+const COGNITIVE_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Recognizing a distortion",
+    situation: "You notice yourself thinking 'Everyone thinks I'm stupid' after a meeting.",
+    action: "Review the cognitive distortions list and identify this as 'Mind Reading'—assuming you know what others think.",
+    result: "Simply naming the distortion creates distance from the thought and opens space for questioning it."
+  },
+  {
+    level: "intermediate",
+    title: "Challenging a thought",
+    situation: "After a mistake at work, you think 'I'm a total failure.'",
+    action: "Use the thought challenge steps: catch the thought, identify 'All-or-Nothing Thinking,' examine evidence, create a balanced reframe.",
+    result: "You replace the thought with 'I made a mistake, but I've also had many successes. One error doesn't define me.'"
+  },
+  {
+    level: "advanced",
+    title: "Breaking an anxiety spiral",
+    situation: "You notice catastrophic thinking: 'If I mess this up, everything will fall apart.'",
+    action: "Use the interactive reframe tool. List evidence for/against, calculate realistic probability, create a coping plan.",
+    result: "The spiral breaks as you realize the feared outcome is unlikely, and even if it happened, you could cope."
+  }
+];
 
 const cognitiveDistortions = [
   {
@@ -218,6 +259,14 @@ export default function CognitiveToolsPage() {
             crisisLink="/crisis"
             variant="minimal"
             className="mb-6"
+          />
+
+          <ClarityCard {...COGNITIVE_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={COGNITIVE_EXAMPLES} 
+            title="See how others use cognitive tools"
+            className="mb-8"
           />
 
           <div className="card-bordered mb-8 rounded-xl p-6" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>

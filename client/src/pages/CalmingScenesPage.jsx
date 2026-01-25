@@ -2,9 +2,50 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Play, Pause, Volume2, VolumeX, Sun, Moon, Cloud, Waves, Trees, Mountain, Sparkles, Heart } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+
+const CALMING_CLARITY = {
+  what: "Immersive nature visualizations with guided breathing and affirmations for nervous system regulation.",
+  who: "Anyone needing a moment of peace, experiencing stress, or wanting to use visualization for calm.",
+  when: "During breaks, before sleep, when anxious, or whenever you need to transport yourself somewhere peaceful.",
+  why: "Visualization activates similar brain regions as actual experiences, allowing you to access calm without leaving your space.",
+  howSteps: [
+    "Choose a scene that calls to you today",
+    "Let the visualization guide your imagination",
+    "Follow the breath prompts to deepen the experience",
+    "Carry the affirmation with you after the practice"
+  ],
+  whereLinkText: "Try meditation guide",
+  whereHref: "/meditation"
+};
+
+const CALMING_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Taking a quick mental escape",
+    situation: "You have 2 minutes between tasks and feel stressed.",
+    action: "Choose the Ocean Waves scene, close your eyes, and imagine the elements: soft breeze, warm sand, endless horizon.",
+    result: "Even brief visualization shifts your nervous system toward calm."
+  },
+  {
+    level: "intermediate",
+    title: "Using scenes for sleep preparation",
+    situation: "Your mind is racing at bedtime and you need help relaxing.",
+    action: "Choose Gentle Rain, follow the breath prompt, and let the rhythmic imagery quiet your thoughts.",
+    result: "The calming imagery becomes a sleep cue that helps you transition to rest."
+  },
+  {
+    level: "advanced",
+    title: "Building a visualization practice",
+    situation: "You want to develop your ability to self-regulate through visualization.",
+    action: "Practice different scenes daily, noticing which ones resonate most. Use the affirmations throughout your day.",
+    result: "You develop the ability to access calm on demand by visualizing your favorite scenes anywhere."
+  }
+];
 
 const scenes = [
   {
@@ -130,6 +171,14 @@ export default function CalmingScenesPage() {
           disclaimer="Relaxation visualization—not therapy. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...CALMING_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={CALMING_EXAMPLES} 
+          title="See how others use calming scenes"
           className="mb-8"
         />
 

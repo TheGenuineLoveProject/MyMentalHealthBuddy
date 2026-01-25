@@ -15,9 +15,9 @@ Generated: 2026-01-25
 | Missing Crisis Link (wellness) | 80 |
 | Missing Consent Language (wellness) | 149 |
 | Missing SafetyFooter (wellness) | 105 |
-| Missing ClarityCard (wellness) | 148 |
-| Missing ExamplesAccordion (wellness) | 148 |
-| **Total Issues** | **1070** |
+| Missing ClarityCard (wellness) | 142 |
+| Missing ExamplesAccordion (wellness) | 142 |
+| **Total Issues** | **1058** |
 
 ## Detection Criteria
 
@@ -514,7 +514,7 @@ Consent language must include:
   `className="min-h-[150px] bg-white border-sage-200 text-teal-700 placeholder:text-sage-400 resize-non`
 - **client/src/pages/MoodPage.jsx:282** - `placeholder`
   `placeholder="Any thoughts you'd like to add..."`
-- **client/src/pages/MovementSnacksPage.jsx:230** - `placeholder`
+- **client/src/pages/MovementSnacksPage.jsx:279** - `placeholder`
   `placeholder="How do you feel? (you can skip this)"`
 - **client/src/pages/PhilosophicalInquiryPage.tsx:208** - `placeholder`
   `placeholder="Enter a topic, belief, or question to examine..."`
@@ -1147,12 +1147,10 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/BlogIndex.jsx
 - client/src/pages/BodyWellnessPage.jsx
 - client/src/pages/CRMPage.jsx
-- client/src/pages/CalmingScenesPage.jsx
 - client/src/pages/CanvaLanding.jsx
 - client/src/pages/Challenge.jsx
 - client/src/pages/ChallengeDay.jsx
 - client/src/pages/CognitiveArchitecturePage.tsx
-- client/src/pages/CognitiveToolsPage.jsx
 - client/src/pages/CoherenceLadderPage.jsx
 - client/src/pages/CollaborativeLabPage.tsx
 - client/src/pages/CommunityPage.tsx
@@ -1161,7 +1159,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/ControlDashboard.jsx
 - client/src/pages/CrisisResources.jsx
 - client/src/pages/DailyRitualPage.tsx
-- client/src/pages/DailyRoutinesPage.jsx
 - client/src/pages/DailyWisdomOraclePage.tsx
 - client/src/pages/Dashboard.jsx
 - client/src/pages/DesignDashboard.jsx
@@ -1179,7 +1176,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/HealthPage.jsx
 - client/src/pages/Home.jsx
 - client/src/pages/HowToGuidesPage.jsx
-- client/src/pages/InnerChildPage.jsx
 - client/src/pages/InsightCardsPage.tsx
 - client/src/pages/KnowledgeSynthesisPage.tsx
 - client/src/pages/Legal.tsx
@@ -1187,7 +1183,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/MasteryToolsPage.tsx
 - client/src/pages/MetaLearningPage.tsx
 - client/src/pages/MirrorPage.tsx
-- client/src/pages/MovementSnacksPage.jsx
 - client/src/pages/NervousSystemFloodingPage.jsx
 - client/src/pages/NewsPage.jsx
 - client/src/pages/NotFound.jsx
@@ -1210,7 +1205,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/SafetyPage.jsx
 - client/src/pages/SelfWorthReflectionPage.jsx
 - client/src/pages/Settings.jsx
-- client/src/pages/SleepGuidePage.jsx
 - client/src/pages/SoulWellnessPage.jsx
 - client/src/pages/StatePage.jsx
 - client/src/pages/StrategyMapsPage.tsx
@@ -1300,12 +1294,10 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/BlogIndex.jsx
 - client/src/pages/BodyWellnessPage.jsx
 - client/src/pages/CRMPage.jsx
-- client/src/pages/CalmingScenesPage.jsx
 - client/src/pages/CanvaLanding.jsx
 - client/src/pages/Challenge.jsx
 - client/src/pages/ChallengeDay.jsx
 - client/src/pages/CognitiveArchitecturePage.tsx
-- client/src/pages/CognitiveToolsPage.jsx
 - client/src/pages/CoherenceLadderPage.jsx
 - client/src/pages/CollaborativeLabPage.tsx
 - client/src/pages/CommunityPage.tsx
@@ -1314,7 +1306,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/ControlDashboard.jsx
 - client/src/pages/CrisisResources.jsx
 - client/src/pages/DailyRitualPage.tsx
-- client/src/pages/DailyRoutinesPage.jsx
 - client/src/pages/DailyWisdomOraclePage.tsx
 - client/src/pages/Dashboard.jsx
 - client/src/pages/DesignDashboard.jsx
@@ -1332,7 +1323,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/HealthPage.jsx
 - client/src/pages/Home.jsx
 - client/src/pages/HowToGuidesPage.jsx
-- client/src/pages/InnerChildPage.jsx
 - client/src/pages/InsightCardsPage.tsx
 - client/src/pages/KnowledgeSynthesisPage.tsx
 - client/src/pages/Legal.tsx
@@ -1340,7 +1330,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/MasteryToolsPage.tsx
 - client/src/pages/MetaLearningPage.tsx
 - client/src/pages/MirrorPage.tsx
-- client/src/pages/MovementSnacksPage.jsx
 - client/src/pages/NervousSystemFloodingPage.jsx
 - client/src/pages/NewsPage.jsx
 - client/src/pages/NotFound.jsx
@@ -1363,7 +1352,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/SafetyPage.jsx
 - client/src/pages/SelfWorthReflectionPage.jsx
 - client/src/pages/Settings.jsx
-- client/src/pages/SleepGuidePage.jsx
 - client/src/pages/SoulWellnessPage.jsx
 - client/src/pages/StatePage.jsx
 - client/src/pages/StrategyMapsPage.tsx

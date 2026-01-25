@@ -3,6 +3,47 @@ import { Link } from "wouter";
 import { ArrowLeft, Moon, Sun, Clock, Coffee, Smartphone, Wind, ThermometerSun, Bed, CheckCircle2, XCircle, Sparkles } from "lucide-react";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const SLEEP_CLARITY = {
+  what: "Evidence-based sleep hygiene practices and relaxation techniques for better rest and recovery.",
+  who: "Anyone struggling with sleep, wanting to improve sleep quality, or experiencing stress-related insomnia.",
+  when: "Use the hygiene tips daily, wind-down activities 30-60 minutes before bed, and visualization at bedtime.",
+  why: "Sleep is when your brain heals, consolidates memories, and regulates emotions. Better sleep transforms every aspect of wellbeing.",
+  howSteps: [
+    "Review sleep hygiene tips by category",
+    "Identify 2-3 changes to implement first",
+    "Create a wind-down routine using the suggested activities",
+    "Try the sleep journey visualization at bedtime"
+  ],
+  whereLinkText: "Explore daily routines",
+  whereHref: "/daily-routines"
+};
+
+const SLEEP_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting with one change",
+    situation: "You scroll on your phone until you fall asleep and wake up tired.",
+    action: "Choose one technology tip: put your phone in another room and read a physical book for 15 minutes before bed.",
+    result: "Your brain starts associating the bedroom with rest, and you fall asleep more easily."
+  },
+  {
+    level: "intermediate",
+    title: "Building a wind-down routine",
+    situation: "You have trouble transitioning from busy day to restful sleep.",
+    action: "Create a 30-minute routine: dim lights, take a warm shower, do 4-7-8 breathing, then read until sleepy.",
+    result: "The consistent routine signals your nervous system that it's time to rest."
+  },
+  {
+    level: "advanced",
+    title: "Addressing chronic sleep issues",
+    situation: "Racing thoughts keep you awake despite good sleep hygiene.",
+    action: "Add a 'worry dump' journaling session 2 hours before bed, plus the progressive muscle relaxation wind-down activity.",
+    result: "Externalizing worries and releasing physical tension helps quiet the mind for sleep."
+  }
+];
 
 const sleepHygieneTips = [
   {
@@ -153,6 +194,14 @@ export default function SleepGuidePage() {
           disclaimer="Educational sleep wellness—not medical advice. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...SLEEP_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={SLEEP_EXAMPLES} 
+          title="See how others improve their sleep"
           className="mb-8"
         />
 

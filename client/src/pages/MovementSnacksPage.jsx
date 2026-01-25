@@ -8,8 +8,49 @@ import { Card, CardGrid } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { Activity, Clock, Heart, Wind, Zap, Play, Check, TrendingUp, Calendar } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const MOVEMENT_CLARITY = {
+  what: "Quick, gentle movement breaks to release tension, boost energy, and support your nervous system throughout the day.",
+  who: "Anyone who sits for long periods, experiences physical tension, or needs quick energy boosts.",
+  when: "Every 60-90 minutes during work, when you notice stiffness, or when energy dips.",
+  why: "Brief movement activates your vagus nerve, releases tension, and breaks stress hormone cycles—without requiring a workout.",
+  howSteps: [
+    "Choose a movement snack that fits your current energy",
+    "Start the timer and follow the simple instructions",
+    "Rate your energy before and after to notice the shift",
+    "Log your movement to track your body care patterns"
+  ],
+  whereLinkText: "Explore breathing exercises",
+  whereHref: "/breathing-exercises"
+};
+
+const MOVEMENT_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Breaking up a long sitting session",
+    situation: "You've been at your desk for 2 hours and notice your shoulders are tight.",
+    action: "Do the 30-second Shoulder Rolls movement snack—no need to leave your chair.",
+    result: "Tension releases, blood flows, and you return to work feeling refreshed."
+  },
+  {
+    level: "intermediate",
+    title: "Using movement for an energy dip",
+    situation: "It's 3pm and your energy is crashing. You want to avoid more caffeine.",
+    action: "Do Stand & Stretch for 60 seconds, followed by 5 Deep Breaths.",
+    result: "Your body wakes up naturally and you have sustained energy through the afternoon."
+  },
+  {
+    level: "advanced",
+    title: "Building movement snacks into your routine",
+    situation: "You want to make regular movement breaks automatic.",
+    action: "Set hourly reminders and track your movements, noticing energy patterns over a week.",
+    result: "Movement becomes habitual, and you notice overall improvements in energy and reduced tension."
+  }
+];
 
 const MOVEMENT_SNACKS = [
   { id: "shoulders", name: "Shoulder Rolls", duration: 30, description: "Gently roll shoulders forward, then backward", icon: Activity },
@@ -114,6 +155,14 @@ export default function MovementSnacksPage() {
           disclaimer="Educational wellness support — not medical advice. If you're in crisis, visit /crisis."
           variant="minimal"
           className="mb-6"
+        />
+
+        <ClarityCard {...MOVEMENT_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={MOVEMENT_EXAMPLES} 
+          title="See how others use movement snacks"
+          className="mb-8"
         />
       </SectionContainer>
 

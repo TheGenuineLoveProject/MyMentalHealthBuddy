@@ -4,6 +4,47 @@ import { ArrowLeft, Heart, Baby, Sparkles, Shield, Sun, MessageCircle, Gift, Hom
 import { useSEO } from "../hooks/useSEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const INNERCHILD_CLARITY = {
+  what: "Gentle tools for healing childhood wounds and reparenting yourself with the love and safety you deserved.",
+  who: "Anyone healing from difficult childhood experiences, trauma, or wanting to understand their emotional patterns.",
+  when: "When triggered by old wounds, during self-reflection, or when you notice childhood patterns affecting your present.",
+  why: "Many of our adult struggles stem from unmet childhood needs. Healing your inner child transforms these patterns at their root.",
+  howSteps: [
+    "Learn about the core childhood needs (safety, belonging, love, autonomy, play, validation)",
+    "Identify which needs may have been unmet in your childhood",
+    "Practice the reparenting actions and affirmations",
+    "Be gentle—this is deep work that unfolds over time"
+  ],
+  whereLinkText: "Explore self-worth tools",
+  whereHref: "/tools/self-worth"
+};
+
+const INNERCHILD_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Identifying an unmet need",
+    situation: "You notice you always feel anxious about being 'too much' for others.",
+    action: "Explore the 'Acceptance' need section and recognize this pattern may come from conditional love in childhood.",
+    result: "Understanding the origin helps you feel compassion for yourself rather than shame about the pattern."
+  },
+  {
+    level: "intermediate",
+    title: "Practicing reparenting",
+    situation: "You're triggered by criticism and notice your inner child feels unsafe.",
+    action: "Use the Safety need's reparenting action: place a hand on your heart and say 'I'm here. I've got you. You're safe with me now.'",
+    result: "Your nervous system calms as you give your inner child what they needed but didn't receive."
+  },
+  {
+    level: "advanced",
+    title: "Writing a healing letter",
+    situation: "You want to address deep wounds around feeling unlovable.",
+    action: "Write a letter to your inner child from your wise adult self, offering the unconditional love they deserved.",
+    result: "The writing process allows grief to move through you, and you begin to internalize a new loving voice."
+  }
+];
 
 const innerChildNeeds = [
   {
@@ -296,6 +337,14 @@ export default function InnerChildPage() {
           disclaimer="Educational inner child healing—not therapy. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...INNERCHILD_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={INNERCHILD_EXAMPLES} 
+          title="See how others approach inner child healing"
           className="mb-8"
         />
 
