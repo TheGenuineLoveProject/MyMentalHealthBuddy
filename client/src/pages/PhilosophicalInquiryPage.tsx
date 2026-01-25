@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, MessageCircle, Sparkles, BookOpen, HelpCircle, Lightbulb, ChevronRight, RefreshCw, Save } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_philosophical_inquiry";
 
@@ -157,6 +158,15 @@ export default function PhilosophicalInquiryPage() {
             Socratic questioning and dialectical reasoning. Examine beliefs, discover assumptions, find synthesis.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Deeper self-understanding through Socratic questioning and dialectical reasoning"
+          duration="10–20 minutes per inquiry session"
+          control="Explore at your own pace — save insights or start fresh anytime"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           <div className="card-bordered text-center">

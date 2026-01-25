@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Brain, Zap, Target, BookOpen, Clock, TrendingUp, Lightbulb, Save, RefreshCw } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_meta_learning";
 
@@ -137,6 +138,15 @@ export default function MetaLearningPage() {
             Learn how to learn. Track techniques, optimize retention, become a more effective learner.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Evidence-based learning strategies, retention optimization, and cognitive skill tracking"
+          duration="5–30 minutes per session"
+          control="Track what works for you — all data stays local"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           <div className="card-bordered text-center">

@@ -11,7 +11,7 @@
 
 | Category | Issues Found | Severity | Status |
 |----------|-------------|----------|--------|
-| Missing Benefit Blocks | 40+ pages | Medium | ✓ 12 pages fixed |
+| Missing Benefit Blocks | 40+ pages | Medium | ✓ 16 pages fixed |
 | Missing Safety Disclaimers | 30+ pages | High | ✓ All wellness pages have SafetyFooter |
 | Missing Crisis Links | 15+ pages | High | ✓ All wellness pages have crisis links |
 | Rate Limiting | Configured ✓ | Low | ✓ Complete |

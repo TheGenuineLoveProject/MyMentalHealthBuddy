@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Sun, Moon, Star, Sparkles, BookOpen, RefreshCw, Heart, Share2, Copy } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_daily_wisdom";
 
@@ -159,6 +160,15 @@ export default function DailyWisdomOraclePage() {
             One piece of wisdom each day. Drawn from the world's great philosophical traditions.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Daily reflection and inspiration from world philosophical traditions"
+          duration="2–5 minutes per day"
+          control="Return whenever you're ready — no commitment required"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           <div className="card-bordered text-center">

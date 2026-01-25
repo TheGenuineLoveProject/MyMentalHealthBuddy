@@ -4,6 +4,7 @@ import {
   Sparkles, Sun, Heart, BookOpen, ArrowLeft, Play, Pause,
   RefreshCw, Check, Clock, Calendar, ChevronRight, Quote
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 interface DailyContemplation {
   id: string;
@@ -206,6 +207,15 @@ export default function WisdomPracticesPage() {
             Daily practices for cultivating inner wisdom. Contemplation, gratitude, and presence.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Inner wisdom cultivation through contemplation, gratitude, and mindful presence"
+          duration="10–20 minutes per practice"
+          control="Practice at your own pace — skip or pause anytime"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           <div className="card-bordered text-center">
