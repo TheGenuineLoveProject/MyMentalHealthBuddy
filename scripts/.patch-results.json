@@ -1,10 +1,10 @@
 {
-  "timestamp": "2026-01-25T05:04:48.314Z",
+  "timestamp": "2026-01-25T05:08:52.711Z",
   "dryRun": true,
   "stats": {
     "filesScanned": 506,
-    "filesPatched": 82,
-    "patchesApplied": 83,
+    "filesPatched": 85,
+    "patchesApplied": 91,
     "skipped": 1,
     "errors": []
   },
@@ -103,7 +103,8 @@
     {
       "file": "client/src/pages/DailyWisdomOraclePage.tsx",
       "patches": [
-        "add-seo-import"
+        "add-seo-import",
+        "add-mi-affirmation-comment"
       ]
     },
     {
@@ -145,7 +146,8 @@
     {
       "file": "client/src/pages/GuidedJournalingPage.tsx",
       "patches": [
-        "add-seo-import"
+        "add-seo-import",
+        "add-mi-affirmation-comment"
       ]
     },
     {
@@ -185,6 +187,12 @@
       ]
     },
     {
+      "file": "client/src/pages/JournalPage.jsx",
+      "patches": [
+        "add-mi-affirmation-comment"
+      ]
+    },
+    {
       "file": "client/src/pages/KnowledgeSynthesisPage.tsx",
       "patches": [
         "add-seo-import"
@@ -206,6 +214,12 @@
       "file": "client/src/pages/MirrorPage.tsx",
       "patches": [
         "add-seo-import"
+      ]
+    },
+    {
+      "file": "client/src/pages/MoodPage.jsx",
+      "patches": [
+        "add-mi-affirmation-comment"
       ]
     },
     {
@@ -283,7 +297,8 @@
     {
       "file": "client/src/pages/SelfWorthReflectionPage.jsx",
       "patches": [
-        "add-seo-import"
+        "add-seo-import",
+        "add-mi-affirmation-comment"
       ]
     },
     {
@@ -349,13 +364,21 @@
     {
       "file": "client/src/pages/WisdomPracticesPage.tsx",
       "patches": [
-        "add-seo-import"
+        "add-seo-import",
+        "add-mi-affirmation-comment"
       ]
     },
     {
       "file": "client/src/pages/WisdomSynthesisPage.tsx",
       "patches": [
-        "add-seo-import"
+        "add-seo-import",
+        "add-mi-affirmation-comment"
+      ]
+    },
+    {
+      "file": "client/src/pages/WisdomToolsPage.tsx",
+      "patches": [
+        "add-mi-affirmation-comment"
       ]
     },
     {

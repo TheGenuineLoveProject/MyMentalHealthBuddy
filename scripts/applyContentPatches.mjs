@@ -151,6 +151,58 @@ const PATCHES = [
       }
       return `import { BenefitsBlock } from "@/components/wellness/BenefitsBlock";\n` + content;
     }
+  },
+  {
+    name: "add-mi-affirmation-comment",
+    description: "Adds MI affirmation guidance comment to wellness pages",
+    applicable: (content, filePath) => {
+      const isWellnessPage = /Page\.(tsx|jsx)$/.test(filePath) && 
+                             (filePath.includes("Mood") || 
+                              filePath.includes("Journal") || 
+                              filePath.includes("Wisdom") ||
+                              filePath.includes("Reflection"));
+      const hasMIComment = /MI Pattern|Motivational Interviewing/.test(content);
+      return isWellnessPage && !hasMIComment;
+    },
+    apply: (content) => {
+      const miGuidance = `/**
+ * MI Pattern Guidance:
+ * 1. Open Question: "What matters most about this right now?"
+ * 2. Affirmation: "It makes sense you feel that. You're showing courage by naming it."
+ * 3. Reflection: "It sounds like ___ and you want ___."
+ * 4. Summarize: "So far we have: ___."
+ * 5. Evoke Change Talk: "On a scale of 0–10, how ready are you to take one small step?"
+ * 
+ * Constraint: Never claim outcomes. Use "may help," "often supports," "many people find."
+ */\n`;
+      
+      if (/^\/\*\*/.test(content)) {
+        return content;
+      }
+      
+      if (/^import/.test(content)) {
+        return miGuidance + content;
+      }
+      
+      return miGuidance + content;
+    }
+  },
+  {
+    name: "ensure-safe-outcome-language",
+    description: "Replaces 'will' with 'may help' in outcome statements",
+    applicable: (content, filePath) => {
+      const isPage = /Page\.(tsx|jsx)$/.test(filePath);
+      const hasUnsafeLanguage = /this will (heal|cure|fix|solve|treat)/i.test(content);
+      return isPage && hasUnsafeLanguage;
+    },
+    apply: (content) => {
+      return content
+        .replace(/this will heal/gi, "this may help support healing")
+        .replace(/this will cure/gi, "this may help with")
+        .replace(/this will fix/gi, "this may help address")
+        .replace(/this will solve/gi, "this may help with")
+        .replace(/this will treat/gi, "this offers support for");
+    }
   }
 ];
 
