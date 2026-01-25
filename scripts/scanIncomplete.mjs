@@ -33,10 +33,68 @@ const PATTERNS = {
 
 const WELLNESS_CHECKS = {
   benefitsBlock: /BenefitsBlock|benefits=\{/,
-  crisisLink: /\/crisis|crisis/i,
-  pauseStop: /pause|stop|opt-out|skip|anytime/i,
-  safetyFooter: /SafetyFooter/,
+  crisisLink: /\/crisis|CrisisNotice|SafetyFooter/i,
+  consentLanguage: /(pause|stop)\s*(or|and)\s*(stop|pause)\s*anytime|opt[\s-]?out|only\s+do\s+what\s+feels\s+safe/i,
+  safetyFooter: /SafetyFooter|PersistentDisclaimer|CrisisNotice/,
 };
+
+const WELLNESS_ROUTES = [
+  '/tools', '/wisdom', '/wisdom-practices', '/wisdom-synthesis', '/daily-wisdom',
+  '/advanced', '/mastery', '/ritual', '/guided-journaling', '/insight-cards',
+  '/journal', '/mood', '/check-in', '/tracker', '/wellness',
+  '/healing', '/trauma', '/resilience', '/perception', '/self-worth',
+  '/alignment', '/values', '/boundaries', '/reflection', '/gratitude',
+  '/permaculture', '/philosophy', '/metacognition', '/creativity',
+  '/foresight', '/systems', '/collective', '/contemplative', '/ethical',
+  '/existential', '/embodiment', '/narrative', '/relational', '/neuro',
+  '/socio', '/praxis', '/post-trauma', '/self-mastery', '/spiritual',
+  '/relationship', '/cognitive', '/emotional', '/life-purpose', '/mind-body',
+  '/social', '/peak-performance', '/personal-growth', '/psychological-safety',
+  '/consciousness', '/human-potential', '/life-design', '/holistic'
+];
+
+const WELLNESS_PAGE_PATTERNS = [
+  /Page\.jsx$/,
+  /Tool\.jsx$/,
+  /Guide\.jsx$/,
+  /Practice\.jsx$/,
+  /Wellness/,
+  /Healing/,
+  /Wisdom/,
+  /Mastery/,
+  /Reflection/,
+  /Journal/,
+  /Tracker/,
+  /Alignment/,
+];
+
+function isWellnessPage(filePath, content) {
+  const relativePath = path.relative(rootDir, filePath);
+  
+  if (!relativePath.includes('/pages/')) {
+    return false;
+  }
+  
+  for (const pattern of WELLNESS_PAGE_PATTERNS) {
+    if (pattern.test(relativePath)) {
+      return true;
+    }
+  }
+  
+  for (const route of WELLNESS_ROUTES) {
+    const routePattern = new RegExp(`path=["']${route}["']|Route.*${route}`, 'i');
+    if (routePattern.test(content)) {
+      return true;
+    }
+  }
+  
+  const wellnessKeywords = /wellness|healing|trauma|self-care|mindfulness|reflection|journaling|emotional|mental health|crisis/i;
+  if (wellnessKeywords.test(content)) {
+    return true;
+  }
+  
+  return false;
+}
 
 const issues = {
   todos: [],
@@ -44,7 +102,7 @@ const issues = {
   emptyComponents: [],
   missingBenefitsBlock: [],
   missingCrisisLink: [],
-  missingPauseStop: [],
+  missingConsentLanguage: [],
   missingSafetyFooter: [],
 };
 
@@ -72,12 +130,7 @@ function scanFile(filePath) {
     const content = fs.readFileSync(filePath, 'utf-8');
     const relativePath = path.relative(rootDir, filePath);
     const lines = content.split('\n');
-    const isWellnessPage = relativePath.includes('/pages/') && 
-      (relativePath.includes('Wellness') || 
-       relativePath.includes('Tool') || 
-       relativePath.includes('Page') ||
-       relativePath.includes('Healing') ||
-       relativePath.includes('Guide'));
+    const isWellness = isWellnessPage(filePath, content);
 
     lines.forEach((line, idx) => {
       const lineNum = idx + 1;
@@ -111,15 +164,15 @@ function scanFile(filePath) {
       });
     }
 
-    if (isWellnessPage) {
+    if (isWellness) {
       if (!WELLNESS_CHECKS.benefitsBlock.test(content)) {
         issues.missingBenefitsBlock.push({ file: relativePath });
       }
       if (!WELLNESS_CHECKS.crisisLink.test(content)) {
         issues.missingCrisisLink.push({ file: relativePath });
       }
-      if (!WELLNESS_CHECKS.pauseStop.test(content)) {
-        issues.missingPauseStop.push({ file: relativePath });
+      if (!WELLNESS_CHECKS.consentLanguage.test(content)) {
+        issues.missingConsentLanguage.push({ file: relativePath });
       }
       if (!WELLNESS_CHECKS.safetyFooter.test(content)) {
         issues.missingSafetyFooter.push({ file: relativePath });
@@ -142,7 +195,7 @@ function generateReport() {
     issues.emptyComponents.length +
     issues.missingBenefitsBlock.length +
     issues.missingCrisisLink.length +
-    issues.missingPauseStop.length +
+    issues.missingConsentLanguage.length +
     issues.missingSafetyFooter.length;
 
   report += `## Summary\n\n`;
@@ -153,9 +206,21 @@ function generateReport() {
   report += `| Empty Components | ${issues.emptyComponents.length} |\n`;
   report += `| Missing BenefitsBlock (wellness) | ${issues.missingBenefitsBlock.length} |\n`;
   report += `| Missing Crisis Link (wellness) | ${issues.missingCrisisLink.length} |\n`;
-  report += `| Missing Pause/Stop (wellness) | ${issues.missingPauseStop.length} |\n`;
+  report += `| Missing Consent Language (wellness) | ${issues.missingConsentLanguage.length} |\n`;
   report += `| Missing SafetyFooter (wellness) | ${issues.missingSafetyFooter.length} |\n`;
   report += `| **Total Issues** | **${totalIssues}** |\n\n`;
+
+  report += `## Detection Criteria\n\n`;
+  report += `Wellness pages are detected by:\n`;
+  report += `- Location in \`/pages/\` directory\n`;
+  report += `- Filename patterns: *Page.jsx, *Tool.jsx, *Guide.jsx, *Practice.jsx\n`;
+  report += `- Content keywords: wellness, healing, trauma, self-care, mindfulness, etc.\n`;
+  report += `- Route patterns matching known wellness routes\n\n`;
+
+  report += `Consent language must include:\n`;
+  report += `- "Pause or stop anytime" OR\n`;
+  report += `- "Opt-out" OR\n`;
+  report += `- "Only do what feels safe"\n\n`;
 
   if (issues.todos.length > 0) {
     report += `## TODOs & FIXMEs\n\n`;
@@ -199,9 +264,10 @@ function generateReport() {
     report += `\n`;
   }
 
-  if (issues.missingPauseStop.length > 0) {
-    report += `## Wellness Pages Missing Pause/Stop Language\n\n`;
-    issues.missingPauseStop.forEach(({ file }) => {
+  if (issues.missingConsentLanguage.length > 0) {
+    report += `## Wellness Pages Missing Consent Language\n\n`;
+    report += `Required: "Pause or stop anytime", "opt-out", or "only do what feels safe"\n\n`;
+    issues.missingConsentLanguage.forEach(({ file }) => {
       report += `- ${file}\n`;
     });
     report += `\n`;
@@ -255,7 +321,7 @@ function main() {
   console.log(`   Empty Components: ${issues.emptyComponents.length}`);
   console.log(`   Missing BenefitsBlock: ${issues.missingBenefitsBlock.length}`);
   console.log(`   Missing Crisis Link: ${issues.missingCrisisLink.length}`);
-  console.log(`   Missing Pause/Stop: ${issues.missingPauseStop.length}`);
+  console.log(`   Missing Consent Language: ${issues.missingConsentLanguage.length}`);
   console.log(`   Missing SafetyFooter: ${issues.missingSafetyFooter.length}`);
   console.log(`\n✅ Report saved to: ${reportPath}\n`);
 }
