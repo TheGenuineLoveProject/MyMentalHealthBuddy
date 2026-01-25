@@ -49,7 +49,7 @@ export default function InnerWorkHubPage() {
     <WellnessPageShell
       title="Inner Work Hub"
       subtitle="Tools for deep self-discovery"
-      benefits={pickBenefits(["Clarity", "Safe space", "Your pace", "Dignity"], 4)}
+      benefits={pickBenefits(["clarity", "calm", "meaning", "selfRespect"], 4)}
       clarity={{
         what: "Resources for deep inner work and self-discovery.",
         why: "Understanding yourself is the foundation of genuine change.",

@@ -49,7 +49,7 @@ export default function HealingJourneyHubPage() {
     <WellnessPageShell
       title="Healing Journey Hub"
       subtitle="Resources for your path to wholeness"
-      benefits={pickBenefits(["Safe space", "Your pace", "Compassion", "Agency"], 4)}
+      benefits={pickBenefits(["calm", "meaning", "connection", "agency"], 4)}
       clarity={{
         what: "A collection of resources supporting your unique healing journey.",
         why: "Healing is not linear. Having the right tools at the right time matters.",

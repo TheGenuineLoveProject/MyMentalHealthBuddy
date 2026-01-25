@@ -49,7 +49,7 @@ export default function MotivationHubPage() {
     <WellnessPageShell
       title="Motivation Hub"
       subtitle="Fuel your inner drive"
-      benefits={pickBenefits(["Agency", "Your pace", "Clarity", "No pressure"], 4)}
+      benefits={pickBenefits(["agency", "meaning", "clarity", "agency"], 4)}
       clarity={{
         what: "Resources for finding and maintaining motivation.",
         why: "Motivation fluctuates. Having tools helps ride the waves.",

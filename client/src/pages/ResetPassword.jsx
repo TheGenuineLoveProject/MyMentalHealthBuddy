@@ -79,7 +79,7 @@ export default function ResetPassword() {
   <WellnessPageShell
     title="ResetPassword"
     subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
       why: "To support clarity, values alignment, and gentle next steps.",
@@ -134,7 +134,7 @@ export default function ResetPassword() {
       <WellnessPageShell
         title="Password Reset Complete"
         subtitle="Your password has been successfully reset"
-        benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+        benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
         clarity={{
           what: "Password reset confirmation.",
           why: "To confirm your password was successfully changed.",
@@ -187,7 +187,7 @@ export default function ResetPassword() {
     <WellnessPageShell
       title="Reset Password"
       subtitle="Create a new secure password"
-      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "A secure password reset form.",
         why: "To help you regain access to your account safely.",

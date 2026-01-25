@@ -145,7 +145,7 @@ export default function MovementSnacksPage() {
     <WellnessPageShell
       title="Movement Snacks"
       subtitle="Brief, gentle movements to reconnect with your body"
-      benefits={pickBenefits(["Agency","Calm","Body awareness"], 3)}
+      benefits={pickBenefits(["agency","calm","calm"], 3)}
       clarity={{
         what: "Quick movement exercises for body awareness.",
         why: "To reconnect with your body and release tension.",

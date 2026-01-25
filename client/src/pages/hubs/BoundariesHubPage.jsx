@@ -48,7 +48,7 @@ export default function BoundariesHubPage() {
     <WellnessPageShell
       title="Boundaries Hub"
       subtitle="Tools for setting healthy limits and protecting your energy"
-      benefits={pickBenefits(["Self-respect", "Agency", "Dignity", "Clarity"], 4)}
+      benefits={pickBenefits(["selfRespect", "agency", "selfRespect", "clarity"], 4)}
       clarity={{
         what: "A collection of boundary-focused wellness tools",
         why: "To support healthy relationship patterns through gentle practices",

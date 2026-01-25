@@ -49,7 +49,7 @@ export default function NervousSystemHubPage() {
     <WellnessPageShell
       title="Nervous System Hub"
       subtitle="Regulate and restore balance"
-      benefits={pickBenefits(["Calm", "Agency", "Safe space", "Your pace"], 4)}
+      benefits={pickBenefits(["calm", "agency", "calm", "meaning"], 4)}
       clarity={{
         what: "Resources for understanding and regulating your nervous system.",
         why: "A regulated nervous system is the foundation of wellbeing.",

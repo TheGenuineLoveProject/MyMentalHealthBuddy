@@ -49,7 +49,7 @@ export default function SelfCareHubPage() {
     <WellnessPageShell
       title="Self-Care Hub"
       subtitle="Tools for prioritizing your wellbeing"
-      benefits={pickBenefits(["Self-respect", "Your pace", "No pressure", "Agency"], 4)}
+      benefits={pickBenefits(["selfRespect", "meaning", "agency", "agency"], 4)}
       clarity={{
         what: "Resources for building sustainable self-care practices.",
         why: "Self-care is not selfish. It's the foundation for everything else.",

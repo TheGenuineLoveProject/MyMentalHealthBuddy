@@ -49,7 +49,7 @@ export default function BreathworkHubPage() {
     <WellnessPageShell
       title="Breathwork Hub"
       subtitle="Harness the power of your breath"
-      benefits={pickBenefits(["Calm", "Agency", "Your pace", "Clarity"], 4)}
+      benefits={pickBenefits(["calm", "agency", "meaning", "clarity"], 4)}
       clarity={{
         what: "A collection of breathing techniques and practices.",
         why: "Your breath is always with you - a portable tool for regulation.",

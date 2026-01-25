@@ -49,7 +49,7 @@ export default function ConfidenceHubPage() {
     <WellnessPageShell
       title="Confidence Hub"
       subtitle="Build authentic self-belief"
-      benefits={pickBenefits(["Agency", "Dignity", "Self-respect", "Your pace"], 4)}
+      benefits={pickBenefits(["agency", "selfRespect", "selfRespect", "meaning"], 4)}
       clarity={{
         what: "Resources for developing genuine self-confidence.",
         why: "True confidence comes from knowing your worth, not proving it.",

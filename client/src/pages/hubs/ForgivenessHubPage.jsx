@@ -49,7 +49,7 @@ export default function ForgivenessHubPage() {
     <WellnessPageShell
       title="Forgiveness Hub"
       subtitle="Release what no longer serves you"
-      benefits={pickBenefits(["Calm", "Agency", "Your pace", "Compassion"], 4)}
+      benefits={pickBenefits(["calm", "agency", "meaning", "connection"], 4)}
       clarity={{
         what: "Resources for exploring forgiveness of self and others.",
         why: "Forgiveness is not about them. It's about freeing yourself.",

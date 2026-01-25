@@ -49,7 +49,7 @@ export default function AnxietyHubPage() {
     <WellnessPageShell
       title="Anxiety Relief Hub"
       subtitle="Gentle tools for calming your nervous system"
-      benefits={pickBenefits(["Calm", "Safe space", "Your pace", "No judgment"], 4)}
+      benefits={pickBenefits(["calm", "calm", "meaning", "privacy"], 4)}
       clarity={{
         what: "A collection of educational tools designed to help you understand and work with anxiety.",
         why: "Anxiety is a natural response. Learning to work with it gently can bring more ease.",

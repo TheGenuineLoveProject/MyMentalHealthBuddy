@@ -49,7 +49,7 @@ export default function JournalingHubPage() {
     <WellnessPageShell
       title="Journaling Hub"
       subtitle="Write your way to clarity"
-      benefits={pickBenefits(["Clarity", "Safe space", "Your pace", "Agency"], 4)}
+      benefits={pickBenefits(["clarity", "calm", "meaning", "agency"], 4)}
       clarity={{
         what: "Tools and prompts for written reflection and self-discovery.",
         why: "Writing helps us process emotions and discover insights.",

@@ -37,7 +37,7 @@ const OARS_STEPS = [
   {
     id: "reflect",
     letter: "R",
-    title: "Reflection",
+    title: "clarity",
     description: "Reflect back what you're hearing from yourself with empathy.",
     example: "It sounds like part of you really wants this, even though it feels hard.",
     icon: RefreshCw
@@ -75,7 +75,7 @@ export default function BehaviorChangePage() {
     <WellnessPageShell
       title="Behavior Change"
       subtitle="Supportive coaching-style reflections for personal growth."
-      benefits={pickBenefits(["Agency", "Clarity", "Self-respect", "Your pace", "Evidence-based"], 5)}
+      benefits={pickBenefits(["agency", "clarity", "selfRespect", "meaning", "clarity"], 5)}
       clarity={{
         what: "A self-guided motivational interviewing experience.",
         why: "To explore your readiness for change with compassion and clarity.",

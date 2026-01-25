@@ -528,7 +528,7 @@ export default function ContentAdminDashboard() {
     <WellnessPageShell
       title="Content Admin"
       subtitle="Manage your content hub"
-      benefits={pickBenefits(["Agency","Clarity","Control"], 3)}
+      benefits={pickBenefits(["agency","clarity","agency"], 3)}
       clarity={{
         what: "Content management dashboard.",
         why: "To create and manage platform content.",

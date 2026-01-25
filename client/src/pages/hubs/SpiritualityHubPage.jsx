@@ -49,7 +49,7 @@ export default function SpiritualityHubPage() {
     <WellnessPageShell
       title="Spirituality Hub"
       subtitle="Connect with something greater"
-      benefits={pickBenefits(["Your pace", "Agency", "No judgment", "Safe space"], 4)}
+      benefits={pickBenefits(["meaning", "agency", "privacy", "calm"], 4)}
       clarity={{
         what: "Resources for spiritual exploration without religious attachment.",
         why: "Spirituality is about connection—to self, others, and meaning.",

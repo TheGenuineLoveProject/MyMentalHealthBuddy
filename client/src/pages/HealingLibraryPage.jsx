@@ -152,7 +152,7 @@ export default function HealingLibraryPage() {
   <WellnessPageShell
     title="HealingLibraryPage"
     subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
       why: "To support clarity, values alignment, and gentle next steps.",

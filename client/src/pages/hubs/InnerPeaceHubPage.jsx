@@ -49,7 +49,7 @@ export default function InnerPeaceHubPage() {
     <WellnessPageShell
       title="Inner Peace Hub"
       subtitle="Tools for cultivating serenity"
-      benefits={pickBenefits(["Calm", "Safe space", "Your pace", "No pressure"], 4)}
+      benefits={pickBenefits(["calm", "calm", "meaning", "agency"], 4)}
       clarity={{
         what: "Resources for finding and maintaining inner peace.",
         why: "Peace is not the absence of challenges, but a way of being with them.",

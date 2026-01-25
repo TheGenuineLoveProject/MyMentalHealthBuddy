@@ -49,7 +49,7 @@ export default function SelfDiscoveryHubPage() {
     <WellnessPageShell
       title="Self-Discovery Hub"
       subtitle="Explore who you truly are"
-      benefits={pickBenefits(["Agency", "Your pace", "No judgment", "Clarity"], 4)}
+      benefits={pickBenefits(["agency", "meaning", "privacy", "clarity"], 4)}
       clarity={{
         what: "Resources for exploring your identity and authentic self.",
         why: "You can't be yourself if you don't know yourself.",

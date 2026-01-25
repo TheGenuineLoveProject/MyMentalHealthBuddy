@@ -49,7 +49,7 @@ export default function GratitudeHubPage() {
     <WellnessPageShell
       title="Gratitude Hub"
       subtitle="Cultivate appreciation and thankfulness"
-      benefits={pickBenefits(["Clarity", "Your pace", "Safe space", "Agency"], 4)}
+      benefits={pickBenefits(["clarity", "meaning", "calm", "agency"], 4)}
       clarity={{
         what: "Tools and practices for developing a gratitude mindset.",
         why: "Gratitude rewires the brain toward noticing what's good.",

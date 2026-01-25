@@ -48,7 +48,7 @@ export default function SleepHubPage() {
     <WellnessPageShell
       title="Sleep & Rest Hub"
       subtitle="Gentle tools for peaceful nights and restful sleep"
-      benefits={pickBenefits(["Calm", "Safe space", "Your pace", "Clarity"], 4)}
+      benefits={pickBenefits(["calm", "calm", "meaning", "clarity"], 4)}
       clarity={{
         what: "A collection of sleep-focused wellness tools",
         why: "To support healthy sleep habits through gentle practices",

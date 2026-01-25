@@ -44,7 +44,7 @@ export default function Dashboard() {
   <WellnessPageShell
     title="Dashboard"
     subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
       why: "To support clarity, values alignment, and gentle next steps.",
@@ -83,7 +83,7 @@ export default function Dashboard() {
       <WellnessPageShell
         title="Dashboard Error"
         subtitle="Something went wrong"
-        benefits={pickBenefits(["Agency","Calm","Clarity"], 3)}
+        benefits={pickBenefits(["agency","calm","clarity"], 3)}
         clarity={{
           what: "Error loading your dashboard.",
           why: "Sometimes things need a moment.",

@@ -49,7 +49,7 @@ export default function LifePurposeHubPage() {
     <WellnessPageShell
       title="Life Purpose Hub"
       subtitle="Discover meaning and direction"
-      benefits={pickBenefits(["Clarity", "Agency", "Dignity", "Your pace"], 4)}
+      benefits={pickBenefits(["clarity", "agency", "selfRespect", "meaning"], 4)}
       clarity={{
         what: "Resources for exploring purpose, values, and meaning.",
         why: "Living aligned with your values brings deep satisfaction.",

@@ -49,7 +49,7 @@ export default function CreativityHubPage() {
     <WellnessPageShell
       title="Creativity Hub"
       subtitle="Unlock your creative expression"
-      benefits={pickBenefits(["Agency", "Your pace", "No judgment", "Safe space"], 4)}
+      benefits={pickBenefits(["agency", "meaning", "privacy", "calm"], 4)}
       clarity={{
         what: "Resources for tapping into your creative potential.",
         why: "Creativity is healing. It's how we process and express our inner world.",

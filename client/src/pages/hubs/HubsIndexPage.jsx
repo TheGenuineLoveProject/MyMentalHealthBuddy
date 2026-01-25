@@ -35,7 +35,7 @@ const ALL_HUBS = [
     icon: Heart
   },
   {
-    title: "Resilience",
+    title: "resilience",
     description: "Build emotional strength",
     href: "/hubs/resilience",
     icon: Zap
@@ -268,7 +268,7 @@ export default function HubsIndexPage() {
     <WellnessPageShell
       title="Wellness Topic Hubs"
       subtitle="Find the right tools for your journey"
-      benefits={pickBenefits(["Safe space", "Your pace", "No judgment", "Clarity"], 4)}
+      benefits={pickBenefits(["calm", "meaning", "privacy", "clarity"], 4)}
       clarity={{
         what: "A directory of curated wellness resources organized by topic.",
         why: "Different challenges call for different tools. Find what resonates.",

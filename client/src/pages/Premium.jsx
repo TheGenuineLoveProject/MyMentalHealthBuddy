@@ -148,7 +148,7 @@ export default function Premium() {
     <WellnessPageShell
       title="Premium Features"
       subtitle="Unlock your full wellness potential"
-      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "Premium wellness tools and features.",
         why: "To support deeper healing and growth.",

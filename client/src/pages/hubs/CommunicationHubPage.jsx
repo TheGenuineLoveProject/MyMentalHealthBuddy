@@ -49,7 +49,7 @@ export default function CommunicationHubPage() {
     <WellnessPageShell
       title="Communication Hub"
       subtitle="Express yourself with clarity and care"
-      benefits={pickBenefits(["Clarity", "Agency", "Self-respect", "Your pace"], 4)}
+      benefits={pickBenefits(["clarity", "agency", "selfRespect", "meaning"], 4)}
       clarity={{
         what: "Resources for developing healthier communication patterns.",
         why: "Clear communication builds trust and reduces misunderstanding.",

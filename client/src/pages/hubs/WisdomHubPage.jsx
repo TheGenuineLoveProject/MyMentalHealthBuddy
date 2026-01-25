@@ -49,7 +49,7 @@ export default function WisdomHubPage() {
     <WellnessPageShell
       title="Wisdom Hub"
       subtitle="Timeless insights for modern living"
-      benefits={pickBenefits(["Clarity", "Your pace", "Agency", "No pressure"], 4)}
+      benefits={pickBenefits(["clarity", "meaning", "agency", "agency"], 4)}
       clarity={{
         what: "Resources for accessing and integrating wisdom.",
         why: "Wisdom is knowledge applied with compassion.",

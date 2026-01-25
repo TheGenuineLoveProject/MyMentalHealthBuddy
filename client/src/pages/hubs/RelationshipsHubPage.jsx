@@ -49,7 +49,7 @@ export default function RelationshipsHubPage() {
     <WellnessPageShell
       title="Healthy Relationships Hub"
       subtitle="Tools for building authentic connections"
-      benefits={pickBenefits(["Clarity", "Agency", "Self-respect", "Your pace"], 4)}
+      benefits={pickBenefits(["clarity", "agency", "selfRespect", "meaning"], 4)}
       clarity={{
         what: "Educational resources for understanding and improving your relationships.",
         why: "Healthy relationships start with understanding yourself and others.",

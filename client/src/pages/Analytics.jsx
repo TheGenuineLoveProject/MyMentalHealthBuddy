@@ -87,7 +87,7 @@ export default function Analytics() {
     <WellnessPageShell
       title="Analytics"
       subtitle="Track your wellness journey"
-      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "Wellness analytics and insights.",
         why: "To help you notice patterns and growth.",

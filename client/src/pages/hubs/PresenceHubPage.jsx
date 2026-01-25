@@ -49,7 +49,7 @@ export default function PresenceHubPage() {
     <WellnessPageShell
       title="Presence Hub"
       subtitle="Be here, now"
-      benefits={pickBenefits(["Calm", "Clarity", "Your pace", "No pressure"], 4)}
+      benefits={pickBenefits(["calm", "clarity", "meaning", "agency"], 4)}
       clarity={{
         what: "Resources for cultivating present moment awareness.",
         why: "The present moment is the only moment that actually exists.",

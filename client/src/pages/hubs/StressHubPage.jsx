@@ -49,7 +49,7 @@ export default function StressHubPage() {
     <WellnessPageShell
       title="Stress Relief Hub"
       subtitle="Tools for calming and restoring balance"
-      benefits={pickBenefits(["Calm", "Agency", "Your pace", "No pressure"], 4)}
+      benefits={pickBenefits(["calm", "agency", "meaning", "agency"], 4)}
       clarity={{
         what: "Resources for understanding and managing stress responses.",
         why: "Stress is a signal, not a failure. Learning to work with it brings relief.",

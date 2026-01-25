@@ -110,7 +110,7 @@ export default function ToolsPage() {
   <WellnessPageShell
     title="ToolsPage"
     subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
       why: "To support clarity, values alignment, and gentle next steps.",
@@ -171,7 +171,7 @@ export default function ToolsPage() {
     <WellnessPageShell
       title="Reflection Tools"
       subtitle="A gentle toolkit for self-discovery"
-      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "Educational reflection tools you control.",
         why: "To support self-discovery and gentle growth.",

@@ -49,7 +49,7 @@ export default function MindfulnessHubPage() {
     <WellnessPageShell
       title="Mindfulness Hub"
       subtitle="Tools for present-moment awareness"
-      benefits={pickBenefits(["Calm", "Clarity", "Your pace", "Safe space"], 4)}
+      benefits={pickBenefits(["calm", "clarity", "meaning", "calm"], 4)}
       clarity={{
         what: "Resources for developing awareness of the present moment.",
         why: "Being present can reduce stress and increase appreciation for life.",

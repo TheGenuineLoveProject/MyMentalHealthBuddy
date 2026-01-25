@@ -49,7 +49,7 @@ export default function SelfCompassionHubPage() {
     <WellnessPageShell
       title="Self-Compassion Hub"
       subtitle="Tools for cultivating inner kindness"
-      benefits={pickBenefits(["Compassion", "Self-respect", "No judgment", "Your pace"], 4)}
+      benefits={pickBenefits(["connection", "selfRespect", "privacy", "meaning"], 4)}
       clarity={{
         what: "Resources for developing a kinder relationship with yourself.",
         why: "Self-compassion is the foundation of genuine healing and growth.",

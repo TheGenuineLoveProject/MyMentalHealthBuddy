@@ -48,7 +48,7 @@ export default function SelfWorthHubPage() {
     <WellnessPageShell
       title="Self-Worth Hub"
       subtitle="Gentle tools for building self-compassion and inherent value"
-      benefits={pickBenefits(["Self-respect", "Dignity", "Clarity", "Safe space"], 4)}
+      benefits={pickBenefits(["selfRespect", "selfRespect", "clarity", "calm"], 4)}
       clarity={{
         what: "A collection of self-worth focused wellness tools",
         why: "To support healthy self-image through gentle practices",

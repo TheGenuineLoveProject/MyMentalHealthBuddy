@@ -49,7 +49,7 @@ export default function TraumaHealingHubPage() {
     <WellnessPageShell
       title="Trauma Healing Hub"
       subtitle="Gentle tools for your healing journey"
-      benefits={pickBenefits(["Safe space", "Your pace", "No pressure", "Compassion"], 4)}
+      benefits={pickBenefits(["calm", "meaning", "agency", "connection"], 4)}
       clarity={{
         what: "Trauma-informed resources designed with safety as the foundation.",
         why: "Healing happens in safety, at your own pace, in your own way.",

@@ -227,7 +227,7 @@ export default function DashboardOverview() {
     <WellnessPageShell
       title="Dashboard Overview"
       subtitle="Your personal wellness hub"
-      benefits={pickBenefits(["Agency","Clarity","Progress"], 3)}
+      benefits={pickBenefits(["agency","clarity","growth"], 3)}
       clarity={{
         what: "Your personal wellness dashboard.",
         why: "To track your healing journey and celebrate progress.",

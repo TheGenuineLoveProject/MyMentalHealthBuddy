@@ -49,7 +49,7 @@ export default function GriefHubPage() {
     <WellnessPageShell
       title="Grief Support Hub"
       subtitle="Gentle tools for navigating loss"
-      benefits={pickBenefits(["Safe space", "Your pace", "No judgment", "Compassion"], 4)}
+      benefits={pickBenefits(["calm", "meaning", "privacy", "connection"], 4)}
       clarity={{
         what: "A collection of gentle resources for those experiencing grief or loss.",
         why: "Grief is a natural response to loss. There is no wrong way to grieve.",

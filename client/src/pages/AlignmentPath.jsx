@@ -239,7 +239,7 @@ export default function AlignmentPath() {
     <WellnessPageShell
       title="12-Phase Self-Alignment Path"
       subtitle="A gentle, self-paced journey of personal growth"
-      benefits={pickBenefits(["Agency","Your pace","Clarity"], 3)}
+      benefits={pickBenefits(["agency","meaning","clarity"], 3)}
       clarity={{
         what: "A 12-phase personal growth framework.",
         why: "To support self-alignment across mind, body, values, and action.",

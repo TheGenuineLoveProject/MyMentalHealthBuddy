@@ -49,7 +49,7 @@ export default function HabitsHubPage() {
     <WellnessPageShell
       title="Healthy Habits Hub"
       subtitle="Build sustainable practices"
-      benefits={pickBenefits(["Agency", "Your pace", "Clarity", "No pressure"], 4)}
+      benefits={pickBenefits(["agency", "meaning", "clarity", "agency"], 4)}
       clarity={{
         what: "Resources for building and maintaining healthy habits.",
         why: "Small consistent actions create lasting change.",

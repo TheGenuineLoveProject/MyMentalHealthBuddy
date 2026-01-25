@@ -70,7 +70,7 @@ export default function BlogEditor() {
   <WellnessPageShell
     title="BlogEditor"
     subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
       why: "To support clarity, values alignment, and gentle next steps.",
@@ -111,7 +111,7 @@ export default function BlogEditor() {
     <WellnessPageShell
       title="Write a Post"
       subtitle="Share your thoughts and insights"
-      benefits={pickBenefits(["Agency","Calm","Clarity","Self-respect","Your pace"], 5)}
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "A blog writing tool for sharing wellness insights.",
         why: "To contribute to the community with your experiences.",

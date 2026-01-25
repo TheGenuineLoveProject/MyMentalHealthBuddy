@@ -195,7 +195,7 @@ export default function WisdomPracticesPage() {
     <WellnessPageShell
       title="Wisdom Practices"
       subtitle="Daily contemplation and gratitude practices"
-      benefits={pickBenefits(["Agency","Calm","Reflection"], 3)}
+      benefits={pickBenefits(["agency","calm","clarity"], 3)}
       clarity={{
         what: "Contemplation, gratitude, and meditation practices.",
         why: "To cultivate wisdom and inner peace.",

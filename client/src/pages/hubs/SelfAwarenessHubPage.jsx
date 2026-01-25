@@ -49,7 +49,7 @@ export default function SelfAwarenessHubPage() {
     <WellnessPageShell
       title="Self-Awareness Hub"
       subtitle="Know yourself more deeply"
-      benefits={pickBenefits(["Clarity", "Agency", "Your pace", "No judgment"], 4)}
+      benefits={pickBenefits(["clarity", "agency", "meaning", "privacy"], 4)}
       clarity={{
         what: "Resources for developing self-understanding and awareness.",
         why: "The more you understand yourself, the better you can navigate life.",

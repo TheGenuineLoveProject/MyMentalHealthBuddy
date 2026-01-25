@@ -48,7 +48,7 @@ export default function ResilienceHubPage() {
     <WellnessPageShell
       title="Resilience Hub"
       subtitle="Tools for building emotional strength and bouncing back"
-      benefits={pickBenefits(["Calm", "Agency", "Clarity", "Your pace"], 4)}
+      benefits={pickBenefits(["calm", "agency", "clarity", "meaning"], 4)}
       clarity={{
         what: "A collection of resilience-focused wellness tools",
         why: "To support emotional regulation through gentle practices",
@@ -89,7 +89,7 @@ export default function ResilienceHubPage() {
           quote="Resilience isn't about never falling. It's about getting up one more time than you fall."
           microTool="Name one challenge you've overcome before. Remember: you've done hard things."
           action="Take 3 deep breaths right now. You're building resilience in this moment."
-          category="Resilience"
+          category="resilience"
           className="mb-8"
         />
 

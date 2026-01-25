@@ -49,7 +49,7 @@ export default function ThoughtworkHubPage() {
     <WellnessPageShell
       title="Thoughtwork Hub"
       subtitle="Tools for working with your mind"
-      benefits={pickBenefits(["Clarity", "Agency", "Your pace", "No judgment"], 4)}
+      benefits={pickBenefits(["clarity", "agency", "meaning", "privacy"], 4)}
       clarity={{
         what: "Resources for understanding and working with your thought patterns.",
         why: "Thoughts shape experience. Shifting thoughts shifts how we feel.",

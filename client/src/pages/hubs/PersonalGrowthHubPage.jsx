@@ -49,7 +49,7 @@ export default function PersonalGrowthHubPage() {
     <WellnessPageShell
       title="Personal Growth Hub"
       subtitle="Tools for continuous self-development"
-      benefits={pickBenefits(["Agency", "Clarity", "Your pace", "Dignity"], 4)}
+      benefits={pickBenefits(["agency", "clarity", "meaning", "selfRespect"], 4)}
       clarity={{
         what: "Resources for ongoing personal development and growth.",
         why: "Growth happens gradually, through small consistent steps.",

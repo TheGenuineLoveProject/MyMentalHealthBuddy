@@ -49,7 +49,7 @@ export default function CopingSkillsHubPage() {
     <WellnessPageShell
       title="Coping Skills Hub"
       subtitle="Healthy strategies for difficult moments"
-      benefits={pickBenefits(["Calm", "Agency", "Clarity", "Safe space"], 4)}
+      benefits={pickBenefits(["calm", "agency", "clarity", "calm"], 4)}
       clarity={{
         what: "A toolkit of healthy coping strategies for challenging times.",
         why: "Having the right tools when you need them makes all the difference.",

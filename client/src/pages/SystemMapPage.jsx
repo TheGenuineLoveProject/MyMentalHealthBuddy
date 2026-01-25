@@ -211,7 +211,7 @@ export default function SystemMapPage() {
     <WellnessPageShell
       title="System Map"
       subtitle="Understand how life areas work together"
-      benefits={pickBenefits(["Agency","Clarity","Awareness"], 3)}
+      benefits={pickBenefits(["agency","clarity","clarity"], 3)}
       clarity={{
         what: "Interactive map of 6 life areas.",
         why: "To understand how body, mind, emotions, behavior, environment, and meaning work together.",

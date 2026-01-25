@@ -88,7 +88,7 @@ export default function Admin() {
     <WellnessPageShell
       title="Admin Command Center"
       subtitle="Platform administration and analytics"
-      benefits={pickBenefits(["Agency","Clarity","Control"], 3)}
+      benefits={pickBenefits(["agency","clarity","agency"], 3)}
       clarity={{
         what: "Admin dashboard for platform management.",
         why: "To monitor and manage the platform.",
@@ -561,7 +561,7 @@ function UsersSection({ stats }) {
 function EngagementSection({ stats }) {
   const moodGradients = [
     { emoji: "😊", label: "Happy", count: 145, gradient: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))' },
-    { emoji: "😌", label: "Calm", count: 98, gradient: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' },
+    { emoji: "😌", label: "calm", count: 98, gradient: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' },
     { emoji: "😐", label: "Neutral", count: 67, gradient: 'linear-gradient(135deg, var(--glp-charcoal), #555)' },
     { emoji: "😟", label: "Anxious", count: 34, gradient: 'linear-gradient(135deg, var(--glp-sage-deep), #3d7a7a)' },
     { emoji: "😢", label: "Sad", count: 23, gradient: 'linear-gradient(135deg, var(--glp-rose), #e9a8a3)' },

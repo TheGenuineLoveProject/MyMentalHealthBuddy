@@ -49,7 +49,7 @@ export default function EmotionalIntelligenceHubPage() {
     <WellnessPageShell
       title="Emotional Intelligence Hub"
       subtitle="Tools for understanding and navigating emotions"
-      benefits={pickBenefits(["Clarity", "Agency", "Self-respect", "Your pace"], 4)}
+      benefits={pickBenefits(["clarity", "agency", "selfRespect", "meaning"], 4)}
       clarity={{
         what: "Resources for developing deeper emotional awareness and skill.",
         why: "Understanding your emotions is the foundation of wise action.",

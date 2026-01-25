@@ -49,7 +49,7 @@ export default function FocusHubPage() {
     <WellnessPageShell
       title="Focus Hub"
       subtitle="Sharpen your attention"
-      benefits={pickBenefits(["Clarity", "Agency", "Your pace", "No pressure"], 4)}
+      benefits={pickBenefits(["clarity", "agency", "meaning", "agency"], 4)}
       clarity={{
         what: "Resources for developing and maintaining focus.",
         why: "Attention is a muscle. With practice, it grows stronger.",

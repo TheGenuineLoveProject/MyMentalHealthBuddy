@@ -138,7 +138,7 @@ export default function TwelveStepsPage() {
     <WellnessPageShell
       title="12 Practices for Self-Leadership"
       subtitle="A gentle path of integrity, awareness, and personal transformation."
-      benefits={pickBenefits(["Agency", "Clarity", "Self-respect", "Your pace", "Gentle growth"], 5)}
+      benefits={pickBenefits(["agency", "clarity", "selfRespect", "meaning", "growth"], 5)}
       clarity={{
         what: "12 practices for personal integrity and self-leadership.",
         why: "To cultivate self-awareness, build values-aligned habits, and live with intention.",

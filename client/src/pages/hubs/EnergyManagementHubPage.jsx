@@ -49,7 +49,7 @@ export default function EnergyManagementHubPage() {
     <WellnessPageShell
       title="Energy Management Hub"
       subtitle="Protect and restore your energy"
-      benefits={pickBenefits(["Agency", "Clarity", "Self-respect", "Your pace"], 4)}
+      benefits={pickBenefits(["agency", "clarity", "selfRespect", "meaning"], 4)}
       clarity={{
         what: "Resources for understanding and managing your personal energy.",
         why: "Your energy is finite. Learning to manage it prevents burnout.",

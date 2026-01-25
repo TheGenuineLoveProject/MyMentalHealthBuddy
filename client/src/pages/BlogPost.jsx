@@ -210,7 +210,7 @@ export default function BlogPost() {
     <WellnessPageShell
       title="Blog Post"
       subtitle="Insights and reflections from the community"
-      benefits={pickBenefits(["Agency","Calm","Clarity","Connection","Growth"], 5)}
+      benefits={pickBenefits(["agency","calm","clarity","connection","growth"], 5)}
       clarity={{
         what: "A blog post from our community.",
         why: "To share insights and perspectives.",

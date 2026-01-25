@@ -49,7 +49,7 @@ export default function BodyMindHubPage() {
     <WellnessPageShell
       title="Body-Mind Connection Hub"
       subtitle="Reconnect with your physical self"
-      benefits={pickBenefits(["Calm", "Clarity", "Safe space", "Agency"], 4)}
+      benefits={pickBenefits(["calm", "clarity", "calm", "agency"], 4)}
       clarity={{
         what: "Resources for understanding the body-mind connection.",
         why: "Your body holds wisdom. Learning to listen brings healing.",

@@ -49,7 +49,7 @@ export default function AcceptanceHubPage() {
     <WellnessPageShell
       title="Acceptance Hub"
       subtitle="Find peace with what is"
-      benefits={pickBenefits(["Calm", "Your pace", "No judgment", "Compassion"], 4)}
+      benefits={pickBenefits(["calm", "meaning", "privacy", "connection"], 4)}
       clarity={{
         what: "Resources for practicing acceptance of self and circumstances.",
         why: "Acceptance is not giving up. It's making peace so you can move forward.",
