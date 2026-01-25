@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, Heart, Baby, Sparkles, Shield, Sun, MessageCircle, Gift, Home, Star, Brain, Eye, Feather, BookOpen, Flower2, Zap } from "lucide-react";
 import { useSEO } from "../hooks/useSEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const innerChildNeeds = [
   {
@@ -283,6 +284,20 @@ export default function InnerChildPage() {
             Healing happens when you finally give that child what they always needed: safety, love, and someone who stays.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "10 core childhood needs with healing practices",
+            "Reparenting affirmations and dialogue scripts",
+            "Trauma-informed practices for each wound type"
+          ]}
+          duration="Explore at your own pace"
+          control="Pause or stop anytime—only do what feels safe"
+          disclaimer="Educational inner child healing—not therapy. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="rounded-2xl p-8 mb-12" style={{ background: 'var(--glp-gold-30)' }}>
           <h2 className="text-xl font-bold mb-6 text-center" style={{ color: 'var(--glp-sage-deep)' }}>Understanding Inner Child Work</h2>

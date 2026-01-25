@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Zap, Snowflake, Heart, Shield, Brain, Activity, ArrowRight, CheckCircle2 } from "lucide-react";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const stressResponses = [
   {
@@ -281,6 +282,20 @@ export default function StressResponseGuidePage() {
             Learn to recognize fight, flight, freeze, and fawn patterns.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "Learn fight, flight, freeze, and fawn responses",
+            "Identify body signals and emotional patterns",
+            "Evidence-based regulation techniques for each response"
+          ]}
+          duration="10–15 min to explore; ongoing practice"
+          control="Pause or stop anytime—only do what feels safe"
+          disclaimer="Educational nervous system info—not therapy. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 mb-12">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4 text-center">Nervous System States</h2>

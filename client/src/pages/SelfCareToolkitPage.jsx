@@ -6,6 +6,7 @@ import SEO from "@/components/SEO";
 import { Hero } from "@/components/ui";
 import { useReadingLevel } from "@/context/ReadingLevelContext";
 import Microcopy from "@/components/Microcopy";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const toolkitCategories = [
   {
@@ -198,6 +199,21 @@ export default function SelfCareToolkitPage() {
           <p className="text-center text-sm text-[var(--glp-ink)]/60 italic mb-8">
             <Microcopy slot="consent" seed="self-care-toolkit" as="span" />
           </p>
+          
+          <BenefitsBlock
+            benefits={[
+              "6 self-care categories for body, mind, heart, and soul",
+              "Quick self-care activities under 5 minutes",
+              "Track your daily self-care activities"
+            ]}
+            duration="5–30 min per activity"
+            control="Pause or stop anytime—only do what feels safe"
+            disclaimer="Educational wellness support—not therapy. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-8"
+          />
+
           <div className="rounded-2xl p-6 mb-12" style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}>
             <h2 className="text-lg font-semibold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>Quick Self-Care (Under 5 Minutes)</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">

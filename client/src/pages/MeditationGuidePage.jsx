@@ -4,6 +4,7 @@ import { ArrowLeft, Moon, Sun, Cloud, Leaf, Heart, Brain, Clock, Play, Pause, Vo
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const meditations = [
   {
@@ -369,6 +370,20 @@ export default function MeditationGuidePage() {
             Each practice includes step-by-step guidance to support your inner journey.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "12+ research-backed meditation practices",
+            "Step-by-step guided scripts for each meditation",
+            "Categories: relaxation, compassion, mindfulness, intention"
+          ]}
+          duration="5–20 min per practice"
+          control="Pause or stop anytime—only do what feels safe"
+          disclaimer="Educational mindfulness tools—not therapy. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="rounded-2xl p-6 mb-8" style={{ background: 'var(--glp-sage-10)', border: '1px solid var(--glp-sage-20)' }}>
           <div className="flex items-start gap-4">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 import { 
   ArrowLeft, 
   Sparkles, 
@@ -222,6 +223,20 @@ export default function SoulWellnessPage() {
               </div>
             </div>
           </header>
+
+          <BenefitsBlock
+            benefits={[
+              "Explore practices for meaning, awe, and transcendence",
+              "Gratitude, purpose, and connection exercises",
+              "Spiritual wellness without religious requirements"
+            ]}
+            duration="5–20 min per practice"
+            control="Pause or stop anytime—only do what feels safe"
+            disclaimer="Educational soul wellness—not religious guidance. If you need crisis help, visit"
+            crisisLink="/crisis"
+            variant="minimal"
+            className="mb-6"
+          />
 
           <div className="card-bordered mb-8" style={{ background: 'var(--glp-sage-10)' }}>
             <div className="flex items-start gap-4">

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Moon, Sun, Clock, Coffee, Smartphone, Wind, ThermometerSun, Bed, CheckCircle2, XCircle, Sparkles } from "lucide-react";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const sleepHygieneTips = [
   {
@@ -140,6 +141,20 @@ export default function SleepGuidePage() {
             Learn evidence-based strategies to transform your rest.
           </p>
         </div>
+
+        <BenefitsBlock
+          benefits={[
+            "Science-backed sleep hygiene tips",
+            "Wind-down activities and relaxation techniques",
+            "Sleep stage education and myth-busting"
+          ]}
+          duration="Read in 5–10 min; apply nightly"
+          control="Pause or stop anytime—start with what feels manageable"
+          disclaimer="Educational sleep wellness—not medical advice. If you need crisis help, visit"
+          crisisLink="/crisis"
+          variant="minimal"
+          className="mb-8"
+        />
 
         <div className="flex justify-center gap-2 mb-8">
           {[
