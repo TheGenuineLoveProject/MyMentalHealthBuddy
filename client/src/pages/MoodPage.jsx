@@ -8,6 +8,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "../components/BenefitsBlock";
 import ClarityCard from "../components/content/ClarityCard";
 import ExamplesAccordion from "../components/content/ExamplesAccordion";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -208,6 +209,8 @@ export default function MoodPage() {
             title="See how others use mood tracking"
             className="mb-8"
           />
+
+          <MIPromptCard context="mood" className="mb-8" />
 
           {error && (
             <div className="mb-6 p-4 rounded-xl bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 text-[var(--accent-rose)]" role="alert" data-testid="text-error">

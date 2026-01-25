@@ -106,6 +106,13 @@ export function getRandomAffirmation(): string {
   return MI_AFFIRMATIONS[Math.floor(Math.random() * MI_AFFIRMATIONS.length)];
 }
 
+export function getRandomMIPrompt(stepType: MIStep["type"]): string {
+  const step = MI_STEPS.find(s => s.type === stepType);
+  if (!step) return "What matters most to you right now?";
+  const allPrompts = [step.template, ...step.examples];
+  return allPrompts[Math.floor(Math.random() * allPrompts.length)];
+}
+
 export const SAFE_OUTCOME_LANGUAGE = {
   mayHelp: "This may help you",
   oftenSupports: "Many people find this supports",

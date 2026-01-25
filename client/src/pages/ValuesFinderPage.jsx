@@ -10,6 +10,7 @@ import SafetyFooter from "@/components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { Heart, Star, Compass, Target, CheckCircle2, Plus, Trash2, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
@@ -161,6 +162,8 @@ export default function ValuesFinderPage() {
             title="See how others use values exploration"
             className="mb-8"
           />
+
+          <MIPromptCard context="values" className="mb-8" />
 
           <div className="bg-[var(--surface-elevated)] p-6 rounded-2xl border border-[var(--border-subtle)] mb-8" data-testid="section-intro">
             <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-3" data-testid="heading-intro">
