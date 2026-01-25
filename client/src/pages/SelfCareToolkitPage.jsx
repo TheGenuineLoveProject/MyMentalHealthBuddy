@@ -7,6 +7,47 @@ import { Hero } from "@/components/ui";
 import { useReadingLevel } from "@/context/ReadingLevelContext";
 import Microcopy from "@/components/Microcopy";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const SELFCARE_CLARITY = {
+  what: "Holistic self-care activities for your whole being—body, mind, heart, and soul—organized into six wellness dimensions.",
+  who: "Anyone wanting to build sustainable self-care routines that support their unique needs.",
+  when: "Daily for small acts of kindness, or when you notice you've been neglecting your own needs.",
+  why: "Self-care isn't selfish—it's essential. You deserve the same care you give to others.",
+  howSteps: [
+    "Start with Quick Self-Care if you only have a few minutes",
+    "Choose a category that calls to you today",
+    "Try one activity and check it off when complete",
+    "Notice how small acts of self-care affect your wellbeing"
+  ],
+  whereLinkText: "Explore breathing exercises",
+  whereHref: "/breathing-exercises"
+};
+
+const SELFCARE_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting with one small act",
+    situation: "You feel overwhelmed and don't know where to start with self-care.",
+    action: "Choose one Quick Self-Care activity like taking 5 deep breaths or drinking a glass of water.",
+    result: "You realize self-care doesn't have to be complicated—even 1 minute can make a difference."
+  },
+  {
+    level: "intermediate",
+    title: "Building a balanced routine",
+    situation: "You tend to focus on one type of self-care (like exercise) while neglecting others.",
+    action: "Choose one activity from a category you usually skip—perhaps Emotional Care or Spiritual Care.",
+    result: "You discover new ways to care for yourself and feel more balanced overall."
+  },
+  {
+    level: "advanced",
+    title: "Creating a sustainable practice",
+    situation: "You want self-care to become a natural part of your daily life.",
+    action: "Each day, intentionally choose activities from at least 2-3 different categories. Track what you complete.",
+    result: "Over time, self-care becomes automatic rather than something you have to remember to do."
+  }
+];
 
 const toolkitCategories = [
   {
@@ -211,6 +252,14 @@ export default function SelfCareToolkitPage() {
             disclaimer="Educational wellness support—not therapy. If you need crisis help, visit"
             crisisLink="/crisis"
             variant="minimal"
+            className="mb-8"
+          />
+
+          <ClarityCard {...SELFCARE_CLARITY} variant="compact" className="mb-6" />
+
+          <ExamplesAccordion 
+            examples={SELFCARE_EXAMPLES} 
+            title="See how others approach self-care"
             className="mb-8"
           />
 

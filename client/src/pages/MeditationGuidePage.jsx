@@ -5,6 +5,47 @@ import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
+
+const MEDITATION_CLARITY = {
+  what: "Research-backed guided meditations that literally change your brain structure through practices like body scans, loving-kindness, and mindfulness.",
+  who: "Anyone seeking calm, clarity, self-compassion, or a deeper connection with themselves.",
+  when: "Morning intention-setting, evening wind-down, during stress, or as a daily practice for long-term brain changes.",
+  why: "Just 8 weeks of regular practice increases prefrontal cortex density (self-regulation) while reducing amygdala volume (fear response).",
+  howSteps: [
+    "Choose a meditation that matches your current need or time of day",
+    "Find a comfortable position where you won't be disturbed",
+    "Follow the step-by-step guidance, using Previous/Next to pace yourself",
+    "Practice regularly—consistency matters more than duration"
+  ],
+  whereLinkText: "Try breathing exercises",
+  whereHref: "/breathing-exercises"
+};
+
+const MEDITATION_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting with breath awareness",
+    situation: "You've never meditated and want to try something simple.",
+    action: "Start with Mindful Breath Awareness for just 5 minutes. When thoughts arise, gently notice them and return to the breath.",
+    result: "You complete your first meditation and understand that wandering thoughts are normal—returning is the practice."
+  },
+  {
+    level: "intermediate",
+    title: "Using meditation for emotional regulation",
+    situation: "You're feeling anxious and want to calm your nervous system.",
+    action: "Choose the Progressive Body Scan and slowly release tension from head to toe, noticing where you hold stress.",
+    result: "You feel more embodied and relaxed, with a clearer sense of how emotions show up in your body."
+  },
+  {
+    level: "advanced",
+    title: "Deepening self-compassion practice",
+    situation: "You want to work on your relationship with yourself through meditation.",
+    action: "Practice Loving-Kindness (Metta) meditation, starting with yourself before extending to others.",
+    result: "Over time, you notice less self-criticism and more natural self-compassion in difficult moments."
+  }
+];
 
 const meditations = [
   {
@@ -382,6 +423,14 @@ export default function MeditationGuidePage() {
           disclaimer="Educational mindfulness tools—not therapy. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...MEDITATION_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={MEDITATION_EXAMPLES} 
+          title="See how others use meditation"
           className="mb-8"
         />
 

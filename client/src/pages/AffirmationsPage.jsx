@@ -2,9 +2,50 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Sparkles, RefreshCw, Copy, Check, Star, Sun, Shield, Flower2, Brain, Zap, Compass, BookOpen, Moon, Target, Users } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+
+const AFFIRMATIONS_CLARITY = {
+  what: "Evidence-based affirmations designed to rewire neural pathways toward self-love, healing, resilience, and nervous system regulation.",
+  who: "Anyone working to shift their inner dialogue, heal from past wounds, or build self-compassion.",
+  when: "During morning routines, before sleep, after meditation, or when you notice critical self-talk.",
+  why: "Repeated thoughts strengthen neural pathways. Affirmations deliberately create new, supportive patterns in your brain.",
+  howSteps: [
+    "Choose a category that resonates with what you need today",
+    "Read the affirmation slowly, letting the words land",
+    "Speak it aloud if possible—this engages more brain regions",
+    "Notice any resistance with curiosity, not judgment"
+  ],
+  whereLinkText: "Explore inner child healing",
+  whereHref: "/inner-child"
+};
+
+const AFFIRMATIONS_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting with affirmations that feel true",
+    situation: "You want to try affirmations but some feel too far from how you currently feel.",
+    action: "Start with 'I am learning to believe that...' versions, like 'I am learning to believe I am worthy of love.'",
+    result: "The affirmation feels more accessible, and you can practice without triggering cynicism."
+  },
+  {
+    level: "intermediate",
+    title: "Using affirmations during difficult moments",
+    situation: "Your inner critic is loud after making a mistake.",
+    action: "Find a self-compassion affirmation like 'I am worthy of love exactly as I am' and speak it aloud three times with your hand on your heart.",
+    result: "The critical voice softens as you interrupt the negative thought pattern with deliberate kindness."
+  },
+  {
+    level: "advanced",
+    title: "Building a daily affirmation practice",
+    situation: "You want to make affirmations part of your healing routine.",
+    action: "Each morning, read today's affirmation in the mirror, making eye contact with yourself. Journal about any resistance that arises.",
+    result: "Over time, the affirmations begin to feel true, and you notice shifts in your self-talk throughout the day."
+  }
+];
 
 const affirmationCategories = [
   {
@@ -311,6 +352,14 @@ export default function AffirmationsPage() {
           disclaimer="Supportive affirmations—not clinical treatment. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...AFFIRMATIONS_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={AFFIRMATIONS_EXAMPLES} 
+          title="See how others use affirmations"
           className="mb-8"
         />
 

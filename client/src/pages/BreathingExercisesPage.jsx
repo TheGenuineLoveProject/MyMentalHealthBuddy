@@ -2,9 +2,50 @@ import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Wind, Play, Pause, RotateCcw, Heart, Timer, Zap, Brain, Shield, Moon, Sun, Sparkles, BookOpen } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+
+const BREATHING_CLARITY = {
+  what: "Evidence-based breathing techniques grounded in polyvagal theory for stress relief, anxiety reduction, and nervous system regulation.",
+  who: "Anyone experiencing stress, anxiety, or wanting to build daily calm practices.",
+  when: "During acute stress, before sleep, as a morning routine, or whenever you need to shift your nervous system state.",
+  why: "Your breath is the only autonomic function you can consciously control—making it your most accessible tool for nervous system regulation.",
+  howSteps: [
+    "Choose a breathing technique that matches your current need",
+    "Set the number of breath cycles (start with 3-4)",
+    "Follow the visual timer and instructions",
+    "Notice how you feel before and after the practice"
+  ],
+  whereLinkText: "Explore grounding techniques",
+  whereHref: "/grounding"
+};
+
+const BREATHING_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Starting with simple breath awareness",
+    situation: "You're new to breathwork and want to try something simple.",
+    action: "Start with Coherent Breathing (5-5 pattern) for just 3 cycles. Simply match your breath to the timer without forcing anything.",
+    result: "You complete a short practice and notice a subtle shift toward calm without feeling overwhelmed."
+  },
+  {
+    level: "intermediate",
+    title: "Using breath for acute stress",
+    situation: "You have a stressful meeting in 10 minutes and notice your heart racing.",
+    action: "Use Box Breathing (4-4-4-4) for 4-5 cycles, focusing on the holds to create predictability.",
+    result: "Your heart rate slows and you feel more centered and present for the meeting."
+  },
+  {
+    level: "advanced",
+    title: "Building a daily regulation practice",
+    situation: "You want to build long-term nervous system resilience through consistent practice.",
+    action: "Practice Coherent Breathing for 10 minutes each morning, tracking how it affects your day.",
+    result: "Over weeks, you notice your baseline stress levels decrease and you recover from challenges more quickly."
+  }
+];
 
 const exercises = [
   {
@@ -261,6 +302,14 @@ export default function BreathingExercisesPage() {
           disclaimer="Educational breathing practice—not medical advice. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...BREATHING_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={BREATHING_EXAMPLES} 
+          title="See how others use breathing exercises"
           className="mb-8"
         />
 

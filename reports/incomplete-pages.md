@@ -15,9 +15,9 @@ Generated: 2026-01-25
 | Missing Crisis Link (wellness) | 80 |
 | Missing Consent Language (wellness) | 149 |
 | Missing SafetyFooter (wellness) | 105 |
-| Missing ClarityCard (wellness) | 154 |
-| Missing ExamplesAccordion (wellness) | 154 |
-| **Total Issues** | **1082** |
+| Missing ClarityCard (wellness) | 148 |
+| Missing ExamplesAccordion (wellness) | 148 |
+| **Total Issues** | **1070** |
 
 ## Detection Criteria
 
@@ -1138,7 +1138,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/AdaptiveCompanionPage.tsx
 - client/src/pages/Admin.jsx
 - client/src/pages/AdvancedToolsPage.tsx
-- client/src/pages/AffirmationsPage.jsx
 - client/src/pages/AlignmentPath.jsx
 - client/src/pages/Analytics.jsx
 - client/src/pages/AtlasDashboard.tsx
@@ -1147,7 +1146,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/BlogEditor.jsx
 - client/src/pages/BlogIndex.jsx
 - client/src/pages/BodyWellnessPage.jsx
-- client/src/pages/BreathingExercisesPage.jsx
 - client/src/pages/CRMPage.jsx
 - client/src/pages/CalmingScenesPage.jsx
 - client/src/pages/CanvaLanding.jsx
@@ -1170,11 +1168,9 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/DesignSystem.jsx
 - client/src/pages/Disclaimer.tsx
 - client/src/pages/EliteToolsDashboard.tsx
-- client/src/pages/EmotionalIntelligencePage.jsx
 - client/src/pages/ExamplesPage.jsx
 - client/src/pages/FAQPage.jsx
 - client/src/pages/GlossaryPage.jsx
-- client/src/pages/GroundingTechniquesPage.jsx
 - client/src/pages/GrowthAnalyticsPage.tsx
 - client/src/pages/GuidedJournalingPage.tsx
 - client/src/pages/HealingJourneysPage.jsx
@@ -1189,7 +1185,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/Legal.tsx
 - client/src/pages/Login.jsx
 - client/src/pages/MasteryToolsPage.tsx
-- client/src/pages/MeditationGuidePage.jsx
 - client/src/pages/MetaLearningPage.tsx
 - client/src/pages/MirrorPage.tsx
 - client/src/pages/MovementSnacksPage.jsx
@@ -1213,7 +1208,6 @@ ClarityCard provides What/Who/When/Why/How/Where explanation for each tool.
 - client/src/pages/ResilienceMetricsPage.tsx
 - client/src/pages/ResourcesPage.jsx
 - client/src/pages/SafetyPage.jsx
-- client/src/pages/SelfCareToolkitPage.jsx
 - client/src/pages/SelfWorthReflectionPage.jsx
 - client/src/pages/Settings.jsx
 - client/src/pages/SleepGuidePage.jsx
@@ -1297,7 +1291,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/AdaptiveCompanionPage.tsx
 - client/src/pages/Admin.jsx
 - client/src/pages/AdvancedToolsPage.tsx
-- client/src/pages/AffirmationsPage.jsx
 - client/src/pages/AlignmentPath.jsx
 - client/src/pages/Analytics.jsx
 - client/src/pages/AtlasDashboard.tsx
@@ -1306,7 +1299,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/BlogEditor.jsx
 - client/src/pages/BlogIndex.jsx
 - client/src/pages/BodyWellnessPage.jsx
-- client/src/pages/BreathingExercisesPage.jsx
 - client/src/pages/CRMPage.jsx
 - client/src/pages/CalmingScenesPage.jsx
 - client/src/pages/CanvaLanding.jsx
@@ -1329,11 +1321,9 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/DesignSystem.jsx
 - client/src/pages/Disclaimer.tsx
 - client/src/pages/EliteToolsDashboard.tsx
-- client/src/pages/EmotionalIntelligencePage.jsx
 - client/src/pages/ExamplesPage.jsx
 - client/src/pages/FAQPage.jsx
 - client/src/pages/GlossaryPage.jsx
-- client/src/pages/GroundingTechniquesPage.jsx
 - client/src/pages/GrowthAnalyticsPage.tsx
 - client/src/pages/GuidedJournalingPage.tsx
 - client/src/pages/HealingJourneysPage.jsx
@@ -1348,7 +1338,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/Legal.tsx
 - client/src/pages/Login.jsx
 - client/src/pages/MasteryToolsPage.tsx
-- client/src/pages/MeditationGuidePage.jsx
 - client/src/pages/MetaLearningPage.tsx
 - client/src/pages/MirrorPage.tsx
 - client/src/pages/MovementSnacksPage.jsx
@@ -1372,7 +1361,6 @@ ExamplesAccordion shows Beginner/Intermediate/Advanced examples.
 - client/src/pages/ResilienceMetricsPage.tsx
 - client/src/pages/ResourcesPage.jsx
 - client/src/pages/SafetyPage.jsx
-- client/src/pages/SelfCareToolkitPage.jsx
 - client/src/pages/SelfWorthReflectionPage.jsx
 - client/src/pages/Settings.jsx
 - client/src/pages/SleepGuidePage.jsx

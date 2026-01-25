@@ -2,9 +2,50 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Anchor, Eye, Hand, Ear, Heart, Footprints, Sparkles, CheckCircle2, Brain, Shield, Zap, BookOpen, AlertCircle } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+
+const GROUNDING_CLARITY = {
+  what: "Evidence-based grounding exercises to anchor in the present moment during anxiety, dissociation, or overwhelm.",
+  who: "Anyone experiencing anxiety, flashbacks, dissociation, or feeling disconnected from the present.",
+  when: "During panic, when feeling unreal or disconnected, before or after difficult conversations, or whenever you need to return to the present.",
+  why: "Grounding anchors you in the one moment that is actually happening—right now—sending safety cues to your nervous system.",
+  howSteps: [
+    "Notice you're feeling anxious or disconnected",
+    "Choose a grounding technique that feels accessible",
+    "Follow the step-by-step guidance",
+    "Check each step as you complete it to track progress"
+  ],
+  whereLinkText: "Learn about breathing exercises",
+  whereHref: "/breathing-exercises"
+};
+
+const GROUNDING_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "First time grounding during mild anxiety",
+    situation: "You notice racing thoughts and want to try grounding for the first time.",
+    action: "Use the 5-4-3-2-1 Senses technique, naming things you can see, touch, hear, smell, and taste.",
+    result: "The racing thoughts slow as your attention shifts to your immediate environment."
+  },
+  {
+    level: "intermediate",
+    title: "Grounding during a difficult moment",
+    situation: "You feel overwhelmed during a stressful conversation and need quick relief.",
+    action: "Excuse yourself briefly and use Feet on the Ground—press your feet firmly into the floor and feel the solid support.",
+    result: "You feel more stable and present, able to return to the conversation with more clarity."
+  },
+  {
+    level: "advanced",
+    title: "Using grounding for dissociation",
+    situation: "You notice signs of dissociation—feeling foggy or disconnected from your body.",
+    action: "Use Ice or Cold Water (TIPP skill) to activate the dive reflex, then follow with the Butterfly Hug for self-soothing.",
+    result: "The cold sensation brings you back to your body, and the bilateral stimulation helps you feel more integrated."
+  }
+];
 
 const techniques = [
   {
@@ -298,6 +339,14 @@ export default function GroundingTechniquesPage() {
           disclaimer="Educational grounding practice—not therapy. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...GROUNDING_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={GROUNDING_EXAMPLES} 
+          title="See how others use grounding techniques"
           className="mb-8"
         />
 

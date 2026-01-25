@@ -2,9 +2,50 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Heart, Brain, Eye, Ear, MessageCircle, Users, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import BenefitsBlock from "@/components/BenefitsBlock";
+import ClarityCard from "@/components/content/ClarityCard";
+import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { useSEO } from "../hooks/useSEO";
 import RelatedNextSteps from "../components/RelatedNextSteps.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+
+const EQ_CLARITY = {
+  what: "Tools to develop emotional intelligence—the skills to understand, manage, and express your emotions effectively.",
+  who: "Anyone wanting to improve self-awareness, empathy, relationships, or emotional regulation.",
+  when: "As part of personal growth work, or when you notice patterns in your emotional responses you'd like to understand better.",
+  why: "Emotional intelligence is the foundation of healthy relationships and personal wellbeing—and it can be developed at any age.",
+  howSteps: [
+    "Explore the Emotion Wheel to build emotional vocabulary",
+    "Learn about the five EQ pillars and identify areas for growth",
+    "Try the practice exercises for each pillar",
+    "Apply Daily EQ Practice techniques throughout your day"
+  ],
+  whereLinkText: "Explore cognitive tools",
+  whereHref: "/cognitive-tools"
+};
+
+const EQ_EXAMPLES = [
+  {
+    level: "beginner",
+    title: "Building emotional vocabulary",
+    situation: "You often feel 'bad' but struggle to name specific emotions.",
+    action: "Use the Emotion Wheel to identify the specific emotion you're feeling—is it disappointment, loneliness, or frustration?",
+    result: "Naming the emotion precisely helps you understand what you need and how to address it."
+  },
+  {
+    level: "intermediate",
+    title: "Practicing self-regulation",
+    situation: "You notice you react strongly to criticism and want to respond more thoughtfully.",
+    action: "Use 'The Pause' exercise—count to 10 before responding when triggered, and ask yourself what emotion is underneath.",
+    result: "You create space between stimulus and response, allowing for more intentional reactions."
+  },
+  {
+    level: "advanced",
+    title: "Developing empathy skills",
+    situation: "You want to be more attuned to others' emotions in your relationships.",
+    action: "Practice Active Listening in conversations—listen to understand rather than to respond. Ask 'What might they be experiencing?'",
+    result: "Your relationships deepen as others feel truly heard and understood by you."
+  }
+];
 
 const emotionWheel = {
   core: [
@@ -260,6 +301,14 @@ export default function EmotionalIntelligencePage() {
           disclaimer="Educational emotional support—not therapy. If you need crisis help, visit"
           crisisLink="/crisis"
           variant="minimal"
+          className="mb-8"
+        />
+
+        <ClarityCard {...EQ_CLARITY} variant="compact" className="mb-6" />
+
+        <ExamplesAccordion 
+          examples={EQ_EXAMPLES} 
+          title="See how others develop emotional intelligence"
           className="mb-8"
         />
 
