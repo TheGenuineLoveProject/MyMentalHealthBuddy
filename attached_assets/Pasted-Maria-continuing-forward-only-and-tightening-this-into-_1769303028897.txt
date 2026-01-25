@@ -1,0 +1,288 @@
+Maria — continuing forward only and tightening this into a clean, executable A→Z upgrade that adds what you asked without repetition, without liability, and with measurable performance gains. Everything below is paste-ready for Replit AI, non-destructive, DRY-RUN first, human-in-the-loop, 18+ gated, educational only.
+
+⸻
+
+THE GENUINE LOVE PROJECT
+
+A→Z / 360° PLATFORM PERFECTION — vNEXT (EXECUTABLE)
+
+⸻
+
+1) BENEFITS: MADE EXPLICIT, EVERYWHERE (NO REPETITION)
+
+A→Z BENEFIT INDEX (used as tokens, not paragraphs)
+
+Use these tokens to assemble benefits dynamically per page.
+
+Agency • Boundaries • Calm • Direction • Emotional literacy •
+Focus • Gentle habits • Honesty • Identity • Judgment-free •
+Kindness • Language clarity • Meaning • Nervous system regulation •
+Ownership • Purpose • Quality attention • Resilience •
+Self-respect • Trust • Understanding • Values •
+Wellbeing literacy • X (no extremes) • Your pace • Zero pressure
+
+Universal 4-Line Benefit Block (inject on every page)
+
+What you’ll get: {pick 1–2 tokens}
+Time: 30–90 seconds
+Control: Pause or stop anytime
+Note: Educational wellness support — not medical advice. If you’re in crisis, visit /crisis
+
+Rule: No page ships without this block.
+
+⸻
+
+2) SOCIAL-WORK APPROACHES — EMBEDDED AS UI LOGIC (NON-CLINICAL)
+
+Motivational Interviewing (MI) — Platform Rules
+	•	Autonomy: choices > commands
+	•	Evocation: questions > advice
+	•	Collaboration: “with you,” never “for you”
+	•	Compassion: normalize ambivalence
+
+MI Micro-Patterns (rotate, don’t stack)
+	•	“On a 1–10 scale, how ready do you feel to try a small step?”
+	•	“What would make this 1% easier?”
+	•	“What matters most to you right now?”
+	•	“What’s one reason for and one reason against this change?”
+
+Strengths-Based + Person-in-Environment (PIE)
+	•	Shift: Fix → Build
+	•	Prompts:
+	•	“What around you supports this?”
+	•	“What in your environment makes this harder?”
+	•	“What practical support would help this week?”
+
+Where used: onboarding, journaling, challenges, upgrade CTAs (never pressuring).
+
+⸻
+
+3) 12-PHASE SELF-ALIGNMENT PATH™ (REBUILT, NON-SUBSTANCE)
+
+Never call it “12-Step.”
+Educational, optional, self-paced, non-religious by default.
+
+	1.	Awareness
+	2.	Willingness
+	3.	Self-Honesty
+	4.	Responsibility
+	5.	Values Alignment
+	6.	Pattern Review
+	7.	Release
+	8.	Skill Building
+	9.	Repair
+	10.	Integration
+	11.	Service (integrity-based, optional)
+	12.	Continuity
+
+Every phase ends with:
+	•	“Pause/stop anytime”
+	•	“Choose a gentler option”
+	•	“If you’re in crisis, visit /crisis”
+
+⸻
+
+4) NLP — ETHICAL, SOLID, GUARDED
+
+Allowed
+	•	Reframing, identity language, goal clarity, values-based future pacing
+
+Banned
+	•	Hypnosis claims
+	•	“Subconscious reprogramming”
+	•	Embedded commands
+	•	Clinical promises
+
+Safe Patterns
+	•	“Another way to see this is…”
+	•	“I’m becoming someone who practices…”
+	•	“If this helped a little, what would be different tomorrow?”
+
+⸻
+
+5) 18+ GATING & CONSENT (MANDATORY)
+
+Signup + First Wellness Action
+
+By continuing, you confirm you are 18+ and understand this platform provides educational wellness tools, not medical or mental health treatment.
+
+Persistent Footer
+
+18+ only • Educational support — not medical advice • Pause/stop anytime • /crisis
+
+
+⸻
+
+6) WELLNESS MICROCOPY LIBRARY (ROTATION-SAFE)
+
+Consent & Control
+	•	“You’re in charge here.”
+	•	“Pause, skip, or stop anytime.”
+	•	“Choose the gentlest option.”
+
+Encouragement (Non-Clinical)
+	•	“That makes sense.”
+	•	“One kind step is enough.”
+	•	“You’re not alone.”
+
+Boundaries
+	•	“What would self-respect look like here?”
+	•	“What’s ‘good enough’ today?”
+
+Progress (Non-Addictive)
+	•	“Consistency over intensity.”
+	•	“Skip days are allowed.”
+
+Errors / Empty States
+	•	“Nothing is broken.”
+	•	“Want a tiny start?”
+
+⸻
+
+7) VIRAL + MONETIZATION (ETHICAL, HIGH-PERFORMANCE)
+
+Viral Loops (Primary → Secondary)
+	1.	Reflection Cards (shareable, watermark + URL, no outcome claims)
+	2.	Weekly ‘Your Week in Genuine Love’ Recap (personalized insights + 1 share card)
+	3.	Template / Pack Marketplace (Prompt Packs, Card Packs, 7-Day Challenges)
+	4.	Aligned Referrals (give time/tools, not cash)
+
+Monetization Ladder
+	•	Free → Plus → Premium → Products → B2B (educational wellness literacy)
+
+Rule: Depth over pressure. No scarcity tricks.
+
+⸻
+
+8) ACTIVE PLATFORM SCAN (INCOMPLETE PAGES + INTEGRATIONS)
+
+Replit AI — DRY-RUN ONLY Completion Audit
+
+ROLE: System Steward — TheGenuineLoveProject.com (Aaliyah Draws Art LLC)
+
+NON-NEGOTIABLES:
+- DRY-RUN FIRST
+- Non-destructive
+- Educational only
+- WCAG AA
+- 18+ gating + /crisis coverage
+
+TASK:
+Scan the entire repo for:
+1) Incomplete pages (TODOs, placeholders, empty components)
+2) Dead routes / broken nav
+3) Partial integrations
+4) Flows without clear next step
+5) Missing disclaimers / pause / /crisis
+6) Duplicate or near-duplicate components
+7) Performance risks (unused imports, heavy images, missing prefers-reduced-motion)
+8) AI endpoints without rate limits or logging
+
+OUTPUT:
+- Table: file | issue | severity | recommendation | insertion point
+- 3-phase patch plan (Safety → UX/Content → Performance)
+STOP.
+
+
+⸻
+
+9) PERFORMANCE OPTIMIZATION (SAFE DEFAULTS)
+
+Frontend
+	•	Lazy-load tools
+	•	Animations ≤ 600ms
+	•	Respect prefers-reduced-motion
+	•	Preload 1 heading + 1 body font
+
+Backend
+	•	User-triggered AI only
+	•	Rate limits + basic logs
+	•	Cache static content
+
+UX
+	•	One primary CTA per screen
+	•	Visible Pause/Exit always
+	•	No infinite scroll in wellness tools
+
+⸻
+
+10) SECURITY & IP PROTECTION (ANTI-COPY / ANTI-SCRAPE)
+
+Goal: Deterrence + watermarking + legal clarity (not absolute prevention).
+
+Client-Side
+	•	Disable text selection on sensitive pages (CSS)
+	•	Disable right-click context menu (JS) only on premium content
+	•	Canvas/SVG watermarks on Reflection Cards
+	•	Obfuscated class names for premium components
+
+Server-Side
+	•	Rate-limit HTML fetches
+	•	Bot detection (basic UA + behavior)
+	•	Signed URLs for premium assets
+	•	No raw content APIs without auth
+
+Legal
+	•	Clear Terms: no reproduction, no scraping
+	•	Watermarked exports
+	•	Audit logs for premium downloads
+
+⸻
+
+11) AI EMPLOYEES — SAFE, HUMAN-IN-THE-LOOP
+
+Allowed Roles
+	•	Content consistency checker
+	•	Microcopy rotator
+	•	Completion auditor
+	•	Performance advisor
+	•	Social post drafter (review required)
+
+Never Autonomous
+	•	No background execution
+	•	No self-publishing
+	•	No destructive changes
+
+⸻
+
+12) PERMANENT MASTER COMMAND (FINAL vNEXT)
+
+YOU ARE:
+Permanent System Steward for TheGenuineLoveProject.com
+Owned by Aaliyah Draws Art LLC (Maria Landa)
+
+MISSION:
+Continuously improve the platform A→Z with safety, clarity,
+evidence-informed design, ethical growth, zero liability, zero plagiarism.
+
+ABSOLUTE RULES:
+1) DRY-RUN FIRST
+2) Non-destructive
+3) Human-in-the-loop
+4) Educational only
+5) Original writing only
+6) WCAG AA
+7) Consent-based language
+8) Replit-safe execution
+9) 18+ gating
+10) /crisis routing
+
+LOOP:
+Scan → Diagnose → Propose → Patch → Validate → Document → Pause
+
+BEGIN WITH:
+Repository scan and DRY-RUN report.
+
+
+⸻
+
+WHAT TO DO NEXT (ONE STEP ONLY)
+
+Paste the DRY-RUN Completion Audit (Section 8) into Replit AI.
+Once you have the report, I’ll convert it into a 3-phase patch plan with exact file paths and copy-paste code, still non-destructive and 18+ enforced.
+
+If you want to jump tracks instead, say:
+	•	A4 → Activate tools (MI + 12-Phase + NLP + microcopy)
+	•	F0 → Page-by-page visual + benefit injection
+	•	B0 → Growth + monetization engine
+	•	I0 → Full master system activation

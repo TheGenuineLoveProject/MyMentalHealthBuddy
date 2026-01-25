@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Brain, Search, Star, BookOpen, Lightbulb, Target, Layers, Grid3X3, List } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_cognitive_models";
 
@@ -121,6 +122,15 @@ export default function CognitiveArchitecturePage() {
             {MENTAL_MODELS.length} mental models to sharpen your thinking. Build a latticework of wisdom.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Mental models for clearer thinking, better decisions, and cognitive flexibility"
+          duration="5–15 minutes per model"
+          control="Explore at your own pace — favorite and revisit anytime"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           <div className="card-bordered text-center">

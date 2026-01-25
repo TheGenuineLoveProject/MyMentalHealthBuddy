@@ -5,6 +5,7 @@ import {
   Plus, Save, Trash2, ChevronRight, Tag, Link as LinkIcon,
   Layers, Zap, Eye, Search, Filter
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 interface Concept {
   id: string;
@@ -192,6 +193,15 @@ export default function KnowledgeSynthesisPage() {
             Build your personal knowledge base. Connect concepts, capture learnings, extract insights.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Personal knowledge building through concept connection and insight extraction"
+          duration="5–20 minutes per session"
+          control="Your knowledge base, your way — all data stays local"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           <div className="card-bordered text-center">

@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, GitBranch, Repeat, Layers, Target, Zap, ArrowRightLeft, Plus, Minus, Save } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 const STORAGE_KEY = "glp_systems_thinking";
 
@@ -138,6 +139,15 @@ export default function SystemsThinkingPage() {
             Map feedback loops, identify leverage points, recognize system archetypes. See the whole.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Systems perspective for understanding patterns, feedback loops, and leverage points"
+          duration="10–30 minutes per mapping session"
+          control="Save your maps — build understanding over time"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="grid md:grid-cols-4 gap-4 mb-8">
           <div className="card-bordered text-center">

@@ -5,6 +5,7 @@ import {
   Brain, Heart, Lightbulb, Shield, Clock, ArrowRight,
   ChevronRight, Sparkles, Activity, Zap
 } from "lucide-react";
+import BenefitsBlock from "@/components/BenefitsBlock";
 
 interface GrowthMetric {
   category: string;
@@ -165,6 +166,15 @@ export default function ResilienceMetricsPage() {
             not a destination.
           </p>
         </header>
+
+        <BenefitsBlock
+          benefit="Track your growth journey across emotional, cognitive, and relational dimensions"
+          duration="2–5 minutes to review"
+          control="Your metrics, your pace — no comparison, no pressure"
+          disclaimer="Educational wellness support — not therapy. If you're in crisis, visit /crisis."
+          variant="minimal"
+          className="mb-6"
+        />
 
         <div className="flex justify-center gap-2 mb-8">
           {[
