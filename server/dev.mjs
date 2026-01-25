@@ -13,6 +13,7 @@ import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth/index.
 import adminRouter from "./routes/admin.mjs";
 import blogRouter from "./routes/blog.mjs";
 import journalRouter from "./routes/journal.mjs";
+import { requireAdult } from "./middleware/requireAdult.mjs";
 import moodRouter from "./routes/mood.mjs";
 import healthRouter from "./routes/health.mjs";
 import accountRouter from "./routes/account.mjs";
@@ -165,11 +166,11 @@ async function startServer() {
   app.use("/api/auth", githubAuthRouter);
   app.use("/api/admin", adminRouter);
   app.use("/api/blog", blogRouter);
-  app.use("/api/journal", journalRouter);
+  app.use("/api/journal", requireAdult, journalRouter);
   app.use("/api/mood", moodRouter);
   app.use("/api/health", healthRouter);
   app.use("/api/account", accountRouter);
-  app.use("/api/ai", aiRouter);
+  app.use("/api/ai", requireAdult, aiRouter);
   app.use("/api/analytics", analyticsRouter);
   app.use("/api/billing", billingRouter);
   app.use("/api/gamification", gamificationRouter);
@@ -244,7 +245,7 @@ async function startServer() {
   app.use("/api/products", productsRouter);
   app.use("/api/social-posting", socialPostingRouter);
   app.use("/api/admin/social", adminSocialStudioRouter);
-  app.use("/api/wellness-tools", wellnessToolsRouter);
+  app.use("/api/wellness-tools", requireAdult, wellnessToolsRouter);
   app.use("/api/user", userRouter);
   app.use("/api/perplexity", perplexityRouter);
   app.use("/api/email", emailRouter);
