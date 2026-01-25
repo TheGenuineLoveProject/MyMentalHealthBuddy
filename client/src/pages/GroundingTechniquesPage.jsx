@@ -200,6 +200,8 @@ function TechniqueCard({ technique, onSelect, isSelected }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Grounding Techniques — The Genuine Love Project" description="Methods for staying present and centered." />
+
 
     <button
       onClick={onSelect}

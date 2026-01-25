@@ -5,6 +5,8 @@ import {
   Calendar, Clock, Target, ArrowRight, Zap
 } from "lucide-react";
 import { useGamification } from "../context/GamificationContext.jsx";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const JOURNEYS = [
   {
@@ -234,7 +236,18 @@ export default function HealingJourneys() {
   };
 
   const renderJourneyDetail = () => {
-    if (!selectedJourney) return null;
+    if (!selectedJourney) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Healing Journeys — The Genuine Love Project" description="Explore paths for personal healing and growth." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Healing Journeys</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
     const Icon = selectedJourney.icon;
     const active = getActiveJourney(selectedJourney.id);
 

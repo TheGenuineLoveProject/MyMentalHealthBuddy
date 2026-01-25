@@ -23,6 +23,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const soulCategories = [
   {
@@ -226,6 +227,8 @@ export default function SoulWellnessPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Soul Wellness — The Genuine Love Project" description="Nurture your spiritual and inner wellbeing." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

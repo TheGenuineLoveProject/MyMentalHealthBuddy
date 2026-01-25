@@ -18,6 +18,7 @@ import {
   Eye,
   Lightbulb 
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 interface InsightCard {
   id: string;
@@ -128,6 +129,8 @@ export default function MirrorPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Mirror — The Genuine Love Project" description="Reflective tools for self-discovery." />
+
 
     <main className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

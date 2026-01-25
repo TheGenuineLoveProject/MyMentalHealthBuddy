@@ -14,6 +14,7 @@ import { Layers, ArrowUp, ArrowDown, Check, TrendingUp, MessageCircle, Sparkles 
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const COHERENCE_CLARITY = {
   what: "A 10-level emotional awareness scale to track your inner state across body, mind, and heart dimensions.",
@@ -159,6 +160,8 @@ export default function CoherenceLadderPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Coherence Ladder — The Genuine Love Project" description="Step-by-step guidance for emotional regulation." />
+
 
     <LayoutWrapper>
       <Hero

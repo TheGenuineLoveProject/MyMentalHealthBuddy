@@ -17,6 +17,8 @@ import {
   AlertCircle, RefreshCw
 } from 'lucide-react';
 import styles from './ContentStudio.module.css';
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const CONTENT_TYPES = [
   { id: 'short-post', label: 'Short Post', icon: FileText, desc: 'Single platform post (Instagram, LinkedIn, etc.)' },
@@ -457,7 +459,18 @@ export default function ContentStudio() {
       );
     }
 
-    return null;
+    return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Content Studio — The Genuine Love Project" description="Create and transform wellness content." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Content Studio</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
   };
 
   return (

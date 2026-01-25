@@ -14,6 +14,8 @@ import {
   type BeliefAudit
 } from "@/lib/epistemic/epistemicCalibration";
 import { Target, Plus, RefreshCw, Check, X } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export default function EpistemicCalibration() {
   const [profile, setProfile] = useState<EpistemicProfile | null>(null);
@@ -64,7 +66,18 @@ export default function EpistemicCalibration() {
     setNewCertainty(70);
   }
 
-  if (!profile) return null;
+  if (!profile) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Epistemic Calibration — The Genuine Love Project" description="Explore epistemic calibration tools for your wellness journey." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Epistemic Calibration</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
   const calibration = calculateCalibration(profile.predictions);
   const unresolvedPredictions = profile.predictions.filter(p => !p.resolution || p.resolution === "unresolved");

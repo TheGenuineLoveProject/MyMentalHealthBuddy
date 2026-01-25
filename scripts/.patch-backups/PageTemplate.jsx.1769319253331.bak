@@ -35,8 +35,7 @@ import { getVariant, getBulletVariant } from '../content/readingLevels.js';
 import { NotMedicalAdvice, CrisisNotice } from './SafetyDisclaimer.jsx';
 import SocialShare from './SocialShare.jsx';
 import styles from './PageTemplate.module.css';
-import { SEO } from "/SEO";
-import SafetyFooter from "/ui/SafetyFooter";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const iconMap = {
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,

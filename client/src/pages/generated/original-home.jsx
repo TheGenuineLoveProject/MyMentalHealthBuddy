@@ -5,6 +5,8 @@
  * DO NOT EDIT - Changes will be overwritten on regeneration
  */
 import ConfigRoute from '../pages/_autopilot.jsx';
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export default function OriginalHomePage() {
   return <ConfigRoute route="/original-home" />;

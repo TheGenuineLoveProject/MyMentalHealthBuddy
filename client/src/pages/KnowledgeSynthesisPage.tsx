@@ -8,6 +8,7 @@ import {
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 interface Concept {
   id: string;
@@ -195,6 +196,8 @@ export default function KnowledgeSynthesisPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Knowledge Synthesis — The Genuine Love Project" description="Connect and integrate wellness concepts." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

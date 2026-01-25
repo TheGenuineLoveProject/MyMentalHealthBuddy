@@ -152,7 +152,18 @@ function BreathingTimer({ exercise, onComplete }) {
   };
 
   const getPhaseInstruction = () => {
-    if (phaseDurations[currentPhase] === 0) return null;
+    if (phaseDurations[currentPhase] === 0) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Breathing Exercises — The Genuine Love Project" description="Simple breathing techniques for calming your nervous system." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Breathing Exercises</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
     return phases[currentPhase];
   };
 
@@ -214,6 +225,8 @@ function BreathingTimer({ exercise, onComplete }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Breathing Exercises — The Genuine Love Project" description="Simple breathing techniques for calming your nervous system." />
+
 ) => clearInterval(timer);
   }, [isRunning, currentPhase, cycles, totalBreaths, phaseDurations, onComplete]);
 

@@ -17,8 +17,8 @@
 
 import { Link } from "wouter";
 import { Heart, Mail, Instagram, Twitter, Facebook, Sparkles } from "lucide-react";
-import SacredGeometryBg from "./SacredGeometryBg";
-import "../styles/healing-animations.css";
+import SacredGeometryBg from "@/components/SacredGeometryBg";
+import "@/styles/healing-animations.css";
 
 export default function SacredFooter() {
   const currentYear = new Date().getFullYear();

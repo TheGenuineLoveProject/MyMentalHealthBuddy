@@ -4,6 +4,8 @@ import {
   Sparkles, Trophy, Heart, Moon, Target, Calendar,
   Clock, ChevronRight, Filter, MoreVertical
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const MOCK_NOTIFICATIONS = [
   {
@@ -105,7 +107,18 @@ export default function NotificationCenter({ isOpen, onClose }) {
     return `${days}d ago`;
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Notification Center — The Genuine Love Project" description="Explore notification center tools for your wellness journey." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Notification Center</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
   return (
     <div 

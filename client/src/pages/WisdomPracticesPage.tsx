@@ -7,6 +7,7 @@ import {
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 interface DailyContemplation {
   id: string;
@@ -205,6 +206,8 @@ export default function WisdomPracticesPage() {
       }}
       examples={[]}
     >
+      <SEO title="Wisdom Practices — The Genuine Love Project" description="Ancient and modern wisdom for daily life." />
+
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
         <header className="mb-8">

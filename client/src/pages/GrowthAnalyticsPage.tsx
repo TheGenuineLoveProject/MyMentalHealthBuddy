@@ -8,6 +8,7 @@ import {
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 interface ActivityLog {
   tool: string;
@@ -187,6 +188,8 @@ export default function GrowthAnalyticsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Growth Analytics — The Genuine Love Project" description="Track your wellness journey and growth patterns." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

@@ -29,6 +29,7 @@ import SacredFooter from "../components/SacredFooter";
 import "../styles/healing-animations.css";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 export default function HealingLandingPage() {
   const [visibleSections, setVisibleSections] = useState({});
@@ -71,6 +72,8 @@ export default function HealingLandingPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Healing Landing — The Genuine Love Project" description="Begin your healing journey with supportive resources." />
+
 ) => observer.disconnect();
   }, []);
 

@@ -13,6 +13,7 @@ import { useReadingLevel } from "@/context/ReadingLevelContext";
 import Microcopy from "@/components/Microcopy";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const RESEARCH_TOPICS = [
   {
@@ -364,6 +365,8 @@ export default function StudyVaultPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Study Vault — The Genuine Love Project" description="Research and evidence supporting our approach." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

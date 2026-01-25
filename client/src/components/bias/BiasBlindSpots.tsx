@@ -13,6 +13,8 @@ import {
   type CognitiveBias
 } from "@/lib/bias/biasBlindSpots";
 import { Eye, RefreshCw, AlertTriangle } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export default function BiasBlindSpots() {
   const [profile, setProfile] = useState<BiasAwarenessProfile | null>(null);
@@ -49,7 +51,18 @@ export default function BiasBlindSpots() {
     setProfile(updated);
   }
 
-  if (!profile) return null;
+  if (!profile) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Bias Blind Spots — The Genuine Love Project" description="Explore bias blind spots tools for your wellness journey." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Bias Blind Spots</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
   const filteredBiases = selectedCategory
     ? COGNITIVE_BIASES.filter(b => b.category === selectedCategory)

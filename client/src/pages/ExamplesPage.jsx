@@ -6,6 +6,7 @@ import {
 import { useState } from "react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const practicalExamples = [
   {
@@ -160,6 +161,8 @@ function ExampleCard({ example }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Examples — The Genuine Love Project" description="See examples of wellness tools and practices." />
+
 
     <div 
       className="card-bordered"

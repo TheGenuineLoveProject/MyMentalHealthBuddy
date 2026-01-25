@@ -14,6 +14,7 @@ import { Activity, Clock, Heart, Wind, Zap, Play, Check, TrendingUp, Calendar } 
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const MOVEMENT_CLARITY = {
   what: "Quick, gentle movement breaks to release tension, boost energy, and support your nervous system throughout the day.",
@@ -155,6 +156,8 @@ export default function MovementSnacksPage() {
       }}
       examples={[]}
     >
+      <SEO title="Movement Snacks — The Genuine Love Project" description="Quick movement breaks for body wellness." />
+
     <LayoutWrapper>
       <Hero
         title="Movement Snacks"

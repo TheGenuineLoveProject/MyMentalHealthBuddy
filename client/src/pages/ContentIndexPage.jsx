@@ -11,6 +11,7 @@ import { useState, useMemo } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const allContent = [
   { name: "Adaptive Companion", path: "/companion", description: "AI-powered personalized guidance", category: "Advanced Tools", icon: Users },
@@ -179,6 +180,8 @@ export default function ContentIndexPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Content Index — The Genuine Love Project" description="Browse all wellness content and resources." />
+
 
     <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">

@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, HTMLAttributes, ButtonHTMLAttributes, forwardRef, useId } from "react";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 interface TabsContextValue {
   value: string;
@@ -101,7 +103,18 @@ const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
     const triggerId = `${baseId}-trigger-${value}`;
     const panelId = `${baseId}-panel-${value}`;
     
-    if (selectedValue !== value) return null;
+    if (selectedValue !== value) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="tabs — The Genuine Love Project" description="Explore tabs tools for your wellness journey." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">tabs</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
     return (
       <div

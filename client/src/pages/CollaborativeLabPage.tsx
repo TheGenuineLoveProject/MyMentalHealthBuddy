@@ -8,6 +8,7 @@ import {
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 interface SharedInsight {
   id: string;
@@ -214,6 +215,8 @@ export default function CollaborativeLabPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Collaborative Lab — The Genuine Love Project" description="Explore wellness tools in a collaborative environment." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

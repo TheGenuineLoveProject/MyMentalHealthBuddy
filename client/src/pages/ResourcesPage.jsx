@@ -19,6 +19,7 @@ import {
   Clock,
   MapPin
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const crisisResources = [
   {
@@ -135,6 +136,8 @@ export default function ResourcesPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Resources — The Genuine Love Project" description="Helpful resources for your wellness journey." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

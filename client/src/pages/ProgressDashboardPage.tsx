@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowLeft, TrendingUp, Flame, Target, Calendar, Award, BarChart3, Heart, Brain, Sparkles, ChevronRight } from "lucide-react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const STORAGE_KEYS = {
   mood: "glp_mood_entries",
@@ -180,6 +181,8 @@ export default function ProgressDashboardPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Progress Dashboard — The Genuine Love Project" description="View your wellness journey progress." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

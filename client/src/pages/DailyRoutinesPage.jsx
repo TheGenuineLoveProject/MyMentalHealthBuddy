@@ -299,6 +299,8 @@ export default function DailyRoutinesPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Daily Routines — The Genuine Love Project" description="Establish supportive daily practices for wellbeing." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

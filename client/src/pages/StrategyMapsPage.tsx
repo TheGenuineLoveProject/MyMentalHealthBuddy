@@ -8,6 +8,7 @@ import {
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 interface StrategyNode {
   id: string;
@@ -362,6 +363,8 @@ export default function StrategyMapsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Strategy Maps — The Genuine Love Project" description="Visual guides for wellness planning." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

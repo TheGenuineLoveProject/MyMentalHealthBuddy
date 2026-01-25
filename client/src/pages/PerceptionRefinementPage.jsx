@@ -23,6 +23,7 @@ import {
   Zap,
   Hand
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const REFINEMENT_PRACTICES = [
   {
@@ -121,6 +122,8 @@ export default function PerceptionRefinementPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Perception Refinement — The Genuine Love Project" description="Tools for clearer perception and awareness." />
+
 
     <LayoutWrapper>
       <Hero

@@ -7,6 +7,7 @@ import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { CrisisNotice } from "@/components/PersistentDisclaimer";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const REFRAME_TEMPLATES = [
   {
@@ -116,6 +117,8 @@ export default function ReframePage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Reframe — The Genuine Love Project" description="Tools for shifting perspective on challenges." />
+
 
     <PageTemplate
       title="Reframe Tool"

@@ -6,6 +6,8 @@
 
 import { useRoute } from 'wouter';
 import AutopilotPage from '../_autopilot.jsx';
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export default function DynamicPage() {
   const [, params] = useRoute('/blog/:slug');

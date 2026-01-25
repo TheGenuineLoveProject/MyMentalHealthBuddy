@@ -13,6 +13,8 @@ import { apiRequest, queryClient } from "@/lib/queryClient.js";
 import ContentStudio from "@/components/ContentStudio.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const ALL_FORMATS = [
   { id: "blog", name: "Blog Post", icon: "📝" },
@@ -130,6 +132,8 @@ export default function ContentStudioPage() {
     
     return (
       <div className="space-y-4">
+      <SEO title="Content Studio — The Genuine Love Project" description="Create and transform wellness content." />
+
         {data.title && (
           <div>
             <p className="text-eyebrow text-[var(--sage-500)]">Title</p>
@@ -394,6 +398,8 @@ export default function ContentStudioPage() {
         )}
         </div>
       </div>
-    </div>
+    
+        <SafetyFooter />
+      </div>
   );
 }

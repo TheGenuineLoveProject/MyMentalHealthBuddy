@@ -4,6 +4,7 @@ import { ArrowLeft, BookOpen, Search, ChevronDown, ChevronUp, Lightbulb, Heart, 
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const glossaryTerms = [
   {
@@ -323,6 +324,8 @@ function TermCard({ term, isExpanded, onToggle }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Wellness Glossary — The Genuine Love Project" description="Key terms and definitions for wellness." />
+
 
     <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm overflow-hidden">
       <button

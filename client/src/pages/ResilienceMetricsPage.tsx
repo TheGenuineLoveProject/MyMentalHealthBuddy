@@ -8,6 +8,7 @@ import {
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 interface GrowthMetric {
   category: string;
@@ -169,6 +170,8 @@ export default function ResilienceMetricsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Resilience Metrics — The Genuine Love Project" description="Track and build your resilience over time." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

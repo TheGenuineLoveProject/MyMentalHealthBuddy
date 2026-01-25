@@ -3,6 +3,7 @@ import { ArrowLeft, Heart, Wind, Brain, Anchor, Sparkles, BookOpen, Sun, Moon, S
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const toolCategories = [
   {
@@ -100,6 +101,8 @@ function ToolCard({ tool }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Wellness Hub — The Genuine Love Project" description="Central access point for all wellness tools." />
+
 
     <Link 
       href={tool.href}

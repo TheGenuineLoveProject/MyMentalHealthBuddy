@@ -4,6 +4,7 @@ import { ArrowLeft, Lightbulb, Tag, Search, Trash2, Plus, Filter, Calendar, Star
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const STORAGE_KEY = "glp_insight_cards";
 
@@ -138,6 +139,8 @@ export default function InsightCardsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Insight Cards — The Genuine Love Project" description="Draw reflective insight cards for daily guidance." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

@@ -38,18 +38,14 @@ function backup(filePath) {
   fs.copyFileSync(filePath, backupPath);
 }
 
-function getRelativeImportPath(filePath, targetComponent) {
-  const fileDir = path.dirname(filePath);
-  const componentsDir = path.join(ROOT, "client/src/components");
-  const relativePath = path.relative(fileDir, componentsDir);
-  
+function getImportPath(targetComponent) {
   if (targetComponent === "SEO") {
-    return `${relativePath}/SEO`.replace(/\\/g, "/");
+    return "@/components/SEO";
   }
   if (targetComponent === "SafetyFooter") {
-    return `${relativePath}/ui/SafetyFooter`.replace(/\\/g, "/");
+    return "@/components/ui/SafetyFooter";
   }
-  return relativePath;
+  return "@/components";
 }
 
 function extractPageName(filePath) {
@@ -147,11 +143,11 @@ function generateSEODescription(pageName) {
   return descriptions[pageName] || `Explore ${pageName.toLowerCase()} tools for your wellness journey.`;
 }
 
-function addSEOImport(content, filePath) {
-  const importPath = getRelativeImportPath(filePath, "SEO");
+function addSEOImport(content) {
+  const importPath = getImportPath("SEO");
   const importLine = `import { SEO } from "${importPath}";\n`;
   
-  if (/import\s*{\s*SEO\s*}/.test(content) || /import\s+SEO\s+from/.test(content)) {
+  if (/import\s*{\s*SEO\s*}/.test(content) || /import\s+SEO[\s,]/.test(content) || /from\s+["'][^"']*SEO/.test(content)) {
     return content;
   }
   
@@ -165,11 +161,11 @@ function addSEOImport(content, filePath) {
   return importLine + content;
 }
 
-function addSafetyFooterImport(content, filePath) {
-  const importPath = getRelativeImportPath(filePath, "SafetyFooter");
+function addSafetyFooterImport(content) {
+  const importPath = getImportPath("SafetyFooter");
   const importLine = `import SafetyFooter from "${importPath}";\n`;
   
-  if (/SafetyFooter/.test(content)) {
+  if (/import\s+SafetyFooter/.test(content) || /from\s+["'][^"']*SafetyFooter/.test(content)) {
     return content;
   }
   
@@ -231,19 +227,19 @@ function fixReturnNull(content, filePath) {
   const pageName = extractPageName(filePath);
   const description = generateSEODescription(pageName);
   
-  const importPath = getRelativeImportPath(filePath, "SEO");
-  const safetyPath = getRelativeImportPath(filePath, "SafetyFooter");
+  const seoImportPath = getImportPath("SEO");
+  const safetyImportPath = getImportPath("SafetyFooter");
   
   let newContent = content;
   
-  if (!/import\s*{\s*SEO\s*}/.test(content)) {
+  if (!/import\s*{\s*SEO\s*}/.test(content) && !/import\s+SEO[\s,]/.test(content)) {
     const lastImportMatch = content.match(/^import[^;]+;/gm);
     if (lastImportMatch) {
       const lastImport = lastImportMatch[lastImportMatch.length - 1];
       const lastImportIdx = content.lastIndexOf(lastImport) + lastImport.length;
       newContent = newContent.slice(0, lastImportIdx) + 
-        `\nimport { SEO } from "${importPath}";` +
-        `\nimport SafetyFooter from "${safetyPath}";` +
+        `\nimport { SEO } from "${seoImportPath}";` +
+        `\nimport SafetyFooter from "${safetyImportPath}";` +
         newContent.slice(lastImportIdx);
     }
   }
@@ -282,13 +278,13 @@ function patchFile(filePath, issues) {
   const patchesApplied = [];
   
   if (issues.includes("missing-seo")) {
-    content = addSEOImport(content, fullPath);
+    content = addSEOImport(content);
     content = addSEOUsage(content, fullPath);
     if (content !== originalContent) patchesApplied.push("SEO");
   }
   
   if (issues.includes("missing-safety")) {
-    content = addSafetyFooterImport(content, fullPath);
+    content = addSafetyFooterImport(content);
     content = addSafetyFooterUsage(content);
     if (!patchesApplied.includes("SafetyFooter") && content !== originalContent) {
       patchesApplied.push("SafetyFooter");

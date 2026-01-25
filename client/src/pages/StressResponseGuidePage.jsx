@@ -5,6 +5,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const stressResponses = [
   {
@@ -190,6 +191,8 @@ function ResponseCard({ response, isSelected, onSelect }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Stress Response Guide — The Genuine Love Project" description="Understand and work with stress responses." />
+
 
     <button
       onClick={onSelect}

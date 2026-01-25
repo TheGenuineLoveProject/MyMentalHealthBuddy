@@ -349,6 +349,8 @@ function JourneyCard({ journey, onSelect }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Healing Journeys — The Genuine Love Project" description="Explore paths for personal healing and growth." />
+
 
     <button
       onClick={() => onSelect(journey)}

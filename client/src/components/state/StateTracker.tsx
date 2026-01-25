@@ -147,7 +147,7 @@ export function StateTracker({ onComplete }: StateTrackerProps) {
         <textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}
-          This page is being refined. Use the navigation to explore tools while we finish this section.="Context, observations..."
+          placeholder="Context, observations..."
           className="w-full p-3 rounded-lg border border-[var(--glp-ink)]/10 bg-white text-sm resize-none focus:outline-none focus:border-[var(--glp-sage-deep)]/30"
           rows={2}
           data-testid="input-state-note"

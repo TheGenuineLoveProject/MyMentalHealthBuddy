@@ -113,6 +113,7 @@ import InsightCards from "@/components/insights/InsightCards";
 import { BookOpen, Heart, Network, Sun, Moon, Compass, ChevronRight, Check, Sparkles } from "lucide-react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const STORAGE_KEY = "glp_daily_ritual";
 
@@ -151,7 +152,18 @@ export default function DailyRitualPage() {
   const [currentQuestion, setCurrentQuestion] = useState<string | null>(null);
 
   const insightOutput = useMemo(() => {
-    if (reflectionText.trim().length < 10) return null;
+    if (reflectionText.trim().length < 10) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Daily Ritual — The Genuine Love Project" description="Build meaningful daily routines for self-care." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Daily Ritual</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
     return buildInsightCards(reflectionText);
   }, [reflectionText]);
 
@@ -209,6 +221,8 @@ export default function DailyRitualPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Daily Ritual — The Genuine Love Project" description="Build meaningful daily routines for self-care." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

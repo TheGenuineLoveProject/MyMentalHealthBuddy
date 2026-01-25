@@ -162,6 +162,8 @@ export default function CalmingScenesPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Calming Scenes — The Genuine Love Project" description="Visual and audio environments for relaxation and grounding." />
+
 
     <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, var(--glp-paper), var(--glp-sage-10))' }}>
       <div className="max-w-6xl mx-auto px-4 py-8">

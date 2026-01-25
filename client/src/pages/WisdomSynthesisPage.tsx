@@ -4,6 +4,7 @@ import { ArrowLeft, Brain, Lightbulb, Layers, Sparkles, BookOpen, Target, Zap, S
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const STORAGE_KEY = "glp_wisdom_synthesis";
 
@@ -191,6 +192,8 @@ export default function WisdomSynthesisPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Wisdom Synthesis — The Genuine Love Project" description="Integrate wisdom from multiple traditions." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

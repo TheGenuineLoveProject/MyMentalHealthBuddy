@@ -170,6 +170,8 @@ function FAQItem({ question, answer }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="F A Q — The Genuine Love Project" description="Explore f a q tools for your wellness journey." />
+
 
     <div className="border-b border-[var(--sage-200)] last:border-0">
       <button

@@ -11,6 +11,8 @@
 
 import { Clock, Pause, Heart, Info } from 'lucide-react';
 import { Link } from 'wouter';
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const variants = {
   minimal: {
@@ -142,7 +144,18 @@ export default function BenefitsBlock({
 }
 
 export function QuickBenefits({ items = [], className = "" }) {
-  if (!items.length) return null;
+  if (!items.length) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Benefits Block — The Genuine Love Project" description="Explore benefits block tools for your wellness journey." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Benefits Block</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
   return (
     <ul 

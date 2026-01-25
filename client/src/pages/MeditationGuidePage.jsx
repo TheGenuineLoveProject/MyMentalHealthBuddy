@@ -297,6 +297,8 @@ function MeditationPlayer({ meditation }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Meditation Guide — The Genuine Love Project" description="Guided meditations for calm and clarity." />
+
 
     <div className="rounded-2xl p-8 shadow-lg" style={{ background: 'var(--glp-paper)' }}>
       <div className="flex items-start gap-4 mb-6">

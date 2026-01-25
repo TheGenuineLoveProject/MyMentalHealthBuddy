@@ -6,6 +6,7 @@ import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const WISDOM_CLARITY = {
   what: "Daily wisdom quotes from diverse traditions—Stoicism, Buddhism, psychology, philosophy—with reflection prompts.",
@@ -203,6 +204,8 @@ export default function DailyWisdomOraclePage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Daily Wisdom Oracle — The Genuine Love Project" description="Receive daily insights and reflective guidance." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

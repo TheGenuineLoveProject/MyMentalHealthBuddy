@@ -7,6 +7,7 @@ import {
 import { useState, useMemo } from "react";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const qaCategories = [
   { id: "getting-started", label: "Getting Started", icon: BookOpen },
@@ -145,6 +146,8 @@ function QAItem({ item, isOpen, onToggle }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Q A — The Genuine Love Project" description="Explore q a tools for your wellness journey." />
+
 
     <div 
       className="border-b border-gray-200 dark:border-gray-700 last:border-0"

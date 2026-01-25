@@ -181,6 +181,8 @@ function PillarCard({ pillar, isSelected, onSelect }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Emotional Intelligence — The Genuine Love Project" description="Develop awareness and skills for emotional wellbeing." />
+
 
     <button
       onClick={onSelect}

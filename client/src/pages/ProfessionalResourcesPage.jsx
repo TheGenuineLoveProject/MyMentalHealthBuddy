@@ -3,6 +3,7 @@ import { ArrowLeft, Users, Phone, Globe, BookOpen, Heart, Shield, ExternalLink, 
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const resources = [
   {
@@ -124,6 +125,8 @@ function ResourceCard({ item }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Professional Resources — The Genuine Love Project" description="Resources for wellness professionals." />
+
 
     <div className="p-4 rounded-xl bg-[var(--surface)] border border-[var(--sage-200)] hover:border-[var(--teal-400)] transition">
       <h4 className="text-body-md font-semibold text-[var(--teal-700)] mb-1">{item.name}</h4>

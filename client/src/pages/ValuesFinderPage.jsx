@@ -14,6 +14,7 @@ import { Heart, Star, Compass, Target, CheckCircle2, Plus, Trash2, Sparkles } fr
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const VALUES_CLARITY = {
   what: "A guided exploration tool to help you identify and clarify your core personal values.",
@@ -140,6 +141,8 @@ export default function ValuesFinderPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Values Finder — The Genuine Love Project" description="Discover and clarify your personal values." />
+
 
     <LayoutWrapper>
       <Hero

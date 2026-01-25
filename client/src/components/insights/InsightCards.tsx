@@ -31,7 +31,18 @@ export default function InsightCards({
   tags?: string[];
   onSave?: () => void;
 }) {
-  if (!cards?.length) return null;
+  if (!cards?.length) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Insight Cards — The Genuine Love Project" description="Draw reflective insight cards for daily guidance." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Insight Cards</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
   return (
     <section className="mt-6">

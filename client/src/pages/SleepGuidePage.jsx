@@ -7,6 +7,7 @@ import ClarityCard from "@/components/content/ClarityCard";
 import ExamplesAccordion from "@/components/content/ExamplesAccordion";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const SLEEP_CLARITY = {
   what: "Evidence-based sleep hygiene practices and relaxation techniques for better rest and recovery.",
@@ -156,6 +157,8 @@ function TipCard({ category }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Sleep Guide — The Genuine Love Project" description="Guidance for better sleep and rest." />
+
 
     <div className="rounded-xl p-6 shadow-sm" style={{ background: 'var(--glp-paper)' }}>
       <div className="flex items-center gap-3 mb-4">

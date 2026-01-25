@@ -279,6 +279,8 @@ function AffirmationCard({ affirmation, onNext, category }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Affirmations — The Genuine Love Project" description="Discover supportive affirmations for daily self-encouragement." />
+
 
     <div className="relative rounded-3xl p-8 md:p-12 text-center shadow-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
       <category.icon className="h-12 w-12 mx-auto mb-6 opacity-80" />

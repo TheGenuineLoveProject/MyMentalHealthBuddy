@@ -23,6 +23,7 @@ import {
   AlertCircle,
   RefreshCw
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const TRUTH_STATEMENTS = [
   {
@@ -136,6 +137,8 @@ export default function SelfWorthReflectionPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Self Worth Reflection — The Genuine Love Project" description="Tools for exploring and building self-worth." />
+
 
     <LayoutWrapper>
       <Hero

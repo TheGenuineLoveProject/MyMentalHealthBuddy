@@ -308,6 +308,8 @@ export default function BehaviorChangePage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Behavior Change — The Genuine Love Project" description="Explore gentle approaches to building healthier habits." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

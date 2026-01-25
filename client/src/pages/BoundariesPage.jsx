@@ -14,6 +14,7 @@ import { Shield, MessageCircle, Clock, Users, Home, Heart, Plus, Trash2, Copy, C
 import { useToast } from "@/hooks/use-toast";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const BOUNDARIES_CLARITY = {
   what: "A tool for creating and practicing boundary scripts for different situations in your life.",
@@ -159,6 +160,8 @@ export default function BoundariesPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Boundaries — The Genuine Love Project" description="Learn to set and maintain healthy personal boundaries." />
+
 
     <LayoutWrapper>
       <Hero

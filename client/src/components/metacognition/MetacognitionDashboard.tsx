@@ -14,6 +14,8 @@ import {
   type MentalState
 } from "@/lib/metacognition/metacognitionDashboard";
 import { Brain, Plus, RefreshCw, TrendingUp, TrendingDown, Minus } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export default function MetacognitionDashboard() {
   const [profile, setProfile] = useState<MetacognitiveProfile | null>(null);
@@ -71,7 +73,18 @@ export default function MetacognitionDashboard() {
     setProfile(updated);
   }
 
-  if (!profile) return null;
+  if (!profile) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Metacognition Dashboard — The Genuine Love Project" description="Explore metacognition dashboard tools for your wellness journey." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Metacognition Dashboard</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
   const clarityTrend = calculateClarityTrend(profile.mentalStates);
   const TrendIcon = clarityTrend.trend === "improving" ? TrendingUp :

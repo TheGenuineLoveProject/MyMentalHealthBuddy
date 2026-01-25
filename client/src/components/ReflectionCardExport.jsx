@@ -1,5 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { X, Download, Edit3, Quote, Heart, Footprints, ExternalLink, CheckCircle } from "lucide-react";
+import { SEO } from "@/components/SEO";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const VALUES_SUGGESTIONS = [
   "Authenticity", "Compassion", "Courage", "Growth", "Gratitude",
@@ -150,7 +152,18 @@ export default function ReflectionCardExport({
     setConsentChecked(false);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="Reflection Card Export — The Genuine Love Project" description="Explore reflection card export tools for your wellness journey." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">Reflection Card Export</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
 
   return (
     <div 

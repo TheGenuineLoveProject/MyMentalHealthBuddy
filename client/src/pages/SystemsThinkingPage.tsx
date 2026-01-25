@@ -4,6 +4,7 @@ import { ArrowLeft, GitBranch, Repeat, Layers, Target, Zap, ArrowRightLeft, Plus
 import BenefitsBlock from "@/components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { SEO } from "@/components/SEO";
 
 const STORAGE_KEY = "glp_systems_thinking";
 
@@ -140,6 +141,8 @@ export default function SystemsThinkingPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="Systems Thinking — The Genuine Love Project" description="See the bigger picture of your wellbeing." />
+
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">

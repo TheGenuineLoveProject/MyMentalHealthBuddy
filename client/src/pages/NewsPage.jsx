@@ -8,6 +8,7 @@ import { BRAND } from "@shared/brand";
 import { useSEO, createArticleSchema } from "../hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const NEWS_CATEGORIES = [
   { id: "all", label: "All Updates", icon: Newspaper },
@@ -114,7 +115,18 @@ export default function NewsPage() {
 
   const latestArticle = NEWS_ARTICLES[0];
   const newsJsonLd = useMemo(() => {
-    if (!latestArticle) return null;
+    if (!latestArticle) return (
+    <div className="min-h-screen safe-padding hero-gradient">
+      <SEO title="News — The Genuine Love Project" description="Latest updates from The Genuine Love Project." />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">News</h1>
+        <p className="text-muted-foreground mb-8">
+          This page is being refined. Use the navigation to explore tools while we finish this section.
+        </p>
+        <SafetyFooter />
+      </main>
+    </div>
+  );
     return createArticleSchema(
       latestArticle.title,
       latestArticle.summary,
@@ -164,6 +176,8 @@ export default function NewsPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="News — The Genuine Love Project" description="Latest updates from The Genuine Love Project." />
+
 
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-6xl mx-auto px-4 py-12">

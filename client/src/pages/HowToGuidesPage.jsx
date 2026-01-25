@@ -23,6 +23,7 @@ import {
   Lightbulb,
   Play
 } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 const toolGuides = [
   {
@@ -231,6 +232,8 @@ function GuideCard({ guide, isExpanded, onToggle }) {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
+      <SEO title="How To Guides — The Genuine Love Project" description="Step-by-step guides for wellness practices." />
+
 
     <div className={`card-bordered ${guide.bgColor} overflow-hidden`}>
       <button
