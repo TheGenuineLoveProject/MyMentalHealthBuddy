@@ -65,7 +65,8 @@
     "platform:patch:verbose": "node scripts/applyContentPatches.mjs --verbose",
     "platform:fix": "node scripts/patchFlaggedFiles.mjs",
     "platform:fix:dry": "node scripts/patchFlaggedFiles.mjs --dry-run",
-    "dup-scan": "node scripts/scan-duplicates.mjs",
+    "dup-scan": "node scripts/scan-duplicates.mjs && node scripts/scan-collisions.mjs",
+    "arch-scan": "node scripts/scan-architecture.mjs",
     "dedupe-plan": "node scripts/dedupe-plan.mjs",
     "dedupe-safe": "node scripts/apply-dedupe-safe.mjs"
   },

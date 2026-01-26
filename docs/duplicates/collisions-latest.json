@@ -1,0 +1,2344 @@
+{
+  "endpoints": {
+    "GET /api/health-check": [
+      "server/dev.mjs",
+      "server/index.mjs"
+    ],
+    "GET /healthz": [
+      "server/dev.mjs",
+      "server/index.mjs"
+    ],
+    "GET /health": [
+      "server/dev.mjs",
+      "server/index.mjs",
+      "server/routes/admin.mjs",
+      "server/routes/canva-oauth.mjs",
+      "server/routes/email.mjs",
+      "server/routes/perplexity.mjs"
+    ],
+    "GET /api/content/stats": [
+      "server/dev.mjs"
+    ],
+    "GET *": [
+      "server/index.mjs"
+    ],
+    "GET /api/conversations": [
+      "server/replit_integrations/audio/routes.ts",
+      "server/replit_integrations/chat/routes.ts"
+    ],
+    "GET /api/conversations/:id": [
+      "server/replit_integrations/audio/routes.ts",
+      "server/replit_integrations/chat/routes.ts"
+    ],
+    "POST /api/conversations": [
+      "server/replit_integrations/audio/routes.ts",
+      "server/replit_integrations/chat/routes.ts"
+    ],
+    "DELETE /api/conversations/:id": [
+      "server/replit_integrations/audio/routes.ts",
+      "server/replit_integrations/chat/routes.ts"
+    ],
+    "POST /api/conversations/:id/messages": [
+      "server/replit_integrations/audio/routes.ts",
+      "server/replit_integrations/chat/routes.ts"
+    ],
+    "GET /api/login": [
+      "server/replit_integrations/auth/replitAuth.mjs"
+    ],
+    "GET /api/callback": [
+      "server/replit_integrations/auth/replitAuth.mjs"
+    ],
+    "GET /api/logout": [
+      "server/replit_integrations/auth/replitAuth.mjs"
+    ],
+    "GET /api/auth/user": [
+      "server/replit_integrations/auth/routes.mjs"
+    ],
+    "POST /api/generate-image": [
+      "server/replit_integrations/image/routes.ts"
+    ],
+    "POST /api/uploads/request-url": [
+      "server/replit_integrations/object_storage/routes.ts"
+    ],
+    "GET /objects/:objectPath(*)": [
+      "server/replit_integrations/object_storage/routes.ts"
+    ],
+    "PUT /profile": [
+      "server/routes/account.mjs"
+    ],
+    "POST /onboarding": [
+      "server/routes/account.mjs"
+    ],
+    "POST /password-reset/request": [
+      "server/routes/account.mjs"
+    ],
+    "POST /password-reset/confirm": [
+      "server/routes/account.mjs"
+    ],
+    "DELETE /": [
+      "server/routes/account.mjs"
+    ],
+    "GET /export": [
+      "server/routes/account.mjs",
+      "server/routes/audit-logs.mjs",
+      "server/routes/leads.mjs"
+    ],
+    "GET /rate-limits": [
+      "server/routes/admin-security.mjs"
+    ],
+    "GET /rate-limits/stats": [
+      "server/routes/admin-security.mjs"
+    ],
+    "DELETE /rate-limits/logs": [
+      "server/routes/admin-security.mjs"
+    ],
+    "GET /csrf/stats": [
+      "server/routes/admin-security.mjs"
+    ],
+    "GET /websocket/stats": [
+      "server/routes/admin-security.mjs"
+    ],
+    "GET /overview": [
+      "server/routes/admin-security.mjs"
+    ],
+    "GET /drafts": [
+      "server/routes/admin-social-studio.mjs",
+      "server/routes/content-generator.mjs"
+    ],
+    "GET /drafts/:id": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /drafts": [
+      "server/routes/admin-social-studio.mjs",
+      "server/routes/content-generator.mjs"
+    ],
+    "PATCH /drafts/:id": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "DELETE /drafts/:id": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /drafts/:id/approve": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /templates": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /templates": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "DELETE /templates/:id": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /templates/seed": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /templates/presets": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /calendar": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /calendar": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "DELETE /calendar/:id": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /export": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /analytics": [
+      "server/routes/admin-social-studio.mjs",
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /analytics/content-calendar": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /generate": [
+      "server/routes/admin-social-studio.mjs",
+      "server/routes/content-generator.mjs",
+      "server/routes/content.mjs"
+    ],
+    "POST /generate/repurpose": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /compliance/check": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /compliance/rewrite": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /generate/image": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /generate/batch": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /enhance": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /platforms/specs": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /drafts/bulk/approve": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /drafts/bulk/delete": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "POST /publish/batch": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /publish/platforms": [
+      "server/routes/admin-social-studio.mjs"
+    ],
+    "GET /stats": [
+      "server/routes/admin.mjs",
+      "server/routes/audit-logs.mjs",
+      "server/routes/mood.mjs",
+      "server/routes/user.mjs"
+    ],
+    "GET /metrics": [
+      "server/routes/admin.mjs",
+      "server/routes/health.mjs"
+    ],
+    "GET /diagnostics": [
+      "server/routes/admin.mjs"
+    ],
+    "GET /logs/recent": [
+      "server/routes/admin.mjs"
+    ],
+    "GET /": [
+      "server/routes/ai-dashboard.mjs",
+      "server/routes/analytics.mjs",
+      "server/routes/audit-logs.mjs",
+      "server/routes/blog.mjs",
+      "server/routes/health.mjs",
+      "server/routes/integrationHealth.mjs",
+      "server/routes/journal.mjs",
+      "server/routes/leads.mjs",
+      "server/routes/metrics.mjs",
+      "server/routes/mood.mjs",
+      "server/routes/products.mjs",
+      "server/routes/social-posts.mjs",
+      "server/routes/states.mjs",
+      "server/routes/ui-dashboard.mjs"
+    ],
+    "GET /mood-chart": [
+      "server/routes/ai-dashboard.mjs"
+    ],
+    "GET /wellness-score": [
+      "server/routes/ai-dashboard.mjs"
+    ],
+    "POST /chat": [
+      "server/routes/ai.mjs"
+    ],
+    "GET /history": [
+      "server/routes/ai.mjs",
+      "server/routes/therapy.mjs"
+    ],
+    "DELETE /history": [
+      "server/routes/ai.mjs"
+    ],
+    "POST /event": [
+      "server/routes/analytics.mjs"
+    ],
+    "POST /pageview": [
+      "server/routes/analytics.mjs"
+    ],
+    "GET /summary": [
+      "server/routes/analytics.mjs"
+    ],
+    "GET /moods-last-7": [
+      "server/routes/analytics.mjs"
+    ],
+    "GET /journal-last-7": [
+      "server/routes/analytics.mjs"
+    ],
+    "GET /actions": [
+      "server/routes/audit-logs.mjs"
+    ],
+    "POST /register": [
+      "server/routes/auth.mjs"
+    ],
+    "POST /login": [
+      "server/routes/auth.mjs",
+      "server/routes/login.mjs"
+    ],
+    "POST /refresh": [
+      "server/routes/auth.mjs"
+    ],
+    "POST /logout": [
+      "server/routes/auth.mjs"
+    ],
+    "GET /me": [
+      "server/routes/auth.mjs"
+    ],
+    "GET /plans": [
+      "server/routes/billing.mjs"
+    ],
+    "POST /checkout": [
+      "server/routes/billing.mjs"
+    ],
+    "POST /portal": [
+      "server/routes/billing.mjs"
+    ],
+    "GET /subscription-status": [
+      "server/routes/billing.mjs"
+    ],
+    "GET /current-plan": [
+      "server/routes/billing.mjs"
+    ],
+    "GET /admin": [
+      "server/routes/blog.mjs"
+    ],
+    "GET /:slug": [
+      "server/routes/blog.mjs"
+    ],
+    "POST /": [
+      "server/routes/blog.mjs",
+      "server/routes/journal.mjs",
+      "server/routes/leads.mjs",
+      "server/routes/mirror.mjs",
+      "server/routes/mood.mjs",
+      "server/routes/products.mjs",
+      "server/routes/social-posts.mjs",
+      "server/routes/states.mjs",
+      "server/routes/stripeWebhook.mjs"
+    ],
+    "PUT /:id": [
+      "server/routes/blog.mjs",
+      "server/routes/journal.mjs",
+      "server/routes/mood.mjs"
+    ],
+    "DELETE /:id": [
+      "server/routes/blog.mjs",
+      "server/routes/journal.mjs",
+      "server/routes/mood.mjs",
+      "server/routes/products.mjs",
+      "server/routes/social-posts.mjs"
+    ],
+    "POST /:postId/comments": [
+      "server/routes/blog.mjs"
+    ],
+    "DELETE /comments/:commentId": [
+      "server/routes/blog.mjs"
+    ],
+    "GET /user/drafts": [
+      "server/routes/blog.mjs"
+    ],
+    "GET /rss": [
+      "server/routes/blog.mjs"
+    ],
+    "GET /config": [
+      "server/routes/canva-oauth.mjs"
+    ],
+    "POST /verify-token": [
+      "server/routes/canva-oauth.mjs"
+    ],
+    "POST /webhook": [
+      "server/routes/canva-oauth.mjs"
+    ],
+    "GET /asset-proxy": [
+      "server/routes/canva-oauth.mjs"
+    ],
+    "GET /status": [
+      "server/routes/canva-oauth.mjs",
+      "server/routes/figma.mjs",
+      "server/routes/onboarding.mjs"
+    ],
+    "GET /memory-techniques": [
+      "server/routes/cognitive-enhancement.mjs"
+    ],
+    "GET /focus-strategies": [
+      "server/routes/cognitive-enhancement.mjs"
+    ],
+    "GET /learning-acceleration": [
+      "server/routes/cognitive-enhancement.mjs"
+    ],
+    "GET /cognitive-biases": [
+      "server/routes/cognitive-enhancement.mjs"
+    ],
+    "GET /brain-health": [
+      "server/routes/cognitive-enhancement.mjs"
+    ],
+    "GET /models": [
+      "server/routes/cognitive-lab.mjs",
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /tools": [
+      "server/routes/cognitive-lab.mjs",
+      "server/routes/ethical-reasoning.mjs"
+    ],
+    "GET /biases": [
+      "server/routes/cognitive-lab.mjs",
+      "server/routes/cognitive-mastery.mjs",
+      "server/routes/dialectics.mjs",
+      "server/routes/metacognition.mjs"
+    ],
+    "GET /reasoning": [
+      "server/routes/cognitive-lab.mjs"
+    ],
+    "GET /daily": [
+      "server/routes/cognitive-lab.mjs",
+      "server/routes/collective-intelligence.mjs",
+      "server/routes/contemplative.mjs",
+      "server/routes/creativity.mjs",
+      "server/routes/dialectics.mjs",
+      "server/routes/embodiment.mjs",
+      "server/routes/ethical-reasoning.mjs",
+      "server/routes/existential.mjs",
+      "server/routes/foresight.mjs",
+      "server/routes/insights.mjs",
+      "server/routes/knowledge.mjs",
+      "server/routes/metacognition.mjs",
+      "server/routes/mind-body-integration.mjs",
+      "server/routes/narrative.mjs",
+      "server/routes/neuro-integration.mjs",
+      "server/routes/peak-performance.mjs",
+      "server/routes/personal-growth.mjs",
+      "server/routes/philosophy.mjs",
+      "server/routes/post-trauma.mjs",
+      "server/routes/practices.mjs",
+      "server/routes/praxis.mjs",
+      "server/routes/prompts.mjs",
+      "server/routes/psychological-safety.mjs",
+      "server/routes/relational.mjs",
+      "server/routes/resilience.mjs",
+      "server/routes/social-intelligence.mjs",
+      "server/routes/socio-ecology.mjs",
+      "server/routes/systems-compassion.mjs",
+      "server/routes/values.mjs",
+      "server/routes/wisdom-engine.mjs",
+      "server/routes/wisdom-synthesis.mjs",
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /frameworks": [
+      "server/routes/cognitive-mastery.mjs",
+      "server/routes/collective-intelligence.mjs",
+      "server/routes/content-intelligence.mjs",
+      "server/routes/ethical-reasoning.mjs",
+      "server/routes/life-design.mjs",
+      "server/routes/mirror.mjs",
+      "server/routes/narrative.mjs",
+      "server/routes/purpose-compass.mjs",
+      "server/routes/systems-compassion.mjs",
+      "server/routes/universal-content.mjs"
+    ],
+    "GET /frameworks/:id": [
+      "server/routes/cognitive-mastery.mjs",
+      "server/routes/content-intelligence.mjs",
+      "server/routes/purpose-compass.mjs"
+    ],
+    "GET /categories": [
+      "server/routes/cognitive-mastery.mjs",
+      "server/routes/healing-intelligence.mjs"
+    ],
+    "POST /practice-session": [
+      "server/routes/cognitive-mastery.mjs"
+    ],
+    "GET /principles": [
+      "server/routes/collective-intelligence.mjs",
+      "server/routes/creativity.mjs",
+      "server/routes/self-mastery.mjs"
+    ],
+    "GET /synthesis": [
+      "server/routes/collective-intelligence.mjs",
+      "server/routes/dialectics.mjs",
+      "server/routes/knowledge.mjs",
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /crowd-wisdom": [
+      "server/routes/collective-intelligence.mjs"
+    ],
+    "GET /emergence": [
+      "server/routes/collective-intelligence.mjs"
+    ],
+    "GET /question": [
+      "server/routes/community.mjs"
+    ],
+    "GET /reflections": [
+      "server/routes/community.mjs"
+    ],
+    "POST /reflect": [
+      "server/routes/community.mjs"
+    ],
+    "GET /awareness-practices": [
+      "server/routes/consciousness-expansion.mjs"
+    ],
+    "GET /states": [
+      "server/routes/consciousness-expansion.mjs"
+    ],
+    "GET /perception-exercises": [
+      "server/routes/consciousness-expansion.mjs"
+    ],
+    "GET /integral-stages": [
+      "server/routes/consciousness-expansion.mjs"
+    ],
+    "GET /all": [
+      "server/routes/consciousness-expansion.mjs",
+      "server/routes/healing-modalities.mjs",
+      "server/routes/holistic-healing.mjs",
+      "server/routes/human-potential.mjs",
+      "server/routes/knowledge.mjs",
+      "server/routes/life-design.mjs",
+      "server/routes/mastery-excellence.mjs",
+      "server/routes/philosophy.mjs",
+      "server/routes/practices.mjs",
+      "server/routes/prompts.mjs",
+      "server/routes/self-mastery-intelligence.mjs",
+      "server/routes/trauma-healing-protocols.mjs",
+      "server/routes/universal-content.mjs",
+      "server/routes/wisdom-traditions.mjs",
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /meditation": [
+      "server/routes/contemplative.mjs"
+    ],
+    "GET /inquiry": [
+      "server/routes/contemplative.mjs"
+    ],
+    "GET /mindfulness": [
+      "server/routes/contemplative.mjs"
+    ],
+    "GET /traditions": [
+      "server/routes/contemplative.mjs",
+      "server/routes/wisdom-engine.mjs",
+      "server/routes/wisdom-traditions.mjs"
+    ],
+    "GET /formats": [
+      "server/routes/content-generator.mjs",
+      "server/routes/content.mjs"
+    ],
+    "GET /platforms": [
+      "server/routes/content-intelligence.mjs",
+      "server/routes/social-posting.mjs"
+    ],
+    "GET /platforms/:id": [
+      "server/routes/content-intelligence.mjs"
+    ],
+    "GET /voice-dimensions": [
+      "server/routes/content-intelligence.mjs"
+    ],
+    "GET /content-strategy": [
+      "server/routes/content-intelligence.mjs"
+    ],
+    "POST /generate/podcast": [
+      "server/routes/content-studio.mjs"
+    ],
+    "POST /generate/youtube": [
+      "server/routes/content-studio.mjs"
+    ],
+    "POST /generate/book": [
+      "server/routes/content-studio.mjs"
+    ],
+    "POST /generate/course": [
+      "server/routes/content-studio.mjs"
+    ],
+    "POST /generate/presentation": [
+      "server/routes/content-studio.mjs"
+    ],
+    "GET /templates/podcast": [
+      "server/routes/content-studio.mjs"
+    ],
+    "GET /templates/youtube": [
+      "server/routes/content-studio.mjs"
+    ],
+    "GET /templates/book": [
+      "server/routes/content-studio.mjs"
+    ],
+    "GET /templates/course": [
+      "server/routes/content-studio.mjs"
+    ],
+    "GET /templates/presentation": [
+      "server/routes/content-studio.mjs"
+    ],
+    "GET /templates/all": [
+      "server/routes/content-studio.mjs"
+    ],
+    "GET /feed": [
+      "server/routes/content.mjs"
+    ],
+    "GET /my-content": [
+      "server/routes/content.mjs"
+    ],
+    "GET /techniques": [
+      "server/routes/creativity.mjs"
+    ],
+    "GET /framing": [
+      "server/routes/creativity.mjs"
+    ],
+    "GET /blocks": [
+      "server/routes/creativity.mjs"
+    ],
+    "GET /strategies": [
+      "server/routes/deep-learning.mjs",
+      "server/routes/metacognition.mjs"
+    ],
+    "GET /strategies/:id": [
+      "server/routes/deep-learning.mjs"
+    ],
+    "GET /archetypes": [
+      "server/routes/deep-learning.mjs",
+      "server/routes/narrative.mjs",
+      "server/routes/self-mastery.mjs",
+      "server/routes/wisdom-traditions.mjs"
+    ],
+    "GET /archetypes/:id": [
+      "server/routes/deep-learning.mjs",
+      "server/routes/self-mastery.mjs"
+    ],
+    "GET /cognitive-load": [
+      "server/routes/deep-learning.mjs"
+    ],
+    "GET /daily-learning": [
+      "server/routes/deep-learning.mjs"
+    ],
+    "GET /methods": [
+      "server/routes/dialectics.mjs"
+    ],
+    "GET /methods/:id": [
+      "server/routes/dialectics.mjs"
+    ],
+    "GET /epistemology": [
+      "server/routes/dialectics.mjs"
+    ],
+    "GET /epistemology/:id": [
+      "server/routes/dialectics.mjs"
+    ],
+    "GET /decisions": [
+      "server/routes/dialectics.mjs"
+    ],
+    "GET /decisions/:id": [
+      "server/routes/dialectics.mjs"
+    ],
+    "GET /prompts": [
+      "server/routes/dialectics.mjs",
+      "server/routes/narrative.mjs"
+    ],
+    "GET /prompts/:category": [
+      "server/routes/dialectics.mjs"
+    ],
+    "GET /prompts/:category/random": [
+      "server/routes/dialectics.mjs"
+    ],
+    "POST /welcome": [
+      "server/routes/email.mjs"
+    ],
+    "POST /challenge-reminder": [
+      "server/routes/email.mjs"
+    ],
+    "POST /milestone": [
+      "server/routes/email.mjs"
+    ],
+    "GET /somatic": [
+      "server/routes/embodiment.mjs",
+      "server/routes/healing-modalities.mjs",
+      "server/routes/holistic-healing.mjs",
+      "server/routes/trauma-healing-protocols.mjs"
+    ],
+    "GET /nervous-system": [
+      "server/routes/embodiment.mjs",
+      "server/routes/holistic-healing.mjs",
+      "server/routes/mind-body-integration.mjs",
+      "server/routes/trauma-healing-protocols.mjs"
+    ],
+    "GET /regulation": [
+      "server/routes/embodiment.mjs",
+      "server/routes/emotional-mastery.mjs"
+    ],
+    "GET /interoception": [
+      "server/routes/embodiment.mjs"
+    ],
+    "GET /families": [
+      "server/routes/emotional-mastery.mjs"
+    ],
+    "GET /families/:id": [
+      "server/routes/emotional-mastery.mjs"
+    ],
+    "GET /competencies": [
+      "server/routes/emotional-mastery.mjs"
+    ],
+    "GET /competencies/:id": [
+      "server/routes/emotional-mastery.mjs"
+    ],
+    "GET /daily-eq": [
+      "server/routes/emotional-mastery.mjs"
+    ],
+    "GET /stress-management": [
+      "server/routes/emotional-resilience.mjs"
+    ],
+    "GET /emotional-agility": [
+      "server/routes/emotional-resilience.mjs"
+    ],
+    "GET /inner-strength": [
+      "server/routes/emotional-resilience.mjs"
+    ],
+    "GET /regulation-strategies": [
+      "server/routes/emotional-resilience.mjs"
+    ],
+    "GET /resilience-quotient": [
+      "server/routes/emotional-resilience.mjs"
+    ],
+    "GET /dilemmas": [
+      "server/routes/ethical-reasoning.mjs"
+    ],
+    "GET /process": [
+      "server/routes/ethical-reasoning.mjs"
+    ],
+    "GET /themes": [
+      "server/routes/existential.mjs",
+      "server/routes/wisdom-engine.mjs",
+      "server/routes/wisdom-synthesis.mjs"
+    ],
+    "GET /philosophers": [
+      "server/routes/existential.mjs"
+    ],
+    "GET /questions": [
+      "server/routes/existential.mjs",
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /meaning": [
+      "server/routes/existential.mjs",
+      "server/routes/values.mjs"
+    ],
+    "GET /feed.xml": [
+      "server/routes/feed.mjs"
+    ],
+    "GET /sitemap.xml": [
+      "server/routes/feed.mjs"
+    ],
+    "GET /robots.txt": [
+      "server/routes/feed.mjs"
+    ],
+    "GET /scenarios": [
+      "server/routes/foresight.mjs"
+    ],
+    "GET /ethics": [
+      "server/routes/foresight.mjs"
+    ],
+    "GET /wheel": [
+      "server/routes/foresight.mjs"
+    ],
+    "GET /signals": [
+      "server/routes/foresight.mjs"
+    ],
+    "GET /literacy": [
+      "server/routes/foresight.mjs"
+    ],
+    "GET /progress": [
+      "server/routes/gamification.mjs"
+    ],
+    "POST /record-session": [
+      "server/routes/gamification.mjs"
+    ],
+    "GET /quests": [
+      "server/routes/gamification.mjs"
+    ],
+    "POST /complete-quest": [
+      "server/routes/gamification.mjs"
+    ],
+    "GET /leaderboard": [
+      "server/routes/gamification.mjs"
+    ],
+    "GET /github": [
+      "server/routes/github-auth.mjs"
+    ],
+    "GET /github/callback": [
+      "server/routes/github-auth.mjs"
+    ],
+    "GET /modalities": [
+      "server/routes/healing-intelligence.mjs",
+      "server/routes/healing-modalities.mjs",
+      "server/routes/post-trauma.mjs",
+      "server/routes/transformation-engine.mjs"
+    ],
+    "GET /modalities/:id": [
+      "server/routes/healing-intelligence.mjs",
+      "server/routes/transformation-engine.mjs"
+    ],
+    "GET /journeys": [
+      "server/routes/healing-intelligence.mjs",
+      "server/routes/holistic-healing.mjs"
+    ],
+    "GET /journeys/:id": [
+      "server/routes/healing-intelligence.mjs"
+    ],
+    "POST /recommend": [
+      "server/routes/healing-intelligence.mjs"
+    ],
+    "GET /energy-healing": [
+      "server/routes/healing-modalities.mjs"
+    ],
+    "GET /self-care": [
+      "server/routes/healing-modalities.mjs"
+    ],
+    "GET /wisdom-ladder": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "GET /micro-courage": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "POST /reflection-mirror": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "GET /patterns": [
+      "server/routes/healing-tools.mjs",
+      "server/routes/relational.mjs",
+      "server/routes/wisdom-engine.mjs",
+      "server/routes/wisdom-synthesis.mjs"
+    ],
+    "GET /patterns/summary": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "GET /values-compass": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "POST /values-compass/select": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "GET /emotion-translator": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "POST /emotion-translator/translate": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "GET /boundary-builder": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "GET /repair-guide": [
+      "server/routes/healing-tools.mjs"
+    ],
+    "GET /ready": [
+      "server/routes/health.mjs"
+    ],
+    "GET /live": [
+      "server/routes/health.mjs"
+    ],
+    "GET /detailed": [
+      "server/routes/health.mjs"
+    ],
+    "GET /breathwork": [
+      "server/routes/holistic-healing.mjs",
+      "server/routes/mind-body-integration.mjs"
+    ],
+    "GET /breathwork/:id": [
+      "server/routes/holistic-healing.mjs"
+    ],
+    "GET /inner-child": [
+      "server/routes/holistic-healing.mjs"
+    ],
+    "GET /energy": [
+      "server/routes/holistic-healing.mjs"
+    ],
+    "GET /flow-triggers": [
+      "server/routes/human-potential.mjs"
+    ],
+    "GET /peak-experiences": [
+      "server/routes/human-potential.mjs"
+    ],
+    "GET /capacities": [
+      "server/routes/human-potential.mjs"
+    ],
+    "GET /growth-mindset": [
+      "server/routes/human-potential.mjs",
+      "server/routes/personal-growth.mjs"
+    ],
+    "GET /self-actualization": [
+      "server/routes/human-potential.mjs"
+    ],
+    "GET /database": [
+      "server/routes/integrationHealth.mjs"
+    ],
+    "GET /openai": [
+      "server/routes/integrationHealth.mjs"
+    ],
+    "GET /stripe": [
+      "server/routes/integrationHealth.mjs"
+    ],
+    "GET /:id": [
+      "server/routes/journal.mjs",
+      "server/routes/products.mjs",
+      "server/routes/social-posts.mjs"
+    ],
+    "GET /concepts": [
+      "server/routes/knowledge.mjs"
+    ],
+    "GET /concepts/:id": [
+      "server/routes/knowledge.mjs"
+    ],
+    "GET /learning": [
+      "server/routes/knowledge.mjs",
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /learning/:id": [
+      "server/routes/knowledge.mjs"
+    ],
+    "GET /synthesis/:category": [
+      "server/routes/knowledge.mjs"
+    ],
+    "GET /synthesis/:category/random": [
+      "server/routes/knowledge.mjs"
+    ],
+    "GET /virtues": [
+      "server/routes/knowledge.mjs",
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /domains": [
+      "server/routes/life-design.mjs",
+      "server/routes/spiritual-intelligence.mjs"
+    ],
+    "GET /goal-systems": [
+      "server/routes/life-design.mjs",
+      "server/routes/peak-performance.mjs"
+    ],
+    "GET /decision-making": [
+      "server/routes/life-design.mjs"
+    ],
+    "GET /ikigai": [
+      "server/routes/life-purpose.mjs"
+    ],
+    "GET /values-discovery": [
+      "server/routes/life-purpose.mjs"
+    ],
+    "GET /mission-crafting": [
+      "server/routes/life-purpose.mjs"
+    ],
+    "GET /purpose-frameworks": [
+      "server/routes/life-purpose.mjs"
+    ],
+    "GET /meaning-sources": [
+      "server/routes/life-purpose.mjs"
+    ],
+    "GET /purpose-assessment": [
+      "server/routes/life-purpose.mjs"
+    ],
+    "GET /peak-performance": [
+      "server/routes/mastery-excellence.mjs"
+    ],
+    "GET /habit-mastery": [
+      "server/routes/mastery-excellence.mjs"
+    ],
+    "GET /discipline": [
+      "server/routes/mastery-excellence.mjs",
+      "server/routes/self-mastery-intelligence.mjs"
+    ],
+    "GET /mental-models": [
+      "server/routes/mastery-excellence.mjs",
+      "server/routes/peak-performance.mjs"
+    ],
+    "GET /focus": [
+      "server/routes/mastery-excellence.mjs"
+    ],
+    "GET /future-self/prompts": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "POST /future-self/letter": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "GET /life-chapters": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "GET /life-chapters/:chapter": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "GET /gratitude": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "GET /gratitude/daily": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "GET /contribution-map": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "GET /brave-action": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "POST /brave-action/plan": [
+      "server/routes/meaning-future.mjs"
+    ],
+    "GET /reflection": [
+      "server/routes/metacognition.mjs"
+    ],
+    "GET /self-awareness": [
+      "server/routes/metacognition.mjs"
+    ],
+    "GET /json": [
+      "server/routes/metrics.mjs"
+    ],
+    "POST /setup": [
+      "server/routes/mfa.mjs"
+    ],
+    "POST /verify": [
+      "server/routes/mfa.mjs"
+    ],
+    "POST /disable": [
+      "server/routes/mfa.mjs"
+    ],
+    "GET /somatic-practices": [
+      "server/routes/mind-body-integration.mjs"
+    ],
+    "GET /movement-therapy": [
+      "server/routes/mind-body-integration.mjs"
+    ],
+    "GET /embodiment-exercises": [
+      "server/routes/mind-body-integration.mjs"
+    ],
+    "GET /ping": [
+      "server/routes/mood.mjs"
+    ],
+    "GET /elements": [
+      "server/routes/narrative.mjs"
+    ],
+    "GET /affective-systems": [
+      "server/routes/neuro-integration.mjs"
+    ],
+    "GET /brain-regions": [
+      "server/routes/neuro-integration.mjs"
+    ],
+    "GET /neuroplasticity": [
+      "server/routes/neuro-integration.mjs"
+    ],
+    "GET /mind-body": [
+      "server/routes/neuro-integration.mjs"
+    ],
+    "POST /subscribe": [
+      "server/routes/newsletter.mjs"
+    ],
+    "POST /request-url": [
+      "server/routes/object-storage.mjs"
+    ],
+    "GET /preferences": [
+      "server/routes/onboarding.mjs"
+    ],
+    "POST /complete": [
+      "server/routes/onboarding.mjs"
+    ],
+    "PATCH /preferences": [
+      "server/routes/onboarding.mjs"
+    ],
+    "GET /goals-options": [
+      "server/routes/onboarding.mjs"
+    ],
+    "GET /flow-states": [
+      "server/routes/peak-performance.mjs"
+    ],
+    "GET /energy-management": [
+      "server/routes/peak-performance.mjs"
+    ],
+    "GET /habits": [
+      "server/routes/peak-performance.mjs"
+    ],
+    "GET /productivity": [
+      "server/routes/peak-performance.mjs"
+    ],
+    "POST /ask": [
+      "server/routes/perplexity.mjs"
+    ],
+    "POST /research": [
+      "server/routes/perplexity.mjs"
+    ],
+    "GET /self-improvement": [
+      "server/routes/personal-growth.mjs"
+    ],
+    "GET /character-development": [
+      "server/routes/personal-growth.mjs"
+    ],
+    "GET /self-discipline": [
+      "server/routes/personal-growth.mjs"
+    ],
+    "GET /life-stages": [
+      "server/routes/personal-growth.mjs"
+    ],
+    "GET /schools": [
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /schools/:id": [
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /schools/search/:name": [
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /virtues/cardinal": [
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /virtues/strengths": [
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /questions/:category": [
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /questions/:category/random": [
+      "server/routes/philosophy.mjs"
+    ],
+    "GET /growth-domains": [
+      "server/routes/post-trauma.mjs"
+    ],
+    "GET /reintegration": [
+      "server/routes/post-trauma.mjs"
+    ],
+    "GET /resilience": [
+      "server/routes/post-trauma.mjs"
+    ],
+    "GET /contemplative": [
+      "server/routes/practices.mjs"
+    ],
+    "GET /contemplative/:id": [
+      "server/routes/practices.mjs"
+    ],
+    "GET /contemplative/difficulty/:level": [
+      "server/routes/practices.mjs"
+    ],
+    "GET /growth": [
+      "server/routes/practices.mjs",
+      "server/routes/resilience.mjs"
+    ],
+    "GET /growth/:id": [
+      "server/routes/practices.mjs"
+    ],
+    "GET /rituals": [
+      "server/routes/practices.mjs"
+    ],
+    "GET /execution": [
+      "server/routes/praxis.mjs"
+    ],
+    "GET /creativity-pipeline": [
+      "server/routes/praxis.mjs"
+    ],
+    "GET /resistance": [
+      "server/routes/praxis.mjs"
+    ],
+    "GET /accountability": [
+      "server/routes/praxis.mjs"
+    ],
+    "GET /healing-journeys": [
+      "server/routes/pro-features.mjs"
+    ],
+    "GET /advanced-analytics": [
+      "server/routes/pro-features.mjs"
+    ],
+    "GET /ai-concierge": [
+      "server/routes/pro-features.mjs"
+    ],
+    "GET /team-dashboard": [
+      "server/routes/pro-features.mjs"
+    ],
+    "GET /check-access": [
+      "server/routes/pro-features.mjs"
+    ],
+    "GET /public": [
+      "server/routes/products.mjs"
+    ],
+    "GET /slug/:slug": [
+      "server/routes/products.mjs"
+    ],
+    "PATCH /:id": [
+      "server/routes/products.mjs",
+      "server/routes/social-posts.mjs"
+    ],
+    "POST /:id/purchase": [
+      "server/routes/products.mjs"
+    ],
+    "GET /:id/purchases": [
+      "server/routes/products.mjs"
+    ],
+    "GET /random": [
+      "server/routes/prompts.mjs",
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /inner-security": [
+      "server/routes/psychological-safety.mjs"
+    ],
+    "GET /safety-signals": [
+      "server/routes/psychological-safety.mjs"
+    ],
+    "GET /resilience-factors": [
+      "server/routes/psychological-safety.mjs"
+    ],
+    "GET /trauma-informed-care": [
+      "server/routes/psychological-safety.mjs"
+    ],
+    "GET /grounding-techniques": [
+      "server/routes/psychological-safety.mjs"
+    ],
+    "GET /exercises": [
+      "server/routes/purpose-compass.mjs",
+      "server/routes/values.mjs"
+    ],
+    "GET /exercises/:id": [
+      "server/routes/purpose-compass.mjs"
+    ],
+    "GET /meaning-dimensions": [
+      "server/routes/purpose-compass.mjs"
+    ],
+    "GET /daily-purpose": [
+      "server/routes/purpose-compass.mjs"
+    ],
+    "GET /attachment": [
+      "server/routes/relational.mjs"
+    ],
+    "GET /communication": [
+      "server/routes/relational.mjs"
+    ],
+    "GET /love-languages": [
+      "server/routes/relational.mjs",
+      "server/routes/relationship-dynamics.mjs"
+    ],
+    "GET /attachment-styles": [
+      "server/routes/relationship-dynamics.mjs"
+    ],
+    "GET /four-horsemen": [
+      "server/routes/relationship-dynamics.mjs"
+    ],
+    "GET /healthy-patterns": [
+      "server/routes/relationship-dynamics.mjs"
+    ],
+    "GET /conflict-styles": [
+      "server/routes/relationship-dynamics.mjs"
+    ],
+    "POST /analyze-pattern": [
+      "server/routes/relationship-dynamics.mjs"
+    ],
+    "GET /repair-strategies": [
+      "server/routes/relationship-dynamics.mjs"
+    ],
+    "GET /factors": [
+      "server/routes/resilience.mjs"
+    ],
+    "GET /coping": [
+      "server/routes/resilience.mjs"
+    ],
+    "GET /inoculation": [
+      "server/routes/resilience.mjs"
+    ],
+    "GET /flexibility": [
+      "server/routes/resilience.mjs"
+    ],
+    "GET /emotional-intelligence": [
+      "server/routes/self-mastery-intelligence.mjs"
+    ],
+    "GET /mindset": [
+      "server/routes/self-mastery-intelligence.mjs"
+    ],
+    "GET /personal-power": [
+      "server/routes/self-mastery-intelligence.mjs"
+    ],
+    "GET /excellence": [
+      "server/routes/self-mastery-intelligence.mjs"
+    ],
+    "GET /disciplines": [
+      "server/routes/self-mastery.mjs"
+    ],
+    "GET /disciplines/:id": [
+      "server/routes/self-mastery.mjs"
+    ],
+    "GET /daily-focus": [
+      "server/routes/self-mastery.mjs"
+    ],
+    "GET /emotional-literacy": [
+      "server/routes/social-intelligence.mjs"
+    ],
+    "GET /empathy-development": [
+      "server/routes/social-intelligence.mjs"
+    ],
+    "GET /communication-mastery": [
+      "server/routes/social-intelligence.mjs"
+    ],
+    "GET /social-dynamics": [
+      "server/routes/social-intelligence.mjs"
+    ],
+    "GET /conflict-resolution": [
+      "server/routes/social-intelligence.mjs"
+    ],
+    "GET /boundary-setting": [
+      "server/routes/social-intelligence.mjs"
+    ],
+    "GET /channels": [
+      "server/routes/social-posting.mjs"
+    ],
+    "GET /platforms/status": [
+      "server/routes/social-posting.mjs"
+    ],
+    "GET /platforms/:platformId/status": [
+      "server/routes/social-posting.mjs"
+    ],
+    "POST /post": [
+      "server/routes/social-posting.mjs"
+    ],
+    "POST /schedule": [
+      "server/routes/social-posting.mjs"
+    ],
+    "GET /scheduled": [
+      "server/routes/social-posting.mjs"
+    ],
+    "DELETE /scheduled/:id": [
+      "server/routes/social-posting.mjs"
+    ],
+    "POST /process-scheduled": [
+      "server/routes/social-posting.mjs"
+    ],
+    "POST /drafts/:id/publish": [
+      "server/routes/social-posting.mjs"
+    ],
+    "POST /:id/publish": [
+      "server/routes/social-posts.mjs"
+    ],
+    "GET /planetary-ethics": [
+      "server/routes/socio-ecology.mjs"
+    ],
+    "GET /oppression-systems": [
+      "server/routes/socio-ecology.mjs"
+    ],
+    "GET /regenerative": [
+      "server/routes/socio-ecology.mjs"
+    ],
+    "GET /collective-healing": [
+      "server/routes/socio-ecology.mjs"
+    ],
+    "GET /practices": [
+      "server/routes/spiritual-intelligence.mjs",
+      "server/routes/systems-compassion.mjs"
+    ],
+    "GET /development": [
+      "server/routes/spiritual-intelligence.mjs"
+    ],
+    "GET /wisdom": [
+      "server/routes/spiritual-intelligence.mjs"
+    ],
+    "POST /practice-recommendation": [
+      "server/routes/spiritual-intelligence.mjs"
+    ],
+    "GET /random-teaching": [
+      "server/routes/spiritual-intelligence.mjs"
+    ],
+    "GET /dimensions": [
+      "server/routes/states.mjs"
+    ],
+    "GET /interventions": [
+      "server/routes/systems-compassion.mjs"
+    ],
+    "GET /narratives": [
+      "server/routes/systems-compassion.mjs"
+    ],
+    "GET /scales": [
+      "server/routes/systems-compassion.mjs"
+    ],
+    "GET /crisis-resources": [
+      "server/routes/therapy.mjs"
+    ],
+    "POST /session": [
+      "server/routes/therapy.mjs"
+    ],
+    "POST /message": [
+      "server/routes/therapy.mjs"
+    ],
+    "GET /sessions": [
+      "server/routes/therapy.mjs"
+    ],
+    "GET /stages": [
+      "server/routes/transformation-engine.mjs"
+    ],
+    "GET /stages/:id": [
+      "server/routes/transformation-engine.mjs"
+    ],
+    "GET /shadow-archetypes": [
+      "server/routes/transformation-engine.mjs"
+    ],
+    "GET /shadow-archetypes/:id": [
+      "server/routes/transformation-engine.mjs"
+    ],
+    "GET /daily-transformation": [
+      "server/routes/transformation-engine.mjs"
+    ],
+    "GET /grounding": [
+      "server/routes/trauma-healing-protocols.mjs"
+    ],
+    "GET /parts-work": [
+      "server/routes/trauma-healing-protocols.mjs"
+    ],
+    "GET /reparenting": [
+      "server/routes/trauma-healing-protocols.mjs"
+    ],
+    "GET /window-of-tolerance": [
+      "server/routes/trauma-healing-protocols.mjs"
+    ],
+    "GET /types": [
+      "server/routes/universal-content.mjs"
+    ],
+    "GET /headlines": [
+      "server/routes/universal-content.mjs"
+    ],
+    "GET /hooks": [
+      "server/routes/universal-content.mjs"
+    ],
+    "GET /repurpose": [
+      "server/routes/universal-content.mjs"
+    ],
+    "GET /ctas": [
+      "server/routes/universal-content.mjs"
+    ],
+    "GET /activity": [
+      "server/routes/user.mjs"
+    ],
+    "GET /tasks": [
+      "server/routes/user.mjs"
+    ],
+    "GET /core": [
+      "server/routes/values.mjs"
+    ],
+    "GET /purpose": [
+      "server/routes/values.mjs"
+    ],
+    "POST /stripe": [
+      "server/routes/webhook.mjs"
+    ],
+    "GET /values": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "POST /values": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "GET /boundaries": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "POST /boundaries": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "PATCH /boundaries/:id": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "DELETE /boundaries/:id": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "GET /movement": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "POST /movement": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "GET /coherence": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "POST /coherence": [
+      "server/routes/wellness-tools.mjs"
+    ],
+    "GET /patterns/:id": [
+      "server/routes/wisdom-engine.mjs"
+    ],
+    "GET /traditions/:id": [
+      "server/routes/wisdom-engine.mjs"
+    ],
+    "POST /synthesize": [
+      "server/routes/wisdom-engine.mjs"
+    ],
+    "GET /cross-tradition/:theme": [
+      "server/routes/wisdom-engine.mjs"
+    ],
+    "GET /extraction": [
+      "server/routes/wisdom-synthesis.mjs"
+    ],
+    "GET /integration": [
+      "server/routes/wisdom-synthesis.mjs"
+    ],
+    "GET /perennial-truths": [
+      "server/routes/wisdom-traditions.mjs"
+    ],
+    "GET /meditation-lineages": [
+      "server/routes/wisdom-traditions.mjs"
+    ],
+    "GET /models/:id": [
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /models/category/:category": [
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /systems": [
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /systems/:id": [
+      "server/routes/wisdom.mjs"
+    ],
+    "GET /api/health": [
+      "server/tests/app.mjs"
+    ],
+    "POST /api/auth/signup": [
+      "server/tests/app.mjs"
+    ],
+    "POST /api/auth/login": [
+      "server/tests/app.mjs"
+    ],
+    "GET /api/mood": [
+      "server/tests/app.mjs"
+    ],
+    "POST /api/mood": [
+      "server/tests/app.mjs"
+    ],
+    "GET /api/journal": [
+      "server/tests/app.mjs"
+    ],
+    "POST /api/journal": [
+      "server/tests/app.mjs"
+    ],
+    "POST /api/ai/chat": [
+      "server/tests/app.mjs"
+    ]
+  },
+  "authMiddlewares": [
+    "server/middleware/auth.mjs",
+    "server/middleware/loginRateLimit.mjs",
+    "server/middleware/rateLimit.mjs",
+    "server/middleware/requireAdmin.mjs",
+    "server/middleware/requireAuth.mjs",
+    "server/middleware/requirePlan.mjs",
+    "server/middleware/security.mjs"
+  ],
+  "stripeHandlers": [
+    "server/routes/stripeWebhook.mjs",
+    "server/routes/webhook.mjs",
+    "server/shared/importMap.mjs"
+  ],
+  "openaiWrappers": [
+    "server/ai/crisisClassifier.mjs",
+    "server/replit_integrations/audio/client.ts",
+    "server/replit_integrations/audio/routes.ts",
+    "server/replit_integrations/chat/routes.ts",
+    "server/replit_integrations/image/client.ts",
+    "server/routes/admin-social-studio.mjs",
+    "server/routes/mirror.mjs",
+    "server/services/aiHandler.mjs",
+    "server/services/aiService.mjs",
+    "server/utils/aiClient.mjs"
+  ],
+  "schemaDefinitions": [
+    {
+      "table": "refresh_tokens",
+      "file": "server/db/schema/refreshTokens.js"
+    },
+    {
+      "table": "users",
+      "file": "server/db/schema/users.js"
+    }
+  ],
+  "adminDashboards": [
+    "client/src/App.jsx",
+    "client/src/components/admin/Top50ProcessTracker.jsx",
+    "client/src/content/processes/top50ProcessMap.ts",
+    "client/src/content/routes.js",
+    "client/src/content/searchIndex.ts",
+    "client/src/pages/Admin.jsx",
+    "client/src/pages/ContentAdminDashboard.jsx",
+    "client/src/pages/DesignSystem.jsx",
+    "client/src/pages/WireframeTemplates.jsx",
+    "client/src/pages/admin/CommandCenter.jsx",
+    "client/src/pages/generated/admin.jsx"
+  ],
+  "collisions": [
+    {
+      "type": "endpoint",
+      "name": "GET /api/health-check",
+      "files": [
+        "server/dev.mjs",
+        "server/index.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /healthz",
+      "files": [
+        "server/dev.mjs",
+        "server/index.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /health",
+      "files": [
+        "server/dev.mjs",
+        "server/index.mjs",
+        "server/routes/admin.mjs",
+        "server/routes/canva-oauth.mjs",
+        "server/routes/email.mjs",
+        "server/routes/perplexity.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /api/conversations",
+      "files": [
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/chat/routes.ts"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /api/conversations/:id",
+      "files": [
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/chat/routes.ts"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "POST /api/conversations",
+      "files": [
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/chat/routes.ts"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "DELETE /api/conversations/:id",
+      "files": [
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/chat/routes.ts"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "POST /api/conversations/:id/messages",
+      "files": [
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/chat/routes.ts"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /export",
+      "files": [
+        "server/routes/account.mjs",
+        "server/routes/audit-logs.mjs",
+        "server/routes/leads.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /drafts",
+      "files": [
+        "server/routes/admin-social-studio.mjs",
+        "server/routes/content-generator.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "POST /drafts",
+      "files": [
+        "server/routes/admin-social-studio.mjs",
+        "server/routes/content-generator.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /analytics",
+      "files": [
+        "server/routes/admin-social-studio.mjs",
+        "server/routes/admin-social-studio.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "POST /generate",
+      "files": [
+        "server/routes/admin-social-studio.mjs",
+        "server/routes/content-generator.mjs",
+        "server/routes/content.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /stats",
+      "files": [
+        "server/routes/admin.mjs",
+        "server/routes/audit-logs.mjs",
+        "server/routes/mood.mjs",
+        "server/routes/user.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /metrics",
+      "files": [
+        "server/routes/admin.mjs",
+        "server/routes/health.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /",
+      "files": [
+        "server/routes/ai-dashboard.mjs",
+        "server/routes/analytics.mjs",
+        "server/routes/audit-logs.mjs",
+        "server/routes/blog.mjs",
+        "server/routes/health.mjs",
+        "server/routes/integrationHealth.mjs",
+        "server/routes/journal.mjs",
+        "server/routes/leads.mjs",
+        "server/routes/metrics.mjs",
+        "server/routes/mood.mjs",
+        "server/routes/products.mjs",
+        "server/routes/social-posts.mjs",
+        "server/routes/states.mjs",
+        "server/routes/ui-dashboard.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /history",
+      "files": [
+        "server/routes/ai.mjs",
+        "server/routes/therapy.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "POST /login",
+      "files": [
+        "server/routes/auth.mjs",
+        "server/routes/login.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "POST /",
+      "files": [
+        "server/routes/blog.mjs",
+        "server/routes/journal.mjs",
+        "server/routes/leads.mjs",
+        "server/routes/mirror.mjs",
+        "server/routes/mood.mjs",
+        "server/routes/products.mjs",
+        "server/routes/social-posts.mjs",
+        "server/routes/states.mjs",
+        "server/routes/stripeWebhook.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "PUT /:id",
+      "files": [
+        "server/routes/blog.mjs",
+        "server/routes/journal.mjs",
+        "server/routes/mood.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "DELETE /:id",
+      "files": [
+        "server/routes/blog.mjs",
+        "server/routes/journal.mjs",
+        "server/routes/mood.mjs",
+        "server/routes/products.mjs",
+        "server/routes/social-posts.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /status",
+      "files": [
+        "server/routes/canva-oauth.mjs",
+        "server/routes/figma.mjs",
+        "server/routes/onboarding.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /models",
+      "files": [
+        "server/routes/cognitive-lab.mjs",
+        "server/routes/wisdom.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /tools",
+      "files": [
+        "server/routes/cognitive-lab.mjs",
+        "server/routes/ethical-reasoning.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /biases",
+      "files": [
+        "server/routes/cognitive-lab.mjs",
+        "server/routes/cognitive-mastery.mjs",
+        "server/routes/dialectics.mjs",
+        "server/routes/metacognition.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /daily",
+      "files": [
+        "server/routes/cognitive-lab.mjs",
+        "server/routes/collective-intelligence.mjs",
+        "server/routes/contemplative.mjs",
+        "server/routes/creativity.mjs",
+        "server/routes/dialectics.mjs",
+        "server/routes/embodiment.mjs",
+        "server/routes/ethical-reasoning.mjs",
+        "server/routes/existential.mjs",
+        "server/routes/foresight.mjs",
+        "server/routes/insights.mjs",
+        "server/routes/knowledge.mjs",
+        "server/routes/metacognition.mjs",
+        "server/routes/mind-body-integration.mjs",
+        "server/routes/narrative.mjs",
+        "server/routes/neuro-integration.mjs",
+        "server/routes/peak-performance.mjs",
+        "server/routes/personal-growth.mjs",
+        "server/routes/philosophy.mjs",
+        "server/routes/post-trauma.mjs",
+        "server/routes/practices.mjs",
+        "server/routes/praxis.mjs",
+        "server/routes/prompts.mjs",
+        "server/routes/psychological-safety.mjs",
+        "server/routes/relational.mjs",
+        "server/routes/resilience.mjs",
+        "server/routes/social-intelligence.mjs",
+        "server/routes/socio-ecology.mjs",
+        "server/routes/systems-compassion.mjs",
+        "server/routes/values.mjs",
+        "server/routes/wisdom-engine.mjs",
+        "server/routes/wisdom-synthesis.mjs",
+        "server/routes/wisdom.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /frameworks",
+      "files": [
+        "server/routes/cognitive-mastery.mjs",
+        "server/routes/collective-intelligence.mjs",
+        "server/routes/content-intelligence.mjs",
+        "server/routes/ethical-reasoning.mjs",
+        "server/routes/life-design.mjs",
+        "server/routes/mirror.mjs",
+        "server/routes/narrative.mjs",
+        "server/routes/purpose-compass.mjs",
+        "server/routes/systems-compassion.mjs",
+        "server/routes/universal-content.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /frameworks/:id",
+      "files": [
+        "server/routes/cognitive-mastery.mjs",
+        "server/routes/content-intelligence.mjs",
+        "server/routes/purpose-compass.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /categories",
+      "files": [
+        "server/routes/cognitive-mastery.mjs",
+        "server/routes/healing-intelligence.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /principles",
+      "files": [
+        "server/routes/collective-intelligence.mjs",
+        "server/routes/creativity.mjs",
+        "server/routes/self-mastery.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /synthesis",
+      "files": [
+        "server/routes/collective-intelligence.mjs",
+        "server/routes/dialectics.mjs",
+        "server/routes/knowledge.mjs",
+        "server/routes/wisdom.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /all",
+      "files": [
+        "server/routes/consciousness-expansion.mjs",
+        "server/routes/healing-modalities.mjs",
+        "server/routes/holistic-healing.mjs",
+        "server/routes/human-potential.mjs",
+        "server/routes/knowledge.mjs",
+        "server/routes/life-design.mjs",
+        "server/routes/mastery-excellence.mjs",
+        "server/routes/philosophy.mjs",
+        "server/routes/practices.mjs",
+        "server/routes/prompts.mjs",
+        "server/routes/self-mastery-intelligence.mjs",
+        "server/routes/trauma-healing-protocols.mjs",
+        "server/routes/universal-content.mjs",
+        "server/routes/wisdom-traditions.mjs",
+        "server/routes/wisdom.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /traditions",
+      "files": [
+        "server/routes/contemplative.mjs",
+        "server/routes/wisdom-engine.mjs",
+        "server/routes/wisdom-traditions.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /formats",
+      "files": [
+        "server/routes/content-generator.mjs",
+        "server/routes/content.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /platforms",
+      "files": [
+        "server/routes/content-intelligence.mjs",
+        "server/routes/social-posting.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /strategies",
+      "files": [
+        "server/routes/deep-learning.mjs",
+        "server/routes/metacognition.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /archetypes",
+      "files": [
+        "server/routes/deep-learning.mjs",
+        "server/routes/narrative.mjs",
+        "server/routes/self-mastery.mjs",
+        "server/routes/wisdom-traditions.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /archetypes/:id",
+      "files": [
+        "server/routes/deep-learning.mjs",
+        "server/routes/self-mastery.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /prompts",
+      "files": [
+        "server/routes/dialectics.mjs",
+        "server/routes/narrative.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /somatic",
+      "files": [
+        "server/routes/embodiment.mjs",
+        "server/routes/healing-modalities.mjs",
+        "server/routes/holistic-healing.mjs",
+        "server/routes/trauma-healing-protocols.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /nervous-system",
+      "files": [
+        "server/routes/embodiment.mjs",
+        "server/routes/holistic-healing.mjs",
+        "server/routes/mind-body-integration.mjs",
+        "server/routes/trauma-healing-protocols.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /regulation",
+      "files": [
+        "server/routes/embodiment.mjs",
+        "server/routes/emotional-mastery.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /themes",
+      "files": [
+        "server/routes/existential.mjs",
+        "server/routes/wisdom-engine.mjs",
+        "server/routes/wisdom-synthesis.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /questions",
+      "files": [
+        "server/routes/existential.mjs",
+        "server/routes/philosophy.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /meaning",
+      "files": [
+        "server/routes/existential.mjs",
+        "server/routes/values.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /modalities",
+      "files": [
+        "server/routes/healing-intelligence.mjs",
+        "server/routes/healing-modalities.mjs",
+        "server/routes/post-trauma.mjs",
+        "server/routes/transformation-engine.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /modalities/:id",
+      "files": [
+        "server/routes/healing-intelligence.mjs",
+        "server/routes/transformation-engine.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /journeys",
+      "files": [
+        "server/routes/healing-intelligence.mjs",
+        "server/routes/holistic-healing.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /patterns",
+      "files": [
+        "server/routes/healing-tools.mjs",
+        "server/routes/relational.mjs",
+        "server/routes/wisdom-engine.mjs",
+        "server/routes/wisdom-synthesis.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /breathwork",
+      "files": [
+        "server/routes/holistic-healing.mjs",
+        "server/routes/mind-body-integration.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /growth-mindset",
+      "files": [
+        "server/routes/human-potential.mjs",
+        "server/routes/personal-growth.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /:id",
+      "files": [
+        "server/routes/journal.mjs",
+        "server/routes/products.mjs",
+        "server/routes/social-posts.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /learning",
+      "files": [
+        "server/routes/knowledge.mjs",
+        "server/routes/wisdom.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /virtues",
+      "files": [
+        "server/routes/knowledge.mjs",
+        "server/routes/philosophy.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /domains",
+      "files": [
+        "server/routes/life-design.mjs",
+        "server/routes/spiritual-intelligence.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /goal-systems",
+      "files": [
+        "server/routes/life-design.mjs",
+        "server/routes/peak-performance.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /discipline",
+      "files": [
+        "server/routes/mastery-excellence.mjs",
+        "server/routes/self-mastery-intelligence.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /mental-models",
+      "files": [
+        "server/routes/mastery-excellence.mjs",
+        "server/routes/peak-performance.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /growth",
+      "files": [
+        "server/routes/practices.mjs",
+        "server/routes/resilience.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "PATCH /:id",
+      "files": [
+        "server/routes/products.mjs",
+        "server/routes/social-posts.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /random",
+      "files": [
+        "server/routes/prompts.mjs",
+        "server/routes/wisdom.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /exercises",
+      "files": [
+        "server/routes/purpose-compass.mjs",
+        "server/routes/values.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /love-languages",
+      "files": [
+        "server/routes/relational.mjs",
+        "server/routes/relationship-dynamics.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /practices",
+      "files": [
+        "server/routes/spiritual-intelligence.mjs",
+        "server/routes/systems-compassion.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "auth-middleware",
+      "name": "Multiple auth middlewares",
+      "files": [
+        "server/middleware/auth.mjs",
+        "server/middleware/loginRateLimit.mjs",
+        "server/middleware/rateLimit.mjs",
+        "server/middleware/requireAdmin.mjs",
+        "server/middleware/requireAuth.mjs",
+        "server/middleware/requirePlan.mjs",
+        "server/middleware/security.mjs"
+      ],
+      "severity": "medium",
+      "suggestion": "Use single auth middleware, re-export from one location"
+    },
+    {
+      "type": "stripe-webhook",
+      "name": "Multiple Stripe webhook handlers",
+      "files": [
+        "server/routes/stripeWebhook.mjs",
+        "server/routes/webhook.mjs",
+        "server/shared/importMap.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single webhook handler"
+    },
+    {
+      "type": "openai-wrapper",
+      "name": "Multiple OpenAI client wrappers",
+      "files": [
+        "server/ai/crisisClassifier.mjs",
+        "server/replit_integrations/audio/client.ts",
+        "server/replit_integrations/audio/routes.ts",
+        "server/replit_integrations/chat/routes.ts",
+        "server/replit_integrations/image/client.ts",
+        "server/routes/admin-social-studio.mjs",
+        "server/routes/mirror.mjs",
+        "server/services/aiHandler.mjs",
+        "server/services/aiService.mjs",
+        "server/utils/aiClient.mjs"
+      ],
+      "severity": "medium",
+      "suggestion": "Use single AI client wrapper"
+    },
+    {
+      "type": "admin-dashboard",
+      "name": "Multiple admin dashboards",
+      "files": [
+        "client/src/App.jsx",
+        "client/src/components/admin/Top50ProcessTracker.jsx",
+        "client/src/content/processes/top50ProcessMap.ts",
+        "client/src/content/routes.js",
+        "client/src/content/searchIndex.ts",
+        "client/src/pages/Admin.jsx",
+        "client/src/pages/ContentAdminDashboard.jsx",
+        "client/src/pages/DesignSystem.jsx",
+        "client/src/pages/WireframeTemplates.jsx",
+        "client/src/pages/admin/CommandCenter.jsx",
+        "client/src/pages/generated/admin.jsx"
+      ],
+      "severity": "low",
+      "suggestion": "May be intentional if different admin sections"
+    }
+  ],
+  "timestamp": "2026-01-26T06:55:24.769Z"
+}
