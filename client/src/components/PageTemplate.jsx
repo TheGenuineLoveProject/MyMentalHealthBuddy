@@ -36,6 +36,8 @@ import { NotMedicalAdvice, CrisisNotice } from './SafetyDisclaimer.jsx';
 import SocialShare from './SocialShare.jsx';
 import styles from './PageTemplate.module.css';
 import SafetyFooter from "@/components/ui/SafetyFooter";
+import PageScaffold from "./layout/PageScaffold.tsx";
+import { getRouteMeta } from "../content/meta/routeMetaRegistry.ts";
 
 const iconMap = {
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,
