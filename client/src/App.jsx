@@ -177,8 +177,10 @@ export default function App() {
             <main id="main-content">
             <Suspense fallback={<LoadingFallback />}>
             <Switch>
-              {/* Landing & Public Pages - Config Driven */}
-              <Route path="/">{() => <ConfigRoute route="/" />}</Route>
+              {/* Landing & Public Pages */}
+              <Route path="/">
+                <CanvaLanding />
+              </Route>
               {/* /home and /welcome are handled by server-side 301 redirects to "/" */}
               <Route path="/landing">{() => <ConfigRoute route="/landing" />}</Route>
               <Route path="/original-home">{() => <ConfigRoute route="/original-home" />}</Route>
