@@ -111,6 +111,7 @@ const ContentAdminDashboard = lazy(() => import("./pages/ContentAdminDashboard.j
 const CRMPage = lazy(() => import("./pages/CRMPage.jsx"));
 const DashboardOverview = lazy(() => import("./pages/dashboard/Overview.jsx"));
 const AdminCommandCenter = lazy(() => import("./pages/admin/CommandCenter.jsx"));
+const AdminHealthDashboard = lazy(() => import("./pages/admin/HealthDashboard.jsx"));
 const SocialDashboard = lazy(() => import("./pages/admin/SocialDashboard.jsx"));
 const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
 const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
@@ -593,6 +594,9 @@ export default function App() {
               {/* Admin Routes (require admin role) */}
               <Route path="/admin">
                 <AdminGuard><AdminCommandCenter /></AdminGuard>
+              </Route>
+              <Route path="/admin/health">
+                <AdminGuard><AdminHealthDashboard /></AdminGuard>
               </Route>
               <Route path="/admin/social">
                 <AdminGuard><SocialDashboard /></AdminGuard>

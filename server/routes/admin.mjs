@@ -115,4 +115,74 @@ function formatBytes(bytes) {
   return `${bytes.toFixed(2)} ${units[i]}`;
 }
 
+router.get("/diagnostics", requireAuth, requireAdmin, async (_req, res) => {
+  const memUsage = process.memoryUsage();
+  const uptime = Math.floor((Date.now() - startTime) / 1000);
+  
+  let dbStatus = "unknown";
+  let dbLatency = null;
+  
+  try {
+    const start = Date.now();
+    await db.execute({ sql: "SELECT 1" });
+    dbLatency = Date.now() - start;
+    dbStatus = "connected";
+  } catch {
+    dbStatus = "disconnected";
+  }
+
+  const diagnostics = {
+    server: {
+      uptime: formatUptime(uptime),
+      uptimeSeconds: uptime,
+      nodeVersion: process.version,
+      platform: os.platform(),
+      arch: os.arch(),
+    },
+    memory: {
+      heapUsed: formatBytes(memUsage.heapUsed),
+      heapTotal: formatBytes(memUsage.heapTotal),
+      rss: formatBytes(memUsage.rss),
+      external: formatBytes(memUsage.external),
+      systemFree: formatBytes(os.freemem()),
+      systemTotal: formatBytes(os.totalmem()),
+    },
+    database: {
+      status: dbStatus,
+      latencyMs: dbLatency,
+    },
+    env: {
+      NODE_ENV: process.env.NODE_ENV || "development",
+      hasDatabase: !!process.env.DATABASE_URL,
+      hasOpenAI: !!process.env.OPENAI_API_KEY || !!process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+      hasStripe: !!process.env.STRIPE_SECRET_KEY,
+      hasSession: !!process.env.SESSION_SECRET || !!process.env.JWT_SECRET,
+    },
+    timestamp: new Date().toISOString(),
+  };
+
+  res.json({ ok: true, diagnostics });
+});
+
+router.get("/logs/recent", requireAuth, requireAdmin, async (_req, res) => {
+  try {
+    const result = await db.execute({
+      sql: `SELECT id, actor_user_id, action, resource_type, resource_id, ip_address, created_at 
+            FROM audit_log 
+            ORDER BY created_at DESC 
+            LIMIT 50`
+    });
+    
+    res.json({
+      ok: true,
+      logs: result.rows || [],
+      count: result.rows?.length || 0,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.error("Admin logs error:", err);
+    res.status(500).json({ ok: false, error: "Failed to fetch logs" });
+  }
+});
+
 export default router;
