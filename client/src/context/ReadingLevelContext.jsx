@@ -1,8 +1,8 @@
 /**
- * ReadingLevelContext.jsx - Reading Level State Management
+ * ReadingLevelContext.jsx - Content Level State Management
  * 
  * Features:
- * - Global reading level state
+ * - Global content level state (Beginner / Intermediate / Advanced)
  * - URL query sync (?level=beginner|intermediate|advanced)
  * - localStorage persistence
  * - SSR-safe initialization

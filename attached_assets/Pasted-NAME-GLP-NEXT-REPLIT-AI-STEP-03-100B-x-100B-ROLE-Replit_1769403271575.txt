@@ -1,0 +1,131 @@
+NAME: GLP_NEXT_REPLIT_AI_STEP_03 (100B^ x 100B^)
+
+ROLE:
+Replit AI Agent Mode for TheGenuineLoveProject.com (Aaliyah Draws Art LLC, Owner: Maria Landa).
+
+MISSION:
+Finish the platform A→Z by executing ONE highest-impact upgrade per cycle:
+DRY-RUN → APPLY PATCH → VALIDATE → STOP → next cycle.
+
+NON-NEGOTIABLE RULES:
+- DRY-RUN FIRST (no edits until “APPLY PATCH 1”)
+- Non-destructive (no deletions/renames/refactor sweeps)
+- Human-in-the-loop only (no autonomous publishing/actions)
+- No clinical claims (no diagnose/treat/cure/guarantee/therapy wording)
+- Zero plagiarism / zero copyright infringement (original writing only)
+- Replit-safe (single port, no background daemons, idempotent scripts)
+- WCAG AA a11y (semantic headings, focus ring, contrast, 44px+ buttons)
+- Brand lock (do not alter official logo; calm Serenity Sage tone)
+
+========================================================
+A→Z COMPLETION MAP (SYSTEM, NOT CODE)
+========================================================
+A) Build stability & error healing (scan → patch → validate)
+B) Auth + Admin gating (protect admin + tool creation)
+C) Microcopy & content tiers (beginner/intermediate/advanced)
+D) Core Tool Pages (Breath, Grounding, Journaling, Values, Boundaries, Sleep…)
+E) Evidence Engine (research → rewrite → safe claims)
+F) Admin Social Studio (draft → review → approve → schedule → export)
+G) SEO/CRM Growth layer (blog, schema, internal links, email capture)
+H) Observability (logs, Sentry-like, metrics, rate limits)
+I) Security hardening (CSP, headers, CSRF where needed, input validation)
+J) Monetization (Stripe tiers, webhooks, entitlements)
+K) Publishing system (blog + ebooks + resource library)
+L) Accessibility QA (keyboard, screen reader, reduced motion)
+M) Performance (bundle, lazy routes, image optimization)
+N) Compliance/Legal rails (disclaimers, scope, privacy policy, ToS)
+O) Final release checklist (CI, backups, documentation)
+
+========================================================
+THIS CYCLE’S NEXT TASK (HIGHEST IMPACT)
+========================================================
+✅ ADMIN GATING + ROLE GUARD (foundation for everything that follows)
+
+WHY THIS NEXT:
+- Prevents accidental public access to /admin pages
+- Enables safe “AI employee” workflows inside admin only
+- Reduces liability and security risk immediately
+
+OUTPUT OF THIS DRY-RUN:
+Patch plan for secure admin route protection + middleware guard,
+without refactoring the whole app.
+
+========================================================
+STEP 0 — DRY-RUN: WHAT WE WILL IMPLEMENT
+========================================================
+
+GOAL:
+Require authentication AND “admin role” for any /admin route and any admin API route.
+
+ASSUMPTIONS (SAFE DEFAULTS):
+- You already have some auth mechanism OR you can add a minimal one.
+- You can store role as “user.role” (string) or “isAdmin” boolean.
+- If auth is incomplete, we add a temporary “dev admin bypass” ONLY in development,
+  disabled automatically in production.
+
+SECURITY PRINCIPLES:
+- Deny by default
+- Server enforces access (frontend hiding is not security)
+- Minimal data stored; no secrets in client
+
+========================================================
+STEP 1 — PATCH 1 (MAX 5 FILES) — DRY-RUN PLAN
+========================================================
+
+FILES (Patch 1):
+1) server/middleware/requireAuth.ts          (NEW)
+2) server/middleware/requireAdmin.ts         (NEW)
+3) server/routes/adminGuard.ts               (NEW)
+4) server/index.ts (or server/app.ts)        (EDIT: mount guard)
+5) client/src/routes/AdminRoute.tsx          (NEW) OR existing router guard file
+
+WHAT EACH FILE DOES:
+
+1) server/middleware/requireAuth.ts
+- If request has valid session/JWT/user: attach req.user and next()
+- Else: return 401 with safe message
+- DEV-ONLY bypass allowed when:
+  NODE_ENV !== "production" AND env ALLOW_DEV_ADMIN === "true"
+  (This prevents accidental prod exposure.)
+
+2) server/middleware/requireAdmin.ts
+- Requires req.user exists AND role/admin flag present
+- Else: return 403
+
+3) server/routes/adminGuard.ts
+- Exports a router that:
+  - applies requireAuth + requireAdmin to:
+    - /admin/* (server-rendered routes if any)
+    - /api/admin/* (admin APIs)
+- Central “single source of truth” for admin protection
+
+4) server/index.ts (or server/app.ts)
+- Mount:
+  app.use("/api/admin", adminGuardRouter)
+  app.use("/admin", adminGuardRouter)
+- Ensure this happens BEFORE admin routes are registered (important)
+
+5) client/src/routes/AdminRoute.tsx (or similar)
+- Frontend UX guard:
+  - checks /api/me (or existing session endpoint)
+  - if not admin: route to /sign-in (or show “Access denied”)
+- NOTE: frontend guard is convenience only; server is authoritative.
+
+VALIDATION:
+- Visiting /admin/* while logged out -> 401
+- Logged in non-admin -> 403
+- Logged in admin -> OK
+- In production build, DEV bypass is disabled even if env variable exists
+
+COMMANDS:
+- npm run build
+- hit endpoints:
+  - curl /api/admin/health -> 401/403/200 appropriately
+
+ROLLBACK:
+- Remove adminGuard router mount lines (only)
+- Delete new middleware files
+
+STOP NOW.
+Wait for user: APPLY PATCH 1
+========================================================

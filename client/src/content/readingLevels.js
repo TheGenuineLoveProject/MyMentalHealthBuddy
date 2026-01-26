@@ -1,8 +1,8 @@
 /**
- * readingLevels.js - Conscious-Aware Reading Level System
+ * readingLevels.js - Conscious-Aware Content Level System
  * 
  * Features:
- * - Three levels: beginner (simple), intermediate (warm), advanced (explanatory)
+ * - Three tiers: Beginner (simple), Intermediate (warm), Advanced (explanatory)
  * - SSR-safe localStorage handling
  * - URL query support (?level=beginner|intermediate|advanced)
  * - Fallback chain: URL > localStorage > route default > intermediate
