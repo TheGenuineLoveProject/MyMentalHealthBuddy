@@ -94,6 +94,11 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 | Integration-151-200 | 🟡 Ready (Enterprise/Multi-Tenant/SSO/Billing) |
 | Integration-201-250 | 🔒 Locked (Mobile/Voice/Community/Notifications) |
 
+### Process Engine Extended (201-250)
+| Batch | Status |
+|-------|--------|
+| Process-201-250 | ❌ LOCKED (Unlock after 151-200) |
+
 ### Key Documentation
 - `docs/process-engine/`: Process batches and tracking
 - `docs/integrations.md`: Integration tracking
