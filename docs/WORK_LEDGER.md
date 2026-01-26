@@ -9,7 +9,29 @@
 - ❌ NOT STARTED
 - ⏸️ BLOCKED (link to blocker)
 
-## Current Batch: TOP 50 (P001–P050)
+## Batch 2 Rules (P051–P100)
+- Mark each process as: TODO / IN PROGRESS / DONE / SKIPPED (already exists) / CARRYOVER (finished from Batch 1)
+- Link each DONE item to the Patch # in PATCHLOG
+- Never start a new process if build is failing
+
+## Current Batch: Batch 2 (P051-P100)
+
+### Latest Status
+| Metric | Value |
+|--------|-------|
+| Done | 20 |
+| TODO | 30 |
+| Build | ✅ Passing |
+| Doctor | ✅ All checks pass |
+
+### Recently Completed
+| ID | Process | Patch | Notes |
+|----|---------|-------|-------|
+| P091 | Doctor script | Patch 32 | `npm run doctor` |
+
+---
+
+## Previous Batch: TOP 50 (P001–P050)
 
 ### Product + UX Core
 | ID | Process | Status | Notes |
