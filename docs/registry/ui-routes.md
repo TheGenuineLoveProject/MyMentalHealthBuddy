@@ -1,6 +1,6 @@
 # UI Routes Registry
 
-_Generated: 2026-01-26T07:09:52.965Z_
+_Generated: 2026-01-26T16:56:43.867Z_
 
 | Path | File | Type |
 |------|------|------|
@@ -132,6 +132,16 @@ _Generated: 2026-01-26T07:09:52.965Z_
 | `/insight-cards` | `client/src/App.jsx` | route |
 | `/progress` | `client/src/App.jsx` | route |
 | `/mirror` | `client/src/App.jsx` | route |
+| `/pathways` | `client/src/App.jsx` | route |
+| `/pathways/onboarding` | `client/src/App.jsx` | route |
+| `/pathways/favorites` | `client/src/App.jsx` | route |
+| `/pathways/streaks` | `client/src/App.jsx` | route |
+| `/pathways/calm-plan` | `client/src/App.jsx` | route |
+| `/pathways/values` | `client/src/App.jsx` | route |
+| `/pathways/reflections` | `client/src/App.jsx` | route |
+| `/pricing-page` | `client/src/App.jsx` | route |
+| `/legal-info` | `client/src/App.jsx` | route |
+| `/help/billing` | `client/src/App.jsx` | route |
 | `/community` | `client/src/App.jsx` | route |
 | `/community/discussion/:id` | `client/src/App.jsx` | route |
 | `/social` | `client/src/App.jsx` | route |
@@ -173,6 +183,16 @@ _Generated: 2026-01-26T07:09:52.965Z_
 | `/tools/self-worth` | `client/src/App.jsx` | route |
 | `/tools/twelve-steps` | `client/src/App.jsx` | route |
 | `/tools/behavior-change` | `client/src/App.jsx` | route |
+| `/tools/compassion-break` | `client/src/App.jsx` | route |
+| `/tools/reframe-tool` | `client/src/App.jsx` | route |
+| `/tools/urge-surf` | `client/src/App.jsx` | route |
+| `/tools/grief-letter` | `client/src/App.jsx` | route |
+| `/tools/repair-script` | `client/src/App.jsx` | route |
+| `/tools/awe-microdose` | `client/src/App.jsx` | route |
+| `/tools/body-scan` | `client/src/App.jsx` | route |
+| `/tools/digital-sunset` | `client/src/App.jsx` | route |
+| `/tools/meaning-map` | `client/src/App.jsx` | route |
+| `/tools/community-checkin` | `client/src/App.jsx` | route |
 | `/ai/insights` | `client/src/App.jsx` | route |
 | `/ai/coach` | `client/src/App.jsx` | route |
 | `/ai/meditation` | `client/src/App.jsx` | route |
@@ -187,6 +207,16 @@ _Generated: 2026-01-26T07:09:52.965Z_
 | `/admin/social/library` | `client/src/App.jsx` | route |
 | `/admin/social/calendar` | `client/src/App.jsx` | route |
 | `/admin/social/analytics` | `client/src/App.jsx` | route |
+| `/admin/billing` | `client/src/App.jsx` | route |
+| `/admin/content-studio` | `client/src/App.jsx` | route |
+| `/admin/social-studio` | `client/src/App.jsx` | route |
+| `/admin/revenue` | `client/src/App.jsx` | route |
+| `/account/sessions` | `client/src/App.jsx` | route |
+| `/account/delete` | `client/src/App.jsx` | route |
+| `/account/subscription` | `client/src/App.jsx` | route |
+| `/account/orders` | `client/src/App.jsx` | route |
+| `/preferences/notifications` | `client/src/App.jsx` | route |
+| `/preferences/safety` | `client/src/App.jsx` | route |
 | `/content-admin` | `client/src/App.jsx` | route |
 | `/crm` | `client/src/App.jsx` | route |
 | `/control` | `client/src/App.jsx` | route |
@@ -205,3 +235,15 @@ _Generated: 2026-01-26T07:09:52.965Z_
 | `/safety` | `client/src/App.jsx` | route |
 | `/accessibility` | `client/src/App.jsx` | route |
 | `/cookies` | `client/src/App.jsx` | route |
+| `/safety-center` | `client/src/App.jsx` | route |
+| `/data-retention` | `client/src/App.jsx` | route |
+| `/community-guidelines` | `client/src/App.jsx` | route |
+| `/roadmap` | `client/src/App.jsx` | route |
+| `/our-story` | `client/src/App.jsx` | route |
+| `/press` | `client/src/App.jsx` | route |
+| `/courses` | `client/src/App.jsx` | route |
+| `/practices` | `client/src/App.jsx` | route |
+| `/admin/roles` | `client/src/App.jsx` | route |
+| `account_sessions` | `client/src/content/routes.js` | registry |
+| `account_delete` | `client/src/content/routes.js` | registry |
+| `admin_billing` | `client/src/content/routes.js` | registry |

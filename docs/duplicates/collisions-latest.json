@@ -8,14 +8,6 @@
       "server/dev.mjs",
       "server/index.mjs"
     ],
-    "GET /health": [
-      "server/dev.mjs",
-      "server/index.mjs",
-      "server/routes/admin.mjs",
-      "server/routes/canva-oauth.mjs",
-      "server/routes/email.mjs",
-      "server/routes/perplexity.mjs"
-    ],
     "GET /api/content/stats": [
       "server/dev.mjs"
     ],
@@ -83,6 +75,22 @@
       "server/routes/audit-logs.mjs",
       "server/routes/leads.mjs"
     ],
+    "GET /sessions": [
+      "server/routes/account.mjs",
+      "server/routes/accountActions.mjs",
+      "server/routes/therapy.mjs"
+    ],
+    "DELETE /sessions/:sessionId": [
+      "server/routes/account.mjs",
+      "server/routes/accountActions.mjs"
+    ],
+    "POST /delete-request": [
+      "server/routes/account.mjs",
+      "server/routes/accountActions.mjs"
+    ],
+    "POST /cancel-delete-request": [
+      "server/routes/accountActions.mjs"
+    ],
     "GET /rate-limits": [
       "server/routes/admin-security.mjs"
     ],
@@ -99,7 +107,8 @@
       "server/routes/admin-security.mjs"
     ],
     "GET /overview": [
-      "server/routes/admin-security.mjs"
+      "server/routes/admin-security.mjs",
+      "server/routes/adminBilling.mjs"
     ],
     "GET /drafts": [
       "server/routes/admin-social-studio.mjs",
@@ -199,6 +208,12 @@
       "server/routes/mood.mjs",
       "server/routes/user.mjs"
     ],
+    "GET /health": [
+      "server/routes/admin.mjs",
+      "server/routes/canva-oauth.mjs",
+      "server/routes/email.mjs",
+      "server/routes/perplexity.mjs"
+    ],
     "GET /metrics": [
       "server/routes/admin.mjs",
       "server/routes/health.mjs"
@@ -208,6 +223,12 @@
     ],
     "GET /logs/recent": [
       "server/routes/admin.mjs"
+    ],
+    "GET /subscriptions": [
+      "server/routes/adminBilling.mjs"
+    ],
+    "GET /plan-distribution": [
+      "server/routes/adminBilling.mjs"
     ],
     "GET /": [
       "server/routes/ai-dashboard.mjs",
@@ -1333,9 +1354,6 @@
     "POST /message": [
       "server/routes/therapy.mjs"
     ],
-    "GET /sessions": [
-      "server/routes/therapy.mjs"
-    ],
     "GET /stages": [
       "server/routes/transformation-engine.mjs"
     ],
@@ -1556,20 +1574,6 @@
     },
     {
       "type": "endpoint",
-      "name": "GET /health",
-      "files": [
-        "server/dev.mjs",
-        "server/index.mjs",
-        "server/routes/admin.mjs",
-        "server/routes/canva-oauth.mjs",
-        "server/routes/email.mjs",
-        "server/routes/perplexity.mjs"
-      ],
-      "severity": "high",
-      "suggestion": "Consolidate to single route handler"
-    },
-    {
-      "type": "endpoint",
       "name": "GET /api/conversations",
       "files": [
         "server/replit_integrations/audio/routes.ts",
@@ -1631,6 +1635,47 @@
     },
     {
       "type": "endpoint",
+      "name": "GET /sessions",
+      "files": [
+        "server/routes/account.mjs",
+        "server/routes/accountActions.mjs",
+        "server/routes/therapy.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "DELETE /sessions/:sessionId",
+      "files": [
+        "server/routes/account.mjs",
+        "server/routes/accountActions.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "POST /delete-request",
+      "files": [
+        "server/routes/account.mjs",
+        "server/routes/accountActions.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /overview",
+      "files": [
+        "server/routes/admin-security.mjs",
+        "server/routes/adminBilling.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
       "name": "GET /drafts",
       "files": [
         "server/routes/admin-social-studio.mjs",
@@ -1678,6 +1723,18 @@
         "server/routes/audit-logs.mjs",
         "server/routes/mood.mjs",
         "server/routes/user.mjs"
+      ],
+      "severity": "high",
+      "suggestion": "Consolidate to single route handler"
+    },
+    {
+      "type": "endpoint",
+      "name": "GET /health",
+      "files": [
+        "server/routes/admin.mjs",
+        "server/routes/canva-oauth.mjs",
+        "server/routes/email.mjs",
+        "server/routes/perplexity.mjs"
       ],
       "severity": "high",
       "suggestion": "Consolidate to single route handler"
@@ -2340,5 +2397,5 @@
       "suggestion": "May be intentional if different admin sections"
     }
   ],
-  "timestamp": "2026-01-26T07:28:56.259Z"
+  "timestamp": "2026-01-26T16:56:36.910Z"
 }

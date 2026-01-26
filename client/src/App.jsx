@@ -187,6 +187,11 @@ const CourseCatalog = lazy(() => import("./pages/CourseCatalog.jsx"));
 const PracticeLibrary = lazy(() => import("./pages/PracticeLibrary.jsx"));
 const RolesPermissions = lazy(() => import("./pages/admin/RolesPermissions.jsx"));
 
+// Batch 15 - Optimization + Admin Tools (P401-P450)
+const FeatureFlags = lazy(() => import("./pages/admin/FeatureFlags.jsx"));
+const SystemAlerts = lazy(() => import("./pages/admin/SystemAlerts.jsx"));
+const FeedbackAggregator = lazy(() => import("./pages/admin/FeedbackAggregator.jsx"));
+
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
   return <AutopilotPage route={route} routeKey={routeKey} />;
@@ -806,6 +811,9 @@ export default function App() {
               <Route path="/courses">{() => <CourseCatalog />}</Route>
               <Route path="/practices">{() => <PracticeLibrary />}</Route>
               <Route path="/admin/roles">{() => <ProtectedRoute><AdminGuard><RolesPermissions /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/feature-flags">{() => <ProtectedRoute><AdminGuard><FeatureFlags /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/alerts">{() => <ProtectedRoute><AdminGuard><SystemAlerts /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/feedback">{() => <ProtectedRoute><AdminGuard><FeedbackAggregator /></AdminGuard></ProtectedRoute>}</Route>
 
               {/* Fallback - Config Driven Not Found */}
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>

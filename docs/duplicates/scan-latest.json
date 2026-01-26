@@ -1,5 +1,5 @@
 {
-  "scannedFiles": 1144,
+  "scannedFiles": 1213,
   "exactDuplicates": [
     {
       "hash": "235c0d03f583f08de1bf3bcf2521669a209dcbeeb80a536a37d96f9832b58a85",
@@ -327,8 +327,8 @@
         },
         {
           "path": "server/index.mjs",
-          "normalizedHash": "061da04a9596f6d0d59137639c71e8907be3f9fa0208706b4d403b4f1588a0de",
-          "rawHash": "956751ee74c05bea6e4557d4cfd184a53a240551f42b96a43b48da41a85cf7ed",
+          "normalizedHash": "d6e201233a6f3398a1549d698bdbf49a22f210b1a68a823866141a23ffe9e96a",
+          "rawHash": "57ade438280b130c253d0d0866dad2ac3aeb879196eab316f63f5006ef93fddd",
           "riskScore": 5
         },
         {
@@ -407,6 +407,24 @@
       "maxRisk": 5
     },
     {
+      "name": "EmptyState.jsx",
+      "files": [
+        {
+          "path": "client/src/components/EmptyState.jsx",
+          "normalizedHash": "38c4b749304d210aac1175f170f5b9f4009b27677e13be252c41d2555e5c9710",
+          "rawHash": "396c18e8611e97042ce8d00a6543672b6d22a39a1866714b9efe8e6a8949e73f",
+          "riskScore": 5
+        },
+        {
+          "path": "client/src/components/ui/EmptyState.jsx",
+          "normalizedHash": "4d6959c24d9234279fd265eaff4c93ed18b705b25aa4611ffb8d397b76819882",
+          "rawHash": "5b9e621ea7deebd95bc1d0996ff6c399a1db2f1ac4fbb0cdbb1d7ddfeccbf21d",
+          "riskScore": 5
+        }
+      ],
+      "maxRisk": 5
+    },
+    {
       "name": "Footer.jsx",
       "files": [
         {
@@ -453,8 +471,8 @@
         },
         {
           "path": "client/src/components/seo/SEO.tsx",
-          "normalizedHash": "ea9196f0ecc8a4c7da0a6f6492fe4ffda7cdd5d59a693a7c97eb753340eaee4f",
-          "rawHash": "abb34da91e8250e78cd2b92a607f7a04dd68a3e732c387f87d9ef4e86d9402ed",
+          "normalizedHash": "d5de9af682b5d981aed88b6d1e4dd954601430e32958d4c764f38f2c13b64506",
+          "rawHash": "17fd0d381d484eb0d839ceb71498fc39bb0a0ee12707a3cb8ee8bda840b03807",
           "riskScore": 5
         }
       ],
@@ -652,7 +670,7 @@
         {
           "path": "client/src/content/routes.js",
           "normalizedHash": "9ae84010bef3c17b7c8083ff4fc99bb7f691a9ff064d8ef3346cb9f7651fb77f",
-          "rawHash": "46ba24640d926cc1ef4e4063ef8431f8a70e52a981b81f1306355514981558b1",
+          "rawHash": "624bb1a988021682cd32b63e2ba013d72a1f84a6641cbd0094e918f8c57d0d8b",
           "riskScore": 5
         },
         {
@@ -892,7 +910,7 @@
         {
           "path": "server/dev.mjs",
           "normalizedHash": "ec1d7426f9c4bc7930b6d3b737e723c099f80d819ffbf47e223ccb9a00202e5a",
-          "rawHash": "5d8ea766b7f61c26557eb8c758f2dc0121bc4882c24bc06c82c836679360ed3c",
+          "rawHash": "0a90be1ee96dfa57d6cf2ee9e2b710f03fb41cc98c52ba613392c5115853a992",
           "riskScore": 5
         },
         {
@@ -1159,5 +1177,5 @@
     "scripts/.patch-backups",
     "scripts/_backups"
   ],
-  "timestamp": "2026-01-26T07:28:54.019Z"
+  "timestamp": "2026-01-26T16:56:34.822Z"
 }

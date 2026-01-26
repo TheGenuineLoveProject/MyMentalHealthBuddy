@@ -1,18 +1,18 @@
 # Collision Scan Report
 
-**Timestamp**: 2026-01-26T07:28:56.259Z
+**Timestamp**: 2026-01-26T16:56:36.910Z
 
 ## Summary
 
 | Type | Count |
 |------|-------|
-| Unique Endpoints | 439 |
+| Unique Endpoints | 444 |
 | Auth Middlewares | 7 |
 | Stripe Handlers | 3 |
 | OpenAI Wrappers | 10 |
 | Schema Tables | 2 |
 | Admin Dashboards | 11 |
-| **Collisions Found** | 68 |
+| **Collisions Found** | 72 |
 
 ## Collisions
 
@@ -31,19 +31,6 @@ Files:
 Files:
 - `server/dev.mjs`
 - `server/index.mjs`
-
-**Suggestion**: Consolidate to single route handler
-
-### endpoint: GET /health
-**Severity**: high
-
-Files:
-- `server/dev.mjs`
-- `server/index.mjs`
-- `server/routes/admin.mjs`
-- `server/routes/canva-oauth.mjs`
-- `server/routes/email.mjs`
-- `server/routes/perplexity.mjs`
 
 **Suggestion**: Consolidate to single route handler
 
@@ -102,6 +89,43 @@ Files:
 
 **Suggestion**: Consolidate to single route handler
 
+### endpoint: GET /sessions
+**Severity**: high
+
+Files:
+- `server/routes/account.mjs`
+- `server/routes/accountActions.mjs`
+- `server/routes/therapy.mjs`
+
+**Suggestion**: Consolidate to single route handler
+
+### endpoint: DELETE /sessions/:sessionId
+**Severity**: high
+
+Files:
+- `server/routes/account.mjs`
+- `server/routes/accountActions.mjs`
+
+**Suggestion**: Consolidate to single route handler
+
+### endpoint: POST /delete-request
+**Severity**: high
+
+Files:
+- `server/routes/account.mjs`
+- `server/routes/accountActions.mjs`
+
+**Suggestion**: Consolidate to single route handler
+
+### endpoint: GET /overview
+**Severity**: high
+
+Files:
+- `server/routes/admin-security.mjs`
+- `server/routes/adminBilling.mjs`
+
+**Suggestion**: Consolidate to single route handler
+
 ### endpoint: GET /drafts
 **Severity**: high
 
@@ -147,6 +171,17 @@ Files:
 - `server/routes/audit-logs.mjs`
 - `server/routes/mood.mjs`
 - `server/routes/user.mjs`
+
+**Suggestion**: Consolidate to single route handler
+
+### endpoint: GET /health
+**Severity**: high
+
+Files:
+- `server/routes/admin.mjs`
+- `server/routes/canva-oauth.mjs`
+- `server/routes/email.mjs`
+- `server/routes/perplexity.mjs`
 
 **Suggestion**: Consolidate to single route handler
 

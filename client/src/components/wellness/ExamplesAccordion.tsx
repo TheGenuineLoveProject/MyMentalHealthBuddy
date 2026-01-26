@@ -6,11 +6,15 @@ export type ExampleTier = {
 };
 
 export function ExamplesAccordion({
-  tiers,
+  tiers = [],
 }: {
-  tiers: ExampleTier[];
+  tiers?: ExampleTier[];
 }) {
   const [open, setOpen] = useState<string>("Beginner");
+
+  if (!tiers || tiers.length === 0) {
+    return null;
+  }
 
   return (
     <section aria-label="Examples" className="rounded-xl border p-4">

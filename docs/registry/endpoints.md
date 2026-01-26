@@ -1,6 +1,6 @@
 # API Endpoints Registry
 
-_Generated: 2026-01-26T07:09:52.965Z_
+_Generated: 2026-01-26T16:56:43.867Z_
 
 | Method | Path | File |
 |--------|------|------|
@@ -10,6 +10,13 @@ _Generated: 2026-01-26T07:09:52.965Z_
 | POST | `/password-reset/confirm` | `server/routes/account.mjs` |
 | DELETE | `/` | `server/routes/account.mjs` |
 | GET | `/export` | `server/routes/account.mjs` |
+| GET | `/sessions` | `server/routes/account.mjs` |
+| DELETE | `/sessions/:sessionId` | `server/routes/account.mjs` |
+| POST | `/delete-request` | `server/routes/account.mjs` |
+| GET | `/sessions` | `server/routes/accountActions.mjs` |
+| DELETE | `/sessions/:sessionId` | `server/routes/accountActions.mjs` |
+| POST | `/delete-request` | `server/routes/accountActions.mjs` |
+| POST | `/cancel-delete-request` | `server/routes/accountActions.mjs` |
 | GET | `/rate-limits` | `server/routes/admin-security.mjs` |
 | GET | `/rate-limits/stats` | `server/routes/admin-security.mjs` |
 | DELETE | `/rate-limits/logs` | `server/routes/admin-security.mjs` |
@@ -51,6 +58,9 @@ _Generated: 2026-01-26T07:09:52.965Z_
 | GET | `/metrics` | `server/routes/admin.mjs` |
 | GET | `/diagnostics` | `server/routes/admin.mjs` |
 | GET | `/logs/recent` | `server/routes/admin.mjs` |
+| GET | `/overview` | `server/routes/adminBilling.mjs` |
+| GET | `/subscriptions` | `server/routes/adminBilling.mjs` |
+| GET | `/plan-distribution` | `server/routes/adminBilling.mjs` |
 | GET | `/` | `server/routes/ai-dashboard.mjs` |
 | GET | `/mood-chart` | `server/routes/ai-dashboard.mjs` |
 | GET | `/wellness-score` | `server/routes/ai-dashboard.mjs` |

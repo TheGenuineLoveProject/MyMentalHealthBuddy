@@ -1,14 +1,14 @@
 # Duplicate Scan Report
 
-**Scanned**: 1144 files
-**Timestamp**: 2026-01-26T07:28:54.019Z
+**Scanned**: 1213 files
+**Timestamp**: 2026-01-26T16:56:34.822Z
 
 ## Summary
 
 | Type | Count |
 |------|-------|
 | Exact Duplicates | 4 groups |
-| Name Duplicates | 51 groups |
+| Name Duplicates | 52 groups |
 | Shadow Copies | 0 files |
 | Risky Directories | 5 |
 
