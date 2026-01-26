@@ -13,6 +13,7 @@
  * - AOS with once:true (gentle animations)
  * - GSAP respects prefers-reduced-motion
  * - Sacred UI components with CSS Modules
+ * - Deterministic routeKey for SEO/benefits/content selection
  * ============================================================================
  */
 
@@ -22,16 +23,19 @@ import PageTemplate from '../components/PageTemplate.jsx';
 import RouteGuard from '../components/RouteGuard.jsx';
 import styles from './AutopilotFallback.module.css';
 
-export default function AutopilotPage({ route }) {
+export function AutopilotPage({ route, routeKey }) {
   const [location] = useLocation();
   const pathname = route || location;
+  
+  // Deterministic routeKey: use provided or fallback to route
+  const effectiveRouteKey = routeKey || pathname;
   
   const config = getRouteConfig(pathname);
   
   if (!config) {
     const notFoundConfig = getRouteConfig('/not-found');
     if (notFoundConfig) {
-      return <PageTemplate config={notFoundConfig} />;
+      return <PageTemplate config={notFoundConfig} routeKey="not-found" />;
     }
     return (
       <div className={styles.container}>
@@ -54,7 +58,8 @@ export default function AutopilotPage({ route }) {
     );
   }
   
-  const page = <PageTemplate config={config} />;
+  // Pass effectiveRouteKey to PageTemplate for SEO/benefits/content selection
+  const page = <PageTemplate config={config} routeKey={effectiveRouteKey} />;
   
   if (config.protected) {
     return <RouteGuard>{page}</RouteGuard>;
@@ -63,4 +68,4 @@ export default function AutopilotPage({ route }) {
   return page;
 }
 
-export { AutopilotPage };
+export default AutopilotPage;

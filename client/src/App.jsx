@@ -9,6 +9,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
 import { AutopilotPage } from "./pages/_autopilot.jsx";
 import AgeConsentGate from "./components/AgeConsentGate.jsx";
+import { routeKeyFromRoute } from "./utils/routeKey.js";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
@@ -129,6 +130,11 @@ const ReframePage = lazy(() => import("./pages/tools/ReframePage.jsx"));
 const TwelveStepsPage = lazy(() => import("./pages/TwelveStepsPage.tsx"));
 const BehaviorChangePage = lazy(() => import("./pages/BehaviorChangePage.tsx"));
 
+function ConfigRoute({ route }) {
+  const routeKey = routeKeyFromRoute(route);
+  return <AutopilotPage route={route} routeKey={routeKey} />;
+}
+
 function LoadingFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-mesh">
@@ -138,10 +144,6 @@ function LoadingFallback() {
       </div>
     </div>
   );
-}
-
-function ConfigRoute({ route }) {
-  return <AutopilotPage route={route} />;
 }
 
 function ProtectedRoute({ children }) {

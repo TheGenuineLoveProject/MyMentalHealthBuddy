@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
+import { useLocation } from "wouter";
 import { SEO } from "@/components/seo/SEO";
 import { SafetyFooter } from "@/components/safety/SafetyFooter";
 import { BenefitsBlock } from "@/components/marketing/BenefitsBlock";
 import { buildPageContext } from "@/content/context/buildPageContext";
 import { getBenefitsForRoute } from "@/content/benefits/benefitsBank";
+import { routeKeyFromRoute } from "@/utils/routeKey";
 
 interface PageScaffoldProps {
   routeKey?: string;
@@ -32,12 +34,16 @@ export function PageScaffold({
   className = "",
   children,
 }: PageScaffoldProps) {
-  const context = routeKey ? buildPageContext(routeKey) : null;
+  // Auto-derive routeKey from current location if not provided
+  const [location] = useLocation();
+  const effectiveRouteKey = routeKey || routeKeyFromRoute(location);
+  
+  const context = effectiveRouteKey ? buildPageContext(effectiveRouteKey) : null;
   
   const pageTitle = title || context?.title || "Page";
   const pageDescription = description || context?.description || "";
   const pageBenefits = benefitsBullets || 
-    (routeKey ? getBenefitsForRoute(routeKey).slice(0, 3) : [
+    (effectiveRouteKey ? getBenefitsForRoute(effectiveRouteKey).slice(0, 3) : [
       "Learn at your own pace with no pressure",
       "Practice skills that support emotional wellbeing",
       "Access evidence-informed approaches anytime",
