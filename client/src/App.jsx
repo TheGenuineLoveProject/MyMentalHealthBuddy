@@ -139,6 +139,41 @@ const SavedLibrary = lazy(() => import("./pages/library/SavedLibrary.jsx"));
 const GentleProgressDashboard = lazy(() => import("./pages/dashboard/ProgressDashboard.jsx"));
 const TopicHubPage = lazy(() => import("./pages/hubs/TopicHubPage.jsx"));
 
+// Batch 11 - Personalization (P201-P210)
+const PathwaysHome = lazy(() => import("./pages/pathways/PathwaysHome.jsx"));
+const GoalOnboarding = lazy(() => import("./pages/pathways/GoalOnboarding.jsx"));
+const Favorites = lazy(() => import("./pages/pathways/Favorites.jsx"));
+const ProgressStreaks = lazy(() => import("./pages/pathways/ProgressStreaks.jsx"));
+const CalmPlan = lazy(() => import("./pages/pathways/CalmPlan.jsx"));
+const ValuesToActions = lazy(() => import("./pages/pathways/ValuesToActions.jsx"));
+const ReflectionHistory = lazy(() => import("./pages/pathways/ReflectionHistory.jsx"));
+const NotificationPreferences = lazy(() => import("./pages/preferences/NotificationPreferences.jsx"));
+const SafetyPreferences = lazy(() => import("./pages/preferences/SafetyPreferences.jsx"));
+
+// Batch 11 - Tools Expansion (P211-P220)
+const CompassionBreak = lazy(() => import("./pages/tools/CompassionBreak.jsx"));
+const Reframe = lazy(() => import("./pages/tools/Reframe.jsx"));
+const UrgeSurf = lazy(() => import("./pages/tools/UrgeSurf.jsx"));
+const GriefLetter = lazy(() => import("./pages/tools/GriefLetter.jsx"));
+const RepairScript = lazy(() => import("./pages/tools/RepairScript.jsx"));
+const AweMicrodose = lazy(() => import("./pages/tools/AweMicrodose.jsx"));
+const BodyScan = lazy(() => import("./pages/tools/BodyScan.jsx"));
+const DigitalSunset = lazy(() => import("./pages/tools/DigitalSunset.jsx"));
+const MeaningMap = lazy(() => import("./pages/tools/MeaningMap.jsx"));
+const CommunityCheckin = lazy(() => import("./pages/tools/CommunityCheckin.jsx"));
+
+// Batch 11 - Admin & Content (P221-P240)
+const ContentStudioAdmin = lazy(() => import("./pages/admin/ContentStudioAdmin.jsx"));
+const SocialStudioAdmin = lazy(() => import("./pages/admin/SocialStudioAdmin.jsx"));
+const RevenueAdmin = lazy(() => import("./pages/admin/RevenueAdmin.jsx"));
+
+// Batch 11 - Account & Payments (P241-P250)
+const Subscription = lazy(() => import("./pages/account/Subscription.jsx"));
+const OrderHistory = lazy(() => import("./pages/account/OrderHistory.jsx"));
+const PricingPage = lazy(() => import("./pages/PricingPage.jsx"));
+const RefundHelp = lazy(() => import("./pages/help/RefundHelp.jsx"));
+const LegalPage = lazy(() => import("./pages/LegalPage.jsx"));
+
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
   return <AutopilotPage route={route} routeKey={routeKey} />;
@@ -503,6 +538,34 @@ export default function App() {
                 <ProtectedRoute><MirrorPage /></ProtectedRoute>
               </Route>
 
+              {/* Batch 11 - Personalization (P201-P210) */}
+              <Route path="/pathways">
+                <ProtectedRoute><PathwaysHome /></ProtectedRoute>
+              </Route>
+              <Route path="/pathways/onboarding">
+                <ProtectedRoute><GoalOnboarding /></ProtectedRoute>
+              </Route>
+              <Route path="/pathways/favorites">
+                <ProtectedRoute><Favorites /></ProtectedRoute>
+              </Route>
+              <Route path="/pathways/streaks">
+                <ProtectedRoute><ProgressStreaks /></ProtectedRoute>
+              </Route>
+              <Route path="/pathways/calm-plan">
+                <ProtectedRoute><CalmPlan /></ProtectedRoute>
+              </Route>
+              <Route path="/pathways/values">
+                <ProtectedRoute><ValuesToActions /></ProtectedRoute>
+              </Route>
+              <Route path="/pathways/reflections">
+                <ProtectedRoute><ReflectionHistory /></ProtectedRoute>
+              </Route>
+
+              {/* Batch 11 - Public Pages (P241, P248-P249) */}
+              <Route path="/pricing-page" component={PricingPage} />
+              <Route path="/legal-info" component={LegalPage} />
+              <Route path="/help/billing" component={RefundHelp} />
+
               {/* Community Routes */}
               <Route path="/community">
                 <ProtectedRoute><CommunityPage /></ProtectedRoute>
@@ -580,6 +643,38 @@ export default function App() {
                 <WellnessRoute><BehaviorChangePage /></WellnessRoute>
               </Route>
 
+              {/* Batch 11 - Tool Expansion (P211-P220) */}
+              <Route path="/tools/compassion-break">
+                <WellnessRoute><CompassionBreak /></WellnessRoute>
+              </Route>
+              <Route path="/tools/reframe-tool">
+                <WellnessRoute><Reframe /></WellnessRoute>
+              </Route>
+              <Route path="/tools/urge-surf">
+                <WellnessRoute><UrgeSurf /></WellnessRoute>
+              </Route>
+              <Route path="/tools/grief-letter">
+                <WellnessRoute><GriefLetter /></WellnessRoute>
+              </Route>
+              <Route path="/tools/repair-script">
+                <WellnessRoute><RepairScript /></WellnessRoute>
+              </Route>
+              <Route path="/tools/awe-microdose">
+                <WellnessRoute><AweMicrodose /></WellnessRoute>
+              </Route>
+              <Route path="/tools/body-scan">
+                <WellnessRoute><BodyScan /></WellnessRoute>
+              </Route>
+              <Route path="/tools/digital-sunset">
+                <WellnessRoute><DigitalSunset /></WellnessRoute>
+              </Route>
+              <Route path="/tools/meaning-map">
+                <WellnessRoute><MeaningMap /></WellnessRoute>
+              </Route>
+              <Route path="/tools/community-checkin">
+                <WellnessRoute><CommunityCheckin /></WellnessRoute>
+              </Route>
+
               {/* Additional AI Routes - Config Driven */}
               <Route path="/ai/insights">
                 <ProtectedRoute><ConfigRoute route="/ai/insights" /></ProtectedRoute>
@@ -630,12 +725,39 @@ export default function App() {
               <Route path="/admin/billing">
                 <AdminGuard><BillingViewer /></AdminGuard>
               </Route>
+
+              {/* Batch 11 - Admin Routes (P231-P240, P250) */}
+              <Route path="/admin/content-studio">
+                <AdminGuard><ContentStudioAdmin /></AdminGuard>
+              </Route>
+              <Route path="/admin/social-studio">
+                <AdminGuard><SocialStudioAdmin /></AdminGuard>
+              </Route>
+              <Route path="/admin/revenue">
+                <AdminGuard><RevenueAdmin /></AdminGuard>
+              </Route>
+
               <Route path="/account/sessions">
                 <ProtectedRoute><Sessions /></ProtectedRoute>
               </Route>
               <Route path="/account/delete">
                 <ProtectedRoute><DeleteAccount /></ProtectedRoute>
               </Route>
+
+              {/* Batch 11 - Account Routes (P244-P246) */}
+              <Route path="/account/subscription">
+                <ProtectedRoute><Subscription /></ProtectedRoute>
+              </Route>
+              <Route path="/account/orders">
+                <ProtectedRoute><OrderHistory /></ProtectedRoute>
+              </Route>
+              <Route path="/preferences/notifications">
+                <ProtectedRoute><NotificationPreferences /></ProtectedRoute>
+              </Route>
+              <Route path="/preferences/safety">
+                <ProtectedRoute><SafetyPreferences /></ProtectedRoute>
+              </Route>
+
               <Route path="/content-admin">
                 <AdminGuard><ContentAdminDashboard /></AdminGuard>
               </Route>
