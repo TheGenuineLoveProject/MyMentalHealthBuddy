@@ -12,6 +12,7 @@ import AgeConsentGate from "./components/AgeConsentGate.jsx";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
+const CanvaLanding = lazy(() => import("./pages/CanvaLanding.jsx"));
 const Register = lazy(() => import("./pages/Register.jsx"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword.jsx"));
@@ -174,7 +175,7 @@ export default function App() {
               <Route path="/about">{() => <ConfigRoute route="/about" />}</Route>
               <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
-              <Route path="/canva-landing">{() => <ConfigRoute route="/canva-landing" />}</Route>
+              <Route path="/canva-landing" component={CanvaLanding} />
               <Route path="/pricing">{() => <ConfigRoute route="/pricing" />}</Route>
               <Route path="/challenge" component={Challenge} />
               <Route path="/challenge/day/:dayNum" component={ChallengeDay} />

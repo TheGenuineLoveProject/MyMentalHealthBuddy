@@ -1309,6 +1309,30 @@ const rawRoutes = [
       }
     ]
   },
+  {
+    route: '/canva-landing',
+    category: 'landing',
+    pageLabel: 'Canva Landing',
+    title: 'Heal Your Mind, Body & Soul — The Genuine Love Project',
+    description: 'A comprehensive mental wellness platform offering AI-powered support, mood tracking, journaling, and evidence-based healing tools. Transform from A to Z.',
+    motion: { level: 'rich' },
+    component: 'CanvaLanding',
+    hero: {
+      eyebrow: 'Transformative Healing Platform',
+      title: 'Heal Your Mind,',
+      titleHighlight: 'Body & Soul',
+      subtitle: 'A comprehensive platform designed to guide you through every step of your healing journey—from mindfulness to personal growth.',
+      primaryCta: { label: 'Begin Your Journey', href: '/register' },
+      secondaryCta: { label: 'Explore Dashboard', href: '/dashboard' }
+    },
+    sections: [
+      {
+        id: 'features',
+        title: 'Your Complete Wellness Toolkit',
+        description: 'Comprehensive resources designed to support every aspect of your healing journey'
+      }
+    ]
+  },
   
   // =========================================================================
   // AUTHENTICATION (6 routes)

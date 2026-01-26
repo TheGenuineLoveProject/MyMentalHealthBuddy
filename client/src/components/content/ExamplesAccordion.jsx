@@ -90,18 +90,7 @@ export default function ExamplesAccordion({
     setOpenLevel(openLevel === level ? null : level);
   };
 
-  if (examples.length === 0) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Examples Accordion — The Genuine Love Project" description="Explore examples accordion tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Examples Accordion</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!examples || examples.length === 0) return null;
 
   return (
     <section

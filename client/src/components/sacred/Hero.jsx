@@ -141,19 +141,24 @@ export default function Hero({
         {(primaryCta || secondaryCta) && (
           <div className={styles.actions} data-aos="fade-up" data-aos-delay="350">
             {primaryCta && (
-              <Link href={primaryCta.href || '/register'}>
-                <a className={styles.primaryBtn} data-testid="hero-primary-cta">
-                  {primaryCta.text || primaryCta}
-                  <ArrowRight className={styles.btnIcon} aria-hidden="true" />
-                </a>
+              <Link 
+                href={primaryCta.href || '/register'}
+                className={styles.primaryBtn} 
+                data-testid="hero-primary-cta"
+              >
+                {primaryCta.icon && <span className={styles.btnIcon}>{primaryCta.icon}</span>}
+                {primaryCta.label || primaryCta.text || primaryCta}
+                <ArrowRight className={styles.btnIcon} aria-hidden="true" />
               </Link>
             )}
             {secondaryCta && (
-              <Link href={secondaryCta.href || '/about'}>
-                <a className={styles.secondaryBtn} data-testid="hero-secondary-cta">
-                  {secondaryCta.text || secondaryCta}
-                  <ChevronRight className={styles.btnIcon} aria-hidden="true" />
-                </a>
+              <Link 
+                href={secondaryCta.href || '/about'}
+                className={styles.secondaryBtn} 
+                data-testid="hero-secondary-cta"
+              >
+                {secondaryCta.label || secondaryCta.text || secondaryCta}
+                {secondaryCta.icon || <ChevronRight className={styles.btnIcon} aria-hidden="true" />}
               </Link>
             )}
           </div>
