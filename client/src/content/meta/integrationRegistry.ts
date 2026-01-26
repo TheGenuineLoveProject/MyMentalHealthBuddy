@@ -347,6 +347,118 @@ export const INTEGRATION_REGISTRY: IntegrationEntry[] = [
     routeKeysTouched: [],
     notes: 'Route collision validation script',
     lastUpdated: '2026-01-26'
+  },
+  
+  // ============================================================================
+  // BATCH 10 ADDITIONS (P151-P200)
+  // ============================================================================
+  {
+    integrationKey: 'devex_smoke_test',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['scripts/smokeTest.mjs'],
+    routeKeysTouched: [],
+    notes: 'P163 - Critical route smoke tests',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'devex_route_snapshot',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['scripts/routeSnapshotTest.mjs', 'docs/ci/route-snapshot.json'],
+    routeKeysTouched: [],
+    notes: 'P161 - Route registry snapshot tests',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'devex_contract_tests',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['scripts/endpointContractTest.mjs'],
+    routeKeysTouched: [],
+    notes: 'P162 - API endpoint contract tests',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'accessibility_smoke_checks',
+    category: 'accessibility',
+    status: 'done',
+    canonicalFiles: ['scripts/a11yCheck.mjs'],
+    routeKeysTouched: [],
+    notes: 'P165 - Accessibility smoke check script',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'devex_verify_command',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['package.json'],
+    routeKeysTouched: [],
+    notes: 'P166 - npm run verify consolidated command',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'devex_no_duplicate_work',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['scripts/noDuplicateWork.mjs'],
+    routeKeysTouched: [],
+    notes: 'Batch 10 - Anti-duplicate gate script',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'security_secrets_validator',
+    category: 'security',
+    status: 'done',
+    canonicalFiles: ['scripts/secretsValidator.mjs'],
+    routeKeysTouched: [],
+    notes: 'P194 - Environment secrets validation',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'security_pii_redaction',
+    category: 'security',
+    status: 'done',
+    canonicalFiles: ['scripts/piiRedaction.mjs'],
+    routeKeysTouched: [],
+    notes: 'P193 - PII redaction utility for logs',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'security_dependency_audit',
+    category: 'security',
+    status: 'done',
+    canonicalFiles: ['scripts/dependencyAudit.mjs'],
+    routeKeysTouched: [],
+    notes: 'P198 - Dependency security audit',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'performance_calm_mode',
+    category: 'performance',
+    status: 'done',
+    canonicalFiles: ['client/src/components/ui/CalmModeToggle.jsx'],
+    routeKeysTouched: [],
+    notes: 'P180 - Calm mode UI toggle (reduced motion)',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'performance_empty_states',
+    category: 'performance',
+    status: 'done',
+    canonicalFiles: ['client/src/components/ui/EmptyState.jsx'],
+    routeKeysTouched: [],
+    notes: 'P175 - Standardized empty states',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'content_microcopy_rotation',
+    category: 'content',
+    status: 'done',
+    canonicalFiles: ['client/src/content/microcopy/rotationSeed.ts'],
+    routeKeysTouched: [],
+    notes: 'Batch 10 - Microcopy rotation seed utility',
+    lastUpdated: '2026-01-26'
   }
 ];
 

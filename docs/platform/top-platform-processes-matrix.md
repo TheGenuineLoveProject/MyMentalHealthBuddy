@@ -137,9 +137,28 @@
 
 ---
 
+## Batch 10 Additions (12/12 ✅)
+
+| ID | Process | Status | Files |
+|----|---------|--------|-------|
+| B10-001 | Smoke test script (P163) | ✅ DONE | scripts/smokeTest.mjs |
+| B10-002 | Route snapshot test (P161) | ✅ DONE | scripts/routeSnapshotTest.mjs |
+| B10-003 | Endpoint contract tests (P162) | ✅ DONE | scripts/endpointContractTest.mjs |
+| B10-004 | A11y smoke checks (P165) | ✅ DONE | scripts/a11yCheck.mjs |
+| B10-005 | Verify command (P166) | ✅ DONE | package.json |
+| B10-006 | No duplicate work gate | ✅ DONE | scripts/noDuplicateWork.mjs |
+| B10-007 | Secrets validator (P194) | ✅ DONE | scripts/secretsValidator.mjs |
+| B10-008 | PII redaction (P193) | ✅ DONE | scripts/piiRedaction.mjs |
+| B10-009 | Dependency audit (P198) | ✅ DONE | scripts/dependencyAudit.mjs |
+| B10-010 | Calm mode toggle (P180) | ✅ DONE | client/src/components/ui/CalmModeToggle.jsx |
+| B10-011 | Empty states (P175) | ✅ DONE | client/src/components/ui/EmptyState.jsx |
+| B10-012 | Microcopy rotation | ✅ DONE | client/src/content/microcopy/rotationSeed.ts |
+
+---
+
 ## Platform Status
 
-**All 60 top platform processes are COMPLETE.**
+**72 top platform processes are COMPLETE (60 base + 12 Batch 10).**
 
 The platform has achieved full coverage across all critical operational areas:
 - Security hardened with rate limiting, CORS, Helmet, CSRF, audit logging
@@ -147,7 +166,9 @@ The platform has achieved full coverage across all critical operational areas:
 - Performance optimized with code splitting, lazy loading, compression
 - SEO complete with sitemap, meta tags, JSON-LD
 - Growth tools deployed with email, analytics, social studio
-- DevEx automated with validation scripts and scanning
+- DevEx automated with validation scripts, scanning, and testing
+- QA foundation with smoke tests, a11y checks, contract tests
+- Privacy enhanced with PII redaction and secrets validation
 
 ---
 

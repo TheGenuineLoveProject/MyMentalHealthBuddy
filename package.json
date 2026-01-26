@@ -74,7 +74,13 @@
     "validate:routes": "node scripts/validateRoutes.mjs",
     "validate:routekeys": "node scripts/validateRouteKeys.mjs",
     "nodupes": "node scripts/noDuplicateWork.mjs",
-    "verify": "npm run typecheck && npm run build && npm run nodupes"
+    "verify": "npm run typecheck && npm run build && npm run nodupes",
+    "smoke": "node scripts/smokeTest.mjs",
+    "a11y:check": "node scripts/a11yCheck.mjs",
+    "test:routes": "node scripts/routeSnapshotTest.mjs",
+    "test:contracts": "node scripts/endpointContractTest.mjs",
+    "validate:secrets": "node scripts/secretsValidator.mjs",
+    "audit:deps": "node scripts/dependencyAudit.mjs"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
