@@ -37,9 +37,8 @@ import SocialShare from './SocialShare.jsx';
 import styles from './PageTemplate.module.css';
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import PageScaffold from "./layout/PageScaffold.tsx";
-import { getModules } from "../content/modules/modules.js";
-import { getRouteMeta } from "../content/meta/routeMetaRegistry";
 import { ModulesPanel } from "./modules/ModulesPanel";
+import { getRouteMeta, resolveInternalLinks } from "../content/meta/routeMetaRegistry";
 import { RelatedLinksBlock } from "./RelatedLinksBlock";
 
 const iconMap = {
@@ -948,6 +947,7 @@ export default function PageTemplate({ config, children, routeKey }) {
   const { readingLevel, setReadingLevel, setRouteDefault, isReady } = useReadingLevel();
   const effectiveRouteKey = routeKey || config?.routeKey || "unknown";
   const meta = getRouteMeta(effectiveRouteKey);
+  const resolvedLinks = resolveInternalLinks(effectiveRouteKey);
 
   useEffect(() => {
     prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1136,7 +1136,7 @@ export default function PageTemplate({ config, children, routeKey }) {
             
             <ModulesPanel routeKey={effectiveRouteKey} />
             
-            <RelatedLinksBlock links={meta.internalLinks} />
+            <RelatedLinksBlock links={resolvedLinks} />
 
             {config.sections && config.sections.map((section, index) => (
               <ContentSection key={section.id || index} section={section} index={index} readingLevel={readingLevel} />

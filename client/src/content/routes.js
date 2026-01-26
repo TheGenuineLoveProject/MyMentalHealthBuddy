@@ -36,38 +36,32 @@ import {
 } from 'lucide-react';
     // client/src/content/routes.js
     import { normalizePathname, routeKeyFromPathname } from "./routeKey";
-    import { getRouteMeta } from "./routeMetaRegistry";
+import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
 
-    // OPTIONAL: if you already have explicit configs, keep them here.
-    // This stays small because RouteMetaRegistry provides defaults.
-    const ROUTE_CONFIG = {
-      "/": { protected: false },
-      "/dashboard": { protected: true },
-      "/premium": { protected: true },
-    };
+/**
+ * Return the page config for PageTemplate.
+ * Now routeKey is deterministic and always available.
+ */
+export function getRouteConfig(pathname, opts = {}) {
+  const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname);
+  const meta = getRouteMeta(routeKey);
 
-    export function getRouteConfig(pathname, opts = {}) {
-      const p = normalizePathname(pathname || "/");
-      const routeKey = opts.routeKey || routeKeyFromPathname(p);
+  // Your app already expects config.protected sometimes.
+  // Keep it simple: default false unless you add rules.
+  const protectedRoute = Boolean(opts.protected);
 
-      // explicit config wins for behavior flags (protected, etc)
-      const base = ROUTE_CONFIG[p] || ROUTE_CONFIG["/" + routeKey] || {};
+  return {
+    routeKey,
+    canonicalPath: meta.canonicalPath,
+    title: meta.title,
+    description: meta.description,
+    benefits: meta.benefits,
+    internalLinks: meta.internalLinks,
+    modules: meta.modules,
+    protected: protectedRoute,
+  };
+}
 
-      // single source of truth for meta/content pointers
-      const meta = getRouteMeta(routeKey);
-
-      return {
-        pathname: p,
-        routeKey,
-        protected: Boolean(base.protected),
-        // everything below is used by PageTemplate/PageScaffold
-        title: meta.title,
-        description: meta.description,
-        benefits: meta.benefits,
-        internalLinks: meta.internalLinks,
-        modules: meta.modules,
-      };
-    }
 // --- RouteKey -> Path resolver (single source of truth) ---
 
 let __routeKeyToPathCache = null;

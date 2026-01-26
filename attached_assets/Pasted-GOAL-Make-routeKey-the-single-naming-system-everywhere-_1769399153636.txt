@@ -1,0 +1,37 @@
+GOAL:
+Make routeKey the single naming system everywhere.
+internalLinks must store routeKeys (not paths), and UI must auto-resolve to canonical paths via RouteMetaRegistry.
+Fix build error in client/src/content/routes.js (“Expression expected”).
+
+DO THIS:
+
+1) Create/replace file: client/src/content/meta/routeMetaRegistry.ts
+Paste the full contents exactly (RouteMetaRegistry with: routeKey, canonicalPath, internalLinks routeKeys, resolveInternalLinks, resolveRoutePath, deriveRouteKeyFromPath).
+
+2) Create file: client/src/components/RelatedLinksBlock.jsx
+Paste the full contents exactly (shows “Next best step” cards using hrefs).
+
+3) Update file: client/src/components/PageTemplate.jsx
+- Import: getRouteMeta + resolveInternalLinks from ../content/meta/routeMetaRegistry
+- Import: RelatedLinksBlock from ./RelatedLinksBlock
+- Inside PageTemplate({ config, routeKey }) compute:
+  const meta = getRouteMeta(routeKey);
+  const related = resolveInternalLinks(routeKey);
+- Render: <RelatedLinksBlock links={related} /> somewhere in the layout.
+
+4) Fix file: client/src/content/routes.js
+Replace ANY placeholder like: const config = /* ... */
+with a valid getRouteConfig implementation:
+- import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
+- export function getRouteConfig(pathname, opts={}) { const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname); const meta = getRouteMeta(routeKey); return { routeKey, canonicalPath: meta.canonicalPath, title: meta.title, description: meta.description, benefits: meta.benefits, internalLinks: meta.internalLinks, modules: meta.modules, protected: Boolean(opts.protected) }; }
+
+5) Run build + verify:
+- npm run build
+- Open /hubs/anxiety and confirm:
+  - Related links show with correct hrefs resolved from routeKeys
+  - No duplicate link UI anywhere else (registry-driven)
+
+CONSTRAINTS:
+Do not duplicate metadata across pages.
+Do not store raw paths in internalLinks; store routeKeys only.
+canonicalPath must be resolved from registry, fallback inferred.

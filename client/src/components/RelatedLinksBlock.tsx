@@ -1,53 +1,47 @@
-import React from "react";
-import { getPathForRouteKey } from "../content/routes.js";
+import { Link } from "wouter";
 
-type LinkItem = { label: string; routeKey: string };
+type ResolvedLink = { 
+  label: string; 
+  routeKey: string; 
+  href: string; 
+};
 
-export function RelatedLinksBlock({
-  links,
-  title = "Next best steps",
-  subtitle = "Choose one small, supportive link (no pressure).",
-}: {
-  links?: LinkItem[];
+export function RelatedLinksBlock({ 
+  links = [],
+  title = "Next best step",
+  subtitle = "Choose one"
+}: { 
+  links?: ResolvedLink[]; 
   title?: string;
   subtitle?: string;
 }) {
-  if (!links || links.length === 0) return null;
-
-  const resolved = links
-    .map((l) => {
-      const path = getPathForRouteKey(l.routeKey);
-      return path ? { label: l.label, path } : null;
-    })
-    .filter(Boolean) as Array<{ label: string; path: string }>;
-
-  if (resolved.length === 0) return null;
+  if (!links?.length) return null;
 
   return (
     <section 
-      className="mt-6 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.18)] p-5"
+      className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4"
       data-testid="section-related-links"
     >
-      <div className="mb-3">
-        <h3 className="text-base font-semibold">{title}</h3>
-        <p className="mt-1 text-sm opacity-80">{subtitle}</p>
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-base font-semibold">{title}</h2>
+        <span className="text-xs opacity-70">{subtitle}</span>
       </div>
 
-      <ul className="grid gap-2 md:grid-cols-2">
-        {resolved.map((l, idx) => (
-          <li key={l.path}>
-            <a
-              href={l.path}
-              className="group flex items-center justify-between rounded-xl border border-[rgba(255,255,255,0.10)] bg-[rgba(255,255,255,0.03)] px-4 py-3 transition hover:bg-[rgba(255,255,255,0.06)]"
-              data-testid={`link-related-${idx}`}
-            >
-              <span className="text-sm font-medium">{l.label}</span>
-              <span className="text-sm opacity-70 group-hover:opacity-90">→</span>
-            </a>
-          </li>
+      <div className="mt-3 grid gap-2">
+        {links.map((l, idx) => (
+          <Link 
+            key={l.routeKey} 
+            href={l.href} 
+            className="block"
+            data-testid={`link-related-${idx}`}
+          >
+            <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 hover:bg-black/20 transition">
+              <div className="text-sm font-medium">{l.label}</div>
+              <div className="text-xs opacity-70">{l.href}</div>
+            </div>
+          </Link>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }
-
