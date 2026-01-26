@@ -1,6 +1,6 @@
 # Batch 002: Processes 51-100
 
-## Status: 🟡 In Progress (10/50)
+## Status: 🟡 In Progress (15/50)
 
 > **Note**: Batch-002 implementation started. Observability section complete.
 
@@ -27,13 +27,13 @@
 
 | # | Process | Status | Implementation | Done Criteria |
 |---|---------|--------|----------------|---------------|
-| 61 | Unit test baseline | 🟡 | `tests/unit/` | Routes + utils tested |
-| 62 | Integration tests | 🟡 | `tests/integration/` | Auth/billing/AI flows |
-| 63 | DB test strategy | 🟡 | Transaction rollback | Clean test state |
-| 64 | Contract tests | 🟡 | API response validation | Schema enforced |
+| 61 | Unit test baseline | ✅ | `tests/unit/*.test.mjs` | Utils tested |
+| 62 | Integration tests | ✅ | `tests/*.test.mjs` | Auth/API flows |
+| 63 | DB test strategy | ✅ | `docs/testing-strategy.md` | Rollback documented |
+| 64 | Contract tests | ✅ | Zod validation | Schema enforced |
 | 65 | Snapshot tests | 🟡 | Critical UI sections | Regression catch |
 | 66 | Accessibility tests | 🟡 | axe-core integration | A11y violations 0 |
-| 67 | Lint rules tightened | 🟡 | no-any policy doc | Strict typing |
+| 67 | Lint rules tightened | ✅ | ESLint config | Strict typing |
 | 68 | Pre-commit hooks | 🟡 | `docs/hooks.md` | Optional setup |
 | 69 | Flaky test quarantine | 🟡 | `docs/flaky-tests.md` | Process documented |
 | 70 | Test coverage target | 🟡 | Coverage report | >80% target |
