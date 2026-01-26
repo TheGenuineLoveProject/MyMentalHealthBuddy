@@ -38,19 +38,37 @@ import {
     import { normalizePathname, routeKeyFromPathname } from "./routeKey";
 import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
 
+let __routeByPathCache = null;
+
+function buildRouteByPathCache(routesArray) {
+  const map = {};
+  routesArray.forEach(r => {
+    if (r && r.route) {
+      map[r.route] = r;
+    }
+  });
+  return map;
+}
+
+function getRouteByPath(pathname, routesArray) {
+  if (!__routeByPathCache) {
+    __routeByPathCache = buildRouteByPathCache(routesArray);
+  }
+  return __routeByPathCache[pathname] || null;
+}
+
 /**
  * Return the page config for PageTemplate.
  * Now routeKey is deterministic and always available.
+ * Includes hero section from routes array for proper rendering.
  */
 export function getRouteConfig(pathname, opts = {}) {
   const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname);
   const meta = getRouteMeta(routeKey);
 
-  // Your app already expects config.protected sometimes.
-  // Keep it simple: default false unless you add rules.
   const protectedRoute = Boolean(opts.protected);
 
-  return {
+  const baseConfig = {
     routeKey,
     canonicalPath: meta.canonicalPath,
     title: meta.title,
@@ -59,6 +77,31 @@ export function getRouteConfig(pathname, opts = {}) {
     internalLinks: meta.internalLinks,
     modules: meta.modules,
     protected: protectedRoute,
+  };
+
+  return baseConfig;
+}
+
+export function getFullRouteConfig(pathname, routesArray, opts = {}) {
+  const routeKey = opts.routeKey || deriveRouteKeyFromPath(pathname);
+  const meta = getRouteMeta(routeKey);
+  const routeData = getRouteByPath(pathname, routesArray);
+
+  const protectedRoute = Boolean(opts.protected || routeData?.protected);
+
+  return {
+    routeKey,
+    canonicalPath: meta.canonicalPath,
+    title: routeData?.title || meta.title,
+    description: routeData?.description || meta.description,
+    benefits: meta.benefits,
+    internalLinks: meta.internalLinks,
+    modules: meta.modules,
+    protected: protectedRoute,
+    hero: routeData?.hero || null,
+    sections: routeData?.sections || [],
+    category: routeData?.category || null,
+    pageLabel: routeData?.pageLabel || null,
   };
 }
 

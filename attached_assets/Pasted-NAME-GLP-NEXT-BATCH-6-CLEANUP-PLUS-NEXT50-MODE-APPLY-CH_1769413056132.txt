@@ -1,0 +1,197 @@
+NAME: GLP_NEXT_BATCH_6__CLEANUP_PLUS_NEXT50
+MODE: APPLY CHANGES (not dry-run only)
+PROJECT: TheGenuineLoveProject.com
+OWNER: Aaliyah Draws Art LLC (Maria Landa)
+
+MISSION:
+Proceed to the next batch after “Platform Status: COMPLETE” by:
+1) Fixing the optional cleanup items found by the Deep Scan (endpoint collisions, hardcoded blocks, duplicate components).
+2) Then auto-detecting and implementing the NEXT 50 missing “top-platform processes” (security/observability/growth/content ops/etc).
+3) Preventing duplicate work via a persistent Integration Registry (single source of truth).
+
+NON-NEGOTIABLE RULES:
+- Replit-safe (single port, no background daemons).
+- No destructive deletes. If replacement is needed, deprecate + keep compatibility.
+- Human-in-the-loop: only runs when triggered.
+- Zero plagiarism / original writing for content.
+- Legal safe: educational/supportive only; no medical/therapy claims; no guarantees.
+
+CHECKPOINT FIRST:
+- Create a git commit checkpoint: "checkpoint: before Batch 6 cleanup + next50"
+- If git is not initialized, initialize and commit.
+
+PHASE 1 — IN-DEPTH “NO DUPLICATE WORK” SCAN (MUST DO FIRST)
+Goal: create an authoritative registry of what exists so we never redo work.
+
+1) Create/ensure file:
+   client/src/content/meta/integrationRegistry.ts
+
+2) The registry must store:
+   - integrationKey (string, unique)
+   - category (security|observability|content|growth|performance|accessibility|infra|payments|auth|data|devex)
+   - status (planned|in_progress|done)
+   - canonicalFiles (string[])
+   - routeKeysTouched (string[])
+   - notes (string)
+   - lastUpdated (ISO string)
+
+3) Auto-scan the repo to populate registry entries for anything that already exists:
+   - Auth (sessions/jwt/oauth)
+   - Stripe/billing/webhooks
+   - DB/Drizzle/Postgres
+   - Rate limiting
+   - Logging/metrics/tracing
+   - Error handling boundary
+   - Admin modules
+   - Content routing single-source-of-truth
+   - Design tokens
+   - Sitemap/SEO basics
+
+4) Output a report:
+   docs/batch-6/scan-report.md
+   docs/batch-6/scan-report.json
+
+Include:
+- Detected existing integrations (DONE list)
+- Missing integrations (CANDIDATE list)
+- Conflicts/collisions found (with file+line references)
+
+PHASE 2 — OPTIONAL CLEANUP (FROM DEEP SCAN)
+A) Endpoint Collisions (68 low priority)
+Goal: ensure no two handlers conflict for the same METHOD+PATH.
+
+Steps:
+1) Generate a route table (method, path, file, handlerName).
+   - Backend: Express router registration + any route builders.
+2) Identify collisions:
+   - same method+path defined in multiple places
+   - or ambiguous wildcard routes shadowing a specific route
+3) Resolution rules:
+   - Choose ONE canonical handler per endpoint.
+   - If duplicates exist, keep the canonical, and convert duplicates to:
+     - a thin wrapper calling canonical OR
+     - a redirect alias OR
+     - a deprecated route that returns 410 with guidance (ONLY if safe)
+   - Update any internal references to use the canonical routeKey mapping.
+4) Add an automated test (or minimal runtime assertion) that fails build if collisions reappear.
+   - Put it in scripts/validateRoutes.ts (or existing validation scripts folder).
+5) Re-run build.
+
+B) Hardcoded Blocks (302 cosmetic)
+Goal: replace repeated blocks with reusable components WITHOUT changing UX.
+
+Steps:
+1) Define what “hardcoded block” means (repeated markup chunks).
+2) Group them into top 10 repeating patterns (e.g., disclaimers, hero blocks, CTA blocks, feature grids).
+3) Create or reuse components under:
+   client/src/components/blocks/
+4) Replace occurrences gradually (max 20 replacements per patch), ensuring:
+   - no layout regressions
+   - consistent spacing + typography
+   - no new dependencies
+
+C) Duplicate Components (3 cosmetic)
+Goal: dedupe with re-exports, preserve imports.
+
+Steps:
+1) Identify the 3 duplicates.
+2) Choose canonical component file.
+3) Replace duplicates with:
+   export * from "<canonical>"
+   and/or a wrapper that forwards props.
+4) Ensure barrel exports remain stable.
+
+PHASE 3 — NEXT 50 “TOP PLATFORM PROCESSES” (AUTO-DETECTED)
+Goal: implement the next 50 missing high-value processes used by top platforms, BUT ONLY those not already DONE per registry.
+
+Required:
+1) Create a “Top Platform Processes Matrix” file:
+   docs/platform/top-platform-processes-matrix.md
+
+It must list processes in buckets:
+- Security & Privacy
+- Observability & Reliability
+- Performance & UX
+- Content Ops & SEO
+- Growth & CRM
+- DevEx & CI/CD
+- Data & Analytics
+- Admin Ops
+
+2) Auto-select NEXT 50 items where:
+- status != done
+- high impact
+- low risk first
+- minimal dependencies
+
+3) Implement in batches of 10 within Batch 6, each with:
+- Patch plan
+- Code changes
+- Validation steps
+- Registry update (mark done, add canonicalFiles)
+
+Example eligible items (implement if missing):
+SECURITY:
+- CSP headers baseline
+- CSRF protection for state-changing routes
+- Secure cookies settings
+- Input validation standard (Zod schema map)
+- Centralized auth middleware + RBAC guard
+- Audit log table for admin actions
+- Secret/env validator on boot
+
+OBSERVABILITY:
+- Structured logging (requestId)
+- Central error handler normalization
+- Healthcheck + readiness + version endpoint
+- Simple metrics endpoint (counts/timing)
+- Frontend error boundary + reporting hook (internal)
+
+PERFORMANCE/UX:
+- Route-level code splitting
+- Image optimization defaults
+- Skeleton loading standard
+- Button size >= 44px baseline enforcement
+
+SEO/CONTENT OPS:
+- Automatic sitemap generator from route registry
+- Robots.txt + canonical tags
+- OpenGraph + Twitter cards defaults
+- Internal link resolver from routeKey to canonicalPath
+
+GROWTH/CRM:
+- Newsletter capture component (no auto-send)
+- UTM capture + attribution storage
+- Lead magnet delivery placeholder (manual export)
+- Admin Social Studio integration to Blog drafts
+
+CI/CD/DEVEX:
+- CI build + typecheck + lint
+- Pre-commit checks (optional)
+- “No route collisions” validation in CI
+
+DATA/ANALYTICS:
+- Minimal event tracking abstraction (view/start/complete)
+- Admin analytics dashboard stub reading DB
+
+PHASE 4 — VALIDATE + LOCK IN
+You MUST run:
+- npm run build
+- npm run typecheck (or tsc)
+- any existing tests
+- the route-collision validator
+- ensure no new duplicates introduced
+
+PHASE 5 — OUTPUT
+Return:
+1) What changed (grouped by phase)
+2) Exact files modified
+3) Any remaining “optional” items to queue for Batch 7
+4) Updated registry summary:
+   - done count
+   - planned count
+   - next 10 recommended
+
+STOP CONDITION:
+After completing Batch 6, STOP and wait for:
+"RUN BATCH 7"

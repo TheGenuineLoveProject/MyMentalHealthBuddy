@@ -19,6 +19,22 @@
 
 ---
 
+## Patch 30 — Fix PageTemplate Hero Rendering
+- Date: 2026-01-26
+- Processes: Bug fix
+- Files: 
+  - `client/src/content/routes.js`
+  - `client/src/pages/_autopilot.jsx`
+- Summary: Fixed interface/design-system pages showing placeholder instead of content
+- Root cause: getRouteConfig wasn't returning hero section from routes array
+- Solution: Added getFullRouteConfig function that includes hero/sections data
+- Validation results:
+  - build: ✅ Passed (24s)
+  - /design-system: ✅ Renders correctly
+  - /interface: ✅ Shows 404 (expected - no route configured)
+
+---
+
 ## Patch 29 — Deep Scan A1-A8
 - Date: 2026-01-26
 - Processes: Audit

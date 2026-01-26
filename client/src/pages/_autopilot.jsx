@@ -16,7 +16,7 @@
  * ============================================================================
  */
 import { useLocation } from "wouter";
-import { getRouteConfig } from "../content/routes.js";
+import { getFullRouteConfig, routes } from "../content/routes.js";
 import PageTemplate from "../components/PageTemplate.jsx";
 import RouteGuard from "../components/RouteGuard.jsx";
 import styles from "./AutopilotFallback.module.css";
@@ -27,14 +27,13 @@ export default function AutopilotPage({ route, routeKey }) {
   const [location] = useLocation();
   const pathname = route || location;
 
-  // ✅ Deterministic: always stable, always present
   const effectiveRouteKey = routeKey || deriveRouteKeyFromPath(pathname);
 
-  const config = getRouteConfig(pathname, { routeKey: effectiveRouteKey });
+  const config = getFullRouteConfig(pathname, routes, { routeKey: effectiveRouteKey });
 
-  if (!config) {
-    const notFoundConfig = getRouteConfig("/not-found", { routeKey: "not_found" });
-    if (notFoundConfig) return <PageTemplate config={notFoundConfig} routeKey="not_found" />;
+  if (!config || !config.hero) {
+    const notFoundConfig = getFullRouteConfig("/not-found", routes, { routeKey: "not_found" });
+    if (notFoundConfig && notFoundConfig.hero) return <PageTemplate config={notFoundConfig} routeKey="not_found" />;
     return (
       <div className={styles.container}>
         <div className={styles.content}>
