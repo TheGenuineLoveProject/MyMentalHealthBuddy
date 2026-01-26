@@ -1,6 +1,8 @@
 // AUTO-GENERATED FILE. DO NOT EDIT BY HAND.
 // Run: node scripts/gen-route-registry.mjs
-// To keep manual overrides, add routeKeys to routeMeta.lock.json
+// Run: node scripts/gen-internal-links.mjs
+// Manual overrides live in routeMetaRegistry.ts (MANUAL_REGISTRY).
+// To protect a route from autogen, add its routeKey to routeMeta.lock.json
 
 export const AUTOGEN_REGISTRY = {
   "about": {
@@ -12,7 +14,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "accessibility": {
@@ -24,7 +39,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "admin": {
@@ -36,7 +64,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "admin__social": {
@@ -48,7 +89,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "admin__social__analytics": {
@@ -60,7 +114,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "admin__social__calendar": {
@@ -72,7 +139,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "admin__social__generate": {
@@ -84,7 +164,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "admin__social__library": {
@@ -96,7 +189,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "affirmations": {
@@ -108,7 +214,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "ai-chat": {
@@ -120,7 +239,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "ai__coach": {
@@ -132,7 +264,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "ai__insights": {
@@ -144,7 +289,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "ai__meditation": {
@@ -156,7 +314,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "alignment-path": {
@@ -168,7 +339,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "atlas": {
@@ -180,7 +364,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "behavior-change": {
@@ -192,7 +389,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "billing": {
@@ -204,7 +414,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "blog": {
@@ -216,7 +439,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "blog__param_slug": {
@@ -228,7 +464,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "body-wellness": {
@@ -240,7 +489,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "breathing": {
@@ -252,7 +514,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "calming-scenes": {
@@ -264,7 +539,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "canva-landing": {
@@ -276,7 +564,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "challenge": {
@@ -288,7 +589,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "challenge__day__param_dayNum": {
@@ -300,7 +614,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "cognitive-architecture": {
@@ -312,7 +639,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "cognitive-tools": {
@@ -324,7 +664,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "collaborative-lab": {
@@ -336,7 +689,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "community": {
@@ -348,7 +714,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "community__challenges": {
@@ -360,7 +739,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "community__discussion__param_id": {
@@ -372,7 +764,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "community__events": {
@@ -384,7 +789,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "community__mentors": {
@@ -396,7 +814,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "community__stories": {
@@ -408,7 +839,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "companion": {
@@ -420,7 +864,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "contact": {
@@ -432,7 +889,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "content-admin": {
@@ -444,7 +914,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "content-index": {
@@ -456,7 +939,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "content-studio": {
@@ -468,7 +964,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "control": {
@@ -480,7 +989,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "cookies": {
@@ -492,7 +1014,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "crm": {
@@ -504,7 +1039,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "daily-routines": {
@@ -516,7 +1064,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "daily-wisdom": {
@@ -528,7 +1089,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "design-dashboard": {
@@ -540,7 +1114,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "design-system": {
@@ -552,7 +1139,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "disclaimer": {
@@ -564,7 +1164,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "elite-tools": {
@@ -576,7 +1189,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "emotional-intelligence": {
@@ -588,7 +1214,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "ethics": {
@@ -600,7 +1239,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "examples": {
@@ -612,7 +1264,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "faq": {
@@ -624,7 +1289,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "forgot-password": {
@@ -636,7 +1314,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "glossary": {
@@ -648,7 +1339,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "glossary-full": {
@@ -660,7 +1364,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "growth-analytics": {
@@ -672,7 +1389,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "guided-journaling": {
@@ -684,7 +1414,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "healing": {
@@ -696,7 +1439,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "healing-journeys": {
@@ -708,7 +1464,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "healing-library": {
@@ -720,7 +1489,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "health": {
@@ -732,7 +1514,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "help": {
@@ -744,7 +1539,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "how-to-guides": {
@@ -756,7 +1564,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs": {
@@ -768,7 +1589,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__acceptance": {
@@ -780,7 +1614,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__body-mind": {
@@ -792,7 +1639,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__breathwork": {
@@ -804,7 +1664,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__communication": {
@@ -816,7 +1689,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__confidence": {
@@ -828,7 +1714,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__coping-skills": {
@@ -840,7 +1739,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__creativity": {
@@ -852,7 +1764,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__daily-practice": {
@@ -864,7 +1789,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__energy-management": {
@@ -876,7 +1814,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__focus": {
@@ -888,7 +1839,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__forgiveness": {
@@ -900,7 +1864,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__gratitude": {
@@ -912,7 +1889,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__habits": {
@@ -924,7 +1914,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__healing-journey": {
@@ -936,7 +1939,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__inner-work": {
@@ -948,7 +1964,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__journaling": {
@@ -960,7 +1989,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__life-purpose": {
@@ -972,7 +2014,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__motivation": {
@@ -984,7 +2039,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__nervous-system": {
@@ -996,7 +2064,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__presence": {
@@ -1008,7 +2089,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__self-awareness": {
@@ -1020,7 +2114,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__self-care": {
@@ -1032,7 +2139,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__self-discovery": {
@@ -1044,7 +2164,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__spirituality": {
@@ -1056,7 +2189,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__thoughtwork": {
@@ -1068,7 +2214,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "hubs__wisdom": {
@@ -1080,7 +2239,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Try: Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "inner-child": {
@@ -1092,7 +2264,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "insight-cards": {
@@ -1104,7 +2289,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "insights": {
@@ -1116,7 +2314,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "knowledge-synthesis": {
@@ -1128,7 +2339,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "landing": {
@@ -1140,7 +2364,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "legal": {
@@ -1152,7 +2389,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "login": {
@@ -1164,7 +2414,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "login__callback": {
@@ -1176,7 +2439,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "meditation": {
@@ -1188,7 +2464,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "meta-learning": {
@@ -1200,7 +2489,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "mirror": {
@@ -1212,7 +2514,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "news": {
@@ -1224,7 +2539,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "onboarding": {
@@ -1236,7 +2564,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "original-home": {
@@ -1248,7 +2589,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "overview": {
@@ -1260,7 +2614,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "philosophical-inquiry": {
@@ -1272,7 +2639,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "premium": {
@@ -1284,7 +2664,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "privacy": {
@@ -1296,7 +2689,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "professional-resources": {
@@ -1308,7 +2714,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "profile": {
@@ -1320,7 +2739,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "progress": {
@@ -1332,7 +2764,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "publishing": {
@@ -1344,7 +2789,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "qa": {
@@ -1356,7 +2814,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "register": {
@@ -1368,7 +2839,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "research": {
@@ -1380,7 +2864,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "reset-password": {
@@ -1392,7 +2889,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "resilience": {
@@ -1404,7 +2914,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "resources": {
@@ -1416,7 +2939,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "ritual": {
@@ -1428,7 +2964,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "safety": {
@@ -1440,7 +2989,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "self-care": {
@@ -1452,7 +3014,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "sign-in": {
@@ -1464,7 +3039,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "signin": {
@@ -1476,7 +3064,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "sign-up": {
@@ -1488,7 +3089,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "signup": {
@@ -1500,7 +3114,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "sleep-guide": {
@@ -1512,7 +3139,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "social": {
@@ -1524,7 +3164,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "soul-wellness": {
@@ -1536,7 +3189,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "strategy-maps": {
@@ -1548,7 +3214,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "stress-response": {
@@ -1560,7 +3239,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "study-vault": {
@@ -1572,7 +3264,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "support": {
@@ -1584,7 +3289,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "support__accessibility": {
@@ -1596,7 +3314,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "support__feedback": {
@@ -1608,7 +3339,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "support__guides": {
@@ -1620,7 +3364,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "system-map": {
@@ -1632,7 +3389,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "systems-thinking": {
@@ -1644,7 +3414,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "terms": {
@@ -1656,7 +3439,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "testimonials": {
@@ -1668,7 +3464,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "today": {
@@ -1680,7 +3489,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__behavior-change": {
@@ -1692,7 +3514,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__coherence": {
@@ -1704,7 +3539,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__movement-snacks": {
@@ -1716,7 +3564,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__nervous-system-flooding": {
@@ -1728,7 +3589,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__perception-refinement": {
@@ -1740,7 +3614,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__permaculture": {
@@ -1752,7 +3639,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__self-worth": {
@@ -1764,7 +3664,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tools__twelve-steps": {
@@ -1776,7 +3689,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Return to Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try Another Tool",
+        "routeKey": "tools__boundaries"
+      },
+      {
+        "label": "Build a Path",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "tos": {
@@ -1788,7 +3714,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "twelve-practices": {
@@ -1800,7 +3739,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "upgrade": {
@@ -1812,7 +3764,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wellness": {
@@ -1824,7 +3789,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wellness__creativity": {
@@ -1836,7 +3814,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Explore a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wellness-hub": {
@@ -1848,7 +3839,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wellness__movement": {
@@ -1860,7 +3864,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Explore a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wellness__nature": {
@@ -1872,7 +3889,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Explore a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wellness__nutrition": {
@@ -1884,7 +3914,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Explore a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wellness__sleep": {
@@ -1896,7 +3939,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Explore a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "what-you-get": {
@@ -1908,7 +3964,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wireframes": {
@@ -1920,7 +3989,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wisdom-practices": {
@@ -1932,7 +4014,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "wisdom-synthesis": {
@@ -1944,7 +4039,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   },
   "write": {
@@ -1956,7 +4064,20 @@ export const AUTOGEN_REGISTRY = {
       "Turn insight into a simple plan you can repeat.",
       "Use calm tools that support self-awareness and regulation."
     ],
-    "internalLinks": [],
+    "internalLinks": [
+      {
+        "label": "Start at a Hub",
+        "routeKey": "hubs__acceptance"
+      },
+      {
+        "label": "Try: Reframe Tool",
+        "routeKey": "tools__reframe"
+      },
+      {
+        "label": "Explore: 12 Practices",
+        "routeKey": "paths__12-practices"
+      }
+    ],
     "modules": []
   }
 } as const;

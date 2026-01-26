@@ -1,0 +1,58 @@
+NAME: GLP_NEXT_REPLIT_AI_STEP_001
+
+MISSION:
+Move TheGenuineLoveProject.com one safe, perfect step closer to “complete” — Replit-safe, non-destructive, DRY-RUN first, human-in-the-loop.
+
+NON-NEGOTIABLES:
+- DRY-RUN FIRST (no file edits until you explicitly say “APPLY PATCH 1”)
+- NON-DESTRUCTIVE (no deletes/renames/mass refactors without permission)
+- EDUCATIONAL ONLY (no medical claims, no diagnosis/treatment/cure/guarantees)
+- ORIGINAL WRITING ONLY (zero plagiarism)
+- ACCESSIBILITY (WCAG AA, 44px buttons, focus states, labels)
+- REPLIT SAFE (single port, no background daemons)
+- ALWAYS include /crisis link on wellness pages
+
+STEP 1 (DO NOW): REPO-WIDE DRY-RUN “COMPLETION READINESS” SCAN
+Task:
+1) Run a build + typecheck + lint-style scan using the repo’s existing scripts.
+2) Scan for route/content consistency issues (single source of truth):
+   - routeKey uniqueness
+   - internalLinks stored as routeKeys (not paths)
+   - UI resolves canonicalPath from routeKey
+3) Scan UI for “completion blockers”:
+   - broken buttons / missing handlers
+   - inconsistent typography scale (H1/H2/body)
+   - buttons smaller than 44px height
+   - overcrowded sections (too many choices per screen)
+4) Scan safety/legal:
+   - any clinical language (“treat/cure/diagnose/therapy/guarantee”)
+   - missing opt-out/pause language on practices
+   - missing /crisis links on wellness pages
+5) Scan duplication:
+   - duplicate routes/components/content blocks
+   - unused files referenced by imports
+6) Output a prioritized “Finish Line” plan.
+
+OUTPUT (DRY-RUN ONLY — REQUIRED FORMAT):
+A) COMMANDS TO RUN (exact):
+- show the exact shell commands you will run in Replit (and alternatives if a script is missing)
+
+B) TOP 15 BLOCKERS (ranked):
+For each blocker:
+- severity (P0/P1/P2)
+- why it blocks completion
+- exact file paths involved
+- recommended fix (1–3 sentences)
+- risk level (low/med/high)
+
+C) PATCH PLAN:
+- Patch 1..N (each patch max 5 files)
+- patch goal
+- exact file list
+- validation steps
+
+D) STOP:
+End your response with:
+“WAITING FOR: APPLY PATCH 1”
+
+BEGIN NOW.
