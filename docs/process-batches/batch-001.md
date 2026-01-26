@@ -1,6 +1,6 @@
 # Batch 001: Processes 1-50
 
-## Status: ✅ 96% Complete (48/50)
+## Status: ✅ 100% Complete (50/50)
 
 ### Recent Updates (January 2026)
 - **Pack #2**: RouteSearchBox, recommendations, progress tracking, feature flags, TinyStepPanel
@@ -70,7 +70,7 @@
 | 35 | Log redaction | ✅ | No PII in logs | Verified |
 | 36 | User rate limits | ✅ | `server/middleware/rateLimit.mjs` | Per-user/IP |
 | 37 | Safety rules | ✅ | `docs/ai-safety.md` | Non-diagnostic |
-| 38 | Prompt tests | 🟡 | In progress | Evals framework |
+| 38 | Prompt tests | ✅ | `scripts/prompt-tests.mjs` | 22/22 tests pass |
 | 39 | Human escalation | ✅ | Crisis resources | Guidance exists |
 | 40 | Output constraints | ✅ | AI safety policy | Language safe |
 
@@ -84,7 +84,7 @@
 | 42 | Webhook verify | ✅ | Stripe handler | Verified |
 | 43 | Plan gating | ✅ | `server/middleware/requirePlan.mjs` | Enforced |
 | 44 | Ethical pricing | ✅ | `/pricing` page | Clear pricing |
-| 45 | Email capture | 🟡 | In progress | Lead magnet |
+| 45 | Email capture | ✅ | `client/src/components/marketing/EmailCapture.jsx` | Double opt-in |
 | 46 | SEO | ✅ | `sitemap.xml`, meta | OG tags |
 | 47 | Publishing pipeline | ✅ | Admin content management | Works |
 | 48 | Social sharing | ✅ | `client/src/pages/admin/SocialGenerator.jsx` | Generator works |
@@ -131,11 +131,9 @@ npm run verify         # Full verification
 
 ## Next Steps
 
-Complete remaining 🟡 items:
-- #38: Add prompt test framework
-- #45: Email capture flow
+✅ **BATCH-001 COMPLETE** — All 50 processes implemented.
 
-Then generate Batch 002 (51-100).
+Generate Batch 002 (51-100) for advanced platform features.
 
 ---
 

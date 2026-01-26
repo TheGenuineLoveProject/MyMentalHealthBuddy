@@ -78,6 +78,7 @@ import selfMasteryIntelligenceRouter from "./routes/self-mastery-intelligence.mj
 import universalContentRouter from "./routes/universal-content.mjs";
 import traumaHealingProtocolsRouter from "./routes/trauma-healing-protocols.mjs";
 import spiritualIntelligenceRouter from "./routes/spiritual-intelligence.mjs";
+import newsletterRouter from "./routes/newsletter.mjs";
 import relationshipDynamicsRouter from "./routes/relationship-dynamics.mjs";
 import cognitiveEnhancementRouter from "./routes/cognitive-enhancement.mjs";
 import emotionalResilienceRouter from "./routes/emotional-resilience.mjs";
@@ -264,6 +265,7 @@ app.use('/api/philosophy', philosophyRouter);
 app.use('/api/metacognition', metacognitionRouter);
 app.use('/api/creativity', creativityRouter);
 app.use('/api/resilience', resilienceRouter);
+app.use('/api/newsletter', newsletterRouter);
 app.use('/api/foresight', foresightRouter);
 app.use('/api/systems-compassion', systemsCompassionRouter);
 app.use('/api/collective-intelligence', collectiveIntelligenceRouter);
