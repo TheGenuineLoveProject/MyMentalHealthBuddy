@@ -56,7 +56,7 @@ export default function ContentLevelToggle({ level, onChange }) {
       aria-label="Content complexity level"
     >
       <span className={styles.toggleLabel}>
-        Reading level:
+        Content tier:
       </span>
       <div className={styles.toggleGroup}>
         {LEVELS.map((lvl) => (

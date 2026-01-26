@@ -851,7 +851,7 @@ router.post("/enhance", requireAuth, requireAdmin, async (req, res) => {
     
     const enhancePrompts = {
       engagement: "Suggest 3 ways to make this content more engaging while maintaining trauma-informed principles",
-      accessibility: "Suggest 3 ways to make this content more accessible (reading level, clarity, inclusivity)",
+      accessibility: "Suggest 3 ways to make this content more accessible (content tier, clarity, inclusivity)",
       emotional: "Suggest 3 ways to enhance the emotional resonance while keeping it safe and grounding",
       crisis: "Suggest appropriate crisis resources and safety disclaimers to add"
     };
