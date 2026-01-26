@@ -6,15 +6,17 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.75rem;
-  border-radius: 9999px;
+  min-height: var(--btn-min-height, 44px);
+  padding: var(--btn-padding-y, 0.75rem) var(--btn-padding-x, 1.5rem);
+  border-radius: var(--btn-border-radius, 9999px);
   font-family: var(--font-body, 'Inter', sans-serif);
-  font-size: 1rem;
+  font-size: var(--btn-font-size, 1rem);
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
   border: 2px solid transparent;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
 }
 
 .button:focus-visible {
@@ -60,13 +62,15 @@
 
 /* Size variants */
 .sm {
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  min-height: var(--btn-min-height-sm, 36px);
+  padding: var(--btn-padding-y-sm, 0.5rem) var(--btn-padding-x-sm, 1rem);
+  font-size: var(--btn-font-size-sm, 0.875rem);
 }
 
 .lg {
-  padding: 1rem 2.25rem;
-  font-size: 1.125rem;
+  min-height: var(--btn-min-height-lg, 52px);
+  padding: var(--btn-padding-y-lg, 1rem) var(--btn-padding-x-lg, 2rem);
+  font-size: var(--btn-font-size-lg, 1.125rem);
 }
 
 /* Icon styling - scaled 0.7 */
