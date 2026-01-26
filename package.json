@@ -68,7 +68,8 @@
     "dup-scan": "node scripts/scan-duplicates.mjs && node scripts/scan-collisions.mjs",
     "arch-scan": "node scripts/scan-architecture.mjs",
     "dedupe-plan": "node scripts/dedupe-plan.mjs",
-    "dedupe-safe": "node scripts/apply-dedupe-safe.mjs"
+    "dedupe-safe": "node scripts/apply-dedupe-safe.mjs",
+    "scan:deep": "node scripts/deepScan.mjs"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",

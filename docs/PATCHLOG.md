@@ -28,6 +28,32 @@
 
 ## Recent Patches
 
+### PATCH 026: Trust Center + Deep Scan
+**Date**: 2026-01-26
+**Process IDs**: Pack #4
+**Files Changed**:
+- `scripts/deepScan.mjs`
+- `scripts/generate-sitemap.mjs`
+- `scripts/.work-guard.md`
+- `client/src/components/a11y/SkipToContent.tsx`
+- `client/src/pages/legal/Disclaimer.tsx`
+- `client/src/pages/legal/Terms.tsx`
+- `client/src/pages/legal/Privacy.tsx`
+- `client/src/pages/legal/Ethics.tsx`
+
+**Changes**:
+- Added deep scan for duplicate detection
+- Created Trust Center legal pages
+- Added SkipToContent accessibility component
+- Added sitemap generator
+
+**Validation**:
+- [x] Build passed (26s)
+- [x] Deep scan complete (318 pages, 269 components)
+- [x] Workflow running
+
+---
+
 ### PATCH 025: Master Prompt v25 Integration
 **Date**: 2026-01-26
 **Process IDs**: Foundation

@@ -1,6 +1,6 @@
 # API Endpoints Registry
 
-_Generated: 2026-01-26T07:04:28.581Z_
+_Generated: 2026-01-26T07:09:52.965Z_
 
 | Method | Path | File |
 |--------|------|------|
