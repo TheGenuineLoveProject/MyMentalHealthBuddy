@@ -104,12 +104,13 @@ body {
   color: var(--glp-gray-900);
 }
 
-/* Enhanced CTA Buttons */
+/* Enhanced CTA Buttons - WCAG AA 44px min-height */
 .btn-premium {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  min-height: 44px;
   padding: 0.75rem 1.5rem;
   background: linear-gradient(135deg, var(--glp-primary), var(--glp-sage));
   color: var(--glp-primary-foreground);
@@ -144,6 +145,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  min-height: 44px;
   padding: 0.75rem 1.5rem;
   background: transparent;
   color: var(--glp-primary);
