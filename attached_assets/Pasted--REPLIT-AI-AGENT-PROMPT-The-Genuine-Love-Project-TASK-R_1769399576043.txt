@@ -1,0 +1,188 @@
+# REPLIT AI AGENT PROMPT — The Genuine Love Project
+# TASK: Remove “reading level” everywhere + standardize BenefitsBlock to ONLY:
+# Beginner / Intermediate / Advanced
+# Mode: SAFE REAL WORK (CORE MASTER COMMAND v3.0) — minimal risk, no renames unless required.
+
+You are Replit AI working inside my codebase for The Genuine Love Project (React + Vite + TS + Node/Express).
+GOAL: Remove ANY mention of “reading level” (or reading-based tiers) and replace the system with ONLY:
+- Beginner
+- Intermediate
+- Advanced
+
+NON-NEGOTIABLES:
+1) Do NOT add “reading”, “reading level”, “grade level”, “literacy”, “easy reading”, “advanced reading” anywhere.
+2) Do NOT delete features unrelated to this task.
+3) Keep changes small, safe, and verifiable.
+4) If there is already a BenefitsBlock component, modify it. If not, create it.
+5) If there are types/constants referencing old tiers, update them safely.
+6) Ensure build passes (TypeScript + Vite).
+
+====================================================
+STEP 0 — CREATE A BRANCH-LIKE SAFETY CHECK (NO GIT REQUIRED)
+====================================================
+- Before changes, search for every occurrence of the word “reading”.
+- Capture a quick list of files to edit.
+
+RUN:
+1) ripgrep search:
+   rg -n "reading level|reading-level|reading_level|grade level|easy reading|advanced reading|literacy" .
+
+OUTPUT:
+- A list of matched files and lines.
+
+====================================================
+STEP 1 — STANDARDIZE TIERS
+====================================================
+We will use ONLY these tiers:
+
+Type:
+  type BenefitsTier = "beginner" | "intermediate" | "advanced";
+
+Any previous tiers like:
+  "easy" / "medium" / "hard"
+  "basic" / "pro"
+  "readingLevel"
+  "level1" / "level2" / "level3"
+…must be mapped to the above (see mapping rules below).
+
+MAPPING RULES (use best match):
+- easy/basic/level1 -> beginner
+- medium/standard/level2 -> intermediate
+- hard/pro/level3 -> advanced
+- unknown -> beginner (default)
+
+====================================================
+STEP 2 — IMPLEMENT / UPDATE BenefitsBlock COMPONENT
+====================================================
+Locate existing BenefitsBlock.
+If found:
+- Edit it to remove any reading-level logic.
+- Ensure props accept tier: "beginner" | "intermediate" | "advanced"
+- Ensure default tier is "beginner"
+- Ensure UI does NOT show “reading level” text anywhere.
+
+If not found:
+Create:
+  client/src/components/wellness/BenefitsBlock.tsx
+
+Use this exact implementation:
+
+--- FILE: client/src/components/wellness/BenefitsBlock.tsx ---
+import React from "react";
+
+export type BenefitsTier = "beginner" | "intermediate" | "advanced";
+
+export interface BenefitItem {
+  title: string;
+  body: string;
+}
+
+export interface BenefitsBlockProps {
+  title?: string;
+  tier?: BenefitsTier; // default: "beginner"
+  items: BenefitItem[];
+}
+
+const tierClassMap: Record<BenefitsTier, string> = {
+  beginner: "glp-benefits--beginner",
+  intermediate: "glp-benefits--intermediate",
+  advanced: "glp-benefits--advanced",
+};
+
+export default function BenefitsBlock({
+  title = "What you can do here",
+  tier = "beginner",
+  items,
+}: BenefitsBlockProps) {
+  return (
+    <section className={`glp-benefits ${tierClassMap[tier]}`} aria-labelledby="benefits-title">
+      <h2 id="benefits-title" className="glp-benefits__title">
+        {title}
+      </h2>
+
+      <ul className="glp-benefits__list">
+        {items.map((item, i) => (
+          <li key={i} className="glp-benefits__item">
+            <strong className="glp-benefits__item-title">{item.title}</strong>
+            <p className="glp-benefits__item-body">{item.body}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
+====================================================
+STEP 3 — UPDATE ALL CALL SITES
+====================================================
+Search for where BenefitsBlock is used (or similar benefits component).
+- Replace any prop like readingLevel, difficulty, level, etc. with tier.
+
+RUN:
+rg -n "BenefitsBlock|readingLevel|reading_level|difficulty|tier|level1|level2|level3" client server .
+
+For each match:
+- If the component expects reading-level tiers, rewrite to:
+  tier="beginner" | "intermediate" | "advanced"
+
+If the page previously selected reading levels dynamically:
+- Replace with a safe default:
+  tier="beginner"
+OR map old values using mapping rules above.
+
+====================================================
+STEP 4 — DELETE/REPLACE READING-LABEL COPY (TEXT CLEANUP)
+====================================================
+This task is content + code:
+- Remove phrases like “Beginner Reading”, “Advanced Reading”, “Reading Level 1–3”, etc.
+- Replace with:
+  Beginner / Intermediate / Advanced
+
+Wherever text appears in UI:
+- Use “Beginner”, “Intermediate”, “Advanced” ONLY.
+- Do NOT say “reading”.
+
+====================================================
+STEP 5 — STYLES (OPTIONAL, SAFE)
+====================================================
+If you already have CSS modules/Tailwind, keep it.
+If you need minimal CSS to avoid ugly layout, add a safe base stylesheet:
+
+Option A) If you have a global stylesheet:
+- Add classes:
+  .glp-benefits { ... }
+  .glp-benefits__title { ... }
+  .glp-benefits__list { ... }
+  .glp-benefits__item { ... }
+
+IMPORTANT:
+- Do NOT change the brand palette aggressively.
+- Keep spacing consistent and accessible.
+
+====================================================
+STEP 6 — VALIDATION (MUST PASS)
+====================================================
+Run:
+1) Typecheck/build:
+   npm run build
+2) If build is heavy, run:
+   npm run typecheck || npm run lint || npm run dev (whichever exists)
+
+Also run a final search to confirm removal:
+   rg -n "reading level|reading-level|reading_level|grade level|easy reading|advanced reading|literacy" .
+
+Acceptance Criteria:
+- 0 matches for reading-level phrases (unless in unrelated docs; if in docs, update those too).
+- BenefitsBlock uses tier: beginner/intermediate/advanced only.
+- App builds successfully.
+
+====================================================
+STEP 7 — REPORT BACK (REQUIRED OUTPUT)
+====================================================
+Return:
+1) List of files changed
+2) Brief summary of what changed
+3) Command outputs (build success)
+4) Any remaining matches (if any) and why
+
+END.

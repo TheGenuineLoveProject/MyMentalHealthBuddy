@@ -721,6 +721,192 @@ export const MONETIZATION_LADDER = {
   }
 };
 
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * FLAT ARRAYS (15 variants each for consistency without repetition)
+ * ═══════════════════════════════════════════════════════════════════════════
+ */
+
+export const consent: string[] = [
+  "You're in control here.",
+  "Pause or stop anytime you need.",
+  "Skip anything that doesn't feel right.",
+  "Your comfort matters most.",
+  "Only do what feels okay.",
+  "You choose what to explore.",
+  "There's no pressure to continue.",
+  "Go at your own pace.",
+  "You can leave and come back later.",
+  "Every step is optional.",
+  "Trust your own timing.",
+  "You decide what's right for you.",
+  "Opt out whenever you need to.",
+  "Your boundaries are respected here.",
+  "This is your space, your rules.",
+];
+
+export const pacing: string[] = [
+  "Go slow. There's no rush.",
+  "Take your time with this.",
+  "Move at whatever pace feels right.",
+  "Pause whenever you need to.",
+  "Slower often means deeper.",
+  "Let yourself settle in gradually.",
+  "There's no deadline here.",
+  "Rest is part of the process.",
+  "Your internal rhythm guides the timing.",
+  "One step at a time is enough.",
+  "Take all the time you need.",
+  "This isn't a race.",
+  "Integration happens at its own pace.",
+  "Be gentle with your timing.",
+  "Progress unfolds naturally.",
+];
+
+export const grounding: string[] = [
+  "Feel your feet on the floor.",
+  "Notice where you are right now.",
+  "Take one slow breath.",
+  "Look around the room.",
+  "Feel something solid nearby.",
+  "Name three things you can see.",
+  "Notice the weight of your body.",
+  "Feel the surface beneath you.",
+  "Anchor into this moment.",
+  "Let gravity hold you.",
+  "Orient to your surroundings.",
+  "Touch something with texture.",
+  "Listen to the sounds around you.",
+  "Feel the air on your skin.",
+  "Notice your hands resting.",
+];
+
+export const encouragement: string[] = [
+  "You showed up. That matters.",
+  "Small steps count.",
+  "You're doing something meaningful.",
+  "That took courage.",
+  "This is real progress.",
+  "Your effort is valuable.",
+  "Every practice builds on the last.",
+  "You're building something lasting.",
+  "Consistency over intensity.",
+  "Growth happens in small moments.",
+  "You tried something new today.",
+  "This investment in yourself compounds.",
+  "Awareness itself is progress.",
+  "You're further along than you think.",
+  "Each session contributes to change.",
+];
+
+export const reflection: string[] = [
+  "What did you notice?",
+  "How do you feel now?",
+  "What stood out to you?",
+  "What shifted during this?",
+  "What would you like to remember?",
+  "What felt supportive?",
+  "Notice any changes in your body.",
+  "What might you try differently next time?",
+  "What patterns did you observe?",
+  "What insights emerged?",
+  "What conditions supported you?",
+  "How might this inform future practice?",
+  "What helped the most?",
+  "What surprised you?",
+  "What's one thing to carry forward?",
+];
+
+export const safety: string[] = [
+  "This is educational support — not medical advice.",
+  "For ages 18+. If younger, explore with a trusted adult.",
+  "You don't have to do this alone.",
+  "Help is available when you need it.",
+  "Seeking support is a strength.",
+  "If you feel overwhelmed, pause and ground yourself.",
+  "Professional resources exist for harder moments.",
+  "Your safety matters most.",
+  "Some experiences benefit from professional guidance.",
+  "Recognizing when you need support is adaptive.",
+  "Building a support network is part of wellness.",
+  "It's okay to ask for help.",
+  "Crisis resources provide immediate support.",
+  "Knowing your limits protects your capacity.",
+  "This content does not diagnose or treat.",
+];
+
+export const crisis: string[] = [
+  "Need immediate support? Visit /crisis.",
+  "If you're in crisis, help is available at /crisis.",
+  "Crisis resources are always available at /crisis.",
+  "You can reach out anytime at /crisis.",
+  "Support is available 24/7 at /crisis.",
+  "If things feel too heavy, visit /crisis.",
+  "Our crisis page has immediate support options.",
+  "Struggling right now? /crisis has resources.",
+  "You don't have to face this alone — see /crisis.",
+  "Immediate help is available at /crisis.",
+];
+
+export const ui = {
+  emptyState: [
+    "Nothing here yet. Start when you're ready.",
+    "Your space is waiting.",
+    "Begin with one small note.",
+    "No pressure — start anytime.",
+    "This will build over time.",
+  ],
+  success: [
+    "Saved gently.",
+    "Nice work.",
+    "That counts.",
+    "One step completed.",
+    "Progress documented.",
+  ],
+  error: [
+    "Something didn't save. Try again gently.",
+    "Let's retry that.",
+    "No worries — one more time.",
+    "That didn't work. Please try again.",
+    "We'll get it next time.",
+  ],
+};
+
+/**
+ * Deterministic picker: same routeKey + bucket always returns the same result.
+ * Uses a simple string hash for consistent selection.
+ */
+export function pickDeterministic(routeKey: string, bucket: string[], salt: string = ""): string {
+  if (!bucket || bucket.length === 0) return "";
+  const seed = `${routeKey}-${salt}`;
+  const hash = seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return bucket[Math.abs(hash) % bucket.length];
+}
+
+/**
+ * Convenience function: get all standard microcopy for a page.
+ * Returns deterministic lines based on routeKey.
+ */
+export function getMicrocopy(routeKey: string): {
+  consentLine: string;
+  pacingLine: string;
+  safetyLine: string;
+  crisisLine: string;
+  groundingLine: string;
+  encouragementLine: string;
+  reflectionLine: string;
+} {
+  return {
+    consentLine: pickDeterministic(routeKey, consent, "consent"),
+    pacingLine: pickDeterministic(routeKey, pacing, "pacing"),
+    safetyLine: pickDeterministic(routeKey, safety, "safety"),
+    crisisLine: pickDeterministic(routeKey, crisis, "crisis"),
+    groundingLine: pickDeterministic(routeKey, grounding, "grounding"),
+    encouragementLine: pickDeterministic(routeKey, encouragement, "encouragement"),
+    reflectionLine: pickDeterministic(routeKey, reflection, "reflection"),
+  };
+}
+
 export default {
   wellnessMicrocopy,
   ctaPrimary,
@@ -736,7 +922,17 @@ export default {
   buildTierCopy,
   getWellnessCopy,
   LOCKED_CANONICAL_PHRASES,
-  MONETIZATION_LADDER
+  MONETIZATION_LADDER,
+  consent,
+  pacing,
+  grounding,
+  encouragement,
+  reflection,
+  safety,
+  crisis,
+  ui,
+  pickDeterministic,
+  getMicrocopy,
 };
 export const MICROCOPY = {
   buttons: {
