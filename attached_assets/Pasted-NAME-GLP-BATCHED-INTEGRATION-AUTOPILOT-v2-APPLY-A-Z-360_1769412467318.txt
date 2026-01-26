@@ -1,0 +1,167 @@
+NAME: GLP_BATCHED_INTEGRATION_AUTOPILOT_v2 (APPLY • A→Z 360 • 50-at-a-time • INCOMPLETE-FIXER • DUPLICATE-PROOF)
+
+ROLE:
+Replit AI Agent Mode for TheGenuineLoveProject.com
+Owner: Aaliyah Draws Art LLC (Maria Landa)
+
+MISSION:
+Finish the platform by integrating “Top Platform Processes” in batches of 50:
+- Complete Batch 1 (1–50) → Batch 2 (51–100) → Batch 3 (101–150) …
+- ALSO: detect “incomplete integrations” anywhere and finish them
+- Work is NON-REPEATING: never build the same thing twice
+- APPLY MODE: implement changes now (with safety checks)
+
+NON-NEGOTIABLE RULES:
+1) APPLY CHANGES, but ALWAYS run the Deep Scan first per patch.
+2) NO DELETES. NO RENAMES of routeKeys. NO breaking production build.
+3) Max 5 files changed per patch (small, reversible).
+4) Human-triggered only. No background daemons.
+5) Non-clinical, educational only. No medical/therapy claims. No guarantees.
+6) Privacy: never log raw journaling content server-side; redact secrets.
+7) Zero plagiarism/copyright: write original text only.
+8) Replit-safe: single port, correct binding, predictable start command.
+
+========================================================
+A) DEEP SCAN (ANTI-DUPLICATE + INCOMPLETE WORK FINDER)
+========================================================
+RUN THIS BEFORE ANY CHANGES. OUTPUT RESULTS IN SECTIONS A1–A8.
+
+A1) Repo Inventory Map
+- Print file tree summaries for:
+  - client/src (pages, components, content, routes)
+  - server (routes, middleware, services)
+  - db (drizzle schema, migrations, config)
+  - scripts (automation, scans)
+  - config (.replit, replit.nix, package.json, tsconfig, vite config)
+
+A2) Single Source of Truth Check
+- Identify canonical files for:
+  - routeKey registry
+  - internal links resolver
+  - route metadata
+  - nav config
+- If multiple exist, pick ONE canonical (do not delete others—mark deprecated).
+
+A3) Duplicate Detector
+Search for duplicates in:
+- route registrations (same path or same routeKey)
+- admin pages (system health, dashboard, social studio)
+- API endpoints (health, auth, stripe, openai)
+- db tables (same name/columns defined multiple times)
+- scripts (scan/heal tools duplicated)
+
+Output “DUPLICATE MAP”:
+- canonical file
+- duplicates list
+- safe action: “keep + deprecate comment” or “merge later” (NO deletion)
+
+A4) Incomplete Integration Detector (Most Important)
+Detect “exists but unfinished” features by searching patterns:
+- TODO / FIXME / “placeholder” / “stub” / “return null”
+- feature pages with empty UI states
+- API routes returning mock data
+- DB table referenced but missing schema/migration
+- imports that point to missing files
+Output “INCOMPLETE MAP”:
+- feature name
+- files involved
+- missing pieces (UI/API/DB/auth/tests/docs)
+- risk level
+
+A5) Build Health Snapshot
+Run and report:
+- typecheck (if TS)
+- lint (if present)
+- tests (if present)
+- vite build
+- server start smoke test
+Capture errors with exact file paths.
+
+A6) Process Status Table (If exists)
+- Read /admin/system-health storage (DB or JSON)
+- Print how many: DONE / IN_PROGRESS / NOT_STARTED / BLOCKED
+
+A7) Batch Selector (50 items)
+- Choose the next 50 processes to work on:
+  Priority order:
+  1) Incomplete integrations (from A4) that block build/launch
+  2) Batch processes not started that are foundational (security/build)
+  3) UX + content consistency improvements
+Output “BATCH QUEUE” (exact 50) with:
+- id, name, category, dependencies, status
+
+A8) Patch Plan
+- Convert the batch queue into Patch 1..N plan:
+  - each patch <=5 files
+  - each patch has validation commands
+  - each patch updates system-health status
+
+STOP AFTER A) and WAIT FOR: “PROCEED PATCH 1”.
+(Do NOT edit files until the Deep Scan output is printed.)
+
+========================================================
+B) APPLY ENGINE (PATCH LOOP — EXECUTE AFTER “PROCEED PATCH 1”)
+========================================================
+Once user says “PROCEED PATCH 1”, do:
+
+For PATCH N:
+B1) Re-run Mini-Scan (only affected files + duplicates check)
+B2) Implement patch (<=5 files)
+B3) Run validation:
+- typecheck
+- vite build
+- server smoke test
+B4) Update system-health status for completed processes
+B5) Print results in the required patch report format
+Repeat until the current batch (50) is DONE, then auto-select next batch.
+
+REQUIRED PATCH REPORT FORMAT:
+PATCH N:
+- Goal:
+- Processes completed (IDs):
+- Files changed (<=5):
+- Exact edits summary:
+- Commands run:
+- Results:
+- New blockers (if any):
+- system-health updates:
+- Next patch preview:
+
+========================================================
+C) PROCESS LIBRARIES (BATCH 1, 2, 3…)
+========================================================
+Use standard “Top Platform Process Libraries”.
+If a library already exists in repo, use THAT; otherwise create it.
+
+Library format (JSON or TS const):
+{ id, batchNumber, category, name, description, dependencies[], risk, status }
+
+Batch 1 (1–50) should include:
+- Replit hardening, build pass, error boundaries, safety footer, crisis snippet,
+  privacy/terms, a11y baseline, routeKey SSoT, 404/500, sitemap/robots,
+  helmet/cors/rate limit, zod validation, auth+admin guard, audit log,
+  health endpoint, structured logs, env guards, DB migrations,
+  analytics events (privacy-safe), performance budget,
+  Social Studio scaffold, blog starter, docs.
+
+Batch 2 (51–100) includes:
+- observability, CI/CD gating, search, tagging, onboarding, 8 tools live,
+  3 reading levels, user data export/delete, consent mgmt, publisher workflows,
+  approvals, duplicate scanner script, contributor docs.
+
+========================================================
+D) INCOMPLETE-INTEGRATION FIXER (ALWAYS ON)
+========================================================
+Anytime A4 finds an “incomplete” item, it can jump the line IF:
+- it breaks build, security, or core UX
+- it blocks Batch 1 completion
+These fixes must be counted toward the current 50 if possible.
+
+========================================================
+E) START NOW
+========================================================
+IMMEDIATELY RUN:
+- Section A Deep Scan A1–A8
+PRINT THE FULL RESULTS.
+DO NOT MODIFY FILES YET.
+END.
