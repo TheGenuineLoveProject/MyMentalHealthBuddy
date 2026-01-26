@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-01-26T00:31:34.062Z",
+  "timestamp": "2026-01-26T01:12:28.485Z",
   "summary": {
-    "totalFiles": 555,
+    "totalFiles": 558,
     "wellnessPages": 242,
     "generatedPages": 123,
-    "withSEO": 308,
-    "withDisclaimer": 236,
+    "withSEO": 307,
+    "withDisclaimer": 234,
     "withSafetyFooter": 164,
     "withBenefits": 297,
     "withMI": 31,

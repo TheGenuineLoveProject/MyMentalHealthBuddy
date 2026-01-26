@@ -108,52 +108,46 @@ const ROUTE_CATEGORY_MAP: Record<string, string> = {
   meditation: "mindfulness",
 };
 
-function shuffleArray<T>(array: T[]): T[] {
-  const shuffled = [...array];
-  for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-  }
-  return shuffled;
-}
-
 export function getBenefitsForRoute(routeKey: string): string[] {
   const category = ROUTE_CATEGORY_MAP[routeKey] || "general";
   const categoryBenefits = BENEFIT_POOL.filter(b => b.category === category);
   const generalBenefits = BENEFIT_POOL.filter(b => b.category === "general");
   
   const combined = [...categoryBenefits, ...generalBenefits];
-  const shuffled = shuffleArray(combined);
-  
-  return shuffled.slice(0, 6).map(b => b.text);
+  return combined.slice(0, 6).map(b => b.text);
 }
 
 export function getBeginnerBenefits(): string[] {
-  return shuffleArray(
-    BENEFIT_POOL.filter(b => b.level === "beginner")
-  ).slice(0, 4).map(b => b.text);
+  return BENEFIT_POOL
+    .filter(b => b.level === "beginner")
+    .slice(0, 4)
+    .map(b => b.text);
 }
 
 export function getIntermediateBenefits(): string[] {
-  return shuffleArray(
-    BENEFIT_POOL.filter(b => b.level === "intermediate")
-  ).slice(0, 4).map(b => b.text);
+  return BENEFIT_POOL
+    .filter(b => b.level === "intermediate")
+    .slice(0, 4)
+    .map(b => b.text);
 }
 
 export function getAdvancedBenefits(): string[] {
-  return shuffleArray(
-    BENEFIT_POOL.filter(b => b.level === "advanced")
-  ).slice(0, 4).map(b => b.text);
+  return BENEFIT_POOL
+    .filter(b => b.level === "advanced")
+    .slice(0, 4)
+    .map(b => b.text);
 }
 
 export function getBenefitsByCategory(category: string): string[] {
-  return shuffleArray(
-    BENEFIT_POOL.filter(b => b.category === category)
-  ).slice(0, 4).map(b => b.text);
+  return BENEFIT_POOL
+    .filter(b => b.category === category)
+    .slice(0, 4)
+    .map(b => b.text);
 }
 
 export function getLevelBenefits(level: "beginner" | "intermediate" | "advanced"): string[] {
-  return shuffleArray(
-    BENEFIT_POOL.filter(b => b.level === level)
-  ).slice(0, 4).map(b => b.text);
+  return BENEFIT_POOL
+    .filter(b => b.level === level)
+    .slice(0, 4)
+    .map(b => b.text);
 }

@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
-import { SEO } from "@/components/SEO";
-// @ts-ignore - JSX component
-import SafetyFooter from "@/components/ui/SafetyFooter";
-// @ts-ignore - JSX component  
-import { BenefitsBlock } from "@/components/BenefitsBlock";
+import { SEO } from "@/components/seo/SEO";
+import { SafetyFooter } from "@/components/safety/SafetyFooter";
+import { BenefitsBlock } from "@/components/marketing/BenefitsBlock";
+import { buildPageContext } from "@/content/context/buildPageContext";
+import { getBenefitsForRoute } from "@/content/benefits/benefitsBank";
 
 interface PageScaffoldProps {
+  routeKey?: string;
   title: string;
   description: string;
   benefits?: string;
@@ -19,6 +20,7 @@ interface PageScaffoldProps {
 }
 
 export function PageScaffold({
+  routeKey,
   title,
   description,
   benefits,
@@ -30,36 +32,37 @@ export function PageScaffold({
   className = "",
   children,
 }: PageScaffoldProps) {
-  const defaultBullets = benefitsBullets || [
-    "Learn at your own pace with no pressure",
-    "Practice skills that support emotional wellbeing",
-    "Access evidence-informed approaches anytime",
-  ];
+  const context = routeKey ? buildPageContext(routeKey) : null;
+  
+  const pageTitle = title || context?.title || "Page";
+  const pageDescription = description || context?.description || "";
+  const pageBenefits = benefitsBullets || 
+    (routeKey ? getBenefitsForRoute(routeKey).slice(0, 3) : [
+      "Learn at your own pace with no pressure",
+      "Practice skills that support emotional wellbeing",
+      "Access evidence-informed approaches anytime",
+    ]);
 
   return (
     <div className={`min-h-screen safe-padding ${className}`}>
       <SEO 
-        title={`${title} — The Genuine Love Project`} 
-        description={description}
-        noindex={noIndex}
+        title={`${pageTitle} — The Genuine Love Project`} 
+        description={pageDescription}
+        noIndex={noIndex}
       />
       
       <header className="text-center py-8 px-4">
         <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-          {title}
+          {pageTitle}
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          {description}
+          {pageDescription}
         </p>
       </header>
 
-      {showBenefits && (
+      {showBenefits && pageBenefits.length > 0 && (
         <div className="max-w-4xl mx-auto px-4 mb-8">
-          <BenefitsBlock
-            benefit={benefits || "Educational self-reflection tools for personal growth"}
-            bullets={defaultBullets}
-            benefitFamily={benefitFamily}
-          />
+          <BenefitsBlock benefits={pageBenefits} />
         </div>
       )}
 
