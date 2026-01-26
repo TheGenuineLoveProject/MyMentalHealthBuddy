@@ -1,0 +1,956 @@
+# ADD-ON: LOCKED BATCHES 101–150 + 151–200 (ENDLESS QUEUE)
+# Paste these TWO files into your repo exactly at the paths below.
+# Status for every item: ❌ LOCKED (do not start until prior batches are 100% ✅)
+
+================================================================================
+FILE: /docs/process-engine/batches/process-101-150.md
+================================================================================
+# Process Batch 101–150 (LOCKED)
+Rule: Keep every item ❌ LOCKED until Batch 051–100 is 100% ✅.
+Each process must be completed in order, with:
+- Why
+- Done means (checkboxes)
+- Touch points (files/routes)
+- Verify (commands)
+- Duplicate-safety check (keeper + collision scan)
+- Status: ❌ LOCKED / 🟡 / ✅
+
+---
+
+## 101) Design System Tokens + Brand Lock Enforcement
+Why: single source of truth for Serenity Sage™ palette + typography + spacing.
+Done means:
+- [ ] tokens file created (colors/spacing/radius/shadows)
+- [ ] Tailwind config uses tokens
+- [ ] UI components reference tokens only
+Touch points: client/tailwind.config.*, client/src/styles/*, ui component library
+Verify: npm run verify
+Duplicate-safety: dup-scan + collisions for theme/tokens
+Status: ❌ LOCKED
+
+## 102) Component Library Audit + Canonical “shadcn/ui” keeper map
+Why: prevent multiple button/input/toast implementations.
+Done means:
+- [ ] keeper files for each primitive (Button/Input/Toast/Dialog/etc.)
+- [ ] all imports routed to keepers
+Touch points: client/src/components/ui/*
+Verify: npm run verify
+Duplicate-safety: scan-duplicates cluster on ui/*
+Status: ❌ LOCKED
+
+## 103) Layout Consistency: Grid + Spacing + Container System
+Why: eliminate overcrowding and inconsistent widths.
+Done means:
+- [ ] container + section layout utilities
+- [ ] pages conform to layout primitives
+Touch points: client/src/components/layout/*
+Verify: npm run verify
+Duplicate-safety: collisions for duplicate layout wrappers
+Status: ❌ LOCKED
+
+## 104) Global Navigation + Route Map Consistency
+Why: ensure discoverability and no broken links.
+Done means:
+- [ ] nav items derived from single route registry
+- [ ] 404 + fallback routes
+Touch points: client/src/router*, client/src/components/nav*
+Verify: npm run verify
+Duplicate-safety: scan-architecture ui-routes.md
+Status: ❌ LOCKED
+
+## 105) Accessibility Pass 2: Focus Management + Dialog/Drawer
+Why: keyboard + screen reader correctness.
+Done means:
+- [ ] focus trap for modal components
+- [ ] aria-labels for icon buttons
+Touch points: client/src/components/ui/*
+Verify: npm run verify + basic a11y checks
+Duplicate-safety: ensure single dialog implementation
+Status: ❌ LOCKED
+
+## 106) Security Pass 2: Threat Model + Abuse Case Catalog
+Why: formalize safety and reduce blind spots.
+Done means:
+- [ ] threat-model.md created
+- [ ] mitigations mapped to processes
+Touch points: /docs/security/*
+Verify: npm run verify
+Duplicate-safety: none (docs)
+Status: ❌ LOCKED
+
+## 107) Privacy Pass 2: Data Inventory + DPIA-lite
+Why: clarify data collected + why.
+Done means:
+- [ ] data-inventory.md
+- [ ] retention schedules
+Touch points: /docs/privacy/*
+Verify: npm run verify
+Duplicate-safety: none (docs)
+Status: ❌ LOCKED
+
+## 108) Centralized Config: “appConfig” single export (client + server)
+Why: stop scattered constants.
+Done means:
+- [ ] server config module keeper
+- [ ] client config module keeper
+Touch points: server/src/config*, client/src/config*
+Verify: npm run verify
+Duplicate-safety: collisions for config exports
+Status: ❌ LOCKED
+
+## 109) API Client SDK (typed) + Zod response parsing
+Why: eliminate ad-hoc fetch and runtime surprises.
+Done means:
+- [ ] api client wrapper + typed endpoints
+- [ ] zod parse on responses
+Touch points: client/src/lib/api*
+Verify: npm run verify
+Duplicate-safety: collision scan for multiple api clients
+Status: ❌ LOCKED
+
+## 110) Server Router Refactor: Single Route Registrar
+Why: prevent endpoint duplication/collisions.
+Done means:
+- [ ] central router index registers all routes
+- [ ] scan-collisions returns zero collisions
+Touch points: server/src/routes/*
+Verify: npm run verify + scan-collisions
+Duplicate-safety: collisions-latest.json must be clean
+Status: ❌ LOCKED
+
+## 111) Observability: Request Metrics + Latency Buckets
+Why: measure real performance.
+Done means:
+- [ ] /metrics endpoint (optional) or structured logs
+- [ ] latency metrics included
+Touch points: server middleware
+Verify: npm run verify
+Duplicate-safety: ensure one metrics middleware
+Status: ❌ LOCKED
+
+## 112) Rate Limiting Advanced: per-IP + per-user + per-route profiles
+Why: prevent AI abuse + auth brute force.
+Done means:
+- [ ] profiles defined for /auth /ai /admin /stripe
+Touch points: server middleware
+Verify: npm run verify
+Duplicate-safety: ensure single limiter
+Status: ❌ LOCKED
+
+## 113) Advanced Input Sanitization + Safe Markdown Policy
+Why: prevent XSS in user content.
+Done means:
+- [ ] sanitize pipeline for any HTML/markdown rendering
+Touch points: client markdown renderer + server storage
+Verify: npm run verify
+Duplicate-safety: single sanitizer utility keeper
+Status: ❌ LOCKED
+
+## 114) Content Engine: Tools Library Framework (A–Z module slots)
+Why: scalable evidence-informed content structure.
+Done means:
+- [ ] “tools registry” schema
+- [ ] tool pages generated from registry
+Touch points: DB schema + client pages
+Verify: npm run verify
+Duplicate-safety: prevent multiple tool registries
+Status: ❌ LOCKED
+
+## 115) Beginner/Intermediate/Advanced Tiering Framework (global)
+Why: consistent tier filtering everywhere.
+Done means:
+- [ ] tier enum used across DB/API/UI
+- [ ] filters + badges + gating consistent
+Touch points: shared/types, DB, UI
+Verify: npm run verify
+Duplicate-safety: ensure single enum definition
+Status: ❌ LOCKED
+
+## 116) Onboarding 2.0: Intent + Goals + Tier Selection
+Why: personalize without clinical claims.
+Done means:
+- [ ] onboarding wizard persists preferences
+Touch points: client onboarding, server endpoint, DB
+Verify: npm run verify
+Duplicate-safety: avoid duplicate onboarding flows
+Status: ❌ LOCKED
+
+## 117) Personalization: Recommended Tools + Journaling Prompts
+Why: increase retention.
+Done means:
+- [ ] rec engine v1 (rules-based)
+Touch points: server recommendation service + client UI
+Verify: npm run verify
+Duplicate-safety: single recommender module
+Status: ❌ LOCKED
+
+## 118) Search v2: Full-text search for journals/tools/blog
+Why: findability at scale.
+Done means:
+- [ ] DB FTS or external (documented)
+Touch points: server search endpoints, DB indexes
+Verify: npm run verify
+Duplicate-safety: one search endpoint set
+Status: ❌ LOCKED
+
+## 119) Tagging v2: Controlled vocab + user tags with moderation
+Why: prevent chaos and ensure safe language.
+Done means:
+- [ ] vocab list + CRUD admin
+Touch points: DB + admin UI
+Verify: npm run verify
+Duplicate-safety: one tagging schema
+Status: ❌ LOCKED
+
+## 120) Admin Dashboard v2: Live System Health + Queues
+Why: operational readiness.
+Done means:
+- [ ] admin health widgets reflect real metrics
+Touch points: admin UI + server analyzer endpoints
+Verify: npm run verify
+Duplicate-safety: single admin dashboard route
+Status: ❌ LOCKED
+
+## 121) Content Publishing v2: Editorial Workflow (draft/review/publish)
+Why: safe evidence-informed publishing.
+Done means:
+- [ ] states + roles + audit trail
+Touch points: DB + admin UI
+Verify: npm run verify
+Duplicate-safety: ensure single publishing workflow
+Status: ❌ LOCKED
+
+## 122) Media Pipeline: Image Resize + WebP + Cache Headers
+Why: performance and quality.
+Done means:
+- [ ] upload/transform approach documented + implemented
+Touch points: server upload route or build pipeline
+Verify: npm run verify
+Duplicate-safety: one media pipeline
+Status: ❌ LOCKED
+
+## 123) SEO v2: Structured Data (JSON-LD) for key pages
+Why: discoverability.
+Done means:
+- [ ] JSON-LD for blog/articles/tools
+Touch points: client head tags
+Verify: npm run verify
+Duplicate-safety: single SEO helper
+Status: ❌ LOCKED
+
+## 124) Internationalization (i18n) v2: Locale switch + copy registry
+Why: future global reach.
+Done means:
+- [ ] translation keys + fallback behavior
+Touch points: client i18n system
+Verify: npm run verify
+Duplicate-safety: one i18n library
+Status: ❌ LOCKED
+
+## 125) Email System v2: Templates + Delivery Logs
+Why: trust and debugging.
+Done means:
+- [ ] template system
+- [ ] delivery log table
+Touch points: server email module, DB
+Verify: npm run verify
+Duplicate-safety: single email sender
+Status: ❌ LOCKED
+
+## 126) Notifications v2: Digest + Preference Center
+Why: reduce spam + increase engagement.
+Done means:
+- [ ] notification preferences UI
+- [ ] weekly digest job (human-triggered)
+Touch points: client settings + server job runner
+Verify: npm run verify
+Duplicate-safety: one notification scheduler
+Status: ❌ LOCKED
+
+## 127) Audit Trail v2: Admin searchable + exportable
+Why: compliance-lite.
+Done means:
+- [ ] audit UI with filters
+Touch points: admin UI + server audit endpoints
+Verify: npm run verify
+Duplicate-safety: one audit table
+Status: ❌ LOCKED
+
+## 128) Data Export v2: Self-serve download bundle (safe)
+Why: user trust.
+Done means:
+- [ ] export job creates archive
+Touch points: server export endpoint + storage
+Verify: npm run verify
+Duplicate-safety: one export pipeline
+Status: ❌ LOCKED
+
+## 129) Data Deletion: User-initiated account deletion flow
+Why: privacy baseline.
+Done means:
+- [ ] deletion request + confirmation + delay
+Touch points: server + client settings
+Verify: npm run verify
+Duplicate-safety: one deletion flow
+Status: ❌ LOCKED
+
+## 130) Legal Pages v2: Jurisdiction toggles + versioning
+Why: maintainable policies.
+Done means:
+- [ ] versioned policy pages
+Touch points: public pages
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 131) AI Safety v2: Prompt templates registry + allowlist
+Why: prevent prompt sprawl.
+Done means:
+- [ ] prompt registry file + tests
+Touch points: server ai prompts
+Verify: npm run verify
+Duplicate-safety: one prompt registry
+Status: ❌ LOCKED
+
+## 132) AI Streaming Responses (if desired) + UI typing states
+Why: better UX.
+Done means:
+- [ ] streaming endpoint + client reader
+Touch points: server ai route + client chat
+Verify: npm run verify
+Duplicate-safety: single ai route
+Status: ❌ LOCKED
+
+## 133) AI Cost Controls: Token budgets + per-model caps
+Why: predictability.
+Done means:
+- [ ] budgets enforced with clear errors
+Touch points: server ai wrapper
+Verify: npm run verify
+Duplicate-safety: one budget enforcer
+Status: ❌ LOCKED
+
+## 134) Abuse Reporting + Moderation Queue
+Why: safety and community trust.
+Done means:
+- [ ] report UI + admin queue
+Touch points: DB + admin UI
+Verify: npm run verify
+Duplicate-safety: single moderation queue
+Status: ❌ LOCKED
+
+## 135) Crash Recovery: Safe-mode boot + diagnostics banner
+Why: reduce downtime.
+Done means:
+- [ ] safe-mode flag
+- [ ] diagnostics page
+Touch points: server startup + admin UI
+Verify: npm run verify
+Duplicate-safety: single boot flag logic
+Status: ❌ LOCKED
+
+## 136) Dependency Governance: Allowed list + lockfile policy
+Why: keep stable.
+Done means:
+- [ ] policy doc
+- [ ] CI check
+Touch points: CI workflow + docs
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 137) Monorepo Hygiene: Path aliases + boundary rules
+Why: eliminate import spaghetti.
+Done means:
+- [ ] tsconfig paths + lint rule
+Touch points: tsconfig + eslint
+Verify: npm run verify
+Duplicate-safety: scan-collisions for duplicate utilities
+Status: ❌ LOCKED
+
+## 138) “One Command Doctor” v2: Auto-scan + actionable fix plan
+Why: reduce human load.
+Done means:
+- [ ] doctor script prints prioritized actions
+Touch points: scripts/doctor*
+Verify: npm run verify
+Duplicate-safety: ensure single doctor script
+Status: ❌ LOCKED
+
+## 139) Release Process v2: Semver + changelog automation
+Why: reliable releases.
+Done means:
+- [ ] changelog generation
+Touch points: scripts + CI
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 140) Staging vs Prod Config Separation (strict)
+Why: no accidental prod calls.
+Done means:
+- [ ] env separation enforced
+Touch points: config modules
+Verify: npm run verify
+Duplicate-safety: one config loader
+Status: ❌ LOCKED
+
+## 141) Backups v2: Scheduled (human-triggered) + verification
+Why: safety.
+Done means:
+- [ ] backup script + restore test doc
+Touch points: scripts/backup*
+Verify: npm run verify
+Duplicate-safety: one backup method
+Status: ❌ LOCKED
+
+## 142) Performance Pass v2: DB query profiling + slow query logs
+Why: scale readiness.
+Done means:
+- [ ] slow query logging enabled
+Touch points: DB layer
+Verify: npm run verify
+Duplicate-safety: one DB wrapper
+Status: ❌ LOCKED
+
+## 143) Caching v2: Server-side caching policy for public content
+Why: speed and cost.
+Done means:
+- [ ] cache headers + optional in-memory cache
+Touch points: server public routes
+Verify: npm run verify
+Duplicate-safety: one cache module
+Status: ❌ LOCKED
+
+## 144) CDN/Static Asset Strategy Document + Implementation
+Why: clarity and speed.
+Done means:
+- [ ] doc + config applied
+Touch points: build config
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 145) Mobile UX v2: Touch targets + sticky nav + safe spacing
+Why: iOS usability.
+Done means:
+- [ ] min 44px touch targets
+Touch points: client UI
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 146) Forms v2: Unified form components + error patterns
+Why: consistent UX.
+Done means:
+- [ ] form primitives + field helpers
+Touch points: client components
+Verify: npm run verify
+Duplicate-safety: prevent duplicate field components
+Status: ❌ LOCKED
+
+## 147) Theming v2: Dark mode optional (if desired) + accessibility
+Why: user preference.
+Done means:
+- [ ] theme toggle + persisted setting
+Touch points: client theme provider
+Verify: npm run verify
+Duplicate-safety: single theme provider
+Status: ❌ LOCKED
+
+## 148) Integrations Registry: External services map + health checks
+Why: operational clarity.
+Done means:
+- [ ] integration registry doc + ping endpoints
+Touch points: server health routes + docs
+Verify: npm run verify
+Duplicate-safety: single registry
+Status: ❌ LOCKED
+
+## 149) Partnership/Embed Widgets v1 (safe)
+Why: growth.
+Done means:
+- [ ] embeddable badge/cards with safe JS
+Touch points: public assets
+Verify: npm run verify
+Duplicate-safety: one widget library
+Status: ❌ LOCKED
+
+## 150) “Platform Completion Score” engine + admin scorecard
+Why: measurable progress.
+Done means:
+- [ ] score computed from registry statuses
+Touch points: scripts + admin UI
+Verify: npm run verify
+Duplicate-safety: one score engine
+Status: ❌ LOCKED
+
+
+================================================================================
+FILE: /docs/process-engine/batches/process-151-200.md
+================================================================================
+# Process Batch 151–200 (LOCKED)
+Rule: Keep every item ❌ LOCKED until Batch 101–150 is 100% ✅.
+Each process must be completed in order, with:
+- Why
+- Done means (checkboxes)
+- Touch points (files/routes)
+- Verify (commands)
+- Duplicate-safety check (keeper + collision scan)
+- Status: ❌ LOCKED / 🟡 / ✅
+
+---
+
+## 151) Evidence Library: Source Tracking + Citations Model (non-medical)
+Why: credibility without clinical claims.
+Done means:
+- [ ] DB table for sources
+- [ ] tool pages can reference sources
+Touch points: DB + content pages
+Verify: npm run verify
+Duplicate-safety: single evidence model
+Status: ❌ LOCKED
+
+## 152) Tool Authoring v3: Structured templates + validations
+Why: scalable, consistent content.
+Done means:
+- [ ] schema for tool blocks
+- [ ] editor validates blocks
+Touch points: admin editor + DB
+Verify: npm run verify
+Duplicate-safety: one template schema
+Status: ❌ LOCKED
+
+## 153) Guided Journeys: Multi-step “pathways” engine
+Why: A→Z structured healing journeys.
+Done means:
+- [ ] journey schema + runner
+Touch points: DB + client journey UI
+Verify: npm run verify
+Duplicate-safety: one journeys engine
+Status: ❌ LOCKED
+
+## 154) Progress Insights v2: Cohort-style personal analytics (private)
+Why: retention and insight.
+Done means:
+- [ ] insights endpoints + charts
+Touch points: server analytics + client dashboard
+Verify: npm run verify
+Duplicate-safety: one insights module
+Status: ❌ LOCKED
+
+## 155) Habit Tracker v2: Reminders + streak rules + anti-guilt UX
+Why: behavior change support.
+Done means:
+- [ ] streak logic + nudges
+Touch points: DB + UI
+Verify: npm run verify
+Duplicate-safety: one habit system
+Status: ❌ LOCKED
+
+## 156) Calendar Integration v1: Internal calendar + export (ICS)
+Why: planning without external dependency.
+Done means:
+- [ ] ICS export
+Touch points: server export + UI
+Verify: npm run verify
+Duplicate-safety: one calendar model
+Status: ❌ LOCKED
+
+## 157) Community v1 (Optional): Read-only stories gallery (moderated)
+Why: social proof safely.
+Done means:
+- [ ] story submission + moderation queue
+Touch points: DB + admin
+Verify: npm run verify
+Duplicate-safety: one stories pipeline
+Status: ❌ LOCKED
+
+## 158) Testimonials Engine: Permissions + rotation + A/B slots
+Why: conversion lift.
+Done means:
+- [ ] testimonials CRUD + safe display
+Touch points: admin + marketing pages
+Verify: npm run verify
+Duplicate-safety: single testimonials module
+Status: ❌ LOCKED
+
+## 159) Referral Program v2: Fraud-safe rules + tracking
+Why: growth at scale.
+Done means:
+- [ ] referral ledger + caps
+Touch points: billing + DB
+Verify: npm run verify
+Duplicate-safety: one ledger
+Status: ❌ LOCKED
+
+## 160) Pricing Experiment Framework: A/B gating + analytics (privacy-safe)
+Why: optimize conversion.
+Done means:
+- [ ] experiment flags + assignment
+Touch points: server config + client pricing
+Verify: npm run verify
+Duplicate-safety: single experiment system
+Status: ❌ LOCKED
+
+## 161) Advanced SEO: Internal linking engine + breadcrumbs
+Why: organic growth.
+Done means:
+- [ ] breadcrumbs + link suggestions
+Touch points: routing + content pages
+Verify: npm run verify
+Duplicate-safety: one breadcrumb component
+Status: ❌ LOCKED
+
+## 162) OpenGraph Image Generator v2 (dynamic) — build-time
+Why: better sharing visuals.
+Done means:
+- [ ] OG images generated per page
+Touch points: build scripts
+Verify: npm run verify
+Duplicate-safety: one OG pipeline
+Status: ❌ LOCKED
+
+## 163) Knowledge Graph v1: Concepts + relations (optional)
+Why: A→Z “map” of tools & concepts.
+Done means:
+- [ ] graph schema + UI explorer
+Touch points: DB + client explorer
+Verify: npm run verify
+Duplicate-safety: single graph module
+Status: ❌ LOCKED
+
+## 164) “Ask the Library” Search AI (Optional) with strict safe retrieval
+Why: AI guided discovery.
+Done means:
+- [ ] retrieval restricted to public content
+Touch points: server ai + content
+Verify: npm run verify
+Duplicate-safety: one retrieval path
+Status: ❌ LOCKED
+
+## 165) AI Coach Modes (Beginner/Intermediate/Advanced) — tone + structure
+Why: consistent tiered guidance.
+Done means:
+- [ ] mode profiles + tests
+Touch points: server ai prompt profiles
+Verify: npm run verify
+Duplicate-safety: prompt registry only
+Status: ❌ LOCKED
+
+## 166) Multi-tenant / Org Accounts (Optional) — foundations only
+Why: future enterprise.
+Done means:
+- [ ] org schema + membership table
+Touch points: DB + auth
+Verify: npm run verify
+Duplicate-safety: one membership model
+Status: ❌ LOCKED
+
+## 167) Admin Permissions Matrix + UI gating
+Why: secure admin at scale.
+Done means:
+- [ ] permissions matrix doc + enforcement
+Touch points: server RBAC + admin UI
+Verify: npm run verify
+Duplicate-safety: one RBAC system
+Status: ❌ LOCKED
+
+## 168) Compliance-lite Toolkit: Audit exports + policy acknowledgements
+Why: trust.
+Done means:
+- [ ] acknowledgements table + export
+Touch points: DB + settings UI
+Verify: npm run verify
+Duplicate-safety: one acknowledgements model
+Status: ❌ LOCKED
+
+## 169) Disaster Recovery Runbook + Drill Script
+Why: real ops readiness.
+Done means:
+- [ ] runbook doc + “drill” script
+Touch points: docs + scripts
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 170) Load Test Harness v1 (k6/artillery) + CI optional
+Why: scale signals.
+Done means:
+- [ ] basic load test scenario
+Touch points: /tests/load/*
+Verify: npm run verify
+Duplicate-safety: one harness
+Status: ❌ LOCKED
+
+## 171) Edge-case Testing Suite: auth/stripe/ai failures
+Why: resilience.
+Done means:
+- [ ] failure-mode tests
+Touch points: tests
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 172) Billing v3: Usage-based add-on (Optional)
+Why: advanced monetization.
+Done means:
+- [ ] metering table + invoice support
+Touch points: billing + DB
+Verify: npm run verify
+Duplicate-safety: one metering system
+Status: ❌ LOCKED
+
+## 173) Marketplace Integrations (Optional): Zapier/Make webhook bridge
+Why: automation ecosystem.
+Done means:
+- [ ] webhook bridge endpoints + auth
+Touch points: server integrations
+Verify: npm run verify
+Duplicate-safety: one bridge
+Status: ❌ LOCKED
+
+## 174) Content Syndication v1: RSS + JSON feeds + canonical links
+Why: distribution.
+Done means:
+- [ ] feeds for blog/tools
+Touch points: server public routes
+Verify: npm run verify
+Duplicate-safety: one feed generator
+Status: ❌ LOCKED
+
+## 175) Social Publishing Tool v2: Templates + approval + scheduling (human-triggered)
+Why: your A→Z social engine.
+Done means:
+- [ ] template library + schedule queue
+Touch points: admin publishing module
+Verify: npm run verify
+Duplicate-safety: one scheduler
+Status: ❌ LOCKED
+
+## 176) Analytics Dashboard v2: Funnels + retention (privacy-safe)
+Why: growth measurement.
+Done means:
+- [ ] funnel events + reports UI
+Touch points: server analytics + admin UI
+Verify: npm run verify
+Duplicate-safety: one analytics schema
+Status: ❌ LOCKED
+
+## 177) Feature Flag UI + Remote toggles (admin)
+Why: safe rollouts.
+Done means:
+- [ ] admin page to toggle flags
+Touch points: admin UI + server config
+Verify: npm run verify
+Duplicate-safety: one flags store
+Status: ❌ LOCKED
+
+## 178) Dynamic Forms Builder (Optional) for assessments (non-clinical)
+Why: flexible intake.
+Done means:
+- [ ] builder + renderer + storage
+Touch points: DB + UI
+Verify: npm run verify
+Duplicate-safety: one builder
+Status: ❌ LOCKED
+
+## 179) Personalized Notifications v3: event-driven triggers (safe)
+Why: relevance.
+Done means:
+- [ ] triggers + throttle rules
+Touch points: server notifications
+Verify: npm run verify
+Duplicate-safety: one triggers engine
+Status: ❌ LOCKED
+
+## 180) Offline Support v1 (Optional): local caching + sync strategy
+Why: resilience.
+Done means:
+- [ ] basic offline read mode
+Touch points: client service worker
+Verify: npm run verify
+Duplicate-safety: one SW
+Status: ❌ LOCKED
+
+## 181) Desktop PWA Packaging (Optional)
+Why: reach.
+Done means:
+- [ ] PWA manifest + install UX
+Touch points: client public
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 182) Advanced Content Safety: “safe language” linter for tools/blog
+Why: brand-safe and trauma-informed tone.
+Done means:
+- [ ] linter script + CI check
+Touch points: scripts + content
+Verify: npm run verify
+Duplicate-safety: one linter
+Status: ❌ LOCKED
+
+## 183) Brand Asset Vault: immutable lock list + hash verification
+Why: “do not modify logo” enforcement.
+Done means:
+- [ ] asset hash check script
+Touch points: scripts + assets folder
+Verify: npm run verify
+Duplicate-safety: one vault policy
+Status: ❌ LOCKED
+
+## 184) Legal/IP Toolkit: trademark usage rules + boilerplate notices
+Why: protect brand.
+Done means:
+- [ ] notices injected into site footer
+Touch points: footer component + docs
+Verify: npm run verify
+Duplicate-safety: one notices source
+Status: ❌ LOCKED
+
+## 185) Admin Content QA: checklists + automated validation before publish
+Why: prevent broken content.
+Done means:
+- [ ] validation gate in publish flow
+Touch points: admin publish service
+Verify: npm run verify
+Duplicate-safety: one gatekeeper
+Status: ❌ LOCKED
+
+## 186) Partnerships Page + Contact Workflows
+Why: business ops.
+Done means:
+- [ ] contact form + routing + spam controls
+Touch points: public pages + server
+Verify: npm run verify
+Duplicate-safety: one contact pipeline
+Status: ❌ LOCKED
+
+## 187) Support Ticketing v1 (Optional): simple internal inbox
+Why: user support.
+Done means:
+- [ ] ticket table + admin inbox
+Touch points: DB + admin UI
+Verify: npm run verify
+Duplicate-safety: one ticket system
+Status: ❌ LOCKED
+
+## 188) SLA/Status Page v1: public uptime + incident logs (light)
+Why: trust.
+Done means:
+- [ ] status page + incident posts
+Touch points: public routes
+Verify: npm run verify
+Duplicate-safety: one status page
+Status: ❌ LOCKED
+
+## 189) Multi-region readiness notes + latency strategy doc
+Why: long-term scale.
+Done means:
+- [ ] strategy doc
+Touch points: docs
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 190) Advanced DB Governance: RLS (Optional) or strict row ownership
+Why: stronger security posture.
+Done means:
+- [ ] row ownership enforced consistently
+Touch points: DB + server queries
+Verify: npm run verify
+Duplicate-safety: one ownership policy
+Status: ❌ LOCKED
+
+## 191) Secrets Rotation Playbook + detection of leaked keys
+Why: safety.
+Done means:
+- [ ] rotation doc + CI secret scanning config
+Touch points: docs + CI
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 192) Migration Safety: forward-only migrations + rollback strategy
+Why: fewer outages.
+Done means:
+- [ ] migration guidelines + checks
+Touch points: docs + scripts
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 193) API Versioning Strategy + Deprecation Policy
+Why: stability for integrators.
+Done means:
+- [ ] versioning doc + headers
+Touch points: server routes
+Verify: npm run verify
+Duplicate-safety: none
+Status: ❌ LOCKED
+
+## 194) External API Keys Vault (Optional): per-user integrations
+Why: future integrations.
+Done means:
+- [ ] encrypted storage approach documented + implemented
+Touch points: DB + server
+Verify: npm run verify
+Duplicate-safety: one vault
+Status: ❌ LOCKED
+
+## 195) Advanced Personalization v3: learning preferences + content pacing
+Why: better user outcomes.
+Done means:
+- [ ] pacing model + UI controls
+Touch points: settings + recommender
+Verify: npm run verify
+Duplicate-safety: one pacing module
+Status: ❌ LOCKED
+
+## 196) Gamification (gentle): badges without pressure (Optional)
+Why: motivation with safety.
+Done means:
+- [ ] badge rules + opt-out
+Touch points: DB + UI
+Verify: npm run verify
+Duplicate-safety: one badges system
+Status: ❌ LOCKED
+
+## 197) Creator Toolkit: exportable prompt packs + printables
+Why: content productization.
+Done means:
+- [ ] generator + download endpoints
+Touch points: server exports + UI
+Verify: npm run verify
+Duplicate-safety: one generator
+Status: ❌ LOCKED
+
+## 198) Public API (Optional): token auth + docs
+Why: ecosystem.
+Done means:
+- [ ] API keys + rate limits + docs
+Touch points: server + docs
+Verify: npm run verify
+Duplicate-safety: one public api system
+Status: ❌ LOCKED
+
+## 199) Final Hardening Sweep: full collision-free, zero dup clusters in core
+Why: platform integrity.
+Done means:
+- [ ] collisions-latest shows 0 high-risk collisions
+- [ ] duplicate clusters in core resolved/quarantined
+Touch points: entire repo
+Verify: npm run dup-scan + verify
+Duplicate-safety: required
+Status: ❌ LOCKED
+
+## 200) “Completion Mode”: freeze architecture + golden path docs + template export
+Why: ship the template reliably.
+Done means:
+- [ ] golden path docs (setup/deploy/verify)
+- [ ] template export script
+Touch points: docs + scripts
+Verify: npm run verify
+Duplicate-safety: ensure keepers locked
+Status: ❌ LOCKED

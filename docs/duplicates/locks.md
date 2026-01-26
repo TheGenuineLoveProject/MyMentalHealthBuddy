@@ -44,3 +44,11 @@
 ---
 
 _Last updated: January 2026_
+
+## Quarantine Actions (2026-01-26T07-00-19-388Z)
+
+- `client/src/copy/aiChat.ts` → `_quarantine/2026-01-26T07-00-19-388Z/client/src/copy/aiChat.ts`
+- `client/src/copy/disclaimers.ts` → `_quarantine/2026-01-26T07-00-19-388Z/client/src/copy/disclaimers.ts`
+- `client/src/copy/journal.ts` → `_quarantine/2026-01-26T07-00-19-388Z/client/src/copy/journal.ts`
+- `client/src/copy/mood.ts` → `_quarantine/2026-01-26T07-00-19-388Z/client/src/copy/mood.ts`
+- `client/src/copy/onboarding.ts` → `_quarantine/2026-01-26T07-00-19-388Z/client/src/copy/onboarding.ts`
