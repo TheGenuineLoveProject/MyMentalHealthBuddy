@@ -1,0 +1,167 @@
+NAME: GLP_APPLY_ALL_CHANGES_MASTER (A→Z 360 • Top-50 Platform Processes • APPLY MODE)
+
+ROLE:
+Replit AI Agent Mode for TheGenuineLoveProject.com (Aaliyah Draws Art LLC • Owner: Maria Landa)
+
+OBJECTIVE:
+APPLY all necessary changes to reach “Platform Complete” by the Top-50 definition:
+- safest + most advanced
+- automated + organized
+- high-performing + scalable
+- evidence-informed + non-clinical
+- zero plagiarism + zero copyright infringement
+- Replit-safe, build-pass guaranteed
+
+ABSOLUTE EXECUTION RULES (APPLY MODE):
+1) APPLY CHANGES NOW (no DRY-RUN gate). Make changes directly.
+2) Still: max 5 files per patch. If more needed, create Patch 1, Patch 2, Patch 3…
+3) Never delete files. Never rename. Never break routes.
+4) If a conflict occurs, choose the smallest change that restores build.
+5) Human-triggered only. No background daemons. No auto-posting.
+6) Privacy: never log raw user journaling text server-side.
+7) Non-clinical: no diagnosis/treatment/cure/guarantees.
+8) Accessibility: tap targets ≥44px, keyboard focus, semantic headings.
+9) Brand lock: do not modify your protected logo/assets; do not rename brand.
+10) Always finish each patch with:
+   - build check
+   - route smoke test list
+   - update /admin/system-health statuses
+
+========================================================
+PATCH 1 (APPLY NOW): CREATE “TOP-50 SYSTEM HEALTH” DASHBOARD
+========================================================
+GOAL:
+Make /admin/system-health exist and show the Top-50 process list + statuses.
+
+CREATE/EDIT EXACTLY THESE 5 FILES (adjust paths to your repo if different):
+
+1) NEW: client/src/content/processes/top50ProcessMap.ts
+   - export const TOP50_PROCESSES = [{ id, category, name, description, risk, owner, status }]
+   - status default: "NOT_STARTED"
+
+2) NEW: client/src/pages/admin/SystemHealth.tsx
+   - fetches /api/admin/system-health
+   - shows 50 rows with status pills + category filters
+   - “Mark Done” button calls PATCH endpoint (admin only)
+
+3) NEW: server/routes/adminSystemHealth.ts
+   - GET /api/admin/system-health -> returns list
+   - PATCH /api/admin/system-health/:id -> update status
+   - Storage: simplest safe method:
+     - if DB exists: store in table system_health_status
+     - else: store in server/data/system-health.json
+
+4) EDIT: server/index.ts (or your main server router file)
+   - register adminSystemHealth routes
+
+5) EDIT: client router (App routes file)
+   - add route /admin/system-health -> SystemHealth page
+   - add admin nav link if exists
+
+POST-PATCH VALIDATION:
+- Visit /admin/system-health
+- List shows 50 processes
+- Status update persists after refresh
+- Production build passes
+
+STOP AFTER PATCH 1 AND PRINT:
+- exactly what was changed
+- exact routes added
+- what to test next
+
+========================================================
+PATCH 2 (APPLY): TRUST + SAFETY PAGES (ZERO-LIABILITY FOUNDATION)
+========================================================
+GOAL:
+Publish core legal-safe trust pages + global SafetyFooter.
+
+FILES (max 5):
+1) NEW: client/src/components/SafetyFooter.tsx
+2) NEW: client/src/pages/trust/SafetyPage.tsx
+3) NEW: client/src/pages/trust/PrivacyPage.tsx
+4) NEW: client/src/pages/trust/TermsPage.tsx
+5) EDIT: Layout/Shell component to include <SafetyFooter />
+
+Copy constraints:
+- Original wording
+- Educational/supportive only
+- Crisis resources (US 988 + “local emergency number”)
+- No promises
+
+VALIDATION:
+- /safety /privacy /terms load
+- Footer appears sitewide
+
+========================================================
+PATCH 3 (APPLY): SEO BASELINE (TOP-50 “DISCOVERABILITY”)
+========================================================
+FILES (max 5):
+1) NEW: server/routes/robots.ts  -> /robots.txt
+2) NEW: server/routes/sitemap.ts -> /sitemap.xml
+3) NEW: client/src/components/Meta.tsx
+4) EDIT: App root to use Meta per route
+5) EDIT: server/index.ts register routes
+
+VALIDATION:
+- /robots.txt and /sitemap.xml respond
+- titles/descriptions exist
+
+========================================================
+PATCH 4 (APPLY): ERROR BOUNDARY + FRIENDLY FALLBACKS
+========================================================
+FILES (max 5):
+1) NEW: client/src/components/ErrorBoundary.tsx
+2) NEW: client/src/pages/ErrorFallback.tsx
+3) EDIT: client App root to wrap routes
+4) NEW: client/src/content/microcopy/errorMicrocopy.ts
+5) UPDATE: /admin/system-health mark “Error Handling” IN_PROGRESS
+
+========================================================
+PATCH 5 (APPLY): PRIVACY-SAFE ANALYTICS TAXONOMY
+========================================================
+FILES (max 5):
+1) NEW: server/routes/analytics.ts
+2) NEW: client/src/lib/track.ts
+3) NEW: client/src/content/analytics/eventSchema.ts
+4) EDIT: key pages add track() calls (1–2 files)
+5) UPDATE: /admin/system-health
+
+Rules:
+- No sensitive text
+- No PII
+- Events only
+
+========================================================
+PATCH 6+ (APPLY): ADMIN SOCIAL STUDIO + 8 CORE TOOLS + AUTH + BILLING + DB HARDENING
+========================================================
+Sequence (Top-50 aligned):
+6) Admin Social Studio (draft/review/approve/schedule/export)
+7) Tool Factory deploy 8 starter tools (breath…coherence)
+8) Auth hardening (role-based admin)
+9) Billing + tiers (Stripe)
+10) DB migrations + backups
+11) Observability (logs, health checks)
+12) Performance budgets (LCP/CLS)
+13) Security headers + rate limits + CSRF where needed
+…continue until all Top-50 are DONE.
+
+========================================================
+FINAL SUCCESS CONDITION (“PLATFORM COMPLETE”)
+========================================================
+Platform is complete when:
+- /admin/system-health shows all 50 DONE
+- production build passes
+- trust pages exist
+- social studio works
+- starter 8 tools work (3 reading levels each)
+- auth + billing + db + security hardened
+- zero plagiarism/copyright issues
+- Replit deployment stable
+
+========================================================
+EXECUTE NOW:
+APPLY PATCH 1 immediately in the repo.
+DO NOT ASK QUESTIONS.
+If a path differs, detect the closest existing file and adapt.
+
+END.
