@@ -1,7 +1,7 @@
 # The Genuine Love Project
 
 ## Overview
-The Genuine Love Project is an AI-powered mental wellness platform dedicated to fostering self-love, healing, and emotional growth. It provides a private, compassionate, and accessible environment through AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools. The platform integrates AI with trauma-informed psychological principles to offer a comprehensive wellness toolkit, aiming to empower users to "Live in Genuine Love" with advanced features available via subscription. The business vision is to provide a comprehensive, ethical, and accessible mental wellness solution, leveraging AI to offer personalized support and foster emotional resilience for a broad user base.
+The Genuine Love Project is an AI-powered mental wellness platform designed to foster self-love, healing, and emotional growth. It provides a private, compassionate, and accessible environment through AI-assisted emotional guidance, mood tracking, journaling, crisis support, and evidence-based healing tools. The platform integrates AI with trauma-informed psychological principles to offer a comprehensive wellness toolkit, empowering users to "Live in Genuine Love" with advanced features available via subscription. The business vision is to provide a comprehensive, ethical, and accessible mental wellness solution, leveraging AI for personalized support and fostering emotional resilience for a broad user base.
 
 ## User Preferences
 - Preferred communication style: Simple, everyday language
@@ -21,29 +21,22 @@ The Genuine Love Project is an AI-powered mental wellness platform dedicated to 
 ## System Architecture
 
 ### UI/UX Decisions
-The frontend features a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features including ARIA, semantic HTML, keyboard navigation, and `prefers-reduced-motion` support. Responsive typography and safe area insets ensure mobile adaptability. A comprehensive design token system is implemented for consistent styling across three visual modes: Default, Low-Stim, and Reading. All UI primitives include `data-testid` attributes, `focus-visible` rings, ARIA labels, `prefers-reduced-motion` support, and semantic HTML. A 3-Level Reading Mode System allows users to toggle between Beginner, Intermediate, and Advanced content levels, with features like `helperLine` consent cues and `card` meta for time/effort notes. A "Sacred UI Component Library" provides reusable components like `LayoutWrapper`, `Hero`, `SectionContainer`, `Card/CardGrid`, `Button`, `Footer`, `SafetyNotice`, `EvidenceNote`, `Steps/StepsCompact`, and `Callout`.
+The frontend features a premium, Canva-inspired visual design with HSL color formatting, custom typography, enhanced gradients, and refined shadows. It supports full light/dark themes, micro-interactions, and comprehensive accessibility features including ARIA, semantic HTML, keyboard navigation, and `prefers-reduced-motion` support. A comprehensive design token system is implemented for consistent styling across Default, Low-Stim, and Reading visual modes. All UI primitives include `data-testid` attributes, `focus-visible` rings, ARIA labels, `prefers-reduced-motion` support, and semantic HTML. A 3-Level Reading Mode System allows users to toggle between Beginner, Intermediate, and Advanced content levels. A "Sacred UI Component Library" provides reusable components for consistent design.
 
 ### Social Work-Informed Frameworks
-The platform integrates evidence-based social work approaches:
-- **Motivational Interviewing (MI)**: Language patterns for autonomy, evocation, collaboration, and compassion. Used in journaling prompts, onboarding, check-ins, and upgrade CTAs (non-pressuring).
-- **Strengths-Based Approach**: "Build on what's already working" framing. Environmental reflection prompts for boundaries and habit tools.
-- **The 12-Phase Self-Alignment Path™**: Educational, non-religious transformation framework covering Mind/Body/Values/Action domains. All phases optional, self-paced, with opt-out at every step.
-- **Ethical NLP Patterns**: Future pacing, identity statements, reframing, language awareness. Guardrails: no hypnosis, no embedded commands, no coercive persuasion.
-- **18+ Age Gating**: AgeConsentGate component with localStorage persistence, consent language, crisis links. WellnessRoute wrapper enforces gating on wellness pages.
-- **Benefits Block**: Explicit benefits on every wellness page (what you get, time, control, disclaimer).
-- **Persistent Disclaimers**: Footer bar with 18+ notice, educational disclaimer, pause/stop messaging, and crisis link.
+The platform integrates evidence-based social work approaches such as Motivational Interviewing (MI) for language patterns, a Strengths-Based Approach for framing, and "The 12-Phase Self-Alignment Path™" as an educational transformation framework. Ethical NLP patterns are used with guardrails against coercive persuasion. An 18+ age gating mechanism ensures content suitability, and persistent disclaimers reinforce the educational, non-clinical nature of the platform, always including crisis support links.
 
 ### Technical Implementations
-The project uses a monorepo structure with separate client (React 18 SPA with TypeScript, Vite, Wouter, React Hook Form, Zod, Tailwind CSS, Lucide React) and server (Node.js/Express with TypeScript) applications. The backend provides a RESTful API with middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). Shared types ensure monorepo consistency, and all modules are ESM. Production optimization includes code splitting, environment variable configuration, health checks, rate limiting, and graceful shutdown. A trauma-informed NLP layer ensures supportive user-facing text and prompts. A "Wellness Microcopy Library" and a "Shared TypeScript Microcopy" system provide deterministic, type-safe microcopy selection and validation.
+The project uses a monorepo structure with separate client (React 18 SPA with TypeScript, Vite, Wouter, React Hook Form, Zod, Tailwind CSS, Lucide React) and server (Node.js/Express with TypeScript) applications. The backend provides a RESTful API with middleware for CORS, security headers (Helmet), compression, logging (Morgan), and session management (Express Session). Shared TypeScript types ensure monorepo consistency. A trauma-informed NLP layer ensures supportive user-facing text, supported by a "Wellness Microcopy Library" and "Shared TypeScript Microcopy" system for deterministic, type-safe content.
 
 ### Feature Specifications
 The platform offers:
 - **AI-powered Chat Therapy**: Integrated with OpenAI API for trauma-informed responses and crisis intervention.
-- **Wellness Tools**: State Tracker, Journal Prompts, Reflection, Wisdom, Advanced Intellectual, Mastery tools, Perception Refinement (nervous system regulation), Permaculture Wellness (ecological healing principles), and Self-Worth Reflection (intelligence reclamation and self-doubt healing).
+- **Wellness Tools**: State Tracker, Journal Prompts, Reflection, Wisdom, Mastery tools, Perception Refinement, Permaculture Wellness, and Self-Worth Reflection.
 - **Specialized APIs**: Covering areas such as Knowledge Synthesis, Philosophy, Metacognition, Creativity, Resilience, Foresight, Systems Compassion, Collective Intelligence, Wisdom Synthesis, Cognitive Lab, Contemplative, Ethical Reasoning, Existential, Embodiment, Narrative, Relational, Values, Neuro-Integration, Socio-Ecology, Praxis, Post-Trauma, Self-Mastery Intelligence, Universal Content, Trauma Healing Protocols, Spiritual Intelligence, Relationship Dynamics, Cognitive Enhancement, Emotional Resilience, Life Purpose, Mind-Body Integration, Social Intelligence, Peak Performance, Personal Growth, Psychological Safety, Consciousness Expansion, Human Potential, Wisdom Traditions, Life Design, and Healing Modalities.
 - **Advanced Features**: Deep Learning API, Purpose Compass API, Emotional Mastery API, Holistic Healing API, Mastery Excellence API, Content Studio API, Consciousness Expansion API, Human Potential API, Wisdom Traditions API, Life Design API, and Healing Modalities API.
 - **Navigation & Discovery**: Intellectual Atlas, Strategy Maps, Collaborative Intelligence Lab, Resilience Metrics, and Adaptive Companion.
-- **Security**: Rate limiting (validation-before-rate-limit pattern), CSP, input sanitization, CSRF protection, and account lifecycle management.
+- **Security**: Rate limiting, CSP, input sanitization, CSRF protection, and account lifecycle management.
 - **Gamification**: XP, levels, streaks, and daily quests.
 - **Content Studio**: UI for content transformation with save/export, including social media template generation.
 - **Study Vault**: Evidence-based research summaries.
@@ -81,81 +74,4 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 - **Stripe**: Billing and payment processing.
 - **Replit Auth**: User authentication.
 - **Resend**: Transactional email service.
-- **Perplexity**: Factual AI (used in a similar vein to OpenAI for specific factual queries).
-
-## Recent Changes (January 2026)
-
-### A→Z Platform Perfection Upgrade - Phase 1 & 2
-
-**Phase 1: Safety Infrastructure**
-- Extended WellnessRoute 18+ age gating to cover 15+ additional routes: /wisdom, /wisdom-practices, /wisdom-synthesis, /daily-wisdom, /tools, /advanced, /mastery, /ritual, /guided-journaling, /insight-cards
-- Created A→Z Benefit Index (benefitTokens.js) with 26 tokens (A=Agency through Z=Zero pressure) and preset configurations
-- Added BenefitsBlock component to wellness tool pages (ToolsPage, ValuesFinderPage, BoundariesPage)
-
-**Phase 2: UX/Content Enhancements**
-- Enhanced journalPrompts.js with MI (Motivational Interviewing) patterns:
-  - 6 new MI categories: readiness, strengths, ambivalence, incremental, values, environment
-  - Each category has 4 prompts with follow-up questions
-  - Added helper functions: getMiPrompt(), getDailyMiPrompt(), getMiAffirmation()
-- Created WeeklyRecap component for dashboard showing:
-  - Weekly activity stats (journal entries, mood check-ins, AI sessions, wellness practices)
-  - Streak tracking and top strength recognition
-  - MI affirmation integration for supportive messaging
-  - Added to Dashboard Overview between mainGrid and secondaryGrid
-
-**Phase 3: A→Z Infrastructure & Performance**
-- Created Wellness Microcopy Library (wellnessMicrocopy.js):
-  - 8 categories: consentControl, encouragement, boundaries, progress, errorsEmptyStates, miReadiness, strengthsBased, crisisReminders
-  - Rotation logic with getMicrocopy(), getRandomMicrocopy(), getMicrocopySet()
-  - safetyFooter constant for persistent disclaimer
-- Added Performance Utilities (performance.ts):
-  - prefersReducedMotion() check for accessibility
-  - getAnimationDuration() capped at 600ms per spec
-  - createLazyLoadObserver() for efficient loading
-  - debounce() and throttle() helpers
-- Added Security Utilities (security.ts):
-  - Anti-copy deterrence (disableTextSelection, disableContextMenu)
-  - Canvas watermarking for premium content
-  - Basic bot detection heuristic
-  - Content access logging for audit trails
-- Updated frameworks index to export all new modules
-- BenefitsBlock expanded to 20+ wellness pages
-
-### CORE MASTER COMMAND v3 Integration (January 2026)
-
-**Deterministic Patch System Infrastructure:**
-- `client/src/policy/platformPolicy.ts`: Legal/safety constants (18+ age requirement, not therapy/medical text, forbidden claims, crisis text, safe language alternatives)
-- `client/src/content/prompts/staticPrompts.ts`: Deterministic variant text system (refine notices, encouragement, next steps, CTAs)
-- `client/src/content/context/buildPageContext.ts`: Dynamic page metadata builder (title, description, category, benefits, related routes)
-- `client/src/content/benefits/benefitsBank.ts`: Made fully deterministic (removed shuffle randomization), stable benefit selection
-
-**Shared Backbone Components:**
-- `client/src/components/seo/SEO.tsx`: Document title, meta description, OG tags, canonical URLs, noindex control
-- `client/src/components/safety/SafetyFooter.tsx`: 18+ notice, not therapy, crisis link, legal links from platformPolicy
-- `client/src/components/marketing/BenefitsBlock.tsx`: "How this helps" section with checkmark bullets
-- `client/src/components/layout/PageScaffold.tsx`: Unified page wrapper integrating SEO, BenefitsBlock, SafetyFooter with routeKey-based context
-
-**Skills Engine (Reusable Skill Packs):**
-- `client/src/skills/skillRegistry.ts`: Skill type definitions and pack registry
-- `client/src/skills/packs/mi.ts`: OARS prompts, importance/confidence rulers (0-10), change talk prompts - educational only
-- `client/src/skills/packs/twelvePractices.ts`: 12 mind-body-soul transformation practices with reflections, micro-actions, safety notes
-- `client/src/skills/packs/nlpReframe.ts`: 15 safe reframing language templates (no manipulation, no guarantees)
-- `client/src/skills/renderSkill.tsx`: Consistent skill rendering by level (beginner/intermediate/advanced)
-
-**Agent Specifications (agents/):**
-- `layout-agent.md`: Page structure, responsive design, accessibility
-- `seo-agent.md`: SEO metadata compliance
-- `safety-agent.md`: Safety notices, language compliance, forbidden terms
-- `content-agent.md`: Educational content creation guidelines
-- `growth-agent.md`: Ethical viral mechanics, no dark patterns
-- `mcp-tools-spec.md`: Human-triggered MCP tool registry specification
-
-**Executable Scripts:**
-- `scripts/plan-patches.mjs`: Dry-run patch plan from scan results (no file modifications)
-- `scripts/verify-platform.mjs`: Full platform verification (scan + build summary)
-- `scripts/brand-lock.sh`: Git hook compliance script
-
-**Verification Results:**
-- Platform Scan: 558 files, 0 issues
-- Build: Passing
-- LSP: 0 errors
+- **Perplexity**: Factual AI.
