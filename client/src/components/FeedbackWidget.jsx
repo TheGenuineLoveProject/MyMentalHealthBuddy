@@ -62,7 +62,7 @@ export default function FeedbackWidget() {
           variant="ghost"
           size="sm"
           onClick={() => setIsOpen(false)}
-          className="min-h-[36px] min-w-[36px] p-2 rounded-lg"
+          className="min-h-[44px] min-w-[44px] p-2 rounded-lg"
           data-testid="button-close-feedback"
         >
           <X className="w-4 h-4" />
@@ -118,7 +118,7 @@ export default function FeedbackWidget() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setStep("initial")}
-                className="min-h-[40px] px-4 rounded-lg"
+                className="min-h-[44px] px-4 rounded-lg"
               >
                 Back
               </Button>
@@ -126,7 +126,7 @@ export default function FeedbackWidget() {
                 size="sm"
                 onClick={handleSubmit}
                 disabled={!feedback.trim() || isSubmitting}
-                className="min-h-[40px] px-4 rounded-lg"
+                className="min-h-[44px] px-4 rounded-lg"
                 data-testid="button-submit-feedback"
               >
                 {isSubmitting ? (

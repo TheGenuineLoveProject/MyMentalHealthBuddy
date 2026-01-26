@@ -61,7 +61,7 @@ export default function ConsentBanner() {
                 variant="outline"
                 size="sm"
                 onClick={() => setShowSettings(true)}
-                className="min-h-[40px] px-4 rounded-lg"
+                className="min-h-[44px] px-4 rounded-lg"
                 data-testid="button-cookie-settings"
               >
                 <Settings className="w-4 h-4 mr-2" />
@@ -71,7 +71,7 @@ export default function ConsentBanner() {
                 variant="outline"
                 size="sm"
                 onClick={() => saveConsent("essential")}
-                className="min-h-[40px] px-4 rounded-lg"
+                className="min-h-[44px] px-4 rounded-lg"
                 data-testid="button-essential-only"
               >
                 Essential Only
@@ -79,7 +79,7 @@ export default function ConsentBanner() {
               <Button
                 size="sm"
                 onClick={() => saveConsent("all")}
-                className="min-h-[40px] px-4 rounded-lg"
+                className="min-h-[44px] px-4 rounded-lg"
                 data-testid="button-accept-all"
               >
                 <Check className="w-4 h-4 mr-2" />
@@ -95,7 +95,7 @@ export default function ConsentBanner() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowSettings(false)}
-                className="min-h-[40px] min-w-[40px] p-2 rounded-lg"
+                className="min-h-[44px] min-w-[44px] p-2 rounded-lg"
                 data-testid="button-close-settings"
               >
                 <X className="w-5 h-5" />
