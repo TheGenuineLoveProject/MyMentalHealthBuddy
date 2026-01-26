@@ -2,7 +2,71 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { walkFiles } from "./_lib_walk.mjs";
+import { sha256File } from "./_lib_hash.mjs";
 
+const ROOT = process.cwd();
+const OUT_DIR = path.join(ROOT, "reports", "dup-scan");
+const OUT_JSON = path.join(OUT_DIR, "latest.json");
+
+function ensureDir(p) {
+  fs.mkdirSync(p, { recursive: true });
+}
+
+function main() {
+  ensureDir(OUT_DIR);
+
+  const exts = [".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs", ".json", ".md"];
+  const files = walkFiles(ROOT, { exts });
+
+  const byHash = new Map();
+  for (const f of files) {
+    let h;
+    try {
+      h = sha256File(f);
+    } catch {
+      continue;
+    }
+    if (!byHash.has(h)) byHash.set(h, []);
+    byHash.get(h).push(path.relative(ROOT, f));
+  }
+
+  const clusters = [];
+  for (const [hash, list] of byHash.entries()) {
+    if (list.length >= 2) clusters.push({ hash, files: list.sort() });
+  }
+  clusters.sort((a, b) => b.files.length - a.files.length);
+
+  const high = clusters.filter(c => c.files.length >= 3);
+  const medium = clusters.filter(c => c.files.length === 2);
+
+  const report = {
+    generatedAt: new Date().toISOString(),
+    root: ROOT,
+    totals: { scannedFiles: files.length, duplicateClusters: clusters.length },
+    severity: {
+      high: high.length,
+      medium: medium.length,
+      low: 0,
+    },
+    clusters,
+  };
+
+  fs.writeFileSync(OUT_JSON, JSON.stringify(report, null, 2));
+
+  console.log("dup-scan:", report.totals);
+  if (report.severity.high > 0) {
+    console.log("dup-scan: HIGH duplicates found (3+ identical files).");
+    process.exitCode = 2;
+  } else if (report.severity.medium > 0) {
+    console.log("dup-scan: MEDIUM duplicates found (2 identical files).");
+    process.exitCode = 1;
+  } else {
+    console.log("dup-scan: PASS (no identical duplicates).");
+  }
+}
+
+main();
 const SCAN_DIRS = ['client/src', 'server', 'shared'];
 const IGNORE_PATTERNS = [/node_modules/, /dist/, /\.git/, /_quarantine/, /\.test\./, /\.spec\./];
 const OUTPUT_DIR = 'reports/dup-scan';

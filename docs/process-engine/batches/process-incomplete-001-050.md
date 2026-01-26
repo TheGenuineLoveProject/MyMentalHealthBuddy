@@ -1,0 +1,611 @@
+# PROCESS BATCH INCOMPLETE-001-050
+LOCKED — Do not start items until preflight PASS and batch is officially unlocked.
+Generated: 2026-01-26T22:21:44.717Z
+
+RULES:
+- Run "npm run preflight" before every process.
+- If collisions/dupes exist: fix those FIRST.
+- Mark ✅ DONE only when "npm run verify" passes.
+- Keep one source of truth; consolidate duplicates.
+
+
+### 1. ❌ LOCKED — Security hardening + headers + safe defaults
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 2. ❌ LOCKED — Auth flow completion (signup/signin/reset) + session/JWT alignment
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 3. ❌ LOCKED — Stripe billing tiers + webhook integrity + idempotency
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 4. ❌ LOCKED — DB schema consolidation + migrations + seeds
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 5. ❌ LOCKED — Admin health dashboard + telemetry + audit logs
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 6. ❌ LOCKED — Content publishing system (blog) + SEO + sitemap
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 7. ❌ LOCKED — Social scheduler tool (draft→approve→publish) + templates
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 8. ❌ LOCKED — AI journaling/chat UX polish + safety guardrails + prompt versioning
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 9. ❌ LOCKED — Performance budgets + lazy loading + caching
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 10. ❌ LOCKED — Accessibility (WCAG AA) + reduced motion + keyboard nav
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 11. ❌ LOCKED — Security hardening + headers + safe defaults
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 12. ❌ LOCKED — Auth flow completion (signup/signin/reset) + session/JWT alignment
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 13. ❌ LOCKED — Stripe billing tiers + webhook integrity + idempotency
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 14. ❌ LOCKED — DB schema consolidation + migrations + seeds
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 15. ❌ LOCKED — Admin health dashboard + telemetry + audit logs
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 16. ❌ LOCKED — Content publishing system (blog) + SEO + sitemap
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 17. ❌ LOCKED — Social scheduler tool (draft→approve→publish) + templates
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 18. ❌ LOCKED — AI journaling/chat UX polish + safety guardrails + prompt versioning
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 19. ❌ LOCKED — Performance budgets + lazy loading + caching
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 20. ❌ LOCKED — Accessibility (WCAG AA) + reduced motion + keyboard nav
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 21. ❌ LOCKED — Security hardening + headers + safe defaults
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 22. ❌ LOCKED — Auth flow completion (signup/signin/reset) + session/JWT alignment
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 23. ❌ LOCKED — Stripe billing tiers + webhook integrity + idempotency
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 24. ❌ LOCKED — DB schema consolidation + migrations + seeds
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 25. ❌ LOCKED — Admin health dashboard + telemetry + audit logs
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 26. ❌ LOCKED — Content publishing system (blog) + SEO + sitemap
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 27. ❌ LOCKED — Social scheduler tool (draft→approve→publish) + templates
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 28. ❌ LOCKED — AI journaling/chat UX polish + safety guardrails + prompt versioning
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 29. ❌ LOCKED — Performance budgets + lazy loading + caching
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 30. ❌ LOCKED — Accessibility (WCAG AA) + reduced motion + keyboard nav
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 31. ❌ LOCKED — Security hardening + headers + safe defaults
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 32. ❌ LOCKED — Auth flow completion (signup/signin/reset) + session/JWT alignment
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 33. ❌ LOCKED — Stripe billing tiers + webhook integrity + idempotency
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 34. ❌ LOCKED — DB schema consolidation + migrations + seeds
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 35. ❌ LOCKED — Admin health dashboard + telemetry + audit logs
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 36. ❌ LOCKED — Content publishing system (blog) + SEO + sitemap
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 37. ❌ LOCKED — Social scheduler tool (draft→approve→publish) + templates
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 38. ❌ LOCKED — AI journaling/chat UX polish + safety guardrails + prompt versioning
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 39. ❌ LOCKED — Performance budgets + lazy loading + caching
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 40. ❌ LOCKED — Accessibility (WCAG AA) + reduced motion + keyboard nav
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 41. ❌ LOCKED — Security hardening + headers + safe defaults
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 42. ❌ LOCKED — Auth flow completion (signup/signin/reset) + session/JWT alignment
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 43. ❌ LOCKED — Stripe billing tiers + webhook integrity + idempotency
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 44. ❌ LOCKED — DB schema consolidation + migrations + seeds
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 45. ❌ LOCKED — Admin health dashboard + telemetry + audit logs
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 46. ❌ LOCKED — Content publishing system (blog) + SEO + sitemap
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 47. ❌ LOCKED — Social scheduler tool (draft→approve→publish) + templates
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 48. ❌ LOCKED — AI journaling/chat UX polish + safety guardrails + prompt versioning
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 49. ❌ LOCKED — Performance budgets + lazy loading + caching
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED
+### 50. ❌ LOCKED — Accessibility (WCAG AA) + reduced motion + keyboard nav
+- WHY:
+- DONE MEANS:
+  - [ ] 
+- TOUCH POINTS:
+- IMPLEMENTATION:
+- VERIFY:
+  - [ ] npm run preflight
+  - [ ] npm run verify
+- DUPLICATE-SAFETY:
+  - preflight: reports/*/latest.json
+- STATUS: ❌ LOCKED

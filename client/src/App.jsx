@@ -192,6 +192,14 @@ const FeatureFlags = lazy(() => import("./pages/admin/FeatureFlags.jsx"));
 const SystemAlerts = lazy(() => import("./pages/admin/SystemAlerts.jsx"));
 const FeedbackAggregator = lazy(() => import("./pages/admin/FeedbackAggregator.jsx"));
 
+// Batch 16 - Analytics, Community, Personalization, Wellness (P451-P500)
+const EngagementDashboard = lazy(() => import("./pages/admin/EngagementDashboard.jsx"));
+const UserProfile = lazy(() => import("./pages/UserProfile.jsx"));
+const WellnessGoals = lazy(() => import("./pages/WellnessGoals.jsx"));
+const MeditationPlayer = lazy(() => import("./pages/tools/MeditationPlayer.jsx"));
+const EmotionWheel = lazy(() => import("./pages/tools/EmotionWheel.jsx"));
+const EmailDigest = lazy(() => import("./pages/settings/EmailDigest.jsx"));
+
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
   return <AutopilotPage route={route} routeKey={routeKey} />;
@@ -814,6 +822,12 @@ export default function App() {
               <Route path="/admin/feature-flags">{() => <ProtectedRoute><AdminGuard><FeatureFlags /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/alerts">{() => <ProtectedRoute><AdminGuard><SystemAlerts /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/feedback">{() => <ProtectedRoute><AdminGuard><FeedbackAggregator /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/engagement">{() => <ProtectedRoute><AdminGuard><EngagementDashboard /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/profile">{() => <ProtectedRoute><UserProfile /></ProtectedRoute>}</Route>
+              <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
+              <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
+              <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
+              <Route path="/settings/email-digest">{() => <ProtectedRoute><EmailDigest /></ProtectedRoute>}</Route>
 
               {/* Fallback - Config Driven Not Found */}
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>

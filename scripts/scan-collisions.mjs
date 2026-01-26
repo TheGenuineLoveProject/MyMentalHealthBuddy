@@ -7,7 +7,95 @@
 import { readdir, readFile, writeFile, mkdir } from 'fs/promises';
 import { join, extname } from 'path';
 import { existsSync } from 'fs';
+import fs from "node:fs";
+import path from "node:path";
+import { walkFiles } from "./_lib_walk.mjs";
 
+const ROOT = process.cwd();
+const OUT_DIR = path.join(ROOT, "reports", "collisions");
+const OUT_JSON = path.join(OUT_DIR, "latest.json");
+
+function ensureDir(p) {
+  fs.mkdirSync(p, { recursive: true });
+}
+
+function extractLikelyRouteStrings(text) {
+  // Simple heuristic: catches app.get("/x"), router.post("/x"), etc.
+  const re = /\.(get|post|put|patch|delete)\s*\(\s*["'`]([^"'`]+)["'`]\s*,/gi;
+  const found = [];
+  let m;
+  while ((m = re.exec(text))) {
+    found.push({ method: m[1].toUpperCase(), path: m[2] });
+  }
+  return found;
+}
+
+function extractLikelyTableNames(text) {
+  // catches pgTable("users"), mysqlTable("users"), sqliteTable("users"), etc.
+  const re = /(pgTable|mysqlTable|sqliteTable)\s*\(\s*["'`]([^"'`]+)["'`]\s*,/gi;
+  const found = [];
+  let m;
+  while ((m = re.exec(text))) found.push(m[2]);
+  return found;
+}
+
+function main() {
+  ensureDir(OUT_DIR);
+
+  const files = walkFiles(ROOT, { exts: [".ts", ".tsx", ".js", ".jsx", ".mjs"] });
+
+  const routes = new Map();   // key: METHOD path -> [file]
+  const tables = new Map();   // key: tableName -> [file]
+
+  for (const f of files) {
+    let text;
+    try { text = fs.readFileSync(f, "utf8"); } catch { continue; }
+    const rel = path.relative(ROOT, f);
+
+    for (const r of extractLikelyRouteStrings(text)) {
+      const key = `${r.method} ${r.path}`;
+      if (!routes.has(key)) routes.set(key, []);
+      routes.get(key).push(rel);
+    }
+    for (const t of extractLikelyTableNames(text)) {
+      if (!tables.has(t)) tables.set(t, []);
+      tables.get(t).push(rel);
+    }
+  }
+
+  const routeCollisions = [...routes.entries()]
+    .filter(([, list]) => list.length >= 2)
+    .map(([key, files]) => ({ key, files: files.sort() }))
+    .sort((a, b) => b.files.length - a.files.length);
+
+  const tableCollisions = [...tables.entries()]
+    .filter(([, list]) => list.length >= 2)
+    .map(([name, files]) => ({ name, files: files.sort() }))
+    .sort((a, b) => b.files.length - a.files.length);
+
+  const report = {
+    generatedAt: new Date().toISOString(),
+    totals: {
+      scannedFiles: files.length,
+      routeCollisions: routeCollisions.length,
+      tableCollisions: tableCollisions.length,
+    },
+    routeCollisions,
+    tableCollisions,
+  };
+
+  fs.writeFileSync(OUT_JSON, JSON.stringify(report, null, 2));
+
+  console.log("scan-collisions:", report.totals);
+  if (routeCollisions.length || tableCollisions.length) {
+    console.log("scan-collisions: FAIL (collisions detected).");
+    process.exitCode = 2;
+  } else {
+    console.log("scan-collisions: PASS.");
+  }
+}
+
+main();
 const SCAN_DIRS = ['server', 'client/src'];
 const EXTENSIONS = ['.ts', '.tsx', '.js', '.jsx', '.mjs'];
 const IGNORE_DIRS = ['node_modules', 'dist', 'build', '.git', 'coverage'];
