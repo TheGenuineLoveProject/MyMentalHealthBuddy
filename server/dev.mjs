@@ -262,22 +262,12 @@ async function startServer() {
     res.status(200).json({ 
       ok: true,
       status: "ok",
-      version: "1.0.0",
-      buildTime: new Date().toISOString(),
-      commit: process.env.REPL_ID || "local",
+      version: "2.0.0",
       uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
     });
   });
 
-  app.get("/health", (_req, res) => {
-    res.status(200).json({ 
-      status: "ok",
-      version: "1.0.0",
-      buildTime: new Date().toISOString(),
-      commit: process.env.REPL_ID || "local",
-      uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
-    });
-  });
+  app.use("/health", healthRouter);
 
   app.get("/api/content/stats", async (req, res) => {
     try {

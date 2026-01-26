@@ -328,6 +328,7 @@ app.use('/api/content', contentRouter);
 app.use('/api/perplexity', perplexityRouter);
 
 const SERVER_START_TIME = Date.now();
+const isProduction = process.env.NODE_ENV === 'production';
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });
@@ -337,22 +338,12 @@ app.get("/healthz", (_req, res) => {
   res.status(200).json({ 
     ok: true,
     status: "ok",
-    version: "1.0.0",
-    buildTime: new Date().toISOString(),
-    commit: process.env.REPL_ID || "local",
+    version: "2.0.0",
     uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
   });
 });
 
-app.get("/health", (_req, res) => {
-  res.status(200).json({ 
-    status: "ok",
-    version: "1.0.0",
-    buildTime: new Date().toISOString(),
-    commit: process.env.REPL_ID || "local",
-    uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
-  });
-});
+app.use("/health", healthRouter);
 
 const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));

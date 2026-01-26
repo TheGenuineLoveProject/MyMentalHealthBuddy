@@ -19,6 +19,29 @@
 
 ---
 
+## Patch 31 — Batch 6 Cleanup + Registry
+- Date: 2026-01-26
+- Processes: Batch 6 cleanup
+- Files: 
+  - `client/src/content/meta/integrationRegistry.ts` (NEW)
+  - `docs/batch-6/scan-report.md` (NEW)
+  - `docs/platform/top-platform-processes-matrix.md` (NEW)
+  - `server/dev.mjs` (health endpoint consolidation)
+  - `server/index.mjs` (health endpoint consolidation)
+  - `client/src/components/seo/SEO.tsx` (re-export from canonical)
+  - `scripts/validateRoutes.mjs` (NEW - collision validator)
+- Summary: 
+  - Created Integration Registry with 30 done integrations
+  - Fixed 6 health endpoint collisions by consolidating to healthRouter
+  - Deduped SEO.tsx component (re-export from canonical)
+  - Created route collision validator script
+  - Created Top Platform Processes Matrix (60/60 complete)
+- Validation results:
+  - build: ✅ Passed (23s)
+  - workflow: ✅ Running
+
+---
+
 ## Patch 30 — Fix PageTemplate Hero Rendering
 - Date: 2026-01-26
 - Processes: Bug fix

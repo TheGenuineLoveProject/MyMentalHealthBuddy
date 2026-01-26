@@ -1,0 +1,226 @@
+NAME: GLP_BATCH_2_EXECUTOR__P051_P100__APPLY__NO_DUPES_V2
+
+MISSION:
+Continue immediately after Batch 1 (P001–P050) by implementing the NEXT 50 integrations (P051–P100),
+including any incomplete work found during scans. Execute with an in-depth “no duplicate work” scan,
+apply changes in small validated patches, and keep a permanent ledger.
+
+PROJECT:
+TheGenuineLoveProject.com (Replit)
+Owner: Aaliyah Draws Art LLC (Maria Landa)
+
+NON-NEGOTIABLES:
+- DRY-RUN FIRST → then APPLY (never skip).
+- Non-destructive (no deletes/renames without explicit permission).
+- Human-in-the-loop (no autonomous publishing, billing activation, external posting).
+- Educational only (no diagnosis/treatment/cure/guarantees; no medical claims).
+- Consent + pacing + opt-out everywhere; safety route /crisis on sensitive flows.
+- Original writing only (zero plagiarism/copyright infringement).
+- Replit-safe (one port, no background daemons, deterministic scripts).
+- NO DUPLICATE WORK: always scan, record, skip what exists.
+
+REQUIRED LEDGER FILES (must exist, create if missing as docs-only Patch 0):
+/docs/WORK_LEDGER.md
+/docs/PATCHLOG.md
+/docs/DECISIONS.md
+/docs/NO_DUPES_REPORT.md
+/docs/ROADMAP_TOP50.md
+/docs/ROADMAP_P051_P100.md
+
+========================================================
+A) IN-DEPTH NO-DUPES SCAN (MANDATORY BEFORE ANY PATCH)
+========================================================
+Run these and append results to /docs/NO_DUPES_REPORT.md with a timestamp.
+
+1) Repo structure + duplicates
+- find . -maxdepth 7 -type d \( -iname "*backup*" -o -iname "*copy*" -o -iname "*old*" -o -iname "*tmp*" -o -iname "*archive*" -o -iname "*duplicate*" \)
+- find . -maxdepth 7 -name "package.json" -print
+- find . -maxdepth 7 -name "*.lock" -print
+
+2) “Already implemented” detector (skip work)
+- grep -R "P0[0-9][0-9]\|P1[0-9][0-9]" -n docs || true
+- grep -R "routeKey\|canonicalPath\|internalLinks" -n client/src || true
+- grep -R "/crisis\|crisis" -n client/src server || true
+- grep -R "microcopy\|wellnessMicrocopy" -n client/src content docs || true
+- grep -R "admin/social" -n client/src server || true
+- grep -R "sitemap\|robots\.txt\|canonical" -n client/src server public || true
+- grep -R "rateLimit\|helmet\|cors\|zod" -n server || true
+
+3) Incomplete integrations detector (must finish before new work)
+- grep -R "TODO\|FIXME\|placeholder\|TEMP\|stub\|not implemented" -n client server scripts || true
+- grep -R "throw new Error(\"TODO" -n client server scripts || true
+
+4) Build blockers / regression check
+- npm run build || true
+- npm run typecheck || true
+- npm test || true
+
+NO-DUPES REPORT OUTPUT MUST INCLUDE:
+- Duplicates found (folders/manifests/features)
+- Incomplete/stubbed areas (files + line numbers)
+- What’s already done (skip list)
+- Current blockers (first failing command + error excerpt)
+- Recommendation: “Next Patch Candidate” (1–3 processes only)
+
+STOP after scan. Produce DRY-RUN Patch 1 plan.
+
+========================================================
+B) EXECUTION LOOP (ALWAYS)
+========================================================
+Scan → Diagnose → Propose → APPLY Patch → Validate → Document → Pause
+
+PATCH LIMITS:
+- ≤ 5 files changed per patch (except docs-only patches)
+- Patch must map to 1–3 process IDs
+- After APPLY: run build/typecheck/tests
+- Update /docs/WORK_LEDGER.md + /docs/PATCHLOG.md
+
+========================================================
+C) BATCH 2: PROCESSES P051–P100 (NEXT 50)
+========================================================
+(Implement 50 at a time; do not attempt all at once.)
+
+OBSERVABILITY + QUALITY
+P051 Central error boundary + route-level fallback UI
+P052 Server error middleware + standardized error codes
+P053 Log redaction rules + PII guard
+P054 Structured logging (levels, request ids)
+P055 Frontend performance budget checks (LCP/CLS guardrails)
+P056 Bundle analysis script
+P057 Sentry-ready hooks (disabled by default)
+P058 Healthcheck + diagnostics endpoint hardened
+P059 Admin “System Status” panel (build/version/env checks)
+P060 Incident playbook doc + runbook
+
+SECURITY + PRIVACY HARDENING
+P061 Content Security Policy baseline (non-breaking)
+P062 CSRF strategy for auth/admin (if cookies used)
+P063 Session/token storage hardening (no localStorage secrets)
+P064 Secrets scan script (prevent leaking keys)
+P065 Rate-limit tiers (public vs auth vs admin)
+P066 Audit log expansion (admin actions)
+P067 Data retention rules (journals minimal + export)
+P068 Privacy page + data practices microcopy (plain language)
+P069 Terms/Disclaimer pages (educational scope, consent)
+P070 Cookie banner (only if tracking/cookies)
+
+CONTENT SYSTEM + PUBLISHING
+P071 MDX/Markdown content pipeline (safe)
+P072 Content schema validation (frontmatter zod)
+P073 Blog index + tag pages
+P074 Internal linking (routeKey-based) for content
+P075 Search (client-side simple) for resources/tools
+P076 “Evidence notes” widget (non-clinical, optional)
+P077 Citation storage format (links only, no quotes)
+P078 Content versioning + preview (admin)
+P079 Content lint (no medical claims scanner)
+P080 Translation-ready structure (i18n scaffold, optional)
+
+GROWTH + CRM + EMAIL
+P081 Lead magnet system (download page + consent)
+P082 Email capture API + provider adapter (disabled by default)
+P083 Segmentation tags (non-sensitive)
+P084 Onboarding drip templates (original, non-clinical)
+P085 UTM attribution storage (privacy-safe)
+P086 Referral tracking (simple codes)
+P087 Share cards generator (OG images template)
+P088 Social studio → blog repurpose automation (human-triggered)
+P089 SEO keyword map doc + page intents
+P090 Google Search Console readiness checklist
+
+PLATFORM OPERATIONS + DEV EXPERIENCE
+P091 One-command “doctor” script (scan, build, report)
+P092 One-command “safe apply” script (patch runner)
+P093 Repo guardrails (pre-commit checks optional)
+P094 Dependency upgrade workflow (weekly manual)
+P095 Backup/export script (db + content)
+P096 Staging mode config (optional, Replit-safe)
+P097 Feature flags admin UI
+P098 Role-based access review (admin-only routes locked)
+P099 Accessibility regression checklist (keyboard, contrast)
+P100 Release checklist (version bump, build, deploy, smoke)
+
+========================================================
+D) PRIORITY: FINISH INCOMPLETE WORK FIRST
+========================================================
+If the scan finds any “incomplete integration” (TODO/placeholder/stub) in:
+- routing single-source truth
+- microcopy system
+- /crisis safety routing
+- admin/social studio
+- build/typecheck failures
+
+THEN:
+Those MUST be completed before starting new P051–P100 work.
+Mark them “COMPLETED (carryover)” in WORK_LEDGER with the original process ID.
+
+========================================================
+E) PATCH SELECTOR (AUTO-CHOOSE NEXT)
+========================================================
+Choose the next patch using this ranking:
+
+1) Current build/typecheck failure (fix first)
+2) Incomplete stubs / TODOs blocking core UX
+3) P051 (error boundary) if UI can crash
+4) P061 (CSP baseline) if safe/non-breaking
+5) P071 (content pipeline) if content ops missing
+6) P091 (doctor script) to accelerate everything
+
+For the chosen item:
+- Output DRY-RUN Patch 1 plan:
+  * processes
+  * exact files (≤5)
+  * line-level edits
+  * test plan
+- Then APPLY Patch 1
+- Then validate
+- Then update docs
+STOP and wait for: “NEXT PATCH”
+
+========================================================
+F) APPLY NOW — START BATCH 2
+========================================================
+1) Run the In-Depth No-Dupes Scan (Section A)
+2) Write /docs/ROADMAP_P051_P100.md (docs-only patch if missing)
+3) Fix the FIRST failing build/typecheck/test issue (Patch 1)
+4) Continue patch-by-patch
+
+STOP AFTER PATCH 1 and wait for “NEXT PATCH”.
+
+NAME: GLP_ROADMAP_P051_P100_TEMPLATE__PASTE_INTO_docs_ROADMAP_P051_P100_md
+
+# ROADMAP P051–P100 (Batch 2)
+
+## Priority Order
+1) Build/typecheck/test blockers
+2) Finish incomplete stubs from prior batches
+3) P051–P060 Observability + status
+4) P061–P070 Security + privacy
+5) P071–P080 Content pipeline
+6) P081–P090 Growth/CRM
+7) P091–P100 Ops/DevEx
+
+## Exit Criteria
+- Build passes
+- No critical TODO/stub remains in core flows
+- Admin status panel exists (read-only)
+- Privacy/terms/disclaimer pages exist
+- Content pipeline validated
+
+NAME: GLP_WORK_LEDGER_APPEND_RULES__PASTE_INTO_docs_WORK_LEDGER_md
+
+## Batch 2 Rules (P051–P100)
+- Mark each process as: TODO / IN PROGRESS / DONE / SKIPPED (already exists) / CARRYOVER (finished from Batch 1)
+- Link each DONE item to the Patch # in PATCHLOG
+- Never start a new process if build is failing
+
+✅ Paste GLP_BATCH_2_EXECUTOR__P051_P100__APPLY__NO_DUPES_V2 into Replit AI Agent Mode.
+
+It will:
+	1.	run the deep no-dupes scan,
+	2.	detect what’s already done or incomplete,
+	3.	fix the first blocker,
+	4.	apply Patch 1 (≤5 files),
+	5.	validate and log.
+
+When you paste back the scan + first blocker output, I’ll generate the exact Patch 1 code edits for your repo structure.
