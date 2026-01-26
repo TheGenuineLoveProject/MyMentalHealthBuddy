@@ -1,0 +1,257 @@
+# REPLIT AI AGENT PROMPT — THE GENUINE LOVE PROJECT
+# A→Z 360 “UNTIL COMPLETE” — NEXT ROBUST / SOLID ENHANCEMENT (v4)
+# Power: 100th billionth × 100th billionth
+# Tiers ONLY: Beginner / Intermediate / Advanced
+
+You are Replit AI running INSIDE my repo. Your job is to COMPLETE the platform A→Z 360 safely and verifiably.
+You MUST follow the workflow and output format exactly. You MUST continue phase-by-phase until all DONE criteria are met.
+
+===========================================================
+0) HARD RULES (NON-NEGOTIABLE)
+===========================================================
+- Keep app runnable after EACH micro-step.
+- No mass refactors. No sweeping renames. No deleting core features.
+- Replit Autoscale: single public port, bind 0.0.0.0, respect PORT.
+- No background daemons/watchers; human-triggered scripts only.
+- Never hardcode secrets. Env vars only. Never print secrets.
+- Every write route must validate with Zod (or equivalent).
+- After every phase: typecheck + build + smoke test.
+- Replace/avoid “reading level” everywhere: ONLY Beginner / Intermediate / Advanced.
+
+===========================================================
+1) REQUIRED OUTPUT FORMAT (EVERY PHASE)
+===========================================================
+A) ✅ What changed (file paths + bullets)
+B) 🧪 Commands run + outputs (paste)
+C) 🔎 How to verify (exact clicks/URLs)
+D) ⛔ If blocked: exact error + exact fix applied
+
+===========================================================
+2) “COMPLETE” = DONE CRITERIA (A→Z 360)
+===========================================================
+Platform is COMPLETE only when ALL are true:
+[FOUNDATION]
+- Green: typecheck + build pass
+- One-port Replit config correct (0.0.0.0 + PORT)
+- Stable env var pattern + .env.example
+
+[CORE PRODUCT]
+- Auth works end-to-end (User + Admin) + protected routes
+- DB is real (Drizzle + Postgres) for all core features
+- Journaling + mood tracking persists
+- AI support endpoints safe + crisis fallback + disclaimers + rate limits
+- Stripe billing + webhook verification + subscription sync + plan gating
+
+[ADMIN + OPS]
+- Admin API + System Analyzer route
+- Visual Admin Health Dashboard with live diagnostics
+- Audit logs + error log capture + requestId tracing
+
+[QUALITY + SECURITY]
+- Validation on write routes (Zod)
+- Helmet + sensible CSP, safe CORS, centralized errors
+- Minimal test suite + CI in GitHub Actions
+
+[UX + CONTENT]
+- Buttons/spacing/a11y fixed (min 44px touch targets)
+- Beginner/Intermediate/Advanced content tiering in product UI
+- Docs + disclaimers + launch checklist
+
+===========================================================
+3) EXECUTION ENGINE (PHASE LOOP)
+===========================================================
+You MUST run this loop for EACH phase:
+1) SCAN: inspect files + rg searches + run baseline command
+2) FIX: smallest change to remove the blocker or add the next required feature
+3) VERIFY: typecheck + build + smoke
+4) REPORT: output A/B/C/D in required format
+5) CONTINUE: move to next phase automatically
+
+===========================================================
+4) BEGINNER TIER (FOUNDATION) — PHASES
+===========================================================
+
+PHASE B-1: Repo inventory + baseline
+Commands:
+  ls -la
+  node -v
+  npm -v
+  cat package.json
+  (test -f client/package.json && cat client/package.json) || true
+  (test -f server/package.json && cat server/package.json) || true
+
+  npm ci || npm install
+  npm run -s typecheck || true
+  npm run -s build || true
+  npm run -s test || true
+  npm run -s lint || true
+
+PHASE B-2: Remove “reading level” everywhere (force 3 tiers only)
+Commands:
+  rg -n "reading level|reading-level|reading_level|grade level|literacy|easy reading|beginner only|intermediate only|advanced only" .
+Rules:
+- UI copy and data model must use ONLY:
+  Beginner / Intermediate / Advanced
+- If an enum exists, rename values ONLY (minimal) without breaking DB migrations.
+- Add a safe mapping for legacy values if found.
+
+PHASE B-3: Replit one-port correctness
+Commands:
+  rg -n "listen\\(|PORT|0\\.0\\.0\\.0|localhost|process\\.env\\.PORT" server client .replit replit.nix . || true
+Rules:
+- server listens on process.env.PORT and host 0.0.0.0
+- frontend served by Vite in dev; production uses built assets
+- no second server listening on another port
+
+PHASE B-4: Env hygiene
+Create/verify:
+- .env.example (no secrets)
+- README “Required env vars”
+Minimum env vars:
+  DATABASE_URL
+  OPENAI_API_KEY (or equivalent)
+  STRIPE_SECRET_KEY
+  STRIPE_WEBHOOK_SECRET
+  APP_URL
+  JWT_SECRET (or SESSION_SECRET)
+  ADMIN_EMAIL (optional)
+Rules:
+- app must not crash if optional vars missing; show clear warnings.
+
+===========================================================
+5) INTERMEDIATE TIER (CORE FEATURES) — PHASES
+===========================================================
+
+PHASE I-1: Auth end-to-end (User + Admin)
+Server endpoints required:
+  POST /api/auth/signup
+  POST /api/auth/login
+  POST /api/auth/logout
+  POST /api/auth/forgot-password
+  POST /api/auth/reset-password
+  GET  /api/auth/me
+
+Requirements:
+- bcrypt hashing
+- Zod validation
+- rate limit auth routes
+- forgot-password must not reveal if account exists
+- middleware:
+  requireAuth
+  requireAdmin
+- admin seed/upgrade: if user.email matches env ADMIN_EMAIL, set role=admin
+
+DB tables:
+- users(id, email, passwordHash, role, createdAt, updatedAt)
+- password_resets(id, userId, tokenHash, expiresAt, usedAt, createdAt)
+
+Frontend routes:
+- /signup
+- /login
+- /forgot-password
+- /reset-password
+- /dashboard (protected)
+- /admin (admin protected)
+
+PHASE I-2: Database persistence (Drizzle/Postgres)
+Tables:
+- journal_entries(userId, title, body, mood, tags, createdAt)
+- mood_entries(userId, mood, notes, createdAt)
+- subscriptions(userId, stripeCustomerId, stripeSubId, status, plan, currentPeriodEnd)
+- audit_logs(actorUserId, action, metaJson, createdAt)
+
+Endpoints:
+- CRUD journal entries
+- CRUD mood entries
+- GET /api/health/db (latency)
+
+PHASE I-3: AI support (safe, non-clinical)
+Endpoints:
+  POST /api/ai/chat
+  POST /api/ai/journal-reflection
+  POST /api/ai/mood-insights
+
+Must include:
+- crisis detection → safe crisis response
+- disclaimers (not therapy/medical advice)
+- rate limiting
+- requestId logging
+- refusal policy for self-harm instructions
+
+PHASE I-4: Stripe billing (verified)
+Endpoints:
+  POST /api/billing/create-checkout-session
+  POST /api/billing/create-portal-session
+  POST /api/billing/webhook  (RAW BODY + signature verify)
+  GET  /api/billing/status
+
+Frontend:
+- /pricing (upgrade buttons)
+- dashboard plan indicator
+- plan gating (features locked unless paid)
+
+===========================================================
+6) ADVANCED TIER (OPS + HARDEN + SHIP) — PHASES
+===========================================================
+
+PHASE A-1: Admin API + System Analyzer route
+Admin-only endpoints:
+- GET /api/admin/health
+- GET /api/admin/diagnostics
+- GET /api/admin/logs/recent
+Includes:
+- uptime, memory, version, env readiness (safe), db latency, stripe configured, ai configured
+
+PHASE A-2: Visual Admin Health Dashboard
+Frontend:
+- /admin/health
+- /admin/content (draft publisher MVP)
+DB:
+- content_posts(id, title, body, tier: Beginner|Intermediate|Advanced, status, createdAt)
+
+PHASE A-3: Security hardening
+- Helmet + CSP (reasonable)
+- strict CORS to APP_URL
+- centralized error handling (no stack traces in prod)
+- sanitize logs (no secrets)
+- zod on all write routes
+- audit log sensitive actions
+
+PHASE A-4: UX + Accessibility polish
+- buttons min height 44px, consistent padding
+- consistent max-width containers + spacing scale
+- mobile responsive
+- focus outlines
+- aria labels
+- fix overcrowding: apply layout grid, whitespace, section dividers
+
+PHASE A-5: Quality gate + CI/CD
+- tests: auth, db health, crisis detection, billing webhook signature (mock)
+- GitHub Actions: install, typecheck, build, test
+
+PHASE A-6: Docs + Launch
+- README setup
+- DISCLAIMER.md (not therapy)
+- PRIVACY.md
+- SECURITY.md
+- LAUNCH_CHECKLIST.md
+
+===========================================================
+7) “UNTIL COMPLETE” AUTO-CONTINUATION
+===========================================================
+After finishing each phase, you MUST:
+- Mark it DONE
+- Start the next phase immediately
+- Continue until all DONE CRITERIA in section 2 are satisfied
+
+===========================================================
+START NOW (NO QUESTIONS)
+===========================================================
+Do this exact order:
+1) BEGINNER: B-1 → B-2 → B-3 → B-4
+2) INTERMEDIATE: I-1 → I-2 → I-3 → I-4
+3) ADVANCED: A-1 → A-2 → A-3 → A-4 → A-5 → A-6
+
+Return the report for B-1 first using the required output format, then continue automatically.
+
+END.
