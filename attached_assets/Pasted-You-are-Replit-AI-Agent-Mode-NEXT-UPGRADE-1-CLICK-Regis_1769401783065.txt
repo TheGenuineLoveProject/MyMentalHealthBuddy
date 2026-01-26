@@ -1,0 +1,507 @@
+You are Replit AI Agent Mode.
+
+NEXT UPGRADE (1-CLICK): “Registry-Driven ModulesPanel” (interactive MI sliders + Tiny Step + shareable Infinity-Heart Card)
+Still 100% single-source-of-truth:
+- routeKey is the only identifier
+- registry decides which modules show per route (modules: ["mi","nlp","12practices"])
+- UI never duplicated across 500+ pages (PageTemplate renders once)
+
+DO THIS IN ORDER:
+
+0) SAFETY CHECK
+Before changes, run:
+  npm run build
+If build fails, fix errors first (no new features until green).
+
+1) UPGRADE RouteMeta types + helpers (registry becomes the brain)
+Open/replace: client/src/content/meta/routeMetaRegistry.ts
+MAKE SURE it exports ALL of these:
+- getRouteMeta(routeKey)
+- deriveRouteKeyFromPath(path)
+- resolveInternalLinks(routeKey) -> [{label, routeKey, href}]
+- resolveRoutePath(routeKey) -> canonicalPath OR fallback "/<slug>"
+- getEnabledModules(routeKey) -> string[]
+- getModuleContent(moduleKey) -> structured content for UI
+
+PASTE THIS FULL FILE (REPLACE ENTIRE FILE):
+
+---BEGIN PASTE (client/src/content/meta/routeMetaRegistry.ts)---
+export type ModuleKey = "mi" | "nlp" | "12practices";
+
+export type InternalLink = { label: string; routeKey: string };
+
+export type RouteMeta = {
+  routeKey: string;
+  canonicalPath: string;
+  title: string;
+  description: string;
+  benefits: string[];
+  internalLinks: InternalLink[];
+  modules: ModuleKey[]; // opt-in only
+  protected?: boolean;
+};
+
+type PartialMeta = Partial<Omit<RouteMeta, "routeKey">> & { canonicalPath?: string };
+
+const DEFAULT_BENEFITS = [
+  "Practice one small, doable step (no pressure).",
+  "Turn insight into a simple plan you can repeat.",
+  "Use calm tools that support self-awareness and regulation.",
+];
+
+function titleize(input: string) {
+  const cleaned = input
+    .replace(/^\W+/, "")
+    .replace(/_+/g, " ")
+    .replace(/-+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return cleaned
+    .split(" ")
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+/**
+ * Deterministic routeKey generator from a pathname.
+ * Examples:
+ *  "/hubs/anxiety" -> "hubs__anxiety"
+ *  "/tools/reframe" -> "tools__reframe"
+ *  "/challenge/day/3" -> "challenge__day__param_3"
+ */
+export function deriveRouteKeyFromPath(pathname: string) {
+  const p = (pathname || "/").split("?")[0].split("#")[0].trim();
+  const clean = p.replace(/^\/+/, "").replace(/\/+$/, "");
+  if (!clean) return "home";
+  return clean
+    .split("/")
+    .filter(Boolean)
+    .map((seg) => (seg.startsWith(":") ? seg.replace(":", "param_") : seg))
+    .join("__");
+}
+
+/**
+ * Registry: add “special” routes here.
+ * Everything else gets a safe default meta.
+ */
+const REGISTRY: Record<string, PartialMeta> = {
+  "home": {
+    canonicalPath: "/",
+    title: "The Genuine Love Project",
+    description: "Supportive, evidence-informed tools for calm, clarity, and growth.",
+    benefits: DEFAULT_BENEFITS,
+    internalLinks: [
+      { label: "Start with Anxiety Hub", routeKey: "hubs__anxiety" },
+      { label: "Try Reframe Tool", routeKey: "tools__reframe" },
+      { label: "Explore 12 Practices", routeKey: "paths__12-practices" },
+    ],
+    modules: ["mi", "nlp"],
+  },
+
+  "hubs__anxiety": {
+    canonicalPath: "/hubs/anxiety",
+    title: "Anxiety Support Hub",
+    description: "Build calm skills: grounding, reframing, and tiny steps you can actually do.",
+    benefits: [
+      "Reduce overwhelm with 2-minute nervous system resets.",
+      "Name patterns gently and choose one next step.",
+      "Practice thought-balancing without judging yourself.",
+    ],
+    internalLinks: [
+      { label: "Try: Grounding", routeKey: "grounding" },
+      { label: "Try: Breathwork", routeKey: "breathing" },
+      { label: "Try: Reframe", routeKey: "tools__reframe" },
+    ],
+    modules: ["mi", "nlp"],
+  },
+
+  "tools__reframe": {
+    canonicalPath: "/tools/reframe",
+    title: "Reframe Tool",
+    description: "Turn a hard moment into a kinder, steadier next step.",
+    benefits: [
+      "Name the thought → name the feeling → choose a balanced alternative.",
+      "Reduce spirals with a short, structured flow.",
+      "Leave with one tiny step you can do today.",
+    ],
+    internalLinks: [
+      { label: "Next: Grounding", routeKey: "grounding" },
+      { label: "Next: 12 Practices", routeKey: "paths__12-practices" },
+    ],
+    modules: ["mi", "nlp"],
+  },
+
+  "paths__12-practices": {
+    canonicalPath: "/paths/12-practices",
+    title: "12 Practices",
+    description: "A modern, gentle, practice path for steady change over time.",
+    benefits: [
+      "Build inner stability through daily practice (not perfection).",
+      "Use reflection + tiny actions to change patterns over time.",
+      "Stay grounded in values, compassion, and accountability.",
+    ],
+    internalLinks: [
+      { label: "Start: Today Flow", routeKey: "today" },
+      { label: "Try: Reframe", routeKey: "tools__reframe" },
+    ],
+    modules: ["12practices", "mi", "nlp"],
+  },
+};
+
+/** Fallback: infer canonicalPath from routeKey when not in registry */
+export function resolveRoutePath(routeKey: string) {
+  const reg = REGISTRY[routeKey];
+  if (reg?.canonicalPath) return reg.canonicalPath;
+
+  if (!routeKey || routeKey === "home") return "/";
+  // best-effort: hubs__anxiety -> /hubs/anxiety
+  const path = "/" + routeKey.replace(/__/g, "/");
+  return path;
+}
+
+function safeDefaultMeta(routeKey: string): RouteMeta {
+  const pretty = titleize(routeKey);
+  return {
+    routeKey,
+    canonicalPath: resolveRoutePath(routeKey),
+    title: pretty,
+    description: "A gentle, practical space to build supportive habits through reflection and skill practice.",
+    benefits: DEFAULT_BENEFITS,
+    internalLinks: [],
+    modules: [],
+  };
+}
+
+export function getRouteMeta(routeKey: string): RouteMeta {
+  const base = safeDefaultMeta(routeKey);
+  const reg = REGISTRY[routeKey] || {};
+  return {
+    ...base,
+    ...reg,
+    routeKey,
+    canonicalPath: reg.canonicalPath ?? base.canonicalPath,
+    benefits: reg.benefits ?? base.benefits,
+    internalLinks: reg.internalLinks ?? base.internalLinks,
+    modules: reg.modules ?? base.modules,
+  };
+}
+
+export function resolveInternalLinks(routeKey: string) {
+  const meta = getRouteMeta(routeKey);
+  const links = meta.internalLinks || [];
+  return links.map((l) => ({
+    label: l.label,
+    routeKey: l.routeKey,
+    href: resolveRoutePath(l.routeKey),
+  }));
+}
+
+export function getEnabledModules(routeKey: string): ModuleKey[] {
+  return getRouteMeta(routeKey).modules || [];
+}
+
+/**
+ * Registry-driven module content. UI renders from this.
+ * Add more content here over time; no page duplication.
+ */
+export function getModuleContent(moduleKey: ModuleKey) {
+  if (moduleKey === "mi") {
+    return {
+      title: "Motivational Interviewing",
+      subtitle: "Choose one tiny step you can actually do.",
+      sliders: [
+        { id: "importance", label: "Importance", hint: "How much this matters to you (right now)?" },
+        { id: "confidence", label: "Confidence", hint: "How sure you feel you can do a tiny step?" },
+        { id: "readiness", label: "Readiness", hint: "How ready you feel to take one step today?" },
+      ],
+      tinySteps: [
+        "Do 2 minutes of slow breathing.",
+        "Write one sentence: “Right now I feel…”",
+        "Choose the smallest next action (30 seconds).",
+      ],
+      affirmations: [
+        "Small steps count.",
+        "I can be gentle and still be strong.",
+        "One kind action is enough for today.",
+      ],
+    };
+  }
+
+  if (moduleKey === "nlp") {
+    return {
+      title: "NLP Reframe",
+      subtitle: "Shift language → shift meaning → shift action.",
+      frames: [
+        { id: "and", label: "Add an “and”", example: "This is hard… and I can take one small step." },
+        { id: "yet", label: "Add “yet”", example: "I can’t do it… yet." },
+        { id: "choice", label: "Choice language", example: "I choose to practice one calming skill." },
+      ],
+    };
+  }
+
+  // 12practices
+  return {
+    title: "12 Practices",
+    subtitle: "A gentle path of daily practice (not perfection).",
+    steps: [
+      "Pause + breathe",
+      "Name the moment",
+      "Choose a tiny step",
+      "Reflect with compassion",
+      "Repeat tomorrow",
+    ],
+  };
+}
+---END PASTE---
+
+2) CREATE interactive ModulesPanel (single UI used everywhere)
+Create: client/src/components/ModulesPanel.jsx
+Paste:
+
+---BEGIN PASTE---
+import { useMemo, useState } from "react";
+import { getEnabledModules, getModuleContent } from "../content/meta/routeMetaRegistry";
+
+function clamp(n, min = 0, max = 10) {
+  return Math.max(min, Math.min(max, n));
+}
+
+export function ModulesPanel({ routeKey }) {
+  const modules = useMemo(() => getEnabledModules(routeKey), [routeKey]);
+  if (!modules?.length) return null;
+
+  return (
+    <section className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-base font-semibold">Support Tools</h2>
+        <span className="text-xs opacity-70">Registry-driven</span>
+      </div>
+
+      <div className="mt-4 grid gap-4">
+        {modules.includes("mi") && <MIBlock />}
+        {modules.includes("nlp") && <NLPBlock />}
+        {modules.includes("12practices") && <PracticesBlock />}
+        <InfinityHeartShareCard routeKey={routeKey} />
+      </div>
+    </section>
+  );
+}
+
+function MIBlock() {
+  const mi = getModuleContent("mi");
+  const [importance, setImportance] = useState(5);
+  const [confidence, setConfidence] = useState(5);
+  const [readiness, setReadiness] = useState(5);
+
+  const score = Math.round((importance + confidence + readiness) / 3);
+
+  const tinyStep =
+    score <= 3 ? mi.tinySteps[0] : score <= 7 ? mi.tinySteps[1] : mi.tinySteps[2];
+
+  return (
+    <div className="rounded-xl border border-white/10 bg-black/10 p-3">
+      <div className="text-sm font-semibold">{mi.title}</div>
+      <div className="text-xs opacity-70">{mi.subtitle}</div>
+
+      <div className="mt-3 grid gap-3">
+        <SliderRow
+          label="Importance"
+          value={importance}
+          onChange={(v) => setImportance(clamp(v))}
+        />
+        <SliderRow
+          label="Confidence"
+          value={confidence}
+          onChange={(v) => setConfidence(clamp(v))}
+        />
+        <SliderRow
+          label="Readiness"
+          value={readiness}
+          onChange={(v) => setReadiness(clamp(v))}
+        />
+      </div>
+
+      <div className="mt-3 rounded-lg border border-white/10 bg-white/5 p-3">
+        <div className="text-xs opacity-70">Tiny step suggestion</div>
+        <div className="text-sm font-medium">{tinyStep}</div>
+      </div>
+
+      <div className="mt-2 text-xs opacity-70">
+        Score: <span className="opacity-100 font-semibold">{score}/10</span>
+      </div>
+    </div>
+  );
+}
+
+function NLPBlock() {
+  const nlp = getModuleContent("nlp");
+  const [active, setActive] = useState(nlp.frames[0].id);
+  const frame = nlp.frames.find((f) => f.id === active) || nlp.frames[0];
+
+  return (
+    <div className="rounded-xl border border-white/10 bg-black/10 p-3">
+      <div className="text-sm font-semibold">{nlp.title}</div>
+      <div className="text-xs opacity-70">{nlp.subtitle}</div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        {nlp.frames.map((f) => (
+          <button
+            key={f.id}
+            onClick={() => setActive(f.id)}
+            className={`text-xs rounded-full px-3 py-1 border border-white/10 transition ${
+              active === f.id ? "bg-white/10" : "bg-black/10 hover:bg-black/20"
+            }`}
+            type="button"
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-3 rounded-lg border border-white/10 bg-white/5 p-3">
+        <div className="text-xs opacity-70">Example</div>
+        <div className="text-sm font-medium">{frame.example}</div>
+      </div>
+    </div>
+  );
+}
+
+function PracticesBlock() {
+  const p = getModuleContent("12practices");
+  return (
+    <div className="rounded-xl border border-white/10 bg-black/10 p-3">
+      <div className="text-sm font-semibold">{p.title}</div>
+      <div className="text-xs opacity-70">{p.subtitle}</div>
+
+      <ol className="mt-3 grid gap-2">
+        {p.steps.map((s, i) => (
+          <li key={s} className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm">
+            <span className="opacity-70 mr-2">{i + 1}.</span>
+            <span className="font-medium">{s}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function SliderRow({ label, value, onChange }) {
+  return (
+    <div className="grid gap-1">
+      <div className="flex items-center justify-between">
+        <div className="text-xs opacity-70">{label}</div>
+        <div className="text-xs font-semibold">{value}/10</div>
+      </div>
+      <input
+        type="range"
+        min="0"
+        max="10"
+        step="1"
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="w-full"
+      />
+    </div>
+  );
+}
+
+/**
+ * Shareable “Infinity-Heart” card (simple v1)
+ * Later we can convert to image export, but this is already “share copy” ready.
+ */
+function InfinityHeartShareCard({ routeKey }) {
+  const [copied, setCopied] = useState(false);
+
+  const text = `Infinity-Heart • Next tiny step • (${routeKey})
+1) Breathe 4 slow breaths
+2) Name the moment gently
+3) Choose one kind action
+#GenuineLoveProject #InfinityHeart`;
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1200);
+    } catch {
+      // ignore
+    }
+  }
+
+  return (
+    <div className="rounded-xl border border-white/10 bg-black/10 p-3">
+      <div className="flex items-center justify-between gap-3">
+        <div>
+          <div className="text-sm font-semibold">Infinity-Heart Share Card</div>
+          <div className="text-xs opacity-70">Copy & share (no pressure)</div>
+        </div>
+        <button
+          type="button"
+          onClick={copy}
+          className="text-xs rounded-full px-3 py-1 border border-white/10 bg-white/10 hover:bg-white/15 transition"
+        >
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+
+      <pre className="mt-3 whitespace-pre-wrap text-xs rounded-lg border border-white/10 bg-white/5 p-3">
+{text}
+      </pre>
+    </div>
+  );
+}
+---END PASTE---
+
+3) RENDER ModulesPanel ONCE (PageTemplate only)
+Edit: client/src/components/PageTemplate.jsx
+
+Add import:
+  import { ModulesPanel } from "./ModulesPanel";
+
+Inside PageTemplate({ config, routeKey }) compute:
+  const rk = routeKey || config?.routeKey;
+
+Render in layout (after your main content or before RelatedLinksBlock):
+  <ModulesPanel routeKey={rk} />
+
+IMPORTANT:
+- Do NOT add ModulesPanel to any page files.
+- Only PageTemplate renders it once.
+
+4) MAKE RELATED LINKS USE routeKey RESOLUTION (already)
+Confirm PageTemplate still does:
+- meta/resolveInternalLinks(routeKey)
+- <RelatedLinksBlock links={...} />
+
+5) OPT-IN MODULES VIA REGISTRY FLAGS (NO DUPLICATION)
+Open client/src/content/meta/routeMetaRegistry.ts
+Add modules to any routeKey you want:
+  modules: ["mi","nlp","12practices"]
+Examples:
+- hubs__anxiety -> ["mi","nlp"]
+- tools__reframe -> ["mi","nlp"]
+- paths__12-practices -> ["12practices","mi","nlp"]
+
+6) RUN CHECKS
+Shell:
+  npm run build
+
+If build fails due to TS importing from JS:
+- Ensure routeMetaRegistry is .ts and Vite handles TS (it does)
+- Ensure imports use correct relative paths and no missing extensions required by your config
+
+7) QUICK VISUAL TEST
+Run dev server, visit:
+- /hubs/anxiety
+Confirm:
+- ModulesPanel appears
+- sliders move
+- tiny step updates
+- Copy button copies share card
+- RelatedLinksBlock still works
+
+DONE.
+Next after this: “one-click registry hydration”
+- auto-generate missing REGISTRY entries from scanned routes
+- keep manual overrides for special pages only

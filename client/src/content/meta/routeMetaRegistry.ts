@@ -1127,3 +1127,63 @@ export function resolveInternalLinks(routeKey: string) {
     href: resolveRoutePath(l.routeKey),
   }));
 }
+
+/**
+ * Get enabled modules for a route (registry-driven).
+ */
+export function getEnabledModules(routeKey: string): ModuleKey[] {
+  return getRouteMeta(routeKey).modules || [];
+}
+
+/**
+ * Registry-driven module content. UI renders from this.
+ * Add more content here over time; no page duplication.
+ */
+export function getModuleContent(moduleKey: ModuleKey) {
+  if (moduleKey === "mi") {
+    return {
+      title: "Motivational Interviewing",
+      subtitle: "Choose one tiny step you can actually do.",
+      sliders: [
+        { id: "importance", label: "Importance", hint: "How much this matters to you (right now)?" },
+        { id: "confidence", label: "Confidence", hint: "How sure you feel you can do a tiny step?" },
+        { id: "readiness", label: "Readiness", hint: "How ready you feel to take one step today?" },
+      ],
+      tinySteps: [
+        "Do 2 minutes of slow breathing.",
+        "Write one sentence: 'Right now I feel...'",
+        "Choose the smallest next action (30 seconds).",
+      ],
+      affirmations: [
+        "Small steps count.",
+        "I can be gentle and still be strong.",
+        "One kind action is enough for today.",
+      ],
+    };
+  }
+
+  if (moduleKey === "nlp") {
+    return {
+      title: "NLP Reframe",
+      subtitle: "Shift language → shift meaning → shift action.",
+      frames: [
+        { id: "and", label: "Add an 'and'", example: "This is hard... and I can take one small step." },
+        { id: "yet", label: "Add 'yet'", example: "I can't do it... yet." },
+        { id: "choice", label: "Choice language", example: "I choose to practice one calming skill." },
+      ],
+    };
+  }
+
+  // 12practices
+  return {
+    title: "12 Practices",
+    subtitle: "A gentle path of daily practice (not perfection).",
+    steps: [
+      "Pause + breathe",
+      "Name the moment",
+      "Choose a tiny step",
+      "Reflect with compassion",
+      "Repeat tomorrow",
+    ],
+  };
+}
