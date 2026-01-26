@@ -40,27 +40,38 @@ export function EmptyState({
       className={`flex flex-col items-center justify-center py-12 px-4 text-center ${className}`}
       role="status"
       aria-label={title || defaultTitle}
+      data-testid="container-empty-state"
     >
-      <div className={`rounded-full p-4 mb-4 ${
-        variant === 'muted' 
-          ? 'bg-muted' 
-          : 'bg-primary/10'
-      }`}>
+      <div 
+        className={`rounded-full p-4 mb-4 ${
+          variant === 'muted' 
+            ? 'bg-muted' 
+            : 'bg-primary/10'
+        }`}
+        data-testid="wrapper-empty-icon"
+      >
         <IconComponent 
           className={`h-8 w-8 ${
             variant === 'muted' 
               ? 'text-muted-foreground' 
               : 'text-primary'
-          }`} 
+          }`}
+          data-testid={`icon-empty-${icon}`}
         />
       </div>
       
-      <h3 className="text-lg font-medium text-foreground mb-2">
+      <h3 
+        className="text-lg font-medium text-foreground mb-2"
+        data-testid="text-empty-title"
+      >
         {title || defaultTitle}
       </h3>
       
       {description && (
-        <p className="text-sm text-muted-foreground max-w-sm mb-4">
+        <p 
+          className="text-sm text-muted-foreground max-w-sm mb-4"
+          data-testid="text-empty-description"
+        >
           {description}
         </p>
       )}
@@ -70,7 +81,7 @@ export function EmptyState({
           onClick={action}
           variant="outline"
           size="sm"
-          data-testid="empty-state-action"
+          data-testid="button-empty-state-action"
         >
           {actionLabel}
         </Button>

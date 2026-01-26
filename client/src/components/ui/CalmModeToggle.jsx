@@ -36,17 +36,17 @@ export function CalmModeToggle({ className = '' }) {
         } ${className}`}
       aria-pressed={calmMode}
       aria-label={calmMode ? 'Disable calm mode' : 'Enable calm mode'}
-      data-testid="toggle-calm-mode"
+      data-testid="button-toggle-calm-mode"
     >
       {calmMode ? (
         <>
-          <Moon className="h-4 w-4" />
-          <span>Calm Mode</span>
+          <Moon className="h-4 w-4" data-testid="icon-calm-moon" />
+          <span data-testid="text-calm-mode">Calm Mode</span>
         </>
       ) : (
         <>
-          <Sparkles className="h-4 w-4" />
-          <span>Full Experience</span>
+          <Sparkles className="h-4 w-4" data-testid="icon-full-sparkles" />
+          <span data-testid="text-full-experience">Full Experience</span>
         </>
       )}
     </button>

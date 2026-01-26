@@ -16,7 +16,6 @@
     "test:auth": "vitest run tests/auth.test.mjs",
     "test:api": "vitest run tests/api.test.mjs",
     "test:all": "vitest run tests/",
-    "smoke": "node scripts/smoke.mjs",
     "audit:platform": "node scripts/platformAudit.mjs",
     "gate": "node scripts/gate.mjs",
     "lint": "eslint .",
