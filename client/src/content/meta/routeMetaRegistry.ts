@@ -1,5 +1,7 @@
 // client/src/content/meta/routeMetaRegistry.ts
 
+import { AUTOGEN_REGISTRY } from "./routeMeta.autogen";
+
 export type ModuleKey = "mi" | "nlp" | "12practices";
 
 export type InternalLink = {
@@ -67,11 +69,11 @@ function safeDefaultMeta(routeKey: string): RouteMeta {
 }
 
 /**
- * ✅ SINGLE SOURCE OF TRUTH
- * Add only special routes here.
- * Everything else gets a safe non-repetitive default.
+ * ✅ MANUAL OVERRIDES
+ * Add special routes with curated metadata here.
+ * These win over auto-generated entries.
  */
-const REGISTRY: Record<string, Partial<RouteMeta>> = {
+const MANUAL_REGISTRY: Record<string, Partial<RouteMeta>> = {
   // ═══════════════════════════════════════════════════════════════════
   // CORE TOOLS
   // ═══════════════════════════════════════════════════════════════════
@@ -1078,6 +1080,15 @@ const REGISTRY: Record<string, Partial<RouteMeta>> = {
     ],
     modules: [],
   },
+};
+
+/**
+ * ✅ MERGED REGISTRY (autogen + manual)
+ * Manual overrides always win.
+ */
+const REGISTRY: Record<string, Partial<RouteMeta>> = {
+  ...AUTOGEN_REGISTRY,
+  ...MANUAL_REGISTRY,
 };
 
 export function deriveRouteKeyFromPath(pathname: string) {
