@@ -1,0 +1,189 @@
+NAME: GLP_BATCH_EXECUTOR_V2__TOP50_APPLY__NO_DUPES_SCAN
+
+PURPOSE:
+Execute Top-Platform Process Integrations in batches of 50 (P001–P050, then P051–P100, etc.)
+with an in-depth duplicate-avoidance scan, DRY-RUN-first planning, and APPLY changes in small,
+validated patches until the platform is complete.
+
+PROJECT:
+TheGenuineLoveProject.com (Replit)
+Owner: Aaliyah Draws Art LLC (Maria Landa)
+
+NON-NEGOTIABLES:
+- DRY-RUN FIRST (plan + diffs) then APPLY.
+- Non-destructive by default (no deletes/renames without explicit permission).
+- Human-in-the-loop (no autonomous posting, billing changes, or external publishing).
+- Educational only: no diagnosis/treatment/cure/guarantees; no medical claims.
+- Consent + pacing + opt-out on every practice; include /crisis on wellness/sensitive flows.
+- Zero plagiarism / zero copyright infringement (original copy only).
+- Replit-safe (one port, no background daemons, deterministic scripts).
+- NO DUPLICATE WORK: always scan + record decisions + ledger.
+
+========================================================
+0) ONE-TIME SETUP (IF MISSING) — APPLY IN PATCH 0
+========================================================
+Create/verify these files (if they don’t exist):
+/docs/WORK_LEDGER.md
+/docs/PATCHLOG.md
+/docs/DECISIONS.md
+/docs/ROADMAP_TOP50.md
+/docs/NO_DUPES_REPORT.md
+
+If any are missing, Patch 0 = create them (only docs files).
+
+========================================================
+1) IN-DEPTH NO-DUPES SCAN (MANDATORY BEFORE EVERY PATCH)
+========================================================
+Run ALL scans and write findings into /docs/NO_DUPES_REPORT.md (append with timestamp).
+
+A) Repo + build + env sanity
+- git status || true
+- node -v || true
+- npm -v || true
+- cat package.json
+- ls -la
+
+B) Duplicate folder patterns (backup/copy/old/tmp)
+- find . -maxdepth 6 -type d \( -iname "*backup*" -o -iname "*copy*" -o -iname "*old*" -o -iname "*tmp*" -o -iname "*archive*" \)
+
+C) Duplicate package manifests / monorepo collisions
+- find . -maxdepth 6 -name "package.json" -print
+- find . -maxdepth 6 -name "package-lock.json" -print
+- find . -maxdepth 6 -name "pnpm-lock.yaml" -print
+- find . -maxdepth 6 -name "yarn.lock" -print
+
+D) Placeholder/unfinished code + repeated prompts
+- grep -R "TODO\|FIXME\|HACK\|placeholder\|BEGIN PASTE\|END PASTE" -n client server scripts . || true
+
+E) Duplicate feature risk scan (auth/billing/db/openai/routes)
+- grep -R "jsonwebtoken\|passport\|lucia\|next-auth\|auth" -n server client || true
+- grep -R "stripe\|webhook\|checkout\|billing" -n server client || true
+- grep -R "drizzle\|schema\.ts\|migrate\|neon\|postgres" -n server || true
+- grep -R "openai\|gpt\|chat" -n server client || true
+- grep -R "routeKey\|canonicalPath\|internalLinks" -n client/src || true
+
+F) Dead routes / duplicated routes scan
+- grep -R "createBrowserRouter\|react-router\|Routes\|Route" -n client/src || true
+- grep -R "/admin\|/tools\|/crisis" -n client/src server || true
+
+OUTPUT REQUIRED (in /docs/NO_DUPES_REPORT.md):
+1) Duplicate folders list + recommended handling (keep/ignore/merge later)
+2) Duplicate manifests list + collision risks
+3) Duplicate feature candidates (e.g., 2 stripe configs, 2 auth flows)
+4) “Already implemented” list (skip work)
+5) “Blockers” list (must fix first)
+
+STOP and produce a DRY-RUN plan for Patch 1.
+
+========================================================
+2) EXECUTION LOOP (ALWAYS): Scan → Diagnose → Plan → Patch → Validate → Document → Pause
+========================================================
+
+PATCH RULES:
+- ≤ 5 files changed per patch (except docs-only patches).
+- Each patch maps to 1–3 process IDs max.
+- After each patch: run validations + update ledger/logs.
+- If a patch reveals duplicates, STOP and propose consolidation (no deletes).
+
+VALIDATIONS (minimum):
+- npm run build
+- npm run typecheck (if exists)
+- npm test (if exists)
+- quick smoke: load /, /tools, /admin (if routes exist)
+
+========================================================
+3) TOP 50 PROCESS BACKLOG (P001–P050)
+========================================================
+(Do NOT implement all at once. Implement in patch order.)
+
+PRODUCT + UX CORE
+P001 Single source routing (routeKey → canonicalPath resolver)
+P002 Global design tokens/theme (brand palette + type scale + spacing)
+P003 Accessibility baseline (WCAG AA, focus, aria, reduced motion)
+P004 Wellness microcopy system (consistent, non-repetitive)
+P005 Page template standard (Hero/CTA/cards/footer)
+P006 Touch targets (>=44px), spacing rhythm
+P007 Calm motion (subtle, reduced motion support)
+P008 Empty/loading/error state standard
+P009 Toast/notification system (accessible, calm)
+P010 Crisis routing + safety footer (/crisis) where relevant
+
+WELLNESS TOOLING (NON-CLINICAL)
+P011 Shared tool framework (pace selector + softer toggle + stop rule)
+P012 Breath tool
+P013 Grounding tool
+P014 Values tool
+P015 Boundaries script tool
+P016 Journaling tool (optional save)
+P017 Sleep wind-down tool
+P018 Movement menu tool
+P019 Coherence ladder (metaphor-only)
+P020 Safety language scanner (claim/coercion detector)
+
+ENGINEERING RELIABILITY
+P021 Build-first discipline (CI build gate)
+P022 Lint/format
+P023 Type safety (API contracts)
+P024 Env validation / centralized config
+P025 Logging w/ redaction
+P026 Error handling + boundary
+P027 Rate limiting
+P028 Input validation (Zod)
+P029 Security headers + CORS correctness
+P030 Dependency hygiene (audit + dedupe)
+
+DATA + ANALYTICS
+P031 Minimal analytics events
+P032 Privacy-safe analytics (no journaling text)
+P033 Admin metrics dashboard
+P034 Feature flags
+P035 Admin audit log
+
+GROWTH: SEO / CRM / CONTENT OPS
+P036 SEO architecture (meta, canonical, OG)
+P037 Internal links resolver (routeKey links)
+P038 Publishing system (blog/resources)
+P039 Lead capture (consent)
+P040 CRM tagging (non-sensitive)
+P041 Admin social studio (draft→review→approve→export)
+P042 Social template library
+P043 Repurpose engine (post→blog→email→shorts)
+P044 UTM campaign tracking
+P045 Onboarding funnel
+
+PAYMENTS + ACCOUNT (ONLY IF EXISTS IN REPO)
+P046 Auth baseline (minimal, non-duplicated)
+P047 Roles user/admin
+P048 Billing tiers (Stripe)
+P049 Stripe webhook verification
+P050 Account export/deletion basics
+
+========================================================
+4) PATCH SEQUENCER (AUTO-PICK NEXT STEP)
+========================================================
+After the NO-DUPES scan, choose the next patch using this priority:
+1) Build blockers (must fix first)
+2) P001 Routing single-source
+3) P004 Microcopy library
+4) P003 Accessibility baseline
+5) P036 SEO architecture
+
+For the chosen patch:
+- print DRY-RUN plan with exact file list and line-level changes
+- then APPLY the patch
+- then run validations
+- then update docs ledger/logs
+
+========================================================
+5) APPLY NOW — START PATCH 0 OR PATCH 1
+========================================================
+Step 1: Run the IN-DEPTH NO-DUPES SCAN (Section 1).
+Step 2: If docs missing, APPLY Patch 0 (docs only).
+Step 3: Run npm run build, capture first error.
+Step 4: Propose Patch 1 (≤5 files) to fix the FIRST build blocker.
+Step 5: APPLY Patch 1 and validate.
+
+STOP AFTER PATCH 1.
+Wait for user message: “NEXT PATCH”
+Then repeat the loop until P050 is DONE.
+After P050: generate P051–P100 and continue.

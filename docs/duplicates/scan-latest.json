@@ -1,5 +1,5 @@
 {
-  "scannedFiles": 1137,
+  "scannedFiles": 1144,
   "exactDuplicates": [
     {
       "hash": "235c0d03f583f08de1bf3bcf2521669a209dcbeeb80a536a37d96f9832b58a85",
@@ -750,6 +750,12 @@
           "normalizedHash": "d06e3576578379701fa1f397c7a6db7a874a30b2a91f4cab26715e12078b5765",
           "rawHash": "8ecfc67bba9dc27aff0408b83190e7496504d63951882e2861c93c78a46431ea",
           "riskScore": 5
+        },
+        {
+          "path": "client/src/pages/legal/Disclaimer.tsx",
+          "normalizedHash": "b00b255237c3f7da0fd36cd6cf7bfde63326664fba6907d4d3c60816b40f9bf7",
+          "rawHash": "55cc373ebbe2fd01785105f2bdab1f65f462214cebaab4a4981089d3adcdfa9f",
+          "riskScore": 5
         }
       ],
       "maxRisk": 5
@@ -791,6 +797,24 @@
       "maxRisk": 5
     },
     {
+      "name": "Privacy.tsx",
+      "files": [
+        {
+          "path": "client/src/pages/Privacy.tsx",
+          "normalizedHash": "6b65521191608dd4425c517c7c618ef1eedd7fa929cb2e26d37cf181d6ea1178",
+          "rawHash": "be7f5de447414575e2556fdd9d8c4f22150a622f532b20b48c0f4c1db58b3c7b",
+          "riskScore": 5
+        },
+        {
+          "path": "client/src/pages/legal/Privacy.tsx",
+          "normalizedHash": "da2355ee8f41bb97b31bcbae1d5696f60d1ec8f6abebfa06ed1bc6fab5b99b3a",
+          "rawHash": "ec618ea9c9a36c3158ccab90ab99397867dfe50b11728553e0a0eb78c6c4a0c3",
+          "riskScore": 5
+        }
+      ],
+      "maxRisk": 5
+    },
+    {
       "name": "Profile.jsx",
       "files": [
         {
@@ -821,6 +845,24 @@
           "path": "client/src/pages/account/Settings.jsx",
           "normalizedHash": "a512e5a76b114ba21ca6140487dc3f636affc01c81ba81c1a11c036967944c87",
           "rawHash": "812fbf59b11ec9c06b954a904bf66ea1cb0650f321d3db18465008716a18d0aa",
+          "riskScore": 5
+        }
+      ],
+      "maxRisk": 5
+    },
+    {
+      "name": "Terms.tsx",
+      "files": [
+        {
+          "path": "client/src/pages/Terms.tsx",
+          "normalizedHash": "40efdd40caf432f24724fd7944e52bf395f4fb71a3f7da573d01ac6d32beb3d5",
+          "rawHash": "65fbda2ecd7602081b3a5036154cc2681b46262b81b05723c894b608cacaea41",
+          "riskScore": 5
+        },
+        {
+          "path": "client/src/pages/legal/Terms.tsx",
+          "normalizedHash": "881aa8099d221924766c47d3945e998e53ef7fcd4ba4f354505ab3bdd6da3139",
+          "rawHash": "e7466898692e198ee9252528eb3c5b4f5a346345c05d269f7f25221517567a40",
           "riskScore": 5
         }
       ],
@@ -1117,5 +1159,5 @@
     "scripts/.patch-backups",
     "scripts/_backups"
   ],
-  "timestamp": "2026-01-26T07:09:52.011Z"
+  "timestamp": "2026-01-26T07:21:12.142Z"
 }

@@ -1,16 +1,16 @@
 # DECISIONS — TheGenuineLoveProject.com
 
-> Record of architectural and implementation decisions.
+> Rule: Record decisions to prevent duplicate work.
 
 ## Format
 
 ```
-## DEC-NNN: <Decision Title>
-**Date**: YYYY-MM-DD
-**Status**: PROPOSED | ACCEPTED | DEPRECATED
-**Context**: Why this decision was needed
-**Decision**: What was decided
-**Consequences**: What this means going forward
+## D-NNN — <Title>
+- Date:
+- Context:
+- Decision:
+- Alternatives considered:
+- Implications:
 ```
 
 ---

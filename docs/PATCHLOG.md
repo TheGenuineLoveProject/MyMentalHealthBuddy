@@ -5,24 +5,30 @@
 ## Format
 
 ```
-## PATCH NNN: <Title>
-**Date**: YYYY-MM-DD
-**Process IDs**: P001, P002, ...
-**Files Changed**: 
-- file1.ts
-- file2.tsx
-
-**Changes**:
-- Change 1
-- Change 2
-
-**Validation**:
-- [ ] Build passed
-- [ ] Tests passed
-- [ ] Workflow running
-
-**Notes**: Additional context
+## Patch NNN — <Title>
+- Date:
+- Processes: P001, P002, ...
+- Files:
+- Summary:
+- Validation results:
+  - build:
+  - typecheck:
+  - tests:
+- Notes:
 ```
+
+---
+
+## Patch 0 — Docs Bootstrap
+- Date: 2026-01-26
+- Processes: Foundation
+- Files: `docs/WORK_LEDGER.md`, `docs/DECISIONS.md`, `docs/PATCHLOG.md`, `docs/ROADMAP_TOP50.md`
+- Summary: Created core documentation files for duplicate avoidance system
+- Validation results:
+  - build: ✅ Passed
+  - typecheck: ✅ Passed
+  - tests: ✅ Passed
+- Notes: Bootstrap complete
 
 ---
 

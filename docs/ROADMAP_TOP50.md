@@ -1,6 +1,20 @@
-# ROADMAP: TOP 50 Processes
+# ROADMAP TOP 50 (P001–P050)
 
-> Canonical process list for Batch 1 (P001-P050).
+> Canonical process list for Batch 1.
+
+## Current Order
+1. Build blockers first (P021) ✅
+2. P001 Routing SSoT ✅
+3. P004 Microcopy system ✅
+4. P003 Accessibility baseline ✅
+5. P036 SEO architecture ✅
+6. Then continue in sequence ✅
+
+## Exit Criteria for Batch 1
+- [x] All P001–P050 marked DONE in WORK_LEDGER
+- [x] Build passes
+- [x] Core routes load without console errors
+- [x] Safety disclaimers present where required
 
 ## Status: ✅ COMPLETE (50/50)
 
