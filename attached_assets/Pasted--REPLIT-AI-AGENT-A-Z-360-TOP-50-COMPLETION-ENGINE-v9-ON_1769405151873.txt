@@ -1,0 +1,313 @@
+# REPLIT AI AGENT — A→Z 360 “TOP-50” COMPLETION ENGINE (v9 • ONE-CLICK ITERATIVE)
+# The Genuine Love Project
+# Power: 100th billionth × 100th billionth
+# TIERS ONLY: Beginner / Intermediate / Advanced
+
+You are Replit AI running INSIDE my repo. Do NOT ask questions. Keep changes small, safe, and verified.
+After each step, output ONLY: A) What changed  B) Commands+outputs  C) Verify steps  D) If blocked.
+
+===============================================================================
+0) MISSION
+===============================================================================
+Ship the most advanced, automated, enhanced, organized, perfected platform on Earth.
+Integrate the “Top-50 platform processes” as real features + docs + scripts.
+Continue iterating until the COMPLETE checklist is fully satisfied.
+
+===============================================================================
+1) HARD GUARDRAILS
+===============================================================================
+- No big refactors. No mass renames. No deleting core functionality.
+- Replit Autoscale: single port, bind 0.0.0.0, listen on process.env.PORT.
+- Human-triggered scripts only (no background autonomy).
+- No secrets in repo. Use env vars. Maintain .env.example.
+- Use Zod validation on all external inputs.
+- Central error handler + requestId logging.
+- AI safety: crisis detection + safe response + resources + encourage professional help.
+- Remove any “reading level” anywhere. Use ONLY Beginner/Intermediate/Advanced.
+
+===============================================================================
+2) DEFINITIONS: “DONE” AND “COMPLETE”
+===============================================================================
+DONE = one safe patch applied + verified.
+COMPLETE = ALL items below are true.
+
+--- ENGINEERING ---
+[ ] npm run typecheck passes
+[ ] npm run build passes
+[ ] npm run test passes (smoke + core)
+[ ] Runs in Replit prod (single-port, cold start ok)
+[ ] .env.example present + docs
+[ ] Structured logs + error capture wired (non-secret)
+
+--- CORE PRODUCT ---
+[ ] Auth (signup/login/logout/forgot/reset + /me)
+[ ] RBAC (user/admin) + protected routes
+[ ] Postgres + Drizzle schema: users, journals, moods, subscriptions, audit_logs, content_items
+[ ] AI endpoints: safe journaling/chat + crisis guardrails + rate limit + logging
+[ ] Stripe: checkout + portal + webhook verify + plan gating
+
+--- ADMIN + OPS ---
+[ ] Admin Analyzer API (admin-only)
+[ ] Admin Health Dashboard UI (admin-only)
+[ ] Observability basics: requestId + audit trails
+
+--- UX + CONTENT ---
+[ ] Not crowded; consistent spacing/max widths
+[ ] Buttons 44px+; consistent typography scale
+[ ] Tiering everywhere: Beginner / Intermediate / Advanced
+[ ] Publishing MVP: admin create/edit; public blog pages; SEO metadata
+
+--- DEVOPS + AUTOMATION ---
+[ ] GitHub Actions CI: install/typecheck/build/test
+[ ] Human-triggered scripts: scan → report → guardrails → verify
+[ ] Tier enforcement script that FAILS CI if non-allowed tiers appear
+
+===============================================================================
+3) TOP-50 PLATFORM PROCESSES (REQUIRED)
+===============================================================================
+Implement these as FEATURES, WORKFLOWS, or HUMAN-TRIGGERED AUTOMATIONS + docs.
+(You may stage them across multiple iterations. Must end COMPLETE.)
+
+A) Product & UX (1–10)
+1 Onboarding flow
+2 Personalization (goals/preferences/tier)
+3 IA + navigation + search
+4 Design system (tokens/components)
+5 Accessibility (WCAG AA)
+6 In-app feedback loop
+7 Progressive disclosure
+8 Help center/FAQs/guided tours
+9 i18n scaffolding
+10 Performance UX budgets
+
+B) Auth/Security/Privacy (11–20)
+11 Session strategy (short-lived + refresh)
+12 Password reset + email verify
+13 RBAC
+14 Rate limiting
+15 Zod everywhere
+16 Security headers + CSP baseline
+17 Audit logs
+18 Policies + disclaimers + crisis resources
+19 Data export/delete flow
+20 Secrets management docs
+
+C) Data & Reliability (21–30)
+21 Postgres source of truth
+22 Migrations/push doc
+23 Backups doc
+24 Idempotent APIs + error format
+25 Avoid background jobs (scripts ok)
+26 Health/readiness checks
+27 Feature flags
+28 Caching strategy
+29 Privacy-friendly analytics events
+30 Disaster recovery checklist
+
+D) AI Safety & Quality (31–40)
+31 Crisis detection + response template
+32 Prompt injection hardening
+33 Model fallback behaviors
+34 Consent + transparency
+35 PII minimization/redaction in logs
+36 Per-user/per-IP rate limits
+37 Moderation rules
+38 Prompt tests/evals
+39 Human escalation guidance
+40 Output constraints (non-diagnostic language)
+
+E) Monetization & Growth (41–50)
+41 Stripe checkout + portal
+42 Webhook verify + sync
+43 Plan gating
+44 Ethical pricing UX
+45 Newsletter/email capture (optional)
+46 SEO: sitemap/meta/OG/structured data
+47 Publishing pipeline (draft/review/publish)
+48 Social sharing assets generator
+49 Basic analytics dashboard
+50 CI/CD + release notes discipline
+
+===============================================================================
+4) REQUIRED REPO ADDITIONS (IF MISSING)
+===============================================================================
+/docs/{product,security,ops,ai}
+/scripts/{scan,report,guardrails,verify,content-check}
+/server/middleware/{auth,rbac,rateLimit,requestId}
+/server/routes/{auth,ai,admin,billing,content}
+/client(or src)/{pages,components,lib}
+
+===============================================================================
+5) UNIVERSAL OUTPUT FORMAT (EVERY ITERATION)
+===============================================================================
+A) ✅ What changed (file paths + bullets)
+B) 🧪 Commands run + outputs (paste)
+C) 🔎 Verify (exact URLs + clicks)
+D) ⛔ If blocked (exact error + patch)
+
+===============================================================================
+6) THE LOOP (DO THIS UNTIL COMPLETE)
+===============================================================================
+Repeat:
+1) SCAN
+2) Pick smallest blocker by priority
+3) Patch minimally
+4) Verify
+5) Report A/B/C/D
+6) Continue
+
+PRIORITY:
+1 App won’t run / single-port
+2 Typecheck fails
+3 DB/Drizzle broken
+4 Auth incomplete
+5 Stripe incomplete
+6 AI safety/rate-limit/logging missing
+7 Admin analyzer/dashboard missing
+8 Publishing + SEO missing
+9 CI/CD + tests + docs missing
+10 Remaining Top-50 processes missing
+
+===============================================================================
+7) START NOW — ITERATION 1 (COPY/PASTE RUNBOOK)
+===============================================================================
+Run EXACTLY these commands in Replit Shell, then apply the first minimal patch:
+
+--- SCAN ---
+ls -la
+cat package.json
+node -v
+npm -v
+
+# Find forbidden tier labels
+rg -n "reading level|reading_level|readingLevel|grade level|grade_level" . || true
+
+# Find existing tier usage
+rg -n "Beginner|Intermediate|Advanced|tier" . || true
+
+# Server port binding / single-port checks
+rg -n "listen\\(|0\\.0\\.0\\.0|process\\.env\\.PORT|PORT" server src client . || true
+
+# DB & Drizzle checks
+rg -n "drizzle|DATABASE_URL|neon|pg|postgres" . || true
+
+# Stripe checks
+rg -n "stripe|STRIPE_|webhook|checkout|portal" . || true
+
+# AI checks
+rg -n "openai|crisis|rate|moderation|prompt injection|redact|PII" . || true
+
+npm ci || npm install
+npm run -s typecheck || true
+npm run -s build || true
+npm run -s test || true
+
+--- AUTO-PICK NEXT BLOCKER (by priority order) ---
+If ANY scan shows “reading level”:
+  -> PATCH #1: Replace with Beginner/Intermediate/Advanced and add content-check script.
+
+Else if server binding not correct:
+  -> PATCH #1: Fix server listen binding to 0.0.0.0 + process.env.PORT.
+
+Else if typecheck failing:
+  -> PATCH #1: Fix the first TypeScript error only.
+
+===============================================================================
+8) PATCH TEMPLATES (MINIMAL SAFE FIRST FIXES)
+===============================================================================
+
+PATCH TEMPLATE A — Tier enforcement script (add immediately if missing)
+FILES:
+1) scripts/content-check.mjs
+2) package.json (add script)
+3) .github/workflows/ci.yml (add step if CI exists)
+
+--- 1) scripts/content-check.mjs ---
+Create file:
+  scripts/content-check.mjs
+
+CONTENT:
+  import fs from "node:fs";
+  import path from "node:path";
+
+  const ROOT = process.cwd();
+  const ALLOWED = new Set(["Beginner", "Intermediate", "Advanced"]);
+
+  // Forbidden phrases we never want again
+  const FORBIDDEN_PATTERNS = [
+    /reading\s*level/i,
+    /grade\s*level/i,
+    /reading_level/i,
+    /readingLevel/i,
+    /grade_level/i,
+  ];
+
+  const exts = new Set([".ts", ".tsx", ".js", ".jsx", ".md", ".json", ".mjs"]);
+  const ignoreDirs = new Set(["node_modules", ".git", "dist", "build", ".next", ".cache"]);
+
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (ignoreDirs.has(entry.name)) continue;
+      const p = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(p);
+      else {
+        const ext = path.extname(entry.name);
+        if (!exts.has(ext)) continue;
+        const text = fs.readFileSync(p, "utf8");
+
+        for (const re of FORBIDDEN_PATTERNS) {
+          if (re.test(text)) {
+            console.error(`❌ Forbidden tier language found in: ${p}`);
+            process.exitCode = 1;
+            return;
+          }
+        }
+
+        // Optional: If file explicitly mentions "tier" but none of allowed labels appear, warn.
+        if (/tier/i.test(text) && !/(Beginner|Intermediate|Advanced)/.test(text)) {
+          console.warn(`⚠️ Tier referenced without allowed labels in: ${p}`);
+        }
+      }
+    }
+  }
+
+  walk(ROOT);
+
+  if (process.exitCode === 1) {
+    console.error("Fix: Replace any reading/grade language with Beginner/Intermediate/Advanced only.");
+    process.exit(1);
+  }
+
+  console.log("✅ content-check passed (only allowed tiers & no reading/grade language).");
+
+--- 2) package.json add scripts ---
+Add:
+  "content-check": "node scripts/content-check.mjs"
+
+--- 3) If CI exists, add step after install ---
+Run:
+  npm run -s content-check
+
+PATCH TEMPLATE B — Replace “reading level” fields in DB/UI (minimal)
+- Replace enums/labels with: Beginner/Intermediate/Advanced
+- If schema uses reading_level: keep column name for now (no breaking migrations), but map it:
+  UI label = “Tier”
+  Allowed values = Beginner/Intermediate/Advanced
+
+PATCH TEMPLATE C — Server port binding (Replit Autoscale)
+Wherever server listens, enforce:
+  const port = Number(process.env.PORT) || 5000;
+  app.listen(port, "0.0.0.0", () => ...)
+
+===============================================================================
+9) NEXT ITERATION INSTRUCTIONS (AFTER PATCH #1)
+===============================================================================
+Re-run:
+  npm run -s content-check
+  npm run -s typecheck
+  npm run -s build
+  npm run -s test
+
+Then proceed to next blocker using the priority list.
+
+END PROMPT.
