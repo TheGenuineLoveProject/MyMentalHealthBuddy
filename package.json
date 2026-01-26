@@ -29,6 +29,8 @@
     "verify:routes:fix": "node scripts/verify-routes-manifest.mjs --fix",
     "patch:wellness:dry": "DRY_RUN=1 node scripts/applyWellnessShell.mjs",
     "patch:wellness": "DRY_RUN=0 node scripts/applyWellnessShell.mjs",
+    "wellness:scan": "node scripts/ensure-wellness-compliance.mjs --dry-run",
+    "wellness:apply": "node scripts/ensure-wellness-compliance.mjs --apply",
     "print:routes:diff": "node scripts/print-routes-diff.mjs",
     "print:routes:diff:ci": "node scripts/print-routes-diff.mjs --max=20",
     "print:routes:diff:gha": "node scripts/print-routes-diff.mjs --format=gha --ci",
