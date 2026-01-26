@@ -1,0 +1,187 @@
+NAME: GLP_MASTER_EXECUTION_CHAIN_V1__TOP50_PROCESSES__SCAN_NO_DUPES
+
+CONTEXT:
+TheGenuineLoveProject.com on Replit.
+Owner: Aaliyah Draws Art LLC (Maria Landa).
+
+NON-NEGOTIABLES:
+- APPLY CHANGES (but ONLY after a DRY-RUN plan per patch)
+- No medical claims. No diagnosis/treatment/cure/guarantees.
+- Educational support only + disclaimers + opt-out + “pause/stop” on practices.
+- Zero plagiarism / zero copyright infringement.
+- Non-destructive by default (no deletes/renames unless you ask).
+- Human-in-the-loop: no autonomous posting or actions.
+- Replit-safe: single port, no background daemons.
+- “No duplicate work” enforced via a Work Ledger (below).
+
+PRIMARY OBJECTIVE:
+Ship the most advanced, automated, enhanced, organized platform.
+Integrate “Top Platform Processes” in batches of 50, with a duplicate-avoidance scan.
+ALWAYS: Scan → Diagnose → Plan → Patch → Validate → Document → Pause.
+
+========================================================
+SECTION 0 — DUPLICATE-AVOIDANCE SYSTEM (MANDATORY)
+========================================================
+
+0.1 Create/Verify a single source of truth ledger:
+- /docs/WORK_LEDGER.md
+- /docs/DECISIONS.md
+- /docs/PATCHLOG.md
+- /docs/ROADMAP_TOP50.md
+
+Ledger Rules:
+- Every process has a unique ID: P001..P050 (then P051..P100, etc.)
+- Each patch updates PATCHLOG.md with:
+  - Patch number
+  - Files changed
+  - Process IDs affected
+  - Validation results
+- Before any new work: run “NO-DUPES SCAN” (0.2)
+
+0.2 NO-DUPES SCAN (run before every patch):
+- Search for existing implementations, duplicates, placeholders, and overlap.
+Commands:
+  git status || true
+  ls -la
+  find . -maxdepth 4 -type d -name "*backup*" -o -name "*copy*" -o -name "*old*" -o -name "*tmp*"
+  grep -R "TODO\|placeholder\|FIXME\|HACK" -n client server scripts || true
+  grep -R "routeKey" -n client/src/content || true
+  grep -R "internalLinks" -n client/src || true
+  grep -R "BEGIN PASTE\|const config = /\* \.\.\. \*/" -n . || true
+
+Output required:
+- Duplicate candidates list (files/folders)
+- Overlapping feature candidates (e.g., 2 auth systems, 2 stripe configs)
+- “Already done” list (so we skip it)
+
+STOP after scan and present DRY-RUN plan for Patch 1.
+
+========================================================
+SECTION 1 — TOP 50 PLATFORM PROCESSES (P001–P050)
+========================================================
+These are the first 50 “top platform” processes to integrate. Do NOT implement all at once.
+Implement in patches of ≤5 files each, validated each time.
+
+PRODUCT + UX CORE
+P001 Single Source of Truth Routing (routeKey → canonicalPath resolver)
+P002 Global Design Tokens + Theme (brand palette, typography, spacing scale)
+P003 Accessible Component System (WCAG AA, focus states, aria, reduced motion)
+P004 Consistent Microcopy System (wellness + sitewide variants)
+P005 Page Template Standardization (Hero → CTA → cards → footer)
+P006 Mobile-first Layout & 44px touch targets everywhere
+P007 Calm Motion System (reduced motion support, subtle animations)
+P008 Error/Empty/Loading State Standards
+P009 Global Notification/Toasts (non-intrusive, accessible)
+P010 Crisis Routing + Safety Footer Everywhere Relevant (/crisis)
+
+WELLNESS TOOLING (NON-CLINICAL)
+P011 Tool Framework: 60s / 10m / softer version toggle (shared)
+P012 Breath Tool (gentle coherent breathing)
+P013 Grounding Tool (5-4-3-2-1 reset)
+P014 Values Tool (values finder + tiny action)
+P015 Boundaries Tool (script builder + rehearsal)
+P016 Journaling Tool (guided prompts + optional save)
+P017 Sleep Tool (wind-down ritual)
+P018 Movement Tool (2-minute menu)
+P019 “Coherence Ladder” (metaphor-only alignment steps)
+P020 Safety Language Scanner (detect risky claims/coercive language)
+
+ENGINEERING RELIABILITY
+P021 Build-first Discipline (CI build gate)
+P022 Lint + Format (consistent)
+P023 Type Safety (no implicit any, typed API contracts)
+P024 Centralized Config (env validation, no hardcoded secrets)
+P025 Logging (structured, redaction)
+P026 Error Tracking Hook (capture + safe reporting)
+P027 Rate Limiting + Abuse Protection
+P028 Input Validation (Zod schemas for all APIs)
+P029 Security Headers + CORS correctness
+P030 Dependency Hygiene (audit, lockfile, dedupe policy)
+
+DATA + ANALYTICS
+P031 Minimal Analytics Events (view/start/complete/save)
+P032 Privacy-safe analytics (no journaling content)
+P033 Admin Metrics Dashboard (high level)
+P034 Feature Flags (safe rollout)
+P035 Audit Log for Admin Actions
+
+GROWTH: SEO / CRM / CONTENT OPS
+P036 SEO Architecture Map (site map, meta, canonical, OG)
+P037 Internal Link Resolver (routeKey links)
+P038 Blog/Resource Publishing System (original content)
+P039 Lead Magnet + Email Capture (consent)
+P040 CRM Tagging + Segments (no sensitive data)
+P041 Social Studio Admin (draft → review → approve → export)
+P042 Content Templates Library (brand locked)
+P043 Repurpose Engine (post → blog → email → script)
+P044 UTM + Campaign Tracking
+P045 Onboarding Funnel (gentle, optional)
+
+PAYMENTS + ACCOUNT (ONLY IF ALREADY IN SCOPE)
+P046 Auth Baseline (safe, minimal, non-duplicated)
+P047 Roles: user/admin separation
+P048 Billing Tiers (Stripe) with safe gating
+P049 Webhooks verification (Stripe)
+P050 Account Deletion/Export basics (privacy)
+
+========================================================
+SECTION 2 — IMPLEMENTATION RULES (50 AT A TIME)
+========================================================
+- We implement P001→P050 first.
+- After P050 is validated, generate P051→P100 and repeat.
+- Each patch:
+  - ≤5 files changed
+  - must pass: build + basic route smoke test
+  - must update WORK_LEDGER + PATCHLOG
+- Never duplicate systems (e.g., 2 auth, 2 stripe).
+- If duplication exists, we stop and propose consolidation plan (no deletes).
+
+========================================================
+SECTION 3 — PATCH 1 (APPLY NOW): BUILD-FIRST + NO-DUPES SCAN
+========================================================
+
+PATCH 1 TARGET (highest leverage, lowest risk):
+- Run NO-DUPES SCAN
+- Identify FIRST build blocker
+- Fix build blocker (P021 “Build-first discipline” begins here)
+- Create ledger docs (0.1)
+
+DRY-RUN REQUIRED OUTPUT (before edits):
+A) First build error + file + line
+B) Duplicate candidates list
+C) Proposed Patch 1 file edits (≤5 files)
+D) Validation commands to run after patch
+
+APPLY PATCH 1 AFTER DRY-RUN:
+- Create/update:
+  /docs/WORK_LEDGER.md
+  /docs/DECISIONS.md
+  /docs/PATCHLOG.md
+  /docs/ROADMAP_TOP50.md
+- Fix the first build-blocking file.
+
+Validation after Patch 1:
+  npm run build
+  npm run typecheck || true
+  npm test || true
+
+STOP AFTER PATCH 1.
+WAIT FOR NEXT COMMAND: “NEXT PATCH”.
+
+========================================================
+SECTION 4 — “NEXT PATCH” AUTO-SELECTOR (NO OVERWHELM)
+========================================================
+After Patch 1 succeeds, auto-select the next patch using this priority:
+1) Anything blocking build/prod
+2) P001 routing single-source
+3) P004 microcopy system
+4) P003 accessibility baseline
+5) P036 SEO architecture
+
+Output ONE next patch at a time.
+
+BEGIN NOW:
+1) Run NO-DUPES SCAN (0.2)
+2) Run npm run build
+3) Produce Patch 1 DRY-RUN report (A–D)
+Do NOT change files until you print the DRY-RUN plan.

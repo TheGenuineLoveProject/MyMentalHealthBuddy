@@ -1,6 +1,6 @@
 # Database Schema Registry
 
-_Generated: 2026-01-26T07:02:25.654Z_
+_Generated: 2026-01-26T07:04:28.581Z_
 
 | Table | File |
 |-------|------|

@@ -1,6 +1,6 @@
 # Duplicate Decisions
 
-> Generated from scan: 2026-01-26T07:00:18.218Z
+> Generated from scan: 2026-01-26T07:04:27.665Z
 
 ## Format
 
@@ -45,18 +45,8 @@
 - **Import redirects**: Update imports from duplicates to keeper
 - **Risk**: 5
 
-## Shadow Copies (Auto-Quarantine)
-
-The following files are in backup/old/copy directories and should be quarantined:
-
-- `client/src/copy/aiChat.ts` (Risk: 7)
-- `client/src/copy/disclaimers.ts` (Risk: 7)
-- `client/src/copy/journal.ts` (Risk: 7)
-- `client/src/copy/mood.ts` (Risk: 7)
-- `client/src/copy/onboarding.ts` (Risk: 7)
-
 ---
 
 _Run "npm run dedupe-safe" to apply quarantine actions._
 
-_Last updated: 2026-01-26T07:00:19.215Z_
+_Last updated: 2026-01-26T07:04:28.836Z_
