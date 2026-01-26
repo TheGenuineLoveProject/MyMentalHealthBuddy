@@ -40,6 +40,7 @@ const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
 const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
 const DiscussionPage = lazy(() => import("./features/community/DiscussionPage.jsx"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage.jsx"));
+const BreathTool = lazy(() => import("./pages/tools/BreathTool.jsx"));
 const DailyRitualPage = lazy(() => import("./pages/DailyRitualPage.tsx"));
 const WisdomToolsPage = lazy(() => import("./pages/WisdomToolsPage.tsx"));
 const AdvancedToolsPage = lazy(() => import("./pages/AdvancedToolsPage.tsx"));
@@ -416,6 +417,9 @@ export default function App() {
               </Route>
               <Route path="/system-map">
                 <WellnessRoute><SystemMapPage /></WellnessRoute>
+              </Route>
+              <Route path="/tools/breath">
+                <WellnessRoute><BreathTool /></WellnessRoute>
               </Route>
               <Route path="/tools/reframe">
                 <WellnessRoute><ReframePage /></WellnessRoute>
