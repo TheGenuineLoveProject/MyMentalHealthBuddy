@@ -90,12 +90,12 @@ export default function PricingPage() {
       />
       
       <main className="container mx-auto px-4 py-12 max-w-6xl">
-        <header className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-4">
+        <header className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
             <Sparkles className="w-4 h-4" />
             <span>Simple, Transparent Pricing</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
             Invest in Your <span className="text-primary">Wellbeing</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -104,7 +104,7 @@ export default function PricingPage() {
           </p>
         </header>
 
-        <div className="grid gap-6 md:grid-cols-3 mb-16">
+        <div className="grid gap-8 md:grid-cols-3 mb-20">
           {PLANS.map(plan => (
             <Card 
               key={plan.id}
@@ -142,7 +142,7 @@ export default function PricingPage() {
 
                 <Link href={plan.id === "free" ? "/register" : `/upgrade?plan=${plan.id}`}>
                   <Button 
-                    className="w-full" 
+                    className="w-full min-h-[48px] px-6 py-3 text-base font-semibold rounded-lg" 
                     variant={plan.popular ? "default" : "outline"}
                     data-testid={`cta-${plan.id}`}
                   >
@@ -180,8 +180,8 @@ export default function PricingPage() {
           </div>
         </section>
 
-        <section className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold text-center mb-8">
+        <section className="max-w-2xl mx-auto mt-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">

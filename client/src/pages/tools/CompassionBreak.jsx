@@ -63,18 +63,18 @@ export default function CompassionBreak() {
       
       <main className="container mx-auto px-4 py-12 max-w-2xl">
         <Link href="/tools">
-          <Button variant="ghost" size="sm" className="mb-6" data-testid="button-back">
-            <ArrowLeft className="w-4 h-4 mr-2" />
+          <Button variant="ghost" className="mb-8 min-h-[44px] px-4 py-2 rounded-lg" data-testid="button-back">
+            <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Tools
           </Button>
         </Link>
 
-        <header className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 text-sm mb-4">
+        <header className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300 text-sm font-medium mb-6">
             <Heart className="w-4 h-4" />
             <span>60-Second Practice</span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
             Compassion Break
           </h1>
           <p className="text-muted-foreground">
