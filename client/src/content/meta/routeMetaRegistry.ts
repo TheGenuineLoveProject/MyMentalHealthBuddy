@@ -613,6 +613,471 @@ const REGISTRY: Record<string, Partial<RouteMeta>> = {
     ],
     modules: ["mi"],
   },
+
+  // ═══════════════════════════════════════════════════════════════════
+  // ADDITIONAL HUBS - A→Z COMPLETE
+  // ═══════════════════════════════════════════════════════════════════
+  "hubs__inner-peace": {
+    canonicalPath: "/hubs/inner-peace",
+    title: "Inner Peace Hub",
+    description: "Cultivate lasting calm through mindfulness, acceptance, and gentle practices.",
+    benefits: [
+      "Find stillness in small daily moments.",
+      "Reduce inner conflict through acceptance practices.",
+      "Build resilience against external chaos.",
+    ],
+    internalLinks: [
+      { label: "Mindfulness Hub", routeKey: "hubs__mindfulness" },
+      { label: "Try: Grounding", routeKey: "grounding" },
+      { label: "Acceptance Hub", routeKey: "hubs__acceptance" },
+    ],
+    modules: ["mi"],
+  },
+
+  "hubs__inner-work": {
+    canonicalPath: "/hubs/inner-work",
+    title: "Inner Work Hub",
+    description: "Deep self-exploration for lasting personal transformation.",
+    benefits: [
+      "Explore shadow aspects with compassion.",
+      "Integrate past experiences for healing.",
+      "Build authentic self-understanding.",
+    ],
+    internalLinks: [
+      { label: "Self-Discovery Hub", routeKey: "hubs__self-discovery" },
+      { label: "Healing Journey", routeKey: "hubs__healing-journey" },
+      { label: "12 Practices Path", routeKey: "paths__12-practices" },
+    ],
+    modules: ["mi", "12practices"],
+  },
+
+  hubs__journaling: {
+    canonicalPath: "/hubs/journaling",
+    title: "Journaling Hub",
+    description: "Written reflection practices for self-discovery and emotional processing.",
+    benefits: [
+      "Process emotions through structured writing.",
+      "Track patterns and progress over time.",
+      "Use prompts that guide without leading.",
+    ],
+    internalLinks: [
+      { label: "Try: Guided Journaling", routeKey: "guided-journaling" },
+      { label: "Gratitude Hub", routeKey: "hubs__gratitude" },
+      { label: "Daily Practice Hub", routeKey: "hubs__daily-practice" },
+    ],
+    modules: ["mi"],
+  },
+
+  "hubs__life-purpose": {
+    canonicalPath: "/hubs/life-purpose",
+    title: "Life Purpose Hub",
+    description: "Discover meaning and direction through values and vision work.",
+    benefits: [
+      "Clarify what matters most to you.",
+      "Align daily actions with deeper purpose.",
+      "Build a vision that energizes without pressure.",
+    ],
+    internalLinks: [
+      { label: "Values Finder", routeKey: "tools__values" },
+      { label: "Self-Discovery Hub", routeKey: "hubs__self-discovery" },
+      { label: "Personal Growth Hub", routeKey: "hubs__personal-growth" },
+    ],
+    modules: ["mi"],
+  },
+
+  hubs__motivation: {
+    canonicalPath: "/hubs/motivation",
+    title: "Motivation Hub",
+    description: "Sustainable motivation through intrinsic drives and tiny wins.",
+    benefits: [
+      "Understand what truly drives you.",
+      "Build momentum with small achievable steps.",
+      "Replace willpower with environment design.",
+    ],
+    internalLinks: [
+      { label: "Habits Hub", routeKey: "hubs__habits" },
+      { label: "Life Purpose Hub", routeKey: "hubs__life-purpose" },
+      { label: "Confidence Hub", routeKey: "hubs__confidence" },
+    ],
+    modules: ["mi"],
+  },
+
+  "hubs__nervous-system": {
+    canonicalPath: "/hubs/nervous-system",
+    title: "Nervous System Hub",
+    description: "Regulate your nervous system for calm, safety, and resilience.",
+    benefits: [
+      "Understand fight/flight/freeze responses.",
+      "Use polyvagal-informed regulation tools.",
+      "Build a wider window of tolerance.",
+    ],
+    internalLinks: [
+      { label: "Try: Grounding", routeKey: "grounding" },
+      { label: "Body-Mind Hub", routeKey: "hubs__body-mind" },
+      { label: "Anxiety Hub", routeKey: "hubs__anxiety" },
+    ],
+    modules: ["mi"],
+  },
+
+  "hubs__personal-growth": {
+    canonicalPath: "/hubs/personal-growth",
+    title: "Personal Growth Hub",
+    description: "Continuous development through reflection, learning, and small steps.",
+    benefits: [
+      "Set growth goals that feel achievable.",
+      "Learn from setbacks without shame.",
+      "Celebrate progress, not perfection.",
+    ],
+    internalLinks: [
+      { label: "Habits Hub", routeKey: "hubs__habits" },
+      { label: "Self-Discovery Hub", routeKey: "hubs__self-discovery" },
+      { label: "12 Practices Path", routeKey: "paths__12-practices" },
+    ],
+    modules: ["mi", "12practices"],
+  },
+
+  hubs__presence: {
+    canonicalPath: "/hubs/presence",
+    title: "Presence Hub",
+    description: "Return to the present moment with grounding and awareness practices.",
+    benefits: [
+      "Anchor yourself in the here and now.",
+      "Reduce rumination and future-worry.",
+      "Find calm in sensory awareness.",
+    ],
+    internalLinks: [
+      { label: "Mindfulness Hub", routeKey: "hubs__mindfulness" },
+      { label: "Try: Grounding", routeKey: "grounding" },
+      { label: "Try: Breathwork", routeKey: "breathing" },
+    ],
+    modules: ["mi"],
+  },
+
+  hubs__resilience: {
+    canonicalPath: "/hubs/resilience",
+    title: "Resilience Hub",
+    description: "Build the capacity to recover and adapt through challenges.",
+    benefits: [
+      "Develop flexible coping strategies.",
+      "Build support networks and resources.",
+      "Practice post-traumatic growth mindsets.",
+    ],
+    internalLinks: [
+      { label: "Coping Skills Hub", routeKey: "hubs__coping-skills" },
+      { label: "Healing Journey", routeKey: "hubs__healing-journey" },
+      { label: "Confidence Hub", routeKey: "hubs__confidence" },
+    ],
+    modules: ["mi"],
+  },
+
+  "hubs__self-awareness": {
+    canonicalPath: "/hubs/self-awareness",
+    title: "Self-Awareness Hub",
+    description: "Know yourself better through reflection and observation.",
+    benefits: [
+      "Notice patterns in thoughts and behaviors.",
+      "Understand your triggers and needs.",
+      "Build metacognitive skills with compassion.",
+    ],
+    internalLinks: [
+      { label: "Emotional Intelligence", routeKey: "hubs__emotional-intelligence" },
+      { label: "State Tracker", routeKey: "tools__state-tracker" },
+      { label: "Try: Journaling", routeKey: "guided-journaling" },
+    ],
+    modules: ["mi"],
+  },
+
+  "hubs__self-care": {
+    canonicalPath: "/hubs/self-care",
+    title: "Self-Care Hub",
+    description: "Holistic self-care practices for body, mind, and spirit.",
+    benefits: [
+      "Build sustainable self-care routines.",
+      "Balance rest with productivity.",
+      "Prioritize your wellbeing without guilt.",
+    ],
+    internalLinks: [
+      { label: "Self-Care Toolkit", routeKey: "self-care-toolkit" },
+      { label: "Energy Hub", routeKey: "hubs__energy-management" },
+      { label: "Daily Practice Hub", routeKey: "hubs__daily-practice" },
+    ],
+    modules: ["mi"],
+  },
+
+  "hubs__self-compassion": {
+    canonicalPath: "/hubs/self-compassion",
+    title: "Self-Compassion Hub",
+    description: "Treat yourself with the kindness you'd offer a good friend.",
+    benefits: [
+      "Replace self-criticism with self-kindness.",
+      "Recognize common humanity in struggles.",
+      "Practice mindful self-compassion daily.",
+    ],
+    internalLinks: [
+      { label: "Self-Worth Hub", routeKey: "hubs__self-worth" },
+      { label: "Try: Reframe", routeKey: "tools__reframe" },
+      { label: "Forgiveness Hub", routeKey: "hubs__forgiveness" },
+    ],
+    modules: ["mi", "nlp"],
+  },
+
+  "hubs__self-discovery": {
+    canonicalPath: "/hubs/self-discovery",
+    title: "Self-Discovery Hub",
+    description: "Explore who you are and who you want to become.",
+    benefits: [
+      "Uncover hidden strengths and values.",
+      "Explore identity with curiosity, not judgment.",
+      "Build authentic self-expression.",
+    ],
+    internalLinks: [
+      { label: "Values Finder", routeKey: "tools__values" },
+      { label: "Life Purpose Hub", routeKey: "hubs__life-purpose" },
+      { label: "Inner Work Hub", routeKey: "hubs__inner-work" },
+    ],
+    modules: ["mi"],
+  },
+
+  hubs__sleep: {
+    canonicalPath: "/hubs/sleep",
+    title: "Sleep Hub",
+    description: "Improve sleep quality with evidence-based practices.",
+    benefits: [
+      "Build a calming pre-sleep routine.",
+      "Reduce sleep anxiety with gentle techniques.",
+      "Track and improve your sleep patterns.",
+    ],
+    internalLinks: [
+      { label: "Energy Hub", routeKey: "hubs__energy-management" },
+      { label: "Try: Breathwork", routeKey: "breathing" },
+      { label: "Self-Care Hub", routeKey: "hubs__self-care" },
+    ],
+    modules: ["mi"],
+  },
+
+  hubs__spirituality: {
+    canonicalPath: "/hubs/spirituality",
+    title: "Spirituality Hub",
+    description: "Explore meaning, connection, and transcendence in your own way.",
+    benefits: [
+      "Connect with something larger than yourself.",
+      "Explore spiritual practices without dogma.",
+      "Find meaning in daily life and challenges.",
+    ],
+    internalLinks: [
+      { label: "Life Purpose Hub", routeKey: "hubs__life-purpose" },
+      { label: "Gratitude Hub", routeKey: "hubs__gratitude" },
+      { label: "Inner Peace Hub", routeKey: "hubs__inner-peace" },
+    ],
+    modules: ["mi", "12practices"],
+  },
+
+  hubs__stress: {
+    canonicalPath: "/hubs/stress",
+    title: "Stress Hub",
+    description: "Manage stress with regulation, reframing, and recovery practices.",
+    benefits: [
+      "Identify your stress triggers and signs.",
+      "Use quick regulation techniques in the moment.",
+      "Build long-term stress resilience.",
+    ],
+    internalLinks: [
+      { label: "Anxiety Hub", routeKey: "hubs__anxiety" },
+      { label: "Nervous System Hub", routeKey: "hubs__nervous-system" },
+      { label: "Try: Grounding", routeKey: "grounding" },
+    ],
+    modules: ["mi"],
+  },
+
+  hubs__thoughtwork: {
+    canonicalPath: "/hubs/thoughtwork",
+    title: "Thoughtwork Hub",
+    description: "Work with your thoughts using CBT-informed techniques.",
+    benefits: [
+      "Identify cognitive distortions with compassion.",
+      "Reframe unhelpful thought patterns.",
+      "Build balanced, realistic thinking.",
+    ],
+    internalLinks: [
+      { label: "Try: Reframe", routeKey: "tools__reframe" },
+      { label: "Anxiety Hub", routeKey: "hubs__anxiety" },
+      { label: "Self-Awareness Hub", routeKey: "hubs__self-awareness" },
+    ],
+    modules: ["mi", "nlp"],
+  },
+
+  "hubs__trauma-healing": {
+    canonicalPath: "/hubs/trauma-healing",
+    title: "Trauma Healing Hub",
+    description: "Gentle, trauma-informed resources for healing at your own pace.",
+    benefits: [
+      "Build safety and stability as your foundation.",
+      "Use grounding when overwhelmed.",
+      "Honor your pace — healing isn't linear.",
+    ],
+    internalLinks: [
+      { label: "Healing Journey", routeKey: "hubs__healing-journey" },
+      { label: "Nervous System Hub", routeKey: "hubs__nervous-system" },
+      { label: "Try: Grounding", routeKey: "grounding" },
+    ],
+    modules: ["mi"],
+  },
+
+  hubs__wisdom: {
+    canonicalPath: "/hubs/wisdom",
+    title: "Wisdom Hub",
+    description: "Integrate knowledge, experience, and compassion for wise living.",
+    benefits: [
+      "Learn from diverse wisdom traditions.",
+      "Apply insights to daily decisions.",
+      "Cultivate perspective and patience.",
+    ],
+    internalLinks: [
+      { label: "Wisdom Tools", routeKey: "wisdom" },
+      { label: "Spirituality Hub", routeKey: "hubs__spirituality" },
+      { label: "Life Purpose Hub", routeKey: "hubs__life-purpose" },
+    ],
+    modules: ["mi"],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════
+  // ADVANCED TOOLS & PAGES
+  // ═══════════════════════════════════════════════════════════════════
+  wisdom: {
+    canonicalPath: "/wisdom",
+    title: "Wisdom Tools",
+    description: "Evidence-based wisdom practices and insights for deeper understanding.",
+    benefits: [
+      "Access curated wisdom from research and traditions.",
+      "Apply insights through practical exercises.",
+      "Build discernment and wise decision-making.",
+    ],
+    internalLinks: [
+      { label: "Wisdom Hub", routeKey: "hubs__wisdom" },
+      { label: "Daily Wisdom", routeKey: "daily-wisdom" },
+      { label: "Study Vault", routeKey: "study-vault" },
+    ],
+    modules: ["mi"],
+  },
+
+  "daily-wisdom": {
+    canonicalPath: "/daily-wisdom",
+    title: "Daily Wisdom",
+    description: "A daily dose of wisdom, reflection, and inspiration.",
+    benefits: [
+      "Start your day with a meaningful insight.",
+      "Reflect on wisdom from diverse sources.",
+      "Build a daily contemplation practice.",
+    ],
+    internalLinks: [
+      { label: "Wisdom Tools", routeKey: "wisdom" },
+      { label: "Daily Practice Hub", routeKey: "hubs__daily-practice" },
+      { label: "Gratitude Hub", routeKey: "hubs__gratitude" },
+    ],
+    modules: ["mi"],
+  },
+
+  "study-vault": {
+    canonicalPath: "/study-vault",
+    title: "Study Vault",
+    description: "Evidence-based research summaries for informed wellness.",
+    benefits: [
+      "Access simplified research summaries.",
+      "Understand the science behind practices.",
+      "Make informed choices about your wellness.",
+    ],
+    internalLinks: [
+      { label: "Wisdom Tools", routeKey: "wisdom" },
+      { label: "Tools", routeKey: "tools" },
+    ],
+    modules: [],
+  },
+
+  advanced: {
+    canonicalPath: "/advanced",
+    title: "Advanced Tools",
+    description: "Deep-dive tools for experienced practitioners.",
+    benefits: [
+      "Access sophisticated reflection frameworks.",
+      "Explore metacognitive and contemplative practices.",
+      "Build mastery through advanced techniques.",
+    ],
+    internalLinks: [
+      { label: "Mastery Tools", routeKey: "mastery" },
+      { label: "Wisdom Tools", routeKey: "wisdom" },
+      { label: "12 Practices Path", routeKey: "paths__12-practices" },
+    ],
+    modules: ["mi", "nlp", "12practices"],
+  },
+
+  mastery: {
+    canonicalPath: "/mastery",
+    title: "Mastery Tools",
+    description: "Excellence-oriented tools for peak personal development.",
+    benefits: [
+      "Refine your practice with precision tools.",
+      "Track progress toward mastery goals.",
+      "Integrate multiple domains of growth.",
+    ],
+    internalLinks: [
+      { label: "Advanced Tools", routeKey: "advanced" },
+      { label: "Personal Growth Hub", routeKey: "hubs__personal-growth" },
+      { label: "12 Practices Path", routeKey: "paths__12-practices" },
+    ],
+    modules: ["mi", "12practices"],
+  },
+
+  // ═══════════════════════════════════════════════════════════════════
+  // CORE PAGES
+  // ═══════════════════════════════════════════════════════════════════
+  home: {
+    canonicalPath: "/",
+    title: "The Genuine Love Project",
+    description: "AI-powered mental wellness tools for self-love, healing, and emotional growth.",
+    benefits: [
+      "Access trauma-informed emotional support anytime.",
+      "Build self-awareness with gentle, evidence-based tools.",
+      "Grow at your own pace — no pressure, just support.",
+    ],
+    internalLinks: [
+      { label: "Explore Tools", routeKey: "tools" },
+      { label: "Start: Anxiety Hub", routeKey: "hubs__anxiety" },
+      { label: "Browse Hubs", routeKey: "hubs" },
+    ],
+    modules: [],
+  },
+
+  dashboard: {
+    canonicalPath: "/dashboard",
+    title: "Your Dashboard",
+    description: "Your personalized wellness dashboard with progress tracking.",
+    benefits: [
+      "See your streaks and recent activity.",
+      "Access your favorite tools quickly.",
+      "Track your wellness journey over time.",
+    ],
+    internalLinks: [
+      { label: "Tools", routeKey: "tools" },
+      { label: "Daily Practice Hub", routeKey: "hubs__daily-practice" },
+      { label: "Self-Care Toolkit", routeKey: "self-care-toolkit" },
+    ],
+    modules: [],
+  },
+
+  crisis: {
+    canonicalPath: "/crisis",
+    title: "Crisis Resources",
+    description: "Immediate support and crisis resources — you are not alone.",
+    benefits: [
+      "Access 24/7 crisis hotlines and text lines.",
+      "Find local emergency resources.",
+      "Get immediate grounding techniques.",
+    ],
+    internalLinks: [
+      { label: "Try: Grounding", routeKey: "grounding" },
+    ],
+    modules: [],
+  },
 };
 
 export function deriveRouteKeyFromPath(pathname: string) {
