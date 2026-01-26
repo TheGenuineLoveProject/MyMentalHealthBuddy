@@ -78,7 +78,7 @@ function validateRoutesFile() {
   return { routes: content, routeKeys: new Set(routeKeys), paths: new Set(paths) };
 }
 
-function validateRouteMetaRegistry() {
+function validateRouteMetaRegistry(derivedRouteKeys) {
   console.log('\n📋 Validating routeMetaRegistry.ts');
   
   const registryPath = 'client/src/content/meta/routeMetaRegistry.ts';
@@ -91,22 +91,33 @@ function validateRouteMetaRegistry() {
   const content = fs.readFileSync(registryPath, 'utf-8');
   
   const keyMatches = content.match(/["'`]([a-z0-9-]+)["'`]\s*:/g) || [];
-  const registryKeys = keyMatches.map(m => m.match(/["'`]([^"'`]+)["'`]/)[1]);
+  const registryKeys = new Set(keyMatches.map(m => m.match(/["'`]([^"'`]+)["'`]/)[1]));
   
-  log(PASS, `Found ${registryKeys.length} registry entries`);
+  log(PASS, `Found ${registryKeys.size} registry entries`);
   passCount++;
   
-  return { registryKeys: new Set(registryKeys), content };
+  const orphanedKeys = [...registryKeys].filter(k => !derivedRouteKeys.has(k) && k !== 'home');
+  if (orphanedKeys.length > 0 && orphanedKeys.length <= 10) {
+    log(WARN, 'Registry keys without routes', orphanedKeys.join(', '));
+    warnCount++;
+  } else if (orphanedKeys.length > 10) {
+    log(WARN, `${orphanedKeys.length} registry keys without matching routes`);
+    warnCount++;
+  } else {
+    log(PASS, 'Registry keys align with routes');
+    passCount++;
+  }
+  
+  return { registryKeys, content };
 }
 
-function validateCrisisRoute(routeKeys, paths) {
-  console.log('\n🚨 Validating /crisis routing');
+function validateCrisisRoute(routeKeys, paths, registryKeys) {
+  console.log('\n🚨 Validating /crisis routing (CRITICAL)');
   
-  const hasCrisisKey = routeKeys.has('crisis') || routeKeys.has('crisis-resources');
   const hasCrisisPath = paths.has('/crisis') || paths.has('/crisis-resources');
   
   if (hasCrisisPath) {
-    log(PASS, '/crisis route exists');
+    log(PASS, '/crisis route defined');
     passCount++;
   } else {
     log(FAIL, '/crisis route missing', 'CRITICAL: Crisis page must be accessible');
@@ -115,11 +126,33 @@ function validateCrisisRoute(routeKeys, paths) {
   
   const crisisPagePath = 'client/src/pages/CrisisResources.jsx';
   if (fs.existsSync(crisisPagePath)) {
-    log(PASS, 'CrisisResources.jsx exists');
+    log(PASS, 'CrisisResources.jsx component exists');
     passCount++;
+    
+    const content = fs.readFileSync(crisisPagePath, 'utf-8');
+    const hasCrisisLine = content.includes('988') || content.includes('crisis') || content.includes('hotline');
+    if (hasCrisisLine) {
+      log(PASS, 'Crisis page contains support resources');
+      passCount++;
+    } else {
+      log(WARN, 'Crisis page may need hotline information');
+      warnCount++;
+    }
   } else {
-    log(FAIL, 'CrisisResources.jsx missing');
+    log(FAIL, 'CrisisResources.jsx missing', 'CRITICAL');
     failCount++;
+  }
+  
+  const safetyFooterPath = 'client/src/components/SafetyFooter.jsx';
+  if (fs.existsSync(safetyFooterPath)) {
+    const footerContent = fs.readFileSync(safetyFooterPath, 'utf-8');
+    if (footerContent.includes('/crisis')) {
+      log(PASS, 'SafetyFooter links to /crisis');
+      passCount++;
+    } else {
+      log(WARN, 'SafetyFooter should link to /crisis');
+      warnCount++;
+    }
   }
 }
 
@@ -183,8 +216,8 @@ async function main() {
   console.log('─'.repeat(50));
   
   const { routeKeys, paths } = validateRoutesFile();
-  validateRouteMetaRegistry();
-  validateCrisisRoute(routeKeys, paths);
+  const { registryKeys } = validateRouteMetaRegistry(routeKeys);
+  validateCrisisRoute(routeKeys, paths, registryKeys);
   validateInternalLinks();
   
   const exitCode = printSummary();
