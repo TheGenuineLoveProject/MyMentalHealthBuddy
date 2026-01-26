@@ -6,7 +6,38 @@
  */
 
 import { useState } from "react";
-import { Bookmark, Share2, Check, Sparkles } from "lucide-react";
+
+function BookmarkIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+    </svg>
+  );
+}
+
+function Share2Icon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+    </svg>
+  );
+}
+
+function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
+
+function SparklesIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+    </svg>
+  );
+}
 
 interface ShareCardPromptProps {
   title?: string;
@@ -69,7 +100,7 @@ export function ShareCardPrompt({
           }`}
           data-testid="button-save-tool"
         >
-          {saved ? <Check className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+          {saved ? <CheckIcon className="w-4 h-4" /> : <BookmarkIcon className="w-4 h-4" />}
           <span className="text-sm font-medium">{saved ? "Saved" : "Save this tool"}</span>
         </button>
         <button
@@ -81,7 +112,7 @@ export function ShareCardPrompt({
           }`}
           data-testid="button-share-win"
         >
-          {shared ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+          {shared ? <CheckIcon className="w-4 h-4" /> : <Share2Icon className="w-4 h-4" />}
           <span className="text-sm font-medium">{shared ? "Shared" : "Share a 2-min win"}</span>
         </button>
       </div>
@@ -91,7 +122,7 @@ export function ShareCardPrompt({
   return (
     <div className={`rounded-xl border border-[hsl(var(--sage-200))] dark:border-[hsl(var(--sage-700))] bg-gradient-to-br from-[hsl(var(--sage-50))] to-background p-6 ${className}`} data-testid="card-share-prompt">
       <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="w-5 h-5 text-[hsl(var(--sage-500))]" aria-hidden="true" />
+        <SparklesIcon className="w-5 h-5 text-[hsl(var(--sage-500))]" />
         <h3 className="font-semibold text-foreground">{title}</h3>
       </div>
       
@@ -125,7 +156,7 @@ export function ShareCardPrompt({
           }`}
           data-testid="button-save-progress"
         >
-          {saved ? <Check className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
+          {saved ? <CheckIcon className="w-4 h-4" /> : <BookmarkIcon className="w-4 h-4" />}
           <span>{saved ? "Saved!" : "Save progress"}</span>
         </button>
         <button
@@ -137,7 +168,7 @@ export function ShareCardPrompt({
           }`}
           data-testid="button-share-card"
         >
-          {shared ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+          {shared ? <CheckIcon className="w-4 h-4" /> : <Share2Icon className="w-4 h-4" />}
           <span>{shared ? "Shared!" : "Share"}</span>
         </button>
       </div>
@@ -216,7 +247,7 @@ export function StreakShare({ streakDays, winsCount, onShare, className = "" }: 
         }`}
         data-testid="button-share-streak"
       >
-        {shared ? <Check className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+        {shared ? <CheckIcon className="w-4 h-4" /> : <Share2Icon className="w-4 h-4" />}
         <span>{shared ? "Shared!" : "Share your streak"}</span>
       </button>
       <p className="text-xs text-center text-muted-foreground mt-2">

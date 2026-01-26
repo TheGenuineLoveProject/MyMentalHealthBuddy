@@ -120,3 +120,42 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
   - Content access logging for audit trails
 - Updated frameworks index to export all new modules
 - BenefitsBlock expanded to 20+ wellness pages
+
+### CORE MASTER COMMAND v3 Integration (January 2026)
+
+**Deterministic Patch System Infrastructure:**
+- `client/src/policy/platformPolicy.ts`: Legal/safety constants (18+ age requirement, not therapy/medical text, forbidden claims, crisis text, safe language alternatives)
+- `client/src/content/prompts/staticPrompts.ts`: Deterministic variant text system (refine notices, encouragement, next steps, CTAs)
+- `client/src/content/context/buildPageContext.ts`: Dynamic page metadata builder (title, description, category, benefits, related routes)
+- `client/src/content/benefits/benefitsBank.ts`: Made fully deterministic (removed shuffle randomization), stable benefit selection
+
+**Shared Backbone Components:**
+- `client/src/components/seo/SEO.tsx`: Document title, meta description, OG tags, canonical URLs, noindex control
+- `client/src/components/safety/SafetyFooter.tsx`: 18+ notice, not therapy, crisis link, legal links from platformPolicy
+- `client/src/components/marketing/BenefitsBlock.tsx`: "How this helps" section with checkmark bullets
+- `client/src/components/layout/PageScaffold.tsx`: Unified page wrapper integrating SEO, BenefitsBlock, SafetyFooter with routeKey-based context
+
+**Skills Engine (Reusable Skill Packs):**
+- `client/src/skills/skillRegistry.ts`: Skill type definitions and pack registry
+- `client/src/skills/packs/mi.ts`: OARS prompts, importance/confidence rulers (0-10), change talk prompts - educational only
+- `client/src/skills/packs/twelvePractices.ts`: 12 mind-body-soul transformation practices with reflections, micro-actions, safety notes
+- `client/src/skills/packs/nlpReframe.ts`: 15 safe reframing language templates (no manipulation, no guarantees)
+- `client/src/skills/renderSkill.tsx`: Consistent skill rendering by level (beginner/intermediate/advanced)
+
+**Agent Specifications (agents/):**
+- `layout-agent.md`: Page structure, responsive design, accessibility
+- `seo-agent.md`: SEO metadata compliance
+- `safety-agent.md`: Safety notices, language compliance, forbidden terms
+- `content-agent.md`: Educational content creation guidelines
+- `growth-agent.md`: Ethical viral mechanics, no dark patterns
+- `mcp-tools-spec.md`: Human-triggered MCP tool registry specification
+
+**Executable Scripts:**
+- `scripts/plan-patches.mjs`: Dry-run patch plan from scan results (no file modifications)
+- `scripts/verify-platform.mjs`: Full platform verification (scan + build summary)
+- `scripts/brand-lock.sh`: Git hook compliance script
+
+**Verification Results:**
+- Platform Scan: 558 files, 0 issues
+- Build: Passing
+- LSP: 0 errors
