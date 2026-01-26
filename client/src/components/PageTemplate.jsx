@@ -38,6 +38,8 @@ import styles from './PageTemplate.module.css';
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import PageScaffold from "./layout/PageScaffold.tsx";
 import { getRouteMeta } from "../content/meta/routeMetaRegistry.ts";
+import { getModules } from "../content/modules/modules.js";
+import ModulesPanel from "./modules/ModulesPanel.jsx";
 
 const iconMap = {
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,

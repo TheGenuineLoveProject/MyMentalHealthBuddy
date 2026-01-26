@@ -34,6 +34,40 @@ import {
   Feather, Layers, Search, Edit, CheckCircle, XCircle,
   Grid, List, Quote, Keyboard
 } from 'lucide-react';
+    // client/src/content/routes.js
+    import { normalizePathname, routeKeyFromPathname } from "./routeKey";
+    import { getRouteMeta } from "./routeMetaRegistry";
+
+    // OPTIONAL: if you already have explicit configs, keep them here.
+    // This stays small because RouteMetaRegistry provides defaults.
+    const ROUTE_CONFIG = {
+      "/": { protected: false },
+      "/dashboard": { protected: true },
+      "/premium": { protected: true },
+    };
+
+    export function getRouteConfig(pathname, opts = {}) {
+      const p = normalizePathname(pathname || "/");
+      const routeKey = opts.routeKey || routeKeyFromPathname(p);
+
+      // explicit config wins for behavior flags (protected, etc)
+      const base = ROUTE_CONFIG[p] || ROUTE_CONFIG["/" + routeKey] || {};
+
+      // single source of truth for meta/content pointers
+      const meta = getRouteMeta(routeKey);
+
+      return {
+        pathname: p,
+        routeKey,
+        protected: Boolean(base.protected),
+        // everything below is used by PageTemplate/PageScaffold
+        title: meta.title,
+        description: meta.description,
+        benefits: meta.benefits,
+        internalLinks: meta.internalLinks,
+        modules: meta.modules,
+      };
+    }
 
 // ============================================================================
 // CATEGORY DEFINITIONS
@@ -8139,23 +8173,6 @@ function getNeighborWellnessRoutes(currentRoute) {
     neighbors.push({ route: wellnessRoutes[(idx + 1) % wellnessRoutes.length].route, label: wellnessRoutes[(idx + 1) % wellnessRoutes.length].pageLabel });
   }
   return neighbors.slice(0, 2);
-}
-
-export function getRouteConfig(path) {
-  const directMatch = staticRoutes.find(r => r.route === path);
-  if (directMatch) return injectMicrocopy(directMatch);
-  
-  const aliasMatch = aliasRoutes.find(r => r.route === path);
-  if (aliasMatch) {
-    const target = staticRoutes.find(r => r.route === aliasMatch.aliasOf);
-    return target ? injectMicrocopy({ ...target, route: path, aliasOf: aliasMatch.aliasOf }) : null;
-  }
-  
-  const dynamicMatch = matchDynamicRoute(path);
-  if (dynamicMatch) return injectMicrocopy(dynamicMatch);
-  
-  const notFound = routes.find(r => r.route === '/not-found' || r.route === '/404');
-  return notFound ? { ...notFound, is404: true } : { route: path, title: 'Page Not Found', is404: true };
 }
 
 export function getRoutesByCategory(category) {
