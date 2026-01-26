@@ -1,0 +1,252 @@
+NAME: GLP_NEXT_REPLIT_AI_STEP_05 (Top-50 Platform Processes Pack)
+
+ROLE:
+Replit AI Agent Mode for TheGenuineLoveProject.com (Aaliyah Draws Art LLC, Owner: Maria Landa)
+
+MISSION:
+Upgrade the platform with “Top-50 best processes” (reliability, security, growth, content ops, UX, data, support) in a Replit-safe, human-in-the-loop, non-destructive way.
+
+ABSOLUTE RULES (NO EXCEPTIONS):
+- DRY-RUN FIRST. No edits until “APPLY PATCH 1”.
+- Non-destructive. No deletions/renames. No sweeping refactors.
+- Human-triggered only. No background daemons.
+- Educational/supportive only. No diagnosis/treatment/cure/guarantees.
+- Zero plagiarism. Original writing only.
+- Privacy-minimal. Never log raw journal text server-side.
+- Accessibility WCAG AA. Buttons ≥44px. Keyboard focus visible.
+- Replit safe. One port. No multi-server watchers.
+- Brand lock: do not modify official logo or protected brand assets.
+
+========================================================
+A→Z 360 “TOP-50 PLATFORM PROCESSES” (THE OPERATING SYSTEM)
+========================================================
+You will implement these as SYSTEMS (not just ideas), using small patches.
+
+A. Reliability & Quality (10)
+1) Single Source of Truth routing (routeKey -> canonicalPath)
+2) Build guardrails: typecheck + lint + test + production build
+3) Error boundary UI (friendly fallback)
+4) Runtime logging (structured, scrubbed)
+5) Health checks (api + db + external keys)
+6) Feature flags (env-based, safe toggles)
+7) Rate limiting + request validation
+8) Dependency hygiene (audit + lockfile)
+9) Backups / snapshots (human-triggered)
+10) Release notes + changelog automation
+
+B. Security & Privacy (10)
+11) Security headers (helmet) + CSP baseline
+12) Secure cookies / session settings
+13) CSRF strategy (where relevant)
+14) Input validation (zod) everywhere
+15) Secrets sanity check (no hardcoded keys)
+16) PII minimization & retention plan
+17) Admin access control (role check)
+18) Audit log (admin actions only)
+19) Abuse prevention (spam/rate/ban)
+20) Legal disclaimers + scope guardrails
+
+C. UX & Accessibility (10)
+21) Consistent page shell (layout + spacing rhythm)
+22) Universal components (Button/Card/Section)
+23) Wellness microcopy library (non-repetitive)
+24) Reading-level toggle (Beginner/Intermediate/Advanced)
+25) Empty/loading/error states everywhere
+26) Mobile-first spacing and tap targets
+27) Keyboard navigation + focus rings
+28) Contrast compliance check
+29) Progressive disclosure (reduce overwhelm)
+30) Personalized “Next gentle step” recommender
+
+D. Data & Insights (10)
+31) Event taxonomy (view/start/complete/save)
+32) Privacy-safe analytics (no journaling text)
+33) Admin dashboard: usage + completion + drop-off
+34) Cohort tracking (anonymous IDs)
+35) A/B testing hooks (simple flags)
+36) Feedback collection (1-click + optional comment)
+37) Content performance metrics (SEO/blog)
+38) Uptime/perf metrics (TTFB/LCP basics)
+39) Error rate metrics (client + server)
+40) Data export (user’s own data)
+
+E. Growth, Content Ops, Monetization (10)
+41) SEO foundations (sitemap, robots, meta templates)
+42) Programmatic internal linking (routeKey-based)
+43) Blog engine + repurpose pipeline
+44) Social studio (templates → drafts → approval → export)
+45) Email capture + lead magnet flow (CRM-ready)
+46) Pricing/tiers pattern (even if not live yet)
+47) Stripe readiness (webhook guardrails, test mode)
+48) Referral + share flows (gentle, non-manipulative)
+49) Trust pages (About, Safety, Privacy, Terms, Crisis)
+50) Support + contact workflow (ticket + FAQ)
+
+========================================================
+THIS CYCLE’S NEXT “HIGHEST IMPACT” BUILD (P0)
+========================================================
+✅ P0: PLATFORM SAFETY + TRUST FOUNDATION PACK
+Because it reduces risk, increases credibility, and unblocks growth.
+
+Deliverables in P0:
+1) /safety page (supportive scope, what we are/aren’t)
+2) /privacy page (simple privacy summary)
+3) /terms page (basic terms)
+4) /crisis page (resources + “get help now” language)
+5) Global SafetyFooter wired to riskLevel
+
+All copy must be ORIGINAL, non-clinical, and liability-safe.
+
+========================================================
+STEP 0 — DRY-RUN DISCOVERY (REQUIRED)
+========================================================
+Find:
+- Router file(s)
+- Existing page folder conventions
+- Existing Footer or Layout component
+- Any existing legal pages/routes
+- Any existing /crisis or /resources page
+
+OUTPUT:
+- Exact file paths
+- Proposed patch list with max 5 files per patch
+STOP and wait for: “APPLY PATCH 1”.
+
+========================================================
+PATCH 1 (MAX 5 FILES): SAFETY FOOTER + ROUTE SCAFFOLD
+========================================================
+Goal: Create universal SafetyFooter and route placeholders.
+
+Files (example targets; adjust to your repo after discovery):
+1) client/src/components/SafetyFooter.tsx         (NEW or confirm existing)
+2) client/src/pages/trust/SafetyPage.tsx          (NEW)
+3) client/src/pages/trust/CrisisPage.tsx          (NEW)
+4) client/src/pages/trust/PrivacyPage.tsx         (NEW)
+5) Router file                                   (EDIT to add routes)
+
+SafetyFooter requirements:
+- Props: riskLevel ("low"|"medium"|"high")
+- Always: educational/supportive disclaimer + “go slow” line
+- High risk: show crisis link prominently
+- Never: “treat/cure/diagnose/therapy” language
+
+Validation:
+- Routes load without 404
+- No console errors
+STOP.
+
+WAIT for: APPLY PATCH 1
+
+========================================================
+PATCH 2 (MAX 5 FILES): TERMS PAGE + META TEMPLATE
+========================================================
+Goal: Add /terms and consistent meta tags.
+
+Files:
+1) client/src/pages/trust/TermsPage.tsx           (NEW)
+2) client/src/components/Meta.tsx                 (NEW or existing enhancement)
+3) Router file                                   (EDIT)
+4) client/src/content/microcopy/legalMicrocopy.ts (NEW)
+5) SafetyFooter placement in Layout              (EDIT layout file)
+
+Meta rules:
+- Title per page
+- Meta description per page
+- OG tags minimal
+
+Validation:
+- /terms loads
+- Page titles update
+STOP.
+
+WAIT for: APPLY PATCH 2
+
+========================================================
+PATCH 3 (MAX 5 FILES): “READING LEVEL TOGGLE” GLOBAL SYSTEM
+========================================================
+Goal: Beginner/Intermediate/Advanced toggle that affects copy site-wide.
+
+Files:
+1) client/src/state/readingLevelStore.ts          (NEW)
+2) client/src/components/ReadingLevelToggle.tsx   (NEW)
+3) client/src/components/Microcopy.tsx            (EDIT)
+4) client/src/content/microcopy/index.ts          (EDIT)
+5) Layout component                              (EDIT to add toggle optional)
+
+Rules:
+- Default = Beginner
+- Persist in localStorage
+- Toggle appears on Tools + Blog + Learning pages (not on login/admin unless desired)
+
+Validation:
+- Toggle changes copy (visible)
+STOP.
+
+WAIT for: APPLY PATCH 3
+
+========================================================
+PATCH 4 (MAX 5 FILES): ERROR BOUNDARY + FRIENDLY FALLBACKS
+========================================================
+Goal: If anything breaks, user sees calm guidance not a crash.
+
+Files:
+1) client/src/components/ErrorBoundary.tsx         (NEW)
+2) client/src/pages/ErrorFallback.tsx              (NEW)
+3) client/src/main.tsx or App root                 (EDIT to wrap)
+4) client/src/content/microcopy/errorMicrocopy.ts  (NEW)
+5) Optional: server error handler                  (EDIT if present)
+
+Validation:
+- Simulate error shows fallback page
+STOP.
+
+WAIT for: APPLY PATCH 4
+
+========================================================
+PATCH 5 (MAX 5 FILES): TOP-50 PROCESS TRACKER DASHBOARD (ADMIN)
+========================================================
+Goal: Admin sees A→Z completeness status.
+
+Files:
+1) server/routes/adminHealth.ts                    (NEW)
+2) client/src/pages/admin/SystemHealth.tsx         (NEW)
+3) client/src/content/processes/top50ProcessMap.ts (NEW)
+4) Router + admin nav                              (EDIT)
+5) Minimal auth guard check                         (EDIT if exists)
+
+Output:
+- “50 process checklist” with status: Not started / In progress / Done
+- Links to docs / patch prompts
+- No sensitive data exposed
+
+Validation:
+- Admin page loads
+STOP.
+
+WAIT for: APPLY PATCH 5
+
+========================================================
+CONTINUATION LOOP (FOREVER, ONE STEP AT A TIME)
+========================================================
+After Patch 5, repeat this loop:
+1) Pick the next highest-impact process from Top-50
+2) DRY-RUN plan
+3) Apply in patches of 5 files max
+4) Validate build + UX
+5) Update process tracker status
+6) STOP
+
+========================================================
+HOW TO RUN THIS NOW
+========================================================
+Run STEP 0 discovery now and PRINT:
+- router path
+- layout path
+- pages folder path
+- existing trust/legal pages (if any)
+
+Then output:
+PATCH 1 exact file paths + code plan
+and STOP.
+
+END.
