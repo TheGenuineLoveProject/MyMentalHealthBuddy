@@ -122,6 +122,66 @@
 }
 
 /* =========================================
+   Button Sizing Standards (WCAG AA: min 44px)
+   ========================================= */
+.btn-sacred {
+  min-height: 44px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.btn-sacred-lg {
+  min-height: 52px;
+  padding: 14px 32px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 14px;
+}
+
+.btn-sacred-primary {
+  background: var(--sacred-teal);
+  color: var(--sacred-white);
+  border: none;
+}
+
+.btn-sacred-primary:hover {
+  background: #274e4e;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(47, 93, 93, 0.25);
+}
+
+.btn-sacred-secondary {
+  background: transparent;
+  color: var(--sacred-teal);
+  border: 2px solid var(--sacred-teal);
+}
+
+.btn-sacred-secondary:hover {
+  background: var(--sacred-teal);
+  color: var(--sacred-white);
+}
+
+/* Spacing Scale Utilities */
+.spacing-relaxed {
+  --spacing-unit: 1.5rem;
+}
+
+.spacing-comfortable {
+  --spacing-unit: 2rem;
+}
+
+.spacing-spacious {
+  --spacing-unit: 3rem;
+}
+
+/* =========================================
    GSAP Animation Keyframes
    ========================================= */
 @keyframes sacred-breathe {

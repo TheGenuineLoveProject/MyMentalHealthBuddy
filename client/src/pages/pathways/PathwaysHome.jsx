@@ -89,21 +89,21 @@ export default function PathwaysHome() {
       />
       
       <main className="container mx-auto px-4 py-12 max-w-5xl">
-        <header className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-4">
+        <header className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
             <Target className="w-4 h-4" />
             <span>Personalized Journeys</span>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
             Choose Your <span className="text-primary">Growth Path</span>
           </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Curated wellness journeys to guide you through meaningful transformation. 
             Each pathway combines tools, practices, and insights tailored to your goals.
           </p>
         </header>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-12">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
           {PATHWAYS.map((pathway) => {
             const Icon = pathway.icon;
             return (
@@ -131,12 +131,11 @@ export default function PathwaysHome() {
                   <Link href={`/pathways/${pathway.id}`}>
                     <Button 
                       variant="ghost" 
-                      size="sm" 
-                      className="w-full mt-4 group-hover:bg-primary group-hover:text-white"
+                      className="w-full mt-4 min-h-[44px] px-6 py-3 text-base font-medium group-hover:bg-primary group-hover:text-white transition-all"
                       data-testid={`button-start-${pathway.id}`}
                     >
                       Start Journey
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </Link>
                 </CardContent>
@@ -145,16 +144,19 @@ export default function PathwaysHome() {
           })}
         </div>
 
-        <section className="bg-muted/50 rounded-2xl p-8 text-center">
-          <BookOpen className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h2 className="text-xl font-semibold mb-2">Not Sure Where to Start?</h2>
-          <p className="text-muted-foreground mb-4 max-w-md mx-auto">
+        <section className="bg-muted/50 rounded-3xl p-10 md:p-12 text-center">
+          <BookOpen className="w-12 h-12 text-primary mx-auto mb-6" />
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">Not Sure Where to Start?</h2>
+          <p className="text-lg text-muted-foreground mb-6 max-w-lg mx-auto leading-relaxed">
             Take our quick assessment to discover which pathway aligns with your current needs and goals.
           </p>
           <Link href="/pathways/onboarding">
-            <Button data-testid="button-take-assessment">
+            <Button 
+              className="min-h-[48px] px-8 py-4 text-base font-semibold"
+              data-testid="button-take-assessment"
+            >
               Start Your Journey
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
         </section>
