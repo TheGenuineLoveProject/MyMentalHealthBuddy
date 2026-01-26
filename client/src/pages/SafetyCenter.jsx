@@ -68,15 +68,14 @@ export default function SafetyCenter() {
                   If you or someone you know is in immediate danger, please call emergency services (911) 
                   or go to your nearest emergency room.
                 </p>
-                <Button
-                  as="a"
+                <a
                   href="tel:911"
-                  className="min-h-[48px] px-6 py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white"
+                  className="inline-flex items-center min-h-[48px] px-6 py-3 rounded-lg bg-red-600 hover:bg-red-700 text-white font-medium transition-colors"
                   data-testid="button-call-911"
                 >
                   <Phone className="w-5 h-5 mr-2" />
                   Call 911
-                </Button>
+                </a>
               </div>
             </div>
           </div>

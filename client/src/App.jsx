@@ -11,6 +11,8 @@ import { AutopilotPage } from "./pages/_autopilot.jsx";
 import AgeConsentGate from "./components/AgeConsentGate.jsx";
 import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
+import ConsentBanner from "./components/ConsentBanner.jsx";
+import FeedbackWidget from "./components/FeedbackWidget.jsx";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
@@ -173,6 +175,17 @@ const OrderHistory = lazy(() => import("./pages/account/OrderHistory.jsx"));
 const PricingPage = lazy(() => import("./pages/PricingPage.jsx"));
 const RefundHelp = lazy(() => import("./pages/help/RefundHelp.jsx"));
 const LegalPage = lazy(() => import("./pages/LegalPage.jsx"));
+
+// Batch 14 - Trust, Safety, Community, Learning (P351-P400)
+const SafetyCenter = lazy(() => import("./pages/SafetyCenter.jsx"));
+const DataRetention = lazy(() => import("./pages/DataRetention.jsx"));
+const CommunityGuidelines = lazy(() => import("./pages/CommunityGuidelines.jsx"));
+const PublicRoadmap = lazy(() => import("./pages/PublicRoadmap.jsx"));
+const CreatorProfile = lazy(() => import("./pages/CreatorProfile.jsx"));
+const PressKit = lazy(() => import("./pages/PressKit.jsx"));
+const CourseCatalog = lazy(() => import("./pages/CourseCatalog.jsx"));
+const PracticeLibrary = lazy(() => import("./pages/PracticeLibrary.jsx"));
+const RolesPermissions = lazy(() => import("./pages/admin/RolesPermissions.jsx"));
 
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
@@ -783,11 +796,24 @@ export default function App() {
               <Route path="/accessibility">{() => <ConfigRoute route="/accessibility" />}</Route>
               <Route path="/cookies">{() => <ConfigRoute route="/cookies" />}</Route>
 
+              {/* Batch 14 - Trust, Safety, Community, Learning */}
+              <Route path="/safety-center">{() => <SafetyCenter />}</Route>
+              <Route path="/data-retention">{() => <DataRetention />}</Route>
+              <Route path="/community-guidelines">{() => <CommunityGuidelines />}</Route>
+              <Route path="/roadmap">{() => <PublicRoadmap />}</Route>
+              <Route path="/our-story">{() => <CreatorProfile />}</Route>
+              <Route path="/press">{() => <PressKit />}</Route>
+              <Route path="/courses">{() => <CourseCatalog />}</Route>
+              <Route path="/practices">{() => <PracticeLibrary />}</Route>
+              <Route path="/admin/roles">{() => <ProtectedRoute><AdminGuard><RolesPermissions /></AdminGuard></ProtectedRoute>}</Route>
+
               {/* Fallback - Config Driven Not Found */}
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>
             </Switch>
           </Suspense>
           </main>
+          <ConsentBanner />
+          <FeedbackWidget />
           </ErrorBoundary>
         </ReadingLevelProvider>
       </AuthProvider>
