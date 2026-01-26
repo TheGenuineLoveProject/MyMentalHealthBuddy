@@ -1,0 +1,205 @@
+You are Replit AI Agent Mode.
+
+NEXT 1-CLICK UPGRADE: “Auto-Hydrate the Registry”
+Goal: you stop manually adding 500+ routes.
+We generate missing routeKey entries from your existing route list/files, while keeping your hand-written “special” overrides intact.
+
+OUTCOME:
+- REGISTRY stays your single source of truth
+- Any missing routeKey gets a safe auto-entry (canonicalPath + title + defaults)
+- You can “promote” a route to a special override by editing one entry
+- No duplication, no broken links, build stays green
+
+DO THIS IN ORDER:
+
+0) VERIFY CURRENT BUILD IS GREEN
+Shell:
+  npm run build
+If it fails, fix first. No new features until build passes.
+
+1) CREATE A REGISTRY GENERATOR SCRIPT (human-triggered)
+Create: scripts/gen-route-registry.mjs
+PASTE:
+
+---BEGIN PASTE (scripts/gen-route-registry.mjs)---
+import fs from "node:fs";
+import path from "node:path";
+
+const ROOT = process.cwd();
+const ROUTES_FILE = path.join(ROOT, "client", "src", "content", "allRoutes.json");
+const OUT_FILE = path.join(ROOT, "client", "src", "content", "meta", "routeMeta.autogen.ts");
+const LOCK_FILE = path.join(ROOT, "client", "src", "content", "meta", "routeMeta.lock.json");
+
+function titleizeFromPath(p) {
+  const clean = (p || "/")
+    .split("?")[0]
+    .split("#")[0]
+    .replace(/^\/+/, "")
+    .replace(/\/+$/, "");
+  if (!clean) return "Home";
+  return clean
+    .split("/")
+    .filter(Boolean)
+    .map((s) => s.replace(/[-_]+/g, " "))
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+}
+
+function deriveRouteKeyFromPath(p) {
+  const clean = (p || "/")
+    .split("?")[0]
+    .split("#")[0]
+    .trim()
+    .replace(/^\/+/, "")
+    .replace(/\/+$/, "");
+  if (!clean) return "home";
+  return clean
+    .split("/")
+    .filter(Boolean)
+    .map((seg) => (seg.startsWith(":") ? seg.replace(":", "param_") : seg))
+    .join("__");
+}
+
+function readJson(file, fallback) {
+  try {
+    return JSON.parse(fs.readFileSync(file, "utf8"));
+  } catch {
+    return fallback;
+  }
+}
+
+function main() {
+  const routes = readJson(ROUTES_FILE, []);
+  if (!Array.isArray(routes) || routes.length === 0) {
+    console.error(`Missing or empty ${ROUTES_FILE}. Create it in step 2.`);
+    process.exit(1);
+  }
+
+  const locked = readJson(LOCK_FILE, { locked: [] });
+  const lockedSet = new Set((locked.locked || []).map(String));
+
+  const DEFAULT_BENEFITS = [
+    "Practice one small, doable step (no pressure).",
+    "Turn insight into a simple plan you can repeat.",
+    "Use calm tools that support self-awareness and regulation.",
+  ];
+
+  // Build autogen entries for all non-locked routes
+  const autogen = {};
+  for (const canonicalPath of routes) {
+    const rk = deriveRouteKeyFromPath(canonicalPath);
+    if (lockedSet.has(rk)) continue;
+
+    autogen[rk] = {
+      canonicalPath,
+      title: titleizeFromPath(canonicalPath),
+      description: "A gentle, practical space to build supportive habits through reflection and skill practice.",
+      benefits: DEFAULT_BENEFITS,
+      internalLinks: [],
+      modules: [],
+    };
+  }
+
+  const lines = [];
+  lines.push(`// AUTO-GENERATED FILE. DO NOT EDIT BY HAND.`);
+  lines.push(`// Run: node scripts/gen-route-registry.mjs`);
+  lines.push(`// To keep manual overrides, add routeKeys to routeMeta.lock.json`);
+  lines.push(``);
+  lines.push(`export const AUTOGEN_REGISTRY = ${JSON.stringify(autogen, null, 2)} as const;`);
+  lines.push(``);
+
+  fs.writeFileSync(OUT_FILE, lines.join("\n"), "utf8");
+  console.log(`Wrote ${Object.keys(autogen).length} entries -> ${OUT_FILE}`);
+}
+
+main();
+---END PASTE---
+
+2) CREATE allRoutes.json (single list of canonical paths)
+Create: client/src/content/allRoutes.json
+
+IF you already have a routes list somewhere, use it.
+If you don’t, start with a minimal seed list and expand later.
+
+PASTE THIS (you can add more paths anytime):
+
+---BEGIN PASTE (client/src/content/allRoutes.json)---
+[
+  "/",
+  "/hubs/anxiety",
+  "/tools/reframe",
+  "/paths/12-practices"
+]
+---END PASTE---
+
+3) CREATE LOCK FILE (protect your hand-written “special” routes)
+Create: client/src/content/meta/routeMeta.lock.json
+PASTE:
+
+---BEGIN PASTE (client/src/content/meta/routeMeta.lock.json)---
+{
+  "locked": [
+    "home",
+    "hubs__anxiety",
+    "tools__reframe",
+    "paths__12-practices"
+  ]
+}
+---END PASTE---
+
+4) GENERATE AUTOGEN REGISTRY
+Shell:
+  node scripts/gen-route-registry.mjs
+
+This creates:
+  client/src/content/meta/routeMeta.autogen.ts
+
+5) MERGE AUTOGEN INTO YOUR SINGLE SOURCE OF TRUTH (NO BREAKING)
+Edit: client/src/content/meta/routeMetaRegistry.ts
+
+A) Add import at top:
+  import { AUTOGEN_REGISTRY } from "./routeMeta.autogen";
+
+B) Rename your manual REGISTRY constant to MANUAL_REGISTRY (keep all your overrides):
+  const MANUAL_REGISTRY = { ...existing manual entries... }
+
+C) Replace your existing REGISTRY usage with MERGED:
+  const REGISTRY = { ...AUTOGEN_REGISTRY, ...MANUAL_REGISTRY };
+
+IMPORTANT: manual overrides win.
+
+So your file should have:
+- AUTOGEN_REGISTRY import
+- MANUAL_REGISTRY (your curated “special” routes)
+- REGISTRY = { ...AUTOGEN_REGISTRY, ...MANUAL_REGISTRY }
+
+6) ADD npm scripts (optional but recommended)
+Edit: package.json
+Under "scripts" add:
+  "gen:registry": "node scripts/gen-route-registry.mjs"
+
+7) RUN BUILD
+Shell:
+  npm run build
+
+If build fails with TS module resolution:
+- Ensure routeMeta.autogen.ts exists
+- Ensure import path is exactly "./routeMeta.autogen"
+- Ensure no circular imports
+
+8) QUICK TEST
+Dev server:
+- Visit any route that wasn’t manually defined
+- It should still render with safe defaults (title/description/benefits)
+- internalLinks empty
+- modules empty unless you opt-in manually
+
+CONSTRAINTS (must hold):
+- routeKey is the only identifier in internalLinks
+- canonicalPath resolved from registry
+- PageTemplate renders all common UI once
+- No page files add their own UI blocks
+
+NEXT AFTER THIS:
+“Auto-suggest internalLinks”
+- script that adds 3 best next links based on hub/tool taxonomy (still registry-driven)
