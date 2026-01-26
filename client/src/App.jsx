@@ -117,6 +117,9 @@ const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
 const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
 const SocialCalendar = lazy(() => import("./pages/admin/SocialCalendar.jsx"));
 const SocialAnalytics = lazy(() => import("./pages/admin/SocialAnalytics.jsx"));
+const BillingViewer = lazy(() => import("./pages/admin/BillingViewer.jsx"));
+const Sessions = lazy(() => import("./pages/account/Sessions.jsx"));
+const DeleteAccount = lazy(() => import("./pages/account/DeleteAccount.jsx"));
 const ValuesFinderPage = lazy(() => import("./pages/ValuesFinderPage.jsx"));
 const BoundariesPage = lazy(() => import("./pages/BoundariesPage.jsx"));
 const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
@@ -621,6 +624,15 @@ export default function App() {
               </Route>
               <Route path="/admin/social/analytics">
                 <AdminGuard><SocialAnalytics /></AdminGuard>
+              </Route>
+              <Route path="/admin/billing">
+                <AdminGuard><BillingViewer /></AdminGuard>
+              </Route>
+              <Route path="/account/sessions">
+                <ProtectedRoute><Sessions /></ProtectedRoute>
+              </Route>
+              <Route path="/account/delete">
+                <ProtectedRoute><DeleteAccount /></ProtectedRoute>
               </Route>
               <Route path="/content-admin">
                 <AdminGuard><ContentAdminDashboard /></AdminGuard>

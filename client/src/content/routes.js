@@ -7173,6 +7173,40 @@ const rawRoutes = [
       secondaryCta: { label: 'Security', href: '#security' }
     }
   },
+  {
+    route: '/account/sessions',
+    routeKey: 'account_sessions',
+    category: 'account',
+    pageLabel: 'Active Sessions',
+    title: 'Active Sessions — The Genuine Love Project',
+    description: 'Manage your signed-in devices and active sessions.',
+    protected: true,
+    hero: {
+      eyebrow: 'Security',
+      title: 'Active',
+      titleHighlight: 'Sessions.',
+      subtitle: 'View and manage devices signed into your account.',
+      primaryCta: { label: 'View Sessions', href: '#sessions' },
+      secondaryCta: { label: 'Back to Settings', href: '/account/settings' }
+    }
+  },
+  {
+    route: '/account/delete',
+    routeKey: 'account_delete',
+    category: 'account',
+    pageLabel: 'Delete Account',
+    title: 'Delete Account — The Genuine Love Project',
+    description: 'Request permanent account deletion.',
+    protected: true,
+    hero: {
+      eyebrow: 'Account',
+      title: 'Delete',
+      titleHighlight: 'Account.',
+      subtitle: 'This action is permanent and cannot be undone.',
+      primaryCta: { label: 'Contact Support', href: '/support' },
+      secondaryCta: { label: 'Back to Settings', href: '/account/settings' }
+    }
+  },
   
   // =========================================================================
   // ADMIN (3 routes)
@@ -7220,6 +7254,23 @@ const rawRoutes = [
       subtitle: 'System controls and configuration.',
       primaryCta: { label: 'View Controls', href: '#controls' },
       secondaryCta: { label: 'System Status', href: '/health' }
+    }
+  },
+  {
+    route: '/admin/billing',
+    routeKey: 'admin_billing',
+    category: 'admin',
+    pageLabel: 'Billing Overview',
+    title: 'Billing Overview — Admin — The Genuine Love Project',
+    description: 'View subscription and billing statistics.',
+    protected: true,
+    hero: {
+      eyebrow: 'Administration',
+      title: 'Billing',
+      titleHighlight: 'Overview.',
+      subtitle: 'Read-only view of subscription data and metrics.',
+      primaryCta: { label: 'View Stats', href: '#stats' },
+      secondaryCta: { label: 'Back to Admin', href: '/admin' }
     }
   },
   

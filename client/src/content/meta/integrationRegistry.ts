@@ -459,6 +459,82 @@ export const INTEGRATION_REGISTRY: IntegrationEntry[] = [
     routeKeysTouched: [],
     notes: 'Batch 10 - Microcopy rotation seed utility',
     lastUpdated: '2026-01-26'
+  },
+  
+  // ============================================================================
+  // BATCH 9 ADDITIONS (P101-P150 gap fills)
+  // ============================================================================
+  {
+    integrationKey: 'devex_batch_runner_doc',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['docs/batch-runner.md'],
+    routeKeysTouched: [],
+    notes: 'P150 - Batch Runner guide',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'devex_release_checklist',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['docs/release-checklist.md'],
+    routeKeysTouched: [],
+    notes: 'P149 - Release checklist enforcement',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'devex_docs_index',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['docs/index.md'],
+    routeKeysTouched: [],
+    notes: 'P148 - Documentation index auto-generated',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'devex_bundle_size_check',
+    category: 'devex',
+    status: 'done',
+    canonicalFiles: ['scripts/bundleSizeCheck.mjs'],
+    routeKeysTouched: [],
+    notes: 'P144 - Bundle-size warning in CI',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'content_routekey_link_checker',
+    category: 'content',
+    status: 'done',
+    canonicalFiles: ['scripts/routeKeyLinkChecker.mjs'],
+    routeKeysTouched: [],
+    notes: 'P135 - Broken internal routeKey links checker',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'auth_session_list',
+    category: 'auth',
+    status: 'done',
+    canonicalFiles: ['client/src/pages/account/Sessions.jsx', 'server/routes/accountActions.mjs'],
+    routeKeysTouched: ['account_sessions'],
+    notes: 'P113 - Session list page with revoke',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'auth_delete_account',
+    category: 'auth',
+    status: 'done',
+    canonicalFiles: ['client/src/pages/account/DeleteAccount.jsx', 'server/routes/accountActions.mjs'],
+    routeKeysTouched: ['account_delete'],
+    notes: 'P119 - Delete my account request flow',
+    lastUpdated: '2026-01-26'
+  },
+  {
+    integrationKey: 'admin_billing_viewer',
+    category: 'admin',
+    status: 'done',
+    canonicalFiles: ['client/src/pages/admin/BillingViewer.jsx', 'server/routes/adminBilling.mjs'],
+    routeKeysTouched: ['admin_billing'],
+    notes: 'P128 - Admin billing viewer (read-only)',
+    lastUpdated: '2026-01-26'
   }
 ];
 

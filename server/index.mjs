@@ -99,6 +99,7 @@ import perplexityRouter from "./routes/perplexity.mjs";
 import feedRouter from "./routes/feed.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import { contentRouter } from "./routes/content.mjs";
+import adminBillingRouter from "./routes/adminBilling.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -248,6 +249,7 @@ app.use('/api/mood', moodRouter);
 app.use('/api/health', healthRouter);
 app.use('/api/metrics', metricsRouter);
 app.use('/api/admin/audit-logs', auditLogsRouter);
+app.use('/api/admin/billing', adminBillingRouter);
 app.use('/api/account', accountRouter);
 app.use('/api/ai', requireAdult, aiRouter);
 app.use('/api/analytics', analyticsRouter);
