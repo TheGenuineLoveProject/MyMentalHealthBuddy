@@ -4,6 +4,21 @@ import { AUTOGEN_REGISTRY } from "./routeMeta.autogen";
 
 export type ModuleKey = "mi" | "nlp" | "12practices";
 
+export function slugify(s: string): string {
+  return (s || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+export function toHubKey(topic: string): string {
+  return `hub__${slugify(topic)}`;
+}
+
+export function toToolKey(name: string): string {
+  return `tool__${slugify(name)}`;
+}
+
 export type InternalLink = {
   label: string;
   routeKey: string; // <-- routeKey ONLY (no raw paths)

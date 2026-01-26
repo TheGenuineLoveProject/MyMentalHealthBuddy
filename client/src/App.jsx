@@ -132,6 +132,9 @@ const SystemMapPage = lazy(() => import("./pages/SystemMapPage.jsx"));
 const ReframePage = lazy(() => import("./pages/tools/ReframePage.jsx"));
 const TwelveStepsPage = lazy(() => import("./pages/TwelveStepsPage.tsx"));
 const BehaviorChangePage = lazy(() => import("./pages/BehaviorChangePage.tsx"));
+const SavedLibrary = lazy(() => import("./pages/library/SavedLibrary.jsx"));
+const GentleProgressDashboard = lazy(() => import("./pages/dashboard/ProgressDashboard.jsx"));
+const TopicHubPage = lazy(() => import("./pages/hubs/TopicHubPage.jsx"));
 
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
@@ -225,6 +228,12 @@ export default function App() {
               </Route>
               <Route path="/settings">
                 <ProtectedRoute><Settings /></ProtectedRoute>
+              </Route>
+              <Route path="/library/saved">
+                <ProtectedRoute><SavedLibrary /></ProtectedRoute>
+              </Route>
+              <Route path="/dashboard/progress">
+                <ProtectedRoute><GentleProgressDashboard /></ProtectedRoute>
               </Route>
               <Route path="/wellness">
                 <WellnessRoute><Wellness /></WellnessRoute>

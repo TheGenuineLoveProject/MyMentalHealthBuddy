@@ -52,6 +52,7 @@
     "scan:incomplete": "node scripts/scanIncomplete.mjs",
     "scan:pages": "node scripts/scanIncompletePages.mjs",
     "scan:platform": "node scripts/scanPlatform.mjs",
+    "registry:suggest": "node scripts/generate-registry.mjs",
     "platform:scan": "node scripts/scanPlatform.mjs",
     "platform:scan:json": "node scripts/scanPlatform.mjs --json",
     "platform:scan:verbose": "node scripts/scanPlatform.mjs --verbose",
