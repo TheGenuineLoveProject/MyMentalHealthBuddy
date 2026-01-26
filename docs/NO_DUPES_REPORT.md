@@ -12,11 +12,11 @@
 |--------|-------|
 | Build Status | ✅ Passing (25s) |
 | TODO/FIXME Count | 0 |
-| Already Implemented (P051-P100) | 19 |
-| Remaining TODO | 31 |
+| Already Implemented (P051-P100) | 20 |
+| Remaining TODO | 30 |
 | Blockers | None |
 
-### Already Done (Skip List)
+### Already Done (Skip List) — 20 items
 - P051 ErrorBoundary.jsx
 - P052 errorHandler.mjs
 - P058 health.mjs
@@ -34,6 +34,7 @@
 - P081 leads.mjs
 - P087 SEO.tsx (OG)
 - P090 sitemap.xml, robots.txt
+- P091 Doctor script (**NEW** - Patch 32)
 - P098 adminAuth.mjs
 - P099 tokens.css
 

@@ -31,8 +31,8 @@
 | Security (P061-P070) | 6 | 4 | 10 |
 | Content (P071-P080) | 3 | 7 | 10 |
 | Growth/CRM (P081-P090) | 3 | 7 | 10 |
-| Ops/DevEx (P091-P100) | 2 | 8 | 10 |
-| **Total** | **19** | **31** | **50** |
+| Ops/DevEx (P091-P100) | 3 | 7 | 10 |
+| **Total** | **20** | **30** | **50** |
 
 ---
 
@@ -108,7 +108,7 @@
 
 | ID | Process | Status | Files |
 |----|---------|--------|-------|
-| P091 | One-command "doctor" script | TODO | |
+| P091 | One-command "doctor" script | ✅ DONE | scripts/doctor.mjs (Patch 32) |
 | P092 | One-command "safe apply" script | TODO | |
 | P093 | Repo guardrails (pre-commit) | TODO | |
 | P094 | Dependency upgrade workflow | TODO | |
@@ -125,8 +125,8 @@
 
 Based on priority ranking:
 1. **P054** - Structured logging (foundations for all observability)
-2. **P091** - Doctor script (accelerates future work)
-3. **P064** - Secrets scan script (security hygiene)
+2. **P064** - Secrets scan script (security hygiene)
+3. **P092** - Safe apply script (patch runner)
 
 ---
 
