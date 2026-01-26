@@ -1,7 +1,7 @@
 # Duplicate Scan Report
 
-**Scanned**: 1140 files
-**Timestamp**: 2026-01-26T07:00:18.218Z
+**Scanned**: 1135 files
+**Timestamp**: 2026-01-26T07:02:21.025Z
 
 ## Summary
 
@@ -9,7 +9,7 @@
 |------|-------|
 | Exact Duplicates | 4 groups |
 | Name Duplicates | 49 groups |
-| Shadow Copies | 5 files |
+| Shadow Copies | 0 files |
 | Risky Directories | 5 |
 
 ## Exact Duplicates (Top 10)
@@ -105,14 +105,6 @@
 
 - `client/manifest.json`
 - `client/public/manifest.json`
-
-## Shadow Copies
-
-- `client/src/copy/aiChat.ts` (Risk: 7)
-- `client/src/copy/disclaimers.ts` (Risk: 7)
-- `client/src/copy/journal.ts` (Risk: 7)
-- `client/src/copy/mood.ts` (Risk: 7)
-- `client/src/copy/onboarding.ts` (Risk: 7)
 
 ## Risky Directories
 

@@ -95,8 +95,16 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 | Integration-201-250 | 🔒 Locked (Mobile/Voice/Community/Notifications) |
 
 ### Key Documentation
-- `docs/processes.md`: Process tracking
+- `docs/process-engine/`: Process batches and tracking
 - `docs/integrations.md`: Integration tracking
+- `docs/registry/`: Feature map, endpoints, routes, schema
+- `docs/duplicates/`: Duplicate scan and collision reports
 - `docs/slos.md`: SLO definitions
 - `docs/incident-response.md`: Incident playbook
 - `docs/security-review.md`: Security checklist
+
+### Scan Commands
+- `npm run dup-scan`: Duplicate + collision detection
+- `npm run arch-scan`: Architecture registry generation
+- `npm run dedupe-plan`: Generate deduplication plan
+- `npm run dedupe-safe`: Safe quarantine (no deletion)

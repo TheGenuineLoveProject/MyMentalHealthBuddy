@@ -1,5 +1,5 @@
 {
-  "scannedFiles": 1140,
+  "scannedFiles": 1135,
   "exactDuplicates": [
     {
       "hash": "235c0d03f583f08de1bf3bcf2521669a209dcbeeb80a536a37d96f9832b58a85",
@@ -1109,38 +1109,7 @@
       "maxRisk": 0
     }
   ],
-  "shadowCopies": [
-    {
-      "path": "client/src/copy/aiChat.ts",
-      "normalizedHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "rawHash": "c8cde231124fed09f41c32bbfe7a71e23a260bb0682e1a7e85f9cd3a6f1d41a2",
-      "riskScore": 7
-    },
-    {
-      "path": "client/src/copy/disclaimers.ts",
-      "normalizedHash": "708e80f2424f7b48684323bef9222d9030ef3bd240ddad25791a7168bef2c30b",
-      "rawHash": "e43cc61c6fab1ed2bdfc4a36e7a60865d6a62a7e4d19286a8d609f774b9e8430",
-      "riskScore": 7
-    },
-    {
-      "path": "client/src/copy/journal.ts",
-      "normalizedHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "rawHash": "081582d63e36351b50aeaa2c75356fc666b614fb614762db58566b9b4c80f702",
-      "riskScore": 7
-    },
-    {
-      "path": "client/src/copy/mood.ts",
-      "normalizedHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "rawHash": "e4b5f7dcb823117bd3bef72677e713beedbef2d43477afb735fbed9a339b8aaa",
-      "riskScore": 7
-    },
-    {
-      "path": "client/src/copy/onboarding.ts",
-      "normalizedHash": "0709e3f8317ece0c7e23b6e0cd67ca6de2ca05770f361b1528e2a17a2f582f67",
-      "rawHash": "f829563ef62a7154173dac1d05a78a3c01f41d30163ba61cdd7a66c33f39e170",
-      "riskScore": 7
-    }
-  ],
+  "shadowCopies": [],
   "riskyDirs": [
     "client/src/content/microcopy",
     "client/src/copy",
@@ -1148,5 +1117,5 @@
     "scripts/.patch-backups",
     "scripts/_backups"
   ],
-  "timestamp": "2026-01-26T07:00:18.218Z"
+  "timestamp": "2026-01-26T07:02:21.025Z"
 }
