@@ -1,0 +1,292 @@
+# REPLIT AI — A→Z 360 “UNTIL COMPLETE” MASTER PROMPT (v15)
+# The Genuine Love Project • APPLY-ALL • Top-50 → Next-50 → Next-50… (BATCH LOOP)
+# Beginner / Intermediate / Advanced ONLY
+
+PASTE THIS INTO REPLIT AI AGENT MODE. You are inside THIS repo.
+DO NOT ASK QUESTIONS. DO NOT STOP. DO NOT WAIT FOR CONFIRMATION.
+Apply all changes. Work in safe, small patches. After each patch: run checks and paste outputs.
+
+================================================================================
+0) ABSOLUTE GUARDRAILS
+================================================================================
+- BANNED WORDS (hard fail if found):
+  "reading level", "grade level", "age level", reading_level, readingLevel, grade_level
+  ONLY ALLOWED TIERS: Beginner / Intermediate / Advanced
+- If DB has column reading_level: DO NOT rename right now.
+  Map at API boundary to tier and present only Beginner/Intermediate/Advanced in UI.
+- Replit Autoscale: SINGLE PORT ONLY. Bind 0.0.0.0. Use process.env.PORT.
+- No secrets committed. Provide .env.example.
+- Zod validation for all inputs.
+- Standard error format:
+  { ok:false, error:{ code, message, requestId }, details?:any }
+- Tap targets >= 44px; spacing/typography consistent; unclutter pages.
+- Patch safely; no massive rewrites.
+
+================================================================================
+1) “COMPLETE” EXIT CRITERIA (ALL MUST BE ✅)
+================================================================================
+ENGINEERING
+[ ] npm run content-check ✅
+[ ] npm run lint ✅ (create if missing)
+[ ] npm run typecheck ✅
+[ ] npm run build ✅
+[ ] npm run test ✅
+[ ] Cold start on Replit works ✅ (single port)
+
+CORE PLATFORM
+[ ] Auth: signup/login/logout/forgot/reset/email-verify + /me ✅
+[ ] RBAC: user/admin + protected routes ✅
+[ ] PostgreSQL + Drizzle tables: users, journals, moods, subscriptions, audit_logs, content_items ✅
+[ ] AI: safe journaling/chat + crisis resources + rate limits + audit logging ✅
+[ ] Stripe: checkout + portal + webhook verify + plan gating ✅
+
+ADMIN + OPS
+[ ] /health + /ready ✅
+[ ] requestId middleware ✅
+[ ] Admin Analyzer API (admin-only) ✅
+[ ] Admin Health Dashboard UI (admin-only) ✅
+[ ] Audit trails ✅
+
+UX + CONTENT
+[ ] Responsive layout + uncluttered UI ✅
+[ ] Tier is Beginner/Intermediate/Advanced only ✅
+[ ] Publishing MVP: admin CRUD + public blog + SEO + sitemap + OG ✅
+
+DEVOPS + AUTOMATION
+[ ] GitHub Actions CI: content-check/lint/typecheck/build/test ✅
+[ ] Human-triggered scripts: scan → report → verify ✅
+[ ] /docs/processes.md tracks batches with ✅/🟡/❌ + file links ✅
+
+================================================================================
+2) BATCH LOOP RULE (TOP 50 → NEXT 50 → NEXT 50… UNTIL COMPLETE)
+================================================================================
+Create and maintain:
+- /docs/processes.md                  (master index + current status)
+- /docs/process-batches/batch-001.md  (1–50)
+- /docs/process-batches/batch-002.md  (51–100) GENERATED ONLY AFTER batch-001 ✅
+- /docs/process-batches/batch-003.md  (101–150) GENERATED ONLY AFTER batch-002 ✅
+...continue until COMPLETE.
+
+Each batch must include:
+- Process number + name
+- “Done means” (acceptance criteria)
+- Implementation file paths
+- Status ✅/🟡/❌
+- Verification steps
+
+================================================================================
+3) PATCH ORDER (STRICT — DO NOT SKIP)
+================================================================================
+PATCH 1: Tier enforcement + banned words removal + content-check gate
+PATCH 2: Single-port + /health + /ready + global error handler + requestId
+PATCH 3: Drizzle schema completion + DB connectivity + migrations doc
+PATCH 4: Auth + RBAC + /me + email verify + reset flows
+PATCH 5: Stripe billing + webhook verify + plan gating
+PATCH 6: AI safety + rate limits + audit logs + crisis resources + redaction
+PATCH 7: Admin analyzer API + Admin Health Dashboard UI
+PATCH 8: Publishing MVP + SEO + sitemap + OG meta
+PATCH 9: CI/CD + tests + scan/report/verify scripts
+PATCH 10: Batch-001 finalize ✅ and lock it in docs
+THEN: Auto-generate Batch-002 and repeat PATCH loop until COMPLETE.
+
+================================================================================
+4) REQUIRED FILES (AUTO-CREATE IF MISSING)
+================================================================================
+Docs:
+  /docs/processes.md
+  /docs/process-batches/batch-001.md
+  /docs/process-batches/batch-002.md (only after batch-001 ✅)
+  /docs/security.md
+  /docs/ops.md
+  /docs/ai-safety.md
+  /docs/migrations.md
+  /docs/release-notes.md
+
+Scripts:
+  /scripts/content-check.mjs
+  /scripts/scan.mjs
+  /scripts/report.mjs
+  /scripts/verify.mjs
+
+Server middleware:
+  /server/middleware/requestId.ts
+  /server/middleware/rateLimit.ts
+  /server/middleware/auth.ts
+  /server/middleware/rbac.ts
+  /server/middleware/errorHandler.ts
+
+Server routes:
+  /server/routes/health.ts
+  /server/routes/auth.ts
+  /server/routes/ai.ts
+  /server/routes/billing.ts
+  /server/routes/admin.ts
+  /server/routes/content.ts
+
+Frontend minimum pages:
+  /src/pages/Login.tsx
+  /src/pages/Signup.tsx
+  /src/pages/ForgotPassword.tsx
+  /src/pages/ResetPassword.tsx
+  /src/pages/Journal.tsx
+  /src/pages/Pricing.tsx
+  /src/pages/AdminDashboard.tsx
+  /src/pages/Blog.tsx
+  /src/pages/Help.tsx
+
+================================================================================
+5) BATCH-001 (PROCESSES 1–50) — IMPLEMENT FULLY BEFORE MOVING ON
+================================================================================
+A) Product & UX (1–10)
+1 Onboarding flow
+2 Personalization (goals/preferences/tier)
+3 Navigation + search
+4 Design system tokens/components
+5 Accessibility (WCAG AA basics)
+6 Feedback capture (bug/idea)
+7 Progressive disclosure UI
+8 Help/FAQ page
+9 i18n scaffolding
+10 Performance budgets (basic)
+
+B) Auth/Security/Privacy (11–20)
+11 Session strategy
+12 Password reset + email verify
+13 RBAC
+14 Rate limiting
+15 Zod validation everywhere
+16 Security headers + CSP baseline
+17 Audit logs
+18 Disclaimers + crisis resources
+19 Data export/delete scaffolding
+20 Secrets management docs
+
+C) Data & Reliability (21–30)
+21 Postgres source of truth (Drizzle wired)
+22 Migration docs
+23 Backup guidance docs
+24 Idempotent APIs + error format
+25 No background jobs
+26 Health/readiness endpoints
+27 Feature flags
+28 Caching strategy doc
+29 Privacy-friendly analytics events
+30 DR checklist doc
+
+D) AI Safety & Quality (31–40)
+31 Crisis detection + response template
+32 Prompt injection hardening
+33 Fallback behaviors
+34 Consent + transparency UI
+35 Log redaction (PII)
+36 Per-user/per-IP rate limits
+37 Safety rules (non-diagnostic)
+38 Prompt tests/evals
+39 Human escalation guidance
+40 Output constraints
+
+E) Monetization & Growth (41–50)
+41 Stripe checkout + portal
+42 Webhook verify + sync
+43 Plan gating
+44 Ethical pricing UX
+45 Email capture (optional, safe)
+46 SEO (sitemap/meta/OG)
+47 Publishing pipeline (draft/review/publish)
+48 Social sharing assets generator (MVP)
+49 Basic analytics dashboard (admin)
+50 CI/CD + release notes discipline
+
+================================================================================
+6) EXECUTION LOOP (RUN UNTIL COMPLETE — NO QUESTIONS)
+================================================================================
+LOOP STEP A — SCAN (RUN AND PASTE OUTPUTS)
+1) Snapshot
+  ls -la
+  cat package.json
+  node -v && npm -v
+
+2) Banned tier words must be ZERO
+  rg -n "reading\\s*level|grade\\s*level|age\\s*level|reading_level|readingLevel|grade_level" . || true
+
+3) Port compliance
+  rg -n "listen\\(|0\\.0\\.0\\.0|process\\.env\\.PORT|PORT" server src . || true
+
+4) Feature presence checks
+  rg -n "drizzle|DATABASE_URL|postgres|pg" . || true
+  rg -n "stripe|STRIPE_|webhook|checkout|portal" . || true
+  rg -n "openai|crisis|rate\\s*limit|moderation|prompt injection|PII|redact" . || true
+  rg -n "admin|dashboard|analyzer|audit" . || true
+  rg -n "blog|content|sitemap|metadata|og:" . || true
+
+5) Install + baselines
+  npm ci || npm install
+  npm run -s content-check || true
+  npm run -s lint || true
+  npm run -s typecheck || true
+  npm run -s build || true
+  npm run -s test || true
+
+LOOP STEP B — APPLY NEXT PATCH (STRICT ORDER)
+- Implement the next patch completely.
+- Keep changes minimal and safe.
+
+LOOP STEP C — VERIFY AFTER EVERY PATCH (PASTE OUTPUTS)
+  npm run -s content-check
+  npm run -s lint
+  npm run -s typecheck
+  npm run -s build
+  npm run -s test
+
+LOOP STEP D — REQUIRED REPORT AFTER EVERY PATCH
+1) ✅ Changed files (paths)
+2) 🧪 Commands + outputs (pasted)
+3) 🔎 Pages to click-test:
+   /  /login  /signup  /journal  /pricing  /admin  /blog  /help
+4) ✅ Updated /docs/processes.md + batch status
+5) Start next patch immediately
+
+================================================================================
+7) PATCH #1 — IMPLEMENT NOW (TIER ENFORCEMENT + CONTENT-CHECK GATE)
+================================================================================
+A) Create /scripts/content-check.mjs
+Must fail if:
+- any banned tier words exist
+- any tier values outside Beginner/Intermediate/Advanced exist in:
+  - docs content (batch files)
+  - seed data
+  - UI labels
+  - API responses
+
+B) package.json scripts (add/repair):
+  "content-check": "node scripts/content-check.mjs",
+  "scan": "node scripts/scan.mjs",
+  "report": "node scripts/report.mjs",
+  "verify": "node scripts/verify.mjs"
+
+C) Replace tier usage everywhere:
+- Only show: Beginner / Intermediate / Advanced
+- API uses: tier
+- If DB column reading_level exists:
+  - map reading_level -> tier in code (no rename)
+
+D) Verify immediately:
+  npm run -s content-check
+
+================================================================================
+8) AFTER BATCH-001 ✅ — AUTO-GENERATE NEXT 50 (BATCH-002)
+================================================================================
+When batch-001 is fully ✅, generate batch-002 with processes 51–100 by:
+- Auditing platform gaps after batch-001
+- Selecting next 50 “top platform processes” based on:
+  reliability, security, growth, content scale, analytics, admin tooling, compliance, DX
+- Writing exact acceptance criteria and file paths
+Then implement batch-002 using the SAME patch loop, then batch-003, etc.
+
+================================================================================
+9) START NOW
+================================================================================
+RUN LOOP STEP A (SCAN) and paste outputs.
+THEN implement PATCH #1 fully, verify, and continue patch #2 onward
+until Batch-001 ✅, then auto-generate Batch-002 (51–100) and continue
+until COMPLETE criteria is fully ✅.

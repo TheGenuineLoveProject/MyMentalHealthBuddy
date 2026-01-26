@@ -1,0 +1,547 @@
+You are Replit AI Agent Mode.
+
+TOP-50 PLATFORM PROCESSES PACK #3 (Registry-Driven Hubs + Saved Library + Gentle Progress Dashboard + Auto-Registry Generator)
+Objective:
+- RouteMetaRegistry stays the single source of truth
+- routeKey is the ONLY identifier everywhere
+- internalLinks store routeKeys only
+- Add the next 50 “platform completeness” processes:
+  1) Topic Hub System (tags → hub pages → link graph)
+  2) Saved Library (favorites + saves by routeKey)
+  3) Gentle Progress Dashboard (wins + streak + recommended next)
+  4) Human-triggered Registry Generator (adds/updates registry entries deterministically)
+  5) Build stays stable and production build passes
+
+DO THIS IN ORDER.
+
+0) VERIFY CURRENT BUILD
+Shell:
+  npm run build
+Fix build errors first (exact file/line).
+
+────────────────────────────────────────────────────────
+1) UPGRADE RouteMetaRegistry: topic hubs + canonical naming helpers
+Edit: client/src/content/meta/routeMetaRegistry.ts
+
+A) Add helper exports:
+- toHubKey(topic: string) => `hub__${slug}`
+- toToolKey(name: string) => `tool__${slug}`
+- slugify(s: string)
+
+B) Add optional fields to RouteMeta (if not already):
+- hubTopic?: string            // e.g. "anxiety"
+- isHub?: boolean
+- priority?: number            // for ordering in lists
+- iconKey?: string             // for later icon mapping
+
+C) Ensure listAllRouteMeta() is exported and returns all route meta.
+
+D) Confirm deriveRouteKeyFromPath() remains deterministic and stable.
+
+────────────────────────────────────────────────────────
+2) CREATE TOPIC HUB INDEX (single source of truth)
+Create: client/src/content/hubs/topicHubs.ts
+PASTE:
+
+---BEGIN PASTE (client/src/content/hubs/topicHubs.ts)---
+export type HubTopic =
+  | "anxiety"
+  | "sleep"
+  | "boundaries"
+  | "selfWorth"
+  | "resilience"
+  | "focus"
+  | "grief"
+  | "relationships";
+
+export const HUBS: { topic: HubTopic; title: string; description: string; tags: string[] }[] = [
+  {
+    topic: "anxiety",
+    title: "Anxiety support skills",
+    description: "Calm your body, steady your thoughts, take one tiny step.",
+    tags: ["anxiety", "calm", "grounding", "breath", "reframe"],
+  },
+  {
+    topic: "sleep",
+    title: "Sleep reset",
+    description: "Gentle routines and mind-settling tools for better rest habits.",
+    tags: ["sleep", "winddown", "routine", "breath", "noise"],
+  },
+  {
+    topic: "boundaries",
+    title: "Boundaries & self-respect",
+    description: "Clear limits, kinder self-talk, safer relationships.",
+    tags: ["boundaries", "communication", "values", "assertiveness"],
+  },
+  {
+    topic: "selfWorth",
+    title: "Self-worth & confidence",
+    description: "Build self-respect with small honest practices.",
+    tags: ["self-worth", "confidence", "identity", "values", "compassion"],
+  },
+  {
+    topic: "resilience",
+    title: "Resilience & recovery",
+    description: "Stabilize, regroup, and keep going—one step at a time.",
+    tags: ["resilience", "stress", "coping", "routine", "support"],
+  },
+  {
+    topic: "focus",
+    title: "Focus & momentum",
+    description: "Reduce overwhelm, choose the next right action.",
+    tags: ["focus", "momentum", "overwhelm", "tiny-step"],
+  },
+  {
+    topic: "grief",
+    title: "Grief & change",
+    description: "Gentle reflection tools for hard seasons.",
+    tags: ["grief", "loss", "meaning", "support", "compassion"],
+  },
+  {
+    topic: "relationships",
+    title: "Relationships & connection",
+    description: "Healthier patterns, communication, and repair.",
+    tags: ["relationships", "repair", "communication", "boundaries", "values"],
+  },
+];
+---END PASTE---
+
+────────────────────────────────────────────────────────
+3) CREATE HUB RECOMMENDER (registry-driven link graph)
+Create: client/src/content/hubs/hubGraph.ts
+PASTE:
+
+---BEGIN PASTE (client/src/content/hubs/hubGraph.ts)---
+import { HUBS } from "./topicHubs";
+import { listAllRouteMeta, resolveRoutePath } from "../meta/routeMetaRegistry";
+
+export type HubLink = { label: string; routeKey: string; href: string; reason?: string };
+
+function overlap(a: string[] = [], b: string[] = []) {
+  const A = new Set(a.map((x) => x.toLowerCase()));
+  return b.reduce((n, x) => n + (A.has(x.toLowerCase()) ? 1 : 0), 0);
+}
+
+export function getHubMeta(topic) {
+  return HUBS.find((h) => h.topic === topic);
+}
+
+export function getHubLinks(topic, limit = 18): HubLink[] {
+  const hub = getHubMeta(topic);
+  if (!hub) return [];
+
+  const all = listAllRouteMeta();
+
+  const scored = all
+    .filter((m) => !m.isHub) // hubs list tools/paths, not other hubs
+    .map((m) => ({
+      m,
+      score: overlap(hub.tags || [], m.tags || []),
+    }))
+    .filter((x) => x.score > 0)
+    .sort((a, b) => (b.m.priority || 0) - (a.m.priority || 0) || b.score - a.score)
+    .slice(0, limit)
+    .map((x) => ({
+      label: x.m.title,
+      routeKey: x.m.routeKey,
+      href: resolveRoutePath(x.m.routeKey),
+      reason: "Matches hub topic",
+    }));
+
+  return scored;
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+4) CREATE A SINGLE HUB PAGE TEMPLATE (no duplication across hubs)
+Create: client/src/pages/hubs/TopicHubPage.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { useLocation } from "wouter";
+import { getHubLinks, getHubMeta } from "../../content/hubs/hubGraph";
+import { PageScaffold } from "../../components/layout/PageScaffold";
+import { RelatedLinksBlock } from "../../components/RelatedLinksBlock";
+
+function topicFromPath(pathname) {
+  // expects /hubs/:topic
+  const parts = (pathname || "").split("/").filter(Boolean);
+  return parts[1] || "anxiety";
+}
+
+export default function TopicHubPage() {
+  const [pathname] = useLocation();
+  const topic = topicFromPath(pathname);
+  const hub = getHubMeta(topic);
+
+  const title = hub?.title || "Topic hub";
+  const description = hub?.description || "Tools and next steps—organized for clarity.";
+  const links = getHubLinks(topic, 18);
+
+  const benefits = [
+    "Find the next best tool in one click.",
+    "Practice tiny steps that build real momentum.",
+    "Stay grounded with gentle, legally-safe skill language.",
+  ];
+
+  return (
+    <PageScaffold title={title} description={description} benefitsBullets={benefits}>
+      <section className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+        <div className="text-sm opacity-85">
+          Choose one small tool below. You don’t need to do everything—just one next step.
+        </div>
+      </section>
+
+      <RelatedLinksBlock links={links.map((l) => ({ label: l.label, routeKey: l.routeKey, href: l.href }))} />
+    </PageScaffold>
+  );
+}
+---END PASTE---
+
+Now wire router:
+- Add route: /hubs/:topic -> TopicHubPage
+Follow your existing routing file style (React Router or wouter).
+
+If using wouter:
+Add:
+  <Route path="/hubs/:topic" component={TopicHubPage} />
+
+────────────────────────────────────────────────────────
+5) ADD SAVES / FAVORITES (routeKey only)
+Create: client/src/content/saves/savesStore.ts
+PASTE:
+
+---BEGIN PASTE (client/src/content/saves/savesStore.ts)---
+const KEY = "glp:saves:v1";
+
+function read(): string[] {
+  try {
+    return JSON.parse(localStorage.getItem(KEY) || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function write(v: string[]) {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(v));
+  } catch {}
+}
+
+export function isSaved(routeKey: string): boolean {
+  return read().includes(routeKey);
+}
+
+export function toggleSave(routeKey: string) {
+  const v = read();
+  if (v.includes(routeKey)) write(v.filter((x) => x !== routeKey));
+  else write([routeKey, ...v].slice(0, 500));
+}
+
+export function listSaves(): string[] {
+  return read();
+}
+---END PASTE---
+
+Create: client/src/components/saves/SaveButton.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { useEffect, useState } from "react";
+import { isSaved, toggleSave } from "../../content/saves/savesStore";
+
+export function SaveButton({ routeKey }) {
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    try {
+      setSaved(isSaved(routeKey));
+    } catch {
+      setSaved(false);
+    }
+  }, [routeKey]);
+
+  return (
+    <button
+      onClick={() => {
+        toggleSave(routeKey);
+        setSaved((s) => !s);
+      }}
+      className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-sm hover:bg-white/15 transition"
+    >
+      {saved ? "Saved ★" : "Save"}
+    </button>
+  );
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+6) ADD “Saved Library” page (resolves meta from registry)
+Create: client/src/pages/library/SavedLibrary.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { PageScaffold } from "../../components/layout/PageScaffold";
+import { listSaves } from "../../content/saves/savesStore";
+import { getRouteMeta, resolveRoutePath } from "../../content/meta/routeMetaRegistry";
+import { Link } from "wouter";
+
+export default function SavedLibrary() {
+  const saved = (() => {
+    try {
+      return listSaves();
+    } catch {
+      return [];
+    }
+  })();
+
+  const items = saved
+    .map((rk) => {
+      const m = getRouteMeta(rk);
+      return { routeKey: rk, title: m.title, description: m.description, href: resolveRoutePath(rk) };
+    })
+    .filter(Boolean);
+
+  return (
+    <PageScaffold
+      title="Your saved library"
+      description="Your favorite tools and pages—saved by routeKey and resolved from the registry."
+      benefitsBullets={[
+        "Come back to what works for you.",
+        "Keep your best tools in one place.",
+        "No clutter—just your personal collection.",
+      ]}
+    >
+      <section className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+        {items.length === 0 ? (
+          <div className="text-sm opacity-80">
+            Nothing saved yet. When you find a tool you like, press “Save”.
+          </div>
+        ) : (
+          <div className="grid gap-2">
+            {items.map((it) => (
+              <Link key={it.routeKey} href={it.href} className="block">
+                <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 hover:bg-black/20 transition">
+                  <div className="text-sm font-medium">{it.title}</div>
+                  <div className="text-xs opacity-70 mt-1">{it.description}</div>
+                  <div className="text-xs opacity-60 mt-1">{it.href}</div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
+      </section>
+    </PageScaffold>
+  );
+}
+---END PASTE---
+
+Wire router:
+- /library/saved -> SavedLibrary
+
+────────────────────────────────────────────────────────
+7) WIRE SaveButton INTO PageTemplate (single place)
+Edit: client/src/components/PageTemplate.jsx
+
+- Import:
+  import { SaveButton } from "./saves/SaveButton";
+
+- Render near title area (top right):
+  <SaveButton routeKey={routeKey} />
+
+DO NOT add to individual pages.
+
+────────────────────────────────────────────────────────
+8) ADD “Gentle Progress Dashboard” (wins + streak + recommended next)
+Create: client/src/pages/dashboard/ProgressDashboard.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { PageScaffold } from "../../components/layout/PageScaffold";
+import { listWins, getStreak } from "../../content/progress/progressStore";
+import { getRecommendations } from "../../content/meta/recommendations";
+import { RelatedLinksBlock } from "../../components/RelatedLinksBlock";
+
+export default function ProgressDashboard() {
+  const wins = (() => {
+    try {
+      return listWins(25);
+    } catch {
+      return [];
+    }
+  })();
+
+  const streak = (() => {
+    try {
+      return getStreak();
+    } catch {
+      return { current: 0, lastDay: null };
+    }
+  })();
+
+  const lastRouteKey = wins[0]?.routeKey || "hubs__anxiety";
+  const recs = getRecommendations(lastRouteKey, 6).map((r) => ({
+    label: r.label,
+    routeKey: r.routeKey,
+    href: r.href,
+  }));
+
+  return (
+    <PageScaffold
+      title="Your progress"
+      description="Tiny wins, gentle momentum. No pressure—just direction."
+      benefitsBullets={[
+        "See your streak grow from small wins.",
+        "Return to what helped most recently.",
+        "Get a calm ‘next best step’ suggestion.",
+      ]}
+    >
+      <section className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+        <div className="flex items-center justify-between gap-3">
+          <div className="text-sm font-medium">Streak</div>
+          <div className="text-sm">{streak.current}</div>
+        </div>
+        <div className="text-xs opacity-70 mt-1">
+          A streak is simply “you showed up today”. If you miss a day, you start again with kindness.
+        </div>
+      </section>
+
+      <section className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+        <div className="text-sm font-medium">Recent wins</div>
+        <div className="mt-3 grid gap-2">
+          {wins.length === 0 ? (
+            <div className="text-sm opacity-80">No wins yet. Save one tiny step on any page.</div>
+          ) : (
+            wins.map((w) => (
+              <div key={w.id} className="rounded-xl border border-white/10 bg-black/10 px-3 py-2">
+                <div className="text-xs opacity-70">{new Date(w.createdAt).toLocaleString()}</div>
+                <div className="text-sm mt-1">{w.note || "Saved a win"}</div>
+                <div className="text-xs opacity-70 mt-1">routeKey: {w.routeKey}</div>
+              </div>
+            ))
+          )}
+        </div>
+      </section>
+
+      <RelatedLinksBlock links={recs} />
+    </PageScaffold>
+  );
+}
+---END PASTE---
+
+Wire router:
+- /dashboard/progress -> ProgressDashboard
+
+────────────────────────────────────────────────────────
+9) HUMAN-TRIGGERED AUTO-REGISTRY GENERATOR (deterministic)
+Create: scripts/generate-registry.mjs
+Purpose:
+- Scan client/src/pages for files
+- Derive routeKey from filename/path deterministically
+- Produce JSON suggestions (DO NOT auto-edit registry by default)
+- Output: scripts/.registry-suggestions.json
+
+PASTE:
+
+---BEGIN PASTE (scripts/generate-registry.mjs)---
+import fs from "node:fs";
+import path from "node:path";
+
+const ROOT = process.cwd();
+const PAGES_DIR = path.join(ROOT, "client", "src", "pages");
+const OUT = path.join(ROOT, "scripts", ".registry-suggestions.json");
+
+function walk(dir, out = []) {
+  if (!fs.existsSync(dir)) return out;
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const p = path.join(dir, ent.name);
+    if (ent.isDirectory()) walk(p, out);
+    else if (/\.(tsx|ts|jsx|js)$/.test(ent.name)) out.push(p);
+  }
+  return out;
+}
+
+function slugify(s) {
+  return s
+    .replace(/\.(tsx|ts|jsx|js)$/i, "")
+    .replace(/index$/i, "")
+    .replace(/[^a-zA-Z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .toLowerCase();
+}
+
+function deriveRouteKeyFromFile(filePath) {
+  const rel = path.relative(PAGES_DIR, filePath).replace(/\\/g, "/");
+  // Example: hubs/TopicHubPage.jsx -> hubs__topichubpage
+  const parts = rel.split("/");
+  const base = slugify(parts.join("__"));
+  return base || "page__unknown";
+}
+
+function suggestCanonicalPath(filePath) {
+  const rel = path.relative(PAGES_DIR, filePath).replace(/\\/g, "/");
+  const parts = rel.split("/");
+  // If file under hubs/, canonical uses /hubs/:topic for TopicHubPage; leave placeholder
+  if (parts[0] === "hubs") return "/hubs/:topic";
+  if (parts[0] === "dashboard") return "/dashboard/progress";
+  if (parts[0] === "library") return "/library/saved";
+  // default guess
+  const p = "/" + rel.replace(/\.(tsx|ts|jsx|js)$/i, "").replace(/index$/i, "");
+  return p.replace(/\/+$/g, "") || "/";
+}
+
+const files = walk(PAGES_DIR);
+const suggestions = files.map((f) => ({
+  file: path.relative(ROOT, f).replace(/\\/g, "/"),
+  routeKey: deriveRouteKeyFromFile(f),
+  canonicalPath: suggestCanonicalPath(f),
+  title: null,
+  description: null,
+  benefits: [],
+  internalLinks: [],
+  modules: [],
+  tags: [],
+}));
+
+fs.mkdirSync(path.dirname(OUT), { recursive: true });
+fs.writeFileSync(OUT, JSON.stringify({ generatedAt: new Date().toISOString(), count: suggestions.length, suggestions }, null, 2));
+console.log(`Wrote ${suggestions.length} suggestions -> ${path.relative(ROOT, OUT)}`);
+---END PASTE---
+
+Add npm script (package.json) if you have scripts section:
+  "registry:suggest": "node scripts/generate-registry.mjs"
+
+────────────────────────────────────────────────────────
+10) FEATURE FLAGS: ensure hub/search/progress pages are safe to toggle
+If feature flags exist:
+- Keep showSearch/showRecommendations/showTinyStep enabled by default
+- DO NOT gate essential navigation behind flags
+
+────────────────────────────────────────────────────────
+11) RUN CHECKS (must pass)
+Shell:
+  npm run build
+Then:
+  npm run registry:suggest
+
+Dev tests:
+- /hubs/anxiety (TopicHubPage renders)
+- /library/saved (shows saved list)
+- /dashboard/progress (shows streak + wins + next steps)
+- Any normal tool page:
+  - SaveButton appears
+  - No duplicated UI blocks in pages
+
+────────────────────────────────────────────────────────
+CONSTRAINTS
+- routeKey only
+- internalLinks store routeKeys only
+- registry resolves canonicalPath
+- single-place UI: PageTemplate renders SaveButton/RelatedLinks/Search/TinyStep
+- no background automation
+
+REQUIRED OUTPUT
+1) changed files list (paths only)
+2) build pass confirmation
+3) router wiring summary (what routes were added)
+4) registry:suggest output path and count

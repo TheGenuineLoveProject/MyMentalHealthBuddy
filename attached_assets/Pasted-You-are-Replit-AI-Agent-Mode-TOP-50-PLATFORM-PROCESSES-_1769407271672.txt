@@ -1,0 +1,573 @@
+You are Replit AI Agent Mode.
+
+TOP-50 PLATFORM PROCESSES PACK #2 (Registry-Driven Search + Recommendations + Progress + Feature Flags + Route Health)
+Objective:
+- Keep routeKey as the ONLY identifier system
+- Keep internalLinks as routeKeys only
+- Add the next compounding “platform completeness” layer:
+  1) Search (registry indexed)
+  2) Recommendations (registry-driven, internalLinks + tags)
+  3) Progress (gentle wins + streaks, local-first)
+  4) Feature Flags (safe experiments + rollback)
+  5) Route Health Dashboard (admin scan viewer, human-triggered)
+- Production build must pass
+
+DO THIS IN ORDER.
+
+0) BASELINE
+Shell:
+  npm run build
+Fix any build errors FIRST (exact file/line).
+
+────────────────────────────────────────────────────────
+1) EXPAND RouteMetaRegistry to support tags + recommendations
+Edit: client/src/content/meta/routeMetaRegistry.ts
+
+A) Add fields to RouteMeta type:
+- tags?: string[]
+- difficulty?: "beginner" | "intermediate" | "advanced"
+- estimatedMinutes?: number
+- category?: string
+
+B) Ensure exports include:
+- listAllRouteMeta(): RouteMeta[]
+- resolveRoutePath(routeKey: string): string  (already)
+- resolveInternalLinks(routeKey: string): {label, routeKey, href}[]  (already)
+
+C) Implement listAllRouteMeta()
+- Return Object.values(REGISTRY) (or equivalent)
+
+D) Add/ensure tags on key routes:
+- hubs__anxiety: tags ["anxiety","calm","grounding","beginner"]
+- tools__reframe: tags ["reframe","thoughts","cbt","beginner"]
+- paths__12_practices: tags ["values","habits","meaning","intermediate"]
+Add tags gradually; do not touch unrelated routes unless needed.
+
+────────────────────────────────────────────────────────
+2) ADD SEARCH INDEX (single source of truth)
+Create: client/src/content/meta/routeSearchIndex.ts
+PASTE:
+
+---BEGIN PASTE (client/src/content/meta/routeSearchIndex.ts)---
+import { listAllRouteMeta, resolveRoutePath } from "./routeMetaRegistry";
+
+export type SearchHit = {
+  routeKey: string;
+  title: string;
+  description: string;
+  href: string;
+  tags: string[];
+  category?: string;
+  difficulty?: "beginner" | "intermediate" | "advanced";
+  estimatedMinutes?: number;
+};
+
+function normalize(s: string) {
+  return (s || "").toLowerCase().trim();
+}
+
+export function buildSearchIndex(): SearchHit[] {
+  return listAllRouteMeta().map((m) => ({
+    routeKey: m.routeKey,
+    title: m.title,
+    description: m.description,
+    href: resolveRoutePath(m.routeKey),
+    tags: m.tags || [],
+    category: m.category,
+    difficulty: m.difficulty,
+    estimatedMinutes: m.estimatedMinutes,
+  }));
+}
+
+export function searchRoutes(query: string, limit = 12): SearchHit[] {
+  const q = normalize(query);
+  if (!q) return [];
+
+  const index = buildSearchIndex();
+  const scored = index
+    .map((hit) => {
+      const hay = normalize([hit.title, hit.description, hit.tags.join(" "), hit.category || ""].join(" | "));
+      let score = 0;
+
+      if (normalize(hit.title).includes(q)) score += 5;
+      if (normalize(hit.description).includes(q)) score += 2;
+      if (hit.tags.some((t) => normalize(t).includes(q))) score += 3;
+      if (hay.includes(q)) score += 1;
+
+      // Tiny boost for shorter, beginner-friendly tools when query is short
+      if (q.length <= 6 && hit.difficulty === "beginner") score += 1;
+      if (hit.estimatedMinutes && hit.estimatedMinutes <= 5) score += 1;
+
+      return { hit, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map((x) => x.hit);
+
+  return scored;
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+3) ADD SEARCH UI (registry-driven, no duplication)
+Create: client/src/components/search/RouteSearchBox.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { useMemo, useState } from "react";
+import { Link } from "wouter";
+import { searchRoutes } from "../../content/meta/routeSearchIndex";
+
+export function RouteSearchBox({ placeholder = "Search tools, hubs, paths…" }) {
+  const [q, setQ] = useState("");
+
+  const hits = useMemo(() => searchRoutes(q, 10), [q]);
+
+  return (
+    <section className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-base font-semibold">Find what you need</h2>
+        <span className="text-xs opacity-70">registry-driven</span>
+      </div>
+
+      <input
+        value={q}
+        onChange={(e) => setQ(e.target.value)}
+        placeholder={placeholder}
+        className="mt-3 w-full rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-sm outline-none focus:bg-black/25"
+      />
+
+      {!!q && (
+        <div className="mt-3 grid gap-2">
+          {hits.length === 0 && (
+            <div className="text-sm opacity-75">No matches yet. Try “anxiety”, “sleep”, “boundaries”, “reframe”.</div>
+          )}
+
+          {hits.map((h) => (
+            <Link key={h.routeKey} href={h.href} className="block">
+              <div className="rounded-xl border border-white/10 bg-black/10 px-3 py-2 hover:bg-black/20 transition">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-sm font-medium">{h.title}</div>
+                  <div className="text-xs opacity-70">
+                    {h.difficulty || ""}{h.estimatedMinutes ? ` • ${h.estimatedMinutes}m` : ""}
+                  </div>
+                </div>
+                <div className="text-xs opacity-70 mt-1">{h.description}</div>
+                {!!h.tags?.length && (
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {h.tags.slice(0, 5).map((t) => (
+                      <span key={t} className="text-[11px] rounded-full border border-white/10 bg-white/5 px-2 py-0.5 opacity-80">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
+    </section>
+  );
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+4) ADD RECOMMENDATIONS ENGINE (Next best steps)
+Create: client/src/content/meta/recommendations.ts
+PASTE:
+
+---BEGIN PASTE (client/src/content/meta/recommendations.ts)---
+import { getRouteMeta, listAllRouteMeta, resolveInternalLinks, resolveRoutePath } from "./routeMetaRegistry";
+
+export type RecommendedLink = { label: string; routeKey: string; href: string; reason?: string };
+
+function overlap(a: string[] = [], b: string[] = []) {
+  const A = new Set(a.map((x) => x.toLowerCase()));
+  return b.reduce((n, x) => n + (A.has(x.toLowerCase()) ? 1 : 0), 0);
+}
+
+export function getRecommendations(routeKey: string, limit = 6): RecommendedLink[] {
+  const meta = getRouteMeta(routeKey);
+
+  // Start with internalLinks (curated)
+  const curated = resolveInternalLinks(routeKey).map((l) => ({
+    label: l.label,
+    routeKey: l.routeKey,
+    href: l.href,
+    reason: "Curated next step",
+  }));
+
+  // Fill the rest with “similar tags” suggestions
+  const all = listAllRouteMeta()
+    .filter((m) => m.routeKey !== routeKey)
+    .map((m) => ({
+      m,
+      score: overlap(meta.tags || [], m.tags || []),
+    }))
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 20)
+    .map((x) => ({
+      label: x.m.title,
+      routeKey: x.m.routeKey,
+      href: resolveRoutePath(x.m.routeKey),
+      reason: "Similar topic",
+    }));
+
+  const combined = [...curated];
+  for (const s of all) {
+    if (combined.length >= limit) break;
+    if (!combined.some((c) => c.routeKey === s.routeKey)) combined.push(s);
+  }
+
+  return combined.slice(0, limit);
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+5) ADD “ProgressStore” (local-first: wins + streaks)
+Create: client/src/content/progress/progressStore.ts
+PASTE:
+
+---BEGIN PASTE (client/src/content/progress/progressStore.ts)---
+type Win = { id: string; routeKey: string; note?: string; createdAt: number };
+
+const WINS_KEY = "glp:wins:v1";
+const STREAK_KEY = "glp:streak:v1";
+
+function read<T>(key: string, fallback: T): T {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return fallback;
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
+}
+
+function write(key: string, value: unknown) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {}
+}
+
+function dayStamp(ts: number) {
+  const d = new Date(ts);
+  return `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
+}
+
+export function addWin(routeKey: string, note?: string) {
+  const wins = read<Win[]>(WINS_KEY, []);
+  const win: Win = { id: `${Date.now()}-${Math.random().toString(16).slice(2)}`, routeKey, note, createdAt: Date.now() };
+  wins.unshift(win);
+  write(WINS_KEY, wins.slice(0, 200));
+  bumpStreak();
+}
+
+export function listWins(limit = 25): Win[] {
+  return read<Win[]>(WINS_KEY, []).slice(0, limit);
+}
+
+export function getStreak(): { current: number; lastDay: string | null } {
+  return read(STREAK_KEY, { current: 0, lastDay: null });
+}
+
+export function bumpStreak() {
+  const s = getStreak();
+  const today = dayStamp(Date.now());
+
+  if (s.lastDay === today) return;
+
+  // if lastDay was yesterday, increment; else reset to 1
+  const last = s.lastDay ? new Date(s.lastDay) : null;
+  const y = new Date();
+  y.setDate(y.getDate() - 1);
+  const yesterday = dayStamp(y.getTime());
+
+  const next = {
+    current: s.lastDay === yesterday ? s.current + 1 : 1,
+    lastDay: today,
+  };
+
+  write(STREAK_KEY, next);
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+6) ADD “Tiny Step + Win” interactive UI (registry-driven, single place)
+Create: client/src/components/progress/TinyStepPanel.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { useState } from "react";
+import { addWin, getStreak } from "../../content/progress/progressStore";
+
+export function TinyStepPanel({ routeKey }) {
+  const [tiny, setTiny] = useState("");
+  const [saved, setSaved] = useState(false);
+
+  function save() {
+    const note = tiny.trim();
+    addWin(routeKey, note || undefined);
+    setSaved(true);
+    setTimeout(() => setSaved(false), 1200);
+    setTiny("");
+  }
+
+  const streak = (() => {
+    try {
+      return getStreak();
+    } catch {
+      return { current: 0, lastDay: null };
+    }
+  })();
+
+  return (
+    <section className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-base font-semibold">One tiny next step</h2>
+        <span className="text-xs opacity-70">streak: {streak.current}</span>
+      </div>
+
+      <div className="text-sm opacity-80 mt-2">
+        Keep it small. Something you can do in 2 minutes.
+      </div>
+
+      <textarea
+        value={tiny}
+        onChange={(e) => setTiny(e.target.value)}
+        placeholder="Example: ‘3 slow breaths’, ‘write one honest sentence’, ‘drink a glass of water’…"
+        className="mt-3 w-full min-h-[84px] rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-sm outline-none focus:bg-black/25"
+      />
+
+      <button
+        onClick={save}
+        className="mt-3 rounded-xl border border-white/10 bg-white/10 px-3 py-2 text-sm hover:bg-white/15 transition"
+      >
+        {saved ? "Saved ✅" : "Save as a win"}
+      </button>
+    </section>
+  );
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+7) ADD FEATURE FLAGS (safe experiments)
+Create: client/src/content/flags/featureFlags.ts
+PASTE:
+
+---BEGIN PASTE (client/src/content/flags/featureFlags.ts)---
+export type FlagKey =
+  | "showSearch"
+  | "showRecommendations"
+  | "showTinyStep"
+  | "showTrustCenter";
+
+const KEY = "glp:flags:v1";
+
+function read(): Record<string, boolean> {
+  try {
+    return JSON.parse(localStorage.getItem(KEY) || "{}");
+  } catch {
+    return {};
+  }
+}
+
+function write(v: Record<string, boolean>) {
+  try {
+    localStorage.setItem(KEY, JSON.stringify(v));
+  } catch {}
+}
+
+export function isEnabled(flag: FlagKey, defaultValue = true): boolean {
+  const v = read();
+  if (typeof v[flag] === "boolean") return v[flag];
+  return defaultValue;
+}
+
+export function setFlag(flag: FlagKey, value: boolean) {
+  const v = read();
+  v[flag] = value;
+  write(v);
+}
+
+export function listFlags(): { key: FlagKey; defaultValue: boolean }[] {
+  return [
+    { key: "showSearch", defaultValue: true },
+    { key: "showRecommendations", defaultValue: true },
+    { key: "showTinyStep", defaultValue: true },
+    { key: "showTrustCenter", defaultValue: true },
+  ];
+}
+---END PASTE---
+
+Create: client/src/components/admin/FeatureFlagsPanel.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { useEffect, useState } from "react";
+import { isEnabled, listFlags, setFlag } from "../../content/flags/featureFlags";
+
+export function FeatureFlagsPanel() {
+  const [tick, setTick] = useState(0);
+
+  useEffect(() => {
+    // force a re-render when toggled
+  }, [tick]);
+
+  return (
+    <section className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4">
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="text-base font-semibold">Feature flags</h2>
+        <span className="text-xs opacity-70">safe toggles</span>
+      </div>
+
+      <div className="mt-3 grid gap-2">
+        {listFlags().map((f) => (
+          <label key={f.key} className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-black/10 px-3 py-2">
+            <span className="text-sm">{f.key}</span>
+            <input
+              type="checkbox"
+              checked={isEnabled(f.key, f.defaultValue)}
+              onChange={(e) => {
+                setFlag(f.key, e.target.checked);
+                setTick((x) => x + 1);
+              }}
+            />
+          </label>
+        ))}
+      </div>
+
+      <div className="text-xs opacity-70 mt-3">
+        Flags are local to your device. Use for safe experiments and quick rollback.
+      </div>
+    </section>
+  );
+}
+---END PASTE---
+
+────────────────────────────────────────────────────────
+8) WIRE Search + Recommendations + TinyStep into PageTemplate (ONE PLACE)
+Edit: client/src/components/PageTemplate.jsx
+
+A) Add imports:
+import { RouteSearchBox } from "./search/RouteSearchBox";
+import { TinyStepPanel } from "./progress/TinyStepPanel";
+import { getRecommendations } from "../content/meta/recommendations";
+import { isEnabled } from "../content/flags/featureFlags";
+
+B) Inside PageTemplate:
+const recs = isEnabled("showRecommendations") ? getRecommendations(routeKey, 6) : [];
+const showSearch = isEnabled("showSearch");
+const showTiny = isEnabled("showTinyStep");
+
+C) Render:
+- near top (below description):
+  {showSearch ? <RouteSearchBox /> : null}
+
+- Replace RelatedLinksBlock feed:
+  If you already show RelatedLinksBlock from resolveInternalLinks, keep it.
+  Add a second block using recs (reuse RelatedLinksBlock without duplication):
+    <RelatedLinksBlock links={recs.map(r => ({ label: r.label, routeKey: r.routeKey, href: r.href }))} />
+
+- near bottom:
+  {showTiny ? <TinyStepPanel routeKey={routeKey} /> : null}
+
+IMPORTANT: Do not add these into individual pages. PageTemplate only.
+
+────────────────────────────────────────────────────────
+9) ADD ADMIN ROUTE HEALTH VIEWER (human-triggered scan)
+A) Ensure scripts already create scripts/.scan-results.json.
+Now create a small server endpoint to read it.
+
+Edit backend server (likely server/index.ts or similar):
+- Add route (ADMIN PROTECTED if you already have auth; otherwise keep it behind a simple env key)
+GET /api/admin/scan-results
+- Read file: scripts/.scan-results.json
+- Return JSON
+- If file missing, return { ok:false, error:"scan results not found" }
+
+If you have no auth yet:
+- Require header: x-admin-key matches process.env.ADMIN_KEY
+- If missing, 401.
+
+B) Create admin UI page:
+Create: client/src/pages/admin/RouteHealth.jsx
+PASTE:
+
+---BEGIN PASTE---
+import { useEffect, useState } from "react";
+
+export default function RouteHealth() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/admin/scan-results", {
+          headers: {
+            "x-admin-key": import.meta.env.VITE_ADMIN_KEY || "",
+          },
+        });
+        const json = await res.json();
+        setData(json);
+      } catch (e) {
+        setData({ ok: false, error: String(e) });
+      }
+    })();
+  }, []);
+
+  return (
+    <div className="mx-auto max-w-3xl p-6">
+      <h1 className="text-xl font-semibold">Route health</h1>
+      <p className="mt-2 text-sm opacity-80">
+        Human-triggered scan viewer. Shows incomplete pages and meta gaps.
+      </p>
+
+      <pre className="mt-4 rounded-2xl border border-white/10 bg-black/30 p-4 overflow-auto text-xs">
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </div>
+  );
+}
+---END PASTE---
+
+C) Add route to your router (where routes are defined):
+- route path: /admin/route-health
+- component: RouteHealth
+Do not change existing routing patterns; follow current router style.
+
+────────────────────────────────────────────────────────
+10) ADD “AdminFlags” (optional but fast)
+If you have an admin dashboard page already, import:
+  import { FeatureFlagsPanel } from "../components/admin/FeatureFlagsPanel";
+and render it there.
+
+────────────────────────────────────────────────────────
+11) RUN CHECKS (must pass)
+Shell:
+  npm run build
+
+Dev test:
+- Visit /hubs/anxiety
+  - Search box shows results
+  - Recommendations show (no hardcoded duplicates)
+  - TinyStep saves a win and increments streak
+- Visit /admin/route-health (with VITE_ADMIN_KEY set if required)
+  - shows scan-results JSON
+
+────────────────────────────────────────────────────────
+CONSTRAINTS
+- routeKey only (no paths stored in internalLinks)
+- registry resolves canonical paths
+- no duplicated UI in pages
+- no background runners
+- no unsafe claims (“therapy”, “cure”, “diagnose”, “guarantee”)
+
+REQUIRED OUTPUT
+1) changed files list (paths only)
+2) build pass confirmation
+3) any fixes (file/line)
+4) which routes got tags/difficulty/estimatedMinutes updates

@@ -1198,3 +1198,15 @@ export function getModuleContent(moduleKey: ModuleKey) {
     ],
   };
 }
+
+export function listAllRouteMeta(): RouteMeta[] {
+  const allKeys = new Set<string>();
+  
+  Object.keys(MANUAL_REGISTRY).forEach(k => allKeys.add(k));
+  
+  if (typeof AUTOGEN_REGISTRY === 'object' && AUTOGEN_REGISTRY !== null) {
+    Object.keys(AUTOGEN_REGISTRY).forEach(k => allKeys.add(k));
+  }
+  
+  return Array.from(allKeys).map(key => getRouteMeta(key));
+}
