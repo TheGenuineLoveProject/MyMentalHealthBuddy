@@ -200,6 +200,10 @@ const MeditationPlayer = lazy(() => import("./pages/tools/MeditationPlayer.jsx")
 const EmotionWheel = lazy(() => import("./pages/tools/EmotionWheel.jsx"));
 const EmailDigest = lazy(() => import("./pages/settings/EmailDigest.jsx"));
 
+// Batch 17 - Content, Engagement, AI, A11y, Performance (P501-P550)
+const AIPersonality = lazy(() => import("./pages/settings/AIPersonality.jsx"));
+const WeeklyReflection = lazy(() => import("./pages/tools/WeeklyReflection.jsx"));
+
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
   return <AutopilotPage route={route} routeKey={routeKey} />;
@@ -828,6 +832,8 @@ export default function App() {
               <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
               <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
               <Route path="/settings/email-digest">{() => <ProtectedRoute><EmailDigest /></ProtectedRoute>}</Route>
+              <Route path="/settings/ai-personality">{() => <ProtectedRoute><AIPersonality /></ProtectedRoute>}</Route>
+              <Route path="/tools/weekly-reflection">{() => <WellnessRoute><WeeklyReflection /></WellnessRoute>}</Route>
 
               {/* Fallback - Config Driven Not Found */}
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>
