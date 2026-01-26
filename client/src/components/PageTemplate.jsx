@@ -40,6 +40,7 @@ import PageScaffold from "./layout/PageScaffold.tsx";
 import { getModules } from "../content/modules/modules.js";
 import { getRouteMeta } from "../content/meta/routeMetaRegistry";
 import { ModulesPanel } from "./modules/ModulesPanel";
+import { RelatedLinksBlock } from "./RelatedLinksBlock";
 
 const iconMap = {
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,
@@ -946,6 +947,7 @@ export default function PageTemplate({ config, children, routeKey }) {
   const [contentLevel, setContentLevel] = useContentLevel();
   const { readingLevel, setReadingLevel, setRouteDefault, isReady } = useReadingLevel();
   const effectiveRouteKey = routeKey || config?.routeKey || "unknown";
+  const meta = getRouteMeta(effectiveRouteKey);
 
   useEffect(() => {
     prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1133,6 +1135,8 @@ export default function PageTemplate({ config, children, routeKey }) {
             <ModulesGrid modules={config.modules} />
             
             <ModulesPanel routeKey={effectiveRouteKey} />
+            
+            <RelatedLinksBlock links={meta.internalLinks} />
 
             {config.sections && config.sections.map((section, index) => (
               <ContentSection key={section.id || index} section={section} index={index} readingLevel={readingLevel} />

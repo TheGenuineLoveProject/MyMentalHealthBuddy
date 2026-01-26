@@ -1,0 +1,4 @@
+import { getRouteMeta } from "../content/meta/routeMetaRegistry";
+import { RelatedLinksBlock } from "./RelatedLinksBlock";
+const meta = getRouteMeta(routeKey);
+<RelatedLinksBlock links={meta.internalLinks} />
