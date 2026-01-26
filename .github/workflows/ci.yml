@@ -49,6 +49,9 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Content tier check
+        run: npm run content-check
+
   typecheck:
     name: typecheck
     runs-on: ubuntu-latest

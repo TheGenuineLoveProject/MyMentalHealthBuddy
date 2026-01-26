@@ -20,6 +20,7 @@
     "audit:platform": "node scripts/platformAudit.mjs",
     "gate": "node scripts/gate.mjs",
     "lint": "eslint .",
+    "content-check": "node scripts/content-check.mjs",
     "gen:pages": "node tools/generate_pages_from_routes.mjs",
     "gen:pages:landing": "node scripts/generate-pages.mjs --mode=landing",
     "gen:pages:category": "node scripts/generate-pages.mjs --mode=category --category=\"wellness\"",
