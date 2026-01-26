@@ -75,6 +75,29 @@
 - ✅ Removed orphaned WellnessPageShell wrapper
 - ✅ Pill badge styling with proper padding
 
+### 7. DeleteAccount (/account/delete)
+**Issues Fixed:**
+- ✅ Container padding increased to py-16
+- ✅ CardFooter padding increased to pt-6
+- ✅ Buttons min-h-[44px] px-6 py-3 rounded-lg
+
+### 8. Subscription (/account/subscription)
+**Issues Fixed:**
+- ✅ Hero H1 scaled to 4xl-5xl responsive
+- ✅ Header margin increased to mb-12
+- ✅ Description text enlarged to text-lg
+- ✅ All buttons min-h-[44px] px-6 py-3 rounded-lg
+- ✅ Button gap increased to gap-4
+
+### 9. Sessions (/account/sessions)
+**Issues Fixed:**
+- ✅ Container padding increased to py-12
+- ✅ CardHeader padding increased to pb-6
+- ✅ Title scaled to 2xl-3xl responsive
+- ✅ Description text enlarged to text-base
+- ✅ Revoke button min-h-[44px] min-w-[44px] rounded-lg
+- ✅ Icon size increased to h-5 w-5
+
 ## Remaining Pages (Priority Order)
 
 The following pages should be audited in future passes:
