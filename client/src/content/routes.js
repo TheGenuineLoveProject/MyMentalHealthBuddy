@@ -6703,21 +6703,6 @@ const rawRoutes = [
     category: 'content',
     pageLabel: 'Content Studio',
     title: 'Content Studio — The Genuine Love Project',
-    description: 'Create and manage your personal content.',
-    hero: {
-      eyebrow: 'Create',
-      title: 'Your creative',
-      titleHighlight: 'studio.',
-      subtitle: 'Tools for creating and organizing your personal content.',
-      primaryCta: { label: 'Open Studio', href: '#studio' },
-      secondaryCta: { label: 'My Content', href: '#my-content' }
-    }
-  },
-  {
-    route: '/content-studio',
-    category: 'content',
-    pageLabel: 'Content Studio',
-    title: 'Content Studio — The Genuine Love Project',
     description: 'Create supportive, trauma-informed social media content with brand-aligned templates. Generate posts, carousels, threads, and newsletters that prioritize safety and warmth.',
     customComponent: 'ContentStudio',
     hero: {
@@ -7305,21 +7290,6 @@ const rawRoutes = [
       subtitle: 'Tools for publishing and managing content.',
       primaryCta: { label: 'Start Publishing', href: '#publish' },
       secondaryCta: { label: 'Drafts', href: '#drafts' }
-    }
-  },
-  {
-    route: '/design-system',
-    category: 'system',
-    pageLabel: 'Design System',
-    title: 'Design System — The Genuine Love Project',
-    description: 'Platform design system and component library.',
-    hero: {
-      eyebrow: 'Design',
-      title: 'Design',
-      titleHighlight: 'System.',
-      subtitle: 'Our component library and design guidelines.',
-      primaryCta: { label: 'Browse Components', href: '#components' },
-      secondaryCta: { label: 'Guidelines', href: '#guidelines' }
     }
   },
   {

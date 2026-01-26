@@ -1,0 +1,213 @@
+NAME: GLP_BATCH_11__DEEP_SCAN_V4__INCOMPLETE_FIRST__NEXT50_201_250__APPLY
+MODE: APPLY CHANGES (NO DRY-RUN)
+PROJECT: TheGenuineLoveProject.com
+OWNER: Aaliyah Draws Art LLC (Maria Landa)
+
+MISSION (Batch 11):
+1) Run Deep Scan v4 (stronger “no duplicate work” + quality gates).
+2) Complete any remaining incomplete integrations FIRST (up to 50), patching in chunks.
+3) Implement the NEXT 50 platform processes (#201–#250), skipping anything already DONE in registry.
+4) Validate + checkpoint after each patch.
+
+NON-NEGOTIABLE RULES:
+- APPLY changes.
+- Non-destructive: no deletes without explicit instruction; deprecate/redirect instead.
+- Single source of truth: routeKey only; internal links store routeKeys, UI resolves to canonicalPath.
+- Replit-safe: single port, no background daemons/watchers, no multi-port.
+- No clinical claims; supportive/educational only; avoid diagnosis/treatment/cure/guarantees.
+- Zero plagiarism; write original; no copying.
+- Brand lock: do not modify locked logo/brand assets; no recolor/rename.
+- Privacy: never log secrets; never store raw journaling text in server logs.
+- Security: minimal data, strong defaults, fail-fast on missing required secrets.
+
+================================================
+PHASE 0 — CHECKPOINT BEFORE BATCH 11
+================================================
+Commit:
+"checkpoint: before Batch 11 deep-scan v4 + next50 (201-250)"
+
+=========================================================
+PHASE 1 — DEEP SCAN v4 (NO DUPLICATE WORK — HARD GATE)
+=========================================================
+Write to:
+- docs/batch-11/deep-scan.json
+- docs/batch-11/deep-scan.md
+
+Deep Scan v4 MUST include:
+
+A) “Registry is Truth” Gate
+- Open integration registry file(s) used as source of truth (e.g. client/src/content/meta/integrationRegistry.ts)
+- Ensure each item has:
+  id, name, status, routeKeys, canonicalFiles, dependencies, lastTouchedBatch
+- Add/Update:
+  batch11_scan_timestamp
+  batch11_plan
+
+B) Duplicate Work Prevention (Hard Fail)
+Create/Update:
+- scripts/noDuplicateWork.ts (or .mjs)
+This time it MUST:
+- Detect if any patch touches a canonicalFile belonging to status=done items
+- Detect duplicate routes (routeKey + canonicalPath)
+- Detect duplicate endpoints (METHOD+PATH)
+- Detect duplicate DB table definitions (drizzle schema collisions)
+- Detect duplicate UI components that should be shared (fingerprint collisions)
+- Return nonzero exit code on violations
+- Provide actionable file/line suggestions in output
+
+C) “Incomplete First” Detector
+Create:
+- docs/batch-11/incomplete-queue.md
+Listing ALL items with status:
+- planned but missing files
+- in_progress with failing build/typecheck/tests
+- “done” but broken build
+
+D) Repo Quality Health Report
+Create:
+- docs/batch-11/health-report.md
+Include:
+- build status
+- typecheck status
+- lint status (if present)
+- test status (if present)
+- bundle size snapshot (if available)
+- a11y flags summary (basic)
+
+E) UI Consistency Audit (Spacing/Typography/Buttons)
+Create:
+- docs/batch-11/ui-consistency-audit.md
+Rules to enforce:
+- Buttons >= 44px height
+- Max reading width container
+- Typography scale tokens used consistently
+- Overcrowding removal on top 10 most visited pages (by nav prominence)
+
+AFTER scan:
+- Run:
+  node scripts/noDuplicateWork.*
+If it fails, fix the violations FIRST before implementing anything else.
+
+=============================================================
+PHASE 2 — COMPLETE INCOMPLETE INTEGRATIONS FIRST (UP TO 50)
+=============================================================
+If incomplete items exist:
+- Fix them first, up to 50, in patches of 10.
+Patch constraints:
+- Max 10 items per patch
+- Max 12 files per patch
+- Each patch ends with:
+  npm run build
+  npm run typecheck
+  node scripts/noDuplicateWork.*
+  npm test (if present)
+Document each patch:
+- docs/batch-11/patch-XX.md
+Update registry status for each fixed item:
+- in_progress -> done
+- or planned -> done
+
+Commit after each patch:
+"Batch 11 Fix Patch X: incomplete integrations (items ...)"
+
+Only when incomplete queue is empty (or the first 50 are resolved), continue.
+
+=============================================================
+PHASE 3 — NEXT 50 TOP PLATFORM PROCESSES (#201–#250) — APPLY
+=============================================================
+Implement ONLY missing processes (auto-skip if registry says done).
+Update:
+- docs/platform/top-platform-processes-matrix.md
+Mark #201–#250 planned -> in_progress -> done.
+
+Required Process Set #201–#250 (implement if missing):
+
+A) PERSONALIZATION + USER PATHWAYS (10)
+201) Personal Growth Pathways hub (routeKey: pathways.home)
+202) “Choose Your Goal” onboarding mini-flow (3 steps, optional)
+203) Personalized tool recommendations (rule-based, not medical)
+204) Saved favorites (tools/pages) + quick access
+205) Progress streaks (gentle, non-shaming) + opt-out
+206) “My Calm Plan” card generator + save
+207) “Values to Actions” weekly plan builder + save
+208) Reflection history viewer (privacy-safe, minimal metadata)
+209) Notification preferences UI (no push until user opts-in)
+210) Safety preference toggles (softer language, reduced intensity)
+
+B) TOOL EXPANSION — NEXT 10 HIGH-VALUE TOOLS (10)
+211) /tools/compassion-break (60s)
+212) /tools/reframe (CBT-lite, non-clinical)
+213) /tools/urge-surf (impulse regulation, non-clinical)
+214) /tools/grief-letter (gentle, optional)
+215) /tools/repair-script (relationship repair wording)
+216) /tools/awe-microdose (60s)
+217) /tools/body-scan (gentle)
+218) /tools/digital-sunset (sleep support)
+219) /tools/meaning-map (purpose mapping)
+220) /tools/community-checkin (peer-safe prompts)
+
+C) CONTENT SYSTEMS — 3 LEVELS EVERYWHERE (10)
+221) Content Tier Compiler integrated into admin (beginner/intermediate/advanced)
+222) Page-level “reading level switcher” (A/B: beginner vs advanced)
+223) Microcopy library enforcement (no repeats per page)
+224) Glossary system (term -> simple definition -> deeper)
+225) Content lint rules (flag risky claims + jargon)
+226) Template pack for 25 core pages (consistent structure)
+227) “Examples library” (mirroring examples per tool)
+228) “Practice library” (60s / 10m / softer)
+229) “What to do next” recommender block (routeKey-based)
+230) Content versioning metadata (updatedAt, version)
+
+D) SOCIAL + SEO STUDIO v3 (10)
+231) Viral Hook Lab (admin-only) with non-clickbait guardrails
+232) Hashtag intelligence rules engine (brand/niche/broad sets)
+233) Weekly calendar generator (7/14/30 options)
+234) Repurpose: post -> carousel -> blog -> email -> shorts scripts
+235) UTM builder + campaign tracker (minimal)
+236) Content approval queue improvements (comments, revisions)
+237) Export pack: CSV + JSON + copy-ready blocks
+238) “Brand voice guard” scanner (tone consistency)
+239) “No plagiarism” similarity warning (heuristic only; no copying)
+240) Social analytics input stub (manual entry) + trend dashboard
+
+E) PAYMENTS + PRODUCTIZATION (10)
+241) Pricing page polish + plan comparison (non-clinical)
+242) Stripe checkout hardening (validation + better errors)
+243) Webhook retry + idempotency improvements
+244) “My subscription” page (billing portal link)
+245) Digital product library (journals/ebooks) structure
+246) Order history viewer (minimal)
+247) Coupon/launch code support (optional)
+248) Tax/legal disclosure page links (basic)
+249) Refund/help flow copy (calm, clear)
+250) Admin revenue dashboard (privacy-safe, totals only)
+
+IMPLEMENTATION METHOD:
+- 5 patches total (10 processes each).
+After EACH patch run:
+- npm run build
+- npm run typecheck
+- node scripts/noDuplicateWork.*
+- npm test (if present)
+
+Commit after each patch:
+"Batch 11 Patch X: processes ###-###"
+
+================================================
+PHASE 4 — FINAL VALIDATION + CHECKPOINT
+================================================
+Must pass:
+- npm run build
+- npm run typecheck
+- node scripts/noDuplicateWork.*
+- Smoke: start server + verify 5 key pages load
+
+Final commit:
+"checkpoint: after Batch 11 next50 (201-250) + deep-scan v4"
+
+FINAL OUTPUT TO USER:
+1) Deep scan summary + docs paths
+2) Incomplete integrations completed list
+3) Processes #201–#250 completed list
+4) Remaining Top 20 priorities for Batch 12
+STOP and wait for: "RUN BATCH 12"
