@@ -39,15 +39,15 @@ export default function Subscription() {
       />
       
       <main className="container mx-auto px-4 py-12 max-w-2xl">
-        <header className="mb-8">
-          <div className="flex items-center gap-2 text-primary mb-2">
+        <header className="mb-12">
+          <div className="flex items-center gap-2 text-primary mb-4">
             <CreditCard className="w-5 h-5" />
             <span className="text-sm font-medium">Account</span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 leading-tight">
             My Subscription
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-lg text-muted-foreground">
             Manage your plan and billing preferences.
           </p>
         </header>
@@ -89,17 +89,17 @@ export default function Subscription() {
               ))}
             </div>
 
-            <div className="flex gap-3">
-              <Button variant="outline" className="flex-1" data-testid="button-billing-portal">
+            <div className="flex gap-4">
+              <Button variant="outline" className="flex-1 min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-billing-portal">
                 <ExternalLink className="w-4 h-4 mr-2" />
                 Billing Portal
               </Button>
               {subscription.cancelAtPeriodEnd ? (
-                <Button className="flex-1" data-testid="button-resume">
+                <Button className="flex-1 min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-resume">
                   Resume Subscription
                 </Button>
               ) : (
-                <Button variant="ghost" className="flex-1 text-muted-foreground" data-testid="button-cancel">
+                <Button variant="ghost" className="flex-1 min-h-[44px] px-6 py-3 rounded-lg text-muted-foreground" data-testid="button-cancel">
                   Cancel Plan
                 </Button>
               )}

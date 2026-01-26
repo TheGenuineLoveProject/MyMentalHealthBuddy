@@ -82,7 +82,7 @@ export default function DeleteAccountPage() {
   }
 
   return (
-    <div className="container max-w-lg py-12">
+    <div className="container max-w-lg py-16">
       <Card className="border-red-200 dark:border-red-800">
         <CardHeader>
           <div className="flex items-center gap-2 text-red-600">
@@ -163,11 +163,11 @@ export default function DeleteAccountPage() {
             </label>
           </div>
         </CardContent>
-        <CardFooter className="flex gap-4">
+        <CardFooter className="flex gap-4 pt-6">
           <Button
             variant="outline"
             onClick={() => window.history.back()}
-            className="flex-1"
+            className="flex-1 min-h-[44px] px-6 py-3 rounded-lg"
             data-testid="button-cancel-delete"
           >
             Cancel
@@ -176,7 +176,7 @@ export default function DeleteAccountPage() {
             variant="destructive"
             onClick={() => deleteMutation.mutate()}
             disabled={!canSubmit || deleteMutation.isPending}
-            className="flex-1"
+            className="flex-1 min-h-[44px] px-6 py-3 rounded-lg"
             data-testid="button-confirm-delete"
           >
             {deleteMutation.isPending ? 'Submitting...' : 'Delete My Account'}

@@ -111,14 +111,14 @@ export default function SessionsPage() {
   const sessionList = sessions?.sessions || sessions || [];
 
   return (
-    <div className="container max-w-2xl py-8">
+    <div className="container max-w-2xl py-12">
       <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Globe className="h-5 w-5" />
+        <CardHeader className="pb-6">
+          <CardTitle className="flex items-center gap-2 text-2xl md:text-3xl">
+            <Globe className="h-6 w-6" />
             Active Sessions
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-base mt-2">
             These are the devices currently signed in to your account. 
             If you don't recognize a session, revoke it immediately.
           </CardDescription>
@@ -170,13 +170,12 @@ export default function SessionsPage() {
                   {!isCurrent && (
                     <Button
                       variant="ghost"
-                      size="sm"
                       onClick={() => handleRevoke(session.id)}
                       disabled={revokingId === session.id}
-                      className="text-destructive hover:text-destructive"
+                      className="min-h-[44px] min-w-[44px] p-2 rounded-lg text-destructive hover:text-destructive"
                       data-testid={`revoke-session-${session.id}`}
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="h-5 w-5" />
                     </Button>
                   )}
                 </div>
