@@ -1,0 +1,266 @@
+NAME: GLP_NEXT_REPLIT_AI_STEP_04 (100B^ x 100B^)
+
+ROLE:
+Replit AI Agent Mode for TheGenuineLoveProject.com (Aaliyah Draws Art LLC, Owner: Maria Landa)
+
+MISSION:
+Ship the next “complete, user-visible” upgrade bundle without breaking anything:
+DRY-RUN → APPLY PATCH → VALIDATE → STOP
+
+NON-NEGOTIABLE RULES:
+- DRY-RUN FIRST (no edits until “APPLY PATCH 1”)
+- Non-destructive (no deletions/renames, no sweeping refactors)
+- Human-in-the-loop only
+- Educational/supportive only; no clinical claims
+- Zero plagiarism/copyright infringement; original writing only
+- Replit-safe (single port, no daemons)
+- WCAG AA; buttons ≥44px; keyboard + focus visible
+- Brand lock: do not modify official logo; calm “Serenity Sage” vibe
+
+========================================================
+THIS CYCLE’S NEXT TASK (HIGHEST USER-VISIBLE IMPACT)
+========================================================
+✅ SHIP THE “TOOLS HUB” + TOOL #1 (BREATH) + MICROCOPY SYSTEM
+Reason: Users can immediately DO something calming, and the platform gains a reusable pattern.
+
+Deliverables (in this cycle):
+1) /tools hub page (clean catalog)
+2) /tools/breath tool page (60 seconds + 10 minutes)
+3) Wellness Microcopy Library (reusable, non-repetitive)
+4) Safety Footer component (non-clinical disclaimers + crisis link block)
+5) Minimal analytics events (optional: console/log or DB if already available)
+
+========================================================
+STEP 0 — DRY-RUN REPO DISCOVERY (DO THIS FIRST)
+========================================================
+1) Identify routing:
+   - Is client using React Router? (check client/src/main.tsx, router file)
+2) Identify UI system:
+   - Tailwind? shadcn/ui? existing Button/Card components?
+3) Identify existing layout shell:
+   - AppLayout, Navbar, Footer, PageTemplate?
+4) Identify existing auth/me endpoint:
+   - /api/me or similar (for later personalization; do not block tools)
+
+OUTPUT REQUIRED FROM DISCOVERY:
+- Exact paths to router + layout + UI components
+- Confirm where new pages should live
+- Confirm whether a “content registry” exists (routeKey/meta registry)
+
+STOP after discovery and print Patch 1 plan with exact file paths.
+
+========================================================
+PATCH 1 (MAX 5 FILES): MICROCOPY SYSTEM + SAFETY FOOTER
+========================================================
+Goal: Create reusable microcopy keys so pages stay consistent without repeating exact phrases.
+
+FILES:
+1) client/src/content/microcopy/wellnessMicrocopy.ts     (NEW)
+2) client/src/components/SafetyFooter.tsx                (NEW)
+3) client/src/components/Microcopy.tsx                   (NEW)  (tiny helper)
+4) client/src/content/microcopy/index.ts                 (NEW)
+5) client/src/styles/microcopy.css OR tailwind classes   (EDIT only if needed)
+
+1) wellnessMicrocopy.ts (content-only, NO JSX)
+- Export dictionary with:
+  - “tone packs” (calm/neutral/encouraging)
+  - “slots” (cta_primary, cta_secondary, empty_state, success_toast, error_toast)
+  - Rotating variants to avoid repetition (array per slot)
+- Include “reading level variants” (beginner/intermediate/advanced) for key items.
+
+2) SafetyFooter.tsx
+- Props: riskLevel: "low"|"medium"|"high"
+- Always shows:
+  - “Educational only” disclaimer
+  - “Go slow / pause is allowed”
+- If riskLevel is high:
+  - crisis resources block (link to /crisis or external resources page if exists)
+- No medical claims. Neutral language.
+
+3) Microcopy.tsx
+- Function: pickMicrocopy(key, {variant?, level?}) with stable randomness:
+  - deterministic by (route + key) so it doesn’t change every render
+- Prevents same phrase twice on the same page.
+
+VALIDATION:
+- Typecheck builds
+- No runtime errors
+- Microcopy shows on a test page
+
+STOP. Wait for: APPLY PATCH 1
+
+========================================================
+PATCH 2 (MAX 5 FILES): /tools HUB PAGE
+========================================================
+Goal: One beautiful calm catalog page with 6–12 tool cards.
+
+FILES:
+1) client/src/pages/tools/ToolsHub.tsx                    (NEW)
+2) client/src/pages/tools/toolCatalog.ts                 (NEW)
+3) client/src/routes/toolsRoutes.tsx OR router file       (EDIT)
+4) client/src/components/ToolCard.tsx                     (NEW)
+5) client/src/pages/tools/index.ts                        (NEW)
+
+TOOLS LIST (start):
+- breath (live in Patch 3)
+- grounding
+- journaling
+- values
+- boundaries
+- sleep
+- movement
+- coherence (metaphor-only)
+
+UI RULES:
+- Max width container
+- 2-column on desktop, 1-column on mobile
+- Buttons ≥44px height
+- No overcrowding; card spacing generous
+- Each card has:
+  - title
+  - one-sentence promise (“may help you slow down”)
+  - “Begin gently” CTA → tool route
+
+CONTENT TIERS:
+- ToolsHub shows “Beginner / Intermediate / Advanced” filter toggle
+- Default = Beginner (child-simple)
+- Filter changes card microcopy only (not the tool logic)
+
+SAFETY:
+- SafetyFooter riskLevel="low"
+
+VALIDATION:
+- /tools renders
+- All cards link without 404
+
+STOP. Wait for: APPLY PATCH 2
+
+========================================================
+PATCH 3 (MAX 5 FILES): TOOL #1 LIVE — /tools/breath
+========================================================
+Goal: Full working Breath tool with 60s and 10min modes + softer toggle.
+
+FILES:
+1) client/src/pages/tools/BreathTool.tsx                  (NEW)
+2) client/src/components/PracticeCard.tsx                 (NEW)
+3) client/src/components/PaceToggle.tsx                   (NEW)
+4) client/src/pages/tools/breathCopy.ts                   (NEW)
+5) router file                                            (EDIT)
+
+REQUIRED UX SECTIONS (exact order):
+1) Calm Hero
+   - H1: “Breath Reset”
+   - 1 line promise: “A gentle reset you can stop anytime.”
+   - CTA: “Begin gently”
+
+2) Choose Your Pace
+   - Two buttons:
+     - “60 seconds”
+     - “10 minutes”
+   - Default = 60 seconds
+
+3) Practice Card (steps)
+   - 3–7 steps max
+   - Include “pause” option
+   - Include “softer version” toggle:
+     - replaces instructions with an even gentler variant
+
+4) Reflection (optional)
+   - 1 prompt:
+     - Beginner: “How do you feel now?”
+     - Intermediate: “What changed in your body?”
+     - Advanced: “What state shift do you notice?”
+
+5) Save/Log (optional)
+   - If you already have DB: store only:
+     - tool_slug, pace, completed_at (NO journaling text)
+   - If no DB yet: store in localStorage as a simple history array
+
+6) Support panel
+   - “If this feels too much, stop and look around the room.”
+
+7) SafetyFooter riskLevel="low"
+
+BREATH METHOD (safe default):
+- “Coherent breathing” style:
+  - inhale ~4 seconds, exhale ~6 seconds (gentle)
+- No intense breathwork. No hyperventilation.
+
+ANALYTICS EVENTS (minimal):
+- tool_view
+- pace_select
+- practice_start
+- practice_complete
+
+VALIDATION:
+- /tools/breath works
+- no console errors
+- mobile layout looks clean
+- buttons big enough
+
+STOP. Wait for: APPLY PATCH 3
+
+========================================================
+PATCH 4 (OPTIONAL): “DISCUSSION BUTTONS DON’T WORK” FIX PASS
+========================================================
+If your repo has broken discussion tabs/buttons:
+- Identify component and event handlers
+- Fix wiring (onClick, router links, state)
+- Add disabled/loading states microcopy
+
+But only after ToolsHub + Breath Tool ship.
+
+========================================================
+MICROCOPY LIBRARY (READY CONTENT TO INSERT)
+========================================================
+Add these into wellnessMicrocopy.ts:
+
+SLOTS (examples; each slot should be an array of 6–10 variants)
+
+CTA_PRIMARY:
+- “Begin gently”
+- “Try one small step”
+- “Start with the easy version”
+- “Let’s take this slowly”
+- “Start here, softly”
+- “Take a calm minute”
+
+CTA_SECONDARY:
+- “Save for later”
+- “Not right now”
+- “I’ll come back”
+- “Show a softer version”
+- “Make it easier”
+- “I need a pause”
+
+EMPTY_STATE:
+- “Nothing here yet. That’s okay.”
+- “You’re early. We’ll build this together.”
+- “This space is quiet for now.”
+
+SUCCESS:
+- “Done. You showed up.”
+- “Nice work. Small steps count.”
+- “Saved. You can return anytime.”
+
+ERROR:
+- “Something didn’t load. Try again.”
+- “We hit a bump. You didn’t do anything wrong.”
+- “Please refresh and continue gently.”
+
+CONSENT / SAFETY:
+- “You’re allowed to stop anytime.”
+- “Go at your pace.”
+- “If this feels intense, pause and ground.”
+
+DISCLAIMERS (short):
+- “Supportive education only. Not medical care.”
+- “If you’re in danger or might hurt yourself, seek immediate help.”
+
+========================================================
+STOP CONDITIONS
+========================================================
+After DRY-RUN discovery, STOP and wait.
+After each APPLY PATCH, run validation and STOP.
+
+END.

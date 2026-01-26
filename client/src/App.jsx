@@ -9,6 +9,7 @@ import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
 import { AutopilotPage } from "./pages/_autopilot.jsx";
 import AgeConsentGate from "./components/AgeConsentGate.jsx";
+import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
 
 const Login = lazy(() => import("./pages/Login.jsx"));
@@ -585,30 +586,30 @@ export default function App() {
                 <ProtectedRoute><ConfigRoute route="/community/challenges" /></ProtectedRoute>
               </Route>
 
-              {/* Admin Routes */}
+              {/* Admin Routes (require admin role) */}
               <Route path="/admin">
-                <ProtectedRoute><AdminCommandCenter /></ProtectedRoute>
+                <AdminGuard><AdminCommandCenter /></AdminGuard>
               </Route>
               <Route path="/admin/social">
-                <ProtectedRoute><SocialDashboard /></ProtectedRoute>
+                <AdminGuard><SocialDashboard /></AdminGuard>
               </Route>
               <Route path="/admin/social/generate">
-                <ProtectedRoute><SocialGenerator /></ProtectedRoute>
+                <AdminGuard><SocialGenerator /></AdminGuard>
               </Route>
               <Route path="/admin/social/library">
-                <ProtectedRoute><SocialLibrary /></ProtectedRoute>
+                <AdminGuard><SocialLibrary /></AdminGuard>
               </Route>
               <Route path="/admin/social/calendar">
-                <ProtectedRoute><SocialCalendar /></ProtectedRoute>
+                <AdminGuard><SocialCalendar /></AdminGuard>
               </Route>
               <Route path="/admin/social/analytics">
-                <ProtectedRoute><SocialAnalytics /></ProtectedRoute>
+                <AdminGuard><SocialAnalytics /></AdminGuard>
               </Route>
               <Route path="/content-admin">
-                <ProtectedRoute><ContentAdminDashboard /></ProtectedRoute>
+                <AdminGuard><ContentAdminDashboard /></AdminGuard>
               </Route>
               <Route path="/crm">
-                <ProtectedRoute><CRMPage /></ProtectedRoute>
+                <AdminGuard><CRMPage /></AdminGuard>
               </Route>
               <Route path="/control">{() => <ConfigRoute route="/control" />}</Route>
               <Route path="/health">{() => <ConfigRoute route="/health" />}</Route>
