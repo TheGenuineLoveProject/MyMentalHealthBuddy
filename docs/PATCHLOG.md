@@ -19,6 +19,22 @@
 
 ---
 
+## Patch 27 — Complete Batches 03, 04, 05
+- Date: 2026-01-26
+- Processes: P101-P250
+- Files: 
+  - `docs/process-engine/batches/process-101-150.md`
+  - `docs/process-engine/batches/process-151-200.md`
+  - `docs/process-engine/batches/process-201-250.md`
+- Summary: Marked all 150 processes as complete across 3 batches
+- Validation results:
+  - build: ✅ Passed
+  - typecheck: ✅ Passed
+  - tests: ✅ Passed
+- Notes: Process Engine now 250/250 complete
+
+---
+
 ## Patch 0 — Docs Bootstrap
 - Date: 2026-01-26
 - Processes: Foundation

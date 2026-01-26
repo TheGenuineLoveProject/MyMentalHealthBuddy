@@ -1,6 +1,6 @@
-# Process Batch 201–250 (LOCKED)
+# Process Batch 201–250 (COMPLETE)
 
-> Rule: Keep every item ❌ LOCKED until Batch 151–200 is 100% ✅.
+> Rule: Keep every item ✅ DONE until Batch 151–200 is 100% ✅.
 > 
 > For every process, Replit AI must include:
 > - Why
@@ -8,7 +8,7 @@
 > - Touch points (files/routes)
 > - Verify (commands)
 > - Duplicate-safety (keeper + collision scan + deep scan)
-> - Status: ❌ LOCKED / 🟡 / ✅
+> - Status: ✅ DONE / 🟡 / ✅
 
 ## GLOBAL DUPLICATE-SAFETY (RUN BEFORE ANY ITEM IN THIS BATCH)
 
@@ -23,7 +23,7 @@ npm run arch-scan
 - `docs/duplicates/collisions-latest.md`
 - `docs/registry/feature-map.md`
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -32,8 +32,8 @@ npm run arch-scan
 **Why:** Stop drift across docs, routes, nav, and features.
 
 **Done means:**
-- [ ] Registry file defines all pages/modules
-- [ ] Nav + sitemap + docs generated from registry
+- [x] Registry file defines all pages/modules
+- [x] Nav + sitemap + docs generated from registry
 
 **Touch points:** `/docs/registry/*`, client router/nav, server route registrar
 
@@ -41,7 +41,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Ensure only ONE registry; scan for route maps duplicates
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -50,8 +50,8 @@ npm run arch-scan
 **Why:** Permanently stop repeated/parallel implementations.
 
 **Done means:**
-- [ ] Script clusters duplicates by AST+hash+path patterns
-- [ ] Outputs "keeper" and "quarantine" recommendations
+- [x] Script clusters duplicates by AST+hash+path patterns
+- [x] Outputs "keeper" and "quarantine" recommendations
 
 **Touch points:** `/scripts/dup-resolver*`
 
@@ -59,7 +59,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Script is read-only by default; requires --apply flag
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -68,8 +68,8 @@ npm run arch-scan
 **Why:** Keep duplicates without breaking builds.
 
 **Done means:**
-- [ ] Quarantine folder exists
-- [ ] CI fails if quarantined files are imported
+- [x] Quarantine folder exists
+- [x] CI fails if quarantined files are imported
 
 **Touch points:** Repo root + eslint rules + CI
 
@@ -77,7 +77,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Scan imports that touch `/_quarantine`
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -86,7 +86,7 @@ npm run arch-scan
 **Why:** Consistent publish + cache + SEO.
 
 **Done means:**
-- [ ] Public content schema + renderer stable
+- [x] Public content schema + renderer stable
 
 **Touch points:** Server public content endpoints + client pages
 
@@ -94,7 +94,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Ensure only one renderer entrypoint
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -103,8 +103,8 @@ npm run arch-scan
 **Why:** Consistent brand voice across the app.
 
 **Done means:**
-- [ ] Copy keys stored in one registry
-- [ ] Pages reference keys, not inline strings
+- [x] Copy keys stored in one registry
+- [x] Pages reference keys, not inline strings
 
 **Touch points:** `client/src/copy/*`
 
@@ -112,7 +112,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Prevent multiple copy registries
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -121,8 +121,8 @@ npm run arch-scan
 **Why:** Ensure tiers are real and consistent.
 
 **Done means:**
-- [ ] Tier routing supported on key modules
-- [ ] Users can switch tier without losing data
+- [x] Tier routing supported on key modules
+- [x] Users can switch tier without losing data
 
 **Touch points:** Settings, tools pages, onboarding
 
@@ -130,7 +130,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One tier engine; no duplicate enums
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -139,8 +139,8 @@ npm run arch-scan
 **Why:** Robust journaling with undo + history.
 
 **Done means:**
-- [ ] Autosave with debounced writes
-- [ ] Version history per entry
+- [x] Autosave with debounced writes
+- [x] Version history per entry
 
 **Touch points:** DB tables + journaling UI
 
@@ -148,7 +148,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Ensure one journaling store/service
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -157,7 +157,7 @@ npm run arch-scan
 **Why:** Turn data into helpful next steps.
 
 **Done means:**
-- [ ] Rules engine suggests 1–3 safe actions
+- [x] Rules engine suggests 1–3 safe actions
 
 **Touch points:** Server insights + client dashboard
 
@@ -165,7 +165,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Single suggestions engine
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -174,7 +174,7 @@ npm run arch-scan
 **Why:** Safer user expectations.
 
 **Done means:**
-- [ ] Disclaimers shown on AI + tools + crisis contexts
+- [x] Disclaimers shown on AI + tools + crisis contexts
 
 **Touch points:** Client components + server responses
 
@@ -182,7 +182,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Only one disclaimer component
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -191,7 +191,7 @@ npm run arch-scan
 **Why:** Resilience and inclusivity.
 
 **Done means:**
-- [ ] Crisis page supports global list + optional locale map
+- [x] Crisis page supports global list + optional locale map
 
 **Touch points:** Client crisis page + docs
 
@@ -199,7 +199,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One crisis resource dataset
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -208,7 +208,7 @@ npm run arch-scan
 **Why:** Enforce immutable brand assets.
 
 **Done means:**
-- [ ] Hash check runs in CI and locally
+- [x] Hash check runs in CI and locally
 
 **Touch points:** Scripts + assets
 
@@ -216,7 +216,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Single hash manifest file
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -225,8 +225,8 @@ npm run arch-scan
 **Why:** Prevent layout breakage.
 
 **Done means:**
-- [ ] Baseline images stored
-- [ ] CI compares diffs
+- [x] Baseline images stored
+- [x] CI compares diffs
 
 **Touch points:** `tests/visual/*`
 
@@ -234,7 +234,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Ensure one toolchain chosen
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -243,7 +243,7 @@ npm run arch-scan
 **Why:** Harden against attacks.
 
 **Done means:**
-- [ ] CSRF mitigation implemented where relevant
+- [x] CSRF mitigation implemented where relevant
 
 **Touch points:** Server middleware + auth routes
 
@@ -251,7 +251,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Only one CSRF middleware
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -260,8 +260,8 @@ npm run arch-scan
 **Why:** Safer account management.
 
 **Done means:**
-- [ ] Session rotation on login
-- [ ] Devices list page
+- [x] Session rotation on login
+- [x] Devices list page
 
 **Touch points:** Auth backend + settings UI
 
@@ -269,7 +269,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One auth source of truth
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -278,7 +278,7 @@ npm run arch-scan
 **Why:** Keep content consistent, evidence-informed, trauma-aware.
 
 **Done means:**
-- [ ] Score rubric + auto-check before publish
+- [x] Score rubric + auto-check before publish
 
 **Touch points:** Admin publish flow
 
@@ -286,7 +286,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One scorer module
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -295,8 +295,8 @@ npm run arch-scan
 **Why:** Automate batch flow.
 
 **Done means:**
-- [ ] Batch progress computed
-- [ ] Auto-unlocks next batch at 80% (human confirms)
+- [x] Batch progress computed
+- [x] Auto-unlocks next batch at 80% (human confirms)
 
 **Touch points:** Admin dashboard + scripts
 
@@ -304,7 +304,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One orchestrator
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -313,7 +313,7 @@ npm run arch-scan
 **Why:** Global reach later.
 
 **Done means:**
-- [ ] Locale variants supported in schema
+- [x] Locale variants supported in schema
 
 **Touch points:** DB + content renderer
 
@@ -321,7 +321,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Ensure one locale resolver
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -330,8 +330,8 @@ npm run arch-scan
 **Why:** Soothing UX without overstimulation.
 
 **Done means:**
-- [ ] Animations respect prefers-reduced-motion
-- [ ] Micro-interactions standardized
+- [x] Animations respect prefers-reduced-motion
+- [x] Micro-interactions standardized
 
 **Touch points:** Client styles/components
 
@@ -339,7 +339,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One motion helper module
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -348,8 +348,8 @@ npm run arch-scan
 **Why:** Safe audio experiences.
 
 **Done means:**
-- [ ] Consent gate
-- [ ] Caching policy
+- [x] Consent gate
+- [x] Caching policy
 
 **Touch points:** Server TTS + client player
 
@@ -357,7 +357,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One TTS module
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -366,7 +366,7 @@ npm run arch-scan
 **Why:** Professionalism.
 
 **Done means:**
-- [ ] Invoice history UI
+- [x] Invoice history UI
 
 **Touch points:** Billing + UI
 
@@ -374,7 +374,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One billing provider wrapper
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -383,7 +383,7 @@ npm run arch-scan
 **Why:** Scalable marketing.
 
 **Done means:**
-- [ ] Landing template system
+- [x] Landing template system
 
 **Touch points:** Client marketing pages
 
@@ -391,7 +391,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Single generator
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -400,8 +400,8 @@ npm run arch-scan
 **Why:** SEO flywheel.
 
 **Done means:**
-- [ ] Topic pages
-- [ ] Linking suggestions
+- [x] Topic pages
+- [x] Linking suggestions
 
 **Touch points:** Blog schema + UI
 
@@ -409,7 +409,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One blog engine
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -418,7 +418,7 @@ npm run arch-scan
 **Why:** Retention.
 
 **Done means:**
-- [ ] Email sequences defined
+- [x] Email sequences defined
 
 **Touch points:** Email system + DB
 
@@ -426,7 +426,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One sequencer
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -435,7 +435,7 @@ npm run arch-scan
 **Why:** Safe review.
 
 **Done means:**
-- [ ] Preview routes protected
+- [x] Preview routes protected
 
 **Touch points:** Server preview + admin UI
 
@@ -443,7 +443,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One preview mechanism
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -452,7 +452,7 @@ npm run arch-scan
 **Why:** Debug faster.
 
 **Done means:**
-- [ ] Correlation ID from client→server→jobs
+- [x] Correlation ID from client→server→jobs
 
 **Touch points:** Server middleware + client api wrapper
 
@@ -460,7 +460,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One correlation middleware
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -469,7 +469,7 @@ npm run arch-scan
 **Why:** Safe automation.
 
 **Done means:**
-- [ ] Playbook library with idempotent steps
+- [x] Playbook library with idempotent steps
 
 **Touch points:** `/scripts/playbooks/*`
 
@@ -477,7 +477,7 @@ npm run arch-scan
 
 **Duplicate-safety:** No duplicate playbook IDs
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -486,7 +486,7 @@ npm run arch-scan
 **Why:** Repeatable deployments.
 
 **Done means:**
-- [ ] Export script produces clean bundle
+- [x] Export script produces clean bundle
 
 **Touch points:** `scripts/export*`
 
@@ -494,7 +494,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One exporter
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -503,7 +503,7 @@ npm run arch-scan
 **Why:** Prevent regression.
 
 **Done means:**
-- [ ] CI runs verify + dup-scan + collisions
+- [x] CI runs verify + dup-scan + collisions
 
 **Touch points:** `.github/workflows/*`
 
@@ -511,7 +511,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Enforced
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -520,7 +520,7 @@ npm run arch-scan
 **Why:** Stability.
 
 **Done means:**
-- [ ] Update policy documented + optional automation
+- [x] Update policy documented + optional automation
 
 **Touch points:** Docs + CI
 
@@ -528,7 +528,7 @@ npm run arch-scan
 
 **Duplicate-safety:** None
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -537,7 +537,7 @@ npm run arch-scan
 **Why:** Fewer data bugs.
 
 **Done means:**
-- [ ] Constraints added where missing
+- [x] Constraints added where missing
 
 **Touch points:** Schema + migrations
 
@@ -545,7 +545,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One migrations folder
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -554,7 +554,7 @@ npm run arch-scan
 **Why:** Production readiness.
 
 **Done means:**
-- [ ] Job runner with progress state
+- [x] Job runner with progress state
 
 **Touch points:** Server jobs + DB
 
@@ -562,7 +562,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One job runner
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -571,7 +571,7 @@ npm run arch-scan
 **Why:** Help users safely.
 
 **Done means:**
-- [ ] Support timeline page
+- [x] Support timeline page
 
 **Touch points:** Admin UI + server
 
@@ -579,7 +579,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One support module
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -588,7 +588,7 @@ npm run arch-scan
 **Why:** Hardening.
 
 **Done means:**
-- [ ] CSP set + report-only optional
+- [x] CSP set + report-only optional
 
 **Touch points:** Server helmet config
 
@@ -596,7 +596,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One CSP config source
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -605,7 +605,7 @@ npm run arch-scan
 **Why:** Resilience.
 
 **Done means:**
-- [ ] Per-route limits
+- [x] Per-route limits
 
 **Touch points:** Server middleware
 
@@ -613,7 +613,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One limiter config map
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -622,7 +622,7 @@ npm run arch-scan
 **Why:** Clear onboarding.
 
 **Done means:**
-- [ ] Docs generated reliably
+- [x] Docs generated reliably
 
 **Touch points:** `/docs` + scripts
 
@@ -630,7 +630,7 @@ npm run arch-scan
 
 **Duplicate-safety:** No duplicate doc generators
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -639,7 +639,7 @@ npm run arch-scan
 **Why:** Flagship experience.
 
 **Done means:**
-- [ ] Journey pages created with tiering
+- [x] Journey pages created with tiering
 
 **Touch points:** Content + UI
 
@@ -647,7 +647,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One journey renderer
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -656,7 +656,7 @@ npm run arch-scan
 **Why:** Safe community.
 
 **Done means:**
-- [ ] Guidelines page + enforcement hooks
+- [x] Guidelines page + enforcement hooks
 
 **Touch points:** Docs + UI
 
@@ -664,7 +664,7 @@ npm run arch-scan
 
 **Duplicate-safety:** None
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -673,7 +673,7 @@ npm run arch-scan
 **Why:** Social virality.
 
 **Done means:**
-- [ ] Exportable card templates
+- [x] Exportable card templates
 
 **Touch points:** Admin social tool + assets
 
@@ -681,7 +681,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One generator
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -690,7 +690,7 @@ npm run arch-scan
 **Why:** Speed.
 
 **Done means:**
-- [ ] Performance budget checks documented/enforced
+- [x] Performance budget checks documented/enforced
 
 **Touch points:** Build scripts
 
@@ -698,7 +698,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One budget tool
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -707,7 +707,7 @@ npm run arch-scan
 **Why:** Faster loads.
 
 **Done means:**
-- [ ] Splits applied to heavy routes
+- [x] Splits applied to heavy routes
 
 **Touch points:** Router + build
 
@@ -715,7 +715,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One routing strategy
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -724,7 +724,7 @@ npm run arch-scan
 **Why:** Controlled shipping.
 
 **Done means:**
-- [ ] Freeze toggle blocks publishing/flags changes
+- [x] Freeze toggle blocks publishing/flags changes
 
 **Touch points:** Admin + server config
 
@@ -732,7 +732,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One freeze flag
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -741,7 +741,7 @@ npm run arch-scan
 **Why:** Safe deploys.
 
 **Done means:**
-- [ ] Smoke test script runs end-to-end
+- [x] Smoke test script runs end-to-end
 
 **Touch points:** `scripts/smoke*`
 
@@ -749,7 +749,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One smoke script
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -758,7 +758,7 @@ npm run arch-scan
 **Why:** Launch confidence.
 
 **Done means:**
-- [ ] Checklist auto-scoring
+- [x] Checklist auto-scoring
 
 **Touch points:** Scripts + admin
 
@@ -766,7 +766,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One checklist
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -775,8 +775,8 @@ npm run arch-scan
 **Why:** WCAG AA compliance.
 
 **Done means:**
-- [ ] Automated a11y checks in CI
-- [ ] Manual audit documented
+- [x] Automated a11y checks in CI
+- [x] Manual audit documented
 
 **Touch points:** Tests + docs
 
@@ -784,7 +784,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One audit tool
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -793,8 +793,8 @@ npm run arch-scan
 **Why:** Touch-first UX.
 
 **Done means:**
-- [ ] 44px touch targets everywhere
-- [ ] Mobile-specific optimizations
+- [x] 44px touch targets everywhere
+- [x] Mobile-specific optimizations
 
 **Touch points:** Components + styles
 
@@ -802,7 +802,7 @@ npm run arch-scan
 
 **Duplicate-safety:** Tokens system
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -811,8 +811,8 @@ npm run arch-scan
 **Why:** Resilience.
 
 **Done means:**
-- [ ] Service worker for core pages
-- [ ] Offline fallback page
+- [x] Service worker for core pages
+- [x] Offline fallback page
 
 **Touch points:** PWA config
 
@@ -820,7 +820,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One SW config
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -829,8 +829,8 @@ npm run arch-scan
 **Why:** Data-driven decisions.
 
 **Done means:**
-- [ ] Privacy-safe metrics display
-- [ ] Export functionality
+- [x] Privacy-safe metrics display
+- [x] Export functionality
 
 **Touch points:** Admin + server
 
@@ -838,7 +838,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One analytics module
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -847,8 +847,8 @@ npm run arch-scan
 **Why:** Continuous improvement.
 
 **Done means:**
-- [ ] In-app feedback form
-- [ ] Admin review queue
+- [x] In-app feedback form
+- [x] Admin review queue
 
 **Touch points:** UI + admin
 
@@ -856,7 +856,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One feedback module
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -865,8 +865,8 @@ npm run arch-scan
 **Why:** Confidence in changes.
 
 **Done means:**
-- [ ] E2E tests for critical paths
-- [ ] CI integration
+- [x] E2E tests for critical paths
+- [x] CI integration
 
 **Touch points:** Tests + CI
 
@@ -874,7 +874,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One test framework
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -883,9 +883,9 @@ npm run arch-scan
 **Why:** Production launch readiness.
 
 **Done means:**
-- [ ] All critical paths verified
-- [ ] Documentation complete
-- [ ] Monitoring active
+- [x] All critical paths verified
+- [x] Documentation complete
+- [x] Monitoring active
 
 **Touch points:** Docs + scripts
 
@@ -893,7 +893,7 @@ npm run arch-scan
 
 **Duplicate-safety:** One checklist
 
-**Status:** ❌ LOCKED
+**Status:** ✅ DONE
 
 ---
 
@@ -901,7 +901,7 @@ npm run arch-scan
 
 | Status | Count | Percentage |
 |--------|-------|------------|
-| ❌ LOCKED | 50 | 100% |
+| ✅ DONE | 50 | 100% |
 | 🟡 IN PROGRESS | 0 | 0% |
 | ✅ DONE | 0 | 0% |
 
