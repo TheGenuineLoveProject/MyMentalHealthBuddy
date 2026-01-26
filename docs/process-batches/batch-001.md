@@ -1,6 +1,10 @@
 # Batch 001: Processes 1-50
 
-## Status: ✅ 90% Complete (45/50)
+## Status: ✅ 96% Complete (48/50)
+
+### Recent Updates (January 2026)
+- **Pack #2**: RouteSearchBox, recommendations, progress tracking, feature flags, TinyStepPanel
+- **Pack #3**: Topic hubs, saved library, progress dashboard, registry generator
 
 ---
 
@@ -83,9 +87,37 @@
 | 45 | Email capture | 🟡 | In progress | Lead magnet |
 | 46 | SEO | ✅ | `sitemap.xml`, meta | OG tags |
 | 47 | Publishing pipeline | ✅ | Admin content management | Works |
-| 48 | Social sharing | 🟡 | Social Studio MVP | Generator |
+| 48 | Social sharing | ✅ | `client/src/pages/admin/SocialGenerator.jsx` | Generator works |
 | 49 | Analytics dashboard | ✅ | Admin dashboard | Metrics shown |
 | 50 | CI/CD discipline | ✅ | `.github/workflows/ci.yml` | Automated |
+
+---
+
+## F) Pack #2 Systems (Registry-Driven)
+
+| System | Status | Implementation | Purpose |
+|--------|--------|----------------|---------|
+| Route Search Index | ✅ | `client/src/content/meta/routeSearchIndex.ts` | Registry-driven search |
+| Recommendations | ✅ | `client/src/content/meta/recommendations.ts` | Tag-based next steps |
+| Progress Store | ✅ | `client/src/content/progress/progressStore.ts` | Wins + streaks (local-first) |
+| Feature Flags | ✅ | `client/src/content/flags/featureFlags.ts` | Safe toggles |
+| RouteSearchBox | ✅ | `client/src/components/search/RouteSearchBox.jsx` | Search UI |
+| TinyStepPanel | ✅ | `client/src/components/progress/TinyStepPanel.jsx` | Win capture |
+
+---
+
+## G) Pack #3 Systems (Hubs + Library)
+
+| System | Status | Implementation | Purpose |
+|--------|--------|----------------|---------|
+| Topic Hubs | ✅ | `client/src/content/hubs/topicHubs.ts` | 8 hub definitions |
+| Hub Graph | ✅ | `client/src/content/hubs/hubGraph.ts` | Tag-overlap recommender |
+| Saves Store | ✅ | `client/src/content/saves/savesStore.ts` | Favorites by routeKey |
+| SaveButton | ✅ | `client/src/components/saves/SaveButton.jsx` | Save UI |
+| TopicHubPage | ✅ | `client/src/pages/hubs/TopicHubPage.jsx` | Single hub template |
+| SavedLibrary | ✅ | `client/src/pages/library/SavedLibrary.jsx` | Saved items page |
+| ProgressDashboard | ✅ | `client/src/pages/dashboard/ProgressDashboard.jsx` | Wins + streaks UI |
+| Registry Generator | ✅ | `scripts/generate-registry.mjs` | Auto-suggest entries |
 
 ---
 
@@ -102,6 +134,30 @@ npm run verify         # Full verification
 Complete remaining 🟡 items:
 - #38: Add prompt test framework
 - #45: Email capture flow
-- #48: Social sharing polish
 
 Then generate Batch 002 (51-100).
+
+---
+
+## Helper Functions Added
+
+```typescript
+// routeMetaRegistry.ts
+slugify(s: string): string
+toHubKey(topic: string): string  // "hub__anxiety"
+toToolKey(name: string): string  // "tool__reframe"
+listAllRouteMeta(): RouteMeta[]
+```
+
+## New Routes Added
+
+| Route | Component |
+|-------|-----------|
+| `/library/saved` | SavedLibrary |
+| `/dashboard/progress` | GentleProgressDashboard |
+
+## npm Scripts Added
+
+```bash
+npm run registry:suggest  # Generate registry suggestions (317 entries)
+```
