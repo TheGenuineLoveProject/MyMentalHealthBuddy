@@ -10,7 +10,9 @@ Master registry for all platform integrations. Integrations are implemented in b
 |-------|--------------|--------|------------|
 | [Integration-001-050](./integration-batches/integration-001-050.md) | Core/Data/Auth/AI/Billing | ✅ Complete | 50/50 (100%) |
 | [Integration-051-100](./integration-batches/integration-051-100.md) | Observability/Testing/Content/Perf/Ops | ✅ Complete | 50/50 (100%) |
-| [Integration-101-150](./integration-batches/integration-101-150.md) | Advanced Features | 🟡 Ready | 0/50 |
+| [Integration-101-150](./integration-batches/integration-101-150.md) | Security/Privacy/Backup/Admin/CMS | ✅ Complete | 50/50 (100%) |
+| [Integration-151-200](./integration-batches/integration-151-200.md) | Enterprise/Multi-Tenant/SSO/Billing | 🟡 Ready | 0/50 |
+| [Integration-201-250](./integration-batches/integration-201-250.md) | Mobile/Voice/Community/CMS/Notifications | 🔒 Locked | 0/50 |
 
 ## Integration Categories
 
