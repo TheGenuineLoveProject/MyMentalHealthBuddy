@@ -68,7 +68,40 @@ import {
         modules: meta.modules,
       };
     }
+// --- RouteKey -> Path resolver (single source of truth) ---
 
+let __routeKeyToPathCache = null;
+
+function buildRouteKeyToPath(routes) {
+  const map = {};
+  const visit = (r) => {
+    if (!r) return;
+    if (r.routeKey && r.path && !map[r.routeKey]) map[r.routeKey] = r.path;
+    if (Array.isArray(r.children)) r.children.forEach(visit);
+  };
+  routes.forEach(visit);
+  return map;
+}
+
+/**
+ * Returns the canonical path for a routeKey.
+ * If unknown, returns null (safe).
+ */
+export function getPathForRouteKey(routeKey) {
+  if (!routeKey) return null;
+
+  // Allow already-a-path as fallback safety (optional).
+  if (routeKey.startsWith("/")) return routeKey;
+
+  // Build cache lazily once.
+  if (!__routeKeyToPathCache) {
+    // IMPORTANT: replace `ROUTES` with whatever your main routes array is called.
+    // Common names: routes, ROUTES, ROUTE_CONFIG, routeConfig
+    __routeKeyToPathCache = buildRouteKeyToPath(ROUTES);
+  }
+
+  return __routeKeyToPathCache[routeKey] || null;
+}
 // ============================================================================
 // CATEGORY DEFINITIONS
 // ============================================================================

@@ -1,6 +1,7 @@
 import React from "react";
+import { getPathForRouteKey } from "../content/routes.js";
 
-type LinkItem = { label: string; path: string };
+type LinkItem = { label: string; routeKey: string };
 
 export function RelatedLinksBlock({
   links,
@@ -13,6 +14,15 @@ export function RelatedLinksBlock({
 }) {
   if (!links || links.length === 0) return null;
 
+  const resolved = links
+    .map((l) => {
+      const path = getPathForRouteKey(l.routeKey);
+      return path ? { label: l.label, path } : null;
+    })
+    .filter(Boolean) as Array<{ label: string; path: string }>;
+
+  if (resolved.length === 0) return null;
+
   return (
     <section 
       className="mt-6 rounded-2xl border border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.18)] p-5"
@@ -24,7 +34,7 @@ export function RelatedLinksBlock({
       </div>
 
       <ul className="grid gap-2 md:grid-cols-2">
-        {links.map((l, idx) => (
+        {resolved.map((l, idx) => (
           <li key={l.path}>
             <a
               href={l.path}
@@ -40,3 +50,4 @@ export function RelatedLinksBlock({
     </section>
   );
 }
+

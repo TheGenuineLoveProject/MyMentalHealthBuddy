@@ -1,19 +1,20 @@
 // client/src/content/meta/routeMetaRegistry.ts
 export type ModuleKey = "mi" | "nlp" | "12practices";
 
+export type InternalLink = { label: string; routeKey: string };
+
 export type RouteMeta = {
   routeKey: string;
-  canonicalPath?: string; // optional, but great for internal linking
+  canonicalPath?: string;
   title: string;
   description: string;
-  benefits: string[]; // 3–6 bullets
-  internalLinks?: Array<{ label: string; path: string }>;
-  modules?: ModuleKey[]; // opt-in modules for ModulesPanel
+  benefits: string[];
+  internalLinks?: InternalLink[];
+  modules?: ModuleKey[];
   noIndex?: boolean;
 };
 
 function titleize(input: string) {
-  // "hubs__self-worth" -> "Self Worth"
   const cleaned = input
     .replace(/^\/+/, "")
     .replace(/__+/g, " ")
@@ -26,7 +27,6 @@ function titleize(input: string) {
     .map(w => w.charAt(0).toUpperCase() + w.slice(1))
     .join(" ");
 }
-
 function safeDefaultMeta(routeKey: string): RouteMeta {
   const pretty = titleize(routeKey);
   return {
@@ -59,11 +59,11 @@ const REGISTRY: Record<string, Partial<RouteMeta>> = {
       "Practice thought-balancing without judging yourself.",
     ],
     internalLinks: [
-      { label: "Try: Grounding", path: "/grounding" },
-      { label: "Try: Reframe", path: "/tools/reframe" },
-      { label: "Try: Breathwork", path: "/breathing" },
+      { label: "Try: Grounding", routeKey: "grounding" },
+      { label: "Try: Reframe", routeKey: "tools__reframe" },
+      { label: "Try: Breathwork", routeKey: "breathing" },
     ],
-    modules: ["mi", "nlp"], // anxiety pages get MI + NLP tools
+    modules: ["mi", "nlp"],
   },
 
   "paths__12-practices": {
