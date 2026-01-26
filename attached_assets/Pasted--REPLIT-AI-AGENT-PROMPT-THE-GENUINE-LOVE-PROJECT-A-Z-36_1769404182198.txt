@@ -1,0 +1,252 @@
+# REPLIT AI AGENT PROMPT — THE GENUINE LOVE PROJECT
+# A→Z 360 “UNTIL COMPLETE” — NEXT ROBUST / SOLID ENHANCEMENT (v3)
+# Power: 100th billionth × 100th billionth
+# Tiers: Beginner / Intermediate / Advanced ONLY
+
+You are Replit AI running INSIDE my repo. Your job is to complete the platform from A→Z 360, safely and verifiably.
+You must proceed step-by-step, never breaking the build, never leaking secrets, and validating after every phase.
+
+===========================================================
+0) HARD RULES (NON-NEGOTIABLE)
+===========================================================
+- Keep app runnable after each micro-change.
+- No mass refactors. No sweeping renames. No deleting core features.
+- Replit Autoscale: single public port, bind 0.0.0.0, no background daemons.
+- Never hardcode secrets. Use env vars only.
+- After every phase: typecheck + build + minimal smoke test.
+- Replace any “reading level” concept with ONLY: Beginner / Intermediate / Advanced.
+
+===========================================================
+1) REQUIRED RESPONSE FORMAT (EVERY PHASE)
+===========================================================
+A) ✅ What changed (file paths + short bullets)
+B) 🧪 Commands run + outputs (paste)
+C) 🔎 How to verify (exact URLs/clicks)
+D) ⛔ If blocked: exact error + exact fix applied
+
+===========================================================
+2) GLOBAL A→Z 360 DEFINITION OF “COMPLETE”
+===========================================================
+Platform is “COMPLETE” only when ALL are true:
+- Auth works end-to-end (user + admin) with protected routes
+- DB persistence real (Drizzle/Postgres), no mock storage
+- AI endpoints safe + rate limited + crisis fallback + disclaimers
+- Stripe billing + verified webhooks + subscription sync
+- Admin Health Dashboard (diagnostics + logs + content drafts)
+- Security hardening (CSP/Helmet, validation, safe errors)
+- UX polish (spacing, button size, a11y, mobile)
+- Quality gate (tests + CI)
+- Docs + launch checklist finished
+
+===========================================================
+3) THREE EXECUTION TIERS (BEGINNER / INTERMEDIATE / ADVANCED)
+===========================================================
+
+-------------------------
+BEGINNER (DO THIS FIRST)
+-------------------------
+Goal: create a stable “green build” foundation.
+You will execute only the exact commands, then apply only minimal fixes needed to pass.
+
+B1) Inventory + baseline checks
+Commands:
+  ls -la
+  node -v
+  npm -v
+  cat package.json
+  (test -f client/package.json && cat client/package.json) || true
+  (test -f server/package.json && cat server/package.json) || true
+
+  npm ci || npm install
+  npm run -s typecheck || true
+  npm run -s build || true
+  npm run -s test || true
+  npm run -s lint || true
+
+B2) Remove “reading level” everywhere (replace with tiers)
+Commands:
+  rg -n "reading level|reading-level|reading_level|grade level|literacy|easy reading" .
+
+If matches:
+- Update constants/enums/types/UI copy so ONLY:
+  Beginner / Intermediate / Advanced
+- Ensure typecheck passes afterward.
+
+B3) Standardize app start on Replit
+- Confirm server binds: 0.0.0.0 and uses PORT.
+- Confirm only one public port.
+Commands:
+  rg -n "listen\\(|PORT|0\\.0\\.0\\.0|localhost" server client .replit replit.nix || true
+
+Validation:
+  npm run -s typecheck
+  npm run -s build
+  npm run -s start (or the repo’s dev command)
+
+Stop after Beginner tier is green. Then move to Intermediate.
+
+-----------------------------
+INTERMEDIATE (CORE FEATURES)
+-----------------------------
+Goal: finish core product features with safe defaults.
+
+I1) Auth end-to-end (User + Admin)
+Required server endpoints:
+  POST /api/auth/signup
+  POST /api/auth/login
+  POST /api/auth/logout
+  POST /api/auth/forgot-password
+  POST /api/auth/reset-password
+  GET  /api/auth/me
+
+Rules:
+- bcrypt password hashing
+- Zod validation
+- rate limit auth routes
+- prevent account enumeration on forgot-password
+- middleware: requireAuth + requireAdmin
+- admin seed via env ADMIN_EMAIL (role upgrade if matched)
+
+DB tables required:
+- users(id, email, passwordHash, role, createdAt)
+- password_resets(id, userId, tokenHash, expiresAt, usedAt, createdAt)
+
+Frontend required routes:
+- /signup
+- /login
+- /forgot-password
+- /reset-password
+- /dashboard (protected)
+- /admin (admin protected)
+
+Validation:
+- signup → login → dashboard visible → logout
+- admin can open /admin, non-admin cannot
+
+I2) Database persistence (Drizzle/Postgres)
+Must exist:
+- journal_entries(userId, title, body, mood, tags, createdAt)
+- subscriptions(userId, stripeCustomerId, stripeSubId, status, plan, currentPeriodEnd)
+- audit_logs(actorUserId, action, metaJson, createdAt)
+
+Add:
+  GET /api/health/db (returns ok + latency)
+
+Validation:
+- migrate/push schema
+- create journal entry, refresh, still present
+- /api/health/db ok
+
+I3) AI Support (safe, non-clinical)
+Endpoints:
+  POST /api/ai/chat
+  POST /api/ai/journal-reflection
+  POST /api/ai/mood-insights
+
+Must include:
+- crisis keyword detection → crisis resources response
+- disclaimers: not therapy/medical advice
+- rate limiting
+- requestId logging
+
+Validation:
+- normal prompt works
+- crisis phrase triggers safe fallback
+
+I4) Stripe Billing (verified)
+Endpoints:
+  POST /api/billing/create-checkout-session
+  POST /api/billing/create-portal-session
+  POST /api/billing/webhook (raw body + signature verify)
+  GET  /api/billing/status
+
+Frontend:
+- /pricing → upgrade buttons work
+- dashboard shows plan status
+
+Env:
+- STRIPE_SECRET_KEY
+- STRIPE_WEBHOOK_SECRET
+- STRIPE_PRICE_* (as used)
+- APP_URL
+
+Validation:
+- webhook signature verifies
+- subscription sync into DB
+
+-------------------------
+ADVANCED (HARDEN + SHIP)
+-------------------------
+Goal: make it production-ready.
+
+A1) Admin Health Dashboard (real)
+Server:
+  GET /api/admin/health (admin-only)
+Includes:
+- uptime
+- db ok + latency
+- stripe configured
+- ai configured
+- recent errors count
+- build metadata if available
+
+Frontend:
+- cards + “Run Diagnostics”
+- draft publishing tool MVP:
+  - content_posts table
+  - create + list drafts
+
+A2) Security Hardening
+- Helmet + CSP (reasonable)
+- CORS restricted to APP_URL
+- Zod validation on all write routes
+- centralized error handler (no stack leaks in prod)
+- CSRF strategy if cookies used
+- audit log sensitive events
+
+A3) UX + Accessibility
+- buttons min height 44px
+- spacing normalized
+- mobile layout
+- focus styles
+- keyboard nav
+- aria labels
+- loading/empty states
+- fix “crowded content” by applying consistent container widths + spacing scale
+
+A4) Quality Gate
+- minimal tests:
+  - auth flow
+  - db health
+  - crisis detector
+- GitHub Actions:
+  - install
+  - typecheck
+  - build
+  - test
+
+A5) Docs + Launch
+- README (setup + env vars)
+- DISCLAIMER.md (not therapy)
+- PRIVACY.md / SECURITY.md
+- LAUNCH_CHECKLIST.md
+
+===========================================================
+4) EXECUTION LOOP (UNTIL COMPLETE)
+===========================================================
+You will follow this loop for each phase:
+1) Scan (rg + run command)
+2) Implement smallest fix
+3) Validate (typecheck/build/smoke)
+4) Report in required format
+5) Proceed to next phase automatically
+
+===========================================================
+START NOW (NO QUESTIONS)
+===========================================================
+1) Execute BEGINNER tier B1-B3.
+2) Apply minimal fixes to reach green typecheck+build.
+3) Return report (A/B/C/D).
+4) Then immediately proceed to INTERMEDIATE tier I1 (Auth).
+
+END.
