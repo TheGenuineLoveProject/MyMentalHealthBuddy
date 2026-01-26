@@ -19,6 +19,24 @@
 
 ---
 
+## Patch 33 — P101 RouteKey Validator (Batch 3)
+- Date: 2026-01-26
+- Processes: P101
+- Files: 
+  - `scripts/validateRouteKeys.mjs` (NEW)
+  - `package.json` (added npm run validate:routekeys)
+  - `docs/ROADMAP_P101_P150.md` (NEW)
+- Summary: 
+  - Created RouteKey single-source validator script (CI-safe)
+  - Validates: routes.js structure, duplicate detection, /crisis routing, internal links
+  - Added `npm run validate:routekeys` command
+  - Created Batch 3 roadmap tracking 50 processes (18 done, 32 TODO)
+- Validation results:
+  - validate:routekeys: ✅ Passed (124 routes, 1 warning)
+  - build: ✅ Passed (24s)
+
+---
+
 ## Patch 32 — P091 Doctor Script (Batch 2)
 - Date: 2026-01-26
 - Processes: P091

@@ -71,7 +71,8 @@
     "dedupe-safe": "node scripts/apply-dedupe-safe.mjs",
     "scan:deep": "node scripts/deepScan.mjs",
     "doctor": "node scripts/doctor.mjs",
-    "validate:routes": "node scripts/validateRoutes.mjs"
+    "validate:routes": "node scripts/validateRoutes.mjs",
+    "validate:routekeys": "node scripts/validateRouteKeys.mjs"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
