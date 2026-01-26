@@ -1,130 +1,125 @@
 // client/src/content/meta/routeMetaRegistry.ts
+export type ModuleKey = "mi" | "nlp" | "12practices";
 
 export type RouteMeta = {
   routeKey: string;
+  canonicalPath?: string; // optional, but great for internal linking
   title: string;
   description: string;
-  benefits: string[];
-  internalLinks: Array<{ label: string; href: string }>;
+  benefits: string[]; // 3–6 bullets
+  internalLinks?: Array<{ label: string; path: string }>;
+  modules?: ModuleKey[]; // opt-in modules for ModulesPanel
   noIndex?: boolean;
 };
 
-function titleCaseFromKey(key: string) {
-  // hubs_self-worth -> Hubs · Self Worth
-  const cleaned = key.replace(/[./]/g, "_").replace(/-+/g, "_");
-  const parts = cleaned.split("_").filter(Boolean);
-  return parts
-    .map((p) =>
-      p.length <= 3 ? p.toUpperCase() : p.charAt(0).toUpperCase() + p.slice(1)
-    )
-    .join(" ")
+function titleize(input: string) {
+  // "hubs__self-worth" -> "Self Worth"
+  const cleaned = input
+    .replace(/^\/+/, "")
+    .replace(/__+/g, " ")
+    .replace(/[-_]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  return cleaned
+    .split(" ")
+    .filter(Boolean)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
 }
 
-export function deriveRouteKeyFromPath(pathname: string) {
-  // "/hubs/self-worth" -> "hubs_self-worth"
-  // "/" -> "home"
-  const p = (pathname || "/").split("?")[0].split("#")[0].trim();
-  if (p === "/" || p === "") return "home";
-  return p.replace(/^\/+/, "").replace(/\/+$/,"").replace(/\//g, "_");
-}
-
-export function deriveRouteKeyFromFilePath(filePath: string) {
-  // "client/src/pages/generated/GriefHubPage.jsx" -> "generated_grief-hub-page"
-  // Deterministic + stable across builds
-  const normalized = filePath.replace(/\\/g, "/");
-  const file = normalized.split("/").pop() || normalized;
-  const base = file.replace(/\.(t|j)sx?$/, "");
-  const kebab = base
-    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
-    .replace(/[_\s]+/g, "-")
-    .toLowerCase();
-  return `generated_${kebab}`;
-}
-
-/**
- * Minimal “benefits” fallback that stays legally safe:
- * - No therapy/diagnosis/treatment/cure/guarantee language.
- */
-function defaultBenefits(routeKey: string): string[] {
-  // Keep these short, varied, and “skills practice” oriented.
-  const pool = [
-    "Build gentle, repeatable wellness habits in minutes a day.",
-    "Practice reflection tools that support emotional regulation skills.",
-    "Turn insight into one small next step you can actually do today.",
-    "Use clear prompts to reduce mental noise and regain focus.",
-    "Track patterns over time to improve self-understanding.",
-    "Strengthen boundaries and self-respect through guided practice."
-  ];
-
-  // Deterministic pick (no repetition across pages, stable)
-  const hash = Array.from(routeKey).reduce((a, c) => a + c.charCodeAt(0), 0);
-  const pick = (i: number) => pool[(hash + i) % pool.length];
-  return [pick(0), pick(1), pick(2)];
-}
-
-function defaultInternalLinks(routeKey: string) {
-  // Always give “next steps” (keeps users moving = better retention + SEO)
-  return [
-    { label: "Start Here", href: "/onboarding" },
-    { label: "Daily Practice", href: "/today" },
-    { label: "Tools", href: "/tools" },
-    { label: "Hubs", href: "/hubs" }
-  ];
-}
-
-/**
- * Registry entries for special/high-value routes (you can expand over time).
- * Everything else uses safe deterministic fallbacks.
- */
-const registry: Record<string, Partial<RouteMeta>> = {
-  home: {
-    title: "The Genuine Love Project",
-    description:
-      "A calm, evidence-informed space for reflection, growth, and daily practice — built around genuine love, clarity, and consistency.",
-    internalLinks: [
-      { label: "Begin Your Healing Journey", href: "/onboarding" },
-      { label: "What You Get", href: "/what-you-get" },
-      { label: "Explore Hubs", href: "/hubs" },
-      { label: "Try Tools", href: "/tools" }
-    ]
-  },
-
-  "hubs_self-worth": {
-    title: "Self-Worth Hub",
-    description:
-      "Tools and prompts to strengthen self-respect, reduce self-criticism, and build supportive inner language.",
+function safeDefaultMeta(routeKey: string): RouteMeta {
+  const pretty = titleize(routeKey);
+  return {
+    routeKey,
+    title: pretty,
+    description: "A gentle, practical space to build supportive habits through reflection and skill practice.",
     benefits: [
-      "Practice healthier self-talk with simple reframes.",
-      "Build boundaries that protect your energy and time.",
-      "Create a steady sense of worth through daily micro-actions."
+      "Practice one small, doable step (no pressure).",
+      "Turn insight into a simple plan you can repeat.",
+      "Use calm tools that support self-awareness and regulation.",
+    ],
+    modules: [], // opt-in only by registry entry
+  };
+}
+
+/**
+ * ✅ SINGLE SOURCE OF TRUTH
+ * Add only “special” routes here.
+ * Everything else gets a safe, non-repetitive default.
+ */
+const REGISTRY: Record<string, Partial<RouteMeta>> = {
+  // Examples (edit freely)
+  "hubs__anxiety": {
+    canonicalPath: "/hubs/anxiety",
+    title: "Anxiety Support Hub",
+    description: "Build calm skills: grounding, reframing, and tiny steps you can actually do.",
+    benefits: [
+      "Reduce overwhelm with 2-minute nervous system resets.",
+      "Name patterns gently and choose one next step.",
+      "Practice thought-balancing without judging yourself.",
     ],
     internalLinks: [
-      { label: "Boundaries Hub", href: "/hubs/boundaries" },
-      { label: "Self-Compassion Hub", href: "/hubs/self-compassion" },
-      { label: "Reframe Tool", href: "/tools/reframe" }
-    ]
-  }
+      { label: "Try: Grounding", path: "/grounding" },
+      { label: "Try: Reframe", path: "/tools/reframe" },
+      { label: "Try: Breathwork", path: "/breathing" },
+    ],
+    modules: ["mi", "nlp"], // anxiety pages get MI + NLP tools
+  },
+
+  "paths__12-practices": {
+    canonicalPath: "/paths/12-practices",
+    title: "12 Practices: Mind–Body–Soul Growth",
+    description: "A modern, non-substance 12-step-inspired path for gentle transformation.",
+    benefits: [
+      "Build inner stability through daily practice (not perfection).",
+      "Use reflection + tiny actions to change patterns over time.",
+      "Stay grounded in values, compassion, and accountability.",
+    ],
+    modules: ["12practices", "mi", "nlp"],
+  },
+
+  "tools__reframe": {
+    canonicalPath: "/tools/reframe",
+    title: "Reframe Tool",
+    description: "Turn a hard moment into a kinder, steadier next step.",
+    benefits: [
+      "Name the thought → name the feeling → choose a balanced alternative.",
+      "Reduce spirals with a short, structured flow.",
+      "Leave with one tiny step you can do today.",
+    ],
+    modules: ["mi", "nlp"],
+  },
 };
 
 export function getRouteMeta(routeKey: string): RouteMeta {
-  const key = (routeKey || "home").trim() || "home";
-  const overrides = registry[key] || {};
+  const base = safeDefaultMeta(routeKey);
 
-  const title = overrides.title || titleCaseFromKey(key);
-  const description =
-    overrides.description ||
-    "A guided page for reflection and skill-building — designed to support your growth with calm structure and gentle next steps.";
-  const benefits = overrides.benefits || defaultBenefits(key);
-  const internalLinks = overrides.internalLinks || defaultInternalLinks(key);
+  const override = REGISTRY[routeKey];
+  if (!override) return base;
 
   return {
-    routeKey: key,
-    title,
-    description,
-    benefits,
-    internalLinks,
-    noIndex: overrides.noIndex
+    ...base,
+    ...override,
+    // ensure required arrays exist
+    benefits: override.benefits?.length ? override.benefits : base.benefits,
+    modules: override.modules ?? base.modules,
   };
+}
+
+/**
+ * Deterministic routeKey generator.
+ * ✅ stable across the app
+ * ✅ zero manual work
+ */
+export function deriveRouteKeyFromPath(pathname: string) {
+  const p = (pathname || "/").split("?")[0].split("#")[0].trim();
+  const clean = p.replace(/^\/+/, "").replace(/\/+$/, "");
+  if (!clean) return "home";
+
+  // "/hubs/self-worth" -> "hubs__self-worth"
+  return clean
+    .split("/")
+    .filter(Boolean)
+    .map(seg => seg.replace(/:/g, "param_"))
+    .join("__");
 }

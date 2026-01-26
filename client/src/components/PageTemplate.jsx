@@ -37,9 +37,9 @@ import SocialShare from './SocialShare.jsx';
 import styles from './PageTemplate.module.css';
 import SafetyFooter from "@/components/ui/SafetyFooter";
 import PageScaffold from "./layout/PageScaffold.tsx";
-import { getRouteMeta } from "../content/meta/routeMetaRegistry.ts";
 import { getModules } from "../content/modules/modules.js";
-import ModulesPanel from "./modules/ModulesPanel.jsx";
+import { getRouteMeta } from "../content/meta/routeMetaRegistry";
+import { ModulesPanel } from "./modules/ModulesPanel";
 
 const iconMap = {
   Heart, Shield, Brain, Sparkles, Star, Sun, Moon, Leaf,
@@ -941,10 +941,11 @@ function ContentSection({ section, index, readingLevel = 'intermediate' }) {
   );
 }
 
-export default function PageTemplate({ config, children }) {
+export default function PageTemplate({ config, children, routeKey }) {
   const prefersReducedMotion = useRef(false);
   const [contentLevel, setContentLevel] = useContentLevel();
   const { readingLevel, setReadingLevel, setRouteDefault, isReady } = useReadingLevel();
+  const effectiveRouteKey = routeKey || config?.routeKey || "unknown";
 
   useEffect(() => {
     prefersReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1130,6 +1131,8 @@ export default function PageTemplate({ config, children }) {
             )}
 
             <ModulesGrid modules={config.modules} />
+            
+            <ModulesPanel routeKey={effectiveRouteKey} />
 
             {config.sections && config.sections.map((section, index) => (
               <ContentSection key={section.id || index} section={section} index={index} readingLevel={readingLevel} />
