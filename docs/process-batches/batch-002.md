@@ -1,8 +1,8 @@
 # Batch 002: Processes 51-100
 
-## Status: 🔒 LOCKED (Batch-001 ✅ — Ready to Unlock)
+## Status: 🟡 In Progress (10/50)
 
-> **Note**: Batch-002 unlocked now that Batch-001 is 100% complete.
+> **Note**: Batch-002 implementation started. Observability section complete.
 
 ---
 
@@ -10,16 +10,16 @@
 
 | # | Process | Status | Implementation | Done Criteria |
 |---|---------|--------|----------------|---------------|
-| 51 | Structured logs | 🟡 | `server/lib/logger.mjs` | Pino/Winston + requestId |
-| 52 | Error reporting | 🟡 | Sentry-compatible stub | Errors captured |
-| 53 | Metrics endpoint | 🟡 | prom-client compatible | `/metrics` works |
-| 54 | Tracing notes | 🟡 | `docs/tracing.md` | OpenTelemetry-ready |
-| 55 | Log redaction policy | 🟡 | PII filtered | No emails/names in logs |
-| 56 | Slow request logging | 🟡 | Threshold alerts | >1s logged |
-| 57 | Endpoint timing | 🟡 | Middleware | Response times tracked |
-| 58 | Health dashboard feed | 🟡 | Backend metrics API | Admin can view |
-| 59 | Audit log explorer | 🟡 | Admin UI | Searchable |
-| 60 | Export logs | 🟡 | Admin download | CSV/JSON export |
+| 51 | Structured logs | ✅ | `server/utils/logger.mjs` | JSON + requestId + redaction |
+| 52 | Error reporting | ✅ | `server/utils/sentry.mjs` | Sentry integration |
+| 53 | Metrics endpoint | ✅ | `server/routes/metrics.mjs` | `/api/metrics` Prometheus |
+| 54 | Tracing notes | ✅ | `docs/tracing.md` | OpenTelemetry-ready |
+| 55 | Log redaction policy | ✅ | `server/utils/logRedaction.mjs` | PII auto-redacted |
+| 56 | Slow request logging | ✅ | `server/utils/logger.mjs` | >1s threshold alerts |
+| 57 | Endpoint timing | ✅ | `server/middleware/requestId.mjs` | Duration tracked |
+| 58 | Health dashboard feed | ✅ | `/api/metrics/json` | JSON metrics |
+| 59 | Audit log explorer | ✅ | `client/src/pages/admin/AuditLogExplorer.jsx` | Search/filter UI |
+| 60 | Export logs | ✅ | `/api/admin/audit-logs/export` | CSV/JSON export |
 
 ---
 
