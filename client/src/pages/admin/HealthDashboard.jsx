@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
+import Top50ProcessTracker from "@/components/admin/Top50ProcessTracker";
 
 function StatusIndicator({ status }) {
   const statusConfig = {
@@ -241,6 +242,11 @@ export default function HealthDashboard() {
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Command Center</span>
             </Link>
           </div>
+        </div>
+
+        {/* Top-50 Platform Processes Tracker */}
+        <div className="mt-8">
+          <Top50ProcessTracker />
         </div>
 
         <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-500">
