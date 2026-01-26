@@ -1,0 +1,209 @@
+# REPLIT AI — A→Z 360 “UNTIL COMPLETE” MASTER PROMPT v21 (NEXT POWER INTEGRATION ENGINE)
+# The Genuine Love Project • APPLY-ALL • Top-50 → Next-50 → Next-50… UNTIL COMPLETE
+# Beginner / Intermediate / Advanced ONLY • NO “reading” ANYWHERE • IMPLEMENT, VERIFY, COMMIT
+
+PASTE THIS ENTIRE PROMPT INTO REPLIT AI AGENT MODE INSIDE THE REPO.
+NO QUESTIONS. NO STOPS. APPLY ALL CHANGES.
+
+================================================================================
+0) IMMUTABLE RULES (GUARDRAILS)
+================================================================================
+TIERS (STRICT)
+- User-facing tiers ONLY: Beginner | Intermediate | Advanced
+- BAN everywhere (code + content + DB + UI + docs):
+  "reading level", "grade level", "age level", "reading_level", "readingLevel", "grade_level"
+- If DB already has reading_level, DO NOT rename today:
+  Create a mapping layer so UI only shows Beginner/Intermediate/Advanced.
+  Add a DB migration later only when tests are green.
+
+REPLIT AUTOSCALE
+- Single port: process.env.PORT
+- Bind 0.0.0.0
+- No background watchers spawning extra processes
+
+SAFE PATCHING
+- ≤ 12 files per patch (unless failing tests require more)
+- No huge refactors. No renames across the whole repo.
+- Each patch ends with: verify → report → scoreboard → commit.
+
+SECURITY BASELINE
+- Zod at boundaries, unified errors, requestId
+- Rate limit + audit logs for auth/ai/admin/stripe
+- No secrets committed; .env.example mandatory
+
+================================================================================
+1) REQUIRED “INTEGRATION ENGINE” (CREATE IF MISSING)
+================================================================================
+Create these files:
+
+/docs/integrations.md
+- Holds the master integration registry and status.
+- MUST list integrations in batches of 50: Integration-001…050, 051…100, etc.
+/docs/integration-batches/integration-001-050.md
+/docs/integration-batches/integration-051-100.md (LOCKED)
+/docs/integration-batches/integration-101-150.md (LOCKED)
+/docs/integration-batches/integration-151-200.md (LOCKED)
+/docs/integration-batches/integration-201-250.md (LOCKED)
+/docs/integration-batches/integration-251-300.md (LOCKED)
+...continue generating locked batches of 50 indefinitely.
+
+INTEGRATION ITEM TEMPLATE (REQUIRED)
+Integration-###: <Name>
+- Why:
+- Done means:
+  - [ ] ...
+- Touch points (files/paths/routes):
+- Verify:
+  - command(s)
+- Status: ❌ / 🟡 / ✅
+
+LOCK RULE
+- Only implement the current batch (first incomplete batch).
+- Next batches remain LOCKED until prior batch is ✅.
+
+================================================================================
+2) REQUIRED SCRIPTS (CREATE IF MISSING)
+================================================================================
+/scripts/content-check.mjs    # bans legacy tier terms
+/scripts/scan.mjs             # finds missing ports/env/routes/tests
+/scripts/report.mjs           # writes /docs/reports/latest.md
+/scripts/verify.mjs           # stable order checks, exits nonzero
+/scripts/scoreboard.mjs       # updates /docs/processes.md
+/scripts/integration-score.mjs # updates /docs/integrations.md
+
+package.json add scripts:
+- "content-check": "node scripts/content-check.mjs"
+- "scan": "node scripts/scan.mjs"
+- "report": "node scripts/report.mjs"
+- "verify": "node scripts/verify.mjs"
+- "scoreboard": "node scripts/scoreboard.mjs"
+- "integration-score": "node scripts/integration-score.mjs"
+- "ci": "npm run content-check && npm run lint && npm run typecheck && npm run build && npm run test"
+
+================================================================================
+3) EXECUTION LOOP (NEVER STOP UNTIL COMPLETE)
+================================================================================
+LOOP 0 — BASELINE
+1) node -v && npm -v
+2) npm ci || npm install
+3) npm run -s content-check || true
+4) npm run -s lint || true
+5) npm run -s typecheck || true
+6) npm run -s build || true
+7) npm run -s test || true
+8) node scripts/report.mjs
+9) node scripts/scoreboard.mjs
+10) node scripts/integration-score.mjs
+
+LOOP 1 — INTEGRATION PATCH CYCLE
+For each integration item:
+- Implement the smallest complete slice
+- Add tests if feasible
+- Run: npm run -s verify
+- Update integration batch item status
+- Commit: "integration ###: <name>"
+
+================================================================================
+4) INTEGRATION BATCH-001 (001–050) — IMPLEMENT NOW
+================================================================================
+Create /docs/integration-batches/integration-001-050.md with these 50 integrations
+AND START IMPLEMENTING IMMEDIATELY IN ORDER.
+
+# Core Platform Integrations (001–010)
+Integration-001: Single-port Replit Autoscale binding
+Integration-002: /health + /ready endpoints
+Integration-003: RequestId middleware + propagation
+Integration-004: Unified error envelope (API + UI)
+Integration-005: Zod request validation wrapper
+Integration-006: Rate limiting (global + sensitive routes)
+Integration-007: Audit logging (auth/ai/admin/stripe)
+Integration-008: Feature flags (server + UI)
+Integration-009: Environment validation (startup fails fast)
+Integration-010: Security headers baseline (Helmet + CSP doc)
+
+# Data Integrations (011–020)
+Integration-011: Postgres connection (Drizzle) + pooling
+Integration-012: Drizzle schema alignment + migrations workflow
+Integration-013: User model + profile preferences (tier)
+Integration-014: Content model with tiers (Beginner/Intermediate/Advanced)
+Integration-015: Journaling entries model + CRUD
+Integration-016: Mood tracking model + CRUD
+Integration-017: Admin analytics tables (privacy-friendly)
+Integration-018: Soft-delete + createdAt/updatedAt standards
+Integration-019: DB indexes baseline (frequent queries)
+Integration-020: Data export scaffolding (user-owned data)
+
+# Auth Integrations (021–030)
+Integration-021: Signup + login + logout
+Integration-022: Session/JWT strategy (pick one; implement fully)
+Integration-023: /me endpoint + client hydration
+Integration-024: Forgot password + reset token flow
+Integration-025: Email verification flow (provider-agnostic stub)
+Integration-026: RBAC middleware (admin/user)
+Integration-027: Protected routes (server + client)
+Integration-028: Secure cookie settings (if sessions)
+Integration-029: Brute-force protection (login throttle)
+Integration-030: Auth events audit log
+
+# AI Integrations (031–040)
+Integration-031: AI endpoint wrapper (timeouts, retries, limits)
+Integration-032: Crisis detection + safe response routing
+Integration-033: Prompt injection hardening (system policy + allowlists)
+Integration-034: PII redaction in logs
+Integration-035: AI quotas per user/plan
+Integration-036: AI consent + transparency UI
+Integration-037: Safe output constraints (no diagnosis, disclaimers)
+Integration-038: AI conversation storage (optional; if stored -> consent)
+Integration-039: AI tests (guardrail cases)
+Integration-040: AI audit events (what, when, userId, plan)
+
+# Billing + Growth Integrations (041–050)
+Integration-041: Stripe checkout session creation
+Integration-042: Stripe billing portal session
+Integration-043: Stripe webhook verification (signature)
+Integration-044: Plan gating middleware (API)
+Integration-045: Plan gating UI (locked features)
+Integration-046: Subscription state sync to DB
+Integration-047: Trial / cancel flows handling
+Integration-048: SEO foundations (meta, OG, robots)
+Integration-049: Sitemap generation
+Integration-050: Blog/public content route skeleton
+
+================================================================================
+5) INTEGRATION BATCH-002 (051–100) — GENERATE NOW (LOCKED)
+================================================================================
+Create /docs/integration-batches/integration-051-100.md (LOCKED) with these categories:
+- Observability: structured logs, metrics, admin audit viewer, cost telemetry
+- Testing: API route tests, webhook contract tests, DB integration tests
+- Content: admin CRUD, review workflow, tagging, search indexing MVP, RSS
+- Performance: bundle analysis, lazy loading, image policy, caching headers
+- Ops: incident runbook, rollback runbook, release notes generator
+
+Status for all: ❌ and labeled LOCKED.
+
+================================================================================
+6) CONTINUE BATCHES FOREVER (101–150, 151–200, …)
+================================================================================
+Generate the next locked batch of 50 each time Batch-001 is 80% ✅, so we never stall.
+But DO NOT implement locked batches.
+
+================================================================================
+7) APPLY-ALL CHANGES REQUIREMENT (STRICT)
+================================================================================
+After EACH integration:
+- Update /docs/integrations.md registry
+- Update the integration batch file item status
+- Run: npm run -s verify
+- Fix failures immediately
+- Commit
+
+================================================================================
+8) BEGIN NOW
+================================================================================
+STEP A) Create all required docs + scripts + package.json scripts.
+STEP B) Run LOOP 0 and write outputs to /docs/reports/latest.md.
+STEP C) Create integration-001-050 file and implement Integration-001 immediately.
+STEP D) Continue Integration-002 … Integration-050 in order.
+STEP E) When Integration-050 ✅, unlock Integration-051-100 and begin.
+
+END.

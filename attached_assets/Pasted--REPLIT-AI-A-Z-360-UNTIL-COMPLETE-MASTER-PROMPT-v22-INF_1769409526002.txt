@@ -1,0 +1,306 @@
+# REPLIT AI — A→Z 360 “UNTIL COMPLETE” MASTER PROMPT v22 (INFINITE BATCH ENGINE)
+# The Genuine Love Project • APPLY-ALL • Top-50 → Next-50 → Next-50… UNTIL COMPLETE
+# Beginner | Intermediate | Advanced ONLY • IMPLEMENT + VERIFY + COMMIT LOOP • NO STOPS
+
+PASTE THIS WHOLE PROMPT INTO REPLIT AI AGENT MODE INSIDE THE REPO.
+DO NOT ASK QUESTIONS. DO NOT PAUSE. APPLY ALL CHANGES.
+
+================================================================================
+0) IMMUTABLE GUARDRails
+================================================================================
+A) TIERS ONLY (ABSOLUTE)
+- User-facing tiers ONLY: Beginner | Intermediate | Advanced
+- BAN in UI copy, docs, API responses:
+  "reading level", "grade level", "age level", "reading_level", "readingLevel", "grade_level"
+- If DB currently contains a legacy field:
+  - Do NOT rename today.
+  - Add a mapping layer server-side so the client ONLY sees Beginner/Intermediate/Advanced.
+
+B) REPLIT AUTOSCALE (ABSOLUTE)
+- One port only: process.env.PORT
+- Bind 0.0.0.0
+- No background watchers spawning extra processes
+
+C) SAFE PATCH SIZE (ABSOLUTE)
+- Max 12 files per patch unless tests force more
+- No repo-wide renames or giant refactors
+
+D) SECURITY BASELINE (ABSOLUTE)
+- Zod at boundaries
+- Unified errors with requestId
+- Rate-limit: auth/ai/admin/stripe
+- No secrets committed; .env.example mandatory
+
+================================================================================
+1) CREATE THE “INFINITE INTEGRATION REGISTRY”
+================================================================================
+Create if missing:
+
+/docs/integrations.md
+/docs/processes.md
+/docs/reports/latest.md
+/docs/integration-batches/README.md
+
+Batch files are always exactly 50 items:
+- /docs/integration-batches/integration-001-050.md
+- /docs/integration-batches/integration-051-100.md
+- /docs/integration-batches/integration-101-150.md
+- /docs/integration-batches/integration-151-200.md
+- /docs/integration-batches/integration-201-250.md
+…continue generating future batch files ON DEMAND.
+
+REQUIRED FORMAT FOR EACH INTEGRATION ITEM:
+Integration-###: <Name>
+- Why:
+- Done means:
+  - [ ] ...
+- Touch points (files/routes):
+- Verify (commands):
+- Status: ❌ / 🟡 / ✅
+- Notes:
+
+LOCKING RULE:
+- Only implement the FIRST batch that has any ❌ or 🟡.
+- All later batches remain LOCKED (Status: ❌ LOCKED) until previous batch is 100% ✅.
+
+================================================================================
+2) CREATE REQUIRED SCRIPTS (IF MISSING)
+================================================================================
+Create:
+
+/scripts/content-check.mjs
+  - scans repo text for banned tier terms
+  - fails if found outside allowed legacy DB mapping exceptions
+
+/scripts/scan.mjs
+  - checks: PORT usage, 0.0.0.0 binding, missing env vars, missing endpoints, missing docs
+
+/scripts/verify.mjs
+  - runs in stable order:
+    npm run content-check
+    npm run lint
+    npm run typecheck
+    npm run test
+    npm run build
+  - exits non-zero if any fail
+
+/scripts/report.mjs
+  - writes /docs/reports/latest.md with:
+    - current failing commands
+    - current batch status summary
+    - last commit message target
+    - next action
+
+/scripts/scoreboard.mjs
+  - updates /docs/processes.md with:
+    - ✅/🟡/❌ totals
+    - perf/security/auth/ai/billing/docs progress
+    - “next 3 tasks” list
+
+/scripts/integration-score.mjs
+  - updates /docs/integrations.md and batch item statuses
+
+package.json scripts:
+- "content-check": "node scripts/content-check.mjs"
+- "scan": "node scripts/scan.mjs"
+- "verify": "node scripts/verify.mjs"
+- "report": "node scripts/report.mjs"
+- "scoreboard": "node scripts/scoreboard.mjs"
+- "integration-score": "node scripts/integration-score.mjs"
+- "ci": "npm run verify"
+
+================================================================================
+3) THE NEVER-ENDING EXECUTION LOOP (UNTIL COMPLETE)
+================================================================================
+LOOP 0 — BASELINE
+1) npm ci || npm install
+2) node scripts/scan.mjs || true
+3) npm run -s verify || true
+4) node scripts/report.mjs
+5) node scripts/scoreboard.mjs
+6) node scripts/integration-score.mjs
+
+LOOP 1 — “BATCH OF 50” INTEGRATION CYCLE
+Repeat until current batch is 100% ✅:
+
+FOR each Integration-### in current batch (in order):
+A) Implement the smallest complete slice.
+B) Add/adjust tests if possible.
+C) Run: npm run -s verify
+D) Fix failures immediately.
+E) Mark status 🟡 while WIP, ✅ when Done means is fully met.
+F) Update docs registry + batch file.
+G) Commit:
+   "integration ###: <Name>"
+
+UNLOCK RULE:
+- When batch becomes 100% ✅:
+  - Unlock next batch (remove LOCKED label)
+  - Begin implementing next batch immediately.
+
+AUTO-GENERATION RULE:
+- When current batch reaches 80% ✅, generate the next batch file of 50 (LOCKED) so we never stall.
+
+================================================================================
+4) BATCH-001 (001–050) — CANONICAL “TOP 50 PLATFORM PROCESSES”
+================================================================================
+Create /docs/integration-batches/integration-001-050.md with these EXACT 50:
+
+# Foundation (001–010)
+Integration-001: Replit single-port + 0.0.0.0 binding verified
+Integration-002: /health + /ready endpoints (fast + deterministic)
+Integration-003: requestId middleware (server + client propagation)
+Integration-004: unified API error envelope + UI error boundary
+Integration-005: Zod validation wrapper for all API routes
+Integration-006: global + route-specific rate limiting
+Integration-007: audit logs for auth/ai/admin/stripe
+Integration-008: env validation at startup + .env.example complete
+Integration-009: security headers baseline (Helmet) + CSP plan doc
+Integration-010: feature flags (server + UI)
+
+# Data (011–020)
+Integration-011: Postgres/Drizzle connection + pooling
+Integration-012: migrations workflow + “drizzle push” guardrails
+Integration-013: user profile preferences (tier + settings)
+Integration-014: content tiering model (Beginner/Intermediate/Advanced)
+Integration-015: journaling entries CRUD + ownership checks
+Integration-016: mood tracker CRUD + chart-ready API
+Integration-017: admin analytics tables (privacy-safe)
+Integration-018: timestamps + soft-delete conventions
+Integration-019: indexes for frequent queries
+Integration-020: user data export skeleton (GDPR-style)
+
+# Auth (021–030)
+Integration-021: signup/login/logout complete
+Integration-022: session or JWT chosen + fully implemented (one)
+Integration-023: /me endpoint + client hydration
+Integration-024: forgot-password + reset token flow
+Integration-025: email verification stub (provider agnostic)
+Integration-026: RBAC middleware (admin/user)
+Integration-027: protected routes (server + client)
+Integration-028: secure cookie settings (if sessions)
+Integration-029: brute-force protections (login throttle)
+Integration-030: auth events audit log
+
+# AI (031–040)
+Integration-031: AI wrapper (timeouts/retries/limits)
+Integration-032: crisis detection + safe routing + resources
+Integration-033: prompt-injection hardening (allowlists)
+Integration-034: PII redaction in logs
+Integration-035: AI quotas per plan/user
+Integration-036: AI consent + transparency UI
+Integration-037: safe output constraints + disclaimers (non-clinical)
+Integration-038: conversation storage policy (consent-gated if stored)
+Integration-039: AI guardrail tests (known bad prompts)
+Integration-040: AI audit events (who/when/what/plan)
+
+# Billing + Growth (041–050)
+Integration-041: Stripe checkout session create
+Integration-042: Stripe billing portal session
+Integration-043: Stripe webhooks verified (signature)
+Integration-044: plan gating middleware (API)
+Integration-045: plan gating UI (locked features)
+Integration-046: subscription sync to DB
+Integration-047: trial/cancel handling
+Integration-048: SEO meta + OG baseline
+Integration-049: sitemap generation
+Integration-050: blog/public content route skeleton
+
+================================================================================
+5) BATCH-002 (051–100) — “NEXT 50 PLATFORM PROCESSES” (GENERATE + LOCKED)
+================================================================================
+Create /docs/integration-batches/integration-051-100.md NOW with these 50.
+Mark each “Status: ❌ LOCKED”.
+
+# Observability + Ops (051–060)
+Integration-051: structured logs (JSON) + log levels
+Integration-052: metrics endpoint (basic counters)
+Integration-053: admin audit viewer UI (read-only)
+Integration-054: error tracking hook (provider-agnostic)
+Integration-055: cost telemetry for AI + Stripe events
+Integration-056: uptime checks doc + SLO targets
+Integration-057: incident runbook
+Integration-058: rollback runbook
+Integration-059: release notes generator
+Integration-060: changelog page
+
+# Testing (061–070)
+Integration-061: API route tests for auth
+Integration-062: API route tests for journal
+Integration-063: AI guardrail test suite expanded
+Integration-064: webhook contract tests
+Integration-065: DB integration tests baseline
+Integration-066: test data factories
+Integration-067: CI workflow hardened (cache + artifacts)
+Integration-068: preview build check script
+Integration-069: accessibility test checklist (manual + script notes)
+Integration-070: performance budget checks (bundle size)
+
+# Content System (071–080)
+Integration-071: admin content CRUD (draft/publish)
+Integration-072: review workflow + versioning
+Integration-073: tagging + categories
+Integration-074: search MVP (db LIKE or lightweight index)
+Integration-075: RSS feed
+Integration-076: content import/export tooling
+Integration-077: content moderation queue (basic)
+Integration-078: public content templates (3 layouts)
+Integration-079: tier-based content recommendations
+Integration-080: content analytics (views/saves)
+
+# UX + Performance (081–090)
+Integration-081: lazy loading + route-level code splitting
+Integration-082: image policy + optimization
+Integration-083: caching headers for public assets
+Integration-084: skeleton loaders + empty states
+Integration-085: global toast system + consistent buttons sizing
+Integration-086: responsive spacing system (design tokens)
+Integration-087: keyboard navigation baseline
+Integration-088: WCAG AA contrast checks doc + tokens
+Integration-089: i18n-ready string extraction plan
+Integration-090: error UX playbook (retry, fallback, contact)
+
+# Growth + Marketing Tools (091–100)
+Integration-091: share cards generator (OG images plan)
+Integration-092: referral tracking skeleton
+Integration-093: email capture + welcome drip stub
+Integration-094: admin publishing calendar skeleton
+Integration-095: social post generator (brand-safe templates)
+Integration-096: UTM builder tool
+Integration-097: landing page A/B skeleton (flags)
+Integration-098: testimonials ingestion + display
+Integration-099: pricing experiments gating
+Integration-100: onboarding funnel analytics
+
+================================================================================
+6) “GENERATE NEXT 50” ENGINE (101–150, 151–200, …)
+================================================================================
+After Batch-001 hits 80% ✅:
+- Auto-generate Batch-003 (101–150) LOCKED:
+  categories: security advanced, privacy, compliance docs, backups, exports, admin dashboards, CMS, community, mobile PWA, notifications, web push, TTS/voice, analytics.
+After Batch-002 hits 80% ✅:
+- Auto-generate Batch-004 (151–200) LOCKED:
+  categories: enterprise readiness, multi-tenant, SSO stub, advanced billing, data warehouse export, BI dashboards, advanced search, personalization.
+Continue indefinitely.
+
+================================================================================
+7) APPLY-ALL CHANGES (MANDATORY AFTER EVERY INTEGRATION)
+================================================================================
+After each integration:
+- Update /docs/integrations.md
+- Update current batch status item
+- Run: npm run -s verify
+- Fix failures immediately
+- Write /docs/reports/latest.md
+- Commit with: "integration ###: <Name>"
+
+================================================================================
+8) BEGIN NOW (NO DELAYS)
+================================================================================
+PHASE 1) Create docs + scripts + package.json scripts.
+PHASE 2) Run LOOP 0 and write /docs/reports/latest.md.
+PHASE 3) Create Batch-001 and immediately implement Integration-001.
+PHASE 4) Continue sequentially through Integration-050.
+PHASE 5) Unlock Batch-002 and continue forever.
+
+END.

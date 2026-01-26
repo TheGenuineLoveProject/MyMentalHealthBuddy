@@ -96,6 +96,7 @@ import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import socialPostingRouter from "./routes/social-posting.mjs";
 import userRouter from "./routes/user.mjs";
 import perplexityRouter from "./routes/perplexity.mjs";
+import feedRouter from "./routes/feed.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import { contentRouter } from "./routes/content.mjs";
 const __filename = fileURLToPath(import.meta.url);
@@ -368,6 +369,9 @@ app.use((err, _req, res, _next) => {
     message: "Something went wrong. Please try again.",
   });
 });
+
+// RSS, Sitemap, Robots
+app.use('/', feedRouter);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, "0.0.0.0", () => {
