@@ -4,6 +4,56 @@
 
 ---
 
+## Batch 3 Scan: 2026-01-27 (P101-P150)
+
+### Summary
+
+| Metric | Value |
+|--------|-------|
+| Build Status | ✅ Passing (28.90s) |
+| TODO/FIXME Count | 516 (non-blocking) |
+| Already Implemented | 19/50 |
+| Remaining TODO | 31/50 |
+| Blockers | None |
+
+### Duplicate Folders Found
+| Path | Recommendation |
+|------|----------------|
+| `scripts/_backups` | Keep (intentional) |
+| `scripts/.patch-backups` | Keep (intentional) |
+| `reports/backups` | Keep (intentional) |
+| `_quarantine/archive_DO_NOT_DELETE` | Keep (quarantine) |
+| `docs/duplicates` | Keep (documentation) |
+
+### Already Done (Skip List) — 19 items
+- P101 RouteKey validator (Patch 33)
+- P103 Auto nav map (exists)
+- P104 Breadcrumbs (exists)
+- P106 Canonical URL enforcement (exists)
+- P107 404 page with search (exists)
+- P108 /crisis routing hardening (exists)
+- P110 Global footer safety (exists)
+- P111 Design tokens (exists)
+- P112 Button sizing 44px (exists)
+- P117 Accessibility focus ring (exists)
+- P118 Empty/loading states (exists)
+- P119 Toast standardization (exists)
+- P120 Typography scale (exists)
+- P121 Consent/pacing component (exists)
+- P141 Doctor script v2 (exists)
+- P144 CI gates (exists)
+- P148 Rate limit config (exists)
+
+### Next Patch Candidates (Priority Order)
+1. **P102** — Broken link scanner (routeKey-based)
+2. **P122** — "Softer version" toggle component
+3. **P113** — Form field consistency + error microcopy
+
+### Carryover Items
+None blocking. 516 TODO/FIXME are non-critical (mostly enhancement notes).
+
+---
+
 ## Batch 2 Scan: 2026-01-26 (P051-P100)
 
 ### Summary

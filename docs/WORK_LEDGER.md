@@ -19,14 +19,16 @@
 ### Latest Status
 | Metric | Value |
 |--------|-------|
-| Done | 20 |
-| TODO | 30 |
-| Build | ✅ Passing |
+| Done | 22 |
+| TODO | 28 |
+| Build | ✅ Passing (36.60s) |
 | Doctor | ✅ All checks pass |
 
 ### Recently Completed
 | ID | Process | Patch | Notes |
 |----|---------|-------|-------|
+| P102 | Broken link scanner | Patch 34 | `node scripts/scanBrokenLinks.mjs` |
+| P122 | Softer version toggle | Patch 34 | `SofterVersionToggle.jsx` |
 | P101 | RouteKey validator | Patch 33 | `npm run validate:routekeys` |
 | P091 | Doctor script | Patch 32 | `npm run doctor` |
 

@@ -19,6 +19,31 @@
 
 ---
 
+## Patch 34 — P102 + P122 Broken Links + Softer Toggle (Batch 3)
+- Date: 2026-01-27
+- Processes: P102, P122
+- Files: 
+  - `scripts/scanBrokenLinks.mjs` (NEW) — P102
+  - `client/src/components/wellness/SofterVersionToggle.jsx` (NEW) — P122
+  - `docs/NO_DUPES_REPORT.md` (updated)
+  - `docs/PATCHLOG.md` (updated)
+  - `docs/WORK_LEDGER.md` (updated)
+- Summary: 
+  - P102: Created routeKey-based broken link scanner script
+    - Scans all JSX/TSX files for internal links
+    - Validates against route registry (allRoutes.json + App.jsx fallback)
+    - Outputs JSON report with broken link locations
+  - P122: Created "Softer Version" toggle component
+    - Trauma-informed toggle for gentler content presentation
+    - Supports compact and full modes
+    - WCAG AA compliant with proper ARIA labels
+    - Includes useSofterVersion hook for state management
+- Validation results:
+  - build: ✅ Passed (36.60s)
+  - scanBrokenLinks: ✅ Runs (230 potential links flagged for review)
+
+---
+
 ## Patch 33 — P101 RouteKey Validator (Batch 3)
 - Date: 2026-01-26
 - Processes: P101

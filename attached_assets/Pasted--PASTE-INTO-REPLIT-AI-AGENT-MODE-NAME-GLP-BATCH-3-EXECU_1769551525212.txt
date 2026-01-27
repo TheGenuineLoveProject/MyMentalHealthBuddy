@@ -1,0 +1,213 @@
+::: PASTE INTO REPLIT AI AGENT MODE :::
+
+NAME: GLP_BATCH_3_EXECUTOR__P101_P150__APPLY__NO_DUPES_V3.1
+
+MISSION
+Continue after Batch 2 by implementing NEXT 50 integrations (P101–P150) while also completing any carryover incomplete work discovered during scans. Every cycle: Deep scan → DRY-RUN plan → APPLY small patch → Validate → Ledger → STOP.
+
+PROJECT
+TheGenuineLoveProject.com (Replit)
+Owner: Aaliyah Draws Art LLC (Maria Landa)
+
+⸻
+
+0) ABSOLUTE NON-NEGOTIABLES
+	•	DRY-RUN FIRST → THEN APPLY (never skip)
+	•	≤5 files per patch (docs-only patch may exceed)
+	•	No deletes/renames without explicit permission
+	•	Human-in-the-loop (no autonomous publishing, billing actions, external posting)
+	•	Educational only (no diagnosis/treatment/cure/guarantees)
+	•	/crisis always reachable
+	•	Replit-safe (single port, deterministic scripts, no background daemons)
+	•	NO DUPLICATE WORK: scan + ledger + skip anything already done
+
+⸻
+
+1) REQUIRED LEDGER FILES (PATCH 0 DOCS ONLY)
+
+If missing, create (docs-only Patch 0):
+	•	/docs/WORK_LEDGER.md
+	•	/docs/PATCHLOG.md
+	•	/docs/DECISIONS.md
+	•	/docs/NO_DUPES_REPORT.md
+	•	/docs/ROADMAP_P101_P150.md
+
+Patch 0 must only add these docs with headers + empty sections.
+
+⸻
+
+2) PHASE A — IN-DEPTH NO-DUPES + INCOMPLETE WORK SCAN (MANDATORY)
+
+Run the following scans and append results to /docs/NO_DUPES_REPORT.md with timestamp + “Batch 3”.
+
+A1) Duplicate folders + extra manifests
+	•	find . -maxdepth 8 -type d -iname "*backup*" -o -iname "*copy*" -o -iname "*old*" -o -iname "*tmp*" -o -iname "*archive*" -o -iname "*duplicate*"
+	•	find . -maxdepth 8 -name “package.json” -print
+	•	find . -maxdepth 8 -name "pnpm-lock.yaml" -o -name "yarn.lock" -o -name "package-lock.json" -print
+
+A2) “Already implemented” detector (skip list)
+	•	grep -R “P1[0-5][0-9]|P0[0-9][0-9]” -n docs || true
+	•	grep -R “ErrorBoundary|error boundary” -n client/src server || true
+	•	grep -R “audit log|AUDIT” -n server client/src || true
+	•	grep -R “sitemap|robots.txt|canonical|og:” -n client/src server public || true
+	•	grep -R “admin/status\|health\|system” -n client/src server || true
+	•	grep -R “feature flag|flags” -n server client/src || true
+	•	grep -R “i18n|translation” -n client/src || true
+
+A3) Incomplete integrations detector (finish before new work)
+	•	grep -R “TODO|FIXME|placeholder|TEMP|stub|not implemented” -n client server scripts || true
+	•	grep -R “throw new Error("TODO” -n client server scripts || true
+	•	grep -R “return null; // TODO” -n client server scripts || true
+
+A4) Build + typecheck + tests (blockers first)
+	•	npm run build || true
+	•	npm run typecheck || true
+	•	npm test || true
+
+A5) ROUTING SINGLE SOURCE OF TRUTH CHECK (blocker if broken)
+
+Search for routing canonical source files (discover actual paths):
+	•	find client -maxdepth 6 -type f -iname "*route*registry*" -o -iname "*routes*" -o -iname "*routeMeta*" -print || true
+Then:
+	•	grep -R “routeKey” -n client/src || true
+	•	grep -R “canonicalPath” -n client/src || true
+	•	grep -R “internalLinks” -n client/src || true
+
+REQUIRED SCAN OUTPUT (must print)
+	•	Duplicates found + recommendation (do nothing vs quarantine vs consolidate)
+	•	Carryover incomplete items (file + line) marked “CARRYOVER”
+	•	Already-done items marked “SKIPPED”
+	•	Current blockers (first failing command + excerpt)
+	•	Choose 1–3 “Next Patch Candidates” max
+STOP after scan and produce DRY-RUN Patch 1 plan.
+
+⸻
+
+3) PHASE B — PATCH LOOP (ALWAYS)
+
+Scan → Diagnose → DRY-RUN Patch Plan → APPLY Patch → Validate → Document → STOP
+
+Patch rules
+	•	≤5 files changed per patch
+	•	Each patch maps to 1–3 process IDs
+	•	After APPLY run:
+	•	npm run build
+	•	npm run typecheck (if exists)
+	•	npm test (if exists)
+
+Docs updates after each patch
+	•	/docs/WORK_LEDGER.md (what changed, status per process ID)
+	•	/docs/PATCHLOG.md (patch number, files, validation)
+	•	/docs/DECISIONS.md (why we chose this approach)
+
+⸻
+
+4) BATCH 3 PROCESS SET (P101–P150)
+
+Use exactly these IDs and names; do not invent new IDs.
+
+ROUTING + INFORMATION ARCHITECTURE
+
+P101 routeKey validator script (CI-safe)
+P102 broken link scanner (routeKey-based)
+P103 auto nav map from registry
+P104 breadcrumbs from route meta
+P105 related content engine (routeKey-based)
+P106 canonical URL enforcement + redirects map
+P107 404 page with search + calm microcopy
+P108 /crisis routing hardening (always reachable)
+P109 site-wide “pause” affordance (optional)
+P110 global footer safety consistency pass
+
+DESIGN SYSTEM + UI CONSISTENCY
+
+P111 design tokens + tailwind mapping
+P112 button sizing locked (44px minimum)
+P113 form field consistency + error microcopy
+P114 card system (calm/standard/compact)
+P115 icon system sizing rules
+P116 motion system + reduced-motion support
+P117 accessibility focus + keyboard nav pass
+P118 empty/loading states library
+P119 toast/alert standardization (calm tone)
+P120 typography scale enforced (H1–caption)
+
+WELLNESS QUALITY + SAFETY
+
+P121 universal consent/pacing component
+P122 “softer version” toggle component
+P123 practice timer + “stop now” button
+P124 reflection prompt library (original)
+P125 risk labeling (low/med/high)
+P126 crisis phrasing guard (non-clinical)
+P127 tool completion logging (privacy-safe)
+P128 export entries + delete controls
+P129 data minimization audit
+P130 “not therapy” disclaimer component
+
+ADMIN + CONTENT OPS
+
+P131 admin role gate middleware hardening
+P132 admin audit log viewer (read-only)
+P133 admin content editor safe-mode
+P134 social studio approvals strengthening
+P135 calendar week/month improvements
+P136 export formats (CSV/JSON/MD)
+P137 content template versioning
+P138 “no plagiarism” heuristic checker (internal)
+P139 evidence links manager (links-only)
+P140 admin release-notes generator (internal)
+
+RELIABILITY + OPERATIONS
+
+P141 doctor script v2 (scan+build+report)
+P142 dependency health report doc
+P143 safe upgrade workflow doc
+P144 CI gates (if GH Actions exist)
+P145 lighthouse checklist doc
+P146 backup export of content/settings
+P147 env var validator (fail fast)
+P148 rate limit config centralization
+P149 security headers test checklist
+P150 release checklist v2 (deploy + smoke)
+
+⸻
+
+5) PRIORITY OVERRIDE: COMPLETE CARRYOVER FIRST
+
+If scans reveal incomplete work in:
+	•	build/typecheck/tests
+	•	routeKey registry
+	•	/crisis routing
+	•	auth/admin gating
+You MUST fix those before new P101–P150 work.
+
+⸻
+
+6) PATCH SELECTOR (AUTO-CHOOSE NEXT)
+
+Choose Patch 1 in this exact order:
+	1.	First build/typecheck/test blocker
+	2.	routeKey single-source truth break
+	3.	/crisis routing failure
+	4.	P101 + P102
+	5.	P111 + P112
+	6.	P121 + P122
+
+⸻
+
+7) APPLY NOW
+
+Step 1: Run Phase A scans
+Step 2: If docs missing → Patch 0 (docs-only)
+Step 3: Output DRY-RUN Patch 1 plan (≤5 files)
+Step 4: APPLY Patch 1
+Step 5: Validate
+Step 6: Update ledgers
+STOP and wait for “NEXT PATCH”.
+
+⸻
+
+END
+
+Do not continue past Patch 1 until the user says “NEXT PATCH”.

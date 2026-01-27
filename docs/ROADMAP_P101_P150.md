@@ -28,12 +28,12 @@
 
 | Category | Done | TODO | Total |
 |----------|------|------|-------|
-| Routing (P101-P110) | 7 | 3 | 10 |
+| Routing (P101-P110) | 8 | 2 | 10 |
 | Design System (P111-P120) | 6 | 4 | 10 |
-| Wellness Safety (P121-P130) | 2 | 8 | 10 |
+| Wellness Safety (P121-P130) | 3 | 7 | 10 |
 | Admin + Content (P131-P140) | 1 | 9 | 10 |
 | Reliability (P141-P150) | 3 | 7 | 10 |
-| **Total** | **19** | **31** | **50** |
+| **Total** | **21** | **29** | **50** |
 
 ---
 
@@ -42,7 +42,7 @@
 | ID | Process | Status | Files |
 |----|---------|--------|-------|
 | P101 | RouteKey single-source validator script | ✅ DONE | scripts/validateRouteKeys.mjs (Patch 33) |
-| P102 | Internal link resolver + broken link scanner | TODO | |
+| P102 | Internal link resolver + broken link scanner | ✅ DONE | scripts/scanBrokenLinks.mjs (Patch 34) |
 | P103 | Auto-generated nav map from route registry | ✅ DONE | client/src/components/Navigation.jsx |
 | P104 | Breadcrumbs from route meta | ✅ DONE | client/src/components/Breadcrumbs.jsx |
 | P105 | "Related content" engine | TODO | |
@@ -76,7 +76,7 @@
 | ID | Process | Status | Files |
 |----|---------|--------|-------|
 | P121 | Universal consent/pacing component | ✅ DONE | AgeConsentGate.jsx |
-| P122 | "Softer version" toggle component | TODO | |
+| P122 | "Softer version" toggle component | ✅ DONE | SofterVersionToggle.jsx (Patch 34) |
 | P123 | Practice timer + "stop now" button | TODO | |
 | P124 | Reflection prompt library | TODO | |
 | P125 | Risk labeling for tools | TODO | |
