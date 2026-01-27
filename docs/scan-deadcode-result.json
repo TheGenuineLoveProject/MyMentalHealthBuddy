@@ -1,0 +1,16 @@
+{
+  "deprecatedFiles": [
+    "client/src/components/ui/Card.tsx",
+    "client/src/components/ui/Button.tsx",
+    "client/src/components/layout/Footer.tsx",
+    "client/src/components/sacred/SacredFooter.jsx",
+    "client/src/components/Footer.jsx",
+    "client/src/components/SacredFooter.jsx"
+  ],
+  "unusedExports": [],
+  "backupFiles": [],
+  "passed": true,
+  "emptyFiles": [
+    "server/intelligence/journalingMirror.mjs"
+  ]
+}

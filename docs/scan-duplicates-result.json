@@ -1,0 +1,289 @@
+{
+  "duplicateFiles": [
+    {
+      "name": "Footer.jsx",
+      "paths": [
+        "client/src/components/ui/Footer.jsx",
+        "client/src/components/Footer.jsx"
+      ],
+      "canonical": "client/src/components/ui/Footer.jsx"
+    },
+    {
+      "name": "SafetyFooter.jsx",
+      "paths": [
+        "client/src/components/ui/SafetyFooter.jsx",
+        "client/src/components/SafetyFooter.jsx"
+      ],
+      "canonical": "client/src/components/ui/SafetyFooter.jsx"
+    },
+    {
+      "name": "Hero.jsx",
+      "paths": [
+        "client/src/components/ui/Hero.jsx",
+        "client/src/components/sacred/Hero.jsx"
+      ],
+      "canonical": "client/src/components/ui/Hero.jsx"
+    },
+    {
+      "name": "EmptyState.jsx",
+      "paths": [
+        "client/src/components/ui/EmptyState.jsx",
+        "client/src/components/EmptyState.jsx"
+      ],
+      "canonical": "client/src/components/ui/EmptyState.jsx"
+    },
+    {
+      "name": "Header.jsx",
+      "paths": [
+        "client/src/components/layout/Header.jsx",
+        "client/src/components/Header.jsx"
+      ],
+      "canonical": "client/src/components/layout/Header.jsx"
+    },
+    {
+      "name": "StateTracker.tsx",
+      "paths": [
+        "client/src/components/state/StateTracker.tsx",
+        "client/src/components/StateTracker.tsx"
+      ],
+      "canonical": "client/src/components/state/StateTracker.tsx"
+    },
+    {
+      "name": "SacredFooter.jsx",
+      "paths": [
+        "client/src/components/sacred/SacredFooter.jsx",
+        "client/src/components/SacredFooter.jsx"
+      ],
+      "canonical": "client/src/components/sacred/SacredFooter.jsx"
+    },
+    {
+      "name": "WeeklyRecap.jsx",
+      "paths": [
+        "client/src/components/dashboard/WeeklyRecap.jsx",
+        "client/src/components/WeeklyRecap.jsx"
+      ],
+      "canonical": "client/src/components/dashboard/WeeklyRecap.jsx"
+    },
+    {
+      "name": "SafetyFooter.tsx",
+      "paths": [
+        "client/src/components/wellness/SafetyFooter.tsx",
+        "client/src/components/safety/SafetyFooter.tsx"
+      ],
+      "canonical": "client/src/components/wellness/SafetyFooter.tsx"
+    },
+    {
+      "name": "BenefitsBlock.tsx",
+      "paths": [
+        "client/src/components/wellness/BenefitsBlock.tsx",
+        "client/src/components/marketing/BenefitsBlock.tsx"
+      ],
+      "canonical": "client/src/components/wellness/BenefitsBlock.tsx"
+    },
+    {
+      "name": "SEO.tsx",
+      "paths": [
+        "client/src/components/SEO.tsx",
+        "client/src/components/seo/SEO.tsx"
+      ],
+      "canonical": "client/src/components/SEO.tsx"
+    },
+    {
+      "name": "Profile.jsx",
+      "paths": [
+        "client/src/pages/account/Profile.jsx",
+        "client/src/pages/Profile.jsx"
+      ],
+      "canonical": "client/src/pages/account/Profile.jsx"
+    },
+    {
+      "name": "Settings.jsx",
+      "paths": [
+        "client/src/pages/account/Settings.jsx",
+        "client/src/pages/Settings.jsx"
+      ],
+      "canonical": "client/src/pages/account/Settings.jsx"
+    },
+    {
+      "name": "Disclaimer.tsx",
+      "paths": [
+        "client/src/pages/legal/Disclaimer.tsx",
+        "client/src/pages/Disclaimer.tsx"
+      ],
+      "canonical": "client/src/pages/legal/Disclaimer.tsx"
+    },
+    {
+      "name": "Terms.tsx",
+      "paths": [
+        "client/src/pages/legal/Terms.tsx",
+        "client/src/pages/Terms.tsx"
+      ],
+      "canonical": "client/src/pages/legal/Terms.tsx"
+    },
+    {
+      "name": "Privacy.tsx",
+      "paths": [
+        "client/src/pages/legal/Privacy.tsx",
+        "client/src/pages/Privacy.tsx"
+      ],
+      "canonical": "client/src/pages/legal/Privacy.tsx"
+    },
+    {
+      "name": "index.jsx",
+      "paths": [
+        "client/src/pages/generated/index.jsx",
+        "client/src/pages/hubs/index.jsx"
+      ],
+      "canonical": "client/src/pages/generated/index.jsx"
+    }
+  ],
+  "duplicateComponents": [
+    {
+      "name": "Footer.jsx",
+      "paths": [
+        "client/src/components/ui/Footer.jsx",
+        "client/src/components/Footer.jsx"
+      ],
+      "canonical": "client/src/components/ui/Footer.jsx"
+    },
+    {
+      "name": "SafetyFooter.jsx",
+      "paths": [
+        "client/src/components/ui/SafetyFooter.jsx",
+        "client/src/components/SafetyFooter.jsx"
+      ],
+      "canonical": "client/src/components/ui/SafetyFooter.jsx"
+    },
+    {
+      "name": "Hero.jsx",
+      "paths": [
+        "client/src/components/ui/Hero.jsx",
+        "client/src/components/sacred/Hero.jsx"
+      ],
+      "canonical": "client/src/components/ui/Hero.jsx"
+    },
+    {
+      "name": "EmptyState.jsx",
+      "paths": [
+        "client/src/components/ui/EmptyState.jsx",
+        "client/src/components/EmptyState.jsx"
+      ],
+      "canonical": "client/src/components/ui/EmptyState.jsx"
+    },
+    {
+      "name": "Header.jsx",
+      "paths": [
+        "client/src/components/layout/Header.jsx",
+        "client/src/components/Header.jsx"
+      ],
+      "canonical": "client/src/components/layout/Header.jsx"
+    },
+    {
+      "name": "StateTracker.tsx",
+      "paths": [
+        "client/src/components/state/StateTracker.tsx",
+        "client/src/components/StateTracker.tsx"
+      ],
+      "canonical": "client/src/components/state/StateTracker.tsx"
+    },
+    {
+      "name": "SacredFooter.jsx",
+      "paths": [
+        "client/src/components/sacred/SacredFooter.jsx",
+        "client/src/components/SacredFooter.jsx"
+      ],
+      "canonical": "client/src/components/sacred/SacredFooter.jsx"
+    },
+    {
+      "name": "WeeklyRecap.jsx",
+      "paths": [
+        "client/src/components/dashboard/WeeklyRecap.jsx",
+        "client/src/components/WeeklyRecap.jsx"
+      ],
+      "canonical": "client/src/components/dashboard/WeeklyRecap.jsx"
+    },
+    {
+      "name": "SafetyFooter.tsx",
+      "paths": [
+        "client/src/components/wellness/SafetyFooter.tsx",
+        "client/src/components/safety/SafetyFooter.tsx"
+      ],
+      "canonical": "client/src/components/wellness/SafetyFooter.tsx"
+    },
+    {
+      "name": "BenefitsBlock.tsx",
+      "paths": [
+        "client/src/components/wellness/BenefitsBlock.tsx",
+        "client/src/components/marketing/BenefitsBlock.tsx"
+      ],
+      "canonical": "client/src/components/wellness/BenefitsBlock.tsx"
+    },
+    {
+      "name": "SEO.tsx",
+      "paths": [
+        "client/src/components/SEO.tsx",
+        "client/src/components/seo/SEO.tsx"
+      ],
+      "canonical": "client/src/components/SEO.tsx"
+    }
+  ],
+  "shadowConfigs": [
+    {
+      "pattern": "tsconfig*.json",
+      "files": [
+        "./client/node_modules/@babel/traverse/tsconfig.overrides.json",
+        "./client/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/es-set-tostringtag/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/hasown/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/es-errors/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/has-tostringtag/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/call-bind-apply-helpers/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/es-define-property/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/es-object-atoms/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/get-proto/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/gopd/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/has-symbols/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/math-intrinsics/tsconfig.json",
+        "./.cache/typescript/5.9/node_modules/dunder-proto/tsconfig.json",
+        "./tsconfig.json"
+      ]
+    },
+    {
+      "pattern": "vite.config.*",
+      "files": [
+        "./client/vite.config.js",
+        "./vite.config.js"
+      ]
+    },
+    {
+      "pattern": ".eslintrc*",
+      "files": [
+        "./.cache/typescript/5.9/node_modules/es-set-tostringtag/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/hasown/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/es-errors/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/get-intrinsic/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/has-tostringtag/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/call-bind-apply-helpers/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/es-define-property/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/es-object-atoms/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/function-bind/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/function-bind/test/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/get-proto/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/gopd/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/has-symbols/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/math-intrinsics/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/dunder-proto/.eslintrc",
+        "./.cache/typescript/5.9/node_modules/entities/src/generated/.eslintrc.json"
+      ]
+    },
+    {
+      "pattern": "tailwind.config.*",
+      "files": [
+        "./client/tailwind.config.js",
+        "./tailwind.config.js"
+      ]
+    }
+  ],
+  "portConflicts": [],
+  "passed": true
+}

@@ -1,0 +1,58 @@
+{
+  "timestamp": "2026-01-27T20:28:04.980Z",
+  "passed": 10,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "Package.json exists",
+      "status": "pass",
+      "message": "Found"
+    },
+    {
+      "name": "Server entry exists",
+      "status": "pass",
+      "message": "Server files found"
+    },
+    {
+      "name": "Client entry exists",
+      "status": "pass",
+      "message": "Client app found"
+    },
+    {
+      "name": "Database schema exists",
+      "status": "pass",
+      "message": "Schema found"
+    },
+    {
+      "name": "Build directory exists",
+      "status": "pass",
+      "message": "Build output found"
+    },
+    {
+      "name": "Node modules installed",
+      "status": "pass",
+      "message": "Dependencies installed"
+    },
+    {
+      "name": "Environment configured",
+      "status": "pass",
+      "message": "Database configured"
+    },
+    {
+      "name": "Components directory",
+      "status": "pass",
+      "message": "284 components"
+    },
+    {
+      "name": "Pages directory",
+      "status": "pass",
+      "message": "372 pages"
+    },
+    {
+      "name": "API routes directory",
+      "status": "pass",
+      "message": "104 route files"
+    }
+  ],
+  "overallStatus": "HEALTHY"
+}

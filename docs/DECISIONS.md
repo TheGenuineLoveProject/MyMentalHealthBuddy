@@ -66,6 +66,41 @@
 **Decision**: No background daemons, no auto-posting, human-triggered only
 **Consequences**: All scheduled tasks require manual trigger
 
+### DEC-008: Single Port Architecture
+**Date**: 2026-01
+**Status**: ACCEPTED
+**Context**: Replit requires applications to bind to single port
+**Decision**: All services (frontend + API) bind to port 5000
+**Consequences**: Simplified deployment, Vite proxies API requests
+
+### DEC-009: Drizzle ORM with Neon PostgreSQL
+**Date**: 2026-01
+**Status**: ACCEPTED
+**Context**: Need type-safe ORM for serverless
+**Decision**: Use Drizzle ORM with Neon PostgreSQL
+**Consequences**: Schema in `shared/schema.mjs`, push migrations with `npm run db:push`
+
+### DEC-010: WCAG AA Accessibility
+**Date**: 2026-01
+**Status**: ACCEPTED
+**Context**: Mental wellness platform must be accessible
+**Decision**: 44px minimum button height, ARIA labels, keyboard navigation
+**Consequences**: Inclusive UX, compliance with accessibility standards
+
+### DEC-011: Batch Processing Engine
+**Date**: 2026-01
+**Status**: ACCEPTED
+**Context**: Large platform requires systematic completion
+**Decision**: Implement "Endless 50" batch system with PROCESS_CATALOG_360.json
+**Consequences**: 50 processes per batch, idempotent, traceable progress
+
+### DEC-012: Stateless Design for Autoscale
+**Date**: 2026-01
+**Status**: ACCEPTED
+**Context**: Replit autoscale requires stateless design
+**Decision**: No local file storage, sessions in database
+**Consequences**: Horizontal scaling ready, DB is single source of truth
+
 ---
 
-_Last updated: January 2026_
+_Last updated: January 27, 2026_
