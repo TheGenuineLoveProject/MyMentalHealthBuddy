@@ -74,18 +74,7 @@ function HeroSection({ hero, readingLevel = 'intermediate' }) {
     }
   }, []);
 
-  if (!hero) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Page Template — The Genuine Love Project" description="Explore page template tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Page Template</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!hero) return null;
 
   const eyebrow = getVariant(hero.eyebrow, readingLevel);
   const title = getVariant(hero.title, readingLevel);
@@ -249,18 +238,7 @@ function ModuleCard({ module, index }) {
 }
 
 function ModulesGrid({ modules }) {
-  if (!modules || modules.length === 0) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Page Template — The Genuine Love Project" description="Explore page template tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Page Template</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!modules || modules.length === 0) return null;
   
   return (
     <section 
@@ -277,18 +255,7 @@ function ModulesGrid({ modules }) {
 }
 
 function NextStepBlock({ nextStep, isProminent = false }) {
-  if (!nextStep) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Page Template — The Genuine Love Project" description="Explore page template tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Page Template</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!nextStep) return null;
   
   const IconComponent = nextStep.icon ? getIcon(nextStep.icon) : Target;
   

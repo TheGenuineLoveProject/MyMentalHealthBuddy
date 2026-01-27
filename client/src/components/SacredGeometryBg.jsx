@@ -258,16 +258,5 @@ export default function SacredGeometryBg({
     );
   }
 
-  return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Sacred Geometry Bg — The Genuine Love Project" description="Explore sacred geometry bg tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Sacred Geometry Bg</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  return null;
 }

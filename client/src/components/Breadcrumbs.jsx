@@ -1,21 +1,8 @@
 import { Link } from "wouter";
 import { ChevronRight, Home } from "lucide-react";
-import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export default function Breadcrumbs({ items }) {
-  if (!items || items.length === 0) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Breadcrumbs — The Genuine Love Project" description="Explore breadcrumbs tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Breadcrumbs</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!items || items.length === 0) return null;
   
   return (
     <nav 
