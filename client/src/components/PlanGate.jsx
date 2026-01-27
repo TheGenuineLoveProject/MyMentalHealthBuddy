@@ -1,8 +1,6 @@
 import { Link } from "wouter";
 import { Lock, Sparkles, ArrowRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
-import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
 
 const PLAN_BENEFITS = {
   plus: {
@@ -41,18 +39,7 @@ export default function PlanGate({
   }
 
   if (!showTeaser) {
-    return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Plan Gate — The Genuine Love Project" description="Explore plan gate tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Plan Gate</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+    return null;
   }
 
   const planInfo = PLAN_BENEFITS[requiredPlan] || PLAN_BENEFITS.plus;

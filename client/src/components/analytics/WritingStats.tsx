@@ -1,7 +1,5 @@
 import { useMemo } from "react";
 import { analyzeWriting, getWritingInsight, type WritingMetrics } from "@/lib/analytics/writingAnalytics";
-import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
 
 interface Props {
   text: string;
@@ -43,18 +41,7 @@ export default function WritingStats({ text }: Props) {
   const insight = useMemo(() => getWritingInsight(metrics), [metrics]);
 
   if (metrics.wordCount === 0) {
-    return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Writing Stats — The Genuine Love Project" description="Explore writing stats tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Writing Stats</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+    return null;
   }
 
   return (

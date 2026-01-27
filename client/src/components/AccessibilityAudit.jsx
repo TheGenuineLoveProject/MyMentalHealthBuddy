@@ -3,8 +3,6 @@ import {
   CheckCircle, AlertCircle, XCircle, Eye, 
   Keyboard, Volume2, Contrast, Type, RefreshCw
 } from 'lucide-react';
-import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
 
 export default function AccessibilityAudit() {
   const [results, setResults] = useState([]);
@@ -230,18 +228,7 @@ export default function AccessibilityAudit() {
       case 'fail':
         return <XCircle className="w-4 h-4 text-red-600" />;
       default:
-        return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Accessibility Audit — The Genuine Love Project" description="Explore accessibility audit tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Accessibility Audit</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+        return null;
     }
   };
 

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { getDailyWisdom, getRandomWisdom, type WisdomEntry } from "@/lib/wisdom/wisdomLibrary";
 import { Sparkles, RefreshCw, BookOpen } from "lucide-react";
-import { SEO } from "@/components/SEO";
-import SafetyFooter from "@/components/ui/SafetyFooter";
 
 interface WisdomCardProps {
   mode?: "daily" | "random";
@@ -22,18 +20,7 @@ export default function WisdomCard({ mode = "daily", onQuestionClick }: WisdomCa
     setIsFlipped(false);
   }
 
-  if (!wisdom) return (
-    <div className="min-h-screen safe-padding hero-gradient">
-      <SEO title="Wisdom Card — The Genuine Love Project" description="Explore wisdom card tools for your wellness journey." />
-      <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-4">Wisdom Card</h1>
-        <p className="text-muted-foreground mb-8">
-          This page is being refined. Use the navigation to explore tools while we finish this section.
-        </p>
-        <SafetyFooter />
-      </main>
-    </div>
-  );
+  if (!wisdom) return null;
 
   const categoryColors: Record<string, string> = {
     philosophy: "text-blue-400",
