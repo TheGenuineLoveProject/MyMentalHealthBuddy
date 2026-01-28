@@ -112,7 +112,7 @@ export default function DataRetention() {
                 <p className="text-muted-foreground mb-4">
                   Download a copy of all your data at any time from your account settings.
                 </p>
-                <Link href="/account/export">
+                <Link href="/settings">
                   <Button variant="outline" className="min-h-[44px] px-4 py-2 rounded-lg" data-testid="button-export-data">
                     Export Data
                   </Button>

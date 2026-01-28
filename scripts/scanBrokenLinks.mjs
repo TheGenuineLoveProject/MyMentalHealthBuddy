@@ -35,8 +35,9 @@ try {
   const routes = JSON.parse(routesFile);
   if (Array.isArray(routes)) {
     routes.forEach(r => {
-      if (r.path) validRoutes.add(r.path);
-      if (r.pathname) validRoutes.add(r.pathname);
+      if (typeof r === 'string') validRoutes.add(r);
+      else if (r.path) validRoutes.add(r.path);
+      else if (r.pathname) validRoutes.add(r.pathname);
     });
   }
   console.log(`${COLORS.green}✓${COLORS.reset} Loaded ${validRoutes.size} valid routes from registry`);

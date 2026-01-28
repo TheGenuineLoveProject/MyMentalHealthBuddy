@@ -157,7 +157,7 @@ export default function CommunityGuidelines() {
             If you see content that violates these guidelines or makes you uncomfortable, 
             please report it. We review all reports and take appropriate action.
           </p>
-          <Link href="/report">
+          <Link href="/support/feedback">
             <Button variant="outline" className="min-h-[44px] px-4 py-2 rounded-lg border-amber-600 text-amber-900 dark:text-amber-100" data-testid="button-report">
               Report a Concern
             </Button>

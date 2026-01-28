@@ -225,11 +225,11 @@ export default function HealthDashboard() {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Quick Actions</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Link href="/admin/security" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-security">
+            <Link href="/admin" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-security">
               <Shield className="w-5 h-5 text-sage-600" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Security</span>
             </Link>
-            <Link href="/admin/logs" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-logs">
+            <Link href="/admin" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-logs">
               <Database className="w-5 h-5 text-sage-600" />
               <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Audit Logs</span>
             </Link>

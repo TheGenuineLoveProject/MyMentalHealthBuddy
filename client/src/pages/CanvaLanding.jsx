@@ -703,7 +703,7 @@ export default function CanvaLanding() {
                 <h3 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Wellness Tools</h3>
               </div>
               <div className="space-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
-                <Link href="/mood-tracker"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Mood Tracker</div></Link>
+                <Link href="/mood"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Mood Tracker</div></Link>
                 <Link href="/journal"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Daily Journal</div></Link>
                 <Link href="/meditation"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Meditation</div></Link>
                 <Link href="/breathing"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Breathing Exercises</div></Link>
@@ -755,9 +755,9 @@ export default function CanvaLanding() {
               </div>
               <div className="space-y-2 text-sm" style={{ color: 'var(--glp-ink)' }}>
                 <Link href="/tools"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Tools Library</div></Link>
-                <Link href="/intellectual-atlas"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Intellectual Atlas</div></Link>
-                <Link href="/cognitive-lab"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Cognitive Lab</div></Link>
-                <Link href="/purpose-compass"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Purpose Compass</div></Link>
+                <Link href="/atlas"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Intellectual Atlas</div></Link>
+                <Link href="/cognitive-tools"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Cognitive Lab</div></Link>
+                <Link href="/hubs/life-purpose"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Purpose Compass</div></Link>
                 <Link href="/mastery"><div className="p-2 rounded-lg hover:bg-[var(--glp-sage-10)] cursor-pointer transition-all">Mastery Suite</div></Link>
               </div>
             </div>

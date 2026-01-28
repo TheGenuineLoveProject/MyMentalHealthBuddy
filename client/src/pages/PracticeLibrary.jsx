@@ -27,7 +27,7 @@ export default function PracticeLibrary() {
       duration: "5 min",
       category: "breathing",
       difficulty: "Beginner",
-      link: "/tools/breathing"
+      link: "/breathing"
     },
     {
       id: "body-scan",
@@ -72,7 +72,7 @@ export default function PracticeLibrary() {
       duration: "3-5 min",
       category: "breathing",
       difficulty: "Beginner",
-      link: "/tools/breathing"
+      link: "/breathing"
     },
     {
       id: "mindful-walking",
@@ -204,7 +204,7 @@ export default function PracticeLibrary() {
               New to wellness practices? We recommend starting with simple breathing exercises 
               or grounding techniques. There's no right or wrong way—just begin where you are.
             </p>
-            <Link href="/tools/breathing">
+            <Link href="/breathing">
               <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-start-breathing">
                 Try Breathwork First
               </Button>

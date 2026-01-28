@@ -135,7 +135,7 @@ export default function PublicRoadmap() {
             We'd love to hear what features would help you on your wellness journey. 
             Your feedback shapes our roadmap.
           </p>
-          <Link href="/feedback">
+          <Link href="/support/feedback">
             <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-share-feedback">
               Share Feedback
               <ArrowRight className="w-5 h-5 ml-2" />
