@@ -1269,6 +1269,89 @@ const rawRoutes = [
     ]
   },
   {
+    route: '/features',
+    category: 'landing',
+    pageLabel: 'Platform Features',
+    title: 'Features — The Genuine Love Project',
+    description: 'Discover the full suite of wellness tools, AI-powered therapy, journaling, mood tracking, and healing resources available on The Genuine Love Project platform.',
+    contentLevels: {
+      beginner: {
+        title: 'What You Can Do Here',
+        subtitle: 'Simple tools designed for your wellness journey.',
+        bulletPoints: [
+          'Journal your thoughts in a safe, private space',
+          'Track your mood to understand patterns',
+          'Access guided breathing and grounding exercises',
+          'Your one next step: Try one tool that feels right'
+        ]
+      },
+      intermediate: {
+        title: 'Your Wellness Toolkit',
+        subtitle: 'Evidence-based tools for deeper exploration.',
+        bulletPoints: [
+          'AI-powered chat for emotional support',
+          'Personalized healing recommendations',
+          'Progress tracking and streak rewards',
+          'Your one next step: Explore the dashboard'
+        ]
+      },
+      advanced: {
+        title: 'Premium Features',
+        subtitle: 'Advanced tools for your transformation.',
+        bulletPoints: [
+          'Access to 500+ specialized wellness modules',
+          'Deep-dive healing protocols and frameworks',
+          'Priority AI support with enhanced context',
+          'Your one next step: Upgrade your experience'
+        ]
+      }
+    },
+    hero: {
+      eyebrow: 'Platform Features',
+      title: 'Everything you need',
+      titleHighlight: 'to heal and grow.',
+      subtitle: 'From simple breathing exercises to AI-powered therapy, our platform offers a comprehensive toolkit designed to support your unique journey toward genuine self-love.',
+      primaryCta: { label: 'Get Started Free', href: '/register' },
+      secondaryCta: { label: 'View Pricing', href: '/pricing' }
+    },
+    modules: [
+      { icon: 'MessageCircle', title: 'AI Therapy Chat', description: 'Compassionate, trauma-informed AI support available 24/7.' },
+      { icon: 'BookOpen', title: 'Journaling', description: 'Private space to process thoughts and emotions.' },
+      { icon: 'Activity', title: 'Mood Tracking', description: 'Understand your emotional patterns over time.' },
+      { icon: 'Brain', title: 'Wellness Tools', description: 'Breathing, grounding, and somatic exercises.' },
+      { icon: 'Award', title: 'Progress Tracking', description: 'Celebrate your growth with streaks and achievements.' },
+      { icon: 'Shield', title: 'Crisis Support', description: 'Immediate access to crisis resources when needed.' }
+    ],
+    sections: [
+      {
+        id: 'core-tools',
+        eyebrow: 'Core Tools',
+        title: 'Free tools to start your journey',
+        subtitle: 'These foundational tools are available to everyone, no subscription required.',
+        variant: 'glow',
+        cards: [
+          { icon: 'BookOpen', title: 'Daily Journal', text: 'Write freely in your private digital journal.' },
+          { icon: 'Activity', title: 'Mood Check-In', text: 'Quick emotional check-ins to track your state.' },
+          { icon: 'Wind', title: 'Breathing Exercises', text: 'Guided breathing for calm and regulation.' },
+          { icon: 'Heart', title: 'Affirmations', text: 'Daily words of encouragement and self-love.' }
+        ]
+      },
+      {
+        id: 'premium-tools',
+        eyebrow: 'Premium Features',
+        title: 'Advanced tools for deeper healing',
+        subtitle: 'Unlock the full power of the platform with a subscription.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'MessageCircle', title: 'Unlimited AI Chat', text: 'No limits on your therapeutic conversations.' },
+          { icon: 'Target', title: 'Personalized Paths', text: 'Custom healing journeys based on your needs.' },
+          { icon: 'Zap', title: 'Elite Tools', text: 'Advanced cognitive and emotional exercises.' },
+          { icon: 'Star', title: 'Priority Support', text: 'Enhanced AI responses and faster processing.' }
+        ]
+      }
+    ]
+  },
+  {
     route: '/healing',
     category: 'landing',
     pageLabel: 'Healing Landing',
@@ -7131,6 +7214,73 @@ const rawRoutes = [
       primaryCta: { label: 'Ask a Question', href: '#ask' },
       secondaryCta: { label: 'Browse Questions', href: '#browse' }
     }
+  },
+  {
+    route: '/contact',
+    category: 'support',
+    pageLabel: 'Contact Us',
+    title: 'Contact Us — The Genuine Love Project',
+    description: 'Get in touch with The Genuine Love Project team for support, questions, or feedback.',
+    contentLevels: {
+      beginner: {
+        title: 'Reach Out',
+        subtitle: 'We are here to help.',
+        bulletPoints: [
+          'Send us a message anytime',
+          'We respond within 24-48 hours',
+          'Your privacy is protected',
+          'Your one next step: Share what is on your mind'
+        ]
+      },
+      intermediate: {
+        title: 'Get in Touch',
+        subtitle: 'Multiple ways to connect with us.',
+        bulletPoints: [
+          'Email support for general questions',
+          'Technical support for platform issues',
+          'Partnership inquiries welcome',
+          'Your one next step: Choose the best contact method'
+        ]
+      },
+      advanced: {
+        title: 'Contact Options',
+        subtitle: 'Direct channels for your needs.',
+        bulletPoints: [
+          'Support tickets for tracked issues',
+          'Business inquiries and partnerships',
+          'Media and press requests',
+          'Your one next step: Submit your inquiry'
+        ]
+      }
+    },
+    hero: {
+      eyebrow: 'Contact Us',
+      title: 'We would love to',
+      titleHighlight: 'hear from you.',
+      subtitle: 'Whether you have a question, feedback, or just want to say hello—we are here and listening.',
+      primaryCta: { label: 'Send a Message', href: '/support/feedback' },
+      secondaryCta: { label: 'Browse FAQ', href: '/faq' }
+    },
+    modules: [
+      { icon: 'Mail', title: 'Email Support', description: 'Send us an email and we will respond within 24-48 hours.' },
+      { icon: 'MessageCircle', title: 'Community', description: 'Connect with others on the same journey.' },
+      { icon: 'HelpCircle', title: 'Help Center', description: 'Browse our FAQ for quick answers.' }
+    ],
+    sections: [
+      {
+        id: 'contact-options',
+        eyebrow: 'Ways to Connect',
+        title: 'Choose how you would like to reach us',
+        subtitle: 'We are here to support your journey in whatever way works best for you.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Mail', title: 'General Support', text: 'Questions about your account or the platform.' },
+          { icon: 'Heart', title: 'Wellness Feedback', text: 'Share how the tools are working for you.' },
+          { icon: 'Shield', title: 'Privacy Concerns', text: 'Questions about your data and privacy.' },
+          { icon: 'Sparkles', title: 'Feature Requests', text: 'Ideas for new tools or improvements.' }
+        ]
+      }
+    ]
   },
   
   // =========================================================================
