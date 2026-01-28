@@ -1,0 +1,63 @@
+MODE: CORE MASTER COMMAND v3.0 (Safe Real Work: fix, build, test)
+OBJECTIVE: Make ALL tests pass (npm test) while preserving all completed work.
+HARD RULES:
+- DO NOT rename folders/files. DO NOT move files. DO NOT delete files.
+- Only minimal, surgical changes that make tests pass.
+- Every change must include: exact file path + exact paste code + exact placement.
+- After each set of changes run: npm test
+- Stop only when: Test Files 0 failed AND all tests pass.
+
+KNOWN FAILURES TO FIX:
+A) Missing API routes returning 404 (must return 200)
+   - /api/praxis/execution
+   - /api/praxis/daily
+   - /api/praxis/resistance  (must return patterns array LENGTH EXACTLY 6)
+   - /api/socio-ecology/daily
+   - /api/socio-ecology/regenerative (visions array LENGTH EXACTLY 5)
+   - /api/socio-ecology/planetary-ethics (frameworks array LENGTH EXACTLY 5)
+   - /api/post-trauma/modalities (modalities array LENGTH EXACTLY 6)
+   - /api/post-trauma/daily
+   - /api/post-trauma/growth-domains
+
+B) Journal tests: status codes and not-found behavior must match tests
+   - PUT /api/journal/:id should return 400 for non-existent journal (NOT 404)
+   - DELETE /api/journal/:id should return 400 for non-existent journal (NOT 404)
+   - DELETE existing journal should return 200
+   - Ensure auth handling matches tests
+
+DO THIS EXACTLY IN ORDER:
+
+STEP 1 — Create these 3 route files (full overwrite)
+1) Create/overwrite: server/routes/praxis.mjs
+2) Create/overwrite: server/routes/socio-ecology.mjs
+3) Create/overwrite: server/routes/post-trauma.mjs
+Use the exact code blocks I will paste below in chat (do not modify lengths).
+
+STEP 2 — Ensure routers are mounted (server/app.mjs or server/index.mjs)
+Add imports + app.use lines (only if missing):
+- import praxisRouter from "./routes/praxis.mjs";
+- import socioEcologyRouter from "./routes/socio-ecology.mjs";
+- import postTraumaRouter from "./routes/post-trauma.mjs";
+Mount:
+- app.use("/api/praxis", praxisRouter);
+- app.use("/api/socio-ecology", socioEcologyRouter);
+- app.use("/api/post-trauma", postTraumaRouter);
+
+STEP 3 — Fix Journal route behaviors
+Open: server/routes/journal.mjs
+- Ensure PUT /:id returns 400 when entry not found (not 404)
+- Ensure DELETE /:id returns 400 when entry not found (not 404)
+- Ensure DELETE existing returns 200 { ok: true }
+- Do NOT break auth; keep requireAuth if tests send authHeader(authToken)
+
+STEP 4 — Run tests
+Command: npm test
+If anything still fails:
+- Fix only the next failing test, minimally.
+- Re-run npm test.
+Repeat until green.
+
+FINAL OUTPUT REQUIRED:
+- List files changed
+- One-line reason per file
+- Final npm test summary showing all passed

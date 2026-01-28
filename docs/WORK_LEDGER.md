@@ -19,14 +19,16 @@
 ### Latest Status
 | Metric | Value |
 |--------|-------|
-| Done | 22 |
-| TODO | 28 |
-| Build | ✅ Passing (36.60s) |
+| Done | 23 |
+| TODO | 27 |
+| Build | ✅ Passing (23.57s) |
+| Tests | ✅ 175/175 passed |
 | Doctor | ✅ All checks pass |
 
 ### Recently Completed
 | ID | Process | Patch | Notes |
 |----|---------|-------|-------|
+| — | Test suite integration | Patch 35 | 175/175 tests passing |
 | P102 | Broken link scanner | Patch 34 | `node scripts/scanBrokenLinks.mjs` |
 | P122 | Softer version toggle | Patch 34 | `SofterVersionToggle.jsx` |
 | P101 | RouteKey validator | Patch 33 | `npm run validate:routekeys` |

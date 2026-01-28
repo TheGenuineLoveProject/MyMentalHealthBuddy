@@ -19,6 +19,25 @@
 
 ---
 
+## Patch 35 — Test Suite Integration Fix
+- Date: 2026-01-28
+- Focus: Full test suite integration
+- Files Changed:
+  - `server/app.mjs` — Restored all 70+ API route mounts for test parity
+  - `server/routes/journal.mjs` — Added GET /:id route + content validation
+  - `server/routes/auth.mjs` — Fixed duplicate login route syntax error
+- Summary:
+  - Fixed root cause of 13 failing test suites (syntax error in auth.mjs)
+  - Restored test app route parity with production server
+  - Added missing journal GET /:id endpoint
+  - Added content field validation for journal POST
+- Validation results:
+  - Build: ✅ Passed (23.57s)
+  - Tests: ✅ 175/175 passed (13 suites)
+  - Health: ✅ Server responding
+
+---
+
 ## Patch 34 — P102 + P122 Broken Links + Softer Toggle (Batch 3)
 - Date: 2026-01-27
 - Processes: P102, P122
