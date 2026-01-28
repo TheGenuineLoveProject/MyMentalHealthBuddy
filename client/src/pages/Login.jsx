@@ -1,52 +1,14 @@
-import { useState } from "react";
-import { Link, useLocation } from "wouter";
-import { useAuth } from "../context/AuthContext.jsx";
-import { Heart, Mail, Lock, ArrowRight } from "lucide-react";
-import { SiGithub } from "react-icons/si";
+import { Link } from "wouter";
+import { ArrowRight, Shield, Heart, Sparkles } from "lucide-react";
 import SEO from "../components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
-  const [, setLocation] = useLocation();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || "Login failed");
-      }
-
-      login(data.token, data.user);
-      setLocation("/dashboard");
-    } catch (err) {
-      setError(err.message || "Login failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
   <WellnessPageShell
-    title="Login"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    title="Sign In"
+    subtitle="Continue your healing journey with a secure, simple sign-in."
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
@@ -94,119 +56,45 @@ export default function Login() {
               <p className="mt-3" style={{ color: 'var(--glp-sage)' }}>Sign in to continue your healing journey</p>
             </div>
 
-            {error && (
-              <div className="p-4 rounded-xl mb-6 text-sm" style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-blush)', color: 'var(--glp-rose-dark)' }} role="alert" data-testid="text-error">
-                {error}
+            <a
+              href="/api/login"
+              className="w-full btn-premium py-4 hover-glow-gold flex items-center justify-center gap-3 min-h-[56px] text-lg font-semibold rounded-xl"
+              data-testid="button-login"
+            >
+              <span>Sign In Securely</span>
+              <ArrowRight className="w-5 h-5" />
+            </a>
+
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                <Shield className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
+                <span>Sign in with Google, GitHub, or email</span>
               </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
-                  Email
-                </label>
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="input pl-12"
-                    placeholder="you@example.com"
-                    autoComplete="email"
-                    required
-                    data-testid="input-email"
-                  />
-                </div>
+              <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                <Heart className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
+                <span>Your data stays private and secure</span>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-[var(--text-secondary)] mb-2">
-                  Password
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--text-muted)]" />
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="input pl-12"
-                    placeholder="••••••••"
-                    autoComplete="current-password"
-                    required
-                    data-testid="input-password"
-                  />
-                </div>
+              <div className="flex items-center gap-3 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                <Sparkles className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
+                <span>No passwords to remember</span>
               </div>
-
-              <div className="flex items-center justify-end">
-                <Link href="/forgot-password" className="text-sm font-medium transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
-                  Forgot password?
-                </Link>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full btn-premium py-3.5 hover-glow-gold disabled:opacity-50 disabled:cursor-not-allowed"
-                data-testid="button-login"
-              >
-                {loading ? (
-                  <span className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                    Signing in...
-                  </span>
-                ) : (
-                  <span className="flex items-center justify-center gap-2">
-                    Sign In
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                )}
-              </button>
-            </form>
-
-            <div className="mt-6 pt-6" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
-              <p className="text-center text-sm mb-4" style={{ color: 'var(--glp-sage)' }}>Or continue with</p>
-              <a
-                href="/api/auth/github"
-                className="w-full flex items-center justify-center gap-3 py-3 px-4 rounded-xl font-medium transition-all"
-                style={{ border: '1px solid var(--glp-sage-20)', background: 'var(--glp-paper)', color: 'var(--glp-sage-deep)' }}
-                data-testid="button-github-login"
-              >
-                <SiGithub className="w-5 h-5" />
-                Continue with GitHub
-              </a>
             </div>
 
-            <div className="mt-6 pt-6 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
+            <div className="mt-8 pt-6 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
               <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-                Don't have an account?{" "}
-                <Link href="/register" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
-                  Create one
-                </Link>
+                New here?{" "}
+                <a href="/api/login" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
+                  Create an account
+                </a>
               </p>
             </div>
-            
-            {import.meta.env.DEV && (
-              <div className="mt-4 pt-4 text-center" style={{ borderTop: '1px dashed var(--glp-sage-20)' }}>
-                <button
-                  type="button"
-                  onClick={() => {
-                    localStorage.setItem("glp-qa", "1");
-                    setLocation("/dashboard");
-                  }}
-                  className="text-xs underline transition-colors"
-                  style={{ color: 'var(--glp-sage)' }}
-                  data-testid="button-qa-mode"
-                >
-                  Enable QA Mode (DEV)
-                </button>
-              </div>
-            )}
           </div>
 
           <p className="text-center text-xs mt-6" style={{ color: 'var(--glp-sage)' }}>
-            By signing in, you agree to our Terms of Service and Privacy Policy
+            By signing in, you agree to our{" "}
+            <Link href="/terms" className="underline">Terms of Service</Link>{" "}
+            and{" "}
+            <Link href="/privacy" className="underline">Privacy Policy</Link>
           </p>
         </div>
       </div>
