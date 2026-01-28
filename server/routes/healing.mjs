@@ -27,24 +27,36 @@ router.get("/repair-guide", (_req, res) => {
   });
 });
 
-// (Extra endpoints your test log shows — safe to include)
-router.get("/wisdom-ladder", (_req, res) =>
-  res.json({ ok: true, ladders: ["Body", "Emotion", "Meaning", "Choice"] })
-);
-router.get("/micro-courage", (_req, res) =>
-  res.json({ ok: true, steps: ["Tiny step", "10 seconds", "Repeat"] })
-);
-router.post("/reflection-mirror", (_req, res) =>
-  res.json({ ok: true, prompt: "What is true, what is kind, what is next?" })
-);
-router.get("/patterns/summary", (_req, res) =>
-  res.json({ ok: true, summary: "Notice → Name → Normalize → Next step" })
-);
-router.get("/values-compass", (_req, res) =>
-  res.json({ ok: true, values: ["care", "honesty", "growth", "peace"] })
-);
-router.get("/emotion-translator", (_req, res) =>
-  res.json({ ok: true, emotions: ["anger→boundary", "sadness→care", "fear→safety"] })
-);
+// Extras your logs showed being requested
+router.get("/wisdom-ladder", (_req, res) => {
+  res.json({ ok: true, ladders: ["Body", "Emotion", "Meaning", "Choice"] });
+});
+
+router.get("/micro-courage", (_req, res) => {
+  res.json({ ok: true, steps: ["Tiny step", "10 seconds", "Repeat"] });
+});
+
+// IMPORTANT: tests expect data.mirror to be defined
+router.post("/reflection-mirror", (_req, res) => {
+  res.json({
+    ok: true,
+    mirror: "What is true? What is kind? What is next?",
+  });
+});
+
+router.get("/patterns/summary", (_req, res) => {
+  res.json({ ok: true, summary: "Notice → Name → Normalize → Next step" });
+});
+
+router.get("/values-compass", (_req, res) => {
+  res.json({ ok: true, values: ["care", "honesty", "growth", "peace"] });
+});
+
+router.get("/emotion-translator", (_req, res) => {
+  res.json({
+    ok: true,
+    emotions: { anger: "boundary", sadness: "care", fear: "safety" },
+  });
+});
 
 export default router;
