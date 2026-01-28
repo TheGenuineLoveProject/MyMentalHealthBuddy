@@ -24,6 +24,7 @@ export default function Admin() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeView, setActiveView] = useState("overview");
+  const [adminSessionValid, setAdminSessionValid] = useState(null); // null = checking, true = valid, false = invalid
   const [realtimeData, setRealtimeData] = useState({
     activeUsers: 0,
     requestsPerMin: 0,
@@ -31,12 +32,69 @@ export default function Admin() {
     errorRate: 0.02,
   });
 
+  // Verify admin session token on mount
+  useEffect(() => {
+    const verifyAdminSession = async () => {
+      // If user has admin role, no need to verify token
+      if (user?.role === "admin") {
+        setAdminSessionValid(true);
+        return;
+      }
+      
+      const sessionToken = typeof sessionStorage !== 'undefined' 
+        ? sessionStorage.getItem("adminSessionToken") 
+        : null;
+      
+      if (!sessionToken) {
+        setAdminSessionValid(false);
+        return;
+      }
+      
+      try {
+        const response = await fetch("/api/admin/verify-session", {
+          headers: { 
+            "Authorization": `Bearer ${sessionToken}`,
+            "Content-Type": "application/json"
+          }
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          setAdminSessionValid(data.valid === true);
+        } else {
+          // Invalid token - clear session storage
+          sessionStorage.removeItem("adminVerified");
+          sessionStorage.removeItem("adminSessionToken");
+          setAdminSessionValid(false);
+        }
+      } catch (err) {
+        console.error("[Admin] Session verification failed:", err);
+        setAdminSessionValid(false);
+      }
+    };
+    
+    verifyAdminSession();
+  }, [user]);
+
   const fetchStats = async () => {
     setLoading(true);
     setError(null);
     try {
-      const data = await apiRequest("GET", "/api/admin/stats");
-      setStats(data);
+      const sessionToken = typeof sessionStorage !== 'undefined' 
+        ? sessionStorage.getItem("adminSessionToken") 
+        : null;
+      
+      const headers = sessionToken 
+        ? { "Authorization": `Bearer ${sessionToken}` }
+        : {};
+      
+      const response = await fetch("/api/admin/stats", { headers });
+      if (response.ok) {
+        const data = await response.json();
+        setStats(data);
+      } else {
+        setError("Failed to fetch stats");
+      }
     } catch (err) {
       setError(err.message || "Failed to fetch stats");
     } finally {
@@ -45,7 +103,9 @@ export default function Admin() {
   };
 
   useEffect(() => {
-    fetchStats();
+    if (adminSessionValid === true || user?.role === "admin") {
+      fetchStats();
+    }
     const interval = setInterval(() => {
       setRealtimeData(prev => ({
         activeUsers: Math.max(1, prev.activeUsers + Math.floor(Math.random() * 3) - 1),
@@ -55,9 +115,28 @@ export default function Admin() {
       }));
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [adminSessionValid, user]);
 
-  if (user?.role !== "admin") {
+  // Show loading state while verifying session
+  if (adminSessionValid === null && user?.role !== "admin") {
+    return (
+      <div className="min-h-screen hero-gradient flex items-center justify-center p-6">
+        <SEO title="Verifying Access" description="Checking admin credentials" />
+        <div className="glass-premium max-w-md text-center p-10 rounded-3xl animate-fade-in-up">
+          <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
+            <div className="w-8 h-8 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+          </div>
+          <h2 className="text-heading-lg text-teal mb-3">Verifying Access</h2>
+          <p className="text-body-base text-sage-500">Checking your admin credentials...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Check for admin access via user role OR verified session token
+  const hasAdminAccess = user?.role === "admin" || adminSessionValid === true;
+
+  if (!hasAdminAccess) {
     return (
       <div className="min-h-screen hero-gradient flex items-center justify-center p-6">
         <SEO title="Access Denied" description="Admin access required" />
@@ -67,9 +146,14 @@ export default function Admin() {
           </div>
           <h2 className="text-heading-lg text-teal mb-3">Access Denied</h2>
           <p className="text-body-base text-sage-500 mb-6">You must be an administrator to view this page.</p>
-          <Link href="/dashboard" className="btn-premium inline-flex items-center gap-2">
-            Return to Dashboard
-          </Link>
+          <div className="flex flex-col gap-3">
+            <Link href="/dashboard" className="btn-premium inline-flex items-center justify-center gap-2">
+              Return to Dashboard
+            </Link>
+            <Link href="/" className="text-sm font-medium" style={{ color: 'var(--glp-sage)' }}>
+              Or use Admin Access from homepage
+            </Link>
+          </div>
         </div>
       </div>
     );

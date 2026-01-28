@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
-import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp } from "lucide-react";
+import { Link, useLocation } from "wouter";
+import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Sun, Moon, Flower2, Brain, Eye, KeyRound, Settings } from "lucide-react";
 import "../styles/canva-landing.css";
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -11,6 +11,46 @@ export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [, setLocation] = useLocation();
+  
+  // Admin login state
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [adminToken, setAdminToken] = useState("");
+  const [adminError, setAdminError] = useState("");
+  const [adminLoading, setAdminLoading] = useState(false);
+  
+  const handleAdminLogin = async (e) => {
+    e.preventDefault();
+    setAdminError("");
+    setAdminLoading(true);
+    
+    try {
+      const response = await fetch("/api/admin/verify-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token: adminToken })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          sessionStorage.setItem("adminVerified", "true");
+          if (data.sessionToken) {
+            sessionStorage.setItem("adminSessionToken", data.sessionToken);
+          }
+          setLocation("/admin");
+        } else {
+          setAdminError("Invalid admin token");
+        }
+      } else {
+        setAdminError("Authentication failed");
+      }
+    } catch (err) {
+      setAdminError("Connection error. Please try again.");
+    } finally {
+      setAdminLoading(false);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -234,8 +274,28 @@ export default function CanvaLanding() {
           />
           <div 
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full"
-            style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 60%)' }}
+            style={{ background: 'radial-gradient(circle, var(--glp-sage-20), transparent 60%)' }}
           />
+          
+          {/* Floating Decorative Icons */}
+          <div className="absolute top-20 left-[10%] w-12 h-12 rounded-2xl flex items-center justify-center animate-float opacity-60" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-300))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '0s' }}>
+            <Leaf className="w-6 h-6 text-white" />
+          </div>
+          <div className="absolute top-32 right-[15%] w-10 h-10 rounded-xl flex items-center justify-center animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 6px 20px var(--glp-rose-20)', animationDelay: '0.5s' }}>
+            <Heart className="w-5 h-5 text-white" />
+          </div>
+          <div className="absolute bottom-40 left-[8%] w-14 h-14 rounded-2xl flex items-center justify-center animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', boxShadow: '0 8px 24px var(--glp-sage-deep-30)', animationDelay: '1s' }}>
+            <Brain className="w-7 h-7 text-white" />
+          </div>
+          <div className="absolute bottom-28 right-[12%] w-11 h-11 rounded-xl flex items-center justify-center animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '1.5s' }}>
+            <Flower2 className="w-5 h-5 text-white" />
+          </div>
+          <div className="absolute top-1/2 left-[5%] w-9 h-9 rounded-lg flex items-center justify-center animate-float opacity-30" style={{ background: 'linear-gradient(135deg, var(--glp-teal-300), var(--glp-teal-500))', boxShadow: '0 4px 16px var(--glp-sage-20)', animationDelay: '2s' }}>
+            <Sun className="w-4 h-4 text-white" />
+          </div>
+          <div className="absolute top-1/3 right-[5%] w-10 h-10 rounded-xl flex items-center justify-center animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-sage-400), var(--glp-sage-600))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '2.5s' }}>
+            <Eye className="w-5 h-5 text-white" />
+          </div>
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
@@ -867,6 +927,115 @@ export default function CanvaLanding() {
           <SafetyFooter variant="compact" className="mt-8" />
         </div>
       </footer>
+
+      {/* Admin Access Section - Discrete at bottom */}
+      <section className="py-8 px-6" style={{ background: 'var(--glp-teal-800)' }}>
+        <div className="max-w-md mx-auto text-center">
+          {!showAdminLogin ? (
+            <button
+              onClick={() => setShowAdminLogin(true)}
+              className="inline-flex items-center gap-2 text-xs font-medium px-4 py-2 rounded-lg transition-all opacity-40 hover:opacity-100"
+              style={{ color: 'var(--glp-teal-200)', background: 'var(--glp-teal-700)' }}
+              data-testid="button-admin-toggle"
+            >
+              <Settings className="w-3 h-3" />
+              Admin Access
+            </button>
+          ) : (
+            <div 
+              className="p-6 rounded-2xl animate-fade-in-up"
+              style={{ 
+                background: 'linear-gradient(135deg, var(--glp-teal-700), var(--glp-sage-deep))',
+                border: '1px solid var(--glp-teal-500)',
+                boxShadow: '0 12px 40px rgba(0,0,0,0.3)'
+              }}
+            >
+              <div className="flex items-center justify-center gap-3 mb-5">
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center"
+                  style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', boxShadow: '0 4px 16px var(--glp-sage-30)' }}
+                >
+                  <KeyRound className="w-6 h-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <h4 className="font-bold text-lg text-white">Admin Portal</h4>
+                  <p className="text-xs" style={{ color: 'var(--glp-teal-200)' }}>Platform management access</p>
+                </div>
+              </div>
+              
+              <form onSubmit={handleAdminLogin} className="space-y-4">
+                <div className="relative">
+                  <input
+                    type="password"
+                    value={adminToken}
+                    onChange={(e) => setAdminToken(e.target.value)}
+                    placeholder="Enter admin token"
+                    className="w-full px-4 py-3 rounded-xl text-sm focus:outline-none focus:ring-2"
+                    style={{ 
+                      background: 'var(--glp-teal-600)',
+                      color: 'white',
+                      border: '1px solid var(--glp-teal-500)',
+                      boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.2)'
+                    }}
+                    data-testid="input-admin-token"
+                    autoComplete="off"
+                  />
+                  <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: 'var(--glp-teal-300)' }} />
+                </div>
+                
+                {adminError && (
+                  <p className="text-sm font-medium px-3 py-2 rounded-lg" style={{ background: 'rgba(244,199,195,0.2)', color: 'var(--glp-blush)' }}>
+                    {adminError}
+                  </p>
+                )}
+                
+                <div className="flex items-center gap-3">
+                  <button
+                    type="submit"
+                    disabled={adminLoading || !adminToken}
+                    className="flex-1 inline-flex items-center justify-center gap-2 font-semibold py-3 rounded-xl transition-all disabled:opacity-50"
+                    style={{ 
+                      background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))',
+                      color: 'white',
+                      boxShadow: '0 4px 16px var(--glp-sage-30)'
+                    }}
+                    data-testid="button-admin-submit"
+                  >
+                    {adminLoading ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Verifying...
+                      </>
+                    ) : (
+                      <>
+                        <Shield className="w-4 h-4" />
+                        Access Dashboard
+                      </>
+                    )}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowAdminLogin(false);
+                      setAdminToken("");
+                      setAdminError("");
+                    }}
+                    className="px-4 py-3 rounded-xl transition-all hover:bg-[var(--glp-teal-600)]"
+                    style={{ color: 'var(--glp-teal-200)' }}
+                    data-testid="button-admin-cancel"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </form>
+              
+              <p className="text-xs mt-4" style={{ color: 'var(--glp-teal-300)' }}>
+                For authorized personnel only. All access attempts are logged.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
 
       {/* Scroll to Top Button */}
       <button

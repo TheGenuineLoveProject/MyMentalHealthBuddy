@@ -75,6 +75,23 @@
     inset 0 1px 0 var(--glp-white-80);
 }
 
+/* Floating animation for decorative icons */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+  66% {
+    transform: translateY(-6px) rotate(-2deg);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
 /* Floating animation */
 @keyframes canva-float-gentle {
   0%, 100% {
