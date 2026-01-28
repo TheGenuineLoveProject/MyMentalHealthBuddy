@@ -88,8 +88,8 @@ const SELF_CARE_TIPS = [
 export default function CrisisResources() {
   return (
   <WellnessPageShell
-    title="CrisisResources"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    title="Crisis Resources"
+    subtitle="You are not alone. Help is available."
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
