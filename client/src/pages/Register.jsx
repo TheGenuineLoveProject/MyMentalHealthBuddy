@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Heart, Mail, Lock, User, Sparkles, Check } from "lucide-react";
+import { Heart, Mail, Lock, User, Sparkles, Check, Leaf, Brain, Sun, Star, Shield } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
@@ -98,10 +98,34 @@ export default function Register() {
         title="Create Account"
         description="Create your free Genuine Love Project account. Start your mental wellness journey with AI-powered support, mood tracking, and journaling."
       />
-      <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
-        <div className="absolute -top-24 -right-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
-        <div className="absolute bottom-0 -left-24 w-[450px] h-[450px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }} aria-hidden="true" />
-        <div className="absolute top-1/3 left-10 w-[250px] h-[250px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-gold-30), transparent 70%)' }} aria-hidden="true" />
+      <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
+        {/* Ambient Decorative Orbs */}
+        <div className="decorative-orb sage animate-drift w-[500px] h-[500px] -top-24 -right-24" style={{ animationDelay: '0s' }} aria-hidden="true" />
+        <div className="decorative-orb rose animate-drift w-[400px] h-[400px] -bottom-32 -left-32" style={{ animationDelay: '5s' }} aria-hidden="true" />
+        <div className="decorative-orb teal animate-drift w-[300px] h-[300px] top-1/3 left-10" style={{ animationDelay: '10s' }} aria-hidden="true" />
+        
+        {/* Floating Decorative Icons */}
+        <div className="floating-icon-container top-16 left-[8%] w-12 h-12 rounded-xl animate-float opacity-60" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '0s' }} aria-hidden="true">
+          <Leaf className="w-6 h-6 text-white" />
+        </div>
+        <div className="floating-icon-container top-24 right-[10%] w-10 h-10 rounded-lg animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 6px 20px var(--glp-rose-20)', animationDelay: '1.2s' }} aria-hidden="true">
+          <Heart className="w-5 h-5 text-white" />
+        </div>
+        <div className="floating-icon-container bottom-32 left-[6%] w-11 h-11 rounded-xl animate-float opacity-45" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '2.4s' }} aria-hidden="true">
+          <Brain className="w-5 h-5 text-white" />
+        </div>
+        <div className="floating-icon-container top-1/3 right-[6%] w-9 h-9 rounded-lg animate-float opacity-55" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dim))', boxShadow: '0 6px 20px var(--glp-gold-30)', animationDelay: '3.6s' }} aria-hidden="true">
+          <Sun className="w-4 h-4 text-white" />
+        </div>
+        <div className="floating-icon-container bottom-40 right-[12%] w-10 h-10 rounded-xl animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '0.8s' }} aria-hidden="true">
+          <Star className="w-5 h-5 text-white" />
+        </div>
+        <div className="floating-icon-container top-2/3 left-[12%] w-9 h-9 rounded-lg animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage))', boxShadow: '0 6px 20px var(--glp-teal-30)', animationDelay: '2s' }} aria-hidden="true">
+          <Shield className="w-4 h-4 text-white" />
+        </div>
+        <div className="floating-icon-container top-12 left-1/4 w-8 h-8 rounded-lg animate-float opacity-35" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-rose))', boxShadow: '0 6px 20px var(--glp-rose-20)', animationDelay: '4s' }} aria-hidden="true">
+          <Sparkles className="w-4 h-4 text-white" />
+        </div>
         
         <div className="relative z-10 w-full max-w-md animate-fade-in-up">
           <div className="text-center mb-10">
