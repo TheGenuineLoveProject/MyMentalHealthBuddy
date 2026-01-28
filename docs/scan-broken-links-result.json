@@ -1,6 +1,6 @@
 {
-  "totalLinks": 491,
-  "validLinks": 224,
+  "totalLinks": 498,
+  "validLinks": 228,
   "brokenLinks": [
     {
       "file": "client/src/components/ui/Footer.jsx",
@@ -877,6 +877,18 @@
     {
       "file": "client/src/pages/PracticeLibrary.jsx",
       "link": "/tools/breathing"
+    },
+    {
+      "file": "client/src/pages/AboutApproachPage.jsx",
+      "link": "/about"
+    },
+    {
+      "file": "client/src/pages/ValuesPage.jsx",
+      "link": "/about/approach"
+    },
+    {
+      "file": "client/src/pages/ValuesPage.jsx",
+      "link": "/features"
     },
     {
       "file": "client/src/features/community/DiscussionPage.jsx",

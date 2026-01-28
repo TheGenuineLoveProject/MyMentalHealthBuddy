@@ -123,6 +123,8 @@ const BillingViewer = lazy(() => import("./pages/admin/BillingViewer.jsx"));
 const Sessions = lazy(() => import("./pages/account/Sessions.jsx"));
 const DeleteAccount = lazy(() => import("./pages/account/DeleteAccount.jsx"));
 const ValuesFinderPage = lazy(() => import("./pages/ValuesFinderPage.jsx"));
+const ValuesPage = lazy(() => import("./pages/ValuesPage.jsx"));
+const AboutApproachPage = lazy(() => import("./pages/AboutApproachPage.jsx"));
 const BoundariesPage = lazy(() => import("./pages/BoundariesPage.jsx"));
 const MovementSnacksPage = lazy(() => import("./pages/MovementSnacksPage.jsx"));
 const CoherenceLadderPage = lazy(() => import("./pages/CoherenceLadderPage.jsx"));
@@ -251,6 +253,8 @@ export default function App() {
               <Route path="/original-home">{() => <ConfigRoute route="/original-home" />}</Route>
               <Route path="/healing">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/about">{() => <ConfigRoute route="/about" />}</Route>
+              <Route path="/about/approach" component={AboutApproachPage} />
+              <Route path="/values" component={ValuesPage} />
               <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />

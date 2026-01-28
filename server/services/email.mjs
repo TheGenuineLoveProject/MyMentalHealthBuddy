@@ -232,6 +232,84 @@ export async function sendMilestoneEmail(toEmail, userName, milestone) {
   }
 }
 
+export async function sendAccountDeletionEmail(toEmail, userName, scheduledDate) {
+  try {
+    const { client, fromEmail } = await getResendClient();
+    
+    const formattedDate = new Date(scheduledDate).toLocaleDateString('en-US', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    const result = await client.emails.send({
+      from: fromEmail || 'The Genuine Love Project <hello@genuineloveproject.com>',
+      to: toEmail,
+      subject: 'Account Deletion Request Received',
+      html: `
+        <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <h1 style="color: #2d5a4a; font-size: 28px; margin-bottom: 20px;">Account Deletion Request</h1>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            Dear ${userName || 'friend'},
+          </p>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            We've received your request to delete your account. We respect your decision and want to make sure you're aware of what happens next.
+          </p>
+          
+          <div style="background: #fff5f5; padding: 20px; border-radius: 8px; margin: 30px 0; border-left: 4px solid #e53e3e;">
+            <p style="color: #c53030; font-size: 16px; margin: 0;">
+              <strong>Scheduled Deletion Date:</strong><br>
+              ${formattedDate}
+            </p>
+          </div>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            <strong>What happens during the 7-day waiting period:</strong>
+          </p>
+          
+          <ul style="color: #555; font-size: 16px; line-height: 1.7;">
+            <li>Your account remains active</li>
+            <li>You can cancel the deletion request at any time</li>
+            <li>After 7 days, your data will be permanently removed</li>
+          </ul>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            If you change your mind, you can cancel this request by logging into your account and visiting the Account Settings page.
+          </p>
+          
+          <div style="background: #f8f5f0; padding: 20px; border-radius: 8px; margin: 30px 0;">
+            <p style="color: #2d5a4a; font-size: 16px; margin: 0;">
+              <strong>Didn't request this?</strong><br>
+              If you didn't make this request, please log in immediately and change your password, then contact our support team.
+            </p>
+          </div>
+          
+          <p style="color: #888; font-size: 14px; margin-top: 40px;">
+            Take care of yourself,<br>
+            The Genuine Love Project
+          </p>
+          
+          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+          
+          <p style="color: #999; font-size: 12px;">
+            This is an automated email regarding your account.<br>
+            Crisis support: 988 | Text HOME to 741741
+          </p>
+        </div>
+      `
+    });
+    
+    console.log('[Email] Account deletion email sent to:', toEmail);
+    return { success: true, id: result.id };
+  } catch (error) {
+    console.error('[Email] Failed to send account deletion email:', error);
+    return { success: false, error: error.message };
+  }
+}
+
 export async function testEmailConnection() {
   try {
     await getCredentials();

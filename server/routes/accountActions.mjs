@@ -8,6 +8,7 @@ import { sql } from 'drizzle-orm';
 import db from '../db/client.mjs';
 import { logger } from '../utils/logger.mjs';
 import { success, unauthorized, badRequest, serverError } from '../utils/responses.mjs';
+import { sendAccountDeletionEmail } from '../services/email.mjs';
 
 const router = Router();
 
@@ -107,11 +108,21 @@ router.post('/delete-request', async (req, res) => {
 
     logger.info('Account deletion requested', { userId: req.user.id });
 
-    // TODO: Send confirmation email via Resend
+    const scheduledDeletion = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    
+    if (req.user.email) {
+      sendAccountDeletionEmail(
+        req.user.email, 
+        req.user.username || req.user.name, 
+        scheduledDeletion
+      ).catch(err => {
+        logger.error('Failed to send deletion email', { error: err.message, userId: req.user.id });
+      });
+    }
 
     return success(res, { 
       message: 'Deletion request submitted',
-      scheduledDeletion: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      scheduledDeletion
     });
   } catch (err) {
     logger.error('Deletion request error', { error: err.message, userId: req.user?.id });

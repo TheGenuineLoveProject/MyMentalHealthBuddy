@@ -1,6 +1,7 @@
 [
   "/",
   "/about",
+  "/about/approach",
   "/accessibility",
   "/admin",
   "/admin/social",
@@ -184,6 +185,7 @@
   "/tos",
   "/twelve-practices",
   "/upgrade",
+  "/values",
   "/wellness",
   "/wellness/creativity",
   "/wellness-hub",
