@@ -1,2 +1,0 @@
-// Manual custom implementation for pricing page
-export default function ManualPricingPage() { return <div>Custom Pricing</div>; }
