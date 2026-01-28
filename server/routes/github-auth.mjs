@@ -83,8 +83,13 @@ if (GITHUB_CLIENT_ID && GITHUB_CLIENT_SECRET) {
 
   passport.deserializeUser(async (id, done) => {
     try {
+      // Handle case where id might be an object (legacy sessions)
+      const userId = typeof id === 'object' && id !== null ? id.id : id;
+      if (!userId || typeof userId !== 'string') {
+        return done(null, null);
+      }
       const user = await db.query.users.findFirst({
-        where: eq(users.id, id),
+        where: eq(users.id, userId),
       });
       done(null, user);
     } catch (error) {
