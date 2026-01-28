@@ -1122,6 +1122,153 @@ const rawRoutes = [
     ]
   },
   {
+    route: '/about',
+    category: 'landing',
+    pageLabel: 'About Us',
+    title: 'About The Genuine Love Project — Our Mission & Approach',
+    description: 'Learn about The Genuine Love Project, a trauma-informed mental wellness platform designed to foster self-love, healing, and emotional growth through evidence-based tools.',
+    contentLevels: {
+      beginner: {
+        title: 'Who We Are',
+        subtitle: 'A safe space for your healing journey.',
+        bulletPoints: [
+          'We believe healing begins with genuine love for yourself',
+          'Our tools are designed to be gentle and accessible',
+          'You move at your own pace—there is no rush',
+          'Your one next step: Explore what feels right for you'
+        ]
+      },
+      intermediate: {
+        title: 'Our Approach',
+        subtitle: 'Evidence-based tools with compassion at the core.',
+        bulletPoints: [
+          'All content is trauma-informed and research-backed',
+          'We combine wisdom traditions with modern psychology',
+          'Privacy and safety are our highest priorities',
+          'Your one next step: Try one of our wellness tools'
+        ]
+      },
+      advanced: {
+        title: 'Our Foundation',
+        subtitle: 'The principles that guide everything we do.',
+        bulletPoints: [
+          'Grounded in attachment theory, polyvagal theory, and IFS',
+          'Educational platform—not therapy or medical care',
+          'Built for adults 18+ seeking personal growth',
+          'Your one next step: Dive into our healing library'
+        ]
+      }
+    },
+    hero: {
+      eyebrow: 'About The Genuine Love Project',
+      title: 'Healing Starts with',
+      titleHighlight: 'Genuine Love.',
+      subtitle: 'We created this platform to provide a private, compassionate, and accessible environment for emotional healing. Every tool here is designed with your safety and growth in mind.',
+      primaryCta: { label: 'Start Your Journey', href: '/dashboard' },
+      secondaryCta: { label: 'View Our Approach', href: '/about/approach' }
+    },
+    modules: [
+      { icon: 'Heart', title: 'Self-Compassion First', description: 'Everything begins with kindness toward yourself.' },
+      { icon: 'Shield', title: 'Trauma-Informed', description: 'All content is designed to feel safe, not overwhelming.' },
+      { icon: 'Brain', title: 'Evidence-Based', description: 'Grounded in research and proven psychological frameworks.' }
+    ],
+    sections: [
+      {
+        id: 'mission',
+        eyebrow: 'Our Mission',
+        title: 'Helping you live in genuine love',
+        subtitle: 'We believe everyone deserves access to high-quality mental wellness resources.',
+        variant: 'glow',
+        bullets: [
+          'Provide evidence-based tools for emotional healing',
+          'Create a safe, private space for personal growth',
+          'Make mental wellness accessible to everyone',
+          'Support you at every stage of your journey'
+        ]
+      },
+      {
+        id: 'values',
+        eyebrow: 'Our Values',
+        title: 'What guides everything we do',
+        subtitle: 'These principles are woven into every tool, every page, every interaction.',
+        variant: 'pattern',
+        cards: [
+          { icon: 'Heart', title: 'Compassion', text: 'We approach every user with warmth and understanding.' },
+          { icon: 'Lock', title: 'Privacy', text: 'Your journey is yours alone. We protect it fiercely.' },
+          { icon: 'Sparkles', title: 'Accessibility', text: 'Quality wellness tools should be available to everyone.' },
+          { icon: 'Brain', title: 'Integrity', text: 'We only share what is backed by research and wisdom.' }
+        ]
+      }
+    ]
+  },
+  {
+    route: '/about/approach',
+    category: 'landing',
+    pageLabel: 'Our Approach',
+    title: 'Our Approach — The Genuine Love Project',
+    description: 'Discover the evidence-based, trauma-informed principles that guide The Genuine Love Project. Learn how we combine wisdom traditions with modern psychology.',
+    contentLevels: {
+      beginner: {
+        title: 'How We Help',
+        subtitle: 'Simple, gentle tools for real healing.',
+        bulletPoints: [
+          'We focus on what works, backed by research',
+          'Everything is designed to feel safe',
+          'You are always in control of your experience',
+          'Your one next step: Try a breathing exercise'
+        ]
+      },
+      intermediate: {
+        title: 'Our Methods',
+        subtitle: 'The frameworks behind our tools.',
+        bulletPoints: [
+          'Somatic practices for body-based healing',
+          'Nervous system regulation techniques',
+          'Mindfulness and present-moment awareness',
+          'Your one next step: Explore our healing library'
+        ]
+      },
+      advanced: {
+        title: 'Theoretical Foundations',
+        subtitle: 'The research that informs our approach.',
+        bulletPoints: [
+          'Polyvagal Theory by Dr. Stephen Porges',
+          'Internal Family Systems (IFS) by Dr. Richard Schwartz',
+          'Somatic Experiencing by Dr. Peter Levine',
+          'Your one next step: Read our research summaries'
+        ]
+      }
+    },
+    hero: {
+      eyebrow: 'Our Approach',
+      title: 'Trauma-Informed,',
+      titleHighlight: 'Evidence-Based.',
+      subtitle: 'Every tool and practice on this platform is grounded in research and designed with your nervous system in mind. We believe healing happens when you feel truly safe.',
+      primaryCta: { label: 'Explore Tools', href: '/tools' },
+      secondaryCta: { label: 'Back to About', href: '/about' }
+    },
+    modules: [
+      { icon: 'Activity', title: 'Somatic Practices', description: 'Body-based approaches to release stored tension.' },
+      { icon: 'Brain', title: 'Nervous System Care', description: 'Tools to expand your window of tolerance.' },
+      { icon: 'Eye', title: 'Inner Work', description: 'Gentle exploration of your inner landscape.' }
+    ],
+    sections: [
+      {
+        id: 'principles',
+        eyebrow: 'Core Principles',
+        title: 'What makes our approach different',
+        subtitle: 'These principles guide every tool, every word, every interaction.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Shield', title: 'Safety First', text: 'Nothing here will push you faster than you are ready for.' },
+          { icon: 'Heart', title: 'Self-Compassion', text: 'We meet you with kindness, exactly as you are.' },
+          { icon: 'Compass', title: 'Your Pace', text: 'You are the expert on your own experience.' },
+          { icon: 'Sparkles', title: 'Gentle Progress', text: 'Small steps are celebrated. Hard days are honored.' }
+        ]
+      }
+    ]
+  },
+  {
     route: '/healing',
     category: 'landing',
     pageLabel: 'Healing Landing',
