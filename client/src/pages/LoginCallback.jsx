@@ -57,10 +57,10 @@ export default function LoginCallback() {
     ]}
   >
 
-    <div className="min-h-screen flex items-center justify-center hero-gradient">
+    <div className="min-h-screen flex items-center justify-center hero-gradient" data-testid="container-login-callback">
       <div className="text-center">
-        <div className="w-12 h-12 border-4 border-teal/30 border-t-teal rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-sage-600">Completing sign in...</p>
+        <div className="w-12 h-12 border-4 border-teal/30 border-t-teal rounded-full animate-spin mx-auto mb-4" data-testid="spinner-login" />
+        <p className="text-sage-600" data-testid="text-login-status">Completing sign in...</p>
       </div>
     </div>
   </WellnessPageShell>
