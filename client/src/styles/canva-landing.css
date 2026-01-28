@@ -92,6 +92,147 @@
   animation: float 6s ease-in-out infinite;
 }
 
+/* Slow drift animation for background orbs */
+@keyframes drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(20px, -15px) scale(1.05);
+  }
+  50% {
+    transform: translate(-10px, 10px) scale(0.98);
+  }
+  75% {
+    transform: translate(-20px, -10px) scale(1.02);
+  }
+}
+
+.animate-drift {
+  animation: drift 20s ease-in-out infinite;
+}
+
+/* Sparkle animation */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+/* Rotate gently */
+@keyframes gentle-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-rotate-slow {
+  animation: gentle-rotate 30s linear infinite;
+}
+
+/* Shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--glp-white-40) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Decorative orb styles */
+.decorative-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.decorative-orb.sage {
+  background: radial-gradient(circle, var(--glp-sage-40) 0%, transparent 70%);
+}
+
+.decorative-orb.teal {
+  background: radial-gradient(circle, var(--glp-teal-300) 0%, transparent 70%);
+  opacity: 0.4;
+}
+
+.decorative-orb.rose {
+  background: radial-gradient(circle, var(--glp-rose-30) 0%, transparent 70%);
+}
+
+.decorative-orb.gold {
+  background: radial-gradient(circle, var(--glp-gold-30) 0%, transparent 70%);
+}
+
+/* Floating icon container with glow */
+.floating-icon-container {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.floating-icon-container:hover {
+  transform: scale(1.15) !important;
+}
+
+/* Section divider wave */
+.section-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.section-wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px;
+}
+
+/* Hero gradient text */
+.gradient-text-sage {
+  background: linear-gradient(135deg, var(--glp-sage-deep) 0%, var(--glp-sage) 50%, var(--glp-teal-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, var(--glp-gold) 0%, var(--glp-gold-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Floating animation */
 @keyframes canva-float-gentle {
   0%, 100% {

@@ -264,38 +264,73 @@ export default function CanvaLanding() {
       <section id="home" className="relative py-20 md:py-28 lg:py-36 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Large ambient orbs with drift animation */}
           <div 
-            className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full animate-pulse"
-            style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }}
+            className="decorative-orb sage animate-drift w-[600px] h-[600px] -top-32 -right-32"
+            style={{ animationDelay: '0s' }}
           />
           <div 
-            className="absolute -bottom-48 -left-48 w-[600px] h-[600px] rounded-full animate-pulse"
-            style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)', animationDelay: '1s' }}
+            className="decorative-orb rose animate-drift w-[500px] h-[500px] -bottom-40 -left-40"
+            style={{ animationDelay: '5s' }}
           />
           <div 
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full"
-            style={{ background: 'radial-gradient(circle, var(--glp-sage-20), transparent 60%)' }}
+            className="decorative-orb teal animate-drift w-[400px] h-[400px] top-1/4 left-1/4"
+            style={{ animationDelay: '10s' }}
+          />
+          <div 
+            className="decorative-orb gold animate-drift w-[300px] h-[300px] bottom-1/4 right-1/4"
+            style={{ animationDelay: '15s' }}
           />
           
-          {/* Floating Decorative Icons */}
-          <div className="absolute top-20 left-[10%] w-12 h-12 rounded-2xl flex items-center justify-center animate-float opacity-60" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-300))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '0s' }}>
-            <Leaf className="w-6 h-6 text-white" />
+          {/* Central radial glow */}
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] rounded-full opacity-40"
+            style={{ background: 'radial-gradient(circle, var(--glp-sage-20) 0%, transparent 50%)' }}
+          />
+          
+          {/* Floating Decorative Icons - Enhanced positioning and variety */}
+          <div className="floating-icon-container top-16 left-[8%] w-14 h-14 rounded-2xl animate-float opacity-70" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-teal-400))', boxShadow: '0 10px 30px var(--glp-sage-40)', animationDelay: '0s' }}>
+            <Leaf className="w-7 h-7 text-white" />
           </div>
-          <div className="absolute top-32 right-[15%] w-10 h-10 rounded-xl flex items-center justify-center animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 6px 20px var(--glp-rose-20)', animationDelay: '0.5s' }}>
-            <Heart className="w-5 h-5 text-white" />
+          <div className="floating-icon-container top-24 right-[12%] w-12 h-12 rounded-xl animate-float opacity-60" style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 8px 24px var(--glp-rose-30)', animationDelay: '0.7s' }}>
+            <Heart className="w-6 h-6 text-white" />
           </div>
-          <div className="absolute bottom-40 left-[8%] w-14 h-14 rounded-2xl flex items-center justify-center animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', boxShadow: '0 8px 24px var(--glp-sage-deep-30)', animationDelay: '1s' }}>
-            <Brain className="w-7 h-7 text-white" />
+          <div className="floating-icon-container bottom-32 left-[6%] w-16 h-16 rounded-2xl animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-teal-500), var(--glp-sage-deep))', boxShadow: '0 12px 36px var(--glp-sage-deep-40)', animationDelay: '1.2s' }}>
+            <Brain className="w-8 h-8 text-white" />
           </div>
-          <div className="absolute bottom-28 right-[12%] w-11 h-11 rounded-xl flex items-center justify-center animate-float opacity-50" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '1.5s' }}>
-            <Flower2 className="w-5 h-5 text-white" />
+          <div className="floating-icon-container bottom-20 right-[10%] w-13 h-13 rounded-xl animate-float opacity-55" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 8px 24px var(--glp-sage-30)', animationDelay: '1.8s' }}>
+            <Flower2 className="w-6 h-6 text-white" />
           </div>
-          <div className="absolute top-1/2 left-[5%] w-9 h-9 rounded-lg flex items-center justify-center animate-float opacity-30" style={{ background: 'linear-gradient(135deg, var(--glp-teal-300), var(--glp-teal-500))', boxShadow: '0 4px 16px var(--glp-sage-20)', animationDelay: '2s' }}>
-            <Sun className="w-4 h-4 text-white" />
+          <div className="floating-icon-container top-[45%] left-[3%] w-10 h-10 rounded-lg animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 6px 20px var(--glp-gold-30)', animationDelay: '2.3s' }}>
+            <Sun className="w-5 h-5 text-white" />
           </div>
-          <div className="absolute top-1/3 right-[5%] w-10 h-10 rounded-xl flex items-center justify-center animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-sage-400), var(--glp-sage-600))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '2.5s' }}>
+          <div className="floating-icon-container top-[30%] right-[4%] w-11 h-11 rounded-xl animate-float opacity-45" style={{ background: 'linear-gradient(135deg, var(--glp-teal-300), var(--glp-teal-500))', boxShadow: '0 6px 20px var(--glp-sage-30)', animationDelay: '2.8s' }}>
             <Eye className="w-5 h-5 text-white" />
           </div>
+          
+          {/* Additional floating icons for depth */}
+          <div className="floating-icon-container top-[60%] right-[18%] w-9 h-9 rounded-lg animate-float opacity-35" style={{ background: 'linear-gradient(135deg, var(--glp-sage-400), var(--glp-sage-600))', boxShadow: '0 4px 16px var(--glp-sage-20)', animationDelay: '3.2s' }}>
+            <Sparkles className="w-4 h-4 text-white" />
+          </div>
+          <div className="floating-icon-container bottom-[55%] left-[15%] w-8 h-8 rounded-lg animate-float opacity-30" style={{ background: 'linear-gradient(135deg, var(--glp-blush), var(--glp-rose))', boxShadow: '0 4px 14px var(--glp-rose-20)', animationDelay: '3.7s' }}>
+            <Star className="w-4 h-4 text-white" />
+          </div>
+          <div className="floating-icon-container top-[70%] left-[20%] w-10 h-10 rounded-xl animate-float opacity-35" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage))', boxShadow: '0 6px 18px var(--glp-sage-30)', animationDelay: '4.1s' }}>
+            <Lightbulb className="w-5 h-5 text-white" />
+          </div>
+          <div className="floating-icon-container top-[15%] left-[25%] w-9 h-9 rounded-lg animate-float opacity-30" style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-teal-500))', boxShadow: '0 4px 16px var(--glp-sage-deep-20)', animationDelay: '4.5s' }}>
+            <Shield className="w-4 h-4 text-white" />
+          </div>
+          <div className="floating-icon-container bottom-[40%] right-[6%] w-11 h-11 rounded-xl animate-float opacity-40" style={{ background: 'linear-gradient(135deg, var(--glp-rose-400), var(--glp-rose))', boxShadow: '0 6px 20px var(--glp-rose-30)', animationDelay: '4.9s' }}>
+            <Zap className="w-5 h-5 text-white" />
+          </div>
+          
+          {/* Sparkle dots scattered */}
+          <div className="absolute top-[25%] left-[30%] w-2 h-2 rounded-full animate-sparkle" style={{ background: 'var(--glp-gold)', boxShadow: '0 0 8px var(--glp-gold)' }} />
+          <div className="absolute top-[40%] right-[25%] w-1.5 h-1.5 rounded-full animate-sparkle" style={{ background: 'var(--glp-sage)', boxShadow: '0 0 6px var(--glp-sage)', animationDelay: '0.5s' }} />
+          <div className="absolute bottom-[35%] left-[35%] w-2 h-2 rounded-full animate-sparkle" style={{ background: 'var(--glp-teal-400)', boxShadow: '0 0 8px var(--glp-teal-400)', animationDelay: '1s' }} />
+          <div className="absolute top-[55%] right-[35%] w-1.5 h-1.5 rounded-full animate-sparkle" style={{ background: 'var(--glp-rose)', boxShadow: '0 0 6px var(--glp-rose)', animationDelay: '1.5s' }} />
+          <div className="absolute bottom-[25%] right-[40%] w-2 h-2 rounded-full animate-sparkle" style={{ background: 'var(--glp-gold)', boxShadow: '0 0 8px var(--glp-gold)', animationDelay: '2s' }} />
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
