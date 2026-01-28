@@ -1,222 +1,95 @@
-// server/routes/consciousness-expansion.mjs
-// Advanced consciousness and awareness expansion API
-
+// server/routes/meaning.mjs
 import express from "express";
+
 const router = express.Router();
 
-const AWARENESS_PRACTICES = [
-  {
-    id: "witness-consciousness",
-    name: "Witness Consciousness",
-    description: "Develop the observer perspective that watches thoughts without attachment",
-    tradition: "Advaita Vedanta",
-    duration: "15-30 min",
-    steps: [
-      "Sit comfortably and close your eyes",
-      "Notice thoughts arising like clouds in the sky",
-      "Ask: 'Who is aware of these thoughts?'",
-      "Rest in the space of pure awareness",
-      "Let thoughts come and go without engagement"
-    ],
-    benefits: ["Detachment from mental noise", "Inner peace", "Clarity of perception"]
-  },
-  {
-    id: "open-awareness",
-    name: "Open Awareness Meditation",
-    description: "Expand awareness to include all sensory experience without focus",
-    tradition: "Tibetan Buddhism",
-    duration: "20-40 min",
-    steps: [
-      "Begin with eyes slightly open, soft gaze",
-      "Allow awareness to be like the sky - vast and open",
-      "Include all sounds, sensations, thoughts",
-      "Don't focus on any one object",
-      "Rest in panoramic awareness"
-    ],
-    benefits: ["Expanded perception", "Reduced reactivity", "Present-moment awareness"]
-  },
-  {
-    id: "self-inquiry",
-    name: "Self-Inquiry (Atma Vichara)",
-    description: "Direct investigation into the nature of the self",
-    tradition: "Ramana Maharshi",
-    duration: "20-60 min",
-    steps: [
-      "Ask yourself: 'Who am I?'",
-      "When thoughts arise, ask: 'To whom does this thought occur?'",
-      "Trace the I-thought back to its source",
-      "Rest in the silence between thoughts",
-      "Repeat until the sense of separate self dissolves"
-    ],
-    benefits: ["Self-realization", "Liberation from ego", "Direct experience of being"]
-  },
-  {
-    id: "nondual-awareness",
-    name: "Nondual Recognition",
-    description: "Recognize the unity of subject and object",
-    tradition: "Kashmir Shaivism",
-    duration: "15-30 min",
-    steps: [
-      "Notice something in your visual field",
-      "Notice the awareness that perceives it",
-      "Recognize: perceiver and perceived arise together",
-      "Rest in the nondual ground of experience",
-      "Let this recognition pervade all experience"
-    ],
-    benefits: ["Unity consciousness", "End of separation", "Spontaneous freedom"]
-  }
-];
+/**
+ * Tests expect these to return 200 + { ok: true, ... }:
+ * - GET /api/meaning/brave-action
+ * - GET /api/meaning/contribution-map
+ * - GET /api/meaning/gratitude/daily
+ * - GET /api/meaning/future-self/prompts
+ * - GET /api/meaning/life-chapters
+ */
 
-const CONSCIOUSNESS_STATES = [
-  {
-    id: "waking",
-    name: "Waking Consciousness",
-    description: "Ordinary everyday awareness focused on external world",
-    characteristics: ["Subject-object duality", "Logical thinking", "Time-bound perception"],
-    practices: ["Mindfulness", "Present-moment awareness"]
-  },
-  {
-    id: "dream",
-    name: "Dream Consciousness",
-    description: "Internal awareness during sleep with symbolic content",
-    characteristics: ["Fluid logic", "Symbolic meaning", "Timelessness"],
-    practices: ["Dream journaling", "Lucid dreaming"]
-  },
-  {
-    id: "deep-sleep",
-    name: "Deep Sleep Consciousness",
-    description: "Formless awareness without content",
-    characteristics: ["No thoughts", "No objects", "Pure rest"],
-    practices: ["Yoga Nidra", "Sleep yoga"]
-  },
-  {
-    id: "turiya",
-    name: "Turiya (The Fourth)",
-    description: "Witness consciousness present in all states",
-    characteristics: ["Unchanging awareness", "Beyond time", "Self-luminous"],
-    practices: ["Self-inquiry", "Nondual meditation"]
-  },
-  {
-    id: "turiyatita",
-    name: "Turiyatita (Beyond the Fourth)",
-    description: "Complete integration where witness dissolves into oneness",
-    characteristics: ["No separate witness", "Spontaneous presence", "Sahaja (natural) state"],
-    practices: ["Surrender", "Grace"]
-  }
-];
-
-const PERCEPTION_EXERCISES = [
-  {
-    id: "sensory-clarity",
-    name: "Sensory Clarity Training",
-    description: "Sharpen the precision of sensory awareness",
-    duration: "10-20 min",
-    instructions: [
-      "Choose one sense (hearing, seeing, feeling)",
-      "Notice subtle aspects you normally miss",
-      "Label each sensation: location, intensity, quality",
-      "Notice how sensations change moment to moment",
-      "Expand to include multiple senses"
-    ]
-  },
-  {
-    id: "gap-awareness",
-    name: "Gap Awareness",
-    description: "Notice the space between thoughts",
-    duration: "10-15 min",
-    instructions: [
-      "Watch for the end of one thought",
-      "Before the next thought arises, notice the gap",
-      "Rest in that gap as long as possible",
-      "The gap is pure awareness without content",
-      "Let gaps expand naturally"
-    ]
-  },
-  {
-    id: "figure-ground",
-    name: "Figure-Ground Reversal",
-    description: "Shift attention from content to context",
-    duration: "15-20 min",
-    instructions: [
-      "Notice an object (figure) in your awareness",
-      "Now shift attention to the space around it (ground)",
-      "Notice how both arise in awareness",
-      "Let awareness itself become the focus",
-      "Rest as the space in which everything appears"
-    ]
-  }
-];
-
-const INTEGRAL_STAGES = [
-  {
-    id: "archaic",
-    name: "Archaic",
-    color: "Infrared",
-    description: "Basic survival instincts and sensorimotor intelligence"
-  },
-  {
-    id: "magic",
-    name: "Magic",
-    color: "Magenta",
-    description: "Animistic thinking, tribal bonds, magical causation"
-  },
-  {
-    id: "mythic",
-    name: "Mythic",
-    color: "Red/Amber",
-    description: "Conformist rules, traditional authority, absolute truth"
-  },
-  {
-    id: "rational",
-    name: "Rational",
-    color: "Orange",
-    description: "Scientific thinking, individual achievement, progress"
-  },
-  {
-    id: "pluralistic",
-    name: "Pluralistic",
-    color: "Green",
-    description: "Multiple perspectives, equality, consensus, feelings"
-  },
-  {
-    id: "integral",
-    name: "Integral",
-    color: "Teal",
-    description: "Systems thinking, integration of all stages, both/and logic"
-  },
-  {
-    id: "super-integral",
-    name: "Super-Integral",
-    color: "Turquoise",
-    description: "Global holistic awareness, cosmic consciousness"
-  }
-];
-
-router.get("/awareness-practices", (req, res) => {
-  res.json({ success: true, data: AWARENESS_PRACTICES });
+router.get("/brave-action", (_req, res) => {
+  return res.status(200).json({
+    ok: true,
+    framework: {
+      name: "Brave Action Framework",
+      steps: [
+        { id: 1, title: "Name the fear", prompt: "What exactly am I afraid will happen?" },
+        { id: 2, title: "Choose a value", prompt: "Which value do I want to act from right now?" },
+        { id: 3, title: "Pick the smallest brave step", prompt: "What is the smallest action that honors my value?" },
+        { id: 4, title: "Create safety supports", prompt: "What support or boundary makes this doable?" },
+        { id: 5, title: "Do it + reflect", prompt: "What did I learn, and what’s the next tiny step?" },
+      ],
+      notes: [
+        "Keep it small enough to succeed today.",
+        "A brave action is value-aligned, not fear-free.",
+      ],
+    },
+  });
 });
 
-router.get("/states", (req, res) => {
-  res.json({ success: true, data: CONSCIOUSNESS_STATES });
+router.get("/contribution-map", (_req, res) => {
+  return res.status(200).json({
+    ok: true,
+    spheres: [
+      { id: "self", title: "Self", prompt: "What helps me stay regulated and resourced?" },
+      { id: "home", title: "Home", prompt: "What small improvement would reduce friction at home?" },
+      { id: "relationships", title: "Relationships", prompt: "Who needs repair, appreciation, or clarity?" },
+      { id: "work", title: "Work/Service", prompt: "Where can I contribute meaningfully this week?" },
+      { id: "community", title: "Community", prompt: "What local/online space can I support?" },
+      { id: "planet", title: "Planet", prompt: "What is one earth-kind choice I can make today?" },
+    ],
+  });
 });
 
-router.get("/perception-exercises", (req, res) => {
-  res.json({ success: true, data: PERCEPTION_EXERCISES });
+router.get("/gratitude/daily", (_req, res) => {
+  return res.status(200).json({
+    ok: true,
+    dimension: {
+      name: "Daily Gratitude Dimension",
+      prompts: [
+        "What is one small thing that went right today?",
+        "Who supported me (directly or indirectly) today?",
+        "What did my body do for me today that I can appreciate?",
+        "What is one lesson or growth moment I can honor today?",
+      ],
+      microPractice: "Take 3 slow breaths. Name 1 thing. Feel it for 10 seconds.",
+    },
+  });
 });
 
-router.get("/integral-stages", (req, res) => {
-  res.json({ success: true, data: INTEGRAL_STAGES });
+// ✅ FIX: /api/meaning/future-self/prompts must exist
+router.get("/future-self/prompts", (_req, res) => {
+  return res.status(200).json({
+    ok: true,
+    prompts: [
+      "Six months from now, what would my future self thank me for starting today?",
+      "What is one boundary my future self would be proud I protected?",
+      "If my future self could send one sentence of encouragement, what would it say?",
+      "What is one habit (tiny) that would compound into a calmer life?",
+      "What is one relationship repair my future self would celebrate?",
+      "What is one fear I can befriend with a small brave step?",
+    ],
+  });
 });
 
-router.get("/all", (req, res) => {
-  res.json({
-    success: true,
-    data: {
-      awarenessPractices: AWARENESS_PRACTICES,
-      consciousnessStates: CONSCIOUSNESS_STATES,
-      perceptionExercises: PERCEPTION_EXERCISES,
-      integralStages: INTEGRAL_STAGES
-    }
+// ✅ FIX: /api/meaning/life-chapters must exist
+router.get("/life-chapters", (_req, res) => {
+  return res.status(200).json({
+    ok: true,
+    chapters: [
+      { id: 1, title: "Origins", prompt: "What did I learn early about love, safety, and belonging?" },
+      { id: 2, title: "Survival & Strength", prompt: "What helped me keep going when things were hard?" },
+      { id: 3, title: "Turning Points", prompt: "What moments changed my direction or identity?" },
+      { id: 4, title: "Healing & Integration", prompt: "What helped me soften, grow, or reconnect to myself?" },
+      { id: 5, title: "Values & Purpose", prompt: "What matters most now, and why?" },
+      { id: 6, title: "The Chapter I’m Writing", prompt: "What is the theme of my current season?" },
+      { id: 7, title: "Next Chapter", prompt: "What do I want to build, protect, and become?" },
+    ],
   });
 });
 

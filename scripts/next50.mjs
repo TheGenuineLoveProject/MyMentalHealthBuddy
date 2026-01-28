@@ -2,10 +2,14 @@
 import fs from "node:fs";
 import path from "node:path";
 
-function arg(name, fallback=null){
+function arg(name, fallback = null) {
+  const prefix = `--${name}=`;
+  const eq = process.argv.find((a) => a.startsWith(prefix));
+  if (eq) return eq.slice(prefix.length);
+
   const idx = process.argv.indexOf(`--${name}`);
   if (idx === -1) return fallback;
-  return process.argv[idx+1] ?? true;
+  return process.argv[idx + 1] ?? fallback;
 }
 const start = Number(arg("start", "1"));
 const count = Number(arg("count", "50"));

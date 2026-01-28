@@ -103,8 +103,6 @@ import adminBillingRouter from "./routes/adminBilling.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const isProduction = process.env.NODE_ENV === "production";
-
 // Environment variable validation with categories
 const envValidation = {
   critical: [
@@ -344,7 +342,9 @@ app.get("/healthz", (_req, res) => {
     uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
   });
 });
-
+app.get("/api/health", (_req, res) => {
+  res.json({ ok: true });
+});
 app.use("/health", healthRouter);
 
 const distPath = join(__dirname, "../client/dist");
