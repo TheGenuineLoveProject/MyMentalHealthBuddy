@@ -552,21 +552,21 @@
 
 /* Mission CTA */
 .canva-landing .mission-cta {
-  background: linear-gradient(135deg, var(--warm-gold), var(--blush-pink));
+  background: linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage));
   border-radius: 50px;
   padding: 20px 48px;
   font-weight: 700;
   font-size: 18px;
-  color: var(--deep-teal);
+  color: white;
   border: none;
   cursor: pointer;
   transition: all 0.4s ease;
-  box-shadow: 0 8px 32px rgba(234, 195, 59, 0.3);
+  box-shadow: 0 8px 32px var(--glp-sage-30);
 }
 
 .canva-landing .mission-cta:hover {
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 16px 48px rgba(234, 195, 59, 0.4);
+  box-shadow: 0 16px 48px var(--glp-sage-deep-20);
 }
 
 /* Content Card Types */
@@ -609,7 +609,7 @@
 }
 
 .canva-landing .badge-text {
-  background: var(--warm-gold);
+  background: linear-gradient(135deg, var(--glp-gold-30), var(--glp-sage-20));
   color: var(--deep-teal);
 }
 
@@ -671,7 +671,7 @@
   left: 20%;
   right: 20%;
   height: 4px;
-  background: linear-gradient(90deg, var(--sage-green), var(--warm-gold), var(--blush-pink));
+  background: linear-gradient(90deg, var(--glp-sage), var(--glp-teal-300), var(--glp-sage-deep));
   border-radius: 2px;
 }
 

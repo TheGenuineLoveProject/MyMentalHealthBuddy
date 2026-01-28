@@ -221,7 +221,7 @@ export default function CanvaLanding() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative py-20 md:py-28 lg:py-36 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
+      <section id="home" className="relative py-20 md:py-28 lg:py-36 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
         {/* Decorative Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div 
@@ -353,7 +353,7 @@ export default function CanvaLanding() {
           {/* Values Grid */}
           <div className="grid md:grid-cols-3 gap-8 mt-16">
             <div className="reveal">
-              <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 6px 20px var(--glp-gold-30), inset 0 1px 0 rgba(255,255,255,0.2)', border: '2px solid var(--glp-gold)' }}>
+              <div className="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center transition-transform hover:scale-105" style={{ background: 'linear-gradient(135deg, var(--glp-teal-400), var(--glp-sage-deep))', boxShadow: '0 6px 20px var(--glp-sage-30), inset 0 1px 0 rgba(255,255,255,0.2)', border: '2px solid var(--glp-teal-300)' }}>
                 <Lightbulb className="w-7 h-7 text-white drop-shadow-sm" />
               </div>
               <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
