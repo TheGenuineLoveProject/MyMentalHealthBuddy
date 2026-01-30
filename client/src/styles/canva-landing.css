@@ -1,5 +1,6 @@
 /* Canva Landing Page Styles - The Genuine Love Project */
 /* Uses --glp-* tokens from brand-tokens.css - single source of truth */
+/* Enhanced with sacred geometry, Playfair Display + Inter typography */
 
 /* Alias tokens for legacy class compatibility */
 :root {
@@ -9,16 +10,56 @@
   --soft-ivory: var(--glp-paper);
   --charcoal: var(--glp-ink);
   --warm-gold: var(--glp-gold);
+  
+  /* Metallic Gold Gradient */
+  --metallic-gold: linear-gradient(90deg, #d4af37, #ffd700);
+  --metallic-gold-glow: rgba(212, 175, 55, 0.4);
+  --metallic-gold-strong: rgba(212, 175, 55, 0.6);
+  
+  /* Sacred Design Tokens */
+  --sacred-glow-soft: 0 0 20px rgba(212, 175, 55, 0.4);
+  --sacred-glow-strong: 0 0 40px rgba(212, 175, 55, 0.6);
+  --sacred-pulse-duration: 4s;
 }
 
 .canva-landing {
-  font-family: 'Lato', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   background-color: var(--glp-paper);
   color: var(--glp-ink);
 }
 
 .canva-landing .font-serif {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Typography Hierarchy - Playfair Display for headings */
+.canva-landing h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.canva-landing h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.canva-landing h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Inter for body text */
+.canva-landing p,
+.canva-landing span,
+.canva-landing button,
+.canva-landing a {
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 /* Navigation styles */
@@ -274,7 +315,7 @@
   box-shadow: 0 8px 24px var(--glp-sage-30);
   border: none;
   cursor: pointer;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
 }
 
@@ -292,7 +333,7 @@
   transition: all 0.4s ease;
   border: 2px solid var(--deep-teal);
   cursor: pointer;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
 }
 
@@ -300,6 +341,205 @@
   background: var(--deep-teal);
   color: white;
   transform: translateY(-3px);
+}
+
+/* ===== SACRED DESIGN ELEMENTS ===== */
+
+/* Metallic Gold CTA Button */
+.canva-landing .btn-sacred-gold {
+  background: var(--metallic-gold);
+  color: white;
+  padding: 18px 44px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.125rem;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  box-shadow: 0 0 20px var(--metallic-gold-glow);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.canva-landing .btn-sacred-gold::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 52px;
+  background: var(--metallic-gold);
+  z-index: -1;
+  animation: sacred-border-glow 3s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.canva-landing .btn-sacred-gold:hover::before {
+  opacity: 1;
+}
+
+.canva-landing .btn-sacred-gold:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 0 40px var(--glp-gold-60);
+}
+
+/* Sacred Border Glow Animation */
+@keyframes sacred-border-glow {
+  0%, 100% {
+    opacity: 0.6;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(8px);
+  }
+}
+
+/* Sacred Pulse Animation for icons/elements */
+@keyframes sacred-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.5);
+  }
+}
+
+.canva-landing .sacred-pulse {
+  animation: sacred-pulse var(--sacred-pulse-duration) ease-in-out infinite;
+}
+
+/* Sacred Geometry Rotation */
+@keyframes sacred-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.canva-landing .sacred-rotate-slow {
+  animation: sacred-rotate 60s linear infinite;
+}
+
+.canva-landing .sacred-rotate-medium {
+  animation: sacred-rotate 30s linear infinite;
+}
+
+/* Sacred Glow Halo */
+@keyframes sacred-halo {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+}
+
+.canva-landing .sacred-halo {
+  animation: sacred-halo 6s ease-in-out infinite;
+}
+
+/* Fade In Scale Animation */
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.canva-landing .animate-fade-in-scale {
+  animation: fade-in-scale 0.6s ease-out forwards;
+}
+
+/* Sacred Divider - Gold Line with Flower */
+.canva-landing .sacred-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 0;
+}
+
+.canva-landing .sacred-divider::before,
+.canva-landing .sacred-divider::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  max-width: 200px;
+  background: linear-gradient(90deg, transparent, var(--glp-gold), transparent);
+}
+
+.canva-landing .sacred-divider-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--glp-gold);
+}
+
+/* Scale on Hover */
+.canva-landing .scale-on-hover {
+  transition: transform 0.3s ease;
+}
+
+.canva-landing .scale-on-hover:hover {
+  transform: scale(1.05);
+}
+
+/* Icon Glow Effect */
+.canva-landing .icon-glow {
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Safe Space Box */
+.canva-landing .safe-space-box {
+  background: linear-gradient(135deg, var(--glp-gold-10), var(--glp-sage-10));
+  border: 2px solid var(--glp-gold-30);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 0 30px var(--glp-gold-15);
+}
+
+/* ===== PREFERS REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  .canva-landing .animate-float,
+  .canva-landing .animate-drift,
+  .canva-landing .animate-sparkle,
+  .canva-landing .sacred-pulse,
+  .canva-landing .sacred-rotate-slow,
+  .canva-landing .sacred-rotate-medium,
+  .canva-landing .sacred-halo,
+  .canva-landing .breathing-pulse,
+  .canva-landing .pulse-glow,
+  .canva-landing .btn-sacred-gold::before {
+    animation: none;
+  }
+  
+  .canva-landing .animate-fade-in-up,
+  .canva-landing .animate-fade-in-scale {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  .canva-landing .scale-on-hover:hover,
+  .canva-landing .btn-sacred-gold:hover,
+  .canva-landing .btn-primary:hover,
+  .canva-landing .btn-secondary:hover {
+    transform: none;
+  }
 }
 
 /* Section reveal animation */

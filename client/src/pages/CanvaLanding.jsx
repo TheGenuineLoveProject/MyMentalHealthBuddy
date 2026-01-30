@@ -6,6 +6,7 @@ import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import SacredBackground, { SacredDivider, GlowingHeartLogo } from "../components/sacred/SacredBackground";
 
 export default function CanvaLanding() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -262,8 +263,11 @@ export default function CanvaLanding() {
 
       {/* Hero Section */}
       <section id="home" className="relative py-20 md:py-28 lg:py-36 px-6 sm:px-8 overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
+        {/* Sacred Geometry Background */}
+        <SacredBackground variant="hero" opacity={0.15} />
+        
         {/* Decorative Background Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           {/* Large ambient orbs with drift animation */}
           <div 
             className="decorative-orb sage animate-drift w-[600px] h-[600px] -top-32 -right-32"
@@ -369,17 +373,25 @@ export default function CanvaLanding() {
               A comprehensive platform designed to guide you through every step of your healing journey—from mindfulness to personal growth.
             </p>
 
+            {/* Safety Box */}
+            <div className="safe-space-box max-w-md mx-auto mb-8 animate-fade-in-up" style={{ animationDelay: '0.35s' }}>
+              <div className="flex items-center justify-center gap-3">
+                <Shield className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
+                <span className="font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>You Are Safe Here</span>
+                <Shield className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} aria-hidden="true" />
+              </div>
+            </div>
+
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-20 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <Link href="/register">
                 <button 
-                  className="group inline-flex items-center gap-3 font-bold text-lg px-10 py-5 rounded-full transition-all hover:opacity-90 hover:-translate-y-1 text-white"
-                  style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 8px 32px var(--glp-gold-30)' }}
+                  className="btn-sacred-gold group inline-flex items-center gap-3 font-bold text-lg px-10 py-5"
                   data-testid="button-hero-begin"
                 >
-                  <Sparkles className="w-6 h-6" />
-                  Begin Your Journey
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <Sparkles className="w-6 h-6" aria-hidden="true" />
+                  Begin Your Healing Journey
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </button>
               </Link>
               <Link href="/dashboard">
@@ -388,7 +400,7 @@ export default function CanvaLanding() {
                   style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
                   data-testid="button-hero-dashboard"
                 >
-                  Explore Dashboard
+                  Explore Tools
                 </button>
               </Link>
             </div>
@@ -418,6 +430,9 @@ export default function CanvaLanding() {
         </div>
       </section>
 
+      {/* Sacred Divider */}
+      <SacredDivider icon={Flower2} />
+
       {/* Mission Statement Section */}
       <section 
         id="about" 
@@ -426,10 +441,10 @@ export default function CanvaLanding() {
       >
         <div className="max-w-5xl mx-auto text-center">
           <div 
-            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-8 pulse-glow"
-            style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 8px 24px var(--glp-gold-30), inset 0 1px 0 rgba(255,255,255,0.3)', border: '2px solid var(--glp-gold)' }}
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-8 sacred-pulse"
+            style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 30px var(--metallic-gold-glow), inset 0 1px 0 rgba(255,255,255,0.3)', border: '2px solid var(--glp-gold)' }}
           >
-            <Heart className="w-8 h-8 text-white drop-shadow-sm" />
+            <Heart className="w-8 h-8 text-white drop-shadow-sm" aria-hidden="true" />
           </div>
 
           <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -532,8 +547,8 @@ export default function CanvaLanding() {
       </section>
 
       {/* Core Features Section */}
-      <section id="features" className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section id="features" className="py-20 px-6" style={{ background: 'var(--glp-paper)' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
               Your Complete Wellness Toolkit
@@ -543,22 +558,22 @@ export default function CanvaLanding() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {features.map((feature, index) => (
-              <div key={index} className="glass-card rounded-3xl p-8">
-                <div className="mb-6 flex items-center justify-center w-14 h-14 rounded-2xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15))', boxShadow: '0 4px 12px var(--glp-sage-20)' }}>
-                  <feature.icon className="w-7 h-7" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} />
+              <div key={index} className="glass-card rounded-3xl p-6 group scale-on-hover">
+                <div className="mb-5 flex items-center justify-center w-12 h-12 max-w-[48px] rounded-2xl transition-all group-hover:shadow-lg" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-rose-15))', boxShadow: '0 4px 12px var(--glp-sage-20)' }}>
+                  <feature.icon className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} aria-hidden="true" />
                 </div>
-                <h3 className="text-2xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
+                <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
                   {feature.title}
                 </h3>
-                <p className="leading-relaxed mb-4" style={{ color: 'var(--glp-ink)' }}>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--glp-ink)' }}>
                   {feature.description}
                 </p>
-                <Link href="/register">
-                  <span className="inline-flex items-center font-semibold cursor-pointer" style={{ color: 'var(--glp-sage)' }}>
-                    Learn More
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                <Link href="/register" data-testid={`link-feature-${index}`}>
+                  <span className="inline-flex items-center text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
+                    Explore
+                    <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
                   </span>
                 </Link>
               </div>
@@ -566,11 +581,14 @@ export default function CanvaLanding() {
           </div>
         </div>
       </section>
+      
+      {/* Sacred Divider */}
+      <SacredDivider icon={Sparkles} />
 
       {/* How It Works Section */}
-      <section className="py-20 px-6" style={{ background: 'var(--glp-paper)' }}>
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-20">
+      <section className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-sage-10))' }}>
+        <div className="max-w-[1200px] mx-auto px-4 md:px-8">
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
               How It Works
             </h2>
@@ -579,13 +597,27 @@ export default function CanvaLanding() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
+          <div className="flex flex-col md:flex-row items-start justify-center gap-8 mt-12">
             {steps.map((step, index) => (
-              <div key={index} className="step-card" data-testid={`step-card-${index}`}>
-                <div className="step-number" aria-label={`Step ${index + 1}`}>{index + 1}</div>
+              <div key={index} className="flex flex-col items-center text-center max-w-xs mx-auto" data-testid={`step-card-${index}`}>
+                <div 
+                  className="relative mb-6 sacred-pulse"
+                  style={{ animationDelay: `${index * 0.5}s` }}
+                >
+                  <div 
+                    className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white"
+                    style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 20px var(--metallic-gold-glow)' }}
+                    aria-label={`Step ${index + 1}`}
+                  >
+                    {index + 1}
+                  </div>
+                  {index < steps.length - 1 && (
+                    <div className="hidden md:block absolute top-1/2 left-full w-24 h-0.5" style={{ background: 'linear-gradient(90deg, var(--glp-gold), transparent)' }} aria-hidden="true" />
+                  )}
+                </div>
                 <div className="mb-4 flex justify-center">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-sage-10))', boxShadow: '0 4px 12px var(--glp-sage-20)', border: '2px solid var(--glp-sage-30)' }}>
-                    <step.icon className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} />
+                  <div className="w-12 h-12 max-w-[48px] rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-sage-10))', boxShadow: '0 4px 12px var(--glp-sage-20)', border: '2px solid var(--glp-sage-30)' }}>
+                    <step.icon className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} aria-hidden="true" />
                   </div>
                 </div>
                 <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
@@ -602,10 +634,12 @@ export default function CanvaLanding() {
 
       {/* Testimonials Section */}
       <section 
-        className="py-20 px-6"
+        className="py-20 px-6 relative overflow-hidden"
         style={{ background: 'linear-gradient(180deg, var(--glp-paper), var(--glp-rose-15))' }}
       >
-        <div className="max-w-6xl mx-auto">
+        <SacredBackground variant="flowerOfLife" opacity={0.08} />
+        
+        <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
               Voices of Healing
@@ -617,12 +651,29 @@ export default function CanvaLanding() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="testimonial-card" data-testid={`testimonial-${index}`}>
-                <p className="mb-6 leading-relaxed italic" style={{ color: 'var(--glp-ink)' }}>
-                  "{testimonial.text}"
+              <div 
+                key={index} 
+                className="glass-card rounded-3xl p-8 animate-fade-in-scale"
+                style={{ 
+                  animationDelay: `${index * 0.2}s`,
+                  background: 'var(--glp-white)',
+                  border: '1px solid var(--glp-sage-20)',
+                  boxShadow: '0 8px 32px var(--glp-sage-10)'
+                }}
+                data-testid={`testimonial-${index}`}
+              >
+                <div className="flex items-start gap-2 mb-4">
+                  <span className="text-3xl font-serif" style={{ color: '#d4af37' }}>"</span>
+                </div>
+                <p className="mb-6 leading-relaxed italic text-lg" style={{ color: 'var(--glp-ink)' }}>
+                  {testimonial.text}
                 </p>
-                <div className="flex items-center gap-4">
-                  <div className="testimonial-avatar" aria-hidden="true">
+                <div className="flex items-center gap-4 pt-4" style={{ borderTop: '1px solid var(--glp-sage-15)' }}>
+                  <div 
+                    className="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg text-white"
+                    style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+                    aria-hidden="true"
+                  >
                     {testimonial.initial}
                   </div>
                   <div>
@@ -861,18 +912,19 @@ export default function CanvaLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', borderTop: '1px solid var(--glp-sage-15)' }}>
-        <div className="max-w-6xl mx-auto">
+      <footer className="py-20 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)', borderTop: '1px solid var(--glp-sage-15)' }}>
+        <SacredBackground variant="footer" />
+        
+        <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
           {/* Brand Logo Section - Now at Top */}
-          <div className="flex flex-col items-center justify-center text-center pb-6 mb-8" style={{ borderBottom: '1px solid var(--glp-sage-15)' }}>
-            <div className="flex items-center justify-center mb-1">
-              <img 
-                src="/brand/footer-logo.png" 
-                alt="The Genuine Love Project" 
-                className="w-10 h-10 object-contain block mx-auto"
-              />
+          <div className="flex flex-col items-center justify-center text-center pb-8 mb-8" style={{ borderBottom: '1px solid var(--glp-sage-15)' }}>
+            <div className="flex items-center justify-center mb-4">
+              <GlowingHeartLogo size={56} />
             </div>
-            <p className="text-lg sm:text-xl text-center font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>
+            <h3 className="text-2xl font-serif font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+              The Genuine Love Project
+            </h3>
+            <p className="text-lg text-center" style={{ color: 'var(--glp-sage)' }}>
               360° Support from A to Z — Live in Genuine Love
             </p>
           </div>
