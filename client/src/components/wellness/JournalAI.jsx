@@ -67,35 +67,35 @@ export default function JournalAI({ emotionEntry, className = "" }) {
 
   return (
     <div className={`journal-ai-container ${className}`} data-testid="journal-ai">
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden">
-        <div className="p-6 border-b border-gray-100 dark:border-gray-700 bg-gradient-to-r from-[var(--glp-teal-10)] to-[var(--glp-paper)]">
+      <div className="bg-softWhite dark:bg-gray-800 rounded-xl shadow-lg border border-sageGreen/20 dark:border-gray-700 overflow-hidden">
+        <div className="p-6 border-b border-sageGreen/20 dark:border-gray-700 bg-gradient-to-r from-deepTeal/10 to-softWhite">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--glp-teal)] to-[var(--glp-sage-deep)] flex items-center justify-center sacred-pulse">
-              <Sparkles className="w-5 h-5 text-white" aria-hidden="true" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-deepTeal to-sageGreen flex items-center justify-center sacred-pulse">
+              <Sparkles className="w-5 h-5 text-softWhite" aria-hidden="true" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Compassionate AI Companion</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">A gentle space for reflection and support</p>
+              <h2 className="font-serif text-xl font-semibold text-deepTeal dark:text-white">Compassionate AI Companion</h2>
+              <p className="font-sans text-sm text-deepTeal/70 dark:text-gray-400">A gentle space for reflection and support</p>
             </div>
           </div>
         </div>
 
         <div className="p-6 space-y-6">
           {emotionEntry && (
-            <div className="p-4 rounded-xl bg-[var(--glp-sage-10)] border border-[var(--glp-sage-20)]">
-              <p className="text-sm text-gray-600 dark:text-gray-300">
+            <div className="p-4 rounded-xl bg-sageGreen/10 border border-sageGreen/20">
+              <p className="font-sans text-sm text-deepTeal dark:text-gray-300">
                 <span className="font-medium">Current feeling:</span>{" "}
                 <span className="capitalize">{emotionEntry.emotion}</span>
               </p>
               {emotionEntry.content && (
-                <p className="mt-2 text-sm text-gray-700 dark:text-gray-200 italic">"{emotionEntry.content}"</p>
+                <p className="mt-2 font-sans text-sm text-deepTeal/80 dark:text-gray-200 italic">"{emotionEntry.content}"</p>
               )}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="ai-input" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="ai-input" className="block font-sans text-sm font-medium text-deepTeal dark:text-gray-300 mb-2">
                 {randomPrompt}
               </label>
               <textarea
@@ -104,7 +104,7 @@ export default function JournalAI({ emotionEntry, className = "" }) {
                 onChange={(e) => setUserInput(e.target.value)}
                 placeholder="Write openly about what you're experiencing..."
                 rows={4}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-[var(--glp-teal)] focus:border-transparent resize-none transition"
+                className="w-full px-4 py-3 rounded-xl border border-sageGreen/30 dark:border-gray-600 bg-softWhite dark:bg-gray-700 text-deepTeal dark:text-white placeholder-deepTeal/40 font-sans focus:ring-2 focus:ring-deepTeal focus:border-transparent resize-none transition"
                 data-testid="ai-input"
               />
             </div>
@@ -115,7 +115,7 @@ export default function JournalAI({ emotionEntry, className = "" }) {
                   key={suggestion}
                   type="button"
                   onClick={() => handleSuggestion(suggestion)}
-                  className="px-3 py-1.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition"
+                  className="px-3 py-1.5 rounded-full font-sans text-xs font-medium bg-sageGreen/10 dark:bg-gray-700 text-deepTeal dark:text-gray-300 hover:bg-sageGreen/20 dark:hover:bg-gray-600 transition"
                   data-testid={`suggestion-${suggestion.slice(0, 10)}`}
                 >
                   {suggestion}
@@ -126,7 +126,7 @@ export default function JournalAI({ emotionEntry, className = "" }) {
             <button
               type="submit"
               disabled={chatMutation.isPending || !userInput.trim()}
-              className="w-full py-3 px-4 rounded-xl font-semibold text-white transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 bg-gradient-to-r from-[var(--glp-teal)] to-[var(--glp-sage)]"
+              className="w-full py-3 px-4 rounded-xl font-sans font-semibold text-softWhite transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 bg-gradient-to-r from-deepTeal to-sageGreen hover:shadow-lg"
               data-testid="submit-ai"
             >
               {chatMutation.isPending ? (
@@ -144,13 +144,13 @@ export default function JournalAI({ emotionEntry, className = "" }) {
           </form>
 
           {error && (
-            <div className="p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 flex items-start gap-3" data-testid="ai-error">
-              <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" aria-hidden="true" />
+            <div className="p-4 rounded-xl bg-dustyRose/20 dark:bg-red-900/20 border border-dustyRose/40 dark:border-red-800 flex items-start gap-3" data-testid="ai-error">
+              <AlertCircle className="w-5 h-5 text-dustyRose flex-shrink-0 mt-0.5" aria-hidden="true" />
               <div>
-                <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+                <p className="font-sans text-sm text-dustyRose dark:text-red-300">{error}</p>
                 <button 
                   onClick={() => setError("")}
-                  className="text-xs text-red-600 dark:text-red-400 underline mt-1 hover:text-red-800"
+                  className="font-sans text-xs text-dustyRose/80 dark:text-red-400 underline mt-1 hover:text-dustyRose"
                   data-testid="dismiss-error"
                 >
                   Dismiss
@@ -161,7 +161,7 @@ export default function JournalAI({ emotionEntry, className = "" }) {
 
           {aiResponse && (
             <div className="space-y-4" data-testid="ai-response">
-              <div className="p-5 rounded-xl bg-gradient-to-br from-[var(--glp-paper)] to-[var(--glp-sage-10)] border border-[var(--glp-sage-20)]">
+              <div className="p-5 rounded-xl bg-gradient-to-br from-softWhite to-sageGreen/10 border border-sageGreen/20">
                 <div className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-full bg-[var(--glp-teal)] flex items-center justify-center flex-shrink-0">
                     <Heart className="w-4 h-4 text-white" aria-hidden="true" />

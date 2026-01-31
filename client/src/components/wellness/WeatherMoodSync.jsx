@@ -214,18 +214,18 @@ export default function WeatherMoodSync({ className = "" }) {
   return (
     <div className={`weather-mood-sync ${className}`} data-testid="weather-mood-sync">
       <div 
-        className="rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 overflow-hidden transition-all duration-500"
-        style={{ background: weatherData?.background || "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)" }}
+        className="rounded-xl shadow-lg border border-sageGreen/20 dark:border-gray-700 overflow-hidden transition-all duration-500"
+        style={{ background: weatherData?.background || "linear-gradient(135deg, #f8f9fa 0%, #e8f5e9 100%)" }}
       >
         <div className="p-6">
           {!weather && !loading && (
             <div className="space-y-4">
               <div className="text-center">
-                <div className="w-16 h-16 mx-auto rounded-full bg-white/50 flex items-center justify-center mb-4">
-                  <Sun className="w-8 h-8 text-amber-500" aria-hidden="true" />
+                <div className="w-16 h-16 mx-auto rounded-full bg-softWhite/70 flex items-center justify-center mb-4">
+                  <Sun className="w-8 h-8 text-metallicGold" aria-hidden="true" />
                 </div>
-                <h2 className="text-xl font-semibold text-gray-800">Weather Mood Sync</h2>
-                <p className="text-sm text-gray-600 mt-1">Connect with nature's rhythm for healing affirmations</p>
+                <h2 className="font-serif text-xl font-semibold text-deepTeal">Weather Mood Sync</h2>
+                <p className="font-sans text-sm text-deepTeal/70 mt-1">Connect with nature's rhythm for healing affirmations</p>
               </div>
 
               <form onSubmit={handleCitySubmit} className="flex gap-2">
@@ -234,13 +234,13 @@ export default function WeatherMoodSync({ className = "" }) {
                   value={inputLocation}
                   onChange={(e) => setInputLocation(e.target.value)}
                   placeholder="Enter your city..."
-                  className="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 bg-white/80 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[var(--glp-sage)] focus:border-transparent transition"
+                  className="flex-1 px-4 py-2.5 rounded-xl border border-sageGreen/30 bg-softWhite/80 text-deepTeal placeholder-deepTeal/40 font-sans focus:ring-2 focus:ring-sageGreen focus:border-transparent transition"
                   data-testid="city-input"
                 />
                 <button
                   type="submit"
                   disabled={!inputLocation.trim()}
-                  className="px-4 py-2.5 rounded-xl bg-white text-gray-700 font-medium hover:bg-gray-50 disabled:opacity-50 transition border border-gray-200"
+                  className="px-4 py-2.5 rounded-xl bg-softWhite text-deepTeal font-sans font-medium hover:bg-sageGreen/10 disabled:opacity-50 transition border border-sageGreen/30"
                   data-testid="submit-city"
                 >
                   Go
@@ -251,7 +251,7 @@ export default function WeatherMoodSync({ className = "" }) {
                 type="button"
                 onClick={handleUseLocation}
                 disabled={usingGeolocation}
-                className="w-full py-2.5 rounded-xl bg-white/60 text-gray-700 font-medium hover:bg-white/80 transition flex items-center justify-center gap-2 border border-gray-200"
+                className="w-full py-2.5 rounded-xl bg-softWhite/60 text-deepTeal font-sans font-medium hover:bg-softWhite/80 transition flex items-center justify-center gap-2 border border-sageGreen/30"
                 data-testid="use-location"
               >
                 <MapPin className="w-4 h-4" aria-hidden="true" />
