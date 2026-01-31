@@ -1,140 +1,51 @@
-/* File: tailwind.config.js */
 /** @type {import('tailwindcss').Config} */
-import plugin from "tailwindcss/plugin";
-
-export default {
-  content: ["./client/index.html", "./client/src/**/*.{js,ts,jsx,tsx}"],
+module.exports = {
+  content: [
+    "./client/src/**/*.{js,jsx,ts,tsx,html}",
+    "./public/index.html"
+  ],
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Playfair Display"', "ui-serif", "Georgia", "serif"],
-        display: ['"Playfair Display"', "ui-serif", "Georgia", "serif"],
-        sans: ['"Inter"', "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Arial", "sans-serif"],
+        serif: ['"Playfair Display"', 'serif'],
+        sans: ['"Inter"', 'sans-serif']
       },
-
-      fontSize: {
-        /* Existing scale */
-        "display-1": ["3.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "display-2": ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
-        "heading-1": ["2rem", { lineHeight: "1.2" }],
-        "heading-2": ["1.75rem", { lineHeight: "1.25" }],
-        "section": ["1.5rem", { lineHeight: "1.3" }],
-        body: ["1.125rem", { lineHeight: "1.65" }],
-        quote: ["1.25rem", { lineHeight: "1.6" }],
-        caption: ["0.875rem", { lineHeight: "1.45" }],
-        /* Canva-style typography scale (tglp-*) */
-        "tglp-title": ["56px", { lineHeight: "1.15" }],
-        "tglp-subtitle": ["36px", { lineHeight: "1.2" }],
-        "tglp-heading": ["32px", { lineHeight: "1.25" }],
-        "tglp-subheading": ["28px", { lineHeight: "1.35" }],
-        "tglp-section": ["24px", { lineHeight: "1.35" }],
-        "tglp-body": ["18px", { lineHeight: "1.65" }],
-        "tglp-quote": ["20px", { lineHeight: "1.6" }],
-        "tglp-caption": ["14px", { lineHeight: "1.5" }],
-      },
-
+      extend: {
+        colors: {
+          softWhite: '#faf9f7',
+          dustyRose: '#f4c7c3',
+          sageGreen: '#8fbf9f',
+          deepTeal: '#2f5d5d',
+          charcoal: '#3a3a3a',
+          metallicGold: '#d4af37',
+          metallicGoldLight: '#ffd700'
+        },
+        fontFamily: {
+          sans: ['Inter', 'sans-serif'],
+          serif: ['Playfair Display', 'serif']
+        },
+        boxShadow: {
+          glow: '0 0 20px rgba(212, 175, 55, 0.5)',
+          pulse: '0 0 10px rgba(244, 199, 195, 0.7) inset'
+        },
+        animation: {
+          float: 'float 4s ease-in-out infinite',
+          'pulse-slow': 'pulse 3s ease-in-out infinite'
+        },
+        keyframes: {
+          float: {
+            '0%, 100%': { transform: 'translateY(0)' },
+            '50%': { transform: 'translateY(-10px)' }
+        },
       borderRadius: {
-        sm: "var(--glp-radius-sm)",
-        md: "var(--glp-radius-md)",
-        xl: "1rem",
-        "2xl": "1.25rem",
-        glp1: "var(--glp-radius-1)",
-        glp2: "var(--glp-radius-2)",
+        xl: '1rem',
+        sacred: '2rem'
       },
-
-      boxShadow: {
-        soft: "0 6px 20px rgba(0,0,0,0.06)",
-        1: "var(--glp-shadow-1)",
-        glp1: "var(--glp-shadow-1)",
-        glp2: "var(--glp-shadow-2)",
-      },
-
-      transitionDuration: {
-        fast: "var(--glp-motion-fast)",
-        med: "var(--glp-motion-med)",
-      },
-
-      transitionTimingFunction: {
-        soft: "var(--glp-ease)",
-      },
-
-      colors: {
-        sage: {
-          50: "#f2f7f4",
-          100: "#e5efe9",
-          200: "#c8dfd1",
-          300: "#a7c9b5",
-          400: "#8FBF9F",
-          500: "#6ba37d",
-          600: "#548664",
-          DEFAULT: "var(--glp-sage)",
+      fadeIn: {
+              '0%': { opacity: 0 },
+              '100%': { opacity: 1 }
+            }
+          }
         },
-        blush: {
-          50: "#fdf7f6",
-          100: "#fbefed",
-          200: "#f8e0dc",
-          300: "#F4C7C3",
-          400: "#eba49e",
-          500: "#de7d75",
-          DEFAULT: "var(--glp-blush)",
-        },
-        teal: {
-          50: "#f0f5f5",
-          100: "#dbe9e9",
-          200: "#b7d3d3",
-          300: "#8cb8b8",
-          400: "#5f9a9a",
-          500: "#4a7d7d",
-          600: "#2F5D5D",
-          DEFAULT: "var(--glp-sage-deep)",
-        },
-        gold: {
-          50: "#fefcf3",
-          100: "#fdf7dd",
-          200: "#f9edb9",
-          300: "#f3df8a",
-          400: "#EAC33B",
-          500: "#d4a82e",
-          600: "#b08923",
-          DEFAULT: "var(--glp-gold)",
-        },
-        ivory: {
-          DEFAULT: "var(--glp-paper)",
-        },
-        charcoal: {
-          DEFAULT: "var(--glp-ink)",
-        },
-
-        bg: "var(--bg)",
-        surface: {
-          DEFAULT: "var(--surface-1)",
-          1: "var(--surface-1)",
-          2: "var(--surface-2)",
-        },
-        text: {
-          DEFAULT: "var(--text-1)",
-          1: "var(--text-1)",
-          2: "var(--text-2)",
-          muted: "var(--glp-text-muted)",
-        },
-        primary: {
-          DEFAULT: "var(--primary)",
-          contrast: "var(--primary-contrast)",
-          foreground: "var(--glp-primary-foreground)",
-        },
-        accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--glp-accent-foreground)",
-        },
-        border: "var(--border)",
-        ring: "var(--ring)",
-      },
-    },
-  },
-  plugins: [
-    plugin(function ({ addVariant }) {
-      addVariant("low-stim", "html[data-mode='low-stim'] &");
-      addVariant("reading", "html[data-mode='reading'] &");
-    }),
-  ],
-};
+  plugins: [],
+}

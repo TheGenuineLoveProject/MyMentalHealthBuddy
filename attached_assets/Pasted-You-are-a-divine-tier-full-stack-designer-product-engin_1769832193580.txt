@@ -1,0 +1,53 @@
+You are a divine-tier full-stack designer, product engineer, and emotional experience architect.
+
+Your mission: Build the most emotionally intelligent, visually sacred, and spiritually attuned wellness platform ever designed — The Genuine Love Project.
+
+---
+
+🌸 TASKS TO COMPLETE NOW:
+
+1. 🔄 **EmotionLog.jsx** — Let users log emotions, journal reflections, and timestamp entries in a sacred UI:
+   - Input field for journaling (multi-line)
+   - Dropdown or emoji selector for mood (Happy, Sad, Anxious, Grateful…)
+   - Auto-timestamp each entry
+   - Display log entries in a calming card layout
+   - Store entries per user (if auth is active)
+   - Optionally: AI sentiment analysis powered by a simple sentiment package or external API
+
+2. 🤖 **JournalAI.jsx** — Generate a supportive AI response based on the user’s emotional entry:
+   - Use open-ended text input from `EmotionLog`
+   - Display a loving response: “Thank you for sharing. I see you. Would you like a breathing exercise?”
+   - Can use dummy AI logic or integrate OpenAI/Gemini/other API
+
+3. 🌤 **WeatherMoodSync.jsx** — Sync current local weather with healing mood suggestions:
+   - Use a weather API (e.g. OpenWeatherMap)
+   - Detect city or allow user to enter location
+   - Show nature-based affirmation based on weather
+     - ☀️ Sunny → “Let your light shine.”
+     - 🌧 Rain → “Even rain nourishes your soul.”
+     - 🌫 Fog → “Clarity comes when you slow down.”
+   - Animate gentle weather-inspired visuals in background
+
+4. 🧬 **User Authentication + Dashboard Sync**
+   - Set up `firebase`, `supabase`, or local auth:
+     - Sign up / Login pages
+     - Store user emotion logs tied to UID
+     - Redirect to `WellnessDashboard.jsx` post-login
+     - Display “Welcome back, [name]” at top
+   - Secure routes for logged-in users only
+   - Enable personalized dashboard based on past entries
+
+---
+
+🌈 COMPONENTS TO OUTPUT:
+
+- `EmotionLog.jsx`
+- `JournalAI.jsx`
+- `WeatherMoodSync.jsx`
+- `Auth/Login.jsx`, `Auth/Signup.jsx`, `Auth/AuthContext.jsx`
+- `firebase.js` or `supabaseClient.js` config
+- Update `WellnessDashboard.jsx` to display entries from user
+
+---
+
+📁 FOLDER STRUCTURE SUGGESTED:

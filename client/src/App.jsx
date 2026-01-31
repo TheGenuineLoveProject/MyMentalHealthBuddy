@@ -13,6 +13,8 @@ import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
 import ConsentBanner from "./components/ConsentBanner.jsx";
 import FeedbackWidget from "./components/FeedbackWidget.jsx";
+import './index.css'; // Your Tailwind import
+import WellnessDashboard from './pages/WellnessDashboard';
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
@@ -312,6 +314,9 @@ export default function App() {
               </Route>
               <Route path="/wellness">
                 <WellnessRoute><Wellness /></WellnessRoute>
+              </Route>
+              <Route path="/wellness-dashboard">
+                <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
               <Route path="/hubs/sleep">
                 <WellnessRoute><SleepHubPage /></WellnessRoute>

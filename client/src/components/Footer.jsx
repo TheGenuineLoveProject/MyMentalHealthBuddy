@@ -1,87 +1,49 @@
-/**
- * @deprecated DUPLICATE COMPONENT
- * 
- * Canonical Footer: import { Footer } from '@/components/ui'
- * Safety Footer: import SafetyFooter from '@/components/ui/SafetyFooter'
- * 
- * This file is kept for backwards compatibility but should not be used
- * for new development. Please migrate to the canonical version.
- * 
- * Last audit: 2026-01-23
- */
-import { DISCLAIMERS_COPY } from "../copy/disclaimers";
-import { BRAND } from "@shared/brand.mjs";
 import { Link } from "wouter";
-import { Heart, Shield, FileText, AlertCircle } from "lucide-react";
-import NewsletterSignup from "./NewsletterSignup.jsx";
+import { Heart, Shield, ExternalLink } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg)]" data-testid="footer">
-      <div className="container-lg px-responsive py-8">
-        <div className="flex-between flex-wrap gap-6">
-          <div className="flex items-center gap-4">
-            <img 
-              src="/brand/logo-mark.png" 
-              alt={BRAND.name}
-              className="w-10 h-10 object-contain"
-              draggable="false"
-            />
-            <div className="stack-xs">
-              <span className="text-heading-sm text-brand">{BRAND.name}</span>
-              <span className="text-body-sm text-secondary">{BRAND.tagline}</span>
+    <footer 
+      className="bg-gradient-to-b from-[var(--glp-paper)] via-[var(--glp-sage-10)] to-[var(--glp-teal-10)] text-gray-700 dark:text-gray-300 pt-16 pb-6 relative overflow-hidden"
+      data-testid="footer"
+    >
+      <div className="absolute inset-0 opacity-5 bg-[url('/icons/flower-of-life.svg')] bg-center bg-cover pointer-events-none" aria-hidden="true" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--glp-gold)] to-[var(--glp-teal)] flex items-center justify-center">
+              <Heart className="w-5 h-5 text-white" aria-hidden="true" />
             </div>
+            <span className="font-serif text-xl font-bold text-gray-900 dark:text-white">
+              The Genuine Love Project
+            </span>
           </div>
 
-          <nav className="flex items-center gap-6 flex-wrap" aria-label="Footer navigation">
-            <Link 
-              to="/privacy" 
-              className="text-body-sm text-secondary hover:text-brand transition flex items-center gap-1.5 focus-ring rounded-md px-1"
-              data-testid="link-privacy"
-            >
-              <Shield className="icon-xs" aria-hidden="true" />
-              Privacy
+          <nav className="flex flex-wrap gap-6 text-sm font-medium" aria-label="Footer navigation">
+            <Link href="/tools" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-tools">
+              Wellness Tools
             </Link>
-            <Link 
-              to="/terms" 
-              className="text-body-sm text-secondary hover:text-brand transition flex items-center gap-1.5 focus-ring rounded-md px-1"
-              data-testid="link-terms"
-            >
-              <FileText className="icon-xs" aria-hidden="true" />
-              Terms
+            <Link href="/journal" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-journal">
+              Journal
             </Link>
-            <Link 
-              to="/disclaimer" 
-              className="text-body-sm text-secondary hover:text-brand transition flex items-center gap-1.5 focus-ring rounded-md px-1"
-              data-testid="link-disclaimer"
-            >
-              <AlertCircle className="icon-xs" aria-hidden="true" />
-              Disclaimer
+            <Link href="/wisdom" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-wisdom">
+              Wisdom
             </Link>
-            <Link 
-              to="/crisis" 
-              className="text-body-sm text-accent hover:text-[var(--accent-rose)] transition flex items-center gap-1.5 focus-ring rounded-md px-1 font-medium"
-              data-testid="link-crisis"
-            >
-              <Heart className="icon-xs" aria-hidden="true" />
-              Crisis Help
+            <Link href="/crisis" className="hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-crisis">
+              <Shield className="w-4 h-4" aria-hidden="true" />
+              Crisis Support
             </Link>
           </nav>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-[var(--border)]">
-          <div className="grid gap-8 md:grid-cols-2 items-start">
-            <div>
-              <NewsletterSignup source="footer" variant="footer" />
-            </div>
-            <div className="text-right md:self-end">
-              <p className="text-caption text-secondary">
-                &copy; {currentYear} {BRAND.name}. All rights reserved.
-              </p>
-              <p className="text-caption text-secondary mt-1">Live in Genuine Love.</p>
-            </div>
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500 dark:text-gray-400">
+          <p>© {currentYear} The Genuine Love Project. All rights reserved.</p>
+          <div className="flex gap-4">
+            <Link href="/privacy" className="hover:underline" data-testid="link-privacy">Privacy Policy</Link>
+            <Link href="/terms" className="hover:underline" data-testid="link-terms">Terms of Service</Link>
           </div>
         </div>
       </div>
