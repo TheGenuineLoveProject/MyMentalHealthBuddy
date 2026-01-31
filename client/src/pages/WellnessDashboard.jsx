@@ -5,6 +5,8 @@ import { Heart, TrendingUp, Calendar, Sparkles, Sun, ArrowRight, Activity, BookO
 import EmotionLog from "../components/wellness/EmotionLog";
 import JournalAI from "../components/wellness/JournalAI";
 import WeatherMoodSync from "../components/wellness/WeatherMoodSync";
+import MoodCalendar from "../components/wellness/MoodCalendar";
+import HealingGraph from "../components/wellness/HealingGraph";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { useAuth } from "../context/AuthContext";
@@ -134,7 +136,7 @@ export default function WellnessDashboard() {
           
           <QuickActions />
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <div className="lg:col-span-2 space-y-6">
               <EmotionLog onEntrySubmit={handleEntrySubmit} />
               
@@ -143,6 +145,7 @@ export default function WellnessDashboard() {
 
             <div className="space-y-6">
               <WeatherMoodSync />
+              <MoodCalendar />
 
               <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700 p-6" data-testid="progress-tracker">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
@@ -202,6 +205,14 @@ export default function WellnessDashboard() {
                 </p>
               </div>
             </div>
+          </div>
+
+          <div className="mt-8">
+            <h2 className="font-serif text-2xl font-bold text-deepTeal dark:text-white mb-6 flex items-center gap-2">
+              <TrendingUp className="w-6 h-6 text-metallicGold" aria-hidden="true" />
+              Your Healing Journey
+            </h2>
+            <HealingGraph />
           </div>
         </div>
 
