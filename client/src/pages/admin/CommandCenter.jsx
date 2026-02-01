@@ -286,10 +286,10 @@ export default function AdminCommandCenter() {
   ];
 
   const quickActions = [
-    { label: "User Management", icon: Users, href: "/admin/users" },
-    { label: "View Logs", icon: FileText, href: "/admin/logs" },
-    { label: "Analytics", icon: BarChart3, href: "/analytics" },
-    { label: "Settings", icon: Settings, href: "/admin/settings" }
+    { label: "Roles & Permissions", icon: Users, href: "/admin/roles" },
+    { label: "System Health", icon: Activity, href: "/admin/health" },
+    { label: "Social Dashboard", icon: Globe, href: "/admin/social" },
+    { label: "Billing", icon: BarChart3, href: "/admin/billing" }
   ];
 
   if (isLoading) {
