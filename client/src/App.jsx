@@ -14,7 +14,7 @@ import { routeKeyFromRoute } from "./utils/routeKey.js";
 import ConsentBanner from "./components/ConsentBanner.jsx";
 import FeedbackWidget from "./components/FeedbackWidget.jsx";
 import './index.css'; // Your Tailwind import
-import WellnessDashboard from './pages/WellnessDashboard';
+const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 
 const Login = lazy(() => import("./pages/Login.jsx"));
 const LoginCallback = lazy(() => import("./pages/LoginCallback.jsx"));
