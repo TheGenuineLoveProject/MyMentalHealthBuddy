@@ -25,28 +25,35 @@ export default function CanvaLanding() {
     setAdminError("");
     setAdminLoading(true);
     
+    const trimmedToken = adminToken.trim();
+    if (!trimmedToken) {
+      setAdminError("Please enter your admin token");
+      setAdminLoading(false);
+      return;
+    }
+    
     try {
       const response = await fetch("/api/admin/verify-token", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token: adminToken })
+        body: JSON.stringify({ token: trimmedToken })
       });
       
-      if (response.ok) {
-        const data = await response.json();
-        if (data.success) {
-          sessionStorage.setItem("adminVerified", "true");
-          if (data.sessionToken) {
-            sessionStorage.setItem("adminSessionToken", data.sessionToken);
-          }
-          setLocation("/admin");
-        } else {
-          setAdminError("Invalid admin token");
+      const data = await response.json();
+      
+      if (response.ok && data.success) {
+        sessionStorage.setItem("adminVerified", "true");
+        if (data.sessionToken) {
+          sessionStorage.setItem("adminSessionToken", data.sessionToken);
         }
+        setLocation("/admin");
+      } else if (response.status === 500) {
+        setAdminError("Admin access not configured. Please set the ADMIN_TOKEN secret.");
       } else {
-        setAdminError("Authentication failed");
+        setAdminError(data.message || "Invalid admin token. Please check and try again.");
       }
     } catch (err) {
+      console.error("[Admin Login]", err);
       setAdminError("Connection error. Please try again.");
     } finally {
       setAdminLoading(false);
