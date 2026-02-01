@@ -101,12 +101,12 @@ function NewEntryModal({ isOpen, onClose, selectedPrompt }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" data-testid="modal-new-entry">
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" data-testid="modal-new-entry" role="dialog" aria-modal="true" aria-labelledby="new-entry-title">
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
         <div className="p-6 border-b border-[var(--sage-200)] flex items-center justify-between">
-          <h2 className="text-heading-md text-teal">New Journal Entry</h2>
-          <button onClick={onClose} className="p-2 hover:bg-[var(--sage-100)] rounded-lg transition" data-testid="button-close-modal">
-            <X className="h-5 w-5 text-[var(--sage-500)]" />
+          <h2 id="new-entry-title" className="text-heading-md text-teal">New Journal Entry</h2>
+          <button onClick={onClose} className="p-2 hover:bg-[var(--sage-100)] rounded-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" data-testid="button-close-modal" aria-label="Close modal">
+            <X className="h-5 w-5 text-[var(--sage-500)]" aria-hidden="true" />
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-6 space-y-4">

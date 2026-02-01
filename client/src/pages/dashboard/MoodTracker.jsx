@@ -142,19 +142,21 @@ export default function MoodTracker() {
                 <Sparkles className="h-5 w-5 text-[var(--gold-500)]" />
                 Overall Mood
               </h2>
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid grid-cols-5 gap-3" role="group" aria-label="Select your mood">
                 {MOODS.map(mood => (
                   <button
                     key={mood.id}
                     onClick={() => setSelectedMood(mood.id)}
-                    className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all motion-reduce:transition-none ${
+                    className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       selectedMood === mood.id
                         ? `bg-[var(--${mood.color}-100)] border-[var(--${mood.color}-500)]`
                         : 'bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]'
                     }`}
                     data-testid={`mood-${mood.id}`}
+                    aria-pressed={selectedMood === mood.id}
+                    aria-label={`${mood.label} mood`}
                   >
-                    <span className="text-3xl">{mood.emoji}</span>
+                    <span className="text-3xl" aria-hidden="true">{mood.emoji}</span>
                     <span className="text-body-sm font-medium">{mood.label}</span>
                   </button>
                 ))}
@@ -166,24 +168,29 @@ export default function MoodTracker() {
                 <TrendingUp className="h-5 w-5 text-[var(--teal-500)]" />
                 Energy Level
               </h2>
-              <div className="grid grid-cols-3 gap-4">
-                {ENERGY_LEVELS.map(level => (
-                  <button
-                    key={level.id}
-                    onClick={() => setSelectedEnergy(level.id)}
-                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all motion-reduce:transition-none ${
-                      selectedEnergy === level.id
-                        ? 'bg-[var(--sage-100)] border-[var(--sage-500)]'
-                        : 'bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]'
-                    }`}
-                    data-testid={`energy-${level.id}`}
-                  >
-                    <div className={`icon-container icon-md ${selectedEnergy === level.id ? 'icon-soft-sage' : 'icon-soft-gold'}`}>
-                      <level.icon className="h-5 w-5" />
-                    </div>
-                    <span className="text-body-sm font-medium">{level.label}</span>
-                  </button>
-                ))}
+              <div className="grid grid-cols-3 gap-4" role="group" aria-label="Select your energy level">
+                {ENERGY_LEVELS.map(level => {
+                  const LevelIcon = level.icon;
+                  return (
+                    <button
+                      key={level.id}
+                      onClick={() => setSelectedEnergy(level.id)}
+                      className={`flex items-center gap-3 p-4 rounded-xl border transition-all motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                        selectedEnergy === level.id
+                          ? 'bg-[var(--sage-100)] border-[var(--sage-500)]'
+                          : 'bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]'
+                      }`}
+                      data-testid={`energy-${level.id}`}
+                      aria-pressed={selectedEnergy === level.id}
+                      aria-label={level.label}
+                    >
+                      <div className={`icon-container icon-md ${selectedEnergy === level.id ? 'icon-soft-sage' : 'icon-soft-gold'}`}>
+                        <LevelIcon className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <span className="text-body-sm font-medium">{level.label}</span>
+                    </button>
+                  );
+                })}
               </div>
             </section>
 
@@ -192,20 +199,21 @@ export default function MoodTracker() {
                 <Calendar className="h-5 w-5 text-[var(--sage-500)]" />
                 What are you feeling?
               </h2>
-              <p className="text-body-sm text-[var(--sage-500)] mb-4">Select all that apply</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-body-sm text-[var(--sage-500)] mb-4" id="feelings-description">Select all that apply</p>
+              <div className="flex flex-wrap gap-2" role="group" aria-describedby="feelings-description" aria-label="Select your feelings">
                 {FEELINGS.map(feeling => (
                   <button
                     key={feeling}
                     onClick={() => toggleFeeling(feeling)}
-                    className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all motion-reduce:transition-none ${
+                    className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                       selectedFeelings.includes(feeling)
                         ? 'bg-[var(--teal-500)] text-white'
                         : 'bg-[var(--sage-100)] text-[var(--sage-700)] hover:bg-[var(--sage-200)]'
                     }`}
                     data-testid={`feeling-${feeling.toLowerCase()}`}
+                    aria-pressed={selectedFeelings.includes(feeling)}
                   >
-                    {selectedFeelings.includes(feeling) && <Check className="h-3 w-3 inline mr-1" />}
+                    {selectedFeelings.includes(feeling) && <Check className="h-3 w-3 inline mr-1" aria-hidden="true" />}
                     {feeling}
                   </button>
                 ))}

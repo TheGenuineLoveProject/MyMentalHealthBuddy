@@ -113,29 +113,34 @@ export default function Settings() {
                 <h2 className="text-heading-md text-teal">Appearance</h2>
               </div>
               <div className="form-group">
-                <label className="form-label mb-3">Theme Preference</label>
-                <div className="flex gap-3">
+                <label className="form-label mb-3" id="theme-label">Theme Preference</label>
+                <div className="flex gap-3" role="group" aria-labelledby="theme-label">
                   {[
                     { id: "light", label: "Light", icon: Sun },
                     { id: "dark", label: "Dark", icon: Moon },
                     { id: "system", label: "System", icon: Monitor }
-                  ].map(option => (
-                    <button
-                      key={option.id}
-                      onClick={() => setTheme(option.id)}
-                      className={`flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
-                        theme === option.id 
-                          ? "bg-[var(--sage-100)] border-[var(--sage-500)]" 
-                          : "bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]"
-                      }`}
-                      data-testid={`button-theme-${option.id}`}
-                    >
-                      <div className={`icon-container icon-md ${theme === option.id ? "icon-soft-sage" : "icon-soft-gold"}`}>
-                        <option.icon className="h-5 w-5" />
-                      </div>
-                      <span className="text-body-sm">{option.label}</span>
-                    </button>
-                  ))}
+                  ].map(option => {
+                    const OptionIcon = option.icon;
+                    return (
+                      <button
+                        key={option.id}
+                        onClick={() => setTheme(option.id)}
+                        className={`flex-1 flex flex-col items-center gap-2 p-4 rounded-xl border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+                          theme === option.id 
+                            ? "bg-[var(--sage-100)] border-[var(--sage-500)]" 
+                            : "bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]"
+                        }`}
+                        data-testid={`button-theme-${option.id}`}
+                        aria-pressed={theme === option.id}
+                        aria-label={`${option.label} theme`}
+                      >
+                        <div className={`icon-container icon-md ${theme === option.id ? "icon-soft-sage" : "icon-soft-gold"}`}>
+                          <OptionIcon className="h-5 w-5" aria-hidden="true" />
+                        </div>
+                        <span className="text-body-sm">{option.label}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </section>
