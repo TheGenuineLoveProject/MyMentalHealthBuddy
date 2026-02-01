@@ -1,12 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
-interface InsightResponse {
-  insight: string;
-}
-
 export function TodaysInsight() {
-  const { data, isLoading } = useQuery<InsightResponse>({
+  const { data, isLoading } = useQuery({
     queryKey: ["/api/insights/daily"],
   });
 
