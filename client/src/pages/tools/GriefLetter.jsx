@@ -101,13 +101,14 @@ export default function GriefLetter() {
               />
             </div>
 
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Writing prompts">
               {PROMPTS.map((prompt, i) => (
                 <button
                   key={i}
                   onClick={() => setLetterContent(prev => prev + (prev ? "\n\n" : "") + prompt + "\n")}
-                  className="text-xs px-3 py-1.5 rounded-full bg-muted hover:bg-muted/80 text-muted-foreground transition-colors"
+                  className="text-xs px-3 py-1.5 rounded-full bg-muted hover:bg-muted/80 text-muted-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   data-testid={`prompt-${i}`}
+                  aria-label={`Add prompt: ${prompt}`}
                 >
                   + {prompt.slice(0, 25)}...
                 </button>
@@ -116,25 +117,26 @@ export default function GriefLetter() {
           </CardContent>
         </Card>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between" role="group" aria-label="Letter actions">
           <Button
             variant="ghost"
             onClick={handleClear}
-            className="text-muted-foreground hover:text-destructive"
+            className="text-muted-foreground hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
             data-testid="button-clear"
+            aria-label="Clear letter contents"
           >
-            <Trash2 className="w-4 h-4 mr-2" />
+            <Trash2 className="w-4 h-4 mr-2" aria-hidden="true" />
             Clear
           </Button>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             {savedLocally && (
-              <span className="text-sm text-green-600 dark:text-green-400 flex items-center">
+              <span className="text-sm text-green-600 dark:text-green-400 flex items-center" role="status" aria-live="polite">
                 Saved locally
               </span>
             )}
-            <Button onClick={handleSave} disabled={!letterContent.trim()} data-testid="button-save">
-              <Save className="w-4 h-4 mr-2" />
+            <Button onClick={handleSave} disabled={!letterContent.trim()} data-testid="button-save" aria-label="Save letter to device" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+              <Save className="w-4 h-4 mr-2" aria-hidden="true" />
               Save to Device
             </Button>
           </div>

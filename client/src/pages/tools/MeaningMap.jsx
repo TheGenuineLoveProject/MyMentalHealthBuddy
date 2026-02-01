@@ -80,15 +80,16 @@ export default function MeaningMap() {
             <CardTitle className="text-lg">Core Values (up to 5)</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-4" role="list" aria-label="Your core values">
               {coreValues.map((value, i) => (
                 <span 
                   key={i}
                   className="px-3 py-1.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 flex items-center gap-2"
+                  role="listitem"
                 >
                   {value}
-                  <button onClick={() => removeValue(i)} className="hover:text-amber-900">
-                    <X className="w-3 h-3" />
+                  <button onClick={() => removeValue(i)} className="hover:text-amber-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 rounded-full" aria-label={`Remove value: ${value}`}>
+                    <X className="w-3 h-3" aria-hidden="true" />
                   </button>
                 </span>
               ))}
@@ -154,17 +155,17 @@ export default function MeaningMap() {
           </CardContent>
         </Card>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between" role="group" aria-label="Save actions">
           <div>
             {saved && (
-              <span className="text-green-600 dark:text-green-400 flex items-center gap-1 text-sm">
-                <Check className="w-4 h-4" />
+              <span className="text-green-600 dark:text-green-400 flex items-center gap-1 text-sm" role="status" aria-live="polite">
+                <Check className="w-4 h-4" aria-hidden="true" />
                 Saved to device
               </span>
             )}
           </div>
-          <Button onClick={handleSave} data-testid="button-save">
-            <Save className="w-4 h-4 mr-2" />
+          <Button onClick={handleSave} data-testid="button-save" aria-label="Save your meaning map" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+            <Save className="w-4 h-4 mr-2" aria-hidden="true" />
             Save My Map
           </Button>
         </div>

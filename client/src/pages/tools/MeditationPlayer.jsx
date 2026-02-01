@@ -77,56 +77,61 @@ export default function MeditationPlayer() {
               </div>
 
               <div className="mb-6">
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
+                <div className="h-2 bg-muted rounded-full overflow-hidden" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} aria-label="Meditation progress">
                   <div
                     className="h-full bg-primary rounded-full transition-all"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
                 <div className="flex justify-between mt-2 text-sm text-muted-foreground">
-                  <span>{formatTime(currentTime)}</span>
-                  <span>{formatTime(duration)}</span>
+                  <span aria-label="Current time">{formatTime(currentTime)}</span>
+                  <span aria-label="Total duration">{formatTime(duration)}</span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center justify-center gap-4" role="group" aria-label="Playback controls">
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="min-h-[44px] min-w-[44px]"
+                  className="min-h-[44px] min-w-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   onClick={() => setCurrentTime(Math.max(0, currentTime - 30))}
                   data-testid="button-skip-back"
+                  aria-label="Skip back 30 seconds"
                 >
-                  <SkipBack className="w-6 h-6" />
+                  <SkipBack className="w-6 h-6" aria-hidden="true" />
                 </Button>
 
                 <Button
                   size="lg"
-                  className="w-16 h-16 rounded-full"
+                  className="w-16 h-16 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   onClick={() => setIsPlaying(!isPlaying)}
                   data-testid="button-play-pause"
+                  aria-label={isPlaying ? "Pause meditation" : "Play meditation"}
                 >
-                  {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 ml-1" />}
+                  {isPlaying ? <Pause className="w-8 h-8" aria-hidden="true" /> : <Play className="w-8 h-8 ml-1" aria-hidden="true" />}
                 </Button>
 
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="min-h-[44px] min-w-[44px]"
+                  className="min-h-[44px] min-w-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   onClick={() => setCurrentTime(Math.min(duration, currentTime + 30))}
                   data-testid="button-skip-forward"
+                  aria-label="Skip forward 30 seconds"
                 >
-                  <SkipForward className="w-6 h-6" />
+                  <SkipForward className="w-6 h-6" aria-hidden="true" />
                 </Button>
 
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="min-h-[44px] min-w-[44px]"
+                  className="min-h-[44px] min-w-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   onClick={() => setIsMuted(!isMuted)}
                   data-testid="button-mute"
+                  aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+                  aria-pressed={isMuted}
                 >
-                  {isMuted ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+                  {isMuted ? <VolumeX className="w-6 h-6" aria-hidden="true" /> : <Volume2 className="w-6 h-6" aria-hidden="true" />}
                 </Button>
               </div>
 
@@ -142,12 +147,17 @@ export default function MeditationPlayer() {
             </CardContent>
           </Card>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" role="list" aria-label="Available meditations">
             {meditations.map(meditation => (
               <Card
                 key={meditation.id}
-                className="cursor-pointer hover:border-primary transition-colors"
+                className="cursor-pointer hover:border-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 onClick={() => selectMeditation(meditation)}
+                role="listitem"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === 'Enter' && selectMeditation(meditation)}
+                aria-label={`${meditation.title}: ${meditation.description}. Duration: ${formatTime(meditation.duration)}`}
+                data-testid={`card-meditation-${meditation.id}`}
               >
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between mb-3">
@@ -155,7 +165,7 @@ export default function MeditationPlayer() {
                       {meditation.category}
                     </span>
                     <span className="text-sm text-muted-foreground flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
+                      <Clock className="w-4 h-4" aria-hidden="true" />
                       {formatTime(meditation.duration)}
                     </span>
                   </div>

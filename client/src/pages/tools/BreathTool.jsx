@@ -197,17 +197,20 @@ export default function BreathTool() {
                   <Clock className="w-5 h-5 text-sky-600" />
                   Choose Your Pace
                 </h2>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Select breathing exercise duration">
                   {PACE_OPTIONS.map(pace => (
                     <button
                       key={pace.id}
                       onClick={() => setSelectedPace(pace)}
-                      className={`p-4 rounded-lg border-2 transition-all text-center min-h-[56px] ${
+                      className={`p-4 rounded-lg border-2 transition-all text-center min-h-[56px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                         selectedPace.id === pace.id
                           ? "border-sky-500 bg-sky-50 dark:bg-sky-900/20"
                           : "border-gray-200 dark:border-gray-700 hover:border-sky-300"
                       }`}
                       data-testid={`button-pace-${pace.id}`}
+                      role="radio"
+                      aria-checked={selectedPace.id === pace.id}
+                      aria-label={`${pace.label} breathing session`}
                     >
                       <span className="font-medium">{pace.label}</span>
                     </button>
@@ -287,26 +290,28 @@ export default function BreathTool() {
             </div>
 
             {/* Controls */}
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-4" role="group" aria-label="Breathing exercise controls">
               {phase === "active" ? (
                 <Button
                   variant="outline"
                   size="lg"
                   onClick={pausePractice}
-                  className="h-12 px-6"
+                  className="h-12 px-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   data-testid="button-pause"
+                  aria-label="Pause breathing exercise"
                 >
-                  <Pause className="w-5 h-5 mr-2" />
+                  <Pause className="w-5 h-5 mr-2" aria-hidden="true" />
                   Pause
                 </Button>
               ) : (
                 <Button
                   size="lg"
                   onClick={resumePractice}
-                  className="h-12 px-6 bg-sky-600 hover:bg-sky-700"
+                  className="h-12 px-6 bg-sky-600 hover:bg-sky-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   data-testid="button-resume"
+                  aria-label="Resume breathing exercise"
                 >
-                  <Play className="w-5 h-5 mr-2" />
+                  <Play className="w-5 h-5 mr-2" aria-hidden="true" />
                   Resume
                 </Button>
               )}
@@ -314,10 +319,11 @@ export default function BreathTool() {
                 variant="ghost"
                 size="lg"
                 onClick={resetPractice}
-                className="h-12 px-6"
+                className="h-12 px-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 data-testid="button-reset"
+                aria-label="Stop and reset breathing exercise"
               >
-                <RotateCcw className="w-5 h-5 mr-2" />
+                <RotateCcw className="w-5 h-5 mr-2" aria-hidden="true" />
                 Stop
               </Button>
             </div>

@@ -100,44 +100,47 @@ export default function WeeklyReflection() {
           <p className="text-muted-foreground">Take a few moments to reflect on your week</p>
         </header>
 
-        <div className="flex gap-1 mb-8">
+        <div className="flex gap-1 mb-8" role="progressbar" aria-valuenow={currentStep + 1} aria-valuemin={1} aria-valuemax={questions.length} aria-label={`Question ${currentStep + 1} of ${questions.length}`}>
           {questions.map((_, index) => (
             <div
               key={index}
               className={`flex-1 h-2 rounded-full ${
                 index < currentStep ? "bg-primary" : index === currentStep ? "bg-primary/50" : "bg-muted"
               }`}
+              aria-hidden="true"
             />
           ))}
         </div>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">
+            <CardTitle className="text-lg" id="question-title">
               Question {currentStep + 1} of {questions.length}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <label className="block mb-4">
+            <label htmlFor={`reflection-${currentQuestion.id}`} className="block mb-4">
               <span className="text-xl font-medium">{currentQuestion.label}</span>
             </label>
             <textarea
+              id={`reflection-${currentQuestion.id}`}
               value={answers[currentQuestion.id] || ""}
               onChange={(e) => setAnswers({ ...answers, [currentQuestion.id]: e.target.value })}
               placeholder={currentQuestion.placeholder}
-              className="w-full p-4 rounded-xl border min-h-[150px] resize-none bg-background"
+              className="w-full p-4 rounded-xl border min-h-[150px] resize-none bg-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
               data-testid={`input-${currentQuestion.id}`}
+              aria-describedby="question-title"
             />
 
-            <div className="flex gap-3 mt-6">
+            <div className="flex gap-3 mt-6" role="group" aria-label="Navigation controls">
               {currentStep > 0 && (
-                <Button variant="outline" onClick={handleBack} className="min-h-[44px]">
+                <Button variant="outline" onClick={handleBack} className="min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" data-testid="button-back" aria-label="Go to previous question">
                   Back
                 </Button>
               )}
-              <Button onClick={handleNext} className="flex-1 min-h-[44px]" data-testid="button-next">
+              <Button onClick={handleNext} className="flex-1 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" data-testid="button-next" aria-label={currentStep === questions.length - 1 ? "Complete reflection" : "Go to next question"}>
                 {currentStep === questions.length - 1 ? "Complete" : "Next"}
-                <ChevronRight className="w-4 h-4 ml-2" />
+                <ChevronRight className="w-4 h-4 ml-2" aria-hidden="true" />
               </Button>
             </div>
           </CardContent>
