@@ -279,6 +279,7 @@ export default function Admin() {
                   : { background: 'transparent', color: 'var(--glp-sage)', border: '2px solid transparent' }
                 }
                 data-testid={`nav-${item.id}`}
+                id={`nav-${item.id}`}
                 role="tab"
                 aria-selected={isActive}
                 aria-controls={`panel-${item.id}`}
@@ -297,22 +298,34 @@ export default function Admin() {
         ) : (
           <div className="space-y-8">
             {activeView === "overview" && (
-              <OverviewSection stats={stats} realtimeData={realtimeData} />
+              <div role="tabpanel" id="panel-overview" aria-labelledby="nav-overview">
+                <OverviewSection stats={stats} realtimeData={realtimeData} />
+              </div>
             )}
             {activeView === "users" && (
-              <UsersSection stats={stats} />
+              <div role="tabpanel" id="panel-users" aria-labelledby="nav-users">
+                <UsersSection stats={stats} />
+              </div>
             )}
             {activeView === "engagement" && (
-              <EngagementSection stats={stats} />
+              <div role="tabpanel" id="panel-engagement" aria-labelledby="nav-engagement">
+                <EngagementSection stats={stats} />
+              </div>
             )}
             {activeView === "content" && (
-              <ContentSection stats={stats} />
+              <div role="tabpanel" id="panel-content" aria-labelledby="nav-content">
+                <ContentSection stats={stats} />
+              </div>
             )}
             {activeView === "system" && (
-              <SystemSection stats={stats} realtimeData={realtimeData} />
+              <div role="tabpanel" id="panel-system" aria-labelledby="nav-system">
+                <SystemSection stats={stats} realtimeData={realtimeData} />
+              </div>
             )}
             {activeView === "security" && (
-              <SecuritySection stats={stats} />
+              <div role="tabpanel" id="panel-security" aria-labelledby="nav-security">
+                <SecuritySection stats={stats} />
+              </div>
             )}
           </div>
         )}

@@ -398,9 +398,10 @@ export default function BehaviorChangePage() {
                     ? { background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }
                     : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', color: 'var(--glp-ink)' }}
                   data-testid={`button-module-${module.id}`}
+                  id={`tab-${module.id}`}
                   role="tab"
                   aria-selected={selectedModule.id === module.id}
-                  aria-controls="module-content-panel"
+                  aria-controls={`panel-${module.id}`}
                 >
                   <ModuleIcon className="h-4 w-4 inline mr-2" aria-hidden="true" />
                   {module.title}
@@ -409,7 +410,7 @@ export default function BehaviorChangePage() {
             })}
           </div>
 
-          <div className="card-bordered mb-8" style={selectedModule.bgColorStyle} role="tabpanel" id="module-content-panel" aria-label={`${selectedModule.title} content`}>
+          <div className="card-bordered mb-8" style={selectedModule.bgColorStyle} role="tabpanel" id={`panel-${selectedModule.id}`} aria-labelledby={`tab-${selectedModule.id}`}>
             <div className="flex items-center gap-3 mb-4">
               {(() => { const SelectedIcon = selectedModule.icon; return <SelectedIcon className="h-8 w-8" style={selectedModule.colorStyle} aria-hidden="true" />; })()}
               <h2 className="text-heading-lg" style={{ color: 'var(--glp-ink)' }}>{selectedModule.title}</h2>
