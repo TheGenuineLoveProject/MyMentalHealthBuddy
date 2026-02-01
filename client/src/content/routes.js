@@ -7361,6 +7361,21 @@ const rawRoutes = [
       secondaryCta: { label: 'Questions?', href: '/support' }
     }
   },
+  {
+    route: '/accessibility',
+    category: 'legal',
+    pageLabel: 'Accessibility',
+    title: 'Accessibility — The Genuine Love Project',
+    description: 'Our commitment to making mental wellness accessible to everyone.',
+    hero: {
+      eyebrow: 'Inclusive Design',
+      title: 'Accessibility',
+      titleHighlight: 'Statement.',
+      subtitle: 'Our commitment to making wellness tools available to everyone.',
+      primaryCta: { label: 'Learn More', href: '#accessibility' },
+      secondaryCta: { label: 'Report Issue', href: '/support' }
+    }
+  },
   
   // =========================================================================
   // ACCOUNT & SETTINGS (6 routes)
