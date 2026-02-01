@@ -37,10 +37,7 @@ export function Community() {
   });
 
   const submitMutation = useMutation({
-    mutationFn: async (content: string) => {
-      const res = await apiRequest("POST", "/api/community/reflect", { content });
-      return res.json();
-    },
+    mutationFn: (content: string) => apiRequest("POST", "/api/community/reflect", { content }),
     onSuccess: () => {
       setSubmitted(true);
       setMyReflection("");
@@ -66,8 +63,9 @@ export function Community() {
         </CardHeader>
         <CardContent className="space-y-6">
           {questionQuery.isLoading ? (
-            <div className="flex justify-center py-8">
-              <Loader2 className="w-6 h-6 animate-spin text-sage-400" />
+            <div className="p-6 bg-sage-50 dark:bg-sage-800/50 rounded-xl border border-sage-200 dark:border-sage-700 animate-pulse motion-reduce:animate-none" data-testid="question-skeleton">
+              <div className="h-5 bg-sage-200 dark:bg-sage-700 rounded w-3/4 mb-3" />
+              <div className="h-4 bg-sage-200 dark:bg-sage-700 rounded w-1/2" />
             </div>
           ) : question ? (
             <div className="p-6 bg-sage-50 dark:bg-sage-800/50 rounded-xl border border-sage-200 dark:border-sage-700">
@@ -105,7 +103,7 @@ export function Community() {
                   disabled={myReflection.length < 10 || submitMutation.isPending}
                   className="bg-sage-600 hover:bg-sage-700 text-white"
                 >
-                  {submitMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                  {submitMutation.isPending && <Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" />}
                   <Send className="w-4 h-4 mr-2" />
                   Share Anonymously
                 </Button>
@@ -134,8 +132,13 @@ export function Community() {
         </CardHeader>
         <CardContent>
           {reflectionsQuery.isLoading ? (
-            <div className="flex justify-center py-8">
-              <Loader2 className="w-6 h-6 animate-spin text-sage-400" />
+            <div className="space-y-4" data-testid="reflections-skeleton">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="p-4 bg-sage-50 dark:bg-sage-800/30 rounded-lg border border-sage-100 dark:border-sage-700/50 animate-pulse motion-reduce:animate-none">
+                  <div className="h-4 bg-sage-200 dark:bg-sage-700 rounded w-full mb-2" />
+                  <div className="h-4 bg-sage-200 dark:bg-sage-700 rounded w-3/4" />
+                </div>
+              ))}
             </div>
           ) : reflections.length === 0 ? (
             <p className="text-center text-sage-500 dark:text-sage-400 py-8">
