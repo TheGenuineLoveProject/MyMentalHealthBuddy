@@ -1,41 +1,16 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
-  BookOpen, ArrowLeft, Plus, Search, Calendar, Tag, 
-  Sparkles, Heart, Clock, ChevronRight, PenLine
+  BookOpen, ArrowLeft, Plus, Search, Calendar, 
+  Sparkles, Heart, Clock, ChevronRight, PenLine, X, Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-
-const SAMPLE_ENTRIES = [
-  {
-    id: 1,
-    title: "Reflecting on today's growth",
-    preview: "Today I noticed a shift in how I respond to stress. Instead of reacting immediately, I took a breath and...",
-    date: "Today",
-    mood: "Hopeful",
-    tags: ["growth", "mindfulness"]
-  },
-  {
-    id: 2,
-    title: "Gratitude for small moments",
-    preview: "The morning light through my window, a warm cup of tea, the quiet before the day begins...",
-    date: "Yesterday",
-    mood: "Grateful",
-    tags: ["gratitude", "peace"]
-  },
-  {
-    id: 3,
-    title: "Processing difficult emotions",
-    preview: "It's okay to feel overwhelmed sometimes. I'm learning to sit with discomfort without judgment...",
-    date: "3 days ago",
-    mood: "Reflective",
-    tags: ["emotions", "self-compassion"]
-  }
-];
+import { apiRequest } from "@/lib/queryClient";
 
 const PROMPTS = [
   "What are you grateful for today?",
@@ -43,6 +18,136 @@ const PROMPTS = [
   "Describe a moment of peace you experienced",
   "What would you tell your younger self?"
 ];
+
+function formatRelativeDate(dateString) {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffMs = now - date;
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) return "Today";
+  if (diffDays === 1) return "Yesterday";
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  return date.toLocaleDateString();
+}
+
+function JournalSkeleton() {
+  return (
+    <div className="space-y-4" data-testid="journal-skeleton">
+      {[1, 2, 3].map((i) => (
+        <div key={i} className="card-bordered animate-pulse">
+          <div className="h-5 w-2/3 bg-gray-200 rounded mb-3" />
+          <div className="h-4 w-full bg-gray-100 rounded mb-2" />
+          <div className="h-4 w-3/4 bg-gray-100 rounded mb-4" />
+          <div className="flex gap-2">
+            <div className="h-6 w-16 bg-gray-100 rounded-full" />
+            <div className="h-6 w-20 bg-gray-100 rounded-full" />
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function EmptyJournalState({ onNewEntry }) {
+  return (
+    <div className="card-bordered text-center py-12" data-testid="journal-empty">
+      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-[var(--sage-100)] flex items-center justify-center">
+        <BookOpen className="w-8 h-8 text-[var(--sage-500)]" />
+      </div>
+      <h3 className="text-heading-sm text-teal mb-2">Your journal awaits</h3>
+      <p className="text-body-sm text-[var(--sage-600)] mb-6 max-w-sm mx-auto">
+        Start capturing your thoughts, reflections, and moments of growth. 
+        Every entry is a step on your wellness journey.
+      </p>
+      <Button className="btn-premium" onClick={onNewEntry} data-testid="button-first-entry">
+        <Plus className="h-4 w-4 mr-2" />
+        Write Your First Entry
+      </Button>
+    </div>
+  );
+}
+
+function NewEntryModal({ isOpen, onClose, selectedPrompt }) {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState(selectedPrompt || "");
+  const queryClient = useQueryClient();
+
+  const createMutation = useMutation({
+    mutationFn: (data) => apiRequest("/api/journal", { method: "POST", body: JSON.stringify(data) }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      onClose();
+      setTitle("");
+      setContent("");
+    },
+  });
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (title.trim() && content.trim()) {
+      createMutation.mutate({ title: title.trim(), content: content.trim() });
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" data-testid="modal-new-entry">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-hidden">
+        <div className="p-6 border-b border-[var(--sage-200)] flex items-center justify-between">
+          <h2 className="text-heading-md text-teal">New Journal Entry</h2>
+          <button onClick={onClose} className="p-2 hover:bg-[var(--sage-100)] rounded-lg transition" data-testid="button-close-modal">
+            <X className="h-5 w-5 text-[var(--sage-500)]" />
+          </button>
+        </div>
+        <form onSubmit={handleSubmit} className="p-6 space-y-4">
+          <div>
+            <label className="text-body-sm font-medium text-[var(--sage-700)] mb-2 block">Title</label>
+            <Input
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Give your entry a title..."
+              className="input-premium"
+              data-testid="input-entry-title"
+              required
+            />
+          </div>
+          <div>
+            <label className="text-body-sm font-medium text-[var(--sage-700)] mb-2 block">Your thoughts</label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Write freely... this is your safe space."
+              className="w-full min-h-[200px] p-4 rounded-xl border border-[var(--sage-200)] focus:border-[var(--teal-400)] focus:ring-2 focus:ring-[var(--teal-100)] outline-none resize-y text-body"
+              data-testid="input-entry-content"
+              required
+            />
+          </div>
+          <div className="flex justify-end gap-3 pt-4">
+            <Button type="button" variant="outline" onClick={onClose} className="btn-secondary-premium" data-testid="button-cancel">
+              Cancel
+            </Button>
+            <Button type="submit" className="btn-premium" disabled={createMutation.isPending} data-testid="button-save-entry">
+              {createMutation.isPending ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <BookOpen className="h-4 w-4 mr-2" />
+                  Save Entry
+                </>
+              )}
+            </Button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
 
 export default function Journal() {
   useSEO({
@@ -53,6 +158,50 @@ export default function Journal() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [activePrompt, setActivePrompt] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["/api/journal"],
+    staleTime: 30000,
+  });
+
+  const entries = data?.data || [];
+
+  const filteredEntries = useMemo(() => {
+    if (!searchQuery.trim()) return entries;
+    const query = searchQuery.toLowerCase();
+    return entries.filter(
+      (e) => e.title?.toLowerCase().includes(query) || e.content?.toLowerCase().includes(query)
+    );
+  }, [entries, searchQuery]);
+
+  const stats = useMemo(() => {
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+    const thisMonth = entries.filter((e) => new Date(e.createdAt) >= monthStart);
+    
+    let streak = 0;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    for (let i = 0; i < 365; i++) {
+      const checkDate = new Date(today);
+      checkDate.setDate(checkDate.getDate() - i);
+      const hasEntry = entries.some((e) => {
+        const entryDate = new Date(e.createdAt);
+        entryDate.setHours(0, 0, 0, 0);
+        return entryDate.getTime() === checkDate.getTime();
+      });
+      if (hasEntry) streak++;
+      else if (i > 0) break;
+    }
+    
+    return { total: entries.length, thisMonth: thisMonth.length, streak };
+  }, [entries]);
+
+  const openNewEntry = (prompt = "") => {
+    setIsModalOpen(true);
+  };
 
   return (
   <WellnessPageShell
@@ -91,7 +240,7 @@ export default function Journal() {
                   <p className="text-lead">A safe space for your thoughts and reflections</p>
                 </div>
               </div>
-              <Button className="btn-premium" data-testid="button-new-entry">
+              <Button className="btn-premium" onClick={() => setIsModalOpen(true)} data-testid="button-new-entry">
                 <Plus className="h-4 w-4 mr-2" />
                 New Entry
               </Button>
@@ -113,39 +262,40 @@ export default function Journal() {
                 </div>
               </div>
 
-              <div className="space-y-4">
-                {SAMPLE_ENTRIES.map(entry => (
-                  <article key={entry.id} className="card-bordered hover:shadow-md transition-shadow cursor-pointer group" data-testid={`entry-${entry.id}`}>
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-heading-sm text-teal group-hover:text-[var(--teal-600)] transition">{entry.title}</h3>
-                      <div className="flex items-center gap-2 text-caption">
-                        <Clock className="h-4 w-4" />
-                        {entry.date}
+              {isLoading ? (
+                <JournalSkeleton />
+              ) : filteredEntries.length === 0 && entries.length === 0 ? (
+                <EmptyJournalState onNewEntry={() => setIsModalOpen(true)} />
+              ) : filteredEntries.length === 0 ? (
+                <div className="card-bordered text-center py-8">
+                  <p className="text-body-sm text-[var(--sage-600)]">No entries match your search.</p>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {filteredEntries.map((entry) => (
+                    <article 
+                      key={entry.id} 
+                      className="card-bordered hover:shadow-md transition-all duration-200 cursor-pointer group hover:-translate-y-0.5" 
+                      data-testid={`entry-${entry.id}`}
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-heading-sm text-teal group-hover:text-[var(--teal-600)] transition">{entry.title}</h3>
+                        <div className="flex items-center gap-2 text-caption text-[var(--sage-500)]">
+                          <Clock className="h-4 w-4" />
+                          {formatRelativeDate(entry.createdAt)}
+                        </div>
                       </div>
-                    </div>
-                    <p className="text-body-sm text-[var(--sage-600)] mb-4 line-clamp-2">{entry.preview}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="px-3 py-1 rounded-full bg-[var(--blush-100)] text-[var(--blush-700)] text-caption font-medium">
-                          {entry.mood}
+                      <p className="text-body-sm text-[var(--sage-600)] mb-4 line-clamp-2">{entry.content}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="px-3 py-1 rounded-full bg-[var(--sage-100)] text-[var(--sage-700)] text-caption">
+                          Journal Entry
                         </span>
-                        {entry.tags.map(tag => (
-                          <span key={tag} className="px-3 py-1 rounded-full bg-[var(--sage-100)] text-[var(--sage-700)] text-caption">
-                            #{tag}
-                          </span>
-                        ))}
+                        <ChevronRight className="h-5 w-5 text-[var(--sage-400)] group-hover:text-[var(--teal-500)] transition" />
                       </div>
-                      <ChevronRight className="h-5 w-5 text-[var(--sage-400)] group-hover:text-[var(--teal-500)] transition" />
-                    </div>
-                  </article>
-                ))}
-              </div>
-
-              <div className="text-center py-4">
-                <Button variant="outline" className="btn-secondary-premium" data-testid="button-load-more">
-                  Load More Entries
-                </Button>
-              </div>
+                    </article>
+                  ))}
+                </div>
+              )}
             </div>
 
             <aside className="space-y-6">
@@ -181,15 +331,15 @@ export default function Journal() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--sage-50)]">
                     <span className="text-body-sm">Total Entries</span>
-                    <span className="text-heading-sm text-teal">48</span>
+                    <span className="text-heading-sm text-teal" data-testid="stat-total">{stats.total}</span>
                   </div>
                   <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--sage-50)]">
                     <span className="text-body-sm">This Month</span>
-                    <span className="text-heading-sm text-teal">12</span>
+                    <span className="text-heading-sm text-teal" data-testid="stat-month">{stats.thisMonth}</span>
                   </div>
                   <div className="flex items-center justify-between p-3 rounded-xl bg-[var(--sage-50)]">
                     <span className="text-body-sm">Current Streak</span>
-                    <span className="text-heading-sm text-teal">7 days</span>
+                    <span className="text-heading-sm text-teal" data-testid="stat-streak">{stats.streak} {stats.streak === 1 ? 'day' : 'days'}</span>
                   </div>
                 </div>
               </div>
@@ -208,6 +358,11 @@ export default function Journal() {
         </div>
       </div>
     </div>
+      <NewEntryModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        selectedPrompt={PROMPTS[activePrompt]}
+      />
   </WellnessPageShell>
   );
 }
