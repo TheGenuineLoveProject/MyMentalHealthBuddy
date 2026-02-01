@@ -155,7 +155,7 @@ export default function BlogIndex() {
 
         {isLoading && (
           <div className="text-center py-12">
-            <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+            <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin motion-reduce:animate-none mx-auto mb-4" />
             <p className="text-[var(--glp-ink)]/70">Loading articles...</p>
           </div>
         )}

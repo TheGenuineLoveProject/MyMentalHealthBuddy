@@ -292,7 +292,7 @@ export default function Settings() {
                 >
                   {isSaving ? (
                     <span className="flex items-center justify-center gap-2">
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin motion-reduce:animate-none" />
                       Saving...
                     </span>
                   ) : (
@@ -323,7 +323,7 @@ export default function Settings() {
               >
                 {isExporting ? (
                   <span className="flex items-center justify-center gap-2">
-                    <div className="w-4 h-4 border-2 border-[var(--teal-300)] border-t-[var(--teal-600)] rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-[var(--teal-300)] border-t-[var(--teal-600)] rounded-full animate-spin motion-reduce:animate-none" />
                     Preparing export...
                   </span>
                 ) : (

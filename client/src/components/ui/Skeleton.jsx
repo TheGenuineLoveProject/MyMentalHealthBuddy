@@ -4,7 +4,7 @@
  */
 
 export function Skeleton({ className = '', variant = 'default' }) {
-  const baseClasses = 'animate-pulse bg-gradient-to-r from-sage/20 via-sage/30 to-sage/20 rounded';
+  const baseClasses = 'animate-pulse motion-reduce:animate-none bg-gradient-to-r from-sage/20 via-sage/30 to-sage/20 rounded';
   
   const variants = {
     default: 'h-4 w-full',

@@ -258,7 +258,7 @@ function SocialMediaSection() {
               className="btn-secondary-premium flex items-center gap-2"
               data-testid="button-save-draft"
             >
-              {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileText className="w-4 h-4" />}
+              {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" /> : <FileText className="w-4 h-4" />}
               Save Draft
             </button>
             <button
@@ -267,7 +267,7 @@ function SocialMediaSection() {
               className="btn-premium flex items-center gap-2"
               data-testid="button-schedule-post"
             >
-              {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Calendar className="w-4 h-4" />}
+              {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" /> : <Calendar className="w-4 h-4" />}
               {newPost.scheduledAt ? "Schedule Post" : "Save & Schedule Later"}
             </button>
           </div>
@@ -450,7 +450,7 @@ function ProductsSection() {
               className="btn-premium flex items-center gap-2"
               data-testid="button-create-product"
             >
-              {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
+              {createMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" /> : <Plus className="w-4 h-4" />}
               Create Product
             </button>
           </div>

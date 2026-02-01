@@ -47,7 +47,7 @@ function StatusBadge({ status }) {
 
 function LoadingSkeleton() {
   return (
-    <div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-8 w-16" />
+    <div className="animate-pulse motion-reduce:animate-none bg-gray-200 dark:bg-gray-700 rounded h-8 w-16" />
   );
 }
 
@@ -67,7 +67,7 @@ export default function BillingViewerPage() {
           {[1, 2, 3, 4].map(i => (
             <Card key={i}>
               <CardHeader className="pb-2">
-                <div className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-4 w-24" />
+                <div className="animate-pulse motion-reduce:animate-none bg-gray-200 dark:bg-gray-700 rounded h-4 w-24" />
               </CardHeader>
               <CardContent>
                 <LoadingSkeleton />
@@ -173,7 +173,7 @@ export default function BillingViewerPage() {
           {subsLoading ? (
             <div className="space-y-2">
               {[1, 2, 3].map(i => (
-                <div key={i} className="animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-12 w-full" />
+                <div key={i} className="animate-pulse motion-reduce:animate-none bg-gray-200 dark:bg-gray-700 rounded h-12 w-full" />
               ))}
             </div>
           ) : subsList.length === 0 ? (

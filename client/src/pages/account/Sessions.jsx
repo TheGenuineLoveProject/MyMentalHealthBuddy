@@ -74,10 +74,10 @@ export default function SessionsPage() {
           <CardContent className="space-y-4">
             {[1, 2, 3].map(i => (
               <div key={i} className="flex items-center gap-4 p-4 border rounded-lg">
-                <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-10 w-10 rounded-full" />
+                <div className="animate-pulse motion-reduce:animate-none bg-gray-200 dark:bg-gray-700 h-10 w-10 rounded-full" />
                 <div className="flex-1 space-y-2">
-                  <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-4 w-32 rounded" />
-                  <div className="animate-pulse bg-gray-200 dark:bg-gray-700 h-3 w-48 rounded" />
+                  <div className="animate-pulse motion-reduce:animate-none bg-gray-200 dark:bg-gray-700 h-4 w-32 rounded" />
+                  <div className="animate-pulse motion-reduce:animate-none bg-gray-200 dark:bg-gray-700 h-3 w-48 rounded" />
                 </div>
               </div>
             ))}

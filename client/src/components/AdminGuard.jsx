@@ -27,7 +27,7 @@ export default function AdminGuard({ children }) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto" />
+          <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto" />
           <p className="mt-4 text-sm opacity-70">Checking access...</p>
         </div>
       </div>

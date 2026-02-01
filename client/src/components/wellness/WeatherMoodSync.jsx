@@ -262,7 +262,7 @@ export default function WeatherMoodSync({ className = "" }) {
 
           {loading && (
             <div className="py-12 text-center">
-              <Loader2 className="w-8 h-8 animate-spin text-gray-400 mx-auto mb-3" aria-hidden="true" />
+              <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-gray-400 mx-auto mb-3" aria-hidden="true" />
               <p className="text-gray-600">Finding your weather...</p>
             </div>
           )}

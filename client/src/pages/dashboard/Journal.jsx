@@ -139,7 +139,7 @@ function NewEntryModal({ isOpen, onClose, selectedPrompt }) {
             <Button type="submit" className="btn-premium" disabled={createMutation.isPending} data-testid="button-save-entry">
               {createMutation.isPending ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin motion-reduce:animate-none" />
                   Saving...
                 </>
               ) : (

@@ -24,7 +24,7 @@ const MindfulBreathing = lazy(() => import("../components/MindfulBreathing.jsx")
 const PremiumLoadingFallback = () => (
   <div className="flex items-center justify-center min-h-[300px] rounded-2xl backdrop-blur-sm" style={{ background: 'rgba(255,255,255,0.8)' }}>
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--glp-sage)' }} />
+      <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none" style={{ color: 'var(--glp-sage)' }} />
       <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Loading premium feature...</p>
     </div>
   </div>
@@ -121,7 +121,7 @@ function StripePricingTable() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--glp-sage)' }} />
+          <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none" style={{ color: 'var(--glp-sage)' }} />
           <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Loading pricing options...</p>
         </div>
       </div>

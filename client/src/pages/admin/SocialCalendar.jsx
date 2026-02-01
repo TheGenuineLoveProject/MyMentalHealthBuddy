@@ -245,7 +245,7 @@ export default function SocialCalendar() {
           
           {isLoading ? (
             <div className="flex items-center justify-center py-8">
-              <div className="animate-spin w-6 h-6 border-2 border-[var(--glp-sage)] border-t-transparent rounded-full" />
+              <div className="animate-spin motion-reduce:animate-none w-6 h-6 border-2 border-[var(--glp-sage)] border-t-transparent rounded-full" />
             </div>
           ) : entries.length === 0 ? (
             <p className="text-slate-500 text-center py-8">
@@ -407,7 +407,7 @@ export default function SocialCalendar() {
                   data-testid="button-confirm-schedule"
                 >
                   {scheduleMutation.isPending ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" />
                   ) : (
                     <Send className="w-4 h-4" />
                   )}

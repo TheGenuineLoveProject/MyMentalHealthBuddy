@@ -13,7 +13,7 @@ export function TodaysInsight() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-6">
-        <Loader2 className="w-5 h-5 animate-spin text-[var(--glp-ink)]/30" />
+        <Loader2 className="w-5 h-5 animate-spin motion-reduce:animate-none text-[var(--glp-ink)]/30" />
       </div>
     );
   }

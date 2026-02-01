@@ -169,7 +169,7 @@ export default function ChatConversation() {
                 </div>
                 <div className="card-bordered p-4">
                   <div className="flex items-center gap-2">
-                    <Loader2 className="h-4 w-4 animate-spin text-[var(--sage-500)]" />
+                    <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none text-[var(--sage-500)]" />
                     <span className="text-body-sm text-[var(--sage-500)]">Thinking with care...</span>
                   </div>
                 </div>

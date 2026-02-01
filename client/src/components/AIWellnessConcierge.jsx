@@ -216,7 +216,7 @@ export default function AIWellnessConcierge() {
           className="px-4 py-2 bg-[var(--surface)] hover:bg-[var(--surface-hover)] text-[var(--text)] rounded-lg font-medium transition-colors flex items-center gap-2 disabled:opacity-50"
           data-testid="button-refresh-recommendations"
         >
-          <RefreshCw className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`} />
+          <RefreshCw className={`w-4 h-4 ${isRefreshing ? "animate-spin motion-reduce:animate-none" : ""}`} />
           Refresh
         </button>
       </div>

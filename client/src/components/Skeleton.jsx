@@ -1,7 +1,7 @@
 export function Skeleton({ className = "", ...props }) {
   return (
     <div 
-      className={`animate-pulse bg-[var(--surface-hover)] rounded-xl ${className}`}
+      className={`animate-pulse motion-reduce:animate-none bg-[var(--surface-hover)] rounded-xl ${className}`}
       {...props}
     />
   );

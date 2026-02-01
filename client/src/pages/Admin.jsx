@@ -124,7 +124,7 @@ export default function Admin() {
         <SEO title="Verifying Access" description="Checking admin credentials" />
         <div className="glass-premium max-w-md text-center p-10 rounded-3xl animate-fade-in-up">
           <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}>
-            <div className="w-8 h-8 border-3 border-white/30 border-t-white rounded-full animate-spin" />
+            <div className="w-8 h-8 border-3 border-white/30 border-t-white rounded-full animate-spin motion-reduce:animate-none" />
           </div>
           <h2 className="text-heading-lg text-teal mb-3">Verifying Access</h2>
           <p className="text-body-base text-sage-500">Checking your admin credentials...</p>
@@ -232,7 +232,7 @@ export default function Admin() {
                 style={{ background: 'white', border: '2px solid var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}
                 data-testid="button-refresh"
               >
-                <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin motion-reduce:animate-none' : ''}`} />
                 Refresh
               </button>
               <Link

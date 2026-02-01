@@ -130,7 +130,7 @@ export default function FeedbackWidget() {
                 data-testid="button-submit-feedback"
               >
                 {isSubmitting ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" />
                 ) : (
                   <>
                     <Send className="w-4 h-4 mr-2" />

@@ -90,7 +90,7 @@ export default function SocialLibrary() {
               data-testid="button-seed-templates"
             >
               {seedMutation.isPending ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+                <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" />
               ) : (
                 <Download className="w-4 h-4" />
               )}
@@ -201,7 +201,7 @@ export default function SocialLibrary() {
         
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
+            <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
           </div>
         ) : (
           <div className="space-y-8">

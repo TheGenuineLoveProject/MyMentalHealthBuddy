@@ -214,7 +214,7 @@ export default function SocialGenerator() {
             data-testid="button-ai-generate"
           >
             {generateMutation.isPending ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" />
             ) : (
               <Wand2 className="w-4 h-4" />
             )}
@@ -464,7 +464,7 @@ export default function SocialGenerator() {
                   data-testid="button-save-draft"
                 >
                   {createMutation.isPending ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" />
                   ) : (
                     <Save className="w-4 h-4" />
                   )}
@@ -491,7 +491,7 @@ export default function SocialGenerator() {
                       data-testid="button-ai-rewrite"
                     >
                       {rewriteMutation.isPending ? (
-                        <Loader2 className="w-3 h-3 animate-spin" />
+                        <Loader2 className="w-3 h-3 animate-spin motion-reduce:animate-none" />
                       ) : (
                         <RefreshCw className="w-3 h-3" />
                       )}
@@ -562,7 +562,7 @@ export default function SocialGenerator() {
                   data-testid="button-generate-image"
                 >
                   {imageGenerateMutation.isPending ? (
-                    <Loader2 className="w-3 h-3 animate-spin" />
+                    <Loader2 className="w-3 h-3 animate-spin motion-reduce:animate-none" />
                   ) : (
                     <Sparkles className="w-3 h-3" />
                   )}
@@ -627,7 +627,7 @@ export default function SocialGenerator() {
                 
                 {enhanceMutation.isPending && (
                   <div className="flex items-center justify-center py-4 text-slate-500 dark:text-slate-400">
-                    <Loader2 className="w-5 h-5 animate-spin mr-2" />
+                    <Loader2 className="w-5 h-5 animate-spin motion-reduce:animate-none mr-2" />
                     Analyzing content...
                   </div>
                 )}

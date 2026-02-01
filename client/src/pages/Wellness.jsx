@@ -71,7 +71,7 @@ const AchievementSystem = lazy(() => import("../components/AchievementSystem.jsx
 const ToolLoadingFallback = () => (
   <div className="flex items-center justify-center min-h-[200px] rounded-2xl backdrop-blur-sm" style={{ background: 'var(--glp-paper)', opacity: 0.95 }}>
     <div className="flex flex-col items-center gap-3">
-      <Loader2 className="w-8 h-8 animate-spin" style={{ color: 'var(--glp-sage)' }} />
+      <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none" style={{ color: 'var(--glp-sage)' }} />
       <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>Loading wellness tool...</p>
     </div>
   </div>

@@ -268,7 +268,7 @@ export default function AccessibilityAudit() {
           className="flex items-center gap-2 px-4 py-2 bg-[var(--teal-600)] text-white rounded-lg hover:bg-[var(--teal-700)] disabled:opacity-50"
           data-testid="button-run-audit"
         >
-          <RefreshCw className={`w-4 h-4 ${running ? 'animate-spin' : ''}`} />
+          <RefreshCw className={`w-4 h-4 ${running ? 'animate-spin motion-reduce:animate-none' : ''}`} />
           {running ? 'Running...' : 'Re-run Audit'}
         </button>
       </div>

@@ -174,7 +174,7 @@ export default function BlogPost() {
       <div className="min-h-screen bg-[var(--glp-paper)]">
         <TglpNavbar />
         <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-          <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-12 h-12 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin motion-reduce:animate-none mx-auto mb-4" />
           <p className="text-[var(--glp-ink)]/70">Loading article...</p>
         </div>
       </div>

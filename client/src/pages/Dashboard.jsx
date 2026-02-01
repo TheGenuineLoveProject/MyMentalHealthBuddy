@@ -62,7 +62,7 @@ export default function Dashboard() {
 
       <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))' }} role="status" aria-label="Loading dashboard">
         <div className="max-w-5xl mx-auto px-6 py-10">
-          <div className="space-y-8 animate-pulse">
+          <div className="space-y-8 animate-pulse motion-reduce:animate-none">
             <div className="h-12 w-64 rounded-xl" style={{ background: 'var(--glp-sage-10)' }} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[1, 2].map((i) => (

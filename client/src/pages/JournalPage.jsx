@@ -340,7 +340,7 @@ export default function JournalPage() {
                 >
                   {createMutation.isPending ? (
                     <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" aria-hidden="true" />
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin motion-reduce:animate-none" aria-hidden="true" />
                       Saving...
                     </>
                   ) : (

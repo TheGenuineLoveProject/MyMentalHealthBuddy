@@ -51,7 +51,7 @@ export default function SecurityDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen hero-gradient flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
+        <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
       </div>
     );
   }
@@ -81,7 +81,7 @@ export default function SecurityDashboard() {
             disabled={refreshing}
             data-testid="button-refresh"
           >
-            <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? 'animate-spin motion-reduce:animate-none' : ''}`} />
             Refresh
           </Button>
         </div>

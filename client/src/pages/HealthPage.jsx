@@ -62,7 +62,7 @@ export default function HealthPage() {
             {isLoading ? (
               <div className="flex flex-col items-center justify-center py-12">
                 <div className="icon-container icon-lg icon-soft-teal mb-4">
-                  <Loader2 className="w-6 h-6 animate-spin" />
+                  <Loader2 className="w-6 h-6 animate-spin motion-reduce:animate-none" />
                 </div>
                 <p className="text-body-sm">Checking system health...</p>
               </div>

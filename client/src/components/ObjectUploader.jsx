@@ -176,7 +176,7 @@ export default function ObjectUploader({
 
         {uploading ? (
           <div className="space-y-3">
-            <div className="w-12 h-12 mx-auto border-4 border-[var(--sage-200)] border-t-[var(--sage-600)] rounded-full animate-spin" />
+            <div className="w-12 h-12 mx-auto border-4 border-[var(--sage-200)] border-t-[var(--sage-600)] rounded-full animate-spin motion-reduce:animate-none" />
             <p className="text-sm text-[var(--neutral-600)]">Uploading... {progress}%</p>
             <div className="w-full h-2 bg-[var(--neutral-200)] rounded-full overflow-hidden">
               <div 

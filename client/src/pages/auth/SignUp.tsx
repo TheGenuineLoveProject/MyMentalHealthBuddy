@@ -160,7 +160,7 @@ export default function SignUp() {
               >
                 {signUpMutation.isPending ? (
                   <>
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" />
                     Creating account...
                   </>
                 ) : (

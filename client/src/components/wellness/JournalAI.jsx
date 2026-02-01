@@ -131,7 +131,7 @@ export default function JournalAI({ emotionEntry, className = "" }) {
             >
               {chatMutation.isPending ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" />
+                  <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" aria-hidden="true" />
                   Reflecting...
                 </>
               ) : (

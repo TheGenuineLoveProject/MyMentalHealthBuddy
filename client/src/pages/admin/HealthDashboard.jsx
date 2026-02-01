@@ -86,8 +86,8 @@ export default function HealthDashboard() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-pulse flex items-center gap-3">
-          <RefreshCw className="w-6 h-6 animate-spin text-sage-600" />
+        <div className="animate-pulse motion-reduce:animate-none flex items-center gap-3">
+          <RefreshCw className="w-6 h-6 animate-spin motion-reduce:animate-none text-sage-600" />
           <span className="text-gray-600 dark:text-gray-400">Loading health data...</span>
         </div>
       </div>

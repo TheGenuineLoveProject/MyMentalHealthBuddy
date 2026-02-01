@@ -166,7 +166,7 @@ function PlatformConnections() {
   if (isLoading) {
     return (
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
-        <div className="animate-pulse flex items-center gap-3">
+        <div className="animate-pulse motion-reduce:animate-none flex items-center gap-3">
           <div className="w-5 h-5 bg-slate-200 dark:bg-slate-700 rounded" />
           <div className="h-4 bg-slate-200 dark:bg-slate-700 rounded w-40" />
         </div>
@@ -285,7 +285,7 @@ function ContentAnalytics() {
   if (isLoading) {
     return (
       <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
-        <div className="animate-pulse">
+        <div className="animate-pulse motion-reduce:animate-none">
           <div className="h-5 bg-slate-200 dark:bg-slate-700 rounded w-48 mb-4" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map(i => (
@@ -629,7 +629,7 @@ export default function SocialDashboard() {
         
         {isLoading ? (
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
+            <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
           </div>
         ) : filteredDrafts.length === 0 ? (
           <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
@@ -755,7 +755,7 @@ export default function SocialDashboard() {
                   data-testid="button-confirm-publish"
                 >
                   {batchPublishMutation.isPending ? (
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin motion-reduce:animate-none" />
                   ) : (
                     <Send className="w-4 h-4" />
                   )}
