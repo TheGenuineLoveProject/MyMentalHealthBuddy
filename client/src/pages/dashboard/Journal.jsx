@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
@@ -36,7 +36,7 @@ function JournalSkeleton() {
   return (
     <div className="space-y-4" data-testid="journal-skeleton">
       {[1, 2, 3].map((i) => (
-        <div key={i} className="card-bordered animate-pulse">
+        <div key={i} className="card-bordered animate-pulse motion-reduce:animate-none">
           <div className="h-5 w-2/3 bg-gray-200 rounded mb-3" />
           <div className="h-4 w-full bg-gray-100 rounded mb-2" />
           <div className="h-4 w-3/4 bg-gray-100 rounded mb-4" />
@@ -71,11 +71,18 @@ function EmptyJournalState({ onNewEntry }) {
 
 function NewEntryModal({ isOpen, onClose, selectedPrompt }) {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState(selectedPrompt || "");
+  const [content, setContent] = useState("");
   const queryClient = useQueryClient();
 
+  // Sync content when modal opens with a new prompt
+  React.useEffect(() => {
+    if (isOpen && selectedPrompt) {
+      setContent(selectedPrompt);
+    }
+  }, [isOpen, selectedPrompt]);
+
   const createMutation = useMutation({
-    mutationFn: (data) => apiRequest("/api/journal", { method: "POST", body: JSON.stringify(data) }),
+    mutationFn: (data) => apiRequest("POST", "/api/journal", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
       onClose();
@@ -275,7 +282,7 @@ export default function Journal() {
                   {filteredEntries.map((entry) => (
                     <article 
                       key={entry.id} 
-                      className="card-bordered hover:shadow-md transition-all duration-200 cursor-pointer group hover:-translate-y-0.5" 
+                      className="card-bordered hover:shadow-md transition-all duration-200 cursor-pointer group hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0" 
                       data-testid={`entry-${entry.id}`}
                     >
                       <div className="flex items-start justify-between mb-3">

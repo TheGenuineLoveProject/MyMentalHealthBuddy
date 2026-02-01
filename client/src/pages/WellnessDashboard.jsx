@@ -217,10 +217,10 @@ function QuickStats({ entries = [] }) {
       {statsCards.map((stat, idx) => (
         <div
           key={idx}
-          className={`rounded-xl p-4 border shadow-sm transition-all hover:shadow-md ${
+          className={`rounded-xl p-4 border shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 motion-reduce:transition-none motion-reduce:hover:translate-y-0 cursor-default ${
             stat.isStreak 
               ? 'bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-200/50 dark:border-amber-700/30' 
-              : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'
+              : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700 hover:border-gray-200 dark:hover:border-gray-600'
           }`}
           data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, "-")}`}
         >
@@ -267,12 +267,12 @@ function QuickActions() {
       {actions.map((action) => (
         <Link key={action.label} href={action.href}>
           <div
-            className="p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:border-sage/30 transition-all duration-300 cursor-pointer group"
+            className="p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:border-sage/30 hover:-translate-y-1 transition-all duration-200 motion-reduce:transition-none motion-reduce:hover:translate-y-0 cursor-pointer group"
             data-testid={`action-${action.label.toLowerCase().replace(/\s+/g, "-")}`}
           >
             <div className="flex flex-col items-center text-center gap-2">
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-md"
+                className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-md motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 style={{ background: `${action.color}20` }}
               >
                 <action.icon className="w-5 h-5" style={{ color: action.color }} aria-hidden="true" />
