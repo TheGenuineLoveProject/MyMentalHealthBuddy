@@ -128,28 +128,28 @@ export async function setupAuth(app) {
         return res.redirect("/api/login");
       }
       
-      console.log("[ReplitAuth] User object received:", JSON.stringify(user, null, 2));
+      console.log("[ReplitAuth] User claims:", user.claims?.sub, user.claims?.email);
       
-      req.logIn(user, (loginErr) => {
+      req.logIn(user, { session: true }, (loginErr) => {
         if (loginErr) {
           console.error("[ReplitAuth] Login error:", loginErr);
           return res.redirect("/api/login");
         }
         
-        console.log("[ReplitAuth] After logIn, req.user:", JSON.stringify(req.user, null, 2));
-        console.log("[ReplitAuth] Session passport data:", JSON.stringify(req.session?.passport, null, 2));
+        // Store user data directly in session as backup
+        req.session.userId = user.claims?.sub;
+        req.session.userEmail = user.claims?.email;
+        req.session.userData = user;
         
-        // Manually ensure passport data is in session
-        if (!req.session.passport || !req.session.passport.user) {
-          req.session.passport = { user: user };
-        }
+        console.log("[ReplitAuth] Session ID:", req.session?.id);
+        console.log("[ReplitAuth] req.isAuthenticated():", req.isAuthenticated());
         
-        // Force session save before redirect
+        // Force session regeneration and save
         req.session.save((saveErr) => {
           if (saveErr) {
             console.error("[ReplitAuth] Session save error:", saveErr);
+            return res.redirect("/api/login");
           }
-          console.log("[ReplitAuth] Session after save:", req.session?.id);
           console.log("[ReplitAuth] User authenticated successfully:", user.claims?.sub);
           return res.redirect("/");
         });
@@ -170,9 +170,20 @@ export async function setupAuth(app) {
 }
 
 export const isAuthenticated = async (req, res, next) => {
-  const user = req.user;
+  // Check for passport user or backup userData in session
+  let user = req.user;
+  
+  // Fallback: check for backup userData stored directly in session
+  if (!user && req.session?.userData) {
+    user = req.session.userData;
+    req.user = user; // Restore to req.user for downstream use
+    console.log("[ReplitAuth] Restored user from session backup:", user.claims?.sub);
+  }
 
-  if (!req.isAuthenticated() || !user?.expires_at) {
+  if (!user?.expires_at) {
+    console.log("[ReplitAuth] isAuthenticated failed - no user or expires_at");
+    console.log("[ReplitAuth] req.isAuthenticated():", req.isAuthenticated());
+    console.log("[ReplitAuth] session keys:", Object.keys(req.session || {}));
     return res.status(401).json({ message: "Unauthorized" });
   }
 
