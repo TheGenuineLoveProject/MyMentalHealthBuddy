@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment } from "react";
 import { Shield, Users, Settings, Check, X, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
@@ -130,8 +130,8 @@ export default function RolesPermissions() {
                 </thead>
                 <tbody>
                   {Object.entries(groupedPermissions).map(([category, perms]) => (
-                    <>
-                      <tr key={category} className="bg-muted/50">
+                    <Fragment key={category}>
+                      <tr className="bg-muted/50">
                         <td colSpan={roles.length + 1} className="py-2 px-4 font-semibold text-sm">
                           {category}
                         </td>
@@ -150,7 +150,7 @@ export default function RolesPermissions() {
                           ))}
                         </tr>
                       ))}
-                    </>
+                    </Fragment>
                   ))}
                 </tbody>
               </table>
