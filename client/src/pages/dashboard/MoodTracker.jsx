@@ -1,26 +1,29 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Link } from "wouter";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { 
   Heart, ArrowLeft, Smile, Meh, Frown, Sun, Cloud, CloudRain,
-  Sparkles, TrendingUp, Calendar, Plus, Check
+  Sparkles, TrendingUp, Calendar, Plus, Check, Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 const MOODS = [
-  { id: "great", icon: Smile, label: "Great", color: "sage", emoji: "😊" },
-  { id: "good", icon: Smile, label: "Good", color: "teal", emoji: "🙂" },
-  { id: "okay", icon: Meh, label: "Okay", color: "gold", emoji: "😐" },
-  { id: "low", icon: Frown, label: "Low", color: "blush", emoji: "😔" },
-  { id: "struggling", icon: Frown, label: "Struggling", color: "blush", emoji: "😢" }
+  { id: "great", label: "Great", color: "sage", emoji: "😊", score: 5 },
+  { id: "good", label: "Good", color: "teal", emoji: "🙂", score: 4 },
+  { id: "okay", label: "Okay", color: "gold", emoji: "😐", score: 3 },
+  { id: "low", label: "Low", color: "blush", emoji: "😔", score: 2 },
+  { id: "struggling", label: "Struggling", color: "blush", emoji: "😢", score: 1 }
 ];
 
 const ENERGY_LEVELS = [
-  { id: "high", icon: Sun, label: "High Energy" },
-  { id: "moderate", icon: Cloud, label: "Moderate" },
-  { id: "low", icon: CloudRain, label: "Low Energy" }
+  { id: "high", icon: Sun, label: "High Energy", value: 3 },
+  { id: "moderate", icon: Cloud, label: "Moderate", value: 2 },
+  { id: "low", icon: CloudRain, label: "Low Energy", value: 1 }
 ];
 
 const FEELINGS = [
@@ -35,10 +38,44 @@ export default function MoodTracker() {
     noIndex: true
   });
 
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const noteRef = useRef(null);
   const [selectedMood, setSelectedMood] = useState(null);
   const [selectedEnergy, setSelectedEnergy] = useState(null);
   const [selectedFeelings, setSelectedFeelings] = useState([]);
   const [saved, setSaved] = useState(false);
+
+  const saveMutation = useMutation({
+    mutationFn: async (data) => {
+      return apiRequest("/api/mood", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+    },
+    onSuccess: () => {
+      setSaved(true);
+      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+      toast({
+        title: "Check-in saved",
+        description: "Your mood has been recorded. Keep nurturing your awareness.",
+      });
+      setTimeout(() => {
+        setSaved(false);
+        setSelectedMood(null);
+        setSelectedEnergy(null);
+        setSelectedFeelings([]);
+        if (noteRef.current) noteRef.current.value = "";
+      }, 2500);
+    },
+    onError: (error) => {
+      toast({
+        title: "Could not save",
+        description: error?.message || "Please try again in a moment.",
+        variant: "destructive",
+      });
+    },
+  });
 
   const toggleFeeling = (feeling) => {
     setSelectedFeelings(prev => 
@@ -49,9 +86,22 @@ export default function MoodTracker() {
   };
 
   const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+    if (!selectedMood) return;
+    
+    const moodData = MOODS.find(m => m.id === selectedMood);
+    const energyData = ENERGY_LEVELS.find(e => e.id === selectedEnergy);
+    
+    saveMutation.mutate({
+      rating: selectedMood,
+      score: moodData?.score || 3,
+      emotion: selectedFeelings.join(", ") || null,
+      energyLevel: energyData?.value || null,
+      content: noteRef.current?.value || null,
+      activities: selectedFeelings,
+    });
   };
+
+  const completionPercent = [selectedMood, selectedEnergy, selectedFeelings.length > 0].filter(Boolean).length / 3 * 100;
 
   return (
   <WellnessPageShell
@@ -173,12 +223,28 @@ export default function MoodTracker() {
                 Add a Note (Optional)
               </h2>
               <textarea
+                ref={noteRef}
                 placeholder="What's on your mind? Any context you'd like to add..."
                 className="w-full p-4 rounded-xl border border-[var(--sage-200)] focus:border-[var(--sage-500)] focus:ring-2 focus:ring-[var(--sage-200)] outline-none resize-none text-body-sm"
                 rows={4}
                 data-testid="textarea-note"
               />
             </section>
+
+            {/* Progress indicator */}
+            <div className="bg-[var(--sage-50)] dark:bg-[var(--sage-900)] rounded-xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-body-sm text-[var(--sage-600)]">Check-in progress</span>
+                <span className="text-body-sm font-medium text-[var(--teal-600)]">{Math.round(completionPercent)}%</span>
+              </div>
+              <div className="h-2 bg-[var(--sage-200)] rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-gradient-to-r from-[var(--teal-400)] to-[var(--sage-500)] transition-all duration-500 ease-out rounded-full"
+                  style={{ width: `${completionPercent}%` }}
+                  data-testid="progress-bar"
+                />
+              </div>
+            </div>
 
             <div className="flex items-center justify-between">
               <p className="text-caption flex items-center gap-1">
@@ -188,10 +254,15 @@ export default function MoodTracker() {
               <Button 
                 onClick={handleSave}
                 className="btn-premium"
-                disabled={!selectedMood}
+                disabled={!selectedMood || saveMutation.isPending}
                 data-testid="button-save-checkin"
               >
-                {saved ? (
+                {saveMutation.isPending ? (
+                  <>
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    Saving...
+                  </>
+                ) : saved ? (
                   <>
                     <Check className="h-4 w-4 mr-2" />
                     Saved!

@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Heart, TrendingUp, Calendar, Sparkles, Sun, ArrowRight, Activity, BookOpen, Flame, Lightbulb } from "lucide-react";
 import EmotionLog from "../components/wellness/EmotionLog";
@@ -61,6 +61,90 @@ function calculateStreak(entries) {
   }
   
   return streak;
+}
+
+const QUICK_MOODS = [
+  { id: "great", emoji: "😊", label: "Great", score: 5 },
+  { id: "good", emoji: "🙂", label: "Good", score: 4 },
+  { id: "okay", emoji: "😐", label: "Okay", score: 3 },
+  { id: "low", emoji: "😔", label: "Low", score: 2 },
+  { id: "struggling", emoji: "😢", label: "Struggling", score: 1 },
+];
+
+function QuickMoodLog({ onLog }) {
+  const queryClient = useQueryClient();
+  const [selected, setSelected] = useState(null);
+  const [saved, setSaved] = useState(false);
+
+  const mutation = useMutation({
+    mutationFn: async (mood) => {
+      const response = await fetch("/api/mood", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          rating: mood.id,
+          score: mood.score,
+          emotion: mood.label,
+        }),
+      });
+      if (!response.ok) throw new Error("Failed to save mood");
+      return response.json();
+    },
+    onSuccess: () => {
+      setSaved(true);
+      queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
+      onLog?.();
+      setTimeout(() => {
+        setSaved(false);
+        setSelected(null);
+      }, 2000);
+    },
+    onError: (err) => {
+      console.error("Failed to log mood:", err);
+      setSelected(null);
+    },
+  });
+
+  const handleQuickLog = (mood) => {
+    setSelected(mood.id);
+    mutation.mutate(mood);
+  };
+
+  return (
+    <div 
+      className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700 shadow-sm mb-6"
+      data-testid="quick-mood-log"
+    >
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-200">How are you feeling right now?</h3>
+        {saved && (
+          <span className="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
+            <Activity className="w-3 h-3" /> Logged!
+          </span>
+        )}
+      </div>
+      <div className="flex gap-2 justify-between">
+        {QUICK_MOODS.map((mood) => (
+          <button
+            key={mood.id}
+            onClick={() => handleQuickLog(mood)}
+            disabled={mutation.isPending}
+            className={`flex-1 flex flex-col items-center gap-1 p-3 rounded-lg border transition-all ${
+              selected === mood.id
+                ? "bg-teal-50 dark:bg-teal-900/30 border-teal-300 dark:border-teal-600 scale-105"
+                : "bg-gray-50 dark:bg-gray-700 border-transparent hover:border-gray-200 dark:hover:border-gray-600"
+            }`}
+            aria-label={`Log mood as ${mood.label}`}
+            data-testid={`quick-mood-${mood.id}`}
+          >
+            <span className="text-2xl">{mood.emoji}</span>
+            <span className="text-xs text-gray-600 dark:text-gray-300">{mood.label}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function DailyWellnessTip() {
@@ -200,6 +284,7 @@ function QuickActions() {
 
 export default function WellnessDashboard() {
   const { user } = useAuth();
+  const queryClient = useQueryClient();
   const [latestEntry, setLatestEntry] = useState(null);
 
   const { data: moodEntries = [] } = useQuery({
@@ -209,6 +294,10 @@ export default function WellnessDashboard() {
 
   const handleEntrySubmit = (entry) => {
     setLatestEntry(entry);
+  };
+
+  const handleQuickMoodLog = () => {
+    queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
   };
 
   return (
@@ -223,6 +312,8 @@ export default function WellnessDashboard() {
           <WelcomeHeader user={user} />
           
           <QuickStats entries={moodEntries} />
+          
+          <QuickMoodLog onLog={handleQuickMoodLog} />
           
           <DailyWellnessTip />
           

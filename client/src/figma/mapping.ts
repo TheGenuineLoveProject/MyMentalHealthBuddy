@@ -10,7 +10,7 @@ export const FIGMA_TO_REACT = {
 
   "Dashboard – Overview": "pages/dashboard/Overview.tsx",
   "Dashboard – Mood Tracker": "pages/dashboard/Mood.tsx",
-  "Dashboard – Journal": "pages/dashboard/Journal.tsx",
+  "Dashboard – Journal": "pages/dashboard/Journal.jsx",
   "Dashboard – Insights": "pages/dashboard/Insights.tsx",
 
   "AI Chat – Empty State": "pages/ai/Empty.tsx",
