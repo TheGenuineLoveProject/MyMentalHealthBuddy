@@ -34,7 +34,7 @@ export default function WeeklyReflection() {
   };
 
   const handleSave = () => {
-    console.log("Saving reflection:", answers);
+    // Reflection is displayed to the user; future: persist to /api/reflections
   };
 
   const getWeekRange = () => {

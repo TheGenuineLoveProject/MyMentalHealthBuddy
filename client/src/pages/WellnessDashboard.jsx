@@ -187,18 +187,25 @@ function DailyWellnessTip() {
 }
 
 function QuickStats({ entries = [] }) {
-  const thisWeek = entries.filter((e) => {
-    const date = new Date(e.createdAt);
+  const stats = useMemo(() => {
     const now = new Date();
-    const weekAgo = new Date(now.setDate(now.getDate() - 7));
-    return date >= weekAgo;
-  });
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+    
+    const thisWeek = entries.filter((e) => {
+      const date = new Date(e.createdAt);
+      return date >= weekAgo;
+    });
 
-  const positiveEmotions = ["Happy", "Grateful", "Calm", "Hopeful"];
-  const positiveCount = thisWeek.filter((e) => positiveEmotions.includes(e.emotion)).length;
-  const streak = calculateStreak(entries);
+    const positiveEmotions = ["Happy", "Grateful", "Calm", "Hopeful"];
+    const positiveCount = thisWeek.filter((e) => positiveEmotions.includes(e.emotion)).length;
+    const streak = calculateStreak(entries);
+    
+    return { thisWeek, positiveCount, streak };
+  }, [entries]);
 
-  const stats = [
+  const { thisWeek, positiveCount, streak } = stats;
+
+  const statsCards = [
     { label: "Day streak", value: streak, icon: Flame, color: "#f59e0b", isStreak: true },
     { label: "This week", value: thisWeek.length, icon: Calendar, color: "var(--glp-sage)" },
     { label: "Positive", value: positiveCount, icon: Heart, color: "var(--glp-gold)" },
@@ -207,7 +214,7 @@ function QuickStats({ entries = [] }) {
 
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" data-testid="quick-stats">
-      {stats.map((stat, idx) => (
+      {statsCards.map((stat, idx) => (
         <div
           key={idx}
           className={`rounded-xl p-4 border shadow-sm transition-all hover:shadow-md ${

@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronLeft, ChevronRight, Calendar, Smile, Frown, Meh, Heart, Sparkles, Zap, Sun, Cloud } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar, Smile, Frown, Meh, Heart, Sparkles, Zap, Sun, Cloud, CalendarHeart } from "lucide-react";
+import { Skeleton } from "../ui/Skeleton";
 
 const EMOTIONS = {
   Happy: { emoji: "😊", color: "#22c55e", icon: Smile },
@@ -24,14 +25,79 @@ function getFirstDayOfMonth(year, month) {
   return new Date(year, month, 1).getDay();
 }
 
+function CalendarSkeleton() {
+  return (
+    <div className="bg-softWhite dark:bg-gray-800 rounded-xl shadow-lg border border-sageGreen/20 dark:border-gray-700 overflow-hidden">
+      <div className="p-4 border-b border-sageGreen/20 dark:border-gray-700 bg-gradient-to-r from-sageGreen/10 to-softWhite">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-6 w-32" />
+          <Skeleton className="h-8 w-40" />
+        </div>
+      </div>
+      <div className="p-4">
+        <div className="grid grid-cols-7 gap-1 mb-2">
+          {Array.from({ length: 7 }).map((_, i) => (
+            <Skeleton key={i} className="h-4 w-full" />
+          ))}
+        </div>
+        <div className="grid grid-cols-7 gap-1">
+          {Array.from({ length: 35 }).map((_, i) => (
+            <Skeleton key={i} className="aspect-square rounded-lg" />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EmptyCalendarState() {
+  return (
+    <div className="text-center py-8 px-4">
+      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-sageGreen/10 flex items-center justify-center">
+        <CalendarHeart className="w-8 h-8 text-sageGreen" />
+      </div>
+      <h3 className="font-serif text-lg font-semibold text-deepTeal dark:text-white mb-2">
+        Your mood journey begins here
+      </h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400 max-w-xs mx-auto">
+        Start tracking your emotions to see your patterns and growth over time.
+      </p>
+    </div>
+  );
+}
+
 export default function MoodCalendar({ className = "" }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDay, setSelectedDay] = useState(null);
 
-  const { data: entries = [] } = useQuery({
+  const { data: entries = [], isLoading } = useQuery({
     queryKey: ["/api/mood"],
     staleTime: 30000,
   });
+
+  if (isLoading) {
+    return (
+      <div className={`mood-calendar ${className}`} data-testid="mood-calendar-loading">
+        <CalendarSkeleton />
+      </div>
+    );
+  }
+
+  if (entries.length === 0) {
+    return (
+      <div className={`mood-calendar ${className}`} data-testid="mood-calendar-empty">
+        <div className="bg-softWhite dark:bg-gray-800 rounded-xl shadow-lg border border-sageGreen/20 dark:border-gray-700 overflow-hidden">
+          <div className="p-4 border-b border-sageGreen/20 dark:border-gray-700 bg-gradient-to-r from-sageGreen/10 to-softWhite">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-5 h-5 text-deepTeal" aria-hidden="true" />
+              <h2 className="font-serif text-lg font-semibold text-deepTeal dark:text-white">Mood Calendar</h2>
+            </div>
+          </div>
+          <EmptyCalendarState />
+        </div>
+      </div>
+    );
+  }
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();

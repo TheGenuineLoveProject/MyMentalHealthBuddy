@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { TrendingUp, BarChart3, Calendar, Sparkles, ChevronDown } from "lucide-react";
+import { TrendingUp, BarChart3, Calendar, Sparkles, ChevronDown, LineChart } from "lucide-react";
+import { Skeleton } from "../ui/Skeleton";
 
 const EMOTIONS = {
   Happy: { score: 8, color: "#22c55e" },
@@ -28,14 +29,86 @@ function formatDate(date) {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
 
+function GraphSkeleton() {
+  return (
+    <div className="bg-softWhite dark:bg-gray-800 rounded-xl shadow-lg border border-sageGreen/20 dark:border-gray-700 overflow-hidden">
+      <div className="p-4 border-b border-sageGreen/20 dark:border-gray-700 bg-gradient-to-r from-metallicGold/10 to-softWhite">
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-6 w-36" />
+          <Skeleton className="h-8 w-24" />
+        </div>
+      </div>
+      <div className="p-4">
+        <div className="grid grid-cols-4 gap-3 mb-6">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
+              <Skeleton className="h-8 w-12 mx-auto mb-1" />
+              <Skeleton className="h-3 w-16 mx-auto" />
+            </div>
+          ))}
+        </div>
+        <div className="h-32 flex items-end gap-1">
+          {Array.from({ length: 14 }).map((_, i) => (
+            <div 
+              key={i} 
+              className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-t animate-pulse"
+              style={{ height: `${20 + Math.random() * 60}%` }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function EmptyGraphState() {
+  return (
+    <div className="text-center py-8 px-4">
+      <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-metallicGold/10 flex items-center justify-center">
+        <LineChart className="w-8 h-8 text-metallicGold" />
+      </div>
+      <h3 className="font-serif text-lg font-semibold text-deepTeal dark:text-white mb-2">
+        Track your healing journey
+      </h3>
+      <p className="text-sm text-gray-600 dark:text-gray-400 max-w-xs mx-auto">
+        Log a few mood entries to see your wellness trends and patterns emerge.
+      </p>
+    </div>
+  );
+}
+
 export default function HealingGraph({ className = "" }) {
   const [timeRange, setTimeRange] = useState(TIME_RANGES[0]);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const { data: entries = [] } = useQuery({
+  const { data: entries = [], isLoading } = useQuery({
     queryKey: ["/api/mood"],
     staleTime: 30000,
   });
+
+  if (isLoading) {
+    return (
+      <div className={`healing-graph ${className}`} data-testid="healing-graph-loading">
+        <GraphSkeleton />
+      </div>
+    );
+  }
+
+  if (entries.length === 0) {
+    return (
+      <div className={`healing-graph ${className}`} data-testid="healing-graph-empty">
+        <div className="bg-softWhite dark:bg-gray-800 rounded-xl shadow-lg border border-sageGreen/20 dark:border-gray-700 overflow-hidden">
+          <div className="p-4 border-b border-sageGreen/20 dark:border-gray-700 bg-gradient-to-r from-metallicGold/10 to-softWhite">
+            <div className="flex items-center gap-2">
+              <BarChart3 className="w-5 h-5 text-metallicGold" aria-hidden="true" />
+              <h2 className="font-serif text-lg font-semibold text-deepTeal dark:text-white">Healing Journey</h2>
+            </div>
+          </div>
+          <EmptyGraphState />
+        </div>
+      </div>
+    );
+  }
 
   const graphData = useMemo(() => {
     const now = new Date();
