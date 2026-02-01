@@ -36,7 +36,7 @@ export default function AgeConsentGate({ children, onConsent }) {
         className="min-h-screen flex items-center justify-center"
         data-testid="consent-loading"
       >
-        <div className="animate-pulse text-[var(--sage-600)]">Loading...</div>
+        <div className="animate-pulse motion-reduce:animate-none text-[var(--sage-600)]">Loading...</div>
       </div>
     );
   }

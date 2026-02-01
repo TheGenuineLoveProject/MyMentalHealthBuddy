@@ -9,7 +9,7 @@ export default function DailyInsight() {
   if (isLoading) {
     return (
       <div className="py-4 border-t border-[var(--glp-ink)]/8">
-        <div className="h-4 w-48 bg-[var(--glp-ink)]/5 rounded animate-pulse" />
+        <div className="h-4 w-48 bg-[var(--glp-ink)]/5 rounded animate-pulse motion-reduce:animate-none" />
       </div>
     );
   }

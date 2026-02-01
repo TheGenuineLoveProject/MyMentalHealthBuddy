@@ -79,7 +79,7 @@ export function LazyImage({
     >
       {placeholder === 'blur' && !isLoaded && !hasError && (
         <div 
-          className="absolute inset-0 bg-gradient-to-br from-sage/20 to-sage/10 animate-pulse"
+          className="absolute inset-0 bg-gradient-to-br from-sage/20 to-sage/10 animate-pulse motion-reduce:animate-none"
           aria-hidden="true"
         />
       )}

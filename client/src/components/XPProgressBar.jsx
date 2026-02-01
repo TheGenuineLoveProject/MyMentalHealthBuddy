@@ -30,7 +30,7 @@ export default function XPProgressBar({ compact = false, showStats = true }) {
 
   if (isLoading) {
     return (
-      <div className="animate-pulse">
+      <div className="animate-pulse motion-reduce:animate-none">
         <div className="h-8 bg-slate-700/50 rounded-full"></div>
       </div>
     );
@@ -101,7 +101,7 @@ export default function XPProgressBar({ compact = false, showStats = true }) {
               className={`h-full bg-gradient-to-r ${levelColor} transition-all duration-1000 ease-out rounded-full relative`}
               style={{ width: `${animatedPercent}%` }}
             >
-              <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+              <div className="absolute inset-0 bg-white/20 animate-pulse motion-reduce:animate-none"></div>
             </div>
             <div 
               className="absolute top-0 h-full w-1 bg-white/50"

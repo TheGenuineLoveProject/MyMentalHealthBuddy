@@ -85,7 +85,7 @@ export function DashboardCardGrid({ children, columns = 2 }) {
 
 export function DashboardCardSkeleton({ hasIcon = true }) {
   return (
-    <div className="card-elevated p-5 animate-pulse">
+    <div className="card-elevated p-5 animate-pulse motion-reduce:animate-none">
       <div className="flex items-center gap-3 mb-4">
         {hasIcon && (
           <div className="w-10 h-10 rounded-xl bg-[var(--surface-hover)]" />

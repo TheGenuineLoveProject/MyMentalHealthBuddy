@@ -64,7 +64,7 @@ export default function LazyImage({
     <div ref={imgRef} className={`relative ${className}`} {...props}>
       {!isLoaded && (
         placeholder || (
-          <div className="absolute inset-0 bg-muted animate-pulse rounded" />
+          <div className="absolute inset-0 bg-muted animate-pulse motion-reduce:animate-none rounded" />
         )
       )}
       

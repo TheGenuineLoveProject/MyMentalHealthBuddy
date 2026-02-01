@@ -240,7 +240,7 @@ export default function WeeklyRecap({
 
 export function WeeklyRecapSkeleton() {
   return (
-    <div className="bg-[var(--bg-secondary)] rounded-2xl p-6 animate-pulse">
+    <div className="bg-[var(--bg-secondary)] rounded-2xl p-6 animate-pulse motion-reduce:animate-none">
       <div className="h-6 w-48 bg-[var(--bg-tertiary)] rounded mb-4" />
       <div className="h-4 w-32 bg-[var(--bg-tertiary)] rounded mb-6" />
       <div className="grid grid-cols-3 gap-4 mb-6">

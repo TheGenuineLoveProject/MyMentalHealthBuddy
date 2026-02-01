@@ -30,7 +30,7 @@ export default function QuestPanel({ compact = false }) {
 
   if (isLoading) {
     return (
-      <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-2xl p-6 border border-slate-700/50 animate-pulse">
+      <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-2xl p-6 border border-slate-700/50 animate-pulse motion-reduce:animate-none">
         <div className="h-6 bg-slate-700/50 rounded w-1/3 mb-4"></div>
         <div className="space-y-3">
           <div className="h-16 bg-slate-700/50 rounded-xl"></div>

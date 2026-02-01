@@ -24,7 +24,7 @@ export default function MoodHistoryChart({ compact = false }) {
 
   if (isLoading) {
     return (
-      <div className="animate-pulse">
+      <div className="animate-pulse motion-reduce:animate-none">
         <div className="flex items-end justify-between gap-1 h-16">
           {[...Array(7)].map((_, i) => (
             <div 
