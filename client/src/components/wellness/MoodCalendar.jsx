@@ -159,7 +159,7 @@ export default function MoodCalendar({ className = "" }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={prevMonth}
-                className="p-1.5 rounded-lg hover:bg-sageGreen/10 text-deepTeal transition"
+                className="p-1.5 rounded-lg hover:bg-sageGreen/10 text-deepTeal transition motion-reduce:transition-none"
                 aria-label="Previous month"
                 data-testid="prev-month"
               >
@@ -170,7 +170,7 @@ export default function MoodCalendar({ className = "" }) {
               </span>
               <button
                 onClick={nextMonth}
-                className="p-1.5 rounded-lg hover:bg-sageGreen/10 text-deepTeal transition"
+                className="p-1.5 rounded-lg hover:bg-sageGreen/10 text-deepTeal transition motion-reduce:transition-none"
                 aria-label="Next month"
                 data-testid="next-month"
               >
@@ -204,9 +204,9 @@ export default function MoodCalendar({ className = "" }) {
                 <button
                   key={day}
                   onClick={() => setSelectedDay(isSelected ? null : day)}
-                  className={`aspect-square rounded-lg flex flex-col items-center justify-center relative transition-all duration-200 ${
+                  className={`aspect-square rounded-lg flex flex-col items-center justify-center relative transition-all duration-200 motion-reduce:transition-none ${
                     isSelected
-                      ? "ring-2 ring-deepTeal scale-105 shadow-md"
+                      ? "ring-2 ring-deepTeal scale-105 shadow-md motion-reduce:scale-100"
                       : "hover:bg-sageGreen/10"
                   } ${isToday(day) ? "ring-1 ring-metallicGold" : ""}`}
                   style={mood ? { backgroundColor: `${mood.color}20` } : {}}

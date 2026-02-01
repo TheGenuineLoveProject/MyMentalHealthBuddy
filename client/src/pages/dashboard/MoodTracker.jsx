@@ -47,12 +47,7 @@ export default function MoodTracker() {
   const [saved, setSaved] = useState(false);
 
   const saveMutation = useMutation({
-    mutationFn: async (data) => {
-      return apiRequest("/api/mood", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-    },
+    mutationFn: (data) => apiRequest("POST", "/api/mood", data),
     onSuccess: () => {
       setSaved(true);
       queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
@@ -152,7 +147,7 @@ export default function MoodTracker() {
                   <button
                     key={mood.id}
                     onClick={() => setSelectedMood(mood.id)}
-                    className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all ${
+                    className={`flex flex-col items-center gap-2 p-4 rounded-xl border transition-all motion-reduce:transition-none ${
                       selectedMood === mood.id
                         ? `bg-[var(--${mood.color}-100)] border-[var(--${mood.color}-500)]`
                         : 'bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]'
@@ -176,7 +171,7 @@ export default function MoodTracker() {
                   <button
                     key={level.id}
                     onClick={() => setSelectedEnergy(level.id)}
-                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all ${
+                    className={`flex items-center gap-3 p-4 rounded-xl border transition-all motion-reduce:transition-none ${
                       selectedEnergy === level.id
                         ? 'bg-[var(--sage-100)] border-[var(--sage-500)]'
                         : 'bg-white border-[var(--sage-200)] hover:border-[var(--sage-400)]'
@@ -203,7 +198,7 @@ export default function MoodTracker() {
                   <button
                     key={feeling}
                     onClick={() => toggleFeeling(feeling)}
-                    className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all ${
+                    className={`px-4 py-2 rounded-full text-body-sm font-medium transition-all motion-reduce:transition-none ${
                       selectedFeelings.includes(feeling)
                         ? 'bg-[var(--teal-500)] text-white'
                         : 'bg-[var(--sage-100)] text-[var(--sage-700)] hover:bg-[var(--sage-200)]'
@@ -239,7 +234,7 @@ export default function MoodTracker() {
               </div>
               <div className="h-2 bg-[var(--sage-200)] rounded-full overflow-hidden">
                 <div 
-                  className="h-full bg-gradient-to-r from-[var(--teal-400)] to-[var(--sage-500)] transition-all duration-500 ease-out rounded-full"
+                  className="h-full bg-gradient-to-r from-[var(--teal-400)] to-[var(--sage-500)] transition-all duration-500 ease-out motion-reduce:transition-none rounded-full"
                   style={{ width: `${completionPercent}%` }}
                   data-testid="progress-bar"
                 />
@@ -259,7 +254,7 @@ export default function MoodTracker() {
               >
                 {saveMutation.isPending ? (
                   <>
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin motion-reduce:animate-none" />
                     Saving...
                   </>
                 ) : saved ? (
