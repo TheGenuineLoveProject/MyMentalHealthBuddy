@@ -194,9 +194,9 @@ export default function AIChatPage() {
               <div className="chat-bubble chat-bubble-assistant">
                 <div className="flex items-center gap-3">
                   <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></span>
-                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></span>
-                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></span>
+                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce motion-reduce:animate-none" style={{ animationDelay: "0ms" }}></span>
+                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce motion-reduce:animate-none" style={{ animationDelay: "150ms" }}></span>
+                    <span className="w-2 h-2 bg-[var(--primary)] rounded-full animate-bounce motion-reduce:animate-none" style={{ animationDelay: "300ms" }}></span>
                   </div>
                   <span className="text-[var(--text-muted)]">Thinking...</span>
                 </div>

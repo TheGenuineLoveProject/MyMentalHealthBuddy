@@ -274,7 +274,7 @@ export default function ValuesFinderPage() {
               >
                 {createMutation.isPending ? (
                   <span className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin motion-reduce:animate-none" />
                     Saving...
                   </span>
                 ) : (
@@ -326,7 +326,7 @@ export default function ValuesFinderPage() {
 
           {isLoading && (
             <div className="text-center py-8" data-testid="loading-state">
-              <div className="w-8 h-8 border-2 border-[var(--primary)] border-t-transparent rounded-full animate-spin mx-auto" />
+              <div className="w-8 h-8 border-2 border-[var(--primary)] border-t-transparent rounded-full animate-spin motion-reduce:animate-none mx-auto" />
               <p className="text-sm text-[var(--text-muted)] mt-2">Loading your values...</p>
             </div>
           )}

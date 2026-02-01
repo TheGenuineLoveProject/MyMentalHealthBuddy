@@ -321,7 +321,7 @@ export default function ContentStudioPage() {
                 data-testid="button-generate"
               >
                 {generateMutation.isPending ? (
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" />
                 ) : (
                   <Sparkles className="w-4 h-4" />
                 )}
@@ -347,7 +347,7 @@ export default function ContentStudioPage() {
                       disabled={saveMutation.isPending}
                       data-testid="button-save"
                     >
-                      {saveMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                      {saveMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin motion-reduce:animate-none" /> : <Save className="w-4 h-4" />}
                       Save
                     </button>
                     <button className="btn-secondary-premium btn-sm inline-flex items-center gap-2" onClick={exportAsJSON} data-testid="button-export-json">

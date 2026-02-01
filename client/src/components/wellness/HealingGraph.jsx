@@ -51,7 +51,7 @@ function GraphSkeleton() {
           {Array.from({ length: 14 }).map((_, i) => (
             <div 
               key={i} 
-              className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-t animate-pulse"
+              className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-t animate-pulse motion-reduce:animate-none"
               style={{ height: `${20 + Math.random() * 60}%` }}
             />
           ))}
