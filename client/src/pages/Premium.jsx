@@ -196,26 +196,28 @@ export default function Premium() {
                   <p className="text-lead">Unlock your full wellness potential</p>
                 </div>
               </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2" role="group" aria-label="View options">
               <button
                 onClick={() => setView("features")}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                   view === "features"
                     ? "bg-[var(--primary)] text-white"
                     : "bg-[var(--surface)] text-[var(--text-secondary)]"
                 }`}
                 data-testid="button-view-features"
+                aria-pressed={view === "features"}
               >
                 Features
               </button>
               <button
                 onClick={() => setView("pricing")}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                className={`px-4 py-2 rounded-lg font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                   view === "pricing"
                     ? "bg-[var(--primary)] text-white"
                     : "bg-[var(--surface)] text-[var(--text-secondary)]"
                 }`}
                 data-testid="button-view-pricing"
+                aria-pressed={view === "pricing"}
               >
                 Pricing
               </button>
@@ -251,16 +253,18 @@ export default function Premium() {
                       <button
                         key={feature.id}
                         onClick={() => setActiveFeature(feature.id)}
-                        className="w-full flex items-center gap-3 p-3 rounded-xl transition-all text-left mb-2"
+                        className="w-full flex items-center gap-3 p-3 rounded-xl transition-all text-left mb-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                         style={isActive
                           ? { background: feature.gradient, color: 'var(--glp-paper)' }
                           : { color: 'var(--glp-ink)' }}
                         data-testid={`feature-${feature.id}`}
+                        aria-pressed={isActive}
+                        aria-label={`${feature.name}: ${feature.description}`}
                       >
                         <div className="p-2 rounded-lg" style={isActive
                           ? { background: 'rgba(255,255,255,0.2)' }
                           : { background: feature.gradient, color: 'var(--glp-paper)' }}>
-                          <Icon className="w-4 h-4" />
+                          <Icon className="w-4 h-4" aria-hidden="true" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <p className="font-medium text-sm truncate">{feature.name}</p>
@@ -268,7 +272,7 @@ export default function Premium() {
                             {feature.description}
                           </p>
                         </div>
-                        <ChevronRight className="w-4 h-4" style={{ color: isActive ? 'var(--glp-paper)' : 'var(--glp-sage)' }} />
+                        <ChevronRight className="w-4 h-4" aria-hidden="true" style={{ color: isActive ? 'var(--glp-paper)' : 'var(--glp-sage)' }} />
                       </button>
                     );
                   })}

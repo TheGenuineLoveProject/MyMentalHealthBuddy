@@ -138,7 +138,7 @@ export default function PracticeLibrary() {
           </div>
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-4 mb-8">
+        <div className="flex gap-2 overflow-x-auto pb-4 mb-8" role="group" aria-label="Filter practices by category">
           {categories.map(cat => {
             const Icon = cat.icon;
             return (
@@ -146,10 +146,11 @@ export default function PracticeLibrary() {
                 key={cat.id}
                 variant={activeCategory === cat.id ? "default" : "outline"}
                 onClick={() => setActiveCategory(cat.id)}
-                className="min-h-[44px] px-4 rounded-lg whitespace-nowrap"
+                className="min-h-[44px] px-4 rounded-lg whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 data-testid={`filter-${cat.id}`}
+                aria-pressed={activeCategory === cat.id}
               >
-                <Icon className="w-4 h-4 mr-2" />
+                <Icon className="w-4 h-4 mr-2" aria-hidden="true" />
                 {cat.label}
               </Button>
             );

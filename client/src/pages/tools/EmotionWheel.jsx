@@ -138,13 +138,14 @@ export default function EmotionWheel() {
         </div>
 
         {level === 0 && (
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4" role="group" aria-label="Choose a core emotion">
             {primaryEmotions.map(emotion => (
               <button
                 key={emotion}
                 onClick={() => selectPrimary(emotion)}
-                className={`p-6 rounded-xl ${emotionData[emotion].color} text-white font-semibold text-lg capitalize hover:opacity-90 transition-opacity min-h-[80px]`}
+                className={`p-6 rounded-xl ${emotionData[emotion].color} text-white font-semibold text-lg capitalize hover:opacity-90 transition-opacity min-h-[80px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-white`}
                 data-testid={`emotion-${emotion}`}
+                aria-label={`Select ${emotion} as core emotion`}
               >
                 {emotion}
               </button>
@@ -159,13 +160,14 @@ export default function EmotionWheel() {
                 {selectedPrimary}
               </span>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4" role="group" aria-label="Choose a secondary emotion">
               {emotionData[selectedPrimary].secondary.map(emotion => (
                 <button
                   key={emotion}
                   onClick={() => selectSecondary(emotion)}
-                  className="p-4 rounded-xl border-2 hover:border-primary transition-colors capitalize font-medium min-h-[60px]"
+                  className="p-4 rounded-xl border-2 hover:border-primary transition-colors capitalize font-medium min-h-[60px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   data-testid={`emotion-${emotion}`}
+                  aria-label={`Select ${emotion}`}
                 >
                   {emotion}
                 </button>

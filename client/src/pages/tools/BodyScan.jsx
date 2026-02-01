@@ -138,7 +138,7 @@ export default function BodyScan() {
                 </div>
 
                 <div className="mb-6">
-                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden" role="progressbar" aria-valuenow={Math.round(totalProgress)} aria-valuemin={0} aria-valuemax={100} aria-label="Body scan progress">
                     <div 
                       className="h-full bg-teal-400 transition-all duration-100"
                       style={{ width: `${totalProgress}%` }}
@@ -146,27 +146,28 @@ export default function BodyScan() {
                   </div>
                 </div>
 
-                <div className="flex justify-center gap-4">
+                <div className="flex justify-center gap-4" role="group" aria-label="Playback controls">
                   <Button
                     size="lg"
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="min-w-[120px]"
+                    className="min-w-[120px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                     data-testid="button-play"
+                    aria-label={isPlaying ? "Pause body scan" : (progress > 0 ? "Resume body scan" : "Begin body scan")}
                   >
                     {isPlaying ? (
                       <>
-                        <Pause className="w-5 h-5 mr-2" />
+                        <Pause className="w-5 h-5 mr-2" aria-hidden="true" />
                         Pause
                       </>
                     ) : (
                       <>
-                        <Play className="w-5 h-5 mr-2" />
+                        <Play className="w-5 h-5 mr-2" aria-hidden="true" />
                         {progress > 0 ? "Resume" : "Begin"}
                       </>
                     )}
                   </Button>
-                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset">
-                    <RotateCcw className="w-5 h-5" />
+                  <Button variant="outline" size="lg" onClick={reset} data-testid="button-reset" aria-label="Reset body scan" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+                    <RotateCcw className="w-5 h-5" aria-hidden="true" />
                   </Button>
                 </div>
               </>

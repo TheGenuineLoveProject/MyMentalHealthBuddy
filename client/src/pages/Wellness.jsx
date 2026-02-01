@@ -374,26 +374,28 @@ export default function Wellness() {
                     <div key={catKey} className="mb-3">
                       <button
                         onClick={() => setActiveCategory(catKey)}
-                        className={`w-full flex items-center justify-between p-3 rounded-xl transition-all ${
+                        className={`w-full flex items-center justify-between p-3 rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                           isActive
                             ? "bg-[var(--primary)]/10 text-[var(--primary)]"
                             : "hover:bg-[var(--surface-hover)] text-[var(--text-secondary)]"
                         }`}
                         data-testid={`button-category-${catKey}`}
+                        aria-expanded={isActive}
+                        aria-controls={`tools-${catKey}`}
                       >
                         <div className="flex items-center gap-2">
-                          <CatIcon className="w-4 h-4" />
+                          <CatIcon className="w-4 h-4" aria-hidden="true" />
                           <span className="text-sm font-medium">{category.name}</span>
                         </div>
                         {isActive ? (
-                          <ChevronDown className="w-4 h-4" />
+                          <ChevronDown className="w-4 h-4" aria-hidden="true" />
                         ) : (
-                          <ChevronUp className="w-4 h-4 rotate-90" />
+                          <ChevronUp className="w-4 h-4 rotate-90" aria-hidden="true" />
                         )}
                       </button>
 
                       {isActive && (
-                        <div className="mt-2 ml-2 space-y-1 animate-fade-in-up">
+                        <div id={`tools-${catKey}`} className="mt-2 ml-2 space-y-1 animate-fade-in-up" role="group" aria-label={`${category.name} tools`}>
                           {category.tools.map((tool) => {
                             const ToolIcon = tool.icon;
                             const isToolActive = activeTool === tool.id;
@@ -403,10 +405,10 @@ export default function Wellness() {
                                 <Link
                                   key={tool.id}
                                   href={tool.link}
-                                  className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all hover:bg-[var(--surface)] text-[var(--text-secondary)]`}
+                                  className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all hover:bg-[var(--surface)] text-[var(--text-secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
                                   data-testid={`button-tool-${tool.id}`}
                                 >
-                                  <ToolIcon className="w-4 h-4" />
+                                  <ToolIcon className="w-4 h-4" aria-hidden="true" />
                                   <span className="text-sm">{tool.name}</span>
                                 </Link>
                               );
@@ -416,14 +418,15 @@ export default function Wellness() {
                               <button
                                 key={tool.id}
                                 onClick={() => setActiveTool(tool.id)}
-                                className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all ${
+                                className={`w-full flex items-center gap-3 p-2.5 rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
                                   isToolActive
                                     ? `bg-gradient-to-r ${tool.color} text-white shadow-md`
                                     : "hover:bg-[var(--surface)] text-[var(--text-secondary)]"
                                 }`}
                                 data-testid={`button-tool-${tool.id}`}
+                                aria-pressed={isToolActive}
                               >
-                                <ToolIcon className="w-4 h-4" />
+                                <ToolIcon className="w-4 h-4" aria-hidden="true" />
                                 <span className="text-sm">{tool.name}</span>
                               </button>
                             );
