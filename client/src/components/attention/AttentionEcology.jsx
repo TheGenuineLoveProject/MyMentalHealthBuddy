@@ -97,6 +97,7 @@ export default function AttentionEcology() {
                 }`}
                 aria-pressed={timeframe === tf}
                 aria-label={`Track attention for last ${tf}`}
+                data-testid={`button-timeframe-${tf}`}
               >
                 Last {tf}
               </button>
@@ -118,6 +119,7 @@ export default function AttentionEcology() {
                   }`}
                   role="listitem"
                   aria-label={`${cat.name} - ${cat.type} activity${isAdded ? ' (already added)' : ''}`}
+                  data-testid={`button-category-${cat.name.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   <div className="flex items-center gap-2">
                     <span 

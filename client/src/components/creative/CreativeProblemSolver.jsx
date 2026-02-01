@@ -125,6 +125,7 @@ export default function CreativeProblemSolver() {
                     activeTechnique === tech.name ? "bg-blue-500/30" : "bg-white/5 hover:bg-white/10"
                   }`}
                   aria-pressed={activeTechnique === tech.name}
+                  data-testid={`button-convergent-${tech.name}`}
                 >
                   {tech.name}
                 </button>
@@ -145,6 +146,7 @@ export default function CreativeProblemSolver() {
                       onClick={() => setRandomPrompt(getRandomPrompt())}
                       className="p-1 rounded hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
                       aria-label="Get a new random prompt"
+                      data-testid="button-shuffle-prompt"
                     >
                       <Shuffle className="h-4 w-4" aria-hidden="true" />
                     </button>
@@ -214,6 +216,7 @@ export default function CreativeProblemSolver() {
                 onClick={addIdea}
                 className="px-4 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300"
                 aria-label="Add idea"
+                data-testid="button-add-idea"
               >
                 <Plus className="h-4 w-4" aria-hidden="true" />
               </button>
