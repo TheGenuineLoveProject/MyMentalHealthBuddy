@@ -78,28 +78,33 @@ function QuickStats({ entries = [] }) {
 
 function QuickActions() {
   const actions = [
-    { label: "Journal", href: "/journal", icon: BookOpen, color: "var(--glp-teal)" },
-    { label: "AI Chat", href: "/chat", icon: Sparkles, color: "var(--glp-gold)" },
-    { label: "Tools", href: "/tools", icon: Activity, color: "var(--glp-sage)" },
-    { label: "Wisdom", href: "/wisdom", icon: Sun, color: "var(--glp-sage-deep)" },
+    { label: "Journal", href: "/journal", icon: BookOpen, color: "var(--glp-teal)", desc: "Reflect & write" },
+    { label: "AI Chat", href: "/chat", icon: Sparkles, color: "var(--glp-gold)", desc: "Get support" },
+    { label: "Breathe", href: "/breathing", icon: Activity, color: "var(--glp-sage)", desc: "Calm your mind" },
+    { label: "Affirmations", href: "/affirmations", icon: Heart, color: "var(--glp-sage-deep)", desc: "Self-love" },
+    { label: "Grounding", href: "/grounding", icon: Sun, color: "var(--glp-teal)", desc: "Feel present" },
+    { label: "Mood Track", href: "/mood", icon: TrendingUp, color: "var(--glp-gold)", desc: "How are you?" },
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8" data-testid="quick-actions">
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8" data-testid="quick-actions">
       {actions.map((action) => (
         <Link key={action.label} href={action.href}>
           <div
-            className="p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-md transition cursor-pointer group"
-            data-testid={`action-${action.label.toLowerCase()}`}
+            className="p-4 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:shadow-lg hover:border-sage/30 transition-all duration-300 cursor-pointer group"
+            data-testid={`action-${action.label.toLowerCase().replace(/\s+/g, "-")}`}
           >
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col items-center text-center gap-2">
               <div
-                className="w-9 h-9 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110"
+                className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:shadow-md"
                 style={{ background: `${action.color}20` }}
               >
-                <action.icon className="w-4 h-4" style={{ color: action.color }} aria-hidden="true" />
+                <action.icon className="w-5 h-5" style={{ color: action.color }} aria-hidden="true" />
               </div>
-              <span className="font-medium text-gray-700 dark:text-gray-200">{action.label}</span>
+              <div>
+                <span className="font-medium text-gray-700 dark:text-gray-200 block text-sm">{action.label}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{action.desc}</span>
+              </div>
             </div>
           </div>
         </Link>

@@ -5931,3 +5931,89 @@ a, a:visited {
     justify-content: center;
   }
 }
+
+/* ============================================
+   MOBILE TOUCH INTERACTIONS & RESPONSIVENESS
+   ============================================ */
+
+/* Improve tap targets on mobile */
+@media (max-width: 768px) {
+  button, 
+  a, 
+  [role="button"],
+  .btn,
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improve touch feedback */
+  button:active,
+  a:active,
+  [role="button"]:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+  
+  /* Better spacing for mobile forms */
+  input, 
+  textarea, 
+  select {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    padding: 12px 16px;
+  }
+  
+  /* Smoother scrolling on iOS */
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Reduce animations for mobile performance */
+  @media (prefers-reduced-motion: no-preference) {
+    .animate-float,
+    .animate-pulse-glow {
+      animation-duration: 6s;
+    }
+  }
+  
+  /* Stack quick actions better on small screens */
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+/* Smooth touch transitions */
+@supports (-webkit-touch-callout: none) {
+  button, a, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--glp-sage);
+  outline-offset: 2px;
+}
+
+/* Skip focus outline for mouse users */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Responsive typography */
+@media (max-width: 640px) {
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  .hero-title {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+}
