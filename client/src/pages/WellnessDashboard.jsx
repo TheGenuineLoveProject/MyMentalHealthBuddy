@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { Heart, TrendingUp, Calendar, Sparkles, Sun, ArrowRight, Activity, BookOpen } from "lucide-react";
+import { Heart, TrendingUp, Calendar, Sparkles, Sun, ArrowRight, Activity, BookOpen, Flame, Lightbulb } from "lucide-react";
 import EmotionLog from "../components/wellness/EmotionLog";
 import JournalAI from "../components/wellness/JournalAI";
 import WeatherMoodSync from "../components/wellness/WeatherMoodSync";
@@ -33,6 +33,75 @@ function WelcomeHeader({ user }) {
   );
 }
 
+function calculateStreak(entries) {
+  if (!entries || entries.length === 0) return 0;
+  
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayTime = today.getTime();
+  const oneDayMs = 24 * 60 * 60 * 1000;
+  
+  const uniqueDays = new Set();
+  entries.forEach(e => {
+    const date = new Date(e.createdAt);
+    date.setHours(0, 0, 0, 0);
+    uniqueDays.add(date.getTime());
+  });
+  
+  let streak = 0;
+  let checkDate = todayTime;
+  
+  if (!uniqueDays.has(checkDate)) {
+    checkDate = todayTime - oneDayMs;
+  }
+  
+  while (uniqueDays.has(checkDate)) {
+    streak++;
+    checkDate -= oneDayMs;
+  }
+  
+  return streak;
+}
+
+function DailyWellnessTip() {
+  const tips = [
+    { tip: "Take 3 deep breaths before your first meal today.", category: "Breathing" },
+    { tip: "Write down one thing you're grateful for right now.", category: "Gratitude" },
+    { tip: "Step outside for 5 minutes and notice nature around you.", category: "Grounding" },
+    { tip: "Send a kind message to someone you care about.", category: "Connection" },
+    { tip: "Place your hand on your heart and say 'I am enough.'", category: "Affirmation" },
+    { tip: "Drink a full glass of water mindfully.", category: "Presence" },
+    { tip: "Notice 5 things you can see, 4 you can touch, 3 you can hear.", category: "Grounding" },
+    { tip: "Take a 2-minute stretch break and breathe deeply.", category: "Body" },
+    { tip: "Write one sentence about how you're feeling right now.", category: "Journaling" },
+    { tip: "Close your eyes and listen to the sounds around you for 1 minute.", category: "Mindfulness" },
+  ];
+  
+  const today = new Date();
+  const dayIndex = (today.getFullYear() * 366 + today.getMonth() * 31 + today.getDate()) % tips.length;
+  const todaysTip = tips[dayIndex];
+
+  return (
+    <div 
+      className="bg-gradient-to-br from-teal-50 to-sage/10 dark:from-teal-900/20 dark:to-sage/5 rounded-xl p-4 border border-teal-200/50 dark:border-teal-700/30"
+      data-testid="daily-wellness-tip"
+    >
+      <div className="flex items-start gap-3">
+        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-teal-400 to-teal-500 flex items-center justify-center flex-shrink-0">
+          <Lightbulb className="w-5 h-5 text-white" aria-hidden="true" />
+        </div>
+        <div>
+          <div className="flex items-center gap-2 mb-1">
+            <span className="text-xs font-medium text-teal-600 dark:text-teal-400 uppercase tracking-wide">Today's Tip</span>
+            <span className="text-xs text-teal-500/70 dark:text-teal-400/50">• {todaysTip.category}</span>
+          </div>
+          <p className="text-sm text-gray-700 dark:text-gray-200 leading-relaxed">{todaysTip.tip}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function QuickStats({ entries = [] }) {
   const thisWeek = entries.filter((e) => {
     const date = new Date(e.createdAt);
@@ -43,31 +112,47 @@ function QuickStats({ entries = [] }) {
 
   const positiveEmotions = ["Happy", "Grateful", "Calm", "Hopeful"];
   const positiveCount = thisWeek.filter((e) => positiveEmotions.includes(e.emotion)).length;
+  const streak = calculateStreak(entries);
 
   const stats = [
-    { label: "Check-ins this week", value: thisWeek.length, icon: Calendar, color: "var(--glp-sage)" },
-    { label: "Positive moments", value: positiveCount, icon: Heart, color: "var(--glp-gold)" },
-    { label: "Total reflections", value: entries.length, icon: BookOpen, color: "var(--glp-teal)" },
+    { label: "Day streak", value: streak, icon: Flame, color: "#f59e0b", isStreak: true },
+    { label: "This week", value: thisWeek.length, icon: Calendar, color: "var(--glp-sage)" },
+    { label: "Positive", value: positiveCount, icon: Heart, color: "var(--glp-gold)" },
+    { label: "Total", value: entries.length, icon: BookOpen, color: "var(--glp-teal)" },
   ];
 
   return (
-    <div className="grid grid-cols-3 gap-4 mb-8" data-testid="quick-stats">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" data-testid="quick-stats">
       {stats.map((stat, idx) => (
         <div
           key={idx}
-          className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700 shadow-sm"
+          className={`rounded-xl p-4 border shadow-sm transition-all hover:shadow-md ${
+            stat.isStreak 
+              ? 'bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-amber-200/50 dark:border-amber-700/30' 
+              : 'bg-white dark:bg-gray-800 border-gray-100 dark:border-gray-700'
+          }`}
           data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, "-")}`}
         >
           <div className="flex items-center gap-3">
             <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center"
-              style={{ background: `${stat.color}20` }}
+              className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                stat.isStreak ? 'bg-gradient-to-br from-orange-400 to-amber-500 shadow-sm' : ''
+              }`}
+              style={stat.isStreak ? {} : { background: `${stat.color}20` }}
             >
-              <stat.icon className="w-5 h-5" style={{ color: stat.color }} aria-hidden="true" />
+              <stat.icon 
+                className={`w-5 h-5 ${stat.isStreak ? 'text-white' : ''}`} 
+                style={stat.isStreak ? {} : { color: stat.color }} 
+                aria-hidden="true" 
+              />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">{stat.label}</p>
+              <p className={`text-2xl font-bold ${stat.isStreak ? 'text-amber-600 dark:text-amber-400' : 'text-gray-900 dark:text-white'}`}>
+                {stat.value}
+              </p>
+              <p className={`text-xs ${stat.isStreak ? 'text-amber-600/80 dark:text-amber-400/80' : 'text-gray-500 dark:text-gray-400'}`}>
+                {stat.label}
+              </p>
             </div>
           </div>
         </div>
@@ -138,6 +223,10 @@ export default function WellnessDashboard() {
           <WelcomeHeader user={user} />
           
           <QuickStats entries={moodEntries} />
+          
+          <DailyWellnessTip />
+          
+          <div className="mb-6" />
           
           <QuickActions />
 

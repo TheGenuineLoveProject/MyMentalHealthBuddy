@@ -6017,3 +6017,148 @@ a, a:visited {
     font-size: 1rem;
   }
 }
+
+
+/* ============================================
+   SMOOTH PAGE TRANSITIONS
+   ============================================ */
+
+/* Page enter animation */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply to main content areas */
+main,
+[data-page-content] {
+  animation: fadeSlideIn 0.3s ease-out;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  main,
+  [data-page-content] {
+    animation: none;
+  }
+}
+
+/* Button and link hover micro-interactions */
+.btn-primary,
+.cta-button,
+button[type="submit"] {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-primary:hover,
+.cta-button:hover,
+button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary:active,
+.cta-button:active,
+button[type="submit"]:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Link underline animation */
+.link-animated {
+  position: relative;
+  text-decoration: none;
+}
+
+.link-animated::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.25s ease-out;
+}
+
+.link-animated:hover::after {
+  width: 100%;
+}
+
+/* Smooth accordion transitions */
+[data-accordion-content] {
+  transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+  overflow: hidden;
+}
+
+/* Icon rotation for expandable sections */
+.icon-rotate {
+  transition: transform 0.2s ease-out;
+}
+
+.icon-rotate.open {
+  transform: rotate(180deg);
+}
+
+/* Staggered list animations */
+@keyframes staggerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-item {
+  animation: staggerFadeIn 0.4s ease-out both;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0s; }
+.stagger-item:nth-child(2) { animation-delay: 0.05s; }
+.stagger-item:nth-child(3) { animation-delay: 0.1s; }
+.stagger-item:nth-child(4) { animation-delay: 0.15s; }
+.stagger-item:nth-child(5) { animation-delay: 0.2s; }
+.stagger-item:nth-child(6) { animation-delay: 0.25s; }
+
+
+/* Disable micro-interactions for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .cta-button,
+  button[type="submit"],
+  .card-hover,
+  .link-animated::after,
+  .icon-rotate,
+  .stagger-item {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .btn-primary:hover,
+  .cta-button:hover,
+  button[type="submit"]:hover,
+  .card-hover:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
