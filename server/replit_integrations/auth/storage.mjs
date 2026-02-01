@@ -58,6 +58,11 @@ class AuthStorage {
         return user;
       }
       
+      // Check if there are any existing admins - if not, make this user admin
+      const existingAdmins = await db.select().from(users).where(eq(users.role, 'admin'));
+      const shouldBeAdmin = existingAdmins.length === 0 || 
+        existingAdmins.every(u => u.email?.includes('test') || u.email?.includes('fixture'));
+      
       const [user] = await db
         .insert(users)
         .values({
@@ -65,10 +70,12 @@ class AuthStorage {
           email: email,
           name: fullName,
           profileImageUrl: userData.profileImageUrl,
+          role: shouldBeAdmin ? 'admin' : 'user',
           createdAt: new Date(),
           updatedAt: new Date(),
         })
         .returning();
+      console.log(`[Auth] New user created: ${email}, role: ${user.role}`);
       return { ...user, isNewUser: true };
     }
   }
