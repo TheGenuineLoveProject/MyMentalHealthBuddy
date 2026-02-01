@@ -254,6 +254,7 @@ const scienceOfAffirmations = {
 function AffirmationCard({ affirmation, onNext, category }) {
   const [copied, setCopied] = useState(false);
   const [liked, setLiked] = useState(false);
+  const CategoryIcon = category.icon;
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(affirmation);
@@ -262,60 +263,49 @@ function AffirmationCard({ affirmation, onNext, category }) {
   };
 
   return (
-  <WellnessPageShell
-    title="AffirmationsPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="Affirmations — The Genuine Love Project" description="Discover supportive affirmations for daily self-encouragement." />
-
-
-    <div className="relative rounded-3xl p-8 md:p-12 text-center shadow-xl" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}>
-      <category.icon className="h-12 w-12 mx-auto mb-6 opacity-80" />
+    <div 
+      className="relative rounded-3xl p-8 md:p-12 text-center shadow-xl" 
+      style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', color: 'var(--glp-paper)' }}
+      role="region"
+      aria-label="Current affirmation"
+      data-testid="card-affirmation"
+    >
+      <CategoryIcon className="h-12 w-12 mx-auto mb-6 opacity-80" aria-hidden="true" />
       
       <p className="text-2xl md:text-3xl font-medium leading-relaxed mb-8">
         "{affirmation}"
       </p>
 
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-4 flex-wrap" role="group" aria-label="Affirmation actions">
         <button
           onClick={handleCopy}
-          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           style={{ background: 'var(--glp-white-20)' }}
           data-testid="button-copy-affirmation"
+          aria-label={copied ? "Affirmation copied" : "Copy affirmation to clipboard"}
         >
-          {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+          {copied ? <Check className="h-5 w-5" aria-hidden="true" /> : <Copy className="h-5 w-5" aria-hidden="true" />}
           {copied ? "Copied!" : "Copy"}
         </button>
         <button
           onClick={() => setLiked(!liked)}
-          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           style={liked ? { background: 'white', color: 'var(--glp-blush)' } : { background: 'var(--glp-white-20)' }}
           data-testid="button-like-affirmation"
+          aria-pressed={liked}
+          aria-label={liked ? "Remove from saved" : "Save affirmation"}
         >
-          <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} />
+          <Heart className={`h-5 w-5 ${liked ? "fill-current" : ""}`} aria-hidden="true" />
           {liked ? "Saved" : "Save"}
         </button>
         <button
           onClick={onNext}
-          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           style={{ background: 'var(--glp-white-20)' }}
           data-testid="button-next-affirmation"
+          aria-label="Show next affirmation"
         >
-          <RefreshCw className="h-5 w-5" />
+          <RefreshCw className="h-5 w-5" aria-hidden="true" />
           Next
         </button>
       </div>
@@ -509,6 +499,5 @@ export default function AffirmationsPage() {
         <SafetyFooter variant="prominent" />
       </div>
     </div>
-  </WellnessPageShell>
   );
 }

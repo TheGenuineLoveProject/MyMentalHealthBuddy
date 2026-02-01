@@ -386,26 +386,32 @@ export default function BehaviorChangePage() {
             </div>
           </section>
 
-          <div className="flex flex-wrap gap-2 mb-8">
-            {behaviorModules.map(module => (
-              <button
-                key={module.id}
-                onClick={() => setSelectedModule(module)}
-                className="px-4 py-2 rounded-full text-sm font-medium transition-colors"
-                style={selectedModule.id === module.id 
-                  ? { background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }
-                  : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', color: 'var(--glp-ink)' }}
-                data-testid={`button-module-${module.id}`}
-              >
-                <module.icon className="h-4 w-4 inline mr-2" />
-                {module.title}
-              </button>
-            ))}
+          <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Behavior change modules">
+            {behaviorModules.map(module => {
+              const ModuleIcon = module.icon;
+              return (
+                <button
+                  key={module.id}
+                  onClick={() => setSelectedModule(module)}
+                  className="px-4 py-2 rounded-full text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  style={selectedModule.id === module.id 
+                    ? { background: 'var(--glp-sage-deep)', color: 'var(--glp-paper)' }
+                    : { background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)', color: 'var(--glp-ink)' }}
+                  data-testid={`button-module-${module.id}`}
+                  role="tab"
+                  aria-selected={selectedModule.id === module.id}
+                  aria-controls="module-content-panel"
+                >
+                  <ModuleIcon className="h-4 w-4 inline mr-2" aria-hidden="true" />
+                  {module.title}
+                </button>
+              );
+            })}
           </div>
 
-          <div className="card-bordered mb-8" style={selectedModule.bgColorStyle}>
+          <div className="card-bordered mb-8" style={selectedModule.bgColorStyle} role="tabpanel" id="module-content-panel" aria-label={`${selectedModule.title} content`}>
             <div className="flex items-center gap-3 mb-4">
-              <selectedModule.icon className="h-8 w-8" style={selectedModule.colorStyle} />
+              {(() => { const SelectedIcon = selectedModule.icon; return <SelectedIcon className="h-8 w-8" style={selectedModule.colorStyle} aria-hidden="true" />; })()}
               <h2 className="text-heading-lg" style={{ color: 'var(--glp-ink)' }}>{selectedModule.title}</h2>
             </div>
             

@@ -228,11 +228,12 @@ export default function Admin() {
               <button
                 onClick={fetchStats}
                 disabled={loading}
-                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl font-medium transition-all disabled:opacity-50"
+                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl font-medium transition-all disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 style={{ background: 'white', border: '2px solid var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }}
                 data-testid="button-refresh"
+                aria-label={loading ? "Refreshing data" : "Refresh admin data"}
               >
-                <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin motion-reduce:animate-none' : ''}`} />
+                <RefreshCw className={`w-5 h-5 ${loading ? 'animate-spin motion-reduce:animate-none' : ''}`} aria-hidden="true" />
                 Refresh
               </button>
               <Link
@@ -264,7 +265,7 @@ export default function Admin() {
           </div>
         </header>
 
-        <nav className="flex items-center gap-3 mb-10 overflow-x-auto pb-3 scrollbar-hide">
+        <nav className="flex items-center gap-3 mb-10 overflow-x-auto pb-3 scrollbar-hide" role="tablist" aria-label="Admin navigation">
           {NAV_ITEMS.map(item => {
             const Icon = item.icon;
             const isActive = activeView === item.id;
@@ -272,14 +273,17 @@ export default function Admin() {
               <button
                 key={item.id}
                 onClick={() => setActiveView(item.id)}
-                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl font-medium whitespace-nowrap transition-all"
+                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl font-medium whitespace-nowrap transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 style={isActive 
                   ? { background: 'white', boxShadow: '0 4px 16px var(--glp-sage-15)', border: '2px solid var(--glp-sage-15)', color: 'var(--glp-sage-deep)' }
                   : { background: 'transparent', color: 'var(--glp-sage)', border: '2px solid transparent' }
                 }
                 data-testid={`nav-${item.id}`}
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={`panel-${item.id}`}
               >
-                <Icon className="w-5 h-5" />
+                <Icon className="w-5 h-5" aria-hidden="true" />
                 {item.label}
               </button>
             );

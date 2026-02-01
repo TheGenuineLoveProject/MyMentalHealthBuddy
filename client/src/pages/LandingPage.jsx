@@ -8,10 +8,10 @@ import SacredBackground from '../components/SacredBackground';
 
 export default function LandingPage() {
   return (
-    <div className="relative overflow-hidden min-h-screen font-sans bg-softWhite text-charcoal">
+    <div className="relative overflow-hidden min-h-screen font-sans bg-softWhite text-charcoal" data-testid="page-landing">
       <SacredNavBar />
       <SacredBackground />
-      <main className="space-y-24 pt-32 pb-16 px-4 sm:px-8 md:px-16">
+      <main className="space-y-24 pt-32 pb-16 px-4 sm:px-8 md:px-16" role="main" aria-label="Landing page content">
         <HeroSection />
         <TestimonialCarousel />
         <OnboardingFlow />
