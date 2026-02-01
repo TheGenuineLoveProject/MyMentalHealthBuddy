@@ -86,12 +86,7 @@ export default function BoundariesPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: async (data) => {
-      return apiRequest("/api/wellness-tools/boundaries", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-    },
+    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/boundaries", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
       setSituation("");
@@ -105,9 +100,7 @@ export default function BoundariesPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: async (id) => {
-      return apiRequest(`/api/wellness-tools/boundaries/${id}`, { method: "DELETE" });
-    },
+    mutationFn: (id) => apiRequest("DELETE", `/api/wellness-tools/boundaries/${id}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/boundaries"] });
       toast({ title: "Script removed", description: "The boundary script has been removed." });

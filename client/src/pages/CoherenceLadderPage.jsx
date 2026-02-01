@@ -100,12 +100,7 @@ export default function CoherenceLadderPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: async (data) => {
-      return apiRequest("/api/wellness-tools/coherence", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-    },
+    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/coherence", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/coherence"] });
       setSelectedLevel(null);

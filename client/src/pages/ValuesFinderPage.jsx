@@ -77,12 +77,7 @@ export default function ValuesFinderPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: async (data) => {
-      return apiRequest("/api/wellness-tools/values", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-    },
+    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/values", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/values"] });
       setCustomValue("");

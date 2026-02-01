@@ -80,12 +80,7 @@ export default function MovementSnacksPage() {
   });
 
   const createMutation = useMutation({
-    mutationFn: async (data) => {
-      return apiRequest("/api/wellness-tools/movement", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-    },
+    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/movement", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/wellness-tools/movement"] });
       setActiveSnack(null);

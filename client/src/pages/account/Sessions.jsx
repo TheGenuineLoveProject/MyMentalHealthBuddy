@@ -39,11 +39,7 @@ export default function SessionsPage() {
   });
 
   const revokeMutation = useMutation({
-    mutationFn: async (sessionId) => {
-      return apiRequest(`/api/account/sessions/${sessionId}`, {
-        method: 'DELETE',
-      });
-    },
+    mutationFn: (sessionId) => apiRequest("DELETE", `/api/account/sessions/${sessionId}`),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/account/sessions'] });
       toast({
