@@ -128,10 +128,20 @@ export async function setupAuth(app) {
         return res.redirect("/api/login");
       }
       
+      console.log("[ReplitAuth] User object received:", JSON.stringify(user, null, 2));
+      
       req.logIn(user, (loginErr) => {
         if (loginErr) {
           console.error("[ReplitAuth] Login error:", loginErr);
           return res.redirect("/api/login");
+        }
+        
+        console.log("[ReplitAuth] After logIn, req.user:", JSON.stringify(req.user, null, 2));
+        console.log("[ReplitAuth] Session passport data:", JSON.stringify(req.session?.passport, null, 2));
+        
+        // Manually ensure passport data is in session
+        if (!req.session.passport || !req.session.passport.user) {
+          req.session.passport = { user: user };
         }
         
         // Force session save before redirect
@@ -139,6 +149,7 @@ export async function setupAuth(app) {
           if (saveErr) {
             console.error("[ReplitAuth] Session save error:", saveErr);
           }
+          console.log("[ReplitAuth] Session after save:", req.session?.id);
           console.log("[ReplitAuth] User authenticated successfully:", user.claims?.sub);
           return res.redirect("/");
         });
