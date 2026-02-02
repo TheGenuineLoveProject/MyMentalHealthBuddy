@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 
 const LOTUS_MESSAGES = {
   morning: [
@@ -23,6 +23,30 @@ const LOTUS_MESSAGES = {
   ]
 };
 
+const TRIGGER_MESSAGES = {
+  "low-mood": [
+    "I notice you're going through something difficult. This feeling is temporary.",
+    "Even in darkness, healing continues. You are not alone.",
+    "Difficult moments are part of the journey. Would you like a grounding exercise?"
+  ],
+  "streak-7": [
+    "🌱 One week of showing up for yourself! You've earned the 7-Day badge.",
+    "Seven days of dedication. Your consistency is beautiful."
+  ],
+  "streak-30": [
+    "🌸 A full month of healing practice! You're truly dedicated to your growth.",
+    "Thirty days of self-love. What an incredible achievement."
+  ],
+  "mood-improvement": [
+    "Beautiful! Your spirit is shining today. What's bringing you joy?",
+    "I see the light in you growing stronger. Keep nurturing it."
+  ],
+  "first-entry": [
+    "✨ Your healing journey has begun. Welcome, brave soul.",
+    "Every journey starts with a single step. You've taken yours."
+  ]
+};
+
 const MOOD_COLORS = {
   calm: "#8fbf9f",
   anxious: "#f4c7c3",
@@ -31,6 +55,14 @@ const MOOD_COLORS = {
   neutral: "#9ca3af",
   hopeful: "#2f5d5d",
   grateful: "#d4af37"
+};
+
+const GLOW_STYLES = {
+  default: "0 0 30px rgba(143, 191, 159, 0.4)",
+  golden: "0 0 40px rgba(212, 175, 55, 0.6), 0 0 80px rgba(255, 215, 0, 0.3)",
+  "soft-rose": "0 0 30px rgba(244, 199, 195, 0.5)",
+  "sage-pulse": "0 0 35px rgba(143, 191, 159, 0.6)",
+  "golden-pulse": "0 0 50px rgba(212, 175, 55, 0.7), 0 0 100px rgba(255, 215, 0, 0.4)"
 };
 
 function getTimeOfDay() {
@@ -46,25 +78,48 @@ export default function LotusGuide({
   size = 120,
   showMessage = true,
   animate = true,
+  trigger = null,
+  glowStyle = "default",
+  onTriggerAction,
   onClick,
   className = ""
 }) {
   const [message, setMessage] = useState("");
   const [isBlossoming, setIsBlossoming] = useState(false);
+  const [currentGlow, setCurrentGlow] = useState(glowStyle);
 
   const timeOfDay = useMemo(() => getTimeOfDay(), []);
   const petalColor = MOOD_COLORS[mood] || MOOD_COLORS.neutral;
 
   useEffect(() => {
-    const messages = LOTUS_MESSAGES[timeOfDay];
-    setMessage(messages[Math.floor(Math.random() * messages.length)]);
-  }, [timeOfDay]);
+    if (trigger && TRIGGER_MESSAGES[trigger]) {
+      const triggerMsgs = TRIGGER_MESSAGES[trigger];
+      setMessage(triggerMsgs[Math.floor(Math.random() * triggerMsgs.length)]);
+      
+      if (trigger === "streak-7" || trigger === "streak-30" || trigger === "mood-improvement") {
+        setCurrentGlow("golden-pulse");
+        setIsBlossoming(true);
+        setTimeout(() => {
+          setIsBlossoming(false);
+          setCurrentGlow(glowStyle);
+        }, 3000);
+      } else if (trigger === "low-mood") {
+        setCurrentGlow("soft-rose");
+      }
+    } else {
+      const messages = LOTUS_MESSAGES[timeOfDay];
+      setMessage(messages[Math.floor(Math.random() * messages.length)]);
+    }
+  }, [trigger, timeOfDay, glowStyle]);
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setIsBlossoming(true);
     setTimeout(() => setIsBlossoming(false), 1000);
+    if (trigger && onTriggerAction) {
+      onTriggerAction(trigger);
+    }
     if (onClick) onClick();
-  };
+  }, [trigger, onTriggerAction, onClick]);
 
   return (
     <div 
@@ -74,8 +129,12 @@ export default function LotusGuide({
     >
       <button
         onClick={handleClick}
-        className={`relative transition-transform duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37] rounded-full ${isBlossoming ? 'scale-110' : ''}`}
-        style={{ width: size, height: size }}
+        className={`relative transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37] rounded-full ${isBlossoming ? 'scale-110' : ''}`}
+        style={{ 
+          width: size, 
+          height: size,
+          filter: `drop-shadow(${GLOW_STYLES[currentGlow] || GLOW_STYLES.default})`
+        }}
         aria-label="Click lotus for wellness guidance"
         data-testid="button-lotus-guide"
       >
