@@ -1,27 +1,47 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
-import { CreditCard, Check, ExternalLink, Calendar, Shield, ArrowRight } from "lucide-react";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { CreditCard, Check, ExternalLink, Calendar, Shield, ArrowRight, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
-const MOCK_SUBSCRIPTION = {
-  plan: "Premium",
-  status: "active",
-  currentPeriodEnd: "2026-02-25",
-  cancelAtPeriodEnd: false,
-  features: [
-    "Unlimited AI chat sessions",
-    "All wellness tools",
-    "Priority support",
-    "Advanced analytics"
-  ]
+const PLAN_FEATURES = {
+  free: ["Mood tracking", "Basic journaling", "Core wellness tools"],
+  pro: ["Unlimited AI chat sessions", "All wellness tools", "Advanced analytics", "Healing journeys"],
+  team: ["Everything in Pro", "Team dashboard", "Admin controls", "Priority support"],
+  premium: ["Unlimited AI chat sessions", "All wellness tools", "Priority support", "Advanced analytics"]
 };
 
 export default function Subscription() {
-  const [subscription] = useState(MOCK_SUBSCRIPTION);
+  const { toast } = useToast();
+  const [portalLoading, setPortalLoading] = useState(false);
+  
+  const { data: subscription, isLoading, error } = useQuery({
+    queryKey: ["/api/billing/subscription-status"],
+  });
+  
+  const openPortal = async () => {
+    setPortalLoading(true);
+    try {
+      const res = await apiRequest("/api/billing/portal", { method: "POST" });
+      if (res.url) {
+        window.location.href = res.url;
+      } else {
+        toast({ title: "Error", description: "Unable to open billing portal", variant: "destructive" });
+      }
+    } catch (e) {
+      toast({ title: "Error", description: "Failed to access billing portal", variant: "destructive" });
+    } finally {
+      setPortalLoading(false);
+    }
+  };
+  
+  const subData = subscription || { plan: "free", status: "none" };
+  const planFeatures = PLAN_FEATURES[subData.plan] || PLAN_FEATURES.free;
 
   const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleDateString("en-US", {
@@ -52,36 +72,43 @@ export default function Subscription() {
           </p>
         </header>
 
+        {isLoading ? (
+          <Card className="mb-6 p-12 flex items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </Card>
+        ) : (
         <Card className="mb-6">
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg">Current Plan</CardTitle>
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                subscription.status === "active"
+                subData.status === "active" || subData.status === "trialing"
                   ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
                   : "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"
               }`}>
-                {subscription.status === "active" ? "Active" : "Inactive"}
+                {subData.status === "active" ? "Active" : subData.status === "trialing" ? "Trial" : subData.plan === "free" ? "Free" : "Inactive"}
               </span>
             </div>
           </CardHeader>
           <CardContent>
             <div className="mb-6">
-              <h2 className="text-2xl font-bold text-foreground mb-1">
-                {subscription.plan}
+              <h2 className="text-2xl font-bold text-foreground mb-1 capitalize">
+                {subData.plan || "Free"}
               </h2>
-              <p className="text-sm text-muted-foreground flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                {subscription.cancelAtPeriodEnd 
-                  ? `Cancels on ${formatDate(subscription.currentPeriodEnd)}`
-                  : `Renews on ${formatDate(subscription.currentPeriodEnd)}`
-                }
-              </p>
+              {subData.currentPeriodEnd && (
+                <p className="text-sm text-muted-foreground flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  {subData.cancelAtPeriodEnd 
+                    ? `Cancels on ${formatDate(subData.currentPeriodEnd)}`
+                    : `Renews on ${formatDate(subData.currentPeriodEnd)}`
+                  }
+                </p>
+              )}
             </div>
 
             <div className="space-y-2 mb-6">
               <h3 className="text-sm font-medium">Included Features</h3>
-              {subscription.features.map((feature, i) => (
+              {planFeatures.map((feature, i) => (
                 <div key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Check className="w-4 h-4 text-green-500" />
                   {feature}
@@ -90,22 +117,40 @@ export default function Subscription() {
             </div>
 
             <div className="flex gap-4">
-              <Button variant="outline" className="flex-1 min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-billing-portal">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Billing Portal
-              </Button>
-              {subscription.cancelAtPeriodEnd ? (
-                <Button className="flex-1 min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-resume">
-                  Resume Subscription
-                </Button>
+              {subData.plan !== "free" ? (
+                <>
+                  <Button 
+                    variant="outline" 
+                    className="flex-1 min-h-[44px] px-6 py-3 rounded-lg" 
+                    data-testid="button-billing-portal"
+                    onClick={openPortal}
+                    disabled={portalLoading}
+                  >
+                    {portalLoading ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <ExternalLink className="w-4 h-4 mr-2" />}
+                    Billing Portal
+                  </Button>
+                  {subData.cancelAtPeriodEnd ? (
+                    <Button className="flex-1 min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-resume" onClick={openPortal}>
+                      Resume Subscription
+                    </Button>
+                  ) : (
+                    <Button variant="ghost" className="flex-1 min-h-[44px] px-6 py-3 rounded-lg text-muted-foreground" data-testid="button-cancel" onClick={openPortal}>
+                      Manage Plan
+                    </Button>
+                  )}
+                </>
               ) : (
-                <Button variant="ghost" className="flex-1 min-h-[44px] px-6 py-3 rounded-lg text-muted-foreground" data-testid="button-cancel">
-                  Cancel Plan
-                </Button>
+                <Link href="/pricing" className="flex-1">
+                  <Button className="w-full min-h-[44px] px-6 py-3 rounded-lg" data-testid="button-upgrade">
+                    <ArrowRight className="w-4 h-4 mr-2" />
+                    Upgrade to Pro
+                  </Button>
+                </Link>
               )}
             </div>
           </CardContent>
         </Card>
+        )}
 
         <Card className="mb-6">
           <CardHeader>

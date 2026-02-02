@@ -1,19 +1,16 @@
-import { useState } from "react";
-import { Receipt, Download, Calendar, CreditCard, FileText } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Receipt, Download, Calendar, CreditCard, FileText, Loader2, ExternalLink } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 
-const MOCK_ORDERS = [
-  { id: "ord_001", date: "2026-01-25", description: "Premium Monthly", amount: 19.99, status: "paid" },
-  { id: "ord_002", date: "2025-12-25", description: "Premium Monthly", amount: 19.99, status: "paid" },
-  { id: "ord_003", date: "2025-11-25", description: "Premium Monthly", amount: 19.99, status: "paid" },
-  { id: "ord_004", date: "2025-10-15", description: "Self-Love Journal (Digital)", amount: 9.99, status: "paid" }
-];
-
 export default function OrderHistory() {
-  const [orders] = useState(MOCK_ORDERS);
+  const { data, isLoading } = useQuery({
+    queryKey: ["/api/billing/invoices"],
+  });
+  
+  const orders = data?.invoices || [];
 
   const formatDate = (dateStr) => {
     return new Date(dateStr).toLocaleDateString("en-US", {
@@ -44,7 +41,11 @@ export default function OrderHistory() {
           </p>
         </header>
 
-        {orders.length === 0 ? (
+        {isLoading ? (
+          <Card className="p-12 flex items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-primary" />
+          </Card>
+        ) : orders.length === 0 ? (
           <Card className="p-12 text-center">
             <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h2 className="text-lg font-semibold mb-2">No Orders Yet</h2>
@@ -73,20 +74,26 @@ export default function OrderHistory() {
                         <div className="font-medium">{order.description}</div>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Calendar className="w-3 h-3" />
-                          {formatDate(order.date)}
+                          {order.date && formatDate(order.date)}
                           <span className="text-green-600 dark:text-green-400">{order.status}</span>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="font-semibold">${order.amount.toFixed(2)}</span>
-                      <Button 
-                        variant="ghost" 
-                        size="icon"
-                        data-testid={`download-${order.id}`}
-                      >
-                        <Download className="w-4 h-4" />
-                      </Button>
+                      <span className="font-semibold">${(order.amount || 0).toFixed(2)}</span>
+                      {order.invoicePdf ? (
+                        <a href={order.invoicePdf} target="_blank" rel="noopener noreferrer">
+                          <Button variant="ghost" size="icon" data-testid={`download-${order.id}`}>
+                            <Download className="w-4 h-4" />
+                          </Button>
+                        </a>
+                      ) : order.hostedUrl ? (
+                        <a href={order.hostedUrl} target="_blank" rel="noopener noreferrer">
+                          <Button variant="ghost" size="icon" data-testid={`view-${order.id}`}>
+                            <ExternalLink className="w-4 h-4" />
+                          </Button>
+                        </a>
+                      ) : null}
                     </div>
                   </div>
                 ))}

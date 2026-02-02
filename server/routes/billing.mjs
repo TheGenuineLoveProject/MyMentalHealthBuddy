@@ -163,4 +163,38 @@ router.get("/current-plan", async (req, res) => {
   }
 });
 
+router.get("/invoices", async (req, res) => {
+  try {
+    if (!req.user) return unauthorized(res);
+    if (!stripe) return success(res, { invoices: [] });
+
+    const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.user.id}`);
+    const customerId = userResult.rows?.[0]?.stripe_customer_id;
+    
+    if (!customerId) {
+      return success(res, { invoices: [] });
+    }
+
+    const invoices = await stripe.invoices.list({
+      customer: customerId,
+      limit: 20,
+    });
+
+    const formatted = invoices.data.map(inv => ({
+      id: inv.id,
+      date: inv.created ? new Date(inv.created * 1000).toISOString() : null,
+      description: inv.lines?.data?.[0]?.description || "Subscription",
+      amount: (inv.amount_paid || 0) / 100,
+      status: inv.status,
+      invoicePdf: inv.invoice_pdf,
+      hostedUrl: inv.hosted_invoice_url,
+    }));
+
+    return success(res, { invoices: formatted });
+  } catch (err) {
+    logger.error("Invoices error", { error: err.message });
+    return serverError(res, err);
+  }
+});
+
 export default router;
