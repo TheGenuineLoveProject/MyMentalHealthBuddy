@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { Mail, MessageCircle, Clock, Heart, Sparkles, ArrowRight, CheckCircle, Send } from "lucide-react";
 import SEO from "../components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
+  const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,38 +17,34 @@ export default function Contact() {
     message: ""
   });
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setError("");
-    
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
+  const contactMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/contact", data),
+    onSuccess: () => {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      toast({
+        title: "Message sent!",
+        description: "Thank you for reaching out. We'll respond within 24-48 hours."
       });
-      const data = await res.json();
-      
-      if (data.ok) {
-        setSubmitted(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setError(data.error?.message || "Unable to send message. Please try again.");
-      }
-    } catch {
-      setError("Unable to send message. Please try again later.");
-    } finally {
-      setSubmitting(false);
+    },
+    onError: (err) => {
+      toast({
+        title: "Unable to send message",
+        description: err.message || "Please try again later.",
+        variant: "destructive"
+      });
     }
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    contactMutation.mutate(formData);
   };
 
   const contactMethods = [
@@ -233,20 +233,14 @@ export default function Contact() {
                       />
                     </div>
 
-                    {error && (
-                      <div className="p-4 rounded-xl text-sm" style={{ background: 'var(--glp-rose-10)', color: 'var(--glp-rose-deep)' }} data-testid="text-error">
-                        {error}
-                      </div>
-                    )}
-
                     <button
                       type="submit"
-                      disabled={submitting}
+                      disabled={contactMutation.isPending}
                       className="w-full inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-semibold text-white transition-all hover:opacity-90 disabled:opacity-60"
                       style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-sage))', boxShadow: '0 8px 24px var(--glp-sage-30)' }}
                       data-testid="button-submit"
                     >
-                      {submitting ? (
+                      {contactMutation.isPending ? (
                         <>
                           <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin motion-reduce:animate-none" aria-hidden="true" />
                           <span>Sending...</span>

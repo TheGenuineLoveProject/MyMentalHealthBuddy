@@ -51,9 +51,18 @@ router.post("/register", (req, res) => {
     }
 
     const id = crypto.randomUUID();
-    users.set(email, { id, email, passwordHash: hashPassword(password) });
+    const name = req.body?.name || email.split("@")[0];
+    users.set(email, { id, email, name, passwordHash: hashPassword(password) });
 
-    return res.status(200).json({ ok: true });
+    const token = jwt.sign({ id, email, role: "user" }, ACCESS_SECRET, {
+      expiresIn: "15m",
+    });
+
+    return res.status(200).json({ 
+      ok: true,
+      token,
+      user: { id, email, name, role: "user" }
+    });
   } catch (_err) {
     return res.status(500).json({ ok: false, message: "Registration failed." });
   }
