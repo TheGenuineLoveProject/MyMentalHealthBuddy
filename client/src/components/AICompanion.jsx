@@ -67,8 +67,9 @@ export default function AICompanion({ className = "" }) {
         const aiResponse = {
           id: `ai-${Date.now()}`,
           role: "assistant",
-          content: data?.response || data?.message || SUPPORTIVE_RESPONSES[Math.floor(Math.random() * SUPPORTIVE_RESPONSES.length)],
-          timestamp: new Date()
+          content: data?.reply || data?.response || data?.message || SUPPORTIVE_RESPONSES[Math.floor(Math.random() * SUPPORTIVE_RESPONSES.length)],
+          timestamp: new Date(),
+          isCrisis: data?.isCrisis || false
         };
         setMessages(prev => [...prev, aiResponse]);
       }, 1000 + Math.random() * 1000);
