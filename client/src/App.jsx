@@ -217,21 +217,40 @@ function ConfigRoute({ route }) {
 
 function LoadingFallback() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-softWhite to-sage/10 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30 page-entering">
       <div className="text-center space-y-6" role="status" aria-label="Loading page">
         <div className="relative mx-auto w-20 h-20">
-          <div className="absolute inset-0 rounded-full border-4 border-sage/20" />
-          <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-deepTeal animate-spin motion-reduce:animate-none" />
-          <div className="absolute inset-2 rounded-full border-4 border-transparent border-t-metallicGold animate-spin motion-reduce:animate-none" style={{ animationDirection: 'reverse', animationDuration: '1.5s' }} />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <svg className="w-8 h-8 text-deepTeal" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-          </div>
+          <svg
+            viewBox="0 0 100 100"
+            className="w-full h-full"
+            style={{ animation: 'spin 8s linear infinite' }}
+            aria-hidden="true"
+          >
+            <defs>
+              <linearGradient id="loadingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#8fbf9f" />
+                <stop offset="50%" stopColor="#d4af37" />
+                <stop offset="100%" stopColor="#8fbf9f" />
+              </linearGradient>
+            </defs>
+            {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+              <ellipse
+                key={angle}
+                cx="50"
+                cy="50"
+                rx="10"
+                ry="24"
+                fill="url(#loadingGradient)"
+                fillOpacity={0.6 + (i % 3) * 0.1}
+                transform={`rotate(${angle} 50 50) translate(0, -8)`}
+              />
+            ))}
+            <circle cx="50" cy="50" r="8" fill="#d4af37" />
+          </svg>
         </div>
         <div className="space-y-2">
-          <p className="text-deepTeal font-medium">Preparing your space...</p>
-          <p className="text-sage text-sm">A moment of peace is loading</p>
+          <p className="text-[#2f5d5d] dark:text-[#8fbf9f] font-medium font-serif">Preparing your space...</p>
+          <p className="text-muted-foreground text-sm">A moment of peace is loading</p>
         </div>
       </div>
     </div>

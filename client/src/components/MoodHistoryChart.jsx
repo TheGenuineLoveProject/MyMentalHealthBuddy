@@ -78,7 +78,7 @@ export default function MoodHistoryChart({ compact = false }) {
   const reversedHistory = [...history].reverse();
 
   return (
-    <div data-testid="mood-history-chart" aria-label="Mood history for the last 7 days">
+    <div data-testid="mood-history-chart" aria-label="Mood history for the last 7 days" className="chart-responsive">
       <div className="flex items-end justify-between gap-1.5" style={{ height: compact ? '48px' : '80px' }}>
         {reversedHistory.map((entry, idx) => {
           const rating = entry.rating || 5;
