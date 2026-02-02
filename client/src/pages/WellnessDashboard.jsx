@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Heart, TrendingUp, Calendar, Sparkles, Sun, ArrowRight, Activity, BookOpen, Flame, Lightbulb } from "lucide-react";
@@ -12,6 +12,7 @@ import { LotusGuide } from "../components/sacred";
 import MoodTrendsChartJS from "../components/charts/MoodTrendsChartJS";
 import MoodPieChart from "../components/charts/MoodPieChart";
 import EmotionAdaptiveBackground, { LotusDivider, SacredGlow } from "../components/EmotionAdaptiveBackground";
+import TimeOfDayBackground, { useTimeOfDay } from "../components/TimeOfDayBackground";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { useAuth } from "../context/AuthContext";
@@ -299,6 +300,13 @@ export default function WellnessDashboard() {
   const queryClient = useQueryClient();
   const [latestEntry, setLatestEntry] = useState(null);
   const [currentMood, setCurrentMood] = useState("neutral");
+  const [moodBackgroundPref, setMoodBackgroundPref] = useState("adaptive");
+  const { timeOfDay, theme: timeTheme } = useTimeOfDay();
+
+  useEffect(() => {
+    const savedPref = localStorage.getItem("glp-mood-background") || "adaptive";
+    setMoodBackgroundPref(savedPref);
+  }, []);
 
   const { data: moodEntries = [] } = useQuery({
     queryKey: ["/api/mood"],
@@ -316,6 +324,37 @@ export default function WellnessDashboard() {
     queryClient.invalidateQueries({ queryKey: ["/api/mood"] });
   };
 
+  const MOOD_BG_STYLES = {
+    calm: { mood: "calm", intensity: "medium" },
+    warm: { mood: "grateful", intensity: "medium" },
+    focused: { mood: "hopeful", intensity: "medium" },
+  };
+
+  const BackgroundWrapper = ({ children }) => {
+    if (moodBackgroundPref === "adaptive") {
+      return (
+        <EmotionAdaptiveBackground mood={currentMood} className="min-h-screen" intensity="medium">
+          {children}
+        </EmotionAdaptiveBackground>
+      );
+    }
+    
+    const staticStyle = MOOD_BG_STYLES[moodBackgroundPref];
+    if (staticStyle) {
+      return (
+        <EmotionAdaptiveBackground mood={staticStyle.mood} className="min-h-screen" intensity={staticStyle.intensity}>
+          {children}
+        </EmotionAdaptiveBackground>
+      );
+    }
+    
+    return (
+      <TimeOfDayBackground className="min-h-screen" showMessage={true} intensity="light">
+        {children}
+      </TimeOfDayBackground>
+    );
+  };
+
   return (
     <>
       <SEO
@@ -323,7 +362,7 @@ export default function WellnessDashboard() {
         description="Your personal wellness dashboard for tracking emotions, journaling, and connecting with AI-powered support."
       />
 
-      <EmotionAdaptiveBackground mood={currentMood} className="min-h-screen" intensity="medium">
+      <BackgroundWrapper>
       <div className="bg-[var(--glp-paper)]/80 dark:bg-gray-900/90 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <WelcomeHeader user={user} />
@@ -435,7 +474,7 @@ export default function WellnessDashboard() {
 
         <SafetyFooter />
       </div>
-      </EmotionAdaptiveBackground>
+      </BackgroundWrapper>
     </>
   );
 }

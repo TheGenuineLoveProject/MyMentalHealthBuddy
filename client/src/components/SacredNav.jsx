@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X, Heart, Home, BookOpen, LayoutDashboard, Sparkles, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/Button.jsx";
@@ -17,14 +17,38 @@ export default function SacredNav({ className = "" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [location] = useLocation();
   const { user, isLoading } = useAuth();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+    
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <nav 
-      className={`sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border/50 ${className}`}
+      className={`sticky top-0 z-50 transition-all duration-500 ${
+        isVisible ? "animate-in fade-in slide-in-from-top-4 duration-700" : "opacity-0 -translate-y-4"
+      } ${
+        isScrolled 
+          ? "backdrop-blur-lg bg-background/90 shadow-lg shadow-black/5 border-b border-border/30" 
+          : "backdrop-blur-md bg-background/80 border-b border-border/50"
+      } ${className}`}
       role="navigation"
       aria-label="Main navigation"
+      style={{
+        boxShadow: isScrolled 
+          ? "0 4px 30px rgba(0, 0, 0, 0.05), 0 0 40px rgba(212, 175, 55, 0.05)" 
+          : "none"
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">

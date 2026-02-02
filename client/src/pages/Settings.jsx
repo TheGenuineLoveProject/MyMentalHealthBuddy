@@ -14,12 +14,28 @@ const VISUAL_MODES = [
 ];
 const VISUAL_MODE_KEY = "glp-mode";
 
+const AFFIRMATION_TONES = [
+  { id: "gentle", label: "Gentle", description: "Soft, nurturing affirmations", icon: "🌸" },
+  { id: "empowering", label: "Empowering", description: "Strong, motivating affirmations", icon: "⚡" },
+  { id: "poetic", label: "Poetic", description: "Metaphorical, artistic affirmations", icon: "✨" },
+];
+
+const MOOD_BACKGROUNDS = [
+  { id: "adaptive", label: "Emotion Adaptive", description: "Changes based on your mood" },
+  { id: "calm", label: "Calm Sage", description: "Peaceful green gradients" },
+  { id: "warm", label: "Warm Rose", description: "Gentle dusty rose tones" },
+  { id: "focused", label: "Focused Teal", description: "Deep, grounding teals" },
+];
+
 export default function Settings() {
   const [, setLocation] = useLocation();
   const { user, logout } = useAuth();
   const [notifications, setNotifications] = useState(true);
   const [theme, setTheme] = useState("light");
   const [visualMode, setVisualMode] = useState("");
+  const [affirmationTone, setAffirmationTone] = useState("gentle");
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [moodBackground, setMoodBackground] = useState("adaptive");
   const [isSaving, setIsSaving] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [message, setMessage] = useState("");
@@ -28,9 +44,15 @@ export default function Settings() {
     const savedTheme = localStorage.getItem("theme") || "light";
     const savedNotifications = localStorage.getItem("notifications") !== "false";
     const savedMode = localStorage.getItem(VISUAL_MODE_KEY) || "";
+    const savedTone = localStorage.getItem("glp-affirmation-tone") || "gentle";
+    const savedVoice = localStorage.getItem("glp-voice-enabled") === "true";
+    const savedMoodBg = localStorage.getItem("glp-mood-background") || "adaptive";
     setTheme(savedTheme);
     setNotifications(savedNotifications);
     setVisualMode(savedMode);
+    setAffirmationTone(savedTone);
+    setVoiceEnabled(savedVoice);
+    setMoodBackground(savedMoodBg);
   }, []);
 
   function handleVisualModeChange(modeId) {
@@ -43,6 +65,9 @@ export default function Settings() {
     setIsSaving(true);
     localStorage.setItem("theme", theme);
     localStorage.setItem("notifications", String(notifications));
+    localStorage.setItem("glp-affirmation-tone", affirmationTone);
+    localStorage.setItem("glp-voice-enabled", String(voiceEnabled));
+    localStorage.setItem("glp-mood-background", moodBackground);
 
     setTimeout(() => {
       setIsSaving(false);
@@ -272,6 +297,89 @@ export default function Settings() {
                             </div>
                             <div className="text-xs text-[var(--text-2)] truncate">
                               {mode.description}
+                            </div>
+                          </div>
+                          {isSelected && (
+                            <div className="w-2 h-2 rounded-full bg-[var(--accent)] flex-shrink-0" aria-hidden="true" />
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="form-label mb-3 block">Affirmation Tone</label>
+                  <p className="text-body-sm mb-4">Choose how affirmations speak to you</p>
+                  <div className="grid grid-cols-3 gap-3">
+                    {AFFIRMATION_TONES.map((tone) => {
+                      const isSelected = affirmationTone === tone.id;
+                      return (
+                        <button
+                          key={tone.id}
+                          type="button"
+                          onClick={() => setAffirmationTone(tone.id)}
+                          aria-pressed={isSelected}
+                          data-testid={`button-tone-${tone.id}`}
+                          className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition ${
+                            isSelected
+                              ? "border-[var(--glp-gold)] bg-[var(--glp-gold)]/10 text-[var(--teal-700)]"
+                              : "border-[var(--sage-200)] bg-white hover:border-[var(--sage-300)] text-[var(--teal-600)]"
+                          }`}
+                        >
+                          <span className="text-2xl" aria-hidden="true">{tone.icon}</span>
+                          <span className="text-sm font-medium">{tone.label}</span>
+                          <span className="text-xs text-[var(--text-2)] text-center">{tone.description}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <label className="flex items-start gap-4 cursor-pointer group p-4 rounded-xl hover:bg-[var(--sage-50)] transition border border-[var(--sage-200)]">
+                  <div className="pt-0.5">
+                    <input
+                      type="checkbox"
+                      data-testid="checkbox-voice"
+                      checked={voiceEnabled}
+                      onChange={(e) => setVoiceEnabled(e.target.checked)}
+                      className="w-5 h-5 rounded accent-[var(--sage-500)] focus:ring-2 focus:ring-[var(--sage-400)]"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-lg" aria-hidden="true">🪷</span>
+                      <span className="font-semibold text-[var(--teal-700)]">Voice Affirmations (Lotus Guide)</span>
+                    </div>
+                    <p className="text-body-sm">Enable spoken affirmations using gentle voice synthesis</p>
+                  </div>
+                </label>
+
+                <div>
+                  <label className="form-label mb-3 block">Mood Background Theme</label>
+                  <p className="text-body-sm mb-4">Set your default emotional atmosphere</p>
+                  <div className="space-y-2">
+                    {MOOD_BACKGROUNDS.map((bg) => {
+                      const isSelected = moodBackground === bg.id;
+                      return (
+                        <button
+                          key={bg.id}
+                          type="button"
+                          onClick={() => setMoodBackground(bg.id)}
+                          aria-pressed={isSelected}
+                          data-testid={`button-mood-bg-${bg.id}`}
+                          className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 ${
+                            isSelected
+                              ? "border-[var(--glp-primary)] bg-[var(--surface-2)]"
+                              : "border-[var(--border)] bg-[var(--surface-1)] hover:border-[var(--glp-sage)]"
+                          }`}
+                        >
+                          <div className="flex-1 min-w-0">
+                            <div className={`text-sm font-medium ${isSelected ? "text-[var(--primary)]" : "text-[var(--text-1)]"}`}>
+                              {bg.label}
+                            </div>
+                            <div className="text-xs text-[var(--text-2)] truncate">
+                              {bg.description}
                             </div>
                           </div>
                           {isSelected && (
