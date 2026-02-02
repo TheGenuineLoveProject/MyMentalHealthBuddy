@@ -46,6 +46,9 @@ The platform offers:
 - **Replit Auth Integration**: OIDC authentication with sessions table.
 - **Crisis Page Public Access**: The `/crisis` route is accessible without login for immediate support.
 - **SEO Enhancement**: JSON-LD WebPage schema, SITE_URL constant, route-based canonical URLs, OG tags, Twitter cards.
+- **Accessibility Toolbar**: Floating accessibility panel with high contrast toggle, font size options (small/medium/large/xlarge), reduce motion toggle, dyslexia-friendly font toggle. Settings persist to localStorage.
+- **Daily Healing Reminders**: ReminderScheduler component with customizable check-in times, 6 reminder tones, custom messages, and notification scheduling via service worker.
+- **Voice Affirmation Settings**: VoiceSettings component with voice tone selection, speed/pitch/volume controls, and Web Speech Synthesis API preview.
 
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.

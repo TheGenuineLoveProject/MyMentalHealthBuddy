@@ -265,6 +265,130 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SYNC_OFFLINE_ENTRIES') {
     syncOfflineEntries();
   }
+  if (event.data && event.data.type === 'SCHEDULE_REMINDER') {
+    scheduleReminder(event.data.settings);
+  }
+});
+
+const REMINDER_STORAGE_KEY = 'glp-scheduled-reminder';
+
+function scheduleReminder(settings) {
+  if (!settings || !settings.enabled) {
+    console.log('[SW] Reminders disabled, clearing scheduled reminder');
+    clearScheduledReminder();
+    return;
+  }
+
+  const [hours, minutes] = settings.time.split(':').map(Number);
+  const now = new Date();
+  let nextReminder = new Date();
+  nextReminder.setHours(hours, minutes, 0, 0);
+
+  if (nextReminder <= now) {
+    nextReminder.setDate(nextReminder.getDate() + 1);
+  }
+
+  const reminderData = {
+    scheduledTime: nextReminder.getTime(),
+    settings: settings
+  };
+
+  self.registration.showNotification && storeReminderData(reminderData);
+  console.log('[SW] Reminder scheduled for:', nextReminder.toLocaleString());
+  
+  checkAndShowReminder();
+}
+
+function storeReminderData(data) {
+  try {
+    const channel = new BroadcastChannel('reminder-channel');
+    channel.postMessage({ type: 'STORE_REMINDER', data });
+    channel.close();
+  } catch (e) {
+    console.log('[SW] BroadcastChannel not available');
+  }
+}
+
+function clearScheduledReminder() {
+  try {
+    const channel = new BroadcastChannel('reminder-channel');
+    channel.postMessage({ type: 'CLEAR_REMINDER' });
+    channel.close();
+  } catch (e) {
+    console.log('[SW] BroadcastChannel not available');
+  }
+}
+
+async function checkAndShowReminder() {
+  try {
+    const clients = await self.clients.matchAll({ type: 'window' });
+    if (clients.length > 0) {
+      clients[0].postMessage({ type: 'CHECK_REMINDER' });
+    }
+  } catch (e) {
+    console.log('[SW] Could not check reminder');
+  }
+}
+
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'check-reminders') {
+    event.waitUntil(checkAndShowReminder());
+  }
+});
+
+async function showReminderNotification(settings) {
+  if (!self.registration.showNotification) {
+    console.log('[SW] Notifications not supported');
+    return;
+  }
+
+  const title = 'The Genuine Love Project';
+  const options = {
+    body: settings.message || 'Would you like to check in with your emotions today?',
+    icon: '/android-chrome-192x192.png',
+    badge: '/android-chrome-192x192.png',
+    tag: 'daily-reminder',
+    requireInteraction: false,
+    silent: settings.tone === 'silent',
+    data: {
+      url: '/mood',
+      type: 'daily-reminder'
+    },
+    actions: [
+      { action: 'check-in', title: 'Check In' },
+      { action: 'dismiss', title: 'Later' }
+    ]
+  };
+
+  try {
+    await self.registration.showNotification(title, options);
+    console.log('[SW] Reminder notification shown');
+  } catch (err) {
+    console.error('[SW] Failed to show notification:', err);
+  }
+}
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  if (event.action === 'dismiss') {
+    return;
+  }
+
+  const urlToOpen = event.notification.data?.url || '/mood';
+
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if (client.url.includes(self.registration.scope) && 'focus' in client) {
+            client.postMessage({ type: 'NAVIGATE', url: urlToOpen });
+            return client.focus();
+          }
+        }
+        return self.clients.openWindow(urlToOpen);
+      })
+  );
 });
 
 function openOfflineDB() {

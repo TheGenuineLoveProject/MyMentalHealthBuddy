@@ -54,7 +54,12 @@ router.patch("/", async (req, res) => {
     if (existing) {
       const updateData = { updatedAt: new Date() };
       if (reminders !== undefined) updateData.reminders = reminders;
-      if (preferences !== undefined) updateData.preferences = preferences;
+      if (preferences !== undefined) {
+        updateData.preferences = {
+          ...(existing.preferences || {}),
+          ...preferences
+        };
+      }
 
       const [updated] = await db
         .update(userSettings)

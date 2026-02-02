@@ -19,6 +19,7 @@ import { routeKeyFromRoute } from "./utils/routeKey.js";
 import ConsentBanner from "./components/ConsentBanner.jsx";
 import FeedbackWidget from "./components/FeedbackWidget.jsx";
 import AICompanion from "./components/AICompanion.jsx";
+import AccessibilityToolbar from "./components/AccessibilityToolbar.jsx";
 import './index.css'; // Your Tailwind import
 const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 
@@ -38,6 +39,8 @@ const AIChatPage = lazy(() => import("./pages/AIChatPage.jsx"));
 const Analytics = lazy(() => import("./pages/Analytics.jsx"));
 const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
 const Settings = lazy(() => import("./pages/Settings.jsx"));
+const ReminderScheduler = lazy(() => import("./components/ReminderScheduler.jsx"));
+const VoiceSettings = lazy(() => import("./components/VoiceSettings.jsx"));
 const Wellness = lazy(() => import("./pages/Wellness.jsx"));
 const Premium = lazy(() => import("./pages/Premium.jsx"));
 const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage.jsx"));
@@ -351,6 +354,12 @@ export default function App() {
               </Route>
               <Route path="/settings">
                 <ProtectedRoute><Settings /></ProtectedRoute>
+              </Route>
+              <Route path="/reminders">
+                <ProtectedRoute><ReminderScheduler /></ProtectedRoute>
+              </Route>
+              <Route path="/voice-settings">
+                <ProtectedRoute><VoiceSettings /></ProtectedRoute>
               </Route>
               <Route path="/library/saved">
                 <ProtectedRoute><SavedLibrary /></ProtectedRoute>
@@ -911,6 +920,7 @@ export default function App() {
           <ConsentBanner />
           <FeedbackWidget />
           <AICompanion />
+          <AccessibilityToolbar />
           <LotusGuide />
           <GratitudePrompt frequency="weekly" />
           </ErrorBoundary>

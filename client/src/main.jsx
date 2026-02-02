@@ -5,6 +5,7 @@ import { initUIMode } from "./lib/mode";
 import "./index.css";
 import "./styles/brand.css";
 import "./styles/sacred.css";
+import "./styles/accessibility.css";
 
 // Apply mode BEFORE first paint to prevent FOUC
 try {
@@ -54,6 +55,63 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.addEventListener('controllerchange', () => {
     console.log('SW controller changed');
   });
+
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    if (event.data?.type === 'CHECK_REMINDER') {
+      checkAndShowReminder();
+    }
+    if (event.data?.type === 'NAVIGATE') {
+      window.location.href = event.data.url;
+    }
+  });
+
+  const reminderChannel = new BroadcastChannel('reminder-channel');
+  reminderChannel.addEventListener('message', (event) => {
+    if (event.data.type === 'STORE_REMINDER') {
+      localStorage.setItem('glp-scheduled-reminder', JSON.stringify(event.data.data));
+    }
+    if (event.data.type === 'CLEAR_REMINDER') {
+      localStorage.removeItem('glp-scheduled-reminder');
+    }
+  });
+
+  function checkAndShowReminder() {
+    const stored = localStorage.getItem('glp-scheduled-reminder');
+    if (!stored) return;
+
+    try {
+      const { scheduledTime, settings } = JSON.parse(stored);
+      const now = Date.now();
+      
+      if (now >= scheduledTime) {
+        navigator.serviceWorker.ready.then(registration => {
+          if (Notification.permission === 'granted') {
+            registration.showNotification('The Genuine Love Project', {
+              body: settings.message || 'Would you like to check in with your emotions today?',
+              icon: '/android-chrome-192x192.png',
+              badge: '/android-chrome-192x192.png',
+              tag: 'daily-reminder',
+              silent: settings.tone === 'silent',
+              data: { url: '/mood' }
+            });
+          }
+          
+          const nextReminder = new Date(scheduledTime);
+          nextReminder.setDate(nextReminder.getDate() + 1);
+          localStorage.setItem('glp-scheduled-reminder', JSON.stringify({
+            scheduledTime: nextReminder.getTime(),
+            settings
+          }));
+        });
+      }
+    } catch (e) {
+      console.warn('Error checking reminder:', e);
+    }
+  }
+
+  checkAndShowReminder();
+  
+  setInterval(checkAndShowReminder, 60000);
 }
 
 const root = document.getElementById("root");
