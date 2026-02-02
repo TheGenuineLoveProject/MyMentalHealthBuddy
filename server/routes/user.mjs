@@ -1,11 +1,11 @@
 import express from "express";
-import { requireAuth } from "../middleware/requireAuth.mjs";
+import { isAuthenticated } from "../replit_integrations/auth/replitAuth.mjs";
 
 const router = express.Router();
 
-router.get("/stats", requireAuth, async (req, res) => {
+router.get("/stats", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.user?.claims?.sub || req.user?.id;
     
     const stats = {
       streak: "7 days",
@@ -23,7 +23,7 @@ router.get("/stats", requireAuth, async (req, res) => {
   }
 });
 
-router.get("/activity", requireAuth, async (req, res) => {
+router.get("/activity", isAuthenticated, async (req, res) => {
   try {
     const activities = [
       { type: "journal", title: "Morning Gratitude", time: "2 hours ago", xp: 15, color: "sage" },
@@ -39,7 +39,7 @@ router.get("/activity", requireAuth, async (req, res) => {
   }
 });
 
-router.get("/tasks", requireAuth, async (req, res) => {
+router.get("/tasks", isAuthenticated, async (req, res) => {
   try {
     const tasks = [
       { task: "Morning gratitude reflection", done: true, xp: 10 },
