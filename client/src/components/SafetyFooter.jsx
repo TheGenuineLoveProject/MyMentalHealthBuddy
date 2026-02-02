@@ -95,3 +95,5 @@ export function InlineSafetyNote({ className = '' }) {
     </p>
   );
 }
+
+export { SafetyFooter };
