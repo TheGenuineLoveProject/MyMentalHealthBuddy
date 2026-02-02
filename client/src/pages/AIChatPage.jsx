@@ -7,6 +7,7 @@ import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import "../styles/sacred-visuals.css";
 
 const INITIAL_MESSAGE = {
   role: "assistant",

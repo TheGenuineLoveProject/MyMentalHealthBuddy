@@ -11,6 +11,7 @@ import DailyAffirmations from "../components/DailyAffirmations.jsx";
 import DailyInsight from "../components/DailyInsight.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import "../styles/brand.css";
+import "../styles/sacred-visuals.css";
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";

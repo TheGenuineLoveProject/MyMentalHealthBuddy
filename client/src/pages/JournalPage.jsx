@@ -21,6 +21,7 @@ import MoodTrendsChartJS from "../components/charts/MoodTrendsChartJS";
 import { LotusGuide } from "../components/sacred";
 import JournalAI from "../components/JournalAI";
 import DataExportButton from "../components/DataExportButton";
+import "../styles/sacred-visuals.css";
 
 const JOURNAL_CLARITY = {
   what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",

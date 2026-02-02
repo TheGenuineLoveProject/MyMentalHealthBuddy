@@ -11,6 +11,7 @@ import ExamplesAccordion from "../components/content/ExamplesAccordion";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import "../styles/sacred-visuals.css";
 
 const MOOD_CLARITY = {
   what: "A quick check-in tool to track your emotional state, energy level, and daily activities.",
