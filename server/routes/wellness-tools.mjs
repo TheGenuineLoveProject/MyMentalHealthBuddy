@@ -386,4 +386,61 @@ router.post("/weekly-reflection", requireAuth, async (req, res) => {
   }
 });
 
+/* =====================================================
+ * CHALLENGE PROGRESS
+ * =====================================================
+ */
+
+router.get("/challenge-progress", requireAuth, async (req, res) => {
+  try {
+    const entries = await db
+      .select()
+      .from(reflections)
+      .where(and(
+        eq(reflections.userId, req.user.id),
+        eq(reflections.mode, "challenge-progress")
+      ))
+      .orderBy(desc(reflections.createdAt))
+      .limit(1);
+    
+    if (entries.length > 0 && entries[0].content) {
+      try {
+        const progress = JSON.parse(entries[0].content);
+        return success(res, { progress });
+      } catch {
+        return success(res, { progress: {} });
+      }
+    }
+    
+    return success(res, { progress: {} });
+  } catch (error) {
+    logger.error("Failed to fetch challenge progress:", error);
+    return badRequest(res, "Failed to fetch challenge progress");
+  }
+});
+
+router.post("/challenge-progress", requireAuth, async (req, res) => {
+  try {
+    const { progress } = req.body;
+    
+    if (!progress || typeof progress !== "object") {
+      return badRequest(res, "Progress data is required");
+    }
+    
+    const [entry] = await db
+      .insert(reflections)
+      .values({
+        userId: req.user.id,
+        mode: "challenge-progress",
+        content: JSON.stringify(progress),
+      })
+      .returning();
+    
+    return success(res, entry, 201);
+  } catch (error) {
+    logger.error("Failed to save challenge progress:", error);
+    return badRequest(res, "Failed to save challenge progress");
+  }
+});
+
 export default router;

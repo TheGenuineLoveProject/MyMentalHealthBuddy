@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Shield, Heart, Volume2, Eye, Sparkles, Save, Check, AlertTriangle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Shield, Heart, Volume2, Eye, Sparkles, Save, Check, AlertTriangle, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Switch } from "@/components/ui/Switch";
 import { Label } from "@/components/ui/Label";
+import { useToast } from "@/hooks/use-toast";
 
 const SAFETY_SETTINGS = [
   {
@@ -45,7 +46,10 @@ const SAFETY_SETTINGS = [
   }
 ];
 
+const STORAGE_KEY = "glp_safety_prefs";
+
 export default function SafetyPreferences() {
+  const { toast } = useToast();
   const [settings, setSettings] = useState({
     soft_language: false,
     reduced_intensity: false,
@@ -55,15 +59,62 @@ export default function SafetyPreferences() {
     reading_level: "intermediate"
   });
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const res = await fetch("/api/user-settings", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.preferences?.safety) {
+            setSettings(prev => ({ ...prev, ...data.preferences.safety }));
+          }
+        } else {
+          const cached = localStorage.getItem(STORAGE_KEY);
+          if (cached) setSettings(prev => ({ ...prev, ...JSON.parse(cached) }));
+        }
+      } catch {
+        const cached = localStorage.getItem(STORAGE_KEY);
+        if (cached) setSettings(prev => ({ ...prev, ...JSON.parse(cached) }));
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadSettings();
+  }, []);
 
   const toggleSetting = (key) => {
     setSettings(prev => ({ ...prev, [key]: !prev[key] }));
     setSaved(false);
   };
 
-  const handleSave = () => {
-    localStorage.setItem("glp_safety_prefs", JSON.stringify(settings));
-    setSaved(true);
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/user-settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ preferences: { safety: settings } })
+      });
+      
+      if (res.ok) {
+        setSaved(true);
+        toast({ title: "Safety preferences saved", description: "Your comfort settings are updated." });
+      } else {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+        setSaved(true);
+        toast({ title: "Saved locally", description: "Log in to sync across devices." });
+      }
+    } catch {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+      setSaved(true);
+      toast({ title: "Saved locally", description: "Settings saved to this device." });
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -91,12 +142,21 @@ export default function SafetyPreferences() {
         <Card className="mb-6 border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-900/10">
           <CardContent className="p-4">
             <p className="text-sm text-amber-800 dark:text-amber-200">
-              These preferences are stored locally on your device and are never shared. 
+              These preferences are synced to your account when logged in. 
               You can change them anytime.
             </p>
           </CardContent>
         </Card>
 
+        {loading ? (
+          <Card className="mb-6">
+            <CardContent className="py-12 text-center">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">Loading your preferences...</p>
+            </CardContent>
+          </Card>
+        ) : (
+        <>
         <Card className="mb-6">
           <CardHeader>
             <CardTitle className="text-lg">Experience Customization</CardTitle>
@@ -164,11 +224,13 @@ export default function SafetyPreferences() {
               </span>
             )}
           </div>
-          <Button onClick={handleSave} data-testid="button-save">
-            <Save className="w-4 h-4 mr-2" />
-            Save Preferences
+          <Button onClick={handleSave} disabled={saving} data-testid="button-save">
+            {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+            {saving ? "Saving..." : "Save Preferences"}
           </Button>
         </div>
+        </>
+        )}
       </main>
 
       <SafetyFooter />

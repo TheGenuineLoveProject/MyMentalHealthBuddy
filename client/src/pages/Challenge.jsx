@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "wouter";
 import { 
   ArrowLeft, Heart, CheckCircle, Circle, Calendar, 
-  Sparkles, ArrowRight, ChevronRight
+  Sparkles, ArrowRight, ChevronRight, Loader2
 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import BenefitsBlock from "../components/BenefitsBlock";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
 
 const CHALLENGE_DAYS = [
   {
@@ -62,15 +63,68 @@ const CHALLENGE_DAYS = [
   },
 ];
 
+const STORAGE_KEY = "glp-challenge-progress";
+
 export default function Challenge() {
-  const [progress, setProgress] = useState(() => {
-    const saved = localStorage.getItem("glp-challenge-progress");
-    return saved ? JSON.parse(saved) : {};
-  });
+  const { toast } = useToast();
+  const [progress, setProgress] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
-  }, [progress]);
+    const loadProgress = async () => {
+      try {
+        const res = await fetch("/api/wellness-tools/challenge-progress", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.progress && Object.keys(data.progress).length > 0) {
+            setProgress(data.progress);
+          } else {
+            const cached = localStorage.getItem(STORAGE_KEY);
+            if (cached) setProgress(JSON.parse(cached));
+          }
+        } else {
+          const cached = localStorage.getItem(STORAGE_KEY);
+          if (cached) setProgress(JSON.parse(cached));
+        }
+      } catch {
+        const cached = localStorage.getItem(STORAGE_KEY);
+        if (cached) setProgress(JSON.parse(cached));
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProgress();
+  }, []);
+
+  const saveProgress = useCallback(async (newProgress) => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/wellness-tools/challenge-progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ progress: newProgress })
+      });
+      
+      if (res.ok) {
+        toast({ title: "Progress saved", description: "Your challenge progress is synced." });
+      } else {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
+      }
+    } catch {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newProgress));
+    } finally {
+      setSaving(false);
+    }
+  }, [toast]);
+
+  const toggleDay = (day) => {
+    if (loading || saving) return;
+    const newProgress = { ...progress, [day]: !progress[day] };
+    setProgress(newProgress);
+    saveProgress(newProgress);
+  };
 
   const completedCount = Object.keys(progress).filter(k => progress[k]).length;
   const percentComplete = Math.round((completedCount / 7) * 100);
@@ -125,6 +179,13 @@ export default function Challenge() {
           className="mb-6"
         />
         
+        {loading ? (
+          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-12 mb-8 flex flex-col items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-[var(--glp-sage)] mb-4" />
+            <p className="text-slate-600 dark:text-slate-400">Loading your progress...</p>
+          </div>
+        ) : (
+        <>
         <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-6 mb-8">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
@@ -216,6 +277,8 @@ export default function Challenge() {
             Need urgent support? Visit our crisis page →
           </Link>
         </div>
+        </>
+        )}
         
         <SafetyFooter variant="compact" className="mt-12" />
       </div>

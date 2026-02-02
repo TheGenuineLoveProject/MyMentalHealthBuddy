@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "wouter";
-import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText, Gift } from "lucide-react";
+import { Settings as SettingsIcon, User, Bell, Palette, LogOut, Trash2, Mail, Shield, ArrowLeft, Check, Moon, Sun, Monitor, Eye, Download, FileText, Gift, Loader2 } from "lucide-react";
 import { useAuth } from "../context/AuthContext.jsx";
 import SEO from "../components/SEO";
 import { ReferralInvite } from "../components/referral";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
 
 const VISUAL_MODES = [
   { id: "", label: "Default", icon: Sun, description: "Standard brand palette with Deep Teal primary + Gold accent" },
@@ -13,6 +14,7 @@ const VISUAL_MODES = [
   { id: "reading", label: "Reading", icon: Eye, description: "Maximum legibility, white surfaces, darker text" },
 ];
 const VISUAL_MODE_KEY = "glp-mode";
+const SETTINGS_STORAGE_KEY = "glp-settings";
 
 const AFFIRMATION_TONES = [
   { id: "gentle", label: "Gentle", description: "Soft, nurturing affirmations", icon: "🌸" },
@@ -28,6 +30,7 @@ const MOOD_BACKGROUNDS = [
 ];
 
 export default function Settings() {
+  const { toast } = useToast();
   const [, setLocation] = useLocation();
   const { user, logout } = useAuth();
   const [notifications, setNotifications] = useState(true);
@@ -38,21 +41,50 @@ export default function Settings() {
   const [moodBackground, setMoodBackground] = useState("adaptive");
   const [isSaving, setIsSaving] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") || "light";
-    const savedNotifications = localStorage.getItem("notifications") !== "false";
-    const savedMode = localStorage.getItem(VISUAL_MODE_KEY) || "";
-    const savedTone = localStorage.getItem("glp-affirmation-tone") || "gentle";
-    const savedVoice = localStorage.getItem("glp-voice-enabled") === "true";
-    const savedMoodBg = localStorage.getItem("glp-mood-background") || "adaptive";
-    setTheme(savedTheme);
-    setNotifications(savedNotifications);
-    setVisualMode(savedMode);
-    setAffirmationTone(savedTone);
-    setVoiceEnabled(savedVoice);
-    setMoodBackground(savedMoodBg);
+    const loadSettings = async () => {
+      try {
+        const res = await fetch("/api/user-settings", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.preferences?.general) {
+            const p = data.preferences.general;
+            if (p.theme) setTheme(p.theme);
+            if (p.notifications !== undefined) setNotifications(p.notifications);
+            if (p.visualMode !== undefined) setVisualMode(p.visualMode);
+            if (p.affirmationTone) setAffirmationTone(p.affirmationTone);
+            if (p.voiceEnabled !== undefined) setVoiceEnabled(p.voiceEnabled);
+            if (p.moodBackground) setMoodBackground(p.moodBackground);
+          }
+        } else {
+          loadFromLocalStorage();
+        }
+      } catch {
+        loadFromLocalStorage();
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    const loadFromLocalStorage = () => {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      const savedNotifications = localStorage.getItem("notifications") !== "false";
+      const savedMode = localStorage.getItem(VISUAL_MODE_KEY) || "";
+      const savedTone = localStorage.getItem("glp-affirmation-tone") || "gentle";
+      const savedVoice = localStorage.getItem("glp-voice-enabled") === "true";
+      const savedMoodBg = localStorage.getItem("glp-mood-background") || "adaptive";
+      setTheme(savedTheme);
+      setNotifications(savedNotifications);
+      setVisualMode(savedMode);
+      setAffirmationTone(savedTone);
+      setVoiceEnabled(savedVoice);
+      setMoodBackground(savedMoodBg);
+    };
+    
+    loadSettings();
   }, []);
 
   function handleVisualModeChange(modeId) {
@@ -61,19 +93,50 @@ export default function Settings() {
     localStorage.setItem(VISUAL_MODE_KEY, modeId);
   }
 
-  function handleSavePreferences() {
+  async function handleSavePreferences() {
     setIsSaving(true);
+    
+    const preferences = {
+      theme,
+      notifications,
+      visualMode,
+      affirmationTone,
+      voiceEnabled,
+      moodBackground
+    };
+    
+    try {
+      const res = await fetch("/api/user-settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ preferences: { general: preferences } })
+      });
+      
+      if (res.ok) {
+        toast({ title: "Settings saved", description: "Your preferences are synced." });
+        setMessage("Preferences saved successfully!");
+      } else {
+        saveToLocalStorage();
+        toast({ title: "Saved locally", description: "Log in to sync across devices." });
+        setMessage("Saved locally");
+      }
+    } catch {
+      saveToLocalStorage();
+      toast({ title: "Saved locally", description: "Settings saved to this device." });
+      setMessage("Saved locally");
+    } finally {
+      setIsSaving(false);
+      setTimeout(() => setMessage(""), 3000);
+    }
+  }
+  
+  function saveToLocalStorage() {
     localStorage.setItem("theme", theme);
     localStorage.setItem("notifications", String(notifications));
     localStorage.setItem("glp-affirmation-tone", affirmationTone);
     localStorage.setItem("glp-voice-enabled", String(voiceEnabled));
     localStorage.setItem("glp-mood-background", moodBackground);
-
-    setTimeout(() => {
-      setIsSaving(false);
-      setMessage("Preferences saved successfully!");
-      setTimeout(() => setMessage(""), 3000);
-    }, 500);
   }
 
   function handleLogout() {
@@ -153,6 +216,13 @@ export default function Settings() {
       <div data-testid="page-settings" className="min-h-screen hero-gradient">
         <div className="content-wrapper py-8">
           <div className="max-w-xl mx-auto">
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-20">
+                <Loader2 className="w-10 h-10 animate-spin text-primary mb-4" />
+                <p className="text-muted-foreground">Loading your settings...</p>
+              </div>
+            ) : (
+            <>
             <header className="flex items-center gap-4 mb-8">
               <Link 
                 href="/dashboard" 
@@ -487,6 +557,8 @@ export default function Settings() {
                 Deleting your account is permanent and cannot be undone
               </p>
             </section>
+            </>
+            )}
           </div>
         </div>
       </div>
