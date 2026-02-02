@@ -1,0 +1,5 @@
+<img
+  src="/assets/lotus-animated.svg"
+  alt="Floating Lotus"
+  className="absolute top-10 right-6 w-16 animate-float z-10"
+/>

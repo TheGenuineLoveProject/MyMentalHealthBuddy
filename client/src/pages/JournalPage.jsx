@@ -13,7 +13,14 @@ import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivat
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
+import { useAuth } from "../auth/AuthContext";
+import { saveMoodEntry } from "../utils/saveEntry";
 
+// inside component
+const { user } = useAuth();
+
+// when mood selected:
+saveMoodEntry(user.uid, selected, journalText);
 const JOURNAL_CLARITY = {
   what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",
   who: "Anyone seeking a safe place to reflect, process feelings, or track their inner journey.",

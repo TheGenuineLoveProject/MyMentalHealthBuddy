@@ -1,6 +1,44 @@
 // /src/components/WellnessDashboard.jsx
 import React, { useState, useEffect } from 'react';
+import EmotionTrendChart from './EmotionTrendChart';
+import { Line } from 'react-chartjs-2';
+import { db } from '../firebase/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
+const WellnessDashboard = () => {
+  const [moodData, setMoodData] = useState([]);
+
+  useEffect(() => {
+    const fetchMoods = async () => {
+      const snapshot = await getDocs(collection(db, 'moods'));
+      const moods = snapshot.docs.map((doc) => doc.data());
+      setMoodData(moods);
+    };
+    fetchMoods();
+  }, []);
+
+  const chartData = {
+    labels: moodData.map((entry) => entry.date),
+    datasets: [
+      {
+        label: 'Mood Over Time',
+        data: moodData.map((entry) => entry.value),
+        fill: true,
+        borderColor: '#ffd700',
+        backgroundColor: 'rgba(255, 215, 0, 0.2)',
+      },
+    ],
+  };
+
+  return (
+    <div className="p-8 bg-white rounded-xl shadow">
+      <h2 className="text-2xl font-bold mb-4">📊 Wellness Dashboard</h2>
+      <Line data={chartData} />
+    </div>
+  );
+};
+
+<EmotionTrendChart moodLog={moodLog} />
 export default function WellnessDashboard() {
   const [mood, setMood] = useState("peaceful");
   const [affirmation, setAffirmation] = useState("");

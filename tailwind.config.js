@@ -28,24 +28,22 @@ module.exports = {
           glow: '0 0 20px rgba(212, 175, 55, 0.5)',
           pulse: '0 0 10px rgba(244, 199, 195, 0.7) inset'
         },
-        animation: {
-          float: 'float 4s ease-in-out infinite',
-          'pulse-slow': 'pulse 3s ease-in-out infinite'
-        },
-        keyframes: {
-          float: {
-            '0%, 100%': { transform: 'translateY(0)' },
-            '50%': { transform: 'translateY(-10px)' }
-        },
+          extend: {
+            animation: {
+              float: 'float 4s ease-in-out infinite',
+              'fade-in': 'fadeIn 0.6s ease-out',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-12px)' },
+              },
+              fadeIn: {
+                '0%': { opacity: 0, transform: 'translateY(6px)' },
+                '100%': { opacity: 1, transform: 'translateY(0)' },
+              },
+            },
       borderRadius: {
         xl: '1rem',
         sacred: '2rem'
       },
-      fadeIn: {
-              '0%': { opacity: 0 },
-              '100%': { opacity: 1 }
-            }
-          }
-        },
-  plugins: [],
-}
