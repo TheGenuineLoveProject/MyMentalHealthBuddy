@@ -2,6 +2,7 @@
 @import "./styles/tokens.css";
 @import "./styles/healing-animations.css";
 @import "./styles/sacred-typography.css";
+@import "./styles/emotion-effects.css";
 
 @tailwind base;
 @tailwind components;

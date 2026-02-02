@@ -56,6 +56,8 @@ export default function SacredFooter() {
       style={{ 
         background: 'linear-gradient(180deg, #faf9f7 0%, rgba(47, 93, 93, 0.05) 50%, rgba(47, 93, 93, 0.08) 100%)',
       }}
+      role="contentinfo"
+      aria-label="Site footer"
       data-component="SacredFooter"
       data-testid="footer-sacred"
     >
@@ -162,7 +164,10 @@ export default function SacredFooter() {
         </div>
 
         {/* Links Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12">
+        <nav 
+          className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-12"
+          aria-label="Footer navigation"
+        >
           {/* Explore */}
           <div>
             <h4 
@@ -237,7 +242,7 @@ export default function SacredFooter() {
               ))}
             </ul>
           </div>
-        </div>
+        </nav>
 
         {/* Bottom Section */}
         <div 

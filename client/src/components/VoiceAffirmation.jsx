@@ -113,7 +113,12 @@ export default function VoiceAffirmation({
   };
 
   return (
-    <Card className={`overflow-hidden ${className}`}>
+    <Card 
+      className={`overflow-hidden ${className}`}
+      role="region"
+      aria-label="Voice affirmation player"
+      data-testid="container-voice-affirmation"
+    >
       <div 
         className="absolute inset-0 opacity-10"
         style={{
