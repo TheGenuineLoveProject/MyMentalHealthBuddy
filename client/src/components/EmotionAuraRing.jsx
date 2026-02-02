@@ -145,12 +145,13 @@ export default function EmotionAuraRing({
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap justify-center gap-2">
+      <div className="mt-4 flex flex-wrap justify-center gap-2" data-testid="emotion-aura-legend">
         {segments.slice(0, 4).map((seg, i) => (
           <div 
             key={i}
             className="flex items-center gap-1.5 text-xs"
             title={`${seg.emotion}: ${seg.percentage.toFixed(1)}%`}
+            data-testid={`legend-item-${seg.emotion}`}
           >
             <div 
               className="w-2.5 h-2.5 rounded-full"

@@ -18,6 +18,8 @@ import MoodHistoryChart from "../components/MoodHistoryChart.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { StreakShare } from "@/components/share/StreakShare";
+import EmotionAuraRing from "../components/EmotionAuraRing";
+import DataExportButton from "../components/DataExportButton";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -326,6 +328,25 @@ export default function Dashboard() {
               </Link>
             </div>
             <MoodHistoryChart />
+          </section>
+
+          {/* Emotion Aura & Export */}
+          <section 
+            className="mb-8 p-6 rounded-2xl"
+            style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
+            aria-label="Emotion visualization and data export"
+            data-testid="section-emotion-aura"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold flex items-center gap-2" style={{ color: 'var(--glp-ink)' }}>
+                <Heart className="w-4 h-4" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
+                Your Emotional Spectrum
+              </h3>
+              <DataExportButton dataType="all" />
+            </div>
+            <div className="flex justify-center">
+              <EmotionAuraRing size={180} strokeWidth={14} />
+            </div>
           </section>
 
           <Link 

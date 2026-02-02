@@ -96,6 +96,7 @@ export default function DataExportButton({
           <div 
             className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
+            data-testid="export-menu-overlay"
           />
           <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
             <div className="p-2">

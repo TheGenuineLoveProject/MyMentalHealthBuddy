@@ -19,6 +19,8 @@ import VoiceAffirmation from "../components/VoiceAffirmation";
 import EmotionCalendar from "../components/EmotionCalendar";
 import MoodTrendsChartJS from "../components/charts/MoodTrendsChartJS";
 import { LotusGuide } from "../components/sacred";
+import JournalAI from "../components/JournalAI";
+import DataExportButton from "../components/DataExportButton";
 
 const JOURNAL_CLARITY = {
   what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",
@@ -272,16 +274,19 @@ export default function JournalPage() {
                 </div>
               </div>
             </div>
-            <button
-              onClick={() => setShowForm(!showForm)}
-              className="btn btn-gradient"
-              data-testid="button-new"
-              aria-expanded={showForm}
-              aria-controls="journal-form"
-            >
-              <Plus className="w-5 h-5" aria-hidden="true" />
-              <span className="hidden sm:inline">New Entry</span>
-            </button>
+            <div className="flex items-center gap-3">
+              <DataExportButton dataType="journals" />
+              <button
+                onClick={() => setShowForm(!showForm)}
+                className="btn btn-gradient"
+                data-testid="button-new"
+                aria-expanded={showForm}
+                aria-controls="journal-form"
+              >
+                <Plus className="w-5 h-5" aria-hidden="true" />
+                <span className="hidden sm:inline">New Entry</span>
+              </button>
+            </div>
           </header>
 
           <BenefitsBlock 
@@ -422,6 +427,22 @@ export default function JournalPage() {
                   data-testid="input-content"
                 />
               </div>
+
+              {/* AI-Powered Insights */}
+              {content.length > 20 && (
+                <div className="mb-6">
+                  <JournalAI 
+                    journalText={content}
+                    onAnalysisComplete={(analysis) => {
+                      if (analysis?.mood) {
+                        setCurrentMood(analysis.mood);
+                      }
+                    }}
+                    showVoice={true}
+                    className="animate-in fade-in duration-300"
+                  />
+                </div>
+              )}
 
               <div className="mb-6 p-4 rounded-xl bg-[var(--glp-sage)]/10 border border-[var(--glp-sage)]/20">
                 <label className="flex items-center justify-between cursor-pointer">
