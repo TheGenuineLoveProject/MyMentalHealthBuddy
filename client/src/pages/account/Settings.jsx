@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { 
   Settings as SettingsIcon, User, Bell, Shield, Moon, Sun, Monitor,
@@ -21,6 +21,7 @@ export default function Settings() {
 
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("light");
   const [notifications, setNotifications] = useState({
     email: true,
@@ -29,11 +30,57 @@ export default function Settings() {
     insights: true
   });
 
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const res = await fetch("/api/user-settings", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.preferences?.theme) setTheme(data.preferences.theme);
+          if (data.reminders) {
+            setNotifications(prev => ({
+              ...prev,
+              email: data.reminders.emailEnabled ?? true,
+              push: data.reminders.pushEnabled ?? false,
+              reminders: true,
+              insights: true
+            }));
+          }
+        }
+      } catch {
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSettings();
+  }, []);
+
   const handleSave = async () => {
     setSaving(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setSaving(false);
-    toast({ title: "Settings saved", description: "Your preferences have been updated." });
+    try {
+      const res = await fetch("/api/user-settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          preferences: { theme },
+          reminders: {
+            emailEnabled: notifications.email,
+            pushEnabled: notifications.push
+          }
+        })
+      });
+      
+      if (res.ok) {
+        toast({ title: "Settings saved", description: "Your preferences have been updated." });
+      } else {
+        toast({ title: "Error", description: "Failed to save settings", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Error", description: "Unable to save settings. Please try again.", variant: "destructive" });
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (

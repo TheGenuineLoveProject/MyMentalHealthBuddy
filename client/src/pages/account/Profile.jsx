@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { 
   User, ArrowLeft, Camera, Mail, Calendar, MapPin, 
@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useAuth } from "@/context/AuthContext";
 
 const ACHIEVEMENTS = [
   { icon: Heart, label: "Self-Love Champion", date: "Dec 2025" },
@@ -25,15 +26,46 @@ export default function Profile() {
   });
 
   const { toast } = useToast();
+  const { user } = useAuth();
   const [saving, setSaving] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    location: "",
+    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"
+  });
+
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({
+        ...prev,
+        name: user.username || user.name || ""
+      }));
+    }
+  }, [user]);
 
   const handleSave = async () => {
     setSaving(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setSaving(false);
-    setEditing(false);
-    toast({ title: "Profile updated", description: "Your changes have been saved." });
+    try {
+      const res = await fetch("/api/account/profile", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ name: formData.name })
+      });
+      const data = await res.json();
+      
+      if (res.ok) {
+        setEditing(false);
+        toast({ title: "Profile updated", description: "Your changes have been saved." });
+      } else {
+        toast({ title: "Error", description: data.message || "Failed to update profile", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Error", description: "Unable to save changes. Please try again.", variant: "destructive" });
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -111,7 +143,8 @@ export default function Profile() {
                   <label className="form-label">Display Name</label>
                   <Input 
                     className="input-premium"
-                    defaultValue="Wellness Explorer"
+                    value={formData.name}
+                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                     disabled={!editing}
                     data-testid="input-display-name"
                   />
@@ -123,8 +156,8 @@ export default function Profile() {
                     <Input 
                       className="input-premium pl-10"
                       type="email"
-                      defaultValue="explorer@example.com"
-                      disabled={!editing}
+                      value={user?.email || ""}
+                      disabled
                       data-testid="input-email"
                     />
                   </div>
@@ -136,6 +169,8 @@ export default function Profile() {
                     <Input 
                       className="input-premium pl-10"
                       placeholder="Your city (optional)"
+                      value={formData.location}
+                      onChange={(e) => setFormData(prev => ({ ...prev, location: e.target.value }))}
                       disabled={!editing}
                       data-testid="input-location"
                     />
@@ -147,8 +182,8 @@ export default function Profile() {
                     <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--sage-400)]" />
                     <Input 
                       className="input-premium pl-10"
-                      defaultValue="UTC-5 (Eastern Time)"
-                      disabled={!editing}
+                      value={formData.timezone}
+                      disabled
                       data-testid="input-timezone"
                     />
                   </div>
