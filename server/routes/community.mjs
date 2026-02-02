@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
 import { db } from "../db/client.mjs";
-import { anonymousReflections } from "../../shared/schema.mjs";
-import { desc } from "drizzle-orm";
+import { anonymousReflections, sharedReflections, moods, journals, gratitudeEntries } from "../../shared/schema.mjs";
+import { desc, eq, gte, and, sql } from "drizzle-orm";
 
 const router = Router();
 
@@ -88,6 +88,123 @@ router.post("/reflect", requireAuth, async (req, res) => {
   } catch (err) {
     console.error("Community submit error:", err);
     res.status(500).json({ ok: false, message: "Unable to share reflection" });
+  }
+});
+
+router.post("/reflections", requireAuth, async (req, res) => {
+  const { content, emotion, isAnonymous, displayName, journalId, isBlessed } = req.body;
+
+  if (!content?.trim()) {
+    return res.status(400).json({ error: "Content is required" });
+  }
+
+  try {
+    const [reflection] = await db
+      .insert(sharedReflections)
+      .values({
+        userId: req.user.id,
+        content: content.trim(),
+        emotion: emotion || null,
+        isAnonymous: isAnonymous !== false,
+        displayName: isAnonymous ? null : displayName?.trim() || null,
+        journalId: journalId || null,
+        isBlessed: isBlessed || false
+      })
+      .returning();
+
+    res.status(201).json(reflection);
+  } catch (error) {
+    console.error("Error saving shared reflection:", error);
+    res.status(500).json({ error: "Failed to save reflection" });
+  }
+});
+
+router.post("/reflections/:id/heart", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const [updated] = await db
+      .update(sharedReflections)
+      .set({ 
+        heartCount: sql`${sharedReflections.heartCount} + 1` 
+      })
+      .where(eq(sharedReflections.id, id))
+      .returning();
+
+    if (!updated) {
+      return res.status(404).json({ error: "Reflection not found" });
+    }
+
+    res.json(updated);
+  } catch (error) {
+    console.error("Error hearting reflection:", error);
+    res.status(500).json({ error: "Failed to heart reflection" });
+  }
+});
+
+router.get("/completion-stats", requireAuth, async (req, res) => {
+  try {
+    const weekAgo = new Date();
+    weekAgo.setDate(weekAgo.getDate() - 7);
+
+    const [weeklyMoods, weeklyJournals, weeklyGratitude] = await Promise.all([
+      db.select()
+        .from(moods)
+        .where(
+          and(
+            eq(moods.userId, req.user.id),
+            gte(moods.createdAt, weekAgo)
+          )
+        ),
+      db.select()
+        .from(journals)
+        .where(
+          and(
+            eq(journals.userId, req.user.id),
+            gte(journals.createdAt, weekAgo)
+          )
+        ),
+      db.select()
+        .from(gratitudeEntries)
+        .where(
+          and(
+            eq(gratitudeEntries.userId, req.user.id),
+            gte(gratitudeEntries.createdAt, weekAgo)
+          )
+        )
+    ]);
+
+    const uniqueDays = new Set();
+    [...weeklyMoods, ...weeklyJournals, ...weeklyGratitude].forEach(entry => {
+      const date = new Date(entry.createdAt).toISOString().split("T")[0];
+      uniqueDays.add(date);
+    });
+
+    const emotionCounts = {};
+    weeklyMoods.forEach(m => {
+      const emotion = m.emotion || "neutral";
+      emotionCounts[emotion] = (emotionCounts[emotion] || 0) + 1;
+    });
+
+    const dominantEmotion = Object.entries(emotionCounts)
+      .sort(([, a], [, b]) => b - a)[0]?.[0] || "balanced";
+
+    const totalEntries = weeklyMoods.length + weeklyJournals.length + weeklyGratitude.length;
+    const eligibleForCelebration = uniqueDays.size >= 7 || totalEntries >= 7;
+
+    res.json({
+      daysActive: uniqueDays.size,
+      moodCount: weeklyMoods.length,
+      journalCount: weeklyJournals.length,
+      gratitudeCount: weeklyGratitude.length,
+      totalEntries,
+      dominantEmotion,
+      emotionBreakdown: emotionCounts,
+      eligibleForCelebration
+    });
+  } catch (error) {
+    console.error("Error fetching completion stats:", error);
+    res.status(500).json({ error: "Failed to fetch stats" });
   }
 });
 

@@ -125,6 +125,7 @@
     "@uppy/react": "^5.1.1",
     "aos": "^2.3.4",
     "bcrypt": "^6.0.0",
+    "canvas-confetti": "^1.9.4",
     "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

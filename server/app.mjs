@@ -85,6 +85,7 @@ await mountIfExists("/api/ai", "./routes/ai.mjs");
 await mountIfExists("/api/gamification", "./routes/gamification.mjs");
 await mountIfExists("/api/health", "./routes/health.mjs");
 await mountIfExists("/api/gratitude", "./routes/gratitude.mjs");
+await mountIfExists("/api/favorites", "./routes/favorites.mjs");
 
 // JSON 404 (important so tests don't get HTML)
 app.use((req, res) => {

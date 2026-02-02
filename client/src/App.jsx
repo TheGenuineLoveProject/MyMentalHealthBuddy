@@ -52,6 +52,9 @@ const Profile = lazy(() => import("./pages/Profile.jsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
 const CommunityPage = lazy(() => import("./pages/CommunityFeed.jsx"));
+const CommunityCircle = lazy(() => import("./pages/CommunityCircle.jsx"));
+const InsightsDashboard = lazy(() => import("./pages/InsightsDashboard.jsx"));
+const CelebrationRitual = lazy(() => import("./pages/CelebrationRitual.jsx"));
 const DiscussionPage = lazy(() => import("./features/community/DiscussionPage.jsx"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage.jsx"));
 const BreathTool = lazy(() => import("./pages/tools/BreathTool.jsx"));
@@ -653,8 +656,17 @@ export default function App() {
               <Route path="/community">
                 <ProtectedRoute><CommunityPage /></ProtectedRoute>
               </Route>
+              <Route path="/community/circle">
+                <ProtectedRoute><CommunityCircle /></ProtectedRoute>
+              </Route>
               <Route path="/community/discussion/:id">
                 <ProtectedRoute><DiscussionPage /></ProtectedRoute>
+              </Route>
+              <Route path="/insights">
+                <ProtectedRoute><InsightsDashboard /></ProtectedRoute>
+              </Route>
+              <Route path="/celebration">
+                <ProtectedRoute><CelebrationRitual /></ProtectedRoute>
               </Route>
               <Route path="/social">{() => <ConfigRoute route="/social" />}</Route>
 

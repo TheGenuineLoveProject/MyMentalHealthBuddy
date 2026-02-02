@@ -154,6 +154,35 @@ export const gratitudeEntries = pgTable("gratitude_entries", {
   createdAtIdx: index("gratitude_entries_created_at_idx").on(table.createdAt),
 }));
 
+/* ================= SHARED REFLECTIONS ================= */
+export const sharedReflections = pgTable("shared_reflections", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  journalId: uuid("journal_id"),
+  content: text("content").notNull(),
+  emotion: varchar("emotion", { length: 50 }),
+  isAnonymous: boolean("is_anonymous").default(true).notNull(),
+  displayName: varchar("display_name", { length: 100 }),
+  heartCount: integer("heart_count").default(0).notNull(),
+  isBlessed: boolean("is_blessed").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ({
+  userIdIdx: index("shared_reflections_user_id_idx").on(table.userId),
+  emotionIdx: index("shared_reflections_emotion_idx").on(table.emotion),
+  createdAtIdx: index("shared_reflections_created_at_idx").on(table.createdAt),
+}));
+
+/* ================= USER FAVORITES ================= */
+export const userFavorites = pgTable("user_favorites", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  itemType: varchar("item_type", { length: 50 }).notNull(),
+  itemContent: text("item_content").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ({
+  userIdIdx: index("user_favorites_user_id_idx").on(table.userId),
+}));
+
 export const wellnessGoals = pgTable("wellness_goals", {
   id: uuid("id").defaultRandom().primaryKey(),
 });
