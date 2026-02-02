@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { 
   Layers, Edit, Check, AlertTriangle, Search, Filter,
-  FileText, Eye, Copy, Trash2, Plus
+  FileText, Eye, Copy, Trash2, Plus, Loader2
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 const CONTENT_TIERS = ["beginner", "intermediate", "advanced"];
 
-const SAMPLE_CONTENT = [
+const DEFAULT_CONTENT = [
   { id: "1", title: "Self-Compassion Guide", type: "page", hasTiers: true, status: "complete" },
   { id: "2", title: "Grounding Exercise", type: "tool", hasTiers: true, status: "complete" },
   { id: "3", title: "Boundary Setting", type: "page", hasTiers: false, status: "needs-tiers" },
@@ -24,12 +25,90 @@ export default function ContentStudioAdmin() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedContent, setSelectedContent] = useState(null);
   const [tierContent, setTierContent] = useState({});
+  const [contentList, setContentList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const { toast } = useToast();
 
-  const filteredContent = SAMPLE_CONTENT.filter(c => 
+  useEffect(() => {
+    try {
+      const cached = localStorage.getItem("glp_admin_content");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          setContentList(parsed);
+        } else {
+          throw new Error("Invalid format");
+        }
+      } else {
+        setContentList(DEFAULT_CONTENT);
+        localStorage.setItem("glp_admin_content", JSON.stringify(DEFAULT_CONTENT));
+      }
+    } catch {
+      setContentList(DEFAULT_CONTENT);
+      setTimeout(() => toast({ title: "Cache reset", description: "Using default content data." }), 100);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (selectedContent) {
+      try {
+        const cached = localStorage.getItem(`glp_content_tiers_${selectedContent.id}`);
+        if (cached) {
+          setTierContent(JSON.parse(cached));
+        } else {
+          setTierContent({});
+        }
+      } catch {
+        setTierContent({});
+      }
+    }
+  }, [selectedContent]);
+
+  const handleSave = async () => {
+    if (!selectedContent) return;
+    setSaving(true);
+    await new Promise(r => setTimeout(r, 500));
+    
+    try {
+      localStorage.setItem(`glp_content_tiers_${selectedContent.id}`, JSON.stringify(tierContent));
+      
+      const allTiersFilled = CONTENT_TIERS.every(t => tierContent[t]?.trim());
+      setContentList(prev => {
+        const updated = prev.map(c => 
+          c.id === selectedContent.id 
+            ? { ...c, hasTiers: allTiersFilled, status: allTiersFilled ? "complete" : "needs-tiers" }
+            : c
+        );
+        localStorage.setItem("glp_admin_content", JSON.stringify(updated));
+        return updated;
+      });
+      
+      setSelectedContent(prev => prev ? { ...prev, hasTiers: allTiersFilled, status: allTiersFilled ? "complete" : "needs-tiers" } : null);
+      
+      toast({ title: "Tiers saved", description: `${selectedContent.title} tiers updated successfully.` });
+    } catch {
+      toast({ title: "Save failed", description: "Could not save tier content.", variant: "destructive" });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const filteredContent = contentList.filter(c => 
     c.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const needsTiersCount = SAMPLE_CONTENT.filter(c => !c.hasTiers).length;
+  const needsTiersCount = contentList.filter(c => !c.hasTiers).length;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,7 +134,7 @@ export default function ContentStudioAdmin() {
         <div className="grid gap-4 md:grid-cols-3 mb-8">
           <Card>
             <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-foreground">{SAMPLE_CONTENT.length}</div>
+              <div className="text-2xl font-bold text-foreground">{contentList.length}</div>
               <div className="text-sm text-muted-foreground">Total Content</div>
             </CardContent>
           </Card>
@@ -70,7 +149,7 @@ export default function ContentStudioAdmin() {
           <Card>
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-green-500">
-                {SAMPLE_CONTENT.filter(c => c.hasTiers).length}
+                {contentList.filter(c => c.hasTiers).length}
               </div>
               <div className="text-sm text-muted-foreground">Complete</div>
             </CardContent>
@@ -155,9 +234,14 @@ export default function ContentStudioAdmin() {
                       />
                     </div>
                   ))}
-                  <Button className="w-full" data-testid="button-save">
-                    <Check className="w-4 h-4 mr-2" />
-                    Save Tiers
+                  <Button 
+                    className="w-full" 
+                    onClick={handleSave}
+                    disabled={saving}
+                    data-testid="button-save"
+                  >
+                    {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Check className="w-4 h-4 mr-2" />}
+                    {saving ? "Saving..." : "Save Tiers"}
                   </Button>
                 </div>
               ) : (

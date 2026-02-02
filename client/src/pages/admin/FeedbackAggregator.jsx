@@ -1,20 +1,83 @@
-import { useState } from "react";
-import { MessageSquare, ThumbsUp, ThumbsDown, Star, Filter, Download } from "lucide-react";
+import { useState, useEffect } from "react";
+import { MessageSquare, ThumbsUp, ThumbsDown, Star, Filter, Download, Loader2, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { useToast } from "@/hooks/use-toast";
 import SEO from "../../components/SEO";
+
+const DEFAULT_FEEDBACK = [
+  { id: 1, type: "positive", message: "Love the breathing exercises! They help me calm down.", source: "widget", date: "2026-01-26" },
+  { id: 2, type: "negative", message: "The journal autosave lost my entry", source: "support", date: "2026-01-25" },
+  { id: 3, type: "positive", message: "The AI chat is so supportive and understanding", source: "widget", date: "2026-01-25" },
+  { id: 4, type: "suggestion", message: "Would love a mobile app version", source: "email", date: "2026-01-24" },
+  { id: 5, type: "negative", message: "Dark mode colors are too bright", source: "widget", date: "2026-01-24" },
+  { id: 6, type: "positive", message: "Helped me through a tough week", source: "review", date: "2026-01-23" }
+];
 
 export default function FeedbackAggregator() {
   const [filter, setFilter] = useState("all");
+  const [feedback, setFeedback] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [exporting, setExporting] = useState(false);
+  const { toast } = useToast();
 
-  const feedback = [
-    { id: 1, type: "positive", message: "Love the breathing exercises! They help me calm down.", source: "widget", date: "2026-01-26" },
-    { id: 2, type: "negative", message: "The journal autosave lost my entry", source: "support", date: "2026-01-25" },
-    { id: 3, type: "positive", message: "The AI chat is so supportive and understanding", source: "widget", date: "2026-01-25" },
-    { id: 4, type: "suggestion", message: "Would love a mobile app version", source: "email", date: "2026-01-24" },
-    { id: 5, type: "negative", message: "Dark mode colors are too bright", source: "widget", date: "2026-01-24" },
-    { id: 6, type: "positive", message: "Helped me through a tough week", source: "review", date: "2026-01-23" }
-  ];
+  useEffect(() => {
+    try {
+      const cached = localStorage.getItem("glp_admin_feedback");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          setFeedback(parsed);
+        } else {
+          throw new Error("Invalid format");
+        }
+      } else {
+        setFeedback(DEFAULT_FEEDBACK);
+        localStorage.setItem("glp_admin_feedback", JSON.stringify(DEFAULT_FEEDBACK));
+      }
+    } catch {
+      setFeedback(DEFAULT_FEEDBACK);
+      setTimeout(() => toast({ title: "Cache reset", description: "Using default feedback data." }), 100);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleExport = async () => {
+    setExporting(true);
+    await new Promise(r => setTimeout(r, 500));
+    
+    try {
+      const headers = ["ID", "Type", "Message", "Source", "Date"];
+      const rows = feedback.map(f => [f.id, f.type, `"${f.message}"`, f.source, f.date]);
+      const csv = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `feedback-export-${new Date().toISOString().split("T")[0]}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      
+      toast({ title: "Export complete", description: `${feedback.length} items exported to CSV.` });
+    } catch {
+      toast({ title: "Export failed", description: "Could not generate CSV file.", variant: "destructive" });
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  const handleDismiss = (id) => {
+    const updated = feedback.filter(f => f.id !== id);
+    setFeedback(updated);
+    try {
+      localStorage.setItem("glp_admin_feedback", JSON.stringify(updated));
+      toast({ title: "Feedback dismissed", description: "Item removed from the list." });
+    } catch {
+      toast({ title: "Save failed", description: "Could not persist changes.", variant: "destructive" });
+    }
+  };
 
   const stats = {
     total: feedback.length,
@@ -26,6 +89,14 @@ export default function FeedbackAggregator() {
   const filteredFeedback = feedback.filter(f => 
     filter === "all" || f.type === filter
   );
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   const getIcon = (type) => {
     switch (type) {
@@ -52,8 +123,15 @@ export default function FeedbackAggregator() {
                 <p className="text-muted-foreground">Aggregate feedback from all sources</p>
               </div>
             </div>
-            <Button variant="outline" className="min-h-[44px]" data-testid="button-export">
-              <Download className="w-4 h-4 mr-2" /> Export CSV
+            <Button 
+              variant="outline" 
+              className="min-h-[44px]" 
+              onClick={handleExport}
+              disabled={exporting || feedback.length === 0}
+              data-testid="button-export"
+            >
+              {exporting ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Download className="w-4 h-4 mr-2" />}
+              Export CSV
             </Button>
           </div>
         </header>
@@ -93,6 +171,7 @@ export default function FeedbackAggregator() {
               size="sm"
               onClick={() => setFilter(f)}
               className="min-h-[40px] capitalize"
+              data-testid={`filter-${f}`}
             >
               {f}
             </Button>
@@ -112,6 +191,15 @@ export default function FeedbackAggregator() {
                       <span>{item.date}</span>
                     </div>
                   </div>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    className="text-muted-foreground hover:text-red-600"
+                    onClick={() => handleDismiss(item.id)}
+                    data-testid={`dismiss-${item.id}`}
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
                 </div>
               </CardContent>
             </Card>

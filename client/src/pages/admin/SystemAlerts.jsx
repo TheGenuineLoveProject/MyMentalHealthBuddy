@@ -1,19 +1,63 @@
-import { useState } from "react";
-import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Filter } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Filter, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { useToast } from "@/hooks/use-toast";
 import SEO from "../../components/SEO";
+
+const DEFAULT_ALERTS = [
+  { id: 1, type: "error", title: "Database Connection Timeout", message: "Connection pool exhausted at 14:32 UTC", time: "2 hours ago", resolved: false },
+  { id: 2, type: "warning", title: "High Memory Usage", message: "Memory usage exceeded 85% threshold", time: "4 hours ago", resolved: true },
+  { id: 3, type: "info", title: "Deployment Completed", message: "v2.4.1 deployed successfully to production", time: "6 hours ago", resolved: true },
+  { id: 4, type: "error", title: "Payment Webhook Failed", message: "Stripe webhook returned 500 error", time: "1 day ago", resolved: true },
+  { id: 5, type: "warning", title: "SSL Certificate Expiring", message: "Certificate expires in 30 days", time: "2 days ago", resolved: false }
+];
 
 export default function SystemAlerts() {
   const [filter, setFilter] = useState("all");
+  const [alerts, setAlerts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [resolving, setResolving] = useState(null);
+  const { toast } = useToast();
 
-  const alerts = [
-    { id: 1, type: "error", title: "Database Connection Timeout", message: "Connection pool exhausted at 14:32 UTC", time: "2 hours ago", resolved: false },
-    { id: 2, type: "warning", title: "High Memory Usage", message: "Memory usage exceeded 85% threshold", time: "4 hours ago", resolved: true },
-    { id: 3, type: "info", title: "Deployment Completed", message: "v2.4.1 deployed successfully to production", time: "6 hours ago", resolved: true },
-    { id: 4, type: "error", title: "Payment Webhook Failed", message: "Stripe webhook returned 500 error", time: "1 day ago", resolved: true },
-    { id: 5, type: "warning", title: "SSL Certificate Expiring", message: "Certificate expires in 30 days", time: "2 days ago", resolved: false }
-  ];
+  useEffect(() => {
+    try {
+      const cached = localStorage.getItem("glp_admin_alerts");
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          setAlerts(parsed);
+        } else {
+          throw new Error("Invalid format");
+        }
+      } else {
+        setAlerts(DEFAULT_ALERTS);
+        localStorage.setItem("glp_admin_alerts", JSON.stringify(DEFAULT_ALERTS));
+      }
+    } catch {
+      setAlerts(DEFAULT_ALERTS);
+      setTimeout(() => toast({ title: "Cache reset", description: "Using default alert data." }), 100);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const handleResolve = async (id) => {
+    setResolving(id);
+    await new Promise(r => setTimeout(r, 400));
+    
+    setAlerts(prev => {
+      const alert = prev.find(a => a.id === id);
+      const updated = prev.map(a => a.id === id ? { ...a, resolved: true, resolvedAt: new Date().toISOString() } : a);
+      try {
+        localStorage.setItem("glp_admin_alerts", JSON.stringify(updated));
+        toast({ title: "Alert resolved", description: `${alert?.title || "Alert"} marked as resolved.` });
+      } catch {}
+      return updated;
+    });
+    
+    setResolving(null);
+  };
 
   const getIcon = (type) => {
     switch (type) {
@@ -38,6 +82,14 @@ export default function SystemAlerts() {
     if (filter === "unresolved") return !alert.resolved;
     return alert.type === filter;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -92,8 +144,15 @@ export default function SystemAlerts() {
                     </p>
                   </div>
                   {!alert.resolved && (
-                    <Button variant="outline" size="sm" className="min-h-[40px]">
-                      Resolve
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="min-h-[40px]"
+                      onClick={() => handleResolve(alert.id)}
+                      disabled={resolving === alert.id}
+                      data-testid={`resolve-${alert.id}`}
+                    >
+                      {resolving === alert.id ? <Loader2 className="w-4 h-4 animate-spin" /> : "Resolve"}
                     </Button>
                   )}
                 </div>
