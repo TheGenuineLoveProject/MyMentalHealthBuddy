@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { Mail, Bell, Clock, Check, Save } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Mail, Bell, Clock, Check, Save, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
+import { useToast } from "@/hooks/use-toast";
 
 export default function EmailDigest() {
+  const { toast } = useToast();
   const [settings, setSettings] = useState({
     digestEnabled: true,
     frequency: "weekly",
@@ -17,6 +19,28 @@ export default function EmailDigest() {
   });
 
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const res = await fetch("/api/user-settings", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.preferences?.emailDigest) {
+            setSettings(prev => ({ ...prev, ...data.preferences.emailDigest }));
+          }
+        }
+      } catch {
+        const cached = localStorage.getItem("glp_email_digest");
+        if (cached) setSettings(JSON.parse(cached));
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadSettings();
+  }, []);
 
   const handleToggle = (key) => {
     setSettings(prev => ({ ...prev, [key]: !prev[key] }));
@@ -28,9 +52,34 @@ export default function EmailDigest() {
     setSaved(false);
   };
 
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/user-settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ preferences: { emailDigest: settings } })
+      });
+      
+      if (res.ok) {
+        setSaved(true);
+        toast({ title: "Settings saved", description: "Your email preferences are updated." });
+        setTimeout(() => setSaved(false), 3000);
+      } else {
+        localStorage.setItem("glp_email_digest", JSON.stringify(settings));
+        setSaved(true);
+        toast({ title: "Saved locally", description: "Log in to sync across devices." });
+        setTimeout(() => setSaved(false), 3000);
+      }
+    } catch {
+      localStorage.setItem("glp_email_digest", JSON.stringify(settings));
+      setSaved(true);
+      toast({ title: "Saved locally", description: "Settings saved to this device." });
+      setTimeout(() => setSaved(false), 3000);
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -161,10 +210,15 @@ export default function EmailDigest() {
 
         <Button
           onClick={handleSave}
+          disabled={saving}
           className="w-full min-h-[44px]"
           data-testid="button-save"
         >
-          {saved ? (
+          {saving ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Saving...
+            </>
+          ) : saved ? (
             <>
               <Check className="w-4 h-4 mr-2" /> Saved!
             </>
