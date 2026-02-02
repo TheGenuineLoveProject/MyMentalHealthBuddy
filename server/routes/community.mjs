@@ -29,36 +29,55 @@ router.get("/question", (_req, res) => {
 
 router.get("/reflections", optionalAuth, async (req, res) => {
   try {
-    const { mood } = req.query;
+    const { mood, emotion } = req.query;
+    const filterValue = emotion || mood;
     
-    let query = db
+    // Get shared reflections from new table
+    const shared = await db
+      .select({
+        id: sharedReflections.id,
+        content: sharedReflections.content,
+        emotion: sharedReflections.emotion,
+        displayName: sharedReflections.displayName,
+        isAnonymous: sharedReflections.isAnonymous,
+        heartCount: sharedReflections.heartCount,
+        isBlessed: sharedReflections.isBlessed,
+        createdAt: sharedReflections.createdAt,
+      })
+      .from(sharedReflections)
+      .orderBy(desc(sharedReflections.createdAt))
+      .limit(30);
+
+    // Also get anonymous reflections for backward compatibility
+    const anonymous = await db
       .select({
         id: anonymousReflections.id,
         content: anonymousReflections.content,
-        mood: anonymousReflections.mood,
+        emotion: anonymousReflections.mood,
         displayName: anonymousReflections.displayName,
         isAnonymous: anonymousReflections.isAnonymous,
+        heartCount: sql`0`,
+        isBlessed: sql`false`,
         createdAt: anonymousReflections.createdAt,
       })
       .from(anonymousReflections)
       .orderBy(desc(anonymousReflections.createdAt))
       .limit(30);
 
-    const reflections = await query;
+    // Merge and sort by createdAt
+    const allReflections = [...shared, ...anonymous]
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 30);
     
-    // Filter by mood if specified
-    const filteredReflections = mood && mood !== "all"
-      ? reflections.filter(r => r.mood?.toLowerCase() === mood.toLowerCase())
-      : reflections;
+    // Filter by emotion if specified
+    const filteredReflections = filterValue && filterValue !== "all"
+      ? allReflections.filter(r => r.emotion?.toLowerCase() === filterValue.toLowerCase())
+      : allReflections;
 
-    res.json({
-      ok: true,
-      reflections: filteredReflections,
-      disclaimer: "These reflections are shared anonymously. They are not advice, and they are not a measure of anyone's progress.",
-    });
+    res.json(filteredReflections);
   } catch (err) {
     console.error("Community reflections error:", err);
-    res.json({ ok: true, reflections: [], disclaimer: "These reflections are shared anonymously." });
+    res.json([]);
   }
 });
 
