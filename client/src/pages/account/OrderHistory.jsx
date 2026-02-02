@@ -1,23 +1,28 @@
 import { useQuery } from "@tanstack/react-query";
-import { Receipt, Download, Calendar, CreditCard, FileText, Loader2, ExternalLink } from "lucide-react";
+import { Receipt, Download, Calendar, CreditCard, FileText, Loader2, ExternalLink, AlertCircle, RefreshCw } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 
 export default function OrderHistory() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: ["/api/billing/invoices"],
   });
   
   const orders = data?.invoices || [];
 
   const formatDate = (dateStr) => {
-    return new Date(dateStr).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    });
+    if (!dateStr) return "N/A";
+    try {
+      return new Date(dateStr).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric"
+      });
+    } catch {
+      return "N/A";
+    }
   };
 
   return (
@@ -28,25 +33,37 @@ export default function OrderHistory() {
       />
       
       <main className="container mx-auto px-4 py-12 max-w-2xl">
-        <header className="mb-8">
+        <header className="mb-8" data-testid="header-order-history">
           <div className="flex items-center gap-2 text-primary mb-2">
             <Receipt className="w-5 h-5" />
-            <span className="text-sm font-medium">Account</span>
+            <span className="text-sm font-medium" data-testid="text-breadcrumb">Account</span>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="heading-order-history">
             Order History
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground" data-testid="text-description">
             View your past orders and download receipts.
           </p>
         </header>
 
         {isLoading ? (
-          <Card className="p-12 flex items-center justify-center">
+          <Card className="p-12 flex items-center justify-center" data-testid="loading-indicator">
             <Loader2 className="w-8 h-8 animate-spin text-primary" />
           </Card>
+        ) : isError ? (
+          <Card className="p-12 text-center" data-testid="error-state">
+            <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
+            <h2 className="text-lg font-semibold mb-2">Unable to Load Orders</h2>
+            <p className="text-muted-foreground mb-4">
+              {error?.message || "We couldn't retrieve your order history. Please try again."}
+            </p>
+            <Button onClick={() => refetch()} variant="outline" data-testid="button-retry">
+              <RefreshCw className="w-4 h-4 mr-2" />
+              Try Again
+            </Button>
+          </Card>
         ) : orders.length === 0 ? (
-          <Card className="p-12 text-center">
+          <Card className="p-12 text-center" data-testid="empty-state">
             <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
             <h2 className="text-lg font-semibold mb-2">No Orders Yet</h2>
             <p className="text-muted-foreground">
@@ -71,16 +88,20 @@ export default function OrderHistory() {
                         <CreditCard className="w-5 h-5 text-primary" />
                       </div>
                       <div>
-                        <div className="font-medium">{order.description}</div>
+                        <div className="font-medium" data-testid={`text-description-${order.id}`}>
+                          {order.description || "Invoice"}
+                        </div>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Calendar className="w-3 h-3" />
-                          {order.date && formatDate(order.date)}
-                          <span className="text-green-600 dark:text-green-400">{order.status}</span>
+                          <span data-testid={`text-date-${order.id}`}>{formatDate(order.date)}</span>
+                          <span className="text-green-600 dark:text-green-400" data-testid={`text-status-${order.id}`}>
+                            {order.status || "completed"}
+                          </span>
                         </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
-                      <span className="font-semibold">${(order.amount || 0).toFixed(2)}</span>
+                      <span className="font-semibold" data-testid={`text-amount-${order.id}`}>${(order.amount || 0).toFixed(2)}</span>
                       {order.invoicePdf ? (
                         <a href={order.invoicePdf} target="_blank" rel="noopener noreferrer">
                           <Button variant="ghost" size="icon" data-testid={`download-${order.id}`}>
