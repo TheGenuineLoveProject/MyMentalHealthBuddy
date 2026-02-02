@@ -60,8 +60,6 @@ export default function LotusGuide({ className = "" }) {
     if (dismissed) setIsDismissed(true);
   }, []);
 
-  if (!shouldShow || isDismissed) return null;
-
   useEffect(() => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
       synth.current = window.speechSynthesis;
@@ -139,6 +137,8 @@ export default function LotusGuide({ className = "" }) {
       setCurrentTip(Math.floor(Math.random() * WELLNESS_TIPS.length));
     }
   };
+
+  if (!shouldShow || isDismissed) return null;
 
   return (
     <div 

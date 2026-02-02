@@ -409,10 +409,7 @@ a:focus-visible {
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-/* Gold accent glow */
-.glow-gold {
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
-}
+/* See .glow-gold in Sacred Glow Utilities section above */
 
 .hover-glow-gold:hover {
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
