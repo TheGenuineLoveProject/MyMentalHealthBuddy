@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, HTMLAttributes, ButtonHTMLAttributes, forwardRef, useId } from "react";
+import { createContext, useContext, useState, useId, ReactNode, MouseEvent } from "react";
 
 interface TabsContextValue {
   value: string;
@@ -14,108 +14,122 @@ function useTabs() {
   return context;
 }
 
-interface TabsProps extends HTMLAttributes<HTMLDivElement> {
+interface TabsProps {
   value: string;
   onValueChange: (value: string) => void;
   defaultValue?: string;
+  children: ReactNode;
+  className?: string;
 }
 
-const Tabs = forwardRef<HTMLDivElement, TabsProps>(
-  ({ value, onValueChange, children, className = "", ...props }, ref) => {
-    const baseId = useId();
-    return (
-      <TabsContext.Provider value={{ value, onValueChange, baseId }}>
-        <div ref={ref} className={className} {...props}>
-          {children}
-        </div>
-      </TabsContext.Provider>
-    );
-  }
-);
-Tabs.displayName = "Tabs";
+function Tabs({ value, onValueChange, children, className = "" }: TabsProps) {
+  const baseId = useId();
+  return (
+    <TabsContext.Provider value={{ value, onValueChange, baseId }}>
+      <div className={className}>
+        {children}
+      </div>
+    </TabsContext.Provider>
+  );
+}
 
-const TabsList = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ className = "", ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        role="tablist"
-        aria-orientation="horizontal"
-        className={`inline-flex h-auto min-h-10 items-center justify-start flex-wrap gap-1 rounded-xl bg-gray-100 p-1.5 text-gray-600 dark:bg-gray-800 dark:text-gray-300 ${className}`}
-        {...props}
-      />
-    );
-  }
-);
-TabsList.displayName = "TabsList";
+interface TabsListProps {
+  children: ReactNode;
+  className?: string;
+}
 
-interface TabsTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+function TabsList({ className = "", children }: TabsListProps) {
+  return (
+    <div
+      role="tablist"
+      aria-orientation="horizontal"
+      className={`inline-flex h-auto min-h-10 items-center justify-start flex-wrap gap-1 rounded-xl bg-gray-100 p-1.5 text-gray-600 dark:bg-gray-800 dark:text-gray-300 ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+interface TabsTriggerProps {
   value: string;
+  children: ReactNode;
+  className?: string;
+  disabled?: boolean;
+  "data-testid"?: string;
 }
 
-const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
-  ({ className = "", value, ...props }, ref) => {
-    const { value: selectedValue, onValueChange, baseId } = useTabs();
-    const isSelected = selectedValue === value;
-    const triggerId = `${baseId}-trigger-${value}`;
-    const panelId = `${baseId}-panel-${value}`;
+function TabsTrigger({ className = "", value, children, disabled = false, "data-testid": testId }: TabsTriggerProps) {
+  const { value: selectedValue, onValueChange, baseId } = useTabs();
+  const isSelected = selectedValue === value;
+  const triggerId = `${baseId}-trigger-${value}`;
+  const panelId = `${baseId}-panel-${value}`;
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!disabled) {
+      onValueChange(value);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      if (!disabled) {
         onValueChange(value);
       }
-    };
+    }
+  };
 
-    return (
-      <button
-        ref={ref}
-        type="button"
-        role="tab"
-        id={triggerId}
-        aria-selected={isSelected}
-        aria-controls={panelId}
-        tabIndex={isSelected ? 0 : -1}
-        onClick={() => onValueChange(value)}
-        onKeyDown={handleKeyDown}
-        className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
-          isSelected
-            ? "bg-white text-gray-900 shadow-sm dark:bg-gray-900 dark:text-white"
-            : "text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        } ${className}`}
-        data-state={isSelected ? "active" : "inactive"}
-        {...props}
-      />
-    );
-  }
-);
-TabsTrigger.displayName = "TabsTrigger";
-
-interface TabsContentProps extends HTMLAttributes<HTMLDivElement> {
-  value: string;
+  return (
+    <button
+      type="button"
+      role="tab"
+      id={triggerId}
+      aria-selected={isSelected}
+      aria-controls={panelId}
+      tabIndex={isSelected ? 0 : -1}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      disabled={disabled}
+      data-testid={testId}
+      data-state={isSelected ? "active" : "inactive"}
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
+      className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+        isSelected
+          ? "bg-white text-gray-900 shadow-sm dark:bg-gray-900 dark:text-white"
+          : "text-gray-600 hover:bg-gray-200 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      } ${className}`}
+    >
+      {children}
+    </button>
+  );
 }
 
-const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
-  ({ className = "", value, ...props }, ref) => {
-    const { value: selectedValue, baseId } = useTabs();
-    const triggerId = `${baseId}-trigger-${value}`;
-    const panelId = `${baseId}-panel-${value}`;
-    
-    if (selectedValue !== value) return null;
+interface TabsContentProps {
+  value: string;
+  children: ReactNode;
+  className?: string;
+}
 
-    return (
-      <div
-        ref={ref}
-        role="tabpanel"
-        id={panelId}
-        aria-labelledby={triggerId}
-        tabIndex={0}
-        className={`mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] ${className}`}
-        {...props}
-      />
-    );
-  }
-);
-TabsContent.displayName = "TabsContent";
+function TabsContent({ className = "", value, children }: TabsContentProps) {
+  const { value: selectedValue, baseId } = useTabs();
+  const triggerId = `${baseId}-trigger-${value}`;
+  const panelId = `${baseId}-panel-${value}`;
+  
+  if (selectedValue !== value) return null;
+
+  return (
+    <div
+      role="tabpanel"
+      id={panelId}
+      aria-labelledby={triggerId}
+      tabIndex={0}
+      className={`mt-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 export { Tabs, TabsList, TabsTrigger, TabsContent };
