@@ -1,15 +1,72 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { BookOpen, Clock, Star, Filter, Search, Lock, ArrowRight } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { BookOpen, Clock, Star, Filter, Search, Lock, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
+
+const ENROLLMENT_KEY = "glp-course-enrollments";
 
 export default function CourseCatalog() {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
+  const [enrollments, setEnrollments] = useState([]);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(ENROLLMENT_KEY);
+      if (saved) setEnrollments(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  const enrollMutation = useMutation({
+    mutationFn: async (courseId) => {
+      return apiRequest("POST", "/api/gamification/record-session", {
+        toolName: "course-enrollment",
+        durationSeconds: 300,
+        metadata: { courseId }
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Server sync failed",
+        description: "Your enrollment was saved locally. It will sync when you're back online.",
+        variant: "destructive"
+      });
+    }
+  });
+
+  const handleEnroll = (courseId, courseTitle) => {
+    if (enrollments.includes(courseId)) return;
+    
+    const updatedEnrollments = [...enrollments, courseId];
+    setEnrollments(updatedEnrollments);
+    try {
+      localStorage.setItem(ENROLLMENT_KEY, JSON.stringify(updatedEnrollments));
+    } catch {}
+
+    if (user) {
+      enrollMutation.mutate(courseId);
+    }
+    
+    toast({
+      title: "Enrolled!",
+      description: `You've enrolled in "${courseTitle}". Start learning anytime.`
+    });
+  };
+
+  const isEnrolled = (courseId) => enrollments.includes(courseId);
 
   const courses = [
     {
@@ -180,17 +237,40 @@ export default function CourseCatalog() {
                     </span>
                   )}
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
                     {course.rating}
                   </div>
-                  <Link href={`/courses/${course.id}`}>
-                    <Button size="sm" className="min-h-[40px] px-4 rounded-lg" data-testid={`button-view-${course.id}`}>
-                      View Course
-                      <ArrowRight className="w-4 h-4 ml-1" />
-                    </Button>
-                  </Link>
+                  <div className="flex gap-2">
+                    {isEnrolled(course.id) ? (
+                      <span className="flex items-center gap-1 text-sm text-green-600 dark:text-green-400">
+                        <CheckCircle className="w-4 h-4" />
+                        Enrolled
+                      </span>
+                    ) : (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="min-h-[36px] px-3 rounded-lg"
+                        onClick={() => handleEnroll(course.id, course.title)}
+                        disabled={enrollMutation.isPending}
+                        data-testid={`button-enroll-${course.id}`}
+                      >
+                        {enrollMutation.isPending ? (
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                        ) : (
+                          "Enroll"
+                        )}
+                      </Button>
+                    )}
+                    <Link href={`/courses/${course.id}`}>
+                      <Button size="sm" className="min-h-[36px] px-3 rounded-lg" data-testid={`button-view-${course.id}`}>
+                        View Course
+                        <ArrowRight className="w-4 h-4 ml-1" />
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </CardContent>
             </Card>

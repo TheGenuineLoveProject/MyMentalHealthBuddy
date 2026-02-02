@@ -128,27 +128,6 @@ const qaItems = [
 
 function QAItem({ item, isOpen, onToggle }) {
   return (
-  <WellnessPageShell
-    title="QAPage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="Q A — The Genuine Love Project" description="Explore q a tools for your wellness journey." />
-
-
     <div 
       className="border-b border-gray-200 dark:border-gray-700 last:border-0"
       data-testid={`qa-item-${item.question.slice(0, 20).toLowerCase().replace(/\s+/g, '-')}`}
@@ -193,6 +172,24 @@ export default function QAPage() {
   }, [searchQuery, activeCategory]);
 
   return (
+    <WellnessPageShell
+      title="Questions & Answers"
+      subtitle="Common questions about healing, practices, and mental wellness"
+      benefits={pickBenefits(["clarity", "calm", "agency", "safety"], 4)}
+      clarity={{
+        what: "Answers to frequently asked questions about wellness and healing.",
+        why: "To provide clear, accessible information when you need it.",
+        who: "Anyone curious about healing, practices, or mental wellness topics.",
+        when: "Whenever you have questions or want to learn more.",
+        where: "Available anytime you need quick, reliable answers.",
+        how: "Browse categories, search, or scroll to find what you need."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["What is grounding?", "How does breathing help anxiety?"] },
+        { label: "Intermediate", examples: ["Why is healing non-linear?", "What's nervous system regulation?"] },
+        { label: "Advanced", examples: ["Can I heal without therapy?", "How do patterns form?"] }
+      ]}
+    >
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
         <div className="max-w-4xl mx-auto">

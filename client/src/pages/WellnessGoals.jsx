@@ -1,51 +1,147 @@
-import { useState } from "react";
-import { Target, Plus, CheckCircle, Circle, Trash2, Edit2, Calendar } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { Target, Plus, CheckCircle, Circle, Trash2, Edit2, Calendar, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
+
+const STORAGE_KEY = "glp-wellness-goals";
+
+const DEFAULT_GOALS = [
+  { id: 1, title: "Practice mindfulness daily", category: "Mind", progress: 70, target: 30, current: 21, unit: "days" },
+  { id: 2, title: "Journal 3 times per week", category: "Reflection", progress: 85, target: 12, current: 10, unit: "entries" },
+  { id: 3, title: "Complete breathing exercises", category: "Body", progress: 40, target: 20, current: 8, unit: "sessions" },
+  { id: 4, title: "Read self-help content", category: "Learning", progress: 60, target: 5, current: 3, unit: "articles" }
+];
 
 export default function WellnessGoals() {
-  const [goals, setGoals] = useState([
-    { id: 1, title: "Practice mindfulness daily", category: "Mind", progress: 70, target: 30, current: 21, unit: "days" },
-    { id: 2, title: "Journal 3 times per week", category: "Reflection", progress: 85, target: 12, current: 10, unit: "entries" },
-    { id: 3, title: "Complete breathing exercises", category: "Body", progress: 40, target: 20, current: 8, unit: "sessions" },
-    { id: 4, title: "Read self-help content", category: "Learning", progress: 60, target: 5, current: 3, unit: "articles" }
-  ]);
-
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const [goals, setGoals] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showAddGoal, setShowAddGoal] = useState(false);
   const [newGoalTitle, setNewGoalTitle] = useState("");
+  const [newGoalCategory, setNewGoalCategory] = useState("Mind");
+  const [newGoalTarget, setNewGoalTarget] = useState(10);
 
   const categories = ["Mind", "Body", "Reflection", "Learning", "Connection", "Creativity"];
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        setGoals(JSON.parse(saved));
+      } else {
+        setGoals(DEFAULT_GOALS);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_GOALS));
+      }
+    } catch {
+      setGoals(DEFAULT_GOALS);
+    }
+    setLoading(false);
+  }, []);
+
+  const saveToStorage = (updatedGoals) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedGoals));
+    } catch {
+      toast({
+        title: "Couldn't save",
+        description: "Your changes might not persist.",
+        variant: "destructive"
+      });
+    }
+  };
+
+  const recordProgressMutation = useMutation({
+    mutationFn: async (goalTitle) => {
+      return apiRequest("POST", "/api/gamification/record-session", {
+        toolName: "wellness-goal",
+        durationSeconds: 60,
+        metadata: { goal: goalTitle }
+      });
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+      if (data?.xpEarned) {
+        toast({
+          title: "Progress recorded!",
+          description: `You earned ${data.xpEarned} XP for working on your goal.`
+        });
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Sync failed",
+        description: "Your progress was saved locally. It will sync when you're back online.",
+        variant: "destructive"
+      });
+    }
+  });
 
   const addGoal = () => {
     if (!newGoalTitle.trim()) return;
     const newGoal = {
       id: Date.now(),
       title: newGoalTitle,
-      category: "Mind",
+      category: newGoalCategory,
       progress: 0,
-      target: 10,
+      target: newGoalTarget,
       current: 0,
       unit: "times"
     };
-    setGoals([...goals, newGoal]);
+    const updatedGoals = [...goals, newGoal];
+    setGoals(updatedGoals);
+    saveToStorage(updatedGoals);
     setNewGoalTitle("");
+    setNewGoalCategory("Mind");
+    setNewGoalTarget(10);
     setShowAddGoal(false);
+    toast({
+      title: "Goal Created",
+      description: "Your new wellness goal has been added."
+    });
   };
 
   const incrementProgress = (goalId) => {
-    setGoals(goals.map(goal => {
-      if (goal.id === goalId && goal.current < goal.target) {
-        const newCurrent = goal.current + 1;
-        return { ...goal, current: newCurrent, progress: Math.round((newCurrent / goal.target) * 100) };
+    const goal = goals.find(g => g.id === goalId);
+    if (!goal || goal.current >= goal.target) return;
+    
+    const newCurrent = goal.current + 1;
+    const newProgress = Math.round((newCurrent / goal.target) * 100);
+    const updatedGoals = goals.map(g => {
+      if (g.id === goalId) {
+        return { ...g, current: newCurrent, progress: newProgress };
       }
-      return goal;
-    }));
+      return g;
+    });
+    setGoals(updatedGoals);
+    saveToStorage(updatedGoals);
+
+    if (user) {
+      recordProgressMutation.mutate(goal.title);
+    }
+
+    if (newProgress >= 100) {
+      toast({
+        title: "Goal Complete!",
+        description: `Congratulations on completing "${goal.title}"!`
+      });
+    }
   };
 
   const deleteGoal = (goalId) => {
-    setGoals(goals.filter(goal => goal.id !== goalId));
+    const updatedGoals = goals.filter(goal => goal.id !== goalId);
+    setGoals(updatedGoals);
+    saveToStorage(updatedGoals);
+    toast({
+      title: "Goal Removed",
+      description: "The goal has been deleted."
+    });
   };
 
   const getCategoryColor = (category) => {
@@ -89,20 +185,45 @@ export default function WellnessGoals() {
         {showAddGoal && (
           <Card className="mb-6">
             <CardContent className="pt-6">
-              <div className="flex gap-3">
+              <div className="space-y-4">
                 <Input
                   placeholder="Enter your wellness goal..."
                   value={newGoalTitle}
                   onChange={(e) => setNewGoalTitle(e.target.value)}
-                  className="min-h-[44px] flex-1"
+                  className="min-h-[44px]"
                   data-testid="input-new-goal"
                 />
-                <Button onClick={addGoal} className="min-h-[44px]" data-testid="button-save-goal">
-                  Save
-                </Button>
-                <Button variant="outline" onClick={() => setShowAddGoal(false)} className="min-h-[44px]">
-                  Cancel
-                </Button>
+                <div className="flex gap-3 flex-wrap">
+                  <select
+                    value={newGoalCategory}
+                    onChange={(e) => setNewGoalCategory(e.target.value)}
+                    className="min-h-[44px] px-3 rounded-md border border-input bg-background"
+                    data-testid="select-goal-category"
+                  >
+                    {categories.map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
+                  </select>
+                  <Input
+                    type="number"
+                    min="1"
+                    max="365"
+                    placeholder="Target"
+                    value={newGoalTarget}
+                    onChange={(e) => setNewGoalTarget(parseInt(e.target.value) || 10)}
+                    className="min-h-[44px] w-24"
+                    data-testid="input-goal-target"
+                  />
+                  <span className="flex items-center text-muted-foreground">times</span>
+                </div>
+                <div className="flex gap-3">
+                  <Button onClick={addGoal} className="min-h-[44px]" data-testid="button-save-goal">
+                    Save Goal
+                  </Button>
+                  <Button variant="outline" onClick={() => setShowAddGoal(false)} className="min-h-[44px]">
+                    Cancel
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

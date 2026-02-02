@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link, useRoute, useLocation } from "wouter";
-import { ArrowLeft, Heart, CheckCircle, Clock, ArrowRight, Share2 } from "lucide-react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { ArrowLeft, Heart, CheckCircle, Clock, ArrowRight, Share2, Loader2, Sparkles } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { ReflectionCard } from "../components/share";
 import ShareModal from "../components/share/ShareModal";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 
 const CHALLENGE_DAYS = [
   { day: 1, title: "Name One Feeling", description: "Take 60 seconds to identify and name one emotion you're experiencing.", prompt: "Right now, I notice I'm feeling...", duration: "60 seconds" },
@@ -21,6 +25,8 @@ const CHALLENGE_DAYS = [
 export default function ChallengeDay() {
   const [, params] = useRoute("/challenge/day/:dayNum");
   const [, navigate] = useLocation();
+  const { user } = useAuth();
+  const { toast } = useToast();
   const dayNum = parseInt(params?.dayNum || "1", 10);
   
   const day = CHALLENGE_DAYS.find(d => d.day === dayNum) || CHALLENGE_DAYS[0];
@@ -29,32 +35,115 @@ export default function ChallengeDay() {
   const [reflection, setReflection] = useState("");
   const [completed, setCompleted] = useState(false);
   const [showShare, setShowShare] = useState(false);
+  const [xpEarned, setXpEarned] = useState(0);
   
+  const { data: progressData, isLoading: isLoadingProgress } = useQuery({
+    queryKey: ["/api/gamification/progress"],
+    enabled: !!user,
+  });
+
   useEffect(() => {
-    const saved = localStorage.getItem("glp-challenge-progress");
-    const progress = saved ? JSON.parse(saved) : {};
-    setCompleted(!!progress[dayNum]);
-  }, [dayNum]);
+    try {
+      const saved = localStorage.getItem("glp-challenge-progress");
+      const progress = saved ? JSON.parse(saved) : {};
+      const localCompleted = !!progress[dayNum];
+      
+      // Check server-side completion if user is authenticated
+      if (user && progressData?.sessions) {
+        const serverCompleted = progressData.sessions.some(
+          s => s.toolName === `challenge-day-${dayNum}`
+        );
+        setCompleted(serverCompleted || localCompleted);
+      } else {
+        setCompleted(localCompleted);
+      }
+    } catch {
+      setCompleted(false);
+    }
+  }, [dayNum, user, progressData]);
+
+  const completeMutation = useMutation({
+    mutationFn: async () => {
+      return apiRequest("POST", "/api/gamification/record-session", {
+        toolName: `challenge-day-${dayNum}`,
+        durationSeconds: dayNum === 7 ? 180 : 90,
+        metadata: { day: dayNum, title: day.title }
+      });
+    },
+    onSuccess: (data) => {
+      try {
+        const saved = localStorage.getItem("glp-challenge-progress");
+        const progress = saved ? JSON.parse(saved) : {};
+        progress[dayNum] = true;
+        localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
+      } catch {}
+      
+      setCompleted(true);
+      setXpEarned(data?.xpEarned || 25);
+      queryClient.invalidateQueries({ queryKey: ["/api/gamification/progress"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/badges"] });
+      
+      toast({
+        title: "Day Complete!",
+        description: `You earned ${data?.xpEarned || 25} XP. Great work on your healing journey.`,
+      });
+    },
+    onError: () => {
+      try {
+        const saved = localStorage.getItem("glp-challenge-progress");
+        const progress = saved ? JSON.parse(saved) : {};
+        progress[dayNum] = true;
+        localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
+      } catch {}
+      setCompleted(true);
+      toast({
+        title: "Day Complete!",
+        description: "Progress saved locally. Keep going!",
+      });
+    }
+  });
 
   const handleComplete = () => {
-    const saved = localStorage.getItem("glp-challenge-progress");
-    const progress = saved ? JSON.parse(saved) : {};
-    progress[dayNum] = true;
-    localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
-    setCompleted(true);
+    if (user) {
+      completeMutation.mutate();
+    } else {
+      try {
+        const saved = localStorage.getItem("glp-challenge-progress");
+        const progress = saved ? JSON.parse(saved) : {};
+        progress[dayNum] = true;
+        localStorage.setItem("glp-challenge-progress", JSON.stringify(progress));
+      } catch {}
+      setCompleted(true);
+      toast({
+        title: "Day Complete!",
+        description: "Sign in to earn XP and track your streak!",
+      });
+    }
   };
 
   const handleSaveCard = ({ text, theme }) => {
-    const saved = localStorage.getItem("glp-reflection-cards");
-    const cards = saved ? JSON.parse(saved) : [];
-    cards.push({
-      id: Date.now(),
-      text,
-      theme,
-      day: dayNum,
-      date: new Date().toISOString(),
-    });
-    localStorage.setItem("glp-reflection-cards", JSON.stringify(cards));
+    try {
+      const saved = localStorage.getItem("glp-reflection-cards");
+      const cards = saved ? JSON.parse(saved) : [];
+      cards.push({
+        id: Date.now(),
+        text,
+        theme,
+        day: dayNum,
+        date: new Date().toISOString(),
+      });
+      localStorage.setItem("glp-reflection-cards", JSON.stringify(cards));
+      toast({
+        title: "Card Saved",
+        description: "Your reflection card has been saved.",
+      });
+    } catch {
+      toast({
+        title: "Couldn't save card",
+        description: "Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
@@ -160,16 +249,31 @@ export default function ChallengeDay() {
           {!completed ? (
             <button
               onClick={handleComplete}
-              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--glp-sage)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity"
+              disabled={completeMutation.isPending}
+              className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[var(--glp-sage)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
               data-testid="button-complete-day"
             >
-              <CheckCircle className="w-5 h-5" />
-              Mark Day Complete
+              {completeMutation.isPending ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <CheckCircle className="w-5 h-5" />
+                  Mark Day Complete
+                </>
+              )}
             </button>
           ) : (
             <div className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 rounded-xl font-medium">
               <CheckCircle className="w-5 h-5" />
               Day Completed!
+              {xpEarned > 0 && (
+                <span className="flex items-center gap-1 ml-2 text-sm">
+                  <Sparkles className="w-4 h-4" /> +{xpEarned} XP
+                </span>
+              )}
             </div>
           )}
           

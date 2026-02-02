@@ -1,15 +1,85 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Dumbbell, Clock, Star, Heart, Wind, Brain, Sparkles, Search, ArrowRight } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { Dumbbell, Clock, Star, Heart, Wind, Brain, Sparkles, Search, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
+
+const FAVORITES_KEY = "glp-practice-favorites";
 
 export default function PracticeLibrary() {
+  const { user } = useAuth();
+  const { toast } = useToast();
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("all");
+  const [favorites, setFavorites] = useState([]);
+  const [togglingId, setTogglingId] = useState(null);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(FAVORITES_KEY);
+      if (saved) setFavorites(JSON.parse(saved));
+    } catch {}
+  }, []);
+
+  const favoriteMutation = useMutation({
+    mutationFn: async ({ practiceId, action }) => {
+      return apiRequest("POST", "/api/favorites", { 
+        itemId: practiceId, 
+        itemType: "practice",
+        action 
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+      setTogglingId(null);
+    },
+    onError: (error) => {
+      setTogglingId(null);
+      toast({
+        title: "Sync failed",
+        description: "Your favorite was saved locally. It will sync when you're back online.",
+        variant: "destructive"
+      });
+    }
+  });
+
+  const toggleFavorite = (practiceId, practiceTitle) => {
+    const isFav = favorites.includes(practiceId);
+    let updatedFavorites;
+    
+    if (isFav) {
+      updatedFavorites = favorites.filter(id => id !== practiceId);
+      toast({
+        title: "Removed from favorites",
+        description: `"${practiceTitle}" removed from your saved practices.`
+      });
+    } else {
+      updatedFavorites = [...favorites, practiceId];
+      toast({
+        title: "Added to favorites",
+        description: `"${practiceTitle}" saved to your favorites.`
+      });
+    }
+    
+    setFavorites(updatedFavorites);
+    try {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(updatedFavorites));
+    } catch {}
+
+    if (user) {
+      setTogglingId(practiceId);
+      favoriteMutation.mutate({ practiceId, action: isFav ? "remove" : "add" });
+    }
+  };
+
+  const isFavorite = (practiceId) => favorites.includes(practiceId);
 
   const categories = [
     { id: "all", label: "All Practices", icon: Dumbbell },
@@ -161,8 +231,28 @@ export default function PracticeLibrary() {
           {filteredPractices.map(practice => (
             <Card key={practice.id} className="hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
-                <CardTitle className="text-lg">{practice.title}</CardTitle>
-                <CardDescription>{practice.description}</CardDescription>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <CardTitle className="text-lg">{practice.title}</CardTitle>
+                    <CardDescription>{practice.description}</CardDescription>
+                  </div>
+                  <button
+                    onClick={() => toggleFavorite(practice.id, practice.title)}
+                    className="p-2 rounded-lg hover:bg-muted transition-colors disabled:opacity-50"
+                    aria-label={isFavorite(practice.id) ? "Remove from favorites" : "Add to favorites"}
+                    aria-busy={togglingId === practice.id}
+                    disabled={togglingId === practice.id}
+                    data-testid={`button-favorite-${practice.id}`}
+                  >
+                    {togglingId === practice.id ? (
+                      <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
+                    ) : (
+                      <Heart 
+                        className={`w-5 h-5 ${isFavorite(practice.id) ? "fill-rose-500 text-rose-500" : "text-muted-foreground"}`}
+                      />
+                    )}
+                  </button>
+                </div>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2 mb-4">
@@ -173,6 +263,11 @@ export default function PracticeLibrary() {
                     <Clock className="w-3 h-3 inline mr-1" />
                     {practice.duration}
                   </span>
+                  {isFavorite(practice.id) && (
+                    <span className="px-2 py-1 rounded-full text-xs bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-300">
+                      Favorited
+                    </span>
+                  )}
                 </div>
                 <Link href={practice.link}>
                   <Button className="w-full min-h-[44px] rounded-lg" data-testid={`button-start-${practice.id}`}>
