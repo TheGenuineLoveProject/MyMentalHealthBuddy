@@ -1,6 +1,8 @@
-const CACHE_VERSION = '1.0.0';
+const CACHE_VERSION = '1.1.0';
 const CACHE_NAME = `genuine-love-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `genuine-love-runtime-${CACHE_VERSION}`;
+const OFFLINE_QUEUE_DB = 'genuine-love-offline-queue';
+const OFFLINE_QUEUE_STORE = 'pending-entries';
 
 const STATIC_ASSETS = [
   '/',
@@ -260,4 +262,104 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
+  if (event.data && event.data.type === 'SYNC_OFFLINE_ENTRIES') {
+    syncOfflineEntries();
+  }
+});
+
+function openOfflineDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(OFFLINE_QUEUE_DB, 1);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => resolve(request.result);
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains(OFFLINE_QUEUE_STORE)) {
+        db.createObjectStore(OFFLINE_QUEUE_STORE, { keyPath: 'id', autoIncrement: true });
+      }
+    };
+  });
+}
+
+async function saveOfflineEntry(entry) {
+  try {
+    const db = await openOfflineDB();
+    const tx = db.transaction(OFFLINE_QUEUE_STORE, 'readwrite');
+    const store = tx.objectStore(OFFLINE_QUEUE_STORE);
+    store.add({ ...entry, timestamp: Date.now() });
+    await tx.complete;
+    console.log('[SW] Saved entry for offline sync');
+    return true;
+  } catch (err) {
+    console.error('[SW] Failed to save offline entry:', err);
+    return false;
+  }
+}
+
+async function getOfflineEntries() {
+  try {
+    const db = await openOfflineDB();
+    const tx = db.transaction(OFFLINE_QUEUE_STORE, 'readonly');
+    const store = tx.objectStore(OFFLINE_QUEUE_STORE);
+    return new Promise((resolve, reject) => {
+      const request = store.getAll();
+      request.onsuccess = () => resolve(request.result);
+      request.onerror = () => reject(request.error);
+    });
+  } catch (err) {
+    console.error('[SW] Failed to get offline entries:', err);
+    return [];
+  }
+}
+
+async function clearOfflineEntry(id) {
+  try {
+    const db = await openOfflineDB();
+    const tx = db.transaction(OFFLINE_QUEUE_STORE, 'readwrite');
+    const store = tx.objectStore(OFFLINE_QUEUE_STORE);
+    store.delete(id);
+  } catch (err) {
+    console.error('[SW] Failed to clear offline entry:', err);
+  }
+}
+
+async function syncOfflineEntries() {
+  const entries = await getOfflineEntries();
+  if (entries.length === 0) return;
+  
+  console.log(`[SW] Syncing ${entries.length} offline entries...`);
+  
+  for (const entry of entries) {
+    try {
+      const response = await fetch(entry.url, {
+        method: entry.method,
+        headers: entry.headers,
+        body: entry.body,
+        credentials: 'include'
+      });
+      
+      if (response.ok) {
+        await clearOfflineEntry(entry.id);
+        console.log('[SW] Synced offline entry:', entry.id);
+      }
+    } catch (err) {
+      console.log('[SW] Entry sync failed, will retry later:', entry.id);
+    }
+  }
+  
+  self.clients.matchAll().then(clients => {
+    clients.forEach(client => {
+      client.postMessage({ type: 'OFFLINE_SYNC_COMPLETE' });
+    });
+  });
+}
+
+self.addEventListener('sync', (event) => {
+  if (event.tag === 'sync-offline-entries') {
+    event.waitUntil(syncOfflineEntries());
+  }
+});
+
+self.addEventListener('online', () => {
+  syncOfflineEntries();
 });
