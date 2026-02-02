@@ -504,6 +504,32 @@ export const coherenceEntries = pgTable("coherence_entries", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+/* ================= BADGES ================= */
+export const badges = pgTable("badges", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  badgeId: varchar("badge_id", { length: 100 }).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= INVITES ================= */
+export const invites = pgTable("invites", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  senderId: uuid("sender_id").notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  status: varchar("status", { length: 50 }).default("pending"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= USER SETTINGS ================= */
+export const userSettings = pgTable("user_settings", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull().unique(),
+  reminders: jsonb("reminders"),
+  preferences: jsonb("preferences"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 /* ================= SESSIONS (Passport/Replit Auth) ================= */
 export const sessions = pgTable(
   "sessions",

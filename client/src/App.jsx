@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient.js";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import { EmotionProvider } from "./context/EmotionContext.jsx";
 import { ReadingLevelProvider } from "./context/ReadingLevelContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
@@ -40,6 +41,7 @@ const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
 const About = lazy(() => import("./pages/About.jsx"));
 const Privacy = lazy(() => import("./pages/Privacy.jsx"));
+const Invite = lazy(() => import("./pages/Invite.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const Profile = lazy(() => import("./pages/Profile.jsx"));
@@ -275,6 +277,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <EmotionProvider>
         <ReadingLevelProvider>
           <ErrorBoundary>
             <SkipToContent />
@@ -675,6 +678,7 @@ export default function App() {
               <Route path="/contact"><Contact /></Route>
               <Route path="/about"><About /></Route>
               <Route path="/privacy"><Privacy /></Route>
+              <Route path="/invite"><ProtectedRoute><Invite /></ProtectedRoute></Route>
               <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
               <Route path="/support/guides">{() => <ConfigRoute route="/support/guides" />}</Route>
               <Route path="/support/feedback">{() => <ConfigRoute route="/support/feedback" />}</Route>
@@ -891,6 +895,7 @@ export default function App() {
           <AICompanion />
           </ErrorBoundary>
         </ReadingLevelProvider>
+        </EmotionProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

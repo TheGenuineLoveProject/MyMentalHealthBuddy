@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { MessageCircle, X, Send, Sparkles, Heart, Loader2 } from "lucide-react";
+import { MessageCircle, X, Send, Sparkles, Heart, Loader2, Volume2, VolumeX } from "lucide-react";
 import { apiRequest } from "../lib/queryClient";
 import { LotusGuide } from "./sacred";
+import { useEmotion } from "@/context/EmotionContext";
 
 const INITIAL_MESSAGES = [
   {
@@ -30,8 +31,52 @@ export default function AICompanion({ className = "" }) {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [showAffirmation, setShowAffirmation] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
+  const speechSynthRef = useRef(null);
+  
+  let emotionContext = null;
+  try {
+    emotionContext = useEmotion();
+  } catch {
+    emotionContext = null;
+  }
+  
+  const speakMessage = useCallback((text) => {
+    if (!voiceEnabled || !('speechSynthesis' in window)) return;
+    
+    window.speechSynthesis.cancel();
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.9;
+    utterance.pitch = 1.0;
+    utterance.volume = 0.8;
+    
+    const voices = window.speechSynthesis.getVoices();
+    const preferredVoice = voices.find(v => 
+      v.name.includes('Samantha') || 
+      v.name.includes('Google US English Female') ||
+      v.lang.startsWith('en')
+    );
+    if (preferredVoice) utterance.voice = preferredVoice;
+    
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    
+    speechSynthRef.current = utterance;
+    window.speechSynthesis.speak(utterance);
+  }, [voiceEnabled]);
+  
+  useEffect(() => {
+    return () => {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -64,14 +109,23 @@ export default function AICompanion({ className = "" }) {
     onSuccess: (data) => {
       setTimeout(() => {
         setIsTyping(false);
+        const responseContent = data?.reply || data?.response || data?.message || SUPPORTIVE_RESPONSES[Math.floor(Math.random() * SUPPORTIVE_RESPONSES.length)];
         const aiResponse = {
           id: `ai-${Date.now()}`,
           role: "assistant",
-          content: data?.reply || data?.response || data?.message || SUPPORTIVE_RESPONSES[Math.floor(Math.random() * SUPPORTIVE_RESPONSES.length)],
+          content: responseContent,
           timestamp: new Date(),
           isCrisis: data?.isCrisis || false
         };
         setMessages(prev => [...prev, aiResponse]);
+        
+        if (voiceEnabled) {
+          speakMessage(responseContent);
+        }
+        
+        if (data?.detectedEmotion && emotionContext?.setEmotion) {
+          emotionContext.setEmotion(data.detectedEmotion, data.emotionIntensity || 0.5);
+        }
       }, 1000 + Math.random() * 1000);
     },
     onError: () => {
@@ -173,14 +227,32 @@ export default function AICompanion({ className = "" }) {
                   </p>
                 </div>
               </div>
-              <button
-                onClick={handleClose}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-                aria-label="Close companion"
-                data-testid="button-close-companion"
-              >
-                <X className="w-5 h-5 text-gray-500" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setVoiceEnabled(!voiceEnabled)}
+                  className={`p-2 rounded-full transition ${
+                    voiceEnabled 
+                      ? 'bg-[var(--glp-sage)]/20 text-[var(--glp-sage)]' 
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400'
+                  } ${isSpeaking ? 'animate-pulse' : ''}`}
+                  aria-label={voiceEnabled ? "Disable voice" : "Enable voice"}
+                  data-testid="button-toggle-voice"
+                >
+                  {voiceEnabled ? (
+                    <Volume2 className="w-5 h-5" />
+                  ) : (
+                    <VolumeX className="w-5 h-5" />
+                  )}
+                </button>
+                <button
+                  onClick={handleClose}
+                  className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                  aria-label="Close companion"
+                  data-testid="button-close-companion"
+                >
+                  <X className="w-5 h-5 text-gray-500" />
+                </button>
+              </div>
             </header>
 
             <div className="mx-4 mt-2 p-3 rounded-lg bg-[var(--glp-rose)]/10 border border-[var(--glp-rose)]/20">
