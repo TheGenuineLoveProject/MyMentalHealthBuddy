@@ -10,6 +10,7 @@ import EmotionAuraRing from "@/components/EmotionAuraRing.jsx";
 import GratitudePrompt from "@/components/GratitudePrompt.jsx";
 import SacredQuote from "@/components/SacredQuote.jsx";
 import AffirmationDeck from "@/components/AffirmationDeck.jsx";
+import "@/styles/sacred-visuals.css";
 
 export default function InsightsDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
@@ -31,15 +32,16 @@ export default function InsightsDashboard() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-rose-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="min-h-screen bg-sunrise dark:bg-sunrise">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <header className="mb-8">
           <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-rose-400 flex items-center justify-center shadow-lg">
+            <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-rose-400 flex items-center justify-center shadow-lg lotus-blossom">
               <Flower2 className="w-6 h-6 text-white" />
+              <div className="absolute inset-0 rounded-2xl lotus-glow opacity-60" />
             </div>
             <div>
-              <h1 className="text-3xl font-display font-bold text-gray-800 dark:text-white">
+              <h1 className="text-3xl font-playfair font-bold text-gray-800 dark:text-white">
                 Insights Dashboard
               </h1>
               <p className="text-gray-600 dark:text-gray-300">
