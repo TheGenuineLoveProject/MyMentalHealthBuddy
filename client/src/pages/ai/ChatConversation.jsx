@@ -146,7 +146,15 @@ export default function ChatConversation() {
                 </p>
               </div>
             </div>
-            <Button variant="ghost" size="sm" data-testid="button-menu">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              data-testid="button-menu"
+              onClick={() => toast({
+                title: "Chat Options",
+                description: "Settings menu coming soon"
+              })}
+            >
               <MoreVertical className="h-5 w-5" />
             </Button>
           </div>

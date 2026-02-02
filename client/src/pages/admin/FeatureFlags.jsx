@@ -120,7 +120,14 @@ export default function FeatureFlags() {
               data-testid="input-search-flags"
             />
           </div>
-          <Button className="min-h-[44px]" data-testid="button-add-flag">
+          <Button 
+            className="min-h-[44px]" 
+            data-testid="button-add-flag"
+            onClick={() => toast({
+              title: "Add Feature Flag",
+              description: "Feature flag creation form coming soon"
+            })}
+          >
             <Plus className="w-4 h-4 mr-2" /> Add Flag
           </Button>
         </div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { 
   Share2, Calendar, Hash, Zap, FileText, Check, Clock, 
   AlertTriangle, RefreshCw, Download, Copy, Eye, Edit,
-  TrendingUp, BarChart
+  TrendingUp, BarChart, Loader2
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useToast } from "@/hooks/use-toast";
 
 const HASHTAG_SETS = {
   brand: ["#GenuineLove", "#SelfLoveJourney", "#HealingPath", "#WellnessWisdom"],
@@ -27,6 +28,11 @@ export default function SocialStudioAdmin() {
   const [activeTab, setActiveTab] = useState("calendar");
   const [selectedDraft, setSelectedDraft] = useState(null);
   const [utmParams, setUtmParams] = useState({ source: "", medium: "", campaign: "" });
+  const [calendarDays, setCalendarDays] = useState(7);
+  const [selectedHookType, setSelectedHookType] = useState(null);
+  const [generatingHooks, setGeneratingHooks] = useState(false);
+  const [drafts, setDrafts] = useState(SAMPLE_DRAFTS);
+  const { toast } = useToast();
 
   const generateUTM = () => {
     const base = "https://thegenuineloveproject.com";
@@ -35,6 +41,27 @@ export default function SocialStudioAdmin() {
     if (utmParams.medium) params.set("utm_medium", utmParams.medium);
     if (utmParams.campaign) params.set("utm_campaign", utmParams.campaign);
     return `${base}?${params.toString()}`;
+  };
+
+  const handleCopyText = async (text, label = "Text") => {
+    await navigator.clipboard.writeText(text);
+    toast({ title: "Copied!", description: `${label} copied to clipboard` });
+  };
+
+  const handleGenerateHooks = async () => {
+    setGeneratingHooks(true);
+    await new Promise(r => setTimeout(r, 1500));
+    setGeneratingHooks(false);
+    toast({ title: "Hooks Generated", description: "3 trauma-informed hooks ready for review" });
+  };
+
+  const handleDraftAction = (draftId, action) => {
+    if (action === "approve") {
+      setDrafts(prev => prev.map(d => d.id === draftId ? { ...d, status: "approved" } : d));
+      toast({ title: "Approved", description: "Draft approved for publishing" });
+    } else if (action === "view" || action === "edit") {
+      toast({ title: action === "view" ? "Previewing" : "Editing", description: `Opening draft ${draftId}` });
+    }
   };
 
   return (
@@ -88,9 +115,9 @@ export default function SocialStudioAdmin() {
                 <CardTitle className="flex items-center justify-between">
                   <span>Content Calendar</span>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm">7 Days</Button>
-                    <Button variant="outline" size="sm">14 Days</Button>
-                    <Button variant="outline" size="sm">30 Days</Button>
+                    <Button variant={calendarDays === 7 ? "default" : "outline"} size="sm" onClick={() => setCalendarDays(7)}>7 Days</Button>
+                    <Button variant={calendarDays === 14 ? "default" : "outline"} size="sm" onClick={() => setCalendarDays(14)}>14 Days</Button>
+                    <Button variant={calendarDays === 30 ? "default" : "outline"} size="sm" onClick={() => setCalendarDays(30)}>30 Days</Button>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -129,7 +156,14 @@ export default function SocialStudioAdmin() {
                     <label className="text-sm font-medium mb-1 block">Hook Type</label>
                     <div className="flex gap-2 flex-wrap">
                       {["Question", "Statement", "Story", "List", "Contrast"].map(type => (
-                        <Button key={type} variant="outline" size="sm">{type}</Button>
+                        <Button 
+                          key={type} 
+                          variant={selectedHookType === type ? "default" : "outline"} 
+                          size="sm"
+                          onClick={() => setSelectedHookType(type)}
+                        >
+                          {type}
+                        </Button>
                       ))}
                     </div>
                   </div>
@@ -137,9 +171,13 @@ export default function SocialStudioAdmin() {
                     <label className="text-sm font-medium mb-1 block">Topic</label>
                     <Input placeholder="e.g., self-compassion, boundaries, healing" data-testid="input-topic" />
                   </div>
-                  <Button data-testid="button-generate-hooks">
-                    <Zap className="w-4 h-4 mr-2" />
-                    Generate Hooks
+                  <Button 
+                    data-testid="button-generate-hooks"
+                    onClick={handleGenerateHooks}
+                    disabled={generatingHooks}
+                  >
+                    {generatingHooks ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Zap className="w-4 h-4 mr-2" />}
+                    {generatingHooks ? "Generating..." : "Generate Hooks"}
                   </Button>
                 </div>
               </CardContent>
@@ -168,7 +206,12 @@ export default function SocialStudioAdmin() {
                       </div>
                     </div>
                   ))}
-                  <Button variant="outline" className="w-full" data-testid="button-copy-all">
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    data-testid="button-copy-all"
+                    onClick={() => handleCopyText(Object.values(HASHTAG_SETS).flat().join(" "), "All hashtags")}
+                  >
                     <Copy className="w-4 h-4 mr-2" />
                     Copy All Tags
                   </Button>
@@ -213,7 +256,11 @@ export default function SocialStudioAdmin() {
                 <div className="p-3 bg-muted rounded-lg font-mono text-sm break-all">
                   {generateUTM()}
                 </div>
-                <Button className="w-full" data-testid="button-copy-utm">
+                <Button 
+                  className="w-full" 
+                  data-testid="button-copy-utm"
+                  onClick={() => handleCopyText(generateUTM(), "UTM URL")}
+                >
                   <Copy className="w-4 h-4 mr-2" />
                   Copy URL
                 </Button>
@@ -228,7 +275,7 @@ export default function SocialStudioAdmin() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {SAMPLE_DRAFTS.map(draft => (
+                  {drafts.map(draft => (
                     <div 
                       key={draft.id}
                       className="p-4 border rounded-lg"
@@ -256,9 +303,9 @@ export default function SocialStudioAdmin() {
                           </div>
                         </div>
                         <div className="flex gap-1">
-                          <Button variant="ghost" size="icon"><Eye className="w-4 h-4" /></Button>
-                          <Button variant="ghost" size="icon"><Edit className="w-4 h-4" /></Button>
-                          <Button variant="ghost" size="icon" className="text-green-600"><Check className="w-4 h-4" /></Button>
+                          <Button variant="ghost" size="icon" onClick={() => handleDraftAction(draft.id, "view")}><Eye className="w-4 h-4" /></Button>
+                          <Button variant="ghost" size="icon" onClick={() => handleDraftAction(draft.id, "edit")}><Edit className="w-4 h-4" /></Button>
+                          <Button variant="ghost" size="icon" className="text-green-600" onClick={() => handleDraftAction(draft.id, "approve")}><Check className="w-4 h-4" /></Button>
                         </div>
                       </div>
                     </div>

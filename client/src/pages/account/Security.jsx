@@ -245,7 +245,14 @@ export default function Security() {
                     </p>
                   </div>
                 </div>
-                <Button variant="outline" data-testid="button-enable-2fa">
+                <Button 
+                  variant="outline" 
+                  data-testid="button-enable-2fa"
+                  onClick={() => toast({
+                    title: "Coming Soon",
+                    description: "Two-factor authentication will be available in a future update."
+                  })}
+                >
                   Enable 2FA
                 </Button>
               </div>
