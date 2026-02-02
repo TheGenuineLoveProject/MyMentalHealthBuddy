@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import confetti from "canvas-confetti";
+import "@/styles/sacred-visuals.css";
 
 const AFFIRMATION_TEMPLATES = {
   joy: "I am a vessel of joy, radiating light wherever I go.",
@@ -145,10 +146,11 @@ export default function CelebrationRitual() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-rose-50 to-pink-50 dark:from-gray-900 dark:via-rose-900/20 dark:to-gray-900 overflow-hidden">
+    <div className="min-h-screen bg-sunrise dark:bg-sunrise overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-amber-200/30 to-transparent rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-rose-200/30 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-radial from-amber-200/40 to-transparent rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-radial from-rose-200/40 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-pink-200/20 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-2xl mx-auto px-4 py-8">
@@ -187,15 +189,30 @@ export default function CelebrationRitual() {
         )}
 
         {phase === "celebrate" && (
-          <div className="text-center animate-fadeIn">
+          <div className="text-center sacred-fade-in">
             <div className="relative mb-8">
-              <Flower2 
-                className="w-40 h-40 mx-auto text-rose-400 animate-spin" 
-                style={{ animationDuration: "8s" }} 
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-300 to-rose-300 animate-pulse opacity-50" />
+              <div className="relative inline-block lotus-blossom">
+                <Flower2 
+                  className="w-40 h-40 mx-auto text-rose-400" 
+                />
+                <div className="absolute inset-0 rounded-full lotus-glow" />
               </div>
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-300 via-rose-300 to-pink-300 animate-pulse opacity-40 blur-sm" />
+              </div>
+              {[...Array(6)].map((_, i) => (
+                <div 
+                  key={i}
+                  className="absolute petal-float"
+                  style={{
+                    left: `${20 + Math.random() * 60}%`,
+                    top: `${60 + Math.random() * 20}%`,
+                    animationDelay: `${i * 0.5}s`
+                  }}
+                >
+                  <span className="text-2xl opacity-70">🌸</span>
+                </div>
+              ))}
             </div>
 
             <h2 className="text-3xl font-display font-bold text-gray-800 dark:text-white mb-6">

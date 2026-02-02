@@ -5,6 +5,7 @@ import {
   Loader2, Flower2, BookOpen 
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import "@/styles/sacred-visuals.css";
 
 const EMOTIONS = [
   { id: "joy", label: "Joy", emoji: "✨" },
@@ -57,7 +58,7 @@ export default function ShareReflection({ onClose, onSuccess }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div 
-        className="relative w-full max-w-lg bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden"
+        className="relative w-full max-w-lg bg-dawn dark:bg-dawn rounded-2xl shadow-2xl overflow-hidden glow-border glow-border-active"
         data-testid="share-reflection-modal"
       >
         <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-br from-violet-400 via-purple-400 to-pink-400 opacity-20" />

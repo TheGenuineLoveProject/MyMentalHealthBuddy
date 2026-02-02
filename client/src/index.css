@@ -3,6 +3,7 @@
 @import "./styles/healing-animations.css";
 @import "./styles/sacred-typography.css";
 @import "./styles/emotion-effects.css";
+@import "./styles/sacred-visuals.css";
 
 @tailwind base;
 @tailwind components;

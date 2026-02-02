@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Heart, RefreshCw, Sparkles, BookmarkPlus, Volume2, VolumeX } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import "@/styles/sacred-visuals.css";
 
 const AFFIRMATIONS = [
   { text: "I am worthy of love, happiness, and all good things.", category: "self-worth" },
@@ -160,7 +161,7 @@ export default function AffirmationDeck({ className = "" }) {
               <span className="text-4xl">🌸</span>
             </div>
 
-            <p className="text-xl md:text-2xl font-serif text-white text-center leading-relaxed italic px-4">
+            <p className="text-xl md:text-2xl font-playfair text-white text-center leading-relaxed italic px-4">
               "{currentAffirmation.text}"
             </p>
 

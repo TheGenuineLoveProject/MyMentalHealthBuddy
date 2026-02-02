@@ -1,0 +1,322 @@
+/* Sacred Visual Styles - The Genuine Love Project */
+
+/* ============================================
+   PLAYFAIR DISPLAY FONT IMPORT
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+.font-playfair {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+/* ============================================
+   LOTUS BLOSSOM ANIMATION
+   ============================================ */
+@keyframes lotusBlossom {
+  0% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.6;
+  }
+  25% {
+    transform: scale(1) rotate(15deg);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.1) rotate(0deg);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(1) rotate(-15deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(0.8) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes lotusGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(244, 114, 182, 0.3),
+                0 0 40px rgba(251, 191, 36, 0.2),
+                0 0 60px rgba(167, 139, 250, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(244, 114, 182, 0.5),
+                0 0 60px rgba(251, 191, 36, 0.3),
+                0 0 90px rgba(167, 139, 250, 0.2);
+  }
+}
+
+@keyframes petalFloat {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(45deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.lotus-blossom {
+  animation: lotusBlossom 6s ease-in-out infinite;
+}
+
+.lotus-glow {
+  animation: lotusGlow 3s ease-in-out infinite;
+}
+
+.petal-float {
+  animation: petalFloat 4s ease-out forwards;
+}
+
+/* ============================================
+   MOOD-BASED GLOW RINGS
+   ============================================ */
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.glow-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+.glow-ring-joy {
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.4), rgba(251, 191, 36, 0.2));
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.3), inset 0 0 20px rgba(250, 204, 21, 0.1);
+}
+
+.glow-ring-calm {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(14, 165, 233, 0.2));
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.3), inset 0 0 20px rgba(56, 189, 248, 0.1);
+}
+
+.glow-ring-grateful {
+  background: linear-gradient(135deg, rgba(244, 114, 182, 0.4), rgba(236, 72, 153, 0.2));
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.3), inset 0 0 20px rgba(244, 114, 182, 0.1);
+}
+
+.glow-ring-hopeful {
+  background: linear-gradient(135deg, rgba(74, 222, 128, 0.4), rgba(34, 197, 94, 0.2));
+  box-shadow: 0 0 20px rgba(74, 222, 128, 0.3), inset 0 0 20px rgba(74, 222, 128, 0.1);
+}
+
+.glow-ring-healing {
+  background: linear-gradient(135deg, rgba(45, 212, 191, 0.4), rgba(20, 184, 166, 0.2));
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.3), inset 0 0 20px rgba(45, 212, 191, 0.1);
+}
+
+.glow-ring-loved {
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.4), rgba(244, 63, 94, 0.2));
+  box-shadow: 0 0 20px rgba(251, 113, 133, 0.3), inset 0 0 20px rgba(251, 113, 133, 0.1);
+}
+
+.glow-ring-sad {
+  background: linear-gradient(135deg, rgba(129, 140, 248, 0.4), rgba(99, 102, 241, 0.2));
+  box-shadow: 0 0 20px rgba(129, 140, 248, 0.3), inset 0 0 20px rgba(129, 140, 248, 0.1);
+}
+
+.glow-ring-anxious {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.4), rgba(249, 115, 22, 0.2));
+  box-shadow: 0 0 20px rgba(251, 146, 60, 0.3), inset 0 0 20px rgba(251, 146, 60, 0.1);
+}
+
+.glow-ring-balanced {
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.4), rgba(139, 92, 246, 0.2));
+  box-shadow: 0 0 20px rgba(167, 139, 250, 0.3), inset 0 0 20px rgba(167, 139, 250, 0.1);
+}
+
+/* ============================================
+   PASTEL GRADIENT BACKGROUNDS
+   ============================================ */
+.bg-sunrise {
+  background: linear-gradient(135deg, 
+    hsl(35, 100%, 95%) 0%, 
+    hsl(350, 100%, 92%) 50%, 
+    hsl(280, 80%, 92%) 100%);
+}
+
+.bg-moonlight {
+  background: linear-gradient(135deg, 
+    hsl(230, 60%, 92%) 0%, 
+    hsl(260, 50%, 88%) 50%, 
+    hsl(280, 40%, 90%) 100%);
+}
+
+.bg-dawn {
+  background: linear-gradient(135deg, 
+    hsl(210, 50%, 92%) 0%, 
+    hsl(340, 60%, 92%) 50%, 
+    hsl(40, 80%, 94%) 100%);
+}
+
+/* Dark mode variants */
+.dark .bg-sunrise {
+  background: linear-gradient(135deg, 
+    hsl(35, 40%, 12%) 0%, 
+    hsl(350, 40%, 10%) 50%, 
+    hsl(280, 30%, 12%) 100%);
+}
+
+.dark .bg-moonlight {
+  background: linear-gradient(135deg, 
+    hsl(230, 30%, 10%) 0%, 
+    hsl(260, 25%, 12%) 50%, 
+    hsl(280, 20%, 10%) 100%);
+}
+
+.dark .bg-dawn {
+  background: linear-gradient(135deg, 
+    hsl(210, 25%, 10%) 0%, 
+    hsl(340, 30%, 10%) 50%, 
+    hsl(40, 35%, 12%) 100%);
+}
+
+/* ============================================
+   GLOW BORDER FOR CARDS
+   ============================================ */
+.glow-border {
+  position: relative;
+  overflow: visible;
+}
+
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, 
+    rgba(167, 139, 250, 0.5), 
+    rgba(244, 114, 182, 0.5), 
+    rgba(251, 191, 36, 0.5));
+  z-index: -1;
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glow-border:hover::before {
+  opacity: 1;
+}
+
+.glow-border-active::before {
+  opacity: 1;
+}
+
+/* Blessed reflection glow */
+.blessed-glow {
+  box-shadow: 
+    0 0 10px rgba(251, 191, 36, 0.3),
+    0 0 20px rgba(244, 114, 182, 0.2),
+    0 0 30px rgba(167, 139, 250, 0.1);
+  animation: blessedPulse 2s ease-in-out infinite;
+}
+
+@keyframes blessedPulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 10px rgba(251, 191, 36, 0.3),
+      0 0 20px rgba(244, 114, 182, 0.2),
+      0 0 30px rgba(167, 139, 250, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 15px rgba(251, 191, 36, 0.5),
+      0 0 30px rgba(244, 114, 182, 0.3),
+      0 0 45px rgba(167, 139, 250, 0.2);
+  }
+}
+
+/* ============================================
+   SACRED ANIMATIONS
+   ============================================ */
+@keyframes sacredFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes sacredFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes sacredShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.sacred-fade-in {
+  animation: sacredFadeIn 0.6s ease-out forwards;
+}
+
+.sacred-float {
+  animation: sacredFloat 4s ease-in-out infinite;
+}
+
+.sacred-shimmer {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    transparent 100%);
+  background-size: 200% 100%;
+  animation: sacredShimmer 3s linear infinite;
+}
+
+/* ============================================
+   QUOTE CARD ENHANCEMENTS
+   ============================================ */
+.quote-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-card::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  font-size: 120px;
+  font-family: 'Playfair Display', serif;
+  color: currentColor;
+  opacity: 0.1;
+  line-height: 1;
+}
+
+.quote-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle at bottom right, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 70%);
+  pointer-events: none;
+}

@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import ShareReflection from "@/components/ShareReflection.jsx";
+import "@/styles/sacred-visuals.css";
 
 const EMOTION_FILTERS = [
   { id: "all", label: "All", emoji: "🌈" },
@@ -49,7 +50,7 @@ export default function CommunityCircle() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-purple-900/20 dark:to-gray-900">
+    <div className="min-h-screen bg-moonlight dark:bg-moonlight">
       {justShared && (
         <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
           <div className="animate-pulse">
@@ -166,25 +167,40 @@ function ReflectionCard({ reflection, onHeart, isHearting }) {
     default: "from-violet-100 to-purple-100 dark:from-violet-900/20 dark:to-purple-900/20 border-violet-200 dark:border-violet-800"
   };
 
+  const glowRingClass = {
+    joy: "glow-ring-joy",
+    calm: "glow-ring-calm",
+    grateful: "glow-ring-grateful",
+    hopeful: "glow-ring-hopeful",
+    healing: "glow-ring-healing",
+    loved: "glow-ring-loved",
+    sad: "glow-ring-sad",
+    anxious: "glow-ring-anxious",
+    balanced: "glow-ring-balanced"
+  };
+
   const colorClass = emotionColors[reflection.emotion] || emotionColors.default;
+  const glowClass = glowRingClass[reflection.emotion] || "glow-ring-balanced";
   const displayName = reflection.isAnonymous 
     ? "Anonymous Soul" 
     : (reflection.displayName || "Fellow Traveler");
 
   return (
     <div 
-      className={`relative p-6 rounded-2xl bg-gradient-to-br ${colorClass} border backdrop-blur-sm transition-all hover:shadow-lg`}
+      className={`relative p-6 rounded-2xl bg-gradient-to-br ${colorClass} border backdrop-blur-sm transition-all hover:shadow-lg glow-border ${reflection.isBlessed ? "blessed-glow" : ""}`}
       data-testid={`reflection-card-${reflection.id}`}
     >
+      <div className={`glow-ring rounded-2xl ${glowClass}`} />
+      
       {reflection.isBlessed && (
-        <div className="absolute -top-2 -right-2">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-rose-400 flex items-center justify-center shadow-lg animate-pulse">
+        <div className="absolute -top-2 -right-2 z-10">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-rose-400 flex items-center justify-center shadow-lg lotus-glow">
             <Sparkles className="w-4 h-4 text-white" />
           </div>
         </div>
       )}
 
-      <div className="flex items-center gap-2 mb-3">
+      <div className="relative z-10 flex items-center gap-2 mb-3">
         <div className="w-8 h-8 rounded-full bg-white/50 dark:bg-black/20 flex items-center justify-center">
           <span className="text-sm">🙏</span>
         </div>
@@ -193,11 +209,11 @@ function ReflectionCard({ reflection, onHeart, isHearting }) {
         </span>
       </div>
 
-      <p className="text-gray-700 dark:text-gray-200 font-serif italic leading-relaxed mb-4 line-clamp-4">
+      <p className="relative z-10 text-gray-700 dark:text-gray-200 font-playfair italic leading-relaxed mb-4 line-clamp-4">
         "{reflection.content}"
       </p>
 
-      <div className="flex items-center justify-between">
+      <div className="relative z-10 flex items-center justify-between">
         <span className="text-xs text-gray-500 dark:text-gray-400">
           {new Date(reflection.createdAt).toLocaleDateString()}
         </span>

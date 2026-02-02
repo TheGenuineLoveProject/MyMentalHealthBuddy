@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Volume2, VolumeX, RefreshCw, Feather } from "lucide-react";
 import { useEmotion } from "@/context/EmotionContext.jsx";
+import "@/styles/sacred-visuals.css";
 
 const SACRED_QUOTES = [
   { text: "The wound is the place where the Light enters you.", author: "Rumi", mood: ["sad", "healing"] },
@@ -91,7 +92,7 @@ export default function SacredQuote({ className = "" }) {
 
   return (
     <div 
-      className={`p-6 rounded-2xl bg-gradient-to-br ${colors.bg} border ${colors.border} backdrop-blur-sm ${className}`}
+      className={`quote-card glow-border p-6 rounded-2xl bg-gradient-to-br ${colors.bg} border ${colors.border} backdrop-blur-sm ${className}`}
       data-testid="sacred-quote"
     >
       <div className="flex items-start justify-between mb-4">
@@ -126,12 +127,12 @@ export default function SacredQuote({ className = "" }) {
       </div>
 
       <blockquote className="mb-3">
-        <p className="text-lg font-serif italic text-gray-800 dark:text-gray-100 leading-relaxed">
+        <p className="text-lg font-playfair italic text-gray-800 dark:text-gray-100 leading-relaxed">
           "{currentQuote.text}"
         </p>
       </blockquote>
 
-      <p className={`text-sm ${colors.text} text-right`}>
+      <p className={`text-sm font-playfair ${colors.text} text-right`}>
         — {currentQuote.author}
       </p>
     </div>
