@@ -10,6 +10,8 @@ import HealingGraph from "../components/wellness/HealingGraph";
 import VoiceAffirmation from "../components/VoiceAffirmation";
 import { LotusGuide } from "../components/sacred";
 import MoodTrendsChartJS from "../components/charts/MoodTrendsChartJS";
+import MoodPieChart from "../components/charts/MoodPieChart";
+import EmotionAdaptiveBackground, { LotusDivider, SacredGlow } from "../components/EmotionAdaptiveBackground";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { useAuth } from "../context/AuthContext";
@@ -296,6 +298,7 @@ export default function WellnessDashboard() {
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [latestEntry, setLatestEntry] = useState(null);
+  const [currentMood, setCurrentMood] = useState("neutral");
 
   const { data: moodEntries = [] } = useQuery({
     queryKey: ["/api/mood"],
@@ -304,6 +307,9 @@ export default function WellnessDashboard() {
 
   const handleEntrySubmit = (entry) => {
     setLatestEntry(entry);
+    if (entry?.emotion) {
+      setCurrentMood(entry.emotion.toLowerCase());
+    }
   };
 
   const handleQuickMoodLog = () => {
@@ -317,7 +323,8 @@ export default function WellnessDashboard() {
         description="Your personal wellness dashboard for tracking emotions, journaling, and connecting with AI-powered support."
       />
 
-      <div className="min-h-screen bg-[var(--glp-paper)] dark:bg-gray-900">
+      <EmotionAdaptiveBackground mood={currentMood} className="min-h-screen" intensity="medium">
+      <div className="bg-[var(--glp-paper)]/80 dark:bg-gray-900/90 min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <WelcomeHeader user={user} />
           
@@ -327,7 +334,7 @@ export default function WellnessDashboard() {
           
           <DailyWellnessTip />
           
-          <div className="mb-6" />
+          <LotusDivider className="my-6" />
           
           <QuickActions />
 
@@ -406,20 +413,29 @@ export default function WellnessDashboard() {
             </div>
           </div>
 
+          <LotusDivider className="my-8" />
+
           <div className="mt-8">
-            <h2 className="font-serif text-2xl font-bold text-deepTeal dark:text-white mb-6 flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-metallicGold" aria-hidden="true" />
-              Your Healing Journey
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <SacredGlow color="gold" intensity="light">
+              <h2 className="font-serif text-2xl font-bold text-deepTeal dark:text-white mb-6 flex items-center gap-2">
+                <TrendingUp className="w-6 h-6 text-metallicGold" aria-hidden="true" />
+                Your Healing Journey
+              </h2>
+            </SacredGlow>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
               <MoodTrendsChartJS entries={moodEntries} days={14} />
+              <MoodPieChart entries={moodEntries} period="month" />
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <HealingGraph />
+              <MoodPieChart entries={moodEntries} period="week" />
             </div>
           </div>
         </div>
 
         <SafetyFooter />
       </div>
+      </EmotionAdaptiveBackground>
     </>
   );
 }
