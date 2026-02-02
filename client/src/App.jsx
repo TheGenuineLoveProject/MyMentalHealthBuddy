@@ -138,6 +138,7 @@ const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
 const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
 const SocialCalendar = lazy(() => import("./pages/admin/SocialCalendar.jsx"));
 const SocialAnalytics = lazy(() => import("./pages/admin/SocialAnalytics.jsx"));
+const SocialHub = lazy(() => import("./pages/SocialHub.jsx"));
 const BillingViewer = lazy(() => import("./pages/admin/BillingViewer.jsx"));
 const Sessions = lazy(() => import("./pages/account/Sessions.jsx"));
 const DeleteAccount = lazy(() => import("./pages/account/DeleteAccount.jsx"));
@@ -683,7 +684,9 @@ export default function App() {
               <Route path="/celebration">
                 <ProtectedRoute><CelebrationRitual /></ProtectedRoute>
               </Route>
-              <Route path="/social">{() => <ConfigRoute route="/social" />}</Route>
+              <Route path="/social">
+                <WellnessRoute><SocialHub /></WellnessRoute>
+              </Route>
 
               {/* Blog & Content - Config Driven */}
               <Route path="/blog">{() => <ConfigRoute route="/blog" />}</Route>
