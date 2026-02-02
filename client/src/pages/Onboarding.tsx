@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
@@ -64,6 +64,36 @@ export default function Onboarding() {
   const [reminderTime, setReminderTime] = useState("");
   const [reminderDays, setReminderDays] = useState<string[]>([]);
   const [disclaimerAccepted, setDisclaimerAccepted] = useState(false);
+
+  const { data: authData, isLoading: authLoading } = useQuery({
+    queryKey: ["/api/auth/user"],
+    retry: false,
+  });
+
+  useEffect(() => {
+    if (!authLoading && !authData) {
+      window.location.href = "/api/login";
+    }
+  }, [authLoading, authData]);
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-pulse text-[var(--sage-600)]">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!authData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="mb-4">Please sign in to continue</p>
+          <a href="/api/login" className="btn btn-gradient">Sign In</a>
+        </div>
+      </div>
+    );
+  }
 
   const handleIntroNext = () => {
     if (introSlide < INTRO_SLIDES.length - 1) {
