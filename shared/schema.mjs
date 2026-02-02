@@ -275,6 +275,9 @@ export const blogComments = pgTable("blog_comments", {
 export const anonymousReflections = pgTable("anonymous_reflections", {
   id: uuid("id").defaultRandom().primaryKey(),
   content: text("content").notNull(),
+  mood: text("mood").default("neutral"),
+  displayName: text("display_name"),
+  isAnonymous: boolean("is_anonymous").default(true),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

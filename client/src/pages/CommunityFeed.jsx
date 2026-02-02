@@ -12,9 +12,10 @@ export default function CommunityFeed() {
   const [filter, setFilter] = useState("all");
 
   const { data: entries = [], isLoading, refetch, isFetching } = useQuery({
-    queryKey: ["/api/community"],
+    queryKey: ["/api/community/reflections"],
     select: (data) => {
       if (Array.isArray(data)) return data;
+      if (data?.reflections && Array.isArray(data.reflections)) return data.reflections;
       if (data?.entries && Array.isArray(data.entries)) return data.entries;
       return [];
     },

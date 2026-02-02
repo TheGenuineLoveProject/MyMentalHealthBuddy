@@ -27,21 +27,33 @@ router.get("/question", (_req, res) => {
   });
 });
 
-router.get("/reflections", optionalAuth, async (_req, res) => {
+router.get("/reflections", optionalAuth, async (req, res) => {
   try {
-    const reflections = await db
+    const { mood } = req.query;
+    
+    let query = db
       .select({
         id: anonymousReflections.id,
         content: anonymousReflections.content,
+        mood: anonymousReflections.mood,
+        displayName: anonymousReflections.displayName,
+        isAnonymous: anonymousReflections.isAnonymous,
         createdAt: anonymousReflections.createdAt,
       })
       .from(anonymousReflections)
       .orderBy(desc(anonymousReflections.createdAt))
-      .limit(20);
+      .limit(30);
+
+    const reflections = await query;
+    
+    // Filter by mood if specified
+    const filteredReflections = mood && mood !== "all"
+      ? reflections.filter(r => r.mood?.toLowerCase() === mood.toLowerCase())
+      : reflections;
 
     res.json({
       ok: true,
-      reflections,
+      reflections: filteredReflections,
       disclaimer: "These reflections are shared anonymously. They are not advice, and they are not a measure of anyone's progress.",
     });
   } catch (err) {

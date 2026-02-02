@@ -2,6 +2,8 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
+import { db } from "../db/client.mjs";
+import { anonymousReflections } from "../../shared/schema.mjs";
 
 const router = Router();
 
@@ -32,11 +34,11 @@ function requireAuth(req, res, next) {
 
 /**
  * POST /api/journal
- * body: { title, content? }
+ * body: { title, content, shareWithCommunity?, isAnonymous?, mood? }
  * Returns: { ok:true, data:{...entry} }
  */
 router.post("/", requireAuth, async (req, res) => {
-  const { title, content } = req.body || {};
+  const { title, content, shareWithCommunity, isAnonymous = true, mood = "neutral" } = req.body || {};
   
   // Both title and content are required
   if (!title || String(title).trim().length === 0) {
@@ -53,12 +55,31 @@ router.post("/", requireAuth, async (req, res) => {
     id,
     title: String(title).trim(),
     content: String(content),
+    mood: mood || "neutral",
+    shareWithCommunity: Boolean(shareWithCommunity),
+    isAnonymous: Boolean(isAnonymous),
     createdAt: now,
     updatedAt: now,
     userId: req.user?.id || "test-user",
   };
 
   journalStore.set(id, entry);
+
+  // If user wants to share with community, create an anonymous reflection
+  if (shareWithCommunity) {
+    try {
+      const displayName = isAnonymous ? null : (req.user?.name || req.user?.email?.split("@")[0] || null);
+      await db.insert(anonymousReflections).values({
+        content: String(content).slice(0, 500), // Limit to 500 chars
+        mood: mood || "neutral",
+        displayName,
+        isAnonymous: Boolean(isAnonymous),
+      });
+    } catch (err) {
+      console.error("Failed to share with community:", err);
+      // Don't fail the whole request, just log the error
+    }
+  }
 
   // IMPORTANT: tests typically expect res.body.data.*
   return res.status(200).json({ ok: true, data: entry });
