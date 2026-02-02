@@ -142,6 +142,18 @@ export const userJourneyProgress = pgTable("user_journey_progress", {
   id: uuid("id").defaultRandom().primaryKey(),
 });
 
+/* ================= GRATITUDE ENTRIES ================= */
+export const gratitudeEntries = pgTable("gratitude_entries", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id").notNull(),
+  prompt: text("prompt").notNull(),
+  response: text("response").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ({
+  userIdIdx: index("gratitude_entries_user_id_idx").on(table.userId),
+  createdAtIdx: index("gratitude_entries_created_at_idx").on(table.createdAt),
+}));
+
 export const wellnessGoals = pgTable("wellness_goals", {
   id: uuid("id").defaultRandom().primaryKey(),
 });
