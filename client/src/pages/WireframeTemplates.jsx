@@ -706,15 +706,15 @@ function HomepageWireframe() {
         </div>
         <nav className="flex-1 space-y-2">
           {[
-            { icon: Home, label: "Home", active: true },
-            { icon: MessageCircle, label: "AI Chat", active: false },
-            { icon: BookOpen, label: "Journal", active: false },
-            { icon: Users, label: "Community", active: false },
-            { icon: Settings, label: "Settings", active: false }
+            { icon: Home, label: "Home", active: true, href: "/dashboard" },
+            { icon: MessageCircle, label: "AI Chat", active: false, href: "/chat" },
+            { icon: BookOpen, label: "Journal", active: false, href: "/journal" },
+            { icon: Users, label: "Community", active: false, href: "/community" },
+            { icon: Settings, label: "Settings", active: false, href: "/settings" }
           ].map((item, i) => (
             <a
               key={i}
-              href="#"
+              href={item.href}
               className="flex items-center gap-3 p-3 rounded-xl transition-colors"
               style={{ 
                 background: item.active ? 'rgba(143, 191, 159, 0.15)' : 'transparent',

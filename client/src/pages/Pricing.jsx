@@ -6,6 +6,7 @@ import SafetyFooter from "../components/ui/SafetyFooter";
 import { TrustSignals, BeforeAfter } from "../components/benefits";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
 
 const tiers = [
   {
@@ -62,6 +63,7 @@ const tiers = [
 
 export default function Pricing() {
   const { user } = useAuth();
+  const { toast } = useToast();
 
   const startCheckout = async (planId) => {
     if (!user) {
@@ -69,18 +71,33 @@ export default function Pricing() {
       return;
     }
 
-    const res = await fetch("/api/billing/checkout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ planId }),
-    });
+    try {
+      const res = await fetch("/api/billing/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ planId }),
+      });
 
-    const data = await res.json();
-    if (data.url) window.location.href = data.url;
-    else alert(data.error || "Checkout failed");
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        toast({
+          title: "Checkout unavailable",
+          description: data.error || "Unable to start checkout. Please try again.",
+          variant: "destructive"
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Connection error",
+        description: "Unable to connect to payment service. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (

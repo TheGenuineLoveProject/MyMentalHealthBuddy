@@ -2,35 +2,22 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { 
   MessageCircle, ArrowLeft, Send, Heart, Sparkles, 
-  Bot, User, Loader2, MoreVertical, Lightbulb
+  Bot, User, Loader2, MoreVertical, Lightbulb, AlertTriangle
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 
-interface Message {
-  id: number;
-  role: "user" | "assistant";
-  content: string;
-  timestamp: Date;
-}
-
-const SAMPLE_MESSAGES: Message[] = [
-  {
-    id: 1,
-    role: "user",
-    content: "I've been feeling overwhelmed lately and don't know how to cope.",
-    timestamp: new Date(Date.now() - 120000)
-  },
-  {
-    id: 2,
-    role: "assistant",
-    content: "I hear you, and I want you to know that feeling overwhelmed is completely valid. It takes courage to acknowledge these feelings. Let's take a moment together. Can you tell me what's been weighing on you the most? Sometimes breaking things down can help us see a path forward.",
-    timestamp: new Date(Date.now() - 60000)
-  }
-];
+const WELCOME_MESSAGE = {
+  id: 1,
+  role: "assistant",
+  content: "Hello, I'm here to support you on your wellness journey. This is a safe space to share what's on your mind. How are you feeling today?",
+  timestamp: new Date()
+};
 
 const SUGGESTIONS = [
   "I need help with anxiety",
@@ -45,10 +32,13 @@ export default function ChatConversation() {
     noIndex: true
   });
 
-  const [messages, setMessages] = useState<Message[]>(SAMPLE_MESSAGES);
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const [messages, setMessages] = useState([WELCOME_MESSAGE]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState(null);
+  const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -60,8 +50,17 @@ export default function ChatConversation() {
 
   const handleSend = async () => {
     if (!input.trim()) return;
+    
+    if (!user) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to chat with the AI companion.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-    const userMessage: Message = {
+    const userMessage = {
       id: messages.length + 1,
       role: "user",
       content: input,
@@ -71,17 +70,41 @@ export default function ChatConversation() {
     setMessages(prev => [...prev, userMessage]);
     setInput("");
     setIsTyping(true);
+    setError(null);
 
-    setTimeout(() => {
-      const assistantMessage: Message = {
+    try {
+      const res = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ message: input })
+      });
+
+      const data = await res.json();
+      
+      if (!res.ok) {
+        throw new Error(data.error || "Unable to get response");
+      }
+
+      const assistantMessage = {
         id: messages.length + 2,
         role: "assistant",
-        content: "Thank you for sharing that with me. Your feelings are valid and important. Let's work through this together, one step at a time. What would feel most helpful for you right now?",
-        timestamp: new Date()
+        content: data.content || data.reply || "I'm here to support you. Could you tell me more?",
+        timestamp: new Date(),
+        isCrisis: data.isCrisis
       };
+      
       setMessages(prev => [...prev, assistantMessage]);
+    } catch (err) {
+      setError(err.message);
+      toast({
+        title: "Connection issue",
+        description: "Unable to reach AI companion. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
       setIsTyping(false);
-    }, 2000);
+    }
   };
 
   return (

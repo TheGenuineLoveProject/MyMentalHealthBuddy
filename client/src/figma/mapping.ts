@@ -19,7 +19,7 @@ export const FIGMA_TO_REACT = {
 
   "Profile": "pages/account/Profile.jsx",
   "Settings": "pages/account/Settings.jsx",
-  "Billing": "pages/account/Billing.tsx",
+  "Billing": "pages/account/Billing.jsx",
 
   "Privacy Policy": "pages/legal/Privacy.tsx",
   "Terms of Service": "pages/legal/Terms.tsx",
