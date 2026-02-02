@@ -92,4 +92,139 @@ router.get("/stats", requireAuth, (_req, res) => {
   res.json({ ok: true, stats: { status: "healthy" } });
 });
 
+// Admin health endpoint for dashboard
+const startTime = Date.now();
+router.get("/health", async (_req, res) => {
+  try {
+    const db = (await import("../db/client.mjs")).default;
+    const { sql } = await import("drizzle-orm");
+    const { isConfigured } = await import("../utils/aiClient.mjs");
+    
+    let dbConnected = false;
+    let dbLatency = null;
+    
+    if (process.env.DATABASE_URL) {
+      try {
+        const dbStart = Date.now();
+        await db.execute(sql`SELECT 1`);
+        dbConnected = true;
+        dbLatency = Date.now() - dbStart;
+      } catch {
+        dbConnected = false;
+      }
+    }
+
+    const uptimeSeconds = Math.floor((Date.now() - startTime) / 1000);
+    const days = Math.floor(uptimeSeconds / 86400);
+    const hours = Math.floor((uptimeSeconds % 86400) / 3600);
+    const minutes = Math.floor((uptimeSeconds % 3600) / 60);
+    const secs = uptimeSeconds % 60;
+    const uptimeFormatted = [
+      days > 0 && `${days}d`,
+      hours > 0 && `${hours}h`,
+      minutes > 0 && `${minutes}m`,
+      `${secs}s`
+    ].filter(Boolean).join(" ");
+
+    res.json({
+      status: dbConnected ? "healthy" : "degraded",
+      environment: process.env.NODE_ENV || "development",
+      version: process.env.npm_package_version || "2.0.0",
+      database: { 
+        status: dbConnected ? "connected" : "disconnected",
+        latencyMs: dbLatency 
+      },
+      ai: { 
+        status: isConfigured() ? "healthy" : "unavailable",
+        available: isConfigured() 
+      },
+      uptime: {
+        seconds: uptimeSeconds,
+        formatted: uptimeFormatted,
+        startedAt: new Date(startTime).toISOString(),
+      },
+      memory: {
+        heapUsedMB: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+        heapTotalMB: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+        rssMB: Math.round(process.memoryUsage().rss / 1024 / 1024),
+      },
+      services: {
+        stripe: { configured: !!process.env.STRIPE_SECRET_KEY },
+        openai: { configured: !!(process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY) },
+        sentry: { configured: !!process.env.SENTRY_DSN },
+        resend: { configured: !!process.env.RESEND_API_KEY },
+      }
+    });
+  } catch (error) {
+    console.error("Admin health check error:", error);
+    res.status(500).json({ status: "unhealthy", error: "Health probe failed" });
+  }
+});
+
+// Admin diagnostics endpoint
+router.get("/diagnostics", async (_req, res) => {
+  try {
+    const db = (await import("../db/client.mjs")).default;
+    const { sql } = await import("drizzle-orm");
+    
+    const dbStats = { users: 0, messages: 0, reflections: 0, moods: 0 };
+    const envVars = {};
+
+    // Check environment variables (presence only, not values)
+    const envChecks = [
+      'DATABASE_URL',
+      'OPENAI_API_KEY',
+      'AI_INTEGRATIONS_OPENAI_API_KEY',
+      'STRIPE_SECRET_KEY',
+      'STRIPE_PUBLISHABLE_KEY',
+      'SENTRY_DSN',
+      'RESEND_API_KEY',
+      'ADMIN_TOKEN',
+      'SESSION_SECRET'
+    ];
+    
+    envChecks.forEach(key => {
+      envVars[key] = !!process.env[key];
+    });
+
+    if (process.env.DATABASE_URL) {
+      try {
+        const [usersResult, messagesResult, reflectionsResult, moodsResult] = await Promise.all([
+          db.execute(sql`SELECT COUNT(*)::int as count FROM users`),
+          db.execute(sql`SELECT COUNT(*)::int as count FROM ai_messages`),
+          db.execute(sql`SELECT COUNT(*)::int as count FROM reflections`),
+          db.execute(sql`SELECT COUNT(*)::int as count FROM moods`),
+        ]);
+        dbStats.users = usersResult.rows?.[0]?.count || 0;
+        dbStats.messages = messagesResult.rows?.[0]?.count || 0;
+        dbStats.reflections = reflectionsResult.rows?.[0]?.count || 0;
+        dbStats.moods = moodsResult.rows?.[0]?.count || 0;
+      } catch (e) {
+        console.error("DB stats query error:", e.message);
+      }
+    }
+
+    res.json({
+      status: "ok",
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || "development",
+      node: {
+        version: process.version,
+        platform: process.platform,
+      },
+      database: dbStats,
+      envVars,
+      memory: {
+        heapUsedMB: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+        heapTotalMB: Math.round(process.memoryUsage().heapTotal / 1024 / 1024),
+        rssMB: Math.round(process.memoryUsage().rss / 1024 / 1024),
+        externalMB: Math.round(process.memoryUsage().external / 1024 / 1024),
+      },
+    });
+  } catch (error) {
+    console.error("Diagnostics error:", error);
+    res.status(500).json({ error: "Failed to gather diagnostics" });
+  }
+});
+
 export default router;
