@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { BookOpen, Calendar, Search, Filter, Eye, ChevronDown, ArrowRight } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
+import { useToast } from "@/hooks/use-toast";
 
 const MOCK_REFLECTIONS = [
   { id: "1", date: "2026-01-26", type: "journal", preview: "Felt grateful for...", mood: "peaceful" },
@@ -27,6 +28,19 @@ const TYPE_COLORS = {
 export default function ReflectionHistory() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
+  const { toast } = useToast();
+  const [, navigate] = useLocation();
+
+  const handleViewReflection = (reflection) => {
+    if (reflection.type === "journal") {
+      navigate("/journal");
+    } else if (reflection.type === "mood") {
+      navigate("/mood");
+    } else if (reflection.type === "gratitude") {
+      navigate("/gratitude");
+    }
+    toast({ title: "Opening Reflection", description: `Viewing ${reflection.type} from ${reflection.date}` });
+  };
 
   const filteredReflections = MOCK_REFLECTIONS.filter(r => {
     const matchesSearch = r.preview.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -129,6 +143,7 @@ export default function ReflectionHistory() {
                     variant="ghost" 
                     size="icon"
                     className="opacity-0 group-hover:opacity-100 transition-opacity"
+                    onClick={() => handleViewReflection(reflection)}
                     data-testid={`button-view-${reflection.id}`}
                   >
                     <Eye className="w-4 h-4" />
