@@ -7,6 +7,8 @@ import JournalAI from "../components/wellness/JournalAI";
 import WeatherMoodSync from "../components/wellness/WeatherMoodSync";
 import MoodCalendar from "../components/wellness/MoodCalendar";
 import HealingGraph from "../components/wellness/HealingGraph";
+import VoiceAffirmation from "../components/VoiceAffirmation";
+import { LotusGuide } from "../components/sacred";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { useAuth } from "../context/AuthContext";
@@ -388,13 +390,17 @@ export default function WellnessDashboard() {
                 )}
               </div>
 
-              <div className="bg-gradient-to-br from-[var(--glp-sage-10)] to-[var(--glp-teal-10)] rounded-2xl border border-[var(--glp-sage-20)] p-6" data-testid="daily-affirmation">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                  Daily Affirmation
-                </h3>
-                <p className="text-gray-700 dark:text-gray-200 italic leading-relaxed" data-testid="text-affirmation">
-                  "You are worthy of love and healing. Every step you take on this journey matters."
-                </p>
+              <VoiceAffirmation 
+                mood={latestEntry?.emotion?.toLowerCase() || "default"}
+                className="rounded-2xl"
+              />
+              
+              <div className="flex justify-center">
+                <LotusGuide 
+                  mood={latestEntry?.emotion?.toLowerCase() || "neutral"}
+                  size={100}
+                  showMessage={true}
+                />
               </div>
             </div>
           </div>
