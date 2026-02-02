@@ -99,10 +99,13 @@ import userRouter from "./routes/user.mjs";
 import perplexityRouter from "./routes/perplexity.mjs";
 import feedRouter from "./routes/feed.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
-import { contentRouter } from "./routes/content.mjs";
+import contentRouter from "./routes/content.mjs";
 import adminBillingRouter from "./routes/adminBilling.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+// Environment detection (must be early for validation logic)
+const isProduction = process.env.NODE_ENV === 'production';
 
 // Environment variable validation with categories
 const envValidation = {
@@ -330,7 +333,6 @@ app.use('/api/content', contentRouter);
 app.use('/api/perplexity', perplexityRouter);
 
 const SERVER_START_TIME = Date.now();
-const isProduction = process.env.NODE_ENV === 'production';
 
 app.get("/api/health-check", (_req, res) => {
   res.json({ ok: true, env: isProduction ? "production" : "development" });

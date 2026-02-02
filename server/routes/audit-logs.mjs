@@ -3,7 +3,7 @@
 
 import express from "express";
 import { db } from "../db.mjs";
-import { auditLogs } from "../../shared/schema.mjs";
+import { auditLog } from "../../shared/schema.mjs";
 import { desc, eq, and, gte, lte, like, sql } from "drizzle-orm";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 
@@ -28,19 +28,19 @@ router.get("/", async (req, res) => {
     const conditions = [];
 
     if (action) {
-      conditions.push(eq(auditLogs.action, action));
+      conditions.push(eq(auditLog.action, action));
     }
     if (userId) {
-      conditions.push(eq(auditLogs.userId, userId));
+      conditions.push(eq(auditLog.userId, userId));
     }
     if (startDate) {
-      conditions.push(gte(auditLogs.createdAt, new Date(startDate)));
+      conditions.push(gte(auditLog.createdAt, new Date(startDate)));
     }
     if (endDate) {
-      conditions.push(lte(auditLogs.createdAt, new Date(endDate)));
+      conditions.push(lte(auditLog.createdAt, new Date(endDate)));
     }
     if (search) {
-      conditions.push(like(auditLogs.action, `%${search}%`));
+      conditions.push(like(auditLog.action, `%${search}%`));
     }
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
@@ -48,14 +48,14 @@ router.get("/", async (req, res) => {
     const [logs, countResult] = await Promise.all([
       db
         .select()
-        .from(auditLogs)
+        .from(auditLog)
         .where(whereClause)
-        .orderBy(desc(auditLogs.createdAt))
+        .orderBy(desc(auditLog.createdAt))
         .limit(parseInt(limit, 10))
         .offset(offset),
       db
         .select({ count: sql`count(*)` })
-        .from(auditLogs)
+        .from(auditLog)
         .where(whereClause),
     ]);
 
@@ -85,9 +85,9 @@ router.get("/", async (req, res) => {
 router.get("/actions", async (_req, res) => {
   try {
     const actions = await db
-      .selectDistinct({ action: auditLogs.action })
-      .from(auditLogs)
-      .orderBy(auditLogs.action);
+      .selectDistinct({ action: auditLog.action })
+      .from(auditLog)
+      .orderBy(auditLog.action);
 
     res.json({
       ok: true,
@@ -108,19 +108,19 @@ router.get("/export", async (req, res) => {
     const conditions = [];
 
     if (startDate) {
-      conditions.push(gte(auditLogs.createdAt, new Date(startDate)));
+      conditions.push(gte(auditLog.createdAt, new Date(startDate)));
     }
     if (endDate) {
-      conditions.push(lte(auditLogs.createdAt, new Date(endDate)));
+      conditions.push(lte(auditLog.createdAt, new Date(endDate)));
     }
 
     const whereClause = conditions.length > 0 ? and(...conditions) : undefined;
 
     const logs = await db
       .select()
-      .from(auditLogs)
+      .from(auditLog)
       .where(whereClause)
-      .orderBy(desc(auditLogs.createdAt))
+      .orderBy(desc(auditLog.createdAt))
       .limit(10000);
 
     if (format === "csv") {
@@ -160,18 +160,18 @@ router.get("/export", async (req, res) => {
 router.get("/stats", async (_req, res) => {
   try {
     const [totalResult, todayResult, actionCounts] = await Promise.all([
-      db.select({ count: sql`count(*)` }).from(auditLogs),
+      db.select({ count: sql`count(*)` }).from(auditLog),
       db
         .select({ count: sql`count(*)` })
-        .from(auditLogs)
-        .where(gte(auditLogs.createdAt, sql`CURRENT_DATE`)),
+        .from(auditLog)
+        .where(gte(auditLog.createdAt, sql`CURRENT_DATE`)),
       db
         .select({
-          action: auditLogs.action,
+          action: auditLog.action,
           count: sql`count(*)`,
         })
-        .from(auditLogs)
-        .groupBy(auditLogs.action)
+        .from(auditLog)
+        .groupBy(auditLog.action)
         .orderBy(desc(sql`count(*)`))
         .limit(10),
     ]);
