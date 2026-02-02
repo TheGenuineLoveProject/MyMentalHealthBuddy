@@ -102,14 +102,18 @@ export default function RefundHelp() {
               Need help with a refund or billing issue? We're here for you.
             </p>
             <div className="grid gap-3 sm:grid-cols-2">
-              <Button variant="outline" className="justify-start" data-testid="button-email">
-                <Mail className="w-4 h-4 mr-2" />
-                Email Support
-              </Button>
-              <Button variant="outline" className="justify-start" data-testid="button-chat">
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Live Chat
-              </Button>
+              <a href="mailto:support@genuinelove.app">
+                <Button variant="outline" className="justify-start w-full" data-testid="button-email">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Email Support
+                </Button>
+              </a>
+              <Link href="/contact">
+                <Button variant="outline" className="justify-start w-full" data-testid="button-chat">
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  Contact Us
+                </Button>
+              </Link>
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <Clock className="w-4 h-4" />

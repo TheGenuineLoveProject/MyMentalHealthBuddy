@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { User, Award, Calendar, Heart, Shield, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
@@ -58,9 +59,11 @@ export default function UserProfile() {
                 </div>
               </div>
               {isOwnProfile && (
-                <Button variant="outline" className="min-h-[44px]" data-testid="button-edit-profile">
-                  Edit Profile
-                </Button>
+                <Link href="/account/profile">
+                  <Button variant="outline" className="min-h-[44px]" data-testid="button-edit-profile">
+                    Edit Profile
+                  </Button>
+                </Link>
               )}
             </div>
           </CardContent>
@@ -120,9 +123,11 @@ export default function UserProfile() {
               <p className="text-sm text-blue-800 dark:text-blue-200">
                 Your profile is private by default. Only you can see your detailed progress.
               </p>
-              <Button variant="link" className="p-0 h-auto text-blue-600 text-sm">
-                Manage privacy settings
-              </Button>
+              <Link href="/preferences/safety">
+                <Button variant="link" className="p-0 h-auto text-blue-600 text-sm">
+                  Manage privacy settings
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
