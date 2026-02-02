@@ -42,6 +42,7 @@ const Settings = lazy(() => import("./pages/Settings.jsx"));
 const ReminderScheduler = lazy(() => import("./components/ReminderScheduler.jsx"));
 const VoiceSettings = lazy(() => import("./components/VoiceSettings.jsx"));
 const Wellness = lazy(() => import("./pages/Wellness.jsx"));
+const AffirmationWall = lazy(() => import("./pages/AffirmationWall.jsx"));
 const Premium = lazy(() => import("./pages/Premium.jsx"));
 const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
@@ -369,6 +370,9 @@ export default function App() {
               </Route>
               <Route path="/wellness">
                 <WellnessRoute><Wellness /></WellnessRoute>
+              </Route>
+              <Route path="/affirmations">
+                <AffirmationWall />
               </Route>
               <Route path="/wellness-dashboard">
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>

@@ -298,9 +298,24 @@ export default function AICompanion({ className = "" }) {
               {isTyping && (
                 <div className="flex justify-start">
                   <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-2xl rounded-bl-md">
-                    <div className="flex items-center gap-2">
-                      <Loader2 className="w-4 h-4 text-[var(--glp-sage)] animate-spin" aria-hidden="true" />
-                      <span className="text-sm text-gray-500 dark:text-gray-400">Reflecting...</span>
+                    <div className="flex items-center gap-3">
+                      <div 
+                        className="w-8 h-8 rounded-full flex items-center justify-center"
+                        style={{
+                          background: 'linear-gradient(135deg, var(--glp-sage) 0%, var(--glp-teal) 100%)',
+                          animation: 'pulse 1.5s ease-in-out infinite'
+                        }}
+                      >
+                        <Heart className="w-4 h-4 text-white animate-pulse" aria-hidden="true" />
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <span className="text-sm text-gray-600 dark:text-gray-300 font-medium">Contemplating with care...</span>
+                        <div className="flex gap-1">
+                          <span className="w-2 h-2 rounded-full bg-[var(--glp-sage)] animate-bounce" style={{ animationDelay: '0ms' }} />
+                          <span className="w-2 h-2 rounded-full bg-[var(--glp-sage)] animate-bounce" style={{ animationDelay: '150ms' }} />
+                          <span className="w-2 h-2 rounded-full bg-[var(--glp-sage)] animate-bounce" style={{ animationDelay: '300ms' }} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

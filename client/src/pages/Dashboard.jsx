@@ -24,6 +24,7 @@ import DataExportButton from "../components/DataExportButton";
 import ProgressTracker from "../components/ProgressTracker";
 import { AchievementsPanel } from "../components/AchievementBadge";
 import MoodInsight from "../components/MoodInsight";
+import JournalInsights from "../components/JournalInsights";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -468,6 +469,11 @@ export default function Dashboard() {
           <section className="mb-10" aria-label="Mood insights">
             <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Your Inner Wisdom</h2>
             <MoodInsight />
+          </section>
+
+          <section className="mb-10" aria-label="Journal insights">
+            <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Journal Journey</h2>
+            <JournalInsights />
           </section>
 
           <Link 

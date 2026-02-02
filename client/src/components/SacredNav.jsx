@@ -9,8 +9,8 @@ const NAV_LINKS = [
   { href: "/wellness", label: "Wellness", icon: Heart },
   { href: "/journal", label: "Journal", icon: BookOpen },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/tools", label: "Tools", icon: Sparkles },
-  { href: "/hubs", label: "Hubs", icon: Sparkles }
+  { href: "/affirmations", label: "Community", icon: Sparkles },
+  { href: "/tools", label: "Tools", icon: Sparkles }
 ];
 
 export default function SacredNav({ className = "" }) {
