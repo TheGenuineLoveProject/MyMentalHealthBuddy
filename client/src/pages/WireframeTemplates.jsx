@@ -26,9 +26,9 @@
 
 import { useState } from "react";
 import { Link } from "wouter";
-import {
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import {
   Heart, ArrowRight, ArrowLeft, Home, User, LayoutDashboard, BookOpen,
   MessageCircle, LogIn, ChevronDown, ChevronRight, Sparkles, Menu, X, Bell,
   Settings, Search, Plus, Filter, Star, Calendar, TrendingUp, Users, FileText,
@@ -1349,272 +1349,42 @@ function LoginWireframe() {
  * Code Mode - Display developer code
  */
 function CodeMode({ activeTemplate }) {
-  const codeExamples = {
-    landing: `<!-- ============================================================
-    LANDING PAGE WIREFRAME
-    SEO Priority: 1 (Homepage)
-    CRM Sections: Lead capture, newsletter signup
-    ============================================================ -->
-
-<!-- META TAGS FOR SEO -->
-<head>
-  <title>The Genuine Love Project - AI-Powered Mental Wellness</title>
-  <meta name="description" content="Begin your journey to genuine self-love with AI-powered emotional guidance, journaling, and community support.">
-  <meta name="keywords" content="mental wellness, self-love, healing, trauma-informed, AI therapy">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="The Genuine Love Project">
-  <meta property="og:description" content="AI-powered mental wellness platform">
-  <meta property="og:type" content="website">
-  
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "The Genuine Love Project",
-    "description": "Mental wellness platform"
-  }
-  </script>
-</head>
-
-<!-- NAVBAR COMPONENT -->
-<nav 
-  id="main-nav"
-  class="canva-header"
-  role="navigation"
-  aria-label="Main navigation"
-  data-component="NavBar"
->
-  <div class="nav-brand" data-slot="logo">
-    <img src="logo.svg" alt="TGLP Logo" />
-    <span class="brand-name">TGLP</span>
-  </div>
-  <div class="nav-links" data-slot="nav-links">
-    <a href="#features" data-testid="link-features">Features</a>
-    <a href="#about" data-testid="link-about">About</a>
-  </div>
-  <div class="nav-actions" data-slot="auth-buttons">
-    <button class="btn-ghost" data-testid="button-login">Log In</button>
-    <button class="btn-primary" data-testid="button-signup-nav">Start Free</button>
-  </div>
-</nav>
-
-<!-- HERO SECTION -->
-<section 
-  class="hero-section"
-  aria-labelledby="hero-heading"
-  data-component="HeroSection"
-  data-seo="h1-primary"
->
-  <span class="badge" data-slot="badge">Trauma-Informed Wellness</span>
-  <h1 id="hero-heading" data-slot="headline">
-    Begin Your Journey to Genuine Self-Love
-  </h1>
-  <p data-slot="subheadline">
-    AI-powered emotional guidance, journaling, and community support.
-  </p>
-  <div class="cta-buttons" data-slot="cta-buttons">
-    <button class="btn-cta-primary" data-testid="button-hero-cta-primary">
-      Start Your Free Journey
-    </button>
-    <button class="btn-cta-secondary" data-testid="button-hero-cta-secondary">
-      Learn More
-    </button>
-  </div>
-</section>
-
-<!-- NEWSLETTER SECTION (CRM) -->
-<section 
-  class="newsletter-section"
-  aria-labelledby="newsletter-heading"
-  data-component="NewsletterForm"
-  data-crm="lead-capture"
->
-  <h2 id="newsletter-heading">Get Weekly Healing Insights</h2>
-  <form data-form="newsletter-signup" aria-label="Newsletter signup">
-    <input 
-      type="email"
-      placeholder="Your email"
-      required
-      aria-label="Email address"
-      data-testid="input-email-newsletter"
-    />
-    <button type="submit" data-testid="button-subscribe">Subscribe</button>
-  </form>
-  <p class="gdpr-notice">GDPR compliant. Unsubscribe anytime.</p>
-</section>`,
-    
-    onboarding: `<!-- ONBOARDING FLOW WIREFRAME -->
-<!-- Progress Steps Component -->
-<div 
-  role="progressbar"
-  aria-valuenow="2"
-  aria-valuemin="1"
-  aria-valuemax="4"
-  data-component="ProgressSteps"
->
-  <!-- Step indicators -->
-</div>
-
-<!-- Preference Cards Component -->
-<div 
-  role="group"
-  aria-label="Healing goals selection"
-  data-component="PreferenceCards"
->
-  <button 
-    aria-pressed="true"
-    data-testid="button-preference-self-love"
-  >
-    Self-Love
-  </button>
-  <!-- More options... -->
-</div>`,
-
-    homepage: `<!-- HOMEPAGE (LOGGED IN) WIREFRAME -->
-<!-- Daily Focus Card -->
-<section 
-  aria-labelledby="daily-focus-heading"
-  data-component="DailyFocusCard"
->
-  <h2 id="daily-focus-heading">Today's Healing Focus</h2>
-  <p data-slot="message">Embrace the present moment.</p>
-</section>
-
-<!-- Quick Navigation Grid -->
-<nav 
-  aria-label="Quick actions"
-  data-component="QuickNavGrid"
->
-  <button data-testid="button-quick-community">Q&A Community</button>
-  <button data-testid="button-quick-crisis">Crisis Support</button>
-  <button data-testid="button-quick-tools">Tools Library</button>
-</nav>`,
-
-    crm: `<!-- CRM DASHBOARD WIREFRAME -->
-<!-- Stats Cards -->
-<section 
-  aria-label="Key metrics"
-  data-component="StatsCards"
->
-  <div data-testid="card-stat-users">
-    <p>Total Users</p>
-    <p>12,847</p>
-    <span class="trend-up">+12%</span>
-  </div>
-  <!-- More stats... -->
-</section>
-
-<!-- User Table -->
-<table 
-  role="table"
-  data-component="UserTable"
->
-  <!-- Table content... -->
-</table>`,
-
-    content: `<!-- CONTENT HUB WIREFRAME -->
-<!-- Search Bar -->
-<div data-component="SearchBar">
-  <input 
-    type="search"
-    placeholder="Search articles..."
-    aria-label="Search content"
-    data-testid="input-content-search"
-  />
-</div>
-
-<!-- Filter Tabs -->
-<nav 
-  role="tablist"
-  aria-label="Content categories"
-  data-component="FilterTabs"
->
-  <button role="tab" aria-selected="true">All</button>
-  <button role="tab">Articles</button>
-  <!-- More tabs... -->
-</nav>
-
-<!-- Content Card -->
-<article data-component="ContentCard" data-testid="card-content-0">
-  <div data-slot="thumbnail"></div>
-  <span data-slot="type-badge">Article</span>
-  <h3 data-slot="title">Understanding Self-Compassion</h3>
-  <span data-slot="tag">#Self-Love</span>
-</article>`,
-
-    qa: `<!-- Q&A COMMUNITY WIREFRAME -->
-<!-- Post Card -->
-<article 
-  data-component="PostCard"
-  data-testid="card-post-0"
->
-  <!-- Vote Button -->
-  <div data-component="VoteButton">
-    <button 
-      data-testid="button-upvote-0"
-      aria-label="Upvote post, current votes: 24"
-    >▲</button>
-    <span>24</span>
-  </div>
-  
-  <div class="post-content">
-    <div class="post-meta">
-      <span class="author">Anonymous</span>
-      <span class="verified-badge">Verified</span>
-    </div>
-    <h3 data-slot="post-title">How do you practice self-compassion?</h3>
-    <p data-slot="post-preview">I've been struggling...</p>
-  </div>
-</article>`,
-
-    login: `<!-- LOGIN/AUTH WIREFRAME -->
-<!-- Auth Card -->
-<div data-component="AuthCard">
-  <form 
-    data-component="AuthForm"
-    aria-label="Login form"
-  >
-    <!-- Email Input -->
-    <div data-component="FormInput">
-      <label for="email">Email</label>
-      <input 
-        id="email"
-        type="email"
-        required
-        data-testid="input-email-login"
-      />
-    </div>
-    
-    <!-- Password Input -->
-    <div data-component="PasswordInput">
-      <label for="password">Password</label>
-      <input 
-        id="password"
-        type="password"
-        required
-        data-testid="input-password-login"
-      />
-      <button 
-        type="button"
-        aria-label="Show password"
-        data-testid="button-toggle-password"
-      >👁</button>
-    </div>
-    
-    <button type="submit" data-testid="button-login-submit">
-      Sign In
-    </button>
-  </form>
-  
-  <!-- Social Login -->
-  <div data-component="SocialLogin">
-    <button data-testid="button-login-google">Google</button>
-    <button data-testid="button-login-github">GitHub</button>
-  </div>
-</div>`
+  const codeDescriptions = {
+    landing: "Landing Page - Hero section, features grid, CTA buttons, newsletter signup",
+    onboarding: "Onboarding Flow - Welcome screens, preference selection, account setup",
+    homepage: "User Dashboard - Stats cards, activity feed, quick actions",
+    crm: "CRM Dashboard - Contact list, pipeline view, analytics charts",
+    content: "Content Hub - Article cards, categories, search functionality",
+    qa: "Q&A Community - Question list, voting, answer threads",
+    login: "Authentication - Login form, social login, password recovery"
   };
+
+  const templateCode = `
+/* ============================================================
+   ${(activeTemplate || 'landing').toUpperCase()} WIREFRAME
+   ${codeDescriptions[activeTemplate] || codeDescriptions.landing}
+   ============================================================ */
+
+/* Component Structure:
+   - Header/Navigation
+   - Main Content Area
+   - Interactive Elements
+   - Footer/Actions
+   
+   For full HTML/CSS export, use the Download button above.
+*/
+
+// React Component Pattern:
+export default function ${activeTemplate ? activeTemplate.charAt(0).toUpperCase() + activeTemplate.slice(1) : 'Landing'}Page() {
+  return (
+    <div className="page-container">
+      <Header />
+      <MainContent />
+      <Footer />
+    </div>
+  );
+}
+`;
 
   return (
     <div className="space-y-6">
@@ -1626,6 +1396,7 @@ function CodeMode({ activeTemplate }) {
           className="flex items-center gap-2 px-4 py-2 rounded-lg"
           style={{ background: '#2f5d5d', color: 'white' }}
           data-testid="button-copy-code"
+          onClick={() => navigator.clipboard.writeText(templateCode)}
         >
           <Copy className="w-4 h-4" aria-hidden="true" /> Copy All
         </button>
@@ -1639,9 +1410,10 @@ function CodeMode({ activeTemplate }) {
           border: '1px solid rgba(143, 191, 159, 0.2)'
         }}
       >
-        <code>{codeExamples[activeTemplate] || codeExamples.landing}</code>
+        <code>{templateCode}</code>
       </pre>
     </div>
-  </WellnessPageShell>
   );
 }
+
+
