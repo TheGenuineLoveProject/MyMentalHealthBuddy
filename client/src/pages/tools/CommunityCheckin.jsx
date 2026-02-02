@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Users, ArrowLeft, Send, Heart, RefreshCw } from "lucide-react";
+import { Users, ArrowLeft, Send, Heart, RefreshCw, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 const CHECK_IN_PROMPTS = [
   "Something that made me smile today...",
@@ -18,16 +19,26 @@ const CHECK_IN_PROMPTS = [
   "Something I'm grateful for in this community..."
 ];
 
-const SAMPLE_RESPONSES = [
-  { prompt: "Something that made me smile today...", response: "My cat curled up in a sunbeam this morning.", hearts: 12 },
-  { prompt: "A small win I want to celebrate...", response: "I actually took a full lunch break today instead of working through it.", hearts: 23 },
-  { prompt: "A way I practiced self-care today...", response: "I said no to an extra commitment and it felt really good.", hearts: 18 }
-];
-
 export default function CommunityCheckin() {
+  const { toast } = useToast();
   const [currentPrompt, setCurrentPrompt] = useState(CHECK_IN_PROMPTS[0]);
   const [response, setResponse] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [recentReflections, setRecentReflections] = useState([]);
+
+  useEffect(() => {
+    const fetchReflections = async () => {
+      try {
+        const res = await fetch("/api/community/reflections", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          setRecentReflections(data.slice(0, 3));
+        }
+      } catch {}
+    };
+    fetchReflections();
+  }, [submitted]);
 
   const getRandomPrompt = () => {
     const randomIndex = Math.floor(Math.random() * CHECK_IN_PROMPTS.length);
@@ -36,9 +47,32 @@ export default function CommunityCheckin() {
     setSubmitted(false);
   };
 
-  const handleSubmit = () => {
-    if (response.trim()) {
-      setSubmitted(true);
+  const handleSubmit = async () => {
+    if (!response.trim() || response.length < 10) {
+      toast({ title: "Please share a bit more", description: "Your reflection should be at least 10 characters.", variant: "destructive" });
+      return;
+    }
+    
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/community/reflect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ content: `${currentPrompt} ${response}` })
+      });
+      
+      if (res.ok) {
+        setSubmitted(true);
+        toast({ title: "Shared with community", description: "Thank you for opening up." });
+      } else {
+        const data = await res.json();
+        toast({ title: "Couldn't share", description: data.message || "Please try again.", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Connection error", description: "Please try again later.", variant: "destructive" });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -108,7 +142,7 @@ export default function CommunityCheckin() {
             ) : (
               <>
                 <Textarea
-                  placeholder="Share your thoughts... (private practice—nothing is stored)"
+                  placeholder="Share your thoughts with the community..."
                   value={response}
                   onChange={(e) => setResponse(e.target.value)}
                   rows={4}
@@ -116,12 +150,15 @@ export default function CommunityCheckin() {
                 />
                 <Button 
                   onClick={handleSubmit}
-                  disabled={!response.trim()}
+                  disabled={!response.trim() || submitting}
                   className="mt-4 w-full"
                   data-testid="button-submit"
                 >
-                  <Send className="w-4 h-4 mr-2" />
-                  Share (Private Practice)
+                  {submitting ? (
+                    <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" />Sharing...</>
+                  ) : (
+                    <><Send className="w-4 h-4 mr-2" />Share with Community</>
+                  )}
                 </Button>
               </>
             )}
@@ -134,23 +171,28 @@ export default function CommunityCheckin() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground mb-4">
-              Here are some example shares from our community. Names are never shown.
+              Recent shares from our community. Names are never shown.
             </p>
-            {SAMPLE_RESPONSES.map((sample, i) => (
-              <div key={i} className="p-4 bg-muted/50 rounded-lg">
-                <p className="text-xs text-muted-foreground mb-1">{sample.prompt}</p>
-                <p className="text-foreground mb-2">"{sample.response}"</p>
-                <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                  <Heart className="w-3 h-3 fill-rose-400 text-rose-400" />
-                  <span>{sample.hearts}</span>
+            {recentReflections.length > 0 ? (
+              recentReflections.map((r, i) => (
+                <div key={r.id || i} className="p-4 bg-muted/50 rounded-lg">
+                  <p className="text-foreground mb-2">"{r.content}"</p>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                    <Heart className="w-3 h-3 fill-rose-400 text-rose-400" />
+                    <span>{r.heartCount || 0}</span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-sm text-muted-foreground text-center py-4">
+                Be the first to share today!
+              </p>
+            )}
           </CardContent>
         </Card>
 
         <p className="text-center text-xs text-muted-foreground mt-8">
-          This is a private practice tool. Your responses are not stored or shared.
+          Your reflections are shared anonymously with the community.
         </p>
       </main>
 
