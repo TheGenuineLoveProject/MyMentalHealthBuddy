@@ -4,6 +4,8 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient.js";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { EmotionProvider } from "./context/EmotionContext.jsx";
+import ResponsiveWrapper from "./components/ResponsiveWrapper.jsx";
+import LotusGuide from "./components/LotusGuide.jsx";
 import { ReadingLevelProvider } from "./context/ReadingLevelContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
@@ -278,6 +280,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <EmotionProvider>
+        <ResponsiveWrapper>
         <ReadingLevelProvider>
           <ErrorBoundary>
             <SkipToContent />
@@ -893,8 +896,10 @@ export default function App() {
           <ConsentBanner />
           <FeedbackWidget />
           <AICompanion />
+          <LotusGuide />
           </ErrorBoundary>
         </ReadingLevelProvider>
+        </ResponsiveWrapper>
         </EmotionProvider>
       </AuthProvider>
     </QueryClientProvider>
