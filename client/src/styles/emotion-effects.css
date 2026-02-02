@@ -436,3 +436,75 @@
     display: none;
   }
 }
+
+/* ===== BODY MOOD CLASSES - Global Emotion Adaptive Backgrounds ===== */
+
+body.mood-joy {
+  background: linear-gradient(135deg, #fef9e7 0%, #fff8e1 50%, #fffbf0 100%);
+}
+
+body.mood-excited {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 50%, #fff8e1 100%);
+}
+
+body.mood-grateful {
+  background: linear-gradient(135deg, #f5f5dc 0%, #fdf5e6 50%, #fffaf0 100%);
+}
+
+body.mood-loved {
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 50%, #fff5f8 100%);
+}
+
+body.mood-hopeful {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 50%, #f5fff5 100%);
+}
+
+body.mood-peaceful {
+  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 30%, #f1f8e9 100%);
+}
+
+body.mood-calm {
+  background: linear-gradient(135deg, #e3f2fd 0%, #e8f5e9 50%, #f5f5f5 100%);
+}
+
+body.mood-neutral {
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 50%, #eeeeee 100%);
+}
+
+body.mood-tired {
+  background: linear-gradient(135deg, #eceff1 0%, #e0e0e0 50%, #eeeeee 100%);
+}
+
+body.mood-anxious {
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #ede7f6 100%);
+}
+
+body.mood-sad {
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 30%, #e1f5fe 100%);
+}
+
+body.mood-angry {
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 30%, #fff5f5 100%);
+}
+
+/* Dark mode variants */
+body.dark.mood-joy {
+  background: linear-gradient(135deg, #1a1a0f 0%, #1f1a10 50%, #1a1815 100%);
+}
+
+body.dark.mood-calm {
+  background: linear-gradient(135deg, #0f1a1a 0%, #101815 50%, #121a18 100%);
+}
+
+body.dark.mood-sad {
+  background: linear-gradient(135deg, #0f1520 0%, #101822 50%, #0f1a25 100%);
+}
+
+body.dark.mood-anxious {
+  background: linear-gradient(135deg, #1a0f18 0%, #1a1020 50%, #180f1a 100%);
+}
+
+body.dark.mood-neutral,
+body.dark.mood-tired {
+  background: linear-gradient(135deg, #1a1a1a 0%, #1f1f1f 50%, #181818 100%);
+}

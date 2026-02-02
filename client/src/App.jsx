@@ -6,6 +6,8 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { EmotionProvider } from "./context/EmotionContext.jsx";
 import ResponsiveWrapper from "./components/ResponsiveWrapper.jsx";
 import LotusGuide from "./components/LotusGuide.jsx";
+import EmotionBackgroundProvider from "./components/EmotionBackgroundProvider.jsx";
+import GratitudePrompt from "./components/GratitudePrompt.jsx";
 import { ReadingLevelProvider } from "./context/ReadingLevelContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
@@ -280,6 +282,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <EmotionProvider>
+        <EmotionBackgroundProvider>
         <ResponsiveWrapper>
         <ReadingLevelProvider>
           <ErrorBoundary>
@@ -897,9 +900,11 @@ export default function App() {
           <FeedbackWidget />
           <AICompanion />
           <LotusGuide />
+          <GratitudePrompt frequency="weekly" />
           </ErrorBoundary>
         </ReadingLevelProvider>
         </ResponsiveWrapper>
+        </EmotionBackgroundProvider>
         </EmotionProvider>
       </AuthProvider>
     </QueryClientProvider>
