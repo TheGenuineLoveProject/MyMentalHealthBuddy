@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Heart, ChevronRight, RotateCcw, BookOpen } from "lucide-react";
+import { Link } from "wouter";
+import { Heart, ChevronRight, RotateCcw, BookOpen, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
@@ -221,9 +222,11 @@ export default function EmotionWheel() {
                 <Button onClick={reset} variant="outline" className="min-h-[44px]">
                   <RotateCcw className="w-4 h-4 mr-2" /> Start Over
                 </Button>
-                <Button className="min-h-[44px]">
-                  <BookOpen className="w-4 h-4 mr-2" /> Journal This
-                </Button>
+                <Link href="/journal">
+                  <Button className="min-h-[44px]">
+                    <BookOpen className="w-4 h-4 mr-2" /> Journal This
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
