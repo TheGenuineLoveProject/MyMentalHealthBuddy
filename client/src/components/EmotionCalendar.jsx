@@ -88,29 +88,62 @@ function MoodDonutChart({ moodCounts, total }) {
 
 export default function EmotionCalendar({ 
   moodData = {},
+  entries = [],
   onDateSelect,
   className = ""
 }) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [viewMode, setViewMode] = useState("monthly");
-  const [moodFilter, setMoodFilter] = useState(null);
-  const [showFilters, setShowFilters] = useState(false);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   
+  const normalizedMoodData = useMemo(() => {
+    if (Object.keys(moodData).length > 0) return moodData;
+    
+    const dateMap = {};
+    entries.forEach(entry => {
+      if (entry.timestamp || entry.createdAt || entry.date) {
+        const date = new Date(entry.timestamp || entry.createdAt || entry.date);
+        const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+        if (entry.mood || entry.emotion) {
+          dateMap[dateStr] = entry.mood || entry.emotion;
+        }
+      }
+    });
+    return dateMap;
+  }, [moodData, entries]);
+  
   const moodStats = useMemo(() => {
     const counts = {};
     let total = 0;
-    Object.values(moodData).forEach(mood => {
-      if (mood) {
+    const now = new Date();
+    
+    Object.entries(normalizedMoodData).forEach(([dateStr, mood]) => {
+      if (!mood) return;
+      
+      const entryDate = new Date(dateStr);
+      let include = false;
+      
+      if (viewMode === 'weekly') {
+        const weekAgo = new Date(now);
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        include = entryDate >= weekAgo && entryDate <= now;
+      } else if (viewMode === 'monthly') {
+        include = entryDate.getMonth() === month && entryDate.getFullYear() === year;
+      } else {
+        include = true;
+      }
+      
+      if (include) {
         counts[mood] = (counts[mood] || 0) + 1;
         total++;
       }
     });
+    
     return { counts, total };
-  }, [moodData]);
+  }, [normalizedMoodData, viewMode, month, year]);
 
   const calendarDays = useMemo(() => {
     const daysInMonth = getDaysInMonth(year, month);
@@ -126,12 +159,12 @@ export default function EmotionCalendar({
       days.push({ 
         day, 
         date: dateStr,
-        mood: moodData[dateStr] || null
+        mood: normalizedMoodData[dateStr] || null
       });
     }
 
     return days;
-  }, [year, month, moodData]);
+  }, [year, month, normalizedMoodData]);
 
   const navigateMonth = (direction) => {
     setCurrentDate(prev => {
@@ -237,11 +270,32 @@ export default function EmotionCalendar({
         </div>
 
         <div className="mt-4 flex flex-wrap gap-2 justify-center" role="legend" aria-label="Mood color legend">
-          {Object.entries(MOOD_COLORS).slice(0, 5).map(([mood, style]) => (
+          {Object.entries(MOOD_COLORS).slice(0, 6).map(([mood, style]) => (
             <div key={mood} className="flex items-center gap-1 text-xs">
               <span className={`w-3 h-3 rounded-full ${style.bg} ${style.border} border`} aria-hidden="true" />
               <span className="text-muted-foreground">{style.label}</span>
             </div>
+          ))}
+        </div>
+
+        {moodStats.total > 0 && (
+          <MoodDonutChart moodCounts={moodStats.counts} total={moodStats.total} />
+        )}
+
+        <div className="mt-4 flex justify-center gap-2" role="group" aria-label="View toggle">
+          {Object.entries(VIEW_MODES).map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setViewMode(key)}
+              className={`px-3 py-1 text-xs rounded-full transition-all ${
+                viewMode === key 
+                  ? 'bg-[#d4af37] text-white' 
+                  : 'bg-muted hover:bg-muted/80 text-muted-foreground'
+              }`}
+              data-testid={`button-view-${key}`}
+            >
+              {label}
+            </button>
           ))}
         </div>
       </CardContent>

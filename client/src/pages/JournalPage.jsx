@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw, Share2 } from "lucide-react";
@@ -14,6 +14,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { useAuth } from "../context/AuthContext";
+import { useEmotion } from "../context/EmotionContext";
 import EmotionLog from "../components/EmotionLog";
 import VoiceAffirmation from "../components/VoiceAffirmation";
 import EmotionCalendar from "../components/EmotionCalendar";
@@ -22,6 +23,22 @@ import { LotusGuide } from "../components/sacred";
 import JournalAI from "../components/JournalAI";
 import DataExportButton from "../components/DataExportButton";
 import "../styles/sacred-visuals.css";
+
+const MOOD_BACKGROUNDS = {
+  joy: 'linear-gradient(135deg, rgba(255, 236, 210, 0.4) 0%, rgba(252, 182, 159, 0.3) 50%, rgba(250, 249, 247, 1) 100%)',
+  happy: 'linear-gradient(135deg, rgba(255, 236, 210, 0.4) 0%, rgba(252, 182, 159, 0.3) 50%, rgba(250, 249, 247, 1) 100%)',
+  sad: 'linear-gradient(135deg, rgba(161, 196, 253, 0.3) 0%, rgba(194, 233, 251, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
+  calm: 'linear-gradient(135deg, rgba(212, 252, 121, 0.2) 0%, rgba(150, 230, 161, 0.25) 50%, rgba(250, 249, 247, 1) 100%)',
+  peaceful: 'linear-gradient(135deg, rgba(212, 252, 121, 0.2) 0%, rgba(150, 230, 161, 0.25) 50%, rgba(250, 249, 247, 1) 100%)',
+  anxious: 'linear-gradient(135deg, rgba(200, 162, 200, 0.2) 0%, rgba(244, 199, 195, 0.25) 50%, rgba(250, 249, 247, 1) 100%)',
+  angry: 'linear-gradient(135deg, rgba(254, 202, 202, 0.3) 0%, rgba(252, 165, 165, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
+  hopeful: 'linear-gradient(135deg, rgba(167, 243, 208, 0.25) 0%, rgba(110, 231, 183, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
+  grateful: 'linear-gradient(135deg, rgba(254, 240, 138, 0.25) 0%, rgba(253, 224, 71, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
+  loved: 'linear-gradient(135deg, rgba(251, 207, 232, 0.3) 0%, rgba(244, 114, 182, 0.15) 50%, rgba(250, 249, 247, 1) 100%)',
+  tired: 'linear-gradient(135deg, rgba(199, 210, 254, 0.25) 0%, rgba(165, 180, 252, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
+  neutral: 'linear-gradient(135deg, rgba(243, 244, 246, 0.5) 0%, rgba(229, 231, 235, 0.3) 50%, rgba(250, 249, 247, 1) 100%)',
+  excited: 'linear-gradient(135deg, rgba(254, 215, 170, 0.3) 0%, rgba(251, 191, 36, 0.2) 50%, rgba(250, 249, 247, 1) 100%)'
+};
 
 const JOURNAL_CLARITY = {
   what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",
@@ -139,9 +156,15 @@ export default function JournalPage() {
   const [shareAnonymously, setShareAnonymously] = useState(true);
   
   const { user } = useAuth();
+  const { currentEmotion, setEmotion } = useEmotion();
+  
+  const emotionBackground = useMemo(() => {
+    return MOOD_BACKGROUNDS[currentEmotion] || MOOD_BACKGROUNDS.neutral;
+  }, [currentEmotion]);
 
   const handleMoodChange = (mood) => {
     setCurrentMood(mood);
+    setEmotion(mood);
   };
 
   const handleSelectPrompt = (prompt) => {
@@ -252,7 +275,10 @@ export default function JournalPage() {
         title="Reflective Journal - The Genuine Love Project"
         description="A safe, private space to process thoughts, honor feelings, and witness your growth. Express yourself freely with compassionate journaling."
       />
-      <div className="min-h-screen safe-padding hero-gradient">
+      <div 
+        className="min-h-screen safe-padding transition-all duration-700"
+        style={{ background: emotionBackground }}
+      >
         <div className="container-sm px-responsive">
           <header className="flex-between mb-8">
             <div className="flex items-center gap-4">
