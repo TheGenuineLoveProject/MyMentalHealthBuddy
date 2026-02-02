@@ -26,6 +26,7 @@ import therapyRouter from "./routes/therapy.mjs";
 import dashboardRouter from "./routes/ui-dashboard.mjs";
 import webhookRouter from "./routes/webhook.mjs";
 import insightsRouter from "./routes/insights.mjs";
+import progressRouter from "./routes/progress.mjs";
 import statesRouter from "./routes/states.mjs";
 import promptsRouter from "./routes/prompts.mjs";
 import mirrorRouter from "./routes/mirror.mjs";
@@ -179,6 +180,7 @@ async function startServer() {
   app.use("/api/dashboard", dashboardRouter);
   app.use("/api/webhook", webhookRouter);
   app.use("/api/insights", insightsRouter);
+  app.use("/api/progress", progressRouter);
   app.use("/api/states", statesRouter);
   app.use("/api/prompts", promptsRouter);
   app.use("/api/mirror", mirrorRouter);

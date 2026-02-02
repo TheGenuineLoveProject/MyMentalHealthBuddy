@@ -21,6 +21,9 @@ import { pickBenefits } from "@/lib/benefits";
 import { StreakShare } from "@/components/share/StreakShare";
 import EmotionAuraRing from "../components/EmotionAuraRing";
 import DataExportButton from "../components/DataExportButton";
+import ProgressTracker from "../components/ProgressTracker";
+import { AchievementsPanel } from "../components/AchievementBadge";
+import MoodInsight from "../components/MoodInsight";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -450,6 +453,21 @@ export default function Dashboard() {
 
           <section className="mb-10" aria-label="Daily affirmation">
             <DailyAffirmations compact />
+          </section>
+
+          <section className="mb-10" aria-label="Progress tracking">
+            <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Your Healing Journey</h2>
+            <ProgressTracker />
+          </section>
+
+          <section className="mb-10" aria-label="Achievements">
+            <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Sacred Achievements</h2>
+            <AchievementsPanel />
+          </section>
+
+          <section className="mb-10" aria-label="Mood insights">
+            <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Your Inner Wisdom</h2>
+            <MoodInsight />
           </section>
 
           <Link 
