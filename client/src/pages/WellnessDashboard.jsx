@@ -9,6 +9,7 @@ import MoodCalendar from "../components/wellness/MoodCalendar";
 import HealingGraph from "../components/wellness/HealingGraph";
 import VoiceAffirmation from "../components/VoiceAffirmation";
 import { LotusGuide } from "../components/sacred";
+import MoodTrendsChartJS from "../components/charts/MoodTrendsChartJS";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { useAuth } from "../context/AuthContext";
@@ -410,7 +411,10 @@ export default function WellnessDashboard() {
               <TrendingUp className="w-6 h-6 text-metallicGold" aria-hidden="true" />
               Your Healing Journey
             </h2>
-            <HealingGraph />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <MoodTrendsChartJS entries={moodEntries} days={14} />
+              <HealingGraph />
+            </div>
           </div>
         </div>
 

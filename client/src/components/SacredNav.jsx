@@ -6,9 +6,11 @@ import { useAuth } from "../context/AuthContext";
 
 const NAV_LINKS = [
   { href: "/", label: "Home", icon: Home },
+  { href: "/wellness", label: "Wellness", icon: Heart },
   { href: "/journal", label: "Journal", icon: BookOpen },
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/tools", label: "Tools", icon: Sparkles }
+  { href: "/tools", label: "Tools", icon: Sparkles },
+  { href: "/hubs", label: "Hubs", icon: Sparkles }
 ];
 
 export default function SacredNav({ className = "" }) {
@@ -29,17 +31,26 @@ export default function SacredNav({ className = "" }) {
           <Link href="/">
             <a className="flex items-center gap-2 group" data-testid="link-logo">
               <div 
-                className="relative w-10 h-10 rounded-full flex items-center justify-center transition-all group-hover:scale-105"
+                className="relative w-10 h-10 rounded-full flex items-center justify-center transition-all group-hover:scale-110 group-hover:rotate-3"
                 style={{
-                  background: "linear-gradient(135deg, #d4af37, #ffd700)",
-                  boxShadow: "0 0 20px rgba(212, 175, 55, 0.4)"
+                  background: "linear-gradient(135deg, #d4af37 0%, #ffd700 50%, #d4af37 100%)",
+                  boxShadow: "0 0 25px rgba(212, 175, 55, 0.5), 0 0 50px rgba(212, 175, 55, 0.2), inset 0 1px 2px rgba(255, 255, 255, 0.3)"
                 }}
               >
-                <Heart className="w-5 h-5 text-white" aria-hidden="true" />
+                <Heart className="w-5 h-5 text-white drop-shadow-md" aria-hidden="true" />
                 <div 
-                  className="absolute inset-0 rounded-full animate-pulse opacity-50"
+                  className="absolute inset-0 rounded-full animate-pulse"
                   style={{
-                    background: "radial-gradient(circle, rgba(255, 215, 0, 0.6) 0%, transparent 70%)"
+                    background: "radial-gradient(circle, rgba(255, 215, 0, 0.7) 0%, rgba(212, 175, 55, 0.3) 40%, transparent 70%)",
+                    animation: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite"
+                  }}
+                  aria-hidden="true"
+                />
+                <div 
+                  className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{
+                    background: "radial-gradient(circle, rgba(255, 215, 0, 0.4) 0%, transparent 70%)",
+                    filter: "blur(4px)"
                   }}
                   aria-hidden="true"
                 />

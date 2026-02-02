@@ -29,11 +29,56 @@ const SUPPORTIVE_PROMPTS = [
   "What does this feeling need from you today?",
 ];
 
+const GUIDED_JOURNAL_PROMPTS = [
+  {
+    category: "Self-Compassion",
+    prompts: [
+      "What kind words would you offer a friend in your situation?",
+      "Name three things you did well today, no matter how small.",
+      "What is one way you can be gentler with yourself right now?",
+    ],
+  },
+  {
+    category: "Gratitude",
+    prompts: [
+      "What simple pleasure brought you joy today?",
+      "Who in your life are you thankful for, and why?",
+      "What challenge are you grateful for overcoming?",
+    ],
+  },
+  {
+    category: "Emotional Processing",
+    prompts: [
+      "Where do you feel this emotion in your body?",
+      "If this feeling had a color and shape, what would it be?",
+      "What message might this emotion be trying to tell you?",
+    ],
+  },
+  {
+    category: "Future Self",
+    prompts: [
+      "What does your healed self look like?",
+      "What would you tell yourself one year from now?",
+      "What small step can you take today toward your goals?",
+    ],
+  },
+  {
+    category: "Inner Wisdom",
+    prompts: [
+      "What does your intuition want you to know right now?",
+      "If fear wasn't a factor, what would you do?",
+      "What truth have you been avoiding?",
+    ],
+  },
+];
+
 export default function JournalAI({ emotionEntry, className = "" }) {
   const [userInput, setUserInput] = useState(emotionEntry?.content || "");
   const [aiResponse, setAiResponse] = useState(null);
   const [showBreathing, setShowBreathing] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState(null);
+  const [showGuidedPrompts, setShowGuidedPrompts] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const [error, setError] = useState("");
 
@@ -92,6 +137,59 @@ export default function JournalAI({ emotionEntry, className = "" }) {
               )}
             </div>
           )}
+
+          <div className="space-y-3">
+            <button
+              type="button"
+              onClick={() => setShowGuidedPrompts(!showGuidedPrompts)}
+              className="flex items-center gap-2 text-sm font-medium text-[var(--glp-teal)] hover:text-[var(--glp-sage-deep)] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37] rounded-lg px-2 py-1"
+              data-testid="toggle-guided-prompts"
+            >
+              <Sparkles className="w-4 h-4" aria-hidden="true" />
+              {showGuidedPrompts ? "Hide" : "Show"} Guided Journal Prompts
+            </button>
+
+            {showGuidedPrompts && (
+              <div className="space-y-3 animate-in slide-in-from-top-2 duration-200" data-testid="guided-prompts-section">
+                <div className="flex flex-wrap gap-2">
+                  {GUIDED_JOURNAL_PROMPTS.map((cat) => (
+                    <button
+                      key={cat.category}
+                      type="button"
+                      onClick={() => setSelectedCategory(selectedCategory === cat.category ? null : cat.category)}
+                      className={`px-3 py-1.5 rounded-full text-xs font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37] ${
+                        selectedCategory === cat.category
+                          ? "bg-[var(--glp-teal)] text-white"
+                          : "bg-[var(--glp-sage-10)] text-[var(--glp-sage-deep)] hover:bg-[var(--glp-sage-20)]"
+                      }`}
+                      data-testid={`category-${cat.category.toLowerCase().replace(/\s+/g, "-")}`}
+                    >
+                      {cat.category}
+                    </button>
+                  ))}
+                </div>
+
+                {selectedCategory && (
+                  <div className="grid gap-2">
+                    {GUIDED_JOURNAL_PROMPTS.find((c) => c.category === selectedCategory)?.prompts.map((prompt, idx) => (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          setUserInput(prompt);
+                          setShowGuidedPrompts(false);
+                        }}
+                        className="text-left p-3 rounded-lg border border-[var(--glp-sage-20)] hover:border-[var(--glp-teal)] hover:bg-[var(--glp-sage-10)] text-sm text-gray-700 dark:text-gray-200 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37]"
+                        data-testid={`prompt-${idx}`}
+                      >
+                        "{prompt}"
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
