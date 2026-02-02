@@ -43,7 +43,7 @@ const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const Profile = lazy(() => import("./pages/Profile.jsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
-const CommunityPage = lazy(() => import("./features/community/SharedReflectionsPage.jsx"));
+const CommunityPage = lazy(() => import("./pages/CommunityFeed.jsx"));
 const DiscussionPage = lazy(() => import("./features/community/DiscussionPage.jsx"));
 const ToolsPage = lazy(() => import("./pages/ToolsPage.jsx"));
 const BreathTool = lazy(() => import("./pages/tools/BreathTool.jsx"));

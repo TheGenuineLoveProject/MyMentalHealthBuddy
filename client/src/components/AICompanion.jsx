@@ -182,6 +182,19 @@ export default function AICompanion({ className = "" }) {
               </button>
             </header>
 
+            <div className="mx-4 mt-2 p-3 rounded-lg bg-[var(--glp-rose)]/10 border border-[var(--glp-rose)]/20">
+              <p className="text-xs text-gray-600 dark:text-gray-300">
+                This is a supportive AI companion for emotional wellness, not a replacement for professional care.{" "}
+                <a 
+                  href="/crisis" 
+                  className="underline text-[var(--glp-teal)] hover:text-[var(--glp-sage)] font-medium"
+                  data-testid="link-crisis-support"
+                >
+                  Need immediate support? Visit our crisis resources →
+                </a>
+              </p>
+            </div>
+
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
               {messages.map((msg) => (
                 <div

@@ -20,7 +20,8 @@ const MOOD_COLORS = {
 
 export default function SharedEntryCard({ 
   entry,
-  className = "" 
+  className = "",
+  style = {}
 }) {
   const [isLiked, setIsLiked] = useState(false);
   const [showFull, setShowFull] = useState(false);
@@ -43,6 +44,7 @@ export default function SharedEntryCard({
       className={`group relative overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm hover:shadow-xl transition-all duration-500 animate-in fade-in slide-in-from-bottom-4 ${className}`}
       style={{
         background: `linear-gradient(135deg, ${moodConfig.bg} 0%, transparent 50%)`,
+        ...style
       }}
       data-testid={`shared-entry-${entry?.id}`}
     >
