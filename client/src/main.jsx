@@ -32,15 +32,27 @@ if ('serviceWorker' in navigator) {
           if (newWorker) {
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                console.log('New content available; please refresh.');
+                console.log('New content available; refreshing...');
+                if (window.confirm('A new version is available. Refresh to update?')) {
+                  newWorker.postMessage({ type: 'SKIP_WAITING' });
+                  window.location.reload();
+                }
               }
             });
           }
         });
+
+        setInterval(() => {
+          registration.update();
+        }, 60 * 60 * 1000);
       })
       .catch((error) => {
         console.warn('SW registration failed:', error);
       });
+  });
+
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    console.log('SW controller changed');
   });
 }
 

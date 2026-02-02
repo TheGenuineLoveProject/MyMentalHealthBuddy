@@ -1,6 +1,10 @@
-const CACHE_NAME = 'genuine-love-v1';
+const CACHE_VERSION = '1.0.0';
+const CACHE_NAME = `genuine-love-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `genuine-love-runtime-${CACHE_VERSION}`;
+
 const STATIC_ASSETS = [
   '/',
+  '/index.html',
   '/offline.html',
   '/manifest.json',
   '/brand/favicon.svg',
@@ -14,17 +18,28 @@ const STATIC_ASSETS = [
   '/sacred-pattern.svg'
 ];
 
-const FONT_URLS = [
-  'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap'
-];
+const FONT_CSS_URL = 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(STATIC_ASSETS).catch((err) => {
-        console.warn('Some assets failed to cache:', err);
-      });
-    })
+    Promise.all([
+      caches.open(CACHE_NAME).then((cache) => {
+        return cache.addAll(STATIC_ASSETS).catch((err) => {
+          console.warn('Some static assets failed to cache:', err);
+        });
+      }),
+      caches.open(RUNTIME_CACHE).then((cache) => {
+        return fetch(FONT_CSS_URL)
+          .then((response) => {
+            if (response.ok) {
+              cache.put(FONT_CSS_URL, response);
+            }
+          })
+          .catch((err) => {
+            console.warn('Font CSS failed to cache:', err);
+          });
+      })
+    ])
   );
   self.skipWaiting();
 });
@@ -34,8 +49,11 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name !== CACHE_NAME)
-          .map((name) => caches.delete(name))
+          .filter((name) => name !== CACHE_NAME && name !== RUNTIME_CACHE)
+          .map((name) => {
+            console.log('Deleting old cache:', name);
+            return caches.delete(name);
+          })
       );
     })
   );
@@ -55,12 +73,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
+    event.respondWith(cacheFirst(request, RUNTIME_CACHE));
+    return;
+  }
+
   if (
     request.destination === 'image' ||
     request.destination === 'font' ||
     url.pathname.match(/\.(png|jpg|jpeg|svg|gif|woff2?|ttf|eot)$/)
   ) {
-    event.respondWith(cacheFirst(request));
+    event.respondWith(cacheFirst(request, RUNTIME_CACHE));
+    return;
+  }
+
+  if (url.pathname.startsWith('/assets/') || url.pathname.match(/\.(js|css)$/)) {
+    event.respondWith(cacheFirst(request, RUNTIME_CACHE));
     return;
   }
 
@@ -72,7 +100,7 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(staleWhileRevalidate(request));
 });
 
-async function cacheFirst(request) {
+async function cacheFirst(request, cacheName = CACHE_NAME) {
   const cached = await caches.match(request);
   if (cached) {
     return cached;
@@ -80,7 +108,7 @@ async function cacheFirst(request) {
   try {
     const response = await fetch(request);
     if (response.ok) {
-      const cache = await caches.open(CACHE_NAME);
+      const cache = await caches.open(cacheName);
       cache.put(request, response.clone());
     }
     return response;
