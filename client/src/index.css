@@ -116,6 +116,83 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid rgba(143, 191, 159, 0.2);
 }
 
+/* Sacred Glow Utilities */
+.glow-gold {
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.6);
+}
+
+.glow-sage {
+  box-shadow: 0 0 20px rgba(143, 191, 159, 0.5);
+}
+
+.glow-blossom {
+  box-shadow: 0 0 20px rgba(244, 199, 195, 0.6);
+}
+
+.glow-healing {
+  box-shadow: 0 0 30px rgba(143, 191, 159, 0.4), 0 0 60px rgba(212, 175, 55, 0.2);
+}
+
+/* Emotion-Linked Gradient Backgrounds */
+.bg-emotion-calm {
+  background: linear-gradient(135deg, rgba(143, 191, 159, 0.15) 0%, rgba(250, 249, 247, 1) 50%, rgba(173, 216, 230, 0.1) 100%);
+}
+
+.bg-emotion-joy {
+  background: linear-gradient(135deg, rgba(255, 223, 186, 0.2) 0%, rgba(250, 249, 247, 1) 50%, rgba(212, 175, 55, 0.1) 100%);
+}
+
+.bg-emotion-reflection {
+  background: linear-gradient(135deg, rgba(200, 162, 200, 0.15) 0%, rgba(250, 249, 247, 1) 50%, rgba(143, 191, 159, 0.1) 100%);
+}
+
+.bg-emotion-healing {
+  background: linear-gradient(135deg, rgba(244, 199, 195, 0.2) 0%, rgba(250, 249, 247, 1) 50%, rgba(143, 191, 159, 0.15) 100%);
+}
+
+.bg-emotion-focus {
+  background: linear-gradient(135deg, rgba(90, 138, 110, 0.1) 0%, rgba(250, 249, 247, 1) 50%, rgba(70, 130, 180, 0.1) 100%);
+}
+
+.dark .bg-emotion-calm {
+  background: linear-gradient(135deg, rgba(143, 191, 159, 0.1) 0%, hsl(180, 22%, 10%) 50%, rgba(173, 216, 230, 0.05) 100%);
+}
+
+.dark .bg-emotion-joy {
+  background: linear-gradient(135deg, rgba(255, 223, 186, 0.1) 0%, hsl(180, 22%, 10%) 50%, rgba(212, 175, 55, 0.05) 100%);
+}
+
+.dark .bg-emotion-reflection {
+  background: linear-gradient(135deg, rgba(200, 162, 200, 0.08) 0%, hsl(180, 22%, 10%) 50%, rgba(143, 191, 159, 0.05) 100%);
+}
+
+.dark .bg-emotion-healing {
+  background: linear-gradient(135deg, rgba(244, 199, 195, 0.1) 0%, hsl(180, 22%, 10%) 50%, rgba(143, 191, 159, 0.08) 100%);
+}
+
+.dark .bg-emotion-focus {
+  background: linear-gradient(135deg, rgba(90, 138, 110, 0.08) 0%, hsl(180, 22%, 10%) 50%, rgba(70, 130, 180, 0.05) 100%);
+}
+
+/* Animated Gradient Background */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.bg-emotion-animated {
+  background: linear-gradient(-45deg, rgba(143, 191, 159, 0.15), rgba(244, 199, 195, 0.15), rgba(212, 175, 55, 0.1), rgba(173, 216, 230, 0.1));
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-emotion-animated {
+    animation: none;
+    background-size: 100% 100%;
+  }
+}
+
 /* Button styles */
 .btn {
   display: inline-flex;

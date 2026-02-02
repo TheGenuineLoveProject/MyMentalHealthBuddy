@@ -1,6 +1,17 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { useLocation } from "wouter";
 import { useEmotion } from "../context/EmotionContext";
-import { Volume2, VolumeX, Flower2 } from "lucide-react";
+import { Volume2, VolumeX, Flower2, X, Sparkles } from "lucide-react";
+
+const VISIBLE_ROUTES = ['/journal', '/dashboard', '/ai-companion', '/chat', '/mood', '/insights', '/progress'];
+
+const WELLNESS_TIPS = [
+  "Take a moment to breathe. You're doing beautifully.",
+  "Journaling helps process emotions. Try writing 3 things you're grateful for.",
+  "Your thoughts are just visitors. You can choose which ones to invite in.",
+  "Be gentle with yourself today. Healing takes time.",
+  "Every step forward, no matter how small, is progress.",
+];
 
 const VOICE_AFFIRMATIONS = {
   journal_saved: [
@@ -31,12 +42,25 @@ const VOICE_AFFIRMATIONS = {
 };
 
 export default function LotusGuide({ className = "" }) {
+  const [location] = useLocation();
   const { currentEmotion } = useEmotion();
   const [isActive, setIsActive] = useState(false);
   const [voiceEnabled, setVoiceEnabled] = useState(true);
   const [lastSpokenEmotion, setLastSpokenEmotion] = useState(null);
+  const [showTip, setShowTip] = useState(false);
+  const [currentTip, setCurrentTip] = useState(0);
+  const [isDismissed, setIsDismissed] = useState(false);
   const hasSpokenWelcome = useRef(false);
   const synth = useRef(null);
+
+  const shouldShow = VISIBLE_ROUTES.some(route => location.startsWith(route));
+
+  useEffect(() => {
+    const dismissed = sessionStorage.getItem('lotus-dismissed');
+    if (dismissed) setIsDismissed(true);
+  }, []);
+
+  if (!shouldShow || isDismissed) return null;
 
   useEffect(() => {
     if (typeof window !== "undefined" && "speechSynthesis" in window) {
@@ -104,17 +128,57 @@ export default function LotusGuide({ className = "" }) {
     window.lotusGuide = { speakJournalSaved };
   }
 
+  const handleDismiss = () => {
+    setIsDismissed(true);
+    sessionStorage.setItem('lotus-dismissed', 'true');
+  };
+
+  const handleShowTip = () => {
+    setShowTip(!showTip);
+    if (!showTip) {
+      setCurrentTip(Math.floor(Math.random() * WELLNESS_TIPS.length));
+    }
+  };
+
   return (
     <div 
       className={`fixed bottom-24 right-6 z-30 ${className}`}
       data-testid="lotus-guide"
+      role="complementary"
+      aria-label="Lotus wellness guide"
     >
+      {showTip && (
+        <div 
+          className="absolute bottom-20 right-0 w-64 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-4 mb-2 animate-in fade-in slide-in-from-bottom-2"
+          data-testid="lotus-tip-panel"
+        >
+          <div className="flex justify-between items-start mb-2">
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-amber-500" />
+              <span className="text-xs font-medium text-gray-600 dark:text-gray-300">Wellness Tip</span>
+            </div>
+            <button
+              onClick={handleDismiss}
+              className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+              aria-label="Dismiss lotus guide"
+              data-testid="button-dismiss-lotus"
+            >
+              <X className="w-3 h-3 text-gray-400" />
+            </button>
+          </div>
+          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            {WELLNESS_TIPS[currentTip]}
+          </p>
+        </div>
+      )}
+
       <div className="relative">
         <button
-          onClick={() => setVoiceEnabled(!voiceEnabled)}
+          onClick={handleShowTip}
+          onDoubleClick={() => setVoiceEnabled(!voiceEnabled)}
           className={`
             w-14 h-14 rounded-full flex items-center justify-center
-            transition-all duration-300 shadow-lg
+            transition-all duration-300 shadow-lg glow-healing
             ${isActive 
               ? "bg-gradient-to-br from-[var(--glp-gold)] to-[var(--glp-sage)] animate-pulse scale-110" 
               : "bg-gradient-to-br from-[var(--glp-sage)] to-[var(--glp-teal)]"
@@ -123,7 +187,7 @@ export default function LotusGuide({ className = "" }) {
             hover:scale-110 focus-visible:outline-none focus-visible:ring-2 
             focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2
           `}
-          aria-label={voiceEnabled ? "Disable Lotus Guide voice" : "Enable Lotus Guide voice"}
+          aria-label="Show wellness tip (double-click to toggle voice)"
           data-testid="button-toggle-lotus-voice"
         >
           <Flower2 
