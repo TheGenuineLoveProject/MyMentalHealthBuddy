@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Bell, BellOff, Mail, Smartphone, Clock, Save, Check } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Bell, BellOff, Mail, Smartphone, Clock, Save, Check, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Switch } from "@/components/ui/Switch";
 import { Label } from "@/components/ui/Label";
+import { useToast } from "@/hooks/use-toast";
 
 const NOTIFICATION_SETTINGS = [
   {
@@ -41,6 +42,7 @@ const NOTIFICATION_SETTINGS = [
 ];
 
 export default function NotificationPreferences() {
+  const { toast } = useToast();
   const [settings, setSettings] = useState({
     email_enabled: true,
     push_enabled: false,
@@ -53,15 +55,59 @@ export default function NotificationPreferences() {
     quiet_hours_end: "08:00"
   });
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const res = await fetch("/api/user-settings", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.preferences?.notifications) {
+            setSettings(prev => ({ ...prev, ...data.preferences.notifications }));
+          }
+        }
+      } catch {
+        const cached = localStorage.getItem("glp_notification_prefs");
+        if (cached) setSettings(JSON.parse(cached));
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadSettings();
+  }, []);
 
   const toggleSetting = (key) => {
     setSettings(prev => ({ ...prev, [key]: !prev[key] }));
     setSaved(false);
   };
 
-  const handleSave = () => {
-    localStorage.setItem("glp_notification_prefs", JSON.stringify(settings));
-    setSaved(true);
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/user-settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ preferences: { notifications: settings } })
+      });
+      
+      if (res.ok) {
+        setSaved(true);
+        toast({ title: "Preferences saved", description: "Your notification settings are updated." });
+      } else {
+        localStorage.setItem("glp_notification_prefs", JSON.stringify(settings));
+        setSaved(true);
+        toast({ title: "Saved locally", description: "Log in to sync across devices." });
+      }
+    } catch {
+      localStorage.setItem("glp_notification_prefs", JSON.stringify(settings));
+      setSaved(true);
+      toast({ title: "Saved locally", description: "Settings saved to this device." });
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -85,6 +131,15 @@ export default function NotificationPreferences() {
           </p>
         </header>
 
+        {loading ? (
+          <Card className="mb-6">
+            <CardContent className="py-12 text-center">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">Loading your preferences...</p>
+            </CardContent>
+          </Card>
+        ) : (
+        <>
         <Card className="mb-6">
           <CardHeader>
             <CardTitle className="text-lg">Notification Channels</CardTitle>
@@ -189,11 +244,13 @@ export default function NotificationPreferences() {
               </span>
             )}
           </div>
-          <Button onClick={handleSave} data-testid="button-save">
-            <Save className="w-4 h-4 mr-2" />
-            Save Preferences
+          <Button onClick={handleSave} disabled={saving} data-testid="button-save">
+            {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+            {saving ? "Saving..." : "Save Preferences"}
           </Button>
         </div>
+        </>
+        )}
       </main>
 
       <SafetyFooter />

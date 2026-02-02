@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Map, ArrowLeft, Plus, X, Save, Check } from "lucide-react";
+import { Map, ArrowLeft, Plus, X, Save, Check, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
 
 const MEANING_PROMPTS = [
   { category: "Purpose", question: "What activities make you lose track of time?" },
@@ -17,11 +18,43 @@ const MEANING_PROMPTS = [
 ];
 
 export default function MeaningMap() {
+  const { toast } = useToast();
   const [answers, setAnswers] = useState({});
   const [coreValues, setCoreValues] = useState([]);
   const [newValue, setNewValue] = useState("");
   const [meaningStatement, setMeaningStatement] = useState("");
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const res = await fetch("/api/wellness-tools/meaning-map/latest", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.data) {
+            setMeaningStatement(data.data.text || "");
+            const tags = data.data.tags ? JSON.parse(data.data.tags) : [];
+            setCoreValues(tags);
+            const snapshot = data.data.stateSnapshot ? JSON.parse(data.data.stateSnapshot) : {};
+            setAnswers(snapshot.answers || {});
+          }
+        }
+      } catch {
+        const cached = localStorage.getItem("glp_meaning_map");
+        if (cached) {
+          const { answers: a, coreValues: cv, meaningStatement: ms } = JSON.parse(cached);
+          setAnswers(a || {});
+          setCoreValues(cv || []);
+          setMeaningStatement(ms || "");
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
 
   const addValue = () => {
     if (newValue.trim() && coreValues.length < 5) {
@@ -41,11 +74,40 @@ export default function MeaningMap() {
     setSaved(false);
   };
 
-  const handleSave = () => {
-    const map = { answers, coreValues, meaningStatement, savedAt: new Date().toISOString() };
-    localStorage.setItem("glp_meaning_map", JSON.stringify(map));
-    setSaved(true);
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/wellness-tools/meaning-map", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ answers, coreValues, meaningStatement })
+      });
+      
+      if (res.ok) {
+        setSaved(true);
+        toast({ title: "Meaning map saved", description: "Your reflections are safely stored." });
+      } else {
+        localStorage.setItem("glp_meaning_map", JSON.stringify({ answers, coreValues, meaningStatement }));
+        toast({ title: "Saved locally", description: "Log in to save to your account.", variant: "default" });
+        setSaved(true);
+      }
+    } catch {
+      localStorage.setItem("glp_meaning_map", JSON.stringify({ answers, coreValues, meaningStatement }));
+      toast({ title: "Saved locally", description: "Your work is saved on this device." });
+      setSaved(true);
+    } finally {
+      setSaving(false);
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-muted-foreground" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-background dark:from-amber-900/10 dark:to-background">
@@ -160,13 +222,16 @@ export default function MeaningMap() {
             {saved && (
               <span className="text-green-600 dark:text-green-400 flex items-center gap-1 text-sm" role="status" aria-live="polite">
                 <Check className="w-4 h-4" aria-hidden="true" />
-                Saved to device
+                Saved
               </span>
             )}
           </div>
-          <Button onClick={handleSave} data-testid="button-save" aria-label="Save your meaning map" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-            <Save className="w-4 h-4 mr-2" aria-hidden="true" />
-            Save My Map
+          <Button onClick={handleSave} disabled={saving} data-testid="button-save" aria-label="Save your meaning map" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+            {saving ? (
+              <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" aria-hidden="true" />Saving...</>
+            ) : (
+              <><Save className="w-4 h-4 mr-2" aria-hidden="true" />Save My Map</>
+            )}
           </Button>
         </div>
       </main>

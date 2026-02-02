@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Feather, ArrowLeft, Save, Download, Trash2, AlertTriangle } from "lucide-react";
+import { Feather, ArrowLeft, Save, Download, Trash2, AlertTriangle, Loader2, Check } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/Input";
+import { useToast } from "@/hooks/use-toast";
+
+const STORAGE_KEY = "glp_grief_letter_draft";
 
 const PROMPTS = [
   "What I wish I could tell you...",
@@ -17,15 +20,53 @@ const PROMPTS = [
 ];
 
 export default function GriefLetter() {
+  const { toast } = useToast();
   const [recipient, setRecipient] = useState("");
   const [letterContent, setLetterContent] = useState("");
   const [savedLocally, setSavedLocally] = useState(false);
+  const [saving, setSaving] = useState(false);
 
-  const handleSave = () => {
-    if (letterContent.trim()) {
-      const key = `glp_grief_letter_${Date.now()}`;
-      localStorage.setItem(key, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() }));
+  useEffect(() => {
+    const cached = localStorage.getItem(STORAGE_KEY);
+    if (cached) {
+      try {
+        const data = JSON.parse(cached);
+        if (data.recipient) setRecipient(data.recipient);
+        if (data.content) setLetterContent(data.content);
+      } catch {}
+    }
+  }, []);
+
+  const handleSave = async () => {
+    if (!letterContent.trim() || letterContent.trim().length < 10) {
+      toast({ title: "Please write a bit more", description: "Your letter should have at least 10 characters.", variant: "destructive" });
+      return;
+    }
+    
+    setSaving(true);
+    try {
+      const res = await fetch("/api/wellness-tools/grief-letter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ recipient, content: letterContent })
+      });
+      
+      if (res.ok) {
+        setSavedLocally(true);
+        localStorage.removeItem(STORAGE_KEY);
+        toast({ title: "Letter saved", description: "Your words are safely stored." });
+      } else {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() }));
+        setSavedLocally(true);
+        toast({ title: "Saved locally", description: "Log in to save to your account." });
+      }
+    } catch {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() }));
       setSavedLocally(true);
+      toast({ title: "Saved locally", description: "Your letter is saved on this device." });
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -34,6 +75,7 @@ export default function GriefLetter() {
       setRecipient("");
       setLetterContent("");
       setSavedLocally(false);
+      localStorage.removeItem(STORAGE_KEY);
     }
   };
 
@@ -131,19 +173,23 @@ export default function GriefLetter() {
 
           <div className="flex gap-2 items-center">
             {savedLocally && (
-              <span className="text-sm text-green-600 dark:text-green-400 flex items-center" role="status" aria-live="polite">
-                Saved locally
+              <span className="text-sm text-green-600 dark:text-green-400 flex items-center gap-1" role="status" aria-live="polite">
+                <Check className="w-4 h-4" aria-hidden="true" />
+                Saved
               </span>
             )}
-            <Button onClick={handleSave} disabled={!letterContent.trim()} data-testid="button-save" aria-label="Save letter to device" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-              <Save className="w-4 h-4 mr-2" aria-hidden="true" />
-              Save to Device
+            <Button onClick={handleSave} disabled={!letterContent.trim() || saving} data-testid="button-save" aria-label="Save letter" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+              {saving ? (
+                <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" aria-hidden="true" />Saving...</>
+              ) : (
+                <><Save className="w-4 h-4 mr-2" aria-hidden="true" />Save Letter</>
+              )}
             </Button>
           </div>
         </div>
 
         <p className="text-center text-xs text-muted-foreground mt-8">
-          Your words stay private on your device. We never store or read your letters.
+          Your words are private and safely stored.
         </p>
       </main>
 

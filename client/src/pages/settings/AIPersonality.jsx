@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { Bot, Heart, Sparkles, Brain, Shield, Save, Check } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Bot, Heart, Sparkles, Brain, Shield, Save, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
+import { useToast } from "@/hooks/use-toast";
 
 const personalities = [
   {
@@ -48,6 +49,7 @@ const responseLength = [
 ];
 
 export default function AIPersonality() {
+  const { toast } = useToast();
   const [settings, setSettings] = useState({
     personality: "compassionate",
     style: "casual",
@@ -56,10 +58,57 @@ export default function AIPersonality() {
     useAffirmations: true
   });
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const handleSave = () => {
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+  useEffect(() => {
+    const loadSettings = async () => {
+      try {
+        const res = await fetch("/api/user-settings", { credentials: "include" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.preferences?.aiPersonality) {
+            setSettings(prev => ({ ...prev, ...data.preferences.aiPersonality }));
+          }
+        }
+      } catch {
+        const cached = localStorage.getItem("glp_ai_personality");
+        if (cached) setSettings(JSON.parse(cached));
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadSettings();
+  }, []);
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/user-settings", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ preferences: { aiPersonality: settings } })
+      });
+      
+      if (res.ok) {
+        setSaved(true);
+        toast({ title: "Settings saved", description: "Your AI companion preferences are updated." });
+        setTimeout(() => setSaved(false), 3000);
+      } else {
+        localStorage.setItem("glp_ai_personality", JSON.stringify(settings));
+        setSaved(true);
+        toast({ title: "Saved locally", description: "Log in to sync across devices." });
+        setTimeout(() => setSaved(false), 3000);
+      }
+    } catch {
+      localStorage.setItem("glp_ai_personality", JSON.stringify(settings));
+      setSaved(true);
+      toast({ title: "Saved locally", description: "Settings saved to this device." });
+      setTimeout(() => setSaved(false), 3000);
+    } finally {
+      setSaving(false);
+    }
   };
 
   const selectedPersonality = personalities.find(p => p.id === settings.personality);
@@ -81,6 +130,15 @@ export default function AIPersonality() {
           </div>
         </header>
 
+        {loading ? (
+          <Card className="mb-6">
+            <CardContent className="py-12 text-center">
+              <Loader2 className="w-8 h-8 animate-spin mx-auto text-muted-foreground mb-4" />
+              <p className="text-muted-foreground">Loading your settings...</p>
+            </CardContent>
+          </Card>
+        ) : (
+        <>
         <Card className="mb-6">
           <CardHeader>
             <CardTitle>Personality Style</CardTitle>
@@ -192,8 +250,12 @@ export default function AIPersonality() {
           </CardContent>
         </Card>
 
-        <Button onClick={handleSave} className="w-full min-h-[44px]" data-testid="button-save">
-          {saved ? (
+        <Button onClick={handleSave} disabled={saving} className="w-full min-h-[44px]" data-testid="button-save">
+          {saving ? (
+            <>
+              <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Saving...
+            </>
+          ) : saved ? (
             <>
               <Check className="w-4 h-4 mr-2" /> Saved!
             </>
@@ -203,6 +265,8 @@ export default function AIPersonality() {
             </>
           )}
         </Button>
+        </>
+        )}
       </main>
     </div>
   );

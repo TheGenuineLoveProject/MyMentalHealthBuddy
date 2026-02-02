@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { Calendar, ChevronRight, Save, Sparkles } from "lucide-react";
+import { Calendar, ChevronRight, Save, Sparkles, Loader2, Check, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
+import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
 
 const questions = [
   { id: "highlight", label: "What was the highlight of your week?", placeholder: "A moment that brought you joy..." },
@@ -13,9 +15,12 @@ const questions = [
 ];
 
 export default function WeeklyReflection() {
+  const { toast } = useToast();
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [isComplete, setIsComplete] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const currentQuestion = questions[currentStep];
 
@@ -33,18 +38,40 @@ export default function WeeklyReflection() {
     }
   };
 
-  const handleSave = () => {
-    // Reflection is displayed to the user; future: persist to /api/reflections
-  };
-
   const getWeekRange = () => {
     const now = new Date();
     const start = new Date(now);
     start.setDate(now.getDate() - now.getDay());
     const end = new Date(start);
     end.setDate(start.getDate() + 6);
-    
     return `${start.toLocaleDateString("en-US", { month: "short", day: "numeric" })} - ${end.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
+  };
+
+  const handleSave = async () => {
+    setSaving(true);
+    try {
+      const res = await fetch("/api/wellness-tools/weekly-reflection", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ answers, weekRange: getWeekRange() })
+      });
+      
+      if (res.ok) {
+        setSaved(true);
+        toast({ title: "Reflection saved", description: "Your weekly reflection is safely stored." });
+      } else {
+        localStorage.setItem(`glp_weekly_${Date.now()}`, JSON.stringify({ answers, weekRange: getWeekRange() }));
+        setSaved(true);
+        toast({ title: "Saved locally", description: "Log in to save to your account." });
+      }
+    } catch {
+      localStorage.setItem(`glp_weekly_${Date.now()}`, JSON.stringify({ answers, weekRange: getWeekRange() }));
+      setSaved(true);
+      toast({ title: "Saved locally", description: "Your reflection is saved on this device." });
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (isComplete) {
@@ -75,8 +102,14 @@ export default function WeeklyReflection() {
                 <Button variant="outline" onClick={() => { setIsComplete(false); setCurrentStep(0); }} className="flex-1 min-h-[44px]">
                   Edit Answers
                 </Button>
-                <Button onClick={handleSave} className="flex-1 min-h-[44px]" data-testid="button-save">
-                  <Save className="w-4 h-4 mr-2" /> Save Reflection
+                <Button onClick={handleSave} disabled={saving || saved} className="flex-1 min-h-[44px]" data-testid="button-save">
+                  {saving ? (
+                    <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" /> Saving...</>
+                  ) : saved ? (
+                    <><Check className="w-4 h-4 mr-2" /> Saved</>
+                  ) : (
+                    <><Save className="w-4 h-4 mr-2" /> Save Reflection</>
+                  )}
                 </Button>
               </div>
             </CardContent>

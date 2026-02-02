@@ -1,7 +1,7 @@
 import express from "express";
 import { db } from "../db/connection.mjs";
-import { valuesEntries, boundaryScripts, movementLogs, coherenceEntries } from "../../shared/schema.mjs";
-import { eq, desc } from "drizzle-orm";
+import { valuesEntries, boundaryScripts, movementLogs, coherenceEntries, reflections } from "../../shared/schema.mjs";
+import { eq, and, desc } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
@@ -211,6 +211,178 @@ router.post("/coherence", requireAuth, async (req, res) => {
   } catch (error) {
     logger.error("Failed to save coherence entry:", error);
     return badRequest(res, "Failed to save coherence entry");
+  }
+});
+
+/* =====================================================
+ * MEANING MAP
+ * =====================================================
+ */
+
+router.get("/meaning-map", requireAuth, async (req, res) => {
+  try {
+    const entries = await db
+      .select()
+      .from(reflections)
+      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "meaning-map")))
+      .orderBy(desc(reflections.createdAt))
+      .limit(10);
+    
+    return success(res, entries);
+  } catch (error) {
+    logger.error("Failed to fetch meaning map entries:", error);
+    return badRequest(res, "Failed to fetch meaning map entries");
+  }
+});
+
+router.get("/meaning-map/latest", requireAuth, async (req, res) => {
+  try {
+    const [entry] = await db
+      .select()
+      .from(reflections)
+      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "meaning-map")))
+      .orderBy(desc(reflections.createdAt))
+      .limit(1);
+    
+    return success(res, entry || null);
+  } catch (error) {
+    logger.error("Failed to fetch latest meaning map:", error);
+    return badRequest(res, "Failed to fetch meaning map");
+  }
+});
+
+router.post("/meaning-map", requireAuth, async (req, res) => {
+  try {
+    const { answers, coreValues, meaningStatement } = req.body;
+    
+    const [entry] = await db
+      .insert(reflections)
+      .values({
+        userId: req.user.id,
+        text: meaningStatement || "",
+        mode: "meaning-map",
+        tags: JSON.stringify(coreValues || []),
+        stateSnapshot: JSON.stringify({ answers: answers || {} }),
+      })
+      .returning();
+    
+    return success(res, entry, 201);
+  } catch (error) {
+    logger.error("Failed to save meaning map:", error);
+    return badRequest(res, "Failed to save meaning map");
+  }
+});
+
+/* =====================================================
+ * GRIEF LETTER
+ * =====================================================
+ */
+
+router.get("/grief-letter", requireAuth, async (req, res) => {
+  try {
+    const entries = await db
+      .select()
+      .from(reflections)
+      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "grief-letter")))
+      .orderBy(desc(reflections.createdAt))
+      .limit(20);
+    
+    return success(res, entries);
+  } catch (error) {
+    logger.error("Failed to fetch grief letters:", error);
+    return badRequest(res, "Failed to fetch grief letters");
+  }
+});
+
+router.post("/grief-letter", requireAuth, async (req, res) => {
+  try {
+    const { recipient, content } = req.body;
+    
+    if (!content || content.trim().length < 10) {
+      return badRequest(res, "Letter content is required (at least 10 characters)");
+    }
+    
+    const [entry] = await db
+      .insert(reflections)
+      .values({
+        userId: req.user.id,
+        text: content.trim(),
+        mode: "grief-letter",
+        tags: recipient ? JSON.stringify({ recipient }) : null,
+      })
+      .returning();
+    
+    return success(res, entry, 201);
+  } catch (error) {
+    logger.error("Failed to save grief letter:", error);
+    return badRequest(res, "Failed to save grief letter");
+  }
+});
+
+router.delete("/grief-letter/:id", requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const [existing] = await db
+      .select()
+      .from(reflections)
+      .where(and(eq(reflections.id, id), eq(reflections.userId, req.user.id)))
+      .limit(1);
+    
+    if (!existing) {
+      return badRequest(res, "Letter not found", 404);
+    }
+    
+    await db.delete(reflections).where(eq(reflections.id, id));
+    return success(res, { message: "Letter deleted" });
+  } catch (error) {
+    logger.error("Failed to delete grief letter:", error);
+    return badRequest(res, "Failed to delete grief letter");
+  }
+});
+
+/* =====================================================
+ * WEEKLY REFLECTION
+ * =====================================================
+ */
+
+router.get("/weekly-reflection", requireAuth, async (req, res) => {
+  try {
+    const entries = await db
+      .select()
+      .from(reflections)
+      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "weekly-reflection")))
+      .orderBy(desc(reflections.createdAt))
+      .limit(12);
+    
+    return success(res, entries);
+  } catch (error) {
+    logger.error("Failed to fetch weekly reflections:", error);
+    return badRequest(res, "Failed to fetch weekly reflections");
+  }
+});
+
+router.post("/weekly-reflection", requireAuth, async (req, res) => {
+  try {
+    const { answers, weekRange } = req.body;
+    
+    if (!answers || Object.keys(answers).length === 0) {
+      return badRequest(res, "Reflection answers are required");
+    }
+    
+    const [entry] = await db
+      .insert(reflections)
+      .values({
+        userId: req.user.id,
+        text: JSON.stringify(answers),
+        mode: "weekly-reflection",
+        tags: weekRange ? JSON.stringify({ weekRange }) : null,
+      })
+      .returning();
+    
+    return success(res, entry, 201);
+  } catch (error) {
+    logger.error("Failed to save weekly reflection:", error);
+    return badRequest(res, "Failed to save weekly reflection");
   }
 });
 
