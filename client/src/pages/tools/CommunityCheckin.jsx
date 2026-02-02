@@ -19,6 +19,8 @@ const CHECK_IN_PROMPTS = [
   "Something I'm grateful for in this community..."
 ];
 
+const MAX_LENGTH = 500;
+
 export default function CommunityCheckin() {
   const { toast } = useToast();
   const [currentPrompt, setCurrentPrompt] = useState(CHECK_IN_PROMPTS[0]);
@@ -26,16 +28,22 @@ export default function CommunityCheckin() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [recentReflections, setRecentReflections] = useState([]);
+  const [loadingReflections, setLoadingReflections] = useState(true);
 
   useEffect(() => {
     const fetchReflections = async () => {
+      setLoadingReflections(true);
       try {
         const res = await fetch("/api/community/reflections", { credentials: "include" });
         if (res.ok) {
           const data = await res.json();
           setRecentReflections(data.slice(0, 3));
         }
-      } catch {}
+      } catch {
+        console.error("Failed to load reflections");
+      } finally {
+        setLoadingReflections(false);
+      }
     };
     fetchReflections();
   }, [submitted]);
@@ -48,10 +56,13 @@ export default function CommunityCheckin() {
   };
 
   const handleSubmit = async () => {
-    if (!response.trim() || response.length < 10) {
+    const trimmed = response.trim();
+    if (!trimmed || trimmed.length < 10) {
       toast({ title: "Please share a bit more", description: "Your reflection should be at least 10 characters.", variant: "destructive" });
       return;
     }
+    
+    const content = `${currentPrompt} ${trimmed}`.slice(0, MAX_LENGTH);
     
     setSubmitting(true);
     try {
@@ -59,11 +70,12 @@ export default function CommunityCheckin() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ content: `${currentPrompt} ${response}` })
+        body: JSON.stringify({ content })
       });
       
       if (res.ok) {
         setSubmitted(true);
+        setResponse("");
         toast({ title: "Shared with community", description: "Thank you for opening up." });
       } else {
         const data = await res.json();
@@ -173,7 +185,11 @@ export default function CommunityCheckin() {
             <p className="text-sm text-muted-foreground mb-4">
               Recent shares from our community. Names are never shown.
             </p>
-            {recentReflections.length > 0 ? (
+            {loadingReflections ? (
+              <div className="flex items-center justify-center py-6">
+                <Loader2 className="w-5 h-5 animate-spin motion-reduce:animate-none text-muted-foreground" />
+              </div>
+            ) : recentReflections.length > 0 ? (
               recentReflections.map((r, i) => (
                 <div key={r.id || i} className="p-4 bg-muted/50 rounded-lg">
                   <p className="text-foreground mb-2">"{r.content}"</p>
