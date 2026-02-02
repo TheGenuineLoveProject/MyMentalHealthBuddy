@@ -38,6 +38,8 @@ const Premium = lazy(() => import("./pages/Premium.jsx"));
 const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
+const About = lazy(() => import("./pages/About.jsx"));
+const Privacy = lazy(() => import("./pages/Privacy.jsx"));
 const Upgrade = lazy(() => import("./pages/Upgrade.jsx"));
 const Onboarding = lazy(() => import("./pages/Onboarding.tsx"));
 const Profile = lazy(() => import("./pages/Profile.jsx"));
@@ -671,6 +673,8 @@ export default function App() {
               <Route path="/support">{() => <ConfigRoute route="/support" />}</Route>
               <Route path="/resources">{() => <ConfigRoute route="/resources" />}</Route>
               <Route path="/contact"><Contact /></Route>
+              <Route path="/about"><About /></Route>
+              <Route path="/privacy"><Privacy /></Route>
               <Route path="/help">{() => <ConfigRoute route="/help" />}</Route>
               <Route path="/support/guides">{() => <ConfigRoute route="/support/guides" />}</Route>
               <Route path="/support/feedback">{() => <ConfigRoute route="/support/feedback" />}</Route>

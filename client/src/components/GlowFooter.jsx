@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Heart, Sparkles, Mail } from "lucide-react";
 
 const SACRED_QUOTES = [
+  "Healing is the new success.",
   "Live in Genuine Love",
   "Healing is not linear, but it is always forward",
   "You are worthy of the peace you seek",
@@ -14,12 +15,11 @@ export default function GlowFooter({ className = "" }) {
   const currentYear = new Date().getFullYear();
 
   const footerLinks = [
-    { href: "/", label: "Home" },
-    { href: "/wellness", label: "Wellness" },
-    { href: "/tools", label: "Tools" },
-    { href: "/crisis", label: "Crisis Support" },
+    { href: "/about", label: "About" },
     { href: "/privacy", label: "Privacy" },
-    { href: "/terms", label: "Terms" }
+    { href: "/contact", label: "Contact" },
+    { href: "/journal", label: "Journal" },
+    { href: "/crisis", label: "Crisis Support" }
   ];
 
   return (
