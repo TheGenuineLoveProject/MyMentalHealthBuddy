@@ -15,21 +15,21 @@ export default function About() {
             <span>Back to Home</span>
           </Link>
 
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#8fbf9f] to-[#2f5d5d] mb-6 shadow-lg">
+          <div className="text-center mb-12" data-testid="about-header">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#8fbf9f] to-[#2f5d5d] mb-6 shadow-lg" aria-hidden="true">
               <Flower2 className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4" data-testid="text-about-title">
               About The Genuine Love Project
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto" data-testid="text-about-subtitle">
               A sacred space for healing, self-discovery, and genuine transformation.
             </p>
           </div>
 
-          <div className="bg-card/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-border/50 shadow-xl mb-12">
-            <h2 className="text-2xl font-serif font-semibold text-foreground mb-6 flex items-center gap-3">
-              <Heart className="w-6 h-6 text-[#e8a5b3]" />
+          <div className="bg-card/80 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-border/50 shadow-xl mb-12" data-testid="card-mission">
+            <h2 className="text-2xl font-serif font-semibold text-foreground mb-6 flex items-center gap-3" data-testid="text-mission-title">
+              <Heart className="w-6 h-6 text-[#e8a5b3]" aria-hidden="true" />
               Our Mission
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
@@ -40,9 +40,9 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8fbf9f]/20 mb-4">
+          <div className="grid md:grid-cols-3 gap-6 mb-12" data-testid="about-features-grid">
+            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg text-center" data-testid="card-feature-safe">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#8fbf9f]/20 mb-4" aria-hidden="true">
                 <Shield className="w-7 h-7 text-[#8fbf9f]" />
               </div>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-2">Safe & Private</h3>
@@ -51,8 +51,8 @@ export default function About() {
               </p>
             </div>
 
-            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#d4af37]/20 mb-4">
+            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg text-center" data-testid="card-feature-ai">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#d4af37]/20 mb-4" aria-hidden="true">
                 <Sparkles className="w-7 h-7 text-[#d4af37]" />
               </div>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-2">AI-Powered Guidance</h3>
@@ -61,8 +61,8 @@ export default function About() {
               </p>
             </div>
 
-            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg text-center">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#e8a5b3]/20 mb-4">
+            <div className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 border border-border/50 shadow-lg text-center" data-testid="card-feature-community">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#e8a5b3]/20 mb-4" aria-hidden="true">
                 <Users className="w-7 h-7 text-[#e8a5b3]" />
               </div>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-2">Community Care</h3>
@@ -72,11 +72,11 @@ export default function About() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-[#8fbf9f]/10 to-[#2f5d5d]/10 rounded-3xl p-8 md:p-12 border border-[#8fbf9f]/20 text-center">
-            <blockquote className="text-2xl md:text-3xl font-serif italic text-foreground mb-4">
+          <div className="bg-gradient-to-br from-[#8fbf9f]/10 to-[#2f5d5d]/10 rounded-3xl p-8 md:p-12 border border-[#8fbf9f]/20 text-center" data-testid="card-quote">
+            <blockquote className="text-2xl md:text-3xl font-serif italic text-foreground mb-4" data-testid="text-quote-main">
               "Healing is the new success."
             </blockquote>
-            <p className="text-muted-foreground">
+            <p className="text-muted-foreground" data-testid="text-quote-attribution">
               — The Genuine Love Project
             </p>
           </div>

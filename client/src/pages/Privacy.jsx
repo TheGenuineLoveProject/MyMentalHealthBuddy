@@ -15,25 +15,25 @@ export default function Privacy() {
             <span>Back to Home</span>
           </Link>
 
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#8fbf9f] to-[#2f5d5d] mb-6 shadow-lg">
+          <div className="text-center mb-12" data-testid="privacy-header">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#8fbf9f] to-[#2f5d5d] mb-6 shadow-lg" aria-hidden="true">
               <Shield className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
+            <h1 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4" data-testid="text-privacy-title">
               Privacy Policy
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto" data-testid="text-privacy-subtitle">
               Your healing journey is sacred. We protect it with care.
             </p>
-            <p className="text-sm text-muted-foreground mt-4">
+            <p className="text-sm text-muted-foreground mt-4" data-testid="text-privacy-updated">
               Last updated: February 2, 2026
             </p>
           </div>
 
-          <div className="space-y-8">
-            <section className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-border/50 shadow-lg">
+          <div className="space-y-8" data-testid="privacy-sections">
+            <section className="bg-card/80 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-border/50 shadow-lg" data-testid="card-info-collect">
               <h2 className="text-xl font-serif font-semibold text-foreground mb-4 flex items-center gap-3">
-                <Lock className="w-5 h-5 text-[#8fbf9f]" />
+                <Lock className="w-5 h-5 text-[#8fbf9f]" aria-hidden="true" />
                 Information We Collect
               </h2>
               <div className="text-muted-foreground space-y-4">

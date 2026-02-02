@@ -67,14 +67,14 @@ export default function GlowFooter({ className = "" }) {
           aria-label="Footer navigation"
         >
           {footerLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <span 
-                className="text-sm transition-colors hover:text-[#2f5d5d] cursor-pointer"
-                style={{ color: 'rgba(58, 58, 58, 0.7)' }}
-                data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
-              >
-                {link.label}
-              </span>
+            <Link 
+              key={link.href} 
+              href={link.href}
+              className="text-sm transition-colors hover:text-[#2f5d5d] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8fbf9f] focus-visible:ring-offset-2 rounded px-1"
+              style={{ color: 'rgba(58, 58, 58, 0.7)' }}
+              data-testid={`link-footer-${link.label.toLowerCase().replace(' ', '-')}`}
+            >
+              {link.label}
             </Link>
           ))}
         </nav>
