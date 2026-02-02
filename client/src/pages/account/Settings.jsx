@@ -230,7 +230,9 @@ export default function Settings() {
                       <p className="text-caption">Update your account password</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" data-testid="button-change-password">Change</Button>
+                  <Link href="/account/security">
+                    <Button variant="outline" size="sm" data-testid="button-change-password">Change</Button>
+                  </Link>
                 </div>
                 <div className="flex items-center justify-between p-4 rounded-xl bg-[var(--sage-50)]">
                   <div className="flex items-center gap-3">
@@ -240,7 +242,9 @@ export default function Settings() {
                       <p className="text-caption">Manage how your data is used</p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm" data-testid="button-data-privacy">Manage</Button>
+                  <Link href="/preferences/safety">
+                    <Button variant="outline" size="sm" data-testid="button-data-privacy">Manage</Button>
+                  </Link>
                 </div>
               </div>
             </section>
@@ -255,9 +259,11 @@ export default function Settings() {
               <p className="text-body-sm text-[var(--blush-600)] mb-4">
                 Once you delete your account, there is no going back. Please be certain.
               </p>
-              <Button variant="destructive" size="sm" data-testid="button-delete-account">
-                Delete Account
-              </Button>
+              <Link href="/account/delete">
+                <Button variant="destructive" size="sm" data-testid="button-delete-account">
+                  Delete Account
+                </Button>
+              </Link>
             </section>
 
             <div className="flex items-center justify-between pt-4">

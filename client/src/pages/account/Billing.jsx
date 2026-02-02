@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
   CreditCard, ArrowLeft, Check, Crown, Zap, Star,
-  Download, Calendar, Shield, Sparkles, ArrowRight
+  Download, Calendar, Shield, Sparkles, ArrowRight, Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const PLANS = [
   {
@@ -40,11 +43,23 @@ const PLANS = [
   }
 ];
 
-const INVOICES = [
-  { id: "INV-001", date: "Jan 1, 2026", amount: "$12.00", status: "Paid" },
-  { id: "INV-002", date: "Dec 1, 2025", amount: "$12.00", status: "Paid" },
-  { id: "INV-003", date: "Nov 1, 2025", amount: "$12.00", status: "Paid" }
-];
+const formatDate = (dateStr) => {
+  if (!dateStr) return "N/A";
+  try {
+    return new Date(dateStr).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    });
+  } catch {
+    return "N/A";
+  }
+};
+
+const formatAmount = (cents) => {
+  if (!cents) return "$0.00";
+  return `$${(cents / 100).toFixed(2)}`;
+};
 
 export default function Billing() {
   useSEO({
@@ -52,8 +67,71 @@ export default function Billing() {
     description: "Manage your subscription plan and view your billing history.",
     noIndex: true
   });
-
+  
+  const { toast } = useToast();
   const [selectedPlan, setSelectedPlan] = useState("premium");
+  const [upgradingPlan, setUpgradingPlan] = useState(null);
+
+  const { data: subscriptionData } = useQuery({
+    queryKey: ["/api/billing/subscription-status"],
+  });
+
+  const { data: invoicesData, isLoading: invoicesLoading } = useQuery({
+    queryKey: ["/api/billing/invoices"],
+  });
+
+  const currentPlan = subscriptionData?.plan || "free";
+  const invoices = invoicesData?.invoices || [];
+
+  const handleDownloadInvoice = (invoiceUrl) => {
+    if (invoiceUrl) {
+      window.open(invoiceUrl, "_blank");
+    } else {
+      handleOpenPortal();
+    }
+  };
+
+  const checkoutMutation = useMutation({
+    mutationFn: (plan) => apiRequest("POST", "/api/billing/checkout", { plan }),
+    onSuccess: (data) => {
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Unable to start checkout",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
+      setUpgradingPlan(null);
+    },
+  });
+
+  const portalMutation = useMutation({
+    mutationFn: () => apiRequest("POST", "/api/billing/portal"),
+    onSuccess: (data) => {
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Unable to open billing portal",
+        description: error.message || "Please try again later.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleUpgrade = (planId) => {
+    setUpgradingPlan(planId);
+    checkoutMutation.mutate(planId === "premium" ? "pro" : planId);
+  };
+
+  const handleOpenPortal = () => {
+    portalMutation.mutate();
+  };
 
   return (
   <WellnessPageShell
@@ -147,11 +225,18 @@ export default function Billing() {
                       ))}
                     </ul>
                     <Button 
-                      className={`w-full ${plan.current ? 'btn-secondary-premium' : 'btn-premium'}`}
-                      disabled={plan.current}
+                      className={`w-full ${plan.id === currentPlan ? 'btn-secondary-premium' : 'btn-premium'}`}
+                      disabled={plan.id === currentPlan || plan.id === "free" || upgradingPlan === plan.id}
+                      onClick={() => handleUpgrade(plan.id)}
                       data-testid={`button-select-${plan.id}`}
                     >
-                      {plan.current ? 'Current Plan' : 'Upgrade'}
+                      {upgradingPlan === plan.id ? (
+                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Processing...</>
+                      ) : plan.id === currentPlan ? (
+                        'Current Plan'
+                      ) : (
+                        'Upgrade'
+                      )}
                     </Button>
                   </div>
                 ))}
@@ -164,32 +249,64 @@ export default function Billing() {
                   <Calendar className="h-5 w-5 text-[var(--sage-500)]" />
                   Payment History
                 </h2>
-                <Button variant="outline" size="sm" className="btn-secondary-premium" data-testid="button-download-all">
-                  <Download className="h-4 w-4 mr-2" />
-                  Download All
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="btn-secondary-premium" 
+                  onClick={handleOpenPortal}
+                  disabled={portalMutation.isPending}
+                  data-testid="button-download-all"
+                >
+                  {portalMutation.isPending ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <Download className="h-4 w-4 mr-2" />
+                  )}
+                  View All Invoices
                 </Button>
               </div>
               <div className="space-y-3">
-                {INVOICES.map(invoice => (
-                  <div key={invoice.id} className="flex items-center justify-between p-4 rounded-xl bg-[var(--sage-50)]" data-testid={`invoice-${invoice.id}`}>
-                    <div className="flex items-center gap-4">
-                      <div className="icon-container icon-sm icon-soft-sage">
-                        <CreditCard className="h-4 w-4" />
-                      </div>
-                      <div>
-                        <p className="text-body-sm font-medium">{invoice.id}</p>
-                        <p className="text-caption">{invoice.date}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <span className="text-body-sm font-medium">{invoice.amount}</span>
-                      <span className="px-2 py-1 rounded-full bg-[var(--sage-200)] text-[var(--sage-700)] text-caption">{invoice.status}</span>
-                      <Button variant="ghost" size="sm" data-testid={`button-download-${invoice.id}`}>
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </div>
+                {invoicesLoading ? (
+                  <div className="flex items-center justify-center p-8">
+                    <Loader2 className="h-6 w-6 animate-spin text-[var(--sage-500)]" />
                   </div>
-                ))}
+                ) : invoices.length === 0 ? (
+                  <div className="text-center p-6 text-caption">
+                    No invoices yet. Your payment history will appear here.
+                  </div>
+                ) : (
+                  invoices.map(invoice => (
+                    <div key={invoice.id} className="flex items-center justify-between p-4 rounded-xl bg-[var(--sage-50)]" data-testid={`invoice-${invoice.id}`}>
+                      <div className="flex items-center gap-4">
+                        <div className="icon-container icon-sm icon-soft-sage">
+                          <CreditCard className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className="text-body-sm font-medium">{invoice.number || invoice.id}</p>
+                          <p className="text-caption">{formatDate(invoice.created || invoice.date)}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <span className="text-body-sm font-medium">{formatAmount(invoice.amount_paid || invoice.amount)}</span>
+                        <span className={`px-2 py-1 rounded-full text-caption ${
+                          invoice.status === "paid" 
+                            ? "bg-[var(--sage-200)] text-[var(--sage-700)]"
+                            : "bg-amber-100 text-amber-700"
+                        }`}>
+                          {invoice.status === "paid" ? "Paid" : invoice.status}
+                        </span>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => handleDownloadInvoice(invoice.invoice_pdf || invoice.hosted_invoice_url)}
+                          data-testid={`button-download-${invoice.id}`}
+                        >
+                          <Download className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))
+                )}
               </div>
             </section>
 
@@ -210,8 +327,18 @@ export default function Billing() {
                     <p className="text-caption">Expires 12/27</p>
                   </div>
                 </div>
-                <Button variant="outline" size="sm" data-testid="button-update-payment">
-                  Update
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleOpenPortal}
+                  disabled={portalMutation.isPending}
+                  data-testid="button-update-payment"
+                >
+                  {portalMutation.isPending ? (
+                    <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Loading...</>
+                  ) : (
+                    'Update'
+                  )}
                 </Button>
               </div>
             </section>
