@@ -49,6 +49,9 @@ The platform offers:
 - **Accessibility Toolbar**: Floating accessibility panel with high contrast toggle, font size options (small/medium/large/xlarge), reduce motion toggle, dyslexia-friendly font toggle. Settings persist to localStorage.
 - **Daily Healing Reminders**: ReminderScheduler component with customizable check-in times, 6 reminder tones, custom messages, and notification scheduling via service worker.
 - **Voice Affirmation Settings**: VoiceSettings component with voice tone selection, speed/pitch/volume controls, and Web Speech Synthesis API preview.
+- **Community Affirmation Wall**: Anonymous community affirmations with "Send Light" (heart) feature, 5-280 character limit, uses sharedReflections table with emotion='affirmation' discriminator, rate-limited likes (10/min per IP).
+- **Journal Insights**: Client-side sentiment analysis using keyword matching, keyword extraction, 7-day emotional flow graph, and mood-based suggested prompts.
+- **AI Companion Animations**: Pulsing heart orb thinking animation with bouncing dots for emotion-aware responses.
 
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
