@@ -57,6 +57,20 @@
       "description": "Track your emotional state",
       "url": "/mood",
       "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Your Progress",
+      "short_name": "Progress",
+      "description": "View your healing journey progress",
+      "url": "/progress",
+      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mood Insights",
+      "short_name": "Insights",
+      "description": "Discover patterns in your emotions",
+      "url": "/insights",
+      "icons": [{ "src": "/brand/favicon.png", "sizes": "96x96" }]
     }
   ]
 }
