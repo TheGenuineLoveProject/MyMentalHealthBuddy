@@ -523,7 +523,6 @@ export default function App() {
               </Route>
               <Route path="/billing">{() => <ConfigRoute route="/billing" />}</Route>
               <Route path="/overview">{() => <ConfigRoute route="/overview" />}</Route>
-              <Route path="/insights">{() => <ConfigRoute route="/insights" />}</Route>
 
               {/* Wellness Pages - Config Driven */}
               <Route path="/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
