@@ -141,6 +141,9 @@ const SocialAnalytics = lazy(() => import("./pages/admin/SocialAnalytics.jsx"));
 const BillingViewer = lazy(() => import("./pages/admin/BillingViewer.jsx"));
 const Sessions = lazy(() => import("./pages/account/Sessions.jsx"));
 const DeleteAccount = lazy(() => import("./pages/account/DeleteAccount.jsx"));
+const AccountProfile = lazy(() => import("./pages/account/Profile.jsx"));
+const AccountSecurity = lazy(() => import("./pages/account/Security.jsx"));
+const AccountBilling = lazy(() => import("./pages/account/Billing.jsx"));
 const ValuesFinderPage = lazy(() => import("./pages/ValuesFinderPage.jsx"));
 const ValuesPage = lazy(() => import("./pages/ValuesPage.jsx"));
 const AboutApproachPage = lazy(() => import("./pages/AboutApproachPage.jsx"));
@@ -860,6 +863,15 @@ export default function App() {
               </Route>
               <Route path="/account/orders">
                 <ProtectedRoute><OrderHistory /></ProtectedRoute>
+              </Route>
+              <Route path="/account/profile">
+                <ProtectedRoute><AccountProfile /></ProtectedRoute>
+              </Route>
+              <Route path="/account/security">
+                <ProtectedRoute><AccountSecurity /></ProtectedRoute>
+              </Route>
+              <Route path="/account/billing">
+                <ProtectedRoute><AccountBilling /></ProtectedRoute>
               </Route>
               <Route path="/preferences/notifications">
                 <ProtectedRoute><NotificationPreferences /></ProtectedRoute>
