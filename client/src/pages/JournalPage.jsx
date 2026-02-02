@@ -237,7 +237,6 @@ export default function JournalPage() {
         { label: "Advanced", examples: ["Track patterns over time.", "Practice deep self-reflection."] }
       ]}
     >
-    <>
       <SEO 
         title="Reflective Journal - The Genuine Love Project"
         description="A safe, private space to process thoughts, honor feelings, and witness your growth. Express yourself freely with compassionate journaling."
@@ -305,13 +304,15 @@ export default function JournalPage() {
                 onClick={() => setShowSacredTools(!showSacredTools)}
                 className="text-sm text-[var(--glp-teal)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37] rounded px-2 py-1"
                 data-testid="toggle-sacred-tools"
+                aria-expanded={showSacredTools}
+                aria-controls="sacred-tools-section"
               >
                 {showSacredTools ? "Hide" : "Show"} Tools
               </button>
             </div>
 
             {showSacredTools && (
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+              <div id="sacred-tools-section" className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in duration-300" data-testid="sacred-tools-section">
                 {/* Left Column - Lotus Guide & Voice Affirmation */}
                 <div className="space-y-4">
                   <div className="flex justify-center">
@@ -561,7 +562,6 @@ export default function JournalPage() {
         suggestedQuotes={selectedEntryForCard?.content?.split('\n').filter(line => line.trim().length > 10).slice(0, 5) || []}
         source="journal"
       />
-    </>
   </WellnessPageShell>
   );
 }
