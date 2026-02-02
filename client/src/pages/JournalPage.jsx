@@ -13,14 +13,13 @@ import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivat
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { MIPromptCard } from "@/components/mi/MIPromptCard";
-import { useAuth } from "../auth/AuthContext";
-import { saveMoodEntry } from "../utils/saveEntry";
+import { useAuth } from "../context/AuthContext";
+import EmotionLog from "../components/EmotionLog";
+import VoiceAffirmation from "../components/VoiceAffirmation";
+import EmotionCalendar from "../components/EmotionCalendar";
+import MoodTrendsChartJS from "../components/charts/MoodTrendsChartJS";
+import { LotusGuide } from "../components/sacred";
 
-// inside component
-const { user } = useAuth();
-
-// when mood selected:
-saveMoodEntry(user.uid, selected, journalText);
 const JOURNAL_CLARITY = {
   what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",
   who: "Anyone seeking a safe place to reflect, process feelings, or track their inner journey.",
@@ -131,7 +130,15 @@ export default function JournalPage() {
   const [error, setError] = useState("");
   const [reflectionCardOpen, setReflectionCardOpen] = useState(false);
   const [selectedEntryForCard, setSelectedEntryForCard] = useState(null);
+  const [currentMood, setCurrentMood] = useState("neutral");
+  const [showSacredTools, setShowSacredTools] = useState(true);
   
+  const { user } = useAuth();
+
+  const handleMoodChange = (mood) => {
+    setCurrentMood(mood);
+  };
+
   const handleSelectPrompt = (prompt) => {
     setTitle(prompt.category + " Reflection");
     setContent(prompt.prompt + "\n\n");
@@ -144,6 +151,15 @@ export default function JournalPage() {
       if (Array.isArray(data)) return data;
       if (data?.journals && Array.isArray(data.journals)) return data.journals;
       if (data?.data && Array.isArray(data.data)) return data.data;
+      return [];
+    },
+  });
+
+  const { data: moodEntries = [] } = useQuery({
+    queryKey: ["/api/mood"],
+    select: (data) => {
+      if (Array.isArray(data)) return data;
+      if (data?.entries && Array.isArray(data.entries)) return data.entries;
       return [];
     },
   });
@@ -276,6 +292,67 @@ export default function JournalPage() {
             title="See how others use journaling"
             className="mb-8"
           />
+
+          {/* Sacred Healing Tools Section */}
+          <div className="mb-8 space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="font-serif text-xl font-semibold text-[var(--glp-sage-deep)] dark:text-white flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-[var(--glp-gold)]" aria-hidden="true" />
+                Sacred Healing Tools
+              </h2>
+              <button
+                type="button"
+                onClick={() => setShowSacredTools(!showSacredTools)}
+                className="text-sm text-[var(--glp-teal)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37] rounded px-2 py-1"
+                data-testid="toggle-sacred-tools"
+              >
+                {showSacredTools ? "Hide" : "Show"} Tools
+              </button>
+            </div>
+
+            {showSacredTools && (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in duration-300">
+                {/* Left Column - Lotus Guide & Voice Affirmation */}
+                <div className="space-y-4">
+                  <div className="flex justify-center">
+                    <LotusGuide 
+                      mood={currentMood} 
+                      size={120} 
+                      showMessage={true}
+                    />
+                  </div>
+                  <VoiceAffirmation 
+                    mood={currentMood}
+                    className="rounded-xl"
+                  />
+                </div>
+
+                {/* Center Column - Emotion Log */}
+                <div className="lg:col-span-1">
+                  <EmotionLog 
+                    onMoodChange={handleMoodChange}
+                    className="h-full"
+                  />
+                </div>
+
+                {/* Right Column - Calendar & Trends */}
+                <div className="space-y-4">
+                  <EmotionCalendar 
+                    entries={moodEntries}
+                    className="rounded-xl"
+                  />
+                </div>
+              </div>
+            )}
+
+            {showSacredTools && moodEntries.length > 0 && (
+              <MoodTrendsChartJS 
+                entries={moodEntries} 
+                days={14}
+                className="mt-4"
+              />
+            )}
+          </div>
 
           {/* Journal Prompts */}
           {!showForm && <JournalPrompts onSelectPrompt={handleSelectPrompt} />}
