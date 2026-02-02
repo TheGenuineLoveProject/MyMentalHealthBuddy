@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { Feather, ArrowLeft, Save, Download, Trash2, AlertTriangle, Loader2, Check } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const STORAGE_KEY = "glp_grief_letter_draft";
 
@@ -24,7 +26,6 @@ export default function GriefLetter() {
   const [recipient, setRecipient] = useState("");
   const [letterContent, setLetterContent] = useState("");
   const [savedLocally, setSavedLocally] = useState(false);
-  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const cached = localStorage.getItem(STORAGE_KEY);
@@ -37,37 +38,26 @@ export default function GriefLetter() {
     }
   }, []);
 
-  const handleSave = async () => {
+  const letterMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/grief-letter", data),
+    onSuccess: () => {
+      setSavedLocally(true);
+      localStorage.removeItem(STORAGE_KEY);
+      toast({ title: "Letter saved", description: "Your words are safely stored." });
+    },
+    onError: () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() }));
+      setSavedLocally(true);
+      toast({ title: "Saved locally", description: "Your letter is saved on this device." });
+    }
+  });
+
+  const handleSave = () => {
     if (!letterContent.trim() || letterContent.trim().length < 10) {
       toast({ title: "Please write a bit more", description: "Your letter should have at least 10 characters.", variant: "destructive" });
       return;
     }
-    
-    setSaving(true);
-    try {
-      const res = await fetch("/api/wellness-tools/grief-letter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ recipient, content: letterContent })
-      });
-      
-      if (res.ok) {
-        setSavedLocally(true);
-        localStorage.removeItem(STORAGE_KEY);
-        toast({ title: "Letter saved", description: "Your words are safely stored." });
-      } else {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() }));
-        setSavedLocally(true);
-        toast({ title: "Saved locally", description: "Log in to save to your account." });
-      }
-    } catch {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ recipient, content: letterContent, savedAt: new Date().toISOString() }));
-      setSavedLocally(true);
-      toast({ title: "Saved locally", description: "Your letter is saved on this device." });
-    } finally {
-      setSaving(false);
-    }
+    letterMutation.mutate({ recipient, content: letterContent });
   };
 
   const handleClear = () => {
@@ -178,8 +168,8 @@ export default function GriefLetter() {
                 Saved
               </span>
             )}
-            <Button onClick={handleSave} disabled={!letterContent.trim() || saving} data-testid="button-save" aria-label="Save letter" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-              {saving ? (
+            <Button onClick={handleSave} disabled={!letterContent.trim() || letterMutation.isPending} data-testid="button-save" aria-label="Save letter" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+              {letterMutation.isPending ? (
                 <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" aria-hidden="true" />Saving...</>
               ) : (
                 <><Save className="w-4 h-4 mr-2" aria-hidden="true" />Save Letter</>

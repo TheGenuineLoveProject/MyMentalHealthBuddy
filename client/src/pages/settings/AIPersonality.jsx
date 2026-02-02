@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Bot, Heart, Sparkles, Brain, Shield, Save, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const personalities = [
   {
@@ -58,7 +60,6 @@ export default function AIPersonality() {
     useAffirmations: true
   });
   const [saved, setSaved] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -81,34 +82,23 @@ export default function AIPersonality() {
     loadSettings();
   }, []);
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/user-settings", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ preferences: { aiPersonality: settings } })
-      });
-      
-      if (res.ok) {
-        setSaved(true);
-        toast({ title: "Settings saved", description: "Your AI companion preferences are updated." });
-        setTimeout(() => setSaved(false), 3000);
-      } else {
-        localStorage.setItem("glp_ai_personality", JSON.stringify(settings));
-        setSaved(true);
-        toast({ title: "Saved locally", description: "Log in to sync across devices." });
-        setTimeout(() => setSaved(false), 3000);
-      }
-    } catch {
+  const aiPersonalityMutation = useMutation({
+    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+    onSuccess: () => {
+      setSaved(true);
+      toast({ title: "Settings saved", description: "Your AI companion preferences are updated." });
+      setTimeout(() => setSaved(false), 3000);
+    },
+    onError: () => {
       localStorage.setItem("glp_ai_personality", JSON.stringify(settings));
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
       setTimeout(() => setSaved(false), 3000);
-    } finally {
-      setSaving(false);
     }
+  });
+
+  const handleSave = () => {
+    aiPersonalityMutation.mutate({ preferences: { aiPersonality: settings } });
   };
 
   const selectedPersonality = personalities.find(p => p.id === settings.personality);
@@ -250,8 +240,8 @@ export default function AIPersonality() {
           </CardContent>
         </Card>
 
-        <Button onClick={handleSave} disabled={saving} className="w-full min-h-[44px]" data-testid="button-save">
-          {saving ? (
+        <Button onClick={handleSave} disabled={aiPersonalityMutation.isPending} className="w-full min-h-[44px]" data-testid="button-save">
+          {aiPersonalityMutation.isPending ? (
             <>
               <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Saving...
             </>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Bell, BellOff, Mail, Smartphone, Clock, Save, Check, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Switch } from "@/components/ui/Switch";
 import { Label } from "@/components/ui/Label";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const NOTIFICATION_SETTINGS = [
   {
@@ -55,7 +57,6 @@ export default function NotificationPreferences() {
     quiet_hours_end: "08:00"
   });
   const [saved, setSaved] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -83,31 +84,21 @@ export default function NotificationPreferences() {
     setSaved(false);
   };
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/user-settings", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ preferences: { notifications: settings } })
-      });
-      
-      if (res.ok) {
-        setSaved(true);
-        toast({ title: "Preferences saved", description: "Your notification settings are updated." });
-      } else {
-        localStorage.setItem("glp_notification_prefs", JSON.stringify(settings));
-        setSaved(true);
-        toast({ title: "Saved locally", description: "Log in to sync across devices." });
-      }
-    } catch {
+  const notificationMutation = useMutation({
+    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+    onSuccess: () => {
+      setSaved(true);
+      toast({ title: "Preferences saved", description: "Your notification settings are updated." });
+    },
+    onError: () => {
       localStorage.setItem("glp_notification_prefs", JSON.stringify(settings));
       setSaved(true);
-      toast({ title: "Saved locally", description: "Settings saved to this device." });
-    } finally {
-      setSaving(false);
+      toast({ title: "Saved locally", description: "Your preferences are saved on this device." });
     }
+  });
+
+  const handleSave = () => {
+    notificationMutation.mutate({ preferences: { notifications: settings } });
   };
 
   return (
@@ -244,9 +235,9 @@ export default function NotificationPreferences() {
               </span>
             )}
           </div>
-          <Button onClick={handleSave} disabled={saving} data-testid="button-save">
-            {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
-            {saving ? "Saving..." : "Save Preferences"}
+          <Button onClick={handleSave} disabled={notificationMutation.isPending} data-testid="button-save">
+            {notificationMutation.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+            {notificationMutation.isPending ? "Saving..." : "Save Preferences"}
           </Button>
         </div>
         </>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { 
   User, ArrowLeft, Camera, Mail, Calendar, MapPin, 
   Heart, Shield, Award, Save, Loader2, Edit2
@@ -11,6 +12,7 @@ import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useAuth } from "@/context/AuthContext";
+import { apiRequest } from "@/lib/queryClient";
 
 const ACHIEVEMENTS = [
   { icon: Heart, label: "Self-Love Champion", date: "Dec 2025" },
@@ -27,7 +29,6 @@ export default function Profile() {
 
   const { toast } = useToast();
   const { user } = useAuth();
-  const [saving, setSaving] = useState(false);
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -44,28 +45,19 @@ export default function Profile() {
     }
   }, [user]);
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/account/profile", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ name: formData.name })
-      });
-      const data = await res.json();
-      
-      if (res.ok) {
-        setEditing(false);
-        toast({ title: "Profile updated", description: "Your changes have been saved." });
-      } else {
-        toast({ title: "Error", description: data.message || "Failed to update profile", variant: "destructive" });
-      }
-    } catch {
-      toast({ title: "Error", description: "Unable to save changes. Please try again.", variant: "destructive" });
-    } finally {
-      setSaving(false);
+  const profileMutation = useMutation({
+    mutationFn: (data) => apiRequest("PUT", "/api/account/profile", data),
+    onSuccess: () => {
+      setEditing(false);
+      toast({ title: "Profile updated", description: "Your changes have been saved." });
+    },
+    onError: (err) => {
+      toast({ title: "Error", description: err.message || "Unable to save changes.", variant: "destructive" });
     }
+  });
+
+  const handleSave = () => {
+    profileMutation.mutate({ name: formData.name });
   };
 
   return (
@@ -195,8 +187,8 @@ export default function Profile() {
                   <Button variant="outline" onClick={() => setEditing(false)} data-testid="button-cancel">
                     Cancel
                   </Button>
-                  <Button onClick={handleSave} disabled={saving} className="btn-premium" data-testid="button-save-profile">
-                    {saving ? (
+                  <Button onClick={handleSave} disabled={profileMutation.isPending} className="btn-premium" data-testid="button-save-profile">
+                    {profileMutation.isPending ? (
                       <>
                         <Loader2 className="h-4 w-4 mr-2 animate-spin motion-reduce:animate-none" />
                         Saving...

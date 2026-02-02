@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Users, ArrowLeft, Send, Heart, RefreshCw, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -7,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.j
 import { Button } from "@/components/ui/Button.jsx";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const CHECK_IN_PROMPTS = [
   "Something that made me smile today...",
@@ -23,10 +25,10 @@ const MAX_LENGTH = 500;
 
 export default function CommunityCheckin() {
   const { toast } = useToast();
+  const queryClient = useQueryClient();
   const [currentPrompt, setCurrentPrompt] = useState(CHECK_IN_PROMPTS[0]);
   const [response, setResponse] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [recentReflections, setRecentReflections] = useState([]);
   const [loadingReflections, setLoadingReflections] = useState(true);
 
@@ -55,37 +57,27 @@ export default function CommunityCheckin() {
     setSubmitted(false);
   };
 
-  const handleSubmit = async () => {
+  const checkinMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/community/reflect", data),
+    onSuccess: () => {
+      setSubmitted(true);
+      setResponse("");
+      toast({ title: "Shared with community", description: "Thank you for opening up." });
+      queryClient.invalidateQueries({ queryKey: ["/api/community/reflections"] });
+    },
+    onError: (err) => {
+      toast({ title: "Couldn't share", description: err.message || "Please try again.", variant: "destructive" });
+    }
+  });
+
+  const handleSubmit = () => {
     const trimmed = response.trim();
     if (!trimmed || trimmed.length < 10) {
       toast({ title: "Please share a bit more", description: "Your reflection should be at least 10 characters.", variant: "destructive" });
       return;
     }
-    
     const content = `${currentPrompt} ${trimmed}`.slice(0, MAX_LENGTH);
-    
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/community/reflect", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ content })
-      });
-      
-      if (res.ok) {
-        setSubmitted(true);
-        setResponse("");
-        toast({ title: "Shared with community", description: "Thank you for opening up." });
-      } else {
-        const data = await res.json();
-        toast({ title: "Couldn't share", description: data.message || "Please try again.", variant: "destructive" });
-      }
-    } catch {
-      toast({ title: "Connection error", description: "Please try again later.", variant: "destructive" });
-    } finally {
-      setSubmitting(false);
-    }
+    checkinMutation.mutate({ content });
   };
 
   return (
@@ -162,11 +154,11 @@ export default function CommunityCheckin() {
                 />
                 <Button 
                   onClick={handleSubmit}
-                  disabled={!response.trim() || submitting}
+                  disabled={!response.trim() || checkinMutation.isPending}
                   className="mt-4 w-full"
                   data-testid="button-submit"
                 >
-                  {submitting ? (
+                  {checkinMutation.isPending ? (
                     <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" />Sharing...</>
                   ) : (
                     <><Send className="w-4 h-4 mr-2" />Share with Community</>

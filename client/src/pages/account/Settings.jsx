@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { 
   Settings as SettingsIcon, User, Bell, Shield, Moon, Sun, Monitor,
   ArrowLeft, Save, Loader2, Globe, Lock, Trash2, Heart
@@ -11,6 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function Settings() {
   useSEO({
@@ -20,7 +22,6 @@ export default function Settings() {
   });
 
   const { toast } = useToast();
-  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
   const [theme, setTheme] = useState("light");
   const [notifications, setNotifications] = useState({
@@ -55,32 +56,24 @@ export default function Settings() {
     fetchSettings();
   }, []);
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/user-settings", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          preferences: { theme },
-          reminders: {
-            emailEnabled: notifications.email,
-            pushEnabled: notifications.push
-          }
-        })
-      });
-      
-      if (res.ok) {
-        toast({ title: "Settings saved", description: "Your preferences have been updated." });
-      } else {
-        toast({ title: "Error", description: "Failed to save settings", variant: "destructive" });
-      }
-    } catch {
-      toast({ title: "Error", description: "Unable to save settings. Please try again.", variant: "destructive" });
-    } finally {
-      setSaving(false);
+  const settingsMutation = useMutation({
+    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+    onSuccess: () => {
+      toast({ title: "Settings saved", description: "Your preferences have been updated." });
+    },
+    onError: (err) => {
+      toast({ title: "Error", description: err.message || "Unable to save settings.", variant: "destructive" });
     }
+  });
+
+  const handleSave = () => {
+    settingsMutation.mutate({
+      preferences: { theme },
+      reminders: {
+        emailEnabled: notifications.email,
+        pushEnabled: notifications.push
+      }
+    });
   };
 
   return (
@@ -274,11 +267,11 @@ export default function Settings() {
               </div>
               <Button 
                 onClick={handleSave} 
-                disabled={saving}
+                disabled={settingsMutation.isPending}
                 className="btn-premium"
                 data-testid="button-save-settings"
               >
-                {saving ? (
+                {settingsMutation.isPending ? (
                   <>
                     <Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" />
                     Saving...

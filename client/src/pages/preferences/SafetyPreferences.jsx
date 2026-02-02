@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Shield, Heart, Volume2, Eye, Sparkles, Save, Check, AlertTriangle, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Switch } from "@/components/ui/Switch";
 import { Label } from "@/components/ui/Label";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const SAFETY_SETTINGS = [
   {
@@ -59,7 +61,6 @@ export default function SafetyPreferences() {
     reading_level: "intermediate"
   });
   const [saved, setSaved] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -90,31 +91,21 @@ export default function SafetyPreferences() {
     setSaved(false);
   };
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/user-settings", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ preferences: { safety: settings } })
-      });
-      
-      if (res.ok) {
-        setSaved(true);
-        toast({ title: "Safety preferences saved", description: "Your comfort settings are updated." });
-      } else {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
-        setSaved(true);
-        toast({ title: "Saved locally", description: "Log in to sync across devices." });
-      }
-    } catch {
+  const safetyMutation = useMutation({
+    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+    onSuccess: () => {
+      setSaved(true);
+      toast({ title: "Safety preferences saved", description: "Your comfort settings are updated." });
+    },
+    onError: () => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
-    } finally {
-      setSaving(false);
     }
+  });
+
+  const handleSave = () => {
+    safetyMutation.mutate({ preferences: { safety: settings } });
   };
 
   return (
@@ -224,9 +215,9 @@ export default function SafetyPreferences() {
               </span>
             )}
           </div>
-          <Button onClick={handleSave} disabled={saving} data-testid="button-save">
-            {saving ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
-            {saving ? "Saving..." : "Save Preferences"}
+          <Button onClick={handleSave} disabled={safetyMutation.isPending} data-testid="button-save">
+            {safetyMutation.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Save className="w-4 h-4 mr-2" />}
+            {safetyMutation.isPending ? "Saving..." : "Save Preferences"}
           </Button>
         </div>
         </>

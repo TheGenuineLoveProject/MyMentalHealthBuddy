@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Calendar, ChevronRight, Save, Sparkles, Loader2, Check, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
+import { apiRequest } from "@/lib/queryClient";
 
 const questions = [
   { id: "highlight", label: "What was the highlight of your week?", placeholder: "A moment that brought you joy..." },
@@ -19,7 +21,6 @@ export default function WeeklyReflection() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [isComplete, setIsComplete] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const currentQuestion = questions[currentStep];
@@ -47,31 +48,21 @@ export default function WeeklyReflection() {
     return `${start.toLocaleDateString("en-US", { month: "short", day: "numeric" })} - ${end.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`;
   };
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/wellness-tools/weekly-reflection", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ answers, weekRange: getWeekRange() })
-      });
-      
-      if (res.ok) {
-        setSaved(true);
-        toast({ title: "Reflection saved", description: "Your weekly reflection is safely stored." });
-      } else {
-        localStorage.setItem(`glp_weekly_${Date.now()}`, JSON.stringify({ answers, weekRange: getWeekRange() }));
-        setSaved(true);
-        toast({ title: "Saved locally", description: "Log in to save to your account." });
-      }
-    } catch {
+  const reflectionMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/weekly-reflection", data),
+    onSuccess: () => {
+      setSaved(true);
+      toast({ title: "Reflection saved", description: "Your weekly reflection is safely stored." });
+    },
+    onError: () => {
       localStorage.setItem(`glp_weekly_${Date.now()}`, JSON.stringify({ answers, weekRange: getWeekRange() }));
       setSaved(true);
       toast({ title: "Saved locally", description: "Your reflection is saved on this device." });
-    } finally {
-      setSaving(false);
     }
+  });
+
+  const handleSave = () => {
+    reflectionMutation.mutate({ answers, weekRange: getWeekRange() });
   };
 
   if (isComplete) {
@@ -102,8 +93,8 @@ export default function WeeklyReflection() {
                 <Button variant="outline" onClick={() => { setIsComplete(false); setCurrentStep(0); }} className="flex-1 min-h-[44px]">
                   Edit Answers
                 </Button>
-                <Button onClick={handleSave} disabled={saving || saved} className="flex-1 min-h-[44px]" data-testid="button-save">
-                  {saving ? (
+                <Button onClick={handleSave} disabled={reflectionMutation.isPending || saved} className="flex-1 min-h-[44px]" data-testid="button-save">
+                  {reflectionMutation.isPending ? (
                     <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" /> Saving...</>
                   ) : saved ? (
                     <><Check className="w-4 h-4 mr-2" /> Saved</>

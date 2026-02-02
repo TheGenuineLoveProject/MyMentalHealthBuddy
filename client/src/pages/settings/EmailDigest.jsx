@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { Mail, Bell, Clock, Check, Save, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function EmailDigest() {
   const { toast } = useToast();
@@ -19,7 +21,6 @@ export default function EmailDigest() {
   });
 
   const [saved, setSaved] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,34 +53,23 @@ export default function EmailDigest() {
     setSaved(false);
   };
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/user-settings", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ preferences: { emailDigest: settings } })
-      });
-      
-      if (res.ok) {
-        setSaved(true);
-        toast({ title: "Settings saved", description: "Your email preferences are updated." });
-        setTimeout(() => setSaved(false), 3000);
-      } else {
-        localStorage.setItem("glp_email_digest", JSON.stringify(settings));
-        setSaved(true);
-        toast({ title: "Saved locally", description: "Log in to sync across devices." });
-        setTimeout(() => setSaved(false), 3000);
-      }
-    } catch {
+  const emailDigestMutation = useMutation({
+    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+    onSuccess: () => {
+      setSaved(true);
+      toast({ title: "Settings saved", description: "Your email preferences are updated." });
+      setTimeout(() => setSaved(false), 3000);
+    },
+    onError: () => {
       localStorage.setItem("glp_email_digest", JSON.stringify(settings));
       setSaved(true);
       toast({ title: "Saved locally", description: "Settings saved to this device." });
       setTimeout(() => setSaved(false), 3000);
-    } finally {
-      setSaving(false);
     }
+  });
+
+  const handleSave = () => {
+    emailDigestMutation.mutate({ preferences: { emailDigest: settings } });
   };
 
   if (loading) {
@@ -218,11 +208,11 @@ export default function EmailDigest() {
 
         <Button
           onClick={handleSave}
-          disabled={saving}
+          disabled={emailDigestMutation.isPending}
           className="w-full min-h-[44px]"
           data-testid="button-save"
         >
-          {saving ? (
+          {emailDigestMutation.isPending ? (
             <>
               <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Saving...
             </>

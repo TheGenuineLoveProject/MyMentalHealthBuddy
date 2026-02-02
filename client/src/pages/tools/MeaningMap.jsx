@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useMutation } from "@tanstack/react-query";
 import { Map, ArrowLeft, Plus, X, Save, Check, Loader2 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
 
 const MEANING_PROMPTS = [
   { category: "Purpose", question: "What activities make you lose track of time?" },
@@ -24,7 +26,6 @@ export default function MeaningMap() {
   const [newValue, setNewValue] = useState("");
   const [meaningStatement, setMeaningStatement] = useState("");
   const [saved, setSaved] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -74,31 +75,21 @@ export default function MeaningMap() {
     setSaved(false);
   };
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      const res = await fetch("/api/wellness-tools/meaning-map", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ answers, coreValues, meaningStatement })
-      });
-      
-      if (res.ok) {
-        setSaved(true);
-        toast({ title: "Meaning map saved", description: "Your reflections are safely stored." });
-      } else {
-        localStorage.setItem("glp_meaning_map", JSON.stringify({ answers, coreValues, meaningStatement }));
-        toast({ title: "Saved locally", description: "Log in to save to your account.", variant: "default" });
-        setSaved(true);
-      }
-    } catch {
+  const meaningMapMutation = useMutation({
+    mutationFn: (data) => apiRequest("POST", "/api/wellness-tools/meaning-map", data),
+    onSuccess: () => {
+      setSaved(true);
+      toast({ title: "Meaning map saved", description: "Your reflections are safely stored." });
+    },
+    onError: () => {
       localStorage.setItem("glp_meaning_map", JSON.stringify({ answers, coreValues, meaningStatement }));
       toast({ title: "Saved locally", description: "Your work is saved on this device." });
       setSaved(true);
-    } finally {
-      setSaving(false);
     }
+  });
+
+  const handleSave = () => {
+    meaningMapMutation.mutate({ answers, coreValues, meaningStatement });
   };
 
   if (loading) {
@@ -226,8 +217,8 @@ export default function MeaningMap() {
               </span>
             )}
           </div>
-          <Button onClick={handleSave} disabled={saving} data-testid="button-save" aria-label="Save your meaning map" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-            {saving ? (
+          <Button onClick={handleSave} disabled={meaningMapMutation.isPending} data-testid="button-save" aria-label="Save your meaning map" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+            {meaningMapMutation.isPending ? (
               <><Loader2 className="w-4 h-4 mr-2 animate-spin motion-reduce:animate-none" aria-hidden="true" />Saving...</>
             ) : (
               <><Save className="w-4 h-4 mr-2" aria-hidden="true" />Save My Map</>
