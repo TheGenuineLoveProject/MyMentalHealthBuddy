@@ -14,6 +14,7 @@ export default function Contact() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,11 +24,27 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
+    setError("");
     
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setSubmitted(true);
-    setSubmitting(false);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+      const data = await res.json();
+      
+      if (data.ok) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setError(data.error?.message || "Unable to send message. Please try again.");
+      }
+    } catch {
+      setError("Unable to send message. Please try again later.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const contactMethods = [
@@ -215,6 +232,12 @@ export default function Contact() {
                         data-testid="input-message"
                       />
                     </div>
+
+                    {error && (
+                      <div className="p-4 rounded-xl text-sm" style={{ background: 'var(--glp-rose-10)', color: 'var(--glp-rose-deep)' }} data-testid="text-error">
+                        {error}
+                      </div>
+                    )}
 
                     <button
                       type="submit"
