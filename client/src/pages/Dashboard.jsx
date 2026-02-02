@@ -434,7 +434,7 @@ export default function Dashboard() {
                 testId="link-atlas"
               />
               <ExploreCard 
-                href="/wellness#habits" 
+                href="/hubs/habits" 
                 icon={Target} 
                 title="Daily Habits" 
                 description="Build healthy routines"
