@@ -132,6 +132,8 @@ export default function JournalPage() {
   const [selectedEntryForCard, setSelectedEntryForCard] = useState(null);
   const [currentMood, setCurrentMood] = useState("neutral");
   const [showSacredTools, setShowSacredTools] = useState(true);
+  const [shareWithCommunity, setShareWithCommunity] = useState(false);
+  const [shareAnonymously, setShareAnonymously] = useState(true);
   
   const { user } = useAuth();
 
@@ -197,7 +199,13 @@ export default function JournalPage() {
       return;
     }
     setError("");
-    createMutation.mutate({ title, content });
+    createMutation.mutate({ 
+      title, 
+      content,
+      shareWithCommunity,
+      isAnonymous: shareAnonymously,
+      mood: currentMood
+    });
   }
 
   function handleDelete(id) {
@@ -413,6 +421,42 @@ export default function JournalPage() {
                   className="input resize-none"
                   data-testid="input-content"
                 />
+              </div>
+
+              <div className="mb-6 p-4 rounded-xl bg-[var(--glp-sage)]/10 border border-[var(--glp-sage)]/20">
+                <label className="flex items-center justify-between cursor-pointer">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-[var(--glp-sage)]/20 flex items-center justify-center">
+                      <Share2 className="w-4 h-4 text-[var(--glp-sage)]" aria-hidden="true" />
+                    </div>
+                    <div>
+                      <span className="font-medium text-gray-900 dark:text-white block text-sm">Share with Community</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">Inspire others on their healing journey</span>
+                    </div>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={shareWithCommunity}
+                    onChange={(e) => setShareWithCommunity(e.target.checked)}
+                    className="w-5 h-5 rounded text-[var(--glp-sage)] focus:ring-[var(--glp-sage)]"
+                    data-testid="toggle-share"
+                  />
+                </label>
+                
+                {shareWithCommunity && (
+                  <div className="mt-3 pt-3 border-t border-[var(--glp-sage)]/20 animate-in fade-in duration-200">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={shareAnonymously}
+                        onChange={(e) => setShareAnonymously(e.target.checked)}
+                        className="w-4 h-4 rounded text-[var(--glp-sage)] focus:ring-[var(--glp-sage)]"
+                        data-testid="toggle-anonymous"
+                      />
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Share anonymously (hide your name)</span>
+                    </label>
+                  </div>
+                )}
               </div>
               
               <div className="flex gap-3">

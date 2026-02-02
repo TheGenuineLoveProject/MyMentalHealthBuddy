@@ -13,6 +13,7 @@ import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
 import ConsentBanner from "./components/ConsentBanner.jsx";
 import FeedbackWidget from "./components/FeedbackWidget.jsx";
+import AICompanion from "./components/AICompanion.jsx";
 import './index.css'; // Your Tailwind import
 const WellnessDashboard = lazy(() => import('./pages/WellnessDashboard'));
 
@@ -864,6 +865,7 @@ export default function App() {
           </main>
           <ConsentBanner />
           <FeedbackWidget />
+          <AICompanion />
           </ErrorBoundary>
         </ReadingLevelProvider>
       </AuthProvider>
