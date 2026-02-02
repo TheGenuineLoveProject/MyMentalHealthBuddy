@@ -18,9 +18,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/Label.jsx";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/components/ui/Switch";
 
 const PLATFORMS = [
   { id: "instagram", name: "Instagram", icon: SiInstagram, color: "bg-gradient-to-r from-purple-500 to-pink-500", charLimit: 2200, textColor: "text-white" },
