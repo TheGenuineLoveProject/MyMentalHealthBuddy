@@ -6163,3 +6163,106 @@ button[type="submit"]:active {
     box-shadow: none !important;
   }
 }
+
+/* ===== RESPONSIVE CHART CONTAINER ===== */
+.chart-responsive {
+  width: 100%;
+  min-height: 200px;
+  max-height: 400px;
+}
+
+@media (max-width: 768px) {
+  .chart-responsive {
+    min-height: 180px;
+    max-height: 280px;
+  }
+  
+  .chart-responsive canvas {
+    max-height: 100% !important;
+  }
+}
+
+/* ===== RESPONSIVE FORM ELEMENTS ===== */
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .form-actions button {
+    width: 100%;
+  }
+  
+  /* Stack label and input vertically on mobile */
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  /* Full-width inputs on mobile */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select {
+    width: 100%;
+    min-height: 44px; /* Touch-friendly */
+  }
+}
+
+/* ===== RESPONSIVE MODAL FIXES ===== */
+@media (max-width: 640px) {
+  [role="dialog"] > div {
+    margin: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+  }
+}
+
+/* ===== RESPONSIVE CARD GRID ===== */
+.card-grid-responsive {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+@media (max-width: 640px) {
+  .card-grid-responsive {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== PAGE TRANSITION ===== */
+.page-entering {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-entering,
+  .page-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ===== SAFE AREA INSETS (iOS) ===== */
+@supports (padding: max(0px)) {
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+}
