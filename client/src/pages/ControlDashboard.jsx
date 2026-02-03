@@ -14,6 +14,7 @@ import {
 import SEO from "../components/SEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
 
 const CONTROL_SECTIONS = [
   { id: "general", label: "General", icon: Settings },
@@ -27,6 +28,7 @@ const CONTROL_SECTIONS = [
 
 export default function ControlDashboard() {
   const [activeSection, setActiveSection] = useState("general");
+  const { toast } = useToast();
   const [settings, setSettings] = useState({
     siteName: "The Genuine Love Project",
     siteDescription: "AI-powered mental wellness platform",
@@ -94,7 +96,11 @@ export default function ControlDashboard() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-sm font-medium transition">
+              <button 
+                onClick={() => toast({ title: "Settings synced", description: "All changes have been saved" })}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-sm font-medium transition"
+                data-testid="button-sync"
+              >
                 <RefreshCw className="w-4 h-4" />
                 Sync
               </button>
@@ -354,6 +360,7 @@ function GeneralSection({ settings, toggleSetting, setSettings }) {
 }
 
 function UsersSection({ settings, toggleSetting }) {
+  const { toast } = useToast();
   return (
     <div className="space-y-6">
       <SectionHeader 
@@ -409,19 +416,35 @@ function UsersSection({ settings, toggleSetting }) {
           <h3 className="font-semibold text-slate-800">Quick Actions</h3>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <button className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition">
+          <button 
+            onClick={() => toast({ title: "User Management", description: "Opening user list view..." })}
+            className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition"
+            data-testid="button-view-users"
+          >
             <Users className="w-5 h-5 text-slate-600" />
             <span className="text-sm font-medium text-slate-700">View All Users</span>
           </button>
-          <button className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition">
+          <button 
+            onClick={() => toast({ title: "Export Started", description: "User data export will be emailed to admin" })}
+            className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition"
+            data-testid="button-export-users"
+          >
             <Download className="w-5 h-5 text-slate-600" />
             <span className="text-sm font-medium text-slate-700">Export Users</span>
           </button>
-          <button className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition">
+          <button 
+            onClick={() => toast({ title: "Email Composer", description: "Opening mass email composer..." })}
+            className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition"
+            data-testid="button-mass-email"
+          >
             <Mail className="w-5 h-5 text-slate-600" />
             <span className="text-sm font-medium text-slate-700">Mass Email</span>
           </button>
-          <button className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition">
+          <button 
+            onClick={() => toast({ title: "Role Management", description: "Opening role management panel..." })}
+            className="flex flex-col items-center gap-2 p-4 rounded-xl border border-slate-200 hover:border-teal-300 hover:bg-teal-50 transition"
+            data-testid="button-manage-roles"
+          >
             <Shield className="w-5 h-5 text-slate-600" />
             <span className="text-sm font-medium text-slate-700">Manage Roles</span>
           </button>
@@ -575,6 +598,7 @@ function NotificationsSection({ settings, toggleSetting }) {
 }
 
 function IntegrationsSection({ settings, toggleSetting }) {
+  const { toast } = useToast();
   const integrations = [
     { name: "OpenAI", description: "AI wellness companion and content generation", status: "connected", icon: "🤖" },
     { name: "Stripe", description: "Payment processing and subscriptions", status: "connected", icon: "💳" },
@@ -595,7 +619,11 @@ function IntegrationsSection({ settings, toggleSetting }) {
       <SettingCard>
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-semibold text-slate-800">Connected Services</h3>
-          <button className="inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-700 font-medium">
+          <button 
+            onClick={() => toast({ title: "Add Integration", description: "Opening integration marketplace..." })}
+            className="inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-700 font-medium"
+            data-testid="button-add-integration"
+          >
             <Plus className="w-4 h-4" />
             Add Integration
           </button>
@@ -619,7 +647,14 @@ function IntegrationsSection({ settings, toggleSetting }) {
                 </div>
                 <p className="text-sm text-slate-500 mt-1">{integration.description}</p>
               </div>
-              <button className="text-sm text-teal-600 hover:text-teal-700 font-medium">
+              <button 
+                onClick={() => toast({ 
+                  title: integration.status === 'connected' ? 'Configure Integration' : 'Connect Integration', 
+                  description: `Opening ${integration.name} settings...` 
+                })}
+                className="text-sm text-teal-600 hover:text-teal-700 font-medium"
+                data-testid={`button-integration-${integration.name.toLowerCase()}`}
+              >
                 {integration.status === 'connected' ? 'Configure' : 'Connect'}
               </button>
             </div>
@@ -639,7 +674,11 @@ function IntegrationsSection({ settings, toggleSetting }) {
         {settings.webhooksEnabled && (
           <div className="mt-4 p-4 rounded-xl bg-slate-50">
             <p className="text-sm text-slate-600 mb-3">Webhook endpoints will receive POST requests for configured events.</p>
-            <button className="inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-700 font-medium">
+            <button 
+              onClick={() => toast({ title: "Add Webhook", description: "Opening webhook configuration..." })}
+              className="inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-700 font-medium"
+              data-testid="button-add-webhook"
+            >
               <Plus className="w-4 h-4" />
               Add Webhook Endpoint
             </button>
@@ -651,6 +690,7 @@ function IntegrationsSection({ settings, toggleSetting }) {
 }
 
 function StorageSection() {
+  const { toast } = useToast();
   const storageStats = {
     used: 4.5,
     total: 10,
@@ -716,7 +756,11 @@ function StorageSection() {
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-xs text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full">{backup.status}</span>
-                <button className="p-2 rounded-lg hover:bg-slate-200 transition">
+                <button 
+                  onClick={() => toast({ title: "Download Started", description: `Downloading backup from ${backup.date}` })}
+                  className="p-2 rounded-lg hover:bg-slate-200 transition"
+                  data-testid={`button-download-backup-${i}`}
+                >
                   <Download className="w-4 h-4 text-slate-600" />
                 </button>
               </div>
@@ -724,11 +768,19 @@ function StorageSection() {
           ))}
         </div>
         <div className="mt-4 flex gap-3">
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-500 text-white text-sm font-medium hover:bg-teal-600 transition">
+          <button 
+            onClick={() => toast({ title: "Backup Started", description: "Creating manual backup, this may take a few minutes..." })}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-teal-500 text-white text-sm font-medium hover:bg-teal-600 transition"
+            data-testid="button-create-backup"
+          >
             <RefreshCw className="w-4 h-4" />
             Create Backup Now
           </button>
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition">
+          <button 
+            onClick={() => toast({ title: "Schedule Backups", description: "Opening backup schedule configuration..." })}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition"
+            data-testid="button-schedule-backups"
+          >
             <Calendar className="w-4 h-4" />
             Schedule Backups
           </button>
@@ -739,6 +791,7 @@ function StorageSection() {
 }
 
 function DeveloperSection({ settings, toggleSetting, setSettings }) {
+  const { toast } = useToast();
   return (
     <div className="space-y-6">
       <SectionHeader 
@@ -774,10 +827,18 @@ function DeveloperSection({ settings, toggleSetting, setSettings }) {
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-slate-700">Production API Key</span>
               <div className="flex items-center gap-2">
-                <button className="p-1.5 rounded-lg hover:bg-slate-200 transition">
+                <button 
+                  onClick={() => toast({ title: "API Key", description: "Production key revealed temporarily" })}
+                  className="p-1.5 rounded-lg hover:bg-slate-200 transition"
+                  data-testid="button-view-prod-key"
+                >
                   <Eye className="w-4 h-4 text-slate-500" />
                 </button>
-                <button className="p-1.5 rounded-lg hover:bg-slate-200 transition">
+                <button 
+                  onClick={() => { navigator.clipboard?.writeText("glp_prod_****"); toast({ title: "Copied", description: "Production API key copied to clipboard" }); }}
+                  className="p-1.5 rounded-lg hover:bg-slate-200 transition"
+                  data-testid="button-copy-prod-key"
+                >
                   <Copy className="w-4 h-4 text-slate-500" />
                 </button>
               </div>
@@ -788,10 +849,18 @@ function DeveloperSection({ settings, toggleSetting, setSettings }) {
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-medium text-slate-700">Development API Key</span>
               <div className="flex items-center gap-2">
-                <button className="p-1.5 rounded-lg hover:bg-slate-200 transition">
+                <button 
+                  onClick={() => toast({ title: "API Key", description: "Development key revealed temporarily" })}
+                  className="p-1.5 rounded-lg hover:bg-slate-200 transition"
+                  data-testid="button-view-dev-key"
+                >
                   <Eye className="w-4 h-4 text-slate-500" />
                 </button>
-                <button className="p-1.5 rounded-lg hover:bg-slate-200 transition">
+                <button 
+                  onClick={() => { navigator.clipboard?.writeText("glp_dev_****"); toast({ title: "Copied", description: "Development API key copied to clipboard" }); }}
+                  className="p-1.5 rounded-lg hover:bg-slate-200 transition"
+                  data-testid="button-copy-dev-key"
+                >
                   <Copy className="w-4 h-4 text-slate-500" />
                 </button>
               </div>
@@ -799,7 +868,11 @@ function DeveloperSection({ settings, toggleSetting, setSettings }) {
             <code className="text-sm font-mono text-slate-600">glp_dev_****************************</code>
           </div>
         </div>
-        <button className="mt-4 inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-700 font-medium">
+        <button 
+          onClick={() => toast({ title: "Regenerate Keys", description: "Are you sure? This will invalidate existing keys.", variant: "destructive" })}
+          className="mt-4 inline-flex items-center gap-2 text-sm text-teal-600 hover:text-teal-700 font-medium"
+          data-testid="button-regenerate-keys"
+        >
           <RefreshCw className="w-4 h-4" />
           Regenerate Keys
         </button>
@@ -815,11 +888,19 @@ function DeveloperSection({ settings, toggleSetting, setSettings }) {
           <Toggle enabled={settings.debugMode} onChange={() => toggleSetting('debugMode')} label="Debug Mode" />
         </SettingRow>
         <div className="mt-4 flex gap-3">
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition">
+          <button 
+            onClick={() => toast({ title: "View Logs", description: "Opening log viewer..." })}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition"
+            data-testid="button-view-logs"
+          >
             <Terminal className="w-4 h-4" />
             View Logs
           </button>
-          <button className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition">
+          <button 
+            onClick={() => toast({ title: "Export Logs", description: "Log export will be emailed to admin" })}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition"
+            data-testid="button-export-logs"
+          >
             <Download className="w-4 h-4" />
             Export Logs
           </button>

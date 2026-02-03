@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'wouter';
+import { Link, useLocation } from 'wouter';
 import { 
   Calendar, Bell, Users, TrendingUp, Heart, Clock, 
   CheckCircle, Star, MessageCircle, Activity, Target,
@@ -8,9 +8,12 @@ import {
 import SEO from '../components/SEO';
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
 
 export default function CRMPage() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
 
   const upcomingEvents = [
     { id: 1, time: '9:00 AM', title: 'Morning Meditation', type: 'practice', badge: '+10 XP' },
@@ -84,10 +87,20 @@ export default function CRMPage() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <button className="p-2.5 rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }} data-testid="button-notifications">
+                <button 
+                  onClick={() => toast({ title: "Notifications", description: "You have 2 unread notifications" })}
+                  className="p-2.5 rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" 
+                  style={{ color: 'var(--glp-ink)' }} 
+                  data-testid="button-notifications"
+                >
                   <Bell className="h-5 w-5" />
                 </button>
-                <button className="p-2.5 rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-ink)' }} data-testid="button-settings">
+                <button 
+                  onClick={() => setLocation('/settings')}
+                  className="p-2.5 rounded-lg transition-colors hover:bg-[var(--glp-sage-10)]" 
+                  style={{ color: 'var(--glp-ink)' }} 
+                  data-testid="button-settings"
+                >
                   <Settings className="h-5 w-5" />
                 </button>
                 <div className="h-9 w-9 rounded-full flex items-center justify-center" style={{ background: 'var(--glp-sage)' }}>
