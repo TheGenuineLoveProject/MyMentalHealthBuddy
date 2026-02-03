@@ -1,19 +1,12 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { Flame, Calendar, TrendingUp, Award, Settings, X, ArrowRight, Check } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Flame, Calendar, TrendingUp, Award, Settings, X, ArrowRight, Check, RefreshCw, AlertCircle } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Switch } from "@/components/ui/Switch";
-
-const MOCK_STREAK_DATA = {
-  currentStreak: 7,
-  longestStreak: 14,
-  totalDays: 45,
-  thisWeek: [true, true, true, true, true, false, false],
-  streakEnabled: true
-};
 
 const GENTLE_MESSAGES = [
   "Every moment is a fresh start.",
@@ -23,15 +16,54 @@ const GENTLE_MESSAGES = [
 ];
 
 export default function ProgressStreaks() {
-  const [data, setData] = useState(MOCK_STREAK_DATA);
   const [showSettings, setShowSettings] = useState(false);
+  const [streakEnabled, setStreakEnabled] = useState(true);
+
+  const { data: progressData, isLoading, isError, refetch } = useQuery({
+    queryKey: ["/api/progress/stats"],
+    staleTime: 1000 * 60 * 5
+  });
+
+  const data = {
+    currentStreak: progressData?.currentStreak || 0,
+    longestStreak: progressData?.longestStreak || 0,
+    totalDays: progressData?.totalEntries || 0,
+    thisWeek: [false, false, false, false, false, false, false]
+  };
 
   const weekDays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
   const randomMessage = GENTLE_MESSAGES[Math.floor(Math.random() * GENTLE_MESSAGES.length)];
 
   const toggleStreaks = () => {
-    setData(prev => ({ ...prev, streakEnabled: !prev.streakEnabled }));
+    setStreakEnabled(prev => !prev);
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center" role="status" aria-busy="true">
+        <div className="text-center">
+          <RefreshCw className="w-8 h-8 animate-spin text-primary mx-auto mb-4" aria-hidden="true" />
+          <p className="text-muted-foreground">Loading your progress...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center" role="alert" aria-live="assertive">
+        <div className="text-center p-8 max-w-md">
+          <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" aria-hidden="true" />
+          <h2 className="text-xl font-semibold mb-2">Unable to load progress</h2>
+          <p className="text-muted-foreground mb-6">Please try again in a moment.</p>
+          <Button onClick={() => refetch()} data-testid="button-retry">
+            <RefreshCw className="w-4 h-4 mr-2" aria-hidden="true" />
+            Try Again
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -75,7 +107,7 @@ export default function ProgressStreaks() {
                   </p>
                 </div>
                 <Switch
-                  checked={data.streakEnabled}
+                  checked={streakEnabled}
                   onCheckedChange={toggleStreaks}
                   data-testid="switch-streak-toggle"
                 />
@@ -84,7 +116,7 @@ export default function ProgressStreaks() {
           </Card>
         )}
 
-        {data.streakEnabled ? (
+        {streakEnabled ? (
           <>
             <div className="grid gap-4 sm:grid-cols-3 mb-8">
               <Card className="bg-gradient-to-br from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20 border-orange-200 dark:border-orange-800">

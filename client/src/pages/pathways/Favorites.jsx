@@ -1,26 +1,38 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Heart, Star, Bookmark, Trash2, ArrowRight, Grid, List, Search } from "lucide-react";
+import { Heart, Star, Bookmark, Trash2, ArrowRight, Grid, List, Search, RefreshCw, AlertCircle } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
-import { queryClient } from "../../lib/queryClient";
-
-const MOCK_FAVORITES = [
-  { id: "1", type: "tool", title: "Mood Tracker", path: "/mood", category: "Self-Awareness", savedAt: "2026-01-20" },
-  { id: "2", type: "tool", title: "Breathwork", path: "/tools/breathwork", category: "Calm", savedAt: "2026-01-19" },
-  { id: "3", type: "page", title: "Self-Love Guide", path: "/wisdom/self-love", category: "Wisdom", savedAt: "2026-01-18" },
-  { id: "4", type: "tool", title: "Gratitude Journal", path: "/gratitude", category: "Positivity", savedAt: "2026-01-17" },
-  { id: "5", type: "page", title: "Boundaries 101", path: "/wisdom/boundaries", category: "Relationships", savedAt: "2026-01-15" }
-];
+import { queryClient, apiRequest } from "../../lib/queryClient";
 
 export default function Favorites() {
   const [viewMode, setViewMode] = useState("grid");
   const [searchTerm, setSearchTerm] = useState("");
-  const [favorites, setFavorites] = useState(MOCK_FAVORITES);
+
+  const { data: favoritesData, isLoading, isError, refetch } = useQuery({
+    queryKey: ["/api/favorites"],
+    staleTime: 1000 * 60 * 5
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (id) => apiRequest("DELETE", `/api/favorites/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/favorites"] });
+    }
+  });
+
+  const favorites = (favoritesData || []).map(fav => ({
+    id: fav.id,
+    type: fav.itemType || "tool",
+    title: fav.itemContent || "Saved Item",
+    path: fav.itemPath || "/tools",
+    category: fav.category || "Wellness",
+    savedAt: fav.createdAt ? new Date(fav.createdAt).toISOString().split("T")[0] : ""
+  }));
 
   const filteredFavorites = favorites.filter(fav => 
     fav.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -28,8 +40,35 @@ export default function Favorites() {
   );
 
   const removeFavorite = (id) => {
-    setFavorites(prev => prev.filter(f => f.id !== id));
+    deleteMutation.mutate(id);
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center" role="status" aria-busy="true">
+        <div className="text-center">
+          <RefreshCw className="w-8 h-8 animate-spin text-primary mx-auto mb-4" aria-hidden="true" />
+          <p className="text-muted-foreground">Loading your favorites...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center" role="alert" aria-live="assertive">
+        <div className="text-center p-8 max-w-md">
+          <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" aria-hidden="true" />
+          <h2 className="text-xl font-semibold mb-2">Unable to load favorites</h2>
+          <p className="text-muted-foreground mb-6">Please try again in a moment.</p>
+          <Button onClick={() => refetch()} data-testid="button-retry">
+            <RefreshCw className="w-4 h-4 mr-2" aria-hidden="true" />
+            Try Again
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
