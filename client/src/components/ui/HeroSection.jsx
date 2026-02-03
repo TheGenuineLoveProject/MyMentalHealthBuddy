@@ -55,10 +55,11 @@ const HeroText = ({ children }) => (
   </p>
 );
 
-const CTAButton = ({ href, children }) => (
+const CTAButton = ({ href, children, testId }) => (
   <a
     href={href}
     className="inline-block transition-transform hover:scale-105"
+    data-testid={testId}
     style={{
       fontFamily: theme.fonts.body,
       fontSize: theme.fontSizes.button,
@@ -84,7 +85,7 @@ function HeroSection() {
       <HeroText>
         Join thousands who have found peace, growth, and genuine love within themselves.
       </HeroText>
-      <CTAButton href="/register">Begin Your Healing Journey →</CTAButton>
+      <CTAButton href="/register" testId="link-register-cta">Begin Your Healing Journey →</CTAButton>
     </HeroWrapper>
   );
 }

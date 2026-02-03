@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { BookOpen, Calendar, Search, Eye, ArrowRight, Loader2 } from "lucide-react";
+import { BookOpen, Calendar, Search, Eye, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -15,67 +15,80 @@ const TYPE_COLORS = {
   gratitude: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"
 };
 
+const normalizeData = (data) => {
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
+  if (data.ok === false) return [];
+  if (data.data && Array.isArray(data.data)) return data.data;
+  return [];
+};
+
+const parseDate = (dateStr) => {
+  if (!dateStr) return 0;
+  const parsed = new Date(dateStr);
+  return isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+};
+
 export default function ReflectionHistory() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
   const { toast } = useToast();
   const [, navigate] = useLocation();
 
-  const { data: journalData, isLoading: journalLoading } = useQuery({
+  const { data: journalData, isLoading: journalLoading, isError: journalError, refetch: refetchJournal } = useQuery({
     queryKey: ["/api/journal"],
   });
 
-  const { data: moodData, isLoading: moodLoading } = useQuery({
+  const { data: moodData, isLoading: moodLoading, isError: moodError, refetch: refetchMood } = useQuery({
     queryKey: ["/api/mood"],
   });
 
-  const { data: gratitudeData, isLoading: gratitudeLoading } = useQuery({
+  const { data: gratitudeData, isLoading: gratitudeLoading, isError: gratitudeError, refetch: refetchGratitude } = useQuery({
     queryKey: ["/api/gratitude"],
   });
 
   const isLoading = journalLoading || moodLoading || gratitudeLoading;
+  const hasError = journalError || moodError || gratitudeError;
+
+  const handleRetry = () => {
+    if (journalError) refetchJournal();
+    if (moodError) refetchMood();
+    if (gratitudeError) refetchGratitude();
+  };
 
   const reflections = [];
 
-  if (journalData?.data) {
-    journalData.data.forEach(entry => {
-      reflections.push({
-        id: `journal-${entry.id}`,
-        date: entry.createdAt || entry.date,
-        type: "journal",
-        preview: entry.title || entry.content?.substring(0, 50) + "..." || "Journal entry",
-        mood: entry.mood || "reflective"
-      });
+  normalizeData(journalData).forEach(entry => {
+    reflections.push({
+      id: `journal-${entry.id}`,
+      date: entry.createdAt || entry.date,
+      type: "journal",
+      preview: entry.title || (entry.content?.substring(0, 50) + "...") || "Journal entry",
+      mood: entry.mood || "reflective"
     });
-  }
+  });
 
-  if (moodData) {
-    const moods = Array.isArray(moodData) ? moodData : moodData.data || [];
-    moods.forEach(entry => {
-      reflections.push({
-        id: `mood-${entry.id}`,
-        date: entry.createdAt || entry.date,
-        type: "mood",
-        preview: entry.note || "Mood check-in",
-        mood: entry.mood || entry.value || "neutral"
-      });
+  normalizeData(moodData).forEach(entry => {
+    reflections.push({
+      id: `mood-${entry.id}`,
+      date: entry.createdAt || entry.date,
+      type: "mood",
+      preview: entry.note || "Mood check-in",
+      mood: entry.mood || entry.value || "neutral"
     });
-  }
+  });
 
-  if (gratitudeData) {
-    const gratitude = Array.isArray(gratitudeData) ? gratitudeData : gratitudeData.data || [];
-    gratitude.forEach(entry => {
-      reflections.push({
-        id: `gratitude-${entry.id}`,
-        date: entry.createdAt || entry.date,
-        type: "gratitude",
-        preview: entry.content?.substring(0, 50) + "..." || "Gratitude entry",
-        mood: "grateful"
-      });
+  normalizeData(gratitudeData).forEach(entry => {
+    reflections.push({
+      id: `gratitude-${entry.id}`,
+      date: entry.createdAt || entry.date,
+      type: "gratitude",
+      preview: (entry.content?.substring(0, 50) + "...") || "Gratitude entry",
+      mood: "grateful"
     });
-  }
+  });
 
-  reflections.sort((a, b) => new Date(b.date) - new Date(a.date));
+  reflections.sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
   const handleViewReflection = (reflection) => {
     if (reflection.type === "journal") {
@@ -154,6 +167,17 @@ export default function ReflectionHistory() {
             <Card className="p-8 text-center">
               <Loader2 className="w-12 h-12 text-muted-foreground mx-auto mb-4 animate-spin" />
               <p className="text-muted-foreground">Loading your reflections...</p>
+            </Card>
+          ) : hasError ? (
+            <Card className="p-8 text-center">
+              <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" />
+              <h2 className="text-lg font-semibold mb-2">Unable to load reflections</h2>
+              <p className="text-muted-foreground mb-4">
+                We encountered an issue loading your data. Please try again.
+              </p>
+              <Button onClick={handleRetry} data-testid="button-retry">
+                Try Again
+              </Button>
             </Card>
           ) : filteredReflections.length === 0 ? (
             <Card className="p-8 text-center">
