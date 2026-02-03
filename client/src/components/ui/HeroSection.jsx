@@ -1,57 +1,80 @@
-import React from 'react';
-import styled from 'styled-components';
 import { theme } from './theme';
 
-const HeroWrapper = styled.section`
-  background: ${theme.colors.sageGreen};
-  padding: ${theme.spacing.sectionVertical} ${theme.spacing.sectionHorizontal};
-  text-align: center;
-  max-width: ${theme.spacing.maxWidth};
-  margin: 0 auto;
-`;
+const HeroWrapper = ({ children }) => (
+  <section
+    className="text-center mx-auto"
+    style={{
+      background: theme.colors.sageGreen,
+      padding: `${theme.spacing.sectionVertical} ${theme.spacing.sectionHorizontal}`,
+      maxWidth: theme.spacing.maxWidth,
+    }}
+  >
+    {children}
+  </section>
+);
 
-const HeroHeading = styled.h1`
-  font-family: ${theme.fonts.heading};
-  font-size: ${theme.fontSizes.h1};
-  color: ${theme.colors.charcoal};
-`;
+const HeroHeading = ({ children }) => (
+  <h1
+    style={{
+      fontFamily: theme.fonts.heading,
+      fontSize: theme.fontSizes.h1,
+      color: theme.colors.charcoal,
+    }}
+  >
+    {children}
+  </h1>
+);
 
-const HeroSubheading = styled.h2`
-  font-family: ${theme.fonts.heading};
-  font-size: ${theme.fontSizes.h2};
-  background: ${theme.colors.metallicGoldGradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
-`;
+const HeroSubheading = ({ children }) => (
+  <h2
+    className="mb-6"
+    style={{
+      fontFamily: theme.fonts.heading,
+      fontSize: theme.fontSizes.h2,
+      background: theme.colors.metallicGoldGradient,
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      backgroundClip: 'text',
+    }}
+  >
+    {children}
+  </h2>
+);
 
-const HeroText = styled.p`
-  font-family: ${theme.fonts.body};
-  font-size: ${theme.fontSizes.body};
-  color: ${theme.colors.charcoal};
-  margin-bottom: 2rem;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-`;
+const HeroText = ({ children }) => (
+  <p
+    className="mb-8 mx-auto"
+    style={{
+      fontFamily: theme.fonts.body,
+      fontSize: theme.fontSizes.body,
+      color: theme.colors.charcoal,
+      maxWidth: 700,
+    }}
+  >
+    {children}
+  </p>
+);
 
-const CTAButton = styled.a`
-  font-family: ${theme.fonts.body};
-  font-size: ${theme.fontSizes.button};
-  padding: 1rem 2rem;
-  background: ${theme.colors.metallicGoldGradient};
-  color: ${theme.colors.softWhite};
-  border: none;
-  border-radius: ${theme.radii.pill};
-  box-shadow: ${theme.shadows.goldGlow};
-  cursor: pointer;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-  }
-`;
+const CTAButton = ({ href, children }) => (
+  <a
+    href={href}
+    className="inline-block transition-transform hover:scale-105"
+    style={{
+      fontFamily: theme.fonts.body,
+      fontSize: theme.fontSizes.button,
+      padding: '1rem 2rem',
+      background: theme.colors.metallicGoldGradient,
+      color: theme.colors.softWhite,
+      border: 'none',
+      borderRadius: theme.radii.pill,
+      boxShadow: theme.shadows.goldGlow,
+      cursor: 'pointer',
+      textDecoration: 'none',
+    }}
+  >
+    {children}
+  </a>
+);
 
 function HeroSection() {
   return (
@@ -67,3 +90,4 @@ function HeroSection() {
 }
 
 export default HeroSection;
+export { HeroSection };
