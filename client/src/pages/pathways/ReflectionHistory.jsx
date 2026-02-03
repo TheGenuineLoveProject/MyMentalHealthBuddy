@@ -96,7 +96,7 @@ export default function ReflectionHistory() {
     } else if (reflection.type === "mood") {
       navigate("/mood");
     } else if (reflection.type === "gratitude") {
-      navigate("/gratitude");
+      navigate("/hubs/gratitude");
     }
     toast({ title: "Opening Reflection", description: `Viewing ${reflection.type} entry` });
   };
