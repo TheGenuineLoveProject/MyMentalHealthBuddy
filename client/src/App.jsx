@@ -932,6 +932,7 @@ export default function App() {
               <Route path="/our-story">{() => <CreatorProfile />}</Route>
               <Route path="/press">{() => <PressKit />}</Route>
               <Route path="/courses">{() => <CourseCatalog />}</Route>
+              <Route path="/learn/courses">{() => <CourseCatalog />}</Route>
               <Route path="/practices">{() => <PracticeLibrary />}</Route>
               <Route path="/admin/roles">{() => <ProtectedRoute><AdminGuard><RolesPermissions /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/feature-flags">{() => <ProtectedRoute><AdminGuard><FeatureFlags /></AdminGuard></ProtectedRoute>}</Route>
