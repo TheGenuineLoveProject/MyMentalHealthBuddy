@@ -39,6 +39,7 @@ import {
 import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
 
 let __routeByPathCache = null;
+let __cachedRoutesRef = null;
 
 function buildRouteByPathCache(routesArray) {
   const map = {};
@@ -51,10 +52,15 @@ function buildRouteByPathCache(routesArray) {
 }
 
 function getRouteByPath(pathname, routesArray) {
-  if (!__routeByPathCache) {
+  if (!__routeByPathCache || __cachedRoutesRef !== routesArray) {
     __routeByPathCache = buildRouteByPathCache(routesArray);
+    __cachedRoutesRef = routesArray;
   }
-  return __routeByPathCache[pathname] || null;
+  const route = __routeByPathCache[pathname] || null;
+  if (route && route.aliasOf) {
+    return __routeByPathCache[route.aliasOf] || null;
+  }
+  return route;
 }
 
 /**
@@ -1929,6 +1935,22 @@ const rawRoutes = [
     }
   },
   {
+    route: '/signin',
+    aliasOf: '/login'
+  },
+  {
+    route: '/sign-in',
+    aliasOf: '/login'
+  },
+  {
+    route: '/signup',
+    aliasOf: '/register'
+  },
+  {
+    route: '/sign-up',
+    aliasOf: '/register'
+  },
+  {
     route: '/forgot-password',
     category: 'auth',
     pageLabel: 'Forgot Password',
@@ -2185,6 +2207,21 @@ const rawRoutes = [
         ]
       }
     ]
+  },
+  {
+    route: '/overview',
+    category: 'core',
+    pageLabel: 'Overview',
+    title: 'Overview — The Genuine Love Project',
+    description: 'A quick overview of your healing journey and progress.',
+    hero: {
+      eyebrow: 'At a Glance',
+      title: 'Your journey',
+      titleHighlight: 'overview.',
+      subtitle: 'See your progress, upcoming practices, and personalized insights.',
+      primaryCta: { label: 'Go to Dashboard', href: '/dashboard' },
+      secondaryCta: { label: 'View Progress', href: '/progress' }
+    }
   },
   {
     route: '/crm',
@@ -2777,6 +2814,10 @@ const rawRoutes = [
       primaryCta: { label: 'Start Conversation', href: '#chat' },
       secondaryCta: { label: 'Learn About AI Safety', href: '/safety' }
     }
+  },
+  {
+    route: '/ai-chat',
+    aliasOf: '/chat'
   },
   {
     route: '/crisis',
@@ -7266,6 +7307,21 @@ const rawRoutes = [
     }
   },
   {
+    route: '/help',
+    category: 'support',
+    pageLabel: 'Help Center',
+    title: 'Help Center — The Genuine Love Project',
+    description: 'Find answers to common questions and get support.',
+    hero: {
+      eyebrow: 'Help Center',
+      title: 'How can we',
+      titleHighlight: 'help you?',
+      subtitle: 'Browse articles, FAQs, and guides to get the most from your experience.',
+      primaryCta: { label: 'Browse Articles', href: '#articles' },
+      secondaryCta: { label: 'Contact Support', href: '/support' }
+    }
+  },
+  {
     route: '/professional-resources',
     category: 'support',
     pageLabel: 'Professional Resources',
@@ -7397,6 +7453,36 @@ const rawRoutes = [
     }
   },
   {
+    route: '/cookies',
+    category: 'legal',
+    pageLabel: 'Cookie Policy',
+    title: 'Cookie Policy — The Genuine Love Project',
+    description: 'How we use cookies and similar technologies.',
+    hero: {
+      eyebrow: 'Transparency',
+      title: 'Cookie',
+      titleHighlight: 'Policy.',
+      subtitle: 'We use cookies to improve your experience. Here is how.',
+      primaryCta: { label: 'Read Policy', href: '#cookies' },
+      secondaryCta: { label: 'Manage Preferences', href: '#preferences' }
+    }
+  },
+  {
+    route: '/tos',
+    category: 'legal',
+    pageLabel: 'Terms of Service',
+    title: 'Terms of Service — The Genuine Love Project',
+    description: 'Terms and conditions for using our platform.',
+    hero: {
+      eyebrow: 'Agreement',
+      title: 'Terms of',
+      titleHighlight: 'Service.',
+      subtitle: 'The terms that govern your use of our wellness platform.',
+      primaryCta: { label: 'Read Terms', href: '#terms' },
+      secondaryCta: { label: 'Contact Legal', href: '/support' }
+    }
+  },
+  {
     route: '/legal',
     category: 'legal',
     pageLabel: 'Legal',
@@ -7488,6 +7574,21 @@ const rawRoutes = [
       subtitle: 'Unlock all features and accelerate your healing.',
       primaryCta: { label: 'Upgrade Now', href: '#upgrade' },
       secondaryCta: { label: 'Compare Plans', href: '/pricing' }
+    }
+  },
+  {
+    route: '/billing',
+    category: 'account',
+    pageLabel: 'Billing',
+    title: 'Billing — The Genuine Love Project',
+    description: 'Manage your subscription and payment methods.',
+    hero: {
+      eyebrow: 'Account',
+      title: 'Billing &',
+      titleHighlight: 'Payments.',
+      subtitle: 'Manage your subscription, view invoices, and update payment methods.',
+      primaryCta: { label: 'Manage Subscription', href: '#subscription' },
+      secondaryCta: { label: 'View Invoices', href: '#invoices' }
     }
   },
   {

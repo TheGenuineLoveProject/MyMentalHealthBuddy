@@ -323,10 +323,10 @@ export default function App() {
               <Route path="/login" component={Login} />
               <Route path="/login/callback" component={LoginCallback} />
               <Route path="/register" component={Register} />
-              <Route path="/signup">{() => <ConfigRoute route="/signup" />}</Route>
-              <Route path="/sign-up">{() => <ConfigRoute route="/sign-up" />}</Route>
-              <Route path="/signin">{() => <ConfigRoute route="/signin" />}</Route>
-              <Route path="/sign-in">{() => <ConfigRoute route="/sign-in" />}</Route>
+              <Route path="/signup" component={Register} />
+              <Route path="/sign-up" component={Register} />
+              <Route path="/signin" component={Login} />
+              <Route path="/sign-in" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={ResetPassword} />
 
@@ -349,8 +349,9 @@ export default function App() {
               <Route path="/chat">
                 <WellnessRoute><AIChatPage /></WellnessRoute>
               </Route>
-              {/* Route renamed: /therapy → /companion (see line 243) */}
-              <Route path="/ai-chat">{() => <ConfigRoute route="/ai-chat" />}</Route>
+              <Route path="/ai-chat">
+                <WellnessRoute><AIChatPage /></WellnessRoute>
+              </Route>
               <Route path="/analytics">
                 <ProtectedRoute><Analytics /></ProtectedRoute>
               </Route>
