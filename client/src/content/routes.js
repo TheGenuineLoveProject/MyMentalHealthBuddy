@@ -1352,6 +1352,86 @@ const rawRoutes = [
     ]
   },
   {
+    route: '/testimonials',
+    category: 'landing',
+    pageLabel: 'Testimonials',
+    title: 'Testimonials — The Genuine Love Project',
+    description: 'Real stories from real people who have experienced healing and growth through The Genuine Love Project platform.',
+    contentLevels: {
+      beginner: {
+        title: 'Stories of Hope',
+        subtitle: 'Hear from others who started exactly where you are.',
+        bulletPoints: [
+          'Every journey begins with a single step',
+          'You are not alone in what you are feeling',
+          'Small changes can lead to meaningful transformation',
+          'Your one next step: Read one story that resonates with you'
+        ]
+      },
+      intermediate: {
+        title: 'Journeys of Growth',
+        subtitle: 'Discover how others have used these tools.',
+        bulletPoints: [
+          'Learn which features helped others most',
+          'See real progress from consistent practice',
+          'Find inspiration in shared experiences',
+          'Your one next step: Consider starting your own journey'
+        ]
+      },
+      advanced: {
+        title: 'Transformation Stories',
+        subtitle: 'In-depth accounts of personal growth and healing.',
+        bulletPoints: [
+          'Deep dives into individual healing journeys',
+          'Insights from long-term platform users',
+          'Evidence of sustainable emotional wellness',
+          'Your one next step: Join our community of growth'
+        ]
+      }
+    },
+    hero: {
+      eyebrow: 'Stories of Healing',
+      title: 'Real people.',
+      titleHighlight: 'Real transformation.',
+      subtitle: 'These are the voices of people who have walked the path of healing. Their stories remind us that change is possible, one gentle step at a time.',
+      primaryCta: { label: 'Start Your Journey', href: '/register' },
+      secondaryCta: { label: 'Explore Features', href: '/features' }
+    },
+    modules: [
+      { icon: 'Heart', title: 'Self-Love', description: 'Stories of learning to embrace and accept oneself.' },
+      { icon: 'Sparkles', title: 'Growth', description: 'Journeys of personal development and transformation.' },
+      { icon: 'Shield', title: 'Healing', description: 'Accounts of recovery and emotional wellness.' }
+    ],
+    sections: [
+      {
+        id: 'featured-stories',
+        eyebrow: 'Featured Stories',
+        title: 'Voices from our community',
+        subtitle: 'Each story is unique, yet they all share a common thread of hope and resilience.',
+        variant: 'glow',
+        cards: [
+          { icon: 'Quote', title: 'Finding Peace', text: '"I never thought I could feel calm again. The breathing exercises changed everything for me."' },
+          { icon: 'Quote', title: 'Learning Self-Compassion', text: '"The AI companion helped me see myself the way a loving friend would. That perspective shift was everything."' },
+          { icon: 'Quote', title: 'Daily Practice', text: '"Journaling every morning has become my sanctuary. I finally have a safe space to process my thoughts."' },
+          { icon: 'Quote', title: 'Reconnecting', text: '"Through inner child work, I reconnected with parts of myself I had forgotten. Healing is real."' }
+        ]
+      },
+      {
+        id: 'impact',
+        eyebrow: 'Our Impact',
+        title: 'The ripple effect of healing',
+        subtitle: 'When one person heals, it touches everyone around them.',
+        variant: 'pattern',
+        bullets: [
+          'Thousands of journal entries written in safe, private spaces',
+          'Countless moments of calm found through breathing exercises',
+          'Daily check-ins helping people understand their emotional patterns',
+          'A growing community supporting each other in healing'
+        ]
+      }
+    ]
+  },
+  {
     route: '/healing',
     category: 'landing',
     pageLabel: 'Healing Landing',
