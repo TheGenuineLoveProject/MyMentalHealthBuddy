@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { 
   MessageCircle, ArrowLeft, Send, Heart, Sparkles, 
-  Bot, User, Loader2, MoreVertical, Lightbulb, AlertTriangle
+  Bot, User, Loader2, MoreVertical, Lightbulb, AlertTriangle,
+  Settings, Trash2, Download, Volume2, VolumeX, Moon, Sun, X
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -39,6 +40,58 @@ export default function ChatConversation() {
   const [isTyping, setIsTyping] = useState(false);
   const [error, setError] = useState(null);
   const messagesEndRef = useRef(null);
+  const [showSettingsMenu, setShowSettingsMenu] = useState(false);
+  const [chatSettings, setChatSettings] = useState(() => {
+    try {
+      const saved = localStorage.getItem("glp_chat_settings");
+      return saved ? JSON.parse(saved) : {
+        soundEnabled: true,
+        responseStyle: "warm",
+        autoScroll: true
+      };
+    } catch {
+      return { soundEnabled: true, responseStyle: "warm", autoScroll: true };
+    }
+  });
+  
+  const updateSetting = (key, value) => {
+    setChatSettings(prev => {
+      const updated = { ...prev, [key]: value };
+      localStorage.setItem("glp_chat_settings", JSON.stringify(updated));
+      return updated;
+    });
+    toast({
+      title: "Setting Updated",
+      description: `${key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase())} changed.`
+    });
+  };
+  
+  const handleClearHistory = () => {
+    setMessages([WELCOME_MESSAGE]);
+    setShowSettingsMenu(false);
+    toast({
+      title: "Chat Cleared",
+      description: "Your conversation history has been cleared."
+    });
+  };
+  
+  const handleExportChat = () => {
+    const exportData = messages.map(m => 
+      `[${m.timestamp.toLocaleString()}] ${m.role === 'user' ? 'You' : 'AI Companion'}: ${m.content}`
+    ).join('\n\n');
+    const blob = new Blob([exportData], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `glp-chat-${new Date().toISOString().split('T')[0]}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setShowSettingsMenu(false);
+    toast({
+      title: "Chat Exported",
+      description: "Your conversation has been downloaded."
+    });
+  };
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -146,17 +199,66 @@ export default function ChatConversation() {
                 </p>
               </div>
             </div>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              data-testid="button-menu"
-              onClick={() => toast({
-                title: "Chat Options",
-                description: "Settings menu coming soon"
-              })}
-            >
-              <MoreVertical className="h-5 w-5" />
-            </Button>
+            <div className="relative">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                data-testid="button-menu"
+                onClick={() => setShowSettingsMenu(!showSettingsMenu)}
+              >
+                <MoreVertical className="h-5 w-5" />
+              </Button>
+              
+              {showSettingsMenu && (
+                <div className="absolute right-0 top-full mt-2 w-64 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-[var(--sage-200)] dark:border-slate-700 p-2 z-50">
+                  <div className="p-2 border-b border-[var(--sage-200)] dark:border-slate-700 mb-2">
+                    <p className="text-body-sm font-medium text-[var(--sage-700)]">Chat Settings</p>
+                  </div>
+                  
+                  <button
+                    onClick={() => updateSetting('soundEnabled', !chatSettings.soundEnabled)}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--sage-100)] dark:hover:bg-slate-700 transition"
+                    data-testid="button-toggle-sound"
+                  >
+                    {chatSettings.soundEnabled ? (
+                      <Volume2 className="w-5 h-5 text-[var(--teal-600)]" />
+                    ) : (
+                      <VolumeX className="w-5 h-5 text-[var(--sage-500)]" />
+                    )}
+                    <span className="text-body-sm">{chatSettings.soundEnabled ? 'Sound On' : 'Sound Off'}</span>
+                  </button>
+                  
+                  <button
+                    onClick={() => updateSetting('autoScroll', !chatSettings.autoScroll)}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--sage-100)] dark:hover:bg-slate-700 transition"
+                    data-testid="button-toggle-autoscroll"
+                  >
+                    <Settings className="w-5 h-5 text-[var(--sage-500)]" />
+                    <span className="text-body-sm">{chatSettings.autoScroll ? 'Auto-scroll On' : 'Auto-scroll Off'}</span>
+                  </button>
+                  
+                  <div className="border-t border-[var(--sage-200)] dark:border-slate-700 my-2" />
+                  
+                  <button
+                    onClick={handleExportChat}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-[var(--sage-100)] dark:hover:bg-slate-700 transition"
+                    data-testid="button-export-chat"
+                  >
+                    <Download className="w-5 h-5 text-[var(--sage-500)]" />
+                    <span className="text-body-sm">Export Chat</span>
+                  </button>
+                  
+                  <button
+                    onClick={handleClearHistory}
+                    className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 transition"
+                    data-testid="button-clear-chat"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                    <span className="text-body-sm">Clear History</span>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>

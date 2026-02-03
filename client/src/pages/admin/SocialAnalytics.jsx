@@ -117,30 +117,77 @@ function ContentPerformance({ posts }) {
 }
 
 export default function SocialAnalytics() {
-  const { data: analytics = {}, isLoading } = useQuery({
+  const { data: analytics = {}, isLoading: analyticsLoading } = useQuery({
     queryKey: ["/api/admin/social/analytics"],
   });
   
-  const { data: drafts = [] } = useQuery({
+  const { data: drafts = [], isLoading: draftsLoading } = useQuery({
     queryKey: ["/api/admin/social/drafts"],
   });
   
-  const publishedCount = drafts.filter(d => d.status === "published").length;
+  const isLoading = analyticsLoading || draftsLoading;
+  
+  const publishedDrafts = drafts.filter(d => d.status === "published");
+  const publishedCount = publishedDrafts.length;
   const approvedCount = drafts.filter(d => d.status === "approved").length;
   const scheduledCount = drafts.filter(d => d.status === "scheduled").length;
+  const totalDrafts = drafts.length;
   
-  const mockPlatformStats = [
-    { platform: "instagram", handle: "thegenuineloveproject", posts: 12, engagement: "4.2%", reach: "2.4K" },
-    { platform: "tiktok", handle: "genuineloveproject", posts: 8, engagement: "6.8%", reach: "5.1K" },
-    { platform: "youtube", handle: "GenuineLoveProject", posts: 3, engagement: "2.1%", reach: "890" },
-    { platform: "x", handle: "GenuineLoveProj", posts: 15, engagement: "1.8%", reach: "1.2K" },
-  ];
+  const platformCounts = publishedDrafts.reduce((acc, draft) => {
+    const platform = draft.platform || "instagram";
+    acc[platform] = (acc[platform] || 0) + 1;
+    return acc;
+  }, {});
   
-  const mockTopPosts = [
-    { title: "5 Signs You're Healing (Even When It Doesn't Feel Like It)", platform: "Instagram", date: "Jan 22", likes: 342, comments: 28, shares: 45 },
-    { title: "Grounding Exercise for Anxious Moments", platform: "TikTok", date: "Jan 20", likes: 1.2 + "K", comments: 89, shares: 156 },
-    { title: "Why Self-Compassion Matters", platform: "YouTube", date: "Jan 18", likes: 234, comments: 42, shares: 31 },
-  ];
+  const platformStats = Object.entries(platformCounts).map(([platform, count]) => ({
+    platform,
+    handle: analytics?.handles?.[platform] || "connected",
+    posts: count,
+    engagement: analytics?.engagement?.[platform] || "—",
+    reach: analytics?.reach?.[platform] || "—"
+  }));
+  
+  if (platformStats.length === 0) {
+    platformStats.push(
+      { platform: "instagram", handle: "not connected", posts: 0, engagement: "—", reach: "—" },
+      { platform: "tiktok", handle: "not connected", posts: 0, engagement: "—", reach: "—" }
+    );
+  }
+  
+  const topPosts = publishedDrafts
+    .slice(0, 5)
+    .map((draft, idx) => ({
+      title: draft.title || draft.content?.substring(0, 50) || `Post ${idx + 1}`,
+      platform: draft.platform || "Instagram",
+      date: draft.createdAt ? new Date(draft.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : "Recent",
+      likes: draft.likes || "—",
+      comments: draft.comments || "—",
+      shares: draft.shares || "—"
+    }));
+  
+  const themes = drafts.reduce((acc, draft) => {
+    const content = (draft.content || draft.title || "").toLowerCase();
+    if (content.includes("compassion") || content.includes("self-love")) acc["Self-Compassion"] = (acc["Self-Compassion"] || 0) + 1;
+    if (content.includes("ground") || content.includes("breath")) acc["Grounding"] = (acc["Grounding"] || 0) + 1;
+    if (content.includes("boundary") || content.includes("boundaries")) acc["Boundaries"] = (acc["Boundaries"] || 0) + 1;
+    if (content.includes("nervous") || content.includes("calm")) acc["Nervous System"] = (acc["Nervous System"] || 0) + 1;
+    if (content.includes("heal") || content.includes("recovery")) acc["Healing"] = (acc["Healing"] || 0) + 1;
+    return acc;
+  }, {});
+  
+  const topThemes = Object.entries(themes)
+    .sort(([,a], [,b]) => b - a)
+    .slice(0, 4)
+    .map(([theme, count]) => ({ theme, count }));
+  
+  if (topThemes.length === 0) {
+    topThemes.push(
+      { theme: "Self-Compassion", count: 0 },
+      { theme: "Grounding", count: 0 },
+      { theme: "Boundaries", count: 0 },
+      { theme: "Nervous System", count: 0 }
+    );
+  }
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
@@ -179,9 +226,8 @@ export default function SocialAnalytics() {
             color="sage"
           />
           <MetricCard 
-            title="Total Reach" 
-            value={analytics.totalReach || "9.5K"}
-            change={12}
+            title="Total Posts" 
+            value={publishedCount + approvedCount + scheduledCount}
             icon={Users}
             color="sage"
           />
@@ -194,14 +240,20 @@ export default function SocialAnalytics() {
               Platform Performance
             </h3>
             
-            <div className="space-y-3">
-              {mockPlatformStats.map(stats => (
-                <PlatformRow key={stats.platform} platform={stats.platform} stats={stats} />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="flex items-center justify-center py-8">
+                <div className="w-8 h-8 border-2 border-[var(--glp-sage)] border-t-transparent rounded-full animate-spin" />
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {platformStats.map(stats => (
+                  <PlatformRow key={stats.platform} platform={stats.platform} stats={stats} />
+                ))}
+              </div>
+            )}
           </div>
           
-          <ContentPerformance posts={mockTopPosts} />
+          <ContentPerformance posts={topPosts} />
         </div>
         
         <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
@@ -211,19 +263,24 @@ export default function SocialAnalytics() {
           </h3>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {["Self-Compassion", "Grounding", "Boundaries", "Nervous System"].map((theme, idx) => (
-              <div key={theme} className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-center">
+            {topThemes.map((item, idx) => (
+              <div key={item.theme} className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-center">
                 <p className="text-2xl font-bold text-[var(--glp-sage)]">#{idx + 1}</p>
-                <p className="text-sm font-medium text-slate-900 dark:text-white mt-1">{theme}</p>
-                <p className="text-xs text-slate-500 mt-1">{Math.floor(Math.random() * 20 + 5)} posts</p>
+                <p className="text-sm font-medium text-slate-900 dark:text-white mt-1">{item.theme}</p>
+                <p className="text-xs text-slate-500 mt-1">{item.count} posts</p>
               </div>
             ))}
           </div>
         </div>
         
-        <div className="mt-8 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-xl border border-amber-200 dark:border-amber-800">
-          <p className="text-sm text-amber-800 dark:text-amber-200">
-            <strong>Note:</strong> Analytics are currently showing sample data. Connect your social media API keys in the Secrets panel to see real-time metrics.
+        <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+          <p className="text-sm text-blue-800 dark:text-blue-200">
+            <strong>Content Tracking:</strong> Showing data from your content drafts. 
+            {totalDrafts > 0 
+              ? ` ${totalDrafts} total drafts, ${publishedCount} published, ${approvedCount} approved, ${scheduledCount} scheduled.`
+              : " Create and publish content to see your analytics."
+            }
+            {" "}Engagement and reach metrics require connecting social media APIs.
           </p>
         </div>
         

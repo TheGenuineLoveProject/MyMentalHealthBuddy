@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Flag, ToggleLeft, ToggleRight, Search, Plus, Info, Loader2 } from "lucide-react";
+import { Flag, ToggleLeft, ToggleRight, Search, Plus, Info, Loader2, X, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
@@ -22,6 +22,13 @@ export default function FeatureFlags() {
   const [flags, setFlags] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toggling, setToggling] = useState(null);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newFlag, setNewFlag] = useState({
+    id: "",
+    name: "",
+    description: "",
+    percentage: 100
+  });
   
   useEffect(() => {
     try {
@@ -79,6 +86,64 @@ export default function FeatureFlags() {
     setToggling(null);
   };
 
+  const handleAddFlag = () => {
+    if (!newFlag.id || !newFlag.name) {
+      toast({
+        title: "Missing Fields",
+        description: "Please provide both an ID and name for the flag.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    if (flags.some(f => f.id === newFlag.id)) {
+      toast({
+        title: "Duplicate ID",
+        description: "A flag with this ID already exists.",
+        variant: "destructive"
+      });
+      return;
+    }
+    
+    const flagToAdd = {
+      id: newFlag.id.toLowerCase().replace(/\s+/g, "_"),
+      name: newFlag.name,
+      description: newFlag.description || "No description",
+      enabled: true,
+      percentage: parseInt(newFlag.percentage) || 100
+    };
+    
+    setFlags(prev => {
+      const updated = [...prev, flagToAdd];
+      try {
+        localStorage.setItem("glp_admin_feature_flags", JSON.stringify(updated));
+      } catch {}
+      return updated;
+    });
+    
+    setNewFlag({ id: "", name: "", description: "", percentage: 100 });
+    setShowAddForm(false);
+    toast({
+      title: "Flag Created",
+      description: `${flagToAdd.name} has been added.`
+    });
+  };
+  
+  const handleDeleteFlag = (flagId) => {
+    setFlags(prev => {
+      const flag = prev.find(f => f.id === flagId);
+      const updated = prev.filter(f => f.id !== flagId);
+      try {
+        localStorage.setItem("glp_admin_feature_flags", JSON.stringify(updated));
+        toast({
+          title: "Flag Deleted",
+          description: `${flag?.name || flagId} has been removed.`
+        });
+      } catch {}
+      return updated;
+    });
+  };
+
   const filteredFlags = flags.filter(flag =>
     flag.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     flag.id.toLowerCase().includes(searchQuery.toLowerCase())
@@ -123,14 +188,74 @@ export default function FeatureFlags() {
           <Button 
             className="min-h-[44px]" 
             data-testid="button-add-flag"
-            onClick={() => toast({
-              title: "Add Feature Flag",
-              description: "Feature flag creation form coming soon"
-            })}
+            onClick={() => setShowAddForm(true)}
           >
             <Plus className="w-4 h-4 mr-2" /> Add Flag
           </Button>
         </div>
+
+        {showAddForm && (
+          <Card className="mb-6">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-lg">Create New Feature Flag</CardTitle>
+                <Button variant="ghost" size="sm" onClick={() => setShowAddForm(false)}>
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Flag ID</label>
+                  <Input
+                    placeholder="e.g., new_feature"
+                    value={newFlag.id}
+                    onChange={(e) => setNewFlag(prev => ({ ...prev, id: e.target.value }))}
+                    data-testid="input-flag-id"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Display Name</label>
+                  <Input
+                    placeholder="e.g., New Feature"
+                    value={newFlag.name}
+                    onChange={(e) => setNewFlag(prev => ({ ...prev, name: e.target.value }))}
+                    data-testid="input-flag-name"
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Description</label>
+                <Input
+                  placeholder="What does this feature do?"
+                  value={newFlag.description}
+                  onChange={(e) => setNewFlag(prev => ({ ...prev, description: e.target.value }))}
+                  data-testid="input-flag-description"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Rollout Percentage</label>
+                <Input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={newFlag.percentage}
+                  onChange={(e) => setNewFlag(prev => ({ ...prev, percentage: e.target.value }))}
+                  data-testid="input-flag-percentage"
+                />
+              </div>
+              <div className="flex gap-2 pt-2">
+                <Button onClick={handleAddFlag} data-testid="button-create-flag">
+                  Create Flag
+                </Button>
+                <Button variant="outline" onClick={() => setShowAddForm(false)}>
+                  Cancel
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="space-y-4">
           {filteredFlags.map(flag => (
@@ -149,21 +274,32 @@ export default function FeatureFlags() {
                       </p>
                     )}
                   </div>
-                  <Button
-                    variant="ghost"
-                    onClick={() => handleToggle(flag.id)}
-                    disabled={toggling === flag.id}
-                    className={`min-h-[44px] ${flag.enabled ? "text-green-600" : "text-muted-foreground"}`}
-                    data-testid={`toggle-${flag.id}`}
-                  >
-                    {toggling === flag.id ? (
-                      <Loader2 className="w-8 h-8 animate-spin" />
-                    ) : flag.enabled ? (
-                      <ToggleRight className="w-8 h-8" />
-                    ) : (
-                      <ToggleLeft className="w-8 h-8" />
-                    )}
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDeleteFlag(flag.id)}
+                      className="text-muted-foreground hover:text-red-600"
+                      data-testid={`delete-${flag.id}`}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      onClick={() => handleToggle(flag.id)}
+                      disabled={toggling === flag.id}
+                      className={`min-h-[44px] ${flag.enabled ? "text-green-600" : "text-muted-foreground"}`}
+                      data-testid={`toggle-${flag.id}`}
+                    >
+                      {toggling === flag.id ? (
+                        <Loader2 className="w-8 h-8 animate-spin" />
+                      ) : flag.enabled ? (
+                        <ToggleRight className="w-8 h-8" />
+                      ) : (
+                        <ToggleLeft className="w-8 h-8" />
+                      )}
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
