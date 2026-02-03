@@ -17,9 +17,11 @@ import SEO from "../components/SEO";
 import { apiRequest } from "../lib/queryClient.js";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Admin() {
   const { user } = useAuth();
+  const { toast } = useToast();
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -254,6 +256,7 @@ export default function Admin() {
                 Controls
               </Link>
               <button
+                onClick={() => toast({ title: "Export Started", description: "Preparing admin data export..." })}
                 className="inline-flex items-center gap-2.5 px-5 py-3 rounded-xl text-white font-medium shadow-lg transition-all hover:-translate-y-0.5"
                 style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-blush))', boxShadow: '0 4px 16px var(--glp-rose-20)' }}
                 data-testid="button-export"
@@ -520,6 +523,7 @@ function OverviewSection({ stats, realtimeData }) {
 }
 
 function UsersSection({ stats }) {
+  const { toast } = useToast();
   const mockUsers = [
     { id: 1, name: "Sarah M.", email: "sarah@example.com", status: "active", plan: "premium", sessions: 24, joined: "2 days ago", avatar: "S" },
     { id: 2, name: "James K.", email: "james@example.com", status: "active", plan: "free", sessions: 8, joined: "1 week ago", avatar: "J" },
@@ -549,8 +553,10 @@ function UsersSection({ stats }) {
                   style={{ border: '2px solid var(--glp-sage-15)', background: 'white', color: 'var(--glp-charcoal)' }}
                 />
                 <button 
+                  onClick={() => toast({ title: "Add User", description: "User creation form coming soon" })}
                   className="px-5 py-3 rounded-xl text-white text-sm font-medium transition-all hover:-translate-y-0.5"
                   style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}
+                  data-testid="button-add-user"
                 >
                   Add User
                 </button>
@@ -602,13 +608,28 @@ function UsersSection({ stats }) {
                     <td className="py-5 px-6 text-sm" style={{ color: 'var(--glp-sage)' }}>{user.joined}</td>
                     <td className="py-5 px-6">
                       <div className="flex items-center gap-2">
-                        <button className="p-2.5 rounded-lg transition" style={{ color: 'var(--glp-sage)' }}>
+                        <button 
+                          onClick={() => toast({ title: "View User", description: `Viewing ${user.name}'s profile` })}
+                          className="p-2.5 rounded-lg transition hover:bg-[var(--glp-sage-10)]" 
+                          style={{ color: 'var(--glp-sage)' }}
+                          data-testid={`button-view-user-${user.id}`}
+                        >
                           <Eye className="w-5 h-5" />
                         </button>
-                        <button className="p-2.5 rounded-lg transition" style={{ color: 'var(--glp-sage)' }}>
+                        <button 
+                          onClick={() => toast({ title: "Email User", description: `Opening email for ${user.email}` })}
+                          className="p-2.5 rounded-lg transition hover:bg-[var(--glp-sage-10)]" 
+                          style={{ color: 'var(--glp-sage)' }}
+                          data-testid={`button-email-user-${user.id}`}
+                        >
                           <Mail className="w-5 h-5" />
                         </button>
-                        <button className="p-2.5 rounded-lg transition" style={{ color: 'var(--glp-sage)' }}>
+                        <button 
+                          onClick={() => toast({ title: "User Settings", description: `Managing settings for ${user.name}` })}
+                          className="p-2.5 rounded-lg transition hover:bg-[var(--glp-sage-10)]" 
+                          style={{ color: 'var(--glp-sage)' }}
+                          data-testid={`button-settings-user-${user.id}`}
+                        >
                           <Settings className="w-5 h-5" />
                         </button>
                       </div>
