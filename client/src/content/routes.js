@@ -1,5 +1,5 @@
 // Routes Registry - The Genuine Love Project
-// Last updated: 2026-02-03T05:10:00Z - v141 routes
+// Last updated: 2026-02-03T05:30:00Z - v145 routes FORCE REBUILD (ai/companion, learn, learning category)
 
 /**
  * ============================================================================
@@ -43,6 +43,8 @@ import { getRouteMeta, deriveRouteKeyFromPath } from "./meta/routeMetaRegistry";
 
 let __routeByPathCache = null;
 let __cachedRoutesRef = null;
+let __cacheVersion = 0;
+const EXPECTED_CACHE_VERSION = 145; // Increment this to force cache rebuild
 
 function buildRouteByPathCache(routesArray) {
   const map = {};
@@ -55,9 +57,11 @@ function buildRouteByPathCache(routesArray) {
 }
 
 function getRouteByPath(pathname, routesArray) {
-  if (!__routeByPathCache || __cachedRoutesRef !== routesArray) {
+  // Force rebuild if cache version doesn't match
+  if (!__routeByPathCache || __cachedRoutesRef !== routesArray || __cacheVersion !== EXPECTED_CACHE_VERSION) {
     __routeByPathCache = buildRouteByPathCache(routesArray);
     __cachedRoutesRef = routesArray;
+    __cacheVersion = EXPECTED_CACHE_VERSION;
   }
   const route = __routeByPathCache[pathname] || null;
   if (route && route.aliasOf) {
@@ -157,6 +161,7 @@ export const routeCategories = {
   auth: 'Authentication',
   core: 'Dashboard & Core',
   ai: 'AI & Chat',
+  learning: 'Learning & Education',
   wellness: 'Wellness & Healing Tools',
   advanced: 'Advanced & Mastery',
   content: 'Content & Learning',
@@ -525,6 +530,22 @@ const categoryPresets = {
       subtitle: 'Trauma-informed AI support for your healing journey.',
       primaryCta: { label: 'Start Conversation', href: '#chat' },
       secondaryCta: { label: 'Learn About Safety', href: '/safety' }
+    },
+    defaultSections: []
+  },
+
+  learning: {
+    motion: { level: 'calm' },
+    protected: false,
+    defaultReadingLevel: 'standard',
+    readingLevelsEnabled: true,
+    defaultHero: {
+      eyebrow: 'Educational Resources',
+      title: 'Learn &',
+      titleHighlight: 'Grow.',
+      subtitle: 'Evidence-based resources to support your healing journey.',
+      primaryCta: { label: 'Explore Topics', href: '#topics' },
+      secondaryCta: { label: 'Browse Guides', href: '/learn/guides' }
     },
     defaultSections: []
   },
@@ -8404,6 +8425,70 @@ const rawRoutes = [
       subtitle: 'Personalized meditation sessions created just for you.',
       primaryCta: { label: 'Start Meditation', href: '#meditate' },
       secondaryCta: { label: 'Session Library', href: '#library' }
+    }
+  },
+  {
+    route: '/ai/companion',
+    category: 'ai',
+    pageLabel: 'AI Companion',
+    title: 'AI Companion — The Genuine Love Project',
+    description: 'Your supportive AI companion for emotional wellness.',
+    hero: {
+      eyebrow: 'Always Here For You',
+      title: 'Meet Your',
+      titleHighlight: 'AI Companion.',
+      subtitle: 'A gentle, supportive presence available whenever you need someone to talk to.',
+      primaryCta: { label: 'Start Conversation', href: '/chat' },
+      secondaryCta: { label: 'Learn How It Works', href: '#how-it-works' }
+    }
+  },
+
+  // =========================================================================
+  // LEARNING & EDUCATION ROUTES (3 routes)
+  // =========================================================================
+  {
+    route: '/learn',
+    category: 'learning',
+    pageLabel: 'Learning Hub',
+    title: 'Learning Hub — The Genuine Love Project',
+    description: 'Educational resources for your healing journey.',
+    hero: {
+      eyebrow: 'Grow Your Understanding',
+      title: 'Learn &',
+      titleHighlight: 'Grow.',
+      subtitle: 'Evidence-based articles, guides, and courses to support your healing journey.',
+      primaryCta: { label: 'Explore Topics', href: '#topics' },
+      secondaryCta: { label: 'Featured Guides', href: '#guides' }
+    }
+  },
+  {
+    route: '/learn/guides',
+    category: 'learning',
+    pageLabel: 'Guides',
+    title: 'Healing Guides — The Genuine Love Project',
+    description: 'Step-by-step guides for your wellness journey.',
+    hero: {
+      eyebrow: 'Step by Step',
+      title: 'Healing',
+      titleHighlight: 'Guides.',
+      subtitle: 'Comprehensive guides to help you navigate your healing path.',
+      primaryCta: { label: 'Browse Guides', href: '#guides' },
+      secondaryCta: { label: 'Quick Start', href: '#start' }
+    }
+  },
+  {
+    route: '/learn/articles',
+    category: 'learning',
+    pageLabel: 'Articles',
+    title: 'Articles — The Genuine Love Project',
+    description: 'Insightful articles on emotional wellness.',
+    hero: {
+      eyebrow: 'Insights & Wisdom',
+      title: 'Wellness',
+      titleHighlight: 'Articles.',
+      subtitle: 'Evidence-based articles to deepen your understanding of healing.',
+      primaryCta: { label: 'Read Articles', href: '#articles' },
+      secondaryCta: { label: 'Popular Topics', href: '#topics' }
     }
   },
   

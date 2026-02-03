@@ -1,9 +1,17 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MessageCircle, X, Send, Sparkles, Heart, Loader2, Volume2, VolumeX } from "lucide-react";
 import { apiRequest } from "../lib/queryClient";
 import { LotusGuide } from "./sacred";
 import { useEmotion } from "@/context/EmotionContext";
+
+function useQueryClientSafe() {
+  try {
+    return useQueryClient();
+  } catch {
+    return null;
+  }
+}
 
 const INITIAL_MESSAGES = [
   {
@@ -26,6 +34,8 @@ const SUPPORTIVE_RESPONSES = [
 ];
 
 export default function AICompanion({ className = "" }) {
+  const queryClient = useQueryClientSafe();
+  
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const [input, setInput] = useState("");
@@ -42,6 +52,11 @@ export default function AICompanion({ className = "" }) {
     emotionContext = useEmotion();
   } catch {
     emotionContext = null;
+  }
+  
+  // Return null if QueryClient is not available
+  if (!queryClient) {
+    return null;
   }
   
   const speakMessage = useCallback((text) => {

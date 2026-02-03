@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * AUTOPILOT PAGE - Config-Driven Route Renderer
+ * AUTOPILOT PAGE - Config-Driven Route Renderer (v145)
  * ============================================================================
  * 
  * Renders any route via: getRouteConfig(pathname) -> <PageTemplate config={...} />

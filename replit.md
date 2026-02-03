@@ -55,6 +55,7 @@ The platform offers:
 - **Floating Lotus Guide**: Route-conditional wellness assistant showing on /journal, /dashboard, /chat, /mood, /insights, /progress with wellness tips, voice affirmations, and session-based dismissal.
 - **Sacred Glow Utilities**: CSS utility classes (.glow-gold, .glow-sage, .glow-blossom, .glow-healing) for subtle ambient effects.
 - **Emotion-Linked Backgrounds**: Gradient backgrounds (.bg-emotion-calm, .bg-emotion-joy, .bg-emotion-reflection, etc.) with dark mode variants and animated option with prefers-reduced-motion support.
+- **Learning Hub**: Dedicated `/learn` page with guides, articles, and courses navigation. Links to `/learn/guides` and `/learn/articles` for educational content.
 
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
