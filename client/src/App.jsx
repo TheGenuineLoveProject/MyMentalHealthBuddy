@@ -99,6 +99,8 @@ const BodyMindHubPage = lazy(() => import("./pages/hubs/BodyMindHubPage.jsx"));
 const DailyPracticeHubPage = lazy(() => import("./pages/hubs/DailyPracticeHubPage.jsx"));
 const GratitudeHubPage = lazy(() => import("./pages/hubs/GratitudeHubPage.jsx"));
 const LearnHub = lazy(() => import("./pages/LearnHub.jsx"));
+const LearnGuides = lazy(() => import("./pages/LearnGuides.jsx"));
+const LearnArticles = lazy(() => import("./pages/LearnArticles.jsx"));
 const ThoughtworkHubPage = lazy(() => import("./pages/hubs/ThoughtworkHubPage.jsx"));
 const LifePurposeHubPage = lazy(() => import("./pages/hubs/LifePurposeHubPage.jsx"));
 const CommunicationHubPage = lazy(() => import("./pages/hubs/CommunicationHubPage.jsx"));
@@ -937,8 +939,8 @@ export default function App() {
               
               {/* Learning Routes */}
               <Route path="/learn" component={LearnHub} />
-              <Route path="/learn/guides">{() => <ConfigRoute route="/learn/guides" />}</Route>
-              <Route path="/learn/articles">{() => <ConfigRoute route="/learn/articles" />}</Route>
+              <Route path="/learn/guides" component={LearnGuides} />
+              <Route path="/learn/articles" component={LearnArticles} />
 
               {/* Fallback - Config Driven Not Found */}
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>
