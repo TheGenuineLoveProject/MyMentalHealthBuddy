@@ -76,17 +76,20 @@ export default function CanvaLanding() {
     {
       icon: PenLine,
       title: "Create Your Profile",
-      description: "Tell us about your journey and what matters most to you"
+      description: "Tell us about your journey and what matters most to you",
+      link: "/login"
     },
     {
       icon: MessageCircle,
       title: "Connect with AI",
-      description: "Start conversations with our compassionate AI companion"
+      description: "Start conversations with our compassionate AI companion",
+      link: "/chat"
     },
     {
       icon: TrendingUp,
       title: "Track Your Growth",
-      description: "Watch your progress unfold with personalized insights"
+      description: "Watch your progress unfold with personalized insights",
+      link: "/dashboard"
     }
   ];
 
@@ -606,15 +609,22 @@ export default function CanvaLanding() {
 
           <div className="flex flex-col md:flex-row items-start justify-center gap-8 mt-12">
             {steps.map((step, index) => (
-              <div key={index} className="flex flex-col items-center text-center max-w-xs mx-auto" data-testid={`step-card-${index}`}>
+              <Link 
+                key={index} 
+                href={step.link}
+                className="flex flex-col items-center text-center max-w-xs mx-auto group cursor-pointer transition-transform duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2" 
+                style={{ '--tw-ring-color': 'var(--glp-sage)' }}
+                data-testid={`step-card-${index}`}
+                aria-label={`${step.title} - ${step.description}`}
+              >
                 <div 
                   className="relative mb-6 sacred-pulse"
                   style={{ animationDelay: `${index * 0.5}s` }}
                 >
                   <div 
-                    className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white"
+                    className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold text-white transition-shadow duration-300 group-hover:shadow-lg"
                     style={{ background: 'var(--metallic-gold)', boxShadow: '0 0 20px var(--metallic-gold-glow)' }}
-                    aria-label={`Step ${index + 1}`}
+                    aria-hidden="true"
                   >
                     {index + 1}
                   </div>
@@ -623,17 +633,17 @@ export default function CanvaLanding() {
                   )}
                 </div>
                 <div className="mb-4 flex justify-center">
-                  <div className="w-12 h-12 max-w-[48px] rounded-xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-sage-10))', boxShadow: '0 4px 12px var(--glp-sage-20)', border: '2px solid var(--glp-sage-30)' }}>
+                  <div className="w-12 h-12 max-w-[48px] rounded-xl flex items-center justify-center transition-all duration-300 group-hover:shadow-md" style={{ background: 'linear-gradient(135deg, var(--glp-sage-20), var(--glp-sage-10))', boxShadow: '0 4px 12px var(--glp-sage-20)', border: '2px solid var(--glp-sage-30)' }}>
                     <step.icon className="w-6 h-6" style={{ color: 'var(--glp-sage-deep)' }} strokeWidth={2} aria-hidden="true" />
                   </div>
                 </div>
-                <h3 className="text-xl font-serif font-semibold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>
+                <h3 className="text-xl font-serif font-semibold mb-2 group-hover:underline" style={{ color: 'var(--glp-sage-deep)' }}>
                   {step.title}
                 </h3>
                 <p className="text-sm leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
                   {step.description}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
