@@ -216,6 +216,7 @@ export default function WireframeTemplates() {
         </main>
       </div>
     </div>
+  </WellnessPageShell>
   );
 }
 
