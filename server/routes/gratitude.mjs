@@ -1,5 +1,5 @@
 import express from "express";
-import { db } from "../db/index.mjs";
+import { db } from "../db/client.mjs";
 import { gratitudeEntries, moods, journals } from "../../shared/schema.mjs";
 import { eq, desc, gte, and } from "drizzle-orm";
 

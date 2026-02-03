@@ -1,0 +1,202 @@
+PHASE 3 — SECURITY & TRUST
+
+Goal: Hardened perimeter + safe defaults.
+
+Must implement:
+	•	validation (request schemas)
+	•	rate limiting
+	•	auth scaffolding (extensible)
+	•	secrets isolation (no hardcoded keys)
+	•	audit logging
+	•	abuse prevention
+	•	dependency risk scan script
+
+✅ Exit Criteria:
+	•	secrets never logged
+	•	abuse/rate protection verified
+	•	dependency scan runnable
+	•	auth scaffolding compiles and is testable
+
+⸻
+
+PHASE 4 — UX, ACCESSIBILITY & PERFORMANCE
+
+Goal: Fast, inclusive, beautiful, calm.
+
+Must implement:
+	•	mobile-first responsive layout
+	•	WCAG checks (keyboard nav, labels, contrast guidance)
+	•	performance budgets (bundle + LCP targets)
+	•	lazy loading where needed
+	•	cache strategy (static + API)
+
+✅ Exit Criteria:
+	•	fast first paint
+	•	smooth navigation
+	•	accessibility checklist passes
+
+⸻
+
+PHASE 5 — AUTOMATION & SELF-HEALING
+
+Goal: Transparent, human-triggered healing automation.
+
+Must implement scripts (human-run):
+	•	scan for errors (TypeScript/build/runtime)
+	•	detect duplication (file hashes / name collisions)
+	•	validate routes (frontend + backend)
+	•	verify config drift
+	•	re-run failed build pipeline safely
+	•	generate a single markdown report in /docs/
+
+✅ Exit Criteria:
+	•	scripts run without side effects
+	•	reports generated
+	•	no silent edits
+
+⸻
+
+PHASE 6 — TESTING & QUALITY
+
+Goal: Safe iteration velocity.
+
+Must implement:
+	•	unit tests
+	•	integration tests
+	•	smoke tests
+	•	CI-ready structure and commands
+
+✅ Exit Criteria:
+	•	npm test works
+	•	CI config exists and runs locally
+
+⸻
+
+PHASE 7 — DEPLOYMENT & OPERATIONS
+
+Goal: Production deployment on Replit with operational readiness.
+
+Must implement:
+	•	production build output
+	•	autoscale readiness
+	•	graceful shutdown
+	•	health checks
+	•	observability hooks (logs + metrics-ready)
+	•	zero-downtime restart readiness patterns
+
+✅ Exit Criteria:
+	•	production build works
+	•	reboots cleanly
+	•	health checks stable
+
+⸻
+
+PHASE 8 — DOCUMENTATION & HANDOFF
+
+Goal: Teachable, transferable, durable platform.
+
+Must generate:
+	•	README (setup, run, deploy)
+	•	architecture map
+	•	environment setup guide
+	•	operator manual
+	•	upgrade protocol
+
+✅ Exit Criteria:
+	•	a new engineer can run it from docs alone
+
+⸻
+
+PHASE 9 — GROWTH & VIRAL READINESS
+
+Goal: Shareable, discoverable, conversion-ready.
+
+Must implement:
+	•	SEO metadata + structured share tags
+	•	shareable routes
+	•	performance analytics hooks (privacy-respecting)
+	•	conversion-ready flows (signup / onboarding-ready)
+	•	feature flags for safe rollout
+
+✅ Exit Criteria:
+	•	pages have share cards + metadata
+	•	SEO-friendly routing
+	•	feature flags functional
+
+⸻
+
+♾️ CONTINUOUS EVOLUTION MODE (MANDATORY)
+
+After Phase 9, enter the Infinite Improvement Loop:
+	1.	Scan the whole codebase
+	2.	Identify:
+	•	bottlenecks
+	•	risks
+	•	redundancies
+	•	UX friction
+	•	performance drag
+	3.	Propose improvements (one at a time)
+	4.	Apply only minimal safe change
+	5.	Re-test
+	6.	Re-document
+	7.	Repeat forever
+
+Never degrade stability.
+
+⸻
+
+🧪 VALIDATION REQUIREMENTS (EVERY CHANGE)
+
+For every change provide:
+	•	✅ What changed
+	•	📍 Exact file path
+	•	📄 Paste-ready code
+	•	🧠 Reason
+	•	🧪 How to verify
+	•	🔁 How to roll back
+
+⸻
+
+🚫 ABSOLUTE PROHIBITIONS
+	•	no silent changes
+	•	no hidden autonomy
+	•	no dark patterns
+	•	no breaking changes without tests
+	•	no phase skipping
+	•	no dead code
+
+⸻
+
+▶️ EXECUTION COMMAND
+
+Begin now at PHASE 0.
+
+Before writing code, do a Project Reality Scan:
+	•	list file tree summary
+	•	identify stack (Node/React/Vite/TS/DB)
+	•	identify current run command
+	•	identify current failures (build/test/runtime)
+	•	then implement Phase 0 with exact file edits and verification steps.
+
+Proceed sequentially until Phase 9 is complete, then enter Continuous Evolution Mode.
+
+⸻
+
+🌟 HEALING & LOVE GUARANTEE (NON-NEGOTIABLE)
+
+This platform must communicate:
+	•	gentle clarity
+	•	non-clinical tone
+	•	crisis-safe boundaries (not therapy, not emergency)
+	•	dignity-first design
+	•	evidence-informed practices (without medical claims)
+
+⸻
+
+NOW EXECUTE PHASE 0.
+
+⸻
+
+If you paste that into Replit AI, it will know exactly how to behave.
+
+If you want the absolute next perfection layer, I can also provide a compressed “ONE-PASTE RUN BUTTON” variant (same rules, shorter wording, higher “agent compliance rate”) that tends to work even better with Replit agents.

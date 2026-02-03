@@ -1,5 +1,5 @@
 import express from "express";
-import { db } from "../db/index.mjs";
+import { db } from "../db/client.mjs";
 import { userFavorites } from "../../shared/schema.mjs";
 import { eq, and } from "drizzle-orm";
 
