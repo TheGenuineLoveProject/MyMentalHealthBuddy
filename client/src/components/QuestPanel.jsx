@@ -1,10 +1,19 @@
 import { useState, useEffect } from "react";
 import { Target, CheckCircle, Clock, Sparkles, Trophy, ChevronRight, Flame, Zap } from "lucide-react";
 import { useGamification } from "../context/GamificationContext.jsx";
+import { useToast } from "@/hooks/use-toast";
 
 export default function QuestPanel({ compact = false }) {
   const { quests, progress, refreshQuests, isLoading } = useGamification();
   const [expandedQuest, setExpandedQuest] = useState(null);
+  const [savedInterest, setSavedInterest] = useState(false);
+  const { toast } = useToast();
+  
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setSavedInterest(localStorage.getItem('glp_quest_interest') === 'true');
+    }
+  }, []);
 
   const activeQuests = quests.filter(q => !q.isCompleted);
   const completedQuests = quests.filter(q => q.isCompleted);
@@ -126,21 +135,32 @@ export default function QuestPanel({ compact = false }) {
             <div className="w-16 h-16 bg-slate-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
               <Clock className="w-8 h-8 text-slate-600" />
             </div>
-            <h3 className="text-lg font-medium text-white mb-2">Quests Are Being Prepared</h3>
+            <h3 className="text-lg font-medium text-white mb-2">Your Quests Are Loading</h3>
             <p className="text-slate-400 text-sm mb-4">
               Daily quests help you build gentle wellness habits at your own pace. 
-              This feature is in development.
+              Use any wellness tool to start earning quest progress.
             </p>
-            <button
-              onClick={() => {
-                localStorage.setItem('glp_quest_interest', 'true');
-                alert('Saved! We will notify you when quests are ready.');
-              }}
-              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-violet-600 text-white hover:bg-violet-700 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-              data-testid="btn-save-quest-interest"
-            >
-              Save for later
-            </button>
+            {savedInterest ? (
+              <div className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/30">
+                <CheckCircle className="w-4 h-4" />
+                Interest saved
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  localStorage.setItem('glp_quest_interest', 'true');
+                  setSavedInterest(true);
+                  toast({
+                    title: "Interest Saved",
+                    description: "We'll let you know when personalized quests are ready for you."
+                  });
+                }}
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-violet-600 text-white hover:bg-violet-700 transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-slate-900"
+                data-testid="btn-save-quest-interest"
+              >
+                Notify me when ready
+              </button>
+            )}
           </div>
         ) : (
           <div className="space-y-4">
