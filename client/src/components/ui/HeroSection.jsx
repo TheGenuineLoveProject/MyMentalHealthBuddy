@@ -84,7 +84,7 @@ function HeroSection() {
       <HeroText>
         Join thousands who have found peace, growth, and genuine love within themselves.
       </HeroText>
-      <CTAButton href="#start">Begin Your Healing Journey →</CTAButton>
+      <CTAButton href="/register">Begin Your Healing Journey →</CTAButton>
     </HeroWrapper>
   );
 }

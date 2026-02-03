@@ -1,23 +1,13 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { BookOpen, Calendar, Search, Filter, Eye, ChevronDown, ArrowRight } from "lucide-react";
+import { BookOpen, Calendar, Search, Eye, ArrowRight, Loader2 } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
+import { Card, CardContent } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
 import { useToast } from "@/hooks/use-toast";
-
-const MOCK_REFLECTIONS = [
-  { id: "1", date: "2026-01-26", type: "journal", preview: "Felt grateful for...", mood: "peaceful" },
-  { id: "2", date: "2026-01-25", type: "mood", preview: "Mood check-in", mood: "happy" },
-  { id: "3", date: "2026-01-24", type: "gratitude", preview: "Three things I appreciate...", mood: "content" },
-  { id: "4", date: "2026-01-23", type: "journal", preview: "Today I noticed...", mood: "reflective" },
-  { id: "5", date: "2026-01-22", type: "mood", preview: "Mood check-in", mood: "calm" },
-  { id: "6", date: "2026-01-21", type: "gratitude", preview: "Grateful for support from...", mood: "hopeful" },
-  { id: "7", date: "2026-01-20", type: "journal", preview: "Working through...", mood: "processing" },
-  { id: "8", date: "2026-01-19", type: "mood", preview: "Mood check-in", mood: "neutral" }
-];
 
 const TYPE_COLORS = {
   journal: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
@@ -31,6 +21,62 @@ export default function ReflectionHistory() {
   const { toast } = useToast();
   const [, navigate] = useLocation();
 
+  const { data: journalData, isLoading: journalLoading } = useQuery({
+    queryKey: ["/api/journal"],
+  });
+
+  const { data: moodData, isLoading: moodLoading } = useQuery({
+    queryKey: ["/api/mood"],
+  });
+
+  const { data: gratitudeData, isLoading: gratitudeLoading } = useQuery({
+    queryKey: ["/api/gratitude"],
+  });
+
+  const isLoading = journalLoading || moodLoading || gratitudeLoading;
+
+  const reflections = [];
+
+  if (journalData?.data) {
+    journalData.data.forEach(entry => {
+      reflections.push({
+        id: `journal-${entry.id}`,
+        date: entry.createdAt || entry.date,
+        type: "journal",
+        preview: entry.title || entry.content?.substring(0, 50) + "..." || "Journal entry",
+        mood: entry.mood || "reflective"
+      });
+    });
+  }
+
+  if (moodData) {
+    const moods = Array.isArray(moodData) ? moodData : moodData.data || [];
+    moods.forEach(entry => {
+      reflections.push({
+        id: `mood-${entry.id}`,
+        date: entry.createdAt || entry.date,
+        type: "mood",
+        preview: entry.note || "Mood check-in",
+        mood: entry.mood || entry.value || "neutral"
+      });
+    });
+  }
+
+  if (gratitudeData) {
+    const gratitude = Array.isArray(gratitudeData) ? gratitudeData : gratitudeData.data || [];
+    gratitude.forEach(entry => {
+      reflections.push({
+        id: `gratitude-${entry.id}`,
+        date: entry.createdAt || entry.date,
+        type: "gratitude",
+        preview: entry.content?.substring(0, 50) + "..." || "Gratitude entry",
+        mood: "grateful"
+      });
+    });
+  }
+
+  reflections.sort((a, b) => new Date(b.date) - new Date(a.date));
+
   const handleViewReflection = (reflection) => {
     if (reflection.type === "journal") {
       navigate("/journal");
@@ -39,10 +85,10 @@ export default function ReflectionHistory() {
     } else if (reflection.type === "gratitude") {
       navigate("/gratitude");
     }
-    toast({ title: "Opening Reflection", description: `Viewing ${reflection.type} from ${reflection.date}` });
+    toast({ title: "Opening Reflection", description: `Viewing ${reflection.type} entry` });
   };
 
-  const filteredReflections = MOCK_REFLECTIONS.filter(r => {
+  const filteredReflections = reflections.filter(r => {
     const matchesSearch = r.preview.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           r.mood.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesType = filterType === "all" || r.type === filterType;
@@ -50,6 +96,7 @@ export default function ReflectionHistory() {
   });
 
   const formatDate = (dateStr) => {
+    if (!dateStr) return "Unknown";
     const date = new Date(dateStr);
     return date.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
   };
@@ -103,7 +150,12 @@ export default function ReflectionHistory() {
         </div>
 
         <div className="space-y-3">
-          {filteredReflections.length === 0 ? (
+          {isLoading ? (
+            <Card className="p-8 text-center">
+              <Loader2 className="w-12 h-12 text-muted-foreground mx-auto mb-4 animate-spin" />
+              <p className="text-muted-foreground">Loading your reflections...</p>
+            </Card>
+          ) : filteredReflections.length === 0 ? (
             <Card className="p-8 text-center">
               <Calendar className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
               <h2 className="text-lg font-semibold mb-2">No reflections found</h2>
