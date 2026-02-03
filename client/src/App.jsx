@@ -376,6 +376,12 @@ export default function App() {
               <Route path="/dashboard/progress">
                 <ProtectedRoute><GentleProgressDashboard /></ProtectedRoute>
               </Route>
+              <Route path="/gratitude">
+                <WellnessRoute><GratitudeHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/reflections">
+                <ProtectedRoute><ReflectionHistory /></ProtectedRoute>
+              </Route>
               <Route path="/wellness">
                 <WellnessRoute><Wellness /></WellnessRoute>
               </Route>
@@ -755,6 +761,12 @@ export default function App() {
               </Route>
               <Route path="/tools/self-worth">
                 <WellnessRoute><SelfWorthReflectionPage /></WellnessRoute>
+              </Route>
+              <Route path="/self-worth-reflection">
+                <WellnessRoute><SelfWorthReflectionPage /></WellnessRoute>
+              </Route>
+              <Route path="/self-worth">
+                <WellnessRoute><SelfWorthHubPage /></WellnessRoute>
               </Route>
               <Route path="/tools/twelve-steps">
                 <WellnessRoute><TwelveStepsPage /></WellnessRoute>
