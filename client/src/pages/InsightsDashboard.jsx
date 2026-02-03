@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { 
   Sparkles, Heart, Flower2, BookOpen, TrendingUp, 
-  Calendar, Sun, Moon, ArrowRight 
+  Calendar, Sun, Moon, ArrowRight, RefreshCw, AlertCircle
 } from "lucide-react";
 import { Link } from "wouter";
 import ReflectionInsights from "@/components/ReflectionInsights.jsx";
@@ -15,21 +15,79 @@ import "@/styles/sacred-visuals.css";
 export default function InsightsDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
 
-  const { data: summary } = useQuery({
+  const { data: summary, isLoading: summaryLoading, isError: summaryError, refetch: refetchSummary } = useQuery({
     queryKey: ["/api/gratitude/weekly-summary"],
     staleTime: 1000 * 60 * 5
   });
 
-  const { data: completionStats } = useQuery({
+  const { data: completionStats, isLoading: statsLoading, isError: statsError, refetch: refetchStats } = useQuery({
     queryKey: ["/api/community/completion-stats"],
     staleTime: 1000 * 60 * 10
   });
+
+  const isLoading = summaryLoading || statsLoading;
+  const hasError = summaryError || statsError;
+
+  const handleRetry = () => {
+    if (summaryError) refetchSummary();
+    if (statsError) refetchStats();
+  };
 
   const tabs = [
     { id: "overview", label: "Overview", icon: Sun },
     { id: "gratitude", label: "Gratitude", icon: Heart },
     { id: "affirmations", label: "Affirmations", icon: Sparkles },
   ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-sunrise dark:bg-sunrise" role="status" aria-busy="true" aria-label="Loading insights dashboard">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <div className="animate-pulse space-y-6">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-gray-200 dark:bg-gray-700" />
+              <div className="space-y-2">
+                <div className="h-8 w-48 bg-gray-200 dark:bg-gray-700 rounded" />
+                <div className="h-4 w-64 bg-gray-200 dark:bg-gray-700 rounded" />
+              </div>
+            </div>
+            <div className="flex gap-2">
+              {[1, 2, 3].map(i => (
+                <div key={i} className="h-10 w-28 bg-gray-200 dark:bg-gray-700 rounded-xl" />
+              ))}
+            </div>
+            <div className="grid lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 h-64 bg-gray-200 dark:bg-gray-700 rounded-2xl" />
+              <div className="h-64 bg-gray-200 dark:bg-gray-700 rounded-2xl" />
+            </div>
+          </div>
+          <span className="sr-only">Loading your insights...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (hasError) {
+    return (
+      <div className="min-h-screen bg-sunrise dark:bg-sunrise flex items-center justify-center" role="alert" aria-live="assertive">
+        <div className="text-center p-8 max-w-md">
+          <div className="w-16 h-16 rounded-2xl bg-rose-100 dark:bg-rose-900/30 flex items-center justify-center mx-auto mb-4">
+            <AlertCircle className="w-8 h-8 text-rose-500" aria-hidden="true" />
+          </div>
+          <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-2">Unable to load insights</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">Please try again in a moment.</p>
+          <button
+            onClick={handleRetry}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-rose-400 text-white font-medium hover:shadow-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+            data-testid="button-retry"
+          >
+            <RefreshCw className="w-4 h-4" aria-hidden="true" />
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-sunrise dark:bg-sunrise">
