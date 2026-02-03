@@ -31,6 +31,7 @@ export default function AutopilotPage({ route, routeKey }) {
 
   const config = getFullRouteConfig(pathname, routes, { routeKey: effectiveRouteKey });
 
+
   if (!config || !config.hero) {
     const notFoundConfig = getFullRouteConfig("/not-found", routes, { routeKey: "not_found" });
     if (notFoundConfig && notFoundConfig.hero) return <PageTemplate config={notFoundConfig} routeKey="not_found" />;

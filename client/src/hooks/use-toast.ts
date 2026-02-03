@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 type ToastVariant = "default" | "destructive" | "success";
 
@@ -42,7 +42,7 @@ function dispatch(toast: Omit<Toast, "id">) {
 export function useToast() {
   const [state, setState] = useState<ToastState>(memoryState);
 
-  useState(() => {
+  useEffect(() => {
     listeners.push(setState);
     return () => {
       const index = listeners.indexOf(setState);
@@ -50,7 +50,7 @@ export function useToast() {
         listeners.splice(index, 1);
       }
     };
-  });
+  }, []);
 
   const toast = useCallback(
     ({ title, description, variant = "default" }: Omit<Toast, "id">) => {
