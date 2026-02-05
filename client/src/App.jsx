@@ -363,6 +363,7 @@ export default function App() {
               <Route path="/therapy">
                 <WellnessRoute><AIChatPage /></WellnessRoute>
               </Route>
+              <Route path="/therapy-tools"><ToolsPage /></Route>
               <Route path="/coach">
                 <WellnessRoute><AIChatPage /></WellnessRoute>
               </Route>
@@ -644,6 +645,10 @@ export default function App() {
               <Route path="/triggers"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/worry">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/overthinking">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/relaxation">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/serenity">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/peace">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/tranquility">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/ptsd"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/grief"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/loss"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
@@ -658,6 +663,7 @@ export default function App() {
               <Route path="/wellness-tools">{() => <ConfigRoute route="/practices" />}</Route>
               <Route path="/counseling">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/wellbeing">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/well-being">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/mental-wellness">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/emotional-health"><WellnessRoute><MoodPage /></WellnessRoute></Route>
               <Route path="/joy"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
@@ -676,12 +682,34 @@ export default function App() {
               <Route path="/confidence"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/boundaries"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/empowerment"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/mental">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/spirit">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/spiritual">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/spiritual-wellness">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/body">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/soul">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/yoga">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/exercise">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/movement">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/fitness">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/nutrition">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/sleep">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/rest">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/energy">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/balance">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/guide">{() => <ConfigRoute route="/healing" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
               <Route path="/healing-library">{() => <ConfigRoute route="/healing-library" />}</Route>
               <Route path="/healing-journeys">{() => <ConfigRoute route="/healing-journeys" />}</Route>
+              <Route path="/healing-journey">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/emotional-wellness"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+              <Route path="/mental-health-support">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/personal-growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/self-discovery"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/transformation"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/body-wellness">{() => <ConfigRoute route="/body-wellness" />}</Route>
               <Route path="/soul-wellness">{() => <ConfigRoute route="/soul-wellness" />}</Route>
 
