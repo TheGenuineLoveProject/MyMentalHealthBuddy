@@ -948,6 +948,77 @@ export default function App() {
               <Route path="/fulfilled">{() => <Redirect to="/purpose" />}</Route>
               <Route path="/uplifting">{() => <Redirect to="/hope" />}</Route>
               <Route path="/fearless">{() => <Redirect to="/courage" />}</Route>
+              <Route path="/still">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/vitality">{() => <Redirect to="/energy" />}</Route>
+              <Route path="/blossoming">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/integrated">{() => <Redirect to="/balance" />}</Route>
+              <Route path="/unified">{() => <Redirect to="/balance" />}</Route>
+              <Route path="/harmonize">{() => <Redirect to="/balance" />}</Route>
+              <Route path="/essence">{() => <Redirect to="/purpose" />}</Route>
+              <Route path="/inner">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/core">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/depths">{() => <Redirect to="/reflection" />}</Route>
+              <Route path="/within">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/emerge">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/unfold">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/rise">{() => <Redirect to="/resilience" />}</Route>
+              <Route path="/expand">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/deepen">{() => <Redirect to="/reflection" />}</Route>
+              <Route path="/strengthen">{() => <Redirect to="/resilience" />}</Route>
+              <Route path="/nourish">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/sustain">{() => <Redirect to="/resilience" />}</Route>
+              <Route path="/cultivate">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/embody">{() => <Redirect to="/presence" />}</Route>
+              <Route path="/embrace">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/embark">{() => <Redirect to="/onboarding" />}</Route>
+              <Route path="/honor">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/cherish">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/treasure">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/sacred">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/devotion">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/liberation">{() => <Redirect to="/freedom" />}</Route>
+              <Route path="/renewal">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/rebirth">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/restore">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/reclaim">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/rediscover">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/reawaken">{() => <Redirect to="/awareness" />}</Route>
+              <Route path="/reconnect">{() => <Redirect to="/connection" />}</Route>
+              <Route path="/rebuild">{() => <Redirect to="/resilience" />}</Route>
+              <Route path="/revive">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/rebalance">{() => <Redirect to="/balance" />}</Route>
+              <Route path="/reinvent">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/prosper">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/excel">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/blossom">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/ascend">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/soar">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/shine">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/glow">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/radiate">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/illuminate">{() => <Redirect to="/awareness" />}</Route>
+              <Route path="/uplift">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/encourage">{() => <Redirect to="/support" />}</Route>
+              <Route path="/motivate">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/embrace">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/cherish">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/appreciate">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/celebrate">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/affirm">{() => <Redirect to="/affirmations" />}</Route>
+              <Route path="/validate">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/renew">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/refresh">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/recharge">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/recover">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/center">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/anchor">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/feel">{() => <Redirect to="/emotions" />}</Route>
+              <Route path="/listen">{() => <Redirect to="/awareness" />}</Route>
+              <Route path="/witness">{() => <Redirect to="/awareness" />}</Route>
+              <Route path="/acknowledge">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/let-go">{() => <Redirect to="/release" />}</Route>
+              <Route path="/protect">{() => <Redirect to="/boundaries" />}</Route>
+              <Route path="/shield">{() => <Redirect to="/boundaries" />}</Route>
               <Route path="/patient">{() => <Redirect to="/patience" />}</Route>
               <Route path="/thankful">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/thanks">{() => <Redirect to="/gratitude" />}</Route>
