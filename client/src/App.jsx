@@ -672,6 +672,10 @@ export default function App() {
               <Route path="/intimacy"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/attachment"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/addiction"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/self-esteem"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/confidence"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/boundaries"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/empowerment"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
