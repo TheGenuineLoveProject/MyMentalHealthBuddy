@@ -36,8 +36,8 @@ export default function NotFound() {
 
     <>
       <SEO 
-        title="Page Not Found"
-        description="The page you're looking for doesn't exist. Let's get you back on track."
+        title="Taking a Different Path"
+        description="This page isn't here, but you are. Let's find what you're looking for together."
       />
       <div className="min-h-screen hero-gradient overflow-hidden relative flex items-center justify-center p-6">
         <div className="decorative-orb decorative-orb-sage w-[400px] h-[400px] top-1/4 -left-20 absolute" aria-hidden="true" />
@@ -58,14 +58,14 @@ export default function NotFound() {
           
           <div className="glass-premium rounded-2xl p-8 md:p-12">
             <div className="mb-10">
-              <div className="text-8xl md:text-9xl font-display font-bold bg-gradient-to-r from-[var(--glp-primary)] via-[var(--glp-sage)] to-[var(--glp-gold)] bg-clip-text text-transparent mb-6 leading-none">
-                404
+              <div className="text-6xl md:text-7xl font-display font-bold bg-gradient-to-r from-[var(--glp-primary)] via-[var(--glp-sage)] to-[var(--glp-gold)] bg-clip-text text-transparent mb-6 leading-none">
+                Hmm...
               </div>
               <h1 className="text-2xl md:text-3xl font-display font-semibold text-[var(--glp-primary)] mb-4" data-testid="text-title">
-                Page Not Found
+                This path leads somewhere new
               </h1>
               <p className="text-[var(--text-2)] max-w-md mx-auto leading-relaxed">
-                The page you're looking for seems to have wandered off. Let's guide you back to a place of calm.
+                The page you were looking for isn't here—but that's okay. Sometimes we find ourselves in unexpected places. Let's gently guide you somewhere helpful.
               </p>
             </div>
 
@@ -76,7 +76,7 @@ export default function NotFound() {
                 data-testid="button-go-home"
               >
                 <Home className="w-5 h-5" aria-hidden="true" />
-                Go Home
+                Return Home
               </Link>
               <button
                 onClick={() => window.history.back()}
@@ -91,7 +91,7 @@ export default function NotFound() {
             <div className="border-t border-[var(--border)] pt-8">
               <h2 className="text-sm font-medium text-[var(--text-2)] uppercase tracking-wider mb-5 flex items-center justify-center gap-2">
                 <Search className="w-4 h-4" aria-hidden="true" />
-                Try These Instead
+                Explore These Gentle Spaces
               </h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {QUICK_LINKS.map((link) => {
@@ -115,7 +115,7 @@ export default function NotFound() {
           </div>
           
           <p className="mt-6 text-sm text-[var(--text-muted)]">
-            Need help? <Link href="/crisis" className="text-[var(--primary)] hover:underline">View crisis resources</Link> or <Link href="/chat" className="text-[var(--primary)] hover:underline">talk to our AI companion</Link>.
+            You're not alone. <Link href="/crisis" className="text-[var(--primary)] hover:underline">Crisis support is always available</Link>, or <Link href="/chat" className="text-[var(--primary)] hover:underline">talk with our compassionate AI companion</Link>.
           </p>
         </div>
       </div>

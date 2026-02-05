@@ -7,37 +7,37 @@ export default function NotFoundPage() {
   return (
     <>
       <SEO
-        title="Page Not Found | The Genuine Love Project"
-        description="This page doesn't exist. Return to our educational wellness tools for adults 18+."
+        title="Taking a Different Path | The Genuine Love Project"
+        description="This page isn't here, but you are. Let's find what you're looking for together."
       />
       <div 
         className="min-h-screen flex items-center justify-center"
         style={{ background: 'var(--sacred-cream, #faf9f7)' }}
       >
         <BenefitsBlock
-          benefit="Educational support for your personal growth journey"
-          bullets={["Educational resources for your journey","Crisis support links always available","Explore our wellness tools"]}
+          benefit="You're in good hands—let's find your way"
+          bullets={["Your wellness journey continues","Crisis support is always available","Every path leads somewhere meaningful"]}
         />
 
         <main id="main-content" className="text-center px-6">
           <h1 
-            className="text-6xl font-serif mb-4"
+            className="text-5xl font-serif mb-4"
             style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
           >
-            404
+            Hmm...
           </h1>
           <p 
             className="text-2xl font-serif mb-6"
             style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
           >
-            This page doesn't exist yet
+            This path leads somewhere new
           </p>
           <p 
             className="text-lg mb-8 max-w-md mx-auto"
             style={{ color: 'var(--sacred-charcoal, #3a3a3a)', opacity: 0.7 }}
           >
-            Perhaps you were looking for something else. 
-            Let's guide you back to a gentle space.
+            The page you were looking for isn't here—but that's okay. 
+            Sometimes we find ourselves in unexpected places. Let's gently guide you somewhere helpful.
           </p>
           <Link 
             href="/"
@@ -51,7 +51,7 @@ export default function NotFoundPage() {
             Return Home
           </Link>
           <p className="text-sm opacity-70 mt-8">
-            Adults 18+ only. Educational wellness tools, not medical care.
+            You're not alone. Crisis support is always available at <a href="/crisis" className="underline" style={{ color: 'var(--sacred-teal, #2f5d5d)' }}>/crisis</a>
           </p>
         </main>
       </div>

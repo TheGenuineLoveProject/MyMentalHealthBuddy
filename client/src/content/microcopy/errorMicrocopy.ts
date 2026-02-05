@@ -1,57 +1,57 @@
 export const ERROR_MICROCOPY = {
   boundary: {
     title: "Something unexpected happened",
-    message: "We encountered an issue loading this page. Your progress is safe.",
-    action: "Return to Home",
-    supportNote: "If this keeps happening, please let us know."
+    message: "We ran into a small bump, but your progress is safe. Take a breath.",
+    action: "Return Home",
+    supportNote: "If this keeps happening, we're here to help."
   },
   notFound: {
-    title: "Page not found",
-    message: "The page you're looking for doesn't exist or has been moved.",
-    action: "Go Home",
-    suggestion: "Try checking the URL or return to the homepage."
+    title: "This path leads somewhere new",
+    message: "The page you were looking for isn't here—but that's okay. Sometimes we find ourselves in unexpected places.",
+    action: "Return Home",
+    suggestion: "Let's gently guide you somewhere helpful."
   },
   network: {
-    title: "Connection issue",
-    message: "We're having trouble connecting. Please check your internet connection.",
+    title: "Connection taking a moment",
+    message: "We're having a little trouble connecting. This happens sometimes.",
     action: "Try Again",
-    tip: "This might be temporary. Take a breath and try again in a moment."
+    tip: "Take a gentle breath. When you're ready, try again."
   },
   serverError: {
-    title: "Server hiccup",
-    message: "Something went wrong on our end. We're working to fix it.",
+    title: "We need a moment",
+    message: "Something on our end needs attention. We're working on it.",
     action: "Refresh",
-    reassurance: "Your data is safe. This is temporary."
+    reassurance: "Your progress is safe. This is just temporary."
   },
   timeout: {
-    title: "Taking longer than expected",
-    message: "The request is taking a while. You can wait or try again.",
+    title: "Taking longer than usual",
+    message: "Things are moving slowly right now. You can wait, or come back in a moment.",
     action: "Retry",
-    patience: "Sometimes things just need a moment."
+    patience: "Sometimes the best things take time."
   },
   unauthorized: {
-    title: "Access restricted",
-    message: "You need to sign in to view this content.",
+    title: "Welcome back",
+    message: "Please sign in to continue your journey with us.",
     action: "Sign In",
-    note: "Your wellness journey awaits."
+    note: "Your wellness space is waiting for you."
   },
   forbidden: {
-    title: "Not available",
-    message: "This content isn't available with your current access level.",
-    action: "Learn More",
-    upgrade: "Consider exploring our membership options."
+    title: "This space isn't quite ready",
+    message: "This content is available with different access levels.",
+    action: "Explore Options",
+    upgrade: "There may be something perfect waiting for you."
   },
   validation: {
-    title: "Something needs attention",
-    message: "Please check the highlighted fields and try again.",
+    title: "One small thing",
+    message: "Let's take another look at the highlighted areas together.",
     action: "Review",
-    help: "We're here to help you get it right."
+    help: "We're here to support you through this."
   },
   generic: {
-    title: "Oops",
-    message: "Something didn't work as expected.",
+    title: "Hmm...",
+    message: "Something didn't quite work as expected. That's okay.",
     action: "Try Again",
-    encouragement: "Every setback is a setup for a comeback."
+    encouragement: "Every moment is a fresh start."
   }
 } as const;
 
@@ -62,7 +62,7 @@ export function getErrorMicrocopy(type: ErrorType = 'generic') {
 }
 
 export const CRISIS_FALLBACK = {
-  message: "If you're in crisis, please reach out for support.",
+  message: "If you need support right now, please reach out. You're not alone.",
   usHotline: "988 Suicide & Crisis Lifeline",
   usNumber: "988",
   international: "Contact your local emergency services"

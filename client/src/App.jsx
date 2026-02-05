@@ -760,6 +760,13 @@ export default function App() {
               <Route path="/tool">{() => <Redirect to="/tools" />}</Route>
               <Route path="/course">{() => <Redirect to="/courses" />}</Route>
               <Route path="/account">{() => <Redirect to="/settings" />}</Route>
+              <Route path="/lesson">{() => <Redirect to="/learn" />}</Route>
+              <Route path="/session">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/challenges">{() => <Redirect to="/challenge" />}</Route>
+              <Route path="/therapist">{() => <Redirect to="/therapy" />}</Route>
+              <Route path="/donate">{() => <Redirect to="/pricing" />}</Route>
+              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>

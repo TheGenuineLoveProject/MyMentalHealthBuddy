@@ -38,10 +38,10 @@ export default function AutopilotPage({ route, routeKey }) {
     return (
       <div className={styles.container}>
         <div className={styles.content}>
-          <h1 className={styles.title}>Page Not Found</h1>
-          <p className={styles.message}>The route "{pathname}" is not configured.</p>
+          <h1 className={styles.title}>Taking a different path</h1>
+          <p className={styles.message}>This page isn't here right now—but that's okay. Sometimes we find ourselves in unexpected places. Let's guide you somewhere helpful.</p>
           <a href="/" className={styles.homeLink} data-testid="link-go-home">
-            Go Home
+            Return Home
           </a>
         </div>
       </div>

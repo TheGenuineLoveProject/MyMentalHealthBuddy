@@ -8696,16 +8696,16 @@ const rawRoutes = [
   {
     route: '/not-found',
     category: 'system',
-    pageLabel: '404 Not Found',
-    title: 'Page Not Found — The Genuine Love Project',
-    description: 'The page you\'re looking for couldn\'t be found.',
+    pageLabel: 'Taking a Different Path',
+    title: 'Taking a Different Path — The Genuine Love Project',
+    description: 'This page isn\'t here, but you are. Let\'s find what you\'re looking for together.',
     hero: {
-      eyebrow: 'Oops',
-      title: 'Page not',
-      titleHighlight: 'found.',
-      subtitle: 'The page you\'re looking for doesn\'t exist or has been moved.',
-      primaryCta: { label: 'Go Home', href: '/' },
-      secondaryCta: { label: 'Contact Support', href: '/support' }
+      eyebrow: 'A Gentle Pause',
+      title: 'This path leads',
+      titleHighlight: 'somewhere new.',
+      subtitle: 'The page you were looking for isn\'t here—but that\'s okay. Sometimes we find ourselves in unexpected places. Let\'s gently guide you somewhere helpful.',
+      primaryCta: { label: 'Return Home', href: '/' },
+      secondaryCta: { label: 'Get Support', href: '/support' }
     }
   }
 ];
