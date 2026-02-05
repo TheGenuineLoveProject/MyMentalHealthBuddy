@@ -1008,6 +1008,30 @@ export default function App() {
               <Route path="/awakening">{() => <Redirect to="/spiritual" />}</Route>
               <Route path="/alive">{() => <Redirect to="/joy" />}</Route>
               <Route path="/nourished">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/worried">{() => <Redirect to="/anxiety" />}</Route>
+              <Route path="/fearful">{() => <Redirect to="/fear" />}</Route>
+              <Route path="/scared">{() => <Redirect to="/fear" />}</Route>
+              <Route path="/afraid">{() => <Redirect to="/fear" />}</Route>
+              <Route path="/panicked">{() => <Redirect to="/anxiety" />}</Route>
+              <Route path="/hopeless">{() => <Redirect to="/hope" />}</Route>
+              <Route path="/empty">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/lost">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/stuck">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/numb">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/broken">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/damaged">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/ashamed">{() => <Redirect to="/shame" />}</Route>
+              <Route path="/guilty">{() => <Redirect to="/guilt" />}</Route>
+              <Route path="/jealous">{() => <Redirect to="/jealousy" />}</Route>
+              <Route path="/envious">{() => <Redirect to="/jealousy" />}</Route>
+              <Route path="/resentful">{() => <Redirect to="/anger" />}</Route>
+              <Route path="/bitter">{() => <Redirect to="/anger" />}</Route>
+              <Route path="/exhausted">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/drained">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/burnout">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/burned-out">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/weary">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/fatigued">{() => <Redirect to="/rest" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
