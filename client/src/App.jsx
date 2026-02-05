@@ -945,6 +945,9 @@ export default function App() {
               <Route path="/caring">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/understanding">{() => <Redirect to="/compassion" />}</Route>
               <Route path="/supportive">{() => <Redirect to="/support" />}</Route>
+              <Route path="/fulfilled">{() => <Redirect to="/purpose" />}</Route>
+              <Route path="/uplifting">{() => <Redirect to="/hope" />}</Route>
+              <Route path="/fearless">{() => <Redirect to="/courage" />}</Route>
               <Route path="/patient">{() => <Redirect to="/patience" />}</Route>
               <Route path="/thankful">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/thanks">{() => <Redirect to="/gratitude" />}</Route>
