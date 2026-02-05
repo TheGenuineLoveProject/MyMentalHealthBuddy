@@ -1032,6 +1032,18 @@ export default function App() {
               <Route path="/burned-out">{() => <Redirect to="/rest" />}</Route>
               <Route path="/weary">{() => <Redirect to="/rest" />}</Route>
               <Route path="/fatigued">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/letting-go">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/surrender">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/release">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/moving-on">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/closure">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/meaning">{() => <Redirect to="/purpose" />}</Route>
+              <Route path="/identity">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/empathy">{() => <Redirect to="/compassion" />}</Route>
+              <Route path="/body-image">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/eating">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/sobriety">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/ptsd">{() => <Redirect to="/trauma" />}</Route>
               <Route path="/nightmares">{() => <Redirect to="/sleep" />}</Route>
               <Route path="/trauma-responses">{() => <Redirect to="/trauma" />}</Route>
               <Route path="/flashbacks">{() => <Redirect to="/trauma" />}</Route>
