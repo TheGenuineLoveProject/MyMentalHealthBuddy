@@ -826,6 +826,13 @@ export default function App() {
               <Route path="/join">{() => <Redirect to="/register" />}</Route>
               <Route path="/worksheets">{() => <Redirect to="/practices" />}</Route>
               <Route path="/meditations">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/appointments">{() => <Redirect to="/booking" />}</Route>
+              <Route path="/members">{() => <Redirect to="/community" />}</Route>
+              <Route path="/member">{() => <Redirect to="/profile" />}</Route>
+              <Route path="/log-in">{() => <Redirect to="/login" />}</Route>
+              <Route path="/contact-us">{() => <Redirect to="/contact" />}</Route>
+              <Route path="/about-us">{() => <Redirect to="/about" />}</Route>
+              <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
