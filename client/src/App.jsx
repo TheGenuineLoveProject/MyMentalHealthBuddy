@@ -730,6 +730,36 @@ export default function App() {
               <Route path="/webinar">{() => <Redirect to="/courses" />}</Route>
               <Route path="/ebook">{() => <ConfigRoute route="/learn" />}</Route>
               <Route path="/podcast">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/membership">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/subscription">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/video">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/free">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/trial">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/demo">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/group">{() => <Redirect to="/community" />}</Route>
+              <Route path="/groups">{() => <Redirect to="/community" />}</Route>
+              <Route path="/event">{() => <Redirect to="/events" />}</Route>
+              <Route path="/updates">{() => <Redirect to="/news" />}</Route>
+              <Route path="/partner">{() => <Redirect to="/partners" />}</Route>
+              <Route path="/affiliate">{() => <Redirect to="/partners" />}</Route>
+              <Route path="/affiliates">{() => <Redirect to="/partners" />}</Route>
+              <Route path="/career">{() => <Redirect to="/careers" />}</Route>
+              <Route path="/job">{() => <Redirect to="/careers" />}</Route>
+              <Route path="/jobs">{() => <Redirect to="/careers" />}</Route>
+              <Route path="/ios">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/android">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/book">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/audio">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/music">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/sounds">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/service">{() => <Redirect to="/services" />}</Route>
+              <Route path="/retreat">{() => <Redirect to="/retreats" />}</Route>
+              <Route path="/plans">{() => <Redirect to="/pricing" />}</Route>
+              <Route path="/plan">{() => <Redirect to="/pricing" />}</Route>
+              <Route path="/resource">{() => <Redirect to="/resources" />}</Route>
+              <Route path="/tool">{() => <Redirect to="/tools" />}</Route>
+              <Route path="/course">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/account">{() => <Redirect to="/settings" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
