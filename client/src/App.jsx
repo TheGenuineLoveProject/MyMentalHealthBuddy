@@ -1090,6 +1090,27 @@ export default function App() {
               <Route path="/quietude">{() => <Redirect to="/meditation" />}</Route>
               <Route path="/centeredness">{() => <Redirect to="/grounding" />}</Route>
               <Route path="/completeness">{() => <Redirect to="/wholeness" />}</Route>
+              <Route path="/loved">{() => <Redirect to="/love" />}</Route>
+              <Route path="/precious">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/harmonious">{() => <Redirect to="/harmony" />}</Route>
+              <Route path="/quiet">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/silence">{() => <Redirect to="/stillness" />}</Route>
+              <Route path="/solitude">{() => <Redirect to="/stillness" />}</Route>
+              <Route path="/healed">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/recovered">{() => <Redirect to="/healing-journey" />}</Route>
+              <Route path="/stronger">{() => <Redirect to="/resilience" />}</Route>
+              <Route path="/content">{() => <Redirect to="/contentment" />}</Route>
+              <Route path="/fulfillment">{() => <Redirect to="/purpose" />}</Route>
+              <Route path="/lightness">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/openness">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/spaciousness">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/ease">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/relief">{() => <Redirect to="/release" />}</Route>
+              <Route path="/comfort">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/valid">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/lovable">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/deserving">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/capable">{() => <Redirect to="/resilience" />}</Route>
               <Route path="/nourished">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/worried">{() => <Redirect to="/anxiety" />}</Route>
               <Route path="/fearful">{() => <Redirect to="/fear" />}</Route>
