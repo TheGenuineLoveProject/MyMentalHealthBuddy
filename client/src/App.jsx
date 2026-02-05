@@ -338,6 +338,7 @@ export default function App() {
               <Route path="/sign-in" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
               <Route path="/reset-password" component={ResetPassword} />
+              <Route path="/create-account" component={Register} />
 
               {/* Protected Core Routes - Special Components */}
               <Route path="/dashboard">
@@ -876,6 +877,22 @@ export default function App() {
               <Route path="/tasks">{() => <Redirect to="/dashboard" />}</Route>
               <Route path="/notes">{() => <Redirect to="/journal" />}</Route>
               <Route path="/sponsor">{() => <Redirect to="/about" />}</Route>
+              <Route path="/archive">{() => <Redirect to="/learn" />}</Route>
+              <Route path="/episode">{() => <Redirect to="/learn" />}</Route>
+              <Route path="/episodes">{() => <Redirect to="/learn" />}</Route>
+              <Route path="/series">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/program">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/programs">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/meetups">{() => <Redirect to="/community" />}</Route>
+              <Route path="/live">{() => <Redirect to="/community" />}</Route>
+              <Route path="/webinar">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/seminar">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/seminars">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/inspire">{() => <Redirect to="/affirmation" />}</Route>
+              <Route path="/inspiration">{() => <Redirect to="/affirmation" />}</Route>
+              <Route path="/motivated">{() => <Redirect to="/motivation" />}</Route>
+              <Route path="/mantras">{() => <Redirect to="/affirmation" />}</Route>
+              <Route path="/mantra">{() => <Redirect to="/affirmation" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
