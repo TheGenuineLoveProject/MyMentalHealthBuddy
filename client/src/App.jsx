@@ -1025,6 +1025,71 @@ export default function App() {
               <Route path="/beliefs">{() => <Redirect to="/self-discovery" />}</Route>
               <Route path="/behavior">{() => <Redirect to="/growth" />}</Route>
               <Route path="/patterns">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/chakra">{() => <Redirect to="/energy" />}</Route>
+              <Route path="/aura">{() => <Redirect to="/energy" />}</Route>
+              <Route path="/vibration">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/frequency">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/manifest">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/prayer">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/faith">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/religion">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/karma">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/zen">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/buddhism">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/reiki">{() => <Redirect to="/energy" />}</Route>
+              <Route path="/tarot">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/astrology">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/numerology">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/crystals">{() => <Redirect to="/energy" />}</Route>
+              <Route path="/taichi">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/qigong">{() => <Redirect to="/energy" />}</Route>
+              <Route path="/acupuncture">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/massage">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/hypnosis">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/eft">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/tapping">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/emdr">{() => <Redirect to="/trauma" />}</Route>
+              <Route path="/cbt">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/dbt">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/somatic">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/act">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/ifs">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/parts-work">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/reparenting">{() => <Redirect to="/inner-child" />}</Route>
+              <Route path="/secure-attachment">{() => <Redirect to="/relationships" />}</Route>
+              <Route path="/polyvagal">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/window-of-tolerance">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/regulation">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/dysregulation">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/skills">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/shadow">{() => <Redirect to="/shadow-work" />}</Route>
+              <Route path="/wholeness">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/harmony">{() => <Redirect to="/balance" />}</Route>
+              <Route path="/authentic-self">{() => <Redirect to="/authentic" />}</Route>
+              <Route path="/true-self">{() => <Redirect to="/authentic" />}</Route>
+              <Route path="/enough">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/i-am-enough">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/positive-thinking">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/positive">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/positivity">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/optimism">{() => <Redirect to="/hope" />}</Route>
+              <Route path="/bravery">{() => <Redirect to="/courage" />}</Route>
+              <Route path="/self-acceptance">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/evolve">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/thrive">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/flourish">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/flourishing">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/bloom">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/awaken">{() => <Redirect to="/awakening" />}</Route>
+              <Route path="/enlighten">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/enlightenment">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/transcend">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/compassionate">{() => <Redirect to="/compassion" />}</Route>
+              <Route path="/empathetic">{() => <Redirect to="/empathy" />}</Route>
+              <Route path="/calmness">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/quietude">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/centeredness">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/completeness">{() => <Redirect to="/wholeness" />}</Route>
               <Route path="/nourished">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/worried">{() => <Redirect to="/anxiety" />}</Route>
               <Route path="/fearful">{() => <Redirect to="/fear" />}</Route>
