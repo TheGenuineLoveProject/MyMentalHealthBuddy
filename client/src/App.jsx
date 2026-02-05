@@ -782,6 +782,13 @@ export default function App() {
               <Route path="/tracking">{() => <Redirect to="/mood" />}</Route>
               <Route path="/log">{() => <Redirect to="/journal" />}</Route>
               <Route path="/logs">{() => <Redirect to="/journal" />}</Route>
+              <Route path="/tutorial">{() => <Redirect to="/guides" />}</Route>
+              <Route path="/class">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/classes">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/selfcare">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/selflove">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/innerchild">{() => <Redirect to="/inner-child" />}</Route>
+              <Route path="/quotes">{() => <Redirect to="/affirmations" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
