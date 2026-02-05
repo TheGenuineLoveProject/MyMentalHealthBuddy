@@ -74,6 +74,10 @@ const AdaptiveCompanionPage = lazy(() => import("./pages/AdaptiveCompanionPage.t
 const KnowledgeSynthesisPage = lazy(() => import("./pages/KnowledgeSynthesisPage.tsx"));
 const WisdomPracticesPage = lazy(() => import("./pages/WisdomPracticesPage.tsx"));
 const GrowthAnalyticsPage = lazy(() => import("./pages/GrowthAnalyticsPage.tsx"));
+const DailyPracticePage = lazy(() => import("./pages/DailyPracticePage.jsx"));
+const RoutinesPage = lazy(() => import("./pages/RoutinesPage.jsx"));
+const GrowthPage = lazy(() => import("./pages/GrowthPage.jsx"));
+const RecoveryPage = lazy(() => import("./pages/RecoveryPage.jsx"));
 const SleepHubPage = lazy(() => import("./pages/hubs/SleepHubPage.jsx"));
 const BoundariesHubPage = lazy(() => import("./pages/hubs/BoundariesHubPage.jsx"));
 const SelfWorthHubPage = lazy(() => import("./pages/hubs/SelfWorthHubPage.jsx"));
@@ -585,6 +589,16 @@ export default function App() {
               <Route path="/tools/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/tools/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/tools/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
+
+              {/* Daily Practice & Routines Pages */}
+              <Route path="/daily"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              <Route path="/practice"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              <Route path="/exercises"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              <Route path="/activities"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              <Route path="/routines"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
+              <Route path="/habits"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
+              <Route path="/growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/recovery"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
