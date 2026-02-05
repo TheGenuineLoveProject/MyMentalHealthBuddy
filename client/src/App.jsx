@@ -676,6 +676,7 @@ export default function App() {
               <Route path="/confidence"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/boundaries"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/empowerment"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/guide">{() => <ConfigRoute route="/healing" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
@@ -1088,7 +1089,12 @@ export default function App() {
               <Route path="/guides" component={LearnGuides} />
               <Route path="/articles" component={LearnArticles} />
               <Route path="/tutorials" component={LearnGuides} />
+              <Route path="/lessons" component={LearnGuides} />
+              <Route path="/training">{() => <CourseCatalog />}</Route>
+              <Route path="/education" component={LearnHub} />
+              <Route path="/workshop">{() => <CourseCatalog />}</Route>
               <Route path="/workshops">{() => <CourseCatalog />}</Route>
+              <Route path="/programs">{() => <CourseCatalog />}</Route>
               <Route path="/library" component={LearnHub} />
 
               {/* Fallback - Config Driven Not Found */}
