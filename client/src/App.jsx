@@ -355,6 +355,18 @@ export default function App() {
               <Route path="/ai-chat">
                 <WellnessRoute><AIChatPage /></WellnessRoute>
               </Route>
+              <Route path="/therapy">
+                <WellnessRoute><AIChatPage /></WellnessRoute>
+              </Route>
+              <Route path="/coach">
+                <WellnessRoute><AIChatPage /></WellnessRoute>
+              </Route>
+              <Route path="/mentor">
+                <WellnessRoute><AIChatPage /></WellnessRoute>
+              </Route>
+              <Route path="/sessions">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
               <Route path="/analytics">
                 <ProtectedRoute><Analytics /></ProtectedRoute>
               </Route>
@@ -436,6 +448,15 @@ export default function App() {
               <Route path="/hubs">
                 <WellnessRoute><HubsIndexPage /></WellnessRoute>
               </Route>
+              <Route path="/explore/topics">
+                <WellnessRoute><HubsIndexPage /></WellnessRoute>
+              </Route>
+              <Route path="/explore/pathways">
+                <ProtectedRoute><PathwaysHome /></ProtectedRoute>
+              </Route>
+              <Route path="/explore/search">
+                <WellnessRoute><HubsIndexPage /></WellnessRoute>
+              </Route>
               <Route path="/hubs/healing-journey">
                 <WellnessRoute><HealingJourneyHubPage /></WellnessRoute>
               </Route>
@@ -514,6 +535,12 @@ export default function App() {
               <Route path="/hubs/self-discovery">
                 <WellnessRoute><SelfDiscoveryHubPage /></WellnessRoute>
               </Route>
+              <Route path="/hubs/emotions">
+                <WellnessRoute><EmotionalIntelligenceHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/hubs/self-love">
+                <WellnessRoute><SelfCompassionHubPage /></WellnessRoute>
+              </Route>
               <Route path="/twelve-practices">
                 <WellnessRoute><TwelvePracticesPage /></WellnessRoute>
               </Route>
@@ -542,12 +569,22 @@ export default function App() {
               <Route path="/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/mindfulness">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/affirmations">{() => <ConfigRoute route="/affirmations" />}</Route>
               <Route path="/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
               <Route path="/calming-scenes">{() => <ConfigRoute route="/calming-scenes" />}</Route>
               <Route path="/sleep-guide">{() => <ConfigRoute route="/sleep-guide" />}</Route>
               <Route path="/stress-response">{() => <ConfigRoute route="/stress-response" />}</Route>
               <Route path="/emotional-intelligence">{() => <ConfigRoute route="/emotional-intelligence" />}</Route>
+
+              {/* Tools Route Aliases */}
+              <Route path="/tools/journal"><WellnessRoute><JournalPage /></WellnessRoute></Route>
+              <Route path="/tools/mood"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+              <Route path="/tools/breathing">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/tools/affirmations"><AffirmationWall /></Route>
+              <Route path="/tools/meditation">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/tools/grounding">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/tools/self-care">{() => <ConfigRoute route="/self-care" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
@@ -680,6 +717,9 @@ export default function App() {
 
               {/* Community Routes */}
               <Route path="/community">
+                <ProtectedRoute><CommunityPage /></ProtectedRoute>
+              </Route>
+              <Route path="/forum">
                 <ProtectedRoute><CommunityPage /></ProtectedRoute>
               </Route>
               <Route path="/community/circle">
@@ -954,6 +994,11 @@ export default function App() {
               <Route path="/learn" component={LearnHub} />
               <Route path="/learn/guides" component={LearnGuides} />
               <Route path="/learn/articles" component={LearnArticles} />
+              <Route path="/guides" component={LearnGuides} />
+              <Route path="/articles" component={LearnArticles} />
+              <Route path="/tutorials" component={LearnGuides} />
+              <Route path="/workshops">{() => <CourseCatalog />}</Route>
+              <Route path="/library" component={LearnHub} />
 
               {/* Fallback - Config Driven Not Found */}
               <Route>{() => <ConfigRoute route="/not-found" />}</Route>
