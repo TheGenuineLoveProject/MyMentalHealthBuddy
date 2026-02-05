@@ -815,6 +815,14 @@ export default function App() {
               <Route path="/guidance">{() => <Redirect to="/support" />}</Route>
               <Route path="/healing-tools">{() => <Redirect to="/practices" />}</Route>
               <Route path="/my-journey">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/media">{() => <Redirect to="/learn" />}</Route>
+              <Route path="/downloads">{() => <Redirect to="/resources" />}</Route>
+              <Route path="/user">{() => <Redirect to="/profile" />}</Route>
+              <Route path="/apps">{() => <Redirect to="/tools" />}</Route>
+              <Route path="/appointment">{() => <Redirect to="/booking" />}</Route>
+              <Route path="/test">{() => <Redirect to="/demo" />}</Route>
+              <Route path="/start">{() => <Redirect to="/onboarding" />}</Route>
+              <Route path="/begin">{() => <Redirect to="/onboarding" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
