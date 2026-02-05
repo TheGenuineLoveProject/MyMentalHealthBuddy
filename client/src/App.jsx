@@ -915,6 +915,20 @@ export default function App() {
               <Route path="/therapy">{() => <Redirect to="/support" />}</Route>
               <Route path="/counseling">{() => <Redirect to="/support" />}</Route>
               <Route path="/mental-health">{() => <Redirect to="/wellness" />}</Route>
+              <Route path="/assistance">{() => <Redirect to="/support" />}</Route>
+              <Route path="/toolbox">{() => <Redirect to="/tools" />}</Route>
+              <Route path="/calm-down">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/grounded">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/grateful">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/peaceful">{() => <Redirect to="/peace" />}</Route>
+              <Route path="/insomnia">{() => <Redirect to="/sleep" />}</Route>
+              <Route path="/safe">{() => <Redirect to="/safety" />}</Route>
+              <Route path="/secure">{() => <Redirect to="/safety" />}</Route>
+              <Route path="/hopeful">{() => <Redirect to="/hope" />}</Route>
+              <Route path="/strong">{() => <Redirect to="/strength" />}</Route>
+              <Route path="/present">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/moment">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/now">{() => <Redirect to="/mindfulness" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
