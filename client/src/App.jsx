@@ -789,6 +789,22 @@ export default function App() {
               <Route path="/selflove">{() => <Redirect to="/self-love" />}</Route>
               <Route path="/innerchild">{() => <Redirect to="/inner-child" />}</Route>
               <Route path="/quotes">{() => <Redirect to="/affirmations" />}</Route>
+              <Route path="/exercises">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/activities">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/activity">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/heal">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/mentalhealth">{() => <Redirect to="/mental-health" />}</Route>
+              <Route path="/ground">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/routine">{() => <Redirect to="/routines" />}</Route>
+              <Route path="/program">{() => <Redirect to="/programs" />}</Route>
+              <Route path="/explore">{() => <Redirect to="/wellness-tools" />}</Route>
+              <Route path="/discover">{() => <Redirect to="/wellness-tools" />}</Route>
+              <Route path="/toolkit">{() => <Redirect to="/wellness-tools" />}</Route>
+              <Route path="/breathe">{() => <Redirect to="/breathing" />}</Route>
+              <Route path="/technique">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/techniques">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/selfworth">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/emotion">{() => <Redirect to="/emotions" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
