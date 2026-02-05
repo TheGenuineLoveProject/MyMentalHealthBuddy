@@ -610,6 +610,29 @@ export default function App() {
               <Route path="/emotions"><WellnessRoute><Suspense fallback={<div>Loading...</div>}><EmotionalIntelligenceHubPage /></Suspense></WellnessRoute></Route>
               <Route path="/feelings"><WellnessRoute><MoodPage /></WellnessRoute></Route>
               <Route path="/trauma"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/love">{() => <ConfigRoute route="/self-love" />}</Route>
+              <Route path="/hope"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/mindset"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/sleep">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+              <Route path="/rest">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+              <Route path="/focus">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/clarity">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/strength"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/courage"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/acceptance"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/forgiveness"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/motivation"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/purpose"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/balance">{() => <ConfigRoute route="/self-care" />}</Route>
+              <Route path="/energy">{() => <ConfigRoute route="/body-wellness" />}</Route>
+              <Route path="/happiness"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/joy">{() => <ConfigRoute route="/gratitude" />}</Route>
+              <Route path="/peace-of-mind">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/inner-peace">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/body">{() => <ConfigRoute route="/body-wellness" />}</Route>
+              <Route path="/spirit">{() => <ConfigRoute route="/gratitude" />}</Route>
+              <Route path="/soul"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
