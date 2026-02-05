@@ -986,6 +986,28 @@ export default function App() {
               <Route path="/freedom">{() => <Redirect to="/empowerment" />}</Route>
               <Route path="/clear">{() => <Redirect to="/clarity" />}</Route>
               <Route path="/focused">{() => <Redirect to="/focus" />}</Route>
+              <Route path="/stable">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/steady">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/protected">{() => <Redirect to="/safety" />}</Route>
+              <Route path="/embraced">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/accepted">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/understood">{() => <Redirect to="/understanding" />}</Route>
+              <Route path="/validated">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/seen">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/heard">{() => <Redirect to="/support" />}</Route>
+              <Route path="/held">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/uplifted">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/lifted">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/elevated">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/rising">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/blooming">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/flourishing">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/thriving">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/growing">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/transforming">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/awakening">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/alive">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/nourished">{() => <Redirect to="/self-care" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
