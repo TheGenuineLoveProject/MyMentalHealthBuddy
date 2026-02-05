@@ -951,6 +951,41 @@ export default function App() {
               <Route path="/authentic">{() => <Redirect to="/self-love" />}</Route>
               <Route path="/authenticity">{() => <Redirect to="/self-love" />}</Route>
               <Route path="/genuine">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/mindful">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/aware">{() => <Redirect to="/awareness" />}</Route>
+              <Route path="/centered">{() => <Redirect to="/grounding" />}</Route>
+              <Route path="/balanced">{() => <Redirect to="/balance" />}</Route>
+              <Route path="/nurture">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/nurtured">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/nurturing">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/relaxed">{() => <Redirect to="/relax" />}</Route>
+              <Route path="/calming">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/soothing">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/soothe">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/tranquil">{() => <Redirect to="/peace" />}</Route>
+              <Route path="/tranquility">{() => <Redirect to="/peace" />}</Route>
+              <Route path="/serene">{() => <Redirect to="/peace" />}</Route>
+              <Route path="/serenity">{() => <Redirect to="/peace" />}</Route>
+              <Route path="/inspired">{() => <Redirect to="/inspire" />}</Route>
+              <Route path="/motivated">{() => <Redirect to="/motivation" />}</Route>
+              <Route path="/inspiring">{() => <Redirect to="/inspire" />}</Route>
+              <Route path="/motivating">{() => <Redirect to="/motivation" />}</Route>
+              <Route path="/resilient">{() => <Redirect to="/resilience" />}</Route>
+              <Route path="/confident">{() => <Redirect to="/confidence" />}</Route>
+              <Route path="/supported">{() => <Redirect to="/support" />}</Route>
+              <Route path="/cherished">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/treasured">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/blessed">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/whole">{() => <Redirect to="/wholeness" />}</Route>
+              <Route path="/complete">{() => <Redirect to="/wholeness" />}</Route>
+              <Route path="/connected">{() => <Redirect to="/connection" />}</Route>
+              <Route path="/restored">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/renewed">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/refreshed">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/liberated">{() => <Redirect to="/empowerment" />}</Route>
+              <Route path="/freedom">{() => <Redirect to="/empowerment" />}</Route>
+              <Route path="/clear">{() => <Redirect to="/clarity" />}</Route>
+              <Route path="/focused">{() => <Redirect to="/focus" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
