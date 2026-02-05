@@ -823,6 +823,9 @@ export default function App() {
               <Route path="/test">{() => <Redirect to="/demo" />}</Route>
               <Route path="/start">{() => <Redirect to="/onboarding" />}</Route>
               <Route path="/begin">{() => <Redirect to="/onboarding" />}</Route>
+              <Route path="/join">{() => <Redirect to="/register" />}</Route>
+              <Route path="/worksheets">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/meditations">{() => <Redirect to="/meditation" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
