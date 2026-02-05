@@ -841,6 +841,24 @@ export default function App() {
               <Route path="/my-account">{() => <Redirect to="/profile" />}</Route>
               <Route path="/my-settings">{() => <Redirect to="/settings" />}</Route>
               <Route path="/preferences">{() => <Redirect to="/settings" />}</Route>
+              <Route path="/logout">{() => <Redirect to="/login" />}</Route>
+              <Route path="/signout">{() => <Redirect to="/login" />}</Route>
+              <Route path="/sign-out">{() => <Redirect to="/login" />}</Route>
+              <Route path="/log-out">{() => <Redirect to="/login" />}</Route>
+              <Route path="/products">{() => <Redirect to="/features" />}</Route>
+              <Route path="/index">{() => <Redirect to="/" />}</Route>
+              <Route path="/main">{() => <Redirect to="/" />}</Route>
+              <Route path="/intro">{() => <Redirect to="/onboarding" />}</Route>
+              <Route path="/checkin">{() => <Redirect to="/mood" />}</Route>
+              <Route path="/check-in">{() => <Redirect to="/mood" />}</Route>
+              <Route path="/workbooks">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/templates">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/notifications">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/inbox">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/messages">{() => <Redirect to="/chat" />}</Route>
+              <Route path="/alerts">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/cart">{() => <Redirect to="/pricing" />}</Route>
+              <Route path="/treatment">{() => <Redirect to="/healing" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
