@@ -78,6 +78,7 @@ const DailyPracticePage = lazy(() => import("./pages/DailyPracticePage.jsx"));
 const RoutinesPage = lazy(() => import("./pages/RoutinesPage.jsx"));
 const GrowthPage = lazy(() => import("./pages/GrowthPage.jsx"));
 const RecoveryPage = lazy(() => import("./pages/RecoveryPage.jsx"));
+const SelfLovePage = lazy(() => import("./pages/SelfLovePage.jsx"));
 const SleepHubPage = lazy(() => import("./pages/hubs/SleepHubPage.jsx"));
 const BoundariesHubPage = lazy(() => import("./pages/hubs/BoundariesHubPage.jsx"));
 const SelfWorthHubPage = lazy(() => import("./pages/hubs/SelfWorthHubPage.jsx"));
@@ -610,7 +611,7 @@ export default function App() {
               <Route path="/emotions"><WellnessRoute><Suspense fallback={<div>Loading...</div>}><EmotionalIntelligenceHubPage /></Suspense></WellnessRoute></Route>
               <Route path="/feelings"><WellnessRoute><MoodPage /></WellnessRoute></Route>
               <Route path="/trauma"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
-              <Route path="/love">{() => <ConfigRoute route="/self-love" />}</Route>
+              <Route path="/love"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/hope"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/mindset"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/sleep">{() => <ConfigRoute route="/calming-scenes" />}</Route>
@@ -626,13 +627,51 @@ export default function App() {
               <Route path="/balance">{() => <ConfigRoute route="/self-care" />}</Route>
               <Route path="/energy">{() => <ConfigRoute route="/body-wellness" />}</Route>
               <Route path="/happiness"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
-              <Route path="/joy">{() => <ConfigRoute route="/gratitude" />}</Route>
+              <Route path="/joy"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/peace-of-mind">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/inner-peace">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/body">{() => <ConfigRoute route="/body-wellness" />}</Route>
               <Route path="/spirit">{() => <ConfigRoute route="/gratitude" />}</Route>
               <Route path="/soul"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/mental-health"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/self-help">{() => <ConfigRoute route="/self-care" />}</Route>
+              <Route path="/self-improvement"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/personal-growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/emotional"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+              <Route path="/coping">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/nervous-system">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/triggers"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/worry">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/overthinking">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/ptsd"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/grief"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/loss"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/sadness"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+              <Route path="/anger">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/fear">{() => <ConfigRoute route="/grounding" />}</Route>
+              <Route path="/shame"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/guilt"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/loneliness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/isolation"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/self-love"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/wellness-tools">{() => <ConfigRoute route="/practices" />}</Route>
+              <Route path="/counseling">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/wellbeing">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/mental-wellness">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/emotional-health"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+              <Route path="/joy"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/trust"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/compassion"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/patience"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
+              <Route path="/kindness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/presence"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              <Route path="/awareness"><WellnessRoute><DailyPracticePage /></WellnessRoute></Route>
+              <Route path="/connection"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/relationships"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
+              <Route path="/intimacy"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/attachment"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/addiction"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
