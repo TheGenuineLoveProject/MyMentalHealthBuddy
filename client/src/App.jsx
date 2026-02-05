@@ -661,7 +661,7 @@ export default function App() {
               <Route path="/loneliness"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/isolation"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/self-love"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
-              <Route path="/wellness-tools">{() => <ConfigRoute route="/practices" />}</Route>
+              <Route path="/wellness-tools">{() => <PracticeLibrary />}</Route>
               <Route path="/counseling">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/wellbeing">{() => <ConfigRoute route="/healing" />}</Route>
               <Route path="/well-being">{() => <ConfigRoute route="/healing" />}</Route>
@@ -810,6 +810,11 @@ export default function App() {
               <Route path="/talk">{() => <Redirect to="/talk-topics" />}</Route>
               <Route path="/conversations">{() => <Redirect to="/talk-topics" />}</Route>
               <Route path="/discussion">{() => <Redirect to="/talk-topics" />}</Route>
+              <Route path="/find">{() => <Redirect to="/explore/search" />}</Route>
+              <Route path="/search">{() => <Redirect to="/explore/search" />}</Route>
+              <Route path="/guidance">{() => <Redirect to="/support" />}</Route>
+              <Route path="/healing-tools">{() => <Redirect to="/practices" />}</Route>
+              <Route path="/my-journey">{() => <Redirect to="/dashboard" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
