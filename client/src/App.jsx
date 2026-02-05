@@ -699,6 +699,24 @@ export default function App() {
               <Route path="/energy">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/balance">{() => <ConfigRoute route="/grounding" />}</Route>
               <Route path="/guide">{() => <ConfigRoute route="/healing" />}</Route>
+              <Route path="/science">{() => <ConfigRoute route="/research" />}</Route>
+              <Route path="/studies">{() => <ConfigRoute route="/research" />}</Route>
+              <Route path="/evidence">{() => <ConfigRoute route="/research" />}</Route>
+              <Route path="/materials">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/videos">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/podcasts">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/ebooks">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/webinars">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/events">{() => <ConfigRoute route="/community" />}</Route>
+              <Route path="/calendar">{() => <ConfigRoute route="/dashboard" />}</Route>
+              <Route path="/feedback">{() => <ConfigRoute route="/contact" />}</Route>
+              <Route path="/reviews">{() => <ConfigRoute route="/testimonials" />}</Route>
+              <Route path="/partners">{() => <ConfigRoute route="/about" />}</Route>
+              <Route path="/sponsorship">{() => <ConfigRoute route="/about" />}</Route>
+              <Route path="/careers">{() => <ConfigRoute route="/about" />}</Route>
+              <Route path="/team">{() => <ConfigRoute route="/about" />}</Route>
+              <Route path="/mobile">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/newsletter">{() => <ConfigRoute route="/contact" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
@@ -834,6 +852,29 @@ export default function App() {
               <Route path="/pricing-page" component={PricingPage} />
               <Route path="/legal-info" component={LegalPage} />
               <Route path="/help/billing" component={RefundHelp} />
+
+              {/* Gamification Routes */}
+              <Route path="/quests">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
+              <Route path="/achievements">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
+              <Route path="/rewards">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
+              <Route path="/levels">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
+              <Route path="/badges">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
+              <Route path="/xp">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
+              <Route path="/streaks">
+                <ProtectedRoute><ProgressDashboardPage /></ProtectedRoute>
+              </Route>
 
               {/* Community Routes */}
               <Route path="/community">
