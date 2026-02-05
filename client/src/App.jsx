@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { Suspense, lazy } from "react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient.js";
@@ -717,6 +717,19 @@ export default function App() {
               <Route path="/team">{() => <ConfigRoute route="/about" />}</Route>
               <Route path="/mobile">{() => <ConfigRoute route="/features" />}</Route>
               <Route path="/newsletter">{() => <ConfigRoute route="/contact" />}</Route>
+              <Route path="/app">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/download">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/store">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/shop">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/coaching">{() => <ConfigRoute route="/chat" />}</Route>
+              <Route path="/mentoring">{() => <ConfigRoute route="/chat" />}</Route>
+              <Route path="/retreats">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/services">{() => <ConfigRoute route="/features" />}</Route>
+              <Route path="/schedule">{() => <ConfigRoute route="/dashboard" />}</Route>
+              <Route path="/booking">{() => <ConfigRoute route="/dashboard" />}</Route>
+              <Route path="/webinar">{() => <Redirect to="/courses" />}</Route>
+              <Route path="/ebook">{() => <ConfigRoute route="/learn" />}</Route>
+              <Route path="/podcast">{() => <ConfigRoute route="/learn" />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
