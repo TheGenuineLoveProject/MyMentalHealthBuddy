@@ -902,6 +902,19 @@ export default function App() {
               <Route path="/lonely">{() => <Redirect to="/loneliness" />}</Route>
               <Route path="/stressed">{() => <Redirect to="/stress" />}</Route>
               <Route path="/tired">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/overwhelmed">{() => <Redirect to="/stress" />}</Route>
+              <Route path="/anxious">{() => <Redirect to="/anxiety" />}</Route>
+              <Route path="/nervous">{() => <Redirect to="/anxiety" />}</Route>
+              <Route path="/upset">{() => <Redirect to="/anger" />}</Route>
+              <Route path="/hurt">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/frustrated">{() => <Redirect to="/anger" />}</Route>
+              <Route path="/depressed">{() => <Redirect to="/depression" />}</Route>
+              <Route path="/wellness-journey">{() => <Redirect to="/healing-journey" />}</Route>
+              <Route path="/my-healing">{() => <Redirect to="/healing-journey" />}</Route>
+              <Route path="/recovery">{() => <Redirect to="/healing-journey" />}</Route>
+              <Route path="/therapy">{() => <Redirect to="/support" />}</Route>
+              <Route path="/counseling">{() => <Redirect to="/support" />}</Route>
+              <Route path="/mental-health">{() => <Redirect to="/wellness" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
