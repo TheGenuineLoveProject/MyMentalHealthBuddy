@@ -929,6 +929,28 @@ export default function App() {
               <Route path="/present">{() => <Redirect to="/mindfulness" />}</Route>
               <Route path="/moment">{() => <Redirect to="/mindfulness" />}</Route>
               <Route path="/now">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/connect">{() => <Redirect to="/connection" />}</Route>
+              <Route path="/belong">{() => <Redirect to="/community" />}</Route>
+              <Route path="/belonging">{() => <Redirect to="/community" />}</Route>
+              <Route path="/forgive">{() => <Redirect to="/forgiveness" />}</Route>
+              <Route path="/forgiving">{() => <Redirect to="/forgiveness" />}</Route>
+              <Route path="/accept">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/accepting">{() => <Redirect to="/acceptance" />}</Route>
+              <Route path="/loving">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/kind">{() => <Redirect to="/kindness" />}</Route>
+              <Route path="/patient">{() => <Redirect to="/patience" />}</Route>
+              <Route path="/thankful">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/thanks">{() => <Redirect to="/gratitude" />}</Route>
+              <Route path="/worth">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/worthy">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/valued">{() => <Redirect to="/self-worth" />}</Route>
+              <Route path="/brave">{() => <Redirect to="/courage" />}</Route>
+              <Route path="/courageous">{() => <Redirect to="/courage" />}</Route>
+              <Route path="/empowered">{() => <Redirect to="/empowerment" />}</Route>
+              <Route path="/empower">{() => <Redirect to="/empowerment" />}</Route>
+              <Route path="/authentic">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/authenticity">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/genuine">{() => <Redirect to="/self-love" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
