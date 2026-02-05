@@ -599,6 +599,17 @@ export default function App() {
               <Route path="/habits"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
               <Route path="/growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/recovery"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/reflection"><WellnessRoute><JournalPage /></WellnessRoute></Route>
+              <Route path="/prompts"><WellnessRoute><JournalPage /></WellnessRoute></Route>
+              <Route path="/anxiety">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/depression"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
+              <Route path="/calm">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/peace">{() => <ConfigRoute route="/meditation" />}</Route>
+              <Route path="/stress">{() => <ConfigRoute route="/breathing" />}</Route>
+              <Route path="/relax">{() => <ConfigRoute route="/calming-scenes" />}</Route>
+              <Route path="/emotions"><WellnessRoute><Suspense fallback={<div>Loading...</div>}><EmotionalIntelligenceHubPage /></Suspense></WellnessRoute></Route>
+              <Route path="/feelings"><WellnessRoute><MoodPage /></WellnessRoute></Route>
+              <Route path="/trauma"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
