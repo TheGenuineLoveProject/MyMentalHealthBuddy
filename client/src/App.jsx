@@ -859,6 +859,23 @@ export default function App() {
               <Route path="/alerts">{() => <Redirect to="/dashboard" />}</Route>
               <Route path="/cart">{() => <Redirect to="/pricing" />}</Route>
               <Route path="/treatment">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/discussions">{() => <Redirect to="/community" />}</Route>
+              <Route path="/reports">{() => <Redirect to="/progress" />}</Route>
+              <Route path="/history">{() => <Redirect to="/journal" />}</Route>
+              <Route path="/favorites">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/bookmarks">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/saved">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/collections">{() => <Redirect to="/learn" />}</Route>
+              <Route path="/feed">{() => <Redirect to="/community" />}</Route>
+              <Route path="/playlist">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/playlists">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/testimonial">{() => <Redirect to="/reviews" />}</Route>
+              <Route path="/review">{() => <Redirect to="/reviews" />}</Route>
+              <Route path="/creators">{() => <Redirect to="/about" />}</Route>
+              <Route path="/experts">{() => <Redirect to="/about" />}</Route>
+              <Route path="/tasks">{() => <Redirect to="/dashboard" />}</Route>
+              <Route path="/notes">{() => <Redirect to="/journal" />}</Route>
+              <Route path="/sponsor">{() => <Redirect to="/about" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
