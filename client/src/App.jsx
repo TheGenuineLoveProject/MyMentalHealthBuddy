@@ -1032,6 +1032,26 @@ export default function App() {
               <Route path="/burned-out">{() => <Redirect to="/rest" />}</Route>
               <Route path="/weary">{() => <Redirect to="/rest" />}</Route>
               <Route path="/fatigued">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/nightmares">{() => <Redirect to="/sleep" />}</Route>
+              <Route path="/trauma-responses">{() => <Redirect to="/trauma" />}</Route>
+              <Route path="/flashbacks">{() => <Redirect to="/trauma" />}</Route>
+              <Route path="/dissociation">{() => <Redirect to="/trauma" />}</Route>
+              <Route path="/relationship">{() => <Redirect to="/relationships" />}</Route>
+              <Route path="/communication">{() => <Redirect to="/relationships" />}</Route>
+              <Route path="/parenting">{() => <Redirect to="/relationships" />}</Route>
+              <Route path="/family">{() => <Redirect to="/relationships" />}</Route>
+              <Route path="/divorce">{() => <Redirect to="/relationships" />}</Route>
+              <Route path="/breakup">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/heartbreak">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/rejection">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/abandonment">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/betrayal">{() => <Redirect to="/trust" />}</Route>
+              <Route path="/codependency">{() => <Redirect to="/relationships" />}</Route>
+              <Route path="/narcissism">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/abuse">{() => <Redirect to="/crisis" />}</Route>
+              <Route path="/self-harm">{() => <Redirect to="/crisis" />}</Route>
+              <Route path="/suicide">{() => <Redirect to="/crisis" />}</Route>
+              <Route path="/self-compassion">{() => <Redirect to="/self-care" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
