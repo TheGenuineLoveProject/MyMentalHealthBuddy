@@ -43,6 +43,7 @@ const ReminderScheduler = lazy(() => import("./components/ReminderScheduler.jsx"
 const VoiceSettings = lazy(() => import("./components/VoiceSettings.jsx"));
 const Wellness = lazy(() => import("./pages/Wellness.jsx"));
 const AffirmationWall = lazy(() => import("./pages/AffirmationWall.jsx"));
+const TalkTopics = lazy(() => import("./pages/TalkTopics.jsx"));
 const Premium = lazy(() => import("./pages/Premium.jsx"));
 const SubscriberBenefitsPage = lazy(() => import("./pages/SubscriberBenefitsPage.jsx"));
 const Admin = lazy(() => import("./pages/Admin.jsx"));
@@ -805,6 +806,13 @@ export default function App() {
               <Route path="/techniques">{() => <Redirect to="/practices" />}</Route>
               <Route path="/selfworth">{() => <Redirect to="/self-worth" />}</Route>
               <Route path="/emotion">{() => <Redirect to="/emotions" />}</Route>
+              <Route path="/topics">{() => <Redirect to="/talk-topics" />}</Route>
+              <Route path="/talk">{() => <Redirect to="/talk-topics" />}</Route>
+              <Route path="/conversations">{() => <Redirect to="/talk-topics" />}</Route>
+              <Route path="/discussion">{() => <Redirect to="/talk-topics" />}</Route>
+
+              {/* Talk Topics - Conversation Starters */}
+              <Route path="/talk-topics">{() => <TalkTopics />}</Route>
 
               {/* Healing Pages - Config Driven */}
               <Route path="/inner-child">{() => <ConfigRoute route="/inner-child" />}</Route>
