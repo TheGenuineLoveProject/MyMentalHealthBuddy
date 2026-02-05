@@ -1007,6 +1007,24 @@ export default function App() {
               <Route path="/transforming">{() => <Redirect to="/growth" />}</Route>
               <Route path="/awakening">{() => <Redirect to="/spiritual" />}</Route>
               <Route path="/alive">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/stillness">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/consciousness">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/inner-self">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/inner-work">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/shadow-work">{() => <Redirect to="/healing" />}</Route>
+              <Route path="/higher-self">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/ego">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/subconscious">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/unconscious">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/psyche">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/heart">{() => <Redirect to="/self-love" />}</Route>
+              <Route path="/intuition">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/instinct">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/feeling">{() => <Redirect to="/emotions" />}</Route>
+              <Route path="/thoughts">{() => <Redirect to="/mindfulness" />}</Route>
+              <Route path="/beliefs">{() => <Redirect to="/self-discovery" />}</Route>
+              <Route path="/behavior">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/patterns">{() => <Redirect to="/self-discovery" />}</Route>
               <Route path="/nourished">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/worried">{() => <Redirect to="/anxiety" />}</Route>
               <Route path="/fearful">{() => <Redirect to="/fear" />}</Route>
@@ -1044,6 +1062,10 @@ export default function App() {
               <Route path="/eating">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/sobriety">{() => <Redirect to="/healing" />}</Route>
               <Route path="/ptsd">{() => <Redirect to="/trauma" />}</Route>
+              <Route path="/assertiveness">{() => <Redirect to="/boundaries" />}</Route>
+              <Route path="/vulnerability">{() => <Redirect to="/authenticity" />}</Route>
+              <Route path="/security">{() => <Redirect to="/safety" />}</Route>
+              <Route path="/stability">{() => <Redirect to="/safety" />}</Route>
               <Route path="/nightmares">{() => <Redirect to="/sleep" />}</Route>
               <Route path="/trauma-responses">{() => <Redirect to="/trauma" />}</Route>
               <Route path="/flashbacks">{() => <Redirect to="/trauma" />}</Route>
