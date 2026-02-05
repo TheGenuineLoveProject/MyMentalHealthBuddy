@@ -938,6 +938,13 @@ export default function App() {
               <Route path="/accepting">{() => <Redirect to="/acceptance" />}</Route>
               <Route path="/loving">{() => <Redirect to="/self-love" />}</Route>
               <Route path="/kind">{() => <Redirect to="/kindness" />}</Route>
+              <Route path="/tender">{() => <Redirect to="/compassion" />}</Route>
+              <Route path="/gentle">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/soft">{() => <Redirect to="/compassion" />}</Route>
+              <Route path="/warm">{() => <Redirect to="/love" />}</Route>
+              <Route path="/caring">{() => <Redirect to="/self-care" />}</Route>
+              <Route path="/understanding">{() => <Redirect to="/compassion" />}</Route>
+              <Route path="/supportive">{() => <Redirect to="/support" />}</Route>
               <Route path="/patient">{() => <Redirect to="/patience" />}</Route>
               <Route path="/thankful">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/thanks">{() => <Redirect to="/gratitude" />}</Route>
@@ -991,7 +998,7 @@ export default function App() {
               <Route path="/protected">{() => <Redirect to="/safety" />}</Route>
               <Route path="/embraced">{() => <Redirect to="/self-love" />}</Route>
               <Route path="/accepted">{() => <Redirect to="/acceptance" />}</Route>
-              <Route path="/understood">{() => <Redirect to="/understanding" />}</Route>
+              <Route path="/understood">{() => <Redirect to="/acceptance" />}</Route>
               <Route path="/validated">{() => <Redirect to="/self-worth" />}</Route>
               <Route path="/seen">{() => <Redirect to="/self-worth" />}</Route>
               <Route path="/heard">{() => <Redirect to="/support" />}</Route>
@@ -1099,7 +1106,7 @@ export default function App() {
               <Route path="/healed">{() => <Redirect to="/healing" />}</Route>
               <Route path="/recovered">{() => <Redirect to="/healing-journey" />}</Route>
               <Route path="/stronger">{() => <Redirect to="/resilience" />}</Route>
-              <Route path="/content">{() => <Redirect to="/contentment" />}</Route>
+              <Route path="/content">{() => <Redirect to="/peace" />}</Route>
               <Route path="/fulfillment">{() => <Redirect to="/purpose" />}</Route>
               <Route path="/lightness">{() => <Redirect to="/joy" />}</Route>
               <Route path="/openness">{() => <Redirect to="/acceptance" />}</Route>
@@ -1111,6 +1118,21 @@ export default function App() {
               <Route path="/lovable">{() => <Redirect to="/self-worth" />}</Route>
               <Route path="/deserving">{() => <Redirect to="/self-worth" />}</Route>
               <Route path="/capable">{() => <Redirect to="/resilience" />}</Route>
+              <Route path="/evolving">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/becoming">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/unfolding">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/emerging">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/ascending">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/expanding">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/deepening">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/integrating">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/releasing">{() => <Redirect to="/release" />}</Route>
+              <Route path="/aligned">{() => <Redirect to="/balance" />}</Route>
+              <Route path="/revived">{() => <Redirect to="/calm" />}</Route>
+              <Route path="/rested">{() => <Redirect to="/rest" />}</Route>
+              <Route path="/optimistic">{() => <Redirect to="/hope" />}</Route>
+              <Route path="/joyful">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/satisfied">{() => <Redirect to="/gratitude" />}</Route>
               <Route path="/nourished">{() => <Redirect to="/self-care" />}</Route>
               <Route path="/worried">{() => <Redirect to="/anxiety" />}</Route>
               <Route path="/fearful">{() => <Redirect to="/fear" />}</Route>
