@@ -833,6 +833,14 @@ export default function App() {
               <Route path="/contact-us">{() => <Redirect to="/contact" />}</Route>
               <Route path="/about-us">{() => <Redirect to="/about" />}</Route>
               <Route path="/subscribe">{() => <Redirect to="/pricing" />}</Route>
+              <Route path="/faqs">{() => <Redirect to="/faq" />}</Route>
+              <Route path="/getting-started">{() => <Redirect to="/onboarding" />}</Route>
+              <Route path="/how-it-works">{() => <Redirect to="/features" />}</Route>
+              <Route path="/sitemap">{() => <Redirect to="/explore" />}</Route>
+              <Route path="/my-profile">{() => <Redirect to="/profile" />}</Route>
+              <Route path="/my-account">{() => <Redirect to="/profile" />}</Route>
+              <Route path="/my-settings">{() => <Redirect to="/settings" />}</Route>
+              <Route path="/preferences">{() => <Redirect to="/settings" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
