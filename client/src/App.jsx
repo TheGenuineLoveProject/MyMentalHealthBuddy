@@ -635,7 +635,6 @@ export default function App() {
               <Route path="/inner-peace">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/body">{() => <ConfigRoute route="/body-wellness" />}</Route>
-              <Route path="/spirit">{() => <ConfigRoute route="/gratitude" />}</Route>
               <Route path="/soul"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/mental-health"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
               <Route path="/self-help">{() => <ConfigRoute route="/self-care" />}</Route>
@@ -685,7 +684,6 @@ export default function App() {
               <Route path="/boundaries"><WellnessRoute><SelfLovePage /></WellnessRoute></Route>
               <Route path="/empowerment"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/mental">{() => <ConfigRoute route="/healing" />}</Route>
-              <Route path="/spirit">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/spiritual">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/spiritual-wellness">{() => <ConfigRoute route="/meditation" />}</Route>
               <Route path="/mind">{() => <ConfigRoute route="/meditation" />}</Route>
@@ -893,6 +891,17 @@ export default function App() {
               <Route path="/motivated">{() => <Redirect to="/motivation" />}</Route>
               <Route path="/mantras">{() => <Redirect to="/affirmation" />}</Route>
               <Route path="/mantra">{() => <Redirect to="/affirmation" />}</Route>
+              <Route path="/sound">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/sounds">{() => <Redirect to="/meditation" />}</Route>
+              <Route path="/transform">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/improve">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/change">{() => <Redirect to="/growth" />}</Route>
+              <Route path="/spirit">{() => <Redirect to="/spiritual" />}</Route>
+              <Route path="/sad">{() => <Redirect to="/sadness" />}</Route>
+              <Route path="/happy">{() => <Redirect to="/joy" />}</Route>
+              <Route path="/lonely">{() => <Redirect to="/loneliness" />}</Route>
+              <Route path="/stressed">{() => <Redirect to="/stress" />}</Route>
+              <Route path="/tired">{() => <Redirect to="/rest" />}</Route>
 
               {/* Talk Topics - Conversation Starters */}
               <Route path="/talk-topics">{() => <TalkTopics />}</Route>
