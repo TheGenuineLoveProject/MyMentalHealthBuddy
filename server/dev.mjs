@@ -163,8 +163,7 @@ async function startServer() {
     next();
   });
 
-  app.use("/api/auth", authRouter);
-  app.use("/api/auth", githubAuthRouter);
+  app.use("/api/auth/github", githubAuthRouter);
   app.use("/api/admin", adminRouter);
   app.use("/api/blog", blogRouter);
   app.use("/api/journal", requireAdult, journalRouter);

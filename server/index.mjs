@@ -242,7 +242,6 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/auth', authRouter);
-app.use('/api/auth', githubAuthRouter);
 app.use('/api/user', userRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/blog', blogRouter);
@@ -294,7 +293,6 @@ app.use('/api/praxis', praxisRouter);
 app.use('/api/post-trauma', postTraumaRouter);
 app.use('/api/healing', healingToolsRouter);
 app.use('/api/meaning', meaningFutureRouter);
-app.use('/api/content', contentGeneratorRouter);
 app.use('/api/healing-intelligence', healingIntelligenceRouter);
 app.use('/api/cognitive-mastery', cognitiveMasteryRouter);
 app.use('/api/wisdom-engine', wisdomEngineRouter);
@@ -387,10 +385,6 @@ function _gracefulShutdown(signal) {
   }, 10000);
 }
 
-process.on("SIGTERM", () => {
-  console.log("[shutdown] SIGTERM received");
-  process.exit(0);
-});
 process.on("SIGINT", () => {
   console.log("[shutdown] SIGINT received");
   process.exit(0);
