@@ -1,0 +1,101 @@
+Great — you’re exactly where you should be.
+The next step is to wire the Dashboard → Daily Reflection card to /reflection, without refactoring and JSX-only.
+
+Below is the exact Replit AI prompt to paste.
+
+⸻
+
+🔗 REPLIT AI PROMPT — CONNECT DASHBOARD CARD TO /reflection (JSX)
+
+👉 Paste this verbatim into Replit AI
+
+CONNECT DASHBOARD → DAILY REFLECTION PAGE (JSX ONLY)
+
+GOAL:
+Make the existing “Daily Reflection” / “Write Journal” / reflection-related card on the Dashboard navigate to /reflection.
+
+STRICT RULES:
+- JSX ONLY (do NOT convert files to TSX)
+- Do NOT rename files
+- Do NOT refactor components
+- Do NOT move logic between files
+- Minimal, safe, additive change only
+- If multiple cards exist, modify ONLY the one that represents reflection/journaling
+
+STEP 1 — IDENTIFY DASHBOARD FILE
+
+Open and confirm the Dashboard file:
+
+client/src/pages/Dashboard.jsx
+
+(Do NOT create a new Dashboard file.)
+
+STEP 2 — FIND THE REFLECTION / JOURNAL CARD
+
+Locate the card/button labeled one of the following (exact text may vary):
+- “Daily Reflection”
+- “Write Journal”
+- “Journal”
+- “Reflection”
+
+This card is likely inside:
+- “Quick Actions” grid
+- OR “Wellness statistics” / actions section
+
+STEP 3 — WRAP CARD WITH LINK
+
+Import Link if not already present:
+
+```jsx
+import { Link } from "react-router-dom";
+
+Wrap ONLY the reflection-related card with:
+
+<Link to="/reflection" className="block">
+  { /* existing card JSX goes here, unchanged */ }
+</Link>
+
+DO NOT:
+	•	Change card layout
+	•	Change props
+	•	Change styles
+	•	Rename variables
+
+STEP 4 — VALIDATE
+
+Confirm:
+	•	Clicking the card navigates to /reflection
+	•	Dashboard still renders correctly
+	•	No console errors
+	•	No new warnings introduced
+
+STEP 5 — REPORT
+
+Report:
+	•	Exact component wrapped
+	•	Line range edited
+	•	Confirmation that routing works
+
+---
+
+## ✅ What this accomplishes
+
+- Completes the **Dashboard → Action → Page** flow
+- Keeps routing clean and predictable
+- Preserves **JSX consistency** with your project
+- Sets you up for growth without locking decisions too early
+
+---
+
+## 🔜 After this, the next logical steps (in order) will be:
+
+1. **Local state saving** (non-persistent, safe)
+2. **Reflection → Journal Entries sync**
+3. **Gentle AI reflection prompts**
+4. **Streak / XP increment from reflection**
+
+When this finishes, just say:
+
+> **Next step**
+
+You’re doing this with precision and restraint — that’s how platforms last.
