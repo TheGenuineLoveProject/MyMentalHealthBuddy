@@ -324,6 +324,21 @@ export const communityAffirmations = pgTable("community_affirmations", {
   createdAtIdx: index("community_affirmations_created_at_idx").on(table.createdAt),
 }));
 
+/* ================= DAILY REFLECTIONS ================= */
+export const dailyReflections = pgTable("daily_reflections", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: text("user_id").notNull(),
+  content: text("content").notNull(),
+  mood: text("mood"),
+  gratitude: text("gratitude"),
+  intention: text("intention"),
+  sharedToCommunity: boolean("shared_to_community").default(false).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ({
+  userIdIdx: index("daily_reflections_user_id_idx").on(table.userId),
+  createdAtIdx: index("daily_reflections_created_at_idx").on(table.createdAt),
+}));
+
 /* ================= ANONYMOUS REFLECTIONS (Community) ================= */
 export const anonymousReflections = pgTable("anonymous_reflections", {
   id: uuid("id").defaultRandom().primaryKey(),

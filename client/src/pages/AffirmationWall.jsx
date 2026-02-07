@@ -75,7 +75,7 @@ export default function AffirmationWall() {
     postMutation.mutate(newAffirmation.trim());
   };
 
-  const displayAffirmations = affirmations.length > 0 ? affirmations : SAMPLE_AFFIRMATIONS;
+  const displayAffirmations = affirmations;
 
   return (
     <div className="min-h-screen py-8 px-4" style={{ background: 'linear-gradient(to bottom, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
@@ -118,6 +118,22 @@ export default function AffirmationWall() {
             {[1, 2, 3, 4].map(i => (
               <div key={i} className="h-32 rounded-2xl animate-pulse" style={{ background: 'var(--glp-sage-10)' }} />
             ))}
+          </div>
+        ) : displayAffirmations.length === 0 ? (
+          <div className="text-center py-16 px-6 rounded-3xl border" style={{ background: 'var(--glp-sage-10)', borderColor: 'var(--glp-sage-20)' }} data-testid="empty-affirmation-wall">
+            <Heart className="w-12 h-12 mx-auto mb-4" style={{ color: 'var(--glp-rose)', opacity: 0.5 }} />
+            <h3 className="text-xl font-serif mb-2" style={{ color: 'var(--glp-ink)' }}>The wall is waiting for your light</h3>
+            <p className="text-sm max-w-sm mx-auto mb-6" style={{ color: 'var(--glp-ink)', opacity: 0.6 }}>
+              Be the first to share an affirmation. Your words may be exactly what someone needs today.
+            </p>
+            <button
+              onClick={() => setShowPostModal(true)}
+              className="px-6 py-3 rounded-full font-semibold text-white transition-all hover:-translate-y-0.5"
+              style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))' }}
+              data-testid="button-post-first-affirmation"
+            >
+              Share the First Light
+            </button>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

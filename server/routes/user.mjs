@@ -1,7 +1,7 @@
 import express from "express";
 import { isAuthenticated } from "../replit_integrations/auth/replitAuth.mjs";
 import { db } from "../db/connection.mjs";
-import { journals, moods, aiMessages, therapySessions, dailyQuests } from "../../shared/schema.mjs";
+import { journals, moods, aiMessages, therapySessions, dailyQuests, dailyReflections, communityAffirmations } from "../../shared/schema.mjs";
 import { eq, and, gte, desc, count, sql } from "drizzle-orm";
 
 const router = express.Router();
@@ -83,16 +83,24 @@ router.get("/stats", isAuthenticated, async (req, res) => {
     const userId = req.user?.claims?.sub || req.user?.id;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
-    const [moodCountResult, journalCountResult, sessionCountResult] = await Promise.all([
+    const [moodCountResult, journalCountResult, sessionCountResult, reflectionCountResult] = await Promise.all([
       db.select({ count: count() }).from(moods).where(eq(moods.userId, userId)),
       db.select({ count: count() }).from(journals).where(eq(journals.userId, userId)),
-      db.select({ count: count() }).from(therapySessions).where(eq(therapySessions.userId, userId))
+      db.select({ count: count() }).from(therapySessions).where(eq(therapySessions.userId, userId)),
+      db.select({ count: count() }).from(dailyReflections).where(eq(dailyReflections.userId, String(userId))),
     ]);
+
+    let affirmationCountResult = [{ count: 0 }];
+    try {
+      affirmationCountResult = await db.select({ count: count() }).from(communityAffirmations).where(sql`${communityAffirmations.userId}::text = ${String(userId)}`);
+    } catch (_e) { /* userId may not be valid UUID — gracefully return 0 */ }
 
     const totalMoods = Number(moodCountResult[0]?.count || 0);
     const totalJournals = Number(journalCountResult[0]?.count || 0);
     const totalSessions = Number(sessionCountResult[0]?.count || 0);
-    const totalActivities = totalMoods + totalJournals + totalSessions;
+    const totalReflections = Number(reflectionCountResult[0]?.count || 0);
+    const totalAffirmations = Number(affirmationCountResult[0]?.count || 0);
+    const totalActivities = totalMoods + totalJournals + totalSessions + totalReflections + totalAffirmations;
 
     const streak = await calculateStreak(userId);
 
@@ -108,7 +116,7 @@ router.get("/stats", isAuthenticated, async (req, res) => {
     const monthlyActivity = Number(recentMoodsCount[0]?.count || 0) + Number(recentJournalsCount[0]?.count || 0);
     const growthScore = Math.min(100, Math.round((monthlyActivity / 30) * 100));
 
-    const xp = (totalJournals * 15) + (totalMoods * 10) + (totalSessions * 25);
+    const xp = (totalJournals * 15) + (totalMoods * 10) + (totalSessions * 25) + (totalReflections * 20) + (totalAffirmations * 10);
     const level = Math.max(1, Math.floor(xp / 200) + 1);
 
     return res.json({
@@ -122,6 +130,8 @@ router.get("/stats", isAuthenticated, async (req, res) => {
       totalMoods,
       totalJournals,
       totalSessions,
+      totalReflections,
+      totalAffirmations,
       totalActivities
     });
   } catch (error) {
@@ -337,6 +347,121 @@ router.post("/tasks/:taskId/complete", isAuthenticated, async (req, res) => {
   } catch (error) {
     console.error("Error completing task:", error);
     return res.status(500).json({ message: "Failed to complete task" });
+  }
+});
+
+/* ================= DAILY REFLECTIONS ================= */
+
+router.get("/reflection/today", isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.user?.claims?.sub || req.user?.id;
+    if (!userId) return res.status(401).json({ message: "Not authenticated" });
+
+    const today = new Date();
+    const todayStart = startOfDay(today);
+    const todayEnd = endOfDay(today);
+
+    const [reflection] = await db
+      .select()
+      .from(dailyReflections)
+      .where(
+        and(
+          eq(dailyReflections.userId, String(userId)),
+          gte(dailyReflections.createdAt, todayStart),
+        )
+      )
+      .orderBy(desc(dailyReflections.createdAt))
+      .limit(1);
+
+    res.json({ reflection: reflection || null, hasReflectedToday: !!reflection });
+  } catch (error) {
+    console.error("Error fetching today's reflection:", error);
+    res.status(500).json({ message: "Failed to fetch reflection" });
+  }
+});
+
+router.get("/reflections", isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.user?.claims?.sub || req.user?.id;
+    if (!userId) return res.status(401).json({ message: "Not authenticated" });
+
+    const limit = Math.min(parseInt(req.query.limit) || 30, 100);
+
+    const reflections = await db
+      .select()
+      .from(dailyReflections)
+      .where(eq(dailyReflections.userId, String(userId)))
+      .orderBy(desc(dailyReflections.createdAt))
+      .limit(limit);
+
+    res.json({ reflections });
+  } catch (error) {
+    console.error("Error fetching reflections:", error);
+    res.status(500).json({ message: "Failed to fetch reflections" });
+  }
+});
+
+router.post("/reflection", isAuthenticated, async (req, res) => {
+  try {
+    const userId = req.user?.claims?.sub || req.user?.id;
+    if (!userId) return res.status(401).json({ message: "Not authenticated" });
+
+    const { content, mood, gratitude, intention, sharedToCommunity } = req.body;
+
+    if (!content || typeof content !== "string" || content.trim().length < 5) {
+      return res.status(400).json({ ok: false, message: "Reflection must be at least 5 characters" });
+    }
+
+    if (content.length > 2000) {
+      return res.status(400).json({ ok: false, message: "Reflection must be under 2000 characters" });
+    }
+
+    const today = new Date();
+    const todayStart = startOfDay(today);
+
+    const [existing] = await db
+      .select({ id: dailyReflections.id })
+      .from(dailyReflections)
+      .where(
+        and(
+          eq(dailyReflections.userId, String(userId)),
+          gte(dailyReflections.createdAt, todayStart),
+        )
+      )
+      .limit(1);
+
+    if (existing) {
+      const [updated] = await db
+        .update(dailyReflections)
+        .set({
+          content: content.trim(),
+          mood: mood || null,
+          gratitude: gratitude?.trim() || null,
+          intention: intention?.trim() || null,
+          sharedToCommunity: sharedToCommunity || false,
+        })
+        .where(eq(dailyReflections.id, existing.id))
+        .returning();
+
+      return res.json({ ok: true, reflection: updated, updated: true });
+    }
+
+    const [reflection] = await db
+      .insert(dailyReflections)
+      .values({
+        userId: String(userId),
+        content: content.trim(),
+        mood: mood || null,
+        gratitude: gratitude?.trim() || null,
+        intention: intention?.trim() || null,
+        sharedToCommunity: sharedToCommunity || false,
+      })
+      .returning();
+
+    res.json({ ok: true, reflection, created: true });
+  } catch (error) {
+    console.error("Error saving reflection:", error);
+    res.status(500).json({ ok: false, message: "Failed to save reflection" });
   }
 });
 
