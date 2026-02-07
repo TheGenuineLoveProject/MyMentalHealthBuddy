@@ -647,3 +647,12 @@
 .retryButton:hover {
   background: var(--glp-sage-deep);
 }
+
+.emptyText {
+  color: var(--glp-sage, #7a8c7e);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  padding: 1rem 0;
+  text-align: center;
+  font-style: italic;
+}

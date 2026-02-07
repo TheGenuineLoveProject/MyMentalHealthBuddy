@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
   Sun, Moon, Heart, BookOpen, Sparkles, TrendingUp,
   Calendar, MessageSquare, Compass, Target, Flame, Zap,
@@ -11,13 +11,7 @@ import styles from "./Overview.module.css";
 import WeeklyRecap from "@/components/dashboard/WeeklyRecap";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-
-const RECENT_ACTIVITY = [
-  { type: "journal", title: "Morning Gratitude", time: "2 hours ago", xp: 15, color: "sage" },
-  { type: "reflection", title: "Self-Compassion Check-in", time: "4 hours ago", xp: 10, color: "blush" },
-  { type: "wisdom", title: "Daily Wisdom Reading", time: "Yesterday", xp: 20, color: "gold" },
-  { type: "chat", title: "AI Therapy Session", time: "Yesterday", xp: 25, color: "sage" }
-];
+import { apiRequest, queryClient } from "@/lib/queryClient";
 
 const QUICK_ACTIONS = [
   { label: "Start Journal", icon: BookOpen, href: "/journal", color: "sage" },
@@ -107,12 +101,18 @@ function StatCard({ stat }) {
   );
 }
 
-function TaskItem({ task }) {
+function TaskItem({ task, onComplete }) {
   return (
     <div className={styles.taskItem} data-testid={`task-${task.done ? 'done' : 'pending'}`}>
-      <div className={task.done ? `${styles.taskCheckbox} ${styles.taskCheckboxDone}` : `${styles.taskCheckbox} ${styles.taskCheckboxPending}`}>
+      <button
+        className={task.done ? `${styles.taskCheckbox} ${styles.taskCheckboxDone}` : `${styles.taskCheckbox} ${styles.taskCheckboxPending}`}
+        onClick={() => !task.done && onComplete && onComplete(task.id)}
+        disabled={task.done}
+        aria-label={task.done ? "Completed" : "Mark as complete"}
+        data-testid={`button-complete-task-${task.id}`}
+      >
         {task.done && <Check className={styles.taskCheckIcon} />}
-      </div>
+      </button>
       <span 
         className={task.done ? `${styles.taskText} ${styles.taskTextDone}` : `${styles.taskText} ${styles.taskTextPending}`}
         data-testid={`task-text-${task.done ? 'done' : 'pending'}`}
@@ -182,23 +182,28 @@ export default function DashboardOverview() {
   const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
   const TimeIcon = hour < 18 ? Sun : Moon;
 
+  const completeTaskMutation = useMutation({
+    mutationFn: async (taskId) => {
+      const res = await apiRequest("POST", `/api/user/tasks/${taskId}/complete`);
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/user/tasks'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/user/stats'] });
+    }
+  });
+
   const stats = [
-    { label: "Current Streak", value: userStats?.streak || "7 days", icon: Flame, color: "gold" },
-    { label: "Sessions", value: userStats?.sessions || "24", icon: Calendar, color: "sage" },
-    { label: "Insights", value: userStats?.insights || "12", icon: Sparkles, color: "blush" },
-    { label: "Growth Score", value: userStats?.growthScore || "78%", icon: TrendingUp, color: "teal", trend: "↑ 4%" }
+    { label: "Current Streak", value: userStats?.streak || "Start today!", icon: Flame, color: "gold" },
+    { label: "Sessions", value: userStats?.sessions || "0", icon: Calendar, color: "sage" },
+    { label: "Journal Entries", value: userStats?.insights || "0", icon: Sparkles, color: "blush" },
+    { label: "Growth Score", value: userStats?.growthScore || "0%", icon: TrendingUp, color: "teal" }
   ];
 
-  const todaysTasks = tasksData?.tasks || [
-    { task: "Morning gratitude reflection", done: true, xp: 10 },
-    { task: "10-minute mindfulness practice", done: true, xp: 15 },
-    { task: "Journal your afternoon thoughts", done: false, xp: 10 },
-    { task: "Evening self-compassion check-in", done: false, xp: 10 }
-  ];
-
-  const recentActivity = activityData?.activities || RECENT_ACTIVITY;
+  const todaysTasks = tasksData?.tasks || [];
+  const recentActivity = activityData?.activities || [];
   const completedTasks = todaysTasks.filter(t => t.done).length;
-  const totalTasks = todaysTasks.length;
+  const totalTasks = todaysTasks.length || 1;
   const progressPercent = Math.round((completedTasks / totalTasks) * 100);
 
   if (isLoading) {
@@ -256,11 +261,11 @@ export default function DashboardOverview() {
             <div className={styles.headerActions}>
               <div className={styles.xpBadge} data-testid="display-xp">
                 <Zap className={styles.xpIcon} />
-                <span className={styles.xpText}>{userStats?.xp || 1250} XP</span>
+                <span className={styles.xpText}>{userStats?.xp ?? 0} XP</span>
               </div>
               <div className={styles.levelBadge} data-testid="display-level">
                 <Star className={styles.levelIcon} />
-                <span className={styles.levelText}>Level {userStats?.level || 5}</span>
+                <span className={styles.levelText}>Level {userStats?.level ?? 1}</span>
               </div>
               <button 
                 className={styles.refreshButton}
@@ -288,7 +293,9 @@ export default function DashboardOverview() {
               <h2 className={styles.cardTitle}>Recent Activity</h2>
             </div>
             <div className={styles.activityList}>
-              {recentActivity.slice(0, 4).map((activity, i) => (
+              {recentActivity.length === 0 ? (
+                <p className={styles.emptyText} data-testid="text-no-activity">No activity yet. Start journaling, tracking your mood, or chatting with your AI companion to see your progress here.</p>
+              ) : recentActivity.slice(0, 4).map((activity, i) => (
                 <ActivityItem key={i} activity={activity} />
               ))}
             </div>
@@ -303,8 +310,10 @@ export default function DashboardOverview() {
               <h2 className={styles.cardTitle}>Today's Focus</h2>
             </div>
             <div className={styles.taskList}>
-              {todaysTasks.map((task, i) => (
-                <TaskItem key={i} task={task} />
+              {todaysTasks.length === 0 ? (
+                <p className={styles.emptyText} data-testid="text-no-tasks">Your daily quests are loading...</p>
+              ) : todaysTasks.map((task, i) => (
+                <TaskItem key={task.id || i} task={task} onComplete={(id) => completeTaskMutation.mutate(id)} />
               ))}
             </div>
             <div className={styles.progressBar}>
