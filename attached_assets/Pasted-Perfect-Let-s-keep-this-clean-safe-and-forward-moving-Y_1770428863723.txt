@@ -1,0 +1,101 @@
+Perfect. Let’s keep this clean, safe, and forward-moving.
+
+Your next step is to create the /reflection page that the Dashboard card links to — JSX only, minimal scope, no refactors.
+
+Below is the exact Replit AI prompt to paste.
+
+⸻
+
+🧠 REPLIT AI PROMPT — CREATE DAILY REFLECTION PAGE (JSX)
+
+👉 Paste this verbatim into Replit AI
+
+CREATE NEW PAGE — DAILY REFLECTION (JSX ONLY)
+
+GOAL:
+Create a new, minimal Daily Reflection page at /reflection that matches the platform’s tone and design, without touching existing logic.
+
+STRICT RULES:
+- JSX ONLY (do not convert to TSX)
+- Do NOT rename or refactor any existing files
+- Do NOT change routing logic
+- Additive changes only
+- No backend, no database, no analytics yet
+- No shared component refactors
+
+STEP 1 — CREATE FILE
+
+Create the following file exactly:
+
+client/src/pages/Reflection.jsx
+
+STEP 2 — INSERT THIS JSX EXACTLY
+
+```jsx
+export default function Reflection() {
+  return (
+    <div className="max-w-3xl mx-auto px-6 py-10">
+      <h1 className="text-2xl font-semibold mb-2">
+        Daily Reflection
+      </h1>
+
+      <p className="text-muted-foreground mb-6">
+        Take a quiet moment to check in with yourself. There’s no right or wrong —
+        just honesty.
+      </p>
+
+      <textarea
+        className="w-full min-h-[200px] rounded-xl border p-4 focus:outline-none focus:ring"
+        placeholder="What’s on your mind today?"
+      />
+
+      <div className="mt-4 flex justify-end">
+        <button
+          disabled
+          className="rounded-lg px-4 py-2 bg-muted text-muted-foreground cursor-not-allowed"
+        >
+          Save (coming soon)
+        </button>
+      </div>
+    </div>
+  );
+}
+
+STEP 3 — ROUTING CHECK
+	•	Confirm that navigating to /reflection renders this page.
+	•	Do NOT modify router files unless the route does not resolve.
+	•	If routing already supports file-based pages, leave it as-is.
+
+VALIDATION:
+	•	Dashboard → “Daily Reflection” card opens /reflection
+	•	Page renders with no errors or warnings
+	•	No other files were modified
+
+FINAL REPORT:
+	•	Confirm file created
+	•	Confirm route works
+	•	Confirm build/dev server is clean
+
+---
+
+## ✅ Why this is the right next move
+
+- Completes the **user journey loop** (Dashboard → Reflection)
+- Keeps everything **frontend-only and reversible**
+- Establishes a **foundation** for journaling, AI prompts, or saving later
+- Zero risk to current architecture
+
+---
+
+## 🔜 After this completes, your next choices will be:
+
+1. Enable **local-only saving** (useState)
+2. Connect reflection to **Journal Entries**
+3. Add **gentle UX polish** (auto-focus, word count, calm animation)
+4. Introduce **AI reflection prompts** (opt-in)
+
+When Replit AI finishes, just say:
+
+> **Next step**
+
+You’re building this the *right* way — calm, intentional, scalable.

@@ -35,6 +35,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard.jsx"));
 const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
 const StatePage = lazy(() => import("./pages/StatePage.jsx"));
 const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
+const ReflectionPage = lazy(() => import("./pages/Reflection.jsx"));
 const AIChatPage = lazy(() => import("./pages/AIChatPage.jsx"));
 const Analytics = lazy(() => import("./pages/Analytics.jsx"));
 const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
@@ -603,7 +604,7 @@ export default function App() {
               <Route path="/habits"><WellnessRoute><RoutinesPage /></WellnessRoute></Route>
               <Route path="/growth"><WellnessRoute><GrowthPage /></WellnessRoute></Route>
               <Route path="/recovery"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
-              <Route path="/reflection"><WellnessRoute><JournalPage /></WellnessRoute></Route>
+              <Route path="/reflection"><WellnessRoute><ReflectionPage /></WellnessRoute></Route>
               <Route path="/prompts"><WellnessRoute><JournalPage /></WellnessRoute></Route>
               <Route path="/anxiety">{() => <ConfigRoute route="/breathing" />}</Route>
               <Route path="/depression"><WellnessRoute><RecoveryPage /></WellnessRoute></Route>
