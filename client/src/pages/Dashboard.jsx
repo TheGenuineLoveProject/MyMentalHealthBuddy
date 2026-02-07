@@ -309,6 +309,23 @@ export default function Dashboard() {
                 <p className="text-sm text-white/70 mt-2">Total entries written</p>
               </div>
             </article>
+
+            <Link
+              href="/reflection"
+              className="block rounded-2xl p-6 transition-all hover:shadow-md group"
+              style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
+              data-testid="link-daily-reflection"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-sage-10)' }}>
+                  <Compass className="w-5 h-5" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
+                </div>
+                <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>Daily Reflection</h3>
+              </div>
+              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
+                Pause, reflect, and gently check in with yourself.
+              </p>
+            </Link>
           </section>
 
           {/* Mood History Visual */}
