@@ -312,6 +312,18 @@ export const blogComments = pgTable("blog_comments", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+/* ================= COMMUNITY AFFIRMATIONS ================= */
+export const communityAffirmations = pgTable("community_affirmations", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  userId: uuid("user_id"),
+  content: text("content").notNull(),
+  isAnonymous: boolean("is_anonymous").default(true).notNull(),
+  heartCount: integer("heart_count").default(0).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => ({
+  createdAtIdx: index("community_affirmations_created_at_idx").on(table.createdAt),
+}));
+
 /* ================= ANONYMOUS REFLECTIONS (Community) ================= */
 export const anonymousReflections = pgTable("anonymous_reflections", {
   id: uuid("id").defaultRandom().primaryKey(),

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
 import { db } from "../db/client.mjs";
-import { anonymousReflections, sharedReflections, moods, journals, gratitudeEntries } from "../../shared/schema.mjs";
+import { anonymousReflections, sharedReflections, moods, journals, gratitudeEntries, communityAffirmations } from "../../shared/schema.mjs";
 import { desc, eq, gte, and, sql } from "drizzle-orm";
 
 const router = Router();
@@ -161,107 +161,7 @@ router.post("/reflections/:id/heart", async (req, res) => {
   }
 });
 
-router.get("/affirmations", async (req, res) => {
-  try {
-    const affirmations = await db
-      .select({
-        id: sharedReflections.id,
-        content: sharedReflections.content,
-        displayName: sql`'Anonymous Soul'`,
-        heartCount: sharedReflections.heartCount,
-        createdAt: sharedReflections.createdAt
-      })
-      .from(sharedReflections)
-      .where(
-        and(
-          eq(sharedReflections.isAnonymous, true),
-          eq(sharedReflections.emotion, 'affirmation')
-        )
-      )
-      .orderBy(desc(sharedReflections.heartCount), desc(sharedReflections.createdAt))
-      .limit(50);
 
-    res.json(affirmations);
-  } catch (error) {
-    console.error("Error fetching affirmations:", error);
-    res.status(500).json({ error: "Failed to fetch affirmations" });
-  }
-});
-
-router.post("/affirmations", requireAuth, async (req, res) => {
-  try {
-    const { content } = req.body;
-
-    if (!content || content.trim().length < 5 || content.length > 280) {
-      return res.status(400).json({ error: "Content must be 5-280 characters" });
-    }
-
-    const [affirmation] = await db
-      .insert(sharedReflections)
-      .values({
-        userId: req.user.id,
-        content: content.trim(),
-        isAnonymous: true,
-        displayName: null,
-        emotion: 'affirmation',
-        heartCount: 0
-      })
-      .returning();
-
-    res.status(201).json(affirmation);
-  } catch (error) {
-    console.error("Error creating affirmation:", error);
-    res.status(500).json({ error: "Failed to create affirmation" });
-  }
-});
-
-const likeRateLimit = new Map();
-const LIKE_RATE_WINDOW = 60000;
-const LIKE_RATE_MAX = 10;
-
-router.post("/affirmations/:id/like", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const clientIp = req.ip || req.connection.remoteAddress || 'unknown';
-    const now = Date.now();
-    
-    const clientLikes = likeRateLimit.get(clientIp) || { count: 0, resetAt: now + LIKE_RATE_WINDOW };
-    
-    if (now > clientLikes.resetAt) {
-      clientLikes.count = 0;
-      clientLikes.resetAt = now + LIKE_RATE_WINDOW;
-    }
-    
-    if (clientLikes.count >= LIKE_RATE_MAX) {
-      return res.status(429).json({ error: "Too many likes. Please wait a moment." });
-    }
-    
-    clientLikes.count++;
-    likeRateLimit.set(clientIp, clientLikes);
-
-    const [updated] = await db
-      .update(sharedReflections)
-      .set({ 
-        heartCount: sql`${sharedReflections.heartCount} + 1` 
-      })
-      .where(
-        and(
-          eq(sharedReflections.id, id),
-          eq(sharedReflections.isAnonymous, true)
-        )
-      )
-      .returning();
-
-    if (!updated) {
-      return res.status(404).json({ error: "Affirmation not found" });
-    }
-
-    res.json({ heartCount: updated.heartCount });
-  } catch (error) {
-    console.error("Error liking affirmation:", error);
-    res.status(500).json({ error: "Failed to like affirmation" });
-  }
-});
 
 router.get("/completion-stats", requireAuth, async (req, res) => {
   try {
@@ -326,6 +226,77 @@ router.get("/completion-stats", requireAuth, async (req, res) => {
   } catch (error) {
     console.error("Error fetching completion stats:", error);
     res.status(500).json({ error: "Failed to fetch stats" });
+  }
+});
+
+/* ================= AFFIRMATION WALL ================= */
+
+router.get("/affirmations", async (_req, res) => {
+  try {
+    const affirmations = await db
+      .select({
+        id: communityAffirmations.id,
+        content: communityAffirmations.content,
+        heartCount: communityAffirmations.heartCount,
+        createdAt: communityAffirmations.createdAt,
+      })
+      .from(communityAffirmations)
+      .orderBy(desc(communityAffirmations.createdAt))
+      .limit(50);
+
+    res.json(affirmations);
+  } catch (err) {
+    console.error("Affirmations fetch error:", err);
+    res.json([]);
+  }
+});
+
+router.post("/affirmations", optionalAuth, async (req, res) => {
+  try {
+    const { content, isAnonymous } = req.body;
+
+    if (!content || typeof content !== "string" || content.trim().length < 3) {
+      return res.status(400).json({ ok: false, message: "Affirmation must be at least 3 characters" });
+    }
+
+    if (content.length > 280) {
+      return res.status(400).json({ ok: false, message: "Affirmation must be under 280 characters" });
+    }
+
+    const [affirmation] = await db
+      .insert(communityAffirmations)
+      .values({
+        userId: req.user?.id || null,
+        content: content.trim(),
+        isAnonymous: isAnonymous !== false,
+      })
+      .returning();
+
+    res.json({ ok: true, affirmation });
+  } catch (err) {
+    console.error("Affirmation post error:", err);
+    res.status(500).json({ ok: false, message: "Unable to share affirmation" });
+  }
+});
+
+router.post("/affirmations/:id/like", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const [updated] = await db
+      .update(communityAffirmations)
+      .set({ heartCount: sql`${communityAffirmations.heartCount} + 1` })
+      .where(eq(communityAffirmations.id, id))
+      .returning();
+
+    if (!updated) {
+      return res.status(404).json({ ok: false, message: "Affirmation not found" });
+    }
+
+    res.json({ ok: true, heartCount: updated.heartCount });
+  } catch (err) {
+    console.error("Affirmation like error:", err);
+    res.status(500).json({ ok: false, message: "Unable to send light" });
   }
 });
 
