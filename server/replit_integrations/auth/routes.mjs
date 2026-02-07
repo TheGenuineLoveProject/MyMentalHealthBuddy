@@ -7,14 +7,34 @@ import { authStorage } from "./storage.mjs";
 import { isAuthenticated } from "./replitAuth.mjs";
 
 export function registerAuthRoutes(app) {
-  app.get("/api/auth/user", isAuthenticated, async (req, res) => {
+  app.get("/api/auth/user", async (req, res) => {
     try {
-      const replitId = req.user.claims.sub;
-      const user = await authStorage.getUserByReplitId(replitId);
-      res.json(user);
+      let user = req.user;
+
+      if (!user && req.session?.userData) {
+        user = req.session.userData;
+        req.user = user;
+      }
+
+      if (!user?.expires_at) {
+        return res.json(null);
+      }
+
+      const now = Math.floor(Date.now() / 1000);
+      if (now > user.expires_at) {
+        return res.json(null);
+      }
+
+      const replitId = user.claims?.sub;
+      if (!replitId) {
+        return res.json(null);
+      }
+
+      const dbUser = await authStorage.getUserByReplitId(replitId);
+      res.json(dbUser);
     } catch (error) {
       console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
+      res.json(null);
     }
   });
 }

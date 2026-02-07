@@ -58,6 +58,7 @@ const Profile = lazy(() => import("./pages/Profile.jsx"));
 const DailyFlow = lazy(() => import("./features/daily/DailyFlow.tsx"));
 const MirrorPage = lazy(() => import("./pages/MirrorPage.tsx"));
 const CommunityPage = lazy(() => import("./pages/CommunityFeed.jsx"));
+const CommunityHub = lazy(() => import("./pages/CommunityHub.jsx"));
 const CommunityCircle = lazy(() => import("./pages/CommunityCircle.jsx"));
 const InsightsDashboard = lazy(() => import("./pages/InsightsDashboard.jsx"));
 const CelebrationRitual = lazy(() => import("./pages/CelebrationRitual.jsx"));
@@ -1437,6 +1438,9 @@ export default function App() {
 
               {/* Community Routes */}
               <Route path="/community">
+                <CommunityHub />
+              </Route>
+              <Route path="/community/feed">
                 <ProtectedRoute><CommunityPage /></ProtectedRoute>
               </Route>
               <Route path="/forum">
