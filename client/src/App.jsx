@@ -105,6 +105,7 @@ const JournalingHubPage = lazy(() => import("./pages/hubs/JournalingHubPage.jsx"
 const BodyMindHubPage = lazy(() => import("./pages/hubs/BodyMindHubPage.jsx"));
 const DailyPracticeHubPage = lazy(() => import("./pages/hubs/DailyPracticeHubPage.jsx"));
 const GratitudeHubPage = lazy(() => import("./pages/hubs/GratitudeHubPage.jsx"));
+const GratitudePractice = lazy(() => import("./pages/GratitudePractice.jsx"));
 const LearnHub = lazy(() => import("./pages/LearnHub.jsx"));
 const LearnGuides = lazy(() => import("./pages/LearnGuides.jsx"));
 const LearnArticles = lazy(() => import("./pages/LearnArticles.jsx"));
@@ -398,6 +399,9 @@ export default function App() {
                 <ProtectedRoute><GentleProgressDashboard /></ProtectedRoute>
               </Route>
               <Route path="/gratitude">
+                <WellnessRoute><GratitudePractice /></WellnessRoute>
+              </Route>
+              <Route path="/gratitude/hub">
                 <WellnessRoute><GratitudeHubPage /></WellnessRoute>
               </Route>
               <Route path="/reflections">

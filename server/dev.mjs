@@ -28,6 +28,7 @@ import webhookRouter from "./routes/webhook.mjs";
 import insightsRouter from "./routes/insights.mjs";
 import progressRouter from "./routes/progress.mjs";
 import statesRouter from "./routes/states.mjs";
+import gratitudeRouter from "./routes/gratitude.mjs";
 import promptsRouter from "./routes/prompts.mjs";
 import mirrorRouter from "./routes/mirror.mjs";
 import communityRouter from "./routes/community.mjs";
@@ -183,6 +184,7 @@ async function startServer() {
   app.use("/api/insights", insightsRouter);
   app.use("/api/progress", progressRouter);
   app.use("/api/states", statesRouter);
+  app.use("/api/gratitude", gratitudeRouter);
   app.use("/api/prompts", promptsRouter);
   app.use("/api/mirror", mirrorRouter);
   app.use("/api/community", communityRouter);
