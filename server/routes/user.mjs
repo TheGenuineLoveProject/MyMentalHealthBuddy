@@ -48,9 +48,17 @@ async function calculateStreak(userId) {
       .orderBy(desc(journals.createdAt))
       .limit(60);
 
+    const recentReflections = await db
+      .select({ date: sql`DATE(${dailyReflections.createdAt})` })
+      .from(dailyReflections)
+      .where(eq(dailyReflections.userId, String(userId)))
+      .orderBy(desc(dailyReflections.createdAt))
+      .limit(60);
+
     const allDates = new Set();
     recentMoods.forEach(r => allDates.add(r.date?.toISOString?.()?.split("T")[0] || String(r.date)));
     recentJournals.forEach(r => allDates.add(r.date?.toISOString?.()?.split("T")[0] || String(r.date)));
+    recentReflections.forEach(r => allDates.add(r.date?.toISOString?.()?.split("T")[0] || String(r.date)));
 
     if (allDates.size === 0) return 0;
 
@@ -457,6 +465,18 @@ router.post("/reflection", isAuthenticated, async (req, res) => {
         sharedToCommunity: sharedToCommunity || false,
       })
       .returning();
+
+    if (sharedToCommunity && content.trim().length >= 3) {
+      try {
+        await db.insert(communityAffirmations).values({
+          userId: null,
+          content: content.trim().slice(0, 280),
+          isAnonymous: true,
+        });
+      } catch (shareErr) {
+        console.error("Auto-share to community failed (non-blocking):", shareErr);
+      }
+    }
 
     res.json({ ok: true, reflection, created: true });
   } catch (error) {

@@ -4,7 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import {
   ArrowLeft, Sunrise, Heart, Sparkles, Target,
-  Loader2, Check, PenLine, BookOpen
+  Loader2, Check, PenLine, BookOpen, Users
 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -53,6 +53,7 @@ export default function DailyReflection() {
   const [mood, setMood] = useState("");
   const [gratitude, setGratitude] = useState("");
   const [intention, setIntention] = useState("");
+  const [sharedToCommunity, setSharedToCommunity] = useState(false);
   const [saved, setSaved] = useState(false);
 
   const { data: todayReflection, isLoading } = useQuery({
@@ -66,6 +67,7 @@ export default function DailyReflection() {
       setMood(todayReflection.mood || "");
       setGratitude(todayReflection.gratitude || "");
       setIntention(todayReflection.intention || "");
+      setSharedToCommunity(todayReflection.sharedToCommunity || false);
       setSaved(true);
     }
   }, [todayReflection]);
@@ -77,6 +79,7 @@ export default function DailyReflection() {
         mood,
         gratitude,
         intention,
+        sharedToCommunity,
       });
       return res.json();
     },
@@ -85,6 +88,9 @@ export default function DailyReflection() {
       queryClient.invalidateQueries({ queryKey: ["/api/user/reflection/today"] });
       queryClient.invalidateQueries({ queryKey: ["/api/user/reflections"] });
       queryClient.invalidateQueries({ queryKey: ["/api/user/stats"] });
+      if (sharedToCommunity) {
+        queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
+      }
     },
   });
 
@@ -232,6 +238,40 @@ export default function DailyReflection() {
               className="w-full p-4 rounded-lg border border-[var(--glp-ink)]/10 bg-[var(--glp-paper)]/50 text-[var(--glp-ink)] text-sm focus:outline-none focus:border-[var(--glp-sage-deep)]/30 placeholder:text-[var(--glp-ink)]/30"
               data-testid="input-intention"
             />
+          </section>
+
+          <section className="rounded-2xl border border-[var(--glp-ink)]/5 p-5 shadow-sm space-y-3"
+            style={{ background: sharedToCommunity ? 'var(--glp-sage-10)' : 'white' }}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-[var(--glp-ink)]/70">
+                <Users className="w-4 h-4" />
+                <span className="text-sm font-medium">Share anonymously with the community</span>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={sharedToCommunity}
+                onClick={() => {
+                  setSharedToCommunity(!sharedToCommunity);
+                  setSaved(false);
+                }}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                  sharedToCommunity ? 'bg-[var(--glp-sage-deep)]' : 'bg-[var(--glp-ink)]/15'
+                }`}
+                data-testid="toggle-share-community"
+              >
+                <span
+                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow-sm ${
+                    sharedToCommunity ? 'translate-x-6' : 'translate-x-1'
+                  }`}
+                />
+              </button>
+            </div>
+            <p className="text-xs text-[var(--glp-ink)]/40 leading-relaxed">
+              {sharedToCommunity
+                ? "Your reflection will appear anonymously on the Community Affirmation Wall. Only the content is shared — your name and details stay private."
+                : "This reflection is completely private. You can choose to share it anonymously anytime."}
+            </p>
           </section>
 
           <div className="flex gap-3">
