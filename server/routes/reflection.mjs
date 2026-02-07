@@ -2,6 +2,9 @@ import { Router } from "express";
 import { authGuard } from "../middleware/auth.mjs";
 import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
+import { db } from "../db/client.mjs";
+import { reflections } from "../../shared/schema.mjs";
+import { eq, desc, and } from "drizzle-orm";
 
 const router = Router();
 
@@ -19,6 +22,71 @@ const FALLBACK_PROMPTS = [
 function pickFallback() {
   return FALLBACK_PROMPTS[Math.floor(Math.random() * FALLBACK_PROMPTS.length)];
 }
+
+router.get("/entries", authGuard, async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) return res.status(401).json({ ok: false, message: "Unauthorized" });
+
+    const limit = Math.min(parseInt(req.query.limit) || 50, 100);
+
+    const rows = await db
+      .select()
+      .from(reflections)
+      .where(and(eq(reflections.userId, userId), eq(reflections.mode, "daily")))
+      .orderBy(desc(reflections.createdAt))
+      .limit(limit);
+
+    const entries = rows.map((r) => ({
+      id: r.id,
+      text: r.text,
+      date: r.createdAt.toISOString(),
+    }));
+
+    return res.json({ ok: true, entries });
+  } catch (err) {
+    logger.error("Failed to fetch reflection entries", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Could not load reflections." });
+  }
+});
+
+router.post("/entries", authGuard, async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) return res.status(401).json({ ok: false, message: "Unauthorized" });
+
+    const { text } = req.body || {};
+    if (!text || String(text).trim().length === 0) {
+      return res.status(400).json({ ok: false, message: "Reflection text is required." });
+    }
+
+    const trimmed = String(text).trim();
+    if (trimmed.length > 10000) {
+      return res.status(400).json({ ok: false, message: "Reflection is too long (max 10,000 characters)." });
+    }
+
+    const [entry] = await db
+      .insert(reflections)
+      .values({
+        userId,
+        text: trimmed,
+        mode: "daily",
+      })
+      .returning();
+
+    return res.json({
+      ok: true,
+      entry: {
+        id: entry.id,
+        text: entry.text,
+        date: entry.createdAt.toISOString(),
+      },
+    });
+  } catch (err) {
+    logger.error("Failed to save reflection entry", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Could not save reflection." });
+  }
+});
 
 router.post("/prompt", authGuard, async (req, res) => {
   try {

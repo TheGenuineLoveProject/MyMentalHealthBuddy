@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef, useMemo, useCallback } from "react";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import { Flame, Sparkles, Wand2 } from "lucide-react";
 
@@ -24,11 +25,6 @@ function todayLabel() {
     month: "long",
     day: "numeric",
   });
-}
-
-function todayKey() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
 
 function dateToDay(dateStr) {
@@ -98,21 +94,49 @@ function getStreakMessage(streak, reflectedToday) {
   return "Start your reflection streak today.";
 }
 
+function mirrorToLocalStorage(entries) {
+  try {
+    const local = entries.slice(0, 50).map((e) => ({ text: e.text, date: e.date }));
+    localStorage.setItem("glp_reflections", JSON.stringify(local));
+  } catch {}
+}
+
+function getLocalEntries() {
+  try {
+    return JSON.parse(localStorage.getItem("glp_reflections") || "[]");
+  } catch { return []; }
+}
+
 export default function Reflection() {
   const [text, setText] = useState("");
   const [saved, setSaved] = useState(false);
-  const [saveCount, setSaveCount] = useState(0);
   const [addToJournal, setAddToJournal] = useState(false);
   const [journalStatus, setJournalStatus] = useState(null);
   const [xpAwarded, setXpAwarded] = useState(null);
   const [totalXp, setTotalXp] = useState(() => parseInt(localStorage.getItem("glp_reflection_xp") || "0", 10));
   const [aiPrompt, setAiPrompt] = useState(null);
   const [aiPromptLoading, setAiPromptLoading] = useState(false);
+  const [localFallbackEntries, setLocalFallbackEntries] = useState(null);
   const textareaRef = useRef(null);
 
+  const { data: backendData, isLoading: entriesLoading } = useQuery({
+    queryKey: ["/api/reflection/entries"],
+    queryFn: async () => {
+      const res = await apiRequest("GET", "/api/reflection/entries?limit=50");
+      return res;
+    },
+    retry: false,
+    staleTime: 30000,
+  });
+
+  const backendAvailable = backendData?.ok === true;
   const allEntries = useMemo(() => {
-    return JSON.parse(localStorage.getItem("glp_reflections") || "[]");
-  }, [saveCount]);
+    if (backendAvailable && backendData.entries) {
+      mirrorToLocalStorage(backendData.entries);
+      return backendData.entries;
+    }
+    return localFallbackEntries || getLocalEntries();
+  }, [backendAvailable, backendData, localFallbackEntries]);
 
   const streak = useMemo(() => calcStreak(allEntries), [allEntries]);
 
@@ -130,29 +154,44 @@ export default function Reflection() {
     }
   }, [text]);
 
+  const saveMutation = useMutation({
+    mutationFn: async (reflectionText) => {
+      return apiRequest("POST", "/api/reflection/entries", { text: reflectionText });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/reflection/entries"] });
+    },
+  });
+
   async function handleSave() {
     if (!text.trim()) return;
-    const wc = text.trim().split(/\s+/).length;
-    const entries = JSON.parse(localStorage.getItem("glp_reflections") || "[]");
-    entries.unshift({ text: text.trim(), date: new Date().toISOString() });
-    if (entries.length > 50) entries.length = 50;
-    localStorage.setItem("glp_reflections", JSON.stringify(entries));
+    const trimmed = text.trim();
+    const wc = trimmed.split(/\s+/).length;
+
     localStorage.removeItem("glp_reflection_draft");
     setSaved(true);
-    setSaveCount((c) => c + 1);
     setTimeout(() => setSaved(false), 3000);
 
-    const newStreak = calcStreak(entries);
+    const localEntries = getLocalEntries();
+    localEntries.unshift({ text: trimmed, date: new Date().toISOString() });
+    if (localEntries.length > 50) localEntries.length = 50;
+    localStorage.setItem("glp_reflections", JSON.stringify(localEntries));
+    setLocalFallbackEntries([...localEntries]);
+
+    try {
+      await saveMutation.mutateAsync(trimmed);
+    } catch {}
+
+    const newStreak = calcStreak(localEntries);
     const xp = calcXpEarned(newStreak.current, wc);
     setXpAwarded(xp);
     setTimeout(() => setXpAwarded(null), 3500);
-
     const newTotal = totalXp + xp;
     setTotalXp(newTotal);
     localStorage.setItem("glp_reflection_xp", String(newTotal));
 
     if (addToJournal) {
-      await syncToJournal(text.trim());
+      await syncToJournal(trimmed);
     }
 
     setText("");
@@ -162,7 +201,7 @@ export default function Reflection() {
     try {
       setJournalStatus("saving");
       await apiRequest("POST", "/api/journal", {
-        title: `Reflection — ${todayLabel()}`,
+        title: `Reflection \u2014 ${todayLabel()}`,
         content,
         mood: "neutral",
       });
@@ -370,7 +409,7 @@ export default function Reflection() {
             )}
             <button
               onClick={handleSave}
-              disabled={!text.trim() || journalStatus === "saving"}
+              disabled={!text.trim() || journalStatus === "saving" || saveMutation.isPending}
               className="rounded-xl px-5 py-2.5 font-medium text-white transition-all disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 background: text.trim()
@@ -380,12 +419,12 @@ export default function Reflection() {
               }}
               data-testid="button-save-reflection"
             >
-              {journalStatus === "saving" ? "Saving..." : "Save Reflection"}
+              {saveMutation.isPending ? "Saving..." : journalStatus === "saving" ? "Saving..." : "Save Reflection"}
             </button>
           </div>
         </div>
 
-        <RecentReflections refreshKey={saveCount} onSyncToJournal={syncToJournal} />
+        <RecentReflections entries={allEntries} isLoading={entriesLoading} onSyncToJournal={syncToJournal} />
       </div>
     </div>
   );
@@ -445,15 +484,11 @@ function StreakBadge({ current, longest, reflectedToday, totalXp }) {
   );
 }
 
-function RecentReflections({ refreshKey, onSyncToJournal }) {
-  const [entries, setEntries] = useState([]);
+function RecentReflections({ entries, isLoading, onSyncToJournal }) {
   const [syncingIdx, setSyncingIdx] = useState(null);
   const [syncedSet, setSyncedSet] = useState(new Set());
 
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("glp_reflections") || "[]");
-    setEntries(stored.slice(0, 5));
-  }, [refreshKey]);
+  const recent = entries.slice(0, 5);
 
   async function handleSync(entry, idx) {
     setSyncingIdx(idx);
@@ -465,7 +500,19 @@ function RecentReflections({ refreshKey, onSyncToJournal }) {
     }
   }
 
-  if (entries.length === 0) return null;
+  if (isLoading) {
+    return (
+      <section className="mt-10" aria-label="Loading reflections" data-testid="section-recent-reflections-loading">
+        <div className="space-y-3 animate-pulse motion-reduce:animate-none">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="h-20 rounded-xl" style={{ background: "var(--glp-sage-10)" }} />
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  if (recent.length === 0) return null;
 
   return (
     <section className="mt-10" aria-label="Recent reflections" data-testid="section-recent-reflections">
@@ -473,9 +520,9 @@ function RecentReflections({ refreshKey, onSyncToJournal }) {
         Recent Reflections
       </h2>
       <div className="space-y-3">
-        {entries.map((entry, idx) => (
+        {recent.map((entry, idx) => (
           <article
-            key={idx}
+            key={entry.id || idx}
             className="rounded-xl p-4"
             style={{ background: "var(--glp-paper)", border: "1px solid var(--glp-sage-15)" }}
             data-testid={`card-reflection-${idx}`}
