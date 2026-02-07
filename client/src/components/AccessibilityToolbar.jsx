@@ -78,7 +78,7 @@ export default function AccessibilityToolbar() {
   };
 
   return (
-    <div ref={toolbarRef} className="fixed bottom-6 right-6 z-50" data-testid="accessibility-toolbar">
+    <div ref={toolbarRef} className="fixed bottom-6 right-6 z-50" style={{ pointerEvents: 'auto' }} data-testid="accessibility-toolbar">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all hover:scale-110 focus:outline-none focus:ring-4"

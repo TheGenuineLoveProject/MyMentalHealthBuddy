@@ -41,7 +41,7 @@ export default function FeedbackWidget() {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 z-40 min-h-[48px] min-w-[48px] p-3 rounded-full shadow-lg"
+        className="fixed bottom-6 left-6 z-40 min-h-[48px] min-w-[48px] p-3 rounded-full shadow-lg"
         aria-label="Open feedback"
         data-testid="button-open-feedback"
       >
@@ -52,7 +52,7 @@ export default function FeedbackWidget() {
 
   return (
     <div 
-      className="fixed bottom-4 right-4 z-50 w-80 bg-background border rounded-xl shadow-xl overflow-hidden"
+      className="fixed bottom-20 left-6 z-50 w-80 bg-background border rounded-xl shadow-xl overflow-hidden"
       role="dialog"
       aria-label="Feedback form"
     >

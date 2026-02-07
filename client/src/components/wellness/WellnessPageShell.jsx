@@ -26,10 +26,12 @@ export function WellnessPageShell({
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8">
-      <header className="mb-6">
-        <h1 className="text-3xl font-semibold">{title}</h1>
-        {subtitle ? <p className="mt-2 opacity-80">{subtitle}</p> : null}
-      </header>
+      {title ? (
+        <header className="mb-6">
+          <h1 className="text-3xl font-semibold">{title}</h1>
+          {subtitle ? <p className="mt-2 opacity-80">{subtitle}</p> : null}
+        </header>
+      ) : null}
 
       <section className="rounded-xl border bg-[var(--surface)] p-4 md:p-6 mb-6">
         {children}

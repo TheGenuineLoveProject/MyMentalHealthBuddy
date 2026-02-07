@@ -193,7 +193,7 @@ export default function AICompanion({ className = "" }) {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl transition-all hover:scale-110 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--glp-gold)] ${className}`}
+        className={`fixed bottom-24 right-6 z-40 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-xl transition-all hover:scale-110 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--glp-gold)] ${className}`}
         style={{
           background: "linear-gradient(135deg, var(--glp-sage) 0%, var(--glp-teal) 100%)",
           boxShadow: "0 4px 20px rgba(143, 191, 159, 0.4)"

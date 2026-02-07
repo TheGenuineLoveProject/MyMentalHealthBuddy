@@ -190,8 +190,8 @@ export default function Settings() {
 
   return (
   <WellnessPageShell
-    title="Settings"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    title=""
+    subtitle=""
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",

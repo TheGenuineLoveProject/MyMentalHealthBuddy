@@ -142,7 +142,7 @@ export default function LotusGuide({ className = "" }) {
 
   return (
     <div 
-      className={`fixed bottom-24 right-6 z-30 ${className}`}
+      className={`fixed bottom-[10.5rem] right-6 z-30 ${className}`}
       data-testid="lotus-guide"
       role="complementary"
       aria-label="Lotus wellness guide"

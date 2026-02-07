@@ -88,8 +88,8 @@ const SELF_CARE_TIPS = [
 export default function CrisisResources() {
   return (
   <WellnessPageShell
-    title="Crisis Resources"
-    subtitle="You are not alone. Help is available."
+    title=""
+    subtitle=""
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
@@ -111,33 +111,17 @@ export default function CrisisResources() {
         title="Crisis Resources"
         description="24/7 crisis support hotlines and mental health resources. Find immediate help, emergency contacts, and self-care tips when you need them most."
       />
-      <div className="min-h-screen" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 100%)' }}>
-        <div className="absolute -top-20 -left-20 w-[400px] h-[400px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-rose-20), transparent 70%)' }} aria-hidden="true" />
-        <div className="absolute bottom-20 -right-20 w-[300px] h-[300px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
-        
-        <div className="max-w-4xl mx-auto px-6 py-8 relative z-10">
-          <header className="mb-8">
-            <Link 
-              href="/dashboard"
-              className="inline-flex items-center gap-2 text-body-sm transition mb-6 hover:opacity-80"
-              style={{ color: 'var(--glp-sage)' }}
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Dashboard
-            </Link>
-            <div className="flex items-center gap-4">
-              <div 
-                className="w-14 h-14 rounded-xl flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, var(--glp-rose), var(--glp-rose-dark))', color: 'var(--glp-paper)' }}
-              >
-                <Heart className="w-7 h-7" />
-              </div>
-              <div>
-                <h1 className="text-display-lg" style={{ color: 'var(--glp-sage-deep)' }}>Crisis Resources</h1>
-                <p className="text-lead">You're not alone. Help is available.</p>
-              </div>
-            </div>
-          </header>
+      <div className="relative">
+        <div className="relative z-10">
+          <Link 
+            href="/dashboard"
+            className="inline-flex items-center gap-2 text-body-sm transition mb-6 hover:opacity-80"
+            style={{ color: 'var(--glp-sage)' }}
+            data-testid="link-back-dashboard"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Dashboard
+          </Link>
 
           <div className="rounded-2xl p-6 mb-8" style={{ background: 'var(--glp-rose-15)', border: '1px solid var(--glp-blush)' }}>
             <div className="flex items-start gap-4">
