@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
+import { Flame, Sparkles } from "lucide-react";
 
 const PROMPTS = [
   "What's on your mind today?",
@@ -25,13 +26,93 @@ function todayLabel() {
   });
 }
 
+function todayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function dateToDay(dateStr) {
+  const d = new Date(dateStr);
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+}
+
+const ONE_DAY = 86400000;
+
+function calcStreak(entries) {
+  if (!entries.length) return { current: 0, longest: 0, reflectedToday: false };
+
+  const dayTimestamps = [...new Set(entries.map((e) => dateToDay(e.date)))].sort((a, b) => b - a);
+  const todayTs = dateToDay(new Date().toISOString());
+  const reflectedToday = dayTimestamps[0] === todayTs;
+
+  let current = 0;
+  let expectedTs = reflectedToday ? todayTs : todayTs - ONE_DAY;
+  for (const ts of dayTimestamps) {
+    if (ts === expectedTs) {
+      current++;
+      expectedTs -= ONE_DAY;
+    } else if (ts < expectedTs) {
+      break;
+    }
+  }
+
+  let longest = 1;
+  let run = 1;
+  for (let i = 1; i < dayTimestamps.length; i++) {
+    if (dayTimestamps[i - 1] - dayTimestamps[i] === ONE_DAY) {
+      run++;
+    } else {
+      longest = Math.max(longest, run);
+      run = 1;
+    }
+  }
+  longest = Math.max(longest, run, current);
+
+  return { current, longest, reflectedToday };
+}
+
+const XP_BASE = 25;
+const XP_STREAK_BONUS = 5;
+
+function calcXpEarned(streakDays, wordCount) {
+  const streakBonus = Math.min(streakDays, 10) * XP_STREAK_BONUS;
+  const lengthBonus = Math.min(Math.floor(wordCount / 20) * 3, 30);
+  return XP_BASE + streakBonus + lengthBonus;
+}
+
+function getFlameColor(streak) {
+  if (streak >= 30) return "from-amber-400 via-orange-500 to-red-600";
+  if (streak >= 14) return "from-orange-400 to-red-500";
+  if (streak >= 7) return "from-yellow-400 to-orange-500";
+  if (streak >= 3) return "from-amber-300 to-yellow-500";
+  return "from-gray-300 to-gray-400";
+}
+
+function getStreakMessage(streak, reflectedToday) {
+  if (reflectedToday && streak >= 30) return "Legendary dedication!";
+  if (reflectedToday && streak >= 14) return "Two weeks strong!";
+  if (reflectedToday && streak >= 7) return "A whole week of showing up!";
+  if (reflectedToday && streak >= 3) return "Building real momentum!";
+  if (reflectedToday && streak >= 1) return "You showed up today.";
+  if (streak >= 1) return "Continue your streak — reflect today.";
+  return "Start your reflection streak today.";
+}
+
 export default function Reflection() {
   const [text, setText] = useState("");
   const [saved, setSaved] = useState(false);
   const [saveCount, setSaveCount] = useState(0);
   const [addToJournal, setAddToJournal] = useState(false);
   const [journalStatus, setJournalStatus] = useState(null);
+  const [xpAwarded, setXpAwarded] = useState(null);
+  const [totalXp, setTotalXp] = useState(() => parseInt(localStorage.getItem("glp_reflection_xp") || "0", 10));
   const textareaRef = useRef(null);
+
+  const allEntries = useMemo(() => {
+    return JSON.parse(localStorage.getItem("glp_reflections") || "[]");
+  }, [saveCount]);
+
+  const streak = useMemo(() => calcStreak(allEntries), [allEntries]);
 
   useEffect(() => {
     const draft = localStorage.getItem("glp_reflection_draft");
@@ -49,6 +130,7 @@ export default function Reflection() {
 
   async function handleSave() {
     if (!text.trim()) return;
+    const wc = text.trim().split(/\s+/).length;
     const entries = JSON.parse(localStorage.getItem("glp_reflections") || "[]");
     entries.unshift({ text: text.trim(), date: new Date().toISOString() });
     if (entries.length > 50) entries.length = 50;
@@ -57,6 +139,15 @@ export default function Reflection() {
     setSaved(true);
     setSaveCount((c) => c + 1);
     setTimeout(() => setSaved(false), 3000);
+
+    const newStreak = calcStreak(entries);
+    const xp = calcXpEarned(newStreak.current, wc);
+    setXpAwarded(xp);
+    setTimeout(() => setXpAwarded(null), 3500);
+
+    const newTotal = totalXp + xp;
+    setTotalXp(newTotal);
+    localStorage.setItem("glp_reflection_xp", String(newTotal));
 
     if (addToJournal) {
       await syncToJournal(text.trim());
@@ -91,18 +182,28 @@ export default function Reflection() {
       style={{ background: "linear-gradient(135deg, var(--glp-paper), var(--glp-teal-50))" }}
     >
       <div className="max-w-3xl mx-auto px-6 py-10">
-        <h1
-          className="text-2xl font-semibold mb-2"
-          style={{ color: "var(--glp-sage-deep)" }}
-          data-testid="text-reflection-title"
-        >
-          Daily Reflection
-        </h1>
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-6">
+          <div>
+            <h1
+              className="text-2xl font-semibold mb-2"
+              style={{ color: "var(--glp-sage-deep)" }}
+              data-testid="text-reflection-title"
+            >
+              Daily Reflection
+            </h1>
+            <p style={{ color: "var(--glp-ink)", opacity: 0.7 }}>
+              Take a quiet moment to check in with yourself. There's no right or wrong —
+              just honesty.
+            </p>
+          </div>
 
-        <p className="mb-6" style={{ color: "var(--glp-ink)", opacity: 0.7 }}>
-          Take a quiet moment to check in with yourself. There's no right or wrong —
-          just honesty.
-        </p>
+          <StreakBadge
+            current={streak.current}
+            longest={streak.longest}
+            reflectedToday={streak.reflectedToday}
+            totalXp={totalXp}
+          />
+        </div>
 
         <textarea
           ref={textareaRef}
@@ -146,6 +247,16 @@ export default function Reflection() {
           </div>
 
           <div className="flex items-center gap-3">
+            {xpAwarded && (
+              <span
+                className="text-sm font-bold"
+                style={{ color: "var(--glp-gold, #d4a574)" }}
+                role="status"
+                data-testid="text-xp-awarded"
+              >
+                +{xpAwarded} XP
+              </span>
+            )}
             {saved && (
               <span
                 className="text-sm font-medium"
@@ -195,6 +306,60 @@ export default function Reflection() {
 
         <RecentReflections refreshKey={saveCount} onSyncToJournal={syncToJournal} />
       </div>
+    </div>
+  );
+}
+
+function StreakBadge({ current, longest, reflectedToday, totalXp }) {
+  return (
+    <div
+      className="flex items-center gap-3 px-4 py-3 rounded-xl shrink-0"
+      style={{
+        background: "var(--glp-paper)",
+        border: "1px solid var(--glp-sage-15)",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+      }}
+      data-testid="streak-badge"
+    >
+      <div
+        className={`w-10 h-10 rounded-xl bg-gradient-to-br ${getFlameColor(current)} flex items-center justify-center shadow-md ${current >= 3 ? "animate-pulse" : ""}`}
+      >
+        <Flame className="w-5 h-5 text-white" aria-hidden="true" />
+      </div>
+      <div>
+        <div className="flex items-baseline gap-1.5">
+          <span
+            className="text-xl font-bold"
+            style={{ color: "var(--glp-ink)" }}
+            data-testid="text-streak-count"
+          >
+            {current}
+          </span>
+          <span className="text-xs" style={{ color: "var(--glp-sage)" }}>
+            day{current !== 1 ? "s" : ""}
+          </span>
+          {longest > current && (
+            <span className="text-xs ml-1" style={{ color: "var(--glp-sage)", opacity: 0.6 }}>
+              (best: {longest})
+            </span>
+          )}
+        </div>
+        <p className="text-xs" style={{ color: "var(--glp-sage)", opacity: 0.8 }} data-testid="text-streak-message">
+          {getStreakMessage(current, reflectedToday)}
+        </p>
+      </div>
+      {totalXp > 0 && (
+        <div
+          className="flex items-center gap-1 ml-2 px-2 py-1 rounded-lg"
+          style={{ background: "var(--glp-gold-10, rgba(212,165,116,0.1))" }}
+          data-testid="text-total-xp"
+        >
+          <Sparkles className="w-3.5 h-3.5" style={{ color: "var(--glp-gold, #d4a574)" }} aria-hidden="true" />
+          <span className="text-xs font-semibold" style={{ color: "var(--glp-gold, #d4a574)" }}>
+            {totalXp} XP
+          </span>
+        </div>
+      )}
     </div>
   );
 }
