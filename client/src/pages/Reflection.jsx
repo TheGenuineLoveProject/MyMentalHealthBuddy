@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { apiRequest, queryClient } from "../lib/queryClient.js";
 
 const PROMPTS = [
   "What's on your mind today?",
@@ -16,10 +17,20 @@ function pickPrompt() {
   return PROMPTS[idx];
 }
 
+function todayLabel() {
+  return new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 export default function Reflection() {
   const [text, setText] = useState("");
   const [saved, setSaved] = useState(false);
   const [saveCount, setSaveCount] = useState(0);
+  const [addToJournal, setAddToJournal] = useState(false);
+  const [journalStatus, setJournalStatus] = useState(null);
   const textareaRef = useRef(null);
 
   useEffect(() => {
@@ -36,7 +47,7 @@ export default function Reflection() {
     }
   }, [text]);
 
-  function handleSave() {
+  async function handleSave() {
     if (!text.trim()) return;
     const entries = JSON.parse(localStorage.getItem("glp_reflections") || "[]");
     entries.unshift({ text: text.trim(), date: new Date().toISOString() });
@@ -46,7 +57,30 @@ export default function Reflection() {
     setSaved(true);
     setSaveCount((c) => c + 1);
     setTimeout(() => setSaved(false), 3000);
+
+    if (addToJournal) {
+      await syncToJournal(text.trim());
+    }
+
     setText("");
+  }
+
+  async function syncToJournal(content) {
+    try {
+      setJournalStatus("saving");
+      await apiRequest("POST", "/api/journal", {
+        title: `Reflection — ${todayLabel()}`,
+        content,
+        mood: "neutral",
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+      setJournalStatus("saved");
+      setTimeout(() => setJournalStatus(null), 3000);
+    } catch {
+      setJournalStatus("error");
+      setTimeout(() => setJournalStatus(null), 4000);
+    }
   }
 
   const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
@@ -85,19 +119,36 @@ export default function Reflection() {
           data-testid="input-reflection"
         />
 
-        <div className="mt-3 flex items-center justify-between">
-          <span
-            className="text-sm"
-            style={{ color: "var(--glp-sage)", opacity: 0.8 }}
-            data-testid="text-word-count"
-          >
-            {wordCount} {wordCount === 1 ? "word" : "words"}
-          </span>
+        <div className="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-4">
+            <span
+              className="text-sm"
+              style={{ color: "var(--glp-sage)", opacity: 0.8 }}
+              data-testid="text-word-count"
+            >
+              {wordCount} {wordCount === 1 ? "word" : "words"}
+            </span>
+
+            <label
+              className="flex items-center gap-2 text-sm cursor-pointer select-none"
+              style={{ color: "var(--glp-sage)" }}
+              data-testid="label-add-to-journal"
+            >
+              <input
+                type="checkbox"
+                checked={addToJournal}
+                onChange={(e) => setAddToJournal(e.target.checked)}
+                className="rounded"
+                data-testid="checkbox-add-to-journal"
+              />
+              Also save to journal
+            </label>
+          </div>
 
           <div className="flex items-center gap-3">
             {saved && (
               <span
-                className="text-sm font-medium animate-in fade-in"
+                className="text-sm font-medium"
                 style={{ color: "var(--glp-sage)" }}
                 role="status"
                 data-testid="text-saved-status"
@@ -105,9 +156,29 @@ export default function Reflection() {
                 Saved gently
               </span>
             )}
+            {journalStatus === "saved" && (
+              <span
+                className="text-sm font-medium"
+                style={{ color: "var(--glp-sage)" }}
+                role="status"
+                data-testid="text-journal-status"
+              >
+                Added to journal
+              </span>
+            )}
+            {journalStatus === "error" && (
+              <span
+                className="text-sm font-medium"
+                style={{ color: "var(--glp-blush)" }}
+                role="alert"
+                data-testid="text-journal-error"
+              >
+                Could not save to journal — try again later
+              </span>
+            )}
             <button
               onClick={handleSave}
-              disabled={!text.trim()}
+              disabled={!text.trim() || journalStatus === "saving"}
               className="rounded-xl px-5 py-2.5 font-medium text-white transition-all disabled:opacity-40 disabled:cursor-not-allowed"
               style={{
                 background: text.trim()
@@ -117,24 +188,36 @@ export default function Reflection() {
               }}
               data-testid="button-save-reflection"
             >
-              Save Reflection
+              {journalStatus === "saving" ? "Saving..." : "Save Reflection"}
             </button>
           </div>
         </div>
 
-        <RecentReflections refreshKey={saveCount} />
+        <RecentReflections refreshKey={saveCount} onSyncToJournal={syncToJournal} />
       </div>
     </div>
   );
 }
 
-function RecentReflections({ refreshKey }) {
+function RecentReflections({ refreshKey, onSyncToJournal }) {
   const [entries, setEntries] = useState([]);
+  const [syncingIdx, setSyncingIdx] = useState(null);
+  const [syncedSet, setSyncedSet] = useState(new Set());
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem("glp_reflections") || "[]");
     setEntries(stored.slice(0, 5));
   }, [refreshKey]);
+
+  async function handleSync(entry, idx) {
+    setSyncingIdx(idx);
+    try {
+      await onSyncToJournal(entry.text);
+      setSyncedSet((prev) => new Set([...prev, idx]));
+    } finally {
+      setSyncingIdx(null);
+    }
+  }
 
   if (entries.length === 0) return null;
 
@@ -152,15 +235,32 @@ function RecentReflections({ refreshKey }) {
             data-testid={`card-reflection-${idx}`}
           >
             <p className="text-sm mb-2" style={{ color: "var(--glp-ink)" }}>
-              {entry.text.length > 200 ? entry.text.slice(0, 200) + "…" : entry.text}
+              {entry.text.length > 200 ? entry.text.slice(0, 200) + "\u2026" : entry.text}
             </p>
-            <time className="text-xs" style={{ color: "var(--glp-sage)", opacity: 0.7 }}>
-              {new Date(entry.date).toLocaleDateString("en-US", {
-                weekday: "short",
-                month: "short",
-                day: "numeric",
-              })}
-            </time>
+            <div className="flex items-center justify-between">
+              <time className="text-xs" style={{ color: "var(--glp-sage)", opacity: 0.7 }}>
+                {new Date(entry.date).toLocaleDateString("en-US", {
+                  weekday: "short",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </time>
+              {syncedSet.has(idx) ? (
+                <span className="text-xs font-medium" style={{ color: "var(--glp-sage)" }} data-testid={`text-synced-${idx}`}>
+                  In your journal
+                </span>
+              ) : (
+                <button
+                  onClick={() => handleSync(entry, idx)}
+                  disabled={syncingIdx === idx}
+                  className="text-xs font-medium underline-offset-2 hover:underline transition-colors disabled:opacity-50"
+                  style={{ color: "var(--glp-sage)" }}
+                  data-testid={`button-sync-journal-${idx}`}
+                >
+                  {syncingIdx === idx ? "Saving..." : "Save to journal"}
+                </button>
+              )}
+            </div>
           </article>
         ))}
       </div>
