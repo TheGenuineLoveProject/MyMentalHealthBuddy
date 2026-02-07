@@ -184,12 +184,21 @@ export default function CanvaLanding() {
         >
           <X className="w-6 h-6" />
         </button>
-        <div className="space-y-6">
-          <a href="#home" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Home</a>
-          <a href="#about" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>About</a>
-          <a href="#features" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>Features</a>
-          <a href="#faq" className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }}>FAQ</a>
-          <div className="pt-6 mt-6 border-t" style={{ borderColor: 'var(--glp-sage-30)' }}>
+        <div className="space-y-5">
+          <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-home">Home</a>
+          <a href="#about" onClick={() => setMobileMenuOpen(false)} className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-about">About</a>
+          <a href="#features" onClick={() => setMobileMenuOpen(false)} className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-features">Features</a>
+          <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="block text-2xl font-serif font-semibold" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-faq">FAQ</a>
+          <div className="pt-4 mt-4 border-t" style={{ borderColor: 'var(--glp-sage-20)' }}>
+            <p className="text-xs uppercase tracking-widest mb-3" style={{ color: 'var(--glp-sage)' }}>Explore</p>
+            <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-blog">Blog</Link>
+            <Link href="/community" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-community">Community</Link>
+            <Link href="/learn" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-learn">Learn</Link>
+            <Link href="/affirmations" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="mobile-nav-affirmations">Affirmations</Link>
+            <Link href="/crisis" onClick={() => setMobileMenuOpen(false)} className="block text-xl font-serif font-semibold" style={{ color: 'var(--glp-rose)' }} data-testid="mobile-nav-crisis">Crisis Help</Link>
+          </div>
+          <div className="pt-4 mt-4 border-t" style={{ borderColor: 'var(--glp-sage-30)' }}>
+            <Link href="/pricing" onClick={() => setMobileMenuOpen(false)} className="block text-lg font-semibold mb-4" style={{ color: 'var(--glp-sage)' }} data-testid="mobile-nav-pricing">Pricing</Link>
             <Link href="/login">
               <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Sign In</button>
             </Link>
@@ -226,12 +235,15 @@ export default function CanvaLanding() {
             </Link>
 
             {/* Desktop Navigation - Centered */}
-            <nav className="hidden lg:flex items-center gap-4 xl:gap-5 absolute left-1/2 transform -translate-x-1/2">
-              <a href="#home" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Home</a>
-              <a href="#about" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>About</a>
-              <a href="#features" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Features</a>
-              <a href="#faq" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>FAQ</a>
-              <a href="/pricing" className="px-6 xl:px-7 py-3 text-[15px] xl:text-base font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }}>Pricing</a>
+            <nav className="hidden lg:flex items-center gap-2 xl:gap-3 absolute left-1/2 transform -translate-x-1/2">
+              <a href="#home" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-home">Home</a>
+              <a href="#about" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-about">About</a>
+              <a href="#features" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-features">Features</a>
+              <Link href="/blog" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-blog">Blog</Link>
+              <Link href="/community" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-community">Community</Link>
+              <Link href="/learn" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-learn">Learn</Link>
+              <Link href="/crisis" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-crisis">Crisis Help</Link>
+              <Link href="/pricing" className="px-4 xl:px-5 py-3 text-[14px] xl:text-[15px] font-semibold rounded-xl transition-all duration-200 hover:bg-[var(--glp-sage-10)]" style={{ color: 'var(--glp-sage-deep)' }} data-testid="nav-pricing">Pricing</Link>
             </nav>
 
             {/* CTA Buttons - Right aligned */}
@@ -973,10 +985,14 @@ export default function CanvaLanding() {
                 <h4 className="font-semibold text-lg" style={{ color: 'var(--glp-sage-deep)' }}>Resources</h4>
               </div>
               <div className="space-y-2 text-sm">
+                <Link href="/blog"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-blog"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Blog</span></div></Link>
+                <Link href="/community"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-community"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Community</span></div></Link>
+                <Link href="/learn"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-learn"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Learn & Grow</span></div></Link>
+                <Link href="/affirmations"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-affirmations"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Affirmation Wall</span></div></Link>
                 <Link href="/content-index"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-content"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>A–Z Directory</span></div></Link>
                 <Link href="/qa"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-qa"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Q&A Community</span></div></Link>
-                <Link href="/crisis"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Crisis Support</span></div></Link>
-                <Link href="/study-vault"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Study Vault</span></div></Link>
+                <Link href="/crisis"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-crisis"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Crisis Support</span></div></Link>
+                <Link href="/study-vault"><div className="p-2.5 rounded-xl hover:bg-[var(--glp-gold-10)] cursor-pointer transition-all flex items-center justify-center sm:justify-start gap-3 group" data-testid="link-footer-study-vault"><div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ background: 'var(--glp-gold-20)' }}><ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" style={{ color: 'var(--glp-gold-dark)' }} /></div><span style={{ color: 'var(--glp-ink)' }}>Study Vault</span></div></Link>
               </div>
             </div>
             
