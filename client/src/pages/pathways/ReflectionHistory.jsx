@@ -12,7 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 const TYPE_COLORS = {
   journal: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
   mood: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
-  gratitude: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300"
+  gratitude: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300",
+  reflection: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300"
 };
 
 const normalizeData = (data) => {
@@ -47,13 +48,18 @@ export default function ReflectionHistory() {
     queryKey: ["/api/gratitude"],
   });
 
-  const isLoading = journalLoading || moodLoading || gratitudeLoading;
-  const hasError = journalError || moodError || gratitudeError;
+  const { data: dailyReflectionData, isLoading: reflectionLoading, isError: reflectionError, refetch: refetchReflections } = useQuery({
+    queryKey: ["/api/user/reflections"],
+  });
+
+  const isLoading = journalLoading || moodLoading || gratitudeLoading || reflectionLoading;
+  const hasError = journalError || moodError || gratitudeError || reflectionError;
 
   const handleRetry = () => {
     if (journalError) refetchJournal();
     if (moodError) refetchMood();
     if (gratitudeError) refetchGratitude();
+    if (reflectionError) refetchReflections();
   };
 
   const reflections = [];
@@ -88,6 +94,20 @@ export default function ReflectionHistory() {
     });
   });
 
+  normalizeData(dailyReflectionData).forEach(entry => {
+    const parts = [];
+    if (entry.content) parts.push(entry.content.substring(0, 40));
+    if (entry.gratitude) parts.push("Grateful: " + entry.gratitude.substring(0, 30));
+    if (entry.intention) parts.push("Intention: " + entry.intention.substring(0, 30));
+    reflections.push({
+      id: `reflection-${entry.id}`,
+      date: entry.createdAt || entry.date,
+      type: "reflection",
+      preview: parts.join(" | ") || "Daily reflection",
+      mood: entry.mood || "reflective"
+    });
+  });
+
   reflections.sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
   const handleViewReflection = (reflection) => {
@@ -97,6 +117,8 @@ export default function ReflectionHistory() {
       navigate("/mood");
     } else if (reflection.type === "gratitude") {
       navigate("/hubs/gratitude");
+    } else if (reflection.type === "reflection") {
+      navigate("/reflect");
     }
     toast({ title: "Opening Reflection", description: `Viewing ${reflection.type} entry` });
   };
@@ -147,7 +169,7 @@ export default function ReflectionHistory() {
             />
           </div>
           <div className="flex gap-2">
-            {["all", "journal", "mood", "gratitude"].map(type => (
+            {["all", "journal", "mood", "gratitude", "reflection"].map(type => (
               <Button
                 key={type}
                 variant={filterType === type ? "default" : "outline"}

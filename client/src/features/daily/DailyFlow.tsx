@@ -85,6 +85,23 @@ export function DailyFlow() {
                 <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
               </button>
 
+              <Link
+                href="/reflect"
+                className="w-full flex items-center justify-between p-4 rounded-xl bg-white border border-[var(--glp-ink)]/8 hover:border-[var(--glp-sage)]/30 hover:bg-[var(--glp-sage)]/5 transition-all group"
+                data-testid="link-daily-reflection"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-[var(--glp-sage)]/10 flex items-center justify-center">
+                    <PenLine className="w-5 h-5 text-[var(--glp-sage-deep)]" />
+                  </div>
+                  <div className="text-left">
+                    <div className="font-medium text-[var(--glp-ink)]/80">Daily reflection</div>
+                    <div className="text-xs text-[var(--glp-ink)]/50">Mood, gratitude & intention</div>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-[var(--glp-ink)]/30 group-hover:text-[var(--glp-sage-deep)] transition-colors" />
+              </Link>
+
               <button
                 onClick={() => setStep("prompt")}
                 className="w-full flex items-center justify-between p-4 rounded-xl bg-white border border-[var(--glp-ink)]/8 hover:border-[var(--glp-sage)]/30 hover:bg-[var(--glp-sage)]/5 transition-all group"
@@ -95,7 +112,7 @@ export function DailyFlow() {
                     <PenLine className="w-5 h-5 text-[var(--glp-sage-deep)]" />
                   </div>
                   <div className="text-left">
-                    <div className="font-medium text-[var(--glp-ink)]/80">Today's reflection</div>
+                    <div className="font-medium text-[var(--glp-ink)]/80">Today's reflection prompt</div>
                     <div className="text-xs text-[var(--glp-ink)]/50">{categoryLabels[dailyPrompt.category]}</div>
                   </div>
                 </div>

@@ -36,6 +36,7 @@ const MoodPage = lazy(() => import("./pages/MoodPage.jsx"));
 const StatePage = lazy(() => import("./pages/StatePage.jsx"));
 const JournalPage = lazy(() => import("./pages/JournalPage.jsx"));
 const ReflectionPage = lazy(() => import("./pages/Reflection.jsx"));
+const DailyReflection = lazy(() => import("./pages/DailyReflection.jsx"));
 const AIChatPage = lazy(() => import("./pages/AIChatPage.jsx"));
 const Analytics = lazy(() => import("./pages/Analytics.jsx"));
 const CrisisResources = lazy(() => import("./pages/CrisisResources.jsx"));
@@ -404,6 +405,12 @@ export default function App() {
               </Route>
               <Route path="/gratitude/hub">
                 <WellnessRoute><GratitudeHubPage /></WellnessRoute>
+              </Route>
+              <Route path="/reflect">
+                <WellnessRoute><DailyReflection /></WellnessRoute>
+              </Route>
+              <Route path="/daily-reflection">
+                <WellnessRoute><DailyReflection /></WellnessRoute>
               </Route>
               <Route path="/reflections">
                 <ProtectedRoute><ReflectionHistory /></ProtectedRoute>

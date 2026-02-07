@@ -4,7 +4,7 @@ import {
   Sun, Moon, Heart, BookOpen, Sparkles, TrendingUp,
   Calendar, MessageSquare, Compass, Target, Flame, Zap,
   Star, Activity, ArrowRight, Check, RefreshCw, AlertCircle,
-  Brain, Lightbulb, Shield
+  Brain, Lightbulb, Shield, Sunrise
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import styles from "./Overview.module.css";
@@ -14,10 +14,11 @@ import { pickBenefits } from "@/lib/benefits";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
 const QUICK_ACTIONS = [
+  { label: "Daily Reflection", icon: Sunrise, href: "/reflect", color: "gold" },
   { label: "Start Journal", icon: BookOpen, href: "/journal", color: "sage" },
-  { label: "Chat Therapy", icon: MessageSquare, href: "/chat", color: "gold" },
-  { label: "Daily Wisdom", icon: Lightbulb, href: "/wisdom", color: "blush" },
-  { label: "Mood Check", icon: Heart, href: "/state-tracker", color: "teal" }
+  { label: "Chat Therapy", icon: MessageSquare, href: "/chat", color: "blush" },
+  { label: "Mood Check", icon: Heart, href: "/state-tracker", color: "teal" },
+  { label: "Daily Wisdom", icon: Lightbulb, href: "/wisdom", color: "sage" }
 ];
 
 const WELLNESS_INSIGHTS = [
