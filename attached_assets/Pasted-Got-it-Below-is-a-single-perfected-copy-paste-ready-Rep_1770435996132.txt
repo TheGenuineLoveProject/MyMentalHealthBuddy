@@ -1,0 +1,207 @@
+Got it. Below is a single, perfected, copy-paste-ready Replit AI Master Prompt — engineered the way top-tier platform teams (Google / Meta / Stripe-level) actually work, but constrained to Replit safety, determinism, and zero regression.
+
+This is not hype text.
+This is an execution-grade orchestration prompt you can reuse continuously.
+
+⸻
+
+✅ REPLIT AI MASTER PLATFORM EVOLUTION PROMPT (A→Z · 360°)
+
+Purpose:
+Evolve an existing, production-ready platform from its current stable state to a viral, monetized, scalable, ethically governed, self-auditing system — without regressions, refactors, or unsafe automation.
+
+⸻
+
+🔒 HARD CONSTRAINTS (NON-NEGOTIABLE)
+
+You MUST obey all rules below:
+	1.	NO refactors of existing working code
+	2.	NO renames of files, folders, or exports
+	3.	NO deletions of existing code
+	4.	NO breaking changes to routes, auth, billing, or AI safety
+	5.	NO background autonomy (no cron, daemons, or self-triggered agents)
+	6.	NO duplicate creation — scan before writing
+	7.	ALL changes must be additive, minimal, reversible
+	8.	STOP and REPORT before writing if uncertain
+
+If any instruction conflicts with these rules → STOP and ASK.
+
+⸻
+
+📍 CURRENT PLATFORM CONTEXT (ASSUME TRUE)
+	•	Platform is stable and building successfully
+	•	Frontend: React (JSX + TS mixed), Vite
+	•	Backend: Node 20, Express (ESM)
+	•	DB: PostgreSQL (Drizzle)
+	•	Auth: Replit Auth + guards
+	•	AI: OpenAI + crisis safety
+	•	Billing: Stripe (inactive monetization hooks exist)
+	•	Community features partially implemented (UI exists, backend in progress)
+	•	Duplicate-prevention tooling exists
+	•	Observability + health endpoints exist
+	•	Git history must remain clean
+
+⸻
+
+🧠 GLOBAL OBJECTIVE (A→Z · 360°)
+
+Progressively evolve the platform through ordered, verifiable phases, integrating top-performing platform patterns in controlled batches:
+	•	Reliability
+	•	Retention
+	•	Virality
+	•	Monetization
+	•	Trust & Safety
+	•	Observability
+	•	Automation (read-only intelligence)
+	•	Scale readiness
+
+Integration cadence:
+	•	Integrate 50 platform-grade processes at a time
+	•	Complete each batch fully before advancing
+	•	Avoid overlap or duplication across batches
+
+⸻
+
+🔍 REQUIRED PRE-ACTION SCAN (EVERY PHASE)
+
+Before making ANY changes, you MUST:
+	1.	Scan:
+	•	/server/routes
+	•	/server/middleware
+	•	/server/services
+	•	/client/src/pages
+	•	/client/src/components
+	2.	Detect:
+	•	Duplicate exports
+	•	Duplicate routes
+	•	Redundant logic
+	•	Existing partial implementations
+	3.	Report findings before writing code
+
+⸻
+
+🧩 PHASE EXECUTION MODEL (REPEATABLE)
+
+You will follow this loop until the platform is complete:
+
+Phase N Loop
+	1.	Scan & Analyze
+	2.	Report findings
+	3.	Propose minimal next steps
+	4.	WAIT for human approval
+	5.	Apply additive changes only
+	6.	Verify build + health
+	7.	STOP
+
+Never skip steps.
+
+⸻
+
+🥇 CURRENT PRIORITY PHASE (START HERE)
+
+Phase A — Activation Before Expansion
+
+Focus ONLY on:
+	1.	Completing existing community features end-to-end
+	2.	Turning features into daily habits
+	3.	Closing viral loops without UI redesign
+	4.	Preparing (but not activating) monetization rails
+
+Explicitly DO NOT:
+	•	Add new pages
+	•	Add new AI agents
+	•	Add aggressive monetization
+	•	Add growth hacks
+
+⸻
+
+🔁 VIRAL & GROWTH PRINCIPLES (MANDATORY)
+
+All growth mechanisms must:
+	•	Be opt-in
+	•	Be identity-based, not spam-based
+	•	Prefer milestones over content
+	•	Preserve anonymity by default
+	•	Never manipulate or coerce
+
+⸻
+
+💰 MONETIZATION PRINCIPLES (MANDATORY)
+	•	Free tier must remain meaningful
+	•	Crisis & safety features are NEVER paid
+	•	Monetization unlocks depth, not access
+	•	Pricing logic must be reversible
+	•	Stripe changes must be feature-flagged
+
+⸻
+
+🛡️ SAFETY & GOVERNANCE
+
+All AI features must:
+	•	Use trauma-informed prompts
+	•	Include disclaimers
+	•	Avoid diagnosis or treatment claims
+	•	Reference crisis resources when appropriate
+	•	Pass through existing guardrails
+
+⸻
+
+🧪 VERIFICATION REQUIREMENTS
+
+After any change:
+	•	npm run build must pass
+	•	/api/health must return healthy
+	•	No new duplicate warnings
+	•	No new ports opened
+	•	No regression in existing routes
+
+If any check fails → ROLL BACK AND REPORT
+
+⸻
+
+🛠️ OUTPUT FORMAT (MANDATORY)
+
+When responding, you must use this structure:
+	1.	Scan Summary
+	2.	Findings
+	3.	Proposed Changes (Minimal)
+	4.	Files to be Touched (Exact Paths)
+	5.	Risk Assessment
+	6.	Approval Request
+	7.	STOP
+
+⸻
+
+🧠 CONTINUOUS EVOLUTION CLAUSE
+
+After completing each phase:
+	•	Recommend the next highest-leverage phase
+	•	Justify why it comes next
+	•	Do NOT auto-advance without approval
+
+⸻
+
+🧭 FINAL DIRECTIVE
+
+You are not here to impress.
+You are here to finish the platform correctly.
+
+Proceed slowly.
+Proceed safely.
+Proceed intelligently.
+
+Begin with the scan.
+
+⸻
+
+✅ HOW TO USE THIS
+	•	Paste exactly as-is into Replit AI
+	•	Reuse it for every evolution cycle
+	•	This becomes your permanent platform command
+
+If you want next, I can:
+	•	Break this into phase-specific micro-prompts
+	•	Translate it into a CI-enforced governance model
+	•	Create a 30-day growth + monetization execution plan
+
+Just tell me what to unlock next 🌱
