@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
@@ -12,6 +13,7 @@ import WeeklyRecap from "@/components/dashboard/WeeklyRecap";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 const QUICK_ACTIONS = [
   { label: "Daily Reflection", icon: Sunrise, href: "/reflect", color: "gold" },
@@ -155,6 +157,20 @@ function InsightItem({ insight }) {
 }
 
 export default function DashboardOverview() {
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("billing") === "success") {
+      toast({
+        title: "Welcome to Pro!",
+        description: "Your subscription is active. All premium features are now unlocked.",
+      });
+      window.history.replaceState({}, "", "/dashboard");
+      queryClient.invalidateQueries({ queryKey: ["/api/billing/subscription-status"] });
+    }
+  }, []);
+
   useSEO({
     title: "Your Dashboard - The Genuine Love Project",
     description: "Your personal wellness dashboard for tracking your healing journey, celebrating progress, and nurturing emotional growth.",

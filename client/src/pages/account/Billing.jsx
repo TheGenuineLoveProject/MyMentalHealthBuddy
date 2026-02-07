@@ -1,47 +1,45 @@
-import { useState } from "react";
-import { Link } from "wouter";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
   CreditCard, ArrowLeft, Check, Crown, Zap, Star,
-  Download, Calendar, Shield, Sparkles, ArrowRight, Loader2
+  Download, Calendar, Shield, Sparkles, ArrowRight, Loader2, ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 
-const PLANS = [
-  {
-    id: "free",
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    icon: Star,
-    features: ["Basic mood tracking", "5 journal entries/month", "Community access"],
-    current: false
-  },
-  {
-    id: "premium",
-    name: "Premium",
-    price: "$12",
-    period: "/month",
-    icon: Zap,
-    features: ["Unlimited journaling", "AI chat support", "Advanced insights", "Priority support"],
-    current: true,
-    popular: true
-  },
-  {
-    id: "lifetime",
-    name: "Lifetime",
-    price: "$199",
-    period: "one-time",
-    icon: Crown,
-    features: ["All Premium features", "Lifetime access", "Early access to new features", "Exclusive content"],
-    current: false
-  }
-];
+const PRO_PLAN = {
+  id: "pro",
+  name: "Pro",
+  price: "$12",
+  period: "/month",
+  icon: Zap,
+  features: [
+    "Unlimited AI chat sessions",
+    "All wellness tools unlocked",
+    "Advanced insights & analytics",
+    "Healing journey access",
+    "Priority support",
+  ],
+};
+
+const FREE_PLAN = {
+  id: "free",
+  name: "Free",
+  price: "$0",
+  period: "forever",
+  icon: Star,
+  features: [
+    "Basic mood tracking",
+    "Journal entries",
+    "Daily reflection",
+    "Community access",
+  ],
+};
 
 const formatDate = (dateStr) => {
   if (!dateStr) return "N/A";
@@ -56,9 +54,9 @@ const formatDate = (dateStr) => {
   }
 };
 
-const formatAmount = (cents) => {
-  if (!cents) return "$0.00";
-  return `$${(cents / 100).toFixed(2)}`;
+const formatAmount = (amount) => {
+  if (!amount && amount !== 0) return "$0.00";
+  return `$${Number(amount).toFixed(2)}`;
 };
 
 export default function Billing() {
@@ -69,10 +67,10 @@ export default function Billing() {
   });
   
   const { toast } = useToast();
-  const [selectedPlan, setSelectedPlan] = useState("premium");
-  const [upgradingPlan, setUpgradingPlan] = useState(null);
+  const [location] = useLocation();
+  const [upgrading, setUpgrading] = useState(false);
 
-  const { data: subscriptionData } = useQuery({
+  const { data: subscriptionData, isLoading: subLoading } = useQuery({
     queryKey: ["/api/billing/subscription-status"],
   });
 
@@ -81,18 +79,22 @@ export default function Billing() {
   });
 
   const currentPlan = subscriptionData?.plan || "free";
+  const isActive = subscriptionData?.status === "active" || subscriptionData?.status === "trialing";
   const invoices = invoicesData?.invoices || [];
 
-  const handleDownloadInvoice = (invoiceUrl) => {
-    if (invoiceUrl) {
-      window.open(invoiceUrl, "_blank");
-    } else {
-      handleOpenPortal();
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("canceled") === "true") {
+      toast({
+        title: "Checkout canceled",
+        description: "No worries — you can upgrade whenever you're ready.",
+      });
+      window.history.replaceState({}, "", "/account/billing");
     }
-  };
+  }, []);
 
   const checkoutMutation = useMutation({
-    mutationFn: (plan) => apiRequest("POST", "/api/billing/checkout", { plan }),
+    mutationFn: () => apiRequest("POST", "/api/billing/checkout", { plan: "pro" }),
     onSuccess: (data) => {
       if (data.url) {
         window.location.href = data.url;
@@ -104,7 +106,7 @@ export default function Billing() {
         description: error.message || "Please try again later.",
         variant: "destructive",
       });
-      setUpgradingPlan(null);
+      setUpgrading(false);
     },
   });
 
@@ -124,38 +126,42 @@ export default function Billing() {
     },
   });
 
-  const handleUpgrade = (planId) => {
-    setUpgradingPlan(planId);
-    checkoutMutation.mutate(planId === "premium" ? "pro" : planId);
+  const handleUpgrade = () => {
+    setUpgrading(true);
+    checkoutMutation.mutate();
   };
 
   const handleOpenPortal = () => {
     portalMutation.mutate();
   };
 
+  const handleDownloadInvoice = (invoiceUrl) => {
+    if (invoiceUrl) {
+      window.open(invoiceUrl, "_blank");
+    } else {
+      handleOpenPortal();
+    }
+  };
+
   return (
   <WellnessPageShell
     title="Billing"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
+    subtitle="Your subscription and payment details."
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
+      what: "Manage your subscription plan.",
+      why: "To keep your wellness tools accessible.",
+      who: "For adults (18+) using this platform.",
+      when: "Anytime you want to review or change your plan.",
+      where: "Right here — secure payments handled by Stripe.",
+      how: "Choose your plan, and Stripe handles the rest safely."
     }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
+    examples={[]}
   >
 
     <div className="min-h-screen hero-gradient">
       <div className="content-wrapper py-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <header className="mb-8">
             <Link href="/dashboard" className="inline-flex items-center gap-2 text-body-sm text-[var(--sage-500)] hover:text-[var(--teal-600)] mb-4 transition" data-testid="link-back">
               <ArrowLeft className="h-4 w-4" /> Back to Dashboard
@@ -172,98 +178,166 @@ export default function Billing() {
           </header>
 
           <div className="space-y-8">
-            <section className="card-bordered bg-gradient-to-r from-[var(--sage-50)] to-[var(--gold-50)]">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="icon-container icon-xl icon-soft-gold">
-                    <Zap className="h-7 w-7" />
+
+            {subLoading ? (
+              <div className="card-bordered flex items-center justify-center p-12">
+                <Loader2 className="h-8 w-8 animate-spin text-[var(--sage-500)]" />
+              </div>
+            ) : currentPlan !== "free" && isActive ? (
+              <section className="card-bordered bg-gradient-to-r from-[var(--sage-50)] to-[var(--gold-50)]" data-testid="section-current-plan">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="icon-container icon-xl icon-soft-gold">
+                      <Crown className="h-7 w-7" />
+                    </div>
+                    <div>
+                      <h2 className="text-heading-lg text-teal capitalize">{currentPlan} Plan</h2>
+                      <p className="text-body-sm text-[var(--sage-600)]">
+                        {subscriptionData?.cancelAtPeriodEnd
+                          ? `Cancels on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+                          : `Renews on ${formatDate(subscriptionData?.currentPeriodEnd)}`
+                        }
+                      </p>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    onClick={handleOpenPortal}
+                    disabled={portalMutation.isPending}
+                    data-testid="button-manage-subscription"
+                  >
+                    {portalMutation.isPending ? (
+                      <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Loading...</>
+                    ) : (
+                      <><ExternalLink className="h-4 w-4 mr-2" />Manage Subscription</>
+                    )}
+                  </Button>
+                </div>
+              </section>
+            ) : (
+              <section className="card-bordered" data-testid="section-current-plan">
+                <div className="flex items-center gap-4 mb-2">
+                  <div className="icon-container icon-xl icon-soft-sage">
+                    <Star className="h-7 w-7" />
                   </div>
                   <div>
-                    <h2 className="text-heading-lg text-teal">Premium Plan</h2>
-                    <p className="text-body-sm text-[var(--sage-600)]">Your subscription renews on Feb 1, 2026</p>
+                    <h2 className="text-heading-lg text-teal">Free Plan</h2>
+                    <p className="text-body-sm text-[var(--sage-600)]">You're using the free tier</p>
                   </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-display-md text-teal">$12</p>
-                  <p className="text-caption">/month</p>
-                </div>
-              </div>
-            </section>
+              </section>
+            )}
 
-            <section>
-              <h2 className="text-heading-md text-teal mb-4">Available Plans</h2>
-              <div className="grid md:grid-cols-3 gap-4">
-                {PLANS.map(plan => (
-                  <div 
-                    key={plan.id}
-                    className={`card-bordered relative transition-all ${
-                      plan.current 
-                        ? 'ring-2 ring-[var(--teal-500)] bg-[var(--sage-50)]' 
-                        : 'hover:border-[var(--sage-400)]'
-                    }`}
-                    data-testid={`plan-${plan.id}`}
-                  >
-                    {plan.popular && (
-                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-[var(--gold-500)] to-[var(--gold-400)] text-white text-caption font-medium">
-                        Current Plan
-                      </span>
-                    )}
-                    <div className="text-center mb-4 pt-2">
-                      <div className={`icon-container icon-lg mx-auto mb-3 ${plan.current ? 'icon-soft-teal' : 'icon-soft-sage'}`}>
-                        <plan.icon className="h-6 w-6" />
-                      </div>
-                      <h3 className="text-heading-sm text-teal">{plan.name}</h3>
-                      <p className="text-display-md text-teal">{plan.price}</p>
-                      <p className="text-caption">{plan.period}</p>
+            <section data-testid="section-plans">
+              <h2 className="text-heading-md text-teal mb-4">
+                {currentPlan === "free" ? "Upgrade Your Experience" : "Your Plan"}
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+
+                <div className={`card-bordered relative transition-all ${currentPlan === "free" ? 'ring-2 ring-[var(--sage-400)]' : ''}`} data-testid="plan-free">
+                  <div className="text-center mb-4 pt-2">
+                    <div className={`icon-container icon-lg mx-auto mb-3 ${currentPlan === "free" ? 'icon-soft-teal' : 'icon-soft-sage'}`}>
+                      <Star className="h-6 w-6" />
                     </div>
-                    <ul className="space-y-2 mb-4">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-center gap-2 text-body-sm">
-                          <Check className="h-4 w-4 text-[var(--sage-500)]" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
+                    <h3 className="text-heading-sm text-teal">{FREE_PLAN.name}</h3>
+                    <p className="text-display-md text-teal">{FREE_PLAN.price}</p>
+                    <p className="text-caption">{FREE_PLAN.period}</p>
+                  </div>
+                  <ul className="space-y-2 mb-4">
+                    {FREE_PLAN.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-body-sm">
+                        <Check className="h-4 w-4 text-[var(--sage-500)]" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  {currentPlan === "free" && (
+                    <div className="text-center">
+                      <span className="text-body-sm text-[var(--sage-600)] font-medium">Current Plan</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className={`card-bordered relative transition-all ${currentPlan !== "free" && isActive ? 'ring-2 ring-[var(--teal-500)] bg-[var(--sage-50)]' : 'hover:border-[var(--teal-400)]'}`} data-testid="plan-pro">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-[var(--gold-500)] to-[var(--gold-400)] text-white text-caption font-medium">
+                    {currentPlan !== "free" && isActive ? "Your Plan" : "Recommended"}
+                  </span>
+                  <div className="text-center mb-4 pt-4">
+                    <div className="icon-container icon-lg mx-auto mb-3 icon-soft-gold">
+                      <Zap className="h-6 w-6" />
+                    </div>
+                    <h3 className="text-heading-sm text-teal">{PRO_PLAN.name}</h3>
+                    <p className="text-display-md text-teal">{PRO_PLAN.price}</p>
+                    <p className="text-caption">{PRO_PLAN.period}</p>
+                  </div>
+                  <ul className="space-y-2 mb-4">
+                    {PRO_PLAN.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-body-sm">
+                        <Check className="h-4 w-4 text-[var(--gold-500)]" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                  {currentPlan === "free" ? (
                     <Button 
-                      className={`w-full ${plan.id === currentPlan ? 'btn-secondary-premium' : 'btn-premium'}`}
-                      disabled={plan.id === currentPlan || plan.id === "free" || upgradingPlan === plan.id}
-                      onClick={() => handleUpgrade(plan.id)}
-                      data-testid={`button-select-${plan.id}`}
+                      className="w-full btn-premium"
+                      disabled={upgrading}
+                      onClick={handleUpgrade}
+                      data-testid="button-upgrade-pro"
                     >
-                      {upgradingPlan === plan.id ? (
-                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Processing...</>
-                      ) : plan.id === currentPlan ? (
-                        'Current Plan'
+                      {upgrading ? (
+                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Redirecting to checkout...</>
                       ) : (
-                        'Upgrade'
+                        <><Sparkles className="w-4 h-4 mr-2" />Go Pro</>
                       )}
                     </Button>
-                  </div>
-                ))}
+                  ) : isActive ? (
+                    <div className="text-center">
+                      <span className="text-body-sm text-[var(--teal-600)] font-medium flex items-center justify-center gap-1">
+                        <Check className="h-4 w-4" /> Active
+                      </span>
+                    </div>
+                  ) : (
+                    <Button 
+                      className="w-full btn-premium"
+                      disabled={upgrading}
+                      onClick={handleUpgrade}
+                      data-testid="button-resubscribe"
+                    >
+                      {upgrading ? (
+                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Processing...</>
+                      ) : (
+                        'Resubscribe'
+                      )}
+                    </Button>
+                  )}
+                </div>
               </div>
             </section>
 
-            <section className="card-bordered">
+            <section className="card-bordered" data-testid="section-invoices">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-heading-md text-teal flex items-center gap-2">
                   <Calendar className="h-5 w-5 text-[var(--sage-500)]" />
                   Payment History
                 </h2>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="btn-secondary-premium" 
-                  onClick={handleOpenPortal}
-                  disabled={portalMutation.isPending}
-                  data-testid="button-download-all"
-                >
-                  {portalMutation.isPending ? (
-                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <Download className="h-4 w-4 mr-2" />
-                  )}
-                  View All Invoices
-                </Button>
+                {currentPlan !== "free" && (
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="btn-secondary-premium" 
+                    onClick={handleOpenPortal}
+                    disabled={portalMutation.isPending}
+                    data-testid="button-view-all-invoices"
+                  >
+                    {portalMutation.isPending ? (
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                    ) : (
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                    )}
+                    Stripe Portal
+                  </Button>
+                )}
               </div>
               <div className="space-y-3">
                 {invoicesLoading ? (
@@ -272,7 +346,7 @@ export default function Billing() {
                   </div>
                 ) : invoices.length === 0 ? (
                   <div className="text-center p-6 text-caption">
-                    No invoices yet. Your payment history will appear here.
+                    No invoices yet. Your payment history will appear here after your first payment.
                   </div>
                 ) : (
                   invoices.map(invoice => (
@@ -282,12 +356,12 @@ export default function Billing() {
                           <CreditCard className="h-4 w-4" />
                         </div>
                         <div>
-                          <p className="text-body-sm font-medium">{invoice.number || invoice.id}</p>
-                          <p className="text-caption">{formatDate(invoice.created || invoice.date)}</p>
+                          <p className="text-body-sm font-medium">{invoice.description || "Subscription"}</p>
+                          <p className="text-caption">{formatDate(invoice.date)}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className="text-body-sm font-medium">{formatAmount(invoice.amount_paid || invoice.amount)}</span>
+                        <span className="text-body-sm font-medium">{formatAmount(invoice.amount)}</span>
                         <span className={`px-2 py-1 rounded-full text-caption ${
                           invoice.status === "paid" 
                             ? "bg-[var(--sage-200)] text-[var(--sage-700)]"
@@ -295,14 +369,16 @@ export default function Billing() {
                         }`}>
                           {invoice.status === "paid" ? "Paid" : invoice.status}
                         </span>
-                        <Button 
-                          variant="ghost" 
-                          size="sm" 
-                          onClick={() => handleDownloadInvoice(invoice.invoice_pdf || invoice.hosted_invoice_url)}
-                          data-testid={`button-download-${invoice.id}`}
-                        >
-                          <Download className="h-4 w-4" />
-                        </Button>
+                        {(invoice.invoicePdf || invoice.hostedUrl) && (
+                          <Button 
+                            variant="ghost" 
+                            size="sm" 
+                            onClick={() => handleDownloadInvoice(invoice.invoicePdf || invoice.hostedUrl)}
+                            data-testid={`button-download-${invoice.id}`}
+                          >
+                            <Download className="h-4 w-4" />
+                          </Button>
+                        )}
                       </div>
                     </div>
                   ))
@@ -310,23 +386,17 @@ export default function Billing() {
               </div>
             </section>
 
-            <section className="card-bordered">
+            <section className="card-bordered" data-testid="section-payment-security">
               <div className="flex items-center gap-3 mb-4">
                 <div className="icon-container icon-md icon-soft-teal">
                   <Shield className="h-5 w-5" />
                 </div>
-                <h2 className="text-heading-md text-teal">Payment Method</h2>
+                <h2 className="text-heading-md text-teal">Payment Security</h2>
               </div>
-              <div className="flex items-center justify-between p-4 rounded-xl bg-[var(--sage-50)]">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-8 rounded bg-gradient-to-r from-[var(--teal-600)] to-[var(--teal-400)] flex items-center justify-center">
-                    <span className="text-white text-caption font-bold">VISA</span>
-                  </div>
-                  <div>
-                    <p className="text-body-sm font-medium">•••• •••• •••• 4242</p>
-                    <p className="text-caption">Expires 12/27</p>
-                  </div>
-                </div>
+              <p className="text-body-sm text-[var(--sage-600)] mb-4">
+                All payments are securely processed by Stripe. We never store your card details on our servers.
+              </p>
+              {currentPlan !== "free" && (
                 <Button 
                   variant="outline" 
                   size="sm" 
@@ -337,10 +407,10 @@ export default function Billing() {
                   {portalMutation.isPending ? (
                     <><Loader2 className="h-4 w-4 mr-2 animate-spin" />Loading...</>
                   ) : (
-                    'Update'
+                    <><ExternalLink className="h-4 w-4 mr-2" />Manage Payment Method</>
                   )}
                 </Button>
-              </div>
+              )}
             </section>
 
             <div className="text-center py-4">

@@ -79,7 +79,7 @@ router.post("/checkout", async (req, res) => {
       client_reference_id: req.user.id,
       line_items: [{ price: planConfig.priceId, quantity: 1 }],
       success_url: `${process.env.CORS_ORIGIN || ""}/dashboard?billing=success`,
-      cancel_url: `${process.env.CORS_ORIGIN || ""}/billing?canceled=true`,
+      cancel_url: `${process.env.CORS_ORIGIN || ""}/account/billing?canceled=true`,
       metadata: { userId: req.user.id, plan },
     }, {
       idempotencyKey,
