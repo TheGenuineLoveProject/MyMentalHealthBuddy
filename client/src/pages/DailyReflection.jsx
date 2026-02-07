@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { useGamification } from "../context/GamificationContext.jsx";
 
 const MOOD_OPTIONS = [
   { value: "peaceful", label: "Peaceful", emoji: "\u2728" },
@@ -55,6 +56,7 @@ export default function DailyReflection() {
   const [intention, setIntention] = useState("");
   const [sharedToCommunity, setSharedToCommunity] = useState(false);
   const [saved, setSaved] = useState(false);
+  const { awardXp } = useGamification();
 
   const { data: todayReflection, isLoading } = useQuery({
     queryKey: ["/api/user/reflection/today"],
@@ -71,6 +73,9 @@ export default function DailyReflection() {
       setSaved(true);
     }
   }, [todayReflection]);
+
+  const isExisting = todayReflection && todayReflection.id;
+  const hasContent = content.trim() || mood || gratitude.trim() || intention.trim();
 
   const saveMutation = useMutation({
     mutationFn: async () => {
@@ -91,11 +96,11 @@ export default function DailyReflection() {
       if (sharedToCommunity) {
         queryClient.invalidateQueries({ queryKey: ["/api/community/affirmations"] });
       }
+      if (!isExisting) {
+        awardXp("daily-reflection", 120, { type: "daily_reflection" }).catch(() => {});
+      }
     },
   });
-
-  const hasContent = content.trim() || mood || gratitude.trim() || intention.trim();
-  const isExisting = todayReflection && todayReflection.id;
 
   if (isLoading) {
     return (

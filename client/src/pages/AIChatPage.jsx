@@ -5,6 +5,7 @@ import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle, Sparkles, H
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { useGamification } from "../context/GamificationContext.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import "../styles/sacred-visuals.css";
@@ -18,6 +19,8 @@ export default function AIChatPage() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [error, setError] = useState("");
+  const [xpAwarded, setXpAwarded] = useState(false);
+  const { awardXp } = useGamification();
   const messagesEndRef = useRef(null);
 
   const { data: historyData, isLoading: historyLoading } = useQuery({
@@ -38,6 +41,7 @@ export default function AIChatPage() {
     mutationFn: () => apiRequest("DELETE", "/api/ai/history"),
     onSuccess: () => {
       setMessages([INITIAL_MESSAGE]);
+      setXpAwarded(false);
       queryClient.invalidateQueries({ queryKey: ["/api/ai/history"] });
     },
   });
@@ -55,6 +59,10 @@ export default function AIChatPage() {
           ...prev,
           { role: "assistant", content: "I'm having trouble responding right now. Please try again in a moment." },
         ]);
+      }
+      if (!xpAwarded) {
+        awardXp("ai-chat-session", 120, { type: "therapy_chat" }).catch(() => {});
+        setXpAwarded(true);
       }
     },
     onError: (err) => {

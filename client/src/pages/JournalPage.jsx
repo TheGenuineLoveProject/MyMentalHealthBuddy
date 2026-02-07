@@ -6,6 +6,7 @@ import ReflectionCardExport from "../components/ReflectionCardExport";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { useGamification } from "../context/GamificationContext.jsx";
 import BenefitsBlock from "../components/BenefitsBlock";
 import ClarityCard from "../components/content/ClarityCard";
 import ExamplesAccordion from "../components/content/ExamplesAccordion";
@@ -157,6 +158,7 @@ export default function JournalPage() {
   
   const { user } = useAuth();
   const { currentEmotion, setEmotion } = useEmotion();
+  const { awardXp } = useGamification();
   
   const emotionBackground = useMemo(() => {
     return MOOD_BACKGROUNDS[currentEmotion] || MOOD_BACKGROUNDS.neutral;
@@ -197,6 +199,7 @@ export default function JournalPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/journal"] });
       queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
+      awardXp("journal-entry", 180, { type: "journaling" }).catch(() => {});
       setTitle("");
       setContent("");
       setShowForm(false);

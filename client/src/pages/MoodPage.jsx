@@ -5,6 +5,7 @@ import { ArrowLeft, Smile, Frown, Meh, Sun, Moon, Zap, Check, Sparkles } from "l
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import { useGamification } from "../context/GamificationContext.jsx";
 import BenefitsBlock from "../components/BenefitsBlock";
 import ClarityCard from "../components/content/ClarityCard";
 import ExamplesAccordion from "../components/content/ExamplesAccordion";
@@ -73,12 +74,14 @@ export default function MoodPage() {
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const { awardXp } = useGamification();
 
   const saveMutation = useMutation({
     mutationFn: (data) => apiRequest("POST", "/api/mood", data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/dashboard"] });
       queryClient.invalidateQueries({ queryKey: ["/api/analytics"] });
+      awardXp("mood-checkin", 60, { type: "mood_tracking" }).catch(() => {});
       setSuccess(true);
       setTimeout(() => setLocation("/dashboard"), 1500);
     },

@@ -9,6 +9,7 @@ import LotusGuide from "./components/LotusGuide.jsx";
 import EmotionBackgroundProvider from "./components/EmotionBackgroundProvider.jsx";
 import GratitudePrompt from "./components/GratitudePrompt.jsx";
 import { ReadingLevelProvider } from "./context/ReadingLevelContext.jsx";
+import { GamificationProvider } from "./context/GamificationContext.jsx";
 import RouteGuard from "./components/RouteGuard.jsx";
 import { ErrorBoundary } from "./components/ErrorBoundary.jsx";
 import SkipToContent from "./components/SkipToContent.jsx";
@@ -305,6 +306,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <GamificationProvider>
         <EmotionProvider>
         <EmotionBackgroundProvider>
         <ResponsiveWrapper>
@@ -1752,6 +1754,7 @@ export default function App() {
         </ResponsiveWrapper>
         </EmotionBackgroundProvider>
         </EmotionProvider>
+        </GamificationProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
