@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { 
   BarChart3, Smile, Notebook, MessageCircle, TrendingUp, TrendingDown, Minus, 
   Settings, Heart, Sparkles, ArrowRight, Sun, Moon, Wind, Target, LogOut, 
-  Brain, Compass, ChevronRight
+  Brain, Compass, ChevronRight, Flame
 } from "lucide-react";
 import GuardianHeartPanel from "../components/GuardianHeartPanel.tsx";
 import SEO from "../components/SEO";
@@ -310,22 +310,7 @@ export default function Dashboard() {
               </div>
             </article>
 
-            <Link
-              href="/reflection"
-              className="block rounded-2xl p-6 transition-all hover:shadow-md group"
-              style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
-              data-testid="link-daily-reflection"
-            >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-sage-10)' }}>
-                  <Compass className="w-5 h-5" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
-                </div>
-                <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>Daily Reflection</h3>
-              </div>
-              <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
-                Pause, reflect, and gently check in with yourself.
-              </p>
-            </Link>
+            <ReflectionCard />
           </section>
 
           {/* Mood History Visual */}
@@ -607,6 +592,82 @@ function ExploreCard({ href, icon: Icon, title, description, color, testId }) {
         <p className="text-sm truncate" style={{ color: 'var(--glp-sage)' }}>{description}</p>
       </div>
       <ChevronRight className="w-5 h-5 transition-all flex-shrink-0 ml-auto" style={{ color: 'var(--glp-sage)' }} />
+    </Link>
+  );
+}
+
+function getReflectionStreak() {
+  try {
+    const entries = JSON.parse(localStorage.getItem("glp_reflections") || "[]");
+    if (!entries.length) return { current: 0, reflectedToday: false, totalEntries: 0 };
+    const ONE_DAY = 86400000;
+    const toDay = (s) => { const d = new Date(s); return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime(); };
+    const days = [...new Set(entries.map((e) => toDay(e.date)))].sort((a, b) => b - a);
+    const todayTs = toDay(new Date().toISOString());
+    const reflectedToday = days[0] === todayTs;
+    let current = 0;
+    let expected = reflectedToday ? todayTs : todayTs - ONE_DAY;
+    for (const ts of days) {
+      if (ts === expected) { current++; expected -= ONE_DAY; }
+      else if (ts < expected) break;
+    }
+    return { current, reflectedToday, totalEntries: entries.length };
+  } catch { return { current: 0, reflectedToday: false, totalEntries: 0 }; }
+}
+
+function ReflectionCard() {
+  const info = getReflectionStreak();
+  const totalXp = parseInt(localStorage.getItem("glp_reflection_xp") || "0", 10);
+
+  const flameColor = info.current >= 14 ? "from-orange-400 to-red-500"
+    : info.current >= 7 ? "from-yellow-400 to-orange-500"
+    : info.current >= 3 ? "from-amber-300 to-yellow-500"
+    : "from-gray-300 to-gray-400";
+
+  return (
+    <Link
+      href="/reflection"
+      className="block rounded-2xl p-6 transition-all hover:shadow-md group"
+      style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
+      data-testid="link-daily-reflection"
+    >
+      <div className="flex items-center gap-3 mb-3">
+        <div className="w-11 h-11 rounded-xl flex items-center justify-center" style={{ background: 'var(--glp-sage-10)' }}>
+          <Compass className="w-5 h-5" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
+        </div>
+        <h3 className="font-semibold" style={{ color: 'var(--glp-ink)' }}>Daily Reflection</h3>
+      </div>
+
+      <p className="text-sm mb-3" style={{ color: 'var(--glp-sage)' }}>
+        {info.reflectedToday
+          ? "You've reflected today — beautiful."
+          : "Pause, reflect, and gently check in with yourself."}
+      </p>
+
+      {(info.current > 0 || totalXp > 0) && (
+        <div className="flex items-center gap-4 pt-2" style={{ borderTop: '1px solid var(--glp-sage-10)' }}>
+          {info.current > 0 && (
+            <div className="flex items-center gap-1.5" data-testid="text-dashboard-streak">
+              <div className={`w-6 h-6 rounded-md bg-gradient-to-br ${flameColor} flex items-center justify-center`}>
+                <Flame className="w-3.5 h-3.5 text-white" aria-hidden="true" />
+              </div>
+              <span className="text-sm font-semibold" style={{ color: 'var(--glp-ink)' }}>{info.current}</span>
+              <span className="text-xs" style={{ color: 'var(--glp-sage)' }}>day streak</span>
+            </div>
+          )}
+          {totalXp > 0 && (
+            <div className="flex items-center gap-1" data-testid="text-dashboard-xp">
+              <Sparkles className="w-3.5 h-3.5" style={{ color: 'var(--glp-gold, #d4a574)' }} aria-hidden="true" />
+              <span className="text-xs font-semibold" style={{ color: 'var(--glp-gold, #d4a574)' }}>{totalXp} XP</span>
+            </div>
+          )}
+          {info.totalEntries > 0 && (
+            <span className="text-xs ml-auto" style={{ color: 'var(--glp-sage)', opacity: 0.7 }} data-testid="text-dashboard-reflection-count">
+              {info.totalEntries} reflection{info.totalEntries !== 1 ? "s" : ""}
+            </span>
+          )}
+        </div>
+      )}
     </Link>
   );
 }
