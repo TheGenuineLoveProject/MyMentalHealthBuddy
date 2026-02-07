@@ -99,6 +99,7 @@ import perplexityRouter from "./routes/perplexity.mjs";
 import emailRouter from "./routes/email.mjs";
 import adminSecurityRouter from "./routes/admin-security.mjs";
 import objectStorageRouter from "./routes/object-storage.mjs";
+import reflectionRouter from "./routes/reflection.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -167,6 +168,7 @@ async function startServer() {
   app.use("/api/admin", adminRouter);
   app.use("/api/blog", blogRouter);
   app.use("/api/journal", requireAdult, journalRouter);
+  app.use("/api/reflection", requireAdult, reflectionRouter);
   app.use("/api/mood", moodRouter);
   app.use("/api/health", healthRouter);
   app.use("/api/account", accountRouter);

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
-import { Flame, Sparkles } from "lucide-react";
+import { Flame, Sparkles, Wand2 } from "lucide-react";
 
 const PROMPTS = [
   "What's on your mind today?",
@@ -106,6 +106,8 @@ export default function Reflection() {
   const [journalStatus, setJournalStatus] = useState(null);
   const [xpAwarded, setXpAwarded] = useState(null);
   const [totalXp, setTotalXp] = useState(() => parseInt(localStorage.getItem("glp_reflection_xp") || "0", 10));
+  const [aiPrompt, setAiPrompt] = useState(null);
+  const [aiPromptLoading, setAiPromptLoading] = useState(false);
   const textareaRef = useRef(null);
 
   const allEntries = useMemo(() => {
@@ -174,6 +176,31 @@ export default function Reflection() {
     }
   }
 
+  async function fetchAiPrompt() {
+    setAiPromptLoading(true);
+    try {
+      const recentTexts = allEntries.slice(0, 3).map((e) => e.text);
+      const res = await apiRequest("POST", "/api/reflection/prompt", {
+        recentEntries: recentTexts,
+      });
+      if (res?.prompt) {
+        setAiPrompt(res.prompt);
+      }
+    } catch {
+      setAiPrompt(pickPrompt());
+    } finally {
+      setAiPromptLoading(false);
+    }
+  }
+
+  function useAiPrompt() {
+    if (aiPrompt && textareaRef.current) {
+      setText(aiPrompt + "\n\n");
+      setAiPrompt(null);
+      textareaRef.current.focus();
+    }
+  }
+
   const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
 
   return (
@@ -203,6 +230,60 @@ export default function Reflection() {
             reflectedToday={streak.reflectedToday}
             totalXp={totalXp}
           />
+        </div>
+
+        {aiPrompt && (
+          <div
+            className="mb-4 p-4 rounded-xl flex items-start gap-3"
+            style={{
+              background: "linear-gradient(135deg, var(--glp-teal-50), var(--glp-sage-10, rgba(107,142,112,0.1)))",
+              border: "1px solid var(--glp-sage-15)",
+            }}
+            data-testid="section-ai-prompt"
+          >
+            <Wand2 className="w-5 h-5 mt-0.5 shrink-0" style={{ color: "var(--glp-sage)" }} aria-hidden="true" />
+            <div className="flex-1">
+              <p className="text-sm font-medium mb-1" style={{ color: "var(--glp-sage-deep)" }}>
+                A prompt just for you
+              </p>
+              <p className="text-sm" style={{ color: "var(--glp-ink)" }}>
+                {aiPrompt}
+              </p>
+              <button
+                onClick={useAiPrompt}
+                className="mt-2 text-xs font-medium underline-offset-2 hover:underline transition-colors"
+                style={{ color: "var(--glp-sage)" }}
+                data-testid="button-use-ai-prompt"
+              >
+                Use this as a starting point
+              </button>
+            </div>
+            <button
+              onClick={() => setAiPrompt(null)}
+              className="text-xs shrink-0"
+              style={{ color: "var(--glp-sage)", opacity: 0.5 }}
+              aria-label="Dismiss prompt"
+              data-testid="button-dismiss-ai-prompt"
+            >
+              &times;
+            </button>
+          </div>
+        )}
+
+        <div className="flex items-center gap-2 mb-3">
+          <button
+            onClick={fetchAiPrompt}
+            disabled={aiPromptLoading}
+            className="flex items-center gap-1.5 text-sm font-medium px-3 py-1.5 rounded-lg transition-all hover:opacity-80 disabled:opacity-40"
+            style={{
+              background: "var(--glp-sage-10, rgba(107,142,112,0.1))",
+              color: "var(--glp-sage)",
+            }}
+            data-testid="button-get-ai-prompt"
+          >
+            <Wand2 className="w-3.5 h-3.5" aria-hidden="true" />
+            {aiPromptLoading ? "Thinking..." : "Suggest a prompt"}
+          </button>
         </div>
 
         <textarea
