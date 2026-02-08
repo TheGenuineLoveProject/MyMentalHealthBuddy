@@ -3,6 +3,7 @@ import { isAuthenticated } from "../replit_integrations/auth/replitAuth.mjs";
 import { db } from "../db/connection.mjs";
 import { journals, moods, aiMessages, therapySessions, dailyQuests, dailyReflections, communityAffirmations } from "../../shared/schema.mjs";
 import { eq, and, gte, desc, count, sql } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -81,7 +82,7 @@ async function calculateStreak(userId) {
     }
     return streak;
   } catch (err) {
-    console.error("Error calculating streak:", err);
+    logger.error("Error calculating streak:", { error: err?.message || err });
     return 0;
   }
 }
@@ -143,7 +144,7 @@ router.get("/stats", isAuthenticated, async (req, res) => {
       totalActivities
     });
   } catch (error) {
-    console.error("Error fetching user stats:", error);
+    logger.error("Error fetching user stats:", { error: error?.message || error });
     return res.status(500).json({ message: "Failed to fetch user stats" });
   }
 });
@@ -228,7 +229,7 @@ router.get("/activity", isAuthenticated, async (req, res) => {
 
     return res.json({ activities: topActivities });
   } catch (error) {
-    console.error("Error fetching user activity:", error);
+    logger.error("Error fetching user activity:", { error: error?.message || error });
     return res.status(500).json({ message: "Failed to fetch activity" });
   }
 });
@@ -307,7 +308,7 @@ router.get("/tasks", isAuthenticated, async (req, res) => {
 
     return res.json({ tasks });
   } catch (error) {
-    console.error("Error fetching user tasks:", error);
+    logger.error("Error fetching user tasks:", { error: error?.message || error });
     return res.status(500).json({ message: "Failed to fetch tasks" });
   }
 });
@@ -353,7 +354,7 @@ router.post("/tasks/:taskId/complete", isAuthenticated, async (req, res) => {
       }
     });
   } catch (error) {
-    console.error("Error completing task:", error);
+    logger.error("Error completing task:", { error: error?.message || error });
     return res.status(500).json({ message: "Failed to complete task" });
   }
 });
@@ -383,7 +384,7 @@ router.get("/reflection/today", isAuthenticated, async (req, res) => {
 
     res.json({ reflection: reflection || null, hasReflectedToday: !!reflection });
   } catch (error) {
-    console.error("Error fetching today's reflection:", error);
+    logger.error("Error fetching today's reflection:", { error: error?.message || error });
     res.status(500).json({ message: "Failed to fetch reflection" });
   }
 });
@@ -404,7 +405,7 @@ router.get("/reflections", isAuthenticated, async (req, res) => {
 
     res.json({ reflections });
   } catch (error) {
-    console.error("Error fetching reflections:", error);
+    logger.error("Error fetching reflections:", { error: error?.message || error });
     res.status(500).json({ message: "Failed to fetch reflections" });
   }
 });
@@ -474,13 +475,13 @@ router.post("/reflection", isAuthenticated, async (req, res) => {
           isAnonymous: true,
         });
       } catch (shareErr) {
-        console.error("Auto-share to community failed (non-blocking):", shareErr);
+        logger.error("Auto-share to community failed (non-blocking):", { error: shareErr?.message || shareErr });
       }
     }
 
     res.json({ ok: true, reflection, created: true });
   } catch (error) {
-    console.error("Error saving reflection:", error);
+    logger.error("Error saving reflection:", { error: error?.message || error });
     res.status(500).json({ ok: false, message: "Failed to save reflection" });
   }
 });

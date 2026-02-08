@@ -2,6 +2,7 @@ import db from "../db/client.mjs";
 import { sql } from "drizzle-orm";
 import express from "express";
 import { isConfigured } from "../utils/aiClient.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 const startTime = Date.now();
@@ -37,7 +38,7 @@ router.get("/", async (_req, res) => {
       ai: { available: isConfigured() },
     });
   } catch (error) {
-    console.error("Health check error:", error);
+    logger.error("Health check error", { error: error?.message || error });
     res.status(500).json({ status: "unhealthy", error: "Health probe failed" });
   }
 });
@@ -148,7 +149,7 @@ router.get("/metrics", async (_req, res) => {
       },
     });
   } catch (error) {
-    console.error("Metrics error:", error);
+    logger.error("Metrics error", { error: error?.message || error });
     res.status(500).json({ error: "Failed to gather metrics" });
   }
 });

@@ -4,6 +4,7 @@
 import express from "express";
 import { db } from "../db.mjs";
 import { auditLog } from "../../shared/schema.mjs";
+import { logger } from "../utils/logger.mjs";
 import { desc, eq, and, gte, lte, like, sql } from "drizzle-orm";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 
@@ -74,7 +75,7 @@ router.get("/", async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Audit logs fetch error:", error);
+    logger.error("Audit logs fetch error", { error: error?.message || error });
     res.status(500).json({
       ok: false,
       error: { code: "AUDIT_FETCH_ERROR", message: "Failed to fetch audit logs" },
@@ -94,7 +95,7 @@ router.get("/actions", async (_req, res) => {
       data: actions.map((a) => a.action),
     });
   } catch (error) {
-    console.error("Audit actions fetch error:", error);
+    logger.error("Audit actions fetch error", { error: error?.message || error });
     res.status(500).json({
       ok: false,
       error: { code: "ACTIONS_FETCH_ERROR", message: "Failed to fetch action types" },
@@ -149,7 +150,7 @@ router.get("/export", async (req, res) => {
       res.json({ ok: true, data: logs, exportedAt: new Date().toISOString() });
     }
   } catch (error) {
-    console.error("Audit export error:", error);
+    logger.error("Audit export error", { error: error?.message || error });
     res.status(500).json({
       ok: false,
       error: { code: "EXPORT_ERROR", message: "Failed to export audit logs" },
@@ -188,7 +189,7 @@ router.get("/stats", async (_req, res) => {
       },
     });
   } catch (error) {
-    console.error("Audit stats error:", error);
+    logger.error("Audit stats error", { error: error?.message || error });
     res.status(500).json({
       ok: false,
       error: { code: "STATS_ERROR", message: "Failed to fetch audit stats" },

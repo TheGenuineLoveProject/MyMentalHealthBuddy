@@ -3,6 +3,7 @@ import { requireAuth } from "../middleware/auth.mjs";
 import { db } from "../db/client.mjs";
 import { states } from "../../shared/schema.mjs";
 import { eq, desc } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -25,7 +26,7 @@ router.get("/", requireAuth, async (req, res) => {
       .limit(30);
     res.json({ ok: true, data: userStates });
   } catch (err) {
-    console.error("States fetch error:", err);
+    logger.error("States fetch error:", { error: err?.message || err });
     res.status(500).json({ ok: false, message: "Failed to fetch states" });
   }
 });
@@ -66,7 +67,7 @@ router.post("/", requireAuth, async (req, res) => {
 
     res.json({ ok: true, data: newState });
   } catch (err) {
-    console.error("State save error:", err);
+    logger.error("State save error:", { error: err?.message || err });
     res.status(500).json({ ok: false, message: "Failed to save state" });
   }
 });

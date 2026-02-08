@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db/client.mjs";
 import { userFavorites } from "../../shared/schema.mjs";
 import { eq, and } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.get("/", async (req, res) => {
     const favorites = await query;
     res.json(favorites);
   } catch (error) {
-    console.error("Error fetching favorites:", error);
+    logger.error("Error fetching favorites:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch favorites" });
   }
 });
@@ -76,7 +77,7 @@ router.post("/", async (req, res) => {
 
     res.status(201).json(favorite);
   } catch (error) {
-    console.error("Error saving favorite:", error);
+    logger.error("Error saving favorite:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to save favorite" });
   }
 });
@@ -105,7 +106,7 @@ router.delete("/:id", async (req, res) => {
 
     res.json({ message: "Favorite removed" });
   } catch (error) {
-    console.error("Error removing favorite:", error);
+    logger.error("Error removing favorite:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to remove favorite" });
   }
 });

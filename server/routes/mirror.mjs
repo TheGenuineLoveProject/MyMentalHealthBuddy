@@ -2,6 +2,7 @@
 import express from "express";
 import OpenAI from "openai";
 import rateLimit from "express-rate-limit";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -129,7 +130,7 @@ Guidelines:
       tokens: response.usage?.total_tokens || 0,
     };
   } catch (err) {
-    console.error("Mirror AI error:", err.message);
+    logger.error("Mirror AI error", { error: err?.message || err });
     return null;
   }
 }
@@ -219,7 +220,7 @@ router.post("/", mirrorLimiter, async (req, res) => {
       tokens: aiResult?.tokens || 0,
     });
   } catch (e) {
-    console.error("Mirror error:", e.message);
+    logger.error("Mirror error", { error: e?.message || e });
     return res.json({
       ok: true,
       reflection: buildLocalReflection(req.body?.text),

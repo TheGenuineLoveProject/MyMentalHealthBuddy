@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { z } from 'zod';
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.post('/subscribe', async (req, res) => {
   try {
     const { email } = subscribeSchema.parse(req.body);
     
-    console.log(`[Newsletter] Subscription request: ${email.substring(0, 3)}***@***`);
+    logger.info("[Newsletter] Subscription request", { email: `${email.substring(0, 3)}***@***` });
     
     res.json({ 
       ok: true, 
@@ -28,7 +29,7 @@ router.post('/subscribe', async (req, res) => {
       });
     }
     
-    console.error('[Newsletter] Error:', error.message);
+    logger.error("[Newsletter] Error", { error: error?.message || error });
     res.status(500).json({
       ok: false,
       error: {

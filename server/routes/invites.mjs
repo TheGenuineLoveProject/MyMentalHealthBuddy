@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db.mjs";
 import { invites, badges } from "../../shared/schema.mjs";
 import { eq } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.get("/", async (req, res) => {
 
     res.json(userInvites);
   } catch (error) {
-    console.error("Error fetching invites:", error);
+    logger.error("Error fetching invites:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch invites" });
   }
 });
@@ -60,7 +61,7 @@ router.post("/", async (req, res) => {
 
     res.status(201).json(newInvite);
   } catch (error) {
-    console.error("Error creating invite:", error);
+    logger.error("Error creating invite:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to create invite" });
   }
 });

@@ -3,6 +3,7 @@ import { requireAuth, optionalAuth } from "../middleware/auth.mjs";
 import { db } from "../db/client.mjs";
 import { anonymousReflections, sharedReflections, moods, journals, gratitudeEntries, communityAffirmations } from "../../shared/schema.mjs";
 import { desc, eq, gte, and, sql } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -76,7 +77,7 @@ router.get("/reflections", optionalAuth, async (req, res) => {
 
     res.json(filteredReflections);
   } catch (err) {
-    console.error("Community reflections error:", err);
+    logger.error("Community reflections error:", { error: err?.message || err });
     res.json([]);
   }
 });
@@ -105,7 +106,7 @@ router.post("/reflect", requireAuth, async (req, res) => {
       message: "Your reflection has been shared anonymously. Thank you for contributing to the collective space.",
     });
   } catch (err) {
-    console.error("Community submit error:", err);
+    logger.error("Community submit error:", { error: err?.message || err });
     res.status(500).json({ ok: false, message: "Unable to share reflection" });
   }
 });
@@ -133,7 +134,7 @@ router.post("/reflections", requireAuth, async (req, res) => {
 
     res.status(201).json(reflection);
   } catch (error) {
-    console.error("Error saving shared reflection:", error);
+    logger.error("Error saving shared reflection:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to save reflection" });
   }
 });
@@ -156,7 +157,7 @@ router.post("/reflections/:id/heart", async (req, res) => {
 
     res.json(updated);
   } catch (error) {
-    console.error("Error hearting reflection:", error);
+    logger.error("Error hearting reflection:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to heart reflection" });
   }
 });
@@ -224,7 +225,7 @@ router.get("/completion-stats", requireAuth, async (req, res) => {
       eligibleForCelebration
     });
   } catch (error) {
-    console.error("Error fetching completion stats:", error);
+    logger.error("Error fetching completion stats:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch stats" });
   }
 });
@@ -246,7 +247,7 @@ router.get("/affirmations", async (_req, res) => {
 
     res.json(affirmations);
   } catch (err) {
-    console.error("Affirmations fetch error:", err);
+    logger.error("Affirmations fetch error:", { error: err?.message || err });
     res.json([]);
   }
 });
@@ -274,7 +275,7 @@ router.post("/affirmations", optionalAuth, async (req, res) => {
 
     res.json({ ok: true, affirmation });
   } catch (err) {
-    console.error("Affirmation post error:", err);
+    logger.error("Affirmation post error:", { error: err?.message || err });
     res.status(500).json({ ok: false, message: "Unable to share affirmation" });
   }
 });
@@ -295,7 +296,7 @@ router.post("/affirmations/:id/like", async (req, res) => {
 
     res.json({ ok: true, heartCount: updated.heartCount });
   } catch (err) {
-    console.error("Affirmation like error:", err);
+    logger.error("Affirmation like error:", { error: err?.message || err });
     res.status(500).json({ ok: false, message: "Unable to send light" });
   }
 });

@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { randomUUID } from 'crypto';
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -115,7 +116,7 @@ router.post("/request-url", async (req, res) => {
       metadata: { name, size, contentType },
     });
   } catch (error) {
-    console.error("Error generating upload URL:", error);
+    logger.error("Error generating upload URL", { error: error?.message || error });
     res.status(500).json({ error: "Failed to generate upload URL" });
   }
 });

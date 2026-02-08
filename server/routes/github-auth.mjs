@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { db } from "../db/client.mjs";
 import { users } from "../../shared/schema.mjs";
 import { logAudit, getClientIp, AUDIT_ACTIONS } from "../services/auditLog.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -70,7 +71,7 @@ if (GITHUB_CLIENT_ID && GITHUB_CLIENT_SECRET) {
 
           return done(null, user);
         } catch (error) {
-          console.error("GitHub auth error:", error);
+          logger.error("GitHub auth error", { error: error?.message || error });
           return done(error, null);
         }
       }
@@ -159,7 +160,7 @@ router.get(
 
       res.redirect(`/login/callback?token=${encodeURIComponent(accessToken)}`);
     } catch (error) {
-      console.error("GitHub callback error:", error);
+      logger.error("GitHub callback error", { error: error?.message || error });
       res.redirect("/login?error=github_callback_failed");
     }
   }

@@ -5,6 +5,7 @@
  */
 
 import { Router } from 'express';
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -83,7 +84,7 @@ router.post('/ask', async (req, res) => {
       citations: response.citations || [],
     });
   } catch (error) {
-    console.error('Perplexity ask error:', error);
+    logger.error("Perplexity ask error", { error: error?.message || error });
     res.status(500).json({ error: error.message || 'Failed to get response from Perplexity' });
   }
 });
@@ -122,7 +123,7 @@ Important: This is educational content only - not medical advice. Always encoura
       citations: response.citations || [],
     });
   } catch (error) {
-    console.error('Perplexity research error:', error);
+    logger.error("Perplexity research error", { error: error?.message || error });
     res.status(500).json({ error: error.message || 'Failed to research topic' });
   }
 });

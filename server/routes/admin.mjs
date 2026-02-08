@@ -1,6 +1,7 @@
 // server/routes/admin.mjs
 import { Router } from "express";
 import jwt from "jsonwebtoken";
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -28,7 +29,7 @@ router.post("/verify-token", (req, res) => {
   const { token } = req.body;
   
   if (!ADMIN_TOKEN) {
-    console.warn("[Admin] ADMIN_TOKEN not configured");
+    logger.warn("[Admin] ADMIN_TOKEN not configured");
     return res.status(500).json({ success: false, message: "Admin access not configured" });
   }
   
@@ -41,17 +42,17 @@ router.post("/verify-token", (req, res) => {
   const adminBuffer = Buffer.from(ADMIN_TOKEN);
   
   if (tokenBuffer.length !== adminBuffer.length) {
-    console.log(`[Admin] Invalid token attempt from IP: ${req.ip}`);
+    logger.info("[Admin] Invalid token attempt", { ip: req.ip });
     return res.status(401).json({ success: false, message: "Invalid token" });
   }
   
   const crypto = require("crypto");
   if (!crypto.timingSafeEqual(tokenBuffer, adminBuffer)) {
-    console.log(`[Admin] Invalid token attempt from IP: ${req.ip}`);
+    logger.info("[Admin] Invalid token attempt", { ip: req.ip });
     return res.status(401).json({ success: false, message: "Invalid token" });
   }
   
-  console.log(`[Admin] Successful admin authentication from IP: ${req.ip}`);
+  logger.info("[Admin] Successful admin authentication", { ip: req.ip });
   
   // Generate a short-lived admin session token
   const sessionToken = jwt.sign(
@@ -156,7 +157,7 @@ router.get("/health", async (_req, res) => {
       }
     });
   } catch (error) {
-    console.error("Admin health check error:", error);
+    logger.error("Admin health check error", { error: error?.message || error });
     res.status(500).json({ status: "unhealthy", error: "Health probe failed" });
   }
 });
@@ -200,7 +201,7 @@ router.get("/diagnostics", async (_req, res) => {
         dbStats.reflections = reflectionsResult.rows?.[0]?.count || 0;
         dbStats.moods = moodsResult.rows?.[0]?.count || 0;
       } catch (e) {
-        console.error("DB stats query error:", e.message);
+        logger.error("DB stats query error", { error: e?.message || e });
       }
     }
 
@@ -222,7 +223,7 @@ router.get("/diagnostics", async (_req, res) => {
       },
     });
   } catch (error) {
-    console.error("Diagnostics error:", error);
+    logger.error("Diagnostics error", { error: error?.message || error });
     res.status(500).json({ error: "Failed to gather diagnostics" });
   }
 });

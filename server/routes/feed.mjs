@@ -2,6 +2,7 @@
 // RSS feed generation
 
 import { Router } from "express";
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -80,7 +81,7 @@ router.get("/feed.xml", async (req, res) => {
     res.set("Cache-Control", "public, max-age=3600");
     res.send(rss);
   } catch (error) {
-    console.error("RSS generation error:", error);
+    logger.error("RSS generation error:", { error: error?.message || error });
     res.status(500).send("Error generating RSS feed");
   }
 });
@@ -124,7 +125,7 @@ ${urls}
     res.set("Cache-Control", "public, max-age=86400");
     res.send(sitemap);
   } catch (error) {
-    console.error("Sitemap generation error:", error);
+    logger.error("Sitemap generation error:", { error: error?.message || error });
     res.status(500).send("Error generating sitemap");
   }
 });

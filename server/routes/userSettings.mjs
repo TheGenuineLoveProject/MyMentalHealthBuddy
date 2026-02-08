@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db.mjs";
 import { userSettings } from "../../shared/schema.mjs";
 import { eq } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ router.get("/", async (req, res) => {
 
     res.json(settings);
   } catch (error) {
-    console.error("Error fetching user settings:", error);
+    logger.error("Error fetching user settings:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch settings" });
   }
 });
@@ -87,7 +88,7 @@ router.patch("/", async (req, res) => {
       return res.json(created);
     }
   } catch (error) {
-    console.error("Error updating user settings:", error);
+    logger.error("Error updating user settings:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to update settings" });
   }
 });

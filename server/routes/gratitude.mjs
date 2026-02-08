@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db/client.mjs";
 import { gratitudeEntries, moods, journals } from "../../shared/schema.mjs";
 import { eq, desc, gte, and } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ router.get("/", async (req, res) => {
 
     res.json(entries);
   } catch (error) {
-    console.error("Error fetching gratitude entries:", error);
+    logger.error("Error fetching gratitude entries:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch entries" });
   }
 });
@@ -49,7 +50,7 @@ router.get("/today", async (req, res) => {
       entries 
     });
   } catch (error) {
-    console.error("Error checking today's entry:", error);
+    logger.error("Error checking today's entry:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to check today's entry" });
   }
 });
@@ -77,7 +78,7 @@ router.post("/", async (req, res) => {
 
     res.status(201).json(entry);
   } catch (error) {
-    console.error("Error saving gratitude entry:", error);
+    logger.error("Error saving gratitude entry:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to save entry" });
   }
 });
@@ -142,7 +143,7 @@ router.get("/weekly-summary", async (req, res) => {
       journalThemes: extractJournalThemes(weeklyJournals)
     });
   } catch (error) {
-    console.error("Error generating weekly summary:", error);
+    logger.error("Error generating weekly summary:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to generate summary" });
   }
 });

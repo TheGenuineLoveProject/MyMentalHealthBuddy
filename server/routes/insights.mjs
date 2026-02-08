@@ -3,6 +3,7 @@ import { getDailyInsight } from '../insights/daily.mjs';
 import { db } from "../db/connection.mjs";
 import { journals, moods } from "../../shared/schema.mjs";
 import { eq, and, gte, desc, count } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -241,7 +242,7 @@ router.get("/mood", requireAuth, async (req, res) => {
       totalMoodLogs: logs.length
     });
   } catch (error) {
-    console.error("Error fetching mood insights:", error);
+    logger.error("Error fetching mood insights:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch mood insights" });
   }
 });

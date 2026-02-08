@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db/connection.mjs";
 import { journals, moods, gratitudeEntries, userAchievements, users } from "../../shared/schema.mjs";
 import { eq, sql, and, gte, desc, count } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -115,7 +116,7 @@ router.get("/stats", requireAuth, async (req, res) => {
       monthlyEntries
     });
   } catch (error) {
-    console.error("Error fetching progress stats:", error);
+    logger.error("Error fetching progress stats:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch progress stats" });
   }
 });
@@ -202,7 +203,7 @@ router.get("/achievements", requireAuth, async (req, res) => {
       }
     });
   } catch (error) {
-    console.error("Error fetching achievements:", error);
+    logger.error("Error fetching achievements:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch achievements" });
   }
 });

@@ -7,6 +7,7 @@ import { requireAuth } from "../middleware/auth.mjs";
 import { audit } from "../security/audit.mjs";
 import { sha256 } from "../utils/hash.mjs";
 import { signAccessToken } from "../utils/jwt.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.post("/setup", requireAuth, async (req, res) => {
     await audit(req, "mfa.setup");
     res.json({ qr, secret: secret.base32 });
   } catch (err) {
-    console.error("MFA setup error:", err);
+    logger.error("MFA setup error", { error: err?.message || err });
     res.status(500).json({ message: "MFA setup failed" });
   }
 });
@@ -71,7 +72,7 @@ router.post("/verify", requireAuth, async (req, res) => {
 
     res.json({ ok: true, backupCodes: backups, accessToken });
   } catch (err) {
-    console.error("MFA verify error:", err);
+    logger.error("MFA verify error", { error: err?.message || err });
     res.status(500).json({ message: "MFA verification failed" });
   }
 });
@@ -82,7 +83,7 @@ router.post("/disable", requireAuth, async (req, res) => {
     await audit(req, "mfa.disabled");
     res.json({ ok: true });
   } catch (err) {
-    console.error("MFA disable error:", err);
+    logger.error("MFA disable error", { error: err?.message || err });
     res.status(500).json({ message: "Failed to disable MFA" });
   }
 });

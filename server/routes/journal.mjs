@@ -5,6 +5,7 @@ import crypto from "crypto";
 import { db } from "../db/client.mjs";
 import { anonymousReflections } from "../../shared/schema.mjs";
 import { increment } from "../utils/metrics.mjs";
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -79,7 +80,7 @@ router.post("/", requireAuth, async (req, res) => {
         isAnonymous: Boolean(isAnonymous),
       });
     } catch (err) {
-      console.error("Failed to share with community:", err);
+      logger.error("Failed to share with community:", { error: err?.message || err });
       // Don't fail the whole request, just log the error
     }
   }

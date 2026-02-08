@@ -2,6 +2,7 @@ import express from "express";
 import { db } from "../db.mjs";
 import { badges, moods, journals } from "../../shared/schema.mjs";
 import { eq, and, sql } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.get("/", async (req, res) => {
 
     res.json(userBadges);
   } catch (error) {
-    console.error("Error fetching badges:", error);
+    logger.error("Error fetching badges:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to fetch badges" });
   }
 });
@@ -95,7 +96,7 @@ router.post("/check", async (req, res) => {
       newBadges: newBadges.map(b => b.badgeId) 
     });
   } catch (error) {
-    console.error("Error checking badges:", error);
+    logger.error("Error checking badges:", { error: error?.message || error });
     res.status(500).json({ error: "Failed to check badges" });
   }
 });
