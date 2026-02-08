@@ -15,8 +15,8 @@ import { apiRequest, queryClient } from "@/lib/queryClient";
 const PRO_PLAN = {
   id: "pro",
   name: "Pro",
-  price: "$12",
-  period: "/month",
+  monthly: { price: "$12", period: "/month", savings: null },
+  yearly: { price: "$99", period: "/year", savings: "Save $45" },
   icon: Zap,
   features: [
     "Unlimited AI chat sessions",
@@ -69,6 +69,7 @@ export default function Billing() {
   const { toast } = useToast();
   const [location] = useLocation();
   const [upgrading, setUpgrading] = useState(false);
+  const [billingInterval, setBillingInterval] = useState("monthly");
 
   const { data: subscriptionData, isLoading: subLoading } = useQuery({
     queryKey: ["/api/billing/subscription-status"],
@@ -94,7 +95,7 @@ export default function Billing() {
   }, []);
 
   const checkoutMutation = useMutation({
-    mutationFn: () => apiRequest("POST", "/api/billing/checkout", { plan: "pro" }),
+    mutationFn: (interval) => apiRequest("POST", "/api/billing/checkout", { plan: "pro", interval: interval || billingInterval }),
     onSuccess: (data) => {
       if (data.url) {
         window.location.href = data.url;
@@ -126,9 +127,9 @@ export default function Billing() {
     },
   });
 
-  const handleUpgrade = () => {
+  const handleUpgrade = (interval) => {
     setUpgrading(true);
-    checkoutMutation.mutate();
+    checkoutMutation.mutate(interval || billingInterval);
   };
 
   const handleOpenPortal = () => {
@@ -232,6 +233,29 @@ export default function Billing() {
               <h2 className="text-heading-md text-teal mb-4">
                 {currentPlan === "free" ? "Upgrade Your Experience" : "Your Plan"}
               </h2>
+
+              {currentPlan === "free" && (
+                <div className="flex items-center justify-center gap-1 mb-6 p-1 rounded-full bg-[var(--sage-100)] w-fit mx-auto" data-testid="toggle-billing-interval">
+                  <button
+                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${billingInterval === "monthly" ? "bg-white shadow-sm text-[var(--teal-700)]" : "text-[var(--sage-600)] hover:text-[var(--sage-800)]"}`}
+                    onClick={() => setBillingInterval("monthly")}
+                    data-testid="button-interval-monthly"
+                  >
+                    Monthly
+                  </button>
+                  <button
+                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-1.5 ${billingInterval === "yearly" ? "bg-white shadow-sm text-[var(--teal-700)]" : "text-[var(--sage-600)] hover:text-[var(--sage-800)]"}`}
+                    onClick={() => setBillingInterval("yearly")}
+                    data-testid="button-interval-yearly"
+                  >
+                    Annual
+                    <span className="px-1.5 py-0.5 text-[10px] font-semibold rounded-full bg-gradient-to-r from-[var(--gold-500)] to-[var(--gold-400)] text-white leading-none">
+                      BEST VALUE
+                    </span>
+                  </button>
+                </div>
+              )}
+
               <div className="grid md:grid-cols-2 gap-6">
 
                 <div className={`card-bordered relative transition-all ${currentPlan === "free" ? 'ring-2 ring-[var(--sage-400)]' : ''}`} data-testid="plan-free">
@@ -267,8 +291,20 @@ export default function Billing() {
                       <Zap className="h-6 w-6" />
                     </div>
                     <h3 className="text-heading-sm text-teal">{PRO_PLAN.name}</h3>
-                    <p className="text-display-md text-teal">{PRO_PLAN.price}</p>
-                    <p className="text-caption">{PRO_PLAN.period}</p>
+                    <p className="text-display-md text-teal">
+                      {PRO_PLAN[billingInterval].price}
+                    </p>
+                    <p className="text-caption">
+                      {PRO_PLAN[billingInterval].period}
+                      {PRO_PLAN[billingInterval].savings && (
+                        <span className="ml-2 text-[var(--gold-600)] font-medium">{PRO_PLAN[billingInterval].savings}</span>
+                      )}
+                    </p>
+                    {billingInterval === "yearly" && (
+                      <p className="text-caption text-[var(--sage-500)] mt-1">
+                        That's just $8.25/month
+                      </p>
+                    )}
                   </div>
                   <ul className="space-y-2 mb-4">
                     {PRO_PLAN.features.map((feature, i) => (
@@ -282,26 +318,34 @@ export default function Billing() {
                     <Button 
                       className="w-full btn-premium"
                       disabled={upgrading}
-                      onClick={handleUpgrade}
+                      onClick={() => handleUpgrade(billingInterval)}
                       data-testid="button-upgrade-pro"
                     >
                       {upgrading ? (
                         <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Redirecting to checkout...</>
                       ) : (
-                        <><Sparkles className="w-4 h-4 mr-2" />Go Pro</>
+                        <><Sparkles className="w-4 h-4 mr-2" />Subscribe to Pro — {PRO_PLAN[billingInterval].price}{PRO_PLAN[billingInterval].period}</>
                       )}
                     </Button>
                   ) : isActive ? (
-                    <div className="text-center">
-                      <span className="text-body-sm text-[var(--teal-600)] font-medium flex items-center justify-center gap-1">
-                        <Check className="h-4 w-4" /> Active
-                      </span>
-                    </div>
+                    <Button 
+                      className="w-full"
+                      variant="outline"
+                      onClick={handleOpenPortal}
+                      disabled={portalMutation.isPending}
+                      data-testid="button-manage-subscription-plan"
+                    >
+                      {portalMutation.isPending ? (
+                        <><Loader2 className="w-4 h-4 mr-2 animate-spin" />Loading...</>
+                      ) : (
+                        <><ExternalLink className="w-4 h-4 mr-2" />Manage Subscription</>
+                      )}
+                    </Button>
                   ) : (
                     <Button 
                       className="w-full btn-premium"
                       disabled={upgrading}
-                      onClick={handleUpgrade}
+                      onClick={() => handleUpgrade(billingInterval)}
                       data-testid="button-resubscribe"
                     >
                       {upgrading ? (

@@ -20,6 +20,11 @@ const PLANS = {
   team: { name: "Team", priceId: process.env.STRIPE_PRICE_TEAM, features: ["all_pro", "team_dashboard", "admin_controls", "priority_support"] },
 };
 
+const PRO_INTERVAL_PRICES = {
+  monthly: process.env.STRIPE_PRICE_PRO_MONTHLY || process.env.STRIPE_PRICE_PRO,
+  yearly: process.env.STRIPE_PRICE_PRO_YEARLY || process.env.STRIPE_PRICE_PRO,
+};
+
 function generateIdempotencyKey(userId, plan, timestamp) {
   const data = `${userId}-${plan}-${Math.floor(timestamp / 60000)}`;
   return crypto.createHash("sha256").update(data).digest("hex").substring(0, 32);
@@ -63,29 +68,38 @@ router.post("/checkout", async (req, res) => {
     if (!req.user) return unauthorized(res);
     if (!stripe) return serverError(res, new Error("Stripe not configured"));
 
-    const { plan = "pro" } = req.body;
-    const planConfig = PLANS[plan];
-    
-    if (!planConfig?.priceId) {
-      return badRequest(res, `Invalid plan: ${plan}`);
+    const { plan = "pro", interval = "monthly", priceId: directPriceId } = req.body;
+
+    let resolvedPriceId = directPriceId;
+    if (!resolvedPriceId) {
+      if (plan === "pro" && PRO_INTERVAL_PRICES[interval]) {
+        resolvedPriceId = PRO_INTERVAL_PRICES[interval];
+      } else {
+        const planConfig = PLANS[plan];
+        resolvedPriceId = planConfig?.priceId;
+      }
+    }
+
+    if (!resolvedPriceId) {
+      return badRequest(res, `No price configured for plan: ${plan}, interval: ${interval}`);
     }
 
     const customerId = await getOrCreateStripeCustomer(req.user.id, req.user.email);
-    const idempotencyKey = generateIdempotencyKey(req.user.id, plan, Date.now());
+    const idempotencyKey = generateIdempotencyKey(req.user.id, `${plan}-${interval}`, Date.now());
 
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       customer: customerId,
       client_reference_id: req.user.id,
-      line_items: [{ price: planConfig.priceId, quantity: 1 }],
+      line_items: [{ price: resolvedPriceId, quantity: 1 }],
       success_url: `${process.env.CORS_ORIGIN || ""}/dashboard?billing=success`,
       cancel_url: `${process.env.CORS_ORIGIN || ""}/account/billing?canceled=true`,
-      metadata: { userId: req.user.id, plan },
+      metadata: { userId: req.user.id, plan, interval },
     }, {
       idempotencyKey,
     });
 
-    logger.info("Checkout session created", { userId: req.user.id, plan, sessionId: session.id });
+    logger.info("Checkout session created", { userId: req.user.id, plan, interval, sessionId: session.id });
     return success(res, { url: session.url, sessionId: session.id });
   } catch (err) {
     logger.error("Checkout error", { error: err.message, userId: req.user?.id });
