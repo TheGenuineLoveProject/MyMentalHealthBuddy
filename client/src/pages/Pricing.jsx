@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "wouter";
 import { Check, Star, Crown, ArrowLeft, Loader2 } from "lucide-react";
@@ -66,6 +66,10 @@ export default function Pricing() {
 
   const [checkingOut, setCheckingOut] = useState(false);
   const [interval, setInterval] = useState("yearly");
+
+  useEffect(() => {
+    fetch("/api/billing/pricing-view", { method: "POST", credentials: "include" }).catch(() => {});
+  }, []);
 
   const proTier = interval === "yearly" ? proYearly : proMonthly;
   const tiers = [freeTier, { ...proTier, features: proFeatures }];

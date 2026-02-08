@@ -6,6 +6,7 @@ import { requireAuth } from "../middleware/auth.mjs";
 import db from "../db/client.mjs";
 import { success, badRequest, serverError, unauthorized } from "../utils/response.mjs";
 import { logger } from "../utils/logger.mjs";
+import { increment } from "../utils/metrics.mjs";
 
 const router = express.Router();
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
@@ -102,6 +103,7 @@ router.post("/checkout", async (req, res) => {
     });
 
     logger.info("Checkout session created", { userId: dbUserId, plan, interval, sessionId: session.id });
+    increment("checkout_initiated", { plan: `${plan}_${interval}` });
     return success(res, { url: session.url, sessionId: session.id });
   } catch (err) {
     logger.error("Checkout error", { error: err.message, userId: req.dbUserId });
@@ -230,6 +232,12 @@ router.get("/invoices", async (req, res) => {
     logger.error("Invoices error", { error: err.message });
     return serverError(res, err);
   }
+});
+
+router.post("/pricing-view", (req, res) => {
+  const plan = req.session?.userData ? "authenticated" : "anonymous";
+  increment("pricing_page_view", { plan });
+  res.status(204).end();
 });
 
 export default router;

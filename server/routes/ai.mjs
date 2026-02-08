@@ -73,6 +73,7 @@ router.post("/chat", authGuard, async (req, res) => {
     `);
     const subStatus = userSubResult.rows?.[0]?.subscription_status || "free";
 
+    increment("feature_gate_check", { plan: subStatus });
     if (subStatus !== "pro") {
       const todayStart = new Date();
       todayStart.setHours(0, 0, 0, 0);

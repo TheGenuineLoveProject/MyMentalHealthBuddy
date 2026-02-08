@@ -2,11 +2,16 @@ import express from "express";
 import { requireAuth } from "../middleware/auth.mjs";
 import { requirePro, attachUserPlan } from "../middleware/requirePlan.mjs";
 import { success } from "../utils/response.mjs";
+import { increment } from "../utils/metrics.mjs";
 
 const router = express.Router();
 
 router.use(requireAuth);
 router.use(attachUserPlan);
+router.use((req, res, next) => {
+  increment("feature_gate_check", { plan: req.userPlan || "free" });
+  next();
+});
 
 router.get("/healing-journeys", requirePro, async (req, res) => {
   return success(res, {

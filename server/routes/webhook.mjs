@@ -5,6 +5,7 @@ import { db } from "../db/client.mjs";
 import { users, webhookEvents } from "../../shared/schema.mjs";
 import { eq } from "drizzle-orm";
 import { logger } from "../utils/logger.mjs";
+import { increment } from "../utils/metrics.mjs";
 import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
 
 const router = Router();
@@ -98,6 +99,7 @@ router.post(
             logger.warn("checkout.session.completed: no user matched by email", { email: session.customer_email, customer: session.customer });
           } else {
             logger.info("Subscription activated via checkout", { customer: session.customer, status: "pro" });
+            increment("subscription_transition", { plan: "free_to_pro" });
           }
           sendUpgradeConfirmation(session.customer_email, session.customer_details?.name || "").catch(err => {
             logger.warn("Failed to send upgrade email", { error: err.message });
@@ -156,6 +158,7 @@ router.post(
             logger.warn("customer.subscription.deleted: no user found for stripeCustomerId", { customer: subscription.customer });
           } else {
             logger.info("Subscription deleted, reverted to free", { customer: subscription.customer });
+            increment("subscription_transition", { plan: "pro_to_free" });
           }
           
           const cancelledUser = userRows?.[0];
