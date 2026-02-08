@@ -383,9 +383,27 @@ app.all("/api/*", (_req, res) => {
 });
 
 const distPath = join(__dirname, "../client/dist");
-app.use(express.static(distPath));
+
+app.use(express.static(distPath, {
+  etag: true,
+  lastModified: true,
+  setHeaders(res, filePath) {
+    const isServiceWorker = filePath.endsWith('serviceWorker.js');
+    const isHtmlOrJson = filePath.endsWith('.html') || filePath.endsWith('.json');
+    const isHashedAsset = /\.[a-f0-9]{8,}\.(js|css)$/i.test(filePath);
+
+    if (isServiceWorker || isHtmlOrJson) {
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    } else if (isHashedAsset) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    } else {
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
+  }
+}));
 
 app.get("*", (_req, res) => {
+  res.setHeader('Cache-Control', 'no-cache, must-revalidate');
   res.sendFile(join(distPath, "index.html"));
 });
 

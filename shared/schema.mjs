@@ -36,7 +36,10 @@ export const journals = pgTable("journals", {
   text: text("text").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+}, (table) => ({
+  userIdIdx: index("idx_journals_user_id").on(table.userId),
+  userCreatedIdx: index("idx_journals_user_created").on(table.userId, table.createdAt),
+}));
 
 /* ================= MOODS ================= */
 export const moods = pgTable("moods", {
@@ -54,7 +57,10 @@ export const moods = pgTable("moods", {
   triggers: text("triggers"),
   weather: varchar("weather", { length: 50 }),
   location: varchar("location", { length: 100 }),
-});
+}, (table) => ({
+  userIdIdx: index("idx_moods_user_id").on(table.userId),
+  userCreatedIdx: index("idx_moods_user_created").on(table.userId, table.createdAt),
+}));
 
 /* ================= AI MESSAGES ================= */
 export const aiMessages = pgTable("ai_messages", {
@@ -66,7 +72,10 @@ export const aiMessages = pgTable("ai_messages", {
   flowType: text("flow_type"),
   isCrisis: boolean("is_crisis").default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-});
+}, (table) => ({
+  userIdIdx: index("idx_ai_messages_user_id").on(table.userId),
+  userCreatedIdx: index("idx_ai_messages_user_created").on(table.userId, table.createdAt),
+}));
 
 /* ================= THERAPY SESSIONS ================= */
 export const therapySessions = pgTable("therapy_sessions", {
@@ -75,7 +84,9 @@ export const therapySessions = pgTable("therapy_sessions", {
   flowType: text("flow_type").notNull().default("general"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+}, (table) => ({
+  userCreatedIdx: index("idx_therapy_sessions_user").on(table.userId, table.createdAt),
+}));
 
 /* ================= ANALYTICS ================= */
 export const analytics = pgTable("analytics", {
