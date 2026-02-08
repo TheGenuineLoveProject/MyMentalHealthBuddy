@@ -8,7 +8,9 @@ import { logger } from "../utils/logger.mjs";
 import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
 
 const router = Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" })
+  : null;
 
 /**
  * Check if event has already been processed (durable idempotency)
@@ -45,6 +47,10 @@ router.post(
   "/stripe",
   express.raw({ type: "application/json" }),
   async (req, res) => {
+    if (!stripe) {
+      logger.warn("Stripe webhook received but STRIPE_SECRET_KEY not configured");
+      return res.status(503).json({ error: "Stripe not configured" });
+    }
     const sig = req.headers["stripe-signature"];
     let event;
 

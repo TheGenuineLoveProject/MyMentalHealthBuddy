@@ -32,7 +32,7 @@ export const BACKEND_IMPORTS = {
     analytics: "../routes/analytics.mjs",
     billing: "../routes/billing.mjs",
     stripe: "../routes/stripe.mjs",
-    stripeWebhook: "../routes/stripeWebhook.mjs",
+    webhook: "../routes/webhook.mjs",
     blog: "../routes/blog.mjs",
   },
 
