@@ -1,4 +1,5 @@
 import db from "../db/client.mjs";
+import { logger } from "../utils/logger.mjs";
 
 export async function audit(req, action, meta = {}) {
   try {
@@ -11,7 +12,7 @@ export async function audit(req, action, meta = {}) {
        VALUES ($1, $2, $3, $4, $5)`,
       [userId, action, ip, ua, JSON.stringify(meta)]
     );
-  } catch {
-    // never block requests on audit failure
+  } catch (err) {
+    logger.warn("[Audit] Audit log write failed (non-blocking)", { action, error: err?.message || err });
   }
 }

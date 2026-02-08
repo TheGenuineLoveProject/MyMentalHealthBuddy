@@ -11,6 +11,7 @@ import memoize from "memoizee";
 import connectPg from "connect-pg-simple";
 import { authStorage } from "./storage.mjs";
 import { sendWelcomeEmail } from "../../services/email.mjs";
+import { logger } from "../../utils/logger.mjs";
 
 const getOidcConfig = memoize(
   async () => {
@@ -66,7 +67,7 @@ async function upsertUser(claims) {
       ? `${claims["first_name"]}${claims["last_name"] ? ' ' + claims["last_name"] : ''}`
       : null;
     sendWelcomeEmail(claims["email"], fullName).catch(err => {
-      console.error("[ReplitAuth] Failed to send welcome email:", err);
+      logger.error("[ReplitAuth] Failed to send welcome email", { error: err?.message || err });
     });
   }
 }
@@ -120,37 +121,34 @@ export async function setupAuth(app) {
     ensureStrategy(req.hostname);
     passport.authenticate(`replitauth:${req.hostname}`, (err, user, info) => {
       if (err) {
-        console.error("[ReplitAuth] Callback error:", err);
+        logger.error("[ReplitAuth] Callback error", { error: err?.message || err });
         return res.redirect("/api/login");
       }
       if (!user) {
-        console.log("[ReplitAuth] No user returned from authentication");
+        logger.warn("[ReplitAuth] No user returned from authentication");
         return res.redirect("/api/login");
       }
       
-      console.log("[ReplitAuth] User claims:", user.claims?.sub, user.claims?.email);
+      logger.info("[ReplitAuth] User claims received", { sub: user.claims?.sub, email: user.claims?.email });
       
       req.logIn(user, { session: true }, (loginErr) => {
         if (loginErr) {
-          console.error("[ReplitAuth] Login error:", loginErr);
+          logger.error("[ReplitAuth] Login error", { error: loginErr?.message || loginErr });
           return res.redirect("/api/login");
         }
         
-        // Store user data directly in session as backup
         req.session.userId = user.claims?.sub;
         req.session.userEmail = user.claims?.email;
         req.session.userData = user;
         
-        console.log("[ReplitAuth] Session ID:", req.session?.id);
-        console.log("[ReplitAuth] req.isAuthenticated():", req.isAuthenticated());
+        logger.debug("[ReplitAuth] Session established", { sessionId: req.session?.id, isAuthenticated: req.isAuthenticated() });
         
-        // Force session regeneration and save
         req.session.save((saveErr) => {
           if (saveErr) {
-            console.error("[ReplitAuth] Session save error:", saveErr);
+            logger.error("[ReplitAuth] Session save error", { error: saveErr?.message || saveErr });
             return res.redirect("/api/login");
           }
-          console.log("[ReplitAuth] User authenticated successfully:", user.claims?.sub);
+          logger.info("[ReplitAuth] User authenticated successfully", { sub: user.claims?.sub });
           return res.redirect("/dashboard");
         });
       });
@@ -185,7 +183,7 @@ export async function refreshUserToken(user, req) {
     }
     return true;
   } catch (error) {
-    console.error("[ReplitAuth] Token refresh failed:", error.message);
+    logger.error("[ReplitAuth] Token refresh failed", { error: error?.message || error });
     return false;
   }
 }
@@ -198,13 +196,11 @@ export const isAuthenticated = async (req, res, next) => {
   if (!user && req.session?.userData) {
     user = req.session.userData;
     req.user = user; // Restore to req.user for downstream use
-    console.log("[ReplitAuth] Restored user from session backup:", user.claims?.sub);
+    logger.debug("[ReplitAuth] Restored user from session backup", { sub: user.claims?.sub });
   }
 
   if (!user?.expires_at) {
-    console.log("[ReplitAuth] isAuthenticated failed - no user or expires_at");
-    console.log("[ReplitAuth] req.isAuthenticated():", req.isAuthenticated());
-    console.log("[ReplitAuth] session keys:", Object.keys(req.session || {}));
+    logger.debug("[ReplitAuth] isAuthenticated failed", { hasUser: !!user, hasExpiresAt: !!user?.expires_at, isAuthenticated: req.isAuthenticated(), sessionKeys: Object.keys(req.session || {}) });
     return res.status(401).json({ message: "Unauthorized" });
   }
 
@@ -221,13 +217,13 @@ export const isAuthenticated = async (req, res, next) => {
           req.session.dbUserId = dbUser.id;
         }
       } catch (e) {
-        console.error("[ReplitAuth] Failed to resolve DB user:", e.message);
+        logger.error("[ReplitAuth] Failed to resolve DB user", { error: e?.message || e });
       }
     }
   }
 
   if (!req.dbUserId) {
-    console.error("[ReplitAuth] Could not resolve DB user for Replit ID:", replitId);
+    logger.error("[ReplitAuth] Could not resolve DB user", { replitId });
     return res.status(401).json({ message: "User account not found" });
   }
 

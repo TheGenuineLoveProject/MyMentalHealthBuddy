@@ -1,5 +1,6 @@
 // Healing design creation service
 import { db } from '../db/client.mjs';
+import { logger } from '../utils/logger.mjs';
 
 const THERAPEUTIC_TEMPLATES = [
   { id: 'healing-affirmation', name: 'Healing Affirmation', elements: [] },
@@ -55,7 +56,7 @@ export async function createHealingDesign(templateId, customization, healingInte
     return design;
 
   } catch (error) {
-    console.error('Healing design creation error:', error);
+    logger.error('Healing design creation error', { error: error?.message || error });
     throw new Error(`Unable to create healing design: ${error.message}`);
   }
 }
@@ -92,7 +93,7 @@ function calculateTherapeuticValue(template, customization, healingIntent) {
   const baseValue = 50; // Base therapeutic value
   const customizationBonus = Object.keys(customization).length * 10;
   const intentionBonus = healingIntent.length > 20 ? 20 : 10;
-  const templateMultiplier = template.healingIntent.includes('crisis') ? 1.5 : 1.2;
+  const templateMultiplier = (template.id || '').includes('crisis') ? 1.5 : 1.2;
 
   return Math.min(100, (baseValue + customizationBonus + intentionBonus) * templateMultiplier);
 }

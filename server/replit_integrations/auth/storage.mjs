@@ -6,6 +6,7 @@
 import { users } from "../../../shared/schema.mjs";
 import db from "../../db/client.mjs";
 import { eq } from "drizzle-orm";
+import { logger } from "../../utils/logger.mjs";
 
 class AuthStorage {
   async getUserByReplitId(replitId) {
@@ -75,7 +76,7 @@ class AuthStorage {
           updatedAt: new Date(),
         })
         .returning();
-      console.log(`[Auth] New user created: ${email}, role: ${user.role}`);
+      logger.info("[Auth] New user created", { email, role: user.role });
       return { ...user, isNewUser: true };
     }
   }

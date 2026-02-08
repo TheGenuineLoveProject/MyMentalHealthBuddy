@@ -5,6 +5,7 @@
 
 import { authStorage } from "./storage.mjs";
 import { isAuthenticated, refreshUserToken } from "./replitAuth.mjs";
+import { logger } from "../../utils/logger.mjs";
 
 export function registerAuthRoutes(app) {
   app.get("/api/auth/user", async (req, res) => {
@@ -32,7 +33,7 @@ export function registerAuthRoutes(app) {
       const dbUser = await authStorage.getUserByReplitId(replitId);
       res.json(dbUser);
     } catch (error) {
-      console.error("Error fetching user:", error);
+      logger.error("[Auth] Error fetching user", { error: error?.message || error });
       res.json(null);
     }
   });
