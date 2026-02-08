@@ -111,6 +111,10 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 async function startServer() {
+  // Harden Express defaults
+  app.disable("x-powered-by");
+  app.set("trust proxy", 1);
+
   // Request tracking middleware (first in chain)
   app.use(requestId);
   app.use(requestLogger);
@@ -142,6 +146,7 @@ async function startServer() {
   });
   
   app.use(express.json({ limit: '1mb' }));
+  app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
 
   // Sanitize all incoming request bodies (strip script tags, event handlers, etc.)
