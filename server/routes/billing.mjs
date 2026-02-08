@@ -86,13 +86,14 @@ router.post("/checkout", async (req, res) => {
     const customerId = await getOrCreateStripeCustomer(req.user.id, req.user.email);
     const idempotencyKey = generateIdempotencyKey(req.user.id, `${plan}-${interval}`, Date.now());
 
+    const baseUrl = process.env.CORS_ORIGIN || `https://${process.env.REPLIT_DOMAINS || ""}`;
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       customer: customerId,
       client_reference_id: req.user.id,
       line_items: [{ price: resolvedPriceId, quantity: 1 }],
-      success_url: `${process.env.CORS_ORIGIN || ""}/dashboard?billing=success`,
-      cancel_url: `${process.env.CORS_ORIGIN || ""}/account/billing?canceled=true`,
+      success_url: `${baseUrl}/dashboard?billing=success`,
+      cancel_url: `${baseUrl}/account/billing?canceled=true`,
       metadata: { userId: req.user.id, plan, interval },
     }, {
       idempotencyKey,
@@ -115,9 +116,10 @@ router.post("/portal", async (req, res) => {
     const customerId = userResult.rows?.[0]?.stripe_customer_id;
     if (!customerId) return badRequest(res, "Missing Stripe customer");
 
+    const baseUrl = process.env.CORS_ORIGIN || `https://${process.env.REPLIT_DOMAINS || ""}`;
     const portal = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: `${process.env.CORS_ORIGIN || ""}/dashboard`,
+      return_url: `${baseUrl}/account/billing`,
     });
     return success(res, { url: portal.url });
   } catch (err) {
@@ -129,22 +131,41 @@ router.get("/subscription-status", async (req, res) => {
   try {
     if (!req.user) return unauthorized(res);
 
-    const subResult = await db.execute(sql`
-      SELECT tier, status, current_period_end, cancel_at_period_end 
-      FROM subscriptions WHERE user_id = ${req.user.id} LIMIT 1
+    const userResult = await db.execute(sql`
+      SELECT subscription_status, subscription_expires_at, stripe_customer_id
+      FROM users WHERE id = ${req.user.id} LIMIT 1
     `);
 
-    if (subResult.rows?.length > 0) {
-      const sub = subResult.rows[0];
-      return success(res, {
-        plan: sub.tier || "free",
-        status: sub.status || "active",
-        currentPeriodEnd: sub.current_period_end,
-        cancelAtPeriodEnd: sub.cancel_at_period_end || false,
-      });
+    const user = userResult.rows?.[0];
+    if (!user) {
+      return success(res, { plan: "free", status: "none" });
     }
 
-    return success(res, { plan: "free", status: "none" });
+    const plan = user.subscription_status || "free";
+    const isActive = plan === "pro";
+
+    let cancelAtPeriodEnd = false;
+    if (isActive && stripe && user.stripe_customer_id) {
+      try {
+        const subs = await stripe.subscriptions.list({
+          customer: user.stripe_customer_id,
+          status: "active",
+          limit: 1,
+        });
+        if (subs.data.length > 0) {
+          cancelAtPeriodEnd = subs.data[0].cancel_at_period_end || false;
+        }
+      } catch (stripeErr) {
+        logger.warn("Failed to fetch Stripe subscription details", { error: stripeErr.message });
+      }
+    }
+
+    return success(res, {
+      plan,
+      status: isActive ? "active" : "none",
+      currentPeriodEnd: user.subscription_expires_at || null,
+      cancelAtPeriodEnd,
+    });
   } catch (err) {
     logger.error("Subscription status error", { error: err.message });
     return serverError(res, err);
@@ -155,12 +176,11 @@ router.get("/current-plan", async (req, res) => {
   try {
     if (!req.user) return unauthorized(res);
 
-    const subResult = await db.execute(sql`
-      SELECT tier, status FROM subscriptions 
-      WHERE user_id = ${req.user.id} AND status IN ('active', 'trialing') LIMIT 1
+    const userResult = await db.execute(sql`
+      SELECT subscription_status FROM users WHERE id = ${req.user.id} LIMIT 1
     `);
 
-    const plan = subResult.rows?.[0]?.tier || "free";
+    const plan = userResult.rows?.[0]?.subscription_status || "free";
     const planConfig = PLANS[plan] || PLANS.free;
 
     return success(res, {
