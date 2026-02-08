@@ -202,13 +202,13 @@ export default function Pricing() {
                       )}
                     </button>
                   ) : (
-                    <Link 
-                      href="/register"
+                    <a 
+                      href="/api/login"
                       className="block w-full py-3.5 px-6 text-center btn-secondary-premium"
                       data-testid="button-get-started"
                     >
                       Get Started Free
-                    </Link>
+                    </a>
                   )}
                 </div>
               );

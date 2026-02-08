@@ -48,15 +48,15 @@ export default function LandingCTA() {
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Link 
-            href="/register"
+          <a 
+            href="/api/login"
             className="group flex items-center gap-2 px-8 py-4 bg-white text-teal-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
             data-testid="link-cta-start"
           >
             <Heart className="w-5 h-5 text-rose-500" />
             Begin Free Trial
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </a>
           <Link 
             href="/pricing"
             className="flex items-center gap-2 px-8 py-4 bg-transparent text-white font-semibold rounded-xl border-2 border-white/30 hover:border-white/50 hover:bg-white/10 transition-all"

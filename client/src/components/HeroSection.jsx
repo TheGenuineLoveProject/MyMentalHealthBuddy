@@ -12,14 +12,12 @@ export default function HeroSection() {
           Mood tracking, journaling, and AI reflection tools — private by design, free to start.
         </p>
         <div className="mt-8 flex flex-wrap gap-4 justify-center">
-          <Link href="/register">
-            <button 
-              className="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform"
-              data-testid="btn-start-free"
-            >
-              Start Free Today →
-            </button>
-          </Link>
+          <a href="/api/login"
+            className="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform inline-block"
+            data-testid="btn-start-free"
+          >
+            Start Free Today →
+          </a>
           <Link href="/pricing">
             <button 
               className="px-6 py-3 border-2 border-amber-500 text-amber-600 font-semibold rounded-xl hover:bg-amber-50 transition-colors"

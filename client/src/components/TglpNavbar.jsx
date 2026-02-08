@@ -165,18 +165,15 @@ export default function TglpNavbar() {
             </>
           ) : (
             <>
-              <Link 
-                href="/login" 
-                className={`hidden md:flex items-center px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)] ${
-                  isActive("/login") ? "bg-[var(--glp-sage)]/15" : ""
-                }`}
-                aria-current={isActive("/login") ? "page" : undefined}
+              <a 
+                href="/api/login" 
+                className="hidden md:flex items-center px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)]"
                 data-testid="link-login"
               >
                 Sign In
-              </Link>
-              <Link 
-                href="/register" 
+              </a>
+              <a 
+                href="/api/login" 
                 className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
                 style={{ 
                   background: "var(--glp-gold-gradient)",
@@ -187,7 +184,7 @@ export default function TglpNavbar() {
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
                 <span className="hidden sm:inline">Get Started</span>
                 <span className="sm:hidden">Start</span>
-              </Link>
+              </a>
             </>
           )}
 
@@ -282,24 +279,22 @@ export default function TglpNavbar() {
               </>
             ) : (
               <>
-                <Link 
-                  href="/login"
+                <a 
+                  href="/api/login"
                   className="block text-center px-4 py-3 rounded-xl text-sm font-medium transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep-20)]"
-                  onClick={() => setMobileMenuOpen(false)}
                   data-testid="link-mobile-signin"
                 >
                   Sign In
-                </Link>
-                <Link 
-                  href="/register" 
+                </a>
+                <a 
+                  href="/api/login" 
                   className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
                   style={{ background: "var(--glp-gold-gradient)" }}
-                  onClick={() => setMobileMenuOpen(false)}
                   data-testid="link-mobile-get-started"
                 >
                   <Sparkles className="w-4 h-4" />
                   Get Started Free
-                </Link>
+                </a>
               </>
             )}
           </div>

@@ -22,7 +22,7 @@ export default function HealingHero({
   badge = "Wellness Reflection Platform",
   title = "A Private Space for\nMind, Body & Soul",
   subtitle = "Mood tracking, journaling, and AI-assisted reflection — built with trauma-informed care and designed around how you actually feel.",
-  primaryCTA = { text: "Try It Free", href: "/register" },
+  primaryCTA = { text: "Try It Free", href: "/api/login" },
   secondaryCTA = { text: "Explore Features", href: "/features" },
   showFloatingElements = true,
 }) {

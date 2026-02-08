@@ -56,14 +56,13 @@ export default function OnboardingFlow() {
                 Next
               </button>
             ) : (
-              <Link href="/register">
-                <button 
-                  className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-white font-medium hover:opacity-90 transition-opacity"
-                  data-testid="btn-onboarding-finish"
-                >
-                  Create Your Account
-                </button>
-              </Link>
+              <a 
+                href="/api/login"
+                className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 text-white font-medium hover:opacity-90 transition-opacity inline-block"
+                data-testid="btn-onboarding-finish"
+              >
+                Create Your Account
+              </a>
             )}
           </div>
         </div>

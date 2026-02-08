@@ -479,20 +479,19 @@ export default function HealingLandingPage() {
             Free to start. Mood tracking, journaling, and AI reflection tools — private and at your pace.
           </p>
 
-          <Link href="/register">
-            <button 
-              className="group px-12 py-5 rounded-full font-semibold text-lg inline-flex items-center gap-3 transition-all duration-400 hover-glow-gold"
-              style={{ 
-                background: 'linear-gradient(135deg, #eac33b 0%, #ddb12d 100%)',
-                color: '#2f5d5d',
-                boxShadow: '0 4px 24px rgba(234, 195, 59, 0.35)',
-              }}
-              data-testid="button-cta-final"
-            >
-              Try It Free
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
-          </Link>
+          <a 
+            href="/api/login"
+            className="group px-12 py-5 rounded-full font-semibold text-lg inline-flex items-center gap-3 transition-all duration-400 hover-glow-gold"
+            style={{ 
+              background: 'linear-gradient(135deg, #eac33b 0%, #ddb12d 100%)',
+              color: '#2f5d5d',
+              boxShadow: '0 4px 24px rgba(234, 195, 59, 0.35)',
+            }}
+            data-testid="button-cta-final"
+          >
+            Try It Free
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </a>
 
           <p 
             className="mt-6 text-sm"

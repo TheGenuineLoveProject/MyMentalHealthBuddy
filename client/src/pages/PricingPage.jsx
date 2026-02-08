@@ -120,7 +120,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <Link href={plan.id === "free" ? "/register" : "/upgrade"}>
+                <a href={plan.id === "free" ? "/api/login" : "/upgrade"}>
                   <Button 
                     className="w-full min-h-[48px] px-6 py-3 text-base font-semibold rounded-lg" 
                     variant={plan.popular ? "default" : "outline"}
@@ -128,7 +128,7 @@ export default function PricingPage() {
                   >
                     {plan.cta}
                   </Button>
-                </Link>
+                </a>
               </CardContent>
             </Card>
           ))}

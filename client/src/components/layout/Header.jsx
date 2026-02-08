@@ -160,8 +160,8 @@ function Header() {
           </Link>
 
           {/* CTA Button */}
-          <Link 
-            href="/register" 
+          <a 
+            href="/api/login" 
             className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg text-[var(--glp-sage-deep)]"
             style={{ 
               background: "var(--glp-gold-gradient)",
@@ -172,7 +172,7 @@ function Header() {
             <Sparkles className="w-4 h-4" />
             <span className="hidden sm:inline">Get Started</span>
             <span className="sm:hidden">Start</span>
-          </Link>
+          </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -238,16 +238,15 @@ function Header() {
             >
               Sign In
             </Link>
-            <Link 
-              href="/register" 
+            <a 
+              href="/api/login" 
               className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
               style={{ background: "var(--glp-gold-gradient)" }}
-              onClick={() => setMobileMenuOpen(false)}
               data-testid="link-mobile-get-started"
             >
               <Sparkles className="w-4 h-4" />
               Get Started Free
-            </Link>
+            </a>
           </div>
         </div>
       )}

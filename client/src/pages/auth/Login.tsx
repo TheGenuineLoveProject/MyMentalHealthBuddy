@@ -134,9 +134,9 @@ export default function Login() {
           <div className="mt-6 pt-6 border-t border-[var(--sage-200)] text-center">
             <p className="text-body-sm">
               New to Genuine Love?{" "}
-              <Link href="/register" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium" data-testid="link-signup">
+              <a href="/api/login" className="text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium" data-testid="link-signup">
                 Create an account
-              </Link>
+              </a>
             </p>
           </div>
         </div>

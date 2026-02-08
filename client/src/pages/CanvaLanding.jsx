@@ -206,9 +206,9 @@ export default function CanvaLanding() {
             <Link href="/login">
               <button className="btn-primary w-full mb-3" data-testid="button-mobile-signin">Sign In</button>
             </Link>
-            <Link href="/register">
+            <a href="/api/login">
               <button className="btn-secondary w-full" data-testid="button-mobile-getstarted">Get Started</button>
-            </Link>
+            </a>
           </div>
         </div>
       </nav>
@@ -261,17 +261,16 @@ export default function CanvaLanding() {
                   Sign In
                 </button>
               </Link>
-              <Link href="/register">
-                <button 
-                  className="inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
-                  style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 14px var(--glp-gold-30)' }}
-                  data-testid="button-getstarted"
-                >
-                  <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
-                  <span className="hidden sm:inline">Get Started</span>
-                  <span className="sm:hidden">Start</span>
-                </button>
-              </Link>
+              <a 
+                href="/api/login"
+                className="inline-flex items-center gap-2.5 font-semibold text-[15px] lg:text-base px-6 lg:px-7 py-3 lg:py-3.5 rounded-full transition-all hover:opacity-90 hover:shadow-lg text-white"
+                style={{ background: 'linear-gradient(135deg, var(--glp-gold), var(--glp-gold-dark))', boxShadow: '0 4px 14px var(--glp-gold-30)' }}
+                data-testid="button-getstarted"
+              >
+                <Sparkles className="w-[18px] h-[18px] lg:w-5 lg:h-5" />
+                <span className="hidden sm:inline">Get Started</span>
+                <span className="sm:hidden">Start</span>
+              </a>
 
               {/* Mobile Menu Button */}
               <button 
@@ -410,16 +409,15 @@ export default function CanvaLanding() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-5 mb-20 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-              <Link href="/register">
-                <button 
-                  className="btn-sacred-gold group inline-flex items-center gap-3 font-bold text-lg px-10 py-5"
-                  data-testid="button-hero-begin"
-                >
-                  <Sparkles className="w-6 h-6" aria-hidden="true" />
-                  Try It Free
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                </button>
-              </Link>
+              <a 
+                href="/api/login"
+                className="btn-sacred-gold group inline-flex items-center gap-3 font-bold text-lg px-10 py-5"
+                data-testid="button-hero-begin"
+              >
+                <Sparkles className="w-6 h-6" aria-hidden="true" />
+                Try It Free
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </a>
               <Link href="/dashboard">
                 <button 
                   className="inline-flex items-center gap-3 font-bold text-lg px-10 py-5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:-translate-y-1"
@@ -594,12 +592,10 @@ export default function CanvaLanding() {
                 <p className="text-sm leading-relaxed mb-4" style={{ color: 'var(--glp-ink)' }}>
                   {feature.description}
                 </p>
-                <Link href="/register" data-testid={`link-feature-${index}`}>
-                  <span className="inline-flex items-center text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
+                <a href="/api/login" data-testid={`link-feature-${index}`} className="inline-flex items-center text-sm font-semibold cursor-pointer transition-colors hover:opacity-80" style={{ color: 'var(--glp-gold)' }}>
                     Explore
                     <ArrowRight className="w-4 h-4 ml-1" aria-hidden="true" />
-                  </span>
-                </Link>
+                </a>
               </div>
             ))}
           </div>
@@ -820,24 +816,23 @@ export default function CanvaLanding() {
           
           {/* Buttons - refined shape with gold text */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 mt-12">
-            <Link href="/register">
-              <button 
-                className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105"
-                style={{
-                  background: 'var(--glp-white)',
-                  color: 'var(--glp-gold)',
-                  boxShadow: '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 40px rgba(234, 195, 59, 0.5), 0 16px 48px var(--glp-overlay-50)'}
-                onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'}
-                data-testid="button-final-cta"
-              >
-                <span className="flex items-center gap-4">
-                  Try It Free
-                  <ArrowRight className="w-10 h-10 transition-transform group-hover:translate-x-2" />
-                </span>
-              </button>
-            </Link>
+            <a 
+              href="/api/login"
+              className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105 inline-block"
+              style={{
+                background: 'var(--glp-white)',
+                color: 'var(--glp-gold)',
+                boxShadow: '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 40px rgba(234, 195, 59, 0.5), 0 16px 48px var(--glp-overlay-50)'}
+              onMouseLeave={(e) => e.currentTarget.style.boxShadow = '0 0 25px rgba(234, 195, 59, 0.35), 0 12px 40px var(--glp-overlay-50)'}
+              data-testid="button-final-cta"
+            >
+              <span className="flex items-center gap-4">
+                Try It Free
+                <ArrowRight className="w-10 h-10 transition-transform group-hover:translate-x-2" />
+              </span>
+            </a>
             <Link href="/pricing">
               <button 
                 className="group px-12 py-6 rounded-2xl font-bold text-3xl md:text-4xl transition-all duration-300 hover:scale-105"

@@ -85,7 +85,7 @@ function HeroSection() {
       <HeroText>
         Mood tracking, journaling, and AI reflection tools — private by design, free to start.
       </HeroText>
-      <CTAButton href="/register" testId="link-register-cta">Try It Free →</CTAButton>
+      <CTAButton href="/api/login" testId="link-register-cta">Try It Free →</CTAButton>
     </HeroWrapper>
   );
 }

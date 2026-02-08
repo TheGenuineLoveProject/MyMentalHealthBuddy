@@ -66,14 +66,14 @@ export default function PlanGate({
               </Link>
             ) : (
               <>
-                <Link
-                  href="/register"
+                <a
+                  href="/api/login"
                   className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[var(--glp-sage)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity"
                   data-testid="link-signup"
                 >
                   Start for free
                   <ArrowRight className="w-4 h-4" />
-                </Link>
+                </a>
                 <Link
                   href="/login"
                   className="block text-sm text-[var(--glp-sage)] hover:underline"
