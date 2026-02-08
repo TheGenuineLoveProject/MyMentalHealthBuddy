@@ -359,6 +359,9 @@ async function startServer() {
     }
   });
 
+  const { errorHandler } = await import("./middleware/errorHandler.mjs");
+  app.use(errorHandler);
+
   const preferredPort = parseInt(process.env.PORT, 10) || 5000;
   const fallbackPorts = [preferredPort, 5001, 5002, 5003];
   

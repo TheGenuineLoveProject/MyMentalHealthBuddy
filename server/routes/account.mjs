@@ -493,7 +493,7 @@ router.post("/2fa/setup", requireAuth, sensitiveRateLimit, async (req, res) => {
 
     const secret = authenticator.generateSecret();
     const otpauth = authenticator.keyuri(
-      userRows[0].email || req.user.id,
+      userRows[0].email || req.dbUserId,
       "Genuine Love Project",
       secret
     );
