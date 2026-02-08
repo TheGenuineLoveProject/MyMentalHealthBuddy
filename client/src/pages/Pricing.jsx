@@ -9,42 +9,55 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 
-const tiers = [
-  {
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    description: "Core wellness tools with no credit card and no expiration",
-    features: [
-      "Mood tracking & journaling",
-      "5 AI chat sessions per day",
-      "Daily reflection prompts",
-      "Community affirmation wall",
-      "Crisis support resources",
-      "Daily wisdom & insights"
-    ],
-    planId: null,
-    icon: Star,
-    popular: false,
-  },
-  {
-    name: "Pro",
-    price: "$12",
-    period: "/month",
-    description: "Unlimited AI sessions and the full wellness toolkit — cancel anytime",
-    features: [
-      "Everything in Free",
-      "Unlimited AI chat sessions",
-      "Advanced emotional insights",
-      "Guided healing journeys",
-      "Content studio access",
-      "Progress analytics",
-      "Priority support"
-    ],
-    planId: "pro",
-    icon: Crown,
-    popular: true,
-  },
+const freeTier = {
+  name: "Free",
+  price: "$0",
+  period: "forever",
+  description: "Core wellness tools with no credit card and no expiration",
+  features: [
+    "Mood tracking & journaling",
+    "5 AI chat sessions per day",
+    "Daily reflection prompts",
+    "Community affirmation wall",
+    "Crisis support resources",
+    "Daily wisdom & insights"
+  ],
+  planId: null,
+  icon: Star,
+  popular: false,
+};
+
+const proMonthly = {
+  name: "Pro",
+  price: "$12",
+  period: "/month",
+  description: "Unlimited AI sessions and the full wellness toolkit — cancel anytime",
+  planId: "pro",
+  interval: "monthly",
+  icon: Crown,
+  popular: true,
+};
+
+const proYearly = {
+  name: "Pro",
+  price: "$99",
+  period: "/year",
+  description: "Save 31% — everything in Pro, billed annually",
+  planId: "pro",
+  interval: "yearly",
+  icon: Crown,
+  popular: true,
+  savings: "Save $45/year",
+};
+
+const proFeatures = [
+  "Everything in Free",
+  "Unlimited AI chat sessions",
+  "Advanced emotional insights",
+  "Guided healing journeys",
+  "Content studio access",
+  "Progress analytics",
+  "Priority support"
 ];
 
 export default function Pricing() {
@@ -52,8 +65,12 @@ export default function Pricing() {
   const { toast } = useToast();
 
   const [checkingOut, setCheckingOut] = useState(false);
+  const [interval, setInterval] = useState("yearly");
 
-  const startCheckout = async (plan) => {
+  const proTier = interval === "yearly" ? proYearly : proMonthly;
+  const tiers = [freeTier, { ...proTier, features: proFeatures }];
+
+  const startCheckout = async (plan, billingInterval) => {
     if (!user) {
       window.location.href = "/api/login";
       return;
@@ -67,7 +84,7 @@ export default function Pricing() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ plan, interval: "monthly" }),
+        body: JSON.stringify({ plan, interval: billingInterval }),
       });
 
       const data = await res.json();
@@ -141,6 +158,25 @@ export default function Pricing() {
               Core tools are free, always. Pro adds unlimited AI sessions and deeper insights — only if you want them.
               Cancel anytime, no questions asked.
             </p>
+
+            <div className="mt-8 inline-flex items-center rounded-full p-1" style={{ background: 'var(--glp-sage-20)' }} data-testid="toggle-billing-interval">
+              <button
+                onClick={() => setInterval("monthly")}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${interval === "monthly" ? "shadow-md" : "opacity-70 hover:opacity-90"}`}
+                style={interval === "monthly" ? { background: 'var(--glp-paper)', color: 'var(--glp-sage-deep)' } : { color: 'var(--glp-sage-deep)' }}
+                data-testid="button-interval-monthly"
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setInterval("yearly")}
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${interval === "yearly" ? "shadow-md" : "opacity-70 hover:opacity-90"}`}
+                style={interval === "yearly" ? { background: 'var(--glp-paper)', color: 'var(--glp-sage-deep)' } : { color: 'var(--glp-sage-deep)' }}
+                data-testid="button-interval-yearly"
+              >
+                Yearly <span style={{ color: 'var(--glp-gold-dark)' }}>Save 31%</span>
+              </button>
+            </div>
           </div>
           
           <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto">
@@ -188,9 +224,15 @@ export default function Pricing() {
                     ))}
                   </ul>
                   
+                  {tier.savings && (
+                    <div className="mb-3 inline-block px-3 py-1 rounded-full text-xs font-semibold" style={{ background: 'var(--glp-gold-30)', color: 'var(--glp-gold-dark)' }} data-testid="badge-savings">
+                      {tier.savings}
+                    </div>
+                  )}
+
                   {tier.planId ? (
                     <button 
-                      onClick={() => startCheckout(tier.planId)}
+                      onClick={() => startCheckout(tier.planId, tier.interval)}
                       disabled={checkingOut}
                       className={`w-full py-3.5 px-6 rounded-xl font-semibold transition-all ${tier.popular ? 'btn-premium hover-glow-gold' : 'btn-secondary-premium'} ${checkingOut ? 'opacity-70 cursor-not-allowed' : ''}`}
                       data-testid={`button-choose-${tier.name.toLowerCase()}`}

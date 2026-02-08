@@ -212,6 +212,7 @@ const RevenueAdmin = lazy(() => import("./pages/admin/RevenueAdmin.jsx"));
 const Subscription = lazy(() => import("./pages/account/Subscription.jsx"));
 const OrderHistory = lazy(() => import("./pages/account/OrderHistory.jsx"));
 const PricingPage = lazy(() => import("./pages/PricingPage.jsx"));
+const PricingReal = lazy(() => import("./pages/Pricing.jsx"));
 const RefundHelp = lazy(() => import("./pages/help/RefundHelp.jsx"));
 const LegalPage = lazy(() => import("./pages/LegalPage.jsx"));
 
@@ -330,7 +331,7 @@ export default function App() {
               <Route path="/features">{() => <ConfigRoute route="/features" />}</Route>
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />
-              <Route path="/pricing">{() => <ConfigRoute route="/pricing" />}</Route>
+              <Route path="/pricing" component={PricingReal} />
               <Route path="/challenge" component={Challenge} />
               <Route path="/challenge/day/:dayNum" component={ChallengeDay} />
 

@@ -79,6 +79,7 @@ import wisdomTraditionsRouter from "./routes/wisdom-traditions.mjs";
 import lifeDesignRouter from "./routes/life-design.mjs";
 import healingModalitiesRouter from "./routes/healing-modalities.mjs";
 import selfMasteryIntelligenceRouter from "./routes/self-mastery-intelligence.mjs";
+import proFeaturesRouter from "./routes/pro-features.mjs";
 import universalContentRouter from "./routes/universal-content.mjs";
 import traumaHealingProtocolsRouter from "./routes/trauma-healing-protocols.mjs";
 import spiritualIntelligenceRouter from "./routes/spiritual-intelligence.mjs";
@@ -209,6 +210,7 @@ async function startServer() {
   app.use("/api/ai", requireAdult, aiRouter);
   app.use("/api/analytics", analyticsRouter);
   app.use("/api/billing", billingRouter);
+  app.use("/api/pro-features", proFeaturesRouter);
   app.use("/api/gamification", gamificationRouter);
   app.use("/api/onboarding", onboardingRouter);
   app.use("/api/therapy", therapyRouter);
