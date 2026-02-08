@@ -40,7 +40,8 @@ router.get("/check", requireAdminToken, async (_req, res) => {
     await db.execute(sql`SELECT 1`);
     results.checks.databaseConnection = { status: "pass", detail: "Connected" };
   } catch (err) {
-    results.checks.databaseConnection = { status: "fail", detail: err.message };
+    logger.warn("Deployment check: database connection failed", { error: err?.message || err });
+    results.checks.databaseConnection = { status: "fail", detail: "Connection failed" };
   }
 
   try {
@@ -64,7 +65,8 @@ router.get("/check", requireAdminToken, async (_req, res) => {
       };
     }
   } catch (err) {
-    results.checks.subscriptionStatusColumn = { status: "fail", detail: err.message };
+    logger.warn("Deployment check: subscription_status column query failed", { error: err?.message || err });
+    results.checks.subscriptionStatusColumn = { status: "fail", detail: "Query failed" };
   }
 
   try {
@@ -83,7 +85,8 @@ router.get("/check", requireAdminToken, async (_req, res) => {
       },
     };
   } catch (err) {
-    results.checks.subscriptionStatusIntegrity = { status: "fail", detail: err.message };
+    logger.warn("Deployment check: subscription status integrity query failed", { error: err?.message || err });
+    results.checks.subscriptionStatusIntegrity = { status: "fail", detail: "Query failed" };
   }
 
   try {
@@ -97,7 +100,8 @@ router.get("/check", requireAdminToken, async (_req, res) => {
       detail: tableCheck.rows?.[0]?.exists ? "Table exists" : "Table missing",
     };
   } catch (err) {
-    results.checks.webhookEventsTable = { status: "fail", detail: err.message };
+    logger.warn("Deployment check: webhook_events table query failed", { error: err?.message || err });
+    results.checks.webhookEventsTable = { status: "fail", detail: "Query failed" };
   }
 
   const failedChecks = Object.values(results.checks).filter(c => c.status === "fail");

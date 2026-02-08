@@ -63,7 +63,7 @@ router.post(
       );
     } catch (err) {
       logger.error("Stripe webhook signature verification failed", { error: err.message });
-      return res.status(400).send(`Webhook Error: ${err.message}`);
+      return res.status(400).send("Webhook signature verification failed");
     }
 
     // Durable idempotency check
