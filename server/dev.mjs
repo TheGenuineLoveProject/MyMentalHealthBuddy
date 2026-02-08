@@ -107,6 +107,20 @@ import metricsSummaryRouter from "./routes/metricsSummary.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
+// JWT secret handling — ensure JWT_SECRET is always set (match production pattern)
+process.env.JWT_SECRET = process.env.JWT_SECRET || process.env.SESSION_SECRET || 'dev-jwt-secret';
+process.env.JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || process.env.SESSION_SECRET || 'dev-jwt-refresh';
+
+// Lightweight env validation for development
+const devEnvChecks = [
+  { name: 'DATABASE_URL', value: process.env.DATABASE_URL },
+  { name: 'SESSION_SECRET', value: process.env.SESSION_SECRET },
+];
+const missingDev = devEnvChecks.filter(v => !v.value);
+if (missingDev.length > 0) {
+  logger.warn("Missing recommended env vars for development", { vars: missingDev.map(v => v.name).join(', ') });
+}
+
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
