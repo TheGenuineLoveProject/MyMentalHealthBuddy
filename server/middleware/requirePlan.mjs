@@ -33,7 +33,8 @@ function hasAccess(userPlan, requiredPlan) {
 
 export function requirePlan(requiredPlan) {
   return async (req, res, next) => {
-    if (!req.user?.id) {
+    const userId = req.dbUserId;
+    if (!userId) {
       return res.status(401).json({ 
         ok: false, 
         error: "Authentication required",
@@ -41,12 +42,12 @@ export function requirePlan(requiredPlan) {
       });
     }
 
-    const userPlan = await getUserPlan(req.user.id);
+    const userPlan = await getUserPlan(userId);
     req.userPlan = userPlan;
 
     if (!hasAccess(userPlan, requiredPlan)) {
       logger.info("Plan access denied", { 
-        userId: req.user.id, 
+        userId, 
         userPlan, 
         requiredPlan,
         path: req.path 
@@ -69,8 +70,8 @@ export function requirePlan(requiredPlan) {
 export const requirePro = requirePlan("pro");
 
 export async function attachUserPlan(req, res, next) {
-  if (req.user?.id) {
-    req.userPlan = await getUserPlan(req.user.id);
+  if (req.dbUserId) {
+    req.userPlan = await getUserPlan(req.dbUserId);
   } else {
     req.userPlan = "free";
   }

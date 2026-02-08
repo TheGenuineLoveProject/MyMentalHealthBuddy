@@ -32,6 +32,7 @@ export async function requireAuth(req, res, next) {
     }
 
     req.user = user;
+    req.dbUserId = user.id;
     return next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
@@ -57,7 +58,10 @@ export async function optionalAuth(req, _res, next) {
       where: eq(users.id, payload.id),
     });
 
-    if (user) req.user = user;
+    if (user) {
+      req.user = user;
+      req.dbUserId = user.id;
+    }
   } catch (_) {
     // intentionally ignore optional auth failures
   }

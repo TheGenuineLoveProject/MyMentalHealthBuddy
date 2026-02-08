@@ -226,6 +226,11 @@ export const isAuthenticated = async (req, res, next) => {
     }
   }
 
+  if (!req.dbUserId) {
+    console.error("[ReplitAuth] Could not resolve DB user for Replit ID:", replitId);
+    return res.status(401).json({ message: "User account not found" });
+  }
+
   const now = Math.floor(Date.now() / 1000);
   if (now <= user.expires_at) {
     return next();

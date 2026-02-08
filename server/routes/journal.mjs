@@ -27,6 +27,7 @@ function requireAuth(req, res, next) {
 
     const payload = jwt.verify(token, ACCESS_SECRET);
     req.user = payload;
+    if (payload.id) req.dbUserId = payload.id;
     return next();
   } catch {
     return res.status(401).json({ ok: false, message: "Unauthorized." });
@@ -61,7 +62,7 @@ router.post("/", requireAuth, async (req, res) => {
     isAnonymous: Boolean(isAnonymous),
     createdAt: now,
     updatedAt: now,
-    userId: req.dbUserId || req.user?.claims?.sub || "test-user",
+    userId: req.dbUserId,
   };
 
   journalStore.set(id, entry);
@@ -92,7 +93,7 @@ router.post("/", requireAuth, async (req, res) => {
  * Returns: { ok:true, data:[...entries] }
  */
 router.get("/", requireAuth, async (req, res) => {
-  const userId = req.dbUserId || req.user?.claims?.sub || "test-user";
+  const userId = req.dbUserId;
   const entries = Array.from(journalStore.values()).filter((e) => e.userId === userId);
   return res.status(200).json({ ok: true, data: entries });
 });
