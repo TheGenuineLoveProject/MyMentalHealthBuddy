@@ -162,7 +162,7 @@ export default function CanvaLanding() {
     },
     {
       question: "Is there a free version?",
-      answer: "Yes! We offer a generous free tier with core features. Premium plans unlock advanced tools, unlimited AI conversations, and exclusive content."
+      answer: "Yes! We offer a generous free tier with core features. Our Pro plan unlocks advanced tools, unlimited AI conversations, and exclusive content."
     }
   ];
 

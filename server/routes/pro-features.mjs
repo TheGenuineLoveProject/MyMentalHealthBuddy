@@ -1,6 +1,6 @@
 import express from "express";
 import { requireAuth } from "../middleware/auth.mjs";
-import { requirePro, requireTeam, attachUserPlan } from "../middleware/requirePlan.mjs";
+import { requirePro, attachUserPlan } from "../middleware/requirePlan.mjs";
 import { success } from "../utils/response.mjs";
 
 const router = express.Router();
@@ -42,22 +42,12 @@ router.get("/ai-concierge", requirePro, async (req, res) => {
   });
 });
 
-router.get("/team-dashboard", requireTeam, async (req, res) => {
-  return success(res, {
-    feature: "team_dashboard",
-    plan: req.userPlan,
-    message: "Team Dashboard - Team plan required",
-    teamFeatures: ["member_management", "usage_reports", "shared_resources"],
-  });
-});
-
 router.get("/check-access", async (req, res) => {
   return success(res, {
     currentPlan: req.userPlan,
     access: {
       freeFeatures: true,
-      proFeatures: ["pro", "team", "enterprise"].includes(req.userPlan),
-      teamFeatures: ["team", "enterprise"].includes(req.userPlan),
+      proFeatures: req.userPlan === "pro",
     },
   });
 });

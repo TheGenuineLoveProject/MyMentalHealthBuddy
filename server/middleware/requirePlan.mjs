@@ -4,10 +4,7 @@ import { logger } from "../utils/logger.mjs";
 
 const PLAN_HIERARCHY = {
   free: 0,
-  basic: 1,
-  pro: 2,
-  team: 3,
-  enterprise: 4,
+  pro: 1,
 };
 
 async function getUserPlan(userId) {
@@ -70,8 +67,6 @@ export function requirePlan(requiredPlan) {
 }
 
 export const requirePro = requirePlan("pro");
-export const requireTeam = requirePlan("team");
-export const requireBasic = requirePlan("basic");
 
 export async function attachUserPlan(req, res, next) {
   if (req.user?.id) {
@@ -86,16 +81,9 @@ export function isPro(req) {
   return hasAccess(req.userPlan || "free", "pro");
 }
 
-export function isTeam(req) {
-  return hasAccess(req.userPlan || "free", "team");
-}
-
 export default {
   requirePlan,
   requirePro,
-  requireTeam,
-  requireBasic,
   attachUserPlan,
   isPro,
-  isTeam,
 };

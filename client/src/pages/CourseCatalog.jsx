@@ -293,11 +293,11 @@ export default function CourseCatalog() {
         <section className="text-center bg-muted/50 rounded-xl p-8">
           <h2 className="text-2xl font-bold text-foreground mb-4">Want More Courses?</h2>
           <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-            Premium members get access to all courses plus exclusive content and certificates.
+            Pro members get access to all courses plus exclusive content and certificates.
           </p>
           <Link href="/pricing">
             <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-upgrade">
-              View Premium Plans
+              View Pro Plan
             </Button>
           </Link>
         </section>

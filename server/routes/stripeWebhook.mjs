@@ -12,13 +12,11 @@ const stripe = process.env.STRIPE_SECRET_KEY
 
 function getPlanFromPriceId(priceId) {
   const planMap = {
-    [process.env.STRIPE_PRICE_BASIC]: "basic",
-    [process.env.STRIPE_PRICE_PREMIUM]: "premium",
     [process.env.STRIPE_PRICE_PRO]: "pro",
     [process.env.STRIPE_PRICE_PRO_MONTHLY]: "pro",
     [process.env.STRIPE_PRICE_PRO_YEARLY]: "pro",
   };
-  return planMap[priceId] || "basic";
+  return planMap[priceId] || "free";
 }
 
 async function isEventProcessed(eventId) {

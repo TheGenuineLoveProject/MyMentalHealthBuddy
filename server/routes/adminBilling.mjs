@@ -38,7 +38,7 @@ router.get('/overview', async (req, res) => {
       GROUP BY tier
     `);
     
-    const tierPrices = { pro: 1999, team: 4999, enterprise: 9999 }; // cents
+    const tierPrices = { pro: 1999 }; // cents
     let mrr = 0;
     mrrResult.rows?.forEach(row => {
       mrr += (tierPrices[row.tier] || 0) * parseInt(row.count || 0);
