@@ -85,7 +85,7 @@ router.post('/ask', async (req, res) => {
     });
   } catch (error) {
     logger.error("Perplexity ask error", { error: error?.message || error });
-    res.status(500).json({ error: error.message || 'Failed to get response from Perplexity' });
+    res.status(500).json({ error: 'Failed to get response from Perplexity' });
   }
 });
 
@@ -124,7 +124,7 @@ Important: This is educational content only - not medical advice. Always encoura
     });
   } catch (error) {
     logger.error("Perplexity research error", { error: error?.message || error });
-    res.status(500).json({ error: error.message || 'Failed to research topic' });
+    res.status(500).json({ error: 'Failed to research topic' });
   }
 });
 
@@ -136,7 +136,8 @@ router.get('/health', async (_req, res) => {
     }
     res.json({ status: 'available' });
   } catch (error) {
-    res.status(503).json({ status: 'error', error: error.message });
+    logger.error("Perplexity health check error", { error: error?.message || error });
+    res.status(503).json({ status: 'error', error: 'Health check failed' });
   }
 });
 
