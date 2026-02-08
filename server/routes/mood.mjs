@@ -9,6 +9,7 @@ import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth } from "../middleware/auth.mjs";
 import { createMoodSchema, updateMoodSchema, validateBody } from "../validation/schemas.mjs";
 import { logger } from "../utils/logger.mjs";
+import { increment } from "../utils/metrics.mjs";
 
 const router = express.Router();
 
@@ -60,6 +61,7 @@ router.post("/", validateBody(createMoodSchema), async (req, res) => {
       })
       .returning();
 
+    increment("mood_log_created", { plan: "unknown" });
     return success(res, row, "Mood entry created.");
   } catch (err) {
     logger.error("Failed to create mood entry", { error: err.message, requestId: req.requestId });

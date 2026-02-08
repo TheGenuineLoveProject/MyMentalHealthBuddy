@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { db } from "../db/client.mjs";
 import { anonymousReflections } from "../../shared/schema.mjs";
+import { increment } from "../utils/metrics.mjs";
 
 const router = Router();
 
@@ -64,6 +65,7 @@ router.post("/", requireAuth, async (req, res) => {
   };
 
   journalStore.set(id, entry);
+  increment("journal_entry_created", { plan: "unknown" });
 
   // If user wants to share with community, create an anonymous reflection
   if (shareWithCommunity) {

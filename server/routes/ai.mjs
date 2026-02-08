@@ -5,6 +5,7 @@ import { authGuard } from "../middleware/auth.mjs";
 import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
 import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../utils/safetyCheck.mjs";
+import { increment } from "../utils/metrics.mjs";
 
 const router = Router();
 
@@ -79,6 +80,7 @@ router.post("/chat", authGuard, async (req, res) => {
       `);
       const todayCount = parseInt(countResult.rows?.[0]?.count || "0", 10);
       if (todayCount >= FREE_DAILY_SESSION_LIMIT) {
+        increment("ai_chat_limit_hit", { plan: "free" });
         return res.status(429).json({
           error: "Daily session limit reached",
           limit: FREE_DAILY_SESSION_LIMIT,
@@ -150,6 +152,8 @@ router.post("/chat", authGuard, async (req, res) => {
       VALUES (${responseId}, ${userId}, 'assistant', ${aiResponse}, NOW())
     `);
 
+    increment("ai_chat_message_count", { plan: subStatus });
+    if (subStatus === "pro") increment("pro_user_action", { plan: "pro" });
     res.json({ reply: aiResponse, messageId: responseId });
   } catch (err) {
     logger.error("AI chat error", { error: err.message, userId: req.user?.id });

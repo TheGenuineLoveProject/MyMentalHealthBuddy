@@ -102,6 +102,7 @@ import adminSecurityRouter from "./routes/admin-security.mjs";
 import objectStorageRouter from "./routes/object-storage.mjs";
 import reflectionRouter from "./routes/reflection.mjs";
 import deploymentReadinessRouter from "./routes/deploymentReadiness.mjs";
+import metricsSummaryRouter from "./routes/metricsSummary.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -258,6 +259,7 @@ async function startServer() {
   app.use("/api/email", emailRouter);
   app.use("/api/admin/security", adminSecurityRouter);
   app.use("/api/uploads", objectStorageRouter);
+  app.use("/api/metrics", metricsSummaryRouter);
 
   const SERVER_START_TIME = Date.now();
 

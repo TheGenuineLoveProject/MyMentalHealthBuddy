@@ -128,3 +128,64 @@ These can be implemented via:
 
 ## Phase 12 Status: COMPLETE
 No code modified. Existing observability documented. Recommendations for alerting provided.
+
+---
+
+## Feature Usage Observability Layer (Added Feb 2026)
+
+### Purpose
+
+Passive, server-side-only feature usage counters that answer four questions:
+
+1. Which core features are used (counts only, no content)
+2. How often free users hit natural daily limits
+3. How often Pro users use unlimited access
+4. Whether any errors or slowdowns occur over time
+
+### What Is Tracked
+
+| Metric Name              | Description                                           | Tags   |
+|--------------------------|-------------------------------------------------------|--------|
+| `ai_chat_message_count`  | Number of AI chat messages sent (successful only)     | plan   |
+| `ai_chat_limit_hit`      | Free user reached the 5/day session cap               | plan   |
+| `journal_entry_created`  | A journal entry was successfully saved                | plan   |
+| `mood_log_created`       | A mood log was successfully saved                     | plan   |
+| `pro_user_action`        | A Pro subscriber used a gated feature                 | plan   |
+
+All counters are in-memory, aggregated, and reset on server restart.
+
+### What Is Explicitly NOT Tracked
+
+- No message content, journal text, or mood descriptions
+- No usernames, emails, or personally identifiable information
+- No IP addresses, device fingerprints, or session tokens
+- No browsing history, page views, or click patterns
+- No third-party analytics, pixels, or tracking scripts
+- No per-user breakdowns in the summary endpoint
+- No frontend JavaScript instrumentation of any kind
+
+### Endpoint
+
+`GET /api/metrics/summary` returns aggregate counts grouped by metric name and plan tier.
+
+### Architecture
+
+- `server/utils/metrics.mjs` — In-memory counter store with `increment()` and `getSummary()`
+- `server/routes/metricsSummary.mjs` — Read-only endpoint
+- Instrumentation added to: `ai.mjs`, `journal.mjs`, `mood.mjs`
+
+### Guardrails
+
+- All `increment()` calls are wrapped in try/catch and will never throw
+- If the metrics module fails to load, routes continue to function normally
+- No database writes, no external service calls, no network dependencies
+- Metrics are fire-and-forget: they never block or slow down user requests
+
+### Ethical Rationale
+
+1. **Minimal collection**: Only aggregate feature usage counts
+2. **No surveillance**: No user-level tracking, profiling, or behavioral analysis
+3. **No manipulation**: Data informs product health, never used for dark patterns
+4. **Transparent**: This document fully describes everything that is collected
+5. **Reversible**: Remove the `increment()` calls and the layer disappears completely
+6. **No frontend impact**: Zero additional API calls, scripts, or UI elements added

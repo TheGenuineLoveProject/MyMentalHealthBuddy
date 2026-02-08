@@ -102,6 +102,7 @@ import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import contentRouter from "./routes/content.mjs";
 import adminBillingRouter from "./routes/adminBilling.mjs";
 import deploymentReadinessRouter from "./routes/deploymentReadiness.mjs";
+import metricsSummaryRouter from "./routes/metricsSummary.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -262,6 +263,7 @@ app.use('/api/therapy', therapyRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/webhook', webhookRouter);
 app.use('/api/deployment-readiness', deploymentReadinessRouter);
+app.use('/api/metrics', metricsSummaryRouter);
 app.use('/api/insights', insightsRouter);
 app.use('/api/states', statesRouter);
 app.use('/api/prompts', promptsRouter);
