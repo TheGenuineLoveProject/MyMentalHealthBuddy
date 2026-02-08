@@ -2,33 +2,18 @@ import { Link } from "wouter";
 import { Lock, Sparkles, ArrowRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
-const PLAN_BENEFITS = {
-  plus: {
-    label: "Plus",
-    tagline: "Go deeper without pressure",
-    includes: ["Full prompt library", "Card packs", "Gentle challenges"]
-  },
-  pro: {
-    label: "Premium",
-    tagline: "Build lasting change",
-    includes: ["Identity pathways", "Audio reflections", "Creator tools"]
-  }
-};
-
 export default function PlanGate({ 
-  requiredPlan = "plus",
+  requiredPlan = "pro",
   feature = "this feature",
   children,
   fallback = null,
   showTeaser = true,
   className = ""
 }) {
-  const { user, isPro, isPlus } = useAuth();
+  const { user, isPro } = useAuth();
   
   const hasAccess = 
-    requiredPlan === "free" ||
-    (requiredPlan === "plus" && (isPlus || isPro)) ||
-    (requiredPlan === "pro" && isPro);
+    requiredPlan === "free" || isPro;
 
   if (hasAccess) {
     return children;
@@ -42,9 +27,6 @@ export default function PlanGate({
     return null;
   }
 
-  const planInfo = PLAN_BENEFITS[requiredPlan] || PLAN_BENEFITS.plus;
-  const planName = planInfo.label;
-  
   return (
     <div 
       className={`relative ${className}`}
@@ -63,23 +45,23 @@ export default function PlanGate({
           </div>
           
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-            {user ? `Upgrade to ${planName}` : "Sign up to unlock"}
+            {user ? "Upgrade to Pro" : "Sign up to unlock"}
           </h3>
           
           <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-            {feature} is available with {planName}. 
+            {feature} is available with Pro. 
             No pressure—explore at your pace.
           </p>
           
           <div className="space-y-2">
             {user ? (
               <Link
-                href="/pricing"
+                href="/upgrade"
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[var(--glp-sage)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity"
                 data-testid="link-upgrade"
               >
                 <Sparkles className="w-4 h-4" />
-                See {planName} benefits
+                See Pro benefits
                 <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (

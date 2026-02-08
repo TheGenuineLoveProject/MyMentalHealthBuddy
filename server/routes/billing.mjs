@@ -15,9 +15,8 @@ if (STRIPE_SECRET_KEY) {
 }
 
 const PLANS = {
-  free: { name: "Free", priceId: null, features: ["mood_tracking", "journaling", "basic_tools"] },
-  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, features: ["ai_therapy", "advanced_tools", "analytics", "healing_journeys"] },
-  team: { name: "Team", priceId: process.env.STRIPE_PRICE_TEAM, features: ["all_pro", "team_dashboard", "admin_controls", "priority_support"] },
+  free: { name: "Free", priceId: null, features: ["mood_tracking", "journaling", "daily_reflection", "community_wall", "crisis_support", "daily_wisdom"] },
+  pro: { name: "Pro", priceId: process.env.STRIPE_PRICE_PRO, features: ["unlimited_ai_chat", "advanced_insights", "healing_journeys", "content_studio", "progress_analytics", "priority_support"] },
 };
 
 const PRO_INTERVAL_PRICES = {
@@ -168,8 +167,7 @@ router.get("/current-plan", async (req, res) => {
       plan,
       name: planConfig.name,
       features: planConfig.features,
-      canAccessPro: ["pro", "team", "enterprise"].includes(plan),
-      canAccessTeam: ["team", "enterprise"].includes(plan),
+      canAccessPro: plan === "pro",
     });
   } catch (err) {
     logger.error("Current plan error", { error: err.message });

@@ -13,49 +13,32 @@ const PLANS = [
     price: 0,
     description: "Start your wellness journey",
     features: [
-      "Basic mood tracking",
-      "5 AI chat sessions/month",
-      "Access to core tools",
-      "Community check-ins",
-      "Crisis resources"
+      "Mood tracking & journaling",
+      "5 AI chat sessions per day",
+      "Daily reflection prompts",
+      "Community affirmation wall",
+      "Crisis support resources",
+      "Daily wisdom & insights"
     ],
     cta: "Get Started",
     popular: false
   },
   {
-    id: "premium",
-    name: "Premium",
-    price: 19.99,
-    description: "Full access to transform your life",
+    id: "pro",
+    name: "Pro",
+    price: 19,
+    description: "Unlock your full wellness potential",
     features: [
       "Everything in Free",
       "Unlimited AI chat sessions",
-      "All wellness tools unlocked",
-      "Personal growth pathways",
+      "Advanced emotional insights",
+      "Guided healing journeys",
+      "Content studio access",
       "Progress analytics",
-      "Priority support",
-      "Downloadable journals",
-      "Custom calm plans"
+      "Priority support"
     ],
-    cta: "Start Free Trial",
+    cta: "Upgrade to Pro",
     popular: true
-  },
-  {
-    id: "lifetime",
-    name: "Lifetime",
-    price: 299,
-    description: "One-time payment, forever access",
-    features: [
-      "Everything in Premium",
-      "Lifetime updates",
-      "Early access to new features",
-      "Exclusive content library",
-      "Personal onboarding call",
-      "Legacy pricing locked"
-    ],
-    cta: "Get Lifetime Access",
-    popular: false,
-    oneTime: true
   }
 ];
 
@@ -104,7 +87,7 @@ export default function PricingPage() {
           </p>
         </header>
 
-        <div className="grid gap-8 md:grid-cols-3 mb-20">
+        <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto mb-20">
           {PLANS.map(plan => (
             <Card 
               key={plan.id}
@@ -122,12 +105,9 @@ export default function PricingPage() {
               </CardHeader>
               <CardContent className="text-center">
                 <div className="mb-6">
-                  <span className="text-4xl font-bold">${plan.price}</span>
-                  {plan.price > 0 && !plan.oneTime && (
+                  <span className="text-4xl font-bold">{plan.price === 0 ? "Free" : `$${plan.price}`}</span>
+                  {plan.price > 0 && (
                     <span className="text-muted-foreground">/month</span>
-                  )}
-                  {plan.oneTime && (
-                    <span className="text-muted-foreground"> one-time</span>
                   )}
                 </div>
 
@@ -140,7 +120,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <Link href={plan.id === "free" ? "/register" : `/upgrade?plan=${plan.id}`}>
+                <Link href={plan.id === "free" ? "/register" : "/upgrade"}>
                   <Button 
                     className="w-full min-h-[48px] px-6 py-3 text-base font-semibold rounded-lg" 
                     variant={plan.popular ? "default" : "outline"}

@@ -1,6 +1,6 @@
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "wouter";
-import { Check, Star, Zap, Crown, ArrowLeft } from "lucide-react";
+import { Check, Star, Crown, ArrowLeft } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { TrustSignals, BeforeAfter } from "../components/benefits";
@@ -15,49 +15,34 @@ const tiers = [
     period: "forever",
     description: "Begin your healing journey with foundational tools—no credit card required",
     features: [
-      "Daily mood & energy tracking",
-      "Basic guided journaling",
-      "Breathing & grounding exercises",
+      "Mood tracking & journaling",
+      "5 AI chat sessions per day",
+      "Daily reflection prompts",
+      "Community affirmation wall",
       "Crisis support resources",
-      "Daily affirmations & insights"
+      "Daily wisdom & insights"
     ],
     planId: null,
     icon: Star,
     popular: false,
   },
   {
-    name: "Plus",
-    price: "$9",
-    period: "/month",
-    description: "Unlock your AI companion and personalized healing insights",
-    features: [
-      "Everything in Free",
-      "Unlimited AI companion chat",
-      "Personalized weekly reflections",
-      "Export journal to PDF",
-      "Guided wellness programs",
-      "Advanced emotion tracking"
-    ],
-    planId: "plus",
-    icon: Zap,
-    popular: true,
-  },
-  {
     name: "Pro",
     price: "$19",
     period: "/month",
-    description: "Complete access to our entire healing ecosystem",
+    description: "Unlock your full wellness potential with unlimited access",
     features: [
-      "Everything in Plus",
-      "100+ premium wellness tools",
-      "Voice journaling with AI insights",
-      "Trauma-informed programs",
-      "Priority 24/7 support",
-      "Personalized wellness pathways"
+      "Everything in Free",
+      "Unlimited AI chat sessions",
+      "Advanced emotional insights",
+      "Guided healing journeys",
+      "Content studio access",
+      "Progress analytics",
+      "Priority support"
     ],
     planId: "pro",
     icon: Crown,
-    popular: false,
+    popular: true,
   },
 ];
 
@@ -123,7 +108,7 @@ export default function Pricing() {
     <div className="min-h-screen overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 50%, var(--glp-paper) 100%)' }}>
       <SEO 
         title="Pricing - The Genuine Love Project"
-        description="Choose your plan and start your wellness journey. Free, Plus, and Pro options available."
+        description="Choose your plan and start your wellness journey. Free and Pro options available."
       />
       
       <div className="absolute -top-48 -right-48 w-[600px] h-[600px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
@@ -152,7 +137,7 @@ export default function Pricing() {
             </p>
           </div>
           
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2 max-w-3xl mx-auto">
             {tiers.map((tier, index) => {
               const Icon = tier.icon;
               return (
