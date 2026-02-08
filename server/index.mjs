@@ -8,6 +8,7 @@ import passport from "passport";
 import { fileURLToPath } from "url";
 import { dirname, join } from 'path';
 import process from "node:process";
+import { setupAuth, registerAuthRoutes } from "./replit_integrations/auth/index.mjs";
 import authRouter from './routes/auth.mjs';
 import githubAuthRouter from './routes/github-auth.mjs';
 import adminRouter from './routes/admin.mjs';
@@ -163,6 +164,8 @@ console.log(`Environment validation complete. Mode: ${isProduction ? 'PRODUCTION
 
 const app = express();
 
+async function startProductionServer() {
+
 app.set('trust proxy', 1);
 
 // Request tracking middleware (first in chain)
@@ -199,7 +202,10 @@ app.use(compression());
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(passport.initialize());
+
+// Replit Auth (session + OIDC) — must be before routes
+await setupAuth(app);
+registerAuthRoutes(app);
 
 const corsOrigins = isProduction
   ? [...allowedDomains, /\.replit\.dev$/, /\.replit\.com$/]
@@ -377,8 +383,8 @@ const server = app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server listening on http://0.0.0.0:${PORT}`);
 });
 
-function _gracefulShutdown(signal) {
-  console.log(`${signal} received, shutting down gracefully...`);
+process.on("SIGTERM", () => {
+  console.log("SIGTERM received, shutting down gracefully...");
   server.close(() => {
     console.log("Server closed.");
     process.exit(0);
@@ -387,9 +393,16 @@ function _gracefulShutdown(signal) {
     console.error("Forced shutdown after timeout.");
     process.exit(1);
   }, 10000);
-}
+});
 
 process.on("SIGINT", () => {
   console.log("[shutdown] SIGINT received");
   process.exit(0);
+});
+
+} // end startProductionServer
+
+startProductionServer().catch(err => {
+  console.error("Failed to start production server:", err);
+  process.exit(1);
 });
