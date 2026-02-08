@@ -35,9 +35,9 @@ export default function RouteGuard({ children }) {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated()) {
-      setLocation("/login");
+      window.location.href = "/api/login";
     }
-  }, [isLoading, isAuthenticated, setLocation]);
+  }, [isLoading, isAuthenticated]);
 
   if (isLoading) {
     return (

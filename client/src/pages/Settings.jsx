@@ -141,7 +141,6 @@ export default function Settings() {
 
   function handleLogout() {
     logout();
-    setLocation("/login");
   }
 
   function handleDeleteAccount() {

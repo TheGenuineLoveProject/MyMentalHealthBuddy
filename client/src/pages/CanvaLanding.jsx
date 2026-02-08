@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext.jsx";
 import { Link, useLocation } from "wouter";
 import { Heart, Lightbulb, Users, Zap, Smile, BarChart3, BookOpen, Shield, Star, ChevronDown, Menu, X, ArrowRight, ArrowUp, Lock, Clock, Sparkles, PenLine, MessageCircle, TrendingUp, Leaf, Sun, Moon, Flower2, Brain, Eye, KeyRound, Settings } from "lucide-react";
 import "../styles/canva-landing.css";
@@ -13,6 +14,14 @@ export default function CanvaLanding() {
   const [activeFaq, setActiveFaq] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [, setLocation] = useLocation();
+  
+  const { isAuthenticated, isLoading } = useAuth();
+  
+  useEffect(() => {
+    if (!isLoading && isAuthenticated()) {
+      setLocation("/dashboard");
+    }
+  }, [isLoading, isAuthenticated, setLocation]);
   
   // Admin login state
   const [showAdminLogin, setShowAdminLogin] = useState(false);

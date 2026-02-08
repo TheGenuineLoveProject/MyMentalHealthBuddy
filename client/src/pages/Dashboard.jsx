@@ -36,7 +36,6 @@ export default function Dashboard() {
 
   function handleLogout() {
     logout();
-    setLocation("/login");
   }
 
   function getGreeting() {
