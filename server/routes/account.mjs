@@ -395,6 +395,243 @@ router.post('/delete-request', requireAuth, sensitiveRateLimit, async (req, res)
   }
 });
 
+router.get("/security", requireAuth, async (req, res) => {
+  try {
+    const userRows = await db
+      .select({
+        mfaEnabled: users.mfaEnabled,
+        createdAt: users.createdAt,
+        passwordHash: users.passwordHash,
+      })
+      .from(users)
+      .where(eq(users.id, req.user.id))
+      .limit(1);
+
+    if (userRows.length === 0) {
+      return badRequest(res, "User not found");
+    }
+
+    const user = userRows[0];
+    return res.json({
+      twoFactorEnabled: user.mfaEnabled || false,
+      hasPassword: !!user.passwordHash,
+      accountCreated: user.createdAt,
+    });
+  } catch (error) {
+    logger.error("Security status failed", { error: error.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
+});
+
+const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, "Current password required"),
+  newPassword: z.string().min(8, "New password must be at least 8 characters"),
+});
+
+router.post("/password", requireAuth, sensitiveRateLimit, async (req, res) => {
+  try {
+    const parsed = changePasswordSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return badRequest(res, parsed.error.errors[0].message);
+    }
+
+    const { currentPassword, newPassword } = parsed.data;
+
+    const userRows = await db
+      .select({ passwordHash: users.passwordHash })
+      .from(users)
+      .where(eq(users.id, req.user.id))
+      .limit(1);
+
+    if (userRows.length === 0) {
+      return badRequest(res, "User not found");
+    }
+
+    const user = userRows[0];
+
+    if (!user.passwordHash) {
+      return badRequest(res, "Account uses external authentication. Password change is not available.");
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!isMatch) {
+      return badRequest(res, "Current password is incorrect");
+    }
+
+    const newHash = await bcrypt.hash(newPassword, 10);
+    await db
+      .update(users)
+      .set({ passwordHash: newHash, updatedAt: new Date() })
+      .where(eq(users.id, req.user.id));
+
+    await logAuditEvent({
+      userId: req.user.id,
+      action: AuditActions.PASSWORD_CHANGE || "PASSWORD_CHANGE",
+      req,
+    });
+
+    return success(res, null, "Password updated successfully");
+  } catch (error) {
+    logger.error("Password change failed", { error: error.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
+});
+
+router.post("/2fa/setup", requireAuth, sensitiveRateLimit, async (req, res) => {
+  try {
+    const { authenticator } = await import("otplib");
+    const QRCode = await import("qrcode");
+
+    const userRows = await db
+      .select({ email: users.email, mfaEnabled: users.mfaEnabled })
+      .from(users)
+      .where(eq(users.id, req.user.id))
+      .limit(1);
+
+    if (userRows.length === 0) return badRequest(res, "User not found");
+    if (userRows[0].mfaEnabled) return badRequest(res, "2FA is already enabled");
+
+    const secret = authenticator.generateSecret();
+    const otpauth = authenticator.keyuri(
+      userRows[0].email || req.user.id,
+      "Genuine Love Project",
+      secret
+    );
+
+    const qrCodeDataUrl = await QRCode.toDataURL(otpauth);
+
+    const codes = Array.from({ length: 6 }, () =>
+      crypto.randomBytes(4).toString("hex").toUpperCase().match(/.{4}/g).join("-")
+    );
+
+    const storedSecret = encryptMfaSecret(secret);
+
+    await db
+      .update(users)
+      .set({ mfaSecret: storedSecret, mfaBackupCodes: JSON.stringify(codes) })
+      .where(eq(users.id, req.user.id));
+
+    return res.json({
+      qrCode: qrCodeDataUrl,
+      backupCodes: codes,
+    });
+  } catch (error) {
+    logger.error("2FA setup failed", { error: error.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
+});
+
+router.post("/2fa/verify", requireAuth, sensitiveRateLimit, async (req, res) => {
+  try {
+    const { authenticator } = await import("otplib");
+    const { code } = req.body;
+
+    if (!code || typeof code !== "string" || code.length !== 6) {
+      return badRequest(res, "A 6-digit verification code is required");
+    }
+
+    const userRows = await db
+      .select({ mfaSecret: users.mfaSecret, mfaEnabled: users.mfaEnabled })
+      .from(users)
+      .where(eq(users.id, req.user.id))
+      .limit(1);
+
+    if (userRows.length === 0) return badRequest(res, "User not found");
+    if (!userRows[0].mfaSecret) return badRequest(res, "2FA setup not started. Please start setup first.");
+    if (userRows[0].mfaEnabled) return badRequest(res, "2FA is already enabled");
+
+    const decryptedSecret = decryptMfaSecret(userRows[0].mfaSecret);
+    const isValid = authenticator.verify({ token: code, secret: decryptedSecret });
+    if (!isValid) {
+      return badRequest(res, "Invalid verification code. Please check your authenticator app and try again.");
+    }
+
+    await db
+      .update(users)
+      .set({ mfaEnabled: true, updatedAt: new Date() })
+      .where(eq(users.id, req.user.id));
+
+    await logAuditEvent({
+      userId: req.user.id,
+      action: AuditActions.MFA_ENABLE || "MFA_ENABLE",
+      req,
+    });
+
+    return success(res, null, "Two-factor authentication enabled successfully");
+  } catch (error) {
+    logger.error("2FA verify failed", { error: error.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
+});
+
+router.post("/2fa/disable", requireAuth, sensitiveRateLimit, async (req, res) => {
+  try {
+    const userRows = await db
+      .select({ mfaEnabled: users.mfaEnabled })
+      .from(users)
+      .where(eq(users.id, req.user.id))
+      .limit(1);
+
+    if (userRows.length === 0) return badRequest(res, "User not found");
+    if (!userRows[0].mfaEnabled) return badRequest(res, "2FA is not currently enabled");
+
+    await db
+      .update(users)
+      .set({
+        mfaEnabled: false,
+        mfaSecret: null,
+        mfaBackupCodes: null,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, req.user.id));
+
+    await logAuditEvent({
+      userId: req.user.id,
+      action: AuditActions.MFA_DISABLE || "MFA_DISABLE",
+      req,
+    });
+
+    return success(res, null, "Two-factor authentication disabled");
+  } catch (error) {
+    logger.error("2FA disable failed", { error: error.message, requestId: req.requestId });
+    return res.status(500).json({ ok: false, message: "Server error" });
+  }
+});
+
+function getMfaEncryptionKey() {
+  const secret = process.env.SESSION_SECRET;
+  if (!secret) {
+    throw new Error("SESSION_SECRET is required for MFA encryption");
+  }
+  return crypto.createHash("sha256").update(secret).digest();
+}
+
+function encryptMfaSecret(plainSecret) {
+  const key = getMfaEncryptionKey();
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  let encrypted = cipher.update(plainSecret, "utf8", "hex");
+  encrypted += cipher.final("hex");
+  const authTag = cipher.getAuthTag().toString("hex");
+  return iv.toString("hex") + ":" + authTag + ":" + encrypted;
+}
+
+function decryptMfaSecret(storedSecret) {
+  const parts = storedSecret.split(":");
+  if (parts.length !== 3) {
+    throw new Error("Invalid MFA secret format");
+  }
+  const [ivHex, authTagHex, encrypted] = parts;
+  const key = getMfaEncryptionKey();
+  const iv = Buffer.from(ivHex, "hex");
+  const authTag = Buffer.from(authTagHex, "hex");
+  const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
+  decipher.setAuthTag(authTag);
+  let decrypted = decipher.update(encrypted, "hex", "utf8");
+  decrypted += decipher.final("utf8");
+  return decrypted;
+}
+
 function parseDeviceName(userAgent) {
   if (!userAgent) return 'Unknown Device';
   if (/iPhone/i.test(userAgent)) return 'iPhone';

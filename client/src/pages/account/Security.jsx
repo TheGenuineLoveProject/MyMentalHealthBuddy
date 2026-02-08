@@ -42,15 +42,15 @@ export default function Security() {
   
   const twoFactorEnabled = securityData?.twoFactorEnabled || false;
   
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
+
   const setup2FAMutation = useMutation({
     mutationFn: async () => {
       return apiRequest("/api/account/2fa/setup", { method: "POST" });
     },
     onSuccess: (data) => {
-      setBackupCodes(data.backupCodes || [
-        "XXXX-XXXX-XXXX", "YYYY-YYYY-YYYY", "ZZZZ-ZZZZ-ZZZZ",
-        "AAAA-AAAA-AAAA", "BBBB-BBBB-BBBB", "CCCC-CCCC-CCCC"
-      ]);
+      setBackupCodes(data.backupCodes || []);
+      setQrCodeUrl(data.qrCode || "");
       setTwoFAStep(2);
     },
     onError: (error) => {
@@ -409,20 +409,22 @@ export default function Security() {
                   {twoFAStep === 2 && (
                     <div className="space-y-4">
                       <div className="flex justify-center">
-                        <div className="w-48 h-48 bg-white p-4 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
-                          <div className="text-center">
-                            <QrCode className="w-24 h-24 mx-auto text-gray-800" />
-                            <p className="text-xs text-muted-foreground mt-2">Scan with authenticator app</p>
+                        {qrCodeUrl ? (
+                          <img 
+                            src={qrCodeUrl} 
+                            alt="Scan this QR code with your authenticator app" 
+                            className="w-48 h-48 rounded-lg border"
+                            data-testid="img-2fa-qr"
+                          />
+                        ) : (
+                          <div className="w-48 h-48 bg-white p-4 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
+                            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
                           </div>
-                        </div>
+                        )}
                       </div>
                       <p className="text-sm text-center text-muted-foreground">
                         Scan this QR code with Google Authenticator, Authy, or another TOTP app.
                       </p>
-                      <div className="bg-muted p-3 rounded-lg">
-                        <p className="text-xs text-muted-foreground mb-1">Manual entry key:</p>
-                        <code className="text-sm font-mono">GLPS-2FA9-XXXX-YYYY</code>
-                      </div>
                       <Button className="w-full" onClick={() => setTwoFAStep(3)}>
                         Continue
                       </Button>

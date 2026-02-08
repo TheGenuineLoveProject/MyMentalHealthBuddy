@@ -34,7 +34,7 @@ export default function Settings() {
   useEffect(() => {
     const fetchSettings = async () => {
       try {
-        const res = await fetch("/api/user-settings", { credentials: "include" });
+        const res = await fetch("/api/user/settings", { credentials: "include" });
         if (res.ok) {
           const data = await res.json();
           if (data.preferences?.theme) setTheme(data.preferences.theme);
@@ -57,7 +57,7 @@ export default function Settings() {
   }, []);
 
   const settingsMutation = useMutation({
-    mutationFn: (data) => apiRequest("PATCH", "/api/user-settings", data),
+    mutationFn: (data) => apiRequest("PATCH", "/api/user/settings", data),
     onSuccess: () => {
       toast({ title: "Settings saved", description: "Your preferences have been updated." });
     },
