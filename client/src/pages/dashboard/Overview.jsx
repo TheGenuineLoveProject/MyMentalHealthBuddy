@@ -313,7 +313,7 @@ export default function DashboardOverview() {
               </button>
             </div>
           </div>
-          <p className={styles.leadText}>Track your journey, celebrate your progress, and nurture your growth.</p>
+          <p className={styles.leadText}>A quiet place to check in with yourself, use your tools, and notice your progress.</p>
         </header>
 
         <div className={styles.statsGrid}>
@@ -330,7 +330,7 @@ export default function DashboardOverview() {
             </div>
             <div className={styles.activityList}>
               {recentActivity.length === 0 ? (
-                <p className={styles.emptyText} data-testid="text-no-activity">No activity yet. Start journaling, tracking your mood, or chatting with your AI companion to see your progress here.</p>
+                <p className={styles.emptyText} data-testid="text-no-activity">Nothing here yet — and that's okay. Whenever you're ready, your journal and mood tracker are good places to start.</p>
               ) : recentActivity.slice(0, 4).map((activity, i) => (
                 <ActivityItem key={i} activity={activity} />
               ))}
@@ -365,7 +365,7 @@ export default function DashboardOverview() {
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <Compass className={styles.cardHeaderIcon} />
-              <h2 className={styles.cardTitle}>Quick Actions</h2>
+              <h2 className={styles.cardTitle}>Your Tools</h2>
             </div>
             <div className={styles.quickActionsGrid}>
               {QUICK_ACTIONS.map((action, i) => (
@@ -377,7 +377,7 @@ export default function DashboardOverview() {
           <div className={styles.card}>
             <div className={styles.cardHeader}>
               <Sparkles className={styles.cardHeaderIcon} />
-              <h2 className={styles.cardTitle}>Wellness Insights</h2>
+              <h2 className={styles.cardTitle}>Gentle Reminders</h2>
             </div>
             <div className={styles.insightsList}>
               {WELLNESS_INSIGHTS.map((insight, i) => (

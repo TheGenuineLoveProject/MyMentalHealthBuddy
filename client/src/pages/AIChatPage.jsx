@@ -266,13 +266,16 @@ export default function AIChatPage() {
           <div className="px-4 py-5 bg-gradient-to-r from-[var(--glp-sage-5)] to-[var(--glp-gold-10)] border-t border-[var(--glp-sage-15)]" data-testid="banner-session-limit">
             <div className="max-w-lg mx-auto text-center space-y-3">
               <div className="w-10 h-10 mx-auto rounded-full bg-[var(--glp-gold-30)] flex items-center justify-center">
-                <Lock className="w-5 h-5 text-[var(--glp-gold)]" />
+                <Heart className="w-5 h-5 text-[var(--glp-gold)]" />
               </div>
               <h3 className="text-base font-semibold text-[var(--glp-sage-deep)]">
-                You've used your {dailyLimit} free sessions today
+                You've reached today's {dailyLimit} sessions — nothing went wrong
               </h3>
               <p className="text-sm text-[var(--glp-ink-60)]">
-                Your sessions reset tomorrow. Want unlimited access to your AI companion?
+                This is just a natural daily pause. Your sessions reset automatically tomorrow — no action needed on your part.
+              </p>
+              <p className="text-sm text-[var(--glp-ink-60)]">
+                Journaling, mood tracking, daily reflection, and crisis support are always available to you, free of charge.
               </p>
               <Link
                 href="/account/billing"
@@ -281,10 +284,10 @@ export default function AIChatPage() {
                 data-testid="link-upgrade-chat"
               >
                 <Sparkles className="w-4 h-4" />
-                Explore Pro — unlimited sessions
+                If you'd like unlimited sessions, explore Pro
               </Link>
               <p className="text-xs text-[var(--glp-ink-40)]">
-                Core tools like journaling, mood tracking, and reflection remain free always.
+                No obligation. You can continue using the free plan as long as you like.
               </p>
             </div>
           </div>
@@ -294,11 +297,7 @@ export default function AIChatPage() {
         {!isPro && !hasReachedLimit && sessionsRemaining !== null && sessionsRemaining <= 3 && (
           <div className="px-4 py-2 bg-[var(--glp-gold-10)] border-t border-[var(--glp-gold-20)] text-center" data-testid="banner-sessions-remaining">
             <p className="text-xs text-[var(--glp-ink-60)]">
-              {sessionsRemaining} {sessionsRemaining === 1 ? "session" : "sessions"} remaining today
-              <span className="mx-2">·</span>
-              <Link href="/account/billing" className="text-[var(--glp-sage)] hover:underline font-medium" data-testid="link-upgrade-remaining">
-                Go Pro for unlimited
-              </Link>
+              {sessionsRemaining} {sessionsRemaining === 1 ? "session" : "sessions"} remaining today — they reset tomorrow automatically
             </p>
           </div>
         )}
@@ -313,7 +312,7 @@ export default function AIChatPage() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder={hasReachedLimit ? "Daily sessions used — resets tomorrow" : "Type your message..."}
+              placeholder={hasReachedLimit ? "Sessions reset tomorrow — your other tools are still here for you" : "Type your message..."}
               disabled={chatMutation.isPending || hasReachedLimit}
               className="input-lg flex-1"
               data-testid="input-message"

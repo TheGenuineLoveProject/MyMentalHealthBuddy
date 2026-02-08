@@ -226,7 +226,7 @@ export default function Billing() {
                   </div>
                   <div>
                     <h2 className="text-heading-lg text-teal">Free Plan</h2>
-                    <p className="text-body-sm text-[var(--sage-600)]">You're using the free tier</p>
+                    <p className="text-body-sm text-[var(--sage-600)]">Core tools are always free — no expiration, no pressure to change</p>
                   </div>
                 </div>
               </section>
@@ -234,7 +234,7 @@ export default function Billing() {
 
             <section data-testid="section-plans">
               <h2 className="text-heading-md text-teal mb-4">
-                {currentPlan === "free" ? "Upgrade Your Experience" : "Your Plan"}
+                {currentPlan === "free" ? "Compare Plans" : "Your Plan"}
               </h2>
 
               {currentPlan === "free" && (
@@ -440,8 +440,11 @@ export default function Billing() {
                 </div>
                 <h2 className="text-heading-md text-teal">Payment Security</h2>
               </div>
-              <p className="text-body-sm text-[var(--sage-600)] mb-4">
+              <p className="text-body-sm text-[var(--sage-600)] mb-2">
                 All payments are securely processed by Stripe. We never store your card details on our servers.
+              </p>
+              <p className="text-body-sm text-[var(--sage-600)] mb-4">
+                Pro subscriptions can be canceled anytime from this page — no hidden fees, no lock-in, no cancellation hoops. If you cancel, you keep access through the end of your paid period.
               </p>
               {currentPlan !== "free" && (
                 <Button 
