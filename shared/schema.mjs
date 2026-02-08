@@ -304,6 +304,8 @@ export const blogPosts = pgTable("blog_posts", {
   excerpt: text("excerpt"),
   authorId: uuid("author_id").notNull(),
   status: varchar("status", { length: 20 }).default("draft").notNull(), // draft, published
+  contentType: varchar("content_type", { length: 30 }).default("blog_post").notNull(), // blog_post, newsletter, reflection, essay, note
+  visibility: varchar("visibility", { length: 20 }).default("public").notNull(), // public, private, draft
   publishedAt: timestamp("published_at"),
   readingTimeMinutes: integer("reading_time_minutes").default(1),
   tags: text("tags"), // comma-separated tags
@@ -426,7 +428,7 @@ export const socialPosts = pgTable("social_posts", {
   mediaUrl: text("media_url"),
   scheduledAt: timestamp("scheduled_at"),
   publishedAt: timestamp("published_at"),
-  status: varchar("status", { length: 20 }).default("draft").notNull(), // draft, scheduled, published
+  status: varchar("status", { length: 20 }).default("idea").notNull(), // idea, drafted, approved, archived, published
   hashtags: text("hashtags"),
   authorId: uuid("author_id").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),

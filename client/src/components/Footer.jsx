@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Heart, Shield, ExternalLink, Instagram, Youtube } from "lucide-react";
+import { Heart, Shield, ExternalLink, Instagram, Youtube, BookOpen } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -31,6 +31,10 @@ export default function Footer() {
             </Link>
             <Link href="/wisdom" className="hover:text-[var(--glp-teal)] transition" data-testid="link-footer-wisdom">
               Wisdom
+            </Link>
+            <Link href="/blog" className="hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-blog">
+              <BookOpen className="w-4 h-4" aria-hidden="true" />
+              Blog
             </Link>
             <Link href="/crisis" className="hover:text-[var(--glp-teal)] transition flex items-center gap-1" data-testid="link-footer-crisis">
               <Shield className="w-4 h-4" aria-hidden="true" />

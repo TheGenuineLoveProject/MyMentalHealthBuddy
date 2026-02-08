@@ -2,20 +2,32 @@ import express from "express";
 import { randomUUID } from "crypto";
 import { db } from "../db/connection.mjs";
 import { socialPosts } from "../../shared/schema.mjs";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
+
+const VALID_STATUSES = ["idea", "drafted", "approved", "archived", "published"];
+const VALID_PLATFORMS = ["instagram", "twitter", "linkedin", "tiktok", "youtube", "facebook", "pinterest"];
 
 const router = express.Router();
 
 router.get("/", requireAuth, requireAdmin, async (req, res) => {
   try {
-    const posts = await db
-      .select()
-      .from(socialPosts)
-      .orderBy(desc(socialPosts.createdAt))
-      .limit(50);
+    const { status: filterStatus, platform: filterPlatform } = req.query;
+    const conditions = [];
+
+    if (filterStatus && VALID_STATUSES.includes(filterStatus)) {
+      conditions.push(eq(socialPosts.status, filterStatus));
+    }
+    if (filterPlatform && VALID_PLATFORMS.includes(filterPlatform)) {
+      conditions.push(eq(socialPosts.platform, filterPlatform));
+    }
+
+    const query = db.select().from(socialPosts);
+    const posts = conditions.length > 0
+      ? await query.where(and(...conditions)).orderBy(desc(socialPosts.createdAt)).limit(100)
+      : await query.orderBy(desc(socialPosts.createdAt)).limit(100);
     
     return success(res, posts);
   } catch (error) {
@@ -46,11 +58,17 @@ router.get("/:id", requireAuth, requireAdmin, async (req, res) => {
 
 router.post("/", requireAuth, requireAdmin, async (req, res) => {
   try {
-    const { title, content, platform, mediaUrl, scheduledAt, hashtags, status = "draft" } = req.body;
+    const { title, content, platform, mediaUrl, hashtags, status = "idea" } = req.body;
     
     if (!title || !content || !platform) {
       return badRequest(res, "Title, content, and platform are required");
     }
+
+    if (!VALID_PLATFORMS.includes(platform)) {
+      return badRequest(res, `Platform must be one of: ${VALID_PLATFORMS.join(", ")}`);
+    }
+
+    const safeStatus = VALID_STATUSES.includes(status) ? status : "idea";
     
     const [newPost] = await db
       .insert(socialPosts)
@@ -59,9 +77,9 @@ router.post("/", requireAuth, requireAdmin, async (req, res) => {
         content,
         platform,
         mediaUrl: mediaUrl || null,
-        scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
+        scheduledAt: null,
         hashtags: hashtags || null,
-        status,
+        status: safeStatus,
         authorId: req.dbUserId || randomUUID(),
       })
       .returning();
@@ -85,7 +103,7 @@ router.patch("/:id", requireAuth, requireAdmin, async (req, res) => {
     if (mediaUrl !== undefined) updateData.mediaUrl = mediaUrl;
     if (scheduledAt !== undefined) updateData.scheduledAt = scheduledAt ? new Date(scheduledAt) : null;
     if (hashtags !== undefined) updateData.hashtags = hashtags;
-    if (status !== undefined) updateData.status = status;
+    if (status !== undefined && VALID_STATUSES.includes(status)) updateData.status = status;
     updateData.updatedAt = new Date();
     
     const [updatedPost] = await db

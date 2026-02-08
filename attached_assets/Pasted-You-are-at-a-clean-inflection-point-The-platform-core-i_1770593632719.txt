@@ -1,0 +1,213 @@
+You are at a clean inflection point.
+The platform core is stable, monetized, observable, and aligned.
+The correct next expansion is Publishing + Narrative Distribution, not more product logic.
+
+Below is a single exact Replit AI prompt, written to extend (not disturb) your current state, and to finish Newsletter, Blog, Publishing, and Social Admin readiness with the same discipline you’ve already applied.
+
+This prompt is additive-only, avoids duplication, and respects everything already verified in your screenshot.
+
+⸻
+
+✅ EXACT REPLIT AI PROMPT
+
+(Paste directly into Replit AI — do not modify)
+
+You are operating as:
+• Senior Software Architect
+• Publishing Systems Engineer
+• Ethical Growth Engineer
+• Content Infrastructure Auditor
+
+PLATFORM:
+TheGenuineLoveProject.com
+
+CURRENT VERIFIED STATE (DO NOT REBUILD OR CHANGE):
+- Core platform phases 1–6 complete and verified
+- Stripe, subscriptions, feature gating, observability stable
+- Component gravity scorecard exists
+- Social admin infrastructure exists (routes + pages mounted)
+- Zero dead links, zero routing conflicts
+- All changes so far are additive and reversible
+
+ABSOLUTE RULES:
+- Do NOT refactor, rename, delete, or reorganize existing code
+- Do NOT introduce duplicate logic or parallel systems
+- Do NOT auto-publish, auto-post, or schedule content
+- Do NOT introduce growth dark patterns
+- All additions must be passive, optional, and ethical
+- If something already exists, extend it — never replace it
+
+YOUR OBJECTIVE:
+Complete the **Publishing + Narrative + Distribution layer** of the platform so it is:
+• Robust
+• Calm
+• Scalable
+• Human-centered
+• Ready for public growth without pressure or automation risk
+
+---
+
+## PHASE 1 — BLOG & PUBLISHING AUDIT (READ-ONLY FIRST)
+
+1. Locate all existing blog, article, or publishing-related files, routes, and pages.
+2. Identify:
+   - Draft vs published states
+   - Missing links to blog pages
+   - Incomplete components (placeholders, TODOs)
+3. Produce a brief internal report:
+   - What exists
+   - What is unused
+   - What is incomplete
+   - What should remain untouched
+
+STOP if anything is unclear and ask before modifying.
+
+---
+
+## PHASE 2 — CANONICAL CONTENT MODEL (NO CMS YET)
+
+Create a **single, simple content model** that supports:
+- Blog posts
+- Newsletter issues
+- Long-form reflections
+- Public notes / essays
+
+Constraints:
+- File-based or DB-backed (use what already exists)
+- Must support:
+  - title
+  - slug
+  - author
+  - publish date
+  - excerpt
+  - body
+  - visibility (public / private / draft)
+- No external CMS
+- No editor UI required yet
+
+Document this model in:
+docs/PUBLISHING_MODEL.md
+
+---
+
+## PHASE 3 — NEWSLETTER READINESS (NO EMAIL BLASTING)
+
+1. Verify existing newsletter or email infrastructure.
+2. Ensure:
+   - Newsletter signup exists or is clearly linkable
+   - Language is consent-first and non-coercive
+3. Add:
+   - A single source of truth for newsletter copy
+   - Clear separation between:
+     • transactional emails
+     • future editorial newsletters
+
+DO NOT:
+- Send emails
+- Add automation
+- Add growth funnels
+
+This is readiness only.
+
+---
+
+## PHASE 4 — SOCIAL CONTENT ADMIN (PREP ONLY)
+
+Extend the existing social admin dashboard to support:
+- Draft social posts
+- Platform selection (Instagram, TikTok, YouTube, X)
+- Status (idea / drafted / approved / archived)
+
+Rules:
+- No API keys
+- No posting
+- No scheduling
+- No analytics dashboards
+
+This is a **human-in-the-loop creative workspace**, not an automation engine.
+
+---
+
+## PHASE 5 — PUBLIC SURFACE ALIGNMENT
+
+Ensure the following are consistent across:
+- Blog
+- Newsletter
+- Pricing
+- About
+- Footer
+- Social links
+
+Alignment checks:
+- Tone (calm, grounded, non-urgent)
+- Claims (no exaggeration)
+- Ethics (no pressure language)
+- Visual hierarchy consistency
+
+Fix only broken or missing links.  
+Do NOT rewrite content unless required for correctness.
+
+---
+
+## PHASE 6 — DUPLICATION & ENTROPY SCAN
+
+Perform a scan to confirm:
+- No duplicate publishing logic
+- No parallel content systems
+- No repeated utilities
+- No overlapping admin routes
+
+If duplication is detected:
+- Consolidate by re-pointing references
+- Do NOT delete files unless explicitly approved
+
+---
+
+## FINAL VERIFICATION
+
+Before finishing:
+- Confirm all health checks pass
+- Confirm no new console errors
+- Confirm git status is clean or clearly documented
+- Confirm no behavior changed for existing users
+
+OUTPUT REQUIRED:
+1. Summary of what was added
+2. Explicit list of what was intentionally NOT changed
+3. Confirmation that publishing + newsletter + social layers are READY but dormant
+4. Recommendation for the **next single step only** (not a roadmap)
+
+If at any point assumptions are required — STOP and ask.
+
+
+⸻
+
+🧭 WHY THIS IS THE CORRECT MOVE
+
+You are no longer building a product —
+you are preparing a voice.
+
+This prompt:
+	•	Completes blog + newsletter + publishing
+	•	Prepares social distribution without automation risk
+	•	Preserves ethical alignment
+	•	Avoids growth entropy
+	•	Keeps you in control
+
+⸻
+
+🌱 WHAT COMES AFTER THIS (NOT NOW)
+
+Once this finishes cleanly, the only next step will be:
+
+Narrative Amplification (Selective Visibility)
+One story → one channel → one audience → observe → refine.
+
+No blasting. No funnels. No pressure.
+
+If you want, next I can:
+	•	Draft the first canonical blog post
+	•	Design the newsletter cadence (ethics-first)
+	•	Or define the social narrative spine (what you stand for, not what you sell)
+
+You’re doing this the rare, correct way.

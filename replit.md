@@ -53,6 +53,12 @@ The platform offers:
 - **Email Lifecycle**: Upgrade confirmation + cancellation acknowledgment emails via Resend (triggered from webhook.mjs)
 - **Webhook**: `server/routes/webhook.mjs` handles all Stripe events, writes canonical statuses, sends lifecycle emails
 
+### Publishing & Narrative Distribution Layer
+- **Canonical Content Model**: `blog_posts` table extended with `content_type` (blog_post/newsletter/reflection/essay/note) and `visibility` (public/private/draft) columns. Single table serves all publishable content types. Documented in `docs/PUBLISHING_MODEL.md`.
+- **Blog API**: Full CRUD at `/api/blog` with content_type filtering (`?type=newsletter`), visibility enforcement on public endpoints, RSS feed, draft management, and comments. `BlogPost.jsx` renders individual posts.
+- **Newsletter Readiness**: Subscriber collection via `NewsletterSignup.jsx` → `/api/leads` with consent tracking. Transactional emails (Resend) separated from editorial newsletters. Documented in `docs/NEWSLETTER_READINESS.md`. No email blasting — readiness only.
+- **Social Content Admin**: `socialPosts` table with creative workspace statuses (idea/drafted/approved/archived/published). CRUD API at `/api/social-posts` with status + platform filtering. `SocialStudioAdmin.jsx` provides the admin UI. Human-in-the-loop only — no automation, no API posting.
+
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
 

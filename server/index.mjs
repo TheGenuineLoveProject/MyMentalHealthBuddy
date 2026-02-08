@@ -98,6 +98,7 @@ import leadsRouter from "./routes/leads.mjs";
 import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
 import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import socialPostingRouter from "./routes/social-posting.mjs";
+import socialPostsRouter from "./routes/social-posts.mjs";
 import userRouter from "./routes/user.mjs";
 import perplexityRouter from "./routes/perplexity.mjs";
 import feedRouter from "./routes/feed.mjs";
@@ -354,6 +355,7 @@ app.use('/api/leads', leadsRouter);
 app.use('/api/admin/social', adminSocialStudioRouter);
 app.use('/api/wellness-tools', requireAdult, wellnessToolsRouter);
 app.use('/api/social-posting', socialPostingRouter);
+app.use('/api/social-posts', socialPostsRouter);
 app.use('/api/content', contentRouter);
 app.use('/api/perplexity', perplexityRouter);
 

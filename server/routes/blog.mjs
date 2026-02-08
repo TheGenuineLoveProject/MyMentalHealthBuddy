@@ -25,9 +25,13 @@ function calculateReadingTime(content) {
 
 router.get("/", async (req, res) => {
   try {
-    const { search, tag, limit = 20, offset = 0 } = req.query;
+    const { search, tag, type, limit = 20, offset = 0 } = req.query;
     
-    const conditions = [eq(blogPosts.status, "published")];
+    const conditions = [eq(blogPosts.status, "published"), eq(blogPosts.visibility, "public")];
+
+    if (type && typeof type === "string" && type.trim()) {
+      conditions.push(eq(blogPosts.contentType, type.trim()));
+    }
     
     if (search && typeof search === "string" && search.trim()) {
       const searchTerm = `%${search.trim()}%`;
@@ -106,7 +110,11 @@ router.get("/:slug", async (req, res) => {
     const posts = await db
       .select()
       .from(blogPosts)
-      .where(eq(blogPosts.slug, slug))
+      .where(and(
+        eq(blogPosts.slug, slug),
+        eq(blogPosts.status, "published"),
+        eq(blogPosts.visibility, "public")
+      ))
       .limit(1);
 
     if (posts.length === 0) {
@@ -161,11 +169,16 @@ router.get("/:slug", async (req, res) => {
 router.post("/", requireAuth, async (req, res) => {
   try {
     const userId = req.dbUserId;
-    const { title, content, excerpt, tags, featuredImage, status = "draft" } = req.body;
+    const { title, content, excerpt, tags, featuredImage, status = "draft", contentType = "blog_post", visibility = "public" } = req.body;
 
     if (!title || !content) {
       return badRequest(res, "Title and content are required.");
     }
+
+    const validContentTypes = ["blog_post", "newsletter", "reflection", "essay", "note"];
+    const validVisibilities = ["public", "private", "draft"];
+    const safeContentType = validContentTypes.includes(contentType) ? contentType : "blog_post";
+    const safeVisibility = validVisibilities.includes(visibility) ? visibility : "public";
 
     const slug = generateSlug(title);
     const readingTimeMinutes = calculateReadingTime(content);
@@ -181,6 +194,8 @@ router.post("/", requireAuth, async (req, res) => {
         excerpt: excerpt || content.substring(0, 200) + "...",
         authorId: userId,
         status,
+        contentType: safeContentType,
+        visibility: safeVisibility,
         publishedAt,
         readingTimeMinutes,
         tags: tags || "",
@@ -229,6 +244,18 @@ router.put("/:id", requireAuth, async (req, res) => {
     if (excerpt !== undefined) updateValues.excerpt = excerpt;
     if (tags !== undefined) updateValues.tags = tags;
     if (featuredImage !== undefined) updateValues.featuredImage = featuredImage;
+    if (req.body.contentType) {
+      const validContentTypes = ["blog_post", "newsletter", "reflection", "essay", "note"];
+      if (validContentTypes.includes(req.body.contentType)) {
+        updateValues.contentType = req.body.contentType;
+      }
+    }
+    if (req.body.visibility) {
+      const validVisibilities = ["public", "private", "draft"];
+      if (validVisibilities.includes(req.body.visibility)) {
+        updateValues.visibility = req.body.visibility;
+      }
+    }
     if (status) {
       updateValues.status = status;
       if (status === "published" && !existing[0].publishedAt) {
@@ -367,7 +394,7 @@ router.get("/user/drafts", requireAuth, async (req, res) => {
 router.get("/rss", async (_req, res) => {
   try {
     const posts = await db.select().from(blogPosts)
-      .where(eq(blogPosts.status, "published"))
+      .where(and(eq(blogPosts.status, "published"), eq(blogPosts.visibility, "public")))
       .orderBy(desc(blogPosts.publishedAt))
       .limit(20);
 
