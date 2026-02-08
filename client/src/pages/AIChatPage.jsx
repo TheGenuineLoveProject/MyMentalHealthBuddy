@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle, Sparkles, Heart, Lock } from "lucide-react";
+import { ArrowLeft, Send, Bot, User, Loader2, Trash2, AlertTriangle, Sparkles, Heart, Lock, FileText, Copy, Check } from "lucide-react";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
@@ -49,6 +49,8 @@ export default function AIChatPage() {
   const [error, setError] = useState("");
   const [xpAwarded, setXpAwarded] = useState(false);
   const [sessionCount, setSessionCount] = useState(getDailySessionCount);
+  const [reflectionSummary, setReflectionSummary] = useState(null);
+  const [copied, setCopied] = useState(false);
   const { awardXp } = useGamification();
   const { isPro } = useAuth();
   const messagesEndRef = useRef(null);
@@ -76,9 +78,28 @@ export default function AIChatPage() {
     onSuccess: () => {
       setMessages([INITIAL_MESSAGE]);
       setXpAwarded(false);
+      setReflectionSummary(null);
       queryClient.invalidateQueries({ queryKey: ["/api/ai/history"] });
     },
   });
+
+  const reflectMutation = useMutation({
+    mutationFn: () => apiRequest("POST", "/api/ai/reflect"),
+    onSuccess: (data) => {
+      if (data?.summary) {
+        setReflectionSummary(data.summary);
+      }
+    },
+  });
+
+  function copyReflection() {
+    if (reflectionSummary) {
+      navigator.clipboard.writeText(reflectionSummary).then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }).catch(() => {});
+    }
+  }
 
   const chatMutation = useMutation({
     mutationFn: (message) => apiRequest("POST", "/api/ai/chat", { message }),
@@ -189,6 +210,16 @@ export default function AIChatPage() {
               <span className="hidden sm:inline">Crisis Help</span>
             </Link>
             <button
+              onClick={() => reflectMutation.mutate()}
+              disabled={reflectMutation.isPending || messages.length <= 2}
+              className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/50 transition disabled:opacity-40"
+              data-testid="button-reflect"
+              aria-label="Reflect on this conversation"
+              title="Reflect on this conversation"
+            >
+              {reflectMutation.isPending ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <FileText className="w-5 h-5" aria-hidden="true" />}
+            </button>
+            <button
               onClick={() => clearHistoryMutation.mutate()}
               disabled={clearHistoryMutation.isPending || messages.length <= 1}
               className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-rose)] hover:border-[var(--accent-rose)]/50 transition disabled:opacity-40"
@@ -253,6 +284,42 @@ export default function AIChatPage() {
           <div ref={messagesEndRef} />
         </div>
 
+        {/* Reflection Summary */}
+        {reflectionSummary && (
+          <div className="px-4 py-4 bg-[var(--glp-sage-5)] border-t border-[var(--glp-sage-15)]" data-testid="panel-reflection-summary">
+            <div className="max-w-lg mx-auto space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <FileText className="w-4 h-4 text-[var(--accent-teal)]" aria-hidden="true" />
+                  <span className="text-xs font-medium text-[var(--glp-ink-60)] uppercase tracking-wide">Reflection</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={copyReflection}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] transition"
+                    data-testid="button-copy-reflection"
+                    aria-label="Copy reflection to clipboard"
+                  >
+                    {copied ? <Check className="w-3.5 h-3.5" aria-hidden="true" /> : <Copy className="w-3.5 h-3.5" aria-hidden="true" />}
+                    {copied ? "Copied" : "Copy"}
+                  </button>
+                  <button
+                    onClick={() => setReflectionSummary(null)}
+                    className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition px-2 py-1"
+                    data-testid="button-dismiss-reflection"
+                    aria-label="Dismiss reflection"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              </div>
+              <p className="text-sm text-[var(--glp-ink-80)] leading-relaxed italic">
+                {reflectionSummary}
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* Error Message */}
         {error && (
           <div className="px-4 py-3 bg-[var(--accent-rose-soft)] border-t border-[var(--accent-rose)]/30 text-[var(--accent-rose)] text-sm flex items-center gap-2" role="alert">
@@ -294,10 +361,10 @@ export default function AIChatPage() {
         )}
 
         {/* Sessions remaining indicator (free users only) */}
-        {!isPro && !hasReachedLimit && sessionsRemaining !== null && sessionsRemaining <= 3 && (
+        {!isPro && !hasReachedLimit && sessionsRemaining !== null && (
           <div className="px-4 py-2 bg-[var(--glp-gold-10)] border-t border-[var(--glp-gold-20)] text-center" data-testid="banner-sessions-remaining">
             <p className="text-xs text-[var(--glp-ink-60)]">
-              {sessionsRemaining} {sessionsRemaining === 1 ? "session" : "sessions"} remaining today — they reset tomorrow automatically
+              {sessionsRemaining} of {dailyLimit} {sessionsRemaining === 1 ? "session" : "sessions"} available today
             </p>
           </div>
         )}

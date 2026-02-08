@@ -182,6 +182,74 @@ router.get("/history", authGuard, async (req, res) => {
   }
 });
 
+router.post("/reflect", authGuard, async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    const result = await db.execute(sql`
+      SELECT role, content FROM ai_messages 
+      WHERE user_id = ${userId}
+      ORDER BY created_at ASC
+      LIMIT 20
+    `);
+
+    const history = result.rows || [];
+    if (history.length < 2) {
+      return res.json({ summary: "Not enough conversation to reflect on yet." });
+    }
+
+    const conversationText = history
+      .map(m => `${m.role === "user" ? "You" : "Companion"}: ${m.content}`)
+      .join("\n");
+
+    const reflectPrompt = [
+      {
+        role: "system",
+        content: `You are a gentle, non-directive summarizer for The Genuine Love Project.
+Given a conversation between a user and their wellness companion, write a brief 2-3 sentence reflection.
+Rules:
+- Use tentative language ("It sounds like...", "You seemed to be exploring...")
+- Do NOT give advice, diagnose, or interpret
+- Do NOT claim progress, healing, or transformation
+- Simply mirror back the themes the user touched on
+- End with: "This is yours to keep or let go."
+- Keep it under 60 words total`
+      },
+      { role: "user", content: `Here is the conversation:\n\n${conversationText}` }
+    ];
+
+    let summary;
+
+    if (isConfigured()) {
+      const aiResult = await chatCompletion({
+        messages: reflectPrompt,
+        temperature: 0.6,
+        maxTokens: 150,
+      });
+
+      if (aiResult.success) {
+        summary = aiResult.content;
+        const safetyResult = checkResponseSafety(summary);
+        if (!safetyResult.passes) {
+          summary = sanitizeAIResponse(summary);
+        }
+      } else {
+        summary = "Your conversation touched on something worth sitting with. This is yours to keep or let go.";
+      }
+    } else {
+      summary = "Your conversation touched on something worth sitting with. This is yours to keep or let go.";
+    }
+
+    res.json({ summary });
+  } catch (err) {
+    logger.error("Reflection summary error", { error: err.message, userId: req.user?.id });
+    res.status(500).json({ error: "Could not generate reflection" });
+  }
+});
+
 router.delete("/history", authGuard, async (req, res) => {
   try {
     const userId = req.user?.id;
