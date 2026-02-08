@@ -1,13 +1,33 @@
 import { Link, useLocation } from "wouter";
-import { Sparkles, BookOpen, LayoutDashboard, Heart, Menu, X, Home, MessageCircle, Search } from "lucide-react";
+import { Sparkles, BookOpen, LayoutDashboard, Heart, Menu, X, Home, MessageCircle, Search, Crown } from "lucide-react";
 import { useState, useEffect } from "react";
 import ModeToggle from "./ModeToggle.jsx";
 import GlobalSearch from "./GlobalSearch.jsx";
+import { useAuth } from "../context/AuthContext";
+
+function ProBadge() {
+  return (
+    <span
+      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold"
+      style={{
+        background: "linear-gradient(135deg, var(--glp-gold-400, #d4a843) 0%, var(--glp-gold-500, #c49a38) 100%)",
+        color: "var(--glp-sage-deep, #1a3a2a)",
+        boxShadow: "0 1px 3px rgba(196, 154, 56, 0.3)",
+      }}
+      data-testid="badge-pro"
+      aria-label="Pro member"
+    >
+      <Crown className="w-3 h-3" aria-hidden="true" />
+      Pro
+    </span>
+  );
+}
 
 export default function TglpNavbar() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user, isPro } = useAuth();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -111,32 +131,50 @@ export default function TglpNavbar() {
             </Link>
           ))}
 
-          {/* Sign In */}
-          <Link 
-            href="/login" 
-            className={`hidden md:flex items-center px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)] ${
-              isActive("/login") ? "bg-[var(--glp-sage)]/15" : ""
-            }`}
-            aria-current={isActive("/login") ? "page" : undefined}
-            data-testid="link-login"
-          >
-            Sign In
-          </Link>
-
-          {/* CTA Button */}
-          <Link 
-            href="/register" 
-            className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
-            style={{ 
-              background: "var(--glp-gold-gradient)",
-              boxShadow: "var(--glp-gold-shadow)",
-            }}
-            data-testid="link-register"
-          >
-            <Sparkles className="w-4 h-4" aria-hidden="true" />
-            <span className="hidden sm:inline">Get Started</span>
-            <span className="sm:hidden">Start</span>
-          </Link>
+          {user ? (
+            <>
+              {isPro && <div className="hidden md:block"><ProBadge /></div>}
+              <Link 
+                href="/dashboard" 
+                className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
+                style={{ 
+                  background: "var(--glp-gold-gradient)",
+                  boxShadow: "var(--glp-gold-shadow)",
+                }}
+                data-testid="link-dashboard-cta"
+              >
+                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                <span className="hidden sm:inline">Dashboard</span>
+                <span className="sm:hidden">Go</span>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link 
+                href="/login" 
+                className={`hidden md:flex items-center px-5 py-3 rounded-lg text-sm font-medium transition-all hover:bg-[var(--glp-sage)]/10 text-[var(--glp-sage-deep)] ${
+                  isActive("/login") ? "bg-[var(--glp-sage)]/15" : ""
+                }`}
+                aria-current={isActive("/login") ? "page" : undefined}
+                data-testid="link-login"
+              >
+                Sign In
+              </Link>
+              <Link 
+                href="/register" 
+                className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
+                style={{ 
+                  background: "var(--glp-gold-gradient)",
+                  boxShadow: "var(--glp-gold-shadow)",
+                }}
+                data-testid="link-register"
+              >
+                <Sparkles className="w-4 h-4" aria-hidden="true" />
+                <span className="hidden sm:inline">Get Started</span>
+                <span className="sm:hidden">Start</span>
+              </Link>
+            </>
+          )}
 
           {/* Mobile Menu Button */}
           <button
@@ -194,24 +232,47 @@ export default function TglpNavbar() {
           </div>
 
           <div className="pt-4 px-4 space-y-2">
-            <Link 
-              href="/login"
-              className="block text-center px-4 py-3 rounded-xl text-sm font-medium transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep-20)]"
-              onClick={() => setMobileMenuOpen(false)}
-              data-testid="link-mobile-signin"
-            >
-              Sign In
-            </Link>
-            <Link 
-              href="/register" 
-              className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
-              style={{ background: "var(--glp-gold-gradient)" }}
-              onClick={() => setMobileMenuOpen(false)}
-              data-testid="link-mobile-get-started"
-            >
-              <Sparkles className="w-4 h-4" />
-              Get Started Free
-            </Link>
+            {user ? (
+              <>
+                {isPro && (
+                  <div className="flex items-center justify-center gap-2 py-2">
+                    <ProBadge />
+                    <span className="text-xs text-[var(--glp-ink-60)]">Premium member</span>
+                  </div>
+                )}
+                <Link 
+                  href="/dashboard" 
+                  className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+                  style={{ background: "var(--glp-gold-gradient)" }}
+                  onClick={() => setMobileMenuOpen(false)}
+                  data-testid="link-mobile-dashboard"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Go to Dashboard
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link 
+                  href="/login"
+                  className="block text-center px-4 py-3 rounded-xl text-sm font-medium transition-all text-[var(--glp-sage-deep)] border border-[var(--glp-sage-deep-20)]"
+                  onClick={() => setMobileMenuOpen(false)}
+                  data-testid="link-mobile-signin"
+                >
+                  Sign In
+                </Link>
+                <Link 
+                  href="/register" 
+                  className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
+                  style={{ background: "var(--glp-gold-gradient)" }}
+                  onClick={() => setMobileMenuOpen(false)}
+                  data-testid="link-mobile-get-started"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Get Started Free
+                </Link>
+              </>
+            )}
           </div>
         </div>
       )}

@@ -5,7 +5,7 @@ import {
   Sun, Moon, Heart, BookOpen, Sparkles, TrendingUp,
   Calendar, MessageSquare, Compass, Target, Flame, Zap,
   Star, Activity, ArrowRight, Check, RefreshCw, AlertCircle,
-  Brain, Lightbulb, Shield, Sunrise
+  Brain, Lightbulb, Shield, Sunrise, Crown
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import styles from "./Overview.module.css";
@@ -14,6 +14,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/context/AuthContext";
 
 const QUICK_ACTIONS = [
   { label: "Daily Reflection", icon: Sunrise, href: "/reflect", color: "gold" },
@@ -158,6 +159,7 @@ function InsightItem({ insight }) {
 
 export default function DashboardOverview() {
   const { toast } = useToast();
+  const { isPro } = useAuth();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -270,7 +272,24 @@ export default function DashboardOverview() {
                   <TimeIcon className={styles.greetingIconInner} />
                 </div>
                 <div>
-                  <p className={styles.greetingText} data-testid="text-greeting">{greeting}</p>
+                  <p className={styles.greetingText} data-testid="text-greeting">
+                    {greeting}
+                    {isPro && (
+                      <span
+                        className="inline-flex items-center gap-1 ml-2 px-2 py-0.5 rounded-full text-xs font-semibold align-middle"
+                        style={{
+                          background: "linear-gradient(135deg, #d4a843, #c49a38)",
+                          color: "#1a3a2a",
+                          boxShadow: "0 1px 3px rgba(196,154,56,0.3)",
+                        }}
+                        data-testid="badge-dashboard-pro"
+                        aria-label="Pro member"
+                      >
+                        <Crown className="w-3 h-3" aria-hidden="true" />
+                        Pro
+                      </span>
+                    )}
+                  </p>
                   <h1 className={styles.pageTitle} data-testid="text-page-title">Your Wellness Dashboard</h1>
                 </div>
               </div>

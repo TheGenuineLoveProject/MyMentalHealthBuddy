@@ -310,6 +310,131 @@ export async function sendAccountDeletionEmail(toEmail, userName, scheduledDate)
   }
 }
 
+export async function sendUpgradeConfirmation(toEmail, userName) {
+  try {
+    const { client, fromEmail } = await getResendClient();
+    
+    const result = await client.emails.send({
+      from: fromEmail || 'The Genuine Love Project <hello@genuineloveproject.com>',
+      to: toEmail,
+      subject: 'Welcome to Pro — Your Healing Tools Are Unlocked',
+      html: `
+        <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <h1 style="color: #2d5a4a; font-size: 28px; margin-bottom: 20px;">Welcome to Pro, ${userName || 'friend'}</h1>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            Thank you for choosing to invest in yourself. Your Pro membership is now active, 
+            and all premium tools are unlocked.
+          </p>
+          
+          <div style="background: #f8f5f0; padding: 20px; border-radius: 8px; margin: 30px 0;">
+            <p style="color: #2d5a4a; font-size: 16px; margin: 0 0 10px 0; font-weight: bold;">
+              What's now available to you:
+            </p>
+            <ul style="color: #555; font-size: 15px; line-height: 1.8; margin: 0; padding-left: 20px;">
+              <li>Unlimited AI wellness conversations</li>
+              <li>Advanced insights and analytics</li>
+              <li>Full healing journey access</li>
+              <li>All premium wellness tools</li>
+            </ul>
+          </div>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            There's no rush to explore everything at once. 
+            Take your time — your tools will be here whenever you're ready.
+          </p>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            You can manage your subscription anytime from your 
+            <a href="https://genuineloveproject.com/account/billing" style="color: #2d5a4a; text-decoration: underline;">billing page</a>.
+          </p>
+          
+          <p style="color: #888; font-size: 14px; margin-top: 40px;">
+            With gratitude,<br>
+            The Genuine Love Project
+          </p>
+          
+          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+          
+          <p style="color: #999; font-size: 12px;">
+            This is educational support—not therapy or medical advice.<br>
+            If you're in crisis, call 988 or text HOME to 741741.
+          </p>
+        </div>
+      `
+    });
+    
+    console.log('[Email] Upgrade confirmation sent to:', toEmail);
+    return { success: true, id: result.id };
+  } catch (error) {
+    console.error('[Email] Failed to send upgrade confirmation:', error);
+    return { success: false, error: error.message };
+  }
+}
+
+export async function sendCancellationAcknowledgment(toEmail, userName, periodEnd) {
+  try {
+    const { client, fromEmail } = await getResendClient();
+    
+    const endDate = periodEnd 
+      ? new Date(periodEnd * 1000).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      : 'the end of your current billing period';
+    
+    const result = await client.emails.send({
+      from: fromEmail || 'The Genuine Love Project <hello@genuineloveproject.com>',
+      to: toEmail,
+      subject: 'Your Subscription Update',
+      html: `
+        <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+          <h1 style="color: #2d5a4a; font-size: 28px; margin-bottom: 20px;">We hear you, ${userName || 'friend'}</h1>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            Your Pro subscription has been canceled. You'll continue to have access to all Pro features 
+            until <strong>${endDate}</strong>.
+          </p>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            After that, your account will return to the free plan. 
+            Your journal entries, mood history, and all your data will still be here — nothing gets deleted.
+          </p>
+          
+          <div style="background: #f8f5f0; padding: 20px; border-radius: 8px; margin: 30px 0;">
+            <p style="color: #2d5a4a; font-size: 16px; margin: 0;">
+              <strong>Changed your mind?</strong><br>
+              You can resubscribe anytime from your 
+              <a href="https://genuineloveproject.com/account/billing" style="color: #2d5a4a; text-decoration: underline;">billing page</a>. 
+              No pressure — come back whenever feels right.
+            </p>
+          </div>
+          
+          <p style="color: #555; font-size: 16px; line-height: 1.7;">
+            Core wellness tools like journaling, mood tracking, and daily reflection 
+            will always be free. You're welcome here no matter what.
+          </p>
+          
+          <p style="color: #888; font-size: 14px; margin-top: 40px;">
+            With care,<br>
+            The Genuine Love Project
+          </p>
+          
+          <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+          
+          <p style="color: #999; font-size: 12px;">
+            This is educational support—not therapy or medical advice.<br>
+            If you're in crisis, call 988 or text HOME to 741741.
+          </p>
+        </div>
+      `
+    });
+    
+    console.log('[Email] Cancellation acknowledgment sent to:', toEmail);
+    return { success: true, id: result.id };
+  } catch (error) {
+    console.error('[Email] Failed to send cancellation acknowledgment:', error);
+    return { success: false, error: error.message };
+  }
+}
+
 export async function testEmailConnection() {
   try {
     await getCredentials();

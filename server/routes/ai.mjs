@@ -8,6 +8,8 @@ import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../ut
 
 const router = Router();
 
+const FREE_DAILY_SESSION_LIMIT = 5;
+
 const CRISIS_KEYWORDS = [
   "kill myself", "end my life", "suicide", "suicidal", "want to die",
   "don't want to live", "hurt myself", "self-harm", "cut myself",
@@ -61,6 +63,28 @@ router.post("/chat", authGuard, async (req, res) => {
 
     if (!userId || !message) {
       return res.status(400).json({ error: "Missing userId or message" });
+    }
+
+    const userSubResult = await db.execute(sql`
+      SELECT subscription_status FROM users WHERE id = ${userId} LIMIT 1
+    `);
+    const subStatus = userSubResult.rows?.[0]?.subscription_status || "free";
+
+    if (subStatus !== "pro") {
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+      const countResult = await db.execute(sql`
+        SELECT COUNT(*) as count FROM ai_messages 
+        WHERE user_id = ${userId} AND role = 'user' AND created_at >= ${todayStart.toISOString()}
+      `);
+      const todayCount = parseInt(countResult.rows?.[0]?.count || "0", 10);
+      if (todayCount >= FREE_DAILY_SESSION_LIMIT) {
+        return res.status(429).json({
+          error: "Daily session limit reached",
+          limit: FREE_DAILY_SESSION_LIMIT,
+          message: "You've used your free sessions for today. They reset tomorrow, or you can upgrade to Pro for unlimited access.",
+        });
+      }
     }
 
     if (detectCrisis(message)) {

@@ -5,6 +5,7 @@ import { db } from "../db/client.mjs";
 import { users, webhookEvents } from "../../shared/schema.mjs";
 import { eq } from "drizzle-orm";
 import { logger } from "../utils/logger.mjs";
+import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
 
 const router = Router();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -79,6 +80,12 @@ router.post(
               })
               .where(eq(users.email, session.customer_email));
             logger.info("Subscription activated via checkout", { customer: session.customer, status: "pro" });
+            
+            if (session.customer_email) {
+              sendUpgradeConfirmation(session.customer_email, session.customer_details?.name || "").catch(err => {
+                logger.warn("Failed to send upgrade email", { error: err.message });
+              });
+            }
           }
           break;
         }
@@ -105,6 +112,10 @@ router.post(
         case "customer.subscription.deleted": {
           const subscription = event.data.object;
           if (subscription.customer) {
+            const userRows = await db.select({ email: users.email, username: users.username })
+              .from(users)
+              .where(eq(users.stripeCustomerId, subscription.customer));
+            
             await db
               .update(users)
               .set({
@@ -114,6 +125,17 @@ router.post(
               })
               .where(eq(users.stripeCustomerId, subscription.customer));
             logger.info("Subscription deleted, reverted to free", { customer: subscription.customer });
+            
+            const cancelledUser = userRows?.[0];
+            if (cancelledUser?.email) {
+              sendCancellationAcknowledgment(
+                cancelledUser.email, 
+                cancelledUser.username || "", 
+                subscription.current_period_end
+              ).catch(err => {
+                logger.warn("Failed to send cancellation email", { error: err.message });
+              });
+            }
           }
           break;
         }

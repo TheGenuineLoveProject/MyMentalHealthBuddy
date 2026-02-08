@@ -41,6 +41,18 @@ The platform offers:
 - **User Features**: Resend Email Integration (transactional emails), Replit Auth Integration (OIDC authentication), Crisis Page Public Access (`/crisis` route), SEO Enhancement (JSON-LD, OG tags, Twitter cards), Accessibility Toolbar (high contrast, font size, reduce motion, dyslexia-friendly font), Daily Healing Reminders (customizable check-in times, tones, messages), Voice Affirmation Settings (voice tone, speed, pitch, volume controls), Community Affirmation Wall (anonymous affirmations, "Send Light" feature), Journal Insights (client-side sentiment analysis, emotional flow graph, suggested prompts), AI Companion Animations (pulsing heart orb, bouncing dots), Floating Lotus Guide (route-conditional wellness assistant), Sacred Glow Utilities (CSS utility classes), Emotion-Linked Backgrounds (gradient backgrounds with dark mode variants and animation option).
 - **Content Organization**: Learning Hub (`/learn` page with guides, articles, courses), Comprehensive Route Redirects (510+ semantic redirects for improved discoverability).
 
+### Monetization Architecture (Two-Tier: Free/Pro)
+- **Feature Access Map**: `client/src/config/featureAccess.js` — single source of truth for feature → plan mapping
+- **Canonical Status**: `users.subscription_status` column = "free" | "pro" only (never raw Stripe statuses)
+- **AuthContext**: Exposes `subscriptionStatus` and `isPro` to all frontend components via `useAuth()`
+- **PlanGate.jsx**: Wraps Pro-only features with gentle upgrade prompt (blurred teaser + upgrade CTA)
+- **Soft Gating**: AI Chat has 5 free daily sessions; Pro gets unlimited. Core tools (mood, journal, reflection) always free.
+- **Server Enforcement**: `server/routes/ai.mjs` enforces daily session limit server-side (counts user messages per day)
+- **Pro Badge**: Gold crown badge appears in navbar (TglpNavbar.jsx) and dashboard greeting for Pro users
+- **Billing Page**: `/account/billing` uses AuthContext as primary plan source, with Stripe API as fallback for details
+- **Email Lifecycle**: Upgrade confirmation + cancellation acknowledgment emails via Resend (triggered from webhook.mjs)
+- **Webhook**: `server/routes/webhook.mjs` handles all Stripe events, writes canonical statuses, sends lifecycle emails
+
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
 

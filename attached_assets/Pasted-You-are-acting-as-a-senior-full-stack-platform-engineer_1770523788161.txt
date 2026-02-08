@@ -1,0 +1,140 @@
+You are acting as a senior full-stack platform engineer, product architect, and safety-aware monetization specialist.
+
+CONTEXT (DO NOT REPEAT BACK):
+• Platform name: The Genuine Love Project / MyMentalHealthBuddy
+• Current phase: Late Activation / Early Growth
+• Stripe backend is fully wired and verified
+• subscription_status is canonical ("free" | "pro")
+• Webhooks are live and stable
+• useAuth() exposes isPro and subscriptionStatus
+• PlanGate.jsx exists
+• Billing checkout and portal routes are live
+• DO NOT add new features unless explicitly instructed
+• DO NOT refactor, rename, or delete existing files unless necessary
+• Prefer additive, minimal, reversible changes only
+• Trauma-informed, trust-first UX is mandatory
+
+OBJECTIVE:
+Complete the platform in a revenue-ready, scalable, ethical way by activating monetization, soft gating, and retention — WITHOUT overwhelming users or expanding scope prematurely.
+
+EXECUTION ORDER (STRICT — FOLLOW IN THIS ORDER ONLY):
+
+────────────────────────────────────────
+STEP 1 — FEATURE ACCESS MAP (FOUNDATION)
+────────────────────────────────────────
+Create a single canonical configuration file that defines which features are:
+• free
+• pro
+• future (not yet gated)
+
+Rules:
+• This must be a plain config (no logic)
+• All gating logic must reference this config
+• Do not gate any core healing tools (AI chat, mood, journal, reflection)
+
+Deliverable:
+• One new config file defining feature access tiers
+• No UI changes yet
+
+STOP AFTER STEP 1 AND REPORT.
+
+────────────────────────────────────────
+STEP 2 — SOFT PLAN GATE (ONE FEATURE ONLY)
+────────────────────────────────────────
+Using the existing PlanGate.jsx component:
+• Soft-gate exactly ONE high-value, non-essential feature
+• Free users must still see the feature preview
+• The gate copy must be calm, optional, and non-coercive
+
+Rules:
+• No hard blocking of healing tools
+• No guilt-based or urgency-based copy
+• No popups — inline only
+
+Deliverable:
+• One existing feature wrapped with PlanGate
+• Gentle upgrade prompt shown to free users
+• No pricing language yet
+
+STOP AFTER STEP 2 AND REPORT.
+
+────────────────────────────────────────
+STEP 3 — PRO VISUAL INDICATOR
+────────────────────────────────────────
+Add a minimal, respectful visual indicator for Pro users:
+• Small “Pro” badge in dashboard or account area
+• Optional subtle color accent (must match existing theme)
+
+Rules:
+• No hierarchy, no leaderboard emphasis
+• Pro = support + deeper tools, not superiority
+
+Deliverable:
+• Pro users can clearly see their status
+• Free users are not shamed
+
+STOP AFTER STEP 3 AND REPORT.
+
+────────────────────────────────────────
+STEP 4 — BILLING PAGE POLISH
+────────────────────────────────────────
+Ensure the billing page:
+• Reads from subscriptionStatus context (not extra API calls)
+• Clearly shows current plan
+• Has a working Upgrade and Manage Subscription button
+• Uses Stripe portal for cancellations
+
+Rules:
+• No dark patterns
+• Cancellation must be easy
+• Language must reinforce trust
+
+Deliverable:
+• Billing page reflects real subscription state
+• Stripe flows verified end-to-end
+
+STOP AFTER STEP 4 AND REPORT.
+
+────────────────────────────────────────
+STEP 5 — SINGLE RETENTION LOOP (OPTIONAL)
+────────────────────────────────────────
+If and only if all above steps are complete and stable:
+• Activate ONE retention loop (e.g., deeper AI insights, progress synthesis)
+• Free users get preview, Pro users get full depth
+
+Rules:
+• No notifications yet
+• No emails yet
+• No streak pressure
+
+Deliverable:
+• One loop that increases depth, not noise
+
+STOP AFTER STEP 5 AND REPORT.
+
+────────────────────────────────────────
+GUARDRAILS (ABSOLUTE):
+• DO NOT add Premium tier yet
+• DO NOT activate community posting yet
+• DO NOT add email campaigns yet
+• DO NOT add new Stripe products
+• DO NOT touch database schema unless required
+• DO NOT increase AI surface area
+
+VALIDATION REQUIRED AFTER EACH STEP:
+• App runs clean
+• No console errors
+• No broken routes
+• No regressions in core tools
+• subscription_status remains canonical
+
+OUTPUT FORMAT:
+After each step, provide:
+1. What changed (files + purpose)
+2. Why it was safe
+3. What remains untouched
+4. Confirmation before proceeding
+
+If any ambiguity exists, STOP and ask for confirmation before making changes.
+
+Begin with STEP 1 only.

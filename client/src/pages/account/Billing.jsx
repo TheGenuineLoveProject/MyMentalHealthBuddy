@@ -11,6 +11,8 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useAuth } from "@/context/AuthContext";
+import { getProFeatures, getFreeFeatures } from "@/config/featureAccess";
 
 const PRO_PLAN = {
   id: "pro",
@@ -67,6 +69,7 @@ export default function Billing() {
   });
   
   const { toast } = useToast();
+  const { subscriptionStatus, isPro, isLoading: authLoading } = useAuth();
   const [location] = useLocation();
   const [upgrading, setUpgrading] = useState(false);
   const [billingInterval, setBillingInterval] = useState("monthly");
@@ -79,8 +82,8 @@ export default function Billing() {
     queryKey: ["/api/billing/invoices"],
   });
 
-  const currentPlan = subscriptionData?.plan || "free";
-  const isActive = subscriptionData?.status === "active" || subscriptionData?.status === "trialing";
+  const currentPlan = subscriptionStatus || subscriptionData?.plan || "free";
+  const isActive = isPro || subscriptionData?.status === "active" || subscriptionData?.status === "trialing";
   const invoices = invoicesData?.invoices || [];
 
   useEffect(() => {
