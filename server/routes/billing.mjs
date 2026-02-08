@@ -64,7 +64,7 @@ router.get("/plans", async (req, res) => {
 
 router.post("/checkout", async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
     if (!stripe) return serverError(res, new Error("Stripe not configured"));
 
     const { plan = "pro", interval = "monthly", priceId: directPriceId } = req.body;
@@ -84,8 +84,7 @@ router.post("/checkout", async (req, res) => {
     }
 
     const dbUserId = req.dbUserId;
-    if (!dbUserId) return unauthorized(res);
-    const customerId = await getOrCreateStripeCustomer(dbUserId, req.user.email || req.user.claims?.email);
+    const customerId = await getOrCreateStripeCustomer(dbUserId, req.user?.email || req.user?.claims?.email);
     const idempotencyKey = generateIdempotencyKey(dbUserId, `${plan}-${interval}`, Date.now());
 
     const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
@@ -105,14 +104,14 @@ router.post("/checkout", async (req, res) => {
     logger.info("Checkout session created", { userId: dbUserId, plan, interval, sessionId: session.id });
     return success(res, { url: session.url, sessionId: session.id });
   } catch (err) {
-    logger.error("Checkout error", { error: err.message, userId: req.user?.id });
+    logger.error("Checkout error", { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });
 
 router.post("/portal", async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
     if (!stripe) return serverError(res, new Error("Stripe not configured"));
 
     const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.dbUserId}`);
@@ -133,7 +132,7 @@ router.post("/portal", async (req, res) => {
 
 router.get("/subscription-status", async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
 
     const userResult = await db.execute(sql`
       SELECT subscription_status, subscription_expires_at, stripe_customer_id
@@ -178,7 +177,7 @@ router.get("/subscription-status", async (req, res) => {
 
 router.get("/current-plan", async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
 
     const userResult = await db.execute(sql`
       SELECT subscription_status FROM users WHERE id = ${req.dbUserId} LIMIT 1
@@ -201,7 +200,7 @@ router.get("/current-plan", async (req, res) => {
 
 router.get("/invoices", async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
     if (!stripe) return success(res, { invoices: [] });
 
     const userResult = await db.execute(sql`SELECT stripe_customer_id FROM users WHERE id = ${req.dbUserId}`);

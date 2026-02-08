@@ -6,7 +6,7 @@ import { eq, sql, and, gte, desc, count } from "drizzle-orm";
 const router = express.Router();
 
 function requireAuth(req, res, next) {
-  if (!req.isAuthenticated?.() || !req.user?.id) {
+  if (!req.dbUserId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
   next();

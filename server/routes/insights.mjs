@@ -9,7 +9,7 @@ const router = Router();
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function requireAuth(req, res, next) {
-  if (!req.isAuthenticated?.() || !req.user?.id) {
+  if (!req.dbUserId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
   next();

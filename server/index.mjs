@@ -362,6 +362,9 @@ app.get("/api/health", (_req, res) => {
 });
 app.use("/health", healthRouter);
 
+// RSS, Sitemap, Robots (must be before SPA catch-all)
+app.use('/', feedRouter);
+
 const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));
 
@@ -377,9 +380,6 @@ app.use((err, _req, res, _next) => {
     message: "Something went wrong. Please try again.",
   });
 });
-
-// RSS, Sitemap, Robots
-app.use('/', feedRouter);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, "0.0.0.0", () => {

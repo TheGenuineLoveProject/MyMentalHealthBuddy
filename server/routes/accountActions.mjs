@@ -15,7 +15,7 @@ const router = Router();
 // P113: Get user sessions
 router.get('/sessions', async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
 
     const sessionsResult = await db.execute(sql`
       SELECT 
@@ -43,7 +43,7 @@ router.get('/sessions', async (req, res) => {
 
     return success(res, { sessions });
   } catch (err) {
-    logger.error('Sessions fetch error', { error: err.message, userId: req.user?.id });
+    logger.error('Sessions fetch error', { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });
@@ -51,7 +51,7 @@ router.get('/sessions', async (req, res) => {
 // P113: Revoke a session
 router.delete('/sessions/:sessionId', async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
 
     const { sessionId } = req.params;
 
@@ -73,7 +73,7 @@ router.delete('/sessions/:sessionId', async (req, res) => {
     logger.info('Session revoked', { userId: req.dbUserId, revokedSessionId: sessionId });
     return success(res, { message: 'Session revoked' });
   } catch (err) {
-    logger.error('Session revoke error', { error: err.message, userId: req.user?.id });
+    logger.error('Session revoke error', { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });
@@ -81,7 +81,7 @@ router.delete('/sessions/:sessionId', async (req, res) => {
 // P119: Request account deletion
 router.post('/delete-request', async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
 
     const { confirmation } = req.body;
 
@@ -106,17 +106,18 @@ router.post('/delete-request', async (req, res) => {
       ON CONFLICT (user_id) WHERE status = 'pending' DO NOTHING
     `);
 
-    logger.info('Account deletion requested', { userId: req.user.id });
+    logger.info('Account deletion requested', { userId: req.dbUserId });
 
     const scheduledDeletion = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
     
-    if (req.user.email) {
+    const userEmail = req.user?.email || req.user?.claims?.email;
+    if (userEmail) {
       sendAccountDeletionEmail(
-        req.user.email, 
-        req.user.username || req.user.name, 
+        userEmail, 
+        req.user?.username || req.user?.name || "User", 
         scheduledDeletion
       ).catch(err => {
-        logger.error('Failed to send deletion email', { error: err.message, userId: req.user.id });
+        logger.error('Failed to send deletion email', { error: err.message, userId: req.dbUserId });
       });
     }
 
@@ -125,7 +126,7 @@ router.post('/delete-request', async (req, res) => {
       scheduledDeletion
     });
   } catch (err) {
-    logger.error('Deletion request error', { error: err.message, userId: req.user?.id });
+    logger.error('Deletion request error', { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });
@@ -133,7 +134,7 @@ router.post('/delete-request', async (req, res) => {
 // P119: Cancel deletion request
 router.post('/cancel-delete-request', async (req, res) => {
   try {
-    if (!req.user) return unauthorized(res);
+    if (!req.dbUserId) return unauthorized(res);
 
     const result = await db.execute(sql`
       UPDATE account_deletion_requests 
@@ -149,7 +150,7 @@ router.post('/cancel-delete-request', async (req, res) => {
     logger.info('Account deletion cancelled', { userId: req.dbUserId });
     return success(res, { message: 'Deletion request cancelled' });
   } catch (err) {
-    logger.error('Cancel deletion error', { error: err.message, userId: req.user?.id });
+    logger.error('Cancel deletion error', { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });

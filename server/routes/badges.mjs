@@ -22,7 +22,7 @@ const BADGE_TRIGGERS = {
 
 router.get("/", async (req, res) => {
   try {
-    if (!req.isAuthenticated?.() || !req.user?.id) {
+    if (!req.dbUserId) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
 
 router.post("/check", async (req, res) => {
   try {
-    if (!req.isAuthenticated?.() || !req.user?.id) {
+    if (!req.dbUserId) {
       return res.status(401).json({ error: "Unauthorized" });
     }
 

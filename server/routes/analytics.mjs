@@ -39,7 +39,7 @@ router.post("/event", async (req, res) => {
     logger.debug("Analytics event", {
       eventType,
       page: page?.substring(0, 200),
-      userId: req.user?.id || "anonymous",
+      userId: req.dbUserId || "anonymous",
       metadata: safeMetadata,
     });
 
@@ -65,7 +65,7 @@ router.post("/pageview", async (req, res) => {
     logger.debug("Page view", {
       page: page.substring(0, 200),
       referrer: referrer?.substring(0, 500),
-      userId: req.user?.id || "anonymous",
+      userId: req.dbUserId || "anonymous",
     });
 
     return success(res, { ok: true });
