@@ -365,21 +365,22 @@ router.get("/user/drafts", requireAuth, async (req, res) => {
   }
 });
 router.get("/rss", async (_req, res) => {
-  const posts = await db.select().from(blogPosts)
-    .where(eq(blogPosts.status, "published"))
-    .orderBy(desc(blogPosts.publishedAt))
-    .limit(20);
+  try {
+    const posts = await db.select().from(blogPosts)
+      .where(eq(blogPosts.status, "published"))
+      .orderBy(desc(blogPosts.publishedAt))
+      .limit(20);
 
-  const items = posts.map(p => `
-    <item>
-      <title><![CDATA[${p.title}]]></title>
-      <link>https://thegenuineloveproject.com/blog/${p.slug}</link>
-      <pubDate>${new Date(p.publishedAt).toUTCString()}</pubDate>
-      <description><![CDATA[${p.excerpt || ""}]]></description>
-    </item>
-  `).join("");
+    const items = posts.map(p => `
+      <item>
+        <title><![CDATA[${p.title}]]></title>
+        <link>https://thegenuineloveproject.com/blog/${p.slug}</link>
+        <pubDate>${new Date(p.publishedAt).toUTCString()}</pubDate>
+        <description><![CDATA[${p.excerpt || ""}]]></description>
+      </item>
+    `).join("");
 
-  res.type("application/rss+xml").send(`<?xml version="1.0"?>
+    res.type("application/rss+xml").send(`<?xml version="1.0"?>
 <rss version="2.0">
   <channel>
     <title>The Genuine Love Project Blog</title>
@@ -388,6 +389,12 @@ router.get("/rss", async (_req, res) => {
     ${items}
   </channel>
 </rss>`);
+  } catch (err) {
+    logger.error("Failed to generate RSS feed", { error: err.message });
+    if (!res.headersSent) {
+      return res.status(500).json({ ok: false, message: "Something went wrong" });
+    }
+  }
 });
 
 export default router;

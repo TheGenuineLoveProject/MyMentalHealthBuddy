@@ -34,52 +34,55 @@ function requireAuth(req, res, next) {
  * Returns: { ok:true, data:{...entry} }
  */
 router.post("/", requireAuth, async (req, res) => {
-  const { title, content, shareWithCommunity, isAnonymous = true, mood = "neutral" } = req.body || {};
-  
-  // Both title and content are required
-  if (!title || String(title).trim().length === 0) {
-    return res.status(400).json({ ok: false, message: "Title is required." });
-  }
-  if (content == null || String(content).trim().length === 0) {
-    return res.status(400).json({ ok: false, message: "Content is required." });
-  }
+  try {
+    const { title, content, shareWithCommunity, isAnonymous = true, mood = "neutral" } = req.body || {};
+    
+    if (!title || String(title).trim().length === 0) {
+      return res.status(400).json({ ok: false, message: "Title is required." });
+    }
+    if (content == null || String(content).trim().length === 0) {
+      return res.status(400).json({ ok: false, message: "Content is required." });
+    }
 
-  const id = crypto.randomUUID();
-  const now = new Date().toISOString();
+    const id = crypto.randomUUID();
+    const now = new Date().toISOString();
 
-  const entry = {
-    id,
-    title: String(title).trim(),
-    content: String(content),
-    mood: mood || "neutral",
-    shareWithCommunity: Boolean(shareWithCommunity),
-    isAnonymous: Boolean(isAnonymous),
-    createdAt: now,
-    updatedAt: now,
-    userId: req.dbUserId,
-  };
+    const entry = {
+      id,
+      title: String(title).trim(),
+      content: String(content),
+      mood: mood || "neutral",
+      shareWithCommunity: Boolean(shareWithCommunity),
+      isAnonymous: Boolean(isAnonymous),
+      createdAt: now,
+      updatedAt: now,
+      userId: req.dbUserId,
+    };
 
-  journalStore.set(id, entry);
-  increment("journal_entry_created", { plan: "unknown" });
+    journalStore.set(id, entry);
+    increment("journal_entry_created", { plan: "unknown" });
 
-  // If user wants to share with community, create an anonymous reflection
-  if (shareWithCommunity) {
-    try {
-      const displayName = isAnonymous ? null : (req.user?.name || req.user?.email?.split("@")[0] || null);
-      await db.insert(anonymousReflections).values({
-        content: String(content).slice(0, 500), // Limit to 500 chars
-        mood: mood || "neutral",
-        displayName,
-        isAnonymous: Boolean(isAnonymous),
-      });
-    } catch (err) {
-      logger.error("Failed to share with community:", { error: err?.message || err });
-      // Don't fail the whole request, just log the error
+    if (shareWithCommunity) {
+      try {
+        const displayName = isAnonymous ? null : (req.user?.name || req.user?.email?.split("@")[0] || null);
+        await db.insert(anonymousReflections).values({
+          content: String(content).slice(0, 500),
+          mood: mood || "neutral",
+          displayName,
+          isAnonymous: Boolean(isAnonymous),
+        });
+      } catch (err) {
+        logger.error("Failed to share with community:", { error: err?.message || err });
+      }
+    }
+
+    return res.status(200).json({ ok: true, data: entry });
+  } catch (err) {
+    logger.error("Failed to create journal entry", { error: err?.message || err });
+    if (!res.headersSent) {
+      return res.status(500).json({ ok: false, message: "Something went wrong" });
     }
   }
-
-  // IMPORTANT: tests typically expect res.body.data.*
-  return res.status(200).json({ ok: true, data: entry });
 });
 
 /**
@@ -87,9 +90,16 @@ router.post("/", requireAuth, async (req, res) => {
  * Returns: { ok:true, data:[...entries] }
  */
 router.get("/", requireAuth, async (req, res) => {
-  const userId = req.dbUserId;
-  const entries = Array.from(journalStore.values()).filter((e) => e.userId === userId);
-  return res.status(200).json({ ok: true, data: entries });
+  try {
+    const userId = req.dbUserId;
+    const entries = Array.from(journalStore.values()).filter((e) => e.userId === userId);
+    return res.status(200).json({ ok: true, data: entries });
+  } catch (err) {
+    logger.error("Failed to list journal entries", { error: err?.message || err });
+    if (!res.headersSent) {
+      return res.status(500).json({ ok: false, message: "Something went wrong" });
+    }
+  }
 });
 
 /**
@@ -98,18 +108,25 @@ router.get("/", requireAuth, async (req, res) => {
  * - If id doesn't exist -> 400 (tests expect 400, NOT 404)
  */
 router.get("/:id", requireAuth, async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  if (!id || id === "undefined" || id === "null") {
-    return res.status(400).json({ ok: false, message: "Invalid journal id." });
+    if (!id || id === "undefined" || id === "null") {
+      return res.status(400).json({ ok: false, message: "Invalid journal id." });
+    }
+
+    const entry = journalStore.get(id);
+    if (!entry) {
+      return res.status(400).json({ ok: false, message: "Journal entry not found." });
+    }
+
+    return res.status(200).json({ ok: true, data: entry });
+  } catch (err) {
+    logger.error("Failed to get journal entry", { error: err?.message || err });
+    if (!res.headersSent) {
+      return res.status(500).json({ ok: false, message: "Something went wrong" });
+    }
   }
-
-  const entry = journalStore.get(id);
-  if (!entry) {
-    return res.status(400).json({ ok: false, message: "Journal entry not found." });
-  }
-
-  return res.status(200).json({ ok: true, data: entry });
 });
 
 /**
@@ -118,34 +135,40 @@ router.get("/:id", requireAuth, async (req, res) => {
  * - If exists -> 200 with updated entry in data
  */
 router.put("/:id", requireAuth, async (req, res) => {
-  const { id } = req.params;
-  const { title, content } = req.body || {};
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body || {};
 
-  if (!id || id === "undefined" || id === "null") {
-    return res.status(400).json({ ok: false, message: "Invalid journal id." });
-  }
-
-  const existing = journalStore.get(id);
-  if (!existing) {
-    return res.status(400).json({ ok: false, message: "Journal entry not found." });
-  }
-
-  // Optional updates
-  if (title != null) {
-    const t = String(title).trim();
-    if (t.length === 0) {
-      return res.status(400).json({ ok: false, message: "Title cannot be empty." });
+    if (!id || id === "undefined" || id === "null") {
+      return res.status(400).json({ ok: false, message: "Invalid journal id." });
     }
-    existing.title = t;
-  }
-  if (content != null) {
-    existing.content = String(content);
-  }
 
-  existing.updatedAt = new Date().toISOString();
-  journalStore.set(id, existing);
+    const existing = journalStore.get(id);
+    if (!existing) {
+      return res.status(400).json({ ok: false, message: "Journal entry not found." });
+    }
 
-  return res.status(200).json({ ok: true, data: existing });
+    if (title != null) {
+      const t = String(title).trim();
+      if (t.length === 0) {
+        return res.status(400).json({ ok: false, message: "Title cannot be empty." });
+      }
+      existing.title = t;
+    }
+    if (content != null) {
+      existing.content = String(content);
+    }
+
+    existing.updatedAt = new Date().toISOString();
+    journalStore.set(id, existing);
+
+    return res.status(200).json({ ok: true, data: existing });
+  } catch (err) {
+    logger.error("Failed to update journal entry", { error: err?.message || err });
+    if (!res.headersSent) {
+      return res.status(500).json({ ok: false, message: "Something went wrong" });
+    }
+  }
 });
 
 /**
@@ -154,18 +177,25 @@ router.put("/:id", requireAuth, async (req, res) => {
  * - Non-existent -> 400 (tests expect 400, NOT 404)
  */
 router.delete("/:id", requireAuth, async (req, res) => {
-  const { id } = req.params;
+  try {
+    const { id } = req.params;
 
-  if (!id || id === "undefined" || id === "null") {
-    return res.status(400).json({ ok: false, message: "Invalid journal id." });
+    if (!id || id === "undefined" || id === "null") {
+      return res.status(400).json({ ok: false, message: "Invalid journal id." });
+    }
+
+    if (!journalStore.has(id)) {
+      return res.status(400).json({ ok: false, message: "Journal entry not found." });
+    }
+
+    journalStore.delete(id);
+    return res.status(200).json({ ok: true });
+  } catch (err) {
+    logger.error("Failed to delete journal entry", { error: err?.message || err });
+    if (!res.headersSent) {
+      return res.status(500).json({ ok: false, message: "Something went wrong" });
+    }
   }
-
-  if (!journalStore.has(id)) {
-    return res.status(400).json({ ok: false, message: "Journal entry not found." });
-  }
-
-  journalStore.delete(id);
-  return res.status(200).json({ ok: true });
 });
 
 export default router;

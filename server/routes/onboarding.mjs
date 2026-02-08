@@ -202,17 +202,24 @@ router.patch("/preferences", async (req, res) => {
 });
 
 router.get("/goals-options", async (_req, res) => {
-  return success(res, {
-    goals: VALID_GOALS.map((id) => ({
-      id,
-      label: id.split("_").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "),
-    })),
-    supportModes: VALID_SUPPORT_MODES.map((id) => ({
-      id,
-      label: id.charAt(0).toUpperCase() + id.slice(1),
-      description: getSupportModeDescription(id),
-    })),
-  });
+  try {
+    return success(res, {
+      goals: VALID_GOALS.map((id) => ({
+        id,
+        label: id.split("_").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" "),
+      })),
+      supportModes: VALID_SUPPORT_MODES.map((id) => ({
+        id,
+        label: id.charAt(0).toUpperCase() + id.slice(1),
+        description: getSupportModeDescription(id),
+      })),
+    });
+  } catch (err) {
+    logger.error("Goals options error", { error: err.message });
+    if (!res.headersSent) {
+      return res.status(500).json({ ok: false, message: "Something went wrong" });
+    }
+  }
 });
 
 function getSupportModeDescription(mode) {
