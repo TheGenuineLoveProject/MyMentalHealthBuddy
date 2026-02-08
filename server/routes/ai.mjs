@@ -2,12 +2,14 @@ import { Router } from "express";
 import { sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { authGuard } from "../middleware/auth.mjs";
+import { aiRateLimit } from "../middleware/rateLimit.mjs";
 import { chatCompletion, isConfigured } from "../utils/aiClient.mjs";
 import { logger } from "../utils/logger.mjs";
 import { checkResponseSafety, sanitizeAIResponse, ensureDisclaimer } from "../utils/safetyCheck.mjs";
 import { increment } from "../utils/metrics.mjs";
 
 const router = Router();
+router.use(aiRateLimit);
 
 const FREE_DAILY_SESSION_LIMIT = 5;
 

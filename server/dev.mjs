@@ -143,7 +143,11 @@ async function startServer() {
   
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
-  
+
+  // Global API rate limiter (120 requests/min per IP)
+  const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
+  app.use("/api", apiRateLimit);
+
   // Setup Replit Auth (must be before other routes)
   // Integration: blueprint:javascript_log_in_with_replit
   await setupAuth(app);

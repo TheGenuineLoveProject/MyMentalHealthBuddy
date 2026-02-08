@@ -6,8 +6,10 @@
 
 import { Router } from 'express';
 import { logger } from "../utils/logger.mjs";
+import { aiRateLimit } from "../middleware/rateLimit.mjs";
 
 const router = Router();
+router.use(aiRateLimit);
 
 const PERPLEXITY_API_URL = 'https://api.perplexity.ai/chat/completions';
 

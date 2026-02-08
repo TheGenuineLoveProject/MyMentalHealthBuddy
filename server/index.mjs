@@ -207,6 +207,10 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Global API rate limiter (120 requests/min per IP)
+const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
+app.use("/api", apiRateLimit);
+
 // Replit Auth (session + OIDC) — must be before routes
 await setupAuth(app);
 registerAuthRoutes(app);
