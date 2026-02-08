@@ -93,6 +93,8 @@ import peakPerformanceRouter from "./routes/peak-performance.mjs";
 import personalGrowthRouter from "./routes/personal-growth.mjs";
 import psychologicalSafetyRouter from "./routes/psychological-safety.mjs";
 import socialPostsRouter from "./routes/social-posts.mjs";
+import leadsRouter from "./routes/leads.mjs";
+import newsletterRouter from "./routes/newsletter.mjs";
 import productsRouter from "./routes/products.mjs";
 import socialPostingRouter from "./routes/social-posting.mjs";
 import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
@@ -283,6 +285,9 @@ async function startServer() {
   app.use("/api/personal-growth", personalGrowthRouter);
   app.use("/api/psychological-safety", psychologicalSafetyRouter);
   app.use("/api/social/posts", socialPostsRouter);
+  app.use("/api/social-posts", socialPostsRouter);
+  app.use("/api/leads", leadsRouter);
+  app.use("/api/newsletter", newsletterRouter);
   app.use("/api/products", productsRouter);
   app.use("/api/social-posting", socialPostingRouter);
   app.use("/api/admin/social", adminSocialStudioRouter);
