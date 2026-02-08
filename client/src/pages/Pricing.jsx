@@ -55,7 +55,7 @@ export default function Pricing() {
 
   const startCheckout = async (plan) => {
     if (!user) {
-      window.location.href = "/login";
+      window.location.href = "/api/login";
       return;
     }
 

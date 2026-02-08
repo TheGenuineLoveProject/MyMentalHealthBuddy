@@ -100,7 +100,7 @@ export default function SessionTimeout() {
           </Button>
           <Button
             variant="outline"
-            onClick={() => (window.location.href = "/login")}
+            onClick={() => (window.location.href = "/api/logout")}
             className="flex-1 min-h-[44px]"
             data-testid="button-logout"
           >

@@ -1,11 +1,17 @@
 import { useAuth } from "../hooks/useAuth";
-import { Redirect } from "wouter";
 import { Loader2 } from "lucide-react";
+import { useEffect } from "react";
 
 export default function ProtectedRoute({ children }) {
   const { user, isLoading } = useAuth();
 
-  if (isLoading) {
+  useEffect(() => {
+    if (!isLoading && !user) {
+      window.location.href = "/api/login";
+    }
+  }, [isLoading, user]);
+
+  if (isLoading || !user) {
     return (
       <div 
         className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[var(--glp-white)] to-[var(--glp-sage)]/10"
@@ -19,10 +25,6 @@ export default function ProtectedRoute({ children }) {
         </div>
       </div>
     );
-  }
-
-  if (!user) {
-    return <Redirect to="/login" />;
   }
 
   return children;

@@ -3,7 +3,8 @@ import rateLimit from "express-rate-limit";
 import cors from "cors";
 
 export function applyHardening(app) {
-  const origin = process.env.CORS_ORIGIN || "http://localhost:3000";
+  const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
+  const origin = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:3000");
   const isProd = process.env.NODE_ENV === "production";
 
   app.disable("x-powered-by");

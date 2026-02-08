@@ -24,7 +24,7 @@ function getCallbackURL() {
     const domain = process.env.REPLIT_DOMAINS.split(",")[0];
     return `https://${domain}/api/auth/github/callback`;
   }
-  return "http://localhost:5000/api/auth/github/callback";
+  return `http://localhost:5000/api/auth/github/callback`;
 }
 
 if (GITHUB_CLIENT_ID && GITHUB_CLIENT_SECRET) {

@@ -3,7 +3,8 @@ import Stripe from "stripe";
 import { logger } from "./logger.mjs";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY || "";
-const APP_BASE_URL = process.env.APP_BASE_URL || "http://localhost:5173";
+const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
+const APP_BASE_URL = process.env.APP_BASE_URL || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
 
 let stripe = null;
 
