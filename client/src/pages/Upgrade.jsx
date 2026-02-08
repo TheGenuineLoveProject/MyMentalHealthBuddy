@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Link } from "wouter";
-import { Crown, Check, ArrowLeft, Sparkles, Zap, Shield, Star, ArrowRight } from "lucide-react";
+import { Crown, Check, ArrowLeft, Sparkles, Zap, Shield, Star, ArrowRight, Loader2 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { useToast } from "@/hooks/use-toast";
 
 const PRO_FEATURES = [
   { name: "Advanced analytics", description: "Deep insights into your wellness patterns", icon: Sparkles },
@@ -14,8 +16,37 @@ const PRO_FEATURES = [
 ];
 
 export default function Upgrade() {
-  const handleUpgrade = () => {
-    window.location.href = "/api/billing/checkout?plan=pro";
+  const [upgrading, setUpgrading] = useState(false);
+  const { toast } = useToast();
+
+  const handleUpgrade = async () => {
+    setUpgrading(true);
+    try {
+      const res = await fetch("/api/billing/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ plan: "pro", interval: "monthly" }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        toast({
+          title: "Checkout unavailable",
+          description: data.error || "Unable to start checkout. Please try again.",
+          variant: "destructive",
+        });
+        setUpgrading(false);
+      }
+    } catch (error) {
+      toast({
+        title: "Connection error",
+        description: "Unable to connect to payment service. Please try again.",
+        variant: "destructive",
+      });
+      setUpgrading(false);
+    }
   };
 
   return (
@@ -99,12 +130,16 @@ export default function Upgrade() {
               
               <button 
                 onClick={handleUpgrade}
-                className="w-full btn-premium py-4 text-lg hover-glow-gold"
+                disabled={upgrading}
+                className={`w-full btn-premium py-4 text-lg hover-glow-gold ${upgrading ? 'opacity-70 cursor-not-allowed' : ''}`}
                 data-testid="button-upgrade"
               >
                 <span className="flex items-center justify-center gap-2">
-                  Continue to Pro
-                  <ArrowRight className="w-5 h-5" />
+                  {upgrading ? (
+                    <><Loader2 className="w-5 h-5 animate-spin" />Redirecting to checkout...</>
+                  ) : (
+                    <>Subscribe to Pro — $12/month<ArrowRight className="w-5 h-5" /></>
+                  )}
                 </span>
               </button>
               

@@ -209,16 +209,29 @@ export default function AIChatPage() {
               <AlertTriangle className="w-4 h-4" aria-hidden="true" />
               <span className="hidden sm:inline">Crisis Help</span>
             </Link>
-            <button
-              onClick={() => reflectMutation.mutate()}
-              disabled={reflectMutation.isPending || messages.length <= 2}
-              className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/50 transition disabled:opacity-40"
-              data-testid="button-reflect"
-              aria-label="Reflect on this conversation"
-              title="Reflect on this conversation"
-            >
-              {reflectMutation.isPending ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <FileText className="w-5 h-5" aria-hidden="true" />}
-            </button>
+            {isPro ? (
+              <button
+                onClick={() => reflectMutation.mutate()}
+                disabled={reflectMutation.isPending || messages.length <= 2}
+                className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-secondary)] hover:text-[var(--accent-teal)] hover:border-[var(--accent-teal)]/50 transition disabled:opacity-40"
+                data-testid="button-reflect"
+                aria-label="Reflect on this conversation"
+                title="Reflect on this conversation"
+              >
+                {reflectMutation.isPending ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <FileText className="w-5 h-5" aria-hidden="true" />}
+              </button>
+            ) : (
+              <Link
+                href="/account/billing"
+                className="p-2.5 rounded-xl bg-[var(--card)] border border-[var(--border)] text-[var(--text-muted)] hover:text-[var(--glp-gold)] hover:border-[var(--glp-gold)]/50 transition relative"
+                data-testid="button-reflect-pro"
+                aria-label="Reflection summary — available with Pro"
+                title="Reflection summary — available with Pro"
+              >
+                <FileText className="w-5 h-5" aria-hidden="true" />
+                <Lock className="w-3 h-3 absolute -top-1 -right-1 text-[var(--glp-gold)]" aria-hidden="true" />
+              </Link>
+            )}
             <button
               onClick={() => clearHistoryMutation.mutate()}
               disabled={clearHistoryMutation.isPending || messages.length <= 1}

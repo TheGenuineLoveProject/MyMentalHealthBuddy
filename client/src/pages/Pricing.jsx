@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { useAuth } from "../context/AuthContext.jsx";
 import { Link } from "wouter";
-import { Check, Star, Crown, ArrowLeft } from "lucide-react";
+import { Check, Star, Crown, ArrowLeft, Loader2 } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
 import { TrustSignals, BeforeAfter } from "../components/benefits";
@@ -50,12 +51,15 @@ export default function Pricing() {
   const { user } = useAuth();
   const { toast } = useToast();
 
-  const startCheckout = async (planId) => {
+  const [checkingOut, setCheckingOut] = useState(false);
+
+  const startCheckout = async (plan) => {
     if (!user) {
       window.location.href = "/login";
       return;
     }
 
+    setCheckingOut(true);
     try {
       const res = await fetch("/api/billing/checkout", {
         method: "POST",
@@ -63,7 +67,7 @@ export default function Pricing() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({ planId }),
+        body: JSON.stringify({ plan, interval: "monthly" }),
       });
 
       const data = await res.json();
@@ -75,6 +79,7 @@ export default function Pricing() {
           description: data.error || "Unable to start checkout. Please try again.",
           variant: "destructive"
         });
+        setCheckingOut(false);
       }
     } catch (error) {
       toast({
@@ -82,6 +87,7 @@ export default function Pricing() {
         description: "Unable to connect to payment service. Please try again.",
         variant: "destructive"
       });
+      setCheckingOut(false);
     }
   };
 
@@ -185,10 +191,15 @@ export default function Pricing() {
                   {tier.planId ? (
                     <button 
                       onClick={() => startCheckout(tier.planId)}
-                      className={`w-full py-3.5 px-6 rounded-xl font-semibold transition-all ${tier.popular ? 'btn-premium hover-glow-gold' : 'btn-secondary-premium'}`}
+                      disabled={checkingOut}
+                      className={`w-full py-3.5 px-6 rounded-xl font-semibold transition-all ${tier.popular ? 'btn-premium hover-glow-gold' : 'btn-secondary-premium'} ${checkingOut ? 'opacity-70 cursor-not-allowed' : ''}`}
                       data-testid={`button-choose-${tier.name.toLowerCase()}`}
                     >
-                      Choose {tier.name}
+                      {checkingOut ? (
+                        <span className="flex items-center justify-center gap-2"><Loader2 className="w-4 h-4 animate-spin" />Redirecting to checkout...</span>
+                      ) : (
+                        `Subscribe to ${tier.name} — ${tier.price}${tier.period}`
+                      )}
                     </button>
                   ) : (
                     <Link 

@@ -189,6 +189,12 @@ router.post("/reflect", authGuard, async (req, res) => {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
+    const subResult = await db.execute(sql`SELECT subscription_status FROM users WHERE id = ${userId}`);
+    const status = subResult.rows?.[0]?.subscription_status;
+    if (status !== "pro") {
+      return res.status(403).json({ error: "Reflection summary is available with Pro." });
+    }
+
     const result = await db.execute(sql`
       SELECT role, content FROM ai_messages 
       WHERE user_id = ${userId}
