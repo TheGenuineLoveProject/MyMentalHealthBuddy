@@ -15,6 +15,8 @@ function getPlanFromPriceId(priceId) {
     [process.env.STRIPE_PRICE_BASIC]: "basic",
     [process.env.STRIPE_PRICE_PREMIUM]: "premium",
     [process.env.STRIPE_PRICE_PRO]: "pro",
+    [process.env.STRIPE_PRICE_PRO_MONTHLY]: "pro",
+    [process.env.STRIPE_PRICE_PRO_YEARLY]: "pro",
   };
   return planMap[priceId] || "basic";
 }
