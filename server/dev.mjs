@@ -101,6 +101,7 @@ import emailRouter from "./routes/email.mjs";
 import adminSecurityRouter from "./routes/admin-security.mjs";
 import objectStorageRouter from "./routes/object-storage.mjs";
 import reflectionRouter from "./routes/reflection.mjs";
+import deploymentReadinessRouter from "./routes/deploymentReadiness.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -181,6 +182,7 @@ async function startServer() {
   app.use("/api/therapy", therapyRouter);
   app.use("/api/dashboard", dashboardRouter);
   app.use("/api/webhook", webhookRouter);
+  app.use("/api/deployment-readiness", deploymentReadinessRouter);
   app.use("/api/insights", insightsRouter);
   app.use("/api/progress", progressRouter);
   app.use("/api/states", statesRouter);

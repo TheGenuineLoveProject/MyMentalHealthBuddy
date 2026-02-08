@@ -62,48 +62,66 @@ router.post(
 
     // Durable idempotency check
     if (await isProcessed(event.id)) {
+      logger.info("Duplicate webhook event skipped", { eventId: event.id, type: event.type });
       return res.json({ received: true, duplicate: true });
     }
 
-    // Handle events safely (retry-safe)
+    // Handle events safely (retry-safe, idempotent)
     try {
       switch (event.type) {
         case "checkout.session.completed": {
           const session = event.data.object;
-          if (session.customer && session.subscription) {
-            await db
-              .update(users)
-              .set({
-                stripeCustomerId: session.customer,
-                subscriptionStatus: "pro",
-                updatedAt: new Date(),
-              })
-              .where(eq(users.email, session.customer_email));
-            logger.info("Subscription activated via checkout", { customer: session.customer, status: "pro" });
-            
-            if (session.customer_email) {
-              sendUpgradeConfirmation(session.customer_email, session.customer_details?.name || "").catch(err => {
-                logger.warn("Failed to send upgrade email", { error: err.message });
-              });
-            }
+          if (!session.customer || !session.subscription) {
+            logger.warn("checkout.session.completed missing customer or subscription", { sessionId: session.id });
+            break;
           }
+          if (!session.customer_email) {
+            logger.warn("checkout.session.completed missing customer_email — cannot match user", { customer: session.customer });
+            break;
+          }
+          const checkoutResult = await db
+            .update(users)
+            .set({
+              stripeCustomerId: session.customer,
+              subscriptionStatus: "pro",
+              updatedAt: new Date(),
+            })
+            .where(eq(users.email, session.customer_email));
+          const checkoutRowsAffected = checkoutResult?.rowCount ?? checkoutResult?.changes ?? 0;
+          if (checkoutRowsAffected === 0) {
+            logger.warn("checkout.session.completed: no user matched by email", { email: session.customer_email, customer: session.customer });
+          } else {
+            logger.info("Subscription activated via checkout", { customer: session.customer, status: "pro" });
+          }
+          sendUpgradeConfirmation(session.customer_email, session.customer_details?.name || "").catch(err => {
+            logger.warn("Failed to send upgrade email", { error: err.message });
+          });
           break;
         }
 
         case "customer.subscription.created":
         case "customer.subscription.updated": {
           const subscription = event.data.object;
-          if (subscription.customer) {
-            const isActive = ["active", "trialing"].includes(subscription.status);
-            const canonicalStatus = isActive ? "pro" : "free";
-            await db
-              .update(users)
-              .set({
-                subscriptionStatus: canonicalStatus,
-                subscriptionExpiresAt: new Date(subscription.current_period_end * 1000),
-                updatedAt: new Date(),
-              })
-              .where(eq(users.stripeCustomerId, subscription.customer));
+          if (!subscription.customer) {
+            logger.warn(`${event.type} missing customer field`, { subscriptionId: subscription.id });
+            break;
+          }
+          const isActive = ["active", "trialing"].includes(subscription.status);
+          const canonicalStatus = isActive ? "pro" : "free";
+          const syncResult = await db
+            .update(users)
+            .set({
+              subscriptionStatus: canonicalStatus,
+              subscriptionExpiresAt: subscription.current_period_end
+                ? new Date(subscription.current_period_end * 1000)
+                : null,
+              updatedAt: new Date(),
+            })
+            .where(eq(users.stripeCustomerId, subscription.customer));
+          const syncRows = syncResult?.rowCount ?? syncResult?.changes ?? 0;
+          if (syncRows === 0) {
+            logger.warn(`${event.type}: no user found for stripeCustomerId`, { customer: subscription.customer, stripeStatus: subscription.status });
+          } else {
             logger.info("Subscription status synced", { customer: subscription.customer, stripeStatus: subscription.status, canonicalStatus });
           }
           break;
@@ -111,45 +129,59 @@ router.post(
 
         case "customer.subscription.deleted": {
           const subscription = event.data.object;
-          if (subscription.customer) {
-            const userRows = await db.select({ email: users.email, username: users.username })
-              .from(users)
-              .where(eq(users.stripeCustomerId, subscription.customer));
-            
-            await db
-              .update(users)
-              .set({
-                subscriptionStatus: "free",
-                subscriptionExpiresAt: new Date(),
-                updatedAt: new Date(),
-              })
-              .where(eq(users.stripeCustomerId, subscription.customer));
+          if (!subscription.customer) {
+            logger.warn("customer.subscription.deleted missing customer field", { subscriptionId: subscription.id });
+            break;
+          }
+          const userRows = await db.select({ email: users.email, username: users.username })
+            .from(users)
+            .where(eq(users.stripeCustomerId, subscription.customer));
+          
+          const deleteResult = await db
+            .update(users)
+            .set({
+              subscriptionStatus: "free",
+              subscriptionExpiresAt: new Date(),
+              updatedAt: new Date(),
+            })
+            .where(eq(users.stripeCustomerId, subscription.customer));
+          const deleteRows = deleteResult?.rowCount ?? deleteResult?.changes ?? 0;
+          if (deleteRows === 0) {
+            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId", { customer: subscription.customer });
+          } else {
             logger.info("Subscription deleted, reverted to free", { customer: subscription.customer });
-            
-            const cancelledUser = userRows?.[0];
-            if (cancelledUser?.email) {
-              sendCancellationAcknowledgment(
-                cancelledUser.email, 
-                cancelledUser.username || "", 
-                subscription.current_period_end
-              ).catch(err => {
-                logger.warn("Failed to send cancellation email", { error: err.message });
-              });
-            }
+          }
+          
+          const cancelledUser = userRows?.[0];
+          if (cancelledUser?.email) {
+            sendCancellationAcknowledgment(
+              cancelledUser.email, 
+              cancelledUser.username || "", 
+              subscription.current_period_end
+            ).catch(err => {
+              logger.warn("Failed to send cancellation email", { error: err.message });
+            });
           }
           break;
         }
 
         case "invoice.paid": {
           const invoice = event.data.object;
-          if (invoice.customer) {
-            await db
-              .update(users)
-              .set({
-                subscriptionStatus: "pro",
-                updatedAt: new Date(),
-              })
-              .where(eq(users.stripeCustomerId, invoice.customer));
+          if (!invoice.customer) {
+            logger.warn("invoice.paid missing customer field", { invoiceId: invoice.id });
+            break;
+          }
+          const paidResult = await db
+            .update(users)
+            .set({
+              subscriptionStatus: "pro",
+              updatedAt: new Date(),
+            })
+            .where(eq(users.stripeCustomerId, invoice.customer));
+          const paidRows = paidResult?.rowCount ?? paidResult?.changes ?? 0;
+          if (paidRows === 0) {
+            logger.warn("invoice.paid: no user found for stripeCustomerId", { customer: invoice.customer });
+          } else {
             logger.info("Invoice paid, confirmed pro", { customer: invoice.customer });
           }
           break;
@@ -157,14 +189,21 @@ router.post(
 
         case "invoice.payment_failed": {
           const invoice = event.data.object;
-          if (invoice.customer) {
-            await db
-              .update(users)
-              .set({
-                subscriptionStatus: "free",
-                updatedAt: new Date(),
-              })
-              .where(eq(users.stripeCustomerId, invoice.customer));
+          if (!invoice.customer) {
+            logger.warn("invoice.payment_failed missing customer field", { invoiceId: invoice.id });
+            break;
+          }
+          const failedResult = await db
+            .update(users)
+            .set({
+              subscriptionStatus: "free",
+              updatedAt: new Date(),
+            })
+            .where(eq(users.stripeCustomerId, invoice.customer));
+          const failedRows = failedResult?.rowCount ?? failedResult?.changes ?? 0;
+          if (failedRows === 0) {
+            logger.warn("invoice.payment_failed: no user found for stripeCustomerId", { customer: invoice.customer });
+          } else {
             logger.info("Invoice payment failed, reverted to free", { customer: invoice.customer });
           }
           break;
