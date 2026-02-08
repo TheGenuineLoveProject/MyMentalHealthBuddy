@@ -41,7 +41,7 @@ export default function Upgrade() {
     <>
       <SEO 
         title="Upgrade to Pro - The Genuine Love Project"
-        description="Unlock advanced analytics, AI insights, guided journaling, and 1000+ wellness tools with a Pro subscription."
+        description="Pro adds unlimited AI sessions, deeper insights, and additional wellness tools. Cancel anytime."
       />
       <div className="min-h-screen safe-padding hero-gradient overflow-hidden relative">
         <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
@@ -66,7 +66,7 @@ export default function Upgrade() {
                 <h1 className="text-display-lg text-teal mb-2" data-testid="text-upgrade-title">
                   Upgrade to <span className="text-gradient-brand">Pro</span>
                 </h1>
-                <p className="text-lead">Unlock your full wellness potential</p>
+                <p className="text-lead">More tools, if you want them</p>
               </div>
             </header>
 

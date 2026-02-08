@@ -37,7 +37,7 @@ const VOICE_AFFIRMATIONS = {
   welcome: [
     "Welcome back to your sacred space.",
     "I'm here whenever you need me.",
-    "Let's continue your healing journey together."
+    "Your tools are here whenever you're ready."
   ]
 };
 

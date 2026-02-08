@@ -40,7 +40,7 @@ export default function ProtectedRoute({ children }) {
               Protected Space
             </h2>
             <p className="text-muted-foreground">
-              Sign in to access your personal healing journey, journal entries, and wellness tools.
+              Sign in to access your journal, mood tracking, and wellness tools.
             </p>
           </div>
           

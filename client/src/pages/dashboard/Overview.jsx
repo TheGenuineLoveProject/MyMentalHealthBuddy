@@ -27,7 +27,7 @@ const QUICK_ACTIONS = [
 const WELLNESS_INSIGHTS = [
   { icon: Brain, title: "Mindfulness Streak", description: "You've been consistent with your practice for 7 days!" },
   { icon: Shield, title: "Emotional Resilience", description: "Your coping skills have improved by 15% this month." },
-  { icon: Flame, title: "Growth Momentum", description: "You're making steady progress on your healing journey." }
+  { icon: Flame, title: "Growth Momentum", description: "You've been showing up consistently. That's real progress." }
 ];
 
 function getIconClass(color) {
@@ -175,7 +175,7 @@ export default function DashboardOverview() {
 
   useSEO({
     title: "Your Dashboard - The Genuine Love Project",
-    description: "Your personal wellness dashboard for tracking your healing journey, celebrating progress, and nurturing emotional growth.",
+    description: "Your personal wellness dashboard for reviewing mood patterns, journal entries, and reflection insights.",
     noIndex: true
   });
 
@@ -254,8 +254,8 @@ export default function DashboardOverview() {
       benefits={pickBenefits(["agency","clarity","growth"], 3)}
       clarity={{
         what: "Your personal wellness dashboard.",
-        why: "To track your healing journey and celebrate progress.",
-        who: "For you and your wellness goals.",
+        why: "To see your patterns and notice what's working.",
+        who: "For you — review at your own pace.",
         when: "Check in whenever you want.",
         where: "Right here.",
         how: "Explore your stats, activities, and insights."

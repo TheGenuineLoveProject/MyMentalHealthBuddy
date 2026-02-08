@@ -24,7 +24,7 @@ type SignUpForm = z.infer<typeof signUpSchema>;
 
 const FEATURES = [
   "AI-powered wellness support",
-  "Personalized healing journey",
+  "Self-paced reflection tools",
   "Evidence-based tools",
   "Safe, compassionate space"
 ];
@@ -64,7 +64,7 @@ export default function SignUp() {
     <>
       <SEO
         title="Sign Up | The Genuine Love Project"
-        description="Begin your wellness journey. Educational wellness tools for adults 18+."
+        description="Free wellness tools for self-reflection and emotional awareness. For adults 18+."
       />
     <div className="min-h-screen hero-gradient flex items-center justify-center p-4">
       <div className="w-full max-w-lg">
@@ -77,8 +77,8 @@ export default function SignUp() {
             />
             <span className="text-heading-lg text-teal">Genuine Love</span>
           </Link>
-          <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Start Your Journey</h1>
-          <p className="text-lead">Begin your path to healing and self-love</p>
+          <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Create Your Account</h1>
+          <p className="text-lead">Free to start. No credit card required.</p>
         </div>
 
         <div className="grid md:grid-cols-5 gap-6">

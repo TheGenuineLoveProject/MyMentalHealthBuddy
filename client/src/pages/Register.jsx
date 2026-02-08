@@ -96,7 +96,7 @@ export default function Register() {
     <>
       <SEO 
         title="Create Account"
-        description="Create your free Genuine Love Project account. Start your mental wellness journey with AI-powered support, mood tracking, and journaling."
+        description="Create your free account. Mood tracking, journaling, reflection prompts, and AI chat — no credit card required."
       />
       <div className="min-h-screen overflow-hidden relative flex items-center justify-center p-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 50%, var(--glp-teal-50) 100%)' }}>
         {/* Ambient Decorative Orbs */}
@@ -151,9 +151,9 @@ export default function Register() {
           >
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold font-display mb-3" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-register-title">
-                Start Your Wellness Journey
+                Create Your Account
               </h1>
-              <p style={{ color: 'var(--glp-sage)' }}>Create your free account today</p>
+              <p style={{ color: 'var(--glp-sage)' }}>Free to start. No credit card required.</p>
             </div>
 
             <div className="mb-6 p-4 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)]/20">

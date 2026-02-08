@@ -149,7 +149,7 @@ export default function Dashboard() {
                 <h1 className="text-2xl lg:text-3xl font-bold tracking-tight" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-greeting">
                   {greeting.text}, {user?.email?.split("@")[0] || "Friend"}
                 </h1>
-                <p style={{ color: 'var(--glp-ink)', opacity: 0.6 }} className="mt-0.5">Your healing journey continues—here's where you are today</p>
+                <p style={{ color: 'var(--glp-ink)', opacity: 0.6 }} className="mt-0.5">Here's what's available to you today</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -459,7 +459,7 @@ export default function Dashboard() {
           </section>
 
           <section className="mb-10" aria-label="Progress tracking">
-            <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Your Healing Journey</h2>
+            <h2 className="text-lg font-semibold mb-5" style={{ color: 'var(--glp-ink)' }}>Your Progress</h2>
             <ProgressTracker />
           </section>
 

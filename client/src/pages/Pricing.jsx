@@ -13,7 +13,7 @@ const tiers = [
     name: "Free",
     price: "$0",
     period: "forever",
-    description: "Begin your healing journey with foundational tools—no credit card required",
+    description: "Core wellness tools with no credit card and no expiration",
     features: [
       "Mood tracking & journaling",
       "5 AI chat sessions per day",
@@ -108,7 +108,7 @@ export default function Pricing() {
     <div className="min-h-screen overflow-hidden relative" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-teal-50) 50%, var(--glp-paper) 100%)' }}>
       <SEO 
         title="Pricing - The Genuine Love Project"
-        description="Choose your plan and start your wellness journey. Free and Pro options available."
+        description="Free core tools or Pro with unlimited AI sessions. No lock-in, cancel anytime."
       />
       
       <div className="absolute -top-48 -right-48 w-[600px] h-[600px] rounded-full" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />

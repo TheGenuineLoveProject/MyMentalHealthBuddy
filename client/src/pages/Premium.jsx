@@ -34,7 +34,7 @@ const PREMIUM_FEATURES = [
   {
     id: "journeys",
     name: "Healing Journeys",
-    description: "Structured therapeutic programs for lasting transformation",
+    description: "Self-paced programs with guided prompts and reflection exercises",
     icon: Sparkles,
     gradient: "linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))",
     component: HealingJourneys
@@ -42,7 +42,7 @@ const PREMIUM_FEATURES = [
   {
     id: "analytics",
     name: "Progress Analytics",
-    description: "Comprehensive insights into your wellness journey",
+    description: "See how your mood and reflections change over time",
     icon: BarChart3,
     gradient: "linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))",
     component: ProgressAnalytics
@@ -147,15 +147,15 @@ export default function Premium() {
   return (
     <WellnessPageShell
       title="Premium Features"
-      subtitle="Unlock your full wellness potential"
+      subtitle="Additional tools for Pro members"
       benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
       clarity={{
         what: "Premium wellness tools and features.",
-        why: "To support deeper healing and growth.",
-        who: "For members seeking advanced support.",
-        when: "Whenever you're ready for more.",
-        where: "Right here.",
-        how: "Explore features and choose your path."
+        why: "To add depth to your existing reflection practice.",
+        who: "For Pro members who want more tools.",
+        when: "Whenever it feels useful.",
+        where: "Right here, alongside your free tools.",
+        how: "Browse the tools below and try what interests you."
       }}
       examples={[
         { label: "Beginner", examples: ["Explore available features.", "Start with one premium tool."] },
@@ -166,7 +166,7 @@ export default function Premium() {
     <>
       <SEO
         title="Premium Features"
-        description="Unlock the full potential of your mental wellness journey with premium features including healing journeys, AI concierge, advanced analytics, and personalized recommendations."
+        description="Pro tools including guided programs, mood analytics, daily planner, and AI-powered suggestions. Cancel anytime."
       />
 
       <div className="min-h-screen hero-gradient">
@@ -193,7 +193,7 @@ export default function Premium() {
                   <h1 className="text-display-lg text-teal" data-testid="text-premium-title">
                     Premium Features
                   </h1>
-                  <p className="text-lead">Unlock your full wellness potential</p>
+                  <p className="text-lead">Additional tools for Pro members</p>
                 </div>
               </div>
             <div className="flex gap-2" role="group" aria-label="View options">
@@ -229,10 +229,10 @@ export default function Premium() {
             <div className="card-elevated p-6 md:p-8">
               <div className="text-center mb-8">
                 <h2 className="text-2xl font-bold text-[var(--text)] mb-2">
-                  Choose Your Wellness Journey
+                  Plans
                 </h2>
                 <p className="text-[var(--text-secondary)]">
-                  Select a plan that fits your mental health goals
+                  Core tools are free. Pro adds more, if you want it
                 </p>
               </div>
               <StripePricingTable />

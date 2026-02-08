@@ -62,7 +62,7 @@ export default function Login() {
             <span className="text-heading-lg text-teal">Genuine Love</span>
           </Link>
           <h1 className="text-display-md text-teal mb-2" data-testid="text-page-title">Welcome Back</h1>
-          <p className="text-lead">Continue your wellness journey</p>
+          <p className="text-lead">Sign in to your account</p>
         </div>
 
         <div className="card-bordered">

@@ -123,27 +123,27 @@ export default function CanvaLanding() {
     {
       icon: BarChart3,
       title: "Personal Growth",
-      description: "Track your transformation journey with intelligent progress insights and milestones"
+      description: "Track how you're feeling over time with mood patterns, reflection history, and progress insights"
     },
     {
       icon: Users,
       title: "Community Support",
-      description: "Connect with like-minded souls in a safe, nurturing environment"
+      description: "Share anonymous affirmations and read others' — a quiet, moderated space with no social pressure"
     },
     {
       icon: BookOpen,
       title: "Wisdom Library",
-      description: "Access ancient wisdom and modern psychology insights curated for your journey"
+      description: "Browse reflection prompts, educational articles, and evidence-informed wellness concepts"
     },
     {
       icon: Shield,
       title: "Safe Space",
-      description: "Your sanctuary for vulnerability, growth, and authentic self-expression"
+      description: "Private by default. No social feeds, no public profiles, no pressure to share"
     },
     {
       icon: Zap,
       title: "AI Companion",
-      description: "24/7 compassionate guidance powered by trauma-informed AI technology"
+      description: "An AI reflection partner available anytime — it listens, reflects back, and doesn't tell you what to do"
     }
   ];
 

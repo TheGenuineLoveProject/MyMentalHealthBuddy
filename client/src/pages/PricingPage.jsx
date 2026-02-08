@@ -11,7 +11,7 @@ const PLANS = [
     id: "free",
     name: "Free",
     price: 0,
-    description: "Start your wellness journey",
+    description: "Core wellness tools, always free",
     features: [
       "Mood tracking & journaling",
       "5 AI chat sessions per day",
@@ -69,7 +69,7 @@ export default function PricingPage() {
     <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background">
       <SEO 
         title="Pricing — The Genuine Love Project"
-        description="Choose the plan that's right for your wellness journey."
+        description="Free core tools or Pro with unlimited AI sessions. No lock-in, cancel anytime."
       />
       
       <main className="container mx-auto px-4 py-12 max-w-6xl">

@@ -8,7 +8,7 @@ export default function Login() {
   return (
   <WellnessPageShell
     title="Sign In"
-    subtitle="Continue your healing journey with a secure, simple sign-in."
+    subtitle="Sign in to your account."
     benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
     clarity={{
       what: "A self-paced reflection tool you control.",
@@ -28,7 +28,7 @@ export default function Login() {
     <>
       <SEO 
         title="Sign In - The Genuine Love Project"
-        description="Sign in to your Genuine Love Project account. Continue your mental wellness journey."
+        description="Sign in to your Genuine Love Project account to access your wellness tools."
       />
       <div className="min-h-screen overflow-hidden relative flex items-center justify-center px-6" style={{ background: 'linear-gradient(180deg, var(--glp-paper) 0%, var(--glp-sage-10) 100%)' }}>
         <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full animate-pulse" style={{ background: 'radial-gradient(circle, var(--glp-sage-30), transparent 70%)' }} aria-hidden="true" />
@@ -53,7 +53,7 @@ export default function Login() {
               <h1 className="text-3xl font-bold font-display" style={{ color: 'var(--glp-sage-deep)' }}>
                 Welcome Back
               </h1>
-              <p className="mt-3" style={{ color: 'var(--glp-sage)' }}>Sign in to continue your healing journey</p>
+              <p className="mt-3" style={{ color: 'var(--glp-sage)' }}>Sign in to access your tools and reflections</p>
             </div>
 
             <a
