@@ -8,7 +8,7 @@ import { pickBenefits } from "@/lib/benefits";
 const PRO_FEATURES = [
   { name: "Advanced analytics", description: "Deep insights into your wellness patterns", icon: Sparkles },
   { name: "AI-powered insights", description: "Personalized recommendations and reflections", icon: Zap },
-  { name: "Premium journaling", description: "Advanced prompts and guided exercises", icon: Star },
+  { name: "Guided journaling", description: "Advanced prompts and guided exercises", icon: Star },
   { name: "Priority support", description: "Fast, dedicated assistance when you need it", icon: Shield },
   { name: "1000+ wellness tools", description: "Full access to our complete toolkit", icon: Crown },
 ];
@@ -41,7 +41,7 @@ export default function Upgrade() {
     <>
       <SEO 
         title="Upgrade to Pro - The Genuine Love Project"
-        description="Unlock advanced analytics, AI insights, premium journaling, and 1000+ wellness tools with a Pro subscription."
+        description="Unlock advanced analytics, AI insights, guided journaling, and 1000+ wellness tools with a Pro subscription."
       />
       <div className="min-h-screen safe-padding hero-gradient overflow-hidden relative">
         <div className="decorative-orb decorative-orb-gold w-[400px] h-[400px] -top-20 -right-20 absolute" aria-hidden="true" />
@@ -72,7 +72,7 @@ export default function Upgrade() {
 
             <div className="glass-premium rounded-2xl p-8 mb-8">
               <div className="flex items-baseline justify-center gap-2 mb-6">
-                <span className="text-display-xl text-gold font-bold">$19</span>
+                <span className="text-display-xl text-gold font-bold">$12</span>
                 <span className="text-body-lg text-[var(--teal-500)]">/month</span>
               </div>
               
@@ -103,13 +103,13 @@ export default function Upgrade() {
                 data-testid="button-upgrade"
               >
                 <span className="flex items-center justify-center gap-2">
-                  Upgrade Now
+                  Continue to Pro
                   <ArrowRight className="w-5 h-5" />
                 </span>
               </button>
               
               <p className="text-caption text-center mt-4">
-                Cancel anytime. 7-day money-back guarantee.
+                Cancel anytime — no lock-in, no cancellation fees.
               </p>
             </div>
 

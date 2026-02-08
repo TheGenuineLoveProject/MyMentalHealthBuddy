@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Lock, Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
 export default function PlanGate({ 
@@ -41,27 +41,27 @@ export default function PlanGate({
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-6 max-w-sm w-full text-center border border-slate-200 dark:border-slate-700">
           <div className="w-12 h-12 mx-auto mb-4 rounded-full bg-[var(--glp-gold-30)] flex items-center justify-center">
-            <Lock className="w-6 h-6 text-[var(--glp-gold)]" />
+            <Sparkles className="w-6 h-6 text-[var(--glp-gold)]" />
           </div>
           
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-            {user ? "Upgrade to Pro" : "Sign up to unlock"}
+            {user ? "This is a Pro feature" : "Sign up to explore"}
           </h3>
           
           <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
-            {feature} is available with Pro. 
-            No pressure—explore at your pace.
+            {feature} is part of Pro. 
+            Your free tools — journaling, mood tracking, reflection — are always available.
           </p>
           
           <div className="space-y-2">
             {user ? (
               <Link
-                href="/upgrade"
+                href="/account/billing"
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-[var(--glp-sage)] text-white rounded-xl font-medium hover:opacity-90 transition-opacity"
                 data-testid="link-upgrade"
               >
                 <Sparkles className="w-4 h-4" />
-                See Pro benefits
+                Learn about Pro
                 <ArrowRight className="w-4 h-4" />
               </Link>
             ) : (
@@ -86,7 +86,7 @@ export default function PlanGate({
           </div>
           
           <p className="text-xs text-slate-400 mt-4">
-            Cancel anytime. No strings attached.
+            No obligation. Cancel anytime, no questions asked.
           </p>
         </div>
       </div>

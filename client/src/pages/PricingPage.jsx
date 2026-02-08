@@ -26,8 +26,8 @@ const PLANS = [
   {
     id: "pro",
     name: "Pro",
-    price: 19,
-    description: "Unlock your full wellness potential",
+    price: 12,
+    description: "Unlimited AI sessions and the full wellness toolkit",
     features: [
       "Everything in Free",
       "Unlimited AI chat sessions",
@@ -49,15 +49,15 @@ const FAQ = [
   },
   {
     q: "Is there a free trial?",
-    a: "Yes! Premium includes a 7-day free trial. You won't be charged until the trial ends."
+    a: "The free plan is yours forever — no trial needed. If you choose Pro, you can cancel anytime and keep access through the end of your paid period."
   },
   {
     q: "What payment methods do you accept?",
     a: "We accept all major credit cards through Stripe. Your payment information is securely encrypted."
   },
   {
-    q: "Do you offer refunds?",
-    a: "Yes, we offer a 30-day money-back guarantee on all paid plans. No questions asked."
+    q: "What if I change my mind?",
+    a: "You can cancel anytime from your billing page. You'll keep full access through the end of your paid period — no penalties, no hassle."
   }
 ];
 
@@ -79,11 +79,11 @@ export default function PricingPage() {
             <span>Simple, Transparent Pricing</span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-            Invest in Your <span className="text-primary">Wellbeing</span>
+            Choose What Feels <span className="text-primary">Right</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Choose the plan that fits your journey. All plans include our core 
-            wellness tools and crisis support resources.
+            Core tools — mood tracking, journaling, reflection, and crisis support — are free, always.
+            Pro adds unlimited AI sessions and deeper insights, only if you want them.
           </p>
         </header>
 
@@ -139,8 +139,8 @@ export default function PricingPage() {
             <div className="flex items-start gap-3 p-4">
               <Shield className="w-8 h-8 text-primary flex-shrink-0" />
               <div>
-                <h3 className="font-semibold mb-1">30-Day Guarantee</h3>
-                <p className="text-sm text-muted-foreground">Not satisfied? Full refund, no questions asked.</p>
+                <h3 className="font-semibold mb-1">No Lock-In</h3>
+                <p className="text-sm text-muted-foreground">Cancel anytime. Keep access through the end of your paid period.</p>
               </div>
             </div>
             <div className="flex items-start gap-3 p-4">

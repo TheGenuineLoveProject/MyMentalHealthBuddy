@@ -28,9 +28,9 @@ const tiers = [
   },
   {
     name: "Pro",
-    price: "$19",
+    price: "$12",
     period: "/month",
-    description: "Unlock your full wellness potential with unlimited access",
+    description: "Unlimited AI sessions and the full wellness toolkit — cancel anytime",
     features: [
       "Everything in Free",
       "Unlimited AI chat sessions",
@@ -129,11 +129,11 @@ export default function Pricing() {
 
           <div className="text-center mb-16 animate-fade-in-up">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 font-display" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-pricing-title">
-              Invest in Your <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Healing</span>
+              Choose What Feels <span style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-gold))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Right</span>
             </h1>
             <p className="text-xl max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--glp-sage)' }}>
-              Your mental health is worth prioritizing. Start free and upgrade when you're ready for deeper support. 
-              Cancel anytime—no questions asked.
+              Core tools are free, always. Pro adds unlimited AI sessions and deeper insights — only if you want them.
+              Cancel anytime, no questions asked.
             </p>
           </div>
           
