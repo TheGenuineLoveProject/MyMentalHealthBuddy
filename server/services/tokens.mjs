@@ -1,8 +1,5 @@
 import jwt from "jsonwebtoken";
-
-const isProduction = process.env.NODE_ENV === "production";
-const JWT_SECRET = process.env.JWT_SECRET || (isProduction ? null : "dev_secret_not_for_production");
-const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || (isProduction ? null : "dev_refresh_secret_not_for_production");
+import { JWT_SECRET, JWT_REFRESH_SECRET } from "../config/secrets.mjs";
 
 const ACCESS_TOKEN_EXPIRY = "15m";
 const REFRESH_TOKEN_EXPIRY = "7d";

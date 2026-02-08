@@ -7,15 +7,12 @@ import { db } from "../db/client.mjs";
 import { users } from "../../shared/schema.mjs";
 import { logAudit, getClientIp, AUDIT_ACTIONS } from "../services/auditLog.mjs";
 import { logger } from "../utils/logger.mjs";
+import { JWT_SECRET as ACCESS_SECRET, JWT_REFRESH_SECRET as REFRESH_SECRET } from "../config/secrets.mjs";
 
 const router = express.Router();
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
-const isProduction = process.env.NODE_ENV === "production";
-
-const ACCESS_SECRET = process.env.JWT_SECRET || (isProduction ? null : "dev_secret_not_for_production");
-const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || (isProduction ? null : "dev_refresh_secret_not_for_production");
 
 function getCallbackURL() {
   if (process.env.REPLIT_DEV_DOMAIN) {

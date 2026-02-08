@@ -2,9 +2,7 @@ import jwt from "jsonwebtoken";
 import { db } from "../db/client.mjs";
 import { eq } from "drizzle-orm";
 import { users } from "../db/schema.mjs";
-
-// Secrets (dev fallback is OK for local tests; set real ones in prod)
-const JWT_SECRET = process.env.JWT_SECRET || "dev-secret-key";
+import { JWT_SECRET } from "../config/secrets.mjs";
 
 // Reads: Authorization: Bearer <token>
 function getToken(req) {

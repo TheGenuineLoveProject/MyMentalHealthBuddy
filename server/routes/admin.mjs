@@ -2,12 +2,9 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import { logger } from "../utils/logger.mjs";
+import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
 
 const router = Router();
-
-const isProd = process.env.NODE_ENV === "production";
-const ACCESS_SECRET =
-  process.env.JWT_SECRET || (isProd ? null : "dev_secret_not_for_production");
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 function requireAuth(req, res, next) {

@@ -3,14 +3,11 @@ import { Router } from "express";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { logger } from "../utils/logger.mjs";
+import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
 
-// In-memory users for tests/dev (swap to DB later safely)
-const users = new Map(); // email -> { id, email, passwordHash }
-
-// Secrets (dev-safe defaults; production requires env vars)
 const isProd = process.env.NODE_ENV === "production";
-const ACCESS_SECRET =
-  process.env.JWT_SECRET || (isProd ? null : "dev_secret_not_for_production");
+
+const users = new Map();
 
 if (isProd && !ACCESS_SECRET) {
   logger.error("DEPLOY BLOCKED: JWT_SECRET must be set in production.");

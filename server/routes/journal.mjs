@@ -6,19 +6,11 @@ import { db } from "../db/client.mjs";
 import { anonymousReflections } from "../../shared/schema.mjs";
 import { increment } from "../utils/metrics.mjs";
 import { logger } from "../utils/logger.mjs";
+import { JWT_SECRET as ACCESS_SECRET } from "../config/secrets.mjs";
 
 const router = Router();
 
-/**
- * In-memory store for tests (deterministic).
- * Key: id, Value: entry
- */
 const journalStore = new Map();
-
-/** Match typical dev/prod behavior */
-const isProd = process.env.NODE_ENV === "production";
-const ACCESS_SECRET =
-  process.env.JWT_SECRET || (isProd ? null : "dev_secret_not_for_production");
 
 function requireAuth(req, res, next) {
   try {
