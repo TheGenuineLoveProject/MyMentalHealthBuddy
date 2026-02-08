@@ -164,7 +164,7 @@ router.post("/", requireAuth, requireAdmin, async (req, res) => {
         featured: featured ? 1 : 0,
         category: category || null,
         tags: tags || null,
-        authorId: req.user?.id || randomUUID(),
+        authorId: req.dbUserId || randomUUID(),
       })
       .returning();
     
@@ -269,7 +269,7 @@ router.post("/:id/purchase", requireAuth, async (req, res) => {
       .insert(productPurchases)
       .values({
         productId: id,
-        userId: req.user.id,
+        userId: req.dbUserId,
         pricePaid: product.price,
         paymentMethod: paymentMethod || null,
         transactionId: transactionId || null,

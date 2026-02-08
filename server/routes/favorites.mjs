@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     let query = db
       .select()
       .from(userFavorites)
-      .where(eq(userFavorites.userId, req.user.id));
+      .where(eq(userFavorites.userId, req.dbUserId));
 
     if (type) {
       query = db
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
         .from(userFavorites)
         .where(
           and(
-            eq(userFavorites.userId, req.user.id),
+            eq(userFavorites.userId, req.dbUserId),
             eq(userFavorites.itemType, type)
           )
         );
@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
       .from(userFavorites)
       .where(
         and(
-          eq(userFavorites.userId, req.user.id),
+          eq(userFavorites.userId, req.dbUserId),
           eq(userFavorites.itemType, itemType),
           eq(userFavorites.itemContent, itemContent)
         )
@@ -68,7 +68,7 @@ router.post("/", async (req, res) => {
     const [favorite] = await db
       .insert(userFavorites)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         itemType,
         itemContent: itemContent.trim()
       })
@@ -94,7 +94,7 @@ router.delete("/:id", async (req, res) => {
       .where(
         and(
           eq(userFavorites.id, id),
-          eq(userFavorites.userId, req.user.id)
+          eq(userFavorites.userId, req.dbUserId)
         )
       )
       .returning();

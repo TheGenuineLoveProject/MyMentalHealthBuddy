@@ -69,7 +69,7 @@ router.use(authGuard);
 
 router.post("/session", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { flowType = "general" } = req.body;
 
     if (!userId) {
@@ -107,7 +107,7 @@ router.post("/session", async (req, res) => {
 
 router.post("/message", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { sessionId, message, flowType = "general" } = req.body;
 
     if (!userId || !message) {
@@ -204,7 +204,7 @@ router.post("/message", async (req, res) => {
 
 router.get("/sessions", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) {
       return res.status(401).json({ error: "Unauthorized" });
     }
@@ -229,7 +229,7 @@ router.get("/sessions", async (req, res) => {
 
 router.get("/history", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) {
       return res.status(401).json({ error: "Unauthorized" });
     }

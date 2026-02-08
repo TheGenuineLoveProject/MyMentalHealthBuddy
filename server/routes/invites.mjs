@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     const userInvites = await db
       .select()
       .from(invites)
-      .where(eq(invites.senderId, req.user.id));
+      .where(eq(invites.senderId, req.dbUserId));
 
     res.json(userInvites);
   } catch (error) {
@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
     const [newInvite] = await db
       .insert(invites)
       .values({
-        senderId: req.user.id,
+        senderId: req.dbUserId,
         email: email.toLowerCase().trim(),
         status: "pending"
       })
@@ -47,13 +47,13 @@ router.post("/", async (req, res) => {
     const existingBadge = await db
       .select()
       .from(badges)
-      .where(eq(badges.userId, req.user.id))
+      .where(eq(badges.userId, req.dbUserId))
       .where(eq(badges.badgeId, "invited-friend"))
       .limit(1);
 
     if (existingBadge.length === 0) {
       await db.insert(badges).values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         badgeId: "invited-friend"
       });
     }

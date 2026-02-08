@@ -88,7 +88,7 @@ async function calculateStreak(userId) {
 
 router.get("/stats", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.claims?.sub || req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
     const [moodCountResult, journalCountResult, sessionCountResult, reflectionCountResult] = await Promise.all([
@@ -150,7 +150,7 @@ router.get("/stats", isAuthenticated, async (req, res) => {
 
 router.get("/activity", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.claims?.sub || req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
     const [recentMoods, recentJournals, recentSessions] = await Promise.all([
@@ -262,7 +262,7 @@ function pickDailyQuests(userId, date) {
 
 router.get("/tasks", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.claims?.sub || req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
     const today = new Date();
@@ -314,7 +314,7 @@ router.get("/tasks", isAuthenticated, async (req, res) => {
 
 router.post("/tasks/:taskId/complete", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.claims?.sub || req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
     const { taskId } = req.params;
@@ -362,7 +362,7 @@ router.post("/tasks/:taskId/complete", isAuthenticated, async (req, res) => {
 
 router.get("/reflection/today", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.claims?.sub || req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
     const today = new Date();
@@ -390,7 +390,7 @@ router.get("/reflection/today", isAuthenticated, async (req, res) => {
 
 router.get("/reflections", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.claims?.sub || req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
     const limit = Math.min(parseInt(req.query.limit) || 30, 100);
@@ -411,7 +411,7 @@ router.get("/reflections", isAuthenticated, async (req, res) => {
 
 router.post("/reflection", isAuthenticated, async (req, res) => {
   try {
-    const userId = req.user?.claims?.sub || req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ message: "Not authenticated" });
 
     const { content, mood, gratitude, intention, sharedToCommunity } = req.body;

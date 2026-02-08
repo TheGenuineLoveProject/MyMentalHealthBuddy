@@ -28,7 +28,7 @@ router.get("/status", async (req, res) => {
   try {
     const result = await db.execute(sql`
       SELECT onboarding_completed, support_mode, wellness_goals, disclaimer_accepted
-      FROM user_preferences WHERE user_id = ${req.user.id} LIMIT 1
+      FROM user_preferences WHERE user_id = ${req.dbUserId} LIMIT 1
     `);
 
     if (result.rows?.length > 0) {
@@ -48,7 +48,7 @@ router.get("/status", async (req, res) => {
       disclaimerAccepted: false,
     });
   } catch (err) {
-    logger.error("Onboarding status error", { error: err.message, userId: req.user.id });
+    logger.error("Onboarding status error", { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });
@@ -56,7 +56,7 @@ router.get("/status", async (req, res) => {
 router.get("/preferences", async (req, res) => {
   try {
     const result = await db.execute(sql`
-      SELECT * FROM user_preferences WHERE user_id = ${req.user.id} LIMIT 1
+      SELECT * FROM user_preferences WHERE user_id = ${req.dbUserId} LIMIT 1
     `);
 
     if (result.rows?.length > 0) {
@@ -110,7 +110,7 @@ router.post("/complete", async (req, res) => {
     const daysJson = reminderDays.length > 0 ? JSON.stringify(reminderDays) : null;
 
     const existing = await db.execute(sql`
-      SELECT id FROM user_preferences WHERE user_id = ${req.user.id} LIMIT 1
+      SELECT id FROM user_preferences WHERE user_id = ${req.dbUserId} LIMIT 1
     `);
 
     if (existing.rows?.length > 0) {
@@ -124,7 +124,7 @@ router.post("/complete", async (req, res) => {
           disclaimer_accepted = true,
           disclaimer_accepted_at = NOW(),
           updated_at = NOW()
-        WHERE user_id = ${req.user.id}
+        WHERE user_id = ${req.dbUserId}
       `);
     } else {
       await db.execute(sql`
@@ -133,20 +133,20 @@ router.post("/complete", async (req, res) => {
           reminder_time, reminder_days, disclaimer_accepted, disclaimer_accepted_at,
           created_at, updated_at
         ) VALUES (
-          gen_random_uuid(), ${req.user.id}, true, ${goalsJson}, ${supportMode},
+          gen_random_uuid(), ${req.dbUserId}, true, ${goalsJson}, ${supportMode},
           ${reminderTime || null}, ${daysJson}, true, NOW(), NOW(), NOW()
         )
       `);
     }
 
-    logger.info("Onboarding completed", { userId: req.user.id, goals: validGoals, supportMode });
+    logger.info("Onboarding completed", { userId: req.dbUserId, goals: validGoals, supportMode });
 
     return success(res, {
       completed: true,
       message: "Welcome to your wellness journey!",
     });
   } catch (err) {
-    logger.error("Onboarding complete error", { error: err.message, userId: req.user.id });
+    logger.error("Onboarding complete error", { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });
@@ -191,7 +191,7 @@ router.patch("/preferences", async (req, res) => {
         theme = COALESCE(${values.theme || null}, theme),
         notifications = COALESCE(${values.notifications}, notifications),
         updated_at = NOW()
-      WHERE user_id = ${req.user.id}
+      WHERE user_id = ${req.dbUserId}
     `);
 
     return success(res, { updated: updates });

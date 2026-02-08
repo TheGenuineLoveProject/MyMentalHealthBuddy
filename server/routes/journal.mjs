@@ -61,7 +61,7 @@ router.post("/", requireAuth, async (req, res) => {
     isAnonymous: Boolean(isAnonymous),
     createdAt: now,
     updatedAt: now,
-    userId: req.user?.id || "test-user",
+    userId: req.dbUserId || req.user?.claims?.sub || "test-user",
   };
 
   journalStore.set(id, entry);
@@ -92,7 +92,7 @@ router.post("/", requireAuth, async (req, res) => {
  * Returns: { ok:true, data:[...entries] }
  */
 router.get("/", requireAuth, async (req, res) => {
-  const userId = req.user?.id || "test-user";
+  const userId = req.dbUserId || req.user?.claims?.sub || "test-user";
   const entries = Array.from(journalStore.values()).filter((e) => e.userId === userId);
   return res.status(200).json({ ok: true, data: entries });
 });

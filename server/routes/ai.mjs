@@ -59,7 +59,7 @@ function generateId(prefix = "id") {
 
 router.post("/chat", authGuard, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { message } = req.body;
 
     if (!userId || !message) {
@@ -163,7 +163,7 @@ router.post("/chat", authGuard, async (req, res) => {
 
 router.get("/history", authGuard, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) {
       return res.status(401).json({ error: "Unauthorized" });
     }
@@ -184,7 +184,7 @@ router.get("/history", authGuard, async (req, res) => {
 
 router.post("/reflect", authGuard, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) {
       return res.status(401).json({ error: "Unauthorized" });
     }
@@ -258,7 +258,7 @@ Rules:
 
 router.delete("/history", authGuard, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) {
       return res.status(401).json({ error: "Unauthorized" });
     }

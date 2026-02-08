@@ -20,7 +20,7 @@ router.get("/", requireAuth, async (req, res) => {
     const userStates = await db
       .select()
       .from(states)
-      .where(eq(states.userId, req.user.id))
+      .where(eq(states.userId, req.dbUserId))
       .orderBy(desc(states.createdAt))
       .limit(30);
     res.json({ ok: true, data: userStates });
@@ -53,7 +53,7 @@ router.post("/", requireAuth, async (req, res) => {
     const [newState] = await db
       .insert(states)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         energy,
         clarity,
         openness,

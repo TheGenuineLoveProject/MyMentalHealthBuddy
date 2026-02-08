@@ -26,10 +26,10 @@ router.put("/profile", requireAuth, async (req, res) => {
     await db
       .update(users)
       .set({ name: name.trim(), updatedAt: new Date() })
-      .where(eq(users.id, req.user.id));
+      .where(eq(users.id, req.dbUserId));
 
     await logAuditEvent({
-      userId: req.user.id,
+      userId: req.dbUserId,
       action: AuditActions.PROFILE_UPDATE,
       metadata: { field: "name" },
       req,
@@ -53,14 +53,14 @@ router.post("/onboarding", requireAuth, async (req, res) => {
       await db
         .update(users)
         .set({ name: name.trim(), updatedAt: new Date() })
-        .where(eq(users.id, req.user.id));
+        .where(eq(users.id, req.dbUserId));
     }
 
     // Update or create user preferences with onboarding data
     const existingPrefs = await db
       .select()
       .from(userPreferences)
-      .where(eq(userPreferences.userId, req.user.id))
+      .where(eq(userPreferences.userId, req.dbUserId))
       .limit(1);
 
     if (existingPrefs.length > 0) {
@@ -71,17 +71,17 @@ router.post("/onboarding", requireAuth, async (req, res) => {
           onboardingCompleted: true,
           updatedAt: new Date(),
         })
-        .where(eq(userPreferences.userId, req.user.id));
+        .where(eq(userPreferences.userId, req.dbUserId));
     } else {
       await db.insert(userPreferences).values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         wellnessGoals: goal,
         onboardingCompleted: true,
       });
     }
 
     await logAuditEvent({
-      userId: req.user.id,
+      userId: req.dbUserId,
       action: AuditActions.ONBOARDING_COMPLETE,
       metadata: { goal },
       req,
@@ -216,7 +216,7 @@ router.delete("/", requireAuth, sensitiveRateLimit, async (req, res) => {
     }
 
     const { password } = parsed.data;
-    const userId = req.user.id;
+    const userId = req.dbUserId;
 
     const userRows = await db
       .select()
@@ -257,7 +257,7 @@ router.delete("/", requireAuth, sensitiveRateLimit, async (req, res) => {
 
 router.get("/export", requireAuth, sensitiveRateLimit, async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.dbUserId;
 
     const userRows = await db
       .select({
@@ -319,7 +319,7 @@ router.get('/sessions', requireAuth, async (req, res) => {
     const sessionsResult = await db
       .select()
       .from(users)
-      .where(eq(users.id, req.user.id))
+      .where(eq(users.id, req.dbUserId))
       .limit(1);
     
     // Since we're using Replit Auth with session store, generate a mock session list
@@ -352,13 +352,13 @@ router.delete('/sessions/:sessionId', requireAuth, async (req, res) => {
 
     // Log the session revocation
     await logAuditEvent({
-      userId: req.user.id,
+      userId: req.dbUserId,
       action: AuditActions.SESSION_REVOKE || 'SESSION_REVOKE',
       metadata: { sessionId },
       req,
     });
 
-    logger.info('Session revoked', { userId: req.user.id, sessionId, requestId: req.requestId });
+    logger.info('Session revoked', { userId: req.user?.id, sessionId, requestId: req.requestId });
 
     return success(res, { revoked: true, sessionId });
   } catch (error) {
@@ -377,13 +377,13 @@ router.post('/delete-request', requireAuth, sensitiveRateLimit, async (req, res)
     }
 
     await logAuditEvent({
-      userId: req.user.id,
+      userId: req.dbUserId,
       action: AuditActions.ACCOUNT_DELETE_REQUEST || 'ACCOUNT_DELETE_REQUEST',
       metadata: { scheduledDeletion: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) },
       req,
     });
 
-    logger.info('Account deletion requested', { userId: req.user.id, requestId: req.requestId });
+    logger.info('Account deletion requested', { userId: req.user?.id, requestId: req.requestId });
 
     return success(res, { 
       message: 'Deletion request submitted',
@@ -404,7 +404,7 @@ router.get("/security", requireAuth, async (req, res) => {
         passwordHash: users.passwordHash,
       })
       .from(users)
-      .where(eq(users.id, req.user.id))
+      .where(eq(users.id, req.dbUserId))
       .limit(1);
 
     if (userRows.length === 0) {
@@ -440,7 +440,7 @@ router.post("/password", requireAuth, sensitiveRateLimit, async (req, res) => {
     const userRows = await db
       .select({ passwordHash: users.passwordHash })
       .from(users)
-      .where(eq(users.id, req.user.id))
+      .where(eq(users.id, req.dbUserId))
       .limit(1);
 
     if (userRows.length === 0) {
@@ -462,10 +462,10 @@ router.post("/password", requireAuth, sensitiveRateLimit, async (req, res) => {
     await db
       .update(users)
       .set({ passwordHash: newHash, updatedAt: new Date() })
-      .where(eq(users.id, req.user.id));
+      .where(eq(users.id, req.dbUserId));
 
     await logAuditEvent({
-      userId: req.user.id,
+      userId: req.dbUserId,
       action: AuditActions.PASSWORD_CHANGE || "PASSWORD_CHANGE",
       req,
     });
@@ -485,7 +485,7 @@ router.post("/2fa/setup", requireAuth, sensitiveRateLimit, async (req, res) => {
     const userRows = await db
       .select({ email: users.email, mfaEnabled: users.mfaEnabled })
       .from(users)
-      .where(eq(users.id, req.user.id))
+      .where(eq(users.id, req.dbUserId))
       .limit(1);
 
     if (userRows.length === 0) return badRequest(res, "User not found");
@@ -509,7 +509,7 @@ router.post("/2fa/setup", requireAuth, sensitiveRateLimit, async (req, res) => {
     await db
       .update(users)
       .set({ mfaSecret: storedSecret, mfaBackupCodes: JSON.stringify(codes) })
-      .where(eq(users.id, req.user.id));
+      .where(eq(users.id, req.dbUserId));
 
     return res.json({
       qrCode: qrCodeDataUrl,
@@ -533,7 +533,7 @@ router.post("/2fa/verify", requireAuth, sensitiveRateLimit, async (req, res) => 
     const userRows = await db
       .select({ mfaSecret: users.mfaSecret, mfaEnabled: users.mfaEnabled })
       .from(users)
-      .where(eq(users.id, req.user.id))
+      .where(eq(users.id, req.dbUserId))
       .limit(1);
 
     if (userRows.length === 0) return badRequest(res, "User not found");
@@ -549,10 +549,10 @@ router.post("/2fa/verify", requireAuth, sensitiveRateLimit, async (req, res) => 
     await db
       .update(users)
       .set({ mfaEnabled: true, updatedAt: new Date() })
-      .where(eq(users.id, req.user.id));
+      .where(eq(users.id, req.dbUserId));
 
     await logAuditEvent({
-      userId: req.user.id,
+      userId: req.dbUserId,
       action: AuditActions.MFA_ENABLE || "MFA_ENABLE",
       req,
     });
@@ -569,7 +569,7 @@ router.post("/2fa/disable", requireAuth, sensitiveRateLimit, async (req, res) =>
     const userRows = await db
       .select({ mfaEnabled: users.mfaEnabled })
       .from(users)
-      .where(eq(users.id, req.user.id))
+      .where(eq(users.id, req.dbUserId))
       .limit(1);
 
     if (userRows.length === 0) return badRequest(res, "User not found");
@@ -583,10 +583,10 @@ router.post("/2fa/disable", requireAuth, sensitiveRateLimit, async (req, res) =>
         mfaBackupCodes: null,
         updatedAt: new Date(),
       })
-      .where(eq(users.id, req.user.id));
+      .where(eq(users.id, req.dbUserId));
 
     await logAuditEvent({
-      userId: req.user.id,
+      userId: req.dbUserId,
       action: AuditActions.MFA_DISABLE || "MFA_DISABLE",
       req,
     });

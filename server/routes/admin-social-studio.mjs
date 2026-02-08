@@ -83,7 +83,7 @@ router.post("/drafts", requireAuth, requireAdmin, async (req, res) => {
     const [draft] = await db
       .insert(postDrafts)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         platform,
         hook,
         caption,

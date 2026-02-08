@@ -14,7 +14,7 @@ function requireAuth(req, res, next) {
 
 router.get("/stats", requireAuth, async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.dbUserId;
 
     const totalEntriesResult = await db
       .select({ count: count() })
@@ -122,7 +122,7 @@ router.get("/stats", requireAuth, async (req, res) => {
 
 router.get("/achievements", requireAuth, async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.dbUserId;
 
     const totalEntriesResult = await db
       .select({ count: count() })

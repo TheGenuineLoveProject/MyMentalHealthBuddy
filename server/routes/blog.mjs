@@ -160,7 +160,7 @@ router.get("/:slug", async (req, res) => {
 
 router.post("/", requireAuth, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { title, content, excerpt, tags, featuredImage, status = "draft" } = req.body;
 
     if (!title || !content) {
@@ -199,7 +199,7 @@ router.post("/", requireAuth, async (req, res) => {
 
 router.put("/:id", requireAuth, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { id } = req.params;
     const { title, content, excerpt, tags, featuredImage, status } = req.body;
 
@@ -251,7 +251,7 @@ router.put("/:id", requireAuth, async (req, res) => {
 
 router.delete("/:id", requireAuth, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { id } = req.params;
 
     const existing = await db
@@ -276,7 +276,7 @@ router.delete("/:id", requireAuth, async (req, res) => {
 
 router.post("/:postId/comments", requireAuth, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { postId } = req.params;
     const { content, parentId } = req.body;
 
@@ -325,7 +325,7 @@ router.post("/:postId/comments", requireAuth, async (req, res) => {
 
 router.delete("/comments/:commentId", requireAuth, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { commentId } = req.params;
 
     const existing = await db
@@ -350,7 +350,7 @@ router.delete("/comments/:commentId", requireAuth, async (req, res) => {
 
 router.get("/user/drafts", requireAuth, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     
     const drafts = await db
       .select()

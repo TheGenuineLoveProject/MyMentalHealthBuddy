@@ -18,7 +18,7 @@ router.get("/values", requireAuth, async (req, res) => {
     const entries = await db
       .select()
       .from(valuesEntries)
-      .where(eq(valuesEntries.userId, req.user.id))
+      .where(eq(valuesEntries.userId, req.dbUserId))
       .orderBy(desc(valuesEntries.createdAt))
       .limit(20);
     
@@ -36,7 +36,7 @@ router.post("/values", requireAuth, async (req, res) => {
     const [entry] = await db
       .insert(valuesEntries)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         coreValues: typeof coreValues === "string" ? coreValues : JSON.stringify(coreValues),
         reflections,
         priorityRanking: typeof priorityRanking === "string" ? priorityRanking : JSON.stringify(priorityRanking),
@@ -60,7 +60,7 @@ router.get("/boundaries", requireAuth, async (req, res) => {
     const scripts = await db
       .select()
       .from(boundaryScripts)
-      .where(eq(boundaryScripts.userId, req.user.id))
+      .where(eq(boundaryScripts.userId, req.dbUserId))
       .orderBy(desc(boundaryScripts.createdAt))
       .limit(50);
     
@@ -78,7 +78,7 @@ router.post("/boundaries", requireAuth, async (req, res) => {
     const [entry] = await db
       .insert(boundaryScripts)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         situation,
         boundaryType,
         script,
@@ -136,7 +136,7 @@ router.get("/movement", requireAuth, async (req, res) => {
     const logs = await db
       .select()
       .from(movementLogs)
-      .where(eq(movementLogs.userId, req.user.id))
+      .where(eq(movementLogs.userId, req.dbUserId))
       .orderBy(desc(movementLogs.createdAt))
       .limit(50);
     
@@ -154,7 +154,7 @@ router.post("/movement", requireAuth, async (req, res) => {
     const [log] = await db
       .insert(movementLogs)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         movementType,
         durationSeconds,
         energyBefore,
@@ -180,7 +180,7 @@ router.get("/coherence", requireAuth, async (req, res) => {
     const entries = await db
       .select()
       .from(coherenceEntries)
-      .where(eq(coherenceEntries.userId, req.user.id))
+      .where(eq(coherenceEntries.userId, req.dbUserId))
       .orderBy(desc(coherenceEntries.createdAt))
       .limit(20);
     
@@ -198,7 +198,7 @@ router.post("/coherence", requireAuth, async (req, res) => {
     const [entry] = await db
       .insert(coherenceEntries)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         alignmentLevel,
         bodyState,
         mindState,
@@ -224,7 +224,7 @@ router.get("/meaning-map", requireAuth, async (req, res) => {
     const entries = await db
       .select()
       .from(reflections)
-      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "meaning-map")))
+      .where(and(eq(reflections.userId, req.dbUserId), eq(reflections.mode, "meaning-map")))
       .orderBy(desc(reflections.createdAt))
       .limit(10);
     
@@ -240,7 +240,7 @@ router.get("/meaning-map/latest", requireAuth, async (req, res) => {
     const [entry] = await db
       .select()
       .from(reflections)
-      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "meaning-map")))
+      .where(and(eq(reflections.userId, req.dbUserId), eq(reflections.mode, "meaning-map")))
       .orderBy(desc(reflections.createdAt))
       .limit(1);
     
@@ -258,7 +258,7 @@ router.post("/meaning-map", requireAuth, async (req, res) => {
     const [entry] = await db
       .insert(reflections)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         text: meaningStatement || "",
         mode: "meaning-map",
         tags: JSON.stringify(coreValues || []),
@@ -283,7 +283,7 @@ router.get("/grief-letter", requireAuth, async (req, res) => {
     const entries = await db
       .select()
       .from(reflections)
-      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "grief-letter")))
+      .where(and(eq(reflections.userId, req.dbUserId), eq(reflections.mode, "grief-letter")))
       .orderBy(desc(reflections.createdAt))
       .limit(20);
     
@@ -305,7 +305,7 @@ router.post("/grief-letter", requireAuth, async (req, res) => {
     const [entry] = await db
       .insert(reflections)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         text: content.trim(),
         mode: "grief-letter",
         tags: recipient ? JSON.stringify({ recipient }) : null,
@@ -325,7 +325,7 @@ router.delete("/grief-letter/:id", requireAuth, async (req, res) => {
     const [existing] = await db
       .select()
       .from(reflections)
-      .where(and(eq(reflections.id, id), eq(reflections.userId, req.user.id)))
+      .where(and(eq(reflections.id, id), eq(reflections.userId, req.dbUserId)))
       .limit(1);
     
     if (!existing) {
@@ -350,7 +350,7 @@ router.get("/weekly-reflection", requireAuth, async (req, res) => {
     const entries = await db
       .select()
       .from(reflections)
-      .where(and(eq(reflections.userId, req.user.id), eq(reflections.mode, "weekly-reflection")))
+      .where(and(eq(reflections.userId, req.dbUserId), eq(reflections.mode, "weekly-reflection")))
       .orderBy(desc(reflections.createdAt))
       .limit(12);
     
@@ -372,7 +372,7 @@ router.post("/weekly-reflection", requireAuth, async (req, res) => {
     const [entry] = await db
       .insert(reflections)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         text: JSON.stringify(answers),
         mode: "weekly-reflection",
         tags: weekRange ? JSON.stringify({ weekRange }) : null,
@@ -397,7 +397,7 @@ router.get("/challenge-progress", requireAuth, async (req, res) => {
       .select()
       .from(reflections)
       .where(and(
-        eq(reflections.userId, req.user.id),
+        eq(reflections.userId, req.dbUserId),
         eq(reflections.mode, "challenge-progress")
       ))
       .orderBy(desc(reflections.createdAt))
@@ -430,7 +430,7 @@ router.post("/challenge-progress", requireAuth, async (req, res) => {
     const [entry] = await db
       .insert(reflections)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         mode: "challenge-progress",
         content: JSON.stringify(progress),
       })

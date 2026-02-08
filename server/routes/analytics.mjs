@@ -84,7 +84,7 @@ router.use(requireAuth);
  */
 router.get("/", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
 
     // Mood count
     const [moodStats] = await db
@@ -131,7 +131,7 @@ router.get("/", async (req, res) => {
  */
 router.get("/summary", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
 
     // Mood count
     const [moodStats] = await db
@@ -161,7 +161,7 @@ router.get("/summary", async (req, res) => {
  */
 router.get("/moods-last-7", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return badRequest(res, "Missing authentication.");
 
     const results = await db
@@ -187,7 +187,7 @@ router.get("/moods-last-7", async (req, res) => {
  */
 router.get("/journal-last-7", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
 
     const results = await db
       .select({

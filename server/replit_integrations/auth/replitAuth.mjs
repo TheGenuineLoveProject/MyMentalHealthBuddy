@@ -208,6 +208,24 @@ export const isAuthenticated = async (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
+  // Resolve Replit ID → internal DB UUID (cached in session)
+  const replitId = String(user.claims?.sub || "");
+  if (replitId && !req.dbUserId) {
+    if (req.session?.dbUserId) {
+      req.dbUserId = req.session.dbUserId;
+    } else {
+      try {
+        const dbUser = await authStorage.getUserByReplitId(replitId);
+        if (dbUser) {
+          req.dbUserId = dbUser.id;
+          req.session.dbUserId = dbUser.id;
+        }
+      } catch (e) {
+        console.error("[ReplitAuth] Failed to resolve DB user:", e.message);
+      }
+    }
+  }
+
   const now = Math.floor(Date.now() / 1000);
   if (now <= user.expires_at) {
     return next();

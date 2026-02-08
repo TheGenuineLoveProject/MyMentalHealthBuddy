@@ -121,7 +121,7 @@ router.post("/reflections", requireAuth, async (req, res) => {
     const [reflection] = await db
       .insert(sharedReflections)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         content: content.trim(),
         emotion: emotion || null,
         isAnonymous: isAnonymous !== false,
@@ -173,7 +173,7 @@ router.get("/completion-stats", requireAuth, async (req, res) => {
         .from(moods)
         .where(
           and(
-            eq(moods.userId, req.user.id),
+            eq(moods.userId, req.dbUserId),
             gte(moods.createdAt, weekAgo)
           )
         ),
@@ -181,7 +181,7 @@ router.get("/completion-stats", requireAuth, async (req, res) => {
         .from(journals)
         .where(
           and(
-            eq(journals.userId, req.user.id),
+            eq(journals.userId, req.dbUserId),
             gte(journals.createdAt, weekAgo)
           )
         ),
@@ -189,7 +189,7 @@ router.get("/completion-stats", requireAuth, async (req, res) => {
         .from(gratitudeEntries)
         .where(
           and(
-            eq(gratitudeEntries.userId, req.user.id),
+            eq(gratitudeEntries.userId, req.dbUserId),
             gte(gratitudeEntries.createdAt, weekAgo)
           )
         )
@@ -266,7 +266,7 @@ router.post("/affirmations", optionalAuth, async (req, res) => {
     const [affirmation] = await db
       .insert(communityAffirmations)
       .values({
-        userId: req.user?.id || null,
+        userId: req.dbUserId || null,
         content: content.trim(),
         isAnonymous: isAnonymous !== false,
       })

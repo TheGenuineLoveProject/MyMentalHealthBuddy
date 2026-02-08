@@ -25,7 +25,7 @@ function pickFallback() {
 
 router.get("/entries", authGuard, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ ok: false, message: "Unauthorized" });
 
     const limit = Math.min(parseInt(req.query.limit) || 50, 100);
@@ -52,7 +52,7 @@ router.get("/entries", authGuard, async (req, res) => {
 
 router.post("/entries", authGuard, async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) return res.status(401).json({ ok: false, message: "Unauthorized" });
 
     const { text } = req.body || {};

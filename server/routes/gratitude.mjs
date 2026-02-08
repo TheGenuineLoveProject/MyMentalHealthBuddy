@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     const entries = await db
       .select()
       .from(gratitudeEntries)
-      .where(eq(gratitudeEntries.userId, req.user.id))
+      .where(eq(gratitudeEntries.userId, req.dbUserId))
       .orderBy(desc(gratitudeEntries.createdAt))
       .limit(50);
 
@@ -39,7 +39,7 @@ router.get("/today", async (req, res) => {
       .from(gratitudeEntries)
       .where(
         and(
-          eq(gratitudeEntries.userId, req.user.id),
+          eq(gratitudeEntries.userId, req.dbUserId),
           gte(gratitudeEntries.createdAt, today)
         )
       );
@@ -69,7 +69,7 @@ router.post("/", async (req, res) => {
     const [entry] = await db
       .insert(gratitudeEntries)
       .values({
-        userId: req.user.id,
+        userId: req.dbUserId,
         prompt,
         response: response.trim(),
       })
@@ -96,7 +96,7 @@ router.get("/weekly-summary", async (req, res) => {
         .from(gratitudeEntries)
         .where(
           and(
-            eq(gratitudeEntries.userId, req.user.id),
+            eq(gratitudeEntries.userId, req.dbUserId),
             gte(gratitudeEntries.createdAt, weekAgo)
           )
         ),
@@ -104,7 +104,7 @@ router.get("/weekly-summary", async (req, res) => {
         .from(moods)
         .where(
           and(
-            eq(moods.userId, req.user.id),
+            eq(moods.userId, req.dbUserId),
             gte(moods.createdAt, weekAgo)
           )
         ),
@@ -112,7 +112,7 @@ router.get("/weekly-summary", async (req, res) => {
         .from(journals)
         .where(
           and(
-            eq(journals.userId, req.user.id),
+            eq(journals.userId, req.dbUserId),
             gte(journals.createdAt, weekAgo)
           )
         )

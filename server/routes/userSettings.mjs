@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
     const [settings] = await db
       .select()
       .from(userSettings)
-      .where(eq(userSettings.userId, req.user.id))
+      .where(eq(userSettings.userId, req.dbUserId))
       .limit(1);
 
     if (!settings) {
@@ -48,7 +48,7 @@ router.patch("/", async (req, res) => {
     const [existing] = await db
       .select()
       .from(userSettings)
-      .where(eq(userSettings.userId, req.user.id))
+      .where(eq(userSettings.userId, req.dbUserId))
       .limit(1);
 
     if (existing) {
@@ -64,7 +64,7 @@ router.patch("/", async (req, res) => {
       const [updated] = await db
         .update(userSettings)
         .set(updateData)
-        .where(eq(userSettings.userId, req.user.id))
+        .where(eq(userSettings.userId, req.dbUserId))
         .returning();
 
       return res.json(updated);
@@ -72,7 +72,7 @@ router.patch("/", async (req, res) => {
       const [created] = await db
         .insert(userSettings)
         .values({
-          userId: req.user.id,
+          userId: req.dbUserId,
           reminders: reminders || {
             frequency: "daily",
             time: "08:00",

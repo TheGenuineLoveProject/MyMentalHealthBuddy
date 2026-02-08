@@ -28,7 +28,7 @@ router.use(requireAuth);
  */
 router.post("/", validateBody(createMoodSchema), async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const {
       rating,
       emotion,
@@ -78,7 +78,7 @@ router.post("/", validateBody(createMoodSchema), async (req, res) => {
  */
 router.get("/", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
 
     const rows = await db
       .select()
@@ -108,7 +108,7 @@ router.get("/", async (req, res) => {
  */
 router.get("/stats", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
 
     const rows = await db
       .select()
@@ -164,7 +164,7 @@ router.get("/stats", async (req, res) => {
  */
 router.put("/:id", validateBody(updateMoodSchema), async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { id } = req.params;
     const updates = req.validatedBody;
 
@@ -209,7 +209,7 @@ router.put("/:id", validateBody(updateMoodSchema), async (req, res) => {
  */
 router.delete("/:id", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { id } = req.params;
 
     // Check ownership

@@ -20,7 +20,7 @@ router.use(requireAuth);
  */
 router.get("/", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
 
     // Get mood stats
     const moodRows = await db

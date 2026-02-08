@@ -23,7 +23,7 @@ router.post("/setup", requireAuth, async (req, res) => {
 
     const qr = await QRCode.toDataURL(otpauth_url);
 
-    await db.execute(sql`UPDATE users SET mfa_secret=${secret.base32}, mfa_enabled=FALSE WHERE id=${req.user.id}`);
+    await db.execute(sql`UPDATE users SET mfa_secret=${secret.base32}, mfa_enabled=FALSE WHERE id=${req.dbUserId}`);
 
     await audit(req, "mfa.setup");
     res.json({ qr, secret: secret.base32 });
@@ -38,7 +38,7 @@ router.post("/verify", requireAuth, async (req, res) => {
     const { code } = req.body || {};
     if (!code) return res.status(400).json({ message: "Missing code" });
 
-    const r = await db.execute(sql`SELECT * FROM users WHERE id=${req.user.id} LIMIT 1`);
+    const r = await db.execute(sql`SELECT * FROM users WHERE id=${req.dbUserId} LIMIT 1`);
     const user = r.rows?.[0] || r[0]?.[0];
     if (!user?.mfa_secret) return res.status(400).json({ message: "MFA not setup" });
 
@@ -57,7 +57,7 @@ router.post("/verify", requireAuth, async (req, res) => {
     const backups = makeBackupCodes();
     const hashedBackups = JSON.stringify(backups.map(c => sha256(c)));
     
-    await db.execute(sql`UPDATE users SET mfa_enabled=TRUE, mfa_backup_codes=${hashedBackups} WHERE id=${req.user.id}`);
+    await db.execute(sql`UPDATE users SET mfa_enabled=TRUE, mfa_backup_codes=${hashedBackups} WHERE id=${req.dbUserId}`);
 
     await audit(req, "mfa.enabled");
 
@@ -78,7 +78,7 @@ router.post("/verify", requireAuth, async (req, res) => {
 
 router.post("/disable", requireAuth, async (req, res) => {
   try {
-    await db.execute(sql`UPDATE users SET mfa_enabled=FALSE, mfa_secret=NULL, mfa_backup_codes=NULL WHERE id=${req.user.id}`);
+    await db.execute(sql`UPDATE users SET mfa_enabled=FALSE, mfa_secret=NULL, mfa_backup_codes=NULL WHERE id=${req.dbUserId}`);
     await audit(req, "mfa.disabled");
     res.json({ ok: true });
   } catch (err) {

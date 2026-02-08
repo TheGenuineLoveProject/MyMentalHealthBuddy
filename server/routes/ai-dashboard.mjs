@@ -15,7 +15,7 @@ router.use(requireAuth);
 
 router.get("/", async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.dbUserId;
     const now = new Date();
     const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
     const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -139,7 +139,7 @@ router.get("/", async (req, res) => {
 
 router.get("/mood-chart", async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.dbUserId;
     const days = parseInt(req.query.days) || 30;
     const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
 
@@ -166,7 +166,7 @@ router.get("/mood-chart", async (req, res) => {
 
 router.get("/wellness-score", async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.dbUserId;
     const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
 
     const [recentMoods, recentJournals, recentSessions, progress] = await Promise.all([

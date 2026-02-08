@@ -163,7 +163,7 @@ router.post('/schedule', requireAdmin, async (req, res) => {
         status: 'scheduled',
         scheduledAt: new Date(scheduledAt),
         content: JSON.stringify(content),
-        createdBy: req.user?.id || 'system',
+        createdBy: req.dbUserId || 'system',
       })
       .returning();
 

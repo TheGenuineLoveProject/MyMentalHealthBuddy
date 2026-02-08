@@ -37,7 +37,7 @@ function calculateLevel(totalXp) {
 
 router.get("/progress", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) {
       return res.status(401).json({ ok: false, error: "Unauthorized" });
     }
@@ -94,7 +94,7 @@ router.get("/progress", async (req, res) => {
 
 router.post("/record-session", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { toolName, durationSeconds = 60, metadata } = req.body;
 
     if (!userId || !toolName) {
@@ -197,7 +197,7 @@ router.post("/record-session", async (req, res) => {
 
 router.get("/quests", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     if (!userId) {
       return res.status(401).json({ ok: false, error: "Unauthorized" });
     }
@@ -252,7 +252,7 @@ router.get("/quests", async (req, res) => {
 
 router.post("/complete-quest", async (req, res) => {
   try {
-    const userId = req.user?.id;
+    const userId = req.dbUserId;
     const { questId } = req.body;
 
     if (!userId || !questId) {

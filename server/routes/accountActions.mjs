@@ -26,7 +26,7 @@ router.get('/sessions', async (req, res) => {
         last_active as "lastActive",
         CASE WHEN id = ${req.sessionID || ''} THEN true ELSE false END as "isCurrent"
       FROM sessions 
-      WHERE user_id = ${req.user.id}
+      WHERE user_id = ${req.dbUserId}
       ORDER BY last_active DESC NULLS LAST
       LIMIT 20
     `);
@@ -62,7 +62,7 @@ router.delete('/sessions/:sessionId', async (req, res) => {
 
     const result = await db.execute(sql`
       DELETE FROM sessions 
-      WHERE id = ${sessionId} AND user_id = ${req.user.id}
+      WHERE id = ${sessionId} AND user_id = ${req.dbUserId}
       RETURNING id
     `);
 
@@ -70,7 +70,7 @@ router.delete('/sessions/:sessionId', async (req, res) => {
       return badRequest(res, 'Session not found');
     }
 
-    logger.info('Session revoked', { userId: req.user.id, revokedSessionId: sessionId });
+    logger.info('Session revoked', { userId: req.dbUserId, revokedSessionId: sessionId });
     return success(res, { message: 'Session revoked' });
   } catch (err) {
     logger.error('Session revoke error', { error: err.message, userId: req.user?.id });
@@ -92,7 +92,7 @@ router.post('/delete-request', async (req, res) => {
     // Create deletion request (don't actually delete yet)
     const existingRequest = await db.execute(sql`
       SELECT id FROM account_deletion_requests 
-      WHERE user_id = ${req.user.id} AND status = 'pending'
+      WHERE user_id = ${req.dbUserId} AND status = 'pending'
       LIMIT 1
     `);
 
@@ -102,7 +102,7 @@ router.post('/delete-request', async (req, res) => {
 
     await db.execute(sql`
       INSERT INTO account_deletion_requests (user_id, requested_at, status, scheduled_deletion)
-      VALUES (${req.user.id}, NOW(), 'pending', NOW() + INTERVAL '7 days')
+      VALUES (${req.dbUserId}, NOW(), 'pending', NOW() + INTERVAL '7 days')
       ON CONFLICT (user_id) WHERE status = 'pending' DO NOTHING
     `);
 
@@ -138,7 +138,7 @@ router.post('/cancel-delete-request', async (req, res) => {
     const result = await db.execute(sql`
       UPDATE account_deletion_requests 
       SET status = 'cancelled', cancelled_at = NOW()
-      WHERE user_id = ${req.user.id} AND status = 'pending'
+      WHERE user_id = ${req.dbUserId} AND status = 'pending'
       RETURNING id
     `);
 
@@ -146,7 +146,7 @@ router.post('/cancel-delete-request', async (req, res) => {
       return badRequest(res, 'No pending deletion request found');
     }
 
-    logger.info('Account deletion cancelled', { userId: req.user.id });
+    logger.info('Account deletion cancelled', { userId: req.dbUserId });
     return success(res, { message: 'Deletion request cancelled' });
   } catch (err) {
     logger.error('Cancel deletion error', { error: err.message, userId: req.user?.id });

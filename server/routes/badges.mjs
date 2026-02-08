@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
     const userBadges = await db
       .select()
       .from(badges)
-      .where(eq(badges.userId, req.user.id));
+      .where(eq(badges.userId, req.dbUserId));
 
     res.json(userBadges);
   } catch (error) {
@@ -44,7 +44,7 @@ router.post("/check", async (req, res) => {
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    const userId = req.user.id;
+    const userId = req.dbUserId;
 
     const [userMoods, userJournals, existingBadges] = await Promise.all([
       db.select().from(moods).where(eq(moods.userId, userId)),

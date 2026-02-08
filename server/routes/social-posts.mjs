@@ -62,7 +62,7 @@ router.post("/", requireAuth, requireAdmin, async (req, res) => {
         scheduledAt: scheduledAt ? new Date(scheduledAt) : null,
         hashtags: hashtags || null,
         status,
-        authorId: req.user?.id || randomUUID(),
+        authorId: req.dbUserId || randomUUID(),
       })
       .returning();
     

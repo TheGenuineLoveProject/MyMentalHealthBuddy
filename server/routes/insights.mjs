@@ -150,7 +150,7 @@ router.get('/daily', (_req, res) => {
 
 router.get("/mood", requireAuth, async (req, res) => {
   try {
-    const userId = req.user.id;
+    const userId = req.dbUserId;
 
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
