@@ -204,7 +204,7 @@ app.use(helmet({
 }));
 app.use(compression());
 app.use(express.json({ limit: '1mb' }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true, limit: '1mb' }));
 app.use(cookieParser());
 
 // Sanitize all incoming request bodies (strip script tags, event handlers, etc.)
@@ -422,22 +422,29 @@ const server = app.listen(PORT, "0.0.0.0", () => {
   logger.info("Server listening", { url: `http://0.0.0.0:${PORT}`, port: PORT });
 });
 
-process.on("SIGTERM", () => {
-  logger.info("SIGTERM received, shutting down gracefully...");
-  server.close(() => {
-    logger.info("Server closed.");
-    process.exit(0);
-  });
-  setTimeout(() => {
+async function gracefulShutdown(signal) {
+  logger.info(`${signal} received, shutting down gracefully...`);
+  const forceTimer = setTimeout(() => {
     logger.error("Forced shutdown after timeout.");
     process.exit(1);
   }, 10000);
-});
+  forceTimer.unref();
 
-process.on("SIGINT", () => {
-  logger.info("[shutdown] SIGINT received");
-  process.exit(0);
-});
+  server.close(async () => {
+    logger.info("HTTP server closed.");
+    try {
+      const { pool } = await import("./db/client.mjs");
+      if (pool && typeof pool.end === "function") {
+        await pool.end();
+        logger.info("Database pool closed.");
+      }
+    } catch {}
+    process.exit(0);
+  });
+}
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 
 } // end startProductionServer
 

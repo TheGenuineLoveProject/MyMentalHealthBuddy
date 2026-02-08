@@ -31,12 +31,18 @@ router.get("/", async (_req, res) => {
       }
     }
 
+    const mem = process.memoryUsage();
     res.json({
       status: "healthy",
       environment: process.env.NODE_ENV || "development",
       version: process.env.npm_package_version || "2.0.0",
+      uptime: Math.floor(process.uptime()),
       database: { connected: dbConnected },
       ai: { available: isConfigured() },
+      memory: {
+        heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
+        rssMB: Math.round(mem.rss / 1024 / 1024),
+      },
     });
   } catch (error) {
     logger.error("Health check error", { error: error?.message || error });

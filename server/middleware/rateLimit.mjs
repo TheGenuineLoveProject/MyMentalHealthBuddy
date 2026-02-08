@@ -5,8 +5,30 @@
 // - loginRateLimit (401 + "Invalid credentials" ALWAYS when blocked; security-uniform)
 
 import rateLimit from "express-rate-limit";
+import { logger } from "../utils/logger.mjs";
 
 const attempts = new Map(); // key -> { count, firstAt, blockedUntil }
+
+const CLEANUP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+const MAX_MAP_SIZE = 10000;
+
+function cleanupExpiredEntries() {
+  const now = Date.now();
+  let cleaned = 0;
+  for (const [key, entry] of attempts) {
+    const windowExpired = now - entry.firstAt > 30 * 60 * 1000;
+    const blockExpired = entry.blockedUntil && now > entry.blockedUntil;
+    if (windowExpired && (!entry.blockedUntil || blockExpired)) {
+      attempts.delete(key);
+      cleaned++;
+    }
+  }
+  if (cleaned > 0) {
+    try { logger.info("Rate limiter cleanup", { cleaned, remaining: attempts.size }); } catch {}
+  }
+}
+
+setInterval(cleanupExpiredEntries, CLEANUP_INTERVAL_MS).unref();
 
 function nowMs() {
   return Date.now();
@@ -40,8 +62,11 @@ function createInMemoryLimiter(opts = {}) {
   const message = opts.message ?? "Too many requests";
 
   return (req, res, next) => {
-    // Keep health checks unblocked if you use them.
     if (req.path === "/api/health") return next();
+
+    if (attempts.size > MAX_MAP_SIZE) {
+      cleanupExpiredEntries();
+    }
 
     const key = `${prefix}:${getClientKey(req)}`;
     const entry = attempts.get(key) || { count: 0, firstAt: nowMs(), blockedUntil: 0 };
