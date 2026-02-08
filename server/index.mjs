@@ -377,6 +377,11 @@ app.use("/health", healthRouter);
 // RSS, Sitemap, Robots (must be before SPA catch-all)
 app.use('/', feedRouter);
 
+// API 404 handler — catch unmatched /api routes before SPA catch-all
+app.all("/api/*", (_req, res) => {
+  res.status(404).json({ ok: false, error: "NOT_FOUND", message: "Endpoint not found" });
+});
+
 const distPath = join(__dirname, "../client/dist");
 app.use(express.static(distPath));
 
@@ -384,8 +389,9 @@ app.get("*", (_req, res) => {
   res.sendFile(join(distPath, "index.html"));
 });
 
-app.use((err, _req, res, _next) => {
-  logger.error("Server error", { error: err?.message || err });
+app.use((err, req, res, _next) => {
+  logger.error("Unhandled error", { error: err?.message || err, stack: err?.stack, requestId: req.requestId });
+  if (res.headersSent) return;
   res.status(500).json({
     ok: false,
     error: "INTERNAL_SERVER_ERROR",

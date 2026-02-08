@@ -348,10 +348,14 @@ async function startServer() {
     appType: "spa",
   });
   
+  // API 404 handler — catch unmatched /api routes before Vite middleware
+  app.all("/api/*", (_req, res) => {
+    res.status(404).json({ ok: false, error: "NOT_FOUND", message: "Endpoint not found" });
+  });
+
   // Vite middleware MUST be registered before any catch-all routes
   app.use(vite.middlewares);
 
-  // SPA fallback - only for non-API, non-Vite routes
   // Vite internal paths: /@vite/*, /@fs/*, /@react-refresh, /src/*, /node_modules/.vite/*
   app.use("/{*splat}", async (req, res, next) => {
     const url = req.originalUrl;
