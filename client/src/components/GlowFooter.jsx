@@ -2,12 +2,12 @@ import { Link } from "wouter";
 import { Heart, Sparkles, Mail } from "lucide-react";
 
 const SACRED_QUOTES = [
-  "Healing is the new success.",
-  "Live in Genuine Love",
-  "Healing is not linear, but it is always forward",
-  "You are worthy of the peace you seek",
-  "Every breath is a new beginning",
-  "Your journey matters, and so do you"
+  "Use what helps. Leave the rest.",
+  "Your pace is the right pace.",
+  "No streaks. No pressure. Just tools.",
+  "Private by default. Yours by design.",
+  "Always here when you come back.",
+  "Built around how you feel, not how we want you to engage."
 ];
 
 export default function GlowFooter({ className = "" }) {
@@ -90,7 +90,7 @@ export default function GlowFooter({ className = "" }) {
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-[#d4af37]" aria-hidden="true" />
             <span className="text-xs text-[#8fbf9f] italic font-serif">
-              Made with love for your healing journey
+              No ads. No data sales. Your reflections stay private.
             </span>
           </div>
         </div>

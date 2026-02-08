@@ -226,7 +226,7 @@ export default function Billing() {
                   </div>
                   <div>
                     <h2 className="text-heading-lg text-teal">Free Plan</h2>
-                    <p className="text-body-sm text-[var(--sage-600)]">Core tools are always free — no expiration, no pressure to change</p>
+                    <p className="text-body-sm text-[var(--sage-600)]">Core tools are always free — no expiration, no pressure to upgrade, no features taken away</p>
                   </div>
                 </div>
               </section>
@@ -444,7 +444,7 @@ export default function Billing() {
                 All payments are securely processed by Stripe. We never store your card details on our servers.
               </p>
               <p className="text-body-sm text-[var(--sage-600)] mb-4">
-                Pro subscriptions can be canceled anytime from this page — no hidden fees, no lock-in, no cancellation hoops. If you cancel, you keep access through the end of your paid period.
+                Pro subscriptions can be canceled anytime from this page — no hidden fees, no lock-in, no cancellation hoops. If you cancel, you keep full access through the end of your paid period, and your free tools never go away.
               </p>
               {currentPlan !== "free" && (
                 <Button 

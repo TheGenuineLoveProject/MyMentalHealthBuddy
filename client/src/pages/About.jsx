@@ -23,7 +23,7 @@ export default function About() {
               About The Genuine Love Project
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto" data-testid="text-about-subtitle">
-              A sacred space for healing, self-discovery, and genuine transformation.
+              A private space for reflection, built around what wellness apps usually get wrong.
             </p>
           </div>
 
@@ -33,10 +33,10 @@ export default function About() {
               Our Mission
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              The Genuine Love Project was born from a simple yet profound belief: everyone deserves access to compassionate, trauma-informed support on their healing journey. We combine the wisdom of evidence-based therapeutic approaches with cutting-edge AI technology to create a private, accessible sanctuary for emotional growth.
+              This platform exists because most wellness tools are designed to maximize how long you stay, not whether you're actually helped. We built something different — tools that are useful when you need them and quiet when you don't. No streaks, no guilt-driven notifications, no engagement tricks.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Our platform is designed to meet you exactly where you are—whether you're processing difficult emotions, celebrating small victories, or simply seeking a moment of peace. We believe that healing is not linear, and every step forward, no matter how small, is worthy of recognition.
+              If you're someone who values privacy, prefers going at your own pace, and wants tools that don't demand constant participation — you'll probably recognize what this is for. You don't need to be in crisis to use it. You don't need to commit to a program. It's here when you want to check in with yourself, and it stays out of the way when you don't.
             </p>
           </div>
 
@@ -74,7 +74,7 @@ export default function About() {
 
           <div className="bg-gradient-to-br from-[#8fbf9f]/10 to-[#2f5d5d]/10 rounded-3xl p-8 md:p-12 border border-[#8fbf9f]/20 text-center" data-testid="card-quote">
             <blockquote className="text-2xl md:text-3xl font-serif italic text-foreground mb-4" data-testid="text-quote-main">
-              "Healing is the new success."
+              "The quietest tools are often the most useful ones."
             </blockquote>
             <p className="text-muted-foreground" data-testid="text-quote-attribution">
               — The Genuine Love Project

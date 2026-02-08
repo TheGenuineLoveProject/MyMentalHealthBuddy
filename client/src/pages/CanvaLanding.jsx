@@ -75,20 +75,20 @@ export default function CanvaLanding() {
   const steps = [
     {
       icon: PenLine,
-      title: "Create Your Profile",
-      description: "Tell us about your journey and what matters most to you",
+      title: "Set Up Your Space",
+      description: "Choose what feels relevant — skip anything that doesn't",
       link: "/login"
     },
     {
       icon: MessageCircle,
-      title: "Connect with AI",
-      description: "Start conversations with our compassionate AI companion",
+      title: "Explore at Your Pace",
+      description: "Journal, reflect, or talk with the AI companion — whatever suits the day",
       link: "/chat"
     },
     {
       icon: TrendingUp,
-      title: "Track Your Growth",
-      description: "Watch your progress unfold with personalized insights",
+      title: "Check In When You Want",
+      description: "Your patterns are tracked privately, available whenever you're curious",
       link: "/dashboard"
     }
   ];
@@ -150,19 +150,23 @@ export default function CanvaLanding() {
   const faqs = [
     {
       question: "What is The Genuine Love Project?",
-      answer: "The Genuine Love Project is a comprehensive mental wellness platform designed to support your healing journey through AI-powered guidance, journaling, mood tracking, and evidence-based wellness tools."
+      answer: "A private wellness platform with journaling, mood tracking, guided reflection, and an AI companion. It's educational — not clinical — and designed for adults exploring self-awareness at their own pace."
     },
     {
       question: "Is my data private and secure?",
-      answer: "Absolutely. We use enterprise-grade encryption and never share your personal data. Your healing journey is completely private and protected."
+      answer: "Yes. Your entries are encrypted and private. We don't sell your data, we don't show ads, and we don't share your information with third parties."
     },
     {
       question: "How does the AI companion work?",
-      answer: "Our AI companion uses trauma-informed principles to provide compassionate, personalized support 24/7. It's designed to listen, reflect, and guide—never to diagnose or replace professional care."
+      answer: "It uses trauma-informed language principles to reflect what you share back to you with care. It won't diagnose, prescribe, or replace professional support — it's a thinking-out-loud space, not a therapist."
     },
     {
-      question: "Is there a free version?",
-      answer: "Yes! We offer a generous free tier with core features. Our Pro plan unlocks advanced tools, unlimited AI conversations, and exclusive content."
+      question: "Do I have to pay?",
+      answer: "Core tools — mood tracking, journaling, daily reflection, and community features — are free with no expiration. Pro adds unlimited AI conversations and additional tools. You can cancel Pro anytime with no penalties."
+    },
+    {
+      question: "What if I stop using it for a while?",
+      answer: "Nothing happens. There are no streaks to lose, no progress that resets, and no notifications asking you to come back. Your space stays exactly as you left it."
     }
   ];
 
@@ -372,27 +376,27 @@ export default function CanvaLanding() {
             >
               <Star className="w-5 h-5" style={{ color: 'var(--glp-gold)' }} fill="currentColor" />
               <span className="font-bold uppercase tracking-widest text-sm" style={{ color: 'var(--glp-sage-deep)' }}>
-                Transformative Healing Platform
+                A Quieter Kind of Wellness
               </span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold mb-8 leading-[1.05] tracking-tight animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', animationDelay: '0.1s' }}>
-              Heal Your Mind,
+              A Private Space
               <br />
               <span style={{ background: 'linear-gradient(135deg, var(--glp-sage-deep), var(--glp-gold), var(--glp-sage))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                Body & Soul
+                for Honest Reflection
               </span>
             </h1>
 
             {/* Subheadline */}
             <p className="text-xl sm:text-2xl md:text-3xl font-serif mb-8 animate-fade-in-up" style={{ color: 'var(--glp-sage-deep)', fontWeight: 600, animationDelay: '0.2s' }}>
-              360° Transformation from A to Z
+              Wellness tools that respect your pace
             </p>
 
             {/* Description */}
             <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ color: 'var(--glp-ink)', animationDelay: '0.3s' }}>
-              A comprehensive platform designed to guide you through every step of your healing journey—from mindfulness to personal growth.
+              Most wellness apps want your attention. This one gives it back. Journaling, mood tracking, and AI-assisted reflection — built around how you actually feel, not how a product wants you to engage.
             </p>
 
             {/* Safety Box */}
@@ -412,7 +416,7 @@ export default function CanvaLanding() {
                   data-testid="button-hero-begin"
                 >
                   <Sparkles className="w-6 h-6" aria-hidden="true" />
-                  Begin Your Healing Journey
+                  Try It Free
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </button>
               </Link>
@@ -422,7 +426,7 @@ export default function CanvaLanding() {
                   style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
                   data-testid="button-hero-dashboard"
                 >
-                  Explore Tools
+                  See What's Available
                 </button>
               </Link>
             </div>
@@ -470,16 +474,14 @@ export default function CanvaLanding() {
           </div>
 
           <h2 className="text-4xl md:text-6xl font-serif font-bold mb-6" style={{ color: 'var(--glp-sage-deep)' }}>
-            Our Mission
+            Why This Exists
           </h2>
 
           <p 
             className="text-xl md:text-2xl leading-relaxed font-serif max-w-4xl mx-auto"
             style={{ color: 'var(--glp-ink)' }}
           >
-            We believe healing begins with genuine love—love for yourself, your journey, and your potential. 
-            Our platform provides a sacred space where mind, body, and soul unite in transformative growth, 
-            offering comprehensive tools, wisdom, and community support for your holistic wellness.
+            Most wellness apps are built to maximize engagement. This one was built to respect it. There are no streaks to protect, no notifications designed to pull you back, and no punishment for stepping away. The tools here — journaling, mood tracking, guided reflection, AI-assisted conversation — are available when you want them and quiet when you don't.
           </p>
 
           {/* Values Grid */}
@@ -489,10 +491,10 @@ export default function CanvaLanding() {
                 <Lightbulb className="w-7 h-7 text-white drop-shadow-sm" />
               </div>
               <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-                Wisdom
+                No Streak Pressure
               </h3>
               <p className="leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                Curated insights from ancient traditions to modern psychology
+                Use the tools when they help. Skip a day, a week, a month — nothing resets, nothing is lost.
               </p>
             </div>
 
@@ -501,10 +503,10 @@ export default function CanvaLanding() {
                 <Users className="w-7 h-7 text-white drop-shadow-sm" />
               </div>
               <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-                Community
+                No Dark Patterns
               </h3>
               <p className="leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                Connect with kindred spirits on similar healing paths
+                No guilt notifications, no manufactured urgency, no manipulative design. Every interaction is opt-in.
               </p>
             </div>
 
@@ -513,10 +515,10 @@ export default function CanvaLanding() {
                 <Zap className="w-7 h-7 text-white drop-shadow-sm" />
               </div>
               <h3 className="font-serif text-2xl font-semibold mb-3" style={{ color: 'var(--glp-sage-deep)' }}>
-                Transformation
+                Your Data, Your Space
               </h3>
               <p className="leading-relaxed" style={{ color: 'var(--glp-ink)' }}>
-                Evidence-based tools for measurable personal growth
+                Private by default. Your reflections belong to you — not an algorithm, not a feed, not an advertiser.
               </p>
             </div>
           </div>
@@ -552,15 +554,15 @@ export default function CanvaLanding() {
               </div>
             </div>
             <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4">
-              You Are Safe Here
+              This Space Is Here When You Are
             </h3>
             <p className="text-lg max-w-2xl mx-auto mb-8" style={{ color: 'var(--glp-ink)' }}>
-              Take a deep breath. This is your sanctuary for healing, growth, and self-discovery. 
-              Every step forward is a victory.
+              There's no right time to start, no wrong way to use this, and no pressure to keep going. 
+              Everything here works at your pace.
             </p>
             <Link href="/onboarding">
               <button className="mission-cta" data-testid="cta-join-now">
-                Begin Your Healing Journey
+                Get Started Free
                 <ArrowRight className="inline ml-3 w-5 h-5" />
               </button>
             </Link>
@@ -573,10 +575,10 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
-              Your Complete Wellness Toolkit
+              What's Available
             </h2>
             <p className="text-xl max-w-3xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              Comprehensive resources designed to support every aspect of your healing journey
+              Use what resonates. Ignore what doesn't. Everything here is optional.
             </p>
           </div>
 
@@ -615,7 +617,7 @@ export default function CanvaLanding() {
               How It Works
             </h2>
             <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              Begin your transformation in three simple steps
+              Three ways to get oriented — no commitments
             </p>
           </div>
 
@@ -671,10 +673,10 @@ export default function CanvaLanding() {
         <div className="max-w-[1200px] mx-auto px-4 md:px-8 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-serif font-bold mb-4" style={{ color: 'var(--glp-sage-deep)' }}>
-              Voices of Healing
+              What People Say
             </h2>
             <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              Real stories from our community
+              From people who use the platform
             </p>
           </div>
 
@@ -789,7 +791,7 @@ export default function CanvaLanding() {
           {/* Start your transformation today */}
           <div className="inline-flex items-center justify-center gap-7 px-14 py-8 rounded-full bg-white/10 backdrop-blur-sm mb-12">
             <Sparkles className="w-16 h-16 text-[var(--glp-gold)]" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }} />
-            <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 4px 6px rgba(0,0,0,0.2)' }}>Start your transformation today</span>
+            <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[var(--glp-gold)] font-serif font-bold tracking-tight" style={{ textShadow: '0 4px 6px rgba(0,0,0,0.2)' }}>A place to begin, whenever you're ready</span>
           </div>
           
           {/* Lotus Accent */}
@@ -806,14 +808,14 @@ export default function CanvaLanding() {
           
           {/* Begin Your Healing Journey Today - moved closer to paragraph */}
           <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mt-80 mb-4 text-white leading-tight text-center">
-            Begin Your Healing
+            If This Feels
             <br />
-            <span className="text-[var(--glp-gold)]">Journey Today</span>
+            <span className="text-[var(--glp-gold)]">Right, Come In</span>
           </h2>
           
           {/* Paragraph - close to heading */}
           <p className="text-5xl md:text-6xl lg:text-7xl mt-4 mb-12 text-white/90 max-w-6xl mx-auto font-medium text-center">
-            Join thousands who have found peace, growth, and genuine love within themselves.
+            Free to start. Free to pause. Free to leave. Always here if you come back.
           </p>
           
           {/* Buttons - refined shape with gold text */}
@@ -831,7 +833,7 @@ export default function CanvaLanding() {
                 data-testid="button-final-cta"
               >
                 <span className="flex items-center gap-4">
-                  Start Free Today
+                  Try It Free
                   <ArrowRight className="w-10 h-10 transition-transform group-hover:translate-x-2" />
                 </span>
               </button>
@@ -864,7 +866,7 @@ export default function CanvaLanding() {
               Explore Our Platform
             </h2>
             <p className="text-lg max-w-2xl mx-auto" style={{ color: 'var(--glp-ink)' }}>
-              Discover all the tools, resources, and support available for your healing journey
+              Browse the full set of tools and resources — use what's useful, skip the rest
             </p>
           </div>
 
@@ -954,7 +956,7 @@ export default function CanvaLanding() {
               The Genuine Love Project
             </h3>
             <p className="text-lg text-center" style={{ color: 'var(--glp-sage)' }}>
-              360° Support from A to Z — Live in Genuine Love
+              Wellness tools that respect your time, your privacy, and your pace
             </p>
           </div>
 
@@ -1019,7 +1021,7 @@ export default function CanvaLanding() {
               The Genuine Love Project
             </h4>
             <p className="text-sm leading-relaxed mb-4 max-w-md" style={{ color: 'var(--glp-ink)' }}>
-              Transformative healing through AI-powered support, mindfulness, and community.
+              Private wellness tools, AI-assisted reflection, and a quiet community — available when you need them.
             </p>
             <div className="flex justify-center gap-3">
               <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform hover:scale-110 cursor-pointer" style={{ background: 'linear-gradient(135deg, var(--glp-sage), var(--glp-sage-deep))', boxShadow: '0 4px 12px var(--glp-sage-30)' }}>
@@ -1039,9 +1041,9 @@ export default function CanvaLanding() {
               © {new Date().getFullYear()} The Genuine Love Project. All rights reserved.
             </p>
             <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--glp-sage)' }}>
-              <span>Made with</span>
+              <span>Built with care.</span>
               <Heart className="w-4 h-4" style={{ color: 'var(--glp-blush)' }} fill="currentColor" />
-              <span>for your healing journey</span>
+              <span>No ads. No data sales. Your reflections stay private.</span>
             </div>
           </div>
           <SafetyFooter variant="compact" className="mt-8" />
