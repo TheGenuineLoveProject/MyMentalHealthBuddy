@@ -406,6 +406,15 @@ process.on("SIGINT", () => {
 
 } // end startProductionServer
 
+process.on("unhandledRejection", (reason) => {
+  logger.error("Unhandled promise rejection", { error: reason?.message || reason });
+});
+
+process.on("uncaughtException", (err) => {
+  logger.error("Uncaught exception — shutting down", { error: err?.message || err, stack: err?.stack });
+  process.exit(1);
+});
+
 startProductionServer().catch(err => {
   logger.error("Failed to start production server", { error: err?.message || err });
   process.exit(1);

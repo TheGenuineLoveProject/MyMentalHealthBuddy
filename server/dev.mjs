@@ -429,4 +429,13 @@ async function startServer() {
   process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 }
 
+process.on("unhandledRejection", (reason) => {
+  logger.error("Unhandled promise rejection", { error: reason?.message || reason });
+});
+
+process.on("uncaughtException", (err) => {
+  logger.error("Uncaught exception — shutting down", { error: err?.message || err, stack: err?.stack });
+  process.exit(1);
+});
+
 startServer().catch(err => logger.error("Failed to start dev server", { error: err?.message || err }));
