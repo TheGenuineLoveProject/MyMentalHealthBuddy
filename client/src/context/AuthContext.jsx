@@ -194,6 +194,13 @@ export function AuthProvider({ children }) {
   
   const combinedLoading = isLoading || replitLoading;
 
+  const subscriptionStatus = user?.subscriptionStatus || "free";
+  const isPro = subscriptionStatus === "pro";
+
+  if (import.meta.env.DEV && user && !combinedLoading) {
+    console.debug("[Auth] subscriptionStatus:", subscriptionStatus, "isPro:", isPro);
+  }
+
   const loginWithReplit = () => {
     window.location.href = "/api/login";
   };
@@ -210,6 +217,8 @@ export function AuthProvider({ children }) {
         logout,
         refreshToken,
         replitUser,
+        subscriptionStatus,
+        isPro,
       }}
     >
       {children}
