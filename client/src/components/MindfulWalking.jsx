@@ -185,7 +185,7 @@ export default function MindfulWalking() {
         </div>
         <h2 className="text-2xl font-bold text-[var(--text)]">Walking Meditation</h2>
         <p className="text-[var(--text-secondary)] mt-2">
-          Transform your walk into a moving meditation
+          Turn your walk into a moving meditation
         </p>
       </div>
 

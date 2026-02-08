@@ -13,20 +13,20 @@ const STEPS = ["intro", "goals", "support", "reminders", "disclaimer"];
 const INTRO_SLIDES = [
   {
     icon: Heart,
-    title: "Welcome to Your Healing Journey",
-    description: "You've taken the first step towards genuine self-love and transformation. We're honored to walk this path with you.",
+    title: "Welcome to Your Private Space",
+    description: "You've created your account. Here's a quick look at what's available — use what feels useful, skip the rest.",
     color: "#f4c7c3"
   },
   {
     icon: Flower2,
-    title: "A Safe Space for Growth",
-    description: "This is your sanctuary—a judgment-free zone where you can explore, heal, and bloom at your own pace.",
+    title: "A Safe, Private Space",
+    description: "This is a private, judgment-free space where you can reflect, journal, and check in with yourself at your own pace.",
     color: "#8fbf9f"
   },
   {
     icon: Users,
     title: "You're Not Alone",
-    description: "Join a compassionate community of souls on similar journeys. Together, we heal stronger.",
+    description: "A quiet community of people using these tools in their own way. Share anonymously if you'd like — or just read.",
     color: "#eac33b"
   }
 ];

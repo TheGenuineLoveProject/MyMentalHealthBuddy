@@ -100,7 +100,7 @@ const wellnessApproach = [
   {
     icon: Target,
     title: "Integrate",
-    description: "Transform intellectual understanding into embodied wisdom and lasting healing."
+    description: "Bring what you've learned into daily practice — quietly, at your own pace."
   }
 ];
 
@@ -159,8 +159,8 @@ export default function Home() {
   return (
     <SacredLayout>
       <SEO 
-        title="The Genuine Love Project — Grow at Your Own Pace" 
-        description="A supportive space for emotional wellness, conscious awareness, and healing. Evidence-informed tools including inner child work, nervous system education, and trauma-informed practices—all in complete privacy."
+        title="The Genuine Love Project — A Private Space for Honest Reflection" 
+        description="Journaling, mood tracking, and AI-assisted reflection — built with trauma-informed care. Evidence-informed tools including inner child work, nervous system education, and somatic practices, all in complete privacy."
       />
 
       <header role="banner">
@@ -237,12 +237,12 @@ export default function Home() {
               }}
             >
               <Leaf className="w-4 h-4 sacred-icon" />
-              Trusted by 50,000+ growing hearts
+              A quieter kind of wellness
             </span>
           }
-          title="Your sanctuary for emotional wellness—"
-          titleHighlight="where growth happens at your own pace."
-          subtitle="A supportive space built for people who carry more than they show. Process grief, calm your nervous system, understand attachment patterns, reconnect with yourself—all in complete privacy."
+          title="A private space for reflection—"
+          titleHighlight="built around how you actually feel."
+          subtitle="Journaling, mood tracking, and AI-assisted reflection for people who carry more than they show. Notice patterns, understand yourself better, check in when you want to — all in complete privacy."
           primaryCta={{ 
             href: '/register', 
             label: 'Try It Free',
@@ -304,13 +304,13 @@ export default function Home() {
               className="sacred-subtitle mb-4"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              The Journey of Genuine Healing
+              How the Tools Work
             </h2>
             <p 
               className="sacred-body max-w-2xl mx-auto"
               style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
             >
-              Healing isn't about becoming someone new—it's about coming home to who you've always been.
+              Each tool supports a different kind of self-understanding. Use what's useful, skip what isn't.
             </p>
           </div>
           
@@ -404,13 +404,13 @@ export default function Home() {
               className="sacred-subtitle mb-4"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              Words From The Healing Path
+              What People Say
             </h2>
             <p 
               className="sacred-body max-w-2xl mx-auto"
               style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
             >
-              Real experiences from people transforming their relationship with themselves.
+              Real experiences from people using these tools in their own way.
             </p>
           </div>
           
@@ -450,10 +450,10 @@ export default function Home() {
             aria-label="Platform statistics"
           >
             {[
-              { value: '50K+', label: 'Healing Journeys Started' },
-              { value: '1000+', label: 'Therapeutic Tools' },
+              { value: '500+', label: 'Reflection Tools' },
               { value: '24/7', label: 'AI Companion Available' },
               { value: '100%', label: 'Private & Encrypted' },
+              { value: '$0', label: 'Core Tools, Always Free' },
             ].map((stat, idx) => (
               <div 
                 key={idx}
@@ -496,7 +496,7 @@ export default function Home() {
               className="sacred-heading mb-4"
               style={{ color: 'var(--sacred-teal, #2f5d5d)' }}
             >
-              Built for Real, Deep Healing
+              Built for Honest Self-Reflection
             </h3>
             <p 
               className="sacred-body mb-6"
@@ -516,7 +516,7 @@ export default function Home() {
                 className="sacred-caption"
                 style={{ color: 'var(--sacred-charcoal, #3a3a3a)' }}
               >
-                <strong>Important:</strong> This platform supports your wellness journey but is not a replacement for professional mental health care. If you're in crisis, please reach out to a crisis line or mental health professional.
+                <strong>Important:</strong> This is an educational wellness platform, not a replacement for professional mental health care. If you're in crisis, please reach out to a crisis line or mental health professional.
               </p>
             </div>
           </div>
@@ -537,12 +537,12 @@ export default function Home() {
             <h2 
               className="sacred-subtitle text-white mb-4"
             >
-              Ready to Get Started?
+              It's Here When You Want It
             </h2>
             <p 
               className="sacred-body text-white opacity-90 mb-8 max-w-xl mx-auto"
             >
-              You don't need to be ready. You don't need to have it figured out. You just need to show up—the rest unfolds from there.
+              No commitment required. Create a free account, try the tools, and decide for yourself whether they're useful.
             </p>
             <Link
               href="/register"
@@ -561,9 +561,9 @@ export default function Home() {
 
         <SacredSection id="identity-mirror" variant="paper">
           <div className="max-w-2xl mx-auto text-center mb-8">
-            <h2 className="sacred-subtitle mb-3">Who Are You Becoming?</h2>
+            <h2 className="sacred-subtitle mb-3">What Matters to You Right Now?</h2>
             <p className="sacred-body text-slate-600">
-              Reflect on the identity you're growing into. Share if it resonates.
+              A quiet reflection prompt. Share if it resonates, or keep it to yourself.
             </p>
           </div>
           <IdentityMirror className="max-w-xl mx-auto" />

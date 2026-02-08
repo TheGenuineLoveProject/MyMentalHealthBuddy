@@ -96,7 +96,7 @@ export default function PricingPage() {
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-primary text-white text-xs font-medium rounded-full">
-                  Most Popular
+                  Full Access
                 </div>
               )}
               <CardHeader className="text-center pb-2">

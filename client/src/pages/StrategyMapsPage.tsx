@@ -94,7 +94,7 @@ const STRATEGY_MAPS: StrategyMap[] = [
       {
         id: "ei-5",
         name: "Narrative Reauthoring",
-        description: "Transform your life story with agency and meaning",
+        description: "Rewrite your life story with agency and meaning",
         category: "advanced",
         route: "/advanced",
         prerequisites: ["ei-4"],

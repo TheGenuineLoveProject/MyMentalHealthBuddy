@@ -144,7 +144,7 @@ export default function PowerNap() {
         </div>
         <h2 className="text-2xl font-bold text-[var(--text)]">Strategic Rest</h2>
         <p className="text-[var(--text-secondary)] mt-2">
-          Scientifically optimized nap durations for peak performance
+          Research-based nap durations to help you rest well
         </p>
       </div>
 

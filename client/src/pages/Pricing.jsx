@@ -153,7 +153,7 @@ export default function Pricing() {
                 >
                   {tier.popular && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 text-white text-xs font-semibold rounded-full shadow-md" style={{ background: 'linear-gradient(90deg, var(--glp-gold), var(--glp-gold-dark))' }}>
-                      Most Popular
+                      Full Access
                     </div>
                   )}
                   

@@ -211,13 +211,13 @@ export default function WisdomSynthesisPage() {
             </h1>
           </div>
           <p className="text-body-sm">
-            Transform raw thoughts into structured insights. Extract patterns, discover connections, find actionable wisdom.
+            Organize raw thoughts into structured insights. Extract patterns, discover connections, find actionable wisdom.
           </p>
         </header>
 
         <BenefitsBlock
           benefits={[
-            "Transform thoughts into structured insights automatically",
+            "Organize thoughts into structured insights automatically",
             "Extract patterns and discover hidden connections",
             "Generate actionable wisdom from your reflections"
           ]}

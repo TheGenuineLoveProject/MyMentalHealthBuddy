@@ -234,7 +234,7 @@ export default function RoutinesPage() {
               Build Your Wellness <span className="text-sage-600 dark:text-sage-400 italic">Foundation</span>
             </h1>
             <p className="text-slate-600 dark:text-slate-400 max-w-xl mx-auto">
-              Consistent small actions create lasting transformation. Choose routines that resonate with your current needs.
+              Small, consistent actions add up over time. Choose routines that resonate with your current needs.
             </p>
           </header>
           

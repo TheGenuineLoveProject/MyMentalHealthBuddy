@@ -97,13 +97,13 @@ export default function CanvaLanding() {
     {
       initial: "S",
       name: "Sarah M.",
-      text: "This platform helped me reconnect with myself after years of burnout. The AI companion feels like talking to a wise friend.",
+      text: "I use this when I need to think something through. The AI companion doesn't tell me what to do — it just reflects things back in a way that helps me see more clearly.",
       role: "Teacher"
     },
     {
       initial: "J",
       name: "James K.",
-      text: "The mood tracking and journaling features have become essential to my daily routine. I feel more grounded than ever.",
+      text: "The mood tracking helped me notice patterns I wasn't seeing on my own. I don't use it every day, but when I do, it's useful.",
       role: "Software Engineer"
     },
     {
@@ -435,9 +435,9 @@ export default function CanvaLanding() {
           {/* Hero Stats */}
           <div className="grid grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
             <div className="text-center p-4 sm:p-6 rounded-2xl transition-all hover:scale-105 shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-sage-30)' }}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>10K+</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>$0</div>
               <p className="text-xs sm:text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
-                Active Members
+                Core Tools, Always Free
               </p>
             </div>
             <div className="text-center p-4 sm:p-6 rounded-2xl transition-all hover:scale-105 shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-gold-30)' }}>

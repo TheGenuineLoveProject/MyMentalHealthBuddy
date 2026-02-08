@@ -1006,7 +1006,7 @@ a, a:visited {
 }
 
 .card-pricing.featured::before {
-  content: 'Most Popular';
+  content: 'Full Access';
   position: absolute;
   top: -12px;
   left: 50%;

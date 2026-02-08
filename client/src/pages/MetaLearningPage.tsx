@@ -170,7 +170,7 @@ export default function MetaLearningPage() {
             </h1>
           </div>
           <p className="text-lead max-w-2xl">
-            Learn how to learn. Track techniques, optimize retention, become a more effective learner.
+            Learn how to learn. Track techniques, notice what helps retention, and find your own effective approach.
           </p>
         </header>
 

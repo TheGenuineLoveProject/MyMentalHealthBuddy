@@ -127,7 +127,7 @@ export default function CourseCatalog() {
     {
       id: "gratitude-practice",
       title: "The Gratitude Journey",
-      description: "Transform your perspective through structured gratitude practices",
+      description: "Explore your perspective through structured gratitude practices",
       duration: "2 weeks",
       lessons: 7,
       level: "Beginner",
