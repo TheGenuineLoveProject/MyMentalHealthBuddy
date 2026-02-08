@@ -173,7 +173,7 @@ export default function CourseCatalog() {
             Learning Library
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Bite-sized courses designed to support your wellness journey. Learn at your own pace.
+            Bite-sized courses on wellness topics. Learn at your own pace.
           </p>
         </header>
 

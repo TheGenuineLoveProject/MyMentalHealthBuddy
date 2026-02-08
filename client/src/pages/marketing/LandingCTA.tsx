@@ -34,7 +34,7 @@ export default function LandingCTA() {
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-8">
           <Sparkles className="w-4 h-4 text-gold-300" />
-          <span className="text-sm font-medium text-white">Start Your Healing Journey Today</span>
+          <span className="text-sm font-medium text-white">Free to Start — No Credit Card Required</span>
         </div>
 
         <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
@@ -43,8 +43,8 @@ export default function LandingCTA() {
         </h2>
 
         <p className="text-xl text-white/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Join thousands who have discovered a gentler path to healing. 
-          No pressure, no judgment — just compassionate support when you need it.
+          Mood tracking, journaling, and AI reflection tools — 
+          private by design, supportive by nature, free to try.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

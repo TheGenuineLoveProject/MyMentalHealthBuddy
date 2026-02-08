@@ -23,7 +23,7 @@ export default function BrandHero() {
           </div>
 
           <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-            <a className="btn" href="/login">Start Your Journey →</a>
+            <a className="btn" href="/login">Sign In →</a>
             <a className="btn secondary" href="/register">Create Account</a>
           </div>
         </div>

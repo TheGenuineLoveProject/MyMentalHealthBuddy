@@ -245,7 +245,7 @@ export default function Home() {
           subtitle="A supportive space built for people who carry more than they show. Process grief, calm your nervous system, understand attachment patterns, reconnect with yourself—all in complete privacy."
           primaryCta={{ 
             href: '/register', 
-            label: 'Begin Your Wellness Journey',
+            label: 'Try It Free',
             icon: <Heart className="w-5 h-5" />
           }}
           secondaryCta={{ 
@@ -537,7 +537,7 @@ export default function Home() {
             <h2 
               className="sacred-subtitle text-white mb-4"
             >
-              Begin Your Wellness Journey Today
+              Ready to Get Started?
             </h2>
             <p 
               className="sacred-body text-white opacity-90 mb-8 max-w-xl mx-auto"

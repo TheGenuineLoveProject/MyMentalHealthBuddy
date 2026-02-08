@@ -118,7 +118,7 @@ export default function ResilienceStories({ onXpEarned }) {
                 <h2 className="text-xl font-bold text-white">
                   {editingId ? "Edit Your Story" : "Write Your Story"}
                 </h2>
-                <p className="text-slate-400 text-sm">Share your journey of resilience</p>
+                <p className="text-slate-400 text-sm">Share a moment of resilience</p>
               </div>
             </div>
             <button
@@ -226,7 +226,7 @@ export default function ResilienceStories({ onXpEarned }) {
             </div>
             <div>
               <h2 className="text-xl font-bold text-white">Resilience Stories</h2>
-              <p className="text-slate-400 text-sm">Your journey of strength and growth</p>
+              <p className="text-slate-400 text-sm">Moments of strength you've recorded</p>
             </div>
           </div>
           
@@ -260,8 +260,8 @@ export default function ResilienceStories({ onXpEarned }) {
             </div>
             <h3 className="text-lg font-medium text-white mb-2">No Stories Yet</h3>
             <p className="text-slate-400 mb-6 max-w-sm mx-auto">
-              Your resilience stories are powerful reminders of your strength. 
-              Start documenting your journey today.
+              Resilience stories are reminders of your strength. 
+              Start documenting moments that matter to you.
             </p>
             <button
               onClick={startNewStory}

@@ -533,7 +533,7 @@ export default function CanvaLanding() {
         <div className="max-w-4xl mx-auto">
           <div className="quote-block" data-testid="quote-block-healing">
             <p className="quote-text relative z-10">
-              The wound is the place where the Light enters you. Your healing journey isn't about becoming 
+              The wound is the place where the Light enters you. Healing isn't about becoming 
               someone new—it's about returning to who you've always been, beneath the layers of pain.
             </p>
             <p className="quote-author">— Rumi, adapted for modern healing</p>
@@ -806,7 +806,7 @@ export default function CanvaLanding() {
             </div>
           </div>
           
-          {/* Begin Your Healing Journey Today - moved closer to paragraph */}
+          {/* CTA Section - moved closer to paragraph */}
           <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mt-80 mb-4 text-white leading-tight text-center">
             If This Feels
             <br />

@@ -25,7 +25,7 @@ const PROMPTS = [
   "What did you learn this week that you appreciate?",
   "What about your home brings you comfort?",
   "What act of kindness have you witnessed or received lately?",
-  "What part of your healing journey are you grateful for?",
+  "What part of your self-reflection practice are you grateful for?",
   "What strength have you discovered in yourself?",
   "What about this season do you appreciate?",
   "What book, song, or artwork has touched your heart?",

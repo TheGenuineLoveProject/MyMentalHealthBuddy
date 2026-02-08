@@ -126,13 +126,13 @@ export default function SacredFooter() {
               className="font-serif text-lg font-semibold mb-3"
               style={{ color: '#2f5d5d', fontFamily: "'Cormorant Garamond', serif" }}
             >
-              Join Our Healing Community
+              Stay Connected
             </h3>
             <p 
               className="text-sm mb-4"
               style={{ color: '#3a3a3a', opacity: 0.75 }}
             >
-              Receive weekly wisdom, healing practices, and gentle reminders for your journey.
+              Receive weekly reflections, wellness practices, and gentle reminders.
             </p>
             <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
               <input

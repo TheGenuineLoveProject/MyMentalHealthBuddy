@@ -482,7 +482,7 @@ export default function JournalPage() {
                     </div>
                     <div>
                       <span className="font-medium text-gray-900 dark:text-white block text-sm">Share with Community</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">Inspire others on their healing journey</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">Share your reflection with the community</span>
                     </div>
                   </div>
                   <input

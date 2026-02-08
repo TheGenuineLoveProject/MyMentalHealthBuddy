@@ -171,7 +171,7 @@ export function MicroCommitmentEngine({
       </div>
 
       <p className="text-xs text-gray-500 dark:text-gray-500 mt-4 text-center">
-        Small steps lead to lasting change. You're doing great.
+        Small steps add up. You're doing great.
       </p>
     </div>
   );

@@ -44,15 +44,15 @@ export default function CreativityHubPage() {
     <>
     <SEO 
       title="Creativity Hub | The Genuine Love Project"
-      description="Unlock your creative potential. Tools for creative expression, journaling, and finding your unique voice."
+      description="Tools for creative expression, journaling, and exploring your unique voice."
     />
     <WellnessPageShell
       title="Creativity Hub"
-      subtitle="Unlock your creative expression"
+      subtitle="Explore your creative expression"
       benefits={pickBenefits(["agency", "meaning", "privacy", "calm"], 4)}
       clarity={{
-        what: "Resources for tapping into your creative potential.",
-        why: "Creativity is healing. It's how we process and express our inner world.",
+        what: "Resources for exploring creative expression.",
+        why: "Creativity can be a way to process and express what's inside.",
         how: "Start creating before you're ready. Perfection is not the goal."
       }}
     >

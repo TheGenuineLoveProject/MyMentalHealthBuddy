@@ -47,7 +47,7 @@ export default function About() {
               </div>
               <h3 className="text-lg font-serif font-semibold text-foreground mb-2">Safe & Private</h3>
               <p className="text-sm text-muted-foreground">
-                Your journey is yours alone. We prioritize your privacy and create a judgment-free space for exploration.
+                Your reflections are private. We prioritize your privacy and create a judgment-free space for exploration.
               </p>
             </div>
 

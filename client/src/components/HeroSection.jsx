@@ -5,11 +5,11 @@ export default function HeroSection() {
     <section id="hero" className="text-center py-20 relative z-10">
       <div className="max-w-3xl mx-auto px-4">
         <h1 className="text-5xl md:text-6xl font-serif font-bold text-deepTeal leading-tight">
-          Begin Your Healing <br />
-          <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">Journey Today</span>
+          A Private Space for <br />
+          <span className="bg-gradient-to-r from-amber-400 to-amber-600 bg-clip-text text-transparent">Honest Reflection</span>
         </h1>
         <p className="mt-6 text-lg text-charcoal font-sans">
-          Join thousands who have found peace, growth, and genuine love within themselves.
+          Mood tracking, journaling, and AI reflection tools — private by design, free to start.
         </p>
         <div className="mt-8 flex flex-wrap gap-4 justify-center">
           <Link href="/register">

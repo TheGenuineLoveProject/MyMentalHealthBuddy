@@ -44,16 +44,16 @@ export default function HealingJourneyHubPage() {
     <>
     <SEO 
       title="Healing Journey Hub | The Genuine Love Project"
-      description="Comprehensive resources for your healing journey. Discover the 12 Steps of Genuine Love and curated healing paths for personal transformation."
+      description="Guided programs and reflection tools. Discover the 12 Steps of Genuine Love and curated paths for self-awareness."
     />
     <WellnessPageShell
       title="Healing Journey Hub"
-      subtitle="Resources for your path to wholeness"
+      subtitle="Guided programs and reflection tools"
       benefits={pickBenefits(["calm", "meaning", "connection", "agency"], 4)}
       clarity={{
-        what: "A collection of resources supporting your unique healing journey.",
+        what: "A collection of guided programs and self-reflection resources.",
         why: "Healing is not linear. Having the right tools at the right time matters.",
-        how: "Explore what calls to you. Your journey is yours to define."
+        how: "Explore what resonates. Go at your own pace."
       }}
     >
       <div className="max-w-4xl mx-auto px-4 py-8">

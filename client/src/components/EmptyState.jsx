@@ -30,7 +30,7 @@ const EMPTY_STATE_CONFIGS = {
   analytics: {
     icon: BarChart3,
     title: "No data to analyze yet",
-    description: "Start logging moods and journal entries to see insights about your wellness journey over time.",
+    description: "Start logging moods and journal entries to see patterns over time.",
     actionText: "Log a Mood",
     actionHref: "/mood",
     variant: "sage",
@@ -38,7 +38,7 @@ const EMPTY_STATE_CONFIGS = {
   default: {
     icon: Heart,
     title: "Nothing here yet",
-    description: "This is where your content will appear. Take the first step on your wellness journey.",
+    description: "This is where your content will appear. You can start whenever you're ready.",
     actionText: "Get Started",
     actionHref: "/dashboard",
     variant: "teal",

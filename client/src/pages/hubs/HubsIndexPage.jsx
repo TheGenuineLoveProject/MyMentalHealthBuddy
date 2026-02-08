@@ -102,7 +102,7 @@ const ALL_HUBS = [
   },
   {
     title: "Healing Journey",
-    description: "Path to wholeness",
+    description: "Guided reflection programs",
     href: "/hubs/healing-journey",
     icon: Heart
   },
@@ -263,11 +263,11 @@ export default function HubsIndexPage() {
     <>
     <SEO 
       title="Wellness Topic Hubs | The Genuine Love Project"
-      description="Explore our collection of wellness topic hubs covering sleep, anxiety, relationships, grief, mindfulness, and more. Find the right tools for your journey."
+      description="Explore our collection of wellness topic hubs covering sleep, anxiety, relationships, grief, mindfulness, and more. Find tools that resonate with you."
     />
     <WellnessPageShell
       title="Wellness Topic Hubs"
-      subtitle="Find the right tools for your journey"
+      subtitle="Find tools that resonate with you"
       benefits={pickBenefits(["calm", "meaning", "privacy", "clarity"], 4)}
       clarity={{
         what: "A directory of curated wellness resources organized by topic.",

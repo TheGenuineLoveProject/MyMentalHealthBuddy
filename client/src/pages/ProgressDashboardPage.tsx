@@ -181,7 +181,7 @@ export default function ProgressDashboardPage() {
       { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
     ]}
   >
-      <SEO title="Progress Dashboard — The Genuine Love Project" description="View your wellness journey progress." />
+      <SEO title="Progress Dashboard — The Genuine Love Project" description="View your mood and reflection patterns over time." />
 
 
     <div className="min-h-screen hero-gradient">
@@ -199,7 +199,7 @@ export default function ProgressDashboardPage() {
             </h1>
           </div>
           <p className="text-lead max-w-2xl">
-            Track your journey. Celebrate growth. Recognize patterns.
+            See your patterns. Notice what's shifting. Celebrate what's working.
           </p>
         </header>
 
@@ -358,8 +358,8 @@ export default function ProgressDashboardPage() {
 
         <div className="mt-8 p-4 rounded-xl bg-sage-50 border border-sage-200">
           <p className="text-body-sm text-sage-700">
-            <strong className="text-teal-600">Your journey matters.</strong> Every reflection, every insight, every moment of self-awareness 
-            contributes to your growth. Progress isn't always linear—and that's perfectly okay.
+            <strong className="text-teal-600">Every entry counts.</strong> Every reflection, every insight, every moment of self-awareness 
+            adds to the picture. Progress isn't always linear—and that's perfectly okay.
           </p>
         </div>
       </div>

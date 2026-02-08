@@ -140,7 +140,7 @@ export default function GoalProgress() {
               <h3 className="font-display font-bold text-[var(--text)]" data-testid="text-goal-title">
                 Goal Progress
               </h3>
-              <p className="text-sm text-[var(--text-secondary)]">Track your wellness journey</p>
+              <p className="text-sm text-[var(--text-secondary)]">Track what matters to you</p>
             </div>
           </div>
           <button

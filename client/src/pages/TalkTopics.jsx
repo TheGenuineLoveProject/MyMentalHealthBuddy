@@ -424,7 +424,7 @@ export default function TalkTopics() {
 
         <section className="text-center mb-12">
           <h2 className="font-serif text-2xl text-gray-800 dark:text-gray-100 mb-4">
-            Continue Your Journey
+            Explore More Tools
           </h2>
           
           <div className="flex flex-wrap justify-center gap-4">

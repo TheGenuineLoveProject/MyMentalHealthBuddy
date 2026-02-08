@@ -52,7 +52,7 @@ export default function HabitsHubPage() {
       benefits={pickBenefits(["agency", "meaning", "clarity", "agency"], 4)}
       clarity={{
         what: "Resources for building and maintaining healthy habits.",
-        why: "Small consistent actions create lasting change.",
+        why: "Small consistent actions build over time.",
         how: "Start with one tiny habit. Make it so easy you can't say no."
       }}
     >

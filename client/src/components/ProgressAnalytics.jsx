@@ -136,7 +136,7 @@ export default function ProgressAnalytics() {
           </div>
           <div>
             <h2 className="text-xl font-bold text-[var(--text)]">Progress Analytics</h2>
-            <p className="text-sm text-[var(--text-secondary)]">Track your wellness journey</p>
+            <p className="text-sm text-[var(--text-secondary)]">See how you're doing over time</p>
           </div>
         </div>
         <div className="flex items-center gap-2">

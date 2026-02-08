@@ -119,7 +119,7 @@ export const segmentationTags = [
   { id: 'journaling', label: 'Interested in journaling' },
   { id: 'relationships', label: 'Interested in relationship health' },
   { id: 'sleep', label: 'Interested in sleep improvement' },
-  { id: 'healing', label: 'On a healing journey' },
+  { id: 'healing', label: 'Exploring self-reflection' },
   { id: 'professional', label: 'Wellness professional' }
 ];
 

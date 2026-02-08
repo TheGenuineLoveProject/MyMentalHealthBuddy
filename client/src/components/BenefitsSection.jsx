@@ -44,7 +44,7 @@ export default function BenefitsSection() {
     {
       icon: Brain,
       title: "AI-Powered Insights",
-      description: "Our trauma-informed AI understands the nuances of emotional healing, providing personalized guidance that evolves with your journey.",
+      description: "A reflection-focused AI that uses trauma-informed language to mirror what you share with care and nuance.",
       variant: "sage",
       color: "#8fbf9f",
     },
@@ -162,15 +162,15 @@ export default function BenefitsSection() {
             }}
             data-testid="heading-benefits"
           >
-            Transform Your Inner World
+            Tools for Honest Reflection
           </h2>
           
           <p 
             className="text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ color: '#3a3a3a', opacity: 0.85 }}
           >
-            Experience the benefits of a platform designed with love, built on science, 
-            and dedicated to your emotional flourishing.
+            A platform built with care, informed by evidence-based approaches, 
+            and designed to support your self-reflection at your own pace.
           </p>
         </div>
 

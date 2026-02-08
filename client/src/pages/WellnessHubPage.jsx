@@ -30,7 +30,7 @@ const toolCategories = [
     tools: [
       { name: "Body Wellness", description: "Somatic healing, movement, and nutrition", href: "/body-wellness", icon: Activity },
       { name: "Soul Wellness", description: "Meaning, purpose, and spiritual connection", href: "/soul-wellness", icon: Sparkles },
-      { name: "Healing Journeys", description: "Structured multi-week transformation paths", href: "/healing-journeys", icon: MapPin }
+      { name: "Healing Journeys", description: "Structured multi-week guided programs", href: "/healing-journeys", icon: MapPin }
     ]
   },
   {

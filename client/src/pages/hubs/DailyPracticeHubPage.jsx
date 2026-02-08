@@ -48,7 +48,7 @@ export default function DailyPracticeHubPage() {
     />
     <WellnessPageShell
       title="Daily Practice Hub"
-      subtitle="Small steps, lasting change"
+      subtitle="Small steps, your own pace"
       benefits={pickBenefits(["agency", "meaning", "clarity", "agency"], 4)}
       clarity={{
         what: "Tools for building and maintaining daily wellness practices.",

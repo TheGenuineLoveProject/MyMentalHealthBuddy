@@ -170,7 +170,7 @@ export default function CommunityGuidelines() {
           </p>
           <Link href="/tools">
             <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-explore-tools">
-              Start Your Journey
+              Explore the Tools
             </Button>
           </Link>
         </section>

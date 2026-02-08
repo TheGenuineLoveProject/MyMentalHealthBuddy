@@ -361,7 +361,7 @@ function LandingWireframe() {
             style={{ color: '#2f5d5d' }}
             data-slot="headline"
           >
-            Begin Your Journey to Genuine Self-Love
+            A Private Space for Honest Reflection
           </h1>
           <p 
             className="text-lg mb-8"
@@ -376,7 +376,7 @@ function LandingWireframe() {
               style={{ background: '#eac33b', color: '#2f5d5d' }}
               data-testid="button-hero-cta-primary"
             >
-              Start Your Free Journey <ArrowRight className="w-5 h-5" aria-hidden="true" />
+              Try It Free <ArrowRight className="w-5 h-5" aria-hidden="true" />
             </button>
             <button 
               className="px-8 py-4 rounded-full font-semibold text-lg"

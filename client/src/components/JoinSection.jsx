@@ -131,15 +131,15 @@ export default function JoinSection() {
             }}
             data-testid="heading-join"
           >
-            Begin Your Sacred Journey
+            Start When You're Ready
           </h2>
 
           <p 
             className="text-lg mb-10 max-w-2xl mx-auto leading-relaxed"
             style={{ color: '#3a3a3a', opacity: 0.85 }}
           >
-            Join thousands who have discovered the path to genuine self-love, 
-            emotional healing, and lasting inner peace.
+            A free account gives you access to mood tracking, journaling, and reflection tools. 
+            No pressure, no commitment — explore at your own pace.
           </p>
 
           {/* Benefits List */}

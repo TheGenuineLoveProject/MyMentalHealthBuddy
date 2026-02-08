@@ -299,7 +299,7 @@ export default function DiscussionPage() {
           <footer className="mt-8 p-5 rounded-2xl bg-slate-50 dark:bg-gray-800/50 text-center">
             <Shield className="w-6 h-6 text-teal-500 mx-auto mb-2" aria-hidden="true" />
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Be kind and supportive. Everyone is on their own healing journey.
+              Be kind and supportive. Everyone is here at their own pace.
             </p>
           </footer>
         </div>

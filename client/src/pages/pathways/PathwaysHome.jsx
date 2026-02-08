@@ -155,7 +155,7 @@ export default function PathwaysHome() {
               className="min-h-[48px] px-8 py-4 text-base font-semibold"
               data-testid="button-take-assessment"
             >
-              Start Your Journey
+              Take the Assessment
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>

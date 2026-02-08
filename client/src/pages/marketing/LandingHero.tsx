@@ -58,7 +58,7 @@ export default function LandingHero() {
             data-testid="link-hero-start"
           >
             <Heart className="w-5 h-5" />
-            Start Your Journey
+            Try It Free
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link 

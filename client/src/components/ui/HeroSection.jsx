@@ -80,12 +80,12 @@ const CTAButton = ({ href, children, testId }) => (
 function HeroSection() {
   return (
     <HeroWrapper>
-      <HeroHeading>Begin Your Healing</HeroHeading>
-      <HeroSubheading>Journey Today</HeroSubheading>
+      <HeroHeading>A Private Space for</HeroHeading>
+      <HeroSubheading>Honest Reflection</HeroSubheading>
       <HeroText>
-        Join thousands who have found peace, growth, and genuine love within themselves.
+        Mood tracking, journaling, and AI reflection tools — private by design, free to start.
       </HeroText>
-      <CTAButton href="/register" testId="link-register-cta">Begin Your Healing Journey →</CTAButton>
+      <CTAButton href="/register" testId="link-register-cta">Try It Free →</CTAButton>
     </HeroWrapper>
   );
 }

@@ -131,9 +131,9 @@ export default function AboutSection() {
               fontFamily: "'Poppins', sans-serif",
             }}
           >
-            The Genuine Love Project was born from a profound understanding that healing is not just 
-            possible—it is our birthright. We believe every soul deserves access to compassionate 
-            support, evidence-based tools, and a sacred space to rediscover their inherent wholeness.
+            The Genuine Love Project offers a private space for self-reflection, mood tracking, 
+            and guided journaling. We believe everyone deserves access to compassionate 
+            support and evidence-based wellness tools — on their own terms, at their own pace.
           </p>
         </div>
 

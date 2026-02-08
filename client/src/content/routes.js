@@ -208,7 +208,7 @@ const categoryPresets = {
       primaryCta: { 
         label: {
           beginner: 'Start Now',
-          standard: 'Begin Your Journey',
+          standard: 'Try It Free',
           deep: 'Explore the Framework'
         }, 
         href: '/register' 
@@ -1194,7 +1194,7 @@ const rawRoutes = [
       title: 'Healing Starts with',
       titleHighlight: 'Genuine Love.',
       subtitle: 'We created this platform to provide a private, compassionate, and accessible environment for emotional healing. Every tool here is designed with your safety and growth in mind.',
-      primaryCta: { label: 'Start Your Journey', href: '/dashboard' },
+      primaryCta: { label: 'Go to Dashboard', href: '/dashboard' },
       secondaryCta: { label: 'View Our Approach', href: '/about/approach' }
     },
     modules: [
@@ -1424,7 +1424,7 @@ const rawRoutes = [
       title: 'Real people.',
       titleHighlight: 'Real transformation.',
       subtitle: 'These are the voices of people who have walked the path of healing. Their stories remind us that change is possible, one gentle step at a time.',
-      primaryCta: { label: 'Start Your Journey', href: '/register' },
+      primaryCta: { label: 'Try It Free', href: '/register' },
       secondaryCta: { label: 'Explore Features', href: '/features' }
     },
     modules: [
@@ -1762,11 +1762,11 @@ const rawRoutes = [
     motion: { level: 'rich' },
     component: 'CanvaLanding',
     hero: {
-      eyebrow: 'Transformative Healing Platform',
-      title: 'Heal Your Mind,',
-      titleHighlight: 'Body & Soul',
-      subtitle: 'A comprehensive platform designed to guide you through every step of your healing journey—from mindfulness to personal growth.',
-      primaryCta: { label: 'Begin Your Journey', href: '/register' },
+      eyebrow: 'Wellness Reflection Platform',
+      title: 'A Private Space for',
+      titleHighlight: 'Mind, Body & Soul',
+      subtitle: 'Mood tracking, journaling, and AI-assisted reflection — built with trauma-informed care and designed around how you actually feel.',
+      primaryCta: { label: 'Try It Free', href: '/register' },
       secondaryCta: { label: 'Explore Dashboard', href: '/dashboard' }
     },
     sections: [
@@ -1950,9 +1950,9 @@ const rawRoutes = [
       }
     },
     hero: {
-      eyebrow: 'Begin Your Journey',
+      eyebrow: 'Get Started Free',
       title: 'Create your',
-      titleHighlight: 'healing sanctuary.',
+      titleHighlight: 'private space.',
       subtitle: 'A safe, private space designed just for you.',
       primaryCta: { label: 'Get Started Free', href: '#register-form' },
       secondaryCta: { label: 'Already have an account?', href: '/login' }

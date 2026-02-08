@@ -309,7 +309,7 @@ export default function WellnessStreakDashboard() {
               <p className="text-sm text-orange-700 dark:text-orange-400">
                 {stats.currentStreak > 0 
                   ? `You're on a ${stats.currentStreak}-day streak. Don't break the chain!`
-                  : "Start your wellness journey today!"}
+                  : "Log your first mood or journal entry to begin."}
               </p>
             </div>
           </div>

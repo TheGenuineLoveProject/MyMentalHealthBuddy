@@ -66,7 +66,7 @@ export default function SubscriberBenefitsPage() {
         clarity={{
           what: "A complete overview of your subscription benefits.",
           why: "So you can discover and use all the tools available to you.",
-          who: "For subscribers who want to maximize their wellness journey.",
+          who: "For subscribers who want to explore everything available to them.",
           when: "Whenever you want to explore new features.",
           where: "Right here - your personal benefits dashboard.",
           how: "Browse, click, and explore at your own pace."

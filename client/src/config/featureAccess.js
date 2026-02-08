@@ -47,7 +47,7 @@ export const FEATURE_ACCESS = {
   wisdom: {
     requiredPlan: "free",
     label: "Daily Wisdom",
-    description: "Curated wisdom for your healing journey",
+    description: "Curated wisdom and daily reflections",
   },
 
   communityWall: {

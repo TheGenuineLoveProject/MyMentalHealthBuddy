@@ -29,7 +29,7 @@ export const LEGAL_LINKS = {
 export const SAFE_LANGUAGE = {
   instead_of_therapy: "self-reflection tools",
   instead_of_treatment: "wellness practices",
-  instead_of_cure: "support your journey",
+  instead_of_cure: "support your reflection",
   instead_of_diagnose: "explore patterns",
   instead_of_guarantee: "may help you"
 } as const;

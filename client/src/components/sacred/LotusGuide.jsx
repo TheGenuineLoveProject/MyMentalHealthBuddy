@@ -28,7 +28,7 @@ const LOTUS_MESSAGES = {
     "You did enough today. You are enough."
   ],
   night: [
-    "The stars witness your healing journey.",
+    "The stars are out. A quiet moment for you.",
     "Let go of what no longer serves you tonight.",
     "Sleep is sacred medicine for the soul."
   ]
@@ -38,14 +38,14 @@ const TRIGGER_MESSAGES = {
   "low-mood": [
     "I notice you're going through something difficult. This feeling is temporary.",
     "Even in darkness, healing continues. You are not alone.",
-    "Difficult moments are part of the journey. Would you like a grounding exercise?"
+    "Difficult moments happen. Would you like a grounding exercise?"
   ],
   "streak-7": [
     "🌱 One week of showing up for yourself! You've earned the 7-Day badge.",
     "Seven days of dedication. Your consistency is beautiful."
   ],
   "streak-30": [
-    "🌸 A full month of healing practice! You're truly dedicated to your growth.",
+    "🌸 A full month of showing up for yourself. That's consistency.",
     "Thirty days of self-love. What an incredible achievement."
   ],
   "mood-improvement": [
@@ -53,8 +53,8 @@ const TRIGGER_MESSAGES = {
     "I see the light in you growing stronger. Keep nurturing it."
   ],
   "first-entry": [
-    "✨ Your healing journey has begun. Welcome, brave soul.",
-    "Every journey starts with a single step. You've taken yours."
+    "✨ Welcome. Your first entry is here.",
+    "You showed up. That's a meaningful first step."
   ]
 };
 

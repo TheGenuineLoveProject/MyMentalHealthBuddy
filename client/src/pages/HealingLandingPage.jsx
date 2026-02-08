@@ -470,13 +470,13 @@ export default function HealingLandingPage() {
             style={{ color: '#2f5d5d' }}
             data-testid="heading-cta"
           >
-            Ready to Begin Your Healing Journey?
+            Ready to Try It?
           </h2>
           <p 
             className="text-lg mb-10 max-w-2xl mx-auto"
             style={{ color: '#3a3a3a', opacity: 0.8 }}
           >
-            Join thousands who have found peace, clarity, and genuine self-love through our platform.
+            Free to start. Mood tracking, journaling, and AI reflection tools — private and at your pace.
           </p>
 
           <Link href="/register">
@@ -489,7 +489,7 @@ export default function HealingLandingPage() {
               }}
               data-testid="button-cta-final"
             >
-              Start Your Free Journey
+              Try It Free
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </button>
           </Link>

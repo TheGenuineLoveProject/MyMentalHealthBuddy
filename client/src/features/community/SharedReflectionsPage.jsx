@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const TOPICS = [
   { id: "all", label: "All Topics", icon: Filter },
-  { id: "healing", label: "Healing Journey", icon: Heart },
+  { id: "healing", label: "Healing & Reflection", icon: Heart },
   { id: "anxiety", label: "Anxiety & Stress", icon: Shield },
   { id: "relationships", label: "Relationships", icon: Users },
   { id: "growth", label: "Personal Growth", icon: Sparkles }
@@ -151,7 +151,7 @@ export default function SharedReflectionsPage() {
             Q&A Community
           </h1>
           <p className="text-lead max-w-2xl mx-auto content-breathe">
-            A safe space to ask questions, share wisdom, and support each other's healing journey.
+            A safe space to ask questions, share wisdom, and support each other.
             No judgment, only compassion.
           </p>
         </header>
@@ -377,7 +377,7 @@ export default function SharedReflectionsPage() {
             Community Guidelines
           </h3>
           <p className="text-gray-700 dark:text-gray-300 max-w-xl mx-auto content-breathe">
-            This is a safe, moderated space. Be kind, be supportive, and remember that everyone is on their own healing journey. 
+            This is a safe, moderated space. Be kind, be supportive, and remember that everyone is working through things at their own pace. 
             No medical advice—seek professional help for clinical concerns.
           </p>
           <div className="mt-4">

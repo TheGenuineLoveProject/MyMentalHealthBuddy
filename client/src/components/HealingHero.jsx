@@ -19,10 +19,10 @@ import { Heart, Sparkles, ArrowRight, Star, Leaf } from "lucide-react";
 import "../styles/healing-animations.css";
 
 export default function HealingHero({
-  badge = "Transformative Healing Platform",
-  title = "Heal Your Mind,\nBody & Soul",
-  subtitle = "Experience profound transformation through AI-powered guidance, ancient wisdom, and a compassionate community dedicated to your wellbeing.",
-  primaryCTA = { text: "Begin Your Journey", href: "/register" },
+  badge = "Wellness Reflection Platform",
+  title = "A Private Space for\nMind, Body & Soul",
+  subtitle = "Mood tracking, journaling, and AI-assisted reflection — built with trauma-informed care and designed around how you actually feel.",
+  primaryCTA = { text: "Try It Free", href: "/register" },
   secondaryCTA = { text: "Explore Features", href: "/features" },
   showFloatingElements = true,
 }) {
@@ -253,7 +253,7 @@ export default function HealingHero({
           style={{ borderColor: 'rgba(143, 191, 159, 0.2)' }}
         >
           <p className="text-sm mb-4" style={{ color: '#3a3a3a', opacity: 0.6 }}>
-            Trusted by thousands on their healing journey
+            Used by thousands for daily reflection
           </p>
           <div className="flex flex-wrap justify-center gap-8">
             <div className="text-center">

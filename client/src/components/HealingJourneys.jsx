@@ -339,7 +339,7 @@ export default function HealingJourneys() {
             data-testid="button-start-journey"
           >
             <Sparkles className="w-5 h-5" />
-            Begin Your Journey
+            Start This Program
           </button>
         )}
       </div>

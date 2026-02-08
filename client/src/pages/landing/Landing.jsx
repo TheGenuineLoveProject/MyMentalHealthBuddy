@@ -182,7 +182,7 @@ export default function Landing() {
             <div className="flex flex-wrap items-center gap-4 pt-2">
               <Link href="/register" className="btn-premium" data-testid="link-cta-register">
                 <Sparkles className="icon-sm" aria-hidden="true" />
-                Start Your Journey
+                Try It Free
               </Link>
               <Link href="/login" className="btn-secondary-premium" data-testid="link-cta-login">
                 Sign in
