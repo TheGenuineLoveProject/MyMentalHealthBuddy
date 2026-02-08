@@ -151,7 +151,7 @@ export async function setupAuth(app) {
             return res.redirect("/api/login");
           }
           console.log("[ReplitAuth] User authenticated successfully:", user.claims?.sub);
-          return res.redirect("/");
+          return res.redirect("/dashboard");
         });
       });
     })(req, res, next);
