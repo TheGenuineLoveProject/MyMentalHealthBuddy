@@ -133,7 +133,22 @@ export default function TglpNavbar() {
 
           {user ? (
             <>
-              {isPro && <div className="hidden md:block"><ProBadge /></div>}
+              {isPro ? (
+                <div className="hidden md:block"><ProBadge /></div>
+              ) : user && (
+                <Link
+                  href="/account/billing"
+                  className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium transition-all hover:opacity-90"
+                  style={{
+                    border: "1px solid var(--glp-gold, #d4a843)",
+                    color: "var(--glp-gold-dark, #a07d2e)",
+                  }}
+                  data-testid="link-navbar-upgrade"
+                >
+                  <Sparkles className="w-3 h-3" aria-hidden="true" />
+                  Upgrade
+                </Link>
+              )}
               <Link 
                 href="/dashboard" 
                 className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2 text-[var(--glp-sage-deep)]"
@@ -234,11 +249,25 @@ export default function TglpNavbar() {
           <div className="pt-4 px-4 space-y-2">
             {user ? (
               <>
-                {isPro && (
+                {isPro ? (
                   <div className="flex items-center justify-center gap-2 py-2">
                     <ProBadge />
                     <span className="text-xs text-[var(--glp-ink-60)]">Premium member</span>
                   </div>
+                ) : (
+                  <Link
+                    href="/account/billing"
+                    className="flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-sm font-medium transition-all"
+                    style={{
+                      border: "1px solid var(--glp-gold, #d4a843)",
+                      color: "var(--glp-gold-dark, #a07d2e)",
+                    }}
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid="link-mobile-upgrade"
+                  >
+                    <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+                    Explore Pro
+                  </Link>
                 )}
                 <Link 
                   href="/dashboard" 

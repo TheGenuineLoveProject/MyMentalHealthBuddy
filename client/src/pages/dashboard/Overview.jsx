@@ -385,6 +385,46 @@ export default function DashboardOverview() {
               ))}
             </div>
           </div>
+
+          {!isPro && (
+            <div
+              className="mt-6 rounded-2xl p-5 flex items-center justify-between flex-wrap gap-4"
+              style={{
+                border: "1px solid var(--glp-sage-20, #d4ddd4)",
+                background: "var(--glp-paper, #faf9f6)",
+              }}
+              data-testid="card-dashboard-upgrade"
+            >
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ background: "var(--glp-gold-30, #f5e6c0)" }}
+                >
+                  <Crown className="w-4 h-4" style={{ color: "var(--glp-gold-dark, #a07d2e)" }} aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium" style={{ color: "var(--glp-sage-deep, #1a3a2a)" }}>
+                    Want more? Pro adds unlimited AI sessions and deeper insights.
+                  </p>
+                  <p className="text-xs mt-0.5" style={{ color: "var(--glp-ink-50, #7a8a7a)" }}>
+                    $12/month — cancel anytime, no questions asked.
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/account/billing"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium transition-all hover:opacity-90"
+                style={{
+                  border: "1px solid var(--glp-gold, #d4a843)",
+                  color: "var(--glp-gold-dark, #a07d2e)",
+                }}
+                data-testid="link-dashboard-upgrade"
+              >
+                Learn more
+                <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
