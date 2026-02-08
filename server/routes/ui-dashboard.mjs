@@ -69,7 +69,7 @@ router.get("/", async (req, res) => {
       },
       user: {
         id: userId,
-        email: req.user?.email,
+        email: req.user?.email || req.user?.claims?.email || null,
       },
     }, "Dashboard data loaded.");
   } catch (err) {

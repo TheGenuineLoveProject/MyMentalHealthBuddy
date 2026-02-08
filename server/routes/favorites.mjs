@@ -6,7 +6,7 @@ import { eq, and } from "drizzle-orm";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  if (!req.isAuthenticated?.()) {
+  if (!req.dbUserId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  if (!req.isAuthenticated?.()) {
+  if (!req.dbUserId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
@@ -82,7 +82,7 @@ router.post("/", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  if (!req.isAuthenticated?.()) {
+  if (!req.dbUserId) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
