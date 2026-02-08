@@ -172,9 +172,12 @@ app.set('trust proxy', 1);
 app.use(requestId);
 app.use(requestLogger);
 
-const allowedDomains = process.env.REPLIT_DOMAINS
-  ? process.env.REPLIT_DOMAINS.split(",").map(d => `https://${d.trim()}`)
-  : ["https://localhost:5000"];
+const replitDevDomain = process.env.REPLIT_DEV_DOMAIN;
+const replitDomainsList = process.env.REPLIT_DOMAINS?.split(",").map(d => d.trim()) || [];
+const allDomains = replitDevDomain ? [replitDevDomain, ...replitDomainsList] : replitDomainsList;
+const allowedDomains = allDomains.length > 0
+  ? [...new Set(allDomains)].map(d => `https://${d}`)
+  : ["http://localhost:5000"];
 const frameAncestorsDomains = isProduction
   ? ["'self'", ...allowedDomains, "https://*.replit.dev", "https://*.replit.com"]
   : ["'self'", "https://*.replit.dev", "https://*.replit.com", "http://localhost:*"];

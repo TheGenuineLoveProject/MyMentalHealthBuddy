@@ -86,7 +86,8 @@ router.post("/checkout", async (req, res) => {
     const customerId = await getOrCreateStripeCustomer(req.user.id, req.user.email);
     const idempotencyKey = generateIdempotencyKey(req.user.id, `${plan}-${interval}`, Date.now());
 
-    const baseUrl = process.env.CORS_ORIGIN || `https://${process.env.REPLIT_DOMAINS || ""}`;
+    const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
+    const baseUrl = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
     const session = await stripe.checkout.sessions.create({
       mode: "subscription",
       customer: customerId,
@@ -116,7 +117,8 @@ router.post("/portal", async (req, res) => {
     const customerId = userResult.rows?.[0]?.stripe_customer_id;
     if (!customerId) return badRequest(res, "Missing Stripe customer");
 
-    const baseUrl = process.env.CORS_ORIGIN || `https://${process.env.REPLIT_DOMAINS || ""}`;
+    const replitDomain = process.env.REPLIT_DEV_DOMAIN || process.env.REPLIT_DOMAINS?.split(",")[0];
+    const baseUrl = process.env.CORS_ORIGIN || (replitDomain ? `https://${replitDomain}` : "http://localhost:5000");
     const portal = await stripe.billingPortal.sessions.create({
       customer: customerId,
       return_url: `${baseUrl}/account/billing`,
