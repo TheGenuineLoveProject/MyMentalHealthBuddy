@@ -144,6 +144,13 @@ async function startServer() {
   app.use(express.json({ limit: '1mb' }));
   app.use(cookieParser());
 
+  // Sanitize all incoming request bodies (strip script tags, event handlers, etc.)
+  const { sanitizeBody, securityHeaders } = await import("./middleware/security.mjs");
+  app.use(sanitizeBody);
+
+  // Security headers for API responses (no-cache, XSS protection)
+  app.use("/api", securityHeaders);
+
   // Global API rate limiter (120 requests/min per IP)
   const { default: apiRateLimit } = await import("./middleware/rateLimit.mjs");
   app.use("/api", apiRateLimit);
