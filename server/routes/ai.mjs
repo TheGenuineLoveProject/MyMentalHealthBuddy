@@ -156,7 +156,7 @@ router.post("/chat", authGuard, async (req, res) => {
     if (subStatus === "pro") increment("pro_user_action", { plan: "pro" });
     res.json({ reply: aiResponse, messageId: responseId });
   } catch (err) {
-    logger.error("AI chat error", { error: err.message, userId: req.user?.id });
+    logger.error("AI chat error", { error: err.message, userId: req.dbUserId });
     res.status(500).json({ error: "AI chat failed" });
   }
 });
@@ -177,7 +177,7 @@ router.get("/history", authGuard, async (req, res) => {
 
     res.json({ ok: true, messages: result.rows || [] });
   } catch (err) {
-    logger.error("Get chat history error", { error: err.message, userId: req.user?.id });
+    logger.error("Get chat history error", { error: err.message, userId: req.dbUserId });
     res.status(500).json({ error: "Failed to get chat history" });
   }
 });
@@ -251,7 +251,7 @@ Rules:
 
     res.json({ summary });
   } catch (err) {
-    logger.error("Reflection summary error", { error: err.message, userId: req.user?.id });
+    logger.error("Reflection summary error", { error: err.message, userId: req.dbUserId });
     res.status(500).json({ error: "Could not generate reflection" });
   }
 });
@@ -267,7 +267,7 @@ router.delete("/history", authGuard, async (req, res) => {
 
     res.json({ ok: true, message: "Chat history cleared" });
   } catch (err) {
-    logger.error("Clear chat history error", { error: err.message, userId: req.user?.id });
+    logger.error("Clear chat history error", { error: err.message, userId: req.dbUserId });
     res.status(500).json({ error: "Failed to clear chat history" });
   }
 });

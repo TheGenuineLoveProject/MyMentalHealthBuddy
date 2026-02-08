@@ -132,7 +132,7 @@ router.get("/", async (req, res) => {
       insights
     });
   } catch (err) {
-    logger.error("AI Dashboard error", { error: err.message, userId: req.user?.id });
+    logger.error("AI Dashboard error", { error: err.message, userId: req.dbUserId });
     return serverError(res, err);
   }
 });

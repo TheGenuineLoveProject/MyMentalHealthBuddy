@@ -87,7 +87,7 @@ router.get("/progress", async (req, res) => {
       },
     });
   } catch (error) {
-    logger.error("Error fetching progress", { error: error.message, userId: req.user?.id });
+    logger.error("Error fetching progress", { error: error.message, userId: req.dbUserId });
     res.status(500).json({ ok: false, error: "Failed to fetch progress" });
   }
 });
@@ -190,7 +190,7 @@ router.post("/record-session", async (req, res) => {
       currentStreak: progress.currentStreak,
     });
   } catch (error) {
-    logger.error("Error recording session", { error: error.message, userId: req.user?.id });
+    logger.error("Error recording session", { error: error.message, userId: req.dbUserId });
     res.status(500).json({ ok: false, error: "Failed to record session" });
   }
 });
@@ -245,7 +245,7 @@ router.get("/quests", async (req, res) => {
 
     res.json({ ok: true, quests });
   } catch (error) {
-    logger.error("Error fetching quests", { error: error.message, userId: req.user?.id });
+    logger.error("Error fetching quests", { error: error.message, userId: req.dbUserId });
     res.status(500).json({ ok: false, error: "Failed to fetch quests" });
   }
 });
@@ -306,7 +306,7 @@ router.post("/complete-quest", async (req, res) => {
 
     res.json({ ok: true, xpReward: quest.xpReward });
   } catch (error) {
-    logger.error("Error completing quest", { error: error.message, userId: req.user?.id });
+    logger.error("Error completing quest", { error: error.message, userId: req.dbUserId });
     res.status(500).json({ ok: false, error: "Failed to complete quest" });
   }
 });

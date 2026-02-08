@@ -358,7 +358,7 @@ router.delete('/sessions/:sessionId', requireAuth, async (req, res) => {
       req,
     });
 
-    logger.info('Session revoked', { userId: req.user?.id, sessionId, requestId: req.requestId });
+    logger.info('Session revoked', { userId: req.dbUserId, sessionId, requestId: req.requestId });
 
     return success(res, { revoked: true, sessionId });
   } catch (error) {
@@ -383,7 +383,7 @@ router.post('/delete-request', requireAuth, sensitiveRateLimit, async (req, res)
       req,
     });
 
-    logger.info('Account deletion requested', { userId: req.user?.id, requestId: req.requestId });
+    logger.info('Account deletion requested', { userId: req.dbUserId, requestId: req.requestId });
 
     return success(res, { 
       message: 'Deletion request submitted',
