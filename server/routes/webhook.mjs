@@ -74,10 +74,11 @@ router.post(
               .update(users)
               .set({
                 stripeCustomerId: session.customer,
-                subscriptionStatus: "active",
+                subscriptionStatus: "pro",
                 updatedAt: new Date(),
               })
               .where(eq(users.email, session.customer_email));
+            logger.info("Subscription activated via checkout", { customer: session.customer, status: "pro" });
           }
           break;
         }
@@ -86,14 +87,17 @@ router.post(
         case "customer.subscription.updated": {
           const subscription = event.data.object;
           if (subscription.customer) {
+            const isActive = ["active", "trialing"].includes(subscription.status);
+            const canonicalStatus = isActive ? "pro" : "free";
             await db
               .update(users)
               .set({
-                subscriptionStatus: subscription.status,
+                subscriptionStatus: canonicalStatus,
                 subscriptionExpiresAt: new Date(subscription.current_period_end * 1000),
                 updatedAt: new Date(),
               })
               .where(eq(users.stripeCustomerId, subscription.customer));
+            logger.info("Subscription status synced", { customer: subscription.customer, stripeStatus: subscription.status, canonicalStatus });
           }
           break;
         }
@@ -104,11 +108,12 @@ router.post(
             await db
               .update(users)
               .set({
-                subscriptionStatus: "canceled",
+                subscriptionStatus: "free",
                 subscriptionExpiresAt: new Date(),
                 updatedAt: new Date(),
               })
               .where(eq(users.stripeCustomerId, subscription.customer));
+            logger.info("Subscription deleted, reverted to free", { customer: subscription.customer });
           }
           break;
         }
@@ -119,10 +124,11 @@ router.post(
             await db
               .update(users)
               .set({
-                subscriptionStatus: "active",
+                subscriptionStatus: "pro",
                 updatedAt: new Date(),
               })
               .where(eq(users.stripeCustomerId, invoice.customer));
+            logger.info("Invoice paid, confirmed pro", { customer: invoice.customer });
           }
           break;
         }
@@ -133,16 +139,16 @@ router.post(
             await db
               .update(users)
               .set({
-                subscriptionStatus: "past_due",
+                subscriptionStatus: "free",
                 updatedAt: new Date(),
               })
               .where(eq(users.stripeCustomerId, invoice.customer));
+            logger.info("Invoice payment failed, reverted to free", { customer: invoice.customer });
           }
           break;
         }
 
         default:
-          // Unhandled event type - log for monitoring
           logger.info("Unhandled Stripe event type", { type: event.type });
       }
 

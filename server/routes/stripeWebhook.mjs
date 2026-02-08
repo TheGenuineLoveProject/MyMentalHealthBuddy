@@ -91,6 +91,14 @@ async function updateUserSubscription(customerId, subscriptionData, customerEmai
       logger.info("Subscription created", { userId, plan: subscriptionData.plan });
     }
 
+    const isActive = ["active", "trialing"].includes(subscriptionData.status);
+    const canonicalStatus = subscriptionData.plan === "free" ? "free" : (isActive ? "pro" : "free");
+    await db.execute(sql`
+      UPDATE users SET subscription_status = ${canonicalStatus}, updated_at = NOW()
+      WHERE stripe_customer_id = ${customerId}
+    `);
+    logger.info("Canonical subscription_status synced on users", { userId, canonicalStatus });
+
     return { userId, ...subscriptionData };
   } catch (error) {
     logger.error("Failed to update subscription", { error: error.message, customerId });
