@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { logger } from "./logger.mjs";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -7,7 +8,7 @@ function getJwtSecret() {
     return process.env.JWT_SECRET;
   }
   if (isProduction) {
-    console.error("CRITICAL: JWT_SECRET must be set in production!");
+    logger.error("CRITICAL: JWT_SECRET must be set in production!");
     process.exit(1);
   }
   return "dev-jwt-secret-genuine-love-project-2024";

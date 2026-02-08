@@ -1,3 +1,5 @@
+import { logger } from "./logger.mjs";
+
 const REQUIRED_VARS = {
   production: [
     "JWT_SECRET",
@@ -23,33 +25,33 @@ export function validateEnv() {
   const missing = required.filter((key) => !process.env[key]);
   
   if (missing.length > 0) {
-    console.error("=== ENVIRONMENT VALIDATION FAILED ===");
-    console.error(`Missing required environment variables: ${missing.join(", ")}`);
+    logger.error("=== ENVIRONMENT VALIDATION FAILED ===");
+    logger.error("Missing required environment variables", { missing: missing.join(", ") });
     if (isProduction) {
-      console.error("DEPLOY BLOCKED: Cannot start in production without required secrets.");
+      logger.error("DEPLOY BLOCKED: Cannot start in production without required secrets.");
       process.exit(1);
     } else {
-      console.warn("Warning: Running in development mode with missing variables.");
+      logger.warn("Running in development mode with missing variables.");
     }
   }
 
   const warnings = OPTIONAL_VARS.filter((key) => !process.env[key]);
   if (warnings.length > 0) {
-    console.log(`Optional variables not configured: ${warnings.join(", ")}`);
+    logger.info("Optional variables not configured", { variables: warnings.join(", ") });
   }
 
   if (!isProduction && (!process.env.JWT_SECRET || process.env.JWT_SECRET.includes("dev"))) {
-    console.warn("Warning: Using development JWT secret. Do not use in production.");
+    logger.warn("Using development JWT secret. Do not use in production.");
   }
 
-  console.log(`Environment validation passed for ${env} mode.`);
+  logger.info("Environment validation passed", { mode: env });
   return true;
 }
 
 export function validateSecretStrength(secret, name) {
   if (!secret) return false;
   if (secret.length < 32) {
-    console.warn(`Warning: ${name} should be at least 32 characters for security.`);
+    logger.warn(`${name} should be at least 32 characters for security.`);
     return false;
   }
   return true;

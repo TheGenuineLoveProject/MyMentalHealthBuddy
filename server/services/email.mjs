@@ -10,6 +10,7 @@
  */
 
 import { Resend } from 'resend';
+import { logger } from '../utils/logger.mjs';
 
 let connectionSettings = null;
 
@@ -100,10 +101,10 @@ export async function sendWelcomeEmail(toEmail, userName) {
       `
     });
     
-    console.log('[Email] Welcome email sent to:', toEmail);
+    logger.info("[Email] Welcome email sent", { toEmail });
     return { success: true, id: result.id };
   } catch (error) {
-    console.error('[Email] Failed to send welcome email:', error);
+    logger.error("[Email] Failed to send welcome email", { error: error?.message || error });
     return { success: false, error: error.message };
   }
 }
@@ -152,10 +153,10 @@ export async function sendChallengeReminder(toEmail, userName, dayNumber) {
       `
     });
     
-    console.log('[Email] Challenge reminder sent to:', toEmail);
+    logger.info("[Email] Challenge reminder sent", { toEmail });
     return { success: true, id: result.id };
   } catch (error) {
-    console.error('[Email] Failed to send challenge reminder:', error);
+    logger.error("[Email] Failed to send challenge reminder", { error: error?.message || error });
     return { success: false, error: error.message };
   }
 }
@@ -224,10 +225,10 @@ export async function sendMilestoneEmail(toEmail, userName, milestone) {
       `
     });
     
-    console.log('[Email] Milestone email sent to:', toEmail);
+    logger.info("[Email] Milestone email sent", { toEmail });
     return { success: true, id: result.id };
   } catch (error) {
-    console.error('[Email] Failed to send milestone email:', error);
+    logger.error("[Email] Failed to send milestone email", { error: error?.message || error });
     return { success: false, error: error.message };
   }
 }
@@ -302,10 +303,10 @@ export async function sendAccountDeletionEmail(toEmail, userName, scheduledDate)
       `
     });
     
-    console.log('[Email] Account deletion email sent to:', toEmail);
+    logger.info("[Email] Account deletion email sent", { toEmail });
     return { success: true, id: result.id };
   } catch (error) {
-    console.error('[Email] Failed to send account deletion email:', error);
+    logger.error("[Email] Failed to send account deletion email", { error: error?.message || error });
     return { success: false, error: error.message };
   }
 }
@@ -364,10 +365,10 @@ export async function sendUpgradeConfirmation(toEmail, userName) {
       `
     });
     
-    console.log('[Email] Upgrade confirmation sent to:', toEmail);
+    logger.info("[Email] Upgrade confirmation sent", { toEmail });
     return { success: true, id: result.id };
   } catch (error) {
-    console.error('[Email] Failed to send upgrade confirmation:', error);
+    logger.error("[Email] Failed to send upgrade confirmation", { error: error?.message || error });
     return { success: false, error: error.message };
   }
 }
@@ -427,10 +428,10 @@ export async function sendCancellationAcknowledgment(toEmail, userName, periodEn
       `
     });
     
-    console.log('[Email] Cancellation acknowledgment sent to:', toEmail);
+    logger.info("[Email] Cancellation acknowledgment sent", { toEmail });
     return { success: true, id: result.id };
   } catch (error) {
-    console.error('[Email] Failed to send cancellation acknowledgment:', error);
+    logger.error("[Email] Failed to send cancellation acknowledgment", { error: error?.message || error });
     return { success: false, error: error.message };
   }
 }

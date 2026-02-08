@@ -1,5 +1,6 @@
 import { db } from "../db/client.mjs";
 import { auditLog } from "../../shared/schema.mjs";
+import { logger } from "../utils/logger.mjs";
 
 export async function logAudit({
   userId = null,
@@ -21,7 +22,7 @@ export async function logAudit({
       userAgent: userAgent?.substring(0, 500),
     });
   } catch (err) {
-    console.error("Audit log insert failed:", err?.message);
+    logger.error("Audit log insert failed", { error: err?.message });
   }
 }
 
