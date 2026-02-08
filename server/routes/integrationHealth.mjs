@@ -1,4 +1,5 @@
 import express from "express";
+import { logger } from "../utils/logger.mjs";
 
 const router = express.Router();
 
@@ -52,6 +53,7 @@ router.get("/", async (req, res) => {
       },
     });
   } catch (err) {
+    logger.error("Integration health check failed", { error: err?.message || err });
     res.status(500).json({
       ok: false,
       status: "error",

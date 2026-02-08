@@ -1,5 +1,6 @@
 // server/routes/content.mjs
 import { Router } from "express";
+import { logger } from "../utils/logger.mjs";
 
 const router = Router();
 
@@ -52,7 +53,8 @@ router.post("/generate", (req, res) => {
       outputCount: FORMATS.length,
       outputs,
     });
-  } catch (_e) {
+  } catch (err) {
+    logger.error("Content generation failed", { error: err?.message || err });
     return res.status(500).json({ ok: false, message: "Generate failed." });
   }
 });
