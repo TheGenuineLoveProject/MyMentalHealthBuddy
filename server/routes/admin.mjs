@@ -107,7 +107,8 @@ router.get("/health", async (_req, res) => {
         await db.execute(sql`SELECT 1`);
         dbConnected = true;
         dbLatency = Date.now() - dbStart;
-      } catch {
+      } catch (dbErr) {
+        logger.warn("Admin health DB probe failed", { error: dbErr?.message || dbErr });
         dbConnected = false;
       }
     }

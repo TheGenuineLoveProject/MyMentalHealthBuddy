@@ -218,7 +218,8 @@ router.get("/sessions", async (req, res) => {
         LIMIT 20
       `);
       res.json({ ok: true, sessions: result.rows || [] });
-    } catch {
+    } catch (dbErr) {
+      logger.warn("Therapy sessions query fallback", { error: dbErr?.message || dbErr });
       res.json({ ok: true, sessions: [] });
     }
   } catch (err) {

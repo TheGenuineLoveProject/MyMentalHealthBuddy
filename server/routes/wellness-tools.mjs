@@ -407,7 +407,8 @@ router.get("/challenge-progress", requireAuth, async (req, res) => {
       try {
         const progress = JSON.parse(entries[0].content);
         return success(res, { progress });
-      } catch {
+      } catch (parseErr) {
+        logger.warn("Progress JSON parse fallback", { error: parseErr?.message || parseErr });
         return success(res, { progress: {} });
       }
     }

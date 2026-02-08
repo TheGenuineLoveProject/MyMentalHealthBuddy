@@ -25,7 +25,8 @@ router.get("/", async (_req, res) => {
       try {
         await db.execute(sql`SELECT 1`);
         dbConnected = true;
-      } catch {
+      } catch (dbErr) {
+        logger.warn("Health check DB probe failed", { error: dbErr?.message || dbErr });
         dbConnected = false;
       }
     }
@@ -49,7 +50,8 @@ router.get("/ready", async (_req, res) => {
       await db.execute(sql`SELECT 1`);
     }
     res.json({ status: "ready" });
-  } catch {
+  } catch (readyErr) {
+    logger.warn("Readiness check failed", { error: readyErr?.message || readyErr });
     res.status(503).json({ status: "not ready" });
   }
 });
@@ -73,7 +75,8 @@ router.get("/detailed", async (_req, res) => {
       await db.execute(sql`SELECT 1`);
       checks.db.ok = true;
       checks.db.latencyMs = Date.now() - dbStart;
-    } catch {
+    } catch (dbErr) {
+      logger.warn("Detailed health DB check failed", { error: dbErr?.message || dbErr });
       checks.db.ok = false;
     }
   }
@@ -120,8 +123,8 @@ router.get("/metrics", async (_req, res) => {
         ]);
         dbStats.users = usersResult.rows?.[0]?.count || 0;
         dbStats.messages = messagesResult.rows?.[0]?.count || 0;
-      } catch {
-        // DB query failed, use defaults
+      } catch (metricsErr) {
+        logger.warn("Metrics DB query fallback", { error: metricsErr?.message || metricsErr });
       }
     }
 

@@ -90,7 +90,8 @@ router.post("/verify-token", async (req, res) => {
         brandId: payload.brandId,
         expiresAt: payload.exp ? new Date(payload.exp * 1000).toISOString() : null
       });
-    } catch {
+    } catch (decodeErr) {
+      logger.warn("Canva token decode failed", { error: decodeErr?.message || decodeErr });
       return badRequest(res, "Failed to decode token.");
     }
   } catch (err) {

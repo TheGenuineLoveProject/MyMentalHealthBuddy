@@ -22,7 +22,8 @@ function requireAuth(req, res, next) {
     req.user = payload;
     if (payload.id) req.dbUserId = payload.id;
     return next();
-  } catch {
+  } catch (authErr) {
+    logger.warn("Journal auth token verification failed", { error: authErr?.message || authErr });
     return res.status(401).json({ ok: false, message: "Unauthorized." });
   }
 }
