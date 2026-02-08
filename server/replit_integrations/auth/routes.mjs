@@ -4,7 +4,7 @@
  */
 
 import { authStorage } from "./storage.mjs";
-import { isAuthenticated } from "./replitAuth.mjs";
+import { isAuthenticated, refreshUserToken } from "./replitAuth.mjs";
 
 export function registerAuthRoutes(app) {
   app.get("/api/auth/user", async (req, res) => {
@@ -16,20 +16,19 @@ export function registerAuthRoutes(app) {
         req.user = user;
       }
 
-      if (!user?.expires_at) {
+      if (!user?.claims?.sub) {
         return res.json(null);
       }
 
       const now = Math.floor(Date.now() / 1000);
-      if (now > user.expires_at) {
-        return res.json(null);
+      if (user.expires_at && now > user.expires_at) {
+        const refreshed = await refreshUserToken(user, req);
+        if (!refreshed) {
+          return res.json(null);
+        }
       }
 
-      const replitId = user.claims?.sub;
-      if (!replitId) {
-        return res.json(null);
-      }
-
+      const replitId = user.claims.sub;
       const dbUser = await authStorage.getUserByReplitId(replitId);
       res.json(dbUser);
     } catch (error) {

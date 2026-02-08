@@ -169,6 +169,27 @@ export async function setupAuth(app) {
   });
 }
 
+export async function refreshUserToken(user, req) {
+  const refreshToken = user.refresh_token;
+  if (!refreshToken) {
+    return false;
+  }
+
+  try {
+    const config = await getOidcConfig();
+    const tokenResponse = await client.refreshTokenGrant(config, refreshToken);
+    updateUserSession(user, tokenResponse);
+    if (req.session) {
+      req.session.userData = user;
+      req.session.save(() => {});
+    }
+    return true;
+  } catch (error) {
+    console.error("[ReplitAuth] Token refresh failed:", error.message);
+    return false;
+  }
+}
+
 export const isAuthenticated = async (req, res, next) => {
   // Check for passport user or backup userData in session
   let user = req.user;
