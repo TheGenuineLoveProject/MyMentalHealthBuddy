@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import compression from 'compression';
+import { logger } from "./utils/logger.mjs";
 import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -131,7 +132,7 @@ const envValidation = {
 // JWT secret handling - use SESSION_SECRET for token signing (consistent approach)
 if (isProduction) {
   if (!process.env.SESSION_SECRET) {
-    console.error('CRITICAL: SESSION_SECRET required in production');
+    logger.error('CRITICAL: SESSION_SECRET required in production');
     process.exit(1);
   }
   process.env.JWT_SECRET = process.env.JWT_SECRET || process.env.SESSION_SECRET;
@@ -146,21 +147,21 @@ const missingRecommended = envValidation.recommended.filter(v => !v.value);
 const missingOptional = envValidation.optional.filter(v => !v.value);
 
 if (missingCritical.length > 0 && isProduction) {
-  console.error(`CRITICAL: Missing required env vars: ${missingCritical.map(v => v.name).join(', ')}`);
-  console.error('Server cannot start in production without these. Exiting.');
+  logger.error("CRITICAL: Missing required env vars", { vars: missingCritical.map(v => v.name).join(', ') });
+  logger.error('Server cannot start in production without these. Exiting.');
   process.exit(1);
 }
 
 if (missingRecommended.length > 0) {
-  console.warn(`WARNING: Missing recommended env vars: ${missingRecommended.map(v => v.name).join(', ')}`);
-  console.warn('Some features may not work correctly.');
+  logger.warn("WARNING: Missing recommended env vars", { vars: missingRecommended.map(v => v.name).join(', ') });
+  logger.warn('Some features may not work correctly.');
 }
 
 if (missingOptional.length > 0) {
-  console.info(`INFO: Optional env vars not set: ${missingOptional.map(v => v.name).join(', ')}`);
+  logger.info("Optional env vars not set", { vars: missingOptional.map(v => v.name).join(', ') });
 }
 
-console.log(`Environment validation complete. Mode: ${isProduction ? 'PRODUCTION' : 'DEVELOPMENT'}`);
+logger.info("Environment validation complete", { mode: isProduction ? 'PRODUCTION' : 'DEVELOPMENT' });
 
 const app = express();
 
@@ -373,7 +374,7 @@ app.get("*", (_req, res) => {
 });
 
 app.use((err, _req, res, _next) => {
-  console.error("Server error:", err);
+  logger.error("Server error", { error: err?.message || err });
   res.status(500).json({
     ok: false,
     error: "INTERNAL_SERVER_ERROR",
@@ -383,29 +384,29 @@ app.use((err, _req, res, _next) => {
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server listening on http://0.0.0.0:${PORT}`);
+  logger.info("Server listening", { url: `http://0.0.0.0:${PORT}`, port: PORT });
 });
 
 process.on("SIGTERM", () => {
-  console.log("SIGTERM received, shutting down gracefully...");
+  logger.info("SIGTERM received, shutting down gracefully...");
   server.close(() => {
-    console.log("Server closed.");
+    logger.info("Server closed.");
     process.exit(0);
   });
   setTimeout(() => {
-    console.error("Forced shutdown after timeout.");
+    logger.error("Forced shutdown after timeout.");
     process.exit(1);
   }, 10000);
 });
 
 process.on("SIGINT", () => {
-  console.log("[shutdown] SIGINT received");
+  logger.info("[shutdown] SIGINT received");
   process.exit(0);
 });
 
 } // end startProductionServer
 
 startProductionServer().catch(err => {
-  console.error("Failed to start production server:", err);
+  logger.error("Failed to start production server", { error: err?.message || err });
   process.exit(1);
 });

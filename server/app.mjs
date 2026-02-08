@@ -2,6 +2,7 @@
 // Shared Express app for testing and production
 import express from "express";
 import cookieParser from "cookie-parser";
+import { logger } from "./utils/logger.mjs";
 
 const app = express();
 
@@ -37,7 +38,7 @@ async function mountIfExists(mountPath, modulePath) {
   } catch (e) {
     // Log errors in test mode for debugging
     if (process.env.NODE_ENV === "test") {
-      console.warn(`[app.mjs] Failed to mount ${mountPath}:`, e.message);
+      logger.warn("Failed to mount route", { mountPath, error: e?.message || e });
     }
   }
 }

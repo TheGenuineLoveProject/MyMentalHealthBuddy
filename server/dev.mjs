@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from "express";
 import cors from "cors";
+import { logger } from "./utils/logger.mjs";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import { createServer as createViteServer } from "vite";
@@ -310,7 +311,7 @@ async function startServer() {
         totalRevenue: Number(revenueResult?.total || 0),
       });
     } catch (error) {
-      console.error("Content stats error:", error);
+      logger.error("Content stats error", { error: error?.message || error });
       res.json({
         totalPosts: 0,
         publishedPosts: 0,
@@ -389,13 +390,13 @@ async function startServer() {
       break;
     } catch (err) {
       if (err.code === 'EADDRINUSE') {
-        console.log(`Port ${port} is busy, trying next...`);
+        logger.info("Port is busy, trying next", { port });
         try {
           const { execSync } = await import('child_process');
           const pids = execSync(`lsof -ti tcp:${port} 2>/dev/null || true`, { encoding: 'utf-8' }).trim();
           if (pids) {
-            console.log(`  Blocked by PID(s): ${pids.split('\n').join(', ')}`);
-            console.log(`  To free: kill -9 ${pids.split('\n').join(' ')}`);
+            logger.info("Blocked by PIDs", { port, pids: pids.split('\n').join(', ') });
+            logger.info("To free port", { command: `kill -9 ${pids.split('\n').join(' ')}` });
           }
         } catch (e) {}
       } else {
@@ -405,20 +406,20 @@ async function startServer() {
   }
   
   if (!server) {
-    console.error(`Could not bind to any port: ${fallbackPorts.join(', ')}`);
-    console.error(`Run: npm run dev:free && npm run dev`);
+    logger.error("Could not bind to any port", { ports: fallbackPorts.join(', ') });
+    logger.error("Run: npm run dev:free && npm run dev");
     process.exit(1);
   }
   
-  console.log(`Dev server listening on http://0.0.0.0:${boundPort}`);
+  logger.info("Dev server listening", { url: `http://0.0.0.0:${boundPort}`, port: boundPort });
   if (boundPort !== preferredPort) {
-    console.log(`  (preferred port ${preferredPort} was busy)`);
+    logger.info("Preferred port was busy", { preferredPort, boundPort });
   }
 
   function gracefulShutdown(signal) {
-    console.log(`${signal} received, shutting down...`);
+    logger.info("Signal received, shutting down", { signal });
     server.close(() => {
-      console.log("Server closed.");
+      logger.info("Server closed.");
       process.exit(0);
     });
     setTimeout(() => process.exit(1), 5000);
@@ -428,4 +429,4 @@ async function startServer() {
   process.on("SIGINT", () => gracefulShutdown("SIGINT"));
 }
 
-startServer().catch(console.error);
+startServer().catch(err => logger.error("Failed to start dev server", { error: err?.message || err }));

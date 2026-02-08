@@ -1,4 +1,5 @@
 import { WebSocketServer, WebSocket } from 'ws';
+import { logger } from "../utils/logger.mjs";
 
 const clients = new Map();
 const rooms = new Map();
@@ -12,7 +13,7 @@ export function setupWebSocket(server) {
   const wss = new WebSocketServer({ server, path: '/ws' });
 
   wss.on('connection', (ws) => {
-    console.log('[WebSocket] New connection');
+    logger.info('[WebSocket] New connection');
     
     messageRateLimits.set(ws, { count: 0, windowStart: Date.now() });
 
@@ -38,7 +39,7 @@ export function setupWebSocket(server) {
         const message = JSON.parse(rawMessage);
         handleMessage(ws, message);
       } catch (error) {
-        console.error('[WebSocket] Error parsing message:', error);
+        logger.error('[WebSocket] Error parsing message', { error: error?.message || error });
         ws.send(JSON.stringify({ 
           type: 'error', 
           content: 'Invalid message format' 
@@ -51,12 +52,12 @@ export function setupWebSocket(server) {
     });
 
     ws.on('error', (error) => {
-      console.error('[WebSocket] Error:', error);
+      logger.error('[WebSocket] Error', { error: error?.message || error });
       handleDisconnect(ws);
     });
   });
 
-  console.log('[WebSocket] Server initialized on path /ws');
+  logger.info('[WebSocket] Server initialized on path /ws');
   return wss;
 }
 

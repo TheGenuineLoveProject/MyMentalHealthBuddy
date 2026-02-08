@@ -1,6 +1,7 @@
 import { db } from "../db/index.mjs";
 import { journals } from "../../shared/schema.mjs";
 import { eq, desc } from "drizzle-orm";
+import { logger } from "../utils/logger.mjs";
 
 export async function getJournalMirrorInsights(userId, limit = 5) {
   try {
@@ -30,7 +31,7 @@ export async function getJournalMirrorInsights(userId, limit = 5) {
       suggestion: generateSuggestion(themes, patterns)
     };
   } catch (error) {
-    console.error("JournalingMirror error:", error);
+    logger.error("JournalingMirror error", { error: error?.message || error });
     return { patterns: [], themes: [], suggestion: null };
   }
 }
