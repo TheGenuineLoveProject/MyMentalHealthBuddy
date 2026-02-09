@@ -209,7 +209,7 @@ export default function NarrativeDrafts() {
                           </Badge>
                         </div>
                         <p className="text-sm leading-relaxed line-clamp-2">
-                          {post.draft?.editedCaption || post.platform_variants?.instagram_caption?.slice(0, 120)}...
+                          {post.draft?.editedCaption || post.instagram_caption?.slice(0, 120)}...
                         </p>
                       </div>
                       <div className="flex items-center gap-1 flex-shrink-0">
@@ -240,14 +240,19 @@ export default function NarrativeDrafts() {
                   {isExpanded && (
                     <CardContent className="pt-0 space-y-4">
                       <div className="border-t pt-4">
+                        {post.hook && (
+                          <div className="text-sm font-medium text-foreground mb-3 italic">
+                            "{post.hook}"
+                          </div>
+                        )}
                         <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
                           <Globe className="w-4 h-4" />
                           Platform Variants
                         </h4>
                         <div className="grid gap-3">
-                          {Object.entries(post.platform_variants).map(([platform, text]) => {
-                            const pConfig = PLATFORM_ICONS[platform];
-                            if (!pConfig) return null;
+                          {Object.entries(PLATFORM_ICONS).map(([platform, pConfig]) => {
+                            const text = post[platform];
+                            if (!text) return null;
                             const Icon = pConfig.icon;
                             const copyKey = `${post.id}-${platform}`;
                             return (
@@ -278,9 +283,9 @@ export default function NarrativeDrafts() {
                         </div>
                       </div>
 
-                      {post.gentle_CTA && (
+                      {post.gentle_cta_url && (
                         <div className="text-xs text-muted-foreground border-l-2 border-amber-300 pl-3">
-                          <span className="font-medium">CTA:</span> {post.gentle_CTA}
+                          <span className="font-medium">CTA URL:</span> {post.gentle_cta_url}
                         </div>
                       )}
 

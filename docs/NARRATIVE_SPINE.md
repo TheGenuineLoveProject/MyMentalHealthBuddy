@@ -63,6 +63,23 @@ Visit our [Crisis Resources page](/crisis) anytime — it's always accessible, n
 
 ---
 
+## G) CTA Rules
+
+All calls to action must be invitational, never demanding. Use these patterns:
+
+| Do use | Don't use |
+|---|---|
+| "If you'd like to explore..." | "Sign up now!" |
+| "When you're ready..." | "Don't miss out!" |
+| "You can try..." | "Act fast!" |
+| "You're welcome to..." | "You need to..." |
+| "If it feels right..." | "You should..." |
+| "Whenever feels comfortable..." | "Limited time!" |
+
+Every CTA must include an implicit or explicit opt-out. The reader should always feel free to close the page, skip the action, or come back later.
+
+---
+
 ## Cross-References
 
 - Blog: [/blog](/blog)

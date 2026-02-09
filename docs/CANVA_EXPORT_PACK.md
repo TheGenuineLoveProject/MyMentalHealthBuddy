@@ -152,7 +152,7 @@ Examples:
 
 ## Template 5: Newsletter Header Image
 
-**Dimensions:** 600 × 200 px (3:1 landscape)
+**Dimensions:** 1200 × 600 px (2:1 landscape)
 **Use:** Email newsletter header (Resend templates)
 
 ### Layout

@@ -2,145 +2,133 @@
   {
     "id": "ns-001",
     "theme": "trust",
-    "platform_variants": {
-      "instagram_caption": "You don't have to share everything to start healing.\n\nSome of the most important work happens in private — in the space between you and your own thoughts.\n\nThe Genuine Love Project is a quiet place for that kind of reflection. No audience. No performance. Just you.\n\nExplore when you're ready: thegenuineloveproject.com/blog",
-      "tiktok_caption": "What if the most powerful wellness tool was just... a private space to be honest with yourself? No followers. No likes. Just reflection. 🌿 thegenuineloveproject.com/blog",
-      "youtube_shorts_description": "Real wellness doesn't need an audience. The Genuine Love Project is a private space for honest self-reflection — no social pressure, no performance. Explore at your pace: thegenuineloveproject.com/blog",
-      "x_post": "Some of the most meaningful growth happens where no one is watching.\n\nThe Genuine Love Project is a private space for honest reflection — no audience required.\n\nthegenuineloveproject.com/blog"
-    },
-    "gentle_CTA": "Explore when you're ready: thegenuineloveproject.com/blog",
-    "safety_note": null
+    "hook": "The most powerful wellness tool might just be a private space to be honest with yourself.",
+    "instagram_caption": "You don't have to share everything to start healing.\n\nSome of the most important work happens in private — in the space between you and your own thoughts.\n\nThe Genuine Love Project is a quiet place for that kind of reflection. No audience. No performance. Just you.\n\nExplore when you're ready: thegenuineloveproject.com/blog",
+    "tiktok_caption": "What if the most powerful wellness tool was just... a private space to be honest with yourself? No followers. No likes. Just reflection. thegenuineloveproject.com/blog",
+    "youtube_shorts_description": "Real wellness doesn't need an audience. The Genuine Love Project is a private space for honest self-reflection — no social pressure, no performance. Explore at your pace: thegenuineloveproject.com/blog",
+    "x_post": "Some of the most meaningful growth happens where no one is watching.\n\nThe Genuine Love Project is a private space for honest reflection — no audience required.\n\nthegenuineloveproject.com/blog",
+    "gentle_cta_url": "/blog",
+    "safety_note": ""
   },
   {
     "id": "ns-002",
     "theme": "gentleness",
-    "platform_variants": {
-      "instagram_caption": "There's no right speed for emotional growth.\n\nSome days, showing up looks like journaling for twenty minutes. Other days, it looks like closing the app and going outside.\n\nBoth are valid. Both matter.\n\nWe built tools that respect your pace: thegenuineloveproject.com/newsletter",
-      "tiktok_caption": "Reminder: closing the wellness app and going outside IS a form of self-care. We built tools that respect that. 🌱 thegenuineloveproject.com/newsletter",
-      "youtube_shorts_description": "There's no wrong pace for personal growth. Some days you journal. Some days you rest. The Genuine Love Project respects both. Learn more: thegenuineloveproject.com/newsletter",
-      "x_post": "There's no right speed for emotional growth.\n\nSome days it's journaling. Other days it's going outside instead.\n\nWe built tools that respect your pace.\n\nthegenuineloveproject.com/newsletter"
-    },
-    "gentle_CTA": "Learn more when you're ready: thegenuineloveproject.com/newsletter",
-    "safety_note": null
+    "hook": "There's no right speed for emotional growth.",
+    "instagram_caption": "There's no right speed for emotional growth.\n\nSome days, showing up looks like journaling for twenty minutes. Other days, it looks like closing the app and going outside.\n\nBoth are valid. Both matter.\n\nWe built tools that respect your pace: thegenuineloveproject.com/newsletter",
+    "tiktok_caption": "Reminder: closing the wellness app and going outside IS a form of self-care. We built tools that respect that. thegenuineloveproject.com/newsletter",
+    "youtube_shorts_description": "There's no wrong pace for personal growth. Some days you journal. Some days you rest. The Genuine Love Project respects both. Learn more: thegenuineloveproject.com/newsletter",
+    "x_post": "There's no right speed for emotional growth.\n\nSome days it's journaling. Other days it's going outside instead.\n\nWe built tools that respect your pace.\n\nthegenuineloveproject.com/newsletter",
+    "gentle_cta_url": "/newsletter",
+    "safety_note": ""
   },
   {
     "id": "ns-003",
     "theme": "boundaries",
-    "platform_variants": {
-      "instagram_caption": "A wellness app that tells you to take a break from it?\n\nThat's us.\n\nWe don't track your streaks to make you feel guilty. We don't send push notifications to pull you back. Your wellness journey isn't our engagement metric.\n\nSee what that looks like: thegenuineloveproject.com/blog",
-      "tiktok_caption": "POV: A wellness app that actually wants you to close it sometimes. No streaks. No guilt. No engagement tricks. 🌿 thegenuineloveproject.com/blog",
-      "youtube_shorts_description": "We don't track streaks or send guilt notifications. The Genuine Love Project respects your boundaries — even the boundary of stepping away. thegenuineloveproject.com/blog",
-      "x_post": "We don't track streaks to make you feel guilty.\nWe don't send notifications to pull you back.\n\nYour wellness journey isn't our engagement metric.\n\nthegenuineloveproject.com/blog"
-    },
-    "gentle_CTA": "See what ethical wellness tools look like: thegenuineloveproject.com/blog",
-    "safety_note": null
+    "hook": "A wellness app that tells you to take a break from it.",
+    "instagram_caption": "A wellness app that tells you to take a break from it?\n\nThat's us.\n\nWe don't track your streaks to make you feel guilty. We don't send push notifications to pull you back. Your wellness journey isn't our engagement metric.\n\nSee what that looks like: thegenuineloveproject.com/blog",
+    "tiktok_caption": "POV: A wellness app that actually wants you to close it sometimes. No streaks. No guilt. No engagement tricks. thegenuineloveproject.com/blog",
+    "youtube_shorts_description": "We don't track streaks or send guilt notifications. The Genuine Love Project respects your boundaries — even the boundary of stepping away. thegenuineloveproject.com/blog",
+    "x_post": "We don't track streaks to make you feel guilty.\nWe don't send notifications to pull you back.\n\nYour wellness journey isn't our engagement metric.\n\nthegenuineloveproject.com/blog",
+    "gentle_cta_url": "/blog",
+    "safety_note": ""
   },
   {
     "id": "ns-004",
     "theme": "daily_practice",
-    "platform_variants": {
-      "instagram_caption": "What does your inner landscape look like today?\n\nNot yesterday. Not next week. Just right now.\n\nOur mood tracker doesn't judge your answer. It just holds space for whatever you're feeling — and offers a gentle prompt if you'd like one.\n\nTry it free: thegenuineloveproject.com/blog",
-      "tiktok_caption": "What does your inner landscape look like today? Not yesterday. Just now. Our mood tracker holds space for whatever you're feeling. 🌿 thegenuineloveproject.com/blog",
-      "youtube_shorts_description": "Check in with yourself — not to fix anything, but to notice. The Genuine Love Project's mood tracker holds space for wherever you are today. thegenuineloveproject.com/blog",
-      "x_post": "What does your inner landscape look like today?\n\nNot yesterday. Not next week. Just now.\n\nOur mood tracker holds space for whatever the answer is.\n\nthegenuineloveproject.com/blog"
-    },
-    "gentle_CTA": "Try it free: thegenuineloveproject.com/blog",
-    "safety_note": null
+    "hook": "What does your inner landscape look like today?",
+    "instagram_caption": "What does your inner landscape look like today?\n\nNot yesterday. Not next week. Just right now.\n\nOur mood tracker doesn't judge your answer. It just holds space for whatever you're feeling — and offers a gentle prompt if you'd like one.\n\nTry it free: thegenuineloveproject.com/blog",
+    "tiktok_caption": "What does your inner landscape look like today? Not yesterday. Just now. Our mood tracker holds space for whatever you're feeling. thegenuineloveproject.com/blog",
+    "youtube_shorts_description": "Check in with yourself — not to fix anything, but to notice. The Genuine Love Project's mood tracker holds space for wherever you are today. thegenuineloveproject.com/blog",
+    "x_post": "What does your inner landscape look like today?\n\nNot yesterday. Not next week. Just now.\n\nOur mood tracker holds space for whatever the answer is.\n\nthegenuineloveproject.com/blog",
+    "gentle_cta_url": "/blog",
+    "safety_note": ""
   },
   {
     "id": "ns-005",
     "theme": "community",
-    "platform_variants": {
-      "instagram_caption": "You're not behind.\n\nThere's no leaderboard here. No \"most improved\" badge. No comparison.\n\nJust a quiet community of people exploring what it means to live with a little more self-awareness and a little more kindness.\n\nJoin the conversation: thegenuineloveproject.com/newsletter",
-      "tiktok_caption": "No leaderboard. No \"most improved\" badge. Just a quiet space for people learning to be kinder to themselves. 🌱 thegenuineloveproject.com/newsletter",
-      "youtube_shorts_description": "There's no competition in genuine self-care. The Genuine Love Project is a community of people exploring self-awareness without comparison. thegenuineloveproject.com/newsletter",
-      "x_post": "You're not behind.\n\nThere's no leaderboard here. No comparison. Just a quiet space for self-awareness and kindness.\n\nthegenuineloveproject.com/newsletter"
-    },
-    "gentle_CTA": "Join the conversation: thegenuineloveproject.com/newsletter",
-    "safety_note": null
+    "hook": "You're not behind. There's no leaderboard here.",
+    "instagram_caption": "You're not behind.\n\nThere's no leaderboard here. No \"most improved\" badge. No comparison.\n\nJust a quiet community of people exploring what it means to live with a little more self-awareness and a little more kindness.\n\nJoin the conversation: thegenuineloveproject.com/newsletter",
+    "tiktok_caption": "No leaderboard. No \"most improved\" badge. Just a quiet space for people learning to be kinder to themselves. thegenuineloveproject.com/newsletter",
+    "youtube_shorts_description": "There's no competition in genuine self-care. The Genuine Love Project is a community of people exploring self-awareness without comparison. thegenuineloveproject.com/newsletter",
+    "x_post": "You're not behind.\n\nThere's no leaderboard here. No comparison. Just a quiet space for self-awareness and kindness.\n\nthegenuineloveproject.com/newsletter",
+    "gentle_cta_url": "/newsletter",
+    "safety_note": ""
   },
   {
     "id": "ns-006",
     "theme": "safety",
-    "platform_variants": {
-      "instagram_caption": "If you're going through something heavy right now, we want you to know:\n\nYou deserve real support — from real people.\n\nOur crisis resources page is always available. No login. No paywall. No questions.\n\n988 Suicide & Crisis Lifeline: Call or text 988\nCrisis Text Line: Text HOME to 741741\n\nthegenuineloveproject.com/crisis",
-      "tiktok_caption": "If things feel heavy right now: you deserve real support from real people. Our crisis resources page is always open — no login, no paywall. 988 or text HOME to 741741. 💛 thegenuineloveproject.com/crisis",
-      "youtube_shorts_description": "You deserve real support. Our crisis resources page is always accessible — no login required. 988 Lifeline: Call or text 988. Crisis Text Line: Text HOME to 741741. thegenuineloveproject.com/crisis",
-      "x_post": "If things feel heavy right now, you deserve real support from real people.\n\n988 Lifeline: Call or text 988\nCrisis Text Line: Text HOME to 741741\n\nOur crisis page is always open — no login needed.\nthegenuineloveproject.com/crisis"
-    },
-    "gentle_CTA": "Crisis resources (always free, no login): thegenuineloveproject.com/crisis",
+    "hook": "If things feel heavy right now, you deserve real support from real people.",
+    "instagram_caption": "If you're going through something heavy right now, we want you to know:\n\nYou deserve real support — from real people.\n\nOur crisis resources page is always available. No login. No paywall. No questions.\n\n988 Suicide & Crisis Lifeline: Call or text 988\nCrisis Text Line: Text HOME to 741741\n\nthegenuineloveproject.com/crisis",
+    "tiktok_caption": "If things feel heavy right now: you deserve real support from real people. Our crisis resources page is always open — no login, no paywall. 988 or text HOME to 741741. thegenuineloveproject.com/crisis",
+    "youtube_shorts_description": "You deserve real support. Our crisis resources page is always accessible — no login required. 988 Lifeline: Call or text 988. Crisis Text Line: Text HOME to 741741. thegenuineloveproject.com/crisis",
+    "x_post": "If things feel heavy right now, you deserve real support from real people.\n\n988 Lifeline: Call or text 988\nCrisis Text Line: Text HOME to 741741\n\nOur crisis page is always open — no login needed.\nthegenuineloveproject.com/crisis",
+    "gentle_cta_url": "/crisis",
     "safety_note": "This post includes crisis resources. Always include hotline numbers when sharing."
   },
   {
     "id": "ns-007",
     "theme": "honesty",
-    "platform_variants": {
-      "instagram_caption": "We won't tell you we can heal your trauma.\n\nBecause we can't. No app can.\n\nWhat we can do is offer a private space for reflection, journaling, and emotional check-ins — tools that research suggests can support self-awareness over time.\n\nThat's the honest truth: thegenuineloveproject.com/blog",
-      "tiktok_caption": "No app can heal your trauma. But a private space for reflection, journaling, and check-ins? That can support self-awareness. And that's what we offer. 🌿 thegenuineloveproject.com/blog",
-      "youtube_shorts_description": "We won't promise to heal your trauma — because no app can. But we offer private tools for reflection and self-awareness. That's the honest truth. thegenuineloveproject.com/blog",
-      "x_post": "We won't tell you we can heal your trauma. No app can.\n\nWhat we offer: a private space for reflection, journaling, and emotional check-ins.\n\nThat's the honest truth.\n\nthegenuineloveproject.com/blog"
-    },
-    "gentle_CTA": "Explore what we actually offer: thegenuineloveproject.com/blog",
+    "hook": "We won't tell you we can heal your trauma. Because no app can.",
+    "instagram_caption": "We won't tell you we can heal your trauma.\n\nBecause we can't. No app can.\n\nWhat we can do is offer a private space for reflection, journaling, and emotional check-ins — tools that research suggests can support self-awareness over time.\n\nThat's the honest truth: thegenuineloveproject.com/blog",
+    "tiktok_caption": "No app can heal your trauma. But a private space for reflection, journaling, and check-ins? That can support self-awareness. And that's what we offer. thegenuineloveproject.com/blog",
+    "youtube_shorts_description": "We won't promise to heal your trauma — because no app can. But we offer private tools for reflection and self-awareness. That's the honest truth. thegenuineloveproject.com/blog",
+    "x_post": "We won't tell you we can heal your trauma. No app can.\n\nWhat we offer: a private space for reflection, journaling, and emotional check-ins.\n\nThat's the honest truth.\n\nthegenuineloveproject.com/blog",
+    "gentle_cta_url": "/blog",
     "safety_note": "If referencing trauma, ensure crisis link is accessible in bio or comments."
   },
   {
     "id": "ns-008",
     "theme": "consent",
-    "platform_variants": {
-      "instagram_caption": "Every prompt on our platform is invitational.\n\n\"Would you like to explore this?\"\n\"If it feels right, you might try...\"\n\"You can skip this anytime.\"\n\nBecause wellness tools should ask, not demand.\n\nSee the difference: thegenuineloveproject.com/newsletter",
-      "tiktok_caption": "\"Would you like to explore this?\" \"You can skip this anytime.\" — That's how every prompt on our platform sounds. Because wellness should ask, not demand. 🌱 thegenuineloveproject.com/newsletter",
-      "youtube_shorts_description": "Every prompt is invitational. Every feature is optional. The Genuine Love Project believes wellness tools should ask, not demand. thegenuineloveproject.com/newsletter",
-      "x_post": "\"Would you like to explore this?\"\n\"You can skip this anytime.\"\n\nThat's how every prompt on our platform sounds.\n\nWellness tools should ask, not demand.\n\nthegenuineloveproject.com/newsletter"
-    },
-    "gentle_CTA": "See consent-first design: thegenuineloveproject.com/newsletter",
-    "safety_note": null
+    "hook": "Every prompt on our platform is invitational.",
+    "instagram_caption": "Every prompt on our platform is invitational.\n\n\"Would you like to explore this?\"\n\"If it feels right, you might try...\"\n\"You can skip this anytime.\"\n\nBecause wellness tools should ask, not demand.\n\nSee the difference: thegenuineloveproject.com/newsletter",
+    "tiktok_caption": "\"Would you like to explore this?\" \"You can skip this anytime.\" — That's how every prompt on our platform sounds. Because wellness should ask, not demand. thegenuineloveproject.com/newsletter",
+    "youtube_shorts_description": "Every prompt is invitational. Every feature is optional. The Genuine Love Project believes wellness tools should ask, not demand. thegenuineloveproject.com/newsletter",
+    "x_post": "\"Would you like to explore this?\"\n\"You can skip this anytime.\"\n\nThat's how every prompt on our platform sounds.\n\nWellness tools should ask, not demand.\n\nthegenuineloveproject.com/newsletter",
+    "gentle_cta_url": "/newsletter",
+    "safety_note": ""
   },
   {
     "id": "ns-009",
     "theme": "accessibility",
-    "platform_variants": {
-      "instagram_caption": "Wellness tools should be usable by everyone.\n\nThat's why we built in:\n- Screen reader support\n- Keyboard navigation\n- Reduced motion options\n- Dyslexia-friendly fonts\n- High contrast mode\n\nAccessibility isn't a feature. It's a value.\n\nthegenuineloveproject.com/blog",
-      "tiktok_caption": "Screen reader support. Keyboard nav. Reduced motion. Dyslexia fonts. High contrast. Because accessibility isn't a feature — it's a value. 🌿 thegenuineloveproject.com/blog",
-      "youtube_shorts_description": "Accessibility isn't a feature — it's a value. The Genuine Love Project includes screen reader support, reduced motion, dyslexia-friendly fonts, and more. thegenuineloveproject.com/blog",
-      "x_post": "Accessibility isn't a feature. It's a value.\n\nScreen reader support. Keyboard nav. Reduced motion. Dyslexia-friendly fonts. High contrast.\n\nWellness tools should be usable by everyone.\n\nthegenuineloveproject.com/blog"
-    },
-    "gentle_CTA": "Explore accessible wellness tools: thegenuineloveproject.com/blog",
-    "safety_note": null
+    "hook": "Wellness tools should be usable by everyone.",
+    "instagram_caption": "Wellness tools should be usable by everyone.\n\nThat's why we built in:\n- Screen reader support\n- Keyboard navigation\n- Reduced motion options\n- Dyslexia-friendly fonts\n- High contrast mode\n\nAccessibility isn't a feature. It's a value.\n\nthegenuineloveproject.com/blog",
+    "tiktok_caption": "Screen reader support. Keyboard nav. Reduced motion. Dyslexia fonts. High contrast. Because accessibility isn't a feature — it's a value. thegenuineloveproject.com/blog",
+    "youtube_shorts_description": "Accessibility isn't a feature — it's a value. The Genuine Love Project includes screen reader support, reduced motion, dyslexia-friendly fonts, and more. thegenuineloveproject.com/blog",
+    "x_post": "Accessibility isn't a feature. It's a value.\n\nScreen reader support. Keyboard nav. Reduced motion. Dyslexia-friendly fonts. High contrast.\n\nWellness tools should be usable by everyone.\n\nthegenuineloveproject.com/blog",
+    "gentle_cta_url": "/blog",
+    "safety_note": ""
   },
   {
     "id": "ns-010",
     "theme": "privacy",
-    "platform_variants": {
-      "instagram_caption": "Your journal entries belong to you.\n\nWe don't read them. We don't sell them. We don't use them to train AI models.\n\nWhen you write something honest in a private space, it should stay private. That's not a premium feature — it's the default.\n\nthegenuineloveproject.com/blog",
-      "tiktok_caption": "Your journal entries belong to you. We don't read them. We don't sell them. We don't train AI on them. Privacy isn't premium — it's the default. 🔒 thegenuineloveproject.com/blog",
-      "youtube_shorts_description": "Your journal entries stay private. We don't read, sell, or train AI on them. Privacy isn't a premium feature — it's the default at The Genuine Love Project. thegenuineloveproject.com/blog",
-      "x_post": "Your journal entries belong to you.\n\nWe don't read them.\nWe don't sell them.\nWe don't train AI on them.\n\nPrivacy isn't premium — it's the default.\n\nthegenuineloveproject.com/blog"
-    },
-    "gentle_CTA": "Learn about our privacy approach: thegenuineloveproject.com/blog",
-    "safety_note": null
+    "hook": "Your journal entries belong to you. We don't read them.",
+    "instagram_caption": "Your journal entries belong to you.\n\nWe don't read them. We don't sell them. We don't use them to train AI models.\n\nWhen you write something honest in a private space, it should stay private. That's not a premium feature — it's the default.\n\nthegenuineloveproject.com/blog",
+    "tiktok_caption": "Your journal entries belong to you. We don't read them. We don't sell them. We don't train AI on them. Privacy isn't premium — it's the default. thegenuineloveproject.com/blog",
+    "youtube_shorts_description": "Your journal entries stay private. We don't read, sell, or train AI on them. Privacy isn't a premium feature — it's the default at The Genuine Love Project. thegenuineloveproject.com/blog",
+    "x_post": "Your journal entries belong to you.\n\nWe don't read them.\nWe don't sell them.\nWe don't train AI on them.\n\nPrivacy isn't premium — it's the default.\n\nthegenuineloveproject.com/blog",
+    "gentle_cta_url": "/blog",
+    "safety_note": ""
   },
   {
     "id": "ns-011",
     "theme": "self_compassion",
-    "platform_variants": {
-      "instagram_caption": "The voice in your head that says you're not doing enough?\n\nYou don't have to listen to it today.\n\nSelf-compassion isn't about ignoring reality. It's about responding to yourself with the same kindness you'd offer a friend.\n\nOur reflection tools can help you practice that: thegenuineloveproject.com/newsletter",
-      "tiktok_caption": "That voice saying you're not doing enough? You don't have to listen today. Self-compassion = treating yourself like a friend. 🌱 thegenuineloveproject.com/newsletter",
-      "youtube_shorts_description": "Self-compassion isn't ignoring reality — it's responding to yourself with kindness. The Genuine Love Project offers reflection tools to help you practice. thegenuineloveproject.com/newsletter",
-      "x_post": "The voice that says you're not doing enough?\n\nYou don't have to listen to it today.\n\nSelf-compassion is responding to yourself with the same kindness you'd offer a friend.\n\nthegenuineloveproject.com/newsletter"
-    },
-    "gentle_CTA": "Explore reflection tools: thegenuineloveproject.com/newsletter",
-    "safety_note": null
+    "hook": "The voice that says you're not doing enough? You don't have to listen today.",
+    "instagram_caption": "The voice in your head that says you're not doing enough?\n\nYou don't have to listen to it today.\n\nSelf-compassion isn't about ignoring reality. It's about responding to yourself with the same kindness you'd offer a friend.\n\nOur reflection tools can help you practice that: thegenuineloveproject.com/newsletter",
+    "tiktok_caption": "That voice saying you're not doing enough? You don't have to listen today. Self-compassion = treating yourself like a friend. thegenuineloveproject.com/newsletter",
+    "youtube_shorts_description": "Self-compassion isn't ignoring reality — it's responding to yourself with kindness. The Genuine Love Project offers reflection tools to help you practice. thegenuineloveproject.com/newsletter",
+    "x_post": "The voice that says you're not doing enough?\n\nYou don't have to listen to it today.\n\nSelf-compassion is responding to yourself with the same kindness you'd offer a friend.\n\nthegenuineloveproject.com/newsletter",
+    "gentle_cta_url": "/newsletter",
+    "safety_note": ""
   },
   {
     "id": "ns-012",
     "theme": "gratitude",
-    "platform_variants": {
-      "instagram_caption": "We built this platform because we believe everyone deserves a private space to be honest with themselves.\n\nNo performance. No metrics. No judgment.\n\nJust a quiet corner of the internet where your inner world matters.\n\nThank you for being here.\n\nthegenuineloveproject.com/blog",
-      "tiktok_caption": "A quiet corner of the internet where your inner world matters. No performance. No metrics. No judgment. Thank you for being here. 💛 thegenuineloveproject.com/blog",
-      "youtube_shorts_description": "Everyone deserves a private space to be honest with themselves. The Genuine Love Project is that quiet corner of the internet. Thank you for being here. thegenuineloveproject.com/blog",
-      "x_post": "We built this because everyone deserves a private space to be honest with themselves.\n\nNo performance. No metrics. No judgment.\n\nJust a quiet corner of the internet where your inner world matters.\n\nThank you for being here.\n\nthegenuineloveproject.com/blog"
-    },
-    "gentle_CTA": "Explore the platform: thegenuineloveproject.com/blog",
-    "safety_note": null
+    "hook": "A quiet corner of the internet where your inner world matters.",
+    "instagram_caption": "We built this platform because we believe everyone deserves a private space to be honest with themselves.\n\nNo performance. No metrics. No judgment.\n\nJust a quiet corner of the internet where your inner world matters.\n\nThank you for being here.\n\nthegenuineloveproject.com/blog",
+    "tiktok_caption": "A quiet corner of the internet where your inner world matters. No performance. No metrics. No judgment. Thank you for being here. thegenuineloveproject.com/blog",
+    "youtube_shorts_description": "Everyone deserves a private space to be honest with themselves. The Genuine Love Project is that quiet corner of the internet. Thank you for being here. thegenuineloveproject.com/blog",
+    "x_post": "We built this because everyone deserves a private space to be honest with themselves.\n\nNo performance. No metrics. No judgment.\n\nJust a quiet corner of the internet where your inner world matters.\n\nThank you for being here.\n\nthegenuineloveproject.com/blog",
+    "gentle_cta_url": "/blog",
+    "safety_note": ""
   }
 ]
