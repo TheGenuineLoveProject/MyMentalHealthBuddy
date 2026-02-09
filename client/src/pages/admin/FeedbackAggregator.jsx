@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { useToast } from "@/hooks/use-toast";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const CATEGORY_META = {
   bug: { label: "Bug", icon: Bug, color: "text-red-500", bg: "bg-red-50 dark:bg-red-950/30" },
@@ -77,18 +78,7 @@ export default function FeedbackAggregator() {
     );
   }
 
-  if (isError) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4" data-testid="error-state">
-        <AlertCircle className="w-12 h-12 text-destructive/60" />
-        <h2 className="text-xl font-semibold" data-testid="text-error-title">Unable to load feedback</h2>
-        <p className="text-muted-foreground text-sm">Authentication may be required.</p>
-        <Button onClick={() => refetch()} data-testid="button-retry-feedback">
-          <RefreshCw className="w-4 h-4 mr-2" /> Try Again
-        </Button>
-      </div>
-    );
-  }
+  if (isError) return <AdminErrorBanner title="Unable to load feedback" message="The feedback service may be temporarily unavailable." onRetry={refetch} />;
 
   return (
     <>

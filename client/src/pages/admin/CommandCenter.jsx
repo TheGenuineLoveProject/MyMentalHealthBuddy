@@ -492,8 +492,27 @@ function DailyToolsPanel() {
         await new Promise(r => setTimeout(r, 150));
       }
     }
-    setLastFullCheck(new Date().toLocaleTimeString());
+    const checkTime = new Date().toLocaleTimeString();
+    setLastFullCheck(checkTime);
     setIsRunningAll(false);
+  };
+
+  useEffect(() => {
+    if (Object.keys(toolResults).length > 0 && lastFullCheck) {
+      try {
+        localStorage.setItem('glp_tools_last_check', JSON.stringify({
+          results: toolResults,
+          lastCheck: lastFullCheck,
+          timestamp: Date.now()
+        }));
+      } catch {}
+    }
+  }, [toolResults, lastFullCheck]);
+
+  const runErrorsOnly = async () => {
+    const errorTools = toolCategories.flatMap(c => c.tools).filter(t => toolResults[t.id]?.status === 'error' || toolResults[t.id]?.status === 'warning');
+    if (errorTools.length === 0) return;
+    await Promise.all(errorTools.map(t => runHealthCheck(t)));
   };
 
   const totalTools = toolCategories.reduce((sum, c) => sum + c.tools.length, 0);
@@ -564,43 +583,69 @@ function DailyToolsPanel() {
         </div>
       )}
       
-      {checkedCount === totalTools && !isAnyRunning && (
+      {checkedCount === totalTools && !isAnyRunning && (() => {
+        const healthScore = totalTools > 0 ? Math.round((healthyCount / totalTools) * 100) : 0;
+        const scoreColor = healthScore >= 90 ? '#22c55e' : healthScore >= 70 ? '#f59e0b' : '#ef4444';
+        const scoreBg = healthScore >= 90 ? 'rgba(34,197,94,0.06)' : healthScore >= 70 ? 'rgba(245,158,11,0.06)' : 'rgba(239,68,68,0.06)';
+        const scoreBorder = healthScore >= 90 ? 'rgba(34,197,94,0.15)' : healthScore >= 70 ? 'rgba(245,158,11,0.15)' : 'rgba(239,68,68,0.15)';
+        return (
         <div style={{ padding: '0.5rem 1rem', marginBottom: '0.25rem' }} data-testid="panel-check-results-summary">
           <div style={{ 
-            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem',
-            padding: '0.75rem', borderRadius: '8px', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.06)'
+            padding: '0.75rem', borderRadius: '8px', background: scoreBg, border: `1px solid ${scoreBorder}`
           }}>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#22c55e' }} data-testid="text-healthy-count">{healthyCount}</div>
-              <div style={{ fontSize: '0.7rem', color: '#666' }}>Healthy</div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ fontSize: '2rem', fontWeight: 700, color: scoreColor }} data-testid="text-health-score">{healthScore}%</div>
+                <div>
+                  <div style={{ fontSize: '0.82rem', fontWeight: 600 }}>Platform Health Score</div>
+                  <div style={{ fontSize: '0.7rem', color: '#888' }}>Last check: {lastFullCheck}</div>
+                </div>
+              </div>
+              {(errorCount + warningCount > 0) && (
+                <button onClick={runErrorsOnly} disabled={isAnyRunning} style={{
+                  display: 'inline-flex', alignItems: 'center', gap: '4px',
+                  fontSize: '0.7rem', padding: '4px 10px', borderRadius: '6px',
+                  border: '1px solid rgba(239,68,68,0.2)', background: 'rgba(239,68,68,0.06)',
+                  cursor: 'pointer', color: '#dc2626', fontWeight: 500
+                }} data-testid="button-recheck-issues">
+                  <RefreshCw size={10} /> Re-check Issues ({errorCount + warningCount})
+                </button>
+              )}
             </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#eab308' }} data-testid="text-warning-count">{warningCount}</div>
-              <div style={{ fontSize: '0.7rem', color: '#666' }}>Warnings</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ef4444' }} data-testid="text-error-count">{errorCount}</div>
-              <div style={{ fontSize: '0.7rem', color: '#666' }}>Errors</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#3b82f6' }} data-testid="text-auth-gated-count">{authGatedCount}</div>
-              <div style={{ fontSize: '0.7rem', color: '#666' }}>Auth-Gated</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f59e0b' }} data-testid="text-rate-limited-count">{rateLimitedCount}</div>
-              <div style={{ fontSize: '0.7rem', color: '#666' }}>Rate-Limited</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#8b5cf6' }} data-testid="text-avg-response-time">{avgResponseTime}ms</div>
-              <div style={{ fontSize: '0.7rem', color: '#666' }}>Avg Response</div>
-            </div>
-            <div style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: maxResponseTime > 1000 ? '#ef4444' : '#64748b' }} data-testid="text-max-response-time">{maxResponseTime}ms</div>
-              <div style={{ fontSize: '0.7rem', color: '#666' }}>Slowest</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.5rem' }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#22c55e' }} data-testid="text-healthy-count">{healthyCount}</div>
+                <div style={{ fontSize: '0.65rem', color: '#666' }}>Healthy</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#eab308' }} data-testid="text-warning-count">{warningCount}</div>
+                <div style={{ fontSize: '0.65rem', color: '#666' }}>Warnings</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#ef4444' }} data-testid="text-error-count">{errorCount}</div>
+                <div style={{ fontSize: '0.65rem', color: '#666' }}>Errors</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#3b82f6' }} data-testid="text-auth-gated-count">{authGatedCount}</div>
+                <div style={{ fontSize: '0.65rem', color: '#666' }}>Auth-Gated</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#8b5cf6' }} data-testid="text-avg-response-time">{avgResponseTime}ms</div>
+                <div style={{ fontSize: '0.65rem', color: '#666' }}>Avg Response</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: maxResponseTime > 1000 ? '#ef4444' : '#64748b' }} data-testid="text-max-response-time">{maxResponseTime}ms</div>
+                <div style={{ fontSize: '0.65rem', color: '#666' }}>Slowest</div>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 700, color: '#64748b' }} data-testid="text-total-tools">{totalTools}</div>
+                <div style={{ fontSize: '0.65rem', color: '#666' }}>Total Tools</div>
+              </div>
             </div>
           </div>
         </div>
-      )}
+        );
+      })()}
       
       <div style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
         <div style={{ position: 'relative', flex: '1 1 200px', minWidth: '200px' }}>
@@ -943,6 +988,78 @@ function DailyOpsChecklist() {
           }
           return <div key={task.id}>{inner}</div>;
         })}
+      </div>
+    </div>
+  );
+}
+
+function AIKnowledgeHub() {
+  const aiSystems = [
+    { id: 'openai', label: 'OpenAI Chat Engine', desc: 'AI-powered wellness conversations with trauma-informed responses', status: 'active', endpoint: '/api/ai/history', icon: MessageSquare, color: '#10a37f' },
+    { id: 'perplexity', label: 'Perplexity AI (Factual)', desc: 'Evidence-based factual research for content validation', status: 'active', endpoint: '/api/perplexity', icon: Search, color: '#1da1f2' },
+    { id: 'canva', label: 'Canva AI Design', desc: 'Visual content creation and brand-aligned design tools', status: 'active', endpoint: '/api/canva-oauth', icon: Palette, color: '#7d2ae8' },
+    { id: 'codex', label: 'Codex Knowledge Base', desc: 'Platform intelligence, self-repair diagnostics, and optimization engine', status: 'active', endpoint: '/api/integrations', icon: Brain, color: '#f59e0b' },
+  ];
+
+  const knowledgeAreas = [
+    { label: 'Wellness Tools', count: 10, href: '/admin/tools', icon: Heart },
+    { label: 'Intelligence APIs', count: 15, href: '/admin/tools', icon: Brain },
+    { label: 'Healing Protocols', count: 11, href: '/admin/tools', icon: Leaf },
+    { label: 'Content Pipeline', count: 11, href: '/admin/tools', icon: FileText },
+    { label: 'Admin Systems', count: 13, href: '/admin/tools', icon: Shield },
+    { label: 'Infrastructure', count: 20, href: '/admin/tools', icon: Server },
+  ];
+
+  return (
+    <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTitleContainer}>
+          <Brain className={styles.cardHeaderIcon} />
+          <h2 className={styles.cardTitle}>AI Knowledge Hub</h2>
+        </div>
+        <Link href="/admin/tools" style={{ fontSize: '0.75rem', color: 'hsl(var(--primary))', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }} data-testid="link-ai-hub-tools">
+          All 123 Tools <ArrowRight size={12} />
+        </Link>
+      </div>
+      <div style={{ padding: '0 1rem 0.75rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.75rem', marginBottom: '1rem' }}>
+          {aiSystems.map(sys => (
+            <div key={sys.id} style={{
+              display: 'flex', alignItems: 'center', gap: '0.75rem',
+              padding: '0.75rem', borderRadius: '10px',
+              border: '1px solid rgba(0,0,0,0.08)', background: 'rgba(0,0,0,0.015)'
+            }} data-testid={`ai-system-${sys.id}`}>
+              <div style={{
+                width: '38px', height: '38px', borderRadius: '8px',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                background: `${sys.color}15`, flexShrink: 0
+              }}>
+                <sys.icon size={18} style={{ color: sys.color }} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ fontSize: '0.82rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {sys.label}
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }} />
+                </div>
+                <div style={{ fontSize: '0.7rem', color: '#888', lineHeight: 1.3 }}>{sys.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.5rem' }}>
+          {knowledgeAreas.map(area => (
+            <Link key={area.label} href={area.href} style={{
+              display: 'flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.5rem 0.65rem', borderRadius: '8px',
+              border: '1px solid rgba(0,0,0,0.06)', background: 'hsl(var(--muted))',
+              textDecoration: 'none', color: 'inherit', fontSize: '0.78rem'
+            }} data-testid={`knowledge-area-${area.label.toLowerCase().replace(/\s+/g, '-')}`}>
+              <area.icon size={14} style={{ opacity: 0.5, flexShrink: 0 }} />
+              <span style={{ flex: 1 }}>{area.label}</span>
+              <span style={{ fontSize: '0.68rem', fontWeight: 600, color: 'hsl(var(--primary))' }}>{area.count}</span>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -1356,6 +1473,8 @@ export default function AdminCommandCenter() {
         <ToolsStatusWidget />
 
         <AdminNavGrid />
+
+        <AIKnowledgeHub />
 
         <DailyToolsPanel />
         <SafetyFooter variant="compact" className="mt-12" />

@@ -9,6 +9,7 @@ import {
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const PLATFORMS = [
   { id: "instagram", name: "Instagram", icon: Instagram, color: "#E4405F" },

@@ -202,6 +202,8 @@ const CRITICAL_CHECKS = [
   { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: CreditCard, desc: "Stripe billing" },
   { id: "blog-api", label: "Blog Engine", endpoint: "/api/blog", icon: BookOpen, desc: "Blog system" },
   { id: "email", label: "Email Service", endpoint: "/api/email", icon: Mail, desc: "Resend email" },
+  { id: "perplexity", label: "Perplexity AI", endpoint: "/api/perplexity", icon: Search, desc: "Factual research AI" },
+  { id: "canva-oauth", label: "Canva AI", endpoint: "/api/canva-oauth", icon: FolderKanban, desc: "Canva integration" },
 ];
 
 function QuickDiagnostics({ toolResults, runHealthCheck, runningTools }) {
@@ -220,7 +222,7 @@ function QuickDiagnostics({ toolResults, runHealthCheck, runningTools }) {
         <div className="flex items-center gap-2">
           <Zap size={16} className="text-amber-500" />
           <h3 className="text-sm font-semibold">Quick Diagnostics</h3>
-          <span className="text-xs text-muted-foreground">6 critical endpoints</span>
+          <span className="text-xs text-muted-foreground">8 critical endpoints</span>
         </div>
         <button
           onClick={runQuickCheck}
@@ -232,7 +234,7 @@ function QuickDiagnostics({ toolResults, runHealthCheck, runningTools }) {
           {isRunning ? 'Running...' : 'Run Quick Check'}
         </button>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2">
         {CRITICAL_CHECKS.map((check) => {
           const Icon = check.icon;
           const result = toolResults[check.id];

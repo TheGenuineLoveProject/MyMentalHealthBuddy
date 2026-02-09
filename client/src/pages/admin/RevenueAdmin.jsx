@@ -6,6 +6,7 @@ import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function RevenueAdmin() {
   const [period, setPeriod] = useState("month");
@@ -53,21 +54,7 @@ export default function RevenueAdmin() {
     );
   }
 
-  if (hasError) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center" role="alert" aria-live="assertive" data-testid="error-state">
-        <div className="text-center p-8 max-w-md">
-          <AlertCircle className="w-12 h-12 text-destructive mx-auto mb-4" aria-hidden="true" />
-          <h2 className="text-xl font-semibold mb-2" data-testid="text-error-title">Unable to load revenue data</h2>
-          <p className="text-muted-foreground mb-6">Admin authentication may be required.</p>
-          <Button onClick={() => refetch()} data-testid="button-retry">
-            <RefreshCw className="w-4 h-4 mr-2" aria-hidden="true" />
-            Try Again
-          </Button>
-        </div>
-      </div>
-    );
-  }
+  if (hasError) return <AdminErrorBanner title="Unable to load revenue data" message="The billing service may be temporarily unavailable." onRetry={refetch} />;
 
   const revenueCards = [
     { label: "MRR", value: `$${stats.mrr.toLocaleString()}`, icon: TrendingUp, desc: "Monthly Recurring Revenue", testId: "card-mrr" },

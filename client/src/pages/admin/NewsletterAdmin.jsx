@@ -8,6 +8,7 @@ import {
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function NewsletterAdmin() {
   const [confirmSendId, setConfirmSendId] = useState(null);
@@ -30,6 +31,8 @@ export default function NewsletterAdmin() {
   const drafts = stats?.drafts || [];
   const signupsByDay = stats?.signupsByDay || [];
   const totalSignups = stats?.newsletterSignups || 0;
+
+  if (error) return <AdminErrorBanner title="Unable to load newsletter data" message="The newsletter service may be temporarily unavailable." onRetry={refetch} />;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
