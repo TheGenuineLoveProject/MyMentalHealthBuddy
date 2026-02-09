@@ -1,0 +1,105 @@
+PUBLISHING SYSTEM V1.0 — HARDEN + STANDARDIZE + ZERO-REGRESSION (ADDITIVE ONLY)
+
+NON-NEGOTIABLE RULES:
+- Additive changes only (no renames, no deletes, no refactors).
+- Keep manual-first ethics (no auto-posting to social).
+- No medical claims, coercion, shame, urgency.
+- Every phase ends with a small verification step.
+- Final output must include: files changed + commands run + PASS/FAIL.
+
+OBJECTIVE:
+Make Blog + Newsletter + Publishing robust, scalable, and consistently auditable:
+- Canonical content structure
+- Reliable routing + safe fallbacks
+- Newsletter pipeline (subscribe/unsubscribe)
+- Admin-friendly publishing workflow (human-in-loop)
+- Strong audit script that prevents regressions
+
+PHASE 0 — INVENTORY (NO CHANGES)
+1) Locate and list actual paths for:
+   - Blog index route/page
+   - Blog post slug route/page
+   - Newsletter page (if exists)
+   - API routes for newsletter (if exist)
+   - Any existing /content or /posts folders
+   - Existing scripts/audit-publishing.mjs (confirm path)
+2) Print these paths before editing.
+
+PHASE 1 — CANONICAL CONTENT LAYOUT (ADDITIVE ONLY)
+1) Ensure a single canonical publishing folder exists (create if missing):
+   - content/publishing/blog/
+   - content/publishing/newsletter/
+2) For blog posts: use .md files with frontmatter:
+   - title, slug, date, pillar, excerpt, cta (optional), tags (optional)
+3) For newsletters: ensure templates exist:
+   - weekly-template.md
+   - welcome-template.md
+   - crisis-safe-footer.md
+   - newsletter-style-guide.md
+(If they already exist somewhere else, DO NOT MOVE THEM—just add a README file pointing to canonical paths or add fallback search logic in the loader.)
+
+PHASE 2 — BLOG ROUTES: RELIABILITY + FRIENDLY FALLBACKS
+1) /blog must work with:
+   - zero posts (gentle empty state)
+   - list sorting by date desc if date present
+2) /blog/:slug must never crash:
+   - slug missing => friendly “not found” block + Back to Blog
+3) Add a small “Subscribe to Newsletter” block to blog index and bottom of post pages:
+   - accessible labels
+   - clear success/error messaging
+   - no manipulative copy
+
+PHASE 3 — NEWSLETTER PIPELINE: SUBSCRIBE / UNSUBSCRIBE (SAFE STORAGE)
+1) Ensure POST /api/newsletter/subscribe exists:
+   - validate email
+   - rate limit (e.g., 10/min per IP)
+   - store subscriber:
+     a) if DB is available: table newsletter_subscribers(email unique, status, created_at, unsubscribed_at)
+     b) else fallback: data/newsletter_subscribers.jsonl append-only
+2) Ensure POST /api/newsletter/unsubscribe exists:
+   - validate email
+   - update DB or append unsubscribe record to JSONL
+3) Ensure newsletter page (if exists) uses this API.
+If newsletter page does not exist, create a minimal /newsletter page with:
+   - what it is
+   - signup form
+   - privacy-first language
+
+PHASE 4 — ADMIN-FRIENDLY PUBLISHING WORKFLOW (HUMAN-IN-LOOP)
+1) Create /admin/publishing (or confirm existing admin area) with:
+   - list blog posts (from canonical folder)
+   - list newsletter templates
+   - “Copy” buttons for common CTAs + UTM-ready links
+   - manual status notes (draft/ready/published) stored in a small JSON file:
+       data/publishing_status.json
+   - absolutely NO auto-posting
+
+PHASE 5 — STRENGTHEN scripts/audit-publishing.mjs
+Enhance audit to produce deterministic PASS/FAIL:
+- Verify all publishing files parse (frontmatter OK)
+- Verify internal links are valid (routes exist)
+- Forbidden language scan (no medical claims, no coercion/urgency/shame)
+- Validate templates exist (weekly/welcome/crisis footer/style guide)
+- Ensure at least:
+  - 3 blog posts (or print “INFO: fewer than 3 posts” but still PASS)
+  - 1 newsletter template set (must PASS)
+- Output:
+  PUBLISHING_AUDIT: PASS
+  or FAIL with exact reasons.
+
+PHASE 6 — FINAL VERIFICATION (MUST RUN + SHOW OUTPUT)
+Run and paste output:
+1) node scripts/audit-publishing.mjs
+2) curl -s http://localhost:5000/api/health (or correct health endpoint)
+3) If build exists: npm run build
+4) Manual checks:
+   - /blog loads
+   - /blog/:slug works
+   - /newsletter signup submits (success)
+   - unsubscribe endpoint returns ok
+
+FINAL REPORT FORMAT:
+A) Files created/changed (full paths)
+B) What changed (bullets)
+C) PASS/FAIL checklist
+D) Any follow-ups

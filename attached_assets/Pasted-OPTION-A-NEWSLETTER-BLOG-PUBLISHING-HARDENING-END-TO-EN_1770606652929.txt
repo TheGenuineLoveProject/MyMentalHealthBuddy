@@ -1,0 +1,95 @@
+OPTION A — NEWSLETTER + BLOG + PUBLISHING HARDENING (END-TO-END, COMPLETION-LOCKED)
+
+RULES:
+- Additive changes only. Do not rename/delete/refactor existing files.
+- No auto-posting to social platforms.
+- No dark patterns, urgency, shame, or medical claims.
+- Must end with a PASS/FAIL report + commands run.
+
+GOAL:
+Ensure /blog and /newsletter are robust, linked, validated, and auditable:
+- /blog index loads reliably
+- /blog/:slug renders safely with friendly 404
+- newsletter signup works end-to-end (client → API → storage)
+- footer/nav/landing link to blog/newsletter (if those components exist)
+- publishing audit script confirms: links valid + templates exist + language safe
+
+PHASE 1 — DISCOVERY (NO CHANGES YET)
+1) Locate and list actual file paths for:
+   - Blog index page/route
+   - Blog post page/route (slug route)
+   - Newsletter page (if exists)
+   - Newsletter subscribe API route (if exists)
+   - Navbar and Footer components
+   - Any existing content folder for markdown/posts/templates
+2) Print these paths before editing.
+
+PHASE 2 — BLOG INDEX RELIABILITY
+1) Ensure /blog works even if zero posts exist.
+2) Add empty state copy: "New posts are coming soon. You're welcome here."
+3) Add a newsletter signup block at the bottom of /blog with:
+   - Email input (label + aria)
+   - Submit button
+   - Success message
+   - Error message
+4) Ensure no console errors.
+
+PHASE 3 — BLOG POST RELIABILITY (/blog/:slug)
+1) Ensure slug not found returns a friendly 404 section (no crash).
+2) Include "Back to Blog".
+3) Add newsletter signup block at end of every post.
+4) Validate any internal links referenced in posts (e.g. /crisis, /pricing, /newsletter):
+   - If route exists: ok
+   - If missing: add minimal safe stub page that routes correctly (additive only)
+
+PHASE 4 — NEWSLETTER PIPELINE (SERVER + STORAGE)
+1) If POST /api/newsletter/subscribe exists, verify it:
+   - validates email
+   - returns JSON { ok: true } or { ok: false, error }
+2) If missing, add it:
+   - POST /api/newsletter/subscribe
+   - validate email format
+   - add lightweight rate limit per IP (e.g. 10/min)
+   - store submission:
+       a) If DB exists: create a minimal newsletter_subscribers table + use it
+       b) Else: store in a safe JSONL file under /data/newsletter_subscribers.jsonl
+          (append-only; do not expose publicly)
+3) Add unsubscribe capability (manual-safe):
+   - POST /api/newsletter/unsubscribe (email)
+   - marks unsubscribed in DB or appends an unsubscribe record in JSONL
+
+PHASE 5 — PUBLISHING QUALITY LOCK (AUDIT SCRIPT)
+1) Create or enhance scripts/audit-publishing.mjs that checks:
+   - Blog posts loadable (parseable) with fallbacks
+   - Internal links resolve (routes exist)
+   - Newsletter templates exist (weekly + welcome + crisis-safe footer if you have them)
+   - Forbidden language scan stays clean (no coercion/medical claims)
+   - Prints counts by pillar/theme if pillars exist
+2) Script outputs:
+   - PUBLISHING_AUDIT: PASS (only if all checks pass)
+   - else PUBLISHING_AUDIT: FAIL with exact reasons
+
+PHASE 6 — PUBLIC SURFACE ALIGNMENT (LINKS)
+1) Add Blog + Newsletter entry points:
+   - Footer includes Blog and Newsletter links (if Footer component exists)
+   - Navbar includes Blog link (if Navbar exists)
+   - Landing page includes a gentle "Read the Blog" link if landing exists
+2) Verify all links are correct.
+
+PHASE 7 — VERIFICATION (MUST RUN AND REPORT)
+Run and show outputs for:
+- node scripts/audit-publishing.mjs
+- curl -s http://localhost:5000/api/health (or your health endpoint)
+- If you have tests/build: npm test and/or npm run build
+- Manual click list:
+   Landing→Blog
+   Blog→Post
+   Post→Back to Blog
+   Blog→Newsletter signup submit
+   Footer→Blog / Newsletter
+
+FINAL REPORT FORMAT:
+A) Files changed (full paths)
+B) What was added
+C) PASS/FAIL checklist
+D) Any follow-ups required

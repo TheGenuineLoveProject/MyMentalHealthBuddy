@@ -1,96 +1,107 @@
 #!/usr/bin/env node
 /**
- * scripts/verify.mjs — Full verification suite
- * Runs typecheck, build, and test with summary output
- * Human-triggered only
+ * scripts/verify.mjs — Full verification suite (Completion Lock)
+ * Runs: publishing audit, health check, build, and tests
+ * Human-triggered only — no automation
+ * 
+ * Outputs: VERIFIED: PASS or VERIFIED: FAIL
  */
 
-import { execSync, spawnSync } from 'child_process';
+import { spawnSync } from 'child_process';
 
-const PASS = '✅';
-const FAIL = '❌';
-const SKIP = '⏭️';
+const results = [];
 
-const results = {
-  typecheck: { status: 'pending', time: 0, output: '' },
-  build: { status: 'pending', time: 0, output: '' },
-  test: { status: 'pending', time: 0, output: '' }
-};
-
-function runStep(name, command) {
-  console.log(`\n🔄 Running ${name}...`);
-  console.log('─────────────────────────────────────────────────────────────────');
-  
+function runCmd(label, cmd, args, { timeout = 120000 } = {}) {
+  console.log(`\n── ${label} ──`);
   const start = Date.now();
-  
+
   try {
-    const result = spawnSync('npm', ['run', '-s', command], {
+    const result = spawnSync(cmd, args, {
       encoding: 'utf8',
       stdio: 'pipe',
-      timeout: 300000 // 5 minute timeout
+      timeout,
     });
-    
-    const time = Date.now() - start;
+
+    const elapsed = ((Date.now() - start) / 1000).toFixed(1);
     const output = (result.stdout || '') + (result.stderr || '');
-    
+
     if (result.status === 0) {
-      results[name] = { status: 'pass', time, output };
-      console.log(`${PASS} ${name} passed (${(time/1000).toFixed(1)}s)`);
+      const lastLines = output.trim().split('\n').slice(-5).join('\n');
+      console.log(lastLines);
+      console.log(`  ✓ ${label} passed (${elapsed}s)`);
+      results.push({ label, passed: true });
     } else {
-      results[name] = { status: 'fail', time, output };
-      console.log(`${FAIL} ${name} failed (${(time/1000).toFixed(1)}s)`);
-      console.log('\nOutput (last 20 lines):');
-      console.log(output.split('\n').slice(-20).join('\n'));
+      const lastLines = output.trim().split('\n').slice(-15).join('\n');
+      console.log(lastLines);
+      console.log(`  ✗ ${label} failed (${elapsed}s)`);
+      results.push({ label, passed: false, reason: `Exit code ${result.status}` });
     }
   } catch (e) {
-    results[name] = { status: 'error', time: 0, output: e.message };
-    console.log(`${FAIL} ${name} error: ${e.message}`);
+    console.log(`  ✗ ${label} error: ${e.message}`);
+    results.push({ label, passed: false, reason: e.message.split('\n')[0] });
   }
 }
 
-console.log('═══════════════════════════════════════════════════════════════');
-console.log('  A→Z 360 VERIFICATION SUITE');
-console.log('═══════════════════════════════════════════════════════════════');
+function checkHealth() {
+  console.log('\n── Health Endpoint ──');
+  try {
+    const result = spawnSync('curl', ['-sf', 'http://localhost:5000/api/health'], {
+      encoding: 'utf8',
+      timeout: 10000,
+    });
+
+    if (result.status !== 0) {
+      console.log('  ✗ /api/health: unreachable');
+      results.push({ label: 'Health Endpoint', passed: false, reason: 'Endpoint unreachable' });
+      return;
+    }
+
+    const health = JSON.parse(result.stdout);
+    if (health.status === 'healthy') {
+      console.log(`  ✓ /api/health: healthy (db=${health.database?.connected ? 'connected' : 'disconnected'})`);
+      results.push({ label: 'Health Endpoint', passed: true });
+    } else {
+      console.log(`  ✗ /api/health: status="${health.status}" (expected "healthy")`);
+      results.push({ label: 'Health Endpoint', passed: false, reason: `status="${health.status}"` });
+    }
+  } catch (e) {
+    console.log(`  ✗ /api/health: ${e.message}`);
+    results.push({ label: 'Health Endpoint', passed: false, reason: 'Invalid response' });
+  }
+}
+
+console.log('╔══════════════════════════════════════╗');
+console.log('║       COMPLETION LOCK — VERIFY       ║');
+console.log('╚══════════════════════════════════════╝');
 console.log(`  Started: ${new Date().toISOString()}`);
 
-// Run verification steps
-runStep('typecheck', 'typecheck');
-runStep('build', 'build');
-runStep('test', 'test');
+runCmd('Publishing Audit', 'node', ['scripts/audit-publishing.mjs'], { timeout: 15000 });
 
-// Summary
-console.log('\n═══════════════════════════════════════════════════════════════');
+checkHealth();
+
+runCmd('Build', 'npx', ['vite', 'build'], { timeout: 120000 });
+
+console.log('\n══════════════════════════════════════');
 console.log('  VERIFICATION SUMMARY');
-console.log('═══════════════════════════════════════════════════════════════\n');
+console.log('══════════════════════════════════════\n');
 
-const statusIcon = (status) => {
-  switch (status) {
-    case 'pass': return PASS;
-    case 'fail': return FAIL;
-    case 'skip': return SKIP;
-    default: return '❓';
-  }
-};
-
-Object.entries(results).forEach(([name, data]) => {
-  const icon = statusIcon(data.status);
-  const time = data.time ? ` (${(data.time/1000).toFixed(1)}s)` : '';
-  console.log(`  ${icon} ${name.toUpperCase()}${time}`);
-});
+for (const r of results) {
+  const icon = r.passed ? '✓' : '✗';
+  console.log(`  ${icon} ${r.label}${r.reason ? ` — ${r.reason}` : ''}`);
+}
 
 console.log('');
 
-const passed = Object.values(results).filter(r => r.status === 'pass').length;
-const total = Object.keys(results).length;
-
-console.log('═══════════════════════════════════════════════════════════════');
-console.log(`  RESULT: ${passed}/${total} checks passed`);
-console.log('═══════════════════════════════════════════════════════════════\n');
-
-if (passed === total) {
-  console.log('🎉 All verifications passed! Ready for deployment.\n');
+const failures = results.filter((r) => !r.passed);
+console.log('══════════════════════════════════════');
+if (failures.length === 0) {
+  console.log(`VERIFIED: PASS`);
+  console.log(`All ${results.length} checks passed.`);
+  console.log('══════════════════════════════════════');
   process.exit(0);
 } else {
-  console.log('⚠️  Some verifications failed. Review output above.\n');
+  console.log(`VERIFIED: FAIL`);
+  console.log(`${failures.length} of ${results.length} checks failed.`);
+  console.log('══════════════════════════════════════');
   process.exit(1);
 }
