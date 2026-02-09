@@ -987,7 +987,7 @@ function AdminNavGrid() {
       ]
     },
     {
-      title: "Management & Security (8)",
+      title: "Management & Security (9)",
       items: [
         { label: "Newsletter Admin", icon: Mail, href: "/admin/newsletter", desc: "Subscriber & send management" },
         { label: "Roles & Permissions", icon: Users, href: "/admin/roles", desc: "User access control" },
@@ -997,6 +997,7 @@ function AdminNavGrid() {
         { label: "Feedback Aggregator", icon: MessageSquare, href: "/admin/feedback", desc: "User feedback & suggestions" },
         { label: "System Alerts", icon: AlertTriangle, href: "/admin/alerts", desc: "Alert configuration & resolution" },
         { label: "Admin Users", icon: UserCheck, href: "/admin/users", desc: "Admin user management" },
+        { label: "Platform Tools", icon: Zap, href: "/admin/tools", desc: "All 123 tools health monitor" },
       ]
     },
   ];

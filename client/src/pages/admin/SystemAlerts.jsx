@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Filter, Loader2, ArrowLeft } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Loader2, ArrowLeft, Activity, RefreshCw, Shield } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { Card, CardContent } from "@/components/ui/Card";
 import { useToast } from "@/hooks/use-toast";
 import SEO from "../../components/SEO";
 
@@ -20,6 +21,13 @@ export default function SystemAlerts() {
   const [loading, setLoading] = useState(true);
   const [resolving, setResolving] = useState(null);
   const { toast } = useToast();
+
+  const { data: healthData } = useQuery({
+    queryKey: ['/api/health'],
+    retry: 2,
+    retryDelay: 1000,
+    staleTime: 30000,
+  });
 
   useEffect(() => {
     try {
@@ -84,9 +92,12 @@ export default function SystemAlerts() {
     return alert.type === filter;
   });
 
+  const unresolvedCount = alerts.filter(a => !a.resolved).length;
+  const errorCount = alerts.filter(a => a.type === 'error' && !a.resolved).length;
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center" data-testid="loading-state">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
       </div>
     );
@@ -112,7 +123,30 @@ export default function SystemAlerts() {
           </div>
         </header>
 
-        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6" data-testid="panel-alert-summary">
+          <div className="p-3 rounded-lg bg-muted/50 text-center" data-testid="stat-total-alerts">
+            <div className="text-2xl font-bold">{alerts.length}</div>
+            <div className="text-xs text-muted-foreground">Total Alerts</div>
+          </div>
+          <div className="p-3 rounded-lg bg-red-50 dark:bg-red-900/20 text-center" data-testid="stat-unresolved">
+            <div className="text-2xl font-bold text-red-600">{unresolvedCount}</div>
+            <div className="text-xs text-muted-foreground">Unresolved</div>
+          </div>
+          <div className="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 text-center" data-testid="stat-system-status">
+            <div className="text-2xl font-bold text-green-600">
+              {healthData?.status === 'healthy' ? 'OK' : '—'}
+            </div>
+            <div className="text-xs text-muted-foreground">System Status</div>
+          </div>
+          <div className="p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-center" data-testid="stat-memory">
+            <div className="text-2xl font-bold text-blue-600">
+              {healthData?.memory?.heapUsedMB || '—'}MB
+            </div>
+            <div className="text-xs text-muted-foreground">Memory Used</div>
+          </div>
+        </div>
+
+        <div className="flex gap-2 mb-6 overflow-x-auto pb-2" data-testid="panel-alert-filters">
           {["all", "unresolved", "error", "warning", "info"].map(f => (
             <Button
               key={f}
@@ -123,28 +157,38 @@ export default function SystemAlerts() {
               data-testid={`filter-${f}`}
             >
               {f}
+              {f === 'unresolved' && unresolvedCount > 0 && (
+                <span className="ml-1 px-1.5 py-0.5 text-xs rounded-full bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300">
+                  {unresolvedCount}
+                </span>
+              )}
             </Button>
           ))}
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4" data-testid="panel-alert-list">
           {filteredAlerts.map(alert => (
-            <Card key={alert.id} className={`border ${getBg(alert.type)}`}>
+            <Card key={alert.id} className={`border ${getBg(alert.type)}`} data-testid={`alert-card-${alert.id}`}>
               <CardContent className="pt-6">
                 <div className="flex items-start gap-4">
                   {getIcon(alert.type)}
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold">{alert.title}</h3>
+                      <h3 className="font-semibold" data-testid={`alert-title-${alert.id}`}>{alert.title}</h3>
                       {alert.resolved && (
-                        <span className="px-2 py-0.5 text-xs rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300">
+                        <span className="px-2 py-0.5 text-xs rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300" data-testid={`alert-resolved-badge-${alert.id}`}>
                           Resolved
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground">{alert.message}</p>
+                    <p className="text-sm text-muted-foreground" data-testid={`alert-message-${alert.id}`}>{alert.message}</p>
                     <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1">
                       <Clock className="w-3 h-3" /> {alert.time}
+                      {alert.resolvedAt && (
+                        <span className="ml-2 text-green-600">
+                          Resolved: {new Date(alert.resolvedAt).toLocaleTimeString()}
+                        </span>
+                      )}
                     </p>
                   </div>
                   {!alert.resolved && (
@@ -166,11 +210,18 @@ export default function SystemAlerts() {
         </div>
 
         {filteredAlerts.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-12" data-testid="panel-no-alerts">
             <CheckCircle className="w-12 h-12 text-green-600 mx-auto mb-4" />
             <p className="text-muted-foreground">No alerts matching your filter</p>
           </div>
         )}
+
+        <div className="mt-6 flex items-center justify-between text-xs text-muted-foreground" data-testid="panel-alert-footer">
+          <span>Server uptime: {healthData?.uptimeFormatted || '—'}</span>
+          <Link href="/admin/security" className="text-primary hover:underline" data-testid="link-security-dashboard">
+            Security Dashboard
+          </Link>
+        </div>
       </main>
     </div>
   );

@@ -51,7 +51,7 @@ router.get("/", async (_req, res) => {
       platform: {
         totalTools: 123,
         totalRoutes: 123,
-        adminPages: 26,
+        adminPages: 27,
       },
       services: {
         stripe: !!process.env.STRIPE_SECRET_KEY,
