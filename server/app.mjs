@@ -51,7 +51,6 @@ await mountIfExists("/api/mood", "./routes/mood.mjs");
 await mountIfExists("/api/moods", "./routes/mood.mjs");
 await mountIfExists("/api/badges", "./routes/badges.mjs");
 await mountIfExists("/api/invites", "./routes/invites.mjs");
-await mountIfExists("/api/user/settings", "./routes/userSettings.mjs");
 await mountIfExists("/api/states", "./routes/states.mjs");
 await mountIfExists("/api/insights", "./routes/insights.mjs");
 await mountIfExists("/api/wisdom", "./routes/wisdom.mjs");

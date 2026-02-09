@@ -1028,6 +1028,8 @@ function AdminNavGrid() {
 
 function ToolsStatusWidget() {
   const [toolsData, setToolsData] = useState(null);
+  const [isQuickChecking, setIsQuickChecking] = useState(false);
+  const [quickResults, setQuickResults] = useState(null);
 
   useEffect(() => {
     try {
@@ -1041,6 +1043,42 @@ function ToolsStatusWidget() {
     } catch {}
   }, []);
 
+  const QUICK_ENDPOINTS = [
+    { id: 'health', label: 'System Health', endpoint: '/api/health' },
+    { id: 'auth', label: 'Auth Service', endpoint: '/api/auth/user' },
+    { id: 'blog', label: 'Blog Engine', endpoint: '/api/blog' },
+    { id: 'billing', label: 'Billing API', endpoint: '/api/billing' },
+    { id: 'email', label: 'Email Service', endpoint: '/api/email' },
+    { id: 'perplexity', label: 'Perplexity AI', endpoint: '/api/perplexity' },
+  ];
+
+  const runQuickCheck = async () => {
+    setIsQuickChecking(true);
+    const results = {};
+    await Promise.all(QUICK_ENDPOINTS.map(async (ep) => {
+      const start = performance.now();
+      try {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 6000);
+        let res = await fetch(ep.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
+        clearTimeout(timeout);
+        if (res.status === 405) {
+          const c2 = new AbortController();
+          const t2 = setTimeout(() => c2.abort(), 6000);
+          res = await fetch(ep.endpoint, { method: 'HEAD', credentials: 'include', signal: c2.signal });
+          clearTimeout(t2);
+        }
+        const ms = Math.round(performance.now() - start);
+        const ok = res.ok || res.status === 401 || res.status === 403 || res.status === 405;
+        results[ep.id] = { ok, status: res.status, ms };
+      } catch {
+        results[ep.id] = { ok: false, status: 0, ms: Math.round(performance.now() - start) };
+      }
+    }));
+    setQuickResults(results);
+    setIsQuickChecking(false);
+  };
+
   if (!toolsData) {
     return (
       <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
@@ -1049,17 +1087,43 @@ function ToolsStatusWidget() {
             <Zap className={styles.cardHeaderIcon} />
             <h2 className={styles.cardTitle}>Platform Tools Status</h2>
           </div>
+          <button onClick={runQuickCheck} disabled={isQuickChecking} style={{
+            display: 'inline-flex', alignItems: 'center', gap: '4px',
+            fontSize: '0.75rem', padding: '0.35rem 0.65rem', borderRadius: '6px',
+            border: '1px solid hsl(var(--border))', background: 'transparent', cursor: 'pointer',
+            color: 'hsl(var(--primary))', opacity: isQuickChecking ? 0.5 : 1
+          }} data-testid="button-quick-check">
+            {isQuickChecking ? <RefreshCw size={12} className={styles.refreshIconSpinning} /> : <Activity size={12} />}
+            Quick Check
+          </button>
         </div>
-        <div style={{ padding: '1rem', textAlign: 'center' }}>
-          <p style={{ fontSize: '0.85rem', color: '#888', marginBottom: '0.75rem' }}>No recent health check data. Run a check to see all 123 tools status.</p>
-          <Link href="/admin/tools" style={{
-            display: 'inline-flex', alignItems: 'center', gap: '6px',
-            padding: '0.5rem 1rem', borderRadius: '8px',
-            background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))',
-            fontSize: '0.82rem', fontWeight: 500, textDecoration: 'none'
-          }} data-testid="link-run-first-check">
-            <Activity size={14} /> Run Daily Operations Check
-          </Link>
+        <div style={{ padding: '0.75rem 1rem' }}>
+          {quickResults ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem' }}>
+              {QUICK_ENDPOINTS.map(ep => {
+                const r = quickResults[ep.id];
+                return (
+                  <div key={ep.id} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.78rem', padding: '0.4rem 0.5rem', borderRadius: '6px', background: 'hsl(var(--muted))' }} data-testid={`quick-check-${ep.id}`}>
+                    {r?.ok ? <CheckCircle size={13} style={{ color: '#22c55e', flexShrink: 0 }} /> : <AlertCircle size={13} style={{ color: '#ef4444', flexShrink: 0 }} />}
+                    <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ep.label}</span>
+                    <span style={{ fontSize: '0.65rem', color: '#888' }}>{r?.ms || 0}ms</span>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p style={{ fontSize: '0.85rem', color: '#888', marginBottom: '0.75rem', textAlign: 'center' }}>No recent full health check. Run a quick check or go to Platform Tools for a full scan.</p>
+          )}
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '0.75rem' }}>
+            <Link href="/admin/tools" style={{
+              display: 'inline-flex', alignItems: 'center', gap: '6px',
+              padding: '0.5rem 1rem', borderRadius: '8px',
+              background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))',
+              fontSize: '0.82rem', fontWeight: 500, textDecoration: 'none'
+            }} data-testid="link-run-first-check">
+              <Play size={14} /> Full Daily Operations Check
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -1074,6 +1138,7 @@ function ToolsStatusWidget() {
   const healthPercent = total > 0 ? Math.round((healthy / total) * 100) : 0;
   const timeSince = toolsData.timestamp ? new Date(toolsData.timestamp).toLocaleTimeString() : '—';
   const isStale = toolsData.timestamp && (Date.now() - toolsData.timestamp > 1800000);
+  const scoreColor = healthPercent >= 90 ? '#22c55e' : healthPercent >= 70 ? '#f59e0b' : '#ef4444';
 
   return (
     <div className={styles.card} style={{ gridColumn: '1 / -1' }} data-testid="panel-tools-status">
@@ -1086,14 +1151,43 @@ function ToolsStatusWidget() {
             {isStale && <span style={{ color: '#f59e0b', marginLeft: '4px' }}>(stale)</span>}
           </span>
         </div>
-        <Link href="/admin/tools" style={{
-          display: 'inline-flex', alignItems: 'center', gap: '4px',
-          fontSize: '0.75rem', color: 'hsl(var(--primary))', textDecoration: 'none'
-        }} data-testid="link-view-all-tools">
-          View All <ArrowRight size={12} />
-        </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <button onClick={runQuickCheck} disabled={isQuickChecking} style={{
+            display: 'inline-flex', alignItems: 'center', gap: '4px',
+            fontSize: '0.7rem', padding: '0.3rem 0.5rem', borderRadius: '5px',
+            border: '1px solid hsl(var(--border))', background: 'transparent', cursor: 'pointer',
+            color: 'hsl(var(--muted-foreground))', opacity: isQuickChecking ? 0.5 : 1
+          }} data-testid="button-quick-recheck">
+            {isQuickChecking ? <RefreshCw size={11} className={styles.refreshIconSpinning} /> : <Activity size={11} />}
+            Quick
+          </button>
+          <Link href="/admin/tools" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '4px',
+            fontSize: '0.75rem', color: 'hsl(var(--primary))', textDecoration: 'none'
+          }} data-testid="link-view-all-tools">
+            Full Check <ArrowRight size={12} />
+          </Link>
+        </div>
       </div>
+      {quickResults && (
+        <div style={{ padding: '0 1rem 0.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.4rem' }}>
+          {QUICK_ENDPOINTS.map(ep => {
+            const r = quickResults[ep.id];
+            return (
+              <div key={ep.id} style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.72rem', padding: '0.3rem 0.5rem', borderRadius: '5px', background: 'hsl(var(--muted))' }} data-testid={`quick-check-${ep.id}`}>
+                {r?.ok ? <CheckCircle size={12} style={{ color: '#22c55e', flexShrink: 0 }} /> : <AlertCircle size={12} style={{ color: '#ef4444', flexShrink: 0 }} />}
+                <span style={{ flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{ep.label}</span>
+                <span style={{ fontSize: '0.6rem', color: '#888' }}>{r?.ms || 0}ms</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
       <div style={{ padding: '0 1rem 1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem' }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: scoreColor }} data-testid="text-tools-health-pct">{healthPercent}%</div>
+          <div style={{ fontSize: '0.7rem', color: '#888' }}>Health Score</div>
+        </div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#22c55e' }} data-testid="text-tools-healthy">{healthy}</div>
           <div style={{ fontSize: '0.7rem', color: '#888' }}>Healthy</div>
@@ -1107,10 +1201,6 @@ function ToolsStatusWidget() {
           <div style={{ fontSize: '0.7rem', color: '#888' }}>Errors</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#6366f1' }} data-testid="text-tools-health-pct">{healthPercent}%</div>
-          <div style={{ fontSize: '0.7rem', color: '#888' }}>Health Score</div>
-        </div>
-        <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#64748b' }} data-testid="text-tools-avg-ms">{avgMs}ms</div>
           <div style={{ fontSize: '0.7rem', color: '#888' }}>Avg Response</div>
         </div>
@@ -1120,7 +1210,7 @@ function ToolsStatusWidget() {
           <div style={{ 
             height: '100%', borderRadius: '3px', transition: 'width 0.3s',
             width: `${healthPercent}%`,
-            background: errors > 0 ? '#ef4444' : warnings > 0 ? '#f59e0b' : '#22c55e'
+            background: scoreColor
           }} />
         </div>
       </div>
