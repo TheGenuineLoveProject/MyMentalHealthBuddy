@@ -5,6 +5,7 @@ import { BarChart3, Eye, MousePointer, ShoppingCart, Mail, TrendingUp, Loader2, 
 import { Button } from "@/components/ui/Button";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function AnalyticsDashboard() {
   const [timeframe, setTimeframe] = useState("7d");
@@ -31,15 +32,7 @@ export default function AnalyticsDashboard() {
   }
 
   if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4" data-testid="analytics-error">
-        <AlertCircle className="w-8 h-8 text-red-400" />
-        <p className="text-red-500">{error.message}</p>
-        <Button variant="outline" onClick={() => refetch()} data-testid="button-retry">
-          <RefreshCw className="w-4 h-4 mr-2" /> Try Again
-        </Button>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load analytics dashboard" onRetry={refetch} />;
   }
 
   return (

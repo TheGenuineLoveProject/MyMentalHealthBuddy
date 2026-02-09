@@ -5,6 +5,7 @@ import { Users, ArrowLeft, RefreshCw, Shield, UserCheck, Search, Loader2, AlertC
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function AdminUsers() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,20 +43,7 @@ export default function AdminUsers() {
   }
 
   if (error && !stats) {
-    return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4" data-testid="error-state">
-        <AlertCircle className="w-12 h-12 text-destructive/60" />
-        <h2 className="text-xl font-semibold" data-testid="text-error-title">Unable to load user data</h2>
-        <p className="text-muted-foreground text-sm">The user data couldn't be fetched. Please try again.</p>
-        <button
-          onClick={() => refetch()}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-colors"
-          data-testid="button-retry-users"
-        >
-          <RefreshCw className="w-4 h-4" /> Try Again
-        </button>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load user data" onRetry={refetch} />;
   }
 
   const userMetrics = [

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const PLATFORMS = {
   instagram: { icon: Instagram, color: "#E4405F", name: "Instagram" },
@@ -191,6 +192,10 @@ export default function SocialAnalytics() {
       { theme: "Boundaries", count: 0 },
       { theme: "Nervous System", count: 0 }
     );
+  }
+
+  if (analyticsError) {
+    return <AdminErrorBanner title="Unable to load social analytics" onRetry={refetchAnalytics} />;
   }
   
   return (

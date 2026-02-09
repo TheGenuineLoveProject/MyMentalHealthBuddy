@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function SecurityDashboard() {
   const { data: overviewData, isLoading: overviewLoading, error: overviewError, refetch: refetchOverview, isRefetching } = useQuery({
@@ -62,15 +63,7 @@ export default function SecurityDashboard() {
   }
 
   if (overviewError) {
-    return (
-      <div className="min-h-screen hero-gradient flex flex-col items-center justify-center gap-4" data-testid="error-security">
-        <Shield className="w-12 h-12 text-red-400" />
-        <p className="text-red-500">Failed to load security data</p>
-        <Button variant="outline" onClick={handleRefresh} data-testid="button-retry">
-          <RefreshCw className="w-4 h-4 mr-2" /> Try Again
-        </Button>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load security dashboard" onRetry={refetchOverview} />;
   }
 
   return (

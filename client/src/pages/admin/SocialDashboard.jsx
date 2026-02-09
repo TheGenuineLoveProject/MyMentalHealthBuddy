@@ -11,6 +11,7 @@ import {
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { SEO } from "@/components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const PLATFORMS = [
   { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000", handle: "@GenuineLoveProject", url: "https://youtube.com/@GenuineLoveProject", status: "verified" },
@@ -500,6 +501,10 @@ export default function SocialDashboard() {
     const allIds = filteredDrafts.map(d => d.id);
     setSelectedIds(prev => prev.length === allIds.length ? [] : allIds);
   };
+
+  if (error) {
+    return <AdminErrorBanner title="Unable to load social dashboard" onRetry={refetch} />;
+  }
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">

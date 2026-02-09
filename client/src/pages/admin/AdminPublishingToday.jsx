@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const PLATFORMS = [
   { key: "instagram", label: "Instagram" },
@@ -131,14 +132,7 @@ export default function AdminPublishingToday() {
   }
 
   if (draftsError) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4" data-testid="error-publishing">
-        <p className="text-red-500">Failed to load publishing data</p>
-        <Button variant="outline" onClick={handleRefresh} data-testid="button-retry">
-          <RefreshCw className="w-4 h-4 mr-2" /> Try Again
-        </Button>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load publishing today" onRetry={refetchDrafts} />;
   }
 
   return (

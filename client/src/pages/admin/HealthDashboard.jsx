@@ -9,6 +9,7 @@ import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
 import Top50ProcessTracker from "@/components/admin/Top50ProcessTracker";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 function StatusIndicator({ status }) {
   const statusConfig = {
@@ -96,18 +97,7 @@ export default function HealthDashboard() {
   }
 
   if (error) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center" data-testid="error-state">
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 max-w-md" data-testid="error-alert">
-          <AlertCircle className="w-8 h-8 text-red-500 mb-3" />
-          <h2 className="text-lg font-semibold text-red-700 dark:text-red-400" data-testid="error-title">Failed to Load Health Data</h2>
-          <p className="text-sm text-red-600 dark:text-red-300 mt-1">Please check your admin permissions and try again.</p>
-          <button onClick={handleRefresh} className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition" data-testid="btn-retry">
-            Retry
-          </button>
-        </div>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load health data" onRetry={refetch} />;
   }
 
   const dbStatus = health?.database?.status || "unknown";

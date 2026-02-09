@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "wouter";
 import { 
   ArrowLeft, RefreshCw, CheckCircle, AlertTriangle, AlertCircle,
@@ -13,7 +13,8 @@ import {
   Megaphone, PenTool, UserCheck, LayoutDashboard, CreditCard,
   ShieldCheck, ClipboardList, BarChart3, Activity, PackageCheck,
   DollarSign, Webhook, Contact, Key, Handshake, Upload, UserCog,
-  ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox
+  ListOrdered, Radio, Fingerprint, FolderKanban, Rss, LogIn, Inbox,
+  Clock, Download, Timer, Filter, RotateCcw
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -277,13 +278,62 @@ function QuickDiagnostics({ toolResults, runHealthCheck, runningTools }) {
   );
 }
 
+const STORAGE_KEY = 'glp_tools_last_check';
+const AUTO_REFRESH_INTERVALS = [
+  { label: 'Off', value: 0 },
+  { label: '1 min', value: 60000 },
+  { label: '5 min', value: 300000 },
+  { label: '15 min', value: 900000 },
+  { label: '30 min', value: 1800000 },
+];
+const STATUS_FILTERS = ['all', 'healthy', 'warning', 'error', 'unchecked'];
+
 export default function AdminTools() {
   const [runningTools, setRunningTools] = useState({});
-  const [toolResults, setToolResults] = useState({});
+  const [toolResults, setToolResults] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.results && Date.now() - parsed.timestamp < 3600000) {
+          return parsed.results;
+        }
+      }
+    } catch {}
+    return {};
+  });
   const [collapsedCategories, setCollapsedCategories] = useState({});
-  const [lastFullCheck, setLastFullCheck] = useState(null);
+  const [lastFullCheck, setLastFullCheck] = useState(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.lastCheck && Date.now() - parsed.timestamp < 3600000) {
+          return parsed.lastCheck;
+        }
+      }
+    } catch {}
+    return null;
+  });
   const [searchFilter, setSearchFilter] = useState("");
   const [isRunningAll, setIsRunningAll] = useState(false);
+  const [autoRefreshInterval, setAutoRefreshInterval] = useState(0);
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [showErrorsOnly, setShowErrorsOnly] = useState(false);
+  const autoRefreshRef = useRef(null);
+  const runAllRef = useRef(null);
+
+  useEffect(() => {
+    if (Object.keys(toolResults).length > 0) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          results: toolResults,
+          lastCheck: lastFullCheck,
+          timestamp: Date.now()
+        }));
+      } catch {}
+    }
+  }, [toolResults, lastFullCheck]);
 
   const toggleCategory = (idx) => {
     setCollapsedCategories(prev => ({ ...prev, [idx]: !prev[idx] }));
@@ -324,7 +374,9 @@ export default function AdminTools() {
     }
   };
 
-  const runAllChecks = async () => {
+  const runAllChecks = useCallback(async () => {
+    if (runAllRef.current) return;
+    runAllRef.current = true;
     setIsRunningAll(true);
     setToolResults({});
     const allTools = toolCategories.flatMap(c => c.tools);
@@ -338,6 +390,34 @@ export default function AdminTools() {
     }
     setLastFullCheck(new Date().toLocaleTimeString());
     setIsRunningAll(false);
+    runAllRef.current = false;
+  }, []);
+
+  useEffect(() => {
+    if (autoRefreshRef.current) {
+      clearInterval(autoRefreshRef.current);
+      autoRefreshRef.current = null;
+    }
+    if (autoRefreshInterval > 0) {
+      autoRefreshRef.current = setInterval(() => {
+        if (!runAllRef.current) runAllChecks();
+      }, autoRefreshInterval);
+    }
+    return () => {
+      if (autoRefreshRef.current) clearInterval(autoRefreshRef.current);
+    };
+  }, [autoRefreshInterval, runAllChecks]);
+
+  const clearResults = () => {
+    setToolResults({});
+    setLastFullCheck(null);
+    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+  };
+
+  const runErrorsOnly = async () => {
+    const errorTools = toolCategories.flatMap(c => c.tools).filter(t => toolResults[t.id]?.status === 'error' || toolResults[t.id]?.status === 'warning');
+    if (errorTools.length === 0) return;
+    await Promise.all(errorTools.map(t => runHealthCheck(t)));
   };
 
   const totalTools = toolCategories.reduce((sum, c) => sum + c.tools.length, 0);
@@ -350,9 +430,26 @@ export default function AdminTools() {
   const maxResponseTime = checkedCount > 0 ? Math.max(...Object.values(toolResults).map(r => r.ms || 0)) : 0;
   const authGatedCount = Object.values(toolResults).filter(r => r.label === 'auth-gated' || r.label === 'admin-only').length;
 
-  const exportResults = () => {
+  const exportResults = (format = 'txt') => {
     const now = new Date();
-    const allTools = toolCategories.flatMap(c => c.tools);
+    if (format === 'json') {
+      const report = {
+        generated: now.toISOString(),
+        summary: { total: totalTools, checked: checkedCount, healthy: healthyCount, warnings: warningCount, errors: errorCount, avgResponseMs: avgResponseTime, maxResponseMs: maxResponseTime, authGated: authGatedCount },
+        categories: toolCategories.map(cat => ({
+          name: cat.title,
+          tools: cat.tools.map(t => ({ id: t.id, label: t.label, endpoint: t.endpoint, ...toolResults[t.id] }))
+        }))
+      };
+      const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `tools-health-${now.toISOString().split('T')[0]}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      return;
+    }
     const lines = [
       `Platform Tools Health Report - ${now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`,
       `Generated: ${now.toLocaleTimeString()}`,
@@ -397,7 +494,7 @@ export default function AdminTools() {
                 <p className="text-muted-foreground text-sm">Daily health monitor for all platform tools and API endpoints</p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               {checkedCount > 0 && (
                 <div className="flex items-center gap-3 text-sm" data-testid="text-tool-summary">
                   <span className="flex items-center gap-1 text-green-600"><CheckCircle size={14} /> {healthyCount}</span>
@@ -405,15 +502,6 @@ export default function AdminTools() {
                   {errorCount > 0 && <span className="flex items-center gap-1 text-red-500"><AlertCircle size={14} /> {errorCount}</span>}
                   <span className="text-muted-foreground">/ {totalTools}</span>
                 </div>
-              )}
-              {checkedCount === totalTools && !isAnyRunning && (
-                <button
-                  onClick={exportResults}
-                  className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-sm hover:bg-muted transition-colors"
-                  data-testid="button-export-results"
-                >
-                  Export
-                </button>
               )}
               <button
                 onClick={runAllChecks}
@@ -424,7 +512,7 @@ export default function AdminTools() {
                 {isAnyRunning ? (
                   <><RefreshCw size={14} className="animate-spin" /> Checking... ({checkedCount}/{totalTools})</>
                 ) : (
-                  <><Play size={14} /> Run All Checks</>
+                  <><Play size={14} /> Run Daily Operations</>
                 )}
               </button>
             </div>
@@ -477,6 +565,73 @@ export default function AdminTools() {
           </div>
         )}
 
+        {checkedCount > 0 && (
+          <div className="flex items-center gap-2 mb-4 flex-wrap p-3 rounded-xl bg-muted/30 border border-gray-100 dark:border-gray-800" data-testid="panel-ops-toolbar">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Timer size={12} />
+              <span>Auto-refresh:</span>
+              <select
+                value={autoRefreshInterval}
+                onChange={(e) => setAutoRefreshInterval(Number(e.target.value))}
+                className="px-2 py-1 rounded border border-gray-200 dark:border-gray-700 bg-background text-xs"
+                data-testid="select-auto-refresh"
+              >
+                {AUTO_REFRESH_INTERVALS.map(i => (
+                  <option key={i.value} value={i.value}>{i.label}</option>
+                ))}
+              </select>
+              {autoRefreshInterval > 0 && <span className="text-green-600 font-medium">Active</span>}
+            </div>
+            <div className="h-4 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block" />
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Filter size={12} />
+              <span>Show:</span>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-2 py-1 rounded border border-gray-200 dark:border-gray-700 bg-background text-xs"
+                data-testid="select-status-filter"
+              >
+                {STATUS_FILTERS.map(f => (
+                  <option key={f} value={f}>{f === 'all' ? 'All' : f === 'unchecked' ? 'Unchecked' : f.charAt(0).toUpperCase() + f.slice(1)}</option>
+                ))}
+              </select>
+            </div>
+            <div className="h-4 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block" />
+            {(errorCount > 0 || warningCount > 0) && (
+              <button
+                onClick={runErrorsOnly}
+                disabled={isAnyRunning}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-medium hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors disabled:opacity-50"
+                data-testid="button-recheck-errors"
+              >
+                <RotateCcw size={10} /> Re-check Issues ({errorCount + warningCount})
+              </button>
+            )}
+            <button
+              onClick={() => exportResults('txt')}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-gray-200 dark:border-gray-700 text-xs hover:bg-muted transition-colors"
+              data-testid="button-export-txt"
+            >
+              <Download size={10} /> TXT
+            </button>
+            <button
+              onClick={() => exportResults('json')}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-gray-200 dark:border-gray-700 text-xs hover:bg-muted transition-colors"
+              data-testid="button-export-json"
+            >
+              <Download size={10} /> JSON
+            </button>
+            <button
+              onClick={clearResults}
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs text-muted-foreground hover:bg-muted transition-colors"
+              data-testid="button-clear-results"
+            >
+              Clear
+            </button>
+          </div>
+        )}
+
         <div className="flex items-center gap-3 mb-6 flex-wrap">
           <div className="relative flex-1 min-w-[200px]">
             <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
@@ -491,16 +646,27 @@ export default function AdminTools() {
           </div>
           <button onClick={expandAll} className="px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-xs hover:bg-muted transition-colors" data-testid="button-expand-all">Expand All</button>
           <button onClick={collapseAll} className="px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg text-xs hover:bg-muted transition-colors" data-testid="button-collapse-all">Collapse All</button>
-          {lastFullCheck && <span className="text-xs text-muted-foreground" data-testid="text-last-check">Last check: {lastFullCheck}</span>}
+          {lastFullCheck && (
+            <span className="flex items-center gap-1.5 text-xs text-muted-foreground" data-testid="text-last-check">
+              <Clock size={12} /> Last check: {lastFullCheck}
+            </span>
+          )}
         </div>
 
         <div className="space-y-6" data-testid="panel-tool-categories">
           {toolCategories.map((category, ci) => {
             const filterLower = searchFilter.toLowerCase();
-            const filteredTools = searchFilter 
+            let filteredTools = searchFilter 
               ? category.tools.filter(t => t.label.toLowerCase().includes(filterLower) || t.desc.toLowerCase().includes(filterLower) || t.id.toLowerCase().includes(filterLower))
               : category.tools;
-            if (searchFilter && filteredTools.length === 0) return null;
+            if (statusFilter !== 'all') {
+              filteredTools = filteredTools.filter(t => {
+                const r = toolResults[t.id];
+                if (statusFilter === 'unchecked') return !r;
+                return r?.status === statusFilter;
+              });
+            }
+            if ((searchFilter || statusFilter !== 'all') && filteredTools.length === 0) return null;
             const catHealthy = category.tools.filter(t => toolResults[t.id]?.status === 'healthy').length;
             const catChecked = category.tools.filter(t => toolResults[t.id]).length;
             const catErrors = category.tools.filter(t => toolResults[t.id]?.status === 'error').length;

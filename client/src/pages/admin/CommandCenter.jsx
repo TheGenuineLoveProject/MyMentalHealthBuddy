@@ -756,7 +756,7 @@ function DailyOpsChecklist() {
   });
 
   const dailyTasks = [
-    { id: 'health-check', label: 'Run Platform Health Check', desc: 'Verify all 123 tools are operational', icon: Activity, action: 'scroll-tools', category: 'monitoring', priority: 'high' },
+    { id: 'health-check', label: 'Run Platform Health Check', desc: 'Verify all 123 tools are operational', icon: Activity, href: '/admin/tools', category: 'monitoring', priority: 'high' },
     { id: 'review-drafts', label: 'Review Pending Drafts', desc: 'Check narrative and social drafts for approval', icon: PenTool, href: '/admin/narrative', category: 'content', priority: 'high' },
     { id: 'check-analytics', label: 'Check Analytics', desc: 'Review daily engagement and traffic metrics', icon: BarChart3, href: '/admin/analytics', category: 'analytics', priority: 'medium' },
     { id: 'publishing-queue', label: 'Review Publishing Queue', desc: 'Check today\'s scheduled content', icon: Calendar, href: '/admin/publishing/today', category: 'content', priority: 'high' },
@@ -940,16 +940,6 @@ function DailyOpsChecklist() {
           if (task.href) {
             return <Link key={task.id} href={task.href} style={{ textDecoration: 'none' }}>{inner}</Link>;
           }
-          if (task.action === 'scroll-tools') {
-            return (
-              <div key={task.id} onClick={() => {
-                const el = document.querySelector('[data-testid="button-run-all-tool-checks"]');
-                if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => el.click(), 500); }
-              }}>
-                {inner}
-              </div>
-            );
-          }
           return <div key={task.id}>{inner}</div>;
         })}
       </div>
@@ -1032,6 +1022,124 @@ function AdminNavGrid() {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function ToolsStatusWidget() {
+  const [toolsData, setToolsData] = useState(null);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('glp_tools_last_check');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.results && Date.now() - parsed.timestamp < 3600000) {
+          setToolsData(parsed);
+        }
+      }
+    } catch {}
+  }, []);
+
+  if (!toolsData) {
+    return (
+      <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
+        <div className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <Zap className={styles.cardHeaderIcon} />
+            <h2 className={styles.cardTitle}>Platform Tools Status</h2>
+          </div>
+        </div>
+        <div style={{ padding: '1rem', textAlign: 'center' }}>
+          <p style={{ fontSize: '0.85rem', color: '#888', marginBottom: '0.75rem' }}>No recent health check data. Run a check to see all 123 tools status.</p>
+          <Link href="/admin/tools" style={{
+            display: 'inline-flex', alignItems: 'center', gap: '6px',
+            padding: '0.5rem 1rem', borderRadius: '8px',
+            background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))',
+            fontSize: '0.82rem', fontWeight: 500, textDecoration: 'none'
+          }} data-testid="link-run-first-check">
+            <Activity size={14} /> Run Daily Operations Check
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const results = Object.values(toolsData.results);
+  const total = results.length;
+  const healthy = results.filter(r => r.status === 'healthy').length;
+  const warnings = results.filter(r => r.status === 'warning').length;
+  const errors = results.filter(r => r.status === 'error').length;
+  const avgMs = total > 0 ? Math.round(results.reduce((s, r) => s + (r.ms || 0), 0) / total) : 0;
+  const healthPercent = total > 0 ? Math.round((healthy / total) * 100) : 0;
+  const timeSince = toolsData.timestamp ? new Date(toolsData.timestamp).toLocaleTimeString() : '—';
+  const isStale = toolsData.timestamp && (Date.now() - toolsData.timestamp > 1800000);
+
+  return (
+    <div className={styles.card} style={{ gridColumn: '1 / -1' }} data-testid="panel-tools-status">
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTitleContainer}>
+          <Zap className={styles.cardHeaderIcon} />
+          <h2 className={styles.cardTitle}>Platform Tools Status</h2>
+          <span style={{ fontSize: '0.7rem', color: '#888', marginLeft: '0.5rem' }}>
+            {total} tools checked at {timeSince}
+            {isStale && <span style={{ color: '#f59e0b', marginLeft: '4px' }}>(stale)</span>}
+          </span>
+        </div>
+        <Link href="/admin/tools" style={{
+          display: 'inline-flex', alignItems: 'center', gap: '4px',
+          fontSize: '0.75rem', color: 'hsl(var(--primary))', textDecoration: 'none'
+        }} data-testid="link-view-all-tools">
+          View All <ArrowRight size={12} />
+        </Link>
+      </div>
+      <div style={{ padding: '0 1rem 1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '0.75rem' }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#22c55e' }} data-testid="text-tools-healthy">{healthy}</div>
+          <div style={{ fontSize: '0.7rem', color: '#888' }}>Healthy</div>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f59e0b' }} data-testid="text-tools-warnings">{warnings}</div>
+          <div style={{ fontSize: '0.7rem', color: '#888' }}>Warnings</div>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ef4444' }} data-testid="text-tools-errors">{errors}</div>
+          <div style={{ fontSize: '0.7rem', color: '#888' }}>Errors</div>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#6366f1' }} data-testid="text-tools-health-pct">{healthPercent}%</div>
+          <div style={{ fontSize: '0.7rem', color: '#888' }}>Health Score</div>
+        </div>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#64748b' }} data-testid="text-tools-avg-ms">{avgMs}ms</div>
+          <div style={{ fontSize: '0.7rem', color: '#888' }}>Avg Response</div>
+        </div>
+      </div>
+      <div style={{ padding: '0 1rem 0.75rem' }}>
+        <div style={{ height: '6px', borderRadius: '3px', background: '#e5e7eb', overflow: 'hidden' }}>
+          <div style={{ 
+            height: '100%', borderRadius: '3px', transition: 'width 0.3s',
+            width: `${healthPercent}%`,
+            background: errors > 0 ? '#ef4444' : warnings > 0 ? '#f59e0b' : '#22c55e'
+          }} />
+        </div>
+      </div>
+      {(errors > 0 || isStale) && (
+        <div style={{ padding: '0 1rem 0.75rem' }}>
+          <Link href="/admin/tools" style={{
+            display: 'flex', alignItems: 'center', gap: '6px',
+            padding: '0.5rem 0.75rem', borderRadius: '8px',
+            background: errors > 0 ? 'rgba(239,68,68,0.08)' : 'rgba(245,158,11,0.08)',
+            border: `1px solid ${errors > 0 ? 'rgba(239,68,68,0.2)' : 'rgba(245,158,11,0.2)'}`,
+            fontSize: '0.78rem', color: errors > 0 ? '#dc2626' : '#d97706',
+            textDecoration: 'none', fontWeight: 500
+          }} data-testid="link-fix-tools-issues">
+            <AlertTriangle size={14} />
+            {errors > 0 ? `${errors} tool(s) need attention` : 'Results may be stale - re-run checks'}
+            <ArrowRight size={12} style={{ marginLeft: 'auto' }} />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }
@@ -1151,6 +1259,8 @@ export default function AdminCommandCenter() {
         </div>
 
         <DailyOpsChecklist />
+
+        <ToolsStatusWidget />
 
         <AdminNavGrid />
 

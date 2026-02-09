@@ -13,6 +13,7 @@ import { Download, Search, RefreshCw, ChevronLeft, ChevronRight, ArrowLeft, Aler
 import { Link } from "wouter";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 export default function AuditLogExplorer() {
   const [page, setPage] = useState(1);
@@ -67,20 +68,7 @@ export default function AuditLogExplorer() {
   const stats = statsData?.data || { total: 0, today: 0, topActions: [] };
 
   if (error) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
-        <SEO title="Audit Log Explorer — Admin" noindex />
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center py-16" data-testid="section-error">
-            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
-            <button onClick={() => refetch()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-              Retry
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load audit logs" onRetry={refetch} />;
   }
 
   return (

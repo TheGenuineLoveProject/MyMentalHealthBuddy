@@ -11,6 +11,7 @@ import { queryClient, apiRequest } from "../../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 function CopyButton({ text, label }) {
   const [copied, setCopied] = useState(false);
@@ -196,19 +197,7 @@ export default function AdminPublishing() {
   const todayItems = calendar.filter(c => c.date === today);
 
   if (publishError) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center py-16" data-testid="section-error">
-            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
-            <button onClick={() => refetchRegistry()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-              Retry
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load publishing data" onRetry={refetchRegistry} />;
   }
 
   return (

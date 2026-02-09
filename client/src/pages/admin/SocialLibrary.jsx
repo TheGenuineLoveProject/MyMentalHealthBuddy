@@ -5,6 +5,7 @@ import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, Sparkle
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const TEMPLATE_TYPES = [
   { id: "hook", name: "Hook", description: "2-second attention grabber" },
@@ -64,6 +65,10 @@ export default function SocialLibrary() {
     acc[type.id] = templates.filter(t => t.type === type.id);
     return acc;
   }, {});
+
+  if (error) {
+    return <AdminErrorBanner title="Unable to load social library" onRetry={refetch} />;
+  }
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">

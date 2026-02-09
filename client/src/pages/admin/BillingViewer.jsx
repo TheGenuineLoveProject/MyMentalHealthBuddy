@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft, RefreshCw } from 'lucide-react';
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 function formatCurrency(cents) {
   if (!cents && cents !== 0) return '$0.00';
@@ -83,17 +84,7 @@ export default function BillingViewerPage() {
   }
 
   if (error) {
-    return (
-      <div className="container py-8">
-        <div className="text-center py-16" data-testid="section-error">
-          <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-          <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
-          <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-            Retry
-          </button>
-        </div>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load billing data" onRetry={refetch} />;
   }
 
   const stats = billingData || {

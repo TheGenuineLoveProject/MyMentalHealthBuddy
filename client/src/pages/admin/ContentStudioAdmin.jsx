@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner, AdminLoadingState } from "../../components/admin/AdminQueryStates";
 
 const CONTENT_TIERS = ["beginner", "intermediate", "advanced"];
 
@@ -111,29 +112,16 @@ export default function ContentStudioAdmin() {
   const needsTiersCount = contentList.filter(c => !c.hasTiers).length;
   const completeCount = contentList.filter(c => c.hasTiers).length;
 
+  if (!healthData && !error) {
+    return <AdminLoadingState label="Loading content studio..." />;
+  }
+
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center" data-testid="loading-content-studio">
-        <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-primary" />
-        <span className="ml-3 text-muted-foreground">Loading content studio...</span>
-      </div>
-    );
+    return <AdminLoadingState label="Loading content studio..." />;
   }
 
   if (error) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center py-16" data-testid="section-error">
-            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
-            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
-            <button onClick={() => refetch()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
-              Retry
-            </button>
-          </div>
-        </div>
-      </div>
-    );
+    return <AdminErrorBanner title="Unable to load content studio" onRetry={refetch} />;
   }
 
   return (

@@ -9,6 +9,7 @@ import {
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "../../components/SEO";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const PLATFORMS = {
   instagram: { icon: Instagram, color: "#E4405F", name: "Instagram" },
@@ -117,6 +118,10 @@ export default function SocialCalendar() {
   };
   
   const monthName = currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+
+  if (error) {
+    return <AdminErrorBanner title="Unable to load social calendar" onRetry={refetch} />;
+  }
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">

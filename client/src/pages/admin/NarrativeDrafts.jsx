@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 
 const STATUS_CONFIG = {
   draft: { label: "Draft", color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" },
@@ -128,6 +129,10 @@ export default function NarrativeDrafts() {
         <p className="text-muted-foreground">Admin access required.</p>
       </div>
     );
+  }
+
+  if (error) {
+    return <AdminErrorBanner title="Unable to load narrative drafts" onRetry={refetch} />;
   }
 
   return (
