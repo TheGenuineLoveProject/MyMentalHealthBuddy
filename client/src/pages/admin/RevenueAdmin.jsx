@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { DollarSign, TrendingUp, Users, CreditCard, Calendar, ArrowUp, ArrowDown, RefreshCw, AlertCircle } from "lucide-react";
+import { DollarSign, TrendingUp, Users, CreditCard, Calendar, ArrowUp, ArrowDown, RefreshCw, AlertCircle, ArrowLeft } from "lucide-react";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
@@ -68,6 +69,9 @@ export default function RevenueAdmin() {
       />
       
       <main className="container mx-auto px-4 py-8 max-w-6xl">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <header className="mb-8">
           <div className="flex items-center gap-2 text-primary mb-2">
             <DollarSign className="w-5 h-5" />

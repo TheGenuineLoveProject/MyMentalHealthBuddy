@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { 
   Share2, Calendar, Hash, Zap, FileText, Check, Clock, 
   AlertTriangle, RefreshCw, Download, Copy, Eye, Edit,
@@ -7,7 +8,7 @@ import {
   MessageSquare, ArrowRight, ExternalLink, Palette, Type, 
   Layout, Settings, Wand2, Bot, Globe, Link2, ChevronRight,
   Instagram, Twitter, Linkedin, Youtube, Facebook, PinIcon,
-  MoreHorizontal, Grip, Star, Filter, Search, Bell
+  MoreHorizontal, Grip, Star, Filter, Search, Bell, ArrowLeft
 } from "lucide-react";
 import { SiInstagram, SiX, SiLinkedin, SiYoutube, SiFacebook, SiPinterest, SiTiktok } from "react-icons/si";
 import SEO from "../../components/SEO";
@@ -337,6 +338,9 @@ export default function SocialStudioAdmin() {
       />
       
       <main className="container mx-auto px-4 py-8 max-w-7xl">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <header className="mb-8">
           <div className="flex items-center justify-between flex-wrap gap-4">
             <div>

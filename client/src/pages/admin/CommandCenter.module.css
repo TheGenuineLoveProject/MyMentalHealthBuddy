@@ -286,6 +286,24 @@
   background: var(--glp-sage-5, rgba(138, 154, 91, 0.05));
 }
 
+.servicesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.serviceRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--glp-sage-5, rgba(138, 154, 91, 0.05));
+}
+
+.serviceRow:last-child {
+  border-bottom: none;
+}
+
 .serviceInfo {
   display: flex;
   align-items: center;

@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Download, Search, RefreshCw, ChevronLeft, ChevronRight } from "lucide-react";
+import { Download, Search, RefreshCw, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
+import { Link } from "wouter";
 
 export default function AuditLogExplorer() {
   const [page, setPage] = useState(1);
@@ -65,6 +66,9 @@ export default function AuditLogExplorer() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
+      <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+        <ArrowLeft size={16} /> Command Center
+      </Link>
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold">Audit Log Explorer</h1>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Flag, ToggleLeft, ToggleRight, Search, Plus, Info, Loader2, X, Trash2 } from "lucide-react";
+import { Link } from "wouter";
+import { Flag, ToggleLeft, ToggleRight, Search, Plus, Info, Loader2, X, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
@@ -162,6 +163,9 @@ export default function FeatureFlags() {
       <SEO title="Feature Flags — Admin" noIndex />
 
       <main className="container mx-auto px-4 py-12 max-w-4xl">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <header className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">

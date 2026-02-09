@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { 
   Layers, Edit, Check, AlertTriangle, Search, Filter,
-  FileText, Eye, Copy, Trash2, Plus, Loader2
+  FileText, Eye, Copy, Trash2, Plus, Loader2, ArrowLeft
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
@@ -118,6 +118,9 @@ export default function ContentStudioAdmin() {
       />
       
       <main className="container mx-auto px-4 py-8 max-w-6xl">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <header className="mb-8">
           <div className="flex items-center gap-2 text-primary mb-2">
             <Layers className="w-5 h-5" />

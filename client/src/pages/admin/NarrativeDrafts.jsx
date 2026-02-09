@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
+import { Link } from "wouter";
 import {
   FileText, Copy, Check, Loader2, Eye, Edit,
   MessageSquare, Send, ChevronDown, ChevronUp,
-  Instagram, Globe, Filter
+  Instagram, Globe, Filter, ArrowLeft
 } from "lucide-react";
 import { SiInstagram, SiX, SiTiktok, SiYoutube } from "react-icons/si";
 import SEO from "../../components/SEO";
@@ -144,6 +145,9 @@ export default function NarrativeDrafts() {
     <>
       <SEO title="Narrative Drafts - Admin" />
       <div className="p-6 max-w-5xl mx-auto space-y-6">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <div>
           <h1 className="text-2xl font-bold flex items-center gap-2" data-testid="text-narrative-title">
             <FileText className="w-6 h-6" />

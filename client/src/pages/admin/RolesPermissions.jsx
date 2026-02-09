@@ -1,5 +1,6 @@
 import { Fragment } from "react";
-import { Shield, Users, Settings, Check, X, Info } from "lucide-react";
+import { Link } from "wouter";
+import { Shield, Users, Settings, Check, X, Info, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
@@ -69,6 +70,9 @@ export default function RolesPermissions() {
       />
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">

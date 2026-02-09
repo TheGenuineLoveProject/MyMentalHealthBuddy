@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { 
   Shield, ChevronLeft, RefreshCw, AlertTriangle, 
-  Lock, Activity, Users, Clock, TrendingUp, Ban
+  Lock, Activity, Users, Clock, TrendingUp, Ban, ArrowLeft
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
@@ -59,6 +59,9 @@ export default function SecurityDashboard() {
   return (
     <div className="min-h-screen hero-gradient">
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
             <Link href="/admin">

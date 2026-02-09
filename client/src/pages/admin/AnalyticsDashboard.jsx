@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { BarChart3, Eye, MousePointer, ShoppingCart, Mail, TrendingUp, Loader2, AlertCircle } from "lucide-react";
+import { Link } from "wouter";
+import { BarChart3, Eye, MousePointer, ShoppingCart, Mail, TrendingUp, Loader2, AlertCircle, ArrowLeft } from "lucide-react";
 import SEO from "../../components/SEO";
 
 export default function AnalyticsDashboard() {
@@ -45,6 +46,9 @@ export default function AnalyticsDashboard() {
     <>
       <SEO title="Analytics Dashboard | Admin" description="Product analytics overview" />
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-8" data-testid="page-analytics-dashboard">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold font-sacred text-[var(--glp-sage-deep)]" data-testid="text-analytics-title">

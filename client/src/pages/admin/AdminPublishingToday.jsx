@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
+import { ArrowLeft } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 
 const PLATFORMS = [
@@ -145,6 +147,9 @@ export default function AdminPublishingToday() {
 
   return (
     <div style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
+      <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+        <ArrowLeft size={16} /> Command Center
+      </Link>
       <h1
         data-testid="heading-todays-pick"
         style={{ fontSize: 24, fontWeight: 700, marginBottom: 4, color: "#1f2937" }}

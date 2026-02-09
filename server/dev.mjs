@@ -111,6 +111,11 @@ import metricsSummaryRouter from "./routes/metricsSummary.mjs";
 import softLaunchMetricsRouter, { recordPageView } from "./routes/soft-launch-metrics.mjs";
 import feedbackRouter from "./routes/feedback.mjs";
 import narrativeDraftsRouter from "./routes/narrative-drafts.mjs";
+import auditLogsRouter from "./routes/audit-logs.mjs";
+import adminBillingRouter from "./routes/adminBilling.mjs";
+import adminPublishingRouter from "./routes/admin-publishing.mjs";
+import contactRouter from "./routes/contact.mjs";
+import metricsRouter from "./routes/metrics.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -304,8 +309,13 @@ async function startServer() {
   app.use("/api/perplexity", perplexityRouter);
   app.use("/api/email", emailRouter);
   app.use("/api/admin/security", adminSecurityRouter);
+  app.use("/api/admin/audit-logs", auditLogsRouter);
+  app.use("/api/admin/billing", adminBillingRouter);
+  app.use("/api/admin/publishing", adminPublishingRouter);
+  app.use("/api/contact", contactRouter);
   app.use("/api/uploads", objectStorageRouter);
-  app.use("/api/metrics", metricsSummaryRouter);
+  app.use("/api/metrics", metricsRouter);
+  app.use("/api/metrics/summary", metricsSummaryRouter);
 
   const SERVER_START_TIME = Date.now();
 

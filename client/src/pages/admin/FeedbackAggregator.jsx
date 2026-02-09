@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { MessageSquare, Download, Loader2, Bug, Lightbulb, HelpCircle, Heart, Mail, Clock, Filter } from "lucide-react";
+import { Link } from "wouter";
+import { MessageSquare, Download, Loader2, Bug, Lightbulb, HelpCircle, Heart, Mail, Clock, Filter, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { useToast } from "@/hooks/use-toast";
@@ -77,6 +78,9 @@ export default function FeedbackAggregator() {
     <>
       <SEO title="Feedback - Admin" />
       <div className="p-6 max-w-5xl mx-auto space-y-6">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
             <h1 className="text-2xl font-bold flex items-center gap-2" data-testid="text-feedback-title">

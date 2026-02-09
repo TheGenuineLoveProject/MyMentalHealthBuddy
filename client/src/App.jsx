@@ -241,6 +241,8 @@ const FeatureFlags = lazy(() => import("./pages/admin/FeatureFlags.jsx"));
 const SystemAlerts = lazy(() => import("./pages/admin/SystemAlerts.jsx"));
 const FeedbackAggregator = lazy(() => import("./pages/admin/FeedbackAggregator.jsx"));
 const NarrativeDrafts = lazy(() => import("./pages/admin/NarrativeDrafts.jsx"));
+const SecurityDashboard = lazy(() => import("./pages/admin/SecurityDashboard.jsx"));
+const AuditLogExplorer = lazy(() => import("./pages/admin/AuditLogExplorer.jsx"));
 
 // Batch 16 - Analytics, Community, Personalization, Wellness (P451-P500)
 const EngagementDashboard = lazy(() => import("./pages/admin/EngagementDashboard.jsx"));
@@ -1674,6 +1676,12 @@ export default function App() {
               </Route>
               <Route path="/admin/revenue">
                 <AdminGuard><RevenueAdmin /></AdminGuard>
+              </Route>
+              <Route path="/admin/security">
+                <AdminGuard><SecurityDashboard /></AdminGuard>
+              </Route>
+              <Route path="/admin/audit-log">
+                <AdminGuard><AuditLogExplorer /></AdminGuard>
               </Route>
 
               <Route path="/account/sessions">

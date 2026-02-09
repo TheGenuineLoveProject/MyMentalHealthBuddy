@@ -1,4 +1,5 @@
-import { Activity, Users, Clock, TrendingUp, BarChart3, Calendar } from "lucide-react";
+import { Link } from "wouter";
+import { Activity, Users, Clock, TrendingUp, BarChart3, Calendar, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 
@@ -23,6 +24,9 @@ export default function EngagementDashboard() {
       <SEO title="Engagement Dashboard — Admin" noIndex />
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} /> Command Center
+        </Link>
         <header className="mb-8">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
