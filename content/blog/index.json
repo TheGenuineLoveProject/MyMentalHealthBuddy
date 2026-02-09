@@ -38,5 +38,37 @@
     "publishDate": "2026-02-09",
     "summary": "A quiet reminder that pausing is not falling behind.",
     "tags": ["rest", "self-compassion", "pace"]
+  },
+  {
+    "slug": "your-privacy-is-not-negotiable",
+    "title": "Your Privacy Is Not Negotiable",
+    "pillar": "Orientation",
+    "publishDate": "2026-02-10",
+    "summary": "How we handle your data, why we built privacy into the foundation, and what you can expect from us.",
+    "tags": ["privacy", "safety", "trust", "orientation"]
+  },
+  {
+    "slug": "gentleness-is-not-weakness",
+    "title": "Gentleness Is Not Weakness",
+    "pillar": "Reflection",
+    "publishDate": "2026-02-11",
+    "summary": "A reflection on why being gentle with yourself takes more courage than pushing through.",
+    "tags": ["self-compassion", "gentleness", "reflection", "courage"]
+  },
+  {
+    "slug": "letting-insight-land",
+    "title": "Letting Insight Land Without Rushing Change",
+    "pillar": "Integration",
+    "publishDate": "2026-02-12",
+    "summary": "How to hold new awareness gently instead of forcing immediate transformation.",
+    "tags": ["integration", "patience", "awareness", "self-compassion"]
+  },
+  {
+    "slug": "small-practices-that-stay",
+    "title": "Small Practices That Stay",
+    "pillar": "Integration",
+    "publishDate": "2026-02-13",
+    "summary": "Why tiny, sustainable habits matter more than dramatic overhauls for lasting emotional growth.",
+    "tags": ["integration", "habits", "sustainability", "practice"]
   }
 ]

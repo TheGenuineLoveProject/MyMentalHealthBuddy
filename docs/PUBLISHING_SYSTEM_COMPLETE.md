@@ -21,15 +21,20 @@
 - `content/newsletter/newsletter-style-guide.md` — Tone, frequency, and ethical guardrails
 - `content/newsletter/drafts.json` — Pre-existing draft storage (unchanged)
 
-### Phase 3 — Blog Canonical Store (Created)
-- `content/blog/index.json` — Registry of 5 canonical blog posts
+### Phase 3 — Blog Canonical Store (Created + Extended)
+- `content/blog/index.json` — Registry of 9 canonical blog posts
 - `content/blog/posts/welcome-to-genuine-love.md` — Pillar: Orientation
-- `content/blog/posts/what-emotional-literacy-means.md` — Pillar: Reflection
 - `content/blog/posts/ai-companion-what-to-expect.md` — Pillar: Orientation
-- `content/blog/posts/after-a-hard-realization.md` — Pillar: Integration
+- `content/blog/posts/your-privacy-is-not-negotiable.md` — Pillar: Orientation
+- `content/blog/posts/what-emotional-literacy-means.md` — Pillar: Reflection
 - `content/blog/posts/rest-is-part-of-the-work.md` — Pillar: Reflection
+- `content/blog/posts/gentleness-is-not-weakness.md` — Pillar: Reflection
+- `content/blog/posts/after-a-hard-realization.md` — Pillar: Integration
+- `content/blog/posts/letting-insight-land.md` — Pillar: Integration
+- `content/blog/posts/small-practices-that-stay.md` — Pillar: Integration
 
-Pillar distribution: Orientation (2), Reflection (2), Integration (1). All pillars represented. Integration has slightly fewer posts — additional Integration posts can be added over time.
+Pillar distribution: Orientation=3, Reflection=3, Integration=3 (balanced).
+All posts include "Try this inside The Genuine Love Project" section with allowed CTA links.
 
 ### Phase 4 — Blog Routing (Documented)
 The blog system already exists as a database-backed system:
@@ -41,19 +46,23 @@ The blog system already exists as a database-backed system:
 
 The canonical blog posts in `content/blog/posts/` serve as source material. They can be published through the admin interface. No routing changes were needed.
 
-### Phase 5 — Quality Gates (Created)
-- `scripts/audit-publishing.mjs` — Automated checks:
-  - Blog index vs post file matching
+Full blog system documentation: `docs/BLOG_SYSTEM_MAP.md`
+
+### Phase 5 — Quality Gates (Created + Enhanced)
+- `scripts/audit-publishing.mjs` — 58 automated checks:
+  - Blog index vs post file matching (9 entries)
   - Frontmatter validation (required fields, valid pillars)
-  - Forbidden language scan (urgency, guilt, shame, medical, dependency)
+  - Forbidden language scan (urgency, guilt, shame, medical, dependency) with context-aware negation
   - Internal link audit (only allowed CTA routes)
-  - Pillar balance check
+  - Newsletter template validation (existence, optionality language, crisis support, footer)
+  - Pillar balance enforcement (3/3/3)
   - Narrative Spine integrity check
 
 ### Phase 6 — Verification
-- `node scripts/audit-publishing.mjs` → **PASS**
-- `curl http://localhost:5000/api/health` → **healthy**
+- `node scripts/audit-publishing.mjs` → **PUBLISHING_AUDIT: PASS** (58 checks, 0 errors, 0 warnings)
+- `curl http://localhost:5000/api/health` → **200 (healthy)**
 - Application running without errors
+- Phase gate tracking: `docs/PHASE_STATUS.md`
 
 ---
 

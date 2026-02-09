@@ -37,3 +37,11 @@ If you would like to sit with this, our [reflection space](/reflection) is alway
 ---
 
 If anything here brings up strong emotions, support is always available at our [Crisis Resources page](/crisis).
+
+---
+
+**Try this inside The Genuine Love Project:**
+
+- Write about what you noticed in the [journal](/journal) — without trying to solve it
+- Sit with today's [reflection prompt](/reflection)
+- If you need support right now, visit our [crisis resources](/crisis)

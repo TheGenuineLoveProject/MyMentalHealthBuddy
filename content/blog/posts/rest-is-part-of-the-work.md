@@ -40,3 +40,11 @@ This space will be here when you come back. And if you do not come back for a wh
 ---
 
 If you are struggling with more than tiredness — if rest itself feels impossible or the heaviness will not lift — please visit our [Crisis Resources page](/crisis). Support is available, and asking for help is its own kind of strength.
+
+---
+
+**Try this inside The Genuine Love Project:**
+
+- Write one honest sentence in the [journal](/journal) about how you feel right now
+- Visit the [reflection space](/reflection) — no pressure to do anything
+- Browse the [blog](/blog) for more quiet essays like this one

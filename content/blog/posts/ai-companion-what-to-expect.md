@@ -39,3 +39,11 @@ Your conversations with the AI are private. We do not use them for advertising, 
 ## If you need immediate support
 
 Our AI companion is not equipped to handle crisis situations. If you or someone you know needs immediate help, please visit our [Crisis Resources page](/crisis) or call 988.
+
+---
+
+**Try this inside The Genuine Love Project:**
+
+- Write a reflection in the [journal](/journal) — the AI companion can help you explore it
+- Visit the [reflection space](/reflection) for a quiet check-in
+- Browse the [wellness tools](/tools) to find what feels right for you

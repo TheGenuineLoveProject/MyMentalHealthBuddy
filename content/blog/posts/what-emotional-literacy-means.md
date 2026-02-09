@@ -38,3 +38,11 @@ If you would like a quiet space to sit with this, our [reflection page](/reflect
 ---
 
 If any of this brings up strong emotions, please know that support is available. Visit our [Crisis Resources page](/crisis) anytime.
+
+---
+
+**Try this inside The Genuine Love Project:**
+
+- Name one feeling in the [journal](/journal) — just one word is enough
+- Sit with today's [reflection prompt](/reflection)
+- Explore more essays on the [blog](/blog)

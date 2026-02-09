@@ -34,3 +34,11 @@ This platform is educational. If you are experiencing a crisis or need immediate
 There is no wrong way to start. You might try a journal prompt. You might sit with a reflection. You might just read and close the page. All of that is fine.
 
 You are welcome here exactly as you are.
+
+---
+
+**Try this inside The Genuine Love Project:**
+
+- Start with a gentle [journal prompt](/journal) — there is no wrong answer
+- Visit the [reflection space](/reflection) to check in with yourself
+- Explore the [wellness tools](/tools) at your own pace

@@ -273,6 +273,8 @@ if (fs.existsSync(indexPath)) {
   for (const entry of index) {
     counts[entry.pillar] = (counts[entry.pillar] || 0) + 1;
   }
+  const minCount = Math.min(...VALID_PILLARS.map(p => counts[p] || 0));
+  const maxCount = Math.max(...VALID_PILLARS.map(p => counts[p] || 0));
   for (const p of VALID_PILLARS) {
     const c = counts[p] || 0;
     if (c === 0) {
@@ -280,6 +282,11 @@ if (fs.existsSync(indexPath)) {
     } else {
       log('PASS', `Pillar "${p}": ${c} post(s)`);
     }
+  }
+  if (minCount > 0 && maxCount - minCount <= 1) {
+    log('PASS', `Pillar balance: ${VALID_PILLARS.map(p => `${p}=${counts[p]||0}`).join(', ')}`);
+  } else if (minCount > 0) {
+    log('WARN', `Pillar imbalance: ${VALID_PILLARS.map(p => `${p}=${counts[p]||0}`).join(', ')} — consider adding more to underrepresented pillars`);
   }
 }
 
