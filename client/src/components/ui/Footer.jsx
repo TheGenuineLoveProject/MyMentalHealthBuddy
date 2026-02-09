@@ -17,18 +17,10 @@ export function Footer({ className = '' }) {
           </div>
 
           <nav aria-label="Footer navigation" className="flex flex-wrap justify-center gap-6 text-sm">
-            <Link href="/about">
-              <a className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-about">About</a>
-            </Link>
-            <Link href="/privacy">
-              <a className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-privacy">Privacy</a>
-            </Link>
-            <Link href="/terms">
-              <a className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-terms">Terms</a>
-            </Link>
-            <Link href="/contact">
-              <a className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-contact">Contact</a>
-            </Link>
+            <Link href="/about" className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-about">About</Link>
+            <Link href="/privacy" className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-privacy">Privacy</Link>
+            <Link href="/terms" className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-terms">Terms</Link>
+            <Link href="/contact" className="hover:text-[var(--glp-gold)] transition-colors" data-testid="footer-contact">Contact</Link>
           </nav>
 
           <p className="text-sm text-white/70">

@@ -427,13 +427,13 @@ export default function CanvaLanding() {
                 Try It Free
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
               </a>
-              <Link href="/dashboard">
+              <Link href="/pricing">
                 <button 
                   className="inline-flex items-center gap-3 font-bold text-lg px-10 py-5 rounded-full transition-all border-2 hover:bg-[var(--glp-sage-deep)] hover:text-white hover:-translate-y-1"
                   style={{ color: 'var(--glp-sage-deep)', borderColor: 'var(--glp-sage-deep)' }}
-                  data-testid="button-hero-dashboard"
+                  data-testid="button-hero-explore"
                 >
-                  See What's Available
+                  See What's Included
                 </button>
               </Link>
             </div>
@@ -456,7 +456,7 @@ export default function CanvaLanding() {
             <div className="text-center p-4 sm:p-6 rounded-2xl transition-all hover:scale-105 shadow-lg" style={{ background: 'var(--glp-white)', border: '2px solid var(--glp-rose-20)' }}>
               <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2" style={{ color: 'var(--glp-sage-deep)' }}>24/7</div>
               <p className="text-xs sm:text-sm font-bold uppercase tracking-wider" style={{ color: 'var(--glp-sage-deep)' }}>
-                AI Support
+                AI Companion
               </p>
             </div>
           </div>
@@ -567,12 +567,12 @@ export default function CanvaLanding() {
               There's no right time to start, no wrong way to use this, and no pressure to keep going. 
               Everything here works at your pace.
             </p>
-            <Link href="/onboarding">
+            <a href="/api/login">
               <button className="mission-cta" data-testid="cta-join-now">
                 Get Started Free
                 <ArrowRight className="inline ml-3 w-5 h-5" />
               </button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

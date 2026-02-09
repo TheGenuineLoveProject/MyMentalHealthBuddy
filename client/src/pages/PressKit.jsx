@@ -66,7 +66,7 @@ export default function PressKit() {
               { label: "Company", value: "Aaliyah Draws Art LLC" },
               { label: "Founder", value: "Maria Landa" },
               { label: "Category", value: "Mental Wellness Tech" },
-              { label: "Platform", value: "Web (Mobile coming soon)" }
+              { label: "Platform", value: "Web (Progressive Web App)" }
             ].map((fact, index) => (
               <Card key={index}>
                 <CardContent className="py-4 flex justify-between items-center">

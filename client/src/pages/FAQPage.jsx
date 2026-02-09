@@ -134,11 +134,11 @@ const faqs = [
     questions: [
       {
         q: "Is there a free version?",
-        a: "Yes. Core features including mood tracking, basic journaling, and limited AI chat are free. Premium features require a subscription."
+        a: "Yes. Core features including mood tracking, journaling, daily reflection, and community features are free with no expiration. Pro adds unlimited AI sessions and additional tools — only if you want them."
       },
       {
-        q: "How do I upgrade to Premium?",
-        a: "Visit the Upgrade page from your dashboard to see Premium features and subscription options."
+        q: "How do I upgrade to Pro?",
+        a: "Visit the Pricing page to see what Pro includes. You can upgrade from your dashboard anytime, and cancel anytime with no penalties."
       },
       {
         q: "Can I cancel anytime?",
