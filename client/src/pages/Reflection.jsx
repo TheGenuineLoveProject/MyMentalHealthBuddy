@@ -85,13 +85,13 @@ function getFlameColor(streak) {
 }
 
 function getStreakMessage(streak, reflectedToday) {
-  if (reflectedToday && streak >= 30) return "Legendary dedication!";
-  if (reflectedToday && streak >= 14) return "Two weeks strong!";
-  if (reflectedToday && streak >= 7) return "A whole week of showing up!";
-  if (reflectedToday && streak >= 3) return "Building real momentum!";
+  if (reflectedToday && streak >= 30) return "A beautiful practice of presence.";
+  if (reflectedToday && streak >= 14) return "Consistent and gentle — well done.";
+  if (reflectedToday && streak >= 7) return "A week of quiet showing up.";
+  if (reflectedToday && streak >= 3) return "You keep returning. That matters.";
   if (reflectedToday && streak >= 1) return "You showed up today.";
-  if (streak >= 1) return "Continue your streak — reflect today.";
-  return "Start your reflection streak today.";
+  if (streak >= 1) return "Your space is here when you're ready.";
+  return "No pressure. Begin whenever feels right.";
 }
 
 function mirrorToLocalStorage(entries) {
@@ -258,8 +258,7 @@ export default function Reflection() {
               Daily Reflection
             </h1>
             <p style={{ color: "var(--glp-ink)", opacity: 0.7 }}>
-              Take a quiet moment to check in with yourself. There's no right or wrong —
-              just honesty.
+              A quiet moment to check in with yourself. There's no right way to do this — just honesty, at your own pace.
             </p>
           </div>
 
@@ -367,16 +366,6 @@ export default function Reflection() {
           </div>
 
           <div className="flex items-center gap-3">
-            {xpAwarded && (
-              <span
-                className="text-sm font-bold"
-                style={{ color: "var(--glp-gold, #d4a574)" }}
-                role="status"
-                data-testid="text-xp-awarded"
-              >
-                +{xpAwarded} XP
-              </span>
-            )}
             {saved && (
               <span
                 className="text-sm font-medium"
@@ -384,7 +373,7 @@ export default function Reflection() {
                 role="status"
                 data-testid="text-saved-status"
               >
-                Saved gently
+                Saved. You're done whenever you feel ready.
               </span>
             )}
             {journalStatus === "saved" && (
@@ -442,7 +431,7 @@ function StreakBadge({ current, longest, reflectedToday, totalXp }) {
       data-testid="streak-badge"
     >
       <div
-        className={`w-10 h-10 rounded-xl bg-gradient-to-br ${getFlameColor(current)} flex items-center justify-center shadow-md ${current >= 3 ? "animate-pulse" : ""}`}
+        className={`w-10 h-10 rounded-xl bg-gradient-to-br ${getFlameColor(current)} flex items-center justify-center shadow-md`}
       >
         <Flame className="w-5 h-5 text-white" aria-hidden="true" />
       </div>
@@ -458,9 +447,9 @@ function StreakBadge({ current, longest, reflectedToday, totalXp }) {
           <span className="text-xs" style={{ color: "var(--glp-sage)" }}>
             day{current !== 1 ? "s" : ""}
           </span>
-          {longest > current && (
+          {longest > current && longest >= 3 && (
             <span className="text-xs ml-1" style={{ color: "var(--glp-sage)", opacity: 0.6 }}>
-              (best: {longest})
+              (you've done {longest} before)
             </span>
           )}
         </div>

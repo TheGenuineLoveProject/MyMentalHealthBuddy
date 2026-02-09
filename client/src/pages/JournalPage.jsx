@@ -238,7 +238,7 @@ export default function JournalPage() {
   }
 
   function handleDelete(id) {
-    if (!confirm("Delete this journal entry?")) return;
+    if (!confirm("Would you like to remove this entry? This can't be undone.")) return;
     deleteMutation.mutate(id);
   }
 
@@ -300,7 +300,7 @@ export default function JournalPage() {
                 </div>
                 <div className="stack-xs">
                   <h1 className="text-display-sm text-brand" data-testid="text-title">Reflective Journal</h1>
-                  <p className="text-body-sm text-secondary">A safe space to process thoughts, honor feelings, and witness your own growth</p>
+                  <p className="text-body-sm text-secondary">Write freely, at your own pace. There's no right way to do this.</p>
                 </div>
               </div>
             </div>
@@ -321,7 +321,7 @@ export default function JournalPage() {
 
           <BenefitsBlock 
             benefit="A private space to process thoughts and track your emotional growth"
-            duration="5-15 minutes"
+            duration="3-10 minutes"
             control="Write as much or little as feels right"
             disclaimer="Educational wellness support only"
             className="mb-6"
@@ -340,7 +340,7 @@ export default function JournalPage() {
             <div className="flex items-center justify-between">
               <h2 className="font-serif text-xl font-semibold text-[var(--glp-sage-deep)] dark:text-white flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-[var(--glp-gold)]" aria-hidden="true" />
-                Sacred Healing Tools
+                Wellness Companions
               </h2>
               <button
                 type="button"
@@ -438,7 +438,7 @@ export default function JournalPage() {
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Give your entry a title..."
+                  placeholder="A word or phrase to remember this by..."
                   className="input"
                   data-testid="input-title"
                   autoComplete="off"
@@ -451,7 +451,7 @@ export default function JournalPage() {
                   id="journal-content"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
-                  placeholder="Write your thoughts..."
+                  placeholder="Whatever is on your mind — no pressure, no structure needed..."
                   rows={6}
                   className="input resize-none"
                   data-testid="input-content"
@@ -548,8 +548,8 @@ export default function JournalPage() {
               <div className="w-20 h-20 rounded-2xl bg-[var(--primary-soft)] flex items-center justify-center mx-auto mb-6">
                 <Notebook className="w-10 h-10 text-[var(--primary)]" aria-hidden="true" />
               </div>
-              <h2 className="text-xl font-semibold mb-2">No journal entries yet</h2>
-              <p className="text-[var(--text-secondary)] mb-6">Start writing to track your thoughts and feelings</p>
+              <h2 className="text-xl font-semibold mb-2">Your journal is waiting</h2>
+              <p className="text-[var(--text-secondary)] mb-6">Whenever you're ready, this space is here for you. No rush.</p>
               <button
                 onClick={() => setShowForm(true)}
                 className="btn btn-gradient"
