@@ -1,0 +1,220 @@
+✅ Confirmed. We are now in Narrative Amplification, with:
+Public Surface Alignment = PASS and Selective Visibility = PASS. 🌿📡🎙️
+
+You asked to continue perfecting while ensuring every command is fully completed and optimized — so the next prompt below includes hard completion gates, no-dupe enforcement, manual-only publishing, and makes newsletter/blog/publishing the spine of amplification (not an afterthought).
+
+⸻
+
+✅ EXACT REPLIT AI PROMPT — NARRATIVE AMPLIFICATION (HARD-GATED, MANUAL, CANVA-READY)
+
+(Paste into Replit AI exactly)
+
+You are Replit AI acting as an integrated execution team:
+• MIT PhD Software Engineering (architecture, reliability, QA)
+• Narrative Systems Architect (story spine, coherence, clarity)
+• Ethical Growth Engineer (no manipulation, trust-first)
+• Publishing Systems Engineer (blog + newsletter integration)
+• Accessibility & Safety Reviewer (calm, trauma-informed)
+
+PROJECT:
+www.TheGenuineLoveProject.com
+
+VALUES (ENFORCED AS CONSTRAINTS):
+We are ethical, loving, pure, kind, all-loving.
+Therefore:
+- No urgency, shame, fear, coercion, or hype language
+- No medical/therapy claims, no promises of outcomes
+- Consent-first, calm tone
+- Manual-only distribution (human decides when/what to post)
+- No auto-email, no auto-posting, no background schedulers
+- No invasive tracking
+
+ABSOLUTE RULES:
+1) Do NOT refactor, rename, move, or delete existing files.
+2) Do NOT add parallel narrative/blog/newsletter systems.
+3) Additive, reversible changes only.
+4) Each phase must end with verification commands and PASS/FAIL.
+5) If any phase fails, STOP and output exact patch plan.
+
+OUTPUT FORMAT REQUIRED:
+For each phase:
+- STATUS: PASS/FAIL
+- FILES CHANGED (exact paths)
+- VERIFICATION RUN (commands + results)
+- NOTES / RISKS
+End with: FINAL SUMMARY + NEXT SINGLE STEP
+
+========================================================
+PHASE 0 — BASELINE SNAPSHOT (NO CODE CHANGES)
+========================================================
+Run:
+- git status
+- curl -s http://localhost:5000/api/health
+- node scripts/prevent-duplicates.mjs (if exists)
+Record results in:
+docs/NARRATIVE_BASELINE.md
+If health fails → STOP and fix first.
+
+========================================================
+PHASE 1 — CANONICAL NARRATIVE SPINE (SOURCE OF TRUTH)
+========================================================
+Create:
+docs/NARRATIVE_SPINE.md
+
+Must include:
+A) One-sentence purpose (plain, grounded)
+B) Three “We exist to…” bullets
+C) Three “We are not…” bullets
+D) Three “What you can expect…” bullets (non-medical)
+E) Safety + crisis link reference
+F) Tone rules: calm, kind, invitational
+G) CTA rules: “If you’d like”, “When you’re ready”, “You can try…”
+
+Verification:
+- File exists
+- No contradictions with public surface pages
+
+========================================================
+PHASE 2 — 12 SHORT-FORM POSTS (MANUAL, MULTI-PLATFORM)
+========================================================
+Create:
+content/narrative/social_posts.json
+
+Exact requirements:
+- Must be valid JSON
+- Must contain EXACTLY 12 objects
+
+Each object must have:
+- id (string)
+- theme (string)
+- hook (string)
+- instagram_caption (string)
+- tiktok_caption (string)
+- youtube_shorts_description (string)
+- x_post (string)
+- gentle_cta_url (string: must be /blog or /newsletter or /crisis)
+- safety_note (string, can be empty)
+
+Constraints:
+- No urgency language
+- No guilt
+- No grand promises
+- No manipulative virality tactics
+- Must reflect platform values
+
+Verification:
+- JSON parses
+- Exactly 12 items
+- gentle_cta_url values resolve (existing routes)
+
+========================================================
+PHASE 3 — CANVA EXPORT PACK (VISUAL SCRIPTING, NO API REQUIRED)
+========================================================
+Create:
+docs/CANVA_EXPORT_PACK.md
+
+Include EXACTLY 6 templates:
+1) Quote Card (1080x1080)
+2) Carousel (1080x1350, 5 slides)
+3) Reel Cover (1080x1920)
+4) Story (1080x1920)
+5) Newsletter Header (1200x600)
+6) Blog Featured Image (1200x630)
+
+For each template include:
+- Purpose
+- Dimensions
+- Layout notes (simple)
+- Brand palette usage (MUST reference existing brand constants)
+- 2 sample text lines pulled from social_posts.json themes
+- Export naming convention:
+  GLP_YYYYMMDD_theme_format.png
+
+Verification:
+- Doc exists
+- Does not invent new brand palette values
+
+========================================================
+PHASE 4 — ADMIN NARRATIVE LIBRARY (NO AUTO-POSTING)
+========================================================
+If an admin social studio exists:
+- Add an admin-only page or tab:
+  /admin/narrative
+That:
+- Lists the 12 posts
+- Allows selecting one and copying it
+- Allows marking status: draft / review / approved / posted (manual)
+- Stores status safely (DB if available, else internal storage pattern)
+- Includes a clear warning:
+  “Manual posting only. No automated publishing exists.”
+
+If admin studio does not exist:
+- Create minimal admin-only route/page that reads social_posts.json and displays it.
+
+Verification:
+- Page is admin-protected
+- Loads with no console errors
+- Status changes persist
+
+========================================================
+PHASE 5 — BLOG + NEWSLETTER TRUST LOOP (NO POPUPS)
+========================================================
+Ensure:
+- Blog contains a gentle newsletter CTA section (in footer of blog pages OR blog index)
+- Newsletter page links to at least one canonical blog post
+- At least 4 of the 12 social posts point to /blog
+- At least 4 point to /newsletter
+- Any safety-related post points to /crisis
+
+No popups.
+No forced modals.
+No manipulative banners.
+
+Verification:
+- Click paths resolve (no 404)
+- No console errors triggered
+
+========================================================
+PHASE 6 — COMPLETION GUARANTEE + NO-DUPE CHECK
+========================================================
+Run:
+- git status
+- curl -s http://localhost:5000/api/health
+- node scripts/prevent-duplicates.mjs (if exists)
+- Validate JSON file exists and parses
+- Confirm /blog, one blog post, /newsletter routes load
+- Confirm admin narrative page loads (if added)
+- Confirm: no automation introduced
+
+Write final report:
+docs/NARRATIVE_AMPLIFICATION_COMPLETE.md
+
+END WITH:
+STATUS: PASS/FAIL
+NEXT SINGLE RECOMMENDED STEP (choose one)
+
+
+⸻
+
+✅ What you should do right now
+	1.	Paste that prompt into Replit AI
+	2.	Let it finish all phases
+	3.	It must output PASS/FAIL for each phase
+
+⸻
+
+🔥 What comes immediately after Narrative Amplification (single next step)
+
+Once this is PASS, your next step is:
+
+Ethical Amplification
+
+Pick ONE channel (Instagram or TikTok or YouTube Shorts) and post 2x/week using the Narrative Library.
+
+No blasting. No pressure. Just signal → resonance → refine.
+
+If you want to keep it most aligned with your brand’s visual strength, the best default is:
+Instagram first (because Canva assets + calm carousels perform insanely well for trust-building).
+
+Whenever you’re ready, say:
+“Narrative Amplification PASS — proceed to Ethical Amplification (Instagram).”

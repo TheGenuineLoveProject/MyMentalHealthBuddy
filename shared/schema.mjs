@@ -612,6 +612,15 @@ export const userSettings = pgTable("user_settings", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+/* ================= SOFT LAUNCH FEEDBACK ================= */
+export const softLaunchFeedback = pgTable("soft_launch_feedback", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  category: varchar("category", { length: 50 }).notNull(),
+  message: text("message").notNull(),
+  contactEmail: varchar("contact_email", { length: 255 }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 /* ================= SESSIONS (Passport/Replit Auth) ================= */
 export const sessions = pgTable(
   "sessions",

@@ -85,6 +85,8 @@ await mountIfExists("/api/mirror", "./routes/mirror.mjs");
 await mountIfExists("/api/ai", "./routes/ai.mjs");
 await mountIfExists("/api/gamification", "./routes/gamification.mjs");
 await mountIfExists("/api/health", "./routes/health.mjs");
+await mountIfExists("/api/admin/soft-launch-metrics", "./routes/soft-launch-metrics.mjs");
+await mountIfExists("/api/feedback", "./routes/feedback.mjs");
 await mountIfExists("/api/gratitude", "./routes/gratitude.mjs");
 await mountIfExists("/api/favorites", "./routes/favorites.mjs");
 

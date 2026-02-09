@@ -1,40 +1,62 @@
 import { useState } from "react";
-import { MessageSquare, X, Send, ThumbsUp, ThumbsDown, Loader2 } from "lucide-react";
+import { MessageSquare, X, Send, Loader2, Bug, Lightbulb, HelpCircle, Heart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/hooks/use-toast";
 
+const CATEGORIES = [
+  { id: "bug", label: "Bug", icon: Bug, color: "text-red-500" },
+  { id: "idea", label: "Idea", icon: Lightbulb, color: "text-amber-500" },
+  { id: "confusion", label: "Confusion", icon: HelpCircle, color: "text-blue-500" },
+  { id: "praise", label: "Praise", icon: Heart, color: "text-green-500" },
+];
+
 export default function FeedbackWidget() {
   const [isOpen, setIsOpen] = useState(false);
-  const [step, setStep] = useState("initial");
-  const [rating, setRating] = useState(null);
-  const [feedback, setFeedback] = useState("");
+  const [step, setStep] = useState("category");
+  const [category, setCategory] = useState(null);
+  const [message, setMessage] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = async () => {
-    if (!feedback.trim()) return;
-    
-    setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Thank you!",
-      description: "Your feedback helps us improve.",
-    });
-    
-    setIsSubmitting(false);
-    setStep("done");
-    setTimeout(() => {
-      setIsOpen(false);
-      setStep("initial");
-      setRating(null);
-      setFeedback("");
-    }, 2000);
+  const resetForm = () => {
+    setStep("category");
+    setCategory(null);
+    setMessage("");
+    setContactEmail("");
   };
 
-  const handleRating = (value) => {
-    setRating(value);
-    setStep("feedback");
+  const handleSubmit = async () => {
+    if (!message.trim() || !category) return;
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category,
+          message: message.trim(),
+          contactEmail: contactEmail.trim() || undefined,
+        }),
+      });
+
+      if (res.ok) {
+        toast({ title: "Thank you!", description: "Your feedback has been saved." });
+        setStep("done");
+        setTimeout(() => {
+          setIsOpen(false);
+          resetForm();
+        }, 2000);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        toast({ title: "Couldn't save", description: data.message || "Please try again.", variant: "destructive" });
+      }
+    } catch {
+      toast({ title: "Connection issue", description: "Please try again in a moment.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) {
@@ -51,7 +73,7 @@ export default function FeedbackWidget() {
   }
 
   return (
-    <div 
+    <div
       className="fixed bottom-20 left-6 z-50 w-80 bg-background border rounded-xl shadow-xl overflow-hidden"
       role="dialog"
       aria-label="Feedback form"
@@ -61,7 +83,7 @@ export default function FeedbackWidget() {
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => setIsOpen(false)}
+          onClick={() => { setIsOpen(false); resetForm(); }}
           className="min-h-[44px] min-w-[44px] p-2 rounded-lg"
           data-testid="button-close-feedback"
         >
@@ -70,54 +92,61 @@ export default function FeedbackWidget() {
       </div>
 
       <div className="p-4">
-        {step === "initial" && (
-          <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-4">
-              How's your experience so far?
+        {step === "category" && (
+          <div>
+            <p className="text-sm text-muted-foreground mb-3">
+              What kind of feedback?
             </p>
-            <div className="flex justify-center gap-4">
-              <Button
-                variant="outline"
-                onClick={() => handleRating("positive")}
-                className="min-h-[60px] min-w-[60px] p-4 rounded-xl flex-col gap-1"
-                data-testid="button-positive"
-              >
-                <ThumbsUp className="w-6 h-6 text-green-600" />
-                <span className="text-xs">Good</span>
-              </Button>
-              <Button
-                variant="outline"
-                onClick={() => handleRating("negative")}
-                className="min-h-[60px] min-w-[60px] p-4 rounded-xl flex-col gap-1"
-                data-testid="button-negative"
-              >
-                <ThumbsDown className="w-6 h-6 text-amber-600" />
-                <span className="text-xs">Could improve</span>
-              </Button>
+            <div className="grid grid-cols-2 gap-2">
+              {CATEGORIES.map((cat) => {
+                const Icon = cat.icon;
+                return (
+                  <Button
+                    key={cat.id}
+                    variant="outline"
+                    onClick={() => { setCategory(cat.id); setStep("message"); }}
+                    className="min-h-[56px] p-3 rounded-xl flex-col gap-1"
+                    data-testid={`button-category-${cat.id}`}
+                  >
+                    <Icon className={`w-5 h-5 ${cat.color}`} />
+                    <span className="text-xs">{cat.label}</span>
+                  </Button>
+                );
+              })}
             </div>
           </div>
         )}
 
-        {step === "feedback" && (
+        {step === "message" && (
           <div>
             <p className="text-sm text-muted-foreground mb-3">
-              {rating === "positive" 
-                ? "Great! What do you love?" 
-                : "What could be better?"}
+              {category === "praise" ? "What do you appreciate?" : 
+               category === "bug" ? "What went wrong?" :
+               category === "idea" ? "What would you like to see?" :
+               "What was confusing?"}
             </p>
             <textarea
-              value={feedback}
-              onChange={(e) => setFeedback(e.target.value)}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
               placeholder="Your thoughts help us improve..."
               className="w-full p-3 border rounded-lg resize-none text-sm focus:outline-none focus:ring-2 focus:ring-primary dark:bg-background"
               rows={3}
+              maxLength={2000}
               data-testid="textarea-feedback"
             />
-            <div className="flex justify-end gap-2 mt-3">
+            <input
+              type="email"
+              value={contactEmail}
+              onChange={(e) => setContactEmail(e.target.value)}
+              placeholder="Email (optional — only if you want a reply)"
+              className="w-full mt-2 p-2.5 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary dark:bg-background"
+              data-testid="input-feedback-email"
+            />
+            <div className="flex justify-between mt-3">
               <Button
                 variant="ghost"
                 size="sm"
-                onClick={() => setStep("initial")}
+                onClick={() => setStep("category")}
                 className="min-h-[44px] px-4 rounded-lg"
               >
                 Back
@@ -125,7 +154,7 @@ export default function FeedbackWidget() {
               <Button
                 size="sm"
                 onClick={handleSubmit}
-                disabled={!feedback.trim() || isSubmitting}
+                disabled={!message.trim() || isSubmitting}
                 className="min-h-[44px] px-4 rounded-lg"
                 data-testid="button-submit-feedback"
               >
@@ -145,10 +174,10 @@ export default function FeedbackWidget() {
         {step === "done" && (
           <div className="text-center py-4">
             <div className="w-12 h-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-3">
-              <ThumbsUp className="w-6 h-6 text-green-600" />
+              <Heart className="w-6 h-6 text-green-600" />
             </div>
             <p className="font-medium">Thank you!</p>
-            <p className="text-sm text-muted-foreground">Your feedback helps us grow.</p>
+            <p className="text-sm text-muted-foreground">Your feedback is saved and helps us improve.</p>
           </div>
         )}
       </div>

@@ -1,0 +1,196 @@
+You are Replit AI acting as a coordinated elite execution team:
+- MIT PhD Software Engineering (architecture, QA, reliability)
+- Publishing Systems Engineer (blog/newsletter workflows)
+- Narrative Architect (coherent story spine)
+- Ethical Growth Engineer (no manipulation, trust-first)
+- UX QA & Link Integrity Auditor (buttons/routes)
+- Security/Privacy Reviewer (no invasive tracking)
+
+PROJECT: www.TheGenuineLoveProject.com
+
+NON-NEGOTIABLE VALUES (MUST BE ENFORCED):
+We are ethical, loving, pure, kind, all-loving.
+Therefore:
+- No urgency, fear, guilt, shame, coercion, hype, or misleading promises.
+- No medical/therapy claims. No “guaranteed healing” language.
+- Manual-only distribution: no auto-email, no auto-social posting, no schedulers/daemons.
+- Consent-first language and clear boundaries.
+- No invasive tracking; no fingerprinting; no storing IPs for analytics.
+
+ABSOLUTE ENGINEERING RULES:
+1) Do NOT refactor/rename/move/delete existing systems.
+2) Changes must be ADDITIVE and REVERSIBLE.
+3) Do not create parallel blog/newsletter systems. Use ONE canonical path.
+4) Every phase must end with VERIFICATION and PASS/FAIL.
+5) If any phase fails, STOP and output exact patches, then re-run verification.
+
+OUTPUT FORMAT REQUIRED:
+For each phase:
+- STATUS: PASS/FAIL
+- FILES CHANGED (exact paths)
+- COMMANDS RUN + RESULTS
+- WHAT WAS FIXED
+End with FINAL SUMMARY + NEXT SINGLE STEP.
+
+========================================================
+PHASE 0 — BASELINE SNAPSHOT (NO CODE MODS)
+========================================================
+Run:
+- git status
+- node -v
+- npm -v
+- curl -s http://localhost:5000/api/health
+- npm run build
+- node scripts/prevent-duplicates.mjs (if present; if not, note "not found")
+
+Write results to:
+docs/NARRATIVE_PHASE_BASELINE.md
+
+If build or health fails: STOP and fix first.
+
+========================================================
+PHASE 1 — CANONICAL PUBLISHING SPINE (BLOG + NEWSLETTER)
+========================================================
+Locate existing blog + newsletter routes/pages and confirm the canonical source of truth.
+Then ensure these canonical public surfaces exist and link correctly:
+
+A) /blog (index)
+B) /blog/:slug (post)
+C) /newsletter (signup page)
+D) /contact (support)
+E) /crisis (safety)
+
+Create/ensure 5 canonical blog posts exist (calm + grounded):
+1) Welcome to The Genuine Love Project
+2) How to Use This Platform Gently
+3) What This Is / What This Is Not
+4) A Gentle Daily Practice (5 minutes)
+5) Privacy + Safety Commitments
+
+Rules for posts:
+- Trauma-informed, non-clinical, no big claims
+- Include crisis resource link where relevant
+- Include gentle CTA to newsletter (“If you’d like…”)
+
+Verification:
+- Load /blog and each post route (no 404)
+- Confirm no console errors
+- Confirm links resolve
+
+========================================================
+PHASE 2 — NARRATIVE SPINE (SINGLE SOURCE OF TRUTH)
+========================================================
+Create:
+docs/NARRATIVE_SPINE.md
+
+Must include:
+- One sentence purpose
+- 3 “We exist to…”
+- 3 “We are not…”
+- 3 “You can expect…”
+- Safety statement + crisis link
+- Tone rules + forbidden language list (urgency/guilt/etc.)
+
+Verification:
+- File exists
+- No contradictions with blog/policy pages
+
+========================================================
+PHASE 3 — 12 SOCIAL NARRATIVE POSTS (MULTI-PLATFORM, MANUAL ONLY)
+========================================================
+Create:
+content/narrative/social_posts.json
+
+Requirements:
+- Valid JSON
+- EXACTLY 12 objects
+Each object includes:
+id, theme, hook,
+instagram_caption, tiktok_caption, youtube_shorts_description, x_post,
+gentle_cta_url (must be /blog or /newsletter or /crisis),
+safety_note (string)
+
+Constraints:
+- No urgency, guilt, shame, hype, manipulation
+- No medical claims
+- Must be consistent with Narrative Spine
+
+Verification:
+- JSON parses
+- Exactly 12 items
+- gentle_cta_url routes exist
+
+========================================================
+PHASE 4 — ADMIN NARRATIVE LIBRARY (NO AUTO-POSTING)
+========================================================
+If an admin studio exists, add admin-only page:
+- /admin/narrative
+
+It must:
+- list all 12 posts
+- allow copy buttons
+- allow status tags: draft / review / approved / posted (manual)
+- store status persistently (DB if existing table fits, else safe minimal storage)
+- display warning: “Manual posting only. No automated publishing.”
+
+If no admin studio exists, create minimal admin-only page that reads the JSON and displays it.
+
+Verification:
+- Admin protected
+- Loads without console errors
+- Status persists after refresh
+
+========================================================
+PHASE 5 — LINK + BUTTON INTEGRITY SWEEP (PUBLIC SURFACES FIRST)
+========================================================
+Scan public pages for:
+- Buttons with no onClick handler
+- <a href> to missing routes
+- Footer/header/social links broken
+- “Subscribe/Upgrade” buttons that go nowhere
+- Any page that leads to dead end without gentle fallback
+
+Fix by:
+- wiring buttons to correct internal routes
+- adding safe fallback routes where needed (gentle message + links back)
+- adding “Coming soon” pages only if unavoidable, but always with navigation back
+
+Verification:
+- Click header + footer links (manual check)
+- Confirm no 404s
+- Confirm no console errors
+
+========================================================
+PHASE 6 — NEWSLETTER HARDENING (DRAFT-FIRST, CONSENT-FIRST)
+========================================================
+Ensure newsletter signup:
+- validates email
+- stores subscriber record safely
+- does NOT auto-send campaigns
+
+Create a “Welcome Email” as a DRAFT TEMPLATE only:
+- stored in existing draft structure
+- optional test-send only to ADMIN when manually triggered
+
+Verification:
+- Signup works and stores record
+- No emails auto-send
+- If test-send exists: only admin, only manual
+
+========================================================
+PHASE 7 — COMPLETION GUARANTEE (NO DUPES, NO REGRESSIONS)
+========================================================
+Run and record:
+- git status
+- npm run build
+- curl -s http://localhost:5000/api/health
+- node scripts/prevent-duplicates.mjs (if present)
+- confirm /blog /newsletter /crisis /contact load
+- confirm admin narrative page loads
+
+Write completion report:
+docs/NARRATIVE_AMPLIFICATION_HARDENING_COMPLETE.md
+
+END WITH:
+STATUS: PASS/FAIL
+NEXT SINGLE RECOMMENDED STEP (choose one)

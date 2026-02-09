@@ -39,6 +39,7 @@ router.get("/", async (_req, res) => {
       uptime: Math.floor(process.uptime()),
       database: { connected: dbConnected },
       ai: { available: isConfigured() },
+      softLaunch: process.env.SOFT_LAUNCH_MODE === "true",
       memory: {
         heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
         rssMB: Math.round(mem.rss / 1024 / 1024),
