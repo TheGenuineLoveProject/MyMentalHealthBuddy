@@ -1,0 +1,100 @@
+NARRATIVE AMPLIFICATION EXECUTION — HARD-GATED
+
+You are Replit AI acting as an elite MIT PhD engineering + publishing + QA team.
+
+PROJECT: www.TheGenuineLoveProject.com
+
+VALUES (NON-NEGOTIABLE):
+Ethical, loving, pure, kind, all-loving.
+Therefore: NO urgency, NO guilt/shame, NO coercion, NO hype, NO medical claims, NO auto-posting, NO auto-email campaigns, NO background schedulers/daemons, NO invasive tracking.
+
+ABSOLUTE RULES:
+1) Do NOT refactor, rename, move, or delete existing files/systems.
+2) Additive and reversible changes only.
+3) Avoid duplicates: scan before adding anything.
+4) Every phase must output PASS/FAIL and verification results.
+5) If any phase fails, STOP and output the exact patch list (file paths + minimal edits), then rerun verification.
+
+PHASE 0 — BASELINE (NO CODE CHANGES)
+Run:
+- git status
+- npm run build
+- curl -s http://localhost:5000/api/health
+- node scripts/prevent-duplicates.mjs (if exists)
+- node scripts/soft-launch-smoke.mjs (if exists)
+Save results to: docs/NARRATIVE_BASELINE.md
+If build/health fails → STOP and fix first.
+
+PHASE 1 — CREATE SINGLE SOURCE OF TRUTH
+Create: docs/NARRATIVE_SPINE.md
+Must include:
+- purpose (1 sentence)
+- what we are (3 bullets)
+- what we are not (3 bullets)
+- what users can expect (3 bullets, non-medical)
+- boundaries (who it’s for / not for)
+- tone rules (consent-first, calm)
+- forbidden language list (urgency/guilt/fear/shame/guarantees)
+- safety note + /crisis reference
+Verify file exists.
+
+PHASE 2 — BLOG FOUNDATION (ROBUST + LINKED)
+Use the existing canonical blog system (do not create another).
+Ensure these routes work:
+- /blog
+- /blog/:slug (or current equivalent)
+Create/ensure 5 canonical posts exist inside the canonical system:
+1) Welcome
+2) What this is / is not
+3) How to use gently
+4) 5-minute daily practice
+5) Safety, consent, boundaries
+Add gentle CTA to /newsletter (no popups).
+Verify: no 404, no console errors, links resolve.
+
+PHASE 3 — NEWSLETTER (CONSENT-FIRST, DRAFT-FIRST)
+Use the existing newsletter system (do not create another).
+Ensure signup validates email and stores subscriber.
+NO auto campaigns.
+Create draft templates only:
+content/newsletter/drafts.json
+(Welcome draft, Weekly reflection draft, Community note draft)
+Verify: signup stores record, no emails auto-send, drafts exist.
+
+PHASE 4 — SOCIAL NARRATIVE LIBRARY (12 POSTS, MANUAL)
+Create: content/narrative/social_posts.json
+Rules:
+- Valid JSON
+- EXACTLY 12 objects
+- Each has: id, theme, hook, instagram_caption, tiktok_caption, youtube_shorts_description, x_post, gentle_cta_url (/blog or /newsletter or /crisis), safety_note
+Constraints: no urgency/guilt/hype, no medical claims.
+Verify JSON parses and has exactly 12 entries.
+
+PHASE 5 — ADMIN NARRATIVE PAGE (NO AUTO-POSTING)
+Add admin-only page /admin/narrative (or existing admin studio section) that:
+- lists the 12 posts
+- has copy buttons
+- allows status tags: draft/review/approved/posted (manual)
+- shows warning: “Manual publishing only. No automated posting.”
+Verify admin protection + status persistence.
+
+PHASE 6 — BROKEN LINKS/BUTTONS SWEEP (PUBLIC SURFACE)
+Scan public pages for:
+- buttons with no destination
+- links to missing routes
+Fix by wiring to correct routes or adding gentle fallback pages (no redesign).
+Verify: home/about/blog/newsletter/crisis/contact have no dead CTAs and no 404s.
+
+PHASE 7 — FINAL GUARANTEE
+Run:
+- git status
+- npm run build
+- curl -s http://localhost:5000/api/health
+- node scripts/prevent-duplicates.mjs (if exists)
+- node scripts/soft-launch-smoke.mjs (if exists)
+Write: docs/NARRATIVE_AMPLIFICATION_COMPLETE.md
+Include: what changed, how to use narrative library, confirmation no automation introduced.
+
+END WITH:
+STATUS: PASS/FAIL
+NEXT SINGLE RECOMMENDED STEP
