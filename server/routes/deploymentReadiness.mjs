@@ -113,4 +113,10 @@ router.get("/check", requireAdminToken, async (_req, res) => {
   res.json(results);
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "deploymentReadiness", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

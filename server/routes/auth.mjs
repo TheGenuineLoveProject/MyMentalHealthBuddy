@@ -100,4 +100,10 @@ router.post("/login", (req, res) => {
   }
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "auth", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

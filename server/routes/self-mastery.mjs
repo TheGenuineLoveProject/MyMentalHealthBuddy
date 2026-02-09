@@ -100,4 +100,10 @@ router.get("/daily-focus", (_req, res) => {
   });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "self-mastery", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

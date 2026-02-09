@@ -403,4 +403,10 @@ router.get("/all", (_req, res) => {
   });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "practices", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

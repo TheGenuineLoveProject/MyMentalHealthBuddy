@@ -241,4 +241,10 @@ router.post("/drafts", (req, res) => {
   res.json({ ok: true, draft });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "content-generator", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

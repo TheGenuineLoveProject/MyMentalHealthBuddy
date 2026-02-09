@@ -455,4 +455,10 @@ router.post("/practice-session", (req, res) => {
   });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "cognitive-mastery", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

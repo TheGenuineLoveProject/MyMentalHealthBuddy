@@ -371,7 +371,7 @@ function DailyToolsPanel() {
     {
       title: "Admin & System Tools",
       tools: [
-        { id: "admin-core", label: "Admin Core", endpoint: "/api/admin/verify-session", icon: Shield, desc: "Admin authentication" },
+        { id: "admin-core", label: "Admin Core", endpoint: "/api/admin", icon: Shield, desc: "Admin authentication" },
         { id: "admin-security", label: "Security Engine", endpoint: "/api/admin/security", icon: ShieldCheck, desc: "Security monitoring" },
         { id: "admin-audit", label: "Audit Logs", endpoint: "/api/admin/audit-logs", icon: ClipboardList, desc: "System audit trail" },
         { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
@@ -407,7 +407,7 @@ function DailyToolsPanel() {
         { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
         { id: "mfa-auth", label: "MFA Security", endpoint: "/api/mfa", icon: Fingerprint, desc: "Multi-factor auth" },
         { id: "canva-oauth", label: "Canva OAuth", endpoint: "/api/canva-oauth", icon: FolderKanban, desc: "Canva integration" },
-        { id: "rss-feed", label: "RSS Feed", endpoint: "/api/rss", icon: Rss, desc: "Blog RSS feed" },
+        { id: "rss-feed", label: "RSS Feed", endpoint: "/rss.xml", icon: Rss, desc: "Blog RSS feed" },
       ]
     },
   ];

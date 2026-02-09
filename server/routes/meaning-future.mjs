@@ -146,4 +146,10 @@ router.post("/brave-action/plan", (req, res) => {
   res.json({ ok: true, plan });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "meaning-future", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

@@ -42,4 +42,10 @@ router.post("/disable", (req, res) => {
   res.status(401).json({ error: "Authentication required" });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "mfa", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

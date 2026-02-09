@@ -229,4 +229,10 @@ router.get("/all", (req, res) => {
   });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "wisdom-traditions", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

@@ -94,4 +94,10 @@ router.get("/daily-eq", (_req, res) => {
   });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "emotional-mastery", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

@@ -327,4 +327,10 @@ router.post('/drafts/:id/publish', requireAdmin, async (req, res) => {
   }
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "social-posting", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

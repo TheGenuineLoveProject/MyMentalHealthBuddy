@@ -233,4 +233,10 @@ router.post(
   }
 );
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "webhook", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

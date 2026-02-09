@@ -240,4 +240,10 @@ router.post("/pricing-view", (req, res) => {
   res.status(204).end();
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "billing", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

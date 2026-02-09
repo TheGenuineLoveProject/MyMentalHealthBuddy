@@ -56,4 +56,10 @@ router.get("/regenerative", (_req, res) => {
   });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "socio-ecology", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

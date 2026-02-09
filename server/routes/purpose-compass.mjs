@@ -88,4 +88,10 @@ router.get("/daily-purpose", (_req, res) => {
   });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "purpose-compass", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;

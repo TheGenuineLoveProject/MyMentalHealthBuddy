@@ -172,4 +172,10 @@ router.get("/repair-guide", (req, res) => {
   res.json({ ok: true, steps: REPAIR_STEPS });
 });
 
+
+// Health check endpoint for admin daily tools monitoring
+router.get("/", (req, res) => {
+  res.json({ ok: true, module: "healing-tools", status: "operational", timestamp: new Date().toISOString() });
+});
+
 export default router;
