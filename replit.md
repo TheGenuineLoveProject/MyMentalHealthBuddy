@@ -103,3 +103,15 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 - **Replit Auth**: User authentication.
 - **Resend**: Transactional email service.
 - **Perplexity**: Factual AI.
+
+## Recent Changes
+
+### v2.5 Signal-Driven Publishing Refinement (Feb 2026)
+- **Editorial Pipeline**: Blog posts flow through draft → review → approved → published with admin endpoints at `/api/blog/admin/:id/submit`, `/approve`, `/publish`. Content safety validation runs before publish.
+- **Content Safety Validator**: `shared/publishingRules.mjs` blocks medical claims, urgency manipulation, shame/pathologizing language. Warns if sensitive topics lack crisis resource links.
+- **Publishing Recommendations**: `/api/admin/publishing/recommendations` analyzes 7-day analytics (top pages, CTAs, newsletter metrics) and suggests blog topics from TOPIC_MAP based on visitor behavior.
+- **Newsletter Analytics**: Subscribe/unsubscribe events logged to `analytics_events` with `privacy_level: "minimal"`. New `newsletter_subscribers` table tracks subscriber status independently.
+- **Publishing Events**: `publishing_events` table logs editorial pipeline actions (draft created, submitted, approved, published).
+- **Frontend Analytics**: BlogIndex, BlogPost, and NewsletterSignup components track page views and signup events via `useAnalytics.mjs`.
+- **Admin UI**: AdminPublishing page extended with "Editorial Pipeline" tab (status board + submit/approve/publish actions) and "Recommendations" tab (analytics-driven insights, suggested topics, newsletter metrics).
+- All changes follow SAFE EVOLUTION mode: additive only, manual-first, no automation, privacy-first analytics (no PII, no IP tracking).
