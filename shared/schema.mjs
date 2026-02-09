@@ -631,6 +631,23 @@ export const softLaunchFeedback = pgTable("soft_launch_feedback", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+/* ================= ANALYTICS EVENTS ================= */
+export const analyticsEvents = pgTable("analytics_events", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  userId: uuid("user_id"),
+  sessionId: varchar("session_id", { length: 64 }),
+  eventName: varchar("event_name", { length: 100 }).notNull(),
+  eventCategory: varchar("event_category", { length: 50 }).notNull(),
+  path: varchar("path", { length: 500 }),
+  meta: jsonb("meta"),
+  privacyLevel: varchar("privacy_level", { length: 20 }).default("minimal").notNull(),
+}, (table) => [
+  index("idx_analytics_events_created").on(table.createdAt),
+  index("idx_analytics_events_name").on(table.eventName),
+  index("idx_analytics_events_category").on(table.eventCategory),
+]);
+
 /* ================= SESSIONS (Passport/Replit Auth) ================= */
 export const sessions = pgTable(
   "sessions",

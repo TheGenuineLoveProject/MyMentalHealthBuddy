@@ -19,6 +19,10 @@ import AdminGuard from "./components/AdminGuard.jsx";
 import { routeKeyFromRoute } from "./utils/routeKey.js";
 import ConsentBanner from "./components/ConsentBanner.jsx";
 import FeedbackWidget from "./components/FeedbackWidget.jsx";
+import { FeatureFlagProvider } from "./contexts/FeatureFlagContext.jsx";
+import ComingSoon from "./pages/ComingSoon.jsx";
+import AnalyticsDashboard from "./pages/admin/AnalyticsDashboard.jsx";
+import { usePageViewTracker } from "./hooks/useAnalytics.mjs";
 import AICompanion from "./components/AICompanion.jsx";
 import AccessibilityToolbar from "./components/AccessibilityToolbar.jsx";
 import './index.css'; // Your Tailwind import
@@ -308,16 +312,23 @@ function WellnessRoute({ children }) {
   );
 }
 
+function PageViewTracker() {
+  usePageViewTracker();
+  return null;
+}
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <FeatureFlagProvider>
         <GamificationProvider>
         <EmotionProvider>
         <EmotionBackgroundProvider>
         <ResponsiveWrapper>
         <ReadingLevelProvider>
           <ErrorBoundary>
+            <PageViewTracker />
             <SkipToContent />
             <main id="main-content">
             <Suspense fallback={<LoadingFallback />}>
@@ -337,6 +348,7 @@ export default function App() {
               <Route path="/testimonials">{() => <ConfigRoute route="/testimonials" />}</Route>
               <Route path="/canva-landing" component={CanvaLanding} />
               <Route path="/pricing" component={PricingReal} />
+              <Route path="/coming-soon">{() => <ComingSoon />}</Route>
               <Route path="/challenge" component={Challenge} />
               <Route path="/challenge/day/:dayNum" component={ChallengeDay} />
 
@@ -1731,6 +1743,7 @@ export default function App() {
               <Route path="/admin/feedback">{() => <ProtectedRoute><AdminGuard><FeedbackAggregator /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/narrative">{() => <ProtectedRoute><AdminGuard><NarrativeDrafts /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/engagement">{() => <ProtectedRoute><AdminGuard><EngagementDashboard /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/analytics">{() => <ProtectedRoute><AdminGuard><AnalyticsDashboard /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/profile">{() => <ProtectedRoute><UserProfile /></ProtectedRoute>}</Route>
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
               <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
@@ -1774,6 +1787,7 @@ export default function App() {
         </EmotionBackgroundProvider>
         </EmotionProvider>
         </GamificationProvider>
+        </FeatureFlagProvider>
       </AuthProvider>
     </QueryClientProvider>
   );
