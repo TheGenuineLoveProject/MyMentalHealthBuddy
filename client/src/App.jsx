@@ -152,6 +152,7 @@ const DashboardOverview = lazy(() => import("./pages/dashboard/Overview.jsx"));
 const AdminCommandCenter = lazy(() => import("./pages/admin/CommandCenter.jsx"));
 const AdminHealthDashboard = lazy(() => import("./pages/admin/HealthDashboard.jsx"));
 const SocialDashboard = lazy(() => import("./pages/admin/SocialDashboard.jsx"));
+const NarrativeOpsConsole = lazy(() => import("./pages/admin/NarrativeOpsConsole.jsx"));
 const SocialGenerator = lazy(() => import("./pages/admin/SocialGenerator.jsx"));
 const SocialLibrary = lazy(() => import("./pages/admin/SocialLibrary.jsx"));
 const SocialCalendar = lazy(() => import("./pages/admin/SocialCalendar.jsx"));
@@ -1629,6 +1630,9 @@ export default function App() {
               </Route>
               <Route path="/admin/health">
                 <AdminGuard><AdminHealthDashboard /></AdminGuard>
+              </Route>
+              <Route path="/admin/social/ops">
+                <AdminGuard><NarrativeOpsConsole /></AdminGuard>
               </Route>
               <Route path="/admin/social">
                 <AdminGuard><SocialDashboard /></AdminGuard>

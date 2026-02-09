@@ -98,6 +98,7 @@ import newsletterRouter from "./routes/newsletter.mjs";
 import productsRouter from "./routes/products.mjs";
 import socialPostingRouter from "./routes/social-posting.mjs";
 import adminSocialStudioRouter from "./routes/admin-social-studio.mjs";
+import socialEnterpriseRouter from "./routes/social-enterprise.mjs";
 import wellnessToolsRouter from "./routes/wellness-tools.mjs";
 import userRouter from "./routes/user.mjs";
 import perplexityRouter from "./routes/perplexity.mjs";
@@ -296,6 +297,7 @@ async function startServer() {
   app.use("/api/newsletter", newsletterRouter);
   app.use("/api/products", productsRouter);
   app.use("/api/social-posting", socialPostingRouter);
+  app.use("/api/admin/social/enterprise", socialEnterpriseRouter);
   app.use("/api/admin/social", adminSocialStudioRouter);
   app.use("/api/wellness-tools", requireAdult, wellnessToolsRouter);
   app.use("/api/user", userRouter);

@@ -515,6 +515,9 @@ export default function SocialDashboard() {
             <p className="text-slate-600 dark:text-slate-400">
               Create, approve, and schedule wellness content
             </p>
+            <Link href="/admin/social/ops" className="inline-flex items-center gap-1 text-xs mt-1 px-2 py-1 rounded bg-slate-800 dark:bg-slate-200 text-white dark:text-gray-900 hover:bg-slate-700 dark:hover:bg-slate-300 transition-colors" data-testid="link-narrative-ops">
+              Open Narrative Ops Console (Enterprise v3.0)
+            </Link>
           </div>
         </div>
         

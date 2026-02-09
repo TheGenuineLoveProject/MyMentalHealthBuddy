@@ -425,16 +425,35 @@ export const socialPosts = pgTable("social_posts", {
   id: uuid("id").defaultRandom().primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   content: text("content").notNull(),
-  platform: varchar("platform", { length: 50 }).notNull(), // instagram, twitter, linkedin, tiktok, pinterest
+  platform: varchar("platform", { length: 50 }).notNull(),
   mediaUrl: text("media_url"),
   scheduledAt: timestamp("scheduled_at"),
   publishedAt: timestamp("published_at"),
-  status: varchar("status", { length: 20 }).default("idea").notNull(), // idea, drafted, approved, archived, published
+  status: varchar("status", { length: 20 }).default("draft").notNull(),
   hashtags: text("hashtags"),
   authorId: uuid("author_id").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+  theme: varchar("theme", { length: 100 }),
+  originType: varchar("origin_type", { length: 30 }).default("standalone"),
+  originId: uuid("origin_id"),
+  captions: jsonb("captions"),
+  gentleCtaUrl: text("gentle_cta_url"),
+  safetyNote: text("safety_note"),
+  crisisLinkRequired: integer("crisis_link_required").default(0),
+  postedPlatforms: jsonb("posted_platforms"),
+  reviewedAt: timestamp("reviewed_at"),
+  approvedAt: timestamp("approved_at"),
+  postedAt: timestamp("posted_at"),
+  createdBy: varchar("created_by", { length: 255 }),
+  reviewedBy: varchar("reviewed_by", { length: 255 }),
+  approvedBy: varchar("approved_by", { length: 255 }),
+  audience: varchar("audience", { length: 100 }),
+}, (table) => [
+  index("idx_social_posts_status").on(table.status),
+  index("idx_social_posts_origin").on(table.originType),
+  index("idx_social_posts_theme").on(table.theme),
+]);
 
 /* ================= DIGITAL PRODUCTS (E-books, Tools, Courses) ================= */
 export const digitalProducts = pgTable("digital_products", {
