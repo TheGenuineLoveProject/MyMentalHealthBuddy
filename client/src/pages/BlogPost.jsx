@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRoute, Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { Calendar, Clock, User, ArrowLeft, MessageCircle, Send, Reply } from "lucide-react";
+import { Calendar, Clock, User, ArrowLeft, MessageCircle, Send, Reply, BookOpen } from "lucide-react";
 import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
@@ -187,10 +187,17 @@ export default function BlogPost() {
       <div className="min-h-screen bg-[var(--glp-paper)]">
         <TglpNavbar />
         <div className="max-w-3xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-2xl font-semibold text-[var(--glp-sage-deep)]">Article not found</h2>
-          <p className="mt-2 text-[var(--glp-ink)]/70">The article you're looking for doesn't exist.</p>
+          <BookOpen className="w-16 h-16 mx-auto text-[var(--glp-sage)]/40 mb-4" />
+          <h2 className="text-2xl font-semibold text-[var(--glp-sage-deep)]" data-testid="text-post-not-found">
+            This article isn't available
+          </h2>
+          <p className="mt-3 text-[var(--glp-ink)]/70 max-w-md mx-auto">
+            The article you're looking for may have been moved or is no longer available.
+            You're welcome to explore our other posts.
+          </p>
           <Link href="/blog">
             <button className="mt-6 px-6 py-3 rounded-xl bg-[var(--glp-sage-deep)] text-white text-sm font-medium hover:bg-[var(--glp-sage)] transition-colors" data-testid="button-back-to-blog">
+              <ArrowLeft className="w-4 h-4 inline mr-2" />
               Back to Blog
             </button>
           </Link>
@@ -266,7 +273,7 @@ export default function BlogPost() {
               </span>
             </div>
 
-            {post.tags && (
+            {post.tags && typeof post.tags === "string" && (
               <div className="mt-4 flex flex-wrap gap-2">
                 {post.tags.split(",").map((tag, i) => (
                   <span

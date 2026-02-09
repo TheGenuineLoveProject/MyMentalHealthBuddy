@@ -7,6 +7,8 @@ import SEO from "../components/SEO";
 import NewsletterSignup from "../components/NewsletterSignup";
 
 function BlogCard({ post }) {
+  if (!post || !post.slug) return null;
+
   const formattedDate = post.publishedAt
     ? new Date(post.publishedAt).toLocaleDateString("en-US", {
         year: "numeric",
@@ -20,24 +22,30 @@ function BlogCard({ post }) {
       {post.featuredImage && (
         <img
           src={post.featuredImage}
-          alt={post.title}
+          alt={post.title || "Blog post"}
           className="w-full h-48 object-cover rounded-xl mb-4"
           data-testid={`img-post-${post.id}`}
         />
       )}
       <div className="flex items-center gap-4 text-xs text-[var(--glp-ink)]/60 mb-3">
-        <span className="flex items-center gap-1">
-          <User className="w-3 h-3" />
-          {post.authorName}
-        </span>
-        <span className="flex items-center gap-1">
-          <Calendar className="w-3 h-3" />
-          {formattedDate}
-        </span>
-        <span className="flex items-center gap-1">
-          <Clock className="w-3 h-3" />
-          {post.readingTimeMinutes} min read
-        </span>
+        {post.authorName && (
+          <span className="flex items-center gap-1">
+            <User className="w-3 h-3" />
+            {post.authorName}
+          </span>
+        )}
+        {formattedDate && (
+          <span className="flex items-center gap-1">
+            <Calendar className="w-3 h-3" />
+            {formattedDate}
+          </span>
+        )}
+        {post.readingTimeMinutes && (
+          <span className="flex items-center gap-1">
+            <Clock className="w-3 h-3" />
+            {post.readingTimeMinutes} min read
+          </span>
+        )}
       </div>
       <Link href={`/blog/${post.slug}`}>
         <h2 className="text-xl font-semibold text-[var(--glp-sage-deep)] hover:text-[var(--glp-sage)] transition-colors cursor-pointer" data-testid={`link-post-title-${post.id}`}>
@@ -45,9 +53,9 @@ function BlogCard({ post }) {
         </h2>
       </Link>
       <p className="mt-2 text-sm text-[var(--glp-ink)]/80 line-clamp-3" data-testid={`text-excerpt-${post.id}`}>
-        {post.excerpt}
+        {post.excerpt || "A gentle reflection on wellness and growth."}
       </p>
-      {post.tags && (
+      {post.tags && typeof post.tags === "string" && (
         <div className="mt-3 flex flex-wrap gap-2">
           {post.tags.split(",").map((tag, i) => (
             <span
@@ -147,12 +155,25 @@ export default function BlogIndex() {
         )}
 
         {!isLoading && !error && filteredPosts.length === 0 && (
-          <div className="text-center py-12">
+          <div className="text-center py-16" data-testid="section-blog-empty">
             <BookOpen className="w-16 h-16 mx-auto text-[var(--glp-sage)]/50 mb-4" />
-            <h3 className="text-xl font-semibold text-[var(--glp-sage-deep)]">No articles yet</h3>
-            <p className="mt-2 text-[var(--glp-ink)]/70">
-              {searchQuery ? "No articles match your search." : "Check back soon for new content!"}
+            <h3 className="text-xl font-semibold text-[var(--glp-sage-deep)]">
+              {searchQuery ? "No articles match your search" : "New posts are coming soon"}
+            </h3>
+            <p className="mt-3 text-[var(--glp-ink)]/70 max-w-md mx-auto">
+              {searchQuery
+                ? "Try a different search term, or browse all articles."
+                : "You're welcome here. We're preparing thoughtful content on wellness and growth."}
             </p>
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="mt-4 px-5 py-2 rounded-xl border border-[rgba(var(--glp-sage-deep-rgb), 0.25)] text-sm text-[var(--glp-sage-deep)] hover:bg-[rgba(var(--glp-sage-rgb), 0.08)] transition-colors"
+                data-testid="button-clear-search"
+              >
+                Clear search
+              </button>
+            )}
           </div>
         )}
 
