@@ -352,6 +352,10 @@ export default function SocialStudioAdmin() {
               </p>
             </div>
             <div className="flex gap-2">
+              <a href="/admin/newsletter" className="inline-flex items-center gap-2 px-3 py-2 rounded-md border border-input bg-background text-sm font-medium hover:bg-accent hover:text-accent-foreground transition-colors" data-testid="link-newsletter-admin">
+                <Bell className="w-4 h-4" />
+                Newsletter
+              </a>
               <Button variant="outline" size="sm" onClick={() => setActiveTab("settings")}>
                 <Settings className="w-4 h-4 mr-2" />
                 Settings

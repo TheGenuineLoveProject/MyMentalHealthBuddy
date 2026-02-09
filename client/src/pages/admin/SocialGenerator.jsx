@@ -690,6 +690,49 @@ export default function SocialGenerator() {
                 </li>
               </ul>
             </div>
+
+            {form.caption && (
+              <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4" data-testid="section-canva-export">
+                <h3 className="font-semibold text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                  <Save className="w-4 h-4 text-purple-500" />
+                  Canva Export Copy Blocks
+                </h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mb-3">
+                  Copy these pre-formatted text blocks into your Canva designs. Each is sized for a different platform.
+                </p>
+                <div className="space-y-3">
+                  {[
+                    { label: "Instagram Post (1080x1080)", maxChars: 125, format: (text) => text.substring(0, 125) + (text.length > 125 ? "..." : "") },
+                    { label: "Instagram Caption", maxChars: 2200, format: (text) => `${form.hook ? form.hook + "\n\n" : ""}${text}\n\n${form.cta || "If you'd like to explore more, the link is in our bio."}\n\n${form.hashtags || "#GenuineLove #SelfLoveJourney #HealingPath"}` },
+                    { label: "Reel / TikTok Caption", maxChars: 300, format: (text) => `${text.substring(0, 250)}${text.length > 250 ? "..." : ""}\n\n${form.hashtags ? form.hashtags.split(" ").slice(0, 5).join(" ") : "#GenuineLove #HealingPath"}` },
+                    { label: "YouTube Short Description", maxChars: 500, format: (text) => `${form.hook || ""}\n\n${text.substring(0, 400)}${text.length > 400 ? "..." : ""}\n\n${form.disclaimer || "This content is for educational purposes only."}\n\nLearn more: thegenuineloveproject.com` },
+                    { label: "X / Twitter Post", maxChars: 280, format: (text) => text.substring(0, 250) + (text.length > 250 ? "..." : "") + "\n\n" + (form.hashtags ? form.hashtags.split(" ").slice(0, 3).join(" ") : "#GenuineLove") },
+                  ].map(({ label, format }) => {
+                    const formatted = format(form.caption);
+                    return (
+                      <div key={label} className="border border-slate-100 dark:border-slate-700 rounded-lg p-3">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-xs font-medium text-slate-700 dark:text-slate-300">{label}</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              navigator.clipboard.writeText(formatted);
+                            }}
+                            className="text-xs px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors"
+                            data-testid={`button-copy-${label.toLowerCase().replace(/[^a-z0-9]/g, "-")}`}
+                          >
+                            Copy
+                          </button>
+                        </div>
+                        <pre className="text-xs text-slate-600 dark:text-slate-400 whitespace-pre-wrap font-sans leading-relaxed max-h-24 overflow-y-auto">
+                          {formatted}
+                        </pre>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>

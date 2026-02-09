@@ -123,13 +123,100 @@ router.get("/admin/stats", requireAuth, requireAdmin, async (req, res) => {
       .select({ total: count() })
       .from(leads);
 
+    const signupsByDay = await db
+      .select({
+        day: sql`DATE(${leads.createdAt})`.as("day"),
+        count: count(),
+      })
+      .from(leads)
+      .groupBy(sql`DATE(${leads.createdAt})`)
+      .orderBy(sql`DATE(${leads.createdAt}) DESC`)
+      .limit(30);
+
+    const drafts = await db
+      .select({
+        id: blogPosts.id,
+        title: blogPosts.title,
+        slug: blogPosts.slug,
+        contentType: blogPosts.contentType,
+        createdAt: blogPosts.createdAt,
+        updatedAt: blogPosts.updatedAt,
+      })
+      .from(blogPosts)
+      .where(eq(blogPosts.status, "draft"))
+      .orderBy(desc(blogPosts.updatedAt));
+
     return success(res, {
       postViews,
       newsletterSignups: signupCount?.total || 0,
+      signupsByDay,
+      drafts,
     }, "Publishing stats fetched.");
   } catch (err) {
     logger.error("Failed to fetch publishing stats", { error: err.message });
     return res.status(500).json({ ok: false, message: "Failed to fetch stats." });
+  }
+});
+
+router.post("/admin/test-send", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { draftId } = req.body;
+    if (!draftId) {
+      return badRequest(res, "Draft ID is required.");
+    }
+
+    const [draft] = await db
+      .select()
+      .from(blogPosts)
+      .where(and(eq(blogPosts.id, draftId), eq(blogPosts.status, "draft")))
+      .limit(1);
+
+    if (!draft) {
+      return res.status(404).json({ ok: false, message: "Draft not found." });
+    }
+
+    let emailSent = false;
+    try {
+      const { Resend } = await import("resend");
+      const resendKey = process.env.RESEND_API_KEY;
+      if (resendKey) {
+        const resend = new Resend(resendKey);
+        const adminUser = await db
+          .select({ email: users.email })
+          .from(users)
+          .where(eq(users.id, req.dbUserId))
+          .limit(1);
+
+        const adminEmail = adminUser[0]?.email;
+        if (adminEmail) {
+          await resend.emails.send({
+            from: "The Genuine Love Project <onboarding@resend.dev>",
+            to: adminEmail,
+            subject: `[TEST] ${draft.title}`,
+            html: `<div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h1 style="color: #4a3728;">${draft.title}</h1>
+              <div style="line-height: 1.8; color: #333;">${draft.content.replace(/\n/g, "<br>")}</div>
+              <hr style="margin: 30px 0; border: none; border-top: 1px solid #e0d5c8;">
+              <p style="font-size: 12px; color: #999;">This is a test email sent to the admin only. No subscribers received this.</p>
+            </div>`,
+          });
+          emailSent = true;
+        }
+      }
+    } catch (emailErr) {
+      logger.warn("Test send email failed (non-critical)", { error: emailErr.message });
+    }
+
+    return success(res, {
+      sent: emailSent,
+      draftTitle: draft.title,
+      message: emailSent
+        ? "Test email sent to your admin email address."
+        : "Email provider not configured. Draft content is ready for manual sending.",
+    });
+  } catch (err) {
+    logger.error("Failed to send test email", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to send test email." });
   }
 });
 
