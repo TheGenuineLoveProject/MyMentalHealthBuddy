@@ -1,0 +1,172 @@
+✅ Continuing — next in order (after v2.3 Selective Visibility) is v2.4 PASSIVE OBSERVABILITY so you can refine based on real signals (clicks, flows, drop-offs) without creepy tracking. 📡💛
+
+This is also the foundation for newsletter/blog/publishing optimization, because you’ll know what people actually read, click, and finish.
+
+⸻
+
+✅ EXACT REPLIT AI PROMPT — v2.4 PASSIVE OBSERVABILITY (SIGNALS, NOT SURVEILLANCE)
+
+PASSIVE OBSERVABILITY v2.4 — SIGNALS NOT SURVEILLANCE (REPLIT SAFE)
+
+HARD RULES:
+- ADDITIVE ONLY. No refactors, no renames, no deletions.
+- No background daemons, no cron inside app.
+- No PII. No full IP storage. No fingerprinting.
+- No session replay. No keystroke capture.
+- Must be opt-out capable.
+- Must end with VERIFIED via npm run verify.
+
+GOAL:
+1) Collect minimal product signals to guide refinement:
+   - page views (route)
+   - CTA clicks (named events)
+   - conversion steps (pricing -> checkout start -> success)
+   - newsletter signups (attempt + success)
+   - blog reads (view + scroll depth bucket optional)
+2) Store signals safely (DB table) + expose admin-only dashboard.
+3) Keep it ethical: aggregated, minimal, transparent.
+
+PHASE 0 — BASELINE VERIFY
+Run:
+- npm run verify
+If FAIL, STOP and report.
+
+PHASE 1 — CREATE DB TABLE (MINIMAL ANALYTICS EVENTS)
+Add to shared/schema.mjs (or wherever analytics tables live) using Drizzle:
+Table: analytics_events
+Fields:
+- id (uuid or serial)
+- created_at (timestamp)
+- user_id (nullable)  // store ONLY if logged in; else null
+- session_id (nullable) // use requestId or short random session token; NOT fingerprint
+- event_name (text)  // e.g. "cta_click", "page_view", "checkout_start"
+- event_category (text) // e.g. "navigation", "newsletter", "billing", "blog"
+- path (text) // route path, e.g. "/pricing"
+- meta (jsonb) // allow small payload: {button:"subscribe_pro", plan:"monthly"} — no PII
+- privacy_level (text default "minimal") // future proof
+
+Migration:
+- create Drizzle migration and apply (drizzle-kit push or existing workflow)
+IMPORTANT: If migrations are already used, follow existing convention.
+
+PHASE 2 — SERVER ENDPOINTS (AUTH-SAFE)
+Create:
+- server/routes/analytics-events.mjs
+Endpoints:
+1) POST /api/analytics/event
+   - Accepts: {event_name, event_category, path, meta}
+   - Validates with zod: max lengths, meta size cap (e.g. 4kb)
+   - If user logged in: attach user_id; else user_id null
+   - Rate limit (reuse existing rateLimit)
+   - Returns 200 {ok:true}
+
+2) GET /api/admin/analytics/summary  (ADMIN ONLY)
+   - Aggregated metrics:
+     - last 24h page views top 20 paths
+     - top CTA clicks last 7d
+     - checkout funnel counts last 7d:
+       pricing_view -> checkout_start -> checkout_success
+     - newsletter funnel:
+       newsletter_view -> signup_attempt -> signup_success
+   - No raw user listing by default.
+
+Mount route in server/index.mjs (single mount, avoid duplicates).
+
+PHASE 3 — CLIENT TRACKING (MINIMAL)
+Create:
+- client/src/hooks/useAnalytics.mjs (or .ts if project standard)
+Functions:
+- trackPageView(path)
+- trackEvent(name, category, meta)
+
+Implementation:
+- sends POST /api/analytics/event
+- debounces page view (avoid spam on rapid route changes)
+- honors opt-out flag:
+  - localStorage "analytics_opt_out" === "true" disables all tracking
+
+PHASE 4 — INSTRUMENT KEY FLOWS (HIGH VALUE)
+Add tracking calls in ONLY these places first:
+A) Router change (global):
+   - on route change => trackPageView(path)
+
+B) Navbar + Footer primary CTAs:
+   - pricing click
+   - newsletter click
+   - blog click
+   - tools click
+
+C) Pricing + Checkout:
+   - pricing_view on /pricing load
+   - checkout_start when user clicks “Subscribe” (before redirect)
+   - checkout_success on return URL (if you have /billing/success or query param)
+   - checkout_cancel on cancel return
+
+D) Newsletter:
+   - newsletter_view on newsletter page load
+   - signup_attempt on submit
+   - signup_success on 200 response
+
+E) Blog/Publishing:
+   - blog_view on /blog and individual post page load
+   - (optional) blog_read_depth bucket based on scroll 25/50/75/100 (NO per-user profiling)
+
+PHASE 5 — ADMIN DASHBOARD UI (READ-ONLY)
+Create:
+- client/src/pages/admin/AnalyticsDashboard.jsx
+Admin-only route: /admin/analytics
+Shows:
+- Top pages last 24h / 7d
+- Top CTAs last 7d
+- Checkout funnel chart (simple counts)
+- Newsletter funnel counts
+- “Opt-out respected” note + link to policy text
+
+PHASE 6 — PRIVACY NOTICE (TRANSPARENCY)
+Create:
+- docs/PRIVACY_SIGNALS.md
+Explain:
+- what is tracked (events, pages)
+- what is NOT tracked (PII, fingerprints, keystrokes)
+- opt-out instructions
+
+Optionally add link in footer to “Privacy Signals”.
+
+PHASE 7 — VERIFICATION
+Run:
+- npm run verify
+Manual checks:
+- Load /pricing -> event inserted
+- Click subscribe -> checkout_start inserted
+- Load /admin/analytics -> data displays (admin only)
+- opt-out localStorage disables events
+
+FINAL REPORT REQUIRED:
+A) files created/modified (paths)
+B) event list (canonical names)
+C) admin dashboard screenshot
+D) VERIFIED result with npm run verify
+
+
+⸻
+
+✅ Why this directly strengthens newsletter + blog + publishing
+
+Once v2.4 is live you can do signal-driven publishing:
+	•	Write blog posts that answer the top visited questions/pages
+	•	Add newsletter CTAs to pages with the highest traffic
+	•	Measure “does this story convert into signup?” without manipulating anyone
+
+⸻
+
+Next after v2.4 (in order)
+
+v2.5 Signal-Driven Refinement
+
+That’s where we take your top signals and systematically improve:
+	•	onboarding copy
+	•	pricing clarity
+	•	blog + newsletter content loop
+	•	social post themes tied to what works
+
+When you’re ready, I’ll drop the exact v2.5 Replit AI prompt next.

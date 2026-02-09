@@ -207,6 +207,7 @@ const CommunityCheckin = lazy(() => import("./pages/tools/CommunityCheckin.jsx")
 const ContentStudioAdmin = lazy(() => import("./pages/admin/ContentStudioAdmin.jsx"));
 const SocialStudioAdmin = lazy(() => import("./pages/admin/SocialStudioAdmin.jsx"));
 const NewsletterAdmin = lazy(() => import("./pages/admin/NewsletterAdmin.jsx"));
+const AdminPublishing = lazy(() => import("./pages/admin/AdminPublishing.jsx"));
 const RevenueAdmin = lazy(() => import("./pages/admin/RevenueAdmin.jsx"));
 
 // Batch 11 - Account & Payments (P241-P250)
@@ -1643,6 +1644,9 @@ export default function App() {
               </Route>
               <Route path="/admin/newsletter">
                 <AdminGuard><NewsletterAdmin /></AdminGuard>
+              </Route>
+              <Route path="/admin/publishing">
+                <AdminGuard><AdminPublishing /></AdminGuard>
               </Route>
               <Route path="/admin/revenue">
                 <AdminGuard><RevenueAdmin /></AdminGuard>

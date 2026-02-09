@@ -76,6 +76,10 @@ console.log('╚═════════════════════�
 console.log(`  Started: ${new Date().toISOString()}`);
 
 runCmd('Publishing Audit', 'node', ['scripts/audit-publishing.mjs'], { timeout: 15000 });
+runCmd('Publishing Registry Validate', 'node', ['scripts/validate-publishing.mjs'], { timeout: 15000 });
+runCmd('Tone Audit', 'node', ['scripts/audit-tone.mjs'], { timeout: 15000 });
+runCmd('Signals Audit', 'node', ['scripts/audit-signals.mjs'], { timeout: 15000 });
+runCmd('Editorial Calendar (dry run)', 'node', ['scripts/generate-editorial-calendar.mjs', '--dry-run'], { timeout: 15000 });
 
 checkHealth();
 

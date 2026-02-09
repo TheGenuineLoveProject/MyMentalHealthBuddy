@@ -105,6 +105,8 @@ import feedRouter from "./routes/feed.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 import contentRouter from "./routes/content.mjs";
 import adminBillingRouter from "./routes/adminBilling.mjs";
+import adminPublishingRouter from "./routes/admin-publishing.mjs";
+import rssRouter from "./routes/rss.mjs";
 import deploymentReadinessRouter from "./routes/deploymentReadiness.mjs";
 import metricsSummaryRouter from "./routes/metricsSummary.mjs";
 const __filename = fileURLToPath(import.meta.url);
@@ -358,6 +360,8 @@ app.use('/api/social-posting', socialPostingRouter);
 app.use('/api/social-posts', socialPostsRouter);
 app.use('/api/content', contentRouter);
 app.use('/api/perplexity', perplexityRouter);
+app.use('/api/admin/publishing', adminPublishingRouter);
+app.use('/rss.xml', rssRouter);
 
 const SERVER_START_TIME = Date.now();
 

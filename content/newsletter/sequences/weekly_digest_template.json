@@ -1,0 +1,40 @@
+{
+  "id": "weekly-digest-template",
+  "type": "weekly_digest",
+  "subject_template": "This week's gentle notes — {{week_label}}",
+  "preview_text_template": "A reflection, a practice, and a quiet reminder.",
+  "sections": [
+    {
+      "key": "reflection",
+      "label": "This Week's Reflection",
+      "description": "A short pillar-aligned reflection (2-3 paragraphs)",
+      "required": true
+    },
+    {
+      "key": "blog_highlight",
+      "label": "From the Blog",
+      "description": "Title + 2-sentence summary + link to recent blog post",
+      "required": false
+    },
+    {
+      "key": "practice",
+      "label": "A Small Practice",
+      "description": "One simple, optional exercise (under 100 words)",
+      "required": false
+    },
+    {
+      "key": "community_note",
+      "label": "Community Note",
+      "description": "A brief update about the community or platform (optional)",
+      "required": false
+    }
+  ],
+  "footer": "crisis-safe-footer",
+  "rules": {
+    "maxSections": 4,
+    "requiredFooter": true,
+    "ctaLimit": 1,
+    "toneCheck": true
+  },
+  "status": "approved"
+}

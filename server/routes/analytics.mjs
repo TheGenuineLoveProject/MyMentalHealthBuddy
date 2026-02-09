@@ -17,7 +17,10 @@ const SAFE_EVENT_TYPES = [
   "page_view", "feature_click", "session_start", "session_end",
   "tool_opened", "tool_completed", "mood_logged", "journal_created",
   "goal_set", "goal_completed", "auth_login", "auth_logout", "auth_register",
-  "subscription_viewed", "error_occurred"
+  "subscription_viewed", "error_occurred",
+  "blog_view", "blog_post_view",
+  "newsletter_signup_submit", "newsletter_signup_success", "newsletter_unsubscribe",
+  "pricing_view", "checkout_start"
 ];
 
 router.post("/event", async (req, res) => {

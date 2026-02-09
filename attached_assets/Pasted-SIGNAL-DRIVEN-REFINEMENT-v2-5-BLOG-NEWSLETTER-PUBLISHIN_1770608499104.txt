@@ -1,0 +1,180 @@
+SIGNAL-DRIVEN REFINEMENT v2.5 — BLOG + NEWSLETTER + PUBLISHING (REPLIT SAFE)
+
+HARD RULES (NON-NEGOTIABLE):
+- ADDITIVE ONLY. No refactors, no renames, no deletions.
+- Do not change existing auth/billing flows unless explicitly instructed.
+- No auto-posting to social platforms. Human-in-the-loop only.
+- No PII in analytics. No fingerprinting. No session replay.
+- Every new feature must include a PASS/FAIL verification checklist.
+- If there are multiple entrypoints (server/index.mjs, server/app.mjs, server/dev.mjs), DO NOT duplicate mounts. Mount once in the canonical entrypoint used by .replit (server/index.mjs).
+
+GOAL:
+Turn newsletter + blog + publishing into a robust, measurable loop:
+1) Editorial pipeline: Draft → Review → Approved → Published
+2) Blog publishing UI for Admin (manual publishing)
+3) Newsletter capture improvements + welcome sequence hooks
+4) Signal-driven decisions: Use analytics_events to decide what to publish next
+5) Zero medical claims; trauma-informed, educational tone; crisis link where relevant
+
+PHASE 0 — BASELINE VERIFY
+Run:
+- npm run verify
+If FAIL: STOP and report.
+
+PHASE 1 — CANONICAL CONTENT MODELS (DB)
+Create/confirm the following tables in shared/schema.mjs (Drizzle) if not present or incomplete:
+A) blog_posts
+Fields:
+- id
+- slug (unique)
+- title
+- excerpt
+- body_markdown (or body_html if existing system uses html)
+- cover_image_url (nullable)
+- status enum: draft | review | approved | published
+- tags (array or json)
+- published_at (nullable)
+- author_user_id (nullable)
+- created_at, updated_at
+
+B) newsletter_subscribers
+Fields:
+- id
+- email (unique)  (store only email, do not store extra personal profile)
+- status: pending | active | unsubscribed
+- source_path (nullable)
+- created_at
+
+C) publishing_events (optional but recommended)
+Fields:
+- id
+- type: blog_published | newsletter_sent | newsletter_welcome_sent
+- meta jsonb (small)
+- created_at
+
+Create migrations and apply using existing migration convention.
+
+PHASE 2 — SERVER ROUTES (ROBUST + SAFE)
+Create or extend routes:
+
+1) server/routes/blog.mjs
+Endpoints:
+- GET /api/blog/posts?status=published
+  returns published list
+- GET /api/blog/post/:slug
+  returns one published post
+- (ADMIN) POST /api/admin/blog/post
+  creates draft
+- (ADMIN) PUT /api/admin/blog/post/:id
+  edits draft/review
+- (ADMIN) POST /api/admin/blog/post/:id/submit
+  status: review
+- (ADMIN) POST /api/admin/blog/post/:id/approve
+  status: approved
+- (ADMIN) POST /api/admin/blog/post/:id/publish
+  status: published + sets published_at
+All admin endpoints must use adminAuth middleware.
+
+2) server/routes/newsletter.mjs (or existing)
+Ensure:
+- POST /api/newsletter/subscribe
+  - validates email
+  - sets status pending/active depending on system (Resend double opt-in if available)
+  - logs analytics event "newsletter_signup_success" when 200
+- POST /api/newsletter/unsubscribe
+  - marks unsubscribed
+
+3) server/routes/admin-publishing.mjs (new)
+Admin-only insights:
+- GET /api/admin/publishing/recommendations
+Returns:
+- Top 10 pages by views last 7 days (from analytics_events)
+- Top 10 CTA clicks last 7 days
+- Suggested blog topics derived from the top pages (no AI required; simple mapping rules)
+- Newsletter performance counts (attempts vs successes)
+
+Mount each route ONCE in server/index.mjs.
+
+PHASE 3 — FRONTEND: BLOG + NEWSLETTER EXPERIENCE
+A) Blog public pages:
+- client/src/pages/BlogIndex.jsx
+- client/src/pages/BlogPost.jsx
+If already exists, do not replace; patch minimally and wire to /api/blog endpoints.
+
+Track events:
+- blog_index_view
+- blog_post_view
+- blog_cta_newsletter_click
+
+B) Newsletter capture:
+Create/confirm a single reusable component:
+- client/src/components/newsletter/NewsletterSignup.jsx
+Features:
+- email input + submit
+- displays privacy sentence + “opt-out anytime”
+- supports source meta (current path)
+Track events:
+- newsletter_view
+- newsletter_signup_attempt
+- newsletter_signup_success
+- newsletter_signup_fail
+
+Add NewsletterSignup component to:
+- BlogIndex footer
+- BlogPost end-of-article
+- /pricing page (soft CTA, not guilt)
+- /dashboard (optional, if user is free-tier)
+
+PHASE 4 — ADMIN: PUBLISHING STUDIO (MANUAL-FIRST)
+Create:
+- client/src/pages/admin/PublishingStudio.jsx
+Route: /admin/publishing
+
+Must include:
+1) Blog Post List (filter by status: draft/review/approved/published)
+2) Create Draft
+3) Edit Draft (markdown editor ok: simple textarea is acceptable)
+4) Submit for Review
+5) Approve
+6) Publish (manual button)
+7) Copy “share caption” generator (per platform) BUT NO auto-posting
+
+Add “Recommendations” panel:
+- pulls from /api/admin/publishing/recommendations
+- shows top pages + suggested topics
+
+PHASE 5 — CONTENT SAFETY + DISCLAIMERS
+Create:
+- shared/publishingRules.mjs
+Rules:
+- no medical claims
+- no “this will cure”
+- no shame/urgency manipulation
+- include gentle CTA
+- include crisis link when topic touches self-harm/abuse
+
+Enforce in admin publish endpoint:
+- run a lightweight validator on title/excerpt/body
+- block publish if forbidden patterns detected
+Return clear error message.
+
+PHASE 6 — VERIFICATION (PASS/FAIL)
+Run:
+- npm run verify
+
+Manual PASS/FAIL checklist:
+1) /blog loads and shows published posts
+2) /blog/:slug loads and renders body
+3) newsletter signup works (success returns 200)
+4) /admin/publishing loads (admin only)
+5) create draft -> review -> approve -> publish works
+6) analytics_events records:
+   - blog views
+   - newsletter funnel events
+
+FINAL REPORT REQUIRED:
+- Files created/modified (paths)
+- Endpoint list (with auth required yes/no)
+- Event names (canonical list)
+- Screenshots: /blog, /admin/publishing
+- Verified output from npm run verify

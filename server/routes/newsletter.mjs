@@ -102,4 +102,53 @@ router.post('/subscribe', rateLimit, async (req, res) => {
   }
 });
 
+router.post('/unsubscribe', rateLimit, async (req, res) => {
+  try {
+    const { email } = subscribeSchema.parse(req.body);
+
+    logger.info("[Newsletter] Unsubscribe request", { email: `${email.substring(0, 3)}***@***` });
+
+    const normalizedEmail = email.toLowerCase().trim();
+
+    const existing = await db
+      .select({ id: leads.id })
+      .from(leads)
+      .where(eq(leads.email, normalizedEmail))
+      .limit(1);
+
+    if (existing.length === 0) {
+      return res.json({
+        ok: true,
+        message: 'If this email was subscribed, it has been removed. Thank you.'
+      });
+    }
+
+    await db.delete(leads).where(eq(leads.email, normalizedEmail));
+
+    res.json({
+      ok: true,
+      message: 'You have been unsubscribed. We respect your choice. Take care.'
+    });
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({
+        ok: false,
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: error.errors[0]?.message || 'Invalid input'
+        }
+      });
+    }
+
+    logger.error("[Newsletter] Unsubscribe error", { error: error?.message || error });
+    res.status(500).json({
+      ok: false,
+      error: {
+        code: 'INTERNAL_ERROR',
+        message: 'Unable to process request'
+      }
+    });
+  }
+});
+
 export default router;
