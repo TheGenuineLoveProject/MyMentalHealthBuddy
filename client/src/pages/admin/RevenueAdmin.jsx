@@ -81,7 +81,7 @@ export default function RevenueAdmin() {
       <SEO 
         title="Revenue Dashboard — The Genuine Love Project"
         description="Admin revenue and subscription analytics."
-        noIndex
+        noindex
       />
       
       <main className="container mx-auto px-4 py-8 max-w-6xl">

@@ -92,7 +92,7 @@ export default function FeedbackAggregator() {
 
   return (
     <>
-      <SEO title="Feedback — Admin" noIndex />
+      <SEO title="Feedback — Admin" noindex />
       <div className="p-6 max-w-5xl mx-auto space-y-6">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} /> Back to Command Center

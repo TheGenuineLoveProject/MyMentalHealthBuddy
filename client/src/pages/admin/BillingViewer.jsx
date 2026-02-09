@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft, RefreshCw } from 'lucide-react';
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { SEO } from "../../components/SEO";
 
 function formatCurrency(cents) {
   if (!cents && cents !== 0) return '$0.00';
@@ -106,6 +107,7 @@ export default function BillingViewerPage() {
 
   return (
     <div className="container py-8 space-y-8">
+      <SEO title="Billing Manager — Admin" noindex />
       <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
         <ArrowLeft size={16} /> Back to Command Center
       </Link>

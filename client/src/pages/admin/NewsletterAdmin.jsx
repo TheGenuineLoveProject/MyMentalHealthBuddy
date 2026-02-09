@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { SEO } from "../../components/SEO";
 
 export default function NewsletterAdmin() {
   const [confirmSendId, setConfirmSendId] = useState(null);
@@ -32,6 +33,7 @@ export default function NewsletterAdmin() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
+      <SEO title="Newsletter Admin — Admin" noindex />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} />

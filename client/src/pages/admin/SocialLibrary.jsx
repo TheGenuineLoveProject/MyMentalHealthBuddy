@@ -4,6 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, Sparkles, AlertCircle } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { SEO } from "../../components/SEO";
 
 const TEMPLATE_TYPES = [
   { id: "hook", name: "Hook", description: "2-second attention grabber" },
@@ -66,6 +67,7 @@ export default function SocialLibrary() {
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <SEO title="Social Library — Admin" noindex />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} />

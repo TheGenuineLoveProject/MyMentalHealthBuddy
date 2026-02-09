@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { SEO } from "../../components/SEO";
 
 const PLATFORMS = {
   instagram: { icon: Instagram, color: "#E4405F", name: "Instagram" },
@@ -119,6 +120,7 @@ export default function SocialCalendar() {
   
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <SEO title="Social Calendar — Admin" noindex />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} />

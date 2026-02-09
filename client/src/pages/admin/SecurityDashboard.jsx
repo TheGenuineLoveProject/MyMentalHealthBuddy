@@ -7,6 +7,7 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { SEO } from "../../components/SEO";
 
 export default function SecurityDashboard() {
   const { data: overviewData, isLoading: overviewLoading, error: overviewError, refetch: refetchOverview, isRefetching } = useQuery({
@@ -74,6 +75,7 @@ export default function SecurityDashboard() {
 
   return (
     <div className="min-h-screen hero-gradient" data-testid="page-security-dashboard">
+      <SEO title="Security Dashboard — Admin" noindex />
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} /> Back to Command Center

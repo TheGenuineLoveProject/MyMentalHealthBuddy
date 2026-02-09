@@ -12,6 +12,7 @@ import { SiInstagram, SiX, SiTiktok, SiYoutube, SiFacebook, SiLinkedin, SiPinter
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { SEO } from "../../components/SEO";
 
 const API_BASE = "/api/admin/social/enterprise";
 
@@ -391,6 +392,7 @@ export default function NarrativeOpsConsole() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
+      <SEO title="Narrative Ops Console — Admin" noindex />
       <div className="max-w-[1600px] mx-auto px-4 py-6">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} />

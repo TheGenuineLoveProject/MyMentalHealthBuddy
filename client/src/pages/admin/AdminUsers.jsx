@@ -81,7 +81,7 @@ export default function AdminUsers() {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Admin Users — Admin" noIndex />
+      <SEO title="Admin Users — Admin" noindex />
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">

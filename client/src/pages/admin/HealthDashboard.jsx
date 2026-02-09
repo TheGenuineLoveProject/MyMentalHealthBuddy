@@ -86,8 +86,8 @@ export default function HealthDashboard() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="animate-pulse motion-reduce:animate-none flex items-center gap-3">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center" data-testid="loading-state">
+        <div className="animate-pulse motion-reduce:animate-none flex items-center gap-3" data-testid="loading-content">
           <RefreshCw className="w-6 h-6 animate-spin motion-reduce:animate-none text-sage-600" />
           <span className="text-gray-600 dark:text-gray-400">Loading health data...</span>
         </div>
@@ -97,10 +97,10 @@ export default function HealthDashboard() {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 max-w-md">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center" data-testid="error-state">
+        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-6 max-w-md" data-testid="error-alert">
           <AlertCircle className="w-8 h-8 text-red-500 mb-3" />
-          <h2 className="text-lg font-semibold text-red-700 dark:text-red-400">Failed to Load Health Data</h2>
+          <h2 className="text-lg font-semibold text-red-700 dark:text-red-400" data-testid="error-title">Failed to Load Health Data</h2>
           <p className="text-sm text-red-600 dark:text-red-300 mt-1">Please check your admin permissions and try again.</p>
           <button onClick={handleRefresh} className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition" data-testid="btn-retry">
             Retry
@@ -169,10 +169,10 @@ export default function HealthDashboard() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700" data-testid="section-environment">
             <div className="flex items-center gap-2 mb-4">
               <Shield className="w-5 h-5 text-sage-600" />
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Environment Configuration</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-environment">Environment Configuration</h2>
             </div>
             <div className="space-y-1">
               <EnvCheckItem name="NODE_ENV" isSet={!!envConfig.NODE_ENV} />
@@ -183,13 +183,13 @@ export default function HealthDashboard() {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700" data-testid="section-resources">
             <div className="flex items-center gap-2 mb-4">
               <Cpu className="w-5 h-5 text-sage-600" />
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white">System Resources</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-resources">System Resources</h2>
             </div>
             <div className="space-y-4">
-              <div>
+              <div data-testid="metric-heap-used">
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-gray-600 dark:text-gray-400">Heap Used</span>
                   <span className="font-medium text-gray-900 dark:text-white">{memoryInfo.heapUsed || health?.system?.heapUsed || "N/A"}</span>
@@ -198,19 +198,19 @@ export default function HealthDashboard() {
                   <div className="h-full bg-sage-500 rounded-full" style={{ width: "45%" }} />
                 </div>
               </div>
-              <div>
+              <div data-testid="metric-heap-total">
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-gray-600 dark:text-gray-400">Heap Total</span>
                   <span className="font-medium text-gray-900 dark:text-white">{memoryInfo.heapTotal || health?.system?.heapTotal || "N/A"}</span>
                 </div>
               </div>
-              <div>
+              <div data-testid="metric-system-free">
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-gray-600 dark:text-gray-400">System Free</span>
                   <span className="font-medium text-gray-900 dark:text-white">{memoryInfo.systemFree || health?.system?.freeMemory || "N/A"}</span>
                 </div>
               </div>
-              <div>
+              <div data-testid="metric-cpu-cores">
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-gray-600 dark:text-gray-400">CPU Cores</span>
                   <span className="font-medium text-gray-900 dark:text-white">{systemInfo?.cpuCount || health?.system?.cpuCount || "N/A"}</span>
@@ -220,10 +220,10 @@ export default function HealthDashboard() {
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-gray-200 dark:border-gray-700" data-testid="section-actions">
           <div className="flex items-center gap-2 mb-4">
             <Activity className="w-5 h-5 text-sage-600" />
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Quick Actions</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white" data-testid="heading-actions">Quick Actions</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link href="/admin/security" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-security">
@@ -246,11 +246,11 @@ export default function HealthDashboard() {
         </div>
 
         {/* Top-50 Platform Processes Tracker */}
-        <div className="mt-8">
+        <div className="mt-8" data-testid="section-top50">
           <Top50ProcessTracker />
         </div>
 
-        <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-500">
+        <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-500" data-testid="text-last-updated">
           Last updated: {health?.timestamp ? new Date(health.timestamp).toLocaleString() : "N/A"}
         </div>
         <SafetyFooter variant="compact" className="mt-12" />

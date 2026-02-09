@@ -67,7 +67,7 @@ export default function RolesPermissions() {
       <SEO
         title="Roles & Permissions — Admin"
         description="Manage admin roles and access permissions"
-        noIndex
+        noindex
       />
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">

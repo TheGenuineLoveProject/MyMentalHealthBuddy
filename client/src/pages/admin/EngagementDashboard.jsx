@@ -84,7 +84,7 @@ export default function EngagementDashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO title="Engagement Dashboard — Admin" noIndex />
+      <SEO title="Engagement Dashboard — Admin" noindex />
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
@@ -129,7 +129,7 @@ export default function EngagementDashboard() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-          <Card>
+          <Card data-testid="panel-top-features">
             <CardHeader>
               <CardTitle>Top Features by Usage</CardTitle>
             </CardHeader>
@@ -153,7 +153,7 @@ export default function EngagementDashboard() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card data-testid="panel-platform-overview">
             <CardHeader>
               <CardTitle>Platform Overview</CardTitle>
             </CardHeader>
@@ -167,7 +167,7 @@ export default function EngagementDashboard() {
                 ))}
               </div>
               {health?.services && (
-                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700" data-testid="panel-service-integrations">
                   <p className="text-xs font-medium text-muted-foreground mb-2">Service Integrations</p>
                   <div className="flex flex-wrap gap-3">
                     {[
@@ -176,7 +176,7 @@ export default function EngagementDashboard() {
                       { name: 'Perplexity', active: health.services.perplexity },
                       { name: 'Sentry', active: health.services.sentry },
                     ].map(svc => (
-                      <span key={svc.name} className="inline-flex items-center gap-1.5 text-xs">
+                      <span key={svc.name} className="inline-flex items-center gap-1.5 text-xs" data-testid={`service-${svc.name.toLowerCase()}`}>
                         <span className={`w-2 h-2 rounded-full ${svc.active ? 'bg-green-500' : 'bg-gray-300'}`} />
                         <span className={svc.active ? 'text-foreground' : 'text-muted-foreground'}>{svc.name}</span>
                       </span>
@@ -189,7 +189,7 @@ export default function EngagementDashboard() {
         </div>
 
         {stats?.recentActivity && stats.recentActivity.length > 0 && (
-          <Card>
+          <Card data-testid="section-recent-activity">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Activity className="w-5 h-5" />

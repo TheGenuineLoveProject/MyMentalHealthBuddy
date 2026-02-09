@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { SEO } from "../../components/SEO";
 
 const PLATFORMS = [
   { key: "instagram", label: "Instagram" },
@@ -142,6 +143,7 @@ export default function AdminPublishingToday() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-6" data-testid="page-publishing-today">
+      <SEO title="Publishing Today — Admin" noindex />
       <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
         <ArrowLeft size={16} /> Back to Command Center
       </Link>
