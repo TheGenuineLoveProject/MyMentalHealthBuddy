@@ -631,6 +631,26 @@ export const softLaunchFeedback = pgTable("soft_launch_feedback", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+/* ================= NEWSLETTER SUBSCRIBERS ================= */
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
+  status: varchar("status", { length: 20 }).default("active").notNull(),
+  sourcePath: varchar("source_path", { length: 500 }),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+/* ================= PUBLISHING EVENTS ================= */
+export const publishingEvents = pgTable("publishing_events", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  type: varchar("type", { length: 50 }).notNull(),
+  meta: jsonb("meta"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_publishing_events_type").on(table.type),
+  index("idx_publishing_events_created").on(table.createdAt),
+]);
+
 /* ================= ANALYTICS EVENTS ================= */
 export const analyticsEvents = pgTable("analytics_events", {
   id: uuid("id").defaultRandom().primaryKey(),

@@ -1,11 +1,12 @@
 import express from "express";
 import { randomUUID } from "crypto";
 import { db } from "../db/connection.mjs";
-import { blogPosts, blogComments, users, leads } from "../../shared/schema.mjs";
-import { eq, desc, and, ilike, or, sql, count } from "drizzle-orm";
+import { blogPosts, blogComments, users, leads, publishingEvents, analyticsEvents } from "../../shared/schema.mjs";
+import { eq, desc, and, ilike, or, sql, count, gte } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
+import { validatePublishingContent } from "../../shared/publishingRules.mjs";
 
 const router = express.Router();
 
@@ -139,11 +140,11 @@ router.get("/admin/stats", requireAuth, requireAdmin, async (req, res) => {
         title: blogPosts.title,
         slug: blogPosts.slug,
         contentType: blogPosts.contentType,
+        status: blogPosts.status,
         createdAt: blogPosts.createdAt,
         updatedAt: blogPosts.updatedAt,
       })
       .from(blogPosts)
-      .where(eq(blogPosts.status, "draft"))
       .orderBy(desc(blogPosts.updatedAt));
 
     return success(res, {
@@ -531,6 +532,168 @@ router.delete("/comments/:commentId", requireAuth, async (req, res) => {
   } catch (err) {
     logger.error("Failed to delete comment", { error: err.message });
     return res.status(500).json({ ok: false, message: "Failed to delete comment." });
+  }
+});
+
+router.post("/admin/create", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const userId = req.dbUserId;
+    const { title, content, excerpt, tags, featuredImage, contentType = "blog_post" } = req.body;
+
+    if (!title || !content) {
+      return badRequest(res, "Title and content are required.");
+    }
+
+    const slug = generateSlug(title);
+    const readingTimeMinutes = calculateReadingTime(content);
+
+    const inserted = await db
+      .insert(blogPosts)
+      .values({
+        id: randomUUID(),
+        title,
+        slug,
+        content,
+        excerpt: excerpt || content.substring(0, 200) + "...",
+        authorId: userId,
+        status: "draft",
+        contentType,
+        visibility: "draft",
+        readingTimeMinutes,
+        tags: tags || "",
+        featuredImage: featuredImage || null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+      .returning();
+
+    await db.insert(publishingEvents).values({
+      type: "blog_draft_created",
+      meta: { postId: inserted[0].id, title },
+    });
+
+    return success(res, inserted[0], "Draft created.");
+  } catch (err) {
+    logger.error("Failed to create admin draft", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to create draft." });
+  }
+});
+
+router.put("/admin/:id", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content, excerpt, tags, featuredImage, contentType } = req.body;
+
+    const existing = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);
+    if (existing.length === 0) {
+      return res.status(404).json({ ok: false, message: "Post not found." });
+    }
+
+    const post = existing[0];
+    if (post.status === "published") {
+      return badRequest(res, "Cannot edit a published post. Create a new version instead.");
+    }
+
+    const updateValues = { updatedAt: new Date() };
+    if (title) { updateValues.title = title; updateValues.slug = generateSlug(title); }
+    if (content) { updateValues.content = content; updateValues.readingTimeMinutes = calculateReadingTime(content); }
+    if (excerpt !== undefined) updateValues.excerpt = excerpt;
+    if (tags !== undefined) updateValues.tags = tags;
+    if (featuredImage !== undefined) updateValues.featuredImage = featuredImage;
+    if (contentType) updateValues.contentType = contentType;
+
+    const updated = await db.update(blogPosts).set(updateValues).where(eq(blogPosts.id, id)).returning();
+    return success(res, updated[0], "Post updated.");
+  } catch (err) {
+    logger.error("Failed to update admin post", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to update post." });
+  }
+});
+
+router.post("/admin/:id/submit", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const existing = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);
+    if (existing.length === 0) return res.status(404).json({ ok: false, message: "Post not found." });
+
+    if (existing[0].status !== "draft") {
+      return badRequest(res, `Cannot submit — post is currently "${existing[0].status}".`);
+    }
+
+    const updated = await db.update(blogPosts).set({ status: "review", updatedAt: new Date() }).where(eq(blogPosts.id, id)).returning();
+
+    await db.insert(publishingEvents).values({
+      type: "blog_submitted_for_review",
+      meta: { postId: id, title: existing[0].title },
+    });
+
+    return success(res, updated[0], "Post submitted for review.");
+  } catch (err) {
+    logger.error("Failed to submit post for review", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to submit for review." });
+  }
+});
+
+router.post("/admin/:id/approve", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const existing = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);
+    if (existing.length === 0) return res.status(404).json({ ok: false, message: "Post not found." });
+
+    if (existing[0].status !== "review") {
+      return badRequest(res, `Cannot approve — post is currently "${existing[0].status}". Submit for review first.`);
+    }
+
+    const updated = await db.update(blogPosts).set({ status: "approved", updatedAt: new Date() }).where(eq(blogPosts.id, id)).returning();
+
+    await db.insert(publishingEvents).values({
+      type: "blog_approved",
+      meta: { postId: id, title: existing[0].title },
+    });
+
+    return success(res, updated[0], "Post approved.");
+  } catch (err) {
+    logger.error("Failed to approve post", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to approve." });
+  }
+});
+
+router.post("/admin/:id/publish", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const existing = await db.select().from(blogPosts).where(eq(blogPosts.id, id)).limit(1);
+    if (existing.length === 0) return res.status(404).json({ ok: false, message: "Post not found." });
+
+    if (existing[0].status !== "approved") {
+      return badRequest(res, `Cannot publish — post is currently "${existing[0].status}". Approve first.`);
+    }
+
+    const validation = validatePublishingContent(existing[0].title, existing[0].excerpt, existing[0].content);
+    if (!validation.valid) {
+      return res.status(422).json({
+        ok: false,
+        message: "Content safety check failed. Please revise before publishing.",
+        errors: validation.errors,
+        warnings: validation.warnings,
+      });
+    }
+
+    const updated = await db.update(blogPosts).set({
+      status: "published",
+      visibility: "public",
+      publishedAt: new Date(),
+      updatedAt: new Date(),
+    }).where(eq(blogPosts.id, id)).returning();
+
+    await db.insert(publishingEvents).values({
+      type: "blog_published",
+      meta: { postId: id, title: existing[0].title, slug: existing[0].slug },
+    });
+
+    return success(res, { ...updated[0], warnings: validation.warnings }, "Post published successfully.");
+  } catch (err) {
+    logger.error("Failed to publish post", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to publish." });
   }
 });
 

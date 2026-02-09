@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRoute, Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Calendar, Clock, User, ArrowLeft, MessageCircle, Send, Reply, BookOpen } from "lucide-react";
@@ -9,6 +9,7 @@ import { apiRequest, queryClient } from "../lib/queryClient.js";
 import NewsletterSignup from "../components/NewsletterSignup";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
+import { trackEvent, trackPageView } from "../hooks/useAnalytics.mjs";
 
 function CommentItem({ comment, postId, slug }) {
   const { user } = useAuth();
@@ -170,6 +171,13 @@ export default function BlogPost() {
   });
 
   const post = data?.data;
+
+  useEffect(() => {
+    if (post?.title && slug) {
+      trackPageView(`/blog/${slug}`);
+      trackEvent("blog_post_view", "content", { slug, title: post.title });
+    }
+  }, [post?.title, slug]);
 
   if (isLoading) {
     return (

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { Search, Calendar, Clock, User, ArrowRight, BookOpen } from "lucide-react";
 import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
 import NewsletterSignup from "../components/NewsletterSignup";
+import { trackEvent, trackPageView } from "../hooks/useAnalytics.mjs";
 
 function BlogCard({ post }) {
   if (!post || !post.slug) return null;
@@ -79,6 +80,10 @@ function BlogCard({ post }) {
 
 export default function BlogIndex() {
   const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    trackPageView("/blog");
+  }, []);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["/api/blog"],

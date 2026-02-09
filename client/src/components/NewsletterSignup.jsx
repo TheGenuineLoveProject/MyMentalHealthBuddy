@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Mail, Check, AlertCircle } from "lucide-react";
+import { trackEvent } from "../hooks/useAnalytics.mjs";
 
 function getStoredUtmParams() {
   try {
@@ -46,6 +47,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
     }
 
     setStatus("loading");
+    trackEvent("newsletter_signup_attempt", "newsletter", { source });
     
     const utm = getStoredUtmParams();
 
@@ -73,6 +75,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
         setMessage(data.message || "Thank you for subscribing!");
         setEmail("");
         setConsent(false);
+        trackEvent("newsletter_signup_success", "newsletter", { source });
       } else {
         setStatus("error");
         setMessage(data.message || "Something went wrong. Please try again.");

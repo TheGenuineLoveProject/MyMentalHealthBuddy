@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { eq } from "drizzle-orm";
 import { db } from "../db/connection.mjs";
 import { leads } from "../db/schema.mjs";
+import { analyticsEvents, newsletterSubscribers } from "../../shared/schema.mjs";
 import { logger } from "../utils/logger.mjs";
 
 const router = Router();
@@ -71,10 +72,28 @@ router.post('/subscribe', rateLimit, async (req, res) => {
 
     await db.insert(leads).values({
       email: normalizedEmail,
-      source: "newsletter-subscribe",
+      source: req.body.source || "newsletter-subscribe",
       consent: true,
       interests: JSON.stringify([]),
     });
+
+    try {
+      await db.insert(newsletterSubscribers).values({
+        email: normalizedEmail,
+        status: "active",
+        sourcePath: req.body.source || null,
+      });
+    } catch (dupErr) {
+      logger.debug("[Newsletter] Subscriber already exists in dedicated table", { email: `${normalizedEmail.substring(0, 3)}***` });
+    }
+
+    db.insert(analyticsEvents).values({
+      eventName: "newsletter_signup_success",
+      eventCategory: "newsletter",
+      path: req.body.source || "/newsletter",
+      meta: {},
+      privacyLevel: "minimal",
+    }).catch(() => {});
 
     res.json({ 
       ok: true, 
@@ -124,6 +143,20 @@ router.post('/unsubscribe', rateLimit, async (req, res) => {
     }
 
     await db.delete(leads).where(eq(leads.email, normalizedEmail));
+
+    try {
+      await db.update(newsletterSubscribers)
+        .set({ status: "unsubscribed" })
+        .where(eq(newsletterSubscribers.email, normalizedEmail));
+    } catch {}
+
+    db.insert(analyticsEvents).values({
+      eventName: "newsletter_unsubscribe",
+      eventCategory: "newsletter",
+      path: "/newsletter/unsubscribe",
+      meta: {},
+      privacyLevel: "minimal",
+    }).catch(() => {});
 
     res.json({
       ok: true,

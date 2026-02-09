@@ -3,10 +3,13 @@ import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   ArrowLeft, FileText, Mail, Calendar, Copy, Check,
-  ChevronDown, Loader2, BookOpen, Send, BarChart3
+  ChevronDown, Loader2, BookOpen, Send, BarChart3,
+  GitPullRequest, Lightbulb, AlertTriangle, CheckCircle, XCircle,
+  TrendingUp, Users, Eye, PenLine
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
+import { useToast } from "@/hooks/use-toast";
 
 function CopyButton({ text, label }) {
   const [copied, setCopied] = useState(false);
@@ -27,9 +30,19 @@ function CopyButton({ text, label }) {
   );
 }
 
+const PIPELINE_STATUS_BADGES = {
+  draft: { label: "Draft", className: "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400", icon: PenLine },
+  review: { label: "In Review", className: "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300", icon: Eye },
+  approved: { label: "Approved", className: "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300", icon: CheckCircle },
+  published: { label: "Published", className: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300", icon: CheckCircle },
+};
+
 export default function AdminPublishing() {
-  const [activeTab, setActiveTab] = useState("registry");
+  const [activeTab, setActiveTab] = useState("pipeline");
+  const { toast } = useToast();
   const tabs = [
+    { key: "pipeline", label: "Editorial Pipeline", icon: GitPullRequest },
+    { key: "recommendations", label: "Recommendations", icon: Lightbulb },
     { key: "registry", label: "Registry", icon: FileText },
     { key: "drafts", label: "Newsletter Drafts", icon: Mail },
     { key: "calendar", label: "Calendar", icon: Calendar },
@@ -40,6 +53,14 @@ export default function AdminPublishing() {
   const { data: draftsData, isLoading: draftsLoading } = useQuery({ queryKey: ["/api/admin/publishing/drafts"] });
   const { data: calendarData, isLoading: calLoading } = useQuery({ queryKey: ["/api/admin/publishing/calendar"] });
   const { data: signalsData, isLoading: sigLoading } = useQuery({ queryKey: ["/api/admin/publishing/signals/summary"] });
+  const { data: pipelineData, isLoading: pipeLoading } = useQuery({
+    queryKey: ["/api/blog/admin/stats"],
+    enabled: activeTab === "pipeline",
+  });
+  const { data: recsData, isLoading: recsLoading } = useQuery({
+    queryKey: ["/api/admin/publishing/recommendations"],
+    enabled: activeTab === "recommendations",
+  });
 
   const statusMutation = useMutation({
     mutationFn: async ({ id, status }) => {
@@ -49,10 +70,26 @@ export default function AdminPublishing() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["/api/admin/publishing/registry"] }),
   });
 
+  const pipelineActionMutation = useMutation({
+    mutationFn: async ({ id, action }) => {
+      const res = await apiRequest("POST", `/api/blog/admin/${id}/${action}`);
+      return res.json();
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
+      toast({ title: data.message || "Action completed" });
+    },
+    onError: (err) => {
+      toast({ title: "Action failed", description: err.message, variant: "destructive" });
+    },
+  });
+
   const registry = registryData?.data || [];
   const drafts = draftsData?.data || [];
   const calendar = calendarData?.data || [];
   const signals = signalsData?.data || {};
+  const pipeline = pipelineData?.data || {};
+  const recs = recsData?.data || {};
 
   const today = new Date().toISOString().split("T")[0];
   const todayItems = calendar.filter(c => c.date === today);
@@ -99,6 +136,189 @@ export default function AdminPublishing() {
             </button>
           ))}
         </div>
+
+        {activeTab === "pipeline" && (
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+            <h2 className="text-lg font-semibold mb-2" data-testid="text-pipeline-title">Editorial Pipeline</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Blog posts flow: Draft → Review → Approved → Published. Content safety validation runs before publishing.</p>
+            {pipeLoading ? (
+              <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                  {["draft", "review", "approved", "published"].map(status => {
+                    const badge = PIPELINE_STATUS_BADGES[status];
+                    const count = (pipeline.drafts || []).filter(p => p.status === status).length;
+                    return (
+                      <div key={status} className={`rounded-lg p-3 text-center ${badge.className}`} data-testid={`stat-pipeline-${status}`}>
+                        <div className="text-2xl font-bold">{count}</div>
+                        <div className="text-xs font-medium">{badge.label}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {(pipeline.drafts || []).length === 0 ? (
+                  <p className="text-center text-gray-500 dark:text-gray-400 py-6">No blog posts in the pipeline yet. Create your first draft from the admin blog API.</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm" data-testid="table-pipeline">
+                      <thead>
+                        <tr className="border-b dark:border-gray-700">
+                          <th className="text-left py-2 px-2">Title</th>
+                          <th className="text-left py-2 px-2">Type</th>
+                          <th className="text-left py-2 px-2">Status</th>
+                          <th className="text-left py-2 px-2">Updated</th>
+                          <th className="text-left py-2 px-2">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(pipeline.drafts || []).map(post => {
+                          const badge = PIPELINE_STATUS_BADGES[post.status] || PIPELINE_STATUS_BADGES.draft;
+                          const StatusIcon = badge.icon;
+                          return (
+                            <tr key={post.id} className="border-b dark:border-gray-700/50" data-testid={`row-pipeline-${post.id}`}>
+                              <td className="py-2 px-2 font-medium max-w-xs truncate">{post.title}</td>
+                              <td className="py-2 px-2"><span className="text-xs px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">{post.contentType || "blog_post"}</span></td>
+                              <td className="py-2 px-2">
+                                <span className={`inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded ${badge.className}`}>
+                                  <StatusIcon className="w-3 h-3" /> {badge.label}
+                                </span>
+                              </td>
+                              <td className="py-2 px-2 text-xs text-gray-500">{post.updatedAt ? new Date(post.updatedAt).toLocaleDateString() : "—"}</td>
+                              <td className="py-2 px-2">
+                                <div className="flex gap-1 flex-wrap">
+                                  {post.status === "draft" && (
+                                    <button
+                                      onClick={() => pipelineActionMutation.mutate({ id: post.id, action: "submit" })}
+                                      disabled={pipelineActionMutation.isPending}
+                                      className="text-xs px-2 py-1 rounded bg-yellow-500 text-white hover:bg-yellow-600 disabled:opacity-50"
+                                      data-testid={`button-submit-${post.id}`}
+                                    >
+                                      Submit for Review
+                                    </button>
+                                  )}
+                                  {post.status === "review" && (
+                                    <button
+                                      onClick={() => pipelineActionMutation.mutate({ id: post.id, action: "approve" })}
+                                      disabled={pipelineActionMutation.isPending}
+                                      className="text-xs px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50"
+                                      data-testid={`button-approve-${post.id}`}
+                                    >
+                                      Approve
+                                    </button>
+                                  )}
+                                  {post.status === "approved" && (
+                                    <button
+                                      onClick={() => pipelineActionMutation.mutate({ id: post.id, action: "publish" })}
+                                      disabled={pipelineActionMutation.isPending}
+                                      className="text-xs px-2 py-1 rounded bg-green-500 text-white hover:bg-green-600 disabled:opacity-50"
+                                      data-testid={`button-publish-${post.id}`}
+                                    >
+                                      Publish
+                                    </button>
+                                  )}
+                                  {post.slug && <CopyButton text={`/blog/${post.slug}`} label="Copy URL" />}
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
+                <div className="mt-4 p-3 bg-amber-50 dark:bg-amber-950/30 rounded-lg text-sm text-amber-800 dark:text-amber-200 flex items-start gap-2">
+                  <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+                  <span>Content safety checks run automatically before publishing. Posts with medical claims, urgency manipulation, or pathologizing language will be blocked. Sensitive topics require crisis resource links.</span>
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {activeTab === "recommendations" && (
+          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+            <h2 className="text-lg font-semibold mb-2" data-testid="text-recommendations-title">Publishing Recommendations</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Analytics-driven insights from the last 7 days. No PII collected. All suggestions are manual — you decide what to act on.</p>
+            {recsLoading ? (
+              <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
+            ) : (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="rounded-lg p-4 bg-green-50 dark:bg-green-950/30 text-center" data-testid="stat-subscribers">
+                    <Users className="w-5 h-5 mx-auto mb-1 text-green-600 dark:text-green-400" />
+                    <div className="text-2xl font-bold text-green-700 dark:text-green-300">{recs.newsletter?.totalSubscribers || 0}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Total Subscribers</div>
+                  </div>
+                  <div className="rounded-lg p-4 bg-blue-50 dark:bg-blue-950/30 text-center" data-testid="stat-signup-attempts">
+                    <TrendingUp className="w-5 h-5 mx-auto mb-1 text-blue-600 dark:text-blue-400" />
+                    <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">{recs.newsletter?.attemptsLast7d || 0}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Signup Attempts (7d)</div>
+                  </div>
+                  <div className="rounded-lg p-4 bg-purple-50 dark:bg-purple-950/30 text-center" data-testid="stat-signup-success">
+                    <CheckCircle className="w-5 h-5 mx-auto mb-1 text-purple-600 dark:text-purple-400" />
+                    <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">{recs.newsletter?.successesLast7d || 0}</div>
+                    <div className="text-xs text-gray-600 dark:text-gray-400">Successful Signups (7d)</div>
+                  </div>
+                </div>
+
+                {(recs.topPages || []).length > 0 && (
+                  <div>
+                    <h3 className="font-medium mb-2 flex items-center gap-2"><Eye className="w-4 h-4" /> Top Pages (7d)</h3>
+                    <div className="space-y-1">
+                      {(recs.topPages || []).map((p, i) => (
+                        <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-gray-50 dark:bg-gray-700/50 rounded">
+                          <span className="text-sm font-mono">{p.path}</span>
+                          <span className="text-sm font-medium">{p.views} views</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {(recs.topCTAs || []).length > 0 && (
+                  <div>
+                    <h3 className="font-medium mb-2 flex items-center gap-2"><TrendingUp className="w-4 h-4" /> Top CTAs (7d)</h3>
+                    <div className="space-y-1">
+                      {(recs.topCTAs || []).map((c, i) => (
+                        <div key={i} className="flex justify-between items-center py-1.5 px-3 bg-gray-50 dark:bg-gray-700/50 rounded">
+                          <span className="text-sm">{c.name}</span>
+                          <span className="text-sm font-medium">{c.clicks} clicks</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {(recs.suggestedTopics || []).length > 0 && (
+                  <div>
+                    <h3 className="font-medium mb-2 flex items-center gap-2"><Lightbulb className="w-4 h-4" /> Suggested Blog Topics</h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Based on most-visited pages — write about what your audience is already exploring.</p>
+                    <div className="space-y-2">
+                      {(recs.suggestedTopics || []).map((t, i) => (
+                        <div key={i} className="flex justify-between items-center py-2 px-3 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
+                          <div>
+                            <span className="text-sm font-medium text-amber-800 dark:text-amber-200">{t.topic}</span>
+                            <span className="text-xs text-gray-500 ml-2">(from {t.path})</span>
+                          </div>
+                          <span className="text-xs bg-amber-200 dark:bg-amber-800 px-2 py-0.5 rounded">{t.views} views</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {(recs.topPages || []).length === 0 && (recs.suggestedTopics || []).length === 0 && (
+                  <p className="text-center text-gray-500 dark:text-gray-400 py-6">
+                    Not enough analytics data yet. Recommendations will appear as visitors interact with the site over the next few days.
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+        )}
 
         {activeTab === "registry" && (
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">

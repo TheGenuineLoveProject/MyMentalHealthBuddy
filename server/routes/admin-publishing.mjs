@@ -4,6 +4,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { requireAuth, requireAdmin } from '../middleware/auth.mjs';
 import { logger } from '../utils/logger.mjs';
+import { db } from '../db/connection.mjs';
+import { analyticsEvents, newsletterSubscribers, leads } from '../../shared/schema.mjs';
+import { desc, sql, count, gte, eq } from 'drizzle-orm';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '../..');
@@ -246,6 +249,93 @@ router.get('/signals/summary', async (req, res) => {
   } catch (err) {
     logger.error('Signals summary error', { error: err.message });
     res.status(500).json({ ok: false, error: 'Failed to load signals' });
+  }
+});
+
+const TOPIC_MAP = {
+  '/tools': 'Wellness Tools Deep Dive',
+  '/mood': 'Mood Tracking & Emotional Awareness',
+  '/journal': 'Journaling for Healing',
+  '/chat': 'AI-Assisted Reflection',
+  '/meditation': 'Meditation & Mindfulness',
+  '/breathing': 'Breathwork for Calm',
+  '/grounding': 'Grounding Techniques',
+  '/affirmations': 'The Power of Affirmations',
+  '/resilience': 'Building Resilience',
+  '/self-care': 'Self-Care Practices',
+  '/healing': 'Healing Journeys',
+  '/wisdom': 'Wisdom & Inner Growth',
+  '/pricing': 'Getting the Most from Your Wellness Practice',
+  '/crisis': 'Mental Health Resources & Support',
+  '/blog': 'Community Stories & Insights',
+  '/dashboard': 'Your Personal Wellness Path',
+  '/learn': 'Learning & Growth Resources',
+  '/challenge': 'Wellness Challenges',
+};
+
+router.get('/recommendations', async (req, res) => {
+  try {
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+    const topPages = await db
+      .select({
+        path: analyticsEvents.path,
+        views: count(),
+      })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventName} = 'page_view' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`)
+      .groupBy(analyticsEvents.path)
+      .orderBy(desc(count()))
+      .limit(10);
+
+    const topCTAs = await db
+      .select({
+        eventName: analyticsEvents.eventName,
+        clicks: count(),
+      })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventCategory} = 'cta' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`)
+      .groupBy(analyticsEvents.eventName)
+      .orderBy(desc(count()))
+      .limit(10);
+
+    const suggestedTopics = topPages
+      .map(p => {
+        const basePath = (p.path || '').split('?')[0].replace(/\/$/, '') || '/';
+        const topic = TOPIC_MAP[basePath];
+        return topic ? { path: basePath, topic, views: Number(p.views) } : null;
+      })
+      .filter(Boolean)
+      .slice(0, 5);
+
+    const [signupAttempts] = await db
+      .select({ total: count() })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventName} = 'newsletter_signup_attempt' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`);
+
+    const [signupSuccesses] = await db
+      .select({ total: count() })
+      .from(analyticsEvents)
+      .where(sql`${analyticsEvents.eventName} = 'newsletter_signup_success' AND ${analyticsEvents.createdAt} >= ${sevenDaysAgo}`);
+
+    const [subscriberCount] = await db.select({ total: count() }).from(leads);
+
+    res.json({
+      ok: true,
+      data: {
+        topPages: topPages.map(p => ({ path: p.path, views: Number(p.views) })),
+        topCTAs: topCTAs.map(c => ({ name: c.eventName, clicks: Number(c.clicks) })),
+        suggestedTopics,
+        newsletter: {
+          totalSubscribers: Number(subscriberCount?.total || 0),
+          attemptsLast7d: Number(signupAttempts?.total || 0),
+          successesLast7d: Number(signupSuccesses?.total || 0),
+        },
+      },
+    });
+  } catch (err) {
+    logger.error('Recommendations error', { error: err.message });
+    res.status(500).json({ ok: false, error: 'Failed to load recommendations' });
   }
 });
 
