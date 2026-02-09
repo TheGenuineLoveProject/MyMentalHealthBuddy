@@ -23,15 +23,15 @@ const toolCategories = [
   {
     title: "AI & Core Wellness Tools",
     tools: [
-      { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai", icon: MessageSquare, desc: "AI conversation engine" },
-      { id: "therapy", label: "Therapy Engine", endpoint: "/api/therapy", icon: Headphones, desc: "Guided therapy sessions" },
+      { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai/history", icon: MessageSquare, desc: "AI conversation engine" },
+      { id: "therapy", label: "Therapy Engine", endpoint: "/api/therapy/crisis-resources", icon: Headphones, desc: "Guided therapy sessions" },
       { id: "mood-tracker", label: "Mood Tracker", endpoint: "/api/mood", icon: Heart, desc: "User mood tracking" },
       { id: "journal", label: "Journal System", endpoint: "/api/journal", icon: BookOpen, desc: "Journaling engine" },
       { id: "gratitude", label: "Gratitude Prompts", endpoint: "/api/gratitude", icon: Sun, desc: "Daily gratitude system" },
       { id: "reflection", label: "Reflection Tools", endpoint: "/api/reflection", icon: Moon, desc: "Self-reflection engine" },
-      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
-      { id: "mirror", label: "Mirror Reflection", endpoint: "/api/mirror", icon: Eye, desc: "Self-awareness mirror" },
-      { id: "prompts", label: "Prompt Engine", endpoint: "/api/prompts", icon: FileQuestion, desc: "Guided prompt system" },
+      { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools/all", icon: Leaf, desc: "Breath, body scan, meditation" },
+      { id: "mirror", label: "Mirror Reflection", endpoint: "/api/mirror/frameworks", icon: Eye, desc: "Self-awareness mirror" },
+      { id: "prompts", label: "Prompt Engine", endpoint: "/api/prompts/daily", icon: FileQuestion, desc: "Guided prompt system" },
       { id: "states", label: "Emotional States", endpoint: "/api/states", icon: Gauge, desc: "State tracking system" },
     ]
   },
@@ -39,18 +39,18 @@ const toolCategories = [
     title: "Intelligence & Growth Tools",
     tools: [
       { id: "wisdom", label: "Wisdom Engine", endpoint: "/api/wisdom", icon: Lightbulb, desc: "Daily wisdom delivery" },
-      { id: "wisdom-engine", label: "Wisdom Engine (Advanced)", endpoint: "/api/wisdom-engine", icon: Landmark, desc: "Deep wisdom system" },
-      { id: "philosophy", label: "Philosophy Lab", endpoint: "/api/philosophy", icon: GraduationCap, desc: "Philosophical inquiry" },
-      { id: "metacognition", label: "Metacognition", endpoint: "/api/metacognition", icon: Brain, desc: "Thinking about thinking" },
-      { id: "creativity", label: "Creativity Engine", endpoint: "/api/creativity", icon: Sparkles, desc: "Creative exploration" },
-      { id: "resilience", label: "Resilience Builder", endpoint: "/api/resilience", icon: Mountain, desc: "Resilience tools" },
+      { id: "wisdom-engine", label: "Wisdom Engine (Advanced)", endpoint: "/api/wisdom-engine/daily", icon: Landmark, desc: "Deep wisdom system" },
+      { id: "philosophy", label: "Philosophy Lab", endpoint: "/api/philosophy/daily", icon: GraduationCap, desc: "Philosophical inquiry" },
+      { id: "metacognition", label: "Metacognition", endpoint: "/api/metacognition/daily", icon: Brain, desc: "Thinking about thinking" },
+      { id: "creativity", label: "Creativity Engine", endpoint: "/api/creativity/daily", icon: Sparkles, desc: "Creative exploration" },
+      { id: "resilience", label: "Resilience Builder", endpoint: "/api/resilience/daily", icon: Mountain, desc: "Resilience tools" },
       { id: "foresight", label: "Foresight Lab", endpoint: "/api/foresight", icon: Compass, desc: "Future planning" },
-      { id: "knowledge", label: "Knowledge Synthesis", endpoint: "/api/knowledge", icon: BookOpen, desc: "Knowledge integration" },
-      { id: "cognitive-lab", label: "Cognitive Lab", endpoint: "/api/cognitive-lab", icon: Brain, desc: "Cognitive exercises" },
-      { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/cognitive-mastery", icon: Trophy, desc: "Cognitive excellence" },
+      { id: "knowledge", label: "Knowledge Synthesis", endpoint: "/api/knowledge/all", icon: BookOpen, desc: "Knowledge integration" },
+      { id: "cognitive-lab", label: "Cognitive Lab", endpoint: "/api/cognitive-lab/daily", icon: Brain, desc: "Cognitive exercises" },
+      { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/self-mastery-intelligence/daily", icon: Trophy, desc: "Cognitive excellence" },
       { id: "deep-learning", label: "Deep Learning", endpoint: "/api/deep-learning", icon: Layers, desc: "Deep learning tools" },
-      { id: "dialectics", label: "Dialectics Engine", endpoint: "/api/dialectics", icon: Puzzle, desc: "Dialectical reasoning" },
-      { id: "practices", label: "Practices Library", endpoint: "/api/practices", icon: Milestone, desc: "Guided practices" },
+      { id: "dialectics", label: "Dialectics Engine", endpoint: "/api/dialectics/daily", icon: Puzzle, desc: "Dialectical reasoning" },
+      { id: "practices", label: "Practices Library", endpoint: "/api/practices/daily", icon: Milestone, desc: "Guided practices" },
       { id: "insights", label: "Insights Engine", endpoint: "/api/insights", icon: Lightbulb, desc: "Personal insights" },
     ]
   },
@@ -58,16 +58,16 @@ const toolCategories = [
     title: "Healing & Recovery Tools",
     tools: [
       { id: "trauma-healing", label: "Trauma Healing", endpoint: "/api/trauma-healing", icon: HeartHandshake, desc: "Trauma-informed protocols" },
-      { id: "emotional-resilience", label: "Emotional Resilience", endpoint: "/api/emotional-resilience", icon: Flame, desc: "Emotional strength" },
-      { id: "emotional-mastery", label: "Emotional Mastery", endpoint: "/api/emotional-mastery", icon: Target, desc: "Emotion regulation" },
+      { id: "emotional-resilience", label: "Emotional Resilience", endpoint: "/api/emotional-resilience/daily", icon: Flame, desc: "Emotional strength" },
+      { id: "emotional-mastery", label: "Emotional Mastery", endpoint: "/api/emotional-mastery/daily-eq", icon: Target, desc: "Emotion regulation" },
       { id: "healing-modalities", label: "Healing Modalities", endpoint: "/api/healing-modalities", icon: Flower2, desc: "Healing approaches" },
       { id: "holistic-healing", label: "Holistic Healing", endpoint: "/api/holistic-healing", icon: TreePine, desc: "Whole-person wellness" },
-      { id: "healing-tools", label: "Healing Tools", endpoint: "/api/healing", icon: Heart, desc: "Core healing toolkit" },
+      { id: "healing-tools", label: "Healing Tools", endpoint: "/api/healing/all", icon: Heart, desc: "Core healing toolkit" },
       { id: "healing-core", label: "Healing Core", endpoint: "/api/healing-core", icon: Leaf, desc: "Core healing engine" },
-      { id: "healing-intelligence", label: "Healing Intelligence", endpoint: "/api/healing-intelligence", icon: Sparkles, desc: "AI-guided healing" },
-      { id: "post-trauma", label: "Post-Trauma Growth", endpoint: "/api/post-trauma", icon: Feather, desc: "Post-traumatic growth" },
-      { id: "mind-body", label: "Mind-Body Integration", endpoint: "/api/mind-body", icon: CircleDot, desc: "Mind-body connection" },
-      { id: "psychological-safety", label: "Psychological Safety", endpoint: "/api/psychological-safety", icon: Shield, desc: "Safety frameworks" },
+      { id: "healing-intelligence", label: "Healing Intelligence", endpoint: "/api/healing-intelligence/categories", icon: Sparkles, desc: "AI-guided healing" },
+      { id: "post-trauma", label: "Post-Trauma Growth", endpoint: "/api/post-trauma/daily", icon: Feather, desc: "Post-traumatic growth" },
+      { id: "mind-body", label: "Mind-Body Integration", endpoint: "/api/mind-body/daily", icon: CircleDot, desc: "Mind-body connection" },
+      { id: "psychological-safety", label: "Psychological Safety", endpoint: "/api/psychological-safety/daily", icon: Shield, desc: "Safety frameworks" },
     ]
   },
   {
@@ -197,7 +197,7 @@ const toolCategories = [
 
 const CRITICAL_CHECKS = [
   { id: "health-api", label: "System Health", endpoint: "/api/health", icon: Activity, desc: "Server & DB status" },
-  { id: "ai-chat", label: "AI Engine", endpoint: "/api/ai", icon: MessageSquare, desc: "AI chat system" },
+  { id: "ai-chat", label: "AI Engine", endpoint: "/api/ai/history", icon: MessageSquare, desc: "AI chat system" },
   { id: "auth-core", label: "Auth Service", endpoint: "/api/auth/user", icon: Shield, desc: "Authentication" },
   { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: CreditCard, desc: "Stripe billing" },
   { id: "blog-api", label: "Blog Engine", endpoint: "/api/blog", icon: BookOpen, desc: "Blog system" },
@@ -353,17 +353,24 @@ export default function AdminTools() {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
-      const res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
+      let res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
       clearTimeout(timeout);
+      if (res.status === 405) {
+        const controller2 = new AbortController();
+        const timeout2 = setTimeout(() => controller2.abort(), 8000);
+        res = await fetch(tool.endpoint, { method: 'HEAD', credentials: 'include', signal: controller2.signal });
+        clearTimeout(timeout2);
+      }
       const responseTime = Math.round(performance.now() - startTime);
       let status = 'healthy';
       if (res.ok) status = 'healthy';
       else if (res.status === 401 || res.status === 403) status = 'healthy';
+      else if (res.status === 405) status = 'healthy';
       else if (res.status === 404) status = 'error';
       else if (res.status === 429) status = 'warning';
       else if (res.status >= 500) status = 'error';
       else status = 'warning';
-      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
+      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 405 ? 'post-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
       setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString(), label: statusLabel, ms: responseTime } }));
     } catch (err) {
       const responseTime = Math.round(performance.now() - startTime);
@@ -532,38 +539,57 @@ export default function AdminTools() {
           </div>
         )}
 
-        {checkedCount === totalTools && !isAnyRunning && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3 mb-6 p-4 rounded-xl bg-muted/50" data-testid="panel-results-summary">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600" data-testid="text-healthy-count">{healthyCount}</div>
-              <div className="text-xs text-muted-foreground">Healthy</div>
+        {checkedCount === totalTools && !isAnyRunning && (() => {
+          const healthScore = totalTools > 0 ? Math.round((healthyCount / totalTools) * 100) : 0;
+          const scoreColor = healthScore >= 90 ? 'text-green-600' : healthScore >= 70 ? 'text-amber-500' : 'text-red-500';
+          const scoreBg = healthScore >= 90 ? 'bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800' : healthScore >= 70 ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800' : 'bg-red-50 dark:bg-red-950/30 border-red-200 dark:border-red-800';
+          return (
+            <div className={`mb-6 p-4 rounded-xl border ${scoreBg}`} data-testid="panel-results-summary">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className={`text-4xl font-bold ${scoreColor}`} data-testid="text-health-score">{healthScore}%</div>
+                  <div>
+                    <div className="font-semibold text-sm">Platform Health Score</div>
+                    <div className="text-xs text-muted-foreground">Last check: {lastFullCheck}</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button onClick={runErrorsOnly} disabled={errorCount + warningCount === 0} className="text-xs px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-muted/50 disabled:opacity-40" data-testid="button-recheck-issues">Re-check Issues ({errorCount + warningCount})</button>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600" data-testid="text-healthy-count">{healthyCount}</div>
+                  <div className="text-xs text-muted-foreground">Healthy</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-amber-500" data-testid="text-warning-count">{warningCount}</div>
+                  <div className="text-xs text-muted-foreground">Warnings</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-red-500" data-testid="text-error-count">{errorCount}</div>
+                  <div className="text-xs text-muted-foreground">Errors</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600" data-testid="text-auth-gated-count">{authGatedCount}</div>
+                  <div className="text-xs text-muted-foreground">Auth-Gated</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-600" data-testid="text-avg-response">{avgResponseTime}ms</div>
+                  <div className="text-xs text-muted-foreground">Avg Response</div>
+                </div>
+                <div className="text-center">
+                  <div className={`text-2xl font-bold ${maxResponseTime > 1000 ? 'text-red-500' : 'text-slate-600'}`} data-testid="text-max-response">{maxResponseTime}ms</div>
+                  <div className="text-xs text-muted-foreground">Slowest</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-slate-600" data-testid="text-total-tools">{totalTools}</div>
+                  <div className="text-xs text-muted-foreground">Total Tools</div>
+                </div>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-amber-500" data-testid="text-warning-count">{warningCount}</div>
-              <div className="text-xs text-muted-foreground">Warnings</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-red-500" data-testid="text-error-count">{errorCount}</div>
-              <div className="text-xs text-muted-foreground">Errors</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600" data-testid="text-auth-gated-count">{authGatedCount}</div>
-              <div className="text-xs text-muted-foreground">Auth-Gated</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-purple-600" data-testid="text-avg-response">{avgResponseTime}ms</div>
-              <div className="text-xs text-muted-foreground">Avg Response</div>
-            </div>
-            <div className="text-center">
-              <div className={`text-2xl font-bold ${maxResponseTime > 1000 ? 'text-red-500' : 'text-slate-600'}`} data-testid="text-max-response">{maxResponseTime}ms</div>
-              <div className="text-xs text-muted-foreground">Slowest</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-slate-600" data-testid="text-total-tools">{totalTools}</div>
-              <div className="text-xs text-muted-foreground">Total Tools</div>
-            </div>
-          </div>
-        )}
+          );
+        })()}
 
         {checkedCount > 0 && (
           <div className="flex items-center gap-2 mb-4 flex-wrap p-3 rounded-xl bg-muted/30 border border-gray-100 dark:border-gray-800" data-testid="panel-ops-toolbar">
@@ -710,7 +736,7 @@ export default function AdminTools() {
                           </div>
                           <div className="flex items-center gap-2 flex-shrink-0">
                             {result && (
-                              <span title={`HTTP ${result.code} - ${result.label || ''} - ${result.ms}ms`} className="flex items-center gap-1">
+                              <span title={`HTTP ${result.code} - ${result.label || ''} - ${result.ms}ms - checked ${result.time}`} className="flex items-center gap-1">
                                 {result.status === 'healthy' ? (
                                   <CheckCircle size={14} className="text-green-600" />
                                 ) : result.status === 'warning' ? (
@@ -718,7 +744,7 @@ export default function AdminTools() {
                                 ) : (
                                   <AlertCircle size={14} className="text-red-500" />
                                 )}
-                                <span className="text-[10px] text-muted-foreground">
+                                <span className={`text-[10px] ${result.ms > 2000 ? 'text-red-500 font-medium' : result.ms > 500 ? 'text-amber-500' : 'text-muted-foreground'}`}>
                                   {result.label && result.label !== 'ok' ? result.label : ''}{result.ms != null ? ` ${result.ms}ms` : ''}
                                 </span>
                               </span>
