@@ -150,30 +150,36 @@ export default function FeatureFlags() {
     flag.id.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const enabledCount = flags.filter(f => f.enabled).length;
+  const disabledCount = flags.filter(f => !f.enabled).length;
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      <div className="min-h-screen bg-background flex items-center justify-center" data-testid="loading-feature-flags">
+        <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-primary" />
+        <span className="ml-3 text-muted-foreground">Loading feature flags...</span>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" data-testid="page-feature-flags">
       <SEO title="Feature Flags — Admin" noIndex />
 
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} /> Command Center
         </Link>
-        <header className="mb-8">
+        <header className="mb-8" data-testid="panel-header">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
               <Flag className="w-6 h-6 text-primary" />
             </div>
             <div>
               <h1 className="text-3xl font-bold" data-testid="text-page-title">Feature Flags</h1>
-              <p className="text-muted-foreground">Control feature rollouts</p>
+              <p className="text-muted-foreground" data-testid="text-subtitle">
+                {flags.length} flags &middot; {enabledCount} enabled &middot; {disabledCount} disabled
+              </p>
             </div>
           </div>
         </header>
@@ -261,19 +267,29 @@ export default function FeatureFlags() {
           </Card>
         )}
 
-        <div className="space-y-4">
+        <div className="space-y-4" data-testid="panel-flags-list">
+          {filteredFlags.length === 0 && (
+            <Card data-testid="text-no-flags">
+              <CardContent className="py-12 text-center text-muted-foreground">
+                No flags match your search.
+              </CardContent>
+            </Card>
+          )}
           {filteredFlags.map(flag => (
-            <Card key={flag.id}>
+            <Card key={flag.id} data-testid={`card-flag-${flag.id}`}>
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold">{flag.name}</h3>
-                      <code className="text-xs bg-muted px-2 py-0.5 rounded">{flag.id}</code>
+                      <h3 className="font-semibold" data-testid={`text-flag-name-${flag.id}`}>{flag.name}</h3>
+                      <code className="text-xs bg-muted px-2 py-0.5 rounded" data-testid={`text-flag-id-${flag.id}`}>{flag.id}</code>
+                      <span className={`text-xs px-2 py-0.5 rounded ${flag.enabled ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'}`} data-testid={`badge-flag-status-${flag.id}`}>
+                        {flag.enabled ? 'ON' : 'OFF'}
+                      </span>
                     </div>
-                    <p className="text-sm text-muted-foreground">{flag.description}</p>
+                    <p className="text-sm text-muted-foreground" data-testid={`text-flag-desc-${flag.id}`}>{flag.description}</p>
                     {flag.percentage < 100 && flag.enabled && (
-                      <p className="text-xs text-amber-600 mt-1">
+                      <p className="text-xs text-amber-600 mt-1" data-testid={`text-flag-rollout-${flag.id}`}>
                         Rolling out to {flag.percentage}% of users
                       </p>
                     )}

@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowLeft } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
+import { ArrowLeft, RefreshCw, Calendar, Copy, Check, Loader2, Star, Send, Filter } from "lucide-react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/Button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 
 const PLATFORMS = [
   { key: "instagram", label: "Instagram" },
@@ -31,424 +33,295 @@ function CopyButton({ text, label }) {
   };
 
   return (
-    <button
-      data-testid={`copy-${label.toLowerCase().replace(/\s+/g, "-")}`}
+    <Button
+      variant="outline"
+      size="sm"
       onClick={handleCopy}
-      style={{
-        padding: "6px 14px",
-        borderRadius: 6,
-        border: "1px solid #d1d5db",
-        background: copied ? "#d1fae5" : "#fff",
-        color: copied ? "#065f46" : "#374151",
-        cursor: "pointer",
-        fontSize: 13,
-        transition: "all 0.2s",
-      }}
+      data-testid={`copy-${label.toLowerCase().replace(/\s+/g, "-")}`}
+      className="text-xs"
     >
+      {copied ? <Check className="w-3 h-3 mr-1 text-green-600" /> : <Copy className="w-3 h-3 mr-1" />}
       {copied ? "Copied!" : `Copy ${label}`}
-    </button>
+    </Button>
   );
 }
 
 export default function AdminPublishingToday() {
-  const { user } = useAuth();
-  const [drafts, setDrafts] = useState([]);
-  const [featured, setFeatured] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const queryClient = useQueryClient();
   const [filter, setFilter] = useState("all");
-  const [posting, setPosting] = useState(null);
-  const [settingFeatured, setSettingFeatured] = useState(null);
-
   const today = new Date().toISOString().split("T")[0];
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  const { data: draftsData, isLoading: draftsLoading, error: draftsError, refetch: refetchDrafts } = useQuery({
+    queryKey: ['/api/admin/publishing/draft-packs'],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/publishing/draft-packs", { credentials: "include" });
+      if (!res.ok) throw new Error("Failed to load drafts");
+      return res.json();
+    },
+    retry: 2,
+    retryDelay: 1000,
+  });
 
-  async function loadData() {
-    setLoading(true);
-    try {
-      const [draftsRes, featuredRes] = await Promise.all([
-        fetch("/api/admin/publishing/draft-packs", { credentials: "include" }),
-        fetch("/api/admin/publishing/featured", { credentials: "include" }),
-      ]);
-      const draftsData = await draftsRes.json();
-      const featuredData = await featuredRes.json();
-      if (draftsData.ok) setDrafts(draftsData.data || []);
-      if (featuredData.ok) setFeatured(featuredData.data?.[today] || null);
-    } catch (err) {
-      console.error("Failed to load publishing data", err);
-    }
-    setLoading(false);
-  }
+  const { data: featuredData, refetch: refetchFeatured } = useQuery({
+    queryKey: ['/api/admin/publishing/featured'],
+    queryFn: async () => {
+      const res = await fetch("/api/admin/publishing/featured", { credentials: "include" });
+      if (!res.ok) throw new Error("Failed to load featured");
+      return res.json();
+    },
+    retry: 2,
+    retryDelay: 1000,
+  });
 
-  async function handleSetFeatured(id) {
-    setSettingFeatured(id);
-    try {
+  const setFeaturedMutation = useMutation({
+    mutationFn: async (id) => {
       const res = await fetch("/api/admin/publishing/featured", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ date: today, glpId: id }),
       });
-      const data = await res.json();
-      if (data.ok) {
-        setFeatured(data.data);
-      }
-    } catch (err) {
-      console.error("Failed to set featured", err);
-    }
-    setSettingFeatured(null);
-  }
+      if (!res.ok) throw new Error("Failed to set featured");
+      return res.json();
+    },
+    onSuccess: () => {
+      refetchFeatured();
+      refetchDrafts();
+    },
+  });
 
-  async function handleMarkPosted(id) {
-    setPosting(id);
-    try {
+  const markPostedMutation = useMutation({
+    mutationFn: async (id) => {
       const res = await fetch(`/api/admin/publishing/mark-posted/${id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
-      const data = await res.json();
-      if (data.ok) {
-        setDrafts((prev) =>
-          prev.map((d) =>
-            d.id === id ? { ...d, status: "posted", postedAt: data.data.postedAt } : d
-          )
-        );
-      }
-    } catch (err) {
-      console.error("Failed to mark posted", err);
-    }
-    setPosting(null);
+      if (!res.ok) throw new Error("Failed to mark posted");
+      return res.json();
+    },
+    onSuccess: () => {
+      refetchDrafts();
+      refetchFeatured();
+    },
+  });
+
+  const drafts = draftsData?.ok ? (draftsData.data || []) : [];
+  const featured = featuredData?.ok ? (featuredData.data?.[today] || null) : null;
+
+  const readyDrafts = drafts.filter((d) => d.status === "draft" || d.status === "approved");
+  const postedDrafts = drafts.filter((d) => d.status === "posted");
+  const filtered = filter === "all" ? readyDrafts : readyDrafts.filter((d) => d.type === filter);
+  const featuredDraft = featured ? drafts.find((d) => d.id === featured.glpId) : null;
+
+  const handleRefresh = () => {
+    refetchDrafts();
+    refetchFeatured();
+  };
+
+  if (draftsLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]" data-testid="loading-publishing">
+        <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-primary" />
+        <span className="ml-3 text-muted-foreground">Loading publishing dashboard...</span>
+      </div>
+    );
   }
 
-  const readyDrafts = drafts.filter(
-    (d) => d.status === "draft" || d.status === "approved"
-  );
-  const postedDrafts = drafts.filter((d) => d.status === "posted");
-
-  const filtered =
-    filter === "all"
-      ? readyDrafts
-      : readyDrafts.filter((d) => d.type === filter);
-
-  const featuredDraft = featured
-    ? drafts.find((d) => d.id === featured.glpId)
-    : null;
-
-  if (loading) {
+  if (draftsError) {
     return (
-      <div style={{ padding: 32, textAlign: "center", color: "#6b7280" }}>
-        Loading publishing dashboard...
+      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4" data-testid="error-publishing">
+        <p className="text-red-500">Failed to load publishing data</p>
+        <Button variant="outline" onClick={handleRefresh} data-testid="button-retry">
+          <RefreshCw className="w-4 h-4 mr-2" /> Try Again
+        </Button>
       </div>
     );
   }
 
   return (
-    <div style={{ maxWidth: 960, margin: "0 auto", padding: "24px 16px" }}>
+    <div className="max-w-5xl mx-auto px-4 py-8 space-y-6" data-testid="page-publishing-today">
       <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
         <ArrowLeft size={16} /> Command Center
       </Link>
-      <h1
-        data-testid="heading-todays-pick"
-        style={{ fontSize: 24, fontWeight: 700, marginBottom: 4, color: "#1f2937" }}
-      >
-        Today's Publishing Pick
-      </h1>
-      <p style={{ color: "#6b7280", marginBottom: 24, fontSize: 14 }}>
-        {today} &middot; {readyDrafts.length} drafts ready &middot;{" "}
-        {postedDrafts.length} posted
-      </p>
+
+      <div className="flex items-center justify-between" data-testid="panel-header">
+        <div>
+          <h1 className="text-2xl font-semibold text-foreground" data-testid="heading-todays-pick">
+            Today's Publishing Pick
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1" data-testid="text-summary">
+            {today} &middot; {readyDrafts.length} drafts ready &middot; {postedDrafts.length} posted
+          </p>
+        </div>
+        <Button variant="outline" size="sm" onClick={handleRefresh} data-testid="button-refresh">
+          <RefreshCw className="w-4 h-4 mr-2" /> Refresh
+        </Button>
+      </div>
+
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" data-testid="panel-stats">
+        <Card>
+          <CardContent className="p-4 text-center">
+            <p className="text-2xl font-bold" data-testid="stat-total">{drafts.length}</p>
+            <p className="text-xs text-muted-foreground">Total Drafts</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4 text-center">
+            <p className="text-2xl font-bold text-amber-600" data-testid="stat-ready">{readyDrafts.length}</p>
+            <p className="text-xs text-muted-foreground">Ready</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4 text-center">
+            <p className="text-2xl font-bold text-green-600" data-testid="stat-posted">{postedDrafts.length}</p>
+            <p className="text-xs text-muted-foreground">Posted</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4 text-center">
+            <p className="text-2xl font-bold text-blue-600" data-testid="stat-featured">{featuredDraft ? "1" : "0"}</p>
+            <p className="text-xs text-muted-foreground">Featured</p>
+          </CardContent>
+        </Card>
+      </div>
 
       {featuredDraft && (
-        <div
-          data-testid="featured-card"
-          style={{
-            background: "linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%)",
-            border: "2px solid #86efac",
-            borderRadius: 12,
-            padding: 20,
-            marginBottom: 24,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 12,
-            }}
-          >
-            <span
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: "#16a34a",
-                textTransform: "uppercase",
-                letterSpacing: 1,
-              }}
-            >
-              Today's Featured
-            </span>
-            <span
-              style={{
-                fontSize: 12,
-                padding: "2px 8px",
-                borderRadius: 4,
-                background: "#dcfce7",
-                color: "#166534",
-              }}
-            >
-              {featuredDraft.pillar}
-            </span>
-          </div>
-          <h3 style={{ fontSize: 18, fontWeight: 600, marginBottom: 8 }}>
-            {featuredDraft.title}
-          </h3>
-          <p style={{ color: "#6b7280", fontSize: 13, marginBottom: 16 }}>
-            Type: {featuredDraft.type} &middot; CTA: {featuredDraft.primaryCta}
-          </p>
-
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 12 }}>
-            {PLATFORMS.map((p) => (
-              <CopyButton
-                key={p.key}
-                text={featuredDraft.captions?.[p.key] || ""}
-                label={p.label}
-              />
-            ))}
-          </div>
-
-          {featuredDraft.status !== "posted" && (
-            <button
-              data-testid="button-mark-posted-featured"
-              onClick={() => handleMarkPosted(featuredDraft.id)}
-              disabled={posting === featuredDraft.id}
-              style={{
-                padding: "8px 20px",
-                borderRadius: 8,
-                border: "none",
-                background: "#16a34a",
-                color: "#fff",
-                fontWeight: 600,
-                cursor: "pointer",
-                fontSize: 14,
-              }}
-            >
-              {posting === featuredDraft.id ? "Marking..." : "Mark as Posted"}
-            </button>
-          )}
-          {featuredDraft.status === "posted" && (
-            <span style={{ color: "#16a34a", fontWeight: 600, fontSize: 14 }}>
-              Posted
-            </span>
-          )}
-        </div>
+        <Card className="border-2 border-green-300 bg-green-50/50 dark:bg-green-950/20" data-testid="featured-card">
+          <CardContent className="p-5">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-semibold text-green-600 uppercase tracking-wider flex items-center gap-1" data-testid="text-featured-label">
+                <Star className="w-3 h-3" /> Today's Featured
+              </span>
+              <span className="text-xs px-2 py-0.5 rounded bg-green-100 text-green-700" data-testid="text-featured-pillar">
+                {featuredDraft.pillar}
+              </span>
+            </div>
+            <h3 className="text-lg font-semibold mb-2" data-testid="text-featured-title">{featuredDraft.title}</h3>
+            <p className="text-sm text-muted-foreground mb-4" data-testid="text-featured-meta">
+              Type: {featuredDraft.type} &middot; CTA: {featuredDraft.primaryCta}
+            </p>
+            <div className="flex gap-2 flex-wrap mb-3">
+              {PLATFORMS.map((p) => (
+                <CopyButton key={p.key} text={featuredDraft.captions?.[p.key] || ""} label={p.label} />
+              ))}
+            </div>
+            {featuredDraft.status !== "posted" ? (
+              <Button
+                onClick={() => markPostedMutation.mutate(featuredDraft.id)}
+                disabled={markPostedMutation.isPending}
+                className="bg-green-600 hover:bg-green-700"
+                data-testid="button-mark-posted-featured"
+              >
+                <Send className="w-4 h-4 mr-2" />
+                {markPostedMutation.isPending ? "Marking..." : "Mark as Posted"}
+              </Button>
+            ) : (
+              <span className="text-green-600 font-semibold text-sm flex items-center gap-1" data-testid="text-featured-posted">
+                <Check className="w-4 h-4" /> Posted
+              </span>
+            )}
+          </CardContent>
+        </Card>
       )}
 
-      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+      <div className="flex gap-2 flex-wrap" data-testid="panel-filters">
         {["all", "social", "blog", "newsletter"].map((f) => (
-          <button
+          <Button
             key={f}
-            data-testid={`filter-${f}`}
+            variant={filter === f ? "default" : "outline"}
+            size="sm"
             onClick={() => setFilter(f)}
-            style={{
-              padding: "6px 14px",
-              borderRadius: 6,
-              border: filter === f ? "2px solid #3b82f6" : "1px solid #d1d5db",
-              background: filter === f ? "#eff6ff" : "#fff",
-              color: filter === f ? "#1d4ed8" : "#374151",
-              cursor: "pointer",
-              fontSize: 13,
-              fontWeight: filter === f ? 600 : 400,
-            }}
+            data-testid={`filter-${f}`}
           >
             {f === "all" ? "All" : f.charAt(0).toUpperCase() + f.slice(1)} (
-            {f === "all"
-              ? readyDrafts.length
-              : readyDrafts.filter((d) => d.type === f).length}
-            )
-          </button>
+            {f === "all" ? readyDrafts.length : readyDrafts.filter((d) => d.type === f).length})
+          </Button>
         ))}
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div className="space-y-3" data-testid="panel-drafts-list">
         {filtered.length === 0 && (
-          <p style={{ color: "#9ca3af", textAlign: "center", padding: 32 }}>
-            No drafts available for this filter.
-          </p>
+          <Card data-testid="text-empty-drafts">
+            <CardContent className="py-12 text-center text-muted-foreground">
+              No drafts available for this filter.
+            </CardContent>
+          </Card>
         )}
         {filtered.map((draft) => (
-          <div
+          <Card
             key={draft.id}
+            className={featured?.glpId === draft.id ? "border-green-300 bg-green-50/30 dark:bg-green-950/10" : ""}
             data-testid={`draft-card-${draft.id}`}
-            style={{
-              border: "1px solid #e5e7eb",
-              borderRadius: 10,
-              padding: 16,
-              background:
-                featured?.glpId === draft.id
-                  ? "#f0fdf4"
-                  : draft.status === "posted"
-                  ? "#f9fafb"
-                  : "#fff",
-            }}
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "flex-start",
-                marginBottom: 8,
-              }}
-            >
-              <div>
-                <h4 style={{ fontSize: 15, fontWeight: 600, marginBottom: 4 }}>
-                  {draft.title}
-                </h4>
-                <div style={{ display: "flex", gap: 6 }}>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      padding: "2px 6px",
-                      borderRadius: 4,
-                      background: "#e0e7ff",
-                      color: "#3730a3",
-                    }}
+            <CardContent className="p-4">
+              <div className="flex items-start justify-between gap-4 mb-2">
+                <div>
+                  <h4 className="font-semibold text-sm" data-testid={`text-draft-title-${draft.id}`}>{draft.title}</h4>
+                  <div className="flex gap-1.5 mt-1 flex-wrap">
+                    <span className="text-[11px] px-1.5 py-0.5 rounded bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300" data-testid={`badge-type-${draft.id}`}>
+                      {draft.type}
+                    </span>
+                    <span className="text-[11px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300" data-testid={`badge-pillar-${draft.id}`}>
+                      {draft.pillar}
+                    </span>
+                    <span className="text-[11px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400" data-testid={`badge-cta-${draft.id}`}>
+                      {draft.primaryCta}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex gap-1.5 flex-shrink-0">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setFeaturedMutation.mutate(draft.id)}
+                    disabled={setFeaturedMutation.isPending || featured?.glpId === draft.id}
+                    data-testid={`button-feature-${draft.id}`}
+                    className="text-xs"
                   >
-                    {draft.type}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      padding: "2px 6px",
-                      borderRadius: 4,
-                      background: "#fef3c7",
-                      color: "#92400e",
-                    }}
-                  >
-                    {draft.pillar}
-                  </span>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      padding: "2px 6px",
-                      borderRadius: 4,
-                      background: "#f3f4f6",
-                      color: "#6b7280",
-                    }}
-                  >
-                    {draft.primaryCta}
-                  </span>
+                    {featured?.glpId === draft.id ? (
+                      <><Star className="w-3 h-3 mr-1 text-green-600" /> Featured</>
+                    ) : setFeaturedMutation.isPending ? (
+                      "Setting..."
+                    ) : (
+                      <><Star className="w-3 h-3 mr-1" /> Set Pick</>
+                    )}
+                  </Button>
+                  {draft.status !== "posted" && (
+                    <Button
+                      size="sm"
+                      onClick={() => markPostedMutation.mutate(draft.id)}
+                      disabled={markPostedMutation.isPending}
+                      data-testid={`button-mark-posted-${draft.id}`}
+                      className="text-xs"
+                    >
+                      <Send className="w-3 h-3 mr-1" />
+                      {markPostedMutation.isPending ? "..." : "Posted"}
+                    </Button>
+                  )}
                 </div>
               </div>
-              <div style={{ display: "flex", gap: 6 }}>
-                <button
-                  data-testid={`button-feature-${draft.id}`}
-                  onClick={() => handleSetFeatured(draft.id)}
-                  disabled={settingFeatured === draft.id || featured?.glpId === draft.id}
-                  style={{
-                    padding: "5px 12px",
-                    borderRadius: 6,
-                    border: "1px solid #d1d5db",
-                    background:
-                      featured?.glpId === draft.id ? "#dcfce7" : "#fff",
-                    color:
-                      featured?.glpId === draft.id ? "#166534" : "#374151",
-                    cursor:
-                      featured?.glpId === draft.id ? "default" : "pointer",
-                    fontSize: 12,
-                  }}
-                >
-                  {featured?.glpId === draft.id
-                    ? "Featured"
-                    : settingFeatured === draft.id
-                    ? "Setting..."
-                    : "Set as Today's Pick"}
-                </button>
-                {draft.status !== "posted" && (
-                  <button
-                    data-testid={`button-mark-posted-${draft.id}`}
-                    onClick={() => handleMarkPosted(draft.id)}
-                    disabled={posting === draft.id}
-                    style={{
-                      padding: "5px 12px",
-                      borderRadius: 6,
-                      border: "none",
-                      background: "#3b82f6",
-                      color: "#fff",
-                      cursor: "pointer",
-                      fontSize: 12,
-                    }}
-                  >
-                    {posting === draft.id ? "..." : "Mark Posted"}
-                  </button>
-                )}
-              </div>
-            </div>
 
-            <details style={{ marginTop: 8 }}>
-              <summary
-                style={{ cursor: "pointer", fontSize: 13, color: "#6b7280" }}
-              >
-                View captions & copy
-              </summary>
-              <div
-                style={{
-                  marginTop: 8,
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 8,
-                }}
-              >
-                {PLATFORMS.map((p) => (
-                  <div
-                    key={p.key}
-                    style={{
-                      background: "#f9fafb",
-                      borderRadius: 6,
-                      padding: 10,
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        marginBottom: 6,
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontSize: 12,
-                          fontWeight: 600,
-                          color: "#374151",
-                        }}
-                      >
-                        {p.label}
-                      </span>
-                      <CopyButton
-                        text={draft.captions?.[p.key] || ""}
-                        label={p.label}
-                      />
+              <details className="mt-2">
+                <summary className="cursor-pointer text-xs text-muted-foreground hover:text-foreground transition-colors" data-testid={`toggle-captions-${draft.id}`}>
+                  View captions &amp; copy
+                </summary>
+                <div className="mt-3 space-y-2">
+                  {PLATFORMS.map((p) => (
+                    <div key={p.key} className="bg-muted/50 rounded-lg p-3" data-testid={`caption-${p.key}-${draft.id}`}>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-xs font-semibold">{p.label}</span>
+                        <CopyButton text={draft.captions?.[p.key] || ""} label={p.label} />
+                      </div>
+                      <p className="text-xs text-muted-foreground whitespace-pre-wrap leading-relaxed">
+                        {draft.captions?.[p.key] || "No caption"}
+                      </p>
                     </div>
-                    <p
-                      style={{
-                        fontSize: 12,
-                        color: "#6b7280",
-                        whiteSpace: "pre-wrap",
-                        lineHeight: 1.5,
-                        margin: 0,
-                      }}
-                    >
-                      {draft.captions?.[p.key] || "No caption"}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </details>
-          </div>
+                  ))}
+                </div>
+              </details>
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>

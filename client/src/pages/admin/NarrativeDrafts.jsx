@@ -1,9 +1,10 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "wouter";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   FileText, Copy, Check, Loader2, Eye, Edit,
   MessageSquare, Send, ChevronDown, ChevronUp,
-  Instagram, Globe, Filter, ArrowLeft
+  Globe, Filter, ArrowLeft, RefreshCw
 } from "lucide-react";
 import { SiInstagram, SiX, SiTiktok, SiYoutube } from "react-icons/si";
 import SEO from "../../components/SEO";
@@ -30,39 +31,36 @@ const PLATFORM_ICONS = {
 const STATUS_ORDER = ["draft", "review", "approved", "posted"];
 
 export default function NarrativeDrafts() {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [expandedPost, setExpandedPost] = useState(null);
   const [editingPost, setEditingPost] = useState(null);
   const [editCaption, setEditCaption] = useState("");
   const [editNotes, setEditNotes] = useState("");
-  const [saving, setSaving] = useState(null);
   const [copied, setCopied] = useState(null);
   const [statusFilter, setStatusFilter] = useState("all");
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const token = localStorage.getItem("glp_admin_token");
 
-  const loadPosts = useCallback(async () => {
-    if (!token) { setLoading(false); return; }
-    try {
+  const { data: postsData, isLoading, error, refetch, isRefetching } = useQuery({
+    queryKey: ['/api/narrative-drafts'],
+    queryFn: async () => {
+      if (!token) return { ok: false, posts: [] };
       const res = await fetch("/api/narrative-drafts", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      const data = await res.json();
-      if (data.ok) setPosts(data.posts);
-    } catch {
-      toast({ title: "Could not load narrative posts", variant: "destructive" });
-    } finally {
-      setLoading(false);
-    }
-  }, [token]);
+      if (!res.ok) throw new Error("Failed to load narrative posts");
+      return res.json();
+    },
+    retry: 2,
+    retryDelay: 1000,
+    enabled: !!token,
+  });
 
-  useEffect(() => { loadPosts(); }, [loadPosts]);
+  const posts = postsData?.posts || [];
 
-  const updateStatus = async (postId, newStatus) => {
-    setSaving(postId);
-    try {
+  const updateStatusMutation = useMutation({
+    mutationFn: async ({ postId, newStatus }) => {
       const res = await fetch(`/api/narrative-drafts/${postId}`, {
         method: "PATCH",
         headers: {
@@ -71,25 +69,20 @@ export default function NarrativeDrafts() {
         },
         body: JSON.stringify({ status: newStatus }),
       });
-      if (res.ok) {
-        setPosts((prev) =>
-          prev.map((p) =>
-            p.id === postId ? { ...p, draft: { ...p.draft, status: newStatus } } : p
-          )
-        );
-        toast({ title: "Status updated", description: `${postId} → ${newStatus}` });
-      }
-    } catch {
+      if (!res.ok) throw new Error("Update failed");
+      return { postId, newStatus };
+    },
+    onSuccess: ({ postId, newStatus }) => {
+      queryClient.invalidateQueries({ queryKey: ['/api/narrative-drafts'] });
+      toast({ title: "Status updated", description: `${postId} → ${newStatus}` });
+    },
+    onError: () => {
       toast({ title: "Update failed", variant: "destructive" });
-    } finally {
-      setSaving(null);
-    }
-  };
+    },
+  });
 
-  const saveEdit = async (postId) => {
-    setSaving(postId);
-    try {
-      const post = posts.find((p) => p.id === postId);
+  const saveEditMutation = useMutation({
+    mutationFn: async ({ postId, status }) => {
       const res = await fetch(`/api/narrative-drafts/${postId}`, {
         method: "PATCH",
         headers: {
@@ -97,28 +90,23 @@ export default function NarrativeDrafts() {
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
-          status: post?.draft?.status || "draft",
+          status: status || "draft",
           editedCaption: editCaption || null,
           notes: editNotes || null,
         }),
       });
-      if (res.ok) {
-        setPosts((prev) =>
-          prev.map((p) =>
-            p.id === postId
-              ? { ...p, draft: { ...p.draft, editedCaption: editCaption, notes: editNotes } }
-              : p
-          )
-        );
-        setEditingPost(null);
-        toast({ title: "Saved" });
-      }
-    } catch {
+      if (!res.ok) throw new Error("Save failed");
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/narrative-drafts'] });
+      setEditingPost(null);
+      toast({ title: "Saved" });
+    },
+    onError: () => {
       toast({ title: "Save failed", variant: "destructive" });
-    } finally {
-      setSaving(null);
-    }
-  };
+    },
+  });
 
   const copyToClipboard = (text, key) => {
     navigator.clipboard.writeText(text);
@@ -135,7 +123,7 @@ export default function NarrativeDrafts() {
 
   if (!token) {
     return (
-      <div className="p-6 max-w-3xl mx-auto text-center py-20">
+      <div className="p-6 max-w-3xl mx-auto text-center py-20" data-testid="text-auth-required">
         <p className="text-muted-foreground">Admin access required.</p>
       </div>
     );
@@ -144,18 +132,35 @@ export default function NarrativeDrafts() {
   return (
     <>
       <SEO title="Narrative Drafts - Admin" />
-      <div className="p-6 max-w-5xl mx-auto space-y-6">
+      <div className="p-6 max-w-5xl mx-auto space-y-6" data-testid="page-narrative-drafts">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} /> Command Center
         </Link>
-        <div>
-          <h1 className="text-2xl font-bold flex items-center gap-2" data-testid="text-narrative-title">
-            <FileText className="w-6 h-6" />
-            Narrative Drafts ({posts.length})
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Manual posting workflow: draft → review → approved → posted
-          </p>
+
+        <div className="flex items-center justify-between" data-testid="panel-header">
+          <div>
+            <h1 className="text-2xl font-bold flex items-center gap-2" data-testid="text-narrative-title">
+              <FileText className="w-6 h-6" />
+              Narrative Drafts ({posts.length})
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Manual posting workflow: draft → review → approved → posted
+            </p>
+          </div>
+          <Button variant="outline" size="sm" onClick={() => refetch()} disabled={isRefetching} data-testid="button-refresh">
+            <RefreshCw className={`w-4 h-4 mr-1 ${isRefetching ? 'animate-spin motion-reduce:animate-none' : ''}`} /> Refresh
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3" data-testid="panel-stats">
+          {STATUS_ORDER.map(s => (
+            <Card key={s} data-testid={`stat-card-${s}`}>
+              <CardContent className="p-3 text-center">
+                <p className="text-xl font-bold">{counts[s] || 0}</p>
+                <p className="text-xs text-muted-foreground">{STATUS_CONFIG[s].label}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
 
         <div className="flex gap-2 flex-wrap" data-testid="narrative-status-filters">
@@ -180,20 +185,30 @@ export default function NarrativeDrafts() {
           ))}
         </div>
 
-        {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+        {isLoading ? (
+          <div className="flex items-center justify-center py-20" data-testid="loading-narrative">
+            <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-muted-foreground" />
+            <span className="ml-3 text-muted-foreground">Loading drafts...</span>
           </div>
+        ) : error ? (
+          <Card data-testid="error-narrative">
+            <CardContent className="py-12 text-center">
+              <p className="text-red-500 mb-4">Failed to load narrative posts</p>
+              <Button variant="outline" onClick={() => refetch()} data-testid="button-retry">
+                <RefreshCw className="w-4 h-4 mr-2" /> Try Again
+              </Button>
+            </CardContent>
+          </Card>
         ) : filtered.length === 0 ? (
-          <Card>
+          <Card data-testid="text-empty-narrative">
             <CardContent className="py-12 text-center text-muted-foreground">
               <FileText className="w-12 h-12 mx-auto mb-4 opacity-30" />
               <p>No posts match this filter.</p>
             </CardContent>
           </Card>
         ) : (
-          <div className="space-y-4">
-            {filtered.map((post, idx) => {
+          <div className="space-y-4" data-testid="panel-drafts-list">
+            {filtered.map((post) => {
               const status = post.draft?.status || "draft";
               const isExpanded = expandedPost === post.id;
               const isEditing = editingPost === post.id;
@@ -204,23 +219,23 @@ export default function NarrativeDrafts() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-mono text-muted-foreground">{post.id}</span>
-                          <Badge className={`text-xs ${STATUS_CONFIG[status].color}`}>
+                          <span className="text-xs font-mono text-muted-foreground" data-testid={`text-post-id-${post.id}`}>{post.id}</span>
+                          <Badge className={`text-xs ${STATUS_CONFIG[status].color}`} data-testid={`badge-status-${post.id}`}>
                             {STATUS_CONFIG[status].label}
                           </Badge>
-                          <Badge variant="outline" className="text-xs">
+                          <Badge variant="outline" className="text-xs" data-testid={`badge-theme-${post.id}`}>
                             {post.theme}
                           </Badge>
                         </div>
-                        <p className="text-sm leading-relaxed line-clamp-2">
+                        <p className="text-sm leading-relaxed line-clamp-2" data-testid={`text-preview-${post.id}`}>
                           {post.draft?.editedCaption || post.instagram_caption?.slice(0, 120)}...
                         </p>
                       </div>
                       <div className="flex items-center gap-1 flex-shrink-0">
                         <select
                           value={status}
-                          onChange={(e) => updateStatus(post.id, e.target.value)}
-                          disabled={saving === post.id}
+                          onChange={(e) => updateStatusMutation.mutate({ postId: post.id, newStatus: e.target.value })}
+                          disabled={updateStatusMutation.isPending}
                           className="text-xs border rounded px-2 py-1 bg-background min-h-[32px]"
                           data-testid={`select-status-${post.id}`}
                         >
@@ -245,7 +260,7 @@ export default function NarrativeDrafts() {
                     <CardContent className="pt-0 space-y-4">
                       <div className="border-t pt-4">
                         {post.hook && (
-                          <div className="text-sm font-medium text-foreground mb-3 italic">
+                          <div className="text-sm font-medium text-foreground mb-3 italic" data-testid={`text-hook-${post.id}`}>
                             "{post.hook}"
                           </div>
                         )}
@@ -260,7 +275,7 @@ export default function NarrativeDrafts() {
                             const Icon = pConfig.icon;
                             const copyKey = `${post.id}-${platform}`;
                             return (
-                              <div key={platform} className="border rounded-lg p-3 bg-muted/30">
+                              <div key={platform} className="border rounded-lg p-3 bg-muted/30" data-testid={`platform-${platform}-${post.id}`}>
                                 <div className="flex items-center justify-between mb-2">
                                   <div className="flex items-center gap-2">
                                     <Icon className="w-4 h-4" />
@@ -288,19 +303,19 @@ export default function NarrativeDrafts() {
                       </div>
 
                       {post.gentle_cta_url && (
-                        <div className="text-xs text-muted-foreground border-l-2 border-amber-300 pl-3">
+                        <div className="text-xs text-muted-foreground border-l-2 border-amber-300 pl-3" data-testid={`text-cta-url-${post.id}`}>
                           <span className="font-medium">CTA URL:</span> {post.gentle_cta_url}
                         </div>
                       )}
 
                       {post.safety_note && (
-                        <div className="text-xs text-red-600 dark:text-red-400 border-l-2 border-red-300 pl-3">
+                        <div className="text-xs text-red-600 dark:text-red-400 border-l-2 border-red-300 pl-3" data-testid={`text-safety-note-${post.id}`}>
                           <span className="font-medium">Safety note:</span> {post.safety_note}
                         </div>
                       )}
 
                       {post.draft?.notes && !isEditing && (
-                        <div className="text-xs text-muted-foreground border-l-2 border-blue-300 pl-3">
+                        <div className="text-xs text-muted-foreground border-l-2 border-blue-300 pl-3" data-testid={`text-notes-${post.id}`}>
                           <span className="font-medium">Notes:</span> {post.draft.notes}
                         </div>
                       )}
@@ -347,11 +362,11 @@ export default function NarrativeDrafts() {
                             <div className="flex gap-2">
                               <Button
                                 size="sm"
-                                onClick={() => saveEdit(post.id)}
-                                disabled={saving === post.id}
+                                onClick={() => saveEditMutation.mutate({ postId: post.id, status: post.draft?.status || "draft" })}
+                                disabled={saveEditMutation.isPending}
                                 data-testid={`button-save-${post.id}`}
                               >
-                                {saving === post.id ? (
+                                {saveEditMutation.isPending ? (
                                   <Loader2 className="w-3 h-3 animate-spin mr-1" />
                                 ) : (
                                   <Check className="w-3 h-3 mr-1" />
@@ -362,6 +377,7 @@ export default function NarrativeDrafts() {
                                 variant="ghost"
                                 size="sm"
                                 onClick={() => setEditingPost(null)}
+                                data-testid={`button-cancel-${post.id}`}
                               >
                                 Cancel
                               </Button>

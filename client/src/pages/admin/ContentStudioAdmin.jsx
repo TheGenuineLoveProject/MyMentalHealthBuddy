@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 import { 
-  Layers, Edit, Check, AlertTriangle, Search, Filter,
-  FileText, Eye, Copy, Trash2, Plus, Loader2, ArrowLeft
+  Layers, Check, AlertTriangle, Search,
+  FileText, Loader2, ArrowLeft, RefreshCw, Activity
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
@@ -29,6 +30,12 @@ export default function ContentStudioAdmin() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
+
+  const { data: healthData } = useQuery({
+    queryKey: ['/api/health'],
+    retry: 1,
+    staleTime: 30000,
+  });
 
   useEffect(() => {
     try {
@@ -101,17 +108,19 @@ export default function ContentStudioAdmin() {
   );
 
   const needsTiersCount = contentList.filter(c => !c.hasTiers).length;
+  const completeCount = contentList.filter(c => c.hasTiers).length;
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      <div className="min-h-screen bg-background flex items-center justify-center" data-testid="loading-content-studio">
+        <Loader2 className="w-8 h-8 animate-spin motion-reduce:animate-none text-primary" />
+        <span className="ml-3 text-muted-foreground">Loading content studio...</span>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" data-testid="page-content-studio">
       <SEO 
         title="Content Studio Admin — The Genuine Love Project"
         description="Manage content tiers and quality across the platform."
@@ -121,27 +130,37 @@ export default function ContentStudioAdmin() {
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
           <ArrowLeft size={16} /> Command Center
         </Link>
-        <header className="mb-8">
-          <div className="flex items-center gap-2 text-primary mb-2">
-            <Layers className="w-5 h-5" />
-            <span className="text-sm font-medium">Admin</span>
+        <header className="mb-8" data-testid="panel-header">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-primary mb-2">
+                <Layers className="w-5 h-5" />
+                <span className="text-sm font-medium">Admin</span>
+              </div>
+              <h1 className="text-3xl font-bold text-foreground mb-2" data-testid="text-page-title">
+                Content Tier Compiler
+              </h1>
+              <p className="text-muted-foreground" data-testid="text-subtitle">
+                Ensure all content has Beginner, Intermediate, and Advanced versions.
+              </p>
+            </div>
+            {healthData?.status && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground" data-testid="text-server-status">
+                <Activity className="w-3 h-3" />
+                Server: {healthData.status}
+              </div>
+            )}
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">
-            Content Tier Compiler
-          </h1>
-          <p className="text-muted-foreground">
-            Ensure all content has Beginner, Intermediate, and Advanced versions.
-          </p>
         </header>
 
-        <div className="grid gap-4 md:grid-cols-3 mb-8">
-          <Card>
+        <div className="grid gap-4 md:grid-cols-3 mb-8" data-testid="panel-stats">
+          <Card data-testid="stat-total">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-foreground">{contentList.length}</div>
               <div className="text-sm text-muted-foreground">Total Content</div>
             </CardContent>
           </Card>
-          <Card className={needsTiersCount > 0 ? "border-amber-500" : ""}>
+          <Card className={needsTiersCount > 0 ? "border-amber-500" : ""} data-testid="stat-needs-tiers">
             <CardContent className="p-4 text-center">
               <div className={`text-2xl font-bold ${needsTiersCount > 0 ? "text-amber-500" : "text-green-500"}`}>
                 {needsTiersCount}
@@ -149,10 +168,10 @@ export default function ContentStudioAdmin() {
               <div className="text-sm text-muted-foreground">Needs Tiers</div>
             </CardContent>
           </Card>
-          <Card>
+          <Card data-testid="stat-complete">
             <CardContent className="p-4 text-center">
               <div className="text-2xl font-bold text-green-500">
-                {contentList.filter(c => c.hasTiers).length}
+                {completeCount}
               </div>
               <div className="text-sm text-muted-foreground">Complete</div>
             </CardContent>
@@ -160,7 +179,7 @@ export default function ContentStudioAdmin() {
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2">
-          <Card>
+          <Card data-testid="card-content-library">
             <CardHeader>
               <CardTitle className="text-lg">Content Library</CardTitle>
             </CardHeader>
@@ -176,7 +195,10 @@ export default function ContentStudioAdmin() {
                 />
               </div>
 
-              <div className="space-y-2 max-h-[400px] overflow-y-auto">
+              <div className="space-y-2 max-h-[400px] overflow-y-auto" data-testid="list-content">
+                {filteredContent.length === 0 && (
+                  <p className="text-sm text-muted-foreground text-center py-8" data-testid="text-no-results">No content matches "{searchTerm}"</p>
+                )}
                 {filteredContent.map(content => (
                   <div
                     key={content.id}
@@ -192,15 +214,15 @@ export default function ContentStudioAdmin() {
                       <div className="flex items-center gap-3">
                         <FileText className="w-4 h-4 text-muted-foreground" />
                         <div>
-                          <span className="font-medium">{content.title}</span>
+                          <span className="font-medium" data-testid={`text-content-title-${content.id}`}>{content.title}</span>
                           <div className="flex gap-2 mt-1">
-                            <span className="text-xs px-2 py-0.5 rounded bg-muted">{content.type}</span>
+                            <span className="text-xs px-2 py-0.5 rounded bg-muted" data-testid={`badge-type-${content.id}`}>{content.type}</span>
                             {content.hasTiers ? (
-                              <span className="text-xs px-2 py-0.5 rounded bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 flex items-center gap-1">
+                              <span className="text-xs px-2 py-0.5 rounded bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300 flex items-center gap-1" data-testid={`badge-tiered-${content.id}`}>
                                 <Check className="w-3 h-3" /> Tiered
                               </span>
                             ) : (
-                              <span className="text-xs px-2 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 flex items-center gap-1">
+                              <span className="text-xs px-2 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 flex items-center gap-1" data-testid={`badge-needs-tiers-${content.id}`}>
                                 <AlertTriangle className="w-3 h-3" /> Needs Tiers
                               </span>
                             )}
@@ -214,9 +236,9 @@ export default function ContentStudioAdmin() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card data-testid="card-tier-editor">
             <CardHeader>
-              <CardTitle className="text-lg">
+              <CardTitle className="text-lg" data-testid="text-editor-title">
                 {selectedContent ? `Edit: ${selectedContent.title}` : "Select Content to Edit"}
               </CardTitle>
             </CardHeader>
@@ -224,7 +246,7 @@ export default function ContentStudioAdmin() {
               {selectedContent ? (
                 <div className="space-y-4">
                   {CONTENT_TIERS.map(tier => (
-                    <div key={tier}>
+                    <div key={tier} data-testid={`tier-section-${tier}`}>
                       <label className="text-sm font-medium capitalize mb-1 block">
                         {tier} Version
                       </label>
@@ -248,7 +270,7 @@ export default function ContentStudioAdmin() {
                   </Button>
                 </div>
               ) : (
-                <div className="text-center py-12 text-muted-foreground">
+                <div className="text-center py-12 text-muted-foreground" data-testid="text-select-content">
                   <Layers className="w-12 h-12 mx-auto mb-4 opacity-50" />
                   <p>Select content from the library to edit tiers</p>
                 </div>
