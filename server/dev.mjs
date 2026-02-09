@@ -282,7 +282,7 @@ async function startServer() {
   app.use("/api/post-trauma", postTraumaRouter);
   app.use("/api/healing", healingToolsRouter);
   app.use("/api/meaning", meaningFutureRouter);
-  app.use("/api/content", contentGeneratorRouter);
+  app.use("/api/content-generator", contentGeneratorRouter);
   app.use("/api/healing-intelligence", healingIntelligenceRouter);
   app.use("/api/cognitive-mastery", cognitiveMasteryRouter);
   app.use("/api/wisdom-engine", wisdomEngineRouter);
@@ -478,7 +478,7 @@ async function startServer() {
         "relationship-dynamics", "social-intelligence", "relational",
         "collective-intelligence", "systems-compassion", "embodiment", "narrative",
         "community",
-        "content-studio", "content-intelligence", "content", "universal-content",
+        "content-studio", "content-intelligence", "content", "content-generator", "universal-content",
         "blog", "newsletter", "social-posts", "social-posting", "narrative-drafts",
         "perplexity",
         "account", "account-actions", "onboarding", "gamification", "progress", "badges",

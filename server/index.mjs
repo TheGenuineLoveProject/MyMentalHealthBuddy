@@ -134,6 +134,8 @@ import analyticsEventsRouter from "./routes/analytics-events.mjs";
 import mfaRouter from "./routes/mfa.mjs";
 import canvaOAuthRouter from "./routes/canva-oauth.mjs";
 import apiCoreRouter from "./routes/api.mjs";
+import integrationHealthRouter from "./routes/integrationHealth.mjs";
+import contentGeneratorRouter from "./routes/content-generator.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -416,6 +418,8 @@ app.use('/api/analytics-events', analyticsEventsRouter);
 app.use('/api/mfa', mfaRouter);
 app.use('/api/canva-oauth', canvaOAuthRouter);
 app.use('/api', apiCoreRouter);
+app.use('/api/integrations', integrationHealthRouter);
+app.use('/api/content-generator', contentGeneratorRouter);
 
 const SERVER_START_TIME = Date.now();
 
@@ -545,7 +549,7 @@ app.get("/api/admin/platform-tools-status", async (req, res) => {
       "relationship-dynamics", "social-intelligence", "relational",
       "collective-intelligence", "systems-compassion", "embodiment", "narrative",
       "community",
-      "content-studio", "content-intelligence", "content", "universal-content",
+      "content-studio", "content-intelligence", "content", "content-generator", "universal-content",
       "blog", "newsletter", "social-posts", "social-posting", "narrative-drafts",
       "perplexity",
       "account", "account-actions", "onboarding", "gamification", "progress", "badges",

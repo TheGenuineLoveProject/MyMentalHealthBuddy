@@ -34,12 +34,14 @@ function StatusBadge({ status }) {
   const statusStyles = {
     healthy: styles.statusHealthy,
     warning: styles.statusWarning,
-    error: styles.statusError
+    error: styles.statusError,
+    unknown: styles.statusWarning
   };
   const icons = {
     healthy: CheckCircle,
     warning: AlertTriangle,
-    error: AlertCircle
+    error: AlertCircle,
+    unknown: Clock
   };
   const Icon = icons[safeStatus] || CheckCircle;
   
@@ -74,12 +76,18 @@ function MetricCard({ title, value, subtitle, icon: Icon, color = "sage" }) {
 }
 
 function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
+  const dbStatus = health?.database?.connected ? 'healthy' : (health?.database ? 'warning' : 'unknown');
+  const aiStatus = health?.ai?.available ? 'healthy' : (health?.ai ? 'warning' : 'unknown');
+  const apiStatus = health?.status === 'healthy' ? 'healthy' : (health ? 'warning' : 'error');
+  const uptimeStr = health?.uptime ? `${Math.floor(health.uptime / 60)}m` : '—';
+  const memMB = health?.memory?.heapUsedMB ? `${health.memory.heapUsedMB}MB` : '—';
+
   const services = [
-    { name: 'API Server', status: health?.api || 'healthy', icon: Server, latency: '24ms' },
-    { name: 'Database', status: health?.database || 'healthy', icon: Database, latency: '12ms' },
-    { name: 'Auth Service', status: health?.auth || 'healthy', icon: Lock, latency: '18ms' },
-    { name: 'AI/Chat', status: health?.ai || 'healthy', icon: MessageSquare, latency: '156ms' },
-    { name: 'CDN/Assets', status: health?.cdn || 'healthy', icon: Globe, latency: '8ms' }
+    { name: 'API Server', status: apiStatus, icon: Server, latency: uptimeStr },
+    { name: 'Database', status: dbStatus, icon: Database, latency: health?.database?.connected ? 'connected' : 'offline' },
+    { name: 'Auth Service', status: health?.softLaunch !== undefined ? 'healthy' : 'unknown', icon: Lock, latency: 'active' },
+    { name: 'AI/Chat', status: aiStatus, icon: MessageSquare, latency: health?.ai?.available ? 'ready' : 'offline' },
+    { name: 'Memory', status: health?.memory?.heapUsedMB < 500 ? 'healthy' : 'warning', icon: HardDrive, latency: memMB }
   ];
 
   return (
@@ -332,7 +340,8 @@ function DailyToolsPanel() {
       tools: [
         { id: "content-studio", label: "Content Studio", endpoint: "/api/content-studio", icon: Palette, desc: "Content creation" },
         { id: "content-intelligence", label: "Content Intelligence", endpoint: "/api/content-intelligence", icon: Sparkles, desc: "Smart content" },
-        { id: "content-generator", label: "Content Generator", endpoint: "/api/content", icon: Wand2, desc: "AI content generation" },
+        { id: "content-api", label: "Content API", endpoint: "/api/content", icon: Wand2, desc: "Content management" },
+        { id: "content-generator", label: "Content Generator", endpoint: "/api/content-generator", icon: FileText, desc: "Blog-to-social generation" },
         { id: "universal-content", label: "Universal Content", endpoint: "/api/universal-content", icon: Globe, desc: "Cross-platform content" },
         { id: "blog-api", label: "Blog Engine", endpoint: "/api/blog", icon: BookOpen, desc: "Blog system" },
         { id: "newsletter-api", label: "Newsletter Engine", endpoint: "/api/newsletter", icon: Mail, desc: "Newsletter system" },
@@ -455,7 +464,7 @@ function DailyToolsPanel() {
   const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
   const warningCount = Object.values(toolResults).filter(r => r.status === 'warning').length;
   const errorCount = Object.values(toolResults).filter(r => r.status === 'error').length;
-  const isRunningAll = Object.values(runningTools).some(Boolean);
+  const isAnyRunning = isRunningAll || Object.values(runningTools).some(Boolean);
 
   return (
     <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
@@ -486,16 +495,16 @@ function DailyToolsPanel() {
           <button
             className={styles.refreshButton}
             onClick={runAllChecks}
-            disabled={isRunningAll}
+            disabled={isAnyRunning}
             data-testid="button-run-all-tool-checks"
             title="Run health check on all platform tools"
           >
-            {isRunningAll ? (
+            {isAnyRunning ? (
               <RefreshCw size={14} style={{ marginRight: '4px', animation: 'spin 1s linear infinite' }} />
             ) : (
               <Play size={14} style={{ marginRight: '4px' }} />
             )}
-            {isRunningAll ? `Checking... (${checkedCount}/${totalTools})` : 'Run All Checks'}
+            {isAnyRunning ? `Checking... (${checkedCount}/${totalTools})` : 'Run All Checks'}
           </button>
         </div>
       </div>
