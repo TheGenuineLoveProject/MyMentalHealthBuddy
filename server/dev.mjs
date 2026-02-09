@@ -419,6 +419,61 @@ async function startServer() {
     }
   });
 
+  app.get("/api/admin/platform-tools-status", async (req, res) => {
+    try {
+      const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+      const authOk = await new Promise((resolve) => {
+        requireAuth(req, res, (err) => {
+          if (err) return resolve(false);
+          requireAdmin(req, res, (err2) => resolve(!err2));
+        });
+      });
+      if (!authOk) return;
+
+      const { db } = await import("./db.mjs");
+      const { sql } = await import("drizzle-orm");
+
+      const dbCheck = await db.execute(sql`SELECT 1 as ok`);
+      const dbHealthy = dbCheck?.rows?.[0]?.ok === 1;
+      
+      const toolEndpoints = [
+        "ai", "mood", "journal", "gratitude", "reflection", "wellness-tools",
+        "wisdom", "philosophy", "metacognition", "creativity", "resilience",
+        "foresight", "knowledge", "cognitive-lab", "deep-learning",
+        "trauma-healing", "emotional-resilience", "emotional-mastery",
+        "healing-modalities", "holistic-healing", "post-trauma",
+        "mind-body", "psychological-safety",
+        "self-mastery-intelligence", "peak-performance", "personal-growth",
+        "life-purpose", "life-design", "purpose-compass", "mastery-excellence",
+        "consciousness", "human-potential", "spiritual-intelligence",
+        "wisdom-traditions", "wisdom-synthesis", "contemplative",
+        "ethical-reasoning", "existential",
+        "relationship-dynamics", "social-intelligence", "relational",
+        "collective-intelligence", "systems-compassion", "cognitive-enhancement",
+        "embodiment", "narrative",
+        "content-studio", "content-intelligence", "universal-content",
+        "blog", "newsletter", "gamification", "perplexity", "community"
+      ];
+
+      res.json({
+        ok: true,
+        data: {
+          database: dbHealthy ? "healthy" : "error",
+          totalTools: toolEndpoints.length,
+          registeredEndpoints: toolEndpoints,
+          checkedAt: new Date().toISOString(),
+          uptime: Math.floor((Date.now() - SERVER_START_TIME) / 1000),
+          memory: {
+            heapUsedMB: Math.round(process.memoryUsage().heapUsed / 1024 / 1024),
+            rssMB: Math.round(process.memoryUsage().rss / 1024 / 1024)
+          }
+        }
+      });
+    } catch (err) {
+      res.status(500).json({ ok: false, message: "Failed to check platform tools status." });
+    }
+  });
+
   app.get("/api/content/stats", async (req, res) => {
     try {
       const { requireAuth } = await import("./middleware/auth.mjs");
