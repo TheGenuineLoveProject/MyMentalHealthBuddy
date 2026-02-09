@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'wouter';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/badge';
-import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft } from 'lucide-react';
+import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft, RefreshCw } from 'lucide-react';
 
 function formatCurrency(cents) {
   if (!cents && cents !== 0) return '$0.00';
@@ -39,7 +39,7 @@ function StatusBadge({ status }) {
   const Icon = v.icon;
   
   return (
-    <Badge className={`${v.color} gap-1`}>
+    <Badge className={`${v.color} gap-1`} data-testid={`badge-status-${status}`}>
       <Icon className="h-3 w-3" />
       {status}
     </Badge>
@@ -53,7 +53,7 @@ function LoadingSkeleton() {
 }
 
 export default function BillingViewerPage() {
-  const { data: billingData, isLoading, error } = useQuery({
+  const { data: billingData, isLoading, error, refetch } = useQuery({
     queryKey: ['/api/admin/billing/overview'],
   });
 
@@ -83,16 +83,13 @@ export default function BillingViewerPage() {
   if (error) {
     return (
       <div className="container py-8">
-        <Card className="border-destructive">
-          <CardHeader>
-            <CardTitle className="text-destructive">Error Loading Billing Data</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">
-              Unable to load billing information. Please try again later.
-            </p>
-          </CardContent>
-        </Card>
+        <div className="text-center py-16" data-testid="section-error">
+          <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+          <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+          <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
@@ -112,13 +109,13 @@ export default function BillingViewerPage() {
         <ArrowLeft size={16} /> Command Center
       </Link>
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Billing Overview</h1>
+        <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">Billing Overview</h1>
         <p className="text-muted-foreground">Read-only view of subscription data</p>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
+      <div className="grid gap-4 md:grid-cols-4" data-testid="section-stats">
+        <Card data-testid="card-total-subscriptions">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Total Subscriptions</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
@@ -130,7 +127,7 @@ export default function BillingViewerPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-testid="card-active-subscriptions">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Active</CardTitle>
             <CheckCircle className="h-4 w-4 text-green-500" />
@@ -142,7 +139,7 @@ export default function BillingViewerPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-testid="card-mrr">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">MRR</CardTitle>
             <CreditCard className="h-4 w-4 text-muted-foreground" />
@@ -154,7 +151,7 @@ export default function BillingViewerPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card data-testid="card-churn-rate">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Churn Rate</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
@@ -168,7 +165,7 @@ export default function BillingViewerPage() {
       </div>
 
       {/* Subscriptions Table */}
-      <Card>
+      <Card data-testid="card-recent-subscriptions">
         <CardHeader>
           <CardTitle>Recent Subscriptions</CardTitle>
           <CardDescription>Last 50 subscription records (read-only)</CardDescription>
@@ -181,7 +178,7 @@ export default function BillingViewerPage() {
               ))}
             </div>
           ) : subsList.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">
+            <p className="text-center text-muted-foreground py-8" data-testid="text-empty-subscriptions">
               No subscription data available.
             </p>
           ) : (

@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import {
   ArrowLeft, Mail, Users, FileText, Send, Loader2,
-  Calendar, Eye, AlertTriangle, CheckCircle, BarChart3
+  Calendar, Eye, AlertTriangle, CheckCircle, BarChart3, AlertCircle
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -11,7 +11,7 @@ import SafetyFooter from "../../components/ui/SafetyFooter";
 export default function NewsletterAdmin() {
   const [confirmSendId, setConfirmSendId] = useState(null);
 
-  const { data: statsData, isLoading } = useQuery({
+  const { data: statsData, isLoading, error, refetch } = useQuery({
     queryKey: ["/api/blog/admin/stats"],
   });
 
@@ -49,11 +49,21 @@ export default function NewsletterAdmin() {
           Internal view of newsletter health. No bulk sends — human trigger only.
         </p>
 
-        {isLoading ? (
+        {error && (
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        )}
+        
+        {!error && isLoading ? (
           <div className="flex items-center justify-center py-16">
             <Loader2 className="w-8 h-8 animate-spin text-amber-600" />
           </div>
-        ) : (
+        ) : !error ? (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm border border-amber-100 dark:border-gray-700" data-testid="card-total-subscribers">
@@ -93,7 +103,7 @@ export default function NewsletterAdmin() {
                 </h2>
                 <div className="space-y-2">
                   {signupsByDay.map((entry, i) => (
-                    <div key={i} className="flex items-center justify-between py-1 border-b border-amber-50 dark:border-gray-700 last:border-0">
+                    <div key={i} className="flex items-center justify-between py-1 border-b border-amber-50 dark:border-gray-700 last:border-0" data-testid={`row-signup-${i}`}>
                       <span className="text-sm text-amber-700 dark:text-amber-300">
                         {entry.day ? new Date(entry.day).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : "Unknown"}
                       </span>
@@ -208,7 +218,7 @@ export default function NewsletterAdmin() {
               </div>
             </div>
           </>
-        )}
+        ) : null}
 
         <div className="mt-12">
           <SafetyFooter />

@@ -149,7 +149,7 @@ function QuickStats({ drafts }) {
         { label: "Approved", value: stats.approved, color: "bg-emerald-100 text-emerald-700" },
         { label: "Scheduled", value: stats.scheduled, color: "bg-blue-100 text-blue-700" },
       ].map(stat => (
-        <div key={stat.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700">
+        <div key={stat.label} className="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-200 dark:border-slate-700" data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, '-')}`}>
           <p className="text-2xl font-bold text-slate-900 dark:text-white">{stat.value}</p>
           <p className="text-sm text-slate-600 dark:text-slate-400">{stat.label}</p>
         </div>
@@ -178,7 +178,7 @@ function PlatformConnections() {
   const connectedCount = platforms.filter(p => p.connected).length;
   
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6 mb-8" data-testid="section-platform-connections">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <Settings className="w-5 h-5 text-slate-500" />
@@ -320,28 +320,28 @@ function ContentAnalytics() {
       </div>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+        <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg" data-testid="metric-total-drafts">
           <div className="flex items-center gap-2 mb-2">
             <FileText className="w-4 h-4 text-slate-500" />
             <span className="text-xs text-slate-500 dark:text-slate-400">Total Drafts</span>
           </div>
           <p className="text-2xl font-bold text-slate-900 dark:text-white">{totals?.drafts || 0}</p>
         </div>
-        <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg">
+        <div className="p-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-lg" data-testid="metric-ready-to-publish">
           <div className="flex items-center gap-2 mb-2">
             <CheckCircle className="w-4 h-4 text-emerald-500" />
             <span className="text-xs text-emerald-600 dark:text-emerald-400">Ready to Publish</span>
           </div>
           <p className="text-2xl font-bold text-emerald-700 dark:text-emerald-300">{contentHealth?.readyToPublish || 0}</p>
         </div>
-        <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
+        <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg" data-testid="metric-pending-review">
           <div className="flex items-center gap-2 mb-2">
             <Clock className="w-4 h-4 text-amber-500" />
             <span className="text-xs text-amber-600 dark:text-amber-400">Pending Review</span>
           </div>
           <p className="text-2xl font-bold text-amber-700 dark:text-amber-300">{contentHealth?.pendingReview || 0}</p>
         </div>
-        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg" data-testid="metric-scheduled">
           <div className="flex items-center gap-2 mb-2">
             <Calendar className="w-4 h-4 text-blue-500" />
             <span className="text-xs text-blue-600 dark:text-blue-400">Scheduled</span>
@@ -420,7 +420,7 @@ export default function SocialDashboard() {
   const [publishDraft, setPublishDraft] = useState(null);
   const [publishPlatforms, setPublishPlatforms] = useState([]);
   
-  const { data: drafts = [], isLoading } = useQuery({
+  const { data: drafts = [], isLoading, error, refetch } = useQuery({
     queryKey: ["/api/admin/social/drafts"],
   });
   
@@ -504,12 +504,13 @@ export default function SocialDashboard() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} />
+          Back to Command Center
+        </Link>
         <div className="flex items-center gap-4 mb-8">
-          <Link href="/admin" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-            <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
-          </Link>
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white" data-testid="text-page-title">
               Social Content Studio
             </h1>
             <p className="text-slate-600 dark:text-slate-400">
@@ -630,11 +631,21 @@ export default function SocialDashboard() {
           </div>
         )}
         
-        {isLoading ? (
+        {error && (
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        )}
+        
+        {!error && isLoading ? (
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
           </div>
-        ) : filteredDrafts.length === 0 ? (
+        ) : !error && filteredDrafts.length === 0 ? (
           <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700">
             <Sparkles className="w-12 h-12 mx-auto text-slate-400 mb-4" />
             <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">

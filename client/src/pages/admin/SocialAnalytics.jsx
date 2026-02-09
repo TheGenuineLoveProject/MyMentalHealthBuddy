@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { 
   ArrowLeft, TrendingUp, BarChart2, Users, Eye, Heart, 
   MessageCircle, Share2, Calendar, Instagram, Twitter, 
-  Youtube, Activity, Target
+  Youtube, Activity, Target, AlertCircle
 } from "lucide-react";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 
@@ -15,10 +15,10 @@ const PLATFORMS = {
   facebook: { icon: MessageCircle, color: "#1877F2", name: "Facebook" },
 };
 
-function MetricCard({ title, value, change, icon: Icon, color = "sage" }) {
+function MetricCard({ title, value, change, icon: Icon, color = "sage", testId }) {
   const isPositive = change >= 0;
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-4" data-testid={testId}>
       <div className="flex items-center justify-between mb-3">
         <div 
           className="w-10 h-10 rounded-lg flex items-center justify-center"
@@ -45,7 +45,7 @@ function PlatformRow({ platform, stats }) {
   const Icon = config.icon;
   
   return (
-    <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
+    <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-lg" data-testid={`platform-row-${platform}`}>
       <div 
         className="w-12 h-12 rounded-lg flex items-center justify-center"
         style={{ backgroundColor: `${config.color}15` }}
@@ -117,13 +117,16 @@ function ContentPerformance({ posts }) {
 }
 
 export default function SocialAnalytics() {
-  const { data: analytics = {}, isLoading: analyticsLoading } = useQuery({
+  const { data: analytics = {}, isLoading: analyticsLoading, error: analyticsError, refetch: refetchAnalytics } = useQuery({
     queryKey: ["/api/admin/social/analytics"],
   });
   
-  const { data: drafts = [], isLoading: draftsLoading } = useQuery({
+  const { data: drafts = [], isLoading: draftsLoading, error: draftsError, refetch: refetchDrafts } = useQuery({
     queryKey: ["/api/admin/social/drafts"],
   });
+  
+  const error = analyticsError || draftsError;
+  const refetch = () => { refetchAnalytics(); refetchDrafts(); };
   
   const isLoading = analyticsLoading || draftsLoading;
   
@@ -210,35 +213,51 @@ export default function SocialAnalytics() {
           </div>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        {error && (
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        )}
+        
+        {!error && (
+        <>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8" data-testid="section-metrics">
           <MetricCard 
             title="Total Published" 
             value={publishedCount} 
             icon={BarChart2}
             color="sage"
+            testId="metric-total-published"
           />
           <MetricCard 
             title="Ready to Publish" 
             value={approvedCount} 
             icon={Activity}
             color="sage"
+            testId="metric-ready-to-publish"
           />
           <MetricCard 
             title="Scheduled" 
             value={scheduledCount} 
             icon={Calendar}
             color="sage"
+            testId="metric-scheduled"
           />
           <MetricCard 
             title="Total Posts" 
             value={publishedCount + approvedCount + scheduledCount}
             icon={Users}
             color="sage"
+            testId="metric-total-posts"
           />
         </div>
         
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
-          <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+          <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6" data-testid="section-platform-performance">
             <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
               <TrendingUp className="w-5 h-5 text-[var(--glp-sage)]" />
               Platform Performance
@@ -260,7 +279,7 @@ export default function SocialAnalytics() {
           <ContentPerformance posts={topPosts} />
         </div>
         
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6" data-testid="section-themes">
           <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
             <Eye className="w-5 h-5 text-[var(--glp-sage)]" />
             Best Performing Themes
@@ -268,7 +287,7 @@ export default function SocialAnalytics() {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {topThemes.map((item, idx) => (
-              <div key={item.theme} className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-center">
+              <div key={item.theme} className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-center" data-testid={`theme-card-${idx}`}>
                 <p className="text-2xl font-bold text-[var(--glp-sage)]">#{idx + 1}</p>
                 <p className="text-sm font-medium text-slate-900 dark:text-white mt-1">{item.theme}</p>
                 <p className="text-xs text-slate-500 mt-1">{item.count} posts</p>
@@ -277,7 +296,7 @@ export default function SocialAnalytics() {
           </div>
         </div>
         
-        <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800">
+        <div className="mt-8 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800" data-testid="section-tracking-info">
           <p className="text-sm text-blue-800 dark:text-blue-200">
             <strong>Content Tracking:</strong> Showing data from your content drafts. 
             {totalDrafts > 0 
@@ -287,6 +306,8 @@ export default function SocialAnalytics() {
             {" "}Engagement and reach metrics require connecting social media APIs.
           </p>
         </div>
+        </>
+        )}
         
         <SafetyFooter variant="compact" className="mt-12" />
       </div>

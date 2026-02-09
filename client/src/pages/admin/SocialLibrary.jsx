@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, Sparkles } from "lucide-react";
+import { ArrowLeft, Plus, FileText, Trash2, BookOpen, Download, Loader2, Sparkles, AlertCircle } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
 
@@ -26,7 +26,7 @@ export default function SocialLibrary() {
     level: "beginner",
   });
   
-  const { data: templates = [], isLoading } = useQuery({
+  const { data: templates = [], isLoading, error, refetch } = useQuery({
     queryKey: ["/api/admin/social/templates"],
   });
   
@@ -196,6 +196,7 @@ export default function SocialLibrary() {
                 type="button"
                 onClick={() => setShowForm(false)}
                 className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-lg"
+                data-testid="button-cancel-template"
               >
                 Cancel
               </button>
@@ -203,16 +204,32 @@ export default function SocialLibrary() {
           </form>
         )}
         
-        {isLoading ? (
+        {error && (
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        )}
+        
+        {!error && isLoading ? (
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin motion-reduce:animate-none w-8 h-8 border-4 border-[var(--glp-sage)] border-t-transparent rounded-full" />
           </div>
-        ) : (
+        ) : !error && templates.length === 0 ? (
+          <div className="text-center py-12 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700" data-testid="section-empty">
+            <BookOpen className="w-12 h-12 mx-auto text-slate-400 mb-4" />
+            <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">No templates yet</h3>
+            <p className="text-slate-600 dark:text-slate-400 mb-4">Load presets or create your first template to get started</p>
+          </div>
+        ) : !error ? (
           <div className="space-y-8">
             {TEMPLATE_TYPES.map(type => {
               const typeTemplates = groupedTemplates[type.id] || [];
               return (
-                <div key={type.id}>
+                <div key={type.id} data-testid={`section-type-${type.id}`}>
                   <div className="flex items-center gap-2 mb-4">
                     <FileText className="w-5 h-5 text-[var(--glp-sage)]" />
                     <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
@@ -222,7 +239,7 @@ export default function SocialLibrary() {
                   </div>
                   
                   {typeTemplates.length === 0 ? (
-                    <p className="text-sm text-slate-500 italic">No templates yet</p>
+                    <p className="text-sm text-slate-500 italic" data-testid={`text-empty-${type.id}`}>No templates yet</p>
                   ) : (
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {typeTemplates.map(template => (
@@ -249,7 +266,7 @@ export default function SocialLibrary() {
                           </p>
                           
                           <div className="flex items-center gap-2">
-                            <span className="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-400">
+                            <span className="text-xs px-2 py-0.5 bg-slate-100 dark:bg-slate-700 rounded text-slate-600 dark:text-slate-400" data-testid={`badge-level-${template.id}`}>
                               {template.level}
                             </span>
                           </div>
@@ -261,7 +278,7 @@ export default function SocialLibrary() {
               );
             })}
           </div>
-        )}
+        ) : null}
         
         <SafetyFooter variant="compact" className="mt-12" />
       </div>

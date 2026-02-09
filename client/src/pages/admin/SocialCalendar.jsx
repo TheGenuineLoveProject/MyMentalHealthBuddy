@@ -4,7 +4,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { 
   ArrowLeft, Calendar, ChevronLeft, ChevronRight, 
   Instagram, Twitter, Youtube, MessageCircle, Trash2,
-  Plus, X, Loader2, Clock, Send
+  Plus, X, Loader2, Clock, Send, AlertCircle
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -50,7 +50,7 @@ export default function SocialCalendar() {
   const month = currentDate.getMonth();
   const days = getMonthDays(year, month);
   
-  const { data: entries = [], isLoading } = useQuery({
+  const { data: entries = [], isLoading, error, refetch } = useQuery({
     queryKey: ["/api/admin/social/calendar"],
   });
   
@@ -138,7 +138,19 @@ export default function SocialCalendar() {
           </div>
         </div>
         
-        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+        {error && (
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[var(--glp-sage)] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        )}
+        
+        {!error && (
+        <>
+        <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden" data-testid="section-calendar">
           <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
             <button
               onClick={prevMonth}
@@ -148,7 +160,7 @@ export default function SocialCalendar() {
               <ChevronLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
             </button>
             
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white" data-testid="text-month-name">
               {monthName}
             </h2>
             
@@ -163,7 +175,7 @@ export default function SocialCalendar() {
           
           <div className="grid grid-cols-7">
             {DAYS.map(day => (
-              <div key={day} className="p-2 text-center text-sm font-medium text-slate-500 border-b border-slate-200 dark:border-slate-700">
+              <div key={day} className="p-2 text-center text-sm font-medium text-slate-500 border-b border-slate-200 dark:border-slate-700" data-testid={`header-day-${day.toLowerCase()}`}>
                 {day}
               </div>
             ))}
@@ -177,6 +189,7 @@ export default function SocialCalendar() {
                 <div
                   key={i}
                   onClick={() => !isPast && handleDateClick(date)}
+                  data-testid={date ? `cell-day-${date.getDate()}` : `cell-empty-${i}`}
                   className={`min-h-[100px] p-2 border-b border-r border-slate-200 dark:border-slate-700 group ${
                     date ? "bg-white dark:bg-slate-800" : "bg-slate-50 dark:bg-slate-900"
                   } ${date && !isPast ? "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50" : ""} ${isPast ? "opacity-60" : ""}`}
@@ -213,6 +226,7 @@ export default function SocialCalendar() {
                               key={entry.id}
                               className="group flex items-center gap-1 text-xs p-1 rounded bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
                               title={draft?.hook || entry.theme}
+                              data-testid={`entry-${entry.id}`}
                             >
                               <Icon className="w-3 h-3 flex-shrink-0" style={{ color: platform.color }} />
                               <span className="truncate text-slate-700 dark:text-slate-300">
@@ -221,6 +235,7 @@ export default function SocialCalendar() {
                               <button
                                 onClick={() => deleteMutation.mutate(entry.id)}
                                 className="ml-auto opacity-0 group-hover:opacity-100 text-slate-400 hover:text-red-500 transition-all"
+                                data-testid={`button-delete-entry-${entry.id}`}
                               >
                                 <Trash2 className="w-3 h-3" />
                               </button>
@@ -242,7 +257,7 @@ export default function SocialCalendar() {
           </div>
         </div>
         
-        <div className="mt-8 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+        <div className="mt-8 bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6" data-testid="section-upcoming-posts">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
             Upcoming Posts
           </h2>
@@ -252,7 +267,7 @@ export default function SocialCalendar() {
               <div className="animate-spin motion-reduce:animate-none w-6 h-6 border-2 border-[var(--glp-sage)] border-t-transparent rounded-full" />
             </div>
           ) : entries.length === 0 ? (
-            <p className="text-slate-500 text-center py-8">
+            <p className="text-slate-500 text-center py-8" data-testid="text-empty-upcoming">
               No scheduled posts yet. Create a draft and add it to the calendar.
             </p>
           ) : (
@@ -293,6 +308,7 @@ export default function SocialCalendar() {
                     <button
                       onClick={() => deleteMutation.mutate(entry.id)}
                       className="p-2 text-slate-400 hover:text-red-500 transition-colors"
+                      data-testid={`button-delete-upcoming-${entry.id}`}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -302,6 +318,8 @@ export default function SocialCalendar() {
             </div>
           )}
         </div>
+        </>
+        )}
         
         <SafetyFooter variant="compact" className="mt-12" />
       </div>
@@ -322,7 +340,7 @@ export default function SocialCalendar() {
               </button>
             </div>
             
-            <form onSubmit={handleScheduleSubmit} className="p-4 space-y-4">
+            <form onSubmit={handleScheduleSubmit} className="p-4 space-y-4" data-testid="form-schedule">
               <div className="p-3 bg-[var(--glp-sage-10)] rounded-lg text-sm text-slate-700 dark:text-slate-300">
                 <Clock className="w-4 h-4 inline-block mr-2 text-[var(--glp-sage)]" />
                 Scheduling for: {selectedDate?.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" })}
@@ -401,6 +419,7 @@ export default function SocialCalendar() {
                   type="button"
                   onClick={() => setShowScheduleModal(false)}
                   className="flex-1 px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors"
+                  data-testid="button-cancel-schedule"
                 >
                   Cancel
                 </button>
