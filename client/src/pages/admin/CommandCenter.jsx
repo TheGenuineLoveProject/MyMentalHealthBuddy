@@ -439,6 +439,7 @@ function DailyToolsPanel() {
         { id: "mfa-auth", label: "MFA Security", endpoint: "/api/mfa", icon: Fingerprint, desc: "Multi-factor auth" },
         { id: "canva-oauth", label: "Canva OAuth", endpoint: "/api/canva-oauth", icon: FolderKanban, desc: "Canva integration" },
         { id: "rss-feed", label: "RSS Feed", endpoint: "/rss.xml", icon: Rss, desc: "Blog RSS feed" },
+        { id: "auth-core", label: "Auth System", endpoint: "/api/auth/user", icon: Shield, desc: "Authentication service" },
       ]
     },
   ];
@@ -509,7 +510,7 @@ function DailyToolsPanel() {
       <div className={styles.cardHeader}>
         <div className={styles.cardTitleContainer}>
           <Wand2 className={styles.cardHeaderIcon} />
-          <h2 className={styles.cardTitle}>Daily Operations &mdash; All Platform Tools ({totalTools})</h2>
+          <h2 className={styles.cardTitle}>Platform Tools &mdash; Daily Health Monitor ({totalTools})</h2>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           {checkedCount > 0 && (
@@ -741,42 +742,99 @@ function DailyOpsChecklist() {
     return null;
   });
 
+  const [taskTimestamps, setTaskTimestamps] = useState(() => {
+    try {
+      const saved = localStorage.getItem('glp_daily_ops_timestamps');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const today = new Date().toDateString();
+        if (parsed.date === today) return parsed.stamps;
+      }
+    } catch {}
+    return {};
+  });
+
   const dailyTasks = [
-    { id: 'health-check', label: 'Run Platform Health Check', desc: 'Verify all 122 tools are operational', icon: Activity, action: 'scroll-tools', category: 'monitoring' },
-    { id: 'review-drafts', label: 'Review Pending Drafts', desc: 'Check narrative and social drafts for approval', icon: PenTool, href: '/admin/narrative', category: 'content' },
-    { id: 'check-analytics', label: 'Check Analytics', desc: 'Review daily engagement and traffic metrics', icon: BarChart3, href: '/admin/analytics', category: 'analytics' },
-    { id: 'publishing-queue', label: 'Review Publishing Queue', desc: 'Check today\'s scheduled content', icon: Calendar, href: '/admin/publishing/today', category: 'content' },
-    { id: 'social-posts', label: 'Review Social Posts', desc: 'Approve or schedule social content', icon: Megaphone, href: '/admin/social', category: 'content' },
-    { id: 'check-feedback', label: 'Check User Feedback', desc: 'Review new feedback submissions', icon: MessageSquare, href: '/admin/feedback', category: 'engagement' },
-    { id: 'audit-log', label: 'Review Audit Logs', desc: 'Check security events and access logs', icon: ClipboardList, href: '/admin/audit-log', category: 'security' },
-    { id: 'newsletter-check', label: 'Newsletter Status', desc: 'Check subscriber growth and pending sends', icon: Mail, href: '/admin/newsletter', category: 'engagement' },
-    { id: 'billing-review', label: 'Review Billing', desc: 'Check revenue, subscriptions, and payments', icon: DollarSign, href: '/admin/billing', category: 'revenue' },
-    { id: 'system-alerts', label: 'Resolve System Alerts', desc: 'Address any unresolved system notifications', icon: AlertTriangle, href: '/admin/alerts', category: 'monitoring' },
+    { id: 'health-check', label: 'Run Platform Health Check', desc: 'Verify all 123 tools are operational', icon: Activity, action: 'scroll-tools', category: 'monitoring', priority: 'high' },
+    { id: 'review-drafts', label: 'Review Pending Drafts', desc: 'Check narrative and social drafts for approval', icon: PenTool, href: '/admin/narrative', category: 'content', priority: 'high' },
+    { id: 'check-analytics', label: 'Check Analytics', desc: 'Review daily engagement and traffic metrics', icon: BarChart3, href: '/admin/analytics', category: 'analytics', priority: 'medium' },
+    { id: 'publishing-queue', label: 'Review Publishing Queue', desc: 'Check today\'s scheduled content', icon: Calendar, href: '/admin/publishing/today', category: 'content', priority: 'high' },
+    { id: 'social-posts', label: 'Review Social Posts', desc: 'Approve or schedule social content', icon: Megaphone, href: '/admin/social', category: 'content', priority: 'medium' },
+    { id: 'check-feedback', label: 'Check User Feedback', desc: 'Review new feedback submissions', icon: MessageSquare, href: '/admin/feedback', category: 'engagement', priority: 'medium' },
+    { id: 'audit-log', label: 'Review Audit Logs', desc: 'Check security events and access logs', icon: ClipboardList, href: '/admin/audit-log', category: 'security', priority: 'low' },
+    { id: 'newsletter-check', label: 'Newsletter Status', desc: 'Check subscriber growth and pending sends', icon: Mail, href: '/admin/newsletter', category: 'engagement', priority: 'medium' },
+    { id: 'billing-review', label: 'Review Billing', desc: 'Check revenue, subscriptions, and payments', icon: DollarSign, href: '/admin/billing', category: 'revenue', priority: 'low' },
+    { id: 'system-alerts', label: 'Resolve System Alerts', desc: 'Address any unresolved system notifications', icon: AlertTriangle, href: '/admin/alerts', category: 'monitoring', priority: 'high' },
+    { id: 'security-review', label: 'Security Dashboard', desc: 'Check for vulnerabilities and rate limit violations', icon: ShieldCheck, href: '/admin/security', category: 'security', priority: 'high' },
+    { id: 'content-studio', label: 'Content Studio Review', desc: 'Check content tier management and studio tools', icon: Palette, href: '/admin/content-studio', category: 'content', priority: 'low' },
+    { id: 'engagement-review', label: 'Engagement Metrics', desc: 'Review user engagement trends and patterns', icon: Heart, href: '/admin/engagement', category: 'analytics', priority: 'medium' },
+    { id: 'social-calendar', label: 'Social Calendar', desc: 'Check upcoming scheduled social posts', icon: Calendar, href: '/admin/social/calendar', category: 'content', priority: 'medium' },
+    { id: 'revenue-check', label: 'Revenue Dashboard', desc: 'Review MRR, subscriptions, and financial health', icon: TrendingUp, href: '/admin/revenue', category: 'revenue', priority: 'low' },
   ];
 
   const getInitialState = () => dailyTasks.reduce((acc, t) => ({ ...acc, [t.id]: false }), {});
 
   const items = checklist || getInitialState();
 
-  const toggleItem = (id) => {
-    const updated = { ...items, [id]: !items[id] };
+  const saveChecklist = (updated) => {
     setChecklist(updated);
     try {
       localStorage.setItem('glp_daily_ops_checklist', JSON.stringify({ date: new Date().toDateString(), items: updated }));
     } catch {}
   };
 
-  const resetChecklist = () => {
-    const fresh = getInitialState();
-    setChecklist(fresh);
+  const saveTimestamps = (stamps) => {
+    setTaskTimestamps(stamps);
     try {
-      localStorage.setItem('glp_daily_ops_checklist', JSON.stringify({ date: new Date().toDateString(), items: fresh }));
+      localStorage.setItem('glp_daily_ops_timestamps', JSON.stringify({ date: new Date().toDateString(), stamps }));
     } catch {}
+  };
+
+  const toggleItem = (id) => {
+    const updated = { ...items, [id]: !items[id] };
+    saveChecklist(updated);
+    if (!items[id]) {
+      saveTimestamps({ ...taskTimestamps, [id]: new Date().toLocaleTimeString() });
+    }
+  };
+
+  const resetChecklist = () => {
+    saveChecklist(getInitialState());
+    saveTimestamps({});
+  };
+
+  const exportReport = () => {
+    const now = new Date();
+    const lines = [
+      `Daily Operations Report - ${now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`,
+      `Generated: ${now.toLocaleTimeString()}`,
+      `Progress: ${completedCount}/${totalCount} tasks (${progressPercent}%)`,
+      '',
+      '--- Task Status ---',
+      ...dailyTasks.map(t => {
+        const done = items[t.id];
+        const stamp = taskTimestamps[t.id];
+        return `[${done ? 'x' : ' '}] ${t.label} ${stamp ? `(completed ${stamp})` : ''} - ${t.desc}`;
+      }),
+      '',
+      `--- Summary ---`,
+      `High Priority: ${dailyTasks.filter(t => t.priority === 'high').filter(t => items[t.id]).length}/${dailyTasks.filter(t => t.priority === 'high').length} complete`,
+      `Medium Priority: ${dailyTasks.filter(t => t.priority === 'medium').filter(t => items[t.id]).length}/${dailyTasks.filter(t => t.priority === 'medium').length} complete`,
+      `Low Priority: ${dailyTasks.filter(t => t.priority === 'low').filter(t => items[t.id]).length}/${dailyTasks.filter(t => t.priority === 'low').length} complete`,
+    ];
+    const blob = new Blob([lines.join('\n')], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ops-report-${now.toISOString().split('T')[0]}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const completedCount = Object.values(items).filter(Boolean).length;
   const totalCount = dailyTasks.length;
   const progressPercent = Math.round((completedCount / totalCount) * 100);
+  const highPriorityRemaining = dailyTasks.filter(t => t.priority === 'high' && !items[t.id]).length;
 
   return (
     <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
@@ -788,13 +846,26 @@ function DailyOpsChecklist() {
             {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
           </span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          {highPriorityRemaining > 0 && (
+            <span style={{ fontSize: '0.68rem', padding: '2px 8px', borderRadius: '10px', background: '#fef3c7', color: '#92400e', fontWeight: 500 }} data-testid="badge-high-priority">
+              {highPriorityRemaining} high priority
+            </span>
+          )}
           <span style={{ fontSize: '0.78rem', fontWeight: 600, color: completedCount === totalCount ? '#22c55e' : '#666' }} data-testid="text-ops-progress">
-            {completedCount}/{totalCount} complete
+            {completedCount}/{totalCount}
           </span>
           <button
+            onClick={exportReport}
+            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '3px' }}
+            data-testid="button-export-report"
+            title="Download daily ops report"
+          >
+            <FileText size={10} /> Export
+          </button>
+          <button
             onClick={resetChecklist}
-            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 10px', fontSize: '0.72rem', cursor: 'pointer' }}
+            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer' }}
             data-testid="button-reset-checklist"
           >
             Reset
@@ -812,17 +883,27 @@ function DailyOpsChecklist() {
           }} />
         </div>
       </div>
+      {completedCount === totalCount && totalCount > 0 && (
+        <div style={{ padding: '0.5rem 1rem', marginBottom: '0.25rem' }}>
+          <div style={{ padding: '0.6rem', borderRadius: '8px', background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', textAlign: 'center', fontSize: '0.82rem', color: '#16a34a', fontWeight: 500 }} data-testid="text-all-complete">
+            All daily operations complete. Great work!
+          </div>
+        </div>
+      )}
       <div style={{ padding: '0.5rem 1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '0.5rem' }}>
         {dailyTasks.map((task) => {
           const TaskIcon = task.icon;
           const isChecked = items[task.id];
+          const stamp = taskTimestamps[task.id];
+          const priorityColors = { high: '#ef4444', medium: '#f59e0b', low: '#6b7280' };
           const inner = (
             <div 
               className={styles.navCard}
               style={{ 
                 display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.75rem',
                 opacity: isChecked ? 0.55 : 1, transition: 'opacity 0.2s ease',
-                textDecoration: 'none', cursor: 'pointer'
+                textDecoration: 'none', cursor: 'pointer',
+                borderLeft: `3px solid ${priorityColors[task.priority] || '#6b7280'}`
               }}
               data-testid={`ops-task-${task.id}`}
             >
@@ -844,7 +925,10 @@ function DailyOpsChecklist() {
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <span className={styles.navCardLabel} style={{ fontSize: '0.82rem', textDecoration: isChecked ? 'line-through' : 'none' }}>{task.label}</span>
-                <span className={styles.navCardDesc} style={{ fontSize: '0.68rem' }}>{task.desc}</span>
+                <span className={styles.navCardDesc} style={{ fontSize: '0.68rem' }}>
+                  {task.desc}
+                  {stamp && <span style={{ marginLeft: '4px', color: '#22c55e', fontStyle: 'italic' }}>{stamp}</span>}
+                </span>
               </div>
               {task.href && (
                 <ArrowRight size={12} style={{ opacity: 0.3, flexShrink: 0 }} />
@@ -875,41 +959,44 @@ function DailyOpsChecklist() {
 function AdminNavGrid() {
   const sections = [
     {
-      title: "Publishing & Content",
+      title: "Publishing & Content (10)",
       items: [
-        { label: "Narrative Ops Console", icon: LayoutDashboard, href: "/admin/social/ops", desc: "Pipeline, campaigns, scheduling" },
-        { label: "Social Dashboard", icon: Globe, href: "/admin/social", desc: "Social posts overview" },
-        { label: "Social Generator", icon: Wand2, href: "/admin/social/generate", desc: "AI content generation" },
-        { label: "Blog Publishing", icon: BookOpen, href: "/admin/publishing", desc: "Editorial pipeline" },
+        { label: "Narrative Ops Console", icon: LayoutDashboard, href: "/admin/social/ops", desc: "Pipeline, campaigns, UTM, scheduling" },
+        { label: "Social Dashboard", icon: Globe, href: "/admin/social", desc: "Social posts overview & management" },
+        { label: "Social Generator", icon: Wand2, href: "/admin/social/generate", desc: "AI-powered content generation" },
+        { label: "Blog Publishing", icon: BookOpen, href: "/admin/publishing", desc: "Editorial discipline pipeline" },
         { label: "Publishing Today", icon: Calendar, href: "/admin/publishing/today", desc: "Today's publishing queue" },
-        { label: "Social Studio", icon: Palette, href: "/admin/social-studio", desc: "Social content tools" },
+        { label: "Social Studio", icon: Palette, href: "/admin/social-studio", desc: "Multi-platform content tools" },
         { label: "Content Tiers", icon: Layers, href: "/admin/content-studio", desc: "Content tier management" },
         { label: "Social Library", icon: Layers, href: "/admin/social/library", desc: "Approved content library" },
         { label: "Social Calendar", icon: Calendar, href: "/admin/social/calendar", desc: "Visual schedule view" },
-        { label: "Narrative Drafts", icon: PenTool, href: "/admin/narrative", desc: "Draft management" },
+        { label: "Narrative Drafts", icon: PenTool, href: "/admin/narrative", desc: "Draft review & approval" },
       ]
     },
     {
-      title: "Analytics & Revenue",
+      title: "Analytics & Revenue (8)",
       items: [
-        { label: "Analytics Dashboard", icon: BarChart3, href: "/admin/analytics", desc: "Platform analytics" },
-        { label: "Social Analytics", icon: LineChart, href: "/admin/social/analytics", desc: "Social performance" },
-        { label: "Engagement", icon: Heart, href: "/admin/engagement", desc: "User engagement metrics" },
+        { label: "Analytics Dashboard", icon: BarChart3, href: "/admin/analytics", desc: "Platform analytics & metrics" },
+        { label: "Social Analytics", icon: LineChart, href: "/admin/social/analytics", desc: "Social performance data" },
+        { label: "Engagement Dashboard", icon: Heart, href: "/admin/engagement", desc: "User engagement metrics" },
         { label: "Revenue Dashboard", icon: DollarSign, href: "/admin/revenue", desc: "Revenue & MRR tracking" },
-        { label: "Billing Manager", icon: BarChart3, href: "/admin/billing", desc: "Subscription management" },
-        { label: "System Health", icon: Activity, href: "/admin/health", desc: "Server & service status" },
+        { label: "Billing Manager", icon: CreditCard, href: "/admin/billing", desc: "Subscription & payment management" },
+        { label: "System Health", icon: Activity, href: "/admin/health", desc: "Server, DB & service status" },
+        { label: "Content Admin", icon: Settings, href: "/content-admin", desc: "Content management tools" },
+        { label: "Command Center", icon: Shield, href: "/admin", desc: "Platform control center" },
       ]
     },
     {
-      title: "Management & Security",
+      title: "Management & Security (8)",
       items: [
-        { label: "Newsletter", icon: Mail, href: "/admin/newsletter", desc: "Subscriber management" },
+        { label: "Newsletter Admin", icon: Mail, href: "/admin/newsletter", desc: "Subscriber & send management" },
         { label: "Roles & Permissions", icon: Users, href: "/admin/roles", desc: "User access control" },
-        { label: "Security Dashboard", icon: ShieldCheck, href: "/admin/security", desc: "Security monitoring" },
-        { label: "Feature Flags", icon: ToggleLeft, href: "/admin/feature-flags", desc: "Feature toggles" },
-        { label: "Audit Log", icon: ClipboardList, href: "/admin/audit-log", desc: "System audit trail" },
-        { label: "Feedback", icon: MessageSquare, href: "/admin/feedback", desc: "User feedback aggregator" },
-        { label: "System Alerts", icon: AlertTriangle, href: "/admin/alerts", desc: "Alert configuration" },
+        { label: "Security Dashboard", icon: ShieldCheck, href: "/admin/security", desc: "Security & rate limit monitoring" },
+        { label: "Feature Flags", icon: ToggleLeft, href: "/admin/feature-flags", desc: "Feature toggles & rollout" },
+        { label: "Audit Log Explorer", icon: ClipboardList, href: "/admin/audit-log", desc: "System audit trail & events" },
+        { label: "Feedback Aggregator", icon: MessageSquare, href: "/admin/feedback", desc: "User feedback & suggestions" },
+        { label: "System Alerts", icon: AlertTriangle, href: "/admin/alerts", desc: "Alert configuration & resolution" },
+        { label: "Admin Users", icon: UserCheck, href: "/admin/roles", desc: "Admin user management" },
       ]
     },
   ];

@@ -6,9 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 
 export default function EngagementDashboard() {
-  const { data: stats, isLoading, refetch, isRefetching } = useQuery({
+  const { data: stats, isLoading, refetch, isRefetching, error: statsError } = useQuery({
     queryKey: ['/api/admin/dashboard-stats'],
-    retry: false,
+    retry: 2,
+    retryDelay: 1000,
     staleTime: 30000,
     refetchInterval: 60000,
     select: (data) => data?.data || data,
@@ -16,7 +17,8 @@ export default function EngagementDashboard() {
 
   const { data: health } = useQuery({
     queryKey: ['/api/health'],
-    retry: false,
+    retry: 2,
+    retryDelay: 1000,
     staleTime: 30000,
   });
 
@@ -58,6 +60,23 @@ export default function EngagementDashboard() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (statsError && !stats) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4">
+        <Activity className="w-12 h-12 text-destructive/60" />
+        <h2 className="text-xl font-semibold" data-testid="text-error-title">Unable to load engagement data</h2>
+        <p className="text-muted-foreground text-sm">The dashboard data couldn't be fetched. Please try again.</p>
+        <button
+          onClick={() => refetch()}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-colors"
+          data-testid="button-retry-engagement"
+        >
+          <RefreshCw className="w-4 h-4" /> Try Again
+        </button>
       </div>
     );
   }
