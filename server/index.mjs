@@ -127,10 +127,13 @@ import softLaunchMetricsRouter from "./routes/soft-launch-metrics.mjs";
 import objectStorageRouter from "./routes/object-storage.mjs";
 import accountActionsRouter from "./routes/accountActions.mjs";
 import aiDashboardRouter from "./routes/ai-dashboard.mjs";
-import feedRouter from "./routes/feed.mjs";
 import healingCoreRouter from "./routes/healing.mjs";
 import meaningCoreRouter from "./routes/meaning.mjs";
 import figmaRouter from "./routes/figma.mjs";
+import analyticsEventsRouter from "./routes/analytics-events.mjs";
+import mfaRouter from "./routes/mfa.mjs";
+import canvaOAuthRouter from "./routes/canva-oauth.mjs";
+import apiCoreRouter from "./routes/api.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -409,6 +412,10 @@ app.use('/api/feed', feedRouter);
 app.use('/api/healing-core', healingCoreRouter);
 app.use('/api/meaning-core', meaningCoreRouter);
 app.use('/api/figma', figmaRouter);
+app.use('/api/analytics-events', analyticsEventsRouter);
+app.use('/api/mfa', mfaRouter);
+app.use('/api/canva-oauth', canvaOAuthRouter);
+app.use('/api', apiCoreRouter);
 
 const SERVER_START_TIME = Date.now();
 
@@ -546,10 +553,13 @@ app.get("/api/admin/platform-tools-status", async (req, res) => {
       "ai-dashboard",
       "admin", "admin/security", "admin/audit-logs", "admin/billing",
       "admin/publishing", "admin/social", "admin/social/enterprise",
-      "analytics", "metrics", "admin/soft-launch-metrics",
+      "analytics", "analytics-events", "metrics", "metrics/summary",
+      "admin/soft-launch-metrics",
       "health", "deployment-readiness", "integrations",
       "billing", "webhook", "email", "contact", "auth/github",
-      "products", "invites", "feed", "figma"
+      "products", "invites", "feed", "figma",
+      "login", "user", "user-settings", "uploads",
+      "social/posts", "mfa", "canva-oauth", "rss"
     ];
 
     res.json({

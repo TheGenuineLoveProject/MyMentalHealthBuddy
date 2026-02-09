@@ -128,6 +128,11 @@ import feedRouter from "./routes/feed.mjs";
 import healingCoreRouter from "./routes/healing.mjs";
 import meaningCoreRouter from "./routes/meaning.mjs";
 import figmaRouter from "./routes/figma.mjs";
+import analyticsEventsRouter from "./routes/analytics-events.mjs";
+import mfaRouter from "./routes/mfa.mjs";
+import canvaOAuthRouter from "./routes/canva-oauth.mjs";
+import contentRouter from "./routes/content.mjs";
+import apiCoreRouter from "./routes/api.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -340,6 +345,11 @@ async function startServer() {
   app.use("/api/healing-core", healingCoreRouter);
   app.use("/api/meaning-core", meaningCoreRouter);
   app.use("/api/figma", figmaRouter);
+  app.use("/api/analytics-events", analyticsEventsRouter);
+  app.use("/api/mfa", mfaRouter);
+  app.use("/api/canva-oauth", canvaOAuthRouter);
+  app.use("/api/content", contentRouter);
+  app.use("/api", apiCoreRouter);
 
   const SERVER_START_TIME = Date.now();
 
@@ -476,10 +486,13 @@ async function startServer() {
         "ai-dashboard",
         "admin", "admin/security", "admin/audit-logs", "admin/billing",
         "admin/publishing", "admin/social", "admin/social/enterprise",
-        "analytics", "metrics", "admin/soft-launch-metrics",
+        "analytics", "analytics-events", "metrics", "metrics/summary",
+        "admin/soft-launch-metrics",
         "health", "deployment-readiness", "integrations",
         "billing", "webhook", "email", "contact", "auth/github",
-        "products", "invites", "feed", "figma"
+        "products", "invites", "feed", "figma",
+        "login", "user", "user-settings", "uploads",
+        "social/posts", "mfa", "canva-oauth", "rss"
       ];
 
       res.json({

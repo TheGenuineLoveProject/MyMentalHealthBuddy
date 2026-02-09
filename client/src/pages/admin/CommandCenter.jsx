@@ -22,7 +22,9 @@ import {
   Landmark, Orbit, Rocket, Puzzle,
   FileQuestion, GitBranch, Webhook, Share2,
   ScanLine, Contact, Inbox, LogIn,
-  PackageCheck, Milestone, Handshake
+  PackageCheck, Milestone, Handshake,
+  Upload, UserCog, ListOrdered, Radio,
+  Fingerprint, FolderKanban, Rss
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import styles from "./CommandCenter.module.css";
@@ -210,9 +212,21 @@ function DailyToolsPanel() {
   const [toolResults, setToolResults] = useState({});
   const [collapsedCategories, setCollapsedCategories] = useState({});
   const [lastFullCheck, setLastFullCheck] = useState(null);
+  const [searchFilter, setSearchFilter] = useState("");
+  const [isRunningAll, setIsRunningAll] = useState(false);
 
   const toggleCategory = (idx) => {
     setCollapsedCategories(prev => ({ ...prev, [idx]: !prev[idx] }));
+  };
+
+  const collapseAll = () => {
+    const all = {};
+    toolCategories.forEach((_, i) => { all[i] = true; });
+    setCollapsedCategories(all);
+  };
+
+  const expandAll = () => {
+    setCollapsedCategories({});
   };
 
   const toolCategories = [
@@ -373,8 +387,18 @@ function DailyToolsPanel() {
         { id: "auth-github", label: "GitHub Auth", endpoint: "/api/auth/github", icon: Key, desc: "GitHub OAuth" },
         { id: "products", label: "Products API", endpoint: "/api/products", icon: PackageCheck, desc: "Product catalog" },
         { id: "invites", label: "Invite System", endpoint: "/api/invites", icon: Handshake, desc: "User invitations" },
-        { id: "feed", label: "RSS Feed", endpoint: "/api/feed", icon: Share2, desc: "RSS feed generation" },
+        { id: "feed", label: "Feed Generator", endpoint: "/api/feed", icon: Share2, desc: "Content feed generation" },
         { id: "figma-api", label: "Figma Integration", endpoint: "/api/figma", icon: Palette, desc: "Figma design tools" },
+        { id: "login", label: "Login System", endpoint: "/api/login", icon: LogIn, desc: "User login endpoint" },
+        { id: "user-mgmt", label: "User Management", endpoint: "/api/user", icon: Users, desc: "User data management" },
+        { id: "user-settings", label: "User Settings", endpoint: "/api/user-settings", icon: UserCog, desc: "User preferences" },
+        { id: "uploads", label: "File Uploads", endpoint: "/api/uploads", icon: Upload, desc: "Object storage uploads" },
+        { id: "metrics-summary", label: "Metrics Summary", endpoint: "/api/metrics/summary", icon: ListOrdered, desc: "Aggregated metrics" },
+        { id: "social-posts-alt", label: "Social Posts Feed", endpoint: "/api/social/posts", icon: Radio, desc: "Social post feed" },
+        { id: "analytics-events", label: "Analytics Events", endpoint: "/api/analytics-events", icon: BarChart3, desc: "Event tracking" },
+        { id: "mfa-auth", label: "MFA Security", endpoint: "/api/mfa", icon: Fingerprint, desc: "Multi-factor auth" },
+        { id: "canva-oauth", label: "Canva OAuth", endpoint: "/api/canva-oauth", icon: FolderKanban, desc: "Canva integration" },
+        { id: "rss-feed", label: "RSS Feed", endpoint: "/api/rss", icon: Rss, desc: "Blog RSS feed" },
       ]
     },
   ];
@@ -382,7 +406,10 @@ function DailyToolsPanel() {
   const runHealthCheck = async (tool) => {
     setRunningTools(prev => ({ ...prev, [tool.id]: true }));
     try {
-      const res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include' });
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+      const res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
+      clearTimeout(timeout);
       let status = 'healthy';
       if (res.ok) {
         status = 'healthy';
@@ -392,30 +419,35 @@ function DailyToolsPanel() {
         status = 'error';
       } else if (res.status === 429) {
         status = 'warning';
+      } else if (res.status >= 500) {
+        status = 'error';
       } else {
         status = 'warning';
       }
-      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 429 ? 'rate-limited' : res.ok ? 'ok' : `${res.status}`;
+      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
       setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString(), label: statusLabel } }));
-    } catch {
-      setToolResults(prev => ({ ...prev, [tool.id]: { status: 'error', code: 0, time: new Date().toLocaleTimeString(), label: 'unreachable' } }));
+    } catch (err) {
+      const label = err?.name === 'AbortError' ? 'timeout' : 'unreachable';
+      setToolResults(prev => ({ ...prev, [tool.id]: { status: 'error', code: 0, time: new Date().toLocaleTimeString(), label } }));
     } finally {
       setRunningTools(prev => ({ ...prev, [tool.id]: false }));
     }
   };
 
   const runAllChecks = async () => {
+    setIsRunningAll(true);
     setToolResults({});
     const allTools = toolCategories.flatMap(c => c.tools);
-    const batchSize = 5;
+    const batchSize = 6;
     for (let i = 0; i < allTools.length; i += batchSize) {
       const batch = allTools.slice(i, i + batchSize);
       await Promise.all(batch.map(tool => runHealthCheck(tool)));
       if (i + batchSize < allTools.length) {
-        await new Promise(r => setTimeout(r, 200));
+        await new Promise(r => setTimeout(r, 150));
       }
     }
     setLastFullCheck(new Date().toLocaleTimeString());
+    setIsRunningAll(false);
   };
 
   const totalTools = toolCategories.reduce((sum, c) => sum + c.tools.length, 0);
@@ -482,13 +514,41 @@ function DailyToolsPanel() {
         </div>
       )}
       
-      {lastFullCheck && (
-        <div style={{ padding: '0 1rem 0.25rem', fontSize: '0.7rem', color: '#888' }} data-testid="text-last-full-check">
-          Last full check: {lastFullCheck}
+      <div style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div style={{ position: 'relative', flex: '1 1 200px', minWidth: '200px' }}>
+          <Search size={14} style={{ position: 'absolute', left: '8px', top: '50%', transform: 'translateY(-50%)', opacity: 0.4 }} />
+          <input
+            type="text"
+            placeholder="Search tools..."
+            value={searchFilter}
+            onChange={(e) => setSearchFilter(e.target.value)}
+            style={{ 
+              width: '100%', padding: '6px 8px 6px 28px', fontSize: '0.8rem',
+              border: '1px solid rgba(0,0,0,0.12)', borderRadius: '6px',
+              background: 'rgba(0,0,0,0.02)', outline: 'none'
+            }}
+            data-testid="input-search-tools"
+          />
         </div>
-      )}
+        <button onClick={expandAll} style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer' }} data-testid="button-expand-all">
+          Expand All
+        </button>
+        <button onClick={collapseAll} style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 8px', fontSize: '0.7rem', cursor: 'pointer' }} data-testid="button-collapse-all">
+          Collapse All
+        </button>
+        {lastFullCheck && (
+          <span style={{ fontSize: '0.7rem', color: '#888' }} data-testid="text-last-full-check">
+            Last check: {lastFullCheck}
+          </span>
+        )}
+      </div>
       <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         {toolCategories.map((category, ci) => {
+          const filterLower = searchFilter.toLowerCase();
+          const filteredTools = searchFilter 
+            ? category.tools.filter(t => t.label.toLowerCase().includes(filterLower) || t.desc.toLowerCase().includes(filterLower) || t.id.toLowerCase().includes(filterLower))
+            : category.tools;
+          if (searchFilter && filteredTools.length === 0) return null;
           const catHealthy = category.tools.filter(t => toolResults[t.id]?.status === 'healthy').length;
           const catChecked = category.tools.filter(t => toolResults[t.id]).length;
           const catErrors = category.tools.filter(t => toolResults[t.id]?.status === 'error').length;
@@ -507,7 +567,7 @@ function DailyToolsPanel() {
             >
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <ArrowRight size={12} style={{ transform: isCollapsed ? 'rotate(0deg)' : 'rotate(90deg)', transition: 'transform 0.2s' }} />
-                {category.title} ({category.tools.length})
+                {category.title} ({searchFilter ? `${filteredTools.length}/` : ''}{category.tools.length})
               </span>
               {catChecked > 0 && (
                 <span style={{ fontSize: '0.7rem', fontWeight: 400, display: 'flex', gap: '0.5rem' }}>
@@ -518,7 +578,7 @@ function DailyToolsPanel() {
             </button>
             {!isCollapsed && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.5rem' }}>
-              {category.tools.map((tool) => {
+              {filteredTools.map((tool) => {
                 const ToolIcon = tool.icon;
                 const result = toolResults[tool.id];
                 const isRunning = runningTools[tool.id];
