@@ -6,8 +6,11 @@ import {
   AlertTriangle, CheckCircle, Clock, RefreshCw, 
   BarChart3, Zap, FileText, Settings, ArrowRight,
   TrendingUp, TrendingDown, Minus, Eye, Lock,
-  HardDrive, Cpu, MemoryStick, Wifi, AlertCircle,
-  Route, BookOpen, MessageSquare, Heart, Calendar
+  HardDrive, Cpu, Wifi, AlertCircle,
+  BookOpen, MessageSquare, Heart, Calendar,
+  Megaphone, Mail, Flag, Palette, Search,
+  LayoutDashboard, PenTool, Layers, LineChart,
+  ShieldCheck, ToggleLeft, Star, ClipboardList
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import styles from "./CommandCenter.module.css";
@@ -34,9 +37,7 @@ function StatusBadge({ status }) {
   );
 }
 
-function MetricCard({ title, value, subtitle, icon: Icon, trend, color = "sage" }) {
-  const TrendIcon = trend > 0 ? TrendingUp : trend < 0 ? TrendingDown : Minus;
-  const trendClass = trend > 0 ? styles.metricTrendUp : trend < 0 ? styles.metricTrendDown : styles.metricTrendNeutral;
+function MetricCard({ title, value, subtitle, icon: Icon, color = "sage" }) {
   const iconClass = {
     sage: styles.metricIconSage,
     gold: styles.metricIconGold,
@@ -50,12 +51,6 @@ function MetricCard({ title, value, subtitle, icon: Icon, trend, color = "sage" 
         <div className={`${styles.metricIconContainer} ${iconClass}`}>
           <Icon className={styles.metricIcon} />
         </div>
-        {trend !== undefined && (
-          <span className={`${styles.metricTrend} ${trendClass}`}>
-            <TrendIcon className={styles.metricTrendIcon} />
-            {Math.abs(trend)}%
-          </span>
-        )}
       </div>
       <p className={styles.metricValue} data-testid={`metric-value-${title.toLowerCase().replace(/\s+/g, '-')}`}>{value}</p>
       <p className={styles.metricLabel} data-testid={`metric-label-${title.toLowerCase().replace(/\s+/g, '-')}`}>{title}</p>
@@ -87,22 +82,19 @@ function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
           data-testid="button-refresh-health"
         >
           <RefreshCw className={`${styles.refreshIcon} ${isRefreshing ? styles.refreshIconSpinning : ''}`} />
-          Refresh
         </button>
       </div>
-      <div className={styles.serviceList}>
+      <div className={styles.servicesList}>
         {services.map((service, i) => {
           const Icon = service.icon;
           return (
-            <div key={i} className={styles.serviceItem} data-testid={`service-${service.name.toLowerCase().replace(/\s+/g, '-')}`}>
+            <div key={i} className={styles.serviceRow} data-testid={`service-${service.name.toLowerCase().replace(/\s+/g, '-')}`}>
               <div className={styles.serviceInfo}>
-                <div className={styles.serviceIcon}>
-                  <Icon className={styles.serviceIconInner} />
-                </div>
+                <Icon className={styles.serviceIcon} />
                 <span className={styles.serviceName}>{service.name}</span>
               </div>
               <div className={styles.serviceStatus}>
-                <span className={styles.serviceLatency} data-testid={`service-latency-${service.name.toLowerCase().replace(/\s+/g, '-')}`}>{service.latency}</span>
+                <span className={styles.serviceLatency}>{service.latency}</span>
                 <StatusBadge status={service.status} />
               </div>
             </div>
@@ -113,68 +105,60 @@ function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
   );
 }
 
-function ResourceMonitor() {
-  const resources = [
-    { name: 'CPU Usage', value: 34, max: 100, icon: Cpu },
-    { name: 'Memory', value: 2.1, max: 4, unit: 'GB', icon: MemoryStick },
-    { name: 'Storage', value: 12.4, max: 50, unit: 'GB', icon: HardDrive },
-    { name: 'Bandwidth', value: 156, max: 1000, unit: 'MB/s', icon: Wifi }
-  ];
+function formatUptime(seconds) {
+  if (!seconds) return "—";
+  const d = Math.floor(seconds / 86400);
+  const h = Math.floor((seconds % 86400) / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  if (d > 0) return `${d}d ${h}h`;
+  if (h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
 
-  const getFillClass = (percent) => {
-    if (percent > 80) return styles.resourceFillDanger;
-    if (percent > 60) return styles.resourceFillWarning;
-    return styles.resourceFillSafe;
-  };
+function formatEventType(type) {
+  return (type || "")
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, l => l.toUpperCase());
+}
 
-  return (
-    <div className={styles.card}>
-      <div className={styles.cardHeader}>
-        <div className={styles.cardTitleContainer}>
-          <BarChart3 className={styles.cardHeaderIcon} />
-          <h2 className={styles.cardTitle}>Resources</h2>
-        </div>
-      </div>
-      <div className={styles.resourceList}>
-        {resources.map((resource, i) => {
-          const Icon = resource.icon;
-          const percent = (resource.value / resource.max) * 100;
-          const displayValue = resource.unit 
-            ? `${resource.value}${resource.unit} / ${resource.max}${resource.unit}`
-            : `${resource.value}%`;
-          
-          return (
-            <div key={i} className={styles.resourceItem} data-testid={`resource-${resource.name.toLowerCase().replace(/\s+/g, '-')}`}>
-              <div className={styles.resourceHeader}>
-                <div className={styles.resourceInfo}>
-                  <Icon className={styles.resourceIcon} />
-                  <span className={styles.resourceName}>{resource.name}</span>
-                </div>
-                <span className={styles.resourceValue}>{displayValue}</span>
-              </div>
-              <div className={styles.resourceBar}>
-                <div 
-                  className={`${styles.resourceFill} ${getFillClass(percent)}`}
-                  style={{ width: `${percent}%` }}
-                />
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+function timeAgo(dateStr) {
+  if (!dateStr) return "";
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
 }
 
 function RecentActivityPanel({ activities }) {
-  const getActivityIconClass = (type) => {
-    const map = {
-      info: styles.activityIconInfo,
-      warning: styles.activityIconWarning,
-      success: styles.activityIconSuccess
-    };
-    return map[type] || styles.activityIconInfo;
+  const activityIcons = {
+    social_post_created: PenTool,
+    social_post_submitted: Eye,
+    social_post_approved: CheckCircle,
+    social_post_posted: Megaphone,
+    blog_published: BookOpen,
+    blog_approved: CheckCircle,
+    blog_submitted: FileText,
   };
+
+  if (!activities || activities.length === 0) {
+    return (
+      <div className={styles.card}>
+        <div className={styles.cardHeader}>
+          <div className={styles.cardTitleContainer}>
+            <Clock className={styles.cardHeaderIcon} />
+            <h2 className={styles.cardTitle}>Recent Activity</h2>
+          </div>
+        </div>
+        <p style={{ padding: '1rem', color: '#888', fontSize: '0.9rem' }} data-testid="text-no-activity">
+          No recent publishing activity. Create a blog post or social post to get started.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.card}>
@@ -185,17 +169,22 @@ function RecentActivityPanel({ activities }) {
         </div>
       </div>
       <div className={styles.activityList}>
-        {activities.map((activity, i) => {
-          const Icon = activity.icon;
+        {activities.map((item, i) => {
+          const Icon = activityIcons[item.type] || FileText;
           return (
-            <div key={i} className={styles.activityItem} data-testid={`admin-activity-${i}`}>
-              <div className={`${styles.activityIcon} ${getActivityIconClass(activity.type)}`}>
+            <div key={i} className={styles.activityRow} data-testid={`activity-item-${i}`}>
+              <div className={styles.activityIcon}>
                 <Icon className={styles.activityIconInner} />
               </div>
               <div className={styles.activityContent}>
-                <p className={styles.activityTitle}>{activity.title}</p>
-                <p className={styles.activityMeta}>{activity.time}</p>
+                <span className={styles.activityTitle}>{formatEventType(item.type)}</span>
+                {item.meta?.postId && (
+                  <span className={styles.activitySubtitle}>Post: {item.meta.postId.slice(0, 8)}...</span>
+                )}
               </div>
+              <span className={styles.activityTime} data-testid={`activity-time-${i}`}>
+                {timeAgo(item.createdAt)}
+              </span>
             </div>
           );
         })}
@@ -204,33 +193,74 @@ function RecentActivityPanel({ activities }) {
   );
 }
 
-function QuickActionsPanel({ actions }) {
+function AdminNavGrid() {
+  const sections = [
+    {
+      title: "Publishing & Content",
+      items: [
+        { label: "Narrative Ops Console", icon: LayoutDashboard, href: "/admin/social/ops", desc: "Pipeline, campaigns, scheduling" },
+        { label: "Social Dashboard", icon: Globe, href: "/admin/social", desc: "Social posts overview" },
+        { label: "Blog Publishing", icon: BookOpen, href: "/admin/publishing", desc: "Editorial pipeline" },
+        { label: "Publishing Today", icon: Calendar, href: "/admin/publishing/today", desc: "Today's publishing queue" },
+        { label: "Content Studio", icon: Palette, href: "/admin/social-studio", desc: "Content generation tools" },
+        { label: "Social Library", icon: Layers, href: "/admin/social/library", desc: "Approved content library" },
+        { label: "Social Calendar", icon: Calendar, href: "/admin/social/calendar", desc: "Visual schedule view" },
+        { label: "Narrative Drafts", icon: PenTool, href: "/admin/narrative", desc: "Draft management" },
+      ]
+    },
+    {
+      title: "Analytics & Monitoring",
+      items: [
+        { label: "Analytics Dashboard", icon: BarChart3, href: "/admin/analytics", desc: "Platform analytics" },
+        { label: "Social Analytics", icon: LineChart, href: "/admin/social/analytics", desc: "Social performance" },
+        { label: "Engagement", icon: Heart, href: "/admin/engagement", desc: "User engagement metrics" },
+        { label: "System Health", icon: Activity, href: "/admin/health", desc: "Server & service status" },
+      ]
+    },
+    {
+      title: "Management & Security",
+      items: [
+        { label: "Newsletter", icon: Mail, href: "/admin/newsletter", desc: "Subscriber management" },
+        { label: "Roles & Permissions", icon: Users, href: "/admin/roles", desc: "User access control" },
+        { label: "Security Dashboard", icon: ShieldCheck, href: "/admin/security", desc: "Security monitoring" },
+        { label: "Feature Flags", icon: ToggleLeft, href: "/admin/feature-flags", desc: "Feature toggles" },
+        { label: "Audit Log", icon: ClipboardList, href: "/admin/audit-log", desc: "System audit trail" },
+        { label: "Billing", icon: BarChart3, href: "/admin/billing", desc: "Revenue & subscriptions" },
+        { label: "Feedback", icon: MessageSquare, href: "/admin/feedback", desc: "User feedback aggregator" },
+        { label: "System Alerts", icon: AlertTriangle, href: "/admin/alerts", desc: "Alert configuration" },
+      ]
+    },
+  ];
+
   return (
-    <div className={styles.card}>
-      <div className={styles.cardHeader}>
-        <div className={styles.cardTitleContainer}>
-          <Zap className={styles.cardHeaderIcon} />
-          <h2 className={styles.cardTitle}>Quick Actions</h2>
+    <div className={styles.navGridContainer}>
+      {sections.map((section, si) => (
+        <div key={si} className={styles.navSection}>
+          <h3 className={styles.navSectionTitle} data-testid={`nav-section-${si}`}>{section.title}</h3>
+          <div className={styles.navGrid}>
+            {section.items.map((item, ii) => {
+              const Icon = item.icon;
+              return (
+                <Link 
+                  key={ii} 
+                  href={item.href} 
+                  className={styles.navCard}
+                  data-testid={`admin-nav-${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                >
+                  <div className={styles.navCardIcon}>
+                    <Icon size={18} />
+                  </div>
+                  <div className={styles.navCardContent}>
+                    <span className={styles.navCardLabel}>{item.label}</span>
+                    <span className={styles.navCardDesc}>{item.desc}</span>
+                  </div>
+                  <ArrowRight size={14} className={styles.navCardArrow} />
+                </Link>
+              );
+            })}
+          </div>
         </div>
-      </div>
-      <div className={styles.quickActionsGrid}>
-        {actions.map((action, i) => {
-          const Icon = action.icon;
-          return (
-            <Link 
-              key={i} 
-              href={action.href} 
-              className={styles.quickActionButton}
-              data-testid={`admin-action-${action.label.toLowerCase().replace(/\s+/g, '-')}`}
-            >
-              <div className={styles.quickActionIcon}>
-                <Icon className={styles.quickActionIconInner} />
-              </div>
-              <span className={styles.quickActionText}>{action.label}</span>
-            </Link>
-          );
-        })}
-      </div>
+      ))}
     </div>
   );
 }
@@ -242,17 +272,19 @@ export default function AdminCommandCenter() {
     noIndex: true
   });
 
-  const { data: healthData, refetch: refetchHealth, isRefetching: isHealthRefetching, isLoading, error } = useQuery({
+  const { data: healthData, refetch: refetchHealth, isRefetching: isHealthRefetching, isLoading: isHealthLoading, error: healthError } = useQuery({
     queryKey: ['/api/health'],
     retry: false,
     staleTime: 30000,
     refetchInterval: 60000
   });
 
-  const { data: statsData, refetch: refetchStats } = useQuery({
-    queryKey: ['/api/admin/stats'],
+  const { data: statsData, isLoading: isStatsLoading } = useQuery({
+    queryKey: ['/api/admin/dashboard-stats'],
     retry: false,
-    staleTime: 60000
+    staleTime: 30000,
+    refetchInterval: 60000,
+    select: (data) => data?.data || data,
   });
 
   const [lastUpdated, setLastUpdated] = useState(new Date());
@@ -265,34 +297,20 @@ export default function AdminCommandCenter() {
 
   const handleRefreshAll = () => {
     refetchHealth();
-    refetchStats();
   };
 
+  const stats = statsData || {};
+
   const metrics = [
-    { title: "Active Users", value: statsData?.activeUsers || "1,247", trend: 12, icon: Users, color: "sage" },
-    { title: "Sessions Today", value: statsData?.sessionsToday || "3,891", trend: 8, icon: Calendar, color: "gold" },
-    { title: "API Calls", value: statsData?.apiCalls || "45.2K", trend: 15, icon: Server, color: "teal" },
-    { title: "Avg Response", value: statsData?.avgResponse || "124ms", trend: -5, icon: Zap, color: "sage" },
-    { title: "Error Rate", value: statsData?.errorRate || "0.02%", trend: -12, icon: AlertTriangle, color: "blush" },
-    { title: "Uptime", value: statsData?.uptime || "99.98%", trend: 0, icon: Activity, color: "sage" }
+    { title: "Users", value: stats.users?.toLocaleString() || "—", icon: Users, color: "sage", subtitle: "Total registered" },
+    { title: "Blog Posts", value: stats.blogPosts || "—", icon: BookOpen, color: "gold", subtitle: `${stats.publishedBlogs || 0} published` },
+    { title: "Social Posts", value: stats.socialPosts || "—", icon: Megaphone, color: "teal", subtitle: `${stats.socialDrafts || 0} drafts` },
+    { title: "Campaigns", value: stats.campaigns || "0", icon: Flag, color: "blush", subtitle: "Active campaigns" },
+    { title: "Leads", value: stats.leads || "—", icon: Mail, color: "sage", subtitle: "Newsletter signups" },
+    { title: "Uptime", value: formatUptime(stats.uptimeSeconds), icon: Activity, color: "teal", subtitle: "Current session" },
   ];
 
-  const recentActivity = [
-    { icon: Users, title: "New user registration", time: "2 minutes ago", type: "info" },
-    { icon: Shield, title: "Security scan completed", time: "15 minutes ago", type: "success" },
-    { icon: Database, title: "Database backup completed", time: "1 hour ago", type: "success" },
-    { icon: AlertTriangle, title: "Rate limit triggered", time: "2 hours ago", type: "warning" },
-    { icon: Settings, title: "System configuration updated", time: "3 hours ago", type: "info" }
-  ];
-
-  const quickActions = [
-    { label: "Roles & Permissions", icon: Users, href: "/admin/roles" },
-    { label: "System Health", icon: Activity, href: "/admin/health" },
-    { label: "Social Dashboard", icon: Globe, href: "/admin/social" },
-    { label: "Billing", icon: BarChart3, href: "/admin/billing" }
-  ];
-
-  if (isLoading) {
+  if (isHealthLoading && isStatsLoading) {
     return (
       <div className={styles.loadingContainer}>
         <RefreshCw className={styles.loadingSpinner} />
@@ -301,7 +319,7 @@ export default function AdminCommandCenter() {
     );
   }
 
-  if (error) {
+  if (healthError && !statsData) {
     return (
       <div className={styles.errorContainer}>
         <AlertCircle className={styles.errorIcon} />
@@ -337,11 +355,11 @@ export default function AdminCommandCenter() {
                 data-testid="button-refresh-all"
               >
                 <RefreshCw className={`${styles.refreshIcon} ${isHealthRefetching ? styles.refreshIconSpinning : ''}`} />
-                Refresh All
+                Refresh
               </button>
             </div>
           </div>
-          <p className={styles.leadText}>Monitor system health, manage users, and track platform performance.</p>
+          <p className={styles.leadText}>Monitor system health, manage content, and track platform performance.</p>
         </header>
 
         <div className={styles.metricsGrid}>
@@ -356,13 +374,10 @@ export default function AdminCommandCenter() {
             onRefresh={refetchHealth} 
             isRefreshing={isHealthRefetching} 
           />
-          <ResourceMonitor />
+          <RecentActivityPanel activities={stats.recentActivity} />
         </div>
 
-        <div className={styles.secondaryGrid}>
-          <RecentActivityPanel activities={recentActivity} />
-          <QuickActionsPanel actions={quickActions} />
-        </div>
+        <AdminNavGrid />
       </div>
     </div>
   );

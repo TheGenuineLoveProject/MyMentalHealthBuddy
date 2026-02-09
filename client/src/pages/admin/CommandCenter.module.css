@@ -498,6 +498,31 @@
   color: var(--glp-text-secondary);
 }
 
+.activityRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--glp-sage-5, rgba(138, 154, 91, 0.05));
+}
+
+.activityRow:last-child {
+  border-bottom: none;
+}
+
+.activitySubtitle {
+  font-size: 12px;
+  color: var(--glp-text-secondary);
+  display: block;
+}
+
+.activityTime {
+  font-size: 12px;
+  color: var(--glp-text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .quickActionsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -613,4 +638,106 @@
 
 .retryButton:hover {
   background: var(--glp-sage-deep);
+}
+
+.navGridContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.navSection {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--glp-sage-10, rgba(138, 154, 91, 0.1));
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.navSectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--glp-sage, #8A9A5B);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--glp-sage-10, rgba(138, 154, 91, 0.1));
+}
+
+.navGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+.navCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  background: var(--glp-sage-5, rgba(138, 154, 91, 0.03));
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.navCard:hover {
+  background: var(--glp-sage-10, rgba(138, 154, 91, 0.08));
+  border-color: var(--glp-sage-20, rgba(138, 154, 91, 0.2));
+  transform: translateY(-1px);
+}
+
+.navCardIcon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: var(--glp-sage, #8A9A5B);
+  flex-shrink: 0;
+  border: 1px solid var(--glp-sage-10, rgba(138, 154, 91, 0.1));
+}
+
+.navCardContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.navCardLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--glp-teal, #2C6E63);
+  line-height: 1.3;
+}
+
+.navCardDesc {
+  display: block;
+  font-size: 12px;
+  color: var(--glp-text-secondary, #888);
+  line-height: 1.3;
+  margin-top: 2px;
+}
+
+.navCardArrow {
+  color: var(--glp-sage-20, rgba(138, 154, 91, 0.3));
+  flex-shrink: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.navCard:hover .navCardArrow {
+  color: var(--glp-sage);
+  transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+  .navGrid {
+    grid-template-columns: 1fr;
+  }
 }

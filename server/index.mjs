@@ -384,6 +384,67 @@ app.get("/api/health", (_req, res) => {
 });
 app.use("/health", healthRouter);
 
+app.get("/api/admin/dashboard-stats", async (req, res) => {
+  try {
+    const { requireAuth, requireAdmin } = await import("./middleware/auth.mjs");
+    const authOk = await new Promise((resolve) => {
+      requireAuth(req, res, (err) => {
+        if (err) return resolve(false);
+        requireAdmin(req, res, (err2) => resolve(!err2));
+      });
+    });
+    if (!authOk) return;
+
+    const { db } = await import("./db.mjs");
+    const { users, blogPosts, socialPosts, leads, socialCampaigns, analyticsEvents, publishingEvents } = await import("../shared/schema.mjs");
+    const { count, sql, desc, gte } = await import("drizzle-orm");
+
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+    const [[userCount], [blogCount], [publishedBlogs], [socialCount], [socialDrafts], [socialPosted], [leadCount], [campaignCount], [eventCount7d]] = await Promise.all([
+      db.select({ total: count() }).from(users),
+      db.select({ total: count() }).from(blogPosts),
+      db.select({ total: count() }).from(blogPosts).where(sql`${blogPosts.status} = 'published'`),
+      db.select({ total: count() }).from(socialPosts),
+      db.select({ total: count() }).from(socialPosts).where(sql`${socialPosts.status} = 'draft'`),
+      db.select({ total: count() }).from(socialPosts).where(sql`${socialPosts.status} = 'posted'`),
+      db.select({ total: count() }).from(leads),
+      db.select({ total: count() }).from(socialCampaigns),
+      db.select({ total: count() }).from(analyticsEvents).where(gte(analyticsEvents.createdAt, sevenDaysAgo)),
+    ]);
+
+    const recentPublishingEvents = await db.select()
+      .from(publishingEvents)
+      .orderBy(desc(publishingEvents.createdAt))
+      .limit(10);
+
+    const uptimeSeconds = Math.floor((Date.now() - SERVER_START_TIME) / 1000);
+
+    res.json({
+      ok: true,
+      data: {
+        users: userCount.total,
+        blogPosts: blogCount.total,
+        publishedBlogs: publishedBlogs.total,
+        socialPosts: socialCount.total,
+        socialDrafts: socialDrafts.total,
+        socialPosted: socialPosted.total,
+        leads: leadCount.total,
+        campaigns: campaignCount.total,
+        analyticsEvents7d: eventCount7d.total,
+        uptimeSeconds,
+        recentActivity: recentPublishingEvents.map(e => ({
+          type: e.type,
+          meta: e.meta,
+          createdAt: e.createdAt,
+        })),
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ ok: false, message: "Failed to fetch dashboard stats." });
+  }
+});
+
 // RSS, Sitemap, Robots (must be before SPA catch-all)
 app.use('/', feedRouter);
 
