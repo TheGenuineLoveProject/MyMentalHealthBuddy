@@ -420,10 +420,24 @@ export const contentDrafts = pgTable("content_drafts", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+/* ================= SOCIAL CAMPAIGNS ================= */
+export const socialCampaigns = pgTable("social_campaigns", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  goal: text("goal"),
+  startDate: timestamp("start_date"),
+  endDate: timestamp("end_date"),
+  status: varchar("status", { length: 20 }).default("active").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+}, (table) => [
+  index("idx_social_campaigns_status").on(table.status),
+]);
+
 /* ================= SOCIAL MEDIA POSTS ================= */
 export const socialPosts = pgTable("social_posts", {
   id: uuid("id").defaultRandom().primaryKey(),
-  title: varchar("title", { length: 255 }).notNull(),
+  title: varchar("title", { length: 255 }),
   content: text("content").notNull(),
   platform: varchar("platform", { length: 50 }).notNull(),
   mediaUrl: text("media_url"),
@@ -449,10 +463,17 @@ export const socialPosts = pgTable("social_posts", {
   reviewedBy: varchar("reviewed_by", { length: 255 }),
   approvedBy: varchar("approved_by", { length: 255 }),
   audience: varchar("audience", { length: 100 }),
+  campaignId: uuid("campaign_id"),
+  scheduledFor: timestamp("scheduled_for"),
+  canvaUrl: text("canva_url"),
+  mediaAssetUrl: text("media_asset_url"),
+  utmUrl: text("utm_url"),
 }, (table) => [
   index("idx_social_posts_status").on(table.status),
   index("idx_social_posts_origin").on(table.originType),
   index("idx_social_posts_theme").on(table.theme),
+  index("idx_social_posts_campaign").on(table.campaignId),
+  index("idx_social_posts_scheduled").on(table.scheduledFor),
 ]);
 
 /* ================= DIGITAL PRODUCTS (E-books, Tools, Courses) ================= */

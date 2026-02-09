@@ -42,38 +42,16 @@ The platform offers:
 - **Content Organization**: Learning Hub (`/learn` page with guides, articles, courses), Comprehensive Route Redirects (510+ semantic redirects for improved discoverability).
 
 ### Monetization Architecture (Two-Tier: Free/Pro)
-- **Feature Access Map**: `client/src/config/featureAccess.js` — single source of truth for feature → plan mapping
-- **Canonical Status**: `users.subscription_status` column = "free" | "pro" only (never raw Stripe statuses)
-- **AuthContext**: Exposes `subscriptionStatus` and `isPro` to all frontend components via `useAuth()`
-- **PlanGate.jsx**: Wraps Pro-only features with gentle upgrade prompt (blurred teaser + upgrade CTA)
-- **Soft Gating**: AI Chat has 5 free daily sessions; Pro gets unlimited. Core tools (mood, journal, reflection) always free.
-- **Server Enforcement**: `server/routes/ai.mjs` enforces daily session limit server-side (counts user messages per day)
-- **Pro Badge**: Gold crown badge appears in navbar (TglpNavbar.jsx) and dashboard greeting for Pro users
-- **Billing Page**: `/account/billing` uses AuthContext as primary plan source, with Stripe API as fallback for details
-- **Email Lifecycle**: Upgrade confirmation + cancellation acknowledgment emails via Resend (triggered from webhook.mjs)
-- **Webhook**: `server/routes/webhook.mjs` handles all Stripe events, writes canonical statuses, sends lifecycle emails
+The platform implements a two-tier monetization model (Free/Pro) managed via `client/src/config/featureAccess.js`. User subscription status is canonicalized in `users.subscription_status` and exposed via `AuthContext`. Pro-only features are gently gated with `PlanGate.jsx`, offering blurred teasers and upgrade CTAs. Server-side enforcement for limits (e.g., AI Chat sessions) is implemented in `server/routes/ai.mjs`. Stripe handles billing, with webhooks (`server/routes/webhook.mjs`) updating user statuses and triggering email lifecycles via Resend.
 
 ### Soft Launch & Selective Visibility
-- **Soft Launch Mode**: `SOFT_LAUNCH_MODE=true` env flag. `SoftLaunchBanner.jsx` shows dismissible banner. Exposed via `/api/health`.
-- **Feedback System**: `FeedbackWidget.jsx` (floating button, 4 categories: bug/idea/confusion/praise). DB table `soft_launch_feedback`. POST `/api/feedback` (public), GET `/api/feedback` (admin-only). Admin viewer at `/admin/feedback` with CSV export.
-- **Aggregate Metrics**: `GET /api/admin/soft-launch-metrics` (admin-only). Page views by route, funnel step counters. No PII, no IPs, no fingerprinting.
-- **Smoke Tests**: `scripts/soft-launch-smoke.mjs` — 11 critical routes, PASS/FAIL output.
-- **Gentle Error Recovery**: Trauma-informed 404 page and ErrorBoundary with crisis links.
+A `SOFT_LAUNCH_MODE=true` environment flag activates a soft launch, displaying a dismissible banner and enabling a feedback widget for user input. Aggregate, privacy-first metrics track page views and funnel steps. Smoke tests validate critical routes, and a trauma-informed error recovery system is in place.
 
 ### Narrative Amplification System
-- **Narrative Spine**: `docs/NARRATIVE_SPINE.md` — single source of truth for all messaging and brand voice.
-- **12 Story Posts**: `content/narrative/social_posts.json` — platform variants (IG, TikTok, YouTube Shorts, X), gentle CTAs, safety notes. Ethical constraints enforced (no urgency, guilt, medical claims).
-- **Canva Export Pack**: `docs/CANVA_EXPORT_PACK.md` — 6 visual templates with dimensions, typography, brand palette. References `client/src/styles/brand-tokens.css`.
-- **Narrative Drafts Admin**: `/admin/narrative` page with `NarrativeDrafts.jsx`. DB table `narrative_drafts`. API at `/api/narrative-drafts` (admin-only). Workflow: draft → review → approved → posted. Copy-to-clipboard for platform variants. No automation, no social API integration.
+A `docs/NARRATIVE_SPINE.md` defines the project's messaging and brand voice. Social media content drafts (`content/narrative/social_posts.json`) are provided for various platforms, adhering to ethical constraints. A `docs/CANVA_EXPORT_PACK.md` contains visual templates for consistent branding. An admin UI (`/admin/narrative`) facilitates the drafting, review, and approval workflow for narrative content.
 
 ### Publishing & Narrative Distribution Layer
-- **Canonical Content Model**: `blog_posts` table extended with `content_type` (blog_post/newsletter/reflection/essay/note) and `visibility` (public/private/draft) columns. Single table serves all publishable content types. Documented in `docs/PUBLISHING_MODEL.md`.
-- **Blog API**: Full CRUD at `/api/blog` with content_type filtering (`?type=newsletter`), visibility enforcement on public endpoints, RSS feed, draft management, and comments. `BlogPost.jsx` renders individual posts.
-- **Newsletter Readiness**: Subscriber collection via `NewsletterSignup.jsx` → `/api/leads` with consent tracking. Transactional emails (Resend) separated from editorial newsletters. Documented in `docs/NEWSLETTER_READINESS.md`. No email blasting — readiness only.
-- **Social Content Admin**: `socialPosts` table with creative workspace statuses (idea/drafted/approved/archived/published). CRUD API at `/api/social-posts` with status + platform filtering. `SocialStudioAdmin.jsx` provides the admin UI. Human-in-the-loop only — no automation, no API posting. Canva export copy blocks for IG post, IG caption, Reel/TikTok, YouTube Short, X/Twitter.
-- **Newsletter Admin**: `NewsletterAdmin.jsx` at `/admin/newsletter` (admin-gated). Displays subscriber count, signups-by-day (last 30 days), newsletter drafts list, and test-send button (sends to admin's email only via Resend). No bulk sends configured.
-- **Publishing Observability**: `view_count` column on `blog_posts` incremented on each public GET. Admin stats endpoint (`GET /api/blog/admin/stats`) returns post views, signup totals, signups_by_day, and draft list. Internal only — no public analytics.
-- **Narrative Amplification Pack (v2.1)**: 25 social drafts, 12 blog drafts (1 per pillar), 4 newsletter drafts in `content/publishing/drafts/`. Import script (`scripts/import-publishing-drafts.mjs`) safely appends to `publishingRegistry.json` without duplicates. Validation script (`scripts/validate-draft-packs.mjs`) enforces schema, pillar keys, CTAs, and forbidden phrases. Admin "Today's Pick" at `/admin/publishing/today` with copy-to-clipboard per platform (IG/X/TikTok/Shorts), set featured, and mark-as-posted. Blog Draft Viewer at `/blog/draft/:id` (admin-only preview). All manual-first, no automation.
+The platform utilizes a unified `blog_posts` table for all publishable content types (blog, newsletter, reflection, essay, note), supporting CRUD operations, RSS feeds, and comment sections. Newsletter readiness includes subscriber collection and consent tracking via Resend for transactional emails. A `socialPosts` table and `SocialStudioAdmin.jsx` manage social content creation, emphasizing a human-in-the-loop approach. Admin tools for newsletters display subscriber statistics, and publishing observability tracks `view_count` on blog posts.
 
 ### System Design Choices
 A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL database, utilizing UUIDs, TEXT-based IDs, serial integers, and indexed foreign key constraints. Production security includes CORS allowlisting, JWT authentication, Helmet, and rate limiting.
@@ -103,15 +81,3 @@ A unified `shared/schema.mjs` defines Drizzle ORM models for the Neon PostgreSQL
 - **Replit Auth**: User authentication.
 - **Resend**: Transactional email service.
 - **Perplexity**: Factual AI.
-
-## Recent Changes
-
-### v2.5 Signal-Driven Publishing Refinement (Feb 2026)
-- **Editorial Pipeline**: Blog posts flow through draft → review → approved → published with admin endpoints at `/api/blog/admin/:id/submit`, `/approve`, `/publish`. Content safety validation runs before publish.
-- **Content Safety Validator**: `shared/publishingRules.mjs` blocks medical claims, urgency manipulation, shame/pathologizing language. Warns if sensitive topics lack crisis resource links.
-- **Publishing Recommendations**: `/api/admin/publishing/recommendations` analyzes 7-day analytics (top pages, CTAs, newsletter metrics) and suggests blog topics from TOPIC_MAP based on visitor behavior.
-- **Newsletter Analytics**: Subscribe/unsubscribe events logged to `analytics_events` with `privacy_level: "minimal"`. New `newsletter_subscribers` table tracks subscriber status independently.
-- **Publishing Events**: `publishing_events` table logs editorial pipeline actions (draft created, submitted, approved, published).
-- **Frontend Analytics**: BlogIndex, BlogPost, and NewsletterSignup components track page views and signup events via `useAnalytics.mjs`.
-- **Admin UI**: AdminPublishing page extended with "Editorial Pipeline" tab (status board + submit/approve/publish actions) and "Recommendations" tab (analytics-driven insights, suggested topics, newsletter metrics).
-- All changes follow SAFE EVOLUTION mode: additive only, manual-first, no automation, privacy-first analytics (no PII, no IP tracking).
