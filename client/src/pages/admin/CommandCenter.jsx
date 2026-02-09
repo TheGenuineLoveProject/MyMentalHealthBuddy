@@ -298,6 +298,7 @@ function DailyToolsPanel() {
         { id: "knowledge", label: "Knowledge Synthesis", endpoint: "/api/knowledge", icon: BookOpen, desc: "Knowledge integration" },
         { id: "cognitive-lab", label: "Cognitive Lab", endpoint: "/api/cognitive-lab", icon: Brain, desc: "Cognitive exercises" },
         { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/cognitive-mastery", icon: Trophy, desc: "Cognitive excellence" },
+        { id: "canva-integration", label: "Canva AI", endpoint: "/api/canva-oauth", icon: Palette, desc: "Canva design integration" },
         { id: "deep-learning", label: "Deep Learning", endpoint: "/api/deep-learning", icon: Layers, desc: "Deep learning tools" },
         { id: "dialectics", label: "Dialectics Engine", endpoint: "/api/dialectics", icon: Puzzle, desc: "Dialectical reasoning" },
         { id: "practices", label: "Practices Library", endpoint: "/api/practices", icon: Milestone, desc: "Guided practices" },
@@ -451,24 +452,24 @@ function DailyToolsPanel() {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
-      const res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
+      let res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
       clearTimeout(timeout);
+      if (res.status === 405) {
+        const c2 = new AbortController();
+        const t2 = setTimeout(() => c2.abort(), 8000);
+        res = await fetch(tool.endpoint, { method: 'HEAD', credentials: 'include', signal: c2.signal });
+        clearTimeout(t2);
+      }
       const responseTime = Math.round(performance.now() - startTime);
       let status = 'healthy';
-      if (res.ok) {
-        status = 'healthy';
-      } else if (res.status === 401 || res.status === 403) {
-        status = 'healthy';
-      } else if (res.status === 404) {
-        status = 'error';
-      } else if (res.status === 429) {
-        status = 'warning';
-      } else if (res.status >= 500) {
-        status = 'error';
-      } else {
-        status = 'warning';
-      }
-      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
+      if (res.ok) status = 'healthy';
+      else if (res.status === 401 || res.status === 403) status = 'healthy';
+      else if (res.status === 405) status = 'healthy';
+      else if (res.status === 404) status = 'error';
+      else if (res.status === 429) status = 'warning';
+      else if (res.status >= 500) status = 'error';
+      else status = 'warning';
+      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 405 ? 'post-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
       setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString(), label: statusLabel, ms: responseTime } }));
     } catch (err) {
       const responseTime = Math.round(performance.now() - startTime);
@@ -1050,6 +1051,8 @@ function ToolsStatusWidget() {
     { id: 'billing', label: 'Billing API', endpoint: '/api/billing' },
     { id: 'email', label: 'Email Service', endpoint: '/api/email' },
     { id: 'perplexity', label: 'Perplexity AI', endpoint: '/api/perplexity' },
+    { id: 'canva', label: 'Canva AI', endpoint: '/api/canva-oauth' },
+    { id: 'ai-engine', label: 'AI Engine', endpoint: '/api/ai/history' },
   ];
 
   const runQuickCheck = async () => {

@@ -47,7 +47,7 @@ const toolCategories = [
       { id: "foresight", label: "Foresight Lab", endpoint: "/api/foresight", icon: Compass, desc: "Future planning" },
       { id: "knowledge", label: "Knowledge Synthesis", endpoint: "/api/knowledge/all", icon: BookOpen, desc: "Knowledge integration" },
       { id: "cognitive-lab", label: "Cognitive Lab", endpoint: "/api/cognitive-lab/daily", icon: Brain, desc: "Cognitive exercises" },
-      { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/self-mastery-intelligence/daily", icon: Trophy, desc: "Cognitive excellence" },
+      { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/cognitive-mastery", icon: Trophy, desc: "Cognitive excellence" },
       { id: "deep-learning", label: "Deep Learning", endpoint: "/api/deep-learning", icon: Layers, desc: "Deep learning tools" },
       { id: "dialectics", label: "Dialectics Engine", endpoint: "/api/dialectics/daily", icon: Puzzle, desc: "Dialectical reasoning" },
       { id: "practices", label: "Practices Library", endpoint: "/api/practices/daily", icon: Milestone, desc: "Guided practices" },
