@@ -19,6 +19,7 @@ import { Link } from "wouter";
 import { useState } from "react";
 import { Heart, Mail, Sparkles, Loader2, Check } from "lucide-react";
 import SacredGeometryBg from "@/components/SacredGeometryBg";
+import NewsletterSignup from "@/components/NewsletterSignup";
 import "@/styles/healing-animations.css";
 
 export default function SacredFooter() {
@@ -170,49 +171,9 @@ export default function SacredFooter() {
               className="text-sm mb-4"
               style={{ color: '#3a3a3a', opacity: 0.75 }}
             >
-              Receive weekly reflections, wellness practices, and gentle reminders.
+              Receive wellness reflections and gentle reminders. No spam, unsubscribe anytime.
             </p>
-            <form className="flex flex-col gap-3" onSubmit={handleNewsletterSubmit}>
-              <div className="flex gap-3">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Your email address"
-                  className="flex-1 px-4 py-3 rounded-full text-sm transition-all duration-300 focus:outline-none focus:ring-2"
-                  style={{ 
-                    background: 'rgba(255, 255, 255, 0.8)',
-                    border: '1px solid rgba(143, 191, 159, 0.2)',
-                    color: '#3a3a3a',
-                  }}
-                  disabled={status === "loading"}
-                  data-testid="input-newsletter-email"
-                />
-                <button
-                  type="submit"
-                  disabled={status === "loading" || !email.trim()}
-                  className="px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 hover-glow-gold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-                  style={{ 
-                    background: status === "success" ? 'linear-gradient(135deg, #8fbf9f, #6da882)' : 'linear-gradient(135deg, #eac33b, #ddb12d)',
-                    color: '#2f5d5d',
-                  }}
-                  data-testid="button-newsletter-submit"
-                >
-                  {status === "loading" && <Loader2 className="w-4 h-4 animate-spin" />}
-                  {status === "success" && <Check className="w-4 h-4" />}
-                  {status === "success" ? "Subscribed" : "Subscribe"}
-                </button>
-              </div>
-              {message && (
-                <p 
-                  className="text-sm text-center"
-                  style={{ color: status === "success" ? '#059669' : '#dc2626' }}
-                  data-testid="text-newsletter-message"
-                >
-                  {message}
-                </p>
-              )}
-            </form>
+            <NewsletterSignup variant="footer" source="sacred-footer-v2" />
           </div>
         </div>
 

@@ -285,7 +285,7 @@ export default function SocialStudioAdmin() {
       d.id === postId ? { ...d, status: "published", publishedAt: new Date().toISOString() } : d
     );
     saveDrafts(updated);
-    toast({ title: "Post Published!", description: `Posted to ${post?.platform}` });
+    toast({ title: "Marked as Published", description: `Status updated. Copy and post manually to ${post?.platform}.` });
   };
 
   const handleExportDraft = (postId) => {

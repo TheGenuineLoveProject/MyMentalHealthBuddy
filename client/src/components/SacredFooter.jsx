@@ -18,6 +18,7 @@
 import { Link } from "wouter";
 import { Heart, Mail, Instagram, Twitter, Facebook, Sparkles } from "lucide-react";
 import SacredGeometryBg from "./SacredGeometryBg";
+import NewsletterSignup from "./NewsletterSignup";
 import "../styles/healing-animations.css";
 
 export default function SacredFooter() {
@@ -45,9 +46,9 @@ export default function SacredFooter() {
   };
 
   const socialLinks = [
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Heart, href: "/community", label: "Community" },
+    { icon: Mail, href: "/contact", label: "Contact" },
+    { icon: Sparkles, href: "/affirmations", label: "Affirmations" },
   ];
 
   return (
@@ -132,32 +133,9 @@ export default function SacredFooter() {
               className="text-sm mb-4"
               style={{ color: '#3a3a3a', opacity: 0.75 }}
             >
-              Receive weekly reflections, wellness practices, and gentle reminders.
+              Receive wellness reflections and gentle reminders. No spam, unsubscribe anytime.
             </p>
-            <form className="flex gap-3" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="flex-1 px-4 py-3 rounded-full text-sm transition-all duration-300 focus:outline-none focus:ring-2"
-                style={{ 
-                  background: 'rgba(255, 255, 255, 0.8)',
-                  border: '1px solid rgba(143, 191, 159, 0.2)',
-                  color: '#3a3a3a',
-                }}
-                data-testid="input-newsletter-email"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 hover-glow-gold"
-                style={{ 
-                  background: 'linear-gradient(135deg, #eac33b, #ddb12d)',
-                  color: '#2f5d5d',
-                }}
-                data-testid="button-newsletter-submit"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterSignup variant="footer" source="sacred-footer" />
           </div>
         </div>
 
