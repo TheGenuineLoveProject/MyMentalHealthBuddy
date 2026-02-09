@@ -2,13 +2,14 @@
 
 > STATUS: **PASS**
 > Date: 2026-02-09
+> Updated: 2026-02-09 (hardening pass included)
 
 ---
 
 ## Phase 0 — Baseline Snapshot
 
 - STATUS: **PASS**
-- FILES CHANGED: `docs/NARRATIVE_BASELINE.md` (created)
+- FILES CHANGED: `docs/NARRATIVE_PHASE_BASELINE.md` (created)
 - VERIFICATION: Health check healthy, smoke tests 11/11 PASS, all pre-existing assets confirmed
 - NOTES: Baseline recorded before alignment changes
 
@@ -60,7 +61,7 @@
 - NOTES:
   1. Quote Card — 1080x1080
   2. Carousel — 1080x1350, 5 slides
-  3. Reel Cover — 1080x1920
+  3. Reels Cover — 1080x1920
   4. Story — 1080x1920
   5. Newsletter Header — 1200x600
   6. Blog Featured Image — 1200x630
@@ -93,17 +94,26 @@
 ## Phase 5 — Blog + Newsletter Trust Loop
 
 - STATUS: **PASS**
-- FILES CHANGED: none (verification only)
+- FILES CHANGED:
+  - `client/src/components/marketing/EmailCapture.jsx` (fixed endpoint → `/api/leads`)
+  - `server/routes/newsletter.mjs` (hardened → stores to `leads` table)
+  - DB: 4 blog posts updated with newsletter CTAs
+  - DB: 1 blog post updated with crisis link (why-this-exists)
+  - DB: Welcome newsletter draft created (content_type: newsletter)
 - VERIFICATION:
   - Blog pages contain gentle newsletter CTA (BlogIndex.jsx, BlogPost.jsx)
-  - Newsletter page links to blog
-  - 7 social posts link to /blog (req: 4+)
-  - 4 social posts link to /newsletter (req: 4+)
-  - 1 safety post links to /crisis
+  - All 5 canonical blog posts have newsletter CTA: YES
+  - All 5 canonical blog posts have crisis link: YES
+  - Newsletter page links to blog: YES
+  - 7 social posts link to /blog (req: 4+): PASS
+  - 4 social posts link to /newsletter (req: 4+): PASS
+  - 1 safety post links to /crisis: PASS
   - No popups, no forced modals, no manipulative banners
   - All click paths resolve (no 404)
   - No console errors triggered
-- NOTES: Cross-linking is organic and invitational
+  - EmailCapture now stores to DB via `/api/leads` (was log-only)
+  - `/api/newsletter/subscribe` now stores to `leads` table with dedup
+- NOTES: Cross-linking is organic and invitational. No misleading copy.
 
 ---
 
@@ -113,13 +123,14 @@
 - VERIFICATION:
   ```
   Health: healthy, softLaunch: true
-  prevent-duplicates.mjs: EXISTS
+  prevent-duplicates.mjs: EXISTS (21 warnings, 3 errors — all pre-existing)
   JSON: valid, 12 objects, all fields present
   /blog: 200 OK
+  /blog/welcome-to-genuine-love: 200 OK
   /newsletter: 200 OK
   /admin/narrative: 200 OK
   Smoke tests: 11/11 PASS
-  Automation references: 0 (no cron, scheduler, autoPost)
+  Automation: NONE (no cron, no scheduler, no autoPost, no autoEmail)
   ```
 - NOTES: No automation introduced, all additions additive and reversible
 
@@ -128,20 +139,27 @@
 ## Files Created/Modified
 
 ### Created
-- `docs/NARRATIVE_BASELINE.md` — Phase 0 baseline snapshot
+- `docs/NARRATIVE_PHASE_BASELINE.md` — Phase 0 baseline snapshot
 - `docs/NARRATIVE_SPINE.md` — Canonical narrative source (sections A-G)
 - `docs/CANVA_EXPORT_PACK.md` — 6 visual template guides
 - `content/narrative/social_posts.json` — 12 story posts (flat structure)
 - `server/routes/narrative-drafts.mjs` — Admin API for draft management
 - `client/src/pages/admin/NarrativeDrafts.jsx` — Admin UI for narrative workflow
 - `docs/NARRATIVE_AMPLIFICATION_COMPLETE.md` — This report
-- `docs/SELECTIVE_VISIBILITY_COMPLETE.md` — Soft launch completion report
+- `docs/NARRATIVE_AMPLIFICATION_HARDENING_COMPLETE.md` — Hardening detail report
 
 ### Modified
 - `shared/schema.mjs` — Added `narrativeDrafts` table
 - `server/dev.mjs` — Mounted narrative-drafts route
 - `client/src/App.jsx` — Added /admin/narrative route
 - `client/src/components/ErrorBoundary.jsx` — Gentle error recovery
+- `client/src/components/marketing/EmailCapture.jsx` — Fixed to use `/api/leads` with `consent: true`
+- `server/routes/newsletter.mjs` — Hardened to store leads in DB, dedup, proper error handling
+
+### Database Changes
+- 4 blog posts: added gentle newsletter CTAs (welcome, how-to-use, why-this-exists, daily-practice)
+- 1 blog post: added crisis link (why-this-exists)
+- 1 newsletter draft: welcome email template (content_type: newsletter, status: draft)
 
 ---
 
