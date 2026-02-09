@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
-import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Loader2, ArrowLeft, Activity, RefreshCw, Shield } from "lucide-react";
+import { Bell, AlertTriangle, CheckCircle, Info, XCircle, Clock, Loader2, ArrowLeft, Activity, RefreshCw, Shield, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { useToast } from "@/hooks/use-toast";
 import SEO from "../../components/SEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const DEFAULT_ALERTS = [
   { id: 1, type: "error", title: "Database Connection Timeout", message: "Connection pool exhausted at 14:32 UTC", time: "2 hours ago", resolved: false },
@@ -22,7 +23,7 @@ export default function SystemAlerts() {
   const [resolving, setResolving] = useState(null);
   const { toast } = useToast();
 
-  const { data: healthData } = useQuery({
+  const { data: healthData, error, refetch } = useQuery({
     queryKey: ['/api/health'],
     retry: 2,
     retryDelay: 1000,
@@ -103,13 +104,29 @@ export default function SystemAlerts() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <SEO title="System Alerts — Admin" noIndex />
 
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <header className="mb-8">
           <div className="flex items-center gap-3 mb-4">
@@ -222,6 +239,7 @@ export default function SystemAlerts() {
             Security Dashboard
           </Link>
         </div>
+        <SafetyFooter variant="compact" className="mt-12" />
       </main>
     </div>
   );

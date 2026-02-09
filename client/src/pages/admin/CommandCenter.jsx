@@ -27,6 +27,7 @@ import {
   Fingerprint, FolderKanban, Rss
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 import styles from "./CommandCenter.module.css";
 
 function StatusBadge({ status }) {
@@ -1154,6 +1155,7 @@ export default function AdminCommandCenter() {
         <AdminNavGrid />
 
         <DailyToolsPanel />
+        <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </div>
   );

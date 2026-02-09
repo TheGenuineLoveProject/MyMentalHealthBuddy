@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { useToast } from "@/hooks/use-toast";
 import SEO from "../../components/SEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const CATEGORY_META = {
   bug: { label: "Bug", icon: Bug, color: "text-red-500", bg: "bg-red-50 dark:bg-red-950/30" },
@@ -94,7 +95,7 @@ export default function FeedbackAggregator() {
       <SEO title="Feedback — Admin" noIndex />
       <div className="p-6 max-w-5xl mx-auto space-y-6">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div>
@@ -211,6 +212,7 @@ export default function FeedbackAggregator() {
             })}
           </div>
         )}
+        <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </>
   );

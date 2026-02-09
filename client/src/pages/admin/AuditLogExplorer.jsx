@@ -9,8 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Download, Search, RefreshCw, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
+import { Download, Search, RefreshCw, ChevronLeft, ChevronRight, ArrowLeft, AlertCircle } from "lucide-react";
 import { Link } from "wouter";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 export default function AuditLogExplorer() {
   const [page, setPage] = useState(1);
@@ -18,7 +19,7 @@ export default function AuditLogExplorer() {
   const [search, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState("");
 
-  const { data: logsData, isLoading, refetch } = useQuery({
+  const { data: logsData, isLoading, refetch, error } = useQuery({
     queryKey: ["/api/admin/audit-logs", { page, action, search }],
     queryFn: async () => {
       const params = new URLSearchParams({ page: String(page), limit: "25" });
@@ -64,10 +65,26 @@ export default function AuditLogExplorer() {
   const actions = actionsData?.data || [];
   const stats = statsData?.data || { total: 0, today: 0, topActions: [] };
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-6 space-y-6">
       <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-        <ArrowLeft size={16} /> Command Center
+        <ArrowLeft size={16} /> Back to Command Center
       </Link>
       <div className="flex items-center justify-between">
         <div>
@@ -234,6 +251,7 @@ export default function AuditLogExplorer() {
             <ChevronRight className="w-4 h-4" />
           </Button>
         </div>
+        <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </div>
   );

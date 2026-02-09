@@ -8,6 +8,7 @@ import { Link } from 'wouter';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/badge';
 import { CreditCard, Users, TrendingUp, AlertCircle, CheckCircle, Clock, ArrowLeft, RefreshCw } from 'lucide-react';
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 function formatCurrency(cents) {
   if (!cents && cents !== 0) return '$0.00';
@@ -215,6 +216,7 @@ export default function BillingViewerPage() {
           )}
         </CardContent>
       </Card>
+        <SafetyFooter variant="compact" className="mt-12" />
     </div>
   );
 }

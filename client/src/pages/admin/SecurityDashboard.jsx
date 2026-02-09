@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 export default function SecurityDashboard() {
   const { data: overviewData, isLoading: overviewLoading, error: overviewError, refetch: refetchOverview, isRefetching } = useQuery({
@@ -75,7 +76,7 @@ export default function SecurityDashboard() {
     <div className="min-h-screen hero-gradient" data-testid="page-security-dashboard">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <div className="flex items-center justify-between mb-8" data-testid="panel-header">
           <div>
@@ -273,6 +274,7 @@ export default function SecurityDashboard() {
             </div>
           </CardContent>
         </Card>
+        <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </div>
   );

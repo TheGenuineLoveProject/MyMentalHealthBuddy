@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../../components/SEO";
 import { useToast } from "@/hooks/use-toast";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const DEFAULT_FLAGS = [
   { id: "new_onboarding", name: "New Onboarding Flow", enabled: true, percentage: 100, description: "Redesigned onboarding experience" },
@@ -168,7 +169,7 @@ export default function FeatureFlags() {
 
       <main className="container mx-auto px-4 py-12 max-w-4xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <header className="mb-8" data-testid="panel-header">
           <div className="flex items-center gap-3 mb-4">
@@ -334,6 +335,7 @@ export default function FeatureFlags() {
             </p>
           </div>
         </div>
+        <SafetyFooter variant="compact" className="mt-12" />
       </main>
     </div>
   );

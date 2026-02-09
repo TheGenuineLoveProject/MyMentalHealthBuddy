@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const STATUS_CONFIG = {
   draft: { label: "Draft", color: "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300" },
@@ -134,7 +135,7 @@ export default function NarrativeDrafts() {
       <SEO title="Narrative Drafts - Admin" />
       <div className="p-6 max-w-5xl mx-auto space-y-6" data-testid="page-narrative-drafts">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
 
         <div className="flex items-center justify-between" data-testid="panel-header">
@@ -392,6 +393,7 @@ export default function NarrativeDrafts() {
             })}
           </div>
         )}
+        <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </>
   );

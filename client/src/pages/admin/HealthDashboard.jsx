@@ -8,6 +8,7 @@ import {
 import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
 import Top50ProcessTracker from "@/components/admin/Top50ProcessTracker";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 function StatusIndicator({ status }) {
   const statusConfig = {
@@ -239,7 +240,7 @@ export default function HealthDashboard() {
             </Link>
             <Link href="/admin" className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition min-h-[44px]" data-testid="link-command">
               <Server className="w-5 h-5 text-sage-600" />
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Command Center</span>
+              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Back to Command Center</span>
             </Link>
           </div>
         </div>
@@ -252,6 +253,7 @@ export default function HealthDashboard() {
         <div className="mt-6 text-center text-xs text-gray-500 dark:text-gray-500">
           Last updated: {health?.timestamp ? new Date(health.timestamp).toLocaleString() : "N/A"}
         </div>
+        <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </div>
   );

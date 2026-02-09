@@ -6,12 +6,12 @@ import {
   FileText, Clock, CheckCircle, Send, Eye,
   AlertTriangle, Shield, BarChart3, BookOpen,
   Calendar, Target, Link2, ExternalLink, ChevronDown, ChevronRight,
-  Megaphone, Zap, TrendingUp, Clipboard, Search, RefreshCw
+  Megaphone, Zap, TrendingUp, Clipboard, Search, RefreshCw, AlertCircle
 } from "lucide-react";
 import { SiInstagram, SiX, SiTiktok, SiYoutube, SiFacebook, SiLinkedin, SiPinterest } from "react-icons/si";
 import { queryClient, apiRequest } from "../../lib/queryClient";
-import SafetyFooter from "../../components/ui/SafetyFooter";
 import { useToast } from "@/hooks/use-toast";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const API_BASE = "/api/admin/social/enterprise";
 
@@ -142,7 +142,7 @@ export default function NarrativeOpsConsole() {
     return qs ? `${API_BASE}/posts?${qs}` : `${API_BASE}/posts`;
   }, [statusFilter, campaignFilter]);
 
-  const { data: postsData, isLoading: postsLoading } = useQuery({
+  const { data: postsData, isLoading: postsLoading, error, refetch } = useQuery({
     queryKey: [API_BASE, "/posts", statusFilter, campaignFilter],
     queryFn: async () => {
       const res = await fetch(buildQueryUrl(), { credentials: "include" });
@@ -372,6 +372,22 @@ export default function NarrativeOpsConsole() {
     const c = (Array.isArray(campaigns) ? campaigns : []).find(c => c.id === id);
     return c?.name || "Unknown";
   };
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">

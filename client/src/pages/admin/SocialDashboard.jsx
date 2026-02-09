@@ -9,8 +9,8 @@ import {
   Activity, PieChart
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
-import SafetyFooter from "../../components/ui/SafetyFooter";
 import { SEO } from "@/components/SEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const PLATFORMS = [
   { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000", handle: "@GenuineLoveProject", url: "https://youtube.com/@GenuineLoveProject", status: "verified" },

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { BarChart3, Eye, MousePointer, ShoppingCart, Mail, TrendingUp, Loader2, AlertCircle, ArrowLeft, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import SEO from "../../components/SEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 export default function AnalyticsDashboard() {
   const [timeframe, setTimeframe] = useState("7d");
@@ -46,7 +47,7 @@ export default function AnalyticsDashboard() {
       <SEO title="Analytics Dashboard | Admin" description="Product analytics overview" />
       <div className="max-w-6xl mx-auto px-4 py-8 space-y-8" data-testid="page-analytics-dashboard">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <div className="flex items-center justify-between" data-testid="panel-header">
           <div>
@@ -163,6 +164,7 @@ export default function AnalyticsDashboard() {
           <strong>Privacy-first analytics:</strong> No PII, no fingerprinting, no session replay. Users can opt out via localStorage.
           Signals are aggregated and minimal. See <code>docs/PRIVACY_SIGNALS.md</code> for full details.
         </div>
+        <SafetyFooter variant="compact" className="mt-12" />
       </div>
     </>
   );

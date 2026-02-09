@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import { 
   Layers, Check, AlertTriangle, Search,
-  FileText, Loader2, ArrowLeft, RefreshCw, Activity
+  FileText, Loader2, ArrowLeft, RefreshCw, Activity, AlertCircle
 } from "lucide-react";
 import SEO from "../../components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/Button.jsx";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const CONTENT_TIERS = ["beginner", "intermediate", "advanced"];
 
@@ -31,7 +32,7 @@ export default function ContentStudioAdmin() {
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
-  const { data: healthData } = useQuery({
+  const { data: healthData, error, refetch } = useQuery({
     queryKey: ['/api/health'],
     retry: 1,
     staleTime: 30000,
@@ -119,6 +120,22 @@ export default function ContentStudioAdmin() {
     );
   }
 
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetch()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background" data-testid="page-content-studio">
       <SEO 
@@ -128,7 +145,7 @@ export default function ContentStudioAdmin() {
       
       <main className="container mx-auto px-4 py-8 max-w-6xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <header className="mb-8" data-testid="panel-header">
           <div className="flex items-center justify-between">
@@ -278,6 +295,7 @@ export default function ContentStudioAdmin() {
             </CardContent>
           </Card>
         </div>
+        <SafetyFooter variant="compact" className="mt-12" />
       </main>
     </div>
   );

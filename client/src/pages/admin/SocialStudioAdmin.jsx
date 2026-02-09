@@ -22,6 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/Label.jsx";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/Switch";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 const PLATFORMS = [
   { id: "instagram", name: "Instagram", icon: SiInstagram, color: "bg-gradient-to-r from-purple-500 to-pink-500", charLimit: 2200, textColor: "text-white" },
@@ -339,7 +340,7 @@ export default function SocialStudioAdmin() {
       
       <main className="container mx-auto px-4 py-8 max-w-7xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <header className="mb-8">
           <div className="flex items-center justify-between flex-wrap gap-4">
@@ -1317,6 +1318,7 @@ export default function SocialStudioAdmin() {
             </div>
           </TabsContent>
         </Tabs>
+        <SafetyFooter variant="compact" className="mt-12" />
       </main>
     </div>
   );

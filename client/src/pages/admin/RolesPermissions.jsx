@@ -4,6 +4,7 @@ import { Shield, Users, Settings, Check, X, Info, ArrowLeft, Lock, Eye } from "l
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 export default function RolesPermissions() {
   const roles = [
@@ -71,7 +72,7 @@ export default function RolesPermissions() {
 
       <main className="container mx-auto px-4 py-12 max-w-6xl">
         <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-          <ArrowLeft size={16} /> Command Center
+          <ArrowLeft size={16} /> Back to Command Center
         </Link>
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
@@ -194,6 +195,7 @@ export default function RolesPermissions() {
             </div>
           </div>
         </section>
+        <SafetyFooter variant="compact" className="mt-12" />
       </main>
     </div>
   );

@@ -5,11 +5,11 @@ import {
   ArrowLeft, FileText, Mail, Calendar, Copy, Check,
   ChevronDown, Loader2, BookOpen, Send, BarChart3,
   GitPullRequest, Lightbulb, AlertTriangle, CheckCircle, XCircle,
-  TrendingUp, Users, Eye, PenLine, Plus, X, Share2, Filter
+  TrendingUp, Users, Eye, PenLine, Plus, X, Share2, Filter, AlertCircle
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
-import SafetyFooter from "../../components/ui/SafetyFooter";
 import { useToast } from "@/hooks/use-toast";
+import SafetyFooter from "../../components/ui/SafetyFooter";
 
 function CopyButton({ text, label }) {
   const [copied, setCopied] = useState(false);
@@ -86,7 +86,7 @@ export default function AdminPublishing() {
     { key: "signals", label: "Signals", icon: BarChart3 },
   ];
 
-  const { data: registryData, isLoading: regLoading } = useQuery({ queryKey: ["/api/admin/publishing/registry"] });
+  const { data: registryData, isLoading: regLoading, error: publishError, refetch: refetchRegistry } = useQuery({ queryKey: ["/api/admin/publishing/registry"] });
   const { data: draftsData, isLoading: draftsLoading } = useQuery({ queryKey: ["/api/admin/publishing/drafts"] });
   const { data: calendarData, isLoading: calLoading } = useQuery({ queryKey: ["/api/admin/publishing/calendar"] });
   const { data: signalsData, isLoading: sigLoading } = useQuery({ queryKey: ["/api/admin/publishing/signals/summary"] });
@@ -193,6 +193,22 @@ export default function AdminPublishing() {
 
   const today = new Date().toISOString().split("T")[0];
   const todayItems = calendar.filter(c => c.date === today);
+
+  if (publishError) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-slate-800 p-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center py-16" data-testid="section-error">
+            <AlertCircle className="w-12 h-12 text-red-400 mx-auto mb-4" />
+            <p className="text-red-600 dark:text-red-400 mb-4">Failed to load data</p>
+            <button onClick={() => refetchRegistry()} className="px-4 py-2 bg-[#8A9A5B] text-white rounded-lg hover:opacity-90" data-testid="button-retry">
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
