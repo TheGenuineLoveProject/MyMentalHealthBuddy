@@ -55,15 +55,15 @@ function BlogCard({ post }) {
       <p className="mt-2 text-sm text-[var(--glp-ink)]/80 line-clamp-3" data-testid={`text-excerpt-${post.id}`}>
         {post.excerpt || "A gentle reflection on wellness and growth."}
       </p>
-      {post.tags && typeof post.tags === "string" && (
+      {post.tags && (
         <div className="mt-3 flex flex-wrap gap-2">
-          {post.tags.split(",").map((tag, i) => (
+          {(Array.isArray(post.tags) ? post.tags : String(post.tags).split(",")).map((tag, i) => (
             <span
               key={i}
               className="px-2 py-1 text-xs rounded-full bg-[rgba(var(--glp-sage-rgb), 0.15)] text-[var(--glp-sage-deep)]"
               data-testid={`tag-${post.id}-${i}`}
             >
-              {tag.trim()}
+              {String(tag).trim()}
             </span>
           ))}
         </div>
@@ -158,12 +158,12 @@ export default function BlogIndex() {
           <div className="text-center py-16" data-testid="section-blog-empty">
             <BookOpen className="w-16 h-16 mx-auto text-[var(--glp-sage)]/50 mb-4" />
             <h3 className="text-xl font-semibold text-[var(--glp-sage-deep)]">
-              {searchQuery ? "No articles match your search" : "New posts are coming soon"}
+              {searchQuery ? "No articles match your search" : "New posts are coming soon. You're welcome here."}
             </h3>
             <p className="mt-3 text-[var(--glp-ink)]/70 max-w-md mx-auto">
               {searchQuery
                 ? "Try a different search term, or browse all articles."
-                : "You're welcome here. We're preparing thoughtful content on wellness and growth."}
+                : "We're preparing thoughtful content on wellness and growth."}
             </p>
             {searchQuery && (
               <button

@@ -166,6 +166,7 @@ export default function BlogPost() {
       return res.json();
     },
     enabled: !!slug,
+    retry: false,
   });
 
   const post = data?.data;
@@ -273,15 +274,15 @@ export default function BlogPost() {
               </span>
             </div>
 
-            {post.tags && typeof post.tags === "string" && (
+            {post.tags && (
               <div className="mt-4 flex flex-wrap gap-2">
-                {post.tags.split(",").map((tag, i) => (
+                {(Array.isArray(post.tags) ? post.tags : String(post.tags).split(",")).map((tag, i) => (
                   <span
                     key={i}
                     className="px-3 py-1 text-xs rounded-full bg-[rgba(var(--glp-sage-rgb), 0.15)] text-[var(--glp-sage-deep)]"
                     data-testid={`tag-${i}`}
                   >
-                    {tag.trim()}
+                    {String(tag).trim()}
                   </span>
                 ))}
               </div>

@@ -1,0 +1,116 @@
+PUBLISHING v1.5 — SIGNAL-DRIVEN REFINEMENT (ADDITIVE ONLY)
+
+HARD RULES:
+- ADDITIVE ONLY. Do not rename/delete/move/refactor existing files.
+- Manual-first: no auto-posting, no auto-sending.
+- Privacy-respecting analytics: no PII required.
+- No dark patterns. No urgency/shame/dependency language.
+- Every phase must end with PASS/FAIL and evidence.
+- Finish by running `npm run verify` and printing VERIFIED: PASS/FAIL.
+
+GOAL:
+Make newsletter + blog + publishing compounding by collecting ethical signals:
+1) UTM tagging utilities for all outbound links
+2) Server-side event endpoint for clicks (anonymous)
+3) Admin “Signals” view: what’s clicked/shared/visited
+4) Weekly refinement suggestions (human-reviewed)
+5) Extend verify pipeline to include signal checks
+
+PHASE 0 — BASELINE VERIFY (NO CHANGES)
+Run and print:
+- npm run verify
+If FAIL, STOP and fix before continuing.
+
+PHASE 1 — UTM BUILDER (CANONICAL)
+Create:
+- shared/utm.mjs (or shared/utm.ts if shared uses TS) with:
+  buildUtmUrl(baseUrlOrPath, { source, medium, campaign, content })
+Rules:
+- Must support internal paths ("/blog") and absolute URLs.
+- Must never include PII (no email, no userId).
+- Provide defaults:
+  source = "glp"
+  medium = "owned"
+  campaign = "publishing"
+- Add small unit test or script-based check:
+  scripts/test-utm.mjs prints sample URLs
+
+PHASE 2 — ANONYMOUS CLICK EVENT (SERVER)
+Create route:
+- server/routes/events.mjs
+Mount at:
+- POST /api/events/click
+
+Payload:
+{ event: "click", target: "<url-or-path>", context: { surface:"blog|newsletter|social", slug?, draft_id? }, ts }
+
+Requirements:
+- Rate limit
+- Validate payload (zod or existing validator)
+- Store in DB table analytics_events if it exists; else fallback:
+  data/analytics_events.jsonl append-only
+
+Return:
+{ ok:true }
+
+PHASE 3 — CLIENT TRACKING (MINIMAL + ETHICAL)
+Add a tiny helper:
+- client/src/utils/trackClick.js (or .ts)
+that calls POST /api/events/click
+Use it ONLY for:
+- Newsletter CTA buttons
+- Blog newsletter CTA block
+- Pricing CTA (optional)
+No global surveillance. No keystroke tracking. No session replay.
+
+PHASE 4 — ADMIN SIGNALS DASHBOARD
+Create or extend:
+- /admin/publishing/signals
+
+Must show:
+- Top clicked targets (last 7 days)
+- Top surfaces (blog/newsletter/social)
+- Top campaigns/content tags (if present)
+- Simple recommendation box:
+  - “Double down on pillar X”
+  - “This CTA underperformed”
+No auto-changes. Human decides.
+
+PHASE 5 — WEEKLY REFINEMENT REPORT (MANUAL-FIRST)
+Create:
+- scripts/publishing-weekly-report.mjs
+It reads analytics_events + editorial_calendar and prints:
+- Best performing pillar
+- Worst performing CTA
+- Suggested next 7 days of pillar rotation (no more than 7 items)
+
+Output ends with:
+WEEKLY_REPORT: PASS
+
+PHASE 6 — UPGRADE AUDITS + VERIFY
+Create or update:
+- scripts/audit-signals.mjs
+Checks:
+- shared/utm.* exists
+- /api/events/click exists (static scan for route mount)
+- admin signals page exists
+- weekly report script exists
+Output:
+SIGNALS_AUDIT: PASS/FAIL
+
+Update:
+- scripts/audit-publishing.mjs to run scripts/audit-signals.mjs too.
+Update:
+- scripts/verify.mjs to include publishing audits and build/health checks.
+
+PHASE 7 — REQUIRED FINAL COMMANDS (RUN + PASTE OUTPUT)
+- node scripts/test-utm.mjs
+- node scripts/audit-signals.mjs
+- node scripts/publishing-weekly-report.mjs
+- npm run verify
+
+FINAL REPORT REQUIRED:
+A) Files created/changed (full paths)
+B) Evidence: outputs showing PASS lines + VERIFIED line
+C) What is now measurable (3 bullets max)
+D) Next 3 steps only

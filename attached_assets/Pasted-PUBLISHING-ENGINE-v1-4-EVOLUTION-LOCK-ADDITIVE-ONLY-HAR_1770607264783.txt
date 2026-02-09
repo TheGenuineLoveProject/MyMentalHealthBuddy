@@ -1,0 +1,101 @@
+PUBLISHING ENGINE v1.4 — EVOLUTION LOCK (ADDITIVE ONLY)
+
+HARD RULES:
+- ADDITIVE ONLY. Do not rename/delete/move/refactor existing files.
+- Manual-first: no auto-posting, no auto-sending.
+- Ethical language only: no urgency, no shame, no dependency framing.
+- No medical/therapy claims.
+- Every phase ends with PASS/FAIL evidence.
+- Must finish by running `npm run verify` and printing VERIFIED: PASS or VERIFIED: FAIL.
+
+GOAL:
+Upgrade newsletter + blog + publishing from “working” to “compounding”:
+1) Add editorial calendar (14 days rolling)
+2) Add “Today’s Publish” admin panel
+3) Add link integrity + CTA integrity scanning
+4) Add quality gates (tone, claims, safety disclaimers)
+5) Add cross-linking rules: blog <-> newsletter <-> platform pages
+6) Extend verify pipeline to include these checks
+
+PHASE 0 — VERIFY BASELINE (NO CHANGES)
+- Run and print:
+  - node scripts/audit-publishing.mjs
+  - npm run verify
+If either fails, STOP and fix before proceeding.
+
+PHASE 1 — EDITORIAL CALENDAR (CANONICAL)
+Create:
+- content/publishing/calendar/editorial_calendar.json
+
+Rules:
+- 14 entries (next 14 days)
+- fields:
+  date, channel (newsletter/blog/social), pillar, title, slug(optional), draft_id(optional), status(planned/draft/approved/published/sent), notes
+- rotate pillars across: Orientation, Reflection, Emotional Literacy, Practice, Community, Safety, Platform Feature, Blog highlight
+- include at least 4 newsletter sends, 4 blog posts, 6 social posts (copy-first)
+
+PHASE 2 — “TODAY’S PUBLISH” ADMIN PANEL (MANUAL-FIRST)
+Create or extend admin:
+- /admin/publishing/today
+
+Must show:
+- Today’s calendar item(s)
+- If newsletter item: show draft_id + copy buttons (subject/body/cta)
+- If blog item: show slug + draft template
+- If social item: show captions + copy buttons
+Must allow status updates (planned→approved→sent/published) stored in:
+- data/publishing_status.json
+
+PHASE 3 — LINK INTEGRITY SCAN (NO BROKEN PUBLIC SURFACE)
+Create script:
+- scripts/audit-links.mjs
+
+It must:
+- Scan blog posts + newsletter drafts + templates for URLs that start with "/"
+- Confirm route targets exist in routing registry:
+  - at minimum these must exist: /blog, /newsletter, /pricing, /crisis, /contact
+- Print:
+  LINKS_AUDIT: PASS
+  or
+  LINKS_AUDIT: FAIL (missing targets listed)
+
+PHASE 4 — QUALITY GATES (TONE + SAFETY)
+Create script:
+- scripts/audit-tone.mjs
+
+It must scan newsletter drafts + templates + blog posts for forbidden patterns:
+- “cure”, “treat”, “diagnose”, “guaranteed results”
+- urgency: “today only”, “limited time”, “don’t miss”
+- shame: “what’s wrong with you”, “you should be ashamed”
+- dependency: “you need us”, “only we can”
+Output:
+  TONE_AUDIT: PASS
+or
+  TONE_AUDIT: FAIL (examples)
+
+PHASE 5 — UPGRADE PUBLISHING AUDIT + VERIFY
+Update scripts/audit-publishing.mjs to also run:
+- scripts/audit-links.mjs
+- scripts/audit-tone.mjs
+And require all three to pass.
+
+Update scripts/verify.mjs to run:
+- node scripts/audit-publishing.mjs
+- npm run build (if exists)
+- health endpoint check
+Then final line:
+  VERIFIED: PASS
+or
+  VERIFIED: FAIL
+
+PHASE 6 — FINAL COMMANDS (MUST RUN + PASTE OUTPUT)
+- node scripts/audit-publishing.mjs
+- node scripts/audit-links.mjs
+- node scripts/audit-tone.mjs
+- npm run verify
+
+FINAL REPORT REQUIRED:
+A) Files created/changed (full paths)
+B) Terminal outputs showing PASS lines + VERIFIED line
+C) What is now possible operationally (3 bullets max)
+D) Next 3 steps only
