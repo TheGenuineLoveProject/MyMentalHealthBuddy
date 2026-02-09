@@ -996,7 +996,7 @@ function AdminNavGrid() {
         { label: "Audit Log Explorer", icon: ClipboardList, href: "/admin/audit-log", desc: "System audit trail & events" },
         { label: "Feedback Aggregator", icon: MessageSquare, href: "/admin/feedback", desc: "User feedback & suggestions" },
         { label: "System Alerts", icon: AlertTriangle, href: "/admin/alerts", desc: "Alert configuration & resolution" },
-        { label: "Admin Users", icon: UserCheck, href: "/admin/roles", desc: "Admin user management" },
+        { label: "Admin Users", icon: UserCheck, href: "/admin/users", desc: "Admin user management" },
       ]
     },
   ];
@@ -1043,14 +1043,16 @@ export default function AdminCommandCenter() {
 
   const { data: healthData, refetch: refetchHealth, isRefetching: isHealthRefetching, isLoading: isHealthLoading, error: healthError } = useQuery({
     queryKey: ['/api/health'],
-    retry: false,
+    retry: 2,
+    retryDelay: 1000,
     staleTime: 30000,
     refetchInterval: 60000
   });
 
   const { data: statsData, isLoading: isStatsLoading } = useQuery({
     queryKey: ['/api/admin/dashboard-stats'],
-    retry: false,
+    retry: 2,
+    retryDelay: 1000,
     staleTime: 30000,
     refetchInterval: 60000,
     select: (data) => data?.data || data,

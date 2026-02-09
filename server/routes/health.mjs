@@ -49,9 +49,9 @@ router.get("/", async (_req, res) => {
       ai: { available: isConfigured() },
       softLaunch: process.env.SOFT_LAUNCH_MODE === "true",
       platform: {
-        totalTools: 122,
+        totalTools: 123,
         totalRoutes: 123,
-        adminPages: 23,
+        adminPages: 26,
       },
       services: {
         stripe: !!process.env.STRIPE_SECRET_KEY,

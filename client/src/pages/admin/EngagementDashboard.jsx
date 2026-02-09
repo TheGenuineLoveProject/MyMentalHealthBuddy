@@ -48,9 +48,9 @@ export default function EngagementDashboard() {
   ];
 
   const platformStats = [
-    { label: "Platform Tools", value: health?.platform?.totalTools || 122 },
+    { label: "Platform Tools", value: health?.platform?.totalTools || 123 },
     { label: "API Routes", value: health?.platform?.totalRoutes || 123 },
-    { label: "Admin Pages", value: health?.platform?.adminPages || 23 },
+    { label: "Admin Pages", value: health?.platform?.adminPages || 26 },
     { label: "Social Posts", value: socialCount },
     { label: "Active Campaigns", value: stats?.campaigns || 0 },
     { label: "Draft Posts", value: stats?.socialDrafts || 0 },

@@ -246,6 +246,7 @@ const AuditLogExplorer = lazy(() => import("./pages/admin/AuditLogExplorer.jsx")
 
 // Batch 16 - Analytics, Community, Personalization, Wellness (P451-P500)
 const EngagementDashboard = lazy(() => import("./pages/admin/EngagementDashboard.jsx"));
+const AdminUsers = lazy(() => import("./pages/admin/AdminUsers.jsx"));
 const UserProfile = lazy(() => import("./pages/UserProfile.jsx"));
 const WellnessGoals = lazy(() => import("./pages/WellnessGoals.jsx"));
 const MeditationPlayer = lazy(() => import("./pages/tools/MeditationPlayer.jsx"));
@@ -1756,6 +1757,7 @@ export default function App() {
               <Route path="/admin/narrative">{() => <ProtectedRoute><AdminGuard><NarrativeDrafts /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/engagement">{() => <ProtectedRoute><AdminGuard><EngagementDashboard /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/analytics">{() => <ProtectedRoute><AdminGuard><AnalyticsDashboard /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/users">{() => <ProtectedRoute><AdminGuard><AdminUsers /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/profile">{() => <ProtectedRoute><UserProfile /></ProtectedRoute>}</Route>
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
               <Route path="/tools/meditation">{() => <WellnessRoute><MeditationPlayer /></WellnessRoute>}</Route>
