@@ -125,6 +125,12 @@ import reflectionRouter from "./routes/reflection.mjs";
 import emailRouter from "./routes/email.mjs";
 import softLaunchMetricsRouter from "./routes/soft-launch-metrics.mjs";
 import objectStorageRouter from "./routes/object-storage.mjs";
+import accountActionsRouter from "./routes/accountActions.mjs";
+import aiDashboardRouter from "./routes/ai-dashboard.mjs";
+import feedRouter from "./routes/feed.mjs";
+import healingCoreRouter from "./routes/healing.mjs";
+import meaningCoreRouter from "./routes/meaning.mjs";
+import figmaRouter from "./routes/figma.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -397,6 +403,12 @@ app.use('/api/content', contentRouter);
 app.use('/api/perplexity', perplexityRouter);
 app.use('/api/admin/publishing', adminPublishingRouter);
 app.use('/rss.xml', rssRouter);
+app.use('/api/account-actions', accountActionsRouter);
+app.use('/api/ai-dashboard', aiDashboardRouter);
+app.use('/api/feed', feedRouter);
+app.use('/api/healing-core', healingCoreRouter);
+app.use('/api/meaning-core', meaningCoreRouter);
+app.use('/api/figma', figmaRouter);
 
 const SERVER_START_TIME = Date.now();
 
@@ -513,11 +525,12 @@ app.get("/api/admin/platform-tools-status", async (req, res) => {
       "resilience", "foresight", "knowledge", "cognitive-lab", "cognitive-mastery",
       "deep-learning", "dialectics", "practices", "insights",
       "trauma-healing", "emotional-resilience", "emotional-mastery",
-      "healing-modalities", "holistic-healing", "healing", "healing-intelligence",
+      "healing-modalities", "holistic-healing", "healing", "healing-core",
+      "healing-intelligence",
       "post-trauma", "mind-body", "psychological-safety",
       "self-mastery-intelligence", "self-mastery", "peak-performance", "personal-growth",
       "life-purpose", "life-design", "purpose-compass", "mastery-excellence",
-      "meaning", "transformation", "values", "praxis",
+      "meaning", "meaning-core", "transformation", "values", "praxis",
       "consciousness", "human-potential", "spiritual-intelligence",
       "wisdom-traditions", "wisdom-synthesis", "contemplative",
       "ethical-reasoning", "existential", "neuro-integration", "socio-ecology",
@@ -528,14 +541,15 @@ app.get("/api/admin/platform-tools-status", async (req, res) => {
       "content-studio", "content-intelligence", "content", "universal-content",
       "blog", "newsletter", "social-posts", "social-posting", "narrative-drafts",
       "perplexity",
-      "account", "onboarding", "gamification", "progress", "badges",
+      "account", "account-actions", "onboarding", "gamification", "progress", "badges",
       "favorites", "dashboard", "pro-features", "leads", "feedback",
+      "ai-dashboard",
       "admin", "admin/security", "admin/audit-logs", "admin/billing",
       "admin/publishing", "admin/social", "admin/social/enterprise",
       "analytics", "metrics", "admin/soft-launch-metrics",
       "health", "deployment-readiness", "integrations",
       "billing", "webhook", "email", "contact", "auth/github",
-      "products", "invites"
+      "products", "invites", "feed", "figma"
     ];
 
     res.json({

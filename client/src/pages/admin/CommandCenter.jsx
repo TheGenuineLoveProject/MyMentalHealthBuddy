@@ -208,6 +208,12 @@ function RecentActivityPanel({ activities }) {
 function DailyToolsPanel() {
   const [runningTools, setRunningTools] = useState({});
   const [toolResults, setToolResults] = useState({});
+  const [collapsedCategories, setCollapsedCategories] = useState({});
+  const [lastFullCheck, setLastFullCheck] = useState(null);
+
+  const toggleCategory = (idx) => {
+    setCollapsedCategories(prev => ({ ...prev, [idx]: !prev[idx] }));
+  };
 
   const toolCategories = [
     {
@@ -253,6 +259,7 @@ function DailyToolsPanel() {
         { id: "healing-modalities", label: "Healing Modalities", endpoint: "/api/healing-modalities", icon: Flower2, desc: "Healing approaches" },
         { id: "holistic-healing", label: "Holistic Healing", endpoint: "/api/holistic-healing", icon: TreePine, desc: "Whole-person wellness" },
         { id: "healing-tools", label: "Healing Tools", endpoint: "/api/healing", icon: Heart, desc: "Core healing toolkit" },
+        { id: "healing-core", label: "Healing Core", endpoint: "/api/healing-core", icon: Leaf, desc: "Core healing engine" },
         { id: "healing-intelligence", label: "Healing Intelligence", endpoint: "/api/healing-intelligence", icon: Sparkles, desc: "AI-guided healing" },
         { id: "post-trauma", label: "Post-Trauma Growth", endpoint: "/api/post-trauma", icon: Feather, desc: "Post-traumatic growth" },
         { id: "mind-body", label: "Mind-Body Integration", endpoint: "/api/mind-body", icon: CircleDot, desc: "Mind-body connection" },
@@ -271,6 +278,7 @@ function DailyToolsPanel() {
         { id: "purpose-compass", label: "Purpose Compass", endpoint: "/api/purpose-compass", icon: Compass, desc: "Purpose navigation" },
         { id: "mastery-excellence", label: "Mastery Excellence", endpoint: "/api/mastery-excellence", icon: Star, desc: "Excellence framework" },
         { id: "meaning", label: "Meaning & Future", endpoint: "/api/meaning", icon: Rocket, desc: "Meaning creation" },
+        { id: "meaning-core", label: "Meaning Core", endpoint: "/api/meaning-core", icon: Star, desc: "Core meaning system" },
         { id: "transformation", label: "Transformation Engine", endpoint: "/api/transformation", icon: Orbit, desc: "Deep transformation" },
         { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
         { id: "praxis", label: "Praxis Lab", endpoint: "/api/praxis", icon: Workflow, desc: "Theory to practice" },
@@ -333,6 +341,8 @@ function DailyToolsPanel() {
         { id: "pro-features", label: "Pro Features", endpoint: "/api/pro-features", icon: Gem, desc: "Premium feature gates" },
         { id: "leads", label: "Leads Engine", endpoint: "/api/leads", icon: Inbox, desc: "Lead collection" },
         { id: "feedback", label: "Feedback System", endpoint: "/api/feedback", icon: MessageSquare, desc: "User feedback" },
+        { id: "account-actions", label: "Account Actions", endpoint: "/api/account-actions", icon: UserCheck, desc: "Account management" },
+        { id: "ai-dashboard", label: "AI Dashboard", endpoint: "/api/ai-dashboard", icon: Brain, desc: "AI wellness dashboard" },
       ]
     },
     {
@@ -363,6 +373,8 @@ function DailyToolsPanel() {
         { id: "auth-github", label: "GitHub Auth", endpoint: "/api/auth/github", icon: Key, desc: "GitHub OAuth" },
         { id: "products", label: "Products API", endpoint: "/api/products", icon: PackageCheck, desc: "Product catalog" },
         { id: "invites", label: "Invite System", endpoint: "/api/invites", icon: Handshake, desc: "User invitations" },
+        { id: "feed", label: "RSS Feed", endpoint: "/api/feed", icon: Share2, desc: "RSS feed generation" },
+        { id: "figma-api", label: "Figma Integration", endpoint: "/api/figma", icon: Palette, desc: "Figma design tools" },
       ]
     },
   ];
@@ -371,21 +383,39 @@ function DailyToolsPanel() {
     setRunningTools(prev => ({ ...prev, [tool.id]: true }));
     try {
       const res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include' });
-      const status = res.ok ? 'healthy' : 'warning';
-      setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString() } }));
+      let status = 'healthy';
+      if (res.ok) {
+        status = 'healthy';
+      } else if (res.status === 401 || res.status === 403) {
+        status = 'healthy';
+      } else if (res.status === 404) {
+        status = 'error';
+      } else if (res.status === 429) {
+        status = 'warning';
+      } else {
+        status = 'warning';
+      }
+      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 429 ? 'rate-limited' : res.ok ? 'ok' : `${res.status}`;
+      setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString(), label: statusLabel } }));
     } catch {
-      setToolResults(prev => ({ ...prev, [tool.id]: { status: 'error', code: 0, time: new Date().toLocaleTimeString() } }));
+      setToolResults(prev => ({ ...prev, [tool.id]: { status: 'error', code: 0, time: new Date().toLocaleTimeString(), label: 'unreachable' } }));
     } finally {
       setRunningTools(prev => ({ ...prev, [tool.id]: false }));
     }
   };
 
   const runAllChecks = async () => {
+    setToolResults({});
     const allTools = toolCategories.flatMap(c => c.tools);
-    for (const tool of allTools) {
-      runHealthCheck(tool);
-      await new Promise(r => setTimeout(r, 100));
+    const batchSize = 5;
+    for (let i = 0; i < allTools.length; i += batchSize) {
+      const batch = allTools.slice(i, i + batchSize);
+      await Promise.all(batch.map(tool => runHealthCheck(tool)));
+      if (i + batchSize < allTools.length) {
+        await new Promise(r => setTimeout(r, 200));
+      }
     }
+    setLastFullCheck(new Date().toLocaleTimeString());
   };
 
   const totalTools = toolCategories.reduce((sum, c) => sum + c.tools.length, 0);
@@ -452,15 +482,41 @@ function DailyToolsPanel() {
         </div>
       )}
       
+      {lastFullCheck && (
+        <div style={{ padding: '0 1rem 0.25rem', fontSize: '0.7rem', color: '#888' }} data-testid="text-last-full-check">
+          Last full check: {lastFullCheck}
+        </div>
+      )}
       <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        {toolCategories.map((category, ci) => (
+        {toolCategories.map((category, ci) => {
+          const catHealthy = category.tools.filter(t => toolResults[t.id]?.status === 'healthy').length;
+          const catChecked = category.tools.filter(t => toolResults[t.id]).length;
+          const catErrors = category.tools.filter(t => toolResults[t.id]?.status === 'error').length;
+          const isCollapsed = collapsedCategories[ci];
+          return (
           <div key={ci}>
-            <h4 
-              style={{ fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', opacity: 0.7 }}
+            <button 
+              onClick={() => toggleCategory(ci)}
+              style={{ 
+                fontSize: '0.8rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em', 
+                marginBottom: isCollapsed ? 0 : '0.5rem', opacity: 0.7, cursor: 'pointer',
+                background: 'none', border: 'none', padding: '0.25rem 0', width: '100%',
+                display: 'flex', alignItems: 'center', justifyContent: 'space-between', textAlign: 'left'
+              }}
               data-testid={`tool-category-${ci}`}
             >
-              {category.title}
-            </h4>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <ArrowRight size={12} style={{ transform: isCollapsed ? 'rotate(0deg)' : 'rotate(90deg)', transition: 'transform 0.2s' }} />
+                {category.title} ({category.tools.length})
+              </span>
+              {catChecked > 0 && (
+                <span style={{ fontSize: '0.7rem', fontWeight: 400, display: 'flex', gap: '0.5rem' }}>
+                  <span style={{ color: '#22c55e' }}>{catHealthy} ok</span>
+                  {catErrors > 0 && <span style={{ color: '#ef4444' }}>{catErrors} err</span>}
+                </span>
+              )}
+            </button>
+            {!isCollapsed && (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '0.5rem' }}>
               {category.tools.map((tool) => {
                 const ToolIcon = tool.icon;
@@ -482,13 +538,16 @@ function DailyToolsPanel() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
                       {result && (
-                        <span style={{ display: 'inline-flex' }}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }} title={`HTTP ${result.code} - ${result.label || ''}`}>
                           {result.status === 'healthy' ? (
                             <CheckCircle size={14} style={{ color: '#22c55e' }} />
                           ) : result.status === 'warning' ? (
                             <AlertTriangle size={14} style={{ color: '#eab308' }} />
                           ) : (
                             <AlertCircle size={14} style={{ color: '#ef4444' }} />
+                          )}
+                          {result.label && result.label !== 'ok' && (
+                            <span style={{ fontSize: '0.6rem', opacity: 0.6 }}>{result.label}</span>
                           )}
                         </span>
                       )}
@@ -515,8 +574,10 @@ function DailyToolsPanel() {
                 );
               })}
             </div>
+            )}
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
