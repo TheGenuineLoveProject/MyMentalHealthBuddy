@@ -53,6 +53,19 @@ The platform offers:
 - **Email Lifecycle**: Upgrade confirmation + cancellation acknowledgment emails via Resend (triggered from webhook.mjs)
 - **Webhook**: `server/routes/webhook.mjs` handles all Stripe events, writes canonical statuses, sends lifecycle emails
 
+### Soft Launch & Selective Visibility
+- **Soft Launch Mode**: `SOFT_LAUNCH_MODE=true` env flag. `SoftLaunchBanner.jsx` shows dismissible banner. Exposed via `/api/health`.
+- **Feedback System**: `FeedbackWidget.jsx` (floating button, 4 categories: bug/idea/confusion/praise). DB table `soft_launch_feedback`. POST `/api/feedback` (public), GET `/api/feedback` (admin-only). Admin viewer at `/admin/feedback` with CSV export.
+- **Aggregate Metrics**: `GET /api/admin/soft-launch-metrics` (admin-only). Page views by route, funnel step counters. No PII, no IPs, no fingerprinting.
+- **Smoke Tests**: `scripts/soft-launch-smoke.mjs` — 11 critical routes, PASS/FAIL output.
+- **Gentle Error Recovery**: Trauma-informed 404 page and ErrorBoundary with crisis links.
+
+### Narrative Amplification System
+- **Narrative Spine**: `docs/NARRATIVE_SPINE.md` — single source of truth for all messaging and brand voice.
+- **12 Story Posts**: `content/narrative/social_posts.json` — platform variants (IG, TikTok, YouTube Shorts, X), gentle CTAs, safety notes. Ethical constraints enforced (no urgency, guilt, medical claims).
+- **Canva Export Pack**: `docs/CANVA_EXPORT_PACK.md` — 6 visual templates with dimensions, typography, brand palette. References `client/src/styles/brand-tokens.css`.
+- **Narrative Drafts Admin**: `/admin/narrative` page with `NarrativeDrafts.jsx`. DB table `narrative_drafts`. API at `/api/narrative-drafts` (admin-only). Workflow: draft → review → approved → posted. Copy-to-clipboard for platform variants. No automation, no social API integration.
+
 ### Publishing & Narrative Distribution Layer
 - **Canonical Content Model**: `blog_posts` table extended with `content_type` (blog_post/newsletter/reflection/essay/note) and `visibility` (public/private/draft) columns. Single table serves all publishable content types. Documented in `docs/PUBLISHING_MODEL.md`.
 - **Blog API**: Full CRUD at `/api/blog` with content_type filtering (`?type=newsletter`), visibility enforcement on public endpoints, RSS feed, draft management, and comments. `BlogPost.jsx` renders individual posts.

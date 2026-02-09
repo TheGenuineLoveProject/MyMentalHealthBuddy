@@ -109,6 +109,7 @@ import deploymentReadinessRouter from "./routes/deploymentReadiness.mjs";
 import metricsSummaryRouter from "./routes/metricsSummary.mjs";
 import softLaunchMetricsRouter, { recordPageView } from "./routes/soft-launch-metrics.mjs";
 import feedbackRouter from "./routes/feedback.mjs";
+import narrativeDraftsRouter from "./routes/narrative-drafts.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -207,6 +208,7 @@ async function startServer() {
   app.use("/api/admin", adminRouter);
   app.use("/api/admin/soft-launch-metrics", softLaunchMetricsRouter);
   app.use("/api/feedback", feedbackRouter);
+  app.use("/api/narrative-drafts", narrativeDraftsRouter);
   app.use("/api/blog", blogRouter);
   app.use("/api/journal", requireAdult, journalRouter);
   app.use("/api/reflection", requireAdult, reflectionRouter);

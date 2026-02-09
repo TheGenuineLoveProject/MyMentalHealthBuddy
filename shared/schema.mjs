@@ -612,6 +612,16 @@ export const userSettings = pgTable("user_settings", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+/* ================= NARRATIVE DRAFTS ================= */
+export const narrativeDrafts = pgTable("narrative_drafts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  postId: varchar("post_id", { length: 20 }).notNull().unique(),
+  status: varchar("status", { length: 20 }).default("draft").notNull(),
+  editedCaption: text("edited_caption"),
+  notes: text("notes"),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 /* ================= SOFT LAUNCH FEEDBACK ================= */
 export const softLaunchFeedback = pgTable("soft_launch_feedback", {
   id: uuid("id").defaultRandom().primaryKey(),

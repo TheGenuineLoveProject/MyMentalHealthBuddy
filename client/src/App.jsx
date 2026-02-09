@@ -232,6 +232,7 @@ const RolesPermissions = lazy(() => import("./pages/admin/RolesPermissions.jsx")
 const FeatureFlags = lazy(() => import("./pages/admin/FeatureFlags.jsx"));
 const SystemAlerts = lazy(() => import("./pages/admin/SystemAlerts.jsx"));
 const FeedbackAggregator = lazy(() => import("./pages/admin/FeedbackAggregator.jsx"));
+const NarrativeDrafts = lazy(() => import("./pages/admin/NarrativeDrafts.jsx"));
 
 // Batch 16 - Analytics, Community, Personalization, Wellness (P451-P500)
 const EngagementDashboard = lazy(() => import("./pages/admin/EngagementDashboard.jsx"));
@@ -1716,6 +1717,7 @@ export default function App() {
               <Route path="/admin/feature-flags">{() => <ProtectedRoute><AdminGuard><FeatureFlags /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/alerts">{() => <ProtectedRoute><AdminGuard><SystemAlerts /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/feedback">{() => <ProtectedRoute><AdminGuard><FeedbackAggregator /></AdminGuard></ProtectedRoute>}</Route>
+              <Route path="/admin/narrative">{() => <ProtectedRoute><AdminGuard><NarrativeDrafts /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/admin/engagement">{() => <ProtectedRoute><AdminGuard><EngagementDashboard /></AdminGuard></ProtectedRoute>}</Route>
               <Route path="/profile">{() => <ProtectedRoute><UserProfile /></ProtectedRoute>}</Route>
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
