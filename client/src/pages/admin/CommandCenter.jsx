@@ -16,7 +16,13 @@ import {
   DollarSign, Wand2, GraduationCap, Headphones,
   HeartHandshake, Flower2, TreePine, CircleDot,
   Footprints, Gem, Mountain, Feather, 
-  ExternalLink, CheckSquare, Play
+  ExternalLink, CheckSquare, Play,
+  UserCheck, CreditCard, Key, Workflow,
+  Network, Gauge, Trophy, Award,
+  Landmark, Orbit, Rocket, Puzzle,
+  FileQuestion, GitBranch, Webhook, Share2,
+  ScanLine, Contact, Inbox, LogIn,
+  PackageCheck, Milestone, Handshake
 } from "lucide-react";
 import { useSEO } from "@/hooks/useSEO";
 import styles from "./CommandCenter.module.css";
@@ -205,21 +211,25 @@ function DailyToolsPanel() {
 
   const toolCategories = [
     {
-      title: "AI & Wellness Tools",
+      title: "AI & Core Wellness Tools",
       tools: [
-        { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/health", icon: MessageSquare, desc: "AI conversation engine" },
+        { id: "ai-chat", label: "AI Chat Therapy", endpoint: "/api/ai", icon: MessageSquare, desc: "AI conversation engine" },
+        { id: "therapy", label: "Therapy Engine", endpoint: "/api/therapy", icon: Headphones, desc: "Guided therapy sessions" },
         { id: "mood-tracker", label: "Mood Tracker", endpoint: "/api/mood", icon: Heart, desc: "User mood tracking" },
         { id: "journal", label: "Journal System", endpoint: "/api/journal", icon: BookOpen, desc: "Journaling engine" },
         { id: "gratitude", label: "Gratitude Prompts", endpoint: "/api/gratitude", icon: Sun, desc: "Daily gratitude system" },
         { id: "reflection", label: "Reflection Tools", endpoint: "/api/reflection", icon: Moon, desc: "Self-reflection engine" },
         { id: "wellness-tools", label: "Wellness Toolkit", endpoint: "/api/wellness-tools", icon: Leaf, desc: "Breath, body scan, meditation" },
-        { id: "breathing", label: "Breathing Exercises", endpoint: "/api/health", icon: Wind, desc: "Guided breathing" },
+        { id: "mirror", label: "Mirror Reflection", endpoint: "/api/mirror", icon: Eye, desc: "Self-awareness mirror" },
+        { id: "prompts", label: "Prompt Engine", endpoint: "/api/prompts", icon: FileQuestion, desc: "Guided prompt system" },
+        { id: "states", label: "Emotional States", endpoint: "/api/states", icon: Gauge, desc: "State tracking system" },
       ]
     },
     {
       title: "Intelligence & Growth Tools",
       tools: [
         { id: "wisdom", label: "Wisdom Engine", endpoint: "/api/wisdom", icon: Lightbulb, desc: "Daily wisdom delivery" },
+        { id: "wisdom-engine", label: "Wisdom Engine (Advanced)", endpoint: "/api/wisdom-engine", icon: Landmark, desc: "Deep wisdom system" },
         { id: "philosophy", label: "Philosophy Lab", endpoint: "/api/philosophy", icon: GraduationCap, desc: "Philosophical inquiry" },
         { id: "metacognition", label: "Metacognition", endpoint: "/api/metacognition", icon: Brain, desc: "Thinking about thinking" },
         { id: "creativity", label: "Creativity Engine", endpoint: "/api/creativity", icon: Sparkles, desc: "Creative exploration" },
@@ -227,7 +237,11 @@ function DailyToolsPanel() {
         { id: "foresight", label: "Foresight Lab", endpoint: "/api/foresight", icon: Compass, desc: "Future planning" },
         { id: "knowledge", label: "Knowledge Synthesis", endpoint: "/api/knowledge", icon: BookOpen, desc: "Knowledge integration" },
         { id: "cognitive-lab", label: "Cognitive Lab", endpoint: "/api/cognitive-lab", icon: Brain, desc: "Cognitive exercises" },
+        { id: "cognitive-mastery", label: "Cognitive Mastery", endpoint: "/api/cognitive-mastery", icon: Trophy, desc: "Cognitive excellence" },
         { id: "deep-learning", label: "Deep Learning", endpoint: "/api/deep-learning", icon: Layers, desc: "Deep learning tools" },
+        { id: "dialectics", label: "Dialectics Engine", endpoint: "/api/dialectics", icon: Puzzle, desc: "Dialectical reasoning" },
+        { id: "practices", label: "Practices Library", endpoint: "/api/practices", icon: Milestone, desc: "Guided practices" },
+        { id: "insights", label: "Insights Engine", endpoint: "/api/insights", icon: Lightbulb, desc: "Personal insights" },
       ]
     },
     {
@@ -238,6 +252,8 @@ function DailyToolsPanel() {
         { id: "emotional-mastery", label: "Emotional Mastery", endpoint: "/api/emotional-mastery", icon: Target, desc: "Emotion regulation" },
         { id: "healing-modalities", label: "Healing Modalities", endpoint: "/api/healing-modalities", icon: Flower2, desc: "Healing approaches" },
         { id: "holistic-healing", label: "Holistic Healing", endpoint: "/api/holistic-healing", icon: TreePine, desc: "Whole-person wellness" },
+        { id: "healing-tools", label: "Healing Tools", endpoint: "/api/healing", icon: Heart, desc: "Core healing toolkit" },
+        { id: "healing-intelligence", label: "Healing Intelligence", endpoint: "/api/healing-intelligence", icon: Sparkles, desc: "AI-guided healing" },
         { id: "post-trauma", label: "Post-Trauma Growth", endpoint: "/api/post-trauma", icon: Feather, desc: "Post-traumatic growth" },
         { id: "mind-body", label: "Mind-Body Integration", endpoint: "/api/mind-body", icon: CircleDot, desc: "Mind-body connection" },
         { id: "psychological-safety", label: "Psychological Safety", endpoint: "/api/psychological-safety", icon: Shield, desc: "Safety frameworks" },
@@ -246,14 +262,18 @@ function DailyToolsPanel() {
     {
       title: "Mastery & Purpose Tools",
       tools: [
-        { id: "self-mastery", label: "Self-Mastery Intelligence", endpoint: "/api/self-mastery-intelligence", icon: Gem, desc: "Self-mastery path" },
+        { id: "self-mastery-intelligence", label: "Self-Mastery Intelligence", endpoint: "/api/self-mastery-intelligence", icon: Gem, desc: "Self-mastery path" },
+        { id: "self-mastery", label: "Self-Mastery Core", endpoint: "/api/self-mastery", icon: Award, desc: "Core mastery system" },
         { id: "peak-performance", label: "Peak Performance", endpoint: "/api/peak-performance", icon: Zap, desc: "Performance optimization" },
         { id: "personal-growth", label: "Personal Growth", endpoint: "/api/personal-growth", icon: TrendingUp, desc: "Growth pathways" },
         { id: "life-purpose", label: "Life Purpose", endpoint: "/api/life-purpose", icon: Target, desc: "Purpose discovery" },
         { id: "life-design", label: "Life Design", endpoint: "/api/life-design", icon: Compass, desc: "Life architecture" },
         { id: "purpose-compass", label: "Purpose Compass", endpoint: "/api/purpose-compass", icon: Compass, desc: "Purpose navigation" },
         { id: "mastery-excellence", label: "Mastery Excellence", endpoint: "/api/mastery-excellence", icon: Star, desc: "Excellence framework" },
+        { id: "meaning", label: "Meaning & Future", endpoint: "/api/meaning", icon: Rocket, desc: "Meaning creation" },
+        { id: "transformation", label: "Transformation Engine", endpoint: "/api/transformation", icon: Orbit, desc: "Deep transformation" },
         { id: "values", label: "Values Explorer", endpoint: "/api/values", icon: Footprints, desc: "Values discovery" },
+        { id: "praxis", label: "Praxis Lab", endpoint: "/api/praxis", icon: Workflow, desc: "Theory to practice" },
       ]
     },
     {
@@ -267,6 +287,9 @@ function DailyToolsPanel() {
         { id: "contemplative", label: "Contemplative Tools", endpoint: "/api/contemplative", icon: Moon, desc: "Contemplation guides" },
         { id: "ethical-reasoning", label: "Ethical Reasoning", endpoint: "/api/ethical-reasoning", icon: Shield, desc: "Ethics framework" },
         { id: "existential", label: "Existential Inquiry", endpoint: "/api/existential", icon: Globe, desc: "Existential exploration" },
+        { id: "neuro-integration", label: "Neuro-Integration", endpoint: "/api/neuro-integration", icon: Network, desc: "Neural integration" },
+        { id: "socio-ecology", label: "Socio-Ecology", endpoint: "/api/socio-ecology", icon: Globe, desc: "Social ecosystems" },
+        { id: "cognitive-enhancement", label: "Cognitive Enhancement", endpoint: "/api/cognitive-enhancement", icon: Brain, desc: "Mental sharpness" },
       ]
     },
     {
@@ -277,9 +300,9 @@ function DailyToolsPanel() {
         { id: "relational", label: "Relational Tools", endpoint: "/api/relational", icon: Heart, desc: "Connection building" },
         { id: "collective-intelligence", label: "Collective Intelligence", endpoint: "/api/collective-intelligence", icon: Users, desc: "Group wisdom" },
         { id: "systems-compassion", label: "Systems Compassion", endpoint: "/api/systems-compassion", icon: Globe, desc: "Systemic empathy" },
-        { id: "cognitive-enhancement", label: "Cognitive Enhancement", endpoint: "/api/cognitive-enhancement", icon: Brain, desc: "Mental sharpness" },
         { id: "embodiment", label: "Embodiment Tools", endpoint: "/api/embodiment", icon: Footprints, desc: "Body awareness" },
         { id: "narrative", label: "Narrative Tools", endpoint: "/api/narrative", icon: FileText, desc: "Story & meaning" },
+        { id: "community", label: "Community Engine", endpoint: "/api/community", icon: Users, desc: "Community features" },
       ]
     },
     {
@@ -287,14 +310,61 @@ function DailyToolsPanel() {
       tools: [
         { id: "content-studio", label: "Content Studio", endpoint: "/api/content-studio", icon: Palette, desc: "Content creation" },
         { id: "content-intelligence", label: "Content Intelligence", endpoint: "/api/content-intelligence", icon: Sparkles, desc: "Smart content" },
+        { id: "content-generator", label: "Content Generator", endpoint: "/api/content", icon: Wand2, desc: "AI content generation" },
         { id: "universal-content", label: "Universal Content", endpoint: "/api/universal-content", icon: Globe, desc: "Cross-platform content" },
         { id: "blog-api", label: "Blog Engine", endpoint: "/api/blog", icon: BookOpen, desc: "Blog system" },
         { id: "newsletter-api", label: "Newsletter Engine", endpoint: "/api/newsletter", icon: Mail, desc: "Newsletter system" },
-        { id: "gamification", label: "Gamification Engine", endpoint: "/api/gamification", icon: Star, desc: "XP, streaks, quests" },
+        { id: "social-posts", label: "Social Posts API", endpoint: "/api/social-posts", icon: Share2, desc: "Social post management" },
+        { id: "social-posting", label: "Social Posting", endpoint: "/api/social-posting", icon: Megaphone, desc: "Post distribution" },
+        { id: "narrative-drafts", label: "Narrative Drafts", endpoint: "/api/narrative-drafts", icon: PenTool, desc: "Draft management" },
         { id: "perplexity", label: "Perplexity AI (Factual)", endpoint: "/api/perplexity", icon: Search, desc: "Factual research AI" },
-        { id: "community", label: "Community Engine", endpoint: "/api/community", icon: Users, desc: "Community features" },
       ]
-    }
+    },
+    {
+      title: "User & Engagement Tools",
+      tools: [
+        { id: "account", label: "Account System", endpoint: "/api/account", icon: UserCheck, desc: "User accounts" },
+        { id: "onboarding", label: "Onboarding Flow", endpoint: "/api/onboarding", icon: Rocket, desc: "New user experience" },
+        { id: "gamification", label: "Gamification Engine", endpoint: "/api/gamification", icon: Star, desc: "XP, streaks, quests" },
+        { id: "progress", label: "Progress Tracker", endpoint: "/api/progress", icon: TrendingUp, desc: "User progress data" },
+        { id: "badges", label: "Badges System", endpoint: "/api/badges", icon: Award, desc: "Achievement badges" },
+        { id: "favorites", label: "Favorites Engine", endpoint: "/api/favorites", icon: Heart, desc: "User favorites" },
+        { id: "dashboard-api", label: "User Dashboard", endpoint: "/api/dashboard", icon: LayoutDashboard, desc: "Dashboard data" },
+        { id: "pro-features", label: "Pro Features", endpoint: "/api/pro-features", icon: Gem, desc: "Premium feature gates" },
+        { id: "leads", label: "Leads Engine", endpoint: "/api/leads", icon: Inbox, desc: "Lead collection" },
+        { id: "feedback", label: "Feedback System", endpoint: "/api/feedback", icon: MessageSquare, desc: "User feedback" },
+      ]
+    },
+    {
+      title: "Admin & System Tools",
+      tools: [
+        { id: "admin-core", label: "Admin Core", endpoint: "/api/admin/verify-session", icon: Shield, desc: "Admin authentication" },
+        { id: "admin-security", label: "Security Engine", endpoint: "/api/admin/security", icon: ShieldCheck, desc: "Security monitoring" },
+        { id: "admin-audit", label: "Audit Logs", endpoint: "/api/admin/audit-logs", icon: ClipboardList, desc: "System audit trail" },
+        { id: "admin-billing", label: "Admin Billing", endpoint: "/api/admin/billing", icon: CreditCard, desc: "Billing management" },
+        { id: "admin-publishing", label: "Admin Publishing", endpoint: "/api/admin/publishing", icon: BookOpen, desc: "Publishing pipeline" },
+        { id: "admin-social", label: "Admin Social Studio", endpoint: "/api/admin/social", icon: Palette, desc: "Social management" },
+        { id: "admin-enterprise", label: "Enterprise Social", endpoint: "/api/admin/social/enterprise", icon: Globe, desc: "Enterprise social ops" },
+        { id: "analytics", label: "Analytics Engine", endpoint: "/api/analytics", icon: BarChart3, desc: "Platform analytics" },
+        { id: "metrics", label: "Metrics System", endpoint: "/api/metrics", icon: Gauge, desc: "System metrics" },
+        { id: "soft-launch", label: "Soft Launch Metrics", endpoint: "/api/admin/soft-launch-metrics", icon: Rocket, desc: "Launch tracking" },
+        { id: "health-api", label: "Health Monitor", endpoint: "/api/health", icon: Activity, desc: "System health" },
+        { id: "deployment", label: "Deployment Readiness", endpoint: "/api/deployment-readiness", icon: PackageCheck, desc: "Deploy checks" },
+        { id: "integrations", label: "Integration Health", endpoint: "/api/integrations", icon: Puzzle, desc: "Service integrations" },
+      ]
+    },
+    {
+      title: "Infrastructure & Auth Tools",
+      tools: [
+        { id: "billing", label: "Billing API", endpoint: "/api/billing", icon: DollarSign, desc: "Stripe billing" },
+        { id: "webhook", label: "Webhook Handler", endpoint: "/api/webhook", icon: Webhook, desc: "Stripe webhooks" },
+        { id: "email", label: "Email Service", endpoint: "/api/email", icon: Mail, desc: "Resend email" },
+        { id: "contact", label: "Contact System", endpoint: "/api/contact", icon: Contact, desc: "Contact forms" },
+        { id: "auth-github", label: "GitHub Auth", endpoint: "/api/auth/github", icon: Key, desc: "GitHub OAuth" },
+        { id: "products", label: "Products API", endpoint: "/api/products", icon: PackageCheck, desc: "Product catalog" },
+        { id: "invites", label: "Invite System", endpoint: "/api/invites", icon: Handshake, desc: "User invitations" },
+      ]
+    },
   ];
 
   const runHealthCheck = async (tool) => {
@@ -321,31 +391,66 @@ function DailyToolsPanel() {
   const totalTools = toolCategories.reduce((sum, c) => sum + c.tools.length, 0);
   const checkedCount = Object.keys(toolResults).length;
   const healthyCount = Object.values(toolResults).filter(r => r.status === 'healthy').length;
+  const warningCount = Object.values(toolResults).filter(r => r.status === 'warning').length;
+  const errorCount = Object.values(toolResults).filter(r => r.status === 'error').length;
+  const isRunningAll = Object.values(runningTools).some(Boolean);
 
   return (
     <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
       <div className={styles.cardHeader}>
         <div className={styles.cardTitleContainer}>
           <Wand2 className={styles.cardHeaderIcon} />
-          <h2 className={styles.cardTitle}>Daily Operations &mdash; Platform Tools ({totalTools})</h2>
+          <h2 className={styles.cardTitle}>Daily Operations &mdash; All Platform Tools ({totalTools})</h2>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           {checkedCount > 0 && (
-            <span style={{ fontSize: '0.8rem', color: '#888' }} data-testid="text-tool-check-summary">
-              {healthyCount}/{checkedCount} healthy
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.78rem' }} data-testid="text-tool-check-summary">
+              <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#22c55e' }}>
+                <CheckCircle size={12} /> {healthyCount}
+              </span>
+              {warningCount > 0 && (
+                <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#eab308' }}>
+                  <AlertTriangle size={12} /> {warningCount}
+                </span>
+              )}
+              {errorCount > 0 && (
+                <span style={{ display: 'flex', alignItems: 'center', gap: '2px', color: '#ef4444' }}>
+                  <AlertCircle size={12} /> {errorCount}
+                </span>
+              )}
+              <span style={{ color: '#888' }}>/ {totalTools}</span>
+            </div>
           )}
           <button
             className={styles.refreshButton}
             onClick={runAllChecks}
+            disabled={isRunningAll}
             data-testid="button-run-all-tool-checks"
             title="Run health check on all platform tools"
           >
-            <Play size={14} style={{ marginRight: '4px' }} />
-            Run All Checks
+            {isRunningAll ? (
+              <RefreshCw size={14} style={{ marginRight: '4px', animation: 'spin 1s linear infinite' }} />
+            ) : (
+              <Play size={14} style={{ marginRight: '4px' }} />
+            )}
+            {isRunningAll ? `Checking... (${checkedCount}/${totalTools})` : 'Run All Checks'}
           </button>
         </div>
       </div>
+      
+      {checkedCount > 0 && (
+        <div style={{ padding: '0 1rem', marginBottom: '0.5rem' }}>
+          <div style={{ height: '4px', borderRadius: '2px', background: '#e5e7eb', overflow: 'hidden' }} data-testid="progress-bar-tools">
+            <div style={{ 
+              height: '100%', 
+              width: `${(checkedCount / totalTools) * 100}%`, 
+              background: errorCount > 0 ? '#ef4444' : warningCount > 0 ? '#eab308' : '#22c55e',
+              transition: 'width 0.3s ease, background 0.3s ease',
+              borderRadius: '2px'
+            }} />
+          </div>
+        </div>
+      )}
       
       <div style={{ padding: '0.75rem 1rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
         {toolCategories.map((category, ci) => (

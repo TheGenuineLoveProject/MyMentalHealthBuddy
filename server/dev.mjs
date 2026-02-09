@@ -437,22 +437,35 @@ async function startServer() {
       const dbHealthy = dbCheck?.rows?.[0]?.ok === 1;
       
       const toolEndpoints = [
-        "ai", "mood", "journal", "gratitude", "reflection", "wellness-tools",
-        "wisdom", "philosophy", "metacognition", "creativity", "resilience",
-        "foresight", "knowledge", "cognitive-lab", "deep-learning",
+        "ai", "therapy", "mood", "journal", "gratitude", "reflection",
+        "wellness-tools", "mirror", "prompts", "states",
+        "wisdom", "wisdom-engine", "philosophy", "metacognition", "creativity",
+        "resilience", "foresight", "knowledge", "cognitive-lab", "cognitive-mastery",
+        "deep-learning", "dialectics", "practices", "insights",
         "trauma-healing", "emotional-resilience", "emotional-mastery",
-        "healing-modalities", "holistic-healing", "post-trauma",
-        "mind-body", "psychological-safety",
-        "self-mastery-intelligence", "peak-performance", "personal-growth",
+        "healing-modalities", "holistic-healing", "healing", "healing-intelligence",
+        "post-trauma", "mind-body", "psychological-safety",
+        "self-mastery-intelligence", "self-mastery", "peak-performance", "personal-growth",
         "life-purpose", "life-design", "purpose-compass", "mastery-excellence",
+        "meaning", "transformation", "values", "praxis",
         "consciousness", "human-potential", "spiritual-intelligence",
         "wisdom-traditions", "wisdom-synthesis", "contemplative",
-        "ethical-reasoning", "existential",
+        "ethical-reasoning", "existential", "neuro-integration", "socio-ecology",
+        "cognitive-enhancement",
         "relationship-dynamics", "social-intelligence", "relational",
-        "collective-intelligence", "systems-compassion", "cognitive-enhancement",
-        "embodiment", "narrative",
-        "content-studio", "content-intelligence", "universal-content",
-        "blog", "newsletter", "gamification", "perplexity", "community"
+        "collective-intelligence", "systems-compassion", "embodiment", "narrative",
+        "community",
+        "content-studio", "content-intelligence", "content", "universal-content",
+        "blog", "newsletter", "social-posts", "social-posting", "narrative-drafts",
+        "perplexity",
+        "account", "onboarding", "gamification", "progress", "badges",
+        "favorites", "dashboard", "pro-features", "leads", "feedback",
+        "admin", "admin/security", "admin/audit-logs", "admin/billing",
+        "admin/publishing", "admin/social", "admin/social/enterprise",
+        "analytics", "metrics", "admin/soft-launch-metrics",
+        "health", "deployment-readiness", "integrations",
+        "billing", "webhook", "email", "contact", "auth/github",
+        "products", "invites"
       ];
 
       res.json({
