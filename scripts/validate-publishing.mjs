@@ -51,7 +51,7 @@ for (const item of registry) {
 }
 check('All primaryCta routes are allowed', passed);
 
-const VALID_STATUSES = ['idea', 'draft', 'review', 'approved', 'published', 'sent'];
+const VALID_STATUSES = ['idea', 'draft', 'review', 'approved', 'published', 'sent', 'posted', 'archived'];
 for (const item of registry) {
   if (!VALID_STATUSES.includes(item.status)) {
     check(`Status "${item.status}" for "${item.title}" is valid`, false);

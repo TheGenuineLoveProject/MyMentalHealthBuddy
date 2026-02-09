@@ -79,6 +79,8 @@ runCmd('Publishing Audit', 'node', ['scripts/audit-publishing.mjs'], { timeout: 
 runCmd('Publishing Registry Validate', 'node', ['scripts/validate-publishing.mjs'], { timeout: 15000 });
 runCmd('Tone Audit', 'node', ['scripts/audit-tone.mjs'], { timeout: 15000 });
 runCmd('Signals Audit', 'node', ['scripts/audit-signals.mjs'], { timeout: 15000 });
+runCmd('Draft Packs Validate', 'node', ['scripts/validate-draft-packs.mjs'], { timeout: 15000 });
+runCmd('Duplicate Prevention', 'node', ['scripts/prevent-duplicates.mjs'], { timeout: 15000 });
 runCmd('Editorial Calendar (dry run)', 'node', ['scripts/generate-editorial-calendar.mjs', '--dry-run'], { timeout: 15000 });
 
 checkHealth();

@@ -105,6 +105,87 @@ router.get('/drafts', (req, res) => {
   res.json({ ok: true, data: drafts });
 });
 
+router.get('/draft-packs', (req, res) => {
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packs = {};
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const data = readJsonFile(path.join(packDir, file));
+    if (data) packs[file] = data;
+  }
+  const all = Object.values(packs).flat();
+  res.json({ ok: true, data: all });
+});
+
+router.get('/draft-packs/:id', (req, res) => {
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const data = readJsonFile(path.join(packDir, file));
+    if (data) {
+      const item = data.find(d => d.id === req.params.id);
+      if (item) return res.json({ ok: true, data: item });
+    }
+  }
+  res.status(404).json({ ok: false, error: 'Draft not found' });
+});
+
+router.get('/featured', (req, res) => {
+  const featured = readJsonFile(path.join(ROOT, 'data/publishing_featured.json')) || {};
+  res.json({ ok: true, data: featured });
+});
+
+router.post('/featured', (req, res) => {
+  const filepath = path.join(ROOT, 'data/publishing_featured.json');
+  const featured = readJsonFile(filepath) || {};
+  const { date, glpId } = req.body;
+
+  if (!date || !glpId) {
+    return res.status(400).json({ ok: false, error: 'date and glpId required' });
+  }
+
+  featured[date] = {
+    glpId,
+    setAt: new Date().toISOString(),
+    setBy: 'admin',
+  };
+
+  writeJsonFile(filepath, featured);
+  res.json({ ok: true, data: featured[date] });
+});
+
+router.post('/mark-posted/:id', (req, res) => {
+  const registryPath = path.join(ROOT, 'content/publishing/publishingRegistry.json');
+  const registry = readJsonFile(registryPath) || [];
+  const idx = registry.findIndex(r => r.id === req.params.id);
+
+  if (idx === -1) {
+    return res.status(404).json({ ok: false, error: 'Item not found in registry' });
+  }
+
+  registry[idx].status = 'posted';
+  registry[idx].postedAt = new Date().toISOString();
+  writeJsonFile(registryPath, registry);
+
+  const packDir = path.join(ROOT, 'content/publishing/drafts');
+  const packFiles = ['socialPack_v2_1.json', 'blogPack_v2_1.json', 'newsletterPack_v2_1.json'];
+  for (const file of packFiles) {
+    const filePath = path.join(packDir, file);
+    const data = readJsonFile(filePath);
+    if (data) {
+      const draftIdx = data.findIndex(d => d.id === req.params.id);
+      if (draftIdx !== -1) {
+        data[draftIdx].status = 'posted';
+        data[draftIdx].postedAt = new Date().toISOString();
+        writeJsonFile(filePath, data);
+        break;
+      }
+    }
+  }
+
+  res.json({ ok: true, data: registry[idx] });
+});
+
 router.get('/status', (req, res) => {
   const status = readJsonFile(path.join(ROOT, 'data/publishing_status.json')) || {};
   res.json({ ok: true, data: status });

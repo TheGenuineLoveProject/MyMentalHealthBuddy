@@ -208,6 +208,8 @@ const ContentStudioAdmin = lazy(() => import("./pages/admin/ContentStudioAdmin.j
 const SocialStudioAdmin = lazy(() => import("./pages/admin/SocialStudioAdmin.jsx"));
 const NewsletterAdmin = lazy(() => import("./pages/admin/NewsletterAdmin.jsx"));
 const AdminPublishing = lazy(() => import("./pages/admin/AdminPublishing.jsx"));
+const AdminPublishingToday = lazy(() => import("./pages/admin/AdminPublishingToday.jsx"));
+const BlogDraftViewer = lazy(() => import("./pages/BlogDraftViewer.jsx"));
 const RevenueAdmin = lazy(() => import("./pages/admin/RevenueAdmin.jsx"));
 
 // Batch 11 - Account & Payments (P241-P250)
@@ -1645,8 +1647,14 @@ export default function App() {
               <Route path="/admin/newsletter">
                 <AdminGuard><NewsletterAdmin /></AdminGuard>
               </Route>
+              <Route path="/admin/publishing/today">
+                <AdminGuard><AdminPublishingToday /></AdminGuard>
+              </Route>
               <Route path="/admin/publishing">
                 <AdminGuard><AdminPublishing /></AdminGuard>
+              </Route>
+              <Route path="/blog/draft/:id">
+                <AdminGuard><BlogDraftViewer /></AdminGuard>
               </Route>
               <Route path="/admin/revenue">
                 <AdminGuard><RevenueAdmin /></AdminGuard>
