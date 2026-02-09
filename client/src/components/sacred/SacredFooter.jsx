@@ -16,49 +16,13 @@
  */
 
 import { Link } from "wouter";
-import { useState } from "react";
-import { Heart, Mail, Sparkles, Loader2, Check } from "lucide-react";
+import { Heart, Mail, Sparkles } from "lucide-react";
 import SacredGeometryBg from "@/components/SacredGeometryBg";
 import NewsletterSignup from "@/components/NewsletterSignup";
 import "@/styles/healing-animations.css";
 
 export default function SacredFooter() {
   const currentYear = new Date().getFullYear();
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle");
-  const [message, setMessage] = useState("");
-
-  const handleNewsletterSubmit = async (e) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    
-    setStatus("loading");
-    try {
-      const res = await fetch("/api/newsletter/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() })
-      });
-      const data = await res.json();
-      
-      if (data.ok) {
-        setStatus("success");
-        setMessage("Thank you for subscribing!");
-        setEmail("");
-      } else {
-        setStatus("error");
-        setMessage(data.error?.message || "Something went wrong");
-      }
-    } catch {
-      setStatus("error");
-      setMessage("Unable to subscribe. Please try again.");
-    }
-    
-    setTimeout(() => {
-      setStatus("idle");
-      setMessage("");
-    }, 4000);
-  };
 
   const footerLinks = {
     explore: [

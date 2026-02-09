@@ -1,5 +1,8 @@
 # Newsletter Readiness — The Genuine Love Project
 
+**Last Updated**: 2026-02-09
+**Status**: PASS — Ready (No Automation)
+
 ## Current State
 
 The platform has two distinct email paths. This document clarifies the boundary and prepares the editorial newsletter layer without introducing automation.
@@ -22,18 +25,35 @@ The platform has two distinct email paths. This document clarifies the boundary 
 
 ## Subscriber Collection
 
-### Current Implementation
-- **Component**: `client/src/components/NewsletterSignup.jsx`
+### Canonical Component
+- **File**: `client/src/components/NewsletterSignup.jsx`
 - **API**: `POST /api/leads` (server/routes/leads.mjs)
 - **Storage**: `leads` table with consent tracking and UTM attribution
-- **Consent**: Explicit opt-in checkbox required before submission
-- **Language**: "Wellness tips and new features delivered to your inbox. No spam, unsubscribe anytime."
+- **Used in**: Both footer components (`SacredFooter.jsx`, `sacred/SacredFooter.jsx`)
 
-### Consent-First Design
-- Checkbox is required (not pre-checked)
-- Language is non-coercive and transparent
-- Unsubscribe messaging is upfront
-- No urgency language, no countdown timers, no FOMO
+### Consent Verification
+
+| Requirement | Status | Evidence |
+|-------------|--------|----------|
+| Explicit consent checkbox | PASS | Unchecked by default, `aria-required="true"` |
+| Clear expectation copy | PASS | "Wellness tips and new features delivered to your inbox" |
+| No pre-checked boxes | PASS | `useState(false)` — user must actively check |
+| Unsubscribe language | PASS | "No spam, unsubscribe anytime" |
+| Consent required for submit | PASS | Validates `consent === true` both client and server |
+| Privacy link accessible | PASS | Footer links to `/privacy` (returns 200) |
+
+### Backend Handling
+
+| Requirement | Status | Evidence |
+|-------------|--------|----------|
+| Email validation | PASS | Zod schema: `z.string().email()` |
+| Duplicate handling | PASS | Checks existing, updates preferences if duplicate |
+| Timestamp storage | PASS | `createdAt` auto-set on insert |
+| Source tracking | PASS | `source` parameter logged (e.g., "sacred-footer") |
+| UTM attribution | PASS | Stores utm_source/medium/campaign with 30-day expiry |
+| Email list not public | PASS | `GET /api/leads` requires admin token |
+| Export admin-only | PASS | `GET /api/leads/export` requires admin token |
+| Error handling | PASS | Friendly messages, no silent failures |
 
 ## Newsletter Copy Source of Truth
 
@@ -56,6 +76,17 @@ This means newsletter issues are:
 - No A/B testing of subject lines
 - No send scheduling
 - No analytics dashboards for email
+
+## Fixes Applied (2026-02-09)
+
+1. `SacredFooter.jsx` (components/) — Replaced non-functional form (preventDefault only, no API call, no consent) with canonical `NewsletterSignup` component
+2. `sacred/SacredFooter.jsx` — Replaced consent-less form (called API without consent checkbox) with canonical `NewsletterSignup` component
+3. Social links in `SacredFooter.jsx` (components/) — Replaced dead `#` hrefs with internal routes (`/community`, `/contact`, `/affirmations`)
+
+## Known Parallel Components (Not Active)
+
+- `EmailCapture.jsx` — Orphan component (not imported anywhere), lacks consent checkbox, calls `/api/newsletter/subscribe`. Not deleted (safe evolution), not used.
+- `/api/newsletter/subscribe` — Separate endpoint that only validates email format without consent requirement. Used by no active component after these fixes.
 
 ## Future Integration Path (When Ready)
 
