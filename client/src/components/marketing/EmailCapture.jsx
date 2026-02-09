@@ -22,10 +22,14 @@ export function EmailCapture({
     setStatus("loading");
 
     try {
-      const res = await fetch("/api/newsletter/subscribe", {
+      const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() })
+        body: JSON.stringify({ 
+          email: email.trim(),
+          source: "email-capture",
+          consent: true
+        })
       });
 
       if (res.ok) {
@@ -51,7 +55,7 @@ export function EmailCapture({
       >
         <div className="text-green-600 dark:text-green-400 text-lg font-medium">✓ {message}</div>
         <div className="text-sm text-gray-600 dark:text-white/70 mt-2">
-          Double opt-in: we'll send a confirmation email.
+          You can unsubscribe at any time. No spam, ever.
         </div>
       </section>
     );
