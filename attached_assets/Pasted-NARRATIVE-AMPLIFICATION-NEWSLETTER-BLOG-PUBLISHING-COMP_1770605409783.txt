@@ -1,0 +1,85 @@
+NARRATIVE AMPLIFICATION — NEWSLETTER + BLOG + PUBLISHING (COMPLETION-FIRST)
+
+You are Replit AI acting as a senior engineering + ethical publishing team.
+
+GOAL:
+Make newsletter, blog, and publishing systems robust, organized, verifiable, and aligned with the platform narrative.
+
+CONSTRAINTS:
+- No auto-posting or background jobs.
+- No refactors/renames/deletes of existing systems.
+- Additive, reversible changes only.
+- Keep Replit constraints: single port, deterministic startup.
+- Prevent duplicates: scan before creating new files.
+- Ethical language only: no urgency, shame, dependency framing, or medical claims.
+
+PHASE 0 — BASELINE CHECK (no changes)
+Run:
+- git status
+- npm run build
+- curl http://localhost:5000/api/health
+If any fail, STOP and fix first.
+
+PHASE 1 — NARRATIVE SPINE
+Create:
+docs/NARRATIVE_SPINE.md
+Include:
+- 3 pillars: Orientation / Reflection / Integration
+- tone rules
+- allowed CTAs: /blog /newsletter /crisis /journal /reflection
+- disallowed language examples
+- publish checklist (PASS/FAIL)
+
+PHASE 2 — NEWSLETTER ASSETS
+Create folder:
+content/newsletter/
+Add:
+- weekly-template.md
+- welcome-template.md
+- crisis-safe-footer.md
+- newsletter-style-guide.md
+All must follow tone rules and include optionality language.
+Do NOT add auto-send logic.
+
+PHASE 3 — BLOG CANONICAL STORE
+Create:
+content/blog/index.json
+content/blog/posts/
+Seed EXACTLY 5 starter posts as markdown files with frontmatter:
+title, slug, pillar, publishDate, summary, tags
+Pillars must be balanced across the 3 categories.
+Ensure internal links only use allowed CTAs.
+
+PHASE 4 — BLOG ROUTING / INTEGRATION
+If blog already exists, DO NOT replace it.
+Instead:
+- Ensure blog index renders a list from index.json (or document how existing blog works).
+- Ensure each post route renders markdown safely.
+- Ensure no broken routes.
+Only minimal additions.
+
+PHASE 5 — QUALITY GATES
+Create:
+scripts/audit-publishing.mjs
+Checks:
+- every index.json entry has a matching file
+- every file has required frontmatter
+- forbidden language scan (urgency/guilt/dependency/medical claims)
+- internal links only allowed paths
+Output:
+PUBLISHING_AUDIT: PASS/FAIL
+Exit 0 on PASS, 1 on FAIL.
+
+PHASE 6 — FINAL VERIFY
+Run:
+- node scripts/audit-publishing.mjs
+- npm run build
+- curl http://localhost:5000/api/health
+
+Create:
+docs/PUBLISHING_SYSTEM_COMPLETE.md
+Summarize what was added, where content lives, and confirmation: no automation added.
+
+END WITH:
+STATUS: PASS or FAIL
+If FAIL: list exact file paths + minimal fixes required.

@@ -80,6 +80,74 @@ Every CTA must include an implicit or explicit opt-out. The reader should always
 
 ---
 
+## H) Three Content Pillars
+
+Every piece of content (blog post, newsletter, social caption, platform copy) must map to exactly one pillar:
+
+### 1. Orientation
+Helps people understand what this space is, how to use it safely, and what it is not.
+
+Examples:
+- "Welcome to The Genuine Love Project"
+- "How to use the platform gently"
+- "What to expect from AI support (and what not to expect)"
+- Privacy and safety commitments
+
+### 2. Reflection
+Invites inward awareness without instruction or fixing. Holds space for honest self-inquiry.
+
+Examples:
+- Short essays on emotional literacy
+- Prompt-based social posts
+- "What does your inner landscape look like today?"
+- Journal and mood check-in guidance
+
+### 3. Integration
+Helps users connect insight to daily life. Bridges reflection and action gently.
+
+Examples:
+- "What to do after a hard realization"
+- "Letting insight land without rushing change"
+- Community notes and quiet updates
+- Gratitude and self-compassion practices
+
+---
+
+## I) Allowed CTAs (Exhaustive List)
+
+Content may only link to these internal routes:
+- `/blog` — Blog index or individual posts
+- `/newsletter` — Newsletter signup
+- `/crisis` — Crisis resources (always accessible)
+- `/journal` — Reflective journal
+- `/reflection` — Daily reflection
+- `/tools` — Wellness tools overview
+- `/about` — About page
+- `/pricing` — Pricing (gentle, no pressure)
+
+No external marketing links. No affiliate links. No paid promotion destinations.
+
+---
+
+## J) Publish Checklist (PASS/FAIL)
+
+Before any content ships, it must pass ALL of these:
+
+| Check | Question | Required |
+|-------|----------|----------|
+| Pillar | Does this clearly belong to Orientation, Reflection, or Integration? | YES |
+| Tone | Would this feel okay to read on a hard day? | YES |
+| Autonomy | Does this respect the reader's right to disengage? | YES |
+| Urgency | Is it free of urgency, guilt, shame, or fear language? | YES |
+| Medical | Does it avoid diagnosis, treatment, or healing promises? | YES |
+| CTA | Do all links point to allowed internal routes only? | YES |
+| Crisis | If the topic is emotionally heavy, is /crisis referenced? | YES |
+| Optionality | Does the reader feel free to skip, pause, or leave? | YES |
+
+If ANY check fails, the content stays in draft until revised.
+
+---
+
 ## Cross-References
 
 - Blog: [/blog](/blog)
@@ -87,6 +155,8 @@ Every CTA must include an implicit or explicit opt-out. The reader should always
 - Crisis Resources: [/crisis](/crisis)
 - Pricing: [/pricing](/pricing)
 - About: [/about](/about)
+- Journal: [/journal](/journal)
+- Reflection: [/reflection](/reflection)
 
 ---
 

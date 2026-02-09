@@ -1,0 +1,42 @@
+[
+  {
+    "slug": "welcome-to-genuine-love",
+    "title": "Welcome to The Genuine Love Project",
+    "pillar": "Orientation",
+    "publishDate": "2026-02-01",
+    "summary": "What this space is, what it is not, and how to begin gently.",
+    "tags": ["welcome", "getting-started", "safety"]
+  },
+  {
+    "slug": "what-emotional-literacy-means",
+    "title": "What Emotional Literacy Actually Means",
+    "pillar": "Reflection",
+    "publishDate": "2026-02-03",
+    "summary": "A gentle introduction to noticing your emotional patterns without judgment.",
+    "tags": ["emotional-literacy", "self-awareness", "reflection"]
+  },
+  {
+    "slug": "ai-companion-what-to-expect",
+    "title": "What to Expect from an AI Wellness Companion",
+    "pillar": "Orientation",
+    "publishDate": "2026-02-05",
+    "summary": "How AI support works here, its limitations, and why professional care matters.",
+    "tags": ["ai", "expectations", "honesty"]
+  },
+  {
+    "slug": "after-a-hard-realization",
+    "title": "What to Do After a Hard Realization",
+    "pillar": "Integration",
+    "publishDate": "2026-02-07",
+    "summary": "When insight arrives and you are not sure what to do next.",
+    "tags": ["integration", "resilience", "self-compassion"]
+  },
+  {
+    "slug": "rest-is-part-of-the-work",
+    "title": "Rest Is Part of the Work",
+    "pillar": "Reflection",
+    "publishDate": "2026-02-09",
+    "summary": "A quiet reminder that pausing is not falling behind.",
+    "tags": ["rest", "self-compassion", "pace"]
+  }
+]
