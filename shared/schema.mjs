@@ -310,6 +310,7 @@ export const blogPosts = pgTable("blog_posts", {
   readingTimeMinutes: integer("reading_time_minutes").default(1),
   tags: text("tags"), // comma-separated tags
   featuredImage: text("featured_image"),
+  viewCount: integer("view_count").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

@@ -1,8 +1,8 @@
 import express from "express";
 import { randomUUID } from "crypto";
 import { db } from "../db/connection.mjs";
-import { blogPosts, blogComments, users } from "../../shared/schema.mjs";
-import { eq, desc, and, ilike, or } from "drizzle-orm";
+import { blogPosts, blogComments, users, leads } from "../../shared/schema.mjs";
+import { eq, desc, and, ilike, or, sql, count } from "drizzle-orm";
 import { success, badRequest } from "../utils/response.mjs";
 import { requireAuth, requireAdmin } from "../middleware/auth.mjs";
 import { logger } from "../utils/logger.mjs";
@@ -105,6 +105,34 @@ router.get("/admin", requireAuth, requireAdmin, async (req, res) => {
   }
 });
 
+router.get("/admin/stats", requireAuth, requireAdmin, async (req, res) => {
+  try {
+    const postViews = await db
+      .select({
+        id: blogPosts.id,
+        title: blogPosts.title,
+        slug: blogPosts.slug,
+        viewCount: blogPosts.viewCount,
+        contentType: blogPosts.contentType,
+        status: blogPosts.status,
+      })
+      .from(blogPosts)
+      .orderBy(desc(blogPosts.viewCount));
+
+    const [signupCount] = await db
+      .select({ total: count() })
+      .from(leads);
+
+    return success(res, {
+      postViews,
+      newsletterSignups: signupCount?.total || 0,
+    }, "Publishing stats fetched.");
+  } catch (err) {
+    logger.error("Failed to fetch publishing stats", { error: err.message });
+    return res.status(500).json({ ok: false, message: "Failed to fetch stats." });
+  }
+});
+
 router.get("/rss", async (_req, res) => {
   try {
     const posts = await db.select().from(blogPosts)
@@ -157,6 +185,11 @@ router.get("/:slug", async (req, res) => {
     }
 
     const post = posts[0];
+
+    db.update(blogPosts)
+      .set({ viewCount: sql`${blogPosts.viewCount} + 1` })
+      .where(eq(blogPosts.id, post.id))
+      .catch(err => logger.error("Failed to increment view count", { error: err.message }));
     
     const authorResult = await db
       .select({ name: users.name })
