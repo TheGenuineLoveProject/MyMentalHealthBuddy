@@ -76,20 +76,20 @@ function PlatformRow({ platform, stats }) {
 
 function ContentPerformance({ posts }) {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6">
+    <div className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-6" data-testid="section-content-performance">
       <h3 className="font-semibold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
         <Target className="w-5 h-5 text-[var(--glp-sage)]" />
         Top Performing Content
       </h3>
       
       {posts.length === 0 ? (
-        <p className="text-sm text-slate-500 text-center py-8">
+        <p className="text-sm text-slate-500 text-center py-8" data-testid="text-no-published-content">
           No published content yet. Approve and publish drafts to see analytics.
         </p>
       ) : (
         <div className="space-y-3">
           {posts.map((post, idx) => (
-            <div key={idx} className="flex items-center gap-4 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+            <div key={idx} className="flex items-center gap-4 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg" data-testid={`post-row-${idx}`}>
               <span className="w-6 h-6 flex items-center justify-center bg-[var(--glp-sage)] text-white rounded-full text-xs font-bold">
                 {idx + 1}
               </span>

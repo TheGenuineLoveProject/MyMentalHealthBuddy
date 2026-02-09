@@ -106,7 +106,7 @@ export default function BillingViewerPage() {
   return (
     <div className="container py-8 space-y-8">
       <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '1rem' }} data-testid="link-back-command-center">
-        <ArrowLeft size={16} /> Command Center
+        <ArrowLeft size={16} /> Back to Command Center
       </Link>
       <div>
         <h1 className="text-3xl font-bold tracking-tight" data-testid="text-page-title">Billing Overview</h1>
