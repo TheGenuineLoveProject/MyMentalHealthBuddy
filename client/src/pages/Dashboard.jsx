@@ -450,25 +450,15 @@ export default function Dashboard() {
                 color="violet"
                 testId="link-growth"
               />
+              <ExploreCard 
+                href="/blog" 
+                icon={BookOpen} 
+                title="Read the Blog" 
+                description="Articles on healing & growth"
+                color="emerald"
+                testId="link-dashboard-blog"
+              />
             </div>
-          </section>
-
-          <section className="mb-10" aria-label="From the blog">
-            <Link
-              href="/blog"
-              className="flex items-center gap-4 p-4 rounded-xl hover:shadow-sm transition-all group"
-              style={{ background: 'var(--glp-paper)', border: '1px solid var(--glp-sage-15)' }}
-              data-testid="link-dashboard-blog"
-            >
-              <div className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'var(--glp-sage-10)' }}>
-                <BookOpen className="w-5 h-5" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
-              </div>
-              <div className="min-w-0">
-                <h3 className="font-medium" style={{ color: 'var(--glp-ink)' }}>Read the Blog</h3>
-                <p className="text-sm truncate" style={{ color: 'var(--glp-sage)' }}>Articles on healing, growth, and gentle self-care</p>
-              </div>
-              <ChevronRight className="w-5 h-5 transition-all flex-shrink-0 ml-auto" style={{ color: 'var(--glp-sage)' }} aria-hidden="true" />
-            </Link>
           </section>
 
           <section className="mb-10" aria-label="Daily affirmation">
