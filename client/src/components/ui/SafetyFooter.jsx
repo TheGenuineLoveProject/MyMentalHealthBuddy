@@ -61,7 +61,13 @@ export default function SafetyFooter({
         </div>
       )}
       
-      <div className={`flex gap-4 mt-3 text-xs ${variant === "compact" ? "justify-center" : ""}`}>
+      <div className={`flex flex-wrap gap-4 mt-3 text-xs ${variant === "compact" ? "justify-center" : ""}`}>
+        <Link href="/blog" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-blog">
+          Blog
+        </Link>
+        <Link href="/newsletter" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded" data-testid="link-footer-newsletter">
+          Newsletter
+        </Link>
         <Link href="/disclaimer" className="hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] rounded">
           Disclaimer
         </Link>

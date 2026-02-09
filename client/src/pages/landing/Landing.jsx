@@ -187,6 +187,14 @@ export default function Landing() {
               <Link href="/login" className="btn-secondary-premium" data-testid="link-cta-login">
                 Sign in
               </Link>
+              <Link
+                href="/blog"
+                className="inline-flex items-center gap-2 text-sm font-medium text-sage-600 hover:text-sage-800 transition-colors"
+                data-testid="link-cta-blog"
+              >
+                <BookOpen className="w-4 h-4" aria-hidden="true" />
+                Read the Blog
+              </Link>
             </div>
             
             <div className="flex items-center gap-2 text-body-sm text-tertiary pt-2">
