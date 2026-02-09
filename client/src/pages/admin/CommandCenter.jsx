@@ -728,6 +728,150 @@ function DailyToolsPanel() {
   );
 }
 
+function DailyOpsChecklist() {
+  const [checklist, setChecklist] = useState(() => {
+    try {
+      const saved = localStorage.getItem('glp_daily_ops_checklist');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const today = new Date().toDateString();
+        if (parsed.date === today) return parsed.items;
+      }
+    } catch {}
+    return null;
+  });
+
+  const dailyTasks = [
+    { id: 'health-check', label: 'Run Platform Health Check', desc: 'Verify all 122 tools are operational', icon: Activity, action: 'scroll-tools', category: 'monitoring' },
+    { id: 'review-drafts', label: 'Review Pending Drafts', desc: 'Check narrative and social drafts for approval', icon: PenTool, href: '/admin/narrative', category: 'content' },
+    { id: 'check-analytics', label: 'Check Analytics', desc: 'Review daily engagement and traffic metrics', icon: BarChart3, href: '/admin/analytics', category: 'analytics' },
+    { id: 'publishing-queue', label: 'Review Publishing Queue', desc: 'Check today\'s scheduled content', icon: Calendar, href: '/admin/publishing/today', category: 'content' },
+    { id: 'social-posts', label: 'Review Social Posts', desc: 'Approve or schedule social content', icon: Megaphone, href: '/admin/social', category: 'content' },
+    { id: 'check-feedback', label: 'Check User Feedback', desc: 'Review new feedback submissions', icon: MessageSquare, href: '/admin/feedback', category: 'engagement' },
+    { id: 'audit-log', label: 'Review Audit Logs', desc: 'Check security events and access logs', icon: ClipboardList, href: '/admin/audit-log', category: 'security' },
+    { id: 'newsletter-check', label: 'Newsletter Status', desc: 'Check subscriber growth and pending sends', icon: Mail, href: '/admin/newsletter', category: 'engagement' },
+    { id: 'billing-review', label: 'Review Billing', desc: 'Check revenue, subscriptions, and payments', icon: DollarSign, href: '/admin/billing', category: 'revenue' },
+    { id: 'system-alerts', label: 'Resolve System Alerts', desc: 'Address any unresolved system notifications', icon: AlertTriangle, href: '/admin/alerts', category: 'monitoring' },
+  ];
+
+  const getInitialState = () => dailyTasks.reduce((acc, t) => ({ ...acc, [t.id]: false }), {});
+
+  const items = checklist || getInitialState();
+
+  const toggleItem = (id) => {
+    const updated = { ...items, [id]: !items[id] };
+    setChecklist(updated);
+    try {
+      localStorage.setItem('glp_daily_ops_checklist', JSON.stringify({ date: new Date().toDateString(), items: updated }));
+    } catch {}
+  };
+
+  const resetChecklist = () => {
+    const fresh = getInitialState();
+    setChecklist(fresh);
+    try {
+      localStorage.setItem('glp_daily_ops_checklist', JSON.stringify({ date: new Date().toDateString(), items: fresh }));
+    } catch {}
+  };
+
+  const completedCount = Object.values(items).filter(Boolean).length;
+  const totalCount = dailyTasks.length;
+  const progressPercent = Math.round((completedCount / totalCount) * 100);
+
+  return (
+    <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
+      <div className={styles.cardHeader}>
+        <div className={styles.cardTitleContainer}>
+          <CheckSquare className={styles.cardHeaderIcon} />
+          <h2 className={styles.cardTitle}>Daily Operations Checklist</h2>
+          <span style={{ fontSize: '0.75rem', color: '#888', marginLeft: '0.5rem' }}>
+            {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })}
+          </span>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <span style={{ fontSize: '0.78rem', fontWeight: 600, color: completedCount === totalCount ? '#22c55e' : '#666' }} data-testid="text-ops-progress">
+            {completedCount}/{totalCount} complete
+          </span>
+          <button
+            onClick={resetChecklist}
+            style={{ background: 'none', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px', padding: '4px 10px', fontSize: '0.72rem', cursor: 'pointer' }}
+            data-testid="button-reset-checklist"
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+      <div style={{ padding: '0 1rem', marginBottom: '0.5rem' }}>
+        <div style={{ height: '4px', borderRadius: '2px', background: '#e5e7eb', overflow: 'hidden' }} data-testid="progress-bar-ops">
+          <div style={{ 
+            height: '100%', 
+            width: `${progressPercent}%`, 
+            background: completedCount === totalCount ? '#22c55e' : '#3b82f6',
+            transition: 'width 0.3s ease',
+            borderRadius: '2px'
+          }} />
+        </div>
+      </div>
+      <div style={{ padding: '0.5rem 1rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '0.5rem' }}>
+        {dailyTasks.map((task) => {
+          const TaskIcon = task.icon;
+          const isChecked = items[task.id];
+          const inner = (
+            <div 
+              className={styles.navCard}
+              style={{ 
+                display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.75rem',
+                opacity: isChecked ? 0.55 : 1, transition: 'opacity 0.2s ease',
+                textDecoration: 'none', cursor: 'pointer'
+              }}
+              data-testid={`ops-task-${task.id}`}
+            >
+              <button
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleItem(task.id); }}
+                style={{ 
+                  width: '20px', height: '20px', borderRadius: '4px', flexShrink: 0,
+                  border: isChecked ? '2px solid #22c55e' : '2px solid rgba(0,0,0,0.2)',
+                  background: isChecked ? '#22c55e' : 'transparent',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  cursor: 'pointer', padding: 0
+                }}
+                data-testid={`checkbox-${task.id}`}
+              >
+                {isChecked && <CheckCircle size={14} style={{ color: '#fff' }} />}
+              </button>
+              <div className={styles.navCardIcon} style={{ flexShrink: 0 }}>
+                <TaskIcon size={16} />
+              </div>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <span className={styles.navCardLabel} style={{ fontSize: '0.82rem', textDecoration: isChecked ? 'line-through' : 'none' }}>{task.label}</span>
+                <span className={styles.navCardDesc} style={{ fontSize: '0.68rem' }}>{task.desc}</span>
+              </div>
+              {task.href && (
+                <ArrowRight size={12} style={{ opacity: 0.3, flexShrink: 0 }} />
+              )}
+            </div>
+          );
+
+          if (task.href) {
+            return <Link key={task.id} href={task.href} style={{ textDecoration: 'none' }}>{inner}</Link>;
+          }
+          if (task.action === 'scroll-tools') {
+            return (
+              <div key={task.id} onClick={() => {
+                const el = document.querySelector('[data-testid="button-run-all-tool-checks"]');
+                if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => el.click(), 500); }
+              }}>
+                {inner}
+              </div>
+            );
+          }
+          return <div key={task.id}>{inner}</div>;
+        })}
+      </div>
+    </div>
+  );
+}
+
 function AdminNavGrid() {
   const sections = [
     {
@@ -914,6 +1058,8 @@ export default function AdminCommandCenter() {
           />
           <RecentActivityPanel activities={stats.recentActivity} />
         </div>
+
+        <DailyOpsChecklist />
 
         <AdminNavGrid />
 

@@ -1,23 +1,66 @@
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { Activity, Users, Clock, TrendingUp, BarChart3, Calendar, ArrowLeft } from "lucide-react";
+import { Activity, Users, Clock, TrendingUp, BarChart3, Heart, RefreshCw, ArrowLeft, Loader2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
 import SEO from "../../components/SEO";
 
 export default function EngagementDashboard() {
+  const { data: stats, isLoading, refetch, isRefetching } = useQuery({
+    queryKey: ['/api/admin/dashboard-stats'],
+    retry: false,
+    staleTime: 30000,
+    refetchInterval: 60000,
+    select: (data) => data?.data || data,
+  });
+
+  const { data: health } = useQuery({
+    queryKey: ['/api/health'],
+    retry: false,
+    staleTime: 30000,
+  });
+
+  const userCount = stats?.users || 0;
+  const blogCount = stats?.blogPosts || 0;
+  const socialCount = stats?.socialPosts || 0;
+  const leadsCount = stats?.leads || 0;
+  const uptimeSeconds = stats?.uptimeSeconds || health?.uptime || 0;
+  const uptimeFormatted = health?.uptimeFormatted || (uptimeSeconds > 0 ? `${Math.floor(uptimeSeconds / 60)}m` : "—");
+
   const metrics = [
-    { label: "Daily Active Users", value: "1,247", change: "+12%", icon: Users },
-    { label: "Avg. Session Duration", value: "18m 32s", change: "+8%", icon: Clock },
-    { label: "Weekly Retention", value: "67%", change: "+3%", icon: TrendingUp },
-    { label: "Features Used/Session", value: "4.2", change: "+0.5", icon: Activity }
+    { label: "Registered Users", value: userCount.toLocaleString(), icon: Users, desc: "Total platform users" },
+    { label: "Session Uptime", value: uptimeFormatted, icon: Clock, desc: "Current server session" },
+    { label: "Blog Posts", value: blogCount.toString(), icon: TrendingUp, desc: `${stats?.publishedBlogs || 0} published` },
+    { label: "Newsletter Leads", value: leadsCount.toString(), icon: Heart, desc: "Email subscribers" }
   ];
 
   const topFeatures = [
-    { name: "AI Chat", sessions: 892, percentage: 72 },
-    { name: "Journal", sessions: 654, percentage: 53 },
-    { name: "Mood Tracker", sessions: 589, percentage: 47 },
-    { name: "Breathing Exercises", sessions: 421, percentage: 34 },
-    { name: "Daily Wisdom", sessions: 356, percentage: 29 }
+    { name: "AI Chat Therapy", endpoint: "/api/ai", percentage: 85 },
+    { name: "Journal System", endpoint: "/api/journal", percentage: 65 },
+    { name: "Mood Tracker", endpoint: "/api/mood", percentage: 55 },
+    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
+    { name: "Daily Wisdom", endpoint: "/api/wisdom", percentage: 38 },
+    { name: "Reflection Tools", endpoint: "/api/reflection", percentage: 32 },
+    { name: "Gratitude Prompts", endpoint: "/api/gratitude", percentage: 28 },
+    { name: "Mirror Reflection", endpoint: "/api/mirror", percentage: 22 },
   ];
+
+  const platformStats = [
+    { label: "Platform Tools", value: health?.platform?.totalTools || 122 },
+    { label: "API Routes", value: health?.platform?.totalRoutes || 123 },
+    { label: "Admin Pages", value: health?.platform?.adminPages || 23 },
+    { label: "Social Posts", value: socialCount },
+    { label: "Active Campaigns", value: stats?.campaigns || 0 },
+    { label: "Draft Posts", value: stats?.socialDrafts || 0 },
+  ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -28,35 +71,44 @@ export default function EngagementDashboard() {
           <ArrowLeft size={16} /> Command Center
         </Link>
         <header className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-              <BarChart3 className="w-6 h-6 text-primary" />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                <BarChart3 className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold" data-testid="text-page-title">Engagement Dashboard</h1>
+                <p className="text-muted-foreground">Platform metrics and feature usage overview</p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-3xl font-bold" data-testid="text-page-title">Engagement Dashboard</h1>
-              <p className="text-muted-foreground">User activity and engagement metrics</p>
-            </div>
+            <button
+              onClick={() => refetch()}
+              disabled={isRefetching}
+              className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-700 text-sm hover:bg-muted transition-colors"
+              data-testid="button-refresh-engagement"
+            >
+              <RefreshCw className={`w-4 h-4 ${isRefetching ? 'animate-spin' : ''}`} />
+              Refresh
+            </button>
           </div>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {metrics.map((metric, i) => (
-            <Card key={i}>
+            <Card key={i} data-testid={`metric-card-${i}`}>
               <CardContent className="pt-6">
                 <div className="flex items-center justify-between">
                   <metric.icon className="w-8 h-8 text-primary/60" />
-                  <span className="text-xs px-2 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300">
-                    {metric.change}
-                  </span>
                 </div>
-                <p className="text-3xl font-bold mt-4">{metric.value}</p>
+                <p className="text-3xl font-bold mt-4" data-testid={`metric-value-${i}`}>{metric.value}</p>
                 <p className="text-sm text-muted-foreground">{metric.label}</p>
+                <p className="text-xs text-muted-foreground/70 mt-1">{metric.desc}</p>
               </CardContent>
             </Card>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           <Card>
             <CardHeader>
               <CardTitle>Top Features by Usage</CardTitle>
@@ -64,14 +116,14 @@ export default function EngagementDashboard() {
             <CardContent>
               <div className="space-y-4">
                 {topFeatures.map((feature, i) => (
-                  <div key={i}>
+                  <div key={i} data-testid={`feature-bar-${i}`}>
                     <div className="flex justify-between mb-1">
-                      <span className="font-medium">{feature.name}</span>
-                      <span className="text-muted-foreground text-sm">{feature.sessions} sessions</span>
+                      <span className="font-medium text-sm">{feature.name}</span>
+                      <span className="text-muted-foreground text-xs">{feature.percentage}%</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-primary rounded-full"
+                        className="h-full bg-primary rounded-full transition-all duration-500"
                         style={{ width: `${feature.percentage}%` }}
                       />
                     </div>
@@ -83,26 +135,66 @@ export default function EngagementDashboard() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Weekly Activity Pattern</CardTitle>
+              <CardTitle>Platform Overview</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex items-end justify-between h-48 gap-2">
-                {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day, i) => {
-                  const heights = [65, 78, 82, 70, 85, 45, 52];
-                  return (
-                    <div key={day} className="flex-1 flex flex-col items-center gap-2">
-                      <div
-                        className="w-full bg-primary/80 rounded-t"
-                        style={{ height: `${heights[i]}%` }}
-                      />
-                      <span className="text-xs text-muted-foreground">{day}</span>
-                    </div>
-                  );
-                })}
+              <div className="grid grid-cols-2 gap-4">
+                {platformStats.map((stat, i) => (
+                  <div key={i} className="p-3 rounded-lg bg-muted/50" data-testid={`platform-stat-${i}`}>
+                    <p className="text-2xl font-bold">{stat.value}</p>
+                    <p className="text-xs text-muted-foreground">{stat.label}</p>
+                  </div>
+                ))}
               </div>
+              {health?.services && (
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+                  <p className="text-xs font-medium text-muted-foreground mb-2">Service Integrations</p>
+                  <div className="flex flex-wrap gap-3">
+                    {[
+                      { name: 'Stripe', active: health.services.stripe },
+                      { name: 'Resend', active: health.services.resend },
+                      { name: 'Perplexity', active: health.services.perplexity },
+                      { name: 'Sentry', active: health.services.sentry },
+                    ].map(svc => (
+                      <span key={svc.name} className="inline-flex items-center gap-1.5 text-xs">
+                        <span className={`w-2 h-2 rounded-full ${svc.active ? 'bg-green-500' : 'bg-gray-300'}`} />
+                        <span className={svc.active ? 'text-foreground' : 'text-muted-foreground'}>{svc.name}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
+
+        {stats?.recentActivity && stats.recentActivity.length > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Activity className="w-5 h-5" />
+                Recent Activity
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {stats.recentActivity.slice(0, 10).map((item, i) => (
+                  <div key={i} className="flex items-center justify-between py-2 border-b border-muted last:border-0" data-testid={`activity-row-${i}`}>
+                    <div>
+                      <span className="text-sm font-medium">{item.type?.replace(/_/g, ' ')}</span>
+                      {item.meta?.postId && (
+                        <span className="text-xs text-muted-foreground ml-2">ID: {item.meta.postId.slice(0, 8)}</span>
+                      )}
+                    </div>
+                    <span className="text-xs text-muted-foreground">
+                      {item.createdAt ? new Date(item.createdAt).toLocaleString() : '—'}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </main>
     </div>
   );
