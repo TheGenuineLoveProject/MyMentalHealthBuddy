@@ -79,16 +79,24 @@ function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
   const dbStatus = health?.database?.connected ? 'healthy' : (health?.database ? 'warning' : 'unknown');
   const aiStatus = health?.ai?.available ? 'healthy' : (health?.ai ? 'warning' : 'unknown');
   const apiStatus = health?.status === 'healthy' ? 'healthy' : (health ? 'warning' : 'error');
-  const uptimeStr = health?.uptime ? `${Math.floor(health.uptime / 60)}m` : '—';
+  const uptimeStr = health?.uptimeFormatted || (health?.uptime ? `${Math.floor(health.uptime / 60)}m` : '—');
   const memMB = health?.memory?.heapUsedMB ? `${health.memory.heapUsedMB}MB` : '—';
+  const memPercent = health?.memory?.heapUsedMB && health?.memory?.heapTotalMB ? Math.round((health.memory.heapUsedMB / health.memory.heapTotalMB) * 100) : 0;
 
   const services = [
     { name: 'API Server', status: apiStatus, icon: Server, latency: uptimeStr },
     { name: 'Database', status: dbStatus, icon: Database, latency: health?.database?.connected ? 'connected' : 'offline' },
     { name: 'Auth Service', status: health?.softLaunch !== undefined ? 'healthy' : 'unknown', icon: Lock, latency: 'active' },
     { name: 'AI/Chat', status: aiStatus, icon: MessageSquare, latency: health?.ai?.available ? 'ready' : 'offline' },
-    { name: 'Memory', status: health?.memory?.heapUsedMB < 500 ? 'healthy' : 'warning', icon: HardDrive, latency: memMB }
+    { name: 'Memory', status: health?.memory?.heapUsedMB < 500 ? 'healthy' : 'warning', icon: HardDrive, latency: `${memMB} (${memPercent}%)` }
   ];
+
+  const integrations = health?.services ? [
+    { name: 'Stripe', active: health.services.stripe },
+    { name: 'Resend', active: health.services.resend },
+    { name: 'Perplexity', active: health.services.perplexity },
+    { name: 'Sentry', active: health.services.sentry },
+  ] : [];
 
   return (
     <div className={styles.card}>
@@ -123,6 +131,29 @@ function SystemHealthPanel({ health, onRefresh, isRefreshing }) {
           );
         })}
       </div>
+      {health?.platform && (
+        <div style={{ padding: '0.5rem 1rem', borderTop: '1px solid rgba(0,0,0,0.06)' }} data-testid="panel-platform-stats">
+          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', fontSize: '0.72rem', color: '#666' }}>
+            <span data-testid="text-tool-count">{health.platform.totalTools} Tools</span>
+            <span data-testid="text-route-count">{health.platform.totalRoutes} Routes</span>
+            <span data-testid="text-admin-page-count">{health.platform.adminPages} Admin Pages</span>
+            {health.node && <span>Node {health.node}</span>}
+            {health.startedAt && <span>Started: {new Date(health.startedAt).toLocaleTimeString()}</span>}
+          </div>
+        </div>
+      )}
+      {integrations.length > 0 && (
+        <div style={{ padding: '0.5rem 1rem', borderTop: '1px solid rgba(0,0,0,0.06)' }} data-testid="panel-integrations">
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', fontSize: '0.72rem' }}>
+            {integrations.map(int => (
+              <span key={int.name} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: int.active ? '#22c55e' : '#d1d5db', flexShrink: 0 }} />
+                <span style={{ color: int.active ? '#333' : '#999' }}>{int.name}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -414,11 +445,13 @@ function DailyToolsPanel() {
 
   const runHealthCheck = async (tool) => {
     setRunningTools(prev => ({ ...prev, [tool.id]: true }));
+    const startTime = performance.now();
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
       const res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
       clearTimeout(timeout);
+      const responseTime = Math.round(performance.now() - startTime);
       let status = 'healthy';
       if (res.ok) {
         status = 'healthy';
@@ -434,10 +467,11 @@ function DailyToolsPanel() {
         status = 'warning';
       }
       const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
-      setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString(), label: statusLabel } }));
+      setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString(), label: statusLabel, ms: responseTime } }));
     } catch (err) {
+      const responseTime = Math.round(performance.now() - startTime);
       const label = err?.name === 'AbortError' ? 'timeout' : 'unreachable';
-      setToolResults(prev => ({ ...prev, [tool.id]: { status: 'error', code: 0, time: new Date().toLocaleTimeString(), label } }));
+      setToolResults(prev => ({ ...prev, [tool.id]: { status: 'error', code: 0, time: new Date().toLocaleTimeString(), label, ms: responseTime } }));
     } finally {
       setRunningTools(prev => ({ ...prev, [tool.id]: false }));
     }
@@ -465,6 +499,10 @@ function DailyToolsPanel() {
   const warningCount = Object.values(toolResults).filter(r => r.status === 'warning').length;
   const errorCount = Object.values(toolResults).filter(r => r.status === 'error').length;
   const isAnyRunning = isRunningAll || Object.values(runningTools).some(Boolean);
+  const avgResponseTime = checkedCount > 0 ? Math.round(Object.values(toolResults).reduce((sum, r) => sum + (r.ms || 0), 0) / checkedCount) : 0;
+  const maxResponseTime = checkedCount > 0 ? Math.max(...Object.values(toolResults).map(r => r.ms || 0)) : 0;
+  const authGatedCount = Object.values(toolResults).filter(r => r.label === 'auth-gated' || r.label === 'admin-only').length;
+  const rateLimitedCount = Object.values(toolResults).filter(r => r.label === 'rate-limited').length;
 
   return (
     <div className={styles.card} style={{ gridColumn: '1 / -1' }}>
@@ -519,6 +557,44 @@ function DailyToolsPanel() {
               transition: 'width 0.3s ease, background 0.3s ease',
               borderRadius: '2px'
             }} />
+          </div>
+        </div>
+      )}
+      
+      {checkedCount === totalTools && !isAnyRunning && (
+        <div style={{ padding: '0.5rem 1rem', marginBottom: '0.25rem' }} data-testid="panel-check-results-summary">
+          <div style={{ 
+            display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem',
+            padding: '0.75rem', borderRadius: '8px', background: 'rgba(0,0,0,0.02)', border: '1px solid rgba(0,0,0,0.06)'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#22c55e' }} data-testid="text-healthy-count">{healthyCount}</div>
+              <div style={{ fontSize: '0.7rem', color: '#666' }}>Healthy</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#eab308' }} data-testid="text-warning-count">{warningCount}</div>
+              <div style={{ fontSize: '0.7rem', color: '#666' }}>Warnings</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ef4444' }} data-testid="text-error-count">{errorCount}</div>
+              <div style={{ fontSize: '0.7rem', color: '#666' }}>Errors</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#3b82f6' }} data-testid="text-auth-gated-count">{authGatedCount}</div>
+              <div style={{ fontSize: '0.7rem', color: '#666' }}>Auth-Gated</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#f59e0b' }} data-testid="text-rate-limited-count">{rateLimitedCount}</div>
+              <div style={{ fontSize: '0.7rem', color: '#666' }}>Rate-Limited</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#8b5cf6' }} data-testid="text-avg-response-time">{avgResponseTime}ms</div>
+              <div style={{ fontSize: '0.7rem', color: '#666' }}>Avg Response</div>
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 700, color: maxResponseTime > 1000 ? '#ef4444' : '#64748b' }} data-testid="text-max-response-time">{maxResponseTime}ms</div>
+              <div style={{ fontSize: '0.7rem', color: '#666' }}>Slowest</div>
+            </div>
           </div>
         </div>
       )}
@@ -607,7 +683,7 @@ function DailyToolsPanel() {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', flexShrink: 0 }}>
                       {result && (
-                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }} title={`HTTP ${result.code} - ${result.label || ''}`}>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '3px' }} title={`HTTP ${result.code} - ${result.label || ''} - ${result.ms}ms`}>
                           {result.status === 'healthy' ? (
                             <CheckCircle size={14} style={{ color: '#22c55e' }} />
                           ) : result.status === 'warning' ? (
@@ -615,9 +691,9 @@ function DailyToolsPanel() {
                           ) : (
                             <AlertCircle size={14} style={{ color: '#ef4444' }} />
                           )}
-                          {result.label && result.label !== 'ok' && (
-                            <span style={{ fontSize: '0.6rem', opacity: 0.6 }}>{result.label}</span>
-                          )}
+                          <span style={{ fontSize: '0.6rem', opacity: 0.6 }}>
+                            {result.label && result.label !== 'ok' ? result.label : ''}{result.ms != null ? ` ${result.ms}ms` : ''}
+                          </span>
                         </span>
                       )}
                       <button

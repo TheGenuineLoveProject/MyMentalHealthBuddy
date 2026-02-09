@@ -32,18 +32,41 @@ router.get("/", async (_req, res) => {
     }
 
     const mem = process.memoryUsage();
+    const uptimeSec = Math.floor(process.uptime());
+    const days = Math.floor(uptimeSec / 86400);
+    const hours = Math.floor((uptimeSec % 86400) / 3600);
+    const mins = Math.floor((uptimeSec % 3600) / 60);
+    const uptimeFormatted = [days > 0 && `${days}d`, hours > 0 && `${hours}h`, mins > 0 && `${mins}m`, `${uptimeSec % 60}s`].filter(Boolean).join(" ");
+    
     res.json({
       status: "healthy",
       environment: process.env.NODE_ENV || "development",
       version: process.env.npm_package_version || "2.0.0",
-      uptime: Math.floor(process.uptime()),
+      uptime: uptimeSec,
+      uptimeFormatted,
+      startedAt: new Date(startTime).toISOString(),
       database: { connected: dbConnected },
       ai: { available: isConfigured() },
       softLaunch: process.env.SOFT_LAUNCH_MODE === "true",
+      platform: {
+        totalTools: 122,
+        totalRoutes: 123,
+        adminPages: 23,
+      },
+      services: {
+        stripe: !!process.env.STRIPE_SECRET_KEY,
+        resend: !!process.env.RESEND_API_KEY,
+        perplexity: !!process.env.PERPLEXITY_API_KEY,
+        sentry: !!process.env.SENTRY_DSN,
+      },
       memory: {
         heapUsedMB: Math.round(mem.heapUsed / 1024 / 1024),
+        heapTotalMB: Math.round(mem.heapTotal / 1024 / 1024),
         rssMB: Math.round(mem.rss / 1024 / 1024),
       },
+      node: process.version,
+      requestCount: _requestCount,
+      errorCount: _errorCount,
     });
   } catch (error) {
     logger.error("Health check error", { error: error?.message || error });
