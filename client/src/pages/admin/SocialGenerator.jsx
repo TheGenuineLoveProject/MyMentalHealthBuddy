@@ -194,12 +194,16 @@ export default function SocialGenerator() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900">
       <div className="max-w-5xl mx-auto px-4 py-8">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} />
+          Back to Command Center
+        </Link>
         <div className="flex items-center gap-4 mb-8">
-          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+          <Link href="/admin/social" className="p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" data-testid="link-back-social">
             <ArrowLeft className="w-5 h-5 text-slate-600 dark:text-slate-400" />
           </Link>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-white" data-testid="text-page-title">
               AI Content Generator
             </h1>
             <p className="text-slate-600 dark:text-slate-400">

@@ -33,6 +33,10 @@ export default function NewsletterAdmin() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-4xl mx-auto px-4 py-8">
+        <Link href="/admin" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#8A9A5B', textDecoration: 'none', fontSize: '14px', marginBottom: '0.5rem' }} data-testid="link-back-command-center">
+          <ArrowLeft size={16} />
+          Back to Command Center
+        </Link>
         <Link href="/admin/social-studio" className="inline-flex items-center gap-2 text-amber-700 dark:text-amber-300 hover:underline mb-6" data-testid="link-back-studio">
           <ArrowLeft className="w-4 h-4" />
           Back to Publishing Studio

@@ -116,6 +116,11 @@ import adminBillingRouter from "./routes/adminBilling.mjs";
 import adminPublishingRouter from "./routes/admin-publishing.mjs";
 import contactRouter from "./routes/contact.mjs";
 import metricsRouter from "./routes/metrics.mjs";
+import badgesRouter from "./routes/badges.mjs";
+import favoritesRouter from "./routes/favorites.mjs";
+import invitesRouter from "./routes/invites.mjs";
+import loginRouter from "./routes/login.mjs";
+import userSettingsRouter from "./routes/userSettings.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -313,6 +318,11 @@ async function startServer() {
   app.use("/api/admin/billing", adminBillingRouter);
   app.use("/api/admin/publishing", adminPublishingRouter);
   app.use("/api/contact", contactRouter);
+  app.use("/api/badges", badgesRouter);
+  app.use("/api/favorites", favoritesRouter);
+  app.use("/api/invites", invitesRouter);
+  app.use("/api/login", loginRouter);
+  app.use("/api/user-settings", userSettingsRouter);
   app.use("/api/uploads", objectStorageRouter);
   app.use("/api/metrics", metricsRouter);
   app.use("/api/metrics/summary", metricsSummaryRouter);
