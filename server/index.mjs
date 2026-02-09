@@ -115,6 +115,16 @@ import favoritesRouter from "./routes/favorites.mjs";
 import invitesRouter from "./routes/invites.mjs";
 import loginRouter from "./routes/login.mjs";
 import userSettingsRouter from "./routes/userSettings.mjs";
+import adminSecurityRouter from "./routes/admin-security.mjs";
+import feedbackRouter from "./routes/feedback.mjs";
+import gratitudeRouter from "./routes/gratitude.mjs";
+import narrativeDraftsRouter from "./routes/narrative-drafts.mjs";
+import productsRouter from "./routes/products.mjs";
+import progressRouter from "./routes/progress.mjs";
+import reflectionRouter from "./routes/reflection.mjs";
+import emailRouter from "./routes/email.mjs";
+import softLaunchMetricsRouter from "./routes/soft-launch-metrics.mjs";
+import objectStorageRouter from "./routes/object-storage.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -316,6 +326,19 @@ app.use('/api/favorites', favoritesRouter);
 app.use('/api/invites', invitesRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/user-settings', userSettingsRouter);
+app.use('/api/admin/security', adminSecurityRouter);
+app.use('/api/feedback', feedbackRouter);
+app.use('/api/gratitude', gratitudeRouter);
+app.use('/api/narrative-drafts', narrativeDraftsRouter);
+app.use('/api/products', productsRouter);
+app.use('/api/progress', progressRouter);
+app.use('/api/reflection', reflectionRouter);
+app.use('/api/email', emailRouter);
+app.use('/api/admin/soft-launch-metrics', softLaunchMetricsRouter);
+app.use('/api/uploads', objectStorageRouter);
+app.use('/api/social/posts', socialPostsRouter);
+app.use('/api/metrics/summary', metricsSummaryRouter);
+app.use('/api/auth/github', githubAuthRouter);
 app.use('/api/foresight', foresightRouter);
 app.use('/api/systems-compassion', systemsCompassionRouter);
 app.use('/api/collective-intelligence', collectiveIntelligenceRouter);
@@ -391,6 +414,17 @@ app.get("/healthz", (_req, res) => {
 });
 app.get("/api/health", (_req, res) => {
   res.json({ ok: true });
+});
+app.post("/api/session/extend", (req, res) => {
+  if (req.session) {
+    req.session.touch();
+    req.session.save((err) => {
+      if (err) return res.status(500).json({ ok: false });
+      res.json({ ok: true, message: "Session extended" });
+    });
+  } else {
+    res.json({ ok: true, message: "No session to extend" });
+  }
 });
 app.use("/health", healthRouter);
 

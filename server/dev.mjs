@@ -121,6 +121,7 @@ import favoritesRouter from "./routes/favorites.mjs";
 import invitesRouter from "./routes/invites.mjs";
 import loginRouter from "./routes/login.mjs";
 import userSettingsRouter from "./routes/userSettings.mjs";
+import rssRouter from "./routes/rss.mjs";
 import { setupWebSocket } from "./lib/websocket.mjs";
 import { requestId, requestLogger } from "./middleware/requestId.mjs";
 
@@ -323,6 +324,7 @@ async function startServer() {
   app.use("/api/invites", invitesRouter);
   app.use("/api/login", loginRouter);
   app.use("/api/user-settings", userSettingsRouter);
+  app.use("/rss.xml", rssRouter);
   app.use("/api/uploads", objectStorageRouter);
   app.use("/api/metrics", metricsRouter);
   app.use("/api/metrics/summary", metricsSummaryRouter);
@@ -340,6 +342,18 @@ async function startServer() {
       version: "2.0.0",
       uptimeSeconds: Math.floor((Date.now() - SERVER_START_TIME) / 1000)
     });
+  });
+
+  app.post("/api/session/extend", (req, res) => {
+    if (req.session) {
+      req.session.touch();
+      req.session.save((err) => {
+        if (err) return res.status(500).json({ ok: false });
+        res.json({ ok: true, message: "Session extended" });
+      });
+    } else {
+      res.json({ ok: true, message: "No session to extend" });
+    }
   });
 
   app.use("/health", healthRouter);

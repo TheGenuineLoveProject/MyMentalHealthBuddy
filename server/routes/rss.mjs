@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
         slug: p.slug,
         description: p.excerpt || p.content?.substring(0, 200) || '',
         date: p.createdAt ? new Date(p.createdAt).toUTCString() : new Date().toUTCString(),
-        tags: p.tags || [],
+        tags: Array.isArray(p.tags) ? p.tags : (typeof p.tags === 'string' && p.tags ? p.tags.split(',').map(t => t.trim()).filter(Boolean) : []),
       }));
     } catch {
       const indexPath = path.join(__dirname, '../../content/blog/index.json');
