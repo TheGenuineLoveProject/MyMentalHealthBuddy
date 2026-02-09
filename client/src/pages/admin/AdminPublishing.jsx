@@ -72,15 +72,38 @@ export default function AdminPublishing() {
 
   const pipelineActionMutation = useMutation({
     mutationFn: async ({ id, action }) => {
-      const res = await apiRequest("POST", `/api/blog/admin/${id}/${action}`);
-      return res.json();
+      try {
+        return await apiRequest("POST", `/api/blog/admin/${id}/${action}`);
+      } catch (err) {
+        let parsed = null;
+        const colonIdx = err.message?.indexOf(": ");
+        if (colonIdx > 0) {
+          try { parsed = JSON.parse(err.message.substring(colonIdx + 2)); } catch {}
+        }
+        if (parsed) {
+          const safetyErrors = parsed.errors || [];
+          const safetyWarnings = parsed.warnings || [];
+          const errorObj = new Error(parsed.message || "Action failed");
+          errorObj.safetyErrors = safetyErrors;
+          errorObj.safetyWarnings = safetyWarnings;
+          throw errorObj;
+        }
+        throw err;
+      }
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
-      toast({ title: data.message || "Action completed" });
+      toast({ title: data?.message || "Action completed" });
     },
     onError: (err) => {
-      toast({ title: "Action failed", description: err.message, variant: "destructive" });
+      const parts = [err.message];
+      if (err.safetyErrors?.length) {
+        parts.push("Blocked: " + err.safetyErrors.join("; "));
+      }
+      if (err.safetyWarnings?.length) {
+        parts.push("Warnings: " + err.safetyWarnings.join("; "));
+      }
+      toast({ title: "Action failed", description: parts.join("\n"), variant: "destructive" });
     },
   });
 
