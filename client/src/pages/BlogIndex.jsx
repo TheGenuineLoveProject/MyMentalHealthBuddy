@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Search, Calendar, Clock, User, ArrowRight, BookOpen } from "lucide-react";
 import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
+import NewsletterSignup from "../components/NewsletterSignup";
 
 function BlogCard({ post }) {
   const formattedDate = post.publishedAt
@@ -162,6 +163,19 @@ export default function BlogIndex() {
             ))}
           </div>
         )}
+
+        <section className="mt-12 relative overflow-hidden rounded-3xl border border-[rgba(var(--glp-sage-rgb), 0.22)] bg-[rgba(250,249,247,0.55)] p-8 shadow-sm backdrop-blur" data-testid="section-blog-newsletter">
+          <div className="max-w-md mx-auto text-center">
+            <h2 className="text-xl font-semibold text-[var(--glp-sage-deep)] mb-2">
+              Stay Gently Connected
+            </h2>
+            <p className="text-sm text-[var(--glp-ink)]/70 mb-6">
+              New articles and wellness reflections, delivered to your inbox.
+              No pressure, no spam — unsubscribe anytime.
+            </p>
+            <NewsletterSignup variant="inline" source="blog-index" />
+          </div>
+        </section>
       </main>
     </div>
   );

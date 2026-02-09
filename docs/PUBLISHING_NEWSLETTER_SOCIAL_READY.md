@@ -11,14 +11,16 @@
 
 | Route | Description | Status |
 |-------|-------------|--------|
-| `/blog` | Blog index page | Working |
-| `/blog/:slug` | Individual post page | Working |
+| `/blog` | Blog index page with search and newsletter CTA | Working |
+| `/blog/:slug` | Individual post with formatted content, comments, newsletter CTA | Working |
 | `GET /api/blog` | Public blog API (published only) | Working |
-| `GET /api/blog/:slug` | Public single post API | Working |
-| `GET /api/blog/rss` | RSS feed (XML) | Working |
+| `GET /api/blog/:slug` | Public single post API (increments view count) | Working |
+| `GET /api/blog/rss` | RSS feed with guid, Atom self-link, language | Working |
 | `GET /api/blog/admin` | Admin: all posts (requires auth+admin) | Working |
-| `GET /api/blog/admin/stats` | Admin: views, signups, drafts (requires auth+admin) | Working |
-| `POST /api/blog/admin/test-send` | Admin: test-send newsletter draft to self (requires auth+admin) | Working |
+| `GET /api/blog/admin/stats` | Admin: views, signups, signupsByDay, drafts | Working |
+| `POST /api/blog/admin/test-send` | Admin: test-send newsletter draft to self | Working |
+| `POST /api/blog` | Create new blog post (requires auth) | Working |
+| `PUT /api/blog/:id` | Update blog post (requires auth+owner) | Working |
 
 ### Published Blog Posts (9)
 
@@ -34,47 +36,61 @@
 | 8 | `mindful-mornings-intention` | The Art of Mindful Mornings | Yes | Yes |
 | 9 | `understanding-self-care-beyond-bubble-baths` | Understanding Self-Care: Beyond Bubble Baths | Yes | Yes |
 
+### Newsletter System
+
+| Component | Route / File | Status |
+|-----------|-------------|--------|
+| Dedicated newsletter page | `/newsletter` (Newsletter.jsx) | Working |
+| Newsletter signup component | `NewsletterSignup.jsx` | Working (consent checkbox required) |
+| Leads API (signup storage) | `POST /api/leads` | Working (validates email + consent) |
+| Newsletter admin page | `/admin/newsletter` (NewsletterAdmin.jsx) | Working (admin-gated) |
+| Newsletter CTA on blog index | BlogIndex.jsx bottom section | Working |
+| Newsletter CTA on blog posts | BlogPost.jsx after article content | Working |
+| Test-send API | `POST /api/blog/admin/test-send` | Working (admin's email only) |
+
 ### Newsletter Draft (Not Sent)
 
 | Slug | Title | Content Type | Status | Visibility |
 |------|-------|-------------|--------|------------|
 | `youre-not-behind-welcome` | You're Not Behind | newsletter | draft | draft |
 
-### Newsletter System
-
-| Component | File | Status |
-|-----------|------|--------|
-| Newsletter signup component | `client/src/components/NewsletterSignup.jsx` | Working (consent checkbox required) |
-| Leads API (signup storage) | `server/routes/leads.mjs` | Working (validates email + consent) |
-| Newsletter admin page | `client/src/pages/admin/NewsletterAdmin.jsx` | Working (admin-gated) |
-| Newsletter admin route | `/admin/newsletter` | Working (AdminGuard) |
-| Test-send API | `POST /api/blog/admin/test-send` | Working (sends only to admin's email) |
-| Subscriber count display | Admin stats API | Working |
-| Signups-by-day chart | Admin stats API (last 30 days) | Working |
-| Draft list | Admin stats API | Working |
-
 ### Social Content Studio
 
-| Route | Page | File | Admin-Gated |
-|-------|------|------|:-----------:|
-| `/admin/social-studio` | Main Studio | `SocialStudioAdmin.jsx` | Yes |
-| `/admin/social` | Dashboard | `SocialDashboard.jsx` | Yes |
-| `/admin/social-generator` | Draft Generator | `SocialGenerator.jsx` | Yes |
-| `/admin/social-calendar` | Content Calendar | `SocialCalendar.jsx` | Yes |
-| `/admin/social-analytics` | Analytics View | `SocialAnalytics.jsx` | Yes |
-| `/admin/social-library` | Content Library | `SocialLibrary.jsx` | Yes |
+| Route | Page | Admin-Gated |
+|-------|------|:-----------:|
+| `/admin/social-studio` | Main Studio with newsletter link | Yes |
+| `/admin/social` | Dashboard | Yes |
+| `/admin/social-generator` | Draft Generator with Canva Export | Yes |
+| `/admin/social-calendar` | Content Calendar | Yes |
+| `/admin/social-analytics` | Analytics View | Yes |
+| `/admin/social-library` | Content Library | Yes |
 
-### Social Studio Features
+### Content Rendering
 
-| Feature | Status |
-|---------|--------|
-| Content calendar (list/grid view) | Working |
-| Draft generator (AI-assisted) | Working |
-| Compliance checker (trauma-informed) | Working |
-| Canva export copy blocks (IG post, IG caption, Reel/TikTok, YouTube Short, X/Twitter) | Working |
-| Platform-specific formatting | Working |
-| Hashtag sets (brand, mental health, growth, engagement) | Working |
-| Newsletter admin link from studio | Working |
+Blog posts now render with structured formatting:
+- `## Heading` → `<h2>` styled headings
+- `### Subheading` → `<h3>` styled subheadings
+- `- Bullet items` → `<ul>` styled lists
+- `1. Numbered items` → `<ol>` styled lists
+- Double newlines → `<p>` paragraph breaks
+
+### Navigation Integration
+
+Newsletter and blog links appear in:
+- Main navbar (Blog link)
+- Footer.jsx (Blog + Newsletter links)
+- SacredFooter.jsx (Blog + Newsletter in explore section)
+- sacred/SacredFooter.jsx (Blog + Newsletter in explore section)
+- Blog index page (newsletter CTA at bottom)
+- Blog post pages (newsletter CTA after content)
+
+### RSS Feed
+
+- Valid RSS 2.0 with `xmlns:atom` namespace
+- `<guid isPermaLink="true">` for each item
+- `<atom:link rel="self">` for feed autodiscovery
+- `<language>en-us</language>` language declaration
+- `<lastBuildDate>` timestamp
 
 ### Passive Observability (Admin-Only)
 
@@ -94,11 +110,11 @@
 # Health check
 curl -s http://localhost:5000/api/health | python3 -m json.tool
 
-# Blog index (should return 9 published posts)
+# Blog index (9 published posts)
 curl -s http://localhost:5000/api/blog | python3 -c "import json,sys; d=json.load(sys.stdin); print(f'{len(d[\"data\"])} posts')"
 
-# Individual post
-curl -s http://localhost:5000/api/blog/welcome-to-genuine-love | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['data']['title'])"
+# Individual post with content type and view count
+curl -s http://localhost:5000/api/blog/welcome-to-genuine-love | python3 -c "import json,sys; d=json.load(sys.stdin)['data']; print(f'title: {d[\"title\"]}'); print(f'viewCount: {d[\"viewCount\"]}'); print(f'contentType: {d[\"contentType\"]}')"
 
 # All 5 canonical posts
 for slug in welcome-to-genuine-love how-to-use-this-platform-gently why-this-exists gentle-daily-practice privacy-safety-commitments; do
@@ -106,15 +122,17 @@ for slug in welcome-to-genuine-love how-to-use-this-platform-gently why-this-exi
   echo "$slug: $code"
 done
 
-# Newsletter draft hidden from public
+# Newsletter draft hidden from public (expect 404)
 curl -s -o /dev/null -w "%{http_code}" http://localhost:5000/api/blog/youre-not-behind-welcome
-# Expected: 404
 
-# RSS feed
-curl -s http://localhost:5000/api/blog/rss | head -5
+# RSS feed with guid elements
+curl -s http://localhost:5000/api/blog/rss | head -15
 
-# Key routes (all should return 200)
-for route in / /blog /crisis /learn /dashboard /tools /admin/social-studio /admin/social /admin/social-generator /admin/social-calendar /admin/social-analytics /admin/social-library /admin/newsletter; do
+# Newsletter signup test
+curl -s -X POST http://localhost:5000/api/leads -H "Content-Type: application/json" -d '{"email":"test@example.com","consent":true}'
+
+# All key routes
+for route in / /blog /newsletter /crisis /learn /dashboard /tools /admin/social-studio /admin/newsletter; do
   code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000$route)
   echo "$route: $code"
 done
@@ -136,12 +154,6 @@ done
 **No auto-social-posting is configured.**  
 **No tracking pixels or fingerprinting are used.**  
 **No bulk email sending is implemented.**
-
----
-
-## NEXT SINGLE RECOMMENDED STEP
-
-**Public Surface Alignment**: Ensure homepage, pricing page, blog, newsletter signup, and social links all tell one coherent story. This means reviewing the homepage copy, verifying the CTA flow from homepage → blog → newsletter → tools, and confirming all footer links reflect the current content map.
 
 ---
 

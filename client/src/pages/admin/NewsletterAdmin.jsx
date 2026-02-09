@@ -33,11 +33,9 @@ export default function NewsletterAdmin() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800">
       <div className="max-w-4xl mx-auto px-4 py-8">
-        <Link href="/admin/social-studio" data-testid="link-back-studio">
-          <a className="inline-flex items-center gap-2 text-amber-700 dark:text-amber-300 hover:underline mb-6">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Publishing Studio
-          </a>
+        <Link href="/admin/social-studio" className="inline-flex items-center gap-2 text-amber-700 dark:text-amber-300 hover:underline mb-6" data-testid="link-back-studio">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Publishing Studio
         </Link>
 
         <h1 className="text-3xl font-bold text-amber-900 dark:text-amber-100 mb-2" data-testid="text-newsletter-title">
@@ -124,11 +122,9 @@ export default function NewsletterAdmin() {
                           </p>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Link href={`/admin/blog`}>
-                            <a className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs bg-amber-100 dark:bg-gray-600 text-amber-800 dark:text-amber-200 hover:bg-amber-200 dark:hover:bg-gray-500 transition-colors" data-testid={`button-view-draft-${draft.id}`}>
-                              <Eye className="w-3 h-3" />
-                              View
-                            </a>
+                          <Link href="/admin/social-studio" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs bg-amber-100 dark:bg-gray-600 text-amber-800 dark:text-amber-200 hover:bg-amber-200 dark:hover:bg-gray-500 transition-colors" data-testid={`button-view-draft-${draft.id}`}>
+                            <Eye className="w-3 h-3" />
+                            View in Studio
                           </Link>
 
                           {confirmSendId === draft.id ? (

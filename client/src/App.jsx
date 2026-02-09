@@ -733,7 +733,7 @@ export default function App() {
               <Route path="/careers">{() => <ConfigRoute route="/about" />}</Route>
               <Route path="/team">{() => <ConfigRoute route="/about" />}</Route>
               <Route path="/mobile">{() => <ConfigRoute route="/features" />}</Route>
-              <Route path="/newsletter">{() => <ConfigRoute route="/contact" />}</Route>
+              <Route path="/newsletter" component={lazy(() => import("./pages/Newsletter.jsx"))} />
               <Route path="/app">{() => <ConfigRoute route="/features" />}</Route>
               <Route path="/download">{() => <ConfigRoute route="/features" />}</Route>
               <Route path="/store">{() => <ConfigRoute route="/pricing" />}</Route>

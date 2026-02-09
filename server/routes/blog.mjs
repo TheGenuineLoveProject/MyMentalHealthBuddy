@@ -231,17 +231,21 @@ router.get("/rss", async (_req, res) => {
       <item>
         <title><![CDATA[${p.title}]]></title>
         <link>https://thegenuineloveproject.com/blog/${p.slug}</link>
+        <guid isPermaLink="true">https://thegenuineloveproject.com/blog/${p.slug}</guid>
         <pubDate>${new Date(p.publishedAt).toUTCString()}</pubDate>
         <description><![CDATA[${p.excerpt || ""}]]></description>
       </item>
     `).join("");
 
-    res.type("application/rss+xml").send(`<?xml version="1.0"?>
-<rss version="2.0">
+    res.type("application/rss+xml").send(`<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>The Genuine Love Project Blog</title>
     <link>https://thegenuineloveproject.com/blog</link>
-    <description>Mental wellness insights and reflections</description>
+    <atom:link href="https://thegenuineloveproject.com/api/blog/rss" rel="self" type="application/rss+xml" />
+    <description>Gentle reflections on mental wellness, self-love, and personal growth from The Genuine Love Project.</description>
+    <language>en-us</language>
+    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     ${items}
   </channel>
 </rss>`);

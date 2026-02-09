@@ -6,6 +6,7 @@ import TglpNavbar from "../components/TglpNavbar";
 import SEO from "../components/SEO";
 import { useAuth } from "../context/AuthContext.jsx";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
+import NewsletterSignup from "../components/NewsletterSignup";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 
@@ -282,12 +283,54 @@ export default function BlogPost() {
 
           <div
             className="prose prose-lg max-w-none text-[var(--glp-ink)]/90 leading-relaxed"
-            style={{ whiteSpace: "pre-wrap" }}
             data-testid="text-post-content"
           >
-            {post.content}
+            {post.content.split(/\n\n+/).map((paragraph, i) => {
+              const trimmed = paragraph.trim();
+              if (!trimmed) return null;
+              if (trimmed.startsWith("## ")) {
+                return <h2 key={i} className="text-2xl font-semibold text-[var(--glp-sage-deep)] mt-8 mb-4">{trimmed.replace(/^## /, "")}</h2>;
+              }
+              if (trimmed.startsWith("### ")) {
+                return <h3 key={i} className="text-xl font-semibold text-[var(--glp-sage-deep)] mt-6 mb-3">{trimmed.replace(/^### /, "")}</h3>;
+              }
+              if (trimmed.startsWith("- ") || trimmed.startsWith("• ")) {
+                const items = trimmed.split(/\n/).filter(Boolean);
+                return (
+                  <ul key={i} className="list-disc list-inside space-y-2 my-4">
+                    {items.map((item, j) => (
+                      <li key={j}>{item.replace(/^[-•]\s*/, "")}</li>
+                    ))}
+                  </ul>
+                );
+              }
+              if (/^\d+[.)]\s/.test(trimmed)) {
+                const items = trimmed.split(/\n/).filter(Boolean);
+                return (
+                  <ol key={i} className="list-decimal list-inside space-y-2 my-4">
+                    {items.map((item, j) => (
+                      <li key={j}>{item.replace(/^\d+[.)]\s*/, "")}</li>
+                    ))}
+                  </ol>
+                );
+              }
+              return <p key={i} className="mb-4">{trimmed}</p>;
+            })}
           </div>
         </article>
+
+        <section className="mt-10 pt-8 border-t border-[rgba(143,191,159,0.25)]" data-testid="section-post-newsletter">
+          <div className="card-glass p-6 text-center">
+            <h3 className="text-lg font-semibold text-[var(--glp-sage-deep)] mb-2">
+              Enjoyed this article?
+            </h3>
+            <p className="text-sm text-[var(--glp-ink)]/70 mb-4">
+              If you'd like more gentle reflections on wellness and growth, our newsletter shares new articles
+              and practices — no pressure, no spam.
+            </p>
+            <NewsletterSignup variant="inline" source="blog-post" />
+          </div>
+        </section>
 
         <CommentSection comments={post.comments} postId={post.id} slug={slug} />
       </main>

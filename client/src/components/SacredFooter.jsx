@@ -30,6 +30,7 @@ export default function SacredFooter() {
       { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
       { label: "Blog", href: "/blog" },
+      { label: "Newsletter", href: "/newsletter" },
     ],
     support: [
       { label: "Help Center", href: "/faq" },
