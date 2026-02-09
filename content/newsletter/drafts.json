@@ -1,0 +1,44 @@
+[
+  {
+    "id": "welcome-draft",
+    "title": "Welcome to The Genuine Love Project — You're Not Behind",
+    "type": "welcome",
+    "status": "draft",
+    "subject_line": "Welcome. You're here, and that's enough.",
+    "preview_text": "A quiet space for self-awareness, emotional resilience, and personal growth.",
+    "body": "## Welcome. You're Here, and That's Enough.\n\nThank you for signing up for The Genuine Love Project newsletter.\n\nThis is not a sales funnel. This is not a content treadmill. This is a quiet space where we share gentle reflections, new wellness tools, and honest thoughts about healing — when they are ready, not on a schedule.\n\n### What to Expect\n\n- **Low frequency, high care.** We send when we have something meaningful — not to fill your inbox.\n- **No manipulation.** No countdown timers, no fake urgency, no guilt if you skip one.\n- **Your privacy matters.** We never sell your data. Unsubscribe anytime with one click.\n\n### A Few Things You Can Try Today\n\n- **Mood Check-In** — A private, gentle emotional awareness tracker. No judgment.\n- **Journal Prompts** — Reflective prompts rooted in trauma-informed principles.\n- **Daily Wisdom** — A quiet thought to sit with, refreshed each day.\n\n### If You're Going Through Something Hard\n\nPlease know: this platform is not therapy, and it is not a substitute for professional care.\n\nBut if you need immediate support, our crisis resources page is always accessible. You can also reach the 988 Suicide & Crisis Lifeline by calling or texting 988.\n\n---\n\n*You do not need to be broken to be here. You do not need a reason. You are welcome exactly as you are.*\n\nWith care,\nThe Genuine Love Project Team",
+    "cta_url": "/tools",
+    "cta_text": "Explore Gentle Tools",
+    "safety_note": "This platform is for educational and emotional wellness purposes only. If you are in crisis, please visit /crisis or call 988.",
+    "created": "2026-02-09",
+    "notes": "Manual send only. Admin triggers test-send to self first."
+  },
+  {
+    "id": "reflection-draft",
+    "title": "A Quiet Reflection: You Don't Have to Fix Everything Today",
+    "type": "reflection",
+    "status": "draft",
+    "subject_line": "You don't have to fix everything today.",
+    "preview_text": "A gentle reminder that rest is part of the work.",
+    "body": "## You Don't Have to Fix Everything Today\n\nSometimes the bravest thing you can do is pause.\n\nNot because you're giving up. But because you're giving yourself permission to breathe before you move forward.\n\n### A Small Practice\n\nToday, try this: before you open your next task, take three slow breaths. Not to be productive. Just to notice that you're here.\n\nThat's it. That's the whole practice.\n\n### What's New\n\nWe've been quietly adding new tools and reflections to the platform. Nothing loud, nothing pushy — just gentle additions when they felt ready:\n\n- New journal prompts for processing difficult emotions\n- Updated mood tracker with gentler language\n- A daily wisdom section that refreshes with care\n\nAll optional. All at your pace.\n\n---\n\n*Healing isn't linear, and progress doesn't always look like motion. Sometimes it looks like stillness.*\n\nWith warmth,\nThe Genuine Love Project Team",
+    "cta_url": "/journal",
+    "cta_text": "Try a Journal Prompt",
+    "safety_note": "If you're going through something heavy, our crisis resources are always at /crisis.",
+    "created": "2026-02-09",
+    "notes": "Manual send only. Suitable for weekly or biweekly rhythm."
+  },
+  {
+    "id": "community-note-draft",
+    "title": "A Note from Our Community: Small Steps, Real Presence",
+    "type": "community_note",
+    "status": "draft",
+    "subject_line": "A note from our quiet community.",
+    "preview_text": "You're not alone in this. Here's what's been happening.",
+    "body": "## Small Steps, Real Presence\n\nWe wanted to share a quiet update — not because anything urgent happened, but because connection matters even in small doses.\n\n### What We've Noticed\n\nPeople are using the platform in ways that feel right to them:\n\n- Some check in with the mood tracker daily. Others once a week. Both are perfect.\n- Journal entries are getting longer — not because we asked, but because people are finding words for things they couldn't say before.\n- The wisdom section gets the most return visits late at night. We see you. You're not alone.\n\n### A Gentle Invitation\n\nIf you haven't visited in a while, that's okay. The platform doesn't judge. Your tools are still there, waiting patiently.\n\nIf you'd like to share a thought — anonymously — our Affirmation Wall is always open. Sometimes the kindest thing you can do is leave a light for someone else.\n\n---\n\n*This community is quiet on purpose. But presence doesn't require volume.*\n\nWith care,\nThe Genuine Love Project Team",
+    "cta_url": "/tools",
+    "cta_text": "Visit Your Tools",
+    "safety_note": "Remember: /crisis is always accessible if you need support.",
+    "created": "2026-02-09",
+    "notes": "Manual send only. Community tone, no pressure, no metrics sharing."
+  }
+]

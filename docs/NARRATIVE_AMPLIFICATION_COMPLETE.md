@@ -100,6 +100,7 @@
   - DB: 4 blog posts updated with newsletter CTAs
   - DB: 1 blog post updated with crisis link (why-this-exists)
   - DB: Welcome newsletter draft created (content_type: newsletter)
+  - `content/newsletter/drafts.json` — 3 draft templates (welcome, reflection, community note)
 - VERIFICATION:
   - Blog pages contain gentle newsletter CTA (BlogIndex.jsx, BlogPost.jsx)
   - All 5 canonical blog posts have newsletter CTA: YES

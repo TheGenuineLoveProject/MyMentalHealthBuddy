@@ -63,6 +63,7 @@ All 5 posts: published, public, HTTP 200, crisis links present, newsletter CTAs 
 | `client/src/components/marketing/EmailCapture.jsx` | Fixed endpoint `/api/newsletter/subscribe` → `/api/leads` with `consent: true` |
 | `server/routes/newsletter.mjs` | Hardened — now stores to `leads` table, deduplicates, proper error handling |
 | `docs/NARRATIVE_AMPLIFICATION_HARDENING_COMPLETE.md` | Created — this report |
+| `content/newsletter/drafts.json` | Created — 3 newsletter draft templates (welcome, reflection, community note) |
 
 ## Database Changes (This Phase)
 
