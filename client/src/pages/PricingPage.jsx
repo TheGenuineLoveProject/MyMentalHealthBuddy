@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Check, Sparkles, Shield, Heart, Zap, HelpCircle } from "lucide-react";
 import SEO from "../components/SEO";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import NewsletterSignup from "../components/NewsletterSignup";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card.jsx";
 import { Button } from "@/components/ui/Button.jsx";
 
@@ -184,6 +185,10 @@ export default function PricingPage() {
               </Card>
             ))}
           </div>
+        </section>
+
+        <section className="mt-16 max-w-lg mx-auto" data-testid="section-pricing-newsletter">
+          <NewsletterSignup source="/pricing" />
         </section>
 
         <p className="text-center text-xs text-muted-foreground mt-12">

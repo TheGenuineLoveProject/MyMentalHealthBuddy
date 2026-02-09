@@ -5,7 +5,7 @@ import {
   ArrowLeft, FileText, Mail, Calendar, Copy, Check,
   ChevronDown, Loader2, BookOpen, Send, BarChart3,
   GitPullRequest, Lightbulb, AlertTriangle, CheckCircle, XCircle,
-  TrendingUp, Users, Eye, PenLine
+  TrendingUp, Users, Eye, PenLine, Plus, X, Share2, Filter
 } from "lucide-react";
 import { queryClient, apiRequest } from "../../lib/queryClient";
 import SafetyFooter from "../../components/ui/SafetyFooter";
@@ -37,8 +37,45 @@ const PIPELINE_STATUS_BADGES = {
   published: { label: "Published", className: "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300", icon: CheckCircle },
 };
 
+const SHARE_TEMPLATES = {
+  instagram: (title, url) => `${title}\n\nRead more on our blog \u2192 ${url}\n\n#genuinelove #mentalwellness #selfcare #healing`,
+  x: (title, url) => `${title}\n\n${url}\n\n#mentalwellness #selfcare`,
+  tiktok: (title) => `${title} \u2014 link in bio \u2764\uFE0F #genuineloveproject #mentalhealth #healing #selfcare`,
+  youtube: (title, url) => `${title}\n\nRead the full article: ${url}\n\nThe Genuine Love Project \u2014 Live in Genuine Love.`,
+};
+
+function ShareCaptions({ title, slug }) {
+  const url = `https://thegenuineloveproject.com/blog/${slug}`;
+  const [open, setOpen] = useState(false);
+  if (!open) {
+    return (
+      <button onClick={() => setOpen(true)} className="inline-flex items-center gap-1 px-2 py-1 text-xs rounded bg-indigo-100 dark:bg-indigo-900/30 hover:bg-indigo-200 dark:hover:bg-indigo-800/40 transition-colors" data-testid={`button-share-${slug}`}>
+        <Share2 className="w-3 h-3" /> Share
+      </button>
+    );
+  }
+  return (
+    <div className="mt-2 p-3 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg space-y-2 text-xs">
+      <div className="flex justify-between items-center mb-1">
+        <span className="font-medium text-indigo-700 dark:text-indigo-300">Share Captions (copy & paste)</span>
+        <button onClick={() => setOpen(false)} className="text-gray-400 hover:text-gray-600" data-testid={`button-close-share`}><X className="w-3 h-3" /></button>
+      </div>
+      {Object.entries(SHARE_TEMPLATES).map(([platform, fn]) => (
+        <div key={platform} className="flex items-start gap-2">
+          <span className="w-16 shrink-0 font-medium capitalize text-gray-600 dark:text-gray-400">{platform}</span>
+          <CopyButton text={fn(title, url)} label={`Copy ${platform}`} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function AdminPublishing() {
   const [activeTab, setActiveTab] = useState("pipeline");
+  const [showCreateDraft, setShowCreateDraft] = useState(false);
+  const [editingPost, setEditingPost] = useState(null);
+  const [draftForm, setDraftForm] = useState({ title: "", content: "", excerpt: "", contentType: "blog_post" });
+  const [statusFilter, setStatusFilter] = useState("all");
   const { toast } = useToast();
   const tabs = [
     { key: "pipeline", label: "Editorial Pipeline", icon: GitPullRequest },
@@ -107,12 +144,52 @@ export default function AdminPublishing() {
     },
   });
 
+  const createDraftMutation = useMutation({
+    mutationFn: async (formData) => {
+      const isEdit = !!editingPost;
+      const res = isEdit
+        ? await apiRequest("PUT", `/api/blog/admin/${editingPost.id}`, formData)
+        : await apiRequest("POST", "/api/blog/admin/create", formData);
+      return { ...(await res.json()), _isEdit: isEdit };
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/blog/admin/stats"] });
+      toast({ title: data._isEdit ? "Draft updated" : "Draft created", description: data?.message || "" });
+      setShowCreateDraft(false);
+      setEditingPost(null);
+      setDraftForm({ title: "", content: "", excerpt: "", contentType: "blog_post" });
+    },
+    onError: (err) => {
+      toast({ title: "Failed to save draft", description: err.message, variant: "destructive" });
+    },
+  });
+
+  function handleEditPost(post) {
+    setEditingPost(post);
+    setDraftForm({
+      title: post.title || "",
+      content: post.content || "",
+      excerpt: post.excerpt || "",
+      contentType: post.contentType || "blog_post",
+    });
+    setShowCreateDraft(true);
+  }
+
+  function handleCancelForm() {
+    setShowCreateDraft(false);
+    setEditingPost(null);
+    setDraftForm({ title: "", content: "", excerpt: "", contentType: "blog_post" });
+  }
+
   const registry = registryData?.data || [];
   const drafts = draftsData?.data || [];
   const calendar = calendarData?.data || [];
   const signals = signalsData?.data || {};
   const pipeline = pipelineData?.data || {};
   const recs = recsData?.data || {};
+
+  const allPipelinePosts = pipeline.drafts || [];
+  const filteredPosts = statusFilter === "all" ? allPipelinePosts : allPipelinePosts.filter(p => p.status === statusFilter);
 
   const today = new Date().toISOString().split("T")[0];
   const todayItems = calendar.filter(c => c.date === today);
@@ -162,27 +239,133 @@ export default function AdminPublishing() {
 
         {activeTab === "pipeline" && (
           <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-            <h2 className="text-lg font-semibold mb-2" data-testid="text-pipeline-title">Editorial Pipeline</h2>
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-lg font-semibold" data-testid="text-pipeline-title">Editorial Pipeline</h2>
+              <button
+                onClick={() => { setEditingPost(null); setDraftForm({ title: "", content: "", excerpt: "", contentType: "blog_post" }); setShowCreateDraft(!showCreateDraft); }}
+                className="inline-flex items-center gap-1 px-3 py-1.5 text-sm rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors"
+                data-testid="button-create-draft"
+              >
+                <Plus className="w-4 h-4" /> Create Draft
+              </button>
+            </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Blog posts flow: Draft → Review → Approved → Published. Content safety validation runs before publishing.</p>
+
+            {showCreateDraft && (
+              <div className="mb-6 p-4 border-2 border-amber-200 dark:border-amber-800 rounded-lg bg-amber-50/50 dark:bg-amber-950/20">
+                <div className="flex justify-between items-center mb-3">
+                  <h3 className="font-medium">{editingPost ? `Editing: ${editingPost.title}` : "New Draft"}</h3>
+                  <button onClick={handleCancelForm} className="text-gray-400 hover:text-gray-600" data-testid="button-cancel-draft"><X className="w-4 h-4" /></button>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Title</label>
+                    <input
+                      type="text" value={draftForm.title}
+                      onChange={(e) => setDraftForm({ ...draftForm, title: e.target.value })}
+                      placeholder="A gentle title for your post..."
+                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none"
+                      data-testid="input-draft-title"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Excerpt (optional)</label>
+                    <input
+                      type="text" value={draftForm.excerpt}
+                      onChange={(e) => setDraftForm({ ...draftForm, excerpt: e.target.value })}
+                      placeholder="A brief summary..."
+                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none"
+                      data-testid="input-draft-excerpt"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Content Type</label>
+                    <select
+                      value={draftForm.contentType}
+                      onChange={(e) => setDraftForm({ ...draftForm, contentType: e.target.value })}
+                      className="px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none"
+                      data-testid="select-draft-type"
+                    >
+                      <option value="blog_post">Blog Post</option>
+                      <option value="newsletter">Newsletter</option>
+                      <option value="reflection">Reflection</option>
+                      <option value="essay">Essay</option>
+                      <option value="note">Note</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-xs font-medium text-gray-600 dark:text-gray-400 mb-1 block">Content</label>
+                    <textarea
+                      value={draftForm.content}
+                      onChange={(e) => setDraftForm({ ...draftForm, content: e.target.value })}
+                      placeholder="Write your compassionate, healing-focused content here..."
+                      rows={8}
+                      className="w-full px-3 py-2 text-sm rounded-lg border dark:border-gray-600 bg-white dark:bg-gray-700 focus:ring-2 focus:ring-amber-400 outline-none resize-y"
+                      data-testid="textarea-draft-content"
+                    />
+                    <div className="text-xs text-gray-400 mt-1">{draftForm.content.length} characters</div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => createDraftMutation.mutate(draftForm)}
+                      disabled={!draftForm.title.trim() || !draftForm.content.trim() || createDraftMutation.isPending}
+                      className="px-4 py-2 text-sm rounded-lg bg-amber-600 text-white hover:bg-amber-700 disabled:opacity-50 transition-colors"
+                      data-testid="button-save-draft"
+                    >
+                      {createDraftMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : editingPost ? "Update Draft" : "Save Draft"}
+                    </button>
+                    <button onClick={handleCancelForm} className="px-4 py-2 text-sm rounded-lg bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition-colors" data-testid="button-cancel-form">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {pipeLoading ? (
               <div className="flex justify-center py-8"><Loader2 className="w-6 h-6 animate-spin" /></div>
             ) : (
               <>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
                   {["draft", "review", "approved", "published"].map(status => {
                     const badge = PIPELINE_STATUS_BADGES[status];
-                    const count = (pipeline.drafts || []).filter(p => p.status === status).length;
+                    const count = allPipelinePosts.filter(p => p.status === status).length;
                     return (
-                      <div key={status} className={`rounded-lg p-3 text-center ${badge.className}`} data-testid={`stat-pipeline-${status}`}>
+                      <button
+                        key={status}
+                        onClick={() => setStatusFilter(statusFilter === status ? "all" : status)}
+                        className={`rounded-lg p-3 text-center transition-all ${badge.className} ${statusFilter === status ? "ring-2 ring-amber-500" : "opacity-80 hover:opacity-100"}`}
+                        data-testid={`stat-pipeline-${status}`}
+                      >
                         <div className="text-2xl font-bold">{count}</div>
                         <div className="text-xs font-medium">{badge.label}</div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
 
-                {(pipeline.drafts || []).length === 0 ? (
-                  <p className="text-center text-gray-500 dark:text-gray-400 py-6">No blog posts in the pipeline yet. Create your first draft from the admin blog API.</p>
+                <div className="flex items-center gap-2 mb-4">
+                  <Filter className="w-4 h-4 text-gray-400" />
+                  <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                    className="text-sm px-2 py-1 rounded border dark:border-gray-600 bg-white dark:bg-gray-700"
+                    data-testid="select-status-filter"
+                  >
+                    <option value="all">All ({allPipelinePosts.length})</option>
+                    <option value="draft">Draft ({allPipelinePosts.filter(p => p.status === "draft").length})</option>
+                    <option value="review">In Review ({allPipelinePosts.filter(p => p.status === "review").length})</option>
+                    <option value="approved">Approved ({allPipelinePosts.filter(p => p.status === "approved").length})</option>
+                    <option value="published">Published ({allPipelinePosts.filter(p => p.status === "published").length})</option>
+                  </select>
+                </div>
+
+                {filteredPosts.length === 0 ? (
+                  <p className="text-center text-gray-500 dark:text-gray-400 py-6">
+                    {allPipelinePosts.length === 0
+                      ? "No blog posts in the pipeline yet. Click 'Create Draft' to start your first post."
+                      : `No posts with status "${statusFilter}". Try a different filter.`}
+                  </p>
                 ) : (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm" data-testid="table-pipeline">
@@ -196,7 +379,7 @@ export default function AdminPublishing() {
                         </tr>
                       </thead>
                       <tbody>
-                        {(pipeline.drafts || []).map(post => {
+                        {filteredPosts.map(post => {
                           const badge = PIPELINE_STATUS_BADGES[post.status] || PIPELINE_STATUS_BADGES.draft;
                           const StatusIcon = badge.icon;
                           return (
@@ -211,6 +394,15 @@ export default function AdminPublishing() {
                               <td className="py-2 px-2 text-xs text-gray-500">{post.updatedAt ? new Date(post.updatedAt).toLocaleDateString() : "—"}</td>
                               <td className="py-2 px-2">
                                 <div className="flex gap-1 flex-wrap">
+                                  {(post.status === "draft" || post.status === "review") && (
+                                    <button
+                                      onClick={() => handleEditPost(post)}
+                                      className="text-xs px-2 py-1 rounded bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500"
+                                      data-testid={`button-edit-${post.id}`}
+                                    >
+                                      Edit
+                                    </button>
+                                  )}
                                   {post.status === "draft" && (
                                     <button
                                       onClick={() => pipelineActionMutation.mutate({ id: post.id, action: "submit" })}
@@ -242,6 +434,7 @@ export default function AdminPublishing() {
                                     </button>
                                   )}
                                   {post.slug && <CopyButton text={`/blog/${post.slug}`} label="Copy URL" />}
+                                  {post.status === "published" && post.slug && <ShareCaptions title={post.title} slug={post.slug} />}
                                 </div>
                               </td>
                             </tr>

@@ -15,6 +15,7 @@ import "../styles/sacred-visuals.css";
 import QuoteBlock from "../components/ui/QuoteBlock.jsx";
 import { CalendarWidget, ProgressWidget, QuickActionsWidget } from "../components/ui/CRMWidgets.jsx";
 import SafetyFooter from "../components/ui/SafetyFooter";
+import NewsletterSignup from "../components/NewsletterSignup";
 import MoodHistoryChart from "../components/MoodHistoryChart.jsx";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
@@ -542,6 +543,10 @@ export default function Dashboard() {
             <div className="mt-6">
               <QuoteBlock variant="card" />
             </div>
+          </section>
+
+          <section className="mt-8" data-testid="section-dashboard-newsletter">
+            <NewsletterSignup source="/dashboard" />
           </section>
 
           <SafetyFooter variant="compact" className="mt-8" />

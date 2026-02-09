@@ -1,0 +1,103 @@
+ENTERPRISE SOCIAL + PUBLISHING OPS v1.0 (The Genuine Love Project)
+ADD ONLY. Do not delete, rename, refactor, or move existing files.
+
+GOAL:
+Upgrade /admin/social into an enterprise-grade Social + Publishing Operations Console with:
+- campaigns
+- UTM link builder
+- attachments (canva links + stored images)
+- weekly queue
+- approval workflow
+- read-only performance signals
+NO auto-posting. Manual copy-to-clipboard only.
+
+PHASE 0 — DISCOVERY
+1) Locate existing:
+   - client/src/pages/admin/*social*
+   - client/src/components/*social*
+   - server/routes/*social*
+   - server/routes/blog.mjs, newsletter.mjs, content*.mjs
+   - analytics routes + analytics_events schema
+2) Report findings before changes.
+
+PHASE 1 — DATA MODEL (prefer DB; fallback JSON if DB not wired)
+Create ONE canonical model for social posts including campaigns.
+
+If DB is used, create table (or extend existing if present):
+- social_campaigns:
+  id, name, goal, start_date, end_date, status, created_at
+- social_posts:
+  id, campaign_id (nullable), theme, platform_captions JSON,
+  hashtags JSON, cta_url, utm_url, safety_note (required),
+  crisis_link_required boolean, status enum(draft/review/approved/posted),
+  scheduled_for (date nullable), posted_at nullable,
+  posted_platforms JSON, canva_url nullable,
+  media_asset_url nullable, created_by, created_at, reviewed_at, approved_at
+
+If JSON is used, store at:
+- content/narrative/social_posts.json
+- content/narrative/social_campaigns.json
+with the same fields.
+
+PHASE 2 — SERVER ROUTES (ADMIN ONLY)
+Add/extend routes under /api/admin/social:
+- GET /campaigns
+- POST /campaigns
+- GET /posts?status=&campaign_id=&scheduled_for=
+- POST /posts (create draft)
+- PUT /posts/:id (edit draft)
+- POST /posts/:id/submit (review)
+- POST /posts/:id/approve (approved; enforce safety checks)
+- POST /posts/:id/mark-posted (requires approved)
+- POST /posts/:id/schedule (sets scheduled_for)
+
+Add UTM builder endpoint:
+- POST /api/admin/social/build-utm
+Input: baseUrl, source, medium, campaign, content(optional)
+Output: utmUrl
+
+Security:
+- Protect ALL endpoints with admin middleware already in project.
+- Validate safety_note required before approve.
+- Block approval if text includes medical/diagnosis/treatment claims or urgency/shame language.
+
+PHASE 3 — FRONTEND ENTERPRISE UI
+Upgrade /admin/social page (or create if missing) with:
+1) Campaign selector + create campaign
+2) Weekly Queue (Next 7 days) list view
+3) Pipeline board: Draft → Review → Approved → Posted
+4) Post editor panel:
+   - platform tabs (IG/FB, TikTok, X, YouTube)
+   - character count
+   - copy-to-clipboard per platform
+   - fields: theme, safety_note, crisis_link_required, canva_url, media_asset_url
+5) UTM builder widget:
+   - baseUrl + auto-params
+   - saves utm_url into post
+6) Read-only signals panel:
+   - show clicks per utm_url (if analytics exists, query it; else create a minimal click counter route that increments on /r/:slug redirects)
+
+PHASE 4 — PUBLISHING INTEGRATION (BLOG + NEWSLETTER)
+Ensure:
+- Blog has a clear public index page and post page routes
+- Newsletter signup has a clear page (/newsletter) and confirmation message
+- Admin can link any social post CTA to: /blog, /newsletter, /pricing, /tools, /crisis
+Add a helper to “Generate 7 social drafts from a blog post”
+(Manual-first: it generates drafts; human must review/approve)
+
+PHASE 5 — VERIFICATION (PASS/FAIL)
+[ ] /admin/social loads for admin only
+[ ] Campaigns create + filter works
+[ ] Weekly queue shows scheduled posts
+[ ] UTM builder generates valid URLs
+[ ] Copy buttons work for each platform
+[ ] Approval blocked without safety_note
+[ ] No auto-posting exists
+[ ] Routes are not duplicated in server entrypoints
+[ ] Build passes
+
+Output:
+- list files changed
+- list routes added
+- verification results
+STOP if any fail.
