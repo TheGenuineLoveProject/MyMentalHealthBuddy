@@ -1,14 +1,8 @@
 import { useState } from "react";
 import { RefreshCw, ArrowRight, Shield, Sparkles } from "lucide-react";
-import BenefitsBlock from "@/components/BenefitsBlock";
-import ClarityCard from "@/components/content/ClarityCard";
-import ExamplesAccordion from "@/components/content/ExamplesAccordion";
-import { CrisisNotice } from "@/components/PersistentDisclaimer";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { SEO } from "@/components/SEO";
-import { MIPromptCard } from "@/components/mi/MIPromptCard";
-import { ShareCardPrompt } from "@/components/share/ShareCardPrompt";
 
 const REFRAME_TEMPLATES = [
   {
@@ -175,23 +169,23 @@ export default function ReframePage() {
 
         {hasGenerated && (
           <section
-            className="p-6 rounded-2xl border bg-[hsl(var(--amber-50))] dark:bg-[hsl(var(--amber-900))] border-[hsl(var(--amber-200))] dark:border-[hsl(var(--amber-700))]"
+            className="p-5 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/30"
             aria-labelledby="reframes-heading"
             data-testid="section-reframes-output"
           >
             <h2
               id="reframes-heading"
-              className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2"
+              className="text-base font-semibold text-foreground mb-4 flex items-center gap-2"
             >
-              <Sparkles className="w-5 h-5 text-[hsl(var(--amber-600))] dark:text-[hsl(var(--amber-300))]" />
+              <Sparkles className="w-4 h-4 text-amber-600 dark:text-amber-300" />
               3 Gentler Perspectives
             </h2>
 
-            <ul className="space-y-3 mb-6" data-testid="list-reframes">
+            <ul className="space-y-3 mb-5" data-testid="list-reframes">
               {reframes.map((reframe, idx) => (
                 <li
                   key={idx}
-                  className="p-4 rounded-xl bg-background dark:bg-[hsl(var(--amber-800))] border border-[hsl(var(--amber-200))] dark:border-[hsl(var(--amber-700))]"
+                  className="p-3 rounded-lg bg-card border border-border"
                   data-testid={`item-reframe-${idx}`}
                 >
                   <p className="text-sm text-foreground" data-testid={`text-reframe-${idx}`}>
@@ -201,9 +195,9 @@ export default function ReframePage() {
               ))}
             </ul>
 
-            <div className="p-4 rounded-xl bg-[hsl(var(--sage-100))] dark:bg-[hsl(var(--sage-800))] border border-[hsl(var(--sage-200))] dark:border-[hsl(var(--sage-700))]">
+            <div className="p-3 rounded-lg bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800">
               <div className="flex items-start gap-3">
-                <ArrowRight className="w-5 h-5 text-[hsl(var(--sage-600))] dark:text-[hsl(var(--sage-300))] shrink-0 mt-0.5" />
+                <ArrowRight className="w-4 h-4 text-emerald-600 dark:text-emerald-300 shrink-0 mt-0.5" />
                 <div>
                   <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                     One Observable Next Step
@@ -215,24 +209,14 @@ export default function ReframePage() {
               </div>
             </div>
 
-            <p className="text-xs text-muted-foreground mt-4 italic">
+            <p className="text-xs text-muted-foreground mt-3 italic">
               Pause or stop anytime—only do what feels safe.
             </p>
-
-            <ShareCardPrompt
-              quote={reframes[0]}
-              microTool="Cognitive reframing"
-              action={nextStep}
-              variant="minimal"
-              className="mt-4"
-            />
           </section>
         )}
 
-        <MIPromptCard context="reflection" className="my-6" />
-
         <section
-          className="p-4 rounded-xl bg-[hsl(var(--gray-50))] dark:bg-[hsl(var(--gray-800))] border border-[hsl(var(--gray-200))] dark:border-[hsl(var(--gray-700))]"
+          className="p-4 rounded-xl border border-border bg-card"
           data-testid="section-reframe-templates"
         >
           <h3 className="text-sm font-semibold text-foreground mb-3">
@@ -245,7 +229,7 @@ export default function ReframePage() {
                 className="flex items-start gap-2 text-sm"
                 data-testid={`item-template-${template.id}`}
               >
-                <span className="text-[hsl(var(--amber-600))] dark:text-[hsl(var(--amber-300))]">•</span>
+                <span className="text-primary mt-0.5">•</span>
                 <div>
                   <span className="text-muted-foreground">{template.category}:</span>{" "}
                   <span className="text-foreground italic">{template.pattern}</span>
@@ -255,41 +239,12 @@ export default function ReframePage() {
           </ul>
         </section>
 
-        <ClarityCard
-          what="A way of shifting harsh self-talk so your mind can find better options."
-          who="Anyone stuck in harsh inner criticism or hopeless thoughts."
-          when="When your mind says 'I can't,' 'I'm broken,' or 'it's hopeless.'"
-          why="Words shape what you notice and what you attempt. Gentler words open new paths."
-          howSteps={[
-            "Notice the harsh phrase your mind is saying",
-            "See 3 alternative reframes",
-            "Pick one observable step to try"
-          ]}
-          whereLinkText="View in System Map"
-          whereHref="/system-map"
-        />
-
-        <BenefitsBlock
-          benefits={[
-            "Turn harsh thoughts into gentler perspectives",
-            "Find one observable next step",
-            "Practice self-compassion through language"
-          ]}
-          control="Pause or stop anytime—only do what feels safe."
-          crisisLink="/crisis"
-        />
-
-        <ExamplesAccordion
-          title="See examples at each level"
-          examples={EXAMPLES}
-        />
-
         <section
-          className="p-4 rounded-xl bg-background dark:bg-[hsl(var(--gray-900))] border border-[hsl(var(--gray-200))] dark:border-[hsl(var(--gray-700))]"
+          className="p-4 rounded-xl border border-border bg-card"
           data-testid="section-guardrails"
         >
           <div className="flex items-center gap-2 mb-3">
-            <Shield className="w-4 h-4 text-[hsl(var(--sage-600))] dark:text-[hsl(var(--sage-300))]" />
+            <Shield className="w-4 h-4 text-muted-foreground" />
             <h3 className="text-sm font-semibold text-foreground">
               Our Ethics Guardrails
             </h3>
@@ -301,14 +256,12 @@ export default function ReframePage() {
                 className="text-xs flex items-start gap-2 text-muted-foreground"
                 data-testid={`item-guardrail-${idx}`}
               >
-                <span className="text-[hsl(var(--sage-600))] dark:text-[hsl(var(--sage-300))]">•</span>
+                <span className="text-primary">•</span>
                 {guardrail}
               </li>
             ))}
           </ul>
         </section>
-
-        <CrisisNotice />
       </div>
     </div>
   </WellnessPageShell>

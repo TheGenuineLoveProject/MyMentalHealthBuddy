@@ -1,84 +1,16 @@
-import { useState, useMemo } from "react";
-import { Link } from "wouter";
+import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { ArrowLeft, Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw, Share2 } from "lucide-react";
+import { Notebook, Plus, Trash2, ChevronDown, ChevronUp, PenLine, Calendar, Sparkles, X, Lightbulb, RefreshCw, Share2 } from "lucide-react";
 import ReflectionCardExport from "../components/ReflectionCardExport";
 import { apiRequest, queryClient } from "../lib/queryClient.js";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
 import { useGamification } from "../context/GamificationContext.jsx";
-import BenefitsBlock from "../components/BenefitsBlock";
-import ClarityCard from "../components/content/ClarityCard";
-import ExamplesAccordion from "../components/content/ExamplesAccordion";
-import { miReflectivePrompts, miPrinciples } from "../content/frameworks/motivationalInterviewing";
+import { miReflectivePrompts } from "../content/frameworks/motivationalInterviewing";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import { MIPromptCard } from "@/components/mi/MIPromptCard";
 import { useAuth } from "../context/AuthContext";
-import { useEmotion } from "../context/EmotionContext";
-import EmotionLog from "../components/EmotionLog";
-import VoiceAffirmation from "../components/VoiceAffirmation";
-import EmotionCalendar from "../components/EmotionCalendar";
-import MoodTrendsChartJS from "../components/charts/MoodTrendsChartJS";
-import { LotusGuide } from "../components/sacred";
 import JournalAI from "../components/JournalAI";
 import DataExportButton from "../components/DataExportButton";
-import "../styles/sacred-visuals.css";
-
-const MOOD_BACKGROUNDS = {
-  joy: 'linear-gradient(135deg, rgba(255, 236, 210, 0.4) 0%, rgba(252, 182, 159, 0.3) 50%, rgba(250, 249, 247, 1) 100%)',
-  happy: 'linear-gradient(135deg, rgba(255, 236, 210, 0.4) 0%, rgba(252, 182, 159, 0.3) 50%, rgba(250, 249, 247, 1) 100%)',
-  sad: 'linear-gradient(135deg, rgba(161, 196, 253, 0.3) 0%, rgba(194, 233, 251, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
-  calm: 'linear-gradient(135deg, rgba(212, 252, 121, 0.2) 0%, rgba(150, 230, 161, 0.25) 50%, rgba(250, 249, 247, 1) 100%)',
-  peaceful: 'linear-gradient(135deg, rgba(212, 252, 121, 0.2) 0%, rgba(150, 230, 161, 0.25) 50%, rgba(250, 249, 247, 1) 100%)',
-  anxious: 'linear-gradient(135deg, rgba(200, 162, 200, 0.2) 0%, rgba(244, 199, 195, 0.25) 50%, rgba(250, 249, 247, 1) 100%)',
-  angry: 'linear-gradient(135deg, rgba(254, 202, 202, 0.3) 0%, rgba(252, 165, 165, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
-  hopeful: 'linear-gradient(135deg, rgba(167, 243, 208, 0.25) 0%, rgba(110, 231, 183, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
-  grateful: 'linear-gradient(135deg, rgba(254, 240, 138, 0.25) 0%, rgba(253, 224, 71, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
-  loved: 'linear-gradient(135deg, rgba(251, 207, 232, 0.3) 0%, rgba(244, 114, 182, 0.15) 50%, rgba(250, 249, 247, 1) 100%)',
-  tired: 'linear-gradient(135deg, rgba(199, 210, 254, 0.25) 0%, rgba(165, 180, 252, 0.2) 50%, rgba(250, 249, 247, 1) 100%)',
-  neutral: 'linear-gradient(135deg, rgba(243, 244, 246, 0.5) 0%, rgba(229, 231, 235, 0.3) 50%, rgba(250, 249, 247, 1) 100%)',
-  excited: 'linear-gradient(135deg, rgba(254, 215, 170, 0.3) 0%, rgba(251, 191, 36, 0.2) 50%, rgba(250, 249, 247, 1) 100%)'
-};
-
-const JOURNAL_CLARITY = {
-  what: "A private journaling space with gentle prompts to help you process thoughts and emotions.",
-  who: "Anyone seeking a safe place to reflect, process feelings, or track their inner journey.",
-  when: "Daily practice, during emotional moments, or whenever you need to 'write it out.'",
-  why: "Writing helps externalize thoughts, process emotions, and notice patterns over time.",
-  howSteps: [
-    "Choose a prompt or write freely",
-    "Write without editing or judging yourself",
-    "Save your entry (or use silence mode for no-save writing)",
-    "Review past entries to notice patterns and growth"
-  ],
-  whereLinkText: "Learn about journaling benefits",
-  whereHref: "/wisdom/journaling"
-};
-
-const JOURNAL_EXAMPLES = [
-  {
-    level: "beginner",
-    title: "Your first journal entry",
-    situation: "You've never journaled before and feel unsure what to write.",
-    action: "Use the random prompt button and write for just 3 minutes without stopping.",
-    result: "You discover journaling feels less intimidating than expected and want to try again."
-  },
-  {
-    level: "intermediate",
-    title: "Processing a difficult emotion",
-    situation: "You're feeling anxious about a work presentation and can't stop ruminating.",
-    action: "Write out every worry without filtering, then ask yourself 'What's the worst that could happen?'",
-    result: "The worries feel smaller on paper, and you identify one concrete action to prepare."
-  },
-  {
-    level: "advanced",
-    title: "Tracking emotional patterns",
-    situation: "You notice you feel low every Sunday evening but don't know why.",
-    action: "Journal specifically about Sunday evenings for several weeks, noting what you did, thought, and felt.",
-    result: "You discover the pattern relates to anticipatory anxiety about Mondays and create a calming Sunday ritual."
-  }
-];
 
 const JOURNAL_PROMPTS = [
   { category: "Gratitude", prompt: "What's one small thing that brought you comfort today?" },
@@ -152,22 +84,11 @@ export default function JournalPage() {
   const [reflectionCardOpen, setReflectionCardOpen] = useState(false);
   const [selectedEntryForCard, setSelectedEntryForCard] = useState(null);
   const [currentMood, setCurrentMood] = useState("neutral");
-  const [showSacredTools, setShowSacredTools] = useState(true);
   const [shareWithCommunity, setShareWithCommunity] = useState(false);
   const [shareAnonymously, setShareAnonymously] = useState(true);
   
   const { user } = useAuth();
-  const { currentEmotion, setEmotion } = useEmotion();
   const { awardXp } = useGamification();
-  
-  const emotionBackground = useMemo(() => {
-    return MOOD_BACKGROUNDS[currentEmotion] || MOOD_BACKGROUNDS.neutral;
-  }, [currentEmotion]);
-
-  const handleMoodChange = (mood) => {
-    setCurrentMood(mood);
-    setEmotion(mood);
-  };
 
   const handleSelectPrompt = (prompt) => {
     setTitle(prompt.category + " Reflection");
@@ -275,378 +196,252 @@ export default function JournalPage() {
       ]}
     >
       <SEO 
-        title="Reflective Journal - The Genuine Love Project"
-        description="A safe, private space to process thoughts, honor feelings, and witness your growth. Express yourself freely with compassionate journaling."
+        title="Reflective Journal — The Genuine Love Project"
+        description="A safe, private space to process thoughts, honor feelings, and witness your growth."
       />
-      <div 
-        className="min-h-screen safe-padding transition-all duration-700"
-        style={{ background: emotionBackground }}
-      >
-        <div className="container-sm px-responsive">
-          <header className="flex-between mb-8">
-            <div className="flex items-center gap-4">
-              <Link 
-                href="/dashboard" 
-                className="inline-flex items-center gap-2 text-body-sm text-secondary hover:text-brand transition focus-ring rounded-lg px-2 py-1" 
-                data-testid="link-back" 
-                aria-label="Back to dashboard"
-              >
-                <ArrowLeft className="icon-sm" aria-hidden="true" />
-                Back
-              </Link>
-              <div className="flex items-center gap-3">
-                <div className="icon-badge icon-badge-sage icon-circle-lg">
-                  <Notebook className="icon-md" aria-hidden="true" />
-                </div>
-                <div className="stack-xs">
-                  <h1 className="text-display-sm text-brand" data-testid="text-title">Reflective Journal</h1>
-                  <p className="text-body-sm text-secondary">Write freely, at your own pace. There's no right way to do this.</p>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <DataExportButton dataType="journals" />
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="btn btn-gradient"
-                data-testid="button-new"
-                aria-expanded={showForm}
-                aria-controls="journal-form"
-              >
-                <Plus className="w-5 h-5" aria-hidden="true" />
-                <span className="hidden sm:inline">New Entry</span>
-              </button>
-            </div>
-          </header>
 
-          <BenefitsBlock 
-            benefit="A private space to process thoughts and track your emotional growth"
-            duration="3-10 minutes"
-            control="Write as much or little as feels right"
-            disclaimer="Educational wellness support only"
-            className="mb-6"
-          />
+      <div className="flex items-center justify-between mb-6">
+        <DataExportButton dataType="journals" />
+        <button
+          onClick={() => setShowForm(!showForm)}
+          className="px-4 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 transition-colors flex items-center gap-2 text-sm"
+          data-testid="button-new"
+          aria-expanded={showForm}
+          aria-controls="journal-form"
+        >
+          <Plus className="w-4 h-4" aria-hidden="true" />
+          New Entry
+        </button>
+      </div>
 
-          <ClarityCard {...JOURNAL_CLARITY} variant="compact" className="mb-6" />
+      {!showForm && <JournalPrompts onSelectPrompt={handleSelectPrompt} />}
+          
+      {error && (
+        <div className="mb-6 p-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 text-sm flex items-center justify-between" role="alert" data-testid="text-error">
+          <span>{error}</span>
+          <button 
+            onClick={() => setError("")} 
+            className="p-1 hover:bg-red-200 dark:hover:bg-red-800 rounded-lg transition"
+            aria-label="Dismiss error"
+          >
+            <X className="w-4 h-4" aria-hidden="true" />
+          </button>
+        </div>
+      )}
 
-          <ExamplesAccordion 
-            examples={JOURNAL_EXAMPLES} 
-            title="See how others use journaling"
-            className="mb-8"
-          />
-
-          {/* Sacred Healing Tools Section */}
-          <div className="mb-8 space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="font-serif text-xl font-semibold text-[var(--glp-sage-deep)] dark:text-white flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[var(--glp-gold)]" aria-hidden="true" />
-                Wellness Companions
-              </h2>
-              <button
-                type="button"
-                onClick={() => setShowSacredTools(!showSacredTools)}
-                className="text-sm text-[var(--glp-teal)] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#d4af37] rounded px-2 py-1"
-                data-testid="toggle-sacred-tools"
-                aria-expanded={showSacredTools}
-                aria-controls="sacred-tools-section"
-              >
-                {showSacredTools ? "Hide" : "Show"} Tools
-              </button>
-            </div>
-
-            {showSacredTools && (
-              <div id="sacred-tools-section" className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-in fade-in duration-300" data-testid="sacred-tools-section">
-                {/* Left Column - Lotus Guide & Voice Affirmation */}
-                <div className="space-y-4">
-                  <div className="flex justify-center">
-                    <LotusGuide 
-                      mood={currentMood} 
-                      size={120} 
-                      showMessage={true}
-                    />
-                  </div>
-                  <VoiceAffirmation 
-                    mood={currentMood}
-                    className="rounded-xl"
-                  />
-                </div>
-
-                {/* Center Column - Emotion Log */}
-                <div className="lg:col-span-1">
-                  <EmotionLog 
-                    onMoodChange={handleMoodChange}
-                    className="h-full"
-                  />
-                </div>
-
-                {/* Right Column - Calendar & Trends */}
-                <div className="space-y-4">
-                  <EmotionCalendar 
-                    entries={moodEntries}
-                    className="rounded-xl"
-                  />
-                </div>
-              </div>
-            )}
-
-            {showSacredTools && moodEntries.length > 0 && (
-              <MoodTrendsChartJS 
-                entries={moodEntries} 
-                days={14}
-                className="mt-4"
-              />
-            )}
+      {showForm && (
+        <form 
+          id="journal-form" 
+          onSubmit={handleSubmit} 
+          className="mb-6 p-5 rounded-xl border border-border bg-card" 
+          data-testid="form-journal" 
+          aria-label="New journal entry form"
+        >
+          <div className="flex items-center gap-2 mb-5">
+            <PenLine className="w-5 h-5 text-primary" aria-hidden="true" />
+            <h2 className="text-base font-semibold text-foreground">New Journal Entry</h2>
+          </div>
+          
+          <div className="mb-4">
+            <label htmlFor="journal-title" className="block text-sm font-medium mb-2 text-muted-foreground">Title</label>
+            <input
+              id="journal-title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="A word or phrase to remember this by..."
+              className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary text-sm"
+              data-testid="input-title"
+              autoComplete="off"
+            />
+          </div>
+          
+          <div className="mb-5">
+            <label htmlFor="journal-content" className="block text-sm font-medium mb-2 text-muted-foreground">Content</label>
+            <textarea
+              id="journal-content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Whatever is on your mind — no pressure, no structure needed..."
+              rows={6}
+              className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm"
+              data-testid="input-content"
+            />
           </div>
 
-          {/* Journal Prompts */}
-          {!showForm && <JournalPrompts onSelectPrompt={handleSelectPrompt} />}
-          
-          {/* Error Alert */}
-          {error && (
-            <div className="mb-6 p-4 rounded-xl bg-[var(--accent-rose-soft)] border border-[var(--accent-rose)]/30 text-[var(--accent-rose)] flex items-center justify-between" role="alert" data-testid="text-error">
-              <span>{error}</span>
-              <button 
-                onClick={() => setError("")} 
-                className="p-1 hover:bg-[var(--accent-rose)]/20 rounded-lg transition"
-                aria-label="Dismiss error"
-              >
-                <X className="w-4 h-4" aria-hidden="true" />
-              </button>
+          {content.length > 20 && (
+            <div className="mb-5">
+              <JournalAI 
+                journalText={content}
+                onAnalysisComplete={(analysis) => {
+                  if (analysis?.mood) {
+                    setCurrentMood(analysis.mood);
+                  }
+                }}
+                showVoice={true}
+              />
             </div>
           )}
 
-          {/* New Entry Form */}
-          {showForm && (
-            <form 
-              id="journal-form" 
-              onSubmit={handleSubmit} 
-              className="mb-8 card-elevated p-6 animate-scale-in" 
-              data-testid="form-journal" 
-              aria-label="New journal entry form"
-            >
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[var(--primary-soft)] flex items-center justify-center">
-                  <PenLine className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
+          <div className="mb-5 p-4 rounded-xl bg-primary/5 border border-primary/20">
+            <label className="flex items-center justify-between cursor-pointer">
+              <div className="flex items-center gap-3">
+                <Share2 className="w-4 h-4 text-primary" aria-hidden="true" />
+                <div>
+                  <span className="font-medium text-foreground block text-sm">Share with Community</span>
+                  <span className="text-xs text-muted-foreground">Share your reflection anonymously</span>
                 </div>
-                <h2 className="text-lg font-semibold">New Journal Entry</h2>
               </div>
-              
-              <div className="mb-4">
-                <label htmlFor="journal-title" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Title</label>
-                <input
-                  id="journal-title"
-                  type="text"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="A word or phrase to remember this by..."
-                  className="input"
-                  data-testid="input-title"
-                  autoComplete="off"
-                />
-              </div>
-              
-              <div className="mb-6">
-                <label htmlFor="journal-content" className="block text-sm font-medium mb-2 text-[var(--text-secondary)]">Content</label>
-                <textarea
-                  id="journal-content"
-                  value={content}
-                  onChange={(e) => setContent(e.target.value)}
-                  placeholder="Whatever is on your mind — no pressure, no structure needed..."
-                  rows={6}
-                  className="input resize-none"
-                  data-testid="input-content"
-                />
-              </div>
-
-              {/* AI-Powered Insights */}
-              {content.length > 20 && (
-                <div className="mb-6">
-                  <JournalAI 
-                    journalText={content}
-                    onAnalysisComplete={(analysis) => {
-                      if (analysis?.mood) {
-                        setCurrentMood(analysis.mood);
-                      }
-                    }}
-                    showVoice={true}
-                    className="animate-in fade-in duration-300"
-                  />
-                </div>
-              )}
-
-              <div className="mb-6 p-4 rounded-xl bg-[var(--glp-sage)]/10 border border-[var(--glp-sage)]/20">
-                <label className="flex items-center justify-between cursor-pointer">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-[var(--glp-sage)]/20 flex items-center justify-center">
-                      <Share2 className="w-4 h-4 text-[var(--glp-sage)]" aria-hidden="true" />
-                    </div>
-                    <div>
-                      <span className="font-medium text-gray-900 dark:text-white block text-sm">Share with Community</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">Share your reflection with the community</span>
-                    </div>
-                  </div>
+              <input
+                type="checkbox"
+                checked={shareWithCommunity}
+                onChange={(e) => setShareWithCommunity(e.target.checked)}
+                className="w-5 h-5 rounded text-primary focus:ring-primary"
+                data-testid="toggle-share"
+              />
+            </label>
+            
+            {shareWithCommunity && (
+              <div className="mt-3 pt-3 border-t border-primary/20">
+                <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
-                    checked={shareWithCommunity}
-                    onChange={(e) => setShareWithCommunity(e.target.checked)}
-                    className="w-5 h-5 rounded text-[var(--glp-sage)] focus:ring-[var(--glp-sage)]"
-                    data-testid="toggle-share"
+                    checked={shareAnonymously}
+                    onChange={(e) => setShareAnonymously(e.target.checked)}
+                    className="w-4 h-4 rounded text-primary focus:ring-primary"
+                    data-testid="toggle-anonymous"
                   />
+                  <span className="text-sm text-muted-foreground">Share anonymously (hide your name)</span>
                 </label>
-                
-                {shareWithCommunity && (
-                  <div className="mt-3 pt-3 border-t border-[var(--glp-sage)]/20 animate-in fade-in duration-200">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={shareAnonymously}
-                        onChange={(e) => setShareAnonymously(e.target.checked)}
-                        className="w-4 h-4 rounded text-[var(--glp-sage)] focus:ring-[var(--glp-sage)]"
-                        data-testid="toggle-anonymous"
-                      />
-                      <span className="text-sm text-gray-600 dark:text-gray-300">Share anonymously (hide your name)</span>
-                    </label>
-                  </div>
-                )}
               </div>
-              
-              <div className="flex gap-3">
-                <button
-                  type="submit"
-                  disabled={createMutation.isPending}
-                  className="btn btn-gradient flex-1"
-                  data-testid="button-save"
-                  aria-busy={createMutation.isPending}
-                >
-                  {createMutation.isPending ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin motion-reduce:animate-none" aria-hidden="true" />
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles className="w-4 h-4" aria-hidden="true" />
-                      Save Entry
-                    </>
-                  )}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowForm(false)}
-                  className="btn btn-secondary"
-                  data-testid="button-cancel"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          )}
+            )}
+          </div>
+          
+          <div className="flex gap-3">
+            <button
+              type="submit"
+              disabled={createMutation.isPending}
+              className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 text-sm"
+              data-testid="button-save"
+              aria-busy={createMutation.isPending}
+            >
+              {createMutation.isPending ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin motion-reduce:animate-none" aria-hidden="true" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Sparkles className="w-4 h-4" aria-hidden="true" />
+                  Save Entry
+                </>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowForm(false)}
+              className="px-4 py-2.5 rounded-xl font-medium border border-border text-foreground hover:bg-muted transition-colors text-sm"
+              data-testid="button-cancel"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      )}
 
-          {/* Empty State */}
-          {entries.length === 0 ? (
-            <div className="text-center py-16 card-elevated" role="status">
-              <div className="w-20 h-20 rounded-2xl bg-[var(--primary-soft)] flex items-center justify-center mx-auto mb-6">
-                <Notebook className="w-10 h-10 text-[var(--primary)]" aria-hidden="true" />
-              </div>
-              <h2 className="text-xl font-semibold mb-2">Your journal is waiting</h2>
-              <p className="text-[var(--text-secondary)] mb-6">Whenever you're ready, this space is here for you. No rush.</p>
-              <button
-                onClick={() => setShowForm(true)}
-                className="btn btn-gradient"
-              >
-                <Plus className="w-5 h-5" aria-hidden="true" />
-                Write Your First Entry
-              </button>
-            </div>
-          ) : (
-            <section className="space-y-4" aria-label="Journal entries">
-              {entries.map((entry, index) => (
-                <article
-                  key={entry.id}
-                  className="card-elevated overflow-hidden animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.05}s` }}
-                  data-testid={`entry-${entry.id}`}
-                >
-                  <div
-                    className="p-5 flex items-center justify-between cursor-pointer hover:bg-[var(--card-hover)] transition"
-                    onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => e.key === "Enter" && setExpandedId(expandedId === entry.id ? null : entry.id)}
-                    aria-expanded={expandedId === entry.id}
-                    aria-controls={`entry-content-${entry.id}`}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl bg-[var(--primary-soft)] flex items-center justify-center flex-shrink-0">
-                        <PenLine className="w-5 h-5 text-[var(--primary)]" aria-hidden="true" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-lg">{entry.title || "Untitled"}</h3>
-                        <p className="text-sm text-[var(--text-secondary)] flex items-center gap-1.5 mt-1">
-                          <Calendar className="w-4 h-4" aria-hidden="true" />
-                          <time dateTime={entry.createdAt}>
-                            {new Date(entry.createdAt).toLocaleDateString("en-US", {
-                              weekday: "long",
-                              year: "numeric",
-                              month: "long",
-                              day: "numeric",
-                            })}
-                          </time>
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDelete(entry.id);
-                        }}
-                        disabled={deleteMutation.isPending}
-                        className="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--accent-rose)] hover:bg-[var(--accent-rose-soft)] transition disabled:opacity-50"
-                        data-testid={`button-delete-${entry.id}`}
-                        aria-label={`Delete entry: ${entry.title || "Untitled"}`}
-                      >
-                        <Trash2 className="w-5 h-5" aria-hidden="true" />
-                      </button>
-                      <div className="p-2 text-[var(--text-muted)]">
-                        {expandedId === entry.id ? (
-                          <ChevronUp className="w-5 h-5" aria-hidden="true" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5" aria-hidden="true" />
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  {expandedId === entry.id && (
-                    <div 
-                      id={`entry-content-${entry.id}`} 
-                      className="px-5 pb-5 border-t border-[var(--border)] pt-5 ml-16"
-                    >
-                      <p className="text-[var(--text)] leading-relaxed whitespace-pre-wrap">{entry.content}</p>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedEntryForCard(entry);
-                          setReflectionCardOpen(true);
-                        }}
-                        className="mt-4 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-[var(--primary-soft)] text-[var(--primary)] hover:bg-[var(--primary)]/20 transition"
-                        data-testid={`btn-reflection-card-${entry.id}`}
-                      >
-                        <Share2 className="w-4 h-4" />
-                        Create Reflection Card
-                      </button>
-                    </div>
-                  )}
-                </article>
-              ))}
-            </section>
-          )}
-
-          <MIPromptCard context="journal" className="mb-6" />
-
-          <SafetyFooter variant="prominent" />
+      {entries.length === 0 ? (
+        <div className="text-center py-12 rounded-xl border border-border bg-card" role="status">
+          <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <Notebook className="w-8 h-8 text-primary" aria-hidden="true" />
+          </div>
+          <h2 className="text-lg font-semibold text-foreground mb-2">Your journal is waiting</h2>
+          <p className="text-sm text-muted-foreground mb-5">Whenever you're ready, this space is here for you. No rush.</p>
+          <button
+            onClick={() => setShowForm(true)}
+            className="px-5 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 transition-colors inline-flex items-center gap-2 text-sm"
+            data-testid="button-first-entry"
+          >
+            <Plus className="w-4 h-4" aria-hidden="true" />
+            Write Your First Entry
+          </button>
         </div>
-      </div>
+      ) : (
+        <section className="space-y-3" aria-label="Journal entries">
+          {entries.map((entry, index) => (
+            <article
+              key={entry.id}
+              className="rounded-xl border border-border bg-card overflow-hidden"
+              data-testid={`entry-${entry.id}`}
+            >
+              <div
+                className="p-4 flex items-center justify-between cursor-pointer hover:bg-muted/50 transition"
+                onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && setExpandedId(expandedId === entry.id ? null : entry.id)}
+                aria-expanded={expandedId === entry.id}
+                aria-controls={`entry-content-${entry.id}`}
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <PenLine className="w-4 h-4 text-primary flex-shrink-0" aria-hidden="true" />
+                  <div className="min-w-0">
+                    <h3 className="font-semibold text-sm text-foreground truncate">{entry.title || "Untitled"}</h3>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+                      <Calendar className="w-3 h-3" aria-hidden="true" />
+                      <time dateTime={entry.createdAt}>
+                        {new Date(entry.createdAt).toLocaleDateString("en-US", {
+                          month: "short",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </time>
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-1 flex-shrink-0">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(entry.id);
+                    }}
+                    disabled={deleteMutation.isPending}
+                    className="p-2 rounded-lg text-muted-foreground hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition disabled:opacity-50"
+                    data-testid={`button-delete-${entry.id}`}
+                    aria-label={`Delete entry: ${entry.title || "Untitled"}`}
+                  >
+                    <Trash2 className="w-4 h-4" aria-hidden="true" />
+                  </button>
+                  {expandedId === entry.id ? (
+                    <ChevronUp className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                  ) : (
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                  )}
+                </div>
+              </div>
+              {expandedId === entry.id && (
+                <div 
+                  id={`entry-content-${entry.id}`} 
+                  className="px-4 pb-4 border-t border-border pt-4"
+                >
+                  <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{entry.content}</p>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedEntryForCard(entry);
+                      setReflectionCardOpen(true);
+                    }}
+                    className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition"
+                    data-testid={`btn-reflection-card-${entry.id}`}
+                  >
+                    <Share2 className="w-3 h-3" />
+                    Create Reflection Card
+                  </button>
+                </div>
+              )}
+            </article>
+          ))}
+        </section>
+      )}
 
       <ReflectionCardExport
         isOpen={reflectionCardOpen}

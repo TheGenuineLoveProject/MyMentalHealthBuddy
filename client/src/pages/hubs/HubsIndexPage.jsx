@@ -14,7 +14,6 @@ import {
 import { Input } from "@/components/ui/Input";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
-import SafetyFooter from "@/components/ui/SafetyFooter";
 import SEO from "@/components/SEO";
 
 const ALL_HUBS = [
@@ -326,24 +325,23 @@ export default function HubsIndexPage() {
         how: "Browse the topics below and explore what calls to you."
       }}
     >
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        <div className="relative mb-6">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-          <Input
-            type="text"
-            placeholder="Search topics..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 min-h-[44px]"
-            data-testid="input-search-hubs"
-          />
-        </div>
+      <div className="relative mb-5">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+        <Input
+          type="text"
+          placeholder="Search topics..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="pl-10 min-h-[44px]"
+          data-testid="input-search-hubs"
+        />
+      </div>
 
-        <p className="text-sm text-muted-foreground mb-4" data-testid="text-hub-count">
-          {filteredHubs.length} topic{filteredHubs.length !== 1 ? "s" : ""} available
-        </p>
+      <p className="text-sm text-muted-foreground mb-4" data-testid="text-hub-count">
+        {filteredHubs.length} topic{filteredHubs.length !== 1 ? "s" : ""} available
+      </p>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-8">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-6">
           {filteredHubs.map((hub) => {
             const Icon = hub.icon;
             return (
@@ -385,12 +383,9 @@ export default function HubsIndexPage() {
           </div>
         )}
 
-        <div className="text-center text-sm text-muted-foreground mb-8">
-          <p>All tools are educational and self-guided. Go at your own pace.</p>
-        </div>
-
-        <SafetyFooter />
-      </div>
+      <p className="text-center text-xs text-muted-foreground mt-6">
+        All tools are educational and self-guided. Go at your own pace.
+      </p>
     </WellnessPageShell>
     </>
   );
