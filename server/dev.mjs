@@ -228,6 +228,7 @@ async function startServer() {
     next();
   });
 
+  app.use("/api/auth", authRouter);
   app.use("/api/auth/github", githubAuthRouter);
   app.use("/api/admin", adminRouter);
   app.use("/api/admin/soft-launch-metrics", softLaunchMetricsRouter);

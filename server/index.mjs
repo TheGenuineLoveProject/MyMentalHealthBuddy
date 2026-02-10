@@ -136,7 +136,6 @@ import mfaRouter from "./routes/mfa.mjs";
 import canvaOAuthRouter from "./routes/canva-oauth.mjs";
 import apiCoreRouter from "./routes/api.mjs";
 import integrationHealthRouter from "./routes/integrationHealth.mjs";
-import contentGeneratorRouter from "./routes/content-generator.mjs";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -219,11 +218,11 @@ app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://js.stripe.com"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://js.stripe.com", "https://www.googletagmanager.com", "https://www.google-analytics.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
-      imgSrc: ["'self'", "data:", "blob:", "https:"],
-      connectSrc: ["'self'", "https://api.openai.com", "https://api.stripe.com", "wss:", "ws:", "https:"],
+      imgSrc: ["'self'", "data:", "blob:", "https:", "https://www.googletagmanager.com", "https://www.google-analytics.com"],
+      connectSrc: ["'self'", "https://api.openai.com", "https://api.stripe.com", "wss:", "ws:", "https:", "https://www.google-analytics.com", "https://analytics.google.com"],
       frameSrc: ["'self'", "https://js.stripe.com"],
       frameAncestors: frameAncestorsDomains,
       objectSrc: ["'none'"],
@@ -317,7 +316,6 @@ app.use('/api/therapy', therapyRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/webhook', webhookRouter);
 app.use('/api/deployment-readiness', deploymentReadinessRouter);
-app.use('/api/metrics', metricsSummaryRouter);
 app.use('/api/insights', insightsRouter);
 app.use('/api/states', statesRouter);
 app.use('/api/prompts', promptsRouter);
@@ -344,7 +342,7 @@ app.use('/api/gratitude', gratitudeRouter);
 app.use('/api/narrative-drafts', narrativeDraftsRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/progress', progressRouter);
-app.use('/api/reflection', reflectionRouter);
+app.use('/api/reflection', requireAdult, reflectionRouter);
 app.use('/api/email', emailRouter);
 app.use('/api/admin/soft-launch-metrics', softLaunchMetricsRouter);
 app.use('/api/uploads', objectStorageRouter);
