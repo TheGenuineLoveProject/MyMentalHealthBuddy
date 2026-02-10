@@ -342,46 +342,46 @@ export default function HubsIndexPage() {
       </p>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-6">
-          {filteredHubs.map((hub) => {
-            const Icon = hub.icon;
-            return (
-              <Link
-                key={hub.href}
-                href={hub.href}
-                className="group block p-4 bg-card rounded-xl border border-border hover:border-primary/40 hover:shadow-md transition-all"
-                data-testid={`link-hub-${hub.title.toLowerCase().replace(/\s+/g, '-')}`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`p-2.5 rounded-xl flex-shrink-0 ${hub.color || "bg-primary/10 text-primary"}`}>
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
-                      {hub.title}
-                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
-                    </h3>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {hub.description}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-
-        {filteredHubs.length === 0 && (
-          <div className="text-center py-12" data-testid="text-hub-empty">
-            <p className="text-muted-foreground">No topics found matching "{searchQuery}"</p>
-            <button
-              onClick={() => setSearchQuery("")}
-              className="mt-2 text-sm text-primary hover:underline"
-              data-testid="button-clear-hub-search"
+        {filteredHubs.map((hub) => {
+          const Icon = hub.icon;
+          return (
+            <Link
+              key={hub.href}
+              href={hub.href}
+              className="group block p-4 bg-card rounded-xl border border-border hover:border-primary/40 hover:shadow-md transition-all"
+              data-testid={`link-hub-${hub.title.toLowerCase().replace(/\s+/g, '-')}`}
             >
-              Clear search
-            </button>
-          </div>
-        )}
+              <div className="flex items-center gap-3">
+                <div className={`p-2.5 rounded-xl flex-shrink-0 ${hub.color || "bg-primary/10 text-primary"}`}>
+                  <Icon className="w-5 h-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors flex items-center gap-2">
+                    {hub.title}
+                    <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0" />
+                  </h3>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {hub.description}
+                  </p>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+
+      {filteredHubs.length === 0 && (
+        <div className="text-center py-12" data-testid="text-hub-empty">
+          <p className="text-muted-foreground">No topics found matching "{searchQuery}"</p>
+          <button
+            onClick={() => setSearchQuery("")}
+            className="mt-2 text-sm text-primary hover:underline"
+            data-testid="button-clear-hub-search"
+          >
+            Clear search
+          </button>
+        </div>
+      )}
 
       <p className="text-center text-xs text-muted-foreground mt-6">
         All tools are educational and self-guided. Go at your own pace.

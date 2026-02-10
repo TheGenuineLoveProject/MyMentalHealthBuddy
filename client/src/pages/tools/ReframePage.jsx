@@ -32,30 +32,6 @@ const REFRAME_TEMPLATES = [
   },
 ];
 
-const EXAMPLES = [
-  {
-    level: "beginner",
-    title: "Simple reframe (30 seconds)",
-    situation: "Your mind says: \"I'm failing.\"",
-    action: "Reframe: \"I'm learning what doesn't work yet.\" Next step: Do the smallest version for 2 minutes.",
-    result: "Shift from self-judgment to learning orientation.",
-  },
-  {
-    level: "intermediate",
-    title: "Identity statement (2 minutes)",
-    situation: "Your mind says: \"I never follow through.\"",
-    action: "Reframe: \"I'm becoming someone who follows through in tiny ways.\" Next step: Open journal and write one sentence.",
-    result: "Identity shift that allows for growth.",
-  },
-  {
-    level: "advanced",
-    title: "Precision question (3 minutes)",
-    situation: "Your mind says: \"I need to be better.\"",
-    action: "Precision question: \"What does 'better' mean in one observable behavior today?\" Answer: \"Drink water before coffee.\"",
-    result: "Vague self-criticism becomes specific, doable action.",
-  },
-];
-
 const GUARDRAILS = [
   "No \"subconscious reprogramming\" claims",
   "No hypnosis or trance techniques",
@@ -94,38 +70,37 @@ export default function ReframePage() {
   };
 
   return (
-  <WellnessPageShell
-    title="Reframe Tool"
-    subtitle="Shift harsh self-talk into something gentler and more actionable."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A way of shifting harsh self-talk so your mind can find better options.",
-      why: "Words shape what you notice and what you attempt. Gentler words open new paths.",
-      who: "Anyone stuck in harsh inner criticism or hopeless thoughts.",
-      when: "When your mind says 'I can't,' 'I'm broken,' or 'it's hopeless.'",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Notice the harsh phrase, see 3 reframes, pick one observable step."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
+    <WellnessPageShell
+      title="Reframe Tool"
+      subtitle="Shift harsh self-talk into something gentler and more actionable."
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
+      clarity={{
+        what: "A way of shifting harsh self-talk so your mind can find better options.",
+        why: "Words shape what you notice and what you attempt. Gentler words open new paths.",
+        who: "Anyone stuck in harsh inner criticism or hopeless thoughts.",
+        when: "When your mind says 'I can't,' 'I'm broken,' or 'it's hopeless.'",
+        where: "Anywhere you can breathe and write for 1–5 minutes.",
+        how: "Notice the harsh phrase, see 3 reframes, pick one observable step."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+        { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+        { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+      ]}
+    >
       <SEO title="Reframe Tool — The Genuine Love Project" description="Shift harsh self-talk into gentler, more actionable perspectives. Educational cognitive reframing exercises." />
 
-    <div>
-      <div className="max-w-2xl mx-auto space-y-8">
+      <div className="space-y-6">
         <section
-          className="p-6 rounded-2xl border bg-background dark:bg-[hsl(var(--gray-900))] border-[hsl(var(--gray-200))] dark:border-[hsl(var(--gray-700))]"
+          className="p-5 rounded-xl border border-border bg-card"
           aria-labelledby="reframe-input-heading"
           data-testid="section-reframe-input"
         >
           <h2
             id="reframe-input-heading"
-            className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2"
+            className="text-base font-semibold text-foreground mb-4 flex items-center gap-2"
           >
-            <RefreshCw className="w-5 h-5 text-[hsl(var(--amber-600))] dark:text-[hsl(var(--amber-300))]" />
+            <RefreshCw className="w-4 h-4 text-amber-600 dark:text-amber-400" />
             What did your mind say?
           </h2>
 
@@ -138,8 +113,8 @@ export default function ReframePage() {
                 id="thought-input"
                 value={inputThought}
                 onChange={(e) => setInputThought(e.target.value)}
-                placeholder="e.g., &quot;I'm failing at everything&quot; or &quot;I'll never get better&quot;"
-                className="w-full p-4 rounded-xl border bg-background dark:bg-[hsl(var(--gray-800))] border-[hsl(var(--gray-300))] dark:border-[hsl(var(--gray-600))] text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(var(--amber-500))] resize-none"
+                placeholder='e.g., "I\'m failing at everything" or "I\'ll never get better"'
+                className="w-full p-3 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary resize-none text-sm"
                 rows={3}
                 data-testid="input-thought"
               />
@@ -149,7 +124,7 @@ export default function ReframePage() {
               <button
                 onClick={generateReframes}
                 disabled={!inputThought.trim()}
-                className="flex-1 px-4 py-3 rounded-xl font-medium text-white bg-[hsl(var(--amber-600))] hover:bg-[hsl(var(--amber-700))] disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--amber-500))] focus-visible:ring-offset-2 transition-colors"
+                className="flex-1 px-4 py-2.5 rounded-xl font-semibold text-white bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors text-sm"
                 data-testid="button-generate-reframes"
               >
                 Generate Reframes
@@ -157,7 +132,7 @@ export default function ReframePage() {
               {hasGenerated && (
                 <button
                   onClick={handleReset}
-                  className="px-4 py-3 rounded-xl font-medium border border-[hsl(var(--gray-300))] dark:border-[hsl(var(--gray-600))] text-foreground hover:bg-[hsl(var(--gray-100))] dark:hover:bg-[hsl(var(--gray-800))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--gray-500))] focus-visible:ring-offset-2 transition-colors"
+                  className="px-4 py-2.5 rounded-xl font-medium border border-border text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors text-sm"
                   data-testid="button-reset"
                 >
                   Start Over
@@ -263,7 +238,6 @@ export default function ReframePage() {
           </ul>
         </section>
       </div>
-    </div>
-  </WellnessPageShell>
+    </WellnessPageShell>
   );
 }

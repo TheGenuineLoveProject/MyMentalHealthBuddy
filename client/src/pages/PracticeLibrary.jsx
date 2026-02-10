@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/Button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/Card";
 import { Input } from "@/components/ui/Input";
 import SEO from "../components/SEO";
-import SafetyFooter from "../components/ui/SafetyFooter";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/context/AuthContext";
@@ -178,18 +177,18 @@ export default function PracticeLibrary() {
         description="Explore our collection of wellness exercises including breathwork, mindfulness, and grounding techniques."
       />
 
-      <main className="container mx-auto px-4 py-16 max-w-6xl">
-        <header className="text-center mb-12">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-              <Dumbbell className="w-8 h-8 text-primary" />
+      <main className="container mx-auto px-4 py-10 max-w-5xl">
+        <header className="text-center mb-10">
+          <div className="flex justify-center mb-4">
+            <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <Dumbbell className="w-7 h-7 text-primary" />
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight" data-testid="text-page-title">
+          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-3 leading-tight" data-testid="text-page-title">
             Practice Library
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            A collection of evidence-informed exercises to support your wellbeing. 
+          <p className="text-base text-muted-foreground max-w-xl mx-auto">
+            Evidence-informed exercises to support your wellbeing. 
             Start with what feels right for you.
           </p>
         </header>
@@ -221,8 +220,8 @@ export default function PracticeLibrary() {
           })}
         </section>
 
-        <section className="mb-10 p-5 sm:p-6 rounded-2xl border border-primary/20 bg-primary/5" data-testid="section-twelve-practices">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+        <section className="mb-10 p-5 rounded-xl border border-primary/20 bg-primary/5" data-testid="section-twelve-practices">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-primary/10">
                 <BookOpen className="w-5 h-5 text-primary" />
@@ -239,7 +238,7 @@ export default function PracticeLibrary() {
               </Button>
             </Link>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5 sm:gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
             {[
               { n: 1, name: "Willingness", domain: "mind" },
               { n: 2, name: "Clarity", domain: "mind" },
@@ -264,36 +263,32 @@ export default function PracticeLibrary() {
                 <Link
                   key={p.n}
                   href="/twelve-practices"
-                  className="hover:bg-primary/10 transition-colors rounded-lg"
+                  className="flex items-center gap-2.5 px-3 py-2 rounded-lg hover:bg-primary/10 transition-colors"
                   data-testid={`link-practice-${p.n}`}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '8px 12px' }}>
-                    <div className={`flex items-center justify-center rounded-full text-xs font-bold ${domainColors[p.domain]}`} style={{ width: '28px', height: '28px', minWidth: '28px', flexShrink: 0 }}>{p.n}</div>
-                    <div className="text-sm font-medium text-foreground">{p.name}</div>
-                  </div>
+                  <span className={`w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold flex-shrink-0 ${domainColors[p.domain]}`}>{p.n}</span>
+                  <span className="text-sm font-medium text-foreground">{p.name}</span>
                 </Link>
               );
             })}
           </div>
         </section>
 
-        <h2 className="text-2xl font-bold text-foreground mb-6">Wellness Exercises</h2>
+        <h2 className="text-xl font-bold text-foreground mb-5">Wellness Exercises</h2>
 
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-            <Input
-              type="text"
-              placeholder="Search practices..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 min-h-[44px]"
-              data-testid="input-search-practices"
-            />
-          </div>
+        <div className="relative mb-5">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Search practices..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 min-h-[44px]"
+            data-testid="input-search-practices"
+          />
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-4 mb-8" role="group" aria-label="Filter practices by category">
+        <div className="flex gap-2 overflow-x-auto pb-3 mb-6" role="group" aria-label="Filter practices by category">
           {categories.map(cat => {
             const Icon = cat.icon;
             return (
@@ -301,18 +296,18 @@ export default function PracticeLibrary() {
                 key={cat.id}
                 variant={activeCategory === cat.id ? "default" : "outline"}
                 onClick={() => setActiveCategory(cat.id)}
-                className="min-h-[44px] px-4 rounded-lg whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="min-h-[40px] px-3 rounded-lg whitespace-nowrap text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 data-testid={`filter-${cat.id}`}
                 aria-pressed={activeCategory === cat.id}
               >
-                <Icon className="w-4 h-4 mr-2" aria-hidden="true" />
+                <Icon className="w-4 h-4 mr-1.5" aria-hidden="true" />
                 {cat.label}
               </Button>
             );
           })}
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           {filteredPractices.map(practice => (
             <Card key={practice.id} className="hover:shadow-lg transition-shadow">
               <CardHeader className="pb-3">
@@ -378,23 +373,23 @@ export default function PracticeLibrary() {
           </div>
         )}
 
-        <section className="bg-muted/50 rounded-xl p-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-2xl font-bold text-foreground mb-4">Getting Started</h2>
-            <p className="text-muted-foreground mb-6">
-              New to wellness practices? We recommend starting with simple breathing exercises 
-              or grounding techniques. There's no right or wrong way—just begin where you are.
-            </p>
-            <Link href="/breathing">
-              <Button size="lg" className="min-h-[48px] px-8 py-4 rounded-lg" data-testid="button-start-breathing">
-                Try Breathwork First
-              </Button>
-            </Link>
-          </div>
+        <section className="bg-muted/50 rounded-xl p-6 text-center">
+          <h2 className="text-lg font-bold text-foreground mb-2">Getting Started</h2>
+          <p className="text-sm text-muted-foreground mb-4 max-w-lg mx-auto">
+            New to wellness practices? Start with simple breathing exercises 
+            or grounding techniques. There's no right or wrong way.
+          </p>
+          <Link href="/breathing">
+            <Button className="min-h-[44px] px-6 rounded-lg" data-testid="button-start-breathing">
+              Try Breathwork First
+            </Button>
+          </Link>
         </section>
-      </main>
 
-      <SafetyFooter />
+        <p className="text-center text-xs text-muted-foreground mt-6">
+          All tools are educational and self-guided. Go at your own pace.
+        </p>
+      </main>
     </div>
   );
 }

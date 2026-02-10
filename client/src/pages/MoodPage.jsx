@@ -10,12 +10,12 @@ import { pickBenefits } from "@/lib/benefits";
 import "../styles/sacred-visuals.css";
 
 const EMOTIONS = [
-  { name: "Happy", icon: Smile, color: "var(--mood-happy)", bgColor: "var(--mood-happy-soft)" },
-  { name: "Sad", icon: Frown, color: "var(--mood-sad)", bgColor: "var(--mood-sad-soft)" },
-  { name: "Neutral", icon: Meh, color: "var(--text-secondary)", bgColor: "var(--border-light)" },
-  { name: "Anxious", icon: Zap, color: "var(--mood-anxious)", bgColor: "var(--mood-anxious-soft)" },
-  { name: "Calm", icon: Sun, color: "var(--mood-calm)", bgColor: "var(--mood-calm-soft)" },
-  { name: "Tired", icon: Moon, color: "var(--mood-tired)", bgColor: "var(--mood-tired-soft)" },
+  { name: "Happy", icon: Smile, color: "#f59e0b", bgColor: "#fef3c7", tw: "border-amber-400 bg-amber-50 dark:bg-amber-950/40" },
+  { name: "Sad", icon: Frown, color: "#3b82f6", bgColor: "#dbeafe", tw: "border-blue-400 bg-blue-50 dark:bg-blue-950/40" },
+  { name: "Neutral", icon: Meh, color: "#6b7280", bgColor: "#f3f4f6", tw: "border-gray-400 bg-gray-50 dark:bg-gray-800/40" },
+  { name: "Anxious", icon: Zap, color: "#ef4444", bgColor: "#fee2e2", tw: "border-red-400 bg-red-50 dark:bg-red-950/40" },
+  { name: "Calm", icon: Sun, color: "#10b981", bgColor: "#d1fae5", tw: "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/40" },
+  { name: "Tired", icon: Moon, color: "#8b5cf6", bgColor: "#ede9fe", tw: "border-violet-400 bg-violet-50 dark:bg-violet-950/40" },
 ];
 
 const ACTIVITIES = [
@@ -67,10 +67,10 @@ export default function MoodPage() {
   }
 
   function getMoodColor() {
-    if (rating <= 3) return "var(--mood-sad)";
-    if (rating <= 5) return "var(--mood-anxious)";
-    if (rating <= 7) return "var(--mood-calm)";
-    return "var(--mood-happy)";
+    if (rating <= 3) return "#3b82f6";
+    if (rating <= 5) return "#ef4444";
+    if (rating <= 7) return "#10b981";
+    return "#f59e0b";
   }
 
   if (success) {
@@ -141,7 +141,7 @@ export default function MoodPage() {
             onChange={(e) => setRating(Number(e.target.value))}
             className="w-full h-3 rounded-full appearance-none cursor-pointer"
             style={{
-              background: `linear-gradient(to right, var(--mood-sad) 0%, var(--mood-anxious) 40%, var(--mood-calm) 70%, var(--mood-happy) 100%)`,
+              background: `linear-gradient(to right, #3b82f6 0%, #ef4444 40%, #10b981 70%, #f59e0b 100%)`,
             }}
             data-testid="input-rating"
             aria-label={`Mood rating: ${rating} out of 10`}
@@ -159,26 +159,23 @@ export default function MoodPage() {
         <fieldset className="p-5 rounded-xl border border-border bg-card">
           <legend className="text-base font-semibold mb-4 text-foreground">Select an emotion</legend>
           <div className="grid grid-cols-3 gap-3" role="radiogroup" aria-label="Emotion selection">
-            {EMOTIONS.map(({ name, icon: Icon, color, bgColor }) => (
+            {EMOTIONS.map(({ name, icon: Icon, color, tw }) => (
               <button
                 key={name}
                 type="button"
                 onClick={() => setEmotion(name)}
                 className={`p-3 rounded-xl border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary ${
                   emotion === name
-                    ? "border-primary shadow-md scale-[1.03]"
+                    ? `${tw} shadow-md scale-[1.03]`
                     : "border-border hover:border-muted-foreground bg-card"
                 }`}
-                style={{
-                  backgroundColor: emotion === name ? bgColor : undefined,
-                }}
                 data-testid={`button-emotion-${name.toLowerCase()}`}
                 aria-pressed={emotion === name}
                 aria-label={`Select emotion: ${name}`}
               >
                 <Icon 
                   className="w-7 h-7 mx-auto mb-1.5 transition-transform" 
-                  style={{ color: color }}
+                  style={{ color }}
                   aria-hidden="true" 
                 />
                 <span className="text-xs font-medium">{name}</span>

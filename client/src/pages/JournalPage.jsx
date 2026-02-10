@@ -40,22 +40,22 @@ function JournalPrompts({ onSelectPrompt }) {
   };
   
   return (
-    <div className="mb-6 p-4 rounded-xl bg-[var(--primary-soft)] border border-[var(--primary)]/20" data-testid="journal-prompts">
+    <div className="mb-6 p-4 rounded-xl bg-primary/5 border border-primary/20" data-testid="journal-prompts">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-start gap-3 flex-1">
-          <div className="w-8 h-8 rounded-lg bg-[var(--primary)]/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-            <Lightbulb className="w-4 h-4 text-[var(--primary)]" aria-hidden="true" />
+          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <Lightbulb className="w-4 h-4 text-primary" aria-hidden="true" />
           </div>
           <div>
-            <span className="text-xs font-medium text-[var(--primary)] uppercase tracking-wide">{currentPrompt.category}</span>
-            <p className="text-sm text-[var(--text-primary)] mt-1">{currentPrompt.prompt}</p>
+            <span className="text-xs font-medium text-primary uppercase tracking-wide">{currentPrompt.category}</span>
+            <p className="text-sm text-foreground mt-1">{currentPrompt.prompt}</p>
           </div>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
             type="button"
             onClick={refreshPrompt}
-            className="p-2 rounded-lg hover:bg-[var(--primary)]/20 transition text-[var(--primary)]"
+            className="p-2 rounded-lg hover:bg-primary/10 transition text-primary"
             aria-label="Get new prompt"
             data-testid="button-refresh-prompt"
           >
@@ -64,7 +64,7 @@ function JournalPrompts({ onSelectPrompt }) {
           <button
             type="button"
             onClick={() => onSelectPrompt(currentPrompt)}
-            className="px-3 py-1.5 text-xs font-medium bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition"
+            className="px-3 py-1.5 text-xs font-medium bg-primary text-white rounded-lg hover:bg-primary/90 transition"
             data-testid="button-use-prompt"
           >
             Use This
@@ -165,12 +165,15 @@ export default function JournalPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen p-6 bg-gradient-mesh">
-        <div className="max-w-2xl mx-auto space-y-4">
-          <div className="skeleton h-10 w-1/3 rounded-xl"></div>
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="skeleton h-28 rounded-xl"></div>
-          ))}
+      <div className="mx-auto max-w-5xl px-4 py-8">
+        <div className="space-y-4">
+          <div className="h-8 w-48 rounded-lg bg-muted animate-pulse"></div>
+          <div className="h-4 w-72 rounded bg-muted animate-pulse"></div>
+          <div className="mt-6 space-y-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="h-20 rounded-xl bg-muted animate-pulse"></div>
+            ))}
+          </div>
         </div>
       </div>
     );
