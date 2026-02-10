@@ -46,9 +46,9 @@ function JournalPrompts({ onSelectPrompt }) {
           <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
             <Lightbulb className="w-4 h-4 text-primary" aria-hidden="true" />
           </div>
-          <div>
+          <div className="min-w-0">
             <span className="text-xs font-medium text-primary uppercase tracking-wide">{currentPrompt.category}</span>
-            <p className="text-sm text-foreground mt-1">{currentPrompt.prompt}</p>
+            <p className="text-sm text-foreground mt-1 break-words">{currentPrompt.prompt}</p>
           </div>
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
@@ -203,7 +203,7 @@ export default function JournalPage() {
         description="A safe, private space to process thoughts, honor feelings, and witness your growth."
       />
 
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <DataExportButton dataType="journals" />
         <button
           onClick={() => setShowForm(!showForm)}
@@ -373,11 +373,11 @@ export default function JournalPage() {
           {entries.map((entry, index) => (
             <article
               key={entry.id}
-              className="rounded-xl border border-border bg-card overflow-hidden"
+              className="rounded-xl border border-border bg-card"
               data-testid={`entry-${entry.id}`}
             >
               <div
-                className="p-4 flex items-center justify-between cursor-pointer hover:bg-muted/50 transition"
+                className="p-4 flex items-center justify-between gap-2 cursor-pointer hover:bg-muted/50 transition"
                 onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
                 role="button"
                 tabIndex={0}
@@ -426,7 +426,7 @@ export default function JournalPage() {
                   id={`entry-content-${entry.id}`} 
                   className="px-4 pb-4 border-t border-border pt-4"
                 >
-                  <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">{entry.content}</p>
+                  <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap break-words" style={{ overflowWrap: 'anywhere' }}>{entry.content}</p>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();

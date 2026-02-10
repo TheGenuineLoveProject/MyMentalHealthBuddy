@@ -25,7 +25,7 @@ export function WellnessPageShell({
   ];
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8">
+    <div className="mx-auto max-w-5xl px-4 py-8">
       {title ? (
         <header className="mb-6">
           <h1 className="text-3xl font-semibold text-foreground">{title}</h1>
@@ -33,8 +33,10 @@ export function WellnessPageShell({
         </header>
       ) : null}
 
-      <section className="rounded-xl border border-border bg-card p-4 md:p-6 mb-6">
-        {children}
+      <section className="rounded-xl border border-border bg-card p-4 md:p-6 mb-6 overflow-hidden">
+        <div className="overflow-x-hidden overflow-y-visible break-words">
+          {children}
+        </div>
       </section>
 
       <button
@@ -106,6 +108,6 @@ export function WellnessPageShell({
         </div>
         <SafetyFooterStrip />
       </div>
-    </main>
+    </div>
   );
 }
