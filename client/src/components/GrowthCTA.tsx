@@ -8,7 +8,7 @@ export function GrowthCTA() {
         Join a growing community choosing compassion, reflection, and genuine love.
       </p>
       <a
-        href="/api/login"
+        href="/login"
         className="inline-block bg-white text-sage px-6 py-3 rounded-full font-inter"
       >
         Begin Gently

@@ -76,7 +76,7 @@ export default function Pricing() {
 
   const startCheckout = async (plan, billingInterval) => {
     if (!user) {
-      window.location.href = "/api/login";
+      window.location.href = "/login";
       return;
     }
 
@@ -249,7 +249,7 @@ export default function Pricing() {
                     </button>
                   ) : (
                     <a 
-                      href="/api/login"
+                      href="/login"
                       className="block w-full py-3.5 px-6 text-center btn-secondary-premium"
                       data-testid="button-get-started"
                     >

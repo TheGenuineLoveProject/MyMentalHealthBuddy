@@ -116,9 +116,9 @@ export default function Login() {
             <div className="mt-8 pt-6 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
               <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 New here?{" "}
-                <a href="/api/login" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
+                <Link href="/register" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}>
                   Create an account
-                </a>
+                </Link>
               </p>
             </div>
           </div>

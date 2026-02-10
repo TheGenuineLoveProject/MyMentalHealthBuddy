@@ -7,7 +7,7 @@ export default function ProtectedRoute({ children }) {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      window.location.href = "/api/login";
+      window.location.href = "/login";
     }
   }, [isLoading, user]);
 

@@ -72,7 +72,7 @@ export default function Onboarding() {
 
   useEffect(() => {
     if (!authLoading && !authData) {
-      window.location.href = "/api/login";
+      window.location.href = "/login";
     }
   }, [authLoading, authData]);
 
@@ -89,7 +89,7 @@ export default function Onboarding() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <p className="mb-4">Please sign in to continue</p>
-          <a href="/api/login" className="btn btn-gradient">Sign In</a>
+          <a href="/login" className="btn btn-gradient">Sign In</a>
         </div>
       </div>
     );

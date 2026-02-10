@@ -44,7 +44,7 @@ export default function ProtectedRoute({ children }) {
             </p>
           </div>
           
-          <a href="/api/login" className="block">
+          <a href="/login" className="block">
             <Button 
               className="w-full bg-gradient-to-r from-[#d4af37] to-[#ffd700] text-white hover:opacity-90 gap-2"
               data-testid="button-protected-login"

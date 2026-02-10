@@ -161,7 +161,7 @@ function Header() {
 
           {/* CTA Button */}
           <a 
-            href="/api/login" 
+            href="/login" 
             className="flex items-center gap-2.5 rounded-full px-6 md:px-7 py-3 md:py-3.5 text-sm font-semibold transition-all hover:opacity-90 hover:shadow-lg text-[var(--glp-sage-deep)]"
             style={{ 
               background: "var(--glp-gold-gradient)",
@@ -239,7 +239,7 @@ function Header() {
               Sign In
             </Link>
             <a 
-              href="/api/login" 
+              href="/login" 
               className="flex items-center justify-center gap-2 rounded-xl px-4 py-3 text-sm font-semibold text-[var(--glp-sage-deep)]"
               style={{ background: "var(--glp-gold-gradient)" }}
               data-testid="link-mobile-get-started"

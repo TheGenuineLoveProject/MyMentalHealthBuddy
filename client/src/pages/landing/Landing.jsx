@@ -136,7 +136,7 @@ export default function Landing() {
               Sign in
             </Link>
             <a
-              href="/api/login"
+              href="/login"
               data-testid="link-start-free"
               className="btn-premium text-sm"
             >
@@ -180,7 +180,7 @@ export default function Landing() {
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
-              <a href="/api/login" className="btn-premium" data-testid="link-cta-register">
+              <a href="/login" className="btn-premium" data-testid="link-cta-register">
                 <Sparkles className="icon-sm" aria-hidden="true" />
                 Try It Free
               </a>

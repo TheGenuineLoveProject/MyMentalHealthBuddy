@@ -25,7 +25,7 @@ export default function SacredNavBar() {
           >
             Testimonials
           </a>
-          <a href="/api/login" className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity cursor-pointer" data-testid="nav-get-started">
+          <a href="/login" className="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-lg font-medium hover:opacity-90 transition-opacity cursor-pointer" data-testid="nav-get-started">
             Get Started
           </a>
         </div>

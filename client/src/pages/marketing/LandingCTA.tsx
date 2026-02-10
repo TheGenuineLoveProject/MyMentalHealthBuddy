@@ -49,7 +49,7 @@ export default function LandingCTA() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
           <a 
-            href="/api/login"
+            href="/login"
             className="group flex items-center gap-2 px-8 py-4 bg-white text-teal-700 font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all hover:scale-105"
             data-testid="link-cta-start"
           >

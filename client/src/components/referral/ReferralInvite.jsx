@@ -34,7 +34,7 @@ export default function ReferralInvite({ className = "" }) {
           Sign up to invite friends. They get 7 days of Plus free, and you get a bonus card pack.
         </p>
         <a
-          href="/api/login"
+          href="/login"
           className="inline-flex items-center gap-2 px-5 py-2.5 bg-[var(--glp-sage)] text-white rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
           data-testid="link-signup-referral"
         >

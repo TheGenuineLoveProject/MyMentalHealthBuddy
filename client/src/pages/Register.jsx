@@ -129,11 +129,11 @@ export default function Register() {
             <div className="mt-8 pt-6 text-center" style={{ borderTop: '1px solid var(--glp-sage-20)' }}>
               <p className="text-sm" style={{ color: 'var(--glp-sage)' }}>
                 Already have an account?{" "}
-                <a href="/api/login" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}
+                <Link href="/login" className="font-semibold transition-colors" style={{ color: 'var(--glp-sage-deep)' }}
                   data-testid="link-login"
                 >
                   Sign in
-                </a>
+                </Link>
               </p>
             </div>
           </div>

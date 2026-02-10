@@ -244,7 +244,7 @@ export default function Home() {
           titleHighlight="built around how you actually feel."
           subtitle="Journaling, mood tracking, and AI-assisted reflection for people who carry more than they show. Notice patterns, understand yourself better, check in when you want to — all in complete privacy."
           primaryCta={{ 
-            href: '/api/login', 
+            href: '/login', 
             label: 'Try It Free',
             icon: <Heart className="w-5 h-5" />
           }}
@@ -545,7 +545,7 @@ export default function Home() {
               No commitment required. Create a free account, try the tools, and decide for yourself whether they're useful.
             </p>
             <a
-              href="/api/login"
+              href="/login"
               className="inline-flex items-center gap-2 px-8 py-4 font-semibold rounded-xl transition-opacity hover:opacity-90 shadow-lg"
               style={{ 
                 background: 'var(--sacred-white, #faf9f7)', 

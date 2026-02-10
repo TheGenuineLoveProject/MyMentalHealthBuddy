@@ -202,7 +202,7 @@ export function AuthProvider({ children }) {
   }
 
   const loginWithReplit = () => {
-    window.location.href = "/api/login";
+    window.location.href = "/login";
   };
 
   return (

@@ -7,7 +7,7 @@ export default function RequireRole({ role, children }) {
     return (
       <div style={{ padding: 24 }}>
         <p>Please log in to access this page.</p>
-        <a href="/api/login">Sign In</a>
+        <a href="/login">Sign In</a>
       </div>
     );
   }

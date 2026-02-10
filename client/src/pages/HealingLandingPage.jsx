@@ -480,7 +480,7 @@ export default function HealingLandingPage() {
           </p>
 
           <a 
-            href="/api/login"
+            href="/login"
             className="group px-12 py-5 rounded-full font-semibold text-lg inline-flex items-center gap-3 transition-all duration-400 hover-glow-gold"
             style={{ 
               background: 'linear-gradient(135deg, #eac33b 0%, #ddb12d 100%)',

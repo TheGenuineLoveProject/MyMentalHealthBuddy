@@ -127,7 +127,7 @@ export default function SacredNav({ className = "" }) {
             )}
 
             {!isLoading && !user && (
-              <a href="/api/login">
+              <a href="/login">
                 <Button 
                   size="sm"
                   className="bg-gradient-to-r from-[#d4af37] to-[#ffd700] text-white hover:opacity-90"

@@ -121,7 +121,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
 
-                <a href={plan.id === "free" ? "/api/login" : "/upgrade"}>
+                <a href={plan.id === "free" ? "/login" : "/upgrade"}>
                   <Button 
                     className="w-full min-h-[48px] px-6 py-3 text-base font-semibold rounded-lg" 
                     variant={plan.popular ? "default" : "outline"}

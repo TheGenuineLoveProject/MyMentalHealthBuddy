@@ -12,7 +12,7 @@ export default function HeroSection() {
           Mood tracking, journaling, and AI reflection tools — private by design, free to start.
         </p>
         <div className="mt-8 flex flex-wrap gap-4 justify-center">
-          <a href="/api/login"
+          <a href="/login"
             className="px-6 py-3 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-semibold rounded-xl shadow-lg hover:scale-105 transition-transform inline-block"
             data-testid="btn-start-free"
           >
