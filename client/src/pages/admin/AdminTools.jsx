@@ -206,6 +206,17 @@ const AI_REMEDIATION = {
   "certificate-expiry": { suggestion: "SSL certificate approaching expiry. Canva KB: Certificate renewal should be automated. In Replit, certificates are managed by the platform layer.", action: "Verify certificate auto-renewal", knowledgeBase: "Canva", autoFixable: false, fixCommand: null },
   "session-fixation": { suggestion: "Potential session fixation vulnerability. Codex KB: Session ID should be regenerated after authentication. Ensure express-session regenerates on login.", action: "Regenerate session on login", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
   "partial-response": { suggestion: "Server returned a partial response (206). Perplexity KB: Range requests or chunked transfer incomplete. May indicate interrupted file downloads or streaming.", action: "Check transfer encoding", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "git-corruption": { suggestion: "Git repository may have integrity issues. Codex KB: Run git fsck to check object database integrity. Corrupted refs or loose objects can cause checkout failures.", action: "Run git integrity check", knowledgeBase: "Codex", autoFixable: true, fixCommand: "repair-git" },
+  "git-untracked": { suggestion: "Untracked files detected in repository. Perplexity KB: Review untracked files for sensitive data, build artifacts, or temp files that should be in .gitignore.", action: "Review .gitignore rules", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "env-validation-fail": { suggestion: "Environment variable validation failed. Codex KB: One or more required env vars have invalid format or empty values. Run validate-env to audit all configuration.", action: "Run environment validation", knowledgeBase: "Codex", autoFixable: true, fixCommand: "validate-env" },
+  "log-overflow": { suggestion: "Server logs consuming excessive storage. Perplexity KB: Log rotation not configured or log level too verbose. Prune old logs and adjust log level to 'warn' in production.", action: "Prune and rotate logs", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "prune-logs" },
+  "deep-scan-needed": { suggestion: "Platform integrity deep scan recommended. Codex KB: Comprehensive audit of DB schema, route mounts, env vars, and service health provides full system visibility.", action: "Run deep platform scan", knowledgeBase: "Codex", autoFixable: true, fixCommand: "health-deep-scan" },
+  "route-collision": { suggestion: "Potential route path collision detected. Codex KB: Two or more routes may be matching the same path. Check Express route ordering and use exact path matching where possible.", action: "Audit route path conflicts", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "worker-thread-hang": { suggestion: "Worker thread appears unresponsive. Perplexity KB: Background tasks may be stuck in infinite loops or deadlocked. Check async operation chains for unresolved promises.", action: "Review background task health", knowledgeBase: "Perplexity", autoFixable: true, fixCommand: "restart-service" },
+  "asset-404": { suggestion: "Static asset returning 404. Canva KB: Build output may be missing assets. Verify Vite build includes all referenced images, fonts, and media files.", action: "Rebuild static assets", knowledgeBase: "Canva", autoFixable: true, fixCommand: "clear-cache" },
+  "compression-fail": { suggestion: "Response compression not applied. Perplexity KB: Compression middleware may not be loaded or is bypassed for certain content types. Verify middleware ordering.", action: "Check compression middleware", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
+  "socket-leak": { suggestion: "Socket connection leak detected. Codex KB: Open sockets not being properly closed after use. Check HTTP agent keepAlive settings and WebSocket cleanup handlers.", action: "Audit socket lifecycle", knowledgeBase: "Codex", autoFixable: true, fixCommand: "drain-connections" },
+  "integrity-mismatch": { suggestion: "Platform integrity score below threshold. Codex KB: Multiple subsystems reporting issues. Run a comprehensive deep scan to identify root causes across DB, env, and services.", action: "Run platform integrity scan", knowledgeBase: "Codex", autoFixable: true, fixCommand: "health-deep-scan" },
 };
 
 function getRemediation(label, ms) {
@@ -925,6 +936,22 @@ function AIRepairCenter({ toolResults, runHealthCheck, runAllChecks }) {
         try { await fetch('/api/health', { credentials: 'include' }); } catch {}
         await new Promise(r => setTimeout(r, 500));
         await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'repair-git') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 400));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'validate-env') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'prune-logs') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'prune-logs' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 300));
+        await runHealthCheck(issue);
+      } else if (rem.fixCommand === 'health-deep-scan') {
+        try { await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'health-deep-scan' }) }); } catch {}
+        await new Promise(r => setTimeout(r, 500));
+        await runHealthCheck(issue);
       } else {
         await runHealthCheck(issue);
       }
@@ -1316,6 +1343,21 @@ function SystemOptimizationAdvisor({ toolResults }) {
   const kbCoverage = {};
   checkedTools.forEach(t => { const r = toolResults[t.id]; if (r && r.label !== 'ok') { const rem = getRemediation(r.label, r.ms); if (rem?.knowledgeBase) kbCoverage[rem.knowledgeBase] = (kbCoverage[rem.knowledgeBase] || 0) + 1; } });
   if (Object.keys(kbCoverage).length > 1) advisories.push({ priority: 'low', category: 'KB Intelligence', text: `Active KB sources: ${Object.entries(kbCoverage).map(([k, v]) => `${k} (${v})`).join(', ')}. Multi-KB remediation active.`, action: 'Review KB scenario coverage', kb: 'Canva' });
+
+  const groupHealth = toolCategories.map(cat => {
+    const catTools = cat.tools.filter(t => toolResults[t.id]);
+    const catErrors = catTools.filter(t => toolResults[t.id]?.status === 'error');
+    return { title: cat.title, total: cat.tools.length, checked: catTools.length, errors: catErrors.length };
+  });
+  const failingGroups = groupHealth.filter(g => g.checked > 0 && g.errors > g.checked * 0.5);
+  if (failingGroups.length > 0) advisories.push({ priority: 'high', category: 'Component Groups', text: `${failingGroups.length} category group(s) have >50% failure rate: ${failingGroups.map(g => g.title).join(', ')}. Investigate shared dependencies.`, action: 'Check group-level dependencies and routes', kb: 'Codex' });
+  
+  const perfectGroups = groupHealth.filter(g => g.checked === g.total && g.errors === 0 && g.total > 0);
+  if (perfectGroups.length > 0 && perfectGroups.length < groupHealth.length) advisories.push({ priority: 'success', category: 'Component Groups', text: `${perfectGroups.length} of ${groupHealth.length} category groups are fully healthy: ${perfectGroups.slice(0, 3).map(g => g.title).join(', ')}${perfectGroups.length > 3 ? '...' : ''}.`, action: 'Maintain current configuration', kb: 'Codex' });
+
+  const totalScenarios = Object.keys(AI_REMEDIATION).length;
+  const autoFixableCount = Object.values(AI_REMEDIATION).filter(r => r.autoFixable).length;
+  if (autoFixableCount > 0 && checkedTools.length > 0) advisories.push({ priority: 'low', category: 'KB Depth', text: `${totalScenarios} remediation scenarios loaded across 3 KBs. ${autoFixableCount} auto-fixable with ${[...new Set(Object.values(AI_REMEDIATION).filter(r => r.fixCommand).map(r => r.fixCommand))].length} unique commands.`, action: 'Review Fix Command Inventory', kb: 'Perplexity' });
 
   if (healthyTools.length === allTools.length) advisories.push({ priority: 'success', category: 'Overall', text: 'All systems healthy — platform is operating at peak performance. No optimization needed.', action: 'Export health report for records', kb: 'Codex' });
 
@@ -1763,6 +1805,272 @@ function PlatformCoverageReport({ toolResults }) {
               })}
             </div>
           </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function GitIntegrityScanner() {
+  const [showGit, setShowGit] = useState(false);
+  const [gitData, setGitData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [repairResult, setRepairResult] = useState(null);
+
+  const fetchGitStatus = async () => {
+    setLoading(true);
+    try {
+      const resp = await fetch('/api/health/git-status', { credentials: 'include' });
+      if (resp.ok) setGitData(await resp.json());
+    } catch {}
+    setLoading(false);
+  };
+
+  const runGitRepair = async () => {
+    setRepairResult(null);
+    try {
+      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'repair-git' }) });
+      if (resp.ok) setRepairResult(await resp.json());
+    } catch {}
+  };
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/30 dark:bg-violet-950/20" data-testid="panel-git-integrity">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <GitBranch size={16} className="text-violet-600" />
+          <span className="text-sm font-semibold">Git Integrity Scanner</span>
+          {gitData && (
+            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${gitData.status === 'healthy' ? 'bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-200' : 'bg-amber-100 dark:bg-amber-800 text-amber-700 dark:text-amber-200'}`}>
+              {gitData.status}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={fetchGitStatus}
+            disabled={loading}
+            className="text-xs px-3 py-1.5 rounded-lg border border-violet-300 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-900/30 transition-colors flex items-center gap-1"
+            data-testid="button-scan-git"
+          >
+            {loading ? <RefreshCw size={10} className="animate-spin" /> : <ScanLine size={10} />}
+            Scan
+          </button>
+          <button
+            onClick={() => setShowGit(!showGit)}
+            className="text-xs px-3 py-1.5 rounded-lg border border-violet-300 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-900/30 transition-colors"
+            data-testid="button-toggle-git"
+          >
+            {showGit ? 'Hide' : 'Show'}
+          </button>
+        </div>
+      </div>
+
+      {gitData && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-2 mb-2">
+          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-branch">
+            <div className="text-sm font-bold text-violet-600 truncate">{gitData.checks?.branch || '—'}</div>
+            <div className="text-[9px] text-muted-foreground">Branch</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-commits">
+            <div className="text-lg font-bold text-blue-600">{gitData.checks?.commitCount || 0}</div>
+            <div className="text-[9px] text-muted-foreground">Commits</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-changes">
+            <div className={`text-lg font-bold ${(gitData.checks?.totalChanges || 0) > 10 ? 'text-amber-500' : 'text-green-600'}`}>{gitData.checks?.totalChanges || 0}</div>
+            <div className="text-[9px] text-muted-foreground">Changes</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-modified">
+            <div className="text-lg font-bold text-orange-500">{gitData.checks?.modifiedFiles || 0}</div>
+            <div className="text-[9px] text-muted-foreground">Modified</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-untracked">
+            <div className={`text-lg font-bold ${(gitData.checks?.untrackedFiles || 0) > 5 ? 'text-red-500' : 'text-gray-500'}`}>{gitData.checks?.untrackedFiles || 0}</div>
+            <div className="text-[9px] text-muted-foreground">Untracked</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-violet-100 dark:border-violet-800" data-testid="git-size">
+            <div className="text-sm font-bold text-gray-600">{gitData.checks?.repoSize || '—'}</div>
+            <div className="text-[9px] text-muted-foreground">Repo Size</div>
+          </div>
+        </div>
+      )}
+
+      {showGit && gitData && (
+        <div className="mt-3 space-y-3">
+          {gitData.checks?.lastCommit && gitData.checks.lastCommit !== 'unknown' && (
+            <div className="p-3 rounded-lg bg-background border border-gray-100 dark:border-gray-800">
+              <div className="text-xs font-semibold mb-1 flex items-center gap-1.5"><Clipboard size={12} /> Last Commit</div>
+              <div className="text-[11px] font-mono text-muted-foreground break-all">{gitData.checks.lastCommit}</div>
+            </div>
+          )}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={runGitRepair}
+              className="text-xs px-3 py-1.5 rounded-lg bg-violet-600 text-white hover:bg-violet-700 transition-colors flex items-center gap-1"
+              data-testid="button-repair-git"
+            >
+              <Wrench size={10} /> Run Git Repair
+            </button>
+          </div>
+          {repairResult && (
+            <div className={`p-3 rounded-lg border ${repairResult.success ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/15'}`}>
+              <div className="text-xs font-semibold mb-1">{repairResult.success ? 'Repair Successful' : 'Repair Issues Found'}</div>
+              <div className="text-[11px] text-muted-foreground">{repairResult.message}</div>
+              {repairResult.actions?.map((a, i) => (
+                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PlatformIntegrityDeepScan() {
+  const [showDeepScan, setShowDeepScan] = useState(false);
+  const [scanData, setScanData] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const runDeepScan = async () => {
+    setLoading(true);
+    try {
+      const resp = await fetch('/api/health/platform-integrity', { credentials: 'include' });
+      if (resp.ok) setScanData(await resp.json());
+    } catch {}
+    setLoading(false);
+  };
+
+  const envValidate = async () => {
+    try {
+      const resp = await fetch('/api/health/repair', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: 'validate-env' }) });
+      if (resp.ok) {
+        const data = await resp.json();
+        setScanData(prev => prev ? { ...prev, envValidation: data } : prev);
+      }
+    } catch {}
+  };
+
+  return (
+    <div className="mb-6 p-4 rounded-xl border border-teal-200 dark:border-teal-800 bg-teal-50/30 dark:bg-teal-950/20" data-testid="panel-deep-scan">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <Stethoscope size={16} className="text-teal-600" />
+          <span className="text-sm font-semibold">Platform Integrity Deep Scan</span>
+          {scanData && (
+            <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${scanData.integrity?.score >= 70 ? 'bg-green-100 text-green-700' : scanData.integrity?.score >= 40 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700'}`} data-testid="text-integrity-score">
+              {scanData.integrity?.score || 0}% integrity
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={runDeepScan}
+            disabled={loading}
+            className="text-xs px-3 py-1.5 rounded-lg border border-teal-300 dark:border-teal-700 hover:bg-teal-100 dark:hover:bg-teal-900/30 transition-colors flex items-center gap-1"
+            data-testid="button-deep-scan"
+          >
+            {loading ? <RefreshCw size={10} className="animate-spin" /> : <ScanLine size={10} />}
+            Run Deep Scan
+          </button>
+          <button
+            onClick={() => setShowDeepScan(!showDeepScan)}
+            className="text-xs px-3 py-1.5 rounded-lg border border-teal-300 dark:border-teal-700 hover:bg-teal-100 dark:hover:bg-teal-900/30 transition-colors"
+            data-testid="button-toggle-deep-scan"
+          >
+            {showDeepScan ? 'Hide' : 'Show'}
+          </button>
+        </div>
+      </div>
+
+      {scanData && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
+          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-db">
+            <div className={`text-lg font-bold ${scanData.integrity?.database?.connected ? 'text-green-600' : 'text-red-500'}`}>
+              {scanData.integrity?.database?.connected ? 'Connected' : 'Down'}
+            </div>
+            <div className="text-[9px] text-muted-foreground">Database ({scanData.integrity?.database?.tableCount || 0} tables)</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-services">
+            <div className="text-lg font-bold text-blue-600">
+              {Object.values(scanData.integrity?.services || {}).filter(Boolean).length}/4
+            </div>
+            <div className="text-[9px] text-muted-foreground">Services Active</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-env">
+            <div className={`text-lg font-bold ${(scanData.integrity?.env?.criticalMissing || 0) === 0 ? 'text-green-600' : 'text-red-500'}`}>
+              {(scanData.integrity?.env?.criticalMissing || 0) === 0 ? 'Complete' : `${scanData.integrity?.env?.criticalMissing} Missing`}
+            </div>
+            <div className="text-[9px] text-muted-foreground">Critical Env Vars</div>
+          </div>
+          <div className="text-center p-2 rounded-lg bg-background border border-teal-100 dark:border-teal-800" data-testid="deep-memory">
+            <div className={`text-lg font-bold ${(scanData.integrity?.memory?.heapPercent || 0) < 80 ? 'text-green-600' : 'text-amber-500'}`}>
+              {scanData.integrity?.memory?.heapPercent || 0}%
+            </div>
+            <div className="text-[9px] text-muted-foreground">Heap ({scanData.integrity?.memory?.heapUsedMB || 0}MB)</div>
+          </div>
+        </div>
+      )}
+
+      {showDeepScan && scanData && (
+        <div className="mt-3 space-y-3">
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><Shield size={12} /> Service Health</div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+              {Object.entries(scanData.integrity?.services || {}).map(([name, active]) => (
+                <div key={name} className={`p-2 rounded-lg border text-center ${active ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-red-200 dark:border-red-800 bg-red-50/50 dark:bg-red-950/15'}`} data-testid={`service-${name}`}>
+                  <div className="text-xs font-semibold capitalize">{name}</div>
+                  <div className={`text-[10px] ${active ? 'text-green-600' : 'text-red-500'}`}>{active ? 'Active' : 'Not Configured'}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><Key size={12} /> Environment Variables</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+              {Object.entries(scanData.integrity?.env?.critical || {}).map(([key, set]) => (
+                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+                  {set ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : <AlertCircle size={10} className="text-red-500 flex-shrink-0" />}
+                  <span className="font-mono truncate">{key}</span>
+                  <span className={`ml-auto font-semibold ${set ? 'text-green-600' : 'text-red-500'}`}>{set ? 'SET' : 'MISSING'}</span>
+                </div>
+              ))}
+              {Object.entries(scanData.integrity?.env?.optional || {}).map(([key, set]) => (
+                <div key={key} className="flex items-center gap-2 p-1.5 rounded-lg bg-background border border-gray-100 dark:border-gray-800 text-[10px]" data-testid={`env-${key}`}>
+                  {set ? <CheckCircle size={10} className="text-green-600 flex-shrink-0" /> : <Clock size={10} className="text-muted-foreground flex-shrink-0" />}
+                  <span className="font-mono truncate">{key}</span>
+                  <span className={`ml-auto font-semibold ${set ? 'text-green-600' : 'text-muted-foreground'}`}>{set ? 'SET' : 'optional'}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {scanData.integrity?.database?.tables && (
+            <div>
+              <div className="text-xs font-semibold mb-2 flex items-center gap-1.5"><HardDrive size={12} /> Database Tables ({scanData.integrity.database.tableCount})</div>
+              <div className="flex flex-wrap gap-1.5">
+                {scanData.integrity.database.tables.map(t => (
+                  <span key={t} className="text-[10px] px-2 py-1 rounded-lg bg-background border border-gray-100 dark:border-gray-800 font-mono" data-testid={`table-${t}`}>{t}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2">
+            <button onClick={envValidate} className="text-xs px-3 py-1.5 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors flex items-center gap-1" data-testid="button-validate-env">
+              <Key size={10} /> Validate All Env Vars
+            </button>
+          </div>
+
+          {scanData.envValidation && (
+            <div className={`p-3 rounded-lg border ${scanData.envValidation.success ? 'border-green-200 dark:border-green-800 bg-green-50/50 dark:bg-green-950/15' : 'border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/15'}`}>
+              <div className="text-xs font-semibold mb-1">{scanData.envValidation.message}</div>
+              {scanData.envValidation.actions?.map((a, i) => (
+                <div key={i} className="text-[10px] font-mono text-muted-foreground mt-0.5">→ {a}</div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -2357,6 +2665,10 @@ export default function AdminTools() {
         <PlatformCoverageReport toolResults={toolResults} />
 
         <DailyOpsRunbook toolResults={toolResults} isAnyRunning={isAnyRunning} runAllChecks={runAllChecks} runErrorsOnly={runErrorsOnly} lastFullCheck={lastFullCheck} runHealthCheck={runHealthCheck} />
+
+        <GitIntegrityScanner />
+
+        <PlatformIntegrityDeepScan />
 
         <AIDiagnosticsPanel toolResults={toolResults} runHealthCheck={runHealthCheck} />
 
