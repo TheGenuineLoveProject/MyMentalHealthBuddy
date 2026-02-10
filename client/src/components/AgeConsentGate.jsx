@@ -1,11 +1,3 @@
-/**
- * AgeConsentGate.jsx
- * 18+ age verification and consent component
- * 
- * Mandatory gating for wellness content
- * Educational support only - not medical advice
- */
-
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { Shield, Heart, AlertCircle, ExternalLink } from 'lucide-react';
@@ -36,7 +28,7 @@ export default function AgeConsentGate({ children, onConsent }) {
         className="min-h-screen flex items-center justify-center"
         data-testid="consent-loading"
       >
-        <div className="animate-pulse motion-reduce:animate-none text-[var(--sage-600)]">Loading...</div>
+        <div className="animate-pulse motion-reduce:animate-none text-muted-foreground">Loading...</div>
       </div>
     );
   }
@@ -47,39 +39,39 @@ export default function AgeConsentGate({ children, onConsent }) {
 
   return (
     <div 
-      className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-[var(--cream-50)] to-[var(--sage-50)]"
+      className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30"
       data-testid="age-consent-gate"
     >
-      <div className="max-w-lg w-full bg-white rounded-2xl shadow-xl p-8 border border-[var(--sage-200)]">
+      <div className="max-w-lg w-full bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 border border-emerald-200 dark:border-emerald-800">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[var(--sage-100)] mb-4">
-            <Shield className="w-8 h-8 text-[var(--sage-600)]" aria-hidden="true" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/50 mb-4">
+            <Shield className="w-8 h-8 text-emerald-700 dark:text-emerald-300" aria-hidden="true" />
           </div>
-          <h1 className="text-2xl font-serif font-bold text-[var(--neutral-900)] mb-2">
+          <h1 className="text-2xl font-serif font-bold text-foreground mb-2">
             Welcome to The Genuine Love Project
           </h1>
-          <p className="text-[var(--neutral-600)]">
+          <p className="text-muted-foreground">
             A safe space for emotional wellness and self-discovery
           </p>
         </div>
 
         <div className="space-y-4 mb-8">
-          <div className="flex items-start gap-3 p-4 bg-[var(--cream-50)] rounded-lg">
-            <Heart className="w-5 h-5 text-[var(--rose-500)] mt-0.5 flex-shrink-0" aria-hidden="true" />
+          <div className="flex items-start gap-3 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
+            <Heart className="w-5 h-5 text-rose-500 mt-0.5 flex-shrink-0" aria-hidden="true" />
             <div>
-              <h2 className="font-medium text-[var(--neutral-900)]">What We Offer</h2>
-              <p className="text-sm text-[var(--neutral-600)]">
+              <h2 className="font-medium text-foreground">What We Offer</h2>
+              <p className="text-sm text-muted-foreground">
                 Educational wellness tools, journaling prompts, self-reflection exercises, 
                 and AI-assisted emotional guidance.
               </p>
             </div>
           </div>
 
-          <div className="flex items-start gap-3 p-4 bg-[var(--amber-50)] rounded-lg">
-            <AlertCircle className="w-5 h-5 text-[var(--amber-600)] mt-0.5 flex-shrink-0" aria-hidden="true" />
+          <div className="flex items-start gap-3 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-lg">
+            <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" aria-hidden="true" />
             <div>
-              <h2 className="font-medium text-[var(--neutral-900)]">Important Notice</h2>
-              <p className="text-sm text-[var(--neutral-600)]">
+              <h2 className="font-medium text-foreground">Important Notice</h2>
+              <p className="text-sm text-muted-foreground">
                 This platform provides educational wellness support, not medical or mental 
                 health treatment. It is not a substitute for professional care.
               </p>
@@ -87,26 +79,26 @@ export default function AgeConsentGate({ children, onConsent }) {
           </div>
         </div>
 
-        <div className="border-t border-[var(--sage-200)] pt-6 mb-6">
-          <p className="text-base font-medium text-[var(--neutral-800)] text-center mb-5">
+        <div className="border-t border-emerald-200 dark:border-emerald-800 pt-6 mb-6">
+          <p className="text-base font-medium text-foreground text-center mb-5">
             By continuing, you confirm:
           </p>
           <ul className="space-y-4 mb-6">
-            <li className="flex items-center gap-4 p-3 bg-[var(--sage-50)] rounded-lg border border-[var(--sage-200)]">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--sage-500)] text-white font-bold text-sm flex-shrink-0" aria-hidden="true">18+</span>
-              <span className="text-base text-[var(--neutral-800)] font-medium">You are 18 years of age or older</span>
+            <li className="flex items-center gap-4 p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 text-white font-bold text-sm flex-shrink-0" aria-hidden="true">18+</span>
+              <span className="text-base text-foreground font-medium">You are 18 years of age or older</span>
             </li>
-            <li className="flex items-center gap-4 p-3 bg-[var(--sage-50)] rounded-lg border border-[var(--sage-200)]">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--sage-500)] flex-shrink-0" aria-hidden="true">
+            <li className="flex items-center gap-4 p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 flex-shrink-0" aria-hidden="true">
                 <Heart className="w-4 h-4 text-white" />
               </span>
-              <span className="text-base text-[var(--neutral-800)] font-medium">You understand this is educational wellness support only</span>
+              <span className="text-base text-foreground font-medium">You understand this is educational wellness support only</span>
             </li>
-            <li className="flex items-center gap-4 p-3 bg-[var(--sage-50)] rounded-lg border border-[var(--sage-200)]">
-              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--sage-500)] flex-shrink-0" aria-hidden="true">
+            <li className="flex items-center gap-4 p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200 dark:border-emerald-800">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-600 flex-shrink-0" aria-hidden="true">
                 <Shield className="w-4 h-4 text-white" />
               </span>
-              <span className="text-base text-[var(--neutral-800)] font-medium">You may pause or stop using the platform at any time</span>
+              <span className="text-base text-foreground font-medium">You may pause or stop using the platform at any time</span>
             </li>
           </ul>
         </div>
@@ -114,7 +106,7 @@ export default function AgeConsentGate({ children, onConsent }) {
         <div className="flex flex-col gap-3">
           <button
             onClick={handleConsent}
-            className="w-full py-3 px-6 bg-[var(--sage-600)] hover:bg-[var(--sage-700)] text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--sage-500)] focus-visible:ring-offset-2"
+            className="w-full py-3 px-6 bg-emerald-700 hover:bg-emerald-800 dark:bg-emerald-600 dark:hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2"
             data-testid="button-confirm-consent"
           >
             I Confirm & Continue
@@ -122,7 +114,7 @@ export default function AgeConsentGate({ children, onConsent }) {
 
           <Link
             href="/"
-            className="w-full py-3 px-6 bg-[var(--neutral-100)] hover:bg-[var(--neutral-200)] text-[var(--neutral-700)] font-medium rounded-lg transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] focus-visible:ring-offset-2"
+            className="w-full py-3 px-6 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-medium rounded-lg transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
             data-testid="button-exit"
           >
             Exit
@@ -130,12 +122,12 @@ export default function AgeConsentGate({ children, onConsent }) {
         </div>
 
         <div className="mt-6 text-center">
-          <p className="text-xs text-[var(--neutral-500)] mb-2">
+          <p className="text-xs text-muted-foreground mb-2">
             Need immediate support?
           </p>
           <Link
             href="/crisis"
-            className="inline-flex items-center gap-1 text-sm text-[var(--teal-600)] hover:text-[var(--teal-700)] font-medium"
+            className="inline-flex items-center gap-1 text-sm text-primary hover:text-primary/80 font-medium"
             data-testid="link-crisis-resources"
           >
             Access Crisis Resources
@@ -143,11 +135,11 @@ export default function AgeConsentGate({ children, onConsent }) {
           </Link>
         </div>
 
-        <p className="mt-4 text-xs text-[var(--neutral-400)] text-center">
+        <p className="mt-4 text-xs text-muted-foreground text-center">
           By clicking "I Confirm & Continue," you agree to our{' '}
-          <Link href="/terms" className="underline hover:text-[var(--neutral-600)]">Terms</Link>
+          <Link href="/terms" className="underline hover:text-foreground">Terms</Link>
           {' '}and{' '}
-          <Link href="/privacy" className="underline hover:text-[var(--neutral-600)]">Privacy Policy</Link>
+          <Link href="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>
         </p>
       </div>
     </div>

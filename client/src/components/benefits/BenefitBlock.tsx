@@ -25,10 +25,10 @@ export function BenefitBlock({ benefits, columns = 3 }: BenefitBlockProps) {
         return (
           <div
             key={key}
-            className="rounded-xl border border-[var(--border)] bg-[var(--surface)] p-4"
+            className="rounded-xl border border-border bg-card p-4"
           >
-            <div className="font-semibold text-[var(--text)]">{title}</div>
-            <div className="mt-1 text-sm text-[var(--text-muted)]">
+            <div className="font-semibold text-foreground">{title}</div>
+            <div className="mt-1 text-sm text-muted-foreground">
               {description}
             </div>
           </div>

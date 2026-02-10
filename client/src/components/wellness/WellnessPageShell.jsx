@@ -28,18 +28,18 @@ export function WellnessPageShell({
     <main className="mx-auto max-w-5xl px-4 py-8">
       {title ? (
         <header className="mb-6">
-          <h1 className="text-3xl font-semibold">{title}</h1>
-          {subtitle ? <p className="mt-2 opacity-80">{subtitle}</p> : null}
+          <h1 className="text-3xl font-semibold text-foreground">{title}</h1>
+          {subtitle ? <p className="mt-2 text-muted-foreground">{subtitle}</p> : null}
         </header>
       ) : null}
 
-      <section className="rounded-xl border bg-[var(--surface)] p-4 md:p-6 mb-6">
+      <section className="rounded-xl border border-border bg-card p-4 md:p-6 mb-6">
         {children}
       </section>
 
       <button
         onClick={() => setShowInfo(!showInfo)}
-        className="flex items-center gap-2 text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors mb-4 min-h-[44px] px-3 rounded-lg hover:bg-[var(--surface)]"
+        className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-4 min-h-[44px] px-3 rounded-lg hover:bg-muted"
         data-testid="button-toggle-info"
         aria-expanded={showInfo}
       >
@@ -48,8 +48,8 @@ export function WellnessPageShell({
       </button>
 
       {showInfo && (
-        <div className="rounded-xl border bg-[var(--surface)] overflow-hidden mb-6">
-          <div className="flex border-b" role="tablist" aria-label="Information tabs">
+        <div className="rounded-xl border border-border bg-card overflow-hidden mb-6">
+          <div className="flex border-b border-border" role="tablist" aria-label="Information tabs">
             {tabs.map((tab) => {
               const IconComponent = tab.icon;
               return (
@@ -61,8 +61,8 @@ export function WellnessPageShell({
                   onClick={() => setActiveTab(activeTab === tab.id ? null : tab.id)}
                   className={`flex items-center gap-2 px-4 py-3 text-sm font-medium transition-colors min-h-[44px] ${
                     activeTab === tab.id
-                      ? "bg-[var(--primary)] text-white"
-                      : "text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--surface-hover)]"
+                      ? "bg-primary text-white"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   }`}
                   data-testid={`tab-${tab.id}`}
                 >
@@ -86,7 +86,7 @@ export function WellnessPageShell({
           )}
 
           {!activeTab && (
-            <div className="p-4 text-sm text-[var(--text-muted)] text-center">
+            <div className="p-4 text-sm text-muted-foreground text-center">
               Select a tab above to learn more
             </div>
           )}
@@ -97,7 +97,7 @@ export function WellnessPageShell({
         <ConsentStrip />
         <div className="text-sm">
           <a 
-            className="text-[var(--primary)] hover:underline inline-flex items-center gap-1" 
+            className="text-primary hover:underline inline-flex items-center gap-1" 
             href={CRISIS_PATH}
             data-testid="link-crisis"
           >
